@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+main {
+  padding-top: 40px;
+}
+
+section:not(:last-of-type) {
+  margin-bottom: 80px;
+}
+
+a {
+  background-image: linear-gradient(#fff, #fff);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  display: inline;
+  position: relative;
+  transition: background-size 0.4s;
+}
+
+a:hover,
+a:focus {
+  background-size: 100% 1px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+address {
+  font-style: normal;
+}

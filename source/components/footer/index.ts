@@ -1,22 +1,17 @@
 import { ComponentStyles, CreateElement } from './components';
-
 import {
   THEME_OPTION_DARK,
   VERSION_TYPE_SIMPLE,
   VERSION_TYPES,
 } from './variables';
 
-//@ts-ignore
-import ElementStyles from './index.css';
-
 export const ELEMENT_NAME = 'umd-element-footer';
 
 const LoadTemplate = async () => {
   const template = document.createElement('template');
+  const ElementStyles = require('./index.css');
 
-  console.log('elementStyles', ElementStyles);
-
-  template.innerHTML = `<style>${ElementStyles}${ComponentStyles}</style>`;
+  template.innerHTML = `<style>${ElementStyles.toString()}${ComponentStyles}</style>`;
 
   return template;
 };

@@ -43,7 +43,7 @@ const componentBundle = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ['to-string-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },

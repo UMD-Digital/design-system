@@ -14,10 +14,7 @@ const twigTask = () =>
   gulp.src(twigSource).pipe(twig()).pipe(gulp.dest(buildDir));
 
 const postCSSTask = () =>
-  gulp
-    .src(postCssSource)
-    .pipe(postcss([require('tailwindcss')]))
-    .pipe(gulp.dest(buildDir));
+  gulp.src(postCssSource).pipe(postcss()).pipe(gulp.dest(buildDir));
 
 const copyTask = () => gulp.src(distSource).pipe(gulp.dest(buildDir));
 

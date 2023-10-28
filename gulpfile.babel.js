@@ -1,14 +1,30 @@
 const gulp = require('gulp');
 const twig = require('gulp-twig');
+const postcss = require('gulp-postcss');
 const { watch } = require('gulp');
 
-const watcher = watch(['source/twig/*.twig']);
+const distSource = 'dist/**/*.*';
+const twigSource = 'source/examples/twig/*.twig';
+const postCssSource = 'source/examples/styles/*.css';
+const buildDir = './build';
+
+const watcher = watch([distSource, twigSource, postCssSource]);
 
 const twigTask = () =>
-  gulp.src('./source/twig/*.twig').pipe(twig()).pipe(gulp.dest('./build'));
+  gulp.src(twigSource).pipe(twig()).pipe(gulp.dest(buildDir));
 
-watcher.on('change', (path, stats) => {
+const postCSSTask = () =>
+  gulp
+    .src(postCssSource)
+    .pipe(postcss([require('tailwindcss')]))
+    .pipe(gulp.dest(buildDir));
+
+const copyTask = () => gulp.src(distSource).pipe(gulp.dest(buildDir));
+
+watcher.on('change', () => {
   twigTask();
+  postCSSTask();
+  copyTask();
 });
 
-exports.default = twigTask;
+exports.default = gulp.series(twigTask, postCSSTask, copyTask);

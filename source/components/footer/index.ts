@@ -1,24 +1,22 @@
 import { ComponentStyles, CreateElement } from './components';
+
 import {
   THEME_OPTION_DARK,
   VERSION_TYPE_SIMPLE,
   VERSION_TYPES,
 } from './variables';
 
+//@ts-ignore
+import ElementStyles from './index.css';
+
 export const ELEMENT_NAME = 'umd-element-footer';
-const STYLE_FILE_CDN =
-  'https://unpkg.com/@universityofmaryland/umd-element-footer/dist/styles.css';
 
 const LoadTemplate = async () => {
   const template = document.createElement('template');
-  const resp = await fetch(STYLE_FILE_CDN).catch((err) => {
-    throw new Error(
-      `UMDFooterElement: Failed to load style file from CDN. ${err}`,
-    );
-  });
-  const configCss = await resp.text();
 
-  template.innerHTML = `<style>${configCss}${ComponentStyles}</style>`;
+  console.log('elementStyles', ElementStyles);
+
+  template.innerHTML = `<style>${ElementStyles}${ComponentStyles}</style>`;
 
   return template;
 };

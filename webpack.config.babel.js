@@ -1,5 +1,4 @@
 import path from 'path';
-import WebpackShellPlugin from 'webpack-shell-plugin-next';
 
 const baseConfig = {
   mode: 'production',
@@ -23,14 +22,6 @@ const baseConfig = {
   },
 };
 
-const plugins = [
-  new WebpackShellPlugin({
-    onBuildEnd: {
-      scripts: ['cp -R dist/* build'],
-    },
-  }),
-];
-
 const componentsFiles = {
   index: path.resolve('source/components/index'),
   footer: path.resolve('source/components/footer'),
@@ -39,7 +30,6 @@ const componentsFiles = {
 const componentBundle = {
   ...baseConfig,
   entry: componentsFiles,
-  plugins,
   output: {
     path: path.resolve('dist'),
     filename: '[name].js',
@@ -51,10 +41,14 @@ const componentBundle = {
         use: ['ts-loader'],
         exclude: [/node_modules/],
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.css'],
     modules: [path.resolve('source'), path.resolve('node_modules')],
   },
 };

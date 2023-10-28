@@ -45,6 +45,17 @@ const componentBundle = {
         test: /\.css$/i,
         use: ['to-string-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.(png|jpg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: true,
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {

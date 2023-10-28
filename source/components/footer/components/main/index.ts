@@ -88,8 +88,7 @@ export const CreateMain = ({
     const backgroundGraident = document.createElement('div');
     const backgroundImage = document.createElement('img');
     let altText = 'The University of Maryland Campus';
-    let imageSrc =
-      'https://unpkg.com/@universityofmaryland/umd-element-footer/dist/default.jpg';
+    let imageSrc = require('../../assets/visual-default.jpg').default;
 
     if (slottedDate) {
       const source = slottedDate.getAttribute('src');

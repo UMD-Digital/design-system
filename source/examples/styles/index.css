@@ -10,4 +10,5 @@
 
 /* Elements */
 
-@import './components/footer.css';
+@import './elements/footer.css';
+@import './elements/alert.css';

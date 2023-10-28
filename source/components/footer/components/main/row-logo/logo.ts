@@ -1,4 +1,4 @@
-import { DARK_LOGO, LIGHT_LOGO } from '../../../assets';
+import { DARK_LOGO, LIGHT_LOGO } from '../../../../../assets/logos';
 import { THEME_OPTION_LIGHT } from '../../../variables';
 
 const LOGO_CONTAINER = 'umd-footer-logo-container';

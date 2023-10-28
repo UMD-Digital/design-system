@@ -5,7 +5,7 @@ import {
   VERSION_TYPES,
 } from './variables';
 
-export const ELEMENT_NAME = 'umd-element-footer';
+export const ELEMENT_FOOTER_NAME = 'umd-element-footer';
 
 const LoadTemplate = async () => {
   const template = document.createElement('template');
@@ -53,8 +53,7 @@ export class UMDFooterElement extends HTMLElement {
   }
 }
 
-if (!window.customElements.get(ELEMENT_NAME)) {
-  // @ts-ignore
+if (!window.customElements.get(ELEMENT_FOOTER_NAME)) {
   window.UMDFooterElement = UMDFooterElement;
-  window.customElements.define(ELEMENT_NAME, UMDFooterElement);
+  window.customElements.define(ELEMENT_FOOTER_NAME, UMDFooterElement);
 }

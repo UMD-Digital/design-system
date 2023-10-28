@@ -23,8 +23,9 @@ const baseConfig = {
 };
 
 const componentsFiles = {
-  index: path.resolve('source/components/index'),
+  index: path.resolve('source/index'),
   footer: path.resolve('source/components/footer'),
+  alert: path.resolve('source/components/alert'),
 };
 
 const componentBundle = {

@@ -1,6 +1,6 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
-import { CreateSlot, MakeSpan } from '../../../helpers';
+import { CreateSlot, MakeSpan } from '../../../../../helpers/ui';
 import { BREAKPOINTS } from '../../../variables';
 
 const SLOT_CONTACT_NAME = 'contact';

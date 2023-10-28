@@ -6,14 +6,14 @@ import {
   THEME_OPTION_LIGHT,
 } from '../../variables';
 import {
-  CAMPAIGN_LOGO,
-  CAMPAIGN_LOGO_DARK,
   FACEBOOK_ICON,
   X_ICON,
   INSTAGRAM_ICON,
   YOUTUBE_ICON,
   TWITTER_ICON,
-} from '../../assets';
+} from '../../../../assets/social';
+
+import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from '../../../../assets/logos';
 
 const SLOT_SOCIAL_NAME = 'social-links';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';

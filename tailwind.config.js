@@ -5,6 +5,6 @@ import {
   plugins,
 } from '@universityofmaryland/design-system-configuration';
 
-const content = ['./source/**/*.{twig,css,ts,js}'];
+const content = ['./source/**/*.{css,ts,js}'];
 
 export { content, theme, plugins };

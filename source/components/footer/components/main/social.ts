@@ -11,9 +11,8 @@ import {
   INSTAGRAM_ICON,
   YOUTUBE_ICON,
   TWITTER_ICON,
-} from '../../../../assets/social';
-
-import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from '../../../../assets/logos';
+} from 'assets/social';
+import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
 
 const SLOT_SOCIAL_NAME = 'social-links';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';

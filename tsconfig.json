@@ -12,7 +12,8 @@
     "removeComments": true,
     "forceConsistentCasingInFileNames": true,
     "rootDir": "source",
-    "outDir": "build"
+    "outDir": "build",
+    "baseUrl": "source",
   },
-  "include": ["source/**/*"],
+  "include": ["source/**/*", "examples/**/*"],
 }

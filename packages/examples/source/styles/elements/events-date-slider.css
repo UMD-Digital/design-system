@@ -1,0 +1,11 @@
+* + umd-element-events-date-slider {
+  margin-top: 40px;
+}
+
+umd-element-events-date-slider[theme='dark'] * {
+  color: #fff;
+}
+
+.umd-sans-extralarge {
+  margin-bottom: 24px;
+}

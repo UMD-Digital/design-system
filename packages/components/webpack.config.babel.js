@@ -26,6 +26,7 @@ const componentsFiles = {
   index: path.resolve('source/index'),
   footer: path.resolve('source/components/footer'),
   alert: path.resolve('source/components/alert'),
+  eventsDateSlider: path.resolve('source/components/events-date-slider'),
 };
 
 const componentBundle = {

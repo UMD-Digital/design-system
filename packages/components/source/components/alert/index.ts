@@ -2,7 +2,7 @@ import {
   CLOSE_BUTTON_ICON,
   NOTIFICATION_ICON,
   EXCLAMATION_ICON,
-} from '../../assets/icons';
+} from 'assets/icons';
 
 export const ELEMENT_ALERT_NAME = 'umd-element-alert';
 

@@ -1,3 +1,6 @@
+require('styles/index.css');
+import '@universityofmaryland/umd-web-components';
+
 const Alerts = () => {
   const elements = Array.from(document.querySelectorAll('umd-element-alert'));
 

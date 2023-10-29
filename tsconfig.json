@@ -6,14 +6,10 @@
     "lib": ["es6", "dom", "dom.iterable"],
     "target": "ES2020",
     "moduleResolution": "node",
-    "declaration": false,
-    "declarationMap": false,
-    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "removeComments": true,
     "forceConsistentCasingInFileNames": true,
-    "rootDir": "source",
-    "outDir": "build",
-    "baseUrl": "source",
-  },
-  "include": ["source/**/*", "examples/**/*"],
+  }
 }

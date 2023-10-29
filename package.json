@@ -7,7 +7,9 @@
   "private": true,
   "scripts": {
     "clean": "npx lerna run clean",
-    "start": "npx lerna run start"
+    "components": "npx lerna run start --scope=@universityofmaryland/umd-web-components",
+    "examples": "npx lerna run start --scope=@universityofmaryland/umd-design-system-examples",
+    "start": "yarn run components & yarn run examples"
   },
   "workspaces": [
     "packages/*"

@@ -6,16 +6,15 @@
   "repository": "",
   "scripts": {
     "clean": "rm -rf build",
-    "gulp": "npx gulp",
     "webpack": "webpack -w",
-    "start": "npm run webpack & npx gulp"
+    "start": "npm run webpack"
   },
   "devDependencies": {
     "babel-loader": "^9.1.3",
     "gulp": "^4.0.2",
     "gulp-twig": "^1.2.0",
     "mini-css-extract-plugin": "^2.7.6",
-    "twig-loader": "^0.5.5"
+    "webpack-shell-plugin-next": "^2.3.1"
   },
   "dependencies": {
     "@universityofmaryland/umd-web-components": "file:../components"

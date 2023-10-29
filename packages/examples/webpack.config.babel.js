@@ -1,6 +1,7 @@
 import path from 'path';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import WebpackShellPlugin from 'webpack-shell-plugin-next';
 
 module.exports = () => {
   const optimization = {};
@@ -33,6 +34,14 @@ module.exports = () => {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
+    }),
+    new WebpackShellPlugin({
+      onBuildStart: {
+        scripts: ['npx gulp'],
+      },
+      onAfterDone: {
+        scripts: ['npx gulp'],
+      },
     }),
   ];
 

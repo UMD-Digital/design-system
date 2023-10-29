@@ -1,5 +1,6 @@
 export const AlertsTest = () => {
   const elements = Array.from(document.querySelectorAll('umd-element-alert'));
+  const firstElement = elements[0];
 
   const observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
@@ -13,19 +14,21 @@ export const AlertsTest = () => {
 
   elements.forEach((element) => {
     observer.observe(element, { attributes: true });
+  });
 
+  if (firstElement) {
     setTimeout(() => {
-      element.setAttribute('type', 'alert');
-      element.setAttribute('icon', 'false');
+      firstElement.setAttribute('type', 'alert');
+      firstElement.setAttribute('icon', 'false');
     }, 2000);
 
     setTimeout(() => {
-      element.setAttribute('type', 'emergency');
-      element.setAttribute('icon', 'true');
+      firstElement.setAttribute('type', 'emergency');
+      firstElement.setAttribute('icon', 'true');
     }, 4000);
 
     setTimeout(() => {
-      element.setAttribute('type', 'notification');
+      firstElement.setAttribute('type', 'notification');
     }, 6000);
-  });
+  }
 };

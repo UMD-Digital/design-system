@@ -1,1 +1,1 @@
-rsync -azP --delete ./build/* staging:/srv/http/design-system/
+rsync -azP --delete ./build/* staging:/srv/http/design/

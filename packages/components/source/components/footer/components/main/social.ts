@@ -84,6 +84,11 @@ export const SocialContainerStyles = `
   .${SOCIAL_CONTAINER_WRAPPER} a path {
     max-height: 20px !important;
     fill: ${colors.white} !important;
+    transition: fill .5s;
+  }
+
+  .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
+    fill: ${colors.red} !important;
   }
 
   .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
@@ -93,6 +98,10 @@ export const SocialContainerStyles = `
   .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
   .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
     fill: ${colors.black} !important;
+  }
+
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
+    fill: ${colors.redDark} !important;
   }
 `;
 

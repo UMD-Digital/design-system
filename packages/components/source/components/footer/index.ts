@@ -1,3 +1,4 @@
+import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateElement } from './components';
 import {
   THEME_OPTION_DARK,
@@ -7,15 +8,6 @@ import {
 
 export const ELEMENT_FOOTER_NAME = 'umd-element-footer';
 
-const LoadTemplate = async () => {
-  const template = document.createElement('template');
-  const ElementStyles = require('./index.css');
-
-  template.innerHTML = `<style>${ElementStyles.toString()}${ComponentStyles}</style>`;
-
-  return template;
-};
-
 export class UMDFooterElement extends HTMLElement {
   _shadow: ShadowRoot;
 
@@ -23,13 +15,12 @@ export class UMDFooterElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
 
-    const load = async () => {
-      const template = await LoadTemplate();
-      this._shadow.appendChild(template.content.cloneNode(true));
-      this.style.display = 'block';
-    };
+    const ElementStyles = require('./index.css');
+    const styles = `${ElementStyles.toString()}${ComponentStyles}`;
+    const template = MakeTemplate({ styles });
 
-    load();
+    this._shadow.appendChild(template.content.cloneNode(true));
+    this.style.display = 'block';
   }
 
   static get observedAttributes() {

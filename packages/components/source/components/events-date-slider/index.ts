@@ -245,7 +245,7 @@ const Debounce = <T extends Function>(cb: T, wait = 50) => {
   return <T>(<any>callable);
 };
 
-const CreateSlot = ({ type }: { type: string }) => {
+const MakeSlot = ({ type }: { type: string }) => {
   const slot = document.createElement('slot');
   slot.setAttribute('name', type);
   return slot;
@@ -665,8 +665,8 @@ export class UMDEventsDateSliderElement extends HTMLElement {
   }
 
   connectedCallback() {
-    const infoSlot = CreateSlot({ type: INTRODUCTION_SLOT_NAME });
-    const datesSlot = CreateSlot({ type: DATE_SLOT_NAME });
+    const infoSlot = MakeSlot({ type: INTRODUCTION_SLOT_NAME });
+    const datesSlot = MakeSlot({ type: DATE_SLOT_NAME });
     const element = this;
     const shadowRoot = this._shadow;
     const theme = this._theme;

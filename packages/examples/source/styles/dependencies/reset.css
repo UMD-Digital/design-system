@@ -9,7 +9,7 @@ body {
 }
 
 main {
-  padding-top: 40px;
+  padding: 40px 0;
 }
 
 section:not(:last-of-type) {

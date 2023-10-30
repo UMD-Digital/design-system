@@ -1,3 +1,6 @@
+import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
+import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { MakeTemplate, MakeSlot } from 'helpers/ui';
 import {
   CLOSE_BUTTON_ICON,
   NOTIFICATION_ICON,
@@ -11,49 +14,63 @@ const ICON_CLASS = 'umd-element-alert-icon';
 const CLOSE_BUTTON_CLASS = 'umd-element-alert-close-button';
 const ALERT_LOCAL_STORAGE_KEY = 'umd-alert-closed-time';
 
-const COLORS = {
-  yellow: '#ffd200',
-  blue: '#2f7eda',
-  red: '#e21833',
-};
 const BREAKPOINTS = {
   small: 500,
   medium: 700,
 };
 
-const template = document.createElement('template');
-
-template.innerHTML = `
-<style>
-  :host {
-    display: block !important;
-    container: umd-alert / inline-size; 
+const AlertStyles = `
+  .${CONTAINER_CLASS}[data-type="alert"] {
+    border: solid 4px ${colors.gold} !important;
   }
-
-  :host button {
-    background-color: transparent !important;
-    border: none !important;
-    cursor: pointer;
+  
+  .${CONTAINER_CLASS}[data-type="alert"] .${ICON_CLASS} svg circle {
+    fill: ${colors.gold} !important;
   }
+`;
 
-  :host .${CONTAINER_CLASS} {
-    display: flex;
-    position: relative !important;
-    padding: 32px;
-    padding-right: 64px;
-    gap: 32px;
+const NotificationStyles = `
+  .${CONTAINER_CLASS}[data-type="notification"] {
+    border: solid 4px #2f7eda !important;
   }
-
-  @container umd-alert (max-width: 260px) {
-    :host .${CONTAINER_CLASS} {
-      display: none
-    }
+  
+  .${CONTAINER_CLASS}[data-type="notification"] .${ICON_CLASS} svg circle {
+    fill: #2f7eda !important;
   }
+`;
 
+const EmergencyStyles = `
+  .${CONTAINER_CLASS}[data-type="emergency"]  {
+    border: solid 4px ${colors.red} !important;
+  }
+  
+  .${CONTAINER_CLASS}[data-type="emergency"] .${ICON_CLASS} svg circle  {
+    fill: ${colors.red} !important;
+  }
+`;
+
+const ButtonStyles = `
+  :host .${CLOSE_BUTTON_CLASS} {
+    position: absolute !important;
+    top: ${spacing.lg};
+    right: ${spacing.lg};
+  }
+  
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
-    :host .${CONTAINER_CLASS} {
-      padding-right: 32px;
+    :host .${CLOSE_BUTTON_CLASS} {
+      top: ${spacing.sm};
+      right: ${spacing.sm};
     }
+  }
+`;
+
+const IconStyles = `
+  .${CONTAINER_CLASS}[data-icon="true"] .${ICON_CLASS} {
+    display: block;
+  }
+  
+  .${CONTAINER_CLASS}[data-icon="false"] .${ICON_CLASS} {
+    display: none;
   }
 
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
@@ -62,82 +79,70 @@ template.innerHTML = `
       top: -20px;
     }
   }
+`;
 
-  :host .${CLOSE_BUTTON_CLASS} {
-    position: absolute !important;
-    top: 32px;
-    right: 32px;
+const ComponentStyles = `
+  :host {
+    display: block !important;
+    container: umd-alert / inline-size; 
   }
-
+  
+  :host button {
+    background-color: transparent !important;
+    border: none !important;
+    cursor: pointer;
+  }
+  
+  :host .${CONTAINER_CLASS} {
+    display: flex;
+    position: relative !important;
+    padding: ${spacing.lg};
+    padding-right: ${spacing['2xl']};
+    gap: ${spacing.lg};
+  }
+  
+  @container umd-alert (max-width: 260px) {
+    :host .${CONTAINER_CLASS} {
+      display: none
+    }
+  }
+  
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
-    :host .${CLOSE_BUTTON_CLASS} {
-      top: 16px;
-      right: 16px;
+    :host .${CONTAINER_CLASS} {
+      padding-right: ${spacing.lg};
     }
   }
 
-  .${CONTAINER_CLASS}[data-icon="true"] .${ICON_CLASS} {
+  :host slot[name="title"] {
+    margin-bottom: ${spacing.sm};
     display: block;
   }
-
-  .${CONTAINER_CLASS}[data-icon="false"] .${ICON_CLASS} {
-    display: none;
-  }
-
-  .${CONTAINER_CLASS}[data-type="alert"] {
-    border: solid 4px ${COLORS.yellow} !important;
-  }
   
-  .${CONTAINER_CLASS}[data-type="alert"] .${ICON_CLASS} svg circle {
-    fill: ${COLORS.yellow} !important;
-  }
-
-  .${CONTAINER_CLASS}[data-type="notification"] {
-    border: solid 4px ${COLORS.blue} !important;
-  }
-
-  .${CONTAINER_CLASS}[data-type="notification"] .${ICON_CLASS} svg circle {
-    fill: ${COLORS.blue} !important;
-  }
-
-  .${CONTAINER_CLASS}[data-type="emergency"]  {
-    border: solid 4px ${COLORS.red} !important;
-  }
-
-  .${CONTAINER_CLASS}[data-type="emergency"] .${ICON_CLASS} svg circle  {
-    fill: ${COLORS.red} !important;
-  }
-</style>`;
-
-const CreateSlot = ({ type }: { type: string }) => {
-  const slot = document.createElement('slot');
-  slot.setAttribute('name', type);
-  return slot;
-};
+  ${IconStyles}
+  ${ButtonStyles}
+  ${AlertStyles}
+  ${NotificationStyles}
+  ${EmergencyStyles}
+`;
 
 const GetLocalString = () => {
   const string = localStorage.getItem(ALERT_LOCAL_STORAGE_KEY);
   if (string) return parseInt(string, 10);
   return null;
 };
+
 const SetLocalString = () => {
   const currentTime = new Date().getTime();
   localStorage.setItem(ALERT_LOCAL_STORAGE_KEY, currentTime.toString());
 };
 
-const CreateShadowDom = ({
-  titleSlot,
-  bodySlot,
-  element,
-}: {
-  titleSlot: HTMLSlotElement;
-  bodySlot: HTMLSlotElement;
-  element: HTMLElement;
-}) => {
+const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const iconWrapper = document.createElement('div');
   const closeButton = document.createElement('button');
+  const titleSlot = MakeSlot({ type: 'title' });
+  const bodySlot = MakeSlot({ type: 'body' });
 
   container.classList.add(CONTAINER_CLASS);
 
@@ -207,6 +212,11 @@ export class UMDAlertElement extends HTMLElement {
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
+
+    const ElementStyles = require('./index.css');
+    const styles = `${ElementStyles.toString()}${ComponentStyles}`;
+    const template = MakeTemplate({ styles });
+
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
@@ -241,18 +251,12 @@ export class UMDAlertElement extends HTMLElement {
   }
 
   connectedCallback() {
-    const type = this.getAttribute('type');
-    const days = this.getAttribute('days');
-    const isShowIcon = this.getAttribute('icon');
     const element = this;
-    const titleSlot = CreateSlot({ type: 'title' });
-    const bodySlot = CreateSlot({ type: 'body' });
-    const domContent = CreateShadowDom({ titleSlot, bodySlot, element });
+    const type = this.getAttribute('type') || 'alert';
+    const days = this.getAttribute('days') || '10';
+    const isShowIcon = this.getAttribute('icon') || 'true';
     const lastClosedTime = GetLocalString();
-
-    if (!type || !days) {
-      throw new Error('Alert element must have a type and days attribute');
-    }
+    const domContent = CreateShadowDom({ element });
 
     if (lastClosedTime) {
       const daysUntilAlertDisplay = parseInt(days) || this._defaultTime;
@@ -269,7 +273,7 @@ export class UMDAlertElement extends HTMLElement {
 
     this._container = domContent;
     this._container.setAttribute('data-type', type);
-    this._container.setAttribute('data-icon', isShowIcon || 'true');
+    this._container.setAttribute('data-icon', isShowIcon);
     this._shadow.appendChild(domContent);
   }
 }

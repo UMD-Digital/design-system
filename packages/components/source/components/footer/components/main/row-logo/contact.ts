@@ -1,6 +1,6 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
-import { CreateSlot, MakeSpan } from 'helpers/ui';
+import { MakeSlot, MakeSpan } from 'helpers/ui';
 import { BREAKPOINTS } from '../../../variables';
 
 const SLOT_CONTACT_NAME = 'contact';
@@ -98,7 +98,7 @@ export const CreateContactContainer = ({
   contactContainer.classList.add(CONTACT_CONTAINER);
 
   const makeContactSlot = () => {
-    const contactSlot = CreateSlot({ type: SLOT_CONTACT_NAME });
+    const contactSlot = MakeSlot({ type: SLOT_CONTACT_NAME });
     contactContainer.appendChild(contactSlot);
   };
 

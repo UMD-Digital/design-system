@@ -1,3 +1,11 @@
+export const MakeTemplate = ({ styles }: { styles: string }) => {
+  const template = document.createElement('template');
+
+  template.innerHTML = `<style>${styles}</style>`;
+
+  return template;
+};
+
 export const MakeSpan = ({ text }: { text: string }) => {
   const span = document.createElement('span');
   span.innerHTML = text;
@@ -5,8 +13,9 @@ export const MakeSpan = ({ text }: { text: string }) => {
   return span;
 };
 
-export const CreateSlot = ({ type }: { type: string }) => {
+export const MakeSlot = ({ type }: { type: string }) => {
   const slot = document.createElement('slot');
   slot.setAttribute('name', type);
+
   return slot;
 };

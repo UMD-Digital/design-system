@@ -12,6 +12,10 @@ umd-element-footer {
     margin-bottom: 8px;
   }
 
+  & ul li {
+    margin-top: 24px;
+  }
+
   & a {
     background-image: linear-gradient(#fff, #fff);
     background-position: 0 100%;

@@ -1,6 +1,7 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import { BREAKPOINTS } from '../../../variables';
+import { MakeSlot } from 'helpers/ui';
 
 const LINK_TYPE = 'link';
 const HEADLINE_TYPE = 'headline';
@@ -216,13 +217,16 @@ export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
 
   if (hasSlot) {
     if (slotOne) {
-      container.appendChild(CreateColumn({ slotElement: slotOne }));
+      const slotElement = MakeSlot({ type: SLOT_COLUMN_ONE_NAME });
+      container.appendChild(CreateColumn({ slotElement }));
     }
     if (slotTwo) {
-      container.appendChild(CreateColumn({ slotElement: slotTwo }));
+      const slotElement = MakeSlot({ type: SLOT_COLUMN_TWO_NAME });
+      container.appendChild(CreateColumn({ slotElement }));
     }
     if (slotThree) {
-      container.appendChild(CreateColumn({ slotElement: slotThree }));
+      const slotElement = MakeSlot({ type: SLOT_COLUMN_THREE_NAME });
+      container.appendChild(CreateColumn({ slotElement }));
     }
   } else {
     container.appendChild(

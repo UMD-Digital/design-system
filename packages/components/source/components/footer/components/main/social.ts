@@ -78,6 +78,7 @@ export const SocialContainerStyles = `
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color .5s;
   }
   
   .${SOCIAL_CONTAINER_WRAPPER} a > *,
@@ -87,8 +88,12 @@ export const SocialContainerStyles = `
     transition: fill .5s;
   }
 
+  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
+    background-color: ${colors.gray.light};
+  }
+
   .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
-    fill: ${colors.red} !important;
+    fill: ${colors.gray.dark} !important;
   }
 
   .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
@@ -100,8 +105,12 @@ export const SocialContainerStyles = `
     fill: ${colors.black} !important;
   }
 
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
+    background-color: ${colors.gray.dark};
+  }
+
   .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
-    fill: ${colors.redDark} !important;
+    fill: ${colors.gray.light} !important;
   }
 `;
 

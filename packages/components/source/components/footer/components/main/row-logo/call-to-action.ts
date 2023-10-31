@@ -13,6 +13,7 @@ export const CallToActionStyles = `
     padding: ${spacing.xs} ${spacing['lg']};
     background-color: ${colors.red};
     color: ${colors.white};
+    font-weight: 800;
   }
 
   .${CALL_TO_ACTION_CONTAINER} a:hover, 

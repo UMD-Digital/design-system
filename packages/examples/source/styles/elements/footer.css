@@ -8,6 +8,10 @@ umd-element-footer {
     color: #fff;
   }
 
+  & p {
+    margin-bottom: 8px;
+  }
+
   & a {
     background-image: linear-gradient(#fff, #fff);
     background-position: 0 100%;
@@ -16,6 +20,10 @@ umd-element-footer {
     display: inline;
     position: relative;
     transition: background-size 0.4s;
+  }
+
+  & address p {
+    font-size: 14px;
   }
 
   & .mail-address {

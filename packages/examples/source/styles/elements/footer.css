@@ -26,6 +26,12 @@ umd-element-footer {
     transition: background-size 0.4s;
   }
 
+  & a:hover,
+  & a:focus {
+    background-size: 100% 1px;
+    color: theme(colors.white);
+  }
+
   & address p {
     font-size: 14px;
   }

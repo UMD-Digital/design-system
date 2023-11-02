@@ -1,7 +1,7 @@
 {
-  "name": "@universityofmaryland/umd-design-system-examples",
+  "name": "@universityofmaryland/umd-design-system-kitchen-sink",
   "version": "0.0.1",
-  "description": "UMD Design System Examples",
+  "description": "UMD Design System Kitchen Sink",
   "license": "MIT",
   "repository": "",
   "scripts": {

@@ -12,6 +12,7 @@ export const ELEMENT_ALERT_NAME = 'umd-element-alert';
 const CONTAINER_CLASS = 'umd-element-alert-container';
 const ICON_CLASS = 'umd-element-alert-icon';
 const TITLE_CLASS = 'umd-element-alert-title-wrapper';
+const BODY_CLASS = 'umd-element-alert-body-wrapper';
 const CLOSE_BUTTON_CLASS = 'umd-element-alert-close-button';
 const ALERT_LOCAL_STORAGE_KEY = 'umd-alert-closed-time';
 
@@ -82,12 +83,10 @@ const IconStyles = `
   }
 `;
 
-const TitleStyles = `
-
-  .${TITLE_CLASS} {
+const BodyStyles = `
+  .${BODY_CLASS} {
     font-weight: 500;
   }
-
 `;
 
 const ComponentStyles = `
@@ -129,8 +128,8 @@ const ComponentStyles = `
   
   ${IconStyles}
   ${ButtonStyles}
+  ${BodyStyles}
   ${AlertStyles}
-  ${TitleStyles}
   ${NotificationStyles}
   ${EmergencyStyles}
 `;
@@ -151,6 +150,7 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const wrapper = document.createElement('div');
   const iconWrapper = document.createElement('div');
   const titleWrapper = document.createElement('div');
+  const bodyWrapper = document.createElement('div');
   const closeButton = document.createElement('button');
   const titleSlot = MakeSlot({ type: 'title' });
   const bodySlot = MakeSlot({ type: 'body' });
@@ -171,8 +171,11 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   titleWrapper.classList.add(TITLE_CLASS);
   titleWrapper.appendChild(titleSlot);
 
+  bodyWrapper.classList.add(BODY_CLASS);
+  bodyWrapper.appendChild(bodySlot);
+
   wrapper.appendChild(titleWrapper);
-  wrapper.appendChild(bodySlot);
+  wrapper.appendChild(bodyWrapper);
 
   container.appendChild(iconWrapper);
   container.appendChild(wrapper);

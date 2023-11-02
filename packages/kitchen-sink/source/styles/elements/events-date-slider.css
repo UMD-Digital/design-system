@@ -2,10 +2,45 @@
   margin-top: 40px;
 }
 
-umd-element-events-date-slider[theme='dark'] * {
-  color: #fff;
-}
-
 .umd-sans-extralarge {
   margin-bottom: 24px;
+}
+
+.container {
+  display: none;
+}
+
+umd-element-events-date-slider {
+  & h3 {
+    font-size: 18px;
+    margin-left: 16px;
+
+    @media (max-width: 768px) {
+      text-wrap: nowrap;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+  }
+
+  & p {
+    margin-bottom: 0;
+
+    & span {
+      display: block;
+      text-transform: uppercase;
+      text-align: center;
+      max-width: 200px;
+      font-weight: 700;
+    }
+  }
+}
+
+umd-test {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+umd-element-events-date-slider[theme='dark'] * {
+  color: #fff;
 }

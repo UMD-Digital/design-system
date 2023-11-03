@@ -30,6 +30,10 @@ export const DatesStyles = `
     min-height: 44px;
   }
 
+  :host .${DATES_WRAPPER_CONTAINER_CLASS} ::slotted(*) {
+    margin-bottom: 0 !important;
+  }
+
   ${ButtonStyles}
 `;
 

@@ -1,5 +1,10 @@
 import { ContainerStyles, CreateContainer } from './components';
-import { SizeDatesElements, EventResize, EventSwipe } from './events';
+import {
+  SizeDatesElements,
+  EventResize,
+  EventSwipe,
+  ButtonVisibilityLogic,
+} from './events';
 import {
   CONTAINER_DARK_CLASS,
   DATE_SLOT_NAME,
@@ -91,14 +96,15 @@ export class UMDEventsDateSliderElement extends HTMLElement {
     OnLoadStyles({ element });
     window.addEventListener('resize', Debounce(resize, 20));
     EventSwipe({ container, element });
+    ButtonVisibilityLogic({ element });
   }
 
   setCountForward = () => {
-    this._count = this._count++;
+    this._count = this._count + 1;
   };
 
   setCountBackward = () => {
-    this._count = this._count--;
+    this._count = this._count - 1;
   };
 }
 

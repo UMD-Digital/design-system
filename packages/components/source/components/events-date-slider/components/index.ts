@@ -29,6 +29,10 @@ export const ContainerStyles = `
     background-color: ${colors.gray.darker};
   }
 
+  :host .${CONTAINER_DARK_CLASS} ::slotted(*) {
+    color: #fff !important;
+  }
+
   ${CoverStyles}
   ${ScrollerStyles}
 `;

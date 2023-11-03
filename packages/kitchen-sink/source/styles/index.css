@@ -13,3 +13,7 @@
 @import './elements/footer.css';
 @import './elements/alert.css';
 @import './elements/events-date-slider.css';
+
+.umd-sans-extralarge {
+  margin-bottom: 24px;
+}

@@ -1,3 +1,4 @@
+import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import {
   BREAKPOINTS,
   DATE_SLOT_NAME,
@@ -126,8 +127,10 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
 
         if (isMobile) {
           dateElement.style.justifyContent = `center`;
+          dateElement.style.paddingRight = `${spacing.md}`;
         } else {
           dateElement.style.justifyContent = `inherit`;
+          dateElement.style.paddingRight = `${spacing.lg}`;
         }
       });
     };
@@ -188,6 +191,7 @@ export const EventSlideDates = ({
 export const EventResize = ({ element }: { element: ELEMENT_TYPE }) => {
   SizeDatesElements({ element });
   JumpToDate({ element });
+  ButtonVisibilityLogic({ element });
 };
 
 export const EventSwipe = ({

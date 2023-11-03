@@ -11,7 +11,7 @@ export const CoverStyles = `
     height: 100%;
     top: 0;
     left: -100vw;
-    background-color: ${colors.gray.light};
+    background-color: ${colors.gray.lighter};
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {

@@ -8,7 +8,7 @@ const CONTAINER_CLASS = 'umd-element-date-slider-container';
 export const ContainerStyles = `
   :host .${CONTAINER_CLASS} {
     padding: 24px 0;
-    background-color: ${colors.gray.light};
+    background-color: ${colors.gray.lighter};
     position: relative;
     z-index: 99;
   }

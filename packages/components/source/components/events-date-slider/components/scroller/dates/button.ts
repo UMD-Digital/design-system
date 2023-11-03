@@ -20,7 +20,7 @@ export const ButtonStyles = `
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${colors.gray};
+    background-color: ${colors.gray.light};
     transition: background-color .5s;
     position: absolute;
     top: 50%;

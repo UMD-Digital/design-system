@@ -1,5 +1,5 @@
 import { Debounce } from '../../helpers/performance';
-import { ContainerStyles, CreateContainer } from './components';
+import { ContainerStyles, CreateContainer } from './elements';
 import {
   SizeDatesElements,
   EventResize,
@@ -45,7 +45,6 @@ const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
 
 export class UMDEventsDateSliderElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _containerElement = document.createElement('div');
   _element: null | HTMLElement = null;
   _count = 0;
 

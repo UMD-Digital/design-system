@@ -23,14 +23,6 @@ import {
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
 const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
 
-const socialOverwriteStyles = `
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
-    .${ROW_LOGO_CONTAINER_WRAPPER} .${SOCIAL_COLUMN_WRAPPER} {
-      display: none;
-    }
-  }
-`;
-
 const ctaOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER} > .${CALL_TO_ACTION_CONTAINER} {
@@ -43,15 +35,28 @@ const themeOverwriteStyles = `
   .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LOGO_CONTAINER} {
     background-color: ${colors.gray.lightest} !important;
   }
+
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+      display: none;
+    }
+  }
 `;
 
 export const RowLogoStyles = `
   .${ROW_LOGO_CONTAINER} {
     background-color: ${colors.black};
-    padding-top: ${spacing['2xl']};
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${ROW_LOGO_CONTAINER} {
+      padding-top: ${spacing['2xl']};
+    }
+  }
+
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${
+  BREAKPOINTS.large
+}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -59,7 +64,7 @@ export const RowLogoStyles = `
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LOGO_CONTAINER} {
       padding-bottom: ${spacing['md']} ;
     }
@@ -77,7 +82,6 @@ export const RowLogoStyles = `
   ${SocialContainerStyles}
   ${CallToActionStyles}
   ${ctaOverwriteStyles}
-  ${socialOverwriteStyles}
   ${themeOverwriteStyles}
 `;
 

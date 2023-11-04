@@ -7,6 +7,7 @@ import {
   BREAKPOINTS,
   ELEMENT_WRAPPER,
   THEME_OPTION_LIGHT,
+  VERSION_TYPE_SIMPLE,
 } from '../../../variables';
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
@@ -18,6 +19,14 @@ const socialOverwriteStyles = `
       display: none;
     }
   }
+
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+    .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+      display: block !important;
+    }
+  }
+
+
 `;
 
 export const RowLinkStyles = `

@@ -19,8 +19,16 @@ const DEFAULT_EMAIL = { url: 'mailto:omc@umd.edu', title: 'omc@umd.edu' };
 const DEFAULT_PHONE = { url: 'tel:3014051000', title: '301.405.1000' };
 
 const socialOverwriteStyles = `
-  .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
-    margin-top: ${spacing.md};
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+    .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+      display: none;
+    }
+  }
+
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+      margin-top: ${spacing.md};
+    }
   }
 `;
 

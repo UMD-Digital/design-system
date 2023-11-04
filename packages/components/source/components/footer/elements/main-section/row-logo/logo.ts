@@ -7,6 +7,8 @@ import {
 import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
 import {
   ELEMENT_TYPE,
+  ELEMENT_WRAPPER,
+  VERSION_TYPE_SIMPLE,
   THEME_OPTION_LIGHT,
   BREAKPOINTS,
 } from '../../../variables';
@@ -23,6 +25,12 @@ const ctaOverwriteStyles = `
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
+      display: none;
+    }
+  }
+
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
   }

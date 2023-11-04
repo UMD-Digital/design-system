@@ -8,6 +8,16 @@ const SLOT_CONTACT_NAME = 'contact';
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_CONTAINER = 'umd-footer-contact-contact-list';
 
+const DEFAULT_HEADLINE_LINK = {
+  url: 'https://www.usmd.edu/',
+  title: 'The Flagship Institution of the State of Maryland',
+};
+const DEFAULT_ADDRESS_TITLE = 'Office of Marketing and Communications';
+const DEFAULT_ADDRESS_ONE = '2101 Turner Hall';
+const DEFAULT_ADDRESS_TWO = 'College Park, MD 20742';
+const DEFAULT_EMAIL = { url: 'mailto:omc@umd.edu', title: 'omc@umd.edu' };
+const DEFAULT_PHONE = { url: 'tel:3014051000', title: '301.405.1000' };
+
 const socialOverwriteStyles = `
   .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
     margin-top: ${spacing.md};
@@ -119,27 +129,18 @@ export const CreateContactContainer = ({
     const addressParagraph = document.createElement('p');
     const contactList = document.createElement('p');
 
-    const headlineLink = makeLink({
-      url: 'https://www.usmd.edu/',
-      title: 'The Flagship Institution of the State of Maryland',
-    });
+    const headlineLink = makeLink(DEFAULT_HEADLINE_LINK);
 
     headline.classList.add('umd-interactive-sans-medium');
     headline.appendChild(headlineLink);
 
-    addressParagraph.appendChild(
-      MakeSpan({ text: 'Office of Marketing and Communications' }),
-    );
-    addressParagraph.appendChild(MakeSpan({ text: '2101 Turner Hall' }));
-    addressParagraph.appendChild(MakeSpan({ text: 'College Park, MD 20742' }));
+    addressParagraph.appendChild(MakeSpan({ text: DEFAULT_ADDRESS_TITLE }));
+    addressParagraph.appendChild(MakeSpan({ text: DEFAULT_ADDRESS_ONE }));
+    addressParagraph.appendChild(MakeSpan({ text: DEFAULT_ADDRESS_TWO }));
 
     contactList.classList.add(CONTACT_LIST_CONTAINER);
-    contactList.appendChild(
-      makeLink({ url: 'mailto:omc@umd.edu', title: 'omc@umd.edu' }),
-    );
-    contactList.appendChild(
-      makeLink({ url: 'tel:3014051000', title: '301.405.1000' }),
-    );
+    contactList.appendChild(makeLink(DEFAULT_EMAIL));
+    contactList.appendChild(makeLink(DEFAULT_PHONE));
 
     address.appendChild(addressParagraph);
     address.appendChild(contactList);

@@ -1,3 +1,8 @@
+export type ELEMENT_TYPE = HTMLElement & {
+  _theme: string;
+  _type: string;
+};
+
 export const ELEMENT_WRAPPER = 'umd-footer-element-wrapper';
 
 export const THEME_OPTION_DARK = 'dark';

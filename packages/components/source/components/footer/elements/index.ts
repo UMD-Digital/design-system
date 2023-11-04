@@ -1,6 +1,6 @@
 import { CreateMain, MainContainerStyles } from './main-section';
 import { CreateUtility, UtilityContainerStyles } from './utility-section';
-import { ELEMENT_WRAPPER } from '../variables';
+import { ELEMENT_TYPE, ELEMENT_WRAPPER } from '../variables';
 
 export const ComponentStyles = `
   :host {
@@ -14,25 +14,15 @@ export const ComponentStyles = `
   ${UtilityContainerStyles}
 `;
 
-export const CreateElement = ({
-  element,
-  type,
-  theme,
-}: {
-  element: HTMLElement;
-  type: string;
-  theme: string;
-}) => {
+export const CreateElement = ({ element }: { element: ELEMENT_TYPE }) => {
   const wrapper = document.createElement('div');
   wrapper.classList.add(ELEMENT_WRAPPER);
 
-  wrapper.setAttribute('theme', theme);
-  wrapper.setAttribute('type', type);
+  wrapper.setAttribute('theme', element._theme);
+  wrapper.setAttribute('type', element._type);
   wrapper.appendChild(
     CreateMain({
       element,
-      type,
-      theme,
     }),
   );
   wrapper.appendChild(CreateUtility({ element }));

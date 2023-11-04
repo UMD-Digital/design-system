@@ -1,6 +1,6 @@
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
-import { THEME_OPTION_LIGHT } from '../../variables';
+import { ELEMENT_TYPE, THEME_OPTION_LIGHT } from '../../variables';
 
 export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
 
@@ -12,7 +12,8 @@ export const CampaignStyles = `
   }
 `;
 
-export const CreateCampaignRow = ({ theme }: { theme: string }) => {
+export const CreateCampaignRow = ({ element }: { element: ELEMENT_TYPE }) => {
+  const theme = element._theme;
   const container = document.createElement('div');
   const link = document.createElement('a');
   link.href = 'https://fearlesslyforward.umd.edu';

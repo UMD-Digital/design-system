@@ -1,15 +1,13 @@
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateElement } from './elements';
-import {
-  THEME_OPTION_DARK,
-  VERSION_TYPE_SIMPLE,
-  VERSION_TYPES,
-} from './variables';
+import { THEME_OPTION_DARK, VERSION_TYPE_SIMPLE } from './variables';
 
 export const ELEMENT_FOOTER_NAME = 'umd-element-footer';
 
 export class UMDFooterElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _theme = THEME_OPTION_DARK;
+  _type = VERSION_TYPE_SIMPLE;
 
   constructor() {
     super();
@@ -29,18 +27,10 @@ export class UMDFooterElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    const type = this.getAttribute('type') || VERSION_TYPE_SIMPLE;
-    const theme = this.getAttribute('theme') || THEME_OPTION_DARK;
-    const wrapper = CreateElement({ element, type, theme });
+    element._type = this.getAttribute('type') || VERSION_TYPE_SIMPLE;
+    element._theme = this.getAttribute('theme') || THEME_OPTION_DARK;
 
-    if (VERSION_TYPES.indexOf(type) === -1) {
-      const message = `UMDFooterElement: Invalid type attribute. Must be one of ${VERSION_TYPES.join(
-        ',',
-      )}. Refer to documenation for more information.`;
-      throw new Error(message);
-    }
-
-    this._shadow.appendChild(wrapper);
+    this._shadow.appendChild(CreateElement({ element }));
   }
 }
 

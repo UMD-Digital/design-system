@@ -9,6 +9,7 @@ import {
   CALL_TO_ACTION_CONTAINER,
 } from '../call-to-action';
 import {
+  ELEMENT_TYPE,
   BREAKPOINTS,
   ELEMENT_WRAPPER,
   THEME_OPTION_LIGHT,
@@ -61,15 +62,9 @@ export const RowLogoStyles = `
   ${themeOverwriteStyles}
 `;
 
-export const CreateRowLogo = ({
-  type,
-  theme,
-  element,
-}: {
-  type: string;
-  theme: string;
-  element: HTMLElement;
-}) => {
+export const CreateRowLogo = ({ element }: { element: ELEMENT_TYPE }) => {
+  const theme = element._theme;
+  const type = element._type;
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -84,7 +79,6 @@ export const CreateRowLogo = ({
     if (includeSocial) {
       const socialColumnWrapper = CreateSocialCampaignColumns({
         element,
-        theme,
       });
       wrapper.appendChild(socialColumnWrapper);
     } else {
@@ -93,7 +87,7 @@ export const CreateRowLogo = ({
     }
   };
 
-  const logoElement = CreateLogoContainer({ theme, element });
+  const logoElement = CreateLogoContainer({ element });
   const contactElement = CreateContactContainer({ element });
   wrapper.appendChild(logoElement);
   wrapper.appendChild(contactElement);

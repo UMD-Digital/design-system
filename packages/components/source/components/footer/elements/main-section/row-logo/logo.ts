@@ -5,7 +5,11 @@ import {
   CALL_TO_ACTION_CONTAINER,
 } from '../call-to-action';
 import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
-import { THEME_OPTION_LIGHT, BREAKPOINTS } from '../../../variables';
+import {
+  ELEMENT_TYPE,
+  THEME_OPTION_LIGHT,
+  BREAKPOINTS,
+} from '../../../variables';
 
 const LOGO_CONTAINER = 'umd-footer-logo-container';
 const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
@@ -48,16 +52,11 @@ export const LogoContainerStyles = `
   ${ctaOverwriteStyles}
 `;
 
-export const CreateLogoContainer = ({
-  theme,
-  element,
-}: {
-  theme: string;
-  element: HTMLElement;
-}) => {
+export const CreateLogoContainer = ({ element }: { element: ELEMENT_TYPE }) => {
+  const theme = element._theme;
   const container = document.createElement('div');
   const logoLink = document.createElement('a');
-  const campaignContainer = CreateCampaignRow({ theme });
+  const campaignContainer = CreateCampaignRow({ element });
   const ctaWrapper = CreateCallToActionContainer({ element });
 
   logoLink.classList.add(LOGO_CONTAINER_LINK);

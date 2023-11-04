@@ -2,6 +2,7 @@ import { colors } from '@universityofmaryland/design-system-configuration/dist/c
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import {
+  ELEMENT_TYPE,
   BREAKPOINTS,
   ELEMENT_WRAPPER,
   THEME_OPTION_LIGHT,
@@ -226,14 +227,12 @@ const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
 
 export const CreateSocialCampaignColumns = ({
   element,
-  theme,
 }: {
-  element: HTMLElement;
-  theme: string;
+  element: ELEMENT_TYPE;
 }) => {
   const socialColumnWrapper = document.createElement('div');
   const socialContainer = CreateSocialRow({ element });
-  const campaignContainer = CreateCampaignRow({ theme });
+  const campaignContainer = CreateCampaignRow({ element });
 
   socialColumnWrapper.classList.add(SOCIAL_COLUMN_WRAPPER);
 

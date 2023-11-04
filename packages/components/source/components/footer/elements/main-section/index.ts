@@ -3,6 +3,7 @@ import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';
 import {
+  ELEMENT_TYPE,
   ELEMENT_WRAPPER,
   VERSION_TYPE_VISUAL,
   THEME_OPTION_LIGHT,
@@ -68,17 +69,10 @@ export const MainContainerStyles = `
   ${VariationVisualStyles}
 `;
 
-export const CreateMain = ({
-  type,
-  theme,
-  element,
-}: {
-  type: string;
-  theme: string;
-  element: HTMLElement;
-}) => {
+export const CreateMain = ({ element }: { element: ELEMENT_TYPE }) => {
+  const type = element._type;
   const container = document.createElement('div');
-  const logoRow = CreateRowLogo({ theme, type, element });
+  const logoRow = CreateRowLogo({ element });
 
   container.classList.add(MAIN_CONTAINER);
 
@@ -120,7 +114,7 @@ export const CreateMain = ({
   container.appendChild(logoRow);
 
   if (type === VERSION_TYPE_MEGA || type === VERSION_TYPE_VISUAL) {
-    const linksRow = CreateRowLinks({ element, theme });
+    const linksRow = CreateRowLinks({ element });
     container.appendChild(linksRow);
   }
 

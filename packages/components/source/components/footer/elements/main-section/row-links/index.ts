@@ -3,6 +3,7 @@ import { spacing } from '@universityofmaryland/design-system-configuration/dist/
 import { CreateSocialCampaignColumns } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 import {
+  ELEMENT_TYPE,
   BREAKPOINTS,
   ELEMENT_WRAPPER,
   THEME_OPTION_LIGHT,
@@ -41,17 +42,11 @@ export const RowLinkStyles = `
   ${LinkColumnStyles}
 `;
 
-export const CreateRowLinks = ({
-  element,
-  theme,
-}: {
-  element: HTMLElement;
-  theme: string;
-}) => {
+export const CreateRowLinks = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const wrapper = document.createElement('div');
-  const socialColumnWrapper = CreateSocialCampaignColumns({ element, theme });
+  const socialColumnWrapper = CreateSocialCampaignColumns({ element });
   const linkColumnWrapper = CreateLinkColumns({ element });
 
   lock.classList.add('umd-lock');

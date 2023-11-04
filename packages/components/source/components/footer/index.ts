@@ -1,5 +1,5 @@
 import { MakeTemplate } from 'helpers/ui';
-import { ComponentStyles, CreateElement } from './components';
+import { ComponentStyles, CreateElement } from './elements';
 import {
   THEME_OPTION_DARK,
   VERSION_TYPE_SIMPLE,

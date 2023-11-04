@@ -1,13 +1,13 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
-
 import { ContactContainerStyles, CreateContactContainer } from './contact';
 import { SocialContainerStyles, CreateSocialCampaignColumns } from '../social';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
 import {
   CallToActionStyles,
   CreateCallToActionContainer,
-} from './call-to-action';
+  CALL_TO_ACTION_CONTAINER,
+} from '../call-to-action';
 import {
   BREAKPOINTS,
   ELEMENT_WRAPPER,
@@ -17,6 +17,20 @@ import {
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
 const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
+
+const ctaOverwriteStyles = `
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${ROW_LOGO_CONTAINER_WRAPPER} > .${CALL_TO_ACTION_CONTAINER} {
+      display: none;
+    }
+  }
+`;
+
+const themeOverwriteStyles = `
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LOGO_CONTAINER} {
+    background-color: ${colors.gray.lightest} !important;
+  }
+`;
 
 export const RowLogoStyles = `
   .${ROW_LOGO_CONTAINER} {
@@ -43,10 +57,10 @@ export const RowLogoStyles = `
   ${ContactContainerStyles}
   ${SocialContainerStyles}
   ${CallToActionStyles}
+  ${ctaOverwriteStyles}
+  ${themeOverwriteStyles}
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LOGO_CONTAINER} {
-    background-color: ${colors.gray.lightest} !important;
-  }
+
 `;
 
 export const CreateRowLogo = ({
@@ -81,7 +95,7 @@ export const CreateRowLogo = ({
     }
   };
 
-  const logoElement = CreateLogoContainer({ theme });
+  const logoElement = CreateLogoContainer({ theme, element });
   const contactElement = CreateContactContainer({ element });
   wrapper.appendChild(logoElement);
   wrapper.appendChild(contactElement);

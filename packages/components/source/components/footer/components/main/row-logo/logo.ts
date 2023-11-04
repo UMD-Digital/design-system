@@ -1,21 +1,30 @@
-import { CreateCampaignRow } from '../campaign';
-import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
+import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
-  THEME_OPTION_LIGHT,
-  BREAKPOINTS,
-  CAMPAIGN_COLUMN_WRAPPER,
-} from '../../../variables';
+  CreateCallToActionContainer,
+  CALL_TO_ACTION_CONTAINER,
+} from '../call-to-action';
+import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
+import { THEME_OPTION_LIGHT, BREAKPOINTS } from '../../../variables';
 
 const LOGO_CONTAINER = 'umd-footer-logo-container';
 const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
 
-const campaignOverwriteStyles = `
+const ctaOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${LOGO_CONTAINER} .${CAMPAIGN_COLUMN_WRAPPER} {
-    
+    .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
+      margin-top: ${spacing.md};
     }
   }
 
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+    .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
+      display: none;
+    }
+  }
+`;
+
+const campaignOverwriteStyles = `
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${LOGO_CONTAINER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: none;
@@ -36,12 +45,20 @@ export const LogoContainerStyles = `
   }
 
   ${campaignOverwriteStyles}
+  ${ctaOverwriteStyles}
 `;
 
-export const CreateLogoContainer = ({ theme }: { theme: string }) => {
+export const CreateLogoContainer = ({
+  theme,
+  element,
+}: {
+  theme: string;
+  element: HTMLElement;
+}) => {
   const container = document.createElement('div');
   const logoLink = document.createElement('a');
   const campaignContainer = CreateCampaignRow({ theme });
+  const ctaWrapper = CreateCallToActionContainer({ element });
 
   logoLink.classList.add(LOGO_CONTAINER_LINK);
   logoLink.setAttribute('href', 'https://umd.edu');
@@ -54,6 +71,7 @@ export const CreateLogoContainer = ({ theme }: { theme: string }) => {
   container.classList.add(LOGO_CONTAINER);
   container.appendChild(logoLink);
   container.appendChild(campaignContainer);
+  container.appendChild(ctaWrapper);
 
   return container;
 };

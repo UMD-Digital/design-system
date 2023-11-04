@@ -1,19 +1,12 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
-import { BREAKPOINTS } from '../../../variables';
 
 const SLOT_CTA_NAME = 'call-to-action';
-const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
+export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 
 export const CallToActionStyles = `
   .${CALL_TO_ACTION_CONTAINER} {
     margin-left: auto;
-  }
-
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
-    .${CALL_TO_ACTION_CONTAINER} {
-      display: none;
-    }
   }
 
   .${CALL_TO_ACTION_CONTAINER} a {

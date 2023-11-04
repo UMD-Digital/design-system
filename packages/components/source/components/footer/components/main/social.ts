@@ -1,11 +1,10 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
-import { CreateCampaignRow } from './campaign';
+import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import {
   BREAKPOINTS,
   ELEMENT_WRAPPER,
   THEME_OPTION_LIGHT,
-  CAMPAIGN_COLUMN_WRAPPER,
 } from '../../variables';
 import {
   FACEBOOK_ICON,

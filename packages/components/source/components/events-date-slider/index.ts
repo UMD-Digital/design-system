@@ -1,3 +1,4 @@
+import { Debounce } from '../../helpers/performance';
 import { ContainerStyles, CreateContainer } from './components';
 import {
   SizeDatesElements,
@@ -28,16 +29,6 @@ template.innerHTML = `
     ${ContainerStyles}
   </style>
 `;
-
-const Debounce = <T extends Function>(cb: T, wait = 50) => {
-  let h = 0;
-  let callable = (...args: any) => {
-    clearTimeout(h);
-    // @ts-ignore
-    h = setTimeout(() => cb(...args), wait);
-  };
-  return <T>(<any>callable);
-};
 
 const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
   const slider = element.querySelector(

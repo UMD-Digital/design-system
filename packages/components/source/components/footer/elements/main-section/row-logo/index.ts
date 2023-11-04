@@ -1,8 +1,12 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import { ContactContainerStyles, CreateContactContainer } from './contact';
-import { SocialContainerStyles, CreateSocialCampaignColumns } from '../social';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
+import {
+  SocialContainerStyles,
+  CreateSocialCampaignColumns,
+  SOCIAL_COLUMN_WRAPPER,
+} from '../social';
 import {
   CallToActionStyles,
   CreateCallToActionContainer,
@@ -18,6 +22,14 @@ import {
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
 const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
+
+const socialOverwriteStyles = `
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+    .${ROW_LOGO_CONTAINER_WRAPPER} .${SOCIAL_COLUMN_WRAPPER} {
+      display: none;
+    }
+  }
+`;
 
 const ctaOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
@@ -36,7 +48,7 @@ const themeOverwriteStyles = `
 export const RowLogoStyles = `
   .${ROW_LOGO_CONTAINER} {
     background-color: ${colors.black};
-    padding: ${spacing['2xl']} 0 ${spacing['md']} ;
+    padding-top: ${spacing['2xl']};
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
@@ -44,6 +56,12 @@ export const RowLogoStyles = `
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: ${spacing.md};
+    }
+  }
+
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+    .${ROW_LOGO_CONTAINER} {
+      padding-bottom: ${spacing['md']} ;
     }
   }
   
@@ -59,11 +77,11 @@ export const RowLogoStyles = `
   ${SocialContainerStyles}
   ${CallToActionStyles}
   ${ctaOverwriteStyles}
+  ${socialOverwriteStyles}
   ${themeOverwriteStyles}
 `;
 
 export const CreateRowLogo = ({ element }: { element: ELEMENT_TYPE }) => {
-  const theme = element._theme;
   const type = element._type;
   const container = document.createElement('div');
   const lock = document.createElement('div');

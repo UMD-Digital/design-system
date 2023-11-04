@@ -1,16 +1,23 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { MakeSlot, MakeSpan } from 'helpers/ui';
-import { BREAKPOINTS } from '../../../variables';
+import { ELEMENT_TYPE, BREAKPOINTS } from '../../../variables';
 
 const SLOT_CONTACT_NAME = 'contact';
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_CONTAINER = 'umd-footer-contact-contact-list';
 
+const socialOverwriteStyles = `
+  .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+    margin-top: ${spacing.md};
+  }
+`;
+
 export const ContactContainerStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${CONTACT_CONTAINER} {
-      padding: ${spacing['md']} 0;
+      padding-top: ${spacing['md']};
     }
   }
 
@@ -73,6 +80,8 @@ export const ContactContainerStyles = `
     top: 50%;
     left: 0;
   }
+
+  ${socialOverwriteStyles}
 `;
 
 const makeLink = ({ url, title }: { url: string; title: string }) => {
@@ -89,10 +98,11 @@ const makeLink = ({ url, title }: { url: string; title: string }) => {
 export const CreateContactContainer = ({
   element,
 }: {
-  element: HTMLElement;
+  element: ELEMENT_TYPE;
 }) => {
   const contactNode = element.querySelector(`[slot="${SLOT_CONTACT_NAME}"]`);
   const contactContainer = document.createElement('div');
+  const socialContainer = CreateSocialCampaignColumns({ element });
   const hasChildren = contactNode ? contactNode.children.length > 0 : false;
 
   contactContainer.classList.add(CONTACT_CONTAINER);
@@ -140,6 +150,8 @@ export const CreateContactContainer = ({
   };
 
   hasChildren ? makeContactSlot() : makeDefaultSlot();
+
+  contactContainer.appendChild(socialContainer);
 
   return contactContainer;
 };

@@ -16,9 +16,9 @@ import {
 } from 'assets/social';
 
 const SLOT_SOCIAL_NAME = 'social-links';
+export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
 const SOCIAL_CONTAINER_WRAPPER = 'umd-footer-social-container_wrapper';
-const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 
 const campaignOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
@@ -61,13 +61,6 @@ export const SocialContainerStyles = `
     display: flex;
     align-items: center;
     align-self: flex-start;
-  }
-
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
-    .${SOCIAL_CONTAINER} {
-      margin-left: 0;
-      grid-column: 2 / -1;
-    }
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {

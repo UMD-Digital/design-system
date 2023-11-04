@@ -1,6 +1,6 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
-import { CreateSocialCampaignColumns } from '../social';
+import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 import {
   ELEMENT_TYPE,
@@ -11,6 +11,14 @@ import {
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
 export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
+
+const socialOverwriteStyles = `
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+      display: none;
+    }
+  }
+`;
 
 export const RowLinkStyles = `
   .${ROW_LINKS_CONTAINER} {
@@ -40,6 +48,7 @@ export const RowLinkStyles = `
   }
 
   ${LinkColumnStyles}
+  ${socialOverwriteStyles}
 `;
 
 export const CreateRowLinks = ({ element }: { element: ELEMENT_TYPE }) => {

@@ -1,4 +1,5 @@
 export const ELEMENT_WRAPPER = 'umd-footer-element-wrapper';
+export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
 
 export const THEME_OPTION_DARK = 'dark';
 export const THEME_OPTION_LIGHT = 'light';

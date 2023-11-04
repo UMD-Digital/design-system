@@ -1,6 +1,7 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
+import { CampaignStyles } from './campaign';
 import {
   ELEMENT_WRAPPER,
   VERSION_TYPE_VISUAL,
@@ -63,6 +64,7 @@ export const MainContainerStyles = `
 
   ${RowLogoStyles}
   ${RowLinkStyles}
+  ${CampaignStyles}
   ${VariationVisualStyles}
 `;
 

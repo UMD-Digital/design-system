@@ -1,9 +1,11 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { CreateCampaignRow } from './campaign';
 import {
   BREAKPOINTS,
   ELEMENT_WRAPPER,
   THEME_OPTION_LIGHT,
+  CAMPAIGN_COLUMN_WRAPPER,
 } from '../../variables';
 import {
   FACEBOOK_ICON,
@@ -12,12 +14,46 @@ import {
   YOUTUBE_ICON,
   TWITTER_ICON,
 } from 'assets/social';
-import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
 
 const SLOT_SOCIAL_NAME = 'social-links';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
 const SOCIAL_CONTAINER_WRAPPER = 'umd-footer-social-container_wrapper';
 const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
+
+const campaignOverwriteStyles = `
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${SOCIAL_COLUMN_WRAPPER} .${CAMPAIGN_COLUMN_WRAPPER} {
+      display: none;
+    }
+  }
+  
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+    .${SOCIAL_COLUMN_WRAPPER} .${CAMPAIGN_COLUMN_WRAPPER} {
+      display: flex;
+      justify-content: flex-end;
+      margin-left: auto;
+    }
+  }
+`;
+
+const themeOverwriteStyles = `
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
+    background-color: ${colors.gray.light};
+  }
+  
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
+    fill: ${colors.black} !important;
+  }
+  
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
+    background-color: ${colors.gray.dark};
+  }
+  
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
+    fill: ${colors.gray.light} !important;
+  }
+`;
 
 export const SocialContainerStyles = `
   .${SOCIAL_CONTAINER} {
@@ -30,7 +66,7 @@ export const SocialContainerStyles = `
   @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${SOCIAL_CONTAINER} {
       margin-left: 0;
-      order: 2;
+      grid-column: 2 / -1;
     }
   }
 
@@ -57,26 +93,6 @@ export const SocialContainerStyles = `
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${SOCIAL_COLUMN_WRAPPER} {
-      margin-left: auto;
-    }
-  }
-  
-  .${SOCIAL_COLUMN_WRAPPER} > a {
-    display: block;
-    margin-top: ${spacing.lg};
-    max-width: 250px;
-  }
-
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
-    .${SOCIAL_COLUMN_WRAPPER} > a {
-      margin-top: -${spacing.lg};
-    }
-  }
-
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
-    .${SOCIAL_COLUMN_WRAPPER} > a {
-      display: flex;
-      justify-content: flex-end;
       margin-left: auto;
     }
   }
@@ -118,22 +134,8 @@ export const SocialContainerStyles = `
     fill: ${colors.gray.dark} !important;
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
-    background-color: ${colors.gray.light};
-  }
-
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
-    fill: ${colors.black} !important;
-  }
-
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
-    background-color: ${colors.gray.dark};
-  }
-
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
-    fill: ${colors.gray.light} !important;
-  }
+  ${campaignOverwriteStyles}
+  ${themeOverwriteStyles}
 `;
 
 // Enforce known social link types logos
@@ -219,18 +221,6 @@ const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
 
   container.appendChild(headline);
   container.appendChild(linksWrapper);
-
-  return container;
-};
-
-const CreateCampaignRow = ({ theme }: { theme: string }) => {
-  const container = document.createElement('a');
-  container.href = 'https://fearlesslyforward.umd.edu';
-  container.setAttribute('target', '_blank');
-  container.setAttribute('rel', 'noopener noreferrer');
-
-  container.innerHTML =
-    theme === THEME_OPTION_LIGHT ? CAMPAIGN_LOGO_DARK : CAMPAIGN_LOGO;
 
   return container;
 };

@@ -23,6 +23,14 @@ export const RowLogoStyles = `
     background-color: ${colors.black};
     padding: ${spacing['2xl']} 0 ${spacing['md']} ;
   }
+
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+    .${ROW_LOGO_CONTAINER_WRAPPER}  {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: ${spacing.md};
+    }
+  }
   
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {

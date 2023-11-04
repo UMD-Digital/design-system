@@ -8,7 +8,7 @@ const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_CONTAINER = 'umd-footer-contact-contact-list';
 
 export const ContactContainerStyles = `
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${CONTACT_CONTAINER} {
       padding: ${spacing['md']} 0;
     }

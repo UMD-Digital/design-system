@@ -27,6 +27,13 @@ export const SocialContainerStyles = `
     align-self: flex-start;
   }
 
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+    .${SOCIAL_CONTAINER} {
+      margin-left: 0;
+      order: 2;
+    }
+  }
+
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${SOCIAL_CONTAINER} {
       justify-content: flex-end;
@@ -39,6 +46,15 @@ export const SocialContainerStyles = `
     padding-top: 3px;
   }
 
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+    .${SOCIAL_COLUMN_WRAPPER} {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column: 1 / span 2;
+      gap: ${spacing.md};
+    }
+  }
+
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${SOCIAL_COLUMN_WRAPPER} {
       margin-left: auto;
@@ -49,6 +65,12 @@ export const SocialContainerStyles = `
     display: block;
     margin-top: ${spacing.lg};
     max-width: 250px;
+  }
+
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+    .${SOCIAL_COLUMN_WRAPPER} > a {
+      margin-top: -${spacing.lg};
+    }
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {

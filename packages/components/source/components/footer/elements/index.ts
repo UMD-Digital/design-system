@@ -1,5 +1,5 @@
-import { CreateMain, MainContainerStyles } from './main';
-import { CreateUtility, UtilityContainerStyles } from './utility';
+import { CreateMain, MainContainerStyles } from './main-section';
+import { CreateUtility, UtilityContainerStyles } from './utility-section';
 import { ELEMENT_WRAPPER } from '../variables';
 
 export const ComponentStyles = `

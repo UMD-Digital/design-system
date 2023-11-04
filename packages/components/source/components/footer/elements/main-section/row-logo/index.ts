@@ -59,8 +59,6 @@ export const RowLogoStyles = `
   ${CallToActionStyles}
   ${ctaOverwriteStyles}
   ${themeOverwriteStyles}
-
-
 `;
 
 export const CreateRowLogo = ({

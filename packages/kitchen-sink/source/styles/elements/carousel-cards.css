@@ -1,2 +1,14 @@
+* + umd-element-carousel-cards {
+  margin-top: 80px;
+}
+
 umd-element-carousel-cards {
+  & .umd-cta-secondary {
+    color: white;
+  }
+
+  & .umd-aligned-content > * {
+    text-wrap: pretty;
+    margin-top: 24px;
+  }
 }

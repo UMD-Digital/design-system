@@ -17,6 +17,7 @@
     "webpack-shell-plugin-next": "^2.3.1"
   },
   "dependencies": {
-    "umd-web-components": "link:../../@universityofmaryland/umd-web-components"
+    "umd-web-components": "link:../../@universityofmaryland/umd-web-components",
+    "umd-web-configuration": "link:../../@universityofmaryland/umd-web-configuration"
   }
 }

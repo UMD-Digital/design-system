@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      UMD Design System
+    </title>
+    <link rel="stylesheet" href="/configuration.css" />
+  </head>
+  <body>
+    <a href="#main" class="umd-skip-content">Skip to Main Content</a>
+    <header class="p-md">
+      <div class="umd-lock">
+        <a href="/" class="umd-cta-secondary mb-md">
+          <!-- prettier-ignore -->
+          <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+          <span>Back to Components List</span>
+        </a>
+      </div>
+    </header>
+    <main id="main">
+      <section class="pb-2xl">
+        <div class="umd-lock">
+          <h1 class="umd-serif-medium">
+            Class and element examples
+          </h1>
+          <div class="mb-md pb-md border-b border-black">
+            <div class="umd-rich-text">
+              <h2 class="umd-serif-medium mb-md text-red">
+                Configuration includes:
+              </h2>
+              <ol>
+                <li>
+                  Tokens:<ul>
+                    <li>Colors <em>[core, grays, and varients]</em></li>
+                    <li>
+                      Fonts
+                      <em>
+                        [font-family, font-size, line-hight, and font-weight]
+                      </em>
+                    </li>
+                    <li>Layout <em>[screens and spacing]</em></li>
+                  </ul>
+                </li>
+                <li>
+                  Custom Properties:<ul>
+                    <li>Colors: <em>[core, grays, and varients]</em></li>
+                    <li>Fonts: <em>[font-family]</em></li>
+                  </ul>
+                </li>
+
+                <li>
+                  Classes:<ul>
+                    <li>
+                      Common:<ul>
+                        <li>Accessibility <em>[.umd-skip-content]</em></li>
+                        <li>
+                          Rich Text
+                          <a href="#rich-text"><em>[.umd-rich-text]</em></a>
+                        </li>
+                        <li>
+                          Typography
+                          <a href="#typography">
+                            <em>[all heading classes]</em>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      Elements<ul>
+                        <li>
+                          Call to Action links
+                          <a href="#cta">
+                            <em>
+                              [.umd-cta-primary, .umd-cta-secondary,
+                              .umd-cta-outlined]
+                            </em>
+                          </a>
+                        </li>
+                        <li>
+                          Image with caption
+                          <a href="#image-caption">
+                            <em>[.umd-media-with-caption, .umd-caption]</em>
+                          </a>
+                        </li>
+                        <li>
+                          Loader
+                          <a href="#loader">
+                            <em>[.umd-loader, .umd-loader-legacy]</em>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      Layout<ul>
+                        <li>
+                          layout lock
+                          <a href="#umd-lock"><em>[.umd-lock]</em></a>
+                        </li>
+                        <li>
+                          Grid columns
+                          <a href="#umd-grid"><em>[.umd-grid]</em></a>
+                        </li>
+                        <li>
+                          Flex columns
+                          <a href="#umd-flex-grid"><em>[.umd-flex]</em></a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="mb-md pb-md border-b border-black">
+            <h2 id="rich-text" class="umd-serif-medium mb-md text-red">
+              Rich Text Styles
+            </h2>
+
+            <div class="umd-rich-text">
+              <h1>
+                H1 heading inside a rich text field: Large Header Academic
+                Program and Unit Approval Process (PCC)
+              </h1>
+
+              <h2>
+                H2 heading inside a rich text field: Medium Header Courseleaf
+                Curriculum Management
+              </h2>
+
+              <h3>
+                H3 heading inside a rich text field: Small Header
+              </h3>
+
+              <p>
+                Rich Text fields support a number of formatting options
+                including
+                <strong>Bold</strong>, <em>Italics</em>,<del>
+                  Strikethrough
+                </del>, Bulleted and ordered lists,
+                <a href="https://president.umd-staging.com/admin/entries/home/1-home#">
+                  links
+                </a>, line separator, and text alignment.
+              </p>
+              <hr />
+              <p>
+                <strong>Normal text formatted with bold</strong>
+              </p>
+              <p>
+                <u>
+                  Normal text formatted with underline
+                </u>
+              </p>
+              <p>
+                <em>Normal text formatted with italics</em>
+              </p>
+              <p>
+                <del>
+                  Normal text formatted with Strikethrough
+                </del>
+              </p>
+              <p>
+                <a href="https://president.umd-staging.com/admin/entries/home/1-home#">
+                  Links are formatted to semi-bold and underlined
+                </a>. <em>For accessibility only links can be underlined.</em>
+              </p>
+              <p>
+                Super<sup>script</sup>
+              </p>
+              <p>
+                Sub<sub>script</sub>
+              </p>
+              <hr />
+              <p>
+                <strong>Bulleted List</strong>
+              </p>
+              <ul>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.<ul>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.<ul>
+                        <li>
+                          Fusce ut placerat orci nulla pellentesque. Morbi
+                          blandit cursus risus at ultrices mi tempus imperdiet
+                          nulla. Sed turpis tincidunt id aliquet risus feugiat
+                          in ante metus. Non enim praesent elementum facilisis.
+                          Sed id semper risus in hendrerit gravida rutrum
+                          quisque non. Cursus risus at ultrices mi.
+                        </li>
+                        <li>
+                          Fusce ut placerat orci nulla pellentesque. Morbi
+                          blandit cursus risus at ultrices mi tempus imperdiet
+                          nulla. Sed turpis tincidunt id aliquet risus feugiat
+                          in ante metus. Non enim praesent elementum facilisis.
+                          Sed id semper risus in hendrerit gravida rutrum
+                          quisque non. Cursus risus at ultrices mi.
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+              </ul>
+              <p>
+                <strong>Ordered List</strong>
+              </p>
+              <ol>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.<ol>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.<ol>
+                        <li>
+                          Fusce ut placerat orci nulla pellentesque. Morbi
+                          blandit cursus risus at ultrices mi tempus imperdiet
+                          nulla. Sed turpis tincidunt id aliquet risus feugiat
+                          in ante metus. Non enim praesent elementum facilisis.
+                          Sed id semper risus in hendrerit gravida rutrum
+                          quisque non. Cursus risus at ultrices mi.
+                        </li>
+                        <li>
+                          Fusce ut placerat orci nulla pellentesque. Morbi
+                          blandit cursus risus at ultrices mi tempus imperdiet
+                          nulla. Sed turpis tincidunt id aliquet risus feugiat
+                          in ante metus. Non enim praesent elementum facilisis.
+                          Sed id semper risus in hendrerit gravida rutrum
+                          quisque non. Cursus risus at ultrices mi.
+                        </li>
+                      </ol>
+                    </li>
+
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                  </ol>
+                </li>
+
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+              </ol>
+              <p>
+                <strong>Mixed List</strong>
+              </p>
+              <ol>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.<ul>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+              </ol>
+
+              <ul>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.<ol>
+                    <li>
+                      Fusce ut placerat orci nolla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                  </ol>
+                </li>
+
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+              </ul>
+
+              <hr />
+              <p>
+                <strong>Text Aligned Left:</strong> Fusce ut placerat orci nulla
+                pellentesque. Morbi blandit cursus risus at ultrices mi tempus imperdiet
+                nulla. Sed turpis tincidunt id aliquet risus feugiat in ante metus.
+                Non enim praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </p>
+              <p style="text-align: center">
+                <strong>Text Aligned Center:</strong> Vel fringilla est ullamcorper
+                eget. Tempor commodo ullamcorper a lacus. Dignissim sodales ut eu
+                sem integer vitae. Cras sed felis eget velit aliquet sagittis. Sodales
+                ut etiam sit amet nisl purus in mollis. Gravida cum sociis natoque
+                penatibus et magnis dis parturient montes.
+              </p>
+              <p style="text-align: right">
+                <strong>Text Aligned Right:</strong> Sed risus pretium quam vulputate
+                dignissim. Scelerisque viverra mauris in aliquam sem fringilla. Vulputate
+                odio ut enim blandit volutpat maecenas volutpat blandit. Nunc faucibus
+                a pellentesque sit amet porttitor eget dolor morbi. Faucibus vitae
+                aliquet nec ullamcorper.
+              </p>
+              <p style="text-align: justify">
+                <strong>Text with Justified Alignment:</strong> Odio euismod lacinia
+                at quis. Placerat vestibulum lectus mauris ultrices eros in cursus
+                turpis. Quis enim lobortis scelerisque fermentum dui faucibus in
+                ornare quam. Rutrum quisque non tellus orci. Euismod nisi porta lorem
+                mollis.
+              </p>
+              <hr />
+              <p>
+                <strong>Blockquote</strong>
+              </p>
+              <blockquote>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Massa sed elementum tempus egestas. Duis ultricies lacus sed
+                turpis tincidunt id aliquet risus feugiat. Nunc pulvinar sapien
+                et ligula. Quam adipiscing vitae proin sagittis.
+              </blockquote>
+              <p>
+                <strong>Codeblock</strong><br />
+              </p>
+              {# prettier-ignore #}
+              <pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Code Block&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+              <p>
+                <strong>Inline code</strong>
+              </p>
+              <p>
+                Lorem ipsum dolor
+                <code>&lt;code&gt;inline code&lt;/code&gt;</code> sit amet, consectetur
+                adipiscing elit.
+              </p>
+              <p>
+                <strong>Table</strong>
+              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>
+                      Header Cell 1
+                    </th>
+                    <th>
+                      Header Cell 2
+                    </th>
+                    <th>
+                      Header Cell 3
+                    </th>
+                    <th>
+                      Header Cell 4
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p>
+                        Row 1: Column 1
+                      </p>
+                    </td>
+                    <td>
+                      Row 1: Column 2
+                    </td>
+                    <td>
+                      Row 1: Column 3
+                    </td>
+                    <td>
+                      Row 1: Column 4
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Row 2: Column 1
+                    </td>
+                    <td>
+                      Row 2: Column 2
+                    </td>
+                    <td>
+                      Row 2: Column 3
+                    </td>
+                    <td>
+                      Row 2: Column 4
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Row 3: Column 1
+                    </td>
+                    <td>
+                      Row 3: Column 2
+                    </td>
+                    <td>
+                      Row 3: Column 3
+                    </td>
+                    <td>
+                      Row 3: Column 4
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    </td>
+                    <td>
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua
+                    </td>
+                    <td>
+                      Massa sed elementum tempus egestas
+                    </td>
+                    <td>
+                      Duis ultricies lacus sed turpis tincidunt id aliquet risus
+                      feugiat
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mb-md pb-md border-b border-black">
+            <h2 id="rich-text" class="umd-serif-medium mb-md text-red">
+              Rich Text Styled with typographic Class Override
+            </h2>
+
+            <div class="umd-rich-text umd-sans-larger">
+              <p>
+                Rich Text block with the <a href="#typography">
+                  .umd-sans-larger
+                </a> class applied
+              </p>
+              <p>
+                Rich Text fields support a number of formatting options
+                including
+                <strong>Bold</strong>, <em>Italics</em>,<del>
+                  Strikethrough
+                </del>, Bulleted and ordered lists,
+                <a href="https://president.umd-staging.com/admin/entries/home/1-home#">
+                  links
+                </a>, line separator, and text alignment.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-md pb-md border-b border-black">
+            <h2 id="typography" class="umd-serif-medium mb-md text-red">
+              Typography Styles
+            </h2>
+
+            <p class="text-red my-md">
+              Serif Styles
+            </p>
+
+            <h3 class="umd-serif-max">
+              umd-serif-max &mdash; Headline Serif One
+            </h3>
+            <h3 class="umd-serif-extralarge">
+              umd-serif-extralarge &mdash; Headline Serif Two
+            </h3>
+            <h3 class="umd-serif-larger">
+              umd-serif-larger &mdash; Headline Serif Three
+            </h3>
+            <h3 class="umd-serif-large">
+              umd-serif-large &mdash; Headline Serif Four
+            </h3>
+            <h3 class="umd-serif-medium">
+              umd-serif-medium &mdash; Headline Serif Five
+            </h3>
+
+            <p class="text-red my-md">
+              San-serif Styles
+            </p>
+
+            <h3 class="umd-sans-maximum">
+              umd-sans-maximum &mdash; Headline Sans One
+            </h3>
+            <h3 class="umd-sans-largest">
+              umd-sans-largest &mdash; Headline Sans Two
+            </h3>
+            <h3 class="umd-sans-extralarge">
+              umd-sans-extralarge &mdash; Headline Sans Three
+            </h3>
+            <h3 class="umd-sans-larger">
+              umd-sans-larger &mdash; Headline Sans Four
+            </h3>
+            <h3 class="umd-sans-large">
+              umd-sans-large &mdash; Headline Sans Five
+            </h3>
+            <h3 class="umd-sans-medium">
+              umd-sans-medium &mdash; Headline Sans Six
+            </h3>
+            <h3 class="umd-sans-small">
+              umd-sans-small &mdash; Body Sans One
+            </h3>
+            <h3 class="umd-sans-smaller">
+              umd-sans-smaller &mdash; Body Sans Two
+            </h3>
+            <h3 class="umd-sans-min">
+              umd-sans-min &mdash; Body Sans Four
+            </h3>
+
+            <p class="text-red my-md">
+              Element specific Styles
+            </p>
+
+            <h3 class="umd-eyebrow">
+              umd-eyebrow &mdash; Headline Sans Six
+            </h3>
+            <h3 class="umd-label-sans-medium">
+              umd-label-sans-medium &mdash; Label 1
+            </h3>
+            <h3 class="umd-label-sans-small">
+              umd-label-sans-small &mdash; Label 2
+            </h3>
+            <h3 class="umd-interactive-sans-medium">
+              umd-interactive-sans-medium &mdash; Button 2
+            </h3>
+            <h3 class="umd-interactive-sans-small">
+              umd-interactive-sans-small &mdash; Button 1
+            </h3>
+          </div>
+
+          <div class="mb-md pb-md border-b border-black">
+            <h2 id="cta" class="umd-serif-medium mb-md text-red">
+              Call to Action Links
+            </h2>
+
+            <h3 class="mb-md umd-sans-small font-bold text-gray-mediumAA">
+              Group of Primary CTA elements
+            </h3>
+
+            <div class="umd-links-group mb-md">
+              <a href="#" class="umd-cta-primary">
+                <span>Primary Call to Action Link</span>
+              </a>
+              <a href="#" class="umd-cta-primary">
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                <span>Primary Call to Action Link with Icon</span>
+              </a>
+              <a href="#" class="umd-cta-primary-large">
+                <span>Primary Call to Large Action</span>
+              </a>
+            </div>
+
+            <h3 class="mb-md umd-sans-small font-bold text-gray-mediumAA">
+              Group of Secondary CTA elements
+            </h3>
+
+            <div class="umd-links-group mb-md">
+              <a href="#" class="umd-cta-secondary">
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                <span>Secondary Call to Action Link</span>
+              </a>
+              <a href="#" class="umd-cta-secondary">
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                <span>Secondary Call to Action Link</span>
+              </a>
+              <a href="#" class="umd-cta-secondary-large">
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                <span>Secondary Call to Large Action</span>
+              </a>
+            </div>
+
+            <h3 class="mb-md umd-sans-small font-bold text-gray-mediumAA">
+              Group of Outlined CTA elements
+            </h3>
+
+            <div class="umd-links-group mb-md">
+              <a href="#" class="umd-cta-outlined">
+                <span>Outlined Call to Action Link</span>
+              </a>
+              <a href="#" class="umd-cta-outlined">
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                <span>Outlined Call to Action Link with Icon</span>
+              </a>
+              <a href="#" class="umd-cta-outlined-large">
+                <span>Outlined Call to Large Action</span>
+              </a>
+            </div>
+
+            <h3 class="mb-md umd-sans-small font-bold text-gray-mediumAA">
+              Group of Primary and Outlined links with icons on right
+            </h3>
+
+            <div class="umd-links-group mb-md">
+              <a href="#" class="umd-cta-primary">
+                <span>Primary Call to Action Link with Icon</span>
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+              </a>
+
+              <a href="#" class="umd-cta-outlined">
+                <span>Outlined Call to Action Link with Icon</span>
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+              </a>
+            </div>
+
+            <h3 class="mb-md umd-sans-small font-bold text-gray-mediumAA">
+              Effect of longer links text on CTA element
+            </h3>
+
+            <div class="max-w-md">
+              <div class="umd-links-group mb-md">
+                <a href="#" class="umd-cta-secondary">
+                  <!-- prettier-ignore -->
+                  <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                  <span>
+                    A link with very long link text that causes the link to
+                    return to a new line
+                  </span>
+                </a>
+              </div>
+
+              <div class="umd-links-group mb-md">
+                <a href="#" class="umd-cta-primary">
+                  <!-- prettier-ignore -->
+                  <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                  <span>
+                    A link with very long link text that causes the link to
+                    return to a new line
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="mb-md umd-sans-small font-bold text-gray-mediumAA text-center">
+              Centered group of CTA Elements
+            </h3>
+
+            <div class="umd-links-group-center mb-md">
+              <a href="#" class="umd-cta-primary">
+                <span>Primary Call to Action Link</span>
+              </a>
+              <a href="#" class="umd-cta-primary">
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                <span>Secondary Call to Action Link</span>
+              </a>
+              <a href="#" class="umd-cta-primary">
+                <span>Primary Call to Large Action</span>
+              </a>
+            </div>
+
+            <h3 class="mb-md umd-sans-small font-bold text-gray-mediumAA">
+              CTA elements not in the <em>.umd-cta-group</em> class
+            </h3>
+
+            <div class="block mb-md">
+              <a href="#" class="umd-cta-primary">
+                <span>Primary Call to Action Link</span>
+              </a>
+            </div>
+
+            <div class="block mb-md">
+              <a href="#" class="umd-cta-secondary">
+                <!-- prettier-ignore -->
+                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z"  /></svg>
+                <span>Secondary Call to Action Link</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mb-md pb-md border-b border-black">
+            <h2 id="image-caption" class="umd-serif-medium mb-md text-red">
+              Image with Caption
+            </h2>
+            <figure class="umd-media-with-caption mb-md">
+              <img src="https://placekitten.com/g/800/600"
+                alt="A cute kitten photo automatically generated by placekitten.com" />
+              <figcaption class="umd-caption">
+                Optional text block. Lorem ipsum dolor sit amet, con adipiscing
+                elit lorem sit ahmet. Lorem ipsum dolor sit amet, con adipiscing
+                elit lorem sit ahmet Lorem ipsum dolor sit amet, con
+              </figcaption>
+            </figure>
+            <figure class="umd-media-with-caption">
+              <img src="https://placekitten.com/g/600/400"
+                alt="Another cute kitten photo automatically generated by placekitten.com" />
+              <figcaption class="umd-caption">
+                <p class="umd-sans-large text-black">
+                  Caption Title
+                </p>
+                <div class="umd-rich-text">
+                  <p>
+                    Optional text block. Lorem ipsum dolor sit amet, con
+                    adipiscing elit lorem sit ahmet. Lorem ipsum dolor sit amet,
+                    con adipiscing elit lorem sit ahmet Lorem ipsum dolor sit
+                    amet, con
+                  </p>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="mb-md pb-md border-b border-black">
+            <h2 id="loader" class="umd-serif-medium mb-md text-red">
+              UMD Loader
+            </h2>
+
+            <div class="py-lg">
+              <div class="umd-loader"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pb-2xl">
+        <div class="umd-lock">
+          <h2 id="umd-lock" class="umd-serif-medium mb-md text-red">
+            UMD Lock
+          </h2>
+        </div>
+
+        <div class="umd-lock">
+          <div class="mb-md pb-md">
+            <h3 class="umd-sans-extrasmall font-bold">
+              Size: null/medium/"default" (max: 1536px)
+            </h3>
+            <p>
+              <em>
+                1536px max-width - (64px * 2) padding = 1,408 content-width
+              </em>
+            </p>
+            <div class="h-md w-full bg-red"></div>
+          </div>
+        </div>
+
+        <div class="umd-lock-small">
+          <div class="mb-md pb-md">
+            <h3 class="umd-sans-extrasmall font-bold">
+              Size: Small (max: 1296px)
+            </h3>
+            <p>
+              <em>
+                1296px max-width - (64px * 2) padding = 1,168px content-width
+              </em>
+            </p>
+            <div class="h-md w-full bg-red"></div>
+          </div>
+        </div>
+
+        <div class="umd-lock-smaller">
+          <div class="mb-md pb-md">
+            <h3 class="umd-sans-extrasmall font-bold">
+              Size: Smaller (max: 1180px)
+            </h3>
+            <p>
+              <em>
+                1180px max-width - (64px * 2) padding = 1,052px content-width
+              </em>
+            </p>
+            <div class="h-md w-full bg-red"></div>
+          </div>
+        </div>
+
+        <div class="umd-lock-extra-small">
+          <div class="mb-md pb-md">
+            <h3 class="umd-sans-extrasmall font-bold">
+              Size: Extra Small (max: 960px)
+            </h3>
+            <p>
+              <em>
+                960px max-width - (64px * 2) padding = 832px content-width
+              </em>
+            </p>
+            <div class="h-md w-full bg-red"></div>
+          </div>
+        </div>
+
+        <div class="umd-lock-smallest">
+          <div class="mb-md pb-md">
+            <h3 class="umd-sans-extrasmall font-bold">
+              Size: Smallest (max: 800px)
+            </h3>
+            <p>
+              <em>
+                800px max-width - (64px * 2) padding = 672px content-width
+              </em>
+            </p>
+            <div class="h-md w-full bg-red"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pb-2xl">
+        <div class="umd-lock">
+          <h2 id="umd-grid" class="umd-serif-medium mb-md text-red">
+            UMD grid
+          </h2>
+
+          <h3 class="umd-sans-extrasmall font-bold">
+            Size: null/"default" (2 columns above 650px)
+          </h3>
+
+          <div class="umd-grid mb-md">
+            <div class="h-3xl w-full bg-red"></div>
+            <div class="h-3xl w-full bg-red"></div>
+          </div>
+
+          <h3 class="umd-sans-extrasmall font-bold">
+            Size: three (3 columns above 768px)
+          </h3>
+
+          <div class="umd-grid-three mb-md">
+            <div class="h-3xl w-full bg-red"></div>
+            <div class="h-3xl w-full bg-red"></div>
+            <div class="h-3xl w-full bg-red"></div>
+          </div>
+
+          <h3 class="umd-sans-extrasmall font-bold">
+            Size: four (4 columns above 768px)
+          </h3>
+
+          <div class="umd-grid-four mb-md">
+            <div class="h-3xl w-full bg-red"></div>
+            <div class="h-3xl w-full bg-red"></div>
+            <div class="h-3xl w-full bg-red"></div>
+            <div class="h-3xl w-full bg-red"></div>
+          </div>
+
+          <h3 class="umd-sans-small mb-md font-bold">
+            UMD grid with Text Example
+          </h3>
+
+          <div class="umd-grid mb-md">
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </div>
+
+          <div class="umd-grid-three mb-md">
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </div>
+
+          <div class="umd-grid-four mb-md">
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pb-2xl">
+        <div class="umd-lock">
+          <h2 id="umd-flex-grid" class="umd-serif-medium mb-md text-red">
+            UMD Flex Grid
+          </h2>
+
+          <h3 class="umd-sans-extrasmall font-bold">
+            Size: null/"default" (2 columns above 650px)
+          </h3>
+
+          <div class="umd-flex mb-md">
+            <div class="h-3xl bg-red"></div>
+            <div class="h-3xl bg-red"></div>
+          </div>
+
+          <h3 class="umd-sans-extrasmall font-bold">
+            Size: three (3 columns above 768px)
+          </h3>
+
+          <div class="umd-flex-three mb-md">
+            <div class="h-3xl bg-red"></div>
+            <div class="h-3xl bg-red"></div>
+            <div class="h-3xl bg-red"></div>
+          </div>
+
+          <h3 class="umd-sans-extrasmall font-bold">
+            Size: four (4 columns above 768px)
+          </h3>
+
+          <div class="umd-flex-four mb-md">
+            <div class="h-3xl bg-red"></div>
+            <div class="h-3xl bg-red"></div>
+            <div class="h-3xl bg-red"></div>
+            <div class="h-3xl bg-red"></div>
+          </div>
+
+          <h3 class="umd-sans-extrasmall font-bold">
+            Columns center if there are not enough columns
+          </h3>
+
+          <div class="umd-flex-four mb-md">
+            <div class="h-3xl bg-red"></div>
+            <div class="h-3xl bg-red"></div>
+          </div>
+
+          <h3 class="umd-sans-small mb-md font-bold">
+            UMD Flex Grid with Text Example
+          </h3>
+
+          <div class="umd-flex mb-md">
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </div>
+
+          <div class="umd-flex-three mb-md">
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </div>
+
+          <div class="umd-flex-four mb-md">
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div class="umd-rich-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+
+  <script src="/configuration.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+</html>

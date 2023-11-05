@@ -10,9 +10,10 @@
 
 /* Elements */
 
-@import './elements/footer.css';
 @import './elements/alert.css';
+@import './elements/carousel-cards.css';
 @import './elements/events-date-slider.css';
+@import './elements/footer.css';
 
 .umd-sans-extralarge {
   margin-bottom: 24px;

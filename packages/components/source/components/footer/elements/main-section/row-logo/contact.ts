@@ -52,7 +52,7 @@ export const ContactContainerStyles = `
   }
   
   .${CONTACT_CONTAINER} p {
-    line-height: 1.2em;
+    line-height: 1.4em;
   }
 
   .${CONTACT_CONTAINER} address {
@@ -77,7 +77,6 @@ export const ContactContainerStyles = `
   
   .${CONTACT_CONTAINER} .${CONTACT_LIST_CONTAINER} {
     display: flex;
-    margin-top: ${spacing.min};
   }
   
   .${CONTACT_CONTAINER} .${CONTACT_LIST_CONTAINER} a:not(:first-child) {

@@ -37,8 +37,8 @@ umd-element-footer {
   }
 
   & .mail-address {
-    line-height: 1.2em;
-    margin-bottom: 8px;
+    line-height: 1.4em;
+    margin-bottom: 0;
 
     & span {
       display: block;
@@ -46,6 +46,8 @@ umd-element-footer {
   }
 
   & .contact-list {
+    line-height: 1.4em;
+
     & a:not(:first-child) {
       position: relative;
       display: inline;

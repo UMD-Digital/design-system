@@ -8,6 +8,7 @@ module.exports = () => {
 
   const entrypoints = {
     app: path.resolve('source/scripts/app'),
+    configuration: path.resolve('source/scripts/configuration'),
   };
 
   const modules = {

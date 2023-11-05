@@ -1,19 +1,22 @@
-import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import { MakeSlot } from 'helpers/ui';
-import { SLOT_NAME_INTRO } from '../variables';
+import { SLOT_NAME_INTRO, BREAKPOINTS } from '../variables';
 
 const INTRO_CONTAINER = 'umd-carousel-cards-intro-container';
 
 export const IntroContainerStyles = `
-  .${INTRO_CONTAINER} {
-
+  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${INTRO_CONTAINER} {
+      margin-bottom: ${spacing.md};
+    }
   }
 
-  .${INTRO_CONTAINER} ::slotted(*) {
-    color: ${colors.white} !important;
+  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+    .${INTRO_CONTAINER} {
+      width: 40%;
+      padding-right: ${spacing.lg};
+    }
   }
-
 `;
 
 export const CreateIntroColumn = () => {

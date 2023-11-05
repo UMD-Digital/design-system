@@ -3,9 +3,8 @@ export type ELEMENT_TYPE = HTMLElement & {};
 export const SLOT_NAME_INTRO = 'intro';
 
 export const BREAKPOINTS = {
-  small: 500,
-  medium: 900,
-  large: 1200,
+  medium: 768,
+  large: 1024,
 };
 
 export const BACKGROUND_TEXTURE = `<svg aria-hidden="true" width="1599" height="618" viewBox="0 0 1599 618" fill="none" xmlns="http://www.w3.org/2000/svg"

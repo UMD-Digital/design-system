@@ -1,8 +1,12 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import { MakeTemplate } from 'helpers/ui';
-import { ELEMENT_TYPE, BREAKPOINTS, BACKGROUND_TEXTURE } from './variables';
-import { CreateIntroColumn } from './elements/intro';
+import { BREAKPOINTS, BACKGROUND_TEXTURE } from './variables';
+import { CreateIntroColumn, IntroContainerStyles } from './elements/intro';
+import {
+  CreateCarouselColumn,
+  CarouselContainerStyles,
+} from './elements/carousel';
 
 export const ELEMENT_CAROUSEL_CARDS_NAME = 'umd-element-carousel-cards';
 
@@ -43,10 +47,10 @@ const ComponentStyles = `
 
   .${CAROUSEL_CONTAINER} > svg {
     width: auto;
+    height: 100%;
     object-fit: cover;
     position: absolute;
     top: 0;
-    bottom: 0;
   }
 
   .${CAROUSEL_CONTAINER} ::slotted(*) {
@@ -56,18 +60,29 @@ const ComponentStyles = `
   .${CAROUSEL_CONTAINER_WRAPPER} {
     position: relative;
   }
+
+  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+    .${CAROUSEL_CONTAINER_WRAPPER} {
+      display: flex;
+    }
+  }
+
+  ${IntroContainerStyles}
+  ${CarouselContainerStyles}
 `;
 
 const CreateContent = () => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const intro = CreateIntroColumn();
+  const carousel = CreateCarouselColumn();
 
   container.classList.add(CAROUSEL_CONTAINER);
   wrapper.classList.add(CAROUSEL_CONTAINER_WRAPPER);
   wrapper.classList.add('umd-lock');
 
   wrapper.appendChild(intro);
+  wrapper.appendChild(carousel);
 
   container.innerHTML = BACKGROUND_TEXTURE;
   container.appendChild(wrapper);

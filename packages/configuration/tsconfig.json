@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "baseUrl": "source",
+    "outDir": "dist",
+    "rootDir": "source"
+  },
+  "include": ["source"],
+  "exclude": ["node_modules", "dist"]
+}

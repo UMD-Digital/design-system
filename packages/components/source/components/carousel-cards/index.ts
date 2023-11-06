@@ -1,12 +1,13 @@
 import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
-import { MakeTemplate } from 'helpers/ui';
-import { BREAKPOINTS, BACKGROUND_TEXTURE } from './variables';
 import { CreateIntroColumn, IntroContainerStyles } from './elements/intro';
 import {
   CreateCarouselColumn,
   CarouselContainerStyles,
 } from './elements/carousel';
+import { MakeTemplate } from 'helpers/ui';
+import { ELEMENT_TYPE, BREAKPOINTS, BACKGROUND_TEXTURE } from './variables';
+import { SizeCarousel } from './events';
 
 export const ELEMENT_CAROUSEL_CARDS_NAME = 'umd-element-carousel-cards';
 
@@ -64,6 +65,7 @@ const ComponentStyles = `
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
     .${CAROUSEL_CONTAINER_WRAPPER} {
       display: flex;
+      justify-content: space-between;
     }
   }
 
@@ -71,11 +73,11 @@ const ComponentStyles = `
   ${CarouselContainerStyles}
 `;
 
-const CreateContent = () => {
+const CreateContent = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const intro = CreateIntroColumn();
-  const carousel = CreateCarouselColumn();
+  const carousel = CreateCarouselColumn({ element });
 
   container.classList.add(CAROUSEL_CONTAINER);
   wrapper.classList.add(CAROUSEL_CONTAINER_WRAPPER);
@@ -115,9 +117,10 @@ export class UMDCarouselCards extends HTMLElement {
   ) {}
 
   connectedCallback() {
-    const content = CreateContent();
-
+    const element = this;
+    const content = CreateContent({ element });
     this._shadow.appendChild(content);
+    SizeCarousel({ element });
   }
 }
 

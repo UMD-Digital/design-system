@@ -1,6 +1,11 @@
 import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import { MakeSlot } from 'helpers/ui';
-import { SLOT_NAME_INTRO, BREAKPOINTS } from '../variables';
+import {
+  ELEMENT_TYPE,
+  SLOT_NAME_CARDS,
+  BREAKPOINTS,
+  CAROUSEL_CONTAINER_WRAPPER,
+} from '../variables';
 
 const CAROUSEL_CONTAINER = 'umd-carousel-cards-carousel-container';
 
@@ -14,14 +19,27 @@ export const CarouselContainerStyles = `
       width: 60%;
     }
   }
+
+  .${CAROUSEL_CONTAINER_WRAPPER} {
+    overflow: hidden;
+  }
+
 `;
 
-export const CreateCarouselColumn = () => {
+export const CreateCarouselColumn = ({
+  element,
+}: {
+  element: ELEMENT_TYPE;
+}) => {
   const container = document.createElement('div');
-
-  container.innerHTML = `Coming soon!`;
+  const wrapper = document.createElement('div');
+  const slot = MakeSlot({ type: SLOT_NAME_CARDS });
 
   container.classList.add(CAROUSEL_CONTAINER);
+  wrapper.classList.add(CAROUSEL_CONTAINER_WRAPPER);
+
+  wrapper.appendChild(slot);
+  container.appendChild(wrapper);
 
   return container;
 };

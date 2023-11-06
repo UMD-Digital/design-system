@@ -1,6 +1,10 @@
 export type ELEMENT_TYPE = HTMLElement & {};
 
 export const SLOT_NAME_INTRO = 'intro';
+export const SLOT_NAME_CARDS = 'cards';
+
+export const CAROUSEL_CONTAINER_WRAPPER =
+  'umd-carousel-cards-carousel-container-wrapper';
 
 export const BREAKPOINTS = {
   medium: 768,

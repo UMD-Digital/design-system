@@ -14,7 +14,7 @@ export const IntroContainerStyles = `
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
     .${INTRO_CONTAINER} {
       width: 40%;
-      padding-right: ${spacing.lg};
+      padding-right: ${spacing['2xl']};
     }
   }
 `;

@@ -1,7 +1,13 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { MakeTemplate } from 'helpers/ui';
-import { ELEMENT_TYPE, BREAKPOINTS, BACKGROUND_TEXTURE } from './variables';
+import { Debounce } from 'helpers/performance';
+import {
+  ELEMENT_TYPE,
+  BREAKPOINTS,
+  BACKGROUND_TEXTURE,
+  SLOT_NAME_CARDS,
+} from './variables';
 import { SizeCarousel } from './events';
 import { CreateIntroColumn, IntroContainerStyles } from './elements/intro';
 import {
@@ -73,6 +79,15 @@ const ComponentStyles = `
   ${CarouselContainerStyles}
 `;
 
+const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
+  const cardsSlot = element.querySelector(
+    `[slot="${SLOT_NAME_CARDS}"]`,
+  ) as HTMLSlotElement;
+
+  cardsSlot.style.display = `flex`;
+  cardsSlot.style.justifyContent = `space-between`;
+};
+
 const CreateContent = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -119,7 +134,13 @@ export class UMDCarouselCardsElement extends HTMLElement {
   connectedCallback() {
     const element = this;
     const content = CreateContent({ element });
+    const resize = () => SizeCarousel({ element });
+
     this._shadow.appendChild(content);
+
     SizeCarousel({ element });
+    OnLoadStyles({ element });
+
+    window.addEventListener('resize', Debounce(resize, 20));
   }
 }

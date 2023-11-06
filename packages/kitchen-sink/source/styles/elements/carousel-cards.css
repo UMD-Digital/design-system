@@ -76,11 +76,10 @@ umd-card[data-type='overlay'] {
     width: 100%;
 
     &:before {
+      content: '';
       background-image: linear-gradient(0, theme(colors.black), transparent);
       background-repeat: no-repeat;
-      background-size: 100% 100%;
       display: block;
-      content: '';
       height: 100%;
       position: absolute;
       bottom: 0;
@@ -94,13 +93,9 @@ umd-card[data-type='overlay'] {
     }
   }
 
-  transition: all 0.5s;
-  transform: scale(1);
-
   &:hover,
   &:focus-within {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    transform: scale(1.0125);
     z-index: 99;
   }
 
@@ -130,33 +125,6 @@ umd-card[data-type='overlay'] {
   & .umd-rich-text,
   & [class^='umd-cta'] {
     color: theme(colors.white);
-  }
-
-  & .umd-rich-text {
-    & a {
-      background-image: linear-gradient(
-        theme(colors.white),
-        theme(colors.white)
-      );
-      background-position: left calc(100% - 2px);
-      background-repeat: no-repeat;
-      background-size: 100% 1px;
-      color: theme(colors.white);
-      position: relative;
-      text-decoration: none;
-      transition: color 0.5s, background-image 0.5s, background-position 0.5s;
-
-      &:hover,
-      &:focus {
-        background-image: linear-gradient(
-          theme(colors.gold),
-          theme(colors.gold)
-        );
-        background-position: left calc(100%);
-        color: theme(colors.white);
-        text-decoration: none;
-      }
-    }
   }
 }
 
@@ -221,13 +189,6 @@ umd-card[data-type^='icon'] a {
   height: 100%;
   width: 100%;
 
-  &:hover,
-  &:focus-within {
-    & .card-title > *:not(svg):not(.sr-only) {
-      background-size: 100% 2px;
-    }
-  }
-
   & img,
   & svg {
     align-self: flex-end;
@@ -258,9 +219,6 @@ umd-card[data-type='icon-light'] a {
   & svg {
     fill: theme(colors.black);
   }
-
-  & .card-title {
-  }
 }
 
 umd-card[data-type='icon-dark'] a {
@@ -274,8 +232,5 @@ umd-card[data-type='icon-dark'] a {
 
   & svg {
     fill: theme(colors.white);
-  }
-
-  & .card-title {
   }
 }

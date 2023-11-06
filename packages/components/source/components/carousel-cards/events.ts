@@ -14,21 +14,56 @@ const GetCarouselWrapperSize = ({ element }: { element: ELEMENT_TYPE }) => {
   return wrapper.offsetWidth;
 };
 
+const SizeForOne = ({
+  slotContent,
+  cardsSlot,
+  containerWidth,
+}: {
+  slotContent: HTMLElement[];
+  cardsSlot: HTMLSlotElement;
+  containerWidth: number;
+}) => {
+  const count = 1;
+  const spaceBetween = parseInt(spacing.md.replace('px', ''));
+  const elementSize = containerWidth / count;
+
+  slotContent.forEach((card) => {
+    card.style.width = `${elementSize - spaceBetween}px`;
+  });
+
+  cardsSlot.style.width = `${elementSize * slotContent.length}px`;
+};
+
+const SizeForTwo = ({
+  slotContent,
+  cardsSlot,
+  containerWidth,
+}: {
+  slotContent: HTMLElement[];
+  cardsSlot: HTMLSlotElement;
+  containerWidth: number;
+}) => {
+  const count = 2;
+  const spaceBetween = parseInt(spacing.md.replace('px', ''));
+  const elementSize = containerWidth / count;
+
+  slotContent.forEach((card) => {
+    card.style.width = `${elementSize - spaceBetween}px`;
+  });
+
+  cardsSlot.style.width = `${elementSize * slotContent.length}px`;
+};
+
 export const SizeCarousel = ({ element }: { element: ELEMENT_TYPE }) => {
   const cardsSlot = element.querySelector(
     `[slot="${SLOT_NAME_CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
   const containerWidth = GetCarouselWrapperSize({ element });
-  console.log(containerWidth);
-  const count = 2;
-  const elementSize =
-    containerWidth / count - parseInt(spacing.md.replace('px', ''));
 
-  slotContent.forEach((card) => {
-    card.style.width = `${elementSize}px`;
-  });
-
-  cardsSlot.style.display = `flex`;
-  cardsSlot.style.width = `${elementSize * slotContent.length}px`;
+  if (element.offsetWidth > 650) {
+    SizeForTwo({ slotContent, cardsSlot, containerWidth });
+  } else {
+    SizeForOne({ slotContent, cardsSlot, containerWidth });
+  }
 };

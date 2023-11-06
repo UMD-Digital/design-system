@@ -19,3 +19,15 @@ export const MakeSlot = ({ type }: { type: string }) => {
 
   return slot;
 };
+
+export const MakeDefaultStyleTag = ({
+  styleString,
+}: {
+  styleString: string;
+}) => {
+  const body = document.querySelector('body') as HTMLBodyElement;
+  const style = document.createElement('style');
+  style.innerHTML = styleString;
+
+  body.appendChild(style);
+};

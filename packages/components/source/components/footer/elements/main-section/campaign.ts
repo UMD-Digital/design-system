@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
 import { ELEMENT_TYPE, THEME_OPTION_LIGHT } from '../../variables';
 

@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
+import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';

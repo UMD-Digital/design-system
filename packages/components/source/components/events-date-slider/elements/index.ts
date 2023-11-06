@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
+import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { CreateCoverElement, CoverStyles } from './cover';
 import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
 import { BREAKPOINTS, CONTAINER_DARK_CLASS, ELEMENT_TYPE } from '../variables';

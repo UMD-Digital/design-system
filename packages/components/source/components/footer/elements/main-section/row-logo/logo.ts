@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
   CreateCallToActionContainer,

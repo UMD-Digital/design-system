@@ -1,5 +1,5 @@
-import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
-import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
+import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 
 const SLOT_CTA_NAME = 'call-to-action';
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';

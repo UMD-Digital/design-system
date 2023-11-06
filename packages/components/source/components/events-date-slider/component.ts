@@ -1,4 +1,4 @@
-import { MakeTemplate, MakeDefaultStyleTag } from 'helpers/ui';
+import { MakeTemplate } from 'helpers/ui';
 import { Debounce } from '../../helpers/performance';
 import { ContainerStyles, CreateContainer } from './elements';
 import {

@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
+import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { BREAKPOINTS, CONTAINER_DARK_CLASS } from '../variables';
 
 const COVER_CLASS = 'umd-element-date-slider-date-lock-cover';

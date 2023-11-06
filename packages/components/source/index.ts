@@ -5,6 +5,10 @@ import {
   GetDefaultStyles as AlertStyles,
 } from './components/alert/component';
 import {
+  UMDCarouselCardsElement,
+  ELEMENT_NAME as ELEMENT_CAROUSEL_CARDS_NAME,
+} from './components/carousel-cards/component';
+import {
   UMDEventsDateSliderElement,
   ELEMENT_NAME as ELEMENT_EVENTS_DATES_SLIDER_NAME,
   GetDefaultStyles as EventsDateSliderStyles,
@@ -21,6 +25,7 @@ declare global {
     UMDFooterElement: typeof UMDFooterElement;
     UMDAlertElement: typeof UMDAlertElement;
     UMDEventsDateSliderElement: typeof UMDEventsDateSliderElement;
+    UMDCarouselCardsElement: typeof UMDCarouselCardsElement;
   }
 }
 
@@ -29,6 +34,14 @@ if (!window.customElements.get(ELEMENT_ALERT_NAME)) {
   window.customElements.define(ELEMENT_ALERT_NAME, UMDAlertElement);
 
   styleString += AlertStyles();
+}
+
+if (!window.customElements.get(ELEMENT_CAROUSEL_CARDS_NAME)) {
+  window.UMDCarouselCardsElement = UMDCarouselCardsElement;
+  window.customElements.define(
+    ELEMENT_CAROUSEL_CARDS_NAME,
+    UMDCarouselCardsElement,
+  );
 }
 
 if (!window.customElements.get(ELEMENT_EVENTS_DATES_SLIDER_NAME)) {

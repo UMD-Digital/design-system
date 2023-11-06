@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import {
   ELEMENT_TYPE,
   SLOT_NAME_CARDS,

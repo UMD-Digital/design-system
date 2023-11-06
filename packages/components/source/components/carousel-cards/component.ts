@@ -1,5 +1,5 @@
-import { colors } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/colors.js';
-import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
+import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
+import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { MakeTemplate } from 'helpers/ui';
 import { ELEMENT_TYPE, BREAKPOINTS, BACKGROUND_TEXTURE } from './variables';
 import { SizeCarousel } from './events';

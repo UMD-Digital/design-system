@@ -1,4 +1,3 @@
-import { spacing } from '@universityofmaryland/design-system-configuration/dist/configuration/tokens/layout.js';
 import { MakeSlot } from 'helpers/ui';
 import {
   ELEMENT_TYPE,

@@ -1,6 +1,6 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
-import { SLOTS, ELEMENTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
+import { SLOTS, ELEMENTS } from '../globals';
 
 const spaceBetween = parseInt(spacing.md.replace('px', ''));
 

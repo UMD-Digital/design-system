@@ -1,8 +1,8 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
-import { FORWARD_ARROW_ICON } from '../../../assets/icons';
-import { BREAKPOINTS, VARIABLES } from '../globals';
 import { ELEMENT_TYPE } from '../component';
+import { BREAKPOINTS, VARIABLES } from '../globals';
+import { FORWARD_ARROW_ICON } from '../../../assets/icons';
 
 const BUTTON_CONTAINER = `umd-carousel-button-container`;
 

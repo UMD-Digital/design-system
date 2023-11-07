@@ -1,15 +1,14 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 
+import { ELEMENT_TYPE } from '../component';
+import { CreateIntroColumn, IntroContainerStyles } from './intro';
+import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 import {
   EventResizeCarouselElementsWidth,
   EventResizeSetHeight,
 } from '../services/events';
-import { CreateIntroColumn, IntroContainerStyles } from './intro';
-import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
-import { ButtonStyles } from './button';
 import { BREAKPOINTS, SLOTS } from '../globals';
-import { ELEMENT_TYPE } from '../component';
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
 
@@ -85,7 +84,6 @@ export const ComponentStyles = `
 
   ${IntroContainerStyles}
   ${CarouselContainerStyles}
-  ${ButtonStyles}
 `;
 
 export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {

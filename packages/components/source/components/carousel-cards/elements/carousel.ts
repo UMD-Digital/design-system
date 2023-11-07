@@ -1,7 +1,7 @@
 import { MakeSlot } from 'helpers/ui';
-import { SLOTS, BREAKPOINTS, ELEMENTS } from '../globals';
-import { CreateButton } from './button';
 import { ELEMENT_TYPE } from '../component';
+import { CreateButton, ButtonStyles } from './button';
+import { SLOTS, BREAKPOINTS, ELEMENTS } from '../globals';
 
 const CAROUSEL_CONTAINER = 'umd-carousel-cards-carousel-container';
 
@@ -29,6 +29,7 @@ export const CarouselContainerStyles = `
       padding: 0;
     }
   }
+  ${ButtonStyles}
 `;
 
 export const CreateCarouselColumn = ({

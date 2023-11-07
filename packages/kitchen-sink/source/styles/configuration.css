@@ -1,3 +1,11 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.umd-configuration-section {
+  @apply mb-md pb-md border-b border-black;
+}
+
+.umd-section-headline {
+  @apply umd-serif-medium mb-md text-red;
+}

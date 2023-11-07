@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    UMDAlertElement: typeof UMDAlertElement;
+  }
+}
+
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { MakeTemplate, MakeSlot } from 'helpers/ui';

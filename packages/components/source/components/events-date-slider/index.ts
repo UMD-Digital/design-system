@@ -5,11 +5,21 @@ import {
   UMDEventsDateSliderElement,
 } from './component';
 
-if (!window.customElements.get(ELEMENT_NAME)) {
+const Load = () => {
+  if (!window.customElements.get(ELEMENT_NAME)) {
+    window.UMDEventsDateSliderElement = UMDEventsDateSliderElement;
+    window.customElements.define(ELEMENT_NAME, UMDEventsDateSliderElement);
+
+    return GetDefaultStyles();
+  }
+};
+
+const IndividusalStyleString = () => {
   const styleString = GetDefaultStyles();
-
-  window.UMDEventsDateSliderElement = UMDEventsDateSliderElement;
-  window.customElements.define(ELEMENT_NAME, UMDEventsDateSliderElement);
-
   MakeDefaultStyleTag({ styleString });
-}
+};
+
+export { Load };
+
+Load();
+IndividusalStyleString();

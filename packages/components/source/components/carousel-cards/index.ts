@@ -1,15 +1,7 @@
 import { MakeDefaultStyleTag } from 'helpers/ui';
+import { UMDCarouselCardsElement, ELEMENT_NAME } from './component';
 
-import {
-  UMDCarouselCardsElement,
-  ELEMENT_NAME,
-  GetDefaultStyles,
-} from './component';
-
-if (!window.customElements.get(ELEMENT_NAME)) {
-  window.UMDCarouselCardsElement = UMDCarouselCardsElement;
-  window.customElements.define(ELEMENT_NAME, UMDCarouselCardsElement);
-}
+const GetDefaultStyles = () => require('./styles/site.css').toString();
 
 const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME)) {

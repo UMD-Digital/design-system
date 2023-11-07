@@ -1,4 +1,6 @@
-export type ELEMENT_TYPE = HTMLElement & {};
+export type ELEMENT_TYPE = HTMLElement & {
+  eventMoveForward: () => void;
+};
 
 export const SLOT_NAME_INTRO = 'intro';
 export const SLOT_NAME_CARDS = 'cards';

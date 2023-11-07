@@ -8,12 +8,13 @@ import {
   BACKGROUND_TEXTURE,
   SLOT_NAME_CARDS,
 } from './variables';
-import { SizeCarousel } from './events';
+import { SizeCarousel, ScrollCarousel } from './events';
 import { CreateIntroColumn, IntroContainerStyles } from './elements/intro';
 import {
   CreateCarouselColumn,
   CarouselContainerStyles,
 } from './elements/carousel';
+import { CreateButton, ButtonStyles } from './elements/button';
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
 
@@ -72,20 +73,26 @@ const ComponentStyles = `
     .${CAROUSEL_CONTAINER_WRAPPER} {
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
   }
 
   ${IntroContainerStyles}
   ${CarouselContainerStyles}
+  ${ButtonStyles}
 `;
 
 const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
   const cardsSlot = element.querySelector(
     `[slot="${SLOT_NAME_CARDS}"]`,
   ) as HTMLSlotElement;
+  const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
 
   cardsSlot.style.display = `flex`;
   cardsSlot.style.justifyContent = `space-between`;
+  slotContent.forEach((card, index) => {
+    if (index > 1) card.style.display = 'none';
+  });
 };
 
 const CreateContent = ({ element }: { element: ELEMENT_TYPE }) => {
@@ -142,5 +149,9 @@ export class UMDCarouselCardsElement extends HTMLElement {
     OnLoadStyles({ element });
 
     window.addEventListener('resize', Debounce(resize, 20));
+  }
+
+  eventMoveForward() {
+    ScrollCarousel({ element: this });
   }
 }

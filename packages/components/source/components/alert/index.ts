@@ -1,5 +1,7 @@
 import { MakeDefaultStyleTag } from 'helpers/ui';
-import { ELEMENT_NAME, UMDAlertElement, GetDefaultStyles } from './component';
+import { ELEMENT_NAME, UMDAlertElement } from './component';
+
+const GetDefaultStyles = () => require('./styles/site.css').toString();
 
 if (!window.customElements.get(ELEMENT_NAME)) {
   window.UMDAlertElement = UMDAlertElement;

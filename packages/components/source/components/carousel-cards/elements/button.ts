@@ -30,7 +30,6 @@ export const ButtonStyles = `
     }
   }
 
-
   .${BUTTON_CONTAINER} svg {
     width: 24px;
     height: 24px;

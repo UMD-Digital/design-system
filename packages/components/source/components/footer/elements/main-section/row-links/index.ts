@@ -1,14 +1,9 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { ELEMENT_TYPE } from '../../../component';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
-import {
-  ELEMENT_TYPE,
-  BREAKPOINTS,
-  ELEMENT_WRAPPER,
-  THEME_OPTION_LIGHT,
-  VERSION_TYPE_SIMPLE,
-} from '../../../variables';
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
 export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
@@ -41,7 +36,9 @@ export const RowLinkStyles = `
     }
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LINKS_CONTAINER} {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
+  VARIABLES.THEME_OPTION_LIGHT
+}"] .${ROW_LINKS_CONTAINER} {
     background-color: ${colors.gray.lightest};
   }
 

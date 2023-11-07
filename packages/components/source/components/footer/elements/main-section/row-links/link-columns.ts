@@ -1,6 +1,6 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
-import { BREAKPOINTS } from '../../../variables';
+import { BREAKPOINTS } from '../../../globals';
 import { MakeSlot } from 'helpers/ui';
 
 const LINK_TYPE = 'link';

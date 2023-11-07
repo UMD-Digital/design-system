@@ -1,12 +1,8 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
-import {
-  ELEMENT_TYPE,
-  BREAKPOINTS,
-  ELEMENT_WRAPPER,
-  THEME_OPTION_LIGHT,
-} from '../../variables';
+import { ELEMENT_TYPE } from '../../component';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../globals';
 import {
   FACEBOOK_ICON,
   X_ICON,
@@ -37,20 +33,20 @@ const campaignOverwriteStyles = `
 `;
 
 const themeOverwriteStyles = `
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
     background-color: ${colors.gray.light};
   }
   
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
     fill: ${colors.black} !important;
   }
   
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
     background-color: ${colors.gray.dark};
   }
   
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
     fill: ${colors.gray.light} !important;
   }
 `;

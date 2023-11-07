@@ -1,10 +1,6 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
-import {
-  BREAKPOINTS,
-  ELEMENT_WRAPPER,
-  THEME_OPTION_LIGHT,
-} from '../../variables';
+import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../../globals';
 
 const SLOT_UTILITY_LINKS_NAME = 'utility-links';
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
@@ -48,12 +44,18 @@ export const UtilityContainerStyles = `
     align-items: center;
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
+  VARIABLES.THEME_OPTION_LIGHT
+}"] .${UTILITY_CONTAINER} {
     background-color: ${colors.gray.light};
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a,
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
+  VARIABLES.THEME_OPTION_LIGHT
+}"] .${UTILITY_CONTAINER} a,
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
+  VARIABLES.THEME_OPTION_LIGHT
+}"] .${UTILITY_CONTAINER} p {
     color: ${colors.black};
   }
 `;

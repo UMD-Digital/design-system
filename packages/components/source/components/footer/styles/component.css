@@ -1,0 +1,5 @@
+/* Configuration Styles injected into the component */
+/* Clean up - only include styles needed for component */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';

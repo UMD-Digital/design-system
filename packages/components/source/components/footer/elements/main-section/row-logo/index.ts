@@ -1,7 +1,7 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
-import { ContactContainerStyles, CreateContactContainer } from './contact';
-import { LogoContainerStyles, CreateLogoContainer } from './logo';
+import { ELEMENT_TYPE } from '../../../component';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
 import {
   SocialContainerStyles,
   CreateSocialCampaignColumns,
@@ -12,13 +12,8 @@ import {
   CreateCallToActionContainer,
   CALL_TO_ACTION_CONTAINER,
 } from '../call-to-action';
-import {
-  ELEMENT_TYPE,
-  BREAKPOINTS,
-  ELEMENT_WRAPPER,
-  THEME_OPTION_LIGHT,
-  VERSION_TYPE_SIMPLE,
-} from '../../../variables';
+import { ContactContainerStyles, CreateContactContainer } from './contact';
+import { LogoContainerStyles, CreateLogoContainer } from './logo';
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
 const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
@@ -32,12 +27,16 @@ const ctaOverwriteStyles = `
 `;
 
 const themeOverwriteStyles = `
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LOGO_CONTAINER} {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
+  VARIABLES.THEME_OPTION_LIGHT
+}"] .${ROW_LOGO_CONTAINER} {
     background-color: ${colors.gray.lightest} !important;
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+    .${ELEMENTS.ELEMENT_WRAPPER}[type="${
+  VARIABLES.VERSION_TYPE_SIMPLE
+}"] .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
@@ -96,7 +95,7 @@ export const CreateRowLogo = ({ element }: { element: ELEMENT_TYPE }) => {
   lock.classList.add('umd-lock');
 
   const makeThirdColumn = () => {
-    const includeSocial = type === VERSION_TYPE_SIMPLE;
+    const includeSocial = type === VARIABLES.VERSION_TYPE_SIMPLE;
 
     if (includeSocial) {
       const socialColumnWrapper = CreateSocialCampaignColumns({

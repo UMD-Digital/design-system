@@ -1,5 +1,7 @@
 import { MakeDefaultStyleTag } from 'helpers/ui';
-import { ELEMENT_NAME, UMDFooterElement, GetDefaultStyles } from './component';
+import { ELEMENT_NAME, UMDFooterElement } from './component';
+
+const GetDefaultStyles = () => require('./styles/site.css').toString();
 
 const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME)) {

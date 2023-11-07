@@ -1,6 +1,7 @@
+import { ELEMENT_TYPE } from '../component';
+import { ELEMENTS } from '../globals';
 import { CreateMain, MainContainerStyles } from './main-section';
 import { CreateUtility, UtilityContainerStyles } from './utility-section';
-import { ELEMENT_TYPE, ELEMENT_WRAPPER } from '../variables';
 
 export const ComponentStyles = `
   :host {
@@ -16,7 +17,7 @@ export const ComponentStyles = `
 
 export const CreateElement = ({ element }: { element: ELEMENT_TYPE }) => {
   const wrapper = document.createElement('div');
-  wrapper.classList.add(ELEMENT_WRAPPER);
+  wrapper.classList.add(ELEMENTS.ELEMENT_WRAPPER);
 
   wrapper.setAttribute('theme', element._theme);
   wrapper.setAttribute('type', element._type);

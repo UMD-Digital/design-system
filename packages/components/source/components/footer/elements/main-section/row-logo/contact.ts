@@ -1,8 +1,9 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
-import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { MakeSlot, MakeSpan } from 'helpers/ui';
-import { ELEMENT_TYPE, BREAKPOINTS } from '../../../variables';
+import { ELEMENT_TYPE } from '../../../component';
+import { BREAKPOINTS } from '../../../globals';
+import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 
 const SLOT_CONTACT_NAME = 'contact';
 const CONTACT_CONTAINER = 'umd-footer-contact-container';

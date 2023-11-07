@@ -1,17 +1,12 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
+import { ELEMENT_TYPE } from '../../../component';
+import { VARIABLES, ELEMENTS, BREAKPOINTS } from '../../../globals';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
   CreateCallToActionContainer,
   CALL_TO_ACTION_CONTAINER,
 } from '../call-to-action';
-import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
-import {
-  ELEMENT_TYPE,
-  ELEMENT_WRAPPER,
-  VERSION_TYPE_SIMPLE,
-  THEME_OPTION_LIGHT,
-  BREAKPOINTS,
-} from '../../../variables';
 
 const LOGO_CONTAINER = 'umd-footer-logo-container';
 const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
@@ -30,7 +25,9 @@ const ctaOverwriteStyles = `
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
+    .${ELEMENTS.ELEMENT_WRAPPER}[type="${
+  VARIABLES.VERSION_TYPE_SIMPLE
+}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
   }
@@ -73,7 +70,7 @@ export const CreateLogoContainer = ({ element }: { element: ELEMENT_TYPE }) => {
   logoLink.setAttribute('rel', 'noopener noreferrer');
 
   logoLink.innerHTML =
-    theme === THEME_OPTION_LIGHT ? `${LIGHT_LOGO}` : `${DARK_LOGO}`;
+    theme === VARIABLES.THEME_OPTION_LIGHT ? `${LIGHT_LOGO}` : `${DARK_LOGO}`;
 
   container.classList.add(LOGO_CONTAINER);
   container.appendChild(logoLink);

@@ -6,22 +6,20 @@ declare global {
 
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateElement } from './elements';
-import { THEME_OPTION_DARK, VERSION_TYPE_SIMPLE } from './variables';
+import { VARIABLES } from './globals';
 
 export const ELEMENT_NAME = 'umd-element-footer';
-
-export const GetDefaultStyles = () => require('./default.css').toString();
-
+export type ELEMENT_TYPE = UMDFooterElement;
 export class UMDFooterElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = THEME_OPTION_DARK;
-  _type = VERSION_TYPE_SIMPLE;
+  _theme = VARIABLES.THEME_OPTION_DARK;
+  _type = VARIABLES.VERSION_TYPE_SIMPLE;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
 
-    const ElementStyles = require('./index.css');
+    const ElementStyles = require('./styles/component.css');
     const styles = `${ElementStyles.toString()}${ComponentStyles}`;
     const template = MakeTemplate({ styles });
 
@@ -35,8 +33,8 @@ export class UMDFooterElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    element._type = this.getAttribute('type') || VERSION_TYPE_SIMPLE;
-    element._theme = this.getAttribute('theme') || THEME_OPTION_DARK;
+    element._type = this.getAttribute('type') || VARIABLES.VERSION_TYPE_SIMPLE;
+    element._theme = this.getAttribute('theme') || VARIABLES.THEME_OPTION_DARK;
 
     this._shadow.appendChild(CreateElement({ element }));
   }

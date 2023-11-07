@@ -1,14 +1,9 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
+import { ELEMENT_TYPE } from '../../component';
+import { VARIABLES, ELEMENTS } from '../../globals';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';
-import {
-  ELEMENT_TYPE,
-  ELEMENT_WRAPPER,
-  VERSION_TYPE_VISUAL,
-  THEME_OPTION_LIGHT,
-  VERSION_TYPE_MEGA,
-} from '../../variables';
 
 const SLOT_BACKGROUND_IMAGE_NAME = 'background-image';
 const MAIN_CONTAINER = 'umd-footer-main-container';
@@ -16,7 +11,7 @@ const BACKGROUND_IMAGE_CONTAINER = 'umd-footer-background-image-container';
 const BACKGROUND_IMAGE_GRADIENT = 'umd-footer-background-image-graident';
 
 const VariationVisualStyles = `
-  .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_VISUAL}"] .${BACKGROUND_IMAGE_CONTAINER}  {
+  .${ELEMENTS.ELEMENT_WRAPPER}[type="${VARIABLES.VERSION_TYPE_VISUAL}"] .${BACKGROUND_IMAGE_CONTAINER}  {
     padding-top: 100px;
   }
 
@@ -43,12 +38,12 @@ const VariationVisualStyles = `
 `;
 
 export const MainContainerStyles = `
-  .${ELEMENT_WRAPPER} p,
-  .${ELEMENT_WRAPPER} a {
+  .${ELEMENTS.ELEMENT_WRAPPER} p,
+  .${ELEMENTS.ELEMENT_WRAPPER} a {
     color: ${colors.white};
   }
 
-  .${ELEMENT_WRAPPER} a {
+  .${ELEMENTS.ELEMENT_WRAPPER} a {
     background-image: linear-gradient(${colors.white}, ${colors.white});
     background-position: 0 100%;
     background-repeat: no-repeat;
@@ -58,8 +53,8 @@ export const MainContainerStyles = `
     transition: background-size 0.4s;
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] p, 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] a {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] p, 
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a {
     color: ${colors.gray.darker}
   }
 
@@ -76,7 +71,7 @@ export const CreateMain = ({ element }: { element: ELEMENT_TYPE }) => {
 
   container.classList.add(MAIN_CONTAINER);
 
-  if (type === VERSION_TYPE_VISUAL) {
+  if (type === VARIABLES.VERSION_TYPE_VISUAL) {
     const slottedDate = element.querySelector(
       `[slot="${SLOT_BACKGROUND_IMAGE_NAME}"]`,
     ) as HTMLImageElement;
@@ -113,7 +108,10 @@ export const CreateMain = ({ element }: { element: ELEMENT_TYPE }) => {
 
   container.appendChild(logoRow);
 
-  if (type === VERSION_TYPE_MEGA || type === VERSION_TYPE_VISUAL) {
+  if (
+    type === VARIABLES.VERSION_TYPE_MEGA ||
+    type === VARIABLES.VERSION_TYPE_VISUAL
+  ) {
     const linksRow = CreateRowLinks({ element });
     container.appendChild(linksRow);
   }

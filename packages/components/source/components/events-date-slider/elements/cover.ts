@@ -1,5 +1,5 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { BREAKPOINTS, CONTAINER_DARK_CLASS } from '../variables';
+import { BREAKPOINTS, ELEMENTS } from '../globals';
 
 const COVER_CLASS = 'umd-element-date-slider-date-lock-cover';
 
@@ -21,7 +21,7 @@ export const CoverStyles = `
     }
   }
 
-  :host .${CONTAINER_DARK_CLASS} .${COVER_CLASS} {
+  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${COVER_CLASS} {
     background-color: ${colors.gray.darker};
   }
 `;

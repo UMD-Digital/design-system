@@ -1,9 +1,7 @@
 import { MakeDefaultStyleTag } from 'helpers/ui';
-import {
-  ELEMENT_NAME,
-  GetDefaultStyles,
-  UMDEventsDateSliderElement,
-} from './component';
+import { ELEMENT_NAME, UMDEventsDateSliderElement } from './component';
+
+const GetDefaultStyles = () => require('./styles/site.css').toString();
 
 const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME)) {

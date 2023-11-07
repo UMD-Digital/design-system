@@ -1,7 +1,9 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
+import { ELEMENT_TYPE } from '../component';
+import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
+import { SizeDatesElements } from '../services/helpers';
 import { CreateCoverElement, CoverStyles } from './cover';
 import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
-import { BREAKPOINTS, CONTAINER_DARK_CLASS, ELEMENT_TYPE } from '../variables';
 
 const CONTAINER_CLASS = 'umd-element-date-slider-container';
 
@@ -25,17 +27,41 @@ export const ContainerStyles = `
     }
   }
 
-  :host .${CONTAINER_DARK_CLASS} {
+  :host .${ELEMENTS.CONTAINER_DARK_CLASS} {
     background-color: ${colors.gray.darker};
   }
 
-  :host .${CONTAINER_DARK_CLASS} ::slotted(*) {
+  :host .${ELEMENTS.CONTAINER_DARK_CLASS} ::slotted(*) {
     color: #fff !important;
   }
 
   ${CoverStyles}
   ${ScrollerStyles}
 `;
+
+export const ComponentStyles = `
+    :host {
+      display: block !important;
+      position: relative !important;
+      text-wrap: pretty;
+      container: dates-slider / inline-size; 
+    }
+  
+    ${ContainerStyles}
+`;
+
+export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
+  const slider = element.querySelector(
+    `[slot=${SLOTS.DATE_SLOT_NAME}]`,
+  ) as HTMLDivElement;
+
+  slider.style.display = 'flex';
+  slider.style.position = 'absolute';
+  slider.style.top = '0';
+  slider.style.left = '0';
+
+  SizeDatesElements({ element });
+};
 
 export const CreateContainer = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');

@@ -1,19 +1,16 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
-import { EventSlideDates, ButtonVisibilityLogic } from '../../../events';
-import {
-  BREAKPOINTS,
-  CONTAINER_DARK_CLASS,
-  ARROW_CLASS,
-  ELEMENT_TYPE,
-} from '../../../variables';
+import { ELEMENT_TYPE } from '../../../component';
+import { ButtonVisibilityLogic } from '../../../services/helpers';
+import { EventSlideDates } from '../../../services/events';
+import { BREAKPOINTS, ELEMENTS } from '../../../globals';
 
 const FORWARD_ARROW_CLASS = 'umd-element-date-slider-forward-arrow';
 const BACK_ARROW_CLASS = 'umd-element-date-slider-back-arrow';
 
 export const ButtonStyles = `
-  :host .${ARROW_CLASS} {
+  :host .${ELEMENTS.ARROW_CLASS} {
     border: none;
     width: 32px;
     height: 32px;
@@ -29,21 +26,21 @@ export const ButtonStyles = `
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${ARROW_CLASS} {
+    :host .${ELEMENTS.ARROW_CLASS} {
       width: 48px;
       height: 48px;
     }
   }
   
-  :host .${ARROW_CLASS}:hover {
+  :host .${ELEMENTS.ARROW_CLASS}:hover {
     background-color: ${colors.black};
   }
   
-  :host .${ARROW_CLASS}:hover svg {
+  :host .${ELEMENTS.ARROW_CLASS}:hover svg {
     fill: ${colors.white};
   }
   
-  :host .${ARROW_CLASS} svg {
+  :host .${ELEMENTS.ARROW_CLASS} svg {
     transition: fill .5s;
     fill: ${colors.black};
     width: 16px;
@@ -51,7 +48,7 @@ export const ButtonStyles = `
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${ARROW_CLASS} svg {
+    :host .${ELEMENTS.ARROW_CLASS} svg {
       width: 24px;
       height: 8px;
     }
@@ -77,19 +74,19 @@ export const ButtonStyles = `
     }
   }
 
-  :host .${CONTAINER_DARK_CLASS} .${ARROW_CLASS} {
+  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} {
     background-color: ${colors.gray.dark};
   }
 
-  :host .${CONTAINER_DARK_CLASS} .${ARROW_CLASS} svg {
+  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} svg {
     fill: ${colors.white}
   }
 
-  :host .${CONTAINER_DARK_CLASS} .${ARROW_CLASS}:hover {
+  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover {
     background-color: ${colors.white}
   }
 
-  :host .${CONTAINER_DARK_CLASS} .${ARROW_CLASS}:hover svg {
+  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover svg {
     fill: ${colors.black}
   }
 `;
@@ -98,7 +95,7 @@ export const CreateBackButton = ({ element }: { element: ELEMENT_TYPE }) => {
   const button = document.createElement('button');
 
   button.innerHTML = BACK_ARROW_ICON;
-  button.classList.add(ARROW_CLASS);
+  button.classList.add(ELEMENTS.ARROW_CLASS);
   button.classList.add(BACK_ARROW_CLASS);
   button.style.display = 'none';
 
@@ -115,7 +112,7 @@ export const CreateForwardButton = ({ element }: { element: ELEMENT_TYPE }) => {
   const button = document.createElement('button');
 
   button.innerHTML = FORWARD_ARROW_ICON;
-  button.classList.add(ARROW_CLASS);
+  button.classList.add(ELEMENTS.ARROW_CLASS);
   button.classList.add(FORWARD_ARROW_CLASS);
 
   button.addEventListener('click', () => {

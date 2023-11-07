@@ -1,5 +1,5 @@
-import { BREAKPOINTS, INTRODUCTION_SLOT_NAME } from '../../variables';
 import { MakeSlot } from 'helpers/ui';
+import { BREAKPOINTS, SLOTS } from '../../globals';
 
 const INTRO_CONTAINER_CLASS = 'umd-element-date-slider-intro-container';
 
@@ -25,7 +25,7 @@ export const IntroStyles = `
   }
 
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    ::slotted(div[slot="${INTRODUCTION_SLOT_NAME}"]) {
+    ::slotted(div[slot="${SLOTS.INTRODUCTION_SLOT_NAME}"]) {
       width: 140px;
     }
   }
@@ -33,7 +33,7 @@ export const IntroStyles = `
 
 export const CreateIntroWrapper = () => {
   const introductionWrapper = document.createElement('div');
-  const infoSlot = MakeSlot({ type: INTRODUCTION_SLOT_NAME });
+  const infoSlot = MakeSlot({ type: SLOTS.INTRODUCTION_SLOT_NAME });
 
   introductionWrapper.classList.add(INTRO_CONTAINER_CLASS);
   introductionWrapper.appendChild(infoSlot);

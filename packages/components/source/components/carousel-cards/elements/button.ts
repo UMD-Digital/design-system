@@ -1,7 +1,8 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { FORWARD_ARROW_ICON } from '../../../assets/icons';
-import { ELEMENT_TYPE, BREAKPOINTS, ANIMATION_DURATION } from '../variables';
+import { BREAKPOINTS, VARIABLES } from '../globals';
+import { ELEMENT_TYPE } from '../component';
 
 const BUTTON_CONTAINER = `umd-carousel-button-container`;
 
@@ -49,7 +50,7 @@ export const CreateButton = ({ element }: { element: ELEMENT_TYPE }) => {
 
     setTimeout(() => {
       button.disabled = false;
-    }, ANIMATION_DURATION + 100);
+    }, VARIABLES.ANIMATION_DURATION + 100);
   });
 
   return button;

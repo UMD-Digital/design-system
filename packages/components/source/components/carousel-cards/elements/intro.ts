@@ -1,6 +1,6 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { MakeSlot } from 'helpers/ui';
-import { SLOT_NAME_INTRO, BREAKPOINTS } from '../variables';
+import { SLOTS, BREAKPOINTS } from '../globals';
 
 const INTRO_CONTAINER = 'umd-carousel-cards-intro-container';
 
@@ -29,7 +29,7 @@ export const IntroContainerStyles = `
 export const CreateIntroColumn = () => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const introSlot = MakeSlot({ type: SLOT_NAME_INTRO });
+  const introSlot = MakeSlot({ type: SLOTS.intro });
 
   wrapper.classList.add('umd-lock');
 

@@ -16,21 +16,6 @@ section:not(:last-of-type) {
   margin-bottom: 80px;
 }
 
-a {
-  background-image: linear-gradient(#fff, #fff);
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 0 1px;
-  display: inline;
-  position: relative;
-  transition: background-size 0.4s;
-}
-
-a:hover,
-a:focus {
-  background-size: 100% 1px;
-}
-
 p {
   margin-bottom: 20px;
 }

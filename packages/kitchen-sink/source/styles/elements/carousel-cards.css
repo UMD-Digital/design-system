@@ -1,0 +1,236 @@
+* + umd-element-carousel-cards {
+  margin-top: 80px;
+}
+
+umd-element-carousel-cards {
+  & .umd-cta-secondary {
+    color: white;
+  }
+
+  & .umd-aligned-content > * {
+    text-wrap: pretty;
+    margin-top: 24px;
+  }
+}
+
+umd-card {
+  display: block;
+  position: relative;
+  width: 100%;
+
+  & > * {
+    text-wrap: pretty;
+    margin-top: theme(spacing.md);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  & img {
+    height: auto;
+    width: 100%;
+  }
+
+  & .card-content {
+    & > * {
+      text-wrap: pretty;
+      margin-top: theme(spacing.sm);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  & * + .card-title {
+    margin-top: theme(spacing.min);
+  }
+
+  & .card-title a {
+    color: currentColor;
+  }
+
+  & .card-details {
+    color: theme(colors.gray.mediumAA);
+  }
+}
+
+umd-card[data-type='overlay'] {
+  background-color: theme(colors.black);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  color: theme(colors.white);
+  display: block;
+  z-index: auto;
+  width: 100%;
+
+  & [role='presentation'] {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+
+    &:before {
+      content: '';
+      background-image: linear-gradient(0, theme(colors.black), transparent);
+      background-repeat: no-repeat;
+      display: block;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: background-position 0.5s;
+      width: 100%;
+    }
+
+    &:before {
+      background-position: left top;
+    }
+  }
+
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    z-index: 99;
+  }
+
+  & .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    margin: 0;
+    padding: theme(spacing.md);
+    padding-top: calc(theme(spacing.md) * 10);
+    position: relative;
+    transition: padding 0.5s;
+    z-index: 1;
+    width: 100%;
+
+    @media (--large-min) {
+      padding: theme(spacing.xl);
+      padding-top: calc(theme(spacing.lg) * 10);
+    }
+  }
+
+  & .card-title a {
+    color: theme(colors.white);
+  }
+
+  & .umd-rich-text,
+  & [class^='umd-cta'] {
+    color: theme(colors.white);
+  }
+}
+
+umd-card[data-type^='text'] {
+  padding: theme(spacing.sm);
+  padding-top: theme(spacing.lg);
+
+  @media (--large-min) {
+    padding: theme(spacing.md);
+    padding-top: theme(spacing.4xl);
+  }
+
+  & .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+  }
+
+  & .umd-links-group {
+    margin-top: auto;
+    padding-top: theme(spacing.3xl);
+  }
+}
+
+umd-card[data-type='text-light'] {
+  background-color: theme(colors.gray.lightest);
+
+  & .card-title a {
+    color: currentColor;
+  }
+
+  & .card-details {
+    color: theme(colors.gray.dark);
+  }
+}
+
+umd-card[data-type='text-dark'] {
+  background-color: theme(colors.gray.darker);
+  color: theme(colors.white);
+
+  & .card-title a {
+    color: theme(colors.white);
+  }
+
+  & .umd-rich-text,
+  & [class^='umd-cta'] {
+    color: theme(colors.white);
+  }
+
+  & .umd-rich-text a:hover,
+  & .umd-rich-text a:focus {
+    color: theme(colors.gold);
+  }
+}
+
+umd-card[data-type^='icon'] a {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+
+  & img,
+  & svg {
+    align-self: flex-end;
+
+    @media (--small-max) {
+      display: none;
+    }
+  }
+
+  & img {
+    max-width: calc(theme(spacing.sm) * 10);
+  }
+
+  & .card-title {
+    margin: theme(spacing.sm);
+  }
+}
+
+umd-card[data-type='icon-light'] a {
+  border-top: 2px solid theme(colors.red);
+  background-color: theme(colors.gray.lightest);
+  color: theme(colors.black);
+
+  @media (--small-max) {
+    border-top: 1px solid theme(colors.red);
+  }
+
+  & svg {
+    fill: theme(colors.black);
+  }
+}
+
+umd-card[data-type='icon-dark'] a {
+  border-top: 2px solid theme(colors.red);
+  background-color: theme(colors.black);
+  color: theme(colors.white);
+
+  @media (--small-max) {
+    border-top: 1px solid theme(colors.red);
+  }
+
+  & svg {
+    fill: theme(colors.white);
+  }
+}

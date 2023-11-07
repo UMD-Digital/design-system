@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    UMDFooterElement: typeof UMDFooterElement;
+  }
+}
+
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateElement } from './elements';
 import { THEME_OPTION_DARK, VERSION_TYPE_SIMPLE } from './variables';

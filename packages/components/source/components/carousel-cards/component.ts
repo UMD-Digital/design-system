@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    UMDCarouselCardsElement: typeof UMDCarouselCardsElement;
+  }
+}
+
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { MakeTemplate } from 'helpers/ui';
@@ -92,6 +98,8 @@ const ComponentStyles = `
   ${CarouselContainerStyles}
   ${ButtonStyles}
 `;
+
+export const GetDefaultStyles = () => require('./default.css').toString();
 
 const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
   const cardsSlot = element.querySelector(

@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    UMDEventsDateSliderElement: typeof UMDEventsDateSliderElement;
+  }
+}
+
 import { MakeTemplate } from 'helpers/ui';
 import { Debounce } from '../../helpers/performance';
 import { ContainerStyles, CreateContainer } from './elements';

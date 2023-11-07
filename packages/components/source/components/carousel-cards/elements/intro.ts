@@ -17,14 +17,26 @@ export const IntroContainerStyles = `
       padding-right: ${spacing['2xl']};
     }
   }
+
+  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+    .${INTRO_CONTAINER} .umd-lock {
+      max-width: inherit;
+      padding: 0;
+    }
+  }
 `;
 
 export const CreateIntroColumn = () => {
   const container = document.createElement('div');
+  const wrapper = document.createElement('div');
   const introSlot = MakeSlot({ type: SLOT_NAME_INTRO });
 
+  wrapper.classList.add('umd-lock');
+
   container.classList.add(INTRO_CONTAINER);
-  container.appendChild(introSlot);
+  wrapper.appendChild(introSlot);
+
+  container.appendChild(wrapper);
 
   return container;
 };

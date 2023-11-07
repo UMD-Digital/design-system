@@ -8,6 +8,7 @@ export const SLOT_NAME_CARDS = 'cards';
 export const CAROUSEL_CONTAINER_WRAPPER =
   'umd-carousel-cards-carousel-container-wrapper';
 
+export const ANIMATION_DURATION = 500;
 export const BREAKPOINTS = {
   medium: 768,
   large: 1024,

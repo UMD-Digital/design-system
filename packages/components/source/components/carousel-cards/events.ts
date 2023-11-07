@@ -2,10 +2,10 @@ import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens
 import {
   ELEMENT_TYPE,
   SLOT_NAME_CARDS,
+  ANIMATION_DURATION,
   CAROUSEL_CONTAINER_WRAPPER,
 } from './variables';
 
-const ANIMATION_DURATION = 500;
 const spaceBetween = parseInt(spacing.md.replace('px', ''));
 
 const GetCarouselWrapperSize = ({ shadowRoot }: { shadowRoot: ShadowRoot }) => {
@@ -25,45 +25,81 @@ const GetCarouselCount = ({ shadowRoot }: { shadowRoot: ShadowRoot }) => {
   return isShowTwo ? 2 : 1;
 };
 
-export const SizeCarousel = ({ element }: { element: ELEMENT_TYPE }) => {
+const GetElementSize = ({ element }: { element: ELEMENT_TYPE }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
-  const cardsSlot = element.querySelector(
-    `[slot="${SLOT_NAME_CARDS}"]`,
-  ) as HTMLSlotElement;
   const containerWidth = GetCarouselWrapperSize({ shadowRoot });
-  const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
   const count = GetCarouselCount({ shadowRoot });
-  const multiplier = count == 2 ? 1 : 0.9;
-  const elementSize = (containerWidth / count) * multiplier;
-  const elementSizeTotal = elementSize * count + spaceBetween / 2;
+  const multiplier = count == 2 ? 1 : 0.8;
+  const additonalSpace = spaceBetween / 2;
 
-  slotContent.forEach((card) => {
-    card.style.width = `${elementSize - spaceBetween / 2}px`;
-  });
-
-  cardsSlot.style.width = `${elementSizeTotal}px`;
+  return (containerWidth / count) * multiplier - additonalSpace;
 };
 
-export const ScrollCarousel = ({ element }: { element: ELEMENT_TYPE }) => {
-  const shadowRoot = element.shadowRoot as ShadowRoot;
+const SetElementSize = ({
+  element,
+  elementSize,
+}: {
+  element: ELEMENT_TYPE;
+  elementSize: number;
+}) => {
   const cardsSlot = element.querySelector(
     `[slot="${SLOT_NAME_CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
+
+  slotContent.forEach((card) => {
+    card.style.width = `${elementSize}px`;
+  });
+};
+
+const SetCarouselSize = ({
+  element,
+  elementSize,
+}: {
+  element: ELEMENT_TYPE;
+  elementSize: number;
+}) => {
+  const elementSizeTotal = elementSize * 2 + spaceBetween;
+  const cardsSlot = element.querySelector(
+    `[slot="${SLOT_NAME_CARDS}"]`,
+  ) as HTMLSlotElement;
+
+  cardsSlot.style.width = `${elementSizeTotal}px`;
+  cardsSlot.style.transition = 'none';
+  cardsSlot.style.transform = 'translateX(0)';
+};
+
+export const EventResizeCarouselElementsWidth = ({
+  element,
+}: {
+  element: ELEMENT_TYPE;
+}) => {
+  const elementSize = GetElementSize({ element });
+
+  SetElementSize({ element, elementSize });
+  SetCarouselSize({ element, elementSize });
+};
+
+export const EventScrollCarousel = ({ element }: { element: ELEMENT_TYPE }) => {
+  const cardsSlot = element.querySelector(
+    `[slot="${SLOT_NAME_CARDS}"]`,
+  ) as HTMLSlotElement;
+  const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
+  const elementCount = 2;
   const firstElement = slotContent[0];
+  const nextElement = slotContent[elementCount];
   const elementSize = firstElement.offsetWidth;
-  const count = GetCarouselCount({ shadowRoot });
-  const nextElement = slotContent[count];
-  const elementSizeTotal = elementSize * count + spaceBetween / 2;
-  const elementSizeWithAdditonal =
-    elementSizeTotal + elementSize + spaceBetween;
+  const elementSizeWithSpace = elementSize + spaceBetween;
+  const elementSizeTotal =
+    elementSize * elementCount + spaceBetween / elementCount;
+  const elementSizeWithAdditonal = elementSizeTotal + elementSizeWithSpace;
 
   if (!nextElement) return;
 
   cardsSlot.style.width = `${elementSizeWithAdditonal}px`;
   nextElement.style.display = 'block';
   cardsSlot.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
-  cardsSlot.style.transform = `translateX(-${elementSize + spaceBetween}px)`;
+  cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
   setTimeout(() => {
     const clonedElement = firstElement.cloneNode(true) as HTMLElement;
@@ -71,9 +107,25 @@ export const ScrollCarousel = ({ element }: { element: ELEMENT_TYPE }) => {
 
     cardsSlot.appendChild(clonedElement);
     cardsSlot.removeChild(firstElement);
+    SetCarouselSize({ element, elementSize });
+  }, ANIMATION_DURATION + 100);
+};
 
-    cardsSlot.style.transition = 'none';
-    cardsSlot.style.transform = 'translateX(0)';
-    cardsSlot.style.width = `${elementSizeTotal}px`;
-  }, ANIMATION_DURATION);
+export const EventResizeSetHeight = ({
+  element,
+}: {
+  element: ELEMENT_TYPE;
+}) => {
+  const cardsSlot = element.querySelector(
+    `[slot="${SLOT_NAME_CARDS}"]`,
+  ) as HTMLSlotElement;
+  const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
+  const maxHeight = slotContent.reduce((acc, currentElement) => {
+    if (acc > currentElement.offsetHeight) return acc;
+    return currentElement.offsetHeight;
+  }, 0);
+
+  slotContent.forEach((card) => {
+    card.style.height = `${maxHeight}px`;
+  });
 };

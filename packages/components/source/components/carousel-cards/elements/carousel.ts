@@ -24,6 +24,14 @@ export const CarouselContainerStyles = `
 
   .${CAROUSEL_CONTAINER_WRAPPER} {
     overflow: hidden;
+    padding-right: 0;
+  }
+
+  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+    .${CAROUSEL_CONTAINER_WRAPPER}  {
+      max-width: inherit;
+      padding: 0;
+    }
   }
 `;
 
@@ -38,6 +46,7 @@ export const CreateCarouselColumn = ({
   const fowardButton = CreateButton({ element });
 
   container.classList.add(CAROUSEL_CONTAINER);
+  wrapper.classList.add('umd-lock');
   wrapper.classList.add(CAROUSEL_CONTAINER_WRAPPER);
 
   wrapper.appendChild(slot);

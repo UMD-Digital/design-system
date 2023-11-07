@@ -1,7 +1,7 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { FORWARD_ARROW_ICON } from '../../../assets/icons';
-import { ELEMENT_TYPE, BREAKPOINTS } from '../variables';
+import { ELEMENT_TYPE, BREAKPOINTS, ANIMATION_DURATION } from '../variables';
 
 const BUTTON_CONTAINER = `umd-carousel-button-container`;
 
@@ -17,6 +17,10 @@ export const ButtonStyles = `
     justify-content: center;
     align-items: center;
     right: 0;
+  }
+
+  .${BUTTON_CONTAINER}:disabled {
+    opacity: 0.5;
   }
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
@@ -41,6 +45,11 @@ export const CreateButton = ({ element }: { element: ELEMENT_TYPE }) => {
   button.innerHTML = FORWARD_ARROW_ICON;
   button.addEventListener('click', () => {
     element.eventMoveForward();
+    button.disabled = true;
+
+    setTimeout(() => {
+      button.disabled = false;
+    }, ANIMATION_DURATION + 100);
   });
 
   return button;

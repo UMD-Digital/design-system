@@ -8,13 +8,17 @@ import {
   BACKGROUND_TEXTURE,
   SLOT_NAME_CARDS,
 } from './variables';
-import { SizeCarousel, ScrollCarousel } from './events';
+import {
+  EventResizeCarouselElementsWidth,
+  EventResizeSetHeight,
+  EventScrollCarousel,
+} from './events';
 import { CreateIntroColumn, IntroContainerStyles } from './elements/intro';
 import {
   CreateCarouselColumn,
   CarouselContainerStyles,
 } from './elements/carousel';
-import { CreateButton, ButtonStyles } from './elements/button';
+import { ButtonStyles } from './elements/button';
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
 
@@ -77,6 +81,13 @@ const ComponentStyles = `
     }
   }
 
+  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${CAROUSEL_CONTAINER_WRAPPER} {
+      max-width: inherit;
+      padding: 0;
+    }
+  }
+
   ${IntroContainerStyles}
   ${CarouselContainerStyles}
   ${ButtonStyles}
@@ -87,6 +98,9 @@ const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
     `[slot="${SLOT_NAME_CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
+
+  EventResizeCarouselElementsWidth({ element });
+  EventResizeSetHeight({ element });
 
   cardsSlot.style.display = `flex`;
   cardsSlot.style.justifyContent = `space-between`;
@@ -102,8 +116,8 @@ const CreateContent = ({ element }: { element: ELEMENT_TYPE }) => {
   const carousel = CreateCarouselColumn({ element });
 
   container.classList.add(CAROUSEL_CONTAINER);
-  wrapper.classList.add(CAROUSEL_CONTAINER_WRAPPER);
   wrapper.classList.add('umd-lock');
+  wrapper.classList.add(CAROUSEL_CONTAINER_WRAPPER);
 
   wrapper.appendChild(intro);
   wrapper.appendChild(carousel);
@@ -141,17 +155,17 @@ export class UMDCarouselCardsElement extends HTMLElement {
   connectedCallback() {
     const element = this;
     const content = CreateContent({ element });
-    const resize = () => SizeCarousel({ element });
+    const resize = () => {
+      EventResizeCarouselElementsWidth({ element });
+      EventResizeSetHeight({ element });
+    };
 
     this._shadow.appendChild(content);
-
-    SizeCarousel({ element });
     OnLoadStyles({ element });
-
     window.addEventListener('resize', Debounce(resize, 20));
   }
 
   eventMoveForward() {
-    ScrollCarousel({ element: this });
+    EventScrollCarousel({ element: this });
   }
 }

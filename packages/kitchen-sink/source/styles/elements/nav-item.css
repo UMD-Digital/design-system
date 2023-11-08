@@ -1,0 +1,7 @@
+umd-element-nav-item {
+  display: block;
+}
+
+umd-element-nav-item:not(:last-child) {
+  margin-right: 24px;
+}

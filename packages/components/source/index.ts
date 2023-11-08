@@ -3,7 +3,7 @@ import { Load as AlertLoader } from './components/alert';
 import { Load as CarouselCardsLoader } from './components/carousel-cards';
 import { Load as DateSliderLoader } from './components/events-date-slider';
 import { Load as FooterLoader } from './components/footer';
-import { Load as NavDropdownLoader } from './components/nav-dropdown';
+import { Load as NavDropdownLoader } from './components/nav-item';
 
 let styleString = AlertLoader();
 styleString += CarouselCardsLoader();

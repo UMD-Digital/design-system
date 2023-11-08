@@ -28,6 +28,7 @@ const componentsFiles = {
   carouselCards: path.resolve('source/components/carousel-cards'),
   eventsDateSlider: path.resolve('source/components/events-date-slider'),
   footer: path.resolve('source/components/footer'),
+  navItem: path.resolve('source/components/nav-item'),
 };
 
 const componentBundle = {

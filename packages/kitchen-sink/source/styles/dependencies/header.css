@@ -1,0 +1,15 @@
+header {
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #eee;
+
+  & .umd-lock {
+    display: flex;
+    width: 100%;
+  }
+
+  & nav {
+    margin-left: auto;
+    display: flex;
+  }
+}

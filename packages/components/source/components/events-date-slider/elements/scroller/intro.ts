@@ -6,7 +6,6 @@ const INTRO_CONTAINER_CLASS = 'umd-element-date-slider-intro-container';
 export const IntroStyles = `
   :host .${INTRO_CONTAINER_CLASS} {
     margin-bottom: 24px;
-    padding-left: 48px;
   }
   
   @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {

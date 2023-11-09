@@ -8,7 +8,6 @@ export const DatesStyles = `
     display: flex;
     position: relative;
     padding: 0 36px;
-    width: calc(100% - 72px);
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {

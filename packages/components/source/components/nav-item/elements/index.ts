@@ -5,7 +5,7 @@ import { ELEMENTS, VARIABLES } from '../globals';
 
 export const ComponentStyles = `
   :host {
-    display: block !important;
+    display: block;
     container: umd-nav-item / inline-size; 
   }
 

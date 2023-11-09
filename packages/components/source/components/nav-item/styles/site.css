@@ -1,0 +1,36 @@
+/* Styles that should be loaded on the website as defaults */
+
+umd-element-nav-item {
+  display: block;
+
+  & a {
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  [slot='dropdown-links'] {
+    & > * + * {
+      margin-top: 24px;
+      display: block;
+    }
+
+    & span {
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0 2px;
+      display: inline;
+      position: relative;
+      transition: background 0.5s;
+      background-image: linear-gradient(#ffd200, #ffd200);
+
+      &:hover,
+      &:focus {
+        background-size: 100% 2px;
+      }
+    }
+  }
+}
+
+umd-element-nav-item + umd-element-nav-item {
+  margin-left: 24px;
+}

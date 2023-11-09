@@ -1,0 +1,107 @@
+{% extends '_layout.twig' %}
+
+{% block page %}
+  <section style="min-height: 400px">
+    <div class="umd-lock">
+      <h2 class="umd-sans-extralarge">
+        Nav Item- Default
+      </h2>
+
+      <div style="display: flex; justify-content: flex-end;">
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>About Example Big</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>The Provost</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              <span>Contact</span>
+            </a>
+          </div>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>About Example Middle</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>The Provost</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              <span>Contact</span>
+            </a>
+          </div>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>About Example</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>The Provost</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              <span>Contact</span>
+            </a>
+          </div>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>About Example Long</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>The Provost</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              <span>Contact</span>
+            </a>
+          </div>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>About Example</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>The Provost</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              <span>Contact</span>
+            </a>
+          </div>
+        </umd-element-nav-item>
+      </div>
+    </div>
+  </section>
+
+  {# <section>
+    <div class="umd-lock">
+      <h2 class="umd-sans-extralarge">
+        Nav Item - Error
+      </h2>
+
+      <umd-element-nav-item>
+        <div slot="dropdown-links">
+          <a href="https://provost.umd-staging.com/about/the-provost">
+            <span>The Provost</span>
+          </a>
+          <a href="https://provost.umd-staging.com/about/contact">
+            <span>Contact</span>
+          </a>
+        </div>
+      </umd-element-nav-item>
+    </div>
+  </section> #}
+{% endblock %}

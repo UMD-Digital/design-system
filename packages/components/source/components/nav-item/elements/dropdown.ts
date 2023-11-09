@@ -1,10 +1,12 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
-import { MakeSlot } from 'helpers/ui';
+import { WrapWithSpan } from '../services/helper';
 import { ElementType } from '../component';
 import { SLOTS, ELEMENTS } from '../globals';
 
 const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
+const TWO_COLUMN_CONTAINER = 'two-column-container';
+const MAX_COLUMN_ITEMS = 8;
 
 export const DropdownStyles = `
   .${ELEMENTS.DROPDOWN_CONTAINER} {
@@ -13,8 +15,7 @@ export const DropdownStyles = `
     left: 50%;
     transform: translateX(-50%);
     min-width: 250px;
-    max-width: 420px;
-    width: 120%;
+    width: auto;
     padding-top: ${spacing.sm};
     display: none;
   }
@@ -23,29 +24,118 @@ export const DropdownStyles = `
     background-color: ${colors.white};
     border-top: 2px solid ${colors.red};
     padding: ${spacing.lg};
+    box-shadow: -1px 9px 32px -10px rgba(0,0,0,0.19);
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} a {
+    display: block;
+    min-width: 120px;
+    max-width: 230px;
+    font-weight: 800;
+    font-size: 14px;
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} a + a {
+    margin-top: ${spacing.md};
+    display: block;
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} a:hover,
+  .${DROPDOWN_LIST_CONTAINER} a:focus {
+    color: ${colors.red};
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} a[data-selected]:hover,
+  .${DROPDOWN_LIST_CONTAINER} a[data-selected]:focus {
+    border-bottom: none;
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} a:hover span,
+  .${DROPDOWN_LIST_CONTAINER} a:focus span {
+    background-size: 100% 2px;
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} a span {
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 2px;
+    position: relative;
+    display: inline-block;
+    transition: background 0.5s;
+    background-image: linear-gradient(${colors.red}, ${colors.red});
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} a[data-selected] span {
+    border-bottom: 2px solid ${colors.gold};
+  }
+
+  .${TWO_COLUMN_CONTAINER} {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .${TWO_COLUMN_CONTAINER} > * {
+    min-width: 232px;
+  }
+
+  .${TWO_COLUMN_CONTAINER} > *:last-child {
+    margin-left: 40px;
   }
 `;
 
+const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
+  const container = document.createElement('div');
+  const column1 = document.createElement('div');
+  const column2 = document.createElement('div');
+  const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
+
+  firstColumnLinks.forEach((link) =>
+    column1.appendChild(WrapWithSpan({ anyElement: link })),
+  );
+  links.forEach((link) =>
+    column2.appendChild(WrapWithSpan({ anyElement: link })),
+  );
+
+  container.classList.add(TWO_COLUMN_CONTAINER);
+
+  container.appendChild(column1);
+  container.appendChild(column2);
+
+  return container;
+};
+
+const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
+  const container = document.createElement('div');
+  links.forEach((link) =>
+    container.appendChild(WrapWithSpan({ anyElement: link })),
+  );
+
+  return container;
+};
+
 export const CreateDropdown = ({ element }: { element: ElementType }) => {
+  const dropdownSlot = element.querySelector(
+    `[slot=${SLOTS.DROPDOWN_LINKS}]`,
+  ) as HTMLSlotElement;
+
+  if (!dropdownSlot) return;
+
+  const links = Array.from(
+    dropdownSlot.querySelectorAll('a'),
+  ) as HTMLAnchorElement[];
+
   const container = document.createElement('div');
   const list = document.createElement('div');
-  const titleSlot = MakeSlot({ type: SLOTS.DROPDOWN_LINKS });
-  const elementBounds = element.getBoundingClientRect();
-
-  if (elementBounds.left < 100) {
-    container.style.left = '0';
-    container.style.transform = 'translateX(0)';
-  }
-
-  if (window.innerWidth - elementBounds.right < 100) {
-    container.style.right = '0';
-    container.style.left = 'inherit';
-    container.style.transform = 'translateX(0)';
-  }
 
   list.classList.add(DROPDOWN_LIST_CONTAINER);
   container.classList.add(ELEMENTS.DROPDOWN_CONTAINER);
-  list.appendChild(titleSlot);
+
+  if (links.length > MAX_COLUMN_ITEMS) {
+    list.appendChild(CreateMultipleColumns({ links }));
+  } else {
+    list.appendChild(CreateSingleColumn({ links }));
+  }
+
   container.appendChild(list);
 
   return container;

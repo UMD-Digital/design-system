@@ -1,7 +1,7 @@
 {% extends '_layout.twig' %}
 
 {% block page %}
-  <section style="min-height: 400px">
+  <section style="min-height: 800px">
     <div class="umd-lock">
       <h2 class="umd-sans-extralarge">
         Nav Item- Default
@@ -9,17 +9,46 @@
 
       <div style="display: flex; justify-content: flex-end;">
         <umd-element-nav-item>
-          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+          <a slot="primary-link"
+            data-selected
+            href="https://provost.umd-staging.com/about">
             <span>About Example Big</span>
           </a>
 
           <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost"
+              data-selected>
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
             <a href="https://provost.umd-staging.com/about/the-provost">
-              <span>The Provost</span>
+              The Provost
             </a>
-            <a href="https://provost.umd-staging.com/about/contact">
-              <span>Contact</span>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
             </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
           </div>
         </umd-element-nav-item>
 
@@ -27,15 +56,6 @@
           <a slot="primary-link" href="https://provost.umd-staging.com/about">
             <span>About Example Middle</span>
           </a>
-
-          <div slot="dropdown-links">
-            <a href="https://provost.umd-staging.com/about/the-provost">
-              <span>The Provost</span>
-            </a>
-            <a href="https://provost.umd-staging.com/about/contact">
-              <span>Contact</span>
-            </a>
-          </div>
         </umd-element-nav-item>
 
         <umd-element-nav-item>

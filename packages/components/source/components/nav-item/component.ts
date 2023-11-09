@@ -4,6 +4,7 @@ declare global {
   }
 }
 
+import { Debounce } from 'helpers/performance';
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import {
@@ -12,6 +13,10 @@ import {
   EventSize,
   EventButtonClick,
 } from './services/events';
+import {
+  DropdownPositionPerViewPort,
+  OnLoadDropdownSpans,
+} from './services/helper';
 import { SLOTS, VARIABLES } from './globals';
 
 export const ELEMENT_NAME = 'umd-element-nav-item';
@@ -65,11 +70,21 @@ export class UMDNavItemElement extends HTMLElement {
 
     setTimeout(() => {
       EventSize({ element });
+      OnLoadDropdownSpans({ element });
     }, 10);
+
+    setTimeout(() => {
+      DropdownPositionPerViewPort({ element });
+    }, 2000);
 
     // Events
 
-    window.addEventListener('resize', () => EventSize({ element }));
+    const resize = () => {
+      EventSize({ element });
+      DropdownPositionPerViewPort({ element });
+    };
+
+    window.addEventListener('resize', () => Debounce(resize, 20));
 
     element.addEventListener('mouseover', () => {
       this._isShowing = true;

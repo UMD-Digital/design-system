@@ -1,4 +1,8 @@
 /* Styles that should be loaded on the website as defaults */
+/* Clean up - only include styles needed for component */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
 
 umd-element-nav-item {
   display: block;
@@ -8,29 +12,32 @@ umd-element-nav-item {
     font-weight: 800;
   }
 
-  [slot='dropdown-links'] {
-    & > * + * {
-      margin-top: 24px;
-      display: block;
-    }
+  & [slot='primary-link'] {
+    font-size: 16px;
+  }
 
-    & span {
-      background-position: 0 100%;
-      background-repeat: no-repeat;
-      background-size: 0 2px;
-      display: inline;
-      position: relative;
-      transition: background 0.5s;
-      background-image: linear-gradient(#ffd200, #ffd200);
+  & [slot='primary-link'][data-selected]:before {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    height: 3px;
+    width: calc(100% - 18px);
+    left: -3px;
+    background-color: theme(colors.gold);
+    display: block;
+    z-index: -1;
+  }
 
-      &:hover,
-      &:focus {
-        background-size: 100% 2px;
-      }
+  & [slot='primary-link'] {
+    transition: color 0.2s ease-in-out;
+
+    &:hover,
+    &:focus {
+      color: theme(colors.red);
     }
   }
 }
 
 umd-element-nav-item + umd-element-nav-item {
-  margin-left: 24px;
+  margin-left: theme(spacing.md);
 }

@@ -1,4 +1,3 @@
-import { fontFamily } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts.js';
 import { MakeSlot } from 'helpers/ui';
 import { CHEVRON_SMALL } from 'assets/icons';
 import { ElementType } from '../component';
@@ -6,7 +5,6 @@ import { CreateDropdown, DropdownStyles } from './dropdown';
 import { SLOTS, ELEMENTS } from '../globals';
 
 const PRIMARY_LINK_CONTAINER = 'primary-link-container';
-const PRIMARY_LINK_CONTAINER_BUTTON = 'primary-link-container-button';
 
 export const PrimaryStyles = `
   .${PRIMARY_LINK_CONTAINER} {
@@ -19,11 +17,16 @@ export const PrimaryStyles = `
     white-space: nowrap;
   }
 
-  .${PRIMARY_LINK_CONTAINER} button {
-    margin-left: 8px;
+  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} ::slotted(a) {
+    font-size: 16px;
   }
 
-  .${PRIMARY_LINK_CONTAINER} button svg {
+  .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
+    margin-left: 8px;
+    transition: transform .5s;
+  }
+
+  .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} svg {
     fill: #e21833;
     height: 16px;
     transform: rotate(0deg);
@@ -37,7 +40,7 @@ export const PrimaryStyles = `
 const CreateButton = ({ element }: { element: ElementType }) => {
   const button = document.createElement('button');
 
-  button.classList.add(PRIMARY_LINK_CONTAINER_BUTTON);
+  button.classList.add(ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON);
   button.innerHTML = CHEVRON_SMALL;
   button.addEventListener('click', () => element.buttonClick());
   button.setAttribute('aria-expanded', 'false');
@@ -66,7 +69,7 @@ export const CreatePrimaryLink = ({ element }: { element: ElementType }) => {
     wrapper.appendChild(button);
   }
 
-  wrapper.appendChild(dropdown);
+  if (dropdown) wrapper.appendChild(dropdown);
 
   container.appendChild(wrapper);
   return container;

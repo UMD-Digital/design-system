@@ -27,6 +27,10 @@ export const ComponentStyles = `
     display: block;
   }
 
+  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
+    transform: rotate(180deg);
+  }
+
   ${PrimaryStyles}
 `;
 

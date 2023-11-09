@@ -98,12 +98,17 @@ export const CreateBackButton = ({ element }: { element: ELEMENT_TYPE }) => {
   button.classList.add(ELEMENTS.ARROW_CLASS);
   button.classList.add(BACK_ARROW_CLASS);
   button.style.display = 'none';
+  button.setAttribute('type', 'button');
+  button.setAttribute('aria-label', 'see previous date');
 
-  button.addEventListener('click', () => {
+  const clickEvent = () => {
     element.setCountBackward();
     EventSlideDates({ forward: false, element });
     ButtonVisibilityLogic({ element });
-  });
+  };
+
+  button.addEventListener('click', clickEvent);
+  button.addEventListener('touchstart', clickEvent);
 
   return button;
 };
@@ -114,12 +119,17 @@ export const CreateForwardButton = ({ element }: { element: ELEMENT_TYPE }) => {
   button.innerHTML = FORWARD_ARROW_ICON;
   button.classList.add(ELEMENTS.ARROW_CLASS);
   button.classList.add(FORWARD_ARROW_CLASS);
+  button.setAttribute('type', 'button');
+  button.setAttribute('aria-label', 'see next date');
 
-  button.addEventListener('click', () => {
+  const clickEvent = () => {
     element.setCountForward();
     EventSlideDates({ forward: true, element });
     ButtonVisibilityLogic({ element });
-  });
+  };
+
+  button.addEventListener('click', clickEvent);
+  button.addEventListener('touchstart', clickEvent);
 
   return button;
 };

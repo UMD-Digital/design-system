@@ -22,3 +22,5 @@ export const FORWARD_ARROW_ICON = `<svg aria-hidden="true"  viewBox="0 0 24 8" f
 export const BACK_ARROW_ICON = `<svg aria-hidden="true" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M3.98162 5.05487L6.93058 8H4.15376L0.104145 4.03913L0.143276 4L0.104143 3.96087L4.15376 0L6.93058 0L3.70637 3.22002H24V5.05487H3.98162Z"/>
 </svg>`;
+
+export const CHEVRON_SMALL = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96"fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M47.2598 49.1794L72.3325 21L94 21.0001L58.9085 62.2714L58.9247 62.2897L47.284 76L47.2598 75.9715L47.2356 76L35.5949 62.2897L35.6111 62.2714L0.519623 21L22.1871 21.0001L47.2598 49.1794Z"></path></svg>`;

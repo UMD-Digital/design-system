@@ -30,3 +30,7 @@ umd-element-nav-item {
     }
   }
 }
+
+umd-element-nav-item + umd-element-nav-item {
+  margin-left: 24px;
+}

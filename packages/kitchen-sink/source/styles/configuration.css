@@ -2,6 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import './dependencies/reset.css';
+@import './dependencies/header.css';
+
 .umd-configuration-section {
   @apply mb-md pb-md border-b border-black;
 }

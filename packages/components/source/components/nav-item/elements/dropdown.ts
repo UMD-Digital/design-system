@@ -4,24 +4,31 @@ import { MakeSlot } from 'helpers/ui';
 import { ElementType } from '../component';
 import { SLOTS, ELEMENTS } from '../globals';
 
+const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
+
 export const DropdownStyles = `
   .${ELEMENTS.DROPDOWN_CONTAINER} {
-    background-color: ${colors.white};
-    border-top: 2px solid ${colors.red};
-    padding: ${spacing.lg};
     position: absolute;
-    top: calc(100% + ${spacing.sm}); 
+    top: 100%; 
     left: 50%;
     transform: translateX(-50%);
     min-width: 250px;
     max-width: 420px;
     width: 120%;
+    padding-top: ${spacing.sm};
     display: none;
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} {
+    background-color: ${colors.white};
+    border-top: 2px solid ${colors.red};
+    padding: ${spacing.lg};
   }
 `;
 
 export const CreateDropdown = ({ element }: { element: ElementType }) => {
   const container = document.createElement('div');
+  const list = document.createElement('div');
   const titleSlot = MakeSlot({ type: SLOTS.DROPDOWN_LINKS });
   const elementBounds = element.getBoundingClientRect();
 
@@ -36,8 +43,10 @@ export const CreateDropdown = ({ element }: { element: ElementType }) => {
     container.style.transform = 'translateX(0)';
   }
 
+  list.classList.add(DROPDOWN_LIST_CONTAINER);
   container.classList.add(ELEMENTS.DROPDOWN_CONTAINER);
-  container.appendChild(titleSlot);
+  list.appendChild(titleSlot);
+  container.appendChild(list);
 
   return container;
 };

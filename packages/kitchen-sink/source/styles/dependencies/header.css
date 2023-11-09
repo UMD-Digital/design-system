@@ -1,7 +1,9 @@
 header {
   margin-bottom: 40px;
-  padding-bottom: 40px;
+  padding: 40px 0;
   border-bottom: 1px solid #eee;
+  position: relative;
+  z-index: 99;
 
   & .umd-lock {
     display: flex;

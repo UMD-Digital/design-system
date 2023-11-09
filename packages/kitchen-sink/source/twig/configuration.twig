@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="/configuration.css" />
   </head>
   <body>
-    <a href="#main" class="umd-skip-content">Skip to Main Content</a>
+    {% include '_components/header.twig' %}
+
+    {# <a href="#main" class="umd-skip-content">Skip to Main Content</a>
     <header class="p-md">
       <div class="umd-lock">
         <a href="/" class="umd-cta-secondary mb-md">
@@ -18,7 +20,7 @@
           <span>Back to Components List</span>
         </a>
       </div>
-    </header>
+    </header> #}
     <main id="main">
       <section class="pb-2xl">
         <div class="umd-lock">
@@ -2290,6 +2292,8 @@
         </div>
       </section>
     </main>
+
+    {% include '_components/footer.twig' %}
   </body>
 
   <script src="/configuration.js"></script>

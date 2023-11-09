@@ -1,7 +1,8 @@
+import { EventAccessibilityFocus } from 'helpers/accessibility';
 import { ElementType } from '../component';
-import { ELEMENTS } from '../globals';
+import { ELEMENTS, VARIABLES } from '../globals';
 
-const ShowDropdown = ({ element }: { element: ElementType }) => {
+export const ShowDropdown = ({ element }: { element: ElementType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const dropdownContainer = shadowRoot.querySelector(
     `.${ELEMENTS.CONTAINER}`,
@@ -9,10 +10,10 @@ const ShowDropdown = ({ element }: { element: ElementType }) => {
 
   if (!dropdownContainer) return;
 
-  dropdownContainer.setAttribute('data-showing', '');
+  dropdownContainer.setAttribute(VARIABLES.ATTRIBUTE_SHOWING, '');
 };
 
-const HideDropdown = ({ element }: { element: ElementType }) => {
+export const HideDropdown = ({ element }: { element: ElementType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const dropdownContainer = shadowRoot.querySelector(
     `.${ELEMENTS.CONTAINER}`,
@@ -20,11 +21,21 @@ const HideDropdown = ({ element }: { element: ElementType }) => {
 
   if (!dropdownContainer) return;
 
-  dropdownContainer.removeAttribute('data-showing');
+  dropdownContainer.removeAttribute(VARIABLES.ATTRIBUTE_SHOWING);
+  element._focusCallback();
+  element._focusCallback = () => {};
 };
 
-export const EventDropdownToggle = ({ element }: { element: ElementType }) => {
-  if (element._isShowing) ShowDropdown({ element });
+export const EventButtonClick = ({ element }: { element: ElementType }) => {
+  if (element._isShowing) {
+    ShowDropdown({ element });
+
+    element._focusCallback = EventAccessibilityFocus({
+      element,
+      action: () => HideDropdown({ element }),
+    });
+  }
+
   if (!element._isShowing) HideDropdown({ element });
 };
 

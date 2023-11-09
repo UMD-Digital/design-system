@@ -1,7 +1,7 @@
 import { fontFamily } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts.js';
 import { ElementType } from '../component';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
-import { ELEMENTS } from '../globals';
+import { ELEMENTS, VARIABLES } from '../globals';
 
 export const ComponentStyles = `
   :host {
@@ -19,7 +19,11 @@ export const ComponentStyles = `
     position: relative;
   }
 
-  .${ELEMENTS.CONTAINER}[data-showing] .${ELEMENTS.DROPDOWN_CONTAINER} {
+  .${ELEMENTS.CONTAINER}:foucs-within .${ELEMENTS.DROPDOWN_CONTAINER} {
+    display: block;
+  }
+
+  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.DROPDOWN_CONTAINER} {
     display: block;
   }
 

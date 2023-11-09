@@ -8,4 +8,8 @@ export const SLOTS = {
   PRIMARY_LINK: 'primary-link',
   DROPDOWN_LINKS: 'dropdown-links',
 };
-export const VARIABLES = {};
+export const VARIABLES = {
+  ATTRIBUTE_SHOW: 'show',
+  ATTRIBUTE_DROPDOWN: 'data-dropdown',
+  ATTRIBUTE_SHOWING: 'data-showing',
+};

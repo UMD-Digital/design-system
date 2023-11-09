@@ -57,15 +57,16 @@ export const CreatePrimaryLink = ({ element }: { element: ElementType }) => {
   const dropdown = CreateDropdown({ element });
 
   container.classList.add(PRIMARY_LINK_CONTAINER);
-
   wrapper.classList.add(ELEMENTS.PRIMARLY_LINK_WRAPPER);
+
   wrapper.appendChild(titleSlot);
-  wrapper.appendChild(dropdown);
 
   if (element._hasDropdown) {
     const button = CreateButton({ element });
     wrapper.appendChild(button);
   }
+
+  wrapper.appendChild(dropdown);
 
   container.appendChild(wrapper);
   return container;

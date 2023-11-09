@@ -6,8 +6,13 @@ declare global {
 
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
-import { EventDropdownToggle, EventSize } from './services/events';
-import { SLOTS } from './globals';
+import {
+  HideDropdown,
+  ShowDropdown,
+  EventSize,
+  EventButtonClick,
+} from './services/events';
+import { SLOTS, VARIABLES } from './globals';
 
 export const ELEMENT_NAME = 'umd-element-nav-item';
 export type ElementType = UMDNavItemElement;
@@ -16,6 +21,7 @@ export class UMDNavItemElement extends HTMLElement {
   _hasDropdown = false;
   _navItemName = '';
   _isShowing = false;
+  _focusCallback = () => {};
 
   constructor() {
     super();
@@ -40,6 +46,10 @@ export class UMDNavItemElement extends HTMLElement {
     const dropdownLinks = element.querySelector(
       `[slot="${SLOTS.DROPDOWN_LINKS}"]`,
     );
+    const hasDropdown =
+      (dropdownLinks?.children && dropdownLinks?.children.length > 0) || false;
+
+    element._hasDropdown = hasDropdown;
 
     if (!primaryLink) {
       throw new Error('Primary link is required for a nav item');
@@ -49,34 +59,32 @@ export class UMDNavItemElement extends HTMLElement {
         .trim();
     }
 
-    if (dropdownLinks?.children && dropdownLinks?.children.length > 0) {
-      element._hasDropdown = true;
-    }
-
     const container = CreateShadowDom({ element });
-    this._shadow.appendChild(container);
-    window.addEventListener('resize', () => EventSize({ element }));
-    element.addEventListener('mouseover', () => {
-      this._isShowing = true;
-      EventDropdownToggle({ element: this });
-    });
-
-    element.addEventListener('focus', () => {
-      console.log('focus');
-    });
-
-    element.addEventListener('mouseleave', () => {
-      this._isShowing = false;
-      EventDropdownToggle({ element: this });
-    });
+    element._shadow.appendChild(container);
+    if (hasDropdown) container.setAttribute(VARIABLES.ATTRIBUTE_DROPDOWN, '');
 
     setTimeout(() => {
       EventSize({ element });
     }, 10);
+
+    // Events
+
+    window.addEventListener('resize', () => EventSize({ element }));
+
+    element.addEventListener('mouseover', () => {
+      this._isShowing = true;
+      ShowDropdown({ element });
+    });
+
+    element.addEventListener('mouseleave', () => {
+      this._isShowing = false;
+      HideDropdown({ element });
+    });
   }
 
   buttonClick() {
+    const element = this;
     this._isShowing = this._isShowing ? false : true;
-    EventDropdownToggle({ element: this });
+    EventButtonClick({ element });
   }
 }

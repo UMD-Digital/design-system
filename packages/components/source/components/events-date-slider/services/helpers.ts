@@ -125,7 +125,7 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
 
         if (isMobile) {
           dateElement.style.justifyContent = `center`;
-          dateElement.style.paddingRight = `${spacing.md}`;
+          dateElement.style.paddingRight = `0`;
         } else {
           dateElement.style.justifyContent = `inherit`;
           dateElement.style.paddingRight = `${spacing.lg}`;

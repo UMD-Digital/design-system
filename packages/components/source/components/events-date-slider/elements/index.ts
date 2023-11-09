@@ -61,6 +61,10 @@ export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
   slider.style.left = '0';
 
   SizeDatesElements({ element });
+
+  setTimeout(() => {
+    SizeDatesElements({ element });
+  }, 1000);
 };
 
 export const CreateContainer = ({ element }: { element: ELEMENT_TYPE }) => {

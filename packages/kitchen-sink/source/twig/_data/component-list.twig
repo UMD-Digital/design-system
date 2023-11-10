@@ -1,0 +1,42 @@
+{% set list = [
+  {
+    name: 'Alert',
+    link: 'alert'
+  },
+  {
+    name: 'Carousel Cards',
+    link: 'carousel-cards'
+  },
+  {
+    name: 'Events Date Slider',
+    link: 'events-date-slider'
+  },
+  {
+    name: 'Footer',
+    link: 'footer'
+  },
+  {
+    name: 'Nav Item',
+    link: 'nav-item'
+  }
+] %}
+
+{% macro DisplayName() %}
+  {% for item in list %}
+    {{ item.name }}
+  {% endfor %}
+{% endmacro %}
+
+{% macro HeaderLinks() %}
+  <ul>
+    {% for item in list %}
+      <li><a href="/{{ item.link }}">{{ item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro Links() %}
+  {% for item in list %}
+    <a href="/{{ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}

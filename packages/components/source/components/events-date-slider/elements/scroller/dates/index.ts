@@ -12,8 +12,8 @@ export const DatesStyles = `
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
     :host .${ELEMENTS.DATES_CONTAINER_CLASS} {
-      padding: 0 48px;
-      width: calc(100% - 236px);
+      padding: 0 60px;
+      width: calc(100% - 96px);
     }
   }
   

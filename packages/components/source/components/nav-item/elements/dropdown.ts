@@ -60,7 +60,7 @@ export const DropdownStyles = `
     background-repeat: no-repeat;
     background-size: 0 2px;
     position: relative;
-    display: inline-block;
+    display: inline;
     transition: background 0.5s;
     background-image: linear-gradient(${colors.red}, ${colors.red});
   }

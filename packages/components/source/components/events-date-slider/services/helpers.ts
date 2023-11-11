@@ -122,6 +122,7 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
 
       dateElements.forEach((dateElement) => {
         dateElement.style.width = `${dateElementSize}px`;
+        dateElement.style.justifyContent = `center`;
 
         if (isMobile) {
           dateElement.style.justifyContent = `center`;

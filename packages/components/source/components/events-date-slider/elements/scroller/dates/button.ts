@@ -58,20 +58,8 @@ export const ButtonStyles = `
     left: 0;
   }
   
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${BACK_ARROW_CLASS} {
-      left: -${spacing.md};
-    }
-  }
-  
   :host .${FORWARD_ARROW_CLASS} {
     right: 0;
-  }
-  
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${FORWARD_ARROW_CLASS} {
-      right: -${spacing.md};
-    }
   }
 
   :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} {

@@ -16,16 +16,16 @@ export const IntroStyles = `
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
     :host .${INTRO_CONTAINER_CLASS} {
-      padding-right: 48px;
+      padding-right: 24px;
       padding-left: 0;
-      width: 140px;
+      width: 200px;
       margin-bottom: 0;
     }
   }
 
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
     ::slotted(div[slot="${SLOTS.INTRODUCTION_SLOT_NAME}"]) {
-      width: 140px;
+      width: 100%;
     }
   }
 `;

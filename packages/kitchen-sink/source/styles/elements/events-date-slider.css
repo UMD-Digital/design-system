@@ -13,7 +13,6 @@
     margin-bottom: 0;
 
     @media (max-width: 768px) {
-      text-wrap: nowrap;
       font-size: 14px !important;
       font-weight: 500 !important;
     }

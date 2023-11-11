@@ -1,3 +1,4 @@
+import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { MakeSlot } from 'helpers/ui';
 import { CHEVRON_SMALL } from 'assets/icons';
 import { ElementType } from '../component';
@@ -14,20 +15,22 @@ export const PrimaryStyles = `
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} {
     display: inline-flex;
     position: relative;
-    white-space: nowrap;
   }
 
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} ::slotted(a) {
     font-size: 16px;
+    white-space: nowrap;
   }
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
+    align-self: flex-start;
+    margin-top: 5px;
     margin-left: 8px;
     transition: transform .5s;
   }
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} svg {
-    fill: #e21833;
+    fill: ${colors.red};
     height: 16px;
     transform: rotate(0deg);
     transition: fill .5s,transform .5s;

@@ -52,9 +52,18 @@ export const EventSize = ({ element }: { element: ElementType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const wrapperElement = shadowRoot.querySelector(
     `.${ELEMENTS.PRIMARLY_LINK_WRAPPER}`,
-  );
+  ) as HTMLDivElement;
 
   if (!wrapperElement) return;
+  let width = wrapperElement.clientWidth;
 
-  element.style.width = `${wrapperElement.clientWidth}px`;
+  if (width > 230) {
+    width = 230;
+    const slottedLink = element.querySelector(
+      `[slot="${SLOTS.PRIMARY_LINK}"]`,
+    ) as HTMLAnchorElement;
+    slottedLink.style.whiteSpace = `initial`;
+  }
+
+  element.style.width = `${width}px`;
 };

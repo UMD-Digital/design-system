@@ -1,0 +1,7 @@
+/* Styles that should be loaded on the website as defaults */
+
+umd-element-card-overlay {
+  &[theme='dark'] * {
+    color: theme(colors.white);
+  }
+}

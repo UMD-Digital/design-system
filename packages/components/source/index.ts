@@ -1,9 +1,9 @@
 import { MakeDefaultStyleTag } from 'helpers/ui';
-import { Load as AlertLoader } from './components/alert';
-import { Load as CarouselCardsLoader } from './components/carousel-cards';
-import { Load as DateSliderLoader } from './components/events-date-slider';
-import { Load as FooterLoader } from './components/footer';
-import { Load as NavDropdownLoader } from './components/nav-item';
+import { Load as AlertLoader } from './components/alert/component';
+import { Load as CarouselCardsLoader } from './components/carousel-cards/component';
+import { Load as DateSliderLoader } from './components/events-date-slider/component';
+import { Load as FooterLoader } from './components/footer/component';
+import { Load as NavDropdownLoader } from './components/nav-item/component';
 
 let styleString = AlertLoader();
 styleString += CarouselCardsLoader();

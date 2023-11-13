@@ -11,6 +11,7 @@ export const ELEMENT_NAME = 'umd-element-card-overlay';
 export type CardType = UMDCardOverlayElement;
 export class UMDCardOverlayElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _theme = 'light';
 
   constructor() {
     super();
@@ -24,17 +25,16 @@ export class UMDCardOverlayElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [];
+    return ['theme'];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
 
   connectedCallback() {
     const element = this;
+    element._theme = element.getAttribute('theme') || element._theme;
 
     const container = CreateShadowDom({ element });
-
-    console.log('called');
 
     this._shadow.appendChild(container);
   }

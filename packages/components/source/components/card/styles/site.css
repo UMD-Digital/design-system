@@ -1,1 +1,21 @@
 /* Styles that should be loaded on the website as defaults */
+
+umd-element-card {
+  &[theme='dark'] * {
+    color: theme(colors.white);
+  }
+
+  & [slot='content'] {
+    & * + * {
+      margin-top: theme(spacing.min);
+    }
+
+    & .umd-sans-smaller + * {
+      margin-top: theme(spacing.min);
+    }
+
+    & * + .umd-sans-min {
+      margin-top: theme(spacing.min);
+    }
+  }
+}

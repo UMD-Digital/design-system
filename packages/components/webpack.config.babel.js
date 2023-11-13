@@ -25,6 +25,7 @@ const baseConfig = {
 const componentsFiles = {
   index: path.resolve('source/index'),
   alert: path.resolve('source/components/alert'),
+  card: path.resolve('source/components/card'),
   carouselCards: path.resolve('source/components/carousel-cards'),
   eventsDateSlider: path.resolve('source/components/events-date-slider'),
   footer: path.resolve('source/components/footer'),

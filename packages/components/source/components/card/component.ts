@@ -38,3 +38,13 @@ export class UMDCardElement extends HTMLElement {
     this._shadow.appendChild(container);
   }
 }
+
+export const GetDefaultStyles = () => require('./styles/site.css').toString();
+export const Load = () => {
+  if (!window.customElements.get(ELEMENT_NAME)) {
+    window.UMDCardElement = UMDCardElement;
+    window.customElements.define(ELEMENT_NAME, UMDCardElement);
+
+    return GetDefaultStyles();
+  }
+};

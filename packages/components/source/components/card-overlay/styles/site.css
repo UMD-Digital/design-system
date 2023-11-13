@@ -4,4 +4,8 @@ umd-element-card-overlay {
   &[theme='dark'] * {
     color: theme(colors.white);
   }
+
+  & * {
+    color: theme(colors.black);
+  }
 }

@@ -85,3 +85,14 @@ export class UMDAlertElement extends HTMLElement {
     this._shadow.appendChild(domContent);
   }
 }
+
+export const Load = () => {
+  if (!window.customElements.get(ELEMENT_NAME)) {
+    const GetDefaultStyles = () => require('./styles/site.css').toString();
+
+    window.UMDAlertElement = UMDAlertElement;
+    window.customElements.define(ELEMENT_NAME, UMDAlertElement);
+
+    return GetDefaultStyles();
+  }
+};

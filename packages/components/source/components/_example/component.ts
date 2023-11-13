@@ -35,3 +35,14 @@ export class UMDExampleElement extends HTMLElement {
     this._shadow.appendChild(container);
   }
 }
+
+export const Load = () => {
+  if (!window.customElements.get(ELEMENT_NAME)) {
+    const GetDefaultStyles = () => require('./styles/site.css').toString();
+
+    window.UMDExampleElement = UMDExampleElement;
+    window.customElements.define(ELEMENT_NAME, UMDExampleElement);
+
+    return GetDefaultStyles();
+  }
+};

@@ -46,3 +46,14 @@ export class UMDCarouselCardsElement extends HTMLElement {
     EventScrollCarousel({ element: this });
   }
 }
+
+export const Load = () => {
+  if (!window.customElements.get(ELEMENT_NAME)) {
+    const GetDefaultStyles = () => require('./styles/site.css').toString();
+
+    window.UMDCarouselCardsElement = UMDCarouselCardsElement;
+    window.customElements.define(ELEMENT_NAME, UMDCarouselCardsElement);
+
+    return GetDefaultStyles();
+  }
+};

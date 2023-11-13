@@ -103,3 +103,13 @@ export class UMDNavItemElement extends HTMLElement {
     EventButtonClick({ element });
   }
 }
+
+export const Load = () => {
+  if (!window.customElements.get(ELEMENT_NAME)) {
+    const GetDefaultStyles = () => require('./styles/site.css').toString();
+    window.UMDNavItemElement = UMDNavItemElement;
+    window.customElements.define(ELEMENT_NAME, UMDNavItemElement);
+
+    return GetDefaultStyles();
+  }
+};

@@ -39,3 +39,14 @@ export class UMDFooterElement extends HTMLElement {
     this._shadow.appendChild(CreateElement({ element }));
   }
 }
+
+export const Load = () => {
+  if (!window.customElements.get(ELEMENT_NAME)) {
+    const GetDefaultStyles = () => require('./styles/site.css').toString();
+
+    window.UMDFooterElement = UMDFooterElement;
+    window.customElements.define(ELEMENT_NAME, UMDFooterElement);
+
+    return GetDefaultStyles();
+  }
+};

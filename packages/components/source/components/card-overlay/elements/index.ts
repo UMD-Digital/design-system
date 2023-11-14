@@ -27,7 +27,7 @@ const VariantThemeStyles = `
 
 const VariantCTAIconStyles = `
   .${CARD_OVERLAY_CONTAINER}[data-cta-icon="true"] .${CARD_OVERLAY_TEXT_CONTAINER} {
-    padding-right: 80px;
+    padding-right: 40px;
   }
 `;
 
@@ -36,7 +36,8 @@ const VariantImageStyles = `
     color: ${colors.white};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"],
+  .${CARD_OVERLAY_CONTAINER}[data-cta-icon="true"] {
     display: flex;
     align-items: flex-end;
     padding-bottom: ${spacing.md};
@@ -108,7 +109,10 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
   textContainer.classList.add(CARD_OVERLAY_TEXT_CONTAINER);
 
   textContainer.appendChild(content);
-  textContainer.appendChild(cta);
+
+  if (cta) {
+    textContainer.appendChild(cta);
+  }
 
   container.setAttribute('theme', element._theme);
   container.classList.add(CARD_OVERLAY_CONTAINER);

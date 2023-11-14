@@ -1,6 +1,6 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { MakeSlot } from 'helpers/ui';
-import { SLOTS, ELEMENTS } from '../globals';
+import { SLOTS } from '../globals';
 import { CardType } from '../component';
 
 const CARD_OVERLAY_CONTAINER_CTA = 'umd-card-overlay-container-cta';

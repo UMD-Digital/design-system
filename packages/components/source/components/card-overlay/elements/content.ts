@@ -5,7 +5,8 @@ import { CardType } from '../component';
 
 export const ContentStyles = `
   .${ELEMENTS.CONTENT_CONTAINER} {
-
+    position: relative;
+    z-index: 9;
   }
 `;
 

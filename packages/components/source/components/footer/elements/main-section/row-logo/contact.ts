@@ -34,6 +34,10 @@ const socialOverwriteStyles = `
 `;
 
 export const ContactContainerStyles = `
+  .${CONTACT_CONTAINER} {
+    background-color: currnetColor;
+  }
+
   @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${CONTACT_CONTAINER} {
       padding-top: ${spacing['md']};

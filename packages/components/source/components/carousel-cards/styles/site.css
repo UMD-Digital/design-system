@@ -1,1 +1,8 @@
 /* Styles that should be loaded on the website as defaults */
+
+umd-element-carousel-cards {
+  & [slot='cards'],
+  & [slot='intro'] {
+    background-color: theme(colors.black);
+  }
+}

@@ -1,8 +1,14 @@
 /* Styles that should be loaded on the website as defaults */
 
 umd-element-card {
-  &[theme='dark'] * {
-    color: theme(colors.white);
+  &[theme='dark'] {
+    * {
+      color: theme(colors.white);
+    }
+
+    & [slot='content'] {
+      background-color: theme(colors.black);
+    }
   }
 
   & [slot='content'] {

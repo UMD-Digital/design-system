@@ -1,9 +1,18 @@
 /* Styles that should be loaded on the website as defaults */
 
-umd-element-events-date-slider [slot='introduction'] * {
-  margin-bottom: 4px;
+umd-element-events-date-slider {
+  &[theme='dark'] {
+    & [slot='date-list'],
+    & [slot='introduction'] {
+      background-color: theme(colors.gray.darker);
+    }
+  }
 
-  &:last-child {
-    margin-bottom: 0;
+  & [slot='introduction'] * {
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }

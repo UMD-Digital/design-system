@@ -27,6 +27,13 @@ const VariantImageStyles = `
     left: ${spacing.md};
   }
 
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    margin-top: ${spacing.min};
+  }
+
   .${CARD_OVERLAY_TINT_OVERLAY} {
     position: absolute;
     top: 0;

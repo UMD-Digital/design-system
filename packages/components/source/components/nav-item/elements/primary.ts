@@ -1,6 +1,6 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { MakeSlot } from 'helpers/ui';
-import { CHEVRON_SMALL } from 'assets/icons';
+import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { ElementType } from '../component';
 import { CreateDropdown, DropdownStyles } from './dropdown';
 import { SLOTS, ELEMENTS } from '../globals';
@@ -44,7 +44,7 @@ const CreateButton = ({ element }: { element: ElementType }) => {
   const button = document.createElement('button');
 
   button.classList.add(ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON);
-  button.innerHTML = CHEVRON_SMALL;
+  button.innerHTML = CHEVRON_SMALL_ICON;
   button.addEventListener('click', () => element.buttonClick());
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', `nav-links-`);

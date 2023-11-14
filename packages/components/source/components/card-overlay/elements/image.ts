@@ -19,6 +19,8 @@ export const ImageStyles = `
     height: 100%;
     object-fit: cover;
     object-position: center;
+    transform: scale(1);
+    transition: transform 0.5s ease-in-out;
   }
 `;
 

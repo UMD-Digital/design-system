@@ -140,6 +140,7 @@ export const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
 
   closeButton.classList.add(CLOSE_BUTTON_CLASS);
   closeButton.innerHTML = CLOSE_BUTTON_ICON;
+  closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
     EventClose({ element });
     SetLocalString();

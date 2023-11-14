@@ -36,10 +36,10 @@ const VariantImageStyles = `
     color: ${colors.white};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${CARD_OVERLAY_TEXT_CONTAINER} {
-    position: absolute;
-    bottom: ${spacing.md};
-    left: ${spacing.md};
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: ${spacing.md};
   }
 
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {

@@ -1,5 +1,5 @@
 import { MakeSlot } from 'helpers/ui';
-import { CheckForImageSlot } from '../services/helper';
+import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { CardType } from '../component';
 
@@ -16,7 +16,8 @@ export const CreateImage = ({ element }: { element: CardType }) => {
     `[slot="${SLOTS.IMAGE}"]`,
   ) as HTMLImageElement;
   const container = document.createElement('div');
-  const isProperImage = CheckForImageSlot({ element });
+
+  const isProperImage = CheckForImageAlt({ element, slotRef: SLOTS.IMAGE });
 
   container.classList.add(IMAGE_CONTAINER);
 

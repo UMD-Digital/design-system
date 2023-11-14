@@ -31,3 +31,23 @@ export const MakeDefaultStyleTag = ({
 
   body.appendChild(style);
 };
+
+export const CheckForImageAlt = ({
+  element,
+  slotRef,
+}: {
+  element: HTMLElement;
+  slotRef: string;
+}) => {
+  const imageSlot = element.querySelector(`[slot="${slotRef}"]`);
+
+  if (imageSlot) {
+    const altText = imageSlot.getAttribute('alt');
+    if (!altText) {
+      console.error('Image elements require alt text');
+      return false;
+    }
+  }
+
+  return true;
+};

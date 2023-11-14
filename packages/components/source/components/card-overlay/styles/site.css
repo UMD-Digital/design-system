@@ -8,4 +8,18 @@ umd-element-card-overlay {
   & * {
     color: theme(colors.black);
   }
+
+  & [slot='content'] {
+    & * + * {
+      margin-top: theme(spacing.min);
+    }
+
+    & .umd-sans-smaller + * {
+      margin-top: theme(spacing.min);
+    }
+
+    & * + .umd-sans-min {
+      margin-top: theme(spacing.min);
+    }
+  }
 }

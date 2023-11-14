@@ -1,12 +1,43 @@
 /* Styles that should be loaded on the website as defaults */
 
 umd-element-card-overlay {
+  & a {
+    background-image: linear-gradient(theme(colors.black), theme(colors.black));
+
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    display: inline;
+    position: relative;
+    transition: background-size 0.4s;
+
+    &:hover,
+    &:focus {
+      background-size: 100% 1px;
+      color: theme(colors.black);
+    }
+  }
+
   &[theme='dark'] * {
     color: theme(colors.white);
   }
 
-  & * {
-    color: theme(colors.black);
+  &[theme='dark'] a {
+    background-image: linear-gradient(theme(colors.white), theme(colors.white));
+
+    &:hover,
+    &:focus {
+      color: theme(colors.white);
+    }
+  }
+
+  &[data-image='true'] a {
+    background-image: linear-gradient(theme(colors.white), theme(colors.white));
+
+    &:hover,
+    &:focus {
+      color: theme(colors.white);
+    }
   }
 
   & [slot='content'] {

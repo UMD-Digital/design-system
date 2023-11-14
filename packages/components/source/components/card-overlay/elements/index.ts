@@ -1,8 +1,9 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { CreateContent, ContentStyles } from './content';
-import { CreateCta, CtaStyles } from './cta';
 import { CreateImage, ImageStyles } from './image';
+import { CreateCta, CtaStyles } from './cta';
+import { CreateCtaIcon, CtaIconStyles } from './cta-icon';
 import { CardType } from '../component';
 import { ELEMENTS, SLOTS } from '../globals';
 
@@ -15,12 +16,26 @@ const VariantThemeStyles = `
     background-color: ${colors.gray.darker};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CONTENT_CONTAINER} {
+  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} {
+    background-color: ${colors.gray.darker};
+  }
 
+  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} svg {
+    fill: ${colors.white};
+  }
+`;
+
+const VariantCTAIconStyles = `
+  .${CARD_OVERLAY_CONTAINER}[data-cta-icon="true"] .${CARD_OVERLAY_TEXT_CONTAINER} {
+    padding-right: 80px;
   }
 `;
 
 const VariantImageStyles = `
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] * {
+    color: ${colors.white};
+  }
+
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${CARD_OVERLAY_TEXT_CONTAINER} {
     position: absolute;
     bottom: ${spacing.md};
@@ -34,13 +49,23 @@ const VariantImageStyles = `
     margin-top: ${spacing.min};
   }
 
-  .${CARD_OVERLAY_TINT_OVERLAY} {
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${CARD_OVERLAY_TINT_OVERLAY} {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"]:hover .${CARD_OVERLAY_TINT_OVERLAY} {
+    opacity: .6;
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"]:hover .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img {
+    transform: scale(1.06);
   }
 `;
 
@@ -61,8 +86,10 @@ export const ComponentStyles = `
   ${ImageStyles}
   ${ContentStyles}
   ${CtaStyles}
+  ${CtaIconStyles}
   ${VariantThemeStyles}
   ${VariantImageStyles}
+  ${VariantCTAIconStyles}
 `;
 
 export const CreateShadowDom = ({ element }: { element: CardType }) => {
@@ -72,9 +99,11 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
   const hasImage = element.querySelector(
     `[slot="${SLOTS.IMAGE}"]`,
   ) as HTMLImageElement;
+
   const image = CreateImage({ element });
   const content = CreateContent({ element });
   const cta = CreateCta({ element });
+  const ctaIcon = CreateCtaIcon({ element });
 
   textContainer.classList.add(CARD_OVERLAY_TEXT_CONTAINER);
 
@@ -88,8 +117,14 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
 
   if (hasImage) {
     container.setAttribute('data-image', 'true');
+    element.setAttribute('data-image', 'true');
     tintOverlay.classList.add(CARD_OVERLAY_TINT_OVERLAY);
     container.appendChild(tintOverlay);
+  }
+
+  if (ctaIcon) {
+    container.setAttribute('data-cta-icon', 'true');
+    container.appendChild(ctaIcon);
   }
 
   container.appendChild(textContainer);

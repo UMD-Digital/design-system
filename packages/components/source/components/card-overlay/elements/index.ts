@@ -16,11 +16,51 @@ const VariantThemeStyles = `
     background-color: ${colors.gray.darker};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} {
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
+    background-color: ${colors.gray.darker};
+    border: 1px solid ${colors.white};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg path,
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg path {
+    fill: ${colors.white};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
     background-color: ${colors.gray.darker};
   }
 
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} svg {
+    fill: ${colors.white};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
+  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
+    background-color: ${colors.white};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
+  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg {
+    fill: ${colors.gray.darker};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
+    background-color: ${colors.white};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a svg {
+    fill: ${colors.gray.darker};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
+    background-color: ${colors.gray.darker};
+    border: none;
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg {
     fill: ${colors.white};
   }
 `;

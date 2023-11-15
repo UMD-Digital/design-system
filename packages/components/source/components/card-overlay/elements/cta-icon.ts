@@ -9,20 +9,25 @@ export const CtaIconStyles = `
     position: absolute;
     bottom: ${spacing.sm};
     right: ${spacing.sm};
-    background-color: ${colors.white};
+    z-index: 9999;
+  }
+
+  .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
     border-radius: 50%;
     height: 40px;
     width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    background-color: ${colors.white};
+    transition: background-color 0.3s ease-in-out;
   }
 
   .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} svg {
     height: 15px;
     width: 15px;
     fill: ${colors.gray.darker};
+    transition: background-color 0.3s ease-in-out;
   }
 `;
 

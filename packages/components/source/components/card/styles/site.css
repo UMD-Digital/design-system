@@ -2,7 +2,8 @@
 
 umd-element-card {
   &[theme='dark'] {
-    & [slot='content'] {
+    & [slot='headline'],
+    & [slot='body'] {
       *,
       & .umd-sans-min,
       & .umd-rich-text {
@@ -13,7 +14,8 @@ umd-element-card {
     }
   }
 
-  & [slot='content'] {
+  & [slot='headline'],
+  & [slot='body'] {
     & * {
       color: theme(colors.black);
     }

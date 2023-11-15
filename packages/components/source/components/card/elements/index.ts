@@ -1,18 +1,19 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { CreateImage, ImageStyles } from './image';
-import { CreateContent, ContentStyles } from './content';
+import { CreateHeadline, HeadlineStyles } from './headline';
+import { CreateBody, BodyStyles } from './body';
 import { CardType } from '../component';
-import { ELEMENTS } from '../globals';
 
 const CARD_CONTAINER = 'umd-card-container';
+const CARD_TEXT_CONTAINER = 'umd-card-text-container';
 
 const VariantThemeStyles = `
   .${CARD_CONTAINER}[theme="dark"] {
     background-color: ${colors.gray.darker};
   }
 
-  .${CARD_CONTAINER}[theme="dark"] .${ELEMENTS.CONTENT_CONTAINER} {
+  .${CARD_CONTAINER}[theme="dark"] .${CARD_TEXT_CONTAINER} {
     padding: ${spacing.md};
   }
 `;
@@ -30,7 +31,7 @@ const VariantBorderStyles = `
     border: 1px solid ${colors.gray.light}
   }
 
-  .${CARD_CONTAINER}[border="true"] .${ELEMENTS.CONTENT_CONTAINER} {
+  .${CARD_CONTAINER}[border="true"] .${CARD_TEXT_CONTAINER} {
     padding: ${spacing.md};
   }
 `;
@@ -45,8 +46,13 @@ export const ComponentStyles = `
     max-width: 560px;
   }
 
+  .${CARD_TEXT_CONTAINER} {
+    padding-top: ${spacing.md};
+  }
+
   ${ImageStyles}
-  ${ContentStyles}
+  ${HeadlineStyles}
+  ${BodyStyles}
   ${VariantThemeStyles}
   ${VariantAlignedStyles}
   ${VariantBorderStyles}
@@ -54,17 +60,22 @@ export const ComponentStyles = `
 
 export const CreateShadowDom = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
+  const textContainer = document.createElement('div');
   const image = CreateImage({ element });
-  const content = CreateContent({ element });
-
-  container.classList.add(CARD_CONTAINER);
+  const headline = CreateHeadline({ element });
+  const body = CreateBody({ element });
 
   container.setAttribute('theme', element._theme);
   container.setAttribute('aligned', element._aligned);
   container.setAttribute('border', element._border);
 
+  textContainer.classList.add(CARD_TEXT_CONTAINER);
+  textContainer.appendChild(headline);
+  textContainer.appendChild(body);
+
+  container.classList.add(CARD_CONTAINER);
   container.appendChild(image);
-  container.appendChild(content);
+  container.appendChild(textContainer);
 
   return container;
 };

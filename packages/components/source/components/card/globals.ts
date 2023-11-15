@@ -1,9 +1,8 @@
 export const BREAKPOINTS = {};
-export const ELEMENTS = {
-  CONTENT_CONTAINER: 'umd-card-content-container',
-};
+export const ELEMENTS = {};
 export const SLOTS = {
   IMAGE: 'image',
-  CONTENT: 'content',
+  HEADLINE: 'headline',
+  BODY: 'body',
 };
 export const VARIABLES = {};

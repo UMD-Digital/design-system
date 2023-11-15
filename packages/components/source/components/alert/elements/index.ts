@@ -83,7 +83,7 @@ const BodyStyles = `
 
 export const ComponentStyles = `
   :host {
-    display: block !important;
+    display: block;
     container: umd-alert / inline-size; 
   }
   

@@ -20,7 +20,7 @@ const CAROUSEL_LOCK = 'umd-element-carousel-lock';
 
 export const ComponentStyles = `
   :host {
-    display: block !important;
+    display: block;
     position: relative !important;
     container: umd-carousel-card / inline-size; 
   }

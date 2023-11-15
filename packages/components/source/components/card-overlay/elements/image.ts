@@ -34,7 +34,8 @@ export const CreateImage = ({ element }: { element: CardType }) => {
   container.classList.add(ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER);
 
   if (isProperImage && imageRef) {
-    container.appendChild(imageRef);
+    const image = imageRef.cloneNode(true) as HTMLImageElement;
+    container.appendChild(image);
   }
 
   return container;

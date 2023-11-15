@@ -39,6 +39,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
 
     this._shadow.appendChild(content);
     OnLoadStyles({ element });
+
     window.addEventListener('resize', Debounce(resize, 20));
   }
 

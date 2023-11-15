@@ -41,7 +41,7 @@ export const ContainerStyles = `
 
 export const ComponentStyles = `
     :host {
-      display: block !important;
+      display: block;
       position: relative !important;
       text-wrap: pretty;
       container: dates-slider / inline-size; 

@@ -112,7 +112,7 @@ const VariantImageStyles = `
 
 export const ComponentStyles = `
   :host {
-    display: block !important;
+    display: block;
     container: umd-card / inline-size; 
   }
 

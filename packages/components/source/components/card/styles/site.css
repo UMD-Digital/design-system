@@ -2,16 +2,30 @@
 
 umd-element-card {
   &[theme='dark'] {
-    * {
-      color: theme(colors.white);
-    }
-
     & [slot='content'] {
-      background-color: theme(colors.black);
+      *,
+      & .umd-sans-min,
+      & .umd-rich-text {
+        color: theme(colors.white);
+      }
+
+      background-color: theme(colors.gray.darker);
     }
   }
 
   & [slot='content'] {
+    & * {
+      color: theme(colors.black);
+    }
+
+    & .umd-rich-text {
+      color: theme(colors.gray.dark);
+    }
+
+    & .umd-sans-min {
+      color: theme(colors.gray.medium);
+    }
+
     & * + * {
       margin-top: theme(spacing.min);
     }

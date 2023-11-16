@@ -16,14 +16,13 @@ export const CreateImage = ({ element }: { element: CardType }) => {
   const imageRef = element.querySelector(
     `[slot="${SLOTS.IMAGE}"]`,
   ) as HTMLImageElement;
-  const clonedImage = imageRef.cloneNode(true) as HTMLImageElement;
   const container = document.createElement('div');
-
   const isProperImage = CheckForImageAlt({ element, slotRef: SLOTS.IMAGE });
 
   container.classList.add(IMAGE_CONTAINER);
 
   if (isProperImage && imageRef) {
+    const clonedImage = imageRef.cloneNode(true) as HTMLImageElement;
     container.appendChild(clonedImage);
   }
 

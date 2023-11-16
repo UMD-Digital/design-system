@@ -3,8 +3,15 @@ umd-element-carousel-cards:not(:defined) {
 }
 
 umd-element-carousel-cards {
-  & [slot='cards'],
   & [slot='intro'] {
-    background-color: theme(colors.black);
+    & .umd-rich-text,
+    & a[class^='umd-cta'] {
+      color: theme(colors.white);
+    }
+
+    & .umd-rich-text a:hover,
+    & .umd-rich-text a:focus {
+      color: theme(colors.gold);
+    }
   }
 }

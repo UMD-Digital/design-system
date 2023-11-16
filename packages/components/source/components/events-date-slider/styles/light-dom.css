@@ -10,11 +10,11 @@ umd-element-events-date-slider {
     }
   }
 
-  & [slot='introduction'] * {
-    margin-bottom: 4px;
+  & [slot='introduction'] > * {
+    margin-top: theme(spacing.min);
 
     &:last-child {
-      margin-bottom: 0;
+      margin-top: 0;
     }
   }
 }

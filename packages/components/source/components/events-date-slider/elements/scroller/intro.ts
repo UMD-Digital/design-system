@@ -1,3 +1,4 @@
+import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { MakeSlot } from 'helpers/ui';
 import { BREAKPOINTS, SLOTS } from '../../globals';
 
@@ -5,17 +6,14 @@ const INTRO_CONTAINER_CLASS = 'umd-element-date-slider-intro-container';
 
 export const IntroStyles = `
   :host .${INTRO_CONTAINER_CLASS} {
-    margin-bottom: 24px;
-  }
-  
-  @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
-    :host .${INTRO_CONTAINER_CLASS} {
-      text-align: center;
-    }
+    margin-bottom: ${spacing.md};
+    padding: 0 ${spacing.lg};
+    position: relative;
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
     :host .${INTRO_CONTAINER_CLASS} {
+      padding: 0;
       padding-right: 24px;
       padding-left: 0;
       width: 200px;

@@ -1,5 +1,4 @@
 import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
 import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
 import { ELEMENT_TYPE } from '../../../component';
 import { ButtonVisibilityLogic } from '../../../services/helpers';

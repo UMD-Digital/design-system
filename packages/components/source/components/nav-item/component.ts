@@ -75,7 +75,11 @@ export class UMDNavItemElement extends HTMLElement {
 
     setTimeout(() => {
       DropdownPositionPerViewPort({ element });
-    }, 2000);
+    }, 500);
+
+    setTimeout(() => {
+      DropdownPositionPerViewPort({ element });
+    }, 1000);
 
     // Events
 

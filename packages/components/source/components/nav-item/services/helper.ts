@@ -39,15 +39,16 @@ export const DropdownPositionPerViewPort = ({
   const dropdownContainer = shadowRoot.querySelector(
     `.${ELEMENTS.DROPDOWN_CONTAINER}`,
   ) as HTMLDivElement;
+  const width = element.offsetWidth;
 
   if (!dropdownContainer) return;
 
-  if (elementBounds.left < 100) {
+  if (elementBounds.left + width < 100) {
     dropdownContainer.style.left = '0';
     dropdownContainer.style.transform = 'translateX(0)';
   }
 
-  if (window.innerWidth - elementBounds.right < 100) {
+  if (window.innerWidth - (elementBounds.right + width) < 100) {
     dropdownContainer.style.right = '0';
     dropdownContainer.style.left = 'inherit';
     dropdownContainer.style.transform = 'translateX(0)';

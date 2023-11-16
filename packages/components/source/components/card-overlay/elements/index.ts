@@ -116,6 +116,10 @@ export const ComponentStyles = `
     container: umd-card / inline-size; 
   }
 
+  :host * {
+    box-sizing: border-box;
+  }
+
   .${CARD_OVERLAY_CONTAINER} {
     max-width: 560px;
     min-height: 300px;

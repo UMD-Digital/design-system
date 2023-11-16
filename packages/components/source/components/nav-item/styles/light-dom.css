@@ -1,8 +1,6 @@
-/* Styles that should be loaded on the website as defaults */
-/* Clean up - only include styles needed for component */
-
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
+umd-element-nav-item:not(:defined) {
+  display: none;
+}
 
 umd-element-nav-item {
   display: block;
@@ -10,6 +8,8 @@ umd-element-nav-item {
   & a {
     font-size: 14px;
     font-weight: 800;
+    color: theme(colors.black);
+    text-decoration: none;
   }
 
   & [slot='primary-link'] {

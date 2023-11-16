@@ -16,7 +16,7 @@ export class UMDExampleElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
 
-    const ElementStyles = require('./styles/component.css');
+    const ElementStyles = require('./styles/shadow-dom.css');
     const styles = `${ElementStyles.toString()}${ComponentStyles}`;
     const template = MakeTemplate({ styles });
 
@@ -38,7 +38,7 @@ export class UMDExampleElement extends HTMLElement {
 
 export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME)) {
-    const GetDefaultStyles = () => require('./styles/site.css').toString();
+    const GetDefaultStyles = () => require('./styles/light-dom.css').toString();
 
     window.UMDExampleElement = UMDExampleElement;
     window.customElements.define(ELEMENT_NAME, UMDExampleElement);

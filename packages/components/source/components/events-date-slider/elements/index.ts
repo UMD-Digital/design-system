@@ -43,8 +43,12 @@ export const ComponentStyles = `
     :host {
       display: block;
       position: relative !important;
-      text-wrap: pretty;
       container: dates-slider / inline-size; 
+    }
+
+    :host * {
+      box-sizing: border-box;
+      text-wrap: pretty;
     }
   
     ${ContainerStyles}

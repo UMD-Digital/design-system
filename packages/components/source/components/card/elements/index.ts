@@ -42,6 +42,14 @@ export const ComponentStyles = `
     container: umd-card / inline-size; 
   }
 
+  :host * {
+    box-sizing: border-box;
+  }
+
+  :host img {
+    max-width: 100%;
+  }
+
   .${CARD_CONTAINER} {
     max-width: 560px;
   }

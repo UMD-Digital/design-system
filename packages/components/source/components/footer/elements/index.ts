@@ -7,8 +7,12 @@ export const ComponentStyles = `
   :host {
     display: none;
     position: relative !important;
-    text-wrap: pretty;
     container: umd-footer / inline-size;
+  }
+
+  :host * {
+    box-sizing: border-box;
+    text-wrap: pretty;
   }
 
   ${MainContainerStyles}

@@ -32,7 +32,7 @@ export class UMDNavItemElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
 
-    const elementStyles = require('./styles/component.css');
+    const elementStyles = require('./styles/shadow-dom.css');
     const styles = `${elementStyles.toString()}${ComponentStyles}`;
     const template = MakeTemplate({ styles });
 
@@ -110,7 +110,7 @@ export class UMDNavItemElement extends HTMLElement {
 
 export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME)) {
-    const GetDefaultStyles = () => require('./styles/site.css').toString();
+    const GetDefaultStyles = () => require('./styles/light-dom.css').toString();
     window.UMDNavItemElement = UMDNavItemElement;
     window.customElements.define(ELEMENT_NAME, UMDNavItemElement);
 

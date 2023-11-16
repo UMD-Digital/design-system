@@ -1,4 +1,6 @@
-/* Styles that should be loaded on the website as defaults */
+umd-element-carousel-cards:not(:defined) {
+  display: none;
+}
 
 umd-element-carousel-cards {
   & [slot='cards'],

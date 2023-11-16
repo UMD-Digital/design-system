@@ -1,4 +1,6 @@
-/* Styles that should be loaded on the website as defaults */
+umd-element-footer:not(:defined) {
+  display: none;
+}
 
 umd-element-footer {
   & a,

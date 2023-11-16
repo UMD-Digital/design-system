@@ -1,4 +1,6 @@
-/* Styles that should be loaded on the website as defaults */
+umd-element-card-overlay:not(:defined) {
+  display: none;
+}
 
 umd-element-card-overlay {
   & a {

@@ -86,6 +86,10 @@ export const ComponentStyles = `
     display: block;
     container: umd-alert / inline-size; 
   }
+
+  :host * {
+    box-sizing: border-box;
+  }
   
   :host button {
     background-color: transparent !important;
@@ -117,7 +121,7 @@ export const ComponentStyles = `
     margin-bottom: ${spacing.sm};
     display: block;
   }
-  
+
   ${IconStyles}
   ${ButtonStyles}
   ${BodyStyles}
@@ -149,7 +153,6 @@ export const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   iconWrapper.classList.add(ELEMENTS.ICON_CLASS);
   iconWrapper.innerHTML = NOTIFICATION_ICON;
 
-  titleWrapper.classList.add('umd-sans-large');
   titleWrapper.classList.add(TITLE_CLASS);
   titleWrapper.appendChild(titleSlot);
 

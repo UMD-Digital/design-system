@@ -32,7 +32,7 @@ export const PrimaryStyles = `
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} svg {
     fill: ${colors.red};
     height: 16px;
-    transform: rotate(0deg);
+    transform: rotate(0deg) translateY(0);
     transition: fill .5s,transform .5s;
     width: 16px;
   }

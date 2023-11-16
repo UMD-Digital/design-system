@@ -19,8 +19,8 @@ export class UMDCardElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
 
-    const ElementStyles = require('./styles/component.css');
-    const styles = `${ElementStyles.toString()}${ComponentStyles}`;
+    const elementStyles = require('./styles/shadow-dom.css');
+    const styles = `${elementStyles.toString()}${ComponentStyles}`;
     const template = MakeTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
@@ -44,7 +44,8 @@ export class UMDCardElement extends HTMLElement {
   }
 }
 
-export const GetDefaultStyles = () => require('./styles/site.css').toString();
+export const GetDefaultStyles = () =>
+  require('./styles/light-dom.css').toString();
 export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME)) {
     window.UMDCardElement = UMDCardElement;

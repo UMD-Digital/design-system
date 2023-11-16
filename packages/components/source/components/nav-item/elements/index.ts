@@ -1,3 +1,4 @@
+import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
 import { fontFamily } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts.js';
 import { ElementType } from '../component';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
@@ -9,10 +10,23 @@ export const ComponentStyles = `
     container: umd-nav-item / inline-size; 
   }
 
+  :host * {
+    box-sizing: border-box;
+  }
+
+  :host button {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+
+  :host a,
   ::slotted(a) {
     font-family: ${fontFamily.sans};
     font-size: 14px;
     font-weight: 800;
+    color: ${colors.black};
+    text-decoration: none;
   }
 
   .${ELEMENTS.CONTAINER} {
@@ -30,7 +44,7 @@ export const ComponentStyles = `
 
   .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
-    transform: rotate(180deg);
+    transform: rotate(180deg) translateY(5px);
   }
 
   ${PrimaryStyles}

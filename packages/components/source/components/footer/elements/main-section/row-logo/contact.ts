@@ -16,8 +16,16 @@ const DEFAULT_HEADLINE_LINK = {
 const DEFAULT_ADDRESS_TITLE = 'Office of Marketing and Communications';
 const DEFAULT_ADDRESS_ONE = '2101 Turner Hall';
 const DEFAULT_ADDRESS_TWO = 'College Park, MD 20742';
-const DEFAULT_EMAIL = { url: 'mailto:omc@umd.edu', title: 'omc@umd.edu' };
-const DEFAULT_PHONE = { url: 'tel:3014051000', title: '301.405.1000' };
+const DEFAULT_EMAIL = {
+  url: 'mailto:omc@umd.edu',
+  title: 'omc@umd.edu',
+  label: 'Email: Office of the marketing and communications at omc@umd.edu',
+};
+const DEFAULT_PHONE = {
+  url: 'tel:3014051000',
+  title: '301.405.1000',
+  label: 'Call: 301-405-1000',
+};
 
 const socialOverwriteStyles = `
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
@@ -106,13 +114,22 @@ export const ContactContainerStyles = `
   ${socialOverwriteStyles}
 `;
 
-const makeLink = ({ url, title }: { url: string; title: string }) => {
+const makeLink = ({
+  url,
+  title,
+  label,
+}: {
+  url: string;
+  title: string;
+  label?: string;
+}) => {
   const link = document.createElement('a');
   const span = document.createElement('span');
   link.setAttribute('href', url);
   link.setAttribute('target', '_blank');
   link.setAttribute('rel', 'noopener noreferrer');
   link.innerText = title;
+  if (label) link.setAttribute('aria-label', label);
   link.appendChild(span);
   return link;
 };

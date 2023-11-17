@@ -20,6 +20,10 @@ export const CreateCampaignRow = ({ element }: { element: ELEMENT_TYPE }) => {
   link.href = 'https://fearlesslyforward.umd.edu';
   link.setAttribute('target', '_blank');
   link.setAttribute('rel', 'noopener noreferrer');
+  link.setAttribute(
+    'aria-label',
+    'Link to the Fearlessly Forward Brand website',
+  );
 
   link.innerHTML =
     theme === VARIABLES.THEME_OPTION_LIGHT ? CAMPAIGN_LOGO_DARK : CAMPAIGN_LOGO;

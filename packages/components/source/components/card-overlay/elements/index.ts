@@ -124,7 +124,7 @@ export const ComponentStyles = `
     max-width: 560px;
     min-height: 300px;
     position: relative;
-    background-color: ${colors.gray.light};
+    background-color: ${colors.gray.lightest};
     padding: ${spacing['4xl']} ${spacing.md};
   }
 

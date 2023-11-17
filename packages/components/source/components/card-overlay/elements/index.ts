@@ -137,6 +137,7 @@ export const ComponentStyles = `
   .${CARD_OVERLAY_CONTAINER} {
     max-width: 560px;
     min-height: 368px;
+    height: 100%;
     position: relative;
     background-color: ${colors.gray.lightest};
     padding: ${spacing['4xl']} ${spacing.md};

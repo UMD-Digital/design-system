@@ -3,23 +3,18 @@ umd-element-card:not(:defined) {
 }
 
 umd-element-card {
-  &[theme='dark'] {
-    & [slot='headline'],
-    & [slot='body'] {
-      *,
-      & .umd-sans-min,
-      & .umd-rich-text {
-        color: theme(colors.white);
-      }
-
-      background-color: theme(colors.gray.darker);
-    }
-  }
-
   & [slot='headline'],
   & [slot='body'] {
     & * {
       color: theme(colors.black);
+    }
+
+    & * + * {
+      margin-top: theme(spacing.min);
+    }
+
+    & a {
+      display: inline-block;
     }
 
     & .umd-rich-text {
@@ -29,17 +24,16 @@ umd-element-card {
     & .umd-sans-min {
       color: theme(colors.gray.medium);
     }
+  }
+}
 
-    & * + * {
-      margin-top: theme(spacing.min);
-    }
+umd-element-card[theme='dark'] {
+  & [slot='headline'],
+  & [slot='body'] {
+    background-color: theme(colors.gray.darker);
 
-    & .umd-sans-smaller + * {
-      margin-top: theme(spacing.min);
-    }
-
-    & * + .umd-sans-min {
-      margin-top: theme(spacing.min);
+    * {
+      color: theme(colors.white);
     }
   }
 }

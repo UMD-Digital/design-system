@@ -4,6 +4,7 @@ import { spacing } from '../tokens/layout';
 import { icons } from '../assets/icons';
 import { typography } from './typography';
 import { richTextlists } from './rich-text-lists';
+import { animatedLinks } from '../common/animated-links';
 
 const richTextBase = {
   '& > *': {
@@ -147,6 +148,13 @@ const richText = {
     ...blockquotes,
     ...tables,
     ...richTextlists,
+  },
+  '.umd-rich-text-dark': {
+    color: colors.white,
+
+    '& a': {
+      ...animatedLinks['.umd-fadein-simple-dark'],
+    },
   },
 };
 

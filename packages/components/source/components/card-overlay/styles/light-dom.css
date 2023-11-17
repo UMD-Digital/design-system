@@ -3,9 +3,8 @@ umd-element-card-overlay:not(:defined) {
 }
 
 umd-element-card-overlay {
-  & a {
+  & .umd-sans-larger a {
     background-image: linear-gradient(theme(colors.black), theme(colors.black));
-
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: 0 1px;
@@ -20,28 +19,6 @@ umd-element-card-overlay {
     }
   }
 
-  &[theme='dark'] * {
-    color: theme(colors.white);
-  }
-
-  &[theme='dark'] a {
-    background-image: linear-gradient(theme(colors.white), theme(colors.white));
-
-    &:hover,
-    &:focus {
-      color: theme(colors.white);
-    }
-  }
-
-  &[data-image='true'] a {
-    background-image: linear-gradient(theme(colors.white), theme(colors.white));
-
-    &:hover,
-    &:focus {
-      color: theme(colors.white);
-    }
-  }
-
   & [slot='content'] {
     & * + * {
       margin-top: theme(spacing.min);
@@ -53,6 +30,32 @@ umd-element-card-overlay {
 
     & * + .umd-sans-min {
       margin-top: theme(spacing.min);
+    }
+  }
+}
+
+umd-element-card-overlay[data-image='true'] {
+  & .umd-sans-larger a {
+    background-image: linear-gradient(theme(colors.white), theme(colors.white));
+
+    &:hover,
+    &:focus {
+      color: theme(colors.white);
+    }
+  }
+}
+
+umd-element-card-overlay[theme='dark'] {
+  & * {
+    color: theme(colors.white);
+  }
+
+  & .umd-sans-larger a {
+    background-image: linear-gradient(theme(colors.white), theme(colors.white));
+
+    &:hover,
+    &:focus {
+      color: theme(colors.white);
     }
   }
 }

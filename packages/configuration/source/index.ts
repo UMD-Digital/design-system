@@ -11,6 +11,7 @@ import { root } from './dependancies/root';
 
 import { skipContent } from './common/accessibility';
 import { typography } from './common/typography';
+import { animatedLinks } from './common/animated-links';
 import { richText } from './common/rich-text';
 import { umdFlexGrid } from './layout/umd-flex';
 import { umdGrid } from './layout/umd-grid';
@@ -23,6 +24,7 @@ import { umdLoader } from './elements/loader';
 const umdUtilities = { ...root };
 const umdComponents = {
   ...skipContent,
+  ...animatedLinks,
   ...richText,
   ...typography,
   ...umdGrid,

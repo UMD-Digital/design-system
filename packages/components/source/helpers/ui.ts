@@ -40,10 +40,18 @@ export const CheckForImageAlt = ({
   element: HTMLElement;
   slotRef: string;
 }) => {
-  const imageSlot = element.querySelector(`[slot="${slotRef}"]`);
+  const imageSlot: any = element.querySelector(
+    `[slot="${slotRef}"]`,
+  ) as HTMLElement;
+  const isImage = imageSlot instanceof HTMLImageElement;
+  let image = imageSlot;
 
-  if (imageSlot) {
-    const altText = imageSlot.getAttribute('alt');
+  if (!isImage) {
+    image = imageSlot.querySelector('img');
+  }
+
+  if (image) {
+    const altText = image.getAttribute('alt');
     if (!altText) {
       console.error('Image elements require alt text');
       return false;

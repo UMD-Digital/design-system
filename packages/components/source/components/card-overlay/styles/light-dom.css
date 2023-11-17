@@ -35,6 +35,8 @@ umd-element-card-overlay {
 }
 
 umd-element-card-overlay[data-image='true'] {
+  background-color: theme(colors.black);
+
   & .umd-sans-larger a {
     background-image: linear-gradient(theme(colors.white), theme(colors.white));
 
@@ -46,6 +48,8 @@ umd-element-card-overlay[data-image='true'] {
 }
 
 umd-element-card-overlay[theme='dark'] {
+  background-color: theme(colors.black);
+
   & * {
     color: theme(colors.white);
   }
@@ -58,4 +62,8 @@ umd-element-card-overlay[theme='dark'] {
       color: theme(colors.white);
     }
   }
+}
+
+umd-element-card-overlay[theme='light'] {
+  background-color: theme(colors.gray.lighter);
 }

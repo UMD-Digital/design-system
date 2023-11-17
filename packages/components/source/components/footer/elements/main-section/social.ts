@@ -157,12 +157,21 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
 };
 
 const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
-  const socialLinks = Array.from(
-    element.querySelectorAll(`[slot="${SLOT_SOCIAL_NAME}"] a`),
-  ) as HTMLAnchorElement[];
+  const socialLinksSlot = element.querySelector(
+    `[slot="${SLOT_SOCIAL_NAME}"]`,
+  ) as HTMLSlotElement;
   const container = document.createElement('div');
   const linksWrapper = document.createElement('div');
   const headline = document.createElement('p');
+  let socialLinks: HTMLAnchorElement[] = [];
+
+  if (socialLinksSlot) {
+    const socialLinksClone = socialLinksSlot.cloneNode(true) as HTMLSlotElement;
+    const slottedSocialLinks = Array.from(
+      socialLinksClone.querySelectorAll(`a`),
+    ) as HTMLAnchorElement[];
+    socialLinks = slottedSocialLinks;
+  }
 
   // Enforce university default links if none are provided
   if (socialLinks.length === 0) {

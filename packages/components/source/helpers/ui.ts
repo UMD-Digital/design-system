@@ -46,7 +46,7 @@ export const CheckForImageAlt = ({
   const isImage = imageSlot instanceof HTMLImageElement;
   let image = imageSlot;
 
-  if (!isImage) {
+  if (!isImage && imageSlot) {
     image = imageSlot.querySelector('img');
   }
 

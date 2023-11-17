@@ -11,22 +11,7 @@ const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';
 const CARD_OVERLAY_TEXT_CONTAINER = 'umd-card-overlay-text-container';
 const CARD_OVERLAY_TINT_OVERLAY = 'umd-card-overlay-tint';
 
-const VariantThemeStyles = `
-  .${CARD_OVERLAY_CONTAINER}[theme="dark"] {
-    background-color: ${colors.gray.darker};
-  }
-
-  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
-  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
-    background-color: ${colors.gray.darker};
-    border: 1px solid ${colors.white};
-  }
-
-  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg path,
-  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg path {
-    fill: ${colors.white};
-  }
-
+const VariantLightThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
     background-color: ${colors.gray.darker};
   }
@@ -43,6 +28,46 @@ const VariantThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg {
     fill: ${colors.gray.darker};
+  }
+`;
+
+const VariantDarkThemeStyles = `
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] {
+    background-color: ${colors.gray.darker};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
+    background-color: ${colors.gray.darker};
+    border: 1px solid ${colors.white};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg path,
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg path {
+    fill: ${colors.white};
+  }
+`;
+
+const VariantImageThemeStyles = `
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
+    padding-top: ${spacing['4xl']};
+  }
+
+  @container umd-card (min-width: 300px) {
+    .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
+      padding-top: ${spacing['8xl']};
+    }
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] * {
+    color: ${colors.white};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    margin-top: ${spacing.min};
   }
 
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
@@ -62,32 +87,6 @@ const VariantThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg {
     fill: ${colors.white};
-  }
-`;
-
-const VariantCTAIconStyles = `
-  .${CARD_OVERLAY_CONTAINER}[data-cta-icon="true"] .${CARD_OVERLAY_TEXT_CONTAINER} {
-    padding-right: 40px;
-  }
-`;
-
-const VariantImageStyles = `
-  .${CARD_OVERLAY_CONTAINER}[data-image="true"] * {
-    color: ${colors.white};
-  }
-
-  .${CARD_OVERLAY_CONTAINER}[data-image="true"],
-  .${CARD_OVERLAY_CONTAINER}[data-cta-icon="true"] {
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: ${spacing.md};
-  }
-
-  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    margin-top: ${spacing.min};
   }
 
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${CARD_OVERLAY_TINT_OVERLAY} {
@@ -110,6 +109,21 @@ const VariantImageStyles = `
   }
 `;
 
+const VariantCTAIconStyles = `
+  .${CARD_OVERLAY_CONTAINER}[data-cta-icon="true"] .${CARD_OVERLAY_TEXT_CONTAINER} {
+    padding-right: 40px;
+  }
+`;
+
+const VariantComboStyles = `
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"],
+  .${CARD_OVERLAY_CONTAINER}[data-cta-icon="true"] {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: ${spacing.md};
+  }
+`;
+
 export const ComponentStyles = `
   :host {
     display: block;
@@ -122,7 +136,7 @@ export const ComponentStyles = `
 
   .${CARD_OVERLAY_CONTAINER} {
     max-width: 560px;
-    min-height: 300px;
+    min-height: 368px;
     position: relative;
     background-color: ${colors.gray.lightest};
     padding: ${spacing['4xl']} ${spacing.md};
@@ -132,9 +146,11 @@ export const ComponentStyles = `
   ${ContentStyles}
   ${CtaStyles}
   ${CtaIconStyles}
-  ${VariantThemeStyles}
-  ${VariantImageStyles}
   ${VariantCTAIconStyles}
+  ${VariantLightThemeStyles}
+  ${VariantDarkThemeStyles}
+  ${VariantImageThemeStyles}
+  ${VariantComboStyles}
 `;
 
 export const CreateShadowDom = ({ element }: { element: CardType }) => {

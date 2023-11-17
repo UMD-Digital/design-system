@@ -48,7 +48,7 @@ export const MainContainerStyles = `
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: 0 1px;
-    display: inline-block;
+    display: inline;
     position: relative;
     transition: background-size 0.4s;
   }

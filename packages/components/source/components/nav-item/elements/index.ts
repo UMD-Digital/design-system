@@ -18,6 +18,7 @@ export const ComponentStyles = `
     border: none;
     background: none;
     padding: 0;
+    cursor: pointer;
   }
 
   :host a,

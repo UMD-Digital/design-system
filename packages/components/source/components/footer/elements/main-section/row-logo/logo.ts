@@ -68,6 +68,10 @@ export const CreateLogoContainer = ({ element }: { element: ELEMENT_TYPE }) => {
   logoLink.setAttribute('href', 'https://umd.edu');
   logoLink.setAttribute('target', '_blank');
   logoLink.setAttribute('rel', 'noopener noreferrer');
+  logoLink.setAttribute(
+    'aria-label',
+    'Link to the Unvieristy of Maryland homepage',
+  );
 
   logoLink.innerHTML =
     theme === VARIABLES.THEME_OPTION_LIGHT ? `${LIGHT_LOGO}` : `${DARK_LOGO}`;

@@ -21,7 +21,7 @@ const listStylesBase = {
         counterIncrement: 'item',
         position: 'absolute',
         top: '0',
-        left: '0',
+        right: `calc(100% - ${spacing.xs})`,
       },
     },
 
@@ -29,7 +29,7 @@ const listStylesBase = {
       paddingLeft: spacing.xl,
 
       '&:before': {
-        left: spacing.sm,
+        right: `calc(100% - ${spacing.md})`,
       },
     },
   },
@@ -39,6 +39,7 @@ const listStylesBase = {
     padding: '0',
     counterReset: 'item',
     listStyleType: 'none !important',
+
     '& li ': {
       paddingLeft: spacing.xl,
       position: 'relative',
@@ -52,7 +53,7 @@ const listStylesBase = {
         fontVariantNumeric: 'tabular-nums',
         position: 'absolute',
         top: '0',
-        left: '0',
+        right: `calc(100% - ${spacing.md})`,
         unicodeBidi: 'isolate',
         whiteSpace: 'pre',
       },
@@ -68,7 +69,7 @@ const listStylesBase = {
       content: 'counter(item)',
       borderRight: `1px solid ${colors.red}`,
       paddingRight: spacing.min,
-      left: spacing.xs,
+      right: `calc(100% - ${spacing.lg})`,
     },
   },
 

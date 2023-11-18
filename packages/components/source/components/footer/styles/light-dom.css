@@ -5,19 +5,19 @@ umd-element-footer:not(:defined) {
 umd-element-footer {
   & a,
   & p {
-    color: #fff;
+    color: theme(colors.white);
   }
 
   & p {
-    margin-bottom: 8px;
+    margin-bottom: theme(spacing.min);
   }
 
   & ul li {
-    margin-top: 24px;
+    margin-top: theme(spacing.md);
   }
 
   & a {
-    background-image: linear-gradient(#fff, #fff);
+    background-image: linear-gradient(theme(colors.white), theme(colors.white));
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: 0 1px;
@@ -33,7 +33,7 @@ umd-element-footer {
   }
 
   & address p {
-    font-size: 14px;
+    font-size: theme(fontSize.sm);
   }
 
   & .mail-address {
@@ -57,10 +57,10 @@ umd-element-footer {
       background-position: 10px 100%;
 
       &:before {
-        background-color: #fff;
-        border-radius: 50%;
         content: '';
         display: block;
+        background-color: theme(colors.white);
+        border-radius: 50%;
         height: 3px;
         left: 0;
         position: absolute;
@@ -81,15 +81,15 @@ umd-element-footer {
 umd-element-footer[theme='light'] {
   & p,
   & a {
-    color: #000;
+    color: theme(colors.black);
   }
 
   & a {
-    background-image: linear-gradient(#000, #000);
+    background-image: linear-gradient(theme(colors.black), theme(colors.black));
   }
 
   & .contact-list a:not(:first-child):before {
-    background-color: #000;
+    background-color: theme(colors.black);
   }
 
   & [slot='contact'],

@@ -1,7 +1,3 @@
-umd-element-nav-item:not(:defined) {
-  display: none;
-}
-
 umd-element-nav-item {
   @media (max-width: theme(screens.tablet.max)) {
     display: none !important;

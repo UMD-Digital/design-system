@@ -1,5 +1,5 @@
 * + umd-element-events-date-slider {
-  margin-top: 40px;
+  margin-top: theme('spacing.2xl');
 }
 
 .date-example {
@@ -8,13 +8,13 @@
   text-align: left;
 
   & .umd-sans-large {
-    font-size: 18px;
-    margin-left: 16px;
+    font-size: theme(fontSize.lg);
+    margin-left: theme(spacing.sm);
     margin-bottom: 0;
 
     @media (max-width: 768px) {
-      font-size: 14px !important;
-      font-weight: 500 !important;
+      font-size: theme(fontSize.sm) !important;
+      font-weight: theme(fontWeight.semibold) !important;
     }
   }
 
@@ -26,7 +26,7 @@
       text-transform: uppercase;
       text-align: center;
       max-width: 200px;
-      font-weight: 700;
+      font-weight: theme(fontWeight.bold);
     }
   }
 }

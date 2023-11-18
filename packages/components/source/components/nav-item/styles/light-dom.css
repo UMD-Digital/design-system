@@ -6,14 +6,14 @@ umd-element-nav-item {
   display: block;
 
   & a {
-    font-size: 14px;
-    font-weight: 800;
+    font-size: theme(fontSize.sm);
+    font-weight: theme(fontWeight.extrabold);
     color: theme(colors.black);
     text-decoration: none;
   }
 
   & [slot='primary-link'] {
-    font-size: 16px;
+    font-size: theme(fontSize.base);
   }
 
   & [slot='primary-link'][data-selected]:before {

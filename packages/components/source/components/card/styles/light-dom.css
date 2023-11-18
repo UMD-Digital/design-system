@@ -24,6 +24,10 @@ umd-element-card {
     & .umd-sans-min {
       color: theme(colors.gray.medium);
     }
+
+    & .umd-sans-smaller {
+      margin-bottom: 0;
+    }
   }
 }
 

@@ -5,28 +5,23 @@ umd-element-card:not(:defined) {
 umd-element-card {
   & [slot='headline'],
   & [slot='body'] {
-    & * {
-      color: theme(colors.black);
-    }
-
     & * + * {
       margin-top: theme(spacing.min);
     }
+  }
 
-    & a {
-      display: inline-block;
-    }
+  & [slot='headline'] {
+    color: theme(colors.black);
+  }
 
-    & .umd-rich-text {
-      color: theme(colors.gray.dark);
-    }
+  & [slot='headline'] > p {
+    margin-bottom: 0;
+  }
 
-    & .umd-sans-min {
-      color: theme(colors.gray.medium);
-    }
-
-    & .umd-sans-smaller {
-      margin-bottom: 0;
+  & [slot='body'] {
+    & > .umd-links-group:last-child,
+    & > a[class^='umd-cta']:last-child {
+      margin-top: theme(spacing.sm);
     }
   }
 }
@@ -36,8 +31,12 @@ umd-element-card[theme='dark'] {
   & [slot='body'] {
     background-color: theme(colors.gray.darker);
 
-    * {
+    & * {
       color: theme(colors.white);
     }
+  }
+
+  & .umd-rich-text {
+    @apply umd-rich-text-dark;
   }
 }

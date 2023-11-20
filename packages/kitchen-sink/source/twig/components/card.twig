@@ -219,8 +219,15 @@
             </div>
             <div slot="body">
               <div class="umd-rich-text">
-                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
+                <p>
+                  <strong>
+                    Duis aute irure dolor in reprehenderit in voluptate
+                  </strong>
+                  <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                    Excepteur sint occaecat cupidatat non proident
+                  </a>, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.
+                </p>
               </div>
               <p class="umd-sans-min">
                 September 31, 2023
@@ -242,28 +249,53 @@
             </div>
             <div slot="body">
               <div class="umd-rich-text">
-                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
+                <p>
+                  <strong>
+                    Duis aute irure dolor in reprehenderit in voluptate
+                  </strong>
+                  <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                    Excepteur sint occaecat cupidatat non proident
+                  </a>, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.
+                </p>
               </div>
             </div>
           </umd-element-card>
 
           <umd-element-card aligned="true" theme="dark">
-            <img slot="image"
-              src="https://umd-provost.transforms.svdcdn.com/staging/images/students-whiteboards.jpg?w=1104&amp;h=1119&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1696443830&amp;s=9c2b82690bf2d992d257630c5fd7d9fe"
-              alt="Students working on whiteboards" />
+            <a href="#" slot="image">
+              <img src="https://umd-provost.transforms.svdcdn.com/staging/images/students-whiteboards.jpg?w=1104&amp;h=1119&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1696443830&amp;s=9c2b82690bf2d992d257630c5fd7d9fe"
+                alt="Students working on whiteboards" />
+            </a>
             <div slot="headline">
               <p class="umd-sans-smaller">
                 Optional Eyebrow
               </p>
               <h3 class="umd-sans-large">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
+                <a href="#"
+                  class="umd-fadein-underline-white"
+                  rel="noopener noreferrer">
+                  <span aria-hidden="true">
+                    Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
+                  </span>
+                  <span class="sr-only">
+                    Example link that reads Learn more and only causes the page
+                    to reload
+                  </span>
+                </a>
               </h3>
             </div>
             <div slot="body">
               <div class="umd-rich-text">
-                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
+                <p>
+                  <strong>
+                    Duis aute irure dolor in reprehenderit in voluptate
+                  </strong>
+                  <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                    Excepteur sint occaecat cupidatat non proident
+                  </a>, sunt in culpa qui officia deserunt mollit anim id est
+                  laborum.
+                </p>
               </div>
               <a href="#" class="umd-cta-secondary">
                 <svg aria-hidden="true"
@@ -448,112 +480,594 @@
 
   <section>
     <div class="umd-lock">
-      <div class="umd-lock">
-        <h2 class="umd-sans-extralarge">
-          Card Example 6 - Four column example
-        </h2>
+      <h2 class="umd-sans-extralarge">
+        Card Example 6 - Default Cards - Four column example
+      </h2>
 
-        <div class="umd-rich-text">
-          <p>
-            Columns determinted by configuraiton. Text sizes are configuration
-            as well but examples provided.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-            nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-            Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-            cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-            faucibus pulvinar.
-          </p>
-        </div>
+      <div class="umd-rich-text">
+        <p>
+          Columns determinted by configuraiton. Text sizes are configuration as
+          well but examples provided.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
+          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
+          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
+          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
+          faucibus pulvinar.
+        </p>
+      </div>
 
-        <div class="umd-grid-four mb-md" style="margin-top: 24px">
-          <umd-element-card aligned="true" border="true">
-            <img slot="image"
-              src="https://umd-provost.transforms.svdcdn.com/staging/images/students-whiteboards.jpg?w=1104&amp;h=1119&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1696443830&amp;s=9c2b82690bf2d992d257630c5fd7d9fe"
+      <div class="umd-grid-four my-md">
+        <umd-element-card>
+          <a href="#" slot="image">
+            <img src="https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg"
+              alt="Students walking up the hill on the sidewalk along Campus Drive." />
+          </a>
+
+          <div slot="headline">
+            <p class="umd-eyebrow">
+              Anim id est laborum.
+            </p>
+
+            <p class="umd-sans-large">
+              <a href="#"
+                class="umd-fadein-underline-black"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">
+                  Example Headline tur. Excepteur sint occae
+                </span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </p>
+          </div>
+
+          <div slot="body">
+            <div class="umd-rich-text">
+              <p>
+                <strong>
+                  Duis aute irure dolor in reprehenderit in voluptate
+                </strong>
+                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                  Excepteur sint occaecat cupidatat non proident
+                </a>, sunt in culpa qui officia deserunt mollit anim id est
+                laborum.
+              </p>
+            </div>
+
+            <div class="umd-links-group">
+              <a href="#" class="umd-cta-secondary" rel="noopener noreferrer">
+                <svg aria-hidden="true"
+                  width="96"
+                  height="96"
+                  viewBox="0 0 96 96"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+                </svg>
+
+                <span aria-hidden="true">Learn More</span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </div>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card>
+          <a href="#" slot="image">
+            <img src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
+              alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
+          </a>
+
+          <div slot="headline">
+            <p class="umd-eyebrow">
+              Short Tagline
+            </p>
+
+            <p class="umd-sans-large">
+              <a href="#"
+                class="umd-fadein-underline-black"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">
+                  Example Headline officia deserunt mollit
+                </span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </p>
+          </div>
+
+          <div slot="body">
+            <div class="umd-rich-text">
+              <p>
+                <strong>
+                  Duis aute irure dolor in reprehenderit in voluptate
+                </strong>
+                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                  Excepteur sint occaecat cupidatat non proident
+                </a>, sunt in culpa qui officia deserunt mollit anim id est
+                laborum.
+              </p>
+            </div>
+
+            <div class="umd-links-group">
+              <a href="#" class="umd-cta-secondary" rel="noopener noreferrer">
+                <svg aria-hidden="true"
+                  width="96"
+                  height="96"
+                  viewBox="0 0 96 96"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+                </svg>
+
+                <span aria-hidden="true">Learn More</span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </div>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card>
+          <a href="#" slot="image">
+            <img src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
+              alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
+          </a>
+
+          <div slot="headline">
+            <p class="umd-eyebrow">
+              Short Tagline
+            </p>
+
+            <p class="umd-sans-large">
+              <a href="#"
+                class="umd-fadein-underline-black"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">
+                  Example Headline lit esse cillum dolore e
+                </span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </p>
+          </div>
+
+          <div slot="body">
+            <div class="umd-rich-text">
+              <p>
+                <strong>
+                  Duis aute irure dolor in reprehenderit in voluptate
+                </strong>
+                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                  Excepteur sint occaecat cupidatat non proident
+                </a>, sunt in culpa qui officia deserunt mollit anim id est
+                laborum.
+              </p>
+            </div>
+
+            <div class="umd-links-group">
+              <a href="#" class="umd-cta-secondary" rel="noopener noreferrer">
+                <svg aria-hidden="true"
+                  width="96"
+                  height="96"
+                  viewBox="0 0 96 96"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+                </svg>
+
+                <span aria-hidden="true">Learn More</span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </div>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card>
+          <a href="#" slot="image">
+            <img src="https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg"
+              alt="Students walking up the hill on the sidewalk along Campus Drive." />
+          </a>
+
+          <div slot="headline">
+            <p class="umd-eyebrow">
+              Short Tagline
+            </p>
+
+            <p class="umd-sans-large">
+              <a href="#"
+                class="umd-fadein-underline-black"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">
+                  Example Headline Duis aute irure dolor
+                </span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </p>
+          </div>
+
+          <div slot="body">
+            <div class="umd-rich-text">
+              <p>
+                <strong>
+                  Duis aute irure dolor in reprehenderit in voluptate
+                </strong>
+                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                  Excepteur sint occaecat cupidatat non proident
+                </a>, sunt in culpa qui officia deserunt mollit anim id est
+                laborum.
+              </p>
+            </div>
+
+            <div class="umd-links-group">
+              <a href="#" class="umd-cta-secondary" rel="noopener noreferrer">
+                <svg aria-hidden="true"
+                  width="96"
+                  height="96"
+                  viewBox="0 0 96 96"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+                </svg>
+
+                <span aria-hidden="true">Learn More</span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </div>
+          </div>
+        </umd-element-card>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <h2 class="umd-sans-extralarge">
+        Card Example 7 - Bordered Cards - Four column example
+      </h2>
+
+      <div class="umd-rich-text">
+        <p>
+          Columns determinted by configuraiton. Text sizes are configuration as
+          well but examples provided.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
+          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
+          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
+          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
+          faucibus pulvinar.
+        </p>
+      </div>
+
+      <div class="umd-grid-four mb-md" style="margin-top: 24px">
+        <umd-element-card aligned="true" border="true">
+          <img slot="image"
+            src="https://umd-provost.transforms.svdcdn.com/staging/images/students-whiteboards.jpg?w=1104&amp;h=1119&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1696443830&amp;s=9c2b82690bf2d992d257630c5fd7d9fe"
+            alt="Students working on whiteboards" />
+          <div slot="headline">
+            <p class="umd-sans-smaller">
+              Optional Eyebrow
+            </p>
+            <h3 class="umd-sans-large">
+              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
+            </h3>
+          </div>
+          <div slot="body">
+            <div class="umd-rich-text">
+              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              vulputate libero et velit interdum, ac aliquet odio mattis.
+            </div>
+            <p class="umd-sans-min">
+              September 31, 2023
+            </p>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card aligned="true" border="true">
+          <img slot="image"
+            src="https://umd-today.transforms.svdcdn.com/production/hero/building_heat_istock_1920x1080.jpg?w=1920&h=1080&auto=compress%2Cformat&fit=crop&dm=1699653674&s=84ab2364758fd22e68411c67a523f53d"
+            alt="Students working on whiteboards" />
+          <div slot="headline">
+            <p class="umd-sans-smaller">
+              Optional Eyebrow
+            </p>
+            <h3 class="umd-sans-large">
+              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
+            </h3>
+          </div>
+          <div slot="body">
+            <div class="umd-rich-text">
+              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              vulputate libero et velit interdum, ac aliquet odio mattis.
+            </div>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card aligned="true" border="true">
+          <img slot="image"
+            src="https://umd-provost.transforms.svdcdn.com/staging/images/students-whiteboards.jpg?w=1104&amp;h=1119&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1696443830&amp;s=9c2b82690bf2d992d257630c5fd7d9fe"
+            alt="Students working on whiteboards" />
+          <div slot="headline">
+            <p class="umd-sans-smaller">
+              Optional Eyebrow
+            </p>
+            <h3 class="umd-sans-large">
+              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
+            </h3>
+          </div>
+          <div slot="body">
+            <div class="umd-rich-text">
+              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              vulputate libero et velit interdum, ac aliquet odio mattis.
+            </div>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card aligned="true" border="true">
+          <a href="google.com" slot="image">
+            <img src="https://umd-provost.transforms.svdcdn.com/staging/images/students-whiteboards.jpg?w=1104&amp;h=1119&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1696443830&amp;s=9c2b82690bf2d992d257630c5fd7d9fe"
               alt="Students working on whiteboards" />
-            <div slot="headline">
-              <p class="umd-sans-smaller">
-                Optional Eyebrow
-              </p>
-              <h3 class="umd-sans-large">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </h3>
-            </div>
-            <div slot="body">
-              <div class="umd-rich-text">
-                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
-              </div>
-              <p class="umd-sans-min">
-                September 31, 2023
-              </p>
-            </div>
-          </umd-element-card>
+          </a>
 
-          <umd-element-card aligned="true" border="true">
-            <img slot="image"
-              src="https://umd-today.transforms.svdcdn.com/production/hero/building_heat_istock_1920x1080.jpg?w=1920&h=1080&auto=compress%2Cformat&fit=crop&dm=1699653674&s=84ab2364758fd22e68411c67a523f53d"
-              alt="Students working on whiteboards" />
-            <div slot="headline">
-              <p class="umd-sans-smaller">
-                Optional Eyebrow
-              </p>
-              <h3 class="umd-sans-large">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </h3>
+          <div slot="headline">
+            <p class="umd-sans-smaller">
+              Optional Eyebrow
+            </p>
+            <h3 class="umd-sans-large">
+              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
+            </h3>
+          </div>
+          <div slot="body">
+            <div class="umd-rich-text">
+              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              vulputate libero et velit interdum, ac aliquet odio mattis.
             </div>
-            <div slot="body">
-              <div class="umd-rich-text">
-                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
-              </div>
-            </div>
-          </umd-element-card>
+          </div>
+        </umd-element-card>
+      </div>
+    </div>
+  </section>
 
-          <umd-element-card aligned="true" border="true">
-            <img slot="image"
-              src="https://umd-provost.transforms.svdcdn.com/staging/images/students-whiteboards.jpg?w=1104&amp;h=1119&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1696443830&amp;s=9c2b82690bf2d992d257630c5fd7d9fe"
-              alt="Students working on whiteboards" />
-            <div slot="headline">
-              <p class="umd-sans-smaller">
-                Optional Eyebrow
-              </p>
-              <h3 class="umd-sans-large">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </h3>
-            </div>
-            <div slot="body">
-              <div class="umd-rich-text">
-                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
-              </div>
-            </div>
-          </umd-element-card>
+  <section>
+    <div class="umd-lock">
+      <h2 class="umd-sans-extralarge">
+        Card Example 8 - Default Cards - Feature Grid
+      </h2>
 
-          <umd-element-card aligned="true" border="true">
-            <a href="google.com" slot="image">
-              <img src="https://umd-provost.transforms.svdcdn.com/staging/images/students-whiteboards.jpg?w=1104&amp;h=1119&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1696443830&amp;s=9c2b82690bf2d992d257630c5fd7d9fe"
-                alt="Students working on whiteboards" />
-            </a>
+      <div class="umd-rich-text">
+        <p>
+          Columns determinted by configuraiton. Text sizes are configuration as
+          well but examples provided.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
+          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
+          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
+          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
+          faucibus pulvinar.
+        </p>
+      </div>
 
-            <div slot="headline">
-              <p class="umd-sans-smaller">
-                Optional Eyebrow
+      <div class="my-md grid grid-cols-1 gap-sm medium:gap-md large:gap-md tablet:gap-md desktop:gap-md highDef:gap-md maximum:gap-md medium:grid-cols-2 large:grid-cols-2 tablet:grid-cols-2 desktop:grid-cols-[calc(50%_-_24px)_repeat(2,_1fr)] highDef:grid-cols-[calc(50%_-_24px)_repeat(2,_1fr)] maximum:grid-cols-[calc(50%_-_24px)_repeat(2,_1fr)]">
+        <umd-element-card>
+          <a href="#" slot="image">
+            <img src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
+              alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
+          </a>
+
+          <div slot="headline">
+            <p class="umd-eyebrow">
+              anim id est laborum.
+            </p>
+
+            <p class="umd-sans-larger">
+              <a href="#"
+                class="umd-fadein-underline-black"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">
+                  Example Headline tur. Excepteur sint occae
+                </span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </p>
+          </div>
+
+          <div slot="body">
+            <div class="umd-rich-text">
+              <p>
+                <strong>
+                  Duis aute irure dolor in reprehenderit in voluptate
+                </strong>
+                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                  Excepteur sint occaecat cupidatat non proident
+                </a>, sunt in culpa qui officia deserunt mollit anim id est
+                laborum.
               </p>
-              <h3 class="umd-sans-large">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </h3>
             </div>
-            <div slot="body">
-              <div class="umd-rich-text">
-                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
-              </div>
+
+            <div class="umd-links-group">
+              <a href="#" class="umd-cta-secondary" rel="noopener noreferrer">
+                <svg aria-hidden="true"
+                  width="96"
+                  height="96"
+                  viewBox="0 0 96 96"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+                </svg>
+
+                <span aria-hidden="true">Learn More</span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
             </div>
-          </umd-element-card>
-        </div>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card>
+          <a href="#" slot="image">
+            <img src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
+              alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
+          </a>
+
+          <div slot="headline">
+            <p class="umd-eyebrow">
+              anim id est laborum.
+            </p>
+
+            <p class="umd-sans-large">
+              <a href="#"
+                class="umd-fadein-underline-black"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">
+                  Example Headline tur. Excepteur sint occae
+                </span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </p>
+          </div>
+
+          <div slot="body">
+            <div class="umd-rich-text">
+              <p>
+                <strong>
+                  Duis aute irure dolor in reprehenderit in voluptate
+                </strong>
+                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                  Excepteur sint occaecat cupidatat non proident
+                </a>, sunt in culpa qui officia deserunt mollit anim id est
+                laborum.
+              </p>
+            </div>
+
+            <div class="umd-links-group">
+              <a href="#" class="umd-cta-secondary" rel="noopener noreferrer">
+                <svg aria-hidden="true"
+                  width="96"
+                  height="96"
+                  viewBox="0 0 96 96"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+                </svg>
+
+                <span aria-hidden="true">Learn More</span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </div>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card>
+          <a href="#" slot="image">
+            <img src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
+              alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
+          </a>
+
+          <div slot="headline">
+            <p class="umd-eyebrow">
+              Short Tagline
+            </p>
+
+            <p class="umd-sans-large">
+              <a href="#"
+                class="umd-fadein-underline-black"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">
+                  Example Headline officia deserunt mollit
+                </span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </p>
+          </div>
+
+          <div slot="body">
+            <div class="umd-rich-text">
+              <p>
+                <strong>
+                  Duis aute irure dolor in reprehenderit in voluptate
+                </strong>
+                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="#">
+                  Excepteur sint occaecat cupidatat non proident
+                </a>, sunt in culpa qui officia deserunt mollit anim id est
+                laborum.
+              </p>
+            </div>
+
+            <div class="umd-links-group">
+              <a href="#" class="umd-cta-secondary" rel="noopener noreferrer">
+                <svg aria-hidden="true"
+                  width="96"
+                  height="96"
+                  viewBox="0 0 96 96"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+                </svg>
+
+                <span aria-hidden="true">Learn More</span>
+                <span class="sr-only">
+                  Example link that reads Learn more and only causes the page to
+                  reload
+                </span>
+              </a>
+            </div>
+          </div>
+        </umd-element-card>
       </div>
     </div>
   </section>

@@ -39,7 +39,7 @@ const VariantBorderStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-card / inline-size; 
+    container: umd-card / inline-size;
   }
 
   :host * {
@@ -48,6 +48,25 @@ export const ComponentStyles = `
 
   :host img {
     max-width: 100%;
+  }
+
+  :host a[slot="image"] {
+    display: block;
+    line-height: 0;
+    overflow: hidden;
+  }
+
+  :host a[slot="image"] img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    transform: scale(1);
+    transition: transform 0.5s;
+    width: 100%;
+  }
+
+  :host a[slot="image"]:hover img,
+  :host a[slot="image"]:focus img {
+    transform: scale(1.025);
   }
 
   .${CARD_CONTAINER} {

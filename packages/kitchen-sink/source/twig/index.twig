@@ -1,11 +1,27 @@
 {% extends '_layout.twig' %}
 
+{% import '_data/component-list.twig' as ComponentList %}
+{% import '_data/config-list.twig' as ConfigList %}
+
 {% block page %}
   <section>
     <div class="umd-lock">
-      <p>
-        To Do: Add menu
-      </p>
+      <h1 class="sr-only">
+        No errors
+      </h1>
+      <h2 class="umd-sans-extralarge">
+        Configuration
+      </h2>
+      <div class="umd-grid-three mb-md">
+        {{ ConfigList.Links() }}
+      </div>
+      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
+      <h2 class="umd-sans-extralarge">
+        Components
+      </h2>
+      <div class="umd-grid-three mb-md">
+        {{ ComponentList.Links() }}
+      </div>
     </div>
   </section>
 {% endblock %}

@@ -1,24 +1,24 @@
-# UMD Design System
+# UMD Web Configuration
 
-Staging: https://designsystem.umd-staging.com/
+Base configuration for the University of Maryland Design System by the [Office of Marketing and Communications Web Services](https://omc.umd.edu)
 
-University of Maryland Design System by the [Office of Marketing and Communications Web Services](https://omc.umd.edu)
+## Requirements
+
+**Dependancies:** This package requires [tailwind](https://tailwindcss.com/), and is installed as a dependancy. _[Review tailwind's documentation](https://tailwindcss.com/docs/installation) for specific support with setting up tailwind._
 
 ## Installation
 
 ```bash
-yarn install @universityofmaryland/design-system-configuration
+yarn install @universityofmaryland/umd-web-configuration
 ```
-
-**Dependancies:** This package requires [tailwind](https://tailwindcss.com/), and is installed as a dependancy.
 
 ## Basic Usage
 
-Import the configuration into your standard tailwind installation.
+Import the configuration into your standard tailwind installation:
 
 <!-- prettier-ignore -->
 ```javascript
-import { theme, plugins } from '@universityofmaryland/design-system-configuration';
+import { theme, plugins } from '@universityofmaryland/umd-web-configuration';
 ```
 
 Example `tailwind.config.js` Configuration:
@@ -26,17 +26,19 @@ Example `tailwind.config.js` Configuration:
 ```javascript
 /** @type {import('tailwindcss').Config} */
 
-import {
-  theme,
-  plugins,
-} from '@universityofmaryland/design-system-configuration';
+import { theme, plugins } from '@universityofmaryland/umd-web-configuration';
 
-const content = ['./source/**/*.{twig,css,ts,js}'];
+const content = ['./source/**/*.{html,css,ts,js}'];
 
 export { content, theme, plugins };
 ```
 
-_[Learn and remove more about tailwind configurations at tailwindcss.com](https://tailwindcss.com/docs/configuration)_
+### Details:
+
+- **Required: theme and plugins parameters:** To access the university's base design configuration in tailwind without any modifications, add the `theme`, and `plugins` parameters to the tailwind configuration.
+- **Content:** Update the `content` parameter to match the file types in your project. Tailwind will look for and process these files during render _(The above example looks at all html, css, typescript, and javascript files in the project's **./source** folder)_.
+
+_[Learn more about tailwind configurations at tailwindcss.com](https://tailwindcss.com/docs/configuration)_
 
 ## Options
 

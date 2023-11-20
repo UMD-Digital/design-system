@@ -1,4 +1,5 @@
-{% import '../_data/component-list.twig' as List %}
+{% import '../_data/component-list.twig' as ComponentList %}
+{% import '../_data/config-list.twig' as ConfigList %}
 
 <header>
   <div class="umd-lock">
@@ -12,16 +13,14 @@
           <span>Configuration</span>
         </a>
         <div slot="dropdown-links">
-          <ul>
-            <li><a href="/configuration">Kitchen Sink</a></li>
-          </ul>
+          {{ ConfigList.HeaderLinks() }}
         </div>
       </umd-element-nav-item>
 
       <umd-element-nav-item>
         <a slot="primary-link" href="/components"><span>Components</span></a>
         <div slot="dropdown-links">
-          {{ List.HeaderLinks() }}
+          {{ ComponentList.HeaderLinks() }}
         </div>
       </umd-element-nav-item>
     </nav>

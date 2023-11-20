@@ -38,13 +38,13 @@
 {% macro HeaderLinks() %}
   <ul>
     {% for item in list %}
-      <li><a href="/{{ item.link }}">{{ item.name }}</a></li>
+      <li><a href="/components/{{ item.link }}">{{ item.name }}</a></li>
     {% endfor %}
   </ul>
 {% endmacro %}
 
 {% macro Links() %}
   {% for item in list %}
-    <a href="/{{ item.link }}">{{ item.name }}</a>
+    <a href="/components/{{ item.link }}">{{ item.name }}</a>
   {% endfor %}
 {% endmacro %}

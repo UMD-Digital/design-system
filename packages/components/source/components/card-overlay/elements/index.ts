@@ -23,6 +23,7 @@ const VariantLightThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
     background-color: ${colors.white};
+    border: 1px solid ${colors.gray.darker};
   }
 
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
@@ -32,6 +33,11 @@ const VariantLightThemeStyles = `
 `;
 
 const VariantDarkThemeStyles = `
+  :host([theme="dark"]) {
+    background-color: ${colors.gray.darker};
+    color: ${colors.white};
+  }
+
   .${CARD_OVERLAY_CONTAINER}[theme="dark"] {
     background-color: ${colors.gray.darker};
   }
@@ -49,6 +55,21 @@ const VariantDarkThemeStyles = `
 `;
 
 const VariantImageThemeStyles = `
+  :host([data-image="true"]) {
+    background-color: ${colors.gray.darker};
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+    color: ${colors.white};
+    transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: scale(1);
+  }
+
+  :host([data-image="true"]:hover),
+  :host([data-image="true"]:focus-within) {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.025);
+    z-index: 99;
+  }
+
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
     padding-top: ${spacing['4xl']};
   }
@@ -61,13 +82,6 @@ const VariantImageThemeStyles = `
 
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] * {
     color: ${colors.white};
-  }
-
-  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    margin-top: ${spacing.min};
   }
 
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
@@ -101,11 +115,12 @@ const VariantImageThemeStyles = `
   }
 
   .${CARD_OVERLAY_CONTAINER}[data-image="true"]:hover .${CARD_OVERLAY_TINT_OVERLAY} {
-    opacity: .6;
+    opacity: .7;
   }
 
-  .${CARD_OVERLAY_CONTAINER}[data-image="true"]:hover .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img {
-    transform: scale(1.06);
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"]:hover .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img,
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"]:focus-within .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img {
+    transform: scale(1.025);
   }
 `;
 
@@ -120,14 +135,13 @@ const VariantComboStyles = `
   .${CARD_OVERLAY_CONTAINER}[data-cta-icon="true"] {
     display: flex;
     align-items: flex-end;
-    padding-bottom: ${spacing.md};
   }
 `;
 
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-card / inline-size; 
+    container: umd-card / inline-size;
   }
 
   :host * {
@@ -140,7 +154,9 @@ export const ComponentStyles = `
     height: 100%;
     position: relative;
     background-color: ${colors.gray.lightest};
-    padding: ${spacing['4xl']} ${spacing.md};
+    padding: ${spacing.md};
+    padding-top: ${spacing['4xl']};
+    padding-bottom: ${spacing.lg};
   }
 
   ${ImageStyles}

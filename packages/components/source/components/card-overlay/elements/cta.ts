@@ -5,9 +5,7 @@ import { CardType } from '../component';
 
 export const CtaStyles = `
   .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
-    position: absolute;
-    bottom: ${spacing.md};
-    left: ${spacing.md};
+    margin-top: ${spacing.md};
   }
 `;
 

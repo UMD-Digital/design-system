@@ -11,6 +11,8 @@ const CARD_TEXT_CONTAINER = 'umd-card-text-container';
 const VariantThemeStyles = `
   .${CARD_CONTAINER}[theme="dark"] {
     background-color: ${colors.gray.darker};
+    color: ${colors.white};
+    height: 100%;
   }
 
   .${CARD_CONTAINER}[theme="dark"] .${CARD_TEXT_CONTAINER} {
@@ -28,7 +30,8 @@ const VariantAlignedStyles = `
 
 const VariantBorderStyles = `
   .${CARD_CONTAINER}[border="true"] {
-    border: 1px solid ${colors.gray.light}
+    border: 1px solid ${colors.gray.light};
+    height: 100%;
   }
 
   .${CARD_CONTAINER}[border="true"] .${CARD_TEXT_CONTAINER} {

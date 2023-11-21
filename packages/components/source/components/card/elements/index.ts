@@ -70,7 +70,7 @@ export const ComponentStyles = `
   }
 
   .${CARD_CONTAINER} {
-    max-width: 560px;
+    max-width: 680px;
   }
 
   .${CARD_TEXT_CONTAINER} {

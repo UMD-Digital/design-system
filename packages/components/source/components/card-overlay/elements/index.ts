@@ -57,17 +57,7 @@ const VariantDarkThemeStyles = `
 const VariantImageThemeStyles = `
   :host([data-image="true"]) {
     background-color: ${colors.gray.darker};
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
     color: ${colors.white};
-    transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
-    transform: scale(1);
-  }
-
-  :host([data-image="true"]:hover),
-  :host([data-image="true"]:focus-within) {
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    transform: scale(1.025);
-    z-index: 99;
   }
 
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
@@ -149,7 +139,7 @@ export const ComponentStyles = `
   }
 
   .${CARD_OVERLAY_CONTAINER} {
-    max-width: 560px;
+    max-width: 680px;
     min-height: 368px;
     height: 100%;
     position: relative;

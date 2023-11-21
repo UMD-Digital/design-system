@@ -3,67 +3,32 @@ umd-element-card-overlay:not(:defined) {
 }
 
 umd-element-card-overlay {
-  & .umd-sans-larger a {
-    background-image: linear-gradient(theme(colors.black), theme(colors.black));
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 0 1px;
-    display: inline;
-    position: relative;
-    transition: background-size 0.4s;
-
-    &:hover,
-    &:focus {
-      background-size: 100% 1px;
-      color: theme(colors.black);
-    }
-  }
-
   & [slot='content'] {
     & * + * {
-      margin-top: theme(spacing.min);
+      margin-top: theme(spacing.sm);
     }
 
-    & .umd-sans-smaller + * {
-      margin-top: theme(spacing.min);
+    & > p {
+      margin-bottom: 0;
     }
 
-    & * + .umd-sans-min {
+    & .umd-sans-smaller:first-child + *,
+    & .umd-eyebrow:first-child + * {
       margin-top: theme(spacing.min);
     }
   }
 }
 
-umd-element-card-overlay[data-image='true'] {
-  background-color: theme(colors.black);
-
-  & .umd-sans-larger a {
-    background-image: linear-gradient(theme(colors.white), theme(colors.white));
-
-    &:hover,
-    &:focus {
-      color: theme(colors.white);
-    }
-  }
-}
-
+umd-element-card-overlay[data-image='true'],
 umd-element-card-overlay[theme='dark'] {
   background-color: theme(colors.black);
 
-  & * {
+  & .umd-rich-text {
+    @apply umd-rich-text-dark;
+  }
+
+  & [slot='content'] a,
+  & a[class^='umd-cta'] {
     color: theme(colors.white);
   }
-
-  & .umd-sans-larger a {
-    background-image: linear-gradient(theme(colors.white), theme(colors.white));
-
-    &:hover,
-    &:focus {
-      color: theme(colors.white);
-    }
-  }
-}
-
-umd-element-card-overlay[theme='light'] {
-  background-color: theme(colors.gray.lighter);
 }

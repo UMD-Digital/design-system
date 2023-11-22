@@ -50,7 +50,7 @@ const umdGridGutterless = {
   '.umd-grid-gutterless-two': {
     ...gridBase,
 
-    gridGap: `${spacing.min}`,
+    gridGap: spacing.min,
 
     [`@media (${queries.large.min})`]: {
       gridGap: `0px`,
@@ -61,7 +61,7 @@ const umdGridGutterless = {
   '.umd-grid-gutterless-three': {
     ...gridBase,
 
-    gridGap: `${spacing.min}`,
+    gridGap: spacing.min,
 
     [`@media (${queries.large.min})`]: {
       gridGap: `0px`,
@@ -75,6 +75,8 @@ const umdGridGutterless = {
 
   '.umd-grid-gutterless-four': {
     ...gridBase,
+
+    gridGap: spacing.min,
 
     [`@media (${queries.large.min})`]: {
       gridGap: `0px`,
@@ -115,6 +117,11 @@ const umdGridSpecial = {
 
   '.umd-grid-four-animated-overlay-card': {
     ...umdGridGutterless['.umd-grid-gutterless-four'],
+
+    [`@media (${queries.desktop.min})`]: {
+      gridTemplateColumns: 'repeat(4, 1fr)',
+      minHeight: `calc(${spacing['3xl']} * 10)`,
+    },
 
     '& umd-element-card-overlay': {
       boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)',

@@ -33,11 +33,6 @@ const VariantLightThemeStyles = `
 `;
 
 const VariantDarkThemeStyles = `
-  :host([theme="dark"]) {
-    background-color: ${colors.gray.darker};
-    color: ${colors.white};
-  }
-
   .${CARD_OVERLAY_CONTAINER}[theme="dark"] {
     background-color: ${colors.gray.darker};
   }
@@ -55,11 +50,6 @@ const VariantDarkThemeStyles = `
 `;
 
 const VariantImageThemeStyles = `
-  :host([data-image="true"]) {
-    background-color: ${colors.gray.darker};
-    color: ${colors.white};
-  }
-
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
     padding-top: ${spacing['4xl']};
   }

@@ -65,7 +65,7 @@ const componentBundle = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.css'],
+    extensions: ['.ts', '.js', '.css'],
     modules: [path.resolve('source'), path.resolve('../../node_modules')],
   },
 };

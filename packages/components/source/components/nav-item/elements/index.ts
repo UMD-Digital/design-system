@@ -1,5 +1,7 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { fontFamily } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts.js';
+import {
+  colors,
+  fontFamily,
+} from '@universityofmaryland/umd-web-configuration';
 import { ElementType } from '../component';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
 import { ELEMENTS, VARIABLES } from '../globals';

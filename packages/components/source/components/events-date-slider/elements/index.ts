@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
+import { colors } from '@universityofmaryland/umd-web-configuration';
 import { ELEMENT_TYPE } from '../component';
 import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 import { SizeDatesElements } from '../services/helpers';

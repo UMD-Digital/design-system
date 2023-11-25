@@ -1,5 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../../globals';
 
 const SLOT_UTILITY_LINKS_NAME = 'utility-links';

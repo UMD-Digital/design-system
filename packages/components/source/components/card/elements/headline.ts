@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { spacing } from '@universityofmaryland/umd-web-configuration';
 import { MakeSlot, CheckForImageAlt } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { CardType } from '../component';

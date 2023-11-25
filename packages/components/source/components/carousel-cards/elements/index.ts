@@ -1,13 +1,11 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
-
-import { ELEMENT_TYPE } from '../component';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 import {
   EventResizeCarouselElementsWidth,
   EventResizeSetHeight,
 } from '../services/events';
+import { ELEMENT_TYPE } from '../component';
 import { BREAKPOINTS, SLOTS } from '../globals';
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';

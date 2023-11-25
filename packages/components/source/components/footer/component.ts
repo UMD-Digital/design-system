@@ -41,12 +41,15 @@ export class UMDFooterElement extends HTMLElement {
 }
 
 export const Load = () => {
-  if (!window.customElements.get(ELEMENT_NAME)) {
-    const GetDefaultStyles = () => require('./styles/light-dom.css').toString();
+  const hasElement =
+    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
+  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDFooterElement = UMDFooterElement;
     window.customElements.define(ELEMENT_NAME, UMDFooterElement);
 
-    return GetDefaultStyles();
+    return require('./styles/light-dom.css').toString();
   }
+
+  return '';
 };

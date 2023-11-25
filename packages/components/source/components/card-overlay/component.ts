@@ -40,13 +40,16 @@ export class UMDCardOverlayElement extends HTMLElement {
   }
 }
 
-export const GetDefaultStyles = () =>
-  require('./styles/light-dom.css').toString();
 export const Load = () => {
-  if (!window.customElements.get(ELEMENT_NAME)) {
+  const hasElement =
+    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
+
+  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDCardOverlayElement = UMDCardOverlayElement;
     window.customElements.define(ELEMENT_NAME, UMDCardOverlayElement);
 
-    return GetDefaultStyles();
+    return require('./styles/light-dom.css').toString();
   }
+
+  return '';
 };

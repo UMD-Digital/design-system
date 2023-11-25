@@ -27,8 +27,7 @@ export const MakeDefaultStyleTag = ({
 }) => {
   const body = document.querySelector('body') as HTMLBodyElement;
   const style = document.createElement('style');
-  const tailwindStyles = require('./tailwind.css');
-  style.innerHTML = `${tailwindStyles} ${styleString}`;
+  style.innerHTML = `${styleString.replace(/\s\s+/g, ' ')}`;
 
   body.appendChild(style);
 };

@@ -44,13 +44,16 @@ export class UMDCardElement extends HTMLElement {
   }
 }
 
-export const GetDefaultStyles = () =>
-  require('./styles/light-dom.css').toString();
 export const Load = () => {
-  if (!window.customElements.get(ELEMENT_NAME)) {
+  const hasElement =
+    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
+
+  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDCardElement = UMDCardElement;
     window.customElements.define(ELEMENT_NAME, UMDCardElement);
 
-    return GetDefaultStyles();
+    return require('./styles/light-dom.css').toString();
   }
+
+  return '';
 };

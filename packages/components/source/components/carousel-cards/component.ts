@@ -49,12 +49,15 @@ export class UMDCarouselCardsElement extends HTMLElement {
 }
 
 export const Load = () => {
-  if (!window.customElements.get(ELEMENT_NAME)) {
-    const GetDefaultStyles = () => require('./styles/light-dom.css').toString();
+  const hasElement =
+    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
+  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDCarouselCardsElement = UMDCarouselCardsElement;
     window.customElements.define(ELEMENT_NAME, UMDCarouselCardsElement);
 
-    return GetDefaultStyles();
+    return require('./styles/light-dom.css').toString();
   }
+
+  return '';
 };

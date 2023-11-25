@@ -74,11 +74,15 @@ export class UMDEventsDateSliderElement extends HTMLElement {
 }
 
 export const Load = () => {
-  if (!window.customElements.get(ELEMENT_NAME)) {
-    const GetDefaultStyles = () => require('./styles/light-dom.css').toString();
+  const hasElement =
+    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
+
+  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDEventsDateSliderElement = UMDEventsDateSliderElement;
     window.customElements.define(ELEMENT_NAME, UMDEventsDateSliderElement);
 
-    return GetDefaultStyles();
+    return require('./styles/light-dom.css').toString();
   }
+
+  return '';
 };

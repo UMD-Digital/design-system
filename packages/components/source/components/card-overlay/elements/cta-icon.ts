@@ -1,5 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';
 import { DOCUMENT_ICON, NEW_WINDOW_ICON, SHORT_ARROW_ICON } from 'assets/icons';

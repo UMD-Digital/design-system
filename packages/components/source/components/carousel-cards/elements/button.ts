@@ -1,5 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { ELEMENT_TYPE } from '../component';
 import { BREAKPOINTS, VARIABLES } from '../globals';
 import { FORWARD_ARROW_ICON } from '../../../assets/icons';

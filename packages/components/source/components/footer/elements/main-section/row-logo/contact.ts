@@ -1,5 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { MakeSlot, MakeSpan } from 'helpers/ui';
 import { ELEMENT_TYPE } from '../../../component';
 import { BREAKPOINTS } from '../../../globals';

@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { spacing } from '@universityofmaryland/umd-web-configuration';
 import { ELEMENT_TYPE } from '../component';
 import { SLOTS, ELEMENTS } from '../globals';
 

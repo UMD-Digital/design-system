@@ -1,5 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { MakeSlot } from 'helpers/ui';
 import { SetLocalString } from '../services/helper';
 import { CLOSE_BUTTON_ICON, NOTIFICATION_ICON } from 'assets/icons';

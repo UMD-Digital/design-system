@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { spacing } from '@universityofmaryland/umd-web-configuration';
 import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
 import { ELEMENT_TYPE } from '../../../component';
 import { VARIABLES, ELEMENTS, BREAKPOINTS } from '../../../globals';

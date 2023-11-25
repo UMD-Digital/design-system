@@ -1,5 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
-import { spacing } from '@universityofmaryland/umd-web-configuration/dist/tokens/layout.js';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { CreateContent, ContentStyles } from './content';
 import { CreateImage, ImageStyles } from './image';
 import { CreateCta, CtaStyles } from './cta';

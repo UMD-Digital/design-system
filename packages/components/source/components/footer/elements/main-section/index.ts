@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
+import { colors } from '@universityofmaryland/umd-web-configuration';
 import { ELEMENT_TYPE } from '../../component';
 import { VARIABLES, ELEMENTS } from '../../globals';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';

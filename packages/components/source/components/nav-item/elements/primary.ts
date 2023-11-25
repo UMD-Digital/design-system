@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration/dist/tokens/colors.js';
+import { colors } from '@universityofmaryland/umd-web-configuration';
 import { MakeSlot } from 'helpers/ui';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { ElementType } from '../component';

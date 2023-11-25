@@ -15,8 +15,5 @@
     "build": "tsc",
     "clean": "rm -rf dist",
     "start": "tsc -w"
-  },
-  "dependencies": {
-    "tailwindcss": "^3.3.5"
   }
 }

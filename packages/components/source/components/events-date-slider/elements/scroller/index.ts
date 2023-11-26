@@ -1,7 +1,7 @@
-import { ELEMENT_TYPE } from '../../component';
-import { BREAKPOINTS } from '../../globals';
 import { CreateIntroWrapper, IntroStyles } from './intro';
 import { CreateDatesContainer, DatesStyles } from './dates';
+import { ELEMENT_TYPE } from '../../component';
+import { BREAKPOINTS } from '../../globals';
 
 const CONTAINER_SCROLL_WRAPPER_CLASS = 'umd-element-container-wrapper';
 

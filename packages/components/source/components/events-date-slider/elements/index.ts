@@ -1,9 +1,9 @@
 import { colors } from '@universityofmaryland/umd-web-configuration';
-import { ELEMENT_TYPE } from '../component';
-import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 import { SizeDatesElements } from '../services/helpers';
 import { CreateCoverElement, CoverStyles } from './cover';
 import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
+import { ELEMENT_TYPE } from '../component';
+import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 
 const CONTAINER_CLASS = 'umd-element-date-slider-container';
 

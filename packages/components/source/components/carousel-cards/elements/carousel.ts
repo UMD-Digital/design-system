@@ -1,15 +1,20 @@
+import { umdLock } from '@universityofmaryland/umd-web-configuration';
+import {
+  CovertObjectMediaQueriesToStyles,
+  CovertObjectToStyles,
+} from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
 import { ELEMENT_TYPE } from '../component';
 import { CreateButton, ButtonStyles } from './button';
 import { SLOTS, BREAKPOINTS, ELEMENTS } from '../globals';
 
 const CAROUSEL_CONTAINER = 'umd-carousel-cards-carousel-container';
+const CAROUSEL_CONTAINER_LOCK = 'umd-carousel-cards-carousel-container-lock';
 
 export const CarouselContainerStyles = `
   .${CAROUSEL_CONTAINER} {
     color: white;
     position: relative;
-
   }
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
@@ -18,17 +23,27 @@ export const CarouselContainerStyles = `
     }
   }
 
+  .${CAROUSEL_CONTAINER_LOCK} {
+    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+  }
+
+  ${CovertObjectMediaQueriesToStyles({
+    element: CAROUSEL_CONTAINER_LOCK,
+    styles: umdLock['.umd-lock'],
+  })}
+
   .${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER} {
     overflow: hidden;
     padding-right: 0;
   }
 
-  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER}  {
       max-width: inherit;
       padding: 0;
     }
   }
+
   ${ButtonStyles}
 `;
 
@@ -43,7 +58,7 @@ export const CreateCarouselColumn = ({
   const fowardButton = CreateButton({ element });
 
   container.classList.add(CAROUSEL_CONTAINER);
-  wrapper.classList.add('umd-lock');
+  wrapper.classList.add(CAROUSEL_CONTAINER_LOCK);
   wrapper.classList.add(ELEMENTS.CAROUSEL_CONTAINER_WRAPPER);
 
   wrapper.appendChild(slot);

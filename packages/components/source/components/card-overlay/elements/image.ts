@@ -1,4 +1,3 @@
-import { MakeSlot } from 'helpers/ui';
 import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';

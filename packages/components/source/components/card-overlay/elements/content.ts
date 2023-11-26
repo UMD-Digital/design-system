@@ -14,7 +14,6 @@ export const CreateContent = ({ element }: { element: CardType }) => {
   const contentSlot = MakeSlot({ type: SLOTS.CONTENT });
 
   container.classList.add(ELEMENTS.CONTENT_CONTAINER);
-
   container.appendChild(contentSlot);
 
   return container;

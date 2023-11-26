@@ -1,7 +1,7 @@
 import { MakeSlot } from 'helpers/ui';
+import { CreateBackButton, CreateForwardButton, ButtonStyles } from './button';
 import { ELEMENT_TYPE } from '../../../component';
 import { BREAKPOINTS, ELEMENTS, SLOTS } from '../../../globals';
-import { CreateBackButton, CreateForwardButton, ButtonStyles } from './button';
 
 export const DatesStyles = `
   :host .${ELEMENTS.DATES_CONTAINER_CLASS} {

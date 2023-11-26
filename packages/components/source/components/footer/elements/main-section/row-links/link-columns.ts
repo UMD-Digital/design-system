@@ -1,6 +1,12 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
-import { BREAKPOINTS } from '../../../globals';
+import {
+  colors,
+  spacing,
+  typography,
+} from '@universityofmaryland/umd-web-configuration';
+import { fontWeight } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts';
+import { CovertObjectToStyles } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
+import { BREAKPOINTS } from '../../../globals';
 
 const LINK_TYPE = 'link';
 const HEADLINE_TYPE = 'headline';
@@ -16,6 +22,8 @@ const ROW_LINKS_COLUMN_WRAPPER = 'umd-footer-row-links-column-wrapper';
 const SLOT_COLUMN_ONE_NAME = 'link-column-one';
 const SLOT_COLUMN_TWO_NAME = 'link-column-two';
 const SLOT_COLUMN_THREE_NAME = 'link-column-three';
+const SLOT_COLUMN_HEADLINE = `link-column-headline`;
+const SLOT_COLUMN_FONTS = `link-column-fonts`;
 
 const COLUMN_ONE_DEFAULT_LINKS = [
   {
@@ -104,6 +112,7 @@ const COLUMN_THREE_DEFAULT_LINKS = [
   },
 ];
 
+// prettier-ignore
 export const LinkColumnStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
@@ -123,14 +132,18 @@ export const LinkColumnStyles = `
     color: ${colors.white};
   }
 
-  .${ROW_LINKS_COLUMNS_CONTAINER} .umd-interactive-sans-medium {
-    font-weight: 900;
+  .${SLOT_COLUMN_HEADLINE} {
+    ${CovertObjectToStyles({
+      styles: typography['.umd-interactive-sans-medium'],
+    })}
+    font-weight: ${fontWeight.extraBold};
   }
 
+  .${SLOT_COLUMN_FONTS} {
+    ${CovertObjectToStyles({ styles: typography['.umd-sans-smaller'] })}
+  }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${
-  BREAKPOINTS.large
-}px) {
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -158,10 +171,7 @@ export const LinkColumnStyles = `
     }
   }
 
-
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${
-  BREAKPOINTS.large
-}px) {
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} > p {
       grid-column: 1 / span 2;
     }
@@ -198,7 +208,7 @@ const CreateColumn = ({
             const link = document.createElement('a');
             link.textContent = row.title;
             link.href = row.url;
-            link.classList.add('umd-sans-smaller');
+            link.classList.add(SLOT_COLUMN_FONTS);
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
             wrapper.appendChild(link);
@@ -207,7 +217,7 @@ const CreateColumn = ({
         } else if (row.elmentType === HEADLINE_TYPE) {
           const headline = document.createElement('p');
           headline.textContent = row.title;
-          headline.classList.add('umd-interactive-sans-medium');
+          headline.classList.add(SLOT_COLUMN_HEADLINE);
           container.appendChild(headline);
         }
       });

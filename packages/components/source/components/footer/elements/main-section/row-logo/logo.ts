@@ -11,6 +11,7 @@ import {
 const LOGO_CONTAINER = 'umd-footer-logo-container';
 const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
 
+// prettier-ignore
 const ctaOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
@@ -25,9 +26,7 @@ const ctaOverwriteStyles = `
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${ELEMENTS.ELEMENT_WRAPPER}[type="${
-  VARIABLES.VERSION_TYPE_SIMPLE
-}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
+    .${ELEMENTS.ELEMENT_WRAPPER}[type="${VARIABLES.VERSION_TYPE_SIMPLE}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
   }

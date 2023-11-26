@@ -1,6 +1,12 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
-import { ELEMENT_TYPE } from '../../../component';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
+import {
+  colors,
+  spacing,
+  umdLock,
+} from '@universityofmaryland/umd-web-configuration';
+import {
+  CovertObjectMediaQueriesToStyles,
+  CovertObjectToStyles,
+} from 'helpers/styles';
 import {
   SocialContainerStyles,
   CreateSocialCampaignColumns,
@@ -13,9 +19,12 @@ import {
 } from '../call-to-action';
 import { ContactContainerStyles, CreateContactContainer } from './contact';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
+import { ELEMENT_TYPE } from '../../../component';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
 const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
+const ROW_LOGO_CONTAINER_LOCK = 'umd-footer-row-logo-container-lock';
 
 const ctaOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
@@ -25,22 +34,20 @@ const ctaOverwriteStyles = `
   }
 `;
 
+// prettier-ignore
 const themeOverwriteStyles = `
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
-  VARIABLES.THEME_OPTION_LIGHT
-}"] .${ROW_LOGO_CONTAINER} {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${ROW_LOGO_CONTAINER} {
     background-color: ${colors.gray.lightest} !important;
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${ELEMENTS.ELEMENT_WRAPPER}[type="${
-  VARIABLES.VERSION_TYPE_SIMPLE
-}"] .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+    .${ELEMENTS.ELEMENT_WRAPPER}[type="${VARIABLES.VERSION_TYPE_SIMPLE}"] .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 `;
 
+// prettier-ignore
 export const RowLogoStyles = `
   .${ROW_LOGO_CONTAINER} {
     background-color: ${colors.black};
@@ -52,9 +59,7 @@ export const RowLogoStyles = `
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${
-  BREAKPOINTS.large
-}px) {
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -74,7 +79,17 @@ export const RowLogoStyles = `
       padding: ${spacing['5xl']} 0 ${spacing['2xl']};
     }
   }
+
+  .${ROW_LOGO_CONTAINER_LOCK} {
+    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+  }
   
+
+  ${CovertObjectMediaQueriesToStyles({
+    element: ROW_LOGO_CONTAINER_LOCK,
+    styles: umdLock['.umd-lock'],
+  })}
+
   ${LogoContainerStyles}
   ${ContactContainerStyles}
   ${SocialContainerStyles}
@@ -91,7 +106,7 @@ export const CreateRowLogo = ({ element }: { element: ELEMENT_TYPE }) => {
 
   container.classList.add(ROW_LOGO_CONTAINER);
   wrapper.classList.add(ROW_LOGO_CONTAINER_WRAPPER);
-  lock.classList.add('umd-lock');
+  lock.classList.add(ROW_LOGO_CONTAINER_LOCK);
 
   const makeThirdColumn = () => {
     const includeSocial = type === VARIABLES.VERSION_TYPE_SIMPLE;

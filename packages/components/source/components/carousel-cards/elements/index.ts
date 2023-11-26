@@ -125,7 +125,6 @@ export const CreateContent = ({ element }: { element: ELEMENT_TYPE }) => {
   const carousel = CreateCarouselColumn({ element });
 
   container.classList.add(CAROUSEL_CONTAINER);
-  // wrapper.classList.add('umd-lock');
   wrapper.classList.add(CAROUSEL_LOCK);
 
   wrapper.appendChild(intro);

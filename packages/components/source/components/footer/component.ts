@@ -19,8 +19,7 @@ export class UMDFooterElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
 
-    const elementStyles = require('./styles/shadow-dom.css');
-    const styles = `${elementStyles.toString()}${ComponentStyles}`;
+    const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));

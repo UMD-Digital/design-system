@@ -1,11 +1,20 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
-import { ELEMENT_TYPE } from '../../../component';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
+import {
+  colors,
+  spacing,
+  umdLock,
+} from '@universityofmaryland/umd-web-configuration';
+import {
+  CovertObjectMediaQueriesToStyles,
+  CovertObjectToStyles,
+} from 'helpers/styles';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
+import { ELEMENT_TYPE } from '../../../component';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
 export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
+const ROW_LINKS_CONTAINER_LOCK = 'umd-footer-row-links-lock';
 
 const socialOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
@@ -19,10 +28,9 @@ const socialOverwriteStyles = `
       display: block !important;
     }
   }
-
-
 `;
 
+// prettier-ignore
 export const RowLinkStyles = `
   .${ROW_LINKS_CONTAINER} {
     padding-bottom: ${spacing['md']};
@@ -35,9 +43,7 @@ export const RowLinkStyles = `
     }
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
-  VARIABLES.THEME_OPTION_LIGHT
-}"] .${ROW_LINKS_CONTAINER} {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${ROW_LINKS_CONTAINER} {
     background-color: ${colors.gray.lightest};
   }
 
@@ -52,6 +58,15 @@ export const RowLinkStyles = `
     }
   }
 
+  .${ROW_LINKS_CONTAINER_LOCK} {
+    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+  }
+
+  ${CovertObjectMediaQueriesToStyles({
+    element: ROW_LINKS_CONTAINER_LOCK,
+    styles: umdLock['.umd-lock'],
+  })}
+
   ${LinkColumnStyles}
   ${socialOverwriteStyles}
 `;
@@ -63,7 +78,7 @@ export const CreateRowLinks = ({ element }: { element: ELEMENT_TYPE }) => {
   const socialColumnWrapper = CreateSocialCampaignColumns({ element });
   const linkColumnWrapper = CreateLinkColumns({ element });
 
-  lock.classList.add('umd-lock');
+  lock.classList.add(ROW_LINKS_CONTAINER_LOCK);
   container.classList.add(ROW_LINKS_CONTAINER);
   wrapper.classList.add(ROW_LINKS_CONTAINER_WRAPPER);
 

@@ -16,8 +16,7 @@ export class UMDExampleElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
 
-    const ElementStyles = require('./styles/shadow-dom.css');
-    const styles = `${ElementStyles.toString()}${ComponentStyles}`;
+    const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));

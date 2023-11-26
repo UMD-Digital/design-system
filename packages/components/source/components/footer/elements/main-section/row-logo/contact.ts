@@ -1,12 +1,18 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import {
+  colors,
+  spacing,
+  typography,
+} from '@universityofmaryland/umd-web-configuration';
+import { CovertObjectToStyles } from 'helpers/styles';
 import { MakeSlot, MakeSpan } from 'helpers/ui';
+import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { ELEMENT_TYPE } from '../../../component';
 import { BREAKPOINTS } from '../../../globals';
-import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 
 const SLOT_CONTACT_NAME = 'contact';
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_CONTAINER = 'umd-footer-contact-contact-list';
+const CONTACT_LIST_HEADLINE = 'umd-footer-contact-list-headline';
 
 const DEFAULT_HEADLINE_LINK = {
   url: 'https://www.usmd.edu/',
@@ -110,6 +116,12 @@ export const ContactContainerStyles = `
     left: 0;
   }
 
+  .${CONTACT_LIST_HEADLINE} {
+    ${CovertObjectToStyles({
+      styles: typography['.umd-interactive-sans-medium'],
+    })}
+  }
+
   ${socialOverwriteStyles}
 `;
 
@@ -159,7 +171,7 @@ export const CreateContactContainer = ({
 
     const headlineLink = makeLink(DEFAULT_HEADLINE_LINK);
 
-    headline.classList.add('umd-interactive-sans-medium');
+    headline.classList.add(CONTACT_LIST_HEADLINE);
     headline.appendChild(headlineLink);
 
     addressParagraph.appendChild(MakeSpan({ text: DEFAULT_ADDRESS_TITLE }));

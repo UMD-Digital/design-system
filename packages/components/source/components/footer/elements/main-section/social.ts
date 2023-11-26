@@ -1,4 +1,9 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import {
+  colors,
+  spacing,
+  typography,
+} from '@universityofmaryland/umd-web-configuration';
+import { CovertObjectToStyles } from 'helpers/styles';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import { ELEMENT_TYPE } from '../../component';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../globals';
@@ -14,6 +19,7 @@ const SLOT_SOCIAL_NAME = 'social-links';
 export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
 const SOCIAL_CONTAINER_WRAPPER = 'umd-footer-social-container_wrapper';
+const SOCIAL_CONTAINER_HEADLINE = 'umd-footer-social-container_headline';
 
 const campaignOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
@@ -50,6 +56,7 @@ const themeOverwriteStyles = `
   }
 `;
 
+// prettier-ignore
 export const SocialContainerStyles = `
   .${SOCIAL_CONTAINER} {
     margin-left: auto;
@@ -120,6 +127,12 @@ export const SocialContainerStyles = `
 
   .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
     fill: ${colors.gray.dark} !important;
+  }
+
+  .${SOCIAL_CONTAINER_HEADLINE} {
+    ${CovertObjectToStyles({
+      styles: typography['.umd-interactive-sans-medium'],
+    })}
   }
 
   ${campaignOverwriteStyles}
@@ -213,7 +226,7 @@ const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
   linksWrapper.classList.add(SOCIAL_CONTAINER_WRAPPER);
   linksWrapper.setAttribute('count', `${socialLinks.length}`);
 
-  headline.classList.add('umd-interactive-sans-medium');
+  headline.classList.add(SOCIAL_CONTAINER_HEADLINE);
   headline.innerText = 'Stay Connected';
 
   container.appendChild(headline);

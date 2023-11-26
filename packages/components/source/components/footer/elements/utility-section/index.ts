@@ -1,23 +1,46 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import {
+  colors,
+  spacing,
+  umdLock,
+  typography,
+} from '@universityofmaryland/umd-web-configuration';
+import {
+  CovertObjectMediaQueriesToStyles,
+  CovertObjectToStyles,
+} from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../../globals';
 
 const SLOT_UTILITY_LINKS_NAME = 'utility-links';
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
+const UTILITY_CONTAINER_LOCK = 'umd-footer-utility-container-lock';
+const UTILITY_CONTAINER_LINK = 'umd-footer-utility-container-link';
 
+// prettier-ignore
 export const UtilityContainerStyles = `
   .${UTILITY_CONTAINER} {
     padding: ${spacing.sm} 0;
     background-color: ${colors.gray.darker};
   }
+
+  .${UTILITY_CONTAINER_LOCK} {
+    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+  }
+  
+
+  ${CovertObjectMediaQueriesToStyles({
+    element: UTILITY_CONTAINER_LOCK,
+    styles: umdLock['.umd-lock'],
+  })}
   
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
-    .${UTILITY_CONTAINER} .umd-lock {
+    .${UTILITY_CONTAINER_LOCK} {
       display: flex;
+      align-items: center;
     }
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${UTILITY_CONTAINER} .umd-lock > *:not(:first-child) {
+    .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-top: ${spacing.sm};
     }
   }
@@ -29,7 +52,7 @@ export const UtilityContainerStyles = `
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
-    .${UTILITY_CONTAINER} .umd-lock > *:not(:first-child) {
+    .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-left: ${spacing.sm};
       padding-left: ${spacing.sm};
       background-position: ${spacing.sm} 100%;
@@ -37,24 +60,22 @@ export const UtilityContainerStyles = `
     }
   }
   
-  .${UTILITY_CONTAINER} .umd-lock p {
+  .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} p {
     color: ${colors.white};
     display: flex;
     align-items: center;
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
-  VARIABLES.THEME_OPTION_LIGHT
-}"] .${UTILITY_CONTAINER} {
+  .${UTILITY_CONTAINER_LINK} {
+    ${CovertObjectToStyles({ styles: typography['.umd-sans-min'] })}
+  }
+
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {
     background-color: ${colors.gray.light};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
-  VARIABLES.THEME_OPTION_LIGHT
-}"] .${UTILITY_CONTAINER} a,
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${
-  VARIABLES.THEME_OPTION_LIGHT
-}"] .${UTILITY_CONTAINER} p {
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a,
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
     color: ${colors.black};
   }
 `;
@@ -77,7 +98,7 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
   link.setAttribute('target', '_blank');
   link.setAttribute('rel', 'noopener noreferrer');
   link.innerText = title;
-  link.classList.add('umd-sans-min');
+  link.classList.add(UTILITY_CONTAINER_LINK);
 
   wrapper.appendChild(link);
   return wrapper;
@@ -90,7 +111,7 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
   const copyRight = document.createElement('p');
 
   container.classList.add(UTILITY_CONTAINER);
-  wrapper.classList.add('umd-lock');
+  wrapper.classList.add(UTILITY_CONTAINER_LOCK);
 
   if (slot) {
     const slottedLinks = Array.from(
@@ -100,13 +121,13 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
     slottedLinks.forEach((link) => {
       const divWrapper = document.createElement('div');
 
-      link.classList.add('umd-sans-min');
+      link.classList.add(UTILITY_CONTAINER_LINK);
       divWrapper.appendChild(link);
       wrapper.appendChild(divWrapper);
     });
   }
   requiredSubLinks.forEach((link) => wrapper.appendChild(createSubLink(link)));
-  copyRight.classList.add('umd-sans-min');
+  copyRight.classList.add(UTILITY_CONTAINER_LINK);
   copyRight.innerHTML = `©${new Date().getFullYear()} UNIVERSITY OF MARYLAND`;
   wrapper.appendChild(copyRight);
   container.appendChild(wrapper);

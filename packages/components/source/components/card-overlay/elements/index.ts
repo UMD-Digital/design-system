@@ -120,7 +120,7 @@ const VariantComboStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-card / inline-size;
+    container: umd-card-overlay / inline-size;
   }
 
   :host * {

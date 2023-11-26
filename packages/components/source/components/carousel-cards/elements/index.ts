@@ -1,4 +1,12 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import {
+  colors,
+  spacing,
+  umdLock,
+} from '@universityofmaryland/umd-web-configuration';
+import {
+  CovertObjectToStyles,
+  CovertObjectMediaQueriesToStyles,
+} from 'helpers/styles';
 import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 import {
@@ -21,6 +29,10 @@ export const ComponentStyles = `
     display: block;
     position: relative !important;
     container: umd-carousel-card / inline-size; 
+  }
+
+  :host button {
+    border: none;
   }
 
   .${CAROUSEL_CONTAINER} {
@@ -63,9 +75,15 @@ export const ComponentStyles = `
 
   .${CAROUSEL_LOCK} {
     position: relative;
+    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
   }
 
-  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+  ${CovertObjectMediaQueriesToStyles({
+    element: CAROUSEL_LOCK,
+    styles: umdLock['.umd-lock'],
+  })}
+
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${CAROUSEL_LOCK} {
       display: flex;
       justify-content: space-between;
@@ -73,7 +91,7 @@ export const ComponentStyles = `
     }
   }
 
-  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+  @media umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
     .${CAROUSEL_LOCK} {
       max-width: inherit;
       padding: 0;
@@ -107,7 +125,7 @@ export const CreateContent = ({ element }: { element: ELEMENT_TYPE }) => {
   const carousel = CreateCarouselColumn({ element });
 
   container.classList.add(CAROUSEL_CONTAINER);
-  wrapper.classList.add('umd-lock');
+  // wrapper.classList.add('umd-lock');
   wrapper.classList.add(CAROUSEL_LOCK);
 
   wrapper.appendChild(intro);

@@ -9,7 +9,7 @@ umd-element-carousel-cards {
 
   & .umd-aligned-content > * {
     text-wrap: pretty;
-    margin-top: theme.(spacing.md);
+    margin-top: theme(spacing.md);
   }
 }
 

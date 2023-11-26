@@ -21,8 +21,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
   constructor() {
     super();
 
-    const elementStyles = require('./styles/shadow-dom.css');
-    const styles = `${elementStyles.toString()}${ComponentStyles}`;
+    const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
 
     this._shadow = this.attachShadow({ mode: 'open' });

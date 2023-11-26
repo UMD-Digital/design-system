@@ -1,7 +1,7 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { MakeSlot } from 'helpers/ui';
-import { SetLocalString } from '../services/helper';
 import { CLOSE_BUTTON_ICON, NOTIFICATION_ICON } from 'assets/icons';
+import { SetLocalString } from '../services/helper';
 import { BREAKPOINTS, ELEMENTS } from '../globals';
 import { EventClose } from '../services/events';
 

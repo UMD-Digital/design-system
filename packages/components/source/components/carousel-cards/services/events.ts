@@ -47,6 +47,66 @@ export const EventScrollCarousel = ({ element }: { element: ELEMENT_TYPE }) => {
   }, VARIABLES.ANIMATION_DURATION + 100);
 };
 
+export const EventSwipe = ({
+  container,
+  element,
+}: {
+  container: HTMLDivElement;
+  element: ELEMENT_TYPE;
+}) => {
+  const threshold = 20;
+  const allowedTime = 100;
+  let startX = 0;
+  let dist = 0;
+  let elapsedTime = 0;
+  let startTime = 0;
+
+  const swipes = (isrightswipe: Boolean) => {
+    console.log(isrightswipe);
+    if (!isrightswipe) {
+      EventScrollCarousel({ element });
+    }
+  };
+
+  container.addEventListener(
+    'touchstart',
+    (event) => {
+      const touchObject = event.changedTouches[0];
+
+      dist = 0;
+      startX = touchObject.pageX;
+      startTime = new Date().getTime();
+      event.preventDefault();
+    },
+    false,
+  );
+
+  container.addEventListener(
+    'touchmove',
+    (event) => {
+      event.preventDefault();
+    },
+    false,
+  );
+
+  container.addEventListener(
+    'touchend',
+    (event) => {
+      const touchObject = event.changedTouches[0];
+
+      dist = touchObject.pageX - startX;
+      elapsedTime = new Date().getTime() - startTime;
+
+      if (elapsedTime > allowedTime && Math.abs(dist) >= threshold) {
+        swipes(dist > 0);
+      }
+
+      event.preventDefault();
+    },
+    false,
+  );
+};
+
 export const EventResizeSetHeight = ({
   element,
 }: {

@@ -10,6 +10,7 @@ import {
   EventResizeCarouselElementsWidth,
   EventResizeSetHeight,
   EventScrollCarousel,
+  EventSwipe,
 } from './services/events';
 import { CreateContent, OnLoadStyles, ComponentStyles } from './elements';
 
@@ -40,6 +41,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
     OnLoadStyles({ element });
 
     window.addEventListener('resize', Debounce(resize, 20));
+    EventSwipe({ container: content, element });
   }
 
   eventMoveForward() {

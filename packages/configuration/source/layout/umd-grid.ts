@@ -115,6 +115,50 @@ const umdGridSpecial = {
     },
   },
 
+  '.umd-grid-two-animated-overlay-card': {
+    ...umdGridGutterless['.umd-grid-gutterless-two'],
+
+    [`@media (${queries.desktop.min})`]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      minHeight: `calc(${spacing['3xl']} * 10)`,
+    },
+
+    '& umd-element-card-overlay': {
+      boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)',
+      transition: 'box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out',
+      transform: 'scale(1)',
+
+      [`&:hover,
+        &:focus-within `]: {
+        boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
+        transform: 'scale(1.025)',
+        zIndex: '99',
+      },
+    },
+  },
+
+  '.umd-grid-three-animated-overlay-card': {
+    ...umdGridGutterless['.umd-grid-gutterless-three'],
+
+    [`@media (${queries.desktop.min})`]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      minHeight: `calc(${spacing['3xl']} * 10)`,
+    },
+
+    '& umd-element-card-overlay': {
+      boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)',
+      transition: 'box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out',
+      transform: 'scale(1)',
+
+      [`&:hover,
+        &:focus-within `]: {
+        boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
+        transform: 'scale(1.025)',
+        zIndex: '99',
+      },
+    },
+  },
+
   '.umd-grid-four-animated-overlay-card': {
     ...umdGridGutterless['.umd-grid-gutterless-four'],
 

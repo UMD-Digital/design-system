@@ -4,12 +4,12 @@ Base configuration for the University of Maryland Design System by the [Office o
 
 ## Requirements
 
-**Dependancies:** This package requires [tailwind](https://tailwindcss.com/), and is installed as a dependancy. _[Review tailwind's documentation](https://tailwindcss.com/docs/installation) for specific support with setting up tailwind._
+**Dependancies:** This package requires [tailwind CSS](https://tailwindcss.com/), and must be installed in addition to the configuration `yarn` or `npm`. _[Review tailwind's documentation](https://tailwindcss.com/docs/installation) for specific support with setting up tailwind._
 
 ## Installation
 
 ```bash
-yarn install @universityofmaryland/umd-web-configuration
+yarn install tailwindcss @universityofmaryland/umd-web-configuration
 ```
 
 ## Basic Usage

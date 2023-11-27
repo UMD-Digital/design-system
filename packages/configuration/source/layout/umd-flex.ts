@@ -76,9 +76,50 @@ const flexGridContent = {
   },
 };
 
+const umdFlexSpecial = {
+  '.umd-flex-three-animated-icon-card': {
+    ...flexGridCore['.umd-flex-three'],
+    ...flexGridContent['.umd-flex-three > *'],
+    ...{
+      '& umd-element-card-icon': {
+        boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)',
+        transition: 'box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out',
+        transform: 'scale(1)',
+
+        [`&:hover,
+        &:focus-within `]: {
+          boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
+          transform: 'scale(1.025)',
+          zIndex: '99',
+        },
+      },
+    },
+  },
+
+  '.umd-flex-four-animated-icon-card': {
+    ...flexGridCore['.umd-flex-four'],
+    ...flexGridContent['.umd-flex-four > *'],
+    ...{
+      '& umd-element-card-icon': {
+        boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)',
+        transition: 'box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out',
+        transform: 'scale(1)',
+
+        [`&:hover,
+        &:focus-within `]: {
+          boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
+          transform: 'scale(1.025)',
+          zIndex: '99',
+        },
+      },
+    },
+  },
+};
+
 const umdFlexGrid = {
   ...flexGridCore,
   ...flexGridContent,
+  ...umdFlexSpecial,
 };
 
 export { umdFlexGrid };

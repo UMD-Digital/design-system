@@ -29,6 +29,7 @@ export const ComponentStyles = `
     display: block;
     position: relative !important;
     container: umd-carousel-card / inline-size; 
+    background-color: ${colors.black};
   }
 
   :host button {

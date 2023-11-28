@@ -87,7 +87,7 @@ export class UMDNavItemElement extends HTMLElement {
       DropdownPositionPerViewPort({ element });
     };
 
-    window.addEventListener('resize', () => Debounce(resize, 20));
+    window.addEventListener('resize', Debounce(resize, 20));
 
     element.addEventListener('mouseover', () => {
       this._isShowing = true;

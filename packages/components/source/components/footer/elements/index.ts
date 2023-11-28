@@ -15,6 +15,10 @@ export const ComponentStyles = `
     text-wrap: pretty;
   }
 
+  :host a {
+    text-decoration: none;
+  }
+
   ${MainContainerStyles}
   ${UtilityContainerStyles}
 `;

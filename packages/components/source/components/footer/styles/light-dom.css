@@ -24,6 +24,7 @@ umd-element-footer {
     display: inline;
     position: relative;
     transition: background-size 0.4s;
+    text-decoration: none;
   }
 
   & a:hover,

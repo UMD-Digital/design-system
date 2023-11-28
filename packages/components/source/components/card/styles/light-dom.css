@@ -11,7 +11,9 @@ umd-element-card {
   }
 
   & [slot='headline'] {
-    color: theme(colors.black);
+    & * {
+      color: theme(colors.black);
+    }
   }
 
   & [slot='headline'] > p {

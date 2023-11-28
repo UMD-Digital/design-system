@@ -38,7 +38,6 @@ export const ComponentStyles = `
   .${CAROUSEL_CONTAINER} {
     background-color: ${colors.black};
     padding: ${spacing.md} 0;
-    min-height: 40vh;
     position: relative;
     overflow: hidden;
   }

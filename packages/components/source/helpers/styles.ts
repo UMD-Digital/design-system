@@ -37,3 +37,15 @@ export const CovertObjectMediaQueriesToStyles = ({
 
   return contactString;
 };
+
+export const MakeDefaultStyleTag = ({
+  styleString,
+}: {
+  styleString: string;
+}) => {
+  const body = document.querySelector('body') as HTMLBodyElement;
+  const style = document.createElement('style');
+  style.innerHTML = `${styleString.replace(/\s\s+/g, ' ')}`;
+
+  body.appendChild(style);
+};

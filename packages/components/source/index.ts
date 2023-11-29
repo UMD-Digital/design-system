@@ -1,4 +1,4 @@
-import { MakeDefaultStyleTag } from 'helpers/ui';
+import { MakeDefaultStyleTag } from 'helpers/styles';
 import { Load as AlertLoader } from './components/alert/component';
 import { Load as CardLoader } from './components/card/component';
 import { Load as CardOverlayLoader } from './components/card-overlay/component';

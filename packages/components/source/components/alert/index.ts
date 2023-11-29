@@ -1,4 +1,4 @@
-import { MakeDefaultStyleTag } from 'helpers/ui';
+import { MakeDefaultStyleTag } from 'helpers/styles';
 import { Load } from './component';
 
 const styleString = Load();

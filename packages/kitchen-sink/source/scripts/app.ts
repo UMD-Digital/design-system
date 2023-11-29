@@ -1,7 +1,8 @@
 require('styles/index.css');
-import '@universityofmaryland/umd-web-components';
+import LoadUmdComponents from '@universityofmaryland/umd-web-components';
 import { AlertsTest } from './elements/alerts';
 
 document.addEventListener('DOMContentLoaded', () => {
+  LoadUmdComponents();
   AlertsTest();
 });

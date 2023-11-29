@@ -39,6 +39,8 @@ const componentBundle = {
   output: {
     path: path.resolve('dist'),
     filename: '[name].js',
+    umdNamedDefine: true,
+    libraryTarget: 'umd',
   },
   module: {
     rules: [

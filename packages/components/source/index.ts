@@ -7,12 +7,16 @@ import { Load as DateSliderLoader } from './components/events-date-slider/compon
 import { Load as FooterLoader } from './components/footer/component';
 import { Load as NavDropdownLoader } from './components/nav-item/component';
 
-let styleString = AlertLoader();
-styleString += CardLoader();
-styleString += CardOverlayLoader();
-styleString += CarouselCardsLoader();
-styleString += DateSliderLoader();
-styleString += FooterLoader();
-styleString += NavDropdownLoader();
+const LoadUmdComponents = () => {
+  let styleString = AlertLoader();
+  styleString += CardLoader();
+  styleString += CardOverlayLoader();
+  styleString += CarouselCardsLoader();
+  styleString += DateSliderLoader();
+  styleString += FooterLoader();
+  styleString += NavDropdownLoader();
 
-MakeDefaultStyleTag({ styleString });
+  MakeDefaultStyleTag({ styleString });
+};
+
+export default LoadUmdComponents;

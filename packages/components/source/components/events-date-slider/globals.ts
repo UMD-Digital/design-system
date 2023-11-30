@@ -13,7 +13,8 @@ export const ELEMENTS = {
 
 export const SLOTS = {
   DATE_SLOT_NAME: 'date-list',
-  INTRODUCTION_SLOT_NAME: 'introduction',
+  HEADLINE_SLOT_NAME: 'headline',
+  LINK_SLOT_NAME: 'link',
 };
 
 export const VARIABLES = {};

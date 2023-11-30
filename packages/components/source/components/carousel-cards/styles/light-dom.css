@@ -1,7 +1,3 @@
-umd-element-carousel-cards:not(:defined) {
-  display: none;
-}
-
 umd-element-carousel-cards {
   & [slot='intro'] {
     & .umd-rich-text,

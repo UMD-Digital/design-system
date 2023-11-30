@@ -1,7 +1,3 @@
-umd-element-footer:not(:defined) {
-  display: none;
-}
-
 umd-element-footer {
   & a,
   & p {

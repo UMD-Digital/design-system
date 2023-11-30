@@ -1,4 +1,6 @@
 umd-element-events-date-slider {
+  container: dates-slider / inline-size;
+
   &[theme='dark'] {
     & [slot='date-list'],
     & [slot='introduction'] {
@@ -6,11 +8,21 @@ umd-element-events-date-slider {
     }
   }
 
-  & [slot='introduction'] > * {
+  & [slot='link']:has(a) {
     margin-top: theme(spacing.min);
 
-    &:last-child {
-      margin-top: 0;
+    & * {
+      margin-top: 0 !important;
+    }
+  }
+}
+
+umd-element-events-date-slider {
+  @container dates-slider (max-width: 550px) {
+    & [slot='headline'],
+    & [slot='link'] {
+      display: flex;
+      justify-content: center;
     }
   }
 }

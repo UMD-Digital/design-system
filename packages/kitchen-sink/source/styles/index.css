@@ -12,6 +12,8 @@
 /* Elements */
 
 @import './elements/alert.css';
+@import './elements/card.css';
+@import './elements/card-overlay.css';
 @import './elements/carousel-cards.css';
 @import './elements/events-date-slider.css';
 @import './elements/footer.css';

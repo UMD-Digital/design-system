@@ -1,3 +1,7 @@
+umd-element-footer:not(:defined) {
+  display: none;
+}
+
 * + umd-element-footer {
   margin-top: theme(spacing.2xl);
 }

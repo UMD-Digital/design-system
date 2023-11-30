@@ -1,0 +1,3 @@
+umd-element-card:not(:defined) {
+  display: none;
+}

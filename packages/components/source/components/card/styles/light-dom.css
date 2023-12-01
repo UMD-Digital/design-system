@@ -1,40 +1,29 @@
 umd-element-card {
-  & [slot='headline'],
-  & [slot='body'] {
-    & * + * {
-      margin-top: theme(spacing.min);
-    }
-  }
-
-  & [slot='headline'] {
-    & * {
-      color: theme(colors.black);
-    }
-  }
-
-  & [slot='headline'] > p {
+  & [slot='headline'] * {
     margin-bottom: 0;
+    margin-top: 0;
   }
 
-  & [slot='body'] {
-    & > .umd-links-group:last-child,
-    & > a[class^='umd-cta']:last-child {
-      margin-top: theme(spacing.sm);
+  & [slot='text'] {
+    & * {
+      color: theme(colors.gray.darker);
     }
   }
 }
 
 umd-element-card[theme='dark'] {
   & [slot='headline'],
+  & [slot='eyebrow'],
+  & [slot='date'],
   & [slot='body'] {
-    background-color: theme(colors.gray.darker);
-
     & * {
       color: theme(colors.white);
     }
   }
 
   & .umd-rich-text {
-    @apply umd-rich-text-dark;
+    & * {
+      @apply umd-rich-text-dark;
+    }
   }
 }

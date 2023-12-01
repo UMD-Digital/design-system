@@ -3,6 +3,9 @@ export const ELEMENTS = {};
 export const SLOTS = {
   IMAGE: 'image',
   HEADLINE: 'headline',
-  BODY: 'body',
+  EYEBROW: 'eyebrow',
+  TEXT: 'text',
+  CTA: 'cta',
+  DATE: 'date',
 };
 export const VARIABLES = {};

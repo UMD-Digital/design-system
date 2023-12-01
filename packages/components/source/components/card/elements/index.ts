@@ -1,6 +1,6 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { CreateImage, ImageStyles } from './image';
-import { CreateHeadline, HeadlineStyles } from './headline';
+import { CreateIntro, IntroStyles } from './intro';
 import { CreateBody, BodyStyles } from './body';
 import { CardType } from '../component';
 
@@ -80,7 +80,7 @@ export const ComponentStyles = `
   }
 
   ${ImageStyles}
-  ${HeadlineStyles}
+  ${IntroStyles}
   ${BodyStyles}
   ${VariantThemeStyles}
   ${VariantAlignedStyles}
@@ -91,7 +91,7 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
   const textContainer = document.createElement('div');
   const image = CreateImage({ element });
-  const headline = CreateHeadline({ element });
+  const intro = CreateIntro({ element });
   const body = CreateBody({ element });
 
   container.setAttribute('theme', element._theme);
@@ -99,7 +99,7 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
   container.setAttribute('border', element._border);
 
   textContainer.classList.add(CARD_TEXT_CONTAINER);
-  textContainer.appendChild(headline);
+  textContainer.appendChild(intro);
   textContainer.appendChild(body);
 
   container.classList.add(CARD_CONTAINER);

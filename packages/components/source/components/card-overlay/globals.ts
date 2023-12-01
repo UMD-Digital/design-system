@@ -12,5 +12,6 @@ export const SLOTS = {
   TEXT: 'text',
   CTA: 'cta',
   CTAICON: 'cta-icon',
+  DATE: 'date',
 };
 export const VARIABLES = {};

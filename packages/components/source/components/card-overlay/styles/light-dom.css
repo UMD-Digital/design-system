@@ -1,20 +1,3 @@
-umd-element-card-overlay {
-  & [slot='content'] {
-    & * + * {
-      margin-top: theme(spacing.sm);
-    }
-
-    & > p {
-      margin-bottom: 0;
-    }
-
-    & .umd-sans-smaller:first-child + *,
-    & .umd-eyebrow:first-child + * {
-      margin-top: theme(spacing.min);
-    }
-  }
-}
-
 umd-element-card-overlay[data-image='true'],
 umd-element-card-overlay[theme='dark'] {
   background-color: theme(colors.black);

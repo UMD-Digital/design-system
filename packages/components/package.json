@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/umd-web-components",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "UMD Web Components",
   "main": "dist/bundle.js",
   "module": "dist/index.js",

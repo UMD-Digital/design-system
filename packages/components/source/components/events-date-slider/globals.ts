@@ -1,7 +1,7 @@
 export const BREAKPOINTS = {
-  tablet: 550,
-  desktop: 750,
-  large: 950,
+  tablet: 650,
+  desktop: 850,
+  large: 1000,
 };
 
 export const ELEMENTS = {

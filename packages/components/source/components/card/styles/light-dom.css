@@ -15,7 +15,8 @@ umd-element-card[theme='dark'] {
   & [slot='headline'],
   & [slot='eyebrow'],
   & [slot='date'],
-  & [slot='body'] {
+  & [slot='body'],
+  & [slot='cta'] {
     & * {
       color: theme(colors.white);
     }

@@ -7,7 +7,9 @@ export const ELEMENTS = {
 };
 export const SLOTS = {
   IMAGE: 'image',
-  CONTENT: 'content',
+  HEADLINE: 'headline',
+  EYEBROW: 'eyebrow',
+  TEXT: 'text',
   CTA: 'cta',
   CTAICON: 'cta-icon',
 };

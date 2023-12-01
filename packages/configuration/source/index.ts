@@ -9,7 +9,7 @@ import { root } from './dependancies/root';
 
 // css-class based components
 
-import { skipContent } from './common/accessibility';
+import { skipContent, screenReaderOnly } from './common/accessibility';
 import { typography } from './common/typography';
 import { animatedLinks } from './common/animated-links';
 import { richText } from './common/rich-text';
@@ -56,6 +56,7 @@ export {
   fontSize,
   screens,
   spacing,
+  screenReaderOnly,
   skipContent,
   richText,
   typography,

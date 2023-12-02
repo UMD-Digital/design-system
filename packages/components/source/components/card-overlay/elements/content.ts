@@ -27,7 +27,7 @@ export const ContentStyles = `
     margin-top: ${spacing.min}
   }
 
-  .${OVERLAY_CARD_HEADLINE}::slotted(*) {
+  .${OVERLAY_CARD_HEADLINE} ::slotted(*) {
     ${CovertObjectToStyles({ styles: typography['.umd-sans-larger'] })}
   }
 
@@ -47,10 +47,6 @@ export const ContentStyles = `
 
 export const CreateContent = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
-  const eyebrowWrapper = document.createElement('div');
-  const headlineWrapper = document.createElement('div');
-  const textWrapper = document.createElement('div');
-  const dateWrapper = document.createElement('div');
   const eyebrowSlot = MakeSlot({ type: SLOTS.EYEBROW });
   const headlineSlot = MakeSlot({ type: SLOTS.HEADLINE });
   const textSlot = MakeSlot({ type: SLOTS.TEXT });
@@ -58,22 +54,33 @@ export const CreateContent = ({ element }: { element: CardType }) => {
 
   container.classList.add(ELEMENTS.CONTENT_CONTAINER);
 
-  eyebrowWrapper.appendChild(eyebrowSlot);
-  eyebrowWrapper.classList.add(OVERLAY_CARD_EYEBROW);
+  if (eyebrowSlot) {
+    const eyebrowWrapper = document.createElement('div');
+    eyebrowWrapper.appendChild(eyebrowSlot);
+    eyebrowWrapper.classList.add(OVERLAY_CARD_EYEBROW);
+    container.appendChild(eyebrowWrapper);
+  }
 
-  headlineWrapper.appendChild(headlineSlot);
-  headlineWrapper.classList.add(OVERLAY_CARD_HEADLINE);
+  if (headlineSlot) {
+    const headlineWrapper = document.createElement('div');
+    headlineWrapper.appendChild(headlineSlot);
+    headlineWrapper.classList.add(OVERLAY_CARD_HEADLINE);
+    container.appendChild(headlineWrapper);
+  }
 
-  textWrapper.appendChild(textSlot);
-  textWrapper.classList.add(OVERLAY_CARD_TEXT);
+  if (textSlot) {
+    const textWrapper = document.createElement('div');
+    textWrapper.appendChild(textSlot);
+    textWrapper.classList.add(OVERLAY_CARD_TEXT);
+    container.appendChild(textWrapper);
+  }
 
-  dateWrapper.appendChild(dateSlot);
-  dateWrapper.classList.add(OVERLAY_CARD_DATE);
-
-  container.appendChild(eyebrowWrapper);
-  container.appendChild(headlineWrapper);
-  container.appendChild(textWrapper);
-  container.appendChild(dateWrapper);
+  if (dateSlot) {
+    const dateWrapper = document.createElement('div');
+    dateWrapper.appendChild(dateSlot);
+    dateWrapper.classList.add(OVERLAY_CARD_DATE);
+    container.appendChild(dateWrapper);
+  }
 
   return container;
 };

@@ -63,9 +63,6 @@ export const IntroContainerStyles = `
 export const CreateIntroColumn = () => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const headlineWrapper = document.createElement('div');
-  const textWrapper = document.createElement('div');
-  const ctaWrapper = document.createElement('div');
   const headlineSlot = MakeSlot({ type: SLOTS.HEADLINE });
   const textSlot = MakeSlot({ type: SLOTS.TEXT });
   const ctaSlot = MakeSlot({ type: SLOTS.CTA });
@@ -73,18 +70,21 @@ export const CreateIntroColumn = () => {
   wrapper.classList.add(INTRO_CONTAINER_LOCK);
 
   if (headlineSlot) {
+    const headlineWrapper = document.createElement('div');
     headlineWrapper.appendChild(headlineSlot);
     headlineWrapper.classList.add(INTRO_CONTAINER_HEADLINE);
     wrapper.appendChild(headlineWrapper);
   }
 
   if (textSlot) {
+    const textWrapper = document.createElement('div');
     textWrapper.appendChild(textSlot);
     textWrapper.classList.add(INTRO_CONTAINER_TEXT);
     wrapper.appendChild(textWrapper);
   }
 
   if (ctaSlot) {
+    const ctaWrapper = document.createElement('div');
     ctaWrapper.appendChild(ctaSlot);
     ctaWrapper.classList.add(INTRO_CONTAINER_CTA);
     wrapper.appendChild(ctaWrapper);

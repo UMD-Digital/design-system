@@ -72,8 +72,6 @@ export const CreateIntro = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
   const textContainer = document.createElement('div');
   const imageContainer = document.createElement('div');
-  const headlineWrapper = document.createElement('div');
-  const eyebrowWrapper = document.createElement('div');
 
   const imageRef = element.querySelector(
     `[slot="${SLOTS.IMAGE}"]`,
@@ -82,15 +80,21 @@ export const CreateIntro = ({ element }: { element: CardType }) => {
   const headlineSlot = MakeSlot({ type: SLOTS.HEADLINE });
   const isProperImage = CheckForImageAlt({ element, slotRef: SLOTS.IMAGE });
 
-  eyebrowWrapper.classList.add(CARD_OVERLAY_EYEBROW_WRAPPER);
-  eyebrowWrapper.appendChild(eyebrowSlot);
-
-  headlineWrapper.classList.add(CARD_OVERLAY_HEADLINE_WRAPPER);
-  headlineWrapper.appendChild(headlineSlot);
-
   textContainer.classList.add(CARD_OVERLAY_INTRO_WRAPPER);
-  textContainer.appendChild(eyebrowWrapper);
-  textContainer.appendChild(headlineWrapper);
+
+  if (eyebrowSlot) {
+    const eyebrowWrapper = document.createElement('div');
+    eyebrowWrapper.appendChild(eyebrowSlot);
+    eyebrowWrapper.classList.add(CARD_OVERLAY_EYEBROW_WRAPPER);
+    textContainer.appendChild(eyebrowWrapper);
+  }
+
+  if (headlineSlot) {
+    const headlineWrapper = document.createElement('div');
+    headlineWrapper.appendChild(headlineSlot);
+    headlineWrapper.classList.add(CARD_OVERLAY_HEADLINE_WRAPPER);
+    textContainer.appendChild(headlineWrapper);
+  }
 
   container.classList.add(CARD_OVERLAY_INTRO_CONTAINER);
   container.appendChild(textContainer);

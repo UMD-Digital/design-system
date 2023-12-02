@@ -45,26 +45,33 @@ export const BodyStyles = `
 
 export const CreateBody = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
-  const textWrapper = document.createElement('div');
-  const dateWrapper = document.createElement('div');
-  const ctaWrapper = document.createElement('div');
+
   const textSlot = MakeSlot({ type: SLOTS.TEXT });
   const dateSlot = MakeSlot({ type: SLOTS.DATE });
   const ctaSlot = MakeSlot({ type: SLOTS.CTA });
 
-  textWrapper.appendChild(textSlot);
-  textWrapper.classList.add(CARD_BODY_TEXT_WRAPPER);
-
-  dateWrapper.appendChild(dateSlot);
-  dateWrapper.classList.add(CARD_BODY_DATE_WRAPPER);
-
-  ctaWrapper.appendChild(ctaSlot);
-  ctaWrapper.classList.add(CARD_BODY_CTA_WRAPPER);
-
   container.classList.add(CARD_BODY_CONTAINER);
-  container.appendChild(textWrapper);
-  container.appendChild(dateWrapper);
-  container.appendChild(ctaWrapper);
+
+  if (textSlot) {
+    const textWrapper = document.createElement('div');
+    textWrapper.appendChild(textSlot);
+    textWrapper.classList.add(CARD_BODY_TEXT_WRAPPER);
+    container.appendChild(textWrapper);
+  }
+
+  if (dateSlot) {
+    const dateWrapper = document.createElement('div');
+    dateWrapper.appendChild(dateSlot);
+    dateWrapper.classList.add(CARD_BODY_DATE_WRAPPER);
+    container.appendChild(dateWrapper);
+  }
+
+  if (ctaSlot) {
+    const ctaWrapper = document.createElement('div');
+    ctaWrapper.appendChild(ctaSlot);
+    ctaWrapper.classList.add(CARD_BODY_CTA_WRAPPER);
+    container.appendChild(ctaWrapper);
+  }
 
   return container;
 };

@@ -1,14 +1,16 @@
 import {
+  colors,
   spacing,
   typography,
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
-import { MakeSlot } from 'helpers/ui';
+import { MakeSlot, SlotDefaultStyling } from 'helpers/ui';
 import {
   CovertObjectMediaQueriesToStyles,
   CovertObjectToStyles,
 } from 'helpers/styles';
 import { SLOTS, BREAKPOINTS } from '../globals';
+import { ELEMENT_TYPE } from '../component';
 
 const INTRO_CONTAINER = 'umd-carousel-cards-intro-container';
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
@@ -46,9 +48,9 @@ export const IntroContainerStyles = `
     }
   }
 
-  .${INTRO_CONTAINER_HEADLINE} ::slotted(*) {
+  .${INTRO_CONTAINER_HEADLINE} * {
     ${CovertObjectToStyles({ styles: typography['.umd-sans-largest'] })}
-    color: theme(colors.white);
+    color: ${colors.white};
   }
 
   * + .${INTRO_CONTAINER_TEXT} {
@@ -60,10 +62,10 @@ export const IntroContainerStyles = `
   }
 `;
 
-export const CreateIntroColumn = () => {
+export const CreateIntroColumn = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const headlineSlot = MakeSlot({ type: SLOTS.HEADLINE });
+  const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
   const textSlot = MakeSlot({ type: SLOTS.TEXT });
   const ctaSlot = MakeSlot({ type: SLOTS.CTA });
 

@@ -49,3 +49,19 @@ export const MakeDefaultStyleTag = ({
 
   body.appendChild(style);
 };
+
+export const Reset = `
+  :host * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  :host button {
+    border: none;
+  }
+
+  :host img {
+    max-width: 100%;
+  }
+`;

@@ -1,16 +1,12 @@
+import { Reset } from 'helpers/styles';
+
 export const ComponentStyles = `
   :host {
     display: block;
     container: umd-example / inline-size; 
   }
 
-  :host * {
-    box-sizing: border-box;
-  }
-
-  :host img {
-    max-width: 100%;
-  }
+  ${Reset}
 `;
 
 export const CreateShadowDom = ({ element }: { element: HTMLElement }) => {

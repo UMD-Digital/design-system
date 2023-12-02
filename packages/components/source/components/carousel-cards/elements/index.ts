@@ -6,6 +6,7 @@ import {
 import {
   CovertObjectToStyles,
   CovertObjectMediaQueriesToStyles,
+  Reset,
 } from 'helpers/styles';
 import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
@@ -27,14 +28,11 @@ const CAROUSEL_LOCK = 'umd-element-carousel-lock';
 export const ComponentStyles = `
   :host {
     display: block;
-    position: relative !important;
-    container: umd-carousel-card / inline-size; 
     background-color: ${colors.black};
+    container: umd-carousel-card / inline-size; 
   }
 
-  :host button {
-    border: none;
-  }
+  ${Reset}
 
   .${CAROUSEL_CONTAINER} {
     background-color: ${colors.black};
@@ -121,7 +119,7 @@ export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
 export const CreateContent = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const intro = CreateIntroColumn();
+  const intro = CreateIntroColumn({ element });
   const carousel = CreateCarouselColumn({ element });
 
   container.classList.add(CAROUSEL_CONTAINER);

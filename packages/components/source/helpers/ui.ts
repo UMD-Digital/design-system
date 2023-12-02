@@ -20,6 +20,29 @@ export const MakeSlot = ({ type }: { type: string }) => {
   return slot;
 };
 
+export const SlotDefaultStyling = ({
+  element,
+  slotRef,
+}: {
+  element: HTMLElement;
+  slotRef: string;
+}) => {
+  const elementRef = element.querySelector(
+    `[slot=${slotRef}]`,
+  ) as HTMLSlotElement;
+
+  if (!elementRef) return null;
+  const isStyled = elementRef.hasAttribute('styled');
+
+  if (isStyled) {
+    return MakeSlot({ type: slotRef });
+  } else {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = elementRef.innerHTML;
+    return wrapper;
+  }
+};
+
 export const CheckForImageAlt = ({
   element,
   slotRef,

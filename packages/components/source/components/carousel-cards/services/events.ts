@@ -1,7 +1,12 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration';
-import { GetElementSize, SetElementSize, SetCarouselSize } from './helpers';
+import {
+  GetElementSize,
+  SetElementSize,
+  SetCarouselSize,
+  IsTabletView,
+} from './helpers';
 import { ELEMENT_TYPE } from '../component';
-import { SLOTS, VARIABLES } from '../globals';
+import { SLOTS, VARIABLES, ELEMENTS } from '../globals';
 
 const spaceBetween = parseInt(spacing.md.replace('px', ''));
 
@@ -124,4 +129,39 @@ export const EventResizeSetHeight = ({
   slotContent.forEach((card) => {
     card.style.height = `${maxHeight}px`;
   });
+};
+
+export const EventResizeButtonLogic = ({
+  element,
+}: {
+  element: ELEMENT_TYPE;
+}) => {
+  const shadowRoot = element.shadowRoot as ShadowRoot;
+  const button = shadowRoot.querySelector(
+    `.${ELEMENTS.CAROUSEL_CARDS_BUTTON}`,
+  ) as HTMLButtonElement;
+  const cardsSlot = element.querySelector(
+    `[slot="${SLOTS.cards}"]`,
+  ) as HTMLSlotElement;
+  const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
+  const count = slotContent.length;
+  const isShowTwo = IsTabletView({ shadowRoot });
+  const isButtonShownMobile = count > VARIABLES.MOBILE_COUNT;
+  const isButtonShownTablet = count > VARIABLES.TABLET_COUNT;
+
+  if (isShowTwo && isButtonShownTablet) {
+    button.style.display = 'block';
+  }
+
+  if (isShowTwo && !isButtonShownTablet) {
+    button.style.display = 'none';
+  }
+
+  if (!isShowTwo && isButtonShownMobile) {
+    button.style.display = 'block';
+  }
+
+  if (!isShowTwo && !isButtonShownMobile) {
+    button.style.display = 'none';
+  }
 };

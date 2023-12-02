@@ -7,6 +7,7 @@ declare global {
 import { MakeTemplate } from 'helpers/ui';
 import { Debounce } from 'helpers/performance';
 import {
+  EventResizeButtonLogic,
   EventResizeCarouselElementsWidth,
   EventResizeSetHeight,
   EventScrollCarousel,
@@ -35,6 +36,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
     const resize = () => {
       EventResizeCarouselElementsWidth({ element });
       EventResizeSetHeight({ element });
+      EventResizeButtonLogic({ element });
     };
 
     this._shadow.appendChild(content);
@@ -42,6 +44,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
 
     window.addEventListener('resize', Debounce(resize, 20));
     EventSwipe({ container: content, element });
+    EventResizeButtonLogic({ element });
   }
 
   eventMoveForward() {

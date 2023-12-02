@@ -1,8 +1,16 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration';
 import { ELEMENT_TYPE } from '../component';
-import { SLOTS, ELEMENTS } from '../globals';
+import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 
 const spaceBetween = parseInt(spacing.md.replace('px', ''));
+
+export const IsTabletView = ({ shadowRoot }: { shadowRoot: ShadowRoot }) => {
+  const wrapper = shadowRoot.querySelector(
+    `.${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER}`,
+  ) as HTMLElement;
+
+  return wrapper.offsetWidth > BREAKPOINTS.cardBreak;
+};
 
 export const GetCarouselWrapperSize = ({
   shadowRoot,
@@ -21,19 +29,15 @@ export const GetCarouselCount = ({
 }: {
   shadowRoot: ShadowRoot;
 }) => {
-  const wrapper = shadowRoot.querySelector(
-    `.${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER}`,
-  ) as HTMLElement;
-  const isShowTwo = wrapper.offsetWidth > 650;
-
-  return isShowTwo ? 2 : 1;
+  const isShowTwo = IsTabletView({ shadowRoot });
+  return isShowTwo ? VARIABLES.TABLET_COUNT : VARIABLES.MOBILE_COUNT;
 };
 
 export const GetElementSize = ({ element }: { element: ELEMENT_TYPE }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const containerWidth = GetCarouselWrapperSize({ shadowRoot });
   const count = GetCarouselCount({ shadowRoot });
-  const multiplier = count == 2 ? 1 : 0.8;
+  const multiplier = count == VARIABLES.TABLET_COUNT ? 1 : 0.8;
   const additonalSpace = spaceBetween / 2;
 
   return (containerWidth / count) * multiplier - additonalSpace;

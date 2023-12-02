@@ -1,12 +1,10 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { ELEMENT_TYPE } from '../component';
-import { BREAKPOINTS, VARIABLES } from '../globals';
+import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
 import { FORWARD_ARROW_ICON } from '../../../assets/icons';
 
-const BUTTON_CONTAINER = `umd-carousel-button-container`;
-
 export const ButtonStyles = `
-  .${BUTTON_CONTAINER} {
+  .${ELEMENTS.CAROUSEL_CARDS_BUTTON} {
     background-color: ${colors.red};
     padding: ${spacing.xs};
     position: absolute;
@@ -18,19 +16,20 @@ export const ButtonStyles = `
     align-items: center;
     right: 0;
     cursor: pointer;
+    display: none;
   }
 
-  .${BUTTON_CONTAINER}:disabled {
+  .${ELEMENTS.CAROUSEL_CARDS_BUTTON}:disabled {
     opacity: 0.5;
   }
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
-    .${BUTTON_CONTAINER} {
+    .${ELEMENTS.CAROUSEL_CARDS_BUTTON} {
       right: -52px;
     }
   }
 
-  .${BUTTON_CONTAINER} svg {
+  .${ELEMENTS.CAROUSEL_CARDS_BUTTON} svg {
     width: 24px;
     height: 24px;
     fill: ${colors.white};
@@ -41,7 +40,7 @@ export const CreateButton = ({ element }: { element: ELEMENT_TYPE }) => {
   const button = document.createElement('button');
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
-  button.classList.add(BUTTON_CONTAINER);
+  button.classList.add(ELEMENTS.CAROUSEL_CARDS_BUTTON);
   button.innerHTML = FORWARD_ARROW_ICON;
   button.addEventListener('click', () => {
     element.eventMoveForward();

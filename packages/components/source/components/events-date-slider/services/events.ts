@@ -111,17 +111,8 @@ export const EventSwipe = ({
       dist = 0;
       startX = touchObject.pageX;
       startTime = new Date().getTime();
-      event.preventDefault();
     },
-    false,
-  );
-
-  container.addEventListener(
-    'touchmove',
-    (event) => {
-      event.preventDefault();
-    },
-    false,
+    { passive: false },
   );
 
   container.addEventListener(
@@ -135,9 +126,7 @@ export const EventSwipe = ({
       if (elapsedTime > allowedTime && Math.abs(dist) >= threshold) {
         swipes(dist > 0);
       }
-
-      event.preventDefault();
     },
-    false,
+    { passive: false },
   );
 };

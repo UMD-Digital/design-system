@@ -21,35 +21,123 @@ export const EventResizeCarouselElementsWidth = ({
   SetCarouselSize({ element, elementSize });
 };
 
-export const EventScrollCarousel = ({ element }: { element: ELEMENT_TYPE }) => {
+export const EventScrollCarousel = ({
+  element,
+  isDirectionRight = true,
+}: {
+  element: ELEMENT_TYPE;
+  isDirectionRight?: boolean;
+}) => {
+  const shadowRoot = element.shadowRoot as ShadowRoot;
   const cardsSlot = element.querySelector(
     `[slot="${SLOTS.cards}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
-  const elementCount = 2;
+  const isShowTwo = IsTabletView({ shadowRoot });
+  const elementCount = isShowTwo ? 2 : 1;
   const firstElement = slotContent[0];
+  const lastElement = slotContent[slotContent.length - 1];
   const nextElement = slotContent[elementCount];
   const elementSize = firstElement.offsetWidth;
   const elementSizeWithSpace = elementSize + spaceBetween;
-  const elementSizeTotal =
-    elementSize * elementCount + spaceBetween / elementCount;
-  const elementSizeWithAdditonal = elementSizeTotal + elementSizeWithSpace;
 
   if (!nextElement) return;
 
-  cardsSlot.style.width = `${elementSizeWithAdditonal}px`;
-  nextElement.style.display = 'block';
-  cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms ease-in-out`;
-  cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+  const scrollTabletRight = () => {
+    const temporaryCarouselSize =
+      elementSize * elementCount +
+      spaceBetween / elementCount +
+      elementSizeWithSpace;
 
-  setTimeout(() => {
-    const clonedElement = firstElement.cloneNode(true) as HTMLElement;
-    clonedElement.style.display = 'none';
+    const animateRight = () => {
+      cardsSlot.style.width = `${temporaryCarouselSize}px`;
+      nextElement.style.display = 'block';
+      cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms`;
+      cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
-    cardsSlot.appendChild(clonedElement);
-    cardsSlot.removeChild(firstElement);
-    SetCarouselSize({ element, elementSize });
-  }, VARIABLES.ANIMATION_DURATION + 100);
+      setTimeout(() => {
+        const clonedElement = firstElement.cloneNode(true) as HTMLDivElement;
+        cardsSlot.appendChild(clonedElement);
+        clonedElement.style.display = 'none';
+
+        cardsSlot.removeChild(firstElement);
+        SetCarouselSize({ element, elementSize });
+      }, VARIABLES.ANIMATION_DURATION - 50);
+    };
+
+    const animateLeft = () => {
+      const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
+      const removedElement = slotContent[1];
+
+      cardsSlot.style.width = `${temporaryCarouselSize}px`;
+      cardsSlot.prepend(clonedElement);
+      clonedElement.style.display = 'block';
+      cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+
+      setTimeout(() => {
+        cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms`;
+        cardsSlot.style.transform = `translateX(0)`;
+      }, 10);
+
+      setTimeout(() => {
+        removedElement.style.display = 'none';
+        cardsSlot.removeChild(lastElement);
+
+        SetCarouselSize({ element, elementSize });
+      }, VARIABLES.ANIMATION_DURATION - 50);
+    };
+
+    isDirectionRight ? animateRight() : animateLeft();
+  };
+
+  const scrollMobileRight = () => {
+    const isOnlyTwo = slotContent.length === 2;
+    const temporaryCarouselSize = elementSize * 3 + spaceBetween * 2;
+
+    const animateRight = () => {
+      const clonedElement = firstElement.cloneNode(true) as HTMLElement;
+      const upcomingElement = isOnlyTwo ? clonedElement : slotContent[2];
+      clonedElement.style.display = 'none';
+      cardsSlot.appendChild(clonedElement);
+
+      cardsSlot.style.width = `${temporaryCarouselSize}px`;
+      upcomingElement.style.display = 'block';
+      cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms ease-in-out`;
+      cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+
+      setTimeout(() => {
+        cardsSlot.removeChild(firstElement);
+
+        SetCarouselSize({ element, elementSize });
+      }, VARIABLES.ANIMATION_DURATION + 100);
+    };
+
+    const animateLeft = () => {
+      const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
+      const removedElement = slotContent[1];
+
+      cardsSlot.style.width = `${temporaryCarouselSize}px`;
+      cardsSlot.prepend(clonedElement);
+      clonedElement.style.display = 'block';
+      cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+
+      setTimeout(() => {
+        cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms`;
+        cardsSlot.style.transform = `translateX(0)`;
+      }, 10);
+
+      setTimeout(() => {
+        removedElement.style.display = 'none';
+        cardsSlot.removeChild(lastElement);
+
+        SetCarouselSize({ element, elementSize });
+      }, VARIABLES.ANIMATION_DURATION - 50);
+    };
+
+    isDirectionRight ? animateRight() : animateLeft();
+  };
+
+  isShowTwo ? scrollTabletRight() : scrollMobileRight();
 };
 
 export const EventSwipe = ({
@@ -67,9 +155,10 @@ export const EventSwipe = ({
   let startTime = 0;
 
   const swipes = (isrightswipe: Boolean) => {
-    console.log(isrightswipe);
     if (!isrightswipe) {
       EventScrollCarousel({ element });
+    } else {
+      EventScrollCarousel({ element, isDirectionRight: false });
     }
   };
 

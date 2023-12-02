@@ -17,6 +17,7 @@ export const ButtonStyles = `
     justify-content: center;
     align-items: center;
     right: 0;
+    cursor: pointer;
   }
 
   .${BUTTON_CONTAINER}:disabled {

@@ -10,8 +10,10 @@ export const ELEMENTS = {
 };
 
 export const SLOTS = {
-  intro: 'intro',
-  cards: 'cards',
+  HEADLINE: 'headline',
+  TEXT: 'text',
+  CTA: 'cta',
+  CARDS: 'cards',
 };
 
 export const VARIABLES = {

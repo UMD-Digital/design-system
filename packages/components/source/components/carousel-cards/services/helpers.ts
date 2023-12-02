@@ -51,7 +51,7 @@ export const SetElementSize = ({
   elementSize: number;
 }) => {
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.cards}"]`,
+    `[slot="${SLOTS.CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
 
@@ -69,7 +69,7 @@ export const SetCarouselSize = ({
 }) => {
   const elementSizeTotal = elementSize * 2 + spaceBetween;
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.cards}"]`,
+    `[slot="${SLOTS.CARDS}"]`,
   ) as HTMLSlotElement;
 
   cardsSlot.style.width = `${elementSizeTotal}px`;

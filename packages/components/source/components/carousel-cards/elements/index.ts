@@ -104,7 +104,7 @@ export const ComponentStyles = `
 
 export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.cards}"]`,
+    `[slot="${SLOTS.CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
 

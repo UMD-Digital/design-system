@@ -54,7 +54,7 @@ export const CreateCarouselColumn = ({
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const slot = MakeSlot({ type: SLOTS.cards });
+  const slot = MakeSlot({ type: SLOTS.CARDS });
   const fowardButton = CreateButton({ element });
 
   container.classList.add(CAROUSEL_CONTAINER);

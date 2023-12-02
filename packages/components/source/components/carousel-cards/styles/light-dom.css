@@ -1,13 +1,10 @@
 umd-element-carousel-cards {
-  & [slot='intro'] {
-    & .umd-rich-text,
-    & a[class^='umd-cta'] {
-      color: theme(colors.white);
-    }
+  & .umd-rich-text {
+    @apply umd-rich-text-dark;
+  }
 
-    & .umd-rich-text a:hover,
-    & .umd-rich-text a:focus {
-      color: theme(colors.gold);
-    }
+  & .umd-rich-text a:hover,
+  & .umd-rich-text a:focus {
+    color: theme(colors.gold);
   }
 }

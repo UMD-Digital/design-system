@@ -30,7 +30,7 @@ export const EventScrollCarousel = ({
 }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.cards}"]`,
+    `[slot="${SLOTS.CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
   const isShowTwo = IsTabletView({ shadowRoot });
@@ -196,7 +196,7 @@ export const EventResizeSetHeight = ({
   element: ELEMENT_TYPE;
 }) => {
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.cards}"]`,
+    `[slot="${SLOTS.CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
   const maxHeight = slotContent.reduce((acc, currentElement) => {
@@ -219,7 +219,7 @@ export const EventResizeButtonLogic = ({
     `.${ELEMENTS.CAROUSEL_CARDS_BUTTON}`,
   ) as HTMLButtonElement;
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.cards}"]`,
+    `[slot="${SLOTS.CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
   const count = slotContent.length;

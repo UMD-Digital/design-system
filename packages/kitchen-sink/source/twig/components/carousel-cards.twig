@@ -1,27 +1,13 @@
 {% extends '../_layout.twig' %}
 
+{% import '../_ui/card-overlay.twig' as CardOverlay %}
+
 {% block page %}
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Carousel Cards Example 1 - Usage with UMD Cards
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          This example also shows how the headline styling will be overwritten
-          in the shadow DOM.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur <a href="google.com">
-            adipiscing elit
-          </a>, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Id porta nibh venenatis cras sed felis. Cursus vitae congue
-          mauris rhoncus. Morbi non arcu risus quis varius. Purus in mollis nunc
-          sed. A arcu cursus vitae congue. Velit aliquet sagittis id consectetur
-          purus ut faucibus pulvinar.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling with UMD Overlay Cards
+      </p>
     </div>
 
     <umd-element-carousel-cards>
@@ -39,8 +25,7 @@
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
             ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
             adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.
+            magna aliqua.
           </p>
         </div>
       </div>
@@ -70,147 +55,193 @@
       </div>
 
       <div slot="cards">
-        <umd-element-card-overlay theme="dark">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Students working on whiteboards" />
+        {{
+          CardOverlay.TruncatedCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-          <div slot="headline">
-            <h3 class="umd-sans-larger">
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-smaller">
-              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.TruncatedCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-        <umd-element-card-overlay theme="dark">
-          <img slot="image"
-            src="/example-2.webp"
-            alt="Students working on whiteboards" />
-          <div slot="headline">
-            <h3 class="umd-sans-larger">
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-smaller">
-              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
+        {{
+          CardOverlay.TruncatedCardBody({
+            theme: 'dark'
+          })
+        }}
 
-          <div slot="cta">
-            <a href="https://strategicplan.umd.edu/commitment/we-reimagine-learning"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer"
-              target="_blank">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-              </svg>
+        {{
+          CardOverlay.TruncatedCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-              <span aria-hidden="true">Read Now</span>
-              <span class="sr-only">
-                Learn more about how UMD reimagines learning
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.TruncatedCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="/example-3.webp"
-            alt="Students working on whiteboards" />
-          <div slot="eyebrow">
-            <p class="umd-sans-smaller">
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3 class="umd-sans-larger">
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-smaller">
-              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay theme="dark">
-          <img slot="image"
-            src="/example-4.webp"
-            alt="Students working on whiteboards" />
-          <div slot="headline">
-            <h3 class="umd-sans-larger">
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-smaller">
-              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://strategicplan.umd.edu/commitment/we-reimagine-learning"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer"
-              target="_blank">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Read Now</span>
-              <span class="sr-only">
-                Learn more about how UMD reimagines learning
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.TruncatedCardBody({
+            theme: 'dark'
+          })
+        }}
       </div>
     </umd-element-carousel-cards>
   </section>
 
-  <section id="zero" class="example">
+  <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Carousel Cards Example 2 - Example with styled non UMD Cards
-      </h2>
+      <p class="umd-sans-large">
+        Default Styling with only two UMD Cards
+      </p>
+    </div>
 
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar. Venenatis cras sed felis eget. Sodales ut etiam sit
-          amet nisl purus in. Quis enim lobortis scelerisque fermentum dui
-          faucibus. Arcu felis bibendum ut tristique et egestas quis. Lobortis
-          scelerisque fermentum dui faucibus in ornare quam viverra orci.
-          Viverra mauris in aliquam sem fringilla ut morbi tincidunt augue. Erat
-          nam at lectus urna duis convallis. Egestas dui id ornare arcu odio.
-          Varius quam quisque id diam.
-        </p>
+    <umd-element-carousel-cards>
+      <div slot="headline">
+        <h2>
+          Lorem ipsum dolor sit amet
+        </h2>
       </div>
+
+      <div slot="text">
+        <div class="umd-rich-text umd-sans-medium">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+
+      <div slot="cta">
+        <a href="https://strategicplan.umd.edu/commitment/we-take-on-humanitys-grand-challenges"
+          class="umd-cta-secondary"
+          rel="noopener noreferrer"
+          target="_blank">
+          <svg aria-hidden="true"
+            width="96"
+            height="96"
+            viewBox="0 0 96 96"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
+          </svg>
+
+          <span aria-hidden="true">Learn More</span>
+          <span class="sr-only">
+            Learn more link about how the strategic plan is helping to solve
+            humanity's grand challenges
+          </span>
+        </a>
+      </div>
+
+      <div slot="cards">
+        {{
+          CardOverlay.TruncatedCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
+
+        {{
+          CardOverlay.TruncatedCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
+      </div>
+    </umd-element-carousel-cards>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-largest">
+        Overwrite Examples
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-large">
+        Overwrite Styling with the carousel with UMD Cards using default styling
+      </p>
+    </div>
+
+    <umd-element-carousel-cards>
+      <div slot="headline" styled>
+        <h2 class="umd-sans-small" style="color: #fff">
+          Lorem ipsum dolor sit amet
+        </h2>
+      </div>
+
+      <div slot="text">
+        <div class="umd-rich-text umd-sans-medium">
+          <p>
+            This example set an override attribute on the slot so it doesn't
+            conform to the default styles
+          </p>
+
+          <p>
+            <a href="google.com">Lorem ipsum dolor</a> sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+            ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+
+      <div slot="cta">
+        <a href="https://strategicplan.umd.edu/commitment/we-take-on-humanitys-grand-challenges"
+          class="umd-cta-secondary"
+          rel="noopener noreferrer"
+          target="_blank">
+          <svg aria-hidden="true"
+            width="96"
+            height="96"
+            viewBox="0 0 96 96"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
+          </svg>
+
+          <span aria-hidden="true">Learn More</span>
+          <span class="sr-only">
+            Learn more link about how the strategic plan is helping to solve
+            humanity's grand challenges
+          </span>
+        </a>
+      </div>
+
+      <div slot="cards">
+        {{
+          CardOverlay.TruncatedCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
+
+        {{
+          CardOverlay.TruncatedCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
+      </div>
+    </umd-element-carousel-cards>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-large">
+        Default Styling with non UMD Cards
+      </p>
     </div>
 
     <umd-element-carousel-cards>
@@ -453,259 +484,6 @@
             </div>
           </div>
         </umd-card>
-      </div>
-    </umd-element-carousel-cards>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Carousel Cards Example 3 - Usage with UMD Cards but limited to two cards
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar.
-        </p>
-      </div>
-    </div>
-
-    <umd-element-carousel-cards>
-      <div slot="headline">
-        <h2>
-          Lorem ipsum dolor sit amet
-        </h2>
-      </div>
-
-      <div slot="text">
-        <div class="umd-rich-text umd-sans-medium">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat.
-          </p>
-        </div>
-      </div>
-
-      <div slot="cta">
-        <a href="https://strategicplan.umd.edu/commitment/we-take-on-humanitys-grand-challenges"
-          class="umd-cta-secondary"
-          rel="noopener noreferrer"
-          target="_blank">
-          <svg aria-hidden="true"
-            width="96"
-            height="96"
-            viewBox="0 0 96 96"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-          </svg>
-
-          <span aria-hidden="true">Learn More</span>
-          <span class="sr-only">
-            Learn more link about how the strategic plan is helping to solve
-            humanity's grand challenges
-          </span>
-        </a>
-      </div>
-
-      <div slot="cards">
-        <umd-element-card-overlay theme="dark">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Students working on whiteboards" />
-
-          <div slot="headline">
-            <h3 class="umd-sans-larger">
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-smaller">
-              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay theme="dark">
-          <img slot="image"
-            src="/example-2.webp"
-            alt="Students working on whiteboards" />
-          <div slot="headline">
-            <h3 class="umd-sans-larger">
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-smaller">
-              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://strategicplan.umd.edu/commitment/we-reimagine-learning"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer"
-              target="_blank">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Read Now</span>
-              <span class="sr-only">
-                Learn more about how UMD reimagines learning
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
-      </div>
-    </umd-element-carousel-cards>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Carousel Cards Example 4 - Override headline for different styling
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur <a href="google.com">
-            adipiscing elit
-          </a>, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Id porta nibh venenatis cras sed felis. Cursus vitae congue
-          mauris rhoncus. Morbi non arcu risus quis varius. Purus in mollis nunc
-          sed. A arcu cursus vitae congue. Velit aliquet sagittis id consectetur
-          purus ut faucibus pulvinar.
-        </p>
-      </div>
-    </div>
-
-    <umd-element-carousel-cards>
-      <div slot="headline" styled>
-        <h2 class="umd-sans-small" style="color: #fff">
-          Lorem ipsum dolor sit amet
-        </h2>
-      </div>
-
-      <div slot="text">
-        <div class="umd-rich-text umd-sans-medium">
-          <p>
-            This example set an override attribute on the slot so it doesn't
-            conform to the default styles
-          </p>
-
-          <p>
-            <a href="google.com">Lorem ipsum dolor</a> sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-            ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-        </div>
-      </div>
-
-      <div slot="cta">
-        <a href="https://strategicplan.umd.edu/commitment/we-take-on-humanitys-grand-challenges"
-          class="umd-cta-secondary"
-          rel="noopener noreferrer"
-          target="_blank">
-          <svg aria-hidden="true"
-            width="96"
-            height="96"
-            viewBox="0 0 96 96"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-          </svg>
-
-          <span aria-hidden="true">Learn More</span>
-          <span class="sr-only">
-            Learn more link about how the strategic plan is helping to solve
-            humanity's grand challenges
-          </span>
-        </a>
-      </div>
-
-      <div slot="cards">
-        <umd-element-card-overlay theme="dark">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Students working on whiteboards" />
-
-          <div slot="headline">
-            <h3 class="umd-sans-larger">
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-smaller">
-              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay theme="dark">
-          <img slot="image"
-            src="/example-2.webp"
-            alt="Students working on whiteboards" />
-          <div slot="headline">
-            <h3 class="umd-sans-larger">
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-smaller">
-              Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://strategicplan.umd.edu/commitment/we-reimagine-learning"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer"
-              target="_blank">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Read Now</span>
-              <span class="sr-only">
-                Learn more about how UMD reimagines learning
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
       </div>
     </umd-element-carousel-cards>
   </section>

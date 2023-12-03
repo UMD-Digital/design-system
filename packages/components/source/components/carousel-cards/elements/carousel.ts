@@ -10,7 +10,6 @@ const CAROUSEL_CONTAINER_LOCK = 'umd-carousel-cards-carousel-container-lock';
 
 export const CarouselContainerStyles = `
   .${CAROUSEL_CONTAINER} {
-    color: white;
     position: relative;
   }
 

@@ -1,943 +1,318 @@
 {% extends '../_layout.twig' %}
 
+{% import '../_ui/card.twig' as Card %}
+
+{% set RecImageOptions = [
+  'https://brandportal.umd.edu/m/7be4cb700f7b7518/Hero_web-KnoxMural_06042018_8081.jpg',
+  'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
+  'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
+  'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
+  'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
+  'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
+  'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
+  'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
+  'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
+  'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
+  'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
+  'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg',
+  'https://brandportal.umd.edu/m/763f805f9e280e6a/Hero_web-Students_Mall_09192019_0744-tif.jpg'
+] %}
+
+{% set SquareImageOptions = [
+  'https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg',
+  'https://brandportal.umd.edu/m/28973b679519d5c9/Square-HornbakeLibrary_03082023_HH_1859.jpg',
+  'https://brandportal.umd.edu/m/8ffda3d340165e1/Square-Campus_Fall_11012022_JC_6055-JPG.jpg'
+] %}
+
+{% set WeirdImageOptions = [
+  'https://brandportal.umd.edu/m/45baf65f957027a8/Hero_web-Campus_Fall_11012022_JC_5990.jpg',
+  'https://brandportal.umd.edu/m/13da92f7a9906748/Hero_web-Students_Outdoors_04052023_HH_2696.jpg',
+  'https://brandportal.umd.edu/m/4f1c9589ac5fa49d/Hero_web-Students_ESJLTC_03292023_SC_5429.jpg'
+] %}
+
 {% block page %}
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Example 1 - Default without headline links
-      </h2>
-
       <div class="umd-rich-text">
-        <p>
-          Description coming
+        <p class="umd-sans-large">
+          Default Styling without images
         </p>
       </div>
 
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        <umd-element-card>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg"
-            alt="Students working on whiteboards" />
-
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-          <div slot="cta">
-            <a href="google.com">Test</a>
-          </div>
-        </umd-element-card>
-
-        <umd-element-card>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Students working on whiteboards" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="">
-                Nunc vulputate libero
-              </a> et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-          <div slot="cta">
-            <a href="https://google.com" class="umd-cta-secondary">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
-              </svg>
-              <span>A link</span>
-            </a>
-          </div>
-        </umd-element-card>
-
-        <umd-element-card>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg"
-            alt="Students working on whiteboards" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card>
+        {{ Card.FullCardBody() }}
+        {{ Card.FullCardBody() }}
+        {{ Card.FullCardBody() }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Example 2 - Aligned Images with Border with headline links
-      </h2>
-
       <div class="umd-rich-text">
-        <p>
-          Full description coming
+        <p class="umd-sans-large">
+          Default Styling with images
         </p>
       </div>
 
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        <umd-element-card aligned="true" border="true">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/7be4cb700f7b7518/Hero_web-KnoxMural_06042018_8081.jpg"
-            alt="example" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-          <div slot="date">
-            <date>
-              September 31, 2023
-            </date>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-        <umd-element-card aligned="true" border="true">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="example" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions)
+          })
+        }}
 
-        <umd-element-card aligned="true" border="true">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg"
-            alt="example" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-          <div slot="cta">
-            <a href="https://google.com" class="umd-cta-secondary">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
-              </svg>
-              <span>A link</span>
-            </a>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(WeirdImageOptions)
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Example 3 - Theme Dark with Aligned Images
-      </h2>
-
       <div class="umd-rich-text">
-        <p>
-          Layout controlled by the configuration
+        <p class="umd-sans-large">
+          Default Styling with aligned images and border
         </p>
       </div>
 
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        <umd-element-card aligned="true" theme="dark">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg"
-            alt="example" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-          <div slot="date">
-            <date>
-              September 31, 2023
-            </date>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(SquareImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-        <umd-element-card aligned="true" theme="dark">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Students working on whiteboards" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-        <umd-element-card aligned="true" theme="dark">
-          <a href="https://google.com" slot="image">
-            <img src="https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg"
-              alt="Students working on whiteboards" />
-          </a>
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com" rel="noopener noreferrer">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-          <div slot="cta">
-            <a href="https://google.com" class="umd-cta-secondary">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
-              </svg>
-              <span>
-                A link with very long link text that causes the link to return
-                to a new line
-              </span>
-            </a>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(SquareImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Example 4 - Two Column Examples with default styles
-      </h2>
-
       <div class="umd-rich-text">
         <p>
-          Columns determinted by configuraiton.
+          Default styling with dark theme
+        </p>
+      </div>
+
+      <div class="umd-grid-three mb-md" style="margin-top: 24px">
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            theme: true
+          })
+        }}
+
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            theme: true
+          })
+        }}
+
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            theme: true
+          })
+        }}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-largest">
+        Layout Examples
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <div class="umd-rich-text">
+        <p class="umd-sans-large">
+          Two Column (columns configured by configuration). - Default Styling
+          with aligned images and border
         </p>
       </div>
 
       <div class="umd-grid mb-md" style="margin-top: 24px">
-        <umd-element-card aligned="true" border="true">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg"
-            alt="Example" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="google.com">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(SquareImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-        <umd-element-card aligned="true" border="true">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/7be4cb700f7b7518/Hero_web-KnoxMural_06042018_8081.jpg"
-            alt="example" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="google.com">
-                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-              </a>
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://google.com"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Learn More</span>
-            </a>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Example 5 - Three Column Example with default styles
-      </h2>
-
       <div class="umd-rich-text">
-        <p>
-          Columns determinted by configuraiton.
+        <p class="umd-sans-large">
+          Three Column (columns configured by configuration). Default Styling
+          with aligned images and border
         </p>
       </div>
 
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        <umd-element-card aligned="true" border="true">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/7be4cb700f7b7518/Hero_web-KnoxMural_06042018_8081.jpg"
-            alt="example" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-          <div slot="date">
-            <date>
-              September 31, 2023
-            </date>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(SquareImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-        <umd-element-card aligned="true" border="true">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="example" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-        <umd-element-card aligned="true" border="true">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Students working on whiteboards" />
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-            </h3>
-          </div>
-          <div slot="text">
-            <div class="umd-rich-text umd-sans-small">
-              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
-            </div>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Example 6 - Default Cards - Feature Grid with default styles
-      </h2>
-
       <div class="umd-rich-text">
-        <p>
-          Columns determinted by configuraiton. Text sizes are configuration as
-          well but examples provided.
+        <p class="umd-sans-large">
+          Four Column (columns configured by configuration). Default Styling
+          with aligned images and border
         </p>
       </div>
 
-      <div class="my-md umd-grid-featured-card">
-        <umd-element-card>
-          <a href="https://google.com" slot="image">
-            <img src="https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg"
-              alt="example" />
-          </a>
+      <div class="umd-grid-four mb-md" style="margin-top: 24px">
+        {{
+          Card.FullCardBody({
+            image: random(SquareImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-          <div slot="eyebrow">
-            <p>
-              Short Tagline
-            </p>
-          </div>
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-          <div slot="headline">
-            <a href="https://google.com"
-              class="umd-fadein-underline-black"
-              rel="noopener noreferrer">
-              Example Headline tur. Excepteur sint occae
-            </a>
-          </div>
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-          <div slot="cta">
-            <div class="umd-links-group">
-              <a href="https://google.com"
-                class="umd-cta-secondary"
-                rel="noopener noreferrer">
-                <svg aria-hidden="true"
-                  width="96"
-                  height="96"
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-                </svg>
-
-                <span aria-hidden="true">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </umd-element-card>
-
-        <umd-element-card>
-          <a href="https://google.com" slot="image">
-            <img src="https://brandportal.umd.edu/m/50b429c689f2b81d/Hero_web-IribeCenter_JC_10152019_0703-tif.jpg"
-              alt="example" />
-          </a>
-
-          <div slot="eyebrow">
-            <p class="umd-eyebrow">
-              Short Tagline
-            </p>
-          </div>
-
-          <div slot="headline">
-            <a href="https://google.com" rel="noopener noreferrer">
-              Example Headline tur. Excepteur sint occae
-            </a>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <div class="umd-links-group">
-              <a href="https://google.com"
-                class="umd-cta-secondary"
-                rel="noopener noreferrer">
-                <svg aria-hidden="true"
-                  width="96"
-                  height="96"
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-                </svg>
-
-                <span aria-hidden="true">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </umd-element-card>
-
-        <umd-element-card>
-          <a href="https://google.com" slot="image">
-            <img src="https://brandportal.umd.edu/m/7be4cb700f7b7518/Hero_web-KnoxMural_06042018_8081.jpg"
-              alt="example" />
-          </a>
-
-          <div slot="eyebrow">
-            <p>
-              Short Tagline
-            </p>
-          </div>
-
-          <div slot="headline">
-            <a href="https://google.com" rel="noopener noreferrer">
-              Example Headline officia deserunt mollit
-            </a>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <div class="umd-links-group">
-              <a href="https://google.com"
-                class="umd-cta-secondary"
-                rel="noopener noreferrer">
-                <svg aria-hidden="true"
-                  width="96"
-                  height="96"
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-                </svg>
-
-                <span aria-hidden="true">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBody({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Example 7 - Four column example with override styles for headline
-      </h2>
+      <p class="umd-sans-largest">
+        Overwrite Examples
+      </p>
+    </div>
+  </section>
 
+  <section>
+    <div class="umd-lock">
       <div class="umd-rich-text">
-        <p>
-          Columns determinted by configuraiton. Text sizes are configuration as
-          well but examples provided.
+        <p class="umd-sans-large">
+          Four Column (columns configured by configuration). Overwrite Styling
         </p>
       </div>
 
-      <div class="umd-grid-four my-md">
-        <umd-element-card>
-          <a href="https://google.com" slot="image">
-            <img src="https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg"
-              alt="Example" />
-          </a>
+      <div class="umd-grid-four mb-md" style="margin-top: 24px">
+        {{
+          Card.FullCardBodyOverwrites({
+            image: random(SquareImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-          <div slot="eyebrow">
-            <p>
-              Short Tagline
-            </p>
-          </div>
-          <div slot="headline" styled>
-            <h3 class="umd-sans-large">
-              <a href="https://google.com"
-                class="umd-fadein-underline-black"
-                rel="noopener noreferrer">
-                <span aria-hidden="true">
-                  Example Headline tur. Excepteur sint occae
-                </span>
-              </a>
-            </h3>
-          </div>
+        {{
+          Card.FullCardBodyOverwrites({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
+        {{
+          Card.FullCardBodyOverwrites({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
 
-          <div slot="cta">
-            <div class="umd-links-group">
-              <a href="https://google.com"
-                class="umd-cta-secondary"
-                rel="noopener noreferrer">
-                <svg aria-hidden="true"
-                  width="96"
-                  height="96"
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-                </svg>
-
-                <span aria-hidden="true">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </umd-element-card>
-
-        <umd-element-card>
-          <a href="https://google.com" slot="image">
-            <img src="https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg"
-              alt="example" />
-          </a>
-
-          <div slot="eyebrow">
-            <p>
-              Short Tagline
-            </p>
-          </div>
-
-          <div slot="headline" styled>
-            <p class="umd-sans-large">
-              <a href="https://google.com"
-                class="umd-fadein-underline-black"
-                rel="noopener noreferrer">
-                <span>Example Headline officia deserunt mollit</span>
-              </a>
-            </p>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-          <div slot="cta">
-            <div class="umd-links-group">
-              <a href="https://google.com"
-                class="umd-cta-secondary"
-                rel="noopener noreferrer">
-                <svg aria-hidden="true"
-                  width="96"
-                  height="96"
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-                </svg>
-
-                <span aria-hidden="true">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </umd-element-card>
-
-        <umd-element-card>
-          <a href="https://google.com" slot="image">
-            <img src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-              alt="example" />
-          </a>
-
-          <div slot="eyebrow">
-            <p>
-              Short Tagline
-            </p>
-          </div>
-
-          <div slot="headline" styled>
-            <p class="umd-sans-large">
-              <a href="https://google.com"
-                class="umd-fadein-underline-black"
-                rel="noopener noreferrer">
-                <span>Example Headline lit esse cillum dolore e</span>
-              </a>
-            </p>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-          <div slot="cta">
-            <div class="umd-links-group">
-              <a href="https://google.com"
-                class="umd-cta-secondary"
-                rel="noopener noreferrer">
-                <svg aria-hidden="true"
-                  width="96"
-                  height="96"
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-                </svg>
-
-                <span aria-hidden="true">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </umd-element-card>
-
-        <umd-element-card>
-          <a href="https://google.com" slot="image">
-            <img src="https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg"
-              alt="example" />
-          </a>
-
-          <div slot="eyebrow">
-            <p>
-              Short Tagline
-            </p>
-          </div>
-
-          <div slot="headline" styled>
-            <p class="umd-sans-large">
-              <a href="https://google.com"
-                class="umd-fadein-underline-black"
-                rel="noopener noreferrer">
-                <span>Example Headline Duis aute irure dolor</span>
-              </a>
-            </p>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text umd-sans-small">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <div class="umd-links-group">
-              <a href="https://google.com"
-                class="umd-cta-secondary"
-                rel="noopener noreferrer">
-                <svg aria-hidden="true"
-                  width="96"
-                  height="96"
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-                </svg>
-
-                <span aria-hidden="true">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </umd-element-card>
+        {{
+          Card.FullCardBodyOverwrites({
+            image: random(RecImageOptions),
+            aligned: true,
+            border: true
+          })
+        }}
       </div>
     </div>
   </section>

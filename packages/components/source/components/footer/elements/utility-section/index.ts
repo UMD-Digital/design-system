@@ -4,10 +4,7 @@ import {
   umdLock,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
-import {
-  CovertObjectMediaQueriesToStyles,
-  CovertObjectToStyles,
-} from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../../globals';
 
 const SLOT_UTILITY_LINKS_NAME = 'utility-links';
@@ -23,14 +20,8 @@ export const UtilityContainerStyles = `
   }
 
   .${UTILITY_CONTAINER_LOCK} {
-    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+    ${ConvertJSSObjectToStyles({ styleObj: umdLock['.umd-lock'] })}
   }
-  
-
-  ${CovertObjectMediaQueriesToStyles({
-    element: UTILITY_CONTAINER_LOCK,
-    styles: umdLock['.umd-lock'],
-  })}
   
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${UTILITY_CONTAINER_LOCK} {
@@ -67,7 +58,7 @@ export const UtilityContainerStyles = `
   }
 
   .${UTILITY_CONTAINER_LINK} {
-    ${CovertObjectToStyles({ styles: typography['.umd-sans-min'] })}
+    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-min'] })}
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {

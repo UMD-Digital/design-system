@@ -1,10 +1,12 @@
+import postcss from 'postcss';
 import {
   typography,
   spacing,
   colors,
+  animatedLinks,
 } from '@universityofmaryland/umd-web-configuration';
-import { MakeSlot } from 'helpers/ui';
-import { CovertObjectToStyles } from 'helpers/styles';
+import { MakeSlot, SlotDefaultStyling } from 'helpers/ui';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';
 
@@ -13,23 +15,37 @@ const OVERLAY_CARD_EYEBROW = 'umd-overlay-card-eyebrow';
 const OVERLAY_CARD_TEXT = 'umd-overlay-card-text';
 const OVERLAY_CARD_DATE = 'umd-overlay-card-date';
 
+const postcssJs = require('postcss-js');
+const linkStyles = postcss().process(animatedLinks['.umd-fadein-simple-dark'], {
+  parser: postcssJs,
+});
+
 export const ContentStyles = `
   .${ELEMENTS.CONTENT_CONTAINER} {
     position: relative;
     z-index: 9;
   }
 
-  .${OVERLAY_CARD_EYEBROW} ::slotted(*) {
-    ${CovertObjectToStyles({ styles: typography['.umd-eyebrow'] })}
+  .${OVERLAY_CARD_EYEBROW} * {
+    ${ConvertJSSObjectToStyles({
+      styleObj: typography['.umd-eyebrow'],
+    })}
   }
 
   * + .${OVERLAY_CARD_HEADLINE} {
     margin-top: ${spacing.min}
   }
 
-  .${OVERLAY_CARD_HEADLINE} ::slotted(*) {
-    ${CovertObjectToStyles({ styles: typography['.umd-sans-larger'] })}
+  .${OVERLAY_CARD_HEADLINE} * {
+    ${ConvertJSSObjectToStyles({
+      styleObj: typography['.umd-sans-larger'],
+    })}
   }
+
+  .${OVERLAY_CARD_HEADLINE} a {
+    ${ConvertJSSObjectToStyles({
+      styleObj: animatedLinks['.umd-slidein-underline-gray-red'],
+    })}
 
   * + .${OVERLAY_CARD_TEXT} {
     margin-top: ${spacing.sm}
@@ -39,20 +55,30 @@ export const ContentStyles = `
     margin-top: ${spacing.min}
   }
 
-  .${OVERLAY_CARD_DATE} ::slotted(*) {
-    ${CovertObjectToStyles({ styles: typography['.umd-sans-min'] })}
+  .${OVERLAY_CARD_DATE} * {
+    ${ConvertJSSObjectToStyles({
+      styleObj: typography['.umd-sans-min'],
+    })}
     color: ${colors.gray.mediumAA};
   }
+
 `;
 
 export const CreateContent = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
-  const eyebrowSlot = MakeSlot({ type: SLOTS.EYEBROW });
-  const headlineSlot = MakeSlot({ type: SLOTS.HEADLINE });
+  const eyebrowSlot = SlotDefaultStyling({ element, slotRef: SLOTS.EYEBROW });
+  const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
   const textSlot = MakeSlot({ type: SLOTS.TEXT });
-  const dateSlot = MakeSlot({ type: SLOTS.DATE });
+  const dateSlot = SlotDefaultStyling({ element, slotRef: SLOTS.DATE });
 
   container.classList.add(ELEMENTS.CONTENT_CONTAINER);
+
+  const style = {
+    top: 10,
+    '&:hover': {
+      top: 5,
+    },
+  };
 
   if (eyebrowSlot) {
     const eyebrowWrapper = document.createElement('div');

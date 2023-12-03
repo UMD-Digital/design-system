@@ -1,8 +1,5 @@
 import { umdLock } from '@universityofmaryland/umd-web-configuration';
-import {
-  CovertObjectMediaQueriesToStyles,
-  CovertObjectToStyles,
-} from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
 import { ELEMENT_TYPE } from '../component';
 import { CreateButton, ButtonStyles } from './button';
@@ -24,13 +21,10 @@ export const CarouselContainerStyles = `
   }
 
   .${CAROUSEL_CONTAINER_LOCK} {
-    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+    ${ConvertJSSObjectToStyles({
+      styleObj: umdLock['.umd-lock'],
+    })}
   }
-
-  ${CovertObjectMediaQueriesToStyles({
-    element: CAROUSEL_CONTAINER_LOCK,
-    styles: umdLock['.umd-lock'],
-  })}
 
   .${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER} {
     overflow: hidden;

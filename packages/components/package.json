@@ -13,5 +13,10 @@
   "scripts": {
     "clean": "rm -rf dist",
     "start": "webpack -w"
+  },
+  "dependencies": {
+    "@types/postcss-js": "^4.0.4",
+    "postcss-js": "^4.0.1",
+    "tw-to-css": "^0.0.12"
   }
 }

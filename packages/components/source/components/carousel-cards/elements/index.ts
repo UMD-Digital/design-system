@@ -3,11 +3,7 @@ import {
   spacing,
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
-import {
-  CovertObjectToStyles,
-  CovertObjectMediaQueriesToStyles,
-  Reset,
-} from 'helpers/styles';
+import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 import {
@@ -73,13 +69,11 @@ export const ComponentStyles = `
 
   .${CAROUSEL_LOCK} {
     position: relative;
-    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+    ${ConvertJSSObjectToStyles({
+      styleObj: umdLock['.umd-lock'],
+    })}
   }
 
-  ${CovertObjectMediaQueriesToStyles({
-    element: CAROUSEL_LOCK,
-    styles: umdLock['.umd-lock'],
-  })}
 
   @media (min-width: ${BREAKPOINTS.large}px) {
     .${CAROUSEL_LOCK} {

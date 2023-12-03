@@ -60,6 +60,7 @@ export {
   skipContent,
   richText,
   typography,
+  animatedLinks,
   umdGrid,
   umdLock,
   umdLinksGroup,

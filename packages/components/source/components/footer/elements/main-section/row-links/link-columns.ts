@@ -4,7 +4,7 @@ import {
   typography,
 } from '@universityofmaryland/umd-web-configuration';
 import { fontWeight } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts';
-import { CovertObjectToStyles } from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
 import { BREAKPOINTS } from '../../../globals';
 
@@ -133,14 +133,14 @@ export const LinkColumnStyles = `
   }
 
   .${SLOT_COLUMN_HEADLINE} {
-    ${CovertObjectToStyles({
-      styles: typography['.umd-interactive-sans-medium'],
+    ${ConvertJSSObjectToStyles({
+      styleObj: typography['.umd-interactive-sans-medium'],
     })}
     font-weight: ${fontWeight.extraBold};
   }
 
   .${SLOT_COLUMN_FONTS} {
-    ${CovertObjectToStyles({ styles: typography['.umd-sans-smaller'] })}
+    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-smaller'] })}
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {

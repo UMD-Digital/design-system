@@ -4,7 +4,7 @@ import {
   typography,
   umdCta,
 } from '@universityofmaryland/umd-web-configuration';
-import { CovertObjectToStyles } from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { CardType } from '../component';
@@ -24,7 +24,7 @@ export const BodyStyles = `
   }
 
   .${CARD_BODY_DATE_WRAPPER} ::slotted(*) {
-    ${CovertObjectToStyles({ styles: typography['.umd-sans-min'] })}
+    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-min'] })}
     color: ${colors.gray.mediumAA};
   }
 
@@ -33,8 +33,8 @@ export const BodyStyles = `
   }
 
   .${CARD_BODY_CTA_WRAPPER} ::slotted(*) {
-    ${CovertObjectToStyles({
-      styles: typography['.umd-interactive-sans-small'],
+    ${ConvertJSSObjectToStyles({
+      styleObj: typography['.umd-interactive-sans-small'],
     })}
     margin-top: 0;
     margin-bottom: 0;

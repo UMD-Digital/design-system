@@ -3,7 +3,7 @@ import {
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
-import { CovertObjectToStyles } from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { MakeSlot, MakeSpan } from 'helpers/ui';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { ELEMENT_TYPE } from '../../../component';
@@ -117,8 +117,8 @@ export const ContactContainerStyles = `
   }
 
   .${CONTACT_LIST_HEADLINE} {
-    ${CovertObjectToStyles({
-      styles: typography['.umd-interactive-sans-medium'],
+    ${ConvertJSSObjectToStyles({
+      styleObj: typography['.umd-interactive-sans-medium'],
     })}
   }
 

@@ -5,6 +5,7 @@ import { CreateCta, CtaStyles } from './cta';
 import { CreateCtaIcon, CtaIconStyles } from './cta-icon';
 import { CardType } from '../component';
 import { ELEMENTS, SLOTS } from '../globals';
+import { Reset } from 'helpers/styles';
 
 const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';
 const CARD_OVERLAY_TEXT_CONTAINER = 'umd-card-overlay-text-container';
@@ -122,9 +123,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  :host * {
-    box-sizing: border-box;
-  }
+  ${Reset}
 
   .${CARD_OVERLAY_CONTAINER} {
     min-height: 368px;

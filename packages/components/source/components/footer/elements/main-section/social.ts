@@ -3,7 +3,7 @@ import {
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
-import { CovertObjectToStyles } from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import { ELEMENT_TYPE } from '../../component';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../globals';
@@ -130,8 +130,8 @@ export const SocialContainerStyles = `
   }
 
   .${SOCIAL_CONTAINER_HEADLINE} {
-    ${CovertObjectToStyles({
-      styles: typography['.umd-interactive-sans-medium'],
+    ${ConvertJSSObjectToStyles({
+      styleObj: typography['.umd-interactive-sans-medium'],
     })}
   }
 

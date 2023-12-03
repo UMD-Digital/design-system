@@ -5,10 +5,7 @@ import {
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
 import { MakeSlot, SlotDefaultStyling } from 'helpers/ui';
-import {
-  CovertObjectMediaQueriesToStyles,
-  CovertObjectToStyles,
-} from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
@@ -33,13 +30,10 @@ export const IntroContainerStyles = `
   }
 
   .${INTRO_CONTAINER_LOCK} {
-    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+    ${ConvertJSSObjectToStyles({
+      styleObj: umdLock['.umd-lock'],
+    })}
   }
-
-  ${CovertObjectMediaQueriesToStyles({
-    element: INTRO_CONTAINER_LOCK,
-    styles: umdLock['.umd-lock'],
-  })}
 
   @media (min-width: ${BREAKPOINTS.large}px) {
     .${INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
@@ -49,7 +43,9 @@ export const IntroContainerStyles = `
   }
 
   .${INTRO_CONTAINER_HEADLINE} * {
-    ${CovertObjectToStyles({ styles: typography['.umd-sans-largest'] })}
+    ${ConvertJSSObjectToStyles({
+      styleObj: typography['.umd-sans-largest'],
+    })}
     color: ${colors.white};
   }
 

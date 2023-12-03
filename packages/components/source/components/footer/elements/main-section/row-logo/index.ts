@@ -3,10 +3,7 @@ import {
   spacing,
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
-import {
-  CovertObjectMediaQueriesToStyles,
-  CovertObjectToStyles,
-} from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
   SocialContainerStyles,
   CreateSocialCampaignColumns,
@@ -81,14 +78,8 @@ export const RowLogoStyles = `
   }
 
   .${ROW_LOGO_CONTAINER_LOCK} {
-    ${CovertObjectToStyles({ styles: umdLock['.umd-lock'] })}
+    ${ConvertJSSObjectToStyles({ styleObj: umdLock['.umd-lock'] })}
   }
-  
-
-  ${CovertObjectMediaQueriesToStyles({
-    element: ROW_LOGO_CONTAINER_LOCK,
-    styles: umdLock['.umd-lock'],
-  })}
 
   ${LogoContainerStyles}
   ${ContactContainerStyles}

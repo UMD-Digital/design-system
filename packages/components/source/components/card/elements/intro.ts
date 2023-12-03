@@ -3,7 +3,7 @@ import {
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
-import { CovertObjectToStyles } from 'helpers/styles';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { MakeSlot, CheckForImageAlt } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { CardType } from '../component';
@@ -54,7 +54,7 @@ export const IntroStyles = `
   }
 
   .${CARD_OVERLAY_EYEBROW_WRAPPER} ::slotted(*) {
-    ${CovertObjectToStyles({ styles: typography['.umd-sans-smaller'] })}
+    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-smaller'] })}
     color: ${colors.black};
   }
 
@@ -63,7 +63,7 @@ export const IntroStyles = `
   }
 
   .${CARD_OVERLAY_HEADLINE_WRAPPER} ::slotted(*) {
-    ${CovertObjectToStyles({ styles: typography['.umd-sans-large'] })}
+    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-large'] })}
     color: ${colors.black};
   }
 `;

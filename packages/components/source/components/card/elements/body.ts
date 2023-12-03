@@ -29,7 +29,7 @@ export const BodyStyles = `
   }
 
   .${CARD_BODY_CTA_WRAPPER} {
-    margin-top: ${spacing.min};
+    margin-top: ${spacing.md};
   }
 
   .${CARD_BODY_CTA_WRAPPER} * {

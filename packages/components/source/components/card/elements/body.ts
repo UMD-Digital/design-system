@@ -5,7 +5,7 @@ import {
   umdCta,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { MakeSlot } from 'helpers/ui';
+import { MakeSlot, SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { CardType } from '../component';
 
@@ -23,47 +23,38 @@ export const BodyStyles = `
     margin-top: ${spacing.min}
   }
 
-  .${CARD_BODY_DATE_WRAPPER} ::slotted(*) {
-    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-min'] })}
+  .${CARD_BODY_DATE_WRAPPER} * {
     color: ${colors.gray.mediumAA};
+    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-min'] })}
   }
 
   .${CARD_BODY_CTA_WRAPPER} {
     margin-top: ${spacing.min};
   }
 
-  .${CARD_BODY_CTA_WRAPPER} ::slotted(*) {
+  .${CARD_BODY_CTA_WRAPPER} * {
     ${ConvertJSSObjectToStyles({
       styleObj: typography['.umd-interactive-sans-small'],
     })}
-    margin-top: 0;
-    margin-bottom: 0;
-    transition: 'background 0.5s, border 0.5s, color 0.5s',
-    textAlign: 'center',
   }
 `;
 
 export const CreateBody = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
-
-  const textSlot = MakeSlot({ type: SLOTS.TEXT });
-  const dateSlot = MakeSlot({ type: SLOTS.DATE });
+  const textSlot = SlotDefaultStyling({ element, slotRef: SLOTS.TEXT });
+  const dateSlot = SlotDefaultStyling({ element, slotRef: SLOTS.DATE });
   const ctaSlot = MakeSlot({ type: SLOTS.CTA });
 
   container.classList.add(CARD_BODY_CONTAINER);
 
   if (textSlot) {
-    const textWrapper = document.createElement('div');
-    textWrapper.appendChild(textSlot);
-    textWrapper.classList.add(CARD_BODY_TEXT_WRAPPER);
-    container.appendChild(textWrapper);
+    textSlot.classList.add(CARD_BODY_TEXT_WRAPPER);
+    container.appendChild(textSlot);
   }
 
   if (dateSlot) {
-    const dateWrapper = document.createElement('div');
-    dateWrapper.appendChild(dateSlot);
-    dateWrapper.classList.add(CARD_BODY_DATE_WRAPPER);
-    container.appendChild(dateWrapper);
+    dateSlot.classList.add(CARD_BODY_DATE_WRAPPER);
+    container.appendChild(dateSlot);
   }
 
   if (ctaSlot) {

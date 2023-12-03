@@ -53,8 +53,8 @@ export const CheckForAnimationLinkSpan = ({
     element.querySelector('slot') || element instanceof HTMLSlotElement;
   const link = element.querySelector('a');
 
-  if (isSlotContent) return element;
-  if (!link) return element;
+  if (isSlotContent) return;
+  if (!link) return;
 
   const isLinkSpan = link.querySelector('span');
 
@@ -63,8 +63,6 @@ export const CheckForAnimationLinkSpan = ({
     span.innerHTML = link.innerHTML;
     link.innerHTML = '';
     link.appendChild(span);
-
-    return element;
   }
 };
 

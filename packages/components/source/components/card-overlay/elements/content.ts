@@ -79,9 +79,7 @@ export const CreateContent = ({ element }: { element: CardType }) => {
   }
 
   if (headlineSlot) {
-    const validatedHeadline = CheckForAnimationLinkSpan({
-      element: headlineSlot,
-    });
+    CheckForAnimationLinkSpan({ element: headlineSlot });
     headlineSlot.classList.add(ELEMENTS.CARD_OVERLAY_HEADLINE);
     container.appendChild(headlineSlot);
   }

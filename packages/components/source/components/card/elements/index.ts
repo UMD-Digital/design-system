@@ -1,4 +1,5 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { Reset } from 'helpers/styles';
 import { CreateImage, ImageStyles } from './image';
 import { CreateIntro, IntroStyles } from './intro';
 import { CreateBody, BodyStyles } from './body';
@@ -12,6 +13,10 @@ const VariantThemeStyles = `
     background-color: ${colors.gray.darker};
     color: ${colors.white};
     height: 100%;
+  }
+
+  .${CARD_CONTAINER}[theme="dark"] * {
+    color: ${colors.white};
   }
 
   .${CARD_CONTAINER}[theme="dark"] .${CARD_TEXT_CONTAINER} {
@@ -43,14 +48,8 @@ export const ComponentStyles = `
     display: block;
     container: umd-card / inline-size;
   }
-
-  :host * {
-    box-sizing: border-box;
-  }
-
-  :host img {
-    max-width: 100%;
-  }
+  
+  ${Reset}
 
   :host a[slot="image"] {
     display: block;

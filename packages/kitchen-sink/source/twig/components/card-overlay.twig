@@ -1,885 +1,278 @@
 {% extends '../_layout.twig' %}
 
+{% import '../_ui/card-overlay.twig' as CardOverlay %}
+
+{% set var = value %}
+
 {% block page %}
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Overlay Example 1 - Default
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling without images and theme options
+      </p>
 
       <div class="umd-grid-three my-md">
-        <umd-element-card-overlay theme="dark">
-          <div slot="eyebrow">
-            <p>
-              Anim id est laborum.
-            </p>
-          </div>
+        {{
+          CardOverlay.FullCardBody({
+            theme: 'dark'
+          })
+        }}
 
-          <div slot="headline">
-            <p>
-              Example Headline tur. Excepteur sint occae
-            </p>
-          </div>
+        {{
+          CardOverlay.FullCardBody({
+            theme: 'light'
+          })
+        }}
 
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-
-          <div slot="date">
-            <date>
-              September 31, 2023
-            </date>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay>
-          <div slot="eyebrow">
-            <p>
-              Anim id est laborum.
-            </p>
-          </div>
-
-          <div slot="headline">
-            <p>
-              Example Headline tur. Excepteur sint occae
-            </p>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-
-          <div slot="date">
-            <date>
-              September 31, 2023
-            </date>
-          </div>
-
-          <div slot="cta">
-            <a href="https://google.com"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
-
-              <span aria-hidden="true">
-                Link with a very long label that causes it to go to a new line.
-              </span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay theme="dark">
-          <div slot="eyebrow">
-            <p>
-              Anim id est laborum.
-            </p>
-          </div>
-          <div slot="headline">
-            <p>
-              Example Headline tur. Excepteur sint occae
-            </p>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://google.com"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Learn More</span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-
-          <div slot="date">
-            <date>
-              September 31, 2023
-            </date>
-          </div>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.FullCardBody({
+            theme: 'dark'
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Overlay Example 2 - Background Image Option with link titles
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling with images
+      </p>
 
       <div class="umd-grid-three my-md">
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg"
-            alt="Students working on whiteboards" />
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com">Lorem ipsum dolor</a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-          </div>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-          <div slot="date">
-            <date>
-              September 31, 2023
-            </date>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay theme="dark">
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com"><span>Lorem ipsum dolor</span></a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay>
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com" rel="noopener noreferrer">
-                <span aria-hidden="true">Lorem ipsum dolor</span>
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div>
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://strategicplan.umd.edu/commitment/we-reimagine-learning"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer"
-              target="_blank">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Read Now</span>
-              <span class="sr-only">
-                Learn more about how UMD reimagines learning
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Overlay Example 3 - CTA Option
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling with CTA Icon Options
+      </p>
 
       <div class="umd-grid-three my-md">
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Students working on whiteboards" />
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions),
+            ctaOption: 'external'
+          })
+        }}
 
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com"><span>Lorem ipsum dolor</span></a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-          </div>
+        {{
+          CardOverlay.FullCardBody({
+            ctaOption: 'download'
+          })
+        }}
 
-          <a href="https://google.com"
-            rel="noopener noreferrer"
-            target="_blank"
-            slot="cta-icon"
-            aria-label="example label">
-
-          </a>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay>
-          <div slot="eyebrow">
-            <p>
-              Optional Eyebrow
-            </p>
-          </div>
-
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com"><span>Lorem ipsum dolor</span></a>
-            </h3>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-          </div>
-
-          <a href="https://google.com"
-            rel="noopener noreferrer"
-            download
-            slot="cta-icon"
-            aria-label="example label">
-
-          </a>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay theme="dark">
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com"><span>Lorem ipsum dolor</span></a>
-            </h3>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-          </div>
-
-          <a href="https://google.com"
-            rel="noopener noreferrer"
-            slot="cta-icon"
-            aria-label="example label">
-
-          </a>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.FullCardBody({
+            theme: 'dark',
+            ctaOption: 'interanl'
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Overlay Example 4 - three column with different rich text options
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar.
-        </p>
-      </div>
-
-      <div class="umd-grid-three my-md">
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
-
-          <div slot="eyebrow">
-            <p>
-              Anim id est laborum.
-            </p>
-          </div>
-          <div slot="headline">
-            <p>
-              <a href="https://google.com" rel="noopener noreferrer">
-                <span aria-hidden="true">
-                  Example Headline tur. Excepteur sint occae
-                </span>
-              </a>
-            </p>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                sunt in culpa qui officia <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, deserunt mollit anim id est laborum.
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://google.com"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Learn More</span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg"
-            alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
-
-          <div slot="eyebrow">
-            <p>
-              Anim id est laborum.
-            </p>
-          </div>
-          <div slot="headline">
-            <p>
-              <a href="https://google.com" rel="noopener noreferrer">
-                <span aria-hidden="true">
-                  Example Headline tur. Excepteur sint occae
-                </span>
-              </a>
-            </p>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://google.com"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Learn More</span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg"
-            alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
-
-          <div slot="eyebrow">
-            <p>
-              Anim id est laborum.
-            </p>
-          </div>
-
-          <div slot="headline">
-            <a href="https://google.com" rel="noopener noreferrer">
-              <span aria-hidden="true">
-                Example Headline tur. Excepteur sint occae
-              </span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://google.com"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Learn More</span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Overlay Example 5 - sizing to parent with default styles
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling with grid configuration animation - three column
+      </p>
 
       <div class="umd-grid-three-animated-overlay-card my-md">
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/50b429c689f2b81d/Hero_web-IribeCenter_JC_10152019_0703-tif.jpg"
-            alt="Students working on whiteboards" />
+        {{
+          CardOverlay.FullCardBody({
+            image: random(WeirdImageOptions)
+          })
+        }}
 
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com"><span>Lorem ipsum dolor</span></a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(RecImageOptions)
+          })
+        }}
 
-            <a href="https://google.com" class="umd-cta-secondary">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
-              </svg>
-              <span>A link</span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/c86e150730938b0/Hero_web-Testudo_Sunrise_SC_09182019_1283.jpg"
-            alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
-
-          <div slot="headline">
-            <a href="https://google.com" rel="noopener noreferrer">
-              <span aria-hidden="true">
-                Example Headline tur. Excepteur sint occae
-              </span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                <strong>
-                  Duis aute irure dolor in reprehenderit in voluptate
-                </strong>
-                <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
-
-          <div slot="cta">
-            <a href="https://google.com"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
-
-              <span aria-hidden="true">Learn More</span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg"
-            alt="Students working on whiteboards" />
-
-          <div slot="headline">
-            <h3>
-              <a href="https://google.com"><span>Lorem ipsum dolor</span></a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-
-            <a href="https://google.com" class="umd-cta-secondary">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
-              </svg>
-              <span>A link</span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
       </div>
     </div>
   </section>
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Card Overlay Example 6 - sizing to parent with overwrite styles
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling with grid configuration animation - four column
+      </p>
 
       <div class="umd-grid-four-animated-overlay-card my-md">
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg"
-            alt="Students working on whiteboards" />
+        {{
+          CardOverlay.FullCardBody({
+            image: random(WeirdImageOptions)
+          })
+        }}
 
-          <div slot="headline" styled>
-            <h3 class="umd-sans-large">
-              <a href="https://google.com" class="umd-slidein-underline-white">
-                <span>Lorem ipsum dolor</span>
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(RecImageOptions)
+          })
+        }}
 
-            <a href="https://google.com" class="umd-cta-secondary">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
-              </svg>
-              <span>A link</span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-        <umd-element-card-overlay theme="dark">
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/665955375d07b78/Medium_web-CampusViews_11012023_RS_1613-tif.jpg"
-            alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
+        {{
+          CardOverlay.FullCardBody({
+            image: random(RecImageOptions)
+          })
+        }}
+      </div>
+    </div>
+  </section>
 
-          <div slot="eyebrow">
-            <p>
-              Anim id est laborum.
-            </p>
-          </div>
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-largest">
+        Layout Examples
+      </p>
+    </div>
+  </section>
 
-          <div slot="headline" styled>
-            <h3 class="umd-sans-large">
-              <a href="https://google.com"
-                class="umd-slidein-underline-white"
-                rel="noopener noreferrer">
-                <span aria-hidden="true">
-                  Example Headline tur. Excepteur sint occae
-                </span>
-              </a>
-            </h3>
-          </div>
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-large">
+        Layout Two Column. Default Styling
+      </p>
 
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                sunt in culpa qui officia deserunt
-                <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>, mollit anim id est laborum.
-              </p>
-            </div>
-          </div>
-        </umd-element-card-overlay>
+      <div class="umd-grid my-md">
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/7be4cb700f7b7518/Hero_web-KnoxMural_06042018_8081.jpg"
-            alt="Students working on whiteboards" />
+        {{
+          CardOverlay.FullCardBody({
+            image: random(WeirdImageOptions)
+          })
+        }}
+      </div>
+    </div>
+  </section>
 
-          <div slot="headline" styled>
-            <h3 class="umd-sans-large">
-              <a href="https://google.com" class="umd-slidein-underline-white">
-                <span>Lorem ipsum dolor</span>
-              </a>
-            </h3>
-          </div>
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-large">
+        Layout Three Column. Default Styling
+      </p>
 
-            <a href="https://google.com" class="umd-cta-secondary">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
-              </svg>
-              <span>A link</span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
-        <umd-element-card-overlay>
-          <img slot="image"
-            src="https://brandportal.umd.edu/m/50b429c689f2b81d/Hero_web-IribeCenter_JC_10152019_0703-tif.jpg"
-            alt="Pale blues and violets float above the main administration building in front of a lush green McKeldin Mall" />
+      <div class="umd-grid-three my-md">
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
 
-          <div slot="eyebrow">
-            <p>
-              Anim id est laborum.
-            </p>
-          </div>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(WeirdImageOptions)
+          })
+        }}
 
-          <div slot="headline" styled>
-            <h3 class="umd-sans-large">
-              <a href="https://google.com"
-                rel="noopener noreferrer"
-                class="umd-slidein-underline-white">
-                <span aria-hidden="true">
-                  Example Headline tur. Excepteur sint occae
-                </span>
-              </a>
-            </h3>
-          </div>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
+      </div>
+    </div>
+  </section>
 
-          <div slot="text" styled>
-            <div class="umd-rich-text">
-              <p>
-                Duis aute irure dolor
-                <a href="https://google.com">
-                  Excepteur sint occaecat cupidatat non proident
-                </a>
-              </p>
-            </div>
-          </div>
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-large">
+        Layout Four Column. Default Styling
+      </p>
 
-          <div slot="cta">
-            <a href="https://google.com"
-              class="umd-cta-secondary"
-              rel="noopener noreferrer">
-              <svg aria-hidden="true"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
+      <div class="umd-grid-four my-md">
+        {{
+          CardOverlay.FullCardBody({
+            image: random(WeirdImageOptions)
+          })
+        }}
 
-              <span aria-hidden="true">Learn More</span>
-              <span class="sr-only">
-                Example link that reads Learn more and only causes the page to
-                reload
-              </span>
-            </a>
-          </div>
-        </umd-element-card-overlay>
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
+
+        {{
+          CardOverlay.FullCardBody({
+            image: random(WeirdImageOptions)
+          })
+        }}
+
+        {{
+          CardOverlay.FullCardBody({
+            image: random(SquareImageOptions)
+          })
+        }}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-largest">
+        Overwrite Examples
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-large">
+        Layout Four Column. Overwrite Styling
+      </p>
+
+      <div class="umd-grid-three my-md">
+        {{
+          CardOverlay.FullCardBodyOverwrites({
+            image: random(WeirdImageOptions)
+          })
+        }}
+
+        {{
+          CardOverlay.FullCardBodyOverwrites({
+            theme: 'dark'
+          })
+        }}
+
+        {{ CardOverlay.FullCardBodyOverwrites({}) }}
       </div>
     </div>
   </section>

@@ -37,6 +37,10 @@ const VariantDarkThemeStyles = `
     background-color: ${colors.gray.darker};
   }
 
+  .${CARD_OVERLAY_CONTAINER}[theme="dark"] * {
+    color: ${colors.white};
+  }
+
   .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
   .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
     background-color: ${colors.gray.darker};
@@ -52,6 +56,10 @@ const VariantDarkThemeStyles = `
 const VariantImageThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
     padding-top: ${spacing['4xl']};
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] * {
+    color: ${colors.white};
   }
 
   @container umd-card (min-width: 300px) {

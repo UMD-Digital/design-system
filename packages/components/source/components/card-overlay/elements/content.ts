@@ -1,11 +1,11 @@
-import postcss from 'postcss';
 import {
   typography,
   spacing,
   colors,
   animatedLinks,
+  richText,
 } from '@universityofmaryland/umd-web-configuration';
-import { MakeSlot, SlotDefaultStyling } from 'helpers/ui';
+import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';
@@ -14,11 +14,6 @@ const OVERLAY_CARD_HEADLINE = 'umd-overlay-card-headline';
 const OVERLAY_CARD_EYEBROW = 'umd-overlay-card-eyebrow';
 const OVERLAY_CARD_TEXT = 'umd-overlay-card-text';
 const OVERLAY_CARD_DATE = 'umd-overlay-card-date';
-
-const postcssJs = require('postcss-js');
-const linkStyles = postcss().process(animatedLinks['.umd-fadein-simple-dark'], {
-  parser: postcssJs,
-});
 
 export const ContentStyles = `
   .${ELEMENTS.CONTENT_CONTAINER} {
@@ -44,11 +39,18 @@ export const ContentStyles = `
 
   .${OVERLAY_CARD_HEADLINE} a {
     ${ConvertJSSObjectToStyles({
-      styleObj: animatedLinks['.umd-slidein-underline-gray-red'],
+      styleObj: animatedLinks['.umd-slidein-underline-white'],
     })}
+  }
 
   * + .${OVERLAY_CARD_TEXT} {
     margin-top: ${spacing.sm}
+  }
+
+  .${OVERLAY_CARD_TEXT} {
+    ${ConvertJSSObjectToStyles({
+      styleObj: richText['.umd-rich-text'],
+    })}
   }
 
   * + .${OVERLAY_CARD_DATE} {
@@ -68,30 +70,19 @@ export const CreateContent = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
   const eyebrowSlot = SlotDefaultStyling({ element, slotRef: SLOTS.EYEBROW });
   const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
-  const textSlot = MakeSlot({ type: SLOTS.TEXT });
+  const textSlot = SlotDefaultStyling({ element, slotRef: SLOTS.TEXT });
   const dateSlot = SlotDefaultStyling({ element, slotRef: SLOTS.DATE });
 
   container.classList.add(ELEMENTS.CONTENT_CONTAINER);
 
-  const style = {
-    top: 10,
-    '&:hover': {
-      top: 5,
-    },
-  };
-
   if (eyebrowSlot) {
-    const eyebrowWrapper = document.createElement('div');
-    eyebrowWrapper.appendChild(eyebrowSlot);
-    eyebrowWrapper.classList.add(OVERLAY_CARD_EYEBROW);
-    container.appendChild(eyebrowWrapper);
+    eyebrowSlot.classList.add(OVERLAY_CARD_EYEBROW);
+    container.appendChild(eyebrowSlot);
   }
 
   if (headlineSlot) {
-    const headlineWrapper = document.createElement('div');
-    headlineWrapper.appendChild(headlineSlot);
-    headlineWrapper.classList.add(OVERLAY_CARD_HEADLINE);
-    container.appendChild(headlineWrapper);
+    headlineSlot.classList.add(OVERLAY_CARD_HEADLINE);
+    container.appendChild(headlineSlot);
   }
 
   if (textSlot) {
@@ -102,10 +93,8 @@ export const CreateContent = ({ element }: { element: CardType }) => {
   }
 
   if (dateSlot) {
-    const dateWrapper = document.createElement('div');
-    dateWrapper.appendChild(dateSlot);
-    dateWrapper.classList.add(OVERLAY_CARD_DATE);
-    container.appendChild(dateWrapper);
+    dateSlot.classList.add(OVERLAY_CARD_DATE);
+    container.appendChild(dateSlot);
   }
 
   return container;

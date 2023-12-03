@@ -58,12 +58,11 @@ export const ContentStyles = `
   }
 
   .${OVERLAY_CARD_DATE} * {
+    color: ${colors.gray.mediumAA};
     ${ConvertJSSObjectToStyles({
       styleObj: typography['.umd-sans-min'],
     })}
-    color: ${colors.gray.mediumAA};
   }
-
 `;
 
 export const CreateContent = ({ element }: { element: CardType }) => {

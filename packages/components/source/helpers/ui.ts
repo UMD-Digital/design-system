@@ -33,14 +33,15 @@ export const SlotDefaultStyling = ({
 
   if (!elementRef) return null;
   const isStyled = elementRef.hasAttribute('styled');
+  const wrapper = document.createElement('div');
 
   if (isStyled) {
-    return MakeSlot({ type: slotRef });
+    wrapper.appendChild(MakeSlot({ type: slotRef }));
   } else {
-    const wrapper = document.createElement('div');
     wrapper.innerHTML = elementRef.innerHTML;
-    return wrapper;
   }
+
+  return wrapper;
 };
 
 export const CheckForImageAlt = ({

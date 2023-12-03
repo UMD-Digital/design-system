@@ -44,6 +44,30 @@ export const SlotDefaultStyling = ({
   return wrapper;
 };
 
+export const CheckForAnimationLinkSpan = ({
+  element,
+}: {
+  element: HTMLElement;
+}) => {
+  const isSlotContent =
+    element.querySelector('slot') || element instanceof HTMLSlotElement;
+  const link = element.querySelector('a');
+
+  if (isSlotContent) return element;
+  if (!link) return element;
+
+  const isLinkSpan = link.querySelector('span');
+
+  if (!isLinkSpan) {
+    const span = document.createElement('span');
+    span.innerHTML = link.innerHTML;
+    link.innerHTML = '';
+    link.appendChild(span);
+
+    return element;
+  }
+};
+
 export const CheckForImageAlt = ({
   element,
   slotRef,

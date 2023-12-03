@@ -5,15 +5,14 @@ import {
   animatedLinks,
   richText,
 } from '@universityofmaryland/umd-web-configuration';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';
 
-const OVERLAY_CARD_HEADLINE = 'umd-overlay-card-headline';
-const OVERLAY_CARD_EYEBROW = 'umd-overlay-card-eyebrow';
-const OVERLAY_CARD_TEXT = 'umd-overlay-card-text';
-const OVERLAY_CARD_DATE = 'umd-overlay-card-date';
+const CARD_OVERLAY_EYEBROW = 'umd-overlay-card-eyebrow';
+const CARD_OVERLAY_TEXT = 'umd-overlay-card-text';
+const CARD_OVERLAY_DATE = 'umd-overlay-card-date';
 
 export const ContentStyles = `
   .${ELEMENTS.CONTENT_CONTAINER} {
@@ -21,43 +20,43 @@ export const ContentStyles = `
     z-index: 9;
   }
 
-  .${OVERLAY_CARD_EYEBROW} * {
+  .${CARD_OVERLAY_EYEBROW} * {
     ${ConvertJSSObjectToStyles({
       styleObj: typography['.umd-eyebrow'],
     })}
   }
 
-  * + .${OVERLAY_CARD_HEADLINE} {
+  * + .${ELEMENTS.CARD_OVERLAY_HEADLINE} {
     margin-top: ${spacing.min}
   }
 
-  .${OVERLAY_CARD_HEADLINE} * {
+  .${ELEMENTS.CARD_OVERLAY_HEADLINE} * {
     ${ConvertJSSObjectToStyles({
       styleObj: typography['.umd-sans-larger'],
     })}
   }
 
-  .${OVERLAY_CARD_HEADLINE} a {
+  .${ELEMENTS.CARD_OVERLAY_HEADLINE} a {
     ${ConvertJSSObjectToStyles({
       styleObj: animatedLinks['.umd-slidein-underline-white'],
     })}
   }
 
-  * + .${OVERLAY_CARD_TEXT} {
+  * + .${CARD_OVERLAY_TEXT} {
     margin-top: ${spacing.sm}
   }
 
-  .${OVERLAY_CARD_TEXT} {
+  .${CARD_OVERLAY_TEXT} {
     ${ConvertJSSObjectToStyles({
       styleObj: richText['.umd-rich-text'],
     })}
   }
 
-  * + .${OVERLAY_CARD_DATE} {
+  * + .${CARD_OVERLAY_DATE} {
     margin-top: ${spacing.min}
   }
 
-  .${OVERLAY_CARD_DATE} * {
+  .${CARD_OVERLAY_DATE} * {
     color: ${colors.gray.mediumAA};
     ${ConvertJSSObjectToStyles({
       styleObj: typography['.umd-sans-min'],
@@ -75,24 +74,27 @@ export const CreateContent = ({ element }: { element: CardType }) => {
   container.classList.add(ELEMENTS.CONTENT_CONTAINER);
 
   if (eyebrowSlot) {
-    eyebrowSlot.classList.add(OVERLAY_CARD_EYEBROW);
+    eyebrowSlot.classList.add(CARD_OVERLAY_EYEBROW);
     container.appendChild(eyebrowSlot);
   }
 
   if (headlineSlot) {
-    headlineSlot.classList.add(OVERLAY_CARD_HEADLINE);
+    const validatedHeadline = CheckForAnimationLinkSpan({
+      element: headlineSlot,
+    });
+    headlineSlot.classList.add(ELEMENTS.CARD_OVERLAY_HEADLINE);
     container.appendChild(headlineSlot);
   }
 
   if (textSlot) {
     const textWrapper = document.createElement('div');
     textWrapper.appendChild(textSlot);
-    textWrapper.classList.add(OVERLAY_CARD_TEXT);
+    textWrapper.classList.add(CARD_OVERLAY_TEXT);
     container.appendChild(textWrapper);
   }
 
   if (dateSlot) {
-    dateSlot.classList.add(OVERLAY_CARD_DATE);
+    dateSlot.classList.add(CARD_OVERLAY_DATE);
     container.appendChild(dateSlot);
   }
 

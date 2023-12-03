@@ -1,16 +1,21 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import {
+  animatedLinks,
+  colors,
+  spacing,
+} from '@universityofmaryland/umd-web-configuration';
+import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateContent, ContentStyles } from './content';
 import { CreateImage, ImageStyles } from './image';
 import { CreateCta, CtaStyles } from './cta';
 import { CreateCtaIcon, CtaIconStyles } from './cta-icon';
 import { CardType } from '../component';
 import { ELEMENTS, SLOTS } from '../globals';
-import { Reset } from 'helpers/styles';
 
 const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';
 const CARD_OVERLAY_TEXT_CONTAINER = 'umd-card-overlay-text-container';
 const CARD_OVERLAY_TINT_OVERLAY = 'umd-card-overlay-tint';
 
+// prettier-ignore
 const VariantLightThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
     background-color: ${colors.gray.darker};
@@ -30,8 +35,15 @@ const VariantLightThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg {
     fill: ${colors.gray.darker};
   }
+
+  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a {
+    ${ConvertJSSObjectToStyles({
+      styleObj: animatedLinks['.umd-slidein-underline-black'],
+    })}
+  }
 `;
 
+// prettier-ignore
 const VariantDarkThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[theme="dark"] {
     background-color: ${colors.gray.darker};
@@ -53,6 +65,7 @@ const VariantDarkThemeStyles = `
   }
 `;
 
+// prettier-ignore
 const VariantImageThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[data-image="true"] {
     padding-top: ${spacing['4xl']};
@@ -109,6 +122,12 @@ const VariantImageThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[data-image="true"]:hover .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img,
   .${CARD_OVERLAY_CONTAINER}[data-image="true"]:focus-within .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img {
     transform: scale(1.025);
+  }
+
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a {
+    ${ConvertJSSObjectToStyles({
+      styleObj: animatedLinks['.umd-slidein-underline-white'],
+    })}
   }
 `;
 

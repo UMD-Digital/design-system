@@ -61,6 +61,11 @@ export const IntroStyles = `
     ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-smaller'] })}
   }
 
+  .${CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} a:hover,
+  .${CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} a:focus {
+    text-decoration: underline;
+  }
+
   * + .${CARD_HEADLINE_WRAPPER} {
     margin-top: ${spacing.min}
   }

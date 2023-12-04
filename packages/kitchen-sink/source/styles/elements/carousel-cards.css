@@ -6,17 +6,6 @@ umd-element-carousel-cards:not(:defined) {
   margin-top: theme('spacing.2xl');
 }
 
-umd-element-carousel-cards {
-  & .umd-cta-secondary {
-    color: theme(colors.white);
-  }
-
-  & .umd-aligned-content > * {
-    text-wrap: pretty;
-    margin-top: theme(spacing.md);
-  }
-}
-
 umd-card {
   display: block;
   position: relative;

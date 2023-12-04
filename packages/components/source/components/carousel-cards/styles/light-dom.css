@@ -3,8 +3,7 @@ umd-element-carousel-cards {
     @apply umd-rich-text-dark;
   }
 
-  & .umd-rich-text a:hover,
-  & .umd-rich-text a:focus {
-    color: theme(colors.gold);
+  & .umd-cta-secondary {
+    color: theme(colors.white);
   }
 }

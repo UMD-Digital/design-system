@@ -38,7 +38,9 @@ export const SlotDefaultStyling = ({
   if (isStyled) {
     wrapper.appendChild(MakeSlot({ type: slotRef }));
   } else {
-    wrapper.innerHTML = elementRef.innerHTML;
+    const clonedElement = elementRef.cloneNode(true) as HTMLElement;
+    clonedElement.removeAttribute('slot');
+    wrapper.appendChild(clonedElement);
   }
 
   return wrapper;

@@ -110,7 +110,7 @@ export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
   });
 };
 
-export const CreateContent = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const intro = CreateIntroColumn({ element });

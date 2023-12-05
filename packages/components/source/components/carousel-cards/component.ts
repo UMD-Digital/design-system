@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MakeTemplate, SlotOberserver } from 'helpers/ui';
 import { Debounce } from 'helpers/performance';
 import {
   EventResizeButtonLogic,
@@ -13,7 +13,8 @@ import {
   EventScrollCarousel,
   EventSwipe,
 } from './services/events';
-import { CreateContent, OnLoadStyles, ComponentStyles } from './elements';
+import { CreateShadowDom, OnLoadStyles, ComponentStyles } from './elements';
+import { SLOTS } from './globals';
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
 export type ELEMENT_TYPE = UMDCarouselCardsElement;
@@ -32,7 +33,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    const content = CreateContent({ element });
+    const content = CreateShadowDom({ element });
     const resize = () => {
       EventResizeCarouselElementsWidth({ element });
       EventResizeSetHeight({ element });
@@ -45,6 +46,12 @@ export class UMDCarouselCardsElement extends HTMLElement {
     window.addEventListener('resize', Debounce(resize, 20));
     EventSwipe({ container: content, element });
     EventResizeButtonLogic({ element });
+    SlotOberserver({
+      element,
+      shadowDom: this._shadow,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 
   eventMoveForward() {

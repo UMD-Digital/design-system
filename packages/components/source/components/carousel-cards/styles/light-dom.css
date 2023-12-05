@@ -1,10 +1,1 @@
-umd-element-carousel-cards {
-  & .umd-rich-text {
-    @apply umd-rich-text-dark;
-  }
 
-  & .umd-rich-text a:hover,
-  & .umd-rich-text a:focus {
-    color: theme(colors.gold);
-  }
-}

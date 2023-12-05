@@ -1,4 +1,4 @@
-import postcss from 'postcss';
+import postcss, { Declaration, Postcss } from 'postcss';
 
 export const Reset = `
   :host * {
@@ -14,6 +14,16 @@ export const Reset = `
   :host a {
     text-decoration: inherit;
     color: inherit;
+  }
+
+  :host strong,
+  :host b {
+    font-weight: 900;
+  }
+
+  :host em, 
+  :host i {
+    font-style: italic;
   }
 
   :host h1,
@@ -44,10 +54,12 @@ export const Reset = `
 `;
 
 const postcssJs = require('postcss-js');
+const tailwindcssNesting = require('tailwindcss/nesting');
+
 export const ConvertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
-  postcss().process(styleObj, {
+  postcss(tailwindcssNesting).process(styleObj, {
     parser: postcssJs,
-  });
+  }).css;
 
 export const MakeDefaultStyleTag = ({
   styleString,

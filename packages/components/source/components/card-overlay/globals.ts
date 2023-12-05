@@ -5,6 +5,7 @@ export const ELEMENTS = {
   CARD_OVERLAY_CONTAINER_CTA: 'umd-card-overlay-container-cta',
   CARD_OVERLAY_CTA_ICON_CONTAINER: 'umd-card-overlay-cta-icon-container',
   CARD_OVERLAY_HEADLINE: 'umd-overlay-card-headline',
+  CARD_OVERLAY_TEXT: 'umd-overlay-card-text',
 };
 export const SLOTS = {
   IMAGE: 'image',

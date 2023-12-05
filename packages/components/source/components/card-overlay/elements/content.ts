@@ -11,7 +11,6 @@ import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';
 
 const CARD_OVERLAY_EYEBROW = 'umd-overlay-card-eyebrow';
-const CARD_OVERLAY_TEXT = 'umd-overlay-card-text';
 const CARD_OVERLAY_DATE = 'umd-overlay-card-date';
 
 export const ContentStyles = `
@@ -20,36 +19,48 @@ export const ContentStyles = `
     z-index: 9;
   }
 
-  .${CARD_OVERLAY_EYEBROW} * {
-    ${ConvertJSSObjectToStyles({
-      styleObj: typography['.umd-eyebrow'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_OVERLAY_EYEBROW} *`]: typography['.umd-eyebrow'],
+    },
+  })}
 
   * + .${ELEMENTS.CARD_OVERLAY_HEADLINE} {
     margin-top: ${spacing.min}
   }
 
-  .${ELEMENTS.CARD_OVERLAY_HEADLINE} * {
-    ${ConvertJSSObjectToStyles({
-      styleObj: typography['.umd-sans-larger'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} *`]: typography['.umd-sans-larger'],
+    },
+  })}
 
-  .${ELEMENTS.CARD_OVERLAY_HEADLINE} a {
-    ${ConvertJSSObjectToStyles({
-      styleObj: animatedLinks['.umd-slidein-underline-white'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
+        animatedLinks['.umd-slidein-underline-white'],
+    },
+  })}
 
-  * + .${CARD_OVERLAY_TEXT} {
+  * + .${ELEMENTS.CARD_OVERLAY_TEXT} {
     margin-top: ${spacing.sm}
   }
 
-  .${CARD_OVERLAY_TEXT} {
-    ${ConvertJSSObjectToStyles({
-      styleObj: richText['.umd-rich-text'],
-    })}
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS.CARD_OVERLAY_TEXT} *`]: typography['.umd-sans-small'],
+    },
+  })}
+
+  .${ELEMENTS.CARD_OVERLAY_TEXT} a {
+    text-decoration: underline;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .${ELEMENTS.CARD_OVERLAY_TEXT} a:hover, 
+  .${ELEMENTS.CARD_OVERLAY_TEXT} a:focus {
+    text-decoration: underline;
+    color: ${colors.red};
   }
 
   * + .${CARD_OVERLAY_DATE} {
@@ -58,10 +69,13 @@ export const ContentStyles = `
 
   .${CARD_OVERLAY_DATE} * {
     color: ${colors.gray.mediumAA};
-    ${ConvertJSSObjectToStyles({
-      styleObj: typography['.umd-sans-min'],
-    })}
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_OVERLAY_DATE} *`]: typography['.umd-sans-min'],
+    },
+  })}
 `;
 
 export const CreateContent = ({ element }: { element: CardType }) => {
@@ -85,10 +99,8 @@ export const CreateContent = ({ element }: { element: CardType }) => {
   }
 
   if (textSlot) {
-    const textWrapper = document.createElement('div');
-    textWrapper.appendChild(textSlot);
-    textWrapper.classList.add(CARD_OVERLAY_TEXT);
-    container.appendChild(textWrapper);
+    textSlot.classList.add(ELEMENTS.CARD_OVERLAY_TEXT);
+    container.appendChild(textSlot);
   }
 
   if (dateSlot) {

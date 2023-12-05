@@ -1,6 +1,7 @@
 import {
   animatedLinks,
   colors,
+  richText,
   spacing,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
@@ -36,11 +37,12 @@ const VariantLightThemeStyles = `
     fill: ${colors.gray.darker};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a {
-    ${ConvertJSSObjectToStyles({
-      styleObj: animatedLinks['.umd-slidein-underline-black'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_OVERLAY_CONTAINER}[theme="light"] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
+      animatedLinks['.umd-slidein-underline-black'],
+    },
+  })}
 `;
 
 // prettier-ignore
@@ -63,6 +65,13 @@ const VariantDarkThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg path {
     fill: ${colors.white};
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_OVERLAY_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
+        richText['.umd-rich-text-dark'],
+    },
+  })}
 `;
 
 // prettier-ignore
@@ -124,11 +133,19 @@ const VariantImageThemeStyles = `
     transform: scale(1.025);
   }
 
-  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a {
-    ${ConvertJSSObjectToStyles({
-      styleObj: animatedLinks['.umd-slidein-underline-white'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
+      animatedLinks['.umd-slidein-underline-white'],
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
+        richText['.umd-rich-text-dark'],
+    },
+  })}
 `;
 
 const VariantCTAIconStyles = `

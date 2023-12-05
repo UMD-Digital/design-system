@@ -8,7 +8,15 @@ export const ELEMENTS = {
   ELEMENT_WRAPPER: 'umd-footer-element-wrapper',
 };
 
-export const SLOTS = {};
+export const SLOTS = {
+  CONTACT: 'contact',
+  CTA: 'call-to-action',
+  SOCIAL: 'social-links',
+  UTILITY: 'utility-links',
+  LINK_COLUMN_ONE: 'link-column-one',
+  LINK_COLUMN_TWO: 'link-column-two',
+  LINK_COLUMN_THREE: 'link-column-three',
+};
 
 export const VARIABLES = {
   VERSION_TYPE_MEGA: 'mega',

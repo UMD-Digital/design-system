@@ -4,12 +4,11 @@ import {
   typography,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { MakeSlot, MakeSpan } from 'helpers/ui';
+import { MakeSpan, SlotDefaultStyling } from 'helpers/ui';
+import { ELEMENT_TYPE } from 'components/footer/component';
+import { BREAKPOINTS, SLOTS } from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
-import { ELEMENT_TYPE } from '../../../component';
-import { BREAKPOINTS } from '../../../globals';
 
-const SLOT_CONTACT_NAME = 'contact';
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_CONTAINER = 'umd-footer-contact-contact-list';
 const CONTACT_LIST_HEADLINE = 'umd-footer-contact-list-headline';
@@ -150,16 +149,17 @@ export const CreateContactContainer = ({
 }: {
   element: ELEMENT_TYPE;
 }) => {
-  const contactNode = element.querySelector(`[slot="${SLOT_CONTACT_NAME}"]`);
+  const contactSlot = element.querySelector(
+    `[slot="${SLOTS.CONTACT}"]`,
+  ) as HTMLSlotElement;
   const contactContainer = document.createElement('div');
   const socialContainer = CreateSocialCampaignColumns({ element });
-  const hasChildren = contactNode ? contactNode.children.length > 0 : false;
 
   contactContainer.classList.add(CONTACT_CONTAINER);
 
   const makeContactSlot = () => {
-    const contactSlot = MakeSlot({ type: SLOT_CONTACT_NAME });
-    contactContainer.appendChild(contactSlot);
+    const contactSlot = SlotDefaultStyling({ element, slotRef: SLOTS.CONTACT });
+    if (contactSlot) contactContainer.appendChild(contactSlot);
   };
 
   const makeDefaultSlot = () => {
@@ -190,7 +190,7 @@ export const CreateContactContainer = ({
     contactContainer.appendChild(defaultContactWrapper);
   };
 
-  hasChildren ? makeContactSlot() : makeDefaultSlot();
+  contactSlot ? makeContactSlot() : makeDefaultSlot();
 
   contactContainer.appendChild(socialContainer);
 

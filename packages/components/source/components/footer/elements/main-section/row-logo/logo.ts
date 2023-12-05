@@ -1,7 +1,7 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration';
 import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
-import { ELEMENT_TYPE } from '../../../component';
-import { VARIABLES, ELEMENTS, BREAKPOINTS } from '../../../globals';
+import { ELEMENT_TYPE } from 'components/footer/component';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
   CreateCallToActionContainer,

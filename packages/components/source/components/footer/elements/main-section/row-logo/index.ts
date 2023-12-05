@@ -4,6 +4,8 @@ import {
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { ELEMENT_TYPE } from 'components/footer/component';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import {
   SocialContainerStyles,
   CreateSocialCampaignColumns,
@@ -16,8 +18,6 @@ import {
 } from '../call-to-action';
 import { ContactContainerStyles, CreateContactContainer } from './contact';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
-import { ELEMENT_TYPE } from '../../../component';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
 const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';

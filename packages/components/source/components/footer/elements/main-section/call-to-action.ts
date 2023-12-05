@@ -1,6 +1,7 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { SLOTS } from 'components/footer/globals';
+import { SlotDefaultStyling } from 'helpers/ui';
 
-const SLOT_CTA_NAME = 'call-to-action';
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 
 export const CallToActionStyles = `
@@ -39,13 +40,14 @@ export const CreateCallToActionContainer = ({
 }) => {
   const container = document.createElement('div');
   const ctaSlot = element.querySelector(
-    `[slot="${SLOT_CTA_NAME}"]`,
+    `[slot="${SLOTS.CTA}"]`,
   ) as HTMLAnchorElement;
 
   container.classList.add(CALL_TO_ACTION_CONTAINER);
 
   if (ctaSlot) {
-    container.appendChild(ctaSlot);
+    const slot = SlotDefaultStyling({ element, slotRef: SLOTS.CTA });
+    if (slot) container.appendChild(slot);
   } else {
     container.appendChild(makeGivingLink());
   }

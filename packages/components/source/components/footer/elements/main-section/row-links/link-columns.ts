@@ -5,8 +5,8 @@ import {
 } from '@universityofmaryland/umd-web-configuration';
 import { fontWeight } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { MakeSlot } from 'helpers/ui';
-import { BREAKPOINTS } from '../../../globals';
+import { BREAKPOINTS, SLOTS } from 'components/footer/globals';
+import { SlotDefaultStyling } from 'helpers/ui';
 
 const LINK_TYPE = 'link';
 const HEADLINE_TYPE = 'headline';
@@ -19,11 +19,8 @@ type ColumnRow = {
 
 const ROW_LINKS_COLUMNS_CONTAINER = 'umd-footer-row-links-columns';
 const ROW_LINKS_COLUMN_WRAPPER = 'umd-footer-row-links-column-wrapper';
-const SLOT_COLUMN_ONE_NAME = 'link-column-one';
-const SLOT_COLUMN_TWO_NAME = 'link-column-two';
-const SLOT_COLUMN_THREE_NAME = 'link-column-three';
-const SLOT_COLUMN_HEADLINE = `link-column-headline`;
-const SLOT_COLUMN_FONTS = `link-column-fonts`;
+const ROW_LINKS_COLUMN_HEADLINE = `link-column-headline`;
+const ROW_LINKS_COLUMN_LINKS = `link-column-fonts`;
 
 const COLUMN_ONE_DEFAULT_LINKS = [
   {
@@ -134,17 +131,17 @@ export const LinkColumnStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SLOT_COLUMN_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
+      [`.${ROW_LINKS_COLUMN_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
     },
   })}
 
-  .${SLOT_COLUMN_HEADLINE} {
+  .${ROW_LINKS_COLUMN_HEADLINE} {
     font-weight: ${fontWeight.extraBold};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SLOT_COLUMN_FONTS}`]: typography['.umd-sans-smaller']
+      [`.${ROW_LINKS_COLUMN_LINKS}`]: typography['.umd-sans-smaller']
     },
   })}
 
@@ -191,43 +188,29 @@ export const LinkColumnStyles = `
   }
 `;
 
-const CreateColumn = ({
-  slotElement,
-  defaultContent,
-}: {
-  slotElement?: HTMLSlotElement;
-  defaultContent?: ColumnRow[];
-}) => {
+const CreateColumn = ({ defaultContent }: { defaultContent: ColumnRow[] }) => {
   const container = document.createElement('div');
 
-  container.classList.add(ROW_LINKS_COLUMN_WRAPPER);
-
-  if (slotElement) {
-    container.appendChild(slotElement);
-  } else {
-    if (defaultContent) {
-      defaultContent.forEach((row) => {
-        if (row.elmentType === LINK_TYPE) {
-          if (row.url) {
-            const wrapper = document.createElement('div');
-            const link = document.createElement('a');
-            link.textContent = row.title;
-            link.href = row.url;
-            link.classList.add(SLOT_COLUMN_FONTS);
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-            wrapper.appendChild(link);
-            container.appendChild(wrapper);
-          }
-        } else if (row.elmentType === HEADLINE_TYPE) {
-          const headline = document.createElement('p');
-          headline.textContent = row.title;
-          headline.classList.add(SLOT_COLUMN_HEADLINE);
-          container.appendChild(headline);
-        }
-      });
+  defaultContent.forEach((row) => {
+    if (row.elmentType === LINK_TYPE) {
+      if (row.url) {
+        const wrapper = document.createElement('div');
+        const link = document.createElement('a');
+        link.textContent = row.title;
+        link.href = row.url;
+        link.classList.add(ROW_LINKS_COLUMN_LINKS);
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        wrapper.appendChild(link);
+        container.appendChild(wrapper);
+      }
+    } else if (row.elmentType === HEADLINE_TYPE) {
+      const headline = document.createElement('p');
+      headline.textContent = row.title;
+      headline.classList.add(ROW_LINKS_COLUMN_HEADLINE);
+      container.appendChild(headline);
     }
-  }
+  });
 
   return container;
 };
@@ -235,29 +218,35 @@ const CreateColumn = ({
 export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
   const container = document.createElement('div');
   const slotOne = element.querySelector(
-    `[slot="${SLOT_COLUMN_ONE_NAME}"]`,
+    `[slot="${SLOTS.LINK_COLUMN_ONE}"]`,
   ) as HTMLSlotElement;
   const slotTwo = element.querySelector(
-    `[slot="${SLOT_COLUMN_TWO_NAME}"]`,
+    `[slot="${SLOTS.LINK_COLUMN_TWO}"]`,
   ) as HTMLSlotElement;
   const slotThree = element.querySelector(
-    `[slot="${SLOT_COLUMN_THREE_NAME}"]`,
+    `[slot="${SLOTS.LINK_COLUMN_THREE}"]`,
   ) as HTMLSlotElement;
+  const slots = [
+    { slotElement: slotOne, ref: SLOTS.LINK_COLUMN_ONE },
+    { slotElement: slotTwo, ref: SLOTS.LINK_COLUMN_TWO },
+    { slotElement: slotThree, ref: SLOTS.LINK_COLUMN_THREE },
+  ];
   const hasSlot = slotOne || slotTwo || slotThree;
 
   if (hasSlot) {
-    if (slotOne) {
-      const slotElement = MakeSlot({ type: SLOT_COLUMN_ONE_NAME });
-      container.appendChild(CreateColumn({ slotElement }));
-    }
-    if (slotTwo) {
-      const slotElement = MakeSlot({ type: SLOT_COLUMN_TWO_NAME });
-      container.appendChild(CreateColumn({ slotElement }));
-    }
-    if (slotThree) {
-      const slotElement = MakeSlot({ type: SLOT_COLUMN_THREE_NAME });
-      container.appendChild(CreateColumn({ slotElement }));
-    }
+    slots.forEach(({ slotElement, ref }) => {
+      if (slotElement) {
+        const slot = SlotDefaultStyling({
+          element,
+          slotRef: ref,
+        });
+
+        if (slot) {
+          slot.classList.add(ROW_LINKS_COLUMN_WRAPPER);
+          container.appendChild(slot);
+        }
+      }
+    });
   } else {
     container.appendChild(
       CreateColumn({ defaultContent: COLUMN_ONE_DEFAULT_LINKS }),

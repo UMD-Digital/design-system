@@ -1,0 +1,143 @@
+{% macro ColumnLinkOverwrite(params) %}
+  <ul slot="link-column-one" data-headline="Important Links">
+    <li class="umd-sans-smaller">
+      <a href="https://provost.umd-staging.com/calendar">
+        <span>Academic Calendars</span>
+      </a>
+    </li>
+    <li class="umd-sans-smaller">
+      <a href="https://strategicplan.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Strategic Plan</span>
+      </a>
+    </li>
+    <li class="umd-sans-smaller">
+      <a href="#" rel="noopener noreferrer">
+        <span>Request an Appearance</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul slot="link-column-two">
+    <li class="umd-sans-smaller">
+      <a href="https://admissions.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Undergraduate Admissions</span>
+      </a>
+    </li>
+    <li class="umd-sans-smaller">
+      <a href="https://financialaid.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Student Financial Aid</span>
+      </a>
+    </li>
+    <li class="umd-sans-smaller">
+      <a href="https://faculty.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Faculty Affairs</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul slot="link-column-three">
+    <li class="umd-sans-smaller">
+      <a href="https://registrar.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Office of the Registrar</span>
+      </a>
+    </li>
+    <li class="umd-sans-smaller">
+      <a href="https://billpay.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Student Financial Services and Cashiering</span>
+      </a>
+    </li>
+    <li class="umd-sans-smaller">
+      <a href="https://policies.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>University Policies</span>
+      </a>
+    </li>
+  </ul>
+{% endmacro %}
+
+{% macro ContactOverwrite() %}
+  <div slot="contact">
+    <address>
+      <p class="umd-interactive-sans-medium">
+        Office of the Senior Vice President &amp; Provost
+      </p>
+      <p class="mail-address">
+        <span>Suite 1132, Main Administration Building</span>
+        <span>7901 Regents Drive College Park, MD 20742</span>
+      </p>
+      <p class="contact-list">
+        <a href="mailto:provost@umd.edu">
+          <span aria-hidden="true">provost@umd.edu</span>
+          <span class="sr-only">
+            Email: Office of the Provost provost@umd.edu
+          </span>
+        </a>
+        <a href="tel:3014055252">
+          <span aria-hidden="true">301.405.5252</span>
+          <span class="sr-only">Call: 301-405-5252</span>
+        </a>
+      </p>
+    </address>
+  </div>
+{% endmacro %}
+
+{% macro SocialOverwrite() %}
+  <div slot="social-links">
+    <a href="https://www.youtube.com/user/UMD2101"
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Link to the youtube channel for the University of Maryland">
+
+    </a>
+    <a href="https://www.facebook.com/UnivofMaryland"
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Link to the facebook page for the University of Maryland">
+
+    </a>
+    <a href="https://x.com/UofMaryland"
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Link to the twitter page for the University of Maryland">
+
+    </a>
+    <a href="https://www.instagram.com/univofmaryland/"
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Link to the instagram page for the University of Maryland">
+
+    </a>
+  </div>
+{% endmacro %}
+
+{% macro UtilityOverwrite() %}
+  <div slot="utility-links">
+    <a href="http://calendar.umd.edu/"
+      target="_blank"
+      rel="noopener noreferrer">
+      UMD Calendar
+    </a>
+  </div>
+{% endmacro %}
+
+{% macro CtaOverwrite() %}
+  <a slot="call-to-action"
+    href="https://giving.umd.edu"
+    target="_blank"
+    rel="noopener noreferrer">
+    Support Example
+  </a>
+{% endmacro %}

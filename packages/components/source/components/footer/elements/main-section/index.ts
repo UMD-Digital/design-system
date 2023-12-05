@@ -1,6 +1,6 @@
 import { colors } from '@universityofmaryland/umd-web-configuration';
-import { ELEMENT_TYPE } from '../../component';
-import { VARIABLES, ELEMENTS } from '../../globals';
+import { ELEMENT_TYPE } from 'components/footer/component';
+import { VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';

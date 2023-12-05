@@ -4,10 +4,10 @@ import {
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { ELEMENT_TYPE } from 'components/footer/component';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
-import { ELEMENT_TYPE } from '../../../component';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
 export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';

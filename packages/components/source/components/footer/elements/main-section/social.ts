@@ -3,10 +3,6 @@ import {
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
-import { ELEMENT_TYPE } from '../../component';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../globals';
 import {
   FACEBOOK_ICON,
   X_ICON,
@@ -14,8 +10,16 @@ import {
   YOUTUBE_ICON,
   TWITTER_ICON,
 } from 'assets/social';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { ELEMENT_TYPE } from 'components/footer/component';
+import {
+  BREAKPOINTS,
+  VARIABLES,
+  ELEMENTS,
+  SLOTS,
+} from 'components/footer/globals';
+import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 
-const SLOT_SOCIAL_NAME = 'social-links';
 export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
 const SOCIAL_CONTAINER_WRAPPER = 'umd-footer-social-container_wrapper';
@@ -170,7 +174,7 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
 
 const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
   const socialLinksSlot = element.querySelector(
-    `[slot="${SLOT_SOCIAL_NAME}"]`,
+    `[slot="${SLOTS.SOCIAL}"]`,
   ) as HTMLSlotElement;
   const container = document.createElement('div');
   const linksWrapper = document.createElement('div');

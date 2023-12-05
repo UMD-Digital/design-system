@@ -1,7 +1,7 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration';
 import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
-import { ELEMENT_TYPE } from '../../component';
-import { VARIABLES } from '../../globals';
+import { ELEMENT_TYPE } from 'components/footer/component';
+import { VARIABLES } from 'components/footer/globals';
 
 export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
 

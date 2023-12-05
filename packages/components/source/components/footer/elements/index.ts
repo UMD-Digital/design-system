@@ -1,5 +1,6 @@
-import { ELEMENT_TYPE } from '../component';
-import { ELEMENTS } from '../globals';
+import { Reset } from 'helpers/styles';
+import { ELEMENT_TYPE } from 'components/footer/component';
+import { ELEMENTS } from 'components/footer/globals';
 import { CreateMain, MainContainerStyles } from './main-section';
 import { CreateUtility, UtilityContainerStyles } from './utility-section';
 
@@ -10,14 +11,7 @@ export const ComponentStyles = `
     container: umd-footer / inline-size;
   }
 
-  :host * {
-    box-sizing: border-box;
-    text-wrap: pretty;
-  }
-
-  :host a {
-    text-decoration: none;
-  }
+  ${Reset}
 
   ${MainContainerStyles}
   ${UtilityContainerStyles}

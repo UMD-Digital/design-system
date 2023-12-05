@@ -5,9 +5,13 @@ import {
   typography,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../../globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  VARIABLES,
+  SLOTS,
+} from 'components/footer/globals';
 
-const SLOT_UTILITY_LINKS_NAME = 'utility-links';
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
 const UTILITY_CONTAINER_LOCK = 'umd-footer-utility-container-lock';
 const UTILITY_CONTAINER_LINK = 'umd-footer-utility-container-link';
@@ -100,7 +104,7 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
 };
 
 export const CreateUtility = ({ element }: { element: HTMLElement }) => {
-  const slot = element.querySelector(`[slot="${SLOT_UTILITY_LINKS_NAME}"]`);
+  const slot = element.querySelector(`[slot="${SLOTS.UTILITY}"]`);
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const copyRight = document.createElement('p');

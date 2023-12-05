@@ -132,16 +132,21 @@ export const LinkColumnStyles = `
     color: ${colors.white};
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${SLOT_COLUMN_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
+    },
+  })}
+
   .${SLOT_COLUMN_HEADLINE} {
-    ${ConvertJSSObjectToStyles({
-      styleObj: typography['.umd-interactive-sans-medium'],
-    })}
     font-weight: ${fontWeight.extraBold};
   }
 
-  .${SLOT_COLUMN_FONTS} {
-    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-smaller'] })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${SLOT_COLUMN_FONTS}`]: typography['.umd-sans-smaller']
+    },
+  })}
 
   @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {

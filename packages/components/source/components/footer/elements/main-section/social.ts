@@ -129,11 +129,11 @@ export const SocialContainerStyles = `
     fill: ${colors.gray.dark} !important;
   }
 
-  .${SOCIAL_CONTAINER_HEADLINE} {
-    ${ConvertJSSObjectToStyles({
-      styleObj: typography['.umd-interactive-sans-medium'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${SOCIAL_CONTAINER_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
+    },
+  })}
 
   ${campaignOverwriteStyles}
   ${themeOverwriteStyles}

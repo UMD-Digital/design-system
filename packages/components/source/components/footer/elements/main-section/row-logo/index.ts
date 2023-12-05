@@ -77,9 +77,11 @@ export const RowLogoStyles = `
     }
   }
 
-  .${ROW_LOGO_CONTAINER_LOCK} {
-    ${ConvertJSSObjectToStyles({ styleObj: umdLock['.umd-lock'] })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ROW_LOGO_CONTAINER_LOCK}`]: umdLock['.umd-lock'] 
+    },
+  })}
 
   ${LogoContainerStyles}
   ${ContactContainerStyles}

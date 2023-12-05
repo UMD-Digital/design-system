@@ -116,11 +116,11 @@ export const ContactContainerStyles = `
     left: 0;
   }
 
-  .${CONTACT_LIST_HEADLINE} {
-    ${ConvertJSSObjectToStyles({
-      styleObj: typography['.umd-interactive-sans-medium'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CONTACT_LIST_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
+    },
+  })}
 
   ${socialOverwriteStyles}
 `;

@@ -55,9 +55,11 @@ export const RowLinkStyles = `
     }
   }
 
-  .${ROW_LINKS_CONTAINER_LOCK} {
-    ${ConvertJSSObjectToStyles({ styleObj: umdLock['.umd-lock'] })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ROW_LINKS_CONTAINER_LOCK}`]: umdLock['.umd-lock']
+    },
+  })}
 
   ${LinkColumnStyles}
   ${socialOverwriteStyles}

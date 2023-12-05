@@ -19,9 +19,11 @@ export const UtilityContainerStyles = `
     background-color: ${colors.gray.darker};
   }
 
-  .${UTILITY_CONTAINER_LOCK} {
-    ${ConvertJSSObjectToStyles({ styleObj: umdLock['.umd-lock'] })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${UTILITY_CONTAINER_LOCK}`]: umdLock['.umd-lock']
+    },
+  })}
   
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${UTILITY_CONTAINER_LOCK} {
@@ -57,9 +59,11 @@ export const UtilityContainerStyles = `
     align-items: center;
   }
 
-  .${UTILITY_CONTAINER_LINK} {
-    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-min'] })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${UTILITY_CONTAINER_LINK}`]: typography['.umd-sans-min']
+    },
+  })}
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {
     background-color: ${colors.gray.light};

@@ -4,8 +4,8 @@ const lockBase = {
   display: 'block',
   marginLeft: 'auto',
   marginRight: 'auto',
-  paddingLeft: spacing['sm'],
-  paddingRight: spacing['sm'],
+  paddingLeft: spacing['md'],
+  paddingRight: spacing['md'],
   maxWidth: '1536px',
 
   [`@media (${queries.tablet.min})`]: {

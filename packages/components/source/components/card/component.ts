@@ -4,8 +4,9 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MakeTemplate, SlotOberserver } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
+import { SLOTS } from './globals';
 
 export const ELEMENT_NAME = 'umd-element-card';
 export type CardType = UMDCardElement;
@@ -29,8 +30,6 @@ export class UMDCardElement extends HTMLElement {
     return ['theme', 'aligned', 'border'];
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
-
   connectedCallback() {
     const element = this;
     element._theme = element.getAttribute('theme') || element._theme;
@@ -38,8 +37,14 @@ export class UMDCardElement extends HTMLElement {
     element._border = element.getAttribute('border') || element._border;
 
     const container = CreateShadowDom({ element });
-
     this._shadow.appendChild(container);
+
+    SlotOberserver({
+      element,
+      shadowDom: this._shadow,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 }
 

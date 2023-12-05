@@ -28,8 +28,6 @@ export class UMDCardOverlayElement extends HTMLElement {
     return ['theme'];
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
-
   connectedCallback() {
     const element = this;
     element._theme = element.getAttribute('theme') || element._theme;

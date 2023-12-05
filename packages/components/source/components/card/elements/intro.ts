@@ -58,8 +58,14 @@ export const IntroStyles = `
 
   .${CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} * {
     color: ${colors.black};
-    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-smaller'] })}
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} *`]:
+        typography['.umd-sans-smaller'],
+    },
+  })}
 
   .${CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} a:hover,
   .${CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} a:focus {
@@ -72,14 +78,21 @@ export const IntroStyles = `
 
   .${CARD_INTRO_CONTAINER} .${CARD_HEADLINE_WRAPPER} * {
     color: ${colors.black};
-    ${ConvertJSSObjectToStyles({ styleObj: typography['.umd-sans-large'] })}
   }
 
-  .${CARD_HEADLINE_WRAPPER} a {
-    ${ConvertJSSObjectToStyles({
-      styleObj: animatedLinks['.umd-slidein-underline-black'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_INTRO_CONTAINER} .${CARD_HEADLINE_WRAPPER} *`]:
+        typography['.umd-sans-large'],
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_HEADLINE_WRAPPER} a `]:
+        animatedLinks['.umd-slidein-underline-black'],
+    },
+  })}
 `;
 
 export const CreateIntro = ({ element }: { element: CardType }) => {

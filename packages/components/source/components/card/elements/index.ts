@@ -1,9 +1,14 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
-import { Reset } from 'helpers/styles';
+import {
+  colors,
+  richText,
+  spacing,
+} from '@universityofmaryland/umd-web-configuration';
+import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateImage, ImageStyles } from './image';
 import { CreateIntro, IntroStyles } from './intro';
 import { CreateBody, BodyStyles } from './body';
 import { CardType } from '../component';
+import { ELEMENTS } from '../globals';
 
 const CARD_CONTAINER = 'umd-card-container';
 const CARD_TEXT_CONTAINER = 'umd-card-text-container';
@@ -22,6 +27,13 @@ const VariantThemeStyles = `
   .${CARD_CONTAINER}[theme="dark"] .${CARD_TEXT_CONTAINER} {
     padding: ${spacing.md};
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_CONTAINER}[theme="dark"] .${ELEMENTS.CARD_BODY_TEXT_WRAPPER}`]:
+        richText['.umd-rich-text-dark'],
+    },
+  })}
 `;
 
 const VariantAlignedStyles = `

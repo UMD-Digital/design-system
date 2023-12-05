@@ -153,12 +153,6 @@ const sans = {
     fontSize: fontSize['sm'],
     fontWeight: fontWeight['medium'],
     lineHeight: `${18 / parseInt(fontSize['sm'])}em`,
-
-    [`@media (${queries.medium.max})`]: {
-      // umd-sans-min
-      fontSize: fontSize['min'],
-      lineHeight: `${16 / parseInt(fontSize['min'])}em`,
-    },
   },
 
   '.umd-sans-min': {

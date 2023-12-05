@@ -1,7 +1,9 @@
 import {
   colors,
+  richText,
   spacing,
   typography,
+  umdCta,
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
 import { MakeSlot, SlotDefaultStyling } from 'helpers/ui';
@@ -29,11 +31,11 @@ export const IntroContainerStyles = `
     }
   }
 
-  .${INTRO_CONTAINER_LOCK} {
-    ${ConvertJSSObjectToStyles({
-      styleObj: umdLock['.umd-lock'],
-    })}
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_LOCK}`]: umdLock['.umd-lock'],
+    },
+  })}
 
   @media (min-width: ${BREAKPOINTS.large}px) {
     .${INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
@@ -43,18 +45,43 @@ export const IntroContainerStyles = `
   }
 
   .${INTRO_CONTAINER_HEADLINE} * {
-    ${ConvertJSSObjectToStyles({
-      styleObj: typography['.umd-sans-largest'],
-    })}
     color: ${colors.white};
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_HEADLINE} *`]: typography['.umd-sans-largest'],
+    },
+  })}
 
   * + .${INTRO_CONTAINER_TEXT} {
     margin-top: ${spacing.md};
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [` .${INTRO_CONTAINER_TEXT} *`]: richText['.umd-rich-text-dark'],
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_TEXT}`]: typography['.umd-sans-medium'],
+    },
+  })}
+
   * + .${INTRO_CONTAINER_CTA} {
     margin-top: ${spacing.md};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_CTA} a`]: umdCta['.umd-cta-secondary'],
+    },
+  })}
+
+  .${INTRO_CONTAINER_CTA} a {
+    color: ${colors.white};
   }
 `;
 
@@ -62,30 +89,24 @@ export const CreateIntroColumn = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
-  const textSlot = MakeSlot({ type: SLOTS.TEXT });
-  const ctaSlot = MakeSlot({ type: SLOTS.CTA });
+  const textSlot = SlotDefaultStyling({ element, slotRef: SLOTS.TEXT });
+  const ctaSlot = SlotDefaultStyling({ element, slotRef: SLOTS.CTA });
 
   wrapper.classList.add(INTRO_CONTAINER_LOCK);
 
   if (headlineSlot) {
-    const headlineWrapper = document.createElement('div');
-    headlineWrapper.appendChild(headlineSlot);
-    headlineWrapper.classList.add(INTRO_CONTAINER_HEADLINE);
-    wrapper.appendChild(headlineWrapper);
+    headlineSlot.classList.add(INTRO_CONTAINER_HEADLINE);
+    wrapper.appendChild(headlineSlot);
   }
 
   if (textSlot) {
-    const textWrapper = document.createElement('div');
-    textWrapper.appendChild(textSlot);
-    textWrapper.classList.add(INTRO_CONTAINER_TEXT);
-    wrapper.appendChild(textWrapper);
+    textSlot.classList.add(INTRO_CONTAINER_TEXT);
+    wrapper.appendChild(textSlot);
   }
 
   if (ctaSlot) {
-    const ctaWrapper = document.createElement('div');
-    ctaWrapper.appendChild(ctaSlot);
-    ctaWrapper.classList.add(INTRO_CONTAINER_CTA);
-    wrapper.appendChild(ctaWrapper);
+    ctaSlot.classList.add(INTRO_CONTAINER_CTA);
+    wrapper.appendChild(ctaSlot);
   }
 
   container.classList.add(INTRO_CONTAINER);

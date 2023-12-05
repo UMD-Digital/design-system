@@ -4,8 +4,9 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MakeTemplate, SlotOberserver } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
+import { ELEMENTS, SLOTS } from './globals';
 
 export const ELEMENT_NAME = 'umd-element-card-overlay';
 export type CardType = UMDCardOverlayElement;
@@ -34,8 +35,14 @@ export class UMDCardOverlayElement extends HTMLElement {
     element._theme = element.getAttribute('theme') || element._theme;
 
     const container = CreateShadowDom({ element });
-
     this._shadow.appendChild(container);
+
+    SlotOberserver({
+      element,
+      shadowDom: this._shadow,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 }
 

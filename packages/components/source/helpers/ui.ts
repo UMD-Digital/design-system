@@ -46,6 +46,43 @@ export const SlotDefaultStyling = ({
   return wrapper;
 };
 
+export const SlotOberserver = ({
+  element,
+  shadowDom,
+  slots,
+  CreateShadowDom,
+}: {
+  element: HTMLElement;
+  shadowDom: ShadowRoot;
+  slots: { [key: string]: string };
+  CreateShadowDom: ({ element }: { element: any }) => HTMLElement;
+}) => {
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.type === 'attributes') {
+        if (mutation.attributeName === 'styled') {
+          const firstChild = shadowDom.querySelector('div');
+
+          if (firstChild) {
+            firstChild.remove();
+            shadowDom.appendChild(CreateShadowDom({ element }));
+          }
+        }
+      }
+    });
+  });
+
+  Object.values(slots).forEach((slotName) => {
+    const slot = element.querySelector(
+      `[slot="${slotName}"]`,
+    ) as HTMLSlotElement;
+
+    if (slot) {
+      observer.observe(slot, { attributes: true });
+    }
+  });
+};
+
 export const CheckForAnimationLinkSpan = ({
   element,
 }: {

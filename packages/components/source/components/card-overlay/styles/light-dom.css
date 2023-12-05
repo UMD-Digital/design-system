@@ -1,12 +1,1 @@
-umd-element-card-overlay[data-image='true'],
-umd-element-card-overlay[theme='dark'] {
-  background-color: theme(colors.black);
 
-  & * {
-    color: theme(colors.white);
-  }
-
-  & .umd-rich-text {
-    @apply umd-rich-text-dark;
-  }
-}

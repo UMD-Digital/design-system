@@ -38,6 +38,7 @@ export const Reset = `
 
   :host img {
     max-width: 100%;
+    display: block;
   }
 
   :host .sr-only {

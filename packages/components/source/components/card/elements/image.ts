@@ -1,3 +1,4 @@
+import { spacing } from '@universityofmaryland/umd-web-configuration';
 import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { CardType } from '../component';
@@ -5,6 +6,10 @@ import { CardType } from '../component';
 const IMAGE_CONTAINER = 'umd-card-image-container';
 
 export const ImageStyles = `
+  .${IMAGE_CONTAINER} {
+    margin-bottom: ${spacing.md};
+  }
+
   @media (max-width: 767px) {
     .${IMAGE_CONTAINER} {
       display: none;

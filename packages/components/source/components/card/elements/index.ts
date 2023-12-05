@@ -26,6 +26,7 @@ const VariantThemeStyles = `
 
   .${CARD_CONTAINER}[theme="dark"] .${CARD_TEXT_CONTAINER} {
     padding: ${spacing.md};
+    padding-top: 0;
   }
 
   ${ConvertJSSObjectToStyles({
@@ -52,6 +53,7 @@ const VariantBorderStyles = `
 
   .${CARD_CONTAINER}[border="true"] .${CARD_TEXT_CONTAINER} {
     padding: ${spacing.md};
+    padding-top: 0;
   }
 `;
 
@@ -84,10 +86,6 @@ export const ComponentStyles = `
 
   .${CARD_CONTAINER} {
     max-width: 680px;
-  }
-
-  .${CARD_TEXT_CONTAINER} {
-    padding-top: ${spacing.md};
   }
 
   ${ImageStyles}

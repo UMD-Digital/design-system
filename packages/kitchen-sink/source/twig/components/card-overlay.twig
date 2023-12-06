@@ -276,4 +276,40 @@
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-largest" id="alignment-example">
+        Alignment Example
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-large">
+        Layout Three Column. with CTA aligned to the bottom
+      </p>
+
+      <div class="umd-grid-three my-md">
+        {{
+          CardOverlay.FullCardBodyNoTextSlot({
+            image: random(WeirdImageOptions)
+          })
+        }}
+
+        {{
+          CardOverlay.FullCardBody({
+            ctaOption: 'download'
+          })
+        }}
+
+        {{
+          CardOverlay.FullCardBodyNoTextSlot({
+            theme: 'dark'
+          })
+        }}
+      </div>
+    </div>
+  </section>
 {% endblock %}

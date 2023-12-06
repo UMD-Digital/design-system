@@ -133,6 +133,10 @@ const VariantImageThemeStyles = `
     transform: scale(1.025);
   }
 
+  .${CARD_OVERLAY_CONTAINER}[data-image="true"] .${CARD_OVERLAY_TEXT_CONTAINER} {
+    justify-content: flex-end;
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[data-image="true"] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
@@ -177,6 +181,13 @@ export const ComponentStyles = `
     padding: ${spacing.md};
     padding-top: ${spacing['4xl']};
     padding-bottom: ${spacing.lg};
+  }
+
+  .${CARD_OVERLAY_TEXT_CONTAINER} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
   }
 
   ${ImageStyles}

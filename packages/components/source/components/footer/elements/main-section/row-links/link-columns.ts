@@ -141,9 +141,13 @@ export const LinkColumnStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_COLUMN_LINKS}`]: typography['.umd-sans-smaller']
+      [`.${ROW_LINKS_COLUMN_LINKS} a`]: typography['.umd-sans-smaller']
     },
   })}
+
+  .${ROW_LINKS_COLUMN_LINKS} > * {
+    margin-bottom: ${spacing.sm};
+  }
 
   @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
@@ -188,19 +192,27 @@ export const LinkColumnStyles = `
   }
 `;
 
-const CreateColumn = ({ defaultContent }: { defaultContent: ColumnRow[] }) => {
+const CreateDefaultColumn = ({
+  defaultContent,
+}: {
+  defaultContent: ColumnRow[];
+}) => {
   const container = document.createElement('div');
+
+  container.classList.add(ROW_LINKS_COLUMN_WRAPPER);
 
   defaultContent.forEach((row) => {
     if (row.elmentType === LINK_TYPE) {
       if (row.url) {
         const wrapper = document.createElement('div');
         const link = document.createElement('a');
+
         link.textContent = row.title;
         link.href = row.url;
-        link.classList.add(ROW_LINKS_COLUMN_LINKS);
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
+
+        wrapper.classList.add(ROW_LINKS_COLUMN_LINKS);
         wrapper.appendChild(link);
         container.appendChild(wrapper);
       }
@@ -213,6 +225,46 @@ const CreateColumn = ({ defaultContent }: { defaultContent: ColumnRow[] }) => {
   });
 
   return container;
+};
+
+const CreateSlotColumn = ({
+  element,
+  ref,
+}: {
+  element: HTMLElement;
+  ref: string;
+}) => {
+  const slot = SlotDefaultStyling({
+    element,
+    slotRef: ref,
+  });
+
+  if (slot) {
+    const isElementSlot = slot?.hasAttribute('slot');
+    let elementToAppend = slot;
+
+    if (!isElementSlot) {
+      const wrapper = document.createElement('div');
+      const links = Array.from(elementToAppend.querySelectorAll('a')).map(
+        (link) => {
+          const linkWrapper = document.createElement('div');
+          linkWrapper.classList.add(ROW_LINKS_COLUMN_LINKS);
+          linkWrapper.appendChild(link);
+          return linkWrapper;
+        },
+      );
+
+      links.forEach((link) => {
+        wrapper.appendChild(link);
+      });
+
+      elementToAppend = wrapper;
+    }
+
+    elementToAppend.classList.add(ROW_LINKS_COLUMN_WRAPPER);
+
+    return elementToAppend;
+  }
 };
 
 export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
@@ -236,26 +288,19 @@ export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
   if (hasSlot) {
     slots.forEach(({ slotElement, ref }) => {
       if (slotElement) {
-        const slot = SlotDefaultStyling({
-          element,
-          slotRef: ref,
-        });
-
-        if (slot) {
-          slot.classList.add(ROW_LINKS_COLUMN_WRAPPER);
-          container.appendChild(slot);
-        }
+        const slotToAppend = CreateSlotColumn({ element, ref });
+        if (slotToAppend) container.appendChild(slotToAppend);
       }
     });
   } else {
     container.appendChild(
-      CreateColumn({ defaultContent: COLUMN_ONE_DEFAULT_LINKS }),
+      CreateDefaultColumn({ defaultContent: COLUMN_ONE_DEFAULT_LINKS }),
     );
     container.appendChild(
-      CreateColumn({ defaultContent: COLUMN_TWO_DEFAULT_LINKS }),
+      CreateDefaultColumn({ defaultContent: COLUMN_TWO_DEFAULT_LINKS }),
     );
     container.appendChild(
-      CreateColumn({ defaultContent: COLUMN_THREE_DEFAULT_LINKS }),
+      CreateDefaultColumn({ defaultContent: COLUMN_THREE_DEFAULT_LINKS }),
     );
   }
 

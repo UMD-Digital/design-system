@@ -33,17 +33,14 @@ export const SlotDefaultStyling = ({
 
   if (!elementRef) return null;
   const isStyled = elementRef.hasAttribute('styled');
-  const wrapper = document.createElement('div');
 
   if (isStyled) {
-    wrapper.appendChild(MakeSlot({ type: slotRef }));
-  } else {
-    const clonedElement = elementRef.cloneNode(true) as HTMLElement;
-    clonedElement.removeAttribute('slot');
-    wrapper.appendChild(clonedElement);
+    return MakeSlot({ type: slotRef });
   }
 
-  return wrapper;
+  const clonedElement = elementRef.cloneNode(true) as HTMLElement;
+  clonedElement.removeAttribute('slot');
+  return clonedElement;
 };
 
 export const SlotOberserver = ({

@@ -14,6 +14,8 @@ import {
 } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
+const HEADLINE_ATTRIBUTE = 'data-headline';
+const HEADLINE_ATTRIBUTE_EMPTY = 'data-empty';
 const LINK_TYPE = 'link';
 const HEADLINE_TYPE = 'headline';
 
@@ -127,6 +129,12 @@ const HeadlineStyles = `
   .${ROW_LINKS_COLUMN_HEADLINE} {
     margin-bottom: ${spacing.sm};
     font-weight: ${fontWeight.extraBold};
+  }
+
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${ROW_LINKS_COLUMN_HEADLINE}[${HEADLINE_ATTRIBUTE_EMPTY}="true"] {
+      display: none;
+    }
   }
 `;
 
@@ -257,18 +265,20 @@ const CreateDefaultColumn = ({
 
 const CreateSlotColumn = ({
   element,
-  ref,
+  slotRef,
+  hasHeadlines,
 }: {
   element: HTMLElement;
-  ref: string;
+  slotRef: string;
+  hasHeadlines: boolean;
 }) => {
   const slot = SlotDefaultStyling({
     element,
-    slotRef: ref,
+    slotRef,
   });
 
   if (slot) {
-    const isElementSlot = slot?.hasAttribute('slot');
+    const isElementSlot = slot.hasAttribute('slot');
     let elementToAppend = slot;
 
     if (!isElementSlot) {
@@ -282,11 +292,25 @@ const CreateSlotColumn = ({
         },
       );
 
+      if (hasHeadlines) {
+        const headline = slot.getAttribute(HEADLINE_ATTRIBUTE) as string;
+
+        const headlineElement = document.createElement('p');
+        headlineElement.classList.add(ROW_LINKS_COLUMN_HEADLINE);
+        headlineElement.innerHTML = headline;
+
+        if (!headline)
+          headlineElement.setAttribute(HEADLINE_ATTRIBUTE_EMPTY, 'true');
+
+        wrapper.appendChild(headlineElement);
+      }
+
       links.forEach((link) => {
         wrapper.appendChild(link);
       });
 
       elementToAppend = wrapper;
+    } else {
     }
 
     elementToAppend.classList.add(ROW_LINKS_COLUMN_WRAPPER);
@@ -297,29 +321,47 @@ const CreateSlotColumn = ({
 
 export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
   const container = document.createElement('div');
-  const slotOne = element.querySelector(
-    `[slot="${SLOTS.LINK_COLUMN_ONE}"]`,
-  ) as HTMLSlotElement;
-  const slotTwo = element.querySelector(
-    `[slot="${SLOTS.LINK_COLUMN_TWO}"]`,
-  ) as HTMLSlotElement;
-  const slotThree = element.querySelector(
-    `[slot="${SLOTS.LINK_COLUMN_THREE}"]`,
-  ) as HTMLSlotElement;
-  const slots = [
-    { slotElement: slotOne, ref: SLOTS.LINK_COLUMN_ONE },
-    { slotElement: slotTwo, ref: SLOTS.LINK_COLUMN_TWO },
-    { slotElement: slotThree, ref: SLOTS.LINK_COLUMN_THREE },
+
+  const slotList = [
+    { slotRef: SLOTS.LINK_COLUMN_ONE },
+    { slotRef: SLOTS.LINK_COLUMN_TWO },
+    { slotRef: SLOTS.LINK_COLUMN_THREE },
   ];
-  const hasSlot = slotOne || slotTwo || slotThree;
+  const hasSlot = slotList.some(
+    ({ slotRef }) =>
+      element.querySelector(`[slot="${slotRef}"]`) as HTMLSlotElement,
+  );
 
   if (hasSlot) {
-    slots.forEach(({ slotElement, ref }) => {
-      if (slotElement) {
-        const slotToAppend = CreateSlotColumn({ element, ref });
-        if (slotToAppend) container.appendChild(slotToAppend);
-      }
+    const hasHeadlines = slotList.some(({ slotRef }) => {
+      const slot = element.querySelector(`[slot="${slotRef}"]`);
+      if (slot) return slot.hasAttribute(HEADLINE_ATTRIBUTE);
+      return false;
     });
+
+    slotList.forEach(({ slotRef }) => {
+      const slotToAppend = CreateSlotColumn({ element, slotRef, hasHeadlines });
+      if (slotToAppend) container.appendChild(slotToAppend);
+    });
+
+    if (hasHeadlines) {
+      setTimeout(() => {
+        const shadowRoot = element.shadowRoot as ShadowRoot;
+        const headlines = Array.from(
+          shadowRoot.querySelectorAll(`.${ROW_LINKS_COLUMN_HEADLINE}`),
+        ) as HTMLDivElement[];
+
+        const renderedHeadlinesSize = headlines.reduce((acc, headline) => {
+          return headline.offsetHeight > acc ? headline.offsetHeight : acc;
+        }, 10);
+
+        console.log(renderedHeadlinesSize);
+
+        headlines.forEach((headline) => {
+          headline.style.height = `${renderedHeadlinesSize}px`;
+        });
+      }, 200);
+    }
   } else {
     container.appendChild(
       CreateDefaultColumn({ defaultContent: COLUMN_ONE_DEFAULT_LINKS }),

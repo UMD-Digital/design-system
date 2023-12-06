@@ -1,5 +1,5 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
-import { SLOTS } from 'components/footer/globals';
+import { ELEMENTS, SLOTS, VARIABLES } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
@@ -14,12 +14,27 @@ export const CallToActionStyles = `
     background-color: ${colors.red};
     color: ${colors.white};
     font-weight: 800;
+    border: 1px solid ${colors.red};
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
 
   .${CALL_TO_ACTION_CONTAINER} a:hover, 
   .${CALL_TO_ACTION_CONTAINER} a:focus {
     background-size: none;
     color: ${colors.white};
+    background-color: ${colors.black};
+  }
+
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a {
+    background-color: ${colors.black};
+    color: ${colors.white};
+    border: 1px solid ${colors.black};
+  }
+
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:hover, 
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:focus {
+    color: ${colors.black};
+    background-color: ${colors.gray.lightest};
   }
 `;
 

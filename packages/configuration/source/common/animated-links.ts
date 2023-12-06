@@ -172,6 +172,24 @@ const specialAnimations = {
       textDecoration: 'none',
     },
   },
+
+  '.umd-fadein-simple-light': {
+    ...baseLink,
+    backgroundImage: `linear-gradient(currentColor, currentColor)`,
+    backgroundPosition: 'left calc(100% - 2px)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 1px',
+    color: 'currentColor',
+    transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
+
+    [`&:hover,
+    &:focus`]: {
+      backgroundImage: `linear-gradient(${colors.red}, ${colors.red})`,
+      backgroundPosition: 'left calc(100%)',
+      color: colors.red,
+      textDecoration: 'none',
+    },
+  },
 };
 
 const animatedLinks = Object.assign(

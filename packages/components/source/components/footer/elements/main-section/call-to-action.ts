@@ -10,6 +10,7 @@ export const CallToActionStyles = `
   }
 
   .${CALL_TO_ACTION_CONTAINER} a {
+    display: inline-block;
     padding: ${spacing.xs} ${spacing['lg']};
     background-color: ${colors.red};
     color: ${colors.white};

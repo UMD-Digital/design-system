@@ -20,6 +20,10 @@ const UTILITY_CONTAINER_LINK = 'umd-footer-utility-container-link';
 
 // prettier-ignore
 const LinkStyles = `
+  .${UTILITY_CONTAINER} a {
+    display: block;
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:

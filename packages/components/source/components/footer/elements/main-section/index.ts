@@ -43,16 +43,6 @@ export const MainContainerStyles = `
     color: ${colors.white};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER} a {
-    background-image: linear-gradient(${colors.white}, ${colors.white});
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 0 1px;
-    display: inline;
-    position: relative;
-    transition: background-size 0.4s;
-  }
-
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] p, 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a {
     color: ${colors.gray.darker}

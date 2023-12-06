@@ -69,28 +69,24 @@
 {% endmacro %}
 
 {% macro ContactOverwrite() %}
-  <div slot="contact">
-    <address>
-      <p class="umd-interactive-sans-medium">
-        Office of the Senior Vice President &amp; Provost
-      </p>
-      <p class="mail-address">
-        <span>Suite 1132, Main Administration Building</span>
-        <span>7901 Regents Drive College Park, MD 20742</span>
-      </p>
-      <p class="contact-list">
-        <a href="mailto:provost@umd.edu">
-          <span aria-hidden="true">provost@umd.edu</span>
-          <span class="sr-only">
-            Email: Office of the Provost provost@umd.edu
-          </span>
-        </a>
-        <a href="tel:3014055252">
-          <span aria-hidden="true">301.405.5252</span>
-          <span class="sr-only">Call: 301-405-5252</span>
-        </a>
-      </p>
-    </address>
+  <p slot="contact-headline" class="umd-interactive-sans-medium">
+    <a href="https://provost.umd.edu">
+      Office of the Senior Vice President &amp; Provost
+    </a>
+  </p>
+
+  <address slot="contact-address">
+    <p>
+      Suite 1132, Main Administration Building
+    </p>
+    <p>
+      7901 Regents Drive College Park, MD 20742
+    </p>
+  </address>
+
+  <div slot="contact-links">
+    <a href="mailto:provost@umd.edu"><span>provost@umd.edu</span></a>
+    <a href="tel:3014055252"><span>301.405.5252</span></a>
   </div>
 {% endmacro %}
 

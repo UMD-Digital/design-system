@@ -1,11 +1,17 @@
 import {
+  animatedLinks,
   colors,
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
 import { fontWeight } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { BREAKPOINTS, SLOTS } from 'components/footer/globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  SLOTS,
+  VARIABLES,
+} from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
 const LINK_TYPE = 'link';
@@ -110,6 +116,89 @@ const COLUMN_THREE_DEFAULT_LINKS = [
 ];
 
 // prettier-ignore
+const HeadlineStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ROW_LINKS_COLUMN_HEADLINE}`]:
+        typography['.umd-interactive-sans-medium'],
+    },
+  })}
+  
+  .${ROW_LINKS_COLUMN_HEADLINE} {
+    margin-bottom: ${spacing.sm};
+    font-weight: ${fontWeight.extraBold};
+  }
+`;
+
+// prettier-ignore
+const LinkStyles = `
+  .${ROW_LINKS_COLUMN_LINKS}:not(:last-child) {
+    margin-bottom: ${spacing.sm};
+  }
+
+  .${ROW_LINKS_COLUMN_LINKS} > * {
+    margin-bottom: ${spacing.sm};
+  }
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ROW_LINKS_COLUMN_LINKS} a`]: typography['.umd-sans-smaller'],
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ROW_LINKS_COLUMN_LINKS} a`]:
+        animatedLinks['.umd-slidein-underline-white'],
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${ROW_LINKS_COLUMN_LINKS} a`]:
+        animatedLinks['.umd-slidein-underline-black'],
+    },
+  })}
+`;
+
+// prettier-ignore
+const ColumnWrapper = `
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+    .${ROW_LINKS_COLUMN_WRAPPER} {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 ${spacing.md};
+    }
+  }
+  
+  @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
+    .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
+      margin-bottom: ${spacing.lg};
+    }
+  }
+  
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+    .${ROW_LINKS_COLUMN_WRAPPER} {
+      padding-right: ${spacing.xs};
+    }
+  }
+  
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+    .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
+      margin-left: ${spacing.lg};
+      padding-left: ${spacing.lg};
+      border-left: 1px solid ${colors.gray.dark};
+    }
+  }
+  
+  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+    .${ROW_LINKS_COLUMN_WRAPPER} > p {
+      grid-column: 1 / span 2;
+    }
+  }
+`
+
+// prettier-ignore
 export const LinkColumnStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
@@ -123,73 +212,9 @@ export const LinkColumnStyles = `
     }
   }
 
-  .${ROW_LINKS_COLUMNS_CONTAINER} a:hover,
-  .${ROW_LINKS_COLUMNS_CONTAINER} a:focus {
-    background-size: 100% 1px;
-    color: ${colors.white};
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ROW_LINKS_COLUMN_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
-    },
-  })}
-
-  .${ROW_LINKS_COLUMN_HEADLINE} {
-    font-weight: ${fontWeight.extraBold};
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ROW_LINKS_COLUMN_LINKS} a`]: typography['.umd-sans-smaller']
-    },
-  })}
-
-  .${ROW_LINKS_COLUMN_LINKS} > * {
-    margin-bottom: ${spacing.sm};
-  }
-
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER} {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 ${spacing.md};
-    }
-  }
-
-  @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
-      margin-bottom: ${spacing.lg};
-    }
-  }
-
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER} {
-      padding-right: ${spacing.xs};
-    }
-  }
-
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
-      margin-left: ${spacing.lg};
-      padding-left: ${spacing.lg};
-      border-left: 1px solid ${colors.gray.dark};
-    }
-  }
-
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER} > p {
-      grid-column: 1 / span 2;
-    }
-  }
-
-  .${ROW_LINKS_COLUMN_WRAPPER} > div:not(:last-child) {
-    margin-bottom: ${spacing.sm};
-  }
-
-  .${ROW_LINKS_COLUMN_WRAPPER} > p {
-    margin-bottom: ${spacing.sm};
-  }
+  ${ColumnWrapper}
+  ${HeadlineStyles}
+  ${LinkStyles}
 `;
 
 const CreateDefaultColumn = ({
@@ -206,8 +231,11 @@ const CreateDefaultColumn = ({
       if (row.url) {
         const wrapper = document.createElement('div');
         const link = document.createElement('a');
+        const span = document.createElement('span');
 
-        link.textContent = row.title;
+        span.textContent = row.title;
+        link.appendChild(span);
+
         link.href = row.url;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';

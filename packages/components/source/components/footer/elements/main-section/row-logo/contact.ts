@@ -1,17 +1,28 @@
 import {
+  animatedLinks,
   colors,
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { MakeSpan, SlotDefaultStyling } from 'helpers/ui';
+import {
+  CheckForAnimationLinkSpan,
+  CreateLinkWithSpan,
+  SlotDefaultStyling,
+} from 'helpers/ui';
 import { ELEMENT_TYPE } from 'components/footer/component';
-import { BREAKPOINTS, SLOTS } from 'components/footer/globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  SLOTS,
+  VARIABLES,
+} from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
-const CONTACT_LIST_CONTAINER = 'umd-footer-contact-contact-list';
 const CONTACT_LIST_HEADLINE = 'umd-footer-contact-list-headline';
+const CONTACT_LIST_ADDRESS = 'umd-footer-contact-list-address';
+const CONTACT_LINKS_LIST = 'umd-footer-contact-links-list';
 
 const DEFAULT_HEADLINE_LINK = {
   url: 'https://www.usmd.edu/',
@@ -31,6 +42,7 @@ const DEFAULT_PHONE = {
   label: 'Call: 301-405-1000',
 };
 
+// prettier-ignore
 const socialOverwriteStyles = `
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
@@ -45,6 +57,110 @@ const socialOverwriteStyles = `
   }
 `;
 
+// prettier-ignore
+const HeadlineStyles = `
+  .${CONTACT_LIST_HEADLINE} {
+    margin-bottom: ${spacing.min};
+  }
+
+  .${CONTACT_LIST_HEADLINE} * {
+    font-weight: 900;
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CONTACT_LIST_HEADLINE} a`]:
+        animatedLinks['.umd-slidein-underline-white'],
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CONTACT_LIST_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
+    },
+  })}
+
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a {
+    color: ${colors.black};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a`]:
+        animatedLinks['.umd-slidein-underline-black'],
+    },
+  })}
+`;
+
+// prettier-ignore
+const AddressStyles = `
+  .${CONTACT_LIST_ADDRESS} address {
+    font-style: normal;
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CONTACT_LIST_ADDRESS} *`]: typography['.umd-sans-smaller'],
+    },
+  })}
+`;
+
+// prettier-ignore
+const LinkListStyles = `
+  .${CONTACT_LINKS_LIST} {
+    display: flex;
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CONTACT_LINKS_LIST} *`]: typography['.umd-sans-smaller'],
+    },
+  })}
+
+  .${CONTACT_LINKS_LIST} a {
+    display: block;
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CONTACT_LINKS_LIST} a`]:
+        animatedLinks['.umd-slidein-underline-white'],
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LINKS_LIST} a`]:
+        animatedLinks['.umd-slidein-underline-black'],
+    },
+  })}
+  
+  .${CONTACT_LINKS_LIST} a:not(:first-child) {
+    position: relative;
+    margin-left: ${spacing.min};
+    padding-left: ${spacing.min};
+    position: relative;
+    background-position: 10px 100%;
+  }
+  
+  .${CONTACT_LINKS_LIST} a:not(:first-child):before {
+    content: "";
+    display: inline-block;
+    height: 3px;
+    width: 3px;
+    background-color: ${colors.white};
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a:not(:first-child):before {
+    background-color: ${colors.black};
+  }
+`;
+
+// prettier-ignore
 export const ContactContainerStyles = `
   .${CONTACT_CONTAINER} {
     background-color: currnetColor;
@@ -62,86 +178,94 @@ export const ContactContainerStyles = `
     }
   }
 
-  .${CONTACT_CONTAINER} a:hover,
-  .${CONTACT_CONTAINER} a:focus {
-    background-size: 100% 1px;
-    color: ${colors.white};
-  }
-  
   .${CONTACT_CONTAINER} p {
     line-height: 1.4em;
   }
 
-  .${CONTACT_CONTAINER} address {
-    font-style: normal;
-  }
-
-  .${CONTACT_CONTAINER} address * {
-    font-size: 14px;
-  }
-  
-  .${CONTACT_CONTAINER} span {
-    display: block;
-  }
-  
-  .${CONTACT_CONTAINER} .umd-interactive-sans-medium {
-    margin-bottom: ${spacing.min};
-  }
-
-  .${CONTACT_CONTAINER} .umd-interactive-sans-medium a {
-    font-weight: 900;
-  }
-  
-  .${CONTACT_CONTAINER} .${CONTACT_LIST_CONTAINER} {
-    display: flex;
-  }
-  
-  .${CONTACT_CONTAINER} .${CONTACT_LIST_CONTAINER} a:not(:first-child) {
-    position: relative;
-    margin-left: ${spacing.min};
-    padding-left: ${spacing.min};
-    position: relative;
-    background-position: 10px 100%;
-  }
-  
-  .${CONTACT_CONTAINER} .${CONTACT_LIST_CONTAINER} a:not(:first-child) > span {
-    display: inline-block;
-    height: 3px;
-    width: 3px;
-    background-color: #fff;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 0;
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${CONTACT_LIST_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
-    },
-  })}
-
+  ${HeadlineStyles}
+  ${AddressStyles}
+  ${LinkListStyles}
   ${socialOverwriteStyles}
 `;
 
-const makeLink = ({
-  url,
-  title,
-  label,
-}: {
-  url: string;
-  title: string;
-  label?: string;
-}) => {
-  const link = document.createElement('a');
-  const span = document.createElement('span');
-  link.setAttribute('href', url);
-  link.setAttribute('target', '_blank');
-  link.setAttribute('rel', 'noopener noreferrer');
-  link.innerText = title;
-  if (label) link.setAttribute('aria-label', label);
-  link.appendChild(span);
-  return link;
+const CreateDefaultHeadline = () => {
+  const headline = document.createElement('p');
+  const headlineLink = CreateLinkWithSpan(DEFAULT_HEADLINE_LINK);
+
+  headline.classList.add(CONTACT_LIST_HEADLINE);
+  headline.appendChild(headlineLink);
+
+  return headline;
+};
+
+const CreateSlotHeadline = ({ element }: { element: ELEMENT_TYPE }) => {
+  const contactHeadlineElement = SlotDefaultStyling({
+    element,
+    slotRef: SLOTS.CONTACT_HEADLINE,
+  });
+
+  if (contactHeadlineElement) {
+    CheckForAnimationLinkSpan({ element: contactHeadlineElement });
+    contactHeadlineElement.classList.add(CONTACT_LIST_HEADLINE);
+
+    return contactHeadlineElement;
+  }
+
+  return null;
+};
+
+const CreateDefaultContactAddress = () => {
+  const address = document.createElement('address');
+  const addressParagraphOne = document.createElement('p');
+  const addressParagraphTwo = document.createElement('p');
+
+  address.classList.add(CONTACT_LIST_ADDRESS);
+
+  addressParagraphOne.innerHTML = DEFAULT_ADDRESS_TITLE;
+  addressParagraphTwo.innerHTML = `${DEFAULT_ADDRESS_ONE} ${DEFAULT_ADDRESS_TWO} `;
+
+  address.appendChild(addressParagraphOne);
+  address.appendChild(addressParagraphTwo);
+
+  return address;
+};
+
+const CreateSlotContactAddress = ({ element }: { element: ELEMENT_TYPE }) => {
+  const contactAddressElement = SlotDefaultStyling({
+    element,
+    slotRef: SLOTS.CONTACT_ADDRESS,
+  });
+
+  if (contactAddressElement) {
+    contactAddressElement.classList.add(CONTACT_LIST_ADDRESS);
+    return contactAddressElement;
+  }
+
+  return null;
+};
+
+const CreateDefaultContactLinks = () => {
+  const contactList = document.createElement('p');
+
+  contactList.classList.add(CONTACT_LINKS_LIST);
+  contactList.appendChild(CreateLinkWithSpan(DEFAULT_EMAIL));
+  contactList.appendChild(CreateLinkWithSpan(DEFAULT_PHONE));
+
+  return contactList;
+};
+
+const CreateSlotContactLinks = ({ element }: { element: ELEMENT_TYPE }) => {
+  const contactLinksElement = SlotDefaultStyling({
+    element,
+    slotRef: SLOTS.CONTACT_LINKS,
+  });
+
+  if (contactLinksElement) {
+    contactLinksElement.classList.add(CONTACT_LINKS_LIST);
+    return contactLinksElement;
+  }
+
+  return null;
 };
 
 export const CreateContactContainer = ({
@@ -149,49 +273,48 @@ export const CreateContactContainer = ({
 }: {
   element: ELEMENT_TYPE;
 }) => {
-  const contactSlot = element.querySelector(
-    `[slot="${SLOTS.CONTACT}"]`,
+  const contactHeadlineSlot = element.querySelector(
+    `[slot="${SLOTS.CONTACT_HEADLINE}"]`,
+  ) as HTMLSlotElement;
+  const contactAddressSlot = element.querySelector(
+    `[slot="${SLOTS.CONTACT_ADDRESS}"]`,
+  ) as HTMLSlotElement;
+  const contactLinksSlot = element.querySelector(
+    `[slot="${SLOTS.CONTACT_LINKS}"]`,
   ) as HTMLSlotElement;
   const contactContainer = document.createElement('div');
   const socialContainer = CreateSocialCampaignColumns({ element });
-
-  contactContainer.classList.add(CONTACT_CONTAINER);
+  const hasSlot = contactHeadlineSlot || contactAddressSlot || contactLinksSlot;
 
   const makeContactSlot = () => {
-    const contactSlot = SlotDefaultStyling({ element, slotRef: SLOTS.CONTACT });
-    if (contactSlot) contactContainer.appendChild(contactSlot);
+    const contactHeadlineElement = CreateSlotHeadline({ element });
+    const contactLinksElement = CreateSlotContactLinks({ element });
+    const contactAddressElement = CreateSlotContactAddress({ element });
+
+    if (contactHeadlineElement)
+      contactContainer.appendChild(contactHeadlineElement);
+
+    if (contactAddressElement)
+      contactContainer.appendChild(contactAddressElement);
+
+    if (contactLinksElement) contactContainer.appendChild(contactLinksElement);
   };
 
   const makeDefaultSlot = () => {
     const defaultContactWrapper = document.createElement('div');
-    const headline = document.createElement('p');
-    const address = document.createElement('address');
-    const addressParagraph = document.createElement('p');
-    const contactList = document.createElement('p');
-
-    const headlineLink = makeLink(DEFAULT_HEADLINE_LINK);
-
-    headline.classList.add(CONTACT_LIST_HEADLINE);
-    headline.appendChild(headlineLink);
-
-    addressParagraph.appendChild(MakeSpan({ text: DEFAULT_ADDRESS_TITLE }));
-    addressParagraph.appendChild(MakeSpan({ text: DEFAULT_ADDRESS_ONE }));
-    addressParagraph.appendChild(MakeSpan({ text: DEFAULT_ADDRESS_TWO }));
-
-    contactList.classList.add(CONTACT_LIST_CONTAINER);
-    contactList.appendChild(makeLink(DEFAULT_EMAIL));
-    contactList.appendChild(makeLink(DEFAULT_PHONE));
-
-    address.appendChild(addressParagraph);
-    address.appendChild(contactList);
+    const headline = CreateDefaultHeadline();
+    const address = CreateDefaultContactAddress();
+    const contactList = CreateDefaultContactLinks();
 
     contactContainer.appendChild(headline);
     contactContainer.appendChild(address);
+    contactContainer.appendChild(contactList);
     contactContainer.appendChild(defaultContactWrapper);
   };
 
-  contactSlot ? makeContactSlot() : makeDefaultSlot();
+  hasSlot ? makeContactSlot() : makeDefaultSlot();
 
+  contactContainer.classList.add(CONTACT_CONTAINER);
   contactContainer.appendChild(socialContainer);
 
   return contactContainer;

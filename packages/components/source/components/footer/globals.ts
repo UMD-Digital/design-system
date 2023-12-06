@@ -9,7 +9,9 @@ export const ELEMENTS = {
 };
 
 export const SLOTS = {
-  CONTACT: 'contact',
+  CONTACT_HEADLINE: 'contact-headline',
+  CONTACT_LINKS: 'contact-links',
+  CONTACT_ADDRESS: 'contact-address',
   CTA: 'call-to-action',
   SOCIAL: 'social-links',
   UTILITY: 'utility-links',

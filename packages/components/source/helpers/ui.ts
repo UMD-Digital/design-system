@@ -20,6 +20,30 @@ export const MakeSlot = ({ type }: { type: string }) => {
   return slot;
 };
 
+export const CreateLinkWithSpan = ({
+  url,
+  title,
+  label,
+}: {
+  url: string;
+  title: string;
+  label?: string;
+}) => {
+  const link = document.createElement('a');
+  const span = document.createElement('span');
+
+  link.setAttribute('href', url);
+  link.setAttribute('target', '_blank');
+  link.setAttribute('rel', 'noopener noreferrer');
+
+  span.innerText = title;
+  link.appendChild(span);
+
+  if (label) link.setAttribute('aria-label', label);
+
+  return link;
+};
+
 export const SlotDefaultStyling = ({
   element,
   slotRef,
@@ -83,11 +107,12 @@ export const SlotOberserver = ({
 export const CheckForAnimationLinkSpan = ({
   element,
 }: {
-  element: HTMLElement;
+  element: HTMLElement | HTMLAnchorElement;
 }) => {
   const isSlotContent =
     element.querySelector('slot') || element instanceof HTMLSlotElement;
-  const link = element.querySelector('a');
+  const link =
+    element instanceof HTMLAnchorElement ? element : element.querySelector('a');
 
   if (isSlotContent) return;
   if (!link) return;

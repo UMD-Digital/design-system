@@ -3,6 +3,7 @@ import {
   spacing,
   umdLock,
   typography,
+  animatedLinks,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -11,10 +12,45 @@ import {
   VARIABLES,
   SLOTS,
 } from 'components/footer/globals';
+import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
 
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
 const UTILITY_CONTAINER_LOCK = 'umd-footer-utility-container-lock';
 const UTILITY_CONTAINER_LINK = 'umd-footer-utility-container-link';
+
+// prettier-ignore
+const LinkStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${UTILITY_CONTAINER} a`]:
+        animatedLinks['.umd-slidein-underline-white'],
+    },
+  })}
+
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a {
+    color: ${colors.black};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a`]:
+        animatedLinks['.umd-slidein-underline-black'],
+    },
+  })}
+`;
+
+// prettier-ignore
+const TextStyles = `
+  .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} p {
+    color: ${colors.white};
+    display: flex;
+    align-items: center;
+  }
+  
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
+    color: ${colors.black};
+  }
+`;
 
 // prettier-ignore
 export const UtilityContainerStyles = `
@@ -36,16 +72,16 @@ export const UtilityContainerStyles = `
     }
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${UTILITY_CONTAINER} *`]: typography['.umd-sans-min']
+    },
+  })}
+
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-top: ${spacing.sm};
     }
-  }
-
-  .${UTILITY_CONTAINER} a:hover,
-  .${UTILITY_CONTAINER} a:focus {
-    background-size: 100% 1px;
-    color: ${colors.white};
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
@@ -56,27 +92,13 @@ export const UtilityContainerStyles = `
       border-left: 1px solid ${colors.gray.dark};
     }
   }
-  
-  .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} p {
-    color: ${colors.white};
-    display: flex;
-    align-items: center;
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${UTILITY_CONTAINER_LINK}`]: typography['.umd-sans-min']
-    },
-  })}
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {
     background-color: ${colors.gray.light};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a,
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
-    color: ${colors.black};
-  }
+  ${LinkStyles}
+  ${TextStyles}
 `;
 
 const requiredSubLinks = [
@@ -118,14 +140,16 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
     ) as HTMLAnchorElement[];
 
     slottedLinks.forEach((link) => {
-      const divWrapper = document.createElement('div');
-
+      CheckForAnimationLinkSpan({ element: link });
       link.classList.add(UTILITY_CONTAINER_LINK);
-      divWrapper.appendChild(link);
-      wrapper.appendChild(divWrapper);
+
+      wrapper.appendChild(link);
     });
   }
-  requiredSubLinks.forEach((link) => wrapper.appendChild(createSubLink(link)));
+
+  requiredSubLinks.forEach((link) =>
+    wrapper.appendChild(CreateLinkWithSpan(link)),
+  );
   copyRight.classList.add(UTILITY_CONTAINER_LINK);
   copyRight.innerHTML = `©${new Date().getFullYear()} UNIVERSITY OF MARYLAND`;
   wrapper.appendChild(copyRight);

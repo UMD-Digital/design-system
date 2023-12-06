@@ -94,8 +94,8 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const AddressStyles = `
-  .${CONTACT_LIST_ADDRESS} address {
-    font-style: normal;
+  .${CONTACT_LIST_ADDRESS} {
+    margin-bottom: ${spacing.min};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -198,10 +198,16 @@ const CreateDefaultHeadline = () => {
   return headline;
 };
 
-const CreateSlotHeadline = ({ element }: { element: ELEMENT_TYPE }) => {
+const CreateSlotHeadline = ({
+  element,
+  slotRef,
+}: {
+  element: ELEMENT_TYPE;
+  slotRef: string;
+}) => {
   const contactHeadlineElement = SlotDefaultStyling({
     element,
-    slotRef: SLOTS.CONTACT_HEADLINE,
+    slotRef,
   });
 
   if (contactHeadlineElement) {
@@ -230,11 +236,14 @@ const CreateDefaultContactAddress = () => {
   return address;
 };
 
-const CreateSlotContactAddress = ({ element }: { element: ELEMENT_TYPE }) => {
-  const contactAddressElement = SlotDefaultStyling({
-    element,
-    slotRef: SLOTS.CONTACT_ADDRESS,
-  });
+const CreateSlotContactAddress = ({
+  element,
+  slotRef,
+}: {
+  element: ELEMENT_TYPE;
+  slotRef: string;
+}) => {
+  const contactAddressElement = SlotDefaultStyling({ element, slotRef });
 
   if (contactAddressElement) {
     contactAddressElement.classList.add(CONTACT_LIST_ADDRESS);
@@ -254,11 +263,14 @@ const CreateDefaultContactLinks = () => {
   return contactList;
 };
 
-const CreateSlotContactLinks = ({ element }: { element: ELEMENT_TYPE }) => {
-  const contactLinksElement = SlotDefaultStyling({
-    element,
-    slotRef: SLOTS.CONTACT_LINKS,
-  });
+const CreateSlotContactLinks = ({
+  element,
+  slotRef,
+}: {
+  element: ELEMENT_TYPE;
+  slotRef: string;
+}) => {
+  const contactLinksElement = SlotDefaultStyling({ element, slotRef });
 
   if (contactLinksElement) {
     contactLinksElement.classList.add(CONTACT_LINKS_LIST);
@@ -273,31 +285,27 @@ export const CreateContactContainer = ({
 }: {
   element: ELEMENT_TYPE;
 }) => {
-  const contactHeadlineSlot = element.querySelector(
-    `[slot="${SLOTS.CONTACT_HEADLINE}"]`,
-  ) as HTMLSlotElement;
-  const contactAddressSlot = element.querySelector(
-    `[slot="${SLOTS.CONTACT_ADDRESS}"]`,
-  ) as HTMLSlotElement;
-  const contactLinksSlot = element.querySelector(
-    `[slot="${SLOTS.CONTACT_LINKS}"]`,
-  ) as HTMLSlotElement;
   const contactContainer = document.createElement('div');
   const socialContainer = CreateSocialCampaignColumns({ element });
-  const hasSlot = contactHeadlineSlot || contactAddressSlot || contactLinksSlot;
+  const slotList = [
+    {
+      slotRef: SLOTS.CONTACT_HEADLINE,
+      create: CreateSlotHeadline,
+    },
+    { slotRef: SLOTS.CONTACT_ADDRESS, create: CreateSlotContactAddress },
+    { slotRef: SLOTS.CONTACT_LINKS, create: CreateSlotContactLinks },
+  ];
+  const hasSlot = slotList.some(
+    ({ slotRef }) =>
+      element.querySelector(`[slot="${slotRef}"]`) as HTMLSlotElement,
+  );
 
   const makeContactSlot = () => {
-    const contactHeadlineElement = CreateSlotHeadline({ element });
-    const contactLinksElement = CreateSlotContactLinks({ element });
-    const contactAddressElement = CreateSlotContactAddress({ element });
+    slotList.forEach(({ create, slotRef }) => {
+      const slotElement = create({ element, slotRef: slotRef });
 
-    if (contactHeadlineElement)
-      contactContainer.appendChild(contactHeadlineElement);
-
-    if (contactAddressElement)
-      contactContainer.appendChild(contactAddressElement);
-
-    if (contactLinksElement) contactContainer.appendChild(contactLinksElement);
+      if (slotElement) contactContainer.appendChild(slotElement);
+    });
   };
 
   const makeDefaultSlot = () => {

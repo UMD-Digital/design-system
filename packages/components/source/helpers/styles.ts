@@ -41,6 +41,10 @@ export const Reset = `
     display: block;
   }
 
+  :host address {
+    font-style: normal;
+  }
+
   :host .sr-only {
     clip: rect(0,0,0,0);
     border-width: 0;

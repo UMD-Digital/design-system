@@ -30,7 +30,7 @@ const socialOverwriteStyles = `
 // prettier-ignore
 export const RowLinkStyles = `
   .${ROW_LINKS_CONTAINER} {
-    padding-bottom: ${spacing['md']};
+    padding-bottom: ${spacing.lg};
     background-color: ${colors.black};
   }
 

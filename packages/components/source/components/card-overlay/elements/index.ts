@@ -174,13 +174,18 @@ export const ComponentStyles = `
   ${Reset}
 
   .${CARD_OVERLAY_CONTAINER} {
-    min-height: 368px;
     height: 100%;
     position: relative;
     background-color: ${colors.gray.lightest};
     padding: ${spacing.md};
     padding-top: ${spacing['4xl']};
     padding-bottom: ${spacing.lg};
+  }
+
+  @media (min-width: 768px) {
+    .${CARD_OVERLAY_CONTAINER} {
+      min-height: 368px;
+    }
   }
 
   .${CARD_OVERLAY_TEXT_CONTAINER} {

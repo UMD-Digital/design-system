@@ -98,6 +98,10 @@ const AddressStyles = `
     margin-bottom: ${spacing.min};
   }
 
+  .${CONTACT_LIST_ADDRESS} * {
+    display: block;
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_ADDRESS} *`]: typography['.umd-sans-smaller'],

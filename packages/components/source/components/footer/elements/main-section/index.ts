@@ -39,11 +39,13 @@ const VariationVisualStyles = `
 
 export const MainContainerStyles = `
   .${ELEMENTS.ELEMENT_WRAPPER} p,
-  .${ELEMENTS.ELEMENT_WRAPPER} a {
+  .${ELEMENTS.ELEMENT_WRAPPER} a,
+  .${ELEMENTS.ELEMENT_WRAPPER} span {
     color: ${colors.white};
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] p, 
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] span,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a {
     color: ${colors.gray.darker}
   }

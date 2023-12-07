@@ -355,8 +355,6 @@ export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
           return headline.offsetHeight > acc ? headline.offsetHeight : acc;
         }, 10);
 
-        console.log(renderedHeadlinesSize);
-
         headlines.forEach((headline) => {
           headline.style.height = `${renderedHeadlinesSize}px`;
         });

@@ -98,25 +98,6 @@ export const ComponentStyles = `
   
   ${Reset}
 
-  :host a[slot="image"] {
-    display: block;
-    line-height: 0;
-    overflow: hidden;
-  }
-
-  :host a[slot="image"] img {
-    object-fit: cover;
-    object-position: 50% 50%;
-    transform: scale(1);
-    transition: transform 0.5s;
-    width: 100%;
-  }
-
-  :host a[slot="image"]:hover img,
-  :host a[slot="image"]:focus img {
-    transform: scale(1.025);
-  }
-
   .${CARD_CONTAINER} {
     max-width: 680px;
   }
@@ -146,10 +127,7 @@ export const ComponentStyles = `
 export const CreateShadowDom = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
   const textContainer = document.createElement('div');
-  const slotImage = element.querySelector(
-    `[slot="${SLOTS.IMAGE}"]`,
-  ) as HTMLSlotElement;
-  const image = CreateImage({ element, slotImage });
+  const image = CreateImage({ element });
   const intro = CreateIntro({ element });
   const body = CreateBody({ element });
 

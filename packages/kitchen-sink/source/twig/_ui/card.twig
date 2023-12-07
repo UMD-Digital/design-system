@@ -22,7 +22,9 @@
 
   <umd-element-card {{ attrs }}>
     {% if params.image %}
-      <img slot="image" src="{{ params.image }}" alt="Example Alt Text" />
+      <a slot="image" href="https://google.com" target="_blank">
+        <img src="{{ params.image }}" alt="Example Alt Text" />
+      </a>
     {% endif %}
 
     {% if hasEyebrow %}

@@ -16,6 +16,10 @@ export const Reset = `
     color: inherit;
   }
 
+  :host div {
+    line-height: 1;
+  }
+
   :host strong,
   :host b {
     font-weight: 900;
@@ -32,8 +36,9 @@ export const Reset = `
   :host h4,
   :host h5,
   :host h6 {
-    font-size: inherit;
-    font-weight: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1em;
   }
 
   :host img {

@@ -6,7 +6,7 @@ import {
   umdCta,
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
-import { MakeSlot, SlotDefaultStyling } from 'helpers/ui';
+import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
@@ -47,6 +47,12 @@ export const IntroContainerStyles = `
   .${INTRO_CONTAINER_HEADLINE} * {
     color: ${colors.white};
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_HEADLINE}`]: typography['.umd-sans-largest'],
+    },
+  })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {

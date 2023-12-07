@@ -3,6 +3,12 @@
 {% import '../_ui/card-overlay.twig' as CardOverlay %}
 
 {% block page %}
+  {% set imageOne = random(RecImageOptions) %}
+  {% set imageTwo = random(RecImageOptions) %}
+  {% set imageThree = random(RecImageOptions) %}
+  {% set imageSquare = random(SquareImageOptions) %}
+  {% set imageWeird = random(WeirdImageOptions) %}
+
   <section>
     <div class="umd-lock">
       <p class="umd-sans-large">
@@ -49,38 +55,44 @@
 
       <div slot="cards">
         {{
-          CardOverlay.TruncatedCardBody({
-            image: random(SquareImageOptions)
+          CardOverlay.FullCardBody({
+            image: imageOne,
+            text: 'small'
           })
         }}
 
         {{
-          CardOverlay.TruncatedCardBody({
-            image: random(SquareImageOptions)
+          CardOverlay.FullCardBody({
+            image: imageTwo,
+            text: 'small'
           })
         }}
 
         {{
-          CardOverlay.TruncatedCardBody({
-            theme: 'dark'
+          CardOverlay.FullCardBody({
+            theme: 'dark',
+            text: 'small'
           })
         }}
 
         {{
-          CardOverlay.TruncatedCardBody({
-            image: random(SquareImageOptions)
+          CardOverlay.FullCardBody({
+            image: imageThree,
+            text: 'small'
           })
         }}
 
         {{
-          CardOverlay.TruncatedCardBody({
-            image: random(SquareImageOptions)
+          CardOverlay.FullCardBody({
+            image: imageSquare,
+            text: 'small'
           })
         }}
 
         {{
-          CardOverlay.TruncatedCardBody({
-            theme: 'dark'
+          CardOverlay.FullCardBody({
+            theme: 'dark',
+            text: 'small'
           })
         }}
       </div>
@@ -131,14 +143,16 @@
 
       <div slot="cards">
         {{
-          CardOverlay.TruncatedCardBody({
-            image: random(SquareImageOptions)
+          CardOverlay.FullCardBody({
+            image: imageTwo,
+            text: 'small'
           })
         }}
 
         {{
-          CardOverlay.TruncatedCardBody({
-            image: random(SquareImageOptions)
+          CardOverlay.FullCardBody({
+            image: imageOne,
+            text: 'small'
           })
         }}
       </div>
@@ -209,14 +223,16 @@
 
       <div slot="cards">
         {{
-          CardOverlay.TruncatedCardBody({
-            image: random(SquareImageOptions)
+          CardOverlay.FullCardBody({
+            image: imageSquare,
+            text: 'small'
           })
         }}
 
         {{
-          CardOverlay.TruncatedCardBody({
-            image: random(SquareImageOptions)
+          CardOverlay.FullCardBody({
+            image: imageOne,
+            text: 'small'
           })
         }}
       </div>

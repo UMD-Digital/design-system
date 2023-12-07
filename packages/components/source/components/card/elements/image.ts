@@ -1,29 +1,31 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration';
 import { CheckForImageAlt } from 'helpers/ui';
-import { SLOTS } from '../globals';
+import { BREAKPOINTS, SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';
 
-const IMAGE_CONTAINER = 'umd-card-image-container';
-
+// prettier-ignore
 export const ImageStyles = `
-  @media (max-width: 767px) {
-    .${IMAGE_CONTAINER} {
-      display: none;
+  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
+    .${ELEMENTS.IMAGE_CONTAINER} {
+      width: 30%;
+      order: 2;
     }
   }
 `;
 
-export const CreateImage = ({ element }: { element: CardType }) => {
-  const imageRef = element.querySelector(
-    `[slot="${SLOTS.IMAGE}"]`,
-  ) as HTMLImageElement;
+export const CreateImage = ({
+  element,
+  slotImage,
+}: {
+  element: CardType;
+  slotImage: HTMLSlotElement;
+}) => {
   const container = document.createElement('div');
   const isProperImage = CheckForImageAlt({ element, slotRef: SLOTS.IMAGE });
 
-  container.classList.add(IMAGE_CONTAINER);
+  container.classList.add(ELEMENTS.IMAGE_CONTAINER);
 
-  if (isProperImage && imageRef) {
-    const clonedImage = imageRef.cloneNode(true) as HTMLImageElement;
+  if (isProperImage && slotImage) {
+    const clonedImage = slotImage.cloneNode(true) as HTMLImageElement;
     container.appendChild(clonedImage);
 
     return container;

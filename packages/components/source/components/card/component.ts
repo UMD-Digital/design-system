@@ -13,8 +13,8 @@ export type CardType = UMDCardElement;
 export class UMDCardElement extends HTMLElement {
   _shadow: ShadowRoot;
   _theme = 'light';
-  _aligned = 'false';
-  _border = 'false';
+  _aligned = false;
+  _border = false;
 
   constructor() {
     super();
@@ -32,9 +32,12 @@ export class UMDCardElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
+    const alignmentAttr = element.getAttribute('aligned');
+    const borderAttr = element.getAttribute('border');
+
     element._theme = element.getAttribute('theme') || element._theme;
-    element._aligned = element.getAttribute('aligned') || element._aligned;
-    element._border = element.getAttribute('border') || element._border;
+    element._aligned = alignmentAttr === 'true';
+    element._border = borderAttr === 'true';
 
     const container = CreateShadowDom({ element });
     this._shadow.appendChild(container);

@@ -18,7 +18,11 @@
       </div>
 
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        {{ Card.FullCardBody() }}
+        {{
+          Card.FullCardBody({
+            text: 'small'
+          })
+        }}
         {{ Card.FullCardBody() }}
         {{ Card.FullCardBody() }}
       </div>
@@ -41,7 +45,8 @@
         }}
         {{
           Card.FullCardBody({
-            border: true
+            border: true,
+            text: 'small'
           })
         }}
         {{
@@ -64,7 +69,8 @@
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
         {{
           Card.FullCardBody({
-            image: imageOne
+            image: imageOne,
+            text: 'small'
           })
         }}
 
@@ -103,6 +109,7 @@
         {{
           Card.FullCardBody({
             image: imageTwo,
+            text: 'small',
             aligned: true,
             border: true
           })
@@ -131,6 +138,7 @@
         {{
           Card.FullCardBody({
             image: imageOne,
+            text: 'small',
             theme: true
           })
         }}
@@ -202,6 +210,7 @@
         {{
           Card.FullCardBody({
             image: imageOne,
+            date: false,
             aligned: true,
             border: true
           })
@@ -218,6 +227,7 @@
         {{
           Card.FullCardBody({
             image: imageThree,
+            text: 'small',
             aligned: true,
             border: true
           })
@@ -239,6 +249,7 @@
         {{
           Card.FullCardBody({
             image: imageSquare,
+            date: false,
             aligned: true,
             border: true
           })
@@ -247,6 +258,7 @@
         {{
           Card.FullCardBody({
             image: imageOne,
+            text: 'small',
             aligned: true,
             border: true
           })
@@ -255,6 +267,7 @@
         {{
           Card.FullCardBody({
             image: imageThree,
+            eyebrow: false,
             aligned: true,
             border: true
           })
@@ -263,58 +276,6 @@
         {{
           Card.FullCardBody({
             image: imageTwo,
-            aligned: true,
-            border: true
-          })
-        }}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-largest">
-        Overwrite Examples
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <div class="umd-rich-text">
-        <p class="umd-sans-large">
-          Four Column (columns configured by configuration). Overwrite Styling
-        </p>
-      </div>
-
-      <div class="umd-grid-four mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBodyOverwrites({
-            image: imageSquare,
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBodyOverwrites({
-            image: imageTwo,
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBodyOverwrites({
-            image: imageOne,
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBodyOverwrites({
-            image: imageThree,
             aligned: true,
             border: true
           })

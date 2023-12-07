@@ -26,7 +26,12 @@ const VariantThemeStyles = `
 
   .${CARD_CONTAINER}[theme="dark"] .${CARD_TEXT_CONTAINER} {
     padding: ${spacing.md};
-    padding-top: 0;
+  }
+
+  @media (min-width: 768px) {
+    .${CARD_CONTAINER}[theme="dark"] .${CARD_TEXT_CONTAINER} {
+      padding-top: 0;
+    }
   }
 
   ${ConvertJSSObjectToStyles({
@@ -53,7 +58,12 @@ const VariantBorderStyles = `
 
   .${CARD_CONTAINER}[border="true"] .${CARD_TEXT_CONTAINER} {
     padding: ${spacing.md};
-    padding-top: 0;
+  }
+
+  @media (min-width: 768px) {
+    .${CARD_CONTAINER}[border="true"] .${CARD_TEXT_CONTAINER} {
+      padding-top: 0;
+    }
   }
 `;
 
@@ -112,7 +122,7 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
   textContainer.appendChild(body);
 
   container.classList.add(CARD_CONTAINER);
-  container.appendChild(image);
+  if (image) container.appendChild(image);
   container.appendChild(textContainer);
 
   return container;

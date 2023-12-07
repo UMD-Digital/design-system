@@ -6,10 +6,6 @@ import { CardType } from '../component';
 const IMAGE_CONTAINER = 'umd-card-image-container';
 
 export const ImageStyles = `
-  .${IMAGE_CONTAINER} {
-    margin-bottom: ${spacing.md};
-  }
-
   @media (max-width: 767px) {
     .${IMAGE_CONTAINER} {
       display: none;
@@ -29,7 +25,9 @@ export const CreateImage = ({ element }: { element: CardType }) => {
   if (isProperImage && imageRef) {
     const clonedImage = imageRef.cloneNode(true) as HTMLImageElement;
     container.appendChild(clonedImage);
+
+    return container;
   }
 
-  return container;
+  return null;
 };

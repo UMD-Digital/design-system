@@ -27,12 +27,17 @@ export const IntroStyles = `
     }
   }
 
+  @media (min-width: 768px) {
+    .${CARD_INTRO_CONTAINER} {
+      padding-top: ${spacing.md};
+    }
+  }
+
   @media (max-width: 767px) {
     .${CARD_INTRO_WRAPPER} {
       width: 70%;
       padding-right: ${spacing.md};
       flex: 1 0;
-      align-self: flex-end;
     }
   }
 

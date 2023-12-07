@@ -158,7 +158,7 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
     container.setAttribute(VARIABLES.ATTR_ALIGNED, '');
   }
   if (element._border) {
-    container.setAttribute('border', '');
+    container.setAttribute(VARIABLES.ATTR_BORDER, '');
   }
 
   textContainer.classList.add(CARD_TEXT_CONTAINER);

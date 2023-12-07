@@ -8,8 +8,8 @@ import {
 } from '@universityofmaryland/umd-web-configuration';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS, BREAKPOINTS } from '../globals';
-import { ELEMENT_TYPE } from '../component';
+import { SLOTS, BREAKPOINTS } from 'components/carousel-cards/globals';
+import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 
 const INTRO_CONTAINER = 'umd-carousel-cards-intro-container';
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
@@ -17,6 +17,62 @@ const INTRO_CONTAINER_HEADLINE = 'umd-carousel-cards-intro-container-headline';
 const INTRO_CONTAINER_TEXT = 'umd-carousel-cards-intro-container-text';
 const INTRO_CONTAINER_CTA = 'umd-carousel-cards-intro-container-cta';
 
+// prettier-ignore
+const headlineStyles = `
+  .${INTRO_CONTAINER_HEADLINE} * {
+    color: ${colors.white};
+  }
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_HEADLINE}`]: typography['.umd-sans-largest'],
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_HEADLINE} *`]: typography['.umd-sans-largest'],
+    },
+  })}
+`;
+
+// prettier-ignore
+const textStyles = `
+  * + .${INTRO_CONTAINER_TEXT} {
+    margin-top: ${spacing.md};
+  }
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_TEXT}`]: richText['.umd-rich-text-dark'],
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_TEXT}`]: typography['.umd-sans-medium'],
+    },
+  })}
+`;
+
+// prettier-ignore
+const ctaStyles = `
+  * + .${INTRO_CONTAINER_CTA} {
+    margin-top: ${spacing.md};
+  }
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_CONTAINER_CTA} a`]: umdCta['.umd-cta-secondary'],
+    },
+  })}
+  
+  .${INTRO_CONTAINER_CTA} a {
+    color: ${colors.white};
+  }
+`;
+
+// prettier-ignore
 export const IntroContainerStyles = `
   @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
     .${INTRO_CONTAINER} {
@@ -44,51 +100,9 @@ export const IntroContainerStyles = `
     }
   }
 
-  .${INTRO_CONTAINER_HEADLINE} * {
-    color: ${colors.white};
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE}`]: typography['.umd-sans-largest'],
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE} *`]: typography['.umd-sans-largest'],
-    },
-  })}
-
-  * + .${INTRO_CONTAINER_TEXT} {
-    margin-top: ${spacing.md};
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [` .${INTRO_CONTAINER_TEXT} *`]: richText['.umd-rich-text-dark'],
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: typography['.umd-sans-medium'],
-    },
-  })}
-
-  * + .${INTRO_CONTAINER_CTA} {
-    margin-top: ${spacing.md};
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${INTRO_CONTAINER_CTA} a`]: umdCta['.umd-cta-secondary'],
-    },
-  })}
-
-  .${INTRO_CONTAINER_CTA} a {
-    color: ${colors.white};
-  }
+  ${headlineStyles}
+  ${textStyles}
+  ${ctaStyles}
 `;
 
 export const CreateIntroColumn = ({ element }: { element: ELEMENT_TYPE }) => {

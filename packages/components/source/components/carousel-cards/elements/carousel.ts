@@ -1,13 +1,19 @@
 import { umdLock } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
-import { ELEMENT_TYPE } from '../component';
+import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+import {
+  SLOTS,
+  BREAKPOINTS,
+  ELEMENTS,
+} from 'components/carousel-cards/globals';
+
 import { CreateButton, ButtonStyles } from './button';
-import { SLOTS, BREAKPOINTS, ELEMENTS } from '../globals';
 
 const CAROUSEL_CONTAINER = 'umd-carousel-cards-carousel-container';
 const CAROUSEL_CONTAINER_LOCK = 'umd-carousel-cards-carousel-container-lock';
 
+// prettier-ignore
 export const CarouselContainerStyles = `
   .${CAROUSEL_CONTAINER} {
     position: relative;

@@ -1,8 +1,13 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
-import { ELEMENT_TYPE } from '../component';
-import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
-import { FORWARD_ARROW_ICON } from '../../../assets/icons';
+import { FORWARD_ARROW_ICON } from 'assets/icons';
+import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  VARIABLES,
+} from 'components/carousel-cards/globals';
 
+// prettier-ignore
 export const ButtonStyles = `
   .${ELEMENTS.CAROUSEL_CARDS_BUTTON} {
     background-color: ${colors.red};

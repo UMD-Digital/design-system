@@ -4,14 +4,14 @@ import {
   umdLock,
 } from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { CreateIntroColumn, IntroContainerStyles } from './intro';
-import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
+import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+import { BREAKPOINTS, SLOTS } from 'components/carousel-cards/globals';
 import {
   EventResizeCarouselElementsWidth,
   EventResizeSetHeight,
-} from '../services/events';
-import { ELEMENT_TYPE } from '../component';
-import { BREAKPOINTS, SLOTS } from '../globals';
+} from 'components/carousel-cards/services/events';
+import { CreateIntroColumn, IntroContainerStyles } from './intro';
+import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
 
@@ -21,6 +21,72 @@ const BACKGROUND_TEXTURE = `<svg aria-hidden="true" width="1599" height="618" vi
 const CAROUSEL_CONTAINER = 'umd-element-carousel-container';
 const CAROUSEL_LOCK = 'umd-element-carousel-lock';
 
+// prettier-ignore
+const containerStyles = `
+  .${CAROUSEL_CONTAINER} {
+    background-color: ${colors.black};
+    padding: ${spacing.md} 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  @container umd-carousel-card (max-width: 300px) {
+    .${CAROUSEL_CONTAINER} {
+      display: none;
+    }
+  }
+  
+  @container umd-carousel-card (min-width: ${BREAKPOINTS.medium}px) {
+    .${CAROUSEL_CONTAINER} {
+      padding: ${spacing['4xl']} 0;
+    }
+  }
+  
+  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+    .${CAROUSEL_CONTAINER} {
+      padding: ${spacing['max']} 0;
+    }
+  }
+  
+  .${CAROUSEL_CONTAINER} > svg {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+  }
+  
+  .${CAROUSEL_CONTAINER} ::slotted(*) {
+    color: ${colors.white};
+  }
+`
+
+// prettier-ignore
+const containerLockStyles = `
+  .${CAROUSEL_LOCK} {
+    position: relative;
+    ${ConvertJSSObjectToStyles({
+      styleObj: umdLock['.umd-lock'],
+    })}
+  }
+  
+  @media (min-width: ${BREAKPOINTS.large}px) {
+    .${CAROUSEL_LOCK} {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  
+  @media umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${CAROUSEL_LOCK} {
+      max-width: inherit;
+      padding: 0;
+    }
+  }
+`;
+
+// prettier-ignore
 export const ComponentStyles = `
   :host {
     display: block;
@@ -29,67 +95,8 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-
-  .${CAROUSEL_CONTAINER} {
-    background-color: ${colors.black};
-    padding: ${spacing.md} 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  @container umd-carousel-card (max-width: 300px) {
-    .${CAROUSEL_CONTAINER} {
-      display: none;
-    }
-  }
-
-  @container umd-carousel-card (min-width: ${BREAKPOINTS.medium}px) {
-    .${CAROUSEL_CONTAINER} {
-      padding: ${spacing['4xl']} 0;
-    }
-  }
-
-  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
-    .${CAROUSEL_CONTAINER} {
-      padding: ${spacing['max']} 0;
-    }
-  }
-
-  .${CAROUSEL_CONTAINER} > svg {
-    width: auto;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-  }
-
-  .${CAROUSEL_CONTAINER} ::slotted(*) {
-    color: ${colors.white} !important;
-  }
-
-  .${CAROUSEL_LOCK} {
-    position: relative;
-    ${ConvertJSSObjectToStyles({
-      styleObj: umdLock['.umd-lock'],
-    })}
-  }
-
-
-  @media (min-width: ${BREAKPOINTS.large}px) {
-    .${CAROUSEL_LOCK} {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-  }
-
-  @media umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${CAROUSEL_LOCK} {
-      max-width: inherit;
-      padding: 0;
-    }
-  }
-
+  ${containerStyles}
+  ${containerLockStyles}
   ${IntroContainerStyles}
   ${CarouselContainerStyles}
 `;

@@ -784,10 +784,12 @@ const orderedListStyleTypes = {
   },
 };
 
-const richTextlists = {
-  ...listStylesBase,
-  ...unOrderedListStyleTypes,
-  ...orderedListStyleTypes,
+const richTextLists = {
+  '.umd-rich-text-lists': {
+    ...listStylesBase,
+    ...unOrderedListStyleTypes,
+    ...orderedListStyleTypes,
+  },
 };
 
-export { richTextlists };
+export { richTextLists };

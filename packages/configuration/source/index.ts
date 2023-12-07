@@ -12,7 +12,14 @@ import { root } from './dependancies/root';
 import { skipContent, screenReaderOnly } from './common/accessibility';
 import { typography } from './common/typography';
 import { animatedLinks } from './common/animated-links';
-import { richText } from './common/rich-text';
+import {
+  richText,
+  richTextBase,
+  richTextCoding,
+  richTextQuotes,
+  richTextTables,
+  richTextLists,
+} from './common/rich-text';
 import { umdFlexGrid } from './layout/umd-flex';
 import { umdGrid } from './layout/umd-grid';
 import { umdLock } from './layout/umd-lock';
@@ -59,6 +66,11 @@ export {
   screenReaderOnly,
   skipContent,
   richText,
+  richTextBase,
+  richTextCoding,
+  richTextQuotes,
+  richTextTables,
+  richTextLists,
   typography,
   animatedLinks,
   umdGrid,

@@ -214,13 +214,17 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
     `[slot="${SLOTS.IMAGE}"]`,
   ) as HTMLImageElement;
 
+  if (hasImage) {
+    container.setAttribute('data-image', 'true');
+    element.setAttribute('data-image', 'true');
+  }
+
   const image = CreateImage({ element });
   const content = CreateContent({ element });
   const cta = CreateCta({ element });
   const ctaIcon = CreateCtaIcon({ element });
 
   textContainer.classList.add(CARD_OVERLAY_TEXT_CONTAINER);
-
   textContainer.appendChild(content);
 
   if (cta) {
@@ -233,8 +237,6 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
   container.appendChild(image);
 
   if (hasImage) {
-    container.setAttribute('data-image', 'true');
-    element.setAttribute('data-image', 'true');
     tintOverlay.classList.add(CARD_OVERLAY_TINT_OVERLAY);
     container.appendChild(tintOverlay);
   }

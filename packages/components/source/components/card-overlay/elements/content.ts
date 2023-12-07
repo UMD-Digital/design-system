@@ -10,6 +10,8 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';
 
+const TEXT_CHARACTER_LIMIT = 140;
+
 const CARD_OVERLAY_EYEBROW = 'umd-overlay-card-eyebrow';
 const CARD_OVERLAY_DATE = 'umd-overlay-card-date';
 
@@ -99,6 +101,15 @@ export const CreateContent = ({ element }: { element: CardType }) => {
   }
 
   if (textSlot) {
+    const hasImage = element.hasAttribute('data-image');
+    const hasLongText = textSlot.innerHTML.length > TEXT_CHARACTER_LIMIT;
+
+    if (hasImage && hasLongText) {
+      let modifiedText = textSlot.innerHTML.substring(0, TEXT_CHARACTER_LIMIT);
+      modifiedText += '...';
+      textSlot.innerHTML = modifiedText;
+    }
+
     textSlot.classList.add(ELEMENTS.CARD_OVERLAY_TEXT);
     container.appendChild(textSlot);
   }

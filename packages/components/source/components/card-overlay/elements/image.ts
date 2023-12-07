@@ -2,6 +2,7 @@ import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../component';
 
+// prettier-ignore
 export const ImageStyles = `
   .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} {
     position: absolute;

@@ -3,47 +3,60 @@ import {
   spacing,
   colors,
   animatedLinks,
-  richText,
 } from '@universityofmaryland/umd-web-configuration';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS, ELEMENTS } from '../globals';
-import { CardType } from '../component';
+import { CardType } from 'components/card-overlay/component';
+import { SLOTS, ELEMENTS, VARIABLES } from 'components/card-overlay/globals';
 
 const TEXT_CHARACTER_LIMIT = 140;
 
 const CARD_OVERLAY_EYEBROW = 'umd-overlay-card-eyebrow';
 const CARD_OVERLAY_DATE = 'umd-overlay-card-date';
 
-export const ContentStyles = `
-  .${ELEMENTS.CONTENT_CONTAINER} {
-    position: relative;
-    z-index: 9;
-  }
+// prettier-ignore
+const eyebrowStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_OVERLAY_EYEBROW}`]: typography['.umd-eyebrow'],
+    },
+  })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_EYEBROW} *`]: typography['.umd-eyebrow'],
     },
   })}
+`;
 
+// prettier-ignore
+const headlineStyles = `
   * + .${ELEMENTS.CARD_OVERLAY_HEADLINE} {
     margin-top: ${spacing.min}
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE}`]: typography['.umd-sans-larger'],
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} *`]: typography['.umd-sans-larger'],
     },
   })}
-
+  
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
         animatedLinks['.umd-slidein-underline-white'],
     },
   })}
+`;
 
+// prettier-ignore
+const textStyles = `
   * + .${ELEMENTS.CARD_OVERLAY_TEXT} {
     margin-top: ${spacing.sm}
   }
@@ -64,20 +77,42 @@ export const ContentStyles = `
     text-decoration: underline;
     color: ${colors.red};
   }
+`;
 
+// prettier-ignore
+const dateStyles = `
   * + .${CARD_OVERLAY_DATE} {
     margin-top: ${spacing.min}
   }
-
+  
   .${CARD_OVERLAY_DATE} * {
     color: ${colors.gray.mediumAA};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${CARD_OVERLAY_DATE}`]: typography['.umd-sans-min'],
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${CARD_OVERLAY_DATE} *`]: typography['.umd-sans-min'],
     },
   })}
+`
+
+// prettier-ignore
+export const ContentStyles = `
+  .${ELEMENTS.CONTENT_CONTAINER} {
+    position: relative;
+    z-index: 9;
+  }
+
+  ${eyebrowStyles}
+  ${headlineStyles}
+  ${textStyles}
+  ${dateStyles}
 `;
 
 export const CreateContent = ({ element }: { element: CardType }) => {
@@ -101,7 +136,7 @@ export const CreateContent = ({ element }: { element: CardType }) => {
   }
 
   if (textSlot) {
-    const hasImage = element.hasAttribute('data-image');
+    const hasImage = element.hasAttribute(VARIABLES.ATTR_IMAGE);
     const hasLongText = textSlot.innerHTML.length > TEXT_CHARACTER_LIMIT;
 
     if (hasImage && hasLongText) {

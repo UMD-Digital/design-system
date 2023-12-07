@@ -1,8 +1,9 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { DOCUMENT_ICON, NEW_WINDOW_ICON, SHORT_ARROW_ICON } from 'assets/icons';
-import { SLOTS, ELEMENTS } from '../globals';
-import { CardType } from '../component';
+import { CardType } from 'components/card-overlay/component';
+import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
+// prettier-ignore
 export const CtaIconStyles = `
   .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} {
     position: absolute;

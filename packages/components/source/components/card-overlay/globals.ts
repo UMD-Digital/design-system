@@ -16,4 +16,10 @@ export const SLOTS = {
   CTAICON: 'cta-icon',
   DATE: 'date',
 };
-export const VARIABLES = {};
+export const VARIABLES = {
+  ATTR_IMAGE: 'data-image',
+  ATTR_CTA_ICON: 'data-cta-icon',
+  ATTR_THEME: `data-theme`,
+  ATTR_THEME_DARK: `data-theme="dark"`,
+  ATTR_THEME_LIGHT: `data-theme="light"`,
+};

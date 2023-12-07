@@ -1,9 +1,10 @@
 import { spacing, umdCta } from '@universityofmaryland/umd-web-configuration';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS, ELEMENTS } from '../globals';
-import { CardType } from '../component';
+import { CardType } from 'components/card-overlay/component';
+import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
+// prettier-ignore
 export const CtaStyles = `
   .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
     margin-top: ${spacing.sm};

@@ -6,7 +6,7 @@ import { CardType } from '../component';
 
 export const CtaStyles = `
   .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
-    margin-top: ${spacing.md};
+    margin-top: ${spacing.sm};
   }
 
   ${ConvertJSSObjectToStyles({

@@ -7,50 +7,43 @@ export const Reset = `
     box-sizing: border-box;
   }
   
-  :host button {
+  button {
     border: none;
   }
 
-  :host a {
+  a {
     text-decoration: inherit;
     color: inherit;
   }
 
-  :host div {
+  div {
     line-height: 1;
   }
 
-  :host strong,
-  :host b {
+  strong, b {
     font-weight: 900;
   }
 
-  :host em, 
-  :host i {
+  em, i {
     font-style: italic;
   }
 
-  :host h1,
-  :host h2,
-  :host h3,
-  :host h4,
-  :host h5,
-  :host h6 {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1em;
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
   }
 
-  :host img {
+  img {
     max-width: 100%;
     display: block;
   }
 
-  :host address {
+  address {
     font-style: normal;
   }
 
-  :host .sr-only {
+  .sr-only {
     clip: rect(0,0,0,0);
     border-width: 0;
     height: 1px;

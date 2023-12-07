@@ -184,7 +184,7 @@ export const ComponentStyles = `
 
   @media (min-width: 768px) {
     .${CARD_OVERLAY_CONTAINER} {
-      min-height: 368px;
+      min-height: 456px;
     }
   }
 

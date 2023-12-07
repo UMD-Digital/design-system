@@ -3,6 +3,12 @@
 {% import '../_ui/card.twig' as Card %}
 
 {% block page %}
+  {% set imageOne = random(RecImageOptions) %}
+  {% set imageTwo = random(RecImageOptions) %}
+  {% set imageThree = random(RecImageOptions) %}
+  {% set imageSquare = random(SquareImageOptions) %}
+  {% set imageWeird = random(WeirdImageOptions) %}
+
   <section>
     <div class="umd-lock">
       <div class="umd-rich-text">
@@ -23,6 +29,34 @@
     <div class="umd-lock">
       <div class="umd-rich-text">
         <p class="umd-sans-large">
+          Default Styling without images and border
+        </p>
+      </div>
+
+      <div class="umd-grid-three mb-md" style="margin-top: 24px">
+        {{
+          Card.FullCardBody({
+            border: true
+          })
+        }}
+        {{
+          Card.FullCardBody({
+            border: true
+          })
+        }}
+        {{
+          Card.FullCardBody({
+            border: true
+          })
+        }}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <div class="umd-rich-text">
+        <p class="umd-sans-large">
           Default Styling with images
         </p>
       </div>
@@ -30,19 +64,19 @@
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
         {{
           Card.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageOne
           })
         }}
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions)
+            image: imageSquare
           })
         }}
 
         {{
           Card.FullCardBody({
-            image: random(WeirdImageOptions)
+            image: imageWeird
           })
         }}
       </div>
@@ -60,7 +94,7 @@
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
         {{
           Card.FullCardBody({
-            image: random(SquareImageOptions),
+            image: imageOne,
             aligned: true,
             border: true
           })
@@ -68,7 +102,7 @@
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageTwo,
             aligned: true,
             border: true
           })
@@ -76,7 +110,7 @@
 
         {{
           Card.FullCardBody({
-            image: random(SquareImageOptions),
+            image: imageThree,
             aligned: true,
             border: true
           })
@@ -96,21 +130,21 @@
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageOne,
             theme: true
           })
         }}
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageThree,
             theme: true
           })
         }}
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageSquare,
             theme: true
           })
         }}
@@ -138,7 +172,7 @@
       <div class="umd-grid mb-md" style="margin-top: 24px">
         {{
           Card.FullCardBody({
-            image: random(SquareImageOptions),
+            image: imageSquare,
             aligned: true,
             border: true
           })
@@ -146,7 +180,7 @@
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageOne,
             aligned: true,
             border: true
           })
@@ -167,7 +201,7 @@
       <div class="umd-grid-three mb-md" style="margin-top: 24px">
         {{
           Card.FullCardBody({
-            image: random(SquareImageOptions),
+            image: imageOne,
             aligned: true,
             border: true
           })
@@ -175,7 +209,7 @@
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageTwo,
             aligned: true,
             border: true
           })
@@ -183,7 +217,7 @@
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageThree,
             aligned: true,
             border: true
           })
@@ -204,7 +238,7 @@
       <div class="umd-grid-four mb-md" style="margin-top: 24px">
         {{
           Card.FullCardBody({
-            image: random(SquareImageOptions),
+            image: imageSquare,
             aligned: true,
             border: true
           })
@@ -212,7 +246,7 @@
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageOne,
             aligned: true,
             border: true
           })
@@ -220,7 +254,7 @@
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageThree,
             aligned: true,
             border: true
           })
@@ -228,7 +262,7 @@
 
         {{
           Card.FullCardBody({
-            image: random(RecImageOptions),
+            image: imageTwo,
             aligned: true,
             border: true
           })
@@ -256,7 +290,7 @@
       <div class="umd-grid-four mb-md" style="margin-top: 24px">
         {{
           Card.FullCardBodyOverwrites({
-            image: random(SquareImageOptions),
+            image: imageSquare,
             aligned: true,
             border: true
           })
@@ -264,7 +298,7 @@
 
         {{
           Card.FullCardBodyOverwrites({
-            image: random(RecImageOptions),
+            image: imageTwo,
             aligned: true,
             border: true
           })
@@ -272,7 +306,7 @@
 
         {{
           Card.FullCardBodyOverwrites({
-            image: random(RecImageOptions),
+            image: imageOne,
             aligned: true,
             border: true
           })
@@ -280,7 +314,7 @@
 
         {{
           Card.FullCardBodyOverwrites({
-            image: random(RecImageOptions),
+            image: imageThree,
             aligned: true,
             border: true
           })

@@ -1,6 +1,13 @@
 {% macro FullCardBody(params) %}
   {% set attrs = '' %}
 
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasDate = params.date ?? true %}
+  {% set hasCtaLink = params.ctaLink ?? true %}
+
+  {% set richTextType = params.text ?? 'full' %}
+
   {% if params.theme %}
     {% set attrs = attrs ~ 'theme="dark"' %}
   {% endif %}
@@ -18,47 +25,65 @@
       <img slot="image" src="{{ params.image }}" alt="Example Alt Text" />
     {% endif %}
 
-    <a href="https://google.com" target="_blank" slot="eyebrow">
-      Optional Short Tagline
-    </a>
-    <div slot="headline">
-      <h3>
-        <a href="https://google.com">
-          Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
-        </a>
-      </h3>
-    </div>
-    <div slot="text">
-      <div>
+    {% if hasEyebrow %}
+      <a href="https://google.com" target="_blank" slot="eyebrow">
+        Optional Short Tagline
+      </a>
+    {% endif %}
+    {% if hasHeadline %}
+      <div slot="headline">
+        <h3>
+          <a href="https://google.com">
+            Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
+          </a>
+        </h3>
+      </div>
+    {% endif %}
+    {% if richTextType == 'full' %}
+      <div slot="text">
+        <div>
+          <p>
+            <strong>Duis aute irure dolor in reprehenderit in voluptate</strong>
+            <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
+              Excepteur sint occaecat cupidatat non proident
+            </a>, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+    {% endif %}
+    {% if richTextType == 'small' %}
+      <div slot="text">
         <p>
-          <strong>Duis aute irure dolor in reprehenderit in voluptate</strong>
-          <i>velit esse cillum dolore eu fugiat nulla pariatur</i>. <a href="https://google.com">
-            Excepteur sint occaecat cupidatat non proident
-          </a>, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <strong>Duis aute irure dolor in reprehenderit</strong>
         </p>
       </div>
-    </div>
-    <div slot="date">
-      <date>
-        September 31, 2023
-      </date>
-    </div>
+    {% endif %}
 
-    <div slot="cta">
-      <a href="https://google.com">
-        <svg aria-hidden="true"
-          width="96"
-          height="96"
-          viewBox="0 0 96 96"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
-        </svg>
-        <span>A link</span>
-      </a>
-    </div>
+    {% if hasDate %}
+      <div slot="date">
+        <date>
+          September 31, 2023
+        </date>
+      </div>
+    {% endif %}
+
+    {% if hasCtaLink %}
+      <div slot="cta">
+        <a href="https://google.com">
+          <svg aria-hidden="true"
+            width="96"
+            height="96"
+            viewBox="0 0 96 96"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M39.9149 15.7825L67.7095 15.7653L58.5274 25.1688H2V87.9014H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9542 38.8741L86.9553 15.7534L87 15.7533V4L86.9559 4.00009L75.1734 4.00008L52.0353 4L39.9149 15.7825ZM49.1033 34.8199L33.3385 50.9647L41.3474 58.9736L56.0127 43.9548V78.2502H11.8205V34.8199H49.1033Z" />
+          </svg>
+          <span>A link</span>
+        </a>
+      </div>
+    {% endif %}
   </umd-element-card>
 {% endmacro %}
 

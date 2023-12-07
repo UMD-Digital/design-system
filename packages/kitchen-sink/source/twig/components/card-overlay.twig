@@ -5,6 +5,12 @@
 {% set var = value %}
 
 {% block page %}
+  {% set imageOne = random(RecImageOptions) %}
+  {% set imageTwo = random(RecImageOptions) %}
+  {% set imageThree = random(RecImageOptions) %}
+  {% set imageSquare = random(SquareImageOptions) %}
+  {% set imageWeird = random(WeirdImageOptions) %}
+
   <section>
     <div class="umd-lock">
       <p class="umd-sans-large">
@@ -43,19 +49,19 @@
       <div class="umd-grid-three my-md">
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageSquare
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageWeird
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageThree
           })
         }}
       </div>
@@ -71,7 +77,7 @@
       <div class="umd-grid-three my-md">
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions),
+            image: imageSquare,
             ctaOption: 'external'
           })
         }}
@@ -95,25 +101,62 @@
   <section>
     <div class="umd-lock">
       <p class="umd-sans-large">
+        Default Styling with truncated content and CTA
+      </p>
+
+      <div class="umd-grid-three my-md">
+        {{
+          CardOverlay.FullCardBody({
+            image: imageSquare,
+            text: 'small',
+            eyebrow: false,
+            date: false
+          })
+        }}
+
+        {{
+          CardOverlay.FullCardBody({
+            ctaOption: 'download',
+            text: 'small',
+            eyebrow: false,
+            date: false
+          })
+        }}
+
+        {{
+          CardOverlay.FullCardBody({
+            theme: 'dark',
+            text: 'small',
+            eyebrow: false,
+            date: false
+          })
+        }}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="umd-sans-large">
         Default Styling with grid configuration animation - three column
       </p>
 
       <div class="umd-grid-three-animated-overlay-card my-md">
         {{
           CardOverlay.FullCardBody({
-            image: random(WeirdImageOptions)
+            image: imageWeird
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(RecImageOptions)
+            image: imageTwo
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageSquare
           })
         }}
       </div>
@@ -129,25 +172,25 @@
       <div class="umd-grid-four-animated-overlay-card my-md">
         {{
           CardOverlay.FullCardBody({
-            image: random(WeirdImageOptions)
+            image: WeirdImageOptions
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(RecImageOptions)
+            image: imageTwo
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageThree
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(RecImageOptions)
+            image: imageSquare
           })
         }}
       </div>
@@ -171,13 +214,13 @@
       <div class="umd-grid my-md">
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageSquare
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(WeirdImageOptions)
+            image: imageWeird
           })
         }}
       </div>
@@ -193,19 +236,19 @@
       <div class="umd-grid-three my-md">
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageSquare
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(WeirdImageOptions)
+            image: imageWeird
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageTwo
           })
         }}
       </div>
@@ -221,25 +264,25 @@
       <div class="umd-grid-four my-md">
         {{
           CardOverlay.FullCardBody({
-            image: random(WeirdImageOptions)
+            image: imageWeird
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageSquare
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(WeirdImageOptions)
+            image: imageOne
           })
         }}
 
         {{
           CardOverlay.FullCardBody({
-            image: random(SquareImageOptions)
+            image: imageThree
           })
         }}
       </div>
@@ -263,7 +306,7 @@
       <div class="umd-grid-three my-md">
         {{
           CardOverlay.FullCardBodyOverwrites({
-            image: random(WeirdImageOptions)
+            image: imageWeird
           })
         }}
 
@@ -274,34 +317,6 @@
         }}
 
         {{ CardOverlay.FullCardBodyOverwrites({}) }}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Layout Three Column. with CTA aligned to the bottom
-      </p>
-
-      <div class="umd-grid-three my-md">
-        {{
-          CardOverlay.FullCardBodyNoTextSlot({
-            image: random(WeirdImageOptions)
-          })
-        }}
-
-        {{
-          CardOverlay.FullCardBody({
-            ctaOption: 'download'
-          })
-        }}
-
-        {{
-          CardOverlay.FullCardBodyNoTextSlot({
-            theme: 'dark'
-          })
-        }}
       </div>
     </div>
   </section>

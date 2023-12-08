@@ -22,7 +22,7 @@ export const ComponentStyles = `
 
   ${Reset}
 
-   a {
+  a {
     font-family: ${fontFamily.sans};
     font-size: ${fontSize.sm};
     font-weight: ${fontWeight.extraBold};

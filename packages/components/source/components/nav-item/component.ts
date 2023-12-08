@@ -13,10 +13,7 @@ import {
   EventSize,
   EventButtonClick,
 } from './services/events';
-import {
-  DropdownPositionPerViewPort,
-  OnLoadDropdownSpans,
-} from './services/helper';
+import { OnLoadDropdownSpans } from './services/helper';
 import { SLOTS, VARIABLES } from './globals';
 
 export const ELEMENT_NAME = 'umd-element-nav-item';

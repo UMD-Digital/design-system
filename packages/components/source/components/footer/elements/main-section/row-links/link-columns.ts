@@ -2,9 +2,9 @@ import {
   animatedLinks,
   colors,
   spacing,
+  fontWeight,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
-import { fontWeight } from '@universityofmaryland/umd-web-configuration/dist/tokens/fonts';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
   BREAKPOINTS,

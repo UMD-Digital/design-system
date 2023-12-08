@@ -1,7 +1,12 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import {
+  animatedLinks,
+  colors,
+  spacing,
+} from '@universityofmaryland/umd-web-configuration';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { CheckForAnimationLinkSpan } from 'helpers/ui';
 import { ElementType } from 'components/nav-item/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
-import { WrapWithSpan } from '../services/helper';
 
 const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
 const TWO_COLUMN_CONTAINER = 'two-column-container';
@@ -33,39 +38,31 @@ const linkStyles = `
     font-size: 14px;
     line-height: 1.5em;
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${DROPDOWN_LIST_CONTAINER} a`]:
+        animatedLinks['.umd-slidein-underline-red'],
+    },
+  })}
+
+  .${DROPDOWN_LIST_CONTAINER} a:hover,
+  .${DROPDOWN_LIST_CONTAINER} a:focus {
+    color: ${colors.red};
+  }
   
   .${DROPDOWN_LIST_CONTAINER} a + a {
     margin-top: ${spacing.md};
     display: block;
   }
   
-  .${DROPDOWN_LIST_CONTAINER} a:hover,
-  .${DROPDOWN_LIST_CONTAINER} a:focus {
-    color: ${colors.red};
-  }
-  
-  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:hover,
-  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:focus {
-    border-bottom: none;
-  }
-  
-  .${DROPDOWN_LIST_CONTAINER} a:hover span,
-  .${DROPDOWN_LIST_CONTAINER} a:focus span {
-    background-size: 100% 2px;
-  }
-  
-  .${DROPDOWN_LIST_CONTAINER} a span {
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 0 2px;
-    position: relative;
-    display: inline;
-    transition: background 0.5s;
-    background-image: linear-gradient(${colors.red}, ${colors.red});
-  }
-  
   .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}] span {
     border-bottom: 2px solid ${colors.gold};
+  }
+
+  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:hover span,
+  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:focus span {
+    border-bottom: none;
   }
 `
 
@@ -99,12 +96,14 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
   const column2 = document.createElement('div');
   const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
 
-  firstColumnLinks.forEach((link) =>
-    column1.appendChild(WrapWithSpan({ anyElement: link })),
-  );
-  links.forEach((link) =>
-    column2.appendChild(WrapWithSpan({ anyElement: link })),
-  );
+  firstColumnLinks.forEach((link) => {
+    CheckForAnimationLinkSpan({ element: link });
+    column1.appendChild(link);
+  });
+  links.forEach((link) => {
+    CheckForAnimationLinkSpan({ element: link });
+    column2.appendChild(link);
+  });
 
   container.classList.add(TWO_COLUMN_CONTAINER);
 
@@ -116,9 +115,10 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
 
 const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   const container = document.createElement('div');
-  links.forEach((link) =>
-    container.appendChild(WrapWithSpan({ anyElement: link })),
-  );
+  links.forEach((link) => {
+    CheckForAnimationLinkSpan({ element: link });
+    container.appendChild(link);
+  });
 
   return container;
 };

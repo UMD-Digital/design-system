@@ -1,15 +1,8 @@
-import { ElementType } from '../component';
-import { SLOTS, ELEMENTS } from '../globals';
+import { CheckForAnimationLinkSpan } from 'helpers/ui';
+import { ElementType } from 'components/nav-item/component';
+import { SLOTS, ELEMENTS } from 'components/nav-item/globals';
 
 const BOUNDS_SHIFT = 140;
-
-export const WrapWithSpan = ({ anyElement }: { anyElement: any }) => {
-  const span = document.createElement('span');
-  span.innerHTML = anyElement.innerHTML;
-  anyElement.innerHTML = '';
-  anyElement.appendChild(span);
-  return anyElement;
-};
 
 export const OnLoadDropdownSpans = ({ element }: { element: ElementType }) => {
   const dropdownSlot = element.querySelector(
@@ -26,7 +19,8 @@ export const OnLoadDropdownSpans = ({ element }: { element: ElementType }) => {
     const hasSpan = link.querySelector('span');
 
     if (!hasSpan) {
-      link.appendChild(WrapWithSpan({ anyElement: link }));
+      CheckForAnimationLinkSpan({ element: link });
+      link.appendChild(link);
     }
   });
 };

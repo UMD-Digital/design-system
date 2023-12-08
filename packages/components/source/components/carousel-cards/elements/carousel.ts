@@ -55,12 +55,14 @@ export const CreateCarouselColumn = ({
   const wrapper = document.createElement('div');
   const slot = MakeSlot({ type: SLOTS.CARDS });
   const fowardButton = CreateButton({ element });
+  const backwardsButton = CreateButton({ element, isRight: false });
 
   container.classList.add(CAROUSEL_CONTAINER);
   wrapper.classList.add(CAROUSEL_CONTAINER_LOCK);
   wrapper.classList.add(ELEMENTS.CAROUSEL_CONTAINER_WRAPPER);
 
   wrapper.appendChild(slot);
+  container.appendChild(backwardsButton);
   container.appendChild(fowardButton);
   container.appendChild(wrapper);
 

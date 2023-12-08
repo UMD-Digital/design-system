@@ -1,12 +1,12 @@
 import { spacing } from '@universityofmaryland/umd-web-configuration';
+import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+import { SLOTS, VARIABLES, ELEMENTS } from 'components/carousel-cards/globals';
 import {
   GetElementSize,
   SetElementSize,
   SetCarouselSize,
   IsTabletView,
 } from './helpers';
-import { ELEMENT_TYPE } from '../component';
-import { SLOTS, VARIABLES, ELEMENTS } from '../globals';
 
 const spaceBetween = parseInt(spacing.md.replace('px', ''));
 
@@ -215,9 +215,13 @@ export const EventResizeButtonLogic = ({
   element: ELEMENT_TYPE;
 }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
-  const button = shadowRoot.querySelector(
-    `.${ELEMENTS.CAROUSEL_CARDS_BUTTON}`,
+  const forwardButton = shadowRoot.querySelector(
+    `.${ELEMENTS.CAROUSEL_CARDS_BUTTON_FORWARDS}`,
   ) as HTMLButtonElement;
+  const backwardButton = shadowRoot.querySelector(
+    `.${ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS}`,
+  ) as HTMLButtonElement;
+  const buttons = [forwardButton, backwardButton];
   const cardsSlot = element.querySelector(
     `[slot="${SLOTS.CARDS}"]`,
   ) as HTMLSlotElement;
@@ -228,18 +232,18 @@ export const EventResizeButtonLogic = ({
   const isButtonShownTablet = count > VARIABLES.TABLET_COUNT;
 
   if (isShowTwo && isButtonShownTablet) {
-    button.style.display = 'block';
+    buttons.forEach((button) => (button.style.display = 'block'));
   }
 
   if (isShowTwo && !isButtonShownTablet) {
-    button.style.display = 'none';
+    buttons.forEach((button) => (button.style.display = 'none'));
   }
 
   if (!isShowTwo && isButtonShownMobile) {
-    button.style.display = 'block';
+    buttons.forEach((button) => (button.style.display = 'block'));
   }
 
   if (!isShowTwo && !isButtonShownMobile) {
-    button.style.display = 'none';
+    buttons.forEach((button) => (button.style.display = 'none'));
   }
 };

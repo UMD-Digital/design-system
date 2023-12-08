@@ -7,9 +7,41 @@ import {
   VARIABLES,
 } from 'components/carousel-cards/globals';
 
+const CAROUSEL_CARDS_BUTTON = `umd-carousel-cards-button`;
+
+const backwardsButtonStyles = `
+  .${ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS} {
+    left: 0;
+    right: inherit;
+  }
+
+  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+    .${ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS} {
+      left: -52px;
+    }
+  }
+
+  .${ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS} svg {
+    transform: rotate(180deg);
+  }
+`;
+
+const forwardButtonStyles = `
+  .${ELEMENTS.CAROUSEL_CARDS_BUTTON_FORWARDS} {
+    right: 0;
+  }
+
+  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+    .${ELEMENTS.CAROUSEL_CARDS_BUTTON_FORWARDS} {
+      right: -52px;
+    }
+  }
+
+`;
+
 // prettier-ignore
 export const ButtonStyles = `
-  .${ELEMENTS.CAROUSEL_CARDS_BUTTON} {
+  .${CAROUSEL_CARDS_BUTTON} {
     background-color: ${colors.red};
     padding: ${spacing.xs};
     position: absolute;
@@ -24,31 +56,49 @@ export const ButtonStyles = `
     display: none;
   }
 
-  .${ELEMENTS.CAROUSEL_CARDS_BUTTON}:disabled {
-    opacity: 0.5;
-  }
-
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
-    .${ELEMENTS.CAROUSEL_CARDS_BUTTON} {
+    .${CAROUSEL_CARDS_BUTTON} {
       right: -52px;
     }
   }
 
-  .${ELEMENTS.CAROUSEL_CARDS_BUTTON} svg {
+  .${CAROUSEL_CARDS_BUTTON}:disabled {
+    opacity: 0.5;
+  }
+
+  .${CAROUSEL_CARDS_BUTTON} svg {
     width: 24px;
     height: 24px;
     fill: ${colors.white};
   }
+
+  ${backwardsButtonStyles}
+  ${forwardButtonStyles}
 `;
 
-export const CreateButton = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateButton = ({
+  element,
+  isRight = true,
+}: {
+  element: ELEMENT_TYPE;
+  isRight?: boolean;
+}) => {
   const button = document.createElement('button');
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
-  button.classList.add(ELEMENTS.CAROUSEL_CARDS_BUTTON);
+  button.classList.add(CAROUSEL_CARDS_BUTTON);
   button.innerHTML = FORWARD_ARROW_ICON;
+
+  if (isRight) button.classList.add(ELEMENTS.CAROUSEL_CARDS_BUTTON_FORWARDS);
+
+  if (!isRight) {
+    button.classList.add(ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS);
+    button.setAttribute('aria-label', 'Previous');
+  }
+
   button.addEventListener('click', () => {
-    element.eventMoveForward();
+    if (isRight) element.eventMoveForward();
+    if (!isRight) element.eventMoveBackwards();
     button.disabled = true;
 
     setTimeout(() => {

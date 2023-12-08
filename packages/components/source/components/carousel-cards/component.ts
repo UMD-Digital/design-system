@@ -57,6 +57,10 @@ export class UMDCarouselCardsElement extends HTMLElement {
   eventMoveForward() {
     EventScrollCarousel({ element: this });
   }
+
+  eventMoveBackwards() {
+    EventScrollCarousel({ element: this, isDirectionRight: false });
+  }
 }
 
 export const Load = () => {

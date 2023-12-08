@@ -1,4 +1,7 @@
-import { richTextBase } from '@universityofmaryland/umd-web-configuration';
+import {
+  colors,
+  richTextBase,
+} from '@universityofmaryland/umd-web-configuration';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
@@ -10,6 +13,7 @@ const ALERT_BODY = 'umd-alert-body';
 export const bodyStyles = `
   .${ALERT_BODY} * {
     font-weight: 500;
+    color: ${colors.gray.dark}
   }
 
   ${ConvertJSSObjectToStyles({

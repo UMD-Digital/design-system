@@ -1,5 +1,6 @@
 import {
   animatedLinks,
+  colors,
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
@@ -14,6 +15,11 @@ const ALERT_HEADLINE = 'umd-alert-headline';
 export const headlineStyles = `
   .${ALERT_HEADLINE} {
     margin-bottom: ${spacing.sm};
+    color: ${colors.black}
+  }
+
+  .${ALERT_HEADLINE} * {
+    color: currentColor;
   }
 
   ${ConvertJSSObjectToStyles({

@@ -13,4 +13,5 @@ export const VARIABLES = {
   ATTRIBUTE_SHOW: 'show',
   ATTRIBUTE_DROPDOWN: 'data-dropdown',
   ATTRIBUTE_SHOWING: 'data-showing',
+  ATTRIBUTE_SELECTED: 'data-selected',
 };

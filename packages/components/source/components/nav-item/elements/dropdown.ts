@@ -1,12 +1,75 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { ElementType } from 'components/nav-item/component';
+import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { WrapWithSpan } from '../services/helper';
-import { ElementType } from '../component';
-import { SLOTS, ELEMENTS } from '../globals';
 
 const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
 const TWO_COLUMN_CONTAINER = 'two-column-container';
 const MAX_COLUMN_ITEMS = 8;
 
+// prettier-ignore
+const columnStyles = `
+  .${TWO_COLUMN_CONTAINER} {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .${TWO_COLUMN_CONTAINER} > * {
+    min-width: 232px;
+  }
+  
+  .${TWO_COLUMN_CONTAINER} > *:last-child {
+    margin-left: 40px;
+  }
+`
+
+// prettier-ignore
+const linkStyles = `
+  .${DROPDOWN_LIST_CONTAINER} a {
+    display: block;
+    min-width: 120px;
+    max-width: 230px;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.5em;
+  }
+  
+  .${DROPDOWN_LIST_CONTAINER} a + a {
+    margin-top: ${spacing.md};
+    display: block;
+  }
+  
+  .${DROPDOWN_LIST_CONTAINER} a:hover,
+  .${DROPDOWN_LIST_CONTAINER} a:focus {
+    color: ${colors.red};
+  }
+  
+  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:hover,
+  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:focus {
+    border-bottom: none;
+  }
+  
+  .${DROPDOWN_LIST_CONTAINER} a:hover span,
+  .${DROPDOWN_LIST_CONTAINER} a:focus span {
+    background-size: 100% 2px;
+  }
+  
+  .${DROPDOWN_LIST_CONTAINER} a span {
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 2px;
+    position: relative;
+    display: inline;
+    transition: background 0.5s;
+    background-image: linear-gradient(${colors.red}, ${colors.red});
+  }
+  
+  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}] span {
+    border-bottom: 2px solid ${colors.gold};
+  }
+`
+
+// prettier-ignore
 export const DropdownStyles = `
   .${ELEMENTS.DROPDOWN_CONTAINER} {
     position: absolute;
@@ -26,60 +89,8 @@ export const DropdownStyles = `
     box-shadow: -1px 9px 32px -10px rgba(0,0,0,0.19);
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a {
-    display: block;
-    min-width: 120px;
-    max-width: 230px;
-    font-weight: 800;
-    font-size: 14px;
-  }
-
-  .${DROPDOWN_LIST_CONTAINER} a + a {
-    margin-top: ${spacing.md};
-    display: block;
-  }
-
-  .${DROPDOWN_LIST_CONTAINER} a:hover,
-  .${DROPDOWN_LIST_CONTAINER} a:focus {
-    color: ${colors.red};
-  }
-
-  .${DROPDOWN_LIST_CONTAINER} a[data-selected]:hover,
-  .${DROPDOWN_LIST_CONTAINER} a[data-selected]:focus {
-    border-bottom: none;
-  }
-
-  .${DROPDOWN_LIST_CONTAINER} a:hover span,
-  .${DROPDOWN_LIST_CONTAINER} a:focus span {
-    background-size: 100% 2px;
-  }
-
-  .${DROPDOWN_LIST_CONTAINER} a span {
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 0 2px;
-    position: relative;
-    display: inline;
-    transition: background 0.5s;
-    background-image: linear-gradient(${colors.red}, ${colors.red});
-  }
-
-  .${DROPDOWN_LIST_CONTAINER} a[data-selected] span {
-    border-bottom: 2px solid ${colors.gold};
-  }
-
-  .${TWO_COLUMN_CONTAINER} {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .${TWO_COLUMN_CONTAINER} > * {
-    min-width: 232px;
-  }
-
-  .${TWO_COLUMN_CONTAINER} > *:last-child {
-    margin-left: 40px;
-  }
+  ${columnStyles}
+  ${linkStyles}
 `;
 
 const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {

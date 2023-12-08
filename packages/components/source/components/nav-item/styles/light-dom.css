@@ -1,39 +1,3 @@
-umd-element-nav-item {
-  display: block;
-
-  & a {
-    font-size: theme(fontSize.sm);
-    font-weight: theme(fontWeight.extrabold);
-    color: theme(colors.black);
-    text-decoration: none;
-  }
-
-  & [slot='primary-link'] {
-    font-size: theme(fontSize.base);
-  }
-
-  & [slot='primary-link'][data-selected]:before {
-    content: '';
-    position: absolute;
-    bottom: 1px;
-    height: 3px;
-    width: calc(100% - 18px);
-    left: -3px;
-    background-color: theme(colors.gold);
-    display: block;
-    z-index: -1;
-  }
-
-  & [slot='primary-link'] {
-    transition: color 0.2s ease-in-out;
-
-    &:hover,
-    &:focus {
-      color: theme(colors.red);
-    }
-  }
-}
-
 umd-element-nav-item + umd-element-nav-item {
   margin-left: theme(spacing.md);
 

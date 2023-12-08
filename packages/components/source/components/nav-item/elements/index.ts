@@ -1,11 +1,15 @@
 import {
   colors,
   fontFamily,
+  fontSize,
+  fontWeight,
 } from '@universityofmaryland/umd-web-configuration';
-import { ElementType } from '../component';
+import { Reset } from 'helpers/styles';
+import { ElementType } from 'components/nav-item/component';
+import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
-import { ELEMENTS, VARIABLES } from '../globals';
 
+// prettier-ignore
 export const ComponentStyles = `
   :host {
     display: block;
@@ -16,32 +20,14 @@ export const ComponentStyles = `
     box-sizing: border-box;
   }
 
-  :host button {
-    border: none;
-    background: none;
-    padding: 0;
-    cursor: pointer;
-  }
+  ${Reset}
 
-  :host a,
-  ::slotted(a) {
+   a {
     font-family: ${fontFamily.sans};
-    font-size: 14px;
-    font-weight: 800;
+    font-size: ${fontSize.sm};
+    font-weight: ${fontWeight.extraBold};
     color: ${colors.black};
     text-decoration: none;
-  }
-
-  :host .sr-only {
-    clip: rect(0,0,0,0);
-    border-width: 0;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
   }
 
   .${ELEMENTS.CONTAINER} {
@@ -52,13 +38,11 @@ export const ComponentStyles = `
     display: block;
   }
 
-  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] 
-  .${ELEMENTS.DROPDOWN_CONTAINER} {
+  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.DROPDOWN_CONTAINER} {
     display: block;
   }
 
-  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] 
-  .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
+  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
     transform: rotate(180deg) translateY(5px);
   }
 

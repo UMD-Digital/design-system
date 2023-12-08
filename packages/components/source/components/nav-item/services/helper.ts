@@ -1,6 +1,8 @@
 import { ElementType } from '../component';
 import { SLOTS, ELEMENTS } from '../globals';
 
+const BOUNDS_SHIFT = 140;
+
 export const WrapWithSpan = ({ anyElement }: { anyElement: any }) => {
   const span = document.createElement('span');
   span.innerHTML = anyElement.innerHTML;
@@ -43,12 +45,14 @@ export const DropdownPositionPerViewPort = ({
 
   if (!dropdownContainer) return;
 
-  if (elementBounds.left + width < 100) {
+  const size = dropdownContainer.offsetWidth + BOUNDS_SHIFT;
+
+  if (elementBounds.left + width < size) {
     dropdownContainer.style.left = '0';
     dropdownContainer.style.transform = 'translateX(0)';
   }
 
-  if (window.innerWidth - (elementBounds.right + width) < 100) {
+  if (window.innerWidth - (elementBounds.right + width) < BOUNDS_SHIFT) {
     dropdownContainer.style.right = '0';
     dropdownContainer.style.left = 'inherit';
     dropdownContainer.style.transform = 'translateX(0)';

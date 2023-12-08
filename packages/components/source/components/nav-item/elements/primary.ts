@@ -1,12 +1,13 @@
-import { colors } from '@universityofmaryland/umd-web-configuration';
-import { MakeSlot } from 'helpers/ui';
+import { colors, fontSize } from '@universityofmaryland/umd-web-configuration';
+import { SlotDefaultStyling } from 'helpers/ui';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
-import { ElementType } from '../component';
+import { ElementType } from 'components/nav-item/component';
+import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreateDropdown, DropdownStyles } from './dropdown';
-import { SLOTS, ELEMENTS } from '../globals';
 
 const PRIMARY_LINK_CONTAINER = 'primary-link-container';
 
+// prettier-ignore
 export const PrimaryStyles = `
   .${PRIMARY_LINK_CONTAINER} {
     position: relative;
@@ -17,14 +18,33 @@ export const PrimaryStyles = `
     position: relative;
   }
 
-  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} ::slotted(a) {
-    font-size: 16px;
+  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a {
+    color: ${colors.black};
+    font-size: ${fontSize.base};
     white-space: nowrap;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:hover, 
+  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:focus {
+    color: ${colors.red};
+   }
+
+  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}]:before {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    height: 3px;
+    width: calc(100% - 18px);
+    left: -3px;
+    background-color: ${colors.gold};
+    display: block;
+    z-index: -1;
   }
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
     align-self: flex-start;
-    margin-top: 5px;
+    margin-top: 2px;
     margin-left: 8px;
     transition: transform .5s;
   }
@@ -58,14 +78,17 @@ const CreateButton = ({ element }: { element: ElementType }) => {
 
 export const CreatePrimaryLink = ({ element }: { element: ElementType }) => {
   const container = document.createElement('div');
-  const wrapper = document.createElement('span');
-  const titleSlot = MakeSlot({ type: SLOTS.PRIMARY_LINK });
+  const wrapper = document.createElement('div');
+  const titleSlot = SlotDefaultStyling({
+    element,
+    slotRef: SLOTS.PRIMARY_LINK,
+  });
   const dropdown = CreateDropdown({ element });
 
   container.classList.add(PRIMARY_LINK_CONTAINER);
   wrapper.classList.add(ELEMENTS.PRIMARLY_LINK_WRAPPER);
 
-  wrapper.appendChild(titleSlot);
+  if (titleSlot) wrapper.appendChild(titleSlot);
 
   if (element._hasDropdown) {
     const button = CreateButton({ element });

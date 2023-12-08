@@ -72,19 +72,10 @@ export class UMDNavItemElement extends HTMLElement {
       OnLoadDropdownSpans({ element });
     }, 10);
 
-    setTimeout(() => {
-      DropdownPositionPerViewPort({ element });
-    }, 500);
-
-    setTimeout(() => {
-      DropdownPositionPerViewPort({ element });
-    }, 1000);
-
     // Events
 
     const resize = () => {
       EventSize({ element });
-      DropdownPositionPerViewPort({ element });
     };
 
     window.addEventListener('resize', Debounce(resize, 20));

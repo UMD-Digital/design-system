@@ -9,6 +9,8 @@ export const Reset = `
   
   button {
     border: none;
+    background: none;
+    cursor: pointer;
   }
 
   a {

@@ -1,6 +1,7 @@
 import { EventAccessibilityFocus } from 'helpers/accessibility';
-import { ElementType } from '../component';
-import { ELEMENTS, VARIABLES, SLOTS } from '../globals';
+import { ElementType } from 'components/nav-item/component';
+import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
+import { DropdownPositionPerViewPort } from './helper';
 
 export const ShowDropdown = ({ element }: { element: ElementType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
@@ -11,6 +12,7 @@ export const ShowDropdown = ({ element }: { element: ElementType }) => {
   if (!dropdownContainer) return;
 
   dropdownContainer.setAttribute(VARIABLES.ATTRIBUTE_SHOWING, '');
+  DropdownPositionPerViewPort({ element });
 };
 
 export const HideDropdown = ({ element }: { element: ElementType }) => {
@@ -55,13 +57,11 @@ export const EventSize = ({ element }: { element: ElementType }) => {
   ) as HTMLDivElement;
 
   if (!wrapperElement) return;
-  let width = wrapperElement.clientWidth;
+  let width = wrapperElement.offsetWidth;
 
   if (width > 230) {
     width = 230;
-    const slottedLink = element.querySelector(
-      `[slot="${SLOTS.PRIMARY_LINK}"]`,
-    ) as HTMLAnchorElement;
+    const slottedLink = wrapperElement.querySelector(`a`) as HTMLAnchorElement;
     slottedLink.style.whiteSpace = `initial`;
   }
 

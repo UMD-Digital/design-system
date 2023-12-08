@@ -3,7 +3,7 @@ import plugin from 'tailwindcss/plugin';
 // Tokens
 
 import { colors } from './tokens/colors';
-import { fontFamily, fontSize } from './tokens/fonts';
+import { fontFamily, fontSize, fontWeight } from './tokens/fonts';
 import { screens, spacing } from './tokens/layout';
 import { root } from './dependancies/root';
 
@@ -61,6 +61,7 @@ export {
   colors,
   fontFamily,
   fontSize,
+  fontWeight,
   screens,
   spacing,
   screenReaderOnly,

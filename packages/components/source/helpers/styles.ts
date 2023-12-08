@@ -1,3 +1,4 @@
+import { colors } from '@universityofmaryland/umd-web-configuration';
 import postcss, { Declaration, Postcss } from 'postcss';
 
 export const Reset = `
@@ -6,11 +7,20 @@ export const Reset = `
     padding: 0;
     box-sizing: border-box;
   }
-  
-  button {
-    border: none;
-    background: none;
-    cursor: pointer;
+
+  div {
+    line-height: 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: ${colors.black};
+  }
+
+  p {
+    color: ${colors.gray.dark};
   }
 
   a {
@@ -18,8 +28,12 @@ export const Reset = `
     color: inherit;
   }
 
-  div {
-    line-height: 1;
+  address {
+    font-style: normal;
+  }
+
+  date {
+    color: ${colors.gray.medium};
   }
 
   strong, b {
@@ -30,19 +44,15 @@ export const Reset = `
     font-style: italic;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
   }
 
   img {
     max-width: 100%;
     display: block;
-  }
-
-  address {
-    font-style: normal;
   }
 
   .sr-only {

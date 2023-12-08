@@ -19,6 +19,12 @@ export const CarouselContainerStyles = `
     position: relative;
   }
 
+  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${CAROUSEL_CONTAINER} {
+      padding-bottom: 60px;
+    }
+  }
+
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
     .${CAROUSEL_CONTAINER} {
       width: 60%;

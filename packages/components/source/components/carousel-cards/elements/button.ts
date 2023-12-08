@@ -10,9 +10,10 @@ import {
 const CAROUSEL_CARDS_BUTTON = `umd-carousel-cards-button`;
 
 const backwardsButtonStyles = `
-  .${ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS} {
-    left: 0;
-    right: inherit;
+  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS} {
+      left: ${spacing.md};
+    }
   }
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
@@ -27,8 +28,10 @@ const backwardsButtonStyles = `
 `;
 
 const forwardButtonStyles = `
-  .${ELEMENTS.CAROUSEL_CARDS_BUTTON_FORWARDS} {
-    right: 0;
+  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${ELEMENTS.CAROUSEL_CARDS_BUTTON_FORWARDS} {
+      left: 73px;
+    }
   }
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
@@ -36,7 +39,6 @@ const forwardButtonStyles = `
       right: -52px;
     }
   }
-
 `;
 
 // prettier-ignore
@@ -45,20 +47,24 @@ export const ButtonStyles = `
     background-color: ${colors.red};
     padding: ${spacing.xs};
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    right: 0;
     cursor: pointer;
     display: none;
   }
 
+  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+    .${CAROUSEL_CARDS_BUTTON} {
+      bottom: 0;
+    }
+  }
+
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
     .${CAROUSEL_CARDS_BUTTON} {
-      right: -52px;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 

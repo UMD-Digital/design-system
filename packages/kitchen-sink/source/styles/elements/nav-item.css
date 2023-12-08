@@ -2,6 +2,14 @@ umd-element-nav-item:not(:defined) {
   display: none;
 }
 
+umd-element-nav-item + umd-element-nav-item {
+  margin-left: theme(spacing.md);
+
+  @media (min-width: theme(screens.desktop.min)) {
+    margin-left: theme(spacing.lg);
+  }
+}
+
 umd-element-nav-item {
   @media (max-width: theme(screens.tablet.max)) {
     display: none !important;

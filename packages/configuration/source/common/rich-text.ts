@@ -8,6 +8,8 @@ import { animatedLinks } from '../common/animated-links';
 
 const richTextBase = {
   '.umd-rich-text-base': {
+    lineHeight: '1.5em',
+
     '& > *': {
       marginTop: spacing.md,
 

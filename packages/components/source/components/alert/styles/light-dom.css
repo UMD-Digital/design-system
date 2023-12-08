@@ -1,5 +1,0 @@
-umd-element-alert {
-  & [slot='title'] {
-    @apply umd-sans-large;
-  }
-}

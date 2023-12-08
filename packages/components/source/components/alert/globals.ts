@@ -3,6 +3,12 @@ export const BREAKPOINTS = {
   medium: 700,
 };
 
+export const SLOTS = {
+  HEADLINE: 'headline',
+  BODY: 'body',
+  CTA: 'cta',
+};
+
 export const ELEMENTS = {
   ICON_CLASS: 'umd-element-alert-icon',
 };

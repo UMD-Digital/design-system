@@ -1,15 +1,17 @@
 import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
-import { MakeSlot } from 'helpers/ui';
 import { CLOSE_BUTTON_ICON, NOTIFICATION_ICON } from 'assets/icons';
-import { SetLocalString } from '../services/helper';
+import { Reset } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS } from '../globals';
+import { AlertType } from '../component';
+import { SetLocalString } from '../services/helper';
 import { EventClose } from '../services/events';
+import { CreateHeadline, headlineStyles } from './headline';
+import { CreateBody, bodyStyles } from './body';
+import { CreateCta, ctaStyles } from './cta';
 
 export const ELEMENT_NAME = 'umd-element-alert';
 
 const CONTAINER_CLASS = 'umd-element-alert-container';
-const TITLE_CLASS = 'umd-element-alert-title-wrapper';
-const BODY_CLASS = 'umd-element-alert-body-wrapper';
 const CLOSE_BUTTON_CLASS = 'umd-element-alert-close-button';
 
 const AlertStyles = `
@@ -43,14 +45,14 @@ const EmergencyStyles = `
 `;
 
 const ButtonStyles = `
-  :host .${CLOSE_BUTTON_CLASS} {
+  .${CLOSE_BUTTON_CLASS} {
     position: absolute !important;
     top: ${spacing.lg};
     right: ${spacing.lg};
   }
   
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
-    :host .${CLOSE_BUTTON_CLASS} {
+    .${CLOSE_BUTTON_CLASS} {
       top: ${spacing.sm};
       right: ${spacing.sm};
     }
@@ -74,28 +76,14 @@ const IconStyles = `
   }
 `;
 
-const BodyStyles = `
-  .${BODY_CLASS} {
-    font-weight: 500;
-  }
-`;
-
 export const ComponentStyles = `
   :host {
     display: block;
     container: umd-alert / inline-size; 
   }
 
-  :host * {
-    box-sizing: border-box;
-  }
-  
-  :host button {
-    background-color: transparent !important;
-    border: none !important;
-    cursor: pointer;
-  }
-  
+  ${Reset}
+
   :host .${CONTAINER_CLASS} {
     display: flex;
     position: relative !important;
@@ -105,41 +93,43 @@ export const ComponentStyles = `
   }
   
   @container umd-alert (max-width: 260px) {
-    :host .${CONTAINER_CLASS} {
+  .${CONTAINER_CLASS} {
       display: none
     }
   }
   
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
-    :host .${CONTAINER_CLASS} {
+  .${CONTAINER_CLASS} {
       padding-right: ${spacing.lg};
     }
   }
 
-  :host slot[name="title"] {
+  slot[name="title"] {
     margin-bottom: ${spacing.sm};
     display: block;
   }
 
   ${IconStyles}
   ${ButtonStyles}
-  ${BodyStyles}
+  ${headlineStyles}
+  ${bodyStyles}
+  ${ctaStyles}
   ${AlertStyles}
   ${NotificationStyles}
   ${EmergencyStyles}
 `;
 
-export const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
+const CreateIcon = () => {
   const iconWrapper = document.createElement('div');
-  const titleWrapper = document.createElement('div');
-  const bodyWrapper = document.createElement('div');
-  const closeButton = document.createElement('button');
-  const titleSlot = MakeSlot({ type: 'title' });
-  const bodySlot = MakeSlot({ type: 'body' });
 
-  container.classList.add(CONTAINER_CLASS);
+  iconWrapper.classList.add(ELEMENTS.ICON_CLASS);
+  iconWrapper.innerHTML = NOTIFICATION_ICON;
+
+  return iconWrapper;
+};
+
+const CreateCloseButton = ({ element }: { element: AlertType }) => {
+  const closeButton = document.createElement('button');
 
   closeButton.classList.add(CLOSE_BUTTON_CLASS);
   closeButton.innerHTML = CLOSE_BUTTON_ICON;
@@ -149,21 +139,25 @@ export const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
     SetLocalString();
   });
 
-  iconWrapper.classList.add(ELEMENTS.ICON_CLASS);
-  iconWrapper.innerHTML = NOTIFICATION_ICON;
+  return closeButton;
+};
 
-  titleWrapper.classList.add(TITLE_CLASS);
-  titleWrapper.appendChild(titleSlot);
+export const CreateShadowDom = ({ element }: { element: AlertType }) => {
+  const container = document.createElement('div');
+  const wrapper = document.createElement('div');
+  const headline = CreateHeadline({ element });
+  const body = CreateBody({ element });
+  const cta = CreateCta({ element });
 
-  bodyWrapper.classList.add(BODY_CLASS);
-  bodyWrapper.appendChild(bodySlot);
+  container.classList.add(CONTAINER_CLASS);
 
-  wrapper.appendChild(titleWrapper);
-  wrapper.appendChild(bodyWrapper);
+  if (headline) wrapper.appendChild(headline);
+  if (body) wrapper.appendChild(body);
+  if (cta) wrapper.appendChild(cta);
 
-  container.appendChild(iconWrapper);
+  container.appendChild(CreateIcon());
   container.appendChild(wrapper);
-  container.appendChild(closeButton);
+  container.appendChild(CreateCloseButton({ element }));
 
   return container;
 };

@@ -62,19 +62,20 @@ export const ButtonVisibilityLogic = ({
 };
 
 export const JumpToDate = ({ element }: { element: ELEMENT_TYPE }) => {
-  const shadowRoot = element.shadowRoot as ShadowRoot;
   const currentPosition = element._count;
-
   const slider = element.querySelector(
     `[slot=${SLOTS.DATE_SLOT_NAME}]`,
   ) as HTMLDivElement;
   const dateElements = Array.from(
     slider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
-  const count = ShowNumberOfDates({ shadowRoot });
-  const endPosition = Math.floor(
-    currentPosition * count + dateElements[0].offsetWidth,
-  );
+
+  let endPosition = 0;
+
+  if (currentPosition > 0) {
+    endPosition =
+      dateElements[currentPosition].offsetLeft - dateElements[0].offsetLeft;
+  }
 
   slider.style.transform = `translateX(${-endPosition}px)`;
 };

@@ -1,9 +1,1 @@
-umd-element-events-date-slider {
-  @container dates-slider (max-width: 550px) {
-    & [slot='headline'],
-    & [slot='link'] {
-      display: flex;
-      justify-content: center;
-    }
-  }
-}
+

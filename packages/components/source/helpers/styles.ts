@@ -1,5 +1,8 @@
 import { colors } from '@universityofmaryland/umd-web-configuration';
-import postcss, { Declaration, Postcss } from 'postcss';
+import postcss from 'postcss';
+
+const postcssNesting = require('postcss-nesting');
+const postcssJs = require('postcss-js');
 
 export const Reset = `
   :host * {
@@ -68,11 +71,8 @@ export const Reset = `
   }
 `;
 
-const postcssJs = require('postcss-js');
-const tailwindcssNesting = require('tailwindcss/nesting');
-
 export const ConvertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
-  postcss(tailwindcssNesting).process(styleObj, {
+  postcss(postcssNesting).process(styleObj, {
     parser: postcssJs,
   }).css;
 

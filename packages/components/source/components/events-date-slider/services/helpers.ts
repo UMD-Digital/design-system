@@ -69,7 +69,6 @@ export const JumpToDate = ({ element }: { element: ELEMENT_TYPE }) => {
   const dateElements = Array.from(
     slider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
-
   let endPosition = 0;
 
   if (currentPosition > 0) {

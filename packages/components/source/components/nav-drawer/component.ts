@@ -5,17 +5,21 @@ declare global {
 }
 
 import { MakeTemplate } from 'helpers/ui';
-import { EventClose, EventOpen } from './services/events';
+import { EventClose, EventOpen, EventSlide } from './services/events';
 import { ComponentStyles, CreateShadowDom } from './elements';
 
 export const ELEMENT_NAME = 'umd-element-nav-drawer';
 export type NavDrawerType = UMDNavDrawer;
 export class UMDNavDrawer extends HTMLElement {
   _shadow: ShadowRoot;
+  _upcomingSlide: null | string;
+  _previousSlide: null | string;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
+    this._upcomingSlide = null;
+    this._previousSlide = null;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
@@ -44,7 +48,7 @@ export class UMDNavDrawer extends HTMLElement {
   }
 
   eventSlide() {
-    console.log('eventSlide');
+    EventSlide({ element: this });
   }
 }
 

@@ -1,5 +1,5 @@
 import { UMDNavDrawer } from 'components/nav-drawer/component';
-import { SLOTS } from 'components/nav-drawer/globals';
+import { SLOTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction, slideActionStyles } from './slide-action';
 
 const DRAWER_SLIDER_PRIMARY_CONTAINER = 'umd-element-drawer-primary-slider';
@@ -25,6 +25,7 @@ export const CreatePrimarySlide = ({ element }: { element: UMDNavDrawer }) => {
   ) as HTMLAnchorElement[];
 
   sliderContainer.classList.add(DRAWER_SLIDER_PRIMARY_CONTAINER);
+  sliderContainer.setAttribute(`${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}`, '');
 
   if (primarySlideLinks.length > 0) {
     primarySlideLinks.forEach((link) => {

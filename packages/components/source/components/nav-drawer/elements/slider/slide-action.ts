@@ -40,11 +40,17 @@ const buttonStyles = `
     align-items: center;
   }
 
+  .${DRAWER_SLIDE_ACTION_BUTTON}:hover svg,
+  .${DRAWER_SLIDE_ACTION_BUTTON}:focus svg {
+    transform: rotate(-90deg) translateY(4px);
+  }
+
   .${DRAWER_SLIDE_ACTION_BUTTON} svg {
     fill: ${colors.red};
     height: 16px;
     width: 16px;
-    transform: rotate(-90deg);
+    transform: rotate(-90deg) translateY(0);
+    transition: transform 0.3s ease-in-out;
   }
 `;
 
@@ -69,12 +75,35 @@ export const slideActionStyles = `
   ${buttonStyles}
 `;
 
-const CreateSlideButton = ({ element }: { element: UMDNavDrawer }) => {
-  const button = document.createElement('button');
+const CreateSlideButton = ({
+  element,
+  link,
+}: {
+  element: UMDNavDrawer;
+  link: HTMLAnchorElement;
+}) => {
+  const childReference = link.getAttribute(VARIABLES.ATTRIBUTE_CHILD_REF);
 
+  if (!childReference) return null;
+
+  const doesReferenceExist = element.querySelector(
+    `[${VARIABLES.ATTRIBUTE_PARENT_REF}="${childReference}"]`,
+  );
+
+  if (!doesReferenceExist) {
+    console.error(
+      `Missing child reference for ${childReference} on ${link.innerHTML}`,
+    );
+    return null;
+  }
+
+  const button = document.createElement('button');
   button.classList.add(DRAWER_SLIDE_ACTION_BUTTON);
   button.innerHTML = CHEVRON_SMALL_ICON;
-  button.addEventListener('click', element.eventSlide.bind(element));
+  button.addEventListener('click', () => {
+    element._upcomingSlide = childReference;
+    element.eventSlide();
+  });
 
   return button;
 };
@@ -87,28 +116,14 @@ export const CreateSlideAction = ({
   link: HTMLAnchorElement;
 }) => {
   const actionContainer = document.createElement('div');
-  const childReference = link.getAttribute(VARIABLES.ATTRIBUTE_CHILD_REF);
+  const button = CreateSlideButton({ element, link });
 
   actionContainer.classList.add(DRAWER_SLIDE_ACTION);
 
   link.classList.add(DRAWER_SLIDE_ACTION_LINK);
   actionContainer.appendChild(link);
 
-  if (childReference) {
-    const doesReferenceExist = element.querySelector(
-      `[${VARIABLES.ATTRIBUTE_PARENT_REF}="${childReference}"]`,
-    );
-
-    if (doesReferenceExist) {
-      const button = CreateSlideButton({ element });
-
-      actionContainer.appendChild(button);
-    } else {
-      console.error(
-        `Missing child reference for ${childReference} on ${link.innerHTML}`,
-      );
-    }
-  }
+  if (button) actionContainer.appendChild(button);
 
   return actionContainer;
 };

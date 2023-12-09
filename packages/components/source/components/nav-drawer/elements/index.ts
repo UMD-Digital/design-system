@@ -2,7 +2,6 @@ import { Reset } from 'helpers/styles';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { CreateButton, buttonStyles } from './button';
 import { CreateDrawer, drawerStyles } from './drawer.ts';
-import { colors } from '@universityofmaryland/umd-web-configuration';
 
 export const ComponentStyles = `
   :host {
@@ -12,7 +11,6 @@ export const ComponentStyles = `
   ${Reset}
   ${buttonStyles}
   ${drawerStyles}
-
 `;
 
 export const CreateShadowDom = ({ element }: { element: UMDNavDrawer }) => {

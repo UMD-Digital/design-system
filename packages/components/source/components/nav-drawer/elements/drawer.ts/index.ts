@@ -1,8 +1,7 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { CreateDrawerButton, drawerButtonStyles } from './button-close';
-import { CreateSlider, drawerSliderStyles } from './slider';
+import { CreateSlider, drawerSliderStyles } from '../slider';
 
 const testStyles = `
   .${ELEMENTS.NAV_DRAWER_BODY_OVERLAY} {
@@ -39,7 +38,6 @@ export const drawerStyles = `
     left: 0;
     top: 0;
     transition: transform ${VARIABLES.ANIMATION_TIME}ms ease-in-out;
-    cursor: default;
     z-index: 9;
     display: none;
     transform: translateX(-100%);
@@ -62,12 +60,9 @@ export const CreateDrawer = ({ element }: { element: UMDNavDrawer }) => {
 
   bodyOverlay.appendChild(drawer);
   bodyOverlay.classList.add(ELEMENTS.NAV_DRAWER_BODY_OVERLAY);
-  bodyOverlay.addEventListener('click', element.eventClose.bind(element));
+  bodyOverlay.addEventListener('click', () => element.eventClose);
 
   drawer.classList.add(ELEMENTS.NAV_DRAWER_CONTAINER);
-  drawer.addEventListener('click', (event) => {
-    event.stopPropagation();
-  });
 
   return bodyOverlay;
 };

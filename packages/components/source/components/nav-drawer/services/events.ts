@@ -11,7 +11,7 @@ export const EventOpen = ({ element }: { element: UMDNavDrawer }) => {
   ) as HTMLDivElement;
 
   bodyOverlay.style.display = 'block';
-  drawer.style.display = 'block';
+  drawer.style.display = 'flex';
 
   setTimeout(() => {
     bodyOverlay.style.opacity = '1';

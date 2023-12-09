@@ -1,9 +1,5 @@
 umd-element-alert:not(:defined) {
   display: none;
-
-  & [slot='title'] {
-    display: none;
-  }
 }
 
 * + umd-element-alert {

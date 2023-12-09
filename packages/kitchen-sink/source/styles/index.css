@@ -8,17 +8,3 @@
 
 @import './dependencies/reset.css';
 @import './dependencies/header.css';
-
-/* Elements */
-
-@import './elements/alert.css';
-@import './elements/card.css';
-@import './elements/card-overlay.css';
-@import './elements/carousel-cards.css';
-@import './elements/events-date-slider.css';
-@import './elements/footer.css';
-@import './elements/nav-item.css';
-
-.umd-sans-extralarge {
-  margin-bottom: 24px;
-}

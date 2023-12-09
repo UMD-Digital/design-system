@@ -7,6 +7,7 @@ module.exports = () => {
   const optimization = {};
 
   const entrypoints = {
+    elements: path.resolve('source/scripts/elements'),
     app: path.resolve('source/scripts/app'),
     configuration: path.resolve('source/scripts/configuration'),
   };

@@ -94,6 +94,10 @@ export const ComponentStyles = `
     container: umd-carousel-card / inline-size; 
   }
 
+  :host * {
+    color: ${colors.white};
+  }
+
   ${Reset}
   ${containerStyles}
   ${containerLockStyles}

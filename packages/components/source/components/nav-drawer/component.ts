@@ -42,6 +42,10 @@ export class UMDNavDrawer extends HTMLElement {
   eventClose() {
     EventClose({ element: this });
   }
+
+  eventSlide() {
+    console.log('eventSlide');
+  }
 }
 
 export const Load = () => {

@@ -39,8 +39,6 @@ export const drawerStyles = `
     left: 0;
     top: 0;
     transition: transform ${VARIABLES.ANIMATION_TIME}ms ease-in-out;
-    overflow-x: hidden;
-    overflow-y: auto;
     cursor: default;
     z-index: 9;
     display: none;
@@ -50,7 +48,7 @@ export const drawerStyles = `
   ${bodyOverlay}
   ${drawerButtonStyles}
   ${drawerSliderStyles}
-
+  ${testStyles}
 `;
 
 export const CreateDrawer = ({ element }: { element: UMDNavDrawer }) => {

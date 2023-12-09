@@ -8,33 +8,34 @@
       </p>
 
       <umd-element-nav-drawer>
-        <div slot="face">
+        <div slot="primary-slide-links">
           <a href="https://google.com" data-child-ref="slide-1">
             <span>Google</span>
           </a>
 
-          <a href="https://github.com" data-child-ref="slide-2">
-            <span>Github</span>
-          </a>
+          <a href="https://github.com"><span>Github</span></a>
 
           <a href="https://apple.com" data-child-ref="slide-3">
             <span>Apple</span>
           </a>
         </div>
 
-        <div slot="slides">
+        <div slot="primary-slide-content">
+          <p style="padding-top: 24px; line-height: 1.5em;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="children-slides">
           <div data-parent-ref="slide-1">
             <a href="https://docs.google.com/" data-child-ref="doc-slide-1">
               <span>Google Docs</span>
             </a>
             <a href="https://images.google.com/"><span>Google Images</span></a>
             <a href="https://maps.google.com/"><span>Google Maps</span></a>
-          </div>
-
-          <div data-parent-ref="doc-slide-1">
-            <a href="https://www.youtube.com/watch?v=0k3RNZfMPZA">
-              <span>Google Example</span>
-            </a>
           </div>
 
           <div data-parent-ref="slide-3">

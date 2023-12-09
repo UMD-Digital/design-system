@@ -1,30 +1,34 @@
 import { MakeSlot } from 'helpers/ui';
+import { ELEMENT_TYPE } from 'components/events-date-slider/component';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  SLOTS,
+} from 'components/events-date-slider/globals';
 import { CreateBackButton, CreateForwardButton, ButtonStyles } from './button';
-import { ELEMENT_TYPE } from '../../../component';
-import { BREAKPOINTS, ELEMENTS, SLOTS } from '../../../globals';
 
 export const DatesStyles = `
-  :host .${ELEMENTS.DATES_CONTAINER_CLASS} {
+  .${ELEMENTS.DATES_CONTAINER_CLASS} {
     display: flex;
     position: relative;
     padding: 0 36px;
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${ELEMENTS.DATES_CONTAINER_CLASS} {
+    .${ELEMENTS.DATES_CONTAINER_CLASS} {
       padding: 0 60px;
       width: calc(100% - 96px);
     }
   }
   
-  :host .${ELEMENTS.DATES_WRAPPER_CONTAINER_CLASS} {
+  .${ELEMENTS.DATES_WRAPPER_CONTAINER_CLASS} {
     position: relative;
     width: 100%;
     overflow: hidden;
     min-height: 44px;
   }
 
-  :host .${ELEMENTS.DATES_WRAPPER_CONTAINER_CLASS} ::slotted(*) {
+  .${ELEMENTS.DATES_WRAPPER_CONTAINER_CLASS} ::slotted(*) {
     margin-bottom: 0 !important;
   }
 

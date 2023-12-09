@@ -1,36 +1,20 @@
 {% extends '../_layout.twig' %}
 
+{% import '../_ui/date.twig' as DateDisplay %}
+
 {% block page %}
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Events Date Slider - Default with intro link
-      </h2>
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar. Venenatis cras sed felis eget. Sodales ut etiam sit
-          amet nisl purus in. Quis enim lobortis scelerisque fermentum dui
-          faucibus. Arcu felis bibendum ut tristique et egestas quis. Lobortis
-          scelerisque fermentum dui faucibus in ornare quam viverra orci.
-          Viverra mauris in aliquam sem fringilla ut morbi tincidunt augue. Erat
-          nam at lectus urna duis convallis. Egestas dui id ornare arcu odio.
-          Varius quam quisque id diam.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling
+      </p>
 
       <umd-element-events-date-slider theme="light" aria-hidden="true">
-        <div slot="headline">
-          <p class="umd-sans-larger">
-            Dates Title
-          </p>
-        </div>
-        <div slot="link">
-          <a class="umd-cta-secondary" href="https://google.com">
+        <p slot="headline" class="umd-sans-larger">
+          Dates Title
+        </p>
+        <div>
+          <a slot="link" href="https://google.com">
             <svg class="umd-cta-icon"
               width="14"
               height="14"
@@ -46,45 +30,25 @@
         </div>
 
         <div slot="date-list">
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">01</span>
-            </p>
-            <p class="umd-sans-large">
-              Longer Title Example Example 1
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">02</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example2
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">03</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example3
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">04</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example 9
-            </p>
-          </div>
+          {{ DateDisplay.DateWithTitle() }}
+          {{
+            DateDisplay.DateWithTitle({
+              text: 'longer'
+            })
+          }}
+          {{ DateDisplay.DateWithTitle() }}
+          {{ DateDisplay.DateWithTitle() }}
+          {{
+            DateDisplay.DateWithTitle({
+              text: 'longer'
+            })
+          }}
+          {{ DateDisplay.DateWithTitle() }}
+          {{
+            DateDisplay.DateWithTitle({
+              text: 'biggest'
+            })
+          }}
         </div>
       </umd-element-events-date-slider>
     </div>
@@ -92,64 +56,36 @@
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Events Date Slider - Theme Dark
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar. Venenatis cras sed felis eget. Sodales ut etiam sit
-          amet nisl purus in. Quis enim lobortis scelerisque fermentum dui
-          faucibus. Arcu felis bibendum ut tristique et egestas quis. Lobortis
-          scelerisque fermentum dui faucibus in ornare quam viverra orci.
-          Viverra mauris in aliquam sem fringilla ut morbi tincidunt augue. Erat
-          nam at lectus urna duis convallis. Egestas dui id ornare arcu odio.
-          Varius quam quisque id diam.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling - Dark Theme
+      </p>
 
       <umd-element-events-date-slider theme="dark" aria-hidden="true">
-        <div slot="headline">
-          <p class="umd-sans-larger">
-            Dates Title
-          </p>
-        </div>
+        <p slot="headline" class="umd-sans-larger">
+          Dates Title
+        </p>
+
+        <a slot="link" href="https://google.com">
+          <svg class="umd-cta-icon"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M7.7183 6.98243L2.625 1.89575H6.15621L11.306 6.93269L11.2563 6.98243L11.306 7.03218L6.15621 12.0691H2.625L7.7183 6.98243Z" />
+          </svg>
+          <span>CTA Link</span>
+        </a>
 
         <div slot="date-list">
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">01</span>
-            </p>
-            <p class="umd-sans-large">
-              Longer Title Example Example 1
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">01</span>
-            </p>
-            <p class="umd-sans-large">
-              Longer Title Example Example 1
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">01</span>
-            </p>
-            <p class="umd-sans-large">
-              Longer Title Example Example 1
-            </p>
-          </div>
+          {{ DateDisplay.DateWithTitle() }}
+          {{ DateDisplay.DateWithTitle() }}
+          {{ DateDisplay.DateWithTitle() }}
+          {{ DateDisplay.DateWithTitle() }}
+          {{ DateDisplay.DateWithTitle() }}
+          {{ DateDisplay.DateWithTitle() }}
         </div>
       </umd-element-events-date-slider>
     </div>
@@ -157,180 +93,32 @@
 
   <section>
     <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Events Date Slider - Minimual example (less than 3)
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar. Venenatis cras sed felis eget. Sodales ut etiam sit
-          amet nisl purus in. Quis enim lobortis scelerisque fermentum dui
-          faucibus. Arcu felis bibendum ut tristique et egestas quis. Lobortis
-          scelerisque fermentum dui faucibus in ornare quam viverra orci.
-          Viverra mauris in aliquam sem fringilla ut morbi tincidunt augue. Erat
-          nam at lectus urna duis convallis. Egestas dui id ornare arcu odio.
-          Varius quam quisque id diam.
-        </p>
-      </div>
+      <p class="umd-sans-large">
+        Default Styling - Less than 3 dates
+      </p>
 
       <umd-element-events-date-slider theme="light" aria-hidden="true">
-        <div slot="headline">
-          <p class="umd-sans-larger">
-            Dates Title
-          </p>
-        </div>
-
-        <div slot="date-list">
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">02</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example2
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">04</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example 9
-            </p>
-          </div>
-        </div>
-      </umd-element-events-date-slider>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <h2 class="umd-sans-extralarge">
-        Events Date Slider - long title examples
-      </h2>
-
-      <div class="umd-rich-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta
-          nibh venenatis cras sed felis. Cursus vitae congue mauris rhoncus.
-          Morbi non arcu risus quis varius. Purus in mollis nunc sed. A arcu
-          cursus vitae congue. Velit aliquet sagittis id consectetur purus ut
-          faucibus pulvinar. Venenatis cras sed felis eget. Sodales ut etiam sit
-          amet nisl purus in. Quis enim lobortis scelerisque fermentum dui
-          faucibus. Arcu felis bibendum ut tristique et egestas quis. Lobortis
-          scelerisque fermentum dui faucibus in ornare quam viverra orci.
-          Viverra mauris in aliquam sem fringilla ut morbi tincidunt augue. Erat
-          nam at lectus urna duis convallis. Egestas dui id ornare arcu odio.
-          Varius quam quisque id diam.
+        <p slot="headline" class="umd-sans-larger">
+          Dates Title
         </p>
-      </div>
 
-      <umd-element-events-date-slider theme="light" aria-hidden="true">
-        <div slot="headline">
-          <p class="umd-sans-larger">
-            Dates Title
-          </p>
-        </div>
+        <a slot="link" href="https://google.com">
+          <svg class="umd-cta-icon"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M7.7183 6.98243L2.625 1.89575H6.15621L11.306 6.93269L11.2563 6.98243L11.306 7.03218L6.15621 12.0691H2.625L7.7183 6.98243Z" />
+          </svg>
+          <span>CTA Link</span>
+        </a>
 
         <div slot="date-list">
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">01</span>
-            </p>
-            <p class="umd-sans-large">
-              Longer Title Example Example 1
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">02</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example2
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">03</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example3
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">04</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example 4
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">04</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example 5
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">04</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example 6
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">04</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example Longer Title Example Longer Title Example Longer
-              Title Example 7
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">04</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example 8
-            </p>
-          </div>
-
-          <div class="date-example">
-            <p>
-              <span class="umd-interactive-sans-small">Nov</span>
-              <span class="umd-sans-larger">04</span>
-            </p>
-            <p class="umd-sans-large">
-              Title Example 9
-            </p>
-          </div>
+          {{ DateDisplay.DateWithTitle() }}
+          {{ DateDisplay.DateWithTitle() }}
         </div>
       </umd-element-events-date-slider>
     </div>

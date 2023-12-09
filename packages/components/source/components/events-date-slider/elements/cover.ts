@@ -1,10 +1,10 @@
 import { colors } from '@universityofmaryland/umd-web-configuration';
-import { BREAKPOINTS, ELEMENTS } from '../globals';
+import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
 
 const COVER_CLASS = 'umd-element-date-slider-date-lock-cover';
 
 export const CoverStyles = `
-   :host .${COVER_CLASS} {
+  .${COVER_CLASS} {
     display: block;
     position: absolute;
     width: 200vw;
@@ -15,13 +15,13 @@ export const CoverStyles = `
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${COVER_CLASS} {
+  .${COVER_CLASS} {
       width: 40vw;
       left: calc(100% - 1px);
     }
   }
 
-  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${COVER_CLASS} {
+  .${ELEMENTS.CONTAINER_DARK_CLASS} .${COVER_CLASS} {
     background-color: ${colors.gray.darker};
   }
 `;
@@ -29,5 +29,6 @@ export const CoverStyles = `
 export const CreateCoverElement = () => {
   const coverElement = document.createElement('div');
   coverElement.classList.add(COVER_CLASS);
+
   return coverElement;
 };

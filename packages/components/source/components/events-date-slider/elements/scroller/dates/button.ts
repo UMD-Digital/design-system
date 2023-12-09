@@ -1,15 +1,33 @@
 import { colors } from '@universityofmaryland/umd-web-configuration';
 import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
-import { ELEMENT_TYPE } from '../../../component';
+import { ELEMENT_TYPE } from 'components/events-date-slider/component';
+import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
 import { ButtonVisibilityLogic } from '../../../services/helpers';
 import { EventSlideDates } from '../../../services/events';
-import { BREAKPOINTS, ELEMENTS } from '../../../globals';
 
 const FORWARD_ARROW_CLASS = 'umd-element-date-slider-forward-arrow';
 const BACK_ARROW_CLASS = 'umd-element-date-slider-back-arrow';
 
+const darkThemeStyles = `
+  .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} {
+    background-color: ${colors.gray.dark};
+  }
+  
+  .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} svg {
+    fill: ${colors.white}
+  }
+  
+  .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover {
+    background-color: ${colors.white}
+  }
+  
+  .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover svg {
+    fill: ${colors.black}
+  }
+`;
+
 export const ButtonStyles = `
-  :host .${ELEMENTS.ARROW_CLASS} {
+  .${ELEMENTS.ARROW_CLASS} {
     border: none;
     width: 32px;
     height: 32px;
@@ -25,21 +43,21 @@ export const ButtonStyles = `
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${ELEMENTS.ARROW_CLASS} {
+    .${ELEMENTS.ARROW_CLASS} {
       width: 48px;
       height: 48px;
     }
   }
   
-  :host .${ELEMENTS.ARROW_CLASS}:hover {
+  .${ELEMENTS.ARROW_CLASS}:hover {
     background-color: ${colors.black};
   }
   
-  :host .${ELEMENTS.ARROW_CLASS}:hover svg {
+  .${ELEMENTS.ARROW_CLASS}:hover svg {
     fill: ${colors.white};
   }
   
-  :host .${ELEMENTS.ARROW_CLASS} svg {
+  .${ELEMENTS.ARROW_CLASS} svg {
     transition: fill .5s;
     fill: ${colors.black};
     width: 16px;
@@ -47,35 +65,21 @@ export const ButtonStyles = `
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${ELEMENTS.ARROW_CLASS} svg {
+    .${ELEMENTS.ARROW_CLASS} svg {
       width: 24px;
       height: 8px;
     }
   }
   
-  :host .${BACK_ARROW_CLASS} {
+  .${BACK_ARROW_CLASS} {
     left: 0;
   }
   
-  :host .${FORWARD_ARROW_CLASS} {
+  .${FORWARD_ARROW_CLASS} {
     right: 0;
   }
 
-  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} {
-    background-color: ${colors.gray.dark};
-  }
-
-  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} svg {
-    fill: ${colors.white}
-  }
-
-  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover {
-    background-color: ${colors.white}
-  }
-
-  :host .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover svg {
-    fill: ${colors.black}
-  }
+  ${darkThemeStyles}
 `;
 
 export const CreateBackButton = ({ element }: { element: ELEMENT_TYPE }) => {

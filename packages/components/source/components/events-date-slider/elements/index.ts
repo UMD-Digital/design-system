@@ -1,14 +1,19 @@
 import { colors } from '@universityofmaryland/umd-web-configuration';
+import { Reset } from 'helpers/styles';
+import { ELEMENT_TYPE } from 'components/events-date-slider/component';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  SLOTS,
+} from 'components/events-date-slider/globals';
 import { SizeDatesElements } from '../services/helpers';
 import { CreateCoverElement, CoverStyles } from './cover';
 import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
-import { ELEMENT_TYPE } from '../component';
-import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 
 const CONTAINER_CLASS = 'umd-element-date-slider-container';
 
 export const ContainerStyles = `
-  :host .${CONTAINER_CLASS} {
+  .${CONTAINER_CLASS} {
     padding: 24px 0;
     background-color: ${colors.gray.lighter};
     position: relative;
@@ -16,22 +21,22 @@ export const ContainerStyles = `
   }
 
   @container dates-slider (max-width: 260px) {
-    :host .${CONTAINER_CLASS} {
+  .${CONTAINER_CLASS} {
       display: none
     }
   }
 
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${CONTAINER_CLASS} {
+  .${CONTAINER_CLASS} {
       padding: 40px;
     }
   }
 
-  :host .${ELEMENTS.CONTAINER_DARK_CLASS} {
+  .${ELEMENTS.CONTAINER_DARK_CLASS} {
     background-color: ${colors.gray.darker};
   }
 
-  :host .${ELEMENTS.CONTAINER_DARK_CLASS} ::slotted(*) {
+  .${ELEMENTS.CONTAINER_DARK_CLASS} ::slotted(*) {
     color: #fff !important;
   }
 
@@ -40,18 +45,13 @@ export const ContainerStyles = `
 `;
 
 export const ComponentStyles = `
-    :host {
-      display: block;
-      position: relative !important;
-      container: dates-slider / inline-size; 
-    }
+  :host {
+    display: block;
+    container: dates-slider / inline-size; 
+  }
 
-    :host * {
-      box-sizing: border-box;
-      text-wrap: pretty;
-    }
-  
-    ${ContainerStyles}
+  ${Reset}
+  ${ContainerStyles}
 `;
 
 export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {

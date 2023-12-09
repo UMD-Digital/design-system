@@ -1,18 +1,18 @@
+import { ELEMENT_TYPE } from 'components/events-date-slider/component';
+import { BREAKPOINTS } from 'components/events-date-slider/globals';
 import { CreateIntroWrapper, IntroStyles } from './intro';
 import { CreateDatesContainer, DatesStyles } from './dates';
-import { ELEMENT_TYPE } from '../../component';
-import { BREAKPOINTS } from '../../globals';
 
 const CONTAINER_SCROLL_WRAPPER_CLASS = 'umd-element-container-wrapper';
 
 export const ScrollerStyles = `
-  :host .${CONTAINER_SCROLL_WRAPPER_CLASS} {
+  .${CONTAINER_SCROLL_WRAPPER_CLASS} {
     position: relative;
     z-index: 99;
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${CONTAINER_SCROLL_WRAPPER_CLASS} {
+  .${CONTAINER_SCROLL_WRAPPER_CLASS} {
       display: flex;
       align-items: center;
     }
@@ -28,7 +28,7 @@ export const CreateScrollerWrapper = ({
   element: ELEMENT_TYPE;
 }) => {
   const container = document.createElement('div');
-  const introductionWrapper = CreateIntroWrapper();
+  const introductionWrapper = CreateIntroWrapper({ element });
   const datesContainer = CreateDatesContainer({ element });
 
   container.classList.add(CONTAINER_SCROLL_WRAPPER_CLASS);

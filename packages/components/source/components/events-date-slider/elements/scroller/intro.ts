@@ -1,26 +1,76 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration';
-import { MakeSlot } from 'helpers/ui';
-import { BREAKPOINTS, SLOTS } from '../../globals';
+import {
+  colors,
+  spacing,
+  typography,
+  umdCta,
+} from '@universityofmaryland/umd-web-configuration';
+import { SlotDefaultStyling } from 'helpers/ui';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  SLOTS,
+} from 'components/events-date-slider/globals';
 
-const INTRO_CONTAINER_CLASS = 'umd-element-date-slider-intro-container';
-const HEADLINE_WRAPPER_CLASS = 'umd-element-date-slider-headline-wrapper';
-const LINK_WRAPPER_CLASS = 'umd-element-date-slider-link-wrapper';
+const INTRO_CONTAINER = 'umd-element-date-slider-intro-container';
+const INTRO_HEADLINE = 'umd-element-date-slider-headline';
+const INTRO_LINK = 'umd-element-date-slider-link';
+
+const headlineStyles = `
+  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
+
+  }
+
+  .${INTRO_HEADLINE} {
+    color: ${colors.black};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_HEADLINE}`]: typography['.umd-sans-larger'],
+    },
+  })}
+
+  .${ELEMENTS.CONTAINER_DARK_CLASS} .${INTRO_HEADLINE} {
+    color: ${colors.white};
+  }
+`;
+
+const linkStyles = `
+  * + .${INTRO_LINK} {
+    text-decoration: none;
+  }
+
+  .${INTRO_LINK} {
+    margin-top: ${spacing.min};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${INTRO_LINK}`]: umdCta['.umd-cta-secondary'],
+    },
+  })}
+
+  .${ELEMENTS.CONTAINER_DARK_CLASS} .${INTRO_LINK} {
+    color: ${colors.white};
+  }
+`;
 
 export const IntroStyles = `
-  :host .${INTRO_CONTAINER_CLASS} {
+  .${INTRO_CONTAINER} {
     margin-bottom: ${spacing.md};
     padding: 0 ${spacing.lg};
     position: relative;
   }
 
   @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
-    :host .${INTRO_CONTAINER_CLASS} {
+    .${INTRO_CONTAINER} {
       text-align: center;
     }
   }
   
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    :host .${INTRO_CONTAINER_CLASS} {
+    .${INTRO_CONTAINER} {
       padding: 0;
       padding-right: 24px;
       padding-left: 0;
@@ -29,31 +79,31 @@ export const IntroStyles = `
     }
   }
 
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    ::slotted(div[slot="${SLOTS.HEADLINE_SLOT_NAME}"]) {
-      width: 100%;
-    }
-  }
-
-  .${HEADLINE_WRAPPER_CLASS} ::slotted(*) {
-    margin: 0;
-  }
+  ${headlineStyles}
+  ${linkStyles}
 `;
 
-export const CreateIntroWrapper = () => {
+export const CreateIntroWrapper = ({ element }: { element: HTMLElement }) => {
   const introductionWrapper = document.createElement('div');
-  const headlineWrapper = document.createElement('div');
-  const linkWrapper = document.createElement('div');
+  const headlineSlot = SlotDefaultStyling({
+    element,
+    slotRef: SLOTS.HEADLINE_SLOT_NAME,
+  });
+  const linkSlot = SlotDefaultStyling({
+    element,
+    slotRef: SLOTS.LINK_SLOT_NAME,
+  });
 
-  const headlineSlot = MakeSlot({ type: SLOTS.HEADLINE_SLOT_NAME });
-  const linkSlot = MakeSlot({ type: SLOTS.LINK_SLOT_NAME });
+  if (headlineSlot) {
+    headlineSlot.classList.add(INTRO_HEADLINE);
+    introductionWrapper.appendChild(headlineSlot);
+  }
+  if (linkSlot) {
+    linkSlot.classList.add(INTRO_LINK);
+    introductionWrapper.appendChild(linkSlot);
+  }
 
-  headlineWrapper.appendChild(headlineSlot);
-  linkWrapper.appendChild(linkSlot);
-
-  introductionWrapper.classList.add(INTRO_CONTAINER_CLASS);
-  introductionWrapper.appendChild(headlineWrapper);
-  introductionWrapper.appendChild(linkWrapper);
+  introductionWrapper.classList.add(INTRO_CONTAINER);
 
   return introductionWrapper;
 };

@@ -1,0 +1,24 @@
+{% macro DateWithTitle(params) %}
+  {% set date = params.date ?? '01' %}
+  {% set text = params.text ?? 'default' %}
+
+  <div class="date-example">
+    <p>
+      <span class="umd-interactive-sans-small">Nov</span>
+      <span class="umd-sans-larger">{{ date }}</span>
+    </p>
+    <p class="umd-sans-large">
+      {% if text == 'default' %}
+        Title Example
+      {% endif %}
+
+      {% if text == 'longer' %}
+        Longer Title Example
+      {% endif %}
+
+      {% if text == 'biggest' %}
+        Big Big Bigger Title Example
+      {% endif %}
+    </p>
+  </div>
+{% endmacro %}

@@ -1,23 +1,4 @@
 umd-element-events-date-slider {
-  container: dates-slider / inline-size;
-
-  &[theme='dark'] {
-    & [slot='date-list'],
-    & [slot='introduction'] {
-      background-color: theme(colors.gray.darker);
-    }
-  }
-
-  & [slot='link']:has(a) {
-    margin-top: theme(spacing.min);
-
-    & * {
-      margin-top: 0 !important;
-    }
-  }
-}
-
-umd-element-events-date-slider {
   @container dates-slider (max-width: 550px) {
     & [slot='headline'],
     & [slot='link'] {

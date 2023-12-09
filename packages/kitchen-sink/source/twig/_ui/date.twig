@@ -1,15 +1,23 @@
 {% macro DateWithTitle(params) %}
+  {% set attrs = '' %}
   {% set date = params.date ?? '01' %}
   {% set text = params.text ?? 'default' %}
 
-  <div class="date-example">
-    <p>
-      <span class="umd-interactive-sans-small">Nov</span>
-      <span class="umd-sans-larger">{{ date }}</span>
+  {% if params.theme %}
+    {% set attrs = attrs ~ 'theme="dark"' %}
+  {% endif %}
+
+  <umd-element-events-date {{ attrs }}>
+    <p slot="month">
+      Nov
     </p>
-    <p class="umd-sans-large">
+    <p slot="day">
+      {{ date }}
+    </p>
+
+    <p slot="headline">
       {% if text == 'default' %}
-        Title Example
+        <a href="https://google.com">Title Example</a>
       {% endif %}
 
       {% if text == 'longer' %}
@@ -19,6 +27,10 @@
       {% if text == 'biggest' %}
         Big Big Bigger Title Example
       {% endif %}
+
+      {% if text == 'link' %}
+        <a href="https://google.com">Link Title Example</a>
+      {% endif %}
     </p>
-  </div>
+  </umd-element-events-date>
 {% endmacro %}

@@ -5,32 +5,3 @@ umd-element-events-date-slider:not(:defined) {
 * + umd-element-events-date-slider {
   margin-top: theme('spacing.2xl');
 }
-
-.date-example {
-  display: flex;
-  align-items: center;
-  text-align: left;
-
-  & .umd-sans-large {
-    font-size: theme(fontSize.lg);
-    margin-left: theme(spacing.sm);
-    margin-bottom: 0;
-
-    @media (max-width: 768px) {
-      font-size: theme(fontSize.sm) !important;
-      font-weight: theme(fontWeight.semibold) !important;
-    }
-  }
-
-  & p {
-    margin-bottom: 0;
-
-    & span {
-      display: block;
-      text-transform: uppercase;
-      text-align: center;
-      max-width: 200px;
-      font-weight: theme(fontWeight.bold);
-    }
-  }
-}

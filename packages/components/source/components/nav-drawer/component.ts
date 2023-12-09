@@ -5,6 +5,7 @@ declare global {
 }
 
 import { MakeTemplate } from 'helpers/ui';
+import { EventClose, EventOpen } from './services/events';
 import { ComponentStyles, CreateShadowDom } from './elements';
 
 export const ELEMENT_NAME = 'umd-element-nav-drawer';
@@ -32,6 +33,14 @@ export class UMDNavDrawer extends HTMLElement {
     const container = CreateShadowDom({ element: this });
 
     this._shadow.appendChild(container);
+  }
+
+  eventOpen() {
+    EventOpen({ element: this });
+  }
+
+  eventClose() {
+    EventClose({ element: this });
   }
 }
 

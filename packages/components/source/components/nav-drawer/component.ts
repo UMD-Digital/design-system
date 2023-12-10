@@ -54,7 +54,6 @@ export class UMDNavDrawer extends HTMLElement {
   }
 
   eventSlideRight() {
-    console.log('called');
     EventSlide({ element: this, isRight: false });
   }
 }

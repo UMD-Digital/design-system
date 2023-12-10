@@ -4,19 +4,6 @@ import { CreateDrawerButton, drawerButtonStyles } from './button-close';
 import { CreateSlider, drawerSliderStyles } from '../slider';
 
 // prettier-ignore
-const testStyles = `
-  .${ELEMENTS.NAV_DRAWER_BODY_OVERLAY} {
-    display: block;
-    opacity: 1;
-  }
-
-  .${ELEMENTS.NAV_DRAWER_CONTAINER} {
-    display: flex;
-    transform: translateX(0);
-  }
-`;
-
-// prettier-ignore
 const bodyOverlay = `
   .${ELEMENTS.NAV_DRAWER_BODY_OVERLAY} {
     position: fixed;
@@ -49,7 +36,6 @@ export const drawerStyles = `
   ${bodyOverlay}
   ${drawerButtonStyles}
   ${drawerSliderStyles}
-  ${testStyles}
 `;
 
 export const CreateDrawer = ({ element }: { element: UMDNavDrawer }) => {

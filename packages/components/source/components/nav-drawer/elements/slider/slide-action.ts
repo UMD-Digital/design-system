@@ -105,7 +105,7 @@ const CreateSlideButton = ({
   button.innerHTML = CHEVRON_SMALL_ICON;
   button.addEventListener('click', () => {
     element._upcomingSlide = childReference;
-    element.eventSlideRight();
+    element.eventSlideLeft();
   });
 
   return button;

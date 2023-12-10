@@ -50,14 +50,24 @@ const sliderStyles = `
     transform: translateX(0);
   }
 
-  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_OUT}] {
+  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_OUT_LEFT}] {
     display: block;
     transform: translateX(-100%);
   }
 
-  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_IN}] {
+  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_OUT_RIGHT}] {
+    display: block;
+    transform: translateX(100%);
+  }
+
+  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_IN_LEFT}] {
     display: block;
     transform: translateX(0);
+  }
+
+  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_IN_RIGHT}] {
+    display: block;
+    transform: translateX(100%);
   }
 `;
 

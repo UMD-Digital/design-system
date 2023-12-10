@@ -55,29 +55,40 @@ export const EventSlide = ({
   ) as HTMLDivElement;
   const upcomingSlide = ShadowRoot.querySelector(
     `[${VARIABLES.ATTRIBUTE_PARENT_REF}=${upcomingSlideRef}]`,
-  );
-  const previousSlideRef = activeSlide.getAttribute(
+  ) as HTMLDivElement;
+  const previousSlideContext = isRight ? activeSlide : upcomingSlide;
+  const previousSlideRef = previousSlideContext.getAttribute(
     VARIABLES.ATTRIBUTE_PARENT_REF,
   );
+  const activeSlideDirection = isRight
+    ? VARIABLES.ATTRIBUTE_SLIDE_OUT_LEFT
+    : VARIABLES.ATTRIBUTE_SLIDE_OUT_RIGHT;
+  const upcomingSlideDirection = isRight
+    ? VARIABLES.ATTRIBUTE_SLIDE_IN_LEFT
+    : VARIABLES.ATTRIBUTE_SLIDE_IN_RIGHT;
 
   if (!upcomingSlide || !activeSlide)
     throw new Error('Missing slide for slide event');
 
   element._previousSlide = previousSlideRef;
 
-  activeSlide.setAttribute(VARIABLES.ATTRIBUTE_SLIDE_OUT, '');
-  activeSlide.removeAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE);
+  if (isRight) {
+    upcomingSlide.style.transform = 'translateX(-100%)';
+  }
 
+  activeSlide.removeAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE);
   upcomingSlide.setAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE, '');
-  upcomingSlide.setAttribute(VARIABLES.ATTRIBUTE_SLIDE_IN, '');
+
+  activeSlide.setAttribute(activeSlideDirection, '');
+  upcomingSlide.setAttribute(upcomingSlideDirection, '');
 
   setTimeout(() => {
     activeSlide.style.display = 'none';
   }, VARIABLES.ANIMATION_TIME);
 
   setTimeout(() => {
-    activeSlide.removeAttribute(VARIABLES.ATTRIBUTE_SLIDE_OUT);
-    upcomingSlide.removeAttribute(VARIABLES.ATTRIBUTE_SLIDE_IN);
+    activeSlide.removeAttribute(activeSlideDirection);
+    upcomingSlide.removeAttribute(upcomingSlideDirection);
     activeSlide.removeAttribute('style');
   }, VARIABLES.ANIMATION_TIME + 100);
 };

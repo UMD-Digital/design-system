@@ -60,7 +60,7 @@ export const CreateDrawer = ({ element }: { element: UMDNavDrawer }) => {
 
   bodyOverlay.appendChild(drawer);
   bodyOverlay.classList.add(ELEMENTS.NAV_DRAWER_BODY_OVERLAY);
-  bodyOverlay.addEventListener('click', () => element.eventClose);
+  bodyOverlay.addEventListener('click', element.eventClose.bind(element));
 
   drawer.classList.add(ELEMENTS.NAV_DRAWER_CONTAINER);
 

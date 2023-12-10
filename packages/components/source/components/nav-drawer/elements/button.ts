@@ -51,7 +51,7 @@ export const CreateButton = ({ element }: { element: UMDNavDrawer }) => {
 
   button.appendChild(wrapper);
   button.classList.add(NAV_DRAWER_BUTTON);
-  button.addEventListener('click', () => element.eventOpen);
+  button.addEventListener('click', element.eventOpen.bind(element));
 
   return button;
 };

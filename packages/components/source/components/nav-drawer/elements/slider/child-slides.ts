@@ -13,6 +13,14 @@ export const CreateChildSlide = ({ element }: { element: UMDNavDrawer }) => {
 
   return slides.map((slide) => {
     const sliderContainer = document.createElement('div');
+    const isSlideActive = slide.hasAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE);
+    const slideParentRef = slide.getAttribute(VARIABLES.ATTRIBUTE_PARENT_REF);
+
+    if (isSlideActive) {
+      sliderContainer.setAttribute(`${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}`, ``);
+      element._currentSlide = sliderContainer;
+    }
+
     const links = Array.from(
       slide.querySelectorAll('a'),
     ) as HTMLAnchorElement[];
@@ -20,7 +28,7 @@ export const CreateChildSlide = ({ element }: { element: UMDNavDrawer }) => {
     sliderContainer.classList.add(DRAWER_SLIDER_CHILD_CONTAINER);
     sliderContainer.setAttribute(
       `${VARIABLES.ATTRIBUTE_PARENT_REF}`,
-      `${slide.getAttribute(`${VARIABLES.ATTRIBUTE_PARENT_REF}`)}`,
+      `${slideParentRef}`,
     );
 
     if (links.length > 0) {

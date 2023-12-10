@@ -78,8 +78,8 @@ export const CreateSlider = ({ element }: { element: UMDNavDrawer }) => {
   const sliderContainer = document.createElement('div');
   const slider = document.createElement('div');
   const decorativeLine = document.createElement('div');
-  const primarySlide = CreatePrimarySlide({ element });
   const childSlides = CreateChildSlide({ element });
+  const primarySlide = CreatePrimarySlide({ element });
 
   sliderContainer.classList.add(DRAWER_SLIDER_CONTAINER);
 

@@ -14,12 +14,14 @@ export class UMDNavDrawer extends HTMLElement {
   _shadow: ShadowRoot;
   _upcomingSlide: null | string;
   _previousSlide: null | string;
+  _currentSlide: null | HTMLDivElement;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._upcomingSlide = null;
     this._previousSlide = null;
+    this._currentSlide = null;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });

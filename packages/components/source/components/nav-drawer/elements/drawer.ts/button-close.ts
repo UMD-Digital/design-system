@@ -32,7 +32,7 @@ export const CreateDrawerButton = ({ element }: { element: UMDNavDrawer }) => {
 
   drawerCloseButton.innerHTML = BUTTON_ICON;
   drawerCloseButton.classList.add(DRAWER_CLOSE_BUTTON);
-  drawerCloseButton.addEventListener('click', () => element.eventClose);
+  drawerCloseButton.addEventListener('click', element.eventClose.bind(element));
 
   return drawerCloseButton;
 };

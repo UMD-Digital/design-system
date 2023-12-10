@@ -178,6 +178,7 @@ export const CreateChildSlide = ({ element }: { element: UMDNavDrawer }) => {
       element._currentSlide = sliderContainer;
     }
 
+    sliderContainer.setAttribute(`${VARIABLES.ATTRIBUTE_DATA_SLIDE}`, '');
     sliderContainer.classList.add(DRAWER_SLIDER_CHILD_CONTAINER);
     sliderContainer.setAttribute(
       `${VARIABLES.ATTRIBUTE_PARENT_REF}`,

@@ -41,54 +41,121 @@ export const EventClose = ({ element }: { element: UMDNavDrawer }) => {
   }, VARIABLES.ANIMATION_TIME + 100);
 };
 
+const FindParent = ({
+  element,
+  attr,
+}: {
+  element: HTMLElement;
+  attr: string;
+}) => {
+  let parent = element;
+
+  const findParentElementByAttribute: any = ({
+    element,
+    attr,
+  }: {
+    element: HTMLElement | null;
+    attr: string;
+  }) => {
+    if (!element || element.hasAttribute(attr)) {
+      return element;
+    } else {
+      return findParentElementByAttribute({
+        element: element.parentElement,
+        attr,
+      });
+    }
+  };
+
+  const foundElement = findParentElementByAttribute({ element, attr });
+  if (foundElement) parent = foundElement;
+
+  return parent;
+};
+
+const GetUpcomingSlide = ({ element }: { element: UMDNavDrawer }) => {
+  const ShadowRoot = element._shadow as ShadowRoot;
+  const upcomingSlideRef = element._upcomingSlide;
+  const upcomingSlide = ShadowRoot.querySelector(
+    `[${VARIABLES.ATTRIBUTE_PARENT_REF}=${upcomingSlideRef}]`,
+  ) as HTMLDivElement;
+
+  return upcomingSlide;
+};
+
+const GetUpcomingSlideParent = ({ element }: { element: UMDNavDrawer }) => {
+  const ShadowRoot = element._shadow as ShadowRoot;
+  const upcomingSlideRef = element._upcomingSlide;
+  const upcomingSlide = ShadowRoot.querySelector(
+    `[${VARIABLES.ATTRIBUTE_CHILD_REF}=${upcomingSlideRef}]`,
+  ) as HTMLDivElement;
+  const parent = FindParent({
+    element: upcomingSlide,
+    attr: VARIABLES.ATTRIBUTE_DATA_SLIDE,
+  });
+
+  return parent;
+};
+
 export const EventSlide = ({
   element,
-  isRight = true,
+  isRight = false,
 }: {
   element: UMDNavDrawer;
   isRight?: boolean;
 }) => {
   const ShadowRoot = element._shadow as ShadowRoot;
-  const upcomingSlideRef = element._upcomingSlide;
   const activeSlide = ShadowRoot.querySelector(
     `[${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}]`,
   ) as HTMLDivElement;
-  const upcomingSlide = ShadowRoot.querySelector(
-    `[${VARIABLES.ATTRIBUTE_PARENT_REF}=${upcomingSlideRef}]`,
-  ) as HTMLDivElement;
-  const previousSlideContext = isRight ? activeSlide : upcomingSlide;
-  const previousSlideRef = previousSlideContext.getAttribute(
-    VARIABLES.ATTRIBUTE_PARENT_REF,
-  );
-  const activeSlideDirection = isRight
-    ? VARIABLES.ATTRIBUTE_SLIDE_OUT_LEFT
-    : VARIABLES.ATTRIBUTE_SLIDE_OUT_RIGHT;
-  const upcomingSlideDirection = isRight
-    ? VARIABLES.ATTRIBUTE_SLIDE_IN_LEFT
-    : VARIABLES.ATTRIBUTE_SLIDE_IN_RIGHT;
+  const upcomingSlide = isRight
+    ? GetUpcomingSlideParent({ element })
+    : GetUpcomingSlide({ element });
+  const slides = [activeSlide, upcomingSlide];
+
+  const setPreviousSlide = () => {
+    const previousSlideContext = isRight ? activeSlide : upcomingSlide;
+    const previousSlideRef = previousSlideContext.getAttribute(
+      VARIABLES.ATTRIBUTE_PARENT_REF,
+    );
+    element._previousSlide = previousSlideRef;
+  };
+
+  const animate = () => {
+    let startPositionForUpcomingSlide = '100%';
+    let transitionPosition = '-100%';
+
+    if (isRight) {
+      startPositionForUpcomingSlide = '-100%';
+      transitionPosition = '100%';
+    }
+
+    upcomingSlide.style.left = startPositionForUpcomingSlide;
+    upcomingSlide.style.display = 'block';
+
+    setTimeout(() => {
+      slides.forEach((slide) => {
+        slide.style.transition = `transform ${VARIABLES.ANIMATION_TIME}ms ease-in-out`;
+        slide.style.transform = `translateX(${transitionPosition})`;
+      });
+    }, 100);
+
+    setTimeout(() => {
+      slides.forEach((slide) => {
+        slide.style.transition = 'none';
+        slide.style.transform = 'translateX(0)';
+        slide.style.left = '0';
+        slide.removeAttribute('style');
+      });
+
+      upcomingSlide.setAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE, '');
+      activeSlide.removeAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE);
+    }, VARIABLES.ANIMATION_TIME + 100);
+  };
 
   if (!upcomingSlide || !activeSlide)
     throw new Error('Missing slide for slide event');
 
-  element._previousSlide = previousSlideRef;
-
-  if (isRight) {
-    upcomingSlide.style.transform = 'translateX(-100%)';
-  }
-
-  activeSlide.removeAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE);
-  upcomingSlide.setAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE, '');
-
-  activeSlide.setAttribute(activeSlideDirection, '');
-  upcomingSlide.setAttribute(upcomingSlideDirection, '');
-
-  setTimeout(() => {
-    activeSlide.style.display = 'none';
-  }, VARIABLES.ANIMATION_TIME);
-
-  setTimeout(() => {
-    activeSlide.removeAttribute(activeSlideDirection);
-    upcomingSlide.removeAttribute(upcomingSlideDirection);
-    activeSlide.removeAttribute('style');
-  }, VARIABLES.ANIMATION_TIME + 100);
+  setPreviousSlide();
+  animate();
 };

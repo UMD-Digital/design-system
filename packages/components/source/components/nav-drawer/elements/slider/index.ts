@@ -40,34 +40,11 @@ const sliderStyles = `
     height: 100%;
     background-color: ${colors.white};
     overflow-y: auto;
-    transform: translateX(100%);
-    transition: transform ${VARIABLES.ANIMATION_TIME}ms ease-in-out;
-    diplay: none;
+    display: none;
   }
 
   .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}] {
     display: block;
-    transform: translateX(0);
-  }
-
-  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_OUT_LEFT}] {
-    display: block;
-    transform: translateX(-100%);
-  }
-
-  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_OUT_RIGHT}] {
-    display: block;
-    transform: translateX(100%);
-  }
-
-  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_IN_LEFT}] {
-    display: block;
-    transform: translateX(0);
-  }
-
-  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_SLIDE_IN_RIGHT}] {
-    display: block;
-    transform: translateX(100%);
   }
 `;
 

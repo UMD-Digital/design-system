@@ -26,6 +26,7 @@ export const CreatePrimarySlide = ({ element }: { element: UMDNavDrawer }) => {
   ) as HTMLAnchorElement[];
 
   sliderContainer.classList.add(DRAWER_SLIDER_PRIMARY_CONTAINER);
+  sliderContainer.setAttribute(`${VARIABLES.ATTRIBUTE_DATA_SLIDE}`, '');
 
   if (!element._currentSlide) {
     sliderContainer.setAttribute(`${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}`, '');

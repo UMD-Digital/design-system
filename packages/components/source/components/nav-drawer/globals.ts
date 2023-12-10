@@ -14,9 +14,6 @@ export const VARIABLES = {
   ANIMATION_TIME: 300,
   ATTRIBUTE_CHILD_REF: 'data-child-ref',
   ATTRIBUTE_PARENT_REF: 'data-parent-ref',
+  ATTRIBUTE_DATA_SLIDE: 'data-slide',
   ATTRIBUTE_ACTIVE_SLIDE: 'data-active',
-  ATTRIBUTE_SLIDE_OUT_LEFT: 'data-slide-out-left',
-  ATTRIBUTE_SLIDE_OUT_RIGHT: 'data-slide-out-right',
-  ATTRIBUTE_SLIDE_IN_LEFT: 'data-slide-in-left',
-  ATTRIBUTE_SLIDE_IN_RIGHT: 'data-slide-in-right',
 };

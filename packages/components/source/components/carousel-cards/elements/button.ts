@@ -12,7 +12,7 @@ const CAROUSEL_CARDS_BUTTON = `umd-carousel-cards-button`;
 const backwardsButtonStyles = `
   @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS} {
-      left: ${spacing.md};
+      left: 0;
     }
   }
 
@@ -30,7 +30,7 @@ const backwardsButtonStyles = `
 const forwardButtonStyles = `
   @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ELEMENTS.CAROUSEL_CARDS_BUTTON_FORWARDS} {
-      left: 73px;
+      left: 49px;
     }
   }
 

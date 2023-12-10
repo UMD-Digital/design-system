@@ -87,12 +87,6 @@ export const IntroContainerStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${INTRO_CONTAINER_LOCK}`]: umdLock['.umd-lock'],
-    },
-  })}
-
   @media (min-width: ${BREAKPOINTS.large}px) {
     .${INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
       max-width: inherit;

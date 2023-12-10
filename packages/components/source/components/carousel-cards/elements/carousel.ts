@@ -31,12 +31,6 @@ export const CarouselContainerStyles = `
     }
   }
 
-  .${CAROUSEL_CONTAINER_LOCK} {
-    ${ConvertJSSObjectToStyles({
-      styleObj: umdLock['.umd-lock'],
-    })}
-  }
-
   .${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER} {
     overflow: hidden;
     padding-right: 0;

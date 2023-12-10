@@ -25,7 +25,7 @@ const CAROUSEL_LOCK = 'umd-element-carousel-lock';
 const containerStyles = `
   .${CAROUSEL_CONTAINER} {
     background-color: ${colors.black};
-    padding: ${spacing.md} 0;
+    padding: ${spacing['3xl']} 0;
     position: relative;
     overflow: hidden;
   }

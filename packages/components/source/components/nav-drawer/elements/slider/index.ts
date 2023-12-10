@@ -8,6 +8,7 @@ const DRAWER_SLIDER_CONTAINER = 'umd-element-drawer-slider-container';
 const DRAWER_SLIDER = 'umd-element-drawer-slider';
 const DRAWER_DECORATIVE_LINE = 'umd-element-drawer-decorative-line';
 
+// prettier-ignore
 const decorativeLineStyles = `
   .${DRAWER_DECORATIVE_LINE} {
     position: absolute;
@@ -20,6 +21,7 @@ const decorativeLineStyles = `
   }
 `;
 
+// prettier-ignore
 const sliderStyles = `
   .${DRAWER_SLIDER} {
     position: relative;
@@ -59,6 +61,7 @@ const sliderStyles = `
   }
 `;
 
+// prettier-ignore
 export const drawerSliderStyles = `
   .${DRAWER_SLIDER_CONTAINER} {
     position: relative;
@@ -92,7 +95,9 @@ export const CreateSlider = ({ element }: { element: UMDNavDrawer }) => {
     event.stopPropagation();
   });
 
-  childSlides.forEach((childSlide) => slider.appendChild(childSlide));
+  childSlides.forEach((childSlide) => {
+    if (childSlide) slider.appendChild(childSlide);
+  });
 
   sliderContainer.appendChild(slider);
 

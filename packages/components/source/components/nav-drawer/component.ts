@@ -49,8 +49,13 @@ export class UMDNavDrawer extends HTMLElement {
     EventClose({ element: this });
   }
 
-  eventSlide() {
+  eventSlideLeft() {
     EventSlide({ element: this });
+  }
+
+  eventSlideRight() {
+    console.log('called');
+    EventSlide({ element: this, isRight: false });
   }
 }
 

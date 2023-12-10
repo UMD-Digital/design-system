@@ -41,13 +41,18 @@ export const EventClose = ({ element }: { element: UMDNavDrawer }) => {
   }, VARIABLES.ANIMATION_TIME + 100);
 };
 
-export const EventSlide = ({ element }: { element: UMDNavDrawer }) => {
+export const EventSlide = ({
+  element,
+  isRight = true,
+}: {
+  element: UMDNavDrawer;
+  isRight?: boolean;
+}) => {
   const ShadowRoot = element._shadow as ShadowRoot;
   const upcomingSlideRef = element._upcomingSlide;
   const activeSlide = ShadowRoot.querySelector(
     `[${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}]`,
   ) as HTMLDivElement;
-
   const upcomingSlide = ShadowRoot.querySelector(
     `[${VARIABLES.ATTRIBUTE_PARENT_REF}=${upcomingSlideRef}]`,
   );

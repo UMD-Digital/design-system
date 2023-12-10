@@ -2,6 +2,8 @@ export const BREAKPOINTS = {};
 export const ELEMENTS = {
   NAV_DRAWER_BODY_OVERLAY: 'umd-nav-drawer-body-overlay',
   NAV_DRAWER_CONTAINER: 'umd-nav-drawer-container',
+  DRAWER_SLIDE_ACTION: 'umd-element-drawer-slide-action',
+  DRAWER_SLIDE_ACTION_LINK: 'umd-element-drawer-slide-action-link',
 };
 export const SLOTS = {
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',

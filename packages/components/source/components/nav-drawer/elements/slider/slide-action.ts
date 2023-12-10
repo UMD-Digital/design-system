@@ -6,30 +6,31 @@ import {
 } from '@universityofmaryland/umd-web-configuration';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
-import { VARIABLES } from 'components/nav-drawer/globals';
+import { VARIABLES, ELEMENTS } from 'components/nav-drawer/globals';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-const DRAWER_SLIDE_ACTION = 'umd-element-drawer-slide-action';
-const DRAWER_SLIDE_ACTION_LINK = 'umd-element-drawer-slide-action-link';
 const DRAWER_SLIDE_ACTION_BUTTON = 'umd-element-drawer-slide-action-button';
 
+// prettier-ignore
 const anchorStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${DRAWER_SLIDE_ACTION_LINK}`]: typography['.umd-sans-medium'],
+      [`.${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}`]: typography['.umd-sans-medium'],
     },
   })}
 
-  .${DRAWER_SLIDE_ACTION_LINK} {
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK} {
     font-weight: ${fontWeight.extraBold};
     transition: color 0.3s ease-in-out;
   }
 
-  .${DRAWER_SLIDE_ACTION_LINK}:hover,
-  .${DRAWER_SLIDE_ACTION_LINK}:focus {
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}:hover,
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}:focus {
     color: ${colors.red};
   }
 `;
+
+// prettier-ignore
 const buttonStyles = `
   .${DRAWER_SLIDE_ACTION_BUTTON} {
     padding-right: ${spacing.sm};
@@ -54,8 +55,9 @@ const buttonStyles = `
   }
 `;
 
+// prettier-ignore
 export const slideActionStyles = `
-  .${DRAWER_SLIDE_ACTION} {
+  .${ELEMENTS.DRAWER_SLIDE_ACTION} {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -65,7 +67,7 @@ export const slideActionStyles = `
   }
 
   @media (min-width: 480px) {
-    .${DRAWER_SLIDE_ACTION} {
+    .${ELEMENTS.DRAWER_SLIDE_ACTION} {
       margin-bottom: ${spacing.sm};
       padding-bottom: ${spacing.sm};
     }
@@ -99,10 +101,11 @@ const CreateSlideButton = ({
 
   const button = document.createElement('button');
   button.classList.add(DRAWER_SLIDE_ACTION_BUTTON);
+  button.setAttribute('type', 'button');
   button.innerHTML = CHEVRON_SMALL_ICON;
   button.addEventListener('click', () => {
     element._upcomingSlide = childReference;
-    element.eventSlide();
+    element.eventSlideRight();
   });
 
   return button;
@@ -118,9 +121,9 @@ export const CreateSlideAction = ({
   const actionContainer = document.createElement('div');
   const button = CreateSlideButton({ element, link });
 
-  actionContainer.classList.add(DRAWER_SLIDE_ACTION);
+  actionContainer.classList.add(ELEMENTS.DRAWER_SLIDE_ACTION);
 
-  link.classList.add(DRAWER_SLIDE_ACTION_LINK);
+  link.classList.add(ELEMENTS.DRAWER_SLIDE_ACTION_LINK);
   actionContainer.appendChild(link);
 
   if (button) actionContainer.appendChild(button);

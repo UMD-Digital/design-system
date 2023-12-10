@@ -4,6 +4,7 @@ import { CreateSlideAction, slideActionStyles } from './slide-action';
 
 const DRAWER_SLIDER_PRIMARY_CONTAINER = 'umd-element-drawer-primary-slider';
 
+// prettier-ignore
 export const primarySliderStyles = `
   .${DRAWER_SLIDER_PRIMARY_CONTAINER} {
     

@@ -1,7 +1,7 @@
 import { Reset } from 'helpers/styles';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { CreateButton, buttonStyles } from './button';
-import { CreateDrawer, drawerStyles } from './drawer.ts';
+import { CreateDrawer, drawerStyles } from './drawer';
 
 export const ComponentStyles = `
   :host {

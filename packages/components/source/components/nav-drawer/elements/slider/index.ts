@@ -1,8 +1,13 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import {
+  colors,
+  spacing,
+  typography,
+} from '@universityofmaryland/umd-web-configuration';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
-import { VARIABLES } from 'components/nav-drawer/globals';
+import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreatePrimarySlide, primarySliderStyles } from './primary-slide';
 import { CreateChildSlide, childSliderStyles } from './child-slides';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const DRAWER_SLIDER_CONTAINER = 'umd-element-drawer-slider-container';
 const DRAWER_SLIDER = 'umd-element-drawer-slider';
@@ -28,7 +33,7 @@ const sliderStyles = `
     overflow: hidden;
     height: 100%;
     width: calc(100vw - ${spacing['8xl']});
-    max-width: 440px;
+    max-width: 400px;
     min-width: 227px;
   }
 
@@ -66,6 +71,33 @@ const selectedLinkStyles = `
 `;
 
 // prettier-ignore
+const secondaryLinkStyles = `
+  .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} {
+    border-bottom: none;
+    margin-bottom: ${spacing.min};
+    padding-bottom: ${spacing.min};
+  }
+  
+  @media (min-width: 480px) {
+    .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} {
+      margin-bottom: ${spacing.xs};
+      padding-bottom: ${spacing.xs};
+    }
+  }
+
+  .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION}:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} a`]: typography['.umd-sans-small'],
+    },
+  })}
+`;
+
+// prettier-ignore
 export const drawerSliderStyles = `
   .${DRAWER_SLIDER_CONTAINER} {
     position: relative;
@@ -80,6 +112,7 @@ export const drawerSliderStyles = `
   ${primarySliderStyles}
   ${childSliderStyles}
   ${selectedLinkStyles}
+  ${secondaryLinkStyles}
 `;
 
 export const CreateSlider = ({ element }: { element: UMDNavDrawer }) => {

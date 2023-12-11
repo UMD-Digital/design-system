@@ -72,25 +72,6 @@ const slideActionStyles = `
   .${DRAWER_SLIDER_ACTIONS} {
     padding-left: ${spacing.sm};
   }
-
-  .${DRAWER_SLIDER_ACTIONS} .${ELEMENTS.DRAWER_SLIDE_ACTION} {
-    border-bottom: none;
-    margin-bottom: ${spacing.min};
-    padding-bottom: ${spacing.min};
-  }
-
-  @media (min-width: 480px) {
-   .${DRAWER_SLIDER_ACTIONS} .${ELEMENTS.DRAWER_SLIDE_ACTION} {
-      margin-bottom: ${spacing.xs};
-      padding-bottom: ${spacing.xs};
-    }
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${DRAWER_SLIDER_ACTIONS} .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}`]: typography['.umd-sans-small'],
-    },
-  })}
 `;
 
 // prettier-ignore
@@ -148,6 +129,7 @@ const createSlideActions = ({
   if (links.length > 0) {
     links.forEach((link) => {
       const slideAction = CreateSlideAction({ element, link });
+      slideAction.classList.add(ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION);
       slideActionsContainer.appendChild(slideAction);
     });
   }

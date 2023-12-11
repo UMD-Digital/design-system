@@ -10,14 +10,26 @@ import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
 
 // prettier-ignore
+const hasDropdownStyles = `
+  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.DROPDOWN_CONTAINER} {
+    display: block;
+  }
+  
+  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
+    transform: rotate(180deg) translateY(5px);
+  }
+  
+  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}] .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}]:before {
+    bottom: 1px;
+    right: 20px;
+  }
+`
+
+// prettier-ignore
 export const ComponentStyles = `
   :host {
     display: block;
     container: umd-nav-item / inline-size; 
-  }
-
-  :host * {
-    box-sizing: border-box;
   }
 
   ${Reset}
@@ -38,15 +50,8 @@ export const ComponentStyles = `
     display: block;
   }
 
-  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.DROPDOWN_CONTAINER} {
-    display: block;
-  }
-
-  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
-    transform: rotate(180deg) translateY(5px);
-  }
-
   ${PrimaryStyles}
+  ${hasDropdownStyles}
 `;
 
 export const CreateShadowDom = ({ element }: { element: ElementType }) => {

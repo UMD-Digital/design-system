@@ -33,10 +33,10 @@ export const PrimaryStyles = `
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}]:before {
     content: '';
     position: absolute;
-    bottom: 1px;
+    bottom: -5px;
     height: 3px;
-    width: calc(100% - 18px);
     left: -3px;
+    right: -3px;
     background-color: ${colors.gold};
     display: block;
     z-index: -1;

@@ -70,16 +70,25 @@ const headlineStyles = `
 // prettier-ignore
 const slideActionStyles = `
   .${DRAWER_SLIDER_ACTIONS} {
-    padding-left: ${spacing.md};
+    padding-left: ${spacing.sm};
   }
 
   .${DRAWER_SLIDER_ACTIONS} .${ELEMENTS.DRAWER_SLIDE_ACTION} {
     border-bottom: none;
+    margin-bottom: ${spacing.min};
+    padding-bottom: ${spacing.min};
+  }
+
+  @media (min-width: 480px) {
+   .${DRAWER_SLIDER_ACTIONS} .${ELEMENTS.DRAWER_SLIDE_ACTION} {
+      margin-bottom: ${spacing.xs};
+      padding-bottom: ${spacing.xs};
+    }
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${DRAWER_SLIDER_ACTIONS} .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}`]: typography['.umd-sans-medium'],
+      [`.${DRAWER_SLIDER_ACTIONS} .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}`]: typography['.umd-sans-small'],
     },
   })}
 `;

@@ -78,7 +78,7 @@ export const CreateSlider = ({ element }: { element: UMDNavDrawer }) => {
 
   slider.classList.add(DRAWER_SLIDER);
   slider.appendChild(primarySlide);
-  slider.addEventListener('click', (event) => {
+  sliderContainer.addEventListener('click', (event) => {
     event.stopPropagation();
   });
 

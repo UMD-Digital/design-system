@@ -48,6 +48,23 @@ const sliderStyles = `
   }
 `;
 
+const selectedLinkStyles = `
+  .${DRAWER_SLIDER_CONTAINER} a[${VARIABLES.ATTRIBUTE_ACTIVE_SELECTED}] {
+    position: relative;
+  }
+
+  .${DRAWER_SLIDER_CONTAINER} a[${VARIABLES.ATTRIBUTE_ACTIVE_SELECTED}]:before {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    height: 3px;
+    left: -3px;
+    right: -3px;
+    background-color: ${colors.gold};
+    display: block;
+  }
+`;
+
 // prettier-ignore
 export const drawerSliderStyles = `
   .${DRAWER_SLIDER_CONTAINER} {
@@ -62,6 +79,7 @@ export const drawerSliderStyles = `
   ${sliderStyles}
   ${primarySliderStyles}
   ${childSliderStyles}
+  ${selectedLinkStyles}
 `;
 
 export const CreateSlider = ({ element }: { element: UMDNavDrawer }) => {

@@ -16,4 +16,5 @@ export const VARIABLES = {
   ATTRIBUTE_PARENT_REF: 'data-parent-ref',
   ATTRIBUTE_DATA_SLIDE: 'data-slide',
   ATTRIBUTE_ACTIVE_SLIDE: 'data-active',
+  ATTRIBUTE_ACTIVE_SELECTED: 'data-selected',
 };

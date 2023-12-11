@@ -4,7 +4,7 @@ import {
   typography,
   umdCta,
 } from '@universityofmaryland/umd-web-configuration';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { CheckForCtaStyle, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
   BREAKPOINTS,
@@ -17,10 +17,6 @@ const INTRO_HEADLINE = 'umd-element-date-slider-headline';
 const INTRO_LINK = 'umd-element-date-slider-link';
 
 const headlineStyles = `
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-
-  }
-
   .${INTRO_HEADLINE} {
     color: ${colors.black};
   }
@@ -99,7 +95,7 @@ export const CreateIntroWrapper = ({ element }: { element: HTMLElement }) => {
     introductionWrapper.appendChild(headlineSlot);
   }
   if (linkSlot) {
-    linkSlot.classList.add(INTRO_LINK);
+    CheckForCtaStyle({ element: linkSlot, styleClass: INTRO_LINK });
     introductionWrapper.appendChild(linkSlot);
   }
 

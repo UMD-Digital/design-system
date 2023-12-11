@@ -154,3 +154,20 @@ export const CheckForImageAlt = ({
 
   return true;
 };
+
+export const CheckForCtaStyle = ({
+  element,
+  styleClass,
+}: {
+  element: HTMLElement | HTMLAnchorElement;
+  styleClass: string;
+}) => {
+  if (element.nodeName === 'A') {
+    element.classList.add(styleClass);
+  } else {
+    const link = element.querySelector('a');
+    if (link) {
+      link.classList.add(styleClass);
+    }
+  }
+};

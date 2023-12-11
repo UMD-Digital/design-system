@@ -14,18 +14,20 @@
           Dates Title
         </p>
 
-        <a slot="link" href="https://google.com">
-          <svg width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M7.7183 6.98243L2.625 1.89575H6.15621L11.306 6.93269L11.2563 6.98243L11.306 7.03218L6.15621 12.0691H2.625L7.7183 6.98243Z" />
-          </svg>
-          <span>CTA Link</span>
-        </a>
+        <div slot="link">
+          <a href="https://google.com">
+            <svg width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M7.7183 6.98243L2.625 1.89575H6.15621L11.306 6.93269L11.2563 6.98243L11.306 7.03218L6.15621 12.0691H2.625L7.7183 6.98243Z" />
+            </svg>
+            <span>CTA Link</span>
+          </a>
+        </div>
 
         <div slot="date-list">
           {{ DateDisplay.DateWithTitle() }}

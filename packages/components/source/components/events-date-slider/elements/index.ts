@@ -36,8 +36,8 @@ export const ContainerStyles = `
     background-color: ${colors.gray.darker};
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} ::slotted(*) {
-    color: #fff !important;
+  .${ELEMENTS.CONTAINER_DARK_CLASS} * {
+    color: #fff;
   }
 
   ${CoverStyles}

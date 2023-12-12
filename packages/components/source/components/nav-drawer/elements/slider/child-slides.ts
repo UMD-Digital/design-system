@@ -37,6 +37,7 @@ const backButtonStyles = `
     letter-spacing: 1px;
     display: flex;
     align-items: center;
+    color: ${colors.black};
   }
 
   .${DRAWER_SLIDER_BACK_BUTTON} button:hover,

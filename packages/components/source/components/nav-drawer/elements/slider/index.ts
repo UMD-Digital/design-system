@@ -74,15 +74,8 @@ const selectedLinkStyles = `
 const secondaryLinkStyles = `
   .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} {
     border-bottom: none;
-    margin-bottom: ${spacing.min};
-    padding-bottom: ${spacing.min};
-  }
-  
-  @media (min-width: 480px) {
-    .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} {
-      margin-bottom: ${spacing.xs};
-      padding-bottom: ${spacing.xs};
-    }
+    margin-bottom: ${spacing.xs};
+    padding-bottom: ${spacing.xs};
   }
 
   .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION}:last-child {

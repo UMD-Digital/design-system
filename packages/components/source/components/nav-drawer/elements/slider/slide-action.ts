@@ -20,6 +20,10 @@ const anchorStyles = `
   })}
 
   .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK} {
+    line-height: 1.3em;
+  }
+
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK} {
     font-weight: ${fontWeight.extraBold};
     transition: color 0.3s ease-in-out;
   }
@@ -33,12 +37,13 @@ const anchorStyles = `
 // prettier-ignore
 const buttonStyles = `
   .${DRAWER_SLIDE_ACTION_BUTTON} {
-    padding-right: ${spacing.sm};
+    position: absolute;
+    right: ${spacing.min};
+    top: 5px;
     width: ${spacing.lg};
     height: ${spacing.lg};
     display: flex;
     justify-content: center;
-    align-items: center;
   }
 
   .${DRAWER_SLIDE_ACTION_BUTTON}:hover svg,
@@ -59,18 +64,12 @@ const buttonStyles = `
 export const slideActionStyles = `
   .${ELEMENTS.DRAWER_SLIDE_ACTION} {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    position: relative;
     border-bottom: 1px solid ${colors.gray.light};
-    margin-bottom: ${spacing.min};
-    padding-bottom: ${spacing.min};
-  }
-
-  @media (min-width: 480px) {
-    .${ELEMENTS.DRAWER_SLIDE_ACTION} {
-      margin-bottom: ${spacing.sm};
-      padding-bottom: ${spacing.sm};
-    }
+    margin-bottom: ${spacing.md};
+    padding-bottom: ${spacing.md};
+    padding-right: ${spacing['3xl']};
   }
 
   ${anchorStyles}

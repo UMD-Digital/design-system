@@ -15,6 +15,7 @@ export class UMDNavDrawer extends HTMLElement {
   _upcomingSlide: null | string;
   _previousSlide: null | string;
   _currentSlide: null | HTMLDivElement;
+  _focusCallback: null | (() => void);
 
   constructor() {
     super();
@@ -22,6 +23,7 @@ export class UMDNavDrawer extends HTMLElement {
     this._upcomingSlide = null;
     this._previousSlide = null;
     this._currentSlide = null;
+    this._focusCallback = null;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });

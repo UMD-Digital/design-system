@@ -11,13 +11,12 @@ import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction } from './slide-action';
 
 const DRAWER_SLIDER_CHILD_CONTAINER = 'umd-element-drawer-child-slider';
-const DRAWER_SLIDER_BACK_BUTTON = 'umd-element-drawer-back-button';
 const DRAWER_SLIDER_HEADLINE = 'umd-element-drawer-back-headline';
 const DRAWER_SLIDER_ACTIONS = 'umd-element-drawer-back-actions';
 
 // prettier-ignore
 const backButtonStyles = `
-  .${DRAWER_SLIDER_BACK_BUTTON} {
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} {
     display: block;
     border-bottom: 1px solid ${colors.gray.light};
     margin-bottom: ${spacing.sm};
@@ -25,13 +24,13 @@ const backButtonStyles = `
   }
 
   @media (min-width: 480px) {
-    .${DRAWER_SLIDER_BACK_BUTTON} {
+    .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} {
       margin-bottom: ${spacing.md};
       padding-bottom: ${spacing.md};
     }
   }
 
-  .${DRAWER_SLIDER_BACK_BUTTON} button {
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} button {
     text-transform: uppercase;
     font-weight: ${fontWeight.semiBold};
     letter-spacing: 1px;
@@ -40,12 +39,12 @@ const backButtonStyles = `
     color: ${colors.black};
   }
 
-  .${DRAWER_SLIDER_BACK_BUTTON} button:hover,
-  .${DRAWER_SLIDER_BACK_BUTTON} button:focus {
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} button:hover,
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} button:focus {
     text-decoration: underline;
   }
 
-  .${DRAWER_SLIDER_BACK_BUTTON} button svg {
+  .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} button svg {
     fill: ${colors.red};
     width: 12px;
     height: 12px;
@@ -99,7 +98,7 @@ const createSlideBackButton = ({
     element.eventSlideRight();
   });
 
-  backButtonContainer.classList.add(DRAWER_SLIDER_BACK_BUTTON);
+  backButtonContainer.classList.add(ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON);
   backButtonContainer.appendChild(slideBackButton);
 
   return backButtonContainer;

@@ -1,3 +1,4 @@
+import { EventAccessibilityFocus } from 'helpers/accessibility';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 
@@ -10,6 +11,15 @@ export const EventOpen = ({ element }: { element: UMDNavDrawer }) => {
   const drawer = ShadowRoot.querySelector(
     `.${ELEMENTS.NAV_DRAWER_CONTAINER}`,
   ) as HTMLDivElement;
+  const activeSlide = ShadowRoot.querySelector(
+    `[${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}]`,
+  ) as HTMLDivElement;
+  const firstLink = activeSlide.querySelector(`a`) as HTMLAnchorElement;
+
+  element._focusCallback = EventAccessibilityFocus({
+    element,
+    action: () => element.eventClose(),
+  });
 
   bodyOverlay.style.display = 'block';
   drawer.style.display = 'flex';
@@ -18,11 +28,13 @@ export const EventOpen = ({ element }: { element: UMDNavDrawer }) => {
     bodyOverlay.style.opacity = '1';
     drawer.style.transform = 'translateX(0)';
     body.style.overflow = 'hidden';
+    if (firstLink) firstLink.focus();
   }, 100);
 };
 
 export const EventClose = ({ element }: { element: UMDNavDrawer }) => {
   const body = document.querySelector('body') as HTMLBodyElement;
+  const focusCallback = element._focusCallback;
   const ShadowRoot = element._shadow as ShadowRoot;
   const bodyOverlay = ShadowRoot.querySelector(
     `.${ELEMENTS.NAV_DRAWER_BODY_OVERLAY}`,
@@ -30,6 +42,8 @@ export const EventClose = ({ element }: { element: UMDNavDrawer }) => {
   const drawer = ShadowRoot.querySelector(
     `.${ELEMENTS.NAV_DRAWER_CONTAINER}`,
   ) as HTMLDivElement;
+
+  if (focusCallback) focusCallback();
 
   bodyOverlay.style.opacity = '0';
   drawer.style.transform = 'translateX(-100%)';

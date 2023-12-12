@@ -5,6 +5,8 @@ export const ELEMENTS = {
   DRAWER_SLIDE_ACTION: 'umd-element-drawer-slide-action',
   DRAWER_SLIDE_ACTION_LINK: 'umd-element-drawer-slide-action-link',
   DRAWER_SLIDE_SECONDARY_ACTION: 'umd-element-drawer-slide-secondary-action',
+  DRAWER_SLIDE_ACTION_BACK_BUTTON:
+    'umd-element-drawer-slide-action-back-button',
 };
 export const SLOTS = {
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',

@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
 import { ELEMENT_TYPE } from 'components/events-date-slider/component';
 import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
@@ -74,9 +74,23 @@ export const ButtonStyles = `
   .${BACK_ARROW_CLASS} {
     left: 0;
   }
+
+  @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
+    .${BACK_ARROW_CLASS} {
+      left: -24px;
+      top: ${spacing.xs};
+    }
+  }
   
   .${FORWARD_ARROW_CLASS} {
     right: 0;
+  }
+
+  @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
+    .${FORWARD_ARROW_CLASS} {
+      right: -24px;
+      top: ${spacing.xs};
+    }
   }
 
   ${darkThemeStyles}

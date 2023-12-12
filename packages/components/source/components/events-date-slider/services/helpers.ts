@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
 import { ELEMENT_TYPE } from '../component';
 import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 
@@ -108,8 +108,11 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
       const maxHeightElement = dateElements.sort((a, b) => {
         return a.offsetHeight - b.offsetHeight;
       })[0];
+      const height =
+        maxHeightElement.offsetHeight +
+        parseInt(maxHeightElement.style.marginTop.replace('px', ''));
 
-      sliderWrapper.style.height = `${maxHeightElement.offsetHeight}px`;
+      sliderWrapper.style.height = `${height}px`;
     };
 
     const setWidthPerDate = () => {
@@ -122,14 +125,22 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
 
       dateElements.forEach((dateElement) => {
         dateElement.style.width = `${dateElementSize}px`;
-        dateElement.style.justifyContent = `center`;
 
         if (isMobile) {
+          dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `center`;
           dateElement.style.paddingRight = `0`;
+          dateElement.style.marginTop = `${spacing.xs}`;
+          dateElement.style.paddingTop = `${spacing.xs}`;
+          dateElement.style.borderTop = `1px solid ${colors.gray.light}`;
         } else {
+          dateElement.style.display = `block`;
           dateElement.style.justifyContent = `inherit`;
           dateElement.style.paddingRight = `${spacing.lg}`;
+
+          dateElement.style.marginTop = `0`;
+          dateElement.style.paddingTop = `0`;
+          dateElement.style.borderTop = `none`;
         }
       });
     };

@@ -54,7 +54,6 @@ const linkStyles = `
 
 export const IntroStyles = `
   .${INTRO_CONTAINER} {
-    margin-bottom: ${spacing.md};
     padding: 0 ${spacing.lg};
     position: relative;
   }
@@ -71,7 +70,6 @@ export const IntroStyles = `
       padding-right: 24px;
       padding-left: 0;
       width: 200px;
-      margin-bottom: 0;
     }
   }
 

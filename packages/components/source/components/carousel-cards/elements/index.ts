@@ -116,6 +116,7 @@ export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
 
   cardsSlot.style.display = `flex`;
   cardsSlot.style.justifyContent = `space-between`;
+
   slotContent.forEach((card, index) => {
     if (index > 1) card.style.display = 'none';
   });

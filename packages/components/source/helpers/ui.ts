@@ -52,8 +52,10 @@ export const SlotDefaultStyling = ({
   slotRef: string;
 }) => {
   const elementRef = element.querySelector(
-    `[slot=${slotRef}]`,
+    `:scope > [slot=${slotRef}]`,
   ) as HTMLSlotElement;
+
+  console.log(elementRef);
 
   if (!elementRef) return null;
   const isStyled = elementRef.hasAttribute('styled');

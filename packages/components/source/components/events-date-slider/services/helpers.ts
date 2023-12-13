@@ -81,7 +81,7 @@ export const JumpToDate = ({ element }: { element: ELEMENT_TYPE }) => {
 
 export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
-
+  const isThemeDark = element.getAttribute('theme') === 'dark';
   const slider = element.querySelector(
     `[slot=${SLOTS.DATE_SLOT_NAME}]`,
   ) as HTMLDivElement;
@@ -127,12 +127,16 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
         dateElement.style.width = `${dateElementSize}px`;
 
         if (isMobile) {
+          const lineColor = isThemeDark
+            ? colors.gray.mediumAA
+            : colors.gray.light;
+
           dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `center`;
           dateElement.style.paddingRight = `0`;
           dateElement.style.marginTop = `${spacing.xs}`;
           dateElement.style.paddingTop = `${spacing.xs}`;
-          dateElement.style.borderTop = `1px solid ${colors.gray.light}`;
+          dateElement.style.borderTop = `1px solid ${lineColor}`;
         } else {
           dateElement.style.display = `block`;
           dateElement.style.justifyContent = `inherit`;

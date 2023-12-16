@@ -55,8 +55,6 @@ export const SlotDefaultStyling = ({
     `:scope > [slot=${slotRef}]`,
   ) as HTMLSlotElement;
 
-  console.log(elementRef);
-
   if (!elementRef) return null;
   const isStyled = elementRef.hasAttribute('styled');
 

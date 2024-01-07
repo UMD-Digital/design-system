@@ -1,0 +1,13 @@
+.cta-layout {
+  overflow: hidden;
+  max-width: 700px;
+  display: flex;
+
+  & > * {
+    height: 100%;
+
+    &:not(:first-child) {
+      margin-left: 24px;
+    }
+  }
+}

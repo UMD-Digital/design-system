@@ -1,13 +1,13 @@
-import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { ELEMENTS } from '../globals';
-import { CallToActionType } from '../component';
 import {
   colors,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
+import { NEW_WINDOW_ICON, DOCUMENT_ICON } from 'assets/icons';
+import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
+import { ELEMENTS } from '../globals';
+import { CallToActionType } from '../component';
 
 const CTA_WRAPPER = 'umd-call-to-action-wrapper';
-const CTA_TEXT_WRAPPER = 'umd-call-to-action-text-wrapper';
 
 const sizeStyles = `
   [data-size="standard"] {
@@ -81,7 +81,7 @@ export const ComponentStyles = `
     align-items: center;
   }
 
-  .${CTA_TEXT_WRAPPER} {
+  .${ELEMENTS.CTA_TEXT_WRAPPER} {
     white-space: nowrap;
   }
 
@@ -109,10 +109,32 @@ const CreateLinkIcon = ({
   icon: SVGSVGElement | HTMLImageElement | null;
 }) => {
   const wrapper = cta.querySelector(`.${CTA_WRAPPER}`) as HTMLSpanElement;
-  const textSpan = cta.querySelector(`.${CTA_TEXT_WRAPPER}`) as HTMLSpanElement;
+  const textSpan = cta.querySelector(
+    `.${ELEMENTS.CTA_TEXT_WRAPPER}`,
+  ) as HTMLSpanElement;
+  const isExternalReference = cta
+    .getAttribute('href')
+    ?.includes('http' || 'https');
+  const isExternalTab = cta.getAttribute('target') === '_blank';
+  const isDownload = cta.getAttribute('download') !== null;
 
-  if (icon && wrapper) {
-    if (icon) wrapper.insertBefore(icon, textSpan);
+  if (!wrapper || !textSpan) return;
+
+  if (icon) {
+    wrapper.insertBefore(icon, textSpan);
+    return;
+  }
+
+  if (isExternalReference || isExternalTab) {
+    wrapper.innerHTML = NEW_WINDOW_ICON;
+    wrapper.appendChild(textSpan);
+    return;
+  }
+
+  if (isDownload) {
+    wrapper.innerHTML = DOCUMENT_ICON;
+    wrapper.appendChild(textSpan);
+    return;
   }
 };
 
@@ -129,7 +151,7 @@ const CreateTextSpan = ({ cta }: { cta: HTMLElement }) => {
   const wrapper = document.createElement('span');
 
   if (cta.textContent) {
-    wrapper.classList.add(CTA_TEXT_WRAPPER);
+    wrapper.classList.add(ELEMENTS.CTA_TEXT_WRAPPER);
     wrapper.innerHTML = cta.textContent;
     cta.textContent = '';
     cta.appendChild(wrapper);

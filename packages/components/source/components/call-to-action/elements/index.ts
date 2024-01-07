@@ -1,5 +1,6 @@
 import {
   colors,
+  spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
 import { NEW_WINDOW_ICON, DOCUMENT_ICON } from 'assets/icons';
@@ -11,11 +12,11 @@ const CTA_WRAPPER = 'umd-call-to-action-wrapper';
 
 const sizeStyles = `
   [data-size="standard"] {
-    padding: 12px 32px;
+    padding: ${spacing.xs} ${spacing.lg};
   }
 
   [data-size="large"] {
-    padding: 16px 32px;
+    padding: ${spacing.sm} ${spacing.lg};
   }
 `;
 
@@ -32,7 +33,7 @@ const typePrimaryStyles = `
     border: 1px solid ${colors.red};
     color: ${colors.white};
     max-width: 400px;
-    transition: background .5s,border .5s,color .5s;
+    transition: background .5s, border .5s, color .5s;
   }
 
   :host [data-type="primary"]:hover,
@@ -48,13 +49,32 @@ const typePrimaryStyles = `
 
 const typeSecondaryStyles = `
   [data-type="secondary"] {
-    padding: 12px 32px;
+    padding: ${spacing.xs} ${spacing.lg};
   }
 `;
 
 const typeOutlineStyles = `
   [data-type="outline"] {
-    padding: 12px 32px;
+    backgroundColor: ${colors.white};
+    border: 1px solid ${colors.gray.darker};
+    color: ${colors.black};
+    transition: background .5s, border .5s, color .5s;
+  }
+
+  [data-type="outline"] svg {
+    fill: ${colors.red};
+    transition: fill .5s;
+  }
+
+  [data-type="outline"]:hover, 
+  [data-type="outline"]:focus {
+    background-color: ${colors.gray.darker};
+    color: ${colors.white};
+  }
+
+  [data-type="outline"]:hover svg, 
+  [data-type="outline"]:focus svg {
+    fill: ${colors.white};
   }
 `;
 

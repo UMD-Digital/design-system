@@ -12,6 +12,8 @@ export const SHORT_ARROW_ICON = `<svg aria-hidden="true" width="96" height="96" 
 
 export const CHEVRON_SMALL_ICON = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96"fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M47.2598 49.1794L72.3325 21L94 21.0001L58.9085 62.2714L58.9247 62.2897L47.284 76L47.2598 75.9715L47.2356 76L35.5949 62.2897L35.6111 62.2714L0.519623 21L22.1871 21.0001L47.2598 49.1794Z"></path></svg>`;
 
+export const FEARLESS_ICON = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path></svg>`;
+
 export const DOCUMENT_ICON = `<svg aria-hidden="true" id="icon-document" data-name="icon-document" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><defs><style>.cls-1 { fill-rule: evenodd; }</style></defs><path class="cls-1" d="m83.12,23.3v.63h-17.26s0-16.99,0-16.99l17.26,16.36ZM60.19,6v23.6h22.93s0,60.4,0,60.4H13V6h47.19Zm7.55,34.09H29.04v8h38.7v-8Zm-38.7,18.1h38.7v8H29.05v-8Z"/></svg>`;
 
 export const NEW_WINDOW_ICON = `<svg id="new-window-icon" data-name="new-window-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><defs><style>.cls-1 {fill-rule: evenodd;}</style></defs><path class="cls-1" d="m48.91,15.78l27.79-.02-9.18,9.4H11v62.73h63.83v-54l9.34-9.57v26.66s11.78-12.12,11.78-12.12V15.75s.05,0,.05,0V4h-.04s-11.78,0-11.78,0h-23.14s-12.12,11.78-12.12,11.78Zm9.19,19.04l-15.76,16.14,8.01,8.01,14.67-15.02v34.3H20.82v-43.43h37.28Z"/></svg>`;

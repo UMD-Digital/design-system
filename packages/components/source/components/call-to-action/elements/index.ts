@@ -1,9 +1,10 @@
 import {
+  animatedLinks,
   colors,
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
-import { NEW_WINDOW_ICON, DOCUMENT_ICON } from 'assets/icons';
+import { NEW_WINDOW_ICON, DOCUMENT_ICON, FEARLESS_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { ELEMENTS } from '../globals';
 import { CallToActionType } from '../component';
@@ -49,8 +50,15 @@ const typePrimaryStyles = `
 
 const typeSecondaryStyles = `
   [data-type="secondary"] {
-    padding: ${spacing.xs} ${spacing.lg};
+    color: ${colors.black};
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`[data-type="secondary"] span`]:
+        animatedLinks['.umd-slidein-underline-black'],
+    },
+  })}
 `;
 
 const typeOutlineStyles = `
@@ -85,6 +93,7 @@ export const ComponentStyles = `
 
   .${ELEMENTS.CTA_CONTAINER} {
     display: inline-block;
+    font-weight: 800;
   }
 
   .${ELEMENTS.CTA_CONTAINER} svg {
@@ -124,9 +133,11 @@ const GetIcon = ({ cta }: { cta: HTMLElement }) => {
 const CreateLinkIcon = ({
   cta,
   icon,
+  type,
 }: {
   cta: HTMLElement;
   icon: SVGSVGElement | HTMLImageElement | null;
+  type: string;
 }) => {
   const wrapper = cta.querySelector(`.${CTA_WRAPPER}`) as HTMLSpanElement;
   const textSpan = cta.querySelector(
@@ -142,6 +153,12 @@ const CreateLinkIcon = ({
 
   if (icon) {
     wrapper.insertBefore(icon, textSpan);
+    return;
+  }
+
+  if (type === 'secondary') {
+    wrapper.innerHTML = FEARLESS_ICON;
+    wrapper.appendChild(textSpan);
     return;
   }
 
@@ -179,6 +196,8 @@ const CreateTextSpan = ({ cta }: { cta: HTMLElement }) => {
 };
 
 export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
+  const type = element._type;
+  const size = element._size;
   const ctaElement = element.querySelector(`a`);
   const buttonElement = element.querySelector(`button`);
   let cta = null;
@@ -191,10 +210,10 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
 
     CreateTextSpan({ cta });
     CreateWrapper({ cta });
-    CreateLinkIcon({ cta, icon });
+    CreateLinkIcon({ cta, icon, type });
     cta.classList.add(ELEMENTS.CTA_CONTAINER);
-    cta.setAttribute('data-size', element._size);
-    cta.setAttribute('data-type', element._type);
+    cta.setAttribute('data-size', size);
+    cta.setAttribute('data-type', type);
   }
 
   if (ctaElement) ctaElement.remove();

@@ -1,0 +1,1004 @@
+{% extends '../_layout.twig' %}
+
+{% block page %}
+  <section class="pb-2xl">
+    <div class="umd-lock">
+      <h1 class="umd-sans-large font-bold mb-sm">
+        Tokens
+      </h1>
+      <div class="umd-configuration-section">
+        <div class="umd-rich-text">
+          <ul>
+            <li>
+              Colors <a href="#tokens-colors"><em>
+                  [core, grays, and varients]
+                </em></a>
+            </li>
+            <li>
+              Fonts
+              <a href="#tokens-fonts">
+                <em>[font-family, font-size, line-hight, and font-weight]</em>
+              </a>
+            </li>
+            <li>
+              Layout <a href="#tokens-layout"><em>[screens and spacing]</em></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="umd-configuration-section">
+        <h2 id="tokens-colors" class="umd-section-headline">
+          Tokens - Colors
+        </h2>
+
+        <h3 class="umd-sans-extrasmall font-bold mb-sm">
+          Core Palette
+        </h3>
+
+        <div class="umd-grid-four mb-2xl">
+          <div>
+            <div class="bg-red mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Maryland Red
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #e21833
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  227/25/51
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/100/84/4
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                  186
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-gold mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Maryland Gold
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #ffd200
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  255/210/0
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/16/100/0
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                  116
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-white border-2 border-gray-lighter border-solid mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                White
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #ffffff
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  255/255/255
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/0
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+
+                  <em>n/a</em>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-black mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Black
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #000000
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  0/0/0
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/100
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                  Black 6
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="umd-sans-extrasmall font-bold mb-sm">
+          Grays
+        </h3>
+
+        <div class="umd-grid-four mb-2xl">
+          <div>
+            <div class="bg-gray-darker mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Gray Darker
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #242424
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  36/36/36
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/86
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-gray-dark mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Gray Dark
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #454545
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  69/69/69
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/73
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-gray-mediumAA mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Gray Medium (AA Compliant)
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #757575
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  117/117/117
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/54
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-gray-medium mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Gray Medium
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #7f7f7f
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  127/127/127
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/50
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-gray-light mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Gray Light
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #e6e6e6
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  230/230/230
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/10
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-gray-lighter mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Gray Lighter
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #f1f1f1
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  241/241/241
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/5
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-gray-lightest mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Gray lightest
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #fafafa
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  250/250/250
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/0/0/2
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="umd-sans-extrasmall font-bold mb-sm">
+          Accents and Varients
+        </h3>
+
+        <div class="umd-grid-four mb-2xl">
+          <div>
+            <div class="bg-redDark mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Red Darker
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #e21833
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  169/0/7
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  0/100/96/34
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-green mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Green
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #e21833
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  0/128/0
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  100/0/100/50
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-blue mb-sm h-8xl w-full"></div>
+            <div class="umd-rich-text">
+              <p class="umd-sans-medium font-bold">
+                Blue
+              </p>
+
+              <ul>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Hexidecimal">Hex:</abbr>
+                  </strong>
+                  #e21833
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Red Green Blue Digital">
+                      RGB:
+                    </abbr>
+                  </strong>
+                  47/126/218
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help"
+                      title="Cyan Magenta Yellow Key/Black Print">
+                      CMYK:
+                    </abbr>
+                  </strong>
+                  78/42/0/15
+                </li>
+                <li>
+                  <strong>
+                    <abbr class="cursor-help" title="Pantone Matching System">
+                      PMS:
+                    </abbr>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="umd-configuration-section">
+        <h2 id="tokens-fonts" class="umd-section-headline">
+          Tokens - Font Family
+        </h2>
+
+        <h3 class="umd-sans-extrasmall font-bold mb-sm">
+          Font Size Scale
+        </h3>
+
+        <div class="umd-rich-text mb-sm">
+          <ul>
+            <li class="mb-3xl text-max">
+              <strong>max:</strong>
+              <span>80px</span>
+            </li>
+            <li class="mb-2xl text-7xl">
+              <strong>7xl:</strong>
+              <span>72px</span>
+            </li>
+            <li class="mb-xl text-6xl">
+              <strong>6xl:</strong>
+              <span>56px</span>
+            </li>
+            <li class="mb-md text-5xl">
+              <strong>5xl:</strong>
+              <span>48px</span>
+            </li>
+            <li class="mb-xs text-4xl">
+              <strong>4xl:</strong>
+              <span>32px</span>
+            </li>
+            <li class="text-3xl">
+              <strong>3xl:</strong>
+              <span>24px</span>
+            </li>
+            <li class="text-2xl">
+              <strong>2xl:</strong>
+              <span>22px</span>
+            </li>
+            <li class="mb-min text-xl">
+              <strong>xl:</strong>
+              <span>20px</span>
+            </li>
+            <li class="mb-min text-lg">
+              <strong>lg:</strong>
+              <span>18px</span>
+            </li>
+            <li class="mb-min text-base">
+              <strong>base:</strong>
+              <span>16px</span>
+            </li>
+            <li class="mb-min text-sm">
+              <strong>sm:</strong>
+              <span>14px</span>
+            </li>
+            <li class="mb-min text-min">
+              <strong>min:</strong>
+              <span>12px</span>
+            </li>
+          </ul>
+        </div>
+
+        <h3 class="umd-sans-extrasmall font-bold mb-sm">
+          Font Weights
+        </h3>
+
+        <div class="umd-rich-text mb-sm">
+          <p>
+            Font weights match the standard scale
+          </p>
+
+          <ul>
+            <li class="font-extrabold">
+              <span>extraBlack:</span>
+              <span>950</span>
+            </li>
+            <li class="font-black">
+              <span>black:</span>
+              <span>900</span>
+            </li>
+            <li class="font-extrabold">
+              <span>extraBold:</span>
+              <span>800</span>
+            </li>
+            <li class="font-bold">
+              <span>bold:</span>
+              <span>700</span>
+            </li>
+            <li class="font-semibold">
+              <span>semiBold:</span>
+              <span>600</span>
+            </li>
+            <li class="font-medium">
+              <span>medium:</span>
+              <span>500</span>
+            </li>
+            <li class="font-normal">
+              <span>normal:</span>
+              <span>400</span>
+            </li>
+            <li class="font-light">
+              <span>light:</span>
+              <span>300</span>
+            </li>
+            <li class="font-extralight">
+              <span>extraLight:</span>
+              <span>200</span>
+            </li>
+            <li class="font-thin">
+              <span>thin:</span>
+              <span>100</span>
+            </li>
+          </ul>
+        </div>
+
+        <h3 class="umd-sans-extrasmall font-bold mb-sm">
+          Font Families
+        </h3>
+
+        <div class="umd-rich-text mb-sm">
+          <p class="text-lg font-sans">
+            'Manrope', Helvetica, Arial, Verdana, sans-serif
+          </p>
+          <p class="text-lg font-serif">
+            'Crimson Pro', Georgia, serif
+          </p>
+          <p class="text-lg font-mono">
+            'IBM Plex Mono', monospace
+          </p>
+
+          <p>
+            <strong>Fonts are available as variable Google Fonts:</strong>
+          </p>
+
+          {# prettier-ignore #}
+          <pre class="overflow-x-scroll">
+&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
+&lt;link rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin /&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono&family=Manrope:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet" /&gt;</pre>
+        </div>
+      </div>
+
+      <div class="umd-configuration-section">
+        <h2 id="tokens-layout" class="umd-section-headline">
+          Tokens - Layout
+        </h2>
+
+        <div class="umd-rich-text mb-sm">
+          <p>
+            <em>
+              <strong>Note:</strong> Layout classes, such as umd-lock, umd-grid,
+              and umd-flex, are included separately in their own section. <a href="/variables/layout">
+                View Layout Classes
+              </a>
+            </em>
+          </p>
+        </div>
+
+        <h3 class="umd-sans-extrasmall font-bold mb-sm">
+          Spacing
+        </h3>
+
+        <div class="mb-sm">
+          <div>
+            <p>
+              <strong>max</strong>
+              <span>128px</span>
+            </p>
+            <div class="bg-red h-[128px] mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>8xl</strong>
+              <span>104px</span>
+            </p>
+            <div class="bg-red h-8xl mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>7xl</strong>
+              <span>96px</span>
+            </p>
+            <div class="bg-red h-7xl mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>6xl</strong>
+              <span>80px</span>
+            </p>
+            <div class="bg-red h-6xl mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>5xl</strong>
+              <span>72px</span>
+            </p>
+            <div class="bg-red h-5xl mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>4xl</strong>
+              <span>64px</span>
+            </p>
+            <div class="bg-red h-4xl mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>3xl</strong>
+              <span>56px</span>
+            </p>
+            <div class="bg-red h-3xl mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>2xl</strong>
+              <span>48px</span>
+            </p>
+            <div class="bg-red h-2xl mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>xl</strong>
+              <span>40px</span>
+            </p>
+            <div class="bg-red h-xl mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>lg</strong>
+              <span>32px</span>
+            </p>
+            <div class="bg-red h-lg mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>md</strong>
+              <span>24px</span>
+            </p>
+            <div class="bg-red h-md mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>sm</strong>
+              <span>16px</span>
+            </p>
+            <div class="bg-red h-sm mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>xs</strong>
+              <span>12px</span>
+            </p>
+            <div class="bg-red h-xs mb-xs"></div>
+          </div>
+          <div>
+            <p>
+              <strong>min</strong>
+              <span>8px</span>
+            </p>
+            <div class="bg-red h-[8px] mb-xs"></div>
+          </div>
+        </div>
+
+        <h3 class="umd-sans-extrasmall font-bold mb-sm">
+          Screens
+        </h3>
+
+        <div class="umd-rich-text mb-sm">
+          <ol>
+            <li>
+              <strong>small:</strong>
+              <ul>
+                <li>
+                  <strong>min:</strong> <span class="font-mono">320px</span>
+                </li>
+                <li>
+                  <strong>max:</strong> <span class="font-mono">479px</span>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>medium:</strong>
+              <ul>
+                <li>
+                  <strong>min:</strong> <span class="font-mono">480px</span>
+                </li>
+                <li>
+                  <strong>max:</strong> <span class="font-mono">649px</span>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>large:</strong>
+              <ul>
+                <li>
+                  <strong>min:</strong> <span class="font-mono">650px</span>
+                </li>
+                <li>
+                  <strong>max:</strong> <span class="font-mono">767px</span>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>tablet:</strong>
+              <ul>
+                <li>
+                  <strong>min:</strong> <span class="font-mono">768px</span>
+                </li>
+                <li>
+                  <strong>max:</strong>
+                  <span class="font-mono">1023px</span>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>desktop:</strong>
+              <ul>
+                <li>
+                  <strong>min:</strong>
+                  <span class="font-mono">1024px</span>
+                </li>
+                <li>
+                  <strong>max:</strong>
+                  <span class="font-mono">1199px</span>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>highDef:</strong>
+              <ul>
+                <li>
+                  <strong>min:</strong>
+                  <span class="font-mono">1200px</span>
+                </li>
+                <li>
+                  <strong>max:</strong>
+                  <span class="font-mono">1499px</span>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>maximum:</strong>
+              <ul>
+                <li>
+                  <strong>min:</strong>
+                  <span class="font-mono">1500px</span>
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

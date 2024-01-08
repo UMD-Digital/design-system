@@ -1,0 +1,96 @@
+{% extends '../_layout.twig' %}
+
+{% block page %}
+  <section class="pb-2xl">
+    <div class="umd-lock">
+      <h1 class="umd-sans-large font-bold mb-sm">
+        Link Animations
+      </h1>
+
+      <div class="umd-configuration-section">
+        <h2 id="link-animations" class="umd-section-headline">
+          Animated Link style classes
+        </h2>
+
+        <div class="umd-rich-text mb-md">
+          <p>
+            Useful for adding animations to links used in titles and non-cta
+            locations
+          </p>
+        </div>
+
+        <h3 class="my-md umd-sans-small font-bold text-gray-mediumAA">
+          Slide-in Animations
+        </h3>
+
+        <div class="flex flex-col items-start gap-y-sm">
+          <a href="#" class="umd-sans-larger umd-slidein-underline-red">
+            <span>UMD Slidein Underline Red</span>
+          </a>
+          <a href="#" class="umd-sans-larger umd-slidein-underline-gold">
+            <span>UMD Slidein Underline Gold</span>
+          </a>
+          <a href="#" class="umd-sans-larger umd-slidein-underline-black">
+            <span>UMD Slidein Underline Black</span>
+          </a>
+          <div class="p-xs bg-black text-white">
+            <a href="#" class="umd-sans-larger umd-slidein-underline-white">
+              <span>UMD Slidein Underline White</span>
+            </a>
+          </div>
+        </div>
+
+        <h3 class="my-md umd-sans-small font-bold text-gray-mediumAA">
+          Fade-in Animations
+        </h3>
+
+        <div class="flex flex-col items-start gap-y-sm">
+          <a href="#" class="umd-sans-larger umd-fadein-underline-red">
+            <span>UMD Fadein Underline Red</span>
+          </a>
+          <a href="#" class="umd-sans-larger umd-fadein-underline-gold">
+            <span>UMD Fadein Underline Gold</span>
+          </a>
+          <a href="#" class="umd-sans-larger umd-fadein-underline-black">
+            <span>UMD Fadein Underline Black</span>
+          </a>
+          <a href="#" class="umd-sans-larger umd-fadein-underline-gray">
+            <span>UMD Fadein Underline Gray</span>
+          </a>
+          <div class="p-xs bg-black text-white">
+            <a href="#" class="umd-sans-larger umd-fadein-underline-white">
+              <span>UMD Fadein Underline White</span>
+            </a>
+          </div>
+        </div>
+
+        <h3 class="my-md umd-sans-small font-bold text-gray-mediumAA">
+          Special Animations
+        </h3>
+
+        <div class="flex flex-col items-start gap-y-sm">
+          <a href="#" class="umd-sans-larger umd-slidein-underline-gray-red">
+            <span>UMD Fadein Underline Gray to Red</span>
+          </a>
+
+          <div>
+            <p class="bg-black p-sm text-white">
+              Class for use on simple links <em>
+                (links without any child nodes)
+              </em>:
+              <a href="#" class="umd-fadein-simple-dark">
+                Use <code>.umd-fadein-simple-dark</code> On the link itself
+              </a>
+            </p>
+          </div>
+          <div class="umd-rich-text umd-rich-text-dark bg-black p-sm text-white">
+            <p>
+              For links in <a href="#">rich text elements</a> on a dark background.
+              Use <span class="font-mono">.umd-rich-text-dark</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

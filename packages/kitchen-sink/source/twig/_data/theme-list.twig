@@ -1,15 +1,7 @@
 {% set list = [
   {
-    name: 'Spacing',
-    link: 'spacing'
-  },
-  {
-    name: 'Typography',
-    link: 'typography'
-  },
-  {
-    name: 'Kitchen Sink',
-    link: 'kitchen-sink'
+    name: 'Layout',
+    link: 'layout'
   }
 ] %}
 
@@ -22,13 +14,13 @@
 {% macro HeaderLinks() %}
   <ul>
     {% for item in list %}
-      <li><a href="/configuration/{{ item.link }}">{{ item.name }}</a></li>
+      <li><a href="/theme/{{ item.link }}">{{ item.name }}</a></li>
     {% endfor %}
   </ul>
 {% endmacro %}
 
 {% macro Links() %}
   {% for item in list %}
-    <a href="/configuration/{{ item.link }}">{{ item.name }}</a>
+    <a href="/theme/{{ item.link }}">{{ item.name }}</a>
   {% endfor %}
 {% endmacro %}

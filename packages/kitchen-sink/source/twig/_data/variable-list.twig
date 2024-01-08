@@ -1,0 +1,46 @@
+{% set list = [
+  {
+    name: 'Elements',
+    link: 'elements'
+  },
+  {
+    name: 'Layout',
+    link: 'layout'
+  },
+  {
+    name: 'Link Animations',
+    link: 'link-animations'
+  },
+  {
+    name: 'Rich Text',
+    link: 'rich-text'
+  },
+  {
+    name: 'Tokens',
+    link: 'tokens'
+  },
+  {
+    name: 'Typography',
+    link: 'typography'
+  }
+] %}
+
+{% macro DisplayName() %}
+  {% for item in list %}
+    {{ item.name }}
+  {% endfor %}
+{% endmacro %}
+
+{% macro HeaderLinks() %}
+  <ul>
+    {% for item in list %}
+      <li><a href="/variables/{{ item.link }}">{{ item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro Links() %}
+  {% for item in list %}
+    <a href="/variables/{{ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}

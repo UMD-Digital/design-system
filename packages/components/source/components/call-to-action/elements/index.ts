@@ -1,6 +1,7 @@
 import {
   animatedLinks,
   colors,
+  fontSize,
   spacing,
   typography,
 } from '@universityofmaryland/umd-web-configuration';
@@ -14,10 +15,18 @@ const CTA_WRAPPER = 'umd-call-to-action-wrapper';
 const sizeStyles = `
   [data-size="standard"] {
     padding: ${spacing.xs} ${spacing.lg};
+    font-size: ${fontSize.sm};
   }
 
-  [data-size="large"] {
+  :host [data-size="large"] {
     padding: ${spacing.sm} ${spacing.lg};
+    font-size: ${fontSize.lg};
+  }
+
+  :host [data-size="large"] svg {
+    height: 17px;
+    width: 17px;
+    margin-right: 5px;
   }
 `;
 
@@ -56,7 +65,7 @@ const typeSecondaryStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`[data-type="secondary"] span`]:
-        animatedLinks['.umd-slidein-underline-black'],
+        animatedLinks['.umd-slidein-underline-red'],
     },
   })}
 `;
@@ -115,10 +124,10 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${sizeStyles}
   ${typePrimaryStyles}
   ${typeSecondaryStyles}
   ${typeOutlineStyles}
+  ${sizeStyles}
 `;
 
 const GetIcon = ({ cta }: { cta: HTMLElement }) => {
@@ -198,11 +207,18 @@ const CreateTextSpan = ({ cta }: { cta: HTMLElement }) => {
 export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
   const type = element._type;
   const size = element._size;
-  const ctaElement = element.querySelector(`a`);
+  const linkElements = Array.from(element.querySelectorAll(`a`));
   const buttonElement = element.querySelector(`button`);
+  const linkElementsPlainText = linkElements.filter(
+    (link) => link.getAttribute('slot') === 'plain-text',
+  );
+  const linkElementFiltered = linkElements.filter(
+    (link) => !linkElementsPlainText.includes(link),
+  );
+  const linkElement = linkElementFiltered[0] || null;
   let cta = null;
 
-  if (ctaElement) cta = ctaElement.cloneNode(true) as HTMLAnchorElement;
+  if (linkElement) cta = linkElement.cloneNode(true) as HTMLAnchorElement;
   if (buttonElement) cta = buttonElement.cloneNode(true) as HTMLButtonElement;
 
   if (cta) {
@@ -215,9 +231,6 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
     cta.setAttribute('data-size', size);
     cta.setAttribute('data-type', type);
   }
-
-  if (ctaElement) ctaElement.remove();
-  if (buttonElement) buttonElement.remove();
 
   return cta;
 };

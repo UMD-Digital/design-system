@@ -1,0 +1,484 @@
+{% extends '../_layout.twig' %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <div>
+        <h1 class="umd-sans-large font-bold mb-sm">
+          Rich Text Styles
+        </h1>
+
+        <div class="umd-rich-text">
+          <h1>
+            H1 heading inside a rich text field: Large Header
+          </h1>
+
+          <h2>
+            H2 heading inside a rich text field: Medium Header
+          </h2>
+
+          <h3>
+            H3 heading inside a rich text field: Small Header
+          </h3>
+
+          <p>
+            Rich Text fields support a number of formatting options including
+            <strong>Bold</strong>, <em>Italics</em>,<del>
+              Strikethrough
+            </del>, Bulleted and ordered lists,
+            <a href="https://president.umd-staging.com/admin/entries/home/1-home#">
+              links
+            </a>, line separator, and text alignment.
+          </p>
+          <hr />
+          <p>
+            <strong>Normal text formatted with bold</strong>
+          </p>
+          <p>
+            <u>
+              Normal text formatted with underline
+            </u>
+          </p>
+          <p>
+            <em>Normal text formatted with italics</em>
+          </p>
+          <p>
+            <del>
+              Normal text formatted with Strikethrough
+            </del>
+          </p>
+          <p>
+            <a href="https://president.umd-staging.com/admin/entries/home/1-home#">
+              Links are formatted to semi-bold and underlined
+            </a>. <em>For accessibility only links can be underlined.</em>
+          </p>
+          <p>
+            Super<sup>script</sup>
+          </p>
+          <p>
+            Sub<sub>script</sub>
+          </p>
+          <hr />
+          <p>
+            <strong>Bulleted List</strong>
+          </p>
+          <ul>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.<ul>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.<ul>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+          </ul>
+          <p>
+            <strong>Ordered List</strong>
+          </p>
+          <ol>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.<ol>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.<ol>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                    <li>
+                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                      turpis tincidunt id aliquet risus feugiat in ante metus.
+                      Non enim praesent elementum facilisis. Sed id semper risus
+                      in hendrerit gravida rutrum quisque non. Cursus risus at
+                      ultrices mi.
+                    </li>
+                  </ol>
+                </li>
+
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+          </ol>
+          <p>
+            <strong>Mixed List</strong>
+          </p>
+          <ol>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.<ul>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+          </ol>
+
+          <ul>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.<ol>
+                <li>
+                  Fusce ut placerat orci nolla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+                <li>
+                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                  tincidunt id aliquet risus feugiat in ante metus. Non enim
+                  praesent elementum facilisis. Sed id semper risus in hendrerit
+                  gravida rutrum quisque non. Cursus risus at ultrices mi.
+                </li>
+              </ol>
+            </li>
+
+            <li>
+              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
+              id aliquet risus feugiat in ante metus. Non enim praesent
+              elementum facilisis. Sed id semper risus in hendrerit gravida
+              rutrum quisque non. Cursus risus at ultrices mi.
+            </li>
+          </ul>
+
+          <hr />
+          <p>
+            <strong>Text Aligned Left:</strong> Fusce ut placerat orci nulla pellentesque.
+            Morbi blandit cursus risus at ultrices mi tempus imperdiet nulla. Sed
+            turpis tincidunt id aliquet risus feugiat in ante metus. Non enim praesent
+            elementum facilisis. Sed id semper risus in hendrerit gravida rutrum
+            quisque non. Cursus risus at ultrices mi.
+          </p>
+          <p style="text-align: center">
+            <strong>Text Aligned Center:</strong> Vel fringilla est ullamcorper eget.
+            Tempor commodo ullamcorper a lacus. Dignissim sodales ut eu sem integer
+            vitae. Cras sed felis eget velit aliquet sagittis. Sodales ut etiam sit
+            amet nisl purus in mollis. Gravida cum sociis natoque penatibus et magnis
+            dis parturient montes.
+          </p>
+          <p style="text-align: right">
+            <strong>Text Aligned Right:</strong> Sed risus pretium quam vulputate
+            dignissim. Scelerisque viverra mauris in aliquam sem fringilla. Vulputate
+            odio ut enim blandit volutpat maecenas volutpat blandit. Nunc faucibus
+            a pellentesque sit amet porttitor eget dolor morbi. Faucibus vitae aliquet
+            nec ullamcorper.
+          </p>
+          <p style="text-align: justify">
+            <strong>Text with Justified Alignment:</strong> Odio euismod lacinia
+            at quis. Placerat vestibulum lectus mauris ultrices eros in cursus turpis.
+            Quis enim lobortis scelerisque fermentum dui faucibus in ornare quam.
+            Rutrum quisque non tellus orci. Euismod nisi porta lorem mollis.
+          </p>
+          <hr />
+          <p>
+            <strong>Blockquote</strong>
+          </p>
+          <blockquote>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa
+            sed elementum tempus egestas. Duis ultricies lacus sed turpis
+            tincidunt id aliquet risus feugiat. Nunc pulvinar sapien et ligula.
+            Quam adipiscing vitae proin sagittis.
+          </blockquote>
+          <p>
+            <strong>Codeblock</strong><br />
+          </p>
+          {# prettier-ignore #}
+          <pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Code Block&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+          <p>
+            <strong>Inline code</strong>
+          </p>
+          <p>
+            Lorem ipsum dolor
+            <code>&lt;code&gt;inline code&lt;/code&gt;</code> sit amet, consectetur
+            adipiscing elit.
+          </p>
+          <p>
+            <strong>Table</strong>
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Header Cell 1
+                </th>
+                <th>
+                  Header Cell 2
+                </th>
+                <th>
+                  Header Cell 3
+                </th>
+                <th>
+                  Header Cell 4
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    Row 1: Column 1
+                  </p>
+                </td>
+                <td>
+                  Row 1: Column 2
+                </td>
+                <td>
+                  Row 1: Column 3
+                </td>
+                <td>
+                  Row 1: Column 4
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Row 2: Column 1
+                </td>
+                <td>
+                  Row 2: Column 2
+                </td>
+                <td>
+                  Row 2: Column 3
+                </td>
+                <td>
+                  Row 2: Column 4
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Row 3: Column 1
+                </td>
+                <td>
+                  Row 3: Column 2
+                </td>
+                <td>
+                  Row 3: Column 3
+                </td>
+                <td>
+                  Row 3: Column 4
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                </td>
+                <td>
+                  sed do eiusmod tempor incididunt ut labore et dolore magna
+                  aliqua
+                </td>
+                <td>
+                  Massa sed elementum tempus egestas
+                </td>
+                <td>
+                  Duis ultricies lacus sed turpis tincidunt id aliquet risus
+                  feugiat
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="umd-section-headline">
+          Rich Text Styled with typographic Class Override
+        </h2>
+
+        <div class="umd-rich-text umd-sans-larger">
+          <p>
+            Rich Text block with the <a href="#typography">.umd-sans-larger</a> class
+            applied
+          </p>
+          <p>
+            Rich Text fields support a number of formatting options including
+            <strong>Bold</strong>, <em>Italics</em>,<del>
+              Strikethrough
+            </del>, Bulleted and ordered lists,
+            <a href="https://president.umd-staging.com/admin/entries/home/1-home#">
+              links
+            </a>, line separator, and text alignment.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

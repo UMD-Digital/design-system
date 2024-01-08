@@ -1,7 +1,8 @@
 {% extends '_layout.twig' %}
 
 {% import '_data/component-list.twig' as ComponentList %}
-{% import '_data/config-list.twig' as ConfigList %}
+{% import '_data/variable-list.twig' as VariableList %}
+{% import '_data/theme-list.twig' as ThemeList %}
 
 {% block page %}
   <section>
@@ -10,14 +11,21 @@
         No errors
       </h1>
       <h2 class="umd-sans-extralarge">
-        Configuration
+        Theme
       </h2>
       <div class="umd-grid-three mb-md">
-        {{ ConfigList.Links() }}
+        {{ ThemeList.Links() }}
       </div>
       <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
       <h2 class="umd-sans-extralarge">
-        Components
+        Variables
+      </h2>
+      <div class="umd-grid-three mb-md">
+        {{ VariableList.Links() }}
+      </div>
+      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
+      <h2 class="umd-sans-extralarge">
+        Component Library
       </h2>
       <div class="umd-grid-three mb-md">
         {{ ComponentList.Links() }}

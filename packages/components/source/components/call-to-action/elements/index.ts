@@ -12,13 +12,14 @@ import { CallToActionType } from '../component';
 
 const CTA_ANIMATION_WRAPPER = 'umd-call-to-action-animation-wrapper';
 
+// prettier-ignore
 const sizeStyles = `
-  [data-size="standard"] {
+  [data-size="standard"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     padding: ${spacing.xs} ${spacing.lg};
     font-size: ${fontSize.sm};
   }
 
-  :host [data-size="large"] {
+  :host [data-size="large"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     padding: ${spacing.sm} ${spacing.lg};
     font-size: ${fontSize.lg};
   }
@@ -30,6 +31,7 @@ const sizeStyles = `
   }
 `;
 
+// prettier-ignore
 const typePrimaryStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
@@ -38,7 +40,7 @@ const typePrimaryStyles = `
     },
   })}
 
-  :host [data-type="primary"] {
+  :host [data-type="primary"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     background-color: ${colors.red};
     border: 1px solid ${colors.red};
     color: ${colors.white};
@@ -46,8 +48,8 @@ const typePrimaryStyles = `
     transition: background .5s, border .5s, color .5s;
   }
 
-  :host [data-type="primary"]:hover,
-  :host [data-type="primary"]:focus {
+  :host [data-type="primary"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover,
+  :host [data-type="primary"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus {
     border: 1px solid ${colors.redDark};
     background-color: ${colors.redDark};
   }
@@ -57,13 +59,14 @@ const typePrimaryStyles = `
   }
 `;
 
+// prettier-ignore
 const typeSecondaryStyles = `
-  :host [data-type="secondary"] {
+  :host [data-type="secondary"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     color: ${colors.black};
     padding: 0;
   }
 
-  :host [data-type="secondary"][data-size="large"] {
+  :host [data-type="secondary"][data-size="large"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     padding: 0;
   }
 
@@ -73,10 +76,15 @@ const typeSecondaryStyles = `
         animatedLinks['.umd-slidein-underline-red'],
     },
   })}
+
+  [data-type="secondary"] .${CTA_ANIMATION_WRAPPER} {
+    background-position: left bottom !important;
+  }
 `;
 
+// prettier-ignore
 const typeOutlineStyles = `
-  [data-type="outline"] {
+  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     backgroundColor: ${colors.white};
     border: 1px solid ${colors.gray.darker};
     color: ${colors.black};
@@ -88,31 +96,32 @@ const typeOutlineStyles = `
     transition: fill .5s;
   }
 
-  [data-type="outline"]:hover, 
-  [data-type="outline"]:focus {
+  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover, 
+  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus {
     background-color: ${colors.gray.darker};
     color: ${colors.white};
   }
 
-  [data-type="outline"]:hover svg, 
-  [data-type="outline"]:focus svg {
+  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover svg, 
+  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus svg {
     fill: ${colors.white};
   }
 `;
 
+// prettier-ignore
 export const ComponentStyles = `
   :host {
     display: block;
   }
 
-  .${ELEMENTS.CTA_CONTAINER} {
+  .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     display: inline-block;
     font-weight: 800;
     text-align: center;
     line-height: 1.2857142857142858em;
   }
 
-  .${ELEMENTS.CTA_CONTAINER} svg {
+  .${ELEMENTS.CTA_CONTAINER_ELEMENT} svg {
     fill: ${colors.red};
     height: 14px;
     width: 14px;
@@ -220,6 +229,7 @@ const CreateTextSpan = ({ cta }: { cta: HTMLElement }) => {
 export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
   const type = element._type;
   const size = element._size;
+  const container = document.createElement('div');
   const linkElements = Array.from(element.querySelectorAll(`a`));
   const buttonElement = element.querySelector(`button`);
   const linkElementsPlainText = linkElements.filter(
@@ -235,17 +245,23 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
   if (linkElement) cta = linkElement.cloneNode(true) as HTMLAnchorElement;
   if (buttonElement) cta = buttonElement.cloneNode(true) as HTMLButtonElement;
 
+  if (!cta) return null;
+
+  container.classList.add(ELEMENTS.CTA_CONTAINER);
+  container.setAttribute('data-size', size);
+  container.setAttribute('data-type', type);
+  if (hasPlainText) container.setAttribute(VARIABLES.ATTR_PLAIN_TEXT, '');
+
   if (cta) {
     const icon = GetIcon({ cta });
 
     CreateTextSpan({ cta });
     CreateWrapper({ cta });
     CreateLinkIcon({ cta, icon, type });
-    cta.classList.add(ELEMENTS.CTA_CONTAINER);
-    if (hasPlainText) cta.setAttribute(VARIABLES.ATTR_PLAIN_TEXT, '');
-    cta.setAttribute('data-size', size);
-    cta.setAttribute('data-type', type);
+
+    cta.classList.add(ELEMENTS.CTA_CONTAINER_ELEMENT);
+    container.appendChild(cta);
   }
 
-  return cta;
+  return container;
 };

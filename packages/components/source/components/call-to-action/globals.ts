@@ -1,6 +1,7 @@
 export const BREAKPOINTS = {};
 export const ELEMENTS = {
   CTA_CONTAINER: 'umd-call-to-action-container',
+  CTA_CONTAINER_ELEMENT: 'umd-call-to-action-element-container',
   CTA_TEXT_WRAPPER: 'umd-call-to-action-text-wrapper',
   CTA_WRAPPER: 'umd-call-to-action-wrapper',
 };

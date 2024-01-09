@@ -25,7 +25,7 @@ export const EventSize = ({ element }: { element: CallToActionType }) => {
     if (textLink) textLink.style.whiteSpace = `initial`;
     if (icon) icon.style.marginTop = `3px`;
     if (type === VARIABLES.TYPE_SECONDARY) {
-      wrapperElement.style.textAlign = `left`;
+      if (textLink) textLink.style.textAlign = `left`;
       if (icon) icon.style.marginTop = `5px`;
     }
   }

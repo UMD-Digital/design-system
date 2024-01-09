@@ -107,6 +107,7 @@ export const ComponentStyles = `
     display: inline-block;
     font-weight: 800;
     text-align: center;
+    line-height: 1.2857142857142858em;
   }
 
   .${ELEMENTS.CTA_CONTAINER} svg {

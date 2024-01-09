@@ -21,6 +21,12 @@ const plainTextSlotStyles = `
     display: inline-block;
     font-size: ${fontSize.min};
     font-weight: 600;
+    transition: color .5s;
+  }
+
+  .${CTA_PLAIN_TEXT_SLOT}:hover,
+  .${CTA_PLAIN_TEXT_SLOT}:focus {
+    color: ${colors.redDark};
   }
 
   [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_PRIMARY}"] .${CTA_PLAIN_TEXT_SLOT} {

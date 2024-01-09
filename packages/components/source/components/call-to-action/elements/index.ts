@@ -191,10 +191,12 @@ const CreateLinkIcon = ({
   cta,
   icon,
   type,
+  isLink,
 }: {
   cta: HTMLElement;
   icon: SVGSVGElement | HTMLImageElement | null;
   type: string;
+  isLink: boolean;
 }) => {
   const wrapper = cta.querySelector(
     `.${ELEMENTS.CTA_WRAPPER}`,
@@ -219,6 +221,8 @@ const CreateLinkIcon = ({
     wrapper.innerHTML = FEARLESS_ICON;
     wrapper.appendChild(textSpan);
   }
+
+  if (!isLink) return;
 
   if (isExternalReference || isExternalTab) {
     wrapper.innerHTML = NEW_WINDOW_ICON;
@@ -273,27 +277,29 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
   const linkElement = linkElementFiltered[0] || null;
   const hasPlainText = linkElementsPlainText.length > 0;
   let cta = null;
+  let isLink = true;
 
   if (linkElement) cta = linkElement.cloneNode(true) as HTMLAnchorElement;
-  if (buttonElement) cta = buttonElement.cloneNode(true) as HTMLButtonElement;
+  if (buttonElement) {
+    cta = buttonElement.cloneNode(true) as HTMLButtonElement;
+    isLink = false;
+  }
 
   if (!cta) return null;
 
+  const icon = GetIcon({ cta });
   container.classList.add(ELEMENTS.CTA_CONTAINER);
   container.setAttribute(VARIABLES.ATTR_SIZE, size);
   container.setAttribute(VARIABLES.ATTR_TYPE, type);
   if (hasPlainText) container.setAttribute(VARIABLES.ATTR_PLAIN_TEXT, '');
 
-  if (cta) {
-    const icon = GetIcon({ cta });
+  cta.classList.add(ELEMENTS.CTA_CONTAINER_ELEMENT);
 
-    CreateTextSpan({ cta });
-    CreateWrapper({ cta });
-    CreateLinkIcon({ cta, icon, type });
+  CreateTextSpan({ cta });
+  CreateWrapper({ cta });
+  CreateLinkIcon({ cta, icon, type, isLink: true });
 
-    cta.classList.add(ELEMENTS.CTA_CONTAINER_ELEMENT);
-    container.appendChild(cta);
-  }
+  container.appendChild(cta);
 
   if (hasPlainText) {
     const plainTextSlot = MakeSlot({ type: SLOTS.PLAIN_TEXT });

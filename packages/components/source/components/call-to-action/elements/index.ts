@@ -44,6 +44,26 @@ const plainTextSlotStyles = `
 `;
 
 // prettier-ignore
+const themeStyles = `
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"][${VARIABLES.ATTR_THEME}="${VARIABLES.THEME_DARK}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
+    background-color: transparent;
+    border: 1px solid ${colors.white};
+    color: ${colors.white};
+  }
+
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"][${VARIABLES.ATTR_THEME}="${VARIABLES.THEME_DARK}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover,
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"][${VARIABLES.ATTR_THEME}="${VARIABLES.THEME_DARK}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus {
+    background-color: ${colors.white};
+    border: 1px solid ${colors.white};
+    color: ${colors.black};
+  }
+
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_SECONDARY}"][${VARIABLES.ATTR_THEME}="${VARIABLES.THEME_DARK}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
+    color: ${colors.white};
+  }
+`
+
+// prettier-ignore
 const sizeStyles = `
   [${VARIABLES.ATTR_SIZE}="${VARIABLES.SIZE_STANDARD}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     padding: ${spacing.xs} ${spacing.lg};
@@ -116,7 +136,7 @@ const typeSecondaryStyles = `
 // prettier-ignore
 const typeOutlineStyles = `
   [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
-    backgroundColor: ${colors.white};
+    background-color: ${colors.white};
     border: 1px solid ${colors.gray.darker};
     color: ${colors.black};
     transition: background .5s, border .5s, color .5s;
@@ -175,6 +195,7 @@ export const ComponentStyles = `
   ${typeSecondaryStyles}
   ${typeOutlineStyles}
   ${sizeStyles}
+  ${themeStyles}
   ${plainTextSlotStyles}
 `;
 
@@ -265,6 +286,7 @@ const CreateTextSpan = ({ cta }: { cta: HTMLElement }) => {
 export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
   const type = element._type;
   const size = element._size;
+  const theme = element._theme;
   const container = document.createElement('div');
   const linkElements = Array.from(element.querySelectorAll(`a`));
   const buttonElement = element.querySelector(`button`);
@@ -291,6 +313,7 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
   container.classList.add(ELEMENTS.CTA_CONTAINER);
   container.setAttribute(VARIABLES.ATTR_SIZE, size);
   container.setAttribute(VARIABLES.ATTR_TYPE, type);
+  container.setAttribute(VARIABLES.ATTR_THEME, theme);
   if (hasPlainText) container.setAttribute(VARIABLES.ATTR_PLAIN_TEXT, '');
 
   cta.classList.add(ELEMENTS.CTA_CONTAINER_ELEMENT);

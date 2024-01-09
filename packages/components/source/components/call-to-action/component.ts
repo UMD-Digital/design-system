@@ -16,6 +16,7 @@ export class UMDCallToActionElement extends HTMLElement {
   _shadow: ShadowRoot;
   _type = VARIABLES.TYPE_PRIMARY;
   _size = VARIABLES.SIZE_STANDARD;
+  _theme = VARIABLES.THEME_LIGHT;
 
   constructor() {
     super();
@@ -41,6 +42,7 @@ export class UMDCallToActionElement extends HTMLElement {
 
     element._size = element.getAttribute('size') || element._size;
     element._type = element.getAttribute('type') || element._type;
+    element._theme = element.getAttribute('theme') || element._theme;
 
     const container = CreateShadowDom({ element });
 

@@ -14,8 +14,11 @@ export const VARIABLES = {
   TYPE_OUTLINE: 'outline',
   SIZE_STANDARD: 'standard',
   SIZE_LARGE: 'large',
+  THEME_LIGHT: 'light',
+  THEME_DARK: 'dark',
   ATTR_PLAIN_TEXT: 'data-plain-text',
   ATTR_TYPE: 'data-type',
   ATTR_SIZE: 'data-size',
+  ATTR_THEME: 'data-theme',
   MAX_WIDTH: 380,
 };

@@ -10,8 +10,6 @@ import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { ELEMENTS } from '../globals';
 import { CallToActionType } from '../component';
 
-const CTA_WRAPPER = 'umd-call-to-action-wrapper';
-
 const sizeStyles = `
   [data-size="standard"] {
     padding: ${spacing.xs} ${spacing.lg};
@@ -58,8 +56,13 @@ const typePrimaryStyles = `
 `;
 
 const typeSecondaryStyles = `
-  [data-type="secondary"] {
-    color: ${colors.black};
+  :host [data-type="secondary"] {
+    color: ${colors.black};   
+    padding: 0;
+  }
+
+  :host [data-type="secondary"][data-size="large"] {
+    padding: 0;
   }
 
   ${ConvertJSSObjectToStyles({
@@ -103,6 +106,7 @@ export const ComponentStyles = `
   .${ELEMENTS.CTA_CONTAINER} {
     display: inline-block;
     font-weight: 800;
+    text-align: center;
   }
 
   .${ELEMENTS.CTA_CONTAINER} svg {
@@ -114,7 +118,7 @@ export const ComponentStyles = `
     margin-right: 4px;
   }
 
-  .${CTA_WRAPPER} {
+  .${ELEMENTS.CTA_WRAPPER} {
     display: flex;
     align-items: center;
   }
@@ -148,7 +152,9 @@ const CreateLinkIcon = ({
   icon: SVGSVGElement | HTMLImageElement | null;
   type: string;
 }) => {
-  const wrapper = cta.querySelector(`.${CTA_WRAPPER}`) as HTMLSpanElement;
+  const wrapper = cta.querySelector(
+    `.${ELEMENTS.CTA_WRAPPER}`,
+  ) as HTMLSpanElement;
   const textSpan = cta.querySelector(
     `.${ELEMENTS.CTA_TEXT_WRAPPER}`,
   ) as HTMLSpanElement;
@@ -168,7 +174,6 @@ const CreateLinkIcon = ({
   if (type === 'secondary') {
     wrapper.innerHTML = FEARLESS_ICON;
     wrapper.appendChild(textSpan);
-    return;
   }
 
   if (isExternalReference || isExternalTab) {
@@ -187,7 +192,7 @@ const CreateLinkIcon = ({
 const CreateWrapper = ({ cta }: { cta: HTMLElement }) => {
   const wrapper = document.createElement('span');
 
-  wrapper.classList.add(CTA_WRAPPER);
+  wrapper.classList.add(ELEMENTS.CTA_WRAPPER);
   wrapper.innerHTML = cta.innerHTML;
   cta.innerHTML = '';
   cta.appendChild(wrapper);

@@ -15,5 +15,7 @@ export const VARIABLES = {
   SIZE_STANDARD: 'standard',
   SIZE_LARGE: 'large',
   ATTR_PLAIN_TEXT: 'data-plain-text',
+  ATTR_TYPE: 'data-type',
+  ATTR_SIZE: 'data-size',
   MAX_WIDTH: 380,
 };

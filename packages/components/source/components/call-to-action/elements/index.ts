@@ -7,24 +7,49 @@ import {
 } from '@universityofmaryland/umd-web-configuration';
 import { NEW_WINDOW_ICON, DOCUMENT_ICON, FEARLESS_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { ELEMENTS, VARIABLES } from '../globals';
+import { MakeSlot } from 'helpers/ui';
+import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 import { CallToActionType } from '../component';
 
 const CTA_ANIMATION_WRAPPER = 'umd-call-to-action-animation-wrapper';
+const CTA_PLAIN_TEXT_SLOT = 'umd-call-to-action-plain-text-slot';
+
+// prettier-ignore
+const plainTextSlotStyles = `
+  .${CTA_PLAIN_TEXT_SLOT} {
+    text-decoration: underline;
+    display: inline-block;
+    font-size: ${fontSize.min};
+    font-weight: 600;
+  }
+
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_PRIMARY}"] .${CTA_PLAIN_TEXT_SLOT} {
+    margin-top: ${spacing.min};
+  }
+
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_SECONDARY}"] .${CTA_PLAIN_TEXT_SLOT} {
+    padding-left: 18px;
+    margin-top: ${spacing.min};
+  }
+
+  .${ELEMENTS.CTA_CONTAINER}[${VARIABLES.ATTR_PLAIN_TEXT}][${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_PRIMARY}"] {
+    text-align: center;
+  }
+`;
 
 // prettier-ignore
 const sizeStyles = `
-  [data-size="standard"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
+  [${VARIABLES.ATTR_SIZE}="${VARIABLES.SIZE_STANDARD}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     padding: ${spacing.xs} ${spacing.lg};
     font-size: ${fontSize.sm};
   }
 
-  :host [data-size="large"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
+  :host [${VARIABLES.ATTR_SIZE}="${VARIABLES.SIZE_LARGE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     padding: ${spacing.sm} ${spacing.lg};
     font-size: ${fontSize.lg};
   }
 
-  :host [data-size="large"] svg {
+  :host [${VARIABLES.ATTR_SIZE}="${VARIABLES.SIZE_LARGE}"] svg {
     height: 17px;
     width: 17px;
     margin-right: 5px;
@@ -35,12 +60,12 @@ const sizeStyles = `
 const typePrimaryStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`:host [data-type="primary"]`]:
+      [`:host [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_PRIMARY}"]`]:
         typography['.umd-interactive-sans-small'],
     },
   })}
 
-  :host [data-type="primary"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
+  :host [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_PRIMARY}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     background-color: ${colors.red};
     border: 1px solid ${colors.red};
     color: ${colors.white};
@@ -48,62 +73,62 @@ const typePrimaryStyles = `
     transition: background .5s, border .5s, color .5s;
   }
 
-  :host [data-type="primary"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover,
-  :host [data-type="primary"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus {
+  :host [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_PRIMARY}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover,
+  :host [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_PRIMARY}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus {
     border: 1px solid ${colors.redDark};
     background-color: ${colors.redDark};
   }
 
-  :host [data-type="primary"] svg{
+  :host [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_PRIMARY}"] svg{
     fill: ${colors.white};
   }
 `;
 
 // prettier-ignore
 const typeSecondaryStyles = `
-  :host [data-type="secondary"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
+  :host [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_SECONDARY}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     color: ${colors.black};
     padding: 0;
   }
 
-  :host [data-type="secondary"][data-size="large"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
+  :host [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_SECONDARY}"][data-size="${VARIABLES.SIZE_LARGE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     padding: 0;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`[data-type="secondary"] .${ELEMENTS.CTA_TEXT_WRAPPER}`]:
+      [`[${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_SECONDARY}"] .${ELEMENTS.CTA_TEXT_WRAPPER}`]:
         animatedLinks['.umd-slidein-underline-red'],
     },
   })}
 
-  [data-type="secondary"] .${CTA_ANIMATION_WRAPPER} {
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_SECONDARY}"] .${CTA_ANIMATION_WRAPPER} {
     background-position: left bottom !important;
   }
 `;
 
 // prettier-ignore
 const typeOutlineStyles = `
-  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     backgroundColor: ${colors.white};
     border: 1px solid ${colors.gray.darker};
     color: ${colors.black};
     transition: background .5s, border .5s, color .5s;
   }
 
-  [data-type="outline"] svg {
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] svg {
     fill: ${colors.red};
     transition: fill .5s;
   }
 
-  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover, 
-  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus {
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover, 
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus {
     background-color: ${colors.gray.darker};
     color: ${colors.white};
   }
 
-  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover svg, 
-  [data-type="outline"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus svg {
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover svg, 
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus svg {
     fill: ${colors.white};
   }
 `;
@@ -144,6 +169,7 @@ export const ComponentStyles = `
   ${typeSecondaryStyles}
   ${typeOutlineStyles}
   ${sizeStyles}
+  ${plainTextSlotStyles}
 `;
 
 const GetIcon = ({ cta }: { cta: HTMLElement }) => {
@@ -248,8 +274,8 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
   if (!cta) return null;
 
   container.classList.add(ELEMENTS.CTA_CONTAINER);
-  container.setAttribute('data-size', size);
-  container.setAttribute('data-type', type);
+  container.setAttribute(VARIABLES.ATTR_SIZE, size);
+  container.setAttribute(VARIABLES.ATTR_TYPE, type);
   if (hasPlainText) container.setAttribute(VARIABLES.ATTR_PLAIN_TEXT, '');
 
   if (cta) {
@@ -261,6 +287,12 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
 
     cta.classList.add(ELEMENTS.CTA_CONTAINER_ELEMENT);
     container.appendChild(cta);
+  }
+
+  if (hasPlainText) {
+    const plainTextSlot = MakeSlot({ type: SLOTS.PLAIN_TEXT });
+    plainTextSlot.classList.add(CTA_PLAIN_TEXT_SLOT);
+    container.appendChild(plainTextSlot);
   }
 
   return container;

@@ -5,7 +5,7 @@ export const EventSize = ({ element }: { element: CallToActionType }) => {
   const type = element._type;
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const wrapperElement = shadowRoot.querySelector(
-    `.${ELEMENTS.CTA_CONTAINER}`,
+    `.${ELEMENTS.CTA_CONTAINER_ELEMENT}`,
   ) as HTMLDivElement;
 
   if (!wrapperElement) return;

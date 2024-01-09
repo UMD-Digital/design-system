@@ -7,8 +7,10 @@ import {
 } from '@universityofmaryland/umd-web-configuration';
 import { NEW_WINDOW_ICON, DOCUMENT_ICON, FEARLESS_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { ELEMENTS } from '../globals';
+import { ELEMENTS, VARIABLES } from '../globals';
 import { CallToActionType } from '../component';
+
+const CTA_ANIMATION_WRAPPER = 'umd-call-to-action-animation-wrapper';
 
 const sizeStyles = `
   [data-size="standard"] {
@@ -57,7 +59,7 @@ const typePrimaryStyles = `
 
 const typeSecondaryStyles = `
   :host [data-type="secondary"] {
-    color: ${colors.black};   
+    color: ${colors.black};
     padding: 0;
   }
 
@@ -67,7 +69,7 @@ const typeSecondaryStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`[data-type="secondary"] span`]:
+      [`[data-type="secondary"] .${ELEMENTS.CTA_TEXT_WRAPPER}`]:
         animatedLinks['.umd-slidein-underline-red'],
     },
   })}
@@ -201,11 +203,16 @@ const CreateWrapper = ({ cta }: { cta: HTMLElement }) => {
 
 const CreateTextSpan = ({ cta }: { cta: HTMLElement }) => {
   const wrapper = document.createElement('span');
+  const animationWrapper = document.createElement('span');
 
   if (cta.textContent) {
+    animationWrapper.classList.add(CTA_ANIMATION_WRAPPER);
     wrapper.classList.add(ELEMENTS.CTA_TEXT_WRAPPER);
-    wrapper.innerHTML = cta.textContent;
+
+    animationWrapper.innerHTML = cta.textContent;
     cta.textContent = '';
+
+    wrapper.appendChild(animationWrapper);
     cta.appendChild(wrapper);
   }
 };
@@ -222,6 +229,7 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
     (link) => !linkElementsPlainText.includes(link),
   );
   const linkElement = linkElementFiltered[0] || null;
+  const hasPlainText = linkElementsPlainText.length > 0;
   let cta = null;
 
   if (linkElement) cta = linkElement.cloneNode(true) as HTMLAnchorElement;
@@ -234,6 +242,7 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
     CreateWrapper({ cta });
     CreateLinkIcon({ cta, icon, type });
     cta.classList.add(ELEMENTS.CTA_CONTAINER);
+    if (hasPlainText) cta.setAttribute(VARIABLES.ATTR_PLAIN_TEXT, '');
     cta.setAttribute('data-size', size);
     cta.setAttribute('data-type', type);
   }

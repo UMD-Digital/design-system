@@ -5,8 +5,7 @@ export const ELEMENTS = {
   CTA_WRAPPER: 'umd-call-to-action-wrapper',
 };
 export const SLOTS = {
-  LINK: 'link',
-  BUTTON: 'button',
+  PLAIN_TEXT: 'plain-text',
 };
 export const VARIABLES = {
   TYPE_PRIMARY: 'primary',
@@ -14,5 +13,6 @@ export const VARIABLES = {
   TYPE_OUTLINE: 'outline',
   SIZE_STANDARD: 'standard',
   SIZE_LARGE: 'large',
+  ATTR_PLAIN_TEXT: 'data-plain-text',
   MAX_WIDTH: 380,
 };

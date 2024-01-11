@@ -1,4 +1,4 @@
-import * as plugin from 'tailwindcss/plugin';
+import plugin from 'tailwindcss/plugin';
 import {
   colors,
   fontFamily,
@@ -21,10 +21,10 @@ import {
 
 const theme = { colors, fontFamily, fontSize, screens, spacing };
 
-const umdUtilities = { ...root };
+const utilities = { ...root };
 
 // // The components are listed in order they should render in CSS.
-const umdComponents = {
+const classes = {
   ...skipContent,
   ...animatedLinks,
   ...richText,
@@ -38,11 +38,11 @@ const umdComponents = {
   ...umdLoader,
 };
 
-const umdPlugin = plugin(function ({ addUtilities, addComponents }) {
-  addUtilities(umdUtilities);
-  addComponents(umdComponents);
-});
-
-const plugins = [umdPlugin];
+const plugins = [
+  plugin(function ({ addUtilities, addComponents }) {
+    addUtilities(utilities);
+    addComponents(classes);
+  }),
+];
 
 export { theme, plugins };

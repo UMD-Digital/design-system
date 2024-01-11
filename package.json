@@ -10,6 +10,7 @@
     "startover": "rm -rf node_modules && rm -rf packages/*/node_modules && yarn install",
     "components": "npx lerna run start --scope=@universityofmaryland/umd-web-components",
     "configuration": "npx lerna run start --scope=@universityofmaryland/umd-web-configuration",
+    "shellwind": "npx lerna run start --scope=@universityofmaryland/shellwind",
     "kitchen": "npx lerna run start --scope=@universityofmaryland/umd-design-system-kitchen-sink",
     "start": "yarn run configuration & yarn run components & yarn run kitchen"
   },
@@ -38,7 +39,6 @@
   },
   "dependencies": {
     "lerna": "^7.4.1",
-    "tailwindcss": "^3.3.5",
-    "umd-web-configuration": "link:packages/configuration/@universityofmaryland/umd-web-configuration"
+    "tailwindcss": "^3.3.5"
   }
 }

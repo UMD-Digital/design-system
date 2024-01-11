@@ -7680,6 +7680,10 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
+"shellwind@link:@universityofmaryland/shellwind":
+  version "0.0.0"
+  uid ""
+
 shortid@^2.2.6:
   version "2.2.16"
   resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.16.tgz#b742b8f0cb96406fd391c76bfc18a67a57fe5608"
@@ -8437,10 +8441,6 @@ uglify-js@^3.1.4:
   integrity sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==
 
 "umd-web-components@link:@universityofmaryland/umd-web-components":
-  version "0.0.0"
-  uid ""
-
-"umd-web-configuration@link:@universityofmaryland/umd-web-configuration":
   version "0.0.0"
   uid ""
 

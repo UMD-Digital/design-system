@@ -1,22 +1,10 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = () => {
   const mode = 'production';
 
   const optimization = {
     minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          compress: false,
-          mangle: false,
-          keep_classnames: true,
-          keep_fnames: true,
-          sourceMap: true,
-        },
-      }),
-    ],
   };
 
   const stats = {
@@ -51,6 +39,9 @@ module.exports = () => {
   const output = {
     path: path.resolve('dist'),
     filename: '[name].js',
+    library: {
+      type: 'commonjs-static',
+    },
   };
 
   const resolve = {

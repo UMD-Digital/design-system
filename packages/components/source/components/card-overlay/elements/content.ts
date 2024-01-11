@@ -3,7 +3,7 @@ import {
   spacing,
   colors,
   animatedLinks,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CardType } from 'components/card-overlay/component';
@@ -40,13 +40,13 @@ const headlineStyles = `
       [`.${ELEMENTS.CARD_OVERLAY_HEADLINE}`]: typography['.umd-sans-larger'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} *`]: typography['.umd-sans-larger'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
@@ -72,7 +72,7 @@ const textStyles = `
     transition: color 0.3s ease-in-out;
   }
 
-  .${ELEMENTS.CARD_OVERLAY_TEXT} a:hover, 
+  .${ELEMENTS.CARD_OVERLAY_TEXT} a:hover,
   .${ELEMENTS.CARD_OVERLAY_TEXT} a:focus {
     text-decoration: underline;
     color: ${colors.red};
@@ -84,7 +84,7 @@ const dateStyles = `
   * + .${CARD_OVERLAY_DATE} {
     margin-top: ${spacing.min}
   }
-  
+
   .${CARD_OVERLAY_DATE} * {
     color: ${colors.gray.mediumAA};
   }
@@ -94,7 +94,7 @@ const dateStyles = `
       [`.${CARD_OVERLAY_DATE}`]: typography['.umd-sans-min'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_DATE} *`]: typography['.umd-sans-min'],

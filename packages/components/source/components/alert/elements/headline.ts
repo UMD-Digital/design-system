@@ -3,7 +3,7 @@ import {
   colors,
   spacing,
   typography,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';

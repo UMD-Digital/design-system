@@ -1,7 +1,4 @@
-import {
-  colors,
-  richTextBase,
-} from '@universityofmaryland/umd-web-configuration';
+import { colors, richTextBase } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';

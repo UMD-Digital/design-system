@@ -4,7 +4,7 @@ import {
   fontWeight,
   spacing,
   typography,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ELEMENT_TYPE } from 'components/events-date/component';

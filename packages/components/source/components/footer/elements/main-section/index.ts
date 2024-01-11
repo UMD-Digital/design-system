@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration';
+import { colors } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
@@ -18,7 +18,7 @@ const VariationVisualStyles = `
   .${BACKGROUND_IMAGE_CONTAINER} {
     position: relative;
   }
-  
+
   .${BACKGROUND_IMAGE_GRADIENT} {
     display: block;
     position: absolute;
@@ -44,7 +44,7 @@ export const MainContainerStyles = `
     color: ${colors.white};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] p, 
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] p,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] span,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a {
     color: ${colors.gray.darker}

@@ -2,7 +2,7 @@ import {
   animatedLinks,
   colors,
   spacing,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 import { ElementType } from 'components/nav-item/component';
@@ -18,11 +18,11 @@ const columnStyles = `
     display: flex;
     justify-content: space-between;
   }
-  
+
   .${TWO_COLUMN_CONTAINER} > * {
     min-width: 232px;
   }
-  
+
   .${TWO_COLUMN_CONTAINER} > *:last-child {
     margin-left: 40px;
   }
@@ -50,12 +50,12 @@ const linkStyles = `
   .${DROPDOWN_LIST_CONTAINER} a:focus {
     color: ${colors.red};
   }
-  
+
   .${DROPDOWN_LIST_CONTAINER} a + a {
     margin-top: ${spacing.md};
     display: block;
   }
-  
+
   .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}] span {
     border-bottom: 2px solid ${colors.gold};
   }
@@ -70,7 +70,7 @@ const linkStyles = `
 export const DropdownStyles = `
   .${ELEMENTS.DROPDOWN_CONTAINER} {
     position: absolute;
-    top: 100%; 
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     min-width: 250px;

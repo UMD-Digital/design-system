@@ -1,8 +1,4 @@
-import {
-  colors,
-  spacing,
-  typography,
-} from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing, typography } from '@universityofmaryland/variables';
 import {
   FACEBOOK_ICON,
   X_ICON,
@@ -31,7 +27,7 @@ const campaignOverwriteStyles = `
       display: none;
     }
   }
-  
+
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${SOCIAL_COLUMN_WRAPPER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: flex;
@@ -45,16 +41,16 @@ const themeOverwriteStyles = `
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
     background-color: ${colors.gray.light};
   }
-  
+
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
     fill: ${colors.black} !important;
   }
-  
+
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
     background-color: ${colors.gray.dark};
   }
-  
+
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
     fill: ${colors.gray.light} !important;
   }
@@ -102,12 +98,12 @@ export const SocialContainerStyles = `
     grid-template-columns: repeat(3, 1fr);
     margin-left: ${spacing.xs};
   }
-  
+
   .${SOCIAL_CONTAINER_WRAPPER}[count="4"] {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .${SOCIAL_CONTAINER_WRAPPER} a {
     background-color: ${colors.gray.darker};
     height: 32px;
@@ -117,7 +113,7 @@ export const SocialContainerStyles = `
     justify-content: center;
     transition: background-color .5s;
   }
-  
+
   .${SOCIAL_CONTAINER_WRAPPER} a > *,
   .${SOCIAL_CONTAINER_WRAPPER} a path {
     max-height: 20px !important;

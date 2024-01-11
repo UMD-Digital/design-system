@@ -3,7 +3,7 @@ import {
   colors,
   spacing,
   typography,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS, ELEMENTS, BREAKPOINTS } from '../globals';
@@ -25,14 +25,14 @@ const eyebrowStyles = `
         typography['.umd-sans-smaller'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} *`]:
         typography['.umd-sans-smaller'],
     },
   })}
-  
+
   .${ELEMENTS.CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} a:hover,
   .${ELEMENTS.CARD_INTRO_CONTAINER} .${CARD_EYEBROW_WRAPPER} a:focus {
     text-decoration: underline;
@@ -44,7 +44,7 @@ const headlineStyles = `
   * + .${CARD_HEADLINE_WRAPPER} {
     margin-top: ${spacing.min}
   }
-  
+
   .${ELEMENTS.CARD_INTRO_CONTAINER} .${CARD_HEADLINE_WRAPPER} * {
     color: ${colors.black};
   }
@@ -55,14 +55,14 @@ const headlineStyles = `
         typography['.umd-sans-large'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.CARD_INTRO_CONTAINER} .${CARD_HEADLINE_WRAPPER} *`]:
         typography['.umd-sans-large'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_HEADLINE_WRAPPER} a`]:

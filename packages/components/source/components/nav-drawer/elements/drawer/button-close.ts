@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/variables';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 

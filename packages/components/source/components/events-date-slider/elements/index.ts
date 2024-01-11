@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration';
+import { colors } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
 import { ELEMENT_TYPE } from 'components/events-date-slider/component';
 import {
@@ -47,7 +47,7 @@ export const ContainerStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: dates-slider / inline-size; 
+    container: dates-slider / inline-size;
   }
 
   ${Reset}

@@ -5,7 +5,7 @@ import {
   typography,
   umdCta,
   umdLock,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, BREAKPOINTS } from 'components/carousel-cards/globals';
@@ -22,13 +22,13 @@ const headlineStyles = `
   .${INTRO_CONTAINER_HEADLINE} * {
     color: ${colors.white};
   }
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE}`]: typography['.umd-sans-largest'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE} *`]: typography['.umd-sans-largest'],
@@ -41,13 +41,13 @@ const textStyles = `
   * + .${INTRO_CONTAINER_TEXT} {
     margin-top: ${spacing.md};
   }
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_TEXT}`]: richText['.umd-rich-text-dark'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_TEXT}`]: typography['.umd-sans-medium'],
@@ -60,13 +60,13 @@ const ctaStyles = `
   * + .${INTRO_CONTAINER_CTA} {
     margin-top: ${spacing.md};
   }
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_CTA} a`]: umdCta['.umd-cta-secondary'],
     },
   })}
-  
+
   .${INTRO_CONTAINER_CTA} a {
     color: ${colors.white};
   }

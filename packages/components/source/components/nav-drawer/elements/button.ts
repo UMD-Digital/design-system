@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration';
+import { colors } from '@universityofmaryland/variables';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 
 const NAV_DRAWER_BUTTON = 'umd-nav-drawer-button';

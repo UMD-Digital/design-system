@@ -3,7 +3,7 @@ import {
   fontWeight,
   spacing,
   typography,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { VARIABLES, ELEMENTS } from 'components/nav-drawer/globals';

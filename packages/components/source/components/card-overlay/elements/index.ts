@@ -3,7 +3,7 @@ import {
   colors,
   richText,
   spacing,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateContent, ContentStyles } from './content';
 import { CreateImage, ImageStyles } from './image';
@@ -82,7 +82,7 @@ const VariantImageThemeContent = `
       animatedLinks['.umd-slidein-underline-white'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
@@ -96,11 +96,11 @@ const VariantImageThemeCtaIcon = `
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
     background-color: ${colors.white};
   }
-  
+
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a svg {
     fill: ${colors.gray.darker};
   }
-  
+
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
     background-color: ${colors.gray.darker};
@@ -125,11 +125,11 @@ const VariantImageThemeTint = `
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
   }
-  
+
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}]:hover .${CARD_OVERLAY_TINT_OVERLAY} {
     opacity: .7;
   }
-  
+
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}]:hover .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}]:focus-within .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img {
     transform: scale(1.025);

@@ -1,8 +1,4 @@
-import {
-  colors,
-  spacing,
-  umdLock,
-} from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing, umdLock } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';

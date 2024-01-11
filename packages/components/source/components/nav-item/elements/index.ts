@@ -3,7 +3,7 @@ import {
   fontFamily,
   fontSize,
   fontWeight,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
 import { ElementType } from 'components/nav-item/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
@@ -14,11 +14,11 @@ const hasDropdownStyles = `
   .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.DROPDOWN_CONTAINER} {
     display: block;
   }
-  
+
   .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
     transform: rotate(180deg) translateY(5px);
   }
-  
+
   .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}] .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}]:before {
     bottom: 1px;
     right: 20px;
@@ -29,7 +29,7 @@ const hasDropdownStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-nav-item / inline-size; 
+    container: umd-nav-item / inline-size;
   }
 
   ${Reset}

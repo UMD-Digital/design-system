@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from '../component';
 import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 

@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/variables';
 import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
 import { ELEMENT_TYPE } from 'components/events-date-slider/component';
 import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
@@ -12,15 +12,15 @@ const darkThemeStyles = `
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} {
     background-color: ${colors.gray.dark};
   }
-  
+
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} svg {
     fill: ${colors.white}
   }
-  
+
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover {
     background-color: ${colors.white}
   }
-  
+
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover svg {
     fill: ${colors.black}
   }
@@ -41,36 +41,36 @@ export const ButtonStyles = `
     transform: translateY(-50%);
     z-index: 99;
   }
-  
+
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
     .${ELEMENTS.ARROW_CLASS} {
       width: 48px;
       height: 48px;
     }
   }
-  
+
   .${ELEMENTS.ARROW_CLASS}:hover {
     background-color: ${colors.black};
   }
-  
+
   .${ELEMENTS.ARROW_CLASS}:hover svg {
     fill: ${colors.white};
   }
-  
+
   .${ELEMENTS.ARROW_CLASS} svg {
     transition: fill .5s;
     fill: ${colors.black};
     width: 16px;
     height: 6px;
   }
-  
+
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
     .${ELEMENTS.ARROW_CLASS} svg {
       width: 24px;
       height: 8px;
     }
   }
-  
+
   .${BACK_ARROW_CLASS} {
     left: 0;
   }
@@ -81,7 +81,7 @@ export const ButtonStyles = `
       top: ${spacing.xs};
     }
   }
-  
+
   .${FORWARD_ARROW_CLASS} {
     right: 0;
   }

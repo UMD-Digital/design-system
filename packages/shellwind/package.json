@@ -1,7 +1,7 @@
 {
   "name": "@universityofmaryland/shellwind",
   "version": "0.0.1",
-  "description": "A Tailwindcss theme of the extrapolated tokens and components from UMD Design system.",
+  "description": "A Tailwindcss theme of the extrapolated tokens and components from the University of Maryland Design System.",
   "keywords": [],
   "author": "UMD Web Services <digital@umd.edu>",
   "license": "MIT",

@@ -1,0 +1,20 @@
+{
+  "name": "@universityofmaryland/shellwind",
+  "version": "0.0.1",
+  "description": "A Tailwindcss theme of the extrapolated tokens and components from UMD Design system.",
+  "keywords": [],
+  "author": "UMD Web Services <digital@umd.edu>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "clean": "rm -rf dist",
+    "start": "webpack -w"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}

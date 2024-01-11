@@ -8442,9 +8442,6 @@ uglify-js@^3.1.4:
 
 "umd-web-configuration@link:@universityofmaryland/umd-web-configuration":
   version "0.0.0"
-
-"umd-web-configuration@link:packages/configuration/@universityofmaryland/umd-web-configuration":
-  version "0.0.0"
   uid ""
 
 unc-path-regex@^0.1.2:

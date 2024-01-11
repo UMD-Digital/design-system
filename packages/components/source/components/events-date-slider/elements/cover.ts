@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration';
+import { colors } from '@universityofmaryland/variables';
 import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
 
 const COVER_CLASS = 'umd-element-date-slider-date-lock-cover';
@@ -13,7 +13,7 @@ export const CoverStyles = `
     left: -100vw;
     background-color: ${colors.gray.lighter};
   }
-  
+
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
   .${COVER_CLASS} {
       width: 40vw;

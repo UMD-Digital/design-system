@@ -3,7 +3,7 @@ import {
   spacing,
   typography,
   umdCta,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { CheckForCtaStyle, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -63,7 +63,7 @@ export const IntroStyles = `
       text-align: center;
     }
   }
-  
+
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
     .${INTRO_CONTAINER} {
       padding: 0;

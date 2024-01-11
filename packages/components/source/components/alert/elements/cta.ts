@@ -1,4 +1,4 @@
-import { spacing, umdCta } from '@universityofmaryland/umd-web-configuration';
+import { spacing, umdCta } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from 'components/alert/globals';

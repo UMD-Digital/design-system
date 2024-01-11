@@ -4,7 +4,7 @@ import {
   spacing,
   fontWeight,
   typography,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
   BREAKPOINTS,
@@ -125,7 +125,7 @@ const HeadlineStyles = `
         typography['.umd-interactive-sans-medium'],
     },
   })}
-  
+
   .${ROW_LINKS_COLUMN_HEADLINE} {
     margin-bottom: ${spacing.sm};
     font-weight: ${fontWeight.extraBold};
@@ -147,13 +147,13 @@ const LinkStyles = `
   .${ROW_LINKS_COLUMN_LINKS} > * {
     margin-bottom: ${spacing.sm};
   }
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]: typography['.umd-sans-smaller'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
@@ -178,19 +178,19 @@ const ColumnWrapper = `
       gap: 0 ${spacing.md};
     }
   }
-  
+
   @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
       margin-bottom: ${spacing.lg};
     }
   }
-  
+
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       padding-right: ${spacing.xs};
     }
   }
-  
+
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
       margin-left: ${spacing.lg};
@@ -198,7 +198,7 @@ const ColumnWrapper = `
       border-left: 1px solid ${colors.gray.dark};
     }
   }
-  
+
   @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} > p {
       grid-column: 1 / span 2;

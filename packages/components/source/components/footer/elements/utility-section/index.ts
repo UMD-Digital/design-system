@@ -4,7 +4,7 @@ import {
   umdLock,
   typography,
   animatedLinks,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
   BREAKPOINTS,
@@ -50,7 +50,7 @@ const TextStyles = `
     display: flex;
     align-items: center;
   }
-  
+
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
     color: ${colors.black};
   }
@@ -68,7 +68,7 @@ export const UtilityContainerStyles = `
       [`.${UTILITY_CONTAINER_LOCK}`]: umdLock['.umd-lock']
     },
   })}
-  
+
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${UTILITY_CONTAINER_LOCK} {
       display: flex;

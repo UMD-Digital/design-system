@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/variables';
 import { FORWARD_ARROW_ICON } from 'assets/icons';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 import {

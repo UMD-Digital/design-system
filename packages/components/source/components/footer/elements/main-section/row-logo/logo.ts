@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration';
+import { spacing } from '@universityofmaryland/variables';
 import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
@@ -47,7 +47,7 @@ export const LogoContainerStyles = `
     background-size: 0;
     display: block !important;
   }
-  
+
   .${LOGO_CONTAINER_LINK} svg {
     width: 100%;
   }

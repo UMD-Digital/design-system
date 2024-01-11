@@ -4,7 +4,7 @@ import {
   fontSize,
   spacing,
   typography,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { NEW_WINDOW_ICON, DOCUMENT_ICON, FEARLESS_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
@@ -147,13 +147,13 @@ const typeOutlineStyles = `
     transition: fill .5s;
   }
 
-  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover, 
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover,
   [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus {
     background-color: ${colors.gray.darker};
     color: ${colors.white};
   }
 
-  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover svg, 
+  [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:hover svg,
   [${VARIABLES.ATTR_TYPE}="${VARIABLES.TYPE_OUTLINE}"] .${ELEMENTS.CTA_CONTAINER_ELEMENT}:focus svg {
     fill: ${colors.white};
   }

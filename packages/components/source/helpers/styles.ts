@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/umd-web-configuration';
+import { colors } from '@universityofmaryland/variables';
 import postcss from 'postcss';
 
 const postcssNesting = require('postcss-nesting');

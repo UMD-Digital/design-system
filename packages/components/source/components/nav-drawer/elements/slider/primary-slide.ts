@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/variables';
 import { MakeSlot } from 'helpers/ui';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/nav-drawer/globals';

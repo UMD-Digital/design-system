@@ -1,8 +1,4 @@
-import {
-  colors,
-  spacing,
-  umdLock,
-} from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing, umdLock } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 import { BREAKPOINTS, SLOTS } from 'components/carousel-cards/globals';
@@ -29,25 +25,25 @@ const containerStyles = `
     position: relative;
     overflow: hidden;
   }
-  
+
   @container umd-carousel-card (max-width: 300px) {
     .${CAROUSEL_CONTAINER} {
       display: none;
     }
   }
-  
+
   @container umd-carousel-card (min-width: ${BREAKPOINTS.medium}px) {
     .${CAROUSEL_CONTAINER} {
       padding: ${spacing['4xl']} 0;
     }
   }
-  
+
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
     .${CAROUSEL_CONTAINER} {
       padding: ${spacing['max']} 0;
     }
   }
-  
+
   .${CAROUSEL_CONTAINER} > svg {
     width: auto;
     height: 100%;
@@ -55,7 +51,7 @@ const containerStyles = `
     position: absolute;
     top: 0;
   }
-  
+
   .${CAROUSEL_CONTAINER} ::slotted(*) {
     color: ${colors.white};
   }
@@ -69,7 +65,7 @@ const containerLockStyles = `
       styleObj: umdLock['.umd-lock'],
     })}
   }
-  
+
   @media (min-width: ${BREAKPOINTS.large}px) {
     .${CAROUSEL_LOCK} {
       display: flex;
@@ -77,7 +73,7 @@ const containerLockStyles = `
       align-items: center;
     }
   }
-  
+
   @media umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
     .${CAROUSEL_LOCK} {
       max-width: inherit;
@@ -91,7 +87,7 @@ export const ComponentStyles = `
   :host {
     display: block;
     background-color: ${colors.black};
-    container: umd-carousel-card / inline-size; 
+    container: umd-carousel-card / inline-size;
   }
 
   :host * {

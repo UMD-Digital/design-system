@@ -3,7 +3,7 @@ import {
   colors,
   spacing,
   typography,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
   CheckForAnimationLinkSpan,
@@ -73,7 +73,7 @@ const HeadlineStyles = `
         animatedLinks['.umd-slidein-underline-white'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
@@ -138,7 +138,7 @@ const LinkListStyles = `
         animatedLinks['.umd-slidein-underline-black'],
     },
   })}
-  
+
   .${CONTACT_LINKS_LIST} a:not(:first-child) {
     position: relative;
     margin-left: ${spacing.min};
@@ -146,7 +146,7 @@ const LinkListStyles = `
     position: relative;
     background-position: 10px 100%;
   }
-  
+
   .${CONTACT_LINKS_LIST} a:not(:first-child):before {
     content: "";
     display: inline-block;

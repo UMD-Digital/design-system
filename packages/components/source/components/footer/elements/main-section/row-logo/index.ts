@@ -1,8 +1,4 @@
-import {
-  colors,
-  spacing,
-  umdLock,
-} from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing, umdLock } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
@@ -69,7 +65,7 @@ export const RowLogoStyles = `
       padding-bottom: ${spacing['md']} ;
     }
   }
-  
+
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: flex;
@@ -79,7 +75,7 @@ export const RowLogoStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LOGO_CONTAINER_LOCK}`]: umdLock['.umd-lock'] 
+      [`.${ROW_LOGO_CONTAINER_LOCK}`]: umdLock['.umd-lock']
     },
   })}
 

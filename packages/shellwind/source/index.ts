@@ -17,7 +17,7 @@ import {
   umdCta,
   captionedMedia,
   umdLoader,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 
 const theme = { colors, fontFamily, fontSize, screens, spacing };
 

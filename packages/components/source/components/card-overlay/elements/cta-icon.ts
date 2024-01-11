@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/variables';
 import { DOCUMENT_ICON, NEW_WINDOW_ICON, SHORT_ARROW_ICON } from 'assets/icons';
 import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';

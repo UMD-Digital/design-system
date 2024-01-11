@@ -1,4 +1,4 @@
-import { colors, fontSize } from '@universityofmaryland/umd-web-configuration';
+import { colors, fontSize } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { ElementType } from 'components/nav-item/component';
@@ -25,7 +25,7 @@ export const PrimaryStyles = `
     transition: color 0.2s ease-in-out;
   }
 
-  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:hover, 
+  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:hover,
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:focus {
     color: ${colors.red};
    }

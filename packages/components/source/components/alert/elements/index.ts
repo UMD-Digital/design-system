@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/variables';
 import { CLOSE_BUTTON_ICON, NOTIFICATION_ICON } from 'assets/icons';
 import { Reset } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS } from '../globals';
@@ -18,7 +18,7 @@ const AlertStyles = `
   .${CONTAINER_CLASS}[data-type="alert"] {
     border: solid 4px ${colors.gold} !important;
   }
-  
+
   .${CONTAINER_CLASS}[data-type="alert"] .${ELEMENTS.ICON_CLASS} svg circle {
     fill: ${colors.gold} !important;
   }
@@ -28,7 +28,7 @@ const NotificationStyles = `
   .${CONTAINER_CLASS}[data-type="notification"] {
     border: solid 4px #2f7eda !important;
   }
-  
+
   .${CONTAINER_CLASS}[data-type="notification"] .${ELEMENTS.ICON_CLASS} svg circle {
     fill: #2f7eda !important;
   }
@@ -38,7 +38,7 @@ const EmergencyStyles = `
   .${CONTAINER_CLASS}[data-type="emergency"]  {
     border: solid 4px ${colors.red} !important;
   }
-  
+
   .${CONTAINER_CLASS}[data-type="emergency"] .${ELEMENTS.ICON_CLASS} svg circle  {
     fill: ${colors.red} !important;
   }
@@ -50,7 +50,7 @@ const ButtonStyles = `
     top: ${spacing.lg};
     right: ${spacing.lg};
   }
-  
+
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
     .${CLOSE_BUTTON_CLASS} {
       top: ${spacing.sm};
@@ -63,7 +63,7 @@ const IconStyles = `
   .${CONTAINER_CLASS}[data-icon="true"] .${ELEMENTS.ICON_CLASS} {
     display: block;
   }
-  
+
   .${CONTAINER_CLASS}[data-icon="false"] .${ELEMENTS.ICON_CLASS} {
     display: none;
   }
@@ -79,7 +79,7 @@ const IconStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-alert / inline-size; 
+    container: umd-alert / inline-size;
   }
 
   ${Reset}
@@ -91,13 +91,13 @@ export const ComponentStyles = `
     padding-right: ${spacing['2xl']};
     gap: ${spacing.lg};
   }
-  
+
   @container umd-alert (max-width: 260px) {
   .${CONTAINER_CLASS} {
       display: none
     }
   }
-  
+
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
   .${CONTAINER_CLASS} {
       padding-right: ${spacing.lg};

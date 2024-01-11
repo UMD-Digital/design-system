@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration';
+import { spacing } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 import { SLOTS, VARIABLES, ELEMENTS } from 'components/carousel-cards/globals';
 import {

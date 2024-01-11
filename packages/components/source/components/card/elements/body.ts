@@ -3,7 +3,7 @@ import {
   spacing,
   typography,
   umdCta,
-} from '@universityofmaryland/umd-web-configuration';
+} from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS, ELEMENTS } from '../globals';
@@ -18,7 +18,7 @@ const DateStyles = `
   * + .${CARD_BODY_DATE_WRAPPER} {
     margin-top: ${spacing.min}
   }
-  
+
   .${CARD_BODY_DATE_WRAPPER} * {
     color: ${colors.gray.mediumAA};
   }
@@ -28,7 +28,7 @@ const DateStyles = `
       [`.${CARD_BODY_DATE_WRAPPER}`]: typography['.umd-sans-min'],
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_BODY_DATE_WRAPPER} *`]: typography['.umd-sans-min'],
@@ -43,13 +43,13 @@ const TextStyles = `
       [`.${ELEMENTS.CARD_BODY_TEXT_WRAPPER} *`]: typography['.umd-sans-small'],
     },
   })}
-  
+
   .${ELEMENTS.CARD_BODY_TEXT_WRAPPER} a {
     text-decoration: underline;
     transition: color 0.3s ease-in-out;
   }
-  
-  .${ELEMENTS.CARD_BODY_TEXT_WRAPPER} a:hover, 
+
+  .${ELEMENTS.CARD_BODY_TEXT_WRAPPER} a:hover,
   .${ELEMENTS.CARD_BODY_TEXT_WRAPPER} a:focus {
     text-decoration: underline;
     color: ${colors.red};
@@ -61,7 +61,7 @@ const CtaStyles = `
   .${CARD_BODY_CTA_WRAPPER} {
     margin-top: ${spacing.md};
   }
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_BODY_CTA_WRAPPER} a`]: umdCta['.umd-cta-secondary'],

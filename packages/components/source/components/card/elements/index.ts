@@ -1,8 +1,4 @@
-import {
-  colors,
-  richText,
-  spacing,
-} from '@universityofmaryland/umd-web-configuration';
+import { colors, richText, spacing } from '@universityofmaryland/variables';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -95,7 +91,7 @@ export const ComponentStyles = `
     display: block;
     container: umd-card / inline-size;
   }
-  
+
   ${Reset}
 
   .${CARD_CONTAINER} {

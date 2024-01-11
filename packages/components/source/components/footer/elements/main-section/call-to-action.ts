@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing } from '@universityofmaryland/variables';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
@@ -19,7 +19,7 @@ export const CallToActionStyles = `
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
 
-  .${CALL_TO_ACTION_CONTAINER} a:hover, 
+  .${CALL_TO_ACTION_CONTAINER} a:hover,
   .${CALL_TO_ACTION_CONTAINER} a:focus {
     background-size: none;
     color: ${colors.white};
@@ -32,7 +32,7 @@ export const CallToActionStyles = `
     border: 1px solid ${colors.black};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:hover, 
+  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:hover,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:focus {
     color: ${colors.black};
     background-color: ${colors.gray.lightest};

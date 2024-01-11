@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/umd-web-configuration';
+import { spacing } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from '../component';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 

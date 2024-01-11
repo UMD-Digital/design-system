@@ -1,8 +1,4 @@
-import {
-  colors,
-  spacing,
-  typography,
-} from '@universityofmaryland/umd-web-configuration';
+import { colors, spacing, typography } from '@universityofmaryland/variables';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreatePrimarySlide, primarySliderStyles } from './primary-slide';
@@ -82,7 +78,7 @@ const secondaryLinkStyles = `
     margin-bottom: 0;
     padding-bottom: 0;
   }
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} a`]: typography['.umd-sans-small'],

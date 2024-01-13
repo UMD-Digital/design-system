@@ -55,8 +55,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDEventsDateElement = UMDEventsDateElement;
     window.customElements.define(ELEMENT_NAME, UMDEventsDateElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

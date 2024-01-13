@@ -58,8 +58,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDCardElement = UMDCardElement;
     window.customElements.define(ELEMENT_NAME, UMDCardElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

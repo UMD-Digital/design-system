@@ -92,8 +92,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDAlertElement = UMDAlertElement;
     window.customElements.define(ELEMENT_NAME, UMDAlertElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

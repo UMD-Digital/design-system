@@ -42,8 +42,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDExampleElement = UMDExampleElement;
     window.customElements.define(ELEMENT_NAME, UMDExampleElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

@@ -79,8 +79,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDEventsDateSliderElement = UMDEventsDateSliderElement;
     window.customElements.define(ELEMENT_NAME, UMDEventsDateSliderElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

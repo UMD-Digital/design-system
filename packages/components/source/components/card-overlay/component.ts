@@ -51,8 +51,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDCardOverlayElement = UMDCardOverlayElement;
     window.customElements.define(ELEMENT_NAME, UMDCardOverlayElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

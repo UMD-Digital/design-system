@@ -46,8 +46,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDFooterElement = UMDFooterElement;
     window.customElements.define(ELEMENT_NAME, UMDFooterElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

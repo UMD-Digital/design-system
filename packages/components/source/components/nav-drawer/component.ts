@@ -67,8 +67,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDNavDrawer = UMDNavDrawer;
     window.customElements.define(ELEMENT_NAME, UMDNavDrawer);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

@@ -70,8 +70,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDCarouselCardsElement = UMDCarouselCardsElement;
     window.customElements.define(ELEMENT_NAME, UMDCarouselCardsElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

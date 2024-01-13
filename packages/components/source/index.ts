@@ -1,4 +1,3 @@
-import { MakeDefaultStyleTag } from 'helpers/styles';
 import { Load as AlertLoader } from './components/alert/component';
 import { Load as CallToActionLoader } from './components/call-to-action/component';
 import { Load as CardLoader } from './components/card/component';
@@ -11,18 +10,16 @@ import { Load as NavDrawerLoader } from './components/nav-drawer/component';
 import { Load as NavItemLoader } from './components/nav-item/component';
 
 const LoadUmdComponents = () => {
-  let styleString = AlertLoader();
-  styleString += CardLoader();
-  styleString += CallToActionLoader();
-  styleString += CardOverlayLoader();
-  styleString += CarouselCardsLoader();
-  styleString += EventDateLoader();
-  styleString += EventDateSliderLoader();
-  styleString += FooterLoader();
-  styleString += NavDrawerLoader();
-  styleString += NavItemLoader();
-
-  MakeDefaultStyleTag({ styleString });
+  AlertLoader();
+  CardLoader();
+  CallToActionLoader();
+  CardOverlayLoader();
+  CarouselCardsLoader();
+  EventDateLoader();
+  EventDateSliderLoader();
+  FooterLoader();
+  NavDrawerLoader();
+  NavItemLoader();
 };
 
 export default LoadUmdComponents;

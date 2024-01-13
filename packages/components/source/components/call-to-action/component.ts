@@ -61,8 +61,6 @@ export const Load = () => {
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDCallToActionElement = UMDCallToActionElement;
     window.customElements.define(ELEMENT_NAME, UMDCallToActionElement);
-
-    return require('./styles/light-dom.css').toString();
   }
 
   return '';

@@ -1,5 +1,5 @@
 require('styles/configuration.css');
 
-import '@universityofmaryland/umd-web-components';
+import '@universityofmaryland/web-components-library';
 
 export {};

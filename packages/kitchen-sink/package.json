@@ -19,6 +19,6 @@
   "dependencies": {
     "shellwind": "link:../../@universityofmaryland/shellwind",
     "tailwindcss": "^3.3.5",
-    "umd-web-components": "link:../../@universityofmaryland/umd-web-components"
+    "umd-web-components": "link:../../@universityofmaryland/web-components-library"
   }
 }

@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "npx lerna run clean",
     "startover": "rm -rf node_modules && rm -rf packages/*/node_modules && yarn install",
-    "components": "npx lerna run start --scope=@universityofmaryland/umd-web-components",
+    "components": "npx lerna run start --scope=@universityofmaryland/web-components-library",
     "variables": "npx lerna run start --scope=@universityofmaryland/variables",
     "shellwind": "npx lerna run start --scope=@universityofmaryland/shellwind",
     "kitchen": "npx lerna run start --scope=@universityofmaryland/umd-design-system-kitchen-sink",

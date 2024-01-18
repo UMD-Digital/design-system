@@ -1,7 +1,7 @@
 {
-  "name": "@universityofmaryland/shellwind",
+  "name": "@universityofmaryland/theme",
   "version": "0.0.1",
-  "description": "A Tailwindcss theme of the extrapolated tokens and components from the University of Maryland Design System.",
+  "description": "A configuration of the tokens and other styles from UMD Design system for use with CSS frameworks that support JSS (CSS-in-JS).",
   "keywords": [],
   "author": "UMD Web Services <digital@umd.edu>",
   "license": "MIT",
@@ -13,8 +13,5 @@
     "build": "webpack",
     "clean": "rm -rf dist",
     "start": "webpack -w"
-  },
-  "dependencies": {
-    "tailwindcss": "^3.3.5"
   }
 }

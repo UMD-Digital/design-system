@@ -1,4 +1,5 @@
-import { spacing, queries } from '../tokens/layout';
+import { queries } from '../../tokens/breakpoints';
+import { spacing } from '../../tokens/spacing';
 
 const lockBase = {
   display: 'block',

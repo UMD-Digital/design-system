@@ -1,5 +1,5 @@
 # UMD Design System Variables
 
-Base tokens, variables, and classes for use in the University of Maryland Design System Components and Themes.
+Base tokens, and styles for use in the University of Maryland Design System Component Library and Theme.
 
-_Look at [@universityofmaryland/shellwind](https://www.npmjs.com/package/@universityofmaryland/shellwind) for use in tailwindCSS's Configurations._
+_Look at [@universityofmaryland/theme](https://www.npmjs.com/package/@universityofmaryland/theme) for use in project's Configurations._

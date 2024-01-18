@@ -1,10 +1,9 @@
-import { colors } from '../tokens/colors';
-import { fontFamily, fontWeight } from '../tokens/fonts';
-import { spacing } from '../tokens/layout';
-import { icons } from '../assets/icons';
+import { colors } from '../../tokens/colors';
+import { fontFamily, fontWeight } from '../../tokens/fonts';
+import { spacing } from '../../tokens/spacing';
 import { typography } from './typography';
 import { richTextLists } from './rich-text-lists';
-import { animatedLinks } from '../common/animated-links';
+import { animatedLinks } from './animated-links';
 
 const richTextBase = {
   '.umd-rich-text-base': {
@@ -90,18 +89,6 @@ const richTextQuotes = {
         borderLeft: `2px solid ${colors.red}`,
         position: 'relative',
         paddingLeft: spacing.md,
-
-        '&:before': {
-          content: '""',
-          backgroundImage: `url('${icons.quoteRed}')`,
-          backgroundSize: 'contain',
-          backgroundPosition: 'center',
-          position: 'absolute',
-          top: '0',
-          left: '-40px',
-          height: '30px',
-          width: '30px',
-        },
       },
     },
   },

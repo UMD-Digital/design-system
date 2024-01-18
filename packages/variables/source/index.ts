@@ -1,17 +1,10 @@
-import plugin from 'tailwindcss/plugin';
-
-// Tokens
-
+import { breakpoints, queries } from './tokens/breakpoints';
 import { colors } from './tokens/colors';
 import { fontFamily, fontSize, fontWeight } from './tokens/fonts';
-import { screens, spacing } from './tokens/layout';
-import { root } from './dependancies/root';
+import { spacing } from './tokens/spacing';
 
-// css-class based components
-
-import { skipContent, screenReaderOnly } from './common/accessibility';
-import { typography } from './common/typography';
-import { animatedLinks } from './common/animated-links';
+import { screenReaderOnly } from './styles/common/accessibility';
+import { animatedLinks } from './styles/common/animated-links';
 import {
   richText,
   richTextBase,
@@ -19,53 +12,25 @@ import {
   richTextQuotes,
   richTextTables,
   richTextLists,
-} from './common/rich-text';
-import { umdFlexGrid } from './layout/umd-flex';
-import { umdGrid } from './layout/umd-grid';
-import { umdLock } from './layout/umd-lock';
-import { umdLinksGroup } from './layout/umd-links-group';
-import { umdCta } from './elements/call-to-action';
-import { captionedMedia } from './elements/media-with-caption';
-import { umdLoader } from './elements/loader';
+} from './styles/common/rich-text';
+import { umdCta } from './styles/common/call-to-action';
+import { typography } from './styles/common/typography';
 
-const umdUtilities = { ...root };
-const umdComponents = {
-  ...skipContent,
-  ...animatedLinks,
-  ...richText,
-  ...typography,
-  ...umdGrid,
-  ...umdLock,
-  ...umdLinksGroup,
-  ...umdCta,
-  ...captionedMedia,
-  ...umdLoader,
-  ...umdFlexGrid,
-};
-
-const umdPlugin = plugin(function ({ addUtilities, addComponents }) {
-  addUtilities(umdUtilities);
-  addComponents(umdComponents);
-});
-
-const plugins = [umdPlugin];
-const theme = { colors, fontFamily, fontSize, screens, spacing };
+import { umdFlexGrid } from './styles/layout/umd-flex';
+import { umdGrid } from './styles/layout/umd-grid';
+import { umdLock } from './styles/layout/umd-lock';
 
 export {
-  theme,
-  plugins,
-  umdUtilities,
-  umdComponents,
-  umdPlugin,
-  root,
+  breakpoints,
+  queries,
   colors,
   fontFamily,
   fontSize,
   fontWeight,
-  screens,
   spacing,
   screenReaderOnly,
-  skipContent,
+  animatedLinks,
+  umdCta,
   richText,
   richTextBase,
   richTextCoding,
@@ -73,12 +38,7 @@ export {
   richTextTables,
   richTextLists,
   typography,
-  animatedLinks,
+  umdFlexGrid,
   umdGrid,
   umdLock,
-  umdLinksGroup,
-  umdCta,
-  captionedMedia,
-  umdLoader,
-  umdFlexGrid,
 };

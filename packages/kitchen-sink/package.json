@@ -17,7 +17,7 @@
     "webpack-shell-plugin-next": "^2.3.1"
   },
   "dependencies": {
-    "shellwind": "link:../../@universityofmaryland/shellwind",
+    "theme": "link:../../@universityofmaryland/theme",
     "tailwindcss": "^3.3.5",
     "umd-web-components": "link:../../@universityofmaryland/web-components-library"
   }

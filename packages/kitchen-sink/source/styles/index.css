@@ -8,3 +8,11 @@
 
 @import './dependencies/reset.css';
 @import './dependencies/header.css';
+
+.umd-configuration-section {
+  @apply mb-md pb-md border-b border-black;
+}
+
+.umd-section-headline {
+  @apply umd-serif-medium mb-md text-red;
+}

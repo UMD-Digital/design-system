@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/variables",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Base tokens, variables, and classes for use in the University of Maryland Design System",
   "main": "dist/index.js",
   "author": "UMD Web Services <digital@umd.edu>",
@@ -13,8 +13,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --preserveWatchOutput",
     "clean": "rm -rf dist",
-    "start": "tsc -w"
+    "start": "tsc -w --preserveWatchOutput"
   }
 }

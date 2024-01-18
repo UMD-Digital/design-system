@@ -1,5 +1,5 @@
-import { fontFamily, fontSize, fontWeight } from '../tokens/fonts';
-import { queries } from '../tokens/layout';
+import { fontFamily, fontSize, fontWeight } from '../../tokens/fonts';
+import { queries } from '../../tokens/breakpoints';
 
 const serif = {
   '.umd-serif-max': {

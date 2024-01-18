@@ -10,9 +10,9 @@
     "startover": "rm -rf node_modules && rm -rf packages/*/node_modules && yarn install",
     "components": "npx lerna run start --scope=@universityofmaryland/web-components-library",
     "variables": "npx lerna run start --scope=@universityofmaryland/variables",
-    "shellwind": "npx lerna run start --scope=@universityofmaryland/shellwind",
+    "theme": "npx lerna run start --scope=@universityofmaryland/theme",
     "kitchen": "npx lerna run start --scope=@universityofmaryland/umd-design-system-kitchen-sink",
-    "start": "yarn run variables & yarn run shellwind & yarn run components & yarn run kitchen"
+    "start": "yarn run variables & yarn run theme & yarn run components & yarn run kitchen"
   },
   "workspaces": [
     "packages/*"

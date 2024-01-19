@@ -9,6 +9,7 @@ module.exports = () => {
   const entrypoints = {
     elements: path.resolve('source/scripts/elements'),
     app: path.resolve('source/scripts/app'),
+    dropdown: path.resolve('source/scripts/dropdown'),
   };
 
   const modules = {

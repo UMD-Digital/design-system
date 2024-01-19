@@ -1,0 +1,90 @@
+.umd-sans-largest {
+  padding-bottom: 40px;
+}
+
+.umd-sans-large {
+  display: block;
+  padding: 45px 0 15px 0;
+  position: relative;
+}
+
+.default {
+  padding: 60px 0 40px 0;
+}
+
+.default::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  top: calc(50% + 11px);
+  left: 75px;
+  position: absolute;
+  width: calc(95% - 12px);
+}
+
+.type {
+  margin-right: 17px;
+}
+
+.type-detail {
+  color: theme(colors.gray.medium);
+  padding-left: 15px;
+  position: relative;
+}
+
+.type-detail::before {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 25px;
+  margin-left: 60px;
+  position: absolute;
+  top: calc(50% + 3px);
+  transform: translateY(-50%);
+  width: 1px;
+}
+
+.type-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 190px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(90% - 50px);
+}
+
+.field-option {
+  margin-right: 10px;
+}
+
+.field-option-detail {
+  color: theme(colors.gray.medium);
+  padding-left: 15px;
+  position: relative;
+}
+
+.field-option-detail::before {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 25px;
+  margin-left: 130px;
+  position: absolute;
+  top: calc(50% + 3px);
+  transform: translateY(-50%);
+  width: 1px;
+}
+
+.field-option-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 280px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(85% - 70px);
+}

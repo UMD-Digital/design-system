@@ -1,0 +1,78 @@
+{% macro Headline(params) %}
+  {% set characters = params.characters ?? null %}
+  {% set isLink = params.isLink ?? null %}
+  {% set isHeader = params.isHeader ?? null %}
+  {% set url = params.url ?? 'https://umd.edu' %}
+
+  {% set string =
+    'Lorem ipsum dolor sit amet consectetur adipiscing elit iacut quis nostrud quamie'
+  %}
+
+  {% if characters is defined and characters is not null and characters <= 80 %}
+    {% set string = string|slice(0, characters) %}
+  {% else %}
+    {% set string = string|slice(0, 40) %}
+  {% endif %}
+
+  {% if isLink %}
+    {% if isHeader %}
+      <h2 slot="headline">
+        <a href="{{ url }}">
+          <span class="sr-only">Text for Screen Reader</span>
+          <span aria-hidden="true">{{ string }}</span>
+        </a>
+      </h2>
+    {% else %}
+      <div slot="headline">
+        <a href="{{ url }}">
+          <span class="sr-only">Text for Screen Reader</span>
+          <span aria-hidden="true">{{ string }}</span>
+        </a>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {% if isLink == false %}
+    {% if isHeader %}
+      <h2 slot="headline">
+        {{ string }}
+      </h2>
+    {% endif %}
+
+    {% if not isHeader %}
+      <div slot="headline">
+        {{ string }}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{% macro HeadlineSuccinct() %}
+  {{
+    _self.Headline({
+      characters: 20,
+      isLink: true,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro HeadlineNormal() %}
+  {{
+    _self.Headline({
+      characters: 40,
+      isLink: true,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro HeadlineVerbose(params) %}
+  {{
+    _self.Headline({
+      characters: 80,
+      isLink: true,
+      isHeader: false
+    })
+  }}
+{% endmacro %}

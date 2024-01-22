@@ -3,7 +3,7 @@ import { colors } from '../../tokens/colors';
 const baseSpan = {
   display: 'inline',
   position: 'relative',
-  backgroundPosition: 'left calc(100% - 0.125em)',
+  backgroundPosition: 'left bottom',
   backgroundRepeat: 'no-repeat',
   transition: 'background 0.5s',
 };
@@ -157,6 +157,7 @@ const specialAnimations = {
 
   '.umd-fadein-simple-dark': {
     ...baseLink,
+
     backgroundImage: `linear-gradient(${colors.white}, ${colors.white})`,
     backgroundPosition: 'left calc(100% - 2px)',
     backgroundRepeat: 'no-repeat',
@@ -175,6 +176,7 @@ const specialAnimations = {
 
   '.umd-fadein-simple-light': {
     ...baseLink,
+
     backgroundImage: `linear-gradient(currentColor, currentColor)`,
     backgroundPosition: 'left calc(100% - 2px)',
     backgroundRepeat: 'no-repeat',
@@ -196,6 +198,7 @@ const animatedLinks = Object.assign(
   slideInUnderline,
   fadeInUnderline,
   specialAnimations,
+  baseAnimation,
 );
 
 export { animatedLinks };

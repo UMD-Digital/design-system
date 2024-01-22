@@ -203,6 +203,42 @@ const elements = {
   },
 };
 
-const typography = Object.assign(serif, sans, elements);
+const statsSmall = {
+  // Stats3
+  '.umd-statistic-sans-small': {
+    fontFamily: fontFamily['sans'],
+    fontSize: fontSize['5xl'],
+    fontWeight: fontWeight['extraBold'],
+    lineHeight: '1em',
+  },
+};
+
+const statistics = {
+  // Stat1
+  '.umd-statistic-sans-large': {
+    ...statsSmall['.umd-statistic-sans-small'],
+
+    fontSize: '100px',
+
+    // Stats3
+    [`@media (${queries.medium.max})`]: {
+      fontSize: fontSize['6xl'],
+    },
+  },
+
+  // Stat2
+  '.umd-statistic-sans-medium': {
+    ...statsSmall['.umd-statistic-sans-small'],
+
+    fontSize: fontSize['max'],
+
+    // Stats3
+    [`@media (${queries.medium.max})`]: {
+      fontSize: fontSize['6xl'],
+    },
+  },
+};
+
+const typography = Object.assign(serif, sans, elements, statistics);
 
 export { typography };

@@ -24,6 +24,7 @@ const containerStyles = `
     padding: ${spacing['3xl']} 0;
     position: relative;
     overflow: hidden;
+    container: umd-carousel-card / inline-size;
   }
 
   @container umd-carousel-card (max-width: 300px) {
@@ -87,7 +88,6 @@ export const ComponentStyles = `
   :host {
     display: block;
     background-color: ${colors.black};
-    container: umd-carousel-card / inline-size;
   }
 
   :host * {

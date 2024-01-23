@@ -79,7 +79,6 @@ const IconStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-alert / inline-size;
   }
 
   ${Reset}
@@ -90,6 +89,7 @@ export const ComponentStyles = `
     padding: ${spacing.lg};
     padding-right: ${spacing['2xl']};
     gap: ${spacing.lg};
+    container: umd-alert / inline-size;
   }
 
   @container umd-alert (max-width: 260px) {

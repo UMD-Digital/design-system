@@ -11,9 +11,14 @@ import { CreateCoverElement, CoverStyles } from './cover';
 import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
 
 const CONTAINER_CLASS = 'umd-element-date-slider-container';
+const CONTAINER_WRAPPER_CLASS = 'umd-element-date-slider-container-wrapper';
 
 export const ContainerStyles = `
   .${CONTAINER_CLASS} {
+    container: dates-slider / inline-size;
+  }
+
+  .${CONTAINER_WRAPPER_CLASS} {
     padding: 24px 0;
     background-color: ${colors.gray.lighter};
     position: relative;
@@ -21,18 +26,18 @@ export const ContainerStyles = `
   }
 
   @container dates-slider (max-width: 260px) {
-  .${CONTAINER_CLASS} {
+    .${CONTAINER_WRAPPER_CLASS} {
       display: none
     }
   }
 
   @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-  .${CONTAINER_CLASS} {
+    .${CONTAINER_WRAPPER_CLASS} {
       padding: 40px;
     }
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} {
+  .${ELEMENTS.CONTAINER_DARK_CLASS} .${CONTAINER_WRAPPER_CLASS} {
     background-color: ${colors.gray.darker};
   }
 
@@ -47,7 +52,6 @@ export const ContainerStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: dates-slider / inline-size;
   }
 
   ${Reset}
@@ -73,13 +77,17 @@ export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
 
 export const CreateContainer = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
+  const wrapper = document.createElement('div');
   const coverElement = CreateCoverElement();
   const containerWrapper = CreateScrollerWrapper({ element });
 
-  container.classList.add(CONTAINER_CLASS);
+  wrapper.classList.add(CONTAINER_WRAPPER_CLASS);
 
-  container.appendChild(containerWrapper);
-  container.appendChild(coverElement);
+  wrapper.appendChild(containerWrapper);
+  wrapper.appendChild(coverElement);
+
+  container.classList.add(CONTAINER_CLASS);
+  container.appendChild(wrapper);
 
   return container;
 };

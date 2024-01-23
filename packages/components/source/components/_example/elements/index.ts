@@ -3,7 +3,6 @@ import { Reset } from 'helpers/styles';
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-example / inline-size; 
   }
 
   ${Reset}

@@ -29,7 +29,6 @@ const hasDropdownStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-nav-item / inline-size;
   }
 
   ${Reset}
@@ -44,6 +43,7 @@ export const ComponentStyles = `
 
   .${ELEMENTS.CONTAINER} {
     position: relative;
+    container: umd-nav-item / inline-size;
   }
 
   .${ELEMENTS.CONTAINER}:foucs-within .${ELEMENTS.DROPDOWN_CONTAINER} {

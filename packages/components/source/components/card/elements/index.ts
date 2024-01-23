@@ -89,13 +89,13 @@ const VariantBorderStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    container: umd-card / inline-size;
   }
 
   ${Reset}
 
   .${CARD_CONTAINER} {
     max-width: 680px;
+    container: umd-card / inline-size;
   }
 
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {

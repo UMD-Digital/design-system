@@ -131,7 +131,7 @@ const HeadlineStyles = `
     font-weight: ${fontWeight.extraBold};
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @media (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LINKS_COLUMN_HEADLINE}[${HEADLINE_ATTRIBUTE_EMPTY}="true"] {
       display: none;
     }
@@ -171,7 +171,7 @@ const LinkStyles = `
 
 // prettier-ignore
 const ColumnWrapper = `
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -179,19 +179,19 @@ const ColumnWrapper = `
     }
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
+  @media (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
       margin-bottom: ${spacing.lg};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       padding-right: ${spacing.xs};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
       margin-left: ${spacing.lg};
       padding-left: ${spacing.lg};
@@ -199,7 +199,7 @@ const ColumnWrapper = `
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} > p {
       grid-column: 1 / span 2;
     }
@@ -208,13 +208,13 @@ const ColumnWrapper = `
 
 // prettier-ignore
 export const LinkColumnStyles = `
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @media (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
       padding-top: ${spacing.md};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
       display: flex;
     }

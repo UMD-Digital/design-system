@@ -13,19 +13,19 @@ const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
 
 // prettier-ignore
 const ctaOverwriteStyles = `
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @media (max-width: ${BREAKPOINTS.large - 1}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       margin-top: ${spacing.md};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @media (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ELEMENTS.ELEMENT_WRAPPER}[type="${VARIABLES.VERSION_TYPE_SIMPLE}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
@@ -33,7 +33,7 @@ const ctaOverwriteStyles = `
 `;
 
 const campaignOverwriteStyles = `
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${LOGO_CONTAINER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: none;
     }

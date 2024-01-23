@@ -69,7 +69,7 @@ export const UtilityContainerStyles = `
     },
   })}
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${UTILITY_CONTAINER_LOCK} {
       display: flex;
       align-items: center;
@@ -82,13 +82,13 @@ export const UtilityContainerStyles = `
     },
   })}
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @media (max-width: ${BREAKPOINTS.large - 1}px) {
     .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-top: ${spacing.sm};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-left: ${spacing.sm};
       padding-left: ${spacing.sm};

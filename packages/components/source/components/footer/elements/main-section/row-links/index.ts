@@ -10,13 +10,13 @@ export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
 const ROW_LINKS_CONTAINER_LOCK = 'umd-footer-row-links-lock';
 
 const socialOverwriteStyles = `
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @media (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: block !important;
     }
@@ -30,7 +30,7 @@ export const RowLinkStyles = `
     background-color: ${colors.black};
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @media (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_CONTAINER}  {
       padding-bottom: ${spacing['2xl']};
     }
@@ -44,7 +44,7 @@ export const RowLinkStyles = `
     display: flex;
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @media (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LINKS_CONTAINER_WRAPPER}  {
       flex-direction: column-reverse;
       flex-wrap: wrap;

@@ -8,6 +8,8 @@
 
 @import './dependencies/reset.css';
 @import './dependencies/header.css';
+@import './dependencies/dropdown.css';
+@import './dependencies/kitchen-sink-styles.css';
 
 .umd-configuration-section {
   @apply mb-md pb-md border-b border-black;

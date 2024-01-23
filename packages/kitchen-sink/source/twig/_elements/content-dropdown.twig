@@ -1,0 +1,20 @@
+{% macro ContentVariations() %}
+  <div class="umd-input-select">
+    <label class="sr-only" for="content-variation">
+      Choose content variation
+    </label>
+    <select id="content-variation" aria-live="polite">
+      <option value="content-succinct">
+        Succinct
+      </option>
+
+      <option value="content-normal" selected="">
+        Normal
+      </option>
+
+      <option value="content-verbose">
+        Verbose
+      </option>
+    </select>
+  </div>
+{% endmacro %}

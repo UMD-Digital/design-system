@@ -1,86 +1,191 @@
 {% extends '../_layout.twig' %}
+{% import '../_elements/content-dropdown.twig' as Dropdown %}
+{% import '../_ui/fields/headline.twig' as Headline %}
+{% import '../_ui/fields/rich-text.twig' as RichText %}
 
 {% block page %}
   <section>
     <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling - Alert Type
-      </p>
+      <h1 class="umd-sans-largest">
+        Alert
+      </h1>
 
-      <umd-element-alert type="alert" days="0" icon="true">
-        <p slot="headline" styled>
-          <a href="https://google.com" target="_blank">Alert Title Link</a>
-        </p>
+      <h2 class="umd-sans-large">
+        Content Variations
+      </h2>
 
-        <div slot="body">
-          <p>
-            Lorem ipsum dolor sit amet consectetur. Ornare enim venenatis
-            feugiat facilisis eu netus urna nisl rutrum. Facilisi dui turpis a
-            ante a egestas in.
-          </p>
-        </div>
+      {{ Dropdown.ContentVariations() }}
 
-        <a href="https://google.com" slot="cta">This is a CTA</a>
-      </umd-element-alert>
-    </div>
-  </section>
+      <div id="content-succinct" aria-hidden="true">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling - Emergency Type
-      </p>
+          <umd-element-alert type="alert" days="0" icon="true">
+            {{ Headline.HeadlineSuccinct() }}
 
-      <umd-element-alert type="emergency" days="0" icon="true">
-        <div slot="headline">
-          <p>
-            Alert Title
-          </p>
-        </div>
+            {{ RichText.RichTextSuccinct() }}
 
-        <div slot="body">
-          <p>
-            Lorem ipsum dolor sit amet consectetur. Ornare enim venenatis
-            feugiat facilisis eu netus urna nisl rutrum. Facilisi dui turpis a
-            ante a egestas in. Augue ac a et facilisis dui enim faucibus mattis.
-            Dolor laoreet justo tortor vel eget neque eget semper. Viverra augue
-            in velit condimentum senectus dui tincidunt leo.
-          </p>
-        </div>
-        <a href="https://google.com" slot="cta">This is a CTA</a>
-      </umd-element-alert>
-    </div>
-  </section>
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling - Notification Type
-      </p>
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Notification</span>
+          </div>
 
-      <umd-element-alert type="notification" days="0" icon="true">
-        <div slot="headline">
-          <p>
-            Alert Title
-          </p>
-        </div>
+          <umd-element-alert type="notification" days="0" icon="true">
+            {{ Headline.HeadlineSuccinct() }}
 
-        <div slot="body">
-          <p>
-            Lorem ipsum dolor sit amet consectetur. Ornare enim venenatis
-            feugiat facilisis eu netus urna nisl rutrum. Facilisi dui turpis a
-            ante a egestas in. Augue ac a et facilisis dui enim faucibus mattis.
-            Dolor laoreet justo tortor vel eget neque eget semper. Viverra augue
-            in velit condimentum senectus dui tincidunt leo. Aliquet enim nibh
-            vel tortor faucibus elementum consequat sed sem. Adipiscing
-            porttitor sed consectetur mattis id. Viverra turpis faucibus odio
-            sed pellentesque in vitae. Sem adipiscing erat lectus turpis at. Id
-            non urna habitant pellentesque. Enim odio augue sodales purus
-            iaculis cursus fusce massa sollicitudin.
-          </p>
-        </div>
-        <a href="https://google.com" slot="cta">This is a CTA</a>
-      </umd-element-alert>
+            {{ RichText.RichTextSuccinct() }}
+
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
+
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Emergency</span>
+          </div>
+
+          <umd-element-alert type="emergency" days="0" icon="true">
+            {{ Headline.HeadlineSuccinct() }}
+
+            {{ RichText.RichTextSuccinct() }}
+
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+
+          <umd-element-alert type="alert" days="0" icon="true">
+            {{ Headline.HeadlineSuccinct() }}
+          </umd-element-alert>
+        </section>
+      </div>
+
+      <div id="content-normal" aria-hidden="false">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
+
+          <umd-element-alert type="alert" days="0" icon="true">
+            {{ Headline.HeadlineNormal() }}
+
+            {{ RichText.RichTextNormal() }}
+
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
+
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Notification</span>
+          </div>
+
+          <umd-element-alert type="notification" days="0" icon="true">
+            {{ Headline.HeadlineNormal() }}
+
+            {{ RichText.RichTextNormal() }}
+
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
+
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Emergency</span>
+          </div>
+
+          <umd-element-alert type="emergency" days="0" icon="true">
+            {{ Headline.HeadlineNormal() }}
+
+            {{ RichText.RichTextNormal() }}
+
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+
+          <umd-element-alert type="alert" days="0" icon="true">
+            {{ Headline.HeadlineNormal() }}
+          </umd-element-alert>
+        </section>
+      </div>
+
+      <div id="content-verbose" aria-hidden="true">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
+
+          <umd-element-alert type="alert" days="0" icon="true">
+            {{ Headline.HeadlineVerbose() }}
+
+            {{ RichText.RichTextVerbose() }}
+
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
+
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Notification</span>
+          </div>
+
+          <umd-element-alert type="notification" days="0" icon="true">
+            {{ Headline.HeadlineVerbose() }}
+
+            {{ RichText.RichTextVerbose() }}
+
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
+
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Emergency</span>
+          </div>
+
+          <umd-element-alert type="emergency" days="0" icon="true">
+            {{ Headline.HeadlineVerbose() }}
+
+            {{ RichText.RichTextVerbose() }}
+
+            <a href="https://google.com" slot="cta">Learn More</a>
+          </umd-element-alert>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+
+          <umd-element-alert type="alert" days="0" icon="true">
+            {{ Headline.HeadlineVerbose() }}
+          </umd-element-alert>
+        </section>
+      </div>
     </div>
   </section>
 {% endblock %}

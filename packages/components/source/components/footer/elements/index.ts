@@ -8,11 +8,13 @@ export const ComponentStyles = `
   :host {
     display: none;
     position: relative !important;
-    container: umd-footer / inline-size;
   }
 
   ${Reset}
 
+  .${ELEMENTS.ELEMENT_WRAPPER} {
+    container: umd-footer / inline-size;
+  }
   ${MainContainerStyles}
   ${UtilityContainerStyles}
 `;

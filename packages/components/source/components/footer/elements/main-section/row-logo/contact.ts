@@ -44,13 +44,13 @@ const DEFAULT_PHONE = {
 
 // prettier-ignore
 const socialOverwriteStyles = `
-  @media (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @media (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       margin-top: ${spacing.md};
     }
@@ -170,13 +170,13 @@ export const ContactContainerStyles = `
     background-color: currnetColor;
   }
 
-  @media (max-width: ${BREAKPOINTS.medium - 1}px) {
+  @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${CONTACT_CONTAINER} {
       padding-top: ${spacing['md']};
     }
   }
 
-  @media (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${CONTACT_CONTAINER} {
       padding-left: ${spacing['2xl']};
     }

@@ -74,7 +74,7 @@ const listStylesBase = {
   },
 
   '& li': {
-    marginTop: spacing.md,
+    marginTop: spacing.sm,
 
     '&:first-child': {
       marginTop: '0',
@@ -82,7 +82,7 @@ const listStylesBase = {
 
     [`& > ul,
       & > ol`]: {
-      marginTop: spacing.md,
+      marginTop: spacing.sm,
     },
   },
 };

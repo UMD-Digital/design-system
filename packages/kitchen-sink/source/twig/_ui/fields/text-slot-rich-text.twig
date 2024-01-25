@@ -1,0 +1,68 @@
+{% macro RichText(params) %}
+  {% set characters = params.characters ?? 1 %}
+  {% set isStyled = params.isStyled ?? null %}
+  {% set url = params.url ?? 'https://umd.edu' %}
+
+  {% set string =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qu.'
+  %}
+
+  {% if
+    characters is defined and characters is not null and characters <= 400 %}
+    {% set string = string|slice(0, characters) %}
+  {% else %}
+    {% set string = string|slice(0, 200) %}
+  {% endif %}
+
+  {% if isStyled == false %}
+    <div slot="text">
+      <p>
+        {{ string }}
+      </p>
+    </div>
+  {% endif %}
+
+  {% if isStyled %}
+    <div slot="text">
+      <p>
+        <strong>Duis aute reprehenderit</strong>
+        <i>eu fugiat nulla pariatur</i>.
+        <a href="{{ url }}">
+          <span class="sr-only">Text for Screen Reader</span>
+          <span aria-hidden="true">Excepteur occaecat</span>
+        </a>, voluptate. {{ string }}
+        <em>Nostrud exercitation</em>
+        <u>
+          dolore eu fugiat nulla
+        </u>.
+      </p>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro CardRichTextSuccinct() %}
+  {{
+    _self.RichText({
+      characters: 100,
+      isStyled: true
+    })
+  }}
+{% endmacro %}
+
+{% macro CardRichTextNormal() %}
+  {{
+    _self.RichText({
+      characters: 200,
+      isStyled: true
+    })
+  }}
+{% endmacro %}
+
+{% macro CardRichTextVerbose(params) %}
+  {{
+    _self.RichText({
+      characters: 400,
+      isStyled: true
+    })
+  }}
+{% endmacro %}

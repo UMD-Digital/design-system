@@ -1,6 +1,9 @@
 {% extends '../_layout.twig' %}
 
 {% import '../_ui/card-overlay.twig' as CardOverlay %}
+{% import '../_ui/fields/headline.twig' as Headline %}
+{% import '../_ui/fields/text-slot-rich-text.twig' as RichText %}
+{% import '../_ui/fields/call-to-action.twig' as CallToAction %}
 
 {% block page %}
   {% set imageOne = random(RecImageOptions) %}
@@ -17,41 +20,11 @@
     </div>
 
     <umd-element-carousel-cards>
-      <div slot="headline">
-        <h2>
-          Lorem ipsum dolor sit amet
-        </h2>
-      </div>
+      {{ Headline.CarouselHeadlineNormal() }}
 
-      <div slot="text">
-        <p>
-          <a href="google.com">Lorem ipsum dolor</a> sit amet, consectetur adipiscing
-          elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-          ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua.
-        </p>
-      </div>
+      {{ RichText.CardRichTextNormal() }}
 
-      <div slot="cta">
-        <a href="https://strategicplan.umd.edu/commitment/we-take-on-humanitys-grand-challenges"
-          rel="noopener noreferrer"
-          target="_blank">
-          <svg aria-hidden="true"
-            width="96"
-            height="96"
-            viewBox="0 0 96 96"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-          </svg>
-
-          <span>Learn More</span>
-        </a>
-      </div>
+      {{ CallToAction.CallToAction() }}
 
       <div slot="cards">
         {{
@@ -107,39 +80,11 @@
     </div>
 
     <umd-element-carousel-cards>
-      <div slot="headline">
-        <h2>
-          Lorem ipsum dolor sit amet
-        </h2>
-      </div>
+      {{ Headline.CarouselHeadlineNormal() }}
 
-      <div slot="text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-      </div>
+      {{ RichText.CardRichTextNormal() }}
 
-      <div slot="cta">
-        <a href="https://strategicplan.umd.edu/commitment/we-take-on-humanitys-grand-challenges"
-          rel="noopener noreferrer"
-          target="_blank">
-          <svg aria-hidden="true"
-            width="96"
-            height="96"
-            viewBox="0 0 96 96"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M39.9149 15.7825L67.7095 15.7653L58.5275 25.1687H2V87.9013H65.8332V33.8977L75.175 24.3307L75.1772 50.9945L86.9541 38.8741L86.9553 15.7534L87 15.7534L87 4.00001L86.9559 4.0001L75.1733 4.0001L52.0353 4.00001L39.9149 15.7825ZM49.1034 34.8198L33.3385 50.9648L41.3473 58.9736L56.0127 43.9548V78.2501H11.8205V34.8198H49.1034Z"></path>
-          </svg>
-
-          <span>Learn More</span>
-        </a>
-      </div>
+      {{ CallToAction.CallToAction() }}
 
       <div slot="cards">
         {{

@@ -179,6 +179,7 @@ export const ComponentStyles = `
     transition: fill 0.5s;
     flex: 1 0 auto;
     margin-right: 4px;
+    z-index: 99;
   }
 
   .${ELEMENTS.CTA_WRAPPER} {

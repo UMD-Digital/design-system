@@ -1,16 +1,251 @@
 {% extends '../_layout.twig' %}
 
 {% block page %}
-  <section style="min-height: 800px">
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling
-      </p>
+  <div class="umd-lock">
+    <h1 class="umd-sans-largest">
+      Nav Item
+    </h1>
+
+    <section style="min-height: 300px">
+      <h2 class="umd-sans-large default">
+        Succinct
+      </h2>
+
+      <div style="display: flex; justify-content: flex-end;">
+        <umd-element-nav-item>
+          <a slot="primary-link"
+            data-selected
+            href="https://provost.umd-staging.com/about">
+            <span>About</span>
+          </a>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>Cat</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>Smoll Cat</span>
+            </a>
+            <a href="https://placekitten.com/g/600/400"><span>Kitten</span></a>
+          </div>
+        </umd-element-nav-item>
+      </div>
+    </section>
+
+    <section style="min-height: 475px">
+      <h2 class="umd-sans-large default">
+        Default
+      </h2>
 
       <div style="display: flex; justify-content: flex-end;">
         <umd-element-nav-item>
           <a slot="primary-link" href="https://provost.umd-staging.com/about">
-            <span>About Example Big</span>
+            <span>About Example</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>Graduate Programs</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              <span>Admissions Process</span>
+            </a>
+          </div>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link"
+            data-selected
+            href="https://provost.umd-staging.com/about">
+            <span>About Example Middle</span>
+          </a>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>Academics</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>Requirements</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              <span>Content Variations</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              <span>Standard Card</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              <span>Frequently Asked Questions</span>
+            </a>
+          </div>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>Support UMD</span>
+          </a>
+          <div slot="dropdown-links">
+            <a data-selected
+              href="https://provost.umd-staging.com/leadership/academic-planning-and-programs">
+              <span>Academic Planning and Programs</span>
+            </a>
+            <a href="https://provost.umd-staging.com/leadership/enrollment-management">
+              <span>Enrollment Management</span>
+            </a>
+            <a href="https://provost.umd-staging.com/leadership/degree-programs">
+              <span>Degree Programs</span>
+            </a>
+            <a href="https://provost.umd-staging.com/leadership/approval-routes-and-deadlines">
+              <span>Approval Routes and Deadlines</span>
+            </a>
+            <a href="https://provost.umd-staging.com/leadership/adding-sections-example-page-delete-me">
+              <span>Adding Sections example page</span>
+            </a>
+            <a href="https://provost.umd-staging.com/leadership/policies-guidelines">
+              <span>Policies &amp; Guidelines</span>
+            </a>
+            <a href="https://provost.umd-staging.com/leadership/senate-programs-curricula-and-courses-pcc-committee-materials">
+              <span>
+                Senate Programs, Curricula, and Courses (PCC) Committee
+                Materials
+              </span>
+            </a>
+            <a href="https://provost.umd-staging.com/leadership/fringe-benefit-rates">
+              <span>Fringe Benefit Rates</span>
+            </a>
+            <a href="https://provost.umd-staging.com/leadership/centers-and-institutes">
+              <span>Centers and Institutes</span>
+            </a>
+            <a href="/pending-proposals"><span>Pending Proposals</span></a>
+            <a href="/approved-proposals"><span>Approved Proposals</span></a>
+          </div>
+        </umd-element-nav-item>
+      </div>
+    </section>
+
+    <section style="min-height: 650px">
+      <h2 class="umd-sans-large default">
+        Verbose
+      </h2>
+
+      <div style="display: flex; justify-content: flex-end;">
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>About</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost"
+              data-selected>
+              <span>The Provost Supercalifragilisticexpialidocious</span>
+              <span class="sr-only">Wrong</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost Wordsmashfieawlifjlasdjflaskd
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              Next Best thing since fried icecreamlaksd flaisdjflskdj
+              flsdflskdjfn
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost adlkjfad adsljkfadf adfkljladfsklj adslkjfadslk;j
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+          </div>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>About Example</span>
+          </a>
+
+          <div slot="dropdown-links">
+            <a href="https://provost.umd-staging.com/about/the-provost"
+              data-selected>
+              <span>About</span>
+              <span class="sr-only">Wrong</span>
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              Acadmeics
+            </a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              Research and Innovation
+            </a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">Arts</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              Qweafads Tosdgoi Gofliousd Bsdlkfj Ldfskdf Cslfdj
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              Athletics
+            </a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              Poiuyt Trewer Vzxczx Hlkj; G:'fkgj #goTerps
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              Student Life
+            </a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost adlkjfad adsljkfadf adfkljladfsklj adslkjfadslk;j
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              On Campus
+            </a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              Campus Alerts
+            </a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost
+            </a>
+            <a href="https://provost.umd-staging.com/about/contact">
+              Calendaralk fjdlaksd jflasdjfas dkflaskdf
+            </a>
+          </div>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link"
+            data-selected
+            href="https://provost.umd-staging.com/about">
+            <span>Longer than Average About Example Big Middle</span>
+          </a>
+        </umd-element-nav-item>
+
+        <umd-element-nav-item>
+          <a slot="primary-link" href="https://provost.umd-staging.com/about">
+            <span>Terps Strive for Solutions to Climate Change Fallout</span>
           </a>
 
           <div slot="dropdown-links">
@@ -52,84 +287,52 @@
         </umd-element-nav-item>
 
         <umd-element-nav-item>
-          <a slot="primary-link"
-            data-selected
-            href="https://provost.umd-staging.com/about">
-            <span>About Example Middle</span>
-          </a>
-        </umd-element-nav-item>
-
-        <umd-element-nav-item>
           <a slot="primary-link" href="https://provost.umd-staging.com/about">
-            <span>About Example</span>
+            <span>Verbose About Example Long Words</span>
           </a>
 
           <div slot="dropdown-links">
-            <a href="https://provost.umd-staging.com/about/the-provost">
-              <span>The Provost</span>
+            <a href="https://provost.umd-staging.com/about/the-provost"
+              data-selected>
+              <span>Campus Alerts</span>
+              <span class="sr-only">Wrong</span>
             </a>
             <a href="https://provost.umd-staging.com/about/contact">
-              <span>Contact</span>
+              Campus Calendar
             </a>
-          </div>
-        </umd-element-nav-item>
-
-        <umd-element-nav-item>
-          <a slot="primary-link" href="https://provost.umd-staging.com/about">
-            <span>About Example Long</span>
-          </a>
-
-          <div slot="dropdown-links">
             <a href="https://provost.umd-staging.com/about/the-provost">
-              <span>The Provost</span>
+              The Provost
             </a>
             <a href="https://provost.umd-staging.com/about/contact">
-              <span>Contact</span>
+              Resources for the News Media
             </a>
-          </div>
-        </umd-element-nav-item>
-
-        <umd-element-nav-item>
-          <a slot="primary-link" href="https://provost.umd-staging.com/about">
-            <span>About Example</span>
-          </a>
-          <div slot="dropdown-links">
-            <a data-selected
-              href="https://provost.umd-staging.com/leadership/academic-planning-and-programs">
-              <span>Academic Planning and Programs</span>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              Admissions
             </a>
-            <a href="https://provost.umd-staging.com/leadership/enrollment-management">
-              <span>Enrollment Management</span>
+            <a href="https://provost.umd-staging.com/about/contact">Events</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              Terp Magazine
             </a>
-            <a href="https://provost.umd-staging.com/leadership/degree-programs">
-              <span>Degree Programs</span>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              UMD Right Now
             </a>
-            <a href="https://provost.umd-staging.com/leadership/approval-routes-and-deadlines">
-              <span>Approval Routes and Deadlines</span>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              The Provost adlkjfad adsljkfadf adfkljladfsklj adslkjfadslk;j
             </a>
-            <a href="https://provost.umd-staging.com/leadership/adding-sections-example-page-delete-me">
-              <span>Adding Sections example page - DELETE ME</span>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              Inclement Weather FAQ
             </a>
-            <a href="https://provost.umd-staging.com/leadership/policies-guidelines">
-              <span>Policies &amp; Guidelines</span>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
+            <a href="https://provost.umd-staging.com/about/the-provost">
+              Maryland Today
             </a>
-            <a href="https://provost.umd-staging.com/leadership/senate-programs-curricula-and-courses-pcc-committee-materials">
-              <span>
-                Senate Programs, Curricula, and Courses (PCC) Committee
-                Materials
-              </span>
-            </a>
-            <a href="https://provost.umd-staging.com/leadership/fringe-benefit-rates">
-              <span>Fringe Benefit Rates</span>
-            </a>
-            <a href="https://provost.umd-staging.com/leadership/centers-and-institutes">
-              <span>Centers and Institutes</span>
-            </a>
-            <a href="/pending-proposals"><span>Pending Proposals</span></a>
-            <a href="/approved-proposals"><span>Approved Proposals</span></a>
+            <a href="https://provost.umd-staging.com/about/contact">Contact</a>
           </div>
         </umd-element-nav-item>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 {% endblock %}

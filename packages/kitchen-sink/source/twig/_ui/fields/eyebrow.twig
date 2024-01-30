@@ -1,0 +1,41 @@
+{% macro Eyebrow(params) %}
+  {% set characters = params.characters ?? null %}
+
+  {% set string = 'Optional short tagline turned to verbose' %}
+
+  {% if characters is defined and characters is not null and characters <= 44 %}
+    {% set string = string|slice(0, characters) %}
+  {% else %}
+    {% set string = string|slice(0, 22) %}
+  {% endif %}
+
+  <div slot="eyebrow">
+    <p>
+      {{ string }}
+    </p>
+  </div>
+{% endmacro %}
+
+{% macro EyebrowSuccinct() %}
+  {{
+    _self.Eyebrow({
+      characters: 8
+    })
+  }}
+{% endmacro %}
+
+{% macro EyebrowNormal() %}
+  {{
+    _self.Eyebrow({
+      characters: 22
+    })
+  }}
+{% endmacro %}
+
+{% macro EyebrowVerbose(params) %}
+  {{
+    _self.Eyebrow({
+      characters: 40
+    })
+  }}
+{% endmacro %}

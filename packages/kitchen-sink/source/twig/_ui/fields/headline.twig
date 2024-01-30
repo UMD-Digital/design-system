@@ -1,14 +1,15 @@
 {% macro Headline(params) %}
-  {% set characters = params.characters ?? null %}
-  {% set isLink = params.isLink ?? null %}
-  {% set isHeader = params.isHeader ?? null %}
+  {% set characters = params.characters ?? true %}
+  {% set isLink = params.isLink ?? true %}
+  {% set isHeader = params.isHeader ?? true %}
   {% set url = params.url ?? 'https://umd.edu' %}
 
   {% set string =
-    'Lorem ipsum dolor sit amet consectetur adipiscing elit iacut quis nostrud quamie'
+    'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis'
   %}
 
-  {% if characters is defined and characters is not null and characters <= 80 %}
+  {% if
+    characters is defined and characters is not null and characters <= 120 %}
     {% set string = string|slice(0, characters) %}
   {% else %}
     {% set string = string|slice(0, 40) %}
@@ -47,7 +48,7 @@
   {% endif %}
 {% endmacro %}
 
-{% macro HeadlineSuccinct() %}
+{% macro AlertHeadlineSuccinct() %}
   {{
     _self.Headline({
       characters: 20,
@@ -57,21 +58,111 @@
   }}
 {% endmacro %}
 
-{% macro HeadlineNormal() %}
+{% macro AlertHeadlineNormal() %}
   {{
     _self.Headline({
-      characters: 40,
+      characters: 60,
       isLink: true,
       isHeader: false
     })
   }}
 {% endmacro %}
 
-{% macro HeadlineVerbose(params) %}
+{% macro AlertHeadlineVerbose(params) %}
+  {{
+    _self.Headline({
+      characters: 120,
+      isLink: true,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro CardHeadlineSuccinct() %}
+  {{
+    _self.Headline({
+      characters: 20,
+      isLink: true,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro CardHeadlineNormal() %}
+  {{
+    _self.Headline({
+      characters: 40,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro CardHeadlineVerbose(params) %}
   {{
     _self.Headline({
       characters: 80,
       isLink: true,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro CarouselHeadlineSuccinct() %}
+  {{
+    _self.Headline({
+      characters: 10,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro CarouselHeadlineNormal() %}
+  {{
+    _self.Headline({
+      characters: 25,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro CarouselHeadlineVerbose(params) %}
+  {{
+    _self.Headline({
+      characters: 50,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro DateSliderHeadlineSuccinct() %}
+  {{
+    _self.Headline({
+      characters: 13,
+      isLink: true,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro DateSliderHeadlineNormal() %}
+  {{
+    _self.Headline({
+      characters: 20,
+      isLink: false,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro DateSliderHeadlineVerbose(params) %}
+  {{
+    _self.Headline({
+      characters: 28,
+      isLink: false,
       isHeader: false
     })
   }}

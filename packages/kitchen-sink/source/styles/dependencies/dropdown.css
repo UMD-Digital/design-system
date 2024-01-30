@@ -1,11 +1,3 @@
-[aria-hidden='true'] {
-  display: none;
-}
-
-[aria-hidden='false'] {
-  display: block;
-}
-
 .umd-input-select {
   background-color: theme(colors.gray.lighter);
   display: inline-block;
@@ -66,5 +58,14 @@
     text-overflow: ellipsis;
     transition: border 0.75s, color 0.75s;
     width: 100%;
+  }
+}
+
+.dropdown-selection {
+  &[aria-hidden='true'] {
+    display: none;
+  }
+  &[aria-hidden='false'] {
+    display: block;
   }
 }

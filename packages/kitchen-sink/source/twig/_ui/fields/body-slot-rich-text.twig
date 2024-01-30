@@ -1,0 +1,68 @@
+{% macro RichText(params) %}
+  {% set characters = params.characters ?? true %}
+  {% set isStyled = params.isStyled ?? true %}
+  {% set url = params.url ?? 'https://umd.edu' %}
+
+  {% set string =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Aliquip ex ea commodo consequat exercitation ullamcoe.'
+  %}
+
+  {% if
+    characters is defined and characters is not null and characters <= 500 %}
+    {% set string = string|slice(0, characters) %}
+  {% else %}
+    {% set string = string|slice(0, 250) %}
+  {% endif %}
+
+  {% if isStyled == false %}
+    <div slot="body">
+      <p>
+        {{ string }}
+      </p>
+    </div>
+  {% endif %}
+
+  {% if isStyled %}
+    <div slot="body">
+      <p>
+        <strong>Duis aute reprehenderit</strong>
+        <i>eu fugiat nulla pariatur</i>.
+        <a href="{{ url }}">
+          <span class="sr-only">Text for Screen Reader</span>
+          <span aria-hidden="true">Excepteur occaecat</span>
+        </a>, voluptate. {{ string }}
+        <em>Nostrud exercitation</em>
+        <u>
+          dolore eu fugiat nulla
+        </u>.
+      </p>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro AlertRichTextSuccinct() %}
+  {{
+    _self.RichText({
+      characters: 125,
+      isStyled: false
+    })
+  }}
+{% endmacro %}
+
+{% macro AlertRichTextNormal() %}
+  {{
+    _self.RichText({
+      characters: 250,
+      isStyled: false
+    })
+  }}
+{% endmacro %}
+
+{% macro AlertRichTextVerbose(params) %}
+  {{
+    _self.RichText({
+      characters: 500,
+      isStyled: false
+    })
+  }}
+{% endmacro %}

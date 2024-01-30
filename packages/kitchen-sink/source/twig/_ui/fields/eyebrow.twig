@@ -1,7 +1,7 @@
 {% macro Eyebrow(params) %}
-  {% set characters = params.characters ?? null %}
+  {% set characters = params.characters ?? true %}
 
-  {% set string = 'Optional short tagline turned to verbose' %}
+  {% set string = 'Optional Eyebrow Adipiscing Elite Iacute' %}
 
   {% if characters is defined and characters is not null and characters <= 44 %}
     {% set string = string|slice(0, characters) %}
@@ -27,7 +27,7 @@
 {% macro EyebrowNormal() %}
   {{
     _self.Eyebrow({
-      characters: 22
+      characters: 17
     })
   }}
 {% endmacro %}
@@ -35,7 +35,7 @@
 {% macro EyebrowVerbose(params) %}
   {{
     _self.Eyebrow({
-      characters: 40
+      characters: 34
     })
   }}
 {% endmacro %}

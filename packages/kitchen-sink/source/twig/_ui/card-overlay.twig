@@ -3,9 +3,11 @@
 {% import '../_ui/fields/text-slot-rich-text.twig' as RichText %}
 {% import '../_ui/fields/call-to-action.twig' as CallToAction %}
 
+{% set url = params.url ?? 'https://umd.edu' %}
+
 {% macro CtaOptions(params) %}
   {% if params == 'download' %}
-    <a href="https://google.com"
+    <a href="{{ url }}"
       rel="noopener noreferrer"
       download
       slot="cta-icon"
@@ -15,7 +17,7 @@
   {% endif %}
 
   {% if params == 'external' %}
-    <a href="https://google.com"
+    <a href="{{ url }}"
       rel="noopener noreferrer"
       target="_blank"
       slot="cta-icon"
@@ -25,7 +27,7 @@
   {% endif %}
 
   {% if params == 'interanl' %}
-    <a href="https://google.com"
+    <a href="{{ url }}"
       rel="noopener noreferrer"
       slot="cta-icon"
       aria-label="example label">
@@ -81,7 +83,7 @@
     {% endif %}
 
     {% if hasCtaLink %}
-      {{ CallToAction.CallToAction() }}
+      {{ CallToAction.InternalCallToAction() }}
     {% endif %}
 
     {% if params.ctaOption %}

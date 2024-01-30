@@ -1,4 +1,7 @@
 {% extends '../_layout.twig' %}
+{% import '../_elements/content-dropdown.twig' as Dropdown %}
+{% import '../_ui/fields/headline.twig' as Headline %}
+{% import '../_ui/fields/text-slot-rich-text.twig' as RichText %}
 
 {% import '../_ui/card.twig' as Card %}
 
@@ -11,259 +14,685 @@
 
   <section>
     <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling without images
-      </p>
+      <h1 class="umd-sans-largest">
+        Standard Card
+      </h1>
 
-      <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBody({
-            text: 'small'
-          })
-        }}
-        {{ Card.FullCardBody() }}
-        {{ Card.FullCardBody() }}
+      <h2 class="umd-sans-large">
+        Content Variations
+      </h2>
+
+      {{ Dropdown.ContentVariations() }}
+
+      <div id="content-succinct" class="dropdown-selection" aria-hidden="true">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false,
+                date: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Outlined</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageOne,
+                aligned: true,
+                border: true,
+                date: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Aligned</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageOne,
+                date: true,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                date: false,
+                aligned: false,
+                border: false,
+                eyebrow: false,
+                ctaLink: false,
+                eyebrow: false,
+                text: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Optional Date</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large minimal-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Minimal</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageOne,
+                date: false,
+                aligned: true,
+                border: false,
+                eyebrow: false,
+                ctaLink: false,
+                text: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Dark</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                theme: true
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (3)</span>
+          </div>
+          <div class="umd-grid-three mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.SuccinctCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.SuccinctCardBody({
+                image: imageThree,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (4)</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.SuccinctCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.SuccinctCardBody({
+                image: imageThree,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.SuccinctCardBody({
+                image: imageWeird,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (2)</span>
+          </div>
+          <div class="umd-grid mb-md" style="margin-top: 24px">
+            {{
+              Card.SuccinctCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.SuccinctCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling without images and border
-      </p>
+      <div id="content-normal" class="dropdown-selection" aria-hidden="false">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageSquare,
+                date: false
+              })
+            }}
+          </div>
+        </section>
 
-      <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBody({
-            border: true
-          })
-        }}
-        {{
-          Card.FullCardBody({
-            border: true,
-            text: 'small'
-          })
-        }}
-        {{
-          Card.FullCardBody({
-            border: true
-          })
-        }}
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Outlined</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageOne,
+                aligned: true,
+                border: true,
+                date: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Aligned</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageOne,
+                date: true,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                date: false,
+                aligned: false,
+                border: false,
+                eyebrow: false,
+                ctaLink: false,
+                text: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Optional Date</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageOne,
+                date: true,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large minimal-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Minimal</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageOne,
+                date: false,
+                aligned: true,
+                border: false,
+                eyebrow: false,
+                ctaLink: false,
+                text: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Dark</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                theme: true
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (3)</span>
+          </div>
+          <div class="umd-grid-three mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.NormalCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.NormalCardBody({
+                image: imageThree,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (4)</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.NormalCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.NormalCardBody({
+                image: imageThree,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.NormalCardBody({
+                image: imageWeird,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (2)</span>
+          </div>
+          <div class="umd-grid mb-md" style="margin-top: 24px">
+            {{
+              Card.NormalCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.NormalCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling with images
-      </p>
+      <div id="content-verbose" class="dropdown-selection" aria-hidden="true">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageSquare,
+                date: false
+              })
+            }}
+          </div>
+        </section>
 
-      <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBody({
-            image: imageOne,
-            text: 'small'
-          })
-        }}
+        <section>
+          <div class="umd-sans-large type-hr">
+            <span class="type">Type</span>
+            <span class="type-detail">Outlined</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageOne,
+                aligned: true,
+                border: true,
+                date: false
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          Card.FullCardBody({
-            image: imageSquare
-          })
-        }}
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Aligned</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageOne,
+                date: true,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          Card.FullCardBody({
-            image: imageWeird
-          })
-        }}
-      </div>
-    </div>
-  </section>
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                date: false,
+                aligned: false,
+                border: false,
+                eyebrow: false,
+                ctaLink: false,
+                text: false
+              })
+            }}
+          </div>
+        </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling with aligned images and border
-      </p>
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Optional Date</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageOne,
+                date: true,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
 
-      <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBody({
-            image: imageOne,
-            aligned: true,
-            border: true
-          })
-        }}
+        <section>
+          <div class="umd-sans-large minimal-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Minimal</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageOne,
+                date: false,
+                aligned: true,
+                border: false,
+                eyebrow: false,
+                text: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          Card.FullCardBody({
-            image: imageTwo,
-            text: 'small',
-            aligned: true,
-            border: true
-          })
-        }}
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Dark</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                theme: true
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          Card.FullCardBody({
-            image: imageThree,
-            aligned: true,
-            border: true
-          })
-        }}
-      </div>
-    </div>
-  </section>
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (3)</span>
+          </div>
+          <div class="umd-grid-three mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.VerboseCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.VerboseCardBody({
+                image: imageThree,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
 
-  <section>
-    <div class="umd-lock">
-      <p>
-        Default styling with dark theme
-      </p>
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (4)</span>
+          </div>
+          <div class="umd-grid-four mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.VerboseCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.VerboseCardBody({
+                image: imageThree,
+                aligned: true,
+                border: false
+              })
+            }}
+            {{
+              Card.VerboseCardBody({
+                image: imageWeird,
+                aligned: true,
+                border: false
+              })
+            }}
+          </div>
+        </section>
 
-      <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBody({
-            image: imageOne,
-            text: 'small',
-            theme: true
-          })
-        }}
-
-        {{
-          Card.FullCardBody({
-            image: imageThree,
-            theme: true
-          })
-        }}
-
-        {{
-          Card.FullCardBody({
-            image: imageSquare,
-            theme: true
-          })
-        }}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-largest">
-        Layout Examples
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Two Column (columns configured by configuration). - Default Styling with
-        aligned images and border
-      </p>
-
-      <div class="umd-grid mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBody({
-            image: imageSquare,
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBody({
-            image: imageOne,
-            aligned: true,
-            border: true
-          })
-        }}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Three Column (columns configured by configuration). Default Styling with
-        aligned images and border
-      </p>
-
-      <div class="umd-grid-three mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBody({
-            image: imageOne,
-            date: false,
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBody({
-            image: imageTwo,
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBody({
-            image: imageThree,
-            text: 'small',
-            aligned: true,
-            border: true
-          })
-        }}
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Four Column (columns configured by configuration). Default Styling with
-        aligned images and border
-      </p>
-
-      <div class="umd-grid-four mb-md" style="margin-top: 24px">
-        {{
-          Card.FullCardBody({
-            image: imageSquare,
-            date: false,
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBody({
-            image: imageOne,
-            text: 'small',
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBody({
-            image: imageThree,
-            eyebrow: false,
-            aligned: true,
-            border: true
-          })
-        }}
-
-        {{
-          Card.FullCardBody({
-            image: imageTwo,
-            aligned: true,
-            border: true
-          })
-        }}
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (2)</span>
+          </div>
+          <div class="umd-grid mb-md" style="margin-top: 24px">
+            {{
+              Card.VerboseCardBody({
+                image: imageOne,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+            {{
+              Card.VerboseCardBody({
+                image: imageTwo,
+                aligned: true,
+                border: false,
+                date: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
       </div>
     </div>
   </section>

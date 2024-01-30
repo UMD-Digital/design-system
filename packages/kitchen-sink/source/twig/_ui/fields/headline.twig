@@ -81,9 +81,9 @@
 {% macro CardHeadlineSuccinct() %}
   {{
     _self.Headline({
-      characters: 20,
+      characters: 25,
       isLink: true,
-      isHeader: false
+      isHeader: true
     })
   }}
 {% endmacro %}
@@ -91,7 +91,7 @@
 {% macro CardHeadlineNormal() %}
   {{
     _self.Headline({
-      characters: 40,
+      characters: 50,
       isLink: true,
       isHeader: true
     })
@@ -101,9 +101,9 @@
 {% macro CardHeadlineVerbose(params) %}
   {{
     _self.Headline({
-      characters: 80,
+      characters: 100,
       isLink: true,
-      isHeader: false
+      isHeader: true
     })
   }}
 {% endmacro %}

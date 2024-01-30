@@ -79,6 +79,7 @@ const sizeStyles = `
     height: 17px;
     width: 17px;
     margin-right: 5px;
+    margin-top: 3px;
   }
 `;
 
@@ -168,7 +169,7 @@ export const ComponentStyles = `
   .${ELEMENTS.CTA_CONTAINER_ELEMENT} {
     display: inline-block;
     font-weight: 800;
-    text-align: center;
+    text-align: left;
     line-height: 1.2857142857142858em;
   }
 
@@ -178,13 +179,13 @@ export const ComponentStyles = `
     width: 14px;
     transition: fill 0.5s;
     flex: 1 0 auto;
-    margin-right: 4px;
     z-index: 99;
+    margin-right: 4px;
+    margin-top: 2px;
   }
 
   .${ELEMENTS.CTA_WRAPPER} {
     display: flex;
-    align-items: center;
   }
 
   .${ELEMENTS.CTA_TEXT_WRAPPER} {

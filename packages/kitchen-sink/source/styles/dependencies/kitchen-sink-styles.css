@@ -89,6 +89,17 @@
   width: calc(85% - 70px);
 }
 
+.grid-animation-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 480px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(70% - 50px);
+}
+
 .minimal-hr::after {
   content: '';
   background-color: theme(colors.gray.light);
@@ -97,7 +108,7 @@
   left: 220px;
   position: absolute;
   top: calc(50% + 17px);
-  width: calc(85% - 70px);
+  width: calc(85% - 10px);
 }
 
 .layout {

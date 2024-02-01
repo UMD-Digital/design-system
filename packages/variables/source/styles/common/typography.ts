@@ -1,5 +1,18 @@
 import { fontFamily, fontSize, fontWeight } from '../../tokens/fonts';
-import { queries } from '../../tokens/breakpoints';
+import { breakpoints, queries } from '../../tokens/breakpoints';
+
+const getScaledFont = (ceilFont: string, baseFont: string) => {
+  const baseBreak = breakpoints['medium']['max'];
+  const ceilBreak = breakpoints['desktop']['max'];
+  const baseFontInt = parseInt(baseFont);
+  const cielFontInt = parseInt(ceilFont);
+  const rise = cielFontInt - baseFontInt;
+  const run = parseInt(ceilBreak) - parseInt(baseBreak);
+  const slope = rise / run;
+
+  // fontSize = ((currentScreenWidth - MIN_SCREEN_WIDTH) x (MAX_FONT_SIZE - MIN_FONT_SIZE / MAX_SCREEN_WIDTH - MIN_SCREEN_WIDTH)) + MIN_FONT_SIZE
+  return `calc(((100vw - ${baseBreak}) * ${slope}) + ${baseFont})`;
+};
 
 const serif = {
   '.umd-serif-max': {
@@ -7,6 +20,11 @@ const serif = {
     fontSize: fontSize['max'],
     fontWeight: fontWeight['normal'],
     lineHeight: `${82 / parseInt(fontSize['max'])}em`,
+
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['max'], fontSize['4xl']),
+    },
 
     [`@media (${queries.medium.max})`]: {
       // umd-serif-larger
@@ -21,6 +39,11 @@ const serif = {
     fontWeight: fontWeight['normal'],
     lineHeight: `${60 / parseInt(fontSize['6xl'])}em`,
 
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['6xl'], fontSize['4xl']),
+    },
+
     [`@media (${queries.medium.max})`]: {
       // umd-serif-larger
       fontSize: fontSize['4xl'],
@@ -34,10 +57,15 @@ const serif = {
     fontWeight: fontWeight['normal'],
     lineHeight: `${38 / parseInt(fontSize['4xl'])}em`,
 
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['4xl'], fontSize['3xl']),
+    },
+
     [`@media (${queries.medium.max})`]: {
       // umd-serif-large
       fontSize: fontSize['3xl'],
-      lineHeight: `${24 / parseInt(fontSize['3xl'])}em`,
+      lineHeight: `${30 / parseInt(fontSize['3xl'])}em`,
     },
   },
 
@@ -45,12 +73,17 @@ const serif = {
     fontFamily: fontFamily['serif'],
     fontSize: fontSize['3xl'],
     fontWeight: fontWeight['normal'],
-    lineHeight: `${24 / parseInt(fontSize['3xl'])}em`,
+    lineHeight: `${30 / parseInt(fontSize['3xl'])}em`,
+
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['3xl'], fontSize['xl']),
+    },
 
     [`@media (${queries.medium.max})`]: {
       // umd-serif-medium
       fontSize: fontSize['xl'],
-      lineHeight: `${30 / parseInt(fontSize['xl'])}em`,
+      lineHeight: `${26 / parseInt(fontSize['xl'])}em`,
     },
   },
 
@@ -58,7 +91,7 @@ const serif = {
     fontFamily: fontFamily['serif'],
     fontSize: fontSize['xl'],
     fontWeight: fontWeight['medium'],
-    lineHeight: `${30 / parseInt(fontSize['xl'])}em`,
+    lineHeight: `${26 / parseInt(fontSize['xl'])}em`,
   },
 };
 
@@ -69,10 +102,19 @@ const sans = {
     fontWeight: fontWeight['extraBold'],
     lineHeight: `${76 / parseInt(fontSize['7xl'])}em`,
 
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['7xl'], fontSize['4xl']),
+    },
+
+    // [`@media (${queries.tablet.max})`]: {
+    //   fontSize: getScaledFont(fontSize['5xl'], fontSize['4xl']),
+    // },
+
     [`@media (${queries.medium.max})`]: {
-      // umd-sans-largest
+      // umd-sans-extralarge
       fontSize: fontSize['4xl'],
-      lineHeight: `${56 / parseInt(fontSize['4xl'])}em`,
+      lineHeight: `${38 / parseInt(fontSize['4xl'])}em`,
     },
   },
 
@@ -81,6 +123,15 @@ const sans = {
     fontSize: fontSize['5xl'],
     fontWeight: fontWeight['extraBold'],
     lineHeight: `${56 / parseInt(fontSize['5xl'])}em`,
+
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['5xl'], fontSize['3xl']),
+    },
+
+    // [`@media (${queries.tablet.max})`]: {
+    //   fontSize: getScaledFont(fontSize['4xl'], fontSize['3xl']),
+    // },
 
     [`@media (${queries.medium.max})`]: {
       // umd-sans-larger
@@ -95,6 +146,11 @@ const sans = {
     fontWeight: fontWeight['extraBold'],
     lineHeight: `${38 / parseInt(fontSize['4xl'])}em`,
 
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['4xl'], fontSize['lg']),
+    },
+
     [`@media (${queries.medium.max})`]: {
       // umd-sans-large
       fontSize: fontSize['lg'],
@@ -107,6 +163,11 @@ const sans = {
     fontSize: fontSize['3xl'],
     fontWeight: fontWeight['extraBold'],
     lineHeight: `${30 / parseInt(fontSize['3xl'])}em`,
+
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['3xl'], fontSize['lg']),
+    },
 
     [`@media (${queries.medium.max})`]: {
       // umd-sans-large
@@ -128,6 +189,11 @@ const sans = {
     fontWeight: fontWeight['medium'],
     lineHeight: `${30 / parseInt(fontSize['lg'])}em`,
 
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['lg'], fontSize['base']),
+    },
+
     [`@media (${queries.medium.max})`]: {
       // umd-sans-small
       fontSize: fontSize['base'],
@@ -140,6 +206,11 @@ const sans = {
     fontSize: fontSize['base'],
     fontWeight: fontWeight['medium'],
     lineHeight: `${24 / parseInt(fontSize['base'])}em`,
+
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['base'], fontSize['sm']),
+    },
 
     [`@media (${queries.medium.max})`]: {
       // umd-sans-smaller
@@ -220,6 +291,11 @@ const statistics = {
 
     fontSize: '100px',
 
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont('100px', fontSize['6xl']),
+    },
+
     // Stats3
     [`@media (${queries.medium.max})`]: {
       fontSize: fontSize['6xl'],
@@ -231,6 +307,11 @@ const statistics = {
     ...statsSmall['.umd-statistic-sans-small'],
 
     fontSize: fontSize['max'],
+
+    [`@media (${queries.desktop.max})`]: {
+      // Scaling
+      fontSize: getScaledFont(fontSize['max'], fontSize['6xl']),
+    },
 
     // Stats3
     [`@media (${queries.medium.max})`]: {

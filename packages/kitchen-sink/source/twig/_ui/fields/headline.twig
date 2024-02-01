@@ -108,6 +108,36 @@
   }}
 {% endmacro %}
 
+{% macro OverlayHeadlineSuccinct() %}
+  {{
+    _self.Headline({
+      characters: 20,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro OverlayHeadlineNormal() %}
+  {{
+    _self.Headline({
+      characters: 40,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro OverlayHeadlineVerbose(params) %}
+  {{
+    _self.Headline({
+      characters: 80,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
 {% macro CarouselHeadlineSuccinct() %}
   {{
     _self.Headline({

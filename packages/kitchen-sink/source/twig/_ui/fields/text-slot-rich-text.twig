@@ -1,6 +1,6 @@
 {% macro RichText(params) %}
-  {% set characters = params.characters ?? 1 %}
-  {% set isStyled = params.isStyled ?? null %}
+  {% set characters = params.characters ?? true %}
+  {% set isStyled = params.isStyled ?? true %}
   {% set url = params.url ?? 'https://umd.edu' %}
 
   {% set string =
@@ -63,6 +63,33 @@
     _self.RichText({
       characters: 400,
       isStyled: true
+    })
+  }}
+{% endmacro %}
+
+{% macro OverlayRichTextSuccinct() %}
+  {{
+    _self.RichText({
+      characters: 100,
+      isStyled: false
+    })
+  }}
+{% endmacro %}
+
+{% macro OverlayRichTextNormal() %}
+  {{
+    _self.RichText({
+      characters: 200,
+      isStyled: false
+    })
+  }}
+{% endmacro %}
+
+{% macro OverlayRichTextVerbose(params) %}
+  {{
+    _self.RichText({
+      characters: 400,
+      isStyled: false
     })
   }}
 {% endmacro %}

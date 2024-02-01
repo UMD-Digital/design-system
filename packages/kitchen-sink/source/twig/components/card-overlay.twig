@@ -1,5 +1,6 @@
 {% extends '../_layout.twig' %}
 
+{% import '../_elements/content-dropdown.twig' as Dropdown %}
 {% import '../_ui/card-overlay.twig' as CardOverlay %}
 
 {% set var = value %}
@@ -13,286 +14,783 @@
 
   <section>
     <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling without images and theme options
-      </p>
+      <h1 class="umd-sans-largest">
+        Overlay Card
+      </h1>
 
-      <div class="umd-grid-three my-md">
-        {{
-          CardOverlay.FullCardBody({
-            theme: 'dark',
-            text: 'succinct'
-          })
-        }}
+      <h2 class="umd-sans-large">
+        Content Variations
+      </h2>
 
-        {{
-          CardOverlay.FullCardBody({
-            theme: 'light',
-            text: 'normal'
-          })
-        }}
+      {{ Dropdown.ContentVariations() }}
 
-        {{
-          CardOverlay.FullCardBody({
-            theme: 'dark',
-            text: 'verbose'
-          })
-        }}
+      <div id="content-succinct" class="dropdown-selection" aria-hidden="true">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageTwo,
+                date: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageThree,
+                date: false,
+                text: false,
+                eyebrow: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Optional Date</span>
+          </div>
+
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageWeird,
+                date: true
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">CTA Icons</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageSquare,
+                ctaLink: false,
+                ctaOption: 'external'
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                ctaOption: 'download',
+                ctaLink: false
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                theme: 'dark',
+                ctaLink: false,
+                ctaOption: 'interanl'
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Dark</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                theme: 'dark',
+                eyebrow: true,
+                date: true
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Light</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                eyebrow: true,
+                date: true
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grid-animation-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">
+              Grid Configuration Animation Grouping (3)
+            </span>
+          </div>
+
+          <div class="umd-grid-three-animated-overlay-card my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageWeird
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageTwo
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageSquare
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grid-animation-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">
+              Grid Configuration Animation Grouping (4)
+            </span>
+          </div>
+
+          <div class="umd-grid-four-animated-overlay-card my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: WeirdImageOptions
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageTwo
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageThree
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageSquare
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (3)</span>
+          </div>
+
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageSquare
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageWeird
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageTwo
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (4)</span>
+          </div>
+
+          <div class="umd-grid-four my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageWeird
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageSquare
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageOne
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageThree
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (2)</span>
+          </div>
+
+          <div class="umd-grid my-md">
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageSquare
+              })
+            }}
+
+            {{
+              CardOverlay.SuccinctCardBody({
+                image: imageWeird
+              })
+            }}
+          </div>
+        </section>
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling with images
-      </p>
+      <div id="content-normal" class="dropdown-selection" aria-hidden="true">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageTwo,
+                date: false
+              })
+            }}
+          </div>
+        </section>
 
-      <div class="umd-grid-three my-md">
-        {{
-          CardOverlay.FullCardBody({
-            image: imageSquare,
-            text: 'verbose'
-          })
-        }}
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageThree,
+                date: false,
+                text: false,
+                eyebrow: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageWeird,
-            text: 'normal'
-          })
-        }}
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Optional Date</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageWeird,
+                date: true
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageThree,
-            text: 'verbose'
-          })
-        }}
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">CTA Icons</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageSquare,
+                ctaLink: false,
+                ctaOption: 'external'
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                ctaOption: 'download',
+                ctaLink: false
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                theme: 'dark',
+                ctaLink: false,
+                ctaOption: 'internal'
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Dark</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                theme: 'dark',
+                eyebrow: true,
+                date: true
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Light</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                eyebrow: true,
+                date: true
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grid-animation-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">
+              Grid Configuration Animation Grouping (3)
+            </span>
+          </div>
+
+          <div class="umd-grid-three-animated-overlay-card my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageWeird
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageTwo
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageSquare
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grid-animation-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">
+              Grid Configuration Animation Grouping (4)
+            </span>
+          </div>
+
+          <div class="umd-grid-four-animated-overlay-card my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: WeirdImageOptions
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageTwo
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageThree
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageSquare
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (3)</span>
+          </div>
+
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageSquare
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageWeird
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageTwo
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (4)</span>
+          </div>
+
+          <div class="umd-grid-four my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageWeird
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageSquare
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageOne
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageThree
+              })
+            }}
+          </div>
+        </section>
+
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (2)</span>
+          </div>
+
+          <div class="umd-grid my-md">
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageSquare
+              })
+            }}
+
+            {{
+              CardOverlay.NormalCardBody({
+                image: imageWeird
+              })
+            }}
+          </div>
+        </section>
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling with CTA Icon Options
-      </p>
+      <div id="content-verbose" class="dropdown-selection" aria-hidden="true">
+        <section>
+          <h3 class="umd-sans-large default">
+            Default
+          </h3>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageTwo,
+                date: false
+              })
+            }}
+          </div>
+        </section>
 
-      <div class="umd-grid-three my-md">
-        {{
-          CardOverlay.FullCardBody({
-            image: imageSquare,
-            ctaOption: 'external'
-          })
-        }}
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Required Only</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageThree,
+                date: false,
+                text: false,
+                eyebrow: false,
+                ctaLink: false
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          CardOverlay.FullCardBody({
-            ctaOption: 'download'
-          })
-        }}
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">Optional Date</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageWeird,
+                date: true
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          CardOverlay.FullCardBody({
-            theme: 'dark',
-            ctaOption: 'interanl'
-          })
-        }}
-      </div>
-    </div>
-  </section>
+        <section>
+          <div class="umd-sans-large field-option-hr">
+            <span class="field-option">Field Options</span>
+            <span class="field-option-detail">CTA Icons</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageSquare,
+                ctaLink: false,
+                ctaOption: 'external'
+              })
+            }}
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling with truncated content and CTA
-      </p>
+            {{
+              CardOverlay.VerboseCardBody({
+                ctaOption: 'download',
+                ctaLink: false
+              })
+            }}
 
-      <div class="umd-grid-three my-md">
-        {{
-          CardOverlay.FullCardBody({
-            image: imageSquare,
-            text: 'succinct',
-            eyebrow: false,
-            date: false
-          })
-        }}
+            {{
+              CardOverlay.VerboseCardBody({
+                theme: 'dark',
+                ctaLink: false,
+                ctaOption: 'internal'
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          CardOverlay.FullCardBody({
-            ctaOption: 'download',
-            text: 'succinct',
-            eyebrow: false,
-            date: false
-          })
-        }}
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Dark</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                theme: 'dark',
+                eyebrow: true,
+                date: true
+              })
+            }}
+          </div>
+        </section>
 
-        {{
-          CardOverlay.FullCardBody({
-            theme: 'dark',
-            text: 'succinct',
-            eyebrow: false,
-            date: false
-          })
-        }}
-      </div>
-    </div>
-  </section>
+        <section>
+          <div class="umd-sans-large layout-hr">
+            <span class="layout">Theme</span>
+            <span class="layout-detail">Light</span>
+          </div>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                eyebrow: true,
+                date: true
+              })
+            }}
+          </div>
+        </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling with grid configuration animation - three column
-      </p>
+        <section>
+          <div class="umd-sans-large grid-animation-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">
+              Grid Configuration Animation Grouping (3)
+            </span>
+          </div>
 
-      <div class="umd-grid-three-animated-overlay-card my-md">
-        {{
-          CardOverlay.FullCardBody({
-            image: imageWeird
-          })
-        }}
+          <div class="umd-grid-three-animated-overlay-card my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageWeird
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageTwo
-          })
-        }}
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageTwo
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageSquare
-          })
-        }}
-      </div>
-    </div>
-  </section>
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageSquare
+              })
+            }}
+          </div>
+        </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Default Styling with grid configuration animation - four column
-      </p>
+        <section>
+          <div class="umd-sans-large grid-animation-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">
+              Grid Configuration Animation Grouping (4)
+            </span>
+          </div>
 
-      <div class="umd-grid-four-animated-overlay-card my-md">
-        {{
-          CardOverlay.FullCardBody({
-            image: WeirdImageOptions
-          })
-        }}
+          <div class="umd-grid-four-animated-overlay-card my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: WeirdImageOptions
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageTwo
-          })
-        }}
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageTwo
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageThree
-          })
-        }}
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageThree
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageSquare
-          })
-        }}
-      </div>
-    </div>
-  </section>
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageSquare
+              })
+            }}
+          </div>
+        </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-largest">
-        Layout Examples
-      </p>
-    </div>
-  </section>
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (3)</span>
+          </div>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Layout Two Column. Default Styling
-      </p>
+          <div class="umd-grid-three my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageSquare
+              })
+            }}
 
-      <div class="umd-grid my-md">
-        {{
-          CardOverlay.FullCardBody({
-            image: imageSquare
-          })
-        }}
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageWeird
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageWeird
-          })
-        }}
-      </div>
-    </div>
-  </section>
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageTwo
+              })
+            }}
+          </div>
+        </section>
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Layout Three Column. Default Styling
-      </p>
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (4)</span>
+          </div>
 
-      <div class="umd-grid-three my-md">
-        {{
-          CardOverlay.FullCardBody({
-            image: imageSquare
-          })
-        }}
+          <div class="umd-grid-four my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageWeird
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageWeird
-          })
-        }}
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageSquare
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageTwo
-          })
-        }}
-      </div>
-    </div>
-  </section>
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageOne
+              })
+            }}
 
-  <section>
-    <div class="umd-lock">
-      <p class="umd-sans-large">
-        Layout Four Column. Default Styling
-      </p>
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageThree
+              })
+            }}
+          </div>
+        </section>
 
-      <div class="umd-grid-four my-md">
-        {{
-          CardOverlay.FullCardBody({
-            image: imageWeird,
-            text: 'succinct'
-          })
-        }}
+        <section>
+          <div class="umd-sans-large grouping-hr">
+            <span class="layout">Layout</span>
+            <span class="layout-detail">Grouping (2)</span>
+          </div>
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageSquare,
-            text: 'succinct'
-          })
-        }}
+          <div class="umd-grid my-md">
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageSquare
+              })
+            }}
 
-        {{
-          CardOverlay.FullCardBody({
-            image: imageOne,
-            text: 'succinct'
-          })
-        }}
-
-        {{
-          CardOverlay.FullCardBody({
-            image: imageThree
-          })
-        }}
+            {{
+              CardOverlay.VerboseCardBody({
+                image: imageWeird
+              })
+            }}
+          </div>
+        </section>
       </div>
     </div>
   </section>

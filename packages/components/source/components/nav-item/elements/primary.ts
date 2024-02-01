@@ -23,6 +23,7 @@ export const PrimaryStyles = `
     font-size: ${fontSize.base};
     white-space: nowrap;
     transition: color 0.2s ease-in-out;
+    line-height: 1.45em;
   }
 
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:hover,
@@ -30,16 +31,13 @@ export const PrimaryStyles = `
     color: ${colors.red};
    }
 
-  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}]:before {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    height: 3px;
-    left: -3px;
-    right: -3px;
-    background-color: ${colors.gold};
-    display: block;
-    z-index: -1;
+  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}] span {
+    display: inline;
+    position: relative;
+    background-position: left calc(100% - 0px);
+    background-repeat: no-repeat;
+    background-size: 100% 2.5px;
+    background-image: linear-gradient(${colors.gold}, ${colors.gold});
   }
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {

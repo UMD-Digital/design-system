@@ -56,8 +56,13 @@ const linkStyles = `
     display: block;
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}] span {
-    border-bottom: 2px solid ${colors.gold};
+  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}] span:not(.sr-only) {
+    display: inline;
+    position: relative;
+    background-position: left calc(100% - 0px);
+    background-repeat: no-repeat;
+    background-size: 100% 2.5px;
+    background-image: linear-gradient(${colors.gold}, ${colors.gold});
   }
 
   .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:hover span,

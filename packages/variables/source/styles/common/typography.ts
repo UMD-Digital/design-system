@@ -3,9 +3,8 @@ import { breakpoints, queries } from '../../tokens/breakpoints';
 
 const getFontScaling = (fontSize: string) => {
   const breakpoint = parseInt(breakpoints['desktop']['max']);
-  const scaling = parseInt(fontSize) / breakpoint;
 
-  return `calc(100vw * ${scaling})`;
+  return `calc(100vw * (${parseInt(fontSize)} / ${breakpoint}))`;
 };
 
 const serif = {

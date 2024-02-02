@@ -1,17 +1,11 @@
 import { fontFamily, fontSize, fontWeight } from '../../tokens/fonts';
 import { breakpoints, queries } from '../../tokens/breakpoints';
 
-const getScaledFont = (ceilFont: string, baseFont: string) => {
-  const baseBreak = breakpoints['medium']['max'];
-  const ceilBreak = breakpoints['desktop']['max'];
-  const baseFontInt = parseInt(baseFont);
-  const cielFontInt = parseInt(ceilFont);
-  const rise = cielFontInt - baseFontInt;
-  const run = parseInt(ceilBreak) - parseInt(baseBreak);
-  const slope = rise / run;
+const getFontScaling = (fontSize: string) => {
+  const breakpoint = parseInt(breakpoints['desktop']['max']);
+  const scaling = parseInt(fontSize) / breakpoint;
 
-  // fontSize = ((currentScreenWidth - MIN_SCREEN_WIDTH) x (MAX_FONT_SIZE - MIN_FONT_SIZE / MAX_SCREEN_WIDTH - MIN_SCREEN_WIDTH)) + MIN_FONT_SIZE
-  return `calc(((100vw - ${baseBreak}) * ${slope}) + ${baseFont})`;
+  return `calc(100vw * ${scaling})`;
 };
 
 const serif = {
@@ -23,7 +17,7 @@ const serif = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['max'], fontSize['4xl']),
+      fontSize: getFontScaling(fontSize['max']),
     },
 
     [`@media (${queries.medium.max})`]: {
@@ -41,7 +35,7 @@ const serif = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['6xl'], fontSize['4xl']),
+      fontSize: getFontScaling(fontSize['6xl']),
     },
 
     [`@media (${queries.medium.max})`]: {
@@ -59,7 +53,7 @@ const serif = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['4xl'], fontSize['3xl']),
+      fontSize: getFontScaling(fontSize['4xl']),
     },
 
     [`@media (${queries.medium.max})`]: {
@@ -77,7 +71,7 @@ const serif = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['3xl'], fontSize['xl']),
+      fontSize: getFontScaling(fontSize['3xl']),
     },
 
     [`@media (${queries.medium.max})`]: {
@@ -104,12 +98,8 @@ const sans = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['7xl'], fontSize['4xl']),
+      fontSize: getFontScaling(fontSize['7xl']),
     },
-
-    // [`@media (${queries.tablet.max})`]: {
-    //   fontSize: getScaledFont(fontSize['5xl'], fontSize['4xl']),
-    // },
 
     [`@media (${queries.medium.max})`]: {
       // umd-sans-extralarge
@@ -126,12 +116,8 @@ const sans = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['5xl'], fontSize['3xl']),
+      fontSize: getFontScaling(fontSize['5xl']),
     },
-
-    // [`@media (${queries.tablet.max})`]: {
-    //   fontSize: getScaledFont(fontSize['4xl'], fontSize['3xl']),
-    // },
 
     [`@media (${queries.medium.max})`]: {
       // umd-sans-larger
@@ -148,7 +134,7 @@ const sans = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['4xl'], fontSize['lg']),
+      fontSize: getFontScaling(fontSize['4xl']),
     },
 
     [`@media (${queries.medium.max})`]: {
@@ -166,7 +152,7 @@ const sans = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['3xl'], fontSize['lg']),
+      fontSize: getFontScaling(fontSize['3xl']),
     },
 
     [`@media (${queries.medium.max})`]: {
@@ -191,7 +177,7 @@ const sans = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['lg'], fontSize['base']),
+      fontSize: getFontScaling(fontSize['lg']),
     },
 
     [`@media (${queries.medium.max})`]: {
@@ -209,7 +195,7 @@ const sans = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['base'], fontSize['sm']),
+      fontSize: getFontScaling(fontSize['base']),
     },
 
     [`@media (${queries.medium.max})`]: {
@@ -293,7 +279,7 @@ const statistics = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont('100px', fontSize['6xl']),
+      fontSize: getFontScaling('100px'),
     },
 
     // Stats3
@@ -310,7 +296,7 @@ const statistics = {
 
     [`@media (${queries.desktop.max})`]: {
       // Scaling
-      fontSize: getScaledFont(fontSize['max'], fontSize['6xl']),
+      fontSize: getFontScaling(fontSize['max']),
     },
 
     // Stats3

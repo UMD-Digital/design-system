@@ -9,6 +9,12 @@ import { Load as FooterLoader } from './components/footer/component';
 import { Load as NavDrawerLoader } from './components/nav-drawer/component';
 import { Load as NavItemLoader } from './components/nav-item/component';
 
+import { Load as FeedNewsLoader } from './feeds/news/component';
+
+const LoadUmdFeeds = () => {
+  FeedNewsLoader();
+};
+
 const LoadUmdComponents = () => {
   AlertLoader();
   CardLoader();
@@ -20,6 +26,7 @@ const LoadUmdComponents = () => {
   FooterLoader();
   NavDrawerLoader();
   NavItemLoader();
+  LoadUmdFeeds();
 };
 
 export default LoadUmdComponents;

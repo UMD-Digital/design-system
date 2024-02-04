@@ -1,19 +1,16 @@
 declare global {
   interface Window {
-    UMDCallToActionElement: typeof UMDCallToActionElement;
+    UMDFeedNews: typeof UMDFeedNews;
   }
 }
 
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
 
-export const ELEMENT_NAME = 'umd-element-call-to-action';
-export type CallToActionType = UMDCallToActionElement;
-export class UMDCallToActionElement extends HTMLElement {
+export const ELEMENT_NAME = 'umd-feed-news';
+export type ExampleType = UMDFeedNews;
+export class UMDFeedNews extends HTMLElement {
   _shadow: ShadowRoot;
-  _type = 'primary';
-  _size = 'standard';
-  _theme = 'light';
 
   constructor() {
     super();
@@ -32,15 +29,8 @@ export class UMDCallToActionElement extends HTMLElement {
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
 
   connectedCallback() {
-    const element = this;
+    const container = CreateShadowDom({ element: this });
 
-    element._size = element.getAttribute('size') || element._size;
-    element._type = element.getAttribute('type') || element._type;
-    element._theme = element.getAttribute('theme') || element._theme;
-
-    const container = CreateShadowDom({ element });
-
-    if (!container) return;
     this._shadow.appendChild(container);
   }
 }
@@ -50,8 +40,8 @@ export const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDCallToActionElement = UMDCallToActionElement;
-    window.customElements.define(ELEMENT_NAME, UMDCallToActionElement);
+    window.UMDFeedNews = UMDFeedNews;
+    window.customElements.define(ELEMENT_NAME, UMDFeedNews);
   }
 
   return '';

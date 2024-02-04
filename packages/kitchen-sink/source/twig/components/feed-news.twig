@@ -1,0 +1,26 @@
+{% extends '../_layout.twig' %}
+{% import '../_elements/content-dropdown.twig' as Dropdown %}
+{% import '../_ui/fields/headline.twig' as Headline %}
+{% import '../_ui/fields/body-slot-rich-text.twig' as RichText %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="umd-sans-largest">
+        Feed News
+      </h1>
+
+      <h2 class="umd-sans-large">
+        Content Variations
+      </h2>
+
+      <section>
+        <h3 class="umd-sans-large default">
+          Default
+        </h3>
+
+        <umd-feed-news></umd-feed-news>
+      </section>
+    </div>
+  </section>
+{% endblock %}

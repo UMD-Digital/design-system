@@ -154,3 +154,83 @@
   top: calc(50% + 17px);
   width: calc(90% - 70px);
 }
+
+.primary-styling-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 145px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(95% - 60px);
+}
+
+.icon-options-detail {
+  color: theme(colors.gray.medium);
+  padding-left: 25px;
+  position: relative;
+}
+
+.icon-options-detail::before {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 25px;
+  margin-left: 150px;
+  position: absolute;
+  top: calc(50% + 3px);
+  transform: translateY(-50%);
+  width: 1px;
+}
+
+.icon-options-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 285px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(85% - 80px);
+}
+
+.secondary-styling-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 170px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(95% - 80px);
+}
+
+.secondary-icon-options {
+  color: theme(colors.gray.medium);
+  padding-left: 25px;
+  position: relative;
+}
+
+.secondary-icon-options::before {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 25px;
+  margin-left: 175px;
+  position: absolute;
+  top: calc(50% + 3px);
+  transform: translateY(-50%);
+  width: 1px;
+}
+
+.secondary-icon-options-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 310px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(85% - 100px);
+}

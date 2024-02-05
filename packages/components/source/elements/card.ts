@@ -380,7 +380,7 @@ export const CreateCardElement = ({
   }
 
   if (eyebrow) {
-    textContainer.classList.add(CARD_EYEBROW_WRAPPER);
+    eyebrow.classList.add(CARD_EYEBROW_WRAPPER);
     introWrapper.appendChild(eyebrow);
   }
 

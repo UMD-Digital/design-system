@@ -92,7 +92,11 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
     margin-right: 4px;
     margin-top: 2px;
   }
-  
+
+  .${CLASS_BASE_CTA} path {
+    transition: fill 0.5s;
+  }
+
   .${CLASS_CTA_WRAPPER} {
     display: flex;
   }

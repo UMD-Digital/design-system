@@ -11,7 +11,8 @@ export const STYLES_CTA_OUTLINE = `
     transition: background .5s, border .5s, color .5s;
   }
 
-  .${CLASS_STYLES_REF_CTA_OUTLINE} svg {
+  .${CLASS_STYLES_REF_CTA_OUTLINE} svg,
+  .${CLASS_STYLES_REF_CTA_OUTLINE} path {
     fill: ${colors.red};
     transition: fill .5s;
   }

@@ -11,6 +11,7 @@
 
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasDarkModeCtaLink = params.darkModeCtaLink ?? false %}
   {% set hasEyebrow = params.eyebrow ?? true %}
   {% set hasHeadline = params.headline ?? true %}
   {% set hasRichText = params.text ?? true %}
@@ -53,6 +54,10 @@
     {% if hasCtaLink %}
       {{ CallToAction.InternalCallToAction() }}
     {% endif %}
+
+    {% if hasDarkModeCtaLink %}
+      {{ CallToAction.DarkModeInternalCallToAction() }}
+    {% endif %}
   </umd-element-card>
 {% endmacro %}
 
@@ -61,6 +66,7 @@
 
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasDarkModeCtaLink = params.darkModeCtaLink ?? true %}
   {% set hasEyebrow = params.eyebrow ?? true %}
   {% set hasHeadline = params.headline ?? true %}
   {% set hasRichText = params.text ?? true %}
@@ -103,6 +109,10 @@
     {% if hasCtaLink %}
       {{ CallToAction.InternalCallToAction() }}
     {% endif %}
+
+    {% if hasDarkModeCtaLink %}
+      {{ CallToAction.DarkModeInternalCallToAction() }}
+    {% endif %}
   </umd-element-card>
 {% endmacro %}
 
@@ -111,6 +121,7 @@
 
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasDarkModeCtaLink = params.darkModeCtaLink ?? false %}
   {% set hasEyebrow = params.eyebrow ?? true %}
   {% set hasHeadline = params.headline ?? true %}
   {% set hasRichText = params.text ?? true %}
@@ -152,6 +163,10 @@
 
     {% if hasCtaLink %}
       {{ CallToAction.InternalCallToAction() }}
+    {% endif %}
+
+    {% if hasDarkModeCtaLink %}
+      {{ CallToAction.DarkModeInternalCallToAction() }}
     {% endif %}
   </umd-element-card>
 {% endmacro %}

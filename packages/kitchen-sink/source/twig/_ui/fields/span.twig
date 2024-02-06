@@ -1,12 +1,12 @@
 {% macro CTASpan(params) %}
-  {% set characters = params.characters ?? 8 %}
+  {% set characters = params.characters ?? 12 %}
 
-  {% set string = 'Example Link Max' %}
+  {% set string = 'View All Application Deadlines and Tuition and Aid' %}
 
-  {% if characters is defined and characters is not null and characters <= 16 %}
+  {% if characters is defined and characters is not null and characters <= 50 %}
     {% set string = string|slice(0, characters) %}
   {% else %}
-    {% set string = string|slice(0, 8) %}
+    {% set string = string|slice(0, 12) %}
   {% endif %}
 
   <span>{{ string }}</span>
@@ -23,7 +23,7 @@
 {% macro CTASpanNormal() %}
   {{
     _self.CTASpan({
-      characters: 8
+      characters: 12
     })
   }}
 {% endmacro %}
@@ -31,7 +31,7 @@
 {% macro CTASpanVerbose() %}
   {{
     _self.CTASpan({
-      characters: 16
+      characters: 50
     })
   }}
 {% endmacro %}

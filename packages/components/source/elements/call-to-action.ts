@@ -80,6 +80,7 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
     font-weight: 800;
     text-align: left;
     line-height: 1.28em;
+    max-width: ${MAX_WIDTH}px;
   }
 
   .${CLASS_BASE_CTA} svg {
@@ -99,10 +100,6 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
 
   .${CLASS_CTA_WRAPPER} {
     display: flex;
-  }
-  
-  .${CLASS_CTA_TEXT_WRAPPER} {
-    white-space: nowrap;
   }
 
   ${STYLES_CTA_PRIMARY}

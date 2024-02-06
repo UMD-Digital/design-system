@@ -46,7 +46,7 @@
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
 
-  {% if params.theme %}
+  {% if params.theme == 'dark' %}
     {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
   {% endif %}
 
@@ -72,7 +72,19 @@
     {% endif %}
 
     {% if hasCtaLink %}
-      {{ CallToAction.InternalCallToAction() }}
+      {% if params.image %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+      {% else %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: params.theme == 'dark' ? 'dark' : 'light'
+          })
+        }}
+      {% endif %}
     {% endif %}
 
     {% if params.ctaOption %}
@@ -90,7 +102,7 @@
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
 
-  {% if params.theme %}
+  {% if params.theme == 'dark' %}
     {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
   {% endif %}
 
@@ -116,7 +128,19 @@
     {% endif %}
 
     {% if hasCtaLink %}
-      {{ CallToAction.InternalCallToAction() }}
+      {% if params.image %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+      {% else %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: params.theme == 'dark' ? 'dark' : 'light'
+          })
+        }}
+      {% endif %}
     {% endif %}
 
     {% if params.ctaOption %}
@@ -134,8 +158,8 @@
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
 
-  {% if params.theme %}
-    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="dark"' ~ params.theme ~ '"' %}
   {% endif %}
 
   <umd-element-card-overlay {{ attrs }}>
@@ -160,7 +184,19 @@
     {% endif %}
 
     {% if hasCtaLink %}
-      {{ CallToAction.InternalCallToAction() }}
+      {% if params.image %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+      {% else %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: params.theme == 'dark' ? 'dark' : 'light'
+          })
+        }}
+      {% endif %}
     {% endif %}
 
     {% if params.ctaOption %}

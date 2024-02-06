@@ -16,7 +16,6 @@ export const STYLES_CTA_PRIMARY = `
     background-color: ${colors.red};
     border: 1px solid ${colors.red};
     color: ${colors.white};
-    max-width: 400px;
     transition: background .5s, border .5s, color .5s;
   }
 

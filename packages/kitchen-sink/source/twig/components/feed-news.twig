@@ -1,25 +1,90 @@
 {% extends '../_layout.twig' %}
-{% import '../_elements/content-dropdown.twig' as Dropdown %}
-{% import '../_ui/fields/headline.twig' as Headline %}
-{% import '../_ui/fields/body-slot-rich-text.twig' as RichText %}
 
 {% block page %}
   <section>
     <div class="umd-lock">
       <h1 class="umd-sans-largest">
-        Feed News
+        Feed News - Do Good Category
       </h1>
-
-      <h2 class="umd-sans-large">
-        Content Variations
-      </h2>
 
       <section>
         <h3 class="umd-sans-large default">
           Default
         </h3>
 
-        <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"></umd-feed-news>
+        <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+          categories="10461"></umd-feed-news>
+      </section>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <h1 class="umd-sans-largest">
+        Feed News - Do Good Category and Research
+      </h1>
+
+      <section>
+        <h3 class="umd-sans-large default">
+          Default
+        </h3>
+
+        <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+          categories="10461, 10671"></umd-feed-news>
+      </section>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <h1 class="umd-sans-largest">
+        Feed News - Display 2 rows of 2
+      </h1>
+
+      <section>
+        <h3 class="umd-sans-large default">
+          Default
+        </h3>
+
+        <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+          row-count="2"
+          show-count="2"></umd-feed-news>
+      </section>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <h1 class="umd-sans-largest">
+        Feed News - Display 2 rows of 3
+      </h1>
+
+      <section>
+        <h3 class="umd-sans-large default">
+          Default
+        </h3>
+
+        <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+          row-count="2"
+          show-count="3"></umd-feed-news>
+      </section>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <h1 class="umd-sans-largest">
+        Feed News - Display 2 rows of 4
+      </h1>
+
+      <section>
+        <h3 class="umd-sans-large default">
+          Default
+        </h3>
+
+        <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+          row-count="2"
+          show-count="4"></umd-feed-news>
       </section>
     </div>
   </section>

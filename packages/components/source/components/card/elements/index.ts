@@ -25,8 +25,8 @@ const GetImage = ({ element }: { element: CardType }) => {
   return null;
 };
 
-export const CreateShadowDom = ({ element }: { element: CardType }) => {
-  return CreateCardElement({
+export const CreateShadowDom = ({ element }: { element: CardType }) =>
+  CreateCardElement({
     image: GetImage({ element }),
     eyebrow: SlotDefaultStyling({ element, slotRef: SLOTS.EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE }),
@@ -37,4 +37,3 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
     aligned: element._aligned,
     border: element._border,
   });
-};

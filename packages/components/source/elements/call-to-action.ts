@@ -197,22 +197,6 @@ const CreateWrapper = ({ element }: { element: HTMLElement }) => {
   element.appendChild(wrapper);
 };
 
-const EventSize = ({ element }: { element: HTMLElement }) => {
-  let width = element.offsetWidth;
-
-  if (width > MAX_WIDTH) {
-    const textLink = element.querySelector(
-      `.${CLASS_CTA_TEXT_WRAPPER}`,
-    ) as HTMLElement;
-
-    if (textLink) textLink.style.whiteSpace = `initial`;
-
-    width = MAX_WIDTH;
-  }
-
-  element.style.width = `${width}px`;
-};
-
 export const CreateCallToActionElement = ({
   cta,
   type = 'primary',
@@ -226,7 +210,6 @@ export const CreateCallToActionElement = ({
 }) => {
   const element = cta || document.createElement('a');
   const icon = GetIcon({ element });
-  const setSize = () => EventSize({ element });
 
   element.classList.add(CLASS_BASE_CTA);
 
@@ -253,9 +236,6 @@ export const CreateCallToActionElement = ({
   CreateTextSpan({ element });
   CreateWrapper({ element });
   CreateLinkIcon({ element, icon, type, isLink: true });
-  setTimeout(setSize, 20);
-
-  window.addEventListener('resize', Debounce(setSize, 20));
 
   return element;
 };

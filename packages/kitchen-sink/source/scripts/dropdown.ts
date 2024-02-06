@@ -15,10 +15,6 @@ const DropdownVariations = () => {
     });
   };
 
-  const triggerResize = (): void => {
-    window.dispatchEvent(new Event('resize'));
-  };
-
   const toggleContentVisibility = (selectedId: string): void => {
     hideAllContent();
 
@@ -26,10 +22,6 @@ const DropdownVariations = () => {
       document.getElementById(selectedId);
     if (selectedContentDiv) {
       selectedContentDiv.setAttribute('aria-hidden', 'false');
-
-      setTimeout(() => {
-        triggerResize();
-      }, 10);
     }
   };
 

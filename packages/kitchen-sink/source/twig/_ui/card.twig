@@ -15,16 +15,16 @@
   {% set hasHeadline = params.headline ?? true %}
   {% set hasRichText = params.text ?? true %}
 
-  {% if params.theme %}
-    {% set attrs = attrs ~ 'theme="dark"' %}
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
   {% endif %}
 
   {% if params.aligned %}
-    {% set attrs = attrs ~ 'aligned="true"' %}
+    {% set attrs = attrs ~ 'aligned="true"' ~ params.aligned ~ '"' %}
   {% endif %}
 
   {% if params.border %}
-    {% set attrs = attrs ~ 'border="true"' %}
+    {% set attrs = attrs ~ 'border="true"' ~ params.border ~ '"' %}
   {% endif %}
 
   <umd-element-card {{ attrs }}>
@@ -51,7 +51,11 @@
     {% endif %}
 
     {% if hasCtaLink %}
-      {{ CallToAction.InternalCallToAction() }}
+      {{
+        CallToAction.InternalCallToAction({
+          theme: params.theme
+        })
+      }}
     {% endif %}
   </umd-element-card>
 {% endmacro %}
@@ -65,16 +69,16 @@
   {% set hasHeadline = params.headline ?? true %}
   {% set hasRichText = params.text ?? true %}
 
-  {% if params.theme %}
-    {% set attrs = attrs ~ 'theme="dark"' %}
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
   {% endif %}
 
   {% if params.aligned %}
-    {% set attrs = attrs ~ 'aligned="true"' %}
+    {% set attrs = attrs ~ 'aligned="true"' ~ params.aligned ~ '"' %}
   {% endif %}
 
   {% if params.border %}
-    {% set attrs = attrs ~ 'border="true"' %}
+    {% set attrs = attrs ~ 'border="true"' ~ params.border ~ '"' %}
   {% endif %}
 
   <umd-element-card {{ attrs }}>
@@ -101,7 +105,11 @@
     {% endif %}
 
     {% if hasCtaLink %}
-      {{ CallToAction.InternalCallToAction() }}
+      {{
+        CallToAction.InternalCallToAction({
+          theme: params.theme
+        })
+      }}
     {% endif %}
   </umd-element-card>
 {% endmacro %}
@@ -115,16 +123,16 @@
   {% set hasHeadline = params.headline ?? true %}
   {% set hasRichText = params.text ?? true %}
 
-  {% if params.theme %}
-    {% set attrs = attrs ~ 'theme="dark"' %}
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
   {% endif %}
 
   {% if params.aligned %}
-    {% set attrs = attrs ~ 'aligned="true"' %}
+    {% set attrs = attrs ~ 'aligned="true"' ~ params.aligned ~ '"' %}
   {% endif %}
 
   {% if params.border %}
-    {% set attrs = attrs ~ 'border="true"' %}
+    {% set attrs = attrs ~ 'border="true"' ~ params.border ~ '"' %}
   {% endif %}
 
   <umd-element-card {{ attrs }}>
@@ -151,7 +159,11 @@
     {% endif %}
 
     {% if hasCtaLink %}
-      {{ CallToAction.InternalCallToAction() }}
+      {{
+        CallToAction.InternalCallToAction({
+          theme: params.theme
+        })
+      }}
     {% endif %}
   </umd-element-card>
 {% endmacro %}

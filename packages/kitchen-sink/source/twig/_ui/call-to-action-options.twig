@@ -45,9 +45,7 @@
 
 {% macro SuccinctCTA(params) %}
   {% set attrs = '' %}
-  {% set buttonAttr = {
-    type: 'button'
-  } %}
+  {% set buttonAttr = '' %}
 
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasCtaSpan = params.ctaSpan ?? true %}
@@ -67,15 +65,19 @@
   {% endif %}
 
   {% if params.theme %}
-    {% set attrs = 'theme="dark"' %}
+    {% set attrs = attrs ~ 'theme="dark"' %}
   {% endif %}
 
   {% if params.large %}
-    {% set attrs = 'size="large"' %}
+    {% set attrs = attrs ~ 'size="large"' %}
   {% endif %}
 
   {% if params.download %}
-    {% set buttonAttr = buttonAttrs ~ 'type="button" download' %}
+    {% set buttonAttr = buttonAttr ~ 'type="button" download' %}
+  {% endif %}
+
+  {% if params.button %}
+    {% set buttonAttr = buttonAttr ~ 'type="button"' %}
   {% endif %}
 
   <umd-element-call-to-action {{ attrs }}>
@@ -104,9 +106,7 @@
 
 {% macro NormalCTA(params) %}
   {% set attrs = '' %}
-  {% set buttonAttr = {
-    type: 'button'
-  } %}
+  {% set buttonAttr = '' %}
 
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasCtaSpan = params.ctaSpan ?? true %}
@@ -134,11 +134,11 @@
   {% endif %}
 
   {% if params.download %}
-    {% set buttonAttr = 'type="button" download' %}
+    {% set buttonAttr = buttonAttr ~ 'type="button" download' %}
   {% endif %}
 
   {% if params.button %}
-    {% set buttonAttr = 'type="button"' %}
+    {% set buttonAttr = buttonAttr ~ 'type="button"' %}
   {% endif %}
 
   <umd-element-call-to-action {{ attrs }}>
@@ -167,9 +167,7 @@
 
 {% macro VerboseCTA(params) %}
   {% set attrs = '' %}
-  {% set buttonAttr = {
-    type: 'button'
-  } %}
+  {% set buttonAttr = '' %}
 
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasCtaSpan = params.ctaSpan ?? true %}
@@ -197,11 +195,11 @@
   {% endif %}
 
   {% if params.download %}
-    {% set buttonAttr = 'type="button" download' %}
+    {% set buttonAttr = buttonAttr ~ 'type="button" download' %}
   {% endif %}
 
   {% if params.button %}
-    {% set buttonAttr = 'type="button"' %}
+    {% set buttonAttr = buttonAttr ~ 'type="button"' %}
   {% endif %}
 
   <umd-element-call-to-action {{ attrs }}>

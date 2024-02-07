@@ -21,6 +21,8 @@ export class UMDFeedNews extends HTMLElement {
   _showCount: number;
   _showRows: number;
   _lazyLoad: boolean;
+  _offset: number;
+  _totalEntries: number | null;
   _categories: string[];
 
   constructor() {
@@ -29,7 +31,9 @@ export class UMDFeedNews extends HTMLElement {
     this._token = null;
     this._showCount = 3;
     this._showRows = 1;
+    this._offset = 0;
     this._lazyLoad = false;
+    this._totalEntries = null;
     this._categories = [];
 
     const styles = `${ComponentStyles}`;

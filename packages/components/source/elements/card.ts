@@ -264,6 +264,7 @@ const VariantAlignedStyles = `
     aspect-ratio: 4/3;
     object-fit: cover;
     object-position: center;
+    width: 100%;
   }
 `;
 

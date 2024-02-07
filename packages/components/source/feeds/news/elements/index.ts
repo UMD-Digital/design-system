@@ -1,8 +1,12 @@
-import { umdGrid } from '@universityofmaryland/variables';
+import { spacing, umdGrid } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { FetchGraphQL } from 'helpers/xhr';
 import { UMDNewsFeedType } from '../component';
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
+import {
+  CreateCallToActionElement,
+  STYLES_CALL_TO_ACTION_ELEMENT,
+} from 'elements/call-to-action';
 
 type ImageType = {
   url: string;
@@ -26,17 +30,21 @@ type ArticleType = {
 type VariablesType = {
   related?: string[];
   limit?: number;
+  offset?: number;
 };
 
 const LAYOUT_CONTAINER = 'umd-feeds-news-layout-container';
+const LAZY_LOAD_BUTTON = 'umd-feeds-news-lazy-load-button';
 
 const TODAY_PRODUCTION_URL = 'https://today.umd.edu/graphql';
 const ARTICLES_QUERY = `
-  query getArticlesByCategories($related: [QueryArgument], $limit: Int) {
+  query getArticlesByCategories($related: [QueryArgument], $limit: Int, $offset: Int) {
+    entryCount(section: "articles", relatedTo: $related)
     entries(
       section: "articles",
       relatedTo: $related,
-      limit: $limit
+      limit: $limit,
+      offset: $offset,
     ) {
       ... on articles_today_Entry {
         id
@@ -58,6 +66,14 @@ const ARTICLES_QUERY = `
         }
       }
     }
+  }
+`;
+
+const LazyLoadButtonStyles = `
+  .${LAZY_LOAD_BUTTON} {
+    display: flex;
+    justify-content: center;
+    margin-top: ${spacing.lg};
   }
 `;
 
@@ -89,23 +105,97 @@ export const ComponentStyles = `
 
   ${Reset}
   ${LayoutStyles}
+  ${LazyLoadButtonStyles}
   ${STYLES_CARD}
+  ${STYLES_CALL_TO_ACTION_ELEMENT}
 `;
 
-const CreateCallToAction = () => {
-  const wrapper = document.createElement('umd-element-call-to-action');
-  const link = document.createElement('a');
+const CheckForLazyLoad = ({ element }: { element: UMDNewsFeedType }) => {
+  const shadowRoot = element.shadowRoot as ShadowRoot;
+  const container = shadowRoot.querySelector(
+    `.${LAZY_LOAD_BUTTON}`,
+  ) as HTMLDivElement;
 
-  link.setAttribute('href', 'https://google.com');
-  link.setAttribute('target', '_blank');
-  link.innerHTML = 'View Article';
+  if (!container) return;
+  if (!element._lazyLoad) return;
+  if (!element._totalEntries) {
+    container.remove();
+    return;
+  }
 
-  wrapper.setAttribute('size', 'large');
-  wrapper.setAttribute('type', 'outline');
+  console.log(element._offset);
+  console.log(element._totalEntries);
+  if (element._offset >= element._totalEntries) {
+    container.remove();
+  }
+};
 
-  wrapper.appendChild(link);
+const LoadMoreEntries = async ({ element }: { element: UMDNewsFeedType }) => {
+  const feedData = await FetchFeed({ element });
+  const shadowRoot = element.shadowRoot as ShadowRoot;
+  const container = shadowRoot.querySelector(
+    `.${LAYOUT_CONTAINER}`,
+  ) as HTMLDivElement;
+  const entries = CreateEntries({ entries: feedData });
 
-  return wrapper;
+  entries.forEach((entry) => {
+    container.appendChild(entry);
+  });
+};
+
+const FetchFeed = async ({ element }: { element: UMDNewsFeedType }) => {
+  if (!element._token) throw new Error('Token not found');
+
+  const variables: VariablesType = {
+    limit: element._showCount * element._showRows,
+    related: element._categories,
+    offset: element._offset,
+  };
+
+  const feedData = await FetchGraphQL({
+    query: ARTICLES_QUERY,
+    url: TODAY_PRODUCTION_URL,
+    token: element._token,
+    variables,
+  });
+
+  if (!feedData) throw new Error('Feed not found');
+  if (feedData.message) {
+    throw new Error(`Feed data errors: ${feedData.message}`);
+  }
+  if (!feedData.data) throw new Error('Feed data not found');
+  if (!feedData.data.entries) throw new Error('Feed entries not found');
+
+  if (feedData.data.entryCount) {
+    element._totalEntries = feedData.data.entryCount;
+  }
+
+  if (feedData.data.entries) {
+    element._offset += feedData.data.entries.length;
+    CheckForLazyLoad({ element });
+    return feedData.data.entries;
+  }
+
+  return null;
+};
+
+const CreateCallToAction = ({ element }: { element: UMDNewsFeedType }) => {
+  const container = document.createElement('div');
+  const button = document.createElement('button');
+  button.innerHTML = 'Load More';
+  button.addEventListener('click', () => {
+    LoadMoreEntries({ element });
+  });
+
+  const ctaButton = CreateCallToActionElement({
+    cta: button,
+    type: 'outline',
+  });
+
+  container.classList.add(LAZY_LOAD_BUTTON);
+  container.appendChild(ctaButton);
+
+  return container;
 };
 
 const CreateGridLayout = ({ element }: { element: UMDNewsFeedType }) => {
@@ -186,46 +276,18 @@ const CreateEntries = ({ entries }: { entries: ArticleType[] }) =>
         date: entry.date,
         dateFormatted: entry.dateFormatted,
       }),
+      aligned: true,
     }),
   );
-
-const CreateFeed = async ({ element }: { element: UMDNewsFeedType }) => {
-  if (!element._token) throw new Error('Token not found');
-
-  const variables: VariablesType = {
-    limit: element._showCount * element._showRows,
-    related: element._categories,
-  };
-
-  const feedData = await FetchGraphQL({
-    query: ARTICLES_QUERY,
-    url: TODAY_PRODUCTION_URL,
-    token: element._token,
-    variables,
-  });
-
-  if (!feedData) throw new Error('Feed not found');
-  if (feedData.message) {
-    throw new Error(`Feed data errors: ${feedData.message}`);
-  }
-  if (!feedData.data) throw new Error('Feed data not found');
-  if (!feedData.data.entries) throw new Error('Feed entries not found');
-
-  if (feedData.data.entries) {
-    return feedData.data.entries;
-  }
-
-  return null;
-};
 
 export const CreateShadowDom = async ({
   element,
 }: {
   element: UMDNewsFeedType;
 }) => {
-  const feedData = await CreateFeed({ element });
+  const feedData = await FetchFeed({ element });
   const container = document.createElement('div');
-  const linkWrapper = CreateCallToAction();
+  const cta = CreateCallToAction({ element });
 
   if (feedData.length === 0) {
     CreateNoResults();
@@ -240,7 +302,8 @@ export const CreateShadowDom = async ({
   });
 
   container.appendChild(grid);
-  // container.appendChild(linkWrapper);
+
+  if (element._lazyLoad) container.appendChild(cta);
 
   return container;
 };

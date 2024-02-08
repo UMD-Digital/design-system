@@ -2,16 +2,15 @@
   {% set url = params.url ?? 'https://umd.edu' %}
   {% set link = params.link ?? 'CTA Link' %}
 
-  <a slot="link" href="{{ url }}">
-    <svg width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M7.7183 6.98243L2.625 1.89575H6.15621L11.306 6.93269L11.2563 6.98243L11.306 7.03218L6.15621 12.0691H2.625L7.7183 6.98243Z" />
-    </svg>
-    <span>{{ link }}</span>
-  </a>
+  {% set attrs = '' %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="dark"' %}
+  {% else %}
+    {% set attrs = attrs ~ 'theme="light"' %}
+  {% endif %}
+
+  <umd-element-call-to-action slot="link" type="secondary" {{ attrs }}>
+    <a href="/"><span>{{ link }}</span></a>
+  </umd-element-call-to-action>
 {% endmacro %}

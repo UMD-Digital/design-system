@@ -168,30 +168,30 @@
   }}
 {% endmacro %}
 
-{% macro DateSliderHeadlineSuccinct() %}
+{% macro DateSliderComponentTitleSuccinct() %}
   {{
     _self.Headline({
-      characters: 13,
+      characters: 6,
       isLink: true,
       isHeader: false
     })
   }}
 {% endmacro %}
 
-{% macro DateSliderHeadlineNormal() %}
+{% macro DateSliderComponentTitleNormal() %}
   {{
     _self.Headline({
-      characters: 20,
+      characters: 15,
       isLink: false,
       isHeader: false
     })
   }}
 {% endmacro %}
 
-{% macro DateSliderHeadlineVerbose() %}
+{% macro DateSliderComponentTitleVerbose() %}
   {{
     _self.Headline({
-      characters: 28,
+      characters: 30,
       isLink: false,
       isHeader: false
     })

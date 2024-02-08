@@ -144,6 +144,17 @@
   width: calc(95% - 80px);
 }
 
+.dark-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 145px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(95% - 80px);
+}
+
 .grouping-hr::after {
   content: '';
   background-color: theme(colors.gray.light);
@@ -233,4 +244,22 @@
   position: absolute;
   top: calc(50% + 17px);
   width: calc(85% - 100px);
+}
+
+.three-dates-detail {
+  color: theme(colors.gray.medium);
+  padding-left: 15px;
+  position: relative;
+}
+
+.three-dates-detail::before {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 25px;
+  margin-left: 115px;
+  position: absolute;
+  top: calc(50% + 3px);
+  transform: translateY(-50%);
+  width: 1px;
 }

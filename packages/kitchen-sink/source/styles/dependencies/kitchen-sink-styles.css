@@ -263,3 +263,32 @@
   transform: translateY(-50%);
   width: 1px;
 }
+
+.two-cards-hr::after {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 1px;
+  left: 230px;
+  position: absolute;
+  top: calc(50% + 17px);
+  width: calc(85% - 100px);
+}
+
+.two-card-detail {
+  color: theme(colors.gray.medium);
+  padding-left: 15px;
+  position: relative;
+}
+
+.two-card-detail::before {
+  content: '';
+  background-color: theme(colors.gray.light);
+  display: block;
+  height: 25px;
+  margin-left: 115px;
+  position: absolute;
+  top: calc(50% + 3px);
+  transform: translateY(-50%);
+  width: 1px;
+}

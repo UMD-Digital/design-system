@@ -1,31 +1,17 @@
 import { spacing, umdGrid } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { FetchGraphQL } from 'helpers/xhr';
-import { UMDNewsFeedType } from '../component';
-import { CreateCardElement, STYLES_CARD } from 'elements/card';
+import { CreateEntries, STYLES_ARTICLE } from 'elements/article';
 import {
   CreateCallToActionElement,
   STYLES_CALL_TO_ACTION_ELEMENT,
 } from 'elements/call-to-action';
-
-type ImageType = {
-  url: string;
-  altText: string;
-}[];
-
-type ArticleType = {
-  id: number;
-  title: string;
-  url: string;
-  date: string;
-  dateFormatted: string;
-  summary: string;
-  image: ImageType;
-  categories: {
-    title: string;
-    url: string;
-  }[];
-};
+import {
+  CreateNoResultsInterface,
+  STYLES_NO_RESULTS,
+  NoResultsContentType,
+} from 'elements/no-results';
+import { UMDNewsFeedType } from '../component';
 
 type VariablesType = {
   related?: string[];
@@ -33,6 +19,7 @@ type VariablesType = {
   offset?: number;
 };
 
+const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 const LAYOUT_CONTAINER = 'umd-feeds-news-layout-container';
 const LAZY_LOAD_BUTTON = 'umd-feeds-news-lazy-load-button';
 
@@ -106,9 +93,16 @@ export const ComponentStyles = `
   ${Reset}
   ${LayoutStyles}
   ${LazyLoadButtonStyles}
-  ${STYLES_CARD}
+  ${STYLES_ARTICLE}
   ${STYLES_CALL_TO_ACTION_ELEMENT}
+  ${STYLES_NO_RESULTS}
 `;
+
+const NoResultsContent: NoResultsContentType = {
+  message: 'No results found',
+  linkUrl: 'https://today.umd.edu',
+  linkText: 'View All Articles',
+};
 
 const CheckForLazyLoad = ({ element }: { element: UMDNewsFeedType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
@@ -123,63 +117,21 @@ const CheckForLazyLoad = ({ element }: { element: UMDNewsFeedType }) => {
     return;
   }
 
-  console.log(element._offset);
-  console.log(element._totalEntries);
   if (element._offset >= element._totalEntries) {
     container.remove();
   }
 };
 
-const LoadMoreEntries = async ({ element }: { element: UMDNewsFeedType }) => {
-  const feedData = await FetchFeed({ element });
-  const shadowRoot = element.shadowRoot as ShadowRoot;
-  const container = shadowRoot.querySelector(
-    `.${LAYOUT_CONTAINER}`,
-  ) as HTMLDivElement;
-  const entries = CreateEntries({ entries: feedData });
+const CreateGridLayout = ({ element }: { element: UMDNewsFeedType }) => {
+  const container = document.createElement('div');
 
-  entries.forEach((entry) => {
-    container.appendChild(entry);
-  });
+  container.classList.add(LAYOUT_CONTAINER);
+  container.setAttribute('grid-count', `${element._showCount}`);
+
+  return container;
 };
 
-const FetchFeed = async ({ element }: { element: UMDNewsFeedType }) => {
-  if (!element._token) throw new Error('Token not found');
-
-  const variables: VariablesType = {
-    limit: element._showCount * element._showRows,
-    related: element._categories,
-    offset: element._offset,
-  };
-
-  const feedData = await FetchGraphQL({
-    query: ARTICLES_QUERY,
-    url: TODAY_PRODUCTION_URL,
-    token: element._token,
-    variables,
-  });
-
-  if (!feedData) throw new Error('Feed not found');
-  if (feedData.message) {
-    throw new Error(`Feed data errors: ${feedData.message}`);
-  }
-  if (!feedData.data) throw new Error('Feed data not found');
-  if (!feedData.data.entries) throw new Error('Feed entries not found');
-
-  if (feedData.data.entryCount) {
-    element._totalEntries = feedData.data.entryCount;
-  }
-
-  if (feedData.data.entries) {
-    element._offset += feedData.data.entries.length;
-    CheckForLazyLoad({ element });
-    return feedData.data.entries;
-  }
-
-  return null;
-};
-
-const CreateCallToAction = ({ element }: { element: UMDNewsFeedType }) => {
+const CreateLazyLoadButton = ({ element }: { element: UMDNewsFeedType }) => {
   const container = document.createElement('div');
   const button = document.createElement('button');
   button.innerHTML = 'Load More';
@@ -198,87 +150,65 @@ const CreateCallToAction = ({ element }: { element: UMDNewsFeedType }) => {
   return container;
 };
 
-const CreateGridLayout = ({ element }: { element: UMDNewsFeedType }) => {
-  const container = document.createElement('div');
+const LoadMoreEntries = async ({ element }: { element: UMDNewsFeedType }) => {
+  const feedData = await FetchFeed({ element });
+  const shadowRoot = element.shadowRoot as ShadowRoot;
+  const container = shadowRoot.querySelector(
+    `.${LAYOUT_CONTAINER}`,
+  ) as HTMLDivElement;
+  const entries = CreateEntries({ entries: feedData });
 
-  container.classList.add(LAYOUT_CONTAINER);
-  container.setAttribute('grid-count', `${element._showCount}`);
-
-  return container;
+  entries.forEach((entry) => {
+    container.appendChild(entry);
+  });
 };
 
-const CreateNoResults = () => {};
+const FetchFeed = async ({ element }: { element: UMDNewsFeedType }) => {
+  const shadowRoot = element.shadowRoot as ShadowRoot;
+  const container = shadowRoot.querySelector(
+    `.${FEEDS_NEWS_CONTAINER}`,
+  ) as HTMLDivElement;
+  if (!element._token) throw new Error('Token not found');
 
-const CreateImage = ({ images }: { images: ImageType }) => {
-  if (images.length > 0) {
-    const image = document.createElement('img');
-    image.src = images[0].url;
-    image.alt = images[0].altText;
-    return image;
+  const variables: VariablesType = {
+    limit: element._showCount * element._showRows,
+    related: element._categories,
+    offset: element._offset,
+  };
+
+  const feedData = await FetchGraphQL({
+    query: ARTICLES_QUERY,
+    url: TODAY_PRODUCTION_URL,
+    token: element._token,
+    variables,
+  });
+
+  if (
+    !feedData ||
+    !feedData.data ||
+    !feedData.data.entries ||
+    feedData.message
+  ) {
+    CreateNoResultsInterface({ container, ...NoResultsContent });
+    if (!feedData) throw new Error('Feed not found');
+    if (!feedData.data) throw new Error('Feed data not found');
+    if (!feedData.data.entries) throw new Error('Feed entries not found');
+    if (!feedData.message)
+      throw new Error(`Feed data errors: ${feedData.message}`);
+  }
+
+  if (feedData.data.entryCount) {
+    element._totalEntries = feedData.data.entryCount;
+  }
+
+  if (feedData.data.entries) {
+    element._offset += feedData.data.entries.length;
+    CheckForLazyLoad({ element });
+    return feedData.data.entries;
   }
 
   return null;
 };
-
-const CreateText = ({ text }: { text: string }) => {
-  if (text) {
-    const textElement = document.createElement('div');
-    const textNode = document.createElement('p');
-    textNode.innerHTML = text;
-    textElement.appendChild(textNode);
-    return textElement;
-  }
-
-  return null;
-};
-
-const CreateHeadline = ({ text, url }: { text: string; url: string }) => {
-  if (text && url) {
-    const headline = document.createElement('p');
-    const headlineLink = document.createElement('a');
-
-    headlineLink.href = url;
-    headlineLink.innerHTML = text;
-    headlineLink.target = '_blank';
-    headlineLink.rel = 'noopener noreferrer';
-    headline.appendChild(headlineLink);
-
-    return headline;
-  }
-
-  return null;
-};
-
-const CreateDate = ({
-  date,
-  dateFormatted,
-}: {
-  date: string;
-  dateFormatted: string;
-}) => {
-  if (date && dateFormatted) {
-    const dateElement = document.createElement('date');
-    dateElement.innerHTML = dateFormatted;
-    dateElement.setAttribute('datetime', date);
-    return dateElement;
-  }
-
-  return null;
-};
-
-const CreateEntries = ({ entries }: { entries: ArticleType[] }) =>
-  entries.map((entry) =>
-    CreateCardElement({
-      image: CreateImage({ images: entry.image }),
-      headline: CreateHeadline({ text: entry.title, url: entry.url }),
-      text: CreateText({ text: entry.summary }),
-      date: CreateDate({
-        date: entry.date,
-        dateFormatted: entry.dateFormatted,
-      }),
-      aligned: true,
-    }),
-  );
 
 export const CreateShadowDom = async ({
   element,
@@ -287,11 +217,11 @@ export const CreateShadowDom = async ({
 }) => {
   const feedData = await FetchFeed({ element });
   const container = document.createElement('div');
-  const cta = CreateCallToAction({ element });
+  const lazyLoadButton = CreateLazyLoadButton({ element });
 
   if (feedData.length === 0) {
-    CreateNoResults();
-    return;
+    CreateNoResultsInterface({ container, ...NoResultsContent });
+    return container;
   }
 
   const entries = CreateEntries({ entries: feedData });
@@ -301,9 +231,10 @@ export const CreateShadowDom = async ({
     grid.appendChild(entry);
   });
 
+  container.classList.add(FEEDS_NEWS_CONTAINER);
   container.appendChild(grid);
 
-  if (element._lazyLoad) container.appendChild(cta);
+  if (element._lazyLoad) container.appendChild(lazyLoadButton);
 
   return container;
 };

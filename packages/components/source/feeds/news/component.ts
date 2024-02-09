@@ -5,7 +5,7 @@ declare global {
 }
 
 import { MakeTemplate } from 'helpers/ui';
-import { ComponentStyles, CreateShadowDom } from './elements';
+import { ComponentStyles, CreateShadowDom, CreateFeed } from './elements';
 
 const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';
@@ -84,8 +84,11 @@ export class UMDFeedNews extends HTMLElement {
       if (showCount === '4') element._showCount = 4;
     }
 
-    const container = await CreateShadowDom({ element });
-    if (container) this._shadow.appendChild(container);
+    const container = CreateShadowDom({ element });
+    if (container) {
+      this._shadow.appendChild(container);
+      CreateFeed({ element });
+    }
   }
 }
 

@@ -11,6 +11,7 @@ import {
   STYLES_NO_RESULTS,
   NoResultsContentType,
 } from 'elements/no-results';
+import { MakeLoader, STYLES_LOADER } from 'elements/loader';
 import { UMDNewsFeedType } from '../component';
 
 type VariablesType = {
@@ -96,6 +97,7 @@ export const ComponentStyles = `
   ${STYLES_ARTICLE}
   ${STYLES_CALL_TO_ACTION_ELEMENT}
   ${STYLES_NO_RESULTS}
+  ${STYLES_LOADER}
 `;
 
 const NoResultsContent: NoResultsContentType = {
@@ -151,16 +153,25 @@ const CreateLazyLoadButton = ({ element }: { element: UMDNewsFeedType }) => {
 };
 
 const LoadMoreEntries = async ({ element }: { element: UMDNewsFeedType }) => {
-  const feedData = await FetchFeed({ element });
+  const loader = MakeLoader();
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const container = shadowRoot.querySelector(
     `.${LAYOUT_CONTAINER}`,
   ) as HTMLDivElement;
-  const entries = CreateEntries({ entries: feedData });
 
-  entries.forEach((entry) => {
-    container.appendChild(entry);
-  });
+  if (!container) return;
+  container.appendChild(loader);
+
+  if (container) {
+    const feedData = await FetchFeed({ element });
+    const entries = CreateEntries({ entries: feedData });
+
+    loader.remove();
+
+    entries.forEach((entry) => {
+      container.appendChild(entry);
+    });
+  }
 };
 
 const FetchFeed = async ({ element }: { element: UMDNewsFeedType }) => {
@@ -210,31 +221,45 @@ const FetchFeed = async ({ element }: { element: UMDNewsFeedType }) => {
   return null;
 };
 
-export const CreateShadowDom = async ({
-  element,
-}: {
-  element: UMDNewsFeedType;
-}) => {
+export const CreateFeed = async ({ element }: { element: UMDNewsFeedType }) => {
+  const shadowRoot = element.shadowRoot as ShadowRoot;
+  const container = shadowRoot.querySelector(
+    `.${FEEDS_NEWS_CONTAINER}`,
+  ) as HTMLDivElement;
   const feedData = await FetchFeed({ element });
-  const container = document.createElement('div');
   const lazyLoadButton = CreateLazyLoadButton({ element });
 
+  if (!container) {
+    throw new Error('Container not found');
+  }
+
   if (feedData.length === 0) {
+    container.innerHTML = '';
     CreateNoResultsInterface({ container, ...NoResultsContent });
     return container;
   }
 
-  const entries = CreateEntries({ entries: feedData });
-  const grid = CreateGridLayout({ element });
+  if (feedData.length > 0) {
+    const entries = CreateEntries({ entries: feedData });
+    const grid = CreateGridLayout({ element });
 
-  entries.forEach((entry) => {
-    grid.appendChild(entry);
-  });
+    entries.forEach((entry) => {
+      grid.appendChild(entry);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(grid);
+
+    if (element._lazyLoad) container.appendChild(lazyLoadButton);
+  }
+};
+
+export const CreateShadowDom = ({ element }: { element: UMDNewsFeedType }) => {
+  const loader = MakeLoader();
+  const container = document.createElement('div');
 
   container.classList.add(FEEDS_NEWS_CONTAINER);
-  container.appendChild(grid);
-
-  if (element._lazyLoad) container.appendChild(lazyLoadButton);
+  container.appendChild(loader);
 
   return container;
 };

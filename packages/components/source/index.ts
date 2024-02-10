@@ -8,6 +8,7 @@ import { Load as EventDateSliderLoader } from './components/events-date-slider/c
 import { Load as FooterLoader } from './components/footer/component';
 import { Load as NavDrawerLoader } from './components/nav-drawer/component';
 import { Load as NavItemLoader } from './components/nav-item/component';
+import { Load as PathwayLoader } from './components/pathway/component';
 
 import { Load as FeedNewsLoader } from './feeds/news/component';
 
@@ -26,6 +27,8 @@ const LoadUmdComponents = () => {
   FooterLoader();
   NavDrawerLoader();
   NavItemLoader();
+  PathwayLoader();
+
   LoadUmdFeeds();
 };
 

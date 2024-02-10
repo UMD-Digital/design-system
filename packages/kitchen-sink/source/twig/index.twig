@@ -3,6 +3,7 @@
 {% import '_data/component-list.twig' as ComponentList %}
 {% import '_data/variable-list.twig' as VariableList %}
 {% import '_data/theme-list.twig' as ThemeList %}
+{% import '_data/feeds-list.twig' as FeedList %}
 
 {% block page %}
   <section>
@@ -29,6 +30,13 @@
       </h2>
       <div class="umd-grid-three mb-md">
         {{ ComponentList.Links() }}
+      </div>
+      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
+      <h2 class="umd-sans-extralarge">
+        Feeds
+      </h2>
+      <div class="umd-grid-three mb-md">
+        {{ FeedList.Links() }}
       </div>
     </div>
   </section>

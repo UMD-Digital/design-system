@@ -1,6 +1,7 @@
 {% import '../_data/component-list.twig' as ComponentList %}
 {% import '../_data/variable-list.twig' as VariableList %}
 {% import '../_data/theme-list.twig' as ThemeList %}
+{% import '../_data/feeds-list.twig' as FeedsList %}
 
 <header>
   <div class="umd-lock">
@@ -29,6 +30,13 @@
         </a>
         <div slot="dropdown-links">
           {{ ComponentList.HeaderLinks() }}
+        </div>
+      </umd-element-nav-item>
+
+      <umd-element-nav-item>
+        <a slot="primary-link" href="/feeds"><span>Feeds</span></a>
+        <div slot="dropdown-links">
+          {{ FeedsList.HeaderLinks() }}
         </div>
       </umd-element-nav-item>
     </nav>

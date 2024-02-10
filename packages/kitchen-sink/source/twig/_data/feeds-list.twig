@@ -1,0 +1,26 @@
+{% set list = [
+  {
+    name: 'News',
+    link: 'news'
+  }
+] %}
+
+{% macro DisplayName() %}
+  {% for item in list %}
+    {{ item.name }}
+  {% endfor %}
+{% endmacro %}
+
+{% macro HeaderLinks() %}
+  <ul>
+    {% for item in list %}
+      <li><a href="/feeds/{{ item.link }}">{{ item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro Links() %}
+  {% for item in list %}
+    <a href="/feeds/{{ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}

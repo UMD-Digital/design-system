@@ -5,6 +5,7 @@ export const BREAKPOINTS = {
 };
 
 export const ELEMENTS = {
+  INTRO_CONTAINER: 'umd-carousel-cards-intro-container',
   CAROUSEL_CONTAINER_WRAPPER: 'umd-carousel-cards-carousel-container-wrapper',
   CAROUSEL_CARDS_BUTTON_FORWARDS: 'umd-carousel-cards-button-forwards',
   CAROUSEL_CARDS_BUTTON_BACKWARDS: 'umd-carousel-cards-button-backwards',

@@ -8,7 +8,7 @@ import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
 
 export const ELEMENT_NAME = 'umd-element-pathway';
-export type PathwayElementType = UMDPathwayElement;
+export type ELEMENT_TYPE = UMDPathwayElement;
 export class UMDPathwayElement extends HTMLElement {
   _shadow: ShadowRoot;
 
@@ -30,8 +30,6 @@ export class UMDPathwayElement extends HTMLElement {
 
   connectedCallback() {
     const container = CreateShadowDom({ element: this });
-
-    console.log('called');
 
     this._shadow.appendChild(container);
   }

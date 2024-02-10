@@ -4,14 +4,16 @@ import {
   spacing,
   typography,
   umdCta,
-  umdLock,
 } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS, BREAKPOINTS } from 'components/carousel-cards/globals';
+import {
+  SLOTS,
+  BREAKPOINTS,
+  ELEMENTS,
+} from 'components/carousel-cards/globals';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 
-const INTRO_CONTAINER = 'umd-carousel-cards-intro-container';
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
 const INTRO_CONTAINER_HEADLINE = 'umd-carousel-cards-intro-container-headline';
 const INTRO_CONTAINER_TEXT = 'umd-carousel-cards-intro-container-text';
@@ -75,20 +77,20 @@ const ctaStyles = `
 // prettier-ignore
 export const IntroContainerStyles = `
   @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${INTRO_CONTAINER} {
+    .${ELEMENTS.INTRO_CONTAINER} {
       margin-bottom: ${spacing.md};
     }
   }
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
-    .${INTRO_CONTAINER} {
+    .${ELEMENTS.INTRO_CONTAINER} {
       width: calc(40% - ${spacing['2xl']});
       padding-right: ${spacing['2xl']};
     }
   }
 
   @media (min-width: ${BREAKPOINTS.large}px) {
-    .${INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
+    .${ELEMENTS.INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
       max-width: inherit;
       padding: 0;
     }
@@ -123,7 +125,7 @@ export const CreateIntroColumn = ({ element }: { element: ELEMENT_TYPE }) => {
     wrapper.appendChild(ctaSlot);
   }
 
-  container.classList.add(INTRO_CONTAINER);
+  container.classList.add(ELEMENTS.INTRO_CONTAINER);
   container.appendChild(wrapper);
 
   return container;

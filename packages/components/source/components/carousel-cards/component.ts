@@ -31,6 +31,22 @@ export class UMDCarouselCardsElement extends HTMLElement {
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
+  static get observedAttributes() {
+    return ['aria-hidden'];
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (name == 'aria-hidden' && newValue === 'false' && oldValue === 'true') {
+      EventResizeCarouselElementsWidth({ element: this });
+      EventResizeSetHeight({ element: this });
+      EventResizeButtonLogic({ element: this });
+    }
+  }
+
   connectedCallback() {
     const element = this;
     const content = CreateShadowDom({ element });

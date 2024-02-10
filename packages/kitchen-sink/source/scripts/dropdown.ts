@@ -10,13 +10,16 @@ const DropdownVariations = () => {
     IDS.forEach((id: string) => {
       const contentDiv: HTMLElement | null = document.getElementById(id);
       if (contentDiv) {
+        const hiddenElements = Array.from(
+          contentDiv.querySelectorAll(`[aria-hidden]`),
+        ) as HTMLDivElement[];
         contentDiv.setAttribute('aria-hidden', 'true');
+
+        hiddenElements.forEach((element) => {
+          element.setAttribute('aria-hidden', 'true');
+        });
       }
     });
-  };
-
-  const triggerResize = (): void => {
-    window.dispatchEvent(new Event('resize'));
   };
 
   const toggleContentVisibility = (selectedId: string): void => {
@@ -25,11 +28,14 @@ const DropdownVariations = () => {
     const selectedContentDiv: HTMLElement | null =
       document.getElementById(selectedId);
     if (selectedContentDiv) {
+      const hiddenElements = Array.from(
+        selectedContentDiv.querySelectorAll(`[aria-hidden]`),
+      ) as HTMLDivElement[];
       selectedContentDiv.setAttribute('aria-hidden', 'false');
 
-      setTimeout(() => {
-        triggerResize();
-      }, 10);
+      hiddenElements.forEach((element) => {
+        element.setAttribute('aria-hidden', 'false');
+      });
     }
   };
 

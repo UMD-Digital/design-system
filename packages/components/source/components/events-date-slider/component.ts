@@ -38,7 +38,7 @@ export class UMDEventsDateSliderElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == 'aria-hidden' && newValue === 'false' && oldValue === null) {
+    if (name == 'aria-hidden' && newValue === 'false' && oldValue === 'true') {
       SizeDatesElements({ element: this });
     }
   }

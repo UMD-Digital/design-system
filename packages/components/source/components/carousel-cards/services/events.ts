@@ -199,10 +199,12 @@ export const EventResizeSetHeight = ({
     `[slot="${SLOTS.CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
+  const minimumHeight = 450;
+
   const maxHeight = slotContent.reduce((acc, currentElement) => {
     if (acc > currentElement.offsetHeight) return acc;
     return currentElement.offsetHeight;
-  }, 0);
+  }, minimumHeight);
 
   slotContent.forEach((card) => {
     card.style.height = `${maxHeight}px`;

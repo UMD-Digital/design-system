@@ -129,8 +129,13 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const DateStyles = `
+  .${CARD_BODY_DATE_WRAPPER} {
+    display: block;
+  }
+
   * + .${CARD_BODY_DATE_WRAPPER} {
-    margin-top: ${spacing.min}
+    margin-top: ${spacing.min};
+    display: block;
   }
 
   .${CARD_BODY_DATE_WRAPPER} * {

@@ -66,6 +66,10 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   if (imageColumn) {
     wrapper.appendChild(imageColumn);
     container.setAttribute(`${VARIABLES.ATTRIBUTE_IMAGE}`, '');
+    container.setAttribute(VARIABLES.ATTRIBUTE_IMAGE_POSITION, imagePosition);
+    if (!element._isImageScaled) {
+      container.setAttribute(VARIABLES.ATTRIBUTE_IMAGE_SCALED, 'false');
+    }
   }
 
   wrapper.classList.add(PATHWAY_CONTAINER_WRAPPER);
@@ -77,7 +81,6 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   }
 
   container.classList.add(ELEMENTS.PATHWAY_CONTAINER);
-  container.setAttribute(VARIABLES.ATTRIBUTE_IMAGE_POSITION, imagePosition);
   container.appendChild(wrapper);
   return container;
 };

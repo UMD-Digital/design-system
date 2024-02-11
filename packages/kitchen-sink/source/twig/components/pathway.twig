@@ -122,6 +122,39 @@
           </div>
         </umd-element-pathway>
       </section>
+
+      <section>
+        <h2 class="umd-sans-large icon-options-hr">
+          <span>Standard - image scaling off</span>
+        </h2>
+
+        <umd-element-pathway isImageScaled="false">
+          <div slot="image">
+            <img src="{{ image }}" alt="Image" />
+          </div>
+
+          <p slot="headline">
+            What does it take to change the world?
+          </p>
+
+          <div slot="text">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-pathway>
+      </section>
     </div>
   </section>
 {% endblock %}

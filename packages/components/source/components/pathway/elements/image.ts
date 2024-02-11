@@ -20,6 +20,14 @@ const PositionStyles = `
 `;
 
 // prettier-ignore
+const SizeStyles = `
+  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE_SCALED}="false"] img {
+    object-fit: contain;
+    height: inherit;
+  }
+`;
+
+// prettier-ignore
 export const STYLES_PATHWAY_IMAGE_COLUMN = `
   .${PATHWAY_IMAGE_CONTAINER} {
 
@@ -35,6 +43,7 @@ export const STYLES_PATHWAY_IMAGE_COLUMN = `
   }
 
   ${PositionStyles}
+  ${SizeStyles}
 `
 
 export const CreateImageColumn = ({ element }: { element: ELEMENT_TYPE }) => {

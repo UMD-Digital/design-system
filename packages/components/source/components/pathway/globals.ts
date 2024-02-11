@@ -18,4 +18,5 @@ export const VARIABLES = {
   ATTRIBUTE_IMAGE: 'data-image',
   ATTRIBUTE_HIGHLIGHT: 'data-highlight',
   ATTRIBUTE_IMAGE_POSITION: 'data-image-position',
+  ATTRIBUTE_IMAGE_SCALED: 'data-image-scaled',
 };

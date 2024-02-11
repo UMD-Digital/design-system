@@ -15,7 +15,7 @@ import {
 } from './styles/common/rich-text';
 import { umdCta } from './styles/common/call-to-action';
 import { typography } from './styles/common/typography';
-import { umdEyebrow } from './styles/common/ribbon';
+import { umdEyebrow } from './styles/common/eyebrow';
 
 import { umdFlexGrid } from './styles/layout/umd-flex';
 import { umdGrid } from './styles/layout/umd-grid';

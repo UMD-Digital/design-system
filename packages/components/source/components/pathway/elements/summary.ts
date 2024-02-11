@@ -1,15 +1,13 @@
 import {
-  colors,
   richText,
   spacing,
   typography,
-  umdCta,
   umdEyebrow,
 } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS, BREAKPOINTS } from 'components/pathway/globals';
-import { ELEMENT_TYPE } from 'components/pathway/component';
+import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
+import { ELEMENT_TYPE } from '../component';
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =
@@ -23,11 +21,29 @@ const SUMMARY_ACTIONS_CONTAINER =
   'umd-pathway-summary-column-actions-container';
 
 // prettier-ignore
-const EyebrowStyles = `
-  .${SUMMARY_EYEBROW_CONTAINER} * {
-    color: ${colors.white};
+const WithImageStyles = `
+  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+    padding-top: ${spacing.md};
   }
 
+  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+      padding: ${spacing['4xl']} ${spacing['2xl']};
+    }
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
+    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+      padding: ${spacing['8xl']} ${spacing['6xl']};
+    }
+  }
+`;
+
+// prettier-ignore
+const EyebrowStyles = `
+  .${SUMMARY_EYEBROW_CONTAINER}  {
+    margin-bottom: ${spacing.sm};
+  }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
@@ -38,10 +54,6 @@ const EyebrowStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  .${SUMMARY_HEADLINE_CONTAINER} * {
-    color: ${colors.white};
-  }
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${SUMMARY_HEADLINE_CONTAINER}`]: typography['.umd-sans-largest'],
@@ -63,13 +75,7 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_TEXT_CONTAINER}`]: richText['.umd-rich-text-dark'],
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${SUMMARY_TEXT_CONTAINER}`]: typography['.umd-sans-medium'],
+      [`.${SUMMARY_TEXT_CONTAINER} *`]: richText['.umd-rich-text'],
     },
   })}
 `;
@@ -77,38 +83,22 @@ const TextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${SUMMARY_ACTIONS_CONTAINER} {
-    margin-top: ${spacing.md};
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${SUMMARY_ACTIONS_CONTAINER} a`]: umdCta['.umd-cta-secondary'],
-    },
-  })}
-
-  .${SUMMARY_ACTIONS_CONTAINER} a {
-    color: ${colors.white};
+    margin-top: ${spacing.lg};
   }
 `;
 
 // prettier-ignore
 export const STYLES_PATHWAY_SUMMARY_COLUMN = `
-  @container umd-pathway (max-width: ${BREAKPOINTS.large - 1}px) {
-
-  }
-
   .${SUMMARY_CONTAINER} {
-
-  }
-
-  .${SUMMARY_CONTAINER_WRAPPER} {
-
+    display: flex;
+    align-items: center;
   }
 
   ${EyebrowStyles}
   ${HeadlineStyles}
   ${TextStyles}
   ${ActionStyles}
+  ${WithImageStyles}
 `;
 
 export const CreateSummaryColumn = ({ element }: { element: ELEMENT_TYPE }) => {

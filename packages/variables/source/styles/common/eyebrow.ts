@@ -1,9 +1,11 @@
 import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { fontWeight } from '../../tokens/fonts';
+import { typography } from './typography';
 
 const umdEyebrow = {
   '.umd-eyebrow-ribbon': {
+    ...typography['.umd-interactive-sans-small'],
     backgroundColor: colors.gold,
     padding: `${spacing.min} ${spacing.md}`,
     display: `inline-block`,

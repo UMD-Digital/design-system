@@ -11,10 +11,12 @@ export const ELEMENT_NAME = 'umd-element-pathway';
 export type ELEMENT_TYPE = UMDPathwayElement;
 export class UMDPathwayElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _isImageFirst: boolean;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
+    this._isImageFirst = true;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
@@ -23,14 +25,17 @@ export class UMDPathwayElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [];
+    return ['isImageFirst'];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
 
   connectedCallback() {
-    const container = CreateShadowDom({ element: this });
+    const isImageFirst = this.getAttribute('isImageFirst');
 
+    if (isImageFirst === 'false') this._isImageFirst = false;
+
+    const container = CreateShadowDom({ element: this });
     this._shadow.appendChild(container);
   }
 }

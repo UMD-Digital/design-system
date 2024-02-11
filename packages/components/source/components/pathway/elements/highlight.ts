@@ -17,11 +17,15 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
-    padding: ${spacing['4xl']} ${spacing['2xl']};
+    .${PATHWAY_HIGHLIGHT_CONTAINER} {
+      padding: ${spacing['4xl']} ${spacing['2xl']};
+    }
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
-    padding: ${spacing['8xl']} ${spacing['xl']};
+    .${PATHWAY_HIGHLIGHT_CONTAINER} {
+      padding: ${spacing['8xl']} ${spacing['xl']};
+    }
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {

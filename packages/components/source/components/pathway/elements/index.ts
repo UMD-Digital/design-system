@@ -56,6 +56,7 @@ export const ComponentStyles = `
 `;
 
 export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
+  const imagePosition = element._isImageFirst ? 'left' : 'right';
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const summaryColumn = CreateSummaryColumn({ element });
@@ -76,6 +77,7 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   }
 
   container.classList.add(ELEMENTS.PATHWAY_CONTAINER);
+  container.setAttribute(VARIABLES.ATTRIBUTE_IMAGE_POSITION, imagePosition);
   container.appendChild(wrapper);
   return container;
 };

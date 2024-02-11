@@ -1,9 +1,23 @@
 import { SlotDefaultStyling } from 'helpers/ui';
-import { SLOTS } from 'components/pathway/globals';
-import { ELEMENT_TYPE } from 'components/pathway/component';
+import {
+  SLOTS,
+  VARIABLES,
+  BREAKPOINTS,
+  ELEMENTS,
+} from 'components/pathway/globals';
+import { ELEMENT_TYPE } from '../component';
 
 const PATHWAY_IMAGE_CONTAINER = 'umd-pathway-image-column-container';
 const PATHWAY_IMAGE_CONTAINER_WRAPPER = 'umd-pathway-image-wrapper';
+
+// prettier-ignore
+const PositionStyles = `
+  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE_POSITION}="right"] .${PATHWAY_IMAGE_CONTAINER} {
+      order: 2;
+    }
+  }
+`;
 
 // prettier-ignore
 export const STYLES_PATHWAY_IMAGE_COLUMN = `
@@ -19,6 +33,8 @@ export const STYLES_PATHWAY_IMAGE_COLUMN = `
     object-fit: cover;
     object-position: center;
   }
+
+  ${PositionStyles}
 `
 
 export const CreateImageColumn = ({ element }: { element: ELEMENT_TYPE }) => {

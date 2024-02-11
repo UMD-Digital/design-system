@@ -1,11 +1,4 @@
-import {
-  richText,
-  spacing,
-  typography,
-  umdEyebrow,
-} from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/pathway/globals';
 import { ELEMENT_TYPE } from 'components/pathway/component';
 

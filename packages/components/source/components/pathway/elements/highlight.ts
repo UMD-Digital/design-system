@@ -1,13 +1,8 @@
-import {
-  richText,
-  spacing,
-  typography,
-  umdEyebrow,
-} from '@universityofmaryland/variables';
+import { colors, spacing, typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS } from 'components/pathway/globals';
-import { ELEMENT_TYPE } from 'components/pathway/component';
+import { BREAKPOINTS, SLOTS } from '../globals';
+import { ELEMENT_TYPE } from '../component';
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
@@ -16,9 +11,54 @@ const PATHWAY_HIGHLIGHT_CONTAINER_TEXT = 'umd-pathway-highlight-text';
 // prettier-ignore
 export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
   .${PATHWAY_HIGHLIGHT_CONTAINER} {
+    padding: ${spacing['5xl']} ${spacing.md} ${spacing.md} ${spacing.md};
+    background-color: ${colors.gray.lightest};
+    position: relative;
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+    padding: ${spacing['4xl']} ${spacing['2xl']};
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
     padding: ${spacing['8xl']} ${spacing['xl']};
   }
 
+  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+    .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER} {
+      padding-left: ${spacing['xl']};
+      position: relative;
+    }
+  }
+
+  .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
+    content: '';
+    position: absolute;
+    background-color: ${colors.red};
+  }
+
+  @container umd-pathway (max-width: ${BREAKPOINTS.medium - 1}px) {
+    .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
+      top: ${spacing['2xl']};
+      width: ${spacing['5xl']};
+      height: 2px;
+    }
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+    .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background-color: ${colors.red};
+    }
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${PATHWAY_HIGHLIGHT_CONTAINER_TEXT}`]: typography['.umd-sans-larger'],
+    },
+  })}
 `
 
 export const CreateHighlightColumn = ({

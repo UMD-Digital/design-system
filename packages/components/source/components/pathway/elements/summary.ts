@@ -40,6 +40,25 @@ const WithImageStyles = `
 `;
 
 // prettier-ignore
+const WithHighlightStyles = `
+  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+    padding-bottom: ${spacing.md};
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+      padding-right: ${spacing.md};
+    }
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
+    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+      padding-right: ${spacing.xl};
+    }
+  }
+`;
+
+// prettier-ignore
 const EyebrowStyles = `
   .${SUMMARY_EYEBROW_CONTAINER}  {
     margin-bottom: ${spacing.sm};
@@ -99,6 +118,7 @@ export const STYLES_PATHWAY_SUMMARY_COLUMN = `
   ${TextStyles}
   ${ActionStyles}
   ${WithImageStyles}
+  ${WithHighlightStyles}
 `;
 
 export const CreateSummaryColumn = ({ element }: { element: ELEMENT_TYPE }) => {

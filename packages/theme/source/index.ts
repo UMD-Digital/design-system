@@ -21,6 +21,7 @@ import { umdLoader } from './elements/loader';
 import { captionedMedia } from './elements/media-with-caption';
 import { richText } from './elements/rich-text';
 import { umdLinksGroup } from './layout/umd-links-group';
+import { umdHeader } from './layout/umd-header';
 
 const theme = {
   animatedLinks,
@@ -43,6 +44,7 @@ const theme = {
   umdGrid,
   umdLinksGroup,
   umdLock,
+  umdHeader,
 };
 
 export default theme;

@@ -23,6 +23,7 @@ const {
   umdGrid,
   umdLinksGroup,
   umdLock,
+  umdHeader,
 } = umdTheme;
 
 const theme = {
@@ -50,6 +51,7 @@ const components = {
   ...umdCta,
   ...captionedMedia,
   ...umdLoader,
+  ...umdHeader,
 };
 
 const plugins = [

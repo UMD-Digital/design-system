@@ -32,6 +32,10 @@ const WeirdImageOptions = [
   'https://brandportal.umd.edu/m/4f1c9589ac5fa49d/Hero_web-Students_ESJLTC_03292023_SC_5429.jpg',
 ];
 
+const logoOptions = [
+  'https://brandportal.umd.edu/m/139cd2d64cbb69cd/Medium_web-SPP_DGI_Primary_rgb-png.jpg',
+];
+
 const twigTask = () =>
   gulp
     .src(twigSource)
@@ -41,6 +45,7 @@ const twigTask = () =>
           RecImageOptions,
           SquareImageOptions,
           WeirdImageOptions,
+          logoOptions,
         },
       }),
     )

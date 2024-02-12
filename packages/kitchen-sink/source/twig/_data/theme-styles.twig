@@ -18,13 +18,13 @@
 {% macro HeaderLinks() %}
   <ul>
     {% for item in list %}
-      <li><a href="/theme/{{ item.link }}">{{ item.name }}</a></li>
+      <li><a href="/theme/styles/{{ item.link }}">{{ item.name }}</a></li>
     {% endfor %}
   </ul>
 {% endmacro %}
 
 {% macro Links() %}
   {% for item in list %}
-    <a href="/theme/{{ item.link }}">{{ item.name }}</a>
+    <a href="/theme/styles/{{ item.link }}">{{ item.name }}</a>
   {% endfor %}
 {% endmacro %}

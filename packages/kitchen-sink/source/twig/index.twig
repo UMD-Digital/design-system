@@ -1,9 +1,10 @@
 {% extends '_layout.twig' %}
 
-{% import '_data/component-list.twig' as ComponentList %}
-{% import '_data/variable-list.twig' as VariableList %}
-{% import '_data/theme-list.twig' as ThemeList %}
-{% import '_data/feeds-list.twig' as FeedList %}
+{% import '_data/variable.twig' as VariableList %}
+{% import '_data/theme-styles.twig' as ThemeStylesList %}
+{% import '_data/theme-layout.twig' as ThemeLayoutList %}
+{% import '_data/components.twig' as ComponentList %}
+{% import '_data/feeds.twig' as FeedList %}
 
 {% block page %}
   <section>
@@ -12,17 +13,24 @@
         No errors
       </h1>
       <h2 class="umd-sans-extralarge">
-        Theme
-      </h2>
-      <div class="umd-grid-three mb-md">
-        {{ ThemeList.Links() }}
-      </div>
-      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
-      <h2 class="umd-sans-extralarge">
         Variables
       </h2>
       <div class="umd-grid-three mb-md">
         {{ VariableList.Links() }}
+      </div>
+      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
+      <h2 class="umd-sans-extralarge">
+        Theme Styles
+      </h2>
+      <div class="umd-grid-three mb-md">
+        {{ ThemeStylesList.Links() }}
+      </div>
+      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
+      <h2 class="umd-sans-extralarge">
+        Theme Layout
+      </h2>
+      <div class="umd-grid-three mb-md">
+        {{ ThemeLayoutList.Links() }}
       </div>
       <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
       <h2 class="umd-sans-extralarge">

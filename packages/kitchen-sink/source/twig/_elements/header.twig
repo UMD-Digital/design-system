@@ -1,20 +1,14 @@
-{% import '../_data/component-list.twig' as ComponentList %}
-{% import '../_data/variable-list.twig' as VariableList %}
-{% import '../_data/theme-list.twig' as ThemeList %}
-{% import '../_data/feeds-list.twig' as FeedsList %}
+{% import '../_data/variable.twig' as VariableList %}
+{% import '../_data/theme-styles.twig' as ThemeStylesList %}
+{% import '../_data/theme-layout.twig' as ThemeLayoutList %}
+{% import '../_data/components.twig' as ComponenstList %}
+{% import '../_data/feeds.twig' as FeedsList %}
 
 <header>
   <div class="umd-lock">
     <nav style="display: flex; justify-content: flex-end;">
       <umd-element-nav-item>
         <a slot="primary-link" href="/"><span>Home</span></a>
-      </umd-element-nav-item>
-
-      <umd-element-nav-item>
-        <a slot="primary-link" href="/theme"><span>Theme</span></a>
-        <div slot="dropdown-links">
-          {{ ThemeList.HeaderLinks() }}
-        </div>
       </umd-element-nav-item>
 
       <umd-element-nav-item>
@@ -25,11 +19,29 @@
       </umd-element-nav-item>
 
       <umd-element-nav-item>
+        <a slot="primary-link" href="/theme/styles">
+          <span>Theme Styles</span>
+        </a>
+        <div slot="dropdown-links">
+          {{ ThemeStylesList.HeaderLinks() }}
+        </div>
+      </umd-element-nav-item>
+
+      <umd-element-nav-item>
+        <a slot="primary-link" href="/theme/layout">
+          <span>Theme Layout</span>
+        </a>
+        <div slot="dropdown-links">
+          {{ ThemeLayoutList.HeaderLinks() }}
+        </div>
+      </umd-element-nav-item>
+
+      <umd-element-nav-item>
         <a slot="primary-link" href="/components">
           <span>Component Library</span>
         </a>
         <div slot="dropdown-links">
-          {{ ComponentList.HeaderLinks() }}
+          {{ ComponenstList.HeaderLinks() }}
         </div>
       </umd-element-nav-item>
 

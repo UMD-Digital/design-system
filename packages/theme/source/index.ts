@@ -20,8 +20,8 @@ import { umdCta } from './elements/call-to-action';
 import { umdLoader } from './elements/loader';
 import { captionedMedia } from './elements/media-with-caption';
 import { richText } from './elements/rich-text';
-import { umdLinksGroup } from './layout/umd-links-group';
 import { umdHeader } from './components/header';
+import { umdIntro } from './components/intro';
 
 const theme = {
   animatedLinks,
@@ -42,9 +42,9 @@ const theme = {
   umdLoader,
   umdFlexGrid,
   umdGrid,
-  umdLinksGroup,
   umdLock,
   umdHeader,
+  umdIntro,
 };
 
 export default theme;

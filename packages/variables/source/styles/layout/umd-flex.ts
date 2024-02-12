@@ -5,6 +5,36 @@ const roundToThree = (number: number): number => {
   return Math.round(number * 1000) / 1000;
 };
 
+const flexRowBase = {
+  alignItems: 'flex-start',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: spacing.sm,
+  justifyContent: 'flex-start',
+
+  [`@media (${queries.large.min})`]: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+};
+
+const umdFlexRowAuto = {
+  '.umd-layout-flex-row-auto': { ...flexRowBase },
+
+  '.umd-layout-flex-row-center': {
+    ...flexRowBase,
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    [`@media (${queries.large.min})`]: {
+      alignItems: 'flex-start',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+  },
+};
+
 const flexBase = {
   display: 'flex',
   flexDirection: 'column',
@@ -122,6 +152,7 @@ const umdFlexSpecial = {
 };
 
 const umdFlexGrid = {
+  ...umdFlexRowAuto,
   ...flexGridCore,
   ...flexGridContent,
   ...umdFlexSpecial,

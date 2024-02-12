@@ -21,9 +21,9 @@ const {
   umdLoader,
   umdFlexGrid,
   umdGrid,
-  umdLinksGroup,
   umdLock,
   umdHeader,
+  umdIntro,
 } = umdTheme;
 
 const theme = {
@@ -47,11 +47,11 @@ const components = {
   ...umdLock,
   ...umdGrid,
   ...umdFlexGrid,
-  ...umdLinksGroup,
   ...umdCta,
   ...captionedMedia,
   ...umdLoader,
   ...umdHeader,
+  ...umdIntro,
 };
 
 const plugins = [

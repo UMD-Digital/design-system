@@ -20,6 +20,7 @@ import { umdEyebrow } from './styles/common/eyebrow';
 import { umdFlexGrid } from './styles/layout/umd-flex';
 import { umdGrid } from './styles/layout/umd-grid';
 import { umdLock } from './styles/layout/umd-lock';
+import { umdAlignedContent } from './styles/layout/umd-aligned-content';
 
 export {
   breakpoints,
@@ -43,4 +44,5 @@ export {
   umdEyebrow,
   umdGrid,
   umdLock,
+  umdAlignedContent,
 };

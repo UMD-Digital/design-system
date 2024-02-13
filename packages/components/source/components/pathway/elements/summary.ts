@@ -108,7 +108,13 @@ const HeadlineStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${SUMMARY_TEXT_CONTAINER} {
-    margin-top: ${spacing.md};
+    margin-top: ${spacing.sm};
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+    * + .${SUMMARY_TEXT_CONTAINER} {
+      margin-top: ${spacing.md};
+    }
   }
 
   ${ConvertJSSObjectToStyles({
@@ -121,7 +127,13 @@ const TextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${SUMMARY_ACTIONS_CONTAINER} {
-    margin-top: ${spacing.lg};
+    margin-top: ${spacing.sm};
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+    * + .${SUMMARY_ACTIONS_CONTAINER} {
+      margin-top: ${spacing.lg};
+    }
   }
 `;
 

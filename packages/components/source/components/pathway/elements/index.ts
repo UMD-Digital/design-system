@@ -1,4 +1,4 @@
-import { Reset } from 'helpers/styles';
+import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateSummaryColumn, STYLES_PATHWAY_SUMMARY_COLUMN } from './summary';
 import { CreateImageColumn, STYLES_PATHWAY_IMAGE_COLUMN } from './image';
 import {
@@ -7,6 +7,7 @@ import {
 } from './highlight';
 import { ELEMENTS, BREAKPOINTS, VARIABLES } from '../globals';
 import { ELEMENT_TYPE } from '../component';
+import { umdLock } from '@universityofmaryland/variables';
 
 const PATHWAY_CONTAINER_WRAPPER = 'umd-pathway-container-wrapper';
 
@@ -14,6 +15,12 @@ const PATHWAY_CONTAINER_WRAPPER = 'umd-pathway-container-wrapper';
 const ImageVariation = `
   .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${PATHWAY_CONTAINER_WRAPPER}{
     align-items: initial;
+  }
+
+  @container umd-pathway (max-width: ${BREAKPOINTS.medium - 1}px) {
+    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${PATHWAY_CONTAINER_WRAPPER} {
+      padding: 0;
+    }
   }
 `
 
@@ -23,9 +30,11 @@ const STYLES_CONTAINER = `
     container: umd-pathway / inline-size;
   }
 
-  .${PATHWAY_CONTAINER_WRAPPER} {
-    
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${PATHWAY_CONTAINER_WRAPPER}`]: umdLock['.umd-lock']
+    },
+  })}
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     .${PATHWAY_CONTAINER_WRAPPER} {

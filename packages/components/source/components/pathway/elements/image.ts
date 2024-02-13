@@ -24,6 +24,7 @@ const SizeStyles = `
   .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE_SCALED}="false"] img {
     object-fit: contain;
     height: inherit;
+    min-height: inherit;
   }
 `;
 
@@ -40,6 +41,12 @@ export const STYLES_PATHWAY_IMAGE_COLUMN = `
   .${PATHWAY_IMAGE_CONTAINER} img {
     object-fit: cover;
     object-position: center;
+  }
+
+  @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
+    .${PATHWAY_IMAGE_CONTAINER} img {
+      min-height: 656px;
+    }
   }
 
   ${PositionStyles}

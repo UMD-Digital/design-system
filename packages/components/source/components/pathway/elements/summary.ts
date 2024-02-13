@@ -68,13 +68,13 @@ const WithHighlightStyles = `
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
-      padding-right: ${spacing.md};
+      padding-right: ${spacing['4xl']};
     }
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
     .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
-      padding-right: ${spacing.xl};
+      padding-right: ${spacing['6xl']};
     }
   }
 `;

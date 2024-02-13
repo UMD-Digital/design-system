@@ -1,5 +1,6 @@
 import {
   colors,
+  fontSize,
   richText,
   spacing,
   typography,
@@ -128,6 +129,10 @@ const TextStyles = `
       [`.${SUMMARY_TEXT_CONTAINER} *`]: richText['.umd-rich-text'],
     },
   })}
+
+  .${SUMMARY_TEXT_CONTAINER} * {
+    font-size: ${fontSize['lg']};
+  }
 `;
 
 // prettier-ignore

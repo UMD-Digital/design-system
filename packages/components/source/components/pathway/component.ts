@@ -13,12 +13,14 @@ export class UMDPathwayElement extends HTMLElement {
   _shadow: ShadowRoot;
   _isImageFirst: boolean;
   _isImageScaled: boolean;
+  _isThemeDark: boolean;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._isImageFirst = true;
     this._isImageScaled = true;
+    this._isThemeDark = false;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
@@ -35,9 +37,11 @@ export class UMDPathwayElement extends HTMLElement {
   connectedCallback() {
     const isImageFirst = this.getAttribute('isImageFirst');
     const isImageScaled = this.getAttribute('isImageScaled');
+    const isThemeDark = this.getAttribute('theme') === 'dark';
 
     if (isImageFirst === 'false') this._isImageFirst = false;
     if (isImageScaled === 'false') this._isImageScaled = false;
+    if (isThemeDark) this._isThemeDark = true;
 
     const container = CreateShadowDom({ element: this });
     this._shadow.appendChild(container);

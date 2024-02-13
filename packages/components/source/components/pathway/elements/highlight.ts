@@ -1,12 +1,23 @@
 import { colors, spacing, typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { BREAKPOINTS, SLOTS } from '../globals';
+import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
 const PATHWAY_HIGHLIGHT_CONTAINER_TEXT = 'umd-pathway-highlight-text';
+
+// prettier-ignore
+const ThemeStyles = `
+  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} {
+    background-color: ${colors.black};
+  }
+
+  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} * {
+    color: ${colors.white};
+  }
+`
 
 // prettier-ignore
 export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
@@ -63,6 +74,8 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
       [`.${PATHWAY_HIGHLIGHT_CONTAINER_TEXT}`]: typography['.umd-sans-larger'],
     },
   })}
+
+  ${ThemeStyles}
 `
 
 export const CreateHighlightColumn = ({

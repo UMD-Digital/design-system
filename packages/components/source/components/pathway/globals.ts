@@ -19,4 +19,5 @@ export const VARIABLES = {
   ATTRIBUTE_HIGHLIGHT: 'data-highlight',
   ATTRIBUTE_IMAGE_POSITION: 'data-image-position',
   ATTRIBUTE_IMAGE_SCALED: 'data-image-scaled',
+  ATTRIBUTE_THEME: 'data-theme',
 };

@@ -23,6 +23,14 @@ const SUMMARY_ACTIONS_CONTAINER =
   'umd-pathway-summary-column-actions-container';
 
 // prettier-ignore
+const ThemeStyles = `
+  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${SUMMARY_HEADLINE_CONTAINER},
+  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${SUMMARY_TEXT_CONTAINER} * {
+    color: ${colors.white};
+  }
+`
+
+// prettier-ignore
 const PositionStyles = `
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE_POSITION}="right"] .${SUMMARY_CONTAINER} {
@@ -162,6 +170,7 @@ export const STYLES_PATHWAY_SUMMARY_COLUMN = `
   ${WithImageStyles}
   ${WithHighlightStyles}
   ${PositionStyles}
+  ${ThemeStyles}
 `;
 
 export const CreateSummaryColumn = ({ element }: { element: ELEMENT_TYPE }) => {

@@ -1,3 +1,4 @@
+import { colors, umdLock } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateSummaryColumn, STYLES_PATHWAY_SUMMARY_COLUMN } from './summary';
 import { CreateImageColumn, STYLES_PATHWAY_IMAGE_COLUMN } from './image';
@@ -7,7 +8,6 @@ import {
 } from './highlight';
 import { ELEMENTS, BREAKPOINTS, VARIABLES } from '../globals';
 import { ELEMENT_TYPE } from '../component';
-import { umdLock } from '@universityofmaryland/variables';
 
 const PATHWAY_CONTAINER_WRAPPER = 'umd-pathway-container-wrapper';
 
@@ -87,6 +87,9 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   if (!imageColumn && highlightColumn) {
     wrapper.appendChild(highlightColumn);
     container.setAttribute(`${VARIABLES.ATTRIBUTE_HIGHLIGHT}`, '');
+    if (element._isThemeDark) {
+      container.setAttribute(VARIABLES.ATTRIBUTE_THEME, '');
+    }
   }
 
   container.classList.add(ELEMENTS.PATHWAY_CONTAINER);

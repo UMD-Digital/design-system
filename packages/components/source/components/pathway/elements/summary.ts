@@ -1,4 +1,5 @@
 import {
+  colors,
   richText,
   spacing,
   typography,
@@ -79,8 +80,9 @@ const WithHighlightStyles = `
 
 // prettier-ignore
 const EyebrowStyles = `
-  .${SUMMARY_EYEBROW_CONTAINER}  {
+  .${SUMMARY_EYEBROW_CONTAINER} {
     margin-bottom: ${spacing.sm};
+    color: ${colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -103,6 +105,10 @@ const HeadlineStyles = `
       [`.${SUMMARY_HEADLINE_CONTAINER} *`]: typography['.umd-sans-largest'],
     },
   })}
+
+  .${SUMMARY_HEADLINE_CONTAINER} {
+    color: ${colors.black};
+  }
 `;
 
 // prettier-ignore

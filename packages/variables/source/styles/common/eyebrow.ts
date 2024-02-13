@@ -11,6 +11,7 @@ const umdEyebrow = {
     display: `inline-block`,
     clipPath: `polygon(8% 0, 100% 0, 92% 100%, 0 100%)`,
     fontWeight: fontWeight.bold,
+    color: colors.black,
   },
 };
 

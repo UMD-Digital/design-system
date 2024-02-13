@@ -1,3 +1,4 @@
+import WebpackShellPlugin from 'webpack-shell-plugin-next';
 const path = require('path');
 
 module.exports = () => {
@@ -36,6 +37,14 @@ module.exports = () => {
     ],
   };
 
+  const plugins = [
+    new WebpackShellPlugin({
+      onAfterDone: {
+        scripts: ['cd ../kitchen-sink && npx yarn build'],
+      },
+    }),
+  ];
+
   const output = {
     path: path.resolve('dist'),
     filename: '[name].js',
@@ -56,6 +65,7 @@ module.exports = () => {
   return {
     entry,
     mode,
+    plugins,
     module,
     optimization,
     output,

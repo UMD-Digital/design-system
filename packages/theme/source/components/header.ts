@@ -22,15 +22,12 @@ const umdHeader = {
   '.umd-header-logo-column': {
     alignItems: 'center',
     display: 'flex',
-    flex: 'none',
     justifyContent: 'flex-start',
-    gap: spacing.sm,
     position: 'relative',
   },
 
   '.umd-header-logo': {
     display: 'block',
-    flex: 'none',
     maxWidth: `calc(100% - (${spacing['6xl']} + 4px))`,
     borderLeft: `1px solid ${colors.gray.light}`,
     paddingLeft: spacing.sm,

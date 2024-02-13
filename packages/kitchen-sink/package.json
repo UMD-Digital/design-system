@@ -6,6 +6,7 @@
   "repository": "",
   "scripts": {
     "clean": "rm -rf build",
+    "build": "webpack",
     "webpack": "webpack -w",
     "start": "npm run webpack"
   },

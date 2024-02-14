@@ -159,7 +159,7 @@ const specialAnimations = {
     ...baseLink,
 
     backgroundImage: `linear-gradient(${colors.white}, ${colors.white})`,
-    backgroundPosition: 'left calc(100% - 2px)',
+    backgroundPosition: 'left calc(100% - 1px)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 1px',
     color: colors.white,
@@ -178,7 +178,7 @@ const specialAnimations = {
     ...baseLink,
 
     backgroundImage: `linear-gradient(currentColor, currentColor)`,
-    backgroundPosition: 'left calc(100% - 2px)',
+    backgroundPosition: 'left calc(100% - 1px)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 1px',
     color: 'currentColor',

@@ -1,6 +1,6 @@
 import { breakpoints, queries } from './tokens/breakpoints';
 import { colors } from './tokens/colors';
-import { fontFamily, fontSize, fontWeight } from './tokens/fonts';
+import { fontFace, fontFamily, fontSize, fontWeight } from './tokens/fonts';
 import { spacing } from './tokens/spacing';
 
 import { screenReaderOnly } from './styles/common/accessibility';
@@ -26,6 +26,7 @@ export {
   breakpoints,
   queries,
   colors,
+  fontFace,
   fontFamily,
   fontSize,
   fontWeight,

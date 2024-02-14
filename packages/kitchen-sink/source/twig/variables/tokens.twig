@@ -655,13 +655,25 @@
 
         <div class="umd-rich-text mb-sm">
           <ul>
-            <li class="mb-3xl text-max">
+            <li class="mb-4xl text-max">
               <strong>max:</strong>
+              <span>120px</span>
+            </li>
+            <li class="mb-4xl text-10xl">
+              <strong>10xl:</strong>
+              <span>96px</span>
+            </li>
+            <li class="mb-3xl text-9xl">
+              <strong>9xl:</strong>
               <span>80px</span>
+            </li>
+            <li class="mb-3xl text-8xl">
+              <strong>8xl:</strong>
+              <span>72px</span>
             </li>
             <li class="mb-2xl text-7xl">
               <strong>7xl:</strong>
-              <span>72px</span>
+              <span>64px</span>
             </li>
             <li class="mb-xl text-6xl">
               <strong>6xl:</strong>
@@ -764,28 +776,32 @@
         </h3>
 
         <div class="umd-rich-text mb-sm">
-          <p class="text-lg font-sans">
-            'Manrope', Helvetica, Arial, Verdana, sans-serif
+          <p class="text-2xl font-campaign">
+            <strong>Campaign:</strong> 'Barlow Condensed', Arial Narrow, sans-serif
           </p>
-          <p class="text-lg font-serif">
-            'Crimson Pro', Georgia, serif
+          <p class="text-2xl font-sans">
+            <strong>Sans Serif:</strong> 'Interstate', Helvetica, Arial, Verdana,
+            sans-serif
           </p>
-          <p class="text-lg font-mono">
-            'IBM Plex Mono', monospace
+          <p class="text-2xl font-serif">
+            <strong>Serif:</strong> 'Crimson Pro', Georgia, serif
+          </p>
+          <p class="text-2xl font-mono">
+            <strong>Monospaced</strong> monospace <em>(system font)</em>
           </p>
 
           <p>
-            <strong>Fonts are available as variable Google Fonts:</strong>
+            <strong>
+              Campaign, and serif fonts are available from Google Fonts. San
+              Serif is loaded locally:
+            </strong>
           </p>
 
           {# prettier-ignore #}
           <pre class="overflow-x-scroll">
-&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;
-&lt;link rel="preconnect"
-  href="https://fonts.gstatic.com"
-  crossorigin /&gt;
-&lt;link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono&family=Manrope:wght@400;500;600;700;800&display=swap"
-  rel="stylesheet" /&gt;</pre>
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,800;1,700;1,800&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"&gt;</pre>
         </div>
       </div>
 

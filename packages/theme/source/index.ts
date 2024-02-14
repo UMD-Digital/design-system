@@ -1,6 +1,7 @@
 import {
   breakpoints,
   colors,
+  fontFace,
   fontFamily,
   fontSize,
   fontWeight,
@@ -24,6 +25,7 @@ import { umdIntro } from './components/intro';
 
 export const base = {
   colors,
+  fontFace,
   fontFamily,
   fontSize,
   fontWeight,

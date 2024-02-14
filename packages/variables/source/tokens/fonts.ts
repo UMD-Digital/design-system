@@ -1,3 +1,19 @@
+import {
+  fontFaceInterstateLight,
+  fontFaceInterstateNormal,
+  fontFaceInterstateBold,
+  fontFaceInterstateBlack,
+} from './font-face-interstate';
+
+const fontFace = {
+  '@font-face': [
+    fontFaceInterstateLight['@font-face'],
+    fontFaceInterstateNormal['@font-face'],
+    fontFaceInterstateBold['@font-face'],
+    fontFaceInterstateBlack['@font-face'],
+  ],
+};
+
 const fontSize = {
   min: '12px',
   sm: '14px',
@@ -9,8 +25,11 @@ const fontSize = {
   '4xl': '32px',
   '5xl': '48px',
   '6xl': '56px',
-  '7xl': '72px',
-  max: '80px',
+  '7xl': '64px',
+  '8xl': '72px',
+  '9xl': '80px',
+  '10xl': '96px',
+  max: '120px',
 };
 
 const fontWeight = {
@@ -27,9 +46,10 @@ const fontWeight = {
 };
 
 const fontFamily = {
-  sans: "'Manrope', Helvetica, Arial, Verdana, sans-serif",
+  campaign: "'Barlow Condensed', Arial Narrow, sans-serif",
+  sans: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
   serif: "'Crimson Pro', Georgia, serif",
-  mono: "'IBM Plex Mono', monospace",
+  mono: 'monospace',
 };
 
-export { fontFamily, fontSize, fontWeight };
+export { fontFace, fontFamily, fontSize, fontWeight };

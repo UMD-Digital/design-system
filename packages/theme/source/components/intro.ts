@@ -2,11 +2,13 @@ import {
   spacing,
   colors,
   umdAlignedContent,
+  queries,
 } from '@universityofmaryland/variables';
 
 const umdIntro = {
   'umd-component-intro': {
-    container: 'umd-intro inline-size',
+    containerName: 'umd-component-intro',
+    containerType: 'inline-size',
     display: 'block',
 
     '& .intro-content-wrapper': {
@@ -29,7 +31,11 @@ const umdIntro = {
     },
   },
 
-  '.umd-intro-type-simple': {
+  'umd-component-intro-simple': {
+    containerName: 'umd-component-intro',
+    containerType: 'inline-size',
+    display: 'block',
+
     '& .intro-content-wrapper': {
       paddingTop: '0',
 
@@ -39,12 +45,16 @@ const umdIntro = {
     },
   },
 
-  '.umd-intro-type-wide': {
+  'umd-component-intro-wide': {
+    containerName: 'umd-component-intro',
+    containerType: 'inline-size',
+    display: 'block',
+
     '& .intro-content-wrapper': {
       display: 'block',
-      paddingTop: '0',
+      padding: '0',
 
-      '@container umd-intro (min-width: 640px)': {
+      [`@container umd-component-intro (${queries.large.min})`]: {
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'space-between',
@@ -59,21 +69,22 @@ const umdIntro = {
         maxWidth: '100%',
         marginTop: spacing.xs,
 
-        '@container umd-intro (min-width: 640px)': {
+        [`@container umd-component-intro (${queries.large.min})`]: {
           marginTop: '0',
         },
 
         '&:first-child': {
           marginTop: '0',
           marginRight: spacing.md,
+          paddingBottom: '0',
 
-          '@container umd-intro (min-width: 640px)': {
+          [`@container umd-component-intro (${queries.large.min})`]: {
             maxWidth: '66.666%',
           },
         },
 
         '&:last-child': {
-          '@container umd-intro (min-width: 640px)': {
+          [`@container umd-component-intro (${queries.large.min})`]: {
             maxWidth: '33.333%',
           },
         },

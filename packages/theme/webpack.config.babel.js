@@ -1,7 +1,8 @@
 import WebpackShellPlugin from 'webpack-shell-plugin-next';
 const path = require('path');
 
-module.exports = () => {
+module.exports = (env) => {
+  const buildOnly = env && env.BUILD_ONLY && env.BUILD_ONLY === 'true';
   const mode = 'production';
 
   const optimization = {
@@ -37,13 +38,17 @@ module.exports = () => {
     ],
   };
 
-  const plugins = [
-    new WebpackShellPlugin({
-      onAfterDone: {
-        scripts: ['cd ../kitchen-sink && npx yarn build'],
-      },
-    }),
-  ];
+  const plugins = [];
+
+  if (!buildOnly) {
+    plugins.push(
+      new WebpackShellPlugin({
+        onAfterDone: {
+          scripts: ['cd ../kitchen-sink && npx yarn build'],
+        },
+      }),
+    );
+  }
 
   const output = {
     path: path.resolve('dist'),

@@ -152,8 +152,8 @@ const umdFlexSpecial = {
 };
 
 const umdFlexGrid = {
-  ...umdFlexRowAuto,
   ...flexGridCore,
+  ...umdFlexRowAuto,
   ...flexGridContent,
   ...umdFlexSpecial,
 };

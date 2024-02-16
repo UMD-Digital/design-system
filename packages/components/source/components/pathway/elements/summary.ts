@@ -5,6 +5,7 @@ import {
   spacing,
   typography,
   umdEyebrow,
+  umdFlexGrid,
 } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
@@ -154,6 +155,12 @@ const ActionStyles = `
       margin-top: ${spacing.lg};
     }
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${SUMMARY_ACTIONS_CONTAINER}`]: umdFlexGrid['.umd-layout-flex-row-auto'],
+    },
+  })}
 `;
 
 // prettier-ignore

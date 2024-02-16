@@ -11,6 +11,7 @@
     "dist"
   ],
   "scripts": {
+    "build": "webpack",
     "clean": "rm -rf dist",
     "start": "webpack -w"
   },

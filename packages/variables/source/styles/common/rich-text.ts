@@ -36,7 +36,7 @@ const richTextBase = {
     },
 
     '& strong, & b': {
-      fontWeight: fontWeight.black,
+      fontWeight: fontWeight.bold,
     },
 
     '& u': {
@@ -138,7 +138,7 @@ const richTextTables = {
 
 const richText = {
   '.umd-rich-text': {
-    fontWeight: fontWeight.medium,
+    fontWeight: fontWeight.normal,
 
     ...richTextBase['.umd-rich-text-base'],
     ...richTextCoding['.umd-rich-text-coding'],

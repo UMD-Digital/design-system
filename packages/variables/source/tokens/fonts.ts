@@ -1,16 +1,26 @@
 import {
-  fontFaceInterstateLight,
-  fontFaceInterstateNormal,
-  fontFaceInterstateBold,
-  fontFaceInterstateBlack,
+  fontFaceInterfaceThin,
+  fontFaceInterfaceExtraLight,
+  fontFaceInterfaceLight,
+  fontFaceInterfaceRegular,
+  fontFaceInterfaceItalic,
+  fontFaceInterfaceBold,
+  fontFaceInterfaceBoldItalic,
+  fontFaceInterfaceBlack,
+  fontFaceInterfaceUltraBlack,
 } from './font-face-interstate';
 
 const fontFace = {
   '@font-face': [
-    fontFaceInterstateLight['@font-face'],
-    fontFaceInterstateNormal['@font-face'],
-    fontFaceInterstateBold['@font-face'],
-    fontFaceInterstateBlack['@font-face'],
+    fontFaceInterfaceThin['@font-face'],
+    fontFaceInterfaceExtraLight['@font-face'],
+    fontFaceInterfaceLight['@font-face'],
+    fontFaceInterfaceRegular['@font-face'],
+    fontFaceInterfaceItalic['@font-face'],
+    fontFaceInterfaceBold['@font-face'],
+    fontFaceInterfaceBoldItalic['@font-face'],
+    fontFaceInterfaceBlack['@font-face'],
+    fontFaceInterfaceUltraBlack['@font-face'],
   ],
 };
 

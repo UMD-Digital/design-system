@@ -1,12 +1,10 @@
-import {
-  animatedLinks,
-  colors,
-  spacing,
-} from '@universityofmaryland/variables';
+import { Tokens, animatedLinks } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 import { ElementType } from 'components/nav-item/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
+
+const { colors, spacing } = Tokens;
 
 const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
 const TWO_COLUMN_CONTAINER = 'two-column-container';

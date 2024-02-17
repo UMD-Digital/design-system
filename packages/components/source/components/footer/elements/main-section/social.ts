@@ -1,4 +1,4 @@
-import { colors, spacing, typography } from '@universityofmaryland/variables';
+import { Tokens, typography } from '@universityofmaryland/variables';
 import {
   FACEBOOK_ICON,
   X_ICON,
@@ -15,6 +15,8 @@ import {
   SLOTS,
 } from 'components/footer/globals';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
+
+const { spacing, colors } = Tokens;
 
 export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';

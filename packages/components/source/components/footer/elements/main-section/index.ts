@@ -1,9 +1,11 @@
-import { colors } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';
+
+const { colors } = Tokens;
 
 const SLOT_BACKGROUND_IMAGE_NAME = 'background-image';
 const MAIN_CONTAINER = 'umd-footer-main-container';

@@ -1,13 +1,14 @@
 import {
   animatedLinks,
-  colors,
-  spacing,
+  Tokens,
   typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
+
+const { colors, spacing } = Tokens;
 
 const ALERT_HEADLINE = 'umd-alert-headline';
 

@@ -1,9 +1,11 @@
-import { colors, spacing, typography } from '@universityofmaryland/variables';
+import { Tokens, typography } from '@universityofmaryland/variables';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreatePrimarySlide, primarySliderStyles } from './primary-slide';
 import { CreateChildSlide, childSliderStyles } from './child-slides';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+
+const { colors, spacing } = Tokens;
 
 const DRAWER_SLIDER_CONTAINER = 'umd-element-drawer-slider-container';
 const DRAWER_SLIDER = 'umd-element-drawer-slider';

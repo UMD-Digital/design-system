@@ -1,5 +1,7 @@
-import { colors } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import postcss from 'postcss';
+
+const { colors } = Tokens;
 
 const postcssNesting = require('postcss-nesting');
 const postcssJs = require('postcss-js');

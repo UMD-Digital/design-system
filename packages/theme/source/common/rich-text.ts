@@ -1,11 +1,6 @@
-import {
-  colors,
-  spacing,
-  typography,
-  fontFamily,
-  UmdFields,
-} from '@universityofmaryland/variables';
+import { typography, UmdFields, Tokens } from '@universityofmaryland/variables';
 
+const { colors, spacing, fontFamily } = Tokens;
 const { Text } = UmdFields;
 
 const RichTextCoding = {

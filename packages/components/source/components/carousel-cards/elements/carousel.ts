@@ -1,5 +1,3 @@
-import { umdLock } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 import {

@@ -1,14 +1,14 @@
 import {
   animatedLinks,
-  colors,
-  spacing,
   typography,
   umdCta,
+  Tokens,
   UmdFields,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
+const { colors, spacing } = Tokens;
 const { Text } = UmdFields;
 
 const BREAKPOINTS = {

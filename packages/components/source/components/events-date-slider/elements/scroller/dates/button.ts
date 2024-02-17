@@ -1,9 +1,11 @@
-import { colors, spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
 import { ELEMENT_TYPE } from 'components/events-date-slider/component';
 import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
 import { ButtonVisibilityLogic } from '../../../services/helpers';
 import { EventSlideDates } from '../../../services/events';
+
+const { colors, spacing } = Tokens;
 
 const FORWARD_ARROW_CLASS = 'umd-element-date-slider-forward-arrow';
 const BACK_ARROW_CLASS = 'umd-element-date-slider-back-arrow';

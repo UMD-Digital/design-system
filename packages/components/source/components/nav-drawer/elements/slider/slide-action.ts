@@ -1,13 +1,10 @@
-import {
-  colors,
-  fontWeight,
-  spacing,
-  typography,
-} from '@universityofmaryland/variables';
+import { Tokens, typography } from '@universityofmaryland/variables';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { VARIABLES, ELEMENTS } from 'components/nav-drawer/globals';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+
+const { colors, fontWeight, spacing } = Tokens;
 
 const DRAWER_SLIDE_ACTION_BUTTON = 'umd-element-drawer-slide-action-button';
 

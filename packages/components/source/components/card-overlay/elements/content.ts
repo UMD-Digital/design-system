@@ -1,13 +1,14 @@
 import {
   typography,
-  spacing,
-  colors,
+  Tokens,
   animatedLinks,
 } from '@universityofmaryland/variables';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/card-overlay/globals';
+
+const { spacing, colors } = Tokens;
 
 const TEXT_CHARACTER_LIMIT = 140;
 

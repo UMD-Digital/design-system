@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
@@ -7,6 +7,8 @@ import {
   CreateCallToActionContainer,
   CALL_TO_ACTION_CONTAINER,
 } from '../call-to-action';
+
+const { spacing } = Tokens;
 
 const LOGO_CONTAINER = 'umd-footer-logo-container';
 const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';

@@ -1,8 +1,10 @@
-import { spacing, umdCta } from '@universityofmaryland/variables';
+import { Tokens, umdCta } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
+
+const { spacing } = Tokens;
 
 // prettier-ignore
 export const CtaStyles = `

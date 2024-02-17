@@ -1,4 +1,4 @@
-import { colors, spacing, umdLock } from '@universityofmaryland/variables';
+import { Tokens, umdLock } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
@@ -14,6 +14,8 @@ import {
 } from '../call-to-action';
 import { ContactContainerStyles, CreateContactContainer } from './contact';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
+
+const { colors, spacing } = Tokens;
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
 const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';

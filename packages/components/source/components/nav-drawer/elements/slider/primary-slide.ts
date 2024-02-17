@@ -1,8 +1,10 @@
-import { colors, spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { MakeSlot } from 'helpers/ui';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction, slideActionStyles } from './slide-action';
+
+const { colors, spacing } = Tokens;
 
 const DRAWER_SLIDER_PRIMARY_CONTAINER = 'umd-element-drawer-primary-container';
 const DRAWER_SLIDER_PRIMARY_LINKS_CONTAINER =

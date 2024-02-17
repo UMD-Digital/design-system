@@ -1,4 +1,6 @@
-import { colors, spacing, queries } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
+
+const { colors, spacing, queries } = Tokens;
 
 export default {
   'umd-element-carousel-cards:not(:defined)': {

@@ -1,8 +1,6 @@
 import {
   animatedLinks,
-  colors,
-  spacing,
-  fontWeight,
+  Tokens,
   typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
@@ -13,6 +11,8 @@ import {
   VARIABLES,
 } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
+
+const { colors, spacing, fontWeight } = Tokens;
 
 const HEADLINE_ATTRIBUTE = 'data-headline';
 const HEADLINE_ATTRIBUTE_EMPTY = 'data-empty';

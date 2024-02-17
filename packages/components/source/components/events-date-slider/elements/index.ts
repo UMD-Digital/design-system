@@ -1,4 +1,4 @@
-import { colors } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
 import { ELEMENT_TYPE } from 'components/events-date-slider/component';
 import {
@@ -9,6 +9,8 @@ import {
 import { SizeDatesElements } from '../services/helpers';
 import { CreateCoverElement, CoverStyles } from './cover';
 import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
+
+const { colors } = Tokens;
 
 const CONTAINER_CLASS = 'umd-element-date-slider-container';
 const CONTAINER_WRAPPER_CLASS = 'umd-element-date-slider-container-wrapper';

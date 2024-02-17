@@ -1,4 +1,4 @@
-import { colors, umdLock } from '@universityofmaryland/variables';
+import { umdLock } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateSummaryColumn, STYLES_PATHWAY_SUMMARY_COLUMN } from './summary';
 import { CreateImageColumn, STYLES_PATHWAY_IMAGE_COLUMN } from './image';

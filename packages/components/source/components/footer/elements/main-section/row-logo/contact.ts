@@ -1,7 +1,6 @@
 import {
   animatedLinks,
-  colors,
-  spacing,
+  Tokens,
   typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
@@ -18,6 +17,8 @@ import {
   VARIABLES,
 } from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
+
+const { colors, spacing } = Tokens;
 
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_HEADLINE = 'umd-footer-contact-list-headline';

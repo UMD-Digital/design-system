@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { FORWARD_ARROW_ICON } from 'assets/icons';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 import {
@@ -7,6 +7,7 @@ import {
   VARIABLES,
 } from 'components/carousel-cards/globals';
 
+const { colors, spacing } = Tokens;
 const CAROUSEL_CARDS_BUTTON = `umd-carousel-cards-button`;
 
 const backwardsButtonStyles = `

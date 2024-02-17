@@ -1,5 +1,5 @@
-import { queries } from '../../tokens/breakpoints';
-import { spacing } from '../../tokens/spacing';
+import { queries } from '../tokens/breakpoints';
+import { spacing } from '../tokens/spacing';
 
 const umdAlignedContentBase = {
   display: 'block',

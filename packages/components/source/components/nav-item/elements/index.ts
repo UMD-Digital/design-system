@@ -1,13 +1,10 @@
-import {
-  colors,
-  fontFamily,
-  fontSize,
-  fontWeight,
-} from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
 import { ElementType } from 'components/nav-item/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
+
+const { colors, fontFamily, fontSize, fontWeight } = Tokens;
 
 // prettier-ignore
 const hasDropdownStyles = `

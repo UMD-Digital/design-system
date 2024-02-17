@@ -1,6 +1,5 @@
 import {
-  colors,
-  spacing,
+  Tokens,
   typography,
   umdCta,
   UmdFields,
@@ -14,6 +13,7 @@ import {
 } from 'components/carousel-cards/globals';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 
+const { colors, spacing } = Tokens;
 const { Text } = UmdFields;
 
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';

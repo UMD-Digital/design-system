@@ -1,4 +1,4 @@
-import { spacing, umdGrid } from '@universityofmaryland/variables';
+import { Tokens, umdGrid } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { FetchGraphQL } from 'helpers/xhr';
 import { CreateEntries, STYLES_ARTICLE } from 'elements/article';
@@ -19,6 +19,8 @@ type VariablesType = {
   limit?: number;
   offset?: number;
 };
+
+const { spacing } = Tokens;
 
 const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 const LAYOUT_CONTAINER = 'umd-feeds-news-layout-container';

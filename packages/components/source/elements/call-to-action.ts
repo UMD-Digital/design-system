@@ -1,5 +1,4 @@
-import { colors, fontSize, spacing } from '@universityofmaryland/variables';
-import { Debounce } from 'helpers/performance';
+import { Tokens } from '@universityofmaryland/variables';
 import { NEW_WINDOW_ICON, DOCUMENT_ICON, FEARLESS_ICON } from 'assets/icons';
 import {
   STYLES_CTA_OUTLINE,
@@ -13,6 +12,8 @@ import {
   STYLES_CTA_PRIMARY,
   CLASS_STYLES_REF_CTA_PRIMARY,
 } from 'styles/call-to-action-primary';
+
+const { colors, fontSize, spacing } = Tokens;
 
 const MAX_WIDTH = 380;
 const ATTR_SIZE = 'data-size';

@@ -1,4 +1,4 @@
-import { colors, spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { CLOSE_BUTTON_ICON, NOTIFICATION_ICON } from 'assets/icons';
 import { Reset } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS } from '../globals';
@@ -8,6 +8,8 @@ import { EventClose } from '../services/events';
 import { CreateHeadline, headlineStyles } from './headline';
 import { CreateBody, bodyStyles } from './body';
 import { CreateCta, ctaStyles } from './cta';
+
+const { colors, spacing } = Tokens;
 
 export const ELEMENT_NAME = 'umd-element-alert';
 

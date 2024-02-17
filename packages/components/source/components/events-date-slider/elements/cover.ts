@@ -1,5 +1,7 @@
-import { colors } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
+
+const { colors } = Tokens;
 
 const COVER_CLASS = 'umd-element-date-slider-date-lock-cover';
 

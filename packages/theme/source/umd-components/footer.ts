@@ -1,4 +1,6 @@
-import { colors, spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
+
+const { colors, spacing } = Tokens;
 
 export default {
   'umd-element-footer:not(:defined)': {

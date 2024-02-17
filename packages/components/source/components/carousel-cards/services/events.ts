@@ -1,4 +1,4 @@
-import { spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 import { SLOTS, VARIABLES, ELEMENTS } from 'components/carousel-cards/globals';
 import {
@@ -7,6 +7,8 @@ import {
   SetCarouselSize,
   IsTabletView,
 } from './helpers';
+
+const { spacing } = Tokens;
 
 const spaceBetween = parseInt(spacing.md.replace('px', ''));
 

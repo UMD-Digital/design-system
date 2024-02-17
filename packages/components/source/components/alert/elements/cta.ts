@@ -1,8 +1,10 @@
-import { spacing, umdCta } from '@universityofmaryland/variables';
+import { Tokens, umdCta } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
+
+const { spacing } = Tokens;
 
 const ALERT_CTA = 'umd-alert-cta';
 

@@ -1,14 +1,14 @@
 import {
   animatedLinks,
-  fontSize,
-  fontWeight,
-  spacing,
+  Tokens,
   typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ELEMENT_TYPE } from 'components/events-date/component';
 import { ELEMENTS, SLOTS } from 'components/events-date/globals';
+
+const { fontSize, fontWeight, spacing } = Tokens;
 
 const EVENT_DATE_CONTAINER = 'umd-event-date-container';
 const EVENT_DATE_WRAPPER = 'umd-event-date-wrapper';

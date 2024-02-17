@@ -1,46 +1,23 @@
-import { breakpoints, queries } from './tokens/breakpoints';
-import { colors } from './tokens/colors';
-import { fontFace, fontFamily, fontSize, fontWeight } from './tokens/fonts';
-import { spacing } from './tokens/spacing';
+import Tokens from './tokens';
 
-import { screenReaderOnly } from './styles/common/accessibility';
-import { animatedLinks } from './styles/common/animated-links';
-import {
-  richText,
-  richTextBase,
-  richTextCoding,
-  richTextQuotes,
-  richTextTables,
-  richTextLists,
-} from './styles/common/rich-text';
-import { umdCta } from './styles/common/call-to-action';
-import { typography } from './styles/common/typography';
+import { screenReaderOnly } from './common/accessibility';
+import { animatedLinks } from './common/animated-links';
 
-import { umdFlexGrid } from './styles/layout/umd-flex';
-import { umdGrid } from './styles/layout/umd-grid';
-import { umdLock } from './styles/layout/umd-lock';
-import { umdAlignedContent } from './styles/layout/umd-aligned-content';
+import { umdCta } from './common/call-to-action';
+import { typography } from './common/typography';
 
-import UmdFields from './styles/fields';
+import { umdFlexGrid } from './layout/umd-flex';
+import { umdGrid } from './layout/umd-grid';
+import { umdLock } from './layout/umd-lock';
+import { umdAlignedContent } from './layout/umd-aligned-content';
+
+import UmdFields from './fields';
 
 export {
-  breakpoints,
-  queries,
-  colors,
-  fontFace,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  spacing,
+  Tokens,
   screenReaderOnly,
   animatedLinks,
   umdCta,
-  richText,
-  richTextBase,
-  richTextCoding,
-  richTextQuotes,
-  richTextTables,
-  richTextLists,
   typography,
   umdFlexGrid,
   umdGrid,

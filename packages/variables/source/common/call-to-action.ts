@@ -1,6 +1,6 @@
-import { colors } from '../../tokens/colors';
-import { spacing } from '../../tokens/spacing';
-import { typography } from '../common/typography';
+import { colors } from '../tokens/colors';
+import { spacing } from '../tokens/spacing';
+import { typography } from './typography';
 
 const base = {
   '.umd-cta': {

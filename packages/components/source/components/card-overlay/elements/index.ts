@@ -1,7 +1,6 @@
 import {
   animatedLinks,
-  colors,
-  spacing,
+  Tokens,
   UmdFields,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
@@ -12,6 +11,7 @@ import { CreateCtaIcon, CtaIconStyles } from './cta-icon';
 import { CardType } from '../component';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 
+const { colors, spacing } = Tokens;
 const { Text } = UmdFields;
 
 const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';

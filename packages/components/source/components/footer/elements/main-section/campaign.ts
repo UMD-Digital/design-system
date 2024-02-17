@@ -1,7 +1,9 @@
-import { spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { VARIABLES } from 'components/footer/globals';
+
+const { spacing } = Tokens;
 
 export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
 

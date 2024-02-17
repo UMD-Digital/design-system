@@ -1,5 +1,7 @@
-import { colors } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
+
+const { colors } = Tokens;
 
 const NAV_DRAWER_BUTTON = 'umd-nav-drawer-button';
 const NAV_DRAWER_BUTTON_WRAPPER = 'umd-nav-drawer-button-wrapper';

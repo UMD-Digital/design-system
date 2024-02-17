@@ -1,8 +1,10 @@
-import { colors, spacing, typography } from '@universityofmaryland/variables';
+import { Tokens, typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../globals';
 import { ELEMENT_TYPE } from '../component';
+
+const { colors, spacing } = Tokens;
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';

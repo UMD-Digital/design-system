@@ -1,5 +1,7 @@
-import { animatedLinks, colors } from '@universityofmaryland/variables';
+import { animatedLinks, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+
+const { colors } = Tokens;
 
 export const CLASS_STYLES_REF_CTA_SECONDARY =
   'umd-styles-call-to-action-secondary';

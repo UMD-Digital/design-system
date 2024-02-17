@@ -1,4 +1,6 @@
-import { colors, spacing, typography } from '@universityofmaryland/variables';
+import { Tokens, typography } from '@universityofmaryland/variables';
+
+const { colors, spacing } = Tokens;
 
 const captionedMedia = {
   '.umd-media-with-caption': {

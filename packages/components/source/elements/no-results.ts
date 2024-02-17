@@ -1,6 +1,8 @@
-import { spacing, typography } from '@universityofmaryland/variables';
+import { Tokens, typography } from '@universityofmaryland/variables';
 import { CreateCallToActionElement } from 'elements/call-to-action';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+
+const { spacing } = Tokens;
 
 export type NoResultsContentType = {
   message?: string;

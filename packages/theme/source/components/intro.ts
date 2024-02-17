@@ -1,9 +1,6 @@
-import {
-  spacing,
-  colors,
-  umdAlignedContent,
-  queries,
-} from '@universityofmaryland/variables';
+import { Tokens, umdAlignedContent } from '@universityofmaryland/variables';
+
+const { colors, spacing, queries } = Tokens;
 
 const umdIntro = {
   'umd-component-intro': {

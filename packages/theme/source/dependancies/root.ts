@@ -1,4 +1,6 @@
-import { colors, fontFamily, fontSize } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
+
+const { colors, fontFamily, fontSize } = Tokens;
 
 const root = {
   ':root': {

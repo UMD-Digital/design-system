@@ -1,4 +1,6 @@
-import { spacing, queries, colors } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
+
+const { colors, spacing, queries } = Tokens;
 
 const umdHeader = {
   '.umd-header-container': {

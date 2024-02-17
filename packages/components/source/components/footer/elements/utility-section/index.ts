@@ -1,6 +1,5 @@
 import {
-  colors,
-  spacing,
+  Tokens,
   umdLock,
   typography,
   animatedLinks,
@@ -13,6 +12,8 @@ import {
   SLOTS,
 } from 'components/footer/globals';
 import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
+
+const { colors, spacing } = Tokens;
 
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
 const UTILITY_CONTAINER_LOCK = 'umd-footer-utility-container-lock';

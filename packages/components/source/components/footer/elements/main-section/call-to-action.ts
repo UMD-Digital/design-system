@@ -1,6 +1,8 @@
-import { colors, spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
+
+const { colors, spacing } = Tokens;
 
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 

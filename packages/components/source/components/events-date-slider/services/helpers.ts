@@ -1,6 +1,8 @@
-import { colors, spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from '../component';
 import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
+
+const { colors, spacing } = Tokens;
 
 export const ShowNumberOfDates = ({
   shadowRoot,

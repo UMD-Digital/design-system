@@ -1,9 +1,4 @@
-import {
-  colors,
-  spacing,
-  typography,
-  umdCta,
-} from '@universityofmaryland/variables';
+import { Tokens, typography, umdCta } from '@universityofmaryland/variables';
 import { CheckForCtaStyle, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -11,6 +6,8 @@ import {
   ELEMENTS,
   SLOTS,
 } from 'components/events-date-slider/globals';
+
+const { colors, spacing } = Tokens;
 
 const INTRO_CONTAINER = 'umd-element-date-slider-intro-container';
 const INTRO_HEADLINE = 'umd-element-date-slider-headline';

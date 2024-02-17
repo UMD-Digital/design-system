@@ -1,4 +1,6 @@
-import { colors, spacing, typography } from '@universityofmaryland/variables';
+import { typography, Tokens } from '@universityofmaryland/variables';
+
+const { colors, spacing } = Tokens;
 
 const skipContent = {
   '.umd-skip-content': {

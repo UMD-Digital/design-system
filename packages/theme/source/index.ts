@@ -1,11 +1,5 @@
 import {
-  breakpoints,
-  colors,
-  fontFace,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  spacing,
+  Tokens,
   screenReaderOnly,
   animatedLinks,
   typography,
@@ -28,13 +22,7 @@ import UmdComponents from './umd-components';
 import UmdFeeds from './umd-feeds';
 
 export const base = {
-  colors,
-  fontFace,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  breakpoints,
-  spacing,
+  ...Tokens,
 };
 
 export const theme = {

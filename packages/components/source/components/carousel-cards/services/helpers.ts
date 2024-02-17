@@ -1,6 +1,8 @@
-import { spacing } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from '../component';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
+
+const { spacing } = Tokens;
 
 const spaceBetween = parseInt(spacing.md.replace('px', ''));
 

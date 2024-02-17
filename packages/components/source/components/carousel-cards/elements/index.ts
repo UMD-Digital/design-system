@@ -1,4 +1,4 @@
-import { colors, spacing, umdLock } from '@universityofmaryland/variables';
+import { Tokens, umdLock } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 import { BREAKPOINTS, SLOTS } from 'components/carousel-cards/globals';
@@ -8,6 +8,8 @@ import {
 } from 'components/carousel-cards/services/events';
 import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
+
+const { colors, spacing } = Tokens;
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
 

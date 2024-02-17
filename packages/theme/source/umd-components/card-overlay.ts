@@ -1,4 +1,6 @@
-import { colors } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
+
+const { colors } = Tokens;
 
 export default {
   'umd-element-card-overlay:not(:defined)': {

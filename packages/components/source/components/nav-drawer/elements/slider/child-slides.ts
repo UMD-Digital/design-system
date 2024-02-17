@@ -1,14 +1,11 @@
-import {
-  colors,
-  fontWeight,
-  spacing,
-  typography,
-} from '@universityofmaryland/variables';
+import { Tokens, typography } from '@universityofmaryland/variables';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction } from './slide-action';
+
+const { colors, fontWeight, spacing } = Tokens;
 
 const DRAWER_SLIDER_CHILD_CONTAINER = 'umd-element-drawer-child-slider';
 const DRAWER_SLIDER_HEADLINE = 'umd-element-drawer-back-headline';

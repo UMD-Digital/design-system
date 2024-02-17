@@ -23,6 +23,9 @@ import { richText } from './elements/rich-text';
 import { umdHeader } from './components/header';
 import { umdIntro } from './components/intro';
 
+import UmdComponents from './umd-components';
+import UmdFeeds from './umd-feeds';
+
 export const base = {
   colors,
   fontFace,
@@ -48,4 +51,6 @@ export const theme = {
   umdLoader,
   umdHeader,
   umdIntro,
+  UmdComponents,
+  UmdFeeds,
 };

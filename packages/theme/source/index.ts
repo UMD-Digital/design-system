@@ -1,6 +1,5 @@
 import {
   breakpoints,
-  queries,
   colors,
   fontFamily,
   fontSize,
@@ -23,28 +22,28 @@ import { richText } from './elements/rich-text';
 import { umdHeader } from './components/header';
 import { umdIntro } from './components/intro';
 
-const theme = {
-  animatedLinks,
-  breakpoints,
-  captionedMedia,
+export const base = {
   colors,
   fontFamily,
   fontSize,
   fontWeight,
-  queries,
-  richText,
-  root,
+  breakpoints,
   spacing,
-  screenReaderOnly,
-  typography,
+};
+
+export const theme = {
+  root,
   skipContent,
-  umdCta,
-  umdLoader,
-  umdFlexGrid,
-  umdGrid,
+  screenReaderOnly,
+  animatedLinks,
+  richText,
+  typography,
   umdLock,
+  umdGrid,
+  umdFlexGrid,
+  umdCta,
+  captionedMedia,
+  umdLoader,
   umdHeader,
   umdIntro,
 };
-
-export default theme;

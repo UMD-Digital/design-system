@@ -1,58 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 
 import plugin from 'tailwindcss/plugin';
-import * as umdTheme from '@universityofmaryland/theme';
+import { base, theme as umdTheme } from '@universityofmaryland/theme';
 
-const {
-  animatedLinks,
-  breakpoints,
-  captionedMedia,
-  colors,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  richText,
-  root,
-  spacing,
-  screenReaderOnly,
-  typography,
-  skipContent,
-  umdCta,
-  umdLoader,
-  umdFlexGrid,
-  umdGrid,
-  umdLock,
-  umdHeader,
-  umdIntro,
-} = umdTheme;
-
-const theme = {
-  colors,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  screens: breakpoints,
-  spacing,
-};
-
-const utilities = { ...root };
-
-// The components are listed in order they should render in CSS.
-const components = {
-  ...skipContent,
-  ...screenReaderOnly,
-  ...animatedLinks,
-  ...richText,
-  ...typography,
-  ...umdLock,
-  ...umdGrid,
-  ...umdFlexGrid,
-  ...umdCta,
-  ...captionedMedia,
-  ...umdLoader,
-  ...umdHeader,
-  ...umdIntro,
-};
+const content = ['./source/**/*.{css,twig}'];
+const { root: utilities, ...styles } = umdTheme;
+const tailwindTheme = { screens: base.breakpoints, ...base };
+const components = Object.values(styles).reduce(
+  (arr, current) => ({ ...arr, ...current }),
+  {},
+);
 
 const plugins = [
   plugin(function ({ addUtilities, addComponents }) {
@@ -61,6 +18,4 @@ const plugins = [
   }),
 ];
 
-const content = ['./source/**/*.{css,twig}'];
-
-export { content, theme, plugins };
+export { content, tailwindTheme as theme, plugins };

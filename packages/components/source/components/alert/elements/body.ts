@@ -1,8 +1,10 @@
-import { colors, richTextBase } from '@universityofmaryland/variables';
+import { colors, UmdFields } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
 import { SlotDefaultStyling } from 'helpers/ui';
+
+const { TextBase } = UmdFields;
 
 const ALERT_BODY = 'umd-alert-body';
 
@@ -15,7 +17,7 @@ export const bodyStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_BODY}`]: richTextBase['.umd-rich-text-base'],
+      [`.${ALERT_BODY}`]: TextBase['.umd-text-base'],
     },
   })}
 `;

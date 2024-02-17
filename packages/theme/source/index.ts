@@ -19,10 +19,11 @@ import { skipContent } from './elements/accessibility';
 import { umdCta } from './elements/call-to-action';
 import { umdLoader } from './elements/loader';
 import { captionedMedia } from './elements/media-with-caption';
-import { richText } from './elements/rich-text';
+
 import { umdHeader } from './components/header';
 import { umdIntro } from './components/intro';
 
+import UmdCommon from './common';
 import UmdComponents from './umd-components';
 import UmdFeeds from './umd-feeds';
 
@@ -41,7 +42,7 @@ export const theme = {
   skipContent,
   screenReaderOnly,
   animatedLinks,
-  richText,
+  UmdCommon,
   typography,
   umdLock,
   umdGrid,

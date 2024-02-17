@@ -1,13 +1,15 @@
 import {
   animatedLinks,
   colors,
-  richText,
   spacing,
   typography,
   umdCta,
+  UmdFields,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
+
+const { Text } = UmdFields;
 
 const BREAKPOINTS = {
   MOBILE: 650,
@@ -251,7 +253,7 @@ const VariantThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${CARD_BODY_TEXT_WRAPPER}`]:
-        richText['.umd-rich-text-dark'],
+      Text['.umd-text-dark'],
     },
   })}
 

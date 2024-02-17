@@ -1,9 +1,9 @@
 import {
   colors,
-  richText,
   spacing,
   typography,
   umdCta,
+  UmdFields,
 } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
@@ -13,6 +13,8 @@ import {
   ELEMENTS,
 } from 'components/carousel-cards/globals';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+
+const { Text } = UmdFields;
 
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
 const INTRO_CONTAINER_HEADLINE = 'umd-carousel-cards-intro-container-headline';
@@ -46,7 +48,7 @@ const textStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: richText['.umd-rich-text-dark'],
+      [`.${INTRO_CONTAINER_TEXT}`]: Text['.umd-text-dark'],
     },
   })}
 

@@ -1,8 +1,8 @@
 import {
   animatedLinks,
   colors,
-  richText,
   spacing,
+  UmdFields,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateContent, ContentStyles } from './content';
@@ -11,6 +11,8 @@ import { CreateCta, CtaStyles } from './cta';
 import { CreateCtaIcon, CtaIconStyles } from './cta-icon';
 import { CardType } from '../component';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
+
+const { Text } = UmdFields;
 
 const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';
 const CARD_OVERLAY_TEXT_CONTAINER = 'umd-card-overlay-text-container';
@@ -72,7 +74,7 @@ const VariantDarkThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
-        richText['.umd-rich-text-dark'],
+        Text['.umd-text-dark'],
     },
   })}
 `;
@@ -89,7 +91,7 @@ const VariantImageThemeContent = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
-        richText['.umd-rich-text-dark'],
+        Text['.umd-text-dark'],
     },
   })}
 `;

@@ -1,7 +1,6 @@
 import {
   colors,
   fontSize,
-  richText,
   spacing,
   typography,
   umdFlexGrid,
@@ -12,7 +11,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
-const { Eyebrow } = UmdFields;
+const { Eyebrow, Text } = UmdFields;
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =
@@ -137,7 +136,7 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_TEXT_CONTAINER} *`]: richText['.umd-rich-text'],
+      [`.${SUMMARY_TEXT_CONTAINER} *`]: Text['.umd-text'],
     },
   })}
 

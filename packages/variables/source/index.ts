@@ -15,12 +15,13 @@ import {
 } from './styles/common/rich-text';
 import { umdCta } from './styles/common/call-to-action';
 import { typography } from './styles/common/typography';
-import { umdEyebrow } from './styles/common/eyebrow';
 
 import { umdFlexGrid } from './styles/layout/umd-flex';
 import { umdGrid } from './styles/layout/umd-grid';
 import { umdLock } from './styles/layout/umd-lock';
 import { umdAlignedContent } from './styles/layout/umd-aligned-content';
+
+import UmdFields from './styles/fields';
 
 export {
   breakpoints,
@@ -42,8 +43,8 @@ export {
   richTextLists,
   typography,
   umdFlexGrid,
-  umdEyebrow,
   umdGrid,
   umdLock,
   umdAlignedContent,
+  UmdFields,
 };

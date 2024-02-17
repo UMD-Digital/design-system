@@ -4,13 +4,15 @@ import {
   richText,
   spacing,
   typography,
-  umdEyebrow,
   umdFlexGrid,
+  UmdFields,
 } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
+
+const { Eyebrow } = UmdFields;
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =
@@ -97,7 +99,7 @@ const EyebrowStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_EYEBROW_CONTAINER}`]: umdEyebrow['.umd-eyebrow-ribbon'],
+      [`.${SUMMARY_EYEBROW_CONTAINER}`]: Eyebrow['.umd-eyebrow-ribbon'],
     },
   })}
 `;

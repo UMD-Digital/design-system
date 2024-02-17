@@ -1,9 +1,9 @@
 import { colors } from '../../tokens/colors';
 import { spacing } from '../../tokens/spacing';
 import { fontWeight } from '../../tokens/fonts';
-import { typography } from './typography';
+import { typography } from '../common/typography';
 
-const umdEyebrow = {
+const Eyebrow = {
   '.umd-eyebrow-ribbon': {
     ...typography['.umd-interactive-sans-small'],
     backgroundColor: colors.gold,
@@ -15,4 +15,4 @@ const umdEyebrow = {
   },
 };
 
-export { umdEyebrow };
+export { Eyebrow };

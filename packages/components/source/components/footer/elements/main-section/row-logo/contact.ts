@@ -1,5 +1,5 @@
 import {
-  animatedLinks,
+  Animations,
   Tokens,
   typography,
 } from '@universityofmaryland/variables';
@@ -19,6 +19,7 @@ import {
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 
 const { colors, spacing } = Tokens;
+const { LinkLineSlide } = Animations;
 
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_HEADLINE = 'umd-footer-contact-list-headline';
@@ -71,7 +72,7 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE} a`]:
-        animatedLinks['.umd-slidein-underline-white'],
+     LinkLineSlide['.slidein-underline-white'],
     },
   })}
 
@@ -88,7 +89,7 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a`]:
-        animatedLinks['.umd-slidein-underline-black'],
+      LinkLineSlide['.slidein-underline-black'],
     },
   })}
 `;
@@ -129,14 +130,14 @@ const LinkListStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} a`]:
-        animatedLinks['.umd-slidein-underline-white'],
+      LinkLineSlide['.slidein-underline-white'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LINKS_LIST} a`]:
-        animatedLinks['.umd-slidein-underline-black'],
+      LinkLineSlide['.slidein-underline-black'],
     },
   })}
 

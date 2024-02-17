@@ -1,4 +1,4 @@
-import { Tokens, animatedLinks } from '@universityofmaryland/variables';
+import { Animations, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 import { ElementType } from 'components/nav-item/component';
@@ -40,7 +40,7 @@ const linkStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${DROPDOWN_LIST_CONTAINER} a`]:
-        animatedLinks['.umd-slidein-underline-red'],
+      Animations.LinkLineSlide['.slidein-underline-red'],
     },
   })}
 

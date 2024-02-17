@@ -1,7 +1,6 @@
 import {
   Tokens,
   screenReaderOnly,
-  animatedLinks,
   typography,
   umdFlexGrid,
   umdGrid,
@@ -17,6 +16,7 @@ import { captionedMedia } from './elements/media-with-caption';
 import { umdHeader } from './components/header';
 import { umdIntro } from './components/intro';
 
+import UmdAnimations from './animations';
 import UmdCommon from './common';
 import UmdComponents from './umd-components';
 import UmdFeeds from './umd-feeds';
@@ -29,7 +29,7 @@ export const theme = {
   root,
   skipContent,
   screenReaderOnly,
-  animatedLinks,
+  UmdAnimations,
   UmdCommon,
   typography,
   umdLock,

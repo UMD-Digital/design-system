@@ -1,5 +1,5 @@
 import {
-  animatedLinks,
+  Animations,
   Tokens,
   typography,
 } from '@universityofmaryland/variables';
@@ -13,6 +13,7 @@ import {
 import { SlotDefaultStyling } from 'helpers/ui';
 
 const { colors, spacing, fontWeight } = Tokens;
+const { LinkLineSlide } = Animations;
 
 const HEADLINE_ATTRIBUTE = 'data-headline';
 const HEADLINE_ATTRIBUTE_EMPTY = 'data-empty';
@@ -157,14 +158,14 @@ const LinkStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
-        animatedLinks['.umd-slidein-underline-white'],
+      LinkLineSlide['.slidein-underline-white'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${ROW_LINKS_COLUMN_LINKS} a`]:
-        animatedLinks['.umd-slidein-underline-black'],
+      LinkLineSlide['.slidein-underline-black'],
     },
   })}
 `;

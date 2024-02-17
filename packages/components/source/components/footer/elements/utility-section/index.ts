@@ -1,8 +1,8 @@
 import {
+  Animations,
   Tokens,
   umdLock,
   typography,
-  animatedLinks,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -14,6 +14,7 @@ import {
 import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
 
 const { colors, spacing } = Tokens;
+const { LinkLineSlide } = Animations;
 
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
 const UTILITY_CONTAINER_LOCK = 'umd-footer-utility-container-lock';
@@ -28,7 +29,7 @@ const LinkStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:
-        animatedLinks['.umd-slidein-underline-white'],
+      LinkLineSlide['.slidein-underline-white'],
     },
   })}
 
@@ -39,7 +40,7 @@ const LinkStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a`]:
-        animatedLinks['.umd-slidein-underline-black'],
+      LinkLineSlide['.slidein-underline-black'],
     },
   })}
 `;

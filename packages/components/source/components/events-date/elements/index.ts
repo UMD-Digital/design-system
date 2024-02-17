@@ -1,5 +1,5 @@
 import {
-  animatedLinks,
+  Animations,
   Tokens,
   typography,
 } from '@universityofmaryland/variables';
@@ -9,6 +9,7 @@ import { ELEMENT_TYPE } from 'components/events-date/component';
 import { ELEMENTS, SLOTS } from 'components/events-date/globals';
 
 const { fontSize, fontWeight, spacing } = Tokens;
+const { LinkLineSlide } = Animations;
 
 const EVENT_DATE_CONTAINER = 'umd-event-date-container';
 const EVENT_DATE_WRAPPER = 'umd-event-date-wrapper';
@@ -97,13 +98,13 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} a`]: animatedLinks['.umd-slidein-underline-black'],
+      [`.${EVENT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-black'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CONTAINER_DARK_CLASS} .${EVENT_HEADLINE} a`]: animatedLinks['.umd-slidein-underline-white'],
+      [`.${ELEMENTS.CONTAINER_DARK_CLASS} .${EVENT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-white'],
     },
   })}
 `;

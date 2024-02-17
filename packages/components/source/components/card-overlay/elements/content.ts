@@ -1,7 +1,7 @@
 import {
   typography,
   Tokens,
-  animatedLinks,
+  Animations,
 } from '@universityofmaryland/variables';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
@@ -9,6 +9,7 @@ import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/card-overlay/globals';
 
 const { spacing, colors } = Tokens;
+const { LinkLineSlide } = Animations;
 
 const TEXT_CHARACTER_LIMIT = 140;
 
@@ -51,7 +52,7 @@ const headlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
-        animatedLinks['.umd-slidein-underline-white'],
+      LinkLineSlide['.slidein-underline-white'],
     },
   })}
 `;

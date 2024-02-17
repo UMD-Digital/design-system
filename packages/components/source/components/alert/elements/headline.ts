@@ -1,5 +1,5 @@
 import {
-  animatedLinks,
+  Animations,
   Tokens,
   typography,
 } from '@universityofmaryland/variables';
@@ -9,6 +9,7 @@ import { AlertType } from 'components/alert/component';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 
 const { colors, spacing } = Tokens;
+const { LinkLineSlide } = Animations;
 
 const ALERT_HEADLINE = 'umd-alert-headline';
 
@@ -37,7 +38,7 @@ export const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_HEADLINE} a`]: animatedLinks['.umd-slidein-underline-black'],
+      [`.${ALERT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-black'],
     },
   })}
 `;

@@ -1,5 +1,5 @@
 import {
-  animatedLinks,
+  Animations,
   typography,
   umdCta,
   Tokens,
@@ -9,6 +9,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
 const { colors, spacing } = Tokens;
+const { LinkLineSlide } = Animations;
 const { Text } = UmdFields;
 
 const BREAKPOINTS = {
@@ -124,7 +125,7 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_HEADLINE_WRAPPER} a`]:
-        animatedLinks['.umd-slidein-underline-black'],
+      LinkLineSlide['.slidein-underline-black'],
     },
   })}
 `;

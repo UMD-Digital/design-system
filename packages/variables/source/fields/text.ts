@@ -1,7 +1,7 @@
 import { colors } from '../tokens/colors';
 import { fontWeight } from '../tokens/fonts';
 import { spacing } from '../tokens/spacing';
-import { animatedLinks } from '../common/animated-links';
+import Animations from '../animations';
 import Lists from '../elements/list';
 
 const TextBase = {
@@ -70,7 +70,7 @@ const Text = {
     color: colors.white,
 
     '& a': {
-      ...animatedLinks['.umd-fadein-simple-dark'],
+      ...Animations.LinkLineFade['.fadein-simple-dark'],
     },
   },
 };

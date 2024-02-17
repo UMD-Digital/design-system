@@ -1,8 +1,4 @@
-import {
-  animatedLinks,
-  Tokens,
-  UmdFields,
-} from '@universityofmaryland/variables';
+import { Animations, Tokens, UmdFields } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateContent, ContentStyles } from './content';
 import { CreateImage, ImageStyles } from './image';
@@ -13,6 +9,7 @@ import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 
 const { colors, spacing } = Tokens;
 const { Text } = UmdFields;
+const { LinkLineSlide } = Animations;
 
 const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';
 const CARD_OVERLAY_TEXT_CONTAINER = 'umd-card-overlay-text-container';
@@ -45,7 +42,7 @@ const VariantLightThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
-      animatedLinks['.umd-slidein-underline-black'],
+      LinkLineSlide['.slidein-underline-black'],
     },
   })}
 `;
@@ -84,7 +81,7 @@ const VariantImageThemeContent = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
-      animatedLinks['.umd-slidein-underline-white'],
+      LinkLineSlide['.slidein-underline-white'],
     },
   })}
 

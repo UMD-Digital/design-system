@@ -1,26 +1,28 @@
-import {
-  fontFaceInterfaceThin,
-  fontFaceInterfaceExtraLight,
-  fontFaceInterfaceLight,
-  fontFaceInterfaceRegular,
-  fontFaceInterfaceItalic,
-  fontFaceInterfaceBold,
-  fontFaceInterfaceBoldItalic,
-  fontFaceInterfaceBlack,
-  fontFaceInterfaceUltraBlack,
-} from './font-face-interstate';
+import interstate from '../font-face/interstate';
+
+const {
+  Thin: InterstateThin,
+  ExtraLight: InterstateExtraLight,
+  Light: InterstateLight,
+  Regular: InterstateRegular,
+  Italic: InterstateItalic,
+  Bold: InterstateBold,
+  BoldItalic: InterstateBoldItalic,
+  Black: InterstateBlack,
+  UltraBlack: InterstateUltraBlack,
+} = interstate;
 
 const fontFace = {
   '@font-face': [
-    fontFaceInterfaceThin['@font-face'],
-    fontFaceInterfaceExtraLight['@font-face'],
-    fontFaceInterfaceLight['@font-face'],
-    fontFaceInterfaceRegular['@font-face'],
-    fontFaceInterfaceItalic['@font-face'],
-    fontFaceInterfaceBold['@font-face'],
-    fontFaceInterfaceBoldItalic['@font-face'],
-    fontFaceInterfaceBlack['@font-face'],
-    fontFaceInterfaceUltraBlack['@font-face'],
+    InterstateThin['@font-face'],
+    InterstateExtraLight['@font-face'],
+    InterstateLight['@font-face'],
+    InterstateRegular['@font-face'],
+    InterstateItalic['@font-face'],
+    InterstateBold['@font-face'],
+    InterstateBoldItalic['@font-face'],
+    InterstateBlack['@font-face'],
+    InterstateUltraBlack['@font-face'],
   ],
 };
 

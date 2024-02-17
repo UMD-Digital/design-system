@@ -1,6 +1,6 @@
 import {
+  Accessibility,
   Tokens,
-  screenReaderOnly,
   typography,
   umdFlexGrid,
   umdGrid,
@@ -28,7 +28,7 @@ export const base = {
 export const theme = {
   root,
   skipContent,
-  screenReaderOnly,
+  Accessibility,
   UmdAnimations,
   UmdCommon,
   typography,

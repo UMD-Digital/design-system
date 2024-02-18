@@ -1,5 +1,5 @@
 import {
-  typography,
+  Typography,
   Tokens,
   Animations,
 } from '@universityofmaryland/variables';
@@ -20,13 +20,13 @@ const CARD_OVERLAY_DATE = 'umd-overlay-card-date';
 const eyebrowStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_EYEBROW}`]: typography['.umd-eyebrow'],
+      [`.${CARD_OVERLAY_EYEBROW}`]: Typography['.umd-eyebrow'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_EYEBROW} *`]: typography['.umd-eyebrow'],
+      [`.${CARD_OVERLAY_EYEBROW} *`]: Typography['.umd-eyebrow'],
     },
   })}
 `;
@@ -39,13 +39,13 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE}`]: typography['.umd-sans-larger'],
+      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE}`]: Typography['.umd-sans-larger'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} *`]: typography['.umd-sans-larger'],
+      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} *`]: Typography['.umd-sans-larger'],
     },
   })}
 
@@ -65,7 +65,7 @@ const textStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_TEXT} *`]: typography['.umd-sans-small'],
+      [`.${ELEMENTS.CARD_OVERLAY_TEXT} *`]: Typography['.umd-sans-small'],
     },
   })}
 
@@ -93,13 +93,13 @@ const dateStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_DATE}`]: typography['.umd-sans-min'],
+      [`.${CARD_OVERLAY_DATE}`]: Typography['.umd-sans-min'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_DATE} *`]: typography['.umd-sans-min'],
+      [`.${CARD_OVERLAY_DATE} *`]: Typography['.umd-sans-min'],
     },
   })}
 `

@@ -1,4 +1,4 @@
-import { typography, Tokens } from '@universityofmaryland/variables';
+import { Typography, Tokens } from '@universityofmaryland/variables';
 
 const { colors, spacing } = Tokens;
 
@@ -15,7 +15,7 @@ export default {
     width: '1px',
   },
   '.umd-skip-content': {
-    ...typography['.umd-interactive-sans-small'],
+    ...Typography['.umd-interactive-sans-small'],
     ...{
       backgroundColor: colors.white,
       color: colors.red,

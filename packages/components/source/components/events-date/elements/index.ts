@@ -1,7 +1,7 @@
 import {
   Animations,
   Tokens,
-  typography,
+  Typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
@@ -45,13 +45,13 @@ const dateWrapperStyles = `
 const monthStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_MONTH}`]: typography['.umd-interactive-sans-small'],
+      [`.${EVENT_MONTH}`]: Typography['.umd-interactive-sans-small'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_MONTH} *`]: typography['.umd-interactive-sans-small'],
+      [`.${EVENT_MONTH} *`]: Typography['.umd-interactive-sans-small'],
     },
   })}
 `;
@@ -59,13 +59,13 @@ const monthStyles = `
 const dayStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DAY}`]: typography['.umd-sans-larger'],
+      [`.${EVENT_DAY}`]: Typography['.umd-sans-larger'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DAY} *`]: typography['.umd-sans-larger'],
+      [`.${EVENT_DAY} *`]: Typography['.umd-sans-larger'],
     },
   })}
 `;
@@ -78,13 +78,13 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE}`]: typography['.umd-sans-large'],
+      [`.${EVENT_HEADLINE}`]: Typography['.umd-sans-large'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} *`]: typography['.umd-sans-large'],
+      [`.${EVENT_HEADLINE} *`]: Typography['.umd-sans-large'],
     },
   })}
 

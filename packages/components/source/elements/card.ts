@@ -1,6 +1,6 @@
 import {
   Animations,
-  typography,
+  Typography,
   Tokens,
   UmdFields,
 } from '@universityofmaryland/variables';
@@ -80,14 +80,14 @@ const EyebrowStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_EYEBROW_WRAPPER}`]:
-        typography['.umd-sans-smaller'],
+      Typography['.umd-sans-smaller'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_EYEBROW_WRAPPER} *`]:
-        typography['.umd-sans-smaller'],
+      Typography['.umd-sans-smaller'],
     },
   })}
 
@@ -110,14 +110,14 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_HEADLINE_WRAPPER}`]:
-        typography['.umd-sans-large'],
+      Typography['.umd-sans-large'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_HEADLINE_WRAPPER} *`]:
-        typography['.umd-sans-large'],
+      Typography['.umd-sans-large'],
     },
   })}
 
@@ -146,13 +146,13 @@ const DateStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_BODY_DATE_WRAPPER}`]: typography['.umd-sans-min'],
+      [`.${CARD_BODY_DATE_WRAPPER}`]: Typography['.umd-sans-min'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_BODY_DATE_WRAPPER} *`]: typography['.umd-sans-min'],
+      [`.${CARD_BODY_DATE_WRAPPER} *`]: Typography['.umd-sans-min'],
     },
   })}
 `;
@@ -161,7 +161,7 @@ const DateStyles = `
 const TextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_BODY_TEXT_WRAPPER} *`]: typography['.umd-sans-small'],
+      [`.${CARD_BODY_TEXT_WRAPPER} *`]: Typography['.umd-sans-small'],
     },
   })}
 

@@ -1,4 +1,4 @@
-import interstate from '../font-face/interstate';
+import interstate from '../typography/font-face/interstate';
 
 const {
   Thin: InterstateThin,

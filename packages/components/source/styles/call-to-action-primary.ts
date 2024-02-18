@@ -1,4 +1,4 @@
-import { Tokens, typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { colors } = Tokens;
@@ -10,7 +10,7 @@ export const STYLES_CTA_PRIMARY = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CLASS_STYLES_REF_CTA_PRIMARY}`]:
-        typography['.umd-interactive-sans-small'],
+      Typography['.umd-interactive-sans-small'],
     },
   })}
 

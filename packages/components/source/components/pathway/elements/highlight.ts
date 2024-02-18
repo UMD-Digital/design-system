@@ -1,4 +1,4 @@
-import { Tokens, typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../globals';
@@ -73,7 +73,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_CONTAINER_TEXT}`]: typography['.umd-sans-larger'],
+      [`.${PATHWAY_HIGHLIGHT_CONTAINER_TEXT}`]: Typography['.umd-sans-larger'],
     },
   })}
 

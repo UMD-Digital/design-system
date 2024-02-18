@@ -1,4 +1,4 @@
-import { Tokens, typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { VARIABLES, ELEMENTS } from 'components/nav-drawer/globals';
@@ -12,7 +12,7 @@ const DRAWER_SLIDE_ACTION_BUTTON = 'umd-element-drawer-slide-action-button';
 const anchorStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}`]: typography['.umd-sans-medium'],
+      [`.${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}`]: Typography['.umd-sans-medium'],
     },
   })}
 

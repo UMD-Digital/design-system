@@ -1,4 +1,4 @@
-import { Tokens, typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CreateCallToActionElement } from 'elements/call-to-action';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
@@ -26,7 +26,7 @@ export const STYLES_NO_RESULTS = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [` .${CONTAINER_NO_RESULTS} p`]: typography['.umd-sans-large'],
+      [` .${CONTAINER_NO_RESULTS} p`]: Typography['.umd-sans-large'],
     },
   })}
 

@@ -1,5 +1,5 @@
 import {
-  typography,
+  Typography,
   umdFlexGrid,
   Tokens,
   UmdFields,
@@ -106,13 +106,13 @@ const EyebrowStyles = `
 const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_HEADLINE_CONTAINER}`]: typography['.umd-sans-largest'],
+      [`.${SUMMARY_HEADLINE_CONTAINER}`]: Typography['.umd-sans-largest'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_HEADLINE_CONTAINER} *`]: typography['.umd-sans-largest'],
+      [`.${SUMMARY_HEADLINE_CONTAINER} *`]: Typography['.umd-sans-largest'],
     },
   })}
 

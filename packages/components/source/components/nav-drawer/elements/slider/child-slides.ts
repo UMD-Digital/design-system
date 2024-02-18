@@ -1,4 +1,4 @@
-import { Tokens, typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
@@ -54,7 +54,7 @@ const backButtonStyles = `
 const headlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${DRAWER_SLIDER_HEADLINE} `]: typography['.umd-sans-large'],
+      [`.${DRAWER_SLIDER_HEADLINE} `]: Typography['.umd-sans-large'],
     },
   })}
 

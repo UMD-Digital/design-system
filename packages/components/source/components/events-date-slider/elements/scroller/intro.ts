@@ -1,4 +1,4 @@
-import { Tokens, typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CheckForCtaStyle, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -20,7 +20,7 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_HEADLINE}`]: typography['.umd-sans-larger'],
+      [`.${INTRO_HEADLINE}`]: Typography['.umd-sans-larger'],
     },
   })}
 

@@ -2,7 +2,7 @@ import {
   Animations,
   Tokens,
   umdLock,
-  typography,
+  Typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -80,7 +80,7 @@ export const UtilityContainerStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER} *`]: typography['.umd-sans-min']
+      [`.${UTILITY_CONTAINER} *`]: Typography['.umd-sans-min']
     },
   })}
 

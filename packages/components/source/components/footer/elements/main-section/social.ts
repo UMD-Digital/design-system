@@ -1,4 +1,4 @@
-import { Tokens, typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import {
   FACEBOOK_ICON,
   X_ICON,
@@ -133,7 +133,7 @@ export const SocialContainerStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SOCIAL_CONTAINER_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
+      [`.${SOCIAL_CONTAINER_HEADLINE}`]: Typography['.umd-interactive-sans-medium'],
     },
   })}
 

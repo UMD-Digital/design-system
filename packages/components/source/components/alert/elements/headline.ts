@@ -1,7 +1,7 @@
 import {
   Animations,
   Tokens,
-  typography,
+  Typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/alert/globals';
@@ -26,13 +26,13 @@ export const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_HEADLINE}`]: typography['.umd-sans-large'],
+      [`.${ALERT_HEADLINE}`]: Typography['.umd-sans-large'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_HEADLINE} *`]: typography['.umd-sans-large'],
+      [`.${ALERT_HEADLINE} *`]: Typography['.umd-sans-large'],
     },
   })}
 

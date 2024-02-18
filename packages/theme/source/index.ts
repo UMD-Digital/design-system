@@ -1,6 +1,6 @@
 import {
   Tokens,
-  typography,
+  Typography,
   umdFlexGrid,
   umdGrid,
   umdLock,
@@ -28,7 +28,7 @@ export const theme = {
   UmdAccessibility,
   UmdAnimations,
   UmdCommon,
-  typography,
+  Typography,
   umdLock,
   umdGrid,
   umdFlexGrid,

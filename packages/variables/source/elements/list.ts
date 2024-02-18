@@ -1,6 +1,6 @@
+import Typography from '../typography';
 import { colors } from '../tokens/colors';
 import { spacing } from '../tokens/spacing';
-import { typography } from '../common/typography';
 
 const listStylesBase = {
   [`& ul,
@@ -15,7 +15,7 @@ const listStylesBase = {
     },
 
     '& li:before': {
-      ...typography['.umd-sans-large'],
+      ...Typography['.umd-sans-large'],
       ...{
         content: '"•"',
         counterIncrement: 'item',
@@ -46,7 +46,7 @@ const listStylesBase = {
     },
 
     '& li:before': {
-      ...typography['.umd-sans-large'],
+      ...Typography['.umd-sans-large'],
       ...{
         content: 'counter(item) "."',
         counterIncrement: 'item',

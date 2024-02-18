@@ -1,4 +1,4 @@
-import { Tokens, typography, UmdFields } from '@universityofmaryland/variables';
+import { Tokens, Typography, UmdFields } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -24,13 +24,13 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE}`]: typography['.umd-sans-largest'],
+      [`.${INTRO_CONTAINER_HEADLINE}`]: Typography['.umd-sans-largest'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE} *`]: typography['.umd-sans-largest'],
+      [`.${INTRO_CONTAINER_HEADLINE} *`]: Typography['.umd-sans-largest'],
     },
   })}
 `;
@@ -49,7 +49,7 @@ const textStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: typography['.umd-sans-medium'],
+      [`.${INTRO_CONTAINER_TEXT}`]: Typography['.umd-sans-medium'],
     },
   })}
 `;

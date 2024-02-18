@@ -1,4 +1,4 @@
-import { Tokens, typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreatePrimarySlide, primarySliderStyles } from './primary-slide';
@@ -83,7 +83,7 @@ const secondaryLinkStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} a`]: typography['.umd-sans-small'],
+      [`.${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} a`]: Typography['.umd-sans-small'],
     },
   })}
 `;

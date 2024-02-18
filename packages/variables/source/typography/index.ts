@@ -458,6 +458,4 @@ const statistics = {
   },
 };
 
-const typography = Object.assign(campaign, serif, sans, elements, statistics);
-
-export { typography };
+export default { ...campaign, ...serif, ...sans, ...elements, ...statistics };

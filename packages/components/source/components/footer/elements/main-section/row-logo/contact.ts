@@ -1,7 +1,7 @@
 import {
   Animations,
   Tokens,
-  typography,
+  Typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -78,7 +78,7 @@ const HeadlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_HEADLINE}`]: typography['.umd-interactive-sans-medium'],
+      [`.${CONTACT_LIST_HEADLINE}`]: Typography['.umd-interactive-sans-medium'],
     },
   })}
 
@@ -106,7 +106,7 @@ const AddressStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_ADDRESS} *`]: typography['.umd-sans-smaller'],
+      [`.${CONTACT_LIST_ADDRESS} *`]: Typography['.umd-sans-smaller'],
     },
   })}
 `;
@@ -119,7 +119,7 @@ const LinkListStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LINKS_LIST} *`]: typography['.umd-sans-smaller'],
+      [`.${CONTACT_LINKS_LIST} *`]: Typography['.umd-sans-smaller'],
     },
   })}
 

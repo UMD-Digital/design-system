@@ -8,7 +8,7 @@ import { CardType } from '../component';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 
 const { Colors, Spacing } = Tokens;
-const { Text } = Fields;
+const { TextDark } = Fields;
 const { LinkLineSlide } = Animations;
 
 const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';
@@ -71,7 +71,7 @@ const VariantDarkThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
-        Text['.umd-text-dark'],
+        TextDark,
     },
   })}
 `;
@@ -88,7 +88,7 @@ const VariantImageThemeContent = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
-        Text['.umd-text-dark'],
+        TextDark,
     },
   })}
 `;

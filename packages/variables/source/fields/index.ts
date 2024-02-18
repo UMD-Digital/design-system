@@ -1,4 +1,4 @@
-import { Eyebrow } from './eyebrow';
-import { TextBase, Text } from './text';
+import { Ribbon } from './eyebrow';
+import { Text, TextDark } from './text';
 
-export default { Eyebrow, TextBase, Text };
+export default { Ribbon, Text, TextDark };

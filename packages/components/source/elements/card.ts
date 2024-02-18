@@ -9,7 +9,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { Text } = Fields;
+const { TextDark } = Fields;
 
 const BREAKPOINTS = {
   MOBILE: 650,
@@ -247,7 +247,7 @@ const VariantThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${CARD_BODY_TEXT_WRAPPER}`]:
-      Text['.umd-text-dark'],
+      TextDark,
     },
   })}
 

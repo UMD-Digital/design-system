@@ -4,7 +4,7 @@ import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
 import { SlotDefaultStyling } from 'helpers/ui';
 
-const { TextBase } = Fields;
+const { Text } = Fields;
 const { Colors } = Tokens;
 
 const ALERT_BODY = 'umd-alert-body';
@@ -18,7 +18,7 @@ export const bodyStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_BODY}`]: TextBase['.umd-text-base'],
+      [`.${ALERT_BODY}`]: Text,
     },
   })}
 `;

@@ -10,7 +10,7 @@ import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
 const { Spacing, Colors, FontSize } = Tokens;
-const { Eyebrow, Text } = Fields;
+const { Ribbon, Text } = Fields;
 const { FlexRows } = Layout;
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
@@ -98,7 +98,7 @@ const EyebrowStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_EYEBROW_CONTAINER}`]: Eyebrow['.umd-eyebrow-ribbon'],
+      [`.${SUMMARY_EYEBROW_CONTAINER}`]: Ribbon,
     },
   })}
 `;
@@ -136,7 +136,7 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_TEXT_CONTAINER} *`]: Text['.umd-text'],
+      [`.${SUMMARY_TEXT_CONTAINER} *`]: Text,
     },
   })}
 

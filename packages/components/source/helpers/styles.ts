@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import postcss from 'postcss';
 
-const { colors } = Tokens;
+const { Colors } = Tokens;
 
 const postcssNesting = require('postcss-nesting');
 const postcssJs = require('postcss-js');
@@ -21,11 +21,11 @@ export const Reset = `
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 
   p {
-    color: ${colors.gray.dark};
+    color: ${Colors.gray.dark};
   }
 
   a {
@@ -38,7 +38,7 @@ export const Reset = `
   }
 
   date {
-    color: ${colors.gray.medium};
+    color: ${Colors.gray.medium};
   }
 
   strong, b {

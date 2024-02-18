@@ -8,7 +8,7 @@ import {
   CreateCallToActionElement,
 } from 'elements/call-to-action';
 
-const { colors, fontSize, spacing } = Tokens;
+const { Colors, fontSize, spacing } = Tokens;
 
 const CTA_PLAIN_TEXT_SLOT = 'umd-call-to-action-plain-text-slot';
 
@@ -50,7 +50,7 @@ const PlainTextSlotStyles = `
 
   .${CTA_PLAIN_TEXT_SLOT}:hover,
   .${CTA_PLAIN_TEXT_SLOT}:focus {
-    color: ${colors.redDark};
+    color: ${Colors.redDark};
   }
 `;
 

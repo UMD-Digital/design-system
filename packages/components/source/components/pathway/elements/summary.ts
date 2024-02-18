@@ -9,7 +9,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
-const { spacing, colors, fontSize } = Tokens;
+const { spacing, Colors, fontSize } = Tokens;
 const { Eyebrow, Text } = Fields;
 const { FlexRows } = Layout;
 
@@ -28,7 +28,7 @@ const SUMMARY_ACTIONS_CONTAINER =
 const ThemeStyles = `
   .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${SUMMARY_HEADLINE_CONTAINER},
   .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${SUMMARY_TEXT_CONTAINER} * {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 `
 
@@ -93,7 +93,7 @@ const WithHighlightStyles = `
 const EyebrowStyles = `
   .${SUMMARY_EYEBROW_CONTAINER} {
     margin-bottom: ${spacing.sm};
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -118,7 +118,7 @@ const HeadlineStyles = `
   })}
 
   .${SUMMARY_HEADLINE_CONTAINER} {
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 `;
 

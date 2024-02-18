@@ -7,7 +7,7 @@ import { CreateCtaIcon, CtaIconStyles } from './cta-icon';
 import { CardType } from '../component';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { Text } = Fields;
 const { LinkLineSlide } = Animations;
 
@@ -18,25 +18,25 @@ const CARD_OVERLAY_TINT_OVERLAY = 'umd-card-overlay-tint';
 // prettier-ignore
 const VariantLightThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
-    background-color: ${colors.gray.darker};
+    background-color: ${Colors.gray.darker};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} svg,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} path {
-    fill: ${colors.white};
+    fill: ${Colors.white};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
-    background-color: ${colors.white};
-    border: 1px solid ${colors.gray.darker};
+    background-color: ${Colors.white};
+    border: 1px solid ${Colors.gray.darker};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover path,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus path {
-    fill: ${colors.gray.darker};
+    fill: ${Colors.gray.darker};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -50,22 +50,22 @@ const VariantLightThemeStyles = `
 // prettier-ignore
 const VariantDarkThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] {
-    background-color: ${colors.gray.darker};
+    background-color: ${Colors.gray.darker};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] * {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
-    background-color: ${colors.gray.darker};
-    border: 1px solid ${colors.white};
+    background-color: ${Colors.gray.darker};
+    border: 1px solid ${Colors.white};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg path,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg path {
-    fill: ${colors.white};
+    fill: ${Colors.white};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -96,17 +96,17 @@ const VariantImageThemeContent = `
 // prettier-ignore
 const VariantImageThemeCtaIcon = `
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
-    background-color: ${colors.white};
+    background-color: ${Colors.white};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a svg,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a path {
-    fill: ${colors.gray.darker};
+    fill: ${Colors.gray.darker};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
-    background-color: ${colors.gray.darker};
+    background-color: ${Colors.gray.darker};
     border: none;
   }
 
@@ -114,7 +114,7 @@ const VariantImageThemeCtaIcon = `
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover path,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg,
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus path {
-    fill: ${colors.white};
+    fill: ${Colors.white};
   }
 `;
 
@@ -154,7 +154,7 @@ const VariantImageThemeStyles = `
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] * {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${CARD_OVERLAY_TEXT_CONTAINER} {
@@ -193,7 +193,7 @@ export const ComponentStyles = `
   .${CARD_OVERLAY_CONTAINER} {
     height: 100%;
     position: relative;
-    background-color: ${colors.gray.lightest};
+    background-color: ${Colors.gray.lightest};
     padding: ${spacing.md};
     padding-top: ${spacing['4xl']};
     padding-bottom: ${spacing.lg};

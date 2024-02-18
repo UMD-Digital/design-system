@@ -5,7 +5,7 @@ import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { Lock } = Layout;
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
@@ -30,7 +30,7 @@ const socialOverwriteStyles = `
 export const RowLinkStyles = `
   .${ROW_LINKS_CONTAINER} {
     padding-bottom: ${spacing.lg};
-    background-color: ${colors.black};
+    background-color: ${Colors.black};
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
@@ -40,7 +40,7 @@ export const RowLinkStyles = `
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${ROW_LINKS_CONTAINER} {
-    background-color: ${colors.gray.lightest};
+    background-color: ${Colors.gray.lightest};
   }
 
   .${ROW_LINKS_CONTAINER_WRAPPER}  {

@@ -1,13 +1,13 @@
 import { Typography, Fields, Tokens } from '@universityofmaryland/variables';
 
-const { colors, spacing, fontFamily } = Tokens;
+const { Colors, spacing, fontFamily } = Tokens;
 const { Text } = Fields;
 
 const RichTextCoding = {
   '.umd-rich-text-coding': {
     '& code, & pre': {
-      border: `1px solid ${colors.gray.lightest}`,
-      backgroundColor: colors.gray.lightest,
+      border: `1px solid ${Colors.gray.lightest}`,
+      backgroundColor: Colors.gray.lightest,
       borderRadius: '3px',
       color: 'currentColor',
       fontFamily: fontFamily.mono,
@@ -30,7 +30,7 @@ const RichTextQuotes = {
       ...Typography['.umd-sans-larger'],
       ...{
         display: 'inline-block',
-        borderLeft: `2px solid ${colors.red}`,
+        borderLeft: `2px solid ${Colors.red}`,
         position: 'relative',
         paddingLeft: spacing.md,
       },
@@ -64,17 +64,17 @@ const RichTextTables = {
       },
 
       '& thead th': {
-        background: colors.gray.lighter,
-        color: colors.black,
+        background: Colors.gray.lighter,
+        color: Colors.black,
         textAlign: 'left',
       },
 
       '& tbody tr': {
-        borderTop: `1px solid ${colors.gray.light}`,
+        borderTop: `1px solid ${Colors.gray.light}`,
       },
 
       '& tr:nth-child(even)': {
-        background: colors.gray.lightest,
+        background: Colors.gray.lightest,
       },
     },
   },

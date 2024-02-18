@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AlignedContent } from '../layout/alignment';
 
-const { colors, spacing, Queries } = Tokens;
+const { Colors, spacing, Queries } = Tokens;
 
 const SectionIntro = {
   'umd-component-intro': {
@@ -18,7 +18,7 @@ const SectionIntro = {
 
         '&:before': {
           content: '""',
-          backgroundColor: colors.red,
+          backgroundColor: Colors.red,
           height: `${spacing['4xl']}`,
           width: '2px',
           position: 'absolute',

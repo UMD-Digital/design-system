@@ -18,7 +18,7 @@ import {
 } from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
@@ -83,7 +83,7 @@ const HeadlineStyles = `
   })}
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a {
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -154,7 +154,7 @@ const LinkListStyles = `
     display: inline-block;
     height: 3px;
     width: 3px;
-    background-color: ${colors.white};
+    background-color: ${Colors.white};
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -162,7 +162,7 @@ const LinkListStyles = `
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a:not(:first-child):before {
-    background-color: ${colors.black};
+    background-color: ${Colors.black};
   }
 `;
 

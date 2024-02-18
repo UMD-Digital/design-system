@@ -16,7 +16,7 @@ import {
 } from 'components/footer/globals';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 
-const { spacing, colors } = Tokens;
+const { spacing, Colors } = Tokens;
 
 export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
@@ -41,20 +41,20 @@ const campaignOverwriteStyles = `
 
 const themeOverwriteStyles = `
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
-    background-color: ${colors.gray.light};
+    background-color: ${Colors.gray.light};
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
-    fill: ${colors.black} !important;
+    fill: ${Colors.black} !important;
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
-    background-color: ${colors.gray.dark};
+    background-color: ${Colors.gray.dark};
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
-    fill: ${colors.gray.light} !important;
+    fill: ${Colors.gray.light} !important;
   }
 `;
 
@@ -107,7 +107,7 @@ export const SocialContainerStyles = `
   }
 
   .${SOCIAL_CONTAINER_WRAPPER} a {
-    background-color: ${colors.gray.darker};
+    background-color: ${Colors.gray.darker};
     height: 32px;
     width: 32px;
     display: flex;
@@ -119,16 +119,16 @@ export const SocialContainerStyles = `
   .${SOCIAL_CONTAINER_WRAPPER} a > *,
   .${SOCIAL_CONTAINER_WRAPPER} a path {
     max-height: 20px !important;
-    fill: ${colors.white} !important;
+    fill: ${Colors.white} !important;
     transition: fill .5s;
   }
 
   .${SOCIAL_CONTAINER_WRAPPER} a:hover {
-    background-color: ${colors.gray.light};
+    background-color: ${Colors.gray.light};
   }
 
   .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
-    fill: ${colors.gray.dark} !important;
+    fill: ${Colors.gray.dark} !important;
   }
 
   ${ConvertJSSObjectToStyles({

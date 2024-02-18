@@ -10,7 +10,7 @@ import { SizeDatesElements } from '../services/helpers';
 import { CreateCoverElement, CoverStyles } from './cover';
 import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
 
-const { colors } = Tokens;
+const { Colors } = Tokens;
 
 const CONTAINER_CLASS = 'umd-element-date-slider-container';
 const CONTAINER_WRAPPER_CLASS = 'umd-element-date-slider-container-wrapper';
@@ -22,7 +22,7 @@ export const ContainerStyles = `
 
   .${CONTAINER_WRAPPER_CLASS} {
     padding: 24px 0;
-    background-color: ${colors.gray.lighter};
+    background-color: ${Colors.gray.lighter};
     position: relative;
     z-index: 99;
   }
@@ -40,7 +40,7 @@ export const ContainerStyles = `
   }
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${CONTAINER_WRAPPER_CLASS} {
-    background-color: ${colors.gray.darker};
+    background-color: ${Colors.gray.darker};
   }
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} * {

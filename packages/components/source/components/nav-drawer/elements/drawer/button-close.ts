@@ -4,12 +4,12 @@ import { UMDNavDrawer } from 'components/nav-drawer/component';
 const BUTTON_ICON = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="25.0241" y="13.2861" width="83" height="16.6" transform="rotate(45 25.0241 13.2861)"></rect><rect x="83.7139" y="25.0241" width="83" height="16.6" transform="rotate(135 83.7139 25.0241)"></rect></svg>`;
 const DRAWER_CLOSE_BUTTON = 'umd-element-drawer-close-button';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 // prettier-ignore
 export const drawerButtonStyles = `
   .${DRAWER_CLOSE_BUTTON} {
-    background-color: ${colors.red};
+    background-color: ${Colors.red};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,7 +25,7 @@ export const drawerButtonStyles = `
   }
 
   .${DRAWER_CLOSE_BUTTON} svg {
-    fill: ${colors.white};
+    fill: ${Colors.white};
   }
 `;
 

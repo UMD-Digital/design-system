@@ -1,6 +1,6 @@
 import { Tokens, Animations } from '@universityofmaryland/variables';
 
-const { colors } = Tokens;
+const { Colors } = Tokens;
 const { LinkLineFade, LinkLineSlide } = Animations;
 
 const baseSpan = {
@@ -36,7 +36,7 @@ const SlideInUnderlineLink = {
       ...baseSpan,
 
       backgroundSize: '0 2px',
-      backgroundImage: `linear-gradient(${colors.gold}, ${colors.gold})`,
+      backgroundImage: `linear-gradient(${Colors.gold}, ${Colors.gold})`,
     },
   },
 };
@@ -49,7 +49,7 @@ const FadeInUnderlineLink = {
       ...baseSpan,
 
       backgroundSize: '100% 0',
-      backgroundImage: `linear-gradient(${colors.red}, ${colors.red})`,
+      backgroundImage: `linear-gradient(${Colors.red}, ${Colors.red})`,
     },
   },
 
@@ -60,7 +60,7 @@ const FadeInUnderlineLink = {
       ...baseSpan,
 
       backgroundSize: '100% 0',
-      backgroundImage: `linear-gradient(${colors.gray.mediumAA}, ${colors.gray.mediumAA})`,
+      backgroundImage: `linear-gradient(${Colors.gray.mediumAA}, ${Colors.gray.mediumAA})`,
     },
   },
 
@@ -71,7 +71,7 @@ const FadeInUnderlineLink = {
       ...baseSpan,
 
       backgroundSize: '100% 0',
-      backgroundImage: `linear-gradient(${colors.gold}, ${colors.gold})`,
+      backgroundImage: `linear-gradient(${Colors.gold}, ${Colors.gold})`,
     },
   },
 
@@ -82,7 +82,7 @@ const FadeInUnderlineLink = {
       ...baseSpan,
 
       backgroundSize: '100% 0',
-      backgroundImage: `linear-gradient(${colors.black}, ${colors.black})`,
+      backgroundImage: `linear-gradient(${Colors.black}, ${Colors.black})`,
     },
   },
 
@@ -93,7 +93,7 @@ const FadeInUnderlineLink = {
       ...baseSpan,
 
       backgroundSize: '100% 0',
-      backgroundImage: `linear-gradient(${colors.white}, ${colors.white})`,
+      backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
     },
   },
 };

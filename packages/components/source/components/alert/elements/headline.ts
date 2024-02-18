@@ -8,7 +8,7 @@ import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const ALERT_HEADLINE = 'umd-alert-headline';
@@ -17,7 +17,7 @@ const ALERT_HEADLINE = 'umd-alert-headline';
 export const headlineStyles = `
   .${ALERT_HEADLINE} {
     margin-bottom: ${spacing.sm};
-    color: ${colors.black}
+    color: ${Colors.black}
   }
 
   .${ALERT_HEADLINE} * {

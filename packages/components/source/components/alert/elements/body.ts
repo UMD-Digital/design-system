@@ -5,7 +5,7 @@ import { AlertType } from 'components/alert/component';
 import { SlotDefaultStyling } from 'helpers/ui';
 
 const { TextBase } = Fields;
-const { colors } = Tokens;
+const { Colors } = Tokens;
 
 const ALERT_BODY = 'umd-alert-body';
 
@@ -13,7 +13,7 @@ const ALERT_BODY = 'umd-alert-body';
 export const bodyStyles = `
   .${ALERT_BODY} * {
     font-weight: 500;
-    color: ${colors.gray.dark}
+    color: ${Colors.gray.dark}
   }
 
   ${ConvertJSSObjectToStyles({

@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 
@@ -14,30 +14,30 @@ export const CallToActionStyles = `
   .${CALL_TO_ACTION_CONTAINER} a {
     display: inline-block;
     padding: ${spacing.xs} ${spacing['lg']};
-    background-color: ${colors.red};
-    color: ${colors.white};
+    background-color: ${Colors.red};
+    color: ${Colors.white};
     font-weight: 800;
-    border: 1px solid ${colors.red};
+    border: 1px solid ${Colors.red};
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
 
   .${CALL_TO_ACTION_CONTAINER} a:hover,
   .${CALL_TO_ACTION_CONTAINER} a:focus {
     background-size: none;
-    color: ${colors.white};
-    background-color: ${colors.black};
+    color: ${Colors.white};
+    background-color: ${Colors.black};
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a {
-    background-color: ${colors.black};
-    color: ${colors.white};
-    border: 1px solid ${colors.black};
+    background-color: ${Colors.black};
+    color: ${Colors.white};
+    border: 1px solid ${Colors.black};
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:hover,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:focus {
-    color: ${colors.black};
-    background-color: ${colors.gray.lightest};
+    color: ${Colors.black};
+    background-color: ${Colors.gray.lightest};
   }
 `;
 

@@ -1,5 +1,5 @@
 import Typography from '../typography';
-import { colors } from '../tokens/colors';
+import { Colors } from '../tokens/colors';
 import { spacing } from '../tokens/spacing';
 
 const ListStylesBase = {
@@ -67,7 +67,7 @@ const ListStylesBase = {
 
     '& > li:before': {
       content: 'counter(item)',
-      borderRight: `1px solid ${colors.red}`,
+      borderRight: `1px solid ${Colors.red}`,
       paddingRight: spacing.min,
       right: `calc(100% - ${spacing.lg})`,
     },

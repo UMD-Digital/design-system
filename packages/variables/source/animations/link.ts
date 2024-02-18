@@ -1,4 +1,4 @@
-import { colors } from '../tokens/colors';
+import { Colors } from '../tokens/colors';
 
 const BaseSpan = {
   display: 'inline',
@@ -35,18 +35,18 @@ export const LinkLineFade = {
   '.fadein-simple-dark': {
     ...BaseLink,
 
-    backgroundImage: `linear-gradient(${colors.white}, ${colors.white})`,
+    backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
     backgroundPosition: 'left calc(100% - 1px)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 1px',
-    color: colors.white,
+    color: Colors.white,
     transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
 
     [`&:hover,
     &:focus`]: {
-      backgroundImage: `linear-gradient(${colors.gold}, ${colors.gold})`,
+      backgroundImage: `linear-gradient(${Colors.gold}, ${Colors.gold})`,
       backgroundPosition: 'left calc(100%)',
-      color: colors.white,
+      color: Colors.white,
       textDecoration: 'none',
     },
   },
@@ -63,9 +63,9 @@ export const LinkLineFade = {
 
     [`&:hover,
     &:focus`]: {
-      backgroundImage: `linear-gradient(${colors.red}, ${colors.red})`,
+      backgroundImage: `linear-gradient(${Colors.red}, ${Colors.red})`,
       backgroundPosition: 'left calc(100%)',
-      color: colors.red,
+      color: Colors.red,
       textDecoration: 'none',
     },
   },
@@ -83,7 +83,7 @@ export const LinkLineSlide = {
       ...BaseSpan,
 
       backgroundSize: '0 2px',
-      backgroundImage: `linear-gradient(${colors.red}, ${colors.red})`,
+      backgroundImage: `linear-gradient(${Colors.red}, ${Colors.red})`,
     },
   },
 
@@ -94,7 +94,7 @@ export const LinkLineSlide = {
       ...BaseSpan,
 
       backgroundSize: '0 2px',
-      backgroundImage: `linear-gradient(${colors.black}, ${colors.black})`,
+      backgroundImage: `linear-gradient(${Colors.black}, ${Colors.black})`,
     },
   },
 
@@ -105,7 +105,7 @@ export const LinkLineSlide = {
       ...BaseSpan,
 
       backgroundSize: '0 2px',
-      backgroundImage: `linear-gradient(${colors.white}, ${colors.white})`,
+      backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
     },
   },
 
@@ -115,7 +115,7 @@ export const LinkLineSlide = {
     '& > *:not(svg):not(.sr-only)': {
       ...BaseSpan,
 
-      backgroundImage: `linear-gradient(to left, ${colors.gray.light} 50%, ${colors.red} 50% 100%)`,
+      backgroundImage: `linear-gradient(to left, ${Colors.gray.light} 50%, ${Colors.red} 50% 100%)`,
       backgroundPosition: 'right bottom',
       backgroundSize: '200% 2px',
     },

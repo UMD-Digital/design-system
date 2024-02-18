@@ -9,7 +9,7 @@ import {
 import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { Lock } = Layout;
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
@@ -23,7 +23,7 @@ const CAROUSEL_LOCK = 'umd-element-carousel-lock';
 // prettier-ignore
 const containerStyles = `
   .${CAROUSEL_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${Colors.black};
     padding: ${spacing['3xl']} 0;
     position: relative;
     overflow: hidden;
@@ -57,7 +57,7 @@ const containerStyles = `
   }
 
   .${CAROUSEL_CONTAINER} ::slotted(*) {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 `
 
@@ -90,11 +90,11 @@ const containerLockStyles = `
 export const ComponentStyles = `
   :host {
     display: block;
-    background-color: ${colors.black};
+    background-color: ${Colors.black};
   }
 
   :host * {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 
   ${Reset}

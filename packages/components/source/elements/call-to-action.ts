@@ -13,7 +13,7 @@ import {
   CLASS_STYLES_REF_CTA_PRIMARY,
 } from 'styles/call-to-action-primary';
 
-const { colors, fontSize, spacing } = Tokens;
+const { Colors, fontSize, spacing } = Tokens;
 
 const MAX_WIDTH = 380;
 const ATTR_SIZE = 'data-size';
@@ -33,19 +33,19 @@ const CLASS_CTA_TEXT_WRAPPER = 'umd-call-to-action-text-wrapper';
 const ThemeStyles = `
   .${CLASS_STYLES_REF_CTA_OUTLINE}[${ATTR_THEME}="${THEME_DARK}"] {
     background-color: transparent;
-    border: 1px solid ${colors.white};
-    color: ${colors.white};
+    border: 1px solid ${Colors.white};
+    color: ${Colors.white};
   }
 
   .${CLASS_STYLES_REF_CTA_OUTLINE}[${ATTR_THEME}="${THEME_DARK}"]:hover,
   .${CLASS_STYLES_REF_CTA_OUTLINE}[${ATTR_THEME}="${THEME_DARK}"]:focus {
-    background-color: ${colors.white};
-    border: 1px solid ${colors.white};
-    color: ${colors.black};
+    background-color: ${Colors.white};
+    border: 1px solid ${Colors.white};
+    color: ${Colors.black};
   }
 
   .${CLASS_STYLES_REF_CTA_SECONDARY}[${ATTR_THEME}="${THEME_DARK}"] {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 `
 
@@ -85,7 +85,7 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
   }
 
   .${CLASS_BASE_CTA} svg {
-    fill: ${colors.red};
+    fill: ${Colors.red};
     height: 14px;
     width: 14px;
     transition: fill 0.5s;

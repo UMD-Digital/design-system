@@ -13,7 +13,7 @@ import {
 } from 'components/footer/globals';
 import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { Lock } = Layout;
 
@@ -35,7 +35,7 @@ const LinkStyles = `
   })}
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a {
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -49,13 +49,13 @@ const LinkStyles = `
 // prettier-ignore
 const TextStyles = `
   .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} p {
-    color: ${colors.white};
+    color: ${Colors.white};
     display: flex;
     align-items: center;
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 `;
 
@@ -63,7 +63,7 @@ const TextStyles = `
 export const UtilityContainerStyles = `
   .${UTILITY_CONTAINER} {
     padding: ${spacing.sm} 0;
-    background-color: ${colors.gray.darker};
+    background-color: ${Colors.gray.darker};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -96,12 +96,12 @@ export const UtilityContainerStyles = `
       margin-left: ${spacing.sm};
       padding-left: ${spacing.sm};
       background-position: ${spacing.sm} 100%;
-      border-left: 1px solid ${colors.gray.dark};
+      border-left: 1px solid ${Colors.gray.dark};
     }
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {
-    background-color: ${colors.gray.light};
+    background-color: ${Colors.gray.light};
   }
 
   ${LinkStyles}

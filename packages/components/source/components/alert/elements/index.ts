@@ -9,7 +9,7 @@ import { CreateHeadline, headlineStyles } from './headline';
 import { CreateBody, bodyStyles } from './body';
 import { CreateCta, ctaStyles } from './cta';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 export const ELEMENT_NAME = 'umd-element-alert';
 
@@ -18,11 +18,11 @@ const CLOSE_BUTTON_CLASS = 'umd-element-alert-close-button';
 
 const AlertStyles = `
   .${CONTAINER_CLASS}[data-type="alert"] {
-    border: solid 4px ${colors.gold} !important;
+    border: solid 4px ${Colors.gold} !important;
   }
 
   .${CONTAINER_CLASS}[data-type="alert"] .${ELEMENTS.ICON_CLASS} svg circle {
-    fill: ${colors.gold} !important;
+    fill: ${Colors.gold} !important;
   }
 `;
 
@@ -38,11 +38,11 @@ const NotificationStyles = `
 
 const EmergencyStyles = `
   .${CONTAINER_CLASS}[data-type="emergency"]  {
-    border: solid 4px ${colors.red} !important;
+    border: solid 4px ${Colors.red} !important;
   }
 
   .${CONTAINER_CLASS}[data-type="emergency"] .${ELEMENTS.ICON_CLASS} svg circle  {
-    fill: ${colors.red} !important;
+    fill: ${Colors.red} !important;
   }
 `;
 

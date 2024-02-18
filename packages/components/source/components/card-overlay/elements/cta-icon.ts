@@ -3,7 +3,7 @@ import { DOCUMENT_ICON, NEW_WINDOW_ICON, SHORT_ARROW_ICON } from 'assets/icons';
 import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 // prettier-ignore
 export const CtaIconStyles = `
@@ -21,14 +21,14 @@ export const CtaIconStyles = `
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${colors.white};
+    background-color: ${Colors.white};
     transition: background-color 0.3s ease-in-out;
   }
 
   .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} svg {
     height: 15px;
     width: 15px;
-    fill: ${colors.gray.darker};
+    fill: ${Colors.gray.darker};
     transition: background-color 0.3s ease-in-out;
   }
 `;

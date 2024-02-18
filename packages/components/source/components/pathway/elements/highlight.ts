@@ -4,7 +4,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
@@ -13,11 +13,11 @@ const PATHWAY_HIGHLIGHT_CONTAINER_TEXT = 'umd-pathway-highlight-text';
 // prettier-ignore
 const ThemeStyles = `
   .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${Colors.black};
   }
 
   .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} * {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 `
 
@@ -25,7 +25,7 @@ const ThemeStyles = `
 export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
   .${PATHWAY_HIGHLIGHT_CONTAINER} {
     padding: ${spacing['5xl']} ${spacing.md} ${spacing.md} ${spacing.md};
-    background-color: ${colors.gray.lightest};
+    background-color: ${Colors.gray.lightest};
     position: relative;
   }
 
@@ -51,7 +51,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
   .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
     content: '';
     position: absolute;
-    background-color: ${colors.red};
+    background-color: ${Colors.red};
   }
 
   @container umd-pathway (max-width: ${BREAKPOINTS.medium - 1}px) {
@@ -67,7 +67,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
       left: 0;
       width: 2px;
       height: 100%;
-      background-color: ${colors.red};
+      background-color: ${Colors.red};
     }
   }
 

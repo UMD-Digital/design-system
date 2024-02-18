@@ -9,24 +9,24 @@ import Layout from './layout';
 import WebComponents from './web-components';
 import WebFeeds from './web-feeds';
 
-const { colors, fontFamily, fontSize } = Tokens;
+const { Colors, fontFamily, fontSize } = Tokens;
 
 const root = {
   ':root': {
-    '--red': colors.red,
-    '--gold': colors.gold,
-    '--blue': colors.blue,
-    '--green': colors.green,
-    '--white': colors.white,
-    '--black': colors.black,
-    '--redDark': colors.redDark,
-    '--grayDarker': colors.gray.darker,
-    '--grayDark': colors.gray.dark,
-    '--grayAA': colors.gray.mediumAA,
-    '--gray': colors.gray.medium,
-    '--grayLight': colors.gray.light,
-    '--grayLighter': colors.gray.lighter,
-    '--grayLightest': colors.gray.lightest,
+    '--red': Colors.red,
+    '--gold': Colors.gold,
+    '--blue': Colors.blue,
+    '--green': Colors.green,
+    '--white': Colors.white,
+    '--black': Colors.black,
+    '--redDark': Colors.redDark,
+    '--grayDarker': Colors.gray.darker,
+    '--grayDark': Colors.gray.dark,
+    '--grayAA': Colors.gray.mediumAA,
+    '--gray': Colors.gray.medium,
+    '--grayLight': Colors.gray.light,
+    '--grayLighter': Colors.gray.lighter,
+    '--grayLightest': Colors.gray.lightest,
     '--serif': fontFamily.serif,
     '--sanSerif': fontFamily.sans,
     fontFamily: fontFamily.sans,
@@ -35,8 +35,12 @@ const root = {
   },
 };
 
+const exposedTokens = Object.fromEntries(
+  Object.entries(Tokens).map(([key, value]) => [key.toLowerCase(), value]),
+);
+
 export const base = {
-  ...Tokens,
+  ...exposedTokens,
 };
 
 export const theme = {

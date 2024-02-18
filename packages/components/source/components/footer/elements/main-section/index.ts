@@ -5,7 +5,7 @@ import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';
 
-const { colors } = Tokens;
+const { Colors } = Tokens;
 
 const SLOT_BACKGROUND_IMAGE_NAME = 'background-image';
 const MAIN_CONTAINER = 'umd-footer-main-container';
@@ -43,13 +43,13 @@ export const MainContainerStyles = `
   .${ELEMENTS.ELEMENT_WRAPPER} p,
   .${ELEMENTS.ELEMENT_WRAPPER} a,
   .${ELEMENTS.ELEMENT_WRAPPER} span {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] p,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] span,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a {
-    color: ${colors.gray.darker}
+    color: ${Colors.gray.darker}
   }
 
   ${RowLogoStyles}

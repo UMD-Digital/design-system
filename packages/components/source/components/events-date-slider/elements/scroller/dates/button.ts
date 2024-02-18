@@ -5,26 +5,26 @@ import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
 import { ButtonVisibilityLogic } from '../../../services/helpers';
 import { EventSlideDates } from '../../../services/events';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 const FORWARD_ARROW_CLASS = 'umd-element-date-slider-forward-arrow';
 const BACK_ARROW_CLASS = 'umd-element-date-slider-back-arrow';
 
 const darkThemeStyles = `
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} {
-    background-color: ${colors.gray.dark};
+    background-color: ${Colors.gray.dark};
   }
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} svg {
-    fill: ${colors.white}
+    fill: ${Colors.white}
   }
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover {
-    background-color: ${colors.white}
+    background-color: ${Colors.white}
   }
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover svg {
-    fill: ${colors.black}
+    fill: ${Colors.black}
   }
 `;
 
@@ -36,7 +36,7 @@ export const ButtonStyles = `
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${colors.gray.light};
+    background-color: ${Colors.gray.light};
     transition: background-color .5s;
     position: absolute;
     top: 50%;
@@ -52,16 +52,16 @@ export const ButtonStyles = `
   }
 
   .${ELEMENTS.ARROW_CLASS}:hover {
-    background-color: ${colors.black};
+    background-color: ${Colors.black};
   }
 
   .${ELEMENTS.ARROW_CLASS}:hover svg {
-    fill: ${colors.white};
+    fill: ${Colors.white};
   }
 
   .${ELEMENTS.ARROW_CLASS} svg {
     transition: fill .5s;
-    fill: ${colors.black};
+    fill: ${Colors.black};
     width: 16px;
     height: 6px;
   }

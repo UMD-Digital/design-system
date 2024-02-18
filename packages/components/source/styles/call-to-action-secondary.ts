@@ -1,7 +1,7 @@
 import { Animations, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-const { colors } = Tokens;
+const { Colors } = Tokens;
 const { LinkLineSlide } = Animations;
 
 export const CLASS_STYLES_REF_CTA_SECONDARY =
@@ -10,7 +10,7 @@ export const CLASS_STYLES_REF_CTA_SECONDARY =
 // prettier-ignore
 export const STYLES_CTA_SECONDARY = `
   .${CLASS_STYLES_REF_CTA_SECONDARY} {
-    color: ${colors.black};
+    color: ${Colors.black};
     padding: 0 !important;
   }
 

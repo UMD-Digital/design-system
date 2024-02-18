@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { colors, spacing, Queries } = Tokens;
+const { Colors, spacing, Queries } = Tokens;
 
 export default {
   'umd-element-carousel-cards:not(:defined)': {
@@ -23,7 +23,7 @@ export default {
     },
 
     '& .umd-cta-secondary': {
-      color: colors.white,
+      color: Colors.white,
     },
   },
 };

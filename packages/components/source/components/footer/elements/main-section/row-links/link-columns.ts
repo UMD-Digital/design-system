@@ -12,7 +12,7 @@ import {
 } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
-const { colors, spacing, fontWeight } = Tokens;
+const { Colors, spacing, fontWeight } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const HEADLINE_ATTRIBUTE = 'data-headline';
@@ -196,7 +196,7 @@ const ColumnWrapper = `
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
       margin-left: ${spacing.lg};
       padding-left: ${spacing.lg};
-      border-left: 1px solid ${colors.gray.dark};
+      border-left: 1px solid ${Colors.gray.dark};
     }
   }
 

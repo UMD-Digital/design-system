@@ -15,7 +15,7 @@ import {
 import { ContactContainerStyles, CreateContactContainer } from './contact';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { Lock } = Layout;
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
@@ -33,7 +33,7 @@ const ctaOverwriteStyles = `
 // prettier-ignore
 const themeOverwriteStyles = `
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${ROW_LOGO_CONTAINER} {
-    background-color: ${colors.gray.lightest} !important;
+    background-color: ${Colors.gray.lightest} !important;
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
@@ -46,7 +46,7 @@ const themeOverwriteStyles = `
 // prettier-ignore
 export const RowLogoStyles = `
   .${ROW_LOGO_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${Colors.black};
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {

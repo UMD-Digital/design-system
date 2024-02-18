@@ -1,12 +1,12 @@
 import { Breakpoints, Queries } from './breakpoints';
-import { colors } from './colors';
+import { Colors } from './colors';
 import { fontFace, fontFamily, fontSize, fontWeight } from './fonts';
 import { spacing } from './spacing';
 
 export default {
   Breakpoints,
   Queries,
-  colors,
+  Colors,
   fontFace,
   fontFamily,
   fontSize,

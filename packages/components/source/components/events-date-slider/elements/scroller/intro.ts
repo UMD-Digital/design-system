@@ -7,7 +7,7 @@ import {
   SLOTS,
 } from 'components/events-date-slider/globals';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 const INTRO_CONTAINER = 'umd-element-date-slider-intro-container';
 const INTRO_HEADLINE = 'umd-element-date-slider-headline';
@@ -15,7 +15,7 @@ const INTRO_LINK = 'umd-element-date-slider-link';
 
 const headlineStyles = `
   .${INTRO_HEADLINE} {
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -25,7 +25,7 @@ const headlineStyles = `
   })}
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${INTRO_HEADLINE} {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 `;
 
@@ -39,7 +39,7 @@ const linkStyles = `
   }
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${INTRO_LINK} {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 `;
 

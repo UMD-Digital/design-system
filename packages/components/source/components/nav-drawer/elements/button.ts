@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { UMDNavDrawer } from 'components/nav-drawer/component';
 
-const { colors } = Tokens;
+const { Colors } = Tokens;
 
 const NAV_DRAWER_BUTTON = 'umd-nav-drawer-button';
 const NAV_DRAWER_BUTTON_WRAPPER = 'umd-nav-drawer-button-wrapper';
@@ -17,7 +17,7 @@ export const buttonStyles = `
 
   .${NAV_DRAWER_BUTTON}:hover .${NAV_DRAWER_BUTTON_WRAPPER} span,
   .${NAV_DRAWER_BUTTON}:focus .${NAV_DRAWER_BUTTON_WRAPPER} span {
-    background-color: ${colors.red};
+    background-color: ${Colors.red};
   }
 
   .${NAV_DRAWER_BUTTON_WRAPPER} {
@@ -32,7 +32,7 @@ export const buttonStyles = `
   .${NAV_DRAWER_BUTTON_WRAPPER} span {
     width: 20px;
     height: 2.5px;
-    background-color: ${colors.black};
+    background-color: ${Colors.black};
     transition: background-color 0.3s ease-in-out;
   }
 

@@ -8,7 +8,7 @@ import {
 } from 'components/carousel-cards/globals';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { Text } = Fields;
 
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
@@ -19,7 +19,7 @@ const INTRO_CONTAINER_CTA = 'umd-carousel-cards-intro-container-cta';
 // prettier-ignore
 const headlineStyles = `
   .${INTRO_CONTAINER_HEADLINE} * {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -61,7 +61,7 @@ const ctaStyles = `
   }
 
   .${INTRO_CONTAINER_CTA} a {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 `;
 

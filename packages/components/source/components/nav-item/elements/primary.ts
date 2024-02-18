@@ -5,7 +5,7 @@ import { ElementType } from 'components/nav-item/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreateDropdown, DropdownStyles } from './dropdown';
 
-const { colors, fontSize } = Tokens;
+const { Colors, fontSize } = Tokens;
 
 const PRIMARY_LINK_CONTAINER = 'primary-link-container';
 
@@ -21,7 +21,7 @@ export const PrimaryStyles = `
   }
 
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a {
-    color: ${colors.black};
+    color: ${Colors.black};
     font-size: ${fontSize.base};
     white-space: nowrap;
     transition: color 0.2s ease-in-out;
@@ -30,7 +30,7 @@ export const PrimaryStyles = `
 
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:hover,
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:focus {
-    color: ${colors.red};
+    color: ${Colors.red};
    }
 
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}] span {
@@ -39,7 +39,7 @@ export const PrimaryStyles = `
     background-position: left calc(100% - 0px);
     background-repeat: no-repeat;
     background-size: 100% 2.5px;
-    background-image: linear-gradient(${colors.gold}, ${colors.gold});
+    background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
   }
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
@@ -50,7 +50,7 @@ export const PrimaryStyles = `
   }
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} svg {
-    fill: ${colors.red};
+    fill: ${Colors.red};
     height: 16px;
     transform: rotate(0deg) translateY(0);
     transition: fill .5s,transform .5s;

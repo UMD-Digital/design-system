@@ -7,7 +7,7 @@ import {
   VARIABLES,
 } from 'components/carousel-cards/globals';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const CAROUSEL_CARDS_BUTTON = `umd-carousel-cards-button`;
 
 const backwardsButtonStyles = `
@@ -45,7 +45,7 @@ const forwardButtonStyles = `
 // prettier-ignore
 export const ButtonStyles = `
   .${CAROUSEL_CARDS_BUTTON} {
-    background-color: ${colors.red};
+    background-color: ${Colors.red};
     padding: ${spacing.xs};
     position: absolute;
     z-index: 9999;
@@ -76,7 +76,7 @@ export const ButtonStyles = `
   .${CAROUSEL_CARDS_BUTTON} svg {
     width: 24px;
     height: 24px;
-    fill: ${colors.white};
+    fill: ${Colors.white};
   }
 
   ${backwardsButtonStyles}

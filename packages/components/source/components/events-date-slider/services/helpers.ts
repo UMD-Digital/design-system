@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from '../component';
 import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 export const ShowNumberOfDates = ({
   shadowRoot,
@@ -130,8 +130,8 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
 
         if (isMobile) {
           const lineColor = isThemeDark
-            ? colors.gray.mediumAA
-            : colors.gray.light;
+            ? Colors.gray.mediumAA
+            : Colors.gray.light;
 
           dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `center`;

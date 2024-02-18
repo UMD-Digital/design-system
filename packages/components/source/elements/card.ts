@@ -7,7 +7,7 @@ import {
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { Text } = Fields;
 
@@ -74,7 +74,7 @@ export const ImageStyles = `
 // prettier-ignore
 const EyebrowStyles = `
   .${CARD_EYEBROW_WRAPPER} * {
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -104,7 +104,7 @@ const HeadlineStyles = `
   }
 
   .${CARD_HEADLINE_WRAPPER} * {
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -141,7 +141,7 @@ const DateStyles = `
   }
 
   .${CARD_BODY_DATE_WRAPPER} * {
-    color: ${colors.gray.mediumAA};
+    color: ${Colors.gray.mediumAA};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -173,7 +173,7 @@ const TextStyles = `
   .${CARD_BODY_TEXT_WRAPPER} a:hover,
   .${CARD_BODY_TEXT_WRAPPER} a:focus {
     text-decoration: underline;
-    color: ${colors.red};
+    color: ${Colors.red};
   }
 `;
 
@@ -225,13 +225,13 @@ export const LayoutBodyStyles = `
 // prettier-ignore
 const VariantThemeStyles = `
   .${CARD_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] {
-    background-color: ${colors.gray.darker};
-    color: ${colors.white};
+    background-color: ${Colors.gray.darker};
+    color: ${Colors.white};
     height: 100%;
   }
 
   .${CARD_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] * {
-    color: ${colors.white};
+    color: ${Colors.white};
   }
 
   .${CARD_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${CARD_TEXT_CONTAINER} {
@@ -272,7 +272,7 @@ const VariantAlignedStyles = `
 // prettier-ignore
 const VariantBorderStyles = `
   .${CARD_CONTAINER}[${VARIABLES.ATTR_BORDER}] {
-    border: 1px solid ${colors.gray.light};
+    border: 1px solid ${Colors.gray.light};
     height: 100%;
   }
 

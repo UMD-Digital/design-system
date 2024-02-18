@@ -1,11 +1,11 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 export default {
   'umd-element-footer:not(:defined)': {
     display: 'block',
-    backgroundColor: colors.black,
+    backgroundColor: Colors.black,
     height: `calc(${spacing.md} * 20)`,
 
     '& > *': {

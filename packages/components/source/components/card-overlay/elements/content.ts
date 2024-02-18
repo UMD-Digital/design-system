@@ -8,7 +8,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/card-overlay/globals';
 
-const { spacing, colors } = Tokens;
+const { spacing, Colors } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const TEXT_CHARACTER_LIMIT = 140;
@@ -77,7 +77,7 @@ const textStyles = `
   .${ELEMENTS.CARD_OVERLAY_TEXT} a:hover,
   .${ELEMENTS.CARD_OVERLAY_TEXT} a:focus {
     text-decoration: underline;
-    color: ${colors.red};
+    color: ${Colors.red};
   }
 `;
 
@@ -88,7 +88,7 @@ const dateStyles = `
   }
 
   .${CARD_OVERLAY_DATE} * {
-    color: ${colors.gray.mediumAA};
+    color: ${Colors.gray.mediumAA};
   }
 
   ${ConvertJSSObjectToStyles({

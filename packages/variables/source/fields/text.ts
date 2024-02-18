@@ -1,4 +1,4 @@
-import { colors } from '../tokens/colors';
+import { Colors } from '../tokens/colors';
 import { fontWeight } from '../tokens/fonts';
 import { spacing } from '../tokens/spacing';
 import Animations from '../animations';
@@ -48,7 +48,7 @@ const TextBase = {
       transition: 'color 0.5s',
 
       '&:hover, &:focus': {
-        color: colors.red,
+        color: Colors.red,
       },
     },
 
@@ -67,7 +67,7 @@ const Text = {
   },
 
   '.umd-text-dark': {
-    color: colors.white,
+    color: Colors.white,
 
     '& a': {
       ...Animations.LinkLineFade['.fadein-simple-dark'],

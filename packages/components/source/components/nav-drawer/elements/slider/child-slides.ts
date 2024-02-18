@@ -5,7 +5,7 @@ import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction } from './slide-action';
 
-const { colors, fontWeight, spacing } = Tokens;
+const { Colors, fontWeight, spacing } = Tokens;
 
 const DRAWER_SLIDER_CHILD_CONTAINER = 'umd-element-drawer-child-slider';
 const DRAWER_SLIDER_HEADLINE = 'umd-element-drawer-back-headline';
@@ -15,7 +15,7 @@ const DRAWER_SLIDER_ACTIONS = 'umd-element-drawer-back-actions';
 const backButtonStyles = `
   .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} {
     display: block;
-    border-bottom: 1px solid ${colors.gray.light};
+    border-bottom: 1px solid ${Colors.gray.light};
     margin-bottom: ${spacing.sm};
     padding-bottom: ${spacing.sm};
   }
@@ -33,7 +33,7 @@ const backButtonStyles = `
     letter-spacing: 1px;
     display: flex;
     align-items: center;
-    color: ${colors.black};
+    color: ${Colors.black};
   }
 
   .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} button:hover,
@@ -42,7 +42,7 @@ const backButtonStyles = `
   }
 
   .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} button svg {
-    fill: ${colors.red};
+    fill: ${Colors.red};
     width: 12px;
     height: 12px;
     margin-right: ${spacing.min};

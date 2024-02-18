@@ -5,7 +5,7 @@ import { CreatePrimarySlide, primarySliderStyles } from './primary-slide';
 import { CreateChildSlide, childSliderStyles } from './child-slides';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 const DRAWER_SLIDER_CONTAINER = 'umd-element-drawer-slider-container';
 const DRAWER_SLIDER = 'umd-element-drawer-slider';
@@ -19,7 +19,7 @@ const decorativeLineStyles = `
     bottom: 0;
     width: 100%;
     height: 8px;
-    background-color: ${colors.red};
+    background-color: ${Colors.red};
     display: block;
   }
 `;
@@ -41,7 +41,7 @@ const sliderStyles = `
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${colors.white};
+    background-color: ${Colors.white};
     overflow-y: auto;
     display: none;
   }
@@ -63,7 +63,7 @@ const selectedLinkStyles = `
     height: 3px;
     left: -3px;
     right: -3px;
-    background-color: ${colors.gold};
+    background-color: ${Colors.gold};
     display: block;
   }
 `;
@@ -92,7 +92,7 @@ const secondaryLinkStyles = `
 export const drawerSliderStyles = `
   .${DRAWER_SLIDER_CONTAINER} {
     position: relative;
-    background-color: ${colors.white};
+    background-color: ${Colors.white};
     padding: ${spacing['2xl']} ${spacing.md};
     height: 100%;
     cursor: default;

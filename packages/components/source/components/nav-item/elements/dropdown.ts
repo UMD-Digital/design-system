@@ -4,7 +4,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 import { ElementType } from 'components/nav-item/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 
-const { colors, spacing } = Tokens;
+const { Colors, spacing } = Tokens;
 
 const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
 const TWO_COLUMN_CONTAINER = 'two-column-container';
@@ -46,7 +46,7 @@ const linkStyles = `
 
   .${DROPDOWN_LIST_CONTAINER} a:hover,
   .${DROPDOWN_LIST_CONTAINER} a:focus {
-    color: ${colors.red};
+    color: ${Colors.red};
   }
 
   .${DROPDOWN_LIST_CONTAINER} a + a {
@@ -60,7 +60,7 @@ const linkStyles = `
     background-position: left calc(100% - 0px);
     background-repeat: no-repeat;
     background-size: 100% 2.5px;
-    background-image: linear-gradient(${colors.gold}, ${colors.gold});
+    background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
   }
 
   .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:hover span,
@@ -83,8 +83,8 @@ export const DropdownStyles = `
   }
 
   .${DROPDOWN_LIST_CONTAINER} {
-    background-color: ${colors.white};
-    border-top: 2px solid ${colors.red};
+    background-color: ${Colors.white};
+    border-top: 2px solid ${Colors.red};
     padding: ${spacing.lg};
     box-shadow: -1px 9px 32px -10px rgba(0,0,0,0.19);
   }

@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { colors } = Tokens;
+const { Colors } = Tokens;
 
 export default {
   'umd-element-card-overlay:not(:defined)': {
@@ -11,7 +11,7 @@ export default {
 
     '&[data-image="true"] .umd-cta-secondary, &[theme="dark"] .umd-cta-secondary':
       {
-        color: colors.white,
+        color: Colors.white,
       },
   },
 };

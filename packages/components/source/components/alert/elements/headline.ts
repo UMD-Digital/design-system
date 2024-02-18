@@ -10,6 +10,7 @@ import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
+const { SansLarge } = Typography;
 
 const ALERT_HEADLINE = 'umd-alert-headline';
 
@@ -26,13 +27,13 @@ export const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_HEADLINE}`]: Typography['.umd-sans-large'],
+      [`.${ALERT_HEADLINE}`]: SansLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_HEADLINE} *`]: Typography['.umd-sans-large'],
+      [`.${ALERT_HEADLINE} *`]: SansLarge,
     },
   })}
 

@@ -14,6 +14,7 @@ import { SlotDefaultStyling } from 'helpers/ui';
 
 const { Colors, Spacing, FontWeight } = Tokens;
 const { LinkLineSlide } = Animations;
+const { SansSmaller, InterativeMedium } = Typography;
 
 const HEADLINE_ATTRIBUTE = 'data-headline';
 const HEADLINE_ATTRIBUTE_EMPTY = 'data-empty';
@@ -122,8 +123,7 @@ const COLUMN_THREE_DEFAULT_LINKS = [
 const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_COLUMN_HEADLINE}`]:
-      Typography['.umd-interactive-sans-medium'],
+      [`.${ROW_LINKS_COLUMN_HEADLINE}`]: InterativeMedium
     },
   })}
 
@@ -151,7 +151,7 @@ const LinkStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_COLUMN_LINKS} a`]: Typography['.umd-sans-smaller'],
+      [`.${ROW_LINKS_COLUMN_LINKS} a`]: SansSmaller,
     },
   })}
 

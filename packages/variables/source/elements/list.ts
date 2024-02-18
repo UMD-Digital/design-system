@@ -2,6 +2,8 @@ import Typography from '../typography';
 import { Colors } from '../tokens/colors';
 import { Spacing } from '../tokens/spacing';
 
+const { SansLarge } = Typography;
+
 const ListStylesBase = {
   [`& ul,
     & ol ul`]: {
@@ -15,7 +17,7 @@ const ListStylesBase = {
     },
 
     '& li:before': {
-      ...Typography['.umd-sans-large'],
+      ...SansLarge,
       ...{
         content: '"•"',
         counterIncrement: 'item',
@@ -46,7 +48,7 @@ const ListStylesBase = {
     },
 
     '& li:before': {
-      ...Typography['.umd-sans-large'],
+      ...SansLarge,
       ...{
         content: 'counter(item) "."',
         counterIncrement: 'item',

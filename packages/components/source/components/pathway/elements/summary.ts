@@ -12,6 +12,7 @@ import { ELEMENT_TYPE } from '../component';
 const { Spacing, Colors, FontSize } = Tokens;
 const { Ribbon, Text } = Fields;
 const { FlexRows } = Layout;
+const { SansLargest } = Typography;
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =
@@ -107,13 +108,13 @@ const EyebrowStyles = `
 const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_HEADLINE_CONTAINER}`]: Typography['.umd-sans-largest'],
+      [`.${SUMMARY_HEADLINE_CONTAINER}`]: SansLargest,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_HEADLINE_CONTAINER} *`]: Typography['.umd-sans-largest'],
+      [`.${SUMMARY_HEADLINE_CONTAINER} *`]: SansLargest,
     },
   })}
 

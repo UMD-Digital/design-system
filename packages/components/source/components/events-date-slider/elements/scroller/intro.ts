@@ -20,7 +20,7 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_HEADLINE}`]: Typography['.umd-sans-larger'],
+      [`.${INTRO_HEADLINE}`]: Typography.SansLarger,
     },
   })}
 

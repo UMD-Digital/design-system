@@ -20,6 +20,7 @@ import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
+const { InterativeMedium, SansSmaller } = Typography;
 
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_HEADLINE = 'umd-footer-contact-list-headline';
@@ -78,7 +79,7 @@ const HeadlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_HEADLINE}`]: Typography['.umd-interactive-sans-medium'],
+      [`.${CONTACT_LIST_HEADLINE}`]: InterativeMedium,
     },
   })}
 
@@ -106,7 +107,7 @@ const AddressStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_ADDRESS} *`]: Typography['.umd-sans-smaller'],
+      [`.${CONTACT_LIST_ADDRESS} *`]: SansSmaller,
     },
   })}
 `;
@@ -119,7 +120,7 @@ const LinkListStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LINKS_LIST} *`]: Typography['.umd-sans-smaller'],
+      [`.${CONTACT_LINKS_LIST} *`]: SansSmaller,
     },
   })}
 

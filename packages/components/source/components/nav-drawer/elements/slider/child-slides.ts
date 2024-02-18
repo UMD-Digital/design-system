@@ -54,7 +54,7 @@ const backButtonStyles = `
 const headlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${DRAWER_SLIDER_HEADLINE} `]: Typography['.umd-sans-large'],
+      [`.${DRAWER_SLIDER_HEADLINE} `]: Typography.SansLarge,
     },
   })}
 

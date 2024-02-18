@@ -10,6 +10,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { TextDark } = Fields;
+const { SansSmaller, SansLarge, SansMin } = Typography;
 
 const BREAKPOINTS = {
   MOBILE: 650,
@@ -79,15 +80,13 @@ const EyebrowStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_EYEBROW_WRAPPER}`]:
-      Typography['.umd-sans-smaller'],
+      [`.${CARD_EYEBROW_WRAPPER}`]: SansSmaller,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_EYEBROW_WRAPPER} *`]:
-      Typography['.umd-sans-smaller'],
+      [`.${CARD_EYEBROW_WRAPPER} *`]: SansSmaller,
     },
   })}
 
@@ -109,15 +108,13 @@ const HeadlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_HEADLINE_WRAPPER}`]:
-      Typography['.umd-sans-large'],
+      [`.${CARD_HEADLINE_WRAPPER}`]: SansLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_HEADLINE_WRAPPER} *`]:
-      Typography['.umd-sans-large'],
+      [`.${CARD_HEADLINE_WRAPPER} *`]: SansLarge,
     },
   })}
 
@@ -146,13 +143,13 @@ const DateStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_BODY_DATE_WRAPPER}`]: Typography['.umd-sans-min'],
+      [`.${CARD_BODY_DATE_WRAPPER}`]: SansMin,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_BODY_DATE_WRAPPER} *`]: Typography['.umd-sans-min'],
+      [`.${CARD_BODY_DATE_WRAPPER} *`]: SansMin,
     },
   })}
 `;
@@ -161,7 +158,7 @@ const DateStyles = `
 const TextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_BODY_TEXT_WRAPPER} *`]: Typography['.umd-sans-small'],
+      [`.${CARD_BODY_TEXT_WRAPPER} *`]: Typography.SansSmall,
     },
   })}
 

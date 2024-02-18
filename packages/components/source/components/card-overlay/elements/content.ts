@@ -10,6 +10,7 @@ import { SLOTS, ELEMENTS, VARIABLES } from 'components/card-overlay/globals';
 
 const { Spacing, Colors } = Tokens;
 const { LinkLineSlide } = Animations;
+const { SansMin, SansSmall, SansLarger, Eyebrow } = Typography;
 
 const TEXT_CHARACTER_LIMIT = 140;
 
@@ -20,13 +21,13 @@ const CARD_OVERLAY_DATE = 'umd-overlay-card-date';
 const eyebrowStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_EYEBROW}`]: Typography['.umd-eyebrow'],
+      [`.${CARD_OVERLAY_EYEBROW}`]: Eyebrow,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_EYEBROW} *`]: Typography['.umd-eyebrow'],
+      [`.${CARD_OVERLAY_EYEBROW} *`]: Eyebrow,
     },
   })}
 `;
@@ -39,13 +40,13 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE}`]: Typography['.umd-sans-larger'],
+      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} *`]: Typography['.umd-sans-larger'],
+      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} *`]: SansLarger,
     },
   })}
 
@@ -65,7 +66,7 @@ const textStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_TEXT} *`]: Typography['.umd-sans-small'],
+      [`.${ELEMENTS.CARD_OVERLAY_TEXT} *`]: SansSmall,
     },
   })}
 
@@ -93,13 +94,13 @@ const dateStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_DATE}`]: Typography['.umd-sans-min'],
+      [`.${CARD_OVERLAY_DATE}`]: SansMin,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_DATE} *`]: Typography['.umd-sans-min'],
+      [`.${CARD_OVERLAY_DATE} *`]: SansMin,
     },
   })}
 `

@@ -10,6 +10,7 @@ import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 
 const { Colors, Spacing } = Tokens;
 const { TextDark } = Fields;
+const { SansMedium, SansLargest } = Typography;
 
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
 const INTRO_CONTAINER_HEADLINE = 'umd-carousel-cards-intro-container-headline';
@@ -24,13 +25,13 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE}`]: Typography['.umd-sans-largest'],
+      [`.${INTRO_CONTAINER_HEADLINE}`]: SansLargest,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE} *`]: Typography['.umd-sans-largest'],
+      [`.${INTRO_CONTAINER_HEADLINE} *`]: SansLargest,
     },
   })}
 `;
@@ -49,7 +50,7 @@ const textStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: Typography['.umd-sans-medium'],
+      [`.${INTRO_CONTAINER_TEXT}`]: SansMedium,
     },
   })}
 `;

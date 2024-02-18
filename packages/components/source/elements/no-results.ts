@@ -26,7 +26,7 @@ export const STYLES_NO_RESULTS = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [` .${CONTAINER_NO_RESULTS} p`]: Typography['.umd-sans-large'],
+      [` .${CONTAINER_NO_RESULTS} p`]: Typography.SansLarge,
     },
   })}
 

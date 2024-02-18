@@ -73,7 +73,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_CONTAINER_TEXT}`]: Typography['.umd-sans-larger'],
+      [`.${PATHWAY_HIGHLIGHT_CONTAINER_TEXT}`]: Typography.SansLarger,
     },
   })}
 

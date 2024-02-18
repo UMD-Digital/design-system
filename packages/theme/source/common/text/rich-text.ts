@@ -2,6 +2,7 @@ import { Typography, Fields, Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Spacing, FontFamily } = Tokens;
 const { Text, TextDark } = Fields;
+const { SansSmaller, SansLarge, SansLarger } = Typography;
 
 const RichTextCoding = {
   '.umd-rich-text-coding': {
@@ -27,7 +28,7 @@ const RichTextCoding = {
 const RichTextQuotes = {
   '.umd-rich-text-inline-quote': {
     '& blockquote': {
-      ...Typography['.umd-sans-larger'],
+      ...SansLarger,
       ...{
         display: 'inline-block',
         borderLeft: `2px solid ${Colors.red}`,
@@ -47,8 +48,8 @@ const RichTextTables = {
       tableLayout: 'fixed',
       maxWidth: '100%',
 
-      '& th': Typography['.umd-sans-large'],
-      '& td': Typography['.umd-sans-smaller'],
+      '& th': SansLarge,
+      '& td': SansSmaller,
 
       '& th, & td': {
         padding: `${Spacing.lg} ${Spacing.md}`,

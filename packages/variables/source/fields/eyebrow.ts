@@ -3,8 +3,10 @@ import { Colors } from '../tokens/colors';
 import { Spacing } from '../tokens/spacing';
 import { FontWeight } from '../tokens/fonts';
 
+const { InterativeSmall } = Typography;
+
 const Ribbon = {
-  ...Typography['.umd-interactive-sans-small'],
+  ...InterativeSmall,
   backgroundColor: Colors.gold,
   padding: `${Spacing.min} ${Spacing.md}`,
   display: `inline-block`,

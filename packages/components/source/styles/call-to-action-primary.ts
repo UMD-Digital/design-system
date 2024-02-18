@@ -2,6 +2,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { Colors } = Tokens;
+const { InterativeSmall } = Typography;
 
 export const CLASS_STYLES_REF_CTA_PRIMARY = 'umd-styles-call-to-action-primary';
 
@@ -9,8 +10,7 @@ export const CLASS_STYLES_REF_CTA_PRIMARY = 'umd-styles-call-to-action-primary';
 export const STYLES_CTA_PRIMARY = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CLASS_STYLES_REF_CTA_PRIMARY}`]:
-      Typography['.umd-interactive-sans-small'],
+      [`.${CLASS_STYLES_REF_CTA_PRIMARY}`]: InterativeSmall,
     },
   })}
 

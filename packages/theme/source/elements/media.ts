@@ -1,6 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 
 const { Colors, Spacing } = Tokens;
+const { SansSmaller } = Typography;
 
 const CaptionedMedia = {
   '.umd-media-with-caption': {
@@ -9,7 +10,7 @@ const CaptionedMedia = {
   },
 
   '.umd-caption': {
-    ...Typography['.umd-sans-smaller'],
+    ...SansSmaller,
     captionSide: 'bottom',
     color: Colors.gray.mediumAA,
     display: 'table-caption',

@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 
 import Animations from './animations';
 import Accessibility from './accessibility';
@@ -46,7 +46,6 @@ export const theme = {
   Accessibility,
   Animations,
   Common,
-  Typography,
   Components,
   Elements,
   Layout,

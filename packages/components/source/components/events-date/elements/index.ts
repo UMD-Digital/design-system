@@ -10,6 +10,7 @@ import { ELEMENTS, SLOTS } from 'components/events-date/globals';
 
 const { FontSize, FontWeight, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
+const { SansLarger, SansLarge, InterativeSmall } = Typography;
 
 const EVENT_DATE_CONTAINER = 'umd-event-date-container';
 const EVENT_DATE_WRAPPER = 'umd-event-date-wrapper';
@@ -45,13 +46,13 @@ const dateWrapperStyles = `
 const monthStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_MONTH}`]: Typography['.umd-interactive-sans-small'],
+      [`.${EVENT_MONTH}`]: InterativeSmall,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_MONTH} *`]: Typography['.umd-interactive-sans-small'],
+      [`.${EVENT_MONTH} *`]: InterativeSmall,
     },
   })}
 `;
@@ -59,13 +60,13 @@ const monthStyles = `
 const dayStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DAY}`]: Typography['.umd-sans-larger'],
+      [`.${EVENT_DAY}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DAY} *`]: Typography['.umd-sans-larger'],
+      [`.${EVENT_DAY} *`]: SansLarger,
     },
   })}
 `;
@@ -78,13 +79,13 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE}`]: Typography['.umd-sans-large'],
+      [`.${EVENT_HEADLINE}`]: SansLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} *`]: Typography['.umd-sans-large'],
+      [`.${EVENT_HEADLINE} *`]: SansLarge,
     },
   })}
 

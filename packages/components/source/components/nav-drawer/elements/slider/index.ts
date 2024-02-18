@@ -83,7 +83,7 @@ const secondaryLinkStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} a`]: Typography['.umd-sans-small'],
+      [`.${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} a`]: Typography.SansSmall,
     },
   })}
 `;

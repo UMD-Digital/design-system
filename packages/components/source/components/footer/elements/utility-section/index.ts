@@ -81,7 +81,7 @@ export const UtilityContainerStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER} *`]: Typography['.umd-sans-min']
+      [`.${UTILITY_CONTAINER} *`]: Typography.SansMin
     },
   })}
 

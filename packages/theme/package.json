@@ -10,7 +10,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "webpack --env BUILD_ONLY=true",
+    "build": "webpack",
+    "bundle": "webpack -w --env BUNDLE",
     "clean": "rm -rf dist",
     "start": "webpack -w"
   }

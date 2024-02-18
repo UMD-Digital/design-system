@@ -2,7 +2,7 @@ import WebpackShellPlugin from 'webpack-shell-plugin-next';
 const path = require('path');
 
 module.exports = (env) => {
-  const buildOnly = env && env.BUILD_ONLY && env.BUILD_ONLY === 'true';
+  const isBundled = env && env.BUNDLE;
   const mode = 'production';
 
   const optimization = {
@@ -40,7 +40,7 @@ module.exports = (env) => {
 
   const plugins = [];
 
-  if (!buildOnly) {
+  if (isBundled) {
     plugins.push(
       new WebpackShellPlugin({
         onAfterDone: {

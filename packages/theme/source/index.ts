@@ -35,12 +35,10 @@ const root = {
   },
 };
 
-const exposedTokens = Object.fromEntries(
-  Object.entries(Tokens).map(([key, value]) => [key.toLowerCase(), value]),
-);
-
 export const base = {
-  ...exposedTokens,
+  ...Object.fromEntries(
+    Object.entries(Tokens).map(([key, value]) => [key.toLowerCase(), value]),
+  ),
 };
 
 export const theme = {

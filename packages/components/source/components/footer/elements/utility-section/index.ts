@@ -13,7 +13,7 @@ import {
 } from 'components/footer/globals';
 import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { Lock } = Layout;
 
@@ -62,7 +62,7 @@ const TextStyles = `
 // prettier-ignore
 export const UtilityContainerStyles = `
   .${UTILITY_CONTAINER} {
-    padding: ${spacing.sm} 0;
+    padding: ${Spacing.sm} 0;
     background-color: ${Colors.gray.darker};
   }
 
@@ -87,15 +87,15 @@ export const UtilityContainerStyles = `
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
-      margin-top: ${spacing.sm};
+      margin-top: ${Spacing.sm};
     }
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
-      margin-left: ${spacing.sm};
-      padding-left: ${spacing.sm};
-      background-position: ${spacing.sm} 100%;
+      margin-left: ${Spacing.sm};
+      padding-left: ${Spacing.sm};
+      background-position: ${Spacing.sm} 100%;
       border-left: 1px solid ${Colors.gray.dark};
     }
   }

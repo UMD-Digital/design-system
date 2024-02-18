@@ -5,7 +5,7 @@ import { CreatePrimarySlide, primarySliderStyles } from './primary-slide';
 import { CreateChildSlide, childSliderStyles } from './child-slides';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const DRAWER_SLIDER_CONTAINER = 'umd-element-drawer-slider-container';
 const DRAWER_SLIDER = 'umd-element-drawer-slider';
@@ -30,7 +30,7 @@ const sliderStyles = `
     position: relative;
     overflow: hidden;
     height: 100%;
-    width: calc(100vw - ${spacing['8xl']});
+    width: calc(100vw - ${Spacing['8xl']});
     max-width: 400px;
     min-width: 227px;
   }
@@ -72,8 +72,8 @@ const selectedLinkStyles = `
 const secondaryLinkStyles = `
   .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} {
     border-bottom: none;
-    margin-bottom: ${spacing.xs};
-    padding-bottom: ${spacing.xs};
+    margin-bottom: ${Spacing.xs};
+    padding-bottom: ${Spacing.xs};
   }
 
   .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION}:last-child {
@@ -93,7 +93,7 @@ export const drawerSliderStyles = `
   .${DRAWER_SLIDER_CONTAINER} {
     position: relative;
     background-color: ${Colors.white};
-    padding: ${spacing['2xl']} ${spacing.md};
+    padding: ${Spacing['2xl']} ${Spacing.md};
     height: 100%;
     cursor: default;
   }

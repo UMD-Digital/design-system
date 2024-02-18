@@ -3,5 +3,5 @@ umd-element-events-date-slider:not(:defined) {
 }
 
 * + umd-element-events-date-slider {
-  margin-top: theme('spacing.2xl');
+  margin-top: theme(spacing.2xl);
 }

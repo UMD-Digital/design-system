@@ -9,7 +9,7 @@ import { CreateHeadline, headlineStyles } from './headline';
 import { CreateBody, bodyStyles } from './body';
 import { CreateCta, ctaStyles } from './cta';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 export const ELEMENT_NAME = 'umd-element-alert';
 
@@ -49,14 +49,14 @@ const EmergencyStyles = `
 const ButtonStyles = `
   .${CLOSE_BUTTON_CLASS} {
     position: absolute !important;
-    top: ${spacing.lg};
-    right: ${spacing.lg};
+    top: ${Spacing.lg};
+    right: ${Spacing.lg};
   }
 
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
     .${CLOSE_BUTTON_CLASS} {
-      top: ${spacing.sm};
-      right: ${spacing.sm};
+      top: ${Spacing.sm};
+      right: ${Spacing.sm};
     }
   }
 `;
@@ -88,9 +88,9 @@ export const ComponentStyles = `
   :host .${CONTAINER_CLASS} {
     display: flex;
     position: relative !important;
-    padding: ${spacing.lg};
-    padding-right: ${spacing['2xl']};
-    gap: ${spacing.lg};
+    padding: ${Spacing.lg};
+    padding-right: ${Spacing['2xl']};
+    gap: ${Spacing.lg};
     container: umd-alert / inline-size;
   }
 
@@ -102,12 +102,12 @@ export const ComponentStyles = `
 
   @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
   .${CONTAINER_CLASS} {
-      padding-right: ${spacing.lg};
+      padding-right: ${Spacing.lg};
     }
   }
 
   slot[name="title"] {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${Spacing.sm};
     display: block;
   }
 

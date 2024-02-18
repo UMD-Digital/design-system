@@ -2,7 +2,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CreateCallToActionElement } from 'elements/call-to-action';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 
 export type NoResultsContentType = {
   message?: string;
@@ -31,7 +31,7 @@ export const STYLES_NO_RESULTS = `
   })}
 
   .${CONTAINER_NO_RESULTS} p {
-    margin-bottom: ${spacing.md};
+    margin-bottom: ${Spacing.md};
   }
 `;
 

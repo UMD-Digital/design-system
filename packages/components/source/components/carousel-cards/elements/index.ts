@@ -9,7 +9,7 @@ import {
 import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
@@ -24,7 +24,7 @@ const CAROUSEL_LOCK = 'umd-element-carousel-lock';
 const containerStyles = `
   .${CAROUSEL_CONTAINER} {
     background-color: ${Colors.black};
-    padding: ${spacing['3xl']} 0;
+    padding: ${Spacing['3xl']} 0;
     position: relative;
     overflow: hidden;
     container: umd-carousel-card / inline-size;
@@ -38,13 +38,13 @@ const containerStyles = `
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.medium}px) {
     .${CAROUSEL_CONTAINER} {
-      padding: ${spacing['4xl']} 0;
+      padding: ${Spacing['4xl']} 0;
     }
   }
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
     .${CAROUSEL_CONTAINER} {
-      padding: ${spacing['max']} 0;
+      padding: ${Spacing['max']} 0;
     }
   }
 

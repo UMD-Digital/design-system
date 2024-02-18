@@ -13,7 +13,7 @@ import {
   CLASS_STYLES_REF_CTA_PRIMARY,
 } from 'styles/call-to-action-primary';
 
-const { Colors, FontSize, spacing } = Tokens;
+const { Colors, FontSize, Spacing } = Tokens;
 
 const MAX_WIDTH = 380;
 const ATTR_SIZE = 'data-size';
@@ -52,7 +52,7 @@ const ThemeStyles = `
 // prettier-ignore
 const SizeStyles = `
   [${ATTR_SIZE}="${SIZE_LARGE}"] {
-    padding: ${spacing.sm} ${spacing.lg};
+    padding: ${Spacing.sm} ${Spacing.lg};
     font-size: ${FontSize.lg};
   }
   
@@ -75,7 +75,7 @@ const OverwriteStyles = `
 export const STYLES_CALL_TO_ACTION_ELEMENT = `
   .${CLASS_BASE_CTA} {
     display: inline-block;
-    padding: ${spacing.xs} ${spacing.lg};
+    padding: ${Spacing.xs} ${Spacing.lg};
     font-size: ${FontSize.sm};
     display: inline-block;
     font-weight: 800;

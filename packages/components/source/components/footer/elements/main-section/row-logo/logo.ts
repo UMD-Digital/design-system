@@ -8,7 +8,7 @@ import {
   CALL_TO_ACTION_CONTAINER,
 } from '../call-to-action';
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 
 const LOGO_CONTAINER = 'umd-footer-logo-container';
 const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
@@ -17,7 +17,7 @@ const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
 const ctaOverwriteStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
-      margin-top: ${spacing.md};
+      margin-top: ${Spacing.md};
     }
   }
 

@@ -1,6 +1,6 @@
 import { Colors } from '../tokens/colors';
 import { FontWeight } from '../tokens/fonts';
-import { spacing } from '../tokens/spacing';
+import { Spacing } from '../tokens/spacing';
 import Animations from '../animations';
 import Lists from '../elements/list';
 
@@ -9,7 +9,7 @@ const TextBase = {
     lineHeight: '1.5em',
 
     '& > *': {
-      marginTop: spacing.md,
+      marginTop: Spacing.md,
 
       '&:first-child': {
         marginTop: '0',

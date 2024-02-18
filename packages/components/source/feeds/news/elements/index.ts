@@ -20,7 +20,7 @@ type VariablesType = {
   offset?: number;
 };
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 const { Grid } = Layout;
 
 const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
@@ -64,7 +64,7 @@ const LazyLoadButtonStyles = `
   .${LAZY_LOAD_BUTTON} {
     display: flex;
     justify-content: center;
-    margin-top: ${spacing.lg};
+    margin-top: ${Spacing.lg};
   }
 `;
 

@@ -4,7 +4,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
@@ -24,26 +24,26 @@ const ThemeStyles = `
 // prettier-ignore
 export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
   .${PATHWAY_HIGHLIGHT_CONTAINER} {
-    padding: ${spacing['5xl']} ${spacing.md} ${spacing.md} ${spacing.md};
+    padding: ${Spacing['5xl']} ${Spacing.md} ${Spacing.md} ${Spacing.md};
     background-color: ${Colors.gray.lightest};
     position: relative;
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER} {
-      padding: ${spacing['4xl']} ${spacing['2xl']};
+      padding: ${Spacing['4xl']} ${Spacing['2xl']};
     }
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER} {
-      padding: ${spacing['8xl']} ${spacing['xl']};
+      padding: ${Spacing['8xl']} ${Spacing['xl']};
     }
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER} {
-      padding-left: ${spacing['xl']};
+      padding-left: ${Spacing['xl']};
       position: relative;
     }
   }
@@ -56,8 +56,8 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
 
   @container umd-pathway (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
-      top: ${spacing['2xl']};
-      width: ${spacing['5xl']};
+      top: ${Spacing['2xl']};
+      width: ${Spacing['5xl']};
       height: 2px;
     }
   }

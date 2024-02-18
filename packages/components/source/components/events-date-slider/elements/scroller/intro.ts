@@ -7,7 +7,7 @@ import {
   SLOTS,
 } from 'components/events-date-slider/globals';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const INTRO_CONTAINER = 'umd-element-date-slider-intro-container';
 const INTRO_HEADLINE = 'umd-element-date-slider-headline';
@@ -35,7 +35,7 @@ const linkStyles = `
   }
 
   .${INTRO_LINK} {
-    margin-top: ${spacing.min};
+    margin-top: ${Spacing.min};
   }
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${INTRO_LINK} {
@@ -45,7 +45,7 @@ const linkStyles = `
 
 export const IntroStyles = `
   .${INTRO_CONTAINER} {
-    padding: 0 ${spacing.lg};
+    padding: 0 ${Spacing.lg};
     position: relative;
   }
 

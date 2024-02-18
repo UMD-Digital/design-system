@@ -1,16 +1,16 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Colors, spacing, Queries } = Tokens;
+const { Colors, Spacing, Queries } = Tokens;
 
 const Header = {
   '.umd-header-container': {
     backgroundColor: Colors.white,
     display: 'block',
-    padding: spacing.md,
+    padding: Spacing.md,
     position: 'relative',
 
     [`@media (${Queries.tablet.min})`]: {
-      padding: `${spacing.md} ${spacing['2xl']}`,
+      padding: `${Spacing.md} ${Spacing['2xl']}`,
     },
   },
 
@@ -18,7 +18,7 @@ const Header = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: spacing.sm,
+    gap: Spacing.sm,
   },
 
   '.umd-header-logo-column': {
@@ -30,10 +30,10 @@ const Header = {
 
   '.umd-header-logo': {
     display: 'block',
-    maxWidth: `calc(100% - (${spacing['6xl']} + 4px))`,
+    maxWidth: `calc(100% - (${Spacing['6xl']} + 4px))`,
     borderLeft: `1px solid ${Colors.gray.light}`,
-    paddingLeft: spacing.sm,
-    marginLeft: spacing.sm,
+    paddingLeft: Spacing.sm,
+    marginLeft: Spacing.sm,
   },
 
   '.umd-header-logo img': {
@@ -46,12 +46,12 @@ const Header = {
 
   '.umd-header-nav-items': {
     display: 'flex',
-    gap: spacing.md,
+    gap: Spacing.md,
     justifyContent: 'flex-end',
     transition: 'gap 0.5s',
 
     [`@media (${Queries.highDef.min})`]: {
-      padding: spacing.lg,
+      padding: Spacing.lg,
     },
   },
 

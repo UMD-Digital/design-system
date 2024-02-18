@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 
@@ -13,7 +13,7 @@ export const CallToActionStyles = `
 
   .${CALL_TO_ACTION_CONTAINER} a {
     display: inline-block;
-    padding: ${spacing.xs} ${spacing['lg']};
+    padding: ${Spacing.xs} ${Spacing['lg']};
     background-color: ${Colors.red};
     color: ${Colors.white};
     font-weight: 800;

@@ -7,7 +7,7 @@ import { CreateCtaIcon, CtaIconStyles } from './cta-icon';
 import { CardType } from '../component';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { Text } = Fields;
 const { LinkLineSlide } = Animations;
 
@@ -144,12 +144,12 @@ const VariantImageThemeTint = `
 // prettier-ignore
 const VariantImageThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] {
-    padding-top: ${spacing['4xl']};
+    padding-top: ${Spacing['4xl']};
   }
 
   @container umd-card (min-width: 300px) {
     .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] {
-      padding-top: ${spacing['8xl']};
+      padding-top: ${Spacing['8xl']};
     }
   }
 
@@ -194,9 +194,9 @@ export const ComponentStyles = `
     height: 100%;
     position: relative;
     background-color: ${Colors.gray.lightest};
-    padding: ${spacing.md};
-    padding-top: ${spacing['4xl']};
-    padding-bottom: ${spacing.lg};
+    padding: ${Spacing.md};
+    padding-top: ${Spacing['4xl']};
+    padding-bottom: ${Spacing.lg};
   }
 
   @media (min-width: 768px) {

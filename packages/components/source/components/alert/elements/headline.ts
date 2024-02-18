@@ -8,7 +8,7 @@ import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const ALERT_HEADLINE = 'umd-alert-headline';
@@ -16,7 +16,7 @@ const ALERT_HEADLINE = 'umd-alert-headline';
 // prettier-ignore
 export const headlineStyles = `
   .${ALERT_HEADLINE} {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${Spacing.sm};
     color: ${Colors.black}
   }
 

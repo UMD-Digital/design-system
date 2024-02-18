@@ -4,7 +4,7 @@ import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction, slideActionStyles } from './slide-action';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const DRAWER_SLIDER_PRIMARY_CONTAINER = 'umd-element-drawer-primary-container';
 const DRAWER_SLIDER_PRIMARY_LINKS_CONTAINER =
@@ -15,15 +15,15 @@ const DRAWER_SLIDER_SECONDARY_LINKS_CONTAINER =
 // prettier-ignore
 export const primarySliderStyles = `
   .${DRAWER_SLIDER_SECONDARY_LINKS_CONTAINER} {
-    padding-bottom: ${spacing.xs};
-    margin-bottom: ${spacing.xs};
+    padding-bottom: ${Spacing.xs};
+    margin-bottom: ${Spacing.xs};
     border-bottom: 1px solid ${Colors.gray.light};
   }
 
   @media (min-width: 480px) {
     .${DRAWER_SLIDER_SECONDARY_LINKS_CONTAINER} {
-      padding-bottom: ${spacing.sm};
-      margin-bottom: ${spacing.sm};
+      padding-bottom: ${Spacing.sm};
+      margin-bottom: ${Spacing.sm};
     }
   }
 

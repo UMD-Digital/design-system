@@ -8,7 +8,7 @@ import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ELEMENT_TYPE } from 'components/events-date/component';
 import { ELEMENTS, SLOTS } from 'components/events-date/globals';
 
-const { FontSize, FontWeight, spacing } = Tokens;
+const { FontSize, FontWeight, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const EVENT_DATE_CONTAINER = 'umd-event-date-container';
@@ -73,7 +73,7 @@ const dayStyles = `
 // prettier-ignore
 const headlineStyles = `
   .${EVENT_HEADLINE} {
-    margin-left: ${spacing.sm};
+    margin-left: ${Spacing.sm};
   }
 
   ${ConvertJSSObjectToStyles({

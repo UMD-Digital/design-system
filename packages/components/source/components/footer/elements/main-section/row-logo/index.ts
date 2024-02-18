@@ -15,7 +15,7 @@ import {
 import { ContactContainerStyles, CreateContactContainer } from './contact';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
@@ -51,7 +51,7 @@ export const RowLogoStyles = `
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LOGO_CONTAINER} {
-      padding-top: ${spacing['2xl']};
+      padding-top: ${Spacing['2xl']};
     }
   }
 
@@ -59,20 +59,20 @@ export const RowLogoStyles = `
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: ${spacing.md};
+      gap: ${Spacing.md};
     }
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LOGO_CONTAINER} {
-      padding-bottom: ${spacing['md']} ;
+      padding-bottom: ${Spacing['md']} ;
     }
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: flex;
-      padding: ${spacing['5xl']} 0 ${spacing['2xl']};
+      padding: ${Spacing['5xl']} 0 ${Spacing['2xl']};
     }
   }
 

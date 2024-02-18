@@ -3,14 +3,14 @@ import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
 import { ELEMENT_TYPE } from 'components/footer/component';
 import { VARIABLES } from 'components/footer/globals';
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 
 export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
 
 export const CampaignStyles = `
   .${CAMPAIGN_COLUMN_WRAPPER} > a {
     display: block;
-    margin-top: ${spacing.lg};
+    margin-top: ${Spacing.lg};
     max-width: 250px;
   }
 `;

@@ -8,7 +8,7 @@ import {
   CreateCallToActionElement,
 } from 'elements/call-to-action';
 
-const { Colors, FontSize, spacing } = Tokens;
+const { Colors, FontSize, Spacing } = Tokens;
 
 const CTA_PLAIN_TEXT_SLOT = 'umd-call-to-action-plain-text-slot';
 
@@ -21,7 +21,7 @@ const OverwritePrimaryLayoutStyles = `
   }
 
   [data-type="primary"] .${CTA_PLAIN_TEXT_SLOT} {
-    margin-top: ${spacing.min};
+    margin-top: ${Spacing.min};
   }
 `
 
@@ -34,7 +34,7 @@ const OverwriteSecondaryLayoutStyles = `
 
   [data-type="secondary"] .${CTA_PLAIN_TEXT_SLOT} {
     padding-left: 20px;
-    margin-top: ${spacing.min};
+    margin-top: ${Spacing.min};
   }
 `
 

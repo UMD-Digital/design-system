@@ -1,22 +1,22 @@
 import { Queries } from '../tokens/breakpoints';
-import { spacing } from '../tokens/spacing';
+import { Spacing } from '../tokens/spacing';
 
 const lockBase = {
   display: 'block',
   marginLeft: 'auto',
   marginRight: 'auto',
-  paddingLeft: spacing['md'],
-  paddingRight: spacing['md'],
+  paddingLeft: Spacing['md'],
+  paddingRight: Spacing['md'],
   maxWidth: '1536px',
 
   [`@media (${Queries.tablet.min})`]: {
-    paddingLeft: spacing['2xl'],
-    paddingRight: spacing['2xl'],
+    paddingLeft: Spacing['2xl'],
+    paddingRight: Spacing['2xl'],
   },
 
   [`@media (${Queries.desktop.min})`]: {
-    paddingLeft: spacing['4xl'],
-    paddingRight: spacing['4xl'],
+    paddingLeft: Spacing['4xl'],
+    paddingRight: Spacing['4xl'],
   },
 };
 

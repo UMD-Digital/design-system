@@ -7,7 +7,7 @@ import {
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { Text } = Fields;
 
@@ -100,7 +100,7 @@ const EyebrowStyles = `
 // prettier-ignore
 const HeadlineStyles = `
   * + .${CARD_HEADLINE_WRAPPER} {
-    margin-top: ${spacing.min}
+    margin-top: ${Spacing.min}
   }
 
   .${CARD_HEADLINE_WRAPPER} * {
@@ -136,7 +136,7 @@ const DateStyles = `
   }
 
   * + .${CARD_BODY_DATE_WRAPPER} {
-    margin-top: ${spacing.min};
+    margin-top: ${Spacing.min};
     display: block;
   }
 
@@ -180,7 +180,7 @@ const TextStyles = `
 // prettier-ignore
 const CtaStyles = `
   .${CARD_BODY_CTA_WRAPPER} {
-    margin-top: ${spacing.md};
+    margin-top: ${Spacing.md};
   }
 `;
 
@@ -189,20 +189,20 @@ export const LayoutIntroStyles = `
   @media (max-width: ${BREAKPOINTS.TABLET - 1}px) {
     .${CARD_INTRO_WRAPPER} {
       display: flex;
-      margin-bottom: ${spacing.min};
+      margin-bottom: ${Spacing.min};
     }
   }
 
   @media (min-width: ${BREAKPOINTS.TABLET}px) {
     .${CARD_INTRO_WRAPPER} {
-      padding-top: ${spacing.md};
+      padding-top: ${Spacing.md};
     }
   }
 
   @media (max-width: ${BREAKPOINTS.TABLET - 1}px) {
     .${CARD_INTRO_WRAPPER} {
       width: 70%;
-      padding-right: ${spacing.md};
+      padding-right: ${Spacing.md};
       flex: 1 0;
     }
   }
@@ -214,7 +214,7 @@ export const LayoutIntroStyles = `
 // prettier-ignore
 export const LayoutBodyStyles = `
   * + .${CARD_BODY_CONTAINER} {
-    margin-top: ${spacing.min};
+    margin-top: ${Spacing.min};
   }
 
   ${DateStyles}
@@ -235,7 +235,7 @@ const VariantThemeStyles = `
   }
 
   .${CARD_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${CARD_TEXT_CONTAINER} {
-    padding: ${spacing.md};
+    padding: ${Spacing.md};
   }
 
   @media (min-width: ${BREAKPOINTS.TABLET}px) {
@@ -253,8 +253,8 @@ const VariantThemeStyles = `
 
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${CARD_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${IMAGE_CONTAINER} {
-     margin-top: ${spacing.md};
-     margin-right: ${spacing.md};
+     margin-top: ${Spacing.md};
+     margin-right: ${Spacing.md};
     }
   }
 `;
@@ -277,7 +277,7 @@ const VariantBorderStyles = `
   }
 
   .${CARD_CONTAINER}[${VARIABLES.ATTR_BORDER}] .${CARD_TEXT_CONTAINER} {
-    padding: ${spacing.md};
+    padding: ${Spacing.md};
   }
 
   @media (min-width: ${BREAKPOINTS.TABLET}px) {
@@ -288,8 +288,8 @@ const VariantBorderStyles = `
 
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${CARD_CONTAINER}[${VARIABLES.ATTR_BORDER}] .${IMAGE_CONTAINER} {
-     margin-top: ${spacing.md};
-     margin-right: ${spacing.md};
+     margin-top: ${Spacing.md};
+     margin-right: ${Spacing.md};
     }
   }
 `;
@@ -310,7 +310,7 @@ export const STYLES_CARD = `
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${CARD_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${CARD_TEXT_CONTAINER} {
       width: 70%;
-      padding-right: ${spacing.md};
+      padding-right: ${Spacing.md};
       order: 1;
     }
   }

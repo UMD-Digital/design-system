@@ -1,6 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const CaptionedMedia = {
   '.umd-media-with-caption': {
@@ -13,10 +13,10 @@ const CaptionedMedia = {
     captionSide: 'bottom',
     color: Colors.gray.mediumAA,
     display: 'table-caption',
-    paddingTop: spacing.xs,
+    paddingTop: Spacing.xs,
 
     '& > *': {
-      marginTop: spacing.sm,
+      marginTop: Spacing.sm,
 
       '&:first-child': {
         marginTop: '0',

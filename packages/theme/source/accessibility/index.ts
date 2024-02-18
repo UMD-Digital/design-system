@@ -1,6 +1,6 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 export default {
   '.sr-only': {
@@ -21,7 +21,7 @@ export default {
       color: Colors.red,
       display: 'block',
       height: '0',
-      padding: spacing.min,
+      padding: Spacing.min,
       position: 'absolute',
       zIndex: '-2147483647',
       opacity: '0',

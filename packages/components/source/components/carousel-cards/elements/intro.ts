@@ -8,7 +8,7 @@ import {
 } from 'components/carousel-cards/globals';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { Text } = Fields;
 
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
@@ -38,7 +38,7 @@ const headlineStyles = `
 // prettier-ignore
 const textStyles = `
   * + .${INTRO_CONTAINER_TEXT} {
-    margin-top: ${spacing.md};
+    margin-top: ${Spacing.md};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -57,7 +57,7 @@ const textStyles = `
 // prettier-ignore
 const ctaStyles = `
   * + .${INTRO_CONTAINER_CTA} {
-    margin-top: ${spacing.md};
+    margin-top: ${Spacing.md};
   }
 
   .${INTRO_CONTAINER_CTA} a {
@@ -69,14 +69,14 @@ const ctaStyles = `
 export const IntroContainerStyles = `
   @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ELEMENTS.INTRO_CONTAINER} {
-      margin-bottom: ${spacing.md};
+      margin-bottom: ${Spacing.md};
     }
   }
 
   @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
     .${ELEMENTS.INTRO_CONTAINER} {
-      width: calc(40% - ${spacing['2xl']});
-      padding-right: ${spacing['2xl']};
+      width: calc(40% - ${Spacing['2xl']});
+      padding-right: ${Spacing['2xl']};
     }
   }
 

@@ -1,15 +1,15 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const Loader = {
   '@keyframes loader-animation': {
     '0%, 100%': {
-      boxShadow: `0 ${spacing.min} 0 -3px ${Colors.gray.dark}`,
+      boxShadow: `0 ${Spacing.min} 0 -3px ${Colors.gray.dark}`,
     },
 
     '50%': {
-      boxShadow: `0 ${spacing.min} 0 0 ${Colors.gray.dark}`,
+      boxShadow: `0 ${Spacing.min} 0 0 ${Colors.gray.dark}`,
     },
   },
 
@@ -19,14 +19,14 @@ const Loader = {
     animation: 'loader-animation 1.5s infinite ease-in-out',
     display: 'block',
     borderRadius: '50%',
-    width: spacing.min,
-    height: spacing.min,
+    width: Spacing.min,
+    height: Spacing.min,
   },
 
   '.umd-loader': {
     color: Colors.black,
     position: 'relative',
-    transform: `translate(${spacing.sm}, -4px)`,
+    transform: `translate(${Spacing.sm}, -4px)`,
 
     '&:before, &:after': {
       content: '""',
@@ -36,12 +36,12 @@ const Loader = {
 
     '&:before': {
       animationDelay: '-0.25s',
-      left: `-${spacing.sm}`,
+      left: `-${Spacing.sm}`,
     },
 
     '&:after': {
       animationDelay: '0.25s',
-      left: spacing.sm,
+      left: Spacing.sm,
     },
   },
 };

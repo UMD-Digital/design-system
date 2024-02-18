@@ -3,12 +3,12 @@ import { SlotDefaultStyling } from 'helpers/ui';
 import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 
 // prettier-ignore
 export const CtaStyles = `
   .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
-    margin-top: ${spacing.sm};
+    margin-top: ${Spacing.sm};
   }
 `;
 

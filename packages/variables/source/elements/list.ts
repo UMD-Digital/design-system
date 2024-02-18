@@ -1,6 +1,6 @@
 import Typography from '../typography';
 import { Colors } from '../tokens/colors';
-import { spacing } from '../tokens/spacing';
+import { Spacing } from '../tokens/spacing';
 
 const ListStylesBase = {
   [`& ul,
@@ -10,7 +10,7 @@ const ListStylesBase = {
     listStyleType: 'none !important',
 
     '& li': {
-      paddingLeft: spacing.md,
+      paddingLeft: Spacing.md,
       position: 'relative',
     },
 
@@ -21,15 +21,15 @@ const ListStylesBase = {
         counterIncrement: 'item',
         position: 'absolute',
         top: '0',
-        right: `calc(100% - ${spacing.xs})`,
+        right: `calc(100% - ${Spacing.xs})`,
       },
     },
 
     '& li li': {
-      paddingLeft: spacing.xl,
+      paddingLeft: Spacing.xl,
 
       '&:before': {
-        right: `calc(100% - ${spacing.md})`,
+        right: `calc(100% - ${Spacing.md})`,
       },
     },
   },
@@ -41,7 +41,7 @@ const ListStylesBase = {
     listStyleType: 'none !important',
 
     '& li ': {
-      paddingLeft: spacing.xl,
+      paddingLeft: Spacing.xl,
       position: 'relative',
     },
 
@@ -53,7 +53,7 @@ const ListStylesBase = {
         fontVariantNumeric: 'tabular-nums',
         position: 'absolute',
         top: '0',
-        right: `calc(100% - ${spacing.md})`,
+        right: `calc(100% - ${Spacing.md})`,
         unicodeBidi: 'isolate',
         whiteSpace: 'pre',
       },
@@ -62,19 +62,19 @@ const ListStylesBase = {
 
   '& > ol': {
     '& > li': {
-      paddingLeft: spacing.xl,
+      paddingLeft: Spacing.xl,
     },
 
     '& > li:before': {
       content: 'counter(item)',
       borderRight: `1px solid ${Colors.red}`,
-      paddingRight: spacing.min,
-      right: `calc(100% - ${spacing.lg})`,
+      paddingRight: Spacing.min,
+      right: `calc(100% - ${Spacing.lg})`,
     },
   },
 
   '& li': {
-    marginTop: spacing.sm,
+    marginTop: Spacing.sm,
 
     '&:first-child': {
       marginTop: '0',
@@ -82,7 +82,7 @@ const ListStylesBase = {
 
     [`& > ul,
       & > ol`]: {
-      marginTop: spacing.sm,
+      marginTop: Spacing.sm,
     },
   },
 };

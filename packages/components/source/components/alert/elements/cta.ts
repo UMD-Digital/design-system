@@ -3,14 +3,14 @@ import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 
 const ALERT_CTA = 'umd-alert-cta';
 
 // prettier-ignore
 export const ctaStyles = `
   * + .${ALERT_CTA} {
-    margin-top: ${spacing.md};
+    margin-top: ${Spacing.md};
   }
 
   .${ALERT_CTA} {

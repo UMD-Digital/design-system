@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 export default {
   'umd-element-nav-drawer:not(:defined)': {
@@ -8,7 +8,7 @@ export default {
     borderRight: `1px solid ${Colors.gray.light}`,
     display: 'block',
     height: '44px',
-    paddingRight: spacing.sm,
+    paddingRight: Spacing.sm,
     width: '60px',
 
     '& > *': {

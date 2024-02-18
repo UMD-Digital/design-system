@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AlignedContent } from '../layout/alignment';
 
-const { Colors, spacing, Queries } = Tokens;
+const { Colors, Spacing, Queries } = Tokens;
 
 const SectionIntro = {
   'umd-component-intro': {
@@ -13,13 +13,13 @@ const SectionIntro = {
       ...AlignedContent['.umd-layout-aligned-center'],
       ...{
         margin: 'auto',
-        paddingTop: `${spacing['6xl']}`,
+        paddingTop: `${Spacing['6xl']}`,
         position: 'relative',
 
         '&:before': {
           content: '""',
           backgroundColor: Colors.red,
-          height: `${spacing['4xl']}`,
+          height: `${Spacing['4xl']}`,
           width: '2px',
           position: 'absolute',
           left: `calc(50% - 1px)`,
@@ -65,7 +65,7 @@ const SectionIntro = {
       '& > *': {
         textWrap: 'pretty',
         maxWidth: '100%',
-        marginTop: spacing.xs,
+        marginTop: Spacing.xs,
 
         [`@container umd-component-intro (${Queries.large.min})`]: {
           marginTop: '0',
@@ -73,7 +73,7 @@ const SectionIntro = {
 
         '&:first-child': {
           marginTop: '0',
-          marginRight: spacing.md,
+          marginRight: Spacing.md,
           paddingBottom: '0',
 
           [`@container umd-component-intro (${Queries.large.min})`]: {

@@ -9,7 +9,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
-const { spacing, Colors, FontSize } = Tokens;
+const { Spacing, Colors, FontSize } = Tokens;
 const { Eyebrow, Text } = Fields;
 const { FlexRows } = Layout;
 
@@ -54,18 +54,18 @@ const PositionStyles = `
 // prettier-ignore
 const WithImageStyles = `
   .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
-    padding: ${spacing.md};
+    padding: ${Spacing.md};
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
-      padding: ${spacing['4xl']} ${spacing['2xl']};
+      padding: ${Spacing['4xl']} ${Spacing['2xl']};
     }
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
     .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
-      padding: ${spacing['8xl']} ${spacing['6xl']};
+      padding: ${Spacing['8xl']} ${Spacing['6xl']};
     }
   }
 `;
@@ -73,18 +73,18 @@ const WithImageStyles = `
 // prettier-ignore
 const WithHighlightStyles = `
   .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
-    padding-bottom: ${spacing.md};
+    padding-bottom: ${Spacing.md};
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
-      padding-right: ${spacing['4xl']};
+      padding-right: ${Spacing['4xl']};
     }
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
     .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
-      padding-right: ${spacing['6xl']};
+      padding-right: ${Spacing['6xl']};
     }
   }
 `;
@@ -92,7 +92,7 @@ const WithHighlightStyles = `
 // prettier-ignore
 const EyebrowStyles = `
   .${SUMMARY_EYEBROW_CONTAINER} {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${Spacing.sm};
     color: ${Colors.black};
   }
 
@@ -125,12 +125,12 @@ const HeadlineStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${SUMMARY_TEXT_CONTAINER} {
-    margin-top: ${spacing.sm};
+    margin-top: ${Spacing.sm};
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     * + .${SUMMARY_TEXT_CONTAINER} {
-      margin-top: ${spacing.md};
+      margin-top: ${Spacing.md};
     }
   }
 
@@ -148,12 +148,12 @@ const TextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${SUMMARY_ACTIONS_CONTAINER} {
-    margin-top: ${spacing.sm};
+    margin-top: ${Spacing.sm};
   }
 
   @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
     * + .${SUMMARY_ACTIONS_CONTAINER} {
-      margin-top: ${spacing.lg};
+      margin-top: ${Spacing.lg};
     }
   }
 

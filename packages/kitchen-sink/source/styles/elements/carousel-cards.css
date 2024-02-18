@@ -3,5 +3,5 @@ umd-element-carousel-cards:not(:defined) {
 }
 
 * + umd-element-carousel-cards {
-  margin-top: theme('spacing.2xl');
+  margin-top: theme(spacing.2xl);
 }

@@ -1,7 +1,7 @@
 import { Breakpoints, Queries } from './breakpoints';
 import { Colors } from './colors';
 import { FontFace, FontFamily, FontSize, FontWeight } from './fonts';
-import { spacing } from './spacing';
+import { Spacing } from './spacing';
 
 export default {
   Breakpoints,
@@ -11,5 +11,5 @@ export default {
   FontFamily,
   FontSize,
   FontWeight,
-  spacing,
+  Spacing,
 };

@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Colors, spacing, Queries } = Tokens;
+const { Colors, Spacing, Queries } = Tokens;
 
 export default {
   'umd-element-carousel-cards:not(:defined)': {
@@ -11,10 +11,10 @@ export default {
 
     '& [slot="headline"], & [slot="text"], & [slot="cta"]': {
       textWrap: 'pretty',
-      marginTop: spacing.sm,
+      marginTop: Spacing.sm,
 
       [`@media (${Queries.large.min})`]: {
-        marginTop: spacing.md,
+        marginTop: Spacing.md,
       },
     },
 

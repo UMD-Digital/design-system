@@ -7,7 +7,7 @@ import {
   VARIABLES,
 } from 'components/carousel-cards/globals';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const CAROUSEL_CARDS_BUTTON = `umd-carousel-cards-button`;
 
 const backwardsButtonStyles = `
@@ -46,7 +46,7 @@ const forwardButtonStyles = `
 export const ButtonStyles = `
   .${CAROUSEL_CARDS_BUTTON} {
     background-color: ${Colors.red};
-    padding: ${spacing.xs};
+    padding: ${Spacing.xs};
     position: absolute;
     z-index: 9999;
     display: flex;

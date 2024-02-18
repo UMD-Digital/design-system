@@ -8,9 +8,9 @@ import {
   IsTabletView,
 } from './helpers';
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 
-const spaceBetween = parseInt(spacing.md.replace('px', ''));
+const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
 export const EventResizeCarouselElementsWidth = ({
   element,

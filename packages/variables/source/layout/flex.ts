@@ -1,16 +1,16 @@
 import { Queries } from '../tokens/breakpoints';
-import { spacing } from '../tokens/spacing';
+import { Spacing } from '../tokens/spacing';
 
 const FlexBase = {
   display: 'flex',
   flexDirection: 'column',
   flexWrap: 'wrap',
-  gap: spacing.md,
+  gap: Spacing.md,
 
   [`@media (${Queries.large.min})`]: {
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: spacing.lg,
+    gap: Spacing.lg,
   },
 };
 
@@ -18,7 +18,7 @@ const FlexRowBase = {
   alignItems: 'flex-start',
   display: 'flex',
   flexDirection: 'column',
-  gap: spacing.sm,
+  gap: Spacing.sm,
   justifyContent: 'flex-start',
 
   [`@media (${Queries.large.min})`]: {

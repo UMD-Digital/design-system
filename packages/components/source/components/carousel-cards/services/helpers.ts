@@ -2,9 +2,9 @@ import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from '../component';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 
-const spaceBetween = parseInt(spacing.md.replace('px', ''));
+const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
 export const IsTabletView = ({ shadowRoot }: { shadowRoot: ShadowRoot }) => {
   const wrapper = shadowRoot.querySelector(

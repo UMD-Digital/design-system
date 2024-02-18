@@ -1,20 +1,20 @@
 import { Queries } from '../tokens/breakpoints';
-import { spacing } from '../tokens/spacing';
+import { Spacing } from '../tokens/spacing';
 
 const GridBase = {
   display: 'grid',
-  gridGap: spacing.md,
+  gridGap: Spacing.md,
   gridTemplateColumns: '1fr',
 };
 
 const GridBaseQueries = {
   [`@media (${Queries.large.min})`]: {
-    gridGap: spacing.lg,
+    gridGap: Spacing.lg,
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
 
   [`@media (${Queries.desktop.min})`]: {
-    gridGap: spacing.lg,
+    gridGap: Spacing.lg,
   },
 };
 
@@ -24,7 +24,7 @@ const Grid = {
     ...GridBaseQueries,
 
     [`@media (${Queries.desktop.min})`]: {
-      gridGap: spacing['4xl'],
+      gridGap: Spacing['4xl'],
     },
   },
 

@@ -1,11 +1,11 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { spacing } = Tokens;
+const { Spacing } = Tokens;
 
 export default {
   'umd-utility-header:not(:defined)': {
     display: 'block',
-    height: spacing['2xl'],
+    height: Spacing['2xl'],
 
     '& > *': {
       display: 'none',

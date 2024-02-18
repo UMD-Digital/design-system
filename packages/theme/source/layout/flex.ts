@@ -1,7 +1,7 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
 const { FlexBase, FlexRows: Rows } = Layout;
-const { Queries, spacing } = Tokens;
+const { Queries, Spacing } = Tokens;
 
 const roundToThree = (number: number): number =>
   Math.round(number * 1000) / 1000;
@@ -10,11 +10,11 @@ const RowTwoChildren = {
   width: '100%',
 
   [`@media (${Queries.large.min})`]: {
-    width: `calc(50% - ${roundToThree(parseInt(spacing.lg) / 2)}px)`,
+    width: `calc(50% - ${roundToThree(parseInt(Spacing.lg) / 2)}px)`,
   },
 
   [`@media (${Queries.desktop.min})`]: {
-    width: `calc(50% - ${roundToThree(parseInt(spacing['4xl']) / 2)}px)`,
+    width: `calc(50% - ${roundToThree(parseInt(Spacing['4xl']) / 2)}px)`,
   },
 };
 
@@ -22,12 +22,12 @@ const RowThreeChildren = {
   width: '100%',
 
   [`@media (${Queries.large.min})`]: {
-    width: `calc(50% - ${roundToThree(parseInt(spacing['lg']) / 2)}px)`,
+    width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
   },
 
   [`@media (${Queries.desktop.min})`]: {
     width: `calc(33.333% - ${roundToThree(
-      (parseInt(spacing['lg']) * 2) / 3,
+      (parseInt(Spacing['lg']) * 2) / 3,
     )}px)`,
   },
 };
@@ -36,11 +36,11 @@ const RowFourChildren = {
   width: '100%',
 
   [`@media (${Queries.large.min})`]: {
-    width: `calc(50% - ${roundToThree(parseInt(spacing['lg']) / 2)}px)`,
+    width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
   },
 
   [`@media (${Queries.desktop.min})`]: {
-    width: `calc(25% - ${roundToThree((parseInt(spacing['lg']) * 3) / 4)}px)`,
+    width: `calc(25% - ${roundToThree((parseInt(Spacing['lg']) * 3) / 4)}px)`,
   },
 };
 
@@ -59,7 +59,7 @@ export const FlexGridCore = {
     ...FlexBase,
     ...{
       [`@media (${Queries.desktop.min})`]: {
-        gap: spacing['4xl'],
+        gap: Spacing['4xl'],
       },
     },
   },

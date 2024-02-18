@@ -16,7 +16,7 @@ import {
 } from 'components/footer/globals';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 
-const { spacing, Colors } = Tokens;
+const { Spacing, Colors } = Tokens;
 
 export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
@@ -70,7 +70,7 @@ export const SocialContainerStyles = `
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${SOCIAL_CONTAINER} {
       justify-content: flex-end;
-      padding-left: ${spacing['2xl']};
+      padding-left: ${Spacing['2xl']};
     }
   }
 
@@ -84,7 +84,7 @@ export const SocialContainerStyles = `
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-column: 1 / span 2;
-      gap: ${spacing.md};
+      gap: ${Spacing.md};
     }
   }
 
@@ -96,9 +96,9 @@ export const SocialContainerStyles = `
 
   .${SOCIAL_CONTAINER_WRAPPER} {
     display: grid;
-    grid-gap: ${spacing.xs};
+    grid-gap: ${Spacing.xs};
     grid-template-columns: repeat(3, 1fr);
-    margin-left: ${spacing.xs};
+    margin-left: ${Spacing.xs};
   }
 
   .${SOCIAL_CONTAINER_WRAPPER}[count="4"] {

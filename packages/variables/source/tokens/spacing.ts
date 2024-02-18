@@ -1,4 +1,4 @@
-const spacing = {
+const Spacing = {
   min: '8px',
   xs: '12px',
   sm: '16px',
@@ -15,4 +15,4 @@ const spacing = {
   max: '128px',
 };
 
-export { spacing };
+export { Spacing };

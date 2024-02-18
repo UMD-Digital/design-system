@@ -5,7 +5,7 @@ import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
 import { ButtonVisibilityLogic } from '../../../services/helpers';
 import { EventSlideDates } from '../../../services/events';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const FORWARD_ARROW_CLASS = 'umd-element-date-slider-forward-arrow';
 const BACK_ARROW_CLASS = 'umd-element-date-slider-back-arrow';
@@ -80,7 +80,7 @@ export const ButtonStyles = `
   @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
     .${BACK_ARROW_CLASS} {
       left: -24px;
-      top: ${spacing.xs};
+      top: ${Spacing.xs};
     }
   }
 
@@ -91,7 +91,7 @@ export const ButtonStyles = `
   @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
     .${FORWARD_ARROW_CLASS} {
       right: -24px;
-      top: ${spacing.xs};
+      top: ${Spacing.xs};
     }
   }
 

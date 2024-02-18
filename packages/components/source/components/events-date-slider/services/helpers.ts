@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import { ELEMENT_TYPE } from '../component';
 import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 export const ShowNumberOfDates = ({
   shadowRoot,
@@ -136,13 +136,13 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
           dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `center`;
           dateElement.style.paddingRight = `0`;
-          dateElement.style.marginTop = `${spacing.xs}`;
-          dateElement.style.paddingTop = `${spacing.xs}`;
+          dateElement.style.marginTop = `${Spacing.xs}`;
+          dateElement.style.paddingTop = `${Spacing.xs}`;
           dateElement.style.borderTop = `1px solid ${lineColor}`;
         } else {
           dateElement.style.display = `block`;
           dateElement.style.justifyContent = `inherit`;
-          dateElement.style.paddingRight = `${spacing.lg}`;
+          dateElement.style.paddingRight = `${Spacing.lg}`;
 
           dateElement.style.marginTop = `0`;
           dateElement.style.paddingTop = `0`;

@@ -1,6 +1,6 @@
 import { Typography, Fields, Tokens } from '@universityofmaryland/variables';
 
-const { Colors, spacing, FontFamily } = Tokens;
+const { Colors, Spacing, FontFamily } = Tokens;
 const { Text } = Fields;
 
 const RichTextCoding = {
@@ -15,11 +15,11 @@ const RichTextCoding = {
 
     '& code': {
       display: 'inline-block',
-      padding: `0 ${spacing.min}`,
+      padding: `0 ${Spacing.min}`,
     },
 
     '& pre': {
-      padding: spacing.min,
+      padding: Spacing.min,
     },
   },
 };
@@ -32,7 +32,7 @@ const RichTextQuotes = {
         display: 'inline-block',
         borderLeft: `2px solid ${Colors.red}`,
         position: 'relative',
-        paddingLeft: spacing.md,
+        paddingLeft: Spacing.md,
       },
     },
   },
@@ -51,15 +51,15 @@ const RichTextTables = {
       '& td': Typography['.umd-sans-smaller'],
 
       '& th, & td': {
-        padding: `${spacing.lg} ${spacing.md}`,
+        padding: `${Spacing.lg} ${Spacing.md}`,
         verticalAlign: 'top',
 
         '&:first-child': {
-          paddingLeft: spacing.lg,
+          paddingLeft: Spacing.lg,
         },
 
         '&:last-Child': {
-          paddingRight: spacing.lg,
+          paddingRight: Spacing.lg,
         },
       },
 

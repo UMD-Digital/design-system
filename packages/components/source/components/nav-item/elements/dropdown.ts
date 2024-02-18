@@ -4,7 +4,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 import { ElementType } from 'components/nav-item/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
 const TWO_COLUMN_CONTAINER = 'two-column-container';
@@ -50,7 +50,7 @@ const linkStyles = `
   }
 
   .${DROPDOWN_LIST_CONTAINER} a + a {
-    margin-top: ${spacing.md};
+    margin-top: ${Spacing.md};
     display: block;
   }
 
@@ -78,14 +78,14 @@ export const DropdownStyles = `
     transform: translateX(-50%);
     min-width: 250px;
     width: auto;
-    padding-top: ${spacing.sm};
+    padding-top: ${Spacing.sm};
     display: none;
   }
 
   .${DROPDOWN_LIST_CONTAINER} {
     background-color: ${Colors.white};
     border-top: 2px solid ${Colors.red};
-    padding: ${spacing.lg};
+    padding: ${Spacing.lg};
     box-shadow: -1px 9px 32px -10px rgba(0,0,0,0.19);
   }
 

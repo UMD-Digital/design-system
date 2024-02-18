@@ -5,7 +5,7 @@ import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
@@ -29,13 +29,13 @@ const socialOverwriteStyles = `
 // prettier-ignore
 export const RowLinkStyles = `
   .${ROW_LINKS_CONTAINER} {
-    padding-bottom: ${spacing.lg};
+    padding-bottom: ${Spacing.lg};
     background-color: ${Colors.black};
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_CONTAINER}  {
-      padding-bottom: ${spacing['2xl']};
+      padding-bottom: ${Spacing['2xl']};
     }
   }
 

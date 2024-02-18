@@ -3,14 +3,14 @@ import { DOCUMENT_ICON, NEW_WINDOW_ICON, SHORT_ARROW_ICON } from 'assets/icons';
 import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 // prettier-ignore
 export const CtaIconStyles = `
   .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} {
     position: absolute;
-    bottom: ${spacing.sm};
-    right: ${spacing.sm};
+    bottom: ${Spacing.sm};
+    right: ${Spacing.sm};
     z-index: 9999;
   }
 

@@ -18,7 +18,7 @@ import {
 } from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 
-const { Colors, spacing } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
@@ -54,7 +54,7 @@ const socialOverwriteStyles = `
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
-      margin-top: ${spacing.md};
+      margin-top: ${Spacing.md};
     }
   }
 `;
@@ -62,7 +62,7 @@ const socialOverwriteStyles = `
 // prettier-ignore
 const HeadlineStyles = `
   .${CONTACT_LIST_HEADLINE} {
-    margin-bottom: ${spacing.min};
+    margin-bottom: ${Spacing.min};
   }
 
   .${CONTACT_LIST_HEADLINE} * {
@@ -97,7 +97,7 @@ const HeadlineStyles = `
 // prettier-ignore
 const AddressStyles = `
   .${CONTACT_LIST_ADDRESS} {
-    margin-bottom: ${spacing.min};
+    margin-bottom: ${Spacing.min};
   }
 
   .${CONTACT_LIST_ADDRESS} * {
@@ -143,8 +143,8 @@ const LinkListStyles = `
 
   .${CONTACT_LINKS_LIST} a:not(:first-child) {
     position: relative;
-    margin-left: ${spacing.min};
-    padding-left: ${spacing.min};
+    margin-left: ${Spacing.min};
+    padding-left: ${Spacing.min};
     position: relative;
     background-position: 10px 100%;
   }
@@ -174,13 +174,13 @@ export const ContactContainerStyles = `
 
   @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${CONTACT_CONTAINER} {
-      padding-top: ${spacing['md']};
+      padding-top: ${Spacing['md']};
     }
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${CONTACT_CONTAINER} {
-      padding-left: ${spacing['2xl']};
+      padding-left: ${Spacing['2xl']};
     }
   }
 

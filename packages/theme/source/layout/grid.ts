@@ -1,7 +1,7 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
 const { Grid, GridBase } = Layout;
-const { Queries, spacing } = Tokens;
+const { Queries, Spacing } = Tokens;
 
 export const GridStandard = {
   '.umd-grid': {
@@ -21,7 +21,7 @@ export const GridGutterless = {
   '.umd-grid-gutterless-two': {
     ...GridBase,
 
-    gridGap: spacing.min,
+    gridGap: Spacing.min,
 
     [`@media (${Queries.large.min})`]: {
       gridGap: `0px`,
@@ -32,7 +32,7 @@ export const GridGutterless = {
   '.umd-grid-gutterless-three': {
     ...GridBase,
 
-    gridGap: spacing.min,
+    gridGap: Spacing.min,
 
     [`@media (${Queries.large.min})`]: {
       gridGap: `0px`,
@@ -47,7 +47,7 @@ export const GridGutterless = {
   '.umd-grid-gutterless-four': {
     ...GridBase,
 
-    gridGap: spacing.min,
+    gridGap: Spacing.min,
 
     [`@media (${Queries.large.min})`]: {
       gridGap: `0px`,
@@ -65,7 +65,7 @@ export const GridSpecial = {
     ...GridBase,
 
     [`@media (${Queries.medium.min})`]: {
-      gridGap: `${spacing.md}`,
+      gridGap: `${Spacing.md}`,
       gridTemplateColumns: 'repeat(2, 1fr)',
 
       '& > *:first-child': {
@@ -75,8 +75,8 @@ export const GridSpecial = {
     },
 
     [`@media (${Queries.desktop.min})`]: {
-      gridGap: `${spacing.lg}`,
-      gridTemplateColumns: `[start-feature] calc(50% - ${spacing.md}) [end-feature start-cards] repeat(2, 1fr) [end-cards]`,
+      gridGap: `${Spacing.lg}`,
+      gridTemplateColumns: `[start-feature] calc(50% - ${Spacing.md}) [end-feature start-cards] repeat(2, 1fr) [end-cards]`,
 
       [`& > umd-element-card-overlay:first-child,
         & > umd-element-card:first-child`]: {
@@ -91,7 +91,7 @@ export const GridSpecial = {
 
     [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
-      minHeight: `calc(${spacing['3xl']} * 10)`,
+      minHeight: `calc(${Spacing['3xl']} * 10)`,
     },
 
     '& umd-element-card-overlay': {
@@ -113,7 +113,7 @@ export const GridSpecial = {
 
     [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
-      minHeight: `calc(${spacing['3xl']} * 10)`,
+      minHeight: `calc(${Spacing['3xl']} * 10)`,
     },
 
     '& umd-element-card-overlay': {
@@ -135,7 +135,7 @@ export const GridSpecial = {
 
     [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
-      minHeight: `calc(${spacing['3xl']} * 10)`,
+      minHeight: `calc(${Spacing['3xl']} * 10)`,
     },
 
     '& umd-element-card-overlay': {

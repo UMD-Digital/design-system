@@ -4,7 +4,7 @@ import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { VARIABLES, ELEMENTS } from 'components/nav-drawer/globals';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-const { Colors, FontWeight, spacing } = Tokens;
+const { Colors, FontWeight, Spacing } = Tokens;
 
 const DRAWER_SLIDE_ACTION_BUTTON = 'umd-element-drawer-slide-action-button';
 
@@ -35,10 +35,10 @@ const anchorStyles = `
 const buttonStyles = `
   .${DRAWER_SLIDE_ACTION_BUTTON} {
     position: absolute;
-    right: ${spacing.min};
+    right: ${Spacing.min};
     top: 5px;
-    width: ${spacing.lg};
-    height: ${spacing.lg};
+    width: ${Spacing.lg};
+    height: ${Spacing.lg};
     display: flex;
     justify-content: center;
   }
@@ -64,9 +64,9 @@ export const slideActionStyles = `
     justify-content: space-between;
     position: relative;
     border-bottom: 1px solid ${Colors.gray.light};
-    margin-bottom: ${spacing.md};
-    padding-bottom: ${spacing.md};
-    padding-right: ${spacing['3xl']};
+    margin-bottom: ${Spacing.md};
+    padding-bottom: ${Spacing.md};
+    padding-right: ${Spacing['3xl']};
   }
 
   ${anchorStyles}

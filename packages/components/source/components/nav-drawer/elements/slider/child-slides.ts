@@ -5,7 +5,7 @@ import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction } from './slide-action';
 
-const { Colors, FontWeight, spacing } = Tokens;
+const { Colors, FontWeight, Spacing } = Tokens;
 
 const DRAWER_SLIDER_CHILD_CONTAINER = 'umd-element-drawer-child-slider';
 const DRAWER_SLIDER_HEADLINE = 'umd-element-drawer-back-headline';
@@ -16,21 +16,21 @@ const backButtonStyles = `
   .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} {
     display: block;
     border-bottom: 1px solid ${Colors.gray.light};
-    margin-bottom: ${spacing.sm};
-    padding-bottom: ${spacing.sm};
+    margin-bottom: ${Spacing.sm};
+    padding-bottom: ${Spacing.sm};
   }
 
   @media (min-width: 480px) {
     .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} {
-      margin-bottom: ${spacing.md};
-      padding-bottom: ${spacing.md};
+      margin-bottom: ${Spacing.md};
+      padding-bottom: ${Spacing.md};
     }
   }
 
   .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} button {
     text-transform: uppercase;
     font-weight: ${FontWeight.semiBold};
-    letter-spacing: 1px;
+    letter-Spacing: 1px;
     display: flex;
     align-items: center;
     color: ${Colors.black};
@@ -45,7 +45,7 @@ const backButtonStyles = `
     fill: ${Colors.red};
     width: 12px;
     height: 12px;
-    margin-right: ${spacing.min};
+    margin-right: ${Spacing.min};
     transform: rotate(90deg);
   }
 `;
@@ -59,7 +59,7 @@ const headlineStyles = `
   })}
 
   .${DRAWER_SLIDER_HEADLINE} {
-    margin-bottom: ${spacing.md};
+    margin-bottom: ${Spacing.md};
     font-weight: ${FontWeight.extraBold};
   }
 `;
@@ -67,7 +67,7 @@ const headlineStyles = `
 // prettier-ignore
 const slideActionStyles = `
   .${DRAWER_SLIDER_ACTIONS} {
-    padding-left: ${spacing.sm};
+    padding-left: ${Spacing.sm};
   }
 `;
 

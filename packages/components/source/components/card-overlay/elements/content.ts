@@ -8,7 +8,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CardType } from 'components/card-overlay/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/card-overlay/globals';
 
-const { spacing, Colors } = Tokens;
+const { Spacing, Colors } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const TEXT_CHARACTER_LIMIT = 140;
@@ -34,7 +34,7 @@ const eyebrowStyles = `
 // prettier-ignore
 const headlineStyles = `
   * + .${ELEMENTS.CARD_OVERLAY_HEADLINE} {
-    margin-top: ${spacing.min}
+    margin-top: ${Spacing.min}
   }
 
   ${ConvertJSSObjectToStyles({
@@ -60,7 +60,7 @@ const headlineStyles = `
 // prettier-ignore
 const textStyles = `
   * + .${ELEMENTS.CARD_OVERLAY_TEXT} {
-    margin-top: ${spacing.sm}
+    margin-top: ${Spacing.sm}
   }
 
   ${ConvertJSSObjectToStyles({
@@ -84,7 +84,7 @@ const textStyles = `
 // prettier-ignore
 const dateStyles = `
   * + .${CARD_OVERLAY_DATE} {
-    margin-top: ${spacing.min}
+    margin-top: ${Spacing.min}
   }
 
   .${CARD_OVERLAY_DATE} * {

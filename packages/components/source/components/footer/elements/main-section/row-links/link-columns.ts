@@ -12,7 +12,7 @@ import {
 } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
-const { Colors, spacing, FontWeight } = Tokens;
+const { Colors, Spacing, FontWeight } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const HEADLINE_ATTRIBUTE = 'data-headline';
@@ -128,7 +128,7 @@ const HeadlineStyles = `
   })}
 
   .${ROW_LINKS_COLUMN_HEADLINE} {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${Spacing.sm};
     font-weight: ${FontWeight.extraBold};
   }
 
@@ -142,11 +142,11 @@ const HeadlineStyles = `
 // prettier-ignore
 const LinkStyles = `
   .${ROW_LINKS_COLUMN_LINKS}:not(:last-child) {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${Spacing.sm};
   }
 
   .${ROW_LINKS_COLUMN_LINKS} > * {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${Spacing.sm};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -176,26 +176,26 @@ const ColumnWrapper = `
     .${ROW_LINKS_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0 ${spacing.md};
+      gap: 0 ${Spacing.md};
     }
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
-      margin-bottom: ${spacing.lg};
+      margin-bottom: ${Spacing.lg};
     }
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
-      padding-right: ${spacing.xs};
+      padding-right: ${Spacing.xs};
     }
   }
 
   @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
-      margin-left: ${spacing.lg};
-      padding-left: ${spacing.lg};
+      margin-left: ${Spacing.lg};
+      padding-left: ${Spacing.lg};
       border-left: 1px solid ${Colors.gray.dark};
     }
   }
@@ -211,7 +211,7 @@ const ColumnWrapper = `
 export const LinkColumnStyles = `
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
-      padding-top: ${spacing.md};
+      padding-top: ${Spacing.md};
     }
   }
 

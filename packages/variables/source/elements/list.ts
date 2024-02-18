@@ -2,7 +2,7 @@ import Typography from '../typography';
 import { colors } from '../tokens/colors';
 import { spacing } from '../tokens/spacing';
 
-const listStylesBase = {
+const ListStylesBase = {
   [`& ul,
     & ol ul`]: {
     padding: '0',
@@ -87,7 +87,7 @@ const listStylesBase = {
   },
 };
 
-const unOrderedListStyleTypes = {
+const UnOrderedListStyleTypes = {
   // disc
 
   [`& ul[style*='list-style-type:disc'] > li:before,
@@ -110,7 +110,7 @@ const unOrderedListStyleTypes = {
   },
 };
 
-const orderedListStyleTypes = {
+const OrderedListStyleTypes = {
   // decimal
 
   [`& ol[style*='list-style-type:decimal'] > li:before,
@@ -232,10 +232,10 @@ const orderedListStyleTypes = {
   },
 };
 
-export default {
-  '.umd-lists': {
-    ...listStylesBase,
-    ...unOrderedListStyleTypes,
-    ...orderedListStyleTypes,
-  },
+const ListStyles = {
+  ...ListStylesBase,
+  ...UnOrderedListStyleTypes,
+  ...OrderedListStyleTypes,
 };
+
+export default ListStyles;

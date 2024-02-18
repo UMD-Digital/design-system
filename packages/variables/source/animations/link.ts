@@ -1,6 +1,6 @@
 import { colors } from '../tokens/colors';
 
-const baseSpan = {
+const BaseSpan = {
   display: 'inline',
   position: 'relative',
   backgroundPosition: 'left bottom',
@@ -8,13 +8,13 @@ const baseSpan = {
   transition: 'background 0.5s',
 };
 
-const baseLink = {
+const BaseLink = {
   position: 'relative',
   textDecoration: 'none',
 };
 
 const baseSlideIn = {
-  ...baseLink,
+  ...BaseLink,
 
   [`&:hover > *:not(svg):not(.sr-only),
     &:focus > *:not(svg):not(.sr-only)`]: {
@@ -24,7 +24,7 @@ const baseSlideIn = {
 
 export const LinkLineFade = {
   '.fadein-underline': {
-    ...baseLink,
+    ...BaseLink,
 
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
@@ -33,7 +33,7 @@ export const LinkLineFade = {
   },
 
   '.fadein-simple-dark': {
-    ...baseLink,
+    ...BaseLink,
 
     backgroundImage: `linear-gradient(${colors.white}, ${colors.white})`,
     backgroundPosition: 'left calc(100% - 1px)',
@@ -52,7 +52,7 @@ export const LinkLineFade = {
   },
 
   '.fadein-simple-light': {
-    ...baseLink,
+    ...BaseLink,
 
     backgroundImage: `linear-gradient(currentColor, currentColor)`,
     backgroundPosition: 'left calc(100% - 1px)',
@@ -80,7 +80,7 @@ export const LinkLineSlide = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...baseSpan,
+      ...BaseSpan,
 
       backgroundSize: '0 2px',
       backgroundImage: `linear-gradient(${colors.red}, ${colors.red})`,
@@ -91,7 +91,7 @@ export const LinkLineSlide = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...baseSpan,
+      ...BaseSpan,
 
       backgroundSize: '0 2px',
       backgroundImage: `linear-gradient(${colors.black}, ${colors.black})`,
@@ -102,7 +102,7 @@ export const LinkLineSlide = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...baseSpan,
+      ...BaseSpan,
 
       backgroundSize: '0 2px',
       backgroundImage: `linear-gradient(${colors.white}, ${colors.white})`,
@@ -113,7 +113,7 @@ export const LinkLineSlide = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...baseSpan,
+      ...BaseSpan,
 
       backgroundImage: `linear-gradient(to left, ${colors.gray.light} 50%, ${colors.red} 50% 100%)`,
       backgroundPosition: 'right bottom',

@@ -63,7 +63,7 @@ const Text = {
     fontWeight: fontWeight.normal,
 
     ...TextBase['.umd-text-base'],
-    ...Lists['.umd-lists'],
+    ...Lists,
   },
 
   '.umd-text-dark': {

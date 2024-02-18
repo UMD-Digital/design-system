@@ -9,7 +9,7 @@ import Layout from './layout';
 import WebComponents from './web-components';
 import WebFeeds from './web-feeds';
 
-const { Colors, fontFamily, fontSize } = Tokens;
+const { Colors, FontFamily, FontSize } = Tokens;
 
 const root = {
   ':root': {
@@ -27,10 +27,10 @@ const root = {
     '--grayLight': Colors.gray.light,
     '--grayLighter': Colors.gray.lighter,
     '--grayLightest': Colors.gray.lightest,
-    '--serif': fontFamily.serif,
-    '--sanSerif': fontFamily.sans,
-    fontFamily: fontFamily.sans,
-    fontSize: fontSize.base,
+    '--serif': FontFamily.serif,
+    '--sanSerif': FontFamily.sans,
+    FontFamily: FontFamily.sans,
+    FontSize: FontSize.base,
     lineHeight: '1.5em',
   },
 };

@@ -9,7 +9,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
-const { spacing, Colors, fontSize } = Tokens;
+const { spacing, Colors, FontSize } = Tokens;
 const { Eyebrow, Text } = Fields;
 const { FlexRows } = Layout;
 
@@ -141,7 +141,7 @@ const TextStyles = `
   })}
 
   .${SUMMARY_TEXT_CONTAINER} * {
-    font-size: ${fontSize['lg']};
+    font-size: ${FontSize['lg']};
   }
 `;
 

@@ -12,7 +12,7 @@ import {
 } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
 
-const { Colors, spacing, fontWeight } = Tokens;
+const { Colors, spacing, FontWeight } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const HEADLINE_ATTRIBUTE = 'data-headline';
@@ -129,7 +129,7 @@ const HeadlineStyles = `
 
   .${ROW_LINKS_COLUMN_HEADLINE} {
     margin-bottom: ${spacing.sm};
-    font-weight: ${fontWeight.extraBold};
+    font-weight: ${FontWeight.extraBold};
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {

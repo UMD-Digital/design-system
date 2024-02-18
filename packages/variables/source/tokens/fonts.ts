@@ -12,7 +12,7 @@ const {
   UltraBlack: InterstateUltraBlack,
 } = interstate;
 
-const fontFace = {
+const FontFace = {
   '@font-face': [
     InterstateThin['@font-face'],
     InterstateExtraLight['@font-face'],
@@ -26,7 +26,7 @@ const fontFace = {
   ],
 };
 
-const fontSize = {
+const FontSize = {
   min: '12px',
   sm: '14px',
   base: '16px',
@@ -44,7 +44,7 @@ const fontSize = {
   max: '120px',
 };
 
-const fontWeight = {
+const FontWeight = {
   thin: '100',
   extraLight: '200',
   light: '300',
@@ -57,11 +57,11 @@ const fontWeight = {
   extraBlack: '950',
 };
 
-const fontFamily = {
+const FontFamily = {
   campaign: "'Barlow Condensed', Arial Narrow, sans-serif",
   sans: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
   serif: "'Crimson Pro', Georgia, serif",
   mono: 'monospace',
 };
 
-export { fontFace, fontFamily, fontSize, fontWeight };
+export { FontFace, FontFamily, FontSize, FontWeight };

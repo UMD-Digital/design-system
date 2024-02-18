@@ -8,7 +8,7 @@ import {
   CreateCallToActionElement,
 } from 'elements/call-to-action';
 
-const { Colors, fontSize, spacing } = Tokens;
+const { Colors, FontSize, spacing } = Tokens;
 
 const CTA_PLAIN_TEXT_SLOT = 'umd-call-to-action-plain-text-slot';
 
@@ -43,7 +43,7 @@ const PlainTextSlotStyles = `
   .${CTA_PLAIN_TEXT_SLOT} {
     text-decoration: underline;
     display: inline-block;
-    font-size: ${fontSize.min};
+    font-size: ${FontSize.min};
     font-weight: 600;
     transition: color .5s;
   }

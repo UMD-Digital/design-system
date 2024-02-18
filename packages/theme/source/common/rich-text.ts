@@ -1,6 +1,6 @@
 import { Typography, Fields, Tokens } from '@universityofmaryland/variables';
 
-const { Colors, spacing, fontFamily } = Tokens;
+const { Colors, spacing, FontFamily } = Tokens;
 const { Text } = Fields;
 
 const RichTextCoding = {
@@ -10,7 +10,7 @@ const RichTextCoding = {
       backgroundColor: Colors.gray.lightest,
       borderRadius: '3px',
       color: 'currentColor',
-      fontFamily: fontFamily.mono,
+      FontFamily: FontFamily.mono,
     },
 
     '& code': {

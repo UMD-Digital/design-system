@@ -1,7 +1,7 @@
 import Typography from '../typography';
 import { Colors } from '../tokens/colors';
 import { spacing } from '../tokens/spacing';
-import { fontWeight } from '../tokens/fonts';
+import { FontWeight } from '../tokens/fonts';
 
 const Eyebrow = {
   '.umd-eyebrow-ribbon': {
@@ -10,7 +10,7 @@ const Eyebrow = {
     padding: `${spacing.min} ${spacing.md}`,
     display: `inline-block`,
     clipPath: `polygon(8% 0, 100% 0, 92% 100%, 0 100%)`,
-    fontWeight: fontWeight.bold,
+    FontWeight: FontWeight.bold,
     color: Colors.black,
   },
 };

@@ -8,7 +8,7 @@ import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ELEMENT_TYPE } from 'components/events-date/component';
 import { ELEMENTS, SLOTS } from 'components/events-date/globals';
 
-const { fontSize, fontWeight, spacing } = Tokens;
+const { FontSize, FontWeight, spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 
 const EVENT_DATE_CONTAINER = 'umd-event-date-container';
@@ -37,7 +37,7 @@ const dateWrapperStyles = `
     text-transform: uppercase;
     text-align: center;
     max-width: 200px;
-    font-weight: ${fontWeight.bold}
+    font-weight: ${FontWeight.bold}
   }
 `;
 
@@ -91,8 +91,8 @@ const headlineStyles = `
   @media (max-width: 767px) {
     .${EVENT_HEADLINE},
     .${EVENT_HEADLINE} * {
-      font-size: ${fontSize.sm};
-      font-weight: ${fontWeight.semiBold};
+      font-size: ${FontSize.sm};
+      font-weight: ${FontWeight.semiBold};
     }
   }
 

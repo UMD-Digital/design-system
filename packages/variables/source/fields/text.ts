@@ -1,5 +1,5 @@
 import { Colors } from '../tokens/colors';
-import { fontWeight } from '../tokens/fonts';
+import { FontWeight } from '../tokens/fonts';
 import { spacing } from '../tokens/spacing';
 import Animations from '../animations';
 import Lists from '../elements/list';
@@ -35,7 +35,7 @@ const TextBase = {
     },
 
     '& strong, & b': {
-      fontWeight: fontWeight.bold,
+      FontWeight: FontWeight.bold,
     },
 
     '& u': {
@@ -60,7 +60,7 @@ const TextBase = {
 
 const Text = {
   '.umd-text': {
-    fontWeight: fontWeight.normal,
+    FontWeight: FontWeight.normal,
 
     ...TextBase['.umd-text-base'],
     ...Lists,

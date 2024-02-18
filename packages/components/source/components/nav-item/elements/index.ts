@@ -4,7 +4,7 @@ import { ElementType } from 'components/nav-item/component';
 import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
 
-const { Colors, fontFamily, fontSize, fontWeight } = Tokens;
+const { Colors, FontFamily, FontSize, FontWeight } = Tokens;
 
 // prettier-ignore
 const hasDropdownStyles = `
@@ -31,9 +31,9 @@ export const ComponentStyles = `
   ${Reset}
 
   a {
-    font-family: ${fontFamily.sans};
-    font-size: ${fontSize.sm};
-    font-weight: ${fontWeight.extraBold};
+    font-family: ${FontFamily.sans};
+    font-size: ${FontSize.sm};
+    font-weight: ${FontWeight.extraBold};
     color: ${Colors.black};
     text-decoration: none;
   }

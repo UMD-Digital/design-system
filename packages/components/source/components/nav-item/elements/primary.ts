@@ -5,7 +5,7 @@ import { ElementType } from 'components/nav-item/component';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreateDropdown, DropdownStyles } from './dropdown';
 
-const { Colors, fontSize } = Tokens;
+const { Colors, FontSize } = Tokens;
 
 const PRIMARY_LINK_CONTAINER = 'primary-link-container';
 
@@ -22,7 +22,7 @@ export const PrimaryStyles = `
 
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a {
     color: ${Colors.black};
-    font-size: ${fontSize.base};
+    font-size: ${FontSize.base};
     white-space: nowrap;
     transition: color 0.2s ease-in-out;
     line-height: 1.45em;

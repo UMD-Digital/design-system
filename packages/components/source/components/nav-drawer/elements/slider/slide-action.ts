@@ -4,7 +4,7 @@ import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { VARIABLES, ELEMENTS } from 'components/nav-drawer/globals';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-const { Colors, fontWeight, spacing } = Tokens;
+const { Colors, FontWeight, spacing } = Tokens;
 
 const DRAWER_SLIDE_ACTION_BUTTON = 'umd-element-drawer-slide-action-button';
 
@@ -21,7 +21,7 @@ const anchorStyles = `
   }
 
   .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK} {
-    font-weight: ${fontWeight.extraBold};
+    font-weight: ${FontWeight.extraBold};
     transition: color 0.3s ease-in-out;
   }
 

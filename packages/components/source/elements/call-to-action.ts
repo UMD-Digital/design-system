@@ -13,7 +13,7 @@ import {
   CLASS_STYLES_REF_CTA_PRIMARY,
 } from 'styles/call-to-action-primary';
 
-const { Colors, fontSize, spacing } = Tokens;
+const { Colors, FontSize, spacing } = Tokens;
 
 const MAX_WIDTH = 380;
 const ATTR_SIZE = 'data-size';
@@ -53,7 +53,7 @@ const ThemeStyles = `
 const SizeStyles = `
   [${ATTR_SIZE}="${SIZE_LARGE}"] {
     padding: ${spacing.sm} ${spacing.lg};
-    font-size: ${fontSize.lg};
+    font-size: ${FontSize.lg};
   }
   
   [${ATTR_SIZE}="${SIZE_LARGE}"] svg {
@@ -76,7 +76,7 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
   .${CLASS_BASE_CTA} {
     display: inline-block;
     padding: ${spacing.xs} ${spacing.lg};
-    font-size: ${fontSize.sm};
+    font-size: ${FontSize.sm};
     display: inline-block;
     font-weight: 800;
     text-align: left;

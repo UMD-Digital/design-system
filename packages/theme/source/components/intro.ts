@@ -2,7 +2,7 @@ import { Tokens, umdAlignedContent } from '@universityofmaryland/variables';
 
 const { colors, spacing, queries } = Tokens;
 
-const umdIntro = {
+const SectionIntro = {
   'umd-component-intro': {
     containerName: 'umd-component-intro',
     containerType: 'inline-size',
@@ -90,4 +90,4 @@ const umdIntro = {
   },
 };
 
-export { umdIntro };
+export default { SectionIntro };

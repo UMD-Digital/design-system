@@ -2,7 +2,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 
 const { colors, spacing } = Tokens;
 
-const captionedMedia = {
+const CaptionedMedia = {
   '.umd-media-with-caption': {
     display: 'table',
     maxWidth: '100%',
@@ -25,4 +25,4 @@ const captionedMedia = {
   },
 };
 
-export { captionedMedia };
+export default { CaptionedMedia };

@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 
 const { colors, spacing, queries } = Tokens;
 
-const umdHeader = {
+const Header = {
   '.umd-header-container': {
     backgroundColor: colors.white,
     display: 'block',
@@ -58,4 +58,4 @@ const umdHeader = {
   '.umd-header-nav-column': {},
 };
 
-export { umdHeader };
+export default { Header };

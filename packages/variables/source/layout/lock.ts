@@ -20,36 +20,10 @@ const lockBase = {
   },
 };
 
-const umdLock = {
-  '.umd-lock': {
+const Lock = {
+  '.base': {
     ...lockBase,
-  },
-
-  '.umd-lock-small': {
-    ...lockBase,
-    ...{
-      maxWidth: '1296px',
-    },
-  },
-
-  '.umd-lock-smaller': {
-    ...lockBase,
-    ...{
-      maxWidth: '1180px',
-    },
-  },
-
-  '.umd-lock-extra-small': {
-    ...lockBase,
-    ...{
-      maxWidth: '960px',
-    },
-  },
-
-  '.umd-lock-smallest': {
-    ...lockBase,
-    ...{ maxWidth: '800px' },
   },
 };
 
-export { umdLock };
+export { Lock };

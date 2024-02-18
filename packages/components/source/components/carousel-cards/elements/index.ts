@@ -1,4 +1,4 @@
-import { Tokens, umdLock } from '@universityofmaryland/variables';
+import { Tokens, Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 import { BREAKPOINTS, SLOTS } from 'components/carousel-cards/globals';
@@ -10,6 +10,7 @@ import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 
 const { colors, spacing } = Tokens;
+const { Lock } = Layout;
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
 
@@ -65,7 +66,7 @@ const containerLockStyles = `
   .${CAROUSEL_LOCK} {
     position: relative;
     ${ConvertJSSObjectToStyles({
-      styleObj: umdLock['.umd-lock'],
+      styleObj: Lock['.base'],
     })}
   }
 

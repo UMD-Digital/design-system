@@ -1,20 +1,7 @@
 import Animations from './animations';
 import Fields from './fields';
+import Layout from './layout';
 import Tokens from './tokens';
 import Typography from './typography';
 
-import { umdFlexGrid } from './layout/umd-flex';
-import { umdGrid } from './layout/umd-grid';
-import { umdLock } from './layout/umd-lock';
-import { umdAlignedContent } from './layout/umd-aligned-content';
-
-export {
-  Animations,
-  Tokens,
-  Typography,
-  umdFlexGrid,
-  umdGrid,
-  umdLock,
-  umdAlignedContent,
-  Fields,
-};
+export { Animations, Fields, Layout, Tokens, Typography };

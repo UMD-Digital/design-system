@@ -1,4 +1,4 @@
-import { umdLock } from '@universityofmaryland/variables';
+import { Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateSummaryColumn, STYLES_PATHWAY_SUMMARY_COLUMN } from './summary';
 import { CreateImageColumn, STYLES_PATHWAY_IMAGE_COLUMN } from './image';
@@ -8,6 +8,8 @@ import {
 } from './highlight';
 import { ELEMENTS, BREAKPOINTS, VARIABLES } from '../globals';
 import { ELEMENT_TYPE } from '../component';
+
+const { Lock } = Layout;
 
 const PATHWAY_CONTAINER_WRAPPER = 'umd-pathway-container-wrapper';
 
@@ -32,7 +34,7 @@ const STYLES_CONTAINER = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_CONTAINER_WRAPPER}`]: umdLock['.umd-lock']
+      [`.${PATHWAY_CONTAINER_WRAPPER}`]: Lock['.base']
     },
   })}
 

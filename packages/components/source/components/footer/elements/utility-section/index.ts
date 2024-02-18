@@ -1,7 +1,7 @@
 import {
   Animations,
   Tokens,
-  umdLock,
+  Layout,
   Typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
@@ -15,6 +15,7 @@ import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
 
 const { colors, spacing } = Tokens;
 const { LinkLineSlide } = Animations;
+const { Lock } = Layout;
 
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
 const UTILITY_CONTAINER_LOCK = 'umd-footer-utility-container-lock';
@@ -67,7 +68,7 @@ export const UtilityContainerStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER_LOCK}`]: umdLock['.umd-lock']
+      [`.${UTILITY_CONTAINER_LOCK}`]: Lock['.base']
     },
   })}
 

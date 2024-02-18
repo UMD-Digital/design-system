@@ -1,4 +1,5 @@
-import { Tokens, umdAlignedContent } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
+import { AlignedContent } from '../layout/alignment';
 
 const { colors, spacing, queries } = Tokens;
 
@@ -9,7 +10,7 @@ const SectionIntro = {
     display: 'block',
 
     '& .intro-content-wrapper': {
-      ...umdAlignedContent['.umd-layout-aligned-center'],
+      ...AlignedContent['.umd-layout-aligned-center'],
       ...{
         margin: 'auto',
         paddingTop: `${spacing['6xl']}`,

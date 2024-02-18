@@ -1,6 +1,6 @@
 import {
   Typography,
-  umdFlexGrid,
+  Layout,
   Tokens,
   Fields,
 } from '@universityofmaryland/variables';
@@ -11,6 +11,7 @@ import { ELEMENT_TYPE } from '../component';
 
 const { spacing, colors, fontSize } = Tokens;
 const { Eyebrow, Text } = Fields;
+const { FlexRows } = Layout;
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =
@@ -158,7 +159,7 @@ const ActionStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_ACTIONS_CONTAINER}`]: umdFlexGrid['.umd-layout-flex-row-auto'],
+      [`.${SUMMARY_ACTIONS_CONTAINER}`]: FlexRows['.auto'],
     },
   })}
 `;

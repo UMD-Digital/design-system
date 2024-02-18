@@ -1,16 +1,11 @@
-import {
-  Tokens,
-  Typography,
-  umdFlexGrid,
-  umdGrid,
-  umdLock,
-} from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 
 import Animations from './animations';
 import Accessibility from './accessibility';
 import Common from './common';
 import Components from './components';
 import Elements from './elements';
+import Layout from './layout';
 import WebComponents from './web-components';
 import WebFeeds from './web-feeds';
 
@@ -52,9 +47,7 @@ export const theme = {
   Typography,
   Components,
   Elements,
+  Layout,
   WebComponents,
   WebFeeds,
-  umdLock,
-  umdGrid,
-  umdFlexGrid,
 };

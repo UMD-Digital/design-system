@@ -1,4 +1,4 @@
-import { Tokens, umdGrid } from '@universityofmaryland/variables';
+import { Tokens, Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { FetchGraphQL } from 'helpers/xhr';
 import { CreateEntries, STYLES_ARTICLE } from 'elements/article';
@@ -21,6 +21,7 @@ type VariablesType = {
 };
 
 const { spacing } = Tokens;
+const { Grid } = Layout;
 
 const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 const LAYOUT_CONTAINER = 'umd-feeds-news-layout-container';
@@ -70,20 +71,20 @@ const LazyLoadButtonStyles = `
 const LayoutStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LAYOUT_CONTAINER}[grid-count="2"]`]: umdGrid['.umd-grid'],
+      [`.${LAYOUT_CONTAINER}[grid-count="2"]`]: Grid['.base'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LAYOUT_CONTAINER}[grid-count="3"]`]: umdGrid['.umd-grid-three'],
+      [`.${LAYOUT_CONTAINER}[grid-count="3"]`]: Grid['.base-three'],
     },
   })}
 
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LAYOUT_CONTAINER}[grid-count="4"]`]: umdGrid['.umd-grid-four'],
+      [`.${LAYOUT_CONTAINER}[grid-count="4"]`]: Grid['.base-four'],
     },
   })}
 `;

@@ -1,55 +1,25 @@
-import { queries } from '../tokens/breakpoints';
-import { spacing } from '../tokens/spacing';
+import { Layout, Tokens } from '@universityofmaryland/variables';
 
-const gridBase = {
-  display: 'grid',
-  gridGap: spacing.md,
-  gridTemplateColumns: '1fr',
-};
+const { Grid, GridBase } = Layout;
+const { queries, spacing } = Tokens;
 
-const gridBaseQueries = {
-  [`@media (${queries.large.min})`]: {
-    gridGap: spacing.lg,
-    gridTemplateColumns: 'repeat(2, 1fr)',
-  },
-
-  [`@media (${queries.desktop.min})`]: {
-    gridGap: spacing.lg,
-  },
-};
-
-const umdGridStandard = {
+export const GridStandard = {
   '.umd-grid': {
-    ...gridBase,
-    ...gridBaseQueries,
-
-    [`@media (${queries.desktop.min})`]: {
-      gridGap: spacing['4xl'],
-    },
+    ...Grid['.base'],
   },
 
   '.umd-grid-three': {
-    ...gridBase,
-    ...gridBaseQueries,
-
-    [`@media (${queries.desktop.min})`]: {
-      gridTemplateColumns: 'repeat(3, 1fr)',
-    },
+    ...Grid['.base-three'],
   },
 
   '.umd-grid-four': {
-    ...gridBase,
-    ...gridBaseQueries,
-
-    [`@media (${queries.desktop.min})`]: {
-      gridTemplateColumns: 'repeat(4, 1fr)',
-    },
+    ...Grid['.base-four'],
   },
 };
 
-const umdGridGutterless = {
+export const GridGutterless = {
   '.umd-grid-gutterless-two': {
-    ...gridBase,
+    ...GridBase,
 
     gridGap: spacing.min,
 
@@ -60,7 +30,7 @@ const umdGridGutterless = {
   },
 
   '.umd-grid-gutterless-three': {
-    ...gridBase,
+    ...GridBase,
 
     gridGap: spacing.min,
 
@@ -75,7 +45,7 @@ const umdGridGutterless = {
   },
 
   '.umd-grid-gutterless-four': {
-    ...gridBase,
+    ...GridBase,
 
     gridGap: spacing.min,
 
@@ -90,9 +60,9 @@ const umdGridGutterless = {
   },
 };
 
-const umdGridSpecial = {
+export const GridSpecial = {
   '.umd-grid-featured-card': {
-    ...gridBase,
+    ...GridBase,
 
     [`@media (${queries.medium.min})`]: {
       gridGap: `${spacing.md}`,
@@ -117,7 +87,7 @@ const umdGridSpecial = {
   },
 
   '.umd-grid-two-animated-overlay-card': {
-    ...umdGridGutterless['.umd-grid-gutterless-two'],
+    ...GridGutterless['.umd-grid-gutterless-two'],
 
     [`@media (${queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
@@ -139,7 +109,7 @@ const umdGridSpecial = {
   },
 
   '.umd-grid-three-animated-overlay-card': {
-    ...umdGridGutterless['.umd-grid-gutterless-three'],
+    ...GridGutterless['.umd-grid-gutterless-three'],
 
     [`@media (${queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
@@ -161,7 +131,7 @@ const umdGridSpecial = {
   },
 
   '.umd-grid-four-animated-overlay-card': {
-    ...umdGridGutterless['.umd-grid-gutterless-four'],
+    ...GridGutterless['.umd-grid-gutterless-four'],
 
     [`@media (${queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
@@ -182,11 +152,3 @@ const umdGridSpecial = {
     },
   },
 };
-
-const umdGrid = {
-  ...umdGridStandard,
-  ...umdGridGutterless,
-  ...umdGridSpecial,
-};
-
-export { umdGrid };

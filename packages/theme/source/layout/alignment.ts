@@ -1,7 +1,8 @@
-import { queries } from '../tokens/breakpoints';
-import { spacing } from '../tokens/spacing';
+import { Tokens } from '@universityofmaryland/variables';
 
-const umdAlignedContentBase = {
+const { spacing, queries } = Tokens;
+
+const AlignedContentBase = {
   display: 'block',
 
   '& > *': {
@@ -18,11 +19,11 @@ const umdAlignedContentBase = {
   },
 };
 
-const umdAlignedContent = {
-  '.umd-aligned-content': { ...umdAlignedContentBase },
+export const AlignedContent = {
+  '.umd-aligned-content': { ...AlignedContentBase },
 
   '.umd-layout-aligned-right': {
-    ...umdAlignedContentBase,
+    ...AlignedContentBase,
     ...{
       textAlign: 'right',
 
@@ -33,7 +34,7 @@ const umdAlignedContent = {
   },
 
   '.umd-layout-aligned-center': {
-    ...umdAlignedContentBase,
+    ...AlignedContentBase,
     ...{
       textAlign: 'center',
 
@@ -43,5 +44,3 @@ const umdAlignedContent = {
     },
   },
 };
-
-export { umdAlignedContent };

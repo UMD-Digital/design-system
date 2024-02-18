@@ -1,5 +1,4 @@
 import {
-  Accessibility,
   Tokens,
   typography,
   umdFlexGrid,
@@ -8,7 +7,6 @@ import {
 } from '@universityofmaryland/variables';
 
 import { root } from './dependancies/root';
-import { skipContent } from './elements/accessibility';
 import { umdCta } from './elements/call-to-action';
 import { umdLoader } from './elements/loader';
 import { captionedMedia } from './elements/media-with-caption';
@@ -17,6 +15,7 @@ import { umdHeader } from './components/header';
 import { umdIntro } from './components/intro';
 
 import UmdAnimations from './animations';
+import UmdAccessibility from './accessibility';
 import UmdCommon from './common';
 import UmdComponents from './umd-components';
 import UmdFeeds from './umd-feeds';
@@ -27,8 +26,7 @@ export const base = {
 
 export const theme = {
   root,
-  skipContent,
-  Accessibility,
+  UmdAccessibility,
   UmdAnimations,
   UmdCommon,
   typography,

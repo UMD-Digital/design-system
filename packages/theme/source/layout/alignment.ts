@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { spacing, queries } = Tokens;
+const { spacing, Queries } = Tokens;
 
 const AlignedContentBase = {
   display: 'block',
@@ -9,7 +9,7 @@ const AlignedContentBase = {
     textWrap: 'pretty',
     marginTop: spacing.sm,
 
-    [`@media (${queries.large.min})`]: {
+    [`@media (${Queries.large.min})`]: {
       marginTop: spacing.md,
     },
 

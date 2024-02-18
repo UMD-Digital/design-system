@@ -5,7 +5,7 @@ import { base, theme as umdTheme } from '@universityofmaryland/theme';
 
 const content = ['./source/**/*.{css,twig}'];
 const { root: utilities, ...styles } = umdTheme;
-const tailwindTheme = { screens: base.breakpoints, ...base };
+const tailwindTheme = { screens: base.Breakpoints, ...base };
 const components = Object.values(styles).reduce(
   (arr, current) => ({ ...arr, ...current }),
   {},

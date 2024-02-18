@@ -1,7 +1,7 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
 const { Grid, GridBase } = Layout;
-const { queries, spacing } = Tokens;
+const { Queries, spacing } = Tokens;
 
 export const GridStandard = {
   '.umd-grid': {
@@ -23,7 +23,7 @@ export const GridGutterless = {
 
     gridGap: spacing.min,
 
-    [`@media (${queries.large.min})`]: {
+    [`@media (${Queries.large.min})`]: {
       gridGap: `0px`,
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
@@ -34,12 +34,12 @@ export const GridGutterless = {
 
     gridGap: spacing.min,
 
-    [`@media (${queries.large.min})`]: {
+    [`@media (${Queries.large.min})`]: {
       gridGap: `0px`,
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },
@@ -49,12 +49,12 @@ export const GridGutterless = {
 
     gridGap: spacing.min,
 
-    [`@media (${queries.large.min})`]: {
+    [`@media (${Queries.large.min})`]: {
       gridGap: `0px`,
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
   },
@@ -64,7 +64,7 @@ export const GridSpecial = {
   '.umd-grid-featured-card': {
     ...GridBase,
 
-    [`@media (${queries.medium.min})`]: {
+    [`@media (${Queries.medium.min})`]: {
       gridGap: `${spacing.md}`,
       gridTemplateColumns: 'repeat(2, 1fr)',
 
@@ -74,7 +74,7 @@ export const GridSpecial = {
       },
     },
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridGap: `${spacing.lg}`,
       gridTemplateColumns: `[start-feature] calc(50% - ${spacing.md}) [end-feature start-cards] repeat(2, 1fr) [end-cards]`,
 
@@ -89,7 +89,7 @@ export const GridSpecial = {
   '.umd-grid-two-animated-overlay-card': {
     ...GridGutterless['.umd-grid-gutterless-two'],
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
       minHeight: `calc(${spacing['3xl']} * 10)`,
     },
@@ -111,7 +111,7 @@ export const GridSpecial = {
   '.umd-grid-three-animated-overlay-card': {
     ...GridGutterless['.umd-grid-gutterless-three'],
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
       minHeight: `calc(${spacing['3xl']} * 10)`,
     },
@@ -133,7 +133,7 @@ export const GridSpecial = {
   '.umd-grid-four-animated-overlay-card': {
     ...GridGutterless['.umd-grid-gutterless-four'],
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
       minHeight: `calc(${spacing['3xl']} * 10)`,
     },

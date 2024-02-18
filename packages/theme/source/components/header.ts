@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { colors, spacing, queries } = Tokens;
+const { colors, spacing, Queries } = Tokens;
 
 const Header = {
   '.umd-header-container': {
@@ -9,7 +9,7 @@ const Header = {
     padding: spacing.md,
     position: 'relative',
 
-    [`@media (${queries.tablet.min})`]: {
+    [`@media (${Queries.tablet.min})`]: {
       padding: `${spacing.md} ${spacing['2xl']}`,
     },
   },
@@ -39,7 +39,7 @@ const Header = {
   '.umd-header-logo img': {
     maxHeight: '40px',
 
-    [`@media (${queries.tablet.min})`]: {
+    [`@media (${Queries.tablet.min})`]: {
       maxHeight: '60px',
     },
   },
@@ -50,7 +50,7 @@ const Header = {
     justifyContent: 'flex-end',
     transition: 'gap 0.5s',
 
-    [`@media (${queries.highDef.min})`]: {
+    [`@media (${Queries.highDef.min})`]: {
       padding: spacing.lg,
     },
   },

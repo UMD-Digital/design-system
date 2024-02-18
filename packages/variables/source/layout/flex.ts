@@ -1,4 +1,4 @@
-import { queries } from '../tokens/breakpoints';
+import { Queries } from '../tokens/breakpoints';
 import { spacing } from '../tokens/spacing';
 
 const FlexBase = {
@@ -7,7 +7,7 @@ const FlexBase = {
   flexWrap: 'wrap',
   gap: spacing.md,
 
-  [`@media (${queries.large.min})`]: {
+  [`@media (${Queries.large.min})`]: {
     flexDirection: 'row',
     justifyContent: 'center',
     gap: spacing.lg,
@@ -21,7 +21,7 @@ const FlexRowBase = {
   gap: spacing.sm,
   justifyContent: 'flex-start',
 
-  [`@media (${queries.large.min})`]: {
+  [`@media (${Queries.large.min})`]: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
@@ -36,7 +36,7 @@ const FlexRows = {
     alignItems: 'center',
     justifyContent: 'center',
 
-    [`@media (${queries.large.min})`]: {
+    [`@media (${Queries.large.min})`]: {
       alignItems: 'flex-start',
       flexDirection: 'row',
       flexWrap: 'wrap',

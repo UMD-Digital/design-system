@@ -1,8 +1,8 @@
 import { fontFamily, fontSize, fontWeight } from '../tokens/fonts';
-import { queries } from '../tokens/breakpoints';
+import { Queries } from '../tokens/breakpoints';
 
-const breakpointMobile = queries.medium.max;
-const breakpointDesktop = queries.desktop.max;
+const breakpointMobile = Queries.medium.max;
+const breakpointDesktop = Queries.desktop.max;
 
 const campaign = {
   // Special Maximum

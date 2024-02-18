@@ -1,4 +1,4 @@
-import { queries } from '../tokens/breakpoints';
+import { Queries } from '../tokens/breakpoints';
 import { spacing } from '../tokens/spacing';
 
 const lockBase = {
@@ -9,12 +9,12 @@ const lockBase = {
   paddingRight: spacing['md'],
   maxWidth: '1536px',
 
-  [`@media (${queries.tablet.min})`]: {
+  [`@media (${Queries.tablet.min})`]: {
     paddingLeft: spacing['2xl'],
     paddingRight: spacing['2xl'],
   },
 
-  [`@media (${queries.desktop.min})`]: {
+  [`@media (${Queries.desktop.min})`]: {
     paddingLeft: spacing['4xl'],
     paddingRight: spacing['4xl'],
   },

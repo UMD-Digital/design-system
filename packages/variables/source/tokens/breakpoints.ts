@@ -1,4 +1,4 @@
-const breakpoints = {
+const Breakpoints = {
   small: { min: '320px', max: '479px' },
   medium: { min: '480px', max: '649px' },
   large: { min: '650px', max: '767px' },
@@ -8,32 +8,32 @@ const breakpoints = {
   maximum: { min: '1500px' },
 };
 
-const queries = {
+const Queries = {
   small: {
-    min: `min-width: ${breakpoints.small.min}`,
-    max: `max-width: ${breakpoints.small.max}`,
+    min: `min-width: ${Breakpoints.small.min}`,
+    max: `max-width: ${Breakpoints.small.max}`,
   },
   medium: {
-    min: `min-width: ${breakpoints.medium.min}`,
-    max: `max-width: ${breakpoints.medium.max}`,
+    min: `min-width: ${Breakpoints.medium.min}`,
+    max: `max-width: ${Breakpoints.medium.max}`,
   },
   large: {
-    min: `min-width: ${breakpoints.large.min}`,
-    max: `max-width: ${breakpoints.large.max}`,
+    min: `min-width: ${Breakpoints.large.min}`,
+    max: `max-width: ${Breakpoints.large.max}`,
   },
   tablet: {
-    min: `min-width: ${breakpoints.tablet.min}`,
-    max: `max-width: ${breakpoints.tablet.max}`,
+    min: `min-width: ${Breakpoints.tablet.min}`,
+    max: `max-width: ${Breakpoints.tablet.max}`,
   },
   desktop: {
-    min: `min-width: ${breakpoints.desktop.min}`,
-    max: `max-width: ${breakpoints.desktop.max}`,
+    min: `min-width: ${Breakpoints.desktop.min}`,
+    max: `max-width: ${Breakpoints.desktop.max}`,
   },
   highDef: {
-    min: `min-width: ${breakpoints.highDef.min}`,
-    max: `max-width: ${breakpoints.highDef.max}`,
+    min: `min-width: ${Breakpoints.highDef.min}`,
+    max: `max-width: ${Breakpoints.highDef.max}`,
   },
-  maximum: { min: `min-width: ${breakpoints.maximum.min}` },
+  maximum: { min: `min-width: ${Breakpoints.maximum.min}` },
 };
 
-export { breakpoints, queries };
+export { Breakpoints, Queries };

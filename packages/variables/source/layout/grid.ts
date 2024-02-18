@@ -1,4 +1,4 @@
-import { queries } from '../tokens/breakpoints';
+import { Queries } from '../tokens/breakpoints';
 import { spacing } from '../tokens/spacing';
 
 const GridBase = {
@@ -8,12 +8,12 @@ const GridBase = {
 };
 
 const GridBaseQueries = {
-  [`@media (${queries.large.min})`]: {
+  [`@media (${Queries.large.min})`]: {
     gridGap: spacing.lg,
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
 
-  [`@media (${queries.desktop.min})`]: {
+  [`@media (${Queries.desktop.min})`]: {
     gridGap: spacing.lg,
   },
 };
@@ -23,7 +23,7 @@ const Grid = {
     ...GridBase,
     ...GridBaseQueries,
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridGap: spacing['4xl'],
     },
   },
@@ -32,7 +32,7 @@ const Grid = {
     ...GridBase,
     ...GridBaseQueries,
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },
@@ -41,7 +41,7 @@ const Grid = {
     ...GridBase,
     ...GridBaseQueries,
 
-    [`@media (${queries.desktop.min})`]: {
+    [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
   },

@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AlignedContent } from '../layout/alignment';
 
-const { colors, spacing, queries } = Tokens;
+const { colors, spacing, Queries } = Tokens;
 
 const SectionIntro = {
   'umd-component-intro': {
@@ -52,7 +52,7 @@ const SectionIntro = {
       display: 'block',
       padding: '0',
 
-      [`@container umd-component-intro (${queries.large.min})`]: {
+      [`@container umd-component-intro (${Queries.large.min})`]: {
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'space-between',
@@ -67,7 +67,7 @@ const SectionIntro = {
         maxWidth: '100%',
         marginTop: spacing.xs,
 
-        [`@container umd-component-intro (${queries.large.min})`]: {
+        [`@container umd-component-intro (${Queries.large.min})`]: {
           marginTop: '0',
         },
 
@@ -76,13 +76,13 @@ const SectionIntro = {
           marginRight: spacing.md,
           paddingBottom: '0',
 
-          [`@container umd-component-intro (${queries.large.min})`]: {
+          [`@container umd-component-intro (${Queries.large.min})`]: {
             maxWidth: '66.666%',
           },
         },
 
         '&:last-child': {
-          [`@container umd-component-intro (${queries.large.min})`]: {
+          [`@container umd-component-intro (${Queries.large.min})`]: {
             maxWidth: '33.333%',
           },
         },

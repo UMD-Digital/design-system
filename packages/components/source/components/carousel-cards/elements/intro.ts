@@ -1,9 +1,4 @@
-import {
-  Tokens,
-  typography,
-  umdCta,
-  UmdFields,
-} from '@universityofmaryland/variables';
+import { Tokens, typography, UmdFields } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -64,12 +59,6 @@ const ctaStyles = `
   * + .${INTRO_CONTAINER_CTA} {
     margin-top: ${spacing.md};
   }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${INTRO_CONTAINER_CTA} a`]: umdCta['.umd-cta-secondary'],
-    },
-  })}
 
   .${INTRO_CONTAINER_CTA} a {
     color: ${colors.white};

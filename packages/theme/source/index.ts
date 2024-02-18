@@ -7,7 +7,6 @@ import {
 } from '@universityofmaryland/variables';
 
 import { root } from './dependancies/root';
-import { umdCta } from './elements/call-to-action';
 import { umdLoader } from './elements/loader';
 import { captionedMedia } from './elements/media-with-caption';
 
@@ -33,7 +32,6 @@ export const theme = {
   umdLock,
   umdGrid,
   umdFlexGrid,
-  umdCta,
   captionedMedia,
   umdLoader,
   umdHeader,

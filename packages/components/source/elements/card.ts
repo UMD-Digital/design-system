@@ -1,7 +1,6 @@
 import {
   Animations,
   typography,
-  umdCta,
   Tokens,
   UmdFields,
 } from '@universityofmaryland/variables';
@@ -183,12 +182,6 @@ const CtaStyles = `
   .${CARD_BODY_CTA_WRAPPER} {
     margin-top: ${spacing.md};
   }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${CARD_BODY_CTA_WRAPPER} a`]: umdCta['.umd-cta-secondary'],
-    },
-  })}
 `;
 
 // prettier-ignore

@@ -1,5 +1,4 @@
-import { Tokens, umdCta } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Tokens } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
@@ -18,12 +17,6 @@ export const ctaStyles = `
     overflow: hidden;
     display: flex;
   }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ALERT_CTA} > a`]: umdCta['.umd-cta-primary'],
-    },
-  })}
 `;
 
 export const CreateCta = ({ element }: { element: AlertType }) => {

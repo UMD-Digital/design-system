@@ -1,4 +1,4 @@
-import { Tokens, typography, umdCta } from '@universityofmaryland/variables';
+import { Tokens, typography } from '@universityofmaryland/variables';
 import { CheckForCtaStyle, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -37,12 +37,6 @@ const linkStyles = `
   .${INTRO_LINK} {
     margin-top: ${spacing.min};
   }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${INTRO_LINK}`]: umdCta['.umd-cta-secondary'],
-    },
-  })}
 
   .${ELEMENTS.CONTAINER_DARK_CLASS} .${INTRO_LINK} {
     color: ${colors.white};

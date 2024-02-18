@@ -2,7 +2,7 @@ import {
   Typography,
   umdFlexGrid,
   Tokens,
-  UmdFields,
+  Fields,
 } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
@@ -10,7 +10,7 @@ import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../component';
 
 const { spacing, colors, fontSize } = Tokens;
-const { Eyebrow, Text } = UmdFields;
+const { Eyebrow, Text } = Fields;
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =

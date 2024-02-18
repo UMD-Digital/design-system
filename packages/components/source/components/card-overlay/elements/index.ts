@@ -1,4 +1,4 @@
-import { Animations, Tokens, UmdFields } from '@universityofmaryland/variables';
+import { Animations, Tokens, Fields } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CreateContent, ContentStyles } from './content';
 import { CreateImage, ImageStyles } from './image';
@@ -8,7 +8,7 @@ import { CardType } from '../component';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 
 const { colors, spacing } = Tokens;
-const { Text } = UmdFields;
+const { Text } = Fields;
 const { LinkLineSlide } = Animations;
 
 const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';

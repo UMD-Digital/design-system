@@ -1,5 +1,5 @@
 import Animations from './animations';
-import UmdFields from './fields';
+import Fields from './fields';
 import Tokens from './tokens';
 import Typography from './typography';
 
@@ -16,5 +16,5 @@ export {
   umdGrid,
   umdLock,
   umdAlignedContent,
-  UmdFields,
+  Fields,
 };

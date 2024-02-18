@@ -1,4 +1,4 @@
-import { Tokens, Typography, UmdFields } from '@universityofmaryland/variables';
+import { Tokens, Typography, Fields } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -9,7 +9,7 @@ import {
 import { ELEMENT_TYPE } from 'components/carousel-cards/component';
 
 const { colors, spacing } = Tokens;
-const { Text } = UmdFields;
+const { Text } = Fields;
 
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
 const INTRO_CONTAINER_HEADLINE = 'umd-carousel-cards-intro-container-headline';

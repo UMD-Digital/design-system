@@ -1,10 +1,10 @@
-import { Tokens, UmdFields } from '@universityofmaryland/variables';
+import { Tokens, Fields } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/alert/globals';
 import { AlertType } from 'components/alert/component';
 import { SlotDefaultStyling } from 'helpers/ui';
 
-const { TextBase } = UmdFields;
+const { TextBase } = Fields;
 const { colors } = Tokens;
 
 const ALERT_BODY = 'umd-alert-body';

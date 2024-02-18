@@ -2,14 +2,14 @@ import {
   Animations,
   Typography,
   Tokens,
-  UmdFields,
+  Fields,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
 const { colors, spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { Text } = UmdFields;
+const { Text } = Fields;
 
 const BREAKPOINTS = {
   MOBILE: 650,

@@ -3,7 +3,7 @@ import { Layout, Tokens } from '@universityofmaryland/variables';
 const { Grid, GridBase } = Layout;
 const { Queries, Spacing } = Tokens;
 
-export const GridStandard = {
+export const GridColumnsStandard = {
   '.umd-grid': {
     ...Grid['.base'],
   },
@@ -17,7 +17,7 @@ export const GridStandard = {
   },
 };
 
-export const GridGutterless = {
+export const GridColumnsGutterless = {
   '.umd-grid-gutterless-two': {
     ...GridBase,
 
@@ -60,7 +60,7 @@ export const GridGutterless = {
   },
 };
 
-export const GridFeatured = {
+export const GridColumnsFeatured = {
   '.umd-grid-featured-card': {
     ...GridBase,
 

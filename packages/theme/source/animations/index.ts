@@ -3,13 +3,13 @@ import {
   FadeInUnderlineLink,
   SpecialAnimationsLink,
 } from './link';
-import { FloatCardsIconGrid } from './cards-icon-grid';
-import { FloatCardsOverlayGrid } from './cards-overlay-grid';
+import { FloatCardsIcon } from './cards-icon';
+import { FloatCardsOverlay } from './cards-overlay';
 
 export default {
   ...SlideInUnderlineLink,
   ...FadeInUnderlineLink,
   ...SpecialAnimationsLink,
-  ...FloatCardsIconGrid,
-  ...FloatCardsOverlayGrid,
+  ...FloatCardsIcon,
+  ...FloatCardsOverlay,
 };

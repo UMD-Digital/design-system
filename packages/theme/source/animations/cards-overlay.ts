@@ -1,11 +1,11 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { GridGutterless } from '../layout/grid';
+import { GridColumnsGutterless } from '../layout/grid';
 
 const { Queries, Spacing } = Tokens;
 
-export const FloatCardsOverlayGrid = {
+export const FloatCardsOverlay = {
   '.umd-grid-two-float-overlay-card': {
-    ...GridGutterless['.umd-grid-gutterless-two'],
+    ...GridColumnsGutterless['.umd-grid-gutterless-two'],
 
     [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
@@ -18,7 +18,7 @@ export const FloatCardsOverlayGrid = {
       transform: 'scale(1)',
 
       [`&:hover,
-      &:focus-within `]: {
+        &:focus-within `]: {
         boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
         transform: 'scale(1.025)',
         zIndex: '99',
@@ -27,7 +27,7 @@ export const FloatCardsOverlayGrid = {
   },
 
   '.umd-grid-three-float-overlay-card': {
-    ...GridGutterless['.umd-grid-gutterless-three'],
+    ...GridColumnsGutterless['.umd-grid-gutterless-three'],
 
     [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
@@ -40,7 +40,7 @@ export const FloatCardsOverlayGrid = {
       transform: 'scale(1)',
 
       [`&:hover,
-      &:focus-within `]: {
+        &:focus-within `]: {
         boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
         transform: 'scale(1.025)',
         zIndex: '99',
@@ -49,7 +49,7 @@ export const FloatCardsOverlayGrid = {
   },
 
   '.umd-grid-four-float-overlay-card': {
-    ...GridGutterless['.umd-grid-gutterless-four'],
+    ...GridColumnsGutterless['.umd-grid-gutterless-four'],
 
     [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
@@ -62,7 +62,7 @@ export const FloatCardsOverlayGrid = {
       transform: 'scale(1)',
 
       [`&:hover,
-      &:focus-within `]: {
+        &:focus-within `]: {
         boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
         transform: 'scale(1.025)',
         zIndex: '99',

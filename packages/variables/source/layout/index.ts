@@ -1,12 +1,20 @@
 import { Lock } from './lock';
-import { FlexBase, FlexRows, FlexRowsChildrenBase } from './flex';
+import {
+  FlexBase,
+  FlexRows,
+  FlexChildrenTwo,
+  FlexChildrenThree,
+  FlexChildrenFour,
+} from './flex';
 import { Grid, GridBase } from './grid';
 
 export default {
   Lock,
   FlexBase,
   FlexRows,
-  FlexRowsChildrenBase,
+  FlexChildrenTwo,
+  FlexChildrenThree,
+  FlexChildrenFour,
   Grid,
   GridBase,
 };

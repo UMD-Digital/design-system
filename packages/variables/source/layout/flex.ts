@@ -47,42 +47,48 @@ const FlexRows = {
   },
 };
 
-const FlexRowsChildrenBase = {
-  Two: {
-    width: '100%',
+const FlexChildrenTwo = {
+  width: '100%',
 
-    [`@media (${Queries.large.min})`]: {
-      width: `calc(50% - ${roundToThree(parseInt(Spacing.lg) / 2)}px)`,
-    },
-
-    [`@media (${Queries.desktop.min})`]: {
-      width: `calc(50% - ${roundToThree(parseInt(Spacing['4xl']) / 2)}px)`,
-    },
+  [`@media (${Queries.large.min})`]: {
+    width: `calc(50% - ${roundToThree(parseInt(Spacing.lg) / 2)}px)`,
   },
-  Three: {
-    width: '100%',
 
-    [`@media (${Queries.large.min})`]: {
-      width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
-    },
-
-    [`@media (${Queries.desktop.min})`]: {
-      width: `calc(33.333% - ${roundToThree(
-        (parseInt(Spacing['lg']) * 2) / 3,
-      )}px)`,
-    },
-  },
-  Four: {
-    width: '100%',
-
-    [`@media (${Queries.large.min})`]: {
-      width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
-    },
-
-    [`@media (${Queries.desktop.min})`]: {
-      width: `calc(25% - ${roundToThree((parseInt(Spacing['lg']) * 3) / 4)}px)`,
-    },
+  [`@media (${Queries.desktop.min})`]: {
+    width: `calc(50% - ${roundToThree(parseInt(Spacing['4xl']) / 2)}px)`,
   },
 };
 
-export { FlexBase, FlexRows, FlexRowsChildrenBase };
+const FlexChildrenThree = {
+  width: '100%',
+
+  [`@media (${Queries.large.min})`]: {
+    width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
+  },
+
+  [`@media (${Queries.desktop.min})`]: {
+    width: `calc(33.333% - ${roundToThree(
+      (parseInt(Spacing['lg']) * 2) / 3,
+    )}px)`,
+  },
+};
+
+const FlexChildrenFour = {
+  width: '100%',
+
+  [`@media (${Queries.large.min})`]: {
+    width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
+  },
+
+  [`@media (${Queries.desktop.min})`]: {
+    width: `calc(25% - ${roundToThree((parseInt(Spacing['lg']) * 3) / 4)}px)`,
+  },
+};
+
+export {
+  FlexBase,
+  FlexRows,
+  FlexChildrenTwo,
+  FlexChildrenThree,
+  FlexChildrenFour,
+};

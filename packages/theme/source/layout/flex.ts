@@ -1,9 +1,15 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
-const { FlexBase, FlexRows: Rows, FlexRowsChildrenBase: RowsChildren } = Layout;
+const {
+  FlexBase,
+  FlexRows: Rows,
+  FlexChildrenTwo,
+  FlexChildrenThree,
+  FlexChildrenFour,
+} = Layout;
 const { Queries, Spacing } = Tokens;
 
-export const FlexRows = {
+export const FlexColumnsRows = {
   '.umd-layout-flex-row-auto': {
     ...Rows['.auto'],
   },
@@ -13,7 +19,7 @@ export const FlexRows = {
   },
 };
 
-export const FlexGridCore = {
+export const FlexColumnsCore = {
   '.umd-flex': {
     ...FlexBase,
     ...{
@@ -32,16 +38,16 @@ export const FlexGridCore = {
   },
 };
 
-export const FlexGridContent = {
+export const FlexColumnsContent = {
   '.umd-flex > *': {
-    ...RowsChildren.Two,
+    ...FlexChildrenTwo,
   },
 
   '.umd-flex-three > *': {
-    ...RowsChildren.Three,
+    ...FlexChildrenThree,
   },
 
   '.umd-flex-four > *': {
-    ...RowsChildren.Four,
+    ...FlexChildrenFour,
   },
 };

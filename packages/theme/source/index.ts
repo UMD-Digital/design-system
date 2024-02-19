@@ -35,11 +35,7 @@ const root = {
   },
 };
 
-export const base = {
-  ...Object.fromEntries(
-    Object.entries(Tokens).map(([key, value]) => [key.toLowerCase(), value]),
-  ),
-};
+export const base = Tokens;
 
 export const theme = {
   root,

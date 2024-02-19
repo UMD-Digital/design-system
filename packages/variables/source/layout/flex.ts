@@ -1,6 +1,9 @@
 import { Queries } from '../tokens/breakpoints';
 import { Spacing } from '../tokens/spacing';
 
+const roundToThree = (number: number): number =>
+  Math.round(number * 1000) / 1000;
+
 const FlexBase = {
   display: 'flex',
   flexDirection: 'column',
@@ -44,4 +47,42 @@ const FlexRows = {
   },
 };
 
-export { FlexBase, FlexRows };
+const FlexRowsChildrenBase = {
+  Two: {
+    width: '100%',
+
+    [`@media (${Queries.large.min})`]: {
+      width: `calc(50% - ${roundToThree(parseInt(Spacing.lg) / 2)}px)`,
+    },
+
+    [`@media (${Queries.desktop.min})`]: {
+      width: `calc(50% - ${roundToThree(parseInt(Spacing['4xl']) / 2)}px)`,
+    },
+  },
+  Three: {
+    width: '100%',
+
+    [`@media (${Queries.large.min})`]: {
+      width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
+    },
+
+    [`@media (${Queries.desktop.min})`]: {
+      width: `calc(33.333% - ${roundToThree(
+        (parseInt(Spacing['lg']) * 2) / 3,
+      )}px)`,
+    },
+  },
+  Four: {
+    width: '100%',
+
+    [`@media (${Queries.large.min})`]: {
+      width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
+    },
+
+    [`@media (${Queries.desktop.min})`]: {
+      width: `calc(25% - ${roundToThree((parseInt(Spacing['lg']) * 3) / 4)}px)`,
+    },
+  },
+};
+
+export { FlexBase, FlexRows, FlexRowsChildrenBase };

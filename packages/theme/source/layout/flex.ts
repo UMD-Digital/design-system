@@ -1,48 +1,7 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
-const { FlexBase, FlexRows: Rows } = Layout;
+const { FlexBase, FlexRows: Rows, FlexRowsChildrenBase: RowsChildren } = Layout;
 const { Queries, Spacing } = Tokens;
-
-const roundToThree = (number: number): number =>
-  Math.round(number * 1000) / 1000;
-
-const RowTwoChildren = {
-  width: '100%',
-
-  [`@media (${Queries.large.min})`]: {
-    width: `calc(50% - ${roundToThree(parseInt(Spacing.lg) / 2)}px)`,
-  },
-
-  [`@media (${Queries.desktop.min})`]: {
-    width: `calc(50% - ${roundToThree(parseInt(Spacing['4xl']) / 2)}px)`,
-  },
-};
-
-const RowThreeChildren = {
-  width: '100%',
-
-  [`@media (${Queries.large.min})`]: {
-    width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
-  },
-
-  [`@media (${Queries.desktop.min})`]: {
-    width: `calc(33.333% - ${roundToThree(
-      (parseInt(Spacing['lg']) * 2) / 3,
-    )}px)`,
-  },
-};
-
-const RowFourChildren = {
-  width: '100%',
-
-  [`@media (${Queries.large.min})`]: {
-    width: `calc(50% - ${roundToThree(parseInt(Spacing['lg']) / 2)}px)`,
-  },
-
-  [`@media (${Queries.desktop.min})`]: {
-    width: `calc(25% - ${roundToThree((parseInt(Spacing['lg']) * 3) / 4)}px)`,
-  },
-};
 
 export const FlexRows = {
   '.umd-layout-flex-row-auto': {
@@ -75,58 +34,14 @@ export const FlexGridCore = {
 
 export const FlexGridContent = {
   '.umd-flex > *': {
-    ...RowTwoChildren,
+    ...RowsChildren.Two,
   },
 
   '.umd-flex-three > *': {
-    ...RowThreeChildren,
+    ...RowsChildren.Three,
   },
 
   '.umd-flex-four > *': {
-    ...RowFourChildren,
-  },
-};
-
-export const FlexSpecial = {
-  '.umd-flex-three-animated-icon-card': {
-    ...FlexGridCore['.umd-flex-three'],
-    ...{
-      '& umd-element-card-icon': {
-        ...RowThreeChildren,
-        ...{
-          boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)',
-          transition: 'box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out',
-          transform: 'scale(1)',
-
-          [`&:hover,
-        &:focus-within `]: {
-            boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
-            transform: 'scale(1.025)',
-            zIndex: '99',
-          },
-        },
-      },
-    },
-  },
-
-  '.umd-flex-four-animated-icon-card': {
-    ...FlexGridCore['.umd-flex-four'],
-    ...{
-      '& umd-element-card-icon': {
-        ...RowFourChildren,
-        ...{
-          boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.2)',
-          transition: 'box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out',
-          transform: 'scale(1)',
-
-          [`&:hover,
-        &:focus-within `]: {
-            boxShadow: '0 0 20px 0 rgba(0, 0, 0, 0.2)',
-            transform: 'scale(1.025)',
-            zIndex: '99',
-          },
-        },
-      },
-    },
+    ...RowsChildren.Four,
   },
 };

@@ -4,6 +4,12 @@ import { Queries } from '../tokens/breakpoints';
 const breakpointMobile = Queries.medium.max;
 const breakpointDesktop = Queries.desktop.max;
 
+const FontBase = {
+  fontFamily: FontFamily['serif'],
+  fontStyle: 'normal',
+  fontWeight: FontWeight['normal'],
+};
+
 const SizeLarger = {
   fontSize: FontSize['4xl'],
   lineHeight: `1.18em`,
@@ -18,8 +24,10 @@ const SizeMedium = {
 };
 
 export const SerifMaxium = {
-  fontFamily: FontFamily['serif'],
+  ...FontBase,
+
   fontSize: FontSize['9xl'],
+  fontWeight: FontWeight['light'],
   lineHeight: `1.025em`,
 
   [`@media (${breakpointDesktop})`]: {
@@ -32,7 +40,8 @@ export const SerifMaxium = {
 };
 
 export const SerifExtralarge = {
-  fontFamily: FontFamily['serif'],
+  ...FontBase,
+
   fontSize: FontSize['6xl'],
   lineHeight: `1.07em`,
 
@@ -46,7 +55,7 @@ export const SerifExtralarge = {
 };
 
 export const SerifLarger = {
-  fontFamily: FontFamily['serif'],
+  ...FontBase,
   ...SizeLarger,
 
   [`@media (${breakpointDesktop})`]: {
@@ -59,7 +68,7 @@ export const SerifLarger = {
 };
 
 export const SerifLarge = {
-  fontFamily: FontFamily['serif'],
+  ...FontBase,
   ...SizeLarge,
 
   [`@media (${breakpointDesktop})`]: {
@@ -72,7 +81,6 @@ export const SerifLarge = {
 };
 
 export const SerifMedium = {
-  fontFamily: FontFamily['serif'],
-  fontWeight: FontWeight['medium'],
+  ...FontBase,
   ...SizeMedium,
 };

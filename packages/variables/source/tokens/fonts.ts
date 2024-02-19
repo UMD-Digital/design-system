@@ -1,31 +1,3 @@
-import interstate from '../typography/font-face/interstate';
-
-const {
-  Thin: InterstateThin,
-  ExtraLight: InterstateExtraLight,
-  Light: InterstateLight,
-  Regular: InterstateRegular,
-  Italic: InterstateItalic,
-  Bold: InterstateBold,
-  BoldItalic: InterstateBoldItalic,
-  Black: InterstateBlack,
-  UltraBlack: InterstateUltraBlack,
-} = interstate;
-
-const FontFace = {
-  '@font-face': [
-    InterstateThin['@font-face'],
-    InterstateExtraLight['@font-face'],
-    InterstateLight['@font-face'],
-    InterstateRegular['@font-face'],
-    InterstateItalic['@font-face'],
-    InterstateBold['@font-face'],
-    InterstateBoldItalic['@font-face'],
-    InterstateBlack['@font-face'],
-    InterstateUltraBlack['@font-face'],
-  ],
-};
-
 const FontSize = {
   min: '12px',
   sm: '14px',
@@ -64,4 +36,4 @@ const FontFamily = {
   mono: 'monospace',
 };
 
-export { FontFace, FontFamily, FontSize, FontWeight };
+export { FontFamily, FontSize, FontWeight };

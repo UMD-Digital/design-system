@@ -3,7 +3,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 const { Colors, Spacing } = Tokens;
 const { SansSmaller } = Typography;
 
-const CaptionedMedia = {
+export const CaptionedMedia = {
   '.umd-media-with-caption': {
     display: 'table',
     maxWidth: '100%',
@@ -25,5 +25,3 @@ const CaptionedMedia = {
     },
   },
 };
-
-export default { CaptionedMedia };

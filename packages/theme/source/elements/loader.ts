@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Spacing } = Tokens;
 
-const Loader = {
+export const Loader = {
   '@keyframes loader-animation': {
     '0%, 100%': {
       boxShadow: `0 ${Spacing.min} 0 -3px ${Colors.gray.dark}`,
@@ -45,5 +45,3 @@ const Loader = {
     },
   },
 };
-
-export default { Loader };

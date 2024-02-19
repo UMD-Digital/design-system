@@ -81,7 +81,7 @@ const RichTextTables = {
   },
 };
 
-const RichText = {
+export default {
   '.umd-rich-text': {
     ...Text,
     ...RichTextCoding['.umd-rich-text-coding'],
@@ -93,5 +93,3 @@ const RichText = {
     ...TextDark,
   },
 };
-
-export { RichText, RichTextCoding, RichTextQuotes, RichTextTables };

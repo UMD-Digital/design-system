@@ -16,7 +16,7 @@ const baseLink = {
   textDecoration: 'none',
 };
 
-const SlideInUnderlineLink = {
+export const SlideInUnderlineLink = {
   '.umd-slidein-underline-red': {
     ...LinkLineSlide['.slidein-underline-red'],
   },
@@ -41,7 +41,7 @@ const SlideInUnderlineLink = {
   },
 };
 
-const FadeInUnderlineLink = {
+export const FadeInUnderlineLink = {
   '.umd-fadein-underline-red': {
     ...LinkLineFade['.fadein-underline'],
 
@@ -98,7 +98,7 @@ const FadeInUnderlineLink = {
   },
 };
 
-const SpecialAnimationsLink = {
+export const SpecialAnimationsLink = {
   '.umd-slidein-underline-gray-red': {
     ...baseLink,
     ...LinkLineSlide['.slidein-gray-red'],
@@ -114,5 +114,3 @@ const SpecialAnimationsLink = {
     ...LinkLineFade['.fadein-simple-light'],
   },
 };
-
-export { SlideInUnderlineLink, FadeInUnderlineLink, SpecialAnimationsLink };

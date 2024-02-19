@@ -3,7 +3,7 @@ import { AlignedContent } from '../layout/alignment';
 
 const { Colors, Spacing, Queries } = Tokens;
 
-const SectionIntro = {
+export default {
   'umd-component-intro': {
     containerName: 'umd-component-intro',
     containerType: 'inline-size',
@@ -90,5 +90,3 @@ const SectionIntro = {
     },
   },
 };
-
-export default { SectionIntro };

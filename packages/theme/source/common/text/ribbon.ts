@@ -7,5 +7,3 @@ export default {
     ...Ribbon,
   },
 };
-
-export { Ribbon };

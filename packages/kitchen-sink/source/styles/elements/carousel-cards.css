@@ -1,7 +1,0 @@
-umd-element-carousel-cards:not(:defined) {
-  display: none;
-}
-
-* + umd-element-carousel-cards {
-  margin-top: theme(spacing.2xl);
-}

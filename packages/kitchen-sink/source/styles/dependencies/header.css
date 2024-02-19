@@ -14,4 +14,10 @@ header {
     margin-left: auto;
     display: flex;
   }
+
+  umd-element-nav-item {
+    @media (max-width: theme(screens.tablet.max)) {
+      display: none !important;
+    }
+  }
 }

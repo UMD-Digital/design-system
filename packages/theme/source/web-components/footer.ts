@@ -15,4 +15,7 @@ export default {
   'umd-element-footer:defined': {
     display: 'block',
   },
+  '* + umd-element-footer': {
+    marginTop: Spacing['2xl'],
+  },
 };

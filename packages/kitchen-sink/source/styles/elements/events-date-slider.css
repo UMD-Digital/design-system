@@ -1,7 +1,0 @@
-umd-element-events-date-slider:not(:defined) {
-  display: none;
-}
-
-* + umd-element-events-date-slider {
-  margin-top: theme(spacing.2xl);
-}

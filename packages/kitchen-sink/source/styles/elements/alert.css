@@ -1,7 +1,0 @@
-umd-element-alert:not(:defined) {
-  display: none;
-}
-
-* + umd-element-alert {
-  margin-top: theme(spacing.lg);
-}

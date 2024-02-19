@@ -26,4 +26,7 @@ export default {
       color: Colors.white,
     },
   },
+  '* + umd-element-carousel-cards': {
+    marginTop: Spacing['2xl'],
+  },
 };

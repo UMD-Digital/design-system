@@ -1,4 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
+import typography from 'common/typography';
 
 const { Colors, Spacing, Queries } = Tokens;
 
@@ -38,24 +39,50 @@ const LogoColumn = {
 
 const NavColumn = {
   '& .nav-column': {
+    display: 'flex',
+    alignItems: 'center',
+
     [`@media (${Queries.tablet.max})`]: {
       display: 'none',
     },
+  },
 
-    '& .nav-items': {
-      display: 'flex',
-      gap: Spacing.md,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-    },
+  '.nav-items': {
+    display: 'flex',
+    gap: Spacing.md,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
 
     '& svg': {
       width: '24px',
+      height: '24px',
       fill: `${Colors.black}`,
     },
 
     '& svg path': {
       fill: `${Colors.black}`,
+    },
+  },
+
+  '.utility-items': {
+    display: 'flex',
+    gap: Spacing.sm,
+    justifyContent: 'flex-end',
+    marginBottom: `${Spacing.sm}`,
+
+    '& *': {
+      ...typography['.umd-sans-min'],
+      fontWeight: 700,
+      position: 'relative',
+    },
+
+    '& *:not(:first-child):before': {
+      content: '""',
+      position: 'absolute',
+      height: '100%',
+      left: `-${Spacing.min}`,
+      width: '1px',
+      backgroundColor: `${Colors.gray.light}`,
     },
   },
 };

@@ -32,7 +32,7 @@ const linkStyles = `
     display: block;
     min-width: 120px;
     max-width: 230px;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 14px;
     line-height: 1.5em;
   }

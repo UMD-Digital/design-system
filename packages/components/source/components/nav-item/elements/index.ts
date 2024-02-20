@@ -33,7 +33,7 @@ export const ComponentStyles = `
   a {
     font-family: ${FontFamily.sans};
     font-size: ${FontSize.sm};
-    font-weight: ${FontWeight.extraBold};
+    font-weight: ${FontWeight.bold};
     color: ${Colors.black};
     text-decoration: none;
   }

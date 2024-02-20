@@ -26,6 +26,7 @@ export const PrimaryStyles = `
     white-space: nowrap;
     transition: color 0.2s ease-in-out;
     line-height: 1.45em;
+    font-weight: 700;
   }
 
   .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:hover,

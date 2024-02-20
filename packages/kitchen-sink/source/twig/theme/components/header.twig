@@ -1,5 +1,7 @@
 {% extends '../../_layout.twig' %}
 
+{% import '../../_ui/call-to-action-options.twig' as CallToActionOption %}
+
 {% block page %}
   <section class="pb-2xl">
     <div class="umd-lock">
@@ -58,7 +60,7 @@
                 </div>
               </umd-element-nav-item>
 
-              <a class="header-search" href="/search">
+              <a href="/search">
                 <svg aria-hidden="true"
                   width="96"
                   height="96"
@@ -138,7 +140,7 @@
               <umd-element-nav-item>
                 <a href="/" slot="primary-link"><span>Contact Us</span></a>
               </umd-element-nav-item>
-              <a class="header-search" href="/search">
+              <a href="/search">
                 <svg aria-hidden="true"
                   width="96"
                   height="96"
@@ -173,36 +175,229 @@
 
             <div class="logo">
               <a href="/">
-                <img src="https://provost.umd.edu/logos/provost-logo-primary-light.png"
+                <img src="https://umd.edu/sites/default/themes/umd/build/images/logo-inverted.svg"
                   alt="Office of the Provost, Division of Academic Affairs, University of Maryland" />
               </a>
             </div>
           </div>
 
           <div class="nav-column">
-            <div class="nav-items" id="featured-nav">
-              <umd-element-nav-item>
-                <a href="/" slot="primary-link"><span>About</span></a>
-              </umd-element-nav-item>
+            <div>
+              <div class="utility-items">
+                <a href="">Visit</a>
+                <a href="">Athletics</a>
+                <a href="">News</a>
+                <a href="">Give</a>
+                <a href="">Quicklinks</a>
+              </div>
+              <div class="nav-items" id="featured-nav">
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>About</span></a>
+                  <div slot="dropdown-links">
+                    <a href="https://google.com">Google</a>
+                  </div>
+                </umd-element-nav-item>
 
-              <umd-element-nav-item>
-                <a href="/" slot="primary-link">
-                  <span>Provost Initiatives</span>
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>Academics</span></a>
+                  <div slot="dropdown-links">
+                    <a href="https://google.com">Google</a>
+                  </div>
+                </umd-element-nav-item>
+
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link">
+                    <span>Admissions & Aid</span>
+                  </a>
+                </umd-element-nav-item>
+
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>On Campus</span></a>
+                  <div slot="dropdown-links">
+                    <a href="https://google.com">Google</a>
+                  </div>
+                </umd-element-nav-item>
+
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>Research</span></a>
+                  <div slot="dropdown-links">
+                    <a href="https://google.com">Google</a>
+                  </div>
+                </umd-element-nav-item>
+
+                <a href="/search">
+                  <svg aria-hidden="true"
+                    width="96"
+                    height="96"
+                    viewBox="0 0 96 96"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M79.3401 42.2306C79.3401 54.1438 69.6826 63.8013 57.7694 63.8013C45.8562 63.8013 36.1987 54.1438 36.1987 42.2306C36.1987 30.3174 45.8562 20.6599 57.7694 20.6599C69.6826 20.6599 79.3401 30.3174 79.3401 42.2306ZM91 42.2306C91 60.5833 76.1222 75.4612 57.7694 75.4612C51.3447 75.4612 45.3458 73.6379 40.2619 70.4806L24.2216 86.5209H5L30.2245 60.8255C26.6351 55.5189 24.5388 49.1195 24.5388 42.2306C24.5388 23.8778 39.4167 9 57.7694 9C76.1222 9 91 23.8778 91 42.2306Z"></path>
+                  </svg>
+                  <span class="sr-only">Search</span>
                 </a>
-                <div slot="dropdown-links"></div>
-              </umd-element-nav-item>
-
-              <umd-element-nav-item>
-                <a href="/" slot="primary-link">
-                  <span>Leadership Areas</span>
-                </a>
-
-                <div slot="dropdown-links"></div>
-              </umd-element-nav-item>
+              </div>
             </div>
           </div>
         </div>
       </umd-component-header>
     </div>
+
+    <div class="umd-lock">
+      <div class="umd-sans-large type-hr">
+        <span class="type">Component Header</span>
+        <span class="type-detail">Utility Example</span>
+      </div>
+
+      <umd-component-header role="navigation">
+        <div class="container-wrapper">
+          <div class="logo-column">
+            <umd-element-nav-drawer>
+              <div slot="primary-slide-links"></div>
+              <div slot="primary-slide-content"></div>
+              <div slot="children-slides"></div>
+            </umd-element-nav-drawer>
+
+            <div class="logo">
+              <a href="/">
+                <img src="https://umd.edu/sites/default/themes/umd/build/images/logo-inverted.svg"
+                  alt="Office of the Provost, Division of Academic Affairs, University of Maryland" />
+              </a>
+            </div>
+          </div>
+
+          <div class="nav-column">
+            <div>
+              <div class="utility-items">
+                <a href="">Login</a>
+                <a href="">Connect</a>
+              </div>
+              <div class="nav-items" id="featured-nav">
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>Academics</span></a>
+                  <div slot="dropdown-links">
+                    <a href="https://google.com">Google</a>
+                  </div>
+                </umd-element-nav-item>
+
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>Student Life</span></a>
+                  <div slot="dropdown-links">
+                    <a href="https://google.com">Google</a>
+                  </div>
+                </umd-element-nav-item>
+
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>How to Apply</span></a>
+                </umd-element-nav-item>
+
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>Tuition & Aid</span></a>
+                  <div slot="dropdown-links">
+                    <a href="https://google.com">Google</a>
+                  </div>
+                </umd-element-nav-item>
+
+                <umd-element-nav-item>
+                  <a href="/" slot="primary-link"><span>Visit</span></a>
+                </umd-element-nav-item>
+
+                <a href="/search">
+                  <svg aria-hidden="true"
+                    width="96"
+                    height="96"
+                    viewBox="0 0 96 96"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M79.3401 42.2306C79.3401 54.1438 69.6826 63.8013 57.7694 63.8013C45.8562 63.8013 36.1987 54.1438 36.1987 42.2306C36.1987 30.3174 45.8562 20.6599 57.7694 20.6599C69.6826 20.6599 79.3401 30.3174 79.3401 42.2306ZM91 42.2306C91 60.5833 76.1222 75.4612 57.7694 75.4612C51.3447 75.4612 45.3458 73.6379 40.2619 70.4806L24.2216 86.5209H5L30.2245 60.8255C26.6351 55.5189 24.5388 49.1195 24.5388 42.2306C24.5388 23.8778 39.4167 9 57.7694 9C76.1222 9 91 23.8778 91 42.2306Z"></path>
+                  </svg>
+                  <span class="sr-only">Search</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </umd-component-header>
+    </div>
+
+    <div class="umd-lock">
+      <div class="umd-sans-large type-hr">
+        <span class="type">Component Header</span>
+        <span class="type-detail">CTA Example</span>
+      </div>
+    </div>
+
+    <umd-component-header role="navigation"
+      style="padding-left: 24px; padding-right: 24px">
+      <div class="container-wrapper">
+        <div class="logo-column">
+          <umd-element-nav-drawer>
+            <div slot="primary-slide-links"></div>
+            <div slot="primary-slide-content"></div>
+            <div slot="children-slides"></div>
+          </umd-element-nav-drawer>
+
+          <div class="logo">
+            <a href="/">
+              <img src="https://umd.edu/sites/default/themes/umd/build/images/logo-inverted.svg"
+                alt="Office of the Provost, Division of Academic Affairs, University of Maryland" />
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-column">
+          <div class="nav-items" id="featured-nav">
+            <umd-element-nav-item>
+              <a href="/" slot="primary-link"><span>Lorem Ipsum</span></a>
+              <div slot="dropdown-links">
+                <a href="https://google.com">Google</a>
+              </div>
+            </umd-element-nav-item>
+
+            <umd-element-nav-item>
+              <a href="/" slot="primary-link"><span>Dolor Sit Ahmet</span></a>
+              <div slot="dropdown-links">
+                <a href="https://google.com">Google</a>
+              </div>
+            </umd-element-nav-item>
+
+            <umd-element-nav-item>
+              <a href="/" slot="primary-link"><span>Consequtur</span></a>
+            </umd-element-nav-item>
+
+            <umd-element-nav-item>
+              <a href="/" slot="primary-link"><span>Lipsum Concorda</span></a>
+              <div slot="dropdown-links">
+                <a href="https://google.com">Google</a>
+              </div>
+            </umd-element-nav-item>
+
+            <a href="/search">
+              <svg aria-hidden="true"
+                width="96"
+                height="96"
+                viewBox="0 0 96 96"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M79.3401 42.2306C79.3401 54.1438 69.6826 63.8013 57.7694 63.8013C45.8562 63.8013 36.1987 54.1438 36.1987 42.2306C36.1987 30.3174 45.8562 20.6599 57.7694 20.6599C69.6826 20.6599 79.3401 30.3174 79.3401 42.2306ZM91 42.2306C91 60.5833 76.1222 75.4612 57.7694 75.4612C51.3447 75.4612 45.3458 73.6379 40.2619 70.4806L24.2216 86.5209H5L30.2245 60.8255C26.6351 55.5189 24.5388 49.1195 24.5388 42.2306C24.5388 23.8778 39.4167 9 57.7694 9C76.1222 9 91 23.8778 91 42.2306Z"></path>
+              </svg>
+              <span class="sr-only">Search</span>
+            </a>
+
+            {{
+              CallToActionOption.SuccinctCTA({
+                ctaSpan: true,
+                ctaLink: false,
+                externalLink: false,
+                download: false
+              })
+            }}
+          </div>
+        </div>
+      </div>
+    </umd-component-header>
   </section>
 {% endblock %}

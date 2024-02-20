@@ -17,18 +17,16 @@ const {
 } = interstate;
 
 export const FontFaces = {
-  '@font-face': [
-    BarlowCondensedBoldItalic['@font-face'],
-    CrimsonProLight['@font-face'],
-    CrimsonProRegular['@font-face'],
-    InterstateThin['@font-face'],
-    InterstateExtraLight['@font-face'],
-    InterstateLight['@font-face'],
-    InterstateRegular['@font-face'],
-    InterstateItalic['@font-face'],
-    InterstateBold['@font-face'],
-    InterstateBoldItalic['@font-face'],
-    InterstateBlack['@font-face'],
-    InterstateUltraBlack['@font-face'],
-  ],
+  BarlowCondensedBoldItalic,
+  CrimsonProLight,
+  CrimsonProRegular,
+  InterstateThin,
+  InterstateExtraLight,
+  InterstateLight,
+  InterstateRegular,
+  InterstateItalic,
+  InterstateBold,
+  InterstateBoldItalic,
+  InterstateBlack,
+  InterstateUltraBlack,
 };

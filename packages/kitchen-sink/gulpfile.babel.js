@@ -33,7 +33,7 @@ const WeirdImageOptions = [
 ];
 
 const logoOptions = [
-  'https://brandportal.umd.edu/m/139cd2d64cbb69cd/Medium_web-SPP_DGI_Primary_rgb-png.jpg',
+  'https://provost.umd.edu/logos/provost-logo-primary-light.png',
 ];
 
 const twigTask = () =>

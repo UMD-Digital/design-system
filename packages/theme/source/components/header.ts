@@ -71,8 +71,8 @@ const NavColumn = {
     marginBottom: `${Spacing.sm}`,
 
     '& *': {
-      ...typography['.umd-sans-min'],
-      fontWeight: 700,
+      ...typography['.umd-sans-smaller'],
+      color: `${Colors.gray.darker}`,
       position: 'relative',
     },
 

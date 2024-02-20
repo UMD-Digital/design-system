@@ -6,8 +6,6 @@ const breakpointDesktop = Queries.desktop.max;
 
 const FontBase = {
   fontFamily: FontFamily['serif'],
-  fontStyle: 'normal',
-  fontWeight: FontWeight['normal'],
 };
 
 const SizeLarger = {

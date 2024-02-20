@@ -23,7 +23,7 @@ export const buttonStyles = `
   .${NAV_DRAWER_BUTTON_WRAPPER} {
     position: relative;
     width: 20px;
-    height: 16px;
+    height: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -31,7 +31,7 @@ export const buttonStyles = `
 
   .${NAV_DRAWER_BUTTON_WRAPPER} span {
     width: 20px;
-    height: 2.5px;
+    height: 2px;
     background-color: ${Colors.black};
     transition: background-color 0.3s ease-in-out;
   }

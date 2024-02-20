@@ -45,17 +45,17 @@ export const PrimaryStyles = `
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
     align-self: flex-start;
-    margin-top: 3px;
+    margin-top: 5px;
     margin-left: 8px;
     transition: transform .5s;
   }
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} svg {
     fill: ${Colors.red};
-    height: 16px;
+    height: 14px;
+    width: 14px;
     transform: rotate(0deg) translateY(0);
     transition: fill .5s,transform .5s;
-    width: 16px;
   }
 
   ${DropdownStyles}

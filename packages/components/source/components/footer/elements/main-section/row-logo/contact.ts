@@ -67,7 +67,7 @@ const HeadlineStyles = `
   }
 
   .${CONTACT_LIST_HEADLINE} * {
-    font-weight: 900;
+    font-weight: 800;
   }
 
   ${ConvertJSSObjectToStyles({

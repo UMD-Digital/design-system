@@ -44,7 +44,7 @@ export const PrimaryStyles = `
 
   .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
     align-self: flex-start;
-    margin-top: 2px;
+    margin-top: 3px;
     margin-left: 8px;
     transition: transform .5s;
   }

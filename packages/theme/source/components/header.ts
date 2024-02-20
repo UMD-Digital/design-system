@@ -12,7 +12,7 @@ const LogoColumn = {
 
   '& umd-element-nav-drawer': {
     borderRight: `1px solid ${Colors.gray.light}`,
-    paddingRight: Spacing.sm,
+    paddingRight: Spacing.min,
     marginRight: Spacing.sm,
   },
 
@@ -21,7 +21,9 @@ const LogoColumn = {
     maxWidth: `calc(100% - (${Spacing['6xl']} + 4px))`,
 
     '& img': {
+      width: '100%',
       maxWidth: '160px',
+      maxHeight: '60px',
 
       [`@media (${Queries.tablet.min})`]: {
         maxWidth: '240px',
@@ -44,11 +46,16 @@ const NavColumn = {
       display: 'flex',
       gap: Spacing.md,
       justifyContent: 'flex-end',
-      transition: 'gap 0.5s',
+      alignItems: 'center',
+    },
 
-      [`@media (${Queries.highDef.min})`]: {
-        padding: Spacing.lg,
-      },
+    '& svg': {
+      width: '24px',
+      fill: `${Colors.black}`,
+    },
+
+    '& svg path': {
+      fill: `${Colors.black}`,
     },
   },
 };
@@ -64,7 +71,7 @@ export default {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      gap: Spacing.sm,
+      gap: Spacing.lg,
     },
 
     ...LogoColumn,

@@ -70,10 +70,15 @@ const NavColumn = {
     justifyContent: 'flex-end',
     marginBottom: `${Spacing.sm}`,
 
+    '& a:hover, & a:focus, & button:hover, & button:focus': {
+      color: `${Colors.red}`,
+    },
+
     '& *': {
       ...typography['.umd-sans-smaller'],
       color: `${Colors.gray.darker}`,
       position: 'relative',
+      tranisition: 'color 0.3s',
     },
 
     '& *:not(:first-child):before': {

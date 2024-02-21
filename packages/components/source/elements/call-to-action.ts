@@ -76,9 +76,9 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
   .${CLASS_BASE_CTA} {
     display: inline-block;
     padding: ${Spacing.xs} ${Spacing.lg};
-    font-size: ${FontSize.sm};
+    font-size: ${FontSize.base};
     display: inline-block;
-    font-weight: 800;
+    font-weight: 700;
     text-align: left;
     line-height: 1.28em;
     max-width: ${MAX_WIDTH}px;

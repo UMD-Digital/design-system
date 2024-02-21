@@ -14,6 +14,7 @@ const ListStylesBase = {
     '& li': {
       paddingLeft: Spacing.md,
       position: 'relative',
+      lineHeight: '1.4em',
     },
 
     '& li:before': {
@@ -22,7 +23,7 @@ const ListStylesBase = {
         content: '"•"',
         counterIncrement: 'item',
         position: 'absolute',
-        top: '0',
+        top: '2px',
         right: `calc(100% - ${Spacing.xs})`,
       },
     },
@@ -41,6 +42,7 @@ const ListStylesBase = {
     padding: '0',
     counterReset: 'item',
     listStyleType: 'none !important',
+    lineHeight: '1.4em',
 
     '& li ': {
       paddingLeft: Spacing.xl,
@@ -54,7 +56,7 @@ const ListStylesBase = {
         counterIncrement: 'item',
         fontVariantNumeric: 'tabular-nums',
         position: 'absolute',
-        top: '0',
+        top: '1px',
         right: `calc(100% - ${Spacing.md})`,
         unicodeBidi: 'isolate',
         whiteSpace: 'pre',

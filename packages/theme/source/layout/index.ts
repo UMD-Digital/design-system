@@ -5,6 +5,7 @@ import {
   GridColumnsStandard,
   GridColumnsFeatured,
 } from './grid';
+import { ListingGroup } from './listing-group';
 import { LockSizes } from './lock';
 
 export default {
@@ -15,5 +16,6 @@ export default {
   ...GridColumnsGutterless,
   ...GridColumnsStandard,
   ...GridColumnsFeatured,
+  ...ListingGroup,
   ...LockSizes,
 };

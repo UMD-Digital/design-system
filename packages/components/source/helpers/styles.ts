@@ -42,7 +42,7 @@ export const Reset = `
   }
 
   strong, b {
-    font-weight: 900;
+    font-weight: 700;
   }
 
   em, i {

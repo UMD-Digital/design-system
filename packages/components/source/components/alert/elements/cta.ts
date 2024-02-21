@@ -10,7 +10,7 @@ const ALERT_CTA = 'umd-alert-cta';
 // prettier-ignore
 export const ctaStyles = `
   * + .${ALERT_CTA} {
-    margin-top: ${Spacing.md};
+    margin-top: ${Spacing.sm};
   }
 
   .${ALERT_CTA} {

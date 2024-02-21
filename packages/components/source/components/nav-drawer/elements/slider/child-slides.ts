@@ -29,7 +29,7 @@ const backButtonStyles = `
 
   .${ELEMENTS.DRAWER_SLIDE_ACTION_BACK_BUTTON} button {
     text-transform: uppercase;
-    font-weight: ${FontWeight.semiBold};
+    font-weight: 600;
     letter-Spacing: 1px;
     display: flex;
     align-items: center;
@@ -60,7 +60,7 @@ const headlineStyles = `
 
   .${DRAWER_SLIDER_HEADLINE} {
     margin-bottom: ${Spacing.md};
-    font-weight: ${FontWeight.extraBold};
+    font-weight: 700;
   }
 `;
 

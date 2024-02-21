@@ -4,7 +4,7 @@ import { UMDNavDrawer } from 'components/nav-drawer/component';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction, slideActionStyles } from './slide-action';
 
-const { Colors, Spacing } = Tokens;
+const { Colors, Spacing, FontSize } = Tokens;
 
 const DRAWER_SLIDER_PRIMARY_CONTAINER = 'umd-element-drawer-primary-container';
 const DRAWER_SLIDER_PRIMARY_LINKS_CONTAINER =
@@ -25,6 +25,11 @@ export const primarySliderStyles = `
       padding-bottom: ${Spacing.sm};
       margin-bottom: ${Spacing.sm};
     }
+  }
+
+  .${DRAWER_SLIDER_SECONDARY_LINKS_CONTAINER} a {
+    font-weight: 400;
+    font-size: ${FontSize.base};
   }
 
   ${slideActionStyles}

@@ -18,7 +18,8 @@ const ALERT_HEADLINE = 'umd-alert-headline';
 export const headlineStyles = `
   .${ALERT_HEADLINE} {
     margin-bottom: ${Spacing.sm};
-    color: ${Colors.black}
+    color: ${Colors.black};
+    padding-right: ${Spacing.md};
   }
 
   .${ALERT_HEADLINE} * {

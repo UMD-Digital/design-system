@@ -10,7 +10,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { TextDark } = Fields;
-const { SansSmaller, SansLarge, SansMin } = Typography;
+const { SansLarge, SansMin, Eyebrow } = Typography;
 
 const BREAKPOINTS = {
   MOBILE: 650,
@@ -80,13 +80,13 @@ const EyebrowStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_EYEBROW_WRAPPER}`]: SansSmaller,
+      [`.${CARD_EYEBROW_WRAPPER}`]: Eyebrow,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_EYEBROW_WRAPPER} *`]: SansSmaller,
+      [`.${CARD_EYEBROW_WRAPPER} *`]: Eyebrow,
     },
   })}
 
@@ -177,7 +177,7 @@ const TextStyles = `
 // prettier-ignore
 const CtaStyles = `
   .${CARD_BODY_CTA_WRAPPER} {
-    margin-top: ${Spacing.md};
+    margin-top: ${Spacing.sm};
   }
 `;
 

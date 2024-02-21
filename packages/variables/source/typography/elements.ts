@@ -1,15 +1,17 @@
 import { FontFamily, FontSize, FontWeight } from '../tokens/fonts';
 import { Queries } from '../tokens/breakpoints';
-import { SansSmaller } from './sans';
+import { Colors } from '../tokens/colors';
 
 const breakpointMobile = Queries.medium.max;
 const breakpointDesktop = Queries.desktop.max;
 
 export const Eyebrow = {
-  ...SansSmaller,
-  fontWeight: FontWeight['bold'],
-  textTransform: 'uppercase',
-  lineHeight: `1.14em`,
+  fontWeight: 700,
+  color: Colors.black,
+  fontSize: FontSize.min,
+  lineHeight: 1,
+  textTransform: `uppercase`,
+  letterSpacing: `.05em`,
 };
 
 export const LabelMedium = {

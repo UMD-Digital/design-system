@@ -18,6 +18,10 @@ const headlineStyles = `
     color: ${Colors.black};
   }
 
+  .${INTRO_HEADLINE} + * {
+    margin-top: ${Spacing.min};
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_HEADLINE}`]: Typography.SansLarger,

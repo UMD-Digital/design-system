@@ -21,6 +21,8 @@ const INTRO_CONTAINER_CTA = 'umd-carousel-cards-intro-container-cta';
 const headlineStyles = `
   .${INTRO_CONTAINER_HEADLINE} * {
     color: ${Colors.white};
+    font-weight: 800;
+    text-transform: uppercase;
   }
 
   ${ConvertJSSObjectToStyles({

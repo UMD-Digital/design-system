@@ -129,7 +129,7 @@ const HeadlineStyles = `
 
   .${ROW_LINKS_COLUMN_HEADLINE} {
     margin-bottom: ${Spacing.sm};
-    font-weight: ${FontWeight.extraBold};
+    font-weight: 700;
   }
 
   @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {

@@ -2,15 +2,16 @@ import {
   Animations,
   Tokens,
   Typography,
+  Fields,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ELEMENT_TYPE } from 'components/events-date/component';
 import { ELEMENTS, SLOTS } from 'components/events-date/globals';
 
-const { FontSize, FontWeight, Spacing } = Tokens;
+const { FontSize, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { SansLarger, SansLarge, InterativeSmall } = Typography;
+const { SansLarger, SansLarge, InterativeSmall, Eyebrow } = Typography;
 
 const EVENT_DATE_CONTAINER = 'umd-event-date-container';
 const EVENT_DATE_WRAPPER = 'umd-event-date-wrapper';
@@ -38,7 +39,7 @@ const dateWrapperStyles = `
     text-transform: uppercase;
     text-align: center;
     max-width: 200px;
-    font-weight: ${FontWeight.bold}
+    font-weight: 700;
   }
 `;
 
@@ -46,7 +47,7 @@ const dateWrapperStyles = `
 const monthStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_MONTH}`]: InterativeSmall,
+      [`.${EVENT_MONTH}`]: Eyebrow,
     },
   })}
 
@@ -93,7 +94,7 @@ const headlineStyles = `
     .${EVENT_HEADLINE},
     .${EVENT_HEADLINE} * {
       font-size: ${FontSize.sm};
-      font-weight: ${FontWeight.semiBold};
+      font-weight: 600;
     }
   }
 

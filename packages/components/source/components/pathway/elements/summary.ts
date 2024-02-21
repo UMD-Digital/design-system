@@ -120,6 +120,8 @@ const HeadlineStyles = `
 
   .${SUMMARY_HEADLINE_CONTAINER} {
     color: ${Colors.black};
+    font-weight: 800;
+    text-transform: uppercase;
   }
 `;
 

@@ -16,7 +16,6 @@ export const CallToActionStyles = `
     padding: ${Spacing.xs} ${Spacing['lg']};
     background-color: ${Colors.red};
     color: ${Colors.white};
-    font-weight: 800;
     border: 1px solid ${Colors.red};
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }

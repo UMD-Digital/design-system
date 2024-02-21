@@ -141,9 +141,6 @@ const CreateLinkIcon = ({
   const textSpan = element.querySelector(
     `.${CLASS_CTA_TEXT_WRAPPER}`,
   ) as HTMLSpanElement;
-  const isExternalReference = element
-    .getAttribute('href')
-    ?.includes('http' || 'https');
   const isExternalTab = element.getAttribute('target') === '_blank';
   const isDownload = element.getAttribute('download') !== null;
 
@@ -161,7 +158,7 @@ const CreateLinkIcon = ({
 
   if (!isLink) return;
 
-  if (isExternalReference || isExternalTab) {
+  if (isExternalTab) {
     wrapper.innerHTML = NEW_WINDOW_ICON;
     wrapper.appendChild(textSpan);
     return;

@@ -5,8 +5,10 @@ declare global {
 }
 
 import { MakeTemplate, SlotOberserver } from 'helpers/ui';
+import { Debounce } from 'helpers/performance';
 import { ComponentStyles, CreateShadowDom } from './elements';
-import { ELEMENTS, SLOTS } from './globals';
+import { SLOTS } from './globals';
+import { EventResize } from './services/events';
 
 export const ELEMENT_NAME = 'umd-element-card-overlay';
 export type CardType = UMDCardOverlayElement;
@@ -32,8 +34,13 @@ export class UMDCardOverlayElement extends HTMLElement {
     const element = this;
     element._theme = element.getAttribute('theme') || element._theme;
 
+    const resizeEvent = () => {
+      EventResize({ element });
+    };
     const container = CreateShadowDom({ element });
     this._shadow.appendChild(container);
+    resizeEvent();
+    window.addEventListener('resize', Debounce(resizeEvent, 20));
 
     SlotOberserver({
       element,

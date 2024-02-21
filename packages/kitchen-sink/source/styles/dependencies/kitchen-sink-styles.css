@@ -1,8 +1,12 @@
-.umd-sans-largest {
+.page-heading {
+  @apply umd-sans-largest;
+
   padding-bottom: 40px;
 }
 
-.umd-sans-large {
+.content-heading {
+  @apply umd-sans-large;
+
   display: block;
   padding: 45px 0 15px 0;
   position: relative;

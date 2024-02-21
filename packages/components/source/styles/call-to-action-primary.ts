@@ -19,7 +19,6 @@ export const STYLES_CTA_PRIMARY = `
     border: 1px solid ${Colors.red};
     color: ${Colors.white};
     transition: background .5s, border .5s, color .5s;
-    font-weight: 800;
   }
 
   .${CLASS_STYLES_REF_CTA_PRIMARY}:hover,

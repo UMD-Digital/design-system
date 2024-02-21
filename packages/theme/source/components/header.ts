@@ -24,7 +24,7 @@ const LogoColumn = {
     '& img': {
       width: '100%',
       maxWidth: '160px',
-      maxHeight: '60px',
+      maxHeight: '48px',
 
       [`@media (${Queries.tablet.min})`]: {
         maxWidth: '240px',

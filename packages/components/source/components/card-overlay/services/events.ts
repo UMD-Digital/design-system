@@ -4,7 +4,7 @@ import { VARIABLES, ELEMENTS, SLOTS } from '../globals';
 const CONTAINER_WIDTH_TEXT_BREAKPOINT_MAX = 600;
 const CONTAINER_WIDTH_TEXT_BREAKPOINT_LARGE = 400;
 const TEXT_CHARACTER_LIMIT_SMALL = 80;
-const TEXT_CHARACTER_LIMIT_LARGE = 120;
+const TEXT_CHARACTER_LIMIT_LARGE = 110;
 const TEXT_CHARACTER_LIMIT_MAX = 232;
 
 const TruncateText = ({ element }: { element: UMDCardOverlayElement }) => {

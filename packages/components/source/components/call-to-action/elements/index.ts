@@ -44,7 +44,6 @@ const PlainTextSlotStyles = `
     text-decoration: underline;
     display: inline-block;
     font-size: ${FontSize.min};
-    font-weight: 600;
     transition: color .5s;
   }
 

@@ -11,6 +11,7 @@ export const ELEMENT_NAME = 'umd-element-call-to-action';
 export type CallToActionType = UMDCallToActionElement;
 export class UMDCallToActionElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _styleProps: null | string;
   _type = 'primary';
   _size = 'standard';
   _theme = 'light';
@@ -18,6 +19,7 @@ export class UMDCallToActionElement extends HTMLElement {
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
+    this._styleProps = null;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
@@ -26,17 +28,26 @@ export class UMDCallToActionElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [];
+    return ['styleProps'];
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (name == 'style') {
+      this._styleProps = newValue;
+    }
+  }
 
   connectedCallback() {
     const element = this;
+    const styleAttrubutes = element.getAttribute('styleProps');
 
     element._size = element.getAttribute('size') || element._size;
     element._type = element.getAttribute('type') || element._type;
     element._theme = element.getAttribute('theme') || element._theme;
+
+    if (styleAttrubutes) {
+      element._styleProps = styleAttrubutes;
+    }
 
     const container = CreateShadowDom({ element });
 

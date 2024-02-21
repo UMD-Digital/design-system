@@ -201,11 +201,13 @@ export const CreateCallToActionElement = ({
   type = 'primary',
   size = null,
   theme = null,
+  styleProps = null,
 }: {
   cta?: HTMLElement | null;
   type?: string;
   size?: string | null;
   theme?: string | null;
+  styleProps?: string | null;
 }) => {
   const element = cta || document.createElement('a');
   const icon = GetIcon({ element });
@@ -230,6 +232,10 @@ export const CreateCallToActionElement = ({
 
   if (size) {
     element.setAttribute('data-size', size);
+  }
+
+  if (styleProps) {
+    element.setAttribute('style', styleProps);
   }
 
   CreateTextSpan({ element });

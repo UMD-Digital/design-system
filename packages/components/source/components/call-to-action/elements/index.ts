@@ -70,16 +70,19 @@ const CreateCtaElement = ({ element }: { element: CallToActionType }) => {
   const type = element._type;
   const size = element._size;
   const theme = element._theme;
+  const styleProps = element._styleProps;
+
   const linkElement = element.querySelector(`a`);
   const buttonElement = element.querySelector(`button`);
+  const styleObj = { type, size, theme, styleProps };
 
   if (linkElement) {
     const cta = linkElement.cloneNode(true) as HTMLAnchorElement;
-    return CreateCallToActionElement({ cta, type, size, theme });
+    return CreateCallToActionElement({ cta, ...styleObj });
   }
   if (buttonElement) {
     const cta = buttonElement.cloneNode(true) as HTMLButtonElement;
-    return CreateCallToActionElement({ cta, type, size, theme });
+    return CreateCallToActionElement({ cta, ...styleObj });
   }
 
   return CreateCallToActionElement({ type });

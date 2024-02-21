@@ -185,7 +185,6 @@ const CtaStyles = `
 export const LayoutIntroStyles = `
   @media (max-width: ${BREAKPOINTS.TABLET - 1}px) {
     .${CARD_INTRO_WRAPPER} {
-      display: flex;
       margin-bottom: ${Spacing.min};
     }
   }

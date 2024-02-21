@@ -19,12 +19,6 @@ const INTRO_CONTAINER_CTA = 'umd-carousel-cards-intro-container-cta';
 
 // prettier-ignore
 const headlineStyles = `
-  .${INTRO_CONTAINER_HEADLINE} * {
-    color: ${Colors.white};
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE}`]: SansLargest,
@@ -36,6 +30,12 @@ const headlineStyles = `
       [`.${INTRO_CONTAINER_HEADLINE} *`]: SansLargest,
     },
   })}
+
+  .${INTRO_CONTAINER_HEADLINE} * {
+    color: ${Colors.white};
+    font-weight: 800;
+    text-transform: uppercase;
+  }
 `;
 
 // prettier-ignore

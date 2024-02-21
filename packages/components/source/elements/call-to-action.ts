@@ -13,7 +13,7 @@ import {
   CLASS_STYLES_REF_CTA_PRIMARY,
 } from 'styles/call-to-action-primary';
 
-const { Colors, FontSize, Spacing } = Tokens;
+const { Colors, FontSize, Spacing, Queries } = Tokens;
 
 const MAX_WIDTH = 380;
 const ATTR_SIZE = 'data-size';
@@ -51,16 +51,20 @@ const ThemeStyles = `
 
 // prettier-ignore
 const SizeStyles = `
-  [${ATTR_SIZE}="${SIZE_LARGE}"] {
-    padding: ${Spacing.sm} ${Spacing.lg};
-    font-size: ${FontSize.lg};
+  @media (${Queries.tablet.min}) {
+    [${ATTR_SIZE}="${SIZE_LARGE}"] {
+      font-size: ${FontSize.lg};
+      padding: ${Spacing.sm} ${Spacing.lg};
+    }
   }
   
-  [${ATTR_SIZE}="${SIZE_LARGE}"] svg {
-    height: 17px;
-    width: 17px;
-    margin-right: 5px;
-    margin-top: 3px;
+  @media (${Queries.tablet.min}) {
+    [${ATTR_SIZE}="${SIZE_LARGE}"] svg {
+      height: 17px;
+      width: 17px;
+      margin-right: 5px;
+      margin-top: 3px;
+    }
   }
 `;
 

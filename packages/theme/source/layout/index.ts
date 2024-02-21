@@ -1,4 +1,4 @@
-import { AlignedContent } from './alignment';
+import { SpacingContent } from './spacing';
 import { FlexColumnsContent, FlexColumnsCore, FlexColumnsRows } from './flex';
 import {
   GridColumnsGutterless,
@@ -8,7 +8,7 @@ import {
 import { LockSizes } from './lock';
 
 export default {
-  ...AlignedContent,
+  ...SpacingContent,
   ...FlexColumnsContent,
   ...FlexColumnsCore,
   ...FlexColumnsRows,

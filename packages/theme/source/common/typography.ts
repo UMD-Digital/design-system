@@ -92,11 +92,15 @@ export const sans = {
 export const transforms = {
   '.umd-sans-largest-uppercase': {
     ...Typography.SansLargest,
+
+    fontWeight: fontWeight['extraBold'],
     textTransform: 'uppercase',
   },
 
   '.umd-sans-extralarge-uppercase': {
     ...Typography.SansExtraLarge,
+
+    fontWeight: fontWeight['extraBold'],
     textTransform: 'uppercase',
   },
 

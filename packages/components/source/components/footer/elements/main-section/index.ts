@@ -49,7 +49,7 @@ export const MainContainerStyles = `
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] p,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] span,
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a {
-    color: ${Colors.gray.darker}
+    color: ${Colors.gray.dark}
   }
 
   ${RowLogoStyles}

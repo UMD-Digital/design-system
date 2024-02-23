@@ -196,7 +196,7 @@ const ColumnWrapper = `
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
       margin-left: ${Spacing.lg};
       padding-left: ${Spacing.lg};
-      border-left: 1px solid ${Colors.gray.dark};
+      border-left: 1px solid ${Colors.gray.light};
     }
   }
 

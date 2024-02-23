@@ -49,9 +49,13 @@ const LinkStyles = `
 // prettier-ignore
 const TextStyles = `
   .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} p {
-    color: ${Colors.white};
+    color: ${Colors.gray.light};
     display: flex;
     align-items: center;
+  }
+
+  .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} a {
+    color: ${Colors.gray.light};
   }
 
   .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {

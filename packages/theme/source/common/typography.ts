@@ -1,4 +1,7 @@
 import { Typography } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
+
+const fontWeight = Tokens.FontWeight;
 
 export const campaign = {
   '.umd-campaign-maximum': {
@@ -97,8 +100,10 @@ export const transforms = {
     textTransform: 'uppercase',
   },
 
-  '.umd-sans-larger-body': {
+  '.umd-sans-larger-regular': {
     ...Typography.SansLarger,
+
+    fontWeight: fontWeight['normal'],
   },
 };
 

@@ -183,12 +183,18 @@ const CreateLinkIcon = ({
 const CreateTextSpan = ({ element }: { element: HTMLElement }) => {
   const wrapper = document.createElement('span');
   const animationWrapper = document.createElement('span');
+  const cloneElement = element.cloneNode(true) as HTMLElement;
+  const svg = cloneElement.querySelector('svg');
+  const img = cloneElement.querySelector('img');
+
+  if (svg) svg.remove();
+  if (img) img.remove();
 
   if (element.textContent) {
     animationWrapper.classList.add(CLASS_CTA_ANIMATION_WRAPPER);
     wrapper.classList.add(CLASS_CTA_TEXT_WRAPPER);
 
-    animationWrapper.innerHTML = element.textContent;
+    animationWrapper.innerHTML = cloneElement.innerHTML;
     element.textContent = '';
 
     wrapper.appendChild(animationWrapper);

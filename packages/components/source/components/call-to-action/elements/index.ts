@@ -45,6 +45,7 @@ const PlainTextSlotStyles = `
     display: inline-block;
     font-size: ${FontSize.min};
     transition: color .5s;
+    position: relative;
   }
 
   .${CTA_PLAIN_TEXT_SLOT}:hover,

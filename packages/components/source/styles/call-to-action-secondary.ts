@@ -14,6 +14,10 @@ export const STYLES_CTA_SECONDARY = `
     padding: 0 !important;
   }
 
+  .${CLASS_STYLES_REF_CTA_SECONDARY} > span > span {
+    width: calc(100% - 16px);
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CLASS_STYLES_REF_CTA_SECONDARY} > span > span`]:

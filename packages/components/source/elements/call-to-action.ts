@@ -86,6 +86,7 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
     text-align: left;
     line-height: 1.28em;
     max-width: ${MAX_WIDTH}px;
+    position: relative;
   }
 
   .${CLASS_BASE_CTA} svg {

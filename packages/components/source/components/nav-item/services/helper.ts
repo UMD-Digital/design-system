@@ -1,5 +1,5 @@
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
-import { ElementType } from 'components/nav-item/component';
+import { ElementType } from 'components/nav-item';
 import { SLOTS, ELEMENTS } from 'components/nav-item/globals';
 
 const BOUNDS_SHIFT = 140;

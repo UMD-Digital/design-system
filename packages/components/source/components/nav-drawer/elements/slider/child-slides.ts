@@ -1,7 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { UMDNavDrawer } from 'components/nav-drawer/component';
+import { UMDNavDrawer } from 'components/nav-drawer';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction } from './slide-action';
 

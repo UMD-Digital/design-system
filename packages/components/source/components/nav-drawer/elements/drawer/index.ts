@@ -1,5 +1,5 @@
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
-import { UMDNavDrawer } from 'components/nav-drawer/component';
+import { UMDNavDrawer } from 'components/nav-drawer';
 import { CreateDrawerButton, drawerButtonStyles } from './button-close';
 import { CreateSlider, drawerSliderStyles } from '../slider';
 

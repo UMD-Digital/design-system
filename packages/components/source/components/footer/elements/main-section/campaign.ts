@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
-import { ELEMENT_TYPE } from 'components/footer/component';
+import { ELEMENT_TYPE } from 'components/footer';
 import { VARIABLES } from 'components/footer/globals';
 
 const { Spacing } = Tokens;

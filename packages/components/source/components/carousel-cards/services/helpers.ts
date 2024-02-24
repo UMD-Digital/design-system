@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENT_TYPE } from '../component';
+import { ELEMENT_TYPE } from '../index';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 
 const { Spacing } = Tokens;

@@ -1,9 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
-import { ELEMENT_TYPE } from 'components/events-date-slider/component';
+import { ELEMENT_TYPE } from 'components/events-date-slider';
 import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
-import { ButtonVisibilityLogic } from '../../../services/helpers';
-import { EventSlideDates } from '../../../services/events';
+import { ButtonVisibilityLogic } from 'components/events-date-slider/services/helpers';
+import { EventSlideDates } from 'components/events-date-slider/services/events';
 
 const { Colors, Spacing } = Tokens;
 

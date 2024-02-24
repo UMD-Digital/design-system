@@ -1,5 +1,5 @@
 import { Reset } from 'helpers/styles';
-import { ELEMENT_TYPE } from 'components/footer/component';
+import { ELEMENT_TYPE } from 'components/footer';
 import { ELEMENTS } from 'components/footer/globals';
 import { CreateMain, MainContainerStyles } from './main-section';
 import { CreateUtility, UtilityContainerStyles } from './utility-section';

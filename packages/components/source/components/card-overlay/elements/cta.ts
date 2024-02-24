@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
-import { CardType } from 'components/card-overlay/component';
+import { CardType } from 'components/card-overlay';
 import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
 const { Spacing } = Tokens;

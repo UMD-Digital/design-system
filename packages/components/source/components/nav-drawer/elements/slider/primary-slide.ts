@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { MakeSlot } from 'helpers/ui';
-import { UMDNavDrawer } from 'components/nav-drawer/component';
+import { UMDNavDrawer } from 'components/nav-drawer';
 import { ELEMENTS, SLOTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreateSlideAction, slideActionStyles } from './slide-action';
 

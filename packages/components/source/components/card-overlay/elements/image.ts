@@ -1,6 +1,6 @@
 import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS, ELEMENTS } from '../globals';
-import { CardType } from '../component';
+import { CardType } from '../index';
 
 // prettier-ignore
 export const ImageStyles = `

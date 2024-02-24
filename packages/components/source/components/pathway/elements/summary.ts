@@ -7,7 +7,7 @@ import {
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
-import { ELEMENT_TYPE } from '../component';
+import { ELEMENT_TYPE } from '../index';
 
 const { Spacing, Colors, FontSize } = Tokens;
 const { Ribbon, Text } = Fields;

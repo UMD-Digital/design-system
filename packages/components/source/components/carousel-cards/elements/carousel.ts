@@ -1,5 +1,5 @@
 import { MakeSlot } from 'helpers/ui';
-import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+import { ELEMENT_TYPE } from 'components/carousel-cards';
 import {
   SLOTS,
   BREAKPOINTS,

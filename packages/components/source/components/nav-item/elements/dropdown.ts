@@ -1,7 +1,7 @@
 import { Animations, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
-import { ElementType } from 'components/nav-item/component';
+import { ElementType } from 'components/nav-item';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 
 const { Colors, Spacing } = Tokens;

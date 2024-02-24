@@ -7,7 +7,7 @@ import {
   STYLES_PATHWAY_HIGHLIGHT_COLUMN,
 } from './highlight';
 import { ELEMENTS, BREAKPOINTS, VARIABLES } from '../globals';
-import { ELEMENT_TYPE } from '../component';
+import { ELEMENT_TYPE } from '../index';
 
 const { Lock } = Layout;
 

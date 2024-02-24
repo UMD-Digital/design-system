@@ -9,7 +9,7 @@ import {
   CreateLinkWithSpan,
   SlotDefaultStyling,
 } from 'helpers/ui';
-import { ELEMENT_TYPE } from 'components/footer/component';
+import { ELEMENT_TYPE } from 'components/footer';
 import {
   BREAKPOINTS,
   ELEMENTS,

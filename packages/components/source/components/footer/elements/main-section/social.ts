@@ -7,7 +7,7 @@ import {
   TWITTER_ICON,
 } from 'assets/social';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { ELEMENT_TYPE } from 'components/footer/component';
+import { ELEMENT_TYPE } from 'components/footer';
 import {
   BREAKPOINTS,
   VARIABLES,

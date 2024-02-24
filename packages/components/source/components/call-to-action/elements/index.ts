@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
-import { CallToActionType } from '../component';
+import { CallToActionType } from '../index';
 import {
   STYLES_CALL_TO_ACTION_ELEMENT,
   CreateCallToActionElement,

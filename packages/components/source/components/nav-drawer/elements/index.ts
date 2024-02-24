@@ -1,5 +1,5 @@
 import { Reset } from 'helpers/styles';
-import { UMDNavDrawer } from 'components/nav-drawer/component';
+import { UMDNavDrawer } from 'components/nav-drawer';
 import { CreateButton, buttonStyles } from './button';
 import { CreateDrawer, drawerStyles } from './drawer';
 

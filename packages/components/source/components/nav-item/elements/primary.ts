@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { CHEVRON_SMALL_ICON } from 'assets/icons';
-import { ElementType } from 'components/nav-item/component';
+import { ElementType } from 'components/nav-item';
 import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreateDropdown, DropdownStyles } from './dropdown';
 

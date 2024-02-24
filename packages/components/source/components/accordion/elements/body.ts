@@ -6,7 +6,7 @@ import {
   BREAKPOINTS,
   ELEMENTS,
 } from 'components/accordion/globals';
-import { ELEMENT_TYPE } from 'components/accordion/component';
+import { ELEMENT_TYPE } from 'components/accordion';
 import { SlotDefaultStyling } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;

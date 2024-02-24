@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENT_TYPE } from 'components/footer/component';
+import { ELEMENT_TYPE } from 'components/footer';
 import { VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';

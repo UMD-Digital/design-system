@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
-import { ElementType } from 'components/nav-item/component';
+import { ElementType } from 'components/nav-item';
 import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
 

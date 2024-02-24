@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from 'components/alert/globals';
-import { AlertType } from 'components/alert/component';
+import { AlertType } from 'components/alert';
 
 const { Spacing } = Tokens;
 

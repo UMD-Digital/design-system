@@ -4,7 +4,7 @@ import { CreateContent, ContentStyles } from './content';
 import { CreateImage, ImageStyles } from './image';
 import { CreateCta, CtaStyles } from './cta';
 import { CreateCtaIcon, CtaIconStyles } from './cta-icon';
-import { CardType } from '../component';
+import { CardType } from '../index';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 
 const { Colors, Spacing } = Tokens;

@@ -6,7 +6,7 @@ import {
   BREAKPOINTS,
   ELEMENTS,
 } from 'components/carousel-cards/globals';
-import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+import { ELEMENT_TYPE } from 'components/carousel-cards';
 
 const { Colors, Spacing } = Tokens;
 const { TextDark } = Fields;

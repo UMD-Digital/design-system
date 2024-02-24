@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+import { ELEMENT_TYPE } from 'components/carousel-cards';
 import { SLOTS, VARIABLES, ELEMENTS } from 'components/carousel-cards/globals';
 import {
   GetElementSize,

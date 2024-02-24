@@ -1,4 +1,4 @@
-import { ELEMENT_TYPE } from '../component';
+import { ELEMENT_TYPE } from '../index';
 import { SLOTS } from '../globals';
 import {
   ButtonVisibilityLogic,

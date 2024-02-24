@@ -1,5 +1,5 @@
 import { EventAccessibilityFocus } from 'helpers/accessibility';
-import { ElementType } from 'components/nav-item/component';
+import { ElementType } from 'components/nav-item';
 import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { DropdownPositionPerViewPort } from './helper';
 

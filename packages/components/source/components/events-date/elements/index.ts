@@ -2,11 +2,10 @@ import {
   Animations,
   Tokens,
   Typography,
-  Fields,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
-import { ELEMENT_TYPE } from 'components/events-date/component';
+import { ELEMENT_TYPE } from 'components/events-date';
 import { ELEMENTS, SLOTS } from 'components/events-date/globals';
 
 const { FontSize, Spacing } = Tokens;

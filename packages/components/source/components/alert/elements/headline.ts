@@ -5,7 +5,7 @@ import {
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS } from 'components/alert/globals';
-import { AlertType } from 'components/alert/component';
+import { AlertType } from 'components/alert';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;

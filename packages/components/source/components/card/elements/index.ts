@@ -1,5 +1,5 @@
 import { SLOTS } from 'components/card/globals';
-import { CardType } from 'components/card/component';
+import { CardType } from 'components/card';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { CreateCardElement, STYLES_CARD } from 'elements/card';

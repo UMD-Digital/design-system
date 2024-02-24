@@ -1,6 +1,6 @@
 import { EventAccessibilityFocus } from 'helpers/accessibility';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
-import { UMDNavDrawer } from 'components/nav-drawer/component';
+import { UMDNavDrawer } from 'components/nav-drawer';
 
 export const EventOpen = ({ element }: { element: UMDNavDrawer }) => {
   const body = document.querySelector('body') as HTMLBodyElement;

@@ -2,7 +2,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../globals';
-import { ELEMENT_TYPE } from '../component';
+import { ELEMENT_TYPE } from '../index';
 
 const { Colors, Spacing } = Tokens;
 

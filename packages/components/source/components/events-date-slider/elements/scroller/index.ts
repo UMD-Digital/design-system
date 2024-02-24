@@ -1,4 +1,4 @@
-import { ELEMENT_TYPE } from 'components/events-date-slider/component';
+import { ELEMENT_TYPE } from 'components/events-date-slider';
 import { BREAKPOINTS } from 'components/events-date-slider/globals';
 import { CreateIntroWrapper, IntroStyles } from './intro';
 import { CreateDatesContainer, DatesStyles } from './dates';

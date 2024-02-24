@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
-import { ELEMENT_TYPE } from 'components/events-date-slider/component';
+import { ELEMENT_TYPE } from 'components/events-date-slider';
 import {
   BREAKPOINTS,
   ELEMENTS,

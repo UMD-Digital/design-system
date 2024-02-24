@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import { CLOSE_BUTTON_ICON, NOTIFICATION_ICON } from 'assets/icons';
 import { Reset } from 'helpers/styles';
 import { BREAKPOINTS, ELEMENTS } from '../globals';
-import { AlertType } from '../component';
+import { AlertType } from 'components/alert';
 import { SetLocalString } from '../services/helper';
 import { EventClose } from '../services/events';
 import { CreateHeadline, headlineStyles } from './headline';

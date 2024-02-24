@@ -1,11 +1,6 @@
 import { SlotDefaultStyling } from 'helpers/ui';
-import {
-  SLOTS,
-  VARIABLES,
-  BREAKPOINTS,
-  ELEMENTS,
-} from 'components/pathway/globals';
-import { ELEMENT_TYPE } from '../component';
+import { SLOTS, VARIABLES, BREAKPOINTS, ELEMENTS } from '../globals';
+import { ELEMENT_TYPE } from '../index';
 
 const PATHWAY_IMAGE_CONTAINER = 'umd-pathway-image-column-container';
 const PATHWAY_IMAGE_CONTAINER_WRAPPER = 'umd-pathway-image-wrapper';

@@ -1,6 +1,6 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { ELEMENT_TYPE } from 'components/footer/component';
+import { ELEMENT_TYPE } from 'components/footer';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import {
   SocialContainerStyles,

@@ -1,7 +1,7 @@
 import { Reset } from 'helpers/styles';
 import { CreateBody, bodyStyles } from './body';
 import { CreateHeadline, headlineStyles } from './headline';
-import { ELEMENT_TYPE } from '../component';
+import { ELEMENT_TYPE } from '../index';
 import { ELEMENT_NAME, ELEMENTS } from '../globals';
 
 export default `

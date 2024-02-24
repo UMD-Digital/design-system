@@ -1,5 +1,5 @@
 import { MakeSlot } from 'helpers/ui';
-import { ELEMENT_TYPE } from 'components/events-date-slider/component';
+import { ELEMENT_TYPE } from 'components/events-date-slider';
 import {
   BREAKPOINTS,
   ELEMENTS,

@@ -1,4 +1,4 @@
-import { UMDCardOverlayElement } from '../component';
+import { UMDCardOverlayElement } from '../index';
 import { VARIABLES, ELEMENTS, SLOTS } from '../globals';
 
 const CONTAINER_WIDTH_TEXT_BREAKPOINT_MAX = 600;

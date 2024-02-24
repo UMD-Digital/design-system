@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
-import { ELEMENT_TYPE } from 'components/footer/component';
+import { ELEMENT_TYPE } from 'components/footer';
 import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {

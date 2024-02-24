@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { DOCUMENT_ICON, NEW_WINDOW_ICON, SHORT_ARROW_ICON } from 'assets/icons';
-import { CardType } from 'components/card-overlay/component';
+import { CardType } from 'components/card-overlay';
 import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
 const { Colors, Spacing } = Tokens;

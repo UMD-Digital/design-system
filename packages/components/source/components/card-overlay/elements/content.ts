@@ -2,11 +2,10 @@ import {
   Typography,
   Tokens,
   Animations,
-  Fields,
 } from '@universityofmaryland/variables';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { CardType } from 'components/card-overlay/component';
+import { CardType } from 'components/card-overlay';
 import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
 const { Spacing, Colors } = Tokens;

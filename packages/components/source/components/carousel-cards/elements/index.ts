@@ -1,6 +1,6 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { ELEMENT_TYPE } from 'components/carousel-cards/component';
+import { ELEMENT_TYPE } from 'components/carousel-cards';
 import { BREAKPOINTS, SLOTS } from 'components/carousel-cards/globals';
 import {
   EventResizeCarouselElementsWidth,

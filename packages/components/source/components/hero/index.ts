@@ -11,6 +11,8 @@ export const ELEMENT_NAME = 'umd-element-hero';
 export type HeroType = UMDHeroElement;
 export class UMDHeroElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _theme = 'light';
+  _type = 'default';
 
   constructor() {
     super();
@@ -23,13 +25,18 @@ export class UMDHeroElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [];
+    return ['theme', 'type'];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
 
   connectedCallback() {
     const container = CreateShadowDom({ element: this });
+    const type = this.getAttribute('type');
+    const theme = this.getAttribute('theme');
+
+    this._theme = theme || this._theme;
+    this._type = type || this._type;
 
     this._shadow.appendChild(container);
   }

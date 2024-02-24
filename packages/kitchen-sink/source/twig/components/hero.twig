@@ -10,6 +10,26 @@
       </h1>
     </div>
 
-    <umd-element-hero></umd-element-hero>
+    <umd-element-hero>
+      <p slot="eyebrow">
+        Eyebrow Text
+      </p>
+      <p slot="headline">
+        <a href="">Headline Text</a>
+      </p>
+      <p slot="text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam
+      </p>
+
+      <div slot="actions">
+        <umd-element-call-to-action type="secondary">
+          <a href="https://google.com" aria-label="link to google">
+            Learn More
+          </a>
+        </umd-element-call-to-action>
+      </div>
+    </umd-element-hero>
   </section>
 {% endblock %}

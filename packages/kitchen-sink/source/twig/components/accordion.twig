@@ -1,0 +1,121 @@
+{% extends '../_layout.twig' %}
+{% import '../_elements/content-dropdown.twig' as Dropdown %}
+{% import '../_ui/card-overlay.twig' as CardOverlay %}
+
+{% set var = value %}
+
+{% block page %}
+  {% set imageOne = random(RecImageOptions) %}
+  {% set imageTwo = random(RecImageOptions) %}
+  {% set imageThree = random(RecImageOptions) %}
+  {% set imageSquare = random(SquareImageOptions) %}
+  {% set imageWeird = random(WeirdImageOptions) %}
+
+  <section>
+    <div class="umd-lock">
+      <h1 class="umd-sans-largest">
+        Accordion
+      </h1>
+
+      <h2 class="umd-sans-large">
+        Content Variations
+      </h2>
+
+      {{ Dropdown.ContentVariations() }}
+
+      <umd-element-accordion>
+        <umd-element-accordion-item>
+          <div slot="headline">
+            Accordion Header 1 (Simple)
+          </div>
+
+          <div slot="body">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+              diam mi, volutpat eu massa quis, finibus vestibulum dui. Praesent
+              eget mauris auctor, scelerisque dolor et, ullamcorper turpis.
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item>
+          <div slot="headline">
+            Accordion Header 2 (Verbose)
+          </div>
+
+          <div slot="body">
+            <p>
+              Lorem ipsum consectetur adipiscing elit. Aliquam diam mi, volutpat
+              eu massa quis, finibus vestibulum dui. Praesent eget mauris
+              auctor, scelerisque dolor et, ullamcorper turpis. Proin blandit,
+              ex nec vehicula laoreet, eros felis rutrum erat, vel elementum
+              neque purus at orci. Vestibulum ante ipsum primis in faucibus orci
+              luctus et ultrices posuere cubilia curae; Duis porta justo ut eros
+              ornare cursus. Praesent eu sodales justo. Quisque sit amet lorem
+              pulvinar, euismod lacus vitae, cursus leo. Duis blandit nibh leo.
+              Morbi lectus metus, venenatis sit amet feugiat vitae, eleifend ac
+              felis. Morbi mauris tellus, maximus at condimentum sodales,
+              pharetra in orci. Maecenas semper ipsum mauris, a tincidunt nibh
+              scelerisque a. Nullam leo elit, condimentum non laoreet ut,
+              molestie vitae arcu. Maecenas ullamcorper rutrum justo vitae
+              pharetra.
+
+              Nulla quis vehicula nunc. Aenean metus orci, tristique nec
+              pharetra ac, tristique a dolor. Pellentesque vitae dolor non diam
+              laoreet tincidunt eu ac sapien. Sed elementum congue placerat.
+              Suspendisse nec urna sit amet tellus viverra lacinia. Aliquam erat
+              volutpat. Mauris condimentum mauris tortor, vitae hendrerit sapien
+              efficitur id. Etiam bibendum nulla id lectus aliquet pellentesque.
+
+              Donec vestibulum fringilla nulla, quis fermentum justo congue
+              quis. Sed lacinia velit dictum mauris venenatis sodales. Nam in
+              velit nisi. In hac habitasse platea dictumst. Integer maximus urna
+              id neque scelerisque auctor. Vivamus ornare tincidunt feugiat.
+              Phasellus fringilla nisl ac est elementum dapibus. Class aptent
+              taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Donec maximus consequat arcu. Etiam tempor
+              tellus a mauris hendrerit, non commodo sapien mattis. Class aptent
+              taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Aenean congue diam nisl, vitae tempus libero
+              commodo accumsan. Cras mi ipsum, scelerisque quis accumsan et,
+              varius at ligula. In tristique felis turpis, et semper metus
+              consequat vel. Suspendisse potenti. Sed mollis, sem sed imperdiet
+              lacinia, nibh nisl porta tellus, non lobortis risus ex quis ex.
+
+              Aenean at nisl leo. Phasellus est odio, congue nec hendrerit id,
+              pharetra id mi. Integer viverra tortor sit amet erat commodo
+              volutpat. Suspendisse vestibulum quis augue a molestie. Maecenas
+              non mattis purus. Donec sed enim semper, iaculis sapien sed,
+              vehicula erat. Ut tempor est nec dolor convallis, a commodo lectus
+              ultricies. In volutpat massa nisl, quis fringilla est vestibulum
+              id. Aenean aliquam consectetur nibh sit amet mollis. Mauris
+              suscipit lorem tellus. Donec pellentesque nibh velit, et vulputate
+              diam vehicula maximus. Suspendisse placerat pharetra ante,
+              interdum sollicitudin quam ornare eget. Etiam pellentesque
+              eleifend dolor, sed pulvinar lectus dictum id. Cras pellentesque
+              dapibus velit varius tristique. Fusce non nunc hendrerit risus
+              vulputate commodo. Praesent laoreet magna eget massa feugiat
+              accumsan.
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item>
+          <div slot="headline">
+            Accordion Header 3 (Rich text)
+          </div>
+
+          <div slot="body">
+            <p>
+              <strong>Some strong text</strong>, <i>Some italic text</i>
+            </p>
+
+            <hr />
+            <p>
+              Lorem ipsum something, <a href="https://google.com" target="_blank">Unstyled
+                Link</a>
+            </p>
+          </div>
+        </umd-element-accordion-item>
+      </umd-element-accordion>
+    </div>
+  </section>
+{% endblock %}

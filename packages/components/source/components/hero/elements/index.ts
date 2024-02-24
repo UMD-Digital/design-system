@@ -1,34 +1,47 @@
-import { Reset } from 'helpers/styles';
-import { STYLES_BODY, CreateBody } from './body';
+import { Layout, Tokens } from '@universityofmaryland/variables';
+import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
+import { STYLES_IMAGE, CreateImage } from './image';
+import { STYLES_WRAPPER, CreateWrapper } from './wrapper';
 import { HeroType } from '../index';
-import { VARIABLES, ELEMENTS } from '../globals';
+import { NAMING, ELEMENTS, VARIABLES } from '../globals';
 
-const HERO_CONTAINER = `umd-hero-container`;
+const { Lock } = Layout;
+const { Colors, Spacing } = Tokens;
 
-const DEFAULT_ATTR = `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_DEFAULT}']`;
-const STACKED_ATTR = `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_STACKED}']`;
-const OVERLAY_ATTR = `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_OVERLAY}']`;
-const MINIMAL_ATTR = `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_MINIMAL}']`;
+const {
+  DEFAULT_ATTR,
+  STACKED_ATTR,
+  OVERLAY_ATTR,
+  MINIMAL_ATTR,
+  DARK_ATTR,
+  LIGHT_ATTR,
+  MD_ATTR,
+} = NAMING;
+const {
+  TYPE_DEFAULT,
+  TYPE_STACKED,
+  TYPE_MINIMAL,
+  TYPE_OVERLAY,
+  ATTRIBUTE_THEME,
+  ATTRIBUTE_TYPE,
+} = VARIABLES;
+const { HERO_CONTAINER } = ELEMENTS;
 
-const DARK_ATTR = `[${VARIABLES.ATTRIBUTE_THEME}='${VARIABLES.THEME_DARK}']`;
-const LIGHT_ATTR = `[${VARIABLES.ATTRIBUTE_THEME}='${VARIABLES.THEME_LIGHT}']`;
-const MD_ATTR = `[${VARIABLES.ATTRIBUTE_THEME}='${VARIABLES.THEME_MARYLAND}']`;
+const HERO_LOCK = 'umd-hero-lock';
 
 const StackDefaultOverwrite = `
   .${HERO_CONTAINER}${DEFAULT_ATTR} {
-
+    height: 80vh;
+    max-height: 800px;
   }
 
-  .${HERO_CONTAINER}${DEFAULT_ATTR}${DARK_ATTR} {
-
+  .${HERO_CONTAINER}${DEFAULT_ATTR} * {
+    color: ${Colors.white};
   }
 
-  .${HERO_CONTAINER}${DEFAULT_ATTR}${LIGHT_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${DEFAULT_ATTR}${MD_ATTR} {
-
+  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_LOCK} {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8) 85%);
+    padding-bottom: ${Spacing.md};
   }
 `;
 
@@ -91,8 +104,19 @@ const STYLES_CONTAINER = `
     container: umd-hero / inline-size;
   }
 
-  ${StackTypeOverwrite}
+  .${HERO_LOCK} {
+    height: 100%;
+    position: relative;
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_LOCK}`]: Lock['.base'],
+    },
+  })}
+
   ${StackDefaultOverwrite}
+  ${StackTypeOverwrite}
   ${OverlayTypeOverwrite}
   ${MinimalTypeOverwrite}
 `;
@@ -104,18 +128,25 @@ export const ComponentStyles = `
 
   ${Reset}
   ${STYLES_CONTAINER}
-  ${STYLES_BODY}
+  ${STYLES_WRAPPER}
+  ${STYLES_IMAGE}
 `;
 
 export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   const container = document.createElement('div');
-  const body = CreateBody({ element });
+  const lock = document.createElement('div');
+  const wrapper = CreateWrapper({ element });
+  const image = CreateImage({ element });
 
   container.classList.add(HERO_CONTAINER);
-  container.setAttribute('data-type', element._type);
-  container.setAttribute('data-theme', element._theme);
+  container.setAttribute(ATTRIBUTE_TYPE, element._type);
+  container.setAttribute(ATTRIBUTE_THEME, element._theme);
 
-  container.appendChild(body);
+  lock.classList.add(HERO_LOCK);
+  lock.appendChild(wrapper);
+
+  container.appendChild(image);
+  container.appendChild(lock);
 
   return container;
 };

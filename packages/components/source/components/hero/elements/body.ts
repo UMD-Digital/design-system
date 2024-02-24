@@ -6,15 +6,36 @@ import {
   Layout,
 } from '@universityofmaryland/variables';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
-import { HeroType } from '../index';
-import { ELEMENTS, SLOTS, BREAKPOINTS } from '../globals';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { HeroType } from '../index';
+import { ELEMENTS, SLOTS, BREAKPOINTS, NAMING, VARIABLES } from '../globals';
 
 const { Colors, Spacing } = Tokens;
 const { Ribbon, Text } = Fields;
 const { LinkLineSlide } = Animations;
-const { SansLargest, SansMedium } = Typography;
+const { CampaignExtralarge, SansMedium } = Typography;
 const { FlexRows } = Layout;
+
+const {
+  DEFAULT_ATTR,
+  STACKED_ATTR,
+  OVERLAY_ATTR,
+  MINIMAL_ATTR,
+  DARK_ATTR,
+  LIGHT_ATTR,
+  MD_ATTR,
+} = NAMING;
+const {
+  TYPE_DEFAULT,
+  TYPE_STACKED,
+  TYPE_MINIMAL,
+  TYPE_OVERLAY,
+  ATTRIBUTE_THEME,
+  ATTRIBUTE_TYPE,
+} = VARIABLES;
+const { HERO_CONTAINER } = ELEMENTS;
+
+const { HERO_BODY, HERO_BODY_WRAPPER } = ELEMENTS;
 
 const HERO_EYEBROW = 'umd-hero-overlay-eyebrow';
 const HERO_HEADLINE = 'umd-hero-overlay-headline';
@@ -24,7 +45,11 @@ const HERO_ACTION = 'umd-hero-overlay-actions';
 // prettier-ignore
 const EyebrowStyles = `
   .${HERO_EYEBROW} {
-  
+
+  }
+
+  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_EYEBROW} {
+    color: ${Colors.black};
   }
   
   ${ConvertJSSObjectToStyles({
@@ -32,6 +57,10 @@ const EyebrowStyles = `
       [`.${HERO_EYEBROW}`]: Ribbon,
     },
   })}
+
+  .${HERO_EYEBROW} + * {
+    margin-top: ${Spacing.sm};
+  }
 `
 
 // prettier-ignore
@@ -43,7 +72,7 @@ const HeadlineStyles = `
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_HEADLINE}`]: SansLargest,
+      [`.${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
     },
   })}
   
@@ -52,6 +81,10 @@ const HeadlineStyles = `
       [`.${HERO_HEADLINE} a`]: LinkLineSlide['.slidein-underline-white'],
     },
   })}
+
+  .${HERO_HEADLINE} + * {
+    margin-top: ${Spacing.md};
+  }
 `
 
 // prettier-ignore
@@ -71,6 +104,10 @@ const TextStyles = `
       [`.${HERO_TEXT} *`]: SansMedium,
     },
   })}
+
+  .${HERO_TEXT} + * {
+    margin-top: ${Spacing.lg};
+  }
 `
 
 // prettier-ignore
@@ -94,11 +131,11 @@ const ActionStyles = `
 
 // prettier-ignore
 export const STYLES_BODY = `
-  .${ELEMENTS.HERO_BODY} {
-
+  .${HERO_BODY} {
+    position: relative;
   }
 
-  .${ELEMENTS.HERO_BODY_WRAPPER} {
+  .${HERO_BODY_WRAPPER} {
 
   }
 
@@ -116,8 +153,8 @@ export const CreateBody = ({ element }: { element: HeroType }) => {
   const textSlot = SlotDefaultStyling({ element, slotRef: SLOTS.TEXT });
   const actionSlot = SlotDefaultStyling({ element, slotRef: SLOTS.ACTIONS });
 
-  container.classList.add(ELEMENTS.HERO_BODY);
-  wrapper.classList.add(ELEMENTS.HERO_BODY_WRAPPER);
+  container.classList.add(HERO_BODY);
+  wrapper.classList.add(HERO_BODY_WRAPPER);
 
   if (eyebrowSlot) {
     eyebrowSlot.classList.add(HERO_EYEBROW);

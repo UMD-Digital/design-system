@@ -1,0 +1,15 @@
+{% extends '../_layout.twig' %}
+
+{% set image = random(RecImageOptions) %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Hero
+      </h1>
+    </div>
+
+    <umd-element-hero></umd-element-hero>
+  </section>
+{% endblock %}

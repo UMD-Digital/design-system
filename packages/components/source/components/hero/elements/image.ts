@@ -8,11 +8,24 @@ const { HERO_CONTAINER } = ELEMENTS;
 const HERO_IMAGE = 'umd-hero-image';
 
 const StackDefaultOverwrite = `
+  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE}:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8) 85%);
+  }
+
   .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE} img  {
     object-fit: cover;
     object-position: center;
     height: 100%;
+    width: 100%;
   }
+
+
 `;
 
 const StackTypeOverwrite = `

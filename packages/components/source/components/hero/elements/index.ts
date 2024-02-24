@@ -40,7 +40,6 @@ const StackDefaultOverwrite = `
   }
 
   .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_LOCK} {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8) 85%);
     padding-bottom: ${Spacing.md};
   }
 `;

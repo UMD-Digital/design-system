@@ -93,8 +93,10 @@ const HeadlineStyles = `
     },
   })}
 
-  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_HEADLINE} {
-    width: 50%;
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_HEADLINE} {
+      width: 50%;
+    }
   }
 
   ${ConvertJSSObjectToStyles({
@@ -126,8 +128,10 @@ const TextStyles = `
     },
   })}
 
-  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
-    width: 50%;
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
+      width: 50%;
+    }
   }
 
   .${HERO_TEXT} + * {

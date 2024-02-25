@@ -60,8 +60,8 @@ const OverlayTypeOverwrite = `
   @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_IMAGE} {
       position: absolute;
-      width: 60%;
-      height: calc(100% - ${Spacing.lg});
+      width: 50%;
+      height: calc(100% - ${Spacing['5xl']});
       right: 0;
       top: 0;
     }
@@ -76,10 +76,20 @@ const OverlayTypeOverwrite = `
 `;
 
 const MinimalTypeOverwrite = `
-  .${HERO_CONTAINER}${MINIMAL_ATTR} {
-
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_IMAGE} {
+      width: 50%;
+    }
   }
 
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_IMAGE} img {
+      object-fit: cover;
+      object-position: center;
+      height: 100%;
+      width: 100%;
+    }
+  }
 `;
 
 const LogoTypeOverwrite = `

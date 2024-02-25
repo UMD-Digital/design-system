@@ -1,43 +1,24 @@
-import {
-  Tokens,
-  Fields,
-  Animations,
-  Typography,
-  Layout,
-} from '@universityofmaryland/variables';
+import { Tokens, Fields, Typography } from '@universityofmaryland/variables';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { HeroType } from '../index';
-import { ELEMENTS, SLOTS, BREAKPOINTS, NAMING, VARIABLES } from '../globals';
+import { ELEMENTS, SLOTS, BREAKPOINTS, NAMING } from '../globals';
 
 const { Colors, Spacing } = Tokens;
 const { Ribbon } = Fields;
-const { LinkLineSlide } = Animations;
-const { CampaignExtralarge, CampaignLarge, SansMedium } = Typography;
-const { FlexRows } = Layout;
+const {
+  CampaignExtralarge,
+  SansLargest,
+  CampaignLarge,
+  SansMedium,
+  SansSmaller,
+} = Typography;
+const { DEFAULT_ATTR, STACKED_ATTR, OVERLAY_ATTR, MINIMAL_ATTR, LOGO_ATTR } =
+  NAMING;
 
-const {
-  DEFAULT_ATTR,
-  STACKED_ATTR,
-  OVERLAY_ATTR,
-  MINIMAL_ATTR,
-  LOGO_ATTR,
-  DARK_ATTR,
-  LIGHT_ATTR,
-  MD_ATTR,
-  TEXT_ALIGN_CENTER,
-} = NAMING;
-const {
-  TYPE_DEFAULT,
-  TYPE_STACKED,
-  TYPE_MINIMAL,
-  TYPE_OVERLAY,
-  ATTRIBUTE_THEME,
-  ATTRIBUTE_TYPE,
-} = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
-const { HERO_BODY, HERO_BODY_WRAPPER } = ELEMENTS;
+const { HERO_BODY } = ELEMENTS;
 const { tablet } = BREAKPOINTS;
 
 const HERO_EYEBROW = 'umd-hero-overlay-eyebrow';
@@ -46,16 +27,48 @@ const HERO_TEXT = 'umd-hero-overlay-text';
 const HERO_ACTION = 'umd-hero-overlay-actions';
 
 // prettier-ignore
-const EyebrowStyles = `
-  .${HERO_EYEBROW} {
-    color: ${Colors.black} !important;
-  }
-  
+const EyebrowStyles = `  
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_EYEBROW}`]: Ribbon,
     },
   })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_EYEBROW}`]: Ribbon,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_EYEBROW}`]: Ribbon,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${LOGO_ATTR} .${HERO_EYEBROW}`]: Ribbon,
+    },
+  })}
+
+  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_EYEBROW},
+  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_EYEBROW},
+  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_EYEBROW},
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_EYEBROW} {
+    color: ${Colors.black}
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_EYEBROW}`]: SansSmaller,
+    },
+  })}
+
+  .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_EYEBROW} {
+    text-transform: uppercase;
+    font-weight: 600;
+  }
 
   .${HERO_EYEBROW} + * {
     margin-top: ${Spacing.sm} !important;
@@ -93,15 +106,15 @@ const HeadlineStyles = `
     },
   })}
 
-  @container umd-hero (min-width: ${tablet}px) {
-    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_HEADLINE} {
-      width: 50%;
-    }
-  }
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${HERO_CONTAINER}${LOGO_ATTR} .${HERO_HEADLINE}`]: CampaignLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_HEADLINE}`]: SansLargest,
     },
   })}
 
@@ -128,12 +141,6 @@ const TextStyles = `
     },
   })}
 
-  @container umd-hero (min-width: ${tablet}px) {
-    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
-      width: 50%;
-    }
-  }
-
   .${HERO_TEXT} + * {
     margin-top: ${Spacing.lg};
   }
@@ -156,10 +163,6 @@ const ActionStyles = `
 export const STYLES_BODY = `
   .${HERO_BODY} {
     position: relative;
-  }
-
-  .${HERO_BODY_WRAPPER} {
-
   }
 
   ${EyebrowStyles}

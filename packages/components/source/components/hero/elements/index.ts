@@ -41,10 +41,6 @@ const ThemeOverwrite = `
     background-color: ${Colors.black};
   }
 
-  .${HERO_CONTAINER}${WHITE_ATTR} * {
-    color: ${Colors.black};
-  }
-
   .${HERO_CONTAINER}${DARK_ATTR} * {
     color: ${Colors.white};
   }
@@ -54,6 +50,18 @@ const ThemeOverwrite = `
   }
 
   .${HERO_CONTAINER}${LIGHT_ATTR} * {
+    color: ${Colors.black};
+  }
+
+  .${HERO_CONTAINER}${MD_ATTR} {
+    background-color: ${Colors.red};
+  }
+
+  .${HERO_CONTAINER}${MD_ATTR} * {
+    color: ${Colors.white};
+  }
+
+  .${HERO_CONTAINER}${WHITE_ATTR} * {
     color: ${Colors.black};
   }
 `;
@@ -97,8 +105,18 @@ const OverlayTypeOverwrite = `
 
 // prettier-ignore
 const MinimalTypeOverwrite = `
-  .${HERO_CONTAINER}${MINIMAL_ATTR} {
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR} {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
 
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_LOCK} {
+      align-self: center;
+      width: 50%;
+    }
   }
 `;
 

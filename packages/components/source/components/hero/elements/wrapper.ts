@@ -3,7 +3,7 @@ import { STYLES_BODY, CreateBody } from './body';
 import { HeroType } from '../index';
 import { NAMING, ELEMENTS, BREAKPOINTS } from '../globals';
 
-const { Spacing } = Tokens;
+const { Spacing, Colors } = Tokens;
 
 const {
   DEFAULT_ATTR,
@@ -12,6 +12,8 @@ const {
   OVERLAY_ATTR,
   MINIMAL_ATTR,
   LOGO_ATTR,
+  DARK_ATTR,
+  MD_ATTR,
 } = NAMING;
 const { HERO_CONTAINER } = ELEMENTS;
 const { tablet } = BREAKPOINTS;
@@ -54,12 +56,28 @@ const OverlayTypeOverwrite = `
     padding: ${Spacing['5xl']} 0;
     display: flex;
   }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_WRAPPER} {
+      width: 50%;
+    }
+  }
 `;
 
 // prettier-ignore
 const MinimalTypeOverwrite = `
   .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_WRAPPER} {
+    padding: ${Spacing['5xl']} 0;
+  }
 
+  .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_WRAPPER_CHILD} {
+    padding-left: ${Spacing.lg};
+    border-left: 2px solid ${Colors.red};
+  }
+
+  .${HERO_CONTAINER}${MINIMAL_ATTR}${DARK_ATTR} .${HERO_WRAPPER_CHILD},
+  .${HERO_CONTAINER}${MINIMAL_ATTR}${MD_ATTR} .${HERO_WRAPPER_CHILD} {;
+    border-left: 2px solid ${Colors.gold};
   }
 `;
 
@@ -77,10 +95,6 @@ export const STYLES_WRAPPER = `
   .${HERO_WRAPPER}  {
     position: relative;
     height: 100%;
-  }
-
-  .${HERO_WRAPPER_CHILD} {
-
   }
 
   ${STYLES_BODY}

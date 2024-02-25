@@ -48,11 +48,7 @@ const HERO_ACTION = 'umd-hero-overlay-actions';
 // prettier-ignore
 const EyebrowStyles = `
   .${HERO_EYEBROW} {
-
-  }
-
-  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_EYEBROW} {
-    color: ${Colors.black};
+    color: ${Colors.black} !important;
   }
   
   ${ConvertJSSObjectToStyles({
@@ -93,6 +89,16 @@ const HeadlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
+    },
+  })}
+
+  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_HEADLINE} {
+    width: 50%;
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${HERO_CONTAINER}${LOGO_ATTR} .${HERO_HEADLINE}`]: CampaignLarge,
     },
   })}
@@ -119,6 +125,10 @@ const TextStyles = `
       [`.${HERO_TEXT} *`]: SansMedium,
     },
   })}
+
+  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
+    width: 50%;
+  }
 
   .${HERO_TEXT} + * {
     margin-top: ${Spacing.lg};

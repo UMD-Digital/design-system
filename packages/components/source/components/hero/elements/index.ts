@@ -36,7 +36,7 @@ const HERO_LOCK = 'umd-hero-lock';
 // prettier-ignore
 const ThemeOverwrite = `
   .${HERO_CONTAINER}${DARK_ATTR} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${Colors.black};
   }
 
   .${HERO_CONTAINER}${WHITE_ATTR} * {
@@ -83,7 +83,7 @@ const StackTypeOverwrite = `
 // prettier-ignore
 const OverlayTypeOverwrite = `
   .${HERO_CONTAINER}${OVERLAY_ATTR} {
-
+    position: relative;
   }
 `;
 

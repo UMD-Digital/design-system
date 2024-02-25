@@ -54,14 +54,15 @@ const StackTypeOverwrite = `
 
 // prettier-ignore
 const OverlayTypeOverwrite = `
-  .${HERO_CONTAINER}${OVERLAY_ATTR} {
-
+  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_WRAPPER} {
+    padding: ${Spacing['5xl']} 0;
+    display: flex;
   }
 `;
 
 // prettier-ignore
 const MinimalTypeOverwrite = `
-  .${HERO_CONTAINER}${MINIMAL_ATTR} {
+  .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_WRAPPER} {
 
   }
 `;

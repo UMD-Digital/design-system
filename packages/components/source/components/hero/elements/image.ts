@@ -46,8 +46,19 @@ const StackTypeOverwrite = `
 `;
 
 const OverlayTypeOverwrite = `
-  .${HERO_CONTAINER}${OVERLAY_ATTR} {
+  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_IMAGE} {
+    position: absolute;
+    width: 60%;
+    height: calc(100% - ${Spacing.lg});
+    right: 0;
+    top: 0;
+  }
 
+  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_IMAGE} img {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width: 100%;
   }
 `;
 

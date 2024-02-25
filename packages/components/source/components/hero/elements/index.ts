@@ -16,6 +16,7 @@ const {
   DARK_ATTR,
   LIGHT_ATTR,
   MD_ATTR,
+  TEXT_ALIGN_CENTER,
 } = NAMING;
 const {
   TYPE_DEFAULT,
@@ -24,6 +25,7 @@ const {
   TYPE_OVERLAY,
   ATTRIBUTE_THEME,
   ATTRIBUTE_TYPE,
+  ATTRIBUTE_TEXT_ALIGN,
 } = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
 
@@ -137,9 +139,12 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   const wrapper = CreateWrapper({ element });
   const image = CreateImage({ element });
 
+  console.log(element._type);
+
   container.classList.add(HERO_CONTAINER);
   container.setAttribute(ATTRIBUTE_TYPE, element._type);
   container.setAttribute(ATTRIBUTE_THEME, element._theme);
+  container.setAttribute(ATTRIBUTE_TEXT_ALIGN, element._textAlignment);
 
   lock.classList.add(HERO_LOCK);
   lock.appendChild(wrapper);

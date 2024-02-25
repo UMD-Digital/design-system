@@ -7,6 +7,7 @@ const { Colors } = Tokens;
 
 const {
   DEFAULT_ATTR,
+  TEXT_ALIGN_CENTER,
   STACKED_ATTR,
   OVERLAY_ATTR,
   MINIMAL_ATTR,
@@ -31,6 +32,11 @@ const StackDefaultOverwrite = `
   .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
     display: flex;
     align-items: flex-end;
+  }
+
+  .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_WRAPPER} {
+    justify-content: center;
+    text-align: center;
   }
 `;
 

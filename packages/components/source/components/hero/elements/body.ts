@@ -24,6 +24,7 @@ const {
   DARK_ATTR,
   LIGHT_ATTR,
   MD_ATTR,
+  TEXT_ALIGN_CENTER,
 } = NAMING;
 const {
   TYPE_DEFAULT,
@@ -128,6 +129,10 @@ const ActionStyles = `
       [`.${HERO_ACTION}`]: FlexRows['.auto'],
     },
   })}
+
+  .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_ACTION} {
+    justify-content: center;
+  }
 `;
 
 // prettier-ignore

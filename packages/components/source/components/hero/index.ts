@@ -6,13 +6,23 @@ declare global {
 
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
+import { VARIABLES } from './globals';
+
+const {
+  THEME_LIGHT,
+  TYPE_DEFAULT_CENTERED,
+  TYPE_DEFAULT,
+  TEXT_ALIGN_LEFT,
+  TEXT_ALIGN_CENTER,
+} = VARIABLES;
 
 export const ELEMENT_NAME = 'umd-element-hero';
 export type HeroType = UMDHeroElement;
 export class UMDHeroElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = 'light';
-  _type = 'default';
+  _theme = THEME_LIGHT;
+  _type = TYPE_DEFAULT;
+  _textAlignment = TEXT_ALIGN_LEFT;
 
   constructor() {
     super();
@@ -31,14 +41,18 @@ export class UMDHeroElement extends HTMLElement {
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
 
   connectedCallback() {
-    const container = CreateShadowDom({ element: this });
     const type = this.getAttribute('type');
     const theme = this.getAttribute('theme');
 
     this._theme = theme || this._theme;
     this._type = type || this._type;
 
-    this._shadow.appendChild(container);
+    if (this._type === TYPE_DEFAULT_CENTERED) {
+      this._type = TYPE_DEFAULT;
+      this._textAlignment = TEXT_ALIGN_CENTER;
+    }
+
+    this._shadow.appendChild(CreateShadowDom({ element: this }));
   }
 }
 

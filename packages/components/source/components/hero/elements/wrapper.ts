@@ -3,7 +3,7 @@ import { STYLES_BODY, CreateBody } from './body';
 import { HeroType } from '../index';
 import { NAMING, ELEMENTS, VARIABLES } from '../globals';
 
-const { Colors } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const {
   DEFAULT_ATTR,
@@ -44,20 +44,11 @@ const DefaultOverwrite = `
 
 // prettier-ignore
 const StackTypeOverwrite = `
-  .${HERO_CONTAINER}${STACKED_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${STACKED_ATTR}${DARK_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${STACKED_ATTR}${LIGHT_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${STACKED_ATTR}${MD_ATTR} {
-
+  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_WRAPPER} {
+    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
+    display: flex;
+    justify-content: center;
+    text-align: center;
   }
 `;
 
@@ -66,35 +57,11 @@ const OverlayTypeOverwrite = `
   .${HERO_CONTAINER}${OVERLAY_ATTR} {
 
   }
-
-  .${HERO_CONTAINER}${OVERLAY_ATTR}${DARK_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${OVERLAY_ATTR}${LIGHT_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${OVERLAY_ATTR}${MD_ATTR} {
-
-  }
 `;
 
 // prettier-ignore
 const MinimalTypeOverwrite = `
   .${HERO_CONTAINER}${MINIMAL_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${MINIMAL_ATTR}${DARK_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${MINIMAL_ATTR}${LIGHT_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${MINIMAL_ATTR}${MD_ATTR} {
 
   }
 `;

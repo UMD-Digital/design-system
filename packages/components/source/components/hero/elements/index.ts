@@ -17,6 +17,7 @@ const {
   DARK_ATTR,
   LIGHT_ATTR,
   MD_ATTR,
+  WHITE_ATTR,
   TEXT_ALIGN_CENTER,
 } = NAMING;
 const {
@@ -36,6 +37,10 @@ const HERO_LOCK = 'umd-hero-lock';
 const ThemeOverwrite = `
   .${HERO_CONTAINER}${DARK_ATTR} {
     background-color: ${Colors.gray.darker};
+  }
+
+  .${HERO_CONTAINER}${WHITE_ATTR} * {
+    color: ${Colors.black};
   }
 
   .${HERO_CONTAINER}${DARK_ATTR} * {
@@ -70,19 +75,8 @@ const DefaultOverwrite = `
 // prettier-ignore
 const StackTypeOverwrite = `
   .${HERO_CONTAINER}${STACKED_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${STACKED_ATTR}${DARK_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${STACKED_ATTR}${LIGHT_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${STACKED_ATTR}${MD_ATTR} {
-
+    display: flex;
+    flex-direction: column-reverse;
   }
 `;
 
@@ -91,35 +85,11 @@ const OverlayTypeOverwrite = `
   .${HERO_CONTAINER}${OVERLAY_ATTR} {
 
   }
-
-  .${HERO_CONTAINER}${OVERLAY_ATTR}${DARK_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${OVERLAY_ATTR}${LIGHT_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${OVERLAY_ATTR}${MD_ATTR} {
-
-  }
 `;
 
 // prettier-ignore
 const MinimalTypeOverwrite = `
   .${HERO_CONTAINER}${MINIMAL_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${MINIMAL_ATTR}${DARK_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${MINIMAL_ATTR}${LIGHT_ATTR} {
-
-  }
-
-  .${HERO_CONTAINER}${MINIMAL_ATTR}${MD_ATTR} {
 
   }
 `;

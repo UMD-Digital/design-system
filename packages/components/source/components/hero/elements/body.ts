@@ -62,7 +62,7 @@ const EyebrowStyles = `
   })}
 
   .${HERO_EYEBROW} + * {
-    margin-top: ${Spacing.sm};
+    margin-top: ${Spacing.sm} !important;
   }
 `
 
@@ -71,6 +71,7 @@ const HeadlineStyles = `
   .${HERO_HEADLINE} {
     text-transform: uppercase;
     color: ${Colors.white};
+    max-width: 860px;
   }
   
   ${ConvertJSSObjectToStyles({
@@ -78,6 +79,17 @@ const HeadlineStyles = `
       [`.${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
     },
   })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
+    },
+  })}
+
+  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_HEADLINE} {
+    max-width: 700px;
+    margin: 0 auto;
+  }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
@@ -132,7 +144,8 @@ const ActionStyles = `
   })}
 
   .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_ACTION},
-  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_ACTION} {
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_ACTION}, 
+  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_ACTION} {
     justify-content: center;
   }
 `;

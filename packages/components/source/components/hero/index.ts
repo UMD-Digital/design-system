@@ -9,7 +9,7 @@ import { ComponentStyles, CreateShadowDom } from './elements';
 import { VARIABLES } from './globals';
 
 const {
-  THEME_LIGHT,
+  THEME_WHITE,
   TYPE_DEFAULT_CENTERED,
   TYPE_DEFAULT,
   TEXT_ALIGN_LEFT,
@@ -20,7 +20,7 @@ export const ELEMENT_NAME = 'umd-element-hero';
 export type HeroType = UMDHeroElement;
 export class UMDHeroElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = THEME_LIGHT;
+  _theme = THEME_WHITE;
   _type = TYPE_DEFAULT;
   _textAlignment = TEXT_ALIGN_LEFT;
 

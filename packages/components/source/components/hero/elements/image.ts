@@ -13,6 +13,14 @@ const { IMAGE } = SLOTS;
 const HERO_IMAGE = 'umd-hero-image';
 
 const StackDefaultOverwrite = `
+  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE}:before {
     content: "";
     position: absolute;
@@ -32,8 +40,8 @@ const StackDefaultOverwrite = `
 `;
 
 const StackTypeOverwrite = `
-  .${HERO_CONTAINER}${STACKED_ATTR} {
-
+  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_IMAGE} {
+    aspect-ratio: 16 / 9;
   }
 `;
 
@@ -54,7 +62,6 @@ const LogoTypeOverwrite = `
   .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} {
     max-width: 90%;
     text-align: center;
-    position: relative;
     display: flex;
     justify-content: center;
     margin-bottom: ${Spacing.xl};
@@ -64,11 +71,7 @@ const LogoTypeOverwrite = `
 // prettier-ignore
 export const STYLES_IMAGE = `
   .${HERO_IMAGE} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+
   }
 
   .${HERO_IMAGE} img {

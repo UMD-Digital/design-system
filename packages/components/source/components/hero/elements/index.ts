@@ -13,6 +13,7 @@ const {
   STACKED_ATTR,
   OVERLAY_ATTR,
   MINIMAL_ATTR,
+  LOGO_ATTR,
   DARK_ATTR,
   LIGHT_ATTR,
   MD_ATTR,
@@ -31,7 +32,27 @@ const { HERO_CONTAINER } = ELEMENTS;
 
 const HERO_LOCK = 'umd-hero-lock';
 
-const StackDefaultOverwrite = `
+// prettier-ignore
+const ThemeOverwrite = `
+  .${HERO_CONTAINER}${DARK_ATTR} {
+    background-color: ${Colors.gray.darker};
+  }
+
+  .${HERO_CONTAINER}${DARK_ATTR} * {
+    color: ${Colors.white};
+  }
+
+  .${HERO_CONTAINER}${LIGHT_ATTR} {
+    background-color: ${Colors.gray.lightest};
+  }
+
+  .${HERO_CONTAINER}${LIGHT_ATTR} * {
+    color: ${Colors.black};
+  }
+`;
+
+// prettier-ignore
+const DefaultOverwrite = `
   .${HERO_CONTAINER}${DEFAULT_ATTR} {
     height: 80vh;
     max-height: 800px;
@@ -46,6 +67,7 @@ const StackDefaultOverwrite = `
   }
 `;
 
+// prettier-ignore
 const StackTypeOverwrite = `
   .${HERO_CONTAINER}${STACKED_ATTR} {
 
@@ -64,6 +86,7 @@ const StackTypeOverwrite = `
   }
 `;
 
+// prettier-ignore
 const OverlayTypeOverwrite = `
   .${HERO_CONTAINER}${OVERLAY_ATTR} {
 
@@ -82,6 +105,7 @@ const OverlayTypeOverwrite = `
   }
 `;
 
+// prettier-ignore
 const MinimalTypeOverwrite = `
   .${HERO_CONTAINER}${MINIMAL_ATTR} {
 
@@ -100,6 +124,14 @@ const MinimalTypeOverwrite = `
   }
 `;
 
+// prettier-ignore
+const LogoTypeOverwrite = `
+  .${HERO_CONTAINER}${LOGO_ATTR} {
+    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
+  }
+`;
+
+// prettier-ignore
 const STYLES_CONTAINER = `
   .${HERO_CONTAINER} {
     container: umd-hero / inline-size;
@@ -116,10 +148,12 @@ const STYLES_CONTAINER = `
     },
   })}
 
-  ${StackDefaultOverwrite}
+  ${ThemeOverwrite}
+  ${DefaultOverwrite}
   ${StackTypeOverwrite}
   ${OverlayTypeOverwrite}
   ${MinimalTypeOverwrite}
+  ${LogoTypeOverwrite}
 `;
 
 export const ComponentStyles = `
@@ -138,8 +172,6 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   const lock = document.createElement('div');
   const wrapper = CreateWrapper({ element });
   const image = CreateImage({ element });
-
-  console.log(element._type);
 
   container.classList.add(HERO_CONTAINER);
   container.setAttribute(ATTRIBUTE_TYPE, element._type);

@@ -1,8 +1,12 @@
+import { Layout, Tokens } from '@universityofmaryland/variables';
 import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS, ELEMENTS, NAMING } from '../globals';
 import { HeroType } from '../index';
 
-const { DEFAULT_ATTR, STACKED_ATTR, OVERLAY_ATTR, MINIMAL_ATTR } = NAMING;
+const { Spacing } = Tokens;
+
+const { DEFAULT_ATTR, STACKED_ATTR, OVERLAY_ATTR, MINIMAL_ATTR, LOGO_ATTR } =
+  NAMING;
 const { HERO_CONTAINER } = ELEMENTS;
 const { IMAGE } = SLOTS;
 
@@ -25,8 +29,6 @@ const StackDefaultOverwrite = `
     height: 100%;
     width: 100%;
   }
-
-
 `;
 
 const StackTypeOverwrite = `
@@ -48,6 +50,17 @@ const MinimalTypeOverwrite = `
 
 `;
 
+const LogoTypeOverwrite = `
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} {
+    max-width: 90%;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: ${Spacing.xl};
+  }
+`;
+
 // prettier-ignore
 export const STYLES_IMAGE = `
   .${HERO_IMAGE} {
@@ -66,12 +79,14 @@ export const STYLES_IMAGE = `
   ${StackTypeOverwrite}
   ${OverlayTypeOverwrite}
   ${MinimalTypeOverwrite}
+  ${LogoTypeOverwrite}
 `;
 
 export const CreateImage = ({ element }: { element: HeroType }) => {
   const imageRef = element.querySelector(
     `[slot="${IMAGE}"]`,
   ) as HTMLImageElement;
+
   const container = document.createElement('div');
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
 

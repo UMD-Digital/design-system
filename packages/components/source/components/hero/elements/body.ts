@@ -11,9 +11,9 @@ import { HeroType } from '../index';
 import { ELEMENTS, SLOTS, BREAKPOINTS, NAMING, VARIABLES } from '../globals';
 
 const { Colors, Spacing } = Tokens;
-const { Ribbon, Text } = Fields;
+const { Ribbon } = Fields;
 const { LinkLineSlide } = Animations;
-const { CampaignExtralarge, SansMedium } = Typography;
+const { CampaignExtralarge, CampaignLarge, SansMedium } = Typography;
 const { FlexRows } = Layout;
 
 const {
@@ -21,6 +21,7 @@ const {
   STACKED_ATTR,
   OVERLAY_ATTR,
   MINIMAL_ATTR,
+  LOGO_ATTR,
   DARK_ATTR,
   LIGHT_ATTR,
   MD_ATTR,
@@ -77,10 +78,10 @@ const HeadlineStyles = `
       [`.${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
     },
   })}
-  
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_HEADLINE} a`]: LinkLineSlide['.slidein-underline-white'],
+      [`.${HERO_CONTAINER}${LOGO_ATTR} .${HERO_HEADLINE}`]: CampaignLarge,
     },
   })}
 
@@ -92,7 +93,7 @@ const HeadlineStyles = `
 // prettier-ignore
 const TextStyles = `
   .${HERO_TEXT} {
-  
+    max-width: 860px;
   }
   
   ${ConvertJSSObjectToStyles({
@@ -130,7 +131,8 @@ const ActionStyles = `
     },
   })}
 
-  .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_ACTION} {
+  .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_ACTION},
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_ACTION} {
     justify-content: center;
   }
 `;
@@ -153,37 +155,33 @@ export const STYLES_BODY = `
 
 export const CreateBody = ({ element }: { element: HeroType }) => {
   const container = document.createElement('div');
-  const wrapper = document.createElement('div');
   const eyebrowSlot = SlotDefaultStyling({ element, slotRef: EYEBROW });
   const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
   const textSlot = SlotDefaultStyling({ element, slotRef: TEXT });
   const actionSlot = SlotDefaultStyling({ element, slotRef: ACTIONS });
 
   container.classList.add(HERO_BODY);
-  wrapper.classList.add(HERO_BODY_WRAPPER);
 
   if (eyebrowSlot) {
     eyebrowSlot.classList.add(HERO_EYEBROW);
-    wrapper.appendChild(eyebrowSlot);
+    container.appendChild(eyebrowSlot);
   }
 
   if (headlineSlot) {
     CheckForAnimationLinkSpan({ element: headlineSlot });
     headlineSlot.classList.add(HERO_HEADLINE);
-    wrapper.appendChild(headlineSlot);
+    container.appendChild(headlineSlot);
   }
 
   if (textSlot) {
     textSlot.classList.add(HERO_TEXT);
-    wrapper.appendChild(textSlot);
+    container.appendChild(textSlot);
   }
 
   if (actionSlot) {
     actionSlot.classList.add(HERO_ACTION);
-    wrapper.appendChild(actionSlot);
+    container.appendChild(actionSlot);
   }
-
-  container.appendChild(wrapper);
 
   return container;
 };

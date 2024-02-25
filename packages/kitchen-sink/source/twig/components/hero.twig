@@ -1,6 +1,7 @@
 {% extends '../_layout.twig' %}
 
 {% set image = random(RecImageOptions) %}
+{% set logo = random(logoOptions) %}
 
 {% block page %}
   <section>
@@ -51,6 +52,42 @@
 
       <umd-element-hero type="default-centered">
         <img slot="image" src="{{ image }}" alt="Image Description" />
+
+        <p slot="eyebrow">
+          Eyebrow Text
+        </p>
+        <p slot="headline">
+          <a href="">Headline Text</a>
+        </p>
+        <p slot="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam
+        </p>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary" theme="dark">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-hero>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading type-hr">
+          Logo
+        </h3>
+      </div>
+
+      <umd-element-hero type="logo">
+        <div slot="image">
+          <img src="{{ logo }}"
+            alt="Image Description"
+            style="max-width: 600px" />
+        </div>
 
         <p slot="eyebrow">
           Eyebrow Text

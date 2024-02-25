@@ -11,6 +11,7 @@ const {
   STACKED_ATTR,
   OVERLAY_ATTR,
   MINIMAL_ATTR,
+  LOGO_ATTR,
   DARK_ATTR,
   LIGHT_ATTR,
   MD_ATTR,
@@ -28,7 +29,8 @@ const { HERO_CONTAINER } = ELEMENTS;
 const HERO_WRAPPER = 'umd-hero-wrapper';
 const HERO_WRAPPER_CHILD = 'umd-hero-child';
 
-const StackDefaultOverwrite = `
+// prettier-ignore
+const DefaultOverwrite = `
   .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
     display: flex;
     align-items: flex-end;
@@ -40,6 +42,7 @@ const StackDefaultOverwrite = `
   }
 `;
 
+// prettier-ignore
 const StackTypeOverwrite = `
   .${HERO_CONTAINER}${STACKED_ATTR} {
 
@@ -58,6 +61,7 @@ const StackTypeOverwrite = `
   }
 `;
 
+// prettier-ignore
 const OverlayTypeOverwrite = `
   .${HERO_CONTAINER}${OVERLAY_ATTR} {
 
@@ -76,6 +80,7 @@ const OverlayTypeOverwrite = `
   }
 `;
 
+// prettier-ignore
 const MinimalTypeOverwrite = `
   .${HERO_CONTAINER}${MINIMAL_ATTR} {
 
@@ -94,8 +99,18 @@ const MinimalTypeOverwrite = `
   }
 `;
 
+// prettier-ignore
+const LogoTypeOverwrite = `
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_WRAPPER} {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+`;
+
+// prettier-ignore
 export const STYLES_WRAPPER = `
-  .${HERO_WRAPPER} {
+  .${HERO_WRAPPER}  {
     position: relative;
     height: 100%;
   }
@@ -105,10 +120,11 @@ export const STYLES_WRAPPER = `
   }
 
   ${STYLES_BODY}
-  ${StackDefaultOverwrite}
+  ${DefaultOverwrite}
   ${StackTypeOverwrite}
   ${OverlayTypeOverwrite}
   ${MinimalTypeOverwrite}
+  ${LogoTypeOverwrite}
 `;
 
 export const CreateWrapper = ({ element }: { element: HeroType }) => {

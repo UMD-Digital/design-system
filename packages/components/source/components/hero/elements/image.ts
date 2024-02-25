@@ -82,11 +82,16 @@ const MinimalTypeOverwrite = `
 
 const LogoTypeOverwrite = `
   .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} {
-    max-width: 90%;
     text-align: center;
     display: flex;
     justify-content: center;
     margin-bottom: ${Spacing.xl};
+  }
+
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} img {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
 

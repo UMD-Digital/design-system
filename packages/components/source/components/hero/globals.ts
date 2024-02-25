@@ -1,5 +1,5 @@
 export const BREAKPOINTS = {
-  medium: 768,
+  tablet: 768,
 };
 export const ELEMENTS = {
   HERO_CONTAINER: `umd-hero-container`,

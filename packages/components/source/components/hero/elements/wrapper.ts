@@ -1,9 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { STYLES_BODY, CreateBody } from './body';
 import { HeroType } from '../index';
-import { NAMING, ELEMENTS, VARIABLES } from '../globals';
+import { NAMING, ELEMENTS, BREAKPOINTS } from '../globals';
 
-const { Colors, Spacing } = Tokens;
+const { Spacing } = Tokens;
 
 const {
   DEFAULT_ATTR,
@@ -12,25 +12,21 @@ const {
   OVERLAY_ATTR,
   MINIMAL_ATTR,
   LOGO_ATTR,
-  DARK_ATTR,
-  LIGHT_ATTR,
-  MD_ATTR,
 } = NAMING;
-const {
-  TYPE_DEFAULT,
-  TYPE_STACKED,
-  TYPE_MINIMAL,
-  TYPE_OVERLAY,
-  ATTRIBUTE_THEME,
-  ATTRIBUTE_TYPE,
-} = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
+const { tablet } = BREAKPOINTS;
 
 const HERO_WRAPPER = 'umd-hero-wrapper';
 const HERO_WRAPPER_CHILD = 'umd-hero-child';
 
 // prettier-ignore
 const DefaultOverwrite = `
+  @container umd-hero (max-width: ${tablet - 1}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
+      margin-top: -14px;
+    }
+  }
+
   .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
     display: flex;
     align-items: flex-end;

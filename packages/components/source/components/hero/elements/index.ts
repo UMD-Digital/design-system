@@ -3,7 +3,7 @@ import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { STYLES_IMAGE, CreateImage } from './image';
 import { STYLES_WRAPPER, CreateWrapper } from './wrapper';
 import { HeroType } from '../index';
-import { NAMING, ELEMENTS, VARIABLES } from '../globals';
+import { NAMING, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 
 const { Lock } = Layout;
 const { Colors, Spacing } = Tokens;
@@ -30,7 +30,9 @@ const {
   ATTRIBUTE_TEXT_ALIGN,
 } = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
+const { tablet } = BREAKPOINTS;
 
+const HERO_DECLARATION = 'umd-hero-declaration';
 const HERO_LOCK = 'umd-hero-lock';
 
 // prettier-ignore
@@ -58,17 +60,23 @@ const ThemeOverwrite = `
 
 // prettier-ignore
 const DefaultOverwrite = `
-  .${HERO_CONTAINER}${DEFAULT_ATTR} {
-    height: 80vh;
-    max-height: 800px;
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} {
+      height: 80vh;
+      max-height: 800px;
+    }
   }
 
-  .${HERO_CONTAINER}${DEFAULT_ATTR} * {
-    color: ${Colors.white};
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} * {
+      color: ${Colors.white};
+    }
   }
 
-  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_LOCK} {
-    padding-bottom: ${Spacing.md};
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_LOCK} {
+      padding-bottom: ${Spacing.md};
+    }
   }
 `;
 
@@ -103,7 +111,7 @@ const LogoTypeOverwrite = `
 
 // prettier-ignore
 const STYLES_CONTAINER = `
-  .${HERO_CONTAINER} {
+  .${HERO_DECLARATION} {
     container: umd-hero / inline-size;
   }
 
@@ -138,6 +146,7 @@ export const ComponentStyles = `
 `;
 
 export const CreateShadowDom = ({ element }: { element: HeroType }) => {
+  const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const wrapper = CreateWrapper({ element });
@@ -154,5 +163,8 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   container.appendChild(image);
   container.appendChild(lock);
 
-  return container;
+  declaration.classList.add(HERO_DECLARATION);
+  declaration.appendChild(container);
+
+  return declaration;
 };

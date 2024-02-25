@@ -38,7 +38,7 @@ const {
 const { HERO_CONTAINER } = ELEMENTS;
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
 const { HERO_BODY, HERO_BODY_WRAPPER } = ELEMENTS;
-const { medium } = BREAKPOINTS;
+const { tablet } = BREAKPOINTS;
 
 const HERO_EYEBROW = 'umd-hero-overlay-eyebrow';
 const HERO_HEADLINE = 'umd-hero-overlay-headline';
@@ -141,22 +141,10 @@ const ActionStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
+  @container umd-hero (min-width: ${tablet}px) {
     * + .${HERO_ACTION} {
       margin-top: ${Spacing.lg};
     }
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${HERO_ACTION}`]: FlexRows['.auto'],
-    },
-  })}
-
-  .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_ACTION},
-  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_ACTION}, 
-  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_ACTION} {
-    justify-content: center;
   }
 `;
 

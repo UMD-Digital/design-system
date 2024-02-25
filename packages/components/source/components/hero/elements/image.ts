@@ -1,6 +1,6 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 import { CheckForImageAlt } from 'helpers/ui';
-import { SLOTS, ELEMENTS, NAMING } from '../globals';
+import { SLOTS, ELEMENTS, NAMING, BREAKPOINTS } from '../globals';
 import { HeroType } from '../index';
 
 const { Spacing } = Tokens;
@@ -9,26 +9,37 @@ const { DEFAULT_ATTR, STACKED_ATTR, OVERLAY_ATTR, MINIMAL_ATTR, LOGO_ATTR } =
   NAMING;
 const { HERO_CONTAINER } = ELEMENTS;
 const { IMAGE } = SLOTS;
+const { tablet } = BREAKPOINTS;
 
 const HERO_IMAGE = 'umd-hero-image';
 
 const StackDefaultOverwrite = `
-  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  @container umd-hero (max-width: ${tablet - 1}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE} {
+      aspect-ratio: 16 / 9;
+    }
   }
 
-  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE}:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8) 85%);
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE}:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8) 85%);
+    }
   }
 
   .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE} img  {

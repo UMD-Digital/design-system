@@ -1,4 +1,4 @@
-import { Layout, Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS, ELEMENTS, NAMING, BREAKPOINTS } from '../globals';
 import { HeroType } from '../index';
@@ -13,6 +13,7 @@ const { tablet } = BREAKPOINTS;
 
 const HERO_IMAGE = 'umd-hero-image';
 
+// prettier-ignore
 const StackDefaultOverwrite = `
   @container umd-hero (max-width: ${tablet - 1}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_IMAGE} {
@@ -50,12 +51,14 @@ const StackDefaultOverwrite = `
   }
 `;
 
+// prettier-ignore
 const StackTypeOverwrite = `
   .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_IMAGE} {
     aspect-ratio: 16 / 9;
   }
 `;
 
+// prettier-ignore
 const OverlayTypeOverwrite = `
   @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_IMAGE} {
@@ -75,6 +78,7 @@ const OverlayTypeOverwrite = `
   }
 `;
 
+// prettier-ignore
 const MinimalTypeOverwrite = `
   @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_IMAGE} {
@@ -92,6 +96,7 @@ const MinimalTypeOverwrite = `
   }
 `;
 
+// prettier-ignore
 const LogoTypeOverwrite = `
   .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} {
     text-align: center;
@@ -109,14 +114,6 @@ const LogoTypeOverwrite = `
 
 // prettier-ignore
 export const STYLES_IMAGE = `
-  .${HERO_IMAGE} {
-
-  }
-
-  .${HERO_IMAGE} img {
-
-  }
-
   ${StackDefaultOverwrite}
   ${StackTypeOverwrite}
   ${OverlayTypeOverwrite}
@@ -128,7 +125,6 @@ export const CreateImage = ({ element }: { element: HeroType }) => {
   const imageRef = element.querySelector(
     `[slot="${IMAGE}"]`,
   ) as HTMLImageElement;
-
   const container = document.createElement('div');
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
 

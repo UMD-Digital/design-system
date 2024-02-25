@@ -12,6 +12,9 @@ const { FontSize, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { SansLarger, SansLarge, InterativeSmall, Eyebrow } = Typography;
 
+const { HEADLINE, MONTH, DAY } = SLOTS;
+const { CONTAINER_DARK_CLASS } = ELEMENTS;
+
 const EVENT_DATE_CONTAINER = 'umd-event-date-container';
 const EVENT_DATE_WRAPPER = 'umd-event-date-wrapper';
 const EVENT_MONTH = 'umd-event-date-month';
@@ -105,7 +108,7 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CONTAINER_DARK_CLASS} .${EVENT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-white'],
+      [`.${CONTAINER_DARK_CLASS} .${EVENT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-white'],
     },
   })}
 `;
@@ -127,9 +130,9 @@ export const ComponentStyles = `
 export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const dateWrapper = document.createElement('div');
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
-  const monthSlot = SlotDefaultStyling({ element, slotRef: SLOTS.MONTH });
-  const daySlot = SlotDefaultStyling({ element, slotRef: SLOTS.DAY });
+  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
+  const monthSlot = SlotDefaultStyling({ element, slotRef: MONTH });
+  const daySlot = SlotDefaultStyling({ element, slotRef: DAY });
 
   container.classList.add(EVENT_DATE_CONTAINER);
 

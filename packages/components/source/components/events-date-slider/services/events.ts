@@ -7,6 +7,8 @@ import {
   SizeDatesElements,
 } from './helpers';
 
+const { DATE_SLOT_NAME } = SLOTS;
+
 export const EventSlideDates = ({
   forward,
   element,
@@ -15,7 +17,7 @@ export const EventSlideDates = ({
   element: ELEMENT_TYPE;
 }) => {
   const scopedSlider = element.querySelector(
-    `[slot=${SLOTS.DATE_SLOT_NAME}]`,
+    `[slot=${DATE_SLOT_NAME}]`,
   ) as HTMLDivElement;
 
   const dateElements = Array.from(
@@ -74,7 +76,7 @@ export const EventSwipe = ({
   const currentPosition = element._count;
 
   const slider = element.querySelector(
-    `[slot=${SLOTS.DATE_SLOT_NAME}]`,
+    `[slot=${DATE_SLOT_NAME}]`,
   ) as HTMLDivElement;
   const dateElements = Array.from(
     slider.querySelectorAll(':scope > *'),

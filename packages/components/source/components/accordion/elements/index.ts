@@ -4,11 +4,13 @@ import { CreateHeadline, headlineStyles } from './headline';
 import { ELEMENT_TYPE } from '../index';
 import { ELEMENT_NAME, ELEMENTS } from '../globals';
 
+const { CONTAINER_NAME } = ELEMENTS;
+
 export default `
   :host {
     display: block;
   }
-  .${ELEMENTS.CONTAINER_NAME} {
+  .${CONTAINER_NAME} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
@@ -22,7 +24,7 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   const headline = CreateHeadline({ element });
   const body = CreateBody({ element });
 
-  container.classList.add(ELEMENTS.CONTAINER_NAME);
+  container.classList.add(CONTAINER_NAME);
 
   if (headline && body) {
     container.appendChild(headline);

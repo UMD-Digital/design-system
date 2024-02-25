@@ -10,11 +10,15 @@ import {
 
 const { Colors, FontSize, Spacing } = Tokens;
 
+const { PLAIN_TEXT } = SLOTS;
+const { ATTR_PLAIN_TEXT } = VARIABLES;
+const { CTA_CONTAINER } = ELEMENTS;
+
 const CTA_PLAIN_TEXT_SLOT = 'umd-call-to-action-plain-text-slot';
 
 // prettier-ignore
 const OverwritePrimaryLayoutStyles = `
-  [${VARIABLES.ATTR_PLAIN_TEXT}][data-type="primary"]  {
+  [${ATTR_PLAIN_TEXT}][data-type="primary"]  {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +31,7 @@ const OverwritePrimaryLayoutStyles = `
 
 // prettier-ignore
 const OverwriteSecondaryLayoutStyles = `
-  [${VARIABLES.ATTR_PLAIN_TEXT}][data-type="secondary"]  {
+  [${ATTR_PLAIN_TEXT}][data-type="secondary"]  {
     display: flex;
     flex-direction: column;
   }
@@ -103,14 +107,14 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
   const plainTextElement = CreatePlainText({ element });
   const hasPlainText = plainTextElement.length > 0;
 
-  container.classList.add(ELEMENTS.CTA_CONTAINER);
+  container.classList.add(CTA_CONTAINER);
   container.appendChild(ctaElement);
   container.setAttribute('data-type', type);
 
   if (hasPlainText) {
-    const plainTextSlot = MakeSlot({ type: SLOTS.PLAIN_TEXT });
+    const plainTextSlot = MakeSlot({ type: PLAIN_TEXT });
     plainTextSlot.classList.add(CTA_PLAIN_TEXT_SLOT);
-    container.setAttribute(VARIABLES.ATTR_PLAIN_TEXT, '');
+    container.setAttribute(ATTR_PLAIN_TEXT, '');
     container.appendChild(plainTextSlot);
   }
 

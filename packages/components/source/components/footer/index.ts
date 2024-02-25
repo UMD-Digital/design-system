@@ -8,12 +8,14 @@ import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateElement } from './elements';
 import { VARIABLES } from './globals';
 
+const { THEME_OPTION_DARK, VERSION_TYPE_SIMPLE } = VARIABLES;
+
 export const ELEMENT_NAME = 'umd-element-footer';
 export type ELEMENT_TYPE = UMDFooterElement;
 export class UMDFooterElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = VARIABLES.THEME_OPTION_DARK;
-  _type = VARIABLES.VERSION_TYPE_SIMPLE;
+  _theme = THEME_OPTION_DARK;
+  _type = VERSION_TYPE_SIMPLE;
 
   constructor() {
     super();
@@ -32,8 +34,8 @@ export class UMDFooterElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    element._type = this.getAttribute('type') || VARIABLES.VERSION_TYPE_SIMPLE;
-    element._theme = this.getAttribute('theme') || VARIABLES.THEME_OPTION_DARK;
+    element._type = this.getAttribute('type') || VERSION_TYPE_SIMPLE;
+    element._theme = this.getAttribute('theme') || THEME_OPTION_DARK;
 
     this._shadow.appendChild(CreateElement({ element }));
   }

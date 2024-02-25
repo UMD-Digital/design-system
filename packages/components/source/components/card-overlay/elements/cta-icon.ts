@@ -5,16 +5,19 @@ import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
 const { Colors, Spacing } = Tokens;
 
+const { CTAICON } = SLOTS;
+const { CARD_OVERLAY_CTA_ICON_CONTAINER } = ELEMENTS;
+
 // prettier-ignore
 export const CtaIconStyles = `
-  .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} {
+  .${CARD_OVERLAY_CTA_ICON_CONTAINER} {
     position: absolute;
     bottom: ${Spacing.sm};
     right: ${Spacing.sm};
     z-index: 9999;
   }
 
-  .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
+  .${CARD_OVERLAY_CTA_ICON_CONTAINER} a {
     border-radius: 50%;
     height: 40px;
     width: 40px;
@@ -25,7 +28,7 @@ export const CtaIconStyles = `
     transition: background-color 0.3s ease-in-out;
   }
 
-  .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} svg {
+  .${CARD_OVERLAY_CTA_ICON_CONTAINER} svg {
     height: 15px;
     width: 15px;
     fill: ${Colors.gray.darker};
@@ -36,7 +39,7 @@ export const CtaIconStyles = `
 export const CreateCtaIcon = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
   const ctaIcon = element.querySelector(
-    `[slot="${SLOTS.CTAICON}"]`,
+    `[slot="${CTAICON}"]`,
   ) as HTMLAnchorElement;
 
   if (!ctaIcon) return null;
@@ -46,7 +49,7 @@ export const CreateCtaIcon = ({ element }: { element: CardType }) => {
     ctaIcon.getAttribute('aria-label') || `Open Link to ${ctaIcon.href}`;
 
   ctaIcon.setAttribute('aria-label', label);
-  container.classList.add(ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER);
+  container.classList.add(CARD_OVERLAY_CTA_ICON_CONTAINER);
 
   if (!hasIcon) {
     const isExternalLink = ctaIcon.getAttribute('target') === '_blank';

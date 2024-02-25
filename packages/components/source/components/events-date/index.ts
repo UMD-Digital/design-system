@@ -8,6 +8,8 @@ import { MakeTemplate, SlotOberserver } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { ELEMENTS, SLOTS } from './globals';
 
+const { CONTAINER_DARK_CLASS } = ELEMENTS;
+
 export const ELEMENT_NAME = 'umd-element-events-date';
 export type ELEMENT_TYPE = UMDEventsDateElement;
 export class UMDEventsDateElement extends HTMLElement {
@@ -34,7 +36,7 @@ export class UMDEventsDateElement extends HTMLElement {
     const container = CreateShadowDom({ element });
 
     if (theme === 'dark') {
-      container.classList.add(ELEMENTS.CONTAINER_DARK_CLASS);
+      container.classList.add(CONTAINER_DARK_CLASS);
     }
 
     element._shadow.appendChild(container);

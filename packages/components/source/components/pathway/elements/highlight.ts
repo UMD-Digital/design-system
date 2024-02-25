@@ -6,17 +6,22 @@ import { ELEMENT_TYPE } from '../index';
 
 const { Colors, Spacing } = Tokens;
 
+const { HIGHLIGHT } = SLOTS;
+const { medium, large } = BREAKPOINTS;
+const { PATHWAY_CONTAINER } = ELEMENTS;
+const { ATTRIBUTE_THEME } = VARIABLES;
+
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
 const PATHWAY_HIGHLIGHT_CONTAINER_TEXT = 'umd-pathway-highlight-text';
 
 // prettier-ignore
 const ThemeStyles = `
-  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} {
+  .${PATHWAY_CONTAINER}[${ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} {
     background-color: ${Colors.black};
   }
 
-  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} * {
+  .${PATHWAY_CONTAINER}[${ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} * {
     color: ${Colors.white};
   }
 `
@@ -29,19 +34,19 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     position: relative;
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+  @container umd-pathway (min-width: ${medium}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER} {
       padding: ${Spacing['4xl']} ${Spacing['2xl']};
     }
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-pathway (min-width: ${large}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER} {
       padding: ${Spacing['8xl']} ${Spacing['xl']};
     }
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+  @container umd-pathway (min-width: ${medium}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER} {
       padding-left: ${Spacing['xl']};
       position: relative;
@@ -54,7 +59,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     background-color: ${Colors.red};
   }
 
-  @container umd-pathway (max-width: ${BREAKPOINTS.medium - 1}px) {
+  @container umd-pathway (max-width: ${medium - 1}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
       top: ${Spacing['2xl']};
       width: ${Spacing['5xl']};
@@ -62,7 +67,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     }
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+  @container umd-pathway (min-width: ${medium}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
       left: 0;
       width: 2px;
@@ -89,7 +94,7 @@ export const CreateHighlightColumn = ({
   const wrapper = document.createElement('div');
   const highlightSlot = SlotDefaultStyling({
     element,
-    slotRef: SLOTS.HIGHLIGHT,
+    slotRef: HIGHLIGHT,
   });
 
   wrapper.classList.add(PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER);

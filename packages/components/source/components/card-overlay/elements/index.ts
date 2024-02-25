@@ -11,37 +11,52 @@ const { Colors, Spacing } = Tokens;
 const { TextDark } = Fields;
 const { LinkLineSlide } = Animations;
 
+const { IMAGE } = SLOTS;
+const {
+  ATTR_THEME,
+  ATTR_IMAGE,
+  ATTR_CTA_ICON,
+  ATTR_THEME_LIGHT,
+  ATTR_THEME_DARK,
+} = VARIABLES;
+const {
+  CARD_OVERLAY_HEADLINE,
+  CARD_OVERLAY_CTA_ICON_CONTAINER,
+  CARD_OVERLAY_IMAGE_CONTAINER,
+  CARD_OVERLAY_TEXT,
+} = ELEMENTS;
+
 const CARD_OVERLAY_CONTAINER = 'umd-card-overlay-container';
 const CARD_OVERLAY_TEXT_CONTAINER = 'umd-card-overlay-text-container';
 const CARD_OVERLAY_TINT_OVERLAY = 'umd-card-overlay-tint';
 
 // prettier-ignore
 const VariantLightThemeStyles = `
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a {
     background-color: ${Colors.gray.darker};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} svg,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} path {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} svg,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} path {
     fill: ${Colors.white};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
     background-color: ${Colors.white};
     border: 1px solid ${Colors.gray.darker};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover path,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus path {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover path,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus path {
     fill: ${Colors.gray.darker};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_LIGHT}] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
+      [`.${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_LIGHT}] .${CARD_OVERLAY_HEADLINE} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -49,28 +64,28 @@ const VariantLightThemeStyles = `
 
 // prettier-ignore
 const VariantDarkThemeStyles = `
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_DARK}] {
     background-color: ${Colors.gray.darker};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] * {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_DARK}] * {
     color: ${Colors.white};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_DARK}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_DARK}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
     background-color: ${Colors.gray.darker};
     border: 1px solid ${Colors.white};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg path,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg path {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_DARK}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg path,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_DARK}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg path {
     fill: ${Colors.white};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
+      [`.${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_DARK}] .${CARD_OVERLAY_TEXT}`]:
         TextDark,
     },
   })}
@@ -80,14 +95,14 @@ const VariantDarkThemeStyles = `
 const VariantImageThemeContent = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
+      [`.${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_HEADLINE} a`]:
       LinkLineSlide['.slidein-underline-white'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_TEXT}`]:
+      [`.${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_TEXT}`]:
         TextDark,
     },
   })}
@@ -95,32 +110,32 @@ const VariantImageThemeContent = `
 
 // prettier-ignore
 const VariantImageThemeCtaIcon = `
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a {
     background-color: ${Colors.white};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a svg,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a path {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a svg,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a path {
     fill: ${Colors.gray.darker};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus {
     background-color: ${Colors.gray.darker};
     border: none;
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover path,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${ELEMENTS.CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus path {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover svg,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:hover path,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus svg,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_CTA_ICON_CONTAINER} a:focus path {
     fill: ${Colors.white};
   }
 `;
 
 // prettier-ignore
 const VariantImageThemeTint = `
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${CARD_OVERLAY_TINT_OVERLAY} {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_TINT_OVERLAY} {
     position: absolute;
     top: 0;
     left: 0;
@@ -131,33 +146,33 @@ const VariantImageThemeTint = `
     transition: opacity 0.5s ease-in-out;
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}]:hover .${CARD_OVERLAY_TINT_OVERLAY} {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}]:hover .${CARD_OVERLAY_TINT_OVERLAY} {
     opacity: .7;
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}]:hover .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img,
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}]:focus-within .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}]:hover .${CARD_OVERLAY_IMAGE_CONTAINER} img,
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}]:focus-within .${CARD_OVERLAY_IMAGE_CONTAINER} img {
     transform: scale(1.025);
   }
 `
 
 // prettier-ignore
 const VariantImageThemeStyles = `
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] {
     padding-top: ${Spacing['4xl']};
   }
 
   @container umd-card (min-width: 300px) {
-    .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] {
+    .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] {
       padding-top: ${Spacing['8xl']};
     }
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] * {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] * {
     color: ${Colors.white};
   }
 
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${CARD_OVERLAY_TEXT_CONTAINER} {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_TEXT_CONTAINER} {
     justify-content: flex-end;
   }
 
@@ -168,15 +183,15 @@ const VariantImageThemeStyles = `
 
 // prettier-ignore
 const VariantCTAIconStyles = `
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_CTA_ICON}] .${CARD_OVERLAY_TEXT_CONTAINER} {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_CTA_ICON}] .${CARD_OVERLAY_TEXT_CONTAINER} {
     padding-right: 40px;
   }
 `;
 
 // prettier-ignore
 const VariantComboStyles = `
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_IMAGE}],
-  .${CARD_OVERLAY_CONTAINER}[${VARIABLES.ATTR_CTA_ICON}] {
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}],
+  .${CARD_OVERLAY_CONTAINER}[${ATTR_CTA_ICON}] {
     display: flex;
     align-items: flex-end;
   }
@@ -228,12 +243,12 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
   const textContainer = document.createElement('div');
   const tintOverlay = document.createElement('div');
   const hasImage = element.querySelector(
-    `[slot="${SLOTS.IMAGE}"]`,
+    `[slot="${IMAGE}"]`,
   ) as HTMLImageElement;
 
   if (hasImage) {
-    container.setAttribute(VARIABLES.ATTR_IMAGE, '');
-    element.setAttribute(VARIABLES.ATTR_IMAGE, '');
+    container.setAttribute(ATTR_IMAGE, '');
+    element.setAttribute(ATTR_IMAGE, '');
   }
 
   const image = CreateImage({ element });
@@ -248,7 +263,7 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
     textContainer.appendChild(cta);
   }
 
-  container.setAttribute(VARIABLES.ATTR_THEME, element._theme);
+  container.setAttribute(ATTR_THEME, element._theme);
   container.classList.add(CARD_OVERLAY_CONTAINER);
 
   container.appendChild(image);
@@ -259,7 +274,7 @@ export const CreateShadowDom = ({ element }: { element: CardType }) => {
   }
 
   if (ctaIcon) {
-    container.setAttribute(VARIABLES.ATTR_CTA_ICON, '');
+    container.setAttribute(ATTR_CTA_ICON, '');
     container.appendChild(ctaIcon);
   }
 

@@ -10,6 +10,11 @@ import {
 
 const { Spacing } = Tokens;
 
+const { CARDS } = SLOTS;
+const { CAROUSEL_CARDS_BUTTON_BACKWARDS, CAROUSEL_CARDS_BUTTON_FORWARDS } =
+  ELEMENTS;
+const { TABLET_COUNT, MOBILE_COUNT, ANIMATION_DURATION } = VARIABLES;
+
 const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
 export const EventResizeCarouselElementsWidth = ({
@@ -32,7 +37,7 @@ export const EventScrollCarousel = ({
 }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.CARDS}"]`,
+    `[slot="${CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
   const isShowTwo = IsTabletView({ shadowRoot });
@@ -54,7 +59,7 @@ export const EventScrollCarousel = ({
     const animateRight = () => {
       cardsSlot.style.width = `${temporaryCarouselSize}px`;
       nextElement.style.display = 'block';
-      cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms`;
+      cardsSlot.style.transition = `transform ${ANIMATION_DURATION}ms`;
       cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
       setTimeout(() => {
@@ -64,7 +69,7 @@ export const EventScrollCarousel = ({
 
         cardsSlot.removeChild(firstElement);
         SetCarouselSize({ element, elementSize });
-      }, VARIABLES.ANIMATION_DURATION - 50);
+      }, ANIMATION_DURATION - 50);
     };
 
     const animateLeft = () => {
@@ -77,7 +82,7 @@ export const EventScrollCarousel = ({
       cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
       setTimeout(() => {
-        cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms`;
+        cardsSlot.style.transition = `transform ${ANIMATION_DURATION}ms`;
         cardsSlot.style.transform = `translateX(0)`;
       }, 10);
 
@@ -86,7 +91,7 @@ export const EventScrollCarousel = ({
         cardsSlot.removeChild(lastElement);
 
         SetCarouselSize({ element, elementSize });
-      }, VARIABLES.ANIMATION_DURATION - 50);
+      }, ANIMATION_DURATION - 50);
     };
 
     isDirectionRight ? animateRight() : animateLeft();
@@ -104,14 +109,14 @@ export const EventScrollCarousel = ({
 
       cardsSlot.style.width = `${temporaryCarouselSize}px`;
       upcomingElement.style.display = 'block';
-      cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms ease-in-out`;
+      cardsSlot.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
       cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
       setTimeout(() => {
         cardsSlot.removeChild(firstElement);
 
         SetCarouselSize({ element, elementSize });
-      }, VARIABLES.ANIMATION_DURATION + 100);
+      }, ANIMATION_DURATION + 100);
     };
 
     const animateLeft = () => {
@@ -124,7 +129,7 @@ export const EventScrollCarousel = ({
       cardsSlot.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
       setTimeout(() => {
-        cardsSlot.style.transition = `transform ${VARIABLES.ANIMATION_DURATION}ms`;
+        cardsSlot.style.transition = `transform ${ANIMATION_DURATION}ms`;
         cardsSlot.style.transform = `translateX(0)`;
       }, 10);
 
@@ -133,7 +138,7 @@ export const EventScrollCarousel = ({
         cardsSlot.removeChild(lastElement);
 
         SetCarouselSize({ element, elementSize });
-      }, VARIABLES.ANIMATION_DURATION - 50);
+      }, ANIMATION_DURATION - 50);
     };
 
     isDirectionRight ? animateRight() : animateLeft();
@@ -198,7 +203,7 @@ export const EventResizeSetHeight = ({
   element: ELEMENT_TYPE;
 }) => {
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.CARDS}"]`,
+    `[slot="${CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
   const minimumHeight = 450;
@@ -220,20 +225,20 @@ export const EventResizeButtonLogic = ({
 }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const forwardButton = shadowRoot.querySelector(
-    `.${ELEMENTS.CAROUSEL_CARDS_BUTTON_FORWARDS}`,
+    `.${CAROUSEL_CARDS_BUTTON_FORWARDS}`,
   ) as HTMLButtonElement;
   const backwardButton = shadowRoot.querySelector(
-    `.${ELEMENTS.CAROUSEL_CARDS_BUTTON_BACKWARDS}`,
+    `.${CAROUSEL_CARDS_BUTTON_BACKWARDS}`,
   ) as HTMLButtonElement;
   const buttons = [forwardButton, backwardButton];
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.CARDS}"]`,
+    `[slot="${CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
   const count = slotContent.length;
   const isShowTwo = IsTabletView({ shadowRoot });
-  const isButtonShownMobile = count > VARIABLES.MOBILE_COUNT;
-  const isButtonShownTablet = count > VARIABLES.TABLET_COUNT;
+  const isButtonShownMobile = count > MOBILE_COUNT;
+  const isButtonShownTablet = count > TABLET_COUNT;
 
   if (isShowTwo && isButtonShownTablet) {
     buttons.forEach((button) => (button.style.display = 'block'));

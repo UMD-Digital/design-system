@@ -4,20 +4,25 @@ import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 
 const { Colors, Spacing } = Tokens;
 
+const { tablet, desktop, large } = BREAKPOINTS;
+const { DATE_SLOT_NAME } = SLOTS;
+const { DATES_CONTAINER_CLASS, DATES_WRAPPER_CONTAINER_CLASS, ARROW_CLASS } =
+  ELEMENTS;
+
 export const ShowNumberOfDates = ({
   shadowRoot,
 }: {
   shadowRoot: ShadowRoot;
 }) => {
   const container = shadowRoot.querySelector(
-    `.${ELEMENTS.DATES_CONTAINER_CLASS}`,
+    `.${DATES_CONTAINER_CLASS}`,
   ) as HTMLDivElement;
 
   let count = 1;
 
-  if (container.offsetWidth > BREAKPOINTS.tablet) count = 2;
-  if (container.offsetWidth > BREAKPOINTS.desktop) count = 3;
-  if (container.offsetWidth > BREAKPOINTS.large) count = 4;
+  if (container.offsetWidth > tablet) count = 2;
+  if (container.offsetWidth > desktop) count = 3;
+  if (container.offsetWidth > large) count = 4;
 
   return count;
 };
@@ -31,13 +36,13 @@ export const ButtonVisibilityLogic = ({
   const currentPosition = element._count;
 
   const slider = element.querySelector(
-    `[slot=${SLOTS.DATE_SLOT_NAME}]`,
+    `[slot=${DATE_SLOT_NAME}]`,
   ) as HTMLDivElement;
   const dateElements = Array.from(
     slider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
   const buttons = Array.from(
-    shadowRoot.querySelectorAll(`.${ELEMENTS.ARROW_CLASS}`),
+    shadowRoot.querySelectorAll(`.${ARROW_CLASS}`),
   ) as HTMLButtonElement[];
   const count = ShowNumberOfDates({ shadowRoot });
   const length = dateElements.length;
@@ -66,7 +71,7 @@ export const ButtonVisibilityLogic = ({
 export const JumpToDate = ({ element }: { element: ELEMENT_TYPE }) => {
   const currentPosition = element._count;
   const slider = element.querySelector(
-    `[slot=${SLOTS.DATE_SLOT_NAME}]`,
+    `[slot=${DATE_SLOT_NAME}]`,
   ) as HTMLDivElement;
   const dateElements = Array.from(
     slider.querySelectorAll(':scope > *'),
@@ -85,10 +90,10 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const isThemeDark = element.getAttribute('theme') === 'dark';
   const slider = element.querySelector(
-    `[slot=${SLOTS.DATE_SLOT_NAME}]`,
+    `[slot=${DATE_SLOT_NAME}]`,
   ) as HTMLDivElement;
   const sliderWrapper = shadowRoot.querySelector(
-    `.${ELEMENTS.DATES_WRAPPER_CONTAINER_CLASS}`,
+    `.${DATES_WRAPPER_CONTAINER_CLASS}`,
   ) as HTMLDivElement;
 
   const sizing = ({
@@ -121,7 +126,7 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
       const count = ShowNumberOfDates({ shadowRoot });
       const dateElementSize = sliderWrapper.offsetWidth / count;
       const elementWidth = element.offsetWidth;
-      const isMobile = elementWidth < BREAKPOINTS.tablet;
+      const isMobile = elementWidth < tablet;
 
       slider.style.width = `${dateElements.length * dateElementSize}px`;
 

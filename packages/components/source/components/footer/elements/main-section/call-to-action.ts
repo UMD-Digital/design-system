@@ -4,6 +4,10 @@ import { SlotDefaultStyling } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 
+const { CTA } = SLOTS;
+const { ELEMENT_WRAPPER } = ELEMENTS;
+const { THEME_OPTION_LIGHT } = VARIABLES;
+
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 
 export const CallToActionStyles = `
@@ -27,14 +31,14 @@ export const CallToActionStyles = `
     background-color: ${Colors.black};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a {
     background-color: ${Colors.black};
     color: ${Colors.white};
     border: 1px solid ${Colors.black};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:hover,
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:focus {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:hover,
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:focus {
     color: ${Colors.black};
     background-color: ${Colors.gray.lightest};
   }
@@ -56,14 +60,12 @@ export const CreateCallToActionContainer = ({
   element: HTMLElement;
 }) => {
   const container = document.createElement('div');
-  const ctaSlot = element.querySelector(
-    `[slot="${SLOTS.CTA}"]`,
-  ) as HTMLAnchorElement;
+  const ctaSlot = element.querySelector(`[slot="${CTA}"]`) as HTMLAnchorElement;
 
   container.classList.add(CALL_TO_ACTION_CONTAINER);
 
   if (ctaSlot) {
-    const slot = SlotDefaultStyling({ element, slotRef: SLOTS.CTA });
+    const slot = SlotDefaultStyling({ element, slotRef: CTA });
     if (slot) container.appendChild(slot);
   } else {
     container.appendChild(makeGivingLink());

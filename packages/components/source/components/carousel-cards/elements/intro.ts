@@ -12,6 +12,10 @@ const { Colors, Spacing } = Tokens;
 const { TextDark } = Fields;
 const { SansMedium, SansLargest } = Typography;
 
+const { large } = BREAKPOINTS;
+const { HEADLINE, TEXT, CTA } = SLOTS;
+const { INTRO_CONTAINER } = ELEMENTS;
+
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
 const INTRO_CONTAINER_HEADLINE = 'umd-carousel-cards-intro-container-headline';
 const INTRO_CONTAINER_TEXT = 'umd-carousel-cards-intro-container-text';
@@ -70,21 +74,21 @@ const ctaStyles = `
 
 // prettier-ignore
 export const IntroContainerStyles = `
-  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${ELEMENTS.INTRO_CONTAINER} {
+  @container umd-carousel-card (max-width: ${large - 1}px) {
+    .${INTRO_CONTAINER} {
       margin-bottom: ${Spacing.md};
     }
   }
 
-  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
-    .${ELEMENTS.INTRO_CONTAINER} {
+  @container umd-carousel-card (min-width: ${large}px) {
+    .${INTRO_CONTAINER} {
       width: calc(40% - ${Spacing['2xl']});
       padding-right: ${Spacing['2xl']};
     }
   }
 
-  @media (min-width: ${BREAKPOINTS.large}px) {
-    .${ELEMENTS.INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
+  @media (min-width: ${large}px) {
+    .${INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
       max-width: inherit;
       padding: 0;
     }
@@ -98,9 +102,9 @@ export const IntroContainerStyles = `
 export const CreateIntroColumn = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
-  const textSlot = SlotDefaultStyling({ element, slotRef: SLOTS.TEXT });
-  const ctaSlot = SlotDefaultStyling({ element, slotRef: SLOTS.CTA });
+  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
+  const textSlot = SlotDefaultStyling({ element, slotRef: TEXT });
+  const ctaSlot = SlotDefaultStyling({ element, slotRef: CTA });
 
   wrapper.classList.add(INTRO_CONTAINER_LOCK);
 
@@ -119,7 +123,7 @@ export const CreateIntroColumn = ({ element }: { element: ELEMENT_TYPE }) => {
     wrapper.appendChild(ctaSlot);
   }
 
-  container.classList.add(ELEMENTS.INTRO_CONTAINER);
+  container.classList.add(INTRO_CONTAINER);
   container.appendChild(wrapper);
 
   return container;

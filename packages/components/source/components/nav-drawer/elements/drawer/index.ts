@@ -3,16 +3,19 @@ import { UMDNavDrawer } from 'components/nav-drawer';
 import { CreateDrawerButton, drawerButtonStyles } from './button-close';
 import { CreateSlider, drawerSliderStyles } from '../slider';
 
+const { ANIMATION_TIME } = VARIABLES;
+const { NAV_DRAWER_BODY_OVERLAY, NAV_DRAWER_CONTAINER } = ELEMENTS;
+
 // prettier-ignore
 const bodyOverlay = `
-  .${ELEMENTS.NAV_DRAWER_BODY_OVERLAY} {
+  .${NAV_DRAWER_BODY_OVERLAY} {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
     background-color: rgba(0,0,0,0.5);
-    transition: opacity ${VARIABLES.ANIMATION_TIME}ms ease-in-out;
+    transition: opacity ${ANIMATION_TIME}ms ease-in-out;
     z-index: 999999;
     cursor: pointer;
     display: none;
@@ -22,12 +25,12 @@ const bodyOverlay = `
 
 // prettier-ignore
 export const drawerStyles = `
-  .${ELEMENTS.NAV_DRAWER_CONTAINER} {
+  .${NAV_DRAWER_CONTAINER} {
     position: fixed;
     bottom: 0;
     left: 0;
     top: 0;
-    transition: transform ${VARIABLES.ANIMATION_TIME}ms ease-in-out;
+    transition: transform ${ANIMATION_TIME}ms ease-in-out;
     z-index: 9;
     display: none;
     transform: translateX(-100%);
@@ -48,10 +51,10 @@ export const CreateDrawer = ({ element }: { element: UMDNavDrawer }) => {
   drawer.appendChild(closeButton);
 
   bodyOverlay.appendChild(drawer);
-  bodyOverlay.classList.add(ELEMENTS.NAV_DRAWER_BODY_OVERLAY);
+  bodyOverlay.classList.add(NAV_DRAWER_BODY_OVERLAY);
   bodyOverlay.addEventListener('click', element.eventClose.bind(element));
 
-  drawer.classList.add(ELEMENTS.NAV_DRAWER_CONTAINER);
+  drawer.classList.add(NAV_DRAWER_CONTAINER);
 
   return bodyOverlay;
 };

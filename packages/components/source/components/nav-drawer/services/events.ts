@@ -2,17 +2,26 @@ import { EventAccessibilityFocus } from 'helpers/accessibility';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { UMDNavDrawer } from 'components/nav-drawer';
 
+const { NAV_DRAWER_BODY_OVERLAY, NAV_DRAWER_CONTAINER } = ELEMENTS;
+const {
+  ATTRIBUTE_ACTIVE_SLIDE,
+  ANIMATION_TIME,
+  ATTRIBUTE_PARENT_REF,
+  ATTRIBUTE_DATA_SLIDE,
+  ATTRIBUTE_CHILD_REF,
+} = VARIABLES;
+
 export const EventOpen = ({ element }: { element: UMDNavDrawer }) => {
   const body = document.querySelector('body') as HTMLBodyElement;
   const ShadowRoot = element._shadow as ShadowRoot;
   const bodyOverlay = ShadowRoot.querySelector(
-    `.${ELEMENTS.NAV_DRAWER_BODY_OVERLAY}`,
+    `.${NAV_DRAWER_BODY_OVERLAY}`,
   ) as HTMLDivElement;
   const drawer = ShadowRoot.querySelector(
-    `.${ELEMENTS.NAV_DRAWER_CONTAINER}`,
+    `.${NAV_DRAWER_CONTAINER}`,
   ) as HTMLDivElement;
   const activeSlide = ShadowRoot.querySelector(
-    `[${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}]`,
+    `[${ATTRIBUTE_ACTIVE_SLIDE}]`,
   ) as HTMLDivElement;
   const firstLink = activeSlide.querySelector(`a`) as HTMLAnchorElement;
 
@@ -37,10 +46,10 @@ export const EventClose = ({ element }: { element: UMDNavDrawer }) => {
   const focusCallback = element._focusCallback;
   const ShadowRoot = element._shadow as ShadowRoot;
   const bodyOverlay = ShadowRoot.querySelector(
-    `.${ELEMENTS.NAV_DRAWER_BODY_OVERLAY}`,
+    `.${NAV_DRAWER_BODY_OVERLAY}`,
   ) as HTMLDivElement;
   const drawer = ShadowRoot.querySelector(
-    `.${ELEMENTS.NAV_DRAWER_CONTAINER}`,
+    `.${NAV_DRAWER_CONTAINER}`,
   ) as HTMLDivElement;
 
   if (focusCallback) focusCallback();
@@ -52,7 +61,7 @@ export const EventClose = ({ element }: { element: UMDNavDrawer }) => {
     bodyOverlay.removeAttribute('style');
     drawer.removeAttribute('style');
     body.style.overflow = 'auto';
-  }, VARIABLES.ANIMATION_TIME + 100);
+  }, ANIMATION_TIME + 100);
 };
 
 const FindParent = ({
@@ -91,7 +100,7 @@ const GetUpcomingSlide = ({ element }: { element: UMDNavDrawer }) => {
   const ShadowRoot = element._shadow as ShadowRoot;
   const upcomingSlideRef = element._upcomingSlide;
   const upcomingSlide = ShadowRoot.querySelector(
-    `[${VARIABLES.ATTRIBUTE_PARENT_REF}=${upcomingSlideRef}]`,
+    `[${ATTRIBUTE_PARENT_REF}=${upcomingSlideRef}]`,
   ) as HTMLDivElement;
 
   return upcomingSlide;
@@ -101,11 +110,11 @@ const GetUpcomingSlideParent = ({ element }: { element: UMDNavDrawer }) => {
   const ShadowRoot = element._shadow as ShadowRoot;
   const upcomingSlideRef = element._upcomingSlide;
   const upcomingSlide = ShadowRoot.querySelector(
-    `[${VARIABLES.ATTRIBUTE_CHILD_REF}=${upcomingSlideRef}]`,
+    `[${ATTRIBUTE_CHILD_REF}=${upcomingSlideRef}]`,
   ) as HTMLDivElement;
   const parent = FindParent({
     element: upcomingSlide,
-    attr: VARIABLES.ATTRIBUTE_DATA_SLIDE,
+    attr: ATTRIBUTE_DATA_SLIDE,
   });
 
   return parent;
@@ -120,7 +129,7 @@ export const EventSlide = ({
 }) => {
   const ShadowRoot = element._shadow as ShadowRoot;
   const activeSlide = ShadowRoot.querySelector(
-    `[${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}]`,
+    `[${ATTRIBUTE_ACTIVE_SLIDE}]`,
   ) as HTMLDivElement;
   const upcomingSlide = isRight
     ? GetUpcomingSlideParent({ element })
@@ -129,9 +138,8 @@ export const EventSlide = ({
 
   const setPreviousSlide = () => {
     const previousSlideContext = isRight ? activeSlide : upcomingSlide;
-    const previousSlideRef = previousSlideContext.getAttribute(
-      VARIABLES.ATTRIBUTE_PARENT_REF,
-    );
+    const previousSlideRef =
+      previousSlideContext.getAttribute(ATTRIBUTE_PARENT_REF);
     element._previousSlide = previousSlideRef;
   };
 
@@ -149,7 +157,7 @@ export const EventSlide = ({
 
     setTimeout(() => {
       slides.forEach((slide) => {
-        slide.style.transition = `transform ${VARIABLES.ANIMATION_TIME}ms ease-in-out`;
+        slide.style.transition = `transform ${ANIMATION_TIME}ms ease-in-out`;
         slide.style.transform = `translateX(${transitionPosition})`;
       });
     }, 100);
@@ -162,9 +170,9 @@ export const EventSlide = ({
         slide.removeAttribute('style');
       });
 
-      upcomingSlide.setAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE, '');
-      activeSlide.removeAttribute(VARIABLES.ATTRIBUTE_ACTIVE_SLIDE);
-    }, VARIABLES.ANIMATION_TIME + 100);
+      upcomingSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
+      activeSlide.removeAttribute(ATTRIBUTE_ACTIVE_SLIDE);
+    }, ANIMATION_TIME + 100);
   };
 
   if (!upcomingSlide || !activeSlide)

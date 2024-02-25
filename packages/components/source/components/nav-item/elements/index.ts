@@ -6,17 +6,25 @@ import { CreatePrimaryLink, PrimaryStyles } from './primary';
 
 const { Colors, FontFamily, FontSize, FontWeight } = Tokens;
 
+const { ATTRIBUTE_DROPDOWN, ATTRIBUTE_SHOWING, ATTRIBUTE_SELECTED } = VARIABLES;
+const {
+  CONTAINER,
+  DROPDOWN_CONTAINER,
+  PRIMARLY_LINK_WRAPPER,
+  PRIMARY_LINK_CONTAINER_BUTTON,
+} = ELEMENTS;
+
 // prettier-ignore
 const hasDropdownStyles = `
-  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.DROPDOWN_CONTAINER} {
+  .${CONTAINER}[${ATTRIBUTE_DROPDOWN}][${ATTRIBUTE_SHOWING}] .${DROPDOWN_CONTAINER} {
     display: block;
   }
 
-  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}][${VARIABLES.ATTRIBUTE_SHOWING}] .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
+  .${CONTAINER}[${ATTRIBUTE_DROPDOWN}][${ATTRIBUTE_SHOWING}] .${PRIMARY_LINK_CONTAINER_BUTTON} {
     transform: rotate(180deg) translateY(4px);
   }
 
-  .${ELEMENTS.CONTAINER}[${VARIABLES.ATTRIBUTE_DROPDOWN}] .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}]:before {
+  .${CONTAINER}[${ATTRIBUTE_DROPDOWN}] .${PRIMARLY_LINK_WRAPPER} > a[${ATTRIBUTE_SELECTED}]:before {
     bottom: 1px;
     right: 20px;
   }
@@ -38,12 +46,12 @@ export const ComponentStyles = `
     text-decoration: none;
   }
 
-  .${ELEMENTS.CONTAINER} {
+  .${CONTAINER} {
     position: relative;
     container: umd-nav-item / inline-size;
   }
 
-  .${ELEMENTS.CONTAINER}:foucs-within .${ELEMENTS.DROPDOWN_CONTAINER} {
+  .${CONTAINER}:foucs-within .${DROPDOWN_CONTAINER} {
     display: block;
   }
 
@@ -56,7 +64,7 @@ export const CreateShadowDom = ({ element }: { element: ElementType }) => {
   const primaryLink = CreatePrimaryLink({ element });
 
   container.appendChild(primaryLink);
-  container.classList.add(ELEMENTS.CONTAINER);
+  container.classList.add(CONTAINER);
 
   return container;
 };

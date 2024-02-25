@@ -34,8 +34,9 @@ const {
   ATTRIBUTE_TYPE,
 } = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
-
+const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
 const { HERO_BODY, HERO_BODY_WRAPPER } = ELEMENTS;
+const { medium } = BREAKPOINTS;
 
 const HERO_EYEBROW = 'umd-hero-overlay-eyebrow';
 const HERO_HEADLINE = 'umd-hero-overlay-headline';
@@ -116,7 +117,7 @@ const ActionStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+  @container umd-pathway (min-width: ${medium}px) {
     * + .${HERO_ACTION} {
       margin-top: ${Spacing.lg};
     }
@@ -148,10 +149,10 @@ export const STYLES_BODY = `
 export const CreateBody = ({ element }: { element: HeroType }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const eyebrowSlot = SlotDefaultStyling({ element, slotRef: SLOTS.EYEBROW });
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
-  const textSlot = SlotDefaultStyling({ element, slotRef: SLOTS.TEXT });
-  const actionSlot = SlotDefaultStyling({ element, slotRef: SLOTS.ACTIONS });
+  const eyebrowSlot = SlotDefaultStyling({ element, slotRef: EYEBROW });
+  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
+  const textSlot = SlotDefaultStyling({ element, slotRef: TEXT });
+  const actionSlot = SlotDefaultStyling({ element, slotRef: ACTIONS });
 
   container.classList.add(HERO_BODY);
   wrapper.classList.add(HERO_BODY_WRAPPER);

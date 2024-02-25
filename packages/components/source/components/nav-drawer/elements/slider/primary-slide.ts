@@ -6,6 +6,14 @@ import { CreateSlideAction, slideActionStyles } from './slide-action';
 
 const { Colors, Spacing, FontSize } = Tokens;
 
+const {
+  PRIMARY_SLIDE_LINKS,
+  PRIMARY_SLIDE_CONTENT,
+  PRIMARY_SLIDE_SECONDARY_LINKS,
+} = SLOTS;
+const { ATTRIBUTE_DATA_SLIDE, ATTRIBUTE_ACTIVE_SLIDE } = VARIABLES;
+const { DRAWER_SLIDE_SECONDARY_ACTION } = ELEMENTS;
+
 const DRAWER_SLIDER_PRIMARY_CONTAINER = 'umd-element-drawer-primary-container';
 const DRAWER_SLIDER_PRIMARY_LINKS_CONTAINER =
   'umd-element-drawer-primary-links';
@@ -38,7 +46,7 @@ export const primarySliderStyles = `
 const createPrimaryLinks = ({ element }: { element: UMDNavDrawer }) => {
   const container = document.createElement('div');
   const slotContent = element.querySelector(
-    `[slot="${SLOTS.PRIMARY_SLIDE_LINKS}"]`,
+    `[slot="${PRIMARY_SLIDE_LINKS}"]`,
   ) as HTMLSlotElement;
 
   if (!slotContent) return null;
@@ -64,7 +72,7 @@ const createPrimaryLinks = ({ element }: { element: UMDNavDrawer }) => {
 const createSecondaryLinks = ({ element }: { element: UMDNavDrawer }) => {
   const container = document.createElement('div');
   const slotContent = element.querySelector(
-    `[slot="${SLOTS.PRIMARY_SLIDE_SECONDARY_LINKS}"]`,
+    `[slot="${PRIMARY_SLIDE_SECONDARY_LINKS}"]`,
   ) as HTMLSlotElement;
 
   if (!slotContent) return null;
@@ -78,7 +86,7 @@ const createSecondaryLinks = ({ element }: { element: UMDNavDrawer }) => {
 
     links.forEach((link) => {
       const slideAction = CreateSlideAction({ element, link });
-      slideAction.classList.add(ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION);
+      slideAction.classList.add(DRAWER_SLIDE_SECONDARY_ACTION);
       container.appendChild(slideAction);
     });
 
@@ -89,7 +97,7 @@ const createSecondaryLinks = ({ element }: { element: UMDNavDrawer }) => {
 };
 
 const createAdditonalContent = () => {
-  const contentSlot = MakeSlot({ type: SLOTS.PRIMARY_SLIDE_CONTENT });
+  const contentSlot = MakeSlot({ type: PRIMARY_SLIDE_CONTENT });
 
   if (contentSlot) return contentSlot;
 
@@ -103,10 +111,10 @@ export const CreatePrimarySlide = ({ element }: { element: UMDNavDrawer }) => {
   const additionalContent = createAdditonalContent();
 
   sliderContainer.classList.add(DRAWER_SLIDER_PRIMARY_CONTAINER);
-  sliderContainer.setAttribute(`${VARIABLES.ATTRIBUTE_DATA_SLIDE}`, '');
+  sliderContainer.setAttribute(`${ATTRIBUTE_DATA_SLIDE}`, '');
 
   if (!element._currentSlide) {
-    sliderContainer.setAttribute(`${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}`, '');
+    sliderContainer.setAttribute(`${ATTRIBUTE_ACTIVE_SLIDE}`, '');
     element._currentSlide = sliderContainer;
   }
 

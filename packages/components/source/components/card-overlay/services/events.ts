@@ -1,6 +1,10 @@
 import { UMDCardOverlayElement } from '../index';
 import { VARIABLES, ELEMENTS, SLOTS } from '../globals';
 
+const { ATTR_IMAGE } = VARIABLES;
+const { TEXT } = SLOTS;
+const { CARD_OVERLAY_TEXT } = ELEMENTS;
+
 const CONTAINER_WIDTH_TEXT_BREAKPOINT_MAX = 600;
 const CONTAINER_WIDTH_TEXT_BREAKPOINT_LARGE = 400;
 const TEXT_CHARACTER_LIMIT_SMALL = 80;
@@ -9,9 +13,9 @@ const TEXT_CHARACTER_LIMIT_MAX = 232;
 
 const TruncateText = ({ element }: { element: UMDCardOverlayElement }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
-  const hasImage = element.hasAttribute(VARIABLES.ATTR_IMAGE);
-  const textSlot = element.querySelector(`[slot=${SLOTS.TEXT}]`);
-  const textNode = shadowRoot.querySelector(`.${ELEMENTS.CARD_OVERLAY_TEXT}`);
+  const hasImage = element.hasAttribute(ATTR_IMAGE);
+  const textSlot = element.querySelector(`[slot=${TEXT}]`);
+  const textNode = shadowRoot.querySelector(`.${CARD_OVERLAY_TEXT}`);
 
   if (hasImage && textSlot && textNode) {
     const containerWidth = element.offsetWidth;

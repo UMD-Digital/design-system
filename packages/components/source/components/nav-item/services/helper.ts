@@ -2,11 +2,14 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 import { ElementType } from 'components/nav-item';
 import { SLOTS, ELEMENTS } from 'components/nav-item/globals';
 
+const { DROPDOWN_LINKS } = SLOTS;
+const { DROPDOWN_CONTAINER } = ELEMENTS;
+
 const BOUNDS_SHIFT = 140;
 
 export const OnLoadDropdownSpans = ({ element }: { element: ElementType }) => {
   const dropdownSlot = element.querySelector(
-    `[slot=${SLOTS.DROPDOWN_LINKS}]`,
+    `[slot=${DROPDOWN_LINKS}]`,
   ) as HTMLSlotElement;
 
   if (!dropdownSlot) return;
@@ -33,7 +36,7 @@ export const DropdownPositionPerViewPort = ({
   const elementBounds = element.getBoundingClientRect();
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const dropdownContainer = shadowRoot.querySelector(
-    `.${ELEMENTS.DROPDOWN_CONTAINER}`,
+    `.${DROPDOWN_CONTAINER}`,
   ) as HTMLDivElement;
   const width = element.offsetWidth;
 

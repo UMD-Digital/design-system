@@ -22,6 +22,11 @@ const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { InterativeMedium, SansSmaller } = Typography;
 
+const { medium, large } = BREAKPOINTS;
+const { ELEMENT_WRAPPER } = ELEMENTS;
+const { THEME_OPTION_LIGHT } = VARIABLES;
+const { CONTACT_HEADLINE, CONTACT_ADDRESS, CONTACT_LINKS } = SLOTS;
+
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_HEADLINE = 'umd-footer-contact-list-headline';
 const CONTACT_LIST_ADDRESS = 'umd-footer-contact-list-address';
@@ -47,13 +52,13 @@ const DEFAULT_PHONE = {
 
 // prettier-ignore
 const socialOverwriteStyles = `
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${large - 1}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       margin-top: ${Spacing.md};
     }
@@ -83,13 +88,13 @@ const HeadlineStyles = `
     },
   })}
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a {
     color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a`]:
+      [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -137,7 +142,7 @@ const LinkListStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${CONTACT_LINKS_LIST} a`]:
+      [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LINKS_LIST} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -162,7 +167,7 @@ const LinkListStyles = `
     left: 0;
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a:not(:first-child):before {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] a:not(:first-child):before {
     background-color: ${Colors.black};
   }
 `;
@@ -173,13 +178,13 @@ export const ContactContainerStyles = `
     background-color: currnetColor;
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
+  @container umd-footer (max-width: ${medium - 1}px) {
     .${CONTACT_CONTAINER} {
       padding-top: ${Spacing['md']};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${CONTACT_CONTAINER} {
       padding-left: ${Spacing['2xl']};
     }
@@ -296,11 +301,11 @@ export const CreateContactContainer = ({
   const socialContainer = CreateSocialCampaignColumns({ element });
   const slotList = [
     {
-      slotRef: SLOTS.CONTACT_HEADLINE,
+      slotRef: CONTACT_HEADLINE,
       create: CreateSlotHeadline,
     },
-    { slotRef: SLOTS.CONTACT_ADDRESS, create: CreateSlotContactAddress },
-    { slotRef: SLOTS.CONTACT_LINKS, create: CreateSlotContactLinks },
+    { slotRef: CONTACT_ADDRESS, create: CreateSlotContactAddress },
+    { slotRef: CONTACT_LINKS, create: CreateSlotContactLinks },
   ];
   const hasSlot = slotList.some(
     ({ slotRef }) =>

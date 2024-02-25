@@ -6,27 +6,30 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { Colors, Spacing } = Tokens;
 
+const { ATTRIBUTE_PARENT_REF, ATTRIBUTE_CHILD_REF } = VARIABLES;
+const { DRAWER_SLIDE_ACTION, DRAWER_SLIDE_ACTION_LINK } = ELEMENTS;
+
 const DRAWER_SLIDE_ACTION_BUTTON = 'umd-element-drawer-slide-action-button';
 
 // prettier-ignore
 const anchorStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}`]: Typography.SansMedium,
+      [`.${DRAWER_SLIDE_ACTION_LINK}`]: Typography.SansMedium,
     },
   })}
 
-  .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK} {
+  .${DRAWER_SLIDE_ACTION_LINK} {
     line-height: 1.3em;
   }
 
-  .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK} {
+  .${DRAWER_SLIDE_ACTION_LINK} {
     font-weight: 700;
     transition: color 0.3s ease-in-out;
   }
 
-  .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}:hover,
-  .${ELEMENTS.DRAWER_SLIDE_ACTION_LINK}:focus {
+  .${DRAWER_SLIDE_ACTION_LINK}:hover,
+  .${DRAWER_SLIDE_ACTION_LINK}:focus {
     color: ${Colors.red};
   }
 `;
@@ -59,7 +62,7 @@ const buttonStyles = `
 
 // prettier-ignore
 export const slideActionStyles = `
-  .${ELEMENTS.DRAWER_SLIDE_ACTION} {
+  .${DRAWER_SLIDE_ACTION} {
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -80,12 +83,12 @@ const CreateSlideButton = ({
   element: UMDNavDrawer;
   link: HTMLAnchorElement;
 }) => {
-  const childReference = link.getAttribute(VARIABLES.ATTRIBUTE_CHILD_REF);
+  const childReference = link.getAttribute(ATTRIBUTE_CHILD_REF);
 
   if (!childReference) return null;
 
   const doesReferenceExist = element.querySelector(
-    `[${VARIABLES.ATTRIBUTE_PARENT_REF}="${childReference}"]`,
+    `[${ATTRIBUTE_PARENT_REF}="${childReference}"]`,
   );
 
   if (!doesReferenceExist) {
@@ -117,9 +120,9 @@ export const CreateSlideAction = ({
   const actionContainer = document.createElement('div');
   const button = CreateSlideButton({ element, link });
 
-  actionContainer.classList.add(ELEMENTS.DRAWER_SLIDE_ACTION);
+  actionContainer.classList.add(DRAWER_SLIDE_ACTION);
 
-  link.classList.add(ELEMENTS.DRAWER_SLIDE_ACTION_LINK);
+  link.classList.add(DRAWER_SLIDE_ACTION_LINK);
   actionContainer.appendChild(link);
 
   if (button) actionContainer.appendChild(button);

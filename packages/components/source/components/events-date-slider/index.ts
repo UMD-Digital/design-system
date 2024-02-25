@@ -11,6 +11,8 @@ import { EventResize, EventSwipe } from './services/events';
 import { ButtonVisibilityLogic, SizeDatesElements } from './services/helpers';
 import { ELEMENTS } from './globals';
 
+const { CONTAINER_DARK_CLASS } = ELEMENTS;
+
 export const ELEMENT_NAME = 'umd-element-events-date-slider';
 export type ELEMENT_TYPE = UMDEventsDateSliderElement;
 export class UMDEventsDateSliderElement extends HTMLElement {
@@ -53,7 +55,7 @@ export class UMDEventsDateSliderElement extends HTMLElement {
     };
 
     if (theme === 'dark') {
-      container.classList.add(ELEMENTS.CONTAINER_DARK_CLASS);
+      container.classList.add(CONTAINER_DARK_CLASS);
     }
 
     element._shadow.appendChild(container);

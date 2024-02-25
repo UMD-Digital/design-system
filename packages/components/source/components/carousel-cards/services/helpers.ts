@@ -3,15 +3,19 @@ import { ELEMENT_TYPE } from '../index';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
 
 const { Spacing } = Tokens;
+const { CARDS } = SLOTS;
+const { CAROUSEL_CONTAINER_WRAPPER } = ELEMENTS;
+const { TABLET_COUNT, MOBILE_COUNT } = VARIABLES;
+const { cardBreak } = BREAKPOINTS;
 
 const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
 export const IsTabletView = ({ shadowRoot }: { shadowRoot: ShadowRoot }) => {
   const wrapper = shadowRoot.querySelector(
-    `.${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER}`,
+    `.${CAROUSEL_CONTAINER_WRAPPER}`,
   ) as HTMLElement;
 
-  return wrapper.offsetWidth > BREAKPOINTS.cardBreak;
+  return wrapper.offsetWidth > cardBreak;
 };
 
 export const GetCarouselWrapperSize = ({
@@ -20,7 +24,7 @@ export const GetCarouselWrapperSize = ({
   shadowRoot: ShadowRoot;
 }) => {
   const wrapper = shadowRoot.querySelector(
-    `.${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER}`,
+    `.${CAROUSEL_CONTAINER_WRAPPER}`,
   ) as HTMLElement;
 
   return wrapper.offsetWidth;
@@ -32,14 +36,14 @@ export const GetCarouselCount = ({
   shadowRoot: ShadowRoot;
 }) => {
   const isShowTwo = IsTabletView({ shadowRoot });
-  return isShowTwo ? VARIABLES.TABLET_COUNT : VARIABLES.MOBILE_COUNT;
+  return isShowTwo ? TABLET_COUNT : MOBILE_COUNT;
 };
 
 export const GetElementSize = ({ element }: { element: ELEMENT_TYPE }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const containerWidth = GetCarouselWrapperSize({ shadowRoot });
   const count = GetCarouselCount({ shadowRoot });
-  const multiplier = count == VARIABLES.TABLET_COUNT ? 1 : 0.8;
+  const multiplier = count == TABLET_COUNT ? 1 : 0.8;
   const additonalSpace = spaceBetween / 2;
 
   return (containerWidth / count) * multiplier - additonalSpace;
@@ -53,7 +57,7 @@ export const SetElementSize = ({
   elementSize: number;
 }) => {
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.CARDS}"]`,
+    `[slot="${CARDS}"]`,
   ) as HTMLSlotElement;
   const slotContent = Array.from(cardsSlot.children) as HTMLElement[];
 
@@ -71,7 +75,7 @@ export const SetCarouselSize = ({
 }) => {
   const elementSizeTotal = elementSize * 2 + spaceBetween;
   const cardsSlot = element.querySelector(
-    `[slot="${SLOTS.CARDS}"]`,
+    `[slot="${CARDS}"]`,
   ) as HTMLSlotElement;
 
   cardsSlot.style.width = `${elementSizeTotal}px`;

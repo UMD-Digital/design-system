@@ -4,6 +4,8 @@ import { ELEMENTS } from 'components/footer/globals';
 import { CreateMain, MainContainerStyles } from './main-section';
 import { CreateUtility, UtilityContainerStyles } from './utility-section';
 
+const { ELEMENT_WRAPPER } = ELEMENTS;
+
 export const ComponentStyles = `
   :host {
     display: none;
@@ -12,7 +14,7 @@ export const ComponentStyles = `
 
   ${Reset}
 
-  .${ELEMENTS.ELEMENT_WRAPPER} {
+  .${ELEMENT_WRAPPER} {
     container: umd-footer / inline-size;
   }
   ${MainContainerStyles}
@@ -21,7 +23,7 @@ export const ComponentStyles = `
 
 export const CreateElement = ({ element }: { element: ELEMENT_TYPE }) => {
   const wrapper = document.createElement('div');
-  wrapper.classList.add(ELEMENTS.ELEMENT_WRAPPER);
+  wrapper.classList.add(ELEMENT_WRAPPER);
 
   wrapper.setAttribute('theme', element._theme);
   wrapper.setAttribute('type', element._type);

@@ -7,6 +7,8 @@ import { SlotDefaultStyling } from 'helpers/ui';
 const { Text } = Fields;
 const { Colors } = Tokens;
 
+const { BODY } = SLOTS;
+
 const ALERT_BODY = 'umd-alert-body';
 
 // prettier-ignore
@@ -24,7 +26,7 @@ export const bodyStyles = `
 `;
 
 export const CreateBody = ({ element }: { element: AlertType }) => {
-  const bodySlot = SlotDefaultStyling({ element, slotRef: SLOTS.BODY });
+  const bodySlot = SlotDefaultStyling({ element, slotRef: BODY });
 
   if (bodySlot) {
     bodySlot.classList.add(ALERT_BODY);

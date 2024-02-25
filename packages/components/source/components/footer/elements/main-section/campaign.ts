@@ -5,6 +5,8 @@ import { VARIABLES } from 'components/footer/globals';
 
 const { Spacing } = Tokens;
 
+const { THEME_OPTION_LIGHT } = VARIABLES;
+
 export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
 
 export const CampaignStyles = `
@@ -28,7 +30,7 @@ export const CreateCampaignRow = ({ element }: { element: ELEMENT_TYPE }) => {
   );
 
   link.innerHTML =
-    theme === VARIABLES.THEME_OPTION_LIGHT ? CAMPAIGN_LOGO_DARK : CAMPAIGN_LOGO;
+    theme === THEME_OPTION_LIGHT ? CAMPAIGN_LOGO_DARK : CAMPAIGN_LOGO;
 
   container.classList.add(CAMPAIGN_COLUMN_WRAPPER);
   container.appendChild(link);

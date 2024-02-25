@@ -7,6 +7,9 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { Colors, Spacing } = Tokens;
 
+const { ATTRIBUTE_ACTIVE_SLIDE, ATTRIBUTE_ACTIVE_SELECTED } = VARIABLES;
+const { DRAWER_SLIDE_SECONDARY_ACTION } = ELEMENTS;
+
 const DRAWER_SLIDER_CONTAINER = 'umd-element-drawer-slider-container';
 const DRAWER_SLIDER = 'umd-element-drawer-slider';
 const DRAWER_DECORATIVE_LINE = 'umd-element-drawer-decorative-line';
@@ -46,17 +49,17 @@ const sliderStyles = `
     display: none;
   }
 
-  .${DRAWER_SLIDER} > *[${VARIABLES.ATTRIBUTE_ACTIVE_SLIDE}] {
+  .${DRAWER_SLIDER} > *[${ATTRIBUTE_ACTIVE_SLIDE}] {
     display: block;
   }
 `;
 
 const selectedLinkStyles = `
-  .${DRAWER_SLIDER_CONTAINER} a[${VARIABLES.ATTRIBUTE_ACTIVE_SELECTED}] {
+  .${DRAWER_SLIDER_CONTAINER} a[${ATTRIBUTE_ACTIVE_SELECTED}] {
     position: relative;
   }
 
-  .${DRAWER_SLIDER_CONTAINER} a[${VARIABLES.ATTRIBUTE_ACTIVE_SELECTED}]:before {
+  .${DRAWER_SLIDER_CONTAINER} a[${ATTRIBUTE_ACTIVE_SELECTED}]:before {
     content: '';
     position: absolute;
     bottom: 1px;
@@ -70,20 +73,20 @@ const selectedLinkStyles = `
 
 // prettier-ignore
 const secondaryLinkStyles = `
-  .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} {
+  .${DRAWER_SLIDE_SECONDARY_ACTION} {
     border-bottom: none;
     margin-bottom: ${Spacing.xs};
     padding-bottom: ${Spacing.xs};
   }
 
-  .${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION}:last-child {
+  .${DRAWER_SLIDE_SECONDARY_ACTION}:last-child {
     margin-bottom: 0;
     padding-bottom: 0;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.DRAWER_SLIDE_SECONDARY_ACTION} a`]: Typography.SansSmall,
+      [`.${DRAWER_SLIDE_SECONDARY_ACTION} a`]: Typography.SansSmall,
     },
   })}
 `;

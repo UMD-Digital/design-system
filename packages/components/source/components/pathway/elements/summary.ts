@@ -14,6 +14,16 @@ const { Ribbon, Text } = Fields;
 const { FlexRows } = Layout;
 const { SansLargest } = Typography;
 
+const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
+const { medium, large } = BREAKPOINTS;
+const { PATHWAY_CONTAINER } = ELEMENTS;
+const {
+  ATTRIBUTE_IMAGE,
+  ATTRIBUTE_IMAGE_POSITION,
+  ATTRIBUTE_HIGHLIGHT,
+  ATTRIBUTE_THEME,
+} = VARIABLES;
+
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =
   'umd-pathway-summary-column-container-wrapper';
@@ -27,26 +37,26 @@ const SUMMARY_ACTIONS_CONTAINER =
 
 // prettier-ignore
 const ThemeStyles = `
-  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${SUMMARY_HEADLINE_CONTAINER},
-  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_THEME}] .${SUMMARY_TEXT_CONTAINER} * {
+  .${PATHWAY_CONTAINER}[${ATTRIBUTE_THEME}] .${SUMMARY_HEADLINE_CONTAINER},
+  .${PATHWAY_CONTAINER}[${ATTRIBUTE_THEME}] .${SUMMARY_TEXT_CONTAINER} * {
     color: ${Colors.white};
   }
 `
 
 // prettier-ignore
 const PositionStyles = `
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
-    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE_POSITION}="right"] .${SUMMARY_CONTAINER} {
+  @container umd-pathway (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="right"] .${SUMMARY_CONTAINER} {
       order: 1;
     }
 
-    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE_POSITION}="right"] .${SUMMARY_CONTAINER_WRAPPER} {
+    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="right"] .${SUMMARY_CONTAINER_WRAPPER} {
       padding-left: 0;
     }
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
-    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE_POSITION}="left"] .${SUMMARY_CONTAINER_WRAPPER} {
+  @container umd-pathway (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="left"] .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: 0;
     }
   }
@@ -54,18 +64,18 @@ const PositionStyles = `
 
 // prettier-ignore
 const WithImageStyles = `
-  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+  .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
     padding: ${Spacing.md};
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
-    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+  @container umd-pathway (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
       padding: ${Spacing['4xl']} ${Spacing['2xl']};
     }
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
-    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+  @container umd-pathway (min-width: ${large}px) {
+    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
       padding: ${Spacing['8xl']} ${Spacing['6xl']};
     }
   }
@@ -73,18 +83,18 @@ const WithImageStyles = `
 
 // prettier-ignore
 const WithHighlightStyles = `
-  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+  .${PATHWAY_CONTAINER}[${ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
     padding-bottom: ${Spacing.md};
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
-    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+  @container umd-pathway (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}[${ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: ${Spacing['4xl']};
     }
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.large}px) {
-    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+  @container umd-pathway (min-width: ${large}px) {
+    .${PATHWAY_CONTAINER}[${ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: ${Spacing['6xl']};
     }
   }
@@ -131,7 +141,7 @@ const TextStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+  @container umd-pathway (min-width: ${medium}px) {
     * + .${SUMMARY_TEXT_CONTAINER} {
       margin-top: ${Spacing.md};
     }
@@ -154,7 +164,7 @@ const ActionStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+  @container umd-pathway (min-width: ${medium}px) {
     * + .${SUMMARY_ACTIONS_CONTAINER} {
       margin-top: ${Spacing.lg};
     }
@@ -187,10 +197,10 @@ export const STYLES_PATHWAY_SUMMARY_COLUMN = `
 export const CreateSummaryColumn = ({ element }: { element: ELEMENT_TYPE }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const eyebrowSlot = SlotDefaultStyling({ element, slotRef: SLOTS.EYEBROW });
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
-  const textSlot = SlotDefaultStyling({ element, slotRef: SLOTS.TEXT });
-  const actionSlot = SlotDefaultStyling({ element, slotRef: SLOTS.ACTIONS });
+  const eyebrowSlot = SlotDefaultStyling({ element, slotRef: EYEBROW });
+  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
+  const textSlot = SlotDefaultStyling({ element, slotRef: TEXT });
+  const actionSlot = SlotDefaultStyling({ element, slotRef: ACTIONS });
 
   wrapper.classList.add(SUMMARY_CONTAINER_WRAPPER);
 

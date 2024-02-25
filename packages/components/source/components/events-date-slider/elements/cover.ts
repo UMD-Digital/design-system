@@ -3,6 +3,9 @@ import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
 
 const { Colors } = Tokens;
 
+const { tablet } = BREAKPOINTS;
+const { CONTAINER_DARK_CLASS } = ELEMENTS;
+
 const COVER_CLASS = 'umd-element-date-slider-date-lock-cover';
 
 export const CoverStyles = `
@@ -16,14 +19,14 @@ export const CoverStyles = `
     background-color: ${Colors.gray.lighter};
   }
 
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
+  @container dates-slider (min-width: ${tablet}px) {
   .${COVER_CLASS} {
       width: 40vw;
       left: calc(100% - 1px);
     }
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} .${COVER_CLASS} {
+  .${CONTAINER_DARK_CLASS} .${COVER_CLASS} {
     background-color: ${Colors.gray.darker};
   }
 `;

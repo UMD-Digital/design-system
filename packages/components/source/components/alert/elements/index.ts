@@ -11,6 +11,9 @@ import { CreateCta, ctaStyles } from './cta';
 
 const { Colors, Spacing } = Tokens;
 
+const { small } = BREAKPOINTS;
+const { ICON_CLASS } = ELEMENTS;
+
 export const ELEMENT_NAME = 'umd-element-alert';
 
 const CONTAINER_CLASS = 'umd-element-alert-container';
@@ -21,7 +24,7 @@ const AlertStyles = `
     border: solid 4px ${Colors.gold} !important;
   }
 
-  .${CONTAINER_CLASS}[data-type="alert"] .${ELEMENTS.ICON_CLASS} svg circle {
+  .${CONTAINER_CLASS}[data-type="alert"] .${ICON_CLASS} svg circle {
     fill: ${Colors.gold} !important;
   }
 `;
@@ -31,7 +34,7 @@ const NotificationStyles = `
     border: solid 4px #2f7eda !important;
   }
 
-  .${CONTAINER_CLASS}[data-type="notification"] .${ELEMENTS.ICON_CLASS} svg circle {
+  .${CONTAINER_CLASS}[data-type="notification"] .${ICON_CLASS} svg circle {
     fill: #2f7eda !important;
   }
 `;
@@ -41,7 +44,7 @@ const EmergencyStyles = `
     border: solid 4px ${Colors.red} !important;
   }
 
-  .${CONTAINER_CLASS}[data-type="emergency"] .${ELEMENTS.ICON_CLASS} svg circle  {
+  .${CONTAINER_CLASS}[data-type="emergency"] .${ICON_CLASS} svg circle  {
     fill: ${Colors.red} !important;
   }
 `;
@@ -53,7 +56,7 @@ const ButtonStyles = `
     right: ${Spacing.lg};
   }
 
-  @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
+  @container umd-alert (max-width: ${small}px) {
     .${CLOSE_BUTTON_CLASS} {
       top: ${Spacing.sm};
       right: ${Spacing.sm};
@@ -62,16 +65,16 @@ const ButtonStyles = `
 `;
 
 const IconStyles = `
-  .${CONTAINER_CLASS}[data-icon="true"] .${ELEMENTS.ICON_CLASS} {
+  .${CONTAINER_CLASS}[data-icon="true"] .${ICON_CLASS} {
     display: block;
   }
 
-  .${CONTAINER_CLASS}[data-icon="false"] .${ELEMENTS.ICON_CLASS} {
+  .${CONTAINER_CLASS}[data-icon="false"] .${ICON_CLASS} {
     display: none;
   }
 
-  @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
-    :host .${ELEMENTS.ICON_CLASS} {
+  @container umd-alert (max-width: ${small}px) {
+    :host .${ICON_CLASS} {
       position: absolute;
       top: -20px;
     }
@@ -100,7 +103,7 @@ export const ComponentStyles = `
     }
   }
 
-  @container umd-alert (max-width: ${BREAKPOINTS.small}px) {
+  @container umd-alert (max-width: ${small}px) {
   .${CONTAINER_CLASS} {
       padding-right: ${Spacing.lg};
     }
@@ -124,7 +127,7 @@ export const ComponentStyles = `
 const CreateIcon = () => {
   const iconWrapper = document.createElement('div');
 
-  iconWrapper.classList.add(ELEMENTS.ICON_CLASS);
+  iconWrapper.classList.add(ICON_CLASS);
   iconWrapper.innerHTML = NOTIFICATION_ICON;
 
   return iconWrapper;

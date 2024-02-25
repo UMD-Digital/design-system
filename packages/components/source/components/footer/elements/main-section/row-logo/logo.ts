@@ -10,32 +10,36 @@ import {
 
 const { Spacing } = Tokens;
 
+const { large } = BREAKPOINTS;
+const { THEME_OPTION_LIGHT, VERSION_TYPE_SIMPLE } = VARIABLES;
+const { ELEMENT_WRAPPER } = ELEMENTS;
+
 const LOGO_CONTAINER = 'umd-footer-logo-container';
 const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
 
 // prettier-ignore
 const ctaOverwriteStyles = `
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${large - 1}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       margin-top: ${Spacing.md};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
-    .${ELEMENTS.ELEMENT_WRAPPER}[type="${VARIABLES.VERSION_TYPE_SIMPLE}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
+  @container umd-footer (max-width: ${large - 1}px) {
+    .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
   }
 `;
 
 const campaignOverwriteStyles = `
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${LOGO_CONTAINER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: none;
     }
@@ -75,7 +79,7 @@ export const CreateLogoContainer = ({ element }: { element: ELEMENT_TYPE }) => {
   );
 
   logoLink.innerHTML =
-    theme === VARIABLES.THEME_OPTION_LIGHT ? `${LIGHT_LOGO}` : `${DARK_LOGO}`;
+    theme === THEME_OPTION_LIGHT ? `${LIGHT_LOGO}` : `${DARK_LOGO}`;
 
   container.classList.add(LOGO_CONTAINER);
   container.appendChild(logoLink);

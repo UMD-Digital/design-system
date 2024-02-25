@@ -7,29 +7,32 @@ import { EventSlideDates } from 'components/events-date-slider/services/events';
 
 const { Colors, Spacing } = Tokens;
 
+const { tablet } = BREAKPOINTS;
+const { CONTAINER_DARK_CLASS, ARROW_CLASS } = ELEMENTS;
+
 const FORWARD_ARROW_CLASS = 'umd-element-date-slider-forward-arrow';
 const BACK_ARROW_CLASS = 'umd-element-date-slider-back-arrow';
 
 const darkThemeStyles = `
-  .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} {
+  .${CONTAINER_DARK_CLASS} .${ARROW_CLASS} {
     background-color: ${Colors.gray.dark};
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS} svg {
+  .${CONTAINER_DARK_CLASS} .${ARROW_CLASS} svg {
     fill: ${Colors.white}
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover {
+  .${CONTAINER_DARK_CLASS} .${ARROW_CLASS}:hover {
     background-color: ${Colors.white}
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} .${ELEMENTS.ARROW_CLASS}:hover svg {
+  .${CONTAINER_DARK_CLASS} .${ARROW_CLASS}:hover svg {
     fill: ${Colors.black}
   }
 `;
 
 export const ButtonStyles = `
-  .${ELEMENTS.ARROW_CLASS} {
+  .${ARROW_CLASS} {
     border: none;
     width: 32px;
     height: 32px;
@@ -44,30 +47,30 @@ export const ButtonStyles = `
     z-index: 99;
   }
 
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    .${ELEMENTS.ARROW_CLASS} {
+  @container dates-slider (min-width: ${tablet}px) {
+    .${ARROW_CLASS} {
       width: 48px;
       height: 48px;
     }
   }
 
-  .${ELEMENTS.ARROW_CLASS}:hover {
+  .${ARROW_CLASS}:hover {
     background-color: ${Colors.black};
   }
 
-  .${ELEMENTS.ARROW_CLASS}:hover svg {
+  .${ARROW_CLASS}:hover svg {
     fill: ${Colors.white};
   }
 
-  .${ELEMENTS.ARROW_CLASS} svg {
+  .${ARROW_CLASS} svg {
     transition: fill .5s;
     fill: ${Colors.black};
     width: 16px;
     height: 6px;
   }
 
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    .${ELEMENTS.ARROW_CLASS} svg {
+  @container dates-slider (min-width: ${tablet}px) {
+    .${ARROW_CLASS} svg {
       width: 24px;
       height: 8px;
     }
@@ -77,7 +80,7 @@ export const ButtonStyles = `
     left: 0;
   }
 
-  @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
+  @container dates-slider (max-width: ${tablet - 1}px) {
     .${BACK_ARROW_CLASS} {
       left: -24px;
       top: ${Spacing.xs};
@@ -88,7 +91,7 @@ export const ButtonStyles = `
     right: 0;
   }
 
-  @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
+  @container dates-slider (max-width: ${tablet - 1}px) {
     .${FORWARD_ARROW_CLASS} {
       right: -24px;
       top: ${Spacing.xs};
@@ -102,7 +105,7 @@ export const CreateBackButton = ({ element }: { element: ELEMENT_TYPE }) => {
   const button = document.createElement('button');
 
   button.innerHTML = BACK_ARROW_ICON;
-  button.classList.add(ELEMENTS.ARROW_CLASS);
+  button.classList.add(ARROW_CLASS);
   button.classList.add(BACK_ARROW_CLASS);
   button.style.display = 'none';
   button.setAttribute('type', 'button');
@@ -124,7 +127,7 @@ export const CreateForwardButton = ({ element }: { element: ELEMENT_TYPE }) => {
   const button = document.createElement('button');
 
   button.innerHTML = FORWARD_ARROW_ICON;
-  button.classList.add(ELEMENTS.ARROW_CLASS);
+  button.classList.add(ARROW_CLASS);
   button.classList.add(FORWARD_ARROW_CLASS);
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'see next date');

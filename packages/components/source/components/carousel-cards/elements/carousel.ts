@@ -5,8 +5,11 @@ import {
   BREAKPOINTS,
   ELEMENTS,
 } from 'components/carousel-cards/globals';
-
 import { CreateButton, ButtonStyles } from './button';
+
+const { CARDS } = SLOTS;
+const { large } = BREAKPOINTS;
+const { CAROUSEL_CONTAINER_WRAPPER } = ELEMENTS;
 
 const CAROUSEL_CONTAINER = 'umd-carousel-cards-carousel-container';
 const CAROUSEL_CONTAINER_LOCK = 'umd-carousel-cards-carousel-container-lock';
@@ -17,25 +20,25 @@ export const CarouselContainerStyles = `
     position: relative;
   }
 
-  @container umd-carousel-card (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-carousel-card (max-width: ${large - 1}px) {
     .${CAROUSEL_CONTAINER} {
       padding-bottom: 60px;
     }
   }
 
-  @container umd-carousel-card (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-carousel-card (min-width: ${large}px) {
     .${CAROUSEL_CONTAINER} {
       width: 60%;
     }
   }
 
-  .${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER} {
+  .${CAROUSEL_CONTAINER_WRAPPER} {
     overflow: hidden;
     padding-right: 0;
   }
 
-  @media (min-width: ${BREAKPOINTS.large}px) {
-    .${ELEMENTS.CAROUSEL_CONTAINER_WRAPPER}  {
+  @media (min-width: ${large}px) {
+    .${CAROUSEL_CONTAINER_WRAPPER}  {
       max-width: inherit;
       padding: 0;
     }
@@ -51,13 +54,13 @@ export const CreateCarouselColumn = ({
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const slot = MakeSlot({ type: SLOTS.CARDS });
+  const slot = MakeSlot({ type: CARDS });
   const fowardButton = CreateButton({ element });
   const backwardsButton = CreateButton({ element, isRight: false });
 
   container.classList.add(CAROUSEL_CONTAINER);
   wrapper.classList.add(CAROUSEL_CONTAINER_LOCK);
-  wrapper.classList.add(ELEMENTS.CAROUSEL_CONTAINER_WRAPPER);
+  wrapper.classList.add(CAROUSEL_CONTAINER_WRAPPER);
 
   wrapper.appendChild(slot);
   container.appendChild(backwardsButton);

@@ -12,6 +12,10 @@ import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
 
 const { Colors } = Tokens;
 
+const { tablet } = BREAKPOINTS;
+const { CONTAINER_DARK_CLASS } = ELEMENTS;
+const { DATE_SLOT_NAME } = SLOTS;
+
 const CONTAINER_CLASS = 'umd-element-date-slider-container';
 const CONTAINER_WRAPPER_CLASS = 'umd-element-date-slider-container-wrapper';
 
@@ -33,17 +37,17 @@ export const ContainerStyles = `
     }
   }
 
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
+  @container dates-slider (min-width: ${tablet}px) {
     .${CONTAINER_WRAPPER_CLASS} {
       padding: 40px;
     }
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} .${CONTAINER_WRAPPER_CLASS} {
+  .${CONTAINER_DARK_CLASS} .${CONTAINER_WRAPPER_CLASS} {
     background-color: ${Colors.gray.darker};
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} * {
+  .${CONTAINER_DARK_CLASS} * {
     color: #fff;
   }
 
@@ -62,7 +66,7 @@ export const ComponentStyles = `
 
 export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
   const slider = element.querySelector(
-    `[slot=${SLOTS.DATE_SLOT_NAME}]`,
+    `[slot=${DATE_SLOT_NAME}]`,
   ) as HTMLDivElement;
 
   slider.style.display = 'flex';

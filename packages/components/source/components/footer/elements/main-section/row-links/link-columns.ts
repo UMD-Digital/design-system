@@ -16,6 +16,11 @@ const { Colors, Spacing, FontWeight } = Tokens;
 const { LinkLineSlide } = Animations;
 const { SansSmaller, InterativeMedium } = Typography;
 
+const { medium, large } = BREAKPOINTS;
+const { ELEMENT_WRAPPER } = ELEMENTS;
+const { THEME_OPTION_LIGHT } = VARIABLES;
+const { LINK_COLUMN_ONE, LINK_COLUMN_TWO, LINK_COLUMN_THREE } = SLOTS;
+
 const HEADLINE_ATTRIBUTE = 'data-headline';
 const HEADLINE_ATTRIBUTE_EMPTY = 'data-empty';
 const LINK_TYPE = 'link';
@@ -132,7 +137,7 @@ const HeadlineStyles = `
     font-weight: 700;
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${large - 1}px) {
     .${ROW_LINKS_COLUMN_HEADLINE}[${HEADLINE_ATTRIBUTE_EMPTY}="true"] {
       display: none;
     }
@@ -164,7 +169,7 @@ const LinkStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${ROW_LINKS_COLUMN_LINKS} a`]:
+      [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LINKS_COLUMN_LINKS} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -172,7 +177,7 @@ const LinkStyles = `
 
 // prettier-ignore
 const ColumnWrapper = `
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${medium}px) and (max-width: ${large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -180,19 +185,19 @@ const ColumnWrapper = `
     }
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.medium - 1}px) {
+  @container umd-footer (max-width: ${medium - 1}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
       margin-bottom: ${Spacing.lg};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       padding-right: ${Spacing.xs};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
       margin-left: ${Spacing.lg};
       padding-left: ${Spacing.lg};
@@ -200,7 +205,7 @@ const ColumnWrapper = `
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${medium}px) and (max-width: ${large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} > p {
       grid-column: 1 / span 2;
     }
@@ -209,13 +214,13 @@ const ColumnWrapper = `
 
 // prettier-ignore
 export const LinkColumnStyles = `
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${large - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
       padding-top: ${Spacing.md};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
       display: flex;
     }
@@ -324,9 +329,9 @@ export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
   const container = document.createElement('div');
 
   const slotList = [
-    { slotRef: SLOTS.LINK_COLUMN_ONE },
-    { slotRef: SLOTS.LINK_COLUMN_TWO },
-    { slotRef: SLOTS.LINK_COLUMN_THREE },
+    { slotRef: LINK_COLUMN_ONE },
+    { slotRef: LINK_COLUMN_TWO },
+    { slotRef: LINK_COLUMN_THREE },
   ];
   const hasSlot = slotList.some(
     ({ slotRef }) =>

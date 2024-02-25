@@ -4,6 +4,7 @@ import { HeroType } from '../index';
 
 const { DEFAULT_ATTR, STACKED_ATTR, OVERLAY_ATTR, MINIMAL_ATTR } = NAMING;
 const { HERO_CONTAINER } = ELEMENTS;
+const { IMAGE } = SLOTS;
 
 const HERO_IMAGE = 'umd-hero-image';
 
@@ -69,10 +70,10 @@ export const STYLES_IMAGE = `
 
 export const CreateImage = ({ element }: { element: HeroType }) => {
   const imageRef = element.querySelector(
-    `[slot="${SLOTS.IMAGE}"]`,
+    `[slot="${IMAGE}"]`,
   ) as HTMLImageElement;
   const container = document.createElement('div');
-  const isProperImage = CheckForImageAlt({ element, slotRef: SLOTS.IMAGE });
+  const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
 
   container.classList.add(HERO_IMAGE);
 

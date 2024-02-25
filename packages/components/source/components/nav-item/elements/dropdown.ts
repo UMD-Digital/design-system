@@ -6,6 +6,10 @@ import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 
 const { Colors, Spacing } = Tokens;
 
+const { DROPDOWN_LINKS } = SLOTS;
+const { DROPDOWN_CONTAINER } = ELEMENTS;
+const { ATTRIBUTE_SELECTED } = VARIABLES;
+
 const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
 const TWO_COLUMN_CONTAINER = 'two-column-container';
 const MAX_COLUMN_ITEMS = 8;
@@ -54,7 +58,7 @@ const linkStyles = `
     display: block;
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}] span:not(.sr-only) {
+  .${DROPDOWN_LIST_CONTAINER} a[${ATTRIBUTE_SELECTED}] span:not(.sr-only) {
     display: inline;
     position: relative;
     background-position: left calc(100% - 0px);
@@ -63,15 +67,15 @@ const linkStyles = `
     background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:hover span,
-  .${DROPDOWN_LIST_CONTAINER} a[${VARIABLES.ATTRIBUTE_SELECTED}]:focus span {
+  .${DROPDOWN_LIST_CONTAINER} a[${ATTRIBUTE_SELECTED}]:hover span,
+  .${DROPDOWN_LIST_CONTAINER} a[${ATTRIBUTE_SELECTED}]:focus span {
     border-bottom: none;
   }
 `
 
 // prettier-ignore
 export const DropdownStyles = `
-  .${ELEMENTS.DROPDOWN_CONTAINER} {
+  .${DROPDOWN_CONTAINER} {
     position: absolute;
     top: 100%;
     left: 50%;
@@ -128,7 +132,7 @@ const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
 
 export const CreateDropdown = ({ element }: { element: ElementType }) => {
   const dropdownSlot = element.querySelector(
-    `[slot=${SLOTS.DROPDOWN_LINKS}]`,
+    `[slot=${DROPDOWN_LINKS}]`,
   ) as HTMLSlotElement;
 
   if (!dropdownSlot) return;
@@ -141,7 +145,7 @@ export const CreateDropdown = ({ element }: { element: ElementType }) => {
   const list = document.createElement('div');
 
   list.classList.add(DROPDOWN_LIST_CONTAINER);
-  container.classList.add(ELEMENTS.DROPDOWN_CONTAINER);
+  container.classList.add(DROPDOWN_CONTAINER);
 
   if (links.length > MAX_COLUMN_ITEMS) {
     list.appendChild(CreateMultipleColumns({ links }));

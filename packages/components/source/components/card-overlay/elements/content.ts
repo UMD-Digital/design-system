@@ -12,6 +12,10 @@ const { Spacing, Colors } = Tokens;
 const { LinkLineSlide } = Animations;
 const { SansMin, SansSmall, SansLarger, Eyebrow } = Typography;
 
+const { EYEBROW, HEADLINE, TEXT, DATE } = SLOTS;
+const { CONTENT_CONTAINER, CARD_OVERLAY_HEADLINE, CARD_OVERLAY_TEXT } =
+  ELEMENTS;
+
 const CARD_OVERLAY_EYEBROW = 'umd-overlay-card-eyebrow';
 const CARD_OVERLAY_DATE = 'umd-overlay-card-date';
 
@@ -32,25 +36,25 @@ const eyebrowStyles = `
 
 // prettier-ignore
 const headlineStyles = `
-  * + .${ELEMENTS.CARD_OVERLAY_HEADLINE} {
+  * + .${CARD_OVERLAY_HEADLINE} {
     margin-top: ${Spacing.min}
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE}`]: SansLarger,
+      [`.${CARD_OVERLAY_HEADLINE}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} *`]: SansLarger,
+      [`.${CARD_OVERLAY_HEADLINE} *`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_HEADLINE} a`]:
+      [`.${CARD_OVERLAY_HEADLINE} a`]:
       LinkLineSlide['.slidein-underline-white'],
     },
   })}
@@ -58,23 +62,23 @@ const headlineStyles = `
 
 // prettier-ignore
 const textStyles = `
-  * + .${ELEMENTS.CARD_OVERLAY_TEXT} {
+  * + .${CARD_OVERLAY_TEXT} {
     margin-top: ${Spacing.sm}
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.CARD_OVERLAY_TEXT} *`]: SansSmall,
+      [`.${CARD_OVERLAY_TEXT} *`]: SansSmall,
     },
   })}
 
-  .${ELEMENTS.CARD_OVERLAY_TEXT} a {
+  .${CARD_OVERLAY_TEXT} a {
     text-decoration: underline;
     transition: color 0.3s ease-in-out;
   }
 
-  .${ELEMENTS.CARD_OVERLAY_TEXT} a:hover,
-  .${ELEMENTS.CARD_OVERLAY_TEXT} a:focus {
+  .${CARD_OVERLAY_TEXT} a:hover,
+  .${CARD_OVERLAY_TEXT} a:focus {
     text-decoration: underline;
     color: ${Colors.red};
   }
@@ -105,7 +109,7 @@ const dateStyles = `
 
 // prettier-ignore
 export const ContentStyles = `
-  .${ELEMENTS.CONTENT_CONTAINER} {
+  .${CONTENT_CONTAINER} {
     position: relative;
     z-index: 9;
   }
@@ -118,12 +122,12 @@ export const ContentStyles = `
 
 export const CreateContent = ({ element }: { element: CardType }) => {
   const container = document.createElement('div');
-  const eyebrowSlot = SlotDefaultStyling({ element, slotRef: SLOTS.EYEBROW });
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
-  const textSlot = SlotDefaultStyling({ element, slotRef: SLOTS.TEXT });
-  const dateSlot = SlotDefaultStyling({ element, slotRef: SLOTS.DATE });
+  const eyebrowSlot = SlotDefaultStyling({ element, slotRef: EYEBROW });
+  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
+  const textSlot = SlotDefaultStyling({ element, slotRef: TEXT });
+  const dateSlot = SlotDefaultStyling({ element, slotRef: DATE });
 
-  container.classList.add(ELEMENTS.CONTENT_CONTAINER);
+  container.classList.add(CONTENT_CONTAINER);
 
   if (eyebrowSlot) {
     eyebrowSlot.classList.add(CARD_OVERLAY_EYEBROW);
@@ -132,12 +136,12 @@ export const CreateContent = ({ element }: { element: CardType }) => {
 
   if (headlineSlot) {
     CheckForAnimationLinkSpan({ element: headlineSlot });
-    headlineSlot.classList.add(ELEMENTS.CARD_OVERLAY_HEADLINE);
+    headlineSlot.classList.add(CARD_OVERLAY_HEADLINE);
     container.appendChild(headlineSlot);
   }
 
   if (textSlot) {
-    textSlot.classList.add(ELEMENTS.CARD_OVERLAY_TEXT);
+    textSlot.classList.add(CARD_OVERLAY_TEXT);
     container.appendChild(textSlot);
   }
 

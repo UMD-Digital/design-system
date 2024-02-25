@@ -1,5 +1,7 @@
 import { ELEMENTS } from '../globals';
 
+const { ACCORDION_BODY, ACCORDION_BODY_WRAPPER } = ELEMENTS;
+
 export const EventToggleExpand = ({
   element,
   expand,
@@ -12,11 +14,11 @@ export const EventToggleExpand = ({
   ) as HTMLButtonElement;
 
   const bodyWrapperElement = element.shadowRoot?.querySelector(
-    `.${ELEMENTS.ACCORDION_BODY_WRAPPER}`,
+    `.${ACCORDION_BODY_WRAPPER}`,
   ) as HTMLElement;
 
   const bodyElement = element.shadowRoot?.querySelector(
-    `.${ELEMENTS.ACCORDION_BODY}`,
+    `.${ACCORDION_BODY}`,
   ) as HTMLElement;
 
   const bodyHeight = bodyElement.offsetHeight;

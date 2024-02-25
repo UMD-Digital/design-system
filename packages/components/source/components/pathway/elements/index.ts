@@ -11,16 +11,26 @@ import { ELEMENT_TYPE } from '../index';
 
 const { Lock } = Layout;
 
+const { medium } = BREAKPOINTS;
+const { PATHWAY_CONTAINER } = ELEMENTS;
+const {
+  ATTRIBUTE_IMAGE,
+  ATTRIBUTE_IMAGE_POSITION,
+  ATTRIBUTE_IMAGE_SCALED,
+  ATTRIBUTE_HIGHLIGHT,
+  ATTRIBUTE_THEME,
+} = VARIABLES;
+
 const PATHWAY_CONTAINER_WRAPPER = 'umd-pathway-container-wrapper';
 
 // prettier-ignore
 const ImageVariation = `
-  .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${PATHWAY_CONTAINER_WRAPPER}{
+  .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE}] .${PATHWAY_CONTAINER_WRAPPER}{
     align-items: initial;
   }
 
-  @container umd-pathway (max-width: ${BREAKPOINTS.medium - 1}px) {
-    .${ELEMENTS.PATHWAY_CONTAINER}[${VARIABLES.ATTRIBUTE_IMAGE}] .${PATHWAY_CONTAINER_WRAPPER} {
+  @container umd-pathway (max-width: ${medium - 1}px) {
+    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE}] .${PATHWAY_CONTAINER_WRAPPER} {
       padding: 0;
     }
   }
@@ -28,7 +38,7 @@ const ImageVariation = `
 
 // prettier-ignore
 const STYLES_CONTAINER = `
-  .${ELEMENTS.PATHWAY_CONTAINER} {
+  .${PATHWAY_CONTAINER} {
     container: umd-pathway / inline-size;
   }
 
@@ -38,14 +48,14 @@ const STYLES_CONTAINER = `
     },
   })}
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+  @container umd-pathway (min-width: ${medium}px) {
     .${PATHWAY_CONTAINER_WRAPPER} {
       display: flex;
       align-items: center;
     }
   }
 
-  @container umd-pathway (min-width: ${BREAKPOINTS.medium}px) {
+  @container umd-pathway (min-width: ${medium}px) {
     .${PATHWAY_CONTAINER_WRAPPER} > * {
       width: 50%;
     }
@@ -76,10 +86,10 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
 
   if (imageColumn) {
     wrapper.appendChild(imageColumn);
-    container.setAttribute(`${VARIABLES.ATTRIBUTE_IMAGE}`, '');
-    container.setAttribute(VARIABLES.ATTRIBUTE_IMAGE_POSITION, imagePosition);
+    container.setAttribute(`${ATTRIBUTE_IMAGE}`, '');
+    container.setAttribute(ATTRIBUTE_IMAGE_POSITION, imagePosition);
     if (!element._isImageScaled) {
-      container.setAttribute(VARIABLES.ATTRIBUTE_IMAGE_SCALED, 'false');
+      container.setAttribute(ATTRIBUTE_IMAGE_SCALED, 'false');
     }
   }
 
@@ -88,13 +98,13 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
 
   if (!imageColumn && highlightColumn) {
     wrapper.appendChild(highlightColumn);
-    container.setAttribute(`${VARIABLES.ATTRIBUTE_HIGHLIGHT}`, '');
+    container.setAttribute(`${ATTRIBUTE_HIGHLIGHT}`, '');
     if (element._isThemeDark) {
-      container.setAttribute(VARIABLES.ATTRIBUTE_THEME, '');
+      container.setAttribute(ATTRIBUTE_THEME, '');
     }
   }
 
-  container.classList.add(ELEMENTS.PATHWAY_CONTAINER);
+  container.classList.add(PATHWAY_CONTAINER);
   container.appendChild(wrapper);
   return container;
 };

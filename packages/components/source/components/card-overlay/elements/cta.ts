@@ -5,18 +5,21 @@ import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
 const { Spacing } = Tokens;
 
+const { CTA } = SLOTS;
+const { CARD_OVERLAY_CONTAINER_CTA } = ELEMENTS;
+
 // prettier-ignore
 export const CtaStyles = `
-  .${ELEMENTS.CARD_OVERLAY_CONTAINER_CTA} {
+  .${CARD_OVERLAY_CONTAINER_CTA} {
     margin-top: ${Spacing.sm};
   }
 `;
 
 export const CreateCta = ({ element }: { element: CardType }) => {
-  const ctaSlot = SlotDefaultStyling({ element, slotRef: SLOTS.CTA });
+  const ctaSlot = SlotDefaultStyling({ element, slotRef: CTA });
 
   if (ctaSlot) {
-    ctaSlot.classList.add(ELEMENTS.CARD_OVERLAY_CONTAINER_CTA);
+    ctaSlot.classList.add(CARD_OVERLAY_CONTAINER_CTA);
 
     return ctaSlot;
   }

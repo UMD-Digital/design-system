@@ -10,6 +10,8 @@ import { NOTIFICATION_ICON, EXCLAMATION_ICON } from 'assets/icons';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { ELEMENTS } from './globals';
 
+const { ICON_CLASS } = ELEMENTS;
+
 export const ELEMENT_NAME = 'umd-element-alert';
 export type AlertType = UMDAlertElement;
 export class UMDAlertElement extends HTMLElement {
@@ -33,7 +35,7 @@ export class UMDAlertElement extends HTMLElement {
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (name === 'type' && newValue) {
-      const icon = this._container?.querySelector(`.${ELEMENTS.ICON_CLASS}`);
+      const icon = this._container?.querySelector(`.${ICON_CLASS}`);
       this._container?.setAttribute('data-type', newValue);
 
       if (!icon) return;

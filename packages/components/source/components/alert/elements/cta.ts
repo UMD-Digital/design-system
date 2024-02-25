@@ -5,6 +5,8 @@ import { AlertType } from 'components/alert';
 
 const { Spacing } = Tokens;
 
+const { CTA } = SLOTS;
+
 const ALERT_CTA = 'umd-alert-cta';
 
 // prettier-ignore
@@ -21,7 +23,7 @@ export const ctaStyles = `
 
 export const CreateCta = ({ element }: { element: AlertType }) => {
   const wrapper = document.createElement('div');
-  const ctaSlot = SlotDefaultStyling({ element, slotRef: SLOTS.CTA });
+  const ctaSlot = SlotDefaultStyling({ element, slotRef: CTA });
 
   if (ctaSlot) {
     wrapper.classList.add(ALERT_CTA);

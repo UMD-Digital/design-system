@@ -3,27 +3,30 @@ import { ElementType } from 'components/nav-item';
 import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { DropdownPositionPerViewPort } from './helper';
 
+const { CONTAINER, DROPDOWN_CONTAINER, PRIMARLY_LINK_WRAPPER } = ELEMENTS;
+const { ATTRIBUTE_SHOWING } = VARIABLES;
+
 export const ShowDropdown = ({ element }: { element: ElementType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const dropdownContainer = shadowRoot.querySelector(
-    `.${ELEMENTS.CONTAINER}`,
+    `.${CONTAINER}`,
   ) as HTMLDivElement;
 
   if (!dropdownContainer) return;
 
-  dropdownContainer.setAttribute(VARIABLES.ATTRIBUTE_SHOWING, '');
+  dropdownContainer.setAttribute(ATTRIBUTE_SHOWING, '');
   DropdownPositionPerViewPort({ element });
 };
 
 export const HideDropdown = ({ element }: { element: ElementType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const dropdownContainer = shadowRoot.querySelector(
-    `.${ELEMENTS.CONTAINER}`,
+    `.${CONTAINER}`,
   ) as HTMLDivElement;
 
   if (!dropdownContainer) return;
 
-  dropdownContainer.removeAttribute(VARIABLES.ATTRIBUTE_SHOWING);
+  dropdownContainer.removeAttribute(ATTRIBUTE_SHOWING);
   element._focusCallback();
   element._focusCallback = () => {};
 };
@@ -32,7 +35,7 @@ export const EventButtonClick = ({ element }: { element: ElementType }) => {
   if (element._isShowing) {
     const shadowRoot = element.shadowRoot as ShadowRoot;
     const dropdownContainer = shadowRoot.querySelector(
-      `.${ELEMENTS.DROPDOWN_CONTAINER}`,
+      `.${DROPDOWN_CONTAINER}`,
     ) as HTMLDivElement;
     const firstElement = dropdownContainer.querySelector(
       'a',
@@ -53,7 +56,7 @@ export const EventButtonClick = ({ element }: { element: ElementType }) => {
 export const EventSize = ({ element }: { element: ElementType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const wrapperElement = shadowRoot.querySelector(
-    `.${ELEMENTS.PRIMARLY_LINK_WRAPPER}`,
+    `.${PRIMARLY_LINK_WRAPPER}`,
   ) as HTMLDivElement;
 
   if (!wrapperElement) return;

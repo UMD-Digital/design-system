@@ -18,19 +18,24 @@ import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 
 const { Spacing, Colors } = Tokens;
 
+const { SOCIAL } = SLOTS;
+const { large, medium } = BREAKPOINTS;
+const { THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_WRAPPER } = ELEMENTS;
+
 export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
 const SOCIAL_CONTAINER_WRAPPER = 'umd-footer-social-container_wrapper';
 const SOCIAL_CONTAINER_HEADLINE = 'umd-footer-social-container_headline';
 
 const campaignOverwriteStyles = `
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${large - 1}px) {
     .${SOCIAL_COLUMN_WRAPPER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${SOCIAL_COLUMN_WRAPPER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: flex;
       justify-content: flex-end;
@@ -40,20 +45,20 @@ const campaignOverwriteStyles = `
 `;
 
 const themeOverwriteStyles = `
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
     background-color: ${Colors.gray.light};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
     fill: ${Colors.black} !important;
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
     background-color: ${Colors.gray.dark};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
     fill: ${Colors.gray.light} !important;
   }
 `;
@@ -67,7 +72,7 @@ export const SocialContainerStyles = `
     align-self: flex-start;
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${SOCIAL_CONTAINER} {
       justify-content: flex-end;
       padding-left: ${Spacing['2xl']};
@@ -79,7 +84,7 @@ export const SocialContainerStyles = `
     padding-top: 3px;
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.medium}px) and (max-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${medium}px) and (max-width: ${large}px) {
     .${SOCIAL_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -88,7 +93,7 @@ export const SocialContainerStyles = `
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${SOCIAL_COLUMN_WRAPPER} {
       margin-left: auto;
     }
@@ -172,7 +177,7 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
 
 const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
   const socialLinksSlot = element.querySelector(
-    `[slot="${SLOTS.SOCIAL}"]`,
+    `[slot="${SOCIAL}"]`,
   ) as HTMLSlotElement;
   const container = document.createElement('div');
   const linksWrapper = document.createElement('div');

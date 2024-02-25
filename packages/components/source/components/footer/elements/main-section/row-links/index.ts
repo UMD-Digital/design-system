@@ -8,18 +8,22 @@ import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
+const { large } = BREAKPOINTS;
+const { THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_WRAPPER } = ELEMENTS;
+
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
 export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
 const ROW_LINKS_CONTAINER_LOCK = 'umd-footer-row-links-lock';
 
 const socialOverwriteStyles = `
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${large - 1}px) {
     .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: block !important;
     }
@@ -33,13 +37,13 @@ export const RowLinkStyles = `
     background-color: ${Colors.black};
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${ROW_LINKS_CONTAINER}  {
       padding-bottom: ${Spacing['2xl']};
     }
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${ROW_LINKS_CONTAINER} {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LINKS_CONTAINER} {
     background-color: ${Colors.gray.lightest};
   }
 
@@ -47,7 +51,7 @@ export const RowLinkStyles = `
     display: flex;
   }
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${large - 1}px) {
     .${ROW_LINKS_CONTAINER_WRAPPER}  {
       flex-direction: column-reverse;
       flex-wrap: wrap;

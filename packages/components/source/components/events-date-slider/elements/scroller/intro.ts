@@ -9,6 +9,10 @@ import {
 
 const { Colors, Spacing } = Tokens;
 
+const { tablet } = BREAKPOINTS;
+const { CONTAINER_DARK_CLASS } = ELEMENTS;
+const { HEADLINE_SLOT_NAME, LINK_SLOT_NAME } = SLOTS;
+
 const INTRO_CONTAINER = 'umd-element-date-slider-intro-container';
 const INTRO_HEADLINE = 'umd-element-date-slider-headline';
 const INTRO_LINK = 'umd-element-date-slider-link';
@@ -28,7 +32,7 @@ const headlineStyles = `
     },
   })}
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} .${INTRO_HEADLINE} {
+  .${CONTAINER_DARK_CLASS} .${INTRO_HEADLINE} {
     color: ${Colors.white};
   }
 `;
@@ -42,7 +46,7 @@ const linkStyles = `
     margin-top: ${Spacing.min};
   }
 
-  .${ELEMENTS.CONTAINER_DARK_CLASS} .${INTRO_LINK} {
+  .${CONTAINER_DARK_CLASS} .${INTRO_LINK} {
     color: ${Colors.white};
   }
 `;
@@ -53,13 +57,13 @@ export const IntroStyles = `
     position: relative;
   }
 
-  @container dates-slider (max-width: ${BREAKPOINTS.tablet - 1}px) {
+  @container dates-slider (max-width: ${tablet - 1}px) {
     .${INTRO_CONTAINER} {
       text-align: center;
     }
   }
 
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
+  @container dates-slider (min-width: ${tablet}px) {
     .${INTRO_CONTAINER} {
       padding: 0;
       padding-right: 24px;
@@ -76,11 +80,11 @@ export const CreateIntroWrapper = ({ element }: { element: HTMLElement }) => {
   const introductionWrapper = document.createElement('div');
   const headlineSlot = SlotDefaultStyling({
     element,
-    slotRef: SLOTS.HEADLINE_SLOT_NAME,
+    slotRef: HEADLINE_SLOT_NAME,
   });
   const linkSlot = SlotDefaultStyling({
     element,
-    slotRef: SLOTS.LINK_SLOT_NAME,
+    slotRef: LINK_SLOT_NAME,
   });
 
   if (headlineSlot) {

@@ -16,6 +16,9 @@ import {
 import { OnLoadDropdownSpans } from './services/helper';
 import { SLOTS, VARIABLES } from './globals';
 
+const { PRIMARY_LINK, DROPDOWN_LINKS } = SLOTS;
+const { ATTRIBUTE_DROPDOWN } = VARIABLES;
+
 export const ELEMENT_NAME = 'umd-element-nav-item';
 export type ElementType = UMDNavItemElement;
 export class UMDNavItemElement extends HTMLElement {
@@ -43,10 +46,8 @@ export class UMDNavItemElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    const primaryLink = element.querySelector(`[slot="${SLOTS.PRIMARY_LINK}"]`);
-    const dropdownLinks = element.querySelector(
-      `[slot="${SLOTS.DROPDOWN_LINKS}"]`,
-    );
+    const primaryLink = element.querySelector(`[slot="${PRIMARY_LINK}"]`);
+    const dropdownLinks = element.querySelector(`[slot="${DROPDOWN_LINKS}"]`);
     const hasDropdown =
       (dropdownLinks?.children && dropdownLinks?.children.length > 0) || false;
 
@@ -62,7 +63,7 @@ export class UMDNavItemElement extends HTMLElement {
 
     const container = CreateShadowDom({ element });
     element._shadow.appendChild(container);
-    if (hasDropdown) container.setAttribute(VARIABLES.ATTRIBUTE_DROPDOWN, '');
+    if (hasDropdown) container.setAttribute(ATTRIBUTE_DROPDOWN, '');
 
     setTimeout(() => {
       EventSize({ element });

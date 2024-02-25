@@ -12,6 +12,8 @@ const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { SansLarge } = Typography;
 
+const { HEADLINE } = SLOTS;
+
 const ALERT_HEADLINE = 'umd-alert-headline';
 
 // prettier-ignore
@@ -46,7 +48,7 @@ export const headlineStyles = `
 `;
 
 export const CreateHeadline = ({ element }: { element: AlertType }) => {
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: SLOTS.HEADLINE });
+  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
 
   if (headlineSlot) {
     CheckForAnimationLinkSpan({ element: headlineSlot });

@@ -7,6 +7,10 @@ import { CreateDropdown, DropdownStyles } from './dropdown';
 
 const { Colors, FontSize } = Tokens;
 
+const { PRIMARY_LINK } = SLOTS;
+const { PRIMARY_LINK_CONTAINER_BUTTON, PRIMARLY_LINK_WRAPPER } = ELEMENTS;
+const { ATTRIBUTE_SELECTED } = VARIABLES;
+
 const PRIMARY_LINK_CONTAINER = 'primary-link-container';
 
 // prettier-ignore
@@ -15,12 +19,12 @@ export const PrimaryStyles = `
     position: relative;
   }
 
-  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} {
+  .${PRIMARLY_LINK_WRAPPER} {
     display: inline-flex;
     position: relative;
   }
 
-  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a {
+  .${PRIMARLY_LINK_WRAPPER} > a {
     color: ${Colors.black};
     font-size: ${FontSize.base};
     white-space: nowrap;
@@ -29,12 +33,12 @@ export const PrimaryStyles = `
     font-weight: 700;
   }
 
-  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:hover,
-  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a:focus {
+  .${PRIMARLY_LINK_WRAPPER} > a:hover,
+  .${PRIMARLY_LINK_WRAPPER} > a:focus {
     color: ${Colors.red};
    }
 
-  .${ELEMENTS.PRIMARLY_LINK_WRAPPER} > a[${VARIABLES.ATTRIBUTE_SELECTED}] span {
+  .${PRIMARLY_LINK_WRAPPER} > a[${ATTRIBUTE_SELECTED}] span {
     display: inline;
     position: relative;
     background-position: left calc(100% - 0px);
@@ -43,14 +47,14 @@ export const PrimaryStyles = `
     background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
   }
 
-  .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} {
+  .${PRIMARY_LINK_CONTAINER_BUTTON} {
     align-self: flex-start;
     margin-top: 5px;
     margin-left: 8px;
     transition: transform .5s;
   }
 
-  .${ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON} svg {
+  .${PRIMARY_LINK_CONTAINER_BUTTON} svg {
     fill: ${Colors.red};
     height: 14px;
     width: 14px;
@@ -64,7 +68,7 @@ export const PrimaryStyles = `
 const CreateButton = ({ element }: { element: ElementType }) => {
   const button = document.createElement('button');
 
-  button.classList.add(ELEMENTS.PRIMARY_LINK_CONTAINER_BUTTON);
+  button.classList.add(PRIMARY_LINK_CONTAINER_BUTTON);
   button.innerHTML = CHEVRON_SMALL_ICON;
   button.addEventListener('click', () => element.buttonClick());
   button.setAttribute('aria-expanded', 'false');
@@ -82,12 +86,12 @@ export const CreatePrimaryLink = ({ element }: { element: ElementType }) => {
   const wrapper = document.createElement('div');
   const titleSlot = SlotDefaultStyling({
     element,
-    slotRef: SLOTS.PRIMARY_LINK,
+    slotRef: PRIMARY_LINK,
   });
   const dropdown = CreateDropdown({ element });
 
   container.classList.add(PRIMARY_LINK_CONTAINER);
-  wrapper.classList.add(ELEMENTS.PRIMARLY_LINK_WRAPPER);
+  wrapper.classList.add(PRIMARLY_LINK_WRAPPER);
 
   if (titleSlot) wrapper.appendChild(titleSlot);
 

@@ -2,9 +2,12 @@ import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS, ELEMENTS } from '../globals';
 import { CardType } from '../index';
 
+const { IMAGE } = SLOTS;
+const { CARD_OVERLAY_IMAGE_CONTAINER } = ELEMENTS;
+
 // prettier-ignore
 export const ImageStyles = `
-  .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} {
+  .${CARD_OVERLAY_IMAGE_CONTAINER} {
     position: absolute;
     top: 0;
     left: 0;
@@ -14,7 +17,7 @@ export const ImageStyles = `
     display: flex;
   }
 
-  .${ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER} img {
+  .${CARD_OVERLAY_IMAGE_CONTAINER} img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -26,12 +29,12 @@ export const ImageStyles = `
 
 export const CreateImage = ({ element }: { element: CardType }) => {
   const imageRef = element.querySelector(
-    `[slot="${SLOTS.IMAGE}"]`,
+    `[slot="${IMAGE}"]`,
   ) as HTMLImageElement;
   const container = document.createElement('div');
-  const isProperImage = CheckForImageAlt({ element, slotRef: SLOTS.IMAGE });
+  const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
 
-  container.classList.add(ELEMENTS.CARD_OVERLAY_IMAGE_CONTAINER);
+  container.classList.add(CARD_OVERLAY_IMAGE_CONTAINER);
 
   if (isProperImage && imageRef) {
     const image = imageRef.cloneNode(true) as HTMLImageElement;

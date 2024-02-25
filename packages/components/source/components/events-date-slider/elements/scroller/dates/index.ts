@@ -7,28 +7,32 @@ import {
 } from 'components/events-date-slider/globals';
 import { CreateBackButton, CreateForwardButton, ButtonStyles } from './button';
 
+const { tablet } = BREAKPOINTS;
+const { DATE_SLOT_NAME } = SLOTS;
+const { DATES_CONTAINER_CLASS, DATES_WRAPPER_CONTAINER_CLASS } = ELEMENTS;
+
 export const DatesStyles = `
-  .${ELEMENTS.DATES_CONTAINER_CLASS} {
+  .${DATES_CONTAINER_CLASS} {
     display: flex;
     position: relative;
     padding: 0 36px;
   }
   
-  @container dates-slider (min-width: ${BREAKPOINTS.tablet}px) {
-    .${ELEMENTS.DATES_CONTAINER_CLASS} {
+  @container dates-slider (min-width: ${tablet}px) {
+    .${DATES_CONTAINER_CLASS} {
       padding: 0 60px;
       width: calc(100% - 96px);
     }
   }
   
-  .${ELEMENTS.DATES_WRAPPER_CONTAINER_CLASS} {
+  .${DATES_WRAPPER_CONTAINER_CLASS} {
     position: relative;
     width: 100%;
     overflow: hidden;
     min-height: 44px;
   }
 
-  .${ELEMENTS.DATES_WRAPPER_CONTAINER_CLASS} ::slotted(*) {
+  .${DATES_WRAPPER_CONTAINER_CLASS} ::slotted(*) {
     margin-bottom: 0 !important;
   }
 
@@ -40,17 +44,17 @@ export const CreateDatesContainer = ({
 }: {
   element: ELEMENT_TYPE;
 }) => {
-  const datesSlot = MakeSlot({ type: SLOTS.DATE_SLOT_NAME });
+  const datesSlot = MakeSlot({ type: DATE_SLOT_NAME });
   const container = document.createElement('div');
   const datesWrapper = document.createElement('div');
   const backButton = CreateBackButton({ element });
   const forwardButton = CreateForwardButton({ element });
 
-  datesWrapper.classList.add(ELEMENTS.DATES_WRAPPER_CONTAINER_CLASS);
+  datesWrapper.classList.add(DATES_WRAPPER_CONTAINER_CLASS);
   datesSlot.style.display = 'block';
   datesWrapper.appendChild(datesSlot);
 
-  container.classList.add(ELEMENTS.DATES_CONTAINER_CLASS);
+  container.classList.add(DATES_CONTAINER_CLASS);
   container.appendChild(backButton);
   container.appendChild(datesWrapper);
   container.appendChild(forwardButton);

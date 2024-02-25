@@ -17,6 +17,11 @@ const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { Lock } = Layout;
 
+const { large } = BREAKPOINTS;
+const { THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_WRAPPER } = ELEMENTS;
+const { UTILITY } = SLOTS;
+
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
 const UTILITY_CONTAINER_LOCK = 'umd-footer-utility-container-lock';
 const UTILITY_CONTAINER_LINK = 'umd-footer-utility-container-link';
@@ -34,13 +39,13 @@ const LinkStyles = `
     },
   })}
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a {
     color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a`]:
+      [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -58,7 +63,7 @@ const TextStyles = `
     color: ${Colors.gray.light};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
     color: ${Colors.black};
   }
 `;
@@ -76,7 +81,7 @@ export const UtilityContainerStyles = `
     },
   })}
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${UTILITY_CONTAINER_LOCK} {
       display: flex;
       align-items: center;
@@ -89,13 +94,13 @@ export const UtilityContainerStyles = `
     },
   })}
 
-  @container umd-footer (max-width: ${BREAKPOINTS.large - 1}px) {
+  @container umd-footer (max-width: ${large - 1}px) {
     .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-top: ${Spacing.sm};
     }
   }
 
-  @container umd-footer (min-width: ${BREAKPOINTS.large}px) {
+  @container umd-footer (min-width: ${large}px) {
     .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-left: ${Spacing.sm};
       padding-left: ${Spacing.sm};
@@ -104,7 +109,7 @@ export const UtilityContainerStyles = `
     }
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {
     background-color: ${Colors.gray.light};
   }
 
@@ -137,7 +142,7 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
 };
 
 export const CreateUtility = ({ element }: { element: HTMLElement }) => {
-  const slot = element.querySelector(`[slot="${SLOTS.UTILITY}"]`);
+  const slot = element.querySelector(`[slot="${UTILITY}"]`);
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const copyRight = document.createElement('p');

@@ -7,13 +7,17 @@ import { CampaignStyles } from './campaign';
 
 const { Colors } = Tokens;
 
+const { THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_WRAPPER } = ELEMENTS;
+const { VERSION_TYPE_MEGA, VERSION_TYPE_VISUAL } = VARIABLES;
+
 const SLOT_BACKGROUND_IMAGE_NAME = 'background-image';
 const MAIN_CONTAINER = 'umd-footer-main-container';
 const BACKGROUND_IMAGE_CONTAINER = 'umd-footer-background-image-container';
 const BACKGROUND_IMAGE_GRADIENT = 'umd-footer-background-image-graident';
 
 const VariationVisualStyles = `
-  .${ELEMENTS.ELEMENT_WRAPPER}[type="${VARIABLES.VERSION_TYPE_VISUAL}"] .${BACKGROUND_IMAGE_CONTAINER}  {
+  .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_VISUAL}"] .${BACKGROUND_IMAGE_CONTAINER}  {
     padding-top: 100px;
   }
 
@@ -40,15 +44,15 @@ const VariationVisualStyles = `
 `;
 
 export const MainContainerStyles = `
-  .${ELEMENTS.ELEMENT_WRAPPER} p,
-  .${ELEMENTS.ELEMENT_WRAPPER} a,
-  .${ELEMENTS.ELEMENT_WRAPPER} span {
+  .${ELEMENT_WRAPPER} p,
+  .${ELEMENT_WRAPPER} a,
+  .${ELEMENT_WRAPPER} span {
     color: ${Colors.white};
   }
 
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] p,
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] span,
-  .${ELEMENTS.ELEMENT_WRAPPER}[theme="${VARIABLES.THEME_OPTION_LIGHT}"] a {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] p,
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] span,
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] a {
     color: ${Colors.gray.dark}
   }
 
@@ -65,7 +69,7 @@ export const CreateMain = ({ element }: { element: ELEMENT_TYPE }) => {
 
   container.classList.add(MAIN_CONTAINER);
 
-  if (type === VARIABLES.VERSION_TYPE_VISUAL) {
+  if (type === VERSION_TYPE_VISUAL) {
     const slottedDate = element.querySelector(
       `[slot="${SLOT_BACKGROUND_IMAGE_NAME}"]`,
     ) as HTMLImageElement;
@@ -102,10 +106,7 @@ export const CreateMain = ({ element }: { element: ELEMENT_TYPE }) => {
 
   container.appendChild(logoRow);
 
-  if (
-    type === VARIABLES.VERSION_TYPE_MEGA ||
-    type === VARIABLES.VERSION_TYPE_VISUAL
-  ) {
+  if (type === VERSION_TYPE_MEGA || type === VERSION_TYPE_VISUAL) {
     const linksRow = CreateRowLinks({ element });
     container.appendChild(linksRow);
   }

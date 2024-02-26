@@ -35,6 +35,7 @@ const headlineStyles = `
     },
   })}
 
+  .${INTRO_CONTAINER_HEADLINE},
   .${INTRO_CONTAINER_HEADLINE} * {
     color: ${Colors.white};
     font-weight: 800;

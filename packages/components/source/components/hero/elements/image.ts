@@ -81,12 +81,6 @@ const OverlayTypeOverwrite = `
 // prettier-ignore
 const MinimalTypeOverwrite = `
   @container umd-hero (min-width: ${tablet}px) {
-    .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_IMAGE} {
-      width: 50%;
-    }
-  }
-
-  @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_IMAGE} img {
       object-fit: cover;
       object-position: center;
@@ -130,12 +124,14 @@ export const CreateImage = ({ element }: { element: HeroType }) => {
 
   container.classList.add(HERO_IMAGE);
 
-  // TO DO - ADD DEFAULT IMAGE CHECK
+  // TO DO - ADD DEFAULT IMAGE CHECK Based on type
 
   if (isProperImage && imageRef) {
     const image = imageRef.cloneNode(true) as HTMLImageElement;
     container.appendChild(image);
+
+    return container;
   }
 
-  return container;
+  return null;
 };

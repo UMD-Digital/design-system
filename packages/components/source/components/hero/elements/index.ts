@@ -104,9 +104,20 @@ const MinimalTypeOverwrite = `
   }
 
   @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR} > * {
+      width: 100%;
+    }
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR}:has(> :nth-child(2)) > * {
+      width: 50%;
+    }
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_LOCK} {
       align-self: center;
-      width: 50%;
     }
   }
 `;
@@ -126,6 +137,7 @@ const STYLES_CONTAINER = `
 
   .${HERO_LOCK} {
     height: 100%;
+    width: 100%;
     position: relative;
   }
 
@@ -169,7 +181,7 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   lock.classList.add(HERO_LOCK);
   lock.appendChild(wrapper);
 
-  container.appendChild(image);
+  if (image) container.appendChild(image);
   container.appendChild(lock);
 
   declaration.classList.add(HERO_DECLARATION);

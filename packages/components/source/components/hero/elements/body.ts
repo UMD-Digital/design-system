@@ -118,6 +118,10 @@ const HeadlineStyles = `
     },
   })}
 
+  .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_HEADLINE} {
+    font-weight: 800;
+  }
+
   .${HERO_HEADLINE} + * {
     margin-top: ${Spacing.md};
   }

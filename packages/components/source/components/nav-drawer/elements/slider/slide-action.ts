@@ -15,7 +15,7 @@ const DRAWER_SLIDE_ACTION_BUTTON = 'umd-element-drawer-slide-action-button';
 const anchorStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${DRAWER_SLIDE_ACTION_LINK}`]: Typography.SansMedium,
+      [`.${DRAWER_SLIDE_ACTION_LINK}`]: Typography.SansLarge,
     },
   })}
 

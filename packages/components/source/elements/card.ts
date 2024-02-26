@@ -183,21 +183,20 @@ const CtaStyles = `
 
 // prettier-ignore
 export const LayoutIntroStyles = `
-  @media (max-width: ${BREAKPOINTS.TABLET - 1}px) {
+  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${CARD_INTRO_WRAPPER} {
       margin-bottom: ${Spacing.min};
     }
   }
 
-  @media (min-width: ${BREAKPOINTS.TABLET}px) {
+  @media (min-width: ${BREAKPOINTS.MOBILE}px) {
     .${CARD_INTRO_WRAPPER} {
       padding-top: ${Spacing.md};
     }
   }
 
-  @media (max-width: ${BREAKPOINTS.TABLET - 1}px) {
+  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${CARD_INTRO_WRAPPER} {
-      width: 70%;
       padding-right: ${Spacing.md};
       flex: 1 0;
     }

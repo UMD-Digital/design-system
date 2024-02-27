@@ -197,7 +197,6 @@ export const LayoutIntroStyles = `
 
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${CARD_INTRO_WRAPPER} {
-      padding-right: ${Spacing.md};
       flex: 1 0;
     }
   }

@@ -52,6 +52,22 @@ const StackDefaultOverwrite = `
 `;
 
 // prettier-ignore
+const LogoTypeOverwrite = `
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: ${Spacing.xl};
+  }
+
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} img {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+// prettier-ignore
 const StackTypeOverwrite = `
   .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_IMAGE} {
     aspect-ratio: 16 / 9;
@@ -81,28 +97,22 @@ const OverlayTypeOverwrite = `
 // prettier-ignore
 const MinimalTypeOverwrite = `
   @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_IMAGE} {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50%;
+      height: 100%;
+    }
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_IMAGE} img {
       object-fit: cover;
       object-position: center;
       height: 100%;
       width: 100%;
     }
-  }
-`;
-
-// prettier-ignore
-const LogoTypeOverwrite = `
-  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    margin-bottom: ${Spacing.xl};
-  }
-
-  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_IMAGE} img {
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
   }
 `;
 

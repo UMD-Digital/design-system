@@ -80,7 +80,6 @@ const HeadlineStyles = `
   .${HERO_HEADLINE} {
     text-transform: uppercase;
     color: ${Colors.white};
-    max-width: 860px;
   }
   
   ${ConvertJSSObjectToStyles({

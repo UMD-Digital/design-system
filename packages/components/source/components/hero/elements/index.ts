@@ -19,7 +19,12 @@ const {
   MD_ATTR,
   WHITE_ATTR,
 } = NAMING;
-const { ATTRIBUTE_THEME, ATTRIBUTE_TYPE, ATTRIBUTE_TEXT_ALIGN } = VARIABLES;
+const {
+  ATTRIBUTE_THEME,
+  ATTRIBUTE_TYPE,
+  ATTRIBUTE_TEXT_ALIGN,
+  ATTRIBUTE_HAS_IMAGE,
+} = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
 const { tablet } = BREAKPOINTS;
 
@@ -80,6 +85,13 @@ const DefaultOverwrite = `
 `;
 
 // prettier-ignore
+const LogoTypeOverwrite = `
+  .${HERO_CONTAINER}${LOGO_ATTR} {
+    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
+  }
+`;
+
+// prettier-ignore
 const StackTypeOverwrite = `
   .${HERO_CONTAINER}${STACKED_ATTR} {
     display: flex;
@@ -97,35 +109,11 @@ const OverlayTypeOverwrite = `
 // prettier-ignore
 const MinimalTypeOverwrite = `
   @container umd-hero (min-width: ${tablet}px) {
-    .${HERO_CONTAINER}${MINIMAL_ATTR} {
-      display: flex;
-      flex-direction: row-reverse;
-    }
-  }
-
-  @container umd-hero (min-width: ${tablet}px) {
-    .${HERO_CONTAINER}${MINIMAL_ATTR} > * {
-      width: 100%;
-    }
-  }
-
-  @container umd-hero (min-width: ${tablet}px) {
-    .${HERO_CONTAINER}${MINIMAL_ATTR}:has(> :nth-child(2)) > * {
-      width: 50%;
-    }
-  }
-
-  @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_LOCK} {
-      align-self: center;
+      min-height: 288px;
+      display: flex;
+      align-items: center;
     }
-  }
-`;
-
-// prettier-ignore
-const LogoTypeOverwrite = `
-  .${HERO_CONTAINER}${LOGO_ATTR} {
-    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
   }
 `;
 
@@ -181,7 +169,11 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   lock.classList.add(HERO_LOCK);
   lock.appendChild(wrapper);
 
-  if (image) container.appendChild(image);
+  if (image) {
+    container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
+    container.appendChild(image);
+  }
+
   container.appendChild(lock);
 
   declaration.classList.add(HERO_DECLARATION);

@@ -14,6 +14,7 @@ const {
   LOGO_ATTR,
   DARK_ATTR,
   MD_ATTR,
+  HAS_IMAGE,
 } = NAMING;
 const { HERO_CONTAINER } = ELEMENTS;
 const { tablet } = BREAKPOINTS;
@@ -35,6 +36,15 @@ const DefaultOverwrite = `
   }
 
   .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_WRAPPER} {
+    justify-content: center;
+    text-align: center;
+  }
+`;
+
+// prettier-ignore
+const LogoTypeOverwrite = `
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_WRAPPER} {
+    display: flex;
     justify-content: center;
     text-align: center;
   }
@@ -67,26 +77,30 @@ const OverlayTypeOverwrite = `
 // prettier-ignore
 const MinimalTypeOverwrite = `
   .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_WRAPPER} {
-    padding: ${Spacing['5xl']} 0;
+    padding: ${Spacing.xl} 0;
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR}${HAS_IMAGE} .${HERO_WRAPPER} {
+      padding: ${Spacing['4xl']} 0;
+      width: calc(50% - ${Spacing['4xl']});
+    }
   }
 
   .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_WRAPPER_CHILD} {
-    padding-left: ${Spacing.lg};
+    padding-left: ${Spacing.md};
     border-left: 2px solid ${Colors.red};
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${MINIMAL_ATTR}${HAS_IMAGE} .${HERO_WRAPPER_CHILD} {
+      padding-left: ${Spacing.lg};
+    }
   }
 
   .${HERO_CONTAINER}${MINIMAL_ATTR}${DARK_ATTR} .${HERO_WRAPPER_CHILD},
   .${HERO_CONTAINER}${MINIMAL_ATTR}${MD_ATTR} .${HERO_WRAPPER_CHILD} {;
     border-left: 2px solid ${Colors.gold};
-  }
-`;
-
-// prettier-ignore
-const LogoTypeOverwrite = `
-  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_WRAPPER} {
-    display: flex;
-    justify-content: center;
-    text-align: center;
   }
 `;
 

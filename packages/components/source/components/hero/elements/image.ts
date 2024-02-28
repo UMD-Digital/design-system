@@ -90,6 +90,18 @@ const OverlayTypeOverwrite = `
     }
   }
 
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_IMAGE}:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0, 0, 0, .9) 0%, rgba(0, 0, 0, 0) 80%);
+    }
+  }
+
   .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_IMAGE} img {
     object-fit: cover;
     object-position: center;

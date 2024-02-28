@@ -24,6 +24,7 @@ const {
   ATTRIBUTE_TYPE,
   ATTRIBUTE_TEXT_ALIGN,
   ATTRIBUTE_HAS_IMAGE,
+  ATTRIBUTE_WITHIN_LOCK,
 } = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
 const { tablet } = BREAKPOINTS;
@@ -175,6 +176,7 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
 
     if (element._withLock) {
       lock.appendChild(image);
+      container.setAttribute(ATTRIBUTE_WITHIN_LOCK, '');
     } else {
       container.appendChild(image);
     }

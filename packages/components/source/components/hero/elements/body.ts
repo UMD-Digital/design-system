@@ -14,8 +14,14 @@ const {
   SansMedium,
   SansSmaller,
 } = Typography;
-const { DEFAULT_ATTR, STACKED_ATTR, OVERLAY_ATTR, MINIMAL_ATTR, LOGO_ATTR } =
-  NAMING;
+const {
+  DEFAULT_ATTR,
+  STACKED_ATTR,
+  OVERLAY_ATTR,
+  MINIMAL_ATTR,
+  LOGO_ATTR,
+  IS_WITHIN_LOCK,
+} = NAMING;
 
 const { HERO_CONTAINER } = ELEMENTS;
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
@@ -92,6 +98,12 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${STACKED_ATTR}${IS_WITHIN_LOCK} .${HERO_HEADLINE}`]: CampaignLarge,
     },
   })}
 

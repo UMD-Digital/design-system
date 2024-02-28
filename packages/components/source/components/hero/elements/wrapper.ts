@@ -69,7 +69,7 @@ const OverlayTypeOverwrite = `
 
   @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_WRAPPER} {
-      width: 50%;
+      width: 60%;
     }
   }
 `;

@@ -182,6 +182,12 @@ const TextStyles = `
     font-weight: 400;
   }
 
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
+      max-width: 60%;
+    }
+  }
+
   .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT} * {
     color: ${Colors.gray.dark};
   }

@@ -27,7 +27,7 @@ const {
   ATTRIBUTE_WITHIN_LOCK,
 } = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
-const { tablet } = BREAKPOINTS;
+const { tablet, desktop } = BREAKPOINTS;
 
 const HERO_DECLARATION = 'umd-hero-declaration';
 const HERO_LOCK = 'umd-hero-lock';
@@ -105,6 +105,20 @@ const StackTypeOverwrite = `
 const OverlayTypeOverwrite = `
   .${HERO_CONTAINER}${OVERLAY_ATTR} {
     position: relative;
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_LOCK} {
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  @container umd-hero (min-width: ${desktop}px) {
+    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_LOCK} {
+      min-height: 764px;
+    }
   }
 `;
 

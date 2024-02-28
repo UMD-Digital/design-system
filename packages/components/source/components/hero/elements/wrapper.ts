@@ -53,7 +53,7 @@ const LogoTypeOverwrite = `
 // prettier-ignore
 const StackTypeOverwrite = `
   .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_WRAPPER} {
-    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
+    padding: ${Spacing['5xl']} 0 ${Spacing['3xl']};
     display: flex;
     justify-content: center;
     text-align: center;

@@ -69,8 +69,12 @@ const LogoTypeOverwrite = `
 
 // prettier-ignore
 const StackTypeOverwrite = `
-  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_IMAGE} {
-    aspect-ratio: 16 / 9;
+  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_IMAGE} img {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+    max-height: 700px;
   }
 `;
 

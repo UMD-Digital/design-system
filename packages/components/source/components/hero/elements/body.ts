@@ -10,6 +10,7 @@ const {
   CampaignExtralarge,
   SansLargest,
   CampaignLarge,
+  SansLarger,
   SansMedium,
   SansSmaller,
 } = Typography;
@@ -146,6 +147,21 @@ const TextStyles = `
 
   .${HERO_TEXT} + * {
     margin-top: ${Spacing.lg};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT}`]: SansLarger,
+    },
+  })}
+
+  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT} {
+    color: ${Colors.gray.dark};
+    font-weight: 400;
+  }
+
+  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT} * {
+    color: ${Colors.gray.dark};
   }
 `
 

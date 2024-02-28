@@ -163,6 +163,16 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_TEXT}`]: SansLarger,
+    },
+  })}
+
+  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_TEXT} {
+    font-weight: 400;
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT}`]: SansLarger,
     },
   })}

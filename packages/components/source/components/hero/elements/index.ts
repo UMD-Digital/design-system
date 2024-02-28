@@ -79,7 +79,8 @@ const DefaultOverwrite = `
 
   @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_LOCK} {
-      padding-bottom: ${Spacing.md};
+      padding-top: ${Spacing['2xl']};
+      padding-bottom: ${Spacing['2xl']};
     }
   }
 `;

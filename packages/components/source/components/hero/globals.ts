@@ -17,6 +17,7 @@ export const VARIABLES = {
   TYPE_DEFAULT: 'default',
   TYPE_DEFAULT_CENTERED: 'default-centered',
   TYPE_STACKED: 'stacked',
+  TYPE_STACKED_INTERIOR: 'stacked-interior',
   TYPE_MINIMAL: 'minimal',
   TYPE_OVERLAY: 'overlay',
   TYPE_LOGO: 'logo',
@@ -30,6 +31,7 @@ export const VARIABLES = {
   ATTRIBUTE_TYPE: 'type',
   ATTRIBUTE_TEXT_ALIGN: 'text-align',
   ATTRIBUTE_HAS_IMAGE: 'has-image',
+  ATTRIBUTE_WITHIN_LOCK: 'within-lock',
 };
 export const NAMING = {
   DEFAULT_ATTR: `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_DEFAULT}']`,

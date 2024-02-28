@@ -171,7 +171,12 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
 
   if (image) {
     container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
-    container.appendChild(image);
+
+    if (element._withLock) {
+      lock.appendChild(image);
+    } else {
+      container.appendChild(image);
+    }
   }
 
   container.appendChild(lock);

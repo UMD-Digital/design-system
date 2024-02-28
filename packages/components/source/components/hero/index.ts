@@ -14,6 +14,9 @@ const {
   TYPE_DEFAULT,
   TEXT_ALIGN_LEFT,
   TEXT_ALIGN_CENTER,
+  TYPE_STACKED_INTERIOR,
+  TYPE_STACKED,
+  ATTRIBUTE_WITHIN_LOCK,
 } = VARIABLES;
 
 export const ELEMENT_NAME = 'umd-element-hero';
@@ -23,6 +26,7 @@ export class UMDHeroElement extends HTMLElement {
   _theme = THEME_WHITE;
   _type = TYPE_DEFAULT;
   _textAlignment = TEXT_ALIGN_LEFT;
+  _withLock = false;
 
   constructor() {
     super();
@@ -50,6 +54,11 @@ export class UMDHeroElement extends HTMLElement {
     if (this._type === TYPE_DEFAULT_CENTERED) {
       this._type = TYPE_DEFAULT;
       this._textAlignment = TEXT_ALIGN_CENTER;
+    }
+
+    if (this._type === TYPE_STACKED_INTERIOR) {
+      this._type = TYPE_STACKED;
+      this._withLock = true;
     }
 
     this._shadow.appendChild(CreateShadowDom({ element: this }));

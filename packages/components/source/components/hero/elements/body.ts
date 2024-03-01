@@ -182,6 +182,19 @@ const TextStyles = `
     font-weight: 400;
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT}`]: SansLarger,
+    },
+  })}
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
+      max-width: 60%;
+      font-weight: 400;
+    }
+  }
+
   .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT} * {
     color: ${Colors.gray.dark};
   }

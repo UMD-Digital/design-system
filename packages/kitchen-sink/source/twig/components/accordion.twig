@@ -1,6 +1,8 @@
 {% extends '../_layout.twig' %}
 {% import '../_elements/content-dropdown.twig' as Dropdown %}
 {% import '../_ui/card-overlay.twig' as CardOverlay %}
+{% import '../_ui/fields/headline.twig' as Headline %}
+{% import '../_ui/fields/body-slot-rich-text.twig' as RichText %}
 
 {% set var = value %}
 
@@ -13,109 +15,313 @@
 
   <section>
     <div class="umd-lock">
-      <h1 class="umd-sans-largest">
+      <h1 class="page-heading">
         Accordion
       </h1>
 
-      <h2 class="umd-sans-large">
+      <h2 class="content-heading">
         Content Variations
       </h2>
 
       {{ Dropdown.ContentVariations() }}
-
-      <umd-element-accordion>
-        <umd-element-accordion-item>
-          <div slot="headline">
-            Accordion Header 1 (Simple)
-          </div>
-
-          <div slot="body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-              diam mi, volutpat eu massa quis, finibus vestibulum dui. Praesent
-              eget mauris auctor, scelerisque dolor et, ullamcorper turpis.
-            </p>
-          </div>
-        </umd-element-accordion-item>
-        <umd-element-accordion-item>
-          <div slot="headline">
-            Accordion Header 2 (Verbose)
-          </div>
-
-          <div slot="body">
-            <p>
-              Lorem ipsum consectetur adipiscing elit. Aliquam diam mi, volutpat
-              eu massa quis, finibus vestibulum dui. Praesent eget mauris
-              auctor, scelerisque dolor et, ullamcorper turpis. Proin blandit,
-              ex nec vehicula laoreet, eros felis rutrum erat, vel elementum
-              neque purus at orci. Vestibulum ante ipsum primis in faucibus orci
-              luctus et ultrices posuere cubilia curae; Duis porta justo ut eros
-              ornare cursus. Praesent eu sodales justo. Quisque sit amet lorem
-              pulvinar, euismod lacus vitae, cursus leo. Duis blandit nibh leo.
-              Morbi lectus metus, venenatis sit amet feugiat vitae, eleifend ac
-              felis. Morbi mauris tellus, maximus at condimentum sodales,
-              pharetra in orci. Maecenas semper ipsum mauris, a tincidunt nibh
-              scelerisque a. Nullam leo elit, condimentum non laoreet ut,
-              molestie vitae arcu. Maecenas ullamcorper rutrum justo vitae
-              pharetra.
-
-              Nulla quis vehicula nunc. Aenean metus orci, tristique nec
-              pharetra ac, tristique a dolor. Pellentesque vitae dolor non diam
-              laoreet tincidunt eu ac sapien. Sed elementum congue placerat.
-              Suspendisse nec urna sit amet tellus viverra lacinia. Aliquam erat
-              volutpat. Mauris condimentum mauris tortor, vitae hendrerit sapien
-              efficitur id. Etiam bibendum nulla id lectus aliquet pellentesque.
-
-              Donec vestibulum fringilla nulla, quis fermentum justo congue
-              quis. Sed lacinia velit dictum mauris venenatis sodales. Nam in
-              velit nisi. In hac habitasse platea dictumst. Integer maximus urna
-              id neque scelerisque auctor. Vivamus ornare tincidunt feugiat.
-              Phasellus fringilla nisl ac est elementum dapibus. Class aptent
-              taciti sociosqu ad litora torquent per conubia nostra, per
-              inceptos himenaeos. Donec maximus consequat arcu. Etiam tempor
-              tellus a mauris hendrerit, non commodo sapien mattis. Class aptent
-              taciti sociosqu ad litora torquent per conubia nostra, per
-              inceptos himenaeos. Aenean congue diam nisl, vitae tempus libero
-              commodo accumsan. Cras mi ipsum, scelerisque quis accumsan et,
-              varius at ligula. In tristique felis turpis, et semper metus
-              consequat vel. Suspendisse potenti. Sed mollis, sem sed imperdiet
-              lacinia, nibh nisl porta tellus, non lobortis risus ex quis ex.
-
-              Aenean at nisl leo. Phasellus est odio, congue nec hendrerit id,
-              pharetra id mi. Integer viverra tortor sit amet erat commodo
-              volutpat. Suspendisse vestibulum quis augue a molestie. Maecenas
-              non mattis purus. Donec sed enim semper, iaculis sapien sed,
-              vehicula erat. Ut tempor est nec dolor convallis, a commodo lectus
-              ultricies. In volutpat massa nisl, quis fringilla est vestibulum
-              id. Aenean aliquam consectetur nibh sit amet mollis. Mauris
-              suscipit lorem tellus. Donec pellentesque nibh velit, et vulputate
-              diam vehicula maximus. Suspendisse placerat pharetra ante,
-              interdum sollicitudin quam ornare eget. Etiam pellentesque
-              eleifend dolor, sed pulvinar lectus dictum id. Cras pellentesque
-              dapibus velit varius tristique. Fusce non nunc hendrerit risus
-              vulputate commodo. Praesent laoreet magna eget massa feugiat
-              accumsan.
-            </p>
-          </div>
-        </umd-element-accordion-item>
-        <umd-element-accordion-item>
-          <div slot="headline">
-            Accordion Header 3 (Rich text)
-          </div>
-
-          <div slot="body">
-            <p>
-              <strong>Some strong text</strong>, <i>Some italic text</i>
-            </p>
-
-            <hr />
-            <p>
-              Lorem ipsum something, <a href="https://google.com" target="_blank">Unstyled
-                Link</a>
-            </p>
-          </div>
-        </umd-element-accordion-item>
-      </umd-element-accordion>
     </div>
   </section>
+
+  <div id="content-succinct" class="dropdown-selection" aria-hidden="true">
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading type-hr">
+          Light Variant (First Item Default Open)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true" open>
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Light Variant (Default Closed)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Dark Variant (First Item Default Open)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            aria-hidden="true"
+            theme="dark"
+            open>
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Dark Variant (Default Closed)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            aria-hidden="true"
+            theme="dark">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+      </div>
+    </section>
+  </div>
+
+  <div id="content-normal" class="dropdown-selection" aria-hidden="true">
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading type-hr">
+          Light Variant (First Item Default Open)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            aria-hidden="true"
+            open
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Light Variant (Default Closed)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Dark Variant (First Item Default Open)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            aria-hidden="true"
+            theme="dark"
+            open
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Dark Variant (Default Closed)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            aria-hidden="true"
+            theme="dark"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+      </div>
+    </section>
+  </div>
+
+  <div id="content-verbose" class="dropdown-selection" aria-hidden="true">
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading type-hr">
+          Light Variant (First Item Default Open)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            aria-hidden="true"
+            open
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Light Variant (Default Closed)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Dark Variant (First Item Default Open)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            aria-hidden="true"
+            theme="dark"
+            open>
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Dark Variant (Default Closed)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            aria-hidden="true"
+            theme="dark">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark"
+            class="mb-xs"
+            aria-hidden="true">
+            {{ Headline.AccordionHeadlineVerbose() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+      </div>
+    </section>
+  </div>
 {% endblock %}

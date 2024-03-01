@@ -197,3 +197,33 @@
     })
   }}
 {% endmacro %}
+
+{% macro AccordionHeadlineSuccinct() %}
+  {{
+    _self.Headline({
+      characters: 15,
+      isLink: false,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro AccordionHeadlineNormal() %}
+  {{
+    _self.Headline({
+      characters: 30,
+      isLink: false,
+      isHeader: false
+    })
+  }}
+{% endmacro %}
+
+{% macro AccordionHeadlineVerbose() %}
+  {{
+    _self.Headline({
+      characters: 60,
+      isLink: false,
+      isHeader: false
+    })
+  }}
+{% endmacro %}

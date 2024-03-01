@@ -6,14 +6,17 @@ declare global {
 
 import { MakeTemplate } from 'helpers/ui';
 import ComponentStyles, { CreateShadowDom } from './elements';
-import { ELEMENT_NAME } from './globals';
-import { Debounce } from './services/helper';
-import { EventToggleExpand } from './services/events';
+import { ELEMENT_NAME, VARIABLES } from './globals';
+import { Debounce } from 'helpers/performance';
+import { EventAdjustHeight } from './services/events';
 
+const { THEME_DEFAULT, OPEN_DEFAULT } = VARIABLES;
 export type ELEMENT_TYPE = UMDAccordionElement;
 
 export class UMDAccordionElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _theme = THEME_DEFAULT;
+  _open = OPEN_DEFAULT;
 
   constructor() {
     super();
@@ -25,28 +28,41 @@ export class UMDAccordionElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [];
+    return ['aria-hidden'];
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (name == 'aria-hidden' && newValue === 'false' && oldValue === 'true') {
+      EventAdjustHeight({
+        element: this,
+        maintainExpandState: true,
+        noTransition: true,
+      });
+    }
+  }
 
   connectedCallback() {
-    const container = CreateShadowDom({ element: this });
     const element = this;
+    const theme = element.getAttribute('theme');
+    const open = element.hasAttribute('open');
 
-    this._shadow.appendChild(container);
+    element._theme = theme || element._theme;
+    element._open = open || element._open;
 
-    const headlineContainer = element.shadowRoot?.querySelector(
-      'button',
-    ) as HTMLButtonElement;
+    const container = CreateShadowDom({ element });
+    element._shadow.appendChild(container);
 
     const resize = () => {
-      const isExpanded = headlineContainer.ariaExpanded === 'true';
-
-      EventToggleExpand({ element, expand: isExpanded });
+      EventAdjustHeight({ element: element, maintainExpandState: true });
     };
 
     window.addEventListener('resize', Debounce(resize, 20));
+
+    EventAdjustHeight({
+      element,
+      maintainExpandState: true,
+      noTransition: true,
+    });
   }
 }
 

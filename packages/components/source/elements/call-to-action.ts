@@ -73,6 +73,10 @@ const OverwriteStyles = `
   .${CLASS_STYLES_REF_CTA_SECONDARY} .${CLASS_CTA_ANIMATION_WRAPPER} {
     background-position: left bottom !important;
   }
+
+  .${CLASS_STYLES_REF_CTA_SECONDARY}  {
+    max-width: 100%;
+  }
 `;
 
 // prettier-ignore

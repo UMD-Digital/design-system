@@ -89,6 +89,7 @@ export const SansLarger = {
 
   [`@media (${breakpointMobile})`]: {
     ...SizeLarge,
+    lineHeight: `1.40em`,
   },
 };
 

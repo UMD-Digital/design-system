@@ -1,6 +1,284 @@
 {% extends '../../_layout.twig' %}
 
 {% block page %}
+  <section>
+    <div class="umd-lock" style="padding-bottom: 50px">
+      <div class="content-heading type-hr">
+        <span class="type">Listing Group (Events)</span>
+        <span class="type-detail">Featured Event</span>
+      </div>
+    </div>
+
+    <div class="umd-lock">
+      <div class="umd-sticky-listing">
+        <div class="umd-sticky-featured">
+          <umd-featured-event>
+            <div class="event-image-wrapper">
+              <a class="event-image"
+                href="https://calendar.umd.edu/mastering-the-art-of-pitching-crafting-and-delivering-your-compelling-startup-story?start=2024-02-19">
+                <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&h=1080&auto=compress%2Cformat&fit=crop&dm=1658178350&s=ac382dd343b5fa928647cfd0542dad28"
+                  alt="Maryland stadium bleachers" />
+              </a>
+              <div aria-hidden="true" class="event-date-tag">
+                <time datetime="2024-09-18T12:00:00+00:00">
+                  <span class="umd-sans-small">Sep</span>
+                  <span class="umd-sans-extralarge">18</span>
+                </time>
+              </div>
+            </div>
+            <div class="event-content">
+              <h3 class="feature-banner">
+                Featured Event
+              </h3>
+              <h4 class="event-title umd-sans-extralarge umd-fadein-underline-black">
+                <a href="https://calendar.umd.edu/mastering-the-art-of-pitching-crafting-and-delivering-your-compelling-startup-story?start=2024-02-19">
+                  <span>Purus eu Sagittis Gravida Porttitor Sodales</span>
+                </a>
+              </h4>
+
+              <umd-event-flags>
+                <ul class="umd-sans-min">
+                  <li>
+                    <svg aria-hidden="true"
+                      title="calendar"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M15 3H27V13H71V3H83V13H90V29H7V13H15V3ZM90 35H7V88H90V35Z"></path>
+                    </svg><time datetime="2024-09-18T12:00:00+00:00">
+                      Sat Sep 18
+                    </time>
+                  </li><li>
+                    <svg aria-hidden="true"
+                      title="clock"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M48 92C72.3005 92 92 72.3005 92 48C92 23.6995 72.3005 4 48 4C23.6995 4 4 23.6995 4 48C4 72.3005 23.6995 92 48 92ZM68.9503 49.7309L50.7567 50.737L52.0969 25.3062L43.1645 16.3738L40.0052 58.6165L39.7495 61.7494L39.771 61.7476L39.7694 61.7694L50.2203 60.9162L50.221 60.9019L77.8826 58.6633L68.9503 49.7309Z"></path>
+                    </svg><time datetime="2024-09-17T16:30:00+00:00">
+                      4:30pm
+                    </time>
+                  </li>
+                  <li>
+                    <svg aria-hidden="true"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M48.5581 0C31.0163 0 16.7442 14.3556 16.7442 32.0001C16.7442 37.2969 18.0608 42.5488 20.5637 47.2071L46.8184 94.9688C47.1679 95.6055 47.8339 96 48.5581 96C49.2823 96 49.9484 95.6055 50.2979 94.9688L76.5623 47.1913C79.0555 42.5488 80.3721 37.2967 80.3721 31.9999C80.3721 14.3556 66.1 0 48.5581 0ZM48.5581 48C39.7872 48 32.6513 40.8223 32.6513 32.0001C32.6513 23.1778 39.7872 16.0001 48.5581 16.0001C57.3291 16.0001 64.465 23.1778 64.465 32.0001C64.465 40.8223 57.3291 48 48.5581 48Z"></path>
+                    </svg>
+                    <span>Location</span>
+                  </li>
+                  <li>
+                    <svg aria-hidden="true"
+                      title="multiple pages"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M26.6702 8.75415H90.5V61.8207H75.1222V27.2119H26.6702V8.75415ZM5.5 35.1276H69.0913V47.3861V47.3862V87.9926H5.5V47.3862V47.3861V35.1276Z"></path>
+                    </svg><span>Multi-day</span>
+                  </li>
+                </ul>
+              </umd-event-flags>
+              <div class="event-summary umd-sans-medium">
+                Neque Fusce habitasse elementum integer scelerisque orci litora
+                quisque nulla rutrum
+              </div>
+              <umd-element-call-to-action type="secondary">
+                <a href="/"><span>Learn more</span></a>
+              </umd-element-call-to-action>
+            </div>
+          </umd-featured-event>
+        </div>
+        <div class="event-list">
+          <umd-event data-eventdate="24-02-21">
+            <div aria-hidden="true" class="event-date-tag">
+              <time datetime="2024-02-21T16:00:00+00:00">
+                <span class="umd-sans-small">Sep</span><span class="umd-sans-extralarge">17</span>
+              </time>
+            </div>
+            <div class="event-content">
+              <a class="event-image"
+                href="https://calendar.umd.edu/the-wellness-series-deepening-relationships-through-vulnerability-2?start=24-02-21">
+                <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-1.jpg?w=1920&amp;h=1080&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1658178312&amp;s=0d9a769f7e60a45db2c9a9f8a7fbe158"
+                  alt="Check out our drop-in skills sessions available all semester. Choose from 16 different topics! For detailed descriptions, schedules, and Zoom links, visit: counseling.umd.edu/wellness" />
+              </a><h2 class="event-title umd-sans-larger umd-fadein-underline-black">
+                <a href="https://calendar.umd.edu/the-wellness-series-deepening-relationships-through-vulnerability-2?start=24-02-21">
+                  <span>Accumsan vel tempus erat penatibus</span>
+                </a>
+              </h2>
+
+              <umd-event-flags>
+                <ul class="umd-sans-min">
+                  <li>
+                    <svg aria-hidden="true"
+                      title="calendar"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M15 3H27V13H71V3H83V13H90V29H7V13H15V3ZM90 35H7V88H90V35Z"></path>
+                    </svg><time datetime="2024-02-21T16:00:00+00:00">
+                      Wed Feb 21
+                    </time>
+                  </li><li>
+                    <svg aria-hidden="true"
+                      title="clock"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M48 92C72.3005 92 92 72.3005 92 48C92 23.6995 72.3005 4 48 4C23.6995 4 4 23.6995 4 48C4 72.3005 23.6995 92 48 92ZM68.9503 49.7309L50.7567 50.737L52.0969 25.3062L43.1645 16.3738L40.0052 58.6165L39.7495 61.7494L39.771 61.7476L39.7694 61.7694L50.2203 60.9162L50.221 60.9019L77.8826 58.6633L68.9503 49.7309Z"></path>
+                    </svg><time datetime="2024-02-21T16:00:00+00:00">
+                      4:00pm
+                    </time>
+                  </li>
+                </ul>
+              </umd-event-flags>
+              <div class="event-summary umd-sans-small">
+                Sociis suscipit netus vivamus aptent cras et ornare. Aliquam
+                vitae tincident netus platea.
+              </div>
+            </div>
+          </umd-event>
+          <umd-event data-eventdate="24-02-21">
+            <div aria-hidden="true" class="event-date-tag">
+              <time datetime="2024-02-21T16:00:00+00:00">
+                <span class="umd-sans-small">Feb</span><span class="umd-sans-extralarge">21</span>
+              </time>
+            </div>
+            <div class="event-content">
+              <a class="event-image"
+                href="https://calendar.umd.edu/is-rest-a-luxury-jedi-collective-rest-is-resistance-practice-group?start=24-02-21">
+                <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/BSO.jpeg?w=1600&h=1067&auto=compress%2Cformat&fit=crop&dm=1685718458&s=b5ecfd39ed65b4bd8070ece85608e0af"
+                  alt="Baltimore Sympbony Orchestra performing" />
+              </a><h2 class="event-title umd-sans-larger umd-fadein-underline-black">
+                <a href="https://calendar.umd.edu/is-rest-a-luxury-jedi-collective-rest-is-resistance-practice-group?start=24-02-21">
+                  <span>
+                    Massa eleifend erat et, cubilia ligula venenatis cursus
+                  </span>
+                </a>
+              </h2>
+
+              <umd-event-flags>
+                <ul class="umd-sans-min">
+                  <li>
+                    <svg aria-hidden="true"
+                      title="calendar"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M15 3H27V13H71V3H83V13H90V29H7V13H15V3ZM90 35H7V88H90V35Z"></path>
+                    </svg><time datetime="2024-02-21T20:00:00+00:00">
+                      Wed Feb 21
+                    </time>
+                  </li><li>
+                    <svg aria-hidden="true"
+                      title="clock"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M48 92C72.3005 92 92 72.3005 92 48C92 23.6995 72.3005 4 48 4C23.6995 4 4 23.6995 4 48C4 72.3005 23.6995 92 48 92ZM68.9503 49.7309L50.7567 50.737L52.0969 25.3062L43.1645 16.3738L40.0052 58.6165L39.7495 61.7494L39.771 61.7476L39.7694 61.7694L50.2203 60.9162L50.221 60.9019L77.8826 58.6633L68.9503 49.7309Z"></path>
+                    </svg><time datetime="2024-02-21T20:00:00+00:00">
+                      8:00pm
+                    </time>
+                  </li>
+                </ul>
+              </umd-event-flags>
+              <div class="event-summary umd-sans-small">
+                Curae neque eu senectus eget curabitur auctor arcu nunc
+                condimentum
+              </div>
+            </div>
+          </umd-event>
+          <umd-event data-eventdate="24-02-22">
+            <div aria-hidden="true" class="event-date-tag">
+              <time datetime="2024-02-22T12:00:00+00:00">
+                <span class="umd-sans-small">Feb</span><span class="umd-sans-extralarge">22</span>
+              </time>
+            </div>
+            <div class="event-content">
+              <a class="event-image"
+                href="https://calendar.umd.edu/soil-soul?start=24-02-22">
+                <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/Meshell-Ndegeocello_inset.jpeg?w=1250&h=833&auto=compress%2Cformat&fit=crop&dm=1687888630&s=af3423b05897873d40315c1835bf2dd5"
+                  alt="Portrait of Meshell Ndegeocello" />
+              </a><h2 class="event-title umd-sans-larger umd-fadein-underline-black">
+                <a href="https://calendar.umd.edu/soil-soul?start=24-02-22">
+                  <span>
+                    Curae neque eu senectus eget curabitur auctor arcu
+                  </span>
+                </a>
+              </h2>
+              <umd-event-flags>
+                <ul class="umd-sans-min">
+                  <li>
+                    <svg aria-hidden="true"
+                      title="calendar"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M15 3H27V13H71V3H83V13H90V29H7V13H15V3ZM90 35H7V88H90V35Z"></path>
+                    </svg><time datetime="2024-02-22T12:00:00+00:00">
+                      Thu Feb 22
+                    </time>
+                  </li><li>
+                    <svg aria-hidden="true"
+                      title="clock"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M48 92C72.3005 92 92 72.3005 92 48C92 23.6995 72.3005 4 48 4C23.6995 4 4 23.6995 4 48C4 72.3005 23.6995 92 48 92ZM68.9503 49.7309L50.7567 50.737L52.0969 25.3062L43.1645 16.3738L40.0052 58.6165L39.7495 61.7494L39.771 61.7476L39.7694 61.7694L50.2203 60.9162L50.221 60.9019L77.8826 58.6633L68.9503 49.7309Z"></path>
+                    </svg><time datetime="2024-02-22T12:00:00+00:00">
+                      12:00pm
+                    </time>
+                  </li>
+                </ul>
+              </umd-event-flags>
+              <div class="event-summary umd-sans-small">
+                Eget senectus netus aptent aliquam tincidunt netus auctor conde
+              </div>
+            </div>
+          </umd-event>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="pb-2xl" style="background-color: black; padding-top: 100px">
     <div class="umd-watermark-container">
       <p class="umd-watermark-dark"

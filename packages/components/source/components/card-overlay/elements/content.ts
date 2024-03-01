@@ -63,7 +63,13 @@ const headlineStyles = `
 // prettier-ignore
 const textStyles = `
   * + .${CARD_OVERLAY_TEXT} {
-    margin-top: ${Spacing.sm}
+    margin-top: ${Spacing.min}
+  }
+
+  @media (min-width: 768px) {
+    * + .${CARD_OVERLAY_TEXT} {
+      margin-top: ${Spacing.sm}
+    }
   }
 
   ${ConvertJSSObjectToStyles({

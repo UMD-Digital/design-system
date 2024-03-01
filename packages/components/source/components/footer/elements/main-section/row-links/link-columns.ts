@@ -167,6 +167,11 @@ const LinkStyles = `
     },
   })}
 
+  .${ROW_LINKS_COLUMN_LINKS} a,
+  .${ROW_LINKS_COLUMN_LINKS} span {
+    color: ${Colors.gray.light};
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LINKS_COLUMN_LINKS} a`]:

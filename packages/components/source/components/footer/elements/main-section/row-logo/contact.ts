@@ -88,7 +88,8 @@ const HeadlineStyles = `
     },
   })}
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a {
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a,
+  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} span {
     color: ${Colors.black};
   }
 

@@ -32,6 +32,10 @@ const LinkStyles = `
     display: block;
   }
 
+  .${UTILITY_CONTAINER} a span {
+    color: ${Colors.gray.light};
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:

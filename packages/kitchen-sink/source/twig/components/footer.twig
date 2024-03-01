@@ -136,4 +136,23 @@
         alt="University of Maryland Logo" />
     </umd-element-footer>
   </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading type-hr">
+        <span class="type">Default Styling</span>
+        <span class="type-detail">Visual with simiple type</span>
+      </p>
+    </div>
+
+    <umd-element-footer type="simple">
+      {{ FooterOverwrites.ContactOverwrite() }}
+      {{ FooterOverwrites.SocialOverwrite() }}
+      {{ FooterOverwrites.UtilityOverwrite() }}
+
+      <img slot="background-image"
+        src="/footer-option.jpg"
+        alt="University of Maryland Logo" />
+    </umd-element-footer>
+  </section>
 {% endblock %}

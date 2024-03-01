@@ -9,7 +9,8 @@ const { Colors } = Tokens;
 
 const { THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { VERSION_TYPE_MEGA, VERSION_TYPE_VISUAL } = VARIABLES;
+const { VERSION_TYPE_MEGA, VERSION_TYPE_VISUAL, VERSION_TYPE_SIMPLE } =
+  VARIABLES;
 
 const SLOT_BACKGROUND_IMAGE_NAME = 'background-image';
 const MAIN_CONTAINER = 'umd-footer-main-container';
@@ -17,7 +18,8 @@ const BACKGROUND_IMAGE_CONTAINER = 'umd-footer-background-image-container';
 const BACKGROUND_IMAGE_GRADIENT = 'umd-footer-background-image-graident';
 
 const VariationVisualStyles = `
-  .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_VISUAL}"] .${BACKGROUND_IMAGE_CONTAINER}  {
+  .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_VISUAL}"] .${BACKGROUND_IMAGE_CONTAINER},
+  .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${BACKGROUND_IMAGE_CONTAINER} {
     padding-top: 100px;
   }
 
@@ -69,15 +71,15 @@ export const CreateMain = ({ element }: { element: ELEMENT_TYPE }) => {
 
   container.classList.add(MAIN_CONTAINER);
 
-  if (type === VERSION_TYPE_VISUAL) {
+  if (type === VERSION_TYPE_VISUAL || type === VERSION_TYPE_SIMPLE) {
     const slottedDate = element.querySelector(
       `[slot="${SLOT_BACKGROUND_IMAGE_NAME}"]`,
     ) as HTMLImageElement;
     const visualContainer = document.createElement('div');
     const backgroundGraident = document.createElement('div');
     const backgroundImage = document.createElement('img');
-    let altText = 'The University of Maryland Campus';
-    let imageSrc = require('../../assets/visual-default.jpg').default;
+    let altText = null;
+    let imageSrc = null;
 
     if (slottedDate) {
       const source = slottedDate.getAttribute('src');
@@ -90,18 +92,25 @@ export const CreateMain = ({ element }: { element: ELEMENT_TYPE }) => {
       if (typeof alt === 'string' && alt.length > 0) {
         altText = alt;
       }
+    } else {
+      if (type === VERSION_TYPE_VISUAL) {
+        altText = 'The University of Maryland Campus';
+        imageSrc = require('../../assets/visual-default.jpg').default;
+      }
     }
 
-    visualContainer.classList.add(BACKGROUND_IMAGE_CONTAINER);
-    backgroundImage.setAttribute('src', imageSrc);
-    backgroundImage.setAttribute('alt', `${altText}`);
+    if (imageSrc && altText) {
+      visualContainer.classList.add(BACKGROUND_IMAGE_CONTAINER);
+      backgroundImage.setAttribute('src', imageSrc);
+      backgroundImage.setAttribute('alt', `${altText}`);
 
-    backgroundGraident.classList.add(BACKGROUND_IMAGE_GRADIENT);
+      backgroundGraident.classList.add(BACKGROUND_IMAGE_GRADIENT);
 
-    visualContainer.appendChild(backgroundGraident);
-    visualContainer.appendChild(backgroundImage);
+      visualContainer.appendChild(backgroundGraident);
+      visualContainer.appendChild(backgroundImage);
 
-    container.appendChild(visualContainer);
+      container.appendChild(visualContainer);
+    }
   }
 
   container.appendChild(logoRow);

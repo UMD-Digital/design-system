@@ -78,6 +78,10 @@ const slideActionStyles = `
   .${DRAWER_SLIDER_ACTIONS} {
     padding-left: ${Spacing.sm};
   }
+
+  .${DRAWER_SLIDER_ACTIONS} a {
+    font-weight: 400;
+  }
 `;
 
 // prettier-ignore

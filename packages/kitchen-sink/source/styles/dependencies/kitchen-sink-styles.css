@@ -77,3 +77,7 @@
   transform: translateY(-50%);
   width: 1px;
 }
+
+section umd-element-nav-item + umd-element-nav-item {
+  margin-left: 20px;
+}

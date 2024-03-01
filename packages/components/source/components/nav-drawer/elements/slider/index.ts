@@ -59,15 +59,13 @@ const selectedLinkStyles = `
     position: relative;
   }
 
-  .${DRAWER_SLIDER_CONTAINER} a[${ATTRIBUTE_ACTIVE_SELECTED}]:before {
-    content: '';
-    position: absolute;
-    bottom: 1px;
-    height: 3px;
-    left: -3px;
-    right: -3px;
-    background-color: ${Colors.gold};
-    display: block;
+  .${DRAWER_SLIDER_CONTAINER} a[${ATTRIBUTE_ACTIVE_SELECTED}] span {
+    display: inline;
+    position: relative;
+    background-position: left calc(100% - 0px);
+    background-repeat: no-repeat;
+    background-size: 100% 2.5px;
+    background-image: linear-gradient(#ffd200, #ffd200);
   }
 `;
 

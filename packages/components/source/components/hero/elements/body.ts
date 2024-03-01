@@ -188,10 +188,13 @@ const TextStyles = `
     },
   })}
 
+  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
+    font-weight: 400;
+  }
+
   @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
       max-width: 60%;
-      font-weight: 400;
     }
   }
 

@@ -53,10 +53,17 @@ const LogoTypeOverwrite = `
 // prettier-ignore
 const StackTypeOverwrite = `
   .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_WRAPPER} {
-    padding: ${Spacing['5xl']} 0 ${Spacing['3xl']};
+    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
     display: flex;
     justify-content: center;
     text-align: center;
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_WRAPPER} {
+      padding: ${Spacing['5xl']} 0 ${Spacing['3xl']};
+    }
+  
   }
 `;
 

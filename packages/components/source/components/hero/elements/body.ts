@@ -20,6 +20,7 @@ const {
   OVERLAY_ATTR,
   MINIMAL_ATTR,
   LOGO_ATTR,
+  DARK_ATTR,
   IS_WITHIN_LOCK,
 } = NAMING;
 
@@ -180,6 +181,12 @@ const TextStyles = `
   .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_TEXT} {
     color: ${Colors.gray.dark};
   }
+
+  .${HERO_CONTAINER}${LOGO_ATTR}${DARK_ATTR} .${HERO_TEXT} {
+    color: ${Colors.white};
+  }
+
+
 
   ${ConvertJSSObjectToStyles({
     styleObj: {

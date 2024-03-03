@@ -173,6 +173,16 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${HERO_CONTAINER}${LOGO_ATTR} .${HERO_TEXT}`]: SansLarger,
+    },
+  })}
+
+  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_TEXT} {
+    color: ${Colors.gray.dark};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT}`]: SansLarger,
     },
   })}

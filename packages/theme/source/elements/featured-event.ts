@@ -33,12 +33,12 @@ const FeaturedEvent = {
 
   '& .event-image-wrapper': {
     display: 'inline-block',
-    marginBottom: Spacing.min,
+    marginBottom: Spacing.sm,
     position: 'relative',
     width: '100%',
 
     [`@media (${Queries.tablet.min})`]: {
-      marginBottom: Spacing.md,
+      marginBottom: Spacing.lg,
     },
   },
 
@@ -80,7 +80,7 @@ const FeaturedEvent = {
     },
   },
 
-  '& .feature-banner': {
+  '& .umd-eyebrow': {
     backgroundColor: Colors.gold,
     clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)',
     display: 'inline-block',

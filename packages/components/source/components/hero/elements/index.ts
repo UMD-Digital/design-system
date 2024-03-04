@@ -18,6 +18,7 @@ const {
   LIGHT_ATTR,
   MD_ATTR,
   WHITE_ATTR,
+  IS_INTERIOR,
 } = NAMING;
 const {
   ATTRIBUTE_THEME,
@@ -25,6 +26,7 @@ const {
   ATTRIBUTE_TEXT_ALIGN,
   ATTRIBUTE_HAS_IMAGE,
   ATTRIBUTE_WITHIN_LOCK,
+  ATTRIBUTE_INTERIOR,
 } = VARIABLES;
 const { HERO_CONTAINER } = ELEMENTS;
 const { tablet, desktop } = BREAKPOINTS;
@@ -88,6 +90,13 @@ const DefaultOverwrite = `
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_LOCK} {
       padding-top: ${Spacing['2xl']};
       padding-bottom: ${Spacing['2xl']};
+    }
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR}${IS_INTERIOR} {
+      min-height: 400px;
+      height: 40vh;
     }
   }
 `;
@@ -187,6 +196,8 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   container.setAttribute(ATTRIBUTE_TYPE, element._type);
   container.setAttribute(ATTRIBUTE_THEME, element._theme);
   container.setAttribute(ATTRIBUTE_TEXT_ALIGN, element._textAlignment);
+
+  if (element._interior) container.setAttribute(ATTRIBUTE_INTERIOR, '');
 
   lock.classList.add(HERO_LOCK);
   lock.appendChild(wrapper);

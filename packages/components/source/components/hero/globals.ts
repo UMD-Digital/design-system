@@ -17,6 +17,7 @@ export const SLOTS = {
 };
 export const VARIABLES = {
   TYPE_DEFAULT: 'default',
+  TYPE_DEFAULT_INTERIOR: 'default-interior',
   TYPE_DEFAULT_CENTERED: 'default-centered',
   TYPE_STACKED: 'stacked',
   TYPE_STACKED_INTERIOR: 'stacked-interior',
@@ -34,6 +35,7 @@ export const VARIABLES = {
   ATTRIBUTE_TEXT_ALIGN: 'text-align',
   ATTRIBUTE_HAS_IMAGE: 'has-image',
   ATTRIBUTE_WITHIN_LOCK: 'within-lock',
+  ATTRIBUTE_INTERIOR: 'interior',
 };
 export const NAMING = {
   DEFAULT_ATTR: `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_DEFAULT}']`,
@@ -48,4 +50,5 @@ export const NAMING = {
   TEXT_ALIGN_CENTER: `[${VARIABLES.ATTRIBUTE_TEXT_ALIGN}='${VARIABLES.TEXT_ALIGN_CENTER}']`,
   HAS_IMAGE: `[${VARIABLES.ATTRIBUTE_HAS_IMAGE}]`,
   IS_WITHIN_LOCK: `[${VARIABLES.ATTRIBUTE_WITHIN_LOCK}]`,
+  IS_INTERIOR: `[${VARIABLES.ATTRIBUTE_INTERIOR}]`,
 };

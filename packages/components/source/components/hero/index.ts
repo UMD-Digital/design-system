@@ -15,6 +15,7 @@ const {
   TEXT_ALIGN_LEFT,
   TEXT_ALIGN_CENTER,
   TYPE_STACKED_INTERIOR,
+  TYPE_DEFAULT_INTERIOR,
   TYPE_STACKED,
 } = VARIABLES;
 
@@ -26,6 +27,7 @@ export class UMDHeroElement extends HTMLElement {
   _type = TYPE_DEFAULT;
   _textAlignment = TEXT_ALIGN_LEFT;
   _withLock = false;
+  _interior = false;
 
   constructor() {
     super();
@@ -47,6 +49,11 @@ export class UMDHeroElement extends HTMLElement {
     if (this._type === TYPE_DEFAULT_CENTERED) {
       this._type = TYPE_DEFAULT;
       this._textAlignment = TEXT_ALIGN_CENTER;
+    }
+
+    if (this._type === TYPE_DEFAULT_INTERIOR) {
+      this._type = TYPE_DEFAULT;
+      this._interior = true;
     }
 
     if (this._type === TYPE_STACKED_INTERIOR) {

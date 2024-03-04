@@ -161,6 +161,16 @@ export const CreateAsset = ({ element }: { element: HeroType }) => {
 
   container.classList.add(HERO_IMAGE);
 
+  const makeDefaultImage = () => {
+    const svgImage = document.createElement('img');
+    svgImage.setAttribute(
+      'src',
+      `data:image/svg+xml,${encodeURIComponent(DEFAULT_IMAGE)}`,
+    );
+    svgImage.setAttribute('alt', 'Fearlessly Forward graphic');
+    container.appendChild(svgImage);
+  };
+
   if (isVideo) {
     const video = videoRef.cloneNode(true) as HTMLImageElement;
     container.appendChild(video);
@@ -177,18 +187,14 @@ export const CreateAsset = ({ element }: { element: HeroType }) => {
 
       return container;
     } else {
-      if (type !== TYPE_MINIMAL) {
-        const svgImage = document.createElement('img');
-        svgImage.setAttribute(
-          'src',
-          `data:image/svg+xml,${encodeURIComponent(DEFAULT_IMAGE)}`,
-        );
-        svgImage.setAttribute('alt', 'Fearlessly Forward graphic');
-        container.appendChild(svgImage);
-
-        return container;
-      }
+      makeDefaultImage();
+      return container;
     }
+  }
+
+  if (!isImage && !isVideo && type !== TYPE_MINIMAL) {
+    makeDefaultImage();
+    return container;
   }
 
   return null;

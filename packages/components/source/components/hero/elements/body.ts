@@ -27,7 +27,7 @@ const {
 const { HERO_CONTAINER } = ELEMENTS;
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
 const { HERO_BODY } = ELEMENTS;
-const { tablet } = BREAKPOINTS;
+const { tablet, desktop } = BREAKPOINTS;
 
 const HERO_EYEBROW = 'umd-hero-overlay-eyebrow';
 const HERO_HEADLINE = 'umd-hero-overlay-headline';
@@ -96,6 +96,18 @@ const HeadlineStyles = `
     },
   })}
 
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE} {
+      max-width: 700px;
+    }
+  }
+
+  @container umd-hero (min-width: ${desktop}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE} {
+      max-width: 776px;
+    }
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
@@ -137,6 +149,11 @@ const HeadlineStyles = `
 
   .${HERO_HEADLINE} + * {
     margin-top: ${Spacing.md};
+  }
+
+  .${HERO_HEADLINE} > a:hover,
+  .${HERO_HEADLINE} > a:focus {
+    text-decoration: underline;
   }
 `
 
@@ -180,6 +197,7 @@ const TextStyles = `
 
   .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_TEXT} {
     color: ${Colors.gray.dark};
+    font-weight: 400;
   }
 
   .${HERO_CONTAINER}${LOGO_ATTR}${DARK_ATTR} .${HERO_TEXT} {

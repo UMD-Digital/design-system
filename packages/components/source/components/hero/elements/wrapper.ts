@@ -17,27 +17,48 @@ const {
   HAS_IMAGE,
 } = NAMING;
 const { HERO_CONTAINER } = ELEMENTS;
-const { tablet } = BREAKPOINTS;
+const { tablet, desktop } = BREAKPOINTS;
 
 const HERO_WRAPPER = 'umd-hero-wrapper';
 const HERO_WRAPPER_CHILD = 'umd-hero-child';
 
 // prettier-ignore
 const DefaultOverwrite = `
+  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
+    display: flex;
+    align-items: flex-end;
+  }
+
   @container umd-hero (max-width: ${tablet - 1}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
       margin-top: -14px;
     }
   }
 
-  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
-    display: flex;
-    align-items: flex-end;
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
+      max-width: 736px;
+    }
+  }
+
+  @container umd-hero (min-width: ${desktop}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
+      max-width: 808px;
+    }
   }
 
   .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_WRAPPER} {
     justify-content: center;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 928px;
+  }
+
+  @container umd-hero (min-width: ${tablet}px) {
+    .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_WRAPPER} {
+      width: 80vw;
+    }
   }
 `;
 

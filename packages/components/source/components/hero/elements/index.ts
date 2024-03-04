@@ -1,6 +1,6 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { STYLES_ASSET, CreateAsset } from './image';
+import { STYLES_ASSET, CreateAsset } from './assets';
 import { STYLES_WRAPPER, CreateWrapper } from './wrapper';
 import { HeroType } from '../index';
 import { NAMING, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
@@ -67,8 +67,14 @@ const ThemeOverwrite = `
 const DefaultOverwrite = `
   @container umd-hero (min-width: ${tablet}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} {
-      height: 80vh;
-      max-height: 800px;
+      height: 75vh;
+      min-height: 480px;
+    }
+  }
+
+  @container umd-hero (min-width: ${desktop}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} {
+      min-height: 720px;
     }
   }
 

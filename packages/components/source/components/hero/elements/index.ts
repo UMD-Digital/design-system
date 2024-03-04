@@ -1,6 +1,6 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { STYLES_IMAGE, CreateImage } from './image';
+import { STYLES_ASSET, CreateAsset } from './image';
 import { STYLES_WRAPPER, CreateWrapper } from './wrapper';
 import { HeroType } from '../index';
 import { NAMING, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
@@ -167,7 +167,7 @@ export const ComponentStyles = `
   ${Reset}
   ${STYLES_CONTAINER}
   ${STYLES_WRAPPER}
-  ${STYLES_IMAGE}
+  ${STYLES_ASSET}
 `;
 
 export const CreateShadowDom = ({ element }: { element: HeroType }) => {
@@ -175,7 +175,7 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const wrapper = CreateWrapper({ element });
-  const image = CreateImage({ element });
+  const asset = CreateAsset({ element });
 
   container.classList.add(HERO_CONTAINER);
   container.setAttribute(ATTRIBUTE_TYPE, element._type);
@@ -185,14 +185,14 @@ export const CreateShadowDom = ({ element }: { element: HeroType }) => {
   lock.classList.add(HERO_LOCK);
   lock.appendChild(wrapper);
 
-  if (image) {
+  if (asset) {
     container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
 
     if (element._withLock) {
-      lock.appendChild(image);
+      lock.appendChild(asset);
       container.setAttribute(ATTRIBUTE_WITHIN_LOCK, '');
     } else {
-      container.appendChild(image);
+      container.appendChild(asset);
     }
   }
 

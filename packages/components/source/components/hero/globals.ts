@@ -9,6 +9,7 @@ export const ELEMENTS = {
 };
 export const SLOTS = {
   IMAGE: 'image',
+  VIDEO: 'video',
   HEADLINE: 'headline',
   EYEBROW: 'eyebrow',
   TEXT: 'text',

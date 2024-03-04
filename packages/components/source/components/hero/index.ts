@@ -16,7 +16,6 @@ const {
   TEXT_ALIGN_CENTER,
   TYPE_STACKED_INTERIOR,
   TYPE_STACKED,
-  ATTRIBUTE_WITHIN_LOCK,
 } = VARIABLES;
 
 export const ELEMENT_NAME = 'umd-element-hero';
@@ -37,12 +36,6 @@ export class UMDHeroElement extends HTMLElement {
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }
-
-  static get observedAttributes() {
-    return ['theme', 'type'];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
 
   connectedCallback() {
     const type = this.getAttribute('type');

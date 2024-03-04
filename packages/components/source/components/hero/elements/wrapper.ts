@@ -16,7 +16,7 @@ const {
   MD_ATTR,
   HAS_IMAGE,
 } = NAMING;
-const { HERO_CONTAINER } = ELEMENTS;
+const { HERO_CONTAINER, HERO_EYEBROW } = ELEMENTS;
 const { tablet, desktop } = BREAKPOINTS;
 
 const HERO_WRAPPER = 'umd-hero-wrapper';
@@ -31,7 +31,14 @@ const DefaultOverwrite = `
 
   @container umd-hero (max-width: ${tablet - 1}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
+      padding-top: ${Spacing.sm};
+    }
+  }
+
+  @container umd-hero (max-width: ${tablet - 1}px) {
+    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER}:has(.${HERO_EYEBROW}) {
       margin-top: -14px;
+      padding-top: 0;
     }
   }
 

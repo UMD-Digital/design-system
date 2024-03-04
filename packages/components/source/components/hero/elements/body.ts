@@ -26,10 +26,9 @@ const {
 
 const { HERO_CONTAINER } = ELEMENTS;
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
-const { HERO_BODY } = ELEMENTS;
+const { HERO_BODY, HERO_EYEBROW } = ELEMENTS;
 const { tablet, desktop } = BREAKPOINTS;
 
-const HERO_EYEBROW = 'umd-hero-overlay-eyebrow';
 const HERO_HEADLINE = 'umd-hero-overlay-headline';
 const HERO_TEXT = 'umd-hero-overlay-text';
 const HERO_ACTION = 'umd-hero-overlay-actions';

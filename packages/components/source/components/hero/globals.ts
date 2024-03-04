@@ -6,6 +6,7 @@ export const ELEMENTS = {
   HERO_CONTAINER: `umd-hero-container`,
   HERO_BODY: 'umd-hero-body',
   HERO_BODY_WRAPPER: 'umd-hero-body-wrapper',
+  HERO_EYEBROW: 'umd-hero-overlay-eyebrow',
 };
 export const SLOTS = {
   IMAGE: 'image',

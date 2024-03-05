@@ -66,3 +66,30 @@
     })
   }}
 {% endmacro %}
+
+{% macro AccordionRichTextSuccinct(params) %}
+  {{
+    _self.RichText({
+      characters: 100,
+      isStyled: false
+    })
+  }}
+{% endmacro %}
+
+{% macro AccordionRichTextNormal(params) %}
+  {{
+    _self.RichText({
+      characters: 250,
+      isStyled: false
+    })
+  }}
+{% endmacro %}
+
+{% macro AccordionRichTextVerbose(params) %}
+  {{
+    _self.RichText({
+      characters: 500,
+      isStyled: false
+    })
+  }}
+{% endmacro %}

@@ -5,35 +5,49 @@ import {
   SLOTS,
   BREAKPOINTS,
   ELEMENTS,
+  NAMING,
 } from 'components/accordion/globals';
 import { ELEMENT_TYPE } from 'components/accordion';
 import { SlotDefaultStyling } from 'helpers/ui';
-import { EventToggleExpand } from '../services/events';
+import { EventAdjustExpandState, EventAdjustHeight } from '../services/events';
 
 const { Colors, Spacing } = Tokens;
 
 const { HEADLINE } = SLOTS;
 const { small } = BREAKPOINTS;
-const { ACCORDION_HEADLINE } = ELEMENTS;
+const { ACCORDION_HEADLINE, CONTAINER_NAME } = ELEMENTS;
+const { THEME_DARK_ATTR } = NAMING;
 
 // prettier-ignore
 export const headlineStyles = `
   .${ACCORDION_HEADLINE} {
     display: flex;
     border-top: 1px solid transparent;
-    padding: 32px 100px 32px 32px !important;
+    padding: ${Spacing.md};
+    padding-right: ${Spacing['4xl']};
     background-color: ${Colors.gray.lightest};
-    padding-right: calc(16px + ${Spacing.sm} + ${Spacing.md}) !important;
     position: relative;
-    text-align: left;
     transition: background 0.5s, border 0.5s, color 0.5s, padding 0.5s;
     width: 100%;
+    text-align: left;
+  }
+
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE} {
+    background-color: ${Colors.black};
+  }
+
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE} > * {
+    color: ${Colors.white}
+  }
+
+  .${CONTAINER_NAME} .${ACCORDION_HEADLINE} > * {
+    color: ${Colors.gray.dark}
   }
 
   @container ${ELEMENT_NAME} (min-width: ${small}px) {
     .${ACCORDION_HEADLINE} {
-      padding: ${Spacing.lg} !important;
-      padding-right: calc(20px + ${Spacing.lg} + ${Spacing['2xl']}) !important;
+      padding: ${Spacing.lg};
+      padding-right: ${Spacing['6xl']}
     }
   }
 
@@ -45,6 +59,11 @@ export const headlineStyles = `
     right: ${Spacing.md};
     transition: background 0.5s, height 0.5s, right 0.5s, top 0.5s,
     transform 0.5s, width 0.5s;
+  }
+
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE}:before,
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE}:after {
+    background-color: ${Colors.gold};
   }
 
   .${ACCORDION_HEADLINE}:before {
@@ -75,23 +94,34 @@ export const headlineStyles = `
     }
   }
 
+  .${ACCORDION_HEADLINE}[aria-expanded='true'],
   .${ACCORDION_HEADLINE}:hover,
   .${ACCORDION_HEADLINE}:focus {
     background-color: ${Colors.gray.light};
+    border-top: 1px solid ${Colors.red};
   }
 
-  .${ACCORDION_HEADLINE}[aria-expanded='true'] {
-    border-top: 1px solid ${Colors.red};
-    color: ${Colors.red};
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE}[aria-expanded='true'],
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE}:hover,
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE}:focus {
+    background-color: ${Colors.gray.dark};
+    border-top: 1px solid ${Colors.gold};
+  }
+
+  .${ACCORDION_HEADLINE}[aria-expanded='true'] > *,
+  .${ACCORDION_HEADLINE}:hover > *,
+  .${ACCORDION_HEADLINE}:focus > * {
+    color: ${Colors.red} !important;
+  }
+
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE}[aria-expanded='true'] > *,
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE}:hover > *,
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_HEADLINE}:focus > * {
+    color: ${Colors.gold} !important;
   }
 
   .${ACCORDION_HEADLINE}[aria-expanded='true']:after {
     transform: rotate(90deg);
-  }
-
-  .${ACCORDION_HEADLINE}[aria-expanded='true']:hover,
-  .${ACCORDION_HEADLINE}[aria-expanded='true']:focus {
-    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -107,15 +137,14 @@ export const CreateHeadline = ({ element }: { element: ELEMENT_TYPE }) => {
   const headerSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
 
   headlineContainer.classList.add(ACCORDION_HEADLINE);
-  headlineContainer.ariaExpanded = 'false';
+  headlineContainer.ariaExpanded = element._open ? 'true' : 'false';
 
   if (headerSlot) {
     headlineContainer.appendChild(headerSlot);
 
     headlineContainer.addEventListener('click', () => {
-      const isExpanded = headlineContainer.ariaExpanded === 'true';
-
-      EventToggleExpand({ element: element, expand: !isExpanded });
+      EventAdjustExpandState({ element: element });
+      EventAdjustHeight({ element: element, maintainExpandState: false });
     });
 
     return headlineContainer;

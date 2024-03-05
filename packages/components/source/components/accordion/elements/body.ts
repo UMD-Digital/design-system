@@ -56,18 +56,20 @@ export const bodyStyles = `
     .${ACCORDION_BODY} > * {
       margin-top: ${Spacing.lg};
     }
+  }
 
+  @container ${ELEMENT_NAME} (min-width: ${small}px) {
     .${ACCORDION_BODY}:first-child {
       margin-top: 0;
     }
-}
+  }
 
-${ConvertJSSObjectToStyles({
-    styleObj: {
-        [`.${ACCORDION_BODY_WRAPPER}`]:
-        Typography.SansMedium
-    },
-})}
+  ${ConvertJSSObjectToStyles({
+      styleObj: {
+          [`.${ACCORDION_BODY_WRAPPER}`]:
+          Typography.SansMedium
+      },
+  })}
 `;
 
 export const CreateBody = ({ element }: { element: ELEMENT_TYPE }) => {

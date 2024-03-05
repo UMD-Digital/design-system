@@ -11,6 +11,7 @@ export default `
   :host {
     display: block;
   }
+  
   .${CONTAINER_NAME} {
     container: ${ELEMENT_NAME} / inline-size;
   }

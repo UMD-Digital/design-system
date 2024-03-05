@@ -14,6 +14,7 @@ export class UMDPathwayElement extends HTMLElement {
   _isImageFirst: boolean;
   _isImageScaled: boolean;
   _isThemeDark: boolean;
+  _isHeroType: boolean;
 
   constructor() {
     super();
@@ -21,6 +22,7 @@ export class UMDPathwayElement extends HTMLElement {
     this._isImageFirst = true;
     this._isImageScaled = true;
     this._isThemeDark = false;
+    this._isHeroType = false;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
@@ -28,23 +30,19 @@ export class UMDPathwayElement extends HTMLElement {
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
-  static get observedAttributes() {
-    return ['isImageFirst', 'isImageScaled'];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
-
   connectedCallback() {
     const isImageFirst = this.getAttribute('isImageFirst');
     const isImageScaled = this.getAttribute('isImageScaled');
     const isThemeDark = this.getAttribute('theme') === 'dark';
+    const isHeroType = this.getAttribute('type') === 'true';
 
     if (isImageFirst === 'false') this._isImageFirst = false;
     if (isImageScaled === 'false') this._isImageScaled = false;
     if (isThemeDark) this._isThemeDark = true;
+    if (isHeroType) this._isHeroType = true;
 
     const container = CreateShadowDom({ element: this });
-    this._shadow.appendChild(container);
+    if (container) this._shadow.appendChild(container);
   }
 }
 

@@ -1,7 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../globals';
+import { BREAKPOINTS, ELEMENTS, NAMING, SLOTS } from '../globals';
 import { ELEMENT_TYPE } from '../index';
 
 const { Colors, Spacing } = Tokens;
@@ -9,7 +9,7 @@ const { Colors, Spacing } = Tokens;
 const { HIGHLIGHT } = SLOTS;
 const { medium, large } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
-const { ATTRIBUTE_THEME } = VARIABLES;
+const { WITH_THEME } = NAMING;
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
@@ -17,11 +17,11 @@ const PATHWAY_HIGHLIGHT_CONTAINER_TEXT = 'umd-pathway-highlight-text';
 
 // prettier-ignore
 const ThemeStyles = `
-  .${PATHWAY_CONTAINER}[${ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} {
+  .${PATHWAY_CONTAINER}${WITH_THEME} .${PATHWAY_HIGHLIGHT_CONTAINER} {
     background-color: ${Colors.black};
   }
 
-  .${PATHWAY_CONTAINER}[${ATTRIBUTE_THEME}] .${PATHWAY_HIGHLIGHT_CONTAINER} * {
+  .${PATHWAY_CONTAINER}${WITH_THEME} .${PATHWAY_HIGHLIGHT_CONTAINER} * {
     color: ${Colors.white};
   }
 `

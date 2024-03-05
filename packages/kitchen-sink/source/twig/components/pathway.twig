@@ -3,7 +3,7 @@
 {% set image = random(RecImageOptions) %}
 
 {% block page %}
-  <section>
+  <section style="padding-bottom: 20vh">
     <div class="umd-lock">
       <h1 class="page-heading">
         Pathway
@@ -13,11 +13,61 @@
     <section>
       <div class="umd-lock">
         <h2 class="content-heading default type-hr">
-          <span>Text</span>
+          <span>Highlight</span>
+          <span class="type-detail">Light Theme</span>
         </h2>
       </div>
 
       <umd-element-pathway>
+        <p slot="highlight">
+          To improve the lives of every person on Earth, we will reimagine
+          teaching and learning; accelerate solutions to the grand challenges of
+          our time through creativity and discovery; and forge a diverse and
+          inclusive community where our differences are celebrated and equity is
+          relentlessly pursued. Together, we will dedicate ourselves to
+          advancing the public good because our individual well-being is
+          enduringly bound to our collective well-being.
+        </p>
+
+        <p slot="eyebrow">
+          Pathway
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="secondary">
+            <a href="/" aria-label="link to homepage">Home Link</a>
+          </umd-element-call-to-action>
+          <umd-element-call-to-action type="secondary">
+            <a href="/components" aria-label="link to components">
+              Components Link
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading default type-hr">
+          <span>Highlight</span>
+          <span class="type-detail">Dark Theme</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway theme="dark">
         <p slot="highlight">
           To improve the lives of every person on Earth, we will reimagine
           teaching and learning; accelerate solutions to the grand challenges of
@@ -106,6 +156,10 @@
           <img src="{{ image }}" alt="Image" />
         </div>
 
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
         <p slot="headline">
           What does it take to change the world?
         </p>
@@ -142,6 +196,10 @@
           <img src="{{ image }}" alt="Image" />
         </div>
 
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
         <p slot="headline">
           What does it take to change the world?
         </p>
@@ -157,6 +215,45 @@
 
         <div slot="actions">
           <umd-element-call-to-action type="secondary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Hero</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway type="true">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary">
             <a href="https://google.com" aria-label="link to google">
               Learn More
             </a>

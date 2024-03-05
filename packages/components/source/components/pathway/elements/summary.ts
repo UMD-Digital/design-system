@@ -6,7 +6,7 @@ import {
 } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
+import { SLOTS, ELEMENTS, NAMING, BREAKPOINTS } from '../globals';
 import { ELEMENT_TYPE } from '../index';
 
 const { Spacing, Colors, FontSize } = Tokens;
@@ -18,11 +18,12 @@ const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
 const { medium, large } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
 const {
-  ATTRIBUTE_IMAGE,
-  ATTRIBUTE_IMAGE_POSITION,
-  ATTRIBUTE_HIGHLIGHT,
-  ATTRIBUTE_THEME,
-} = VARIABLES;
+  WITH_IMAGE_RIGHT,
+  WITH_IMAGE_LEFT,
+  WITH_IMAGE,
+  WITH_HIGHLIGHT,
+  WITH_HERO,
+} = NAMING;
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =
@@ -36,27 +37,19 @@ const SUMMARY_ACTIONS_CONTAINER =
   'umd-pathway-summary-column-actions-container';
 
 // prettier-ignore
-const ThemeStyles = `
-  .${PATHWAY_CONTAINER}[${ATTRIBUTE_THEME}] .${SUMMARY_HEADLINE_CONTAINER},
-  .${PATHWAY_CONTAINER}[${ATTRIBUTE_THEME}] .${SUMMARY_TEXT_CONTAINER} * {
-    color: ${Colors.white};
-  }
-`
-
-// prettier-ignore
 const PositionStyles = `
   @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="right"] .${SUMMARY_CONTAINER} {
+    .${PATHWAY_CONTAINER}${WITH_IMAGE_RIGHT} .${SUMMARY_CONTAINER} {
       order: 1;
     }
 
-    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="right"] .${SUMMARY_CONTAINER_WRAPPER} {
+    .${PATHWAY_CONTAINER}${WITH_IMAGE_RIGHT} .${SUMMARY_CONTAINER_WRAPPER} {
       padding-left: 0;
     }
   }
 
   @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="left"] .${SUMMARY_CONTAINER_WRAPPER} {
+    .${PATHWAY_CONTAINER}${WITH_IMAGE_LEFT} .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: 0;
     }
   }
@@ -64,18 +57,18 @@ const PositionStyles = `
 
 // prettier-ignore
 const WithImageStyles = `
-  .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+  .${PATHWAY_CONTAINER}${WITH_IMAGE} .${SUMMARY_CONTAINER_WRAPPER} {
     padding: ${Spacing.md};
   }
 
   @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+    .${PATHWAY_CONTAINER}${WITH_IMAGE} .${SUMMARY_CONTAINER_WRAPPER} {
       padding: ${Spacing['4xl']} ${Spacing['2xl']};
     }
   }
 
   @container umd-pathway (min-width: ${large}px) {
-    .${PATHWAY_CONTAINER}[${ATTRIBUTE_IMAGE}] .${SUMMARY_CONTAINER_WRAPPER} {
+    .${PATHWAY_CONTAINER}${WITH_IMAGE} .${SUMMARY_CONTAINER_WRAPPER} {
       padding: ${Spacing['8xl']} ${Spacing['6xl']};
     }
   }
@@ -83,19 +76,28 @@ const WithImageStyles = `
 
 // prettier-ignore
 const WithHighlightStyles = `
-  .${PATHWAY_CONTAINER}[${ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+  .${PATHWAY_CONTAINER}${WITH_HIGHLIGHT} .${SUMMARY_CONTAINER_WRAPPER} {
     padding-bottom: ${Spacing.md};
   }
 
   @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}[${ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+    .${PATHWAY_CONTAINER}${WITH_HIGHLIGHT} .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: ${Spacing['4xl']};
     }
   }
 
   @container umd-pathway (min-width: ${large}px) {
-    .${PATHWAY_CONTAINER}[${ATTRIBUTE_HIGHLIGHT}] .${SUMMARY_CONTAINER_WRAPPER} {
+    .${PATHWAY_CONTAINER}${WITH_HIGHLIGHT} .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: ${Spacing['6xl']};
+    }
+  }
+`;
+
+// prettier-ignore
+const WithHeroStyles = `
+  @container umd-pathway (max-width: ${medium - 1}px) {
+    .${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_CONTAINER_WRAPPER} {
+      padding: ${Spacing.md} 0;
     }
   }
 `;
@@ -190,8 +192,8 @@ export const STYLES_PATHWAY_SUMMARY_COLUMN = `
   ${ActionStyles}
   ${WithImageStyles}
   ${WithHighlightStyles}
+  ${WithHeroStyles}
   ${PositionStyles}
-  ${ThemeStyles}
 `;
 
 export const CreateSummaryColumn = ({ element }: { element: ELEMENT_TYPE }) => {

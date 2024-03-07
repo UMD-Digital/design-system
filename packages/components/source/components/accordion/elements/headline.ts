@@ -97,7 +97,7 @@ export const headlineStyles = `
   .${ACCORDION_HEADLINE}[aria-expanded='true'],
   .${ACCORDION_HEADLINE}:hover,
   .${ACCORDION_HEADLINE}:focus {
-    background-color: ${Colors.gray.light};
+    background-color: ${Colors.gray.lighter};
     border-top: 1px solid ${Colors.red};
   }
 

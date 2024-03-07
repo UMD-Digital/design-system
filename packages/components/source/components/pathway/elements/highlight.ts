@@ -82,6 +82,11 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     },
   })}
 
+  .${PATHWAY_HIGHLIGHT_CONTAINER_TEXT},
+  .${PATHWAY_HIGHLIGHT_CONTAINER_TEXT} * {
+    font-weight: 700;
+  }
+
   ${ThemeStyles}
 `
 

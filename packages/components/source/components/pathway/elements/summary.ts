@@ -101,6 +101,10 @@ const WithHeroStyles = `
     }
   }
 
+  .${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_HEADLINE_CONTAINER} {
+    max-width: 85%;
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_HEADLINE_CONTAINER}`]: CampaignExtralarge,
@@ -118,10 +122,6 @@ const WithHeroStyles = `
       [`.${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_TEXT_CONTAINER} *`]: SansLarger,
     },
   })}
-
-  .${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_TEXT_CONTAINER} * {
-    font-weight: 700;
-  }
 `;
 
 // prettier-ignore

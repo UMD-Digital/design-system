@@ -19,7 +19,6 @@ const LogoColumn = {
 
   '& .logo': {
     display: 'block',
-    maxWidth: `calc(100% - (${Spacing['6xl']} + 4px))`,
 
     '& img': {
       width: '100%',

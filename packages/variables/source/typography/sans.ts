@@ -120,7 +120,7 @@ export const SansSmall = {
   },
 
   [`@media (${breakpointMobile})`]: {
-    ...SizeSmaller,
+    ...SizeSmall,
   },
 };
 
@@ -133,7 +133,7 @@ export const SansSmaller = {
   },
 
   [`@media (${breakpointMobile})`]: {
-    ...SizeMin,
+    ...SizeSmaller,
   },
 };
 

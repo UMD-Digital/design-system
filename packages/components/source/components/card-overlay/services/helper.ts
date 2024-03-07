@@ -15,11 +15,6 @@ export const GifFunctionality = ({
   const gif = new Freezeframe(image, {
     trigger: false,
   });
-
-  console.log(gif);
-
-  gif.start();
-  gif.stop();
 };
 
 // button.addEventListener('click', () => {

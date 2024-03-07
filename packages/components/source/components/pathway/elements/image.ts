@@ -49,6 +49,10 @@ const HeroStyles = `
 
 // prettier-ignore
 export const STYLES_PATHWAY_IMAGE_COLUMN = `
+  .${PATHWAY_IMAGE_CONTAINER_WRAPPER} > * {
+    display: flex;
+  }
+
   .${PATHWAY_IMAGE_CONTAINER} * {
     height: 100%;
   }

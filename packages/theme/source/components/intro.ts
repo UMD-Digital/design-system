@@ -13,6 +13,7 @@ export default {
       ...SpacingContent['.umd-layout-spacing-center'],
       ...{
         margin: 'auto',
+        maxWidth: `calc(${Spacing['5xl']} * 10)`,
         paddingTop: `${Spacing['6xl']}`,
         position: 'relative',
 

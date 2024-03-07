@@ -66,7 +66,6 @@ export const SansLargest = {
 
 export const SansExtraLarge = {
   fontFamily: FontFamily['sans'],
-  fontWeight: FontWeight['bold'],
   ...SizeExtraLarge,
 
   [`@media (${breakpointDesktop})`]: {
@@ -80,7 +79,6 @@ export const SansExtraLarge = {
 
 export const SansLarger = {
   fontFamily: FontFamily['sans'],
-  fontWeight: FontWeight['bold'],
   ...SizeLarger,
 
   [`@media (${breakpointDesktop})`]: {

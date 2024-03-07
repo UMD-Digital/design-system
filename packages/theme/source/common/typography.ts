@@ -104,10 +104,16 @@ export const transforms = {
     textTransform: 'uppercase',
   },
 
-  '.umd-sans-larger-regular': {
+  '.umd-sans-extralarge-bold': {
+    ...Typography.SansExtraLarge,
+
+    fontWeight: fontWeight['bold'],
+  },
+
+  '.umd-sans-larger-bold': {
     ...Typography.SansLarger,
 
-    fontWeight: fontWeight['normal'],
+    fontWeight: fontWeight['bold'],
   },
 };
 

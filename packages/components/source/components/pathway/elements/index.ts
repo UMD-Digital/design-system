@@ -61,7 +61,7 @@ const LockStyles = `
 
   @container umd-pathway (min-width: ${medium}px) {
     .${PATHWAY_CONTAINER}${WITH_HERO} .${PATHWAY_CONTAINER_LOCK} {
-      min-height: 656px;
+      min-height: 832px;
     }
   }
 `;

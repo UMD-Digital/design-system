@@ -12,7 +12,7 @@ import { ELEMENT_TYPE } from '../index';
 const { Spacing, Colors, FontSize } = Tokens;
 const { Ribbon, Text } = Fields;
 const { FlexRows } = Layout;
-const { SansLargest } = Typography;
+const { SansLargest, CampaignExtralarge, SansLarger } = Typography;
 
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
 const { medium, large } = BREAKPOINTS;
@@ -100,6 +100,24 @@ const WithHeroStyles = `
       padding: ${Spacing.md} 0;
     }
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_HEADLINE_CONTAINER}`]: CampaignExtralarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_HEADLINE_CONTAINER} *`]: CampaignExtralarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_TEXT_CONTAINER} *`]: SansLarger,
+    },
+  })}
 `;
 
 // prettier-ignore

@@ -16,7 +16,7 @@ const Watermark = {
   fontWeight: 'bold',
   display: 'flex',
   justifyContent: 'flex-start',
-  opacity: ' 0.7',
+  opacity: ' 0.6',
   pointerEvents: 'none',
   userSelect: 'none',
   zIndex: '-1',

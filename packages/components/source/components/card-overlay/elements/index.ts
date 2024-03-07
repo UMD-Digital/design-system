@@ -160,6 +160,7 @@ const VariantImageThemeTint = `
 const VariantImageThemeStyles = `
   .${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] {
     padding-top: ${Spacing['4xl']};
+    min-height: 400px;
   }
 
   @container umd-card (min-width: 300px) {
@@ -212,7 +213,6 @@ export const ComponentStyles = `
     padding: ${Spacing.md};
     padding-top: ${Spacing['4xl']};
     padding-bottom: ${Spacing.lg};
-    min-height: 400px;
   }
 
   @media (min-width: 768px) {

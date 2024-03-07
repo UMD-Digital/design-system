@@ -11,6 +11,7 @@
   {% set imageThree = random(RecImageOptions) %}
   {% set imageSquare = random(SquareImageOptions) %}
   {% set imageWeird = random(WeirdImageOptions) %}
+  {% set gifImage = random(GifImageOptions) %}
 
   <section>
     <div class="umd-lock">
@@ -795,5 +796,136 @@
         </section>
       </div>
     </div>
+
+    <section style="padding-bottom: 10vh">
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span class="type">Edge Cases</span>
+          <span class="type-detail">Gif</span>
+        </div>
+
+        <div class="umd-grid-three my-md">
+          <umd-element-card-overlay data-image="">
+            <img slot="image" src="{{ gifImage }}" alt="Example Alt Text" />
+
+            <div slot="eyebrow">
+              <p>
+                Optional Eyebrow
+              </p>
+            </div>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                <span class="sr-only">Text for Screen Reader</span>
+                <span aria-hidden="false">
+                  Lorem Ipsum Dolor Sit Amet Consectetur A
+                </span>
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut a
+              </p>
+            </div>
+
+            <div slot="date">
+              <date>
+                June 21, 2024
+              </date>
+            </div>
+
+            <umd-element-call-to-action slot="cta"
+              type="secondary"
+              theme="dark">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-card-overlay>
+
+          <umd-element-card-overlay data-image="">
+            <img slot="image" src="{{ gifImage }}" alt="Example Alt Text" />
+
+            <div slot="eyebrow">
+              <p>
+                Optional Eyebrow
+              </p>
+            </div>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                <span class="sr-only">Text for Screen Reader</span>
+                <span aria-hidden="false">
+                  Lorem Ipsum Dolor Sit Amet Consectetur A
+                </span>
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut a
+              </p>
+            </div>
+
+            <div slot="date">
+              <date>
+                March 20, 2023
+              </date>
+            </div>
+
+            <umd-element-call-to-action slot="cta"
+              type="secondary"
+              theme="dark">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-card-overlay>
+
+          <umd-element-card-overlay data-image="">
+            <img slot="image" src="{{ gifImage }}" alt="Example Alt Text" />
+
+            <div slot="eyebrow">
+              <p>
+                Optional Eyebrow
+              </p>
+            </div>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                <span class="sr-only">Text for Screen Reader</span>
+                <span aria-hidden="false">
+                  Lorem Ipsum Dolor Sit Amet Consectetur A
+                </span>
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut a
+              </p>
+            </div>
+
+            <div slot="date">
+              <date>
+                March 20, 2023
+              </date>
+            </div>
+
+            <umd-element-call-to-action slot="cta"
+              type="secondary"
+              theme="dark">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-card-overlay>
+        </div>
+      </div>
+    </section>
   </section>
 {% endblock %}

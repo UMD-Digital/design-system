@@ -32,6 +32,10 @@ const WeirdImageOptions = [
   'https://brandportal.umd.edu/m/4f1c9589ac5fa49d/Hero_web-Students_ESJLTC_03292023_SC_5429.jpg',
 ];
 
+const GifImageOptions = [
+  'https://umd-today.files.svdcdn.com/production/gifs/music_collage.gif_1920x1080.gif?dm=1707945389',
+];
+
 const logoOptions = [
   'https://provost.umd.edu/logos/provost-logo-primary-light.png',
 ];
@@ -45,6 +49,7 @@ const twigTask = () =>
           RecImageOptions,
           SquareImageOptions,
           WeirdImageOptions,
+          GifImageOptions,
           logoOptions,
         },
       }),

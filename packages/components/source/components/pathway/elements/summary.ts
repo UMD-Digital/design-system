@@ -118,6 +118,10 @@ const WithHeroStyles = `
       [`.${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_TEXT_CONTAINER} *`]: SansLarger,
     },
   })}
+
+  .${PATHWAY_CONTAINER}${WITH_HERO} .${SUMMARY_TEXT_CONTAINER} * {
+    font-weight: 700;
+  }
 `;
 
 // prettier-ignore

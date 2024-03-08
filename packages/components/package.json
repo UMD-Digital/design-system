@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
-    "freezeframe": "^5.0.2",
     "postcss-js": "^4.0.1",
     "tw-to-css": "^0.0.12"
   }

@@ -3,7 +3,7 @@ import { VARIABLES, ELEMENTS, SLOTS } from '../globals';
 
 const { ATTR_IMAGE } = VARIABLES;
 const { TEXT } = SLOTS;
-const { CARD_OVERLAY_TEXT } = ELEMENTS;
+const { CARD_OVERLAY_TEXT, CARD_OVERLAY_IMAGE_CONTAINER } = ELEMENTS;
 
 const CONTAINER_WIDTH_TEXT_BREAKPOINT_MAX = 600;
 const CONTAINER_WIDTH_TEXT_BREAKPOINT_LARGE = 400;
@@ -38,10 +38,38 @@ const TruncateText = ({ element }: { element: UMDCardOverlayElement }) => {
   }
 };
 
+export const SizeCanvas = ({ element }: { element: UMDCardOverlayElement }) => {
+  const shadowDom = element.shadowRoot as ShadowRoot;
+  const container = shadowDom.querySelector(
+    `.${CARD_OVERLAY_IMAGE_CONTAINER}`,
+  ) as HTMLDivElement;
+  const image = shadowDom.querySelector('img');
+  const canvas = container.querySelector('canvas') as HTMLCanvasElement;
+
+  if (!container || !canvas || !image) return;
+
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+  const width = image.width;
+  const height = image.height;
+
+  const clientWidth = Math.ceil(width);
+  const clientHeight = Math.ceil(height);
+
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  canvas.setAttribute('width', clientWidth.toString());
+  canvas.setAttribute('height', clientHeight.toString());
+
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(image, 0, 0, clientWidth, clientHeight);
+};
+
 export const EventResize = ({
   element,
 }: {
   element: UMDCardOverlayElement;
 }) => {
   TruncateText({ element });
+  SizeCanvas({ element });
 };

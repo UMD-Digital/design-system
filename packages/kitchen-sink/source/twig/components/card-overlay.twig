@@ -11,7 +11,6 @@
   {% set imageThree = random(RecImageOptions) %}
   {% set imageSquare = random(SquareImageOptions) %}
   {% set imageWeird = random(WeirdImageOptions) %}
-  {% set gifImage = random(GifImageOptions) %}
 
   <section>
     <div class="umd-lock">
@@ -806,7 +805,9 @@
 
         <div class="umd-grid-three my-md">
           <umd-element-card-overlay data-image="">
-            <img slot="image" src="{{ gifImage }}" alt="Example Alt Text" />
+            <img slot="image"
+              src="{{ GifImageOptions[0] }}"
+              alt="Example Alt Text" />
 
             <div slot="eyebrow">
               <p>
@@ -846,7 +847,9 @@
           </umd-element-card-overlay>
 
           <umd-element-card-overlay data-image="">
-            <img slot="image" src="{{ gifImage }}" alt="Example Alt Text" />
+            <img slot="image"
+              src="{{ GifImageOptions[1] }}"
+              alt="Example Alt Text" />
 
             <div slot="eyebrow">
               <p>
@@ -886,7 +889,9 @@
           </umd-element-card-overlay>
 
           <umd-element-card-overlay data-image="">
-            <img slot="image" src="{{ gifImage }}" alt="Example Alt Text" />
+            <img slot="image"
+              src="{{ GifImageOptions[2] }}"
+              alt="Example Alt Text" />
 
             <div slot="eyebrow">
               <p>

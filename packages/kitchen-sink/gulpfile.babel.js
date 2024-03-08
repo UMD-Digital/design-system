@@ -34,6 +34,8 @@ const WeirdImageOptions = [
 
 const GifImageOptions = [
   'https://umd-today.files.svdcdn.com/production/gifs/music_collage.gif_1920x1080.gif?dm=1707945389',
+  'https://umd-today.files.svdcdn.com/production/gifs/ezgif.com-optimize.gif?dm=1694719244',
+  'https://umd-today.files.svdcdn.com/production/gifs/MT-Accolades_23-04_v4.gif?dm=1680887361',
 ];
 
 const logoOptions = [

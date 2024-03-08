@@ -41,6 +41,13 @@ const HeroStyles = `
   }
 
   @container umd-pathway (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${WITH_HERO}${WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER} {
+      left: inherit;
+      right: 0;
+    }
+  }
+
+  @container umd-pathway (min-width: ${medium}px) {
     .${PATHWAY_CONTAINER}${WITH_HERO} .${PATHWAY_IMAGE_CONTAINER} img {
       min-height: inherit;
     }

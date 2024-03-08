@@ -212,5 +212,45 @@
         </div>
       </umd-element-pathway>
     </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Hero</span>
+          <span class="type-detail">Image Right</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway type="true" isImageFirst="false">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
   </section>
 {% endblock %}

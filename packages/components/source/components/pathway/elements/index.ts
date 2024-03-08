@@ -21,7 +21,7 @@ const {
   ATTRIBUTE_THEME,
   ATTRIBUTE_HERO,
 } = VARIABLES;
-const { WITH_IMAGE, WITH_HERO } = NAMING;
+const { WITH_IMAGE, WITH_HERO, WITH_IMAGE_LEFT, WITH_IMAGE_RIGHT } = NAMING;
 
 const PATHWAY_CONTAINER_WRAPPER = 'umd-pathway-container-wrapper';
 const PATHWAY_CONTAINER_LOCK = 'umd-pathway-container-lock';
@@ -74,8 +74,14 @@ const STYLES_CONTAINER = `
   }
 
   @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}${WITH_HERO} .${PATHWAY_CONTAINER_WRAPPER} {
+    .${PATHWAY_CONTAINER}${WITH_HERO}${WITH_IMAGE_LEFT} .${PATHWAY_CONTAINER_WRAPPER} {
       padding-left: 50%;
+    }
+  }
+
+  @container umd-pathway (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${WITH_HERO}${WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_WRAPPER} {
+      padding-right: 50%;
     }
   }
 
@@ -125,6 +131,7 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
     wrapper.appendChild(imageColumn);
     wrapper.appendChild(lock);
 
+    container.setAttribute(ATTRIBUTE_IMAGE_POSITION, imagePosition);
     container.setAttribute(ATTRIBUTE_HERO, '');
     container.appendChild(wrapper);
     return container;

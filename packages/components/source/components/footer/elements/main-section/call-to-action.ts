@@ -22,6 +22,7 @@ export const CallToActionStyles = `
     color: ${Colors.white};
     border: 1px solid ${Colors.red};
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    font-weight: 700;
   }
 
   .${CALL_TO_ACTION_CONTAINER} a:hover,

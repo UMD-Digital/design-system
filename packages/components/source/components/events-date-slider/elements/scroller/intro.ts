@@ -20,6 +20,7 @@ const INTRO_LINK = 'umd-element-date-slider-link';
 const headlineStyles = `
   .${INTRO_HEADLINE} {
     color: ${Colors.black};
+    font-weight: 700;
   }
 
   .${INTRO_HEADLINE} + * {

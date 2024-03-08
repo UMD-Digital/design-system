@@ -52,6 +52,11 @@ const headlineStyles = `
     },
   })}
 
+  .${CARD_OVERLAY_HEADLINE},
+  .${CARD_OVERLAY_HEADLINE} * {
+    font-weight: 700;
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_HEADLINE} a`]:

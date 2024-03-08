@@ -34,7 +34,7 @@ export class UMDPathwayElement extends HTMLElement {
     const isImageFirst = this.getAttribute('isImageFirst');
     const isImageScaled = this.getAttribute('isImageScaled');
     const isThemeDark = this.getAttribute('theme') === 'dark';
-    const isHeroType = this.getAttribute('type') === 'true';
+    const isHeroType = this.getAttribute('type') === 'hero';
 
     if (isImageFirst === 'false') this._isImageFirst = false;
     if (isImageScaled === 'false') this._isImageScaled = false;

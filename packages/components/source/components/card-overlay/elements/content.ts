@@ -10,7 +10,7 @@ import { SLOTS, ELEMENTS } from 'components/card-overlay/globals';
 
 const { Spacing, Colors } = Tokens;
 const { LinkLineSlide } = Animations;
-const { SansMin, SansSmall, SansLarger, Eyebrow } = Typography;
+const { SansMin, SansSmall, SansLarger, SansExtraLarge, Eyebrow } = Typography;
 
 const { EYEBROW, HEADLINE, TEXT, DATE } = SLOTS;
 const { CONTENT_CONTAINER, CARD_OVERLAY_HEADLINE, CARD_OVERLAY_TEXT } =
@@ -46,11 +46,27 @@ const headlineStyles = `
     },
   })}
 
+  @container umd-card-overlay (min-width: 500px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_OVERLAY_HEADLINE}`]: SansExtraLarge,
+      },
+    })}
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_HEADLINE} *`]: SansLarger,
     },
   })}
+
+  @container umd-card-overlay (min-width: 500px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_OVERLAY_HEADLINE} *`]: SansExtraLarge,
+      },
+    })}
+  }
 
   .${CARD_OVERLAY_HEADLINE},
   .${CARD_OVERLAY_HEADLINE} * {

@@ -212,6 +212,7 @@ export const ComponentStyles = `
   ${Reset}
 
   .${CARD_OVERLAY_CONTAINER} {
+    container: umd-card-overlay / inline-size;
     height: 100%;
     position: relative;
     background-color: ${Colors.gray.lightest};

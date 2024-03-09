@@ -6,7 +6,7 @@ import { ELEMENT_TYPE } from '../index';
 
 const { Colors, Spacing } = Tokens;
 
-const { HIGHLIGHT } = SLOTS;
+const { HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } = SLOTS;
 const { medium, large } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
 const { WITH_THEME } = NAMING;
@@ -14,6 +14,8 @@ const { WITH_THEME } = NAMING;
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
 const PATHWAY_HIGHLIGHT_CONTAINER_TEXT = 'umd-pathway-highlight-text';
+const PATHWAY_HIGHLIGHT_CONTAINER_ATTRIBUTION =
+  'umd-pathway-highlight-attribution';
 
 // prettier-ignore
 const ThemeStyles = `
@@ -87,6 +89,16 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     font-weight: 700;
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${PATHWAY_HIGHLIGHT_CONTAINER_ATTRIBUTION}`]: Typography.SansMedium,
+    },
+  })}
+
+  .${PATHWAY_HIGHLIGHT_CONTAINER_ATTRIBUTION} {
+    margin-top: ${Spacing.sm};
+  }
+
   ${ThemeStyles}
 `
 
@@ -101,12 +113,23 @@ export const CreateHighlightColumn = ({
     element,
     slotRef: HIGHLIGHT,
   });
+  const highlightAttributionSlot = SlotDefaultStyling({
+    element,
+    slotRef: HIGHLIGHT_ATTRIBUTION,
+  });
 
   wrapper.classList.add(PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER);
 
   if (highlightSlot) {
     highlightSlot.classList.add(PATHWAY_HIGHLIGHT_CONTAINER_TEXT);
     wrapper.appendChild(highlightSlot);
+
+    if (highlightAttributionSlot) {
+      const attributionElement = document.createElement('div');
+      attributionElement.classList.add(PATHWAY_HIGHLIGHT_CONTAINER_ATTRIBUTION);
+      attributionElement.appendChild(highlightAttributionSlot);
+      wrapper.appendChild(attributionElement);
+    }
 
     container.classList.add(PATHWAY_HIGHLIGHT_CONTAINER);
     container.appendChild(wrapper);

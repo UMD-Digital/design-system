@@ -13,6 +13,7 @@ export const SLOTS = {
   TEXT: 'text',
   ACTIONS: 'actions',
   HIGHLIGHT: 'highlight',
+  HIGHLIGHT_ATTRIBUTION: 'highlight-attribution',
 };
 export const VARIABLES = {
   ATTRIBUTE_IMAGE: 'data-image',

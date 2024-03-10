@@ -173,7 +173,7 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_TEXT_CONTAINER} *`]: Text,
+      [`.${SUMMARY_TEXT_CONTAINER}`]: Text,
     },
   })}
 

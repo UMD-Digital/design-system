@@ -137,6 +137,23 @@ const MinimalTypeOverwrite = `
       width: 100%;
     }
   }
+`;
+
+// prettier-ignore
+export const STYLES_ASSET = `
+  ${StackDefaultOverwrite}
+  ${StackTypeOverwrite}
+  ${OverlayTypeOverwrite}
+  ${MinimalTypeOverwrite}
+  ${LogoTypeOverwrite}
+
+  .${HERO_IMAGE} {
+    position: relative;
+  }
+
+  .${HERO_IMAGE} video {
+    display: block;
+  }
 
   .${HERO_IMAGE} button {
     position: absolute;
@@ -155,15 +172,6 @@ const MinimalTypeOverwrite = `
     fill: white;
     width: 24px;
   }
-`;
-
-// prettier-ignore
-export const STYLES_ASSET = `
-  ${StackDefaultOverwrite}
-  ${StackTypeOverwrite}
-  ${OverlayTypeOverwrite}
-  ${MinimalTypeOverwrite}
-  ${LogoTypeOverwrite}
 `;
 
 export const CreateAsset = ({ element }: { element: HeroType }) => {

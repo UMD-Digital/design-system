@@ -53,6 +53,10 @@ const monthStyles = `
     },
   })}
 
+  .${EVENT_MONTH} {
+    color: inherit;
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_MONTH} *`]: InterativeSmall,

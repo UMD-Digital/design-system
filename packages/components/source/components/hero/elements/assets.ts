@@ -1,4 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
+import { PLAY_ICON, PAUSE_ICON } from 'assets/icons';
 import { CheckForImageAlt } from 'helpers/ui';
 import { SLOTS, ELEMENTS, NAMING, BREAKPOINTS, VARIABLES } from '../globals';
 import { HeroType } from '../index';
@@ -136,6 +137,24 @@ const MinimalTypeOverwrite = `
       width: 100%;
     }
   }
+
+  .${HERO_IMAGE} button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .${HERO_IMAGE} button svg {
+    fill: white;
+    width: 24px;
+  }
 `;
 
 // prettier-ignore
@@ -172,8 +191,27 @@ export const CreateAsset = ({ element }: { element: HeroType }) => {
   };
 
   if (isVideo) {
-    const video = videoRef.cloneNode(true) as HTMLImageElement;
+    const video = videoRef.cloneNode(true) as HTMLVideoElement;
+    const button = document.createElement('button');
+    const setButtonPlay = () => {
+      button.setAttribute('aria-label', 'Pause');
+      button.innerHTML = PAUSE_ICON;
+      video.play();
+    };
+    const setButtonPause = () => {
+      button.setAttribute('aria-label', 'Play');
+      button.innerHTML = PLAY_ICON;
+      video.pause();
+    };
+
+    button.setAttribute('type', 'button');
+    button.addEventListener('click', () => {
+      video.paused ? setButtonPlay() : setButtonPause();
+    });
+
     container.appendChild(video);
+    container.appendChild(button);
+    setButtonPlay();
 
     return container;
   }

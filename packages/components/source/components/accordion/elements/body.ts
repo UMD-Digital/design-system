@@ -29,6 +29,10 @@ export const bodyStyles = `
     background-color: ${Colors.gray.darker};
   }
 
+  .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_BODY} {
+    color: ${Colors.white} !important;
+  }
+
   .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_BODY} > * {
     color: ${Colors.white} !important;
   }

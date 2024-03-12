@@ -9,9 +9,8 @@ export const SLOTS = { HEADLINE: 'headline', BODY: 'body' };
 export const VARIABLES = {
   ATTRIBUTE_THEME: 'theme',
   THEME_DARK: 'dark',
-  THEME_DEFAULT: 'light',
-  ATTRIBUTE_OPEN: 'open',
-  OPEN_DEFAULT: false,
+  THEME_LIGHT: 'light',
+  ANIMATION_TIME: 500,
 };
 
 export const NAMING = {

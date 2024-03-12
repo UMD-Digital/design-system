@@ -9,7 +9,7 @@ import {
 } from 'components/accordion/globals';
 import { ELEMENT_TYPE } from 'components/accordion';
 import { SlotDefaultStyling } from 'helpers/ui';
-import { EventAdjustExpandState, EventAdjustHeight } from '../services/events';
+import { SetOpen, SetClosed } from '../services/helper';
 
 const { Colors, Spacing } = Tokens;
 
@@ -143,8 +143,13 @@ export const CreateHeadline = ({ element }: { element: ELEMENT_TYPE }) => {
     headlineContainer.appendChild(headerSlot);
 
     headlineContainer.addEventListener('click', () => {
-      EventAdjustExpandState({ element: element });
-      EventAdjustHeight({ element: element, maintainExpandState: false });
+      const isExpanded = headlineContainer.ariaExpanded == 'true';
+
+      if (isExpanded) {
+        SetClosed({ element: element });
+      } else {
+        SetOpen({ element: element });
+      }
     });
 
     return headlineContainer;

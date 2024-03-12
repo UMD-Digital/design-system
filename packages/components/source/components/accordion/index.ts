@@ -8,15 +8,16 @@ import { MakeTemplate } from 'helpers/ui';
 import ComponentStyles, { CreateShadowDom } from './elements';
 import { ELEMENT_NAME, VARIABLES } from './globals';
 import { Debounce } from 'helpers/performance';
-import { EventAdjustHeight } from './services/events';
+import { SetClosed, SetOpen } from './services/helper';
+import { EventSize } from './services/events';
 
-const { THEME_DEFAULT, OPEN_DEFAULT } = VARIABLES;
+const { THEME_LIGHT, ATTRIBUTE_THEME } = VARIABLES;
 export type ELEMENT_TYPE = UMDAccordionElement;
 
 export class UMDAccordionElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = THEME_DEFAULT;
-  _open = OPEN_DEFAULT;
+  _theme = THEME_LIGHT;
+  _open = false;
 
   constructor() {
     super();
@@ -32,37 +33,35 @@ export class UMDAccordionElement extends HTMLElement {
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (!oldValue) return;
+
     if (name == 'aria-hidden' && newValue === 'false' && oldValue === 'true') {
-      EventAdjustHeight({
-        element: this,
-        maintainExpandState: true,
-        noTransition: true,
-      });
+      SetOpen({ element: this });
+    }
+
+    if (name == 'aria-hidden' && newValue === 'true' && oldValue === 'false') {
+      SetClosed({ element: this });
     }
   }
 
   connectedCallback() {
     const element = this;
-    const theme = element.getAttribute('theme');
-    const open = element.hasAttribute('open');
+    const theme = element.getAttribute(ATTRIBUTE_THEME);
+    const ariaHidden = element.getAttribute('aria-hidden');
+    const isOpen = ariaHidden && ariaHidden === 'false';
 
     element._theme = theme || element._theme;
-    element._open = open || element._open;
-
-    const container = CreateShadowDom({ element });
-    element._shadow.appendChild(container);
+    element._open = isOpen || element._open;
+    element._shadow.appendChild(CreateShadowDom({ element }));
 
     const resize = () => {
-      EventAdjustHeight({ element: element, maintainExpandState: true });
+      EventSize({ element: element });
     };
 
     window.addEventListener('resize', Debounce(resize, 20));
-
-    EventAdjustHeight({
-      element,
-      maintainExpandState: true,
-      noTransition: true,
-    });
+    if (element._open) {
+      SetOpen({ element: element, hasAnimation: false });
+    }
   }
 }
 

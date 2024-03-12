@@ -23,7 +23,6 @@ export const bodyStyles = `
     background-color: ${Colors.gray.lightest};
     height: 0;
     overflow: hidden;
-    transition: height 0.5s ease-in-out;
   }
 
   .${CONTAINER_NAME}${THEME_DARK_ATTR} .${ACCORDION_BODY_WRAPPER} {
@@ -35,7 +34,7 @@ export const bodyStyles = `
   }
 
   .${ACCORDION_BODY} {
-      padding: ${Spacing.md};
+    padding: ${Spacing.md};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${small}px) {
@@ -65,10 +64,9 @@ export const bodyStyles = `
   }
 
   ${ConvertJSSObjectToStyles({
-      styleObj: {
-          [`.${ACCORDION_BODY_WRAPPER}`]:
-          Typography.SansMedium
-      },
+    styleObj: {
+      [`.${ACCORDION_BODY_WRAPPER}`]: Typography.SansMedium
+    },
   })}
 `;
 

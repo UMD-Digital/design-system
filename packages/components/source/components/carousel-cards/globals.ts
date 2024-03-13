@@ -19,6 +19,7 @@ export const SLOTS = {
 };
 
 export const VARIABLES = {
+  ATTRIBUTE_RESIZE: 'resize',
   ANIMATION_DURATION: 500,
   MOBILE_COUNT: 1,
   TABLET_COUNT: 2,

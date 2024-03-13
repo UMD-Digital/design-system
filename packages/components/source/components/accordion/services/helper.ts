@@ -32,8 +32,6 @@ const ActionAnimation = ({
     throw new Error('headlineContainer or bodyWrapperElement is not found');
   }
 
-  const bodyHeight = bodyElement.offsetHeight;
-
   if (hasAnimation)
     bodyWrapperElement.style.transition = `height ${ANIMATION_TIME}ms ease-in-out`;
 
@@ -46,6 +44,7 @@ const ActionAnimation = ({
   }
 
   setTimeout(() => {
+    const bodyHeight = bodyElement.offsetHeight;
     bodyWrapperElement.style.height = isOpening ? `${bodyHeight}px` : '0';
   }, 100);
 

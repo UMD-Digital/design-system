@@ -5,25 +5,9 @@ const ElementNames = [
   'umd-element-events-date-slider',
 ];
 
-const HideSubElements = ({ container }: { container: HTMLElement }) => {
-  const hiddenElements = Array.from(
-    container.querySelectorAll(`[aria-hidden]`),
-  ) as HTMLDivElement[];
-
-  hiddenElements.forEach((element) => {
-    const isTogglableElement = ElementNames.some(
-      (name) => name === element.nodeName.toLowerCase(),
-    );
-
-    if (isTogglableElement) {
-      element.setAttribute('aria-hidden', 'true');
-    }
-  });
-};
-
 const ShowSubElements = ({ container }: { container: HTMLElement }) => {
   const hiddenElements = Array.from(
-    container.querySelectorAll(`[aria-hidden]`),
+    container.querySelectorAll('[resize]'),
   ) as HTMLDivElement[];
 
   hiddenElements.forEach((element) => {
@@ -32,14 +16,16 @@ const ShowSubElements = ({ container }: { container: HTMLElement }) => {
     );
 
     if (isTogglableElement) {
-      element.setAttribute('aria-hidden', 'false');
+      element.setAttribute('resize', 'true');
     }
 
     // Edge Case for Accordion
 
     if (element.nodeName.toLowerCase() === 'umd-element-accordion-item') {
-      const isOpen = element.hasAttribute('isopen');
-      if (isOpen) element.setAttribute('aria-hidden', 'false');
+      const isOpen = element.getAttribute('state') === 'open';
+      if (isOpen) {
+        element.setAttribute('resize', 'true');
+      }
     }
   });
 };
@@ -65,7 +51,6 @@ const DropdownVariations = () => {
 
         if (selectedContainer !== container) {
           container.setAttribute('aria-hidden', 'true');
-          HideSubElements({ container });
         } else {
           container.setAttribute('aria-hidden', 'false');
           ShowSubElements({ container });

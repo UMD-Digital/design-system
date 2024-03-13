@@ -17,4 +17,7 @@ export const SLOTS = {
   LINK_SLOT_NAME: 'link',
 };
 
-export const VARIABLES = {};
+export const VARIABLES = {
+  ATTRIBUTE_RESIZE: 'resize',
+  ATTRIBUTE_THEME: 'theme',
+};

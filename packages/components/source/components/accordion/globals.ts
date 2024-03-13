@@ -7,9 +7,13 @@ export const ELEMENTS = {
 };
 export const SLOTS = { HEADLINE: 'headline', BODY: 'body' };
 export const VARIABLES = {
+  ATTRIBUTE_RESIZE: 'resize',
+  ATTRIBUTE_STATE: 'state',
   ATTRIBUTE_THEME: 'theme',
   THEME_DARK: 'dark',
   THEME_LIGHT: 'light',
+  STATE_OPEN: 'open',
+  STATE_CLOSED: 'closed',
   ANIMATION_TIME: 500,
 };
 

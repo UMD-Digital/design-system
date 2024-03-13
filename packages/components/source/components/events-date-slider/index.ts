@@ -9,9 +9,11 @@ import { Debounce } from 'helpers/performance';
 import { ComponentStyles, CreateContainer, OnLoadStyles } from './elements';
 import { EventResize, EventSwipe } from './services/events';
 import { ButtonVisibilityLogic, SizeDatesElements } from './services/helpers';
-import { ELEMENTS } from './globals';
+import { ELEMENTS, VARIABLES } from './globals';
 
 const { CONTAINER_DARK_CLASS } = ELEMENTS;
+
+const { ATTRIBUTE_RESIZE, ATTRIBUTE_THEME } = VARIABLES;
 
 export const ELEMENT_NAME = 'umd-element-events-date-slider';
 export type ELEMENT_TYPE = UMDEventsDateSliderElement;
@@ -32,7 +34,7 @@ export class UMDEventsDateSliderElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['theme', 'aria-hidden'];
+    return [ATTRIBUTE_THEME, ATTRIBUTE_RESIZE];
   }
 
   attributeChangedCallback(
@@ -40,14 +42,14 @@ export class UMDEventsDateSliderElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == 'aria-hidden' && newValue === 'false' && oldValue === 'true') {
+    if (name == ATTRIBUTE_RESIZE && newValue === 'true') {
       SizeDatesElements({ element: this });
     }
   }
 
   connectedCallback() {
     const element = this;
-    const theme = element.getAttribute('theme') || 'light';
+    const theme = element.getAttribute(ATTRIBUTE_THEME) || 'light';
     const container = CreateContainer({ element });
 
     const resize = () => {

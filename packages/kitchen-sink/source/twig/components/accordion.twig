@@ -19,102 +19,6 @@
     </div>
   </section>
 
-  <div id="content-succinct" class="dropdown-selection" aria-hidden="true">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading type-hr">
-          Light Variant (First Item Default Open)
-        </p>
-
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true" isOpen>
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-
-        <p class="content-heading type-hr">
-          Light Variant (Default Closed)
-        </p>
-
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-
-        <p class="content-heading type-hr">
-          Dark Variant (First Item Default Open)
-        </p>
-
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs"
-            aria-hidden="true"
-            theme="dark"
-            isOpen>
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-
-        <p class="content-heading type-hr">
-          Dark Variant (Default Closed)
-        </p>
-
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs"
-            aria-hidden="true"
-            theme="dark">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-      </div>
-    </section>
-  </div>
-
   <div id="content-normal" class="dropdown-selection" aria-hidden="false">
     <section>
       <div class="umd-lock">
@@ -123,15 +27,15 @@
         </p>
 
         <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="false" isOpen>
+          <umd-element-accordion-item class="mb-xs" state="open" resize>
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextSuccinct() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextNormal() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextVerbose() }}
           </umd-element-accordion-item>
@@ -142,15 +46,15 @@
         </p>
 
         <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextSuccinct() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextNormal() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextVerbose() }}
           </umd-element-accordion-item>
@@ -162,21 +66,17 @@
 
         <umd-element-accordion>
           <umd-element-accordion-item class="mb-xs"
-            aria-hidden="false"
             theme="dark"
-            isOpen>
+            state="open"
+            resize>
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextSuccinct() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
+          <umd-element-accordion-item theme="dark" class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextNormal() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
+          <umd-element-accordion-item theme="dark" class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextVerbose() }}
           </umd-element-accordion-item>
@@ -187,22 +87,102 @@
         </p>
 
         <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs"
-            aria-hidden="true"
-            theme="dark">
+          <umd-element-accordion-item class="mb-xs" theme="dark">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextSuccinct() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
+          <umd-element-accordion-item theme="dark" class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
             {{ RichText.AccordionRichTextNormal() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
+          <umd-element-accordion-item theme="dark" class="mb-xs">
             {{ Headline.AccordionHeadlineNormal() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+      </div>
+    </section>
+  </div>
+
+  <div id="content-succinct" class="dropdown-selection" aria-hidden="true">
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading type-hr">
+          Light Variant (First Item Default Open)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs" state="open" resize>
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+
+          <umd-element-accordion-item class="mb-xs" state="closed">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Light Variant (Default Closed)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item class="mb-xs">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Dark Variant (First Item Default Open)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs"
+            theme="dark"
+            state="open"
+            resize>
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark" class="mb-xs">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark" class="mb-xs">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextVerbose() }}
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+
+        <p class="content-heading type-hr">
+          Dark Variant (Default Closed)
+        </p>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs" theme="dark">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextSuccinct() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark" class="mb-xs">
+            {{ Headline.AccordionHeadlineSuccinct() }}
+            {{ RichText.AccordionRichTextNormal() }}
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark" class="mb-xs">
+            {{ Headline.AccordionHeadlineSuccinct() }}
             {{ RichText.AccordionRichTextVerbose() }}
           </umd-element-accordion-item>
         </umd-element-accordion>
@@ -218,15 +198,15 @@
         </p>
 
         <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true" isOpen>
+          <umd-element-accordion-item class="mb-xs" state="open" resize>
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextSuccinct() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextNormal() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextVerbose() }}
           </umd-element-accordion-item>
@@ -237,15 +217,15 @@
         </p>
 
         <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextSuccinct() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextNormal() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs" aria-hidden="true">
+          <umd-element-accordion-item class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextVerbose() }}
           </umd-element-accordion-item>
@@ -257,21 +237,17 @@
 
         <umd-element-accordion>
           <umd-element-accordion-item class="mb-xs"
-            aria-hidden="true"
-            isOpen
+            state="open"
+            resize
             theme="dark">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextSuccinct() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
+          <umd-element-accordion-item theme="dark" class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextNormal() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
+          <umd-element-accordion-item theme="dark" class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextVerbose() }}
           </umd-element-accordion-item>
@@ -282,21 +258,15 @@
         </p>
 
         <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs"
-            aria-hidden="true"
-            theme="dark">
+          <umd-element-accordion-item class="mb-xs" theme="dark">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextSuccinct() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
+          <umd-element-accordion-item theme="dark" class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextNormal() }}
           </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark"
-            class="mb-xs"
-            aria-hidden="true">
+          <umd-element-accordion-item theme="dark" class="mb-xs">
             {{ Headline.AccordionHeadlineVerbose() }}
             {{ RichText.AccordionRichTextVerbose() }}
           </umd-element-accordion-item>

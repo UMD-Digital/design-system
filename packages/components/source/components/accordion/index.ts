@@ -11,7 +11,14 @@ import { Debounce } from 'helpers/performance';
 import { SetClosed, SetOpen } from './services/helper';
 import { EventSize } from './services/events';
 
-const { THEME_LIGHT, ATTRIBUTE_THEME } = VARIABLES;
+const {
+  THEME_LIGHT,
+  ATTRIBUTE_THEME,
+  ATTRIBUTE_RESIZE,
+  ATTRIBUTE_STATE,
+  STATE_OPEN,
+  STATE_CLOSED,
+} = VARIABLES;
 export type ELEMENT_TYPE = UMDAccordionElement;
 
 export class UMDAccordionElement extends HTMLElement {
@@ -29,26 +36,36 @@ export class UMDAccordionElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['aria-hidden'];
+    return [ATTRIBUTE_RESIZE, ATTRIBUTE_STATE];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (!oldValue) return;
-
-    if (name == 'aria-hidden' && newValue === 'false' && oldValue === 'true') {
-      SetOpen({ element: this });
+    if (name === ATTRIBUTE_RESIZE && newValue === 'true') {
+      SetOpen({ element: this, hasAnimation: false });
     }
 
-    if (name == 'aria-hidden' && newValue === 'true' && oldValue === 'false') {
+    if (
+      name == ATTRIBUTE_STATE &&
+      newValue === STATE_CLOSED &&
+      oldValue === STATE_OPEN
+    ) {
       SetClosed({ element: this });
+    }
+
+    if (
+      name == ATTRIBUTE_STATE &&
+      newValue === STATE_OPEN &&
+      oldValue === STATE_CLOSED
+    ) {
+      SetOpen({ element: this });
     }
   }
 
   connectedCallback() {
     const element = this;
     const theme = element.getAttribute(ATTRIBUTE_THEME);
-    const ariaHidden = element.getAttribute('aria-hidden');
-    const isOpen = ariaHidden && ariaHidden === 'false';
+    const state = element.getAttribute(ATTRIBUTE_STATE);
+    const isOpen = state && state === STATE_OPEN;
 
     element._theme = theme || element._theme;
     element._open = isOpen || element._open;

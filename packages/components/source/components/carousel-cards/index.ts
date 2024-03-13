@@ -14,7 +14,9 @@ import {
   EventSwipe,
 } from './services/events';
 import { CreateShadowDom, OnLoadStyles, ComponentStyles } from './elements';
-import { SLOTS } from './globals';
+import { SLOTS, VARIABLES } from './globals';
+
+const { ATTRIBUTE_RESIZE } = VARIABLES;
 
 export const ELEMENT_NAME = 'umd-element-carousel-cards';
 export type ELEMENT_TYPE = UMDCarouselCardsElement;
@@ -32,7 +34,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['aria-hidden'];
+    return [ATTRIBUTE_RESIZE];
   }
 
   attributeChangedCallback(
@@ -40,7 +42,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == 'aria-hidden' && newValue === 'false' && oldValue === 'true') {
+    if (name == ATTRIBUTE_RESIZE && newValue === 'true') {
       EventResizeCarouselElementsWidth({ element: this });
       EventResizeSetHeight({ element: this });
       EventResizeButtonLogic({ element: this });

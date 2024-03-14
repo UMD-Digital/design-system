@@ -191,7 +191,7 @@ export const LayoutIntroStyles = `
 
   @media (min-width: ${BREAKPOINTS.MOBILE}px) {
     .${CARD_INTRO_WRAPPER} {
-      padding-top: ${Spacing.md};
+      padding-top: ${Spacing.sm};
     }
   }
 

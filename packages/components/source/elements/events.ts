@@ -49,6 +49,11 @@ const DateRowStyles = `
     flex-direction: column;
   }
 
+  .${EVENTS_DATE_ROW} > p {
+    display: flex;
+    align-items: flex-start;
+  }
+
   .${EVENTS_DATE_ROW} > p:not(:last-child) {
     margin-top: 4px;
   }

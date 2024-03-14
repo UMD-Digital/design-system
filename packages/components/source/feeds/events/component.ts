@@ -52,8 +52,6 @@ export class UMDFeedEvents extends HTMLElement {
     ];
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
-
   async connectedCallback() {
     const element = this;
     const rowCount = element.getAttribute(ATTRIBUTE_ROWS);

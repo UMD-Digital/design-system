@@ -76,8 +76,8 @@ export const ComponentStyles = `
 
 const NoResultsContent: NoResultsContentType = {
   message: 'No results found',
-  linkUrl: 'https://today.umd.edu',
-  linkText: 'View All Articles',
+  linkUrl: 'https://calendar.umd.edu',
+  linkText: 'View All Events',
 };
 
 const CheckForLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
@@ -182,10 +182,10 @@ const FetchFeedCount = async ({ element }: { element: UMDNewsEventsType }) => {
 
   if (!feedData) throw new Error('Feed not found');
 
-  const count = feedData?.data?.eventCount?.events?.length;
+  const count = feedData?.data?.count?.events?.length;
 
   if (count) {
-    element._totalEntries = feedData.data.entryCount;
+    element._totalEntries = count;
   }
 
   return null;

@@ -16,12 +16,12 @@ const SizeLarger = {
 
 const SizeLarge = {
   fontSize: FontSize['lg'],
-  lineHeight: `1.11em`,
+  lineHeight: `1.25em`,
 };
 
 const SizeSmall = {
   fontSize: FontSize['base'],
-  lineHeight: `1.25em`,
+  lineHeight: `1.375em`,
 };
 
 const SizeSmaller = {

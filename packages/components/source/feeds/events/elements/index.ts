@@ -1,8 +1,8 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { FetchGraphQL } from 'helpers/xhr';
-import { ARTICLES_QUERY } from 'helpers/queries';
-import { CreateArticleCards, STYLES_ARTICLE } from 'elements/article';
+import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from 'helpers/queries';
+import { CreateEventCards, STYLES_EVENTS } from 'elements/events';
 import {
   CreateCallToActionElement,
   STYLES_CALL_TO_ACTION_ELEMENT,
@@ -13,9 +13,10 @@ import {
   NoResultsContentType,
 } from 'elements/no-results';
 import { MakeLoader, STYLES_LOADER } from 'elements/loader';
-import { UMDNewsFeedType } from '../component';
+import { UMDNewsEventsType } from '../component';
 
 type VariablesType = {
+  startDate?: string;
   related?: string[];
   limit?: number;
   offset?: number;
@@ -24,11 +25,11 @@ type VariablesType = {
 const { Spacing } = Tokens;
 const { Grid } = Layout;
 
-const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
-const LAYOUT_CONTAINER = 'umd-feeds-news-layout-container';
-const LAZY_LOAD_BUTTON = 'umd-feeds-news-lazy-load-button';
+const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
+const LAYOUT_CONTAINER = 'umd-feeds-events-layout-container';
+const LAZY_LOAD_BUTTON = 'umd-feeds-events-lazy-load-button';
 
-const TODAY_PRODUCTION_URL = 'https://today.umd.edu/graphql';
+const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
 
 const LazyLoadButtonStyles = `
   .${LAZY_LOAD_BUTTON} {
@@ -67,7 +68,7 @@ export const ComponentStyles = `
   ${Reset}
   ${LayoutStyles}
   ${LazyLoadButtonStyles}
-  ${STYLES_ARTICLE}
+  ${STYLES_EVENTS}
   ${STYLES_CALL_TO_ACTION_ELEMENT}
   ${STYLES_NO_RESULTS}
   ${STYLES_LOADER}
@@ -79,7 +80,7 @@ const NoResultsContent: NoResultsContentType = {
   linkText: 'View All Articles',
 };
 
-const CheckForLazyLoad = ({ element }: { element: UMDNewsFeedType }) => {
+const CheckForLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const container = shadowRoot.querySelector(
     `.${LAZY_LOAD_BUTTON}`,
@@ -97,7 +98,7 @@ const CheckForLazyLoad = ({ element }: { element: UMDNewsFeedType }) => {
   }
 };
 
-const CreateGridLayout = ({ element }: { element: UMDNewsFeedType }) => {
+const CreateGridLayout = ({ element }: { element: UMDNewsEventsType }) => {
   const container = document.createElement('div');
 
   container.classList.add(LAYOUT_CONTAINER);
@@ -106,7 +107,7 @@ const CreateGridLayout = ({ element }: { element: UMDNewsFeedType }) => {
   return container;
 };
 
-const CreateLazyLoadButton = ({ element }: { element: UMDNewsFeedType }) => {
+const CreateLazyLoadButton = ({ element }: { element: UMDNewsEventsType }) => {
   const container = document.createElement('div');
   const button = document.createElement('button');
   button.innerHTML = 'Load More';
@@ -125,7 +126,7 @@ const CreateLazyLoadButton = ({ element }: { element: UMDNewsFeedType }) => {
   return container;
 };
 
-const LoadMoreEntries = async ({ element }: { element: UMDNewsFeedType }) => {
+const LoadMoreEntries = async ({ element }: { element: UMDNewsEventsType }) => {
   const loader = MakeLoader();
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const container = shadowRoot.querySelector(
@@ -136,8 +137,8 @@ const LoadMoreEntries = async ({ element }: { element: UMDNewsFeedType }) => {
   container.appendChild(loader);
 
   if (container) {
-    const feedData = await FetchFeed({ element });
-    const entries = CreateArticleCards({ entries: feedData });
+    const feedData = await FetchFeedEntries({ element });
+    const entries = CreateEventCards({ entries: feedData });
 
     loader.remove();
 
@@ -147,25 +148,59 @@ const LoadMoreEntries = async ({ element }: { element: UMDNewsFeedType }) => {
   }
 };
 
-const FetchFeed = async ({ element }: { element: UMDNewsFeedType }) => {
-  const shadowRoot = element.shadowRoot as ShadowRoot;
-  const container = shadowRoot.querySelector(
-    `.${FEEDS_NEWS_CONTAINER}`,
-  ) as HTMLDivElement;
+const FetchFeed = async ({
+  element,
+  query,
+}: {
+  element: UMDNewsEventsType;
+  query: string;
+}) => {
   if (!element._token) throw new Error('Token not found');
 
   const variables: VariablesType = {
+    startDate: new Date().toDateString(),
     limit: element._showCount * element._showRows,
     related: element._categories,
     offset: element._offset,
   };
 
   const feedData = await FetchGraphQL({
-    query: ARTICLES_QUERY,
-    url: TODAY_PRODUCTION_URL,
+    query,
+    url: CALENDAR_PRODUCTION_URL,
     token: element._token,
     variables,
   });
+
+  return feedData;
+};
+
+const FetchFeedCount = async ({ element }: { element: UMDNewsEventsType }) => {
+  const feedData = await FetchFeed({
+    element,
+    query: EVENTS_COUNT_QUERY,
+  });
+
+  if (!feedData) throw new Error('Feed not found');
+
+  const count = feedData?.data?.eventCount?.events?.length;
+
+  if (count) {
+    element._totalEntries = feedData.data.entryCount;
+  }
+
+  return null;
+};
+
+const FetchFeedEntries = async ({
+  element,
+}: {
+  element: UMDNewsEventsType;
+}) => {
+  const shadowRoot = element.shadowRoot as ShadowRoot;
+  const container = shadowRoot.querySelector(
+    `.${FEEDS_EVENTS_CONTAINER}`,
+  ) as HTMLDivElement;
+  const feedData = await FetchFeed({ element, query: EVENTS_QUERY });
 
   if (
     !feedData ||
@@ -177,29 +212,28 @@ const FetchFeed = async ({ element }: { element: UMDNewsFeedType }) => {
     if (!feedData) throw new Error('Feed not found');
     if (!feedData.data) throw new Error('Feed data not found');
     if (!feedData.data.entries) throw new Error('Feed entries not found');
+    if (!feedData.data.entries.events) throw new Error('Feed events not found');
     if (!feedData.message)
       throw new Error(`Feed data errors: ${feedData.message}`);
   }
 
-  if (feedData.data.entryCount) {
-    element._totalEntries = feedData.data.entryCount;
-  }
+  const data = feedData.data.entries.events;
 
-  if (feedData.data.entries) {
-    element._offset += feedData.data.entries.length;
-    CheckForLazyLoad({ element });
-    return feedData.data.entries;
-  }
-
-  return null;
+  element._offset += data.length;
+  CheckForLazyLoad({ element });
+  return data;
 };
 
-export const CreateFeed = async ({ element }: { element: UMDNewsFeedType }) => {
+export const CreateFeed = async ({
+  element,
+}: {
+  element: UMDNewsEventsType;
+}) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const container = shadowRoot.querySelector(
-    `.${FEEDS_NEWS_CONTAINER}`,
+    `.${FEEDS_EVENTS_CONTAINER}`,
   ) as HTMLDivElement;
-  const feedData = await FetchFeed({ element });
+  const feedData = await FetchFeedEntries({ element });
   const lazyLoadButton = CreateLazyLoadButton({ element });
 
   if (!container) {
@@ -213,7 +247,7 @@ export const CreateFeed = async ({ element }: { element: UMDNewsFeedType }) => {
   }
 
   if (feedData.length > 0) {
-    const entries = CreateArticleCards({ entries: feedData });
+    const entries = CreateEventCards({ entries: feedData });
     const grid = CreateGridLayout({ element });
 
     entries.forEach((entry) => {
@@ -223,15 +257,21 @@ export const CreateFeed = async ({ element }: { element: UMDNewsFeedType }) => {
     container.innerHTML = '';
     container.appendChild(grid);
 
+    await FetchFeedCount({ element });
+
     if (element._lazyLoad) container.appendChild(lazyLoadButton);
   }
 };
 
-export const CreateShadowDom = ({ element }: { element: UMDNewsFeedType }) => {
+export const CreateShadowDom = ({
+  element,
+}: {
+  element: UMDNewsEventsType;
+}) => {
   const loader = MakeLoader();
   const container = document.createElement('div');
 
-  container.classList.add(FEEDS_NEWS_CONTAINER);
+  container.classList.add(FEEDS_EVENTS_CONTAINER);
   container.appendChild(loader);
 
   return container;

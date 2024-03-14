@@ -13,9 +13,11 @@ import { Load as NavItemLoader } from './components/nav-item';
 import { Load as PathwayLoader } from './components/pathway';
 
 import { Load as FeedNewsLoader } from './feeds/news/component';
+import { Load as EventsNewsLoader } from './feeds/events/component';
 
 const LoadUmdFeeds = () => {
   FeedNewsLoader();
+  EventsNewsLoader();
 };
 
 const LoadUmdComponents = () => {

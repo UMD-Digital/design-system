@@ -31,15 +31,21 @@ export default {
   },
 
   'umd-component-intro-simple': {
-    containerName: 'umd-component-intro',
+    containerName: 'umd-component-intro-simple',
     containerType: 'inline-size',
     display: 'block',
 
     '& .intro-content-wrapper': {
-      paddingTop: '0',
+      ...SpacingContent['.umd-layout-spacing-center'],
+      ...{
+        margin: 'auto',
+        maxWidth: `calc(${Spacing['5xl']} * 10)`,
+        paddingTop: '0',
+        position: 'relative',
 
-      '&:before': {
-        display: 'none',
+        '&:before': {
+          display: 'none',
+        },
       },
     },
   },

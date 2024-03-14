@@ -103,8 +103,8 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const AddressStyles = `
-  .${CONTACT_LIST_ADDRESS} {
-    margin-bottom: ${Spacing.min};
+  .${CONTACT_LIST_ADDRESS} + * {
+    margin-top: 2px;
   }
 
   .${CONTACT_LIST_ADDRESS} * {
@@ -126,7 +126,7 @@ const LinkListStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LINKS_LIST} *`]: SansSmaller,
+      [`.${CONTACT_LINKS_LIST} *`]: SansSmall,
     },
   })}
 

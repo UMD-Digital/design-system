@@ -41,7 +41,7 @@ const Grid = {
     ...GridBase,
     ...GridBaseQueries,
 
-    [`@media (${Queries.desktop.min})`]: {
+    [`@media (${Queries.highDef.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
   },

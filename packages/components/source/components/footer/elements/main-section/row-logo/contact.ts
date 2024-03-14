@@ -20,7 +20,7 @@ import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { InterativeMedium, SansSmaller } = Typography;
+const { InterativeMedium, SansSmaller, SansSmall } = Typography;
 
 const { medium, large } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -113,7 +113,7 @@ const AddressStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_ADDRESS} *`]: SansSmaller,
+      [`.${CONTACT_LIST_ADDRESS} *`]: SansSmall,
     },
   })}
 `;

@@ -1,7 +1,11 @@
 import { Reset } from 'helpers/styles';
-import { CreateEventCards, STYLES_EVENTS } from 'elements/events';
-import { CreateGridGapLayout, GridGapStyles } from 'elements/grid';
-import { MakeLoader, STYLES_LOADER } from 'elements/loader';
+import { MakeLoader, STYLES_LOADER, UMD_LOADER } from 'elements/loader';
+import { CreateEventCards, STYLES_EVENTS, EventType } from 'elements/events';
+import {
+  CreateGridGapLayout,
+  GridGapStyles,
+  GRID_LAYOUT_CONTAINER,
+} from 'elements/grid';
 import {
   CreateNoResultsInterface,
   STYLES_NO_RESULTS,
@@ -44,49 +48,109 @@ const MakeApiVariables = ({ element }: { element: UMDNewsEventsType }) => ({
   token: element._token,
 });
 
-const CheckForLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
-  const shadowRoot = element.shadowRoot as ShadowRoot;
-  const container = shadowRoot.querySelector(
-    `.${LAZY_LOAD_BUTTON}`,
-  ) as HTMLDivElement;
-
-  if (!container) return;
-  if (!element._lazyLoad) return;
-  if (!element._totalEntries) {
-    container.remove();
-    return;
-  }
-
-  if (element._offset >= element._totalEntries) {
-    container.remove();
-  }
-};
-
-const LoadMoreEntries = async ({ element }: { element: UMDNewsEventsType }) => {
-  const loader = MakeLoader();
+const GetContainer = ({ element }: { element: UMDNewsEventsType }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const container = shadowRoot.querySelector(
     `.${FEEDS_EVENTS_CONTAINER}`,
   ) as HTMLDivElement;
-  const gridContainer = container.querySelector(`[grid-count]`);
 
-  if (!gridContainer) return;
+  return container;
+};
+
+const RemoveLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
+  const container = GetContainer({ element });
+  const button = container.querySelector(
+    `.${LAZY_LOAD_BUTTON}`,
+  ) as HTMLDivElement;
+
+  if (button) button.remove();
+};
+
+const RemoveLoader = ({ element }: { element: UMDNewsEventsType }) => {
+  const container = GetContainer({ element });
+  const loader = container.querySelector(`.${UMD_LOADER}`) as HTMLDivElement;
+
+  if (loader) loader.remove();
+};
+
+const DisplayLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
+  const container = GetContainer({ element });
+  const lazyLoadButton = CreateLazyLoadButton({
+    callback: () => LoadMoreEntries({ element }),
+  });
+
+  if (!element._lazyLoad) return;
+  if (!element._totalEntries) return;
+  if (element._offset >= element._totalEntries) return;
+
+  container.appendChild(lazyLoadButton);
+};
+
+const DisplayNoResults = ({ element }: { element: UMDNewsEventsType }) => {
+  const container = GetContainer({ element });
+
+  container.innerHTML = '';
+  CreateNoResultsInterface({ container, ...NoResultsContent });
+};
+
+const DisplayLoader = ({ element }: { element: UMDNewsEventsType }) => {
+  const container = GetContainer({ element });
+  const loader = MakeLoader();
+
   container.appendChild(loader);
+};
 
-  if (container) {
-    const feedData = await FetchFeedEntries({
-      variables: MakeApiVariables({ element }),
-    });
-    const entries = CreateEventCards({ entries: feedData });
+const DisplayGrid = ({ element }: { element: UMDNewsEventsType }) => {
+  const container = GetContainer({ element });
+  const grid = CreateGridGapLayout({ count: element._showCount });
 
-    loader.remove();
-    element._offset += entries.length;
-    CheckForLazyLoad({ element });
+  container.appendChild(grid);
+};
 
-    entries.forEach((entry) => {
-      gridContainer.appendChild(entry);
-    });
+const DisplayEntries = ({
+  element,
+  feedData,
+}: {
+  element: UMDNewsEventsType;
+  feedData: EventType[];
+}) => {
+  const container = GetContainer({ element });
+  const grid = container.querySelector(
+    `.${GRID_LAYOUT_CONTAINER}`,
+  ) as HTMLDivElement;
+  const entries = CreateEventCards({ entries: feedData });
+
+  element._offset += entries.length;
+
+  RemoveLoader({ element });
+  RemoveLazyLoad({ element });
+
+  entries.forEach((entry) => {
+    grid.appendChild(entry);
+  });
+
+  DisplayLazyLoad({ element });
+};
+
+const SetCount = async ({ element }: { element: UMDNewsEventsType }) => {
+  const count = await FetchFeedCount({
+    variables: MakeApiVariables({ element }),
+  });
+
+  if (count) {
+    element._totalEntries = count;
+    DisplayLazyLoad({ element });
   }
+};
+
+const LoadMoreEntries = async ({ element }: { element: UMDNewsEventsType }) => {
+  RemoveLazyLoad({ element });
+  DisplayLoader({ element });
+  FetchFeedEntries({
+    variables: MakeApiVariables({ element }),
+  }).then((feedData) => {
+    DisplayEntries({ element, feedData });
+  });
 };
 
 export const CreateFeed = async ({
@@ -94,50 +158,20 @@ export const CreateFeed = async ({
 }: {
   element: UMDNewsEventsType;
 }) => {
-  const shadowRoot = element.shadowRoot as ShadowRoot;
-  const container = shadowRoot.querySelector(
-    `.${FEEDS_EVENTS_CONTAINER}`,
-  ) as HTMLDivElement;
-  const feedData = await FetchFeedEntries({
+  FetchFeedEntries({
     variables: MakeApiVariables({ element }),
-  });
-
-  const lazyLoadButton = CreateLazyLoadButton({
-    callback: () => LoadMoreEntries({ element }),
-  });
-
-  if (!container) {
-    throw new Error('Container not found');
-  }
-
-  if (feedData.length === 0) {
-    container.innerHTML = '';
-    CreateNoResultsInterface({ container, ...NoResultsContent });
-    return container;
-  }
-
-  if (feedData.length > 0) {
-    const entries = CreateEventCards({ entries: feedData });
-    const grid = CreateGridGapLayout({ count: element._showCount });
-
-    entries.forEach((entry) => {
-      grid.appendChild(entry);
-    });
-
-    container.innerHTML = '';
-    element._offset += entries.length;
-    container.appendChild(grid);
-
-    const count = await FetchFeedCount({
-      variables: MakeApiVariables({ element }),
-    });
-
-    if (count) {
-      element._totalEntries = count;
+  }).then((feedData) => {
+    if (feedData.length === 0) {
+      DisplayNoResults({ element });
+      return;
     }
 
-    if (element._lazyLoad) container.appendChild(lazyLoadButton);
-  }
+    if (feedData.length > 0) {
+      DisplayGrid({ element });
+      DisplayEntries({ element, feedData });
+      SetCount({ element });
+    }
+  });
 };
 
 export const CreateShadowDom = ({

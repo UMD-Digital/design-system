@@ -1,4 +1,4 @@
-const CONTAINER = 'umd-loader-container';
+export const UMD_LOADER = 'umd-loader-container';
 
 export const STYLES_LOADER = `
   @keyframes loader-first-animation {
@@ -28,7 +28,7 @@ export const STYLES_LOADER = `
     }
   }
 
-  .${CONTAINER} {
+  .${UMD_LOADER} {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,11 +38,11 @@ export const STYLES_LOADER = `
     grid-column: 1 / -1;
   }
 
-  .${CONTAINER} > div {
+  .${UMD_LOADER} > div {
     position: relative;
   }
 
-  .${CONTAINER} > div > div {
+  .${UMD_LOADER} > div > div {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -53,22 +53,22 @@ export const STYLES_LOADER = `
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
 
-  .${CONTAINER} > div > div:first-child {
+  .${UMD_LOADER} > div > div:first-child {
     left: 5px;
     animation: loader-first-animation 0.6s infinite;
   }
 
-  .${CONTAINER} > div > div:nth-child(2) {
+  .${UMD_LOADER} > div > div:nth-child(2) {
     left: 5px;
     animation: loader-middle-animation 0.6s infinite;
   }
 
-  .${CONTAINER} > div > div:nth-child(3) {
+  .${UMD_LOADER} > div > div:nth-child(3) {
     left: 24px;
     animation: loader-middle-animation 0.6s infinite;
   }
 
-  .${CONTAINER} > div > div:last-child {
+  .${UMD_LOADER} > div > div:last-child {
     left: 45px;
     animation: loader-last-animation 0.6s infinite;
   }
@@ -82,7 +82,7 @@ export const MakeLoader = () => {
   const innerElmThree = document.createElement('div');
   const innerElmFour = document.createElement('div');
 
-  container.classList.add(CONTAINER);
+  container.classList.add(UMD_LOADER);
 
   wrapper.appendChild(innerElmOne);
   wrapper.appendChild(innerElmTwo);

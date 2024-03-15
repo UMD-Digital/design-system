@@ -29,7 +29,7 @@ type DateInformaitonType = {
   endTime: string;
 };
 
-type EventType = DateInformaitonType & {
+export type EventType = DateInformaitonType & {
   id: number;
   title: string;
   url: string;

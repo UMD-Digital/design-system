@@ -51,15 +51,26 @@ const DateRowStyles = `
 
   .${EVENTS_DATE_ROW} > p {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
   }
 
-  .${EVENTS_DATE_ROW} > p:not(:last-child) {
+  .${EVENTS_DATE_ROW} > p:not(:first-child) {
     margin-top: 4px;
   }
 
-  .${EVENTS_DATE_ROW} svg {
-    max-width: 14px;
+  .${EVENTS_DATE_ROW} svg#calendar-icon {
+    width: 14px;
+    height: 15px;
+  }
+
+  .${EVENTS_DATE_ROW} svg#clock-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .${EVENTS_DATE_ROW} svg#pin-icon {
+    width: 15px;
+    height: 18px;
   }
 
   ${ConvertJSSObjectToStyles({
@@ -69,8 +80,11 @@ const DateRowStyles = `
   })}
 
   .${EVENTS_DATE_ROW} span {
-    margin-left: 4px;
     color: ${Colors.gray.darker};
+  }
+
+  .${EVENTS_DATE_ROW} span:first-child {
+    width: 25px;
   }
 `;
 
@@ -132,14 +146,14 @@ const CreateDate = ({
   const date = document.createElement('p');
   const time = document.createElement('p');
 
-  date.innerHTML = `${CALENDAR_ICON} <span>${startDayOfWeek}. ${startMonth} ${startDay}</span>`;
+  date.innerHTML = `<span>${CALENDAR_ICON}</span> <span>${startDayOfWeek}. ${startMonth} ${startDay}</span>`;
   container.appendChild(date);
-  time.innerHTML = `${CLOCK_ICON} <span>${startTime}</span>`;
+  time.innerHTML = `<span style="margin-left: -2px; width: 27px;">${CLOCK_ICON}</span> <span>${startTime}</span>`;
   container.appendChild(time);
 
   if (location) {
     const locationText = document.createElement('p');
-    locationText.innerHTML = `${PIN_ICON} <span>${location[0].title}</span>`;
+    locationText.innerHTML = `<span>${PIN_ICON}</span> <span>${location[0].title}</span>`;
     container.appendChild(locationText);
   }
 

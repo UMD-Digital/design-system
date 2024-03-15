@@ -1,32 +1,21 @@
-import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
-import { FetchFeedCount, FetchFeedEntries } from '../../common/api';
 import { CreateEventCards, STYLES_EVENTS } from 'elements/events';
 import { CreateGridGapLayout, GridGapStyles } from 'elements/grid';
-import {
-  CreateCallToActionElement,
-  STYLES_CALL_TO_ACTION_ELEMENT,
-} from 'elements/call-to-action';
+import { MakeLoader, STYLES_LOADER } from 'elements/loader';
 import {
   CreateNoResultsInterface,
   STYLES_NO_RESULTS,
   NoResultsContentType,
 } from 'elements/no-results';
-import { MakeLoader, STYLES_LOADER } from 'elements/loader';
+import { FetchFeedCount, FetchFeedEntries } from '../../common/api';
+import {
+  CreateLazyLoadButton,
+  LazyLoadButtonStyles,
+  LAZY_LOAD_BUTTON,
+} from '../../common/ui';
 import { UMDNewsEventsType } from '../component';
 
-const { Spacing } = Tokens;
-
 const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
-const LAZY_LOAD_BUTTON = 'umd-feeds-events-lazy-load-button';
-
-const LazyLoadButtonStyles = `
-  .${LAZY_LOAD_BUTTON} {
-    display: flex;
-    justify-content: center;
-    margin-top: ${Spacing.lg};
-  }
-`;
 
 export const ComponentStyles = `
   :host {
@@ -37,7 +26,6 @@ export const ComponentStyles = `
   ${GridGapStyles}
   ${LazyLoadButtonStyles}
   ${STYLES_EVENTS}
-  ${STYLES_CALL_TO_ACTION_ELEMENT}
   ${STYLES_NO_RESULTS}
   ${STYLES_LOADER}
 `;
@@ -72,25 +60,6 @@ const CheckForLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
   if (element._offset >= element._totalEntries) {
     container.remove();
   }
-};
-
-const CreateLazyLoadButton = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = document.createElement('div');
-  const button = document.createElement('button');
-  const ctaButton = CreateCallToActionElement({
-    cta: button,
-    type: 'outline',
-  });
-
-  button.innerHTML = 'Load More Events';
-  button.addEventListener('click', () => {
-    LoadMoreEntries({ element });
-  });
-
-  container.classList.add(LAZY_LOAD_BUTTON);
-  container.appendChild(ctaButton);
-
-  return container;
 };
 
 const LoadMoreEntries = async ({ element }: { element: UMDNewsEventsType }) => {
@@ -132,7 +101,10 @@ export const CreateFeed = async ({
   const feedData = await FetchFeedEntries({
     variables: MakeApiVariables({ element }),
   });
-  const lazyLoadButton = CreateLazyLoadButton({ element });
+
+  const lazyLoadButton = CreateLazyLoadButton({
+    callback: () => LoadMoreEntries({ element }),
+  });
 
   if (!container) {
     throw new Error('Container not found');

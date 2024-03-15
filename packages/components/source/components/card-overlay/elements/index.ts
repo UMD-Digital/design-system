@@ -217,13 +217,14 @@ export const ComponentStyles = `
     position: relative;
     background-color: ${Colors.gray.lightest};
     padding: ${Spacing.md};
-    padding-top: ${Spacing['4xl']};
+    padding-top: ${Spacing.lg};
     padding-bottom: ${Spacing.lg};
   }
 
   @media (min-width: 768px) {
     .${CARD_OVERLAY_CONTAINER} {
       min-height: 456px;
+      padding-top: ${Spacing['2xl']};
     }
   }
 

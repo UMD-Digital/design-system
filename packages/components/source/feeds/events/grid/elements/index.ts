@@ -1,22 +1,25 @@
 import { Reset } from 'helpers/styles';
-import { MakeLoader, STYLES_LOADER, UMD_LOADER } from 'elements/loader';
-import { CreateEventCards, STYLES_EVENTS, EventType } from 'elements/events';
+import { MakeLoader, STYLES_LOADER, ID_UMD_LOADER } from 'elements/loader';
+import {
+  CreateEventCards,
+  STYLES_EVENT_CARD,
+  EventType,
+} from 'elements/events';
 import {
   CreateGridGapLayout,
-  GridGapStyles,
-  GRID_LAYOUT_CONTAINER,
+  STYLES_GRID_LAYOUT,
+  ID_GRID_LAYOUT_CONTAINER,
 } from 'elements/grid';
 import {
   CreateNoResultsInterface,
   STYLES_NO_RESULTS,
-  NoResultsContentType,
 } from 'elements/no-results';
-import { FetchFeedCount, FetchFeedEntries } from '../../common/api';
+import { FetchFeedCount, FetchFeedEntries } from 'feeds/events/common/api';
 import {
   CreateLazyLoadButton,
-  LazyLoadButtonStyles,
-  LAZY_LOAD_BUTTON,
-} from '../../common/ui';
+  STYLES_LAZY_LOAD_BUTTON,
+  ID_LAZY_LOAD_BUTTON,
+} from 'feeds/events/common/ui';
 import { UMDNewsEventsType } from '../component';
 
 const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
@@ -27,14 +30,14 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${GridGapStyles}
-  ${LazyLoadButtonStyles}
-  ${STYLES_EVENTS}
+  ${STYLES_GRID_LAYOUT}
+  ${STYLES_LAZY_LOAD_BUTTON}
+  ${STYLES_EVENT_CARD}
   ${STYLES_NO_RESULTS}
   ${STYLES_LOADER}
 `;
 
-const NoResultsContent: NoResultsContentType = {
+const NoResultsContent = {
   message: 'No results found',
   linkUrl: 'https://calendar.umd.edu',
   linkText: 'View All Events',
@@ -60,7 +63,7 @@ const GetContainer = ({ element }: { element: UMDNewsEventsType }) => {
 const RemoveLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
   const container = GetContainer({ element });
   const button = container.querySelector(
-    `.${LAZY_LOAD_BUTTON}`,
+    `.${ID_LAZY_LOAD_BUTTON}`,
   ) as HTMLDivElement;
 
   if (button) button.remove();
@@ -68,7 +71,7 @@ const RemoveLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
 
 const RemoveLoader = ({ element }: { element: UMDNewsEventsType }) => {
   const container = GetContainer({ element });
-  const loader = container.querySelector(`.${UMD_LOADER}`) as HTMLDivElement;
+  const loader = container.querySelector(`.${ID_UMD_LOADER}`) as HTMLDivElement;
 
   if (loader) loader.remove();
 };
@@ -116,7 +119,7 @@ const DisplayEntries = ({
 }) => {
   const container = GetContainer({ element });
   const grid = container.querySelector(
-    `.${GRID_LAYOUT_CONTAINER}`,
+    `.${ID_GRID_LAYOUT_CONTAINER}`,
   ) as HTMLDivElement;
   const entries = CreateEventCards({ entries: feedData });
 

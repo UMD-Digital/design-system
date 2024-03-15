@@ -3,7 +3,7 @@ import { Reset } from 'helpers/styles';
 import { FetchGraphQL } from 'helpers/xhr';
 import { ARTICLES_QUERY } from 'helpers/queries';
 import { CreateArticleCards, STYLES_ARTICLE } from 'elements/article';
-import { CreateGridGapLayout, GridGapStyles } from 'elements/grid';
+import { CreateGridGapLayout, STYLES_GRID_LAYOUT } from 'elements/grid';
 import {
   CreateCallToActionElement,
   STYLES_CALL_TO_ACTION_ELEMENT,
@@ -43,7 +43,7 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${GridGapStyles}
+  ${STYLES_GRID_LAYOUT}
   ${LazyLoadButtonStyles}
   ${STYLES_ARTICLE}
   ${STYLES_CALL_TO_ACTION_ELEMENT}

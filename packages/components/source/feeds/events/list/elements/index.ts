@@ -2,7 +2,7 @@ import { Tokens, Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { FetchGraphQL } from 'helpers/xhr';
 import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from 'helpers/queries';
-import { CreateEventCards, STYLES_EVENTS } from 'elements/events';
+import { CreateEventCards, STYLES_EVENT_CARD } from 'elements/events';
 import {
   CreateCallToActionElement,
   STYLES_CALL_TO_ACTION_ELEMENT,
@@ -68,7 +68,7 @@ export const ComponentStyles = `
   ${Reset}
   ${LayoutStyles}
   ${LazyLoadButtonStyles}
-  ${STYLES_EVENTS}
+  ${STYLES_EVENT_CARD}
   ${STYLES_CALL_TO_ACTION_ELEMENT}
   ${STYLES_NO_RESULTS}
   ${STYLES_LOADER}

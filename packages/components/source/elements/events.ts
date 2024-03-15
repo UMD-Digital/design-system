@@ -88,7 +88,7 @@ const DateRowStyles = `
   }
 `;
 
-export const STYLES_EVENTS = `
+export const STYLES_EVENT_CARD = `
   ${STYLES_CARD}
   ${DateRowStyles}
 `;

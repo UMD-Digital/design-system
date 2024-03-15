@@ -6,12 +6,12 @@ import {
 
 const { Spacing } = Tokens;
 
-export const LAZY_LOAD_BUTTON = 'umd-feeds-events-lazy-load-button';
+export const ID_LAZY_LOAD_BUTTON = 'umd-feeds-events-lazy-load-button';
 
-export const LazyLoadButtonStyles = `
+export const STYLES_LAZY_LOAD_BUTTON = `
   ${STYLES_CALL_TO_ACTION_ELEMENT}
 
-  .${LAZY_LOAD_BUTTON} {
+  .${ID_LAZY_LOAD_BUTTON} {
     display: flex;
     justify-content: center;
     margin-top: ${Spacing.lg};
@@ -33,7 +33,7 @@ export const CreateLazyLoadButton = ({
   button.innerHTML = 'Load More Events';
   button.addEventListener('click', callback);
 
-  container.classList.add(LAZY_LOAD_BUTTON);
+  container.classList.add(ID_LAZY_LOAD_BUTTON);
   container.appendChild(ctaButton);
 
   return container;

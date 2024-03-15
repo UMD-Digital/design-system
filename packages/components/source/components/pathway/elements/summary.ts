@@ -177,8 +177,10 @@ const TextStyles = `
     },
   })}
 
+
   .${SUMMARY_TEXT_CONTAINER} * {
     font-size: ${FontSize['lg']};
+    line-height: 1.5em;
   }
 `;
 

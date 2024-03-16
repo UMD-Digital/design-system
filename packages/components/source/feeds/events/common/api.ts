@@ -1,18 +1,18 @@
 import { FetchGraphQL } from 'helpers/xhr';
 import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from 'helpers/queries';
 
-type FetchVariablesTypes = {
+type TypeFetchVariables = {
   startDate?: string;
   related?: string[];
   limit?: number;
   offset?: number;
 };
 
-type APIFeedVariablesTypes = FetchVariablesTypes & {
+export type TypeAPIFeedVariables = TypeFetchVariables & {
   token: string | null;
 };
 
-type FetchObject = APIFeedVariablesTypes & {
+type TypeFetchObject = TypeAPIFeedVariables & {
   query: string;
 };
 
@@ -24,10 +24,10 @@ const FetchFeed = async ({
   offset,
   token,
   query,
-}: FetchObject) => {
+}: TypeFetchObject) => {
   if (!token) throw new Error('Token not found');
 
-  const variables: FetchVariablesTypes = {
+  const variables: TypeFetchVariables = {
     startDate: new Date().toDateString(),
     limit,
     related,
@@ -47,7 +47,7 @@ const FetchFeed = async ({
 export const FetchFeedCount = async ({
   variables,
 }: {
-  variables: APIFeedVariablesTypes;
+  variables: TypeAPIFeedVariables;
 }) => {
   const feedData = await FetchFeed({
     ...variables,
@@ -68,7 +68,7 @@ export const FetchFeedCount = async ({
 export const FetchFeedEntries = async ({
   variables,
 }: {
-  variables: APIFeedVariablesTypes;
+  variables: TypeAPIFeedVariables;
 }) => {
   const feedData = await FetchFeed({ ...variables, query: EVENTS_QUERY });
 

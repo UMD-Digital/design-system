@@ -1,25 +1,26 @@
 import { Reset } from 'helpers/styles';
-import { MakeLoader, STYLES_LOADER, ID_UMD_LOADER } from 'elements/loader';
+import { MakeLoader } from 'elements/loader';
 import {
   CreateEventCards,
   STYLES_EVENT_CARD,
   EventType,
 } from 'elements/events';
 import {
-  CreateGridGapLayout,
-  STYLES_GRID_LAYOUT,
-  ID_GRID_LAYOUT_CONTAINER,
-} from 'elements/grid';
+  AppendGridEntries,
+  DisplayLazyLoad,
+  DisplayNoResults,
+  DisplayLoader,
+  DisplayGrid,
+  RemoveLazyLoad,
+  RemoveLoader,
+  STYLES_FEEDS_COMMON,
+  TypeLazyLoad,
+} from 'feeds/common/ui';
 import {
-  CreateNoResultsInterface,
-  STYLES_NO_RESULTS,
-} from 'elements/no-results';
-import { FetchFeedCount, FetchFeedEntries } from 'feeds/events/common/api';
-import {
-  CreateLazyLoadButton,
-  STYLES_LAZY_LOAD_BUTTON,
-  ID_LAZY_LOAD_BUTTON,
-} from 'feeds/events/common/ui';
+  FetchFeedCount,
+  FetchFeedEntries,
+  TypeAPIFeedVariables,
+} from 'feeds/events/common/api';
 import { UMDNewsEventsType } from '../component';
 
 const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
@@ -30,11 +31,8 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_GRID_LAYOUT}
-  ${STYLES_LAZY_LOAD_BUTTON}
+  ${STYLES_FEEDS_COMMON}
   ${STYLES_EVENT_CARD}
-  ${STYLES_NO_RESULTS}
-  ${STYLES_LOADER}
 `;
 
 const NoResultsContent = {
@@ -43,12 +41,28 @@ const NoResultsContent = {
   linkText: 'View All Events',
 };
 
-const MakeApiVariables = ({ element }: { element: UMDNewsEventsType }) => ({
+const MakeApiVariables = ({
+  element,
+}: {
+  element: UMDNewsEventsType;
+}): TypeAPIFeedVariables => ({
   startDate: new Date().toDateString(),
   limit: element._showCount * element._showRows,
   related: element._categories,
   offset: element._offset,
   token: element._token,
+});
+
+const MakeLazyLoadVariables = ({
+  element,
+}: {
+  element: UMDNewsEventsType;
+}): TypeLazyLoad => ({
+  container: GetContainer({ element }),
+  isLazyLoad: element._lazyLoad,
+  totalEntries: element._totalEntries,
+  offset: element._offset,
+  lazyLoadCallback: { callback: () => LoadMoreEntries({ element }) },
 });
 
 const GetContainer = ({ element }: { element: UMDNewsEventsType }) => {
@@ -60,56 +74,6 @@ const GetContainer = ({ element }: { element: UMDNewsEventsType }) => {
   return container;
 };
 
-const RemoveLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = GetContainer({ element });
-  const button = container.querySelector(
-    `.${ID_LAZY_LOAD_BUTTON}`,
-  ) as HTMLDivElement;
-
-  if (button) button.remove();
-};
-
-const RemoveLoader = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = GetContainer({ element });
-  const loader = container.querySelector(`.${ID_UMD_LOADER}`) as HTMLDivElement;
-
-  if (loader) loader.remove();
-};
-
-const DisplayLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = GetContainer({ element });
-  const lazyLoadButton = CreateLazyLoadButton({
-    callback: () => LoadMoreEntries({ element }),
-  });
-
-  if (!element._lazyLoad) return;
-  if (!element._totalEntries) return;
-  if (element._offset >= element._totalEntries) return;
-
-  container.appendChild(lazyLoadButton);
-};
-
-const DisplayNoResults = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = GetContainer({ element });
-
-  container.innerHTML = '';
-  CreateNoResultsInterface({ container, ...NoResultsContent });
-};
-
-const DisplayLoader = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = GetContainer({ element });
-  const loader = MakeLoader();
-
-  container.appendChild(loader);
-};
-
-const DisplayGrid = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = GetContainer({ element });
-  const grid = CreateGridGapLayout({ count: element._showCount });
-
-  container.appendChild(grid);
-};
-
 const DisplayEntries = ({
   element,
   feedData,
@@ -118,21 +82,14 @@ const DisplayEntries = ({
   feedData: EventType[];
 }) => {
   const container = GetContainer({ element });
-  const grid = container.querySelector(
-    `.${ID_GRID_LAYOUT_CONTAINER}`,
-  ) as HTMLDivElement;
   const entries = CreateEventCards({ entries: feedData });
 
   element._offset += entries.length;
 
-  RemoveLoader({ element });
-  RemoveLazyLoad({ element });
-
-  entries.forEach((entry) => {
-    grid.appendChild(entry);
-  });
-
-  DisplayLazyLoad({ element });
+  RemoveLoader({ container });
+  RemoveLazyLoad({ container });
+  AppendGridEntries({ container, entries });
+  DisplayLazyLoad(MakeLazyLoadVariables({ element }));
 };
 
 const SetCount = async ({ element }: { element: UMDNewsEventsType }) => {
@@ -142,13 +99,14 @@ const SetCount = async ({ element }: { element: UMDNewsEventsType }) => {
 
   if (count) {
     element._totalEntries = count;
-    DisplayLazyLoad({ element });
+    DisplayLazyLoad(MakeLazyLoadVariables({ element }));
   }
 };
 
 const LoadMoreEntries = async ({ element }: { element: UMDNewsEventsType }) => {
-  RemoveLazyLoad({ element });
-  DisplayLoader({ element });
+  const container = GetContainer({ element });
+  RemoveLazyLoad({ container });
+  DisplayLoader({ container });
   FetchFeedEntries({
     variables: MakeApiVariables({ element }),
   }).then((feedData) => {
@@ -161,16 +119,18 @@ export const CreateFeed = async ({
 }: {
   element: UMDNewsEventsType;
 }) => {
+  const container = GetContainer({ element });
+
   FetchFeedEntries({
     variables: MakeApiVariables({ element }),
   }).then((feedData) => {
     if (feedData.length === 0) {
-      DisplayNoResults({ element });
+      DisplayNoResults({ container, NoResultsContent });
       return;
     }
 
     if (feedData.length > 0) {
-      DisplayGrid({ element });
+      DisplayGrid({ container, count: element._showCount });
       DisplayEntries({ element, feedData });
       SetCount({ element });
     }

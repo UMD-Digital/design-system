@@ -1,10 +1,11 @@
 import { Reset } from 'helpers/styles';
 import { MakeLoader } from 'elements/loader';
 import {
-  CreateEventCards,
-  STYLES_EVENT_CARD,
+  CreateEventCard,
+  CreateEventList,
+  STYLES_EVENT_FEED,
   EventType,
-} from 'elements/events';
+} from 'feeds/events/common/ui';
 import {
   AppendGridEntries,
   DisplayLazyLoad,
@@ -21,9 +22,18 @@ import {
   FetchFeedEntries,
   TypeAPIFeedVariables,
 } from 'feeds/events/common/api';
-import { UMDNewsEventsType } from '..';
+import {
+  UMDFeedEventsList,
+  ELEMENT_NAME as ELEMENT_NAME_LIST,
+} from '../list/index';
+import {
+  UMDFeedEventsGrid,
+  ELEMENT_NAME as ELEMENT_NAME_GRID,
+} from '../grid/index';
 
 const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
+
+type TypeElements = UMDFeedEventsList | UMDFeedEventsGrid;
 
 export const ComponentStyles = `
   :host {
@@ -32,7 +42,7 @@ export const ComponentStyles = `
 
   ${Reset}
   ${STYLES_FEEDS_COMMON}
-  ${STYLES_EVENT_CARD}
+  ${STYLES_EVENT_FEED}
 `;
 
 const NoResultsContent = {
@@ -41,22 +51,40 @@ const NoResultsContent = {
   linkText: 'View All Events',
 };
 
+const isListType = ({ element }: { element: TypeElements }) =>
+  element.nodeName.toLowerCase() === ELEMENT_NAME_LIST;
+
+const isGridType = ({ element }: { element: TypeElements }) =>
+  element.nodeName.toLowerCase() === ELEMENT_NAME_GRID;
+
 const MakeApiVariables = ({
   element,
 }: {
-  element: UMDNewsEventsType;
-}): TypeAPIFeedVariables => ({
-  startDate: new Date().toDateString(),
-  limit: element._showCount * element._showRows,
-  related: element._categories,
-  offset: element._offset,
-  token: element._token,
-});
+  element: TypeElements;
+}): TypeAPIFeedVariables => {
+  const startDate = new Date().toDateString();
+  const related = element._categories;
+  const offset = element._offset;
+  const token = element._token;
+  let limit = element._showRows;
+
+  if ('_showCount' in element) {
+    limit = element._showCount * element._showRows;
+  }
+
+  return {
+    startDate,
+    limit,
+    related,
+    offset,
+    token,
+  };
+};
 
 const MakeLazyLoadVariables = ({
   element,
 }: {
-  element: UMDNewsEventsType;
+  element: TypeElements;
 }): TypeLazyLoad => ({
   container: GetContainer({ element }),
   isLazyLoad: element._lazyLoad,
@@ -65,7 +93,7 @@ const MakeLazyLoadVariables = ({
   lazyLoadCallback: { callback: () => LoadMoreEntries({ element }) },
 });
 
-const GetContainer = ({ element }: { element: UMDNewsEventsType }) => {
+const GetContainer = ({ element }: { element: TypeElements }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const container = shadowRoot.querySelector(
     `.${FEEDS_EVENTS_CONTAINER}`,
@@ -78,11 +106,15 @@ const DisplayEntries = ({
   element,
   feedData,
 }: {
-  element: UMDNewsEventsType;
+  element: TypeElements;
   feedData: EventType[];
 }) => {
+  const isList = isListType({ element });
+  const isGrid = isGridType({ element });
   const container = GetContainer({ element });
-  const entries = CreateEventCards({ entries: feedData });
+  const entries = isGrid
+    ? CreateEventCard({ entries: feedData })
+    : CreateEventList({ entries: feedData });
 
   element._offset += entries.length;
 
@@ -92,7 +124,7 @@ const DisplayEntries = ({
   DisplayLazyLoad(MakeLazyLoadVariables({ element }));
 };
 
-const SetCount = async ({ element }: { element: UMDNewsEventsType }) => {
+const SetCount = async ({ element }: { element: TypeElements }) => {
   const count = await FetchFeedCount({
     variables: MakeApiVariables({ element }),
   });
@@ -103,7 +135,7 @@ const SetCount = async ({ element }: { element: UMDNewsEventsType }) => {
   }
 };
 
-const LoadMoreEntries = async ({ element }: { element: UMDNewsEventsType }) => {
+const LoadMoreEntries = async ({ element }: { element: TypeElements }) => {
   const container = GetContainer({ element });
   RemoveLazyLoad({ container });
   DisplayLoader({ container });
@@ -114,12 +146,10 @@ const LoadMoreEntries = async ({ element }: { element: UMDNewsEventsType }) => {
   });
 };
 
-export const CreateFeed = async ({
-  element,
-}: {
-  element: UMDNewsEventsType;
-}) => {
+export const CreateFeed = async ({ element }: { element: TypeElements }) => {
   const container = GetContainer({ element });
+  const isList = isListType({ element });
+  const isGrid = isGridType({ element });
 
   FetchFeedEntries({
     variables: MakeApiVariables({ element }),
@@ -130,18 +160,16 @@ export const CreateFeed = async ({
     }
 
     if (feedData.length > 0) {
-      DisplayGrid({ container, count: element._showCount });
+      const count = '_showCount' in element ? element._showCount : 1;
+
+      DisplayGrid({ container, count });
       DisplayEntries({ element, feedData });
       SetCount({ element });
     }
   });
 };
 
-export const CreateShadowDom = ({
-  element,
-}: {
-  element: UMDNewsEventsType;
-}) => {
+export const CreateShadowDom = ({ element }: { element: TypeElements }) => {
   const loader = MakeLoader();
   const container = document.createElement('div');
 

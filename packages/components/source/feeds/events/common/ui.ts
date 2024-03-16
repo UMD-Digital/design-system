@@ -1,5 +1,6 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
+import { CreateListElement, STYLES_LIST } from 'elements/list';
 import { CreateCallToActionElement } from 'elements/call-to-action';
 import {
   CALENDAR_ICON,
@@ -88,8 +89,9 @@ const DateRowStyles = `
   }
 `;
 
-export const STYLES_EVENT_CARD = `
+export const STYLES_EVENT_FEED = `
   ${STYLES_CARD}
+  ${STYLES_LIST}
   ${DateRowStyles}
 `;
 
@@ -180,7 +182,7 @@ const CreateCTA = ({ url }: { url: string }) => {
   return null;
 };
 
-export const CreateEventCards = ({ entries }: { entries: EventType[] }) =>
+export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
   entries.map((entry) =>
     CreateCardElement({
       image: CreateImage({ images: entry.image }),
@@ -188,5 +190,15 @@ export const CreateEventCards = ({ entries }: { entries: EventType[] }) =>
       text: CreateText({ text: entry.summary }),
       date: CreateDate(entry),
       aligned: true,
+    }),
+  );
+
+export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
+  entries.map((entry) =>
+    CreateListElement({
+      image: CreateImage({ images: entry.image }),
+      headline: CreateHeadline({ text: entry.title, url: entry.url }),
+      text: CreateText({ text: entry.summary }),
+      date: CreateDate(entry),
     }),
   );

@@ -1,11 +1,11 @@
 declare global {
   interface Window {
-    UMDFeedEvents: typeof UMDFeedEvents;
+    UMDFeedEventsGrid: typeof UMDFeedEventsGrid;
   }
 }
 
 import { MakeTemplate } from 'helpers/ui';
-import { ComponentStyles, CreateShadowDom, CreateFeed } from './elements';
+import { ComponentStyles, CreateShadowDom, CreateFeed } from '../common';
 
 const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';
@@ -14,8 +14,7 @@ const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
 
 export const ELEMENT_NAME = 'umd-feed-events';
-export type UMDNewsEventsType = UMDFeedEvents;
-export class UMDFeedEvents extends HTMLElement {
+export class UMDFeedEventsGrid extends HTMLElement {
   _shadow: ShadowRoot;
   _token: string | null;
   _showCount: number;
@@ -92,8 +91,8 @@ export const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDFeedEvents = UMDFeedEvents;
-    window.customElements.define(ELEMENT_NAME, UMDFeedEvents);
+    window.UMDFeedEventsGrid = UMDFeedEventsGrid;
+    window.customElements.define(ELEMENT_NAME, UMDFeedEventsGrid);
   }
 
   return '';

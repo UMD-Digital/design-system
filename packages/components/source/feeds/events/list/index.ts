@@ -5,7 +5,7 @@ declare global {
 }
 
 import { MakeTemplate } from 'helpers/ui';
-import { ComponentStyles, CreateShadowDom, CreateFeed } from './elements';
+import { ComponentStyles, CreateShadowDom, CreateFeed } from '../common';
 
 const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';
@@ -14,10 +14,10 @@ const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
 
 export const ELEMENT_NAME = 'umd-feed-events-list';
-export type UMDNewsEventsListType = UMDFeedEventsList;
 export class UMDFeedEventsList extends HTMLElement {
   _shadow: ShadowRoot;
   _token: string | null;
+  _showRows: number;
   _lazyLoad: boolean;
   _offset: number;
   _totalEntries: number | null;
@@ -27,6 +27,7 @@ export class UMDFeedEventsList extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._token = null;
+    this._showRows = 5;
     this._offset = 0;
     this._lazyLoad = false;
     this._totalEntries = null;
@@ -51,7 +52,6 @@ export class UMDFeedEventsList extends HTMLElement {
   async connectedCallback() {
     const element = this;
     const rowCount = element.getAttribute(ATTRIBUTE_ROWS);
-    const showCount = element.getAttribute(ATTRIBUTE_SHOW);
     const shouldLazyLoad = element.getAttribute(ATTRIBUTE_LAZYLOAD);
     const categories = element.getAttribute(ATTRIBUTE_CATEGORIES);
 
@@ -60,6 +60,8 @@ export class UMDFeedEventsList extends HTMLElement {
     if (categories) {
       this._categories = categories.split(',');
     }
+
+    if (rowCount) element._showRows = parseInt(rowCount);
 
     if (shouldLazyLoad) {
       if (shouldLazyLoad === 'true') element._lazyLoad = true;

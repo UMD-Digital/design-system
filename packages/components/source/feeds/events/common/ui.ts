@@ -56,7 +56,7 @@ const DateRowStyles = `
   }
 
   .${EVENTS_DATE_ROW} > p:not(:first-child) {
-    margin-top: 4px;
+    margin-top: 3px;
   }
 
   .${EVENTS_DATE_ROW} svg#calendar-icon {

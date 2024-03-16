@@ -11,14 +11,7 @@ import { Load as HeroLoader } from './components/hero';
 import { Load as NavDrawerLoader } from './components/nav-drawer';
 import { Load as NavItemLoader } from './components/nav-item';
 import { Load as PathwayLoader } from './components/pathway';
-
-import { Load as FeedNewsLoader } from './feeds/news/grid/component';
-import { Load as EventsNewsLoader } from './feeds/events/grid/component';
-
-const LoadUmdFeeds = () => {
-  FeedNewsLoader();
-  EventsNewsLoader();
-};
+import LoadUmdFeeds from './feeds';
 
 const LoadUmdComponents = () => {
   AccordionLoader();

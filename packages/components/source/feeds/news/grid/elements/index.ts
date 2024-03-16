@@ -14,7 +14,7 @@ import {
   NoResultsContentType,
 } from 'elements/no-results';
 import { MakeLoader, STYLES_LOADER } from 'elements/loader';
-import { UMDNewsFeedType } from '../component';
+import { UMDNewsFeedType } from '..';
 
 type VariablesType = {
   related?: string[];

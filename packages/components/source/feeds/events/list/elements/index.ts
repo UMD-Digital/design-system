@@ -1,64 +1,29 @@
-import { Tokens, Layout } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { FetchGraphQL } from 'helpers/xhr';
-import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from 'helpers/queries';
-import { CreateEventCards, STYLES_EVENT_CARD } from 'elements/events';
+import { Reset } from 'helpers/styles';
+import { MakeLoader } from 'elements/loader';
 import {
-  CreateCallToActionElement,
-  STYLES_CALL_TO_ACTION_ELEMENT,
-} from 'elements/call-to-action';
+  CreateEventCards,
+  STYLES_EVENT_CARD,
+  EventType,
+} from 'elements/events';
 import {
-  CreateNoResultsInterface,
-  STYLES_NO_RESULTS,
-  NoResultsContentType,
-} from 'elements/no-results';
-import { MakeLoader, STYLES_LOADER } from 'elements/loader';
-import { UMDNewsEventsType } from '../component';
-
-type VariablesType = {
-  startDate?: string;
-  related?: string[];
-  limit?: number;
-  offset?: number;
-};
-
-const { Spacing } = Tokens;
-const { Grid } = Layout;
+  AppendGridEntries,
+  DisplayLazyLoad,
+  DisplayNoResults,
+  DisplayLoader,
+  DisplayGrid,
+  RemoveLazyLoad,
+  RemoveLoader,
+  STYLES_FEEDS_COMMON,
+  TypeLazyLoad,
+} from 'feeds/common/ui';
+import {
+  FetchFeedCount,
+  FetchFeedEntries,
+  TypeAPIFeedVariables,
+} from 'feeds/events/common/api';
+import { UMDFeedEventsList } from '../index';
 
 const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
-const LAYOUT_CONTAINER = 'umd-feeds-events-layout-container';
-const LAZY_LOAD_BUTTON = 'umd-feeds-events-lazy-load-button';
-
-const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
-
-const LazyLoadButtonStyles = `
-  .${LAZY_LOAD_BUTTON} {
-    display: flex;
-    justify-content: center;
-    margin-top: ${Spacing.lg};
-  }
-`;
-
-const LayoutStyles = `
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${LAYOUT_CONTAINER}[grid-count="2"]`]: Grid['.base'],
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${LAYOUT_CONTAINER}[grid-count="3"]`]: Grid['.base-three'],
-    },
-  })}
-
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${LAYOUT_CONTAINER}[grid-count="4"]`]: Grid['.base-four'],
-    },
-  })}
-`;
 
 export const ComponentStyles = `
   :host {
@@ -66,207 +31,115 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${LayoutStyles}
-  ${LazyLoadButtonStyles}
+  ${STYLES_FEEDS_COMMON}
   ${STYLES_EVENT_CARD}
-  ${STYLES_CALL_TO_ACTION_ELEMENT}
-  ${STYLES_NO_RESULTS}
-  ${STYLES_LOADER}
 `;
 
-const NoResultsContent: NoResultsContentType = {
+const NoResultsContent = {
   message: 'No results found',
   linkUrl: 'https://calendar.umd.edu',
   linkText: 'View All Events',
 };
 
-const CheckForLazyLoad = ({ element }: { element: UMDNewsEventsType }) => {
-  const shadowRoot = element.shadowRoot as ShadowRoot;
-  const container = shadowRoot.querySelector(
-    `.${LAZY_LOAD_BUTTON}`,
-  ) as HTMLDivElement;
-
-  if (!container) return;
-  if (!element._lazyLoad) return;
-  if (!element._totalEntries) {
-    container.remove();
-    return;
-  }
-
-  if (element._offset >= element._totalEntries) {
-    container.remove();
-  }
-};
-
-const CreateGridLayout = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = document.createElement('div');
-
-  container.classList.add(LAYOUT_CONTAINER);
-  container.setAttribute('grid-count', `${element._showCount}`);
-
-  return container;
-};
-
-const CreateLazyLoadButton = ({ element }: { element: UMDNewsEventsType }) => {
-  const container = document.createElement('div');
-  const button = document.createElement('button');
-  button.innerHTML = 'Load More';
-  button.addEventListener('click', () => {
-    LoadMoreEntries({ element });
-  });
-
-  const ctaButton = CreateCallToActionElement({
-    cta: button,
-    type: 'outline',
-  });
-
-  container.classList.add(LAZY_LOAD_BUTTON);
-  container.appendChild(ctaButton);
-
-  return container;
-};
-
-const LoadMoreEntries = async ({ element }: { element: UMDNewsEventsType }) => {
-  const loader = MakeLoader();
-  const shadowRoot = element.shadowRoot as ShadowRoot;
-  const container = shadowRoot.querySelector(
-    `.${LAYOUT_CONTAINER}`,
-  ) as HTMLDivElement;
-
-  if (!container) return;
-  container.appendChild(loader);
-
-  if (container) {
-    const feedData = await FetchFeedEntries({ element });
-    const entries = CreateEventCards({ entries: feedData });
-
-    loader.remove();
-
-    entries.forEach((entry) => {
-      container.appendChild(entry);
-    });
-  }
-};
-
-const FetchFeed = async ({
-  element,
-  query,
-}: {
-  element: UMDNewsEventsType;
-  query: string;
-}) => {
-  if (!element._token) throw new Error('Token not found');
-
-  const variables: VariablesType = {
-    startDate: new Date().toDateString(),
-    limit: element._showCount * element._showRows,
-    related: element._categories,
-    offset: element._offset,
-  };
-
-  const feedData = await FetchGraphQL({
-    query,
-    url: CALENDAR_PRODUCTION_URL,
-    token: element._token,
-    variables,
-  });
-
-  return feedData;
-};
-
-const FetchFeedCount = async ({ element }: { element: UMDNewsEventsType }) => {
-  const feedData = await FetchFeed({
-    element,
-    query: EVENTS_COUNT_QUERY,
-  });
-
-  if (!feedData) throw new Error('Feed not found');
-
-  const count = feedData?.data?.count?.events?.length;
-
-  if (count) {
-    element._totalEntries = count;
-  }
-
-  return null;
-};
-
-const FetchFeedEntries = async ({
+const MakeApiVariables = ({
   element,
 }: {
-  element: UMDNewsEventsType;
-}) => {
+  element: UMDFeedEventsList;
+}): TypeAPIFeedVariables => ({
+  startDate: new Date().toDateString(),
+  related: element._categories,
+  offset: element._offset,
+  token: element._token,
+});
+
+const MakeLazyLoadVariables = ({
+  element,
+}: {
+  element: UMDFeedEventsList;
+}): TypeLazyLoad => ({
+  container: GetContainer({ element }),
+  isLazyLoad: element._lazyLoad,
+  totalEntries: element._totalEntries,
+  offset: element._offset,
+  lazyLoadCallback: { callback: () => LoadMoreEntries({ element }) },
+});
+
+const GetContainer = ({ element }: { element: UMDFeedEventsList }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const container = shadowRoot.querySelector(
     `.${FEEDS_EVENTS_CONTAINER}`,
   ) as HTMLDivElement;
-  const feedData = await FetchFeed({ element, query: EVENTS_QUERY });
 
-  if (
-    !feedData ||
-    !feedData.data ||
-    !feedData.data.entries ||
-    feedData.message
-  ) {
-    CreateNoResultsInterface({ container, ...NoResultsContent });
-    if (!feedData) throw new Error('Feed not found');
-    if (!feedData.data) throw new Error('Feed data not found');
-    if (!feedData.data.entries) throw new Error('Feed entries not found');
-    if (!feedData.data.entries.events) throw new Error('Feed events not found');
-    if (!feedData.message)
-      throw new Error(`Feed data errors: ${feedData.message}`);
+  return container;
+};
+
+const DisplayEntries = ({
+  element,
+  feedData,
+}: {
+  element: UMDFeedEventsList;
+  feedData: EventType[];
+}) => {
+  const container = GetContainer({ element });
+  const entries = CreateEventCards({ entries: feedData });
+
+  element._offset += entries.length;
+
+  RemoveLoader({ container });
+  RemoveLazyLoad({ container });
+  AppendGridEntries({ container, entries });
+  DisplayLazyLoad(MakeLazyLoadVariables({ element }));
+};
+
+const SetCount = async ({ element }: { element: UMDFeedEventsList }) => {
+  const count = await FetchFeedCount({
+    variables: MakeApiVariables({ element }),
+  });
+
+  if (count) {
+    element._totalEntries = count;
+    DisplayLazyLoad(MakeLazyLoadVariables({ element }));
   }
+};
 
-  const data = feedData.data.entries.events;
-
-  element._offset += data.length;
-  CheckForLazyLoad({ element });
-  return data;
+const LoadMoreEntries = async ({ element }: { element: UMDFeedEventsList }) => {
+  const container = GetContainer({ element });
+  RemoveLazyLoad({ container });
+  DisplayLoader({ container });
+  FetchFeedEntries({
+    variables: MakeApiVariables({ element }),
+  }).then((feedData) => {
+    DisplayEntries({ element, feedData });
+  });
 };
 
 export const CreateFeed = async ({
   element,
 }: {
-  element: UMDNewsEventsType;
+  element: UMDFeedEventsList;
 }) => {
-  const shadowRoot = element.shadowRoot as ShadowRoot;
-  const container = shadowRoot.querySelector(
-    `.${FEEDS_EVENTS_CONTAINER}`,
-  ) as HTMLDivElement;
-  const feedData = await FetchFeedEntries({ element });
-  const lazyLoadButton = CreateLazyLoadButton({ element });
+  const container = GetContainer({ element });
 
-  if (!container) {
-    throw new Error('Container not found');
-  }
+  FetchFeedEntries({
+    variables: MakeApiVariables({ element }),
+  }).then((feedData) => {
+    if (feedData.length === 0) {
+      DisplayNoResults({ container, NoResultsContent });
+      return;
+    }
 
-  if (feedData.length === 0) {
-    container.innerHTML = '';
-    CreateNoResultsInterface({ container, ...NoResultsContent });
-    return container;
-  }
-
-  if (feedData.length > 0) {
-    const entries = CreateEventCards({ entries: feedData });
-    const grid = CreateGridLayout({ element });
-
-    entries.forEach((entry) => {
-      grid.appendChild(entry);
-    });
-
-    container.innerHTML = '';
-    container.appendChild(grid);
-
-    await FetchFeedCount({ element });
-
-    if (element._lazyLoad) container.appendChild(lazyLoadButton);
-  }
+    if (feedData.length > 0) {
+      DisplayGrid({ container });
+      DisplayEntries({ element, feedData });
+      SetCount({ element });
+    }
+  });
 };
 
 export const CreateShadowDom = ({
   element,
 }: {
-  element: UMDNewsEventsType;
+  element: UMDFeedEventsList;
 }) => {
   const loader = MakeLoader();
   const container = document.createElement('div');

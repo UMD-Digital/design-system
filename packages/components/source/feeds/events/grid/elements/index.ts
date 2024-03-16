@@ -21,7 +21,7 @@ import {
   FetchFeedEntries,
   TypeAPIFeedVariables,
 } from 'feeds/events/common/api';
-import { UMDNewsEventsType } from '../component';
+import { UMDNewsEventsType } from '..';
 
 const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
 

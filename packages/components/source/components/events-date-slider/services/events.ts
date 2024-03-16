@@ -1,5 +1,5 @@
 import { ELEMENT_TYPE } from '../index';
-import { SLOTS } from '../globals';
+import { SLOTS, ELEMENTS } from '../globals';
 import {
   ButtonVisibilityLogic,
   JumpToDate,
@@ -8,6 +8,7 @@ import {
 } from './helpers';
 
 const { DATE_SLOT_NAME } = SLOTS;
+const { CONTAINER_CLASS } = ELEMENTS;
 
 export const EventSlideDates = ({
   forward,
@@ -59,20 +60,11 @@ export const EventResize = ({ element }: { element: ELEMENT_TYPE }) => {
   ButtonVisibilityLogic({ element });
 };
 
-export const EventSwipe = ({
-  container,
-  element,
-}: {
-  container: HTMLDivElement;
-  element: ELEMENT_TYPE;
-}) => {
-  if (!container) {
-    throw new Error(
-      'missing required elements is not defined in EventSwipe function',
-    );
-  }
-
+export const EventSwipe = ({ element }: { element: ELEMENT_TYPE }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
+  const container = shadowRoot.querySelector(
+    `.${CONTAINER_CLASS}`,
+  ) as HTMLDivElement;
   const currentPosition = element._count;
 
   const slider = element.querySelector(

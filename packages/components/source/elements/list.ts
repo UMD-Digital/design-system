@@ -21,21 +21,48 @@ export const VARIABLES = {
   ATTR_IMAGE: 'data-image',
 };
 
+const ELEMENT_NAME = 'umd-list';
+
 const LIST_CONTAINER = 'umd-list-container';
+const LIST_CONTAINER_WRAPPER = 'umd-list-container-wrapper';
+const LIST_DATE_CONTAINER = 'umd-list-date-container';
 const LIST_TEXT_CONTAINER = 'umd-list-text-container';
 const LIST_IMAGE_CONTAINER = 'umd-list-image-container';
 const LIST_HEADLINE_WRAPPER = 'umd-list-headline-wrapper';
-const LIST_DATE_WRAPPER = 'umd-list-date-wrapper';
+const LIST_DETAILS_WRAPPER = 'umd-list-date-wrapper';
 const LIST_TEXT_WRAPPER = 'umd-lisT-text-wrapper';
 
 // prettier-ignore
-const ColumnTextStyles = `
+const VariationImageStyles = `
+  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
+    .${LIST_CONTAINER}[${VARIABLES.ATTR_IMAGE}] {
+      display: flex;
+    }
+  }
+  
+  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
+    .${LIST_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${LIST_TEXT_CONTAINER} {
+      width: 70%;
+      padding-right: ${Spacing.md};
+      order: 1;
+    }
+  }
+`;
 
+// prettier-ignore
+const ColumnDateStyles = `
+  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.DESKTOP - 1}px) {
+    .${LIST_DATE_CONTAINER} {
+      display: none;
+    }
+  }
+`;
+
+// prettier-ignore
+const ColumnTextStyles = `
   .${LIST_TEXT_CONTAINER}  {
 
   }
-
-
 `;
 
 // prettier-ignore
@@ -98,12 +125,12 @@ const HeadlineStyles = `
 `;
 
 // prettier-ignore
-const DateStyles = `
-  .${LIST_DATE_WRAPPER} {
+const DetailsStyles = `
+  .${LIST_DETAILS_WRAPPER} {
     display: block;
   }
 
-  * + .${LIST_DATE_WRAPPER} {
+  * + .${LIST_DETAILS_WRAPPER} {
     margin-top: ${Spacing.min};
     display: block;
   }
@@ -133,28 +160,21 @@ const TextStyles = `
 export const STYLES_LIST = `
   .${LIST_CONTAINER} {
     max-width: 680px;
-    container: umd-list / inline-size;
+    container: ${ELEMENT_NAME} / inline-size;
   }
 
-  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${LIST_CONTAINER}[${VARIABLES.ATTR_IMAGE}] {
-      display: flex;
-    }
+  .${LIST_CONTAINER_WRAPPER} {
+    align-items: flex-start;
+    display: flex;
   }
 
-  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${LIST_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${LIST_TEXT_CONTAINER} {
-      width: 70%;
-      padding-right: ${Spacing.md};
-      order: 1;
-    }
-  }
-
+  ${ColumnDateStyles}
   ${ColumnImageStyles}
   ${ColumnTextStyles}
   ${HeadlineStyles}
-  ${DateStyles}
+  ${DetailsStyles}
   ${TextStyles}
+  ${VariationImageStyles}
 `;
 
 const CreateImage = ({ image }: { image: HTMLImageElement }) => {
@@ -170,23 +190,28 @@ export const CreateListElement = ({
   image,
   headline,
   text,
+  details,
   date,
 }: {
   image?: HTMLImageElement | null;
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
+  details?: HTMLElement | null;
   date?: HTMLElement | null;
 }) => {
   const container = document.createElement('div');
+  const wrapper = document.createElement('div');
   const textContainer = document.createElement('div');
+  const dateContainer = document.createElement('div');
 
   container.classList.add(LIST_CONTAINER);
+  wrapper.classList.add(LIST_CONTAINER_WRAPPER);
   textContainer.classList.add(LIST_TEXT_CONTAINER);
 
-  if (image) {
-    const imageContainer = CreateImage({ image });
-    container.setAttribute(VARIABLES.ATTR_IMAGE, '');
-    container.appendChild(imageContainer);
+  if (date) {
+    dateContainer.classList.add(LIST_DATE_CONTAINER);
+    dateContainer.appendChild(date);
+    wrapper.appendChild(dateContainer);
   }
 
   if (headline) {
@@ -195,9 +220,9 @@ export const CreateListElement = ({
     textContainer.appendChild(headline);
   }
 
-  if (date) {
-    date.classList.add(LIST_DATE_WRAPPER);
-    textContainer.appendChild(date);
+  if (details) {
+    details.classList.add(LIST_DETAILS_WRAPPER);
+    textContainer.appendChild(details);
   }
 
   if (text) {
@@ -205,7 +230,15 @@ export const CreateListElement = ({
     textContainer.appendChild(text);
   }
 
-  container.appendChild(textContainer);
+  wrapper.appendChild(textContainer);
+
+  if (image) {
+    const imageContainer = CreateImage({ image });
+    container.setAttribute(VARIABLES.ATTR_IMAGE, '');
+    wrapper.appendChild(imageContainer);
+  }
+
+  container.appendChild(wrapper);
 
   return container;
 };

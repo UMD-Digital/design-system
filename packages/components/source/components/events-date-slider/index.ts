@@ -9,23 +9,23 @@ import { Debounce } from 'helpers/performance';
 import { ComponentStyles, CreateContainer, OnLoadStyles } from './elements';
 import { EventResize, EventSwipe } from './services/events';
 import { ButtonVisibilityLogic, SizeDatesElements } from './services/helpers';
-import { ELEMENTS, VARIABLES } from './globals';
+import { VARIABLES } from './globals';
 
-const { CONTAINER_DARK_CLASS } = ELEMENTS;
-
-const { ATTRIBUTE_RESIZE, ATTRIBUTE_THEME } = VARIABLES;
+const { ATTRIBUTE_RESIZE, ATTRIBUTE_THEME, THEME_LIGHT } = VARIABLES;
 
 export const ELEMENT_NAME = 'umd-element-events-date-slider';
 export type ELEMENT_TYPE = UMDEventsDateSliderElement;
 export class UMDEventsDateSliderElement extends HTMLElement {
   _shadow: ShadowRoot;
   _element: null | HTMLElement = null;
+  _theme: string;
   _count = 0;
 
   constructor() {
     super();
 
     this._shadow = this.attachShadow({ mode: 'open' });
+    this._theme = THEME_LIGHT;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
@@ -49,22 +49,19 @@ export class UMDEventsDateSliderElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    const theme = element.getAttribute(ATTRIBUTE_THEME) || 'light';
-    const container = CreateContainer({ element });
+    const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
 
     const resize = () => {
       EventResize({ element });
     };
 
-    if (theme === 'dark') {
-      container.classList.add(CONTAINER_DARK_CLASS);
-    }
+    element._theme = theme;
+    element._shadow.appendChild(CreateContainer({ element }));
 
-    element._shadow.appendChild(container);
     OnLoadStyles({ element });
-    window.addEventListener('resize', Debounce(resize, 20));
-    EventSwipe({ container, element });
+    EventSwipe({ element });
     ButtonVisibilityLogic({ element });
+    window.addEventListener('resize', Debounce(resize, 20));
   }
 
   setCountForward = () => {

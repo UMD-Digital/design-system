@@ -1,32 +1,37 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
 import { ELEMENT_TYPE } from 'components/events-date-slider';
-import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
 import { ButtonVisibilityLogic } from 'components/events-date-slider/services/helpers';
 import { EventSlideDates } from 'components/events-date-slider/services/events';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  NAMING,
+} from 'components/events-date-slider/globals';
 
 const { Colors, Spacing } = Tokens;
 
 const { tablet } = BREAKPOINTS;
-const { CONTAINER_DARK_CLASS, ARROW_CLASS } = ELEMENTS;
+const { CONTAINER_CLASS, ARROW_CLASS } = ELEMENTS;
+const { THEME_DARK } = NAMING;
 
 const FORWARD_ARROW_CLASS = 'umd-element-date-slider-forward-arrow';
 const BACK_ARROW_CLASS = 'umd-element-date-slider-back-arrow';
 
 const darkThemeStyles = `
-  .${CONTAINER_DARK_CLASS} .${ARROW_CLASS} {
+  .${CONTAINER_CLASS}${THEME_DARK} .${ARROW_CLASS} {
     background-color: ${Colors.gray.dark};
   }
 
-  .${CONTAINER_DARK_CLASS} .${ARROW_CLASS} svg {
+  .${CONTAINER_CLASS}${THEME_DARK} .${ARROW_CLASS} svg {
     fill: ${Colors.white}
   }
 
-  .${CONTAINER_DARK_CLASS} .${ARROW_CLASS}:hover {
+  .${CONTAINER_CLASS}${THEME_DARK} .${ARROW_CLASS}:hover {
     background-color: ${Colors.white}
   }
 
-  .${CONTAINER_DARK_CLASS} .${ARROW_CLASS}:hover svg {
+  .${CONTAINER_CLASS}${THEME_DARK} .${ARROW_CLASS}:hover svg {
     fill: ${Colors.black}
   }
 `;

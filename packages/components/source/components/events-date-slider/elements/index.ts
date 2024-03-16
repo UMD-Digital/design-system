@@ -5,6 +5,8 @@ import {
   BREAKPOINTS,
   ELEMENTS,
   SLOTS,
+  VARIABLES,
+  NAMING,
 } from 'components/events-date-slider/globals';
 import { SizeDatesElements } from '../services/helpers';
 import { CreateCoverElement, CoverStyles } from './cover';
@@ -13,12 +15,25 @@ import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
 const { Colors } = Tokens;
 
 const { tablet } = BREAKPOINTS;
-const { CONTAINER_DARK_CLASS } = ELEMENTS;
+const { CONTAINER_CLASS } = ELEMENTS;
 const { DATE_SLOT_NAME } = SLOTS;
+const { ATTRIBUTE_THEME } = VARIABLES;
+const { THEME_DARK } = NAMING;
 
-const CONTAINER_CLASS = 'umd-element-date-slider-container';
 const CONTAINER_WRAPPER_CLASS = 'umd-element-date-slider-container-wrapper';
 
+// prettier-ignore
+const VariationThemeDark = `
+  .${CONTAINER_CLASS}${THEME_DARK} .${CONTAINER_WRAPPER_CLASS} {
+    background-color: ${Colors.gray.darker};
+  }
+
+  .${CONTAINER_CLASS}${THEME_DARK}  * {
+    color: #fff !important;
+  }
+`
+
+// prettier-ignore
 export const ContainerStyles = `
   .${CONTAINER_CLASS} {
     container: dates-slider / inline-size;
@@ -43,16 +58,9 @@ export const ContainerStyles = `
     }
   }
 
-  .${CONTAINER_DARK_CLASS} .${CONTAINER_WRAPPER_CLASS} {
-    background-color: ${Colors.gray.darker};
-  }
-
-  .${CONTAINER_DARK_CLASS} * {
-    color: #fff;
-  }
-
   ${CoverStyles}
   ${ScrollerStyles}
+  ${VariationThemeDark}
 `;
 
 export const ComponentStyles = `
@@ -82,6 +90,7 @@ export const OnLoadStyles = ({ element }: { element: ELEMENT_TYPE }) => {
 };
 
 export const CreateContainer = ({ element }: { element: ELEMENT_TYPE }) => {
+  const theme = element._theme;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const coverElement = CreateCoverElement();
@@ -92,6 +101,7 @@ export const CreateContainer = ({ element }: { element: ELEMENT_TYPE }) => {
   wrapper.appendChild(containerWrapper);
   wrapper.appendChild(coverElement);
 
+  container.setAttribute(ATTRIBUTE_THEME, theme);
   container.classList.add(CONTAINER_CLASS);
   container.appendChild(wrapper);
 

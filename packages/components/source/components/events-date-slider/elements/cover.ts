@@ -1,10 +1,15 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { BREAKPOINTS, ELEMENTS } from 'components/events-date-slider/globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  NAMING,
+} from 'components/events-date-slider/globals';
 
 const { Colors } = Tokens;
 
 const { tablet } = BREAKPOINTS;
-const { CONTAINER_DARK_CLASS } = ELEMENTS;
+const { CONTAINER_CLASS } = ELEMENTS;
+const { THEME_DARK } = NAMING;
 
 const COVER_CLASS = 'umd-element-date-slider-date-lock-cover';
 
@@ -20,13 +25,13 @@ export const CoverStyles = `
   }
 
   @container dates-slider (min-width: ${tablet}px) {
-  .${COVER_CLASS} {
+    .${COVER_CLASS} {
       width: 40vw;
       left: calc(100% - 1px);
     }
   }
 
-  .${CONTAINER_DARK_CLASS} .${COVER_CLASS} {
+  .${CONTAINER_CLASS}${THEME_DARK} .${COVER_CLASS} {
     background-color: ${Colors.gray.darker};
   }
 `;

@@ -5,13 +5,15 @@ import {
   BREAKPOINTS,
   ELEMENTS,
   SLOTS,
+  NAMING,
 } from 'components/events-date-slider/globals';
 
 const { Colors, Spacing } = Tokens;
 
 const { tablet } = BREAKPOINTS;
-const { CONTAINER_DARK_CLASS } = ELEMENTS;
+const { CONTAINER_CLASS } = ELEMENTS;
 const { HEADLINE_SLOT_NAME, LINK_SLOT_NAME } = SLOTS;
+const { THEME_DARK } = NAMING;
 
 const INTRO_CONTAINER = 'umd-element-date-slider-intro-container';
 const INTRO_HEADLINE = 'umd-element-date-slider-headline';
@@ -33,7 +35,7 @@ const headlineStyles = `
     },
   })}
 
-  .${CONTAINER_DARK_CLASS} .${INTRO_HEADLINE} {
+  .${CONTAINER_CLASS}${THEME_DARK} .${INTRO_HEADLINE} {
     color: ${Colors.white};
   }
 `;
@@ -47,7 +49,7 @@ const linkStyles = `
     margin-top: ${Spacing.min};
   }
 
-  .${CONTAINER_DARK_CLASS} .${INTRO_LINK} {
+  .${CONTAINER_CLASS}${THEME_DARK} .${INTRO_LINK} {
     color: ${Colors.white};
   }
 `;

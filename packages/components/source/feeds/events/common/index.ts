@@ -46,9 +46,9 @@ export const ComponentStyles = `
 `;
 
 const NoResultsContent = {
-  message: 'No results found',
+  message: 'There are no events to show',
   linkUrl: 'https://calendar.umd.edu',
-  linkText: 'View All Events',
+  linkText: 'View Campus Calendar',
 };
 
 const isListType = ({ element }: { element: TypeElements }) =>

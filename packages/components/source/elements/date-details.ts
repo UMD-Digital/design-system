@@ -44,9 +44,14 @@ type TypeDetailDisplay = EventType & {
   isLayoutVeritcal?: boolean;
 };
 
-const { SansSmaller } = Typography;
+const { SansMin } = Typography;
 const { Colors, Spacing } = Tokens;
 
+const BREAKPOINTS = {
+  MOBILE: 400,
+};
+
+const ELEMENT_NAME = 'umd-date-details';
 const EVENTS_DATE_ROW = 'events-date-row';
 const EVENTS_DATE_ROW_WRAPPER = 'events-date-row-wrapper';
 const EVENTS_DATE_ROW_ICON = 'events-date-row-icon';
@@ -69,34 +74,27 @@ const VariationLayoutHorizontal = `
 
 // prettier-ignore
 const DateRow = `
-  .${EVENTS_DATE_ROW_DATE} {
-    display: flex;
-    align-items: center;
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${EVENTS_DATE_ROW_DATE} {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .${EVENTS_DATE_ROW_DATE} > * {
     display: flex;
-    align-items: center;
   }
 
-  .${EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
-    margin-left: ${Spacing.xs};
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
+      margin-left: ${Spacing.xs};
+    }
   }
 
-  .${EVENTS_DATE_ROW} svg#calendar-icon {
-    width: 14px;
-    height: 15px;
-  }
-
-  .${EVENTS_DATE_ROW} svg#clock-icon {
-    width: 17px;
-    height: 17px;
-    margin-left: -2px; 
-  }
-
-  .${EVENTS_DATE_ROW} svg#multi-day-icon {
-    width: 17px;
-    height: 17px;
+  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
+    .${EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
+      margin-top: 3px;
+    }
   }
 `;
 
@@ -106,17 +104,12 @@ const LocationRow = `
     display: flex;
     align-items: center;
   }
-
-  .${EVENTS_DATE_ROW_LOCATION} svg#pin-icon {
-    width: 15px;
-    height: 18px;
-  }
 `;
 
 // prettier-ignore
 export const STYLES_DATE_DETAILS = `
   .${EVENTS_DATE_ROW} {
-    container: umd-event-details / inline-size;
+    container: ${ELEMENT_NAME} / inline-size;
   }
 
   .${EVENTS_DATE_ROW} + * {
@@ -131,7 +124,7 @@ export const STYLES_DATE_DETAILS = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENTS_DATE_ROW_TEXT}`]: SansSmaller,
+      [`.${EVENTS_DATE_ROW_TEXT}`]: SansMin,
     },
   })}
 
@@ -140,7 +133,25 @@ export const STYLES_DATE_DETAILS = `
   }
 
   .${EVENTS_DATE_ROW_ICON} {
-    width: 20px;
+    width: 18px;
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${EVENTS_DATE_ROW_ICON} {
+      width: 20px;
+    }
+  }
+
+  .${EVENTS_DATE_ROW_ICON} svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${EVENTS_DATE_ROW_ICON} svg {
+      width: 14px;
+      height: 14px;
+    }
   }
 
   ${DateRow}

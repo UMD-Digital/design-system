@@ -29,7 +29,7 @@ const LIST_TEXT_CONTAINER = 'umd-list-text-container';
 const LIST_IMAGE_CONTAINER = 'umd-list-image-container';
 const LIST_HEADLINE_WRAPPER = 'umd-list-headline-wrapper';
 const LIST_DETAILS_WRAPPER = 'umd-list-date-wrapper';
-const LIST_TEXT_WRAPPER = 'umd-lisT-text-wrapper';
+const LIST_TEXT_WRAPPER = 'umd-list-text-wrapper';
 
 // prettier-ignore
 const VariationImageStyles = `
@@ -49,11 +49,17 @@ const VariationImageStyles = `
 // prettier-ignore
 const WrapperStyles = `
   .${LIST_CONTAINER_WRAPPER} {
-    display: flex;
-    justify-content: space-between;
-    padding-left: ${Spacing.md};
     padding-bottom: ${Spacing.md};
     border-bottom: 1px solid ${Colors.gray.light};
+    overflow: hidden;
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${LIST_CONTAINER_WRAPPER} {
+      padding-left: ${Spacing.md};
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `;
 
@@ -73,19 +79,32 @@ const ColumnDateStyles = `
 // prettier-ignore
 const ColumnTextStyles = `
   .${LIST_TEXT_CONTAINER} {
-    padding: 0 ${Spacing.md};
+    padding-right: ${Spacing.min};
     flex: 1 0;
   }
 
-  .${LIST_TEXT_CONTAINER}:last-child {
-    padding-right: 0;
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${LIST_TEXT_CONTAINER} {
+      padding: 0 ${Spacing.md};
+      order: 2;
+    }
   }
 `;
 
 // prettier-ignore
 export const ColumnImageStyles = `
-  .${LIST_IMAGE_CONTAINER} {
-    width: 140px;
+  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE -1}px) {
+    .${LIST_IMAGE_CONTAINER} {
+      width: 90px;
+      float: right;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${LIST_IMAGE_CONTAINER} {
+      width: 140px;
+      order: 3;
+    }
   }
 
   .${LIST_IMAGE_CONTAINER} a {
@@ -110,6 +129,12 @@ export const ColumnImageStyles = `
 const HeadlineStyles = `
   * + .${LIST_HEADLINE_WRAPPER} {
     margin-top: ${Spacing.min}
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
+    .${LIST_HEADLINE_WRAPPER} {
+      max-width: calc(100% - 110px);
+    }
   }
 
   .${LIST_HEADLINE_WRAPPER} * {
@@ -167,7 +192,7 @@ const TextStyles = `
   }
 
   .${LIST_TEXT_WRAPPER} a:hover,
-  .${LIST_TEXT_WRAPPER} a:focus {
+  .${LIST_TEXT_WRAPPER} a:focus{
     text-decoration: underline;
     color: ${Colors.red};
   }
@@ -230,6 +255,12 @@ export const CreateListElement = ({
     wrapper.appendChild(dateContainer);
   }
 
+  if (image) {
+    const imageContainer = CreateImage({ image });
+    container.setAttribute(VARIABLES.ATTR_IMAGE, '');
+    wrapper.appendChild(imageContainer);
+  }
+
   if (headline) {
     CheckForAnimationLinkSpan({ element: headline });
     headline.classList.add(LIST_HEADLINE_WRAPPER);
@@ -247,13 +278,6 @@ export const CreateListElement = ({
   }
 
   wrapper.appendChild(textContainer);
-
-  if (image) {
-    const imageContainer = CreateImage({ image });
-    container.setAttribute(VARIABLES.ATTR_IMAGE, '');
-    wrapper.appendChild(imageContainer);
-  }
-
   container.appendChild(wrapper);
 
   return container;

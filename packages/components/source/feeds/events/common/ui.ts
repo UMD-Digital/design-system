@@ -39,24 +39,52 @@ export type EventType = DateInformaitonType & {
   location: LocationType;
 };
 
+type TypeDetailDisplay = EventType & {
+  isLayoutVeritcal?: boolean;
+};
+
 const { SansSmaller } = Typography;
 const { Colors } = Tokens;
 
 const EVENTS_DATE_ROW = 'events-date-row';
+const EVENTS_DATE_ROW_WRAPPER = 'events-date-row-wrapper';
 
 const DateRowStyles = `
   .${EVENTS_DATE_ROW} {
-    display: flex;
-    flex-direction: column;
+    container: umd-event-details / inline-size;
   }
 
-  .${EVENTS_DATE_ROW} > p {
+  .${EVENTS_DATE_ROW} + * {
+    margin-top: ${Tokens.Spacing.sm};
+  }
+
+  .${EVENTS_DATE_ROW_WRAPPER} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3px 8px;
+  }
+
+  @container umd-event-details (min-width: 500px) {
+    .${EVENTS_DATE_ROW_WRAPPER} {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .${EVENTS_DATE_ROW}[layout="horizontal"] .${EVENTS_DATE_ROW_WRAPPER} {
+    grid-template-columns: 1fr;
+    grid-gap: 3px;
+  }
+
+  .${EVENTS_DATE_ROW_WRAPPER} > p {
     display: flex;
     align-items: center;
   }
 
-  .${EVENTS_DATE_ROW} > p:not(:first-child) {
-    margin-top: 3px;
+  @container umd-event-details (max-width: 499px) {
+    .${EVENTS_DATE_ROW_WRAPPER} > p:nth-child(3) {
+      grid-column: 1 / -1;
+    }
   }
 
   .${EVENTS_DATE_ROW} svg#calendar-icon {
@@ -144,29 +172,36 @@ const CreateDetails = ({
   endDay,
   endMonth,
   location,
-}: EventType) => {
+  isLayoutVeritcal = true,
+}: TypeDetailDisplay) => {
   const container = document.createElement('div');
+  const wrapper = document.createElement('div');
   const date = document.createElement('p');
   const time = document.createElement('p');
 
+  wrapper.classList.add(EVENTS_DATE_ROW_WRAPPER);
+
   date.innerHTML = `<span>${CALENDAR_ICON}</span> <span>${startDayOfWeek}. ${startMonth} ${startDay}</span>`;
-  container.appendChild(date);
+  wrapper.appendChild(date);
+
   time.innerHTML = `<span style="margin-left: -2px; width: 27px;">${CLOCK_ICON}</span> <span>${startTime}</span>`;
-  container.appendChild(time);
+  wrapper.appendChild(time);
 
   if (location) {
     const locationText = document.createElement('p');
     locationText.innerHTML = `<span>${PIN_ICON}</span> <span>${location[0].title}</span>`;
-    container.appendChild(locationText);
+    wrapper.appendChild(locationText);
   }
 
   if (startDay != endDay && startMonth != endMonth) {
     const multiDay = document.createElement('p');
     multiDay.innerHTML = `${MULTI_DAY_ICON} <span>Multi-day</span>`;
-    container.appendChild(multiDay);
+    wrapper.appendChild(multiDay);
   }
 
+  container.appendChild(wrapper);
   container.classList.add(EVENTS_DATE_ROW);
+  if (isLayoutVeritcal) container.setAttribute('layout', 'horizontal');
   return container;
 };
 
@@ -187,7 +222,7 @@ export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      details: CreateDetails(entry),
+      details: CreateDetails({ ...entry, isLayoutVeritcal: false }),
       date: CreateDateBlockElement(entry),
     }),
   );

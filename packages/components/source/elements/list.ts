@@ -8,7 +8,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { SansLarge } = Typography;
+const { SansLarger } = Typography;
 
 const BREAKPOINTS = {
   MOBILE: 650,
@@ -60,7 +60,7 @@ const WrapperStyles = `
 // prettier-ignore
 const ColumnDateStyles = `
   .${LIST_DATE_CONTAINER} {
-    width: 115px;
+    width: ${Spacing['6xl']};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
@@ -75,6 +75,10 @@ const ColumnTextStyles = `
   .${LIST_TEXT_CONTAINER} {
     padding: 0 ${Spacing.md};
     flex: 1 0;
+  }
+
+  .${LIST_TEXT_CONTAINER}:last-child {
+    padding-right: 0;
   }
 `;
 
@@ -114,15 +118,20 @@ const HeadlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_HEADLINE_WRAPPER}`]: SansLarge,
+      [`.${LIST_HEADLINE_WRAPPER}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_HEADLINE_WRAPPER} *`]: SansLarge,
+      [`.${LIST_HEADLINE_WRAPPER} *`]: SansLarger,
     },
   })}
+
+  .${LIST_HEADLINE_WRAPPER}, 
+  .${LIST_HEADLINE_WRAPPER} * {
+    font-weight: 700;
+  }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {

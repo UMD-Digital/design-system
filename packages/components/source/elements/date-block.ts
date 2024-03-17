@@ -25,6 +25,7 @@ const dateWrapperStyles = `
     text-align: center;
     max-width: 200px;
     font-weight: 700;
+    color: currentColor;
   }
 
   .${EVENT_DATE_WRAPPER}${IS_DARK} * {

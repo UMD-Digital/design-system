@@ -1,7 +1,7 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
 import { CreateListElement, STYLES_LIST } from 'elements/list';
-import { CreateCallToActionElement } from 'elements/call-to-action';
+import { CreateDateBlockElement, STYLES_DATE_BLOCK } from 'elements/date-block';
 import {
   CALENDAR_ICON,
   CLOCK_ICON,
@@ -92,6 +92,7 @@ const DateRowStyles = `
 export const STYLES_EVENT_FEED = `
   ${STYLES_CARD}
   ${STYLES_LIST}
+  ${STYLES_DATE_BLOCK}
   ${DateRowStyles}
 `;
 
@@ -135,7 +136,7 @@ const CreateHeadline = ({ text, url }: { text: string; url: string }) => {
   return null;
 };
 
-const CreateDate = ({
+const CreateDetails = ({
   startDayOfWeek,
   startMonth,
   startDay,
@@ -169,26 +170,13 @@ const CreateDate = ({
   return container;
 };
 
-const CreateCTA = ({ url }: { url: string }) => {
-  if (url) {
-    const cta = document.createElement('a');
-
-    cta.href = url;
-    cta.innerHTML = 'Learn More';
-    cta.setAttribute('target', '_blank');
-
-    return CreateCallToActionElement({ cta, type: 'secondary' });
-  }
-  return null;
-};
-
 export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
   entries.map((entry) =>
     CreateCardElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      date: CreateDate(entry),
+      date: CreateDetails(entry),
       aligned: true,
     }),
   );
@@ -199,6 +187,7 @@ export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      date: CreateDate(entry),
+      details: CreateDetails(entry),
+      date: CreateDateBlockElement(entry),
     }),
   );

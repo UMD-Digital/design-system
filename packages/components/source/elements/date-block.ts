@@ -14,6 +14,11 @@ const IS_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 // prettier-ignore
 const dateWrapperStyles = `
+  .${EVENT_DATE_WRAPPER} {
+    display: flex;
+    align-items: center;
+  }
+
   .${EVENT_DATE_WRAPPER} * {
     display: block;
     text-transform: uppercase;
@@ -31,12 +36,24 @@ const dateWrapperStyles = `
 const monthStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${EVENT_MONTH}`]: Eyebrow,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${EVENT_MONTH} *`]: Eyebrow,
     },
   })}
 `;
 
 const dayStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${EVENT_DAY}`]: SansLarger,
+    },
+  })}
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_DAY} *`]: SansLarger,
@@ -51,39 +68,34 @@ export const STYLES_DATE_BLOCK = `
   ${dayStyles}
 `;
 
-export const CreateDateBlockElement = ({
+const makeDateElement = ({
+  element,
+  style,
+}: {
+  element: string | HTMLElement;
+  style: string;
+}) => {
+  const dateElement = document.createElement('span');
+  if (typeof element === 'string') {
+    dateElement.innerHTML = element;
+  } else {
+    dateElement.appendChild(element);
+  }
+
+  dateElement.classList.add(style);
+  return dateElement;
+};
+
+const makeStartDateBlock = ({
+  container,
   startMonth,
   startDay,
-  endMonth,
-  endDay,
-  theme = THEME_LIGHT,
 }: {
+  container: HTMLElement;
   startMonth: string | HTMLElement;
   startDay: string | HTMLElement;
-  endDay?: string | HTMLElement;
-  endMonth?: string | HTMLElement;
-  theme?: string;
 }) => {
-  const container = document.createElement('div');
   const startWrapper = document.createElement('p');
-  const endWrapper = document.createElement('p');
-  const makeDateElement = ({
-    element,
-    style,
-  }: {
-    element: string | HTMLElement;
-    style: string;
-  }) => {
-    const dateElement = document.createElement('span');
-    if (typeof element === 'string') {
-      dateElement.innerHTML = element;
-    } else {
-      dateElement.appendChild(element);
-    }
-
-    dateElement.classList.add(style);
-    return dateElement;
-  };
   const startMonthWrapper = makeDateElement({
     element: startMonth,
     style: EVENT_MONTH,
@@ -95,10 +107,27 @@ export const CreateDateBlockElement = ({
 
   startWrapper.appendChild(startMonthWrapper);
   startWrapper.appendChild(startDayWrapper);
-
   container.appendChild(startWrapper);
+};
 
-  if (endDay && endMonth) {
+const makeEndDateBlock = ({
+  container,
+  startMonth,
+  startDay,
+  endMonth,
+  endDay,
+}: {
+  container: HTMLElement;
+  startMonth: string | HTMLElement;
+  startDay: string | HTMLElement;
+  endDay: string | HTMLElement;
+  endMonth: string | HTMLElement;
+}) => {
+  const endWrapper = document.createElement('p');
+  const isTheSameMonth = endMonth === startMonth;
+  const isTheSameDay = endDay === startDay;
+
+  if (!isTheSameMonth && !isTheSameDay) {
     const srOnly = document.createElement('span');
     const dash = document.createElement('span');
     const endMonthWrapper = makeDateElement({
@@ -117,15 +146,41 @@ export const CreateDateBlockElement = ({
     srOnly.innerHTML = 'to';
 
     dash.style.width = '11px';
-    dash.style.width = '4px';
+    dash.style.height = '4px';
+    dash.style.margin = '0 5px';
+    dash.style.display = 'block';
     dash.style.backgroundColor = 'black';
 
     container.appendChild(srOnly);
     container.appendChild(dash);
     container.appendChild(endWrapper);
   }
+};
+
+export const CreateDateBlockElement = ({
+  startMonth,
+  startDay,
+  endDay,
+  endMonth,
+  theme = THEME_LIGHT,
+}: {
+  startMonth: string | HTMLElement;
+  startDay: string | HTMLElement;
+  endDay?: string | HTMLElement;
+  endMonth?: string | HTMLElement;
+  theme?: string;
+}) => {
+  const container = document.createElement('div');
+  const hasEnd = endDay && endMonth;
 
   container.classList.add(EVENT_DATE_WRAPPER);
   container.setAttribute(ATTRIBUTE_THEME, theme);
+
+  makeStartDateBlock({ container, startMonth, startDay });
+
+  if (hasEnd) {
+    makeEndDateBlock({ container, startMonth, startDay, endDay, endMonth });
+  }
+
   return container;
 };

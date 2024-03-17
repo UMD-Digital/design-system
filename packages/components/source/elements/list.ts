@@ -2,7 +2,6 @@ import {
   Animations,
   Typography,
   Tokens,
-  Fields,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
@@ -36,22 +35,35 @@ const LIST_TEXT_WRAPPER = 'umd-lisT-text-wrapper';
 const VariationImageStyles = `
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${LIST_CONTAINER}[${VARIABLES.ATTR_IMAGE}] {
-      display: flex;
+
     }
   }
   
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${LIST_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${LIST_TEXT_CONTAINER} {
-      width: 70%;
-      padding-right: ${Spacing.md};
-      order: 1;
+ 
     }
   }
 `;
 
 // prettier-ignore
+const WrapperStyles = `
+  .${LIST_CONTAINER_WRAPPER} {
+    display: flex;
+    justify-content: space-between;
+    padding-left: ${Spacing.md};
+    padding-bottom: ${Spacing.md};
+    border-bottom: 1px solid ${Colors.gray.light};
+  }
+`;
+
+// prettier-ignore
 const ColumnDateStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.DESKTOP - 1}px) {
+  .${LIST_DATE_CONTAINER} {
+    width: 115px;
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
     .${LIST_DATE_CONTAINER} {
       display: none;
     }
@@ -60,32 +72,28 @@ const ColumnDateStyles = `
 
 // prettier-ignore
 const ColumnTextStyles = `
-  .${LIST_TEXT_CONTAINER}  {
-
+  .${LIST_TEXT_CONTAINER} {
+    padding: 0 ${Spacing.md};
+    flex: 1 0;
   }
 `;
 
 // prettier-ignore
 export const ColumnImageStyles = `
-  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${LIST_IMAGE_CONTAINER} {
-      width: 30%;
-      order: 2;
-    }
+  .${LIST_IMAGE_CONTAINER} {
+    width: 140px;
   }
 
   .${LIST_IMAGE_CONTAINER} a {
     display: block;
-    line-height: 0;
     overflow: hidden;
   }
 
-  .${LIST_IMAGE_CONTAINER} a img {
+  .${LIST_IMAGE_CONTAINER} img {
     object-fit: cover;
-    object-position: 50% 50%;
+    object-position: center;
     transform: scale(1);
     transition: transform 0.5s;
-    width: 100%;
   }
 
   .${LIST_IMAGE_CONTAINER} a:hover img,
@@ -163,11 +171,11 @@ export const STYLES_LIST = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  .${LIST_CONTAINER_WRAPPER} {
-    align-items: flex-start;
-    display: flex;
+  .${LIST_CONTAINER} + * {
+    margin-top: ${Spacing.md}; 
   }
 
+  ${WrapperStyles}
   ${ColumnDateStyles}
   ${ColumnImageStyles}
   ${ColumnTextStyles}

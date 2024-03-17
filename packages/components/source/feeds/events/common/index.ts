@@ -109,7 +109,6 @@ const DisplayEntries = ({
   element: TypeElements;
   feedData: EventType[];
 }) => {
-  const isList = isListType({ element });
   const isGrid = isGridType({ element });
   const container = GetContainer({ element });
   const entries = isGrid
@@ -148,8 +147,6 @@ const LoadMoreEntries = async ({ element }: { element: TypeElements }) => {
 
 export const CreateFeed = async ({ element }: { element: TypeElements }) => {
   const container = GetContainer({ element });
-  const isList = isListType({ element });
-  const isGrid = isGridType({ element });
 
   FetchFeedEntries({
     variables: MakeApiVariables({ element }),

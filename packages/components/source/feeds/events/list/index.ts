@@ -33,20 +33,8 @@ export class UMDFeedEventsList extends HTMLElement {
     this._totalEntries = null;
     this._categories = [];
 
-    const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
-
+    const template = MakeTemplate({ styles: `${ComponentStyles}` });
     this._shadow.appendChild(template.content.cloneNode(true));
-  }
-
-  static get observedAttributes() {
-    return [
-      ATTRIBUTE_TOKEN,
-      ATTRIBUTE_ROWS,
-      ATTRIBUTE_LAZYLOAD,
-      ATTRIBUTE_SHOW,
-      ATTRIBUTE_CATEGORIES,
-    ];
   }
 
   async connectedCallback() {
@@ -57,10 +45,7 @@ export class UMDFeedEventsList extends HTMLElement {
 
     element._token = element.getAttribute(ATTRIBUTE_TOKEN) || null;
 
-    if (categories) {
-      this._categories = categories.split(',');
-    }
-
+    if (categories) this._categories = categories.split(',');
     if (rowCount) element._showRows = parseInt(rowCount);
 
     if (shouldLazyLoad) {

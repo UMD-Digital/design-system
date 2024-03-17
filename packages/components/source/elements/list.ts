@@ -176,7 +176,6 @@ const TextStyles = `
 // prettier-ignore
 export const STYLES_LIST = `
   .${LIST_CONTAINER} {
-    max-width: 680px;
     container: ${ELEMENT_NAME} / inline-size;
   }
 

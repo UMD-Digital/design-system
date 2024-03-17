@@ -128,7 +128,7 @@ const makeEndDateBlock = ({
   const isTheSameMonth = endMonth === startMonth;
   const isTheSameDay = endDay === startDay;
 
-  if (!isTheSameMonth && !isTheSameDay) {
+  if (!isTheSameMonth || !isTheSameDay) {
     const srOnly = document.createElement('span');
     const dash = document.createElement('span');
     const endMonthWrapper = makeDateElement({

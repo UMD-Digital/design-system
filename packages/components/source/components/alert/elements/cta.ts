@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
-import { SLOTS } from 'components/alert/globals';
-import { AlertType } from 'components/alert';
+import { SLOTS } from '../globals';
+import { UMDAlertElement } from '../index';
 
 const { Spacing } = Tokens;
 
@@ -21,7 +21,7 @@ export const ctaStyles = `
   }
 `;
 
-export const CreateCta = ({ element }: { element: AlertType }) => {
+export const CreateCta = ({ element }: { element: UMDAlertElement }) => {
   const wrapper = document.createElement('div');
   const ctaSlot = SlotDefaultStyling({ element, slotRef: CTA });
 

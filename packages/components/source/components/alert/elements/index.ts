@@ -1,62 +1,63 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { CLOSE_BUTTON_ICON, NOTIFICATION_ICON } from 'assets/icons';
 import { Reset } from 'helpers/styles';
-import { BREAKPOINTS, ELEMENTS } from '../globals';
-import { AlertType } from 'components/alert';
 import { SetLocalString } from '../services/helper';
 import { EventClose } from '../services/events';
 import { CreateHeadline, headlineStyles } from './headline';
 import { CreateBody, bodyStyles } from './body';
 import { CreateCta, ctaStyles } from './cta';
+import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../globals';
+import { UMDAlertElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 
-const { small } = BREAKPOINTS;
+const { SMALL } = BREAKPOINTS;
 const { ICON_CLASS } = ELEMENTS;
-
-export const ELEMENT_NAME = 'umd-element-alert';
+const { ELEMENT_NAME } = VARIABLES;
+const { ALERT_UI, NOTIFICATION_UI, EMEMERGENCY_UI, WITH_ICON, WITHOUT_ICON } =
+  REFERENCES;
 
 const CONTAINER_CLASS = 'umd-element-alert-container';
 const CLOSE_BUTTON_CLASS = 'umd-element-alert-close-button';
 
 const AlertStyles = `
-  .${CONTAINER_CLASS}[data-type="alert"] {
-    border: solid 4px ${Colors.gold} !important;
+  .${CONTAINER_CLASS}${ALERT_UI} {
+    border: solid 4px ${Colors.gold};
   }
 
-  .${CONTAINER_CLASS}[data-type="alert"] .${ICON_CLASS} svg circle {
-    fill: ${Colors.gold} !important;
+  .${CONTAINER_CLASS}${ALERT_UI} .${ICON_CLASS} svg circle {
+    fill: ${Colors.gold};
   }
 `;
 
 const NotificationStyles = `
-  .${CONTAINER_CLASS}[data-type="notification"] {
-    border: solid 4px #2f7eda !important;
+  .${CONTAINER_CLASS}${NOTIFICATION_UI} {
+    border: solid 4px ${Colors.blue};
   }
 
-  .${CONTAINER_CLASS}[data-type="notification"] .${ICON_CLASS} svg circle {
-    fill: #2f7eda !important;
+  .${CONTAINER_CLASS}${NOTIFICATION_UI} .${ICON_CLASS} svg circle {
+    fill: ${Colors.blue};
   }
 `;
 
 const EmergencyStyles = `
-  .${CONTAINER_CLASS}[data-type="emergency"]  {
-    border: solid 4px ${Colors.red} !important;
+  .${CONTAINER_CLASS}${EMEMERGENCY_UI} {
+    border: solid 4px ${Colors.red};
   }
 
-  .${CONTAINER_CLASS}[data-type="emergency"] .${ICON_CLASS} svg circle  {
-    fill: ${Colors.red} !important;
+  .${CONTAINER_CLASS}${EMEMERGENCY_UI} .${ICON_CLASS} svg circle {
+    fill: ${Colors.red};
   }
 `;
 
 const ButtonStyles = `
   .${CLOSE_BUTTON_CLASS} {
-    position: absolute !important;
+    position: absolute;
     top: ${Spacing.lg};
     right: ${Spacing.lg};
   }
 
-  @container umd-alert (max-width: ${small}px) {
+  @container ${ELEMENT_NAME} (max-width: ${SMALL}px) {
     .${CLOSE_BUTTON_CLASS} {
       top: ${Spacing.sm};
       right: ${Spacing.sm};
@@ -65,15 +66,15 @@ const ButtonStyles = `
 `;
 
 const IconStyles = `
-  .${CONTAINER_CLASS}[data-icon="true"] .${ICON_CLASS} {
+  .${CONTAINER_CLASS}${WITH_ICON} .${ICON_CLASS} {
     display: block;
   }
 
-  .${CONTAINER_CLASS}[data-icon="false"] .${ICON_CLASS} {
+  .${CONTAINER_CLASS}${WITHOUT_ICON} .${ICON_CLASS} {
     display: none;
   }
 
-  @container umd-alert (max-width: ${small}px) {
+  @container ${ELEMENT_NAME} (max-width: ${SMALL}px) {
     :host .${ICON_CLASS} {
       position: absolute;
       top: -20px;
@@ -89,29 +90,24 @@ export const ComponentStyles = `
   ${Reset}
 
   :host .${CONTAINER_CLASS} {
+    container: ${ELEMENT_NAME} / inline-size;
     display: flex;
-    position: relative !important;
+    position: relative;
     padding: ${Spacing.lg};
     padding-right: ${Spacing['2xl']};
     gap: ${Spacing.lg};
-    container: umd-alert / inline-size;
   }
 
-  @container umd-alert (max-width: 260px) {
-  .${CONTAINER_CLASS} {
+  @container ${ELEMENT_NAME} (max-width: 260px) {
+    .${CONTAINER_CLASS} {
       display: none
     }
   }
 
-  @container umd-alert (max-width: ${small}px) {
-  .${CONTAINER_CLASS} {
+  @container ${ELEMENT_NAME} (max-width: ${SMALL}px) {
+    .${CONTAINER_CLASS} {
       padding-right: ${Spacing.lg};
     }
-  }
-
-  slot[name="title"] {
-    margin-bottom: ${Spacing.sm};
-    display: block;
   }
 
   ${IconStyles}
@@ -133,7 +129,7 @@ const CreateIcon = () => {
   return iconWrapper;
 };
 
-const CreateCloseButton = ({ element }: { element: AlertType }) => {
+const CreateCloseButton = ({ element }: { element: UMDAlertElement }) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(CLOSE_BUTTON_CLASS);
@@ -147,7 +143,7 @@ const CreateCloseButton = ({ element }: { element: AlertType }) => {
   return closeButton;
 };
 
-export const CreateShadowDom = ({ element }: { element: AlertType }) => {
+export const CreateShadowDom = ({ element }: { element: UMDAlertElement }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const headline = CreateHeadline({ element });

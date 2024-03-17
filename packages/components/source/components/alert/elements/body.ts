@@ -1,8 +1,8 @@
 import { Tokens, Fields } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS } from 'components/alert/globals';
-import { AlertType } from 'components/alert';
 import { SlotDefaultStyling } from 'helpers/ui';
+import { SLOTS } from '../globals';
+import { UMDAlertElement } from '../index';
 
 const { Text } = Fields;
 const { Colors } = Tokens;
@@ -25,7 +25,7 @@ export const bodyStyles = `
   })}
 `;
 
-export const CreateBody = ({ element }: { element: AlertType }) => {
+export const CreateBody = ({ element }: { element: UMDAlertElement }) => {
   const bodySlot = SlotDefaultStyling({ element, slotRef: BODY });
 
   if (bodySlot) {

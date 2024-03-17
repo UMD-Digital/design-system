@@ -1,8 +1,14 @@
 import { Tokens, Fields, Typography } from '@universityofmaryland/variables';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { HeroType } from '../index';
-import { ELEMENTS, SLOTS, BREAKPOINTS, NAMING } from '../globals';
+import {
+  ELEMENTS,
+  SLOTS,
+  BREAKPOINTS,
+  REFERENCES,
+  VARIABLES,
+} from '../globals';
+import { UMDHeroElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 const { Ribbon } = Fields;
@@ -14,6 +20,11 @@ const {
   SansMedium,
   SansSmaller,
 } = Typography;
+
+const { TABLET, DESKTOP } = BREAKPOINTS;
+const { HERO_CONTAINER, HERO_BODY, HERO_EYEBROW } = ELEMENTS;
+const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
+const { ELEMENT_NAME } = VARIABLES;
 const {
   DEFAULT_ATTR,
   STACKED_ATTR,
@@ -22,12 +33,7 @@ const {
   LOGO_ATTR,
   DARK_ATTR,
   IS_WITHIN_LOCK,
-} = NAMING;
-
-const { HERO_CONTAINER } = ELEMENTS;
-const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
-const { HERO_BODY, HERO_EYEBROW } = ELEMENTS;
-const { tablet, desktop } = BREAKPOINTS;
+} = REFERENCES;
 
 const HERO_HEADLINE = 'umd-hero-overlay-headline';
 const HERO_TEXT = 'umd-hero-overlay-text';
@@ -95,13 +101,13 @@ const HeadlineStyles = `
     },
   })}
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE} {
       max-width: 700px;
     }
   }
 
-  @container umd-hero (min-width: ${desktop}px) {
+  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE} {
       max-width: 776px;
     }
@@ -226,7 +232,7 @@ const TextStyles = `
     font-weight: 400;
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
       max-width: 60%;
     }
@@ -243,7 +249,7 @@ const ActionStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     * + .${HERO_ACTION} {
       margin-top: ${Spacing.lg};
     }
@@ -262,7 +268,7 @@ export const STYLES_BODY = `
   ${ActionStyles}
 `;
 
-export const CreateBody = ({ element }: { element: HeroType }) => {
+export const CreateBody = ({ element }: { element: UMDHeroElement }) => {
   const container = document.createElement('div');
   const eyebrowSlot = SlotDefaultStyling({ element, slotRef: EYEBROW });
   const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });

@@ -2,12 +2,23 @@ import { Layout, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { STYLES_ASSET, CreateAsset } from './assets';
 import { STYLES_WRAPPER, CreateWrapper } from './wrapper';
-import { HeroType } from '../index';
-import { NAMING, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
+import { REFERENCES, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
+import { UMDHeroElement } from '../index';
 
 const { Lock } = Layout;
 const { Colors, Spacing } = Tokens;
 
+const { TABLET, DESKTOP } = BREAKPOINTS;
+const { HERO_CONTAINER } = ELEMENTS;
+const {
+  ELEMENT_NAME,
+  ATTRIBUTE_THEME,
+  ATTRIBUTE_TYPE,
+  ATTRIBUTE_TEXT_ALIGN,
+  ATTRIBUTE_HAS_IMAGE,
+  ATTRIBUTE_WITHIN_LOCK,
+  ATTRIBUTE_INTERIOR,
+} = VARIABLES;
 const {
   DEFAULT_ATTR,
   STACKED_ATTR,
@@ -19,17 +30,7 @@ const {
   MD_ATTR,
   WHITE_ATTR,
   IS_INTERIOR,
-} = NAMING;
-const {
-  ATTRIBUTE_THEME,
-  ATTRIBUTE_TYPE,
-  ATTRIBUTE_TEXT_ALIGN,
-  ATTRIBUTE_HAS_IMAGE,
-  ATTRIBUTE_WITHIN_LOCK,
-  ATTRIBUTE_INTERIOR,
-} = VARIABLES;
-const { HERO_CONTAINER } = ELEMENTS;
-const { tablet, desktop } = BREAKPOINTS;
+} = REFERENCES;
 
 const HERO_DECLARATION = 'umd-hero-declaration';
 const HERO_LOCK = 'umd-hero-lock';
@@ -67,33 +68,33 @@ const ThemeOverwrite = `
 
 // prettier-ignore
 const DefaultOverwrite = `
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} {
       height: 75vh;
       min-height: 480px;
     }
   }
 
-  @container umd-hero (min-width: ${desktop}px) {
+  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} {
       min-height: 720px;
     }
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} * {
       color: ${Colors.white};
     }
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_LOCK} {
       padding-top: ${Spacing['2xl']};
       padding-bottom: ${Spacing['2xl']};
     }
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR}${IS_INTERIOR} {
       min-height: 400px;
       height: 40vh;
@@ -122,7 +123,7 @@ const OverlayTypeOverwrite = `
     position: relative;
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_LOCK} {
       min-height: 640px;
       display: flex;
@@ -130,7 +131,7 @@ const OverlayTypeOverwrite = `
     }
   }
 
-  @container umd-hero (min-width: ${desktop}px) {
+  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
     .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_LOCK} {
       min-height: 764px;
     }
@@ -139,7 +140,7 @@ const OverlayTypeOverwrite = `
 
 // prettier-ignore
 const MinimalTypeOverwrite = `
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_LOCK} {
       min-height: 288px;
       display: flex;
@@ -151,7 +152,7 @@ const MinimalTypeOverwrite = `
 // prettier-ignore
 const STYLES_CONTAINER = `
   .${HERO_DECLARATION} {
-    container: umd-hero / inline-size;
+    container: ${ELEMENT_NAME} / inline-size;
   }
 
   .${HERO_LOCK} {
@@ -185,7 +186,7 @@ export const ComponentStyles = `
   ${STYLES_ASSET}
 `;
 
-export const CreateShadowDom = ({ element }: { element: HeroType }) => {
+export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');

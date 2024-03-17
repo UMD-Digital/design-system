@@ -1,6 +1,6 @@
 export const BREAKPOINTS = {
-  tablet: 768,
-  desktop: 1024,
+  TABLET: 768,
+  DESKTOP: 1024,
 };
 export const ELEMENTS = {
   HERO_CONTAINER: `umd-hero-container`,
@@ -17,6 +17,7 @@ export const SLOTS = {
   ACTIONS: 'actions',
 };
 export const VARIABLES = {
+  ELEMENT_NAME: 'umd-element-hero',
   TYPE_DEFAULT: 'default',
   TYPE_DEFAULT_INTERIOR: 'default-interior',
   TYPE_DEFAULT_CENTERED: 'default-centered',
@@ -38,7 +39,7 @@ export const VARIABLES = {
   ATTRIBUTE_WITHIN_LOCK: 'within-lock',
   ATTRIBUTE_INTERIOR: 'interior',
 };
-export const NAMING = {
+export const REFERENCES = {
   DEFAULT_ATTR: `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_DEFAULT}']`,
   STACKED_ATTR: `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_STACKED}']`,
   OVERLAY_ATTR: `[${VARIABLES.ATTRIBUTE_TYPE}='${VARIABLES.TYPE_OVERLAY}']`,

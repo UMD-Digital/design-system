@@ -1,10 +1,13 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { STYLES_BODY, CreateBody } from './body';
-import { HeroType } from '../index';
-import { NAMING, ELEMENTS, BREAKPOINTS } from '../globals';
+import { REFERENCES, ELEMENTS, BREAKPOINTS, VARIABLES } from '../globals';
+import { UMDHeroElement } from '../index';
 
 const { Spacing, Colors } = Tokens;
 
+const { TABLET, DESKTOP } = BREAKPOINTS;
+const { HERO_CONTAINER, HERO_EYEBROW } = ELEMENTS;
+const { ELEMENT_NAME } = VARIABLES;
 const {
   DEFAULT_ATTR,
   TEXT_ALIGN_CENTER,
@@ -15,9 +18,7 @@ const {
   DARK_ATTR,
   MD_ATTR,
   HAS_IMAGE,
-} = NAMING;
-const { HERO_CONTAINER, HERO_EYEBROW } = ELEMENTS;
-const { tablet, desktop } = BREAKPOINTS;
+} = REFERENCES;
 
 const HERO_WRAPPER = 'umd-hero-wrapper';
 const HERO_WRAPPER_CHILD = 'umd-hero-child';
@@ -29,26 +30,26 @@ const DefaultOverwrite = `
     align-items: flex-end;
   }
 
-  @container umd-hero (max-width: ${tablet - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
       padding-top: ${Spacing.sm};
     }
   }
 
-  @container umd-hero (max-width: ${tablet - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER}:has(.${HERO_EYEBROW}) {
       margin-top: -14px;
       padding-top: 0;
     }
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
       max-width: 736px;
     }
   }
 
-  @container umd-hero (min-width: ${desktop}px) {
+  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
     .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_WRAPPER} {
       max-width: 808px;
     }
@@ -62,7 +63,7 @@ const DefaultOverwrite = `
     max-width: 928px;
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${TEXT_ALIGN_CENTER} .${HERO_WRAPPER} {
       width: 80vw;
     }
@@ -87,7 +88,7 @@ const StackTypeOverwrite = `
     text-align: center;
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_WRAPPER} {
       padding: ${Spacing['5xl']} 0 ${Spacing['3xl']};
     }
@@ -102,7 +103,7 @@ const OverlayTypeOverwrite = `
     display: flex;
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_WRAPPER} {
       width: 60%;
       padding: ${Spacing['5xl']} 0;
@@ -116,7 +117,7 @@ const MinimalTypeOverwrite = `
     padding: ${Spacing.xl} 0;
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${MINIMAL_ATTR}${HAS_IMAGE} .${HERO_WRAPPER} {
       padding: ${Spacing['4xl']} 0;
       width: calc(50% - ${Spacing['4xl']});
@@ -128,7 +129,7 @@ const MinimalTypeOverwrite = `
     border-left: 2px solid ${Colors.red};
   }
 
-  @container umd-hero (min-width: ${tablet}px) {
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${MINIMAL_ATTR}${HAS_IMAGE} .${HERO_WRAPPER_CHILD} {
       padding-left: ${Spacing.lg};
     }
@@ -155,7 +156,7 @@ export const STYLES_WRAPPER = `
   ${LogoTypeOverwrite}
 `;
 
-export const CreateWrapper = ({ element }: { element: HeroType }) => {
+export const CreateWrapper = ({ element }: { element: UMDHeroElement }) => {
   const wrapper = document.createElement('div');
   const childWrapper = document.createElement('div');
   const body = CreateBody({ element });

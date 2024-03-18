@@ -2,15 +2,16 @@ import { Layout, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
+import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
 const { LARGE } = BREAKPOINTS;
-const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
+const { ELEMENT_NAME } = VARIABLES;
+const { IS_THEME_LIGHT } = REFERENCES;
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
 export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
@@ -43,7 +44,7 @@ export const RowLinkStyles = `
     }
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LINKS_CONTAINER} {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_CONTAINER} {
     background-color: ${Colors.gray.lightest};
   }
 

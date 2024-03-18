@@ -5,7 +5,13 @@ import {
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SlotDefaultStyling } from 'helpers/ui';
-import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../../../globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  SLOTS,
+  VARIABLES,
+  REFERENCES,
+} from '../../../globals';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
@@ -13,8 +19,9 @@ const { SansSmaller, InterativeMedium } = Typography;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { LINK_COLUMN_ONE, LINK_COLUMN_TWO, LINK_COLUMN_THREE } = SLOTS;
+const { ELEMENT_NAME } = VARIABLES;
+const { IS_THEME_LIGHT } = REFERENCES;
 
 const HEADLINE_ATTRIBUTE = 'data-headline';
 const HEADLINE_ATTRIBUTE_EMPTY = 'data-empty';
@@ -169,7 +176,7 @@ const LinkStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${ROW_LINKS_COLUMN_LINKS} a`]:
+      [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}

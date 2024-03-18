@@ -8,15 +8,22 @@ import {
 } from 'assets/social';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
-import { BREAKPOINTS, ELEMENTS, VARIABLES, SLOTS } from '../../globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  VARIABLES,
+  SLOTS,
+  REFERENCES,
+} from '../../globals';
 import { UMDFooterElement } from '../../index';
 
 const { Spacing, Colors } = Tokens;
 
 const { SOCIAL } = SLOTS;
 const { LARGE, MEDIUM } = BREAKPOINTS;
-const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
+const { ELEMENT_NAME } = VARIABLES;
+const { IS_THEME_LIGHT } = REFERENCES;
 
 export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
@@ -40,20 +47,20 @@ const campaignOverwriteStyles = `
 `;
 
 const themeOverwriteStyles = `
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT}  .${SOCIAL_CONTAINER_WRAPPER} a {
     background-color: ${Colors.gray.light};
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a > *,
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a path {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a > *,
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a path {
     fill: ${Colors.black} !important;
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"]  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT}  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
     background-color: ${Colors.gray.dark};
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
     fill: ${Colors.gray.light} !important;
   }
 `;

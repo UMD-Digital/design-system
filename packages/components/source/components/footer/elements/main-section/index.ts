@@ -2,15 +2,15 @@ import { Tokens } from '@universityofmaryland/variables';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';
-import { ELEMENTS, VARIABLES } from '../../globals';
+import { ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
 import { UMDFooterElement } from '../../index';
 
 const { Colors } = Tokens;
 
-const { THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { VERSION_TYPE_MEGA, VERSION_TYPE_VISUAL, VERSION_TYPE_SIMPLE } =
   VARIABLES;
+const { IS_THEME_LIGHT, IS_VERSION_SIMPLE, IS_VERSION_VISUAL } = REFERENCES;
 
 const SLOT_BACKGROUND_IMAGE_NAME = 'background-image';
 const MAIN_CONTAINER = 'umd-footer-main-container';
@@ -18,8 +18,8 @@ const BACKGROUND_IMAGE_CONTAINER = 'umd-footer-background-image-container';
 const BACKGROUND_IMAGE_GRADIENT = 'umd-footer-background-image-graident';
 
 const VariationVisualStyles = `
-  .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_VISUAL}"] .${BACKGROUND_IMAGE_CONTAINER},
-  .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${BACKGROUND_IMAGE_CONTAINER} {
+  .${ELEMENT_WRAPPER}${IS_VERSION_VISUAL} .${BACKGROUND_IMAGE_CONTAINER},
+  .${ELEMENT_WRAPPER}${IS_VERSION_SIMPLE} .${BACKGROUND_IMAGE_CONTAINER} {
     padding-top: 100px;
   }
 
@@ -52,9 +52,9 @@ export const MainContainerStyles = `
     color: ${Colors.white};
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] p,
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] span,
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] a {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} p,
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} span,
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} a {
     color: ${Colors.gray.dark}
   }
 

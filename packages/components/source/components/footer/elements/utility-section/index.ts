@@ -6,16 +6,23 @@ import {
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
-import { BREAKPOINTS, ELEMENTS, VARIABLES, SLOTS } from '../../globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  VARIABLES,
+  SLOTS,
+  REFERENCES,
+} from '../../globals';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { Lock } = Layout;
 
 const { LARGE } = BREAKPOINTS;
-const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { UTILITY } = SLOTS;
+const { ELEMENT_NAME } = VARIABLES;
+const { IS_THEME_LIGHT } = REFERENCES;
 
 const UTILITY_CONTAINER = 'umd-footer-utility-container';
 const UTILITY_CONTAINER_LOCK = 'umd-footer-utility-container-lock';
@@ -38,13 +45,13 @@ const LinkStyles = `
     },
   })}
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a {
     color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} a`]:
+      [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -62,7 +69,7 @@ const TextStyles = `
     color: ${Colors.gray.light};
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} p {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} p {
     color: ${Colors.black};
   }
 `;
@@ -108,7 +115,7 @@ export const UtilityContainerStyles = `
     }
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${UTILITY_CONTAINER} {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} {
     background-color: ${Colors.gray.light};
   }
 

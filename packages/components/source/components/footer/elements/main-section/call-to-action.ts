@@ -1,12 +1,12 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
-import { ELEMENTS, VARIABLES, SLOTS } from '../../globals';
+import { ELEMENTS, SLOTS, REFERENCES } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
 
 const { CTA } = SLOTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { THEME_OPTION_LIGHT } = VARIABLES;
+const { IS_THEME_LIGHT } = REFERENCES;
 
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 
@@ -32,14 +32,14 @@ export const CallToActionStyles = `
     background-color: ${Colors.black};
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CALL_TO_ACTION_CONTAINER} a {
     background-color: ${Colors.black};
     color: ${Colors.white};
     border: 1px solid ${Colors.black};
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:hover,
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CALL_TO_ACTION_CONTAINER} a:focus {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CALL_TO_ACTION_CONTAINER} a:hover,
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CALL_TO_ACTION_CONTAINER} a:focus {
     color: ${Colors.black};
     background-color: ${Colors.gray.lightest};
   }

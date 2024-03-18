@@ -10,7 +10,13 @@ import {
   SlotDefaultStyling,
 } from 'helpers/ui';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
-import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../../../globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  SLOTS,
+  VARIABLES,
+  REFERENCES,
+} from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
@@ -19,8 +25,9 @@ const { InterativeMedium, SansSmall } = Typography;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { CONTACT_HEADLINE, CONTACT_ADDRESS, CONTACT_LINKS } = SLOTS;
+const { ELEMENT_NAME } = VARIABLES;
+const { IS_THEME_LIGHT } = REFERENCES;
 
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
 const CONTACT_LIST_HEADLINE = 'umd-footer-contact-list-headline';
@@ -83,14 +90,14 @@ const HeadlineStyles = `
     },
   })}
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a,
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} span {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a,
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} span {
     color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LIST_HEADLINE} a`]:
+      [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -138,7 +145,7 @@ const LinkListStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] .${CONTACT_LINKS_LIST} a`]:
+      [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -163,7 +170,7 @@ const LinkListStyles = `
     left: 0;
   }
 
-  .${ELEMENT_WRAPPER}[theme="${THEME_OPTION_LIGHT}"] a:not(:first-child):before {
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} a:not(:first-child):before {
     background-color: ${Colors.black};
   }
 `;

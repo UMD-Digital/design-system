@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    UMDFeedNewsGrid: typeof UMDFeedNewsGrid;
+    UMDFeedNewsList: typeof UMDFeedNewsList;
   }
 }
 
@@ -13,8 +13,8 @@ const ATTRIBUTE_SHOW = 'show-count';
 const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
 
-export const ELEMENT_NAME = 'umd-feed-news';
-export class UMDFeedNewsGrid extends HTMLElement {
+export const ELEMENT_NAME = 'umd-feed-news-list';
+export class UMDFeedNewsList extends HTMLElement {
   _shadow: ShadowRoot;
   _token: string | null;
   _showCount: number;
@@ -94,8 +94,8 @@ export const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDFeedNewsGrid = UMDFeedNewsGrid;
-    window.customElements.define(ELEMENT_NAME, UMDFeedNewsGrid);
+    window.UMDFeedNewsList = UMDFeedNewsList;
+    window.customElements.define(ELEMENT_NAME, UMDFeedNewsList);
   }
 
   return '';

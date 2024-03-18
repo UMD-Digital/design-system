@@ -5,7 +5,7 @@ type ImageType = {
   altText: string;
 }[];
 
-type ArticleType = {
+export type ArticleType = {
   id: number;
   title: string;
   url: string;
@@ -19,7 +19,7 @@ type ArticleType = {
   }[];
 };
 
-export const STYLES_ARTICLE = `
+export const STYLES_NEWS_FEED = `
   ${STYLES_CARD}
 `;
 
@@ -80,7 +80,7 @@ const CreateDate = ({
   return null;
 };
 
-export const CreateArticleCards = ({ entries }: { entries: ArticleType[] }) =>
+export const CreateNewsCard = ({ entries }: { entries: ArticleType[] }) =>
   entries.map((entry) =>
     CreateCardElement({
       image: CreateImage({ images: entry.image }),
@@ -91,5 +91,18 @@ export const CreateArticleCards = ({ entries }: { entries: ArticleType[] }) =>
         dateFormatted: entry.dateFormatted,
       }),
       aligned: true,
+    }),
+  );
+
+export const CreateNewsList = ({ entries }: { entries: ArticleType[] }) =>
+  entries.map((entry) =>
+    CreateCardElement({
+      image: CreateImage({ images: entry.image }),
+      headline: CreateHeadline({ text: entry.title, url: entry.url }),
+      text: CreateText({ text: entry.summary }),
+      date: CreateDate({
+        date: entry.date,
+        dateFormatted: entry.dateFormatted,
+      }),
     }),
   );

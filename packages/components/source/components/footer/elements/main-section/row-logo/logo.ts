@@ -10,7 +10,7 @@ import { UMDFooterElement } from '../../../index';
 
 const { Spacing } = Tokens;
 
-const { large } = BREAKPOINTS;
+const { LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT, VERSION_TYPE_SIMPLE } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 
@@ -19,19 +19,19 @@ const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
 
 // prettier-ignore
 const ctaOverwriteStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       margin-top: ${Spacing.md};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
@@ -39,7 +39,7 @@ const ctaOverwriteStyles = `
 `;
 
 const campaignOverwriteStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${LOGO_CONTAINER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: none;
     }

@@ -11,7 +11,7 @@ const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { SansSmaller, InterativeMedium } = Typography;
 
-const { medium, large } = BREAKPOINTS;
+const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { LINK_COLUMN_ONE, LINK_COLUMN_TWO, LINK_COLUMN_THREE } = SLOTS;
@@ -132,7 +132,7 @@ const HeadlineStyles = `
     font-weight: 700;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LINKS_COLUMN_HEADLINE}[${HEADLINE_ATTRIBUTE_EMPTY}="true"] {
       display: none;
     }
@@ -177,7 +177,7 @@ const LinkStyles = `
 
 // prettier-ignore
 const ColumnWrapper = `
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) and (max-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -185,19 +185,19 @@ const ColumnWrapper = `
     }
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
       margin-bottom: ${Spacing.lg};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       padding-right: ${Spacing.xs};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
       margin-left: ${Spacing.lg};
       padding-left: ${Spacing.lg};
@@ -205,7 +205,7 @@ const ColumnWrapper = `
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) and (max-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} > p {
       grid-column: 1 / span 2;
     }
@@ -214,13 +214,13 @@ const ColumnWrapper = `
 
 // prettier-ignore
 export const LinkColumnStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
       padding-top: ${Spacing.md};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
       display: flex;
     }

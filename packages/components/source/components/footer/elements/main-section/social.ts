@@ -14,7 +14,7 @@ import { UMDFooterElement } from '../../index';
 const { Spacing, Colors } = Tokens;
 
 const { SOCIAL } = SLOTS;
-const { large, medium } = BREAKPOINTS;
+const { LARGE, MEDIUM } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 
@@ -24,13 +24,13 @@ const SOCIAL_CONTAINER_WRAPPER = 'umd-footer-social-container_wrapper';
 const SOCIAL_CONTAINER_HEADLINE = 'umd-footer-social-container_headline';
 
 const campaignOverwriteStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${SOCIAL_COLUMN_WRAPPER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${SOCIAL_COLUMN_WRAPPER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: flex;
       justify-content: flex-end;
@@ -67,7 +67,7 @@ export const SocialContainerStyles = `
     align-self: flex-start;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${SOCIAL_CONTAINER} {
       justify-content: flex-end;
       padding-left: ${Spacing['2xl']};
@@ -79,7 +79,7 @@ export const SocialContainerStyles = `
     padding-top: 3px;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) and (max-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px) {
     .${SOCIAL_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -88,7 +88,7 @@ export const SocialContainerStyles = `
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${SOCIAL_COLUMN_WRAPPER} {
       margin-left: auto;
     }

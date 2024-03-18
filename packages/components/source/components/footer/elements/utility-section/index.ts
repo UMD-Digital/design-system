@@ -12,7 +12,7 @@ const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { Lock } = Layout;
 
-const { large } = BREAKPOINTS;
+const { LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { UTILITY } = SLOTS;
@@ -80,7 +80,7 @@ export const UtilityContainerStyles = `
     },
   })}
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${UTILITY_CONTAINER_LOCK} {
       display: flex;
       align-items: center;
@@ -93,13 +93,13 @@ export const UtilityContainerStyles = `
     },
   })}
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-top: ${Spacing.sm};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-left: ${Spacing.sm};
       padding-left: ${Spacing.sm};

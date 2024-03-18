@@ -18,7 +18,7 @@ import { UMDFooterElement } from '../../../index';
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
-const { medium, large } = BREAKPOINTS;
+const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT, VERSION_TYPE_SIMPLE } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 
@@ -27,7 +27,7 @@ const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
 const ROW_LOGO_CONTAINER_LOCK = 'umd-footer-row-logo-container-lock';
 
 const ctaOverwriteStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER} > .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
@@ -40,7 +40,7 @@ const themeOverwriteStyles = `
     background-color: ${Colors.gray.lightest} !important;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
@@ -53,13 +53,13 @@ export const RowLogoStyles = `
     background-color: ${Colors.black};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LOGO_CONTAINER} {
       padding-top: ${Spacing['2xl']};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) and (max-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -67,13 +67,13 @@ export const RowLogoStyles = `
     }
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LOGO_CONTAINER} {
       padding-bottom: ${Spacing['md']} ;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: flex;
       padding: ${Spacing['5xl']} 0 ${Spacing['2xl']};

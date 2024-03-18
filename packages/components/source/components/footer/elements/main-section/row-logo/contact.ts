@@ -17,7 +17,7 @@ const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { InterativeMedium, SansSmall } = Typography;
 
-const { medium, large } = BREAKPOINTS;
+const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { CONTACT_HEADLINE, CONTACT_ADDRESS, CONTACT_LINKS } = SLOTS;
@@ -47,13 +47,13 @@ const DEFAULT_PHONE = {
 
 // prettier-ignore
 const socialOverwriteStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       margin-top: ${Spacing.md};
     }
@@ -174,13 +174,13 @@ export const ContactContainerStyles = `
     background-color: currnetColor;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${CONTACT_CONTAINER} {
       padding-top: ${Spacing['md']};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CONTACT_CONTAINER} {
       padding-left: ${Spacing['2xl']};
     }

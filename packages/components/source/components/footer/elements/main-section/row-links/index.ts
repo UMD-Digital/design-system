@@ -8,7 +8,7 @@ import { UMDFooterElement } from '../../../index';
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
-const { large } = BREAKPOINTS;
+const { LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 
@@ -17,13 +17,13 @@ export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
 const ROW_LINKS_CONTAINER_LOCK = 'umd-footer-row-links-lock';
 
 const socialOverwriteStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: block !important;
     }
@@ -37,8 +37,8 @@ export const RowLinkStyles = `
     background-color: ${Colors.black};
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
-    .${ROW_LINKS_CONTAINER}  {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    .${ROW_LINKS_CONTAINER} {
       padding-bottom: ${Spacing['2xl']};
     }
   }
@@ -51,7 +51,7 @@ export const RowLinkStyles = `
     display: flex;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LINKS_CONTAINER_WRAPPER}  {
       flex-direction: column-reverse;
       flex-wrap: wrap;

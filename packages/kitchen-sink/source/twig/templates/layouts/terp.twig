@@ -7,16 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
-  <link rel="stylesheet" href="/elements.css" />
+
   <body>
     <main>
-      {% include '_elements/header.twig' %}
+      {% include '../components/header-terp.twig' %}
       {% block page %}
 
       {% endblock %}
-      {% include '_elements/footer.twig' %}
+      {% include '../components/footer-terp.twig' %}
     </main>
+
+    <link rel="stylesheet" href="/terp.css" />
+    <script src="/terp.js"></script>
   </body>
-  <link rel="stylesheet" href="/app.css" />
-  <script src="/app.js"></script>
 </html>

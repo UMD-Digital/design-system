@@ -1,0 +1,34 @@
+{% set list = [
+  {
+    name: 'Terp Home',
+    link: 'terp-home'
+  },
+  {
+    name: 'Terp Interior',
+    link: 'terp-interior'
+  },
+  {
+    name: 'Greater CP Home',
+    link: 'greater-home'
+  }
+] %}
+
+{% macro DisplayName() %}
+  {% for item in list %}
+    {{ item.name }}
+  {% endfor %}
+{% endmacro %}
+
+{% macro HeaderLinks() %}
+  <ul>
+    {% for item in list %}
+      <li><a href="/templates/{{ item.link }}">{{ item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro Links() %}
+  {% for item in list %}
+    <a href="/templates/{{ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}

@@ -30,7 +30,7 @@ const ShowSubElements = ({ container }: { container: HTMLElement }) => {
   });
 };
 
-const DropdownVariations = () => {
+export default () => {
   const dropdownSelection = document.getElementById(
     'content-variation',
   ) as HTMLSelectElement | null;
@@ -68,7 +68,3 @@ const DropdownVariations = () => {
     });
   }
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-  DropdownVariations();
-});

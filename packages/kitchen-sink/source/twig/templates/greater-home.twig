@@ -1,0 +1,22 @@
+{% extends './layouts/greater-cp.twig' %}
+
+{% block page %}
+  <umd-element-hero type="default-centered">
+    <img slot="image" src="/greater-cp/hero.jpg" alt="Image Description" />
+
+    <p slot="headline">
+      RESHAPING COLLEGE PARK
+    </p>
+    <p slot="text">
+      Greater College Park connects the Discovery District—a public-private
+      research hub, the vibrant downtown community of College Park and the
+      University of Maryland's dynamic academic buildings.
+    </p>
+
+    <div slot="actions">
+      <umd-element-call-to-action type="primary">
+        <a href="https://google.com" aria-label="link to google">Watch Video</a>
+      </umd-element-call-to-action>
+    </div>
+  </umd-element-hero>
+{% endblock %}

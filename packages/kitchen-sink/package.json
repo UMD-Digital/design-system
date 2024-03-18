@@ -20,6 +20,7 @@
   "dependencies": {
     "theme": "link:../../@universityofmaryland/theme",
     "tailwindcss": "^3.3.5",
+    "@universityofmaryland/utilityheader": "1.0.7",
     "umd-web-components": "link:../../@universityofmaryland/web-components-library"
   }
 }

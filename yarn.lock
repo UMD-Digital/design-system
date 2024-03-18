@@ -1742,6 +1742,11 @@
   dependencies:
     postcss "^8.3.3"
 
+"@universityofmaryland/utilityheader@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@universityofmaryland/utilityheader/-/utilityheader-1.0.7.tgz#ee9bccd293164aed44de80bfd847e0912e55adfc"
+  integrity sha512-ThCIiuEBXseTM9sqGyk4PVp/GqY1xnDU/bsJW4+CYES7oJvnfm1HUoz7UFIxUWe9PiDUvsynbvkmNtzOGe8EMQ==
+
 "@webassemblyjs/ast@1.11.6", "@webassemblyjs/ast@^1.11.5":
   version "1.11.6"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.11.6.tgz#db046555d3c413f8966ca50a95176a0e2c642e24"

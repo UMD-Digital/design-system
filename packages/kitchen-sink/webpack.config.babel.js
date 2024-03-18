@@ -9,7 +9,8 @@ module.exports = () => {
   const entrypoints = {
     elements: path.resolve('source/scripts/elements'),
     app: path.resolve('source/scripts/app'),
-    dropdown: path.resolve('source/scripts/dropdown'),
+    terp: path.resolve('source/scripts/terp'),
+    greater: path.resolve('source/scripts/greater'),
   };
 
   const modules = {
@@ -32,7 +33,19 @@ module.exports = () => {
 
   const plugins = [
     new CopyWebpackPlugin({
-      patterns: [{ from: '*', to: '', context: 'source/assets/' }],
+      patterns: [
+        { from: '*', to: '', context: 'source/assets/' },
+        {
+          from: 'greater-cp',
+          to: 'greater-cp',
+          context: 'source/assets/',
+        },
+        {
+          from: 'terp',
+          to: 'terp',
+          context: 'source/assets/',
+        },
+      ],
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',

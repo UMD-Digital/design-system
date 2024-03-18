@@ -1,9 +1,8 @@
-require('styles/kitchen-sink.css');
+require('styles/terp.css');
 
+import '@universityofmaryland/utilityheader';
 import LoadUmdComponents from '@universityofmaryland/web-components-library';
-import Dropdown from './components/dropdown';
 
 document.addEventListener('DOMContentLoaded', () => {
   LoadUmdComponents();
-  Dropdown();
 });

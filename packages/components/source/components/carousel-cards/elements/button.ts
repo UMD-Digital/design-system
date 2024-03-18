@@ -1,29 +1,25 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { FORWARD_ARROW_ICON } from 'assets/icons';
-import { ELEMENT_TYPE } from 'components/carousel-cards';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  VARIABLES,
-} from 'components/carousel-cards/globals';
+import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
+import { UMDCarouselCardsElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 
 const { large } = BREAKPOINTS;
-const { ANIMATION_DURATION } = VARIABLES;
+const { ANIMATION_DURATION, ELEMENT_NAME } = VARIABLES;
 const { CAROUSEL_CARDS_BUTTON_BACKWARDS, CAROUSEL_CARDS_BUTTON_FORWARDS } =
   ELEMENTS;
 
 const CAROUSEL_CARDS_BUTTON = `umd-carousel-cards-button`;
 
 const backwardsButtonStyles = `
-  @container umd-carousel-card (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${CAROUSEL_CARDS_BUTTON_BACKWARDS} {
       left: 0;
     }
   }
 
-  @container umd-carousel-card (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${CAROUSEL_CARDS_BUTTON_BACKWARDS} {
       left: -52px;
     }
@@ -35,13 +31,13 @@ const backwardsButtonStyles = `
 `;
 
 const forwardButtonStyles = `
-  @container umd-carousel-card (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${CAROUSEL_CARDS_BUTTON_FORWARDS} {
       left: 49px;
     }
   }
 
-  @container umd-carousel-card (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${CAROUSEL_CARDS_BUTTON_FORWARDS} {
       right: -52px;
     }
@@ -62,13 +58,13 @@ export const ButtonStyles = `
     display: none;
   }
 
-  @container umd-carousel-card (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${CAROUSEL_CARDS_BUTTON} {
       bottom: 0;
     }
   }
 
-  @container umd-carousel-card (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${CAROUSEL_CARDS_BUTTON} {
       top: 50%;
       transform: translateY(-50%);
@@ -93,7 +89,7 @@ export const CreateButton = ({
   element,
   isRight = true,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
   isRight?: boolean;
 }) => {
   const button = document.createElement('button');

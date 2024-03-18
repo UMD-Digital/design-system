@@ -1,12 +1,8 @@
 import { Tokens, Typography, Fields } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import {
-  SLOTS,
-  BREAKPOINTS,
-  ELEMENTS,
-} from 'components/carousel-cards/globals';
-import { ELEMENT_TYPE } from 'components/carousel-cards';
+import { SLOTS, BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
+import { UMDCarouselCardsElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 const { TextDark } = Fields;
@@ -15,6 +11,7 @@ const { SansMedium, SansLargest } = Typography;
 const { large } = BREAKPOINTS;
 const { HEADLINE, TEXT, CTA } = SLOTS;
 const { INTRO_CONTAINER } = ELEMENTS;
+const { ELEMENT_NAME } = VARIABLES;
 
 const INTRO_CONTAINER_LOCK = 'umd-carousel-cards-intro-container-lock';
 const INTRO_CONTAINER_HEADLINE = 'umd-carousel-cards-intro-container-headline';
@@ -75,13 +72,13 @@ const ctaStyles = `
 
 // prettier-ignore
 export const IntroContainerStyles = `
-  @container umd-carousel-card (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${INTRO_CONTAINER} {
       margin-bottom: ${Spacing.md};
     }
   }
 
-  @container umd-carousel-card (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${INTRO_CONTAINER} {
       width: calc(40% - ${Spacing['2xl']});
       padding-right: ${Spacing['2xl']};
@@ -100,7 +97,11 @@ export const IntroContainerStyles = `
   ${ctaStyles}
 `;
 
-export const CreateIntroColumn = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateIntroColumn = ({
+  element,
+}: {
+  element: UMDCarouselCardsElement;
+}) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });

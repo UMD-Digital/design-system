@@ -19,6 +19,7 @@ export const SLOTS = {
 };
 
 export const VARIABLES = {
+  ELEMENT_NAME: 'umd-element-carousel-cards',
   ATTRIBUTE_RESIZE: 'resize',
   ANIMATION_DURATION: 500,
   MOBILE_COUNT: 1,

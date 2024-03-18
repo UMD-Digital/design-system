@@ -16,10 +16,8 @@ import {
 import { CreateShadowDom, OnLoadStyles, ComponentStyles } from './elements';
 import { SLOTS, VARIABLES } from './globals';
 
-const { ATTRIBUTE_RESIZE } = VARIABLES;
+const { ATTRIBUTE_RESIZE, ELEMENT_NAME } = VARIABLES;
 
-export const ELEMENT_NAME = 'umd-element-carousel-cards';
-export type ELEMENT_TYPE = UMDCarouselCardsElement;
 export class UMDCarouselCardsElement extends HTMLElement {
   _shadow: ShadowRoot;
 

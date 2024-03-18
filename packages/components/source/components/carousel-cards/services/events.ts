@@ -1,12 +1,12 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENT_TYPE } from 'components/carousel-cards';
-import { SLOTS, VARIABLES, ELEMENTS } from 'components/carousel-cards/globals';
 import {
   GetElementSize,
   SetElementSize,
   SetCarouselSize,
   IsTabletView,
 } from './helpers';
+import { SLOTS, VARIABLES, ELEMENTS } from '../globals';
+import { UMDCarouselCardsElement } from '../index';
 
 const { Spacing } = Tokens;
 
@@ -20,7 +20,7 @@ const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 export const EventResizeCarouselElementsWidth = ({
   element,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
 }) => {
   const elementSize = GetElementSize({ element });
 
@@ -32,7 +32,7 @@ export const EventScrollCarousel = ({
   element,
   isDirectionRight = true,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
   isDirectionRight?: boolean;
 }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
@@ -152,7 +152,7 @@ export const EventSwipe = ({
   element,
 }: {
   container: HTMLDivElement;
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
 }) => {
   const threshold = 20;
   const allowedTime = 100;
@@ -200,7 +200,7 @@ export const EventSwipe = ({
 export const EventResizeSetHeight = ({
   element,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
 }) => {
   const cardsSlot = element.querySelector(
     `[slot="${CARDS}"]`,
@@ -221,7 +221,7 @@ export const EventResizeSetHeight = ({
 export const EventResizeButtonLogic = ({
   element,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
 }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const forwardButton = shadowRoot.querySelector(

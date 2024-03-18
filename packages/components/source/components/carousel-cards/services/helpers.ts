@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENT_TYPE } from '../index';
 import { SLOTS, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
+import { UMDCarouselCardsElement } from '../index';
 
 const { Spacing } = Tokens;
 const { CARDS } = SLOTS;
@@ -39,7 +39,11 @@ export const GetCarouselCount = ({
   return isShowTwo ? TABLET_COUNT : MOBILE_COUNT;
 };
 
-export const GetElementSize = ({ element }: { element: ELEMENT_TYPE }) => {
+export const GetElementSize = ({
+  element,
+}: {
+  element: UMDCarouselCardsElement;
+}) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const containerWidth = GetCarouselWrapperSize({ shadowRoot });
   const count = GetCarouselCount({ shadowRoot });
@@ -53,7 +57,7 @@ export const SetElementSize = ({
   element,
   elementSize,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
   elementSize: number;
 }) => {
   const cardsSlot = element.querySelector(
@@ -70,7 +74,7 @@ export const SetCarouselSize = ({
   element,
   elementSize,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
   elementSize: number;
 }) => {
   const elementSizeTotal = elementSize * 2 + spaceBetween;

@@ -1,15 +1,12 @@
 import { MakeSlot } from 'helpers/ui';
-import { ELEMENT_TYPE } from 'components/carousel-cards';
-import {
-  SLOTS,
-  BREAKPOINTS,
-  ELEMENTS,
-} from 'components/carousel-cards/globals';
 import { CreateButton, ButtonStyles } from './button';
+import { SLOTS, BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
+import { UMDCarouselCardsElement } from '../index';
 
 const { CARDS } = SLOTS;
 const { large } = BREAKPOINTS;
 const { CAROUSEL_CONTAINER_WRAPPER } = ELEMENTS;
+const { ELEMENT_NAME } = VARIABLES;
 
 const CAROUSEL_CONTAINER = 'umd-carousel-cards-carousel-container';
 const CAROUSEL_CONTAINER_LOCK = 'umd-carousel-cards-carousel-container-lock';
@@ -20,13 +17,13 @@ export const CarouselContainerStyles = `
     position: relative;
   }
 
-  @container umd-carousel-card (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${CAROUSEL_CONTAINER} {
       padding-bottom: 60px;
     }
   }
 
-  @container umd-carousel-card (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${CAROUSEL_CONTAINER} {
       width: 60%;
     }
@@ -50,7 +47,7 @@ export const CarouselContainerStyles = `
 export const CreateCarouselColumn = ({
   element,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDCarouselCardsElement;
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');

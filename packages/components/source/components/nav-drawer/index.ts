@@ -7,9 +7,10 @@ declare global {
 import { MakeTemplate } from 'helpers/ui';
 import { EventClose, EventOpen, EventSlide } from './services/events';
 import { ComponentStyles, CreateShadowDom } from './elements';
+import { VARIABLES } from './globals';
 
-export const ELEMENT_NAME = 'umd-element-nav-drawer';
-export type NavDrawerType = UMDNavDrawer;
+const { ELEMENT_NAME } = VARIABLES;
+
 export class UMDNavDrawer extends HTMLElement {
   _shadow: ShadowRoot;
   _upcomingSlide: null | string;
@@ -31,16 +32,8 @@ export class UMDNavDrawer extends HTMLElement {
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
-  static get observedAttributes() {
-    return [];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
-
   connectedCallback() {
-    const container = CreateShadowDom({ element: this });
-
-    this._shadow.appendChild(container);
+    this._shadow.appendChild(CreateShadowDom({ element: this }));
   }
 
   eventOpen() {

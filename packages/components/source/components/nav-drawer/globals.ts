@@ -15,6 +15,7 @@ export const SLOTS = {
   CHILDREN_SLIDES: 'children-slides',
 };
 export const VARIABLES = {
+  ELEMENT_NAME: 'umd-element-nav-drawer',
   ANIMATION_TIME: 300,
   ATTRIBUTE_CHILD_REF: 'data-child-ref',
   ATTRIBUTE_PARENT_REF: 'data-parent-ref',

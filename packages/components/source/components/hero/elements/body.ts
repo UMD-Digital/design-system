@@ -26,12 +26,12 @@ const { HERO_CONTAINER, HERO_BODY, HERO_EYEBROW } = ELEMENTS;
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
 const { ELEMENT_NAME } = VARIABLES;
 const {
-  DEFAULT_ATTR,
-  STACKED_ATTR,
-  OVERLAY_ATTR,
-  MINIMAL_ATTR,
-  LOGO_ATTR,
-  DARK_ATTR,
+  IS_TYPE_DEFAULT,
+  IS_TYPE_STACKED,
+  IS_TYPE_OVERLAY,
+  IS_TYPE_MINIMAL,
+  IS_TYPE_LOGO,
+  IS_THEME_DARK,
   IS_WITHIN_LOCK,
 } = REFERENCES;
 
@@ -43,42 +43,42 @@ const HERO_ACTION = 'umd-hero-overlay-actions';
 const EyebrowStyles = `  
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_EYEBROW}`]: Ribbon,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_EYEBROW}`]: Ribbon,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_EYEBROW}`]: Ribbon,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${LOGO_ATTR} .${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${IS_TYPE_LOGO} .${HERO_EYEBROW}`]: Ribbon,
     },
   })}
 
-  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_EYEBROW},
-  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_EYEBROW},
-  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_EYEBROW},
-  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_EYEBROW} {
+  .${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_EYEBROW},
+  .${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_EYEBROW},
+  .${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_EYEBROW},
+  .${HERO_CONTAINER}${IS_TYPE_LOGO} .${HERO_EYEBROW} {
     color: ${Colors.black}
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_EYEBROW}`]: SansSmaller,
+      [`.${HERO_CONTAINER}${IS_TYPE_MINIMAL} .${HERO_EYEBROW}`]: SansSmaller,
     },
   })}
 
-  .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_EYEBROW} {
+  .${HERO_CONTAINER}${IS_TYPE_MINIMAL} .${HERO_EYEBROW} {
     text-transform: uppercase;
     font-weight: 600;
   }
@@ -97,58 +97,58 @@ const HeadlineStyles = `
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
+      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_HEADLINE}`]: CampaignExtralarge,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE} {
+    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_HEADLINE} {
       max-width: 700px;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
-    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_HEADLINE} {
+    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_HEADLINE} {
       max-width: 776px;
     }
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
+      [`.${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_HEADLINE}`]: CampaignExtralarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${STACKED_ATTR}${IS_WITHIN_LOCK} .${HERO_HEADLINE}`]: CampaignLarge,
+      [`.${HERO_CONTAINER}${IS_TYPE_STACKED}${IS_WITHIN_LOCK} .${HERO_HEADLINE}`]: CampaignLarge,
     },
   })}
 
-  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_HEADLINE} {
+  .${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_HEADLINE} {
     max-width: 700px;
     margin: 0 auto;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_HEADLINE}`]: CampaignExtralarge,
+      [`.${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_HEADLINE}`]: CampaignExtralarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${LOGO_ATTR} .${HERO_HEADLINE}`]: CampaignLarge,
+      [`.${HERO_CONTAINER}${IS_TYPE_LOGO} .${HERO_HEADLINE}`]: CampaignLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_HEADLINE}`]: SansLargest,
+      [`.${HERO_CONTAINER}${IS_TYPE_MINIMAL} .${HERO_HEADLINE}`]: SansLargest,
     },
   })}
 
-  .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_HEADLINE} {
+  .${HERO_CONTAINER}${IS_TYPE_MINIMAL} .${HERO_HEADLINE} {
     font-weight: 800;
   }
 
@@ -186,26 +186,26 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_TEXT}`]: SansLarger,
+      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_TEXT}`]: SansLarger,
     },
   })}
 
-  .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_TEXT} {
+  .${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_TEXT} {
     font-weight: 400;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${LOGO_ATTR} .${HERO_TEXT}`]: SansLarger,
+      [`.${HERO_CONTAINER}${IS_TYPE_LOGO} .${HERO_TEXT}`]: SansLarger,
     },
   })}
 
-  .${HERO_CONTAINER}${LOGO_ATTR} .${HERO_TEXT} {
+  .${HERO_CONTAINER}${IS_TYPE_LOGO} .${HERO_TEXT} {
     color: ${Colors.gray.dark};
     font-weight: 400;
   }
 
-  .${HERO_CONTAINER}${LOGO_ATTR}${DARK_ATTR} .${HERO_TEXT} {
+  .${HERO_CONTAINER}${IS_TYPE_LOGO}${IS_THEME_DARK} .${HERO_TEXT} {
     color: ${Colors.white};
   }
 
@@ -213,32 +213,32 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT}`]: SansLarger,
+      [`.${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_TEXT}`]: SansLarger,
     },
   })}
 
-  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT} {
+  .${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_TEXT} {
     color: ${Colors.gray.dark};
     font-weight: 400;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT}`]: SansLarger,
+      [`.${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_TEXT}`]: SansLarger,
     },
   })}
 
-  .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
+  .${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_TEXT} {
     font-weight: 400;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_TEXT} {
+    .${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_TEXT} {
       max-width: 60%;
     }
   }
 
-  .${HERO_CONTAINER}${STACKED_ATTR} .${HERO_TEXT} * {
+  .${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_TEXT} * {
     color: ${Colors.gray.dark};
   }
 `

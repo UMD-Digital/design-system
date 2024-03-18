@@ -20,15 +20,15 @@ const {
   ATTRIBUTE_INTERIOR,
 } = VARIABLES;
 const {
-  DEFAULT_ATTR,
-  STACKED_ATTR,
-  OVERLAY_ATTR,
-  MINIMAL_ATTR,
-  LOGO_ATTR,
-  DARK_ATTR,
-  LIGHT_ATTR,
-  MD_ATTR,
-  WHITE_ATTR,
+  IS_TYPE_DEFAULT,
+  IS_TYPE_STACKED,
+  IS_TYPE_OVERLAY,
+  IS_TYPE_MINIMAL,
+  IS_TYPE_LOGO,
+  IS_THEME_DARK,
+  IS_THEME_LIGHT,
+  IS_THEME_MARYLAND,
+  IS_THEME_WHITE,
   IS_INTERIOR,
 } = REFERENCES;
 
@@ -37,31 +37,31 @@ const HERO_LOCK = 'umd-hero-lock';
 
 // prettier-ignore
 const ThemeOverwrite = `
-  .${HERO_CONTAINER}${DARK_ATTR} {
+  .${HERO_CONTAINER}${IS_THEME_DARK} {
     background-color: ${Colors.black};
   }
 
-  .${HERO_CONTAINER}${DARK_ATTR} * {
+  .${HERO_CONTAINER}${IS_THEME_DARK} * {
     color: ${Colors.white};
   }
 
-  .${HERO_CONTAINER}${LIGHT_ATTR} {
+  .${HERO_CONTAINER}${IS_THEME_LIGHT} {
     background-color: ${Colors.gray.lightest};
   }
 
-  .${HERO_CONTAINER}${LIGHT_ATTR} * {
+  .${HERO_CONTAINER}${IS_THEME_LIGHT} * {
     color: ${Colors.black};
   }
 
-  .${HERO_CONTAINER}${MD_ATTR} {
+  .${HERO_CONTAINER}${IS_THEME_MARYLAND} {
     background-color: ${Colors.red};
   }
 
-  .${HERO_CONTAINER}${MD_ATTR} * {
+  .${HERO_CONTAINER}${IS_THEME_MARYLAND} * {
     color: ${Colors.white};
   }
 
-  .${HERO_CONTAINER}${WHITE_ATTR} * {
+  .${HERO_CONTAINER}${IS_THEME_WHITE} * {
     color: ${Colors.black};
   }
 `;
@@ -69,33 +69,33 @@ const ThemeOverwrite = `
 // prettier-ignore
 const DefaultOverwrite = `
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${DEFAULT_ATTR} {
+    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} {
       height: 75vh;
       min-height: 480px;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
-    .${HERO_CONTAINER}${DEFAULT_ATTR} {
+    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} {
       min-height: 720px;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${DEFAULT_ATTR} * {
+    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} * {
       color: ${Colors.white};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${DEFAULT_ATTR} .${HERO_LOCK} {
+    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_LOCK} {
       padding-top: ${Spacing['2xl']};
       padding-bottom: ${Spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${DEFAULT_ATTR}${IS_INTERIOR} {
+    .${HERO_CONTAINER}${IS_TYPE_DEFAULT}${IS_INTERIOR} {
       min-height: 400px;
       height: 40vh;
     }
@@ -104,14 +104,14 @@ const DefaultOverwrite = `
 
 // prettier-ignore
 const LogoTypeOverwrite = `
-  .${HERO_CONTAINER}${LOGO_ATTR} {
+  .${HERO_CONTAINER}${IS_TYPE_LOGO} {
     padding: ${Spacing['5xl']} 0 ${Spacing.lg};
   }
 `;
 
 // prettier-ignore
 const StackTypeOverwrite = `
-  .${HERO_CONTAINER}${STACKED_ATTR} {
+  .${HERO_CONTAINER}${IS_TYPE_STACKED} {
     display: flex;
     flex-direction: column-reverse;
   }
@@ -119,12 +119,12 @@ const StackTypeOverwrite = `
 
 // prettier-ignore
 const OverlayTypeOverwrite = `
-  .${HERO_CONTAINER}${OVERLAY_ATTR} {
+  .${HERO_CONTAINER}${IS_TYPE_OVERLAY} {
     position: relative;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_LOCK} {
+    .${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_LOCK} {
       min-height: 640px;
       display: flex;
       align-items: center;
@@ -132,7 +132,7 @@ const OverlayTypeOverwrite = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
-    .${HERO_CONTAINER}${OVERLAY_ATTR} .${HERO_LOCK} {
+    .${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_LOCK} {
       min-height: 764px;
     }
   }
@@ -141,7 +141,7 @@ const OverlayTypeOverwrite = `
 // prettier-ignore
 const MinimalTypeOverwrite = `
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${MINIMAL_ATTR} .${HERO_LOCK} {
+    .${HERO_CONTAINER}${IS_TYPE_MINIMAL} .${HERO_LOCK} {
       min-height: 288px;
       display: flex;
       align-items: center;

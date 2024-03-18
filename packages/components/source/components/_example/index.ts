@@ -6,9 +6,10 @@ declare global {
 
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
+import { VARIABLES } from './globals';
 
-export const ELEMENT_NAME = 'umd-element-example';
-export type ExampleType = UMDExampleElement;
+const { ELEMENT_NAME } = VARIABLES;
+
 export class UMDExampleElement extends HTMLElement {
   _shadow: ShadowRoot;
 

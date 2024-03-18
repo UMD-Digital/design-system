@@ -12,7 +12,7 @@ import { UMDCarouselCardsElement } from '../index';
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
-const { medium, large } = BREAKPOINTS;
+const { MEDIUM, LARGE } = BREAKPOINTS;
 const { CARDS } = SLOTS;
 const { ELEMENT_NAME } = VARIABLES;
 
@@ -38,13 +38,13 @@ const containerStyles = `
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${CAROUSEL_CONTAINER} {
       padding: ${Spacing['4xl']} 0;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CAROUSEL_CONTAINER} {
       padding: ${Spacing['max']} 0;
     }
@@ -72,7 +72,7 @@ const containerLockStyles = `
     })}
   }
 
-  @media (min-width: ${large}px) {
+  @media (min-width: ${LARGE}px) {
     .${CAROUSEL_LOCK} {
       display: flex;
       justify-content: space-between;
@@ -80,7 +80,7 @@ const containerLockStyles = `
     }
   }
 
-  @media umd-carousel-card (max-width: ${large - 1}px) {
+  @media umd-carousel-card (max-width: ${LARGE - 1}px) {
     .${CAROUSEL_LOCK} {
       max-width: inherit;
       padding: 0;

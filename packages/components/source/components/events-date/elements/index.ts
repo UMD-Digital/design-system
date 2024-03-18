@@ -7,7 +7,7 @@ import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { CreateDateBlockElement, STYLES_DATE_BLOCK } from 'elements/date-block';
 import { ELEMENT_TYPE } from 'components/events-date';
-import { SLOTS, VARIABLES, NAMING } from 'components/events-date/globals';
+import { SLOTS, VARIABLES, REFERENCES } from 'components/events-date/globals';
 
 const { FontSize, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
@@ -15,7 +15,7 @@ const { SansLarge } = Typography;
 
 const { HEADLINE, MONTH, DAY } = SLOTS;
 const { ATTRIBUTE_THEME } = VARIABLES;
-const { THEME_DARK } = NAMING;
+const { IS_THEME_DARK } = REFERENCES;
 
 const EVENT_DATE_CONTAINER = 'umd-event-date-container';
 const EVENT_HEADLINE = 'umd-event-headline';
@@ -67,7 +67,7 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DATE_CONTAINER}${THEME_DARK} .${EVENT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-white'],
+      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-white'],
     },
   })}
 `;

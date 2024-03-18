@@ -6,7 +6,7 @@ import {
   ELEMENTS,
   SLOTS,
   VARIABLES,
-  NAMING,
+  REFERENCES,
 } from 'components/events-date-slider/globals';
 import { SizeDatesElements } from '../services/helpers';
 import { CreateCoverElement, CoverStyles } from './cover';
@@ -14,21 +14,21 @@ import { CreateScrollerWrapper, ScrollerStyles } from './scroller';
 
 const { Colors } = Tokens;
 
-const { tablet } = BREAKPOINTS;
+const { TABLET } = BREAKPOINTS;
 const { CONTAINER_CLASS } = ELEMENTS;
 const { DATE_SLOT_NAME } = SLOTS;
 const { ATTRIBUTE_THEME } = VARIABLES;
-const { THEME_DARK } = NAMING;
+const { IS_THEME_DARK } = REFERENCES;
 
 const CONTAINER_WRAPPER_CLASS = 'umd-element-date-slider-container-wrapper';
 
 // prettier-ignore
 const VariationThemeDark = `
-  .${CONTAINER_CLASS}${THEME_DARK} .${CONTAINER_WRAPPER_CLASS} {
+  .${CONTAINER_CLASS}${IS_THEME_DARK} .${CONTAINER_WRAPPER_CLASS} {
     background-color: ${Colors.gray.darker};
   }
 
-  .${CONTAINER_CLASS}${THEME_DARK}  * {
+  .${CONTAINER_CLASS}${IS_THEME_DARK}  * {
     color: #fff !important;
   }
 `
@@ -52,7 +52,7 @@ export const ContainerStyles = `
     }
   }
 
-  @container dates-slider (min-width: ${tablet}px) {
+  @container dates-slider (min-width: ${TABLET}px) {
     .${CONTAINER_WRAPPER_CLASS} {
       padding: 40px;
     }

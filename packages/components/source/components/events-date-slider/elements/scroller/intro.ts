@@ -5,15 +5,15 @@ import {
   BREAKPOINTS,
   ELEMENTS,
   SLOTS,
-  NAMING,
+  REFERENCES,
 } from 'components/events-date-slider/globals';
 
 const { Colors, Spacing } = Tokens;
 
-const { tablet } = BREAKPOINTS;
+const { TABLET } = BREAKPOINTS;
 const { CONTAINER_CLASS } = ELEMENTS;
 const { HEADLINE_SLOT_NAME, LINK_SLOT_NAME } = SLOTS;
-const { THEME_DARK } = NAMING;
+const { IS_THEME_DARK } = REFERENCES;
 
 const INTRO_CONTAINER = 'umd-element-date-slider-intro-container';
 const INTRO_HEADLINE = 'umd-element-date-slider-headline';
@@ -35,7 +35,7 @@ const headlineStyles = `
     },
   })}
 
-  .${CONTAINER_CLASS}${THEME_DARK} .${INTRO_HEADLINE} {
+  .${CONTAINER_CLASS}${IS_THEME_DARK} .${INTRO_HEADLINE} {
     color: ${Colors.white};
   }
 `;
@@ -49,7 +49,7 @@ const linkStyles = `
     margin-top: ${Spacing.min};
   }
 
-  .${CONTAINER_CLASS}${THEME_DARK} .${INTRO_LINK} {
+  .${CONTAINER_CLASS}${IS_THEME_DARK} .${INTRO_LINK} {
     color: ${Colors.white};
   }
 `;
@@ -60,13 +60,13 @@ export const IntroStyles = `
     position: relative;
   }
 
-  @container dates-slider (max-width: ${tablet - 1}px) {
+  @container dates-slider (max-width: ${TABLET - 1}px) {
     .${INTRO_CONTAINER} {
       text-align: center;
     }
   }
 
-  @container dates-slider (min-width: ${tablet}px) {
+  @container dates-slider (min-width: ${TABLET}px) {
     .${INTRO_CONTAINER} {
       padding: 0;
       padding-right: 24px;

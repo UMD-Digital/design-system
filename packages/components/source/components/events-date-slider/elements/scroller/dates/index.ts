@@ -7,7 +7,7 @@ import {
 } from 'components/events-date-slider/globals';
 import { CreateBackButton, CreateForwardButton, ButtonStyles } from './button';
 
-const { tablet } = BREAKPOINTS;
+const { TABLET } = BREAKPOINTS;
 const { DATE_SLOT_NAME } = SLOTS;
 const { DATES_CONTAINER_CLASS, DATES_WRAPPER_CONTAINER_CLASS } = ELEMENTS;
 
@@ -18,7 +18,7 @@ export const DatesStyles = `
     padding: 0 36px;
   }
   
-  @container dates-slider (min-width: ${tablet}px) {
+  @container dates-slider (min-width: ${TABLET}px) {
     .${DATES_CONTAINER_CLASS} {
       padding: 0 60px;
       width: calc(100% - 96px);

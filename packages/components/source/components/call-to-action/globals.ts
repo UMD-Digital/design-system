@@ -1,4 +1,3 @@
-export const BREAKPOINTS = {};
 export const ELEMENTS = {
   CTA_CONTAINER: 'umd-call-to-action-container',
   CTA_CONTAINER_ELEMENT: 'umd-call-to-action-element-container',
@@ -21,7 +20,6 @@ export const VARIABLES = {
   THEME_LIGHT: 'light',
   THEME_DARK: 'dark',
 };
-
 export const REFERENCES = {
   IS_PRIMARY: `[${VARIABLES.ATTRIBUTE_TYPE}="${VARIABLES.TYPE_PRIMARY}"]`,
   IS_SECONDARY: `[${VARIABLES.ATTRIBUTE_TYPE}="${VARIABLES.TYPE_SECONDARY}"]`,

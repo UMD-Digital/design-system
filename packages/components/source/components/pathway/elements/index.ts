@@ -6,12 +6,12 @@ import {
   CreateHighlightColumn,
   STYLES_PATHWAY_HIGHLIGHT_COLUMN,
 } from './highlight';
-import { ELEMENTS, BREAKPOINTS, VARIABLES, NAMING } from '../globals';
+import { ELEMENTS, BREAKPOINTS, VARIABLES, REFERENCES } from '../globals';
 import { UMDPathwayElement } from '../index';
 
 const { Lock } = Layout;
 
-const { medium } = BREAKPOINTS;
+const { MEDIUM } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
 const {
   ELEMENT_NAME,
@@ -23,7 +23,7 @@ const {
   ATTRIBUTE_HERO,
 } = VARIABLES;
 const { IS_WITH_IMAGE, IS_WITH_HERO, IS_WITH_IMAGE_LEFT, IS_WITH_IMAGE_RIGHT } =
-  NAMING;
+  REFERENCES;
 
 const PATHWAY_CONTAINER_WRAPPER = 'umd-pathway-container-wrapper';
 const PATHWAY_CONTAINER_LOCK = 'umd-pathway-container-lock';
@@ -34,7 +34,7 @@ const ImageVariation = `
     align-items: initial;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_IMAGE} .${PATHWAY_CONTAINER_LOCK} {
       padding: 0;
     }
@@ -48,20 +48,20 @@ const LockStyles = `
     },
   })}
   
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER_LOCK} {
       display: flex;
       align-items: center;
     }
   }
   
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER_LOCK}:has(> :nth-of-type(2)) > * {
       width: 50%;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HERO} .${PATHWAY_CONTAINER_LOCK} {
       min-height: 832px;
     }
@@ -75,13 +75,13 @@ const STYLES_CONTAINER = `
     position: relative;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HERO}${IS_WITH_IMAGE_LEFT} .${PATHWAY_CONTAINER_WRAPPER} {
       padding-left: 50%;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HERO}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_WRAPPER} {
       padding-right: 50%;
     }

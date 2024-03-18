@@ -4,7 +4,7 @@ import { SLOTS, BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
 import { UMDCarouselCardsElement } from '../index';
 
 const { CARDS } = SLOTS;
-const { large } = BREAKPOINTS;
+const { LARGE } = BREAKPOINTS;
 const { CAROUSEL_CONTAINER_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
 
@@ -17,13 +17,13 @@ export const CarouselContainerStyles = `
     position: relative;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${CAROUSEL_CONTAINER} {
       padding-bottom: 60px;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CAROUSEL_CONTAINER} {
       width: 60%;
     }
@@ -34,7 +34,7 @@ export const CarouselContainerStyles = `
     padding-right: 0;
   }
 
-  @media (min-width: ${large}px) {
+  @media (min-width: ${LARGE}px) {
     .${CAROUSEL_CONTAINER_WRAPPER}  {
       max-width: inherit;
       padding: 0;

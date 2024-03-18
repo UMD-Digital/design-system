@@ -8,7 +8,7 @@ const { Colors, Spacing } = Tokens;
 const { TextDark } = Fields;
 const { SansMedium, SansLargest } = Typography;
 
-const { large } = BREAKPOINTS;
+const { LARGE } = BREAKPOINTS;
 const { HEADLINE, TEXT, CTA } = SLOTS;
 const { INTRO_CONTAINER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
@@ -72,20 +72,20 @@ const ctaStyles = `
 
 // prettier-ignore
 export const IntroContainerStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${INTRO_CONTAINER} {
       margin-bottom: ${Spacing.md};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${INTRO_CONTAINER} {
       width: calc(40% - ${Spacing['2xl']});
       padding-right: ${Spacing['2xl']};
     }
   }
 
-  @media (min-width: ${large}px) {
+  @media (min-width: ${LARGE}px) {
     .${INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
       max-width: inherit;
       padding: 0;

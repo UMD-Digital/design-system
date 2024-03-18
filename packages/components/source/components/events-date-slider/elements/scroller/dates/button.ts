@@ -6,32 +6,32 @@ import { EventSlideDates } from 'components/events-date-slider/services/events';
 import {
   BREAKPOINTS,
   ELEMENTS,
-  NAMING,
+  REFERENCES,
 } from 'components/events-date-slider/globals';
 
 const { Colors, Spacing } = Tokens;
 
-const { tablet } = BREAKPOINTS;
+const { TABLET } = BREAKPOINTS;
 const { CONTAINER_CLASS, ARROW_CLASS } = ELEMENTS;
-const { THEME_DARK } = NAMING;
+const { IS_THEME_DARK } = REFERENCES;
 
 const FORWARD_ARROW_CLASS = 'umd-element-date-slider-forward-arrow';
 const BACK_ARROW_CLASS = 'umd-element-date-slider-back-arrow';
 
 const darkThemeStyles = `
-  .${CONTAINER_CLASS}${THEME_DARK} .${ARROW_CLASS} {
+  .${CONTAINER_CLASS}${IS_THEME_DARK} .${ARROW_CLASS} {
     background-color: ${Colors.gray.dark};
   }
 
-  .${CONTAINER_CLASS}${THEME_DARK} .${ARROW_CLASS} svg {
+  .${CONTAINER_CLASS}${IS_THEME_DARK} .${ARROW_CLASS} svg {
     fill: ${Colors.white}
   }
 
-  .${CONTAINER_CLASS}${THEME_DARK} .${ARROW_CLASS}:hover {
+  .${CONTAINER_CLASS}${IS_THEME_DARK} .${ARROW_CLASS}:hover {
     background-color: ${Colors.white}
   }
 
-  .${CONTAINER_CLASS}${THEME_DARK} .${ARROW_CLASS}:hover svg {
+  .${CONTAINER_CLASS}${IS_THEME_DARK} .${ARROW_CLASS}:hover svg {
     fill: ${Colors.black}
   }
 `;
@@ -52,7 +52,7 @@ export const ButtonStyles = `
     z-index: 99;
   }
 
-  @container dates-slider (min-width: ${tablet}px) {
+  @container dates-slider (min-width: ${TABLET}px) {
     .${ARROW_CLASS} {
       width: 48px;
       height: 48px;
@@ -74,7 +74,7 @@ export const ButtonStyles = `
     height: 6px;
   }
 
-  @container dates-slider (min-width: ${tablet}px) {
+  @container dates-slider (min-width: ${TABLET}px) {
     .${ARROW_CLASS} svg {
       width: 24px;
       height: 8px;
@@ -85,7 +85,7 @@ export const ButtonStyles = `
     left: 0;
   }
 
-  @container dates-slider (max-width: ${tablet - 1}px) {
+  @container dates-slider (max-width: ${TABLET - 1}px) {
     .${BACK_ARROW_CLASS} {
       left: -24px;
       top: ${Spacing.xs};
@@ -96,7 +96,7 @@ export const ButtonStyles = `
     right: 0;
   }
 
-  @container dates-slider (max-width: ${tablet - 1}px) {
+  @container dates-slider (max-width: ${TABLET - 1}px) {
     .${FORWARD_ARROW_CLASS} {
       right: -24px;
       top: ${Spacing.xs};

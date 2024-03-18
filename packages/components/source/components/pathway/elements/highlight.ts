@@ -1,16 +1,22 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { BREAKPOINTS, ELEMENTS, NAMING, SLOTS, VARIABLES } from '../globals';
+import {
+  BREAKPOINTS,
+  ELEMENTS,
+  REFERENCES,
+  SLOTS,
+  VARIABLES,
+} from '../globals';
 import { UMDPathwayElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 
 const { HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } = SLOTS;
-const { medium, large } = BREAKPOINTS;
+const { MEDIUM, LARGE } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
-const { IS_WITH_THEME } = NAMING;
+const { IS_WITH_THEME } = REFERENCES;
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
@@ -37,19 +43,19 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     position: relative;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER} {
       padding: ${Spacing['4xl']} ${Spacing['2xl']};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER} {
       padding: ${Spacing['8xl']} ${Spacing['xl']};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER} {
       padding-left: ${Spacing['xl']};
       position: relative;
@@ -62,7 +68,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     background-color: ${Colors.red};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
       top: ${Spacing['2xl']};
       width: ${Spacing['5xl']};
@@ -70,7 +76,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
       left: 0;
       width: 2px;

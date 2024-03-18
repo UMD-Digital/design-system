@@ -6,7 +6,13 @@ import {
 } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SLOTS, ELEMENTS, NAMING, BREAKPOINTS, VARIABLES } from '../globals';
+import {
+  SLOTS,
+  ELEMENTS,
+  REFERENCES,
+  BREAKPOINTS,
+  VARIABLES,
+} from '../globals';
 import { UMDPathwayElement } from '../index';
 
 const { Spacing, Colors, FontSize } = Tokens;
@@ -15,7 +21,7 @@ const { FlexRows } = Layout;
 const { SansLargest, CampaignExtralarge, SansLarger } = Typography;
 
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
-const { medium, large } = BREAKPOINTS;
+const { MEDIUM, LARGE } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
 const {
@@ -24,7 +30,7 @@ const {
   IS_WITH_IMAGE,
   IS_WITH_HIGHLIGHT,
   IS_WITH_HERO,
-} = NAMING;
+} = REFERENCES;
 
 const SUMMARY_CONTAINER = 'umd-pathway-summary-column-container';
 const SUMMARY_CONTAINER_WRAPPER =
@@ -39,7 +45,7 @@ const SUMMARY_ACTIONS_CONTAINER =
 
 // prettier-ignore
 const PositionStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_IMAGE_RIGHT} .${SUMMARY_CONTAINER} {
       order: 1;
     }
@@ -49,7 +55,7 @@ const PositionStyles = `
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_IMAGE_LEFT} .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: 0;
     }
@@ -62,13 +68,13 @@ const WithImageStyles = `
     padding: ${Spacing.md};
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_IMAGE} .${SUMMARY_CONTAINER_WRAPPER} {
       padding: ${Spacing['4xl']} ${Spacing['2xl']};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_IMAGE} .${SUMMARY_CONTAINER_WRAPPER} {
       padding: ${Spacing['8xl']} ${Spacing['6xl']};
     }
@@ -81,13 +87,13 @@ const WithHighlightStyles = `
     padding-bottom: ${Spacing.md};
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HIGHLIGHT} .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: ${Spacing['4xl']};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HIGHLIGHT} .${SUMMARY_CONTAINER_WRAPPER} {
       padding-right: ${Spacing['6xl']};
     }
@@ -96,7 +102,7 @@ const WithHighlightStyles = `
 
 // prettier-ignore
 const WithHeroStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HERO} .${SUMMARY_CONTAINER_WRAPPER} {
       padding: ${Spacing.md} 0;
     }
@@ -166,7 +172,7 @@ const TextStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     * + .${SUMMARY_TEXT_CONTAINER} {
       margin-top: ${Spacing.md};
     }
@@ -191,7 +197,7 @@ const ActionStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     * + .${SUMMARY_ACTIONS_CONTAINER} {
       margin-top: ${Spacing.lg};
     }

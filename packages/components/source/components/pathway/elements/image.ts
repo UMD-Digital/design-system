@@ -1,19 +1,26 @@
 import { SlotDefaultStyling } from 'helpers/ui';
-import { SLOTS, BREAKPOINTS, ELEMENTS, NAMING, VARIABLES } from '../globals';
+import {
+  SLOTS,
+  BREAKPOINTS,
+  ELEMENTS,
+  REFERENCES,
+  VARIABLES,
+} from '../globals';
 import { UMDPathwayElement } from '../index';
 
 const { IMAGE } = SLOTS;
-const { medium, large } = BREAKPOINTS;
+const { MEDIUM, LARGE } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
-const { IS_WITHOUT_IMAGE_SCALED, IS_WITH_IMAGE_RIGHT, IS_WITH_HERO } = NAMING;
+const { IS_WITHOUT_IMAGE_SCALED, IS_WITH_IMAGE_RIGHT, IS_WITH_HERO } =
+  REFERENCES;
 
 const PATHWAY_IMAGE_CONTAINER = 'umd-pathway-image-column-container';
 const PATHWAY_IMAGE_CONTAINER_WRAPPER = 'umd-pathway-image-wrapper';
 
 // prettier-ignore
 const PositionStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER} {
       order: 2;
     }
@@ -31,7 +38,7 @@ const SizeStyles = `
 
 // prettier-ignore
 const HeroStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HERO} .${PATHWAY_IMAGE_CONTAINER} {
       width: 50%;
       position: absolute;
@@ -41,14 +48,14 @@ const HeroStyles = `
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HERO}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER} {
       left: inherit;
       right: 0;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_CONTAINER}${IS_WITH_HERO} .${PATHWAY_IMAGE_CONTAINER} img {
       min-height: inherit;
     }
@@ -70,7 +77,7 @@ export const STYLES_PATHWAY_IMAGE_COLUMN = `
     object-position: center;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${PATHWAY_IMAGE_CONTAINER} img {
       min-height: 656px;
     }

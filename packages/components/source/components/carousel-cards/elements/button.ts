@@ -5,7 +5,7 @@ import { UMDCarouselCardsElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 
-const { large } = BREAKPOINTS;
+const { LARGE } = BREAKPOINTS;
 const { ANIMATION_DURATION, ELEMENT_NAME } = VARIABLES;
 const { CAROUSEL_CARDS_BUTTON_BACKWARDS, CAROUSEL_CARDS_BUTTON_FORWARDS } =
   ELEMENTS;
@@ -13,13 +13,13 @@ const { CAROUSEL_CARDS_BUTTON_BACKWARDS, CAROUSEL_CARDS_BUTTON_FORWARDS } =
 const CAROUSEL_CARDS_BUTTON = `umd-carousel-cards-button`;
 
 const backwardsButtonStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${CAROUSEL_CARDS_BUTTON_BACKWARDS} {
       left: 0;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CAROUSEL_CARDS_BUTTON_BACKWARDS} {
       left: -52px;
     }
@@ -31,13 +31,13 @@ const backwardsButtonStyles = `
 `;
 
 const forwardButtonStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${CAROUSEL_CARDS_BUTTON_FORWARDS} {
       left: 49px;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CAROUSEL_CARDS_BUTTON_FORWARDS} {
       right: -52px;
     }
@@ -58,13 +58,13 @@ export const ButtonStyles = `
     display: none;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${CAROUSEL_CARDS_BUTTON} {
       bottom: 0;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CAROUSEL_CARDS_BUTTON} {
       top: 50%;
       transform: translateY(-50%);

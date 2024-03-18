@@ -4,7 +4,7 @@ import { BREAKPOINTS, ELEMENTS, SLOTS } from '../globals';
 
 const { Colors, Spacing } = Tokens;
 
-const { tablet, desktop, large } = BREAKPOINTS;
+const { TABLET, DESKTOP, LARGE } = BREAKPOINTS;
 const { DATE_SLOT_NAME } = SLOTS;
 const { DATES_CONTAINER_CLASS, DATES_WRAPPER_CONTAINER_CLASS, ARROW_CLASS } =
   ELEMENTS;
@@ -20,9 +20,9 @@ export const ShowNumberOfDates = ({
 
   let count = 1;
 
-  if (container.offsetWidth > tablet) count = 2;
-  if (container.offsetWidth > desktop) count = 3;
-  if (container.offsetWidth > large) count = 4;
+  if (container.offsetWidth > TABLET) count = 2;
+  if (container.offsetWidth > DESKTOP) count = 3;
+  if (container.offsetWidth > LARGE) count = 4;
 
   return count;
 };
@@ -126,7 +126,7 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
       const count = ShowNumberOfDates({ shadowRoot });
       const dateElementSize = sliderWrapper.offsetWidth / count;
       const elementWidth = element.offsetWidth;
-      const isMobile = elementWidth < tablet;
+      const isMobile = elementWidth < TABLET;
 
       slider.style.width = `${dateElements.length * dateElementSize}px`;
 

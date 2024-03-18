@@ -6,7 +6,7 @@ const { Spacing } = Tokens;
 const { CARDS } = SLOTS;
 const { CAROUSEL_CONTAINER_WRAPPER } = ELEMENTS;
 const { TABLET_COUNT, MOBILE_COUNT } = VARIABLES;
-const { cardBreak } = BREAKPOINTS;
+const { CARD_BREAK } = BREAKPOINTS;
 
 const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
@@ -15,7 +15,7 @@ export const IsTabletView = ({ shadowRoot }: { shadowRoot: ShadowRoot }) => {
     `.${CAROUSEL_CONTAINER_WRAPPER}`,
   ) as HTMLElement;
 
-  return wrapper.offsetWidth > cardBreak;
+  return wrapper.offsetWidth > CARD_BREAK;
 };
 
 export const GetCarouselWrapperSize = ({

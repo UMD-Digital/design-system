@@ -1,7 +1,7 @@
 export const BREAKPOINTS = {
-  large: 1200,
-  medium: 800,
-  small: 600,
+  LARGE: 1200,
+  MEDIUM: 800,
+  SMALL: 600,
 };
 export const ELEMENTS = {
   PATHWAY_CONTAINER: 'umd-pathway-container',
@@ -25,7 +25,7 @@ export const VARIABLES = {
   ATTRIBUTE_HERO: 'data-hero',
 };
 
-export const NAMING = {
+export const REFERENCES = {
   IS_WITH_IMAGE: `[${VARIABLES.ATTRIBUTE_IMAGE}]`,
   IS_WITH_IMAGE_RIGHT: `[${VARIABLES.ATTRIBUTE_IMAGE_POSITION}="right"]`,
   IS_WITH_IMAGE_LEFT: `[${VARIABLES.ATTRIBUTE_IMAGE_POSITION}="left"]`,

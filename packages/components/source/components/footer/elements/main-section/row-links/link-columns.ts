@@ -229,7 +229,8 @@ export const LinkColumnStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 

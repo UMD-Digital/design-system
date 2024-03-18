@@ -31,7 +31,7 @@ const VariationVisualStyles = `
     display: block;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 2px;
     width: 500vw;
     height: 100px;
     background: linear-gradient( 180deg, rgba(255, 255, 255, 1) 0%, #e4edf9 100% );

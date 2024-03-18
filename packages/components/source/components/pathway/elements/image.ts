@@ -1,19 +1,20 @@
 import { SlotDefaultStyling } from 'helpers/ui';
-import { SLOTS, BREAKPOINTS, ELEMENTS, NAMING } from '../globals';
-import { ELEMENT_TYPE } from '../index';
+import { SLOTS, BREAKPOINTS, ELEMENTS, NAMING, VARIABLES } from '../globals';
+import { UMDPathwayElement } from '../index';
 
 const { IMAGE } = SLOTS;
 const { medium, large } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
-const { WITHOUT_IMAGE_SCALED, WITH_IMAGE_RIGHT, WITH_HERO } = NAMING;
+const { ELEMENT_NAME } = VARIABLES;
+const { IS_WITHOUT_IMAGE_SCALED, IS_WITH_IMAGE_RIGHT, IS_WITH_HERO } = NAMING;
 
 const PATHWAY_IMAGE_CONTAINER = 'umd-pathway-image-column-container';
 const PATHWAY_IMAGE_CONTAINER_WRAPPER = 'umd-pathway-image-wrapper';
 
 // prettier-ignore
 const PositionStyles = `
-  @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}${WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER} {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER} {
       order: 2;
     }
   }
@@ -21,7 +22,7 @@ const PositionStyles = `
 
 // prettier-ignore
 const SizeStyles = `
-  .${PATHWAY_CONTAINER}${WITHOUT_IMAGE_SCALED} img {
+  .${PATHWAY_CONTAINER}${IS_WITHOUT_IMAGE_SCALED} img {
     object-fit: contain;
     height: inherit;
     min-height: inherit;
@@ -30,8 +31,8 @@ const SizeStyles = `
 
 // prettier-ignore
 const HeroStyles = `
-  @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}${WITH_HERO} .${PATHWAY_IMAGE_CONTAINER} {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${IS_WITH_HERO} .${PATHWAY_IMAGE_CONTAINER} {
       width: 50%;
       position: absolute;
       top: 0;
@@ -40,15 +41,15 @@ const HeroStyles = `
     }
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}${WITH_HERO}${WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER} {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${IS_WITH_HERO}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER} {
       left: inherit;
       right: 0;
     }
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}${WITH_HERO} .${PATHWAY_IMAGE_CONTAINER} img {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${IS_WITH_HERO} .${PATHWAY_IMAGE_CONTAINER} img {
       min-height: inherit;
     }
   }
@@ -69,7 +70,7 @@ export const STYLES_PATHWAY_IMAGE_COLUMN = `
     object-position: center;
   }
 
-  @container umd-pathway (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${PATHWAY_IMAGE_CONTAINER} img {
       min-height: 656px;
     }
@@ -80,7 +81,11 @@ export const STYLES_PATHWAY_IMAGE_COLUMN = `
   ${HeroStyles}
 `
 
-export const CreateImageColumn = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateImageColumn = ({
+  element,
+}: {
+  element: UMDPathwayElement;
+}) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const imageSlot = SlotDefaultStyling({

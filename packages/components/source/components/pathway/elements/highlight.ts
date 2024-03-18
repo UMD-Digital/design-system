@@ -1,15 +1,16 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { BREAKPOINTS, ELEMENTS, NAMING, SLOTS } from '../globals';
-import { ELEMENT_TYPE } from '../index';
+import { BREAKPOINTS, ELEMENTS, NAMING, SLOTS, VARIABLES } from '../globals';
+import { UMDPathwayElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 
 const { HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } = SLOTS;
 const { medium, large } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
-const { WITH_THEME } = NAMING;
+const { ELEMENT_NAME } = VARIABLES;
+const { IS_WITH_THEME } = NAMING;
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
@@ -19,11 +20,11 @@ const PATHWAY_HIGHLIGHT_CONTAINER_ATTRIBUTION =
 
 // prettier-ignore
 const ThemeStyles = `
-  .${PATHWAY_CONTAINER}${WITH_THEME} .${PATHWAY_HIGHLIGHT_CONTAINER} {
+  .${PATHWAY_CONTAINER}${IS_WITH_THEME} .${PATHWAY_HIGHLIGHT_CONTAINER} {
     background-color: ${Colors.black};
   }
 
-  .${PATHWAY_CONTAINER}${WITH_THEME} .${PATHWAY_HIGHLIGHT_CONTAINER} * {
+  .${PATHWAY_CONTAINER}${IS_WITH_THEME} .${PATHWAY_HIGHLIGHT_CONTAINER} * {
     color: ${Colors.white};
   }
 `
@@ -36,19 +37,19 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     position: relative;
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER} {
       padding: ${Spacing['4xl']} ${Spacing['2xl']};
     }
   }
 
-  @container umd-pathway (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER} {
       padding: ${Spacing['8xl']} ${Spacing['xl']};
     }
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER} {
       padding-left: ${Spacing['xl']};
       position: relative;
@@ -61,7 +62,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     background-color: ${Colors.red};
   }
 
-  @container umd-pathway (max-width: ${medium - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
       top: ${Spacing['2xl']};
       width: ${Spacing['5xl']};
@@ -69,7 +70,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
     }
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
     .${PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER}:before {
       left: 0;
       width: 2px;
@@ -105,7 +106,7 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
 export const CreateHighlightColumn = ({
   element,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDPathwayElement;
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');

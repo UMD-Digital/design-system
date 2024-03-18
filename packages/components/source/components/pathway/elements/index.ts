@@ -7,13 +7,14 @@ import {
   STYLES_PATHWAY_HIGHLIGHT_COLUMN,
 } from './highlight';
 import { ELEMENTS, BREAKPOINTS, VARIABLES, NAMING } from '../globals';
-import { ELEMENT_TYPE } from '../index';
+import { UMDPathwayElement } from '../index';
 
 const { Lock } = Layout;
 
 const { medium } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
 const {
+  ELEMENT_NAME,
   ATTRIBUTE_IMAGE,
   ATTRIBUTE_IMAGE_POSITION,
   ATTRIBUTE_IMAGE_SCALED,
@@ -21,19 +22,20 @@ const {
   ATTRIBUTE_THEME,
   ATTRIBUTE_HERO,
 } = VARIABLES;
-const { WITH_IMAGE, WITH_HERO, WITH_IMAGE_LEFT, WITH_IMAGE_RIGHT } = NAMING;
+const { IS_WITH_IMAGE, IS_WITH_HERO, IS_WITH_IMAGE_LEFT, IS_WITH_IMAGE_RIGHT } =
+  NAMING;
 
 const PATHWAY_CONTAINER_WRAPPER = 'umd-pathway-container-wrapper';
 const PATHWAY_CONTAINER_LOCK = 'umd-pathway-container-lock';
 
 // prettier-ignore
 const ImageVariation = `
-  .${PATHWAY_CONTAINER}${WITH_IMAGE} .${PATHWAY_CONTAINER_LOCK} {
+  .${PATHWAY_CONTAINER}${IS_WITH_IMAGE} .${PATHWAY_CONTAINER_LOCK} {
     align-items: initial;
   }
 
-  @container umd-pathway (max-width: ${medium - 1}px) {
-    .${PATHWAY_CONTAINER}${WITH_IMAGE} .${PATHWAY_CONTAINER_LOCK} {
+  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
+    .${PATHWAY_CONTAINER}${IS_WITH_IMAGE} .${PATHWAY_CONTAINER_LOCK} {
       padding: 0;
     }
   }
@@ -46,21 +48,21 @@ const LockStyles = `
     },
   })}
   
-  @container umd-pathway (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
     .${PATHWAY_CONTAINER_LOCK} {
       display: flex;
       align-items: center;
     }
   }
   
-  @container umd-pathway (min-width: ${medium}px) {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
     .${PATHWAY_CONTAINER_LOCK}:has(> :nth-of-type(2)) > * {
       width: 50%;
     }
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}${WITH_HERO} .${PATHWAY_CONTAINER_LOCK} {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${IS_WITH_HERO} .${PATHWAY_CONTAINER_LOCK} {
       min-height: 832px;
     }
   }
@@ -69,18 +71,18 @@ const LockStyles = `
 // prettier-ignore
 const STYLES_CONTAINER = `
   .${PATHWAY_CONTAINER} {
-    container: umd-pathway / inline-size;
+    container: ${ELEMENT_NAME} / inline-size;
     position: relative;
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}${WITH_HERO}${WITH_IMAGE_LEFT} .${PATHWAY_CONTAINER_WRAPPER} {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${IS_WITH_HERO}${IS_WITH_IMAGE_LEFT} .${PATHWAY_CONTAINER_WRAPPER} {
       padding-left: 50%;
     }
   }
 
-  @container umd-pathway (min-width: ${medium}px) {
-    .${PATHWAY_CONTAINER}${WITH_HERO}${WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_WRAPPER} {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) {
+    .${PATHWAY_CONTAINER}${IS_WITH_HERO}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_WRAPPER} {
       padding-right: 50%;
     }
   }
@@ -101,7 +103,11 @@ export const ComponentStyles = `
   ${STYLES_PATHWAY_IMAGE_COLUMN}
 `;
 
-export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateShadowDom = ({
+  element,
+}: {
+  element: UMDPathwayElement;
+}) => {
   const imagePosition = element._isImageFirst ? 'left' : 'right';
   const isTypeHero = element._isHeroType;
   const isImageDefaultSize = !element._isImageScaled;

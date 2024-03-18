@@ -6,9 +6,10 @@ declare global {
 
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
+import { VARIABLES } from './globals';
 
-export const ELEMENT_NAME = 'umd-element-pathway';
-export type ELEMENT_TYPE = UMDPathwayElement;
+const { ELEMENT_NAME } = VARIABLES;
+
 export class UMDPathwayElement extends HTMLElement {
   _shadow: ShadowRoot;
   _isImageFirst: boolean;

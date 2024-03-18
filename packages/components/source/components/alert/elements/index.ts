@@ -14,38 +14,43 @@ const { Colors, Spacing } = Tokens;
 const { SMALL } = BREAKPOINTS;
 const { ICON_CLASS } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
-const { ALERT_UI, NOTIFICATION_UI, EMEMERGENCY_UI, WITH_ICON, WITHOUT_ICON } =
-  REFERENCES;
+const {
+  IS_TYPE_ALERT,
+  IS_TYPE_NOTIFICATION,
+  IS_TYPE_EMEMERGENCY,
+  IS_WITH_ICON,
+  IS_WITHOUT_ICON,
+} = REFERENCES;
 
 const CONTAINER_CLASS = 'umd-element-alert-container';
 const CLOSE_BUTTON_CLASS = 'umd-element-alert-close-button';
 
 const AlertStyles = `
-  .${CONTAINER_CLASS}${ALERT_UI} {
+  .${CONTAINER_CLASS}${IS_TYPE_ALERT} {
     border: solid 4px ${Colors.gold};
   }
 
-  .${CONTAINER_CLASS}${ALERT_UI} .${ICON_CLASS} svg circle {
+  .${CONTAINER_CLASS}${IS_TYPE_ALERT} .${ICON_CLASS} svg circle {
     fill: ${Colors.gold};
   }
 `;
 
 const NotificationStyles = `
-  .${CONTAINER_CLASS}${NOTIFICATION_UI} {
+  .${CONTAINER_CLASS}${IS_TYPE_NOTIFICATION} {
     border: solid 4px ${Colors.blue};
   }
 
-  .${CONTAINER_CLASS}${NOTIFICATION_UI} .${ICON_CLASS} svg circle {
+  .${CONTAINER_CLASS}${IS_TYPE_NOTIFICATION} .${ICON_CLASS} svg circle {
     fill: ${Colors.blue};
   }
 `;
 
 const EmergencyStyles = `
-  .${CONTAINER_CLASS}${EMEMERGENCY_UI} {
+  .${CONTAINER_CLASS}${IS_TYPE_EMEMERGENCY} {
     border: solid 4px ${Colors.red};
   }
 
-  .${CONTAINER_CLASS}${EMEMERGENCY_UI} .${ICON_CLASS} svg circle {
+  .${CONTAINER_CLASS}${IS_TYPE_EMEMERGENCY} .${ICON_CLASS} svg circle {
     fill: ${Colors.red};
   }
 `;
@@ -66,11 +71,11 @@ const ButtonStyles = `
 `;
 
 const IconStyles = `
-  .${CONTAINER_CLASS}${WITH_ICON} .${ICON_CLASS} {
+  .${CONTAINER_CLASS}${IS_WITH_ICON} .${ICON_CLASS} {
     display: block;
   }
 
-  .${CONTAINER_CLASS}${WITHOUT_ICON} .${ICON_CLASS} {
+  .${CONTAINER_CLASS}${IS_WITHOUT_ICON} .${ICON_CLASS} {
     display: none;
   }
 

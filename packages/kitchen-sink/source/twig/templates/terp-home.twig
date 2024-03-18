@@ -1,1 +1,22 @@
 {% extends './layouts/terp.twig' %}
+
+{% block page %}
+  <umd-element-hero type="default">
+    <img slot="image" src="/terp/hero.jpg" alt="Image Description" />
+
+    <p slot="headline">
+      An End to the Bleeding
+    </p>
+    <p slot="text">
+      The mayor of Knoxville, Tenn., picked up a UMD researcher’s book on
+      preventing gun violence. The resulting partnership could ba a model for
+      how cities can create safer streets.
+    </p>
+
+    <div slot="actions">
+      <umd-element-call-to-action type="primary">
+        <a href="https://google.com" aria-label="link to google">Read More</a>
+      </umd-element-call-to-action>
+    </div>
+  </umd-element-hero>
+{% endblock %}

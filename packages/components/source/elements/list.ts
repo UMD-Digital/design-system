@@ -8,7 +8,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { SansLarger } = Typography;
+const { SansLarger, SansMin } = Typography;
 
 const BREAKPOINTS = {
   MOBILE: 650,
@@ -18,30 +18,50 @@ const BREAKPOINTS = {
 
 export const VARIABLES = {
   ATTR_IMAGE: 'data-image',
+  ATTR_DATA_BLOCK: 'data-date-block',
 };
 
 const ELEMENT_NAME = 'umd-list';
 
 const LIST_CONTAINER = 'umd-list-container';
 const LIST_CONTAINER_WRAPPER = 'umd-list-container-wrapper';
-const LIST_DATE_CONTAINER = 'umd-list-date-container';
+const LIST_DATE_BLOCK_CONTAINER = 'umd-list-date-container';
 const LIST_TEXT_CONTAINER = 'umd-list-text-container';
 const LIST_IMAGE_CONTAINER = 'umd-list-image-container';
 const LIST_HEADLINE_WRAPPER = 'umd-list-headline-wrapper';
 const LIST_DETAILS_WRAPPER = 'umd-list-date-wrapper';
 const LIST_TEXT_WRAPPER = 'umd-list-text-wrapper';
+const LIST_DATE_WRAPPER = 'umd-list-date-wrapper';
+
+const IS_WITH_IMAGE = `[${VARIABLES.ATTR_IMAGE}]`;
+const IS_WITH_DATE_BLOCK = `[${VARIABLES.ATTR_DATA_BLOCK}]`;
 
 // prettier-ignore
 const VariationImageStyles = `
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${LIST_CONTAINER}[${VARIABLES.ATTR_IMAGE}] {
+    .${LIST_CONTAINER}${IS_WITH_IMAGE} {
 
     }
   }
   
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${LIST_CONTAINER}[${VARIABLES.ATTR_IMAGE}] .${LIST_TEXT_CONTAINER} {
+    .${LIST_CONTAINER}${IS_WITH_IMAGE} .${LIST_TEXT_CONTAINER} {
  
+    }
+  }
+`;
+
+// prettier-ignore
+const VariationDateBlockStyles = `
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${LIST_CONTAINER}${IS_WITH_DATE_BLOCK} .${LIST_CONTAINER_WRAPPER} {
+      padding-left: ${Spacing.md};
+    }
+  }
+  
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${LIST_CONTAINER}${IS_WITH_DATE_BLOCK} .${LIST_TEXT_CONTAINER} {
+      padding: 0 ${Spacing.md};
     }
   }
 `;
@@ -56,7 +76,6 @@ const WrapperStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
     .${LIST_CONTAINER_WRAPPER} {
-      padding-left: ${Spacing.md};
       display: flex;
       justify-content: space-between;
     }
@@ -65,12 +84,12 @@ const WrapperStyles = `
 
 // prettier-ignore
 const ColumnDateStyles = `
-  .${LIST_DATE_CONTAINER} {
+  .${LIST_DATE_BLOCK_CONTAINER} {
     width: ${Spacing['6xl']};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${LIST_DATE_CONTAINER} {
+    .${LIST_DATE_BLOCK_CONTAINER} {
       display: none;
     }
   }
@@ -85,7 +104,7 @@ const ColumnTextStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
     .${LIST_TEXT_CONTAINER} {
-      padding: 0 ${Spacing.md};
+      padding-right: ${Spacing.md};
       order: 2;
     }
   }
@@ -180,6 +199,11 @@ const DetailsStyles = `
 
 // prettier-ignore
 const TextStyles = `
+  * + .${LIST_TEXT_WRAPPER} {
+    margin-top: ${Spacing.min};
+    display: block;
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${LIST_TEXT_WRAPPER} *`]: Typography.SansSmall,
@@ -199,6 +223,34 @@ const TextStyles = `
 `;
 
 // prettier-ignore
+const DateStyles = `
+  .${LIST_DATE_WRAPPER} {
+    display: block;
+  }
+
+  * + .${LIST_DATE_WRAPPER} {
+    margin-top: ${Spacing.min};
+    display: block;
+  }
+
+  .${LIST_DATE_WRAPPER} * {
+    color: ${Colors.gray.mediumAA};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${LIST_DATE_WRAPPER}`]: SansMin,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${LIST_DATE_WRAPPER} *`]: SansMin,
+    },
+  })}
+`;
+
+// prettier-ignore
 export const STYLES_LIST = `
   .${LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
@@ -215,7 +267,9 @@ export const STYLES_LIST = `
   ${HeadlineStyles}
   ${DetailsStyles}
   ${TextStyles}
+  ${DateStyles}
   ${VariationImageStyles}
+  ${VariationDateBlockStyles}
 `;
 
 const CreateImage = ({ image }: { image: HTMLImageElement }) => {
@@ -232,27 +286,31 @@ export const CreateListElement = ({
   headline,
   text,
   details,
+  dateBlock,
   date,
 }: {
   image?: HTMLImageElement | null;
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   details?: HTMLElement | null;
+  dateBlock?: HTMLElement | null;
   date?: HTMLElement | null;
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const textContainer = document.createElement('div');
-  const dateContainer = document.createElement('div');
 
   container.classList.add(LIST_CONTAINER);
   wrapper.classList.add(LIST_CONTAINER_WRAPPER);
   textContainer.classList.add(LIST_TEXT_CONTAINER);
 
-  if (date) {
-    dateContainer.classList.add(LIST_DATE_CONTAINER);
-    dateContainer.appendChild(date);
-    wrapper.appendChild(dateContainer);
+  if (dateBlock) {
+    const dateBlockContainer = document.createElement('div');
+
+    dateBlockContainer.classList.add(LIST_DATE_BLOCK_CONTAINER);
+    dateBlockContainer.appendChild(dateBlock);
+    container.setAttribute(VARIABLES.ATTR_DATA_BLOCK, '');
+    wrapper.appendChild(dateBlockContainer);
   }
 
   if (image) {
@@ -275,6 +333,11 @@ export const CreateListElement = ({
   if (text) {
     text.classList.add(LIST_TEXT_WRAPPER);
     textContainer.appendChild(text);
+  }
+
+  if (date) {
+    date.classList.add(LIST_DATE_WRAPPER);
+    textContainer.appendChild(date);
   }
 
   wrapper.appendChild(textContainer);

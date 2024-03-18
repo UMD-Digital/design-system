@@ -1,4 +1,5 @@
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
+import { CreateListElement, STYLES_LIST } from 'elements/list';
 
 type ImageType = {
   url: string;
@@ -21,6 +22,7 @@ export type ArticleType = {
 
 export const STYLES_NEWS_FEED = `
   ${STYLES_CARD}
+  ${STYLES_LIST}
 `;
 
 const CreateImage = ({ images }: { images: ImageType }) => {
@@ -96,7 +98,7 @@ export const CreateNewsCard = ({ entries }: { entries: ArticleType[] }) =>
 
 export const CreateNewsList = ({ entries }: { entries: ArticleType[] }) =>
   entries.map((entry) =>
-    CreateCardElement({
+    CreateListElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),

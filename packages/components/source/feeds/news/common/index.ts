@@ -68,6 +68,7 @@ const MakeApiVariables = ({
   }
 
   return {
+    container: GetContainer({ element }),
     limit,
     related,
     offset,

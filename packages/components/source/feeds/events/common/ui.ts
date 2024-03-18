@@ -100,6 +100,6 @@ export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
       details: CreateDateDetailsElement({ ...entry, isLayoutVeritcal: false }),
-      date: CreateDateBlockElement(entry),
+      dateBlock: CreateDateBlockElement(entry),
     }),
   );

@@ -1,0 +1,60 @@
+{% extends '../_layout.twig' %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Feed News List
+      </h1>
+
+      <section>
+        <h2 class="content-heading type-hr">
+          <span>No Results</span>
+        </h2>
+
+        <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+          row-count="2"
+          show-count="4"
+          categories="104"></umd-feed-news-list>
+      </section>
+
+      <section>
+        <h2 class="content-heading type-hr">
+          <span class="type">All Events</span>
+          <span class="type-detail">Limit 5</span>
+        </h2>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"></umd-feed-news-list>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="content-heading type-hr">
+          <span class="type">Lazy Load with Do Good Category</span>
+          <span class="type-detail">Limit 5</span>
+        </h2>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+            categories="10461"
+            lazyload="true"></umd-feed-news-list>
+        </div>
+      </section>
+
+      <section style="padding-bottom: 20vh">
+        <h2 class="content-heading type-hr">
+          <span class="type">Lazy Load with Do Good Category</span>
+          <span class="type-detail">Limit 10</span>
+        </h2>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+            categories="10461"
+            lazyload="true"
+            row-count="10"></umd-feed-news-list>
+        </div>
+      </section>
+    </div>
+  </section>
+{% endblock %}

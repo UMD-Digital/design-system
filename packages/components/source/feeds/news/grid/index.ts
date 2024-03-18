@@ -81,11 +81,8 @@ export class UMDFeedNewsGrid extends HTMLElement {
       if (showCount === '4') element._showCount = 4;
     }
 
-    const container = CreateShadowDom({ element });
-    if (container) {
-      this._shadow.appendChild(container);
-      CreateFeed({ element });
-    }
+    this._shadow.appendChild(CreateShadowDom({ element }));
+    CreateFeed({ element });
   }
 }
 

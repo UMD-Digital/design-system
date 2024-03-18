@@ -9,7 +9,6 @@ import { ComponentStyles, CreateShadowDom, CreateFeed } from '../common';
 
 const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';
-const ATTRIBUTE_SHOW = 'show-count';
 const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
 
@@ -17,7 +16,6 @@ export const ELEMENT_NAME = 'umd-feed-news-list';
 export class UMDFeedNewsList extends HTMLElement {
   _shadow: ShadowRoot;
   _token: string | null;
-  _showCount: number;
   _showRows: number;
   _lazyLoad: boolean;
   _offset: number;
@@ -28,8 +26,7 @@ export class UMDFeedNewsList extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._token = null;
-    this._showCount = 3;
-    this._showRows = 1;
+    this._showRows = 5;
     this._offset = 0;
     this._lazyLoad = false;
     this._totalEntries = null;
@@ -46,7 +43,6 @@ export class UMDFeedNewsList extends HTMLElement {
       ATTRIBUTE_TOKEN,
       ATTRIBUTE_ROWS,
       ATTRIBUTE_LAZYLOAD,
-      ATTRIBUTE_SHOW,
       ATTRIBUTE_CATEGORIES,
     ];
   }
@@ -54,11 +50,11 @@ export class UMDFeedNewsList extends HTMLElement {
   async connectedCallback() {
     const element = this;
     const rowCount = element.getAttribute(ATTRIBUTE_ROWS);
-    const showCount = element.getAttribute(ATTRIBUTE_SHOW);
     const shouldLazyLoad = element.getAttribute(ATTRIBUTE_LAZYLOAD);
     const categories = element.getAttribute(ATTRIBUTE_CATEGORIES);
 
     element._token = element.getAttribute(ATTRIBUTE_TOKEN) || null;
+    if (rowCount) element._showRows = parseInt(rowCount);
 
     if (categories) {
       this._categories = categories.split(',');
@@ -69,23 +65,8 @@ export class UMDFeedNewsList extends HTMLElement {
       if (shouldLazyLoad === 'false') element._lazyLoad = false;
     }
 
-    if (rowCount) {
-      if (rowCount === '1') element._showRows = 1;
-      if (rowCount === '2') element._showRows = 2;
-      if (rowCount === '3') element._showRows = 3;
-    }
-
-    if (showCount) {
-      if (showCount === '2') element._showCount = 2;
-      if (showCount === '3') element._showCount = 3;
-      if (showCount === '4') element._showCount = 4;
-    }
-
-    const container = CreateShadowDom({ element });
-    if (container) {
-      this._shadow.appendChild(container);
-      CreateFeed({ element });
-    }
+    this._shadow.appendChild(CreateShadowDom({ element }));
+    CreateFeed({ element });
   }
 }
 

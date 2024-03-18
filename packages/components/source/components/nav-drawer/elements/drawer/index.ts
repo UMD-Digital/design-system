@@ -1,7 +1,7 @@
-import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
-import { UMDNavDrawer } from 'components/nav-drawer';
 import { CreateDrawerButton, drawerButtonStyles } from './button-close';
 import { CreateSlider, drawerSliderStyles } from '../slider';
+import { ELEMENTS, VARIABLES } from '../../globals';
+import { UMDNavDrawer } from '../../index';
 
 const { ANIMATION_TIME } = VARIABLES;
 const { NAV_DRAWER_BODY_OVERLAY, NAV_DRAWER_CONTAINER } = ELEMENTS;

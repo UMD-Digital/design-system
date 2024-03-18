@@ -1,9 +1,9 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { UMDNavDrawer } from 'components/nav-drawer';
-import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { CreatePrimarySlide, primarySliderStyles } from './primary-slide';
 import { CreateChildSlide, childSliderStyles } from './child-slides';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { ELEMENTS, VARIABLES } from '../../globals';
+import { UMDNavDrawer } from '../../index';
 
 const { Colors, Spacing } = Tokens;
 

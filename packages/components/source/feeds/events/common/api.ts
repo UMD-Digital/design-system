@@ -1,5 +1,6 @@
 import { FetchGraphQL } from 'helpers/xhr';
 import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from 'helpers/queries';
+import { DisplayNoResults } from 'feeds/common/ui';
 
 type TypeFetchVariables = {
   startDate?: string;
@@ -10,6 +11,7 @@ type TypeFetchVariables = {
 
 export type TypeAPIFeedVariables = TypeFetchVariables & {
   token: string | null;
+  container: HTMLDivElement;
 };
 
 type TypeFetchObject = TypeAPIFeedVariables & {
@@ -17,6 +19,11 @@ type TypeFetchObject = TypeAPIFeedVariables & {
 };
 
 const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
+const NoResultsContent = {
+  message: 'Error fetching events. Please visit the main site.',
+  linkUrl: 'https://calendar.umd.edu',
+  linkText: 'View All Events',
+};
 
 const FetchFeed = async ({
   limit,
@@ -70,7 +77,12 @@ export const FetchFeedEntries = async ({
 }: {
   variables: TypeAPIFeedVariables;
 }) => {
+  const { container } = variables;
   const feedData = await FetchFeed({ ...variables, query: EVENTS_QUERY });
+  const graceFail = ({ message }: { message: string }) => {
+    DisplayNoResults({ container, NoResultsContent });
+    throw new Error(message);
+  };
 
   if (
     !feedData ||
@@ -78,12 +90,14 @@ export const FetchFeedEntries = async ({
     !feedData.data.entries ||
     feedData.message
   ) {
-    if (!feedData) throw new Error('Feed not found');
-    if (!feedData.data) throw new Error('Feed data not found');
-    if (!feedData.data.entries) throw new Error('Feed entries not found');
-    if (!feedData.data.entries.events) throw new Error('Feed events not found');
+    if (!feedData) graceFail({ message: 'Feed not found' });
+    if (!feedData.data) graceFail({ message: 'Feed data not found' });
+    if (!feedData.data.entries)
+      graceFail({ message: 'Feed entries not found' });
+    if (!feedData.data.entries.events)
+      graceFail({ message: 'Feed events not found' });
     if (!feedData.message)
-      throw new Error(`Feed data errors: ${feedData.message}`);
+      graceFail({ message: `Feed data errors: ${feedData.message}` });
   }
 
   return feedData.data.entries.events;

@@ -73,6 +73,7 @@ const MakeApiVariables = ({
   }
 
   return {
+    container: GetContainer({ element }),
     startDate,
     limit,
     related,

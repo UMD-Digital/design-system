@@ -1,42 +1,43 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
-import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
-import { CallToActionType } from '../index';
 import {
   STYLES_CALL_TO_ACTION_ELEMENT,
   CreateCallToActionElement,
 } from 'elements/call-to-action';
+import { ELEMENTS, SLOTS, VARIABLES, REFERENCES } from '../globals';
+import { UMDCallToActionElement } from '../index';
 
 const { Colors, FontSize, Spacing } = Tokens;
 
 const { PLAIN_TEXT } = SLOTS;
-const { ATTR_PLAIN_TEXT } = VARIABLES;
 const { CTA_CONTAINER } = ELEMENTS;
+const { ATTRIBUTE_PLAIN_TEXT, ATTRIBUTE_TYPE } = VARIABLES;
+const { IS_PRIMARY, IS_SECONDARY, IS_PLAIN_TEXT } = REFERENCES;
 
 const CTA_PLAIN_TEXT_SLOT = 'umd-call-to-action-plain-text-slot';
 
 // prettier-ignore
 const OverwritePrimaryLayoutStyles = `
-  [${ATTR_PLAIN_TEXT}][data-type="primary"]  {
+  ${IS_PRIMARY}${IS_PLAIN_TEXT} {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  [data-type="primary"] .${CTA_PLAIN_TEXT_SLOT} {
+  ${IS_PRIMARY} .${CTA_PLAIN_TEXT_SLOT} {
     margin-top: ${Spacing.min};
   }
 `
 
 // prettier-ignore
 const OverwriteSecondaryLayoutStyles = `
-  [${ATTR_PLAIN_TEXT}][data-type="secondary"]  {
+  ${IS_SECONDARY}${IS_PLAIN_TEXT} {
     display: flex;
     flex-direction: column;
   }
 
-  [data-type="secondary"] .${CTA_PLAIN_TEXT_SLOT} {
+  ${IS_SECONDARY} .${CTA_PLAIN_TEXT_SLOT} {
     padding-left: 20px;
     margin-top: ${Spacing.min};
   }
@@ -71,7 +72,7 @@ export const ComponentStyles = `
   ${OverwriteSecondaryLayoutStyles}
 `;
 
-const CreateCtaElement = ({ element }: { element: CallToActionType }) => {
+const CreateCtaElement = ({ element }: { element: UMDCallToActionElement }) => {
   const type = element._type;
   const size = element._size;
   const theme = element._theme;
@@ -93,14 +94,18 @@ const CreateCtaElement = ({ element }: { element: CallToActionType }) => {
   return CreateCallToActionElement({ type });
 };
 
-const CreatePlainText = ({ element }: { element: CallToActionType }) => {
+const CreatePlainText = ({ element }: { element: UMDCallToActionElement }) => {
   const linkElements = Array.from(element.querySelectorAll(`a`));
   return linkElements.filter(
-    (link) => link.getAttribute('slot') === 'plain-text',
+    (link) => link.getAttribute('slot') === PLAIN_TEXT,
   );
 };
 
-export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
+export const CreateShadowDom = ({
+  element,
+}: {
+  element: UMDCallToActionElement;
+}) => {
   const type = element._type;
   const container = document.createElement('div');
   const ctaElement = CreateCtaElement({ element });
@@ -109,12 +114,12 @@ export const CreateShadowDom = ({ element }: { element: CallToActionType }) => {
 
   container.classList.add(CTA_CONTAINER);
   container.appendChild(ctaElement);
-  container.setAttribute('data-type', type);
+  container.setAttribute(ATTRIBUTE_TYPE, type);
 
   if (hasPlainText) {
     const plainTextSlot = MakeSlot({ type: PLAIN_TEXT });
     plainTextSlot.classList.add(CTA_PLAIN_TEXT_SLOT);
-    container.setAttribute(ATTR_PLAIN_TEXT, '');
+    container.setAttribute(ATTRIBUTE_PLAIN_TEXT, 'true');
     container.appendChild(plainTextSlot);
   }
 

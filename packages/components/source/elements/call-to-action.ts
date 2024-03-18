@@ -16,13 +16,16 @@ import {
 const { Colors, FontSize, Spacing, Queries } = Tokens;
 
 const MAX_WIDTH = 380;
-const ATTR_SIZE = 'data-size';
-const ATTR_THEME = 'data-theme';
+const ATTR_SIZE = 'size';
+const ATTR_THEME = 'theme';
 const SIZE_LARGE = 'large';
 const THEME_DARK = 'dark';
 const TYPE_PRIMARY = 'primary';
 const TYPE_SECONDARY = 'secondary';
 const TYPE_OUTLINE = 'outline';
+
+const IS_DARK_THEME = `[${ATTR_THEME}="${THEME_DARK}"]`;
+const IS_LARGE_SIZE = `[${ATTR_SIZE}="${SIZE_LARGE}"]`;
 
 export const CLASS_BASE_CTA = 'umd-call-to-action';
 const CLASS_CTA_ANIMATION_WRAPPER = 'umd-call-to-action-animation-wrapper';
@@ -31,20 +34,20 @@ const CLASS_CTA_TEXT_WRAPPER = 'umd-call-to-action-text-wrapper';
 
 // prettier-ignore
 const ThemeStyles = `
-  .${CLASS_STYLES_REF_CTA_OUTLINE}[${ATTR_THEME}="${THEME_DARK}"] {
+  .${CLASS_STYLES_REF_CTA_OUTLINE} ${IS_DARK_THEME} {
     background-color: transparent;
     border: 1px solid ${Colors.white};
     color: ${Colors.white};
   }
 
-  .${CLASS_STYLES_REF_CTA_OUTLINE}[${ATTR_THEME}="${THEME_DARK}"]:hover,
-  .${CLASS_STYLES_REF_CTA_OUTLINE}[${ATTR_THEME}="${THEME_DARK}"]:focus {
+  .${CLASS_STYLES_REF_CTA_OUTLINE}${IS_DARK_THEME}:hover,
+  .${CLASS_STYLES_REF_CTA_OUTLINE}${IS_DARK_THEME}:focus {
     background-color: ${Colors.white};
     border: 1px solid ${Colors.white};
     color: ${Colors.black};
   }
 
-  .${CLASS_STYLES_REF_CTA_SECONDARY}[${ATTR_THEME}="${THEME_DARK}"] {
+  .${CLASS_STYLES_REF_CTA_SECONDARY}${IS_DARK_THEME} {
     color: ${Colors.white};
   }
 `
@@ -52,14 +55,14 @@ const ThemeStyles = `
 // prettier-ignore
 const SizeStyles = `
   @media (${Queries.tablet.min}) {
-    [${ATTR_SIZE}="${SIZE_LARGE}"] {
+    ${IS_LARGE_SIZE} {
       font-size: ${FontSize.lg};
       padding: ${Spacing.sm} ${Spacing.lg};
     }
   }
   
   @media (${Queries.tablet.min}) {
-    [${ATTR_SIZE}="${SIZE_LARGE}"] svg {
+    ${IS_LARGE_SIZE} svg {
       height: 17px;
       width: 17px;
       margin-right: 5px;
@@ -165,7 +168,7 @@ const CreateLinkIcon = ({
     return;
   }
 
-  if (type === 'secondary') {
+  if (type === TYPE_SECONDARY) {
     wrapper.innerHTML = FEARLESS_ICON;
     wrapper.appendChild(textSpan);
   }
@@ -218,7 +221,7 @@ const CreateWrapper = ({ element }: { element: HTMLElement }) => {
 
 export const CreateCallToActionElement = ({
   cta,
-  type = 'primary',
+  type = TYPE_PRIMARY,
   size = null,
   theme = null,
   styleProps = null,
@@ -247,11 +250,11 @@ export const CreateCallToActionElement = ({
   }
 
   if (theme) {
-    element.setAttribute('data-theme', theme);
+    element.setAttribute(ATTR_THEME, theme);
   }
 
   if (size) {
-    element.setAttribute('data-size', size);
+    element.setAttribute(ATTR_SIZE, size);
   }
 
   if (styleProps) {

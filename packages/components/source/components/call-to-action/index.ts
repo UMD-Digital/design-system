@@ -6,15 +6,25 @@ declare global {
 
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
+import { VARIABLES } from './globals';
 
-export const ELEMENT_NAME = 'umd-element-call-to-action';
-export type CallToActionType = UMDCallToActionElement;
+const {
+  ELEMENT_NAME,
+  TYPE_PRIMARY,
+  SIZE_STANDARD,
+  THEME_LIGHT,
+  ATTRIBUTE_TYPE,
+  ATTRIBUTE_SIZE,
+  ATTRIBUTE_THEME,
+  ATTRIBUTE_STYLE_PROPS,
+} = VARIABLES;
+
 export class UMDCallToActionElement extends HTMLElement {
   _shadow: ShadowRoot;
   _styleProps: null | string;
-  _type = 'primary';
-  _size = 'standard';
-  _theme = 'light';
+  _type = TYPE_PRIMARY;
+  _size = SIZE_STANDARD;
+  _theme = THEME_LIGHT;
 
   constructor() {
     super();
@@ -28,31 +38,28 @@ export class UMDCallToActionElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['styleProps'];
+    return [ATTRIBUTE_STYLE_PROPS];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name == 'style') {
+    if (name == ATTRIBUTE_STYLE_PROPS) {
       this._styleProps = newValue;
     }
   }
 
   connectedCallback() {
     const element = this;
-    const styleAttrubutes = element.getAttribute('styleProps');
+    const styleAttrubutes = element.getAttribute(ATTRIBUTE_STYLE_PROPS);
 
-    element._size = element.getAttribute('size') || element._size;
-    element._type = element.getAttribute('type') || element._type;
-    element._theme = element.getAttribute('theme') || element._theme;
+    element._size = element.getAttribute(ATTRIBUTE_SIZE) || element._size;
+    element._type = element.getAttribute(ATTRIBUTE_TYPE) || element._type;
+    element._theme = element.getAttribute(ATTRIBUTE_THEME) || element._theme;
 
     if (styleAttrubutes) {
       element._styleProps = styleAttrubutes;
     }
 
-    const container = CreateShadowDom({ element });
-
-    if (!container) return;
-    this._shadow.appendChild(container);
+    this._shadow.appendChild(CreateShadowDom({ element }));
   }
 }
 

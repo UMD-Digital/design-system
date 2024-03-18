@@ -1,10 +1,11 @@
 import { Reset } from 'helpers/styles';
-import { ELEMENT_TYPE } from 'components/footer';
-import { ELEMENTS } from 'components/footer/globals';
 import { CreateMain, MainContainerStyles } from './main-section';
 import { CreateUtility, UtilityContainerStyles } from './utility-section';
+import { ELEMENTS, VARIABLES } from '../globals';
+import { UMDFooterElement } from '../index';
 
 const { ELEMENT_WRAPPER } = ELEMENTS;
+const { ELEMENT_NAME } = VARIABLES;
 
 export const ComponentStyles = `
   :host {
@@ -15,13 +16,13 @@ export const ComponentStyles = `
   ${Reset}
 
   .${ELEMENT_WRAPPER} {
-    container: umd-footer / inline-size;
+    container: ${ELEMENT_NAME} / inline-size;
   }
   ${MainContainerStyles}
   ${UtilityContainerStyles}
 `;
 
-export const CreateElement = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateElement = ({ element }: { element: UMDFooterElement }) => {
   const wrapper = document.createElement('div');
   wrapper.classList.add(ELEMENT_WRAPPER);
 

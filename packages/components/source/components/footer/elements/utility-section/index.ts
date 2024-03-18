@@ -5,20 +5,15 @@ import {
   Typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  VARIABLES,
-  SLOTS,
-} from 'components/footer/globals';
 import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
+import { BREAKPOINTS, ELEMENTS, VARIABLES, SLOTS } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { Lock } = Layout;
 
 const { large } = BREAKPOINTS;
-const { THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { UTILITY } = SLOTS;
 
@@ -85,7 +80,7 @@ export const UtilityContainerStyles = `
     },
   })}
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${UTILITY_CONTAINER_LOCK} {
       display: flex;
       align-items: center;
@@ -98,13 +93,13 @@ export const UtilityContainerStyles = `
     },
   })}
 
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-top: ${Spacing.sm};
     }
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
       margin-left: ${Spacing.sm};
       padding-left: ${Spacing.sm};

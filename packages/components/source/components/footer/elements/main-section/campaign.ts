@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
-import { ELEMENT_TYPE } from 'components/footer';
-import { VARIABLES } from 'components/footer/globals';
+import { VARIABLES } from '../../globals';
+import { UMDFooterElement } from '../../index';
 
 const { Spacing } = Tokens;
 
@@ -17,7 +17,11 @@ export const CampaignStyles = `
   }
 `;
 
-export const CreateCampaignRow = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateCampaignRow = ({
+  element,
+}: {
+  element: UMDFooterElement;
+}) => {
   const theme = element._theme;
   const container = document.createElement('div');
   const link = document.createElement('a');

@@ -1,7 +1,5 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { ELEMENT_TYPE } from 'components/footer';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import {
   SocialContainerStyles,
   CreateSocialCampaignColumns,
@@ -14,12 +12,14 @@ import {
 } from '../call-to-action';
 import { ContactContainerStyles, CreateContactContainer } from './contact';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
+import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
 const { medium, large } = BREAKPOINTS;
-const { THEME_OPTION_LIGHT, VERSION_TYPE_SIMPLE } = VARIABLES;
+const { ELEMENT_NAME, THEME_OPTION_LIGHT, VERSION_TYPE_SIMPLE } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
@@ -27,7 +27,7 @@ const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
 const ROW_LOGO_CONTAINER_LOCK = 'umd-footer-row-logo-container-lock';
 
 const ctaOverwriteStyles = `
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER} > .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
@@ -40,7 +40,7 @@ const themeOverwriteStyles = `
     background-color: ${Colors.gray.lightest} !important;
   }
 
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
@@ -53,13 +53,13 @@ export const RowLogoStyles = `
     background-color: ${Colors.black};
   }
 
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ROW_LOGO_CONTAINER} {
       padding-top: ${Spacing['2xl']};
     }
   }
 
-  @container umd-footer (min-width: ${medium}px) and (max-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) and (max-width: ${large}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -67,13 +67,13 @@ export const RowLogoStyles = `
     }
   }
 
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ROW_LOGO_CONTAINER} {
       padding-bottom: ${Spacing['md']} ;
     }
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER}  {
       display: flex;
       padding: ${Spacing['5xl']} 0 ${Spacing['2xl']};
@@ -94,7 +94,7 @@ export const RowLogoStyles = `
   ${themeOverwriteStyles}
 `;
 
-export const CreateRowLogo = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateRowLogo = ({ element }: { element: UMDFooterElement }) => {
   const type = element._type;
   const container = document.createElement('div');
   const lock = document.createElement('div');

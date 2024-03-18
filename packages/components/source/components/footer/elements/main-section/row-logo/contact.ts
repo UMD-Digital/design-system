@@ -9,22 +9,17 @@ import {
   CreateLinkWithSpan,
   SlotDefaultStyling,
 } from 'helpers/ui';
-import { ELEMENT_TYPE } from 'components/footer';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  SLOTS,
-  VARIABLES,
-} from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
+import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../../../globals';
+import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { InterativeMedium, SansSmaller, SansSmall } = Typography;
+const { InterativeMedium, SansSmall } = Typography;
 
 const { medium, large } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { CONTACT_HEADLINE, CONTACT_ADDRESS, CONTACT_LINKS } = SLOTS;
 
 const CONTACT_CONTAINER = 'umd-footer-contact-container';
@@ -52,13 +47,13 @@ const DEFAULT_PHONE = {
 
 // prettier-ignore
 const socialOverwriteStyles = `
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       margin-top: ${Spacing.md};
     }
@@ -179,13 +174,13 @@ export const ContactContainerStyles = `
     background-color: currnetColor;
   }
 
-  @container umd-footer (max-width: ${medium - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
     .${CONTACT_CONTAINER} {
       padding-top: ${Spacing['md']};
     }
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${CONTACT_CONTAINER} {
       padding-left: ${Spacing['2xl']};
     }
@@ -215,7 +210,7 @@ const CreateSlotHeadline = ({
   element,
   slotRef,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDFooterElement;
   slotRef: string;
 }) => {
   const contactHeadlineElement = SlotDefaultStyling({
@@ -253,7 +248,7 @@ const CreateSlotContactAddress = ({
   element,
   slotRef,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDFooterElement;
   slotRef: string;
 }) => {
   const contactAddressElement = SlotDefaultStyling({ element, slotRef });
@@ -280,7 +275,7 @@ const CreateSlotContactLinks = ({
   element,
   slotRef,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDFooterElement;
   slotRef: string;
 }) => {
   const contactLinksElement = SlotDefaultStyling({ element, slotRef });
@@ -296,7 +291,7 @@ const CreateSlotContactLinks = ({
 export const CreateContactContainer = ({
   element,
 }: {
-  element: ELEMENT_TYPE;
+  element: UMDFooterElement;
 }) => {
   const contactContainer = document.createElement('div');
   const socialContainer = CreateSocialCampaignColumns({ element });

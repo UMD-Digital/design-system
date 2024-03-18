@@ -1,15 +1,15 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { ELEMENT_TYPE } from 'components/footer';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
+import { BREAKPOINTS, VARIABLES, ELEMENTS } from '../../../globals';
+import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
 const { large } = BREAKPOINTS;
-const { THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 
 export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
@@ -17,13 +17,13 @@ export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
 const ROW_LINKS_CONTAINER_LOCK = 'umd-footer-row-links-lock';
 
 const socialOverwriteStyles = `
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: block !important;
     }
@@ -37,7 +37,7 @@ export const RowLinkStyles = `
     background-color: ${Colors.black};
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${ROW_LINKS_CONTAINER}  {
       padding-bottom: ${Spacing['2xl']};
     }
@@ -51,7 +51,7 @@ export const RowLinkStyles = `
     display: flex;
   }
 
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ROW_LINKS_CONTAINER_WRAPPER}  {
       flex-direction: column-reverse;
       flex-wrap: wrap;
@@ -68,7 +68,7 @@ export const RowLinkStyles = `
   ${socialOverwriteStyles}
 `;
 
-export const CreateRowLinks = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateRowLinks = ({ element }: { element: UMDFooterElement }) => {
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const wrapper = document.createElement('div');

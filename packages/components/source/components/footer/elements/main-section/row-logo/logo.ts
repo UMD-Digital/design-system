@@ -1,17 +1,17 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
-import { ELEMENT_TYPE } from 'components/footer';
-import { BREAKPOINTS, VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
   CreateCallToActionContainer,
   CALL_TO_ACTION_CONTAINER,
 } from '../call-to-action';
+import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../../../globals';
+import { UMDFooterElement } from '../../../index';
 
 const { Spacing } = Tokens;
 
 const { large } = BREAKPOINTS;
-const { THEME_OPTION_LIGHT, VERSION_TYPE_SIMPLE } = VARIABLES;
+const { ELEMENT_NAME, THEME_OPTION_LIGHT, VERSION_TYPE_SIMPLE } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 
 const LOGO_CONTAINER = 'umd-footer-logo-container';
@@ -19,19 +19,19 @@ const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
 
 // prettier-ignore
 const ctaOverwriteStyles = `
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       margin-top: ${Spacing.md};
     }
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
   }
 
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ELEMENT_WRAPPER}[type="${VERSION_TYPE_SIMPLE}"] .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
       display: none;
     }
@@ -39,7 +39,7 @@ const ctaOverwriteStyles = `
 `;
 
 const campaignOverwriteStyles = `
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${LOGO_CONTAINER} .${CAMPAIGN_COLUMN_WRAPPER} {
       display: none;
     }
@@ -62,7 +62,11 @@ export const LogoContainerStyles = `
   ${ctaOverwriteStyles}
 `;
 
-export const CreateLogoContainer = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateLogoContainer = ({
+  element,
+}: {
+  element: UMDFooterElement;
+}) => {
   const theme = element._theme;
   const container = document.createElement('div');
   const logoLink = document.createElement('a');

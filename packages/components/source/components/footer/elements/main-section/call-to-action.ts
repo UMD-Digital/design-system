@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENTS, SLOTS, VARIABLES } from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
+import { ELEMENTS, VARIABLES, SLOTS } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
 

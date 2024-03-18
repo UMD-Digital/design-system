@@ -4,21 +4,16 @@ import {
   Typography,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  SLOTS,
-  VARIABLES,
-} from 'components/footer/globals';
 import { SlotDefaultStyling } from 'helpers/ui';
+import { BREAKPOINTS, ELEMENTS, SLOTS, VARIABLES } from '../../../globals';
 
-const { Colors, Spacing, FontWeight } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { SansSmaller, InterativeMedium } = Typography;
 
 const { medium, large } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
 const { LINK_COLUMN_ONE, LINK_COLUMN_TWO, LINK_COLUMN_THREE } = SLOTS;
 
 const HEADLINE_ATTRIBUTE = 'data-headline';
@@ -137,7 +132,7 @@ const HeadlineStyles = `
     font-weight: 700;
   }
 
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ROW_LINKS_COLUMN_HEADLINE}[${HEADLINE_ATTRIBUTE_EMPTY}="true"] {
       display: none;
     }
@@ -182,7 +177,7 @@ const LinkStyles = `
 
 // prettier-ignore
 const ColumnWrapper = `
-  @container umd-footer (min-width: ${medium}px) and (max-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) and (max-width: ${large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -190,19 +185,19 @@ const ColumnWrapper = `
     }
   }
 
-  @container umd-footer (max-width: ${medium - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${medium - 1}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
       margin-bottom: ${Spacing.lg};
     }
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
       padding-right: ${Spacing.xs};
     }
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
       margin-left: ${Spacing.lg};
       padding-left: ${Spacing.lg};
@@ -210,7 +205,7 @@ const ColumnWrapper = `
     }
   }
 
-  @container umd-footer (min-width: ${medium}px) and (max-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${medium}px) and (max-width: ${large}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} > p {
       grid-column: 1 / span 2;
     }
@@ -219,13 +214,13 @@ const ColumnWrapper = `
 
 // prettier-ignore
 export const LinkColumnStyles = `
-  @container umd-footer (max-width: ${large - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${large - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
       padding-top: ${Spacing.md};
     }
   }
 
-  @container umd-footer (min-width: ${large}px) {
+  @container ${ELEMENT_NAME} (min-width: ${large}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
       display: flex;
     }

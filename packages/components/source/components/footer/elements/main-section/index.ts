@@ -1,9 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENT_TYPE } from 'components/footer';
-import { VARIABLES, ELEMENTS } from 'components/footer/globals';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';
+import { ELEMENTS, VARIABLES } from '../../globals';
+import { UMDFooterElement } from '../../index';
 
 const { Colors } = Tokens;
 
@@ -64,7 +64,7 @@ export const MainContainerStyles = `
   ${VariationVisualStyles}
 `;
 
-export const CreateMain = ({ element }: { element: ELEMENT_TYPE }) => {
+export const CreateMain = ({ element }: { element: UMDFooterElement }) => {
   const type = element._type;
   const container = document.createElement('div');
   const logoRow = CreateRowLogo({ element });

@@ -21,6 +21,7 @@ export const SLOTS = {
 };
 
 export const VARIABLES = {
+  ELEMENT_NAME: 'umd-element-footer',
   VERSION_TYPE_MEGA: 'mega',
   VERSION_TYPE_VISUAL: 'visual',
   VERSION_TYPE_SIMPLE: 'simple',

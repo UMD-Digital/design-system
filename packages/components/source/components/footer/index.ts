@@ -8,10 +8,8 @@ import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateElement } from './elements';
 import { VARIABLES } from './globals';
 
-const { THEME_OPTION_DARK, VERSION_TYPE_SIMPLE } = VARIABLES;
+const { ELEMENT_NAME, THEME_OPTION_DARK, VERSION_TYPE_SIMPLE } = VARIABLES;
 
-export const ELEMENT_NAME = 'umd-element-footer';
-export type ELEMENT_TYPE = UMDFooterElement;
 export class UMDFooterElement extends HTMLElement {
   _shadow: ShadowRoot;
   _theme = THEME_OPTION_DARK;

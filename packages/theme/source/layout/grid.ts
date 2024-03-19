@@ -1,5 +1,7 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
+// Deprecated - Do Not Use
+
 const { Grid, GridBase } = Layout;
 const { Queries, Spacing } = Tokens;
 

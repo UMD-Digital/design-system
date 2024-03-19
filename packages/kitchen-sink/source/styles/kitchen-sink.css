@@ -11,6 +11,14 @@
 @import './dependencies/dropdown.css';
 @import './dependencies/kitchen-sink-styles.css';
 
+main {
+  padding-bottom: 40px;
+}
+
+section:not(:last-of-type) {
+  margin-bottom: 80px;
+}
+
 .umd-configuration-section {
   @apply mb-md pb-md border-b border-black;
 }

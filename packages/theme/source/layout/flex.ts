@@ -1,5 +1,7 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
+// Deprecated - Do Not Use
+
 const {
   FlexBase,
   FlexRows: Rows,

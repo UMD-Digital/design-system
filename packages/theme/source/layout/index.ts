@@ -1,4 +1,4 @@
-import { SpacingContent } from './spacing';
+import { SpacingContent, LayoutSpacing } from './spacing';
 import { FlexColumnsContent, FlexColumnsCore, FlexColumnsRows } from './flex';
 import {
   GridColumnsGutterless,
@@ -18,4 +18,5 @@ export default {
   ...GridColumnsFeatured,
   ...ListingGroup,
   ...LockSizes,
+  ...LayoutSpacing,
 };

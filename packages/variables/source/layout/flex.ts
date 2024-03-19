@@ -1,6 +1,8 @@
 import { Queries } from '../tokens/breakpoints';
 import { Spacing } from '../tokens/spacing';
 
+// Deprecated - Do Not Use
+
 const roundToThree = (number: number): number =>
   Math.round(number * 1000) / 1000;
 

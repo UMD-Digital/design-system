@@ -1,6 +1,8 @@
 import { Queries } from '../tokens/breakpoints';
 import { Spacing } from '../tokens/spacing';
 
+// To Do : Refactor to be part of spacing (renamed for horizitonal)
+
 const lockBase = {
   display: 'block',
   marginLeft: 'auto',

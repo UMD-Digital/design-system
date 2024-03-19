@@ -7,6 +7,7 @@ import {
   FlexChildrenFour,
 } from './flex';
 import { Grid, GridBase } from './grid';
+import Spacing from './spacing';
 
 export default {
   Lock,
@@ -17,4 +18,5 @@ export default {
   FlexChildrenFour,
   Grid,
   GridBase,
+  ...Spacing,
 };

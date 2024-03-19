@@ -8,14 +8,6 @@ body {
   overscroll-behavior: none;
 }
 
-main {
-  padding-bottom: 40px;
-}
-
-section:not(:last-of-type) {
-  margin-bottom: 80px;
-}
-
 h1,
 h2,
 h3,

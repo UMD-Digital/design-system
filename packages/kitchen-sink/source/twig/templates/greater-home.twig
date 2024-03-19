@@ -1,7 +1,7 @@
 {% extends './layouts/greater-cp.twig' %}
 
 {% block page %}
-  <umd-element-hero type="default-centered">
+  <umd-element-hero type="default-centered" class="umd-layout-vertical-landing">
     <img slot="image" src="/greater-cp/hero.jpg" alt="Image Description" />
 
     <p slot="headline">
@@ -20,15 +20,38 @@
     </div>
   </umd-element-hero>
 
-  <section>
+  <section class="umd-layout-vertical-landing">
     <div class="umd-lock">
-      <p>
-        To Do Stats
-      </p>
+      <umd-element-stat size="large">
+        <div slot="stat">
+          30+
+        </div>
+        <div slot="text">
+          New Projects
+        </div>
+      </umd-element-stat>
+
+      <umd-element-stat size="large">
+        <div slot="stat">
+          $2B+
+        </div>
+        <div slot="text">
+          In public-private investment
+        </div>
+      </umd-element-stat>
+
+      <umd-element-stat size="large">
+        <div slot="stat">
+          $2m
+        </div>
+        <div slot="text">
+          Square feet of development
+        </div>
+      </umd-element-stat>
     </div>
   </section>
 
-  <section>
+  <section class="umd-layout-vertical-landing">
     <umd-element-pathway>
       <div slot="image">
         <img src="/greater-cp/home-pathway-1.jpg" alt="Image" />
@@ -56,7 +79,7 @@
     </umd-element-pathway>
   </section>
 
-  <section>
+  <section class="umd-layout-vertical-landing">
     <umd-element-pathway isimagefirst="false">
       <div slot="image">
         <img src="/greater-cp/home-pathway-2.jpg" alt="Image" />
@@ -84,7 +107,7 @@
     </umd-element-pathway>
   </section>
 
-  <section>
+  <section class="umd-layout-vertical-landing">
     <umd-element-pathway>
       <div slot="image">
         <img src="/greater-cp/home-pathway-3.jpg" alt="Image" />

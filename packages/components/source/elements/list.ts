@@ -17,13 +17,16 @@ const BREAKPOINTS = {
 };
 
 export const VARIABLES = {
-  ATTR_IMAGE: 'data-image',
-  ATTR_DATA_BLOCK: 'data-date-block',
+  ATTRIBUTE_IMAGE: 'image',
+  ATTRIBUTE_DATA_BLOCK: 'with-date-block',
+  ATTRIBUTE_THEME: 'theme',
+  THEME_DARK: 'dark',
 };
 
 const ELEMENT_NAME = 'umd-list';
 
 const LIST_CONTAINER = 'umd-list-container';
+
 const LIST_CONTAINER_WRAPPER = 'umd-list-container-wrapper';
 const LIST_DATE_BLOCK_CONTAINER = 'umd-list-date-container';
 const LIST_TEXT_CONTAINER = 'umd-list-text-container';
@@ -33,23 +36,25 @@ const LIST_HEADLINE_WRAPPER = 'umd-list-headline-wrapper';
 const LIST_DETAILS_WRAPPER = 'umd-list-date-wrapper';
 const LIST_TEXT_WRAPPER = 'umd-list-text-wrapper';
 const LIST_DATE_WRAPPER = 'umd-list-date-wrapper';
+const LIST_ACTIONS_WRAPPER = 'umd-list-actions-wrapper';
 
-const IS_WITH_IMAGE = `[${VARIABLES.ATTR_IMAGE}]`;
-const IS_WITH_DATE_BLOCK = `[${VARIABLES.ATTR_DATA_BLOCK}]`;
+const IS_WITH_DATE_BLOCK = `[${VARIABLES.ATTRIBUTE_DATA_BLOCK}]`;
+const IS_THEME_DARK = `[${VARIABLES.ATTRIBUTE_THEME}="${VARIABLES.THEME_DARK}"]`;
+
+console.log(`[${VARIABLES.ATTRIBUTE_THEME}="${VARIABLES.THEME_DARK}"]`);
 
 // prettier-ignore
-const VariationImageStyles = `
-  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${LIST_CONTAINER}${IS_WITH_IMAGE} {
+const VariationThemeStyles = `
+  .${LIST_CONTAINER}${IS_THEME_DARK} .${LIST_TEXT_CONTAINER} * {
+    color: ${Colors.white};
+  }
 
-    }
-  }
-  
-  @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${LIST_CONTAINER}${IS_WITH_IMAGE} .${LIST_TEXT_CONTAINER} {
- 
-    }
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${LIST_CONTAINER}${IS_THEME_DARK} .${LIST_HEADLINE_WRAPPER} a`]:
+      LinkLineSlide['.slidein-underline-white'],
+    },
+  })}
 `;
 
 // prettier-ignore
@@ -286,6 +291,13 @@ const DateStyles = `
 `;
 
 // prettier-ignore
+const ActionStyles = `
+  .${LIST_ACTIONS_WRAPPER}  {
+    margin-top: ${Spacing.sm};
+  }
+`;
+
+// prettier-ignore
 export const STYLES_LIST = `
   .${LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
@@ -304,7 +316,8 @@ export const STYLES_LIST = `
   ${DetailsStyles}
   ${TextStyles}
   ${DateStyles}
-  ${VariationImageStyles}
+  ${ActionStyles}
+  ${VariationThemeStyles}
   ${VariationDateBlockStyles}
 `;
 
@@ -346,22 +359,22 @@ export const CreateListElement = ({
   wrapper.classList.add(LIST_CONTAINER_WRAPPER);
   textContainer.classList.add(LIST_TEXT_CONTAINER);
 
-  // if (theme) {
-  //   container.setAttribute(VARIABLES.ATTRIBUTE_THEME, theme);
-  // }
+  if (theme) {
+    container.setAttribute(VARIABLES.ATTRIBUTE_THEME, theme);
+  }
 
   if (dateBlock) {
     const dateBlockContainer = document.createElement('div');
 
     dateBlockContainer.classList.add(LIST_DATE_BLOCK_CONTAINER);
     dateBlockContainer.appendChild(dateBlock);
-    container.setAttribute(VARIABLES.ATTR_DATA_BLOCK, '');
+    container.setAttribute(VARIABLES.ATTRIBUTE_DATA_BLOCK, '');
     wrapper.appendChild(dateBlockContainer);
   }
 
   if (image) {
     const imageContainer = CreateImage({ image });
-    container.setAttribute(VARIABLES.ATTR_IMAGE, '');
+    container.setAttribute(VARIABLES.ATTRIBUTE_IMAGE, '');
     wrapper.appendChild(imageContainer);
   }
 
@@ -391,10 +404,10 @@ export const CreateListElement = ({
     textContainer.appendChild(date);
   }
 
-  // if (actions) {
-  //   actions.classList.add(LIST_DATE_WRAPPER);
-  //   textContainer.appendChild(actions);
-  // }
+  if (actions) {
+    actions.classList.add(LIST_ACTIONS_WRAPPER);
+    textContainer.appendChild(actions);
+  }
 
   wrapper.appendChild(textContainer);
   container.appendChild(wrapper);

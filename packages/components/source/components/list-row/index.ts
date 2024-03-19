@@ -27,7 +27,6 @@ export class UMDListRowElement extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log('called');
     this._shadow.appendChild(CreateShadowDom({ element: this }));
   }
 }

@@ -24,12 +24,55 @@
             Eyebrow Text
           </p>
           <p slot="headline">
+            <a href="google.com">Headline Text</a>
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-list-row>
+        <umd-element-list-row>
+          <img slot="image" src="{{ image }}" alt="Image Description" />
+
+          <p slot="headline">
             Headline Text
           </p>
           <p slot="text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam
+          </p>
+
+          <p slot="date">
+            September 1, 2021
+          </p>
+        </umd-element-list-row>
+        <umd-element-list-row>
+          <img slot="image" src="{{ image }}" alt="Image Description" />
+
+          <p slot="eyebrow">
+            Eyebrow Text
+          </p>
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <p slot="date">
+            September 1, 2021
           </p>
 
           <div slot="actions">
@@ -49,11 +92,18 @@
           <p slot="headline">
             Headline Text
           </p>
-          <p slot="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam
-          </p>
+          <div slot="text">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam
+            </p>
+          </div>
 
           <div slot="actions">
             <umd-element-call-to-action type="secondary">
@@ -63,7 +113,17 @@
             </umd-element-call-to-action>
           </div>
         </umd-element-list-row>
-        <umd-element-list-row>
+      </div>
+    </section>
+
+    <section style="background-color: black; padding; 50px 0;">
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          <span class="type" style="color: white">Default</span>
+          <span class="type-detail">Theme Dark</span>
+        </h3>
+
+        <umd-element-list-row theme="dark">
           <img slot="image" src="{{ image }}" alt="Image Description" />
 
           <p slot="eyebrow">
@@ -79,14 +139,30 @@
           </p>
 
           <div slot="actions">
-            <umd-element-call-to-action type="secondary">
+            <umd-element-call-to-action type="secondary" theme="dark">
               <a href="https://google.com" aria-label="link to google">
                 Learn More
               </a>
             </umd-element-call-to-action>
           </div>
         </umd-element-list-row>
-        <umd-element-list-row>
+        <umd-element-list-row theme="dark">
+          <img slot="image" src="{{ image }}" alt="Image Description" />
+
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <p slot="date">
+            September 1, 2021
+          </p>
+        </umd-element-list-row>
+        <umd-element-list-row theme="dark">
           <img slot="image" src="{{ image }}" alt="Image Description" />
 
           <p slot="eyebrow">
@@ -101,8 +177,42 @@
             ad minim veniam
           </p>
 
+          <p slot="date">
+            September 1, 2021
+          </p>
+
           <div slot="actions">
-            <umd-element-call-to-action type="secondary">
+            <umd-element-call-to-action type="secondary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-list-row>
+        <umd-element-list-row theme="dark">
+          <img slot="image" src="{{ image }}" alt="Image Description" />
+
+          <p slot="eyebrow">
+            Eyebrow Text
+          </p>
+          <p slot="headline">
+            <a href="google.com">Headline Text</a>
+          </p>
+          <div slot="text">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam
+            </p>
+          </div>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary" theme="dark">
               <a href="https://google.com" aria-label="link to google">
                 Learn More
               </a>

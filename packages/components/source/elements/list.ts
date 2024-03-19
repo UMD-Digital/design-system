@@ -10,23 +10,17 @@ const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { SansLarger, SansMin, Eyebrow } = Typography;
 
-const BREAKPOINTS = {
-  MOBILE: 650,
-  TABLET: 768,
-  DESKTOP: 1024,
-};
-
-export const VARIABLES = {
-  ATTRIBUTE_IMAGE: 'image',
-  ATTRIBUTE_DATA_BLOCK: 'with-date-block',
-  ATTRIBUTE_THEME: 'theme',
-  THEME_DARK: 'dark',
-};
-
 const ELEMENT_NAME = 'umd-list';
 
-const LIST_CONTAINER = 'umd-list-container';
+const ATTRIBUTE_IMAGE = 'image';
+const ATTRIBUTE_DATA_BLOCK = 'with-date-block';
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
+const ATTRIBUTE_IMAGE_FIRST = 'image-first';
 
+const MOBILE = 650;
+
+const LIST_CONTAINER = 'umd-list-container';
 const LIST_CONTAINER_WRAPPER = 'umd-list-container-wrapper';
 const LIST_DATE_BLOCK_CONTAINER = 'umd-list-date-container';
 const LIST_TEXT_CONTAINER = 'umd-list-text-container';
@@ -35,13 +29,13 @@ const LIST_EYEBROW_WRAPPER = 'umd-list-eyebrow-wrapper';
 const LIST_HEADLINE_WRAPPER = 'umd-list-headline-wrapper';
 const LIST_DETAILS_WRAPPER = 'umd-list-date-wrapper';
 const LIST_TEXT_WRAPPER = 'umd-list-text-wrapper';
+const LIST_SUB_TEXT_WRAPPER = 'umd-list-sub-text-wrapper';
 const LIST_DATE_WRAPPER = 'umd-list-date-wrapper';
 const LIST_ACTIONS_WRAPPER = 'umd-list-actions-wrapper';
 
-const IS_WITH_DATE_BLOCK = `[${VARIABLES.ATTRIBUTE_DATA_BLOCK}]`;
-const IS_THEME_DARK = `[${VARIABLES.ATTRIBUTE_THEME}="${VARIABLES.THEME_DARK}"]`;
-
-console.log(`[${VARIABLES.ATTRIBUTE_THEME}="${VARIABLES.THEME_DARK}"]`);
+const IS_WITH_DATE_BLOCK = `[${ATTRIBUTE_DATA_BLOCK}]`;
+const IS_IMAGE_FIRST = `[${ATTRIBUTE_IMAGE_FIRST}]`;
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 // prettier-ignore
 const VariationThemeStyles = `
@@ -58,14 +52,38 @@ const VariationThemeStyles = `
 `;
 
 // prettier-ignore
+const VariationImageFirstStyles = `
+  .${LIST_CONTAINER}${IS_IMAGE_FIRST} .${LIST_CONTAINER_WRAPPER} {
+    display: flex;
+  }
+
+  .${LIST_CONTAINER}${IS_IMAGE_FIRST} .${LIST_IMAGE_CONTAINER} {
+    order: 1;
+    float: none;
+  }
+
+  .${LIST_CONTAINER}${IS_IMAGE_FIRST} .${LIST_TEXT_CONTAINER} {
+    padding-right: 0;
+    padding-left: ${Spacing.min};
+    order: 1;
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
+    .${LIST_CONTAINER}${IS_IMAGE_FIRST} .${LIST_TEXT_CONTAINER} {
+      padding-left: ${Spacing.md};
+    }
+  }
+`;
+
+// prettier-ignore
 const VariationDateBlockStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${LIST_CONTAINER}${IS_WITH_DATE_BLOCK} .${LIST_CONTAINER_WRAPPER} {
       padding-left: ${Spacing.md};
     }
   }
   
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${LIST_CONTAINER}${IS_WITH_DATE_BLOCK} .${LIST_TEXT_CONTAINER} {
       padding: 0 ${Spacing.md};
     }
@@ -80,7 +98,7 @@ const WrapperStyles = `
     overflow: hidden;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${LIST_CONTAINER_WRAPPER} {
       display: flex;
       justify-content: space-between;
@@ -94,7 +112,7 @@ const ColumnDateStyles = `
     width: ${Spacing['6xl']};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MOBILE - 1}px) {
     .${LIST_DATE_BLOCK_CONTAINER} {
       display: none;
     }
@@ -108,7 +126,7 @@ const ColumnTextStyles = `
     flex: 1 0;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${LIST_TEXT_CONTAINER} {
       padding-right: ${Spacing.md};
       order: 2;
@@ -118,14 +136,14 @@ const ColumnTextStyles = `
 
 // prettier-ignore
 export const ColumnImageStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE -1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MOBILE -1}px) {
     .${LIST_IMAGE_CONTAINER} {
       width: 90px;
       float: right;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${LIST_IMAGE_CONTAINER} {
       width: 140px;
       order: 3;
@@ -184,7 +202,7 @@ const HeadlineStyles = `
     margin-top: ${Spacing.min}
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MOBILE - 1}px) {
     .${LIST_HEADLINE_WRAPPER} {
       max-width: calc(100% - 110px);
     }
@@ -263,6 +281,30 @@ const TextStyles = `
 `;
 
 // prettier-ignore
+const SubTextStyles = `
+  .${LIST_SUB_TEXT_WRAPPER} {
+    margin-top: ${Spacing.min};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${LIST_SUB_TEXT_WRAPPER}`]: Typography.SansMin,
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${LIST_SUB_TEXT_WRAPPER} *`]: Typography.SansMin,
+    },
+  })}
+
+  .${LIST_SUB_TEXT_WRAPPER},
+  .${LIST_SUB_TEXT_WRAPPER} * {
+    font-style: italic;
+  }
+`
+
+// prettier-ignore
 const DateStyles = `
   .${LIST_DATE_WRAPPER} {
     display: block;
@@ -315,10 +357,12 @@ export const STYLES_LIST = `
   ${HeadlineStyles}
   ${DetailsStyles}
   ${TextStyles}
+  ${SubTextStyles}
   ${DateStyles}
   ${ActionStyles}
   ${VariationThemeStyles}
   ${VariationDateBlockStyles}
+  ${VariationImageFirstStyles}
 `;
 
 const CreateImage = ({ image }: { image: HTMLImageElement }) => {
@@ -335,21 +379,25 @@ export const CreateListElement = ({
   eyebrow,
   headline,
   text,
+  subText,
   details,
   dateBlock,
   date,
   theme,
   actions,
+  isImageFirst,
 }: {
   image?: HTMLImageElement | null;
   headline?: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
+  subText?: HTMLElement | null;
   details?: HTMLElement | null;
   dateBlock?: HTMLElement | null;
   date?: HTMLElement | null;
   theme?: string;
   actions?: HTMLElement | null;
+  isImageFirst?: boolean;
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -360,7 +408,7 @@ export const CreateListElement = ({
   textContainer.classList.add(LIST_TEXT_CONTAINER);
 
   if (theme) {
-    container.setAttribute(VARIABLES.ATTRIBUTE_THEME, theme);
+    container.setAttribute(ATTRIBUTE_THEME, theme);
   }
 
   if (dateBlock) {
@@ -368,13 +416,14 @@ export const CreateListElement = ({
 
     dateBlockContainer.classList.add(LIST_DATE_BLOCK_CONTAINER);
     dateBlockContainer.appendChild(dateBlock);
-    container.setAttribute(VARIABLES.ATTRIBUTE_DATA_BLOCK, '');
+    container.setAttribute(ATTRIBUTE_DATA_BLOCK, '');
     wrapper.appendChild(dateBlockContainer);
   }
 
   if (image) {
     const imageContainer = CreateImage({ image });
-    container.setAttribute(VARIABLES.ATTRIBUTE_IMAGE, '');
+    container.setAttribute(ATTRIBUTE_IMAGE, '');
+    if (isImageFirst) container.setAttribute(ATTRIBUTE_IMAGE_FIRST, '');
     wrapper.appendChild(imageContainer);
   }
 
@@ -397,6 +446,11 @@ export const CreateListElement = ({
   if (text) {
     text.classList.add(LIST_TEXT_WRAPPER);
     textContainer.appendChild(text);
+  }
+
+  if (subText) {
+    subText.classList.add(LIST_SUB_TEXT_WRAPPER);
+    textContainer.appendChild(subText);
   }
 
   if (date) {

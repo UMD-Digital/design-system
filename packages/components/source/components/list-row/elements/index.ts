@@ -32,7 +32,9 @@ export const CreateShadowDom = ({ element }: { element: UMDListRowElement }) =>
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
+    subText: SlotDefaultStyling({ element, slotRef: SLOTS.SUB_TEXT }),
     date: SlotDefaultStyling({ element, slotRef: DATE }),
     actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
     theme: element._theme,
+    isImageFirst: element._type === 'person',
   });

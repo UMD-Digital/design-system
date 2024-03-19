@@ -12,20 +12,24 @@ const {
   ELEMENT_NAME,
   ATTRIBUTE_TYPE,
   ATTRIBUTE_THEME,
+  ATTRIBUTE_SIZE,
   THEME_LIGHT,
   TYPE_DEFAULT,
+  SIZE_DEFAULT,
 } = VARIABLES;
 
 export class UMDStatElement extends HTMLElement {
   _shadow: ShadowRoot;
   _theme: string;
   _type: string;
+  _size: string;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._type = this.getAttribute(ATTRIBUTE_TYPE) || TYPE_DEFAULT;
     this._theme = this.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+    this._size = this.getAttribute(ATTRIBUTE_SIZE) || SIZE_DEFAULT;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });

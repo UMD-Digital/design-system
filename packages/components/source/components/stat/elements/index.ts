@@ -5,11 +5,18 @@ import { UMDStatElement } from '../index';
 import { SLOTS, REFERENCES, VARIABLES } from '../globals';
 
 const { Colors, Spacing } = Tokens;
-const { SansLarger, SansSmaller, StatisticsLarge } = Typography;
+const {
+  SansLarger,
+  SansMedium,
+  SansSmaller,
+  SansMin,
+  StatisticsMedium,
+  StatisticsLarge,
+} = Typography;
 
 const { STAT, SUB_TEXT, TEXT } = SLOTS;
-const { ATTRIBUTE_THEME, ATTRIBUTE_TYPE } = VARIABLES;
-const { IS_THEME_DARK } = REFERENCES;
+const { ATTRIBUTE_THEME, ATTRIBUTE_TYPE, ATTRIBUTE_SIZE } = VARIABLES;
+const { IS_THEME_DARK, IS_SIZE_LARGE } = REFERENCES;
 
 const STAT_CONTAINER = `umd-stat-container`;
 const STAT_WRAPPER = `umd-stat-wrapper`;
@@ -26,6 +33,50 @@ const VarationThemeDarkStyles = `
   .${STAT_CONTAINER}${IS_THEME_DARK} .${STAT_DISPLAY} {
     color: ${Colors.gold};
   }
+`;
+
+// prettier-ignore
+const VarationSizeLargeStyles = `
+  .${STAT_CONTAINER}${IS_SIZE_LARGE}  {
+    padding-left: ${Spacing.sm};
+    border-left: 2px solid ${Colors.gold};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_DISPLAY}`]: StatisticsLarge,
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_DISPLAY} *`]: StatisticsLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_TEXT}`]: SansLarger,
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_TEXT} *`]: SansLarger,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_SUB_TEXT}`]: SansSmaller,
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_SUB_TEXT} *`]: SansSmaller,
+    },
+  })}
 `;
 
 // prettier-ignore
@@ -46,22 +97,24 @@ const StatWrapperStyles = `
 const StatDisplayStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_DISPLAY}`]: StatisticsLarge,
+      [`.${STAT_DISPLAY}`]: StatisticsMedium,
     },
   })}
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_DISPLAY} *`]: StatisticsLarge,
+      [`.${STAT_DISPLAY} *`]: StatisticsMedium,
     },
   })}
   
   .${STAT_DISPLAY} {
     color: ${Colors.red};
+    -webkit-font-smoothing: antialiased;
   }
 
   .${STAT_DISPLAY} * {
     color: currentColor;
+    -webkit-font-smoothing: antialiased;
   }
 
   .${STAT_DISPLAY} + * {
@@ -73,13 +126,13 @@ const StatDisplayStyles = `
 const TextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_TEXT}`]: SansLarger,
+      [`.${STAT_TEXT}`]: SansMedium,
     },
   })}
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_TEXT} *`]: SansLarger,
+      [`.${STAT_TEXT} *`]: SansMedium,
     },
   })}
 
@@ -100,13 +153,13 @@ const TextStyles = `
 const SubTextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_SUB_TEXT}`]: SansSmaller,
+      [`.${STAT_SUB_TEXT}`]: SansMin,
     },
   })}
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_SUB_TEXT} *`]: SansSmaller,
+      [`.${STAT_SUB_TEXT} *`]: SansMin,
     },
   })}
 
@@ -131,6 +184,7 @@ export const ComponentStyles = `
   ${StatDisplayStyles}
   ${TextStyles}
   ${SubTextStyles}
+  ${VarationSizeLargeStyles}
   ${VarationThemeDarkStyles}
 `;
 
@@ -161,6 +215,7 @@ const MakeState = ({ element }: { element: UMDStatElement }) => {
 export const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
   const theme = element._theme;
   const type = element._type;
+  const size = element._size;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const stat = MakeState({ element });
@@ -170,6 +225,7 @@ export const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
   container.classList.add(STAT_CONTAINER);
   container.setAttribute(ATTRIBUTE_THEME, theme);
   container.setAttribute(ATTRIBUTE_TYPE, type);
+  container.setAttribute(ATTRIBUTE_SIZE, size);
   wrapper.classList.add(STAT_WRAPPER);
 
   if (stat) wrapper.appendChild(stat);

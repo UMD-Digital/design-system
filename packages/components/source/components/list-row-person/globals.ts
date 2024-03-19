@@ -1,15 +1,11 @@
 export const SLOTS = {
   IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
+  NAME: 'name',
   TEXT: 'text',
   SUB_TEXT: 'sub-text',
-  DATE: 'date',
-  ACTIONS: 'actions',
-  DATEBLOCK: 'date-block',
 };
 export const VARIABLES = {
-  ELEMENT_NAME: 'umd-element-list-row',
+  ELEMENT_NAME: 'umd-element-list-person-row',
   ATTRIBUTE_THEME: 'theme',
   THEME_LIGHT: 'light',
   THEME_DARK: 'dark',

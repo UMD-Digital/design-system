@@ -16,7 +16,6 @@ const ATTRIBUTE_IMAGE = 'image';
 const ATTRIBUTE_DATA_BLOCK = 'with-date-block';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
-const ATTRIBUTE_IMAGE_FIRST = 'image-first';
 
 const MOBILE = 650;
 
@@ -29,12 +28,10 @@ const LIST_EYEBROW_WRAPPER = 'umd-list-eyebrow-wrapper';
 const LIST_HEADLINE_WRAPPER = 'umd-list-headline-wrapper';
 const LIST_DETAILS_WRAPPER = 'umd-list-date-wrapper';
 const LIST_TEXT_WRAPPER = 'umd-list-text-wrapper';
-const LIST_SUB_TEXT_WRAPPER = 'umd-list-sub-text-wrapper';
 const LIST_DATE_WRAPPER = 'umd-list-date-wrapper';
 const LIST_ACTIONS_WRAPPER = 'umd-list-actions-wrapper';
 
 const IS_WITH_DATE_BLOCK = `[${ATTRIBUTE_DATA_BLOCK}]`;
-const IS_IMAGE_FIRST = `[${ATTRIBUTE_IMAGE_FIRST}]`;
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 // prettier-ignore
@@ -49,30 +46,6 @@ const VariationThemeStyles = `
       LinkLineSlide['.slidein-underline-white'],
     },
   })}
-`;
-
-// prettier-ignore
-const VariationImageFirstStyles = `
-  .${LIST_CONTAINER}${IS_IMAGE_FIRST} .${LIST_CONTAINER_WRAPPER} {
-    display: flex;
-  }
-
-  .${LIST_CONTAINER}${IS_IMAGE_FIRST} .${LIST_IMAGE_CONTAINER} {
-    order: 1;
-    float: none;
-  }
-
-  .${LIST_CONTAINER}${IS_IMAGE_FIRST} .${LIST_TEXT_CONTAINER} {
-    padding-right: 0;
-    padding-left: ${Spacing.min};
-    order: 1;
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
-    .${LIST_CONTAINER}${IS_IMAGE_FIRST} .${LIST_TEXT_CONTAINER} {
-      padding-left: ${Spacing.md};
-    }
-  }
 `;
 
 // prettier-ignore
@@ -281,30 +254,6 @@ const TextStyles = `
 `;
 
 // prettier-ignore
-const SubTextStyles = `
-  .${LIST_SUB_TEXT_WRAPPER} {
-    margin-top: ${Spacing.min};
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${LIST_SUB_TEXT_WRAPPER}`]: Typography.SansMin,
-    },
-  })}
-  
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${LIST_SUB_TEXT_WRAPPER} *`]: Typography.SansMin,
-    },
-  })}
-
-  .${LIST_SUB_TEXT_WRAPPER},
-  .${LIST_SUB_TEXT_WRAPPER} * {
-    font-style: italic;
-  }
-`
-
-// prettier-ignore
 const DateStyles = `
   .${LIST_DATE_WRAPPER} {
     display: block;
@@ -357,12 +306,10 @@ export const STYLES_LIST = `
   ${HeadlineStyles}
   ${DetailsStyles}
   ${TextStyles}
-  ${SubTextStyles}
   ${DateStyles}
   ${ActionStyles}
   ${VariationThemeStyles}
   ${VariationDateBlockStyles}
-  ${VariationImageFirstStyles}
 `;
 
 const CreateImage = ({ image }: { image: HTMLImageElement }) => {
@@ -379,25 +326,21 @@ export const CreateListElement = ({
   eyebrow,
   headline,
   text,
-  subText,
   details,
   dateBlock,
   date,
   theme,
   actions,
-  isImageFirst,
 }: {
   image?: HTMLImageElement | null;
   headline?: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
-  subText?: HTMLElement | null;
   details?: HTMLElement | null;
   dateBlock?: HTMLElement | null;
   date?: HTMLElement | null;
   theme?: string;
   actions?: HTMLElement | null;
-  isImageFirst?: boolean;
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -423,7 +366,6 @@ export const CreateListElement = ({
   if (image) {
     const imageContainer = CreateImage({ image });
     container.setAttribute(ATTRIBUTE_IMAGE, '');
-    if (isImageFirst) container.setAttribute(ATTRIBUTE_IMAGE_FIRST, '');
     wrapper.appendChild(imageContainer);
   }
 
@@ -446,11 +388,6 @@ export const CreateListElement = ({
   if (text) {
     text.classList.add(LIST_TEXT_WRAPPER);
     textContainer.appendChild(text);
-  }
-
-  if (subText) {
-    subText.classList.add(LIST_SUB_TEXT_WRAPPER);
-    textContainer.appendChild(subText);
   }
 
   if (date) {

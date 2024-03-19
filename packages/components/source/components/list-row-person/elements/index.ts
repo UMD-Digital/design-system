@@ -1,10 +1,10 @@
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
-import { CreateListElement, STYLES_LIST } from 'elements/list';
-import { UMDListRowElement } from '../index';
+import { CreateListPersonElement, STYLES_LIST } from 'elements/list-person';
+import { UMDListRowPersonElement } from '../index';
 import { SLOTS } from '../globals';
 
-const { IMAGE, EYEBROW, HEADLINE, TEXT, DATE, ACTIONS, SUB_TEXT } = SLOTS;
+const { IMAGE, NAME, TEXT, SUB_TEXT } = SLOTS;
 
 export const ComponentStyles = `
   :host {
@@ -15,7 +15,7 @@ export const ComponentStyles = `
   ${STYLES_LIST}
 `;
 
-const GetImage = ({ element }: { element: UMDListRowElement }) => {
+const GetImage = ({ element }: { element: UMDListRowPersonElement }) => {
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
   const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
 
@@ -26,13 +26,15 @@ const GetImage = ({ element }: { element: UMDListRowElement }) => {
   return null;
 };
 
-export const CreateShadowDom = ({ element }: { element: UMDListRowElement }) =>
-  CreateListElement({
+export const CreateShadowDom = ({
+  element,
+}: {
+  element: UMDListRowPersonElement;
+}) =>
+  CreateListPersonElement({
     image: GetImage({ element }),
-    eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+    name: SlotDefaultStyling({ element, slotRef: NAME }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    date: SlotDefaultStyling({ element, slotRef: DATE }),
-    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    subText: SlotDefaultStyling({ element, slotRef: SUB_TEXT }),
     theme: element._theme,
   });

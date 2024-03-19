@@ -2,26 +2,26 @@ import { Layout, Tokens } from '@universityofmaryland/variables';
 
 // Deprecated - Do Not Use
 
-const { Grid, GridBase } = Layout;
+const { GridRows, GridRowsWithGap, GridColumnsWithGap } = Layout;
 const { Queries, Spacing } = Tokens;
 
 export const GridColumnsStandard = {
   '.umd-grid': {
-    ...Grid['.base'],
+    ...GridRowsWithGap['.base'],
   },
 
   '.umd-grid-three': {
-    ...Grid['.base-three'],
+    ...GridRowsWithGap['.base-three'],
   },
 
   '.umd-grid-four': {
-    ...Grid['.base-four'],
+    ...GridRowsWithGap['.base-four'],
   },
 };
 
 export const GridColumnsGutterless = {
   '.umd-grid-gutterless-two': {
-    ...GridBase,
+    ...GridRows,
 
     gridGap: Spacing.min,
 
@@ -32,7 +32,7 @@ export const GridColumnsGutterless = {
   },
 
   '.umd-grid-gutterless-three': {
-    ...GridBase,
+    ...GridRows,
 
     gridGap: Spacing.min,
 
@@ -47,7 +47,7 @@ export const GridColumnsGutterless = {
   },
 
   '.umd-grid-gutterless-four': {
-    ...GridBase,
+    ...GridRows,
 
     gridGap: Spacing.min,
 
@@ -64,7 +64,7 @@ export const GridColumnsGutterless = {
 
 export const GridColumnsFeatured = {
   '.umd-grid-featured-card': {
-    ...GridBase,
+    ...GridRowsWithGap,
 
     [`@media (${Queries.medium.min})`]: {
       gridGap: `${Spacing.md}`,

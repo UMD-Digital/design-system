@@ -17,7 +17,7 @@ import { UMDPathwayElement } from '../index';
 
 const { Spacing, Colors, FontSize } = Tokens;
 const { Ribbon, Text } = Fields;
-const { FlexRows } = Layout;
+const { GridColumnAndRows } = Layout;
 const { SansLargest, CampaignExtralarge, SansLarger } = Typography;
 
 const { EYEBROW, HEADLINE, TEXT, ACTIONS } = SLOTS;
@@ -205,7 +205,7 @@ const ActionStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_ACTIONS_CONTAINER}`]: FlexRows['.auto'],
+      [`.${SUMMARY_ACTIONS_CONTAINER}`]: GridColumnAndRows['.mobile-tablet'],
     },
   })}
 `;

@@ -52,30 +52,32 @@ const GridRowsWithGap = {
   '.base': {
     ...GridBase,
     ...GridGapBaseQueries,
-    gridGap: Spacing.md,
+    gridGap: Spacing.lg,
 
     [`@media (${Queries.desktop.min})`]: {
-      gridGap: Spacing['4xl'],
+      gridGap: Spacing.xl,
     },
   },
 
   '.base-three': {
     ...GridBase,
     ...GridGapBaseQueries,
-    gridGap: Spacing.md,
+    gridGap: Spacing.lg,
 
     [`@media (${Queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
+      gridGap: Spacing.xl,
     },
   },
 
   '.base-four': {
     ...GridBase,
     ...GridGapBaseQueries,
-    gridGap: Spacing.md,
+    gridGap: Spacing.lg,
 
     [`@media (${Queries.highDef.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
+      gridGap: Spacing.xl,
     },
   },
 };

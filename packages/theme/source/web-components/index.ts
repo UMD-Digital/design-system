@@ -5,6 +5,8 @@ import CardOverlay from './card-overlay';
 import CarouselCards from './carousel-cards';
 import EventsDateSlider from './events-date-slider';
 import Footer from './footer';
+import Hero from './hero';
+import ListRow from './list-row';
 import Pathway from './pathway';
 import NavDrawer from './nav-drawer';
 import NavItem from './nav-item';
@@ -17,6 +19,8 @@ export default {
   ...CardOverlay,
   ...CarouselCards,
   ...Footer,
+  ...Hero,
+  ...ListRow,
   ...EventsDateSlider,
   ...Pathway,
   ...NavDrawer,

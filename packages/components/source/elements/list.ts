@@ -8,7 +8,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { SansLarger, SansMin } = Typography;
+const { SansLarger, SansMin, Eyebrow } = Typography;
 
 const BREAKPOINTS = {
   MOBILE: 650,
@@ -28,6 +28,7 @@ const LIST_CONTAINER_WRAPPER = 'umd-list-container-wrapper';
 const LIST_DATE_BLOCK_CONTAINER = 'umd-list-date-container';
 const LIST_TEXT_CONTAINER = 'umd-list-text-container';
 const LIST_IMAGE_CONTAINER = 'umd-list-image-container';
+const LIST_EYEBROW_WRAPPER = 'umd-list-eyebrow-wrapper';
 const LIST_HEADLINE_WRAPPER = 'umd-list-headline-wrapper';
 const LIST_DETAILS_WRAPPER = 'umd-list-date-wrapper';
 const LIST_TEXT_WRAPPER = 'umd-list-text-wrapper';
@@ -145,6 +146,34 @@ export const ColumnImageStyles = `
 `;
 
 // prettier-ignore
+const EyebrowStyles = `
+  * + .${LIST_EYEBROW_WRAPPER} {
+    margin-top: ${Spacing.min}
+  }
+
+  .${LIST_EYEBROW_WRAPPER} * {
+    color: ${Colors.black};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${LIST_EYEBROW_WRAPPER}`]: Eyebrow,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${LIST_EYEBROW_WRAPPER} *`]: Eyebrow,
+    },
+  })}
+
+  .${LIST_EYEBROW_WRAPPER} a:hover,
+  .${LIST_EYEBROW_WRAPPER} a:focus {
+    text-decoration: underline;
+  }
+`;
+
+// prettier-ignore
 const HeadlineStyles = `
   * + .${LIST_HEADLINE_WRAPPER} {
     margin-top: ${Spacing.min}
@@ -206,6 +235,12 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${LIST_TEXT_WRAPPER}`]: Typography.SansSmall,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${LIST_TEXT_WRAPPER} *`]: Typography.SansSmall,
     },
   })}
@@ -264,6 +299,7 @@ export const STYLES_LIST = `
   ${ColumnDateStyles}
   ${ColumnImageStyles}
   ${ColumnTextStyles}
+  ${EyebrowStyles}
   ${HeadlineStyles}
   ${DetailsStyles}
   ${TextStyles}
@@ -283,18 +319,24 @@ const CreateImage = ({ image }: { image: HTMLImageElement }) => {
 
 export const CreateListElement = ({
   image,
+  eyebrow,
   headline,
   text,
   details,
   dateBlock,
   date,
+  theme,
+  actions,
 }: {
   image?: HTMLImageElement | null;
   headline?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   details?: HTMLElement | null;
   dateBlock?: HTMLElement | null;
   date?: HTMLElement | null;
+  theme?: string;
+  actions?: HTMLElement | null;
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -303,6 +345,10 @@ export const CreateListElement = ({
   container.classList.add(LIST_CONTAINER);
   wrapper.classList.add(LIST_CONTAINER_WRAPPER);
   textContainer.classList.add(LIST_TEXT_CONTAINER);
+
+  // if (theme) {
+  //   container.setAttribute(VARIABLES.ATTRIBUTE_THEME, theme);
+  // }
 
   if (dateBlock) {
     const dateBlockContainer = document.createElement('div');
@@ -317,6 +363,11 @@ export const CreateListElement = ({
     const imageContainer = CreateImage({ image });
     container.setAttribute(VARIABLES.ATTR_IMAGE, '');
     wrapper.appendChild(imageContainer);
+  }
+
+  if (eyebrow) {
+    eyebrow.classList.add(LIST_EYEBROW_WRAPPER);
+    textContainer.appendChild(eyebrow);
   }
 
   if (headline) {
@@ -339,6 +390,11 @@ export const CreateListElement = ({
     date.classList.add(LIST_DATE_WRAPPER);
     textContainer.appendChild(date);
   }
+
+  // if (actions) {
+  //   actions.classList.add(LIST_DATE_WRAPPER);
+  //   textContainer.appendChild(actions);
+  // }
 
   wrapper.appendChild(textContainer);
   container.appendChild(wrapper);

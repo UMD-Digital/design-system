@@ -1,0 +1,115 @@
+{% extends '../_layout.twig' %}
+
+{% set image = random(RecImageOptions) %}
+{% set logo = random(logoOptions) %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        List Row
+      </h1>
+    </div>
+
+    <section>
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          Default
+        </h3>
+
+        <umd-element-list-row>
+          <img slot="image" src="{{ image }}" alt="Image Description" />
+
+          <p slot="eyebrow">
+            Eyebrow Text
+          </p>
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-list-row>
+        <umd-element-list-row>
+          <img slot="image" src="{{ image }}" alt="Image Description" />
+
+          <p slot="eyebrow">
+            Eyebrow Text
+          </p>
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-list-row>
+        <umd-element-list-row>
+          <img slot="image" src="{{ image }}" alt="Image Description" />
+
+          <p slot="eyebrow">
+            Eyebrow Text
+          </p>
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-list-row>
+        <umd-element-list-row>
+          <img slot="image" src="{{ image }}" alt="Image Description" />
+
+          <p slot="eyebrow">
+            Eyebrow Text
+          </p>
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-list-row>
+      </div>
+    </section>
+  </section>
+{% endblock %}

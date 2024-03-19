@@ -4,7 +4,7 @@ import { CreateListElement, STYLES_LIST } from 'elements/list';
 import { UMDListRowElement } from '../index';
 import { SLOTS } from '../globals';
 
-const { IMAGE, EYEBROW, HEADLINE, TEXT, DATE, ACTIONS } = SLOTS;
+const { IMAGE, EYEBROW, HEADLINE, TEXT, DATE, ACTIONS, SUB_TEXT } = SLOTS;
 
 export const ComponentStyles = `
   :host {
@@ -32,7 +32,7 @@ export const CreateShadowDom = ({ element }: { element: UMDListRowElement }) =>
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    subText: SlotDefaultStyling({ element, slotRef: SLOTS.SUB_TEXT }),
+    subText: SlotDefaultStyling({ element, slotRef: SUB_TEXT }),
     date: SlotDefaultStyling({ element, slotRef: DATE }),
     actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
     theme: element._theme,

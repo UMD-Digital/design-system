@@ -1,21 +1,15 @@
 export const SLOTS = {
-  IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
+  STAT: 'stat',
   TEXT: 'text',
   SUB_TEXT: 'sub-text',
-  DATE: 'date',
-  ACTIONS: 'actions',
-  DATEBLOCK: 'date-block',
 };
 export const VARIABLES = {
-  ELEMENT_NAME: 'umd-element-list-row',
+  ELEMENT_NAME: 'umd-element-stat',
   ATTRIBUTE_TYPE: 'type',
   ATTRIBUTE_THEME: 'theme',
   THEME_LIGHT: 'light',
   THEME_DARK: 'dark',
   TYPE_DEFAULT: 'default',
-  TYPE_PERSON: 'person',
 };
 export const REFERENCES = {
   IS_THEME_DARK: `[${VARIABLES.ATTRIBUTE_THEME}='${VARIABLES.THEME_DARK}']`,

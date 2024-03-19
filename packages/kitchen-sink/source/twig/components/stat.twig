@@ -1,0 +1,31 @@
+{% extends '../_layout.twig' %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Stat
+      </h1>
+    </div>
+
+    <section>
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          Default
+        </h3>
+
+        <umd-element-stat>
+          <div slot="stat">
+            Titled
+          </div>
+          <div slot="text">
+            123
+          </div>
+          <div slot="sub-text">
+            123
+          </div>
+        </umd-element-stat>
+      </div>
+    </section>
+  </section>
+{% endblock %}

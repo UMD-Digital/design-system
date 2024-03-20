@@ -44,7 +44,7 @@ type TypeDetailDisplay = EventType & {
   isLayoutVeritcal?: boolean;
 };
 
-const { SansMin } = Typography;
+const { SansSmaller } = Typography;
 const { Colors, Spacing } = Tokens;
 
 const BREAKPOINTS = {
@@ -124,7 +124,7 @@ export const STYLES_DATE_DETAILS = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENTS_DATE_ROW_TEXT}`]: SansMin,
+      [`.${EVENTS_DATE_ROW_TEXT}`]: SansSmaller,
     },
   })}
 

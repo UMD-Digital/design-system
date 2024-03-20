@@ -10,9 +10,11 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
 const { TextDark } = Fields;
-const { SansLarge, SansMin, Eyebrow } = Typography;
+const { SansExtraLarge, SansLarger, SansLarge, SansSmall, SansMin, Eyebrow } =
+  Typography;
 
 const BREAKPOINTS = {
+  SMALL: 400,
   MOBILE: 650,
   TABLET: 768,
   DESKTOP: 1024,
@@ -30,6 +32,7 @@ export const ELEMENTS = {
   CARD_INTRO_CONTAINER: 'umd-card-overlay-intro-container',
 };
 
+const ELEMENT_NAME = 'umd-element-card';
 const CARD_CONTAINER = 'umd-card-container';
 const CARD_TEXT_CONTAINER = 'umd-card-text-container';
 const IMAGE_CONTAINER = 'umd-card-image-container';
@@ -102,8 +105,10 @@ const HeadlineStyles = `
     margin-top: ${Spacing.min}
   }
 
+  .${CARD_HEADLINE_WRAPPER},
   .${CARD_HEADLINE_WRAPPER} * {
     color: ${Colors.black};
+    font-weight: 700;
   }
 
   ${ConvertJSSObjectToStyles({
@@ -117,6 +122,35 @@ const HeadlineStyles = `
       [`.${CARD_HEADLINE_WRAPPER} *`]: SansLarge,
     },
   })}
+
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.SMALL}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_HEADLINE_WRAPPER}`]: SansLarger,
+      },
+    })}
+  
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_HEADLINE_WRAPPER} *`]: SansLarger,
+      },
+    })}
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_HEADLINE_WRAPPER}`]: SansExtraLarge,
+      },
+    })}
+  
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_HEADLINE_WRAPPER} *`]: SansExtraLarge,
+      },
+    })}
+  }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
@@ -152,6 +186,20 @@ const DateStyles = `
       [`.${CARD_BODY_DATE_WRAPPER} *`]: SansMin,
     },
   })}
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_BODY_DATE_WRAPPER}`]: SansSmall,
+      },
+    })}
+  
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_BODY_DATE_WRAPPER} *`]: SansSmall,
+      },
+    })}
+  }
 `;
 
 // prettier-ignore
@@ -161,6 +209,14 @@ const TextStyles = `
       [`.${CARD_BODY_TEXT_WRAPPER} *`]: Typography.SansSmall,
     },
   })}
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${CARD_BODY_TEXT_WRAPPER} *`]: Typography.SansLarge,
+      },
+    })}
+  }
 
   .${CARD_BODY_TEXT_WRAPPER} a {
     text-decoration: underline;
@@ -261,6 +317,12 @@ const VariantAlignedStyles = `
     object-position: center;
     width: 100%;
   }
+
+  @media (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${CARD_CONTAINER}[${VARIABLES.ATTR_ALIGNED}] img {
+      aspect-ratio: inherit;
+    }
+  }
 `;
 
 // prettier-ignore
@@ -292,7 +354,7 @@ const VariantBorderStyles = `
 export const STYLES_CARD = `
   .${CARD_CONTAINER} {
     max-width: 680px;
-    container: umd-card / inline-size;
+    container: ${ELEMENT_NAME} / inline-size;
   }
 
   @media (max-width: ${BREAKPOINTS.MOBILE - 1}px) {

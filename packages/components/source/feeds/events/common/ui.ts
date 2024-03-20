@@ -89,7 +89,7 @@ export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
       date: CreateDateDetailsElement(entry),
-      aligned: true,
+      aligned: false,
     }),
   );
 

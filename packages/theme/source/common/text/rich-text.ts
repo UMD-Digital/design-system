@@ -1,7 +1,7 @@
 import { Typography, Fields, Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Spacing, FontFamily } = Tokens;
-const { Text, TextDark } = Fields;
+const { RichText, RichTextDark } = Fields;
 const { SansSmaller, SansLarge, SansLarger } = Typography;
 
 const RichTextCoding = {
@@ -83,13 +83,13 @@ const RichTextTables = {
 
 export default {
   '.umd-rich-text': {
-    ...Text,
+    ...RichText,
     ...RichTextCoding['.umd-rich-text-coding'],
     ...RichTextQuotes['.umd-rich-text-inline-quote'],
     ...RichTextTables['.umd-rich-text-inline-table'],
   },
 
   '.umd-rich-text-dark': {
-    ...TextDark,
+    ...RichTextDark,
   },
 };

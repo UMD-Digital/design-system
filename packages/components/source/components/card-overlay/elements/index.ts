@@ -8,7 +8,7 @@ import { CardType } from '../index';
 import { ELEMENTS, SLOTS, VARIABLES } from '../globals';
 
 const { Colors, Spacing } = Tokens;
-const { TextDark } = Fields;
+const { RichTextDark } = Fields;
 const { LinkLineSlide } = Animations;
 
 const { IMAGE } = SLOTS;
@@ -86,7 +86,7 @@ const VariantDarkThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${ATTR_THEME_DARK}] .${CARD_OVERLAY_TEXT}`]:
-        TextDark,
+      RichTextDark,
     },
   })}
 `;
@@ -103,7 +103,7 @@ const VariantImageThemeContent = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}[${ATTR_IMAGE}] .${CARD_OVERLAY_TEXT}`]:
-        TextDark,
+      RichTextDark,
     },
   })}
 `;

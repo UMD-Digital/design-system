@@ -9,7 +9,7 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { TextDark } = Fields;
+const { RichTextDark } = Fields;
 const { SansExtraLarge, SansLarger, SansLarge, SansSmall, SansMin, Eyebrow } =
   Typography;
 
@@ -297,7 +297,7 @@ const VariantThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_CONTAINER}[${VARIABLES.ATTR_THEME_DARK}] .${CARD_BODY_TEXT_WRAPPER}`]:
-      TextDark,
+      RichTextDark,
     },
   })}
 

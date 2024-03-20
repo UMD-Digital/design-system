@@ -4,7 +4,7 @@ import { Spacing } from '../tokens/spacing';
 import Animations from '../animations';
 import Lists from '../elements/list';
 
-const TextBase = {
+const RichTextBase = {
   lineHeight: '1.5em',
 
   '& > *': {
@@ -56,13 +56,13 @@ const TextBase = {
   },
 };
 
-const Text = {
+const RichText = {
   FontWeight: FontWeight.normal,
-  ...TextBase,
+  ...RichTextBase,
   ...Lists,
 };
 
-const TextDark = {
+const RichTextDark = {
   color: Colors.white,
 
   '& a': {
@@ -70,4 +70,4 @@ const TextDark = {
   },
 };
 
-export { Text, TextDark };
+export { RichText, RichTextDark };

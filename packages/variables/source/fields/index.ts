@@ -1,4 +1,4 @@
 import { Ribbon } from './eyebrow';
-import { Text, TextDark } from './text';
+import { RichText, RichTextDark } from './text';
 
-export default { Ribbon, Text, TextDark };
+export default { Ribbon, RichText, RichTextDark };

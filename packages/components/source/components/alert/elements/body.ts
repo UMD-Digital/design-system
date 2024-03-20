@@ -4,7 +4,7 @@ import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { UMDAlertElement } from '../index';
 
-const { Text } = Fields;
+const { RichText } = Fields;
 const { Colors } = Tokens;
 
 const { BODY } = SLOTS;
@@ -20,7 +20,7 @@ export const bodyStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_BODY}`]: Text,
+      [`.${ALERT_BODY}`]: RichText,
     },
   })}
 `;

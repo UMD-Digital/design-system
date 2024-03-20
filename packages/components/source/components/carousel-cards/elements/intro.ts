@@ -5,7 +5,7 @@ import { SLOTS, BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
 import { UMDCarouselCardsElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
-const { TextDark } = Fields;
+const { RichTextDark } = Fields;
 const { SansMedium, SansLargest } = Typography;
 
 const { LARGE } = BREAKPOINTS;
@@ -48,7 +48,7 @@ const textStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: TextDark,
+      [`.${INTRO_CONTAINER_TEXT}`]: RichTextDark,
     },
   })}
 

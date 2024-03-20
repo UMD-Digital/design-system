@@ -16,7 +16,7 @@ import {
 import { UMDPathwayElement } from '../index';
 
 const { Spacing, Colors, FontSize } = Tokens;
-const { Ribbon, Text } = Fields;
+const { Ribbon, RichText } = Fields;
 const { GridColumnAndRows } = Layout;
 const { SansLargest, CampaignExtralarge, SansLarger } = Typography;
 
@@ -180,7 +180,7 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${SUMMARY_TEXT_CONTAINER}`]: Text,
+      [`.${SUMMARY_TEXT_CONTAINER}`]: RichText,
     },
   })}
 

@@ -7,6 +7,7 @@ import EventsDateSlider from './events-date-slider';
 import Footer from './footer';
 import Hero from './hero';
 import ListRow from './list-row';
+import ListPersonRow from './list-person-row';
 import Pathway from './pathway';
 import NavDrawer from './nav-drawer';
 import NavItem from './nav-item';
@@ -21,6 +22,7 @@ export default {
   ...Footer,
   ...Hero,
   ...ListRow,
+  ...ListPersonRow,
   ...EventsDateSlider,
   ...Pathway,
   ...NavDrawer,

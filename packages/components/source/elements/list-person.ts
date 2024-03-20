@@ -8,9 +8,9 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { SansLarger, Eyebrow } = Typography;
+const { SansLarger } = Typography;
 
-const ELEMENT_NAME = 'umd-list';
+const ELEMENT_NAME = 'umd-list-person';
 
 const ATTRIBUTE_IMAGE = 'image';
 const ATTRIBUTE_THEME = 'theme';
@@ -32,6 +32,10 @@ const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 const VariationThemeStyles = `
   .${LIST_CONTAINER}${IS_THEME_DARK} .${LIST_TEXT_CONTAINER} * {
     color: ${Colors.white};
+  }
+
+  .${LIST_CONTAINER}${IS_THEME_DARK} .${LIST_CONTAINER_WRAPPER} {
+    border-bottom: 1px solid ${Colors.gray.dark};
   }
 
   ${ConvertJSSObjectToStyles({

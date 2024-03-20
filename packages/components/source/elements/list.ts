@@ -40,6 +40,10 @@ const VariationThemeStyles = `
     color: ${Colors.white};
   }
 
+  .${LIST_CONTAINER}${IS_THEME_DARK} .${LIST_CONTAINER_WRAPPER} {
+    border-bottom: 1px solid ${Colors.gray.dark};
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${LIST_CONTAINER}${IS_THEME_DARK} .${LIST_HEADLINE_WRAPPER} a`]:

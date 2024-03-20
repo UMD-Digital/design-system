@@ -42,6 +42,8 @@ const logoOptions = [
   'https://provost.umd.edu/logos/provost-logo-primary-light.png',
 ];
 
+const personOptions = ['/person-1.jpeg', '/person-2.jpeg', '/person-3.jpeg'];
+
 const twigTask = () =>
   gulp
     .src(twigSource)
@@ -53,6 +55,7 @@ const twigTask = () =>
           WeirdImageOptions,
           GifImageOptions,
           logoOptions,
+          personOptions,
         },
       }),
     )

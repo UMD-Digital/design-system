@@ -33,6 +33,10 @@ const VarationThemeDarkStyles = `
   .${STAT_CONTAINER}${IS_THEME_DARK} .${STAT_DISPLAY} {
     color: ${Colors.gold};
   }
+
+  .${STAT_CONTAINER}${IS_THEME_DARK} .${STAT_SUB_TEXT} {
+    color: ${Colors.gray.light};
+  }
 `;
 
 // prettier-ignore
@@ -118,7 +122,7 @@ const StatDisplayStyles = `
   }
 
   .${STAT_DISPLAY} + * {
-    margin-top: ${Spacing.sm};
+    margin-top: ${Spacing.min};
    }
 `;
 
@@ -138,6 +142,7 @@ const TextStyles = `
 
   .${STAT_TEXT} {
     color: ${Colors.black};
+    line-height: 1.444;
   }
 
   .${STAT_TEXT} * {

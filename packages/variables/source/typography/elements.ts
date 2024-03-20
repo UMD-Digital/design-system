@@ -25,7 +25,6 @@ export const LabelMedium = {
   },
 
   [`@media (${breakpointMobile})`]: {
-    // umd-label-sans-small
     fontSize: FontSize['sm'],
     lineHeight: `1.42em`,
   },
@@ -50,7 +49,6 @@ export const InterativeMedium = {
   },
 
   [`@media (${breakpointMobile})`]: {
-    // umd-interactive-sans-small
     fontSize: FontSize['base'],
     lineHeight: `1.125em`,
   },
@@ -69,13 +67,12 @@ export const StatisticsLarge = {
   fontSize: FontSize['max'],
   fontStyle: 'italic',
   fontWeight: FontWeight['extraBold'],
-  lineHeight: '0.83em',
+  lineHeight: '1',
 
   [`@media (${breakpointDesktop})`]: {
     fontSize: `calc(${FontSize['9xl']} + 3.33vw)`,
   },
 
-  // Stat2
   [`@media (${breakpointMobile})`]: {
     fontSize: FontSize['9xl'],
   },
@@ -83,16 +80,15 @@ export const StatisticsLarge = {
 
 export const StatisticsMedium = {
   fontFamily: FontFamily['campaign'],
-  fontSize: FontSize['9xl'],
+  fontSize: FontSize['10xl'],
   fontStyle: 'italic',
   fontWeight: FontWeight['extraBold'],
-  lineHeight: '1.11em',
+  lineHeight: '1',
 
   [`@media (${breakpointDesktop})`]: {
     fontSize: `calc(${FontSize['7xl']} + 1.33vw)`,
   },
 
-  // Stats3
   [`@media (${breakpointMobile})`]: {
     fontSize: FontSize['7xl'],
   },

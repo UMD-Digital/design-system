@@ -213,9 +213,15 @@ const TextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${CARD_BODY_TEXT_WRAPPER} *`]: Typography.SansLarge,
+        [`.${CARD_BODY_TEXT_WRAPPER} *`]: Typography.SansMedium,
       },
     })}
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+    .${CARD_BODY_TEXT_WRAPPER} * {
+      line-height: 1.375em;
+    }
   }
 
   .${CARD_BODY_TEXT_WRAPPER} a {

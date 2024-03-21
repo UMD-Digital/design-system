@@ -15,8 +15,16 @@ const {
 } = Typography;
 
 const { STAT, SUB_TEXT, TEXT } = SLOTS;
-const { ATTRIBUTE_THEME, ATTRIBUTE_TYPE, ATTRIBUTE_SIZE } = VARIABLES;
-const { IS_THEME_DARK, IS_SIZE_LARGE } = REFERENCES;
+const {
+  ELEMENT_NAME,
+  ATTRIBUTE_THEME,
+  ATTRIBUTE_TYPE,
+  ATTRIBUTE_SIZE,
+  ATTRIBUTE_HAS_LINE,
+} = VARIABLES;
+const { IS_THEME_DARK, IS_SIZE_LARGE, IS_WITH_LINE } = REFERENCES;
+
+const SMALL = 400;
 
 const STAT_CONTAINER = `umd-stat-container`;
 const STAT_WRAPPER = `umd-stat-wrapper`;
@@ -26,67 +34,76 @@ const STAT_SUB_TEXT = `umd-stat-sub-text`;
 
 // prettier-ignore
 const VarationThemeDarkStyles = `
-  .${STAT_CONTAINER}${IS_THEME_DARK} .${STAT_WRAPPER} * {
+  .${STAT_WRAPPER}${IS_THEME_DARK} * {
     color: ${Colors.white};
   }
 
-  .${STAT_CONTAINER}${IS_THEME_DARK} .${STAT_DISPLAY} {
+  .${STAT_WRAPPER}${IS_THEME_DARK} .${STAT_DISPLAY} {
     color: ${Colors.gold};
   }
 
-  .${STAT_CONTAINER}${IS_THEME_DARK} .${STAT_SUB_TEXT} {
+  .${STAT_WRAPPER}${IS_THEME_DARK} .${STAT_SUB_TEXT} {
     color: ${Colors.gray.light};
   }
 `;
 
 // prettier-ignore
 const VarationSizeLargeStyles = `
-  .${STAT_CONTAINER}${IS_SIZE_LARGE}  {
-    padding-left: ${Spacing.sm};
-    border-left: 2px solid ${Colors.gold};
-  }
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_DISPLAY}`]: StatisticsLarge,
+      [`.${STAT_WRAPPER}${IS_SIZE_LARGE} .${STAT_DISPLAY}`]: StatisticsLarge,
     },
   })}
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_DISPLAY} *`]: StatisticsLarge,
+      [`.${STAT_WRAPPER}${IS_SIZE_LARGE} .${STAT_DISPLAY} *`]: StatisticsLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_TEXT}`]: SansLarger,
+      [`.${STAT_WRAPPER}${IS_SIZE_LARGE} .${STAT_TEXT}`]: SansLarger,
     },
   })}
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_TEXT} *`]: SansLarger,
+      [`.${STAT_WRAPPER}${IS_SIZE_LARGE} .${STAT_TEXT} *`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_SUB_TEXT}`]: SansSmaller,
+      [`.${STAT_WRAPPER}${IS_SIZE_LARGE} .${STAT_SUB_TEXT}`]: SansSmaller,
     },
   })}
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${STAT_CONTAINER}${IS_SIZE_LARGE} .${STAT_SUB_TEXT} *`]: SansSmaller,
+      [`.${STAT_WRAPPER}${IS_SIZE_LARGE} .${STAT_SUB_TEXT} *`]: SansSmaller,
     },
   })}
 `;
 
 // prettier-ignore
+const VarationWithLineStyles = `
+  .${STAT_WRAPPER}${IS_WITH_LINE} {
+    padding-left: ${Spacing.sm};
+    border-left: 2px solid ${Colors.gold};
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    .${STAT_WRAPPER}${IS_WITH_LINE} {
+      padding-left: ${Spacing.xl};
+    }
+  }
+`
+
+// prettier-ignore
 const StatContainerStyles = `
   .${STAT_CONTAINER} {
-
+    container: ${ELEMENT_NAME} / inline-size;
   }
 `;
 
@@ -190,6 +207,7 @@ export const ComponentStyles = `
   ${TextStyles}
   ${SubTextStyles}
   ${VarationSizeLargeStyles}
+  ${VarationWithLineStyles}
   ${VarationThemeDarkStyles}
 `;
 
@@ -221,6 +239,7 @@ export const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
   const theme = element._theme;
   const type = element._type;
   const size = element._size;
+  const hasLine = element._hasLine;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const stat = MakeState({ element });
@@ -228,9 +247,10 @@ export const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
   const subText = SlotDefaultStyling({ element, slotRef: SUB_TEXT });
 
   container.classList.add(STAT_CONTAINER);
-  container.setAttribute(ATTRIBUTE_THEME, theme);
-  container.setAttribute(ATTRIBUTE_TYPE, type);
-  container.setAttribute(ATTRIBUTE_SIZE, size);
+  wrapper.setAttribute(ATTRIBUTE_THEME, theme);
+  wrapper.setAttribute(ATTRIBUTE_TYPE, type);
+  wrapper.setAttribute(ATTRIBUTE_SIZE, size);
+  if (hasLine) wrapper.setAttribute(ATTRIBUTE_HAS_LINE, '');
   wrapper.classList.add(STAT_WRAPPER);
 
   if (stat) wrapper.appendChild(stat);

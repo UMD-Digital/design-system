@@ -13,6 +13,7 @@ const {
   ATTRIBUTE_TYPE,
   ATTRIBUTE_THEME,
   ATTRIBUTE_SIZE,
+  ATTRIBUTE_HAS_LINE,
   THEME_LIGHT,
   TYPE_DEFAULT,
   SIZE_DEFAULT,
@@ -23,6 +24,7 @@ export class UMDStatElement extends HTMLElement {
   _theme: string;
   _type: string;
   _size: string;
+  _hasLine: boolean;
 
   constructor() {
     super();
@@ -30,6 +32,7 @@ export class UMDStatElement extends HTMLElement {
     this._type = this.getAttribute(ATTRIBUTE_TYPE) || TYPE_DEFAULT;
     this._theme = this.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
     this._size = this.getAttribute(ATTRIBUTE_SIZE) || SIZE_DEFAULT;
+    this._hasLine = this.hasAttribute(ATTRIBUTE_HAS_LINE);
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });

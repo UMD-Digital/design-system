@@ -1,7 +1,7 @@
 import { Layout } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-const { GridRowsWithGap } = Layout;
+const { GridColumnsWithGap } = Layout;
 
 export const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 
@@ -9,14 +9,14 @@ export const STYLES_GRID_LAYOUT = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="2"]`]:
-        GridRowsWithGap['.base'],
+        GridColumnsWithGap['.base'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="3"]`]:
-        GridRowsWithGap['.base-three'],
+        GridColumnsWithGap['.base-three'],
     },
   })}
 
@@ -24,7 +24,7 @@ export const STYLES_GRID_LAYOUT = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="4"]`]:
-        GridRowsWithGap['.base-four'],
+        GridColumnsWithGap['.base-four'],
     },
   })}
 `;

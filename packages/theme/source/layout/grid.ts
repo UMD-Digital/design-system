@@ -1,28 +1,25 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
-// Deprecated - Do Not Use
-
-const { GridRows, GridRowsWithGap, GridColumnsWithGap } = Layout;
+const { GridColumns, GridColumnsWithGap } = Layout;
 const { Queries, Spacing } = Tokens;
 
 export const GridColumnsStandard = {
   '.umd-grid': {
-    ...GridRowsWithGap['.base'],
+    ...GridColumnsWithGap['.base'],
   },
 
   '.umd-grid-three': {
-    ...GridRowsWithGap['.base-three'],
+    ...GridColumnsWithGap['.base-three'],
   },
 
   '.umd-grid-four': {
-    ...GridRowsWithGap['.base-four'],
+    ...GridColumnsWithGap['.base-four'],
   },
 };
 
 export const GridColumnsGutterless = {
   '.umd-grid-gutterless-two': {
-    ...GridRows,
-
+    display: 'grid',
     gridGap: Spacing.min,
 
     [`@media (${Queries.large.min})`]: {
@@ -32,8 +29,7 @@ export const GridColumnsGutterless = {
   },
 
   '.umd-grid-gutterless-three': {
-    ...GridRows,
-
+    display: 'grid',
     gridGap: Spacing.min,
 
     [`@media (${Queries.large.min})`]: {
@@ -47,8 +43,7 @@ export const GridColumnsGutterless = {
   },
 
   '.umd-grid-gutterless-four': {
-    ...GridRows,
-
+    display: 'grid',
     gridGap: Spacing.min,
 
     [`@media (${Queries.large.min})`]: {
@@ -64,7 +59,7 @@ export const GridColumnsGutterless = {
 
 export const GridColumnsFeatured = {
   '.umd-grid-featured-card': {
-    ...GridRowsWithGap,
+    ...GridColumnsWithGap,
 
     [`@media (${Queries.medium.min})`]: {
       gridGap: `${Spacing.md}`,

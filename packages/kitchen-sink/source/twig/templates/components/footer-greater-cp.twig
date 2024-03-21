@@ -1,4 +1,12 @@
-<umd-element-footer type="visual" style="display: block;">
+{% set attrs = '' %}
+
+{% if includeVisual == true %}
+  {% set attrs = attrs ~ 'type=visual' %}
+{% else %}
+  {% set attrs = attrs ~ 'type=mega' %}
+{% endif %}
+
+<umd-element-footer {{ attr }}>
   <p slot="contact-headline">
     Greater College Park
   </p>
@@ -57,7 +65,9 @@
     </li>
   </ul>
 
-  <img slot="background-image"
-    src="/greater-cp/footer.jpg"
-    alt="University of Maryland Logo" />
+  {% if includeVisual == true %}
+    <img slot="background-image"
+      src="/greater-cp/footer.jpg"
+      alt="University of Maryland Logo" />
+  {% endif %}
 </umd-element-footer>

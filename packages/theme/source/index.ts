@@ -33,10 +33,16 @@ const root = {
     FontSize: FontSize.base,
     lineHeight: '1.5em',
   },
+
+  hr: {
+    margin: `${Tokens.Spacing.lg} 0`,
+    backgroundColor: Colors.gray.light,
+    border: 'none',
+    height: '1px',
+  },
 };
 
 export const base = Tokens;
-
 export const theme = {
   root,
   Accessibility,

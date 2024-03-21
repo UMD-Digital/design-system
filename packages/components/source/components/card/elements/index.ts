@@ -1,10 +1,12 @@
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
-import { SLOTS } from '../globals';
+import { CreateListElement, STYLES_LIST } from 'elements/list';
+import { SLOTS, VARIABLES } from '../globals';
 import { UMDCardElement } from '../index';
 
 const { EYEBROW, HEADLINE, TEXT, IMAGE, CTA } = SLOTS;
+const { DISPLAY_LIST } = VARIABLES;
 
 // prettier-ignore
 export const ComponentStyles = `
@@ -14,6 +16,7 @@ export const ComponentStyles = `
 
   ${Reset}
   ${STYLES_CARD}
+  ${STYLES_LIST}
 `;
 
 const GetImage = ({ element }: { element: UMDCardElement }) => {
@@ -27,8 +30,19 @@ const GetImage = ({ element }: { element: UMDCardElement }) => {
   return null;
 };
 
-export const CreateShadowDom = ({ element }: { element: UMDCardElement }) =>
-  CreateCardElement({
+export const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
+  if (element._display === DISPLAY_LIST) {
+    return CreateListElement({
+      image: GetImage({ element }),
+      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+      text: SlotDefaultStyling({ element, slotRef: TEXT }),
+      actions: SlotDefaultStyling({ element, slotRef: CTA }),
+      theme: element._theme,
+    });
+  }
+
+  return CreateCardElement({
     image: GetImage({ element }),
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
@@ -38,3 +52,4 @@ export const CreateShadowDom = ({ element }: { element: UMDCardElement }) =>
     aligned: element._aligned,
     border: element._border,
   });
+};

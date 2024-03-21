@@ -14,11 +14,15 @@ const {
   ATTRIBUTE_BORDER,
   ATTRIBUTE_ALIGNED,
   ATTRIBUTE_THEME,
+  ATTRIBUTE_DISPLAY,
+  DISPLAY_BLOCK,
+  DISPLAY_LIST,
 } = VARIABLES;
 
 export class UMDCardElement extends HTMLElement {
   _shadow: ShadowRoot;
   _theme: string;
+  _display: string;
   _aligned: boolean;
   _border: boolean;
 
@@ -26,6 +30,7 @@ export class UMDCardElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._theme = THEME_LIGHT;
+    this._display = DISPLAY_BLOCK;
     this._aligned = false;
     this._border = false;
 
@@ -35,18 +40,17 @@ export class UMDCardElement extends HTMLElement {
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
-  static get observedAttributes() {
-    return [ATTRIBUTE_THEME, ATTRIBUTE_ALIGNED, ATTRIBUTE_BORDER];
-  }
-
   connectedCallback() {
     const element = this;
     const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
     const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
+    const displayAttr = element.getAttribute(ATTRIBUTE_DISPLAY);
 
     element._theme = element.getAttribute(ATTRIBUTE_THEME) || element._theme;
     element._aligned = alignmentAttr === 'true';
     element._border = borderAttr === 'true';
+
+    if (displayAttr === DISPLAY_LIST) element._display = DISPLAY_LIST;
 
     const container = CreateShadowDom({ element });
     this._shadow.appendChild(container);

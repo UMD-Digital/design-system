@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    UMDCardElement: typeof UMDCardElement;
+    UMDArticleElement: typeof UMDArticleElement;
   }
 }
 
@@ -16,7 +16,7 @@ const {
   ATTRIBUTE_THEME,
 } = VARIABLES;
 
-export class UMDCardElement extends HTMLElement {
+export class UMDArticleElement extends HTMLElement {
   _shadow: ShadowRoot;
   _theme: string;
   _aligned: boolean;
@@ -65,7 +65,7 @@ export const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDCardElement = UMDCardElement;
-    window.customElements.define(ELEMENT_NAME, UMDCardElement);
+    window.UMDArticleElement = UMDArticleElement;
+    window.customElements.define(ELEMENT_NAME, UMDArticleElement);
   }
 };

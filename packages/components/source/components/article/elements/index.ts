@@ -2,7 +2,7 @@ import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
 import { SLOTS } from '../globals';
-import { UMDCardElement } from '../index';
+import { UMDArticleElement } from '../index';
 
 const { EYEBROW, HEADLINE, TEXT, DATE, IMAGE, CTA } = SLOTS;
 
@@ -16,7 +16,7 @@ export const ComponentStyles = `
   ${STYLES_CARD}
 `;
 
-const GetImage = ({ element }: { element: UMDCardElement }) => {
+const GetImage = ({ element }: { element: UMDArticleElement }) => {
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
   const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
 
@@ -27,7 +27,7 @@ const GetImage = ({ element }: { element: UMDCardElement }) => {
   return null;
 };
 
-export const CreateShadowDom = ({ element }: { element: UMDCardElement }) =>
+export const CreateShadowDom = ({ element }: { element: UMDArticleElement }) =>
   CreateCardElement({
     image: GetImage({ element }),
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),

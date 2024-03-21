@@ -6,7 +6,6 @@ import CarouselCards from './carousel-cards';
 import EventsDateSlider from './events-date-slider';
 import Footer from './footer';
 import Hero from './hero';
-import ListRow from './list-row';
 import ListPersonRow from './list-person-row';
 import Pathway from './pathway';
 import NavDrawer from './nav-drawer';
@@ -21,7 +20,6 @@ export default {
   ...CarouselCards,
   ...Footer,
   ...Hero,
-  ...ListRow,
   ...ListPersonRow,
   ...EventsDateSlider,
   ...Pathway,

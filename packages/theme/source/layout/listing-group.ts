@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Spacing } = Tokens;
 
-export const ListingGroup = {
+const ListingGroup = {
   '.umd-listing-group': {
     borderTop: `1px solid ${Colors.gray.light}`,
     display: 'grid',
@@ -10,4 +10,8 @@ export const ListingGroup = {
     gridTemplateColumns: '1fr',
     paddingTop: Spacing.sm,
   },
+};
+
+export default {
+  ...ListingGroup,
 };

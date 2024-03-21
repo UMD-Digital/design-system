@@ -1,6 +1,6 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
-const { GridColumns, GridColumnsWithGap } = Layout;
+const { GridColumns, GridColumnsWithGap, GridColumnAndRows } = Layout;
 const { Queries, Spacing } = Tokens;
 
 export const GridColumnsStandard = {
@@ -57,29 +57,39 @@ export const GridColumnsGutterless = {
   },
 };
 
-export const GridColumnsFeatured = {
-  '.umd-grid-featured-card': {
-    ...GridColumnsWithGap,
+const GridColumnsFeatured = {
+  ...GridColumnsWithGap,
 
-    [`@media (${Queries.medium.min})`]: {
-      gridGap: `${Spacing.md}`,
-      gridTemplateColumns: 'repeat(2, 1fr)',
+  [`@media (${Queries.medium.min})`]: {
+    gridGap: `${Spacing.md}`,
+    gridTemplateColumns: 'repeat(2, 1fr)',
 
-      '& > *:first-child': {
-        gridColumnStart: '1',
-        gridColumnEnd: 'span 2',
-      },
+    '& > *:first-child': {
+      gridColumnStart: '1',
+      gridColumnEnd: 'span 2',
     },
+  },
 
-    [`@media (${Queries.desktop.min})`]: {
-      gridGap: `${Spacing.lg}`,
-      gridTemplateColumns: `[start-feature] calc(50% - ${Spacing.md}) [end-feature start-cards] repeat(2, 1fr) [end-cards]`,
+  [`@media (${Queries.desktop.min})`]: {
+    gridGap: `${Spacing.lg}`,
+    gridTemplateColumns: `[start-feature] calc(50% - ${Spacing.md}) [end-feature start-cards] repeat(2, 1fr) [end-cards]`,
 
-      [`& > umd-element-card-overlay:first-child,
+    [`& > umd-element-card-overlay:first-child,
         & > umd-element-card:first-child`]: {
-        gridColumnStart: '1',
-        gridColumnEnd: '1',
-      },
+      gridColumnStart: '1',
+      gridColumnEnd: '1',
     },
+  },
+};
+
+export default {
+  ...GridColumnsStandard,
+  ...GridColumnsGutterless,
+
+  '.umd-grid-featured-card': {
+    ...GridColumnsFeatured,
+  },
+  '.umd-grid-row-mobile-tablet': {
+    ...GridColumnAndRows['.mobile-tablet'],
   },
 };

@@ -21,7 +21,7 @@ const SpacingContentBase = {
 };
 
 // Deprecated - Do Not Use
-export const SpacingContent = {
+const SpacingContent = {
   '.umd-layout-spacing-left': { ...SpacingContentBase },
 
   '.umd-layout-spacing-right': {
@@ -45,7 +45,45 @@ export const SpacingContent = {
   },
 };
 
-export const LayoutSpacing = {
+const HeadlineLarge = {
+  marginBottom: Spacing.sm,
+
+  [`@media (${Queries.desktop.min})`]: {
+    marginBottom: Spacing.md,
+  },
+};
+
+const HeadlineMedium = {
+  marginBottom: Spacing.sm,
+};
+
+const InteriorNavigation = {
+  [`@media (${Queries.tablet.min})`]: {
+    display: 'flex',
+  },
+
+  '& > *:first-child': {
+    [`@media (${Queries.tablet.max})`]: {
+      display: 'none',
+    },
+
+    [`@media (${Queries.tablet.min})`]: {
+      marginRight: Spacing['max'],
+      width: '242px',
+    },
+  },
+
+  '& > *:last-child': {
+    [`@media (${Queries.tablet.min})`]: {
+      marginTop: Spacing.md,
+      maxWidth: '800px',
+    },
+  },
+};
+
+export default {
+  ...SpacingContent,
+
   '.umd-layout-vertical-landing': {
     ...Layout.VerticalLanding,
   },
@@ -57,5 +95,14 @@ export const LayoutSpacing = {
   },
   '.umd-layout-vertical-interior-child': {
     ...Layout.VerticalInteriorChild,
+  },
+  '.umd-layout-interior-navigation': {
+    ...InteriorNavigation,
+  },
+  '.umd-layout-headline-large': {
+    ...HeadlineLarge,
+  },
+  '.umd-layout-headline-medium': {
+    ...HeadlineMedium,
   },
 };

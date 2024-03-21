@@ -2,7 +2,7 @@ import { Layout } from '@universityofmaryland/variables';
 
 const { Lock } = Layout;
 
-export const LockSizes = {
+export default {
   '.umd-lock': {
     ...Lock['.base'],
   },

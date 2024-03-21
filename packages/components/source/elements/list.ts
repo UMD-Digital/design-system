@@ -19,6 +19,7 @@ const THEME_DARK = 'dark';
 
 const SMALL = 400;
 const MEDIUM = 500;
+const LARGE = 650;
 
 const LIST_CONTAINER = 'umd-list-container';
 const LIST_CONTAINER_WRAPPER = 'umd-list-container-wrapper';
@@ -122,15 +123,22 @@ const ColumnTextStyles = `
 export const ColumnImageStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL -1}px) {
     .${LIST_IMAGE_CONTAINER} {
-      width: 90px;
+      width: 96px;
       float: right;
+      margin-bottom: 4px;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${LIST_IMAGE_CONTAINER} {
-      width: 140px;
+      width: 160px;
       order: 3;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    .${LIST_IMAGE_CONTAINER} {
+      width: 208px;
     }
   }
 
@@ -303,6 +311,7 @@ const ActionStyles = `
 export const STYLES_LIST = `
   .${LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
+    max-width: 750px;
   }
 
   .${LIST_CONTAINER} + * {

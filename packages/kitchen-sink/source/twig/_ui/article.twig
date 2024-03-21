@@ -2,12 +2,14 @@
 {% import '../_ui/fields/eyebrow.twig' as Eyebrow %}
 {% import '../_ui/fields/headline.twig' as Headline %}
 {% import '../_ui/fields/text-slot-rich-text.twig' as RichText %}
+{% import '../_ui/fields/date.twig' as Date %}
 
 {% set url = params.url ?? 'https://umd.edu' %}
 
 {% macro SuccinctCardBody(params) %}
   {% set attrs = '' %}
 
+  {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasEyebrow = params.eyebrow ?? true %}
   {% set hasHeadline = params.headline ?? true %}
@@ -25,7 +27,7 @@
     {% set attrs = attrs ~ 'border="true"' ~ params.border ~ '"' %}
   {% endif %}
 
-  <umd-element-card {{ attrs }}>
+  <umd-element-article {{ attrs }}>
     {% if params.image %}
       <a slot="image" href="{{ url }}" target="_blank">
         <img src="{{ params.image }}" alt="Example Alt Text" />
@@ -44,6 +46,10 @@
       {{ RichText.CardRichTextSuccinct() }}
     {% endif %}
 
+    {% if hasDate %}
+      {{ Date.RandomDate() }}
+    {% endif %}
+
     {% if hasCtaLink %}
       {{
         CallToAction.InternalCallToAction({
@@ -51,12 +57,13 @@
         })
       }}
     {% endif %}
-  </umd-element-card>
+  </umd-element-article>
 {% endmacro %}
 
 {% macro NormalCardBody(params) %}
   {% set attrs = '' %}
 
+  {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasEyebrow = params.eyebrow ?? true %}
   {% set hasHeadline = params.headline ?? true %}
@@ -74,7 +81,7 @@
     {% set attrs = attrs ~ 'border="true"' ~ params.border ~ '"' %}
   {% endif %}
 
-  <umd-element-card {{ attrs }}>
+  <umd-element-article {{ attrs }}>
     {% if params.image %}
       <a slot="image" href="{{ url }}" target="_blank">
         <img src="{{ params.image }}" alt="Example Alt Text" />
@@ -93,6 +100,10 @@
       {{ RichText.CardRichTextNormal() }}
     {% endif %}
 
+    {% if hasDate %}
+      {{ Date.RandomDate() }}
+    {% endif %}
+
     {% if hasCtaLink %}
       {{
         CallToAction.InternalCallToAction({
@@ -100,12 +111,13 @@
         })
       }}
     {% endif %}
-  </umd-element-card>
+  </umd-element-article>
 {% endmacro %}
 
 {% macro VerboseCardBody(params) %}
   {% set attrs = '' %}
 
+  {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasEyebrow = params.eyebrow ?? true %}
   {% set hasHeadline = params.headline ?? true %}
@@ -123,7 +135,7 @@
     {% set attrs = attrs ~ 'border="true"' ~ params.border ~ '"' %}
   {% endif %}
 
-  <umd-element-card {{ attrs }}>
+  <umd-element-article {{ attrs }}>
     {% if params.image %}
       <a slot="image" href="{{ url }}" target="_blank">
         <img src="{{ params.image }}" alt="Example Alt Text" />
@@ -142,6 +154,10 @@
       {{ RichText.CardRichTextVerbose() }}
     {% endif %}
 
+    {% if hasDate %}
+      {{ Date.RandomDate() }}
+    {% endif %}
+
     {% if hasCtaLink %}
       {{
         CallToAction.InternalCallToAction({
@@ -149,5 +165,5 @@
         })
       }}
     {% endif %}
-  </umd-element-card>
+  </umd-element-article>
 {% endmacro %}

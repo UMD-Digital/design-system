@@ -1,5 +1,6 @@
 import { Load as AccordionLoader } from './components/accordion';
 import { Load as AlertLoader } from './components/alert';
+import { Load as ArticleLoader } from './components/article';
 import { Load as CallToActionLoader } from './components/call-to-action';
 import { Load as CardLoader } from './components/card';
 import { Load as CardOverlayLoader } from './components/card-overlay';
@@ -19,6 +20,7 @@ import LoadUmdFeeds from './feeds';
 const LoadUmdComponents = () => {
   AccordionLoader();
   AlertLoader();
+  ArticleLoader();
   CardLoader();
   CallToActionLoader();
   CardOverlayLoader();

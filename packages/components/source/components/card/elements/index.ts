@@ -4,7 +4,7 @@ import { CreateCardElement, STYLES_CARD } from 'elements/card';
 import { SLOTS } from '../globals';
 import { UMDCardElement } from '../index';
 
-const { EYEBROW, HEADLINE, TEXT, DATE, IMAGE, CTA } = SLOTS;
+const { EYEBROW, HEADLINE, TEXT, IMAGE, CTA } = SLOTS;
 
 // prettier-ignore
 export const ComponentStyles = `
@@ -33,7 +33,6 @@ export const CreateShadowDom = ({ element }: { element: UMDCardElement }) =>
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    date: SlotDefaultStyling({ element, slotRef: DATE }),
     cta: SlotDefaultStyling({ element, slotRef: CTA }),
     theme: element._theme,
     aligned: element._aligned,

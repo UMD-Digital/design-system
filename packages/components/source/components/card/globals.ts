@@ -4,7 +4,6 @@ export const SLOTS = {
   EYEBROW: 'eyebrow',
   TEXT: 'text',
   CTA: 'cta',
-  DATE: 'date',
 };
 export const VARIABLES = {
   ELEMENT_NAME: 'umd-element-card',

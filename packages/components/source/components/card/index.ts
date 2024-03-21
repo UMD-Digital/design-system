@@ -52,8 +52,7 @@ export class UMDCardElement extends HTMLElement {
 
     if (displayAttr === DISPLAY_LIST) element._display = DISPLAY_LIST;
 
-    const container = CreateShadowDom({ element });
-    this._shadow.appendChild(container);
+    this._shadow.appendChild(CreateShadowDom({ element }));
 
     SlotOberserver({
       element,

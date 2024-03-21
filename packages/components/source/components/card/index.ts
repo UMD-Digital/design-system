@@ -6,19 +6,28 @@ declare global {
 
 import { MakeTemplate, SlotOberserver } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
-import { SLOTS } from './globals';
+import { SLOTS, VARIABLES } from './globals';
 
-export const ELEMENT_NAME = 'umd-element-card';
-export type CardType = UMDCardElement;
+const {
+  ELEMENT_NAME,
+  THEME_LIGHT,
+  ATTRIBUTE_BORDER,
+  ATTRIBUTE_ALIGNED,
+  ATTRIBUTE_THEME,
+} = VARIABLES;
+
 export class UMDCardElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = 'light';
-  _aligned = false;
-  _border = false;
+  _theme: string;
+  _aligned: boolean;
+  _border: boolean;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
+    this._theme = THEME_LIGHT;
+    this._aligned = false;
+    this._border = false;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
@@ -27,15 +36,15 @@ export class UMDCardElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['theme', 'aligned', 'border'];
+    return [ATTRIBUTE_THEME, ATTRIBUTE_ALIGNED, ATTRIBUTE_BORDER];
   }
 
   connectedCallback() {
     const element = this;
-    const alignmentAttr = element.getAttribute('aligned');
-    const borderAttr = element.getAttribute('border');
+    const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
+    const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
 
-    element._theme = element.getAttribute('theme') || element._theme;
+    element._theme = element.getAttribute(ATTRIBUTE_THEME) || element._theme;
     element._aligned = alignmentAttr === 'true';
     element._border = borderAttr === 'true';
 

@@ -17,7 +17,8 @@ const ATTRIBUTE_DATA_BLOCK = 'with-date-block';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-const MOBILE = 650;
+const SMALL = 400;
+const MEDIUM = 500;
 
 const LIST_CONTAINER = 'umd-list-container';
 const LIST_CONTAINER_WRAPPER = 'umd-list-container-wrapper';
@@ -54,13 +55,13 @@ const VariationThemeStyles = `
 
 // prettier-ignore
 const VariationDateBlockStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${LIST_CONTAINER}${IS_WITH_DATE_BLOCK} .${LIST_CONTAINER_WRAPPER} {
       padding-left: ${Spacing.md};
     }
   }
   
-  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${LIST_CONTAINER}${IS_WITH_DATE_BLOCK} .${LIST_TEXT_CONTAINER} {
       padding: 0 ${Spacing.md};
     }
@@ -75,7 +76,7 @@ const WrapperStyles = `
     overflow: hidden;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${LIST_CONTAINER_WRAPPER} {
       display: flex;
       justify-content: space-between;
@@ -86,12 +87,18 @@ const WrapperStyles = `
 // prettier-ignore
 const ColumnDateStyles = `
   .${LIST_DATE_BLOCK_CONTAINER} {
-    width: ${Spacing['6xl']};
+    width: ${Spacing.xl};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${MOBILE - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     .${LIST_DATE_BLOCK_CONTAINER} {
       display: none;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    .${LIST_DATE_BLOCK_CONTAINER} {
+      width: ${Spacing['6xl']};
     }
   }
 `;
@@ -103,7 +110,7 @@ const ColumnTextStyles = `
     flex: 1 0;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${LIST_TEXT_CONTAINER} {
       padding-right: ${Spacing.md};
       order: 2;
@@ -113,14 +120,14 @@ const ColumnTextStyles = `
 
 // prettier-ignore
 export const ColumnImageStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${MOBILE -1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${SMALL -1}px) {
     .${LIST_IMAGE_CONTAINER} {
       width: 90px;
       float: right;
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${LIST_IMAGE_CONTAINER} {
       width: 140px;
       order: 3;
@@ -179,7 +186,7 @@ const HeadlineStyles = `
     margin-top: ${Spacing.min}
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${MOBILE - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     .${LIST_HEADLINE_WRAPPER} {
       max-width: calc(100% - 110px);
     }

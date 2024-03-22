@@ -1,12 +1,13 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
-import { ElementType } from 'components/nav-item';
-import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
+import { UMDNavItemElement } from '../index';
+import { ELEMENTS, VARIABLES, REFERENCES } from '../globals';
 
-const { Colors, FontFamily, FontSize, FontWeight } = Tokens;
+const { Colors, FontFamily, FontSize } = Tokens;
 
-const { ATTRIBUTE_DROPDOWN, ATTRIBUTE_SHOWING, ATTRIBUTE_SELECTED } = VARIABLES;
+const { ELEMENT_NAME, ATTRIBUTE_DROPDOWN, ATTRIBUTE_SHOWING } = VARIABLES;
+const { IS_SELECTED, IS_SHOWING, IS_DROPDOWN } = REFERENCES;
 const {
   CONTAINER,
   DROPDOWN_CONTAINER,
@@ -16,15 +17,15 @@ const {
 
 // prettier-ignore
 const hasDropdownStyles = `
-  .${CONTAINER}[${ATTRIBUTE_DROPDOWN}][${ATTRIBUTE_SHOWING}] .${DROPDOWN_CONTAINER} {
+  .${CONTAINER}${IS_DROPDOWN}${IS_SHOWING} .${DROPDOWN_CONTAINER} {
     display: block;
   }
 
-  .${CONTAINER}[${ATTRIBUTE_DROPDOWN}][${ATTRIBUTE_SHOWING}] .${PRIMARY_LINK_CONTAINER_BUTTON} {
+  .${CONTAINER}${IS_DROPDOWN}${IS_SHOWING} .${PRIMARY_LINK_CONTAINER_BUTTON} {
     transform: rotate(180deg) translateY(4px);
   }
 
-  .${CONTAINER}[${ATTRIBUTE_DROPDOWN}] .${PRIMARLY_LINK_WRAPPER} > a[${ATTRIBUTE_SELECTED}]:before {
+  .${CONTAINER}${IS_DROPDOWN} .${PRIMARLY_LINK_WRAPPER} > a${IS_SELECTED}:before {
     bottom: 1px;
     right: 20px;
   }
@@ -48,7 +49,7 @@ export const ComponentStyles = `
 
   .${CONTAINER} {
     position: relative;
-    container: umd-nav-item / inline-size;
+    container: ${ELEMENT_NAME} / inline-size;
   }
 
   .${CONTAINER}:foucs-within .${DROPDOWN_CONTAINER} {
@@ -59,7 +60,11 @@ export const ComponentStyles = `
   ${hasDropdownStyles}
 `;
 
-export const CreateShadowDom = ({ element }: { element: ElementType }) => {
+export const CreateShadowDom = ({
+  element,
+}: {
+  element: UMDNavItemElement;
+}) => {
   const container = document.createElement('div');
   const primaryLink = CreatePrimaryLink({ element });
 

@@ -1,12 +1,12 @@
 import { EventAccessibilityFocus } from 'helpers/accessibility';
-import { ElementType } from 'components/nav-item';
-import { ELEMENTS, VARIABLES } from 'components/nav-item/globals';
 import { DropdownPositionPerViewPort } from './helper';
+import { ELEMENTS, VARIABLES } from '../globals';
+import { UMDNavItemElement } from '../index';
 
 const { CONTAINER, DROPDOWN_CONTAINER, PRIMARLY_LINK_WRAPPER } = ELEMENTS;
 const { ATTRIBUTE_SHOWING } = VARIABLES;
 
-export const ShowDropdown = ({ element }: { element: ElementType }) => {
+export const ShowDropdown = ({ element }: { element: UMDNavItemElement }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const dropdownContainer = shadowRoot.querySelector(
     `.${CONTAINER}`,
@@ -18,7 +18,7 @@ export const ShowDropdown = ({ element }: { element: ElementType }) => {
   DropdownPositionPerViewPort({ element });
 };
 
-export const HideDropdown = ({ element }: { element: ElementType }) => {
+export const HideDropdown = ({ element }: { element: UMDNavItemElement }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const dropdownContainer = shadowRoot.querySelector(
     `.${CONTAINER}`,
@@ -31,7 +31,11 @@ export const HideDropdown = ({ element }: { element: ElementType }) => {
   element._focusCallback = () => {};
 };
 
-export const EventButtonClick = ({ element }: { element: ElementType }) => {
+export const EventButtonClick = ({
+  element,
+}: {
+  element: UMDNavItemElement;
+}) => {
   if (element._isShowing) {
     const shadowRoot = element.shadowRoot as ShadowRoot;
     const dropdownContainer = shadowRoot.querySelector(
@@ -53,7 +57,7 @@ export const EventButtonClick = ({ element }: { element: ElementType }) => {
   if (!element._isShowing) HideDropdown({ element });
 };
 
-export const EventSize = ({ element }: { element: ElementType }) => {
+export const EventSize = ({ element }: { element: UMDNavItemElement }) => {
   const shadowRoot = element.shadowRoot as ShadowRoot;
   const wrapperElement = shadowRoot.querySelector(
     `.${PRIMARLY_LINK_WRAPPER}`,

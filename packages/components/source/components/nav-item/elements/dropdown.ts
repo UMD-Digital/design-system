@@ -1,14 +1,14 @@
 import { Animations, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
-import { ElementType } from 'components/nav-item';
-import { SLOTS, ELEMENTS, VARIABLES } from 'components/nav-item/globals';
+import { UMDNavItemElement } from '../index';
+import { SLOTS, ELEMENTS, REFERENCES } from '../globals';
 
 const { Colors, Spacing } = Tokens;
 
 const { DROPDOWN_LINKS } = SLOTS;
 const { DROPDOWN_CONTAINER } = ELEMENTS;
-const { ATTRIBUTE_SELECTED } = VARIABLES;
+const { IS_SELECTED } = REFERENCES;
 
 const DROPDOWN_LIST_CONTAINER = 'dropdown-list-container';
 const TWO_COLUMN_CONTAINER = 'two-column-container';
@@ -58,7 +58,7 @@ const linkStyles = `
     display: block;
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a[${ATTRIBUTE_SELECTED}] span:not(.sr-only) {
+  .${DROPDOWN_LIST_CONTAINER} a${IS_SELECTED} span:not(.sr-only) {
     display: inline;
     position: relative;
     background-position: left calc(100% - 0px);
@@ -67,8 +67,8 @@ const linkStyles = `
     background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a[${ATTRIBUTE_SELECTED}]:hover span,
-  .${DROPDOWN_LIST_CONTAINER} a[${ATTRIBUTE_SELECTED}]:focus span {
+  .${DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:hover span,
+  .${DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:focus span {
     border-bottom: none;
   }
 `
@@ -130,7 +130,7 @@ const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   return container;
 };
 
-export const CreateDropdown = ({ element }: { element: ElementType }) => {
+export const CreateDropdown = ({ element }: { element: UMDNavItemElement }) => {
   const dropdownSlot = element.querySelector(
     `[slot=${DROPDOWN_LINKS}]`,
   ) as HTMLSlotElement;

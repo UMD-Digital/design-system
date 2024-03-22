@@ -1,13 +1,17 @@
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
-import { ElementType } from 'components/nav-item';
-import { SLOTS, ELEMENTS } from 'components/nav-item/globals';
+import { SLOTS, ELEMENTS } from '../globals';
+import { UMDNavItemElement } from '../index';
 
 const { DROPDOWN_LINKS } = SLOTS;
 const { DROPDOWN_CONTAINER } = ELEMENTS;
 
 const BOUNDS_SHIFT = 140;
 
-export const OnLoadDropdownSpans = ({ element }: { element: ElementType }) => {
+export const OnLoadDropdownSpans = ({
+  element,
+}: {
+  element: UMDNavItemElement;
+}) => {
   const dropdownSlot = element.querySelector(
     `[slot=${DROPDOWN_LINKS}]`,
   ) as HTMLSlotElement;
@@ -31,7 +35,7 @@ export const OnLoadDropdownSpans = ({ element }: { element: ElementType }) => {
 export const DropdownPositionPerViewPort = ({
   element,
 }: {
-  element: ElementType;
+  element: UMDNavItemElement;
 }) => {
   const elementBounds = element.getBoundingClientRect();
   const shadowRoot = element.shadowRoot as ShadowRoot;

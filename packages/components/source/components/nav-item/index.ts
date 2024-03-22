@@ -17,10 +17,8 @@ import { OnLoadDropdownSpans } from './services/helper';
 import { SLOTS, VARIABLES } from './globals';
 
 const { PRIMARY_LINK, DROPDOWN_LINKS } = SLOTS;
-const { ATTRIBUTE_DROPDOWN } = VARIABLES;
+const { ATTRIBUTE_DROPDOWN, ELEMENT_NAME } = VARIABLES;
 
-export const ELEMENT_NAME = 'umd-element-nav-item';
-export type ElementType = UMDNavItemElement;
 export class UMDNavItemElement extends HTMLElement {
   _shadow: ShadowRoot;
   _hasDropdown = false;
@@ -37,12 +35,6 @@ export class UMDNavItemElement extends HTMLElement {
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }
-
-  static get observedAttributes() {
-    return ['show'];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
 
   connectedCallback() {
     const element = this;

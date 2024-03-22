@@ -10,8 +10,14 @@ export const SLOTS = {
   DROPDOWN_LINKS: 'dropdown-links',
 };
 export const VARIABLES = {
+  ELEMENT_NAME: 'umd-element-nav-item',
   ATTRIBUTE_SHOW: 'show',
   ATTRIBUTE_DROPDOWN: 'data-dropdown',
   ATTRIBUTE_SHOWING: 'data-showing',
   ATTRIBUTE_SELECTED: 'data-selected',
+};
+export const REFERENCES = {
+  IS_SELECTED: `[${VARIABLES.ATTRIBUTE_SELECTED}]`,
+  IS_SHOWING: `[${VARIABLES.ATTRIBUTE_SHOWING}]`,
+  IS_DROPDOWN: `[${VARIABLES.ATTRIBUTE_DROPDOWN}]`,
 };

@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { SpacingContent } from '../layout/spacing';
+import LayoutSpacing from '../layout/spacing';
 
 const { Colors, Spacing, Queries } = Tokens;
 
@@ -10,7 +10,7 @@ export default {
     display: 'block',
 
     '& .intro-content-wrapper': {
-      ...SpacingContent['.umd-layout-spacing-center'],
+      ...LayoutSpacing['.umd-layout-spacing-center'],
       ...{
         margin: 'auto',
         maxWidth: `calc(${Spacing['5xl']} * 10)`,
@@ -36,7 +36,7 @@ export default {
     display: 'block',
 
     '& .intro-content-wrapper': {
-      ...SpacingContent['.umd-layout-spacing-center'],
+      ...LayoutSpacing['.umd-layout-spacing-center'],
       ...{
         margin: 'auto',
         maxWidth: `calc(${Spacing['5xl']} * 10)`,

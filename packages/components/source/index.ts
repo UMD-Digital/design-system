@@ -9,7 +9,6 @@ import { Load as EventDateLoader } from './components/events-date';
 import { Load as EventDateSliderLoader } from './components/events-date-slider';
 import { Load as FooterLoader } from './components/footer';
 import { Load as HeroLoader } from './components/hero';
-import { Load as ListRowLoader } from './components/list-row';
 import { Load as ListRowPersonLoader } from './components/list-row-person';
 import { Load as NavDrawerLoader } from './components/nav-drawer';
 import { Load as NavItemLoader } from './components/nav-item';
@@ -29,7 +28,6 @@ const LoadUmdComponents = () => {
   EventDateSliderLoader();
   FooterLoader();
   HeroLoader();
-  ListRowLoader();
   ListRowPersonLoader();
   NavDrawerLoader();
   NavItemLoader();

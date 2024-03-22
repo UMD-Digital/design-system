@@ -12,7 +12,7 @@ const Spacing = {
   '6xl': '80px',
   '7xl': '96px',
   '8xl': '104px',
-  max: '128px',
+  max: '120px',
 };
 
 export { Spacing };

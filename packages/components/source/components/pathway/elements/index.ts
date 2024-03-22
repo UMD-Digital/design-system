@@ -12,7 +12,7 @@ import { UMDPathwayElement } from '../index';
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
-const { MEDIUM, LARGE } = BREAKPOINTS;
+const { MEDIUM } = BREAKPOINTS;
 const { PATHWAY_CONTAINER } = ELEMENTS;
 const {
   ELEMENT_NAME,
@@ -190,7 +190,6 @@ const STYLES_CONTAINER = `
       padding: ${Spacing['6xl']} 0;
     }
   }
-
 
   ${LockStyles}
   ${LockWrapperStyles}

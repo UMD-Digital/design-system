@@ -82,7 +82,7 @@
   </section>
 
   <section class="umd-layout-vertical-landing">
-    <umd-element-pathway isimagefirst="false">
+    <umd-element-pathway theme="dark" isimagefirst="false">
       <div slot="image">
         <img src="/greater-cp/home-pathway-2.jpg" alt="Image" />
       </div>
@@ -138,6 +138,41 @@
         </umd-element-call-to-action>
       </div>
     </umd-element-pathway>
+  </section>
+
+  <section class="umd-layout-vertical-landing">
+    <div class="umd-lock">
+      <umd-component-intro>
+        <div class="intro-content-wrapper">
+          <h2 class="umd-sans-largest">
+            FROM MARYLAND TODAY (Replace Me)
+          </h2>
+          <div class="umd-layout-flex-row-auto">
+            <umd-element-call-to-action type="secondary">
+              <a href="/"><span>See all election related content</span></a>
+            </umd-element-call-to-action>
+          </div>
+        </div>
+      </umd-component-intro>
+      <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+        categories="10466"
+        lazyload="true"></umd-feed-news>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock" style="text-align: center">
+      <img src="/greater-cp/home-inline.jpg"
+        alt="example"
+        style="margin: 0 auto 8px auto" />
+      <umd-element-call-to-action type="secondary">
+        <a href="https://google.com"
+          target="_blank"
+          aria-label="link to google">
+          The Association of Public and Land-grant Universities (APLU)
+        </a>
+      </umd-element-call-to-action>
+    </div>
   </section>
 
   {% include './components/footer-greater-cp.twig' with {

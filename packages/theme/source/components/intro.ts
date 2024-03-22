@@ -8,6 +8,11 @@ export default {
     containerName: 'umd-component-intro',
     containerType: 'inline-size',
     display: 'block',
+    marginBottom: `${Spacing.xl}`,
+
+    [`@container umd-component-intro (${Queries.large.min})`]: {
+      marginBottom: `${Spacing['2xl']}`,
+    },
 
     '& .intro-content-wrapper': {
       ...LayoutSpacing['.umd-layout-spacing-center'],
@@ -34,6 +39,11 @@ export default {
     containerName: 'umd-component-intro-simple',
     containerType: 'inline-size',
     display: 'block',
+    marginBottom: `${Spacing.xl}`,
+
+    [`@container umd-component-intro (${Queries.large.min})`]: {
+      marginBottom: `${Spacing['2xl']}`,
+    },
 
     '& .intro-content-wrapper': {
       ...LayoutSpacing['.umd-layout-spacing-center'],

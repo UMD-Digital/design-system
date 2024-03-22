@@ -64,6 +64,10 @@ const HeroStyles = `
 
 // prettier-ignore
 export const STYLES_PATHWAY_IMAGE_COLUMN = `
+  .${PATHWAY_IMAGE_CONTAINER} {
+    z-index: 99;
+  }
+
   .${PATHWAY_IMAGE_CONTAINER_WRAPPER} > * {
     display: flex;
   }

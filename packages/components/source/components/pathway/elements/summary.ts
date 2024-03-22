@@ -135,7 +135,7 @@ const WithHeroStyles = `
 const EyebrowStyles = `
   .${SUMMARY_EYEBROW_CONTAINER} {
     margin-bottom: ${Spacing.sm};
-    color: ${Colors.black};
+    color: ${Colors.black} !important;
   }
 
   ${ConvertJSSObjectToStyles({
@@ -215,6 +215,7 @@ export const STYLES_PATHWAY_SUMMARY_COLUMN = `
   .${SUMMARY_CONTAINER} {
     display: flex;
     align-items: center;
+    z-index: 99;
   }
 
   ${EyebrowStyles}

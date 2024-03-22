@@ -1,39 +1,20 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  REFERENCES,
-  SLOTS,
-  VARIABLES,
-} from '../globals';
+import { BREAKPOINTS, SLOTS, VARIABLES } from '../globals';
 import { UMDPathwayElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 
 const { HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } = SLOTS;
 const { MEDIUM, LARGE } = BREAKPOINTS;
-const { PATHWAY_CONTAINER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
-const { IS_WITH_THEME } = REFERENCES;
 
 const PATHWAY_HIGHLIGHT_CONTAINER = 'umd-pathway-highlight-column-container';
 const PATHWAY_HIGHLIGHT_CONTAINER_WRAPPER = 'umd-pathway-highlight-wrapper';
 const PATHWAY_HIGHLIGHT_CONTAINER_TEXT = 'umd-pathway-highlight-text';
 const PATHWAY_HIGHLIGHT_CONTAINER_ATTRIBUTION =
   'umd-pathway-highlight-attribution';
-
-// prettier-ignore
-const ThemeStyles = `
-  .${PATHWAY_CONTAINER}${IS_WITH_THEME} .${PATHWAY_HIGHLIGHT_CONTAINER} {
-    background-color: ${Colors.black};
-  }
-
-  .${PATHWAY_CONTAINER}${IS_WITH_THEME} .${PATHWAY_HIGHLIGHT_CONTAINER} * {
-    color: ${Colors.white};
-  }
-`
 
 // prettier-ignore
 export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
@@ -105,8 +86,6 @@ export const STYLES_PATHWAY_HIGHLIGHT_COLUMN = `
   .${PATHWAY_HIGHLIGHT_CONTAINER_ATTRIBUTION} {
     margin-top: ${Spacing.sm};
   }
-
-  ${ThemeStyles}
 `
 
 export const CreateHighlightColumn = ({

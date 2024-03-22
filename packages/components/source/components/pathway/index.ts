@@ -8,13 +8,14 @@ import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { VARIABLES } from './globals';
 
-const { ELEMENT_NAME } = VARIABLES;
+const { ELEMENT_NAME, THEME_LIGHT, THEME_DARK, THEME_MARYLAND, THEME_WHITE } =
+  VARIABLES;
 
 export class UMDPathwayElement extends HTMLElement {
   _shadow: ShadowRoot;
   _isImageFirst: boolean;
   _isImageScaled: boolean;
-  _isThemeDark: boolean;
+  _theme: string;
   _isHeroType: boolean;
 
   constructor() {
@@ -22,7 +23,7 @@ export class UMDPathwayElement extends HTMLElement {
     this._shadow = this.attachShadow({ mode: 'open' });
     this._isImageFirst = true;
     this._isImageScaled = true;
-    this._isThemeDark = false;
+    this._theme = THEME_WHITE;
     this._isHeroType = false;
 
     const styles = `${ComponentStyles}`;
@@ -34,13 +35,17 @@ export class UMDPathwayElement extends HTMLElement {
   connectedCallback() {
     const isImageFirst = this.getAttribute('isImageFirst');
     const isImageScaled = this.getAttribute('isImageScaled');
-    const isThemeDark = this.getAttribute('theme') === 'dark';
     const isHeroType = this.getAttribute('type') === 'hero';
+    const theme = this.getAttribute('theme');
 
     if (isImageFirst === 'false') this._isImageFirst = false;
     if (isImageScaled === 'false') this._isImageScaled = false;
-    if (isThemeDark) this._isThemeDark = true;
     if (isHeroType) this._isHeroType = true;
+    if (theme) {
+      if (theme === THEME_LIGHT) this._theme = THEME_LIGHT;
+      if (theme === THEME_DARK) this._theme = THEME_DARK;
+      if (theme === THEME_MARYLAND) this._theme = THEME_MARYLAND;
+    }
 
     const container = CreateShadowDom({ element: this });
     if (container) this._shadow.appendChild(container);

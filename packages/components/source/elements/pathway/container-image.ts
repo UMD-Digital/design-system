@@ -28,6 +28,7 @@ const ImageSizeStyles = `
 export const STYLES_PATHWAY_IMAGE_CONTAINER = `
   .${PATHWAY_CONTAINER_IMAGE} {
     z-index: 99;
+    position: relative;
   }
 
   .${PATHWAY_CONTAINER_IMAGE} * {

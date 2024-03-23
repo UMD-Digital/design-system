@@ -47,28 +47,22 @@ const IS_THEME_MARYLAND = `.${PATHWAY_IMAGE_CONTAINER}[${ATTRIBUTE_THEME}='${THE
 
 // prettier-ignore
 const VarationThemeDark = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_THEME_DARK} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
-      background-color: ${Colors.black};
-    }
+  ${IS_THEME_DARK} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
+    background-color: ${Colors.black};
   }
 `
 
 // prettier-ignore
 const VarationThemeLight = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_THEME_LIGHT} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
-      background-color: ${Colors.gray.lightest};
-    }
+  ${IS_THEME_LIGHT} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
+    background-color: ${Colors.gray.lightest};
   }
 `
 
 // prettier-ignore
 const VarationThemeMaryland = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_THEME_MARYLAND} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
-      background-color: ${Colors.red};
-    }
+  ${IS_THEME_MARYLAND} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
+    background-color: ${Colors.red};
   }
 `
 
@@ -125,8 +119,18 @@ const TextContainerPositionStyles = `
 
 // prettier-ignore
 const TextContainerStyles = `
-  .${PATHWAY_IMAGE_CONTAINER} .${TEXT_CONTAINER_WRAPPER} {
-    padding: ${Spacing.md};
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
+    .${PATHWAY_IMAGE_CONTAINER} .${TEXT_CONTAINER_WRAPPER} {
+      padding: ${Spacing.md} 0;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`.${PATHWAY_IMAGE_CONTAINER} .${TEXT_CONTAINER_WRAPPER}`]: Lock['.base'],
+      },
+    })}
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
@@ -148,6 +152,12 @@ const LockStyles = `
       [`.${PATHWAY_IMAGE_CONTAINER_LOCK}`]: Lock['.base'],
     },
   })}
+
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
+    .${PATHWAY_IMAGE_CONTAINER_LOCK} {
+      padding: 0;
+    }
+  }
 `;
 
 const LockWrapperStyles = `
@@ -187,12 +197,6 @@ const BackgroundStyles = `
 
   .${PATHWAY_IMAGE_CONTAINER}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
     left: -1000px;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} { 
-      display: none;
-    }
   }
 `;
 

@@ -80,7 +80,6 @@ export const CreateShadowDom = ({
   if (type === TYPE_HIGHLIGHT) {
     return CreateHighlightPathway({
       theme,
-      isImageRight,
       eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
       headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
       text: SlotDefaultStyling({ element, slotRef: TEXT }),

@@ -10,14 +10,14 @@ import {
 } from './container-text';
 import {
   CreateImageContainer,
-  TypePositionProps,
-  TypeImageProps,
+  TypePathwayHeroImageContainer,
   PATHWAY_CONTAINER_IMAGE,
 } from './container-image';
 
 type TypePathwayHeroProps = TypePathwayTextContainer &
-  TypeImageProps &
-  TypePositionProps;
+  TypePathwayHeroImageContainer & {
+    isImageRight: boolean;
+  };
 
 const { Spacing } = Tokens;
 const { CampaignExtralarge, SansLarger } = Typography;

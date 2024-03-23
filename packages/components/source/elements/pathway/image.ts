@@ -12,8 +12,10 @@ import {
   PATHWAY_CONTAINER_IMAGE,
 } from './container-image';
 
-type TypePathwayImageProps = TypePathwayTextContainer &
-  TypePathwayImageContainer;
+type TypePathwayHeroProps = TypePathwayTextContainer &
+  TypePathwayImageContainer & {
+    isImageRight: boolean;
+  };
 
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
@@ -88,6 +90,15 @@ const ImageContainerPositionStyles = `
     ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_IMAGE} {
       order: 2;
     }
+  }
+`;
+
+// prettier-ignore
+const ImageContainerStyles = `
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    .${PATHWAY_CONTAINER_IMAGE} img {
+      min-height: 656px;
+     }
   }
 `;
 
@@ -209,15 +220,16 @@ export const STYLES_PATHWAY_IMAGE = `
   ${LockWrapperStyles}
   ${BackgroundStyles}
   ${TextContainerStyles}
+  ${TextContainerPositionStyles}
+  ${ImageContainerStyles}
   ${ImageContainerScaledStyles}
   ${ImageContainerPositionStyles}
-  ${TextContainerPositionStyles}
   ${VarationThemeDark}
   ${VarationThemeLight}
   ${VarationThemeMaryland}
 `;
 
-export const CreateImagePathway = (element: TypePathwayImageProps) => {
+export const CreateImagePathway = (element: TypePathwayHeroProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
@@ -230,11 +242,11 @@ export const CreateImagePathway = (element: TypePathwayImageProps) => {
 
   container.classList.add(PATHWAY_IMAGE_CONTAINER);
   container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isImageScaled) container.setAttribute(ATTRIBUTE_IMAGE_SCALED, '');
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,
     isImageRight ? 'right' : 'left',
   );
-  if (isImageScaled) container.setAttribute(ATTRIBUTE_IMAGE_SCALED, '');
 
   wrapper.classList.add(PATHWAY_IMAGE_CONTAINER_WRAPPER);
   lock.classList.add(PATHWAY_IMAGE_CONTAINER_LOCK);

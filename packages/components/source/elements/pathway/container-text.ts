@@ -6,19 +6,7 @@ import {
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
-export type TypePositionProps = {
-  isImageRight: boolean;
-};
-
-export type TypeScaleProps = {
-  isImageScaled: boolean;
-};
-
-export type TypeImageProps = {
-  image: HTMLElement | null;
-};
-
-export type TypePathwayTextContainer = TypePositionProps & {
+export type TypePathwayTextContainer = {
   eyebrow: HTMLElement | null;
   headline: HTMLElement | null;
   text: HTMLElement | null;
@@ -26,26 +14,18 @@ export type TypePathwayTextContainer = TypePositionProps & {
   theme: string;
 };
 
-export type TypePathwayImageContainer = TypePositionProps &
-  TypeScaleProps &
-  TypeImageProps;
-
-type TypePathwayHeroImageContainer = TypePositionProps & TypeImageProps;
-
 const { Spacing, Colors, FontSize } = Tokens;
 const { Ribbon, RichText } = Fields;
 const { GridColumnAndRows } = Layout;
-const { SansLargest, CampaignExtralarge, SansLarger } = Typography;
+const { SansLargest } = Typography;
 
 const MEDIUM = 400;
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-pathway-text-container';
 const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_HERO = 'hero';
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
-const THEME_WHITE = 'white';
 
 export const TEXT_CONTAINER = 'umd-pathway-text-container';
 export const TEXT_CONTAINER_WRAPPER = 'umd-pathway-text-container-wrapper';

@@ -5,21 +5,19 @@ declare global {
 }
 
 import { MakeTemplate, SlotOberserver } from 'helpers/ui';
-import { Debounce } from 'helpers/performance';
 import { ComponentStyles, CreateShadowDom } from './elements';
-import { SLOTS } from './globals';
-import { EventResize } from './services/events';
-import { GifFunctionality } from './services/helper';
+import { SLOTS, VARIABLES } from './globals';
 
-export const ELEMENT_NAME = 'umd-element-card-overlay';
-export type CardType = UMDCardOverlayElement;
+const { THEME_LIGHT, ELEMENT_NAME } = VARIABLES;
+
 export class UMDCardOverlayElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = 'light';
+  _theme: string;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
+    this._theme = this.getAttribute('theme') || THEME_LIGHT;
 
     const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
@@ -27,25 +25,15 @@ export class UMDCardOverlayElement extends HTMLElement {
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
-  static get observedAttributes() {
-    return ['theme'];
-  }
-
   connectedCallback() {
     const element = this;
-    const resizeEvent = () => {
-      EventResize({ element });
-    };
+    const shadowDom = this._shadow;
 
-    element._theme = element.getAttribute('theme') || element._theme;
-    this._shadow.appendChild(CreateShadowDom({ element }));
+    shadowDom.appendChild(CreateShadowDom({ element }));
 
-    window.addEventListener('resize', Debounce(resizeEvent, 20));
-    resizeEvent();
-    GifFunctionality({ element });
     SlotOberserver({
       element,
-      shadowDom: this._shadow,
+      shadowDom,
       slots: SLOTS,
       CreateShadowDom,
     });

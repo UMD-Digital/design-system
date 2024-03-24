@@ -12,123 +12,106 @@ export type TypeCommonTextAttributes = {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
+  theme?: string;
 };
 
 const { Colors, Spacing } = Tokens;
 const { LinkLineSlide } = Animations;
-const { SansLarger, SansMin, Eyebrow } = Typography;
+const { SansLarge, SansMin, Eyebrow } = Typography;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-export const LIST_TEXT_CONTAINER = 'list-text-container';
-export const LIST_EYEBROW_WRAPPER = 'list-eyebrow-wrapper';
-export const LIST_HEADLINE_WRAPPER = 'list-headline-wrapper';
-export const LIST_TEXT_WRAPPER = 'list-text-wrapper';
-export const LIST_DATE_WRAPPER = 'list-date-wrapper';
-export const LIST_ACTIONS_WRAPPER = 'list-actions-wrapper';
+export const BLOCK_TEXT_CONTAINER = 'block-text-container';
+export const BLOCK_TEXT_WRAPPER = 'block-text-container-wrapper';
+export const BLOCK_TEXT_HEADLINE_WRAPPER = 'block-text-headline-wrapper';
+export const BLOCK_TEXT_EYEBROW_WRAPPER = 'block-text-eyebrow-wrapper';
+export const BLOCK_TEXT_CONTAINER_TEXT_WRAPPER = 'block-text-wrapper';
+export const BLOCK_TEXT_DATE_WRAPPER = 'block-text-date-wrapper';
+export const BLOCK_TEXT_ACTIONS_WRAPPER = 'block-text-actions-wrapper';
 
-const IS_THEME_DARK = `.${LIST_TEXT_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_THEME_DARK = `.${BLOCK_TEXT_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 // prettier-ignore
 const DarkThemeStyles = `
-  ${IS_THEME_DARK} .${LIST_EYEBROW_WRAPPER} {
-    color: ${Colors.white};
-  }
-
-  ${IS_THEME_DARK} .${LIST_HEADLINE_WRAPPER} {
+  ${IS_THEME_DARK} * {
     color: ${Colors.white};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK} .${LIST_HEADLINE_WRAPPER} a`]:
+      [`${IS_THEME_DARK} .${BLOCK_TEXT_HEADLINE_WRAPPER} a`]:
       LinkLineSlide['.slidein-underline-white'],
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK} .${LIST_HEADLINE_WRAPPER}`]:
+      [`${IS_THEME_DARK} .${BLOCK_TEXT_HEADLINE_WRAPPER}`]:
       LinkLineSlide['.slidein-underline-white'],
     },
   })}
-
-  ${IS_THEME_DARK} .${LIST_TEXT_WRAPPER} {
-    color: ${Colors.white};
-  }
-
-  ${IS_THEME_DARK} .${LIST_TEXT_WRAPPER} {
-    color: ${Colors.white};
-  }
 `
 
 // prettier-ignore
 const EyebrowStyles = `
-  * + .${LIST_EYEBROW_WRAPPER} {
-    margin-top: ${Spacing.min}
-  }
-
-  .${LIST_EYEBROW_WRAPPER} {
+  .${BLOCK_TEXT_EYEBROW_WRAPPER} {
     color: ${Colors.black};
   }
 
-  .${LIST_EYEBROW_WRAPPER} * {
+  .${BLOCK_TEXT_EYEBROW_WRAPPER} * {
     color: currentColor;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_EYEBROW_WRAPPER}`]: Eyebrow,
+      [`.${BLOCK_TEXT_EYEBROW_WRAPPER}`]: Eyebrow,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_EYEBROW_WRAPPER} *`]: Eyebrow,
+      [`.${BLOCK_TEXT_EYEBROW_WRAPPER} *`]: Eyebrow,
     },
   })}
 
-  .${LIST_EYEBROW_WRAPPER} a:hover,
-  .${LIST_EYEBROW_WRAPPER} a:focus {
+  .${BLOCK_TEXT_EYEBROW_WRAPPER} a:hover,
+  .${BLOCK_TEXT_EYEBROW_WRAPPER} a:focus {
     text-decoration: underline;
   }
 `;
 
 // prettier-ignore
 const HeadlineStyles = `
-  * + .${LIST_HEADLINE_WRAPPER} {
+  * + .${BLOCK_TEXT_HEADLINE_WRAPPER} {
     margin-top: ${Spacing.min}
   }
 
-  .${LIST_HEADLINE_WRAPPER} {
+  .${BLOCK_TEXT_HEADLINE_WRAPPER} {
     color: ${Colors.black};
   }
 
-  .${LIST_HEADLINE_WRAPPER} * {
+  .${BLOCK_TEXT_HEADLINE_WRAPPER},
+  .${BLOCK_TEXT_HEADLINE_WRAPPER} * {
     color: currentColor;
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${LIST_HEADLINE_WRAPPER}`]: SansLarger,
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${LIST_HEADLINE_WRAPPER} *`]: SansLarger,
-    },
-  })}
-
-  .${LIST_HEADLINE_WRAPPER}, 
-  .${LIST_HEADLINE_WRAPPER} * {
     font-weight: 700;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_HEADLINE_WRAPPER} a`]:
+      [`.${BLOCK_TEXT_HEADLINE_WRAPPER}`]: SansLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${BLOCK_TEXT_HEADLINE_WRAPPER} *`]: SansLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${BLOCK_TEXT_HEADLINE_WRAPPER} a`]:
       LinkLineSlide['.slidein-underline-black'],
     },
   })}
@@ -136,38 +119,23 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  * + .${LIST_TEXT_WRAPPER} {
-    margin-top: ${Spacing.min};
-    display: block;
+  * + .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} {
+    margin-top: ${Spacing.min}
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_TEXT_WRAPPER}`]: Typography.SansSmall,
+      [`.${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} *`]: Typography.SansSmall,
     },
   })}
 
-  .${LIST_TEXT_WRAPPER} {
-    color: ${Colors.black};
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${LIST_TEXT_WRAPPER} *`]: Typography.SansSmall,
-    },
-  })}
-
-  .${LIST_TEXT_WRAPPER} * {
-    color: currentColor;
-  }
-
-  .${LIST_TEXT_WRAPPER} a {
+  .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} a {
     text-decoration: underline;
     transition: color 0.3s ease-in-out;
   }
 
-  .${LIST_TEXT_WRAPPER} a:hover,
-  .${LIST_TEXT_WRAPPER} a:focus{
+  .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} a:hover,
+  .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} a:focus {
     text-decoration: underline;
     color: ${Colors.red};
   }
@@ -175,39 +143,35 @@ const TextStyles = `
 
 // prettier-ignore
 const DateStyles = `
-  .${LIST_DATE_WRAPPER} {
+  .${BLOCK_TEXT_DATE_WRAPPER} {
     display: block;
   }
 
-  * + .${LIST_DATE_WRAPPER} {
+  * + .${BLOCK_TEXT_DATE_WRAPPER} {
     margin-top: ${Spacing.min};
     display: block;
   }
 
-  .${LIST_DATE_WRAPPER} {
+  .${BLOCK_TEXT_DATE_WRAPPER} * {
     color: ${Colors.gray.mediumAA};
-  }
-
-  .${LIST_DATE_WRAPPER} * {
-    color: currentColor;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_DATE_WRAPPER}`]: SansMin,
+      [`.${BLOCK_TEXT_DATE_WRAPPER}`]: SansMin,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_DATE_WRAPPER} *`]: SansMin,
+      [`.${BLOCK_TEXT_DATE_WRAPPER} *`]: SansMin,
     },
   })}
 `;
 
 // prettier-ignore
 const ActionStyles = `
-  .${LIST_ACTIONS_WRAPPER}  {
+  .${BLOCK_TEXT_ACTIONS_WRAPPER} {
     margin-top: ${Spacing.sm};
   }
 `;
@@ -222,49 +186,42 @@ export const STYLES_LIST_COMMON_TEXT = `
   ${DarkThemeStyles}
 `;
 
-export const CreateTextContainer = ({
+export const CreateBlockTextContainer = ({
   eyebrow,
   headline,
   text,
   actions,
   date,
   theme,
-}: {
-  headline?: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  date?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  theme?: string;
-}) => {
+}: TypeCommonTextAttributes) => {
   const container = document.createElement('div');
 
-  container.classList.add(LIST_TEXT_CONTAINER);
+  container.classList.add(BLOCK_TEXT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
   if (eyebrow) {
-    eyebrow.classList.add(LIST_EYEBROW_WRAPPER);
+    eyebrow.classList.add(BLOCK_TEXT_EYEBROW_WRAPPER);
     container.appendChild(eyebrow);
   }
 
   if (headline) {
     CheckForAnimationLinkSpan({ element: headline });
-    headline.classList.add(LIST_HEADLINE_WRAPPER);
+    headline.classList.add(BLOCK_TEXT_HEADLINE_WRAPPER);
     container.appendChild(headline);
   }
 
   if (text) {
-    text.classList.add(LIST_TEXT_WRAPPER);
+    text.classList.add(BLOCK_TEXT_CONTAINER_TEXT_WRAPPER);
     container.appendChild(text);
   }
 
   if (date) {
-    date.classList.add(LIST_DATE_WRAPPER);
+    date.classList.add(BLOCK_TEXT_DATE_WRAPPER);
     container.appendChild(date);
   }
 
   if (actions) {
-    actions.classList.add(LIST_ACTIONS_WRAPPER);
+    actions.classList.add(BLOCK_TEXT_ACTIONS_WRAPPER);
     container.appendChild(actions);
   }
 

@@ -7,10 +7,11 @@ export const SLOTS = {
 export const VARIABLES = {
   ELEMENT_NAME: 'umd-element-person',
   ATTRIBUTE_THEME: 'theme',
+  ATTRIBUTE_ALIGNED: 'aligned',
+  ATTRIBUTE_BORDER: 'border',
+  ATTRIBUTE_DISPLAY: 'display',
   THEME_LIGHT: 'light',
   THEME_DARK: 'dark',
-};
-export const REFERENCES = {
-  IS_THEME_DARK: `[${VARIABLES.ATTRIBUTE_THEME}='${VARIABLES.THEME_DARK}']`,
-  IS_THEME_LIGHT: `[${VARIABLES.ATTRIBUTE_THEME}='${VARIABLES.THEME_LIGHT}']`,
+  DISPLAY_BLOCK: 'block',
+  DISPLAY_LIST: 'list',
 };

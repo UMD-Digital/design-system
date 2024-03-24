@@ -1,4 +1,7 @@
-import { CreateCardElement, STYLES_CARD } from 'elements/card';
+import {
+  CreatStandardBlockElement,
+  STYLES_BLOCK_STANDARD,
+} from 'elements/block/standard';
 import {
   CreatStandardListElement,
   STYLES_LIST_STANDARD,
@@ -24,7 +27,7 @@ export type ArticleType = {
 };
 
 export const STYLES_NEWS_FEED = `
-  ${STYLES_CARD}
+  ${STYLES_BLOCK_STANDARD}
   ${STYLES_LIST_STANDARD}
 `;
 
@@ -87,7 +90,7 @@ const CreateDate = ({
 
 export const CreateNewsCard = ({ entries }: { entries: ArticleType[] }) =>
   entries.map((entry) =>
-    CreateCardElement({
+    CreatStandardBlockElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
@@ -95,7 +98,7 @@ export const CreateNewsCard = ({ entries }: { entries: ArticleType[] }) =>
         date: entry.date,
         dateFormatted: entry.dateFormatted,
       }),
-      aligned: true,
+      isAligned: true,
     }),
   );
 

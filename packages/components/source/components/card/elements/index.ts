@@ -1,6 +1,9 @@
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
-import { CreateCardElement, STYLES_CARD } from 'elements/card';
+import {
+  CreatStandardBlockElement,
+  STYLES_BLOCK_STANDARD,
+} from 'elements/block/standard';
 import {
   CreatStandardListElement,
   STYLES_LIST_STANDARD,
@@ -18,7 +21,7 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_CARD}
+  ${STYLES_BLOCK_STANDARD}
   ${STYLES_LIST_STANDARD}
 `;
 
@@ -45,14 +48,14 @@ export const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     });
   }
 
-  return CreateCardElement({
+  return CreatStandardBlockElement({
     image: GetImage({ element }),
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    cta: SlotDefaultStyling({ element, slotRef: CTA }),
+    actions: SlotDefaultStyling({ element, slotRef: CTA }),
     theme: element._theme,
-    aligned: element._aligned,
-    border: element._border,
+    isAligned: element._aligned,
+    isBordered: element._border,
   });
 };

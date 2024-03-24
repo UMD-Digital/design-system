@@ -99,7 +99,7 @@ export const CreateListEventElement = (element: TypeListEventProps) => {
     dateBlockContainer.appendChild(dateBlock);
     containerWrapper.prepend(dateBlockContainer);
   }
-  1;
+
   if (eventDetails) {
     const headline = textContainer.querySelector(
       `.${LIST_HEADLINE_WRAPPER}`,

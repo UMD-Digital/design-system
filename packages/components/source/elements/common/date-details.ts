@@ -120,7 +120,7 @@ export const STYLES_DATE_DETAILS = `
   .${EVENTS_DATE_ROW_WRAPPER} {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 3px 0;
+    grid-gap: 5px 0;
   }
 
   ${ConvertJSSObjectToStyles({
@@ -135,6 +135,8 @@ export const STYLES_DATE_DETAILS = `
 
   .${EVENTS_DATE_ROW_ICON} {
     width: 18px;
+    display: flex;
+    align-items: center;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {

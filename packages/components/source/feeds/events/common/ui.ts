@@ -1,4 +1,7 @@
-import { CreateCardElement, STYLES_CARD } from 'elements/card';
+import {
+  CreateEventBlockElement,
+  STYLES_BLOCK_EVENT,
+} from 'elements/block/event';
 import { CreateListEventElement, STYLES_LIST_EVENT } from 'elements/list/event';
 import {
   CreateDateBlockElement,
@@ -39,7 +42,7 @@ export type EventType = DateInformaitonType & {
 };
 
 export const STYLES_EVENT_FEED = `
-  ${STYLES_CARD}
+  ${STYLES_BLOCK_EVENT}
   ${STYLES_LIST_EVENT}
   ${STYLES_DATE_BLOCK}
   ${STYLES_DATE_DETAILS}
@@ -87,12 +90,15 @@ const CreateHeadline = ({ text, url }: { text: string; url: string }) => {
 
 export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
   entries.map((entry) =>
-    CreateCardElement({
+    CreateEventBlockElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      date: CreateDateDetailsElement(entry),
-      aligned: false,
+      eventDetails: CreateDateDetailsElement({
+        ...entry,
+        isLayoutVeritcal: false,
+      }),
+      isAligned: false,
     }),
   );
 

@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    UMDListRowPersonElement: typeof UMDListRowPersonElement;
+    UMDPersonElement: typeof UMDPersonElement;
   }
 }
 
@@ -10,7 +10,7 @@ import { VARIABLES } from './globals';
 
 const { ELEMENT_NAME, ATTRIBUTE_THEME, THEME_LIGHT } = VARIABLES;
 
-export class UMDListRowPersonElement extends HTMLElement {
+export class UMDPersonElement extends HTMLElement {
   _shadow: ShadowRoot;
   _theme: string;
 
@@ -35,7 +35,7 @@ export const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDListRowPersonElement = UMDListRowPersonElement;
-    window.customElements.define(ELEMENT_NAME, UMDListRowPersonElement);
+    window.UMDPersonElement = UMDPersonElement;
+    window.customElements.define(ELEMENT_NAME, UMDPersonElement);
   }
 };

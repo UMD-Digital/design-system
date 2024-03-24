@@ -1,0 +1,249 @@
+{% extends '../_layout.twig' %}
+
+{% set image = random(RecImageOptions) %}
+{% set logo = random(logoOptions) %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Person
+      </h1>
+    </div>
+
+    <section>
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          <span class="type">Default</span>
+          <span class="type-detail">Display Type Block</span>
+        </h3>
+
+        <umd-element-person>
+          <img slot="image" src="/person-1.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Janelle Wong
+          </p>
+          <p slot="text">
+            <span>
+              Professor of American Studies and Government and Politics
+            </span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+        <umd-element-person>
+          <img slot="image" src="/person-3.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Melinda Baldwin
+          </p>
+          <p slot="text">
+            <span>Associate Professor, History</span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+
+        <umd-element-person>
+          <img slot="image" src="/person-2.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Christopher Bonner
+          </p>
+          <p slot="text">
+            <span>Associate Professor, History</span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          <span class="type">Default</span>
+          <span class="type-detail">Display Type List</span>
+        </h3>
+
+        <umd-element-person display="list">
+          <img slot="image" src="/person-1.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Janelle Wong
+          </p>
+          <p slot="text">
+            <span>
+              Professor of American Studies and Government and Politics
+            </span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+
+        <umd-element-person display="list">
+          <img slot="image" src="/person-3.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Melinda Baldwin
+          </p>
+          <p slot="text">
+            <span>Associate Professor, History</span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+
+        <umd-element-person display="list">
+          <img slot="image" src="/person-2.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Christopher Bonner
+          </p>
+          <p slot="text">
+            <span>Associate Professor, History</span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+      </div>
+    </section>
+
+    <section style="background-color: black; padding: 50px; margin-bottom: 40px;">
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          <span class="type" style="color: white;">Default</span>
+          <span class="type-detail">Theme Dark</span>
+        </h3>
+
+        <umd-element-person theme="dark">
+          <img slot="image" src="/person-1.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Janelle Wong
+          </p>
+          <p slot="text">
+            <span>
+              Professor of American Studies and Government and Politics
+            </span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+
+        <umd-element-person theme="dark">
+          <img slot="image" src="/person-3.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Melinda Baldwin
+          </p>
+          <p slot="text">
+            <span>Associate Professor, History</span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+
+        <umd-element-person theme="dark">
+          <img slot="image" src="/person-2.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Christopher Bonner
+          </p>
+          <p slot="text">
+            <span>Associate Professor, History</span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+      </div>
+    </section>
+
+    <section style="background-color: black; padding: 50px; margin-bottom: 40px;">
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          <span class="type" style="color: white;">Default</span>
+          <span class="type-detail">Theme Dark & Display Type List</span>
+        </h3>
+
+        <umd-element-person theme="dark" display="list">
+          <img slot="image" src="/person-1.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Janelle Wong
+          </p>
+          <p slot="text">
+            <span>
+              Professor of American Studies and Government and Politics
+            </span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+
+        <umd-element-person theme="dark" display="list">
+          <img slot="image" src="/person-3.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Melinda Baldwin
+          </p>
+          <p slot="text">
+            <span>Associate Professor, History</span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+
+        <umd-element-person theme="dark" display="list">
+          <img slot="image" src="/person-2.jpeg" alt="Image Description" />
+
+          <p slot="name">
+            Christopher Bonner
+          </p>
+          <p slot="text">
+            <span>Associate Professor, History</span>
+            <br />
+            <span>College of Arts and Humanities</span>
+          </p>
+          <p slot="sub-text">
+            Specialty topic, specialty topic
+          </p>
+        </umd-element-person>
+      </div>
+    </section>
+  </section>
+{% endblock %}

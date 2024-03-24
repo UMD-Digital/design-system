@@ -5,7 +5,7 @@ export const SLOTS = {
   SUB_TEXT: 'sub-text',
 };
 export const VARIABLES = {
-  ELEMENT_NAME: 'umd-element-list-person-row',
+  ELEMENT_NAME: 'umd-element-person',
   ATTRIBUTE_THEME: 'theme',
   THEME_LIGHT: 'light',
   THEME_DARK: 'dark',

@@ -1,13 +1,13 @@
 import { Tokens } from '@universityofmaryland/variables';
 
 export default {
-  'umd-element-list-person-row:not(:defined)': {
+  'umd-element-person:not(:defined)': {
     display: 'none',
   },
-  'umd-element-list-person-row:defined': {
+  'umd-element-person:defined': {
     display: 'block',
   },
-  'umd-element-list-person-row + umd-element-list-person-row': {
+  'umd-element-person[display="list"] + umd-element-person[display="list"]': {
     marginTop: Tokens.Spacing.md,
   },
 };

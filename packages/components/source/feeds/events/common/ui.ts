@@ -1,5 +1,5 @@
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
-import { CreateListElement, STYLES_LIST } from 'elements/list';
+import { CreateListEventElement, STYLES_LIST_EVENT } from 'elements/list/event';
 import { CreateDateBlockElement, STYLES_DATE_BLOCK } from 'elements/date-block';
 import {
   CreateDateDetailsElement,
@@ -37,7 +37,7 @@ export type EventType = DateInformaitonType & {
 
 export const STYLES_EVENT_FEED = `
   ${STYLES_CARD}
-  ${STYLES_LIST}
+  ${STYLES_LIST_EVENT}
   ${STYLES_DATE_BLOCK}
   ${STYLES_DATE_DETAILS}
 `;
@@ -95,11 +95,14 @@ export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
 
 export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
   entries.map((entry) =>
-    CreateListElement({
+    CreateListEventElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      details: CreateDateDetailsElement({ ...entry, isLayoutVeritcal: false }),
+      eventDetails: CreateDateDetailsElement({
+        ...entry,
+        isLayoutVeritcal: false,
+      }),
       dateBlock: CreateDateBlockElement(entry),
     }),
   );

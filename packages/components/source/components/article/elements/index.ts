@@ -1,7 +1,10 @@
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
-import { CreateListElement, STYLES_LIST } from 'elements/list';
+import {
+  CreatStandardListElement,
+  STYLES_LIST_STANDARD,
+} from 'elements/list/standard';
 import { SLOTS, VARIABLES } from '../globals';
 import { UMDArticleElement } from '../index';
 
@@ -16,7 +19,7 @@ export const ComponentStyles = `
 
   ${Reset}
   ${STYLES_CARD}
-  ${STYLES_LIST}
+  ${STYLES_LIST_STANDARD}
 `;
 
 const GetImage = ({ element }: { element: UMDArticleElement }) => {
@@ -36,7 +39,7 @@ export const CreateShadowDom = ({
   element: UMDArticleElement;
 }) => {
   if (element._display === DISPLAY_LIST) {
-    return CreateListElement({
+    return CreatStandardListElement({
       image: GetImage({ element }),
       eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
       headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),

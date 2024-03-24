@@ -1,6 +1,9 @@
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
-import { CreateListPersonElement, STYLES_LIST } from 'elements/list-person';
+import {
+  CreatPersonListElement,
+  STYLES_LIST_PERSON,
+} from 'elements/list/person';
 import { UMDPersonElement } from '../index';
 import { SLOTS } from '../globals';
 
@@ -12,7 +15,7 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_LIST}
+  ${STYLES_LIST_PERSON}
 `;
 
 const GetImage = ({ element }: { element: UMDPersonElement }) => {
@@ -27,10 +30,9 @@ const GetImage = ({ element }: { element: UMDPersonElement }) => {
 };
 
 export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) =>
-  CreateListPersonElement({
+  CreatPersonListElement({
     image: GetImage({ element }),
-    name: SlotDefaultStyling({ element, slotRef: NAME }),
+    headline: SlotDefaultStyling({ element, slotRef: NAME }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    subText: SlotDefaultStyling({ element, slotRef: SUB_TEXT }),
     theme: element._theme,
   });

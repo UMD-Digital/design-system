@@ -83,6 +83,7 @@ const DateRow = `
 
   .${EVENTS_DATE_ROW_DATE} > * {
     display: flex;
+    align-items: center;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {

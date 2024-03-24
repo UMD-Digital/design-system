@@ -1,5 +1,8 @@
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
-import { CreateListElement, STYLES_LIST } from 'elements/list';
+import {
+  CreatStandardListElement,
+  STYLES_LIST_STANDARD,
+} from 'elements/list/standard';
 
 type ImageType = {
   url: string;
@@ -22,7 +25,7 @@ export type ArticleType = {
 
 export const STYLES_NEWS_FEED = `
   ${STYLES_CARD}
-  ${STYLES_LIST}
+  ${STYLES_LIST_STANDARD}
 `;
 
 const CreateImage = ({ images }: { images: ImageType }) => {
@@ -98,7 +101,7 @@ export const CreateNewsCard = ({ entries }: { entries: ArticleType[] }) =>
 
 export const CreateNewsList = ({ entries }: { entries: ArticleType[] }) =>
   entries.map((entry) =>
-    CreateListElement({
+    CreatStandardListElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),

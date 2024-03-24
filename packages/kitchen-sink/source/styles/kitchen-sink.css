@@ -11,6 +11,10 @@
 @import './dependencies/dropdown.css';
 @import './dependencies/kitchen-sink-styles.css';
 
+header {
+  z-index: 9999;
+}
+
 main {
   padding-bottom: 40px;
 }

@@ -76,11 +76,11 @@ export const STYLES_LIST_PERSON = `
 
 export const CreatPersonListElement = (element: TypeListPersonProps) => {
   const { theme, image } = element;
-  const textContainer = CreatePersonTextContainer(element);
+  const personContainer = CreatePersonTextContainer(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? CreateImageContainer({ image }) : null;
   const container = CreatListContainer({
-    textContainer,
+    personContainer,
     imageContainer,
     theme,
   });

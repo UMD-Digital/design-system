@@ -1,7 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { PHONE_ICON, EMAIL_ICON } from 'assets/icons';
-import { YOUTUBE_ICON } from 'assets/social';
 
 type TypeContactProps = {
   phone?: HTMLElement | null;
@@ -26,13 +25,13 @@ const { SansLarger, SansSmall, SansSmaller } = Typography;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-export const PERSON_TEXT_CONTAINER = 'list-person-text-container';
-const PERSON_NAME_CONTAINER = 'list-person-name-container';
-const PERSON_JOB_CONTAINER = 'list-person-job-container';
-const PERSON_ASSOCIATION_CONTAINER = 'list-person-association-container';
-const PERSON_PRONOUNS_CONTAINER = 'list-person-pronouns-container';
-const PERSON_SUB_TEXT_CONTAINER = 'list-person-sub-text-container';
-const PERSON_ACTIONS_CONTAINER = 'list-person-actions-container';
+export const PERSON_TEXT_CONTAINER = 'person-text-container';
+const PERSON_NAME_CONTAINER = 'person-name-container';
+const PERSON_JOB_CONTAINER = 'person-job-container';
+const PERSON_ASSOCIATION_CONTAINER = 'person-association-container';
+const PERSON_PRONOUNS_CONTAINER = 'person-pronouns-container';
+const PERSON_SUB_TEXT_CONTAINER = 'person-sub-text-container';
+const PERSON_ACTIONS_CONTAINER = 'person-actions-container';
 
 const PERSON_CONTACT_CONTAINER = 'list-person-contact-container';
 const PERSON_CONTACT_ITEM_CONTAINER = 'list-person-contact-item-container';
@@ -53,6 +52,16 @@ const ThemeDarkStyles = `
 
   ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER} svg path {
     fill: ${Colors.white};
+  }
+
+  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:first-child,
+  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:focus > span:first-child {
+    background-color: ${Colors.gray.light};
+  }
+
+  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:hover path,
+  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:focus path {
+    fill: ${Colors.gray.dark};
   }
 `;
 
@@ -122,10 +131,6 @@ const ContactContainerStyles = `
   * + .${PERSON_CONTACT_CONTAINER} {
     margin-top: ${Spacing.sm};
   }
-
-  .${PERSON_CONTACT_CONTAINER} {
-
-  }
 `;
 
 // prettier-ignore
@@ -141,6 +146,7 @@ const ContactItemStyles = `
 
   .${PERSON_CONTACT_ITEM_CONTAINER} path {
     fill: ${Colors.black};
+    transition: fill 0.3s;
   }
 
   .${PERSON_CONTACT_ITEM_CONTAINER} > span:first-child {
@@ -151,13 +157,29 @@ const ContactItemStyles = `
     justify-content: center;
     margin-right: ${Spacing.sm};
     background-color: ${Colors.gray.lightest};
+    transition: background-color 0.3s;
+  }
+
+  .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:first-child,
+  .${PERSON_CONTACT_ITEM_CONTAINER}:focus > span:first-child {
+    background-color: ${Colors.gray.dark};
+  }
+
+  .${PERSON_CONTACT_ITEM_CONTAINER}:hover path,
+  .${PERSON_CONTACT_ITEM_CONTAINER}:focus path {
+    fill: ${Colors.gray.light};
+  }
+
+  .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:last-child,
+  .${PERSON_CONTACT_ITEM_CONTAINER}:focus > span:last-child {
+    text-decoration: underline;
   }
 `;
 
 // prettier-ignore
 const AdditonalContactStyles = `
   .${PERSON_ADDITONAL_CONTACT_CONTAINER} {
-
+    margin-top: 4px;
   }
 `;
 

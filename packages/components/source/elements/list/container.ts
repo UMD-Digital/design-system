@@ -102,10 +102,12 @@ export const STYLES_LIST_CONTAINER = `
 export const CreatListContainer = ({
   imageContainer,
   textContainer,
+  personContainer,
   theme,
 }: {
-  textContainer: HTMLDivElement;
+  textContainer?: HTMLDivElement;
   imageContainer?: HTMLDivElement | null;
+  personContainer?: HTMLDivElement | null;
   theme?: string;
 }) => {
   const container = document.createElement('div');
@@ -117,8 +119,14 @@ export const CreatListContainer = ({
 
   if (imageContainer) wrapper.appendChild(imageContainer);
 
-  textContainer.classList.add(LIST_TEXT_CONTAINER);
-  wrapper.appendChild(textContainer);
+  if (textContainer) {
+    textContainer.classList.add(LIST_TEXT_CONTAINER);
+    wrapper.appendChild(textContainer);
+  }
+
+  if (personContainer) {
+    wrapper.appendChild(personContainer);
+  }
 
   container.appendChild(wrapper);
 

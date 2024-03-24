@@ -15,8 +15,9 @@ export type TypeBlockContainerAttributes = {
 };
 
 type TypeBlockContainerProps = TypeBlockContainerAttributes & {
-  textContainer: HTMLDivElement;
+  textContainer?: HTMLDivElement | null;
   imageContainer?: HTMLDivElement | null;
+  personContainer?: HTMLDivElement | null;
 };
 
 const { SansExtraLarge, SansLarger, SansSmall } = Typography;
@@ -110,6 +111,7 @@ const VariantWithImageStyles = `
   @media (max-width: ${MEDIUM - 1}px) {
     ${IS_WITH_IMAGE} {
       display: flex;
+      width: 100%;
     }
   }
 
@@ -203,6 +205,10 @@ export const STYLES_BLOCK_CONTAINER = `
     max-width: 680px;
   }
 
+  .${BLOCK_CONTAINER_WRAPPER} {
+    width: 100%;
+  }
+
   ${TextContainerStyles}
   ${ImageContainerStyles}
   ${VariantWithImageStyles}
@@ -214,6 +220,7 @@ export const STYLES_BLOCK_CONTAINER = `
 export const CreatBlockContainer = ({
   imageContainer,
   textContainer,
+  personContainer,
   theme,
   isAligned,
   isBordered,
@@ -232,8 +239,14 @@ export const CreatBlockContainer = ({
     container.setAttribute(ATTRIBUTE_WITH_IMAGE, '');
   }
 
-  textContainer.classList.add(BLOCK_TEXT_CONTAINER);
-  wrapper.appendChild(textContainer);
+  if (textContainer) {
+    textContainer.classList.add(BLOCK_TEXT_CONTAINER);
+    wrapper.appendChild(textContainer);
+  }
+
+  if (personContainer) {
+    wrapper.appendChild(personContainer);
+  }
 
   container.appendChild(wrapper);
 

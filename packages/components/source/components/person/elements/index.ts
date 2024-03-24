@@ -47,33 +47,28 @@ const GetImage = ({ element }: { element: UMDPersonElement }) => {
   return null;
 };
 
+const MakePersonData = ({ element }: { element: UMDPersonElement }) => ({
+  image: GetImage({ element }),
+  name: SlotDefaultStyling({ element, slotRef: NAME }),
+  job: SlotDefaultStyling({ element, slotRef: JOB_TITLE }),
+  association: SlotDefaultStyling({ element, slotRef: ASSOCIATION }),
+  pronouns: SlotDefaultStyling({ element, slotRef: PRONOUNS }),
+  phone: SlotDefaultStyling({ element, slotRef: PHONE }),
+  email: SlotDefaultStyling({ element, slotRef: EMAIL }),
+  linkendIn: SlotDefaultStyling({ element, slotRef: LINKEDIN }),
+  additionalContact: SlotDefaultStyling({
+    element,
+    slotRef: ADDITIONAL_CONTACT,
+  }),
+  subText: SlotDefaultStyling({ element, slotRef: SUB_TEXT }),
+  actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+  theme: element._theme,
+});
+
 export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   if (element._display === DISPLAY_LIST) {
-    return CreatPersonListElement({
-      image: GetImage({ element }),
-      name: SlotDefaultStyling({ element, slotRef: NAME }),
-      job: SlotDefaultStyling({ element, slotRef: JOB_TITLE }),
-      association: SlotDefaultStyling({ element, slotRef: ASSOCIATION }),
-      pronouns: SlotDefaultStyling({ element, slotRef: PRONOUNS }),
-      phone: SlotDefaultStyling({ element, slotRef: PHONE }),
-      email: SlotDefaultStyling({ element, slotRef: EMAIL }),
-      linkendIn: SlotDefaultStyling({ element, slotRef: LINKEDIN }),
-      additionalContact: SlotDefaultStyling({
-        element,
-        slotRef: ADDITIONAL_CONTACT,
-      }),
-      subText: SlotDefaultStyling({ element, slotRef: SUB_TEXT }),
-      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
-      theme: element._theme,
-    });
+    return CreatPersonListElement(MakePersonData({ element }));
   }
 
-  return CreatPersonBlockElement({
-    image: GetImage({ element }),
-    headline: SlotDefaultStyling({ element, slotRef: NAME }),
-    text: SlotDefaultStyling({ element, slotRef: JOB_TITLE }),
-    theme: element._theme,
-    isAligned: element._aligned,
-    isBordered: element._border,
-  });
+  return CreatPersonBlockElement(MakePersonData({ element }));
 };

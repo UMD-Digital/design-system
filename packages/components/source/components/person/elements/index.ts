@@ -11,7 +11,19 @@ import {
 import { UMDPersonElement } from '../index';
 import { SLOTS, VARIABLES } from '../globals';
 
-const { IMAGE, NAME, TEXT, SUB_TEXT } = SLOTS;
+const {
+  IMAGE,
+  NAME,
+  JOB_TITLE,
+  ASSOCIATION,
+  PRONOUNS,
+  PHONE,
+  EMAIL,
+  LINKEDIN,
+  ADDITIONAL_CONTACT,
+  SUB_TEXT,
+  ACTIONS,
+} = SLOTS;
 const { DISPLAY_LIST } = VARIABLES;
 
 export const ComponentStyles = `
@@ -39,8 +51,19 @@ export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   if (element._display === DISPLAY_LIST) {
     return CreatPersonListElement({
       image: GetImage({ element }),
-      headline: SlotDefaultStyling({ element, slotRef: NAME }),
-      text: SlotDefaultStyling({ element, slotRef: TEXT }),
+      name: SlotDefaultStyling({ element, slotRef: NAME }),
+      job: SlotDefaultStyling({ element, slotRef: JOB_TITLE }),
+      association: SlotDefaultStyling({ element, slotRef: ASSOCIATION }),
+      pronouns: SlotDefaultStyling({ element, slotRef: PRONOUNS }),
+      phone: SlotDefaultStyling({ element, slotRef: PHONE }),
+      email: SlotDefaultStyling({ element, slotRef: EMAIL }),
+      linkendIn: SlotDefaultStyling({ element, slotRef: LINKEDIN }),
+      additionalContact: SlotDefaultStyling({
+        element,
+        slotRef: ADDITIONAL_CONTACT,
+      }),
+      subText: SlotDefaultStyling({ element, slotRef: SUB_TEXT }),
+      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
       theme: element._theme,
     });
   }
@@ -48,7 +71,7 @@ export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   return CreatPersonBlockElement({
     image: GetImage({ element }),
     headline: SlotDefaultStyling({ element, slotRef: NAME }),
-    text: SlotDefaultStyling({ element, slotRef: TEXT }),
+    text: SlotDefaultStyling({ element, slotRef: JOB_TITLE }),
     theme: element._theme,
     isAligned: element._aligned,
     isBordered: element._border,

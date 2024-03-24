@@ -1,23 +1,23 @@
 import { Tokens } from '@universityofmaryland/variables';
+import {
+  CreatePersonTextContainer,
+  TypePersonProps,
+  STYLES_PERSON_TEXT,
+  PERSON_TEXT_CONTAINER,
+} from '../common/person-text';
 import { CreatListContainer, STYLES_LIST_CONTAINER } from './container';
 import {
   CreateImageContainer,
   STYLES_LIST_COMMON_IMAGE,
   LIST_IMAGE_CONTAINER,
 } from './image';
-import {
-  CreateTextContainer,
-  TypeCommonTextAttributes,
-  STYLES_LIST_COMMON_TEXT,
-  LIST_TEXT_CONTAINER,
-} from './text';
 
-export type TypeListPersonProps = TypeCommonTextAttributes & {
+export type TypeListPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
   theme?: string;
 };
 
-const { Spacing } = Tokens;
+const { Spacing, Colors } = Tokens;
 
 const SMALL = 400;
 
@@ -25,6 +25,23 @@ const ELEMENT_NAME = 'umd-list-person';
 const ELEMENT_LIST_CONTAINER = 'umd-list-person-container';
 
 const OverwriteImagesStyles = `
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    .${LIST_IMAGE_CONTAINER} {
+      float: none;
+      width: 100%;
+      margin-bottom: ${Spacing.md};
+      background-color: ${Colors.gray.lighter};
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    .${LIST_IMAGE_CONTAINER} img {
+      max-width: 80%;
+    }
+  }
+
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${LIST_IMAGE_CONTAINER} {
       order: 1;
@@ -34,9 +51,7 @@ const OverwriteImagesStyles = `
 
 const OverwriteTextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${LIST_TEXT_CONTAINER} {
-      order: 2;
-      padding-right: 0;
+    .${PERSON_TEXT_CONTAINER} {
       padding-left: ${Spacing.md};
     }
   }
@@ -53,7 +68,7 @@ export const STYLES_LIST_PERSON = `
   }
 
   ${STYLES_LIST_CONTAINER}
-  ${STYLES_LIST_COMMON_TEXT}
+  ${STYLES_PERSON_TEXT}
   ${STYLES_LIST_COMMON_IMAGE}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
@@ -61,7 +76,7 @@ export const STYLES_LIST_PERSON = `
 
 export const CreatPersonListElement = (element: TypeListPersonProps) => {
   const { theme, image } = element;
-  const textContainer = CreateTextContainer(element);
+  const textContainer = CreatePersonTextContainer(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? CreateImageContainer({ image }) : null;
   const container = CreatListContainer({

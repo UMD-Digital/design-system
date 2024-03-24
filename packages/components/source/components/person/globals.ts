@@ -1,8 +1,15 @@
 export const SLOTS = {
   IMAGE: 'image',
   NAME: 'name',
-  TEXT: 'text',
+  JOB_TITLE: 'job-title',
+  ASSOCIATION: 'association',
+  PRONOUNS: 'pronouns',
+  PHONE: 'phone',
+  EMAIL: 'email',
+  LINKEDIN: 'linkedin',
+  ADDITIONAL_CONTACT: 'additional-contact',
   SUB_TEXT: 'sub-text',
+  ACTIONS: 'actions',
 };
 export const VARIABLES = {
   ELEMENT_NAME: 'umd-element-person',

@@ -5,7 +5,10 @@ import {
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
-import { CreateDateBlockElement, STYLES_DATE_BLOCK } from 'elements/date-block';
+import {
+  CreateDateBlockElement,
+  STYLES_DATE_BLOCK,
+} from 'elements/common/date-block';
 import { ELEMENT_TYPE } from 'components/events-date';
 import { SLOTS, VARIABLES, REFERENCES } from 'components/events-date/globals';
 

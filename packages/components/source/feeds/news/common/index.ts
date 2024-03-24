@@ -1,5 +1,5 @@
 import { Reset } from 'helpers/styles';
-import { MakeLoader } from 'elements/loader';
+import { MakeLoader } from 'elements/common/loader';
 import {
   AppendGridEntries,
   DisplayLazyLoad,

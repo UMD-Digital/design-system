@@ -1,10 +1,13 @@
 import { CreateCardElement, STYLES_CARD } from 'elements/card';
 import { CreateListEventElement, STYLES_LIST_EVENT } from 'elements/list/event';
-import { CreateDateBlockElement, STYLES_DATE_BLOCK } from 'elements/date-block';
+import {
+  CreateDateBlockElement,
+  STYLES_DATE_BLOCK,
+} from 'elements/common/date-block';
 import {
   CreateDateDetailsElement,
   STYLES_DATE_DETAILS,
-} from 'elements/date-details';
+} from 'elements/common/date-details';
 
 type ImageType = {
   url: string;

@@ -5,26 +5,34 @@ declare global {
 }
 
 import { MakeTemplate } from 'helpers/ui';
-import { ComponentStyles, CreateShadowDom } from './elements';
+import { ComponentStyles, CreateShadowDom } from './display';
 
 const ELEMENT_NAME = 'umd-element-pathway';
+const SLOTS = {
+  IMAGE: 'image',
+  HEADLINE: 'headline',
+  EYEBROW: 'eyebrow',
+  TEXT: 'text',
+  ACTIONS: 'actions',
+  HIGHLIGHT: 'highlight',
+  HIGHLIGHT_ATTRIBUTION: 'highlight-attribution',
+};
 
 export class UMDPathwayElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _slots: Record<string, string>;
 
   constructor() {
+    const template = MakeTemplate({ styles: `${ComponentStyles}` });
+
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-
-    const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
-
+    this._slots = SLOTS;
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const container = CreateShadowDom({ element: this });
-    if (container) this._shadow.appendChild(container);
+    this._shadow.appendChild(CreateShadowDom({ element: this }));
   }
 }
 

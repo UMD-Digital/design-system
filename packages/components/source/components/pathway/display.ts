@@ -6,15 +6,7 @@ import {
 } from '@universityofmaryland/custom-elements-library';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
-import { UMDPathwayElement } from '../index';
-
-const IMAGE = 'image';
-const HEADLINE = 'headline';
-const EYEBROW = 'eyebrow';
-const TEXT = 'text';
-const ACTIONS = 'actions';
-const HIGHLIGHT = 'highlight';
-const HIGHLIGHT_ATTRIBUTION = 'highlight-attribution';
+import { UMDPathwayElement } from './index';
 
 const ATTRIBUTE_IMAGE_POSITION = 'image-position';
 const ATTRIBUTE_IMAGE_SCALED = 'image-scaled';
@@ -41,6 +33,7 @@ export const ComponentStyles = `
 `;
 
 const GetImage = ({ element }: { element: UMDPathwayElement }) => {
+  const { IMAGE } = element._slots;
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
   const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
 
@@ -56,9 +49,10 @@ export const CreateShadowDom = ({
 }: {
   element: UMDPathwayElement;
 }) => {
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } =
+    element._slots;
   const isImageRight =
     element.getAttribute(ATTRIBUTE_IMAGE_POSITION) !== 'left';
-
   const isImageScaled =
     element.getAttribute(ATTRIBUTE_IMAGE_SCALED) !== 'false';
   const type = element.getAttribute(ATTRIBUTE_TYPE);

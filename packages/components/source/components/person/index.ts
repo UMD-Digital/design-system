@@ -5,58 +5,45 @@ declare global {
 }
 
 import { MakeTemplate, SlotOberserver } from 'helpers/ui';
-import { ComponentStyles, CreateShadowDom } from './elements';
-import { SLOTS, VARIABLES } from './globals';
+import { ComponentStyles, CreateShadowDom } from './display';
 
-const {
-  ATTRIBUTE_ALIGNED,
-  ATTRIBUTE_BORDER,
-  ATTRIBUTE_DISPLAY,
-  ATTRIBUTE_THEME,
-  DISPLAY_BLOCK,
-  DISPLAY_LIST,
-  ELEMENT_NAME,
-  THEME_LIGHT,
-} = VARIABLES;
+const ELEMENT_NAME = 'umd-element-person';
+const SLOTS = {
+  IMAGE: 'image',
+  NAME: 'name',
+  JOB_TITLE: 'job-title',
+  ASSOCIATION: 'association',
+  PRONOUNS: 'pronouns',
+  PHONE: 'phone',
+  EMAIL: 'email',
+  LINKEDIN: 'linkedin',
+  ADDITIONAL_CONTACT: 'additional-contact',
+  SUB_TEXT: 'sub-text',
+  ACTIONS: 'actions',
+};
 
 export class UMDPersonElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme: string;
-  _display: string;
-  _aligned: boolean;
-  _border: boolean;
+  _slots: Record<string, string>;
 
   constructor() {
+    const template = MakeTemplate({ styles: `${ComponentStyles}` });
+
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._theme = this.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-    this._display = DISPLAY_BLOCK;
-    this._aligned = false;
-    this._border = false;
-
-    const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
-
+    this._slots = SLOTS;
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
     const element = this;
-    const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
-    const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
-    const displayAttr = element.getAttribute(ATTRIBUTE_DISPLAY);
+    const shadowDom = this._shadow;
 
-    element._theme = element.getAttribute(ATTRIBUTE_THEME) || element._theme;
-    element._aligned = alignmentAttr === 'true';
-    element._border = borderAttr === 'true';
-
-    if (displayAttr === DISPLAY_LIST) element._display = DISPLAY_LIST;
-
-    this._shadow.appendChild(CreateShadowDom({ element }));
+    shadowDom.appendChild(CreateShadowDom({ element }));
 
     SlotOberserver({
       element,
-      shadowDom: this._shadow,
+      shadowDom,
       slots: SLOTS,
       CreateShadowDom,
     });

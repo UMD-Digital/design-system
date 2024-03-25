@@ -1,10 +1,7 @@
+import { CallToAction } from '@universityofmaryland/custom-elements-library';
 import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';
-import {
-  STYLES_CALL_TO_ACTION_ELEMENT,
-  CreateCallToActionElement,
-} from 'elements/call-to-action';
 import { ELEMENTS, SLOTS, VARIABLES, REFERENCES } from '../globals';
 import { UMDCallToActionElement } from '../index';
 
@@ -66,7 +63,7 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_CALL_TO_ACTION_ELEMENT}
+  ${CallToAction.Styles}
   ${PlainTextSlotStyles}
   ${OverwritePrimaryLayoutStyles}
   ${OverwriteSecondaryLayoutStyles}
@@ -84,14 +81,14 @@ const CreateCtaElement = ({ element }: { element: UMDCallToActionElement }) => {
 
   if (linkElement) {
     const cta = linkElement.cloneNode(true) as HTMLAnchorElement;
-    return CreateCallToActionElement({ cta, ...styleObj });
+    return CallToAction.CreateElement({ cta, ...styleObj });
   }
   if (buttonElement) {
     const cta = buttonElement.cloneNode(true) as HTMLButtonElement;
-    return CreateCallToActionElement({ cta, ...styleObj });
+    return CallToAction.CreateElement({ cta, ...styleObj });
   }
 
-  return CreateCallToActionElement({ type });
+  return CallToAction.CreateElement({ type });
 };
 
 const CreatePlainText = ({ element }: { element: UMDCallToActionElement }) => {

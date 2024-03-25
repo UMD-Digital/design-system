@@ -1,15 +1,12 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  CreateCallToActionElement,
-  STYLES_CALL_TO_ACTION_ELEMENT,
-} from 'elements/call-to-action';
+import { CallToAction } from '@universityofmaryland/custom-elements-library';
 
 const { Spacing } = Tokens;
 
 export const ID_LAZY_LOAD_BUTTON = 'umd-feeds-events-lazy-load-button';
 
 export const STYLES_LAZY_LOAD_BUTTON = `
-  ${STYLES_CALL_TO_ACTION_ELEMENT}
+  ${CallToAction.Styles}
 
   .${ID_LAZY_LOAD_BUTTON} {
     display: flex;
@@ -25,7 +22,7 @@ export const CreateLazyLoadButton = ({
 }) => {
   const container = document.createElement('div');
   const button = document.createElement('button');
-  const ctaButton = CreateCallToActionElement({
+  const ctaButton = CallToAction.CreateElement({
     cta: button,
     type: 'outline',
   });

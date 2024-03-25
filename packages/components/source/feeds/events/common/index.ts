@@ -1,5 +1,5 @@
 import { Reset } from 'helpers/styles';
-import { MakeLoader } from 'elements/common/loader';
+import { MakeLoader } from '../../common/loader';
 import {
   CreateEventCard,
   CreateEventList,

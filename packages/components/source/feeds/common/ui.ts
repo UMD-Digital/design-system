@@ -1,17 +1,13 @@
-import {
-  MakeLoader,
-  STYLES_LOADER,
-  ID_UMD_LOADER,
-} from 'elements/common/loader';
+import { MakeLoader, STYLES_LOADER, ID_UMD_LOADER } from '../common/loader';
 import {
   CreateNoResultsInterface,
   STYLES_NO_RESULTS,
-} from 'elements/common/no-results';
+} from '../common/no-results';
 import {
   CreateGridGapLayout,
   STYLES_GRID_LAYOUT,
   ID_GRID_LAYOUT_CONTAINER,
-} from 'elements/common/grid';
+} from '../common/grid';
 import {
   CreateLazyLoadButton,
   STYLES_LAZY_LOAD_BUTTON,

@@ -1,9 +1,6 @@
+import { CardOverlay } from '@universityofmaryland/custom-elements-library';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
-import {
-  CreateCardOverlayElement,
-  STYLES_OVERLAY_CARD,
-} from 'elements/card-overlay';
 import { UMDCardOverlayElement } from '../index';
 import { SLOTS } from '../globals';
 
@@ -16,7 +13,7 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_OVERLAY_CARD}
+  ${CardOverlay.Styles}
 `;
 
 const GetImage = ({ element }: { element: UMDCardOverlayElement }) => {
@@ -35,7 +32,7 @@ export const CreateShadowDom = ({
 }: {
   element: UMDCardOverlayElement;
 }) =>
-  CreateCardOverlayElement({
+  CardOverlay.CreateElement({
     image: GetImage({ element }),
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),

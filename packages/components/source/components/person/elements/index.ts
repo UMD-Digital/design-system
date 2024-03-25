@@ -1,13 +1,10 @@
+import {
+  PersonBlock,
+  PersonList,
+} from '@universityofmaryland/custom-elements-library';
+
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
-import {
-  CreatPersonBlockElement,
-  STYLES_BLOCK_PERSON,
-} from 'elements/block/person';
-import {
-  CreatPersonListElement,
-  STYLES_LIST_PERSON,
-} from 'elements/list/person';
 import { UMDPersonElement } from '../index';
 import { SLOTS, VARIABLES } from '../globals';
 
@@ -32,8 +29,8 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_LIST_PERSON}
-  ${STYLES_BLOCK_PERSON}
+  ${PersonBlock.Styles}
+  ${PersonList.Styles}
 `;
 
 const GetImage = ({ element }: { element: UMDPersonElement }) => {
@@ -67,8 +64,8 @@ const MakePersonData = ({ element }: { element: UMDPersonElement }) => ({
 
 export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   if (element._display === DISPLAY_LIST) {
-    return CreatPersonListElement(MakePersonData({ element }));
+    return PersonList.CreateElement(MakePersonData({ element }));
   }
 
-  return CreatPersonBlockElement(MakePersonData({ element }));
+  return PersonBlock.CreateElement(MakePersonData({ element }));
 };

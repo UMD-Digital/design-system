@@ -1,17 +1,11 @@
+import {
+  PathwayHero,
+  PathwayHighlight,
+  PathwayImage,
+  PathwayElements,
+} from '@universityofmaryland/custom-elements-library';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
-import {
-  CreateImagePathway,
-  STYLES_PATHWAY_IMAGE,
-} from 'elements/pathway/image';
-import {
-  CreateHighlightPathway,
-  STYLES_PATHWAY_HIGHLIGHT,
-} from 'elements/pathway/highlight';
-import { CreateHeroPathway, STYLES_PATHWAY_HERO } from 'elements/pathway/hero';
-import { STYLES_PATHWAY_TEXT_CONTAINER } from 'elements/pathway/container-text';
-import { STYLES_PATHWAY_IMAGE_CONTAINER } from 'elements/pathway/container-image';
-
 import { UMDPathwayElement } from '../index';
 
 const IMAGE = 'image';
@@ -39,11 +33,11 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_PATHWAY_IMAGE}
-  ${STYLES_PATHWAY_HERO}
-  ${STYLES_PATHWAY_HIGHLIGHT}
-  ${STYLES_PATHWAY_TEXT_CONTAINER}
-  ${STYLES_PATHWAY_IMAGE_CONTAINER}
+  ${PathwayImage.Styles}
+  ${PathwayHero.Styles}
+  ${PathwayHighlight.Styles}
+  ${PathwayElements.Image.Styles}
+  ${PathwayElements.Text.Styles}
 `;
 
 const GetImage = ({ element }: { element: UMDPathwayElement }) => {
@@ -78,7 +72,7 @@ export const CreateShadowDom = ({
   }
 
   if (type === TYPE_HIGHLIGHT) {
-    return CreateHighlightPathway({
+    return PathwayHighlight.CreateElement({
       theme,
       eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
       headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
@@ -96,7 +90,7 @@ export const CreateShadowDom = ({
   }
 
   if (type === TYPE_HERO) {
-    return CreateHeroPathway({
+    return PathwayHero.CreateElement({
       theme,
       isImageRight,
       eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
@@ -107,7 +101,7 @@ export const CreateShadowDom = ({
     });
   }
 
-  return CreateImagePathway({
+  return PathwayImage.CreateElement({
     theme,
     isImageRight,
     isImageScaled,

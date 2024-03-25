@@ -1,16 +1,8 @@
 import {
-  CreateEventBlockElement,
-  STYLES_BLOCK_EVENT,
-} from 'elements/block/event';
-import { CreateListEventElement, STYLES_LIST_EVENT } from 'elements/list/event';
-import {
-  CreateDateBlockElement,
-  STYLES_DATE_BLOCK,
-} from 'elements/common/date-block';
-import {
-  CreateDateDetailsElement,
-  STYLES_DATE_DETAILS,
-} from 'elements/common/date-details';
+  EventBlock,
+  EventList,
+  EventElements,
+} from '@universityofmaryland/custom-elements-library';
 
 type ImageType = {
   url: string;
@@ -42,10 +34,10 @@ export type EventType = DateInformaitonType & {
 };
 
 export const STYLES_EVENT_FEED = `
-  ${STYLES_BLOCK_EVENT}
-  ${STYLES_LIST_EVENT}
-  ${STYLES_DATE_BLOCK}
-  ${STYLES_DATE_DETAILS}
+  ${EventBlock.Styles}
+  ${EventList.Styles}
+  ${EventElements.Sign.Styles}
+  ${EventElements.Details.Styles}
 `;
 
 const CreateImage = ({ images }: { images: ImageType }) => {
@@ -90,11 +82,11 @@ const CreateHeadline = ({ text, url }: { text: string; url: string }) => {
 
 export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
   entries.map((entry) =>
-    CreateEventBlockElement({
+    EventBlock.CreateElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      eventDetails: CreateDateDetailsElement({
+      eventDetails: EventElements.Details.CreateElement({
         ...entry,
         isLayoutVeritcal: false,
       }),
@@ -104,14 +96,14 @@ export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
 
 export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
   entries.map((entry) =>
-    CreateListEventElement({
+    EventList.CreateElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      eventDetails: CreateDateDetailsElement({
+      eventDetails: EventElements.Details.CreateElement({
         ...entry,
         isLayoutVeritcal: false,
       }),
-      dateBlock: CreateDateBlockElement(entry),
+      dateBlock: EventElements.Sign.CreateElement(entry),
     }),
   );

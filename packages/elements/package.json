@@ -1,7 +1,7 @@
 {
-  "name": "@universityofmaryland/web-components-library",
-  "version": "0.10.24",
-  "description": "UMD Web Components",
+  "name": "@universityofmaryland/custom-elements-library",
+  "version": "0.0.1",
+  "description": "UMD Custom Elements",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,6 @@
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
     "postcss-js": "^4.0.1",
-    "tw-to-css": "^0.0.12",
-    "umd-web-components": "link:../../@universityofmaryland/custom-elements-library"
+    "tw-to-css": "^0.0.12"
   }
 }

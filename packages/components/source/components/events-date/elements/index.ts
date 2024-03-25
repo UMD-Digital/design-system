@@ -3,12 +3,9 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
+import { EventElements } from '@universityofmaryland/custom-elements-library';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
-import {
-  CreateDateBlockElement,
-  STYLES_DATE_BLOCK,
-} from 'elements/common/date-block';
 import { ELEMENT_TYPE } from 'components/events-date';
 import { SLOTS, VARIABLES, REFERENCES } from 'components/events-date/globals';
 
@@ -84,7 +81,7 @@ export const ComponentStyles = `
   ${Reset}
   ${containerStyles}
   ${headlineStyles}
-  ${STYLES_DATE_BLOCK}
+  ${EventElements.Sign.Styles}
 `;
 
 export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
@@ -98,7 +95,7 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   container.setAttribute(ATTRIBUTE_THEME, theme);
 
   if (monthSlot && daySlot) {
-    const dateBlock = CreateDateBlockElement({
+    const dateBlock = EventElements.Sign.CreateElement({
       startMonth: monthSlot,
       startDay: daySlot,
       theme,

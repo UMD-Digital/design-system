@@ -1,13 +1,9 @@
+import {
+  CardBlock,
+  CardList,
+} from '@universityofmaryland/custom-elements-library';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
-import {
-  CreatStandardBlockElement,
-  STYLES_BLOCK_STANDARD,
-} from 'elements/block/standard';
-import {
-  CreatStandardListElement,
-  STYLES_LIST_STANDARD,
-} from 'elements/list/standard';
 import { SLOTS, VARIABLES } from '../globals';
 import { UMDCardElement } from '../index';
 
@@ -21,8 +17,8 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_BLOCK_STANDARD}
-  ${STYLES_LIST_STANDARD}
+  ${CardBlock.Styles}
+  ${CardList.Styles}
 `;
 
 const GetImage = ({ element }: { element: UMDCardElement }) => {
@@ -38,7 +34,7 @@ const GetImage = ({ element }: { element: UMDCardElement }) => {
 
 export const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   if (element._display === DISPLAY_LIST) {
-    return CreatStandardListElement({
+    return CardList.CreateElement({
       image: GetImage({ element }),
       eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
       headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
@@ -48,7 +44,7 @@ export const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     });
   }
 
-  return CreatStandardBlockElement({
+  return CardBlock.CreateElement({
     image: GetImage({ element }),
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),

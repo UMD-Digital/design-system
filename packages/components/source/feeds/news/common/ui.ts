@@ -1,11 +1,7 @@
 import {
-  CreatStandardBlockElement,
-  STYLES_BLOCK_STANDARD,
-} from 'elements/block/standard';
-import {
-  CreatStandardListElement,
-  STYLES_LIST_STANDARD,
-} from 'elements/list/standard';
+  CardBlock,
+  CardList,
+} from '@universityofmaryland/custom-elements-library';
 
 type ImageType = {
   url: string;
@@ -27,8 +23,8 @@ export type ArticleType = {
 };
 
 export const STYLES_NEWS_FEED = `
-  ${STYLES_BLOCK_STANDARD}
-  ${STYLES_LIST_STANDARD}
+  ${CardBlock.Styles}
+  ${CardList.Styles}
 `;
 
 const CreateImage = ({ images }: { images: ImageType }) => {
@@ -90,7 +86,7 @@ const CreateDate = ({
 
 export const CreateNewsCard = ({ entries }: { entries: ArticleType[] }) =>
   entries.map((entry) =>
-    CreatStandardBlockElement({
+    CardBlock.CreateElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
@@ -104,7 +100,7 @@ export const CreateNewsCard = ({ entries }: { entries: ArticleType[] }) =>
 
 export const CreateNewsList = ({ entries }: { entries: ArticleType[] }) =>
   entries.map((entry) =>
-    CreatStandardListElement({
+    CardList.CreateElement({
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),

@@ -4,6 +4,7 @@
 | ------------ | :--------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Variables    |     ❌     | Base tokens, and styles for use in the University of Maryland Design System Component Library and Theme.                                                       |
 | Theme        |     ✅     | A configuration of the tokens and other styles from UMD Design system for use with CSS frameworks that support JSS (CSS-in-JS)                                 |
+| Elements     |     ❌     | A collection of extracted UI elements for use in components and APIs                                                                                           |
 | Components   |     ✅     | Web Components built for the University of Maryland Design system on the [Web Components API](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) |
 | Kitchen Sink |     ❌     | Kitchen Sink testing site for internal review and validation                                                                                                   |
 
@@ -64,6 +65,7 @@ _Individually build and watch for changes to packages as follows:_
 ```bash
 yarn variables   # Build and watch for changes on the variables
 yarn theme       # Build and watch for changes on the theme and kitchen sink
+yarn elements    # Build and watch for changes on elements
 yarn components  # Build and watch for changes on components
 yarn kitchen     # build and watch for changes on the kitchen sink
 ```
@@ -75,6 +77,7 @@ Build a specific package, and stop.
 ```bash
 yarn variables:build
 yarn theme:build
+yarn elements:build
 yarn components:build
 yarn kitchen:build
 ```

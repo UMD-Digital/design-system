@@ -4,59 +4,110 @@ declare global {
   }
 }
 
-import { MakeTemplate, SlotOberserver } from 'helpers/ui';
-import { ComponentStyles, CreateShadowDom } from './elements';
-import { SLOTS, VARIABLES } from './globals';
+import {
+  CardBlock,
+  CardList,
+} from '@universityofmaryland/custom-elements-library';
+import { Reset } from 'helpers/styles';
+import {
+  CheckForImageAlt,
+  SlotDefaultStyling,
+  MakeTemplate,
+  SlotOberserver,
+} from 'helpers/ui';
 
-const {
-  ELEMENT_NAME,
-  THEME_LIGHT,
-  ATTRIBUTE_BORDER,
-  ATTRIBUTE_ALIGNED,
-  ATTRIBUTE_THEME,
-  ATTRIBUTE_DISPLAY,
-  DISPLAY_BLOCK,
-  DISPLAY_LIST,
-} = VARIABLES;
+const ELEMENT_NAME = 'umd-element-card';
+const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_ALIGNED = 'aligned';
+const ATTRIBUTE_BORDER = 'border';
+const ATTRIBUTE_DISPLAY = 'display';
+const THEME_LIGHT = 'light';
+const DISPLAY_LIST = 'list';
+const SLOTS = {
+  IMAGE: 'image',
+  HEADLINE: 'headline',
+  EYEBROW: 'eyebrow',
+  TEXT: 'text',
+  CTA: 'cta',
+};
+const styles = `
+  :host {
+    display: block;
+  }
+  
+  ${Reset}
+  ${CardBlock.Styles}
+  ${CardList.Styles}
+`;
+
+const GetImage = ({ element }: { element: UMDCardElement }) => {
+  const { IMAGE } = element._slots;
+  const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
+  const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
+
+  if (isProperImage && slotImage) {
+    return slotImage.cloneNode(true) as HTMLImageElement;
+  }
+
+  return null;
+};
+
+const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
+  const { EYEBROW, HEADLINE, TEXT, CTA } = element._slots;
+
+  const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
+  const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
+  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const isAligned = alignmentAttr === 'true';
+  const isBordered = borderAttr === 'true';
+  const isDisplayList =
+    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
+
+  if (isDisplayList) {
+    return CardList.CreateElement({
+      image: GetImage({ element }),
+      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+      text: SlotDefaultStyling({ element, slotRef: TEXT }),
+      actions: SlotDefaultStyling({ element, slotRef: CTA }),
+      theme,
+    });
+  }
+
+  return CardBlock.CreateElement({
+    image: GetImage({ element }),
+    eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
+    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+    text: SlotDefaultStyling({ element, slotRef: TEXT }),
+    actions: SlotDefaultStyling({ element, slotRef: CTA }),
+    theme,
+    isAligned,
+    isBordered,
+  });
+};
 
 export class UMDCardElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme: string;
-  _display: string;
-  _aligned: boolean;
-  _border: boolean;
+  _slots: Record<string, string>;
 
   constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._theme = THEME_LIGHT;
-    this._display = DISPLAY_BLOCK;
-    this._aligned = false;
-    this._border = false;
-
-    const styles = `${ComponentStyles}`;
     const template = MakeTemplate({ styles });
 
+    super();
+    this._shadow = this.attachShadow({ mode: 'open' });
+    this._slots = SLOTS;
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
     const element = this;
-    const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
-    const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
-    const displayAttr = element.getAttribute(ATTRIBUTE_DISPLAY);
+    const shadowDom = this._shadow;
 
-    element._theme = element.getAttribute(ATTRIBUTE_THEME) || element._theme;
-    element._aligned = alignmentAttr === 'true';
-    element._border = borderAttr === 'true';
-
-    if (displayAttr === DISPLAY_LIST) element._display = DISPLAY_LIST;
-
-    this._shadow.appendChild(CreateShadowDom({ element }));
+    shadowDom.appendChild(CreateShadowDom({ element }));
 
     SlotOberserver({
       element,
-      shadowDom: this._shadow,
+      shadowDom,
       slots: SLOTS,
       CreateShadowDom,
     });

@@ -117,7 +117,7 @@ const VariantWithImageStyles = `
 
   @media (min-width: ${MEDIUM}px) {
     ${IS_WITH_IMAGE} .${BLOCK_TEXT_CONTAINER} {
-      padding-top: ${Spacing.sm};
+      padding-top: ${Spacing.md};
     }
   }
 `;

@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { GridColumnsGutterless } from '../layout/grid';
+import { GridColumnsGutterless } from '../layout/grid-gutterless';
 
 const { Queries, Spacing } = Tokens;
 

@@ -1,6 +1,6 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
-const { GridColumns, GridColumnsWithGap, GridColumnAndRows } = Layout;
+const { GridColumnsWithGap, GridColumnAndRows } = Layout;
 const { Queries, Spacing } = Tokens;
 
 export const GridColumnsStandard = {
@@ -14,46 +14,6 @@ export const GridColumnsStandard = {
 
   '.umd-grid-four': {
     ...GridColumnsWithGap['.base-four'],
-  },
-};
-
-export const GridColumnsGutterless = {
-  '.umd-grid-gutterless-two': {
-    display: 'grid',
-    gridGap: Spacing.min,
-
-    [`@media (${Queries.large.min})`]: {
-      gridGap: `0px`,
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    },
-  },
-
-  '.umd-grid-gutterless-three': {
-    display: 'grid',
-    gridGap: Spacing.min,
-
-    [`@media (${Queries.large.min})`]: {
-      gridGap: `0px`,
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    },
-
-    [`@media (${Queries.desktop.min})`]: {
-      gridTemplateColumns: 'repeat(3, 1fr)',
-    },
-  },
-
-  '.umd-grid-gutterless-four': {
-    display: 'grid',
-    gridGap: Spacing.min,
-
-    [`@media (${Queries.large.min})`]: {
-      gridGap: `0px`,
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    },
-
-    [`@media (${Queries.desktop.min})`]: {
-      gridTemplateColumns: 'repeat(4, 1fr)',
-    },
   },
 };
 
@@ -84,7 +44,6 @@ const GridColumnsFeatured = {
 
 export default {
   ...GridColumnsStandard,
-  ...GridColumnsGutterless,
 
   '.umd-grid-featured-card': {
     ...GridColumnsFeatured,

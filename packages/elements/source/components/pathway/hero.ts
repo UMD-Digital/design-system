@@ -7,12 +7,12 @@ import {
   TEXT_CONTAINER_WRAPPER,
   TEXT_CONTAINER_HEADLINE_WRAPPER,
   TEXT_CONTAINER_TEXT_WRAPPER,
-} from '../../shared-elements/pathway/text';
+} from './elements/text';
 import {
   CreatePathwayImageContainer,
   TypePathwayHeroImageContainer,
   PATHWAY_CONTAINER_IMAGE,
-} from '../../shared-elements/pathway/image';
+} from './elements/image';
 
 type TypePathwayHeroProps = TypePathwayTextContainer &
   TypePathwayHeroImageContainer & {
@@ -38,6 +38,30 @@ const IS_WITH_IMAGE_RIGHT = `.${PATHWAY_HERO_CONTAINER}[${ATTRIBUTE_IMAGE_POSITI
 const IS_WITH_IMAGE_LEFT = `.${PATHWAY_HERO_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
 
 // prettier-ignore
+const OverwriteImageRightStyles = `
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_HERO_CONTAINER_WRAPPER} {
+      padding-right: 50%;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_IMAGE} {
+      order: 2;
+    }
+  }
+`;
+
+// prettier-ignore
+const OverwriteImageLeftStyles = `
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${IS_WITH_IMAGE_LEFT} .${PATHWAY_HERO_CONTAINER_WRAPPER} {
+      padding-left: 50%;
+    }
+  }
+`;
+
+// prettier-ignore
 const ImageContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HERO_CONTAINER} .${PATHWAY_CONTAINER_IMAGE} {
@@ -50,7 +74,7 @@ const ImageContainerStyles = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_IMAGE}  {
+    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_IMAGE} {
       left: inherit;
       right: 0;
     }
@@ -73,14 +97,13 @@ const TextContainerStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_WRAPPER} {
-      padding: ${Spacing['4xl']} ${Spacing['2xl']};
+      padding: ${Spacing['4xl']} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_WRAPPER} {
-      padding: ${Spacing['8xl']} ${Spacing['6xl']};
-      max-width: 85%;
+      padding: ${Spacing['8xl']} 0;
     }
   }
 
@@ -101,15 +124,6 @@ const TextContainerStyles = `
       [`.${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_TEXT_WRAPPER} *`]: SansLarger,
     },
   })}
-`;
-
-// prettier-ignore
-const ImageContainerPositionStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_IMAGE} {
-      order: 2;
-    }
-  }
 `;
 
 // prettier-ignore
@@ -164,23 +178,12 @@ const STYLES_PATHWAY_HERO_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_LEFT} .${PATHWAY_HERO_CONTAINER_WRAPPER} {
-      padding-left: 50%;
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_HERO_CONTAINER_WRAPPER} {
-      padding-right: 50%;
-    }
-  }
-
   ${LockStyles}
   ${TextContainerStyles}
   ${ImageContainerStyles}
   ${TextContainerPositionStyles}
-  ${ImageContainerPositionStyles}
+  ${OverwriteImageRightStyles}
+  ${OverwriteImageLeftStyles}
 `;
 
 const CreatePathwayHeroElement = (element: TypePathwayHeroProps) => {

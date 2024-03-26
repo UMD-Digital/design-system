@@ -5,12 +5,12 @@ import {
   TypePathwayTextContainer,
   TEXT_CONTAINER,
   TEXT_CONTAINER_WRAPPER,
-} from '../../shared-elements/pathway/text';
+} from './elements/text';
 import {
   CreatePathwayImageContainer,
   TypePathwayImageContainer,
   PATHWAY_CONTAINER_IMAGE,
-} from '../../shared-elements/pathway/image';
+} from './elements/image';
 
 type TypePathwayHeroProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {

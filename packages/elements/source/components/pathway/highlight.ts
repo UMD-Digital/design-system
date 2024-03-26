@@ -4,7 +4,7 @@ import {
   CreatePathwayTextContainer,
   TypePathwayTextContainer,
   TEXT_CONTAINER,
-} from '../../shared-elements/pathway/text';
+} from './elements/text';
 
 type TypePathwayHighlightContainer = {
   quote: HTMLElement | null;

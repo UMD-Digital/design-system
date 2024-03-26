@@ -89,7 +89,7 @@ const HeadlineStyles = `
   })}
 
   .${TEXT_CONTAINER_HEADLINE_WRAPPER} {
-    color: ${Colors.gray.darker};
+    color: ${Colors.black};
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -113,10 +113,10 @@ const TextStyles = `
     },
   })}
 
-
   .${TEXT_CONTAINER_TEXT_WRAPPER} * {
     font-size: ${FontSize['lg']};
     line-height: 1.5em;
+    color: ${Colors.gray.dark};
   }
 `;
 

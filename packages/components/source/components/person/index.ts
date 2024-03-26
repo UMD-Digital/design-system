@@ -17,6 +17,7 @@ const SLOTS = {
   PHONE: 'phone',
   EMAIL: 'email',
   LINKEDIN: 'linkedin',
+  ADDRESS: 'address',
   ADDITIONAL_CONTACT: 'additional-contact',
   SUB_TEXT: 'sub-text',
   ACTIONS: 'actions',

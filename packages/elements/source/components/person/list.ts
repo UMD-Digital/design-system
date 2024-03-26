@@ -4,7 +4,7 @@ import {
   TypePersonProps,
   STYLES_PERSON_TEXT,
   PERSON_TEXT_CONTAINER,
-} from '../../shared-elements/person/person-text';
+} from './elements/text';
 import {
   CreatListContainer,
   STYLES_LIST_CONTAINER,
@@ -25,11 +25,17 @@ const { Spacing, Colors } = Tokens;
 const SMALL = 400;
 
 const ELEMENT_NAME = 'umd-list-person';
-const ELEMENT_LIST_CONTAINER = 'umd-list-person-container';
+const ELEMENT_PERSON_LIST_CONTAINER = 'umd-list-person-container';
+const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LIST_IMAGE_CONTAINER}`;
+const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${PERSON_TEXT_CONTAINER}`;
 
 const OverwriteImagesStyles = `
+  ${IS_IMAGE_CONTAINER_OVERWRITE} {
+    order: 1;
+  }
+
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${LIST_IMAGE_CONTAINER} {
+    ${IS_IMAGE_CONTAINER_OVERWRITE} {
       float: none;
       width: 100%;
       margin-bottom: ${Spacing.md};
@@ -40,33 +46,27 @@ const OverwriteImagesStyles = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${LIST_IMAGE_CONTAINER} img {
+    ${IS_IMAGE_CONTAINER_OVERWRITE} img {
       max-width: 80%;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${LIST_IMAGE_CONTAINER} {
-      order: 1;
     }
   }
 `;
 
 const OverwriteTextStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${PERSON_TEXT_CONTAINER} {
+    ${IS_TEXT_CONTAINER_OVERWRITE} {
       padding-left: ${Spacing.md};
+      order: 2;
+      width: 100%;
     }
-  }
 `;
 
 // prettier-ignore
 const STYLES_PERSON_LIST_ELEMENT = `
-  .${ELEMENT_LIST_CONTAINER} {
+  .${ELEMENT_PERSON_LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
   
-  .${ELEMENT_LIST_CONTAINER} + * {
+  .${ELEMENT_PERSON_LIST_CONTAINER} + * {
     margin-top: ${Spacing.md}; 
   }
 
@@ -89,7 +89,7 @@ const CreatePersonListElement = (element: TypeListPersonProps) => {
   });
 
   elementContainer.appendChild(container);
-  elementContainer.classList.add(ELEMENT_LIST_CONTAINER);
+  elementContainer.classList.add(ELEMENT_PERSON_LIST_CONTAINER);
 
   return elementContainer;
 };

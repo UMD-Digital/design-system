@@ -43,6 +43,7 @@ const MakePersonData = ({ element }: { element: UMDPersonElement }) => {
     PHONE,
     EMAIL,
     LINKEDIN,
+    ADDRESS,
     ADDITIONAL_CONTACT,
     SUB_TEXT,
     ACTIONS,
@@ -56,6 +57,7 @@ const MakePersonData = ({ element }: { element: UMDPersonElement }) => {
     pronouns: SlotDefaultStyling({ element, slotRef: PRONOUNS }),
     phone: SlotDefaultStyling({ element, slotRef: PHONE }),
     email: SlotDefaultStyling({ element, slotRef: EMAIL }),
+    address: SlotDefaultStyling({ element, slotRef: ADDRESS }),
     linkendIn: SlotDefaultStyling({ element, slotRef: LINKEDIN }),
     additionalContact: SlotDefaultStyling({
       element,

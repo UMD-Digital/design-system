@@ -1,11 +1,13 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { PHONE_ICON, EMAIL_ICON } from 'assets/icons';
+import { PHONE_ICON, EMAIL_ICON, PIN_ICON } from 'assets/icons';
+import { LINKEDIN_ICON } from 'assets/social';
 
 type TypeContactProps = {
   phone?: HTMLElement | null;
   email?: HTMLElement | null;
   linkendIn?: HTMLElement | null;
+  address?: HTMLElement | null;
   additionalContact?: HTMLElement | null;
 };
 
@@ -160,6 +162,10 @@ const ContactItemStyles = `
     transition: background-color 0.3s;
   }
 
+  .${PERSON_CONTACT_ITEM_CONTAINER} > span:last-child {
+    line-height: 1.2em;
+  }
+
   .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:first-child,
   .${PERSON_CONTACT_ITEM_CONTAINER}:focus > span:first-child {
     background-color: ${Colors.gray.dark};
@@ -173,6 +179,11 @@ const ContactItemStyles = `
   .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:last-child,
   .${PERSON_CONTACT_ITEM_CONTAINER}:focus > span:last-child {
     text-decoration: underline;
+  }
+
+  .${PERSON_CONTACT_ITEM_CONTAINER} svg {
+    width: 16px;
+    height: 16px;
   }
 `;
 
@@ -257,9 +268,11 @@ const CreateContactContainer = ({
   phone,
   email,
   linkendIn,
+  address,
   additionalContact,
 }: TypeContactProps) => {
-  if (!phone && !email && !additionalContact) return null;
+  if (!phone && !email && !linkendIn && !address && !additionalContact)
+    return null;
 
   const container = document.createElement('div');
   container.classList.add(PERSON_CONTACT_CONTAINER);
@@ -275,7 +288,12 @@ const CreateContactContainer = ({
   }
 
   if (linkendIn) {
-    const link = MakeContactLink({ element: linkendIn, icon: EMAIL_ICON });
+    const link = MakeContactLink({ element: linkendIn, icon: LINKEDIN_ICON });
+    if (link) container.appendChild(link);
+  }
+
+  if (address) {
+    const link = MakeContactLink({ element: address, icon: PIN_ICON });
     if (link) container.appendChild(link);
   }
 

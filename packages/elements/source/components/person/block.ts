@@ -1,4 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
+import { PERSON_ICON } from 'assets/icons';
 import {
   CreatBlockContainer,
   TypeBlockContainerAttributes,
@@ -14,7 +15,8 @@ import {
   CreatePersonTextContainer,
   TypePersonProps,
   STYLES_PERSON_TEXT,
-} from '../../shared-elements/person/person-text';
+  PERSON_TEXT_CONTAINER,
+} from './elements/text';
 
 type TypeBlockPersonProps = TypePersonProps &
   TypeBlockContainerAttributes & {
@@ -23,66 +25,79 @@ type TypeBlockPersonProps = TypePersonProps &
 
 const { Spacing, Colors } = Tokens;
 
+const PADDING_BREAKPOINT = 400;
 const SMALL = 650;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
 const ELEMENT_NAME = 'umd-block-person';
-const ELEMENT_LIST_CONTAINER = 'umd-block-person-container';
-const ELEMENT_LIST_WRAPPER = 'umd-block-person-wrapper';
+const ELEMENT_PERSON_BLOCK_CONTAINER = 'umd-block-person-block-container';
+const ELEMENT_PERSON_BLOCK_WRAPPER = 'umd-block-person-block-wrapper';
 
-const IS_THEME_DARK = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-
-const OverwriteImagesStyles = `
-  .${BLOCK_IMAGE_CONTAINER} {
-    display: flex;
-    justify-content: center;
-    margin-bottom: ${Spacing.md};
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${BLOCK_IMAGE_CONTAINER} {
-      float: none;
-      width: 100%;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${BLOCK_IMAGE_CONTAINER} {
-      order: 1;
-    }
-  }
-
-  .${BLOCK_IMAGE_CONTAINER} img {
-    max-height: 240px;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${BLOCK_IMAGE_CONTAINER} img {
-      max-width: 80%;
-    }
-  }
-`;
+const IS_THEME_DARK = `.${ELEMENT_PERSON_BLOCK_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_BLOCK_CONTAINER} .${BLOCK_IMAGE_CONTAINER}`;
 
 const OverwriteThemeDarkStyles = `
   ${IS_THEME_DARK} .${BLOCK_CONTAINER} {
     background-color: ${Colors.black};
   }
 
-  ${IS_THEME_DARK} .${ELEMENT_LIST_WRAPPER} {
+  ${IS_THEME_DARK} .${ELEMENT_PERSON_BLOCK_WRAPPER} {
     border: 1px solid ${Colors.gray.dark};
+  }
+
+  ${IS_THEME_DARK} .${BLOCK_IMAGE_CONTAINER} {
+    background-color: ${Colors.gray.dark};
+  }
+`;
+
+const OverwriteImagesStyles = `
+  ${IS_IMAGE_CONTAINER_OVERWRITE} {
+    display: flex;
+    justify-content: center;
+    margin-bottom: ${Spacing.md};
+    background-color: ${Colors.gray.lightest};
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    ${IS_IMAGE_CONTAINER_OVERWRITE} {
+      float: none;
+      width: 100%;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_IMAGE_CONTAINER_OVERWRITE} {
+      order: 1;
+    }
+  }
+
+  ${IS_IMAGE_CONTAINER_OVERWRITE} img,
+  ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
+    height: 140px;
+  }
+
+  ${IS_IMAGE_CONTAINER_OVERWRITE} img {
+    aspect-ratio: 1 / 1;
+  }
+`;
+
+const OverwritePersonTextStyles = `
+  .${PERSON_TEXT_CONTAINER} {
+
   }
 `;
 
 const WrapperStyles = `
-  .${ELEMENT_LIST_WRAPPER} {
+  .${ELEMENT_PERSON_BLOCK_WRAPPER} {
     border: 1px solid ${Colors.gray.light};
-    padding: ${Spacing.sm};
+    padding: ${Spacing.md};
+    height: 100%;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${ELEMENT_LIST_WRAPPER} {
+  @container ${ELEMENT_NAME} (min-width: ${PADDING_BREAKPOINT}px) {
+    .${ELEMENT_PERSON_BLOCK_WRAPPER} {
       padding: ${Spacing['2xl']};
     }
   }
@@ -90,8 +105,9 @@ const WrapperStyles = `
 
 // prettier-ignore
 const STYLES_PERSON_BLOCK_ELEMENT = `
-  .${ELEMENT_LIST_CONTAINER} {
+  .${ELEMENT_PERSON_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
+    height: 100%;
   }
 
   ${STYLES_BLOCK_COMMON_IMAGE}
@@ -99,15 +115,23 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
   ${STYLES_BLOCK_CONTAINER}
   ${WrapperStyles}
   ${OverwriteImagesStyles}
+  ${OverwritePersonTextStyles}
   ${OverwriteThemeDarkStyles}
 `;
 
 const CreatePersonBlockElement = (element: TypeBlockPersonProps) => {
-  const { theme, image, isAligned = false, isBordered = false } = element;
+  const {
+    theme,
+    image: providedImage,
+    isAligned = false,
+    isBordered = false,
+  } = element;
   const personContainer = CreatePersonTextContainer(element);
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
-  const imageContainer = image ? CreateImageBlockContainer({ image }) : null;
+  const imageContainer = CreateImageBlockContainer({
+    image: providedImage || PERSON_ICON,
+  });
   const container = CreatBlockContainer({
     personContainer,
     imageContainer,
@@ -119,10 +143,10 @@ const CreatePersonBlockElement = (element: TypeBlockPersonProps) => {
   if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
 
   elementWrapper.appendChild(container);
-  elementWrapper.classList.add(ELEMENT_LIST_WRAPPER);
+  elementWrapper.classList.add(ELEMENT_PERSON_BLOCK_WRAPPER);
 
   elementContainer.appendChild(elementWrapper);
-  elementContainer.classList.add(ELEMENT_LIST_CONTAINER);
+  elementContainer.classList.add(ELEMENT_PERSON_BLOCK_CONTAINER);
 
   return elementContainer;
 };

@@ -25,12 +25,17 @@ export const STYLES_BLOCK_COMMON_IMAGE = `
 export const CreateImageBlockContainer = ({
   image,
 }: {
-  image: HTMLImageElement;
+  image: HTMLImageElement | string;
 }) => {
   const container = document.createElement('div');
 
   container.classList.add(BLOCK_IMAGE_CONTAINER);
-  container.appendChild(image);
 
+  if (typeof image === 'string') {
+    container.innerHTML = image;
+    return container;
+  }
+
+  container.appendChild(image);
   return container;
 };

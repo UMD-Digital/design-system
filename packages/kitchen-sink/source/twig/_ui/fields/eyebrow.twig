@@ -16,6 +16,20 @@
   </div>
 {% endmacro %}
 
+{% macro EyebrowString(params) %}
+  {% set characters = params.characters ?? true %}
+
+  {% set string = 'Optional Eyebrow Adipiscing Elite Iacute' %}
+
+  {% if characters is defined and characters is not null and characters <= 44 %}
+    {% set string = string|slice(0, characters) %}
+  {% else %}
+    {% set string = string|slice(0, 22) %}
+  {% endif %}
+
+  {{ string }}
+{% endmacro %}
+
 {% macro EyebrowSuccinct() %}
   {{
     _self.Eyebrow({
@@ -35,6 +49,30 @@
 {% macro EyebrowVerbose(params) %}
   {{
     _self.Eyebrow({
+      characters: 34
+    })
+  }}
+{% endmacro %}
+
+{% macro EyebrowStringSuccinct() %}
+  {{
+    _self.EyebrowString({
+      characters: 8
+    })
+  }}
+{% endmacro %}
+
+{% macro EyebrowStringNormal() %}
+  {{
+    _self.EyebrowString({
+      characters: 17
+    })
+  }}
+{% endmacro %}
+
+{% macro EyebrowStringVerbose(params) %}
+  {{
+    _self.EyebrowString({
       characters: 34
     })
   }}

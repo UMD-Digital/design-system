@@ -3,15 +3,15 @@ import { NEW_WINDOW_ICON, DOCUMENT_ICON, FEARLESS_ICON } from 'assets/icons';
 import {
   STYLES_CTA_OUTLINE,
   CLASS_STYLES_REF_CTA_OUTLINE,
-} from 'styles/call-to-action-outline';
+} from './styles/call-to-action-outline';
 import {
   STYLES_CTA_SECONDARY,
   CLASS_STYLES_REF_CTA_SECONDARY,
-} from 'styles/call-to-action-secondary';
+} from './styles/call-to-action-secondary';
 import {
   STYLES_CTA_PRIMARY,
   CLASS_STYLES_REF_CTA_PRIMARY,
-} from 'styles/call-to-action-primary';
+} from './styles/call-to-action-primary';
 
 const { Colors, FontSize, Spacing, Queries } = Tokens;
 

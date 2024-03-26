@@ -1,6 +1,7 @@
 import {
   PersonBlock,
   PersonList,
+  PersonTabular,
 } from '@universityofmaryland/custom-elements-library';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
@@ -10,6 +11,7 @@ const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_DISPLAY = 'display';
 const THEME_LIGHT = 'light';
 const DISPLAY_LIST = 'list';
+const DISPLAY_TABULAR = 'tabular';
 
 export const ComponentStyles = `
   :host {
@@ -19,6 +21,7 @@ export const ComponentStyles = `
   ${Reset}
   ${PersonBlock.Styles}
   ${PersonList.Styles}
+  ${PersonTabular.Styles}
 `;
 
 const GetImage = ({ element }: { element: UMDPersonElement }) => {
@@ -72,9 +75,15 @@ const MakePersonData = ({ element }: { element: UMDPersonElement }) => {
 export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   const isDisplayList =
     element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
+  const isDisplayTabular =
+    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_TABULAR;
 
   if (isDisplayList) {
     return PersonList.CreateElement(MakePersonData({ element }));
+  }
+
+  if (isDisplayTabular) {
+    return PersonTabular.CreateElement(MakePersonData({ element }));
   }
 
   return PersonBlock.CreateElement(MakePersonData({ element }));

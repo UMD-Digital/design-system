@@ -11,6 +11,7 @@ import PathwayImage from './components/pathway/image';
 import PathwayElements from './components/pathway/elements';
 import PersonBlock from './components/person/block';
 import PersonList from './components/person/list';
+import PersonTabular from './components/person/tabular';
 
 export {
   CallToAction,
@@ -26,4 +27,5 @@ export {
   PathwayElements,
   PersonBlock,
   PersonList,
+  PersonTabular,
 };

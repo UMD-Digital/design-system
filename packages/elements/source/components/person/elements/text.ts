@@ -19,6 +19,7 @@ export type TypePersonProps = TypeContactProps & {
   subText?: HTMLElement | null;
   actions?: HTMLElement | null;
   theme?: string;
+  displayType?: string;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -26,6 +27,7 @@ const { SansLarger, SansSmall, SansSmaller } = Typography;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
+export const DISPLAY_TABULAR = 'tabular';
 
 export const PERSON_TEXT_CONTAINER = 'person-text-container';
 const PERSON_NAME_CONTAINER = 'person-name-container';
@@ -308,42 +310,49 @@ const CreateContactContainer = ({
 export const CreatePersonTextContainer = (person: TypePersonProps) => {
   const { name, job, association, pronouns, subText, actions, theme } = person;
   const container = document.createElement('div');
+  const wrapper = document.createElement('div');
   const contactContainer = CreateContactContainer(person);
+  const isDisplayTabular = person.displayType === DISPLAY_TABULAR;
 
   container.classList.add(PERSON_TEXT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
   if (name) {
     name.classList.add(PERSON_NAME_CONTAINER);
-    container.appendChild(name);
+    wrapper.appendChild(name);
   }
 
   if (job) {
     job.classList.add(PERSON_JOB_CONTAINER);
-    container.appendChild(job);
+    wrapper.appendChild(job);
   }
 
   if (association) {
     association.classList.add(PERSON_ASSOCIATION_CONTAINER);
-    container.appendChild(association);
+    wrapper.appendChild(association);
   }
 
   if (pronouns) {
     pronouns.classList.add(PERSON_PRONOUNS_CONTAINER);
-    container.appendChild(pronouns);
+    wrapper.appendChild(pronouns);
   }
 
   if (subText) {
     subText.classList.add(PERSON_SUB_TEXT_CONTAINER);
-    container.appendChild(subText);
+    wrapper.appendChild(subText);
   }
 
-  if (contactContainer) container.appendChild(contactContainer);
+  if (actions) actions.classList.add(PERSON_ACTIONS_CONTAINER);
 
-  if (actions) {
-    actions.classList.add(PERSON_ACTIONS_CONTAINER);
-    container.appendChild(actions);
+  container.appendChild(wrapper);
+
+  if (contactContainer) {
+    if (actions && isDisplayTabular) wrapper.appendChild(actions);
+
+    container.appendChild(contactContainer);
   }
+
+  if (actions && !isDisplayTabular) container.appendChild(actions);
 
   return container;
 };

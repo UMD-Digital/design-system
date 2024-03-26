@@ -43,10 +43,6 @@ const OverwriteThemeDarkStyles = `
     background-color: ${Colors.black};
   }
 
-  ${IS_THEME_DARK} .${ELEMENT_PERSON_BLOCK_WRAPPER} {
-    border: 1px solid ${Colors.gray.dark};
-  }
-
   ${IS_THEME_DARK} .${BLOCK_IMAGE_CONTAINER} {
     background-color: ${Colors.gray.dark};
   }
@@ -91,7 +87,6 @@ const OverwritePersonTextStyles = `
 
 const WrapperStyles = `
   .${ELEMENT_PERSON_BLOCK_WRAPPER} {
-    border: 1px solid ${Colors.gray.light};
     padding: ${Spacing.md};
     height: 100%;
   }

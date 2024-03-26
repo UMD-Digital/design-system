@@ -8,7 +8,7 @@ import {
   NAMING,
 } from 'components/accordion/globals';
 import { ELEMENT_TYPE } from 'components/accordion';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { MakeSlot } from 'helpers/ui';
 
 const { Colors, Spacing } = Tokens;
 
@@ -76,14 +76,16 @@ export const bodyStyles = `
 
 export const CreateBody = ({ element }: { element: ELEMENT_TYPE }) => {
   const contentWrapper = document.createElement('div');
-  const bodySlot = SlotDefaultStyling({ element, slotRef: BODY });
+  const bodySlot = MakeSlot({ type: BODY });
 
   contentWrapper.classList.add(ACCORDION_BODY_WRAPPER);
 
   if (bodySlot) {
-    bodySlot.classList.add(ACCORDION_BODY);
+    const wrapper = document.createElement('div');
+    wrapper.classList.add(ACCORDION_BODY);
     contentWrapper.ariaHidden = element._open ? 'false' : 'true';
-    contentWrapper.appendChild(bodySlot);
+    wrapper.appendChild(bodySlot);
+    contentWrapper.appendChild(wrapper);
 
     return contentWrapper;
   }

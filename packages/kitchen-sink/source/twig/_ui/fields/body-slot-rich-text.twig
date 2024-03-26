@@ -15,7 +15,7 @@
   {% endif %}
 
   {% if isStyled == false %}
-    <div slot="body">
+    <div slot="body" class="umd-rich-text">
       <p>
         {{ string }}
       </p>
@@ -23,7 +23,7 @@
   {% endif %}
 
   {% if isStyled %}
-    <div slot="body">
+    <div slot="body" class="umd-rich-text">
       <p>
         <strong>Duis reprehen</strong>
         <i>eu fugiat</i>.
@@ -71,7 +71,7 @@
   {{
     _self.RichText({
       characters: 100,
-      isStyled: false
+      isStyled: true
     })
   }}
 {% endmacro %}
@@ -80,7 +80,7 @@
   {{
     _self.RichText({
       characters: 250,
-      isStyled: false
+      isStyled: true
     })
   }}
 {% endmacro %}
@@ -89,7 +89,7 @@
   {{
     _self.RichText({
       characters: 500,
-      isStyled: false
+      isStyled: true
     })
   }}
 {% endmacro %}

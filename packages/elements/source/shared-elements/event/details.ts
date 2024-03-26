@@ -131,6 +131,7 @@ const STYLES_EVENT_DETAILS = `
 
   .${EVENTS_DATE_ROW_TEXT} {
     color: ${Colors.gray.darker};
+    font-weight: 400;
   }
 
   .${EVENTS_DATE_ROW_ICON} {

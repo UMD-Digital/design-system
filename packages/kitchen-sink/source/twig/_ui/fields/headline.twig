@@ -48,6 +48,23 @@
   {% endif %}
 {% endmacro %}
 
+{% macro HeadlineString(params) %}
+  {% set characters = params.characters ?? true %}
+
+  {% set string =
+    'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis'
+  %}
+
+  {% if
+    characters is defined and characters is not null and characters <= 120 %}
+    {% set string = string|slice(0, characters) %}
+  {% else %}
+    {% set string = string|slice(0, 40) %}
+  {% endif %}
+
+  {{ string }}
+{% endmacro %}
+
 {% macro AlertHeadlineSuccinct() %}
   {{
     _self.Headline({
@@ -101,6 +118,36 @@
 {% macro CardHeadlineVerbose() %}
   {{
     _self.Headline({
+      characters: 100,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro CardHeadlineStringSuccinct() %}
+  {{
+    _self.HeadlineString({
+      characters: 25,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro CardHeadlineStringNormal() %}
+  {{
+    _self.HeadlineString({
+      characters: 50,
+      isLink: true,
+      isHeader: true
+    })
+  }}
+{% endmacro %}
+
+{% macro CardHeadlineStringVerbose() %}
+  {{
+    _self.HeadlineString({
       characters: 100,
       isLink: true,
       isHeader: true

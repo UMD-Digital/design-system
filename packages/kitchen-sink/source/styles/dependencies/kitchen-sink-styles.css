@@ -12,32 +12,9 @@
   position: relative;
 }
 
-.type {
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-}
-
-.type::after {
-  content: '';
-  position: absolute;
-  left: 100%;
-  margin-left: 0.5em;
-  height: 1em;
-  width: 1px;
-  background-color: theme(colors.gray.light);
-}
-
-.type-detail {
-  color: theme(colors.gray.medium);
-  margin-left: 1em;
-  position: relative;
-}
-
 .type-hr {
   display: flex;
   align-items: center;
-  white-space: nowwrap;
 }
 
 .type-hr::after {
@@ -46,7 +23,29 @@
   display: block;
   flex-grow: 1;
   height: 1px;
+  margin-left: 0.5em;
+}
+
+.type-hr > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    margin-left: 0.5em;
+    height: 1em;
+    width: 1px;
+    background-color: theme(colors.gray.light);
+  }
+}
+
+.type-hr > span:nth-child(2) {
+  color: theme(colors.gray.medium);
   margin-left: 1em;
+  position: relative;
 }
 
 .two-cards-hr::after {

@@ -92,7 +92,7 @@ const JobStyles = `
   })}
 
   .${PERSON_JOB_CONTAINER} {
-    line-height: 1.2em;
+    line-height: 1.25em;
   }
 `;
 
@@ -165,7 +165,8 @@ const ContactItemStyles = `
   }
 
   .${PERSON_CONTACT_ITEM_CONTAINER} > span:last-child {
-    line-height: 1.2em;
+    line-height: 1.25em;
+    color: ${Colors.gray.dark};
   }
 
   .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:first-child,

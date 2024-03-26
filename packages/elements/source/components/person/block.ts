@@ -15,7 +15,6 @@ import {
   CreatePersonTextContainer,
   TypePersonProps,
   STYLES_PERSON_TEXT,
-  PERSON_TEXT_CONTAINER,
 } from './elements/text';
 
 type TypeBlockPersonProps = TypePersonProps &
@@ -25,6 +24,7 @@ type TypeBlockPersonProps = TypePersonProps &
 
 const { Spacing, Colors } = Tokens;
 
+const IMAGE_BREAKPOINT = 349;
 const PADDING_BREAKPOINT = 400;
 const SMALL = 650;
 
@@ -74,14 +74,11 @@ const OverwriteImagesStyles = `
     height: 140px;
   }
 
-  ${IS_IMAGE_CONTAINER_OVERWRITE} img {
-    aspect-ratio: 1 / 1;
-  }
-`;
-
-const OverwritePersonTextStyles = `
-  .${PERSON_TEXT_CONTAINER} {
-
+  @container ${ELEMENT_NAME} (min-width: ${IMAGE_BREAKPOINT}px) {
+    ${IS_IMAGE_CONTAINER_OVERWRITE} img,
+    ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
+      height: 200px;
+    }
   }
 `;
 
@@ -110,7 +107,6 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
   ${STYLES_BLOCK_CONTAINER}
   ${WrapperStyles}
   ${OverwriteImagesStyles}
-  ${OverwritePersonTextStyles}
   ${OverwriteThemeDarkStyles}
 `;
 

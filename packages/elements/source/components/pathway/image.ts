@@ -190,13 +190,22 @@ const BackgroundStyles = `
     position: absolute;
     top: 0;
     bottom: 0;
-    right: -1000px;
-    width: calc(100% + 1000px) !important;
+    right: 0;
+    width: 100%;
     background-color: ${Colors.white};
   }
 
-  .${PATHWAY_IMAGE_CONTAINER}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
-    left: -1000px;
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
+      right: -1000px;
+      width: calc(75% + 1000px) !important;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    .${PATHWAY_IMAGE_CONTAINER}${IS_WITH_IMAGE_RIGHT} .${PATHWAY_IMAGE_CONTAINER_BACKGROUND} {
+      left: -1000px;
+    }
   }
 `;
 

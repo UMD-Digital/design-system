@@ -30,6 +30,7 @@ const ATTRIBUTE_BORDER = 'border';
 const ATTRIBUTE_WITH_IMAGE = 'image';
 const THEME_DARK = 'dark';
 
+const SMALL = 400;
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-block-standard';
@@ -130,7 +131,7 @@ const TextContainerStyles = `
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
         [`.${BLOCK_TEXT_HEADLINE_WRAPPER}`]: SansLarger,
@@ -158,7 +159,7 @@ const TextContainerStyles = `
     })}
   }
   
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
         [`.${BLOCK_TEXT_DATE_WRAPPER}`]: SansSmall,
@@ -172,7 +173,7 @@ const TextContainerStyles = `
     })}
   }
   
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
         [`.${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} *`]: Typography.SansMedium,

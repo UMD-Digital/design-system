@@ -1,12 +1,12 @@
 import { Colors } from '../tokens/colors';
-import { FontWeight } from '../tokens/fonts';
+import { FontSize, FontWeight } from '../tokens/fonts';
 import { Spacing } from '../tokens/spacing';
 import Animations from '../animations';
 import Lists from './list';
 
 const { Link } = Animations;
 
-const RichTextBase = {
+const Base = {
   lineHeight: '1.5em',
 
   '& > *': {
@@ -15,20 +15,6 @@ const RichTextBase = {
     '&:first-child': {
       marginTop: '0',
     },
-  },
-
-  [`& p,
-    & ul,
-    & ol,
-    & pre,
-    & blockquote`]: {
-    maxWidth: '960px',
-  },
-
-  '& hr': {
-    border: 'none',
-    height: '1px',
-    backgroundColor: 'currentColor',
   },
 
   '& em, & i': {
@@ -52,16 +38,46 @@ const RichTextBase = {
       color: Colors.red,
     },
   },
+};
+
+const RichTextBase = {
+  ...Base,
+  fontSize: `${FontSize.lg}`,
+
+  [`& p,
+    & ul,
+    & ol,
+    & pre,
+    & blockquote`]: {
+    maxWidth: '960px',
+  },
+
+  '& hr': {
+    border: 'none',
+    height: '1px',
+    backgroundColor: 'currentColor',
+  },
 
   '& img': {
     maxWidth: '100%',
   },
 };
 
+const Simple = {
+  ...Base,
+};
+
+const SimpleLarge = {
+  ...Base,
+  fontSize: `${FontSize.lg}`,
+};
+
 const RichText = {
   FontWeight: FontWeight.normal,
   ...RichTextBase,
-  ...Lists,
+  ...Lists.Base,
+  ...Lists.Ordered,
+  ...Lists.Unordered,
 };
 
 const RichTextDark = {
@@ -72,4 +88,4 @@ const RichTextDark = {
   },
 };
 
-export default { RichText, RichTextDark };
+export default { Simple, SimpleLarge, RichText, RichTextDark };

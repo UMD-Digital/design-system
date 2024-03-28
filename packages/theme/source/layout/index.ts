@@ -1,10 +1,7 @@
 import Spacing from './spacing';
-import Grid from './grid';
+import Grid from './grid-gap';
 import GridGutterless from './grid-gutterless';
 import Lock from './lock';
-
-// Do Not Use - To be Deleted
-import { FlexColumnsContent, FlexColumnsCore, FlexColumnsRows } from './flex';
 
 // To Be Refactored
 
@@ -16,7 +13,4 @@ export default {
   ...GridGutterless,
   ...ListGroups,
   ...Lock,
-  ...FlexColumnsContent,
-  ...FlexColumnsCore,
-  ...FlexColumnsRows,
 };

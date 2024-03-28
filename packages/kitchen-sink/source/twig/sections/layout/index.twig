@@ -1,0 +1,13 @@
+{% extends '../../_layout.twig' %}
+
+{% block page %}
+  {% import './_data.twig' as List %}
+
+  <section>
+    <div class="umd-lock">
+      <div class="umd-grid-gap mb-md">
+        {{ List.Links() }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,206 @@
+{% import 'fields/eyebrow.twig' as Eyebrow %}
+{% import 'fields/headline.twig' as Headline %}
+{% import 'fields/text-slot-rich-text.twig' as RichText %}
+{% import 'fields/call-to-action.twig' as CallToAction %}
+{% import 'fields/date.twig' as Date %}
+
+{% set url = params.url ?? 'https://umd.edu' %}
+
+{% macro CtaOptions(params) %}
+  {% if params == 'download' %}
+    <a href="{{ url }}"
+      rel="noopener noreferrer"
+      download
+      slot="cta-icon"
+      aria-label="example label">
+
+    </a>
+  {% endif %}
+
+  {% if params == 'external' %}
+    <a href="{{ url }}"
+      rel="noopener noreferrer"
+      target="_blank"
+      slot="cta-icon"
+      aria-label="example label">
+
+    </a>
+  {% endif %}
+
+  {% if params == 'internal' %}
+    <a href="{{ url }}"
+      rel="noopener noreferrer"
+      slot="cta-icon"
+      aria-label="example label">
+
+    </a>
+  {% endif %}
+{% endmacro %}
+
+{% macro SuccinctCardBody(params) %}
+  {% set attrs = '' %}
+
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasDate = params.date ?? true %}
+  {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasRichText = params.text ?? true %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  <umd-element-card-overlay {{ attrs }}>
+    {% if params.image %}
+      <img slot="image" src="{{ params.image }}" alt="Example Alt Text" />
+    {% endif %}
+
+    {% if hasEyebrow %}
+      {{ Eyebrow.EyebrowSuccinct() }}
+    {% endif %}
+
+    {% if hasHeadline %}
+      {{ Headline.OverlayHeadlineSuccinct() }}
+    {% endif %}
+
+    {% if hasRichText %}
+      {{ RichText.OverlayRichTextSuccinct() }}
+    {% endif %}
+
+    {% if hasDate %}
+      {{ Date.RandomDate() }}
+    {% endif %}
+
+    {% if hasCtaLink %}
+      {% if params.image %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+      {% else %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: params.theme == 'dark' ? 'dark' : 'light'
+          })
+        }}
+      {% endif %}
+    {% endif %}
+
+    {% if params.ctaOption %}
+      {{ _self.CtaOptions(params.ctaOption) }}
+    {% endif %}
+  </umd-element-card-overlay>
+{% endmacro %}
+
+{% macro NormalCardBody(params) %}
+  {% set attrs = '' %}
+
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasDate = params.date ?? true %}
+  {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasRichText = params.text ?? true %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  <umd-element-card-overlay {{ attrs }}>
+    {% if params.image %}
+      <img slot="image" src="{{ params.image }}" alt="Example Alt Text" />
+    {% endif %}
+
+    {% if hasEyebrow %}
+      {{ Eyebrow.EyebrowNormal() }}
+    {% endif %}
+
+    {% if hasHeadline %}
+      {{ Headline.OverlayHeadlineNormal() }}
+    {% endif %}
+
+    {% if hasRichText %}
+      {{ RichText.OverlayRichTextNormal() }}
+    {% endif %}
+
+    {% if hasDate %}
+      {{ Date.RandomDate() }}
+    {% endif %}
+
+    {% if hasCtaLink %}
+      {% if params.image %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+      {% else %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: params.theme == 'dark' ? 'dark' : 'light'
+          })
+        }}
+      {% endif %}
+    {% endif %}
+
+    {% if params.ctaOption %}
+      {{ _self.CtaOptions(params.ctaOption) }}
+    {% endif %}
+  </umd-element-card-overlay>
+{% endmacro %}
+
+{% macro VerboseCardBody(params) %}
+  {% set attrs = '' %}
+
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasDate = params.date ?? true %}
+  {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasRichText = params.text ?? true %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="dark"' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  <umd-element-card-overlay {{ attrs }}>
+    {% if params.image %}
+      <img slot="image" src="{{ params.image }}" alt="Example Alt Text" />
+    {% endif %}
+
+    {% if hasEyebrow %}
+      {{ Eyebrow.EyebrowVerbose() }}
+    {% endif %}
+
+    {% if hasHeadline %}
+      {{ Headline.OverlayHeadlineVerbose() }}
+    {% endif %}
+
+    {% if hasRichText %}
+      {{ RichText.OverlayRichTextVerbose() }}
+    {% endif %}
+
+    {% if hasDate %}
+      {{ Date.RandomDate() }}
+    {% endif %}
+
+    {% if hasCtaLink %}
+      {% if params.image %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+      {% else %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: params.theme == 'dark' ? 'dark' : 'light'
+          })
+        }}
+      {% endif %}
+    {% endif %}
+
+    {% if params.ctaOption %}
+      {{ _self.CtaOptions(params.ctaOption) }}
+    {% endif %}
+  </umd-element-card-overlay>
+{% endmacro %}

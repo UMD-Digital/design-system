@@ -1,0 +1,113 @@
+{% extends '../../_layout.twig' %}
+
+{% block page %}
+  <div class="umd-lock" style="margin-bottom: 40px">
+    <h1 class="umd-sans-extralarge-uppercase">
+      To be Refactored to a Web Component
+    </h1>
+  </div>
+
+  <div class="umd-lock">
+    <h1 class="content-heading type-hr">
+      Section Intro
+    </h1>
+  </div>
+
+  <umd-component-intro>
+    <div class="intro-content-wrapper">
+      <h2 class="umd-sans-largest">
+        FROM MARYLAND TODAY
+      </h2>
+      <div class="umd-layout-flex-row-auto">
+        <umd-element-call-to-action type="secondary">
+          <a href="/"><span>See all election related content</span></a>
+        </umd-element-call-to-action>
+      </div>
+    </div>
+  </umd-component-intro>
+
+  <div class="umd-lock">
+    <h1 class="content-heading type-hr">
+      Section Intro Simple
+    </h1>
+  </div>
+
+  <umd-component-intro-simple>
+    <div class="intro-content-wrapper">
+      <h2 class="umd-sans-largest">
+        FROM MARYLAND TODAY
+      </h2>
+      <div class="umd-layout-flex-row-auto">
+        <umd-element-call-to-action type="secondary">
+          <a href="/"><span>See all election related content</span></a>
+        </umd-element-call-to-action>
+      </div>
+    </div>
+  </umd-component-intro-simple>
+
+  <div class="umd-lock">
+    <div class="content-heading type-hr">
+      <span>Section Intro</span>
+      <span>Grouping Call to Action (5)</span>
+    </div>
+  </div>
+
+  <div class="umd-lock-extra-small">
+    <umd-component-intro>
+      <div class="intro-content-wrapper">
+        <h2 class="umd-sans-largest">
+          OTHER WAYS TO GET INVOLVED
+        </h2>
+        <div class="umd-layout-flex-row-auto">
+          <umd-element-call-to-action type="secondary">
+            <a href="https://today.umd.edu/">
+              <span>Volunteer to register voters</span>
+            </a>
+          </umd-element-call-to-action>
+          <umd-element-call-to-action type="secondary">
+            <a href="https://today.umd.edu/">
+              <span>Be a watcher/challenger at an early voting site</span>
+            </a>
+          </umd-element-call-to-action>
+          <umd-element-call-to-action type="secondary">
+            <a href="https://today.umd.edu/">
+              <span>Serve as an election judge</span>
+            </a>
+          </umd-element-call-to-action>
+          <umd-element-call-to-action type="secondary">
+            <a href="https://today.umd.edu/">
+              <span>Know your voting rights</span>
+            </a>
+          </umd-element-call-to-action>
+          <umd-element-call-to-action type="secondary">
+            <a href="https://today.umd.edu/">
+              <span>See all election related content</span>
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </div>
+    </umd-component-intro>
+  </div>
+
+  <div class="umd-lock">
+    <div class="content-heading type-hr">
+      <span>Section Intro</span>
+      <span>Wide</span>
+    </div>
+  </div>
+
+  <div class="umd-lock">
+    <umd-component-intro-wide>
+      <div class="intro-content-wrapper">
+        <h2 class="umd-sans-largest">
+          FROM MARYLAND TODAY
+        </h2>
+        <div class="umd-layout-flex-row-auto">
+          <umd-element-call-to-action type="secondary">
+            <a href="/"><span>See all election related content</span></a>
+          </umd-element-call-to-action>
+        </div>
+      </div>
+    </umd-component-intro-wide>
+  </div>
+{% endblock %}

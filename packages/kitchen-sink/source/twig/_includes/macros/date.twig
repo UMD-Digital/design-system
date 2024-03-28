@@ -1,0 +1,201 @@
+{% import 'fields/headline.twig' as Headline %}
+{% import 'fields/link.twig' as Link %}
+
+{% set url = params.url ?? 'https://umd.edu' %}
+
+{% macro DateWithSuccinctTitle(params) %}
+  {% set attrs = '' %}
+  {% set date = params.date
+    ?? random(['01', '05', '07', '12', '13', '21', '25', '28', '30', '31'])
+  %}
+  {% set text = params.text ?? 'default' %}
+  {% set month = params.month
+    ?? random(
+      [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+      ]
+    )
+  %}
+
+  {% set succinctString = params.string
+    ?? random(
+      [
+        'Study Fair',
+        'Terrapin',
+        'Topography',
+        'Disrupting',
+        'Transparent',
+        'Revolution'
+      ]
+    )
+  %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% set hasDate = params.date ?? true %}
+  {% set isLink = params.link ?? false %}
+
+  <umd-element-events-date {{ attrs }}>
+    {% if hasDate %}
+      <p slot="month">
+        {{ month }}
+      </p>
+      <p slot="day">
+        {{ date }}
+      </p>
+    {% endif %}
+
+    <p slot="headline">
+      {% if isLink == false %}
+        {{ succinctString }}
+      {% endif %}
+      {% if isLink %}
+        <a href="{{ url }}">{{ succinctString }}</a>
+      {% endif %}
+    </p>
+  </umd-element-events-date>
+{% endmacro %}
+
+{% macro DateWithNormalTitle(params) %}
+  {% set attrs = '' %}
+  {% set date = params.date
+    ?? random(['01', '05', '07', '12', '13', '21', '25', '28', '30', '31'])
+  %}
+  {% set text = params.text ?? 'default' %}
+  {% set month = params.month
+    ?? random(
+      [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+      ]
+    )
+  %}
+  {% set normalString = params.string
+    ?? random(
+      [
+        'Study Abroad Fair',
+        'TerrapinSTRONG In Person',
+        'Topography Competition',
+        'Disrupting Grind Culture',
+        'Transparency in Teaching',
+        'Revolutionizing AI'
+      ]
+    )
+  %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% set hasDate = params.date ?? true %}
+  {% set isLink = params.link ?? false %}
+
+  <umd-element-events-date {{ attrs }}>
+    {% if hasDate %}
+      <p slot="month">
+        {{ month }}
+      </p>
+      <p slot="day">
+        {{ date }}
+      </p>
+    {% endif %}
+
+    <p slot="headline">
+      {% if isLink == false %}
+        {{ normalString }}
+      {% endif %}
+      {% if isLink %}
+        <a href="{{ url }}">{{ normalString }}</a>
+      {% endif %}
+    </p>
+  </umd-element-events-date>
+{% endmacro %}
+
+{% macro DateWithVerboseTitle(params) %}
+  {% set attrs = '' %}
+  {% set date = params.date
+    ?? random(['01', '05', '07', '12', '13', '21', '25', '28', '30', '31'])
+  %}
+  {% set text = params.text ?? 'default' %}
+  {% set month = params.month
+    ?? random(
+      [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+      ]
+    )
+  %}
+
+  {% set verboseString = params.string
+    ?? random(
+      [
+        'Collaborative Art Project on Home and Identity',
+        'Universitas 21 Global Learning - Student Panel',
+        "Music From The Sole: I Didn't Come to Stay Here",
+        'Issues and Challenges in Cyber Insurance Markets',
+        'New Work Reading—Orgullo: Maryland Opera Studio',
+        'Love Data Week: Using reports.umd.edu (faculty/staff only)'
+      ]
+    )
+  %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% set hasDate = params.date ?? true %}
+  {% set isLink = params.link ?? false %}
+
+  <umd-element-events-date {{ attrs }}>
+    {% if hasDate %}
+      <p slot="month">
+        {{ month }}
+      </p>
+      <p slot="day">
+        {{ date }}
+      </p>
+    {% endif %}
+
+    <p slot="headline">
+      {% if isLink == false %}
+        {{ verboseString }}
+      {% endif %}
+      {% if isLink %}
+        <a href="{{ url }}">{{ verboseString }}</a>
+      {% endif %}
+    </p>
+  </umd-element-events-date>
+{% endmacro %}

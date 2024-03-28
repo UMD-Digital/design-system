@@ -1,0 +1,440 @@
+{% extends '../../_layout.twig' %}
+
+{% set image = random(RecImageOptions) %}
+
+{% block page %}
+  <section style="padding-bottom: 20vh">
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Pathway
+      </h1>
+    </div>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading default type-hr">
+          <span>Highlight</span>
+          <span>Light Theme</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway type="highlight">
+        <p slot="highlight">
+          To improve the lives of every person on Earth, we will reimagine
+          teaching and learning; accelerate solutions to the grand challenges of
+          our time through creativity and discovery; and forge a diverse and
+          inclusive community where our differences are celebrated and equity is
+          relentlessly pursued. Together, we will dedicate ourselves to
+          advancing the public good because our individual well-being is
+          enduringly bound to our collective well-being.
+        </p>
+
+        <p slot="highlight-attribution">
+          - The University of Maryland Strategic Plan, <i>Fearlessly Forward: In
+            Pursuit of Excellence and Impact for the Public Good</i>
+        </p>
+
+        <p slot="eyebrow">
+          Pathway
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="secondary">
+            <a href="/" aria-label="link to homepage">Home Link</a>
+          </umd-element-call-to-action>
+          <umd-element-call-to-action type="secondary">
+            <a href="/components" aria-label="link to components">
+              Components Link
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span>Standard</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway>
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea <a href="">commodo consequat</a>.
+          </p>
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+          </ul>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="secondary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span>Standard</span>
+          <span>Image position right</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway image-position="left">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="secondary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Standard</span>
+          <span>Image scaling off</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway image-scaled="false">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="secondary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Hero</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway type="hero">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Hero</span>
+          <span>Image Right</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway type="hero" image-position="left">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Hero</span>
+          <span>Theme Dark</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway theme="dark">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Hero</span>
+          <span>Theme Light</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway theme="light" image-position="left">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Hero</span>
+          <span>Theme Maryland</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway theme="maryland">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="secondary"
+            size="standard"
+            theme="dark">
+            <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
+              rel="noopener noreferrer"
+              aria-label="View the PDF for the Visa Data Collection Form">
+              <svg aria-hidden="true"
+                color="white"
+                width="96"
+                height="96"
+                viewBox="0 0 96 96"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+              </svg>
+              <span aria-hidden="true">Visit and blah</span>
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span class="type">Hero</span>
+          <span>Theme White</span>
+        </h2>
+      </div>
+
+      <umd-element-pathway theme="white" image-position="left">
+        <div slot="image">
+          <img src="{{ image }}" alt="Image" />
+        </div>
+
+        <p slot="eyebrow">
+          Optional Text
+        </p>
+
+        <p slot="headline">
+          What does it take to change the world?
+        </p>
+
+        <div slot="text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-pathway>
+    </section>
+  </section>
+{% endblock %}

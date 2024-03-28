@@ -1,0 +1,181 @@
+{% extends './layouts/greater-cp.twig' %}
+
+{% block page %}
+  <umd-element-hero type="default-centered" class="umd-layout-vertical-landing">
+    <img slot="image" src="/greater-cp/hero.jpg" alt="Image Description" />
+
+    <p slot="headline">
+      RESHAPING COLLEGE PARK
+    </p>
+    <p slot="text">
+      Greater College Park connects the Discovery District—a public-private
+      research hub, the vibrant downtown community of College Park and the
+      University of Maryland's dynamic academic buildings.
+    </p>
+
+    <div slot="actions">
+      <umd-element-call-to-action type="primary">
+        <a href="https://google.com" aria-label="link to google">Watch Video</a>
+      </umd-element-call-to-action>
+    </div>
+  </umd-element-hero>
+
+  <section class="umd-layout-vertical-landing">
+    <div class="umd-lock">
+      <div class="umd-grid-gap-three">
+        <umd-element-stat size="large" has-line>
+          <div slot="stat">
+            30+
+          </div>
+          <div slot="text">
+            New Projects
+          </div>
+        </umd-element-stat>
+
+        <umd-element-stat size="large" has-line>
+          <div slot="stat">
+            $2B+
+          </div>
+          <div slot="text">
+            In public-private investment
+          </div>
+        </umd-element-stat>
+
+        <umd-element-stat size="large" has-line>
+          <div slot="stat">
+            $2m
+          </div>
+          <div slot="text">
+            Square feet of development
+          </div>
+        </umd-element-stat>
+      </div>
+    </div>
+  </section>
+
+  <section class="umd-layout-vertical-landing">
+    <umd-element-pathway image-position="left">
+      <div slot="image">
+        <img src="/greater-cp/home-pathway-1.jpg" alt="Image" />
+      </div>
+
+      <p slot="headline">
+        Our Community
+      </p>
+
+      <div slot="text">
+        <p>
+          Greater College Park, which encompasses historic districts,
+          up-and-coming new neighborhoods and a bustling downtown, is welcoming
+          a swath of amenities, including hotels, retailers, restaurants and
+          recreation.
+        </p>
+        <p>
+          The area has several neighboring communities with diverse housing
+          options for households of all shapes and sizes, including the City of
+          College Park, City of Greenbelt, City of Hyattsville, City of New
+          Carrollton, Town of Berwyn Heights, Town of Riverdale Park and the
+          Town of University Park.
+        </p>
+      </div>
+    </umd-element-pathway>
+  </section>
+
+  <section class="umd-layout-vertical-landing">
+    <umd-element-pathway theme="dark">
+      <div slot="image">
+        <img src="/greater-cp/home-pathway-2.jpg" alt="Image" />
+      </div>
+
+      <p slot="headline">
+        University of Maryland
+      </p>
+
+      <div slot="text">
+        <p>
+          The state's flagship university and one of the nation's preeminent
+          public research universities, UMD is a global leader in research,
+          entrepreneurship and innovation. The university is home to more than
+          40,700 students, 14,000 faculty and staff, and 300 academic programs.
+        </p>
+      </div>
+      <div slot="actions">
+        <umd-element-call-to-action type="primary">
+          <a href="https://google.com" aria-label="link to google">
+            Learn More about UMD
+          </a>
+        </umd-element-call-to-action>
+      </div>
+    </umd-element-pathway>
+  </section>
+
+  <section class="umd-layout-vertical-landing">
+    <umd-element-pathway image-position="left">
+      <div slot="image">
+        <img src="/greater-cp/home-pathway-3.jpg" alt="Image" />
+      </div>
+
+      <p slot="headline">
+        Our Partnerships
+      </p>
+
+      <div slot="text">
+        <p>
+          The result of cooperative work between the City of College Park,
+          Prince George's County, the State of Maryland, private developers and
+          the university. The progress is the realization of the University
+          District Vision, a collaborative effort spearheaded by the College
+          Park City-University Partnership that also features sustainability,
+          transportation, schools and safety.
+        </p>
+      </div>
+
+      <div slot="actions">
+        <umd-element-call-to-action type="secondary">
+          <a href="https://google.com" aria-label="link to google">
+            Learn about the University District vision
+          </a>
+        </umd-element-call-to-action>
+      </div>
+    </umd-element-pathway>
+  </section>
+
+  <section class="umd-layout-vertical-landing">
+    <div class="umd-lock">
+      <umd-component-intro>
+        <div class="intro-content-wrapper">
+          <h2 class="umd-sans-largest">
+            FROM MARYLAND TODAY (Replace Me)
+          </h2>
+          <div class="umd-layout-flex-row-auto">
+            <umd-element-call-to-action type="secondary">
+              <a href="/"><span>See all election related content</span></a>
+            </umd-element-call-to-action>
+          </div>
+        </div>
+      </umd-component-intro>
+      <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+        categories="10466"
+        lazyload="true"></umd-feed-news>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock" style="text-align: center">
+      <img src="/greater-cp/home-inline.jpg"
+        alt="example"
+        style="margin: 0 auto 8px auto" />
+      <umd-element-call-to-action type="secondary">
+        <a href="https://google.com"
+          target="_blank"
+          aria-label="link to google">
+          The Association of Public and Land-grant Universities (APLU)
+        </a>
+      </umd-element-call-to-action>
+    </div>
+  </section>
+
+  {% include './components/footer-greater-cp.twig' with {
+    includeVisual: true
+  } %}
+{% endblock %}

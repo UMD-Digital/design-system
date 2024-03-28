@@ -1,0 +1,43 @@
+{% set list = [
+  {
+    name: 'News Grid',
+    link: 'news-grid'
+  },
+  {
+    name: 'News List',
+    link: 'news-list'
+  },
+  {
+    name: 'Events Grid',
+    link: 'events-grid'
+  },
+  {
+    name: 'Events List',
+    link: 'events-list'
+  }
+] %}
+
+{% macro GetUrl() %}
+  {% set URL = '/sections/feeds/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro DisplayName() %}
+  {% for item in list %}
+    {{ item.name }}
+  {% endfor %}
+{% endmacro %}
+
+{% macro HeaderLinks() %}
+  <ul>
+    {% for item in list %}
+      <li><a href="{{ _self.GetUrl ~ item.link }}">{{ item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro Links() %}
+  {% for item in list %}
+    <a href="{{ _self.GetUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}

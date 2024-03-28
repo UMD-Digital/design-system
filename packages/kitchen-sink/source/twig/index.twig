@@ -1,11 +1,6 @@
 {% extends '_layout.twig' %}
 
-{% import '_data/variable.twig' as VariableList %}
-{% import '_data/theme-styles.twig' as ThemeStylesList %}
-{% import '_data/theme-components.twig' as ThemeComponentsList %}
-{% import '_data/components.twig' as ComponentList %}
-{% import '_data/feeds.twig' as FeedList %}
-{% import '_data/templates.twig' as TemplatesList %}
+{% import './sections/variables/_data.twig' as VariableList %}
 
 {% block page %}
   <section style="padding-bottom: 10vh">
@@ -16,43 +11,8 @@
       <h2 class="umd-sans-extralarge-uppercase" style="margin-bottom: 40px;">
         Variables
       </h2>
-      <div class="umd-grid-three mb-md">
+      <div class="umd-grid-gap-three mb-md">
         {{ VariableList.Links() }}
-      </div>
-      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
-      <h2 class="umd-sans-extralarge-uppercase" style="margin-bottom: 40px;">
-        Theme Styles
-      </h2>
-      <div class="umd-grid-three mb-md">
-        {{ ThemeStylesList.Links() }}
-      </div>
-      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
-      <h2 class="umd-sans-extralarge-uppercase" style="margin-bottom: 40px;">
-        Theme Layout
-      </h2>
-      <div class="umd-grid-three mb-md">
-        {{ ThemeComponentsList.Links() }}
-      </div>
-      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
-      <h2 class="umd-sans-extralarge-uppercase" style="margin-bottom: 40px;">
-        Component Library
-      </h2>
-      <div class="umd-grid-three mb-md">
-        {{ ComponentList.Links() }}
-      </div>
-      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
-      <h2 class="umd-sans-extralarge-uppercase" style="margin-bottom: 40px;">
-        Feeds
-      </h2>
-      <div class="umd-grid-three mb-md">
-        {{ FeedList.Links() }}
-      </div>
-      <hr style="margin: 64px 0; height: 0; border: 1px solid #f1f1f1;" />
-      <h2 class="umd-sans-extralarge-uppercase" style="margin-bottom: 40px;">
-        Templates
-      </h2>
-      <div class="umd-grid-three mb-md">
-        {{ TemplatesList.Links() }}
       </div>
     </div>
   </section>

@@ -1,0 +1,124 @@
+{% extends './layouts/greater-cp.twig' %}
+
+{% block page %}
+  <umd-element-hero type="default-interior">
+    <img slot="image"
+      src="/greater-cp/hero-flex-research.jpg"
+      alt="Image Description" />
+
+    <p slot="headline">
+      Flex/Research & Development Space
+    </p>
+  </umd-element-hero>
+
+  <section>
+    <div class="umd-lock">
+      <div class="umd-layout-vertical-interior">
+        <p style="margin-top: 16px">
+          Book Mark To Come
+        </p>
+      </div>
+
+      <div class="umd-layout-interior-navigation">
+        <div>
+          <a href="">Real Estate</a>
+          <p>
+            More to Come
+          </p>
+        </div>
+        <div style="margin-top: 0">
+          <div class="umd-rich-text umd-layout-vertical-interior-child">
+            <p>
+              We recognize that many of the companies emerging out of the
+              University and in the region are makers – they develop and produce
+              products that often require unique systems and spaces. The
+              University of Maryland’s partnership with St. John Properties
+              (SJPI) has yielded 110,000 SF of flex/R&D buildings, perfect for
+              ventures that require high ceilings, delivery bays, and complex
+              electrical or HVAC systems. Exact availability of space within
+              each building may vary.
+            </p>
+          </div>
+
+          <h2 class="umd-sans-larger-bold umd-layout-headline-large"
+            style="margin-bottom: 32px">
+            5600 - 5751 Rivertech Court
+          </h2>
+
+          <div class="umd-grid-gap">
+            <div class="umd-rich-text umd-layout-vertical-interior-child">
+              <ul>
+                <li>
+                  One story flex/R&D buildings ranging from 50,000 - 57,000 SF
+                </li>
+                <li>LEED Gold Certified building</li>
+                <li>Delivered in a core and shell condition</li>
+                <li>Free onsite parking at a 4/1,000 parking ratio</li>
+                <li>Dock or dive in loading bays</li>
+                <li>16 foot ceiling height</li>
+                <li>Built in 2018</li>
+              </ul>
+              <umd-element-call-to-action type="secondary">
+                <a href="https://google.com"
+                  download
+                  aria-label="link to google">
+                  Download Details PDF
+                </a>
+              </umd-element-call-to-action>
+            </div>
+            <div>
+              <img src="/greater-cp/flex-image-1.jpg" alt="example" />
+            </div>
+          </div>
+
+          <div class="umd-layout-vertical-interior">
+            <p style="margin-top: 32px">
+              Standard Image Carousel To Come
+            </p>
+          </div>
+
+          <h2 class="umd-sans-larger-bold umd-layout-headline-large"
+            style="margin-bottom: 32px">
+            Any inquiries about leasing SJPI products should be directed to:
+          </h2>
+          <div class="umd-grid-gutterless-border-two umd-layout-vertical-interior-child"
+            style="gap: 0">
+            <umd-element-person>
+              <img slot="image"
+                src="/greater-cp/flex-image-2.jpg"
+                alt="St. John Properties, Inc. logo" />
+
+              <h2 slot="name">
+                St. John Properties, Inc.
+              </h2>
+
+              <umd-element-call-to-action type="secondary" slot="actions">
+                <a href="https://google.com"
+                  aria-label="Learn more about St. John Properties, Inc.">
+                  Leasing Inquiries
+                </a>
+              </umd-element-call-to-action>
+            </umd-element-person>
+            <umd-element-person>
+              <img slot="image"
+                src="/greater-cp/claire-cobert.jpg"
+                alt="Portrait of Claire Cobert" />
+
+              <p slot="name">
+                Claire Cobert
+              </p>
+              <p slot="job-title">
+                Leasing Representative
+              </p>
+
+              <a slot="phone" href="tel:3013147734">410.409.3517</a>
+              <a slot="email" href="mailto:email@umd.edu">ccobert@sjpi.com</a>
+            </umd-element-person>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include './components/footer-greater-cp.twig' %}
+{% endblock %}

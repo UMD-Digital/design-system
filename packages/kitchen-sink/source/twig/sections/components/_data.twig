@@ -1,0 +1,91 @@
+{% set list = [
+  {
+    name: 'Accordion',
+    link: 'accordion'
+  },
+  {
+    name: 'Alert',
+    link: 'alert'
+  },
+  {
+    name: 'Article',
+    link: 'article'
+  },
+  {
+    name: 'Call To Action',
+    link: 'call-to-action'
+  },
+  {
+    name: 'Call To Action (Button)',
+    link: 'call-to-action-button'
+  },
+  {
+    name: 'Card',
+    link: 'card'
+  },
+  {
+    name: 'Card Overlay',
+    link: 'card-overlay'
+  },
+  {
+    name: 'Carousel Cards',
+    link: 'carousel-cards'
+  },
+  {
+    name: 'Events Date Slider',
+    link: 'events-date-slider'
+  },
+  {
+    name: 'Footer',
+    link: 'footer'
+  },
+  {
+    name: 'Hero',
+    link: 'hero'
+  },
+  {
+    name: 'Nav Drawer',
+    link: 'nav-drawer'
+  },
+  {
+    name: 'Nav Item',
+    link: 'nav-item'
+  },
+  {
+    name: 'Pathway',
+    link: 'pathway'
+  },
+  {
+    name: 'Person',
+    link: 'person'
+  },
+  {
+    name: 'Stat',
+    link: 'stat'
+  }
+] %}
+
+{% macro GetUrl() %}
+  {% set URL = '/sections/components/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro DisplayName() %}
+  {% for item in list %}
+    {{ item.name }}
+  {% endfor %}
+{% endmacro %}
+
+{% macro HeaderLinks() %}
+  <ul>
+    {% for item in list %}
+      <li><a href="{{ _self.GetUrl ~ item.link }}">{{ item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro Links() %}
+  {% for item in list %}
+    <a href="{{ _self.GetUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}

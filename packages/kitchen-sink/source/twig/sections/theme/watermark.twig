@@ -1,0 +1,118 @@
+{% extends '../../_layout.twig' %}
+
+{% block page %}
+  <section class="pb-2xl" style="padding: 80px 0">
+    <div class="umd-lock">
+      <div class="umd-sans-large type-hr">
+        <span>Watermark</span>
+        <span>Font Size 5xl (Maximum 240px)</span>
+      </div>
+    </div>
+    <div class="umd-watermark-container">
+      <p class="umd-watermark"
+        aria-hidden="true"
+        tab-index="-1"
+        role="presentation">
+        EVENTS
+      </p>
+    </div>
+  </section>
+  <section class="pb-2xl" style="padding: 80px 0">
+    <div class="umd-watermark-container">
+      <p class="umd-watermark"
+        aria-hidden="true"
+        tab-index="-1"
+        role="presentation">
+        RESOURCES
+      </p>
+    </div>
+    <div class="umd-lock">
+      <h1 class="umd-sans-largest page-title">
+        <span>RESOURCES FOR TERPS</span>
+      </h1>
+    </div>
+  </section>
+  <section class="pb-2xl" style="padding: 80px 0">
+    <div class="umd-watermark-container">
+      <p class="umd-watermark"
+        aria-hidden="true"
+        tab-index="-1"
+        role="presentation">
+        EVENTS
+      </p>
+    </div>
+    <div class="umd-lock">
+      <umd-component-intro-wide>
+        <div class="intro-content-wrapper">
+          <h2 class="umd-sans-largest page-title">
+            <span>ELECTION EVENTS ON CAMPUS</span>
+          </h2>
+
+          <div class="umd-layout-flex-row-auto">
+            <umd-element-call-to-action type="secondary">
+              <a href="/"><span>See all</span></a>
+            </umd-element-call-to-action>
+          </div>
+        </div>
+      </umd-component-intro-wide>
+    </div>
+  </section>
+
+  <section class="pb-2xl" style="background-color: black; padding: 100px 0">
+    <div class="umd-watermark-container">
+      <p class="umd-watermark-dark"
+        data-treatment="MEDIA"
+        aria-hidden="true"
+        tab-index="-1"
+        role="presentation">
+        MEDIA
+      </p>
+    </div>
+    <div class="umd-lock">
+      <umd-component-intro-wide>
+        <div class="intro-content-wrapper">
+          <h2 class="umd-sans-largest page-title" style="color: white">
+            <span>RESOURCES FOR THE MEDIA</span>
+          </h2>
+
+          <div class="umd-layout-flex-row-auto">
+            <umd-element-call-to-action type="secondary" theme="dark">
+              <a href="/"><span>See all experts</span></a>
+            </umd-element-call-to-action>
+          </div>
+        </div>
+      </umd-component-intro-wide>
+
+      <div class="umd-grid-gap mb-md" style="margin-top: 50px">
+        <umd-element-card-overlay>
+          <img slot="image"
+            src="https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg"
+            alt="required alt text" />
+          <div slot="eyebrow">
+            <p>
+              Optional Eyebrow
+            </p>
+          </div>
+          <div slot="headline">
+            <h3>
+              <a href="https://google.com">
+                Lorem Ipsum Dolor Sit Amet Consect Adipiscing Tellus
+              </a>
+            </h3>
+          </div>
+          <div slot="text">
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate
+            </p>
+          </div>
+          <div slot="date">
+            <time datetime="2018-01-01">Januray 1, 2018</time>
+          </div>
+          <umd-element-call-to-action slot="cta" type="secondary" theme="dark">
+            <a href="https://umd.edu"><span>Link Text</span></a>
+          </umd-element-call-to-action>
+        </umd-element-card-overlay>
+      </div>
+    </div>
+  </section>
+{% endblock %}

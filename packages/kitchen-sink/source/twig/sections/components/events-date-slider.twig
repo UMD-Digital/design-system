@@ -1,0 +1,474 @@
+{% extends '../../_layout.twig' %}
+
+{% import '../../_includes/content-dropdown.twig' as Dropdown %}
+{% import '../../_includes/macros/date.twig' as DateDisplay %}
+{% import '../../_includes/macros/fields/headline.twig' as Headline %}
+{% import '../../_includes/macros/fields/link.twig' as Link %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Events Date Slider
+      </h1>
+
+      <h2 class="content-heading">
+        Content Variations
+      </h2>
+
+      {{ Dropdown.ContentVariations() }}
+    </div>
+  </section>
+
+  <div id="content-succinct" class="dropdown-selection" aria-hidden="true">
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading type-hr">
+          Default
+        </h3>
+        <umd-element-events-date-slider theme="light" resize>
+          {{ Headline.DateSliderComponentTitleSuccinct() }}
+
+          {{ Link.Link() }}
+
+          <div slot="date-list">
+            {{ DateDisplay.DateWithTitle() }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                link: true
+              })
+            }}
+            {{ DateDisplay.DateWithSuccinctTitle() }}
+            {{ DateDisplay.DateWithSuccinctTitle() }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                link: true
+              })
+            }}
+            {{ DateDisplay.DateWithSuccinctTitle() }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Field Options</span>
+          <span>Without CTA</span>
+        </div>
+
+        <umd-element-events-date-slider theme="light" resize>
+          {{ Headline.DateSliderComponentTitleSuccinct() }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Theme</span>
+          <span>Dark</span>
+        </div>
+
+        <umd-element-events-date-slider theme="dark" resize>
+          {{ Headline.DateSliderComponentTitleSuccinct() }}
+
+          {{
+            Link.Link({
+              theme: 'dark'
+            })
+          }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                theme: 'dark'
+              })
+            }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                theme: 'dark'
+              })
+            }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                theme: 'dark'
+              })
+            }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                theme: 'dark'
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Edge Cases</span>
+          <span>Less than 3 dates</span>
+        </div>
+
+        <umd-element-events-date-slider theme="light" resize>
+          {{ Headline.DateSliderComponentTitleSuccinct() }}
+
+          {{ Link.Link() }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithSuccinctTitle({
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+  </div>
+
+  <div id="content-normal" class="dropdown-selection" aria-hidden="false">
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading type-hr">
+          Default
+        </h3>
+
+        <umd-element-events-date-slider theme="light" resize>
+          {{ Headline.DateSliderComponentTitleNormal() }}
+
+          {{ Link.Link() }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+            {{ DateDisplay.DateWithNormalTitle({}) }}
+            {{ DateDisplay.DateWithNormalTitle({}) }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+            {{ DateDisplay.DateWithNormalTitle({}) }}
+            {{ DateDisplay.DateWithNormalTitle() }}
+            {{ DateDisplay.DateWithNormalTitle({}) }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Field Options</span>
+          <span>Without CTA</span>
+        </div>
+
+        <umd-element-events-date-slider theme="light" resize>
+          {{ Headline.DateSliderComponentTitleNormal() }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Theme</span>
+          <span>Dark</span>
+        </div>
+
+        <umd-element-events-date-slider theme="dark" resize>
+          {{ Headline.DateSliderComponentTitleNormal() }}
+
+          {{
+            Link.Link({
+              theme: 'dark'
+            })
+          }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithNormalTitle({
+                theme: 'dark'
+              })
+            }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                theme: 'dark'
+              })
+            }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                theme: 'dark'
+              })
+            }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Edge Cases</span>
+          <span>Less than 3 dates</span>
+        </div>
+
+        <umd-element-events-date-slider theme="light" resize>
+          {{ Headline.DateSliderComponentTitleNormal() }}
+
+          {{ Link.Link() }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+  </div>
+
+  <div id="content-verbose" class="dropdown-selection" aria-hidden="true">
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading type-hr">
+          Default
+        </h3>
+
+        <umd-element-events-date-slider theme="light" resize>
+          {{ Headline.DateSliderComponentTitleVerbose() }}
+
+          {{ Link.Link() }}
+
+          <div slot="date-list">
+            {{ DateDisplay.DateWithVerboseTitle() }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                link: true
+              })
+            }}
+            {{ DateDisplay.DateWithVerboseTitle() }}
+            {{ DateDisplay.DateWithVerboseTitle() }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                link: true
+              })
+            }}
+            {{ DateDisplay.DateWithVerboseTitle() }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Field Options</span>
+          <span>Without CTA</span>
+        </div>
+
+        <umd-element-events-date-slider theme="light" resize>
+          {{ Headline.DateSliderComponentTitleVerbose() }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Theme</span>
+          <span>Dark</span>
+        </div>
+
+        <umd-element-events-date-slider theme="dark" resize>
+          {{ Headline.DateSliderComponentTitleVerbose() }}
+
+          {{
+            Link.Link({
+              theme: 'dark'
+            })
+          }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                theme: 'dark'
+              })
+            }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                theme: 'dark',
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Edge Cases</span>
+          <span>Less than 3 dates</span>
+        </div>
+
+        <umd-element-events-date-slider theme="light">
+          {{ Headline.DateSliderComponentTitleVerbose() }}
+
+          {{ Link.Link() }}
+
+          <div slot="date-list">
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                link: true
+              })
+            }}
+            {{
+              DateDisplay.DateWithVerboseTitle({
+                link: true
+              })
+            }}
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+  </div>
+{% endblock %}

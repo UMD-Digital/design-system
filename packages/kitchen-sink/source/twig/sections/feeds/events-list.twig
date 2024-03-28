@@ -1,0 +1,60 @@
+{% extends '../../_layout.twig' %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Feed Events List
+      </h1>
+
+      <section>
+        <h2 class="content-heading type-hr">
+          No Results
+        </h2>
+
+        <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
+          row-count="2"
+          show-count="4"
+          categories="104"></umd-feed-events-list>
+      </section>
+
+      <section>
+        <h2 class="content-heading type-hr">
+          <span>All Events</span>
+          <span>Limit 5</span>
+        </h2>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-list>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="content-heading type-hr">
+          <span>Lazy Load with Stamp Events</span>
+          <span>Limit 5</span>
+        </h2>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
+            categories="92369"
+            lazyload="true"></umd-feed-events-list>
+        </div>
+      </section>
+
+      <section style="padding-bottom: 20vh">
+        <h2 class="content-heading type-hr">
+          <span>Lazy Load with Stamp Events</span>
+          <span>Limit 10</span>
+        </h2>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
+            categories="92369"
+            lazyload="true"
+            row-count="10"></umd-feed-events-list>
+        </div>
+      </section>
+    </div>
+  </section>
+{% endblock %}

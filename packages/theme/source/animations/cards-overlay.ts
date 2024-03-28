@@ -3,7 +3,7 @@ import { GridColumnsGutterless } from '../layout/grid-gutterless';
 
 const { Queries, Spacing } = Tokens;
 
-export const FloatCardsOverlay = {
+const CardsOverlayAnimations = {
   '.umd-grid-two-float-overlay-card': {
     ...GridColumnsGutterless['.umd-grid-gutterless-two'],
 
@@ -69,4 +69,8 @@ export const FloatCardsOverlay = {
       },
     },
   },
+};
+
+export default {
+  ...CardsOverlayAnimations,
 };

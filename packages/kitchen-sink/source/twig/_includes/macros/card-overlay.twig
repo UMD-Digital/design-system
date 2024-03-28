@@ -45,7 +45,7 @@
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
-  {% set isSizeBig = params.sizeBig ?? true %}
+  {% set isSizeBig = params.sizeBig ?? false %}
 
   {% if params.theme == 'dark' %}
     {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
@@ -106,7 +106,7 @@
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
-  {% set isSizeBig = params.sizeBig ?? true %}
+  {% set isSizeBig = params.sizeBig ?? false %}
 
   {% if params.theme == 'dark' %}
     {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
@@ -167,7 +167,7 @@
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
-  {% set isSizeBig = params.sizeBig ?? true %}
+  {% set isSizeBig = params.sizeBig ?? false %}
 
   {% if params.theme == 'dark' %}
     {% set attrs = attrs ~ 'theme="dark"' ~ params.theme ~ '"' %}

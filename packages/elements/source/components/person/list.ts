@@ -23,15 +23,25 @@ type TypeListPersonProps = TypePersonProps & {
 const { Spacing, Colors } = Tokens;
 
 const SMALL = 400;
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
 
 const ELEMENT_NAME = 'umd-list-person';
 const ELEMENT_PERSON_LIST_CONTAINER = 'umd-list-person-container';
 const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LIST_IMAGE_CONTAINER}`;
 const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${PERSON_TEXT_CONTAINER}`;
+const IS_THEME_DARK = `.${ELEMENT_PERSON_LIST_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
+const OverwriteThemeDarkStyles = `
+  ${IS_THEME_DARK} .${LIST_IMAGE_CONTAINER} {
+    background-color: ${Colors.gray.dark};
+  }
+`;
 
 const OverwriteImagesStyles = `
   ${IS_IMAGE_CONTAINER_OVERWRITE} {
     order: 1;
+    padding-right: ${Spacing.md};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
@@ -46,15 +56,15 @@ const OverwriteImagesStyles = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} img {
-      max-width: 80%;
+    ${IS_IMAGE_CONTAINER_OVERWRITE} img,
+    ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
+      width: 140px;
     }
   }
 `;
 
 const OverwriteTextStyles = `
   ${IS_TEXT_CONTAINER_OVERWRITE} {
-    padding-left: ${Spacing.md};
     order: 2;
     width: 100%;
   }
@@ -75,6 +85,7 @@ const STYLES_PERSON_LIST_ELEMENT = `
   ${STYLES_LIST_COMMON_IMAGE}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
+  ${OverwriteThemeDarkStyles}
 `;
 
 const CreatePersonListElement = (element: TypeListPersonProps) => {
@@ -87,6 +98,8 @@ const CreatePersonListElement = (element: TypeListPersonProps) => {
     imageContainer,
     theme,
   });
+
+  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
 
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_PERSON_LIST_CONTAINER);

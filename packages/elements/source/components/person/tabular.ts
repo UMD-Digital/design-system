@@ -24,15 +24,25 @@ type TypeTabularPersonProps = TypePersonProps & {
 const { Spacing, Colors } = Tokens;
 
 const SMALL = 400;
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
 
 const ELEMENT_NAME = 'umd-tabluar-person';
 const ELEMENT_PERSON_TABULAR_CONTAINER = 'umd-tabluar-person-container';
 const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LIST_IMAGE_CONTAINER}`;
 const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${PERSON_TEXT_CONTAINER}`;
+const IS_THEME_DARK = `.${ELEMENT_PERSON_TABULAR_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
+const OverwriteThemeDarkStyles = `
+  ${IS_THEME_DARK} .${LIST_IMAGE_CONTAINER} {
+    background-color: ${Colors.gray.dark};
+  }
+`;
 
 const OverwriteImagesStyles = `
   ${IS_IMAGE_CONTAINER_OVERWRITE} {
     order: 1;
+    padding-right: ${Spacing.md};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
@@ -46,25 +56,27 @@ const OverwriteImagesStyles = `
     }
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} img {
-      max-width: 80%;
-    }
+  ${IS_IMAGE_CONTAINER_OVERWRITE} img,
+  ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
+    width: 140px;
   }
 `;
 
 const OverwriteTextStyles = `
-  ${IS_TEXT_CONTAINER_OVERWRITE} {
-    padding-left: ${Spacing.md};
-    order: 2;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: ${Spacing.md};
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_TEXT_CONTAINER_OVERWRITE} {
+      order: 2;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: ${Spacing.md};
+    }
   }
 
-  ${IS_TEXT_CONTAINER_OVERWRITE} > *:last-child {
-    justify-self: end;
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_TEXT_CONTAINER_OVERWRITE} > *:nth-of-type(2) {
+      justify-self: end;
+    }
   }
 `;
 
@@ -83,6 +95,7 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
   ${STYLES_LIST_COMMON_IMAGE}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
+  ${OverwriteThemeDarkStyles}
 `;
 
 const CreatePersonTabularElement = (element: TypeTabularPersonProps) => {
@@ -98,6 +111,8 @@ const CreatePersonTabularElement = (element: TypeTabularPersonProps) => {
     imageContainer,
     theme,
   });
+
+  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
 
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_PERSON_TABULAR_CONTAINER);

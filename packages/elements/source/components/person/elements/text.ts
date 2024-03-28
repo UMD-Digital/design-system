@@ -67,6 +67,10 @@ const ThemeDarkStyles = `
   ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:focus path {
     fill: ${Colors.gray.dark};
   }
+
+  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER} > span:last-child {
+    color: ${Colors.gray.light};
+  }
 `;
 
 // prettier-ignore

@@ -58,8 +58,8 @@ const DarkThemeStyles = `
     color: ${Colors.white};
   }
 
-  ${IS_THEME_DARK} .${LIST_TEXT_WRAPPER} {
-    color: ${Colors.white};
+  ${IS_THEME_DARK} .${LIST_DATE_WRAPPER} {
+    color: ${Colors.gray.lighter};
   }
 `
 

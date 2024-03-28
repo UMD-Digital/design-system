@@ -195,6 +195,7 @@ const ImageContainerStyles = `
       width: 96px;
       float: right;
       margin-bottom: 4px;
+      margin-left: ${Spacing.sm};
     }
   }
 `;

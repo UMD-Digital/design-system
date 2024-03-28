@@ -16,7 +16,7 @@ export type TypeCommonTextAttributes = {
 };
 
 const { Colors, Spacing } = Tokens;
-const { LinkLineSlide } = Animations;
+const { Link } = Animations;
 const { SansLarge, SansMin, Eyebrow } = Typography;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -41,14 +41,14 @@ const DarkThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK} .${BLOCK_TEXT_HEADLINE_WRAPPER} a`]:
-      LinkLineSlide['.slidein-underline-white'],
+      Link.LineSlideUnder.white,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK} .${BLOCK_TEXT_HEADLINE_WRAPPER}`]:
-      LinkLineSlide['.slidein-underline-white'],
+      Link.LineSlideUnder.white,
     },
   })}
 `
@@ -112,7 +112,7 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${BLOCK_TEXT_HEADLINE_WRAPPER} a`]:
-      LinkLineSlide['.slidein-underline-black'],
+      Link.LineSlideUnder.black,
     },
   })}
 `;

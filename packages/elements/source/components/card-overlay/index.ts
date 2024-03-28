@@ -30,7 +30,7 @@ type TypeCardOverlayElement = TypeTextContainer & {
 };
 
 const { Colors, Spacing } = Tokens;
-const { LinkLineSlide } = Animations;
+const { Link } = Animations;
 const { RichTextDark } = Fields;
 const { SansExtraLarge, SansLarger, SansSmall, SansMin, Eyebrow } = Typography;
 
@@ -93,7 +93,7 @@ const VariantLightThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}${IS_THEME_LIGHT} .${CARD_OVERLAY_HEADLINE} a`]:
-      LinkLineSlide['.slidein-underline-black'],
+      Link.LineSlideUnder.black,
     },
   })}
 `;
@@ -132,7 +132,7 @@ const VariantImageThemeContent = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}${IS_WITH_IMAGE} .${CARD_OVERLAY_HEADLINE} a`]:
-      LinkLineSlide['.slidein-underline-white'],
+      Link.LineSlideUnder.white,
     },
   })}
 
@@ -388,7 +388,7 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_HEADLINE} a`]:
-      LinkLineSlide['.slidein-underline-white'],
+      Link.LineSlideUnder.white,
     },
   })}
 `;

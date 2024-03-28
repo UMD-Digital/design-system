@@ -44,7 +44,7 @@ const linkStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${DROPDOWN_LIST_CONTAINER} a`]:
-      Animations.LinkLineSlide['.slidein-underline-red'],
+      Animations.Link.LineSlideUnder.red,
     },
   })}
 

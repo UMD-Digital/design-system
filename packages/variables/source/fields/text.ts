@@ -4,6 +4,8 @@ import { Spacing } from '../tokens/spacing';
 import Animations from '../animations';
 import Lists from '../elements/list';
 
+const { Link } = Animations;
+
 const RichTextBase = {
   lineHeight: '1.5em',
 
@@ -66,7 +68,7 @@ const RichTextDark = {
   color: Colors.white,
 
   '& a': {
-    ...Animations.LinkLineFade['.fadein-simple-dark'],
+    ...Link.LineFadeUnder.dark,
   },
 };
 

@@ -2,7 +2,7 @@ import { Animations, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { Colors } = Tokens;
-const { LinkLineSlide } = Animations;
+const { Link } = Animations;
 
 export const CLASS_STYLES_REF_CTA_SECONDARY =
   'umd-styles-call-to-action-secondary';
@@ -21,7 +21,7 @@ export const STYLES_CTA_SECONDARY = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CLASS_STYLES_REF_CTA_SECONDARY} > span > span`]:
-      LinkLineSlide['.slidein-underline-red'],
+      Link.LineSlideUnder.red,
     },
   })}
 `;

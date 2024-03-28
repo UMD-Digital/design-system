@@ -1,6 +1,5 @@
-import { LinkLineSlide, LinkLineFade } from './link';
+import Link from './link';
 
 export default {
-  LinkLineSlide,
-  LinkLineFade,
+  Link,
 };

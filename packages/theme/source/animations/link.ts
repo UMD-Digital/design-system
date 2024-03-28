@@ -1,7 +1,7 @@
 import { Tokens, Animations } from '@universityofmaryland/variables';
 
 const { Colors } = Tokens;
-const { LinkLineFade, LinkLineSlide } = Animations;
+const { Link } = Animations;
 
 const baseSpan = {
   display: 'inline',
@@ -18,32 +18,25 @@ const baseLink = {
 
 const SlideInUnderlineLink = {
   '.umd-slidein-underline-red': {
-    ...LinkLineSlide['.slidein-underline-red'],
+    ...Link.LineSlideUnder.red,
   },
 
   '.umd-slidein-underline-black': {
-    ...LinkLineSlide['.slidein-underline-black'],
+    ...Link.LineSlideUnder.black,
   },
 
   '.umd-slidein-underline-white': {
-    ...LinkLineSlide['.slidein-underline-white'],
+    ...Link.LineSlideUnder.white,
   },
 
   '.umd-slidein-underline-gold': {
-    ...LinkLineSlide['.slidein-underline'],
-
-    '& > *:not(svg):not(.sr-only)': {
-      ...baseSpan,
-
-      backgroundSize: '0 2px',
-      backgroundImage: `linear-gradient(${Colors.gold}, ${Colors.gold})`,
-    },
+    ...Link.LineSlideUnder.gold,
   },
 };
 
 const FadeInUnderlineLink = {
   '.umd-fadein-underline-red': {
-    ...LinkLineFade['.fadein-underline'],
+    ...Link.LineFadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -54,7 +47,7 @@ const FadeInUnderlineLink = {
   },
 
   '.umd-fadein-underline-gray': {
-    ...LinkLineFade['.fadein-underline'],
+    ...Link.LineFadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -65,7 +58,7 @@ const FadeInUnderlineLink = {
   },
 
   '.umd-fadein-underline-gold': {
-    ...LinkLineFade['.fadein-underline'],
+    ...Link.LineFadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -76,7 +69,7 @@ const FadeInUnderlineLink = {
   },
 
   '.umd-fadein-underline-black': {
-    ...LinkLineFade['.fadein-underline'],
+    ...Link.LineFadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -87,7 +80,7 @@ const FadeInUnderlineLink = {
   },
 
   '.umd-fadein-underline-white': {
-    ...LinkLineFade['.fadein-underline'],
+    ...Link.LineFadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -101,17 +94,17 @@ const FadeInUnderlineLink = {
 const SpecialAnimationsLink = {
   '.umd-slidein-underline-gray-red': {
     ...baseLink,
-    ...LinkLineSlide['.slidein-gray-red'],
+    ...Link.LineSlideUnder.gray,
   },
 
   '.umd-fadein-simple-dark': {
     ...baseLink,
-    ...LinkLineFade['.fadein-simple-dark'],
+    ...Link.LineFadeUnder.dark,
   },
 
   '.umd-fadein-simple-light': {
     ...baseLink,
-    ...LinkLineFade['.fadein-simple-light'],
+    ...Link.LineFadeUnder.light,
   },
 };
 

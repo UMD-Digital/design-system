@@ -20,7 +20,7 @@ import {
 import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
-const { LinkLineSlide } = Animations;
+const { Link } = Animations;
 const { InterativeMedium, SansSmall } = Typography;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
@@ -80,7 +80,7 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE} a`]:
-     LinkLineSlide['.slidein-underline-white'],
+      Link.LineSlideUnder.white,
     },
   })}
 
@@ -98,7 +98,7 @@ const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
-      LinkLineSlide['.slidein-underline-black'],
+      Link.LineSlideUnder.black,
     },
   })}
 `;
@@ -139,14 +139,14 @@ const LinkListStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} a`]:
-      LinkLineSlide['.slidein-underline-white'],
+      Link.LineSlideUnder.white,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
-      LinkLineSlide['.slidein-underline-black'],
+      Link.LineSlideUnder.black,
     },
   })}
 

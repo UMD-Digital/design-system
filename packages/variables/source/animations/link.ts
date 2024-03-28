@@ -22,8 +22,8 @@ const baseSlideIn = {
   },
 };
 
-export const LinkLineFade = {
-  '.fadein-underline': {
+export const LineFadeUnder = {
+  base: {
     ...BaseLink,
 
     [`&:hover > *:not(svg):not(.sr-only),
@@ -32,7 +32,7 @@ export const LinkLineFade = {
     },
   },
 
-  '.fadein-simple-dark': {
+  dark: {
     ...BaseLink,
 
     backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
@@ -51,7 +51,7 @@ export const LinkLineFade = {
     },
   },
 
-  '.fadein-simple-light': {
+  light: {
     ...BaseLink,
 
     backgroundImage: `linear-gradient(currentColor, currentColor)`,
@@ -71,23 +71,8 @@ export const LinkLineFade = {
   },
 };
 
-export const LinkLineSlide = {
-  '.slidein-underline': {
-    ...baseSlideIn,
-  },
-
-  '.slidein-underline-red': {
-    ...baseSlideIn,
-
-    '& > *:not(svg):not(.sr-only)': {
-      ...BaseSpan,
-
-      backgroundSize: '0 2px',
-      backgroundImage: `linear-gradient(${Colors.red}, ${Colors.red})`,
-    },
-  },
-
-  '.slidein-underline-black': {
+export const LineSlideUnder = {
+  black: {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
@@ -98,18 +83,7 @@ export const LinkLineSlide = {
     },
   },
 
-  '.slidein-underline-white': {
-    ...baseSlideIn,
-
-    '& > *:not(svg):not(.sr-only)': {
-      ...BaseSpan,
-
-      backgroundSize: '0 2px',
-      backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
-    },
-  },
-
-  '.slidein-gray-red': {
+  gray: {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
@@ -126,4 +100,42 @@ export const LinkLineSlide = {
       backgroundSize: '200% 2px',
     },
   },
+
+  gold: {
+    ...baseSlideIn,
+
+    '& > *:not(svg):not(.sr-only)': {
+      ...BaseSpan,
+
+      backgroundSize: '0 2px',
+      backgroundImage: `linear-gradient(${Colors.gold}, ${Colors.gold})`,
+    },
+  },
+
+  red: {
+    ...baseSlideIn,
+
+    '& > *:not(svg):not(.sr-only)': {
+      ...BaseSpan,
+
+      backgroundSize: '0 2px',
+      backgroundImage: `linear-gradient(${Colors.red}, ${Colors.red})`,
+    },
+  },
+
+  white: {
+    ...baseSlideIn,
+
+    '& > *:not(svg):not(.sr-only)': {
+      ...BaseSpan,
+
+      backgroundSize: '0 2px',
+      backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
+    },
+  },
+};
+
+export default {
+  LineSlideUnder,
+  LineFadeUnder,
 };

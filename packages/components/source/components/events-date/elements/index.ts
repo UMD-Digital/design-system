@@ -10,7 +10,7 @@ import { ELEMENT_TYPE } from 'components/events-date';
 import { SLOTS, VARIABLES, REFERENCES } from 'components/events-date/globals';
 
 const { FontSize, Spacing } = Tokens;
-const { LinkLineSlide } = Animations;
+const { Link } = Animations;
 const { SansLarge } = Typography;
 
 const { HEADLINE, MONTH, DAY } = SLOTS;
@@ -61,13 +61,13 @@ const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-black'],
+      [`.${EVENT_HEADLINE} a`]: Link.LineSlideUnder.black,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-white'],
+      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: Link.LineSlideUnder.white, 
     },
   })}
 `;

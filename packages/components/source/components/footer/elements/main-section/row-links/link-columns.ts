@@ -14,7 +14,7 @@ import {
 } from '../../../globals';
 
 const { Colors, Spacing } = Tokens;
-const { LinkLineSlide } = Animations;
+const { Link } = Animations;
 const { SansSmaller, InterativeMedium } = Typography;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
@@ -165,7 +165,7 @@ const LinkStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
-      LinkLineSlide['.slidein-underline-white'],
+      Link.LineSlideUnder.white
     },
   })}
 
@@ -177,7 +177,7 @@ const LinkStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
-      LinkLineSlide['.slidein-underline-black'],
+      Link.LineSlideUnder.black
     },
   })}
 `;

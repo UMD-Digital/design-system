@@ -9,7 +9,7 @@ import { SLOTS } from '../globals';
 import { UMDAlertElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
-const { LinkLineSlide } = Animations;
+const { Link } = Animations;
 const { SansLarge } = Typography;
 
 const { HEADLINE } = SLOTS;
@@ -42,7 +42,7 @@ export const headlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_HEADLINE} a`]: LinkLineSlide['.slidein-underline-black'],
+      [`.${ALERT_HEADLINE} a`]: Link.LineSlideUnder.black,
     },
   })}
 `;

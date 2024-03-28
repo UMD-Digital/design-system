@@ -100,35 +100,35 @@ const GutterlessFourColumnBorder = {
 };
 
 export const GridColumnsGutterless = {
-  '.umd-grid-gutterless-two': {
+  '.umd-grid-two': {
     ...GutterlessTwoColumn,
   },
 
-  '.umd-grid-gutterless-three': {
+  '.umd-grid-three': {
     ...GutterlessThreeColumn,
   },
 
-  '.umd-grid-gutterless-four': {
+  '.umd-grid-four': {
     ...GutterlessFourColumn,
   },
 };
 
 const GridColumnsGutterlessBorder = {
-  '.umd-grid-gutterless-border-two': {
+  '.umd-grid-two-border': {
     ...GutterlessTwoColumnBorder,
   },
 
-  '.umd-grid-gutterless-border-three': {
+  '.umd-grid-three-border': {
     ...GutterlessThreeColumnBorder,
   },
 
-  '.umd-grid-gutterless-border-four': {
+  '.umd-grid-four-border': {
     ...GutterlessFourColumnBorder,
   },
 };
 
 const GridColumnsGutterlessBorderDark = {
-  '.umd-grid-gutterless-border-two-dark': {
+  '.umd-grid-two-border-dark': {
     ...GutterlessTwoColumnBorder,
     ...GutterlessBoarderDark,
 
@@ -137,7 +137,7 @@ const GridColumnsGutterlessBorderDark = {
     },
   },
 
-  '.umd-grid-gutterless-border-three-dark': {
+  '.umd-grid-three-border-dark': {
     ...GutterlessThreeColumnBorder,
     ...GutterlessBoarderDark,
 
@@ -146,7 +146,7 @@ const GridColumnsGutterlessBorderDark = {
     },
   },
 
-  '.umd-grid-gutterless-border-four-dark': {
+  '.umd-grid-four-border-dark': {
     ...GutterlessFourColumnBorder,
     ...GutterlessBoarderDark,
 

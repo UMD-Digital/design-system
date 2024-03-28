@@ -33,8 +33,10 @@ const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${PERSON
 const IS_THEME_DARK = `.${ELEMENT_PERSON_LIST_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 const OverwriteThemeDarkStyles = `
-  ${IS_THEME_DARK} .${LIST_IMAGE_CONTAINER} {
-    background-color: ${Colors.gray.dark};
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    ${IS_THEME_DARK} .${LIST_IMAGE_CONTAINER} {
+      background-color: ${Colors.gray.dark};
+    }
   }
 `;
 

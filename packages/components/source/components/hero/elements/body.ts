@@ -1,4 +1,4 @@
-import { Tokens, Fields, Typography } from '@universityofmaryland/variables';
+import { Tokens, Elements, Typography } from '@universityofmaryland/variables';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
@@ -11,7 +11,7 @@ import {
 import { UMDHeroElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
-const { Ribbon } = Fields;
+const { Eyebrow } = Elements;
 const {
   CampaignExtralarge,
   SansLargest,
@@ -43,25 +43,25 @@ const HERO_ACTION = 'umd-hero-overlay-actions';
 const EyebrowStyles = `  
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_EYEBROW}`]: Eyebrow.Ribbon,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_EYEBROW}`]: Eyebrow.Ribbon,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_EYEBROW}`]: Eyebrow.Ribbon,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${IS_TYPE_LOGO} .${HERO_EYEBROW}`]: Ribbon,
+      [`.${HERO_CONTAINER}${IS_TYPE_LOGO} .${HERO_EYEBROW}`]: Eyebrow.Ribbon,
     },
   })}
 

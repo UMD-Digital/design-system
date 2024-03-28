@@ -10,4 +10,4 @@ const Ribbon = {
   clipPath: `polygon(8% 0, 100% 0, 92% 100%, 0 100%)`,
 };
 
-export { Ribbon };
+export default { Ribbon };

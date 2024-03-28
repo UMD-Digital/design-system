@@ -1,10 +1,10 @@
-import { Tokens, Fields } from '@universityofmaryland/variables';
+import { Tokens, Elements } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { UMDAlertElement } from '../index';
 
-const { RichText } = Fields;
+const { Text } = Elements;
 const { Colors } = Tokens;
 
 const { BODY } = SLOTS;
@@ -20,7 +20,7 @@ export const bodyStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ALERT_BODY}`]: RichText,
+      [`.${ALERT_BODY}`]: Text.RichText,
     },
   })}
 `;

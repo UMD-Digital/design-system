@@ -4,7 +4,7 @@ import { Spacing } from '../tokens/spacing';
 
 const { SansLarge } = Typography;
 
-const ListStylesBase = {
+const Base = {
   [`& ul,
     & ol ul`]: {
     padding: '0',
@@ -91,7 +91,7 @@ const ListStylesBase = {
   },
 };
 
-const UnOrderedListStyleTypes = {
+const Unordered = {
   // disc
 
   [`& ul[style*='list-style-type:disc'] > li:before,
@@ -114,7 +114,7 @@ const UnOrderedListStyleTypes = {
   },
 };
 
-const OrderedListStyleTypes = {
+const Ordered = {
   // decimal
 
   [`& ol[style*='list-style-type:decimal'] > li:before,
@@ -236,10 +236,8 @@ const OrderedListStyleTypes = {
   },
 };
 
-const ListStyles = {
-  ...ListStylesBase,
-  ...UnOrderedListStyleTypes,
-  ...OrderedListStyleTypes,
+export default {
+  Base,
+  Unordered,
+  Ordered,
 };
-
-export default ListStyles;

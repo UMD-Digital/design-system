@@ -2,7 +2,7 @@ import { Colors } from '../tokens/colors';
 import { FontWeight } from '../tokens/fonts';
 import { Spacing } from '../tokens/spacing';
 import Animations from '../animations';
-import Lists from '../elements/list';
+import Lists from './list';
 
 const { Link } = Animations;
 
@@ -72,4 +72,4 @@ const RichTextDark = {
   },
 };
 
-export { RichText, RichTextDark };
+export default { RichText, RichTextDark };

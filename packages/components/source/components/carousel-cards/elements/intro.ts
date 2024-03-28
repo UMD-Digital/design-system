@@ -1,11 +1,11 @@
-import { Tokens, Typography, Fields } from '@universityofmaryland/variables';
+import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { SLOTS, BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
 import { UMDCarouselCardsElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
-const { RichTextDark } = Fields;
+const { Text } = Elements;
 const { SansMedium, SansLargest } = Typography;
 
 const { LARGE } = BREAKPOINTS;
@@ -48,7 +48,7 @@ const textStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: RichTextDark,
+      [`.${INTRO_CONTAINER_TEXT}`]: Text.RichTextDark,
     },
   })}
 

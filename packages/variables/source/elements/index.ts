@@ -1,5 +1,9 @@
-import ListStyles from './list';
+import List from './list';
+import Eyebrow from './eyebrow';
+import Text from './text';
 
 export default {
-  ListStyles,
+  List,
+  Eyebrow,
+  Text,
 };

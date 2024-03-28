@@ -1,4 +1,4 @@
-import { Tokens, Typography, Fields } from '@universityofmaryland/variables';
+import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
 import {
   BLOCK_TEXT_CONTAINER,
   BLOCK_TEXT_HEADLINE_WRAPPER,
@@ -22,7 +22,7 @@ type TypeBlockContainerProps = TypeBlockContainerAttributes & {
 
 const { SansExtraLarge, SansLarger, SansSmall } = Typography;
 const { Colors, Spacing } = Tokens;
-const { RichTextDark } = Fields;
+const { Text } = Elements;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_ALIGNED = 'aligned';
@@ -60,7 +60,7 @@ const VariantThemeStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK} .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER}`]: RichTextDark,
+      [`${IS_THEME_DARK} .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER}`]: Text.RichTextDark,
     },
   })}
 

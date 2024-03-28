@@ -2,7 +2,7 @@ import {
   Animations,
   Typography,
   Tokens,
-  Fields,
+  Elements,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
@@ -31,7 +31,7 @@ type TypeCardOverlayElement = TypeTextContainer & {
 
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
-const { RichTextDark } = Fields;
+const { Text } = Elements;
 const { SansExtraLarge, SansLarger, SansSmall, SansMin, Eyebrow } = Typography;
 
 const SMALL = 300;
@@ -122,7 +122,7 @@ const VariantDarkThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}${IS_THEME_DARK} .${CARD_OVERLAY_TEXT}`]:
-      RichTextDark,
+      Text.RichTextDark,
     },
   })}
 `;
@@ -139,7 +139,7 @@ const VariantImageThemeContent = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${CARD_OVERLAY_CONTAINER}${IS_WITH_IMAGE} .${CARD_OVERLAY_TEXT}`]:
-      RichTextDark,
+      Text.RichTextDark,
     },
   })}
 `;

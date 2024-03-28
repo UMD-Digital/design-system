@@ -1,9 +1,9 @@
-import { Fields } from '@universityofmaryland/variables';
+import { Elements } from '@universityofmaryland/variables';
 
-const { Ribbon } = Fields;
+const { Eyebrow } = Elements;
 
 export default {
   '.umd-eyebrow-ribbon': {
-    ...Ribbon,
+    ...Eyebrow.Ribbon,
   },
 };

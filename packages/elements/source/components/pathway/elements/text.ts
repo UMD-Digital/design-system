@@ -2,7 +2,7 @@ import {
   Typography,
   Layout,
   Tokens,
-  Fields,
+  Elements,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
@@ -15,7 +15,7 @@ export type TypePathwayTextContainer = {
 };
 
 const { Spacing, Colors, FontSize } = Tokens;
-const { Ribbon, RichText } = Fields;
+const { Eyebrow, Text } = Elements;
 const { GridColumnAndRows } = Layout;
 const { SansLargest } = Typography;
 
@@ -69,7 +69,7 @@ const EyebrowStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_EYEBROW_WRAPPER}`]: Ribbon,
+      [`.${TEXT_CONTAINER_EYEBROW_WRAPPER}`]: Eyebrow.Ribbon,
     },
   })}
 `;
@@ -109,7 +109,7 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_TEXT_WRAPPER}`]: RichText,
+      [`.${TEXT_CONTAINER_TEXT_WRAPPER}`]: Text.RichText,
     },
   })}
 

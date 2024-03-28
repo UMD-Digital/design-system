@@ -157,6 +157,10 @@ const TextStyles = `
     },
   })}
 
+  .${LIST_TEXT_WRAPPER} {
+    color: ${Colors.gray.dark};
+  }
+
   .${LIST_TEXT_WRAPPER} * {
     color: currentColor;
   }

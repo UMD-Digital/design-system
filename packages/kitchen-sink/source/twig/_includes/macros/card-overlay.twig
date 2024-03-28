@@ -45,9 +45,14 @@
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
+  {% set isSizeBig = params.sizeBig ?? true %}
 
   {% if params.theme == 'dark' %}
     {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% if isSizeBig %}
+    {% set attrs = attrs ~ 'class="size-large"' %}
   {% endif %}
 
   <umd-element-card-overlay {{ attrs }}>
@@ -101,9 +106,14 @@
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
+  {% set isSizeBig = params.sizeBig ?? true %}
 
   {% if params.theme == 'dark' %}
     {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% if isSizeBig %}
+    {% set attrs = attrs ~ 'class="size-large"' %}
   {% endif %}
 
   <umd-element-card-overlay {{ attrs }}>
@@ -157,9 +167,14 @@
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
+  {% set isSizeBig = params.sizeBig ?? true %}
 
   {% if params.theme == 'dark' %}
     {% set attrs = attrs ~ 'theme="dark"' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% if isSizeBig %}
+    {% set attrs = attrs ~ 'class="size-large"' %}
   {% endif %}
 
   <umd-element-card-overlay {{ attrs }}>

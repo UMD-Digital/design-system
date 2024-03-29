@@ -3,6 +3,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 type TypeQuoteFeatured = {
   theme: string;
+  size: string;
 };
 
 const { Spacing } = Tokens;

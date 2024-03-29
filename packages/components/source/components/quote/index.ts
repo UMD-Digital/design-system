@@ -5,12 +5,13 @@ declare global {
 }
 
 import {
+  QuoteElements,
   QuoteFeatured,
   QuoteInline,
-  QuoteSimple,
+  QuoteStatement,
 } from '@universityofmaryland/custom-elements-library';
 import { Reset } from 'helpers/styles';
-import { MakeTemplate } from 'helpers/ui';
+import { MakeTemplate, SlotDefaultStyling } from 'helpers/ui';
 
 const ELEMENT_NAME = 'umd-element-quote';
 
@@ -20,7 +21,7 @@ const ATTRIBUTE_SIZE = 'size';
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
-const TYPE_SIMPLE = 'simple';
+const TYPE_STATEMENT = 'statement';
 const TYPE_INLINE = 'inline';
 const TYPE_FEATURED = 'featured';
 const SIZE_NORMAL = 'normal';
@@ -28,7 +29,7 @@ const SIZE_LARGE = 'large';
 
 const SLOTS = {
   IMAGE: 'image',
-  QUOTE: 'headline',
+  QUOTE: 'quote',
   ATTRIBUTION: 'attribution',
   ATTRIBUTION_SUB_TEXT: 'attribution-sub-text',
   ACTIONS: 'actions',
@@ -39,36 +40,48 @@ const styles = `
   }
   
   ${Reset}
+  ${QuoteElements.Text.Styles}
+  ${QuoteElements.Image.Styles}
   ${QuoteFeatured.Styles}
   ${QuoteInline.Styles}
-  ${QuoteSimple.Styles}
-
+  ${QuoteStatement.Styles}
 `;
 
-const CreateShadowDom = ({ element }: { element: UMDElementQuote }) => {
+const MakeData = ({ element }: { element: UMDElementQuote }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const typeAttribute = element.getAttribute(ATTRIBUTE_TYPE);
+
   const { IMAGE, QUOTE, ATTRIBUTION, ATTRIBUTION_SUB_TEXT, ACTIONS } =
     element._slots;
 
-  const isTypeSimple = typeAttribute === TYPE_SIMPLE;
+  return {
+    theme,
+    quote: SlotDefaultStyling({ element, slotRef: QUOTE }),
+    image: SlotDefaultStyling({ element, slotRef: IMAGE }),
+    attribution: SlotDefaultStyling({ element, slotRef: ATTRIBUTION }),
+    attributionSubText: SlotDefaultStyling({
+      element,
+      slotRef: ATTRIBUTION_SUB_TEXT,
+    }),
+    action: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+  };
+};
+
+const CreateShadowDom = ({ element }: { element: UMDElementQuote }) => {
+  const typeAttribute = element.getAttribute(ATTRIBUTE_TYPE);
+  const size = element.getAttribute(ATTRIBUTE_SIZE) || SIZE_NORMAL;
+
+  const isTypeStatement = typeAttribute === TYPE_STATEMENT;
   const isTypeFeatured = typeAttribute === TYPE_FEATURED;
 
-  if (isTypeSimple) {
-    return QuoteSimple.CreateElement({
-      theme,
-    });
+  if (isTypeStatement) {
+    return QuoteStatement.CreateElement({ ...MakeData({ element }) });
   }
 
   if (isTypeFeatured) {
-    return QuoteFeatured.CreateElement({
-      theme,
-    });
+    return QuoteFeatured.CreateElement({ ...MakeData({ element }), size });
   }
 
-  return QuoteInline.CreateElement({
-    theme,
-  });
+  return QuoteInline.CreateElement({ ...MakeData({ element }), size });
 };
 
 export class UMDElementQuote extends HTMLElement {

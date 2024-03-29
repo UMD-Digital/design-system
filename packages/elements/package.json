@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "webpack",
+    "bundle": "webpack -w --env BUNDLE",
     "clean": "rm -rf dist",
     "start": "webpack -w"
   },

@@ -1,11 +1,15 @@
-import path from 'path';
+import WebpackShellPlugin from 'webpack-shell-plugin-next';
+const path = require('path');
 
-const baseConfig = {
-  mode: 'production',
-  optimization: {
+module.exports = (env) => {
+  const isBundled = env && env.BUNDLE;
+  const mode = 'production';
+
+  const optimization = {
     minimize: true,
-  },
-  stats: {
+  };
+
+  const stats = {
     assets: false,
     cached: false,
     cachedAssets: false,
@@ -19,52 +23,58 @@ const baseConfig = {
     source: true,
     timings: true,
     warnings: true,
-  },
-};
+  };
 
-const componentsFiles = {
-  index: path.resolve('source/index'),
-};
+  const entry = {
+    index: path.resolve('source/index'),
+  };
 
-const componentBundle = {
-  ...baseConfig,
-  entry: componentsFiles,
-  output: {
-    path: path.resolve('dist'),
-    filename: '[name].js',
-    umdNamedDefine: true,
-    libraryTarget: 'umd',
-  },
-  module: {
+  const module = {
     rules: [
       {
         test: /\.ts?$/,
         use: ['ts-loader'],
-        exclude: [/node_modules/],
-      },
-      {
-        test: /\.css$/i,
-        use: ['to-string-loader', 'css-loader', 'postcss-loader'],
-      },
-      {
-        test: /\.(png|jpg)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: true,
-            },
-          },
-        ],
       },
     ],
-  },
-  resolve: {
-    extensions: ['.ts', '.js', '.css'],
-    modules: [path.resolve('source'), path.resolve('../../node_modules')],
-  },
-};
+  };
 
-module.exports = () => {
-  return [componentBundle];
+  const plugins = [];
+
+  if (isBundled) {
+    plugins.push(
+      new WebpackShellPlugin({
+        onAfterDone: {
+          scripts: ['cd ../components && npx yarn build'],
+        },
+      }),
+    );
+  }
+
+  const output = {
+    path: path.resolve('dist'),
+    filename: '[name].js',
+    library: {
+      type: 'commonjs-static',
+    },
+  };
+
+  const resolve = {
+    extensions: ['.ts', '.js'],
+    modules: [
+      path.resolve('source'),
+      path.resolve('node_modules'),
+      path.resolve('../../node_modules'),
+    ],
+  };
+
+  return {
+    entry,
+    mode,
+    plugins,
+    module,
+    optimization,
+    output,
+    resolve,
+    stats,
+  };
 };

@@ -4,6 +4,7 @@ import {
   Tokens,
   Elements,
 } from '@universityofmaryland/variables';
+import { QUOTE_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 export type TypeQuoteTextContainer = {
@@ -19,11 +20,9 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
   isHeadlineLine?: boolean;
 };
 
-const { Spacing, Colors, FontSize } = Tokens;
-const { Eyebrow, Text } = Elements;
+const { Spacing, Colors } = Tokens;
 const { GridColumnAndRows } = Layout;
-const { SansExtraLarge, SansLargest, SansLarger, SansMedium, SansSmall } =
-  Typography;
+const { SansExtraLarge, SansLarger, SansMedium, SansSmall } = Typography;
 
 const MEDIUM = 400;
 
@@ -55,10 +54,6 @@ const VarationHeadlineLine = `
     border-left: 2px solid ${Colors.red};
   }
 
-  ${IS_HEADLINE_LINE}[${ATTRIBUTE_THEME}='${THEME_DARK}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-    border-left: 2px solid ${Colors.white};
-  }
-
   ${IS_HEADLINE_LINE}[${ATTRIBUTE_THEME}='${THEME_MARYLAND}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} {
     border-left: 2px solid ${Colors.white};
   }
@@ -66,10 +61,6 @@ const VarationHeadlineLine = `
 
 // prettier-ignore
 const VarationSizeLarge = `
-  ${IS_SIZE_LARGE} {
-    max-width: 905px;
-  }
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: SansExtraLarge,
@@ -81,6 +72,41 @@ const VarationSizeLarge = `
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: SansExtraLarge,
     },
   })}
+
+  ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} svg {
+    fill: ${Colors.red};
+  }
+
+  @media (max-width: 499px) {
+    ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] {
+      padding-top:  ${Spacing['2xl']};
+    }
+  }
+
+  ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 26px;
+    width: 36px;
+  }
+
+  @media (min-width: 500px) {
+    ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+      margin-left: ${Spacing['2xl']};
+      padding-left: ${Spacing.md};
+    }
+  }
+
+  @media (min-width: 500px) {
+    ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 26px;
+      width: 36px;
+    }
+  }
 `
 
 // prettier-ignore
@@ -196,7 +222,7 @@ const ActionStyles = `
 const STYLES_QUOTE_TEXT_CONTAINER = `
   .${TEXT_CONTAINER} {
     container: ${TEXT_CONTAINER_ELEMENT_NAME} / inline-size;
-    max-width: 755px;
+    width: 100%;
   }
 
   ${QuoteStyles}
@@ -248,6 +274,13 @@ export const CreateQuoteTextContainer = ({
   container.setAttribute(ATTRIBUTE_THEME, theme);
   if (isSizeLarge) container.setAttribute(ATTRIBUTE_SIZE, SIZE_LARGE);
   if (isHeadlineLine) container.setAttribute(ATTRIBUTE_HEADLINE_LINE, '');
+
+  if (isHeadlineLine && isSizeLarge && quote) {
+    const iconSpan = document.createElement('span');
+    iconSpan.innerHTML = QUOTE_ICON;
+    quote.appendChild(iconSpan);
+  }
+
   container.classList.add(TEXT_CONTAINER);
   container.appendChild(wrapper);
 

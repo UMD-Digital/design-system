@@ -34,6 +34,6 @@ export const PHONE_ICON = `<svg aria-hidden="true" id="phone-icon"  width="16" h
 
 export const PLAY_ICON = `<svg aria-hidden="true" id="play-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 96 97" style="enable-background:new 0 0 96 97;" xml:space="preserve"><path d="M21.1,16.4c0-0.8,0.8-1.2,1.5-0.9l56.7,32.1c0.7,0.4,0.7,1.4,0,1.7L22.6,81.5c-0.7,0.4-1.5-0.1-1.5-0.9V16.4z"/></svg>`;
 
-export const QUOTE_ICON = `<svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.27381 0.25L7.32143 8V15H0V8L5.32024 0.25H9.27381ZM20.5 0.25L18.5476 8V15H11.2262V8L16.5952 0.25H20.5Z"/></svg>`;
+export const QUOTE_ICON = `<svg viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.27381 0.25L7.32143 8V15H0V8L5.32024 0.25H9.27381ZM20.5 0.25L18.5476 8V15H11.2262V8L16.5952 0.25H20.5Z"/></svg>`;
 
 export const SHORT_ARROW_ICON = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M63.0351 40L36 13H60.214L95.5269 47.539L95.1858 47.8801L95.5269 48.2212L60.214 82.7602H36L62.795 56H5V40H63.0351Z" fill="black"/></svg>`;

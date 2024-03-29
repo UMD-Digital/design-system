@@ -20,6 +20,8 @@ export const CreateQuoteImageContainer = ({
 
   container.classList.add(IMAGE_CONTAINER);
 
+  container.appendChild(image);
+
   return container;
 };
 

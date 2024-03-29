@@ -19,13 +19,9 @@ const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_TYPE = 'type';
 const ATTRIBUTE_SIZE = 'size';
 const THEME_LIGHT = 'light';
-const THEME_DARK = 'dark';
-const THEME_MARYLAND = 'maryland';
 const TYPE_STATEMENT = 'statement';
-const TYPE_INLINE = 'inline';
 const TYPE_FEATURED = 'featured';
 const SIZE_NORMAL = 'normal';
-const SIZE_LARGE = 'large';
 
 const SLOTS = {
   IMAGE: 'image',
@@ -41,7 +37,6 @@ const styles = `
   
   ${Reset}
   ${QuoteElements.Text.Styles}
-  ${QuoteElements.Image.Styles}
   ${QuoteFeatured.Styles}
   ${QuoteInline.Styles}
   ${QuoteStatement.Styles}

@@ -9,6 +9,7 @@ import Footer from './footer';
 import Hero from './hero';
 import Person from './person';
 import Pathway from './pathway';
+import Quote from './quote';
 import NavDrawer from './nav-drawer';
 import NavItem from './nav-item';
 import UtilityHeader from './utility-header';
@@ -25,6 +26,7 @@ export default {
   ...Person,
   ...EventsDateSlider,
   ...Pathway,
+  ...Quote,
   ...NavDrawer,
   ...NavItem,
   ...UtilityHeader,

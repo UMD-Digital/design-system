@@ -13,6 +13,7 @@ import { Load as PersonLoader } from './components/person';
 import { Load as NavDrawerLoader } from './components/nav-drawer';
 import { Load as NavItemLoader } from './components/nav-item';
 import { Load as PathwayLoader } from './components/pathway';
+import { Load as QuoteLoader } from './components/quote';
 import { Load as StatLoader } from './components/stat';
 import LoadUmdFeeds from './feeds';
 
@@ -32,6 +33,7 @@ const LoadUmdComponents = () => {
   NavDrawerLoader();
   NavItemLoader();
   PathwayLoader();
+  QuoteLoader();
   StatLoader();
 
   LoadUmdFeeds();

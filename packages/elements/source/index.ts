@@ -12,6 +12,9 @@ import PathwayElements from './components/pathway/elements';
 import PersonBlock from './components/person/block';
 import PersonList from './components/person/list';
 import PersonTabular from './components/person/tabular';
+import QuoteFeatured from './components/quote/featured';
+import QuoteInline from './components/quote/inline';
+import QuoteSimple from './components/quote/simple';
 
 export {
   CallToAction,
@@ -28,4 +31,7 @@ export {
   PersonBlock,
   PersonList,
   PersonTabular,
+  QuoteFeatured,
+  QuoteInline,
+  QuoteSimple,
 };

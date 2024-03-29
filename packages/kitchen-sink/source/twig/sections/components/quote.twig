@@ -1,0 +1,25 @@
+{% extends '../../_layout.twig' %}
+
+{% set image = random(RecImageOptions) %}
+{% set logo = random(logoOptions) %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Quote
+      </h1>
+    </div>
+
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading type-hr">
+          <span>Default (inline)</span>
+          <span>Display Type Block</span>
+        </h3>
+
+        <umd-element-quote></umd-element-quote>
+      </div>
+    </section>
+  </section>
+{% endblock %}

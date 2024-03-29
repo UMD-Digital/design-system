@@ -1,9 +1,10 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import {
   CreatePersonTextContainer,
   TypePersonProps,
   STYLES_PERSON_TEXT,
   PERSON_TEXT_CONTAINER,
+  PERSON_NAME_CONTAINER,
   DISPLAY_TABULAR,
 } from './elements/text';
 import {
@@ -15,6 +16,7 @@ import {
   STYLES_LIST_COMMON_IMAGE,
   LIST_IMAGE_CONTAINER,
 } from '../../shared-elements/list/image';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 type TypeTabularPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
@@ -22,6 +24,8 @@ type TypeTabularPersonProps = TypePersonProps & {
 };
 
 const { Spacing, Colors } = Tokens;
+
+const { SansLarge, SansSmaller } = Typography;
 
 const SMALL = 400;
 const ATTRIBUTE_THEME = 'theme';
@@ -65,6 +69,18 @@ const OverwriteImagesStyles = `
 `;
 
 const OverwriteTextStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${IS_TEXT_CONTAINER_OVERWRITE} *`]: SansSmaller,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${IS_TEXT_CONTAINER_OVERWRITE} .${PERSON_NAME_CONTAINER}`]: SansLarge,
+    },
+  })}
+
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} {
       order: 2;

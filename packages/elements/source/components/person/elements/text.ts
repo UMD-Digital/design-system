@@ -30,7 +30,7 @@ const THEME_DARK = 'dark';
 export const DISPLAY_TABULAR = 'tabular';
 
 export const PERSON_TEXT_CONTAINER = 'person-text-container';
-const PERSON_NAME_CONTAINER = 'person-name-container';
+export const PERSON_NAME_CONTAINER = 'person-name-container';
 const PERSON_JOB_CONTAINER = 'person-job-container';
 const PERSON_ASSOCIATION_CONTAINER = 'person-association-container';
 const PERSON_PRONOUNS_CONTAINER = 'person-pronouns-container';

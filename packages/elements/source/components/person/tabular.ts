@@ -48,7 +48,6 @@ const OverwriteThemeDarkStyles = `
 const OverwriteImagesStyles = `
   ${IS_IMAGE_CONTAINER_OVERWRITE} {
     order: 1;
-    padding-right: ${Spacing.md};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
@@ -62,9 +61,17 @@ const OverwriteImagesStyles = `
     }
   }
 
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_IMAGE_CONTAINER_OVERWRITE} {
+      width: 96px;
+      margin-right: ${Spacing.md};
+    }
+  }
+
   ${IS_IMAGE_CONTAINER_OVERWRITE} img,
   ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
     width: 140px;
+    max-width: 100%;
   }
 `;
 
@@ -84,7 +91,7 @@ const OverwriteTextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} {
       order: 2;
-      width: 100%;
+      width: calc(100% - 120px);
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: ${Spacing.md};

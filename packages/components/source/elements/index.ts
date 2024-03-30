@@ -7,7 +7,7 @@ import EventList from './event/list';
 import EventElements from './event/elements';
 import PathwayHero from './pathway/hero';
 import PathwayHighlight from './pathway/highlight';
-import PathwayImage from './pathway/image';
+import PathwayDefault from './pathway/default';
 import PathwayElements from './pathway/elements';
 import PersonBlock from './person/block';
 import PersonList from './person/list';
@@ -27,7 +27,7 @@ export {
   EventElements,
   PathwayHero,
   PathwayHighlight,
-  PathwayImage,
+  PathwayDefault,
   PathwayElements,
   PersonBlock,
   PersonList,

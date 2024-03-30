@@ -3,15 +3,15 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
   CreatePathwayTextContainer,
   TypePathwayTextContainer,
-  TEXT_CONTAINER,
-  TEXT_CONTAINER_WRAPPER,
-  TEXT_CONTAINER_HEADLINE_WRAPPER,
-  TEXT_CONTAINER_TEXT_WRAPPER,
+  ELEMENT_TEXT_CONTAINER,
+  ELEMENT_TEXT_CONTAINER_WRAPPER,
+  ELEMENT_TEXT_CONTAINER_HEADLINE,
+  ELEMENT_TEXT_CONTAINER_RICH_TEXT,
 } from './elements/text';
 import {
   CreatePathwayImageContainer,
   TypePathwayHeroImageContainer,
-  PATHWAY_CONTAINER_IMAGE,
+  ELEMENT_PATHWAY_CONTAINER_IMAGE,
 } from './elements/image';
 
 type TypePathwayHeroProps = TypePathwayTextContainer &
@@ -34,20 +34,49 @@ const PATHWAY_HERO_CONTAINER = 'pathway-hero-container';
 const PATHWAY_HERO_CONTAINER_WRAPPER = 'pathway-hero-container-wrapper';
 const PATHWAY_HERO_CONTAINER_LOCK = 'pathway-hero-container-lock';
 
-const IS_WITH_IMAGE_RIGHT = `.${PATHWAY_HERO_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
-const IS_WITH_IMAGE_LEFT = `.${PATHWAY_HERO_CONTAINER}[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
+const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
+const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
+
+const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_HERO_CONTAINER} .${ELEMENT_PATHWAY_CONTAINER_IMAGE}`;
+const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
+const OVERWRITE_TEXT_HEADLINE = `.${PATHWAY_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER_HEADLINE}`;
+const OVERWRITE_TEXT_RICHTEXT = `.${PATHWAY_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`;
+
+const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
+const OVERWRITE_IMAGE_RIGHT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_WRAPPER}`;
+const OVERWRITE_IMAGE_RIGHT_CONTAINER_IMAGE = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_PATHWAY_CONTAINER_IMAGE}`;
+const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
+const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
+
+const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
+const OVERWRITE_IMAGE_LEFT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_WRAPPER}`;
+const OVERWRITE_IMAGE_LEFT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
 
 // prettier-ignore
 const OverwriteImageRightStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_HERO_CONTAINER_WRAPPER} {
+    ${OVERWRITE_IMAGE_RIGHT_WRAPPER} {
       padding-right: 50%;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_IMAGE} {
+    ${OVERWRITE_IMAGE_RIGHT_CONTAINER_IMAGE} {
       order: 2;
+      left: inherit;
+      right: 0;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT} {
+      order: 1;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT_WRAPPER} {
+      padding-left: 0;
     }
   }
 `;
@@ -55,16 +84,22 @@ const OverwriteImageRightStyles = `
 // prettier-ignore
 const OverwriteImageLeftStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_LEFT} .${PATHWAY_HERO_CONTAINER_WRAPPER} {
+    ${OVERWRITE_IMAGE_LEFT_WRAPPER} {
       padding-left: 50%;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${OVERWRITE_IMAGE_LEFT_CONTAINER_TEXT_WRAPPER} {
+      padding-right: 0;
     }
   }
 `;
 
 // prettier-ignore
-const ImageContainerStyles = `
+const OverwriteImageContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HERO_CONTAINER} .${PATHWAY_CONTAINER_IMAGE} {
+    ${OVERWRITE_IMAGE_CONTAINER} {
       width: 50%;
       position: absolute;
       top: 0;
@@ -74,77 +109,49 @@ const ImageContainerStyles = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_RIGHT} .${PATHWAY_CONTAINER_IMAGE} {
-      left: inherit;
-      right: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HERO_CONTAINER} .${PATHWAY_CONTAINER_IMAGE} img {
+    ${OVERWRITE_IMAGE_CONTAINER} img {
       min-height: inherit;
     }
   }
 `;
 
 // prettier-ignore
-const TextContainerStyles = `
+const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_WRAPPER} {
+    ${OVERWRITE_TEXT_WRAPPER} {
       padding: ${Spacing.md} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_WRAPPER} {
+    ${OVERWRITE_TEXT_WRAPPER} {
       padding: ${Spacing['4xl']} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_WRAPPER} {
+    ${OVERWRITE_TEXT_WRAPPER} {
       padding: ${Spacing['8xl']} 0;
     }
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_HEADLINE_WRAPPER}`]: CampaignExtralarge,
+      [`${OVERWRITE_TEXT_HEADLINE}`]: CampaignExtralarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_HEADLINE_WRAPPER} *`]: CampaignExtralarge,
+      [`${OVERWRITE_TEXT_HEADLINE} *`]: CampaignExtralarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER} .${TEXT_CONTAINER_TEXT_WRAPPER} *`]: SansLarger,
+      [`${OVERWRITE_TEXT_RICHTEXT} *`]: SansLarger,
     },
   })}
-`;
-
-// prettier-ignore
-const TextContainerPositionStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_RIGHT} .${TEXT_CONTAINER} {
-      order: 1;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_RIGHT} .${TEXT_CONTAINER_WRAPPER} {
-      padding-left: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE_LEFT} .${TEXT_CONTAINER_WRAPPER} {
-      padding-right: 0;
-    }
-  }
 `;
 
 const LockStyles = `
@@ -179,9 +186,8 @@ const STYLES_PATHWAY_HERO_ELEMENT = `
   }
 
   ${LockStyles}
-  ${TextContainerStyles}
-  ${ImageContainerStyles}
-  ${TextContainerPositionStyles}
+  ${OverwriteTextContainerStyles}
+  ${OverwriteImageContainerStyles}
   ${OverwriteImageRightStyles}
   ${OverwriteImageLeftStyles}
 `;

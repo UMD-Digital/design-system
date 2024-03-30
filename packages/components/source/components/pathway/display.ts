@@ -1,7 +1,7 @@
 import {
   PathwayHero,
   PathwayHighlight,
-  PathwayImage,
+  PathwayDefault,
   PathwayElements,
 } from 'elements';
 import { Reset } from 'helpers/styles';
@@ -25,7 +25,7 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${PathwayImage.Styles}
+  ${PathwayDefault.Styles}
   ${PathwayHero.Styles}
   ${PathwayHighlight.Styles}
   ${PathwayElements.Image.Styles}
@@ -95,7 +95,7 @@ export const CreateShadowDom = ({
     });
   }
 
-  return PathwayImage.CreateElement({
+  return PathwayDefault.CreateElement({
     theme,
     isImageRight,
     isImageScaled,

@@ -3,7 +3,7 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import {
   CreatePathwayTextContainer,
   TypePathwayTextContainer,
-  TEXT_CONTAINER,
+  ELEMENT_TEXT_CONTAINER,
 } from './elements/text';
 
 type TypePathwayHighlightContainer = {
@@ -30,22 +30,24 @@ const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT = 'pathway-highlight-text';
 const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION =
   'pathway-highlight-attribution';
 
+const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_HIGHLIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
+
 // prettier-ignore
-const TextContainerStyles = `
+const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${PATHWAY_HIGHLIGHT_CONTAINER} .${TEXT_CONTAINER} {
+    ${OVERWRITE_TEXT_CONTAINER} {
       padding-bottom: ${Spacing.md};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HIGHLIGHT_CONTAINER} .${TEXT_CONTAINER} {
+    ${OVERWRITE_TEXT_CONTAINER} {
       padding-right: ${Spacing['4xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${PATHWAY_HIGHLIGHT_CONTAINER} .${TEXT_CONTAINER} {
+    ${OVERWRITE_TEXT_CONTAINER} {
       padding-right: ${Spacing['6xl']};
     }
   }
@@ -151,7 +153,7 @@ const STYLES_PATHWAY_HIGHLIGHT = `
   }
 
   ${LockStyles}
-  ${TextContainerStyles}
+  ${OverwriteTextContainerStyles}
   ${HighlightContainer}
 `;
 

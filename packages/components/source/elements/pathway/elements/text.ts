@@ -21,55 +21,58 @@ const { SansLargest } = Typography;
 
 const MEDIUM = 400;
 
-const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-pathway-text-container';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
 
-export const TEXT_CONTAINER = 'umd-pathway-text-container';
-export const TEXT_CONTAINER_WRAPPER = 'umd-pathway-text-container-wrapper';
-export const TEXT_CONTAINER_HEADLINE_WRAPPER =
-  'umd-pathway-text-container-headline';
-const TEXT_CONTAINER_EYEBROW_WRAPPER = 'umd-pathway-text-container-eyebrow';
-export const TEXT_CONTAINER_TEXT_WRAPPER = 'umd-pathway-text-container-text';
-const TEXT_CONTAINER_ACTIONS_WRAPPER = 'umd-pathway-text-container-actions';
+const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-pathway-text-container';
+export const ELEMENT_TEXT_CONTAINER = 'pathway-text-container';
+export const ELEMENT_TEXT_CONTAINER_WRAPPER = 'pathway-text-container-wrapper';
+export const ELEMENT_TEXT_CONTAINER_HEADLINE = 'pathway-text-headline';
+const ELEMENT_TEXT_CONTAINER_EYEBROW = 'pathway-text-eyebrow';
+export const ELEMENT_TEXT_CONTAINER_RICH_TEXT = 'pathway-text-richtext';
+const ELEMENTS_TEXT_CONTAINER_ACTIONS = 'pathway-text-actions';
 
-const IS_THEME_DARK = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
-const IS_THEME_LIGHT = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
-const IS_THEME_MARYLAND = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
+const IS_THEME_DARK = `.${ELEMENT_TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+const IS_THEME_LIGHT = `.${ELEMENT_TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
+const IS_THEME_MARYLAND = `.${ELEMENT_TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
+
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_LIGHT_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_THEME_LIGHT}`;
+const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_THEME_MARYLAND}`;
 
 // prettier-ignore
 const VarationThemeDark = `
-  ${IS_THEME_DARK} * {
+  ${OVERWRITE_THEME_DARK_CONTAINER} * {
     color: ${Colors.white};
   }
 `
 
 // prettier-ignore
 const VarationThemeLight = `
-  ${IS_THEME_LIGHT} * {
+  ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
     color: ${Colors.black};
   }
 `
 
 // prettier-ignore
 const VarationThemeMaryland = `
-  ${IS_THEME_MARYLAND} * {
+  ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
     color: ${Colors.white};
   }
 `
 
 // prettier-ignore
 const EyebrowStyles = `
-  .${TEXT_CONTAINER_EYEBROW_WRAPPER} {
+  .${ELEMENT_TEXT_CONTAINER_EYEBROW} {
     margin-bottom: ${Spacing.sm};
     color: ${Colors.black} !important;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_EYEBROW_WRAPPER}`]: Eyebrow.Ribbon,
+      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: Eyebrow.Ribbon,
     },
   })}
 `;
@@ -78,17 +81,17 @@ const EyebrowStyles = `
 const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_HEADLINE_WRAPPER}`]: SansLargest,
+      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE}`]: SansLargest,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_HEADLINE_WRAPPER} *`]: SansLargest,
+      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE} *`]: SansLargest,
     },
   })}
 
-  .${TEXT_CONTAINER_HEADLINE_WRAPPER} {
+  .${ELEMENT_TEXT_CONTAINER_HEADLINE} {
     color: ${Colors.black};
     font-weight: 800;
     text-transform: uppercase;
@@ -97,23 +100,23 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  * + .${TEXT_CONTAINER_TEXT_WRAPPER} {
+  * + .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} {
     margin-top: ${Spacing.sm};
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    * + .${TEXT_CONTAINER_TEXT_WRAPPER} {
+    * + .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} {
       margin-top: ${Spacing.md};
     }
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_TEXT_WRAPPER}`]: Text.RichText,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: Text.RichText,
     },
   })}
 
-  .${TEXT_CONTAINER_TEXT_WRAPPER} * {
+  .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} * {
     font-size: ${FontSize['lg']};
     line-height: 1.5em;
     color: ${Colors.gray.dark};
@@ -122,26 +125,26 @@ const TextStyles = `
 
 // prettier-ignore
 const ActionStyles = `
-  * + .${TEXT_CONTAINER_ACTIONS_WRAPPER} {
+  * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
     margin-top: ${Spacing.sm};
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    * + .${TEXT_CONTAINER_ACTIONS_WRAPPER} {
+    * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
       margin-top: ${Spacing.lg};
     }
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ACTIONS_WRAPPER}`]: GridColumnAndRows['.mobile-tablet'],
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
     },
   })}
 `;
 
 // prettier-ignore
 const STYLES_PATHWAY_TEXT_CONTAINER = `
-  .${TEXT_CONTAINER} {
+  .${ELEMENT_TEXT_CONTAINER} {
     container: ${TEXT_CONTAINER_ELEMENT_NAME} / inline-size;
     display: flex;
     align-items: center;
@@ -167,30 +170,30 @@ export const CreatePathwayTextContainer = ({
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
 
-  wrapper.classList.add(TEXT_CONTAINER_WRAPPER);
+  wrapper.classList.add(ELEMENT_TEXT_CONTAINER_WRAPPER);
 
   if (eyebrow) {
-    eyebrow.classList.add(TEXT_CONTAINER_EYEBROW_WRAPPER);
+    eyebrow.classList.add(ELEMENT_TEXT_CONTAINER_EYEBROW);
     wrapper.appendChild(eyebrow);
   }
 
   if (headline) {
-    headline.classList.add(TEXT_CONTAINER_HEADLINE_WRAPPER);
+    headline.classList.add(ELEMENT_TEXT_CONTAINER_HEADLINE);
     wrapper.appendChild(headline);
   }
 
   if (text) {
-    text.classList.add(TEXT_CONTAINER_TEXT_WRAPPER);
+    text.classList.add(ELEMENT_TEXT_CONTAINER_RICH_TEXT);
     wrapper.appendChild(text);
   }
 
   if (action) {
-    action.classList.add(TEXT_CONTAINER_ACTIONS_WRAPPER);
+    action.classList.add(ELEMENTS_TEXT_CONTAINER_ACTIONS);
     wrapper.appendChild(action);
   }
 
   container.setAttribute(ATTRIBUTE_THEME, theme);
-  container.classList.add(TEXT_CONTAINER);
+  container.classList.add(ELEMENT_TEXT_CONTAINER);
   container.appendChild(wrapper);
 
   return container;

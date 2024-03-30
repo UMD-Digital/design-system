@@ -31,7 +31,7 @@ export const TEXT_CONTAINER_QUOTE_WRAPPER = 'quote-container-quote';
 const TEXT_CONTAINER_ATTRIBUTION_WRAPPER = 'quote-container-attribution';
 export const TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER =
   'quote-container-text-attribution-sub-text';
-const TEXT_CONTAINER_ACTIONS_WRAPPER = 'quote-container-actions';
+const ELEMENTS_TEXT_CONTAINER_ACTIONS = 'quote-container-actions';
 
 const IS_THEME_DARK = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_MARYLAND = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
@@ -154,13 +154,13 @@ const AttributionSubTextStyles = `
 
 // prettier-ignore
 const ActionStyles = `
-  * + .${TEXT_CONTAINER_ACTIONS_WRAPPER} {
+  * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
     margin-top: ${Spacing.sm};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ACTIONS_WRAPPER}`]: GridColumnAndRows['.mobile-tablet'],
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
     },
   })}
 `;
@@ -216,7 +216,7 @@ export const CreateQuoteTextContainer = ({
   }
 
   if (action) {
-    action.classList.add(TEXT_CONTAINER_ACTIONS_WRAPPER);
+    action.classList.add(ELEMENTS_TEXT_CONTAINER_ACTIONS);
     wrapper.appendChild(action);
   }
 

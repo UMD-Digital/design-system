@@ -12,12 +12,14 @@ export type TypePathwayHeroImageContainer = TypeImageProps;
 const ATTRIBUTE_IMAGE_SCALED = 'data-image-scaled';
 const IS_WITHOUT_IMAGE_SCALED = `[${ATTRIBUTE_IMAGE_SCALED}="false"]`;
 
-export const PATHWAY_CONTAINER_IMAGE = 'pathway-container-image-column';
-const PATHWAY_CONTAINER_IMAGE_WRAPPER = 'pathway-container-image-wrapper';
+export const ELEMENT_PATHWAY_CONTAINER_IMAGE = 'pathway-image-container';
+const ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER = 'pathway-image-container-image';
+
+const OVERWRITE_SCALED_IMAGE_CONTAINER = `.${ELEMENT_PATHWAY_CONTAINER_IMAGE}${IS_WITHOUT_IMAGE_SCALED}`;
 
 // prettier-ignore
 const ImageSizeStyles = `
-  .${PATHWAY_CONTAINER_IMAGE}${IS_WITHOUT_IMAGE_SCALED} img {
+  ${OVERWRITE_SCALED_IMAGE_CONTAINER} img {
     object-fit: contain;
     height: inherit;
     min-height: inherit;
@@ -26,21 +28,21 @@ const ImageSizeStyles = `
 
 // prettier-ignore
 const STYLES_PATHWAY_IMAGE_CONTAINER = `
-  .${PATHWAY_CONTAINER_IMAGE} {
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} {
     z-index: 99;
     position: relative;
   }
 
-  .${PATHWAY_CONTAINER_IMAGE} * {
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} * {
     height: 100%;
   }
 
-  .${PATHWAY_CONTAINER_IMAGE} img {
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} img {
     object-fit: cover;
     object-position: center;
   }
 
-  .${PATHWAY_CONTAINER_IMAGE_WRAPPER} > * {
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER} > * {
     display: flex;
   }
 
@@ -54,7 +56,7 @@ export const CreatePathwayImageContainer = (
   const wrapper = document.createElement('div');
   const { image } = element;
 
-  wrapper.classList.add(PATHWAY_CONTAINER_IMAGE_WRAPPER);
+  wrapper.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER);
 
   if ('isImageScaled' in element) {
     if (!element.isImageScaled) {
@@ -65,7 +67,7 @@ export const CreatePathwayImageContainer = (
   if (image) {
     wrapper.appendChild(image);
 
-    container.classList.add(PATHWAY_CONTAINER_IMAGE);
+    container.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE);
     container.appendChild(wrapper);
 
     return container;

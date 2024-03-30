@@ -63,10 +63,6 @@ const OverwriteThemeMaryland = `
 
 // prettier-ignore
 const OverwriteSizeLarge = `
-  ${IS_SIZE_LARGE_CONTAINER} {
-    max-width: 905px;
-  }
-
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_CONTAINER} .${QUOTE_INLINE_CONTAINER_WRAPPER} {
       gap: ${Spacing.xl};
@@ -212,7 +208,6 @@ const ImageContainer = `
 const STYLES_QUOTE_INLINE_ELEMENT = `
   .${QUOTE_INLINE_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: 755px;
     width: 100%;
   }
 

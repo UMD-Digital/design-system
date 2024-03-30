@@ -6,8 +6,8 @@ import {
 import { EventElements } from 'elements';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
-import { ELEMENT_TYPE } from 'components/events-date';
-import { SLOTS, VARIABLES, REFERENCES } from 'components/events-date/globals';
+import { ELEMENT_TYPE } from 'components/event-date';
+import { SLOTS, VARIABLES, REFERENCES } from 'components/event-date/globals';
 
 const { FontSize, Spacing } = Tokens;
 const { Link } = Animations;

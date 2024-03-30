@@ -1,49 +1,43 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  CreatListContainer,
-  STYLES_LIST_CONTAINER,
-  LIST_CONTAINER_WRAPPER,
-} from '../list/container';
-import { CreateImageContainer, STYLES_LIST_COMMON_IMAGE } from '../list/image';
-import {
-  CreateTextContainer,
-  TypeCommonTextAttributes,
-  STYLES_LIST_COMMON_TEXT,
-  LIST_HEADLINE_WRAPPER,
+import ListImageContainer from '../list/image';
+import ListTextContainer, {
+  TypeListText,
+  ELEMENT_LIST_HEADLINE,
 } from '../list/text';
+import ListContainer, {
+  ELEMENT_LIST_CONTAINER_WRAPPER,
+} from '../list/container';
 
-type TypeListEventProps = TypeCommonTextAttributes & {
+type TypeListEventProps = TypeListText & {
   image?: HTMLImageElement | null;
-  theme?: string;
   dateBlock: HTMLElement;
   eventDetails: HTMLElement;
 };
 
 const { Spacing } = Tokens;
 
-const ELEMENT_NAME = 'umd-list-event';
-
 const SMALL = 400;
 const MEDIUM = 500;
 
-const ELEMENT_LIST_CONTAINER = 'umd-list-event-container';
-const ELEMENT_LIST_DATE_BLOCK_CONTAINER = 'umd-list-event-date-block-container';
-const ELEMENT_LIST_DETAILS_WRAPPER = 'umd-list-event-details-wrapper';
+const ELEMENT_NAME = 'umd-list-event';
+const ELEMENT_EVENT_LIST_CONTAINER = 'event-list-container';
+const ELEMENT_EVENT_LIST_DATE_BLOCK = 'event-list-date-block';
+const ELEMENT_EVENT_LIST_DETAILS = 'event-list-details';
 
 // prettier-ignore
 const DateBlockContainerStyles = `
-  .${ELEMENT_LIST_DATE_BLOCK_CONTAINER} {
+  .${ELEMENT_EVENT_LIST_DATE_BLOCK} {
     width: ${Spacing.xl};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${ELEMENT_LIST_DATE_BLOCK_CONTAINER} {
+    .${ELEMENT_EVENT_LIST_DATE_BLOCK} {
       display: none;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${ELEMENT_LIST_DATE_BLOCK_CONTAINER} {
+    .${ELEMENT_EVENT_LIST_DATE_BLOCK} {
       width: ${Spacing['6xl']};
     }
   }
@@ -51,11 +45,11 @@ const DateBlockContainerStyles = `
 
 // prettier-ignore
 const DetailsRowStyles = `
-  .${ELEMENT_LIST_DETAILS_WRAPPER} {
+  .${ELEMENT_EVENT_LIST_DETAILS} {
     display: block;
   }
 
-  * + .${ELEMENT_LIST_DETAILS_WRAPPER} {
+  * + .${ELEMENT_EVENT_LIST_DETAILS} {
     margin-top: ${Spacing.min};
     display: block;
   }
@@ -63,17 +57,17 @@ const DetailsRowStyles = `
 
 // prettier-ignore
 const STYLES_EVENT_LIST_ELEMENT = `
-  .${ELEMENT_LIST_CONTAINER} {
+  .${ELEMENT_EVENT_LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  .${ELEMENT_LIST_CONTAINER} + * {
+  .${ELEMENT_EVENT_LIST_CONTAINER} + * {
     margin-top: ${Spacing.md}; 
   }
 
-  ${STYLES_LIST_CONTAINER}
-  ${STYLES_LIST_COMMON_TEXT}
-  ${STYLES_LIST_COMMON_IMAGE}
+  ${ListContainer.Styles}
+  ${ListTextContainer.Styles}
+  ${ListImageContainer.Styles}
   ${DateBlockContainerStyles}
   ${DetailsRowStyles}
 `;
@@ -81,9 +75,11 @@ const STYLES_EVENT_LIST_ELEMENT = `
 const CreateEventListElement = (element: TypeListEventProps) => {
   const { theme, image, dateBlock, eventDetails } = element;
   const elementContainer = document.createElement('div');
-  const textContainer = CreateTextContainer(element);
-  const imageContainer = image ? CreateImageContainer({ image }) : null;
-  const container = CreatListContainer({
+  const textContainer = ListTextContainer.CreateElement(element);
+  const imageContainer = image
+    ? ListImageContainer.CreateElement({ image })
+    : null;
+  const container = ListContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,
@@ -91,25 +87,27 @@ const CreateEventListElement = (element: TypeListEventProps) => {
 
   if (dateBlock) {
     const containerWrapper = container.querySelector(
-      `.${LIST_CONTAINER_WRAPPER}`,
+      `.${ELEMENT_LIST_CONTAINER_WRAPPER}`,
     ) as HTMLElement;
-    const dateBlockContainer = document.createElement('div');
+    if (containerWrapper) {
+      const dateBlockContainer = document.createElement('div');
 
-    dateBlockContainer.classList.add(ELEMENT_LIST_DATE_BLOCK_CONTAINER);
-    dateBlockContainer.appendChild(dateBlock);
-    containerWrapper.prepend(dateBlockContainer);
+      dateBlockContainer.classList.add(ELEMENT_EVENT_LIST_DATE_BLOCK);
+      dateBlockContainer.appendChild(dateBlock);
+      containerWrapper.prepend(dateBlockContainer);
+    }
   }
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
-      `.${LIST_HEADLINE_WRAPPER}`,
+      `.${ELEMENT_LIST_HEADLINE}`,
     ) as HTMLElement;
-    eventDetails.classList.add(ELEMENT_LIST_DETAILS_WRAPPER);
+    eventDetails.classList.add(ELEMENT_EVENT_LIST_DETAILS);
     headline.appendChild(eventDetails);
   }
 
   elementContainer.appendChild(container);
-  elementContainer.classList.add(ELEMENT_LIST_CONTAINER);
+  elementContainer.classList.add(ELEMENT_EVENT_LIST_CONTAINER);
 
   return elementContainer;
 };

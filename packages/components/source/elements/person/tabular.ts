@@ -1,17 +1,13 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import PersonTextContainer, {
   TypePersonProps,
   ELEMENT_PERSON_TEXT_CONTAINER,
   ELEMENT_PERSON_NAME_CONTAINER,
   DISPLAY_TABULAR,
 } from './elements/text';
-import { CreatListContainer, STYLES_LIST_CONTAINER } from '../list/container';
-import {
-  CreateImageContainer,
-  STYLES_LIST_COMMON_IMAGE,
-  LIST_IMAGE_CONTAINER,
-} from '../list/image';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import ImageContainer, { ELEMENT_LIST_IMAGE_CONTAINER } from '../list/image';
+import ListContainer, { ELEMENT_LIST_CONTAINER } from '../list/container';
 
 type TypeTabularPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
@@ -19,34 +15,39 @@ type TypeTabularPersonProps = TypePersonProps & {
 };
 
 const { Spacing, Colors } = Tokens;
-
 const { SansLarge, SansSmaller } = Typography;
 
 const SMALL = 400;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-const ELEMENT_NAME = 'umd-tabluar-person';
-const ELEMENT_PERSON_TABULAR_CONTAINER = 'umd-tabluar-person-container';
-const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LIST_IMAGE_CONTAINER}`;
-const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${ELEMENT_PERSON_TEXT_CONTAINER}`;
-const IS_THEME_DARK = `.${ELEMENT_PERSON_TABULAR_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const ELEMENT_NAME = 'umd-person-tabluar';
+const ELEMENT_PERSON_TABULAR_CONTAINER = 'person-tabluar-container';
+
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${ELEMENT_LIST_CONTAINER} .${ELEMENT_LIST_IMAGE_CONTAINER}`;
+const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${ELEMENT_LIST_CONTAINER} .${ELEMENT_PERSON_TEXT_CONTAINER}`;
+const OVERWRITE_PERSON_NAME = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${ELEMENT_LIST_CONTAINER} .${ELEMENT_PERSON_NAME_CONTAINER}`;
+
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_LIST_IMAGE_CONTAINER}`;
 
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_THEME_DARK} .${LIST_IMAGE_CONTAINER} {
+    ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
       background-color: ${Colors.gray.dark};
     }
   }
 `;
 
 const OverwriteImagesStyles = `
-  ${IS_IMAGE_CONTAINER_OVERWRITE} {
+  ${OVERWRITE_IMAGE_CONTAINER} {
     order: 1;
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} {
+    ${OVERWRITE_IMAGE_CONTAINER} {
       float: none;
       width: 100%;
       margin-bottom: ${Spacing.md};
@@ -57,14 +58,14 @@ const OverwriteImagesStyles = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} {
+    ${OVERWRITE_IMAGE_CONTAINER} {
       width: 96px;
       margin-right: ${Spacing.md};
     }
   }
 
-  ${IS_IMAGE_CONTAINER_OVERWRITE} img,
-  ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
+  ${OVERWRITE_IMAGE_CONTAINER} img,
+  ${OVERWRITE_IMAGE_CONTAINER} svg {
     width: 140px;
     max-width: 100%;
   }
@@ -73,19 +74,18 @@ const OverwriteImagesStyles = `
 const OverwriteTextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_TEXT_CONTAINER_OVERWRITE} *`]: SansSmaller,
+      [`${OVERWRITE_TEXT_CONTAINER} *`]: SansSmaller,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_TEXT_CONTAINER_OVERWRITE} .${ELEMENT_PERSON_NAME_CONTAINER}`]:
-        SansLarge,
+      [`${OVERWRITE_PERSON_NAME}`]: SansLarge,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_TEXT_CONTAINER_OVERWRITE} {
+    ${OVERWRITE_TEXT_CONTAINER} {
       order: 2;
       width: calc(100% - 120px);
       display: grid;
@@ -95,7 +95,7 @@ const OverwriteTextStyles = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_TEXT_CONTAINER_OVERWRITE} > *:nth-of-type(2) {
+    ${OVERWRITE_TEXT_CONTAINER} > *:nth-of-type(2) {
       justify-self: end;
     }
   }
@@ -111,9 +111,9 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
     margin-top: ${Spacing.md}; 
   }
 
-  ${STYLES_LIST_CONTAINER}
   ${PersonTextContainer.Styles}
-  ${STYLES_LIST_COMMON_IMAGE}
+  ${ImageContainer.Styles}
+  ${ListContainer.Styles}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
   ${OverwriteThemeDarkStyles}
@@ -126,8 +126,8 @@ const CreatePersonTabularElement = (element: TypeTabularPersonProps) => {
     displayType: DISPLAY_TABULAR,
   });
   const elementContainer = document.createElement('div');
-  const imageContainer = image ? CreateImageContainer({ image }) : null;
-  const container = CreatListContainer({
+  const imageContainer = image ? ImageContainer.CreateElement({ image }) : null;
+  const container = ListContainer.CreateElement({
     personContainer,
     imageContainer,
     theme,

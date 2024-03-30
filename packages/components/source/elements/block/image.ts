@@ -1,4 +1,4 @@
-export const ELEMENT_BLOCK_IMAGE_CONTAINER = 'umd-block-image-container';
+export const ELEMENT_BLOCK_IMAGE_CONTAINER = 'block-image-container';
 
 // prettier-ignore
 const STYLES_BLOCK_IMAGE_CONTAINER = `

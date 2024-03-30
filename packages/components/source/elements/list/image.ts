@@ -1,34 +1,35 @@
-export const LIST_IMAGE_CONTAINER = 'umd-list-image-container';
+export const ELEMENT_LIST_IMAGE_CONTAINER = 'list-image-container';
 
 // prettier-ignore
-export const STYLES_LIST_COMMON_IMAGE = `
-  .${LIST_IMAGE_CONTAINER} a {
+const STYLES_LIST_IMAGE_CONTAINER = `
+  .${ELEMENT_LIST_IMAGE_CONTAINER} a {
     display: block;
     overflow: hidden;
   }
 
-  .${LIST_IMAGE_CONTAINER} img {
+  .${ELEMENT_LIST_IMAGE_CONTAINER} img {
     object-fit: cover;
     object-position: center;
     transform: scale(1);
     transition: transform 0.5s;
   }
 
-  .${LIST_IMAGE_CONTAINER} a:hover img,
-  .${LIST_IMAGE_CONTAINER} a:focus img {
+  .${ELEMENT_LIST_IMAGE_CONTAINER} a:hover img,
+  .${ELEMENT_LIST_IMAGE_CONTAINER} a:focus img {
     transform: scale(1.025);
   }
 `;
 
-export const CreateImageContainer = ({
-  image,
-}: {
-  image: HTMLImageElement;
-}) => {
+const CreateListImageContainer = ({ image }: { image: HTMLImageElement }) => {
   const container = document.createElement('div');
 
-  container.classList.add(LIST_IMAGE_CONTAINER);
+  container.classList.add(ELEMENT_LIST_IMAGE_CONTAINER);
   container.appendChild(image);
 
   return container;
+};
+
+export default {
+  CreateElement: CreateListImageContainer,
+  Styles: STYLES_LIST_IMAGE_CONTAINER,
 };

@@ -1,50 +1,47 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { CreatListContainer, STYLES_LIST_CONTAINER } from '../list/container';
-import { CreateImageContainer, STYLES_LIST_COMMON_IMAGE } from '../list/image';
-import {
-  CreateTextContainer,
-  TypeCommonTextAttributes,
-  STYLES_LIST_COMMON_TEXT,
-} from '../list/text';
+import ListImageContainer from '../list/image';
+import ListTextContainer, { TypeListText } from '../list/text';
+import ListContainer from '../list/container';
 
-type TypeListCardProps = TypeCommonTextAttributes & {
+type TypeListCardProps = TypeListText & {
   image?: HTMLImageElement | null;
-  theme?: string;
 };
 
 const { Spacing } = Tokens;
 
-const ELEMENT_NAME = 'umd-list-standard';
-const ELEMENT_LIST_CONTAINER = 'umd-list-standard-container';
+const ELEMENT_NAME = 'umd-card-list';
+const ELEMENT_LIST_CARD_CONTAINER = 'card-list-container';
 
 // prettier-ignore
 const STYLES_LIST_CARD_ELEMENT = `
-  .${ELEMENT_LIST_CONTAINER} {
+  .${ELEMENT_LIST_CARD_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
   
-  .${ELEMENT_LIST_CONTAINER} + * {
+  .${ELEMENT_LIST_CARD_CONTAINER} + * {
     margin-top: ${Spacing.md}; 
   }
 
-  ${STYLES_LIST_CONTAINER}
-  ${STYLES_LIST_COMMON_TEXT}
-  ${STYLES_LIST_COMMON_IMAGE}
+  ${ListTextContainer.Styles}
+  ${ListImageContainer.Styles}
+  ${ListContainer.Styles}
 `;
 
 const CreateCardListElement = (element: TypeListCardProps) => {
   const { theme, image } = element;
-  const textContainer = CreateTextContainer(element);
+  const textContainer = ListTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
-  const imageContainer = image ? CreateImageContainer({ image }) : null;
-  const container = CreatListContainer({
+  const imageContainer = image
+    ? ListImageContainer.CreateElement({ image })
+    : null;
+  const container = ListContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,
   });
 
   elementContainer.appendChild(container);
-  elementContainer.classList.add(ELEMENT_LIST_CONTAINER);
+  elementContainer.classList.add(ELEMENT_LIST_CARD_CONTAINER);
 
   return elementContainer;
 };

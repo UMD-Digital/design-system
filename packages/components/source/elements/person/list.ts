@@ -3,12 +3,8 @@ import PersonTextContainer, {
   TypePersonProps,
   ELEMENT_PERSON_TEXT_CONTAINER,
 } from './elements/text';
-import { CreatListContainer, STYLES_LIST_CONTAINER } from '../list/container';
-import {
-  CreateImageContainer,
-  STYLES_LIST_COMMON_IMAGE,
-  LIST_IMAGE_CONTAINER,
-} from '../list/image';
+import ImageContainer, { ELEMENT_LIST_IMAGE_CONTAINER } from '../list/image';
+import ListContainer, { ELEMENT_LIST_CONTAINER } from '../list/container';
 
 type TypeListPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
@@ -21,28 +17,33 @@ const SMALL = 400;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-const ELEMENT_NAME = 'umd-list-person';
-const ELEMENT_PERSON_LIST_CONTAINER = 'umd-list-person-container';
-const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LIST_IMAGE_CONTAINER}`;
-const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${ELEMENT_PERSON_TEXT_CONTAINER}`;
-const IS_THEME_DARK = `.${ELEMENT_PERSON_LIST_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const ELEMENT_NAME = 'umd-person-list';
+const ELEMENT_PERSON_LIST_CONTAINER = 'person-list-container';
+
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER} .${ELEMENT_LIST_CONTAINER} .${ELEMENT_LIST_IMAGE_CONTAINER}`;
+const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER} .${ELEMENT_LIST_CONTAINER} .${ELEMENT_PERSON_TEXT_CONTAINER}`;
+
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_LIST_IMAGE_CONTAINER}`;
 
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_THEME_DARK} .${LIST_IMAGE_CONTAINER} {
+    ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
       background-color: ${Colors.gray.dark};
     }
   }
 `;
 
 const OverwriteImagesStyles = `
-  ${IS_IMAGE_CONTAINER_OVERWRITE} {
+  ${OVERWRITE_IMAGE_CONTAINER} {
     order: 1;
     padding-right: ${Spacing.md};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} {
+    ${OVERWRITE_IMAGE_CONTAINER} {
       float: none;
       width: 100%;
       margin-bottom: ${Spacing.md};
@@ -53,15 +54,15 @@ const OverwriteImagesStyles = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} img,
-    ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
+    ${OVERWRITE_IMAGE_CONTAINER} img,
+    ${OVERWRITE_IMAGE_CONTAINER} svg {
       width: 140px;
     }
   }
 `;
 
 const OverwriteTextStyles = `
-  ${IS_TEXT_CONTAINER_OVERWRITE} {
+  ${OVERWRITE_TEXT_CONTAINER} {
     order: 2;
     width: 100%;
   }
@@ -77,9 +78,9 @@ const STYLES_PERSON_LIST_ELEMENT = `
     margin-top: ${Spacing.md}; 
   }
 
-  ${STYLES_LIST_CONTAINER}
   ${PersonTextContainer.Styles}
-  ${STYLES_LIST_COMMON_IMAGE}
+  ${ImageContainer.Styles}
+  ${ListContainer.Styles}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
   ${OverwriteThemeDarkStyles}
@@ -89,8 +90,8 @@ const CreatePersonListElement = (element: TypeListPersonProps) => {
   const { theme, image } = element;
   const personContainer = PersonTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
-  const imageContainer = image ? CreateImageContainer({ image }) : null;
-  const container = CreatListContainer({
+  const imageContainer = image ? ImageContainer.CreateElement({ image }) : null;
+  const container = ListContainer.CreateElement({
     personContainer,
     imageContainer,
     theme,

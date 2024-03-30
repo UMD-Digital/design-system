@@ -15,16 +15,16 @@ type TypeBlockEventProps = TypeBlockTextContainter &
 const { Spacing } = Tokens;
 
 const ELEMENT_NAME = 'umd-block-event';
-const ELEMENT_BLOCK_CONTAINER = 'block-event-container';
-const ELEMENT_BLOCK_DETAILS_WRAPPER = 'block-event-details-wrapper';
+const ELEMENT_EVENT_BLOCK_CONTAINER = 'block-event-container';
+const ELEMENT_EVENT_BLOCK_DETAILS = 'block-event-details-wrapper';
 
 // prettier-ignore
 const DetailsRowStyles = `
-  .${ELEMENT_BLOCK_DETAILS_WRAPPER} {
+  .${ELEMENT_EVENT_BLOCK_DETAILS} {
     display: block;
   }
 
-  * + .${ELEMENT_BLOCK_DETAILS_WRAPPER} {
+  * + .${ELEMENT_EVENT_BLOCK_DETAILS} {
     margin-top: ${Spacing.min};
     display: block;
   }
@@ -32,7 +32,7 @@ const DetailsRowStyles = `
 
 // prettier-ignore
 const STYLES_EVENT_BLOCK_ELEMENT = `
-  .${ELEMENT_BLOCK_CONTAINER} {
+  .${ELEMENT_EVENT_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
@@ -67,12 +67,12 @@ const CreateEventBlockElement = (element: TypeBlockEventProps) => {
     const headline = textContainer.querySelector(
       `.${ELEMENT_BLOCK_TEXT_HEADLINE}`,
     ) as HTMLElement;
-    eventDetails.classList.add(ELEMENT_BLOCK_DETAILS_WRAPPER);
+    eventDetails.classList.add(ELEMENT_EVENT_BLOCK_DETAILS);
     headline.appendChild(eventDetails);
   }
 
   elementContainer.appendChild(container);
-  elementContainer.classList.add(ELEMENT_BLOCK_CONTAINER);
+  elementContainer.classList.add(ELEMENT_EVENT_BLOCK_CONTAINER);
 
   return elementContainer;
 };

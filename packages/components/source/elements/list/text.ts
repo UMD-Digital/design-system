@@ -6,12 +6,13 @@ import {
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
-export type TypeCommonTextAttributes = {
+export type TypeListText = {
   headline?: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
+  theme?: string;
 };
 
 const { Colors, Spacing } = Tokens;
@@ -21,114 +22,114 @@ const { SansLarger, SansMin, Eyebrow } = Typography;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-export const LIST_TEXT_CONTAINER = 'list-text-container';
-export const LIST_EYEBROW_WRAPPER = 'list-eyebrow-wrapper';
-export const LIST_HEADLINE_WRAPPER = 'list-headline-wrapper';
-export const LIST_TEXT_WRAPPER = 'list-text-wrapper';
-export const LIST_DATE_WRAPPER = 'list-date-wrapper';
-export const LIST_ACTIONS_WRAPPER = 'list-actions-wrapper';
+export const ELEMENT_LIST_TEXT_CONTAINER = 'list-text-container';
+export const ELEMENT_LIST_EYEBROW = 'list-eyebrow-wrapper';
+export const ELEMENT_LIST_HEADLINE = 'list-headline-wrapper';
+export const ELEMENT_LIST_RICH_TEXT = 'list-text-wrapper';
+export const ELEMENT_LIST_DATE = 'list-date-wrapper';
+export const ELEMENT_LIST_ACTIONS = 'list-actions-wrapper';
 
-const IS_THEME_DARK = `.${LIST_TEXT_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_THEME_DARK = `.${ELEMENT_LIST_TEXT_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 // prettier-ignore
 const DarkThemeStyles = `
-  ${IS_THEME_DARK} .${LIST_EYEBROW_WRAPPER} {
+  ${IS_THEME_DARK} .${ELEMENT_LIST_EYEBROW} {
     color: ${Colors.white};
   }
 
-  ${IS_THEME_DARK} .${LIST_HEADLINE_WRAPPER} {
+  ${IS_THEME_DARK} .${ELEMENT_LIST_HEADLINE} {
     color: ${Colors.white};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK} .${LIST_HEADLINE_WRAPPER} a`]:
+      [`${IS_THEME_DARK} .${ELEMENT_LIST_HEADLINE} a`]:
       Link.LineSlideUnder.white
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK} .${LIST_HEADLINE_WRAPPER}`]:
+      [`${IS_THEME_DARK} .${ELEMENT_LIST_HEADLINE}`]:
       Link.LineSlideUnder.white
     },
   })}
 
-  ${IS_THEME_DARK} .${LIST_TEXT_WRAPPER} {
+  ${IS_THEME_DARK} .${ELEMENT_LIST_RICH_TEXT} {
     color: ${Colors.white};
   }
 
-  ${IS_THEME_DARK} .${LIST_DATE_WRAPPER} {
+  ${IS_THEME_DARK} .${ELEMENT_LIST_DATE} {
     color: ${Colors.gray.lighter};
   }
 `
 
 // prettier-ignore
 const EyebrowStyles = `
-  * + .${LIST_EYEBROW_WRAPPER} {
+  * + .${ELEMENT_LIST_EYEBROW} {
     margin-top: ${Spacing.min}
   }
 
-  .${LIST_EYEBROW_WRAPPER} {
+  .${ELEMENT_LIST_EYEBROW} {
     color: ${Colors.black};
   }
 
-  .${LIST_EYEBROW_WRAPPER} * {
+  .${ELEMENT_LIST_EYEBROW} * {
     color: currentColor;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_EYEBROW_WRAPPER}`]: Eyebrow,
+      [`.${ELEMENT_LIST_EYEBROW}`]: Eyebrow,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_EYEBROW_WRAPPER} *`]: Eyebrow,
+      [`.${ELEMENT_LIST_EYEBROW} *`]: Eyebrow,
     },
   })}
 
-  .${LIST_EYEBROW_WRAPPER} a:hover,
-  .${LIST_EYEBROW_WRAPPER} a:focus {
+  .${ELEMENT_LIST_EYEBROW} a:hover,
+  .${ELEMENT_LIST_EYEBROW} a:focus {
     text-decoration: underline;
   }
 `;
 
 // prettier-ignore
 const HeadlineStyles = `
-  * + .${LIST_HEADLINE_WRAPPER} {
+  * + .${ELEMENT_LIST_HEADLINE} {
     margin-top: ${Spacing.min}
   }
 
-  .${LIST_HEADLINE_WRAPPER} {
+  .${ELEMENT_LIST_HEADLINE} {
     color: ${Colors.black};
   }
 
-  .${LIST_HEADLINE_WRAPPER} * {
+  .${ELEMENT_LIST_HEADLINE} * {
     color: currentColor;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_HEADLINE_WRAPPER}`]: SansLarger,
+      [`.${ELEMENT_LIST_HEADLINE}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_HEADLINE_WRAPPER} *`]: SansLarger,
+      [`.${ELEMENT_LIST_HEADLINE} *`]: SansLarger,
     },
   })}
 
-  .${LIST_HEADLINE_WRAPPER}, 
-  .${LIST_HEADLINE_WRAPPER} * {
+  .${ELEMENT_LIST_HEADLINE}, 
+  .${ELEMENT_LIST_HEADLINE} * {
     font-weight: 700;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_HEADLINE_WRAPPER} a`]:
+      [`.${ELEMENT_LIST_HEADLINE} a`]:
       Link.LineSlideUnder.black,
     },
   })}
@@ -136,42 +137,42 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  * + .${LIST_TEXT_WRAPPER} {
+  * + .${ELEMENT_LIST_RICH_TEXT} {
     margin-top: ${Spacing.min};
     display: block;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_TEXT_WRAPPER}`]: Typography.SansSmall,
+      [`.${ELEMENT_LIST_RICH_TEXT}`]: Typography.SansSmall,
     },
   })}
 
-  .${LIST_TEXT_WRAPPER} {
+  .${ELEMENT_LIST_RICH_TEXT} {
     color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_TEXT_WRAPPER} *`]: Typography.SansSmall,
+      [`.${ELEMENT_LIST_RICH_TEXT} *`]: Typography.SansSmall,
     },
   })}
 
-  .${LIST_TEXT_WRAPPER} {
+  .${ELEMENT_LIST_RICH_TEXT} {
     color: ${Colors.gray.dark};
   }
 
-  .${LIST_TEXT_WRAPPER} * {
+  .${ELEMENT_LIST_RICH_TEXT} * {
     color: currentColor;
   }
 
-  .${LIST_TEXT_WRAPPER} a {
+  .${ELEMENT_LIST_RICH_TEXT} a {
     text-decoration: underline;
     transition: color 0.3s ease-in-out;
   }
 
-  .${LIST_TEXT_WRAPPER} a:hover,
-  .${LIST_TEXT_WRAPPER} a:focus{
+  .${ELEMENT_LIST_RICH_TEXT} a:hover,
+  .${ELEMENT_LIST_RICH_TEXT} a:focus{
     text-decoration: underline;
     color: ${Colors.red};
   }
@@ -179,45 +180,45 @@ const TextStyles = `
 
 // prettier-ignore
 const DateStyles = `
-  .${LIST_DATE_WRAPPER} {
+  .${ELEMENT_LIST_DATE} {
     display: block;
   }
 
-  * + .${LIST_DATE_WRAPPER} {
+  * + .${ELEMENT_LIST_DATE} {
     margin-top: ${Spacing.min};
     display: block;
   }
 
-  .${LIST_DATE_WRAPPER} {
+  .${ELEMENT_LIST_DATE} {
     color: ${Colors.gray.mediumAA};
   }
 
-  .${LIST_DATE_WRAPPER} * {
+  .${ELEMENT_LIST_DATE} * {
     color: currentColor;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_DATE_WRAPPER}`]: SansMin,
+      [`.${ELEMENT_LIST_DATE}`]: SansMin,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${LIST_DATE_WRAPPER} *`]: SansMin,
+      [`.${ELEMENT_LIST_DATE} *`]: SansMin,
     },
   })}
 `;
 
 // prettier-ignore
 const ActionStyles = `
-  .${LIST_ACTIONS_WRAPPER}  {
+  .${ELEMENT_LIST_ACTIONS}  {
     margin-top: ${Spacing.sm};
   }
 `;
 
 // prettier-ignore
-export const STYLES_LIST_COMMON_TEXT = `
+export const STYLES_ELEMENT_LIST_TEXT_CONTAINER = `
   ${EyebrowStyles}
   ${HeadlineStyles}
   ${TextStyles}
@@ -226,51 +227,49 @@ export const STYLES_LIST_COMMON_TEXT = `
   ${DarkThemeStyles}
 `;
 
-export const CreateTextContainer = ({
+export const CreateListTextContainer = ({
   eyebrow,
   headline,
   text,
   actions,
   date,
   theme,
-}: {
-  headline?: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  date?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  theme?: string;
-}) => {
+}: TypeListText) => {
   const container = document.createElement('div');
 
-  container.classList.add(LIST_TEXT_CONTAINER);
+  container.classList.add(ELEMENT_LIST_TEXT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
   if (eyebrow) {
-    eyebrow.classList.add(LIST_EYEBROW_WRAPPER);
+    eyebrow.classList.add(ELEMENT_LIST_EYEBROW);
     container.appendChild(eyebrow);
   }
 
   if (headline) {
     CheckForAnimationLinkSpan({ element: headline });
-    headline.classList.add(LIST_HEADLINE_WRAPPER);
+    headline.classList.add(ELEMENT_LIST_HEADLINE);
     container.appendChild(headline);
   }
 
   if (text) {
-    text.classList.add(LIST_TEXT_WRAPPER);
+    text.classList.add(ELEMENT_LIST_RICH_TEXT);
     container.appendChild(text);
   }
 
   if (date) {
-    date.classList.add(LIST_DATE_WRAPPER);
+    date.classList.add(ELEMENT_LIST_DATE);
     container.appendChild(date);
   }
 
   if (actions) {
-    actions.classList.add(LIST_ACTIONS_WRAPPER);
+    actions.classList.add(ELEMENT_LIST_ACTIONS);
     container.appendChild(actions);
   }
 
   return container;
+};
+
+export default {
+  CreateElement: CreateListTextContainer,
+  Styles: STYLES_ELEMENT_LIST_TEXT_CONTAINER,
 };

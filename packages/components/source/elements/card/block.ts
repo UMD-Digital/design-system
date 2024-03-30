@@ -7,8 +7,8 @@ type TypeBlockCardProps = TypeBlockTextContainter &
     image?: HTMLImageElement | null;
   };
 
-const ELEMENT_NAME = 'umd-block-card';
-const ELEMENT_LIST_CONTAINER = 'block-card-container';
+const ELEMENT_NAME = 'umd-card-block';
+const ELEMENT_LIST_CONTAINER = 'card-block-container';
 
 // prettier-ignore
 const STYLES_BLOCK_CARD_ELEMENT = `

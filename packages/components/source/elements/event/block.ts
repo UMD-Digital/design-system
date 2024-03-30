@@ -68,7 +68,7 @@ const CreateEventBlockElement = (element: TypeBlockEventProps) => {
       `.${ELEMENT_BLOCK_TEXT_HEADLINE}`,
     ) as HTMLElement;
     eventDetails.classList.add(ELEMENT_EVENT_BLOCK_DETAILS);
-    headline.appendChild(eventDetails);
+    headline.insertAdjacentElement('afterend', eventDetails);
   }
 
   elementContainer.appendChild(container);

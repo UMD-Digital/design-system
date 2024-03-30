@@ -7,6 +7,7 @@ import ListTextContainer, {
 import ListContainer, {
   ELEMENT_LIST_CONTAINER_WRAPPER,
 } from '../list/container';
+import text from 'elements/block/text';
 
 type TypeListEventProps = TypeListText & {
   image?: HTMLImageElement | null;
@@ -103,7 +104,8 @@ const CreateEventListElement = (element: TypeListEventProps) => {
       `.${ELEMENT_LIST_HEADLINE}`,
     ) as HTMLElement;
     eventDetails.classList.add(ELEMENT_EVENT_LIST_DETAILS);
-    headline.appendChild(eventDetails);
+
+    headline.insertAdjacentElement('afterend', eventDetails);
   }
 
   elementContainer.appendChild(container);

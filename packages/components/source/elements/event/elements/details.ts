@@ -30,7 +30,7 @@ type EventType = DateInformaitonType & {
   location: LocationType;
 };
 
-type TypeDetailDisplay = EventType & {
+export type TypeDetailDisplay = EventType & {
   isLayoutVeritcal?: boolean;
 };
 

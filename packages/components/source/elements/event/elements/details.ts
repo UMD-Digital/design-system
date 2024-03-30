@@ -51,22 +51,22 @@ const BREAKPOINTS = {
   MOBILE: 400,
 };
 
-const ELEMENT_NAME = 'umd-date-details';
-const EVENTS_DATE_ROW = 'events-date-row';
-const EVENTS_DATE_ROW_WRAPPER = 'events-date-row-wrapper';
-const EVENTS_DATE_ROW_ICON = 'events-date-row-icon';
-const EVENTS_DATE_ROW_TEXT = 'events-date-row-text';
-const EVENTS_DATE_ROW_DATE = 'events-date-row-date';
-const EVENTS_DATE_ROW_LOCATION = 'events-date-row-location';
+const ELEMENT_NAME = 'umd-event-details';
+const ELEMENT_EVENTS_DATE_ROW = 'event-date-row';
+const ELEMENT_EVENTS_DATE_ROW_WRAPPER = 'event-date-row-wrapper';
+const ELEMENT_EVENTS_DATE_ROW_ICON = 'event-date-row-icon';
+const ELEMENT_EVENTS_DATE_ROW_TEXT = 'event-date-row-text';
+const ELEMENT_EVENTS_DATE_ROW_DATE = 'event-date-row-date';
+const ELEMENT_EVENTS_DATE_ROW_LOCATION = 'event-date-row-location';
 
 // prettier-ignore
 const VariationLayoutHorizontal = `
-  .${EVENTS_DATE_ROW}[layout="horizontal"] .${EVENTS_DATE_ROW_DATE} {
+  .${ELEMENT_EVENTS_DATE_ROW}[layout="horizontal"] .${ELEMENT_EVENTS_DATE_ROW_DATE} {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .${EVENTS_DATE_ROW}[layout="horizontal"] .${EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
+  .${ELEMENT_EVENTS_DATE_ROW}[layout="horizontal"] .${ELEMENT_EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
     margin-top: 3px;
     margin-left: 0;
   }
@@ -75,25 +75,25 @@ const VariationLayoutHorizontal = `
 // prettier-ignore
 const DateRow = `
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
-    .${EVENTS_DATE_ROW_DATE} {
+    .${ELEMENT_EVENTS_DATE_ROW_DATE} {
       display: flex;
       align-items: center;
     }
   }
 
-  .${EVENTS_DATE_ROW_DATE} > * {
+  .${ELEMENT_EVENTS_DATE_ROW_DATE} > * {
     display: flex;
     align-items: center;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
-    .${EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
+    .${ELEMENT_EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
       margin-left: ${Spacing.xs};
     }
   }
 
   @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
-    .${EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
+    .${ELEMENT_EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
       margin-top: 3px;
     }
   }
@@ -101,7 +101,7 @@ const DateRow = `
 
 // prettier-ignore
 const LocationRow = `
-  .${EVENTS_DATE_ROW_LOCATION} {
+  .${ELEMENT_EVENTS_DATE_ROW_LOCATION} {
     display: flex;
     align-items: center;
   }
@@ -109,15 +109,15 @@ const LocationRow = `
 
 // prettier-ignore
 const STYLES_EVENT_DETAILS = `
-  .${EVENTS_DATE_ROW} {
+  .${ELEMENT_EVENTS_DATE_ROW} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  .${EVENTS_DATE_ROW} + * {
+  .${ELEMENT_EVENTS_DATE_ROW} + * {
     margin-top: ${Spacing.sm};
   }
 
-  .${EVENTS_DATE_ROW_WRAPPER} {
+  .${ELEMENT_EVENTS_DATE_ROW_WRAPPER} {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 5px 0;
@@ -125,34 +125,34 @@ const STYLES_EVENT_DETAILS = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENTS_DATE_ROW_TEXT}`]: SansSmaller,
+      [`.${ELEMENT_EVENTS_DATE_ROW_TEXT}`]: SansSmaller,
     },
   })}
 
-  .${EVENTS_DATE_ROW_TEXT} {
+  .${ELEMENT_EVENTS_DATE_ROW_TEXT} {
     color: ${Colors.gray.darker};
     font-weight: 400;
   }
 
-  .${EVENTS_DATE_ROW_ICON} {
+  .${ELEMENT_EVENTS_DATE_ROW_ICON} {
     width: 18px;
     display: flex;
     align-items: center;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
-    .${EVENTS_DATE_ROW_ICON} {
+    .${ELEMENT_EVENTS_DATE_ROW_ICON} {
       width: 20px;
     }
   }
 
-  .${EVENTS_DATE_ROW_ICON} svg {
+  .${ELEMENT_EVENTS_DATE_ROW_ICON} svg {
     width: 12px;
     height: 12px;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
-    .${EVENTS_DATE_ROW_ICON} svg {
+    .${ELEMENT_EVENTS_DATE_ROW_ICON} svg {
       width: 14px;
       height: 14px;
     }
@@ -177,9 +177,9 @@ const MakeDetailItem = ({
   const textElement = document.createElement('span');
 
   iconElement.innerHTML = icon;
-  iconElement.classList.add(EVENTS_DATE_ROW_ICON);
+  iconElement.classList.add(ELEMENT_EVENTS_DATE_ROW_ICON);
   textElement.innerHTML = text;
-  textElement.classList.add(EVENTS_DATE_ROW_TEXT);
+  textElement.classList.add(ELEMENT_EVENTS_DATE_ROW_TEXT);
 
   if (style) container.classList.add(style);
   container.appendChild(iconElement);
@@ -229,7 +229,7 @@ const RowDateInfo = (info: TypeDetailDisplay) => {
   const dateElement = DateText({ ...info, isMultiDay });
   const timeElement = TimeText({ ...info, isMultiDay });
 
-  container.classList.add(EVENTS_DATE_ROW_DATE);
+  container.classList.add(ELEMENT_EVENTS_DATE_ROW_DATE);
   container.appendChild(dateElement);
   container.appendChild(timeElement);
 
@@ -251,7 +251,7 @@ const CreateEventDetailsElement = (info: TypeDetailDisplay) => {
   const { location, isLayoutVeritcal = true } = info;
   const dateRow = RowDateInfo(info);
 
-  wrapper.classList.add(EVENTS_DATE_ROW_WRAPPER);
+  wrapper.classList.add(ELEMENT_EVENTS_DATE_ROW_WRAPPER);
   wrapper.appendChild(dateRow);
 
   if (location && location.length > 0) {
@@ -259,13 +259,13 @@ const CreateEventDetailsElement = (info: TypeDetailDisplay) => {
       MakeDetailItem({
         icon: PIN_ICON,
         text: location[0].title,
-        style: EVENTS_DATE_ROW_LOCATION,
+        style: ELEMENT_EVENTS_DATE_ROW_LOCATION,
       }),
     );
   }
 
   container.appendChild(wrapper);
-  container.classList.add(EVENTS_DATE_ROW);
+  container.classList.add(ELEMENT_EVENTS_DATE_ROW);
 
   if (isLayoutVeritcal) container.setAttribute('layout', 'horizontal');
 

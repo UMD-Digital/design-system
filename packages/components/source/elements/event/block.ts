@@ -15,8 +15,8 @@ type TypeBlockEventProps = TypeBlockTextContainter &
 const { Spacing } = Tokens;
 
 const ELEMENT_NAME = 'umd-block-event';
-const ELEMENT_EVENT_BLOCK_CONTAINER = 'block-event-container';
-const ELEMENT_EVENT_BLOCK_DETAILS = 'block-event-details-wrapper';
+const ELEMENT_EVENT_BLOCK_CONTAINER = 'event-block-container';
+const ELEMENT_EVENT_BLOCK_DETAILS = 'event-block-details-wrapper';
 
 // prettier-ignore
 const DetailsRowStyles = `

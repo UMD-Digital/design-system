@@ -3,9 +3,9 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { SansLarger, Eyebrow } = Typography;
 
-const EVENT_DATE_WRAPPER = 'umd-event-date-wrapper';
-const EVENT_MONTH = 'umd-event-date-month';
-const EVENT_DAY = 'umd-event-date-day';
+const ELEMENT_EVENT_DATE_WRAPPER = 'event-sign-wrapper';
+const ELEMENT_EVENT_MONTH = 'event-sign-date-month';
+const ELEMENT_EVENT_DAY = 'event-sign-date-day';
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -14,12 +14,12 @@ const IS_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 // prettier-ignore
 const dateWrapperStyles = `
-  .${EVENT_DATE_WRAPPER} {
+  .${ELEMENT_EVENT_DATE_WRAPPER} {
     display: flex;
     align-items: center;
   }
 
-  .${EVENT_DATE_WRAPPER} * {
+  .${ELEMENT_EVENT_DATE_WRAPPER} * {
     display: block;
     text-transform: uppercase;
     text-align: center;
@@ -28,7 +28,7 @@ const dateWrapperStyles = `
     color: currentColor;
   }
 
-  .${EVENT_DATE_WRAPPER}${IS_DARK} * {
+  .${ELEMENT_EVENT_DATE_WRAPPER}${IS_DARK} * {
     color: white !important;
   }
 `;
@@ -37,13 +37,13 @@ const dateWrapperStyles = `
 const monthStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_MONTH}`]: Eyebrow,
+      [`.${ELEMENT_EVENT_MONTH}`]: Eyebrow,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_MONTH} *`]: Eyebrow,
+      [`.${ELEMENT_EVENT_MONTH} *`]: Eyebrow,
     },
   })}
 `;
@@ -51,13 +51,13 @@ const monthStyles = `
 const dayStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DAY}`]: SansLarger,
+      [`.${ELEMENT_EVENT_DAY}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DAY} *`]: SansLarger,
+      [`.${ELEMENT_EVENT_DAY} *`]: SansLarger,
     },
   })}
 `;
@@ -99,11 +99,11 @@ const makeStartDateBlock = ({
   const startWrapper = document.createElement('p');
   const startMonthWrapper = makeDateElement({
     element: startMonth,
-    style: EVENT_MONTH,
+    style: ELEMENT_EVENT_MONTH,
   });
   const startDayWrapper = makeDateElement({
     element: startDay,
-    style: EVENT_DAY,
+    style: ELEMENT_EVENT_DAY,
   });
 
   startWrapper.appendChild(startMonthWrapper);
@@ -133,11 +133,11 @@ const makeEndDateBlock = ({
     const dash = document.createElement('span');
     const endMonthWrapper = makeDateElement({
       element: endMonth,
-      style: EVENT_MONTH,
+      style: ELEMENT_EVENT_MONTH,
     });
     const endDayWrapper = makeDateElement({
       element: endDay,
-      style: EVENT_DAY,
+      style: ELEMENT_EVENT_DAY,
     });
 
     endWrapper.appendChild(endMonthWrapper);
@@ -174,7 +174,7 @@ const CreateEventSignElement = ({
   const container = document.createElement('div');
   const hasEnd = endDay && endMonth;
 
-  container.classList.add(EVENT_DATE_WRAPPER);
+  container.classList.add(ELEMENT_EVENT_DATE_WRAPPER);
   container.setAttribute(ATTRIBUTE_THEME, theme);
 
   makeStartDateBlock({ container, startMonth, startDay });

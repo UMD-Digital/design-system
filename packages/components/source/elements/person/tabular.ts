@@ -1,10 +1,8 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import {
-  CreatePersonTextContainer,
+import PersonTextContainer, {
   TypePersonProps,
-  STYLES_PERSON_TEXT,
-  PERSON_TEXT_CONTAINER,
-  PERSON_NAME_CONTAINER,
+  ELEMENT_PERSON_TEXT_CONTAINER,
+  ELEMENT_PERSON_NAME_CONTAINER,
   DISPLAY_TABULAR,
 } from './elements/text';
 import { CreatListContainer, STYLES_LIST_CONTAINER } from '../list/container';
@@ -31,7 +29,7 @@ const THEME_DARK = 'dark';
 const ELEMENT_NAME = 'umd-tabluar-person';
 const ELEMENT_PERSON_TABULAR_CONTAINER = 'umd-tabluar-person-container';
 const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LIST_IMAGE_CONTAINER}`;
-const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${PERSON_TEXT_CONTAINER}`;
+const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${ELEMENT_PERSON_TEXT_CONTAINER}`;
 const IS_THEME_DARK = `.${ELEMENT_PERSON_TABULAR_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 const OverwriteThemeDarkStyles = `
@@ -81,7 +79,8 @@ const OverwriteTextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_TEXT_CONTAINER_OVERWRITE} .${PERSON_NAME_CONTAINER}`]: SansLarge,
+      [`${IS_TEXT_CONTAINER_OVERWRITE} .${ELEMENT_PERSON_NAME_CONTAINER}`]:
+        SansLarge,
     },
   })}
 
@@ -113,7 +112,7 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
   }
 
   ${STYLES_LIST_CONTAINER}
-  ${STYLES_PERSON_TEXT}
+  ${PersonTextContainer.Styles}
   ${STYLES_LIST_COMMON_IMAGE}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
@@ -122,7 +121,7 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
 
 const CreatePersonTabularElement = (element: TypeTabularPersonProps) => {
   const { theme, image } = element;
-  const personContainer = CreatePersonTextContainer({
+  const personContainer = PersonTextContainer.CreateElement({
     ...element,
     displayType: DISPLAY_TABULAR,
   });

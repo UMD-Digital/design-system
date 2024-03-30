@@ -7,11 +7,7 @@ import BlockContainer, {
 import BlockImageContainer, {
   ELEMENT_BLOCK_IMAGE_CONTAINER,
 } from '../block/image';
-import {
-  CreatePersonTextContainer,
-  TypePersonProps,
-  STYLES_PERSON_TEXT,
-} from './elements/text';
+import PersonTextContainer, { TypePersonProps } from './elements/text';
 
 type TypeBlockPersonProps = TypePersonProps &
   TypeBlockContainer & {
@@ -104,7 +100,7 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
 
   ${BlockImageContainer.Styles}
   ${BlockContainer.Styles}
-  ${STYLES_PERSON_TEXT}
+  ${PersonTextContainer.Styles}
   ${WrapperStyles}
   ${OverwriteImagesStyles}
   ${OverwriteThemeDarkStyles}
@@ -117,7 +113,7 @@ const CreatePersonBlockElement = (element: TypeBlockPersonProps) => {
     isAligned = false,
     isBordered = false,
   } = element;
-  const personContainer = CreatePersonTextContainer(element);
+  const personContainer = PersonTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
   const imageContainer = BlockImageContainer.CreateElement({

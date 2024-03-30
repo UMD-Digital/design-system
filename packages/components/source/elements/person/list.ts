@@ -1,9 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  CreatePersonTextContainer,
+import PersonTextContainer, {
   TypePersonProps,
-  STYLES_PERSON_TEXT,
-  PERSON_TEXT_CONTAINER,
+  ELEMENT_PERSON_TEXT_CONTAINER,
 } from './elements/text';
 import { CreatListContainer, STYLES_LIST_CONTAINER } from '../list/container';
 import {
@@ -26,7 +24,7 @@ const THEME_DARK = 'dark';
 const ELEMENT_NAME = 'umd-list-person';
 const ELEMENT_PERSON_LIST_CONTAINER = 'umd-list-person-container';
 const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LIST_IMAGE_CONTAINER}`;
-const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${PERSON_TEXT_CONTAINER}`;
+const IS_TEXT_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_LIST_CONTAINER} .${ELEMENT_PERSON_TEXT_CONTAINER}`;
 const IS_THEME_DARK = `.${ELEMENT_PERSON_LIST_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 const OverwriteThemeDarkStyles = `
@@ -80,7 +78,7 @@ const STYLES_PERSON_LIST_ELEMENT = `
   }
 
   ${STYLES_LIST_CONTAINER}
-  ${STYLES_PERSON_TEXT}
+  ${PersonTextContainer.Styles}
   ${STYLES_LIST_COMMON_IMAGE}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
@@ -89,7 +87,7 @@ const STYLES_PERSON_LIST_ELEMENT = `
 
 const CreatePersonListElement = (element: TypeListPersonProps) => {
   const { theme, image } = element;
-  const personContainer = CreatePersonTextContainer(element);
+  const personContainer = PersonTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? CreateImageContainer({ image }) : null;
   const container = CreatListContainer({

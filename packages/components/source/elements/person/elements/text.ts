@@ -29,60 +29,61 @@ const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 export const DISPLAY_TABULAR = 'tabular';
 
-export const PERSON_TEXT_CONTAINER = 'person-text-container';
-export const PERSON_NAME_CONTAINER = 'person-name-container';
-const PERSON_JOB_CONTAINER = 'person-job-container';
-const PERSON_ASSOCIATION_CONTAINER = 'person-association-container';
-const PERSON_PRONOUNS_CONTAINER = 'person-pronouns-container';
-const PERSON_SUB_TEXT_CONTAINER = 'person-sub-text-container';
-const PERSON_ACTIONS_CONTAINER = 'person-actions-container';
+export const ELEMENT_PERSON_TEXT_CONTAINER = 'person-text';
+export const ELEMENT_PERSON_NAME_CONTAINER = 'person-name';
+const ELEMENT_PERSON_JOB_CONTAINER = 'person-job';
+const ELEMENT_PERSON_ASSOCIATION_CONTAINER = 'person-association';
+const ELEMENT_PERSON_PRONOUNS_CONTAINER = 'person-pronouns';
+const ELEMENT_PERSON_SUB_TEXT_CONTAINER = 'person-sub-text';
+const ELEMENT_PERSON_ACTIONS_CONTAINER = 'person-actions';
+const ELEMENT_PERSON_CONTACT_CONTAINER = 'person-contact-container';
+const ELEMENT_PERSON_CONTACT_ITEM = 'person-contact-item';
+const ELEMENT_PERSON_ADDITONAL_CONTACT = 'person-additonal-contact';
 
-const PERSON_CONTACT_CONTAINER = 'list-person-contact-container';
-const PERSON_CONTACT_ITEM_CONTAINER = 'list-person-contact-item-container';
-const PERSON_ADDITONAL_CONTACT_CONTAINER =
-  'list-person-additonal-contact-container';
+const IS_DARK_THEME = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
-const IS_DARK_THEME = `.${PERSON_TEXT_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_DARK_THEME_CONTAINER = `.${ELEMENT_PERSON_TEXT_CONTAINER}${IS_DARK_THEME}`;
+const IS_DARK_THEME_CONTACT_ITEM = `.${ELEMENT_PERSON_TEXT_CONTAINER}${IS_DARK_THEME} .${ELEMENT_PERSON_CONTACT_ITEM}`;
 
 // prettier-ignore
 const ThemeDarkStyles = `
-  ${IS_DARK_THEME} * {
+  ${IS_DARK_THEME_CONTAINER} * {
     color: ${Colors.white};
   }
 
-  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER} > span:first-child {
+  ${IS_DARK_THEME_CONTACT_ITEM} > span:first-child {
     background-color: ${Colors.gray.darker};
   }
 
-  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER} svg path {
+  ${IS_DARK_THEME_CONTACT_ITEM} svg path {
     fill: ${Colors.white};
   }
 
-  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:first-child,
-  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:focus > span:first-child {
+  ${IS_DARK_THEME_CONTACT_ITEM}:hover > span:first-child,
+  ${IS_DARK_THEME_CONTACT_ITEM}:focus > span:first-child {
     background-color: ${Colors.gray.light};
   }
 
-  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:hover path,
-  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER}:focus path {
+  ${IS_DARK_THEME_CONTACT_ITEM}:hover path,
+  ${IS_DARK_THEME_CONTACT_ITEM}:focus path {
     fill: ${Colors.gray.dark};
   }
 
-  ${IS_DARK_THEME} .${PERSON_CONTACT_ITEM_CONTAINER} > span:last-child {
+  ${IS_DARK_THEME_CONTACT_ITEM} > span:last-child {
     color: ${Colors.gray.light};
   }
 `;
 
 // prettier-ignore
 const NameStyles = `
-  .${PERSON_NAME_CONTAINER} {
+  .${ELEMENT_PERSON_NAME_CONTAINER} {
     font-weight: 700;
     margin-bottom: ${Spacing.min};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PERSON_NAME_CONTAINER}`]: SansLarger,
+      [`.${ELEMENT_PERSON_NAME_CONTAINER}`]: SansLarger,
     },
   })}
 `;
@@ -91,73 +92,73 @@ const NameStyles = `
 const JobStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PERSON_JOB_CONTAINER}`]: SansSmall,
+      [`.${ELEMENT_PERSON_JOB_CONTAINER}`]: SansSmall,
     },
   })}
 
-  .${PERSON_JOB_CONTAINER} {
+  .${ELEMENT_PERSON_JOB_CONTAINER} {
     line-height: 1.25em;
   }
 `;
 
 // prettier-ignore
 const AssociationStyles = `
-  * + .${PERSON_ASSOCIATION_CONTAINER} {
+  * + .${ELEMENT_PERSON_ASSOCIATION_CONTAINER} {
     margin-top: 4px;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PERSON_ASSOCIATION_CONTAINER}`]: SansSmall,
+      [`.${ELEMENT_PERSON_ASSOCIATION_CONTAINER}`]: SansSmall,
     },
   })}
 
-  .${PERSON_ASSOCIATION_CONTAINER} {
+  .${ELEMENT_PERSON_ASSOCIATION_CONTAINER} {
     line-height: 1.2em;
   }
 `;
 
 // prettier-ignore
 const PronounsStyles = `
-  * + .${PERSON_PRONOUNS_CONTAINER} {
+  * + .${ELEMENT_PERSON_PRONOUNS_CONTAINER} {
     margin-top: ${Spacing.min};
   }
 
-  .${PERSON_PRONOUNS_CONTAINER} {
+  .${ELEMENT_PERSON_PRONOUNS_CONTAINER} {
     font-style: italic;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PERSON_PRONOUNS_CONTAINER}`]: SansSmaller,
+      [`.${ELEMENT_PERSON_PRONOUNS_CONTAINER}`]: SansSmaller,
     },
   })}
 `;
 
 // prettier-ignore
 const ContactContainerStyles = `
-  * + .${PERSON_CONTACT_CONTAINER} {
+  * + .${ELEMENT_PERSON_CONTACT_CONTAINER} {
     margin-top: ${Spacing.sm};
   }
 `;
 
 // prettier-ignore
 const ContactItemStyles = `
-  .${PERSON_CONTACT_ITEM_CONTAINER} {
+  .${ELEMENT_PERSON_CONTACT_ITEM} {
     display: flex;
     align-items: center;
   }
 
-  .${PERSON_CONTACT_ITEM_CONTAINER} + .${PERSON_CONTACT_ITEM_CONTAINER} {
+  .${ELEMENT_PERSON_CONTACT_ITEM} + .${ELEMENT_PERSON_CONTACT_ITEM} {
     margin-top: 4px;
   }
 
-  .${PERSON_CONTACT_ITEM_CONTAINER} path {
+  .${ELEMENT_PERSON_CONTACT_ITEM} path {
     fill: ${Colors.black};
     transition: fill 0.3s;
   }
 
-  .${PERSON_CONTACT_ITEM_CONTAINER} > span:first-child {
+  .${ELEMENT_PERSON_CONTACT_ITEM} > span:first-child {
     width: 28px;
     height: 28px;
     display: flex;
@@ -168,27 +169,27 @@ const ContactItemStyles = `
     transition: background-color 0.3s;
   }
 
-  .${PERSON_CONTACT_ITEM_CONTAINER} > span:last-child {
+  .${ELEMENT_PERSON_CONTACT_ITEM} > span:last-child {
     line-height: 1.25em;
     color: ${Colors.gray.dark};
   }
 
-  .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:first-child,
-  .${PERSON_CONTACT_ITEM_CONTAINER}:focus > span:first-child {
+  .${ELEMENT_PERSON_CONTACT_ITEM}:hover > span:first-child,
+  .${ELEMENT_PERSON_CONTACT_ITEM}:focus > span:first-child {
     background-color: ${Colors.gray.dark};
   }
 
-  .${PERSON_CONTACT_ITEM_CONTAINER}:hover path,
-  .${PERSON_CONTACT_ITEM_CONTAINER}:focus path {
+  .${ELEMENT_PERSON_CONTACT_ITEM}:hover path,
+  .${ELEMENT_PERSON_CONTACT_ITEM}:focus path {
     fill: ${Colors.gray.light};
   }
 
-  .${PERSON_CONTACT_ITEM_CONTAINER}:hover > span:last-child,
-  .${PERSON_CONTACT_ITEM_CONTAINER}:focus > span:last-child {
+  .${ELEMENT_PERSON_CONTACT_ITEM}:hover > span:last-child,
+  .${ELEMENT_PERSON_CONTACT_ITEM}:focus > span:last-child {
     text-decoration: underline;
   }
 
-  .${PERSON_CONTACT_ITEM_CONTAINER} svg {
+  .${ELEMENT_PERSON_CONTACT_ITEM} svg {
     width: 16px;
     height: 16px;
   }
@@ -196,38 +197,38 @@ const ContactItemStyles = `
 
 // prettier-ignore
 const AdditonalContactStyles = `
-  .${PERSON_ADDITONAL_CONTACT_CONTAINER} {
+  .${ELEMENT_PERSON_ADDITONAL_CONTACT} {
     margin-top: 4px;
   }
 `;
 
 // prettier-ignore
 const SubTextStyles = `
-  * + .${PERSON_SUB_TEXT_CONTAINER} {
+  * + .${ELEMENT_PERSON_SUB_TEXT_CONTAINER} {
     margin-top: ${Spacing.min};
   }
 
-  .${PERSON_SUB_TEXT_CONTAINER} {
+  .${ELEMENT_PERSON_SUB_TEXT_CONTAINER} {
     font-style: italic;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PERSON_SUB_TEXT_CONTAINER}`]: SansSmaller,
+      [`.${ELEMENT_PERSON_SUB_TEXT_CONTAINER}`]: SansSmaller,
     },
   })}
 `;
 
 // prettier-ignore
 const ActionsStyles = `
-  * + .${PERSON_ACTIONS_CONTAINER} {
+  * + .${ELEMENT_PERSON_ACTIONS_CONTAINER} {
     margin-top: ${Spacing.sm};
   }
 `;
 
 // prettier-ignore
-export const STYLES_PERSON_TEXT = `
-  .${PERSON_TEXT_CONTAINER} {
+const STYLES_PERSON_TEXT = `
+  .${ELEMENT_PERSON_TEXT_CONTAINER} {
 
   }
 
@@ -260,7 +261,7 @@ const MakeContactLink = ({
 
   link.setAttribute('href', element.getAttribute('href') || '');
   if (ariaLabel) link.setAttribute('aria-label', ariaLabel);
-  link.classList.add(PERSON_CONTACT_ITEM_CONTAINER);
+  link.classList.add(ELEMENT_PERSON_CONTACT_ITEM);
 
   iconSpan.innerHTML = icon;
   textSpan.innerHTML = element.innerHTML;
@@ -282,7 +283,7 @@ const CreateContactContainer = ({
     return null;
 
   const container = document.createElement('div');
-  container.classList.add(PERSON_CONTACT_CONTAINER);
+  container.classList.add(ELEMENT_PERSON_CONTACT_CONTAINER);
 
   if (phone) {
     const phoneLink = MakeContactLink({ element: phone, icon: PHONE_ICON });
@@ -305,49 +306,49 @@ const CreateContactContainer = ({
   }
 
   if (additionalContact) {
-    additionalContact.classList.add(PERSON_ADDITONAL_CONTACT_CONTAINER);
+    additionalContact.classList.add(ELEMENT_PERSON_ADDITONAL_CONTACT);
     container.appendChild(additionalContact);
   }
 
   return container;
 };
 
-export const CreatePersonTextContainer = (person: TypePersonProps) => {
+const CreatePersonTextContainer = (person: TypePersonProps) => {
   const { name, job, association, pronouns, subText, actions, theme } = person;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const contactContainer = CreateContactContainer(person);
   const isDisplayTabular = person.displayType === DISPLAY_TABULAR;
 
-  container.classList.add(PERSON_TEXT_CONTAINER);
+  container.classList.add(ELEMENT_PERSON_TEXT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
   if (name) {
-    name.classList.add(PERSON_NAME_CONTAINER);
+    name.classList.add(ELEMENT_PERSON_NAME_CONTAINER);
     wrapper.appendChild(name);
   }
 
   if (job) {
-    job.classList.add(PERSON_JOB_CONTAINER);
+    job.classList.add(ELEMENT_PERSON_JOB_CONTAINER);
     wrapper.appendChild(job);
   }
 
   if (association) {
-    association.classList.add(PERSON_ASSOCIATION_CONTAINER);
+    association.classList.add(ELEMENT_PERSON_ASSOCIATION_CONTAINER);
     wrapper.appendChild(association);
   }
 
   if (pronouns) {
-    pronouns.classList.add(PERSON_PRONOUNS_CONTAINER);
+    pronouns.classList.add(ELEMENT_PERSON_PRONOUNS_CONTAINER);
     wrapper.appendChild(pronouns);
   }
 
   if (subText) {
-    subText.classList.add(PERSON_SUB_TEXT_CONTAINER);
+    subText.classList.add(ELEMENT_PERSON_SUB_TEXT_CONTAINER);
     wrapper.appendChild(subText);
   }
 
-  if (actions) actions.classList.add(PERSON_ACTIONS_CONTAINER);
+  if (actions) actions.classList.add(ELEMENT_PERSON_ACTIONS_CONTAINER);
 
   container.appendChild(wrapper);
 
@@ -360,4 +361,9 @@ export const CreatePersonTextContainer = (person: TypePersonProps) => {
   if (actions && !isDisplayTabular) container.appendChild(actions);
 
   return container;
+};
+
+export default {
+  CreateElement: CreatePersonTextContainer,
+  Styles: STYLES_PERSON_TEXT,
 };

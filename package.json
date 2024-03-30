@@ -9,8 +9,6 @@
     "clean": "npx lerna run clean",
     "components": "npx lerna run start --scope=@universityofmaryland/web-components-library",
     "components:build": "npx lerna run build --scope=@universityofmaryland/web-components-library",
-    "elements": "npx lerna run start --scope=@universityofmaryland/custom-elements-library",
-    "elements:build": "npx lerna run build --scope=@universityofmaryland/custom-elements-library",
     "variables": "npx lerna run start --scope=@universityofmaryland/variables",
     "variables:build": "npx lerna run build --scope=@universityofmaryland/variables",
     "theme": "npx lerna run start --scope=@universityofmaryland/theme",
@@ -18,8 +16,8 @@
     "kitchen": "npx lerna run start --scope=@universityofmaryland/umd-design-system-kitchen-sink",
     "kitchen:build": "npx lerna run build --scope=@universityofmaryland/umd-design-system-kitchen-sink",
     "reset": "yarn clean && rm -rf node_modules && rm -rf packages/*/node_modules && yarn install --frozen-lock",
-    "scaffold": "yarn variables:build && yarn theme:build && yarn elements:build && yarn components:build && yarn kitchen:build",
-    "start": "yarn run variables & yarn run theme & yarn run elements & yarn run components & yarn run kitchen"
+    "scaffold": "yarn variables:build && yarn theme:build && yarn components:build && yarn kitchen:build",
+    "start": "yarn run variables & yarn run theme & yarn run components & yarn run kitchen"
   },
   "workspaces": [
     "packages/*"

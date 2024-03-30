@@ -1,8 +1,4 @@
-import {
-  PersonBlock,
-  PersonList,
-  PersonTabular,
-} from '@universityofmaryland/custom-elements-library';
+import { PersonBlock, PersonList, PersonTabular } from 'elements';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { UMDPersonElement } from './index';

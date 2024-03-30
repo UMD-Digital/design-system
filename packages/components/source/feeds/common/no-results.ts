@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { CallToAction } from '@universityofmaryland/custom-elements-library';
+import { CallToAction } from 'elements';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { Spacing } = Tokens;

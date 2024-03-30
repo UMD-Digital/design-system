@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { CallToAction } from '@universityofmaryland/custom-elements-library';
+import { CallToAction } from 'elements';
 
 const { Spacing } = Tokens;
 

@@ -1,8 +1,4 @@
-import {
-  EventBlock,
-  EventList,
-  EventElements,
-} from '@universityofmaryland/custom-elements-library';
+import { EventBlock, EventList, EventElements } from 'elements';
 
 type ImageType = {
   url: string;

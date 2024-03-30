@@ -1,4 +1,4 @@
-import { CardOverlay } from '@universityofmaryland/custom-elements-library';
+import { CardOverlay } from 'elements';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { UMDCardOverlayElement } from '../index';

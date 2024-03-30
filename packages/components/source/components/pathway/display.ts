@@ -3,7 +3,7 @@ import {
   PathwayHighlight,
   PathwayImage,
   PathwayElements,
-} from '@universityofmaryland/custom-elements-library';
+} from 'elements';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { UMDPathwayElement } from './index';

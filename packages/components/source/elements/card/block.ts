@@ -2,16 +2,16 @@ import {
   CreatBlockContainer,
   TypeBlockContainerAttributes,
   STYLES_BLOCK_CONTAINER,
-} from '../../shared-elements/block/container';
+} from '../shared-elements/block/container';
 import {
   CreateImageBlockContainer,
   STYLES_BLOCK_COMMON_IMAGE,
-} from '../../shared-elements/block/image';
+} from '../shared-elements/block/image';
 import {
   CreateBlockTextContainer,
   TypeCommonTextAttributes,
   STYLES_LIST_COMMON_TEXT,
-} from '../../shared-elements/block/text';
+} from '../shared-elements/block/text';
 
 type TypeBlockCardProps = TypeCommonTextAttributes &
   TypeBlockContainerAttributes & {

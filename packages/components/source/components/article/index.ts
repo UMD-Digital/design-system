@@ -4,10 +4,7 @@ declare global {
   }
 }
 
-import {
-  CardBlock,
-  CardList,
-} from '@universityofmaryland/custom-elements-library';
+import { CardBlock, CardList } from 'elements';
 import { Reset } from 'helpers/styles';
 import {
   CheckForImageAlt,

@@ -15,9 +15,6 @@
     "clean": "rm -rf dist",
     "start": "webpack -w"
   },
-  "devDependencies": {
-    "umd-web-components": "link:../../@universityofmaryland/custom-elements-library"
-  },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
     "postcss-js": "^4.0.1",

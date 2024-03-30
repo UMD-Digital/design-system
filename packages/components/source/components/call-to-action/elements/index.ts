@@ -1,4 +1,4 @@
-import { CallToAction } from '@universityofmaryland/custom-elements-library';
+import { CallToAction } from 'elements';
 import { Tokens } from '@universityofmaryland/variables';
 import { Reset } from 'helpers/styles';
 import { MakeSlot } from 'helpers/ui';

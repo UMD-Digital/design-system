@@ -5,12 +5,12 @@ import {
   TypeBlockContainerAttributes,
   STYLES_BLOCK_CONTAINER,
   BLOCK_CONTAINER,
-} from '../../shared-elements/block/container';
+} from '../shared-elements/block/container';
 import {
   CreateImageBlockContainer,
   STYLES_BLOCK_COMMON_IMAGE,
   BLOCK_IMAGE_CONTAINER,
-} from '../../shared-elements/block/image';
+} from '../shared-elements/block/image';
 import {
   CreatePersonTextContainer,
   TypePersonProps,

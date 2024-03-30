@@ -3,7 +3,7 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { EventElements } from '@universityofmaryland/custom-elements-library';
+import { EventElements } from 'elements';
 import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
 import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
 import { ELEMENT_TYPE } from 'components/events-date';

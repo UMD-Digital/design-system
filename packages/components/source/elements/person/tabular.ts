@@ -10,12 +10,12 @@ import {
 import {
   CreatListContainer,
   STYLES_LIST_CONTAINER,
-} from '../../shared-elements/list/container';
+} from '../shared-elements/list/container';
 import {
   CreateImageContainer,
   STYLES_LIST_COMMON_IMAGE,
   LIST_IMAGE_CONTAINER,
-} from '../../shared-elements/list/image';
+} from '../shared-elements/list/image';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 type TypeTabularPersonProps = TypePersonProps & {

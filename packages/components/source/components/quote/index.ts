@@ -9,7 +9,7 @@ import {
   QuoteFeatured,
   QuoteInline,
   QuoteStatement,
-} from '@universityofmaryland/custom-elements-library';
+} from 'elements';
 import { Reset } from 'helpers/styles';
 import { MakeTemplate, SlotDefaultStyling } from 'helpers/ui';
 

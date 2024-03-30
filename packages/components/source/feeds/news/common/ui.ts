@@ -1,7 +1,4 @@
-import {
-  CardBlock,
-  CardList,
-} from '@universityofmaryland/custom-elements-library';
+import { CardBlock, CardList } from 'elements';
 
 type ImageType = {
   url: string;

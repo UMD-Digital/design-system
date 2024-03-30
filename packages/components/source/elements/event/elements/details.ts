@@ -7,11 +7,6 @@ import {
   MULTI_DAY_ICON,
 } from 'assets/icons';
 
-type ImageType = {
-  url: string;
-  altText: string;
-}[];
-
 type LocationType = {
   title: string;
 }[];
@@ -32,11 +27,6 @@ type DateDisplayType = DateInformaitonType & {
 };
 
 type EventType = DateInformaitonType & {
-  id: number;
-  title: string;
-  url: string;
-  summary: string;
-  image: ImageType;
   location: LocationType;
 };
 

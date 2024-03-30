@@ -1,5 +1,4 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { QUOTE_ICON } from 'assets/icons';
 import Text, {
   TEXT_CONTAINER,
@@ -19,7 +18,7 @@ const { Spacing, Colors } = Tokens;
 const SMALL = 500;
 
 const ELEMENT_NAME = 'umd-element-quote-inline';
-const ATTRIBUTE_WITH_IMAGE = 'with-image';
+const ATTRIBUTE_WITH_IMAGE = 'has-image';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_SIZE = 'size';
 const THEME_MARYLAND = 'maryland';
@@ -30,27 +29,55 @@ const QUOTE_INLINE_CONTAINER_WRAPPER = 'quote-inline-container-wrapper';
 
 const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
 const IS_SIZE_LARGE = `[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
-const IS_WITH_IMAGE = `.${QUOTE_INLINE_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
+const IS_WITH_IMAGE = `[${ATTRIBUTE_WITH_IMAGE}]`;
+const IS_WITH_IMAGE_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_WITH_IMAGE}`;
+const IS_SIZE_LARGE_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE}`;
+const IS_SIZE_LARGE_WITH_IMAGE_CONTAINER = `${IS_WITH_IMAGE_CONTAINER}${IS_WITH_IMAGE}`;
 const IS_TEXT_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${TEXT_CONTAINER}`;
 const IS_IMAGE_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${IMAGE_CONTAINER}`;
 
+const IS_MARYLAND_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_THEME_MARYLAND}`;
+
+// prettier-ignore
+const OverwriteThemeMaryland = `
+  ${IS_MARYLAND_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+    border-left: 2px solid ${Colors.white};
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    ${IS_MARYLAND_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+      border-left: 2px solid ${Colors.white};
+    }
+  }
+  
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_MARYLAND_CONTAINER} .${IMAGE_CONTAINER} img  {
+      border-right: 2px solid ${Colors.white};
+    }
+  }
+  
+  ${IS_MARYLAND_CONTAINER} span svg {
+    fill: ${Colors.white};
+  }
+`;
+
 // prettier-ignore
 const OverwriteSizeLarge = `
-  .${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE} {
+  ${IS_SIZE_LARGE_CONTAINER} {
     max-width: 905px;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE} .${QUOTE_INLINE_CONTAINER_WRAPPER} {
+    ${IS_SIZE_LARGE_CONTAINER} .${QUOTE_INLINE_CONTAINER_WRAPPER} {
       gap: ${Spacing.xl};
     }
   }
 
-  .${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE} .${IMAGE_CONTAINER} img {
+  ${IS_SIZE_LARGE_CONTAINER} .${IMAGE_CONTAINER} img {
     max-width: 200px;
   }
 
-  .${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE} .${IMAGE_CONTAINER} span {
+  ${IS_SIZE_LARGE_CONTAINER} .${IMAGE_CONTAINER} span {
     bottom: -7px;
     left: -2px;
     height: 26px;
@@ -58,7 +85,7 @@ const OverwriteSizeLarge = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE} .${IMAGE_CONTAINER} span {
+    ${IS_SIZE_LARGE_CONTAINER} .${IMAGE_CONTAINER} span {
       height: 30px;
       width: 41px;
       top: -14px;
@@ -66,33 +93,80 @@ const OverwriteSizeLarge = `
       left: inherit;
     }
   }
+
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER} {
+      padding-top:  ${Spacing['2xl']};
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+      margin-left: ${Spacing['2xl']};
+      padding-left: ${Spacing.md};
+    }
+  }
+
+  ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 26px;
+    width: 36px;
+    display: block;
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 26px;
+      width: 36px;
+    }
+  }
+
+  ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} svg {
+    fill: ${Colors.red};
+  }
+`;
+
+// prettier-ignore
+const OverwriteSizedLargeWithImage = `
+  ${IS_SIZE_LARGE_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+    display: none;
+  }
+
+  ${IS_SIZE_LARGE_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER} {
+    padding-top: 0;
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_SIZE_LARGE_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+      margin-left: 0;
+      padding-left: 0;
+      border-left: none;
+    }
+  }
 `;
 
 // prettier-ignore
 const OverwriteWithImage = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${QUOTE_INLINE_CONTAINER}${IS_WITH_IMAGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+    .${IS_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
       border-left: 2px solid ${Colors.red};
       padding-left: ${Spacing.md};
     }
   }
-
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${QUOTE_INLINE_CONTAINER}${IS_WITH_IMAGE}${IS_THEME_MARYLAND} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-      border-left: 2px solid ${Colors.white};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${QUOTE_INLINE_CONTAINER}${IS_WITH_IMAGE}${IS_THEME_MARYLAND} .${IMAGE_CONTAINER} img  {
-      border-right: 2px solid ${Colors.white};
-    }
-  }
-
-  .${QUOTE_INLINE_CONTAINER}${IS_WITH_IMAGE}${IS_THEME_MARYLAND} span svg {
-    fill: ${Colors.white};
-  }
 `;
+
+// prettier-ignore
+const TextContainer = `
+  ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+    padding-left: ${Spacing.md};
+    border-left: 2px solid ${Colors.red};
+  }
+`
 
 // prettier-ignore
 const ImageContainer = `
@@ -150,8 +224,11 @@ const STYLES_QUOTE_INLINE_ELEMENT = `
   }
 
   ${ImageContainer}
+  ${TextContainer}
   ${OverwriteWithImage}
   ${OverwriteSizeLarge}
+  ${OverwriteSizedLargeWithImage}
+  ${OverwriteThemeMaryland}
 `;
 
 const CreateQuoteInlineElement = (element: TypeInlineInline) => {
@@ -163,7 +240,6 @@ const CreateQuoteInlineElement = (element: TypeInlineInline) => {
   const textContainer = Text.CreateElement({
     ...element,
     isSizeLarge,
-    isHeadlineLine: !hasImage,
   });
 
   if (hasImage) {

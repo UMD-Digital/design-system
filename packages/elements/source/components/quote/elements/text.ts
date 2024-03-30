@@ -1,9 +1,4 @@
-import {
-  Typography,
-  Layout,
-  Tokens,
-  Elements,
-} from '@universityofmaryland/variables';
+import { Typography, Layout, Tokens } from '@universityofmaryland/variables';
 import { QUOTE_ICON } from 'assets/icons';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
@@ -17,19 +12,15 @@ export type TypeQuoteTextContainer = {
 
 type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
   isSizeLarge?: boolean;
-  isHeadlineLine?: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
 const { GridColumnAndRows } = Layout;
 const { SansExtraLarge, SansLarger, SansMedium, SansSmall } = Typography;
 
-const MEDIUM = 400;
-
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_SIZE = 'size';
-const ATTRIBUTE_HEADLINE_LINE = 'headline-line';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
 const SIZE_LARGE = 'large';
@@ -45,19 +36,6 @@ const TEXT_CONTAINER_ACTIONS_WRAPPER = 'quote-container-actions';
 const IS_THEME_DARK = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_MARYLAND = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
 const IS_SIZE_LARGE = `.${TEXT_CONTAINER}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
-const IS_HEADLINE_LINE = `.${TEXT_CONTAINER}[${ATTRIBUTE_HEADLINE_LINE}]`;
-
-// prettier-ignore
-const VarationHeadlineLine = `
-  ${IS_HEADLINE_LINE} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-    padding-left: ${Spacing.md};
-    border-left: 2px solid ${Colors.red};
-  }
-
-  ${IS_HEADLINE_LINE}[${ATTRIBUTE_THEME}='${THEME_MARYLAND}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-    border-left: 2px solid ${Colors.white};
-  }
-`
 
 // prettier-ignore
 const VarationSizeLarge = `
@@ -72,41 +50,6 @@ const VarationSizeLarge = `
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: SansExtraLarge,
     },
   })}
-
-  ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} svg {
-    fill: ${Colors.red};
-  }
-
-  @media (max-width: 499px) {
-    ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] {
-      padding-top:  ${Spacing['2xl']};
-    }
-  }
-
-  ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 26px;
-    width: 36px;
-  }
-
-  @media (min-width: 500px) {
-    ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-      margin-left: ${Spacing['2xl']};
-      padding-left: ${Spacing.md};
-    }
-  }
-
-  @media (min-width: 500px) {
-    ${IS_HEADLINE_LINE}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}'] .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 26px;
-      width: 36px;
-    }
-  }
 `
 
 // prettier-ignore
@@ -149,6 +92,10 @@ const QuoteStyles = `
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: SansLarger,
     },
   })}
+
+  .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+    display: none;
+  }
 `;
 
 // prettier-ignore
@@ -232,7 +179,6 @@ const STYLES_QUOTE_TEXT_CONTAINER = `
   ${VarationThemeDark}
   ${VarationThemeMaryland}
   ${VarationSizeLarge}
-  ${VarationHeadlineLine}
 `;
 
 export const CreateQuoteTextContainer = ({
@@ -242,7 +188,6 @@ export const CreateQuoteTextContainer = ({
   action,
   theme,
   isSizeLarge = false,
-  isHeadlineLine = false,
 }: TypeQuoteTextContainerProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -250,6 +195,10 @@ export const CreateQuoteTextContainer = ({
   wrapper.classList.add(TEXT_CONTAINER_WRAPPER);
 
   if (quote) {
+    const iconSpan = document.createElement('span');
+    iconSpan.innerHTML = QUOTE_ICON;
+
+    quote.appendChild(iconSpan);
     quote.classList.add(TEXT_CONTAINER_QUOTE_WRAPPER);
     wrapper.appendChild(quote);
   }
@@ -273,13 +222,6 @@ export const CreateQuoteTextContainer = ({
 
   container.setAttribute(ATTRIBUTE_THEME, theme);
   if (isSizeLarge) container.setAttribute(ATTRIBUTE_SIZE, SIZE_LARGE);
-  if (isHeadlineLine) container.setAttribute(ATTRIBUTE_HEADLINE_LINE, '');
-
-  if (isHeadlineLine && isSizeLarge && quote) {
-    const iconSpan = document.createElement('span');
-    iconSpan.innerHTML = QUOTE_ICON;
-    quote.appendChild(iconSpan);
-  }
 
   container.classList.add(TEXT_CONTAINER);
   container.appendChild(wrapper);

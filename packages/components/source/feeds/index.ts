@@ -3,9 +3,16 @@ import { Load as FeedNewsListLoader } from './news/list';
 import { Load as EventsNewsGridLoader } from './events/grid';
 import { Load as EventsNewsListLoader } from './events/list';
 
+export const Components = {
+  FeedNewsGridLoader,
+  FeedNewsListLoader,
+  EventsNewsGridLoader,
+  EventsNewsListLoader,
+};
+
 export default () => {
-  FeedNewsGridLoader();
-  FeedNewsListLoader();
-  EventsNewsGridLoader();
-  EventsNewsListLoader();
+  for (const key in Components) {
+    // @ts-ignore
+    Components[key]();
+  }
 };

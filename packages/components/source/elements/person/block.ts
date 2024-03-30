@@ -1,16 +1,12 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { PERSON_ICON } from 'assets/icons';
-import {
-  CreatBlockContainer,
-  TypeBlockContainerAttributes,
-  STYLES_BLOCK_CONTAINER,
-  BLOCK_CONTAINER,
-} from '../shared-elements/block/container';
-import {
-  CreateImageBlockContainer,
-  STYLES_BLOCK_COMMON_IMAGE,
-  BLOCK_IMAGE_CONTAINER,
-} from '../shared-elements/block/image';
+import BlockContainer, {
+  ELEMENT_BLOCK_CONTAINER,
+  TypeBlockContainer,
+} from '../block/container';
+import BlockImageContainer, {
+  ELEMENT_BLOCK_IMAGE_CONTAINER,
+} from '../block/image';
 import {
   CreatePersonTextContainer,
   TypePersonProps,
@@ -18,7 +14,7 @@ import {
 } from './elements/text';
 
 type TypeBlockPersonProps = TypePersonProps &
-  TypeBlockContainerAttributes & {
+  TypeBlockContainer & {
     image?: HTMLImageElement | null;
   };
 
@@ -32,24 +28,28 @@ const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
 const ELEMENT_NAME = 'umd-block-person';
-const ELEMENT_PERSON_BLOCK_CONTAINER = 'umd-block-person-block-container';
-const ELEMENT_PERSON_BLOCK_WRAPPER = 'umd-block-person-block-wrapper';
+const ELEMENT_PERSON_BLOCK_CONTAINER = 'block-person-block-container';
+const ELEMENT_PERSON_BLOCK_WRAPPER = 'block-person-block-wrapper';
 
-const IS_THEME_DARK = `.${ELEMENT_PERSON_BLOCK_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-const IS_IMAGE_CONTAINER_OVERWRITE = `.${ELEMENT_PERSON_BLOCK_CONTAINER} .${BLOCK_IMAGE_CONTAINER}`;
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
+const OVERWRITE_DARK_THEME_PERSON_CONTAINER = `.${ELEMENT_PERSON_BLOCK_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_BLOCK_CONTAINER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
+const OVERWRITE_DARK_THEME_BLOCK_CONTAINER = `${OVERWRITE_DARK_THEME_PERSON_CONTAINER} .${ELEMENT_BLOCK_CONTAINER}`;
+const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${OVERWRITE_DARK_THEME_PERSON_CONTAINER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
 
 const OverwriteThemeDarkStyles = `
-  ${IS_THEME_DARK} .${BLOCK_CONTAINER} {
+  ${OVERWRITE_DARK_THEME_BLOCK_CONTAINER} {
     background-color: ${Colors.black};
   }
 
-  ${IS_THEME_DARK} .${BLOCK_IMAGE_CONTAINER} {
+  ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
     background-color: ${Colors.gray.dark};
   }
 `;
 
 const OverwriteImagesStyles = `
-  ${IS_IMAGE_CONTAINER_OVERWRITE} {
+  ${OVERWRITE_IMAGE_CONTAINER} {
     display: flex;
     justify-content: center;
     margin-bottom: ${Spacing.md};
@@ -57,26 +57,26 @@ const OverwriteImagesStyles = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} {
+    ${OVERWRITE_IMAGE_CONTAINER} {
       float: none;
       width: 100%;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} {
+    ${OVERWRITE_IMAGE_CONTAINER} {
       order: 1;
     }
   }
 
-  ${IS_IMAGE_CONTAINER_OVERWRITE} img,
-  ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
+  ${OVERWRITE_IMAGE_CONTAINER} img,
+  ${OVERWRITE_IMAGE_CONTAINER} svg {
     height: 140px;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${IMAGE_BREAKPOINT}px) {
-    ${IS_IMAGE_CONTAINER_OVERWRITE} img,
-    ${IS_IMAGE_CONTAINER_OVERWRITE} svg {
+    ${OVERWRITE_IMAGE_CONTAINER} img,
+    ${OVERWRITE_IMAGE_CONTAINER} svg {
       height: 200px;
     }
   }
@@ -102,9 +102,9 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
     height: 100%;
   }
 
-  ${STYLES_BLOCK_COMMON_IMAGE}
+  ${BlockImageContainer.Styles}
+  ${BlockContainer.Styles}
   ${STYLES_PERSON_TEXT}
-  ${STYLES_BLOCK_CONTAINER}
   ${WrapperStyles}
   ${OverwriteImagesStyles}
   ${OverwriteThemeDarkStyles}
@@ -120,10 +120,10 @@ const CreatePersonBlockElement = (element: TypeBlockPersonProps) => {
   const personContainer = CreatePersonTextContainer(element);
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
-  const imageContainer = CreateImageBlockContainer({
+  const imageContainer = BlockImageContainer.CreateElement({
     image: providedImage || PERSON_ICON,
   });
-  const container = CreatBlockContainer({
+  const container = BlockContainer.CreateElement({
     personContainer,
     imageContainer,
     theme,

@@ -1,14 +1,14 @@
-export const BLOCK_IMAGE_CONTAINER = 'umd-block-image-container';
+export const ELEMENT_BLOCK_IMAGE_CONTAINER = 'umd-block-image-container';
 
 // prettier-ignore
-export const STYLES_BLOCK_COMMON_IMAGE = `
-  .${BLOCK_IMAGE_CONTAINER} a {
+const STYLES_BLOCK_IMAGE_CONTAINER = `
+  .${ELEMENT_BLOCK_IMAGE_CONTAINER} a {
     display: block;
     line-height: 0;
     overflow: hidden;
   }
 
-  .${BLOCK_IMAGE_CONTAINER} a img {
+  .${ELEMENT_BLOCK_IMAGE_CONTAINER} a img {
     object-fit: cover;
     object-position: 50% 50%;
     transform: scale(1);
@@ -16,20 +16,20 @@ export const STYLES_BLOCK_COMMON_IMAGE = `
     width: 100%;
   }
 
-  .${BLOCK_IMAGE_CONTAINER} a:hover img,
-  .${BLOCK_IMAGE_CONTAINER} a:focus img {
+  .${ELEMENT_BLOCK_IMAGE_CONTAINER} a:hover img,
+  .${ELEMENT_BLOCK_IMAGE_CONTAINER} a:focus img {
     transform: scale(1.025);
   }
 `;
 
-export const CreateImageBlockContainer = ({
+const CreateImageBlockContainer = ({
   image,
 }: {
   image: HTMLImageElement | string;
 }) => {
   const container = document.createElement('div');
 
-  container.classList.add(BLOCK_IMAGE_CONTAINER);
+  container.classList.add(ELEMENT_BLOCK_IMAGE_CONTAINER);
 
   if (typeof image === 'string') {
     container.innerHTML = image;
@@ -38,4 +38,9 @@ export const CreateImageBlockContainer = ({
 
   container.appendChild(image);
   return container;
+};
+
+export default {
+  CreateElement: CreateImageBlockContainer,
+  Styles: STYLES_BLOCK_IMAGE_CONTAINER,
 };

@@ -1,25 +1,14 @@
-import {
-  CreatBlockContainer,
-  TypeBlockContainerAttributes,
-  STYLES_BLOCK_CONTAINER,
-} from '../shared-elements/block/container';
-import {
-  CreateImageBlockContainer,
-  STYLES_BLOCK_COMMON_IMAGE,
-} from '../shared-elements/block/image';
-import {
-  CreateBlockTextContainer,
-  TypeCommonTextAttributes,
-  STYLES_LIST_COMMON_TEXT,
-} from '../shared-elements/block/text';
+import BlockContainer, { TypeBlockContainer } from '../block/container';
+import BlockImageContainer from '../block/image';
+import BlockTextContainer, { TypeBlockTextContainter } from '../block/text';
 
-type TypeBlockCardProps = TypeCommonTextAttributes &
-  TypeBlockContainerAttributes & {
+type TypeBlockCardProps = TypeBlockTextContainter &
+  TypeBlockContainer & {
     image?: HTMLImageElement | null;
   };
 
-const ELEMENT_NAME = 'umd-block-standard';
-const ELEMENT_LIST_CONTAINER = 'umd-block-standard-container';
+const ELEMENT_NAME = 'umd-block-card';
+const ELEMENT_LIST_CONTAINER = 'block-card-container';
 
 // prettier-ignore
 const STYLES_BLOCK_CARD_ELEMENT = `
@@ -27,17 +16,19 @@ const STYLES_BLOCK_CARD_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${STYLES_BLOCK_COMMON_IMAGE}
-  ${STYLES_LIST_COMMON_TEXT}
-  ${STYLES_BLOCK_CONTAINER}
+  ${BlockImageContainer.Styles}
+  ${BlockTextContainer.Styles}
+  ${BlockContainer.Styles}
 `;
 
 const CreateCardBlockElement = (element: TypeBlockCardProps) => {
   const { theme, image, isAligned = false, isBordered = false } = element;
-  const textContainer = CreateBlockTextContainer(element);
+  const textContainer = BlockTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
-  const imageContainer = image ? CreateImageBlockContainer({ image }) : null;
-  const container = CreatBlockContainer({
+  const imageContainer = image
+    ? BlockImageContainer.CreateElement({ image })
+    : null;
+  const container = BlockContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,

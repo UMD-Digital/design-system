@@ -1,20 +1,20 @@
 import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
-import {
-  BLOCK_TEXT_CONTAINER,
-  BLOCK_TEXT_HEADLINE_WRAPPER,
-  BLOCK_TEXT_DATE_WRAPPER,
-  BLOCK_TEXT_CONTAINER_TEXT_WRAPPER,
-} from './text';
-import { BLOCK_IMAGE_CONTAINER } from './image';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import {
+  ELEMENT_BLOCK_TEXT_CONTAINER,
+  ELEMENT_BLOCK_TEXT_HEADLINE,
+  ELEMENT_BLOCK_TEXT_DATE,
+  ELEMENT_BLOCK_TEXT_RICH_TEXT,
+} from './text';
+import { ELEMENT_BLOCK_IMAGE_CONTAINER } from './image';
 
-export type TypeBlockContainerAttributes = {
+export type TypeBlockContainer = {
   isAligned?: boolean;
   isBordered?: boolean;
   theme?: string;
 };
 
-type TypeBlockContainerProps = TypeBlockContainerAttributes & {
+type TypeBlockContainerProps = TypeBlockContainer & {
   textContainer?: HTMLDivElement | null;
   imageContainer?: HTMLDivElement | null;
   personContainer?: HTMLDivElement | null;
@@ -33,14 +33,23 @@ const THEME_DARK = 'dark';
 const SMALL = 400;
 const MEDIUM = 650;
 
-const ELEMENT_NAME = 'umd-block-standard';
-export const BLOCK_CONTAINER = 'block-container';
-export const BLOCK_CONTAINER_WRAPPER = 'block-container-wrapper';
+const ELEMENT_NAME = 'umd-block-container';
+export const ELEMENT_BLOCK_CONTAINER = 'block-container';
+export const ELEMENT_BLOCK_CONTAINER_WRAPPER = 'block-container-wrapper';
 
-const IS_THEME_DARK = `.${BLOCK_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-const IS_ALIGNED = `.${BLOCK_CONTAINER}[${ATTRIBUTE_ALIGNED}]`;
-const IS_WITH_BORDER = `.${BLOCK_CONTAINER}[${ATTRIBUTE_BORDER}]`;
-const IS_WITH_IMAGE = `.${BLOCK_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
+const IS_THEME_DARK = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_ALIGNED = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_ALIGNED}]`;
+const IS_WITH_BORDER = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_BORDER}]`;
+const IS_WITH_IMAGE = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
+
+const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_BLOCK_TEXT_CONTAINER}`;
+const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
+const OVERWRITE_DARK_THEME_RICH_TEXT = `${IS_THEME_DARK} .${ELEMENT_BLOCK_TEXT_RICH_TEXT}`;
+
+const OVERWRITE_TYPE_BORDER_TEXT_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_BLOCK_TEXT_CONTAINER}`;
+const OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
+
+const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${ELEMENT_BLOCK_TEXT_CONTAINER}`;
 
 // prettier-ignore
 const VariantThemeStyles = `
@@ -54,18 +63,18 @@ const VariantThemeStyles = `
     color: ${Colors.white};
   }
 
-  ${IS_THEME_DARK} .${BLOCK_TEXT_CONTAINER} {
+  ${OVERWRITE_DARK_THEME_TEXT_CONTAINER} {
     padding: ${Spacing.md};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK} .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER}`]: Text.RichTextDark,
+      [`${OVERWRITE_DARK_THEME_RICH_TEXT}`]: Text.RichTextDark,
     },
   })}
 
   @media (max-width: ${MEDIUM - 1}px) {
-    ${IS_THEME_DARK} .${BLOCK_IMAGE_CONTAINER} {
+    ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
      margin-top: ${Spacing.md};
      margin-right: ${Spacing.md};
     }
@@ -95,12 +104,12 @@ const VariantBorderStyles = `
     height: 100%;
   }
 
-  ${IS_WITH_BORDER} .${BLOCK_TEXT_CONTAINER} {
+  ${OVERWRITE_TYPE_BORDER_TEXT_CONTAINER} {
     padding: ${Spacing.md};
   }
 
   @media (max-width: ${MEDIUM - 1}px) {
-    ${IS_WITH_BORDER} .${BLOCK_IMAGE_CONTAINER} {
+    ${OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER} {
       margin-top: ${Spacing.md};
       margin-right: ${Spacing.md};
     }
@@ -117,7 +126,7 @@ const VariantWithImageStyles = `
   }
 
   @media (min-width: ${MEDIUM}px) {
-    ${IS_WITH_IMAGE} .${BLOCK_TEXT_CONTAINER} {
+    ${OVERWRITE_WITH_IMAGE_TEXT_CONTAINER} {
       padding-top: ${Spacing.md};
     }
   }
@@ -126,7 +135,7 @@ const VariantWithImageStyles = `
 // prettier-ignore
 const TextContainerStyles = `
   @media (max-width: ${MEDIUM - 1}px) {
-    .${BLOCK_TEXT_HEADLINE_WRAPPER} {
+    .${ELEMENT_BLOCK_TEXT_HEADLINE} {
       max-width: calc(100% - 110px);
     }
   }
@@ -134,13 +143,15 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${BLOCK_TEXT_HEADLINE_WRAPPER}`]: SansLarger,
+        [`.${ELEMENT_BLOCK_TEXT_HEADLINE}`]: SansLarger,
       },
     })}
-  
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${BLOCK_TEXT_HEADLINE_WRAPPER} *`]: SansLarger,
+        [`.${ELEMENT_BLOCK_TEXT_HEADLINE} *`]: SansLarger,
       },
     })}
   }
@@ -148,13 +159,15 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${BLOCK_TEXT_HEADLINE_WRAPPER}`]: SansExtraLarge,
+        [`.${ELEMENT_BLOCK_TEXT_HEADLINE}`]: SansExtraLarge,
       },
     })}
-  
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${BLOCK_TEXT_HEADLINE_WRAPPER} *`]: SansExtraLarge,
+        [`.${ELEMENT_BLOCK_TEXT_HEADLINE} *`]: SansExtraLarge,
       },
     })}
   }
@@ -162,13 +175,15 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${BLOCK_TEXT_DATE_WRAPPER}`]: SansSmall,
+        [`.${ELEMENT_BLOCK_TEXT_DATE}`]: SansSmall,
       },
     })}
-  
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${BLOCK_TEXT_DATE_WRAPPER} *`]: SansSmall,
+        [`.${ELEMENT_BLOCK_TEXT_DATE} *`]: SansSmall,
       },
     })}
   }
@@ -176,13 +191,13 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} *`]: Typography.SansMedium,
+        [`.${ELEMENT_BLOCK_TEXT_RICH_TEXT} *`]: Typography.SansMedium,
       },
     })}
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} * {
+    .${ELEMENT_BLOCK_TEXT_RICH_TEXT} * {
       line-height: 1.375em;
     }
   }
@@ -191,7 +206,7 @@ const TextContainerStyles = `
 // prettier-ignore
 const ImageContainerStyles = `
   @media (max-width: ${MEDIUM - 1}px) {
-    .${BLOCK_IMAGE_CONTAINER} {
+    .${ELEMENT_BLOCK_IMAGE_CONTAINER} {
       width: 96px;
       float: right;
       margin-bottom: 4px;
@@ -201,13 +216,13 @@ const ImageContainerStyles = `
 `;
 
 // prettier-ignore
-export const STYLES_BLOCK_CONTAINER = `
-  .${BLOCK_CONTAINER} {
+const STYLES_BLOCK_CONTAINER = `
+  .${ELEMENT_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     max-width: 680px;
   }
 
-  .${BLOCK_CONTAINER_WRAPPER} {
+  .${ELEMENT_BLOCK_CONTAINER_WRAPPER} {
     width: 100%;
   }
 
@@ -219,7 +234,7 @@ export const STYLES_BLOCK_CONTAINER = `
   ${VariantBorderStyles}
 `;
 
-export const CreatBlockContainer = ({
+const CreateBlockContainer = ({
   imageContainer,
   textContainer,
   personContainer,
@@ -230,11 +245,11 @@ export const CreatBlockContainer = ({
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
 
-  container.classList.add(BLOCK_CONTAINER);
+  container.classList.add(ELEMENT_BLOCK_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   if (isAligned) container.setAttribute(ATTRIBUTE_ALIGNED, '');
   if (isBordered) container.setAttribute(ATTRIBUTE_BORDER, '');
-  wrapper.classList.add(BLOCK_CONTAINER_WRAPPER);
+  wrapper.classList.add(ELEMENT_BLOCK_CONTAINER_WRAPPER);
 
   if (imageContainer) {
     wrapper.appendChild(imageContainer);
@@ -242,7 +257,6 @@ export const CreatBlockContainer = ({
   }
 
   if (textContainer) {
-    textContainer.classList.add(BLOCK_TEXT_CONTAINER);
     wrapper.appendChild(textContainer);
   }
 
@@ -253,4 +267,9 @@ export const CreatBlockContainer = ({
   container.appendChild(wrapper);
 
   return container;
+};
+
+export default {
+  CreateElement: CreateBlockContainer,
+  Styles: STYLES_BLOCK_CONTAINER,
 };

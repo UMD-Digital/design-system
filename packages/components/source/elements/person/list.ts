@@ -5,15 +5,12 @@ import {
   STYLES_PERSON_TEXT,
   PERSON_TEXT_CONTAINER,
 } from './elements/text';
-import {
-  CreatListContainer,
-  STYLES_LIST_CONTAINER,
-} from '../shared-elements/list/container';
+import { CreatListContainer, STYLES_LIST_CONTAINER } from '../list/container';
 import {
   CreateImageContainer,
   STYLES_LIST_COMMON_IMAGE,
   LIST_IMAGE_CONTAINER,
-} from '../shared-elements/list/image';
+} from '../list/image';
 
 type TypeListPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;

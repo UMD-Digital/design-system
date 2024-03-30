@@ -1,22 +1,13 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  CreatBlockContainer,
-  TypeBlockContainerAttributes,
-  STYLES_BLOCK_CONTAINER,
-} from '../shared-elements/block/container';
-import {
-  CreateImageBlockContainer,
-  STYLES_BLOCK_COMMON_IMAGE,
-} from '../shared-elements/block/image';
-import {
-  CreateBlockTextContainer,
-  TypeCommonTextAttributes,
-  STYLES_LIST_COMMON_TEXT,
-  BLOCK_TEXT_HEADLINE_WRAPPER,
-} from '../shared-elements/block/text';
+import BlockContainer, { TypeBlockContainer } from '../block/container';
+import BlockImageContainer from '../block/image';
+import BlockTextContainer, {
+  TypeBlockTextContainter,
+  ELEMENT_BLOCK_TEXT_HEADLINE,
+} from '../block/text';
 
-type TypeBlockEventProps = TypeCommonTextAttributes &
-  TypeBlockContainerAttributes & {
+type TypeBlockEventProps = TypeBlockTextContainter &
+  TypeBlockContainer & {
     image?: HTMLImageElement | null;
     eventDetails: HTMLElement;
   };
@@ -24,8 +15,8 @@ type TypeBlockEventProps = TypeCommonTextAttributes &
 const { Spacing } = Tokens;
 
 const ELEMENT_NAME = 'umd-block-event';
-const ELEMENT_BLOCK_CONTAINER = 'umd-block-event-container';
-const ELEMENT_BLOCK_DETAILS_WRAPPER = 'umd-block-event-details-wrapper';
+const ELEMENT_BLOCK_CONTAINER = 'block-event-container';
+const ELEMENT_BLOCK_DETAILS_WRAPPER = 'block-event-details-wrapper';
 
 // prettier-ignore
 const DetailsRowStyles = `
@@ -45,9 +36,9 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${STYLES_BLOCK_COMMON_IMAGE}
-  ${STYLES_LIST_COMMON_TEXT}
-  ${STYLES_BLOCK_CONTAINER}
+  ${BlockImageContainer.Styles}
+  ${BlockTextContainer.Styles}
+  ${BlockContainer.Styles}
   ${DetailsRowStyles}
 `;
 
@@ -59,10 +50,12 @@ const CreateEventBlockElement = (element: TypeBlockEventProps) => {
     isBordered = false,
     eventDetails,
   } = element;
-  const textContainer = CreateBlockTextContainer(element);
+  const textContainer = BlockTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
-  const imageContainer = image ? CreateImageBlockContainer({ image }) : null;
-  const container = CreatBlockContainer({
+  const imageContainer = image
+    ? BlockImageContainer.CreateElement({ image })
+    : null;
+  const container = BlockContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,
@@ -72,7 +65,7 @@ const CreateEventBlockElement = (element: TypeBlockEventProps) => {
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
-      `.${BLOCK_TEXT_HEADLINE_WRAPPER}`,
+      `.${ELEMENT_BLOCK_TEXT_HEADLINE}`,
     ) as HTMLElement;
     eventDetails.classList.add(ELEMENT_BLOCK_DETAILS_WRAPPER);
     headline.appendChild(eventDetails);

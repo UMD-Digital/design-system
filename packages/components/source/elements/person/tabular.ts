@@ -7,15 +7,12 @@ import {
   PERSON_NAME_CONTAINER,
   DISPLAY_TABULAR,
 } from './elements/text';
-import {
-  CreatListContainer,
-  STYLES_LIST_CONTAINER,
-} from '../shared-elements/list/container';
+import { CreatListContainer, STYLES_LIST_CONTAINER } from '../list/container';
 import {
   CreateImageContainer,
   STYLES_LIST_COMMON_IMAGE,
   LIST_IMAGE_CONTAINER,
-} from '../shared-elements/list/image';
+} from '../list/image';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 type TypeTabularPersonProps = TypePersonProps & {

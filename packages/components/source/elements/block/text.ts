@@ -6,7 +6,7 @@ import {
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
 
-export type TypeCommonTextAttributes = {
+export type TypeBlockTextContainter = {
   headline?: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
@@ -22,15 +22,16 @@ const { SansLarge, SansMin, Eyebrow } = Typography;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-export const BLOCK_TEXT_CONTAINER = 'block-text-container';
-export const BLOCK_TEXT_WRAPPER = 'block-text-container-wrapper';
-export const BLOCK_TEXT_HEADLINE_WRAPPER = 'block-text-headline-wrapper';
-export const BLOCK_TEXT_EYEBROW_WRAPPER = 'block-text-eyebrow-wrapper';
-export const BLOCK_TEXT_CONTAINER_TEXT_WRAPPER = 'block-text-wrapper';
-export const BLOCK_TEXT_DATE_WRAPPER = 'block-text-date-wrapper';
-export const BLOCK_TEXT_ACTIONS_WRAPPER = 'block-text-actions-wrapper';
+export const ELEMENT_BLOCK_TEXT_CONTAINER = 'block-text-container';
+export const ELEMENT_BLOCK_TEXT_WRAPPER = 'block-text-container-wrapper';
+export const ELEMENT_BLOCK_TEXT_EYEBROW = 'block-text-eyebrow';
+export const ELEMENT_BLOCK_TEXT_HEADLINE = 'block-text-headline';
+export const ELEMENT_BLOCK_TEXT_RICH_TEXT = 'block-rich-text';
+export const ELEMENT_BLOCK_TEXT_DATE = 'block-text-date';
+export const ELEMENT_BLOCK_TEXT_ACTIONS = 'block-text-actions';
 
-const IS_THEME_DARK = `.${BLOCK_TEXT_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_THEME_DARK = `.${ELEMENT_BLOCK_TEXT_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_THEME_DARK_HEADLINE = `${IS_THEME_DARK} .${ELEMENT_BLOCK_TEXT_HEADLINE}`;
 
 // prettier-ignore
 const DarkThemeStyles = `
@@ -40,14 +41,14 @@ const DarkThemeStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK} .${BLOCK_TEXT_HEADLINE_WRAPPER} a`]:
+      [`${IS_THEME_DARK_HEADLINE} a`]:
       Link.LineSlideUnder.white,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK} .${BLOCK_TEXT_HEADLINE_WRAPPER}`]:
+      [`${IS_THEME_DARK_HEADLINE}`]:
       Link.LineSlideUnder.white,
     },
   })}
@@ -55,63 +56,63 @@ const DarkThemeStyles = `
 
 // prettier-ignore
 const EyebrowStyles = `
-  .${BLOCK_TEXT_EYEBROW_WRAPPER} {
+  .${ELEMENT_BLOCK_TEXT_EYEBROW} {
     color: ${Colors.black};
   }
 
-  .${BLOCK_TEXT_EYEBROW_WRAPPER} * {
+  .${ELEMENT_BLOCK_TEXT_EYEBROW} * {
     color: currentColor;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${BLOCK_TEXT_EYEBROW_WRAPPER}`]: Eyebrow,
+      [`.${ELEMENT_BLOCK_TEXT_EYEBROW}`]: Eyebrow,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${BLOCK_TEXT_EYEBROW_WRAPPER} *`]: Eyebrow,
+      [`.${ELEMENT_BLOCK_TEXT_EYEBROW} *`]: Eyebrow,
     },
   })}
 
-  .${BLOCK_TEXT_EYEBROW_WRAPPER} a:hover,
-  .${BLOCK_TEXT_EYEBROW_WRAPPER} a:focus {
+  .${ELEMENT_BLOCK_TEXT_EYEBROW} a:hover,
+  .${ELEMENT_BLOCK_TEXT_EYEBROW} a:focus {
     text-decoration: underline;
   }
 `;
 
 // prettier-ignore
 const HeadlineStyles = `
-  * + .${BLOCK_TEXT_HEADLINE_WRAPPER} {
+  * + .${ELEMENT_BLOCK_TEXT_HEADLINE} {
     margin-top: ${Spacing.min}
   }
 
-  .${BLOCK_TEXT_HEADLINE_WRAPPER} {
+  .${ELEMENT_BLOCK_TEXT_HEADLINE} {
     color: ${Colors.black};
   }
 
-  .${BLOCK_TEXT_HEADLINE_WRAPPER},
-  .${BLOCK_TEXT_HEADLINE_WRAPPER} * {
+  .${ELEMENT_BLOCK_TEXT_HEADLINE},
+  .${ELEMENT_BLOCK_TEXT_HEADLINE} * {
     color: currentColor;
     font-weight: 700;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${BLOCK_TEXT_HEADLINE_WRAPPER}`]: SansLarge,
+      [`.${ELEMENT_BLOCK_TEXT_HEADLINE}`]: SansLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${BLOCK_TEXT_HEADLINE_WRAPPER} *`]: SansLarge,
+      [`.${ELEMENT_BLOCK_TEXT_HEADLINE} *`]: SansLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${BLOCK_TEXT_HEADLINE_WRAPPER} a`]:
+      [`.${ELEMENT_BLOCK_TEXT_HEADLINE} a`]:
       Link.LineSlideUnder.black,
     },
   })}
@@ -119,23 +120,23 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  * + .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} {
+  * + .${ELEMENT_BLOCK_TEXT_RICH_TEXT} {
     margin-top: ${Spacing.min}
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} *`]: Typography.SansSmall,
+      [`.${ELEMENT_BLOCK_TEXT_RICH_TEXT} *`]: Typography.SansSmall,
     },
   })}
 
-  .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} a {
+  .${ELEMENT_BLOCK_TEXT_RICH_TEXT} a {
     text-decoration: underline;
     transition: color 0.3s ease-in-out;
   }
 
-  .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} a:hover,
-  .${BLOCK_TEXT_CONTAINER_TEXT_WRAPPER} a:focus {
+  .${ELEMENT_BLOCK_TEXT_RICH_TEXT} a:hover,
+  .${ELEMENT_BLOCK_TEXT_RICH_TEXT} a:focus {
     text-decoration: underline;
     color: ${Colors.red};
   }
@@ -143,41 +144,41 @@ const TextStyles = `
 
 // prettier-ignore
 const DateStyles = `
-  .${BLOCK_TEXT_DATE_WRAPPER} {
+  .${ELEMENT_BLOCK_TEXT_DATE} {
     display: block;
   }
 
-  * + .${BLOCK_TEXT_DATE_WRAPPER} {
+  * + .${ELEMENT_BLOCK_TEXT_DATE} {
     margin-top: ${Spacing.min};
     display: block;
   }
 
-  .${BLOCK_TEXT_DATE_WRAPPER} * {
+  .${ELEMENT_BLOCK_TEXT_DATE} * {
     color: ${Colors.gray.mediumAA};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${BLOCK_TEXT_DATE_WRAPPER}`]: SansMin,
+      [`.${ELEMENT_BLOCK_TEXT_DATE}`]: SansMin,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${BLOCK_TEXT_DATE_WRAPPER} *`]: SansMin,
+      [`.${ELEMENT_BLOCK_TEXT_DATE} *`]: SansMin,
     },
   })}
 `;
 
 // prettier-ignore
 const ActionStyles = `
-  .${BLOCK_TEXT_ACTIONS_WRAPPER} {
+  .${ELEMENT_BLOCK_TEXT_ACTIONS} {
     margin-top: ${Spacing.sm};
   }
 `;
 
 // prettier-ignore
-export const STYLES_LIST_COMMON_TEXT = `
+const STYLES_BLOCK_TEXT_CONTAINER = `
   ${EyebrowStyles}
   ${HeadlineStyles}
   ${TextStyles}
@@ -186,44 +187,49 @@ export const STYLES_LIST_COMMON_TEXT = `
   ${DarkThemeStyles}
 `;
 
-export const CreateBlockTextContainer = ({
+const CreateBlockTextContainer = ({
   eyebrow,
   headline,
   text,
   actions,
   date,
   theme,
-}: TypeCommonTextAttributes) => {
+}: TypeBlockTextContainter) => {
   const container = document.createElement('div');
 
-  container.classList.add(BLOCK_TEXT_CONTAINER);
+  container.classList.add(ELEMENT_BLOCK_TEXT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
   if (eyebrow) {
-    eyebrow.classList.add(BLOCK_TEXT_EYEBROW_WRAPPER);
+    eyebrow.classList.add(ELEMENT_BLOCK_TEXT_EYEBROW);
     container.appendChild(eyebrow);
   }
 
   if (headline) {
     CheckForAnimationLinkSpan({ element: headline });
-    headline.classList.add(BLOCK_TEXT_HEADLINE_WRAPPER);
+    headline.classList.add(ELEMENT_BLOCK_TEXT_HEADLINE);
     container.appendChild(headline);
   }
 
   if (text) {
-    text.classList.add(BLOCK_TEXT_CONTAINER_TEXT_WRAPPER);
+    text.classList.add(ELEMENT_BLOCK_TEXT_RICH_TEXT);
     container.appendChild(text);
   }
 
   if (date) {
-    date.classList.add(BLOCK_TEXT_DATE_WRAPPER);
+    date.classList.add(ELEMENT_BLOCK_TEXT_DATE);
     container.appendChild(date);
   }
 
   if (actions) {
-    actions.classList.add(BLOCK_TEXT_ACTIONS_WRAPPER);
+    actions.classList.add(ELEMENT_BLOCK_TEXT_ACTIONS);
     container.appendChild(actions);
   }
 
   return container;
+};
+
+export default {
+  CreateElement: CreateBlockTextContainer,
+  Styles: STYLES_BLOCK_TEXT_CONTAINER,
 };

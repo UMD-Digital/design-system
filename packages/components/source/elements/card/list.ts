@@ -1,17 +1,11 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  CreatListContainer,
-  STYLES_LIST_CONTAINER,
-} from '../shared-elements/list/container';
-import {
-  CreateImageContainer,
-  STYLES_LIST_COMMON_IMAGE,
-} from '../shared-elements/list/image';
+import { CreatListContainer, STYLES_LIST_CONTAINER } from '../list/container';
+import { CreateImageContainer, STYLES_LIST_COMMON_IMAGE } from '../list/image';
 import {
   CreateTextContainer,
   TypeCommonTextAttributes,
   STYLES_LIST_COMMON_TEXT,
-} from '../shared-elements/list/text';
+} from '../list/text';
 
 type TypeListCardProps = TypeCommonTextAttributes & {
   image?: HTMLImageElement | null;

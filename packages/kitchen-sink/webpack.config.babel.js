@@ -81,6 +81,7 @@ module.exports = () => {
     mode: 'production',
     optimization: optimization,
     stats: stats,
+    devtool: 'eval',
     module: modules,
     plugins: plugins,
     resolve: {

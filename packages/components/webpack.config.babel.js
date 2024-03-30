@@ -17,9 +17,9 @@ const baseConfig = {
     colors: true,
     errors: true,
     errorDetails: true,
-    source: true,
-    timings: true,
-    warnings: true,
+    source: false,
+    timings: false,
+    warnings: false,
   },
 };
 
@@ -30,6 +30,7 @@ const componentsFiles = {
 const componentBundle = {
   ...baseConfig,
   entry: componentsFiles,
+  devtool: 'eval',
   output: {
     path: path.resolve('dist'),
     filename: '[name].js',

@@ -72,6 +72,7 @@ module.exports = (env) => {
     mode,
     plugins,
     module,
+    devtool: 'eval',
     optimization,
     output,
     resolve,

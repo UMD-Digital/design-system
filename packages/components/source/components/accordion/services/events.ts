@@ -13,8 +13,6 @@ export const EventSize = ({ element }: { element: HTMLElement }) => {
 
   if (!isExpanded) return;
 
-  console.log('bodyElement', bodyElement);
-
   const bodyWrapperElement = shadowRoot.querySelector(
     `.${ACCORDION_BODY_WRAPPER}`,
   ) as HTMLElement;

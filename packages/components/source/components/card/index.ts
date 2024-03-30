@@ -25,7 +25,7 @@ const SLOTS = {
   HEADLINE: 'headline',
   EYEBROW: 'eyebrow',
   TEXT: 'text',
-  CTA: 'cta',
+  ACTIONS: 'actions',
 };
 const styles = `
   :host {
@@ -50,7 +50,7 @@ const GetImage = ({ element }: { element: UMDCardElement }) => {
 };
 
 const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
-  const { EYEBROW, HEADLINE, TEXT, CTA } = element._slots;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS } = element._slots;
 
   const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
   const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
@@ -66,7 +66,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
       eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
       headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
       text: SlotDefaultStyling({ element, slotRef: TEXT }),
-      actions: SlotDefaultStyling({ element, slotRef: CTA }),
+      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
       theme,
     });
   }
@@ -76,7 +76,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    actions: SlotDefaultStyling({ element, slotRef: CTA }),
+    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
     isAligned,
     isBordered,

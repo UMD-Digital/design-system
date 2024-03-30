@@ -3,7 +3,7 @@ export const SLOTS = {
   HEADLINE: 'headline',
   EYEBROW: 'eyebrow',
   TEXT: 'text',
-  CTA: 'cta',
+  ACTIONS: 'actions',
   CTAICON: 'cta-icon',
   DATE: 'date',
 };

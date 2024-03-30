@@ -1,11 +1,13 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens, Layout } from '@universityofmaryland/variables';
 import { SlotDefaultStyling } from 'helpers/ui';
 import { SLOTS } from '../globals';
 import { UMDAlertElement } from '../index';
+import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { Spacing } = Tokens;
+const { GridColumnAndRows } = Layout;
 
-const { CTA } = SLOTS;
+const { ACTIONS } = SLOTS;
 
 const ALERT_CTA = 'umd-alert-cta';
 
@@ -15,15 +17,16 @@ export const ctaStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  .${ALERT_CTA} {
-    overflow: hidden;
-    display: flex;
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ALERT_CTA}`]: GridColumnAndRows['.mobile-tablet'],
+    },
+  })}
 `;
 
 export const CreateCta = ({ element }: { element: UMDAlertElement }) => {
   const wrapper = document.createElement('div');
-  const ctaSlot = SlotDefaultStyling({ element, slotRef: CTA });
+  const ctaSlot = SlotDefaultStyling({ element, slotRef: ACTIONS });
 
   if (ctaSlot) {
     wrapper.classList.add(ALERT_CTA);

@@ -4,7 +4,7 @@ export const BREAKPOINTS = {
 export const SLOTS = {
   HEADLINE: 'headline',
   BODY: 'body',
-  CTA: 'cta',
+  ACTIONS: 'actions',
 };
 export const ELEMENTS = {
   ICON_CLASS: 'umd-element-alert-icon',

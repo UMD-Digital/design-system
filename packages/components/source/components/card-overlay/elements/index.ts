@@ -4,7 +4,7 @@ import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { UMDCardOverlayElement } from '../index';
 import { SLOTS } from '../globals';
 
-const { IMAGE, EYEBROW, HEADLINE, TEXT, CTA, CTAICON, DATE } = SLOTS;
+const { IMAGE, EYEBROW, HEADLINE, TEXT, ACTIONS, CTAICON, DATE } = SLOTS;
 
 // prettier-ignore
 export const ComponentStyles = `
@@ -38,7 +38,7 @@ export const CreateShadowDom = ({
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
     date: SlotDefaultStyling({ element, slotRef: DATE }),
-    cta: SlotDefaultStyling({ element, slotRef: CTA }),
+    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
     ctaIcon: SlotDefaultStyling({ element, slotRef: CTAICON }),
     theme: element._theme,
   });

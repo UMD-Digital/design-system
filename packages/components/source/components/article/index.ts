@@ -26,7 +26,7 @@ const SLOTS = {
   EYEBROW: 'eyebrow',
   TEXT: 'text',
   DATE: 'date',
-  CTA: 'cta',
+  ACTIONS: 'actions',
 };
 const styles = `
   :host {
@@ -55,7 +55,7 @@ export const CreateShadowDom = ({
 }: {
   element: UMDArticleElement;
 }) => {
-  const { EYEBROW, HEADLINE, TEXT, DATE, CTA } = element._slots;
+  const { EYEBROW, HEADLINE, TEXT, DATE, ACTIONS } = element._slots;
 
   const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
   const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
@@ -72,7 +72,7 @@ export const CreateShadowDom = ({
       headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
       text: SlotDefaultStyling({ element, slotRef: TEXT }),
       date: SlotDefaultStyling({ element, slotRef: DATE }),
-      actions: SlotDefaultStyling({ element, slotRef: CTA }),
+      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
       theme,
     });
   }
@@ -83,7 +83,7 @@ export const CreateShadowDom = ({
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
     date: SlotDefaultStyling({ element, slotRef: DATE }),
-    actions: SlotDefaultStyling({ element, slotRef: CTA }),
+    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
     isAligned,
     isBordered,

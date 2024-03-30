@@ -2,6 +2,7 @@ import {
   Animations,
   Typography,
   Tokens,
+  Layout,
   Elements,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
@@ -20,7 +21,7 @@ type TypeTextContainer = {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   date?: HTMLElement | null;
-  cta?: HTMLElement | null;
+  actions?: HTMLElement | null;
 };
 
 type TypeCardOverlayElement = TypeTextContainer & {
@@ -33,6 +34,7 @@ const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { Text } = Elements;
 const { SansExtraLarge, SansLarger, SansSmall, SansMin, Eyebrow } = Typography;
+const { GridColumnAndRows } = Layout;
 
 const SMALL = 300;
 
@@ -451,6 +453,12 @@ const CtaStyles = `
   .${CARD_OVERLAY_CONTAINER_CTA} {
     margin-top: ${Spacing.sm};
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${CARD_OVERLAY_CONTAINER_CTA}`]: GridColumnAndRows['.mobile-tablet'],
+    },
+  })}
 `;
 
 // prettier-ignore
@@ -628,7 +636,7 @@ const MakeTextContainer = ({
   headline,
   text,
   date,
-  cta,
+  actions,
 }: TypeTextContainer) => {
   const container = document.createElement('div');
 
@@ -655,11 +663,11 @@ const MakeTextContainer = ({
     container.appendChild(date);
   }
 
-  if (cta) {
+  if (actions) {
     const ctaWrapper = document.createElement('div');
 
     ctaWrapper.classList.add(CARD_OVERLAY_CONTAINER_CTA);
-    ctaWrapper.appendChild(cta);
+    ctaWrapper.appendChild(actions);
 
     container.appendChild(ctaWrapper);
   }

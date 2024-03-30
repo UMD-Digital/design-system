@@ -100,6 +100,7 @@ const GridColumnAndRows = {
     [`@media (${Queries.large.min})`]: {
       flexDirection: 'row',
       flexWrap: 'wrap',
+      alignItems: 'center',
     },
   },
 };

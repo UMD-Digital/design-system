@@ -2,6 +2,7 @@ import {
   Animations,
   Typography,
   Tokens,
+  Layout,
 } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 import { CheckForAnimationLinkSpan } from 'helpers/ui';
@@ -18,6 +19,7 @@ export type TypeBlockTextContainter = {
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { SansLarge, SansMin, Eyebrow } = Typography;
+const { GridColumnAndRows } = Layout;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -175,6 +177,12 @@ const ActionStyles = `
   .${ELEMENT_BLOCK_TEXT_ACTIONS} {
     margin-top: ${Spacing.sm};
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_BLOCK_TEXT_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
+    },
+  })}
 `;
 
 // prettier-ignore

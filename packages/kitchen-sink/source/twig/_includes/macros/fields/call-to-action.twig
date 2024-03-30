@@ -9,7 +9,7 @@
     {% set attrs = attrs ~ 'theme="light"' %}
   {% endif %}
 
-  <umd-element-call-to-action slot="cta" type="secondary" {{ attrs }}>
+  <umd-element-call-to-action slot="actions" type="secondary" {{ attrs }}>
     <a href="/"><span>{{ link }}</span></a>
   </umd-element-call-to-action>
 {% endmacro %}

@@ -13,6 +13,7 @@ import { UMDHeroElement } from '../index';
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const {
+  CampaignMaxium,
   CampaignExtralarge,
   SansLargest,
   CampaignLarge,
@@ -97,13 +98,14 @@ const HeadlineStyles = `
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_HEADLINE}`]: CampaignExtralarge,
+      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_HEADLINE}`]: CampaignMaxium,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_HEADLINE} {
       max-width: 700px;
+      margin: 0 auto;
     }
   }
 
@@ -112,6 +114,18 @@ const HeadlineStyles = `
       max-width: 776px;
     }
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_HEADLINE}[size="extra-large"]`]: CampaignExtralarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_CONTAINER}${IS_TYPE_DEFAULT}[interior] .${HERO_HEADLINE}`]: CampaignExtralarge,
+    },
+  })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
@@ -209,8 +223,6 @@ const TextStyles = `
     color: ${Colors.white};
   }
 
-
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${HERO_CONTAINER}${IS_TYPE_STACKED} .${HERO_TEXT}`]: SansLarger,
@@ -283,8 +295,11 @@ export const CreateBody = ({ element }: { element: UMDHeroElement }) => {
   }
 
   if (headlineSlot) {
+    const characterCount = headlineSlot.textContent?.trim().length || 0;
+
     CheckForAnimationLinkSpan({ element: headlineSlot });
     headlineSlot.classList.add(HERO_HEADLINE);
+    if (characterCount > 30) headlineSlot.setAttribute('size', 'extra-large');
     container.appendChild(headlineSlot);
   }
 

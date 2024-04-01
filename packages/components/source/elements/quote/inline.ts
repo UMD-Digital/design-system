@@ -33,21 +33,21 @@ const IS_WITH_IMAGE = `[${ATTRIBUTE_WITH_IMAGE}]`;
 const IS_WITH_IMAGE_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_WITH_IMAGE}`;
 const IS_SIZE_LARGE_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE}`;
 const IS_SIZE_LARGE_WITH_IMAGE_CONTAINER = `${IS_WITH_IMAGE_CONTAINER}${IS_WITH_IMAGE}`;
+
 const IS_TEXT_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${TEXT_CONTAINER}`;
 const IS_IMAGE_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${IMAGE_CONTAINER}`;
 
 const IS_MARYLAND_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_THEME_MARYLAND}`;
+const IS_SIZE_LARGE_TEXT_CONTAINER = `${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER}`;
+const IS_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER}`;
+const IS_WITH_IMAGE_TEXT_QUOTE = `${IS_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER}`;
+const IS_WITH_IMAGE_SIZE_LARGE_TEXT_CONTAINER = `${IS_SIZE_LARGE_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER}`;
+const IS_WITH_IMAGE_SIZE_LARGE_TEXT_QUOTE = `${IS_SIZE_LARGE_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER}`;
 
 // prettier-ignore
 const OverwriteThemeMaryland = `
-  ${IS_MARYLAND_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-    border-left: 2px solid ${Colors.white};
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_MARYLAND_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-      border-left: 2px solid ${Colors.white};
-    }
+  ${IS_MARYLAND_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
+    background-color: ${Colors.white};
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
@@ -57,7 +57,7 @@ const OverwriteThemeMaryland = `
   }
   
   ${IS_MARYLAND_CONTAINER} span svg {
-    fill: ${Colors.white};
+    fill: ${Colors.white} !important;
   }
 `;
 
@@ -91,76 +91,119 @@ const OverwriteSizeLarge = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER} {
+    ${IS_SIZE_LARGE_TEXT_CONTAINER} {
       padding-top:  ${Spacing['2xl']};
     }
   }
-
+  
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-      margin-left: ${Spacing['2xl']};
-      padding-left: ${Spacing.md};
+    ${IS_SIZE_LARGE_TEXT_CONTAINER} {
+      padding-left: ${Spacing['6xl']};
     }
   }
 
   ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
-    position: absolute;
-    left: 0;
-    top: 0;
     height: 26px;
     width: 36px;
-    display: block;
+    top: -${Spacing['2xl']};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
-      position: absolute;
-      left: 0;
+      left: -${Spacing['6xl']};
       top: 0;
-      height: 26px;
-      width: 36px;
     }
-  }
-
-  ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} svg {
-    fill: ${Colors.red};
   }
 `;
 
 // prettier-ignore
 const OverwriteSizedLargeWithImage = `
-  ${IS_SIZE_LARGE_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
-    display: none;
-  }
-
-  ${IS_SIZE_LARGE_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER} {
+  ${IS_WITH_IMAGE_SIZE_LARGE_TEXT_CONTAINER} {
     padding-top: 0;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_SIZE_LARGE_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+    ${IS_WITH_IMAGE_SIZE_LARGE_TEXT_QUOTE} {
       margin-left: 0;
       padding-left: 0;
-      border-left: none;
     }
+  }
+
+  ${IS_WITH_IMAGE_SIZE_LARGE_TEXT_QUOTE} span {
+    display: none;
   }
 `;
 
 // prettier-ignore
 const OverwriteWithImage = `
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${IS_WITH_IMAGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-      border-left: 2px solid ${Colors.red};
-      padding-left: ${Spacing.md};
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_WITH_IMAGE_TEXT_CONTAINER} {
+      padding-left: 0;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_WITH_IMAGE_TEXT_QUOTE}:before {
+      display: none;
     }
   }
 `;
 
 // prettier-ignore
 const TextContainer = `
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    ${IS_TEXT_CONTAINER_OVERWRITE} {
+      padding-top: ${Spacing.lg};
+      padding-left: ${Spacing.md};
+    }
+  }
+  
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_TEXT_CONTAINER_OVERWRITE} {
+      padding-left: ${Spacing['4xl']};
+    }
+  }
+
   ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} {
-    padding-left: ${Spacing.md};
-    border-left: 2px solid ${Colors.red};
+    position: relative;
+  }
+
+  ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
+    content: '';
+    position: absolute;
+    left: -${Spacing.md};
+    top: 7px;
+    height: calc(100% - 14px);
+    width: 2px;
+    display: block;
+    background-color: ${Colors.red};
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
+      left: -${Spacing.md};
+    }
+  }
+
+  ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+    position: absolute;
+    left: -${Spacing.md};
+    top: -${Spacing.lg};
+    height: 15px;
+    width: 22px;
+    display: block;
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+      position: absolute;
+      left: -${Spacing['4xl']};
+      top: 0;
+    }
+  }
+
+  ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} svg {
+    fill: ${Colors.red};
   }
 `
 

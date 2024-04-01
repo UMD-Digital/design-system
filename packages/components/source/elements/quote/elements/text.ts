@@ -132,7 +132,7 @@ const AttributionSubTextStyles = `
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} {
-    color: ${Colors.gray.darker};
+    color: ${Colors.gray.dark};
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} * {

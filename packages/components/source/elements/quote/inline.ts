@@ -47,17 +47,17 @@ const IS_WITH_IMAGE_SIZE_LARGE_TEXT_QUOTE = `${IS_SIZE_LARGE_WITH_IMAGE_CONTAINE
 // prettier-ignore
 const OverwriteThemeMaryland = `
   ${IS_MARYLAND_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
-    background-color: ${Colors.white};
+    background-color: ${Colors.gold};
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_MARYLAND_CONTAINER} .${IMAGE_CONTAINER} img  {
-      border-right: 2px solid ${Colors.white};
+      border-right: 2px solid ${Colors.gold};
     }
   }
   
   ${IS_MARYLAND_CONTAINER} span svg {
-    fill: ${Colors.white} !important;
+    fill: ${Colors.gold} !important;
   }
 `;
 

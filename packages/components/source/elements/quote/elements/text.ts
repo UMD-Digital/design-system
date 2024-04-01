@@ -16,7 +16,7 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
 
 const { Spacing, Colors } = Tokens;
 const { GridColumnAndRows } = Layout;
-const { SansExtraLarge, SansLarger, SansMedium, SansSmall } = Typography;
+const { SansExtraLarge, SansLarger, SansMedium, SansSmaller } = Typography;
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
 const ATTRIBUTE_THEME = 'theme';
@@ -141,13 +141,13 @@ const AttributionSubTextStyles = `
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: SansSmall,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: SansSmaller,
     },
   })}
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: SansSmall,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: SansSmaller,
     },
   })}
 `;

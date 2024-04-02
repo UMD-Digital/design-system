@@ -24,6 +24,7 @@ import QuoteInline from './quote/inline';
 import QuoteStatement from './quote/statement';
 import SectionIntro from './section-intro/default';
 import SectionIntroWide from './section-intro/wide';
+import StickyColumns from './sticky-columns';
 
 export {
   CallToAction,
@@ -52,4 +53,5 @@ export {
   QuoteStatement,
   SectionIntro,
   SectionIntroWide,
+  StickyColumns,
 };

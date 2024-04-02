@@ -4,6 +4,7 @@ import CallToAction from './call-to-action';
 import Card from './card';
 import CardOverlay from './card-overlay';
 import CarouselCards from './carousel-cards';
+import Event from './event';
 import EventsDateSlider from './events-date-slider';
 import Footer from './footer';
 import Hero from './hero';
@@ -24,6 +25,7 @@ export default {
   ...Footer,
   ...Hero,
   ...Person,
+  ...Event,
   ...EventsDateSlider,
   ...Pathway,
   ...Quote,

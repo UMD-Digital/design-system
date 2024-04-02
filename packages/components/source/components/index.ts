@@ -20,6 +20,7 @@ import { Load as QuoteLoader } from './quote';
 import { Load as StatLoader } from './stat';
 import { Load as SectionIntroLoader } from './section-intro';
 import { Load as SectionIntroWideLoader } from './section-intro-wide';
+import { Load as StickyColumns } from './stickly-columns';
 
 export const Components = {
   AccordionLoader,
@@ -44,6 +45,7 @@ export const Components = {
   StatLoader,
   SectionIntroLoader,
   SectionIntroWideLoader,
+  StickyColumns,
 };
 
 export default () => {

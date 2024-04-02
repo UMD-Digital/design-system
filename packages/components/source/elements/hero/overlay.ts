@@ -241,7 +241,7 @@ export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const text = TextContainer.CreateElement({ element });
-  const asset = ImageContainer.CreateElement({ element });
+  const asset = ImageContainer.CreateElement(element);
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);

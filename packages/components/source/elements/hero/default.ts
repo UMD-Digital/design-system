@@ -259,11 +259,11 @@ export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const text = TextContainer.CreateElement({ element });
-  const asset = ImageContainer.CreateElement({ element });
+  const asset = ImageContainer.CreateElement(element);
 
   lock.classList.add(HERO_LOCK);
   lock.appendChild(text);
-  container.appendChild(asset);
+  if (asset) container.appendChild(asset);
 
   if (!isInterior && headline) {
     const characterCount = headline.textContent?.trim().length || 0;

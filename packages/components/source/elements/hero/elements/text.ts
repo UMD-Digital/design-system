@@ -75,7 +75,7 @@ const EyebrowStyles = `
 const HeadlineStyles = `
   .${ELEMENTS_HERO_HEADLINE} {
     text-transform: uppercase;
-    color: ${Colors.white};
+    color: ${Colors.black};
   }
 
   .${ELEMENTS_HERO_HEADLINE} + * {
@@ -133,6 +133,7 @@ export const STYLES_HERO_ELEMENT_TEXT_CONTAINER = `
 
   .${ELEMENT_TEXT_CONTAINER_WRAPPER} {
     position: relative;
+    z-index: 99;
   }
 
   ${EyebrowStyles}
@@ -184,7 +185,6 @@ export const CreateTextContainerElement = ({
 }) => {
   const { theme, isTextCenter = false } = element;
   const container = document.createElement('div');
-  const wrapper = document.createElement('div');
   const body = CreateBody(element);
 
   container.classList.add(ELEMENT_TEXT_CONTAINER);
@@ -192,10 +192,7 @@ export const CreateTextContainerElement = ({
   if (isTextCenter)
     container.setAttribute(ATTRIBUTE_TEXT_ALIGN, TEXT_ALIGN_CENTER);
 
-  wrapper.classList.add(ELEMENT_TEXT_CONTAINER_WRAPPER);
-  wrapper.appendChild(body);
-
-  container.appendChild(wrapper);
+  container.appendChild(body);
 
   return container;
 };

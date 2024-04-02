@@ -50,15 +50,17 @@ const makeDefaultImage = () => {
   return svgImage;
 };
 
-export const CreateImageContainerElement = ({
-  element,
-}: {
-  element: TypeImageContainerProps;
-}) => {
-  const { imageRef, videoRef, isTypeMinimal } = element;
+export const CreateImageContainerElement = (
+  element: TypeImageContainerProps,
+) => {
+  const { imageRef, videoRef, isTypeMinimal = false } = element;
   const container = document.createElement('div');
 
   container.classList.add(ELEMENT_IMAGE_CONTINATER);
+
+  if (!imageRef && isTypeMinimal) {
+    return null;
+  }
 
   if (videoRef) {
     const video = videoRef.cloneNode(true) as HTMLVideoElement;

@@ -1,64 +1,58 @@
 {% extends '../../_layout.twig' %}
 
 {% block page %}
-  <div class="umd-lock" style="margin-bottom: 40px">
-    <h1 class="umd-sans-extralarge-uppercase">
-      To be Refactored to a Web Component
-    </h1>
-  </div>
-
   <div class="umd-lock">
-    <h1 class="content-heading type-hr">
+    <h1 class="umd-sans-largest" style="margin-bottom: 50px">
       Section Intro
     </h1>
   </div>
 
-  <umd-component-intro>
-    <div class="intro-content-wrapper">
-      <h2 class="umd-sans-largest">
-        FROM MARYLAND TODAY
-      </h2>
-      <div class="umd-grid-row-mobile-tablet">
-        <umd-element-call-to-action type="secondary">
+  <section style="margin-bottom: 100px">
+    <div class="umd-lock">
+      <div class="content-heading type-hr">
+        <span>Type</span>
+        <span>Default</span>
+      </div>
+      <umd-element-section-intro>
+        <h2 slot="headline">
+          FROM MARYLAND TODAY
+        </h2>
+        <umd-element-call-to-action type="secondary" slot="actions">
           <a href="/"><span>See all election related content</span></a>
         </umd-element-call-to-action>
-      </div>
+      </umd-element-section-intro>
     </div>
-  </umd-component-intro>
+  </section>
 
-  <div class="umd-lock">
-    <h1 class="content-heading type-hr">
-      Section Intro Simple
-    </h1>
-  </div>
-
-  <umd-component-intro-simple>
-    <div class="intro-content-wrapper">
-      <h2 class="umd-sans-largest">
-        FROM MARYLAND TODAY
-      </h2>
-      <div class="umd-grid-row-mobile-tablet">
-        <umd-element-call-to-action type="secondary">
+  <section style="margin-bottom: 100px">
+    <div class="umd-lock">
+      <div class="content-heading type-hr">
+        <span>Type</span>
+        <span>Default With Line</span>
+      </div>
+      <umd-element-section-intro include-separator>
+        <h2 slot="headline">
+          FROM MARYLAND TODAY
+        </h2>
+        <umd-element-call-to-action type="secondary" slot="actions">
           <a href="/"><span>See all election related content</span></a>
         </umd-element-call-to-action>
+      </umd-element-section-intro>
+    </div>
+  </section>
+
+  <section style="margin-bottom: 100px">
+    <div class="umd-lock">
+      <div class="content-heading type-hr">
+        <span>Type</span>
+        <span>Multiple Actions</span>
       </div>
-    </div>
-  </umd-component-intro-simple>
-
-  <div class="umd-lock">
-    <div class="content-heading type-hr">
-      <span>Section Intro</span>
-      <span>Grouping Call to Action (5)</span>
-    </div>
-  </div>
-
-  <div class="umd-lock-extra-small">
-    <umd-component-intro>
-      <div class="intro-content-wrapper">
-        <h2 class="umd-sans-largest">
+      <umd-element-section-intro include-separator>
+        <h2 slot="headline">
           OTHER WAYS TO GET INVOLVED
         </h2>
-        <div class="umd-grid-row-mobile-tablet">
+
+        <div slot="actions">
           <umd-element-call-to-action type="secondary">
             <a href="https://today.umd.edu/">
               <span>Volunteer to register voters</span>
@@ -85,9 +79,9 @@
             </a>
           </umd-element-call-to-action>
         </div>
-      </div>
-    </umd-component-intro>
-  </div>
+      </umd-element-section-intro>
+    </div>
+  </section>
 
   <div class="umd-lock">
     <div class="content-heading type-hr">

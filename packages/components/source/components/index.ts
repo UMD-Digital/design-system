@@ -18,6 +18,7 @@ import { Load as NavItemLoader } from './nav-item';
 import { Load as PathwayLoader } from './pathway';
 import { Load as QuoteLoader } from './quote';
 import { Load as StatLoader } from './stat';
+import { Load as SectionIntroLoader } from './section-intro';
 
 export const Components = {
   AccordionLoader,
@@ -40,6 +41,7 @@ export const Components = {
   PathwayLoader,
   QuoteLoader,
   StatLoader,
+  SectionIntroLoader,
 };
 
 export default () => {

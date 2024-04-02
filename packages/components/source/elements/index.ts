@@ -5,6 +5,14 @@ import CardOverlay from './card-overlay';
 import EventBlock from './event/block';
 import EventList from './event/list';
 import EventElements from './event/elements';
+
+import HeroDefault from './hero/default';
+import HeroElements from './hero/elements';
+import HeroMinimal from './hero/minimal';
+import HeroOverlay from './hero/overlay';
+import HeroLogo from './hero/logo';
+import HeroStacked from './hero/stacked';
+
 import PathwayHero from './pathway/hero';
 import PathwayHighlight from './pathway/highlight';
 import PathwayDefault from './pathway/default';
@@ -25,6 +33,12 @@ export {
   EventBlock,
   EventList,
   EventElements,
+  HeroDefault,
+  HeroElements,
+  HeroMinimal,
+  HeroOverlay,
+  HeroLogo,
+  HeroStacked,
   PathwayHero,
   PathwayHighlight,
   PathwayDefault,

@@ -6,27 +6,11 @@ declare global {
 
 import { MakeTemplate } from 'helpers/ui';
 import { ComponentStyles, CreateShadowDom } from './elements';
-import { VARIABLES } from './globals';
 
-const {
-  ELEMENT_NAME,
-  THEME_WHITE,
-  TYPE_DEFAULT_CENTERED,
-  TYPE_DEFAULT,
-  TEXT_ALIGN_LEFT,
-  TEXT_ALIGN_CENTER,
-  TYPE_STACKED_INTERIOR,
-  TYPE_DEFAULT_INTERIOR,
-  TYPE_STACKED,
-} = VARIABLES;
+const ELEMENT_NAME = 'umd-element-hero';
 
 export class UMDHeroElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = THEME_WHITE;
-  _type = TYPE_DEFAULT;
-  _textAlignment = TEXT_ALIGN_LEFT;
-  _withLock = false;
-  _interior = false;
 
   constructor() {
     super();
@@ -39,28 +23,11 @@ export class UMDHeroElement extends HTMLElement {
   }
 
   connectedCallback() {
-    const type = this.getAttribute('type');
-    const theme = this.getAttribute('theme');
+    const UI = CreateShadowDom({ element: this });
 
-    this._theme = theme || this._theme;
-    this._type = type || this._type;
-
-    if (this._type === TYPE_DEFAULT_CENTERED) {
-      this._type = TYPE_DEFAULT;
-      this._textAlignment = TEXT_ALIGN_CENTER;
+    if (UI) {
+      this._shadow.appendChild(UI);
     }
-
-    if (this._type === TYPE_DEFAULT_INTERIOR) {
-      this._type = TYPE_DEFAULT;
-      this._interior = true;
-    }
-
-    if (this._type === TYPE_STACKED_INTERIOR) {
-      this._type = TYPE_STACKED;
-      this._withLock = true;
-    }
-
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
   }
 }
 

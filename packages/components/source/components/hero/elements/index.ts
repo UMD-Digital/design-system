@@ -1,179 +1,31 @@
-import { Layout, Tokens } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { STYLES_ASSET, CreateAsset } from './assets';
-import { STYLES_WRAPPER, CreateWrapper } from './wrapper';
-import { REFERENCES, ELEMENTS, VARIABLES, BREAKPOINTS } from '../globals';
+import { Reset } from 'helpers/styles';
+import { SlotDefaultStyling } from 'helpers/ui';
+import {
+  HeroDefault,
+  HeroElements,
+  HeroLogo,
+  HeroMinimal,
+  HeroOverlay,
+  HeroStacked,
+} from 'elements';
+import { SLOTS, VARIABLES } from '../globals';
 import { UMDHeroElement } from '../index';
 
-const { Lock } = Layout;
-const { Colors, Spacing } = Tokens;
-
-const { TABLET, DESKTOP } = BREAKPOINTS;
-const { HERO_CONTAINER } = ELEMENTS;
 const {
-  ELEMENT_NAME,
-  ATTRIBUTE_THEME,
-  ATTRIBUTE_TYPE,
-  ATTRIBUTE_TEXT_ALIGN,
-  ATTRIBUTE_HAS_IMAGE,
-  ATTRIBUTE_WITHIN_LOCK,
-  ATTRIBUTE_INTERIOR,
+  THEME_WHITE,
+  TYPE_DEFAULT,
+  TYPE_DEFAULT_INTERIOR,
+  TYPE_DEFAULT_CENTERED,
+  TYPE_STACKED,
+  TYPE_STACKED_INTERIOR,
+  TYPE_MINIMAL,
+  TYPE_OVERLAY,
+  TYPE_LOGO,
+  TEXT_ALIGN_LEFT,
+  TEXT_ALIGN_CENTER,
 } = VARIABLES;
-const {
-  IS_TYPE_DEFAULT,
-  IS_TYPE_STACKED,
-  IS_TYPE_OVERLAY,
-  IS_TYPE_MINIMAL,
-  IS_TYPE_LOGO,
-  IS_THEME_DARK,
-  IS_THEME_LIGHT,
-  IS_THEME_MARYLAND,
-  IS_THEME_WHITE,
-  IS_INTERIOR,
-} = REFERENCES;
 
-const HERO_DECLARATION = 'umd-hero-declaration';
-const HERO_LOCK = 'umd-hero-lock';
-
-// prettier-ignore
-const ThemeOverwrite = `
-  .${HERO_CONTAINER}${IS_THEME_DARK} {
-    background-color: ${Colors.black};
-  }
-
-  .${HERO_CONTAINER}${IS_THEME_DARK} * {
-    color: ${Colors.white};
-  }
-
-  .${HERO_CONTAINER}${IS_THEME_LIGHT} {
-    background-color: ${Colors.gray.lightest};
-  }
-
-  .${HERO_CONTAINER}${IS_THEME_LIGHT} * {
-    color: ${Colors.black};
-  }
-
-  .${HERO_CONTAINER}${IS_THEME_MARYLAND} {
-    background-color: ${Colors.red};
-  }
-
-  .${HERO_CONTAINER}${IS_THEME_MARYLAND} * {
-    color: ${Colors.white};
-  }
-
-  .${HERO_CONTAINER}${IS_THEME_WHITE} * {
-    color: ${Colors.black};
-  }
-`;
-
-// prettier-ignore
-const DefaultOverwrite = `
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} {
-      height: 75vh;
-      min-height: 480px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
-    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} {
-      min-height: 720px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} * {
-      color: ${Colors.white};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${IS_TYPE_DEFAULT} .${HERO_LOCK} {
-      padding-top: ${Spacing['2xl']};
-      padding-bottom: ${Spacing['2xl']};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${IS_TYPE_DEFAULT}${IS_INTERIOR} {
-      min-height: 400px;
-      height: 40vh;
-    }
-  }
-`;
-
-// prettier-ignore
-const LogoTypeOverwrite = `
-  .${HERO_CONTAINER}${IS_TYPE_LOGO} {
-    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
-  }
-`;
-
-// prettier-ignore
-const StackTypeOverwrite = `
-  .${HERO_CONTAINER}${IS_TYPE_STACKED} {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-`;
-
-// prettier-ignore
-const OverlayTypeOverwrite = `
-  .${HERO_CONTAINER}${IS_TYPE_OVERLAY} {
-    position: relative;
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_LOCK} {
-      min-height: 640px;
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
-    .${HERO_CONTAINER}${IS_TYPE_OVERLAY} .${HERO_LOCK} {
-      min-height: 764px;
-    }
-  }
-`;
-
-// prettier-ignore
-const MinimalTypeOverwrite = `
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${HERO_CONTAINER}${IS_TYPE_MINIMAL} .${HERO_LOCK} {
-      min-height: 288px;
-      display: flex;
-      align-items: center;
-    }
-  }
-`;
-
-// prettier-ignore
-const STYLES_CONTAINER = `
-  .${HERO_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  .${HERO_LOCK} {
-    height: 100%;
-    width: 100%;
-    position: relative;
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${HERO_LOCK}`]: Lock['.base'],
-    },
-  })}
-
-  ${ThemeOverwrite}
-  ${DefaultOverwrite}
-  ${StackTypeOverwrite}
-  ${OverlayTypeOverwrite}
-  ${MinimalTypeOverwrite}
-  ${LogoTypeOverwrite}
-`;
+const { IMAGE, VIDEO, HEADLINE, EYEBROW, TEXT, ACTIONS } = SLOTS;
 
 export const ComponentStyles = `
   :host {
@@ -181,43 +33,113 @@ export const ComponentStyles = `
   }
 
   ${Reset}
-  ${STYLES_CONTAINER}
-  ${STYLES_WRAPPER}
-  ${STYLES_ASSET}
+  ${HeroElements.Image.Styles}
+  ${HeroElements.Text.Styles}
+  ${HeroLogo.Styles}
+  ${HeroOverlay.Styles}
+  ${HeroMinimal.Styles}
+  ${HeroStacked.Styles}
+  ${HeroDefault.Styles}
 `;
 
 export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
-  const declaration = document.createElement('div');
-  const container = document.createElement('div');
-  const lock = document.createElement('div');
-  const wrapper = CreateWrapper({ element });
-  const asset = CreateAsset({ element });
+  let type = element.getAttribute('type') || TYPE_DEFAULT;
+  let theme = element.getAttribute('theme') || THEME_WHITE;
+  let textAlignment = element.getAttribute('text-align') || TEXT_ALIGN_LEFT;
+  let isInterior = false;
+  let isWithLock = false;
 
-  container.classList.add(HERO_CONTAINER);
-  container.setAttribute(ATTRIBUTE_TYPE, element._type);
-  container.setAttribute(ATTRIBUTE_THEME, element._theme);
-  container.setAttribute(ATTRIBUTE_TEXT_ALIGN, element._textAlignment);
-
-  if (element._interior) container.setAttribute(ATTRIBUTE_INTERIOR, '');
-
-  lock.classList.add(HERO_LOCK);
-  lock.appendChild(wrapper);
-
-  if (asset) {
-    container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
-
-    if (element._withLock) {
-      lock.appendChild(asset);
-      container.setAttribute(ATTRIBUTE_WITHIN_LOCK, '');
-    } else {
-      container.appendChild(asset);
-    }
+  if (type === TYPE_DEFAULT_CENTERED) {
+    type = TYPE_DEFAULT;
+    textAlignment = TEXT_ALIGN_CENTER;
   }
 
-  container.appendChild(lock);
+  if (type === TYPE_DEFAULT_INTERIOR) {
+    type = TYPE_DEFAULT;
+    isInterior = true;
+  }
 
-  declaration.classList.add(HERO_DECLARATION);
-  declaration.appendChild(container);
+  if (type === TYPE_STACKED_INTERIOR) {
+    type = TYPE_STACKED;
+    isWithLock = true;
+  }
 
-  return declaration;
+  if (type === TYPE_DEFAULT) {
+    textAlignment = TEXT_ALIGN_CENTER;
+
+    return HeroDefault.CreateElement({
+      theme,
+      textAlignment,
+      isInterior,
+      isWithLock,
+      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+      richText: SlotDefaultStyling({ element, slotRef: TEXT }),
+      imageRef: SlotDefaultStyling({ element, slotRef: IMAGE }),
+      videoRef: SlotDefaultStyling({ element, slotRef: VIDEO }),
+      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    });
+  }
+
+  if (type === TYPE_STACKED) {
+    return HeroStacked.CreateElement({
+      theme,
+      textAlignment,
+      isInterior,
+      isWithLock,
+      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+      richText: SlotDefaultStyling({ element, slotRef: TEXT }),
+      imageRef: SlotDefaultStyling({ element, slotRef: IMAGE }),
+      videoRef: SlotDefaultStyling({ element, slotRef: VIDEO }),
+      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    });
+  }
+
+  if (type === TYPE_MINIMAL) {
+    return HeroMinimal.CreateElement({
+      theme,
+      textAlignment,
+      isInterior,
+      isWithLock,
+      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+      richText: SlotDefaultStyling({ element, slotRef: TEXT }),
+      imageRef: SlotDefaultStyling({ element, slotRef: IMAGE }),
+      videoRef: SlotDefaultStyling({ element, slotRef: VIDEO }),
+      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    });
+  }
+
+  if (type === TYPE_OVERLAY) {
+    return HeroOverlay.CreateElement({
+      theme,
+      textAlignment,
+      isInterior,
+      isWithLock,
+      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+      richText: SlotDefaultStyling({ element, slotRef: TEXT }),
+      imageRef: SlotDefaultStyling({ element, slotRef: IMAGE }),
+      videoRef: SlotDefaultStyling({ element, slotRef: VIDEO }),
+      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    });
+  }
+
+  if (type === TYPE_LOGO) {
+    return HeroLogo.CreateElement({
+      theme,
+      textAlignment,
+      isInterior,
+      isWithLock,
+      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
+      richText: SlotDefaultStyling({ element, slotRef: TEXT }),
+      imageRef: SlotDefaultStyling({ element, slotRef: IMAGE }),
+      videoRef: SlotDefaultStyling({ element, slotRef: VIDEO }),
+      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    });
+  }
+
+  return null;
 };

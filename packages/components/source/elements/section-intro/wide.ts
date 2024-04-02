@@ -19,16 +19,17 @@ const ELEMENT_ACTIONS = 'intro-wide-actions';
 
 // prettier-ignore
 const HeadlineStyles = `
-  .${ELEMENT_HEADLINE} {
-    color: ${Colors.black};
-    font-weight: 800;
-  }
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: SansLargest,
     },
   })}
+
+  .${ELEMENT_HEADLINE} {
+    color: ${Colors.black};
+    font-weight: 800;
+    text-transform: uppercase;
+  }
 `;
 
 // prettier-ignore

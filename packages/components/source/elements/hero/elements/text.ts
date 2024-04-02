@@ -178,11 +178,7 @@ const CreateBody = ({
   return container;
 };
 
-export const CreateTextContainerElement = ({
-  element,
-}: {
-  element: TypeTextContainerProps;
-}) => {
+export const CreateTextContainerElement = (element: TypeTextContainerProps) => {
   const { theme, isTextCenter = false } = element;
   const container = document.createElement('div');
   const body = CreateBody(element);

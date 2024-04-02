@@ -75,7 +75,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
   const type = element.getAttribute('type');
   const videoRef = SlotDefaultStyling({ element, slotRef: VIDEO });
 
-  if (type === TYPE_STACKED) {
+  if (type === TYPE_STACKED || type === TYPE_STACKED_INTERIOR) {
     return HeroStacked.CreateElement({
       ...MakeHeroData({ element }),
       videoRef,

@@ -174,7 +174,7 @@ export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
-  const text = TextContainer.CreateElement({ element });
+  const text = TextContainer.CreateElement(element);
   const asset = ImageContainer.CreateElement(element);
 
   lock.classList.add(ELEMENT_HERO_LOCK);

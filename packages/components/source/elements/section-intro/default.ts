@@ -43,6 +43,7 @@ const OverwriteSeparator = `
 const HeadlineStyles = `
   .${ELEMENT_HEADLINE} {
     color: ${Colors.black};
+    font-weight: 800;
   }
 
   ${ConvertJSSObjectToStyles({

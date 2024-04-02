@@ -33,7 +33,7 @@ export const STYLES_EVENT_FEED = `
   ${EventBlock.Styles}
   ${EventList.Styles}
   ${EventElements.Sign.Styles}
-  ${EventElements.Details.Styles}
+  ${EventElements.Meta.Styles}
 `;
 
 const CreateImage = ({ images }: { images: ImageType }) => {
@@ -82,7 +82,7 @@ export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      eventDetails: EventElements.Details.CreateElement({
+      eventDetails: EventElements.Meta.CreateElement({
         ...entry,
         isLayoutVeritcal: false,
       }),
@@ -96,7 +96,7 @@ export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
       image: CreateImage({ images: entry.image }),
       headline: CreateHeadline({ text: entry.title, url: entry.url }),
       text: CreateText({ text: entry.summary }),
-      eventDetails: EventElements.Details.CreateElement({
+      eventDetails: EventElements.Meta.CreateElement({
         ...entry,
         isLayoutVeritcal: false,
       }),

@@ -30,7 +30,7 @@ type EventType = DateInformaitonType & {
   location: LocationType;
 };
 
-export type TypeDetailDisplay = EventType & {
+export type TypeMetaDisplay = EventType & {
   isLayoutVeritcal?: boolean;
 };
 
@@ -41,7 +41,7 @@ const BREAKPOINTS = {
   MOBILE: 400,
 };
 
-const ELEMENT_NAME = 'umd-event-details';
+const ELEMENT_NAME = 'umd-event-meta';
 const ELEMENT_EVENTS_DATE_ROW = 'event-date-row';
 const ELEMENT_EVENTS_DATE_ROW_WRAPPER = 'event-date-row-wrapper';
 const ELEMENT_EVENTS_DATE_ROW_ICON = 'event-date-row-icon';
@@ -98,7 +98,7 @@ const LocationRow = `
 `;
 
 // prettier-ignore
-const STYLES_EVENT_DETAILS = `
+const STYLES_EVENT_META = `
   .${ELEMENT_EVENTS_DATE_ROW} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -212,7 +212,7 @@ const TimeText = ({ startTime, endTime }: DateDisplayType) => {
   });
 };
 
-const RowDateInfo = (info: TypeDetailDisplay) => {
+const RowDateInfo = (info: TypeMetaDisplay) => {
   const container = document.createElement('div');
   const { startMonth, startDay, endDay, endMonth } = info;
   const isMultiDay = startDay != endDay || startMonth != endMonth;
@@ -235,7 +235,7 @@ const RowDateInfo = (info: TypeDetailDisplay) => {
   return container;
 };
 
-const CreateEventDetailsElement = (info: TypeDetailDisplay) => {
+const CreateEventMetaElement = (info: TypeMetaDisplay) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const { location, isLayoutVeritcal = true } = info;
@@ -263,6 +263,6 @@ const CreateEventDetailsElement = (info: TypeDetailDisplay) => {
 };
 
 export default {
-  CreateElement: CreateEventDetailsElement,
-  Styles: STYLES_EVENT_DETAILS,
+  CreateElement: CreateEventMetaElement,
+  Styles: STYLES_EVENT_META,
 };

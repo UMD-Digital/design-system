@@ -28,7 +28,7 @@ const styles = `
   }
   
   ${Reset}
-  ${EventElements.Details.Styles}
+  ${EventElements.Meta.Styles}
   ${EventElements.Sign.Styles}
   ${EventBlock.Styles}
   ${EventList.Styles}
@@ -147,7 +147,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
       headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
       text: SlotDefaultStyling({ element, slotRef: TEXT }),
       actions: SlotDefaultStyling({ element, slotRef: CTA }),
-      eventDetails: EventElements.Details.CreateElement(
+      eventDetails: EventElements.Meta.CreateElement(
         MakeEventDetailsData({ element, startDate, endDate }),
       ),
       dateBlock: EventElements.Sign.CreateElement(
@@ -162,7 +162,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotDefaultStyling({ element, slotRef: TEXT }),
     actions: SlotDefaultStyling({ element, slotRef: CTA }),
-    eventDetails: EventElements.Details.CreateElement(
+    eventDetails: EventElements.Meta.CreateElement(
       MakeEventDetailsData({ element, startDate, endDate }),
     ),
     theme,

@@ -1,4 +1,4 @@
-import Details from './details';
+import Meta from './meta';
 import Sign from './sign';
 
-export default { Details, Sign };
+export default { Meta, Sign };

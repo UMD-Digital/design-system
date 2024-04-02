@@ -54,6 +54,10 @@ const OverwriteTheme = `
     background-color: ${Colors.black};
   }
 
+  ${OVERWRITE_THEME_DARK_CONTAINER} * {
+    color: ${Colors.white};
+  }
+
   ${OVERWRITE_THEME_LIGHT_CONTAINER} {
     background-color: ${Colors.gray.lightest};
   }

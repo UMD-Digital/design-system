@@ -17,44 +17,15 @@ import TextContainer, {
   ELEMENTS_HERO_RICH_TEXT,
 } from './elements/text';
 
-type TypeHeroOverlayProps = TypeTextContainerProps &
-  TypeImageContainerProps & {
-    isTextCenter: boolean;
-    isWithLock: boolean;
-    isInterior: boolean;
-  };
+type TypeHeroOverlayProps = TypeTextContainerProps & TypeImageContainerProps;
 
 const { Lock } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
-const { CampaignExtralarge, CampaignLarge, SansLarger } = Typography;
+const { CampaignExtralarge, SansLarger } = Typography;
 
 const TABLET = 768;
 const DESKTOP = 1024;
-
-const TYPE_OVERLAY = 'overlay';
-const TYPE_LOGO = 'logo';
-const THEME_LIGHT = 'light';
-const THEME_DARK = 'dark';
-const THEME_MARYLAND = 'maryland';
-const THEME_WHITE = 'white';
-const TEXT_ALIGN_LEFT = 'left';
-const TEXT_ALIGN_CENTER = 'center';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_TYPE = 'type';
-const ATTRIBUTE_TEXT_ALIGN = 'text-align';
-const ATTRIBUTE_HAS_IMAGE = 'has-image';
-const ATTRIBUTE_WITHIN_LOCK = 'within-lock';
-const ATTRIBUTE_INTERIOR = 'interior';
-
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
-const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
-const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
-const IS_THEME_WHITE = `[${ATTRIBUTE_THEME}='${THEME_WHITE}']`;
-const IS_TEXT_CENTER = `[${ATTRIBUTE_TEXT_ALIGN}='${TEXT_ALIGN_CENTER}']`;
-const IS_WITH_IMAGE = `[${ATTRIBUTE_HAS_IMAGE}]`;
-const IS_WITHIN_LOCK = `[${ATTRIBUTE_WITHIN_LOCK}]`;
-const IS_INTERIOR = `[${ATTRIBUTE_INTERIOR}]`;
 
 const ELEMENT_NAME = 'umd-element-hero-overlay';
 const ELEMENT_HERO_DECLARATION = 'hero-overlay-element-declaration';
@@ -67,40 +38,6 @@ const OVERWRITE_EYEBROW = `.${ELEMENT_HERO_CONTAINER} .${ELEMENT_HERO_EYEBROW}`;
 const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${ELEMENTS_HERO_HEADLINE}`;
 const OVERWRITE_RICH_TEXT = `.${ELEMENT_HERO_CONTAINER} .${ELEMENTS_HERO_RICH_TEXT}`;
 
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_LIGHT_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_LIGHT}`;
-const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_MARYLAND}`;
-
-const OVERWRITE_TEXT_CENTER_ALIGNMENT_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_TEXT_CENTER} .${ELEMENT_TEXT_CONTAINER}`;
-const OVERWRITE_INTERIOR_HEADLINE = `.${ELEMENT_HERO_CONTAINER}${IS_INTERIOR} .${ELEMENTS_HERO_HEADLINE}`;
-
-// prettier-ignore
-const OverwriteTheme = `
-  ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${Colors.black};
-  }
-
-  ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${Colors.white};
-  }
-
-  ${OVERWRITE_THEME_LIGHT_CONTAINER} {
-    background-color: ${Colors.gray.lightest};
-  }
-
-  ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
-    color: ${Colors.black};
-  }
-
-  ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
-    background-color: ${Colors.red};
-  }
-
-  ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
-    color: ${Colors.white};
-  }
-`;
-
 // prettier-ignore
 const OverwriteEyebrow = `
   ${ConvertJSSObjectToStyles({
@@ -109,8 +46,8 @@ const OverwriteEyebrow = `
     },
   })}
 
-  .${OVERWRITE_EYEBROW} {
-    color: ${Colors.black}
+  ${OVERWRITE_EYEBROW} {
+    color: ${Colors.black} !important;
   }
 `;
 
@@ -197,6 +134,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
 
   .${ELEMENT_HERO_CONTAINER} {
     position: relative;
+    background-color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -225,44 +163,28 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
     }
   }
   
-  
   ${OverwriteEyebrow}
   ${OverwriteHeadline}
   ${OverwriteRichText}
   ${OverwriteTextContainer}
   ${OverwriteImageContainer}
-  ${OverwriteTheme}
 `;
 
 export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
-  const { theme, isTextCenter, isWithLock, isInterior } = element;
-
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const text = TextContainer.CreateElement({ element });
   const asset = ImageContainer.CreateElement(element);
 
-  container.classList.add(ELEMENT_HERO_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
-  if (isInterior) container.setAttribute(ATTRIBUTE_INTERIOR, '');
-  if (isTextCenter)
-    container.setAttribute(ATTRIBUTE_TEXT_ALIGN, TEXT_ALIGN_CENTER);
-
   lock.classList.add(ELEMENT_HERO_LOCK);
   lock.appendChild(text);
 
   if (asset) {
-    container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
-
-    if (isWithLock) {
-      lock.appendChild(asset);
-      container.setAttribute(ATTRIBUTE_WITHIN_LOCK, '');
-    } else {
-      container.appendChild(asset);
-    }
+    container.appendChild(asset);
   }
 
+  container.classList.add(ELEMENT_HERO_CONTAINER);
   container.appendChild(lock);
 
   declaration.classList.add(ELEMENT_HERO_DECLARATION);

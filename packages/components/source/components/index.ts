@@ -19,6 +19,7 @@ import { Load as PathwayLoader } from './pathway';
 import { Load as QuoteLoader } from './quote';
 import { Load as StatLoader } from './stat';
 import { Load as SectionIntroLoader } from './section-intro';
+import { Load as SectionIntroWideLoader } from './section-intro-wide';
 
 export const Components = {
   AccordionLoader,
@@ -42,6 +43,7 @@ export const Components = {
   QuoteLoader,
   StatLoader,
   SectionIntroLoader,
+  SectionIntroWideLoader,
 };
 
 export default () => {

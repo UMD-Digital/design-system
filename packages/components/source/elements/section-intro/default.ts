@@ -14,10 +14,10 @@ const { GridColumnAndRows } = Layout;
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
 
 const ELEMENT_NAME = 'umd-section-intro-default';
-const ELEMENT_LIST_CONTAINER = 'section-intro-container';
-const ELEMENT_LIST_CONTAINER_WRAPPER = 'section-intro-container-wrapper';
-const ELEMENT_HEADLINE = 'section-intro-headline';
-const ELEMENT_ACTIONS = 'section-intro-actions';
+const ELEMENT_LIST_CONTAINER = 'intro-default-container';
+const ELEMENT_LIST_CONTAINER_WRAPPER = 'intro-default-container-wrapper';
+const ELEMENT_HEADLINE = 'intro-default-headline';
+const ELEMENT_ACTIONS = 'intro-default-actions';
 
 const OVERWRITE_SEPARATOR_WRAPPER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_WITH_SEPARATOR}] .${ELEMENT_LIST_CONTAINER_WRAPPER}`;
 
@@ -66,6 +66,7 @@ const ActionStyles = `
 
   .${ELEMENT_ACTIONS} {
     justify-content: center;
+    align-items: center;
   }
 `;
 

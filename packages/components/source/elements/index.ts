@@ -23,6 +23,7 @@ import QuoteFeatured from './quote/featured';
 import QuoteInline from './quote/inline';
 import QuoteStatement from './quote/statement';
 import SectionIntro from './section-intro/default';
+import SectionIntroWide from './section-intro/wide';
 
 export {
   CallToAction,
@@ -50,4 +51,5 @@ export {
   QuoteInline,
   QuoteStatement,
   SectionIntro,
+  SectionIntroWide,
 };

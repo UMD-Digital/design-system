@@ -83,25 +83,23 @@
     </div>
   </section>
 
-  <div class="umd-lock">
-    <div class="content-heading type-hr">
-      <span>Section Intro</span>
-      <span>Wide</span>
-    </div>
-  </div>
-
-  <div class="umd-lock">
-    <umd-component-intro-wide>
-      <div class="intro-content-wrapper">
-        <h2 class="umd-sans-largest">
+  <section style="margin-bottom: 100px">
+    <div class="umd-lock">
+      <div class="content-heading type-hr" style="margin-bottom: 40px">
+        <span>Type</span>
+        <span>Wide</span>
+      </div>
+      <umd-element-section-intro-wide>
+        <h2 slot="headline">
           FROM MARYLAND TODAY
         </h2>
-        <div class="umd-grid-row-mobile-tablet">
-          <umd-element-call-to-action type="secondary">
-            <a href="/"><span>See all election related content</span></a>
-          </umd-element-call-to-action>
-        </div>
-      </div>
-    </umd-component-intro-wide>
-  </div>
+
+        <umd-element-call-to-action type="secondary" slot="actions">
+          <a href="https://today.umd.edu/">
+            <span>See all election related content</span>
+          </a>
+        </umd-element-call-to-action>
+      </umd-element-section-intro-wide>
+    </div>
+  </section>
 {% endblock %}

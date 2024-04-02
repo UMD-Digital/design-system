@@ -4,22 +4,35 @@ import { ConvertJSSObjectToStyles } from 'helpers/styles';
 type TypeSectionIntroDefaultProps = {
   headline?: HTMLElement | null;
   actions?: HTMLElement | null;
+  text?: HTMLElement | null;
   hasSeparator?: boolean;
+  theme?: string | null;
 };
 
-const { SansLargest } = Typography;
+const { SansLargest, SansLarger } = Typography;
 const { Colors, Spacing } = Tokens;
 const { GridColumnAndRows } = Layout;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
 
 const ELEMENT_NAME = 'umd-section-intro-default';
 const ELEMENT_LIST_CONTAINER = 'intro-default-container';
 const ELEMENT_LIST_CONTAINER_WRAPPER = 'intro-default-container-wrapper';
 const ELEMENT_HEADLINE = 'intro-default-headline';
+const ELEMENT_RICH_TEXT = 'intro-default-rich-text';
 const ELEMENT_ACTIONS = 'intro-default-actions';
 
 const OVERWRITE_SEPARATOR_WRAPPER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_WITH_SEPARATOR}] .${ELEMENT_LIST_CONTAINER_WRAPPER}`;
+const OVERWRITE_THEME_DARK_CONTAINTER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+
+// prettier-ignore
+const OverwriteTheme = `
+  ${OVERWRITE_THEME_DARK_CONTAINTER} * {
+    color: ${Colors.white};
+  }
+`;
 
 // prettier-ignore
 const OverwriteSeparator = `
@@ -55,6 +68,23 @@ const HeadlineStyles = `
 `;
 
 // prettier-ignore
+const TextStyles = `
+  * + .${ELEMENT_RICH_TEXT} {
+    margin-top: ${Spacing.sm};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_RICH_TEXT}`]: SansLarger,
+    },
+  })}
+
+  .${ELEMENT_RICH_TEXT} {
+    font-weight: 700;
+  }
+`;
+
+// prettier-ignore
 const ActionStyles = `
   * + .${ELEMENT_ACTIONS} {
     margin-top: ${Spacing.md};
@@ -85,25 +115,32 @@ const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
   }
 
   ${HeadlineStyles}
+  ${TextStyles}
   ${ActionStyles}
   ${OverwriteSeparator}
+  ${OverwriteTheme}
 `;
 
 const CreateSectionIntroDefaultElement = (
   element: TypeSectionIntroDefaultProps,
 ) => {
-  const { headline, actions, hasSeparator = false } = element;
+  const { headline, actions, text, theme, hasSeparator = false } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
 
   container.classList.add(ELEMENT_LIST_CONTAINER);
   wrapper.classList.add(ELEMENT_LIST_CONTAINER_WRAPPER);
-
+  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   if (hasSeparator) container.setAttribute(ATTRIBUTE_WITH_SEPARATOR, '');
 
   if (headline) {
     headline.classList.add(ELEMENT_HEADLINE);
     wrapper.appendChild(headline);
+  }
+
+  if (text) {
+    text.classList.add(ELEMENT_RICH_TEXT);
+    wrapper.appendChild(text);
   }
 
   if (actions) {

@@ -18,21 +18,18 @@
 
   <section class="umd-layout-vertical-landing">
     <div class="umd-lock-extra-small">
-      <umd-component-intro>
-        <div class="intro-content-wrapper">
-          <p class="umd-sans-larger-bold">
-            We are activating fearless ideas for transformational impact by
-            fostering research and industry partnerships, supporting small
-            businesses, and nurturing the growth of next generation technology
-            ventures.
-          </p>
-          <div class="umd-grid-row-mobile-tablet">
-            <umd-element-call-to-action type="primary">
-              <a href="/"><span>Learn more</span></a>
-            </umd-element-call-to-action>
-          </div>
-        </div>
-      </umd-component-intro>
+      <umd-element-section-intro include-separator
+        class="umd-layout-vertical-landing-child">
+        <h2 slot="text">
+          We are activating fearless ideas for transformational impact by
+          fostering research and industry partnerships, supporting small
+          businesses, and nurturing the growth of next generation technology
+          ventures.
+        </h2>
+        <umd-element-call-to-action type="primary" slot="actions">
+          <a href="/"><span>Learn more</span></a>
+        </umd-element-call-to-action>
+      </umd-element-section-intro>
     </div>
   </section>
 

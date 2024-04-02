@@ -10,9 +10,11 @@ import { Reset } from 'helpers/styles';
 
 const ELEMENT_NAME = 'umd-element-section-intro';
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
+const ATTRIBUTE_THEME = 'theme';
 const SLOTS = {
   HEADLINE: 'headline',
   ACTIONS: 'actions',
+  TEXT: 'text',
 };
 
 const styles = `
@@ -29,15 +31,19 @@ export const CreateShadowDom = ({
 }: {
   element: UMDSectionIntroElement;
 }) => {
-  const { HEADLINE, ACTIONS } = element._slots;
+  const { HEADLINE, ACTIONS, TEXT } = element._slots;
   const hasSeparator = element.hasAttribute(ATTRIBUTE_WITH_SEPARATOR);
+  const theme = element.getAttribute(ATTRIBUTE_THEME);
   const headline = SlotDefaultStyling({ element, slotRef: HEADLINE });
+  const text = SlotDefaultStyling({ element, slotRef: TEXT });
   const actions = SlotDefaultStyling({ element, slotRef: ACTIONS });
 
   return SectionIntro.CreateElement({
     headline,
+    text,
     actions,
     hasSeparator,
+    theme,
   });
 };
 

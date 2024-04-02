@@ -9,6 +9,7 @@ import { MakeTemplate, SlotDefaultStyling } from 'helpers/ui';
 import { Reset } from 'helpers/styles';
 
 const ELEMENT_NAME = 'umd-element-section-intro-wide';
+const ATTRIBUTE_THEME = 'theme';
 const SLOTS = {
   HEADLINE: 'headline',
   ACTIONS: 'actions',
@@ -29,12 +30,14 @@ export const CreateShadowDom = ({
   element: UMDSectionIntroElement;
 }) => {
   const { HEADLINE, ACTIONS } = element._slots;
+  const theme = element.getAttribute(ATTRIBUTE_THEME);
   const headline = SlotDefaultStyling({ element, slotRef: HEADLINE });
   const actions = SlotDefaultStyling({ element, slotRef: ACTIONS });
 
   return SectionIntroWide.CreateElement({
     headline,
     actions,
+    theme,
   });
 };
 

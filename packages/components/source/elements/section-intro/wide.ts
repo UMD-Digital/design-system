@@ -1,21 +1,33 @@
-import { Typography, Tokens, Layout } from '@universityofmaryland/variables';
+import { Typography, Tokens } from '@universityofmaryland/variables';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 type TypeSectionIntroWideProps = {
   headline?: HTMLElement | null;
   actions?: HTMLElement | null;
+  theme?: string | null;
 };
 
 const { SansLargest } = Typography;
 const { Colors, Spacing } = Tokens;
 
-const TABLET = 768;
+const TABLET = 500;
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
 
 const ELEMENT_NAME = 'umd-section-intro-wide';
 const ELEMENT_LIST_CONTAINER = 'intro-wide-container';
 const ELEMENT_LIST_CONTAINER_WRAPPER = 'intro-wide-container-wrapper';
 const ELEMENT_HEADLINE = 'intro-wide-headline';
 const ELEMENT_ACTIONS = 'intro-wide-actions';
+
+const OVERWRITE_THEME_DARK_CONTAINTER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+
+// prettier-ignore
+const OverwriteTheme = `
+  ${OVERWRITE_THEME_DARK_CONTAINTER} * {
+    color: ${Colors.white};
+  }
+`;
 
 // prettier-ignore
 const HeadlineStyles = `
@@ -57,13 +69,15 @@ const STYLES_SECTION_INTRO_WIDE_ELEMENT = `
 
   ${HeadlineStyles}
   ${ActionStyles}
+  ${OverwriteTheme}
 `;
 
 const CreateSectionIntroWideElement = (element: TypeSectionIntroWideProps) => {
-  const { headline, actions } = element;
+  const { headline, actions, theme } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
 
+  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   container.classList.add(ELEMENT_LIST_CONTAINER);
   wrapper.classList.add(ELEMENT_LIST_CONTAINER_WRAPPER);
 

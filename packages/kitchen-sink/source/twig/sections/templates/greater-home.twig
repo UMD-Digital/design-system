@@ -166,18 +166,16 @@
 
   <section class="umd-layout-vertical-landing">
     <div class="umd-lock">
-      <umd-component-intro>
-        <div class="intro-content-wrapper">
-          <h2 class="umd-sans-largest-uppercase">
-            Latest News (Replace Me)
-          </h2>
-          <div class="umd-grid-row-mobile-tablet">
-            <umd-element-call-to-action type="secondary">
-              <a href="/"><span>View all articles</span></a>
-            </umd-element-call-to-action>
-          </div>
-        </div>
-      </umd-component-intro>
+      <umd-element-section-intro include-separator
+        class="umd-layout-vertical-landing-child">
+        <h2 slot="headline">
+          Latest News
+        </h2>
+        <umd-element-call-to-action type="secondary" slot="actions">
+          <a href="/"><span>View all articles</span></a>
+        </umd-element-call-to-action>
+      </umd-element-section-intro>
+
       <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
         categories="10466"
         lazyload="true"></umd-feed-news>

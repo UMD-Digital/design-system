@@ -1,7 +1,5 @@
 import { Queries } from '../tokens/breakpoints';
-import { Spacing } from '../tokens/spacing';
-
-// To Do : Refactor to be part of spacing (renamed for horizitonal)
+import { Spacing, MaxWidth } from '../tokens/spacing';
 
 const lockBase = {
   display: 'block',
@@ -9,7 +7,7 @@ const lockBase = {
   marginRight: 'auto',
   paddingLeft: Spacing['md'],
   paddingRight: Spacing['md'],
-  maxWidth: '1536px',
+  maxWidth: `${MaxWidth.max}`,
 
   [`@media (${Queries.tablet.min})`]: {
     paddingLeft: Spacing['2xl'],

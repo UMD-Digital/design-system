@@ -10,7 +10,7 @@ type TypeSectionIntroDefaultProps = {
 };
 
 const { SansLargest, SansLarger } = Typography;
-const { Colors, Spacing } = Tokens;
+const { Colors, Spacing, MaxWidth } = Tokens;
 const { GridColumnAndRows } = Layout;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
@@ -106,7 +106,7 @@ const ActionStyles = `
 const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
   .${ELEMENT_LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: 720px;
+    max-width: ${MaxWidth.small};
     margin: 0 auto;
   }
 

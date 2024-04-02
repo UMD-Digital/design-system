@@ -15,4 +15,12 @@ const Spacing = {
   max: '120px',
 };
 
-export { Spacing };
+const MaxWidth = {
+  max: '1536px',
+  large: '1296px',
+  normal: '1180px',
+  small: '960px',
+  smallest: '800px',
+};
+
+export { Spacing, MaxWidth };

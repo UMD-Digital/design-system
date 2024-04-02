@@ -3,6 +3,8 @@ import { CheckForAnimationLinkSpan } from 'helpers/ui';
 import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 type TypeTextProps = {
+  theme?: string | null;
+  isTextCenter?: boolean;
   eyebrow?: HTMLElement | null;
   headline: HTMLElement | null;
   richText?: HTMLElement | null;
@@ -15,6 +17,12 @@ const { Colors, Spacing } = Tokens;
 const { SansMedium } = Typography;
 
 const TABLET = 768;
+const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_TEXT_ALIGN = 'text-align';
+const THEME_LIGHT = 'light';
+const THEME_DARK = 'dark';
+const THEME_MARYLAND = 'maryland';
+const TEXT_ALIGN_CENTER = 'center';
 
 export const ELEMENT_NAME = 'umd-element-hero-text-container';
 export const ELEMENT_TEXT_CONTAINER = 'hero-text-container';
@@ -23,6 +31,38 @@ export const ELEMENT_HERO_EYEBROW = 'hero-eyebrow';
 export const ELEMENTS_HERO_HEADLINE = 'hero-headline';
 export const ELEMENTS_HERO_RICH_TEXT = 'hero-richtext';
 export const ELEMENTS_HERO_ACTION = 'hero-actions';
+
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
+const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
+const IS_TEXT_CENTER = `[${ATTRIBUTE_TEXT_ALIGN}='${TEXT_ALIGN_CENTER}']`;
+
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_LIGHT_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_THEME_LIGHT}`;
+const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_THEME_MARYLAND}`;
+const OVERWRITE_TEXT_CENTER_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_TEXT_CENTER}`;
+
+// prettier-ignore
+const OverwriteTheme = `
+  ${OVERWRITE_THEME_DARK_CONTAINER} * {
+    color: ${Colors.white};
+  }
+
+  ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
+    color: ${Colors.black};
+  }
+
+  ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
+    color: ${Colors.white};
+  }
+`;
+
+// prettier-ignore
+const OverwriteTextCenter = `
+  ${OVERWRITE_TEXT_CENTER_CONTAINER} * {
+    text-align: center;
+  }
+`;
 
 // prettier-ignore
 const EyebrowStyles = `  
@@ -99,7 +139,8 @@ export const STYLES_HERO_ELEMENT_TEXT_CONTAINER = `
   ${HeadlineStyles}
   ${TextStyles}
   ${ActionStyles}
-
+  ${OverwriteTextCenter}
+  ${OverwriteTheme}
 `;
 
 const CreateBody = ({
@@ -118,11 +159,8 @@ const CreateBody = ({
   }
 
   if (headline) {
-    const characterCount = headline.textContent?.trim().length || 0;
-
     CheckForAnimationLinkSpan({ element: headline });
     headline.classList.add(ELEMENTS_HERO_HEADLINE);
-    if (characterCount > 30) headline.setAttribute('size', 'extra-large');
     container.appendChild(headline);
   }
 
@@ -144,17 +182,22 @@ export const CreateTextContainerElement = ({
 }: {
   element: TypeTextContainerProps;
 }) => {
+  const { theme, isTextCenter = false } = element;
+  const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const childWrapper = document.createElement('div');
   const body = CreateBody(element);
 
-  wrapper.classList.add(ELEMENT_TEXT_CONTAINER);
-  childWrapper.classList.add(ELEMENT_TEXT_CONTAINER_WRAPPER);
-  childWrapper.appendChild(body);
+  container.classList.add(ELEMENT_TEXT_CONTAINER);
+  if (theme) container.setAttribute('theme', theme);
+  if (isTextCenter)
+    container.setAttribute(ATTRIBUTE_TEXT_ALIGN, TEXT_ALIGN_CENTER);
 
-  wrapper.appendChild(childWrapper);
+  wrapper.classList.add(ELEMENT_TEXT_CONTAINER_WRAPPER);
+  wrapper.appendChild(body);
 
-  return wrapper;
+  container.appendChild(wrapper);
+
+  return container;
 };
 
 export default {

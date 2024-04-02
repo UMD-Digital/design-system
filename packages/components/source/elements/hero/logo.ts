@@ -19,8 +19,7 @@ import TextContainer, {
 
 type TypeHeroLogoProps = TypeTextContainerProps &
   TypeImageContainerProps & {
-    textAlignment: string;
-    theme: string;
+    isTextCenter: boolean;
     isWithLock: boolean;
     isInterior: boolean;
   };
@@ -194,7 +193,7 @@ export const STYLES_HERO_LOGO_ELEMENT = `
 `;
 
 export const CreateHeroLogoElement = (element: TypeHeroLogoProps) => {
-  const { theme, textAlignment, isWithLock, isInterior } = element;
+  const { theme, isTextCenter, isWithLock, isInterior } = element;
 
   const declaration = document.createElement('div');
   const container = document.createElement('div');
@@ -203,10 +202,10 @@ export const CreateHeroLogoElement = (element: TypeHeroLogoProps) => {
   const asset = ImageContainer.CreateElement({ element });
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
-  container.setAttribute(ATTRIBUTE_THEME, theme);
-  container.setAttribute(ATTRIBUTE_TEXT_ALIGN, textAlignment);
-
+  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   if (isInterior) container.setAttribute(ATTRIBUTE_INTERIOR, '');
+  if (isTextCenter)
+    container.setAttribute(ATTRIBUTE_TEXT_ALIGN, TEXT_ALIGN_CENTER);
 
   lock.classList.add(ELEMENT_HERO_LOCK);
   lock.appendChild(text);

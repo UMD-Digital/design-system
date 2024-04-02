@@ -10,6 +10,8 @@ import { Load as EventDateLoader } from './event-date';
 import { Load as EventDateSliderLoader } from './events-date-slider';
 import { Load as FooterLoader } from './footer';
 import { Load as HeroLoader } from './hero';
+import { Load as HeroLogoLoader } from './hero-logo';
+import { Load as HeroMinimalLoader } from './hero-minimal';
 import { Load as PersonLoader } from './person';
 import { Load as NavDrawerLoader } from './nav-drawer';
 import { Load as NavItemLoader } from './nav-item';
@@ -30,6 +32,8 @@ export const Components = {
   EventDateSliderLoader,
   FooterLoader,
   HeroLoader,
+  HeroLogoLoader,
+  HeroMinimalLoader,
   PersonLoader,
   NavDrawerLoader,
   NavItemLoader,

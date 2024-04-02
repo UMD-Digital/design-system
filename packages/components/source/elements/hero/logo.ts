@@ -17,12 +17,7 @@ import TextContainer, {
   ELEMENTS_HERO_RICH_TEXT,
 } from './elements/text';
 
-type TypeHeroLogoProps = TypeTextContainerProps &
-  TypeImageContainerProps & {
-    isTextCenter: boolean;
-    isWithLock: boolean;
-    isInterior: boolean;
-  };
+type TypeHeroLogoProps = TypeTextContainerProps & TypeImageContainerProps;
 
 const { Lock } = Layout;
 const { Colors, Spacing } = Tokens;
@@ -32,20 +27,13 @@ const { CampaignLarge, SansLarger } = Typography;
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
-const TEXT_ALIGN_CENTER = 'center';
 const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_TEXT_ALIGN = 'text-align';
-const ATTRIBUTE_HAS_IMAGE = 'has-image';
-const ATTRIBUTE_WITHIN_LOCK = 'within-lock';
-const ATTRIBUTE_INTERIOR = 'interior';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
 const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
-const IS_TEXT_CENTER = `[${ATTRIBUTE_TEXT_ALIGN}='${TEXT_ALIGN_CENTER}']`;
-const IS_INTERIOR = `[${ATTRIBUTE_INTERIOR}]`;
 
-const ELEMENT_NAME = 'umd-element-logo-default';
+const ELEMENT_NAME = 'umd-element-hero-logo';
 const ELEMENT_HERO_ELEMENT_DECLARATION = 'hero-logo-element-declaration';
 const ELEMENT_HERO_CONTAINER = 'hero-logo-container';
 const ELEMENT_HERO_LOCK = 'hero-logo-lock';
@@ -60,37 +48,18 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_DAR
 const OVERWRITE_THEME_LIGHT_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_LIGHT}`;
 const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_MARYLAND}`;
 
-const OVERWRITE_TEXT_CENTER_ALIGNMENT_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_TEXT_CENTER} .${ELEMENT_TEXT_CONTAINER}`;
-const OVERWRITE_INTERIOR_HEADLINE = `.${ELEMENT_HERO_CONTAINER}${IS_INTERIOR} .${ELEMENTS_HERO_HEADLINE}`;
-
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
     background-color: ${Colors.black};
   }
 
-  ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${Colors.white};
-  }
-
-  .${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENTS_HERO_RICH_TEXT} {
-    color: ${Colors.white};
-  }
-
   ${OVERWRITE_THEME_LIGHT_CONTAINER} {
     background-color: ${Colors.gray.lightest};
   }
 
-  ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
-    color: ${Colors.black};
-  }
-
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
     background-color: ${Colors.red};
-  }
-
-  ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
-    color: ${Colors.white};
   }
 `;
 
@@ -155,7 +124,8 @@ const OverwriteImageContainer = `
   }
 
   ${OVERWRITE_IMAGE_CONTAINER} img {
-    max-width: 80%;
+    max-width: 800px;
+    max-height: 500px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -168,14 +138,6 @@ export const STYLES_HERO_LOGO_ELEMENT = `
   
   .${ELEMENT_HERO_CONTAINER} {
     padding: ${Spacing['5xl']} 0 ${Spacing.lg};
-  }
-  
-  
-  
-  .${ELEMENT_HERO_LOCK} {
-    height: 100%;
-    width: 100%;
-    position: relative;
   }
   
   ${ConvertJSSObjectToStyles({
@@ -193,34 +155,23 @@ export const STYLES_HERO_LOGO_ELEMENT = `
 `;
 
 export const CreateHeroLogoElement = (element: TypeHeroLogoProps) => {
-  const { theme, isTextCenter, isWithLock, isInterior } = element;
+  const { theme } = element;
 
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
-  const text = TextContainer.CreateElement(element);
+  const text = TextContainer.CreateElement({ ...element, isTextCenter: true });
   const asset = ImageContainer.CreateElement(element);
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
-  if (isInterior) container.setAttribute(ATTRIBUTE_INTERIOR, '');
-  if (isTextCenter)
-    container.setAttribute(ATTRIBUTE_TEXT_ALIGN, TEXT_ALIGN_CENTER);
+
+  if (asset) {
+    lock.appendChild(asset);
+  }
 
   lock.classList.add(ELEMENT_HERO_LOCK);
   lock.appendChild(text);
-
-  if (asset) {
-    container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
-
-    if (isWithLock) {
-      lock.appendChild(asset);
-      container.setAttribute(ATTRIBUTE_WITHIN_LOCK, '');
-    } else {
-      container.appendChild(asset);
-    }
-  }
-
   container.appendChild(lock);
 
   declaration.classList.add(ELEMENT_HERO_ELEMENT_DECLARATION);

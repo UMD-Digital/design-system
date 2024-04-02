@@ -3,6 +3,7 @@ import { SlotDefaultStyling } from 'helpers/ui';
 import {
   HeroDefault,
   HeroElements,
+  HeroLogo,
   HeroMinimal,
   HeroOverlay,
   HeroStacked,
@@ -10,12 +11,15 @@ import {
 
 import { UMDHeroElement } from './index';
 
+const TYPE_DEFAULT = 'default';
 const TYPE_DEFAULT_INTERIOR = 'default-interior';
 const TYPE_DEFAULT_CENTERED = 'default-centered';
 const TYPE_STACKED = 'stacked';
 const TYPE_STACKED_INTERIOR = 'stacked-interior';
 const TYPE_MINIMAL = 'minimal';
 const TYPE_OVERLAY = 'overlay';
+const TYPE_LOGO = 'logo';
+const THEME_WHITE = 'white';
 const TEXT_ALIGN_CENTER = 'center';
 
 export const ComponentStyles = `
@@ -26,6 +30,7 @@ export const ComponentStyles = `
   ${Reset}
   ${HeroElements.Image.Styles}
   ${HeroElements.Text.Styles}
+  ${HeroLogo.Styles}
   ${HeroOverlay.Styles}
   ${HeroMinimal.Styles}
   ${HeroStacked.Styles}
@@ -85,6 +90,13 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
 
   if (type === TYPE_OVERLAY) {
     return HeroOverlay.CreateElement({
+      ...MakeHeroData({ element }),
+      videoRef,
+    });
+  }
+
+  if (type === TYPE_LOGO) {
+    return HeroLogo.CreateElement({
       ...MakeHeroData({ element }),
       videoRef,
     });

@@ -184,8 +184,8 @@ const ContactItemStyles = `
     fill: ${Colors.gray.light};
   }
 
-  .${ELEMENT_PERSON_CONTACT_ITEM}:hover > span:last-child,
-  .${ELEMENT_PERSON_CONTACT_ITEM}:focus > span:last-child {
+  a.${ELEMENT_PERSON_CONTACT_ITEM}:hover > span:last-child,
+  a.${ELEMENT_PERSON_CONTACT_ITEM}:focus > span:last-child {
     text-decoration: underline;
   }
 
@@ -244,6 +244,21 @@ const STYLES_PERSON_TEXT = `
   ${ThemeDarkStyles}
 `;
 
+const MakeContactText = ({
+  element,
+  icon,
+}: {
+  element: HTMLElement | HTMLAnchorElement;
+  icon: string;
+}) => {
+  const text = document.createElement('span');
+
+  text.classList.add(ELEMENT_PERSON_CONTACT_ITEM);
+  text.innerHTML = `<span>${icon}</span> <span>${element.innerHTML}</span>`;
+
+  return text;
+};
+
 const MakeContactLink = ({
   element,
   icon,
@@ -252,6 +267,9 @@ const MakeContactLink = ({
   icon: string;
 }) => {
   if (!element) return null;
+  if (!element.getAttribute('href') && icon === PIN_ICON) {
+    return MakeContactText({ element, icon });
+  }
   if (!element.hasAttribute('href')) return null;
 
   const link = document.createElement('a');

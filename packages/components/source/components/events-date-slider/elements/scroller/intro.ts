@@ -1,6 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { CheckForCtaStyle } from 'utilities/ui';
-import { Styles, MarkupCreate } from 'utilities';
+import { Styles, MarkupCreate, MarkupModify } from 'utilities';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -98,7 +97,7 @@ export const CreateIntroWrapper = ({ element }: { element: HTMLElement }) => {
     introductionWrapper.appendChild(headlineSlot);
   }
   if (linkSlot) {
-    CheckForCtaStyle({ element: linkSlot, styleClass: INTRO_LINK });
+    MarkupModify.CtaStyle({ element: linkSlot, styleClass: INTRO_LINK });
     introductionWrapper.appendChild(linkSlot);
   }
 

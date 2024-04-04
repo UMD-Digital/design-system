@@ -1,6 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
-import { Styles } from 'utilities';
+import { MarkupModify, Styles } from 'utilities';
 
 type TypeTextProps = {
   theme?: string | null;
@@ -162,7 +161,7 @@ const CreateBody = ({
   }
 
   if (headline) {
-    CheckForAnimationLinkSpan({ element: headline });
+    MarkupModify.AnimationLinkSpan({ element: headline });
     headline.classList.add(ELEMENTS_HERO_HEADLINE);
     container.appendChild(headline);
   }

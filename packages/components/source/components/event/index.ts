@@ -5,8 +5,7 @@ declare global {
 }
 
 import { EventBlock, EventList, EventElements } from 'elements';
-import { Styles, MarkupCreate } from 'utilities';
-import { CheckForImageAlt } from 'utilities/ui';
+import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
@@ -38,7 +37,7 @@ const styles = `
 
 const GetImage = ({ element }: { element: UMDCardElement }) => {
   const { IMAGE } = element._slots;
-  const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
+  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
   const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
 
   if (isProperImage && slotImage) {

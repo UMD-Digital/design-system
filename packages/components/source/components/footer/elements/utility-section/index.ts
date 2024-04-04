@@ -4,8 +4,7 @@ import {
   Layout,
   Typography,
 } from '@universityofmaryland/variables';
-import { MarkupCreate, Styles } from 'utilities';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { MarkupCreate, MarkupModify, Styles } from 'utilities';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -164,7 +163,7 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
     ) as HTMLAnchorElement[];
 
     slottedLinks.forEach((link) => {
-      CheckForAnimationLinkSpan({ element: link });
+      MarkupModify.AnimationLinkSpan({ element: link });
       link.classList.add(UTILITY_CONTAINER_LINK);
 
       wrapper.appendChild(link);

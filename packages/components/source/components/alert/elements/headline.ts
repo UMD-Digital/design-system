@@ -3,8 +3,7 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { Styles, MarkupCreate } from 'utilities';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { MarkupCreate, MarkupModify, Styles } from 'utilities';
 import { SLOTS } from '../globals';
 import { UMDAlertElement } from '../index';
 
@@ -57,7 +56,7 @@ export const CreateHeadline = ({ element }: { element: UMDAlertElement }) => {
   });
 
   if (headlineSlot) {
-    CheckForAnimationLinkSpan({ element: headlineSlot });
+    MarkupModify.AnimationLinkSpan({ element: headlineSlot });
     headlineSlot.classList.add(ALERT_HEADLINE);
     return headlineSlot;
   }

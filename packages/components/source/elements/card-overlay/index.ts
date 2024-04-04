@@ -5,8 +5,7 @@ import {
   Layout,
   Elements,
 } from '@universityofmaryland/variables';
-import { AssetIcon, Performance, Styles } from 'utilities';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { AssetIcon, MarkupModify, Performance, Styles } from 'utilities';
 
 type TypeTextContainer = {
   eyebrow?: HTMLElement | null;
@@ -642,7 +641,7 @@ const MakeTextContainer = ({
   }
 
   if (headline) {
-    CheckForAnimationLinkSpan({ element: headline });
+    MarkupModify.AnimationLinkSpan({ element: headline });
     headline.classList.add(CARD_OVERLAY_HEADLINE);
     container.appendChild(headline);
   }

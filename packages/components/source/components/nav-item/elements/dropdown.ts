@@ -1,6 +1,5 @@
 import { Animations, Tokens } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { MarkupModify, Styles } from 'utilities';
 import { UMDNavItemElement } from '../index';
 import { SLOTS, ELEMENTS, REFERENCES } from '../globals';
 
@@ -105,11 +104,11 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
   const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
 
   firstColumnLinks.forEach((link) => {
-    CheckForAnimationLinkSpan({ element: link });
+    MarkupModify.AnimationLinkSpan({ element: link });
     column1.appendChild(link);
   });
   links.forEach((link) => {
-    CheckForAnimationLinkSpan({ element: link });
+    MarkupModify.AnimationLinkSpan({ element: link });
     column2.appendChild(link);
   });
 
@@ -124,7 +123,7 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
 const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   const container = document.createElement('div');
   links.forEach((link) => {
-    CheckForAnimationLinkSpan({ element: link });
+    MarkupModify.AnimationLinkSpan({ element: link });
     container.appendChild(link);
   });
 

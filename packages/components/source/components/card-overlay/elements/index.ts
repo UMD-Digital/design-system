@@ -1,6 +1,5 @@
 import { CardOverlay } from 'elements';
-import { Styles, MarkupCreate } from 'utilities';
-import { CheckForImageAlt } from 'utilities/ui';
+import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 import { UMDCardOverlayElement } from '../index';
 import { SLOTS } from '../globals';
 
@@ -19,7 +18,7 @@ export const ComponentStyles = `
 `;
 
 const GetImage = ({ element }: { element: UMDCardOverlayElement }) => {
-  const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
+  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
   const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
 
   if (isProperImage && slotImage) {

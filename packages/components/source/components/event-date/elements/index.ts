@@ -4,10 +4,9 @@ import {
   Typography,
 } from '@universityofmaryland/variables';
 import { EventElements } from 'elements';
-import { Styles, MarkupCreate } from 'utilities';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
-import { ELEMENT_TYPE } from 'components/event-date';
-import { SLOTS, VARIABLES, REFERENCES } from 'components/event-date/globals';
+import { MarkupCreate, MarkupModify, Styles } from 'utilities';
+import { ELEMENT_TYPE } from '../index';
+import { SLOTS, VARIABLES, REFERENCES } from '../globals';
 
 const { FontSize, Spacing } = Tokens;
 const { Link } = Animations;
@@ -111,7 +110,7 @@ export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
 
   if (headlineSlot) {
     headlineSlot.classList.add(EVENT_HEADLINE);
-    CheckForAnimationLinkSpan({ element: headlineSlot });
+    MarkupModify.AnimationLinkSpan({ element: headlineSlot });
     container.appendChild(headlineSlot);
   }
 

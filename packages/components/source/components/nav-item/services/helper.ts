@@ -1,4 +1,4 @@
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { MarkupModify } from 'utilities';
 import { SLOTS, ELEMENTS } from '../globals';
 import { UMDNavItemElement } from '../index';
 
@@ -26,7 +26,7 @@ export const OnLoadDropdownSpans = ({
     const hasSpan = link.querySelector('span');
 
     if (!hasSpan) {
-      CheckForAnimationLinkSpan({ element: link });
+      MarkupModify.AnimationLinkSpan({ element: link });
       link.appendChild(link);
     }
   });

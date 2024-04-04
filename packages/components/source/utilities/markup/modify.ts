@@ -1,4 +1,4 @@
-export const CheckForAnimationLinkSpan = ({
+const AnimationLinkSpan = ({
   element,
 }: {
   element: HTMLElement | HTMLAnchorElement;
@@ -21,35 +21,7 @@ export const CheckForAnimationLinkSpan = ({
   }
 };
 
-export const CheckForImageAlt = ({
-  element,
-  slotRef,
-}: {
-  element: HTMLElement;
-  slotRef: string;
-}) => {
-  const imageSlot: any = element.querySelector(
-    `[slot="${slotRef}"]`,
-  ) as HTMLElement;
-  const isImage = imageSlot instanceof HTMLImageElement;
-  let image = imageSlot;
-
-  if (!isImage && imageSlot) {
-    image = imageSlot.querySelector('img');
-  }
-
-  if (image) {
-    const altText = image.getAttribute('alt');
-    if (!altText) {
-      console.error('Image elements require alt text');
-      return false;
-    }
-  }
-
-  return true;
-};
-
-export const CheckForCtaStyle = ({
+const CtaStyle = ({
   element,
   styleClass,
 }: {
@@ -64,4 +36,9 @@ export const CheckForCtaStyle = ({
       link.classList.add(styleClass);
     }
   }
+};
+
+export default {
+  AnimationLinkSpan,
+  CtaStyle,
 };

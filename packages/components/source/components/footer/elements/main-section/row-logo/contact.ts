@@ -3,8 +3,7 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { Styles, MarkupCreate } from 'utilities';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { MarkupCreate, MarkupModify, Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import {
   BREAKPOINTS,
@@ -225,7 +224,7 @@ const CreateSlotHeadline = ({
   });
 
   if (contactHeadlineElement) {
-    CheckForAnimationLinkSpan({ element: contactHeadlineElement });
+    MarkupModify.AnimationLinkSpan({ element: contactHeadlineElement });
     contactHeadlineElement.classList.add(CONTACT_LIST_HEADLINE);
 
     return contactHeadlineElement;

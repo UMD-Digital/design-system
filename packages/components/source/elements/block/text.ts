@@ -4,8 +4,7 @@ import {
   Tokens,
   Layout,
 } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { MarkupModify, Styles } from 'utilities';
 
 export type TypeBlockTextContainter = {
   headline?: HTMLElement | null;
@@ -215,7 +214,7 @@ const CreateBlockTextContainer = ({
   }
 
   if (headline) {
-    CheckForAnimationLinkSpan({ element: headline });
+    MarkupModify.AnimationLinkSpan({ element: headline });
     headline.classList.add(ELEMENT_BLOCK_TEXT_HEADLINE);
     container.appendChild(headline);
   }

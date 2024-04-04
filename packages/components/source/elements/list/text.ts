@@ -4,8 +4,7 @@ import {
   Tokens,
   Layout,
 } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
-import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { MarkupModify, Styles } from 'utilities';
 
 export type TypeListText = {
   headline?: HTMLElement | null;
@@ -256,7 +255,7 @@ export const CreateListTextContainer = ({
   }
 
   if (headline) {
-    CheckForAnimationLinkSpan({ element: headline });
+    MarkupModify.AnimationLinkSpan({ element: headline });
     headline.classList.add(ELEMENT_LIST_HEADLINE);
     container.appendChild(headline);
   }

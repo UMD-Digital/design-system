@@ -1,6 +1,5 @@
 import { PathwayHero, PathwayDefault, PathwayElements } from 'elements';
-import { Styles, MarkupCreate } from 'utilities';
-import { CheckForImageAlt } from 'utilities/ui';
+import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 import { UMDPathwayElement } from './index';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
@@ -29,7 +28,7 @@ export const ComponentStyles = `
 
 const GetImage = ({ element }: { element: UMDPathwayElement }) => {
   const { IMAGE } = element._slots;
-  const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
+  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
   const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
 
   if (isProperImage && slotImage) {

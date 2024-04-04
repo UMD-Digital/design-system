@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { DARK_LOGO, LIGHT_LOGO } from 'assets/logos';
+import { DARK_LOGO, LIGHT_LOGO } from 'utilities/assets/logos';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
   CreateCallToActionContainer,

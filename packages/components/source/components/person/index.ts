@@ -4,8 +4,10 @@ declare global {
   }
 }
 
-import { MakeTemplate, SlotOberserver } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom } from './display';
+
+const { Node, SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-person';
 const SLOTS = {
@@ -28,7 +30,9 @@ export class UMDPersonElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles: `${ComponentStyles}` });
+    const template = Node.stylesTemplate({
+      styles: `${ComponentStyles}`,
+    });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

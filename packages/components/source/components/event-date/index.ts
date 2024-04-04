@@ -4,9 +4,11 @@ declare global {
   }
 }
 
-import { MakeTemplate, SlotOberserver } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { SLOTS } from './globals';
+
+const { SlotOberserver, Node } = MarkupCreate;
 
 export const ELEMENT_NAME = 'umd-element-events-date';
 export type ELEMENT_TYPE = UMDEventsDateElement;
@@ -21,7 +23,7 @@ export class UMDEventsDateElement extends HTMLElement {
     this._theme = 'light';
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }

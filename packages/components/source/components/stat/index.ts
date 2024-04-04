@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { VARIABLES } from './globals';
 
@@ -35,7 +35,7 @@ export class UMDStatElement extends HTMLElement {
     this._hasLine = this.hasAttribute(ATTRIBUTE_HAS_LINE);
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }

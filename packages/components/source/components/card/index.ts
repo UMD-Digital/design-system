@@ -5,13 +5,10 @@ declare global {
 }
 
 import { CardBlock, CardList } from 'elements';
-import { Reset } from 'helpers/styles';
-import {
-  CheckForImageAlt,
-  SlotDefaultStyling,
-  MakeTemplate,
-  SlotOberserver,
-} from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { CheckForImageAlt } from 'utilities/ui';
+
+const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-card';
 const ATTRIBUTE_THEME = 'theme';
@@ -32,7 +29,7 @@ const styles = `
     display: block;
   }
   
-  ${Reset}
+  ${Styles.ResetString}
   ${CardBlock.Styles}
   ${CardList.Styles}
 `;
@@ -40,7 +37,7 @@ const styles = `
 const GetImage = ({ element }: { element: UMDCardElement }) => {
   const { IMAGE } = element._slots;
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
+  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
 
   if (isProperImage && slotImage) {
     return slotImage.cloneNode(true) as HTMLImageElement;
@@ -63,20 +60,20 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   if (isDisplayList) {
     return CardList.CreateElement({
       image: GetImage({ element }),
-      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-      text: SlotDefaultStyling({ element, slotRef: TEXT }),
-      actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+      eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+      text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+      actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
       theme,
     });
   }
 
   return CardBlock.CreateElement({
     image: GetImage({ element }),
-    eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
     isAligned,
     isBordered,
@@ -88,7 +85,7 @@ export class UMDCardElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

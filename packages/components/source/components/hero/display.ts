@@ -1,5 +1,4 @@
-import { Reset } from 'helpers/styles';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
 import {
   HeroDefault,
   HeroElements,
@@ -7,8 +6,9 @@ import {
   HeroOverlay,
   HeroStacked,
 } from 'elements';
-
 import { UMDHeroElement } from './index';
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const TYPE_DEFAULT_INTERIOR = 'default-interior';
 const TYPE_DEFAULT_CENTERED = 'default-centered';
@@ -23,7 +23,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${HeroElements.Image.Styles}
   ${HeroElements.Text.Styles}
   ${HeroOverlay.Styles}
@@ -57,18 +57,18 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
     isTextCenter,
     isInterior,
     isWithLock,
-    eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-    richText: SlotDefaultStyling({ element, slotRef: TEXT }),
-    imageRef: SlotDefaultStyling({ element, slotRef: IMAGE }),
-    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    richText: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    imageRef: SlotWithDefaultStyling({ element, slotRef: IMAGE }),
+    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
   };
 };
 
 export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
   const { VIDEO } = element._slots;
   const type = element.getAttribute('type');
-  const videoRef = SlotDefaultStyling({ element, slotRef: VIDEO });
+  const videoRef = SlotWithDefaultStyling({ element, slotRef: VIDEO });
 
   if (type === TYPE_STACKED || type === TYPE_STACKED_INTERIOR) {
     return HeroStacked.CreateElement({

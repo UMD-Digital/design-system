@@ -4,12 +4,14 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { Performance } from 'utilities';
+import { MarkupCreate } from 'utilities';
 import ComponentStyles, { CreateShadowDom } from './elements';
 import { ELEMENT_NAME, VARIABLES } from './globals';
-import { Debounce } from 'helpers/performance';
 import { SetClosed, SetOpen } from './services/helper';
 import { EventSize } from './services/events';
+
+const { Debounce } = Performance;
 
 const {
   THEME_LIGHT,
@@ -31,7 +33,7 @@ export class UMDAccordionElement extends HTMLElement {
     this._shadow = this.attachShadow({ mode: 'open' });
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 

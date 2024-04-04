@@ -1,16 +1,12 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import {
-  SLOTS,
-  ELEMENT_NAME,
-  BREAKPOINTS,
-  ELEMENTS,
-  NAMING,
-} from 'components/accordion/globals';
-import { ELEMENT_TYPE } from 'components/accordion';
-import { MakeSlot } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { SLOTS, ELEMENT_NAME, BREAKPOINTS, ELEMENTS, NAMING } from '../globals';
+import { ELEMENT_TYPE } from '../index';
 
 const { Colors, Spacing } = Tokens;
+
+const { ConvertJSSObjectToStyles } = Styles;
+const { Node } = MarkupCreate;
 
 const { BODY } = SLOTS;
 const { small } = BREAKPOINTS;
@@ -76,7 +72,7 @@ export const bodyStyles = `
 
 export const CreateBody = ({ element }: { element: ELEMENT_TYPE }) => {
   const contentWrapper = document.createElement('div');
-  const bodySlot = MakeSlot({ type: BODY });
+  const bodySlot = Node.slot({ type: BODY });
 
   contentWrapper.classList.add(ACCORDION_BODY_WRAPPER);
 

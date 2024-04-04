@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MakeSlot } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { CreateSlideAction, slideActionStyles } from './slide-action';
 import { ELEMENTS, SLOTS, VARIABLES } from '../../globals';
 import { UMDNavDrawer } from '../../index';
@@ -97,7 +97,7 @@ const createSecondaryLinks = ({ element }: { element: UMDNavDrawer }) => {
 };
 
 const createAdditonalContent = () => {
-  const contentSlot = MakeSlot({ type: PRIMARY_SLIDE_CONTENT });
+  const contentSlot = MarkupCreate.Node.slot({ type: PRIMARY_SLIDE_CONTENT });
 
   if (contentSlot) return contentSlot;
 

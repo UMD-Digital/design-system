@@ -1,5 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { NEW_WINDOW_ICON, DOCUMENT_ICON, FEARLESS_ICON } from 'assets/icons';
+import {
+  NEW_WINDOW_ICON,
+  DOCUMENT_ICON,
+  FEARLESS_ICON,
+} from 'utilities/assets/icons';
 import {
   STYLES_CTA_OUTLINE,
   CLASS_STYLES_REF_CTA_OUTLINE,

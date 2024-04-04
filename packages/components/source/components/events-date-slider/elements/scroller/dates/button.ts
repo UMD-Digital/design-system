@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'assets/icons';
+import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'utilities/assets/icons';
 import { ELEMENT_TYPE } from 'components/events-date-slider';
 import { ButtonVisibilityLogic } from 'components/events-date-slider/services/helpers';
 import { EventSlideDates } from 'components/events-date-slider/services/events';

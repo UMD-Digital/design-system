@@ -1,5 +1,5 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
+import { Styles } from 'utilities';
 import {
   EventResizeCarouselElementsWidth,
   EventResizeSetHeight,
@@ -9,6 +9,7 @@ import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 import { BREAKPOINTS, SLOTS, VARIABLES } from '../globals';
 import { UMDCarouselCardsElement } from '../index';
 
+const { ConvertJSSObjectToStyles, ResetString } = Styles;
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
 
@@ -99,7 +100,7 @@ export const ComponentStyles = `
     color: ${Colors.white};
   }
 
-  ${Reset}
+  ${ResetString}
   ${containerStyles}
   ${containerLockStyles}
   ${IntroContainerStyles}

@@ -5,8 +5,10 @@ declare global {
 }
 
 import { EventBlock, EventList, EventElements } from 'elements';
-import { Reset } from 'helpers/styles';
-import { CheckForImageAlt, SlotDefaultStyling, MakeTemplate } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { CheckForImageAlt } from 'utilities/ui';
+
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-event';
 const ATTRIBUTE_THEME = 'theme';
@@ -27,7 +29,7 @@ const styles = `
     display: block;
   }
   
-  ${Reset}
+  ${Styles.ResetString}
   ${EventElements.Meta.Styles}
   ${EventElements.Sign.Styles}
   ${EventBlock.Styles}
@@ -37,7 +39,7 @@ const styles = `
 const GetImage = ({ element }: { element: UMDCardElement }) => {
   const { IMAGE } = element._slots;
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
+  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
 
   if (isProperImage && slotImage) {
     return slotImage.cloneNode(true) as HTMLImageElement;
@@ -144,9 +146,9 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   if (isDisplayList) {
     return EventList.CreateElement({
       image: GetImage({ element }),
-      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-      text: SlotDefaultStyling({ element, slotRef: TEXT }),
-      actions: SlotDefaultStyling({ element, slotRef: CTA }),
+      headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+      text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+      actions: SlotWithDefaultStyling({ element, slotRef: CTA }),
       eventDetails: EventElements.Meta.CreateElement(
         MakeEventDetailsData({ element, startDate, endDate }),
       ),
@@ -159,9 +161,9 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
 
   return EventBlock.CreateElement({
     image: GetImage({ element }),
-    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    actions: SlotDefaultStyling({ element, slotRef: CTA }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    actions: SlotWithDefaultStyling({ element, slotRef: CTA }),
     eventDetails: EventElements.Meta.CreateElement(
       MakeEventDetailsData({ element, startDate, endDate }),
     ),
@@ -174,7 +176,7 @@ export class UMDCardElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

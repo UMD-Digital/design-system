@@ -1,11 +1,13 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
 import { SLOTS } from '../globals';
 import { UMDAlertElement } from '../index';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
 
 const { Spacing } = Tokens;
 const { GridColumnAndRows } = Layout;
+
+const { ConvertJSSObjectToStyles } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { ACTIONS } = SLOTS;
 
@@ -26,7 +28,7 @@ export const ctaStyles = `
 
 export const CreateCta = ({ element }: { element: UMDAlertElement }) => {
   const wrapper = document.createElement('div');
-  const ctaSlot = SlotDefaultStyling({ element, slotRef: ACTIONS });
+  const ctaSlot = SlotWithDefaultStyling({ element, slotRef: ACTIONS });
 
   if (ctaSlot) {
     wrapper.classList.add(ALERT_CTA);

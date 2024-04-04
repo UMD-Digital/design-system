@@ -5,8 +5,9 @@ declare global {
 }
 
 import { SectionIntro } from 'elements';
-import { MakeTemplate, SlotDefaultStyling } from 'helpers/ui';
-import { Reset } from 'helpers/styles';
+import { Styles, MarkupCreate } from 'utilities';
+
+const { SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-section-intro';
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
@@ -22,7 +23,7 @@ const styles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${SectionIntro.Styles}
 `;
 
@@ -34,9 +35,9 @@ export const CreateShadowDom = ({
   const { HEADLINE, ACTIONS, TEXT } = element._slots;
   const hasSeparator = element.hasAttribute(ATTRIBUTE_WITH_SEPARATOR);
   const theme = element.getAttribute(ATTRIBUTE_THEME);
-  const headline = SlotDefaultStyling({ element, slotRef: HEADLINE });
-  const text = SlotDefaultStyling({ element, slotRef: TEXT });
-  const actions = SlotDefaultStyling({ element, slotRef: ACTIONS });
+  const headline = SlotWithDefaultStyling({ element, slotRef: HEADLINE });
+  const text = SlotWithDefaultStyling({ element, slotRef: TEXT });
+  const actions = SlotWithDefaultStyling({ element, slotRef: ACTIONS });
 
   return SectionIntro.CreateElement({
     headline,
@@ -52,7 +53,7 @@ export class UMDSectionIntroElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

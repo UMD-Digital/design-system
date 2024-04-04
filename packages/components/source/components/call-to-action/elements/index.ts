@@ -1,11 +1,11 @@
 import { CallToAction } from 'elements';
 import { Tokens } from '@universityofmaryland/variables';
-import { Reset } from 'helpers/styles';
-import { MakeSlot } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
 import { ELEMENTS, SLOTS, VARIABLES, REFERENCES } from '../globals';
 import { UMDCallToActionElement } from '../index';
 
 const { Colors, FontSize, Spacing } = Tokens;
+const { Node } = MarkupCreate;
 
 const { PLAIN_TEXT } = SLOTS;
 const { CTA_CONTAINER } = ELEMENTS;
@@ -62,7 +62,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${CallToAction.Styles}
   ${PlainTextSlotStyles}
   ${OverwritePrimaryLayoutStyles}
@@ -114,7 +114,7 @@ export const CreateShadowDom = ({
   container.setAttribute(ATTRIBUTE_TYPE, type);
 
   if (hasPlainText) {
-    const plainTextSlot = MakeSlot({ type: PLAIN_TEXT });
+    const plainTextSlot = Node.slot({ type: PLAIN_TEXT });
     plainTextSlot.classList.add(CTA_PLAIN_TEXT_SLOT);
     container.setAttribute(ATTRIBUTE_PLAIN_TEXT, 'true');
     container.appendChild(plainTextSlot);

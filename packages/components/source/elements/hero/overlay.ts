@@ -4,7 +4,7 @@ import {
   Typography,
   Elements,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import ImageContainer, {
   TypeImageContainerProps,
   ELEMENT_IMAGE_CONTINATER,
@@ -23,6 +23,8 @@ const { Lock } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignExtralarge, SansLarger } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
 const DESKTOP = 1024;

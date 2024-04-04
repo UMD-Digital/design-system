@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { PERSON_ICON } from 'assets/icons';
+import { PERSON_ICON } from 'utilities/assets/icons';
 import BlockContainer, {
   ELEMENT_BLOCK_CONTAINER,
   TypeBlockContainer,

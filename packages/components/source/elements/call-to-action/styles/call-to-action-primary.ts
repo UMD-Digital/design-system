@@ -1,8 +1,10 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 const { Colors } = Tokens;
 const { InterativeSmall } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 export const CLASS_STYLES_REF_CTA_PRIMARY = 'umd-styles-call-to-action-primary';
 

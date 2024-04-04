@@ -1,4 +1,4 @@
-import { Reset } from 'helpers/styles';
+import { Styles } from 'utilities';
 import { MakeLoader } from '../../common/loader';
 import {
   AppendGridEntries,
@@ -36,7 +36,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${STYLES_FEEDS_COMMON}
   ${STYLES_NEWS_FEED}
 `;

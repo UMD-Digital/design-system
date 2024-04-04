@@ -1,7 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { PHONE_ICON, EMAIL_ICON, PIN_ICON } from 'assets/icons';
-import { LINKEDIN_ICON } from 'assets/social';
+import { Styles } from 'utilities';
+import { PHONE_ICON, EMAIL_ICON, PIN_ICON } from 'utilities/assets/icons';
+import { LINKEDIN_ICON } from 'utilities/assets/social';
 
 type TypeContactProps = {
   phone?: HTMLElement | null;
@@ -24,6 +24,8 @@ export type TypePersonProps = TypeContactProps & {
 
 const { Spacing, Colors } = Tokens;
 const { SansLarger, SansSmall, SansSmaller } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';

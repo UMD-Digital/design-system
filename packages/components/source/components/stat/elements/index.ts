@@ -1,9 +1,10 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
 import { UMDStatElement } from '../index';
 import { SLOTS, REFERENCES, VARIABLES } from '../globals';
 
+const { ConvertJSSObjectToStyles, ResetString } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 const { Colors, Spacing } = Tokens;
 const {
   SansLarger,
@@ -200,7 +201,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${ResetString}
   ${StatContainerStyles}
   ${StatWrapperStyles}
   ${StatDisplayStyles}
@@ -212,7 +213,7 @@ export const ComponentStyles = `
 `;
 
 const MakeState = ({ element }: { element: UMDStatElement }) => {
-  const stat = SlotDefaultStyling({ element, slotRef: STAT });
+  const stat = SlotWithDefaultStyling({ element, slotRef: STAT });
 
   if (stat) {
     let text = stat.textContent;
@@ -243,8 +244,8 @@ export const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const stat = MakeState({ element });
-  const text = SlotDefaultStyling({ element, slotRef: TEXT });
-  const subText = SlotDefaultStyling({ element, slotRef: SUB_TEXT });
+  const text = SlotWithDefaultStyling({ element, slotRef: TEXT });
+  const subText = SlotWithDefaultStyling({ element, slotRef: SUB_TEXT });
 
   container.classList.add(STAT_CONTAINER);
   wrapper.setAttribute(ATTRIBUTE_THEME, theme);

@@ -1,8 +1,10 @@
 import { CardOverlay } from 'elements';
-import { Reset } from 'helpers/styles';
-import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { CheckForImageAlt } from 'utilities/ui';
 import { UMDCardOverlayElement } from '../index';
 import { SLOTS } from '../globals';
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { IMAGE, EYEBROW, HEADLINE, TEXT, ACTIONS, CTAICON, DATE } = SLOTS;
 
@@ -12,13 +14,13 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${CardOverlay.Styles}
 `;
 
 const GetImage = ({ element }: { element: UMDCardOverlayElement }) => {
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
+  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
 
   if (isProperImage && slotImage) {
     return slotImage.cloneNode(true) as HTMLImageElement;
@@ -34,11 +36,11 @@ export const CreateShadowDom = ({
 }) =>
   CardOverlay.CreateElement({
     image: GetImage({ element }),
-    eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    date: SlotDefaultStyling({ element, slotRef: DATE }),
-    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
-    ctaIcon: SlotDefaultStyling({ element, slotRef: CTAICON }),
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    date: SlotWithDefaultStyling({ element, slotRef: DATE }),
+    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
+    ctaIcon: SlotWithDefaultStyling({ element, slotRef: CTAICON }),
     theme: element._theme,
   });

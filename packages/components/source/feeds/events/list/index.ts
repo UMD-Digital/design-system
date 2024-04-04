@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom, CreateFeed } from '../common';
 
 const ATTRIBUTE_TOKEN = 'token';
@@ -32,7 +32,9 @@ export class UMDFeedEventsList extends HTMLElement {
     this._totalEntries = null;
     this._categories = [];
 
-    const template = MakeTemplate({ styles: `${ComponentStyles}` });
+    const template = MarkupCreate.Node.stylesTemplate({
+      styles: `${ComponentStyles}`,
+    });
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 

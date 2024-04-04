@@ -4,8 +4,8 @@ import {
   Tokens,
   Layout,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { CheckForAnimationLinkSpan } from 'helpers/ui';
+import { Styles } from 'utilities';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
 
 export type TypeListText = {
   headline?: HTMLElement | null;
@@ -20,6 +20,8 @@ const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { SansLarger, SansMin, Eyebrow } = Typography;
 const { GridColumnAndRows } = Layout;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';

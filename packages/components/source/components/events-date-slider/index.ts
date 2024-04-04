@@ -4,12 +4,14 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
-import { Debounce } from 'helpers/performance';
+import { MarkupCreate } from 'utilities';
+import { Performance } from 'utilities';
 import { ComponentStyles, CreateContainer, OnLoadStyles } from './elements';
 import { EventResize, EventSwipe } from './services/events';
 import { ButtonVisibilityLogic, SizeDatesElements } from './services/helpers';
 import { VARIABLES } from './globals';
+
+const { Debounce } = Performance;
 
 const { ATTRIBUTE_RESIZE, ATTRIBUTE_THEME, THEME_LIGHT } = VARIABLES;
 
@@ -28,7 +30,7 @@ export class UMDEventsDateSliderElement extends HTMLElement {
     this._theme = THEME_LIGHT;
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }

@@ -4,9 +4,11 @@ declare global {
   }
 }
 
-import { MakeTemplate, SlotOberserver } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { SLOTS, VARIABLES } from './globals';
+
+const { SlotOberserver, Node } = MarkupCreate;
 
 const { THEME_LIGHT, ELEMENT_NAME } = VARIABLES;
 
@@ -20,7 +22,7 @@ export class UMDCardOverlayElement extends HTMLElement {
     this._theme = this.getAttribute('theme') || THEME_LIGHT;
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }

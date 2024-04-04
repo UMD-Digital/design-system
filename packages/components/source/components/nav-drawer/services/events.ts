@@ -1,6 +1,8 @@
-import { EventAccessibilityFocus } from 'helpers/accessibility';
+import { Accessibility } from 'utilities';
 import { ELEMENTS, VARIABLES } from 'components/nav-drawer/globals';
 import { UMDNavDrawer } from 'components/nav-drawer';
+
+const { EventAccessibilityFocus } = Accessibility;
 
 const { NAV_DRAWER_BODY_OVERLAY, NAV_DRAWER_CONTAINER } = ELEMENTS;
 const {

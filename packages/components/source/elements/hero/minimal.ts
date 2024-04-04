@@ -1,5 +1,5 @@
 import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import ImageContainer, {
   TypeImageContainerProps,
   ELEMENT_IMAGE_CONTINATER,
@@ -17,6 +17,8 @@ type TypeHeroMinimalProps = TypeTextContainerProps & TypeImageContainerProps;
 const { Lock } = Layout;
 const { Colors, Spacing } = Tokens;
 const { SansLargest, SansSmaller } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
 

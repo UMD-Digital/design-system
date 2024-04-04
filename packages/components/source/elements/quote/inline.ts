@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { QUOTE_ICON } from 'assets/icons';
+import { QUOTE_ICON } from 'utilities/assets/icons';
 import Text, {
   TEXT_CONTAINER,
   TEXT_CONTAINER_QUOTE_WRAPPER,

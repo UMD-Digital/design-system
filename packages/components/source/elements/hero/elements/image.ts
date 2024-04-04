@@ -1,4 +1,4 @@
-import { PLAY_ICON, PAUSE_ICON } from 'assets/icons';
+import { PLAY_ICON, PAUSE_ICON } from 'utilities/assets/icons';
 
 export type TypeImageContainerProps = {
   imageRef?: HTMLElement | null;

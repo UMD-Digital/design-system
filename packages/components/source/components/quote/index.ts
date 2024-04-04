@@ -10,8 +10,9 @@ import {
   QuoteInline,
   QuoteStatement,
 } from 'elements';
-import { Reset } from 'helpers/styles';
-import { MakeTemplate, SlotDefaultStyling } from 'helpers/ui';
+import { MarkupCreate, Styles } from 'utilities';
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-quote';
 
@@ -35,7 +36,7 @@ const styles = `
     display: block;
   }
   
-  ${Reset}
+  ${Styles.ResetString}
   ${QuoteElements.Text.Styles}
   ${QuoteFeatured.Styles}
   ${QuoteInline.Styles}
@@ -50,14 +51,14 @@ const MakeData = ({ element }: { element: UMDElementQuote }) => {
 
   return {
     theme,
-    quote: SlotDefaultStyling({ element, slotRef: QUOTE }),
-    image: SlotDefaultStyling({ element, slotRef: IMAGE }),
-    attribution: SlotDefaultStyling({ element, slotRef: ATTRIBUTION }),
-    attributionSubText: SlotDefaultStyling({
+    quote: SlotWithDefaultStyling({ element, slotRef: QUOTE }),
+    image: SlotWithDefaultStyling({ element, slotRef: IMAGE }),
+    attribution: SlotWithDefaultStyling({ element, slotRef: ATTRIBUTION }),
+    attributionSubText: SlotWithDefaultStyling({
       element,
       slotRef: ATTRIBUTION_SUB_TEXT,
     }),
-    action: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
   };
 };
 
@@ -84,7 +85,7 @@ export class UMDElementQuote extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

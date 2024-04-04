@@ -4,8 +4,8 @@ import {
   Layout,
   Typography,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { CheckForAnimationLinkSpan, CreateLinkWithSpan } from 'helpers/ui';
+import { MarkupCreate, Styles } from 'utilities';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -17,6 +17,8 @@ import {
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { Lock } = Layout;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -170,7 +172,7 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
   }
 
   requiredSubLinks.forEach((link) =>
-    wrapper.appendChild(CreateLinkWithSpan(link)),
+    wrapper.appendChild(MarkupCreate.Node.linkWithSpan(link)),
   );
   copyRight.classList.add(UTILITY_CONTAINER_LINK);
   copyRight.innerHTML = `©${new Date().getFullYear()} UNIVERSITY OF MARYLAND`;

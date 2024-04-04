@@ -4,8 +4,8 @@ declare global {
   }
 }
 
-import { Debounce } from 'helpers/performance';
-import { MakeTemplate } from 'helpers/ui';
+import { Performance } from 'utilities';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import {
   HideDropdown,
@@ -15,6 +15,8 @@ import {
 } from './services/events';
 import { OnLoadDropdownSpans } from './services/helper';
 import { SLOTS, VARIABLES } from './globals';
+
+const { Debounce } = Performance;
 
 const { PRIMARY_LINK, DROPDOWN_LINKS } = SLOTS;
 const { ATTRIBUTE_DROPDOWN, ELEMENT_NAME } = VARIABLES;
@@ -31,7 +33,7 @@ export class UMDNavItemElement extends HTMLElement {
     this._shadow = this.attachShadow({ mode: 'open' });
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }

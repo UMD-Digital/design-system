@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { SlotDefaultStyling } from 'helpers/ui';
-import { CHEVRON_SMALL_ICON } from 'assets/icons';
+import { MarkupCreate } from 'utilities';
+import { CHEVRON_SMALL_ICON } from 'utilities/assets/icons';
 import { CreateDropdown, DropdownStyles } from './dropdown';
 import { UMDNavItemElement } from '../index';
 import { SLOTS, ELEMENTS, VARIABLES } from '../globals';
@@ -10,6 +10,8 @@ const { Colors, FontSize } = Tokens;
 const { PRIMARY_LINK } = SLOTS;
 const { PRIMARY_LINK_CONTAINER_BUTTON, PRIMARLY_LINK_WRAPPER } = ELEMENTS;
 const { ATTRIBUTE_SELECTED } = VARIABLES;
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const PRIMARY_LINK_CONTAINER = 'primary-link-container';
 
@@ -88,7 +90,7 @@ export const CreatePrimaryLink = ({
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const titleSlot = SlotDefaultStyling({
+  const titleSlot = SlotWithDefaultStyling({
     element,
     slotRef: PRIMARY_LINK,
   });

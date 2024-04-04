@@ -1,10 +1,11 @@
 import { Animations, Tokens } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { CheckForAnimationLinkSpan } from 'helpers/ui';
+import { Styles } from 'utilities';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
 import { UMDNavItemElement } from '../index';
 import { SLOTS, ELEMENTS, REFERENCES } from '../globals';
 
 const { Colors, Spacing } = Tokens;
+const { ConvertJSSObjectToStyles } = Styles;
 
 const { DROPDOWN_LINKS } = SLOTS;
 const { DROPDOWN_CONTAINER } = ELEMENTS;

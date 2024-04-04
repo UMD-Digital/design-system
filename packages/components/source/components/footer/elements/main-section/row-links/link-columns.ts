@@ -3,8 +3,7 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -16,6 +15,9 @@ import {
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { SansSmaller, InterativeMedium } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -286,7 +288,7 @@ const CreateSlotColumn = ({
   slotRef: string;
   hasHeadlines: boolean;
 }) => {
-  const slot = SlotDefaultStyling({
+  const slot = SlotWithDefaultStyling({
     element,
     slotRef,
   });

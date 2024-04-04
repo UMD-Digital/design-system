@@ -4,7 +4,7 @@ import {
   Elements,
   Typography,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import ImageContainer, {
   TypeImageContainerProps,
   ELEMENT_IMAGE_CONTINATER,
@@ -23,6 +23,8 @@ const { Lock } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignLarge, SansLarger } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';

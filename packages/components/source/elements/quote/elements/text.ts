@@ -1,6 +1,6 @@
 import { Typography, Layout, Tokens } from '@universityofmaryland/variables';
-import { QUOTE_ICON } from 'assets/icons';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { QUOTE_ICON } from 'utilities/assets/icons';
+import { Styles } from 'utilities';
 
 export type TypeQuoteTextContainer = {
   quote: HTMLElement | null;
@@ -17,6 +17,8 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
 const { Spacing, Colors } = Tokens;
 const { GridColumnAndRows } = Layout;
 const { SansExtraLarge, SansLarger, SansMedium, SansSmaller } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
 const ATTRIBUTE_THEME = 'theme';

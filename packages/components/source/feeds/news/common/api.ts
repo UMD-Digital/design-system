@@ -1,5 +1,5 @@
-import { FetchGraphQL } from 'helpers/xhr';
-import { ARTICLES_QUERY } from 'helpers/queries';
+import { Network } from 'utilities';
+import { ARTICLES_QUERY } from 'feeds/common/queries';
 import { DisplayNoResults } from 'feeds/common/ui';
 
 type TypeFetchVariables = {
@@ -17,8 +17,9 @@ type TypeFetchObject = TypeAPIFeedVariables & {
   query: string;
 };
 
-const TODAY_PRODUCTION_URL = 'https://today.umd.edu/graphql';
+const { FetchGraphQL } = Network;
 
+const TODAY_PRODUCTION_URL = 'https://today.umd.edu/graphql';
 const NoResultsContent = {
   message: 'Error fetching articles. Please visit the main site.',
   linkUrl: 'https://today.umd.edu',

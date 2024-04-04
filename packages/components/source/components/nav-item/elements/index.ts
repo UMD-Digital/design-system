@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { Reset } from 'helpers/styles';
+import { Styles } from 'utilities';
 import { CreatePrimaryLink, PrimaryStyles } from './primary';
 import { UMDNavItemElement } from '../index';
 import { ELEMENTS, VARIABLES, REFERENCES } from '../globals';
@@ -37,7 +37,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
 
   a {
     font-family: ${FontFamily.sans};

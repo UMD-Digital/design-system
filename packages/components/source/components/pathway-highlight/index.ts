@@ -5,8 +5,9 @@ declare global {
 }
 
 import { PathwayHighlight, PathwayElements } from 'elements';
-import { Reset } from 'helpers/styles';
-import { SlotDefaultStyling, MakeTemplate } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
 const ATTRIBUTE_THEME = 'theme';
@@ -27,7 +28,7 @@ const styles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${PathwayHighlight.Styles}
   ${PathwayElements.Image.Styles}
   ${PathwayElements.Text.Styles}
@@ -51,15 +52,15 @@ const CreateShadowDom = ({
 
   return PathwayHighlight.CreateElement({
     theme,
-    eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    action: SlotDefaultStyling({ element, slotRef: ACTIONS }),
-    quote: SlotDefaultStyling({
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
+    quote: SlotWithDefaultStyling({
       element,
       slotRef: HIGHLIGHT,
     }),
-    attribution: SlotDefaultStyling({
+    attribution: SlotWithDefaultStyling({
       element,
       slotRef: HIGHLIGHT_ATTRIBUTION,
     }),
@@ -71,7 +72,7 @@ export class UMDPathwayHighlightElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

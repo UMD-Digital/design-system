@@ -4,11 +4,11 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { GetLocalString } from './services/helper';
-import { NOTIFICATION_ICON, EXCLAMATION_ICON } from 'assets/icons';
+import { NOTIFICATION_ICON, EXCLAMATION_ICON } from 'utilities/assets/icons';
 import { ComponentStyles, CreateShadowDom } from './elements';
-import { ELEMENTS, VARIABLES, REFERENCES } from './globals';
+import { ELEMENTS, VARIABLES } from './globals';
 
 const { ICON_CLASS } = ELEMENTS;
 const {
@@ -30,7 +30,7 @@ export class UMDAlertElement extends HTMLElement {
     this._shadow = this.attachShadow({ mode: 'open' });
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }

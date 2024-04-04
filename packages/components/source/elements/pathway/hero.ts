@@ -1,5 +1,5 @@
 import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import {
   CreatePathwayTextContainer,
   TypePathwayTextContainer,
@@ -22,6 +22,8 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
 const { Spacing } = Tokens;
 const { CampaignExtralarge, SansLarger } = Typography;
 const { Lock } = Layout;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 1000;
 const LARGE = 1300;

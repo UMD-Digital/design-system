@@ -3,14 +3,17 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
 import { SLOTS } from '../globals';
 import { UMDAlertElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { SansLarge } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { HEADLINE } = SLOTS;
 
@@ -48,7 +51,10 @@ export const headlineStyles = `
 `;
 
 export const CreateHeadline = ({ element }: { element: UMDAlertElement }) => {
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
+  const headlineSlot = SlotWithDefaultStyling({
+    element,
+    slotRef: HEADLINE,
+  });
 
   if (headlineSlot) {
     CheckForAnimationLinkSpan({ element: headlineSlot });

@@ -1,8 +1,10 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CallToAction } from 'elements';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 const { Spacing } = Tokens;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 export type NoResultsContentType = {
   message?: string;

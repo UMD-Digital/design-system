@@ -1,4 +1,4 @@
-import { MakeSlot } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ELEMENT_TYPE } from 'components/events-date-slider';
 import {
   BREAKPOINTS,
@@ -6,6 +6,8 @@ import {
   SLOTS,
 } from 'components/events-date-slider/globals';
 import { CreateBackButton, CreateForwardButton, ButtonStyles } from './button';
+
+const { Node } = MarkupCreate;
 
 const { TABLET } = BREAKPOINTS;
 const { DATE_SLOT_NAME } = SLOTS;
@@ -44,7 +46,7 @@ export const CreateDatesContainer = ({
 }: {
   element: ELEMENT_TYPE;
 }) => {
-  const datesSlot = MakeSlot({ type: DATE_SLOT_NAME });
+  const datesSlot = Node.slot({ type: DATE_SLOT_NAME });
   const container = document.createElement('div');
   const datesWrapper = document.createElement('div');
   const backButton = CreateBackButton({ element });

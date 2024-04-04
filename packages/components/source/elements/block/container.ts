@@ -1,5 +1,5 @@
 import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import {
   ELEMENT_BLOCK_TEXT_CONTAINER,
   ELEMENT_BLOCK_TEXT_HEADLINE,
@@ -23,6 +23,7 @@ type TypeBlockContainerProps = TypeBlockContainer & {
 const { SansExtraLarge, SansLarger, SansSmall } = Typography;
 const { Colors, Spacing } = Tokens;
 const { Text } = Elements;
+const { ConvertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_ALIGNED = 'aligned';

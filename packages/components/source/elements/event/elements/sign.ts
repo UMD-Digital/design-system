@@ -1,7 +1,9 @@
 import { Typography } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 const { SansLarger, Eyebrow } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const ELEMENT_EVENT_DATE_WRAPPER = 'event-sign-wrapper';
 const ELEMENT_EVENT_MONTH = 'event-sign-date-month';

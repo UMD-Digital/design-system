@@ -5,8 +5,8 @@ import {
   INSTAGRAM_ICON,
   YOUTUBE_ICON,
   TWITTER_ICON,
-} from 'assets/social';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+} from 'utilities/assets/social';
+import { Styles } from 'utilities';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import {
   BREAKPOINTS,
@@ -18,6 +18,8 @@ import {
 import { UMDFooterElement } from '../../index';
 
 const { Spacing, Colors } = Tokens;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const { SOCIAL } = SLOTS;
 const { LARGE, MEDIUM } = BREAKPOINTS;

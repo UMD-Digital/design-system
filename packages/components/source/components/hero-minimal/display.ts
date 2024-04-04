@@ -1,15 +1,16 @@
-import { Reset } from 'helpers/styles';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { Styles } from 'utilities';
+import { MarkupCreate } from 'utilities';
 import { HeroMinimal, HeroElements } from 'elements';
-
 import { UMDHeroMinimalElement } from './index';
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 export const ComponentStyles = `
   :host {
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${HeroElements.Image.Styles}
   ${HeroElements.Text.Styles}
   ${HeroMinimal.Styles}
@@ -21,11 +22,11 @@ const MakeHeroData = ({ element }: { element: UMDHeroMinimalElement }) => {
 
   return {
     theme,
-    eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-    richText: SlotDefaultStyling({ element, slotRef: TEXT }),
-    imageRef: SlotDefaultStyling({ element, slotRef: IMAGE }),
-    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    richText: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    imageRef: SlotWithDefaultStyling({ element, slotRef: IMAGE }),
+    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
   };
 };
 

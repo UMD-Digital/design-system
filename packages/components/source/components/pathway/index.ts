@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom } from './display';
 
 const ELEMENT_NAME = 'umd-element-pathway';
@@ -21,7 +21,9 @@ export class UMDPathwayElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles: `${ComponentStyles}` });
+    const template = MarkupCreate.Node.stylesTemplate({
+      styles: `${ComponentStyles}`,
+    });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

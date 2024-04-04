@@ -4,8 +4,7 @@ declare global {
   }
 }
 
-import { MakeTemplate, SlotOberserver } from 'helpers/ui';
-import { Debounce } from 'helpers/performance';
+import { Performance, MarkupCreate } from 'utilities';
 import {
   EventResizeButtonLogic,
   EventResizeCarouselElementsWidth,
@@ -16,6 +15,9 @@ import {
 import { CreateShadowDom, OnLoadStyles, ComponentStyles } from './elements';
 import { SLOTS, VARIABLES } from './globals';
 
+const { Debounce } = Performance;
+const { SlotOberserver, Node } = MarkupCreate;
+
 const { ATTRIBUTE_RESIZE, ELEMENT_NAME } = VARIABLES;
 
 export class UMDCarouselCardsElement extends HTMLElement {
@@ -25,7 +27,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
     super();
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));

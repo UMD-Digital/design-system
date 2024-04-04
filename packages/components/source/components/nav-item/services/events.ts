@@ -1,7 +1,9 @@
-import { EventAccessibilityFocus } from 'helpers/accessibility';
+import { Accessibility } from 'utilities';
 import { DropdownPositionPerViewPort } from './helper';
 import { ELEMENTS, VARIABLES } from '../globals';
 import { UMDNavItemElement } from '../index';
+
+const { EventAccessibilityFocus } = Accessibility;
 
 const { CONTAINER, DROPDOWN_CONTAINER, PRIMARLY_LINK_WRAPPER } = ELEMENTS;
 const { ATTRIBUTE_SHOWING } = VARIABLES;

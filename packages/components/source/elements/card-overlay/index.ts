@@ -5,16 +5,16 @@ import {
   Layout,
   Elements,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import { CheckForAnimationLinkSpan } from 'helpers/ui';
-import { Debounce } from 'helpers/performance';
+import { Styles } from 'utilities';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { Performance } from 'utilities';
 import {
   DOCUMENT_ICON,
   NEW_WINDOW_ICON,
   SHORT_ARROW_ICON,
   PLAY_ICON,
   PAUSE_ICON,
-} from 'assets/icons';
+} from 'utilities/assets/icons';
 
 type TypeTextContainer = {
   eyebrow?: HTMLElement | null;
@@ -35,6 +35,8 @@ const { Link } = Animations;
 const { Text } = Elements;
 const { SansExtraLarge, SansLarger, SansSmall, SansMin, Eyebrow } = Typography;
 const { GridColumnAndRows } = Layout;
+const { Debounce } = Performance;
+const { ConvertJSSObjectToStyles } = Styles;
 
 const SMALL = 300;
 

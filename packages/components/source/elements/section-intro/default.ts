@@ -1,5 +1,5 @@
 import { Typography, Tokens, Layout } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 type TypeSectionIntroDefaultProps = {
   headline?: HTMLElement | null;
@@ -12,6 +12,8 @@ type TypeSectionIntroDefaultProps = {
 const { SansLargest, SansLarger, SansMedium } = Typography;
 const { Colors, Spacing, MaxWidth } = Tokens;
 const { GridColumnAndRows } = Layout;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
 const ATTRIBUTE_THEME = 'theme';

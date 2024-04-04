@@ -1,4 +1,4 @@
-import { CheckForAnimationLinkSpan } from 'helpers/ui';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
 import { SLOTS, ELEMENTS } from '../globals';
 import { UMDNavItemElement } from '../index';
 

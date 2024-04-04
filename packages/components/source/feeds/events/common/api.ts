@@ -1,5 +1,5 @@
-import { FetchGraphQL } from 'helpers/xhr';
-import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from 'helpers/queries';
+import { Network } from 'utilities';
+import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from 'feeds/common/queries';
 import { DisplayNoResults } from 'feeds/common/ui';
 
 type TypeFetchVariables = {
@@ -17,6 +17,8 @@ export type TypeAPIFeedVariables = TypeFetchVariables & {
 type TypeFetchObject = TypeAPIFeedVariables & {
   query: string;
 };
+
+const { FetchGraphQL } = Network;
 
 const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
 const NoResultsContent = {

@@ -1,4 +1,4 @@
-import { Reset } from 'helpers/styles';
+import { Styles } from 'utilities';
 import { CreateMain, MainContainerStyles } from './main-section';
 import { CreateUtility, UtilityContainerStyles } from './utility-section';
 import { ELEMENTS, VARIABLES } from '../globals';
@@ -13,7 +13,7 @@ export const ComponentStyles = `
     position: relative !important;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
 
   .${ELEMENT_WRAPPER} {
     container: ${ELEMENT_NAME} / inline-size;

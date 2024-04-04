@@ -1,5 +1,5 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
@@ -7,6 +7,8 @@ import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;

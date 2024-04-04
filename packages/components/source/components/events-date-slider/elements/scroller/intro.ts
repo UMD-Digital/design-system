@@ -1,6 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { CheckForCtaStyle, SlotDefaultStyling } from 'helpers/ui';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { CheckForCtaStyle } from 'utilities/ui';
+import { Styles, MarkupCreate } from 'utilities';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -9,6 +9,9 @@ import {
 } from 'components/events-date-slider/globals';
 
 const { Colors, Spacing } = Tokens;
+
+const { ConvertJSSObjectToStyles } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { TABLET } = BREAKPOINTS;
 const { CONTAINER_CLASS } = ELEMENTS;
@@ -81,11 +84,11 @@ export const IntroStyles = `
 
 export const CreateIntroWrapper = ({ element }: { element: HTMLElement }) => {
   const introductionWrapper = document.createElement('div');
-  const headlineSlot = SlotDefaultStyling({
+  const headlineSlot = SlotWithDefaultStyling({
     element,
     slotRef: HEADLINE_SLOT_NAME,
   });
-  const linkSlot = SlotDefaultStyling({
+  const linkSlot = SlotWithDefaultStyling({
     element,
     slotRef: LINK_SLOT_NAME,
   });

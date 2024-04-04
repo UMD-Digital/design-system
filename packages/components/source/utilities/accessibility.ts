@@ -8,7 +8,7 @@ export type EventAccessibilityFocusType = (
 ) => () => void;
 export type EventAccessibilityEventsType = () => void | undefined;
 
-export const EventAccessibilityFocus: EventAccessibilityFocusType = ({
+const EventAccessibilityFocus: EventAccessibilityFocusType = ({
   element,
   action,
 }) => {
@@ -56,4 +56,8 @@ export const EventAccessibilityFocus: EventAccessibilityFocusType = ({
     window.removeEventListener('keydown', escapeEvent);
     window.removeEventListener('keyup', keyEvent);
   };
+};
+
+export default {
+  EventAccessibilityFocus,
 };

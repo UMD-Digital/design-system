@@ -2,7 +2,7 @@ export type VariablesType = {
   related?: string[];
 };
 
-export const FetchGraphQL = async ({
+const FetchGraphQL = async ({
   query,
   url,
   variables,
@@ -41,4 +41,8 @@ export const FetchGraphQL = async ({
   } catch (error) {
     console.error(error);
   }
+};
+
+export default {
+  FetchGraphQL,
 };

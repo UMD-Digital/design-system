@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateElement } from './elements';
 import { VARIABLES } from './globals';
 
@@ -20,7 +20,7 @@ export class UMDFooterElement extends HTMLElement {
     this._shadow = this.attachShadow({ mode: 'open' });
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
     this.style.display = 'block';

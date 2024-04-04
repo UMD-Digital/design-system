@@ -1,5 +1,5 @@
 import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 type TypeQuoteFeatured = {
   theme: string;

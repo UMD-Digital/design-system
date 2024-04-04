@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { Reset } from 'helpers/styles';
+import { Styles } from 'utilities';
 import { ELEMENT_TYPE } from 'components/events-date-slider';
 import {
   BREAKPOINTS,
@@ -68,7 +68,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${ContainerStyles}
 `;
 

@@ -1,12 +1,14 @@
 import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
-import { SlotDefaultStyling } from 'helpers/ui';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles, MarkupCreate } from 'utilities';
 import { SLOTS, BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
 import { UMDCarouselCardsElement } from '../index';
 
 const { Colors, Spacing } = Tokens;
 const { Text } = Elements;
 const { SansMedium, SansLargest } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { LARGE } = BREAKPOINTS;
 const { HEADLINE, TEXT, CTA } = SLOTS;
@@ -104,9 +106,12 @@ export const CreateIntroColumn = ({
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
-  const textSlot = SlotDefaultStyling({ element, slotRef: TEXT });
-  const ctaSlot = SlotDefaultStyling({ element, slotRef: CTA });
+  const headlineSlot = SlotWithDefaultStyling({
+    element,
+    slotRef: HEADLINE,
+  });
+  const textSlot = SlotWithDefaultStyling({ element, slotRef: TEXT });
+  const ctaSlot = SlotWithDefaultStyling({ element, slotRef: CTA });
 
   wrapper.classList.add(INTRO_CONTAINER_LOCK);
 

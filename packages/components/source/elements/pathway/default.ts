@@ -1,5 +1,5 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import {
   CreatePathwayTextContainer,
   TypePathwayTextContainer,
@@ -19,6 +19,8 @@ type TypePathwayDefaultProps = TypePathwayTextContainer &
 
 const { Colors, Spacing } = Tokens;
 const { Lock } = Layout;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 800;
 const LARGE = 1200;

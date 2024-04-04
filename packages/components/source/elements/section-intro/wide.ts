@@ -1,5 +1,5 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 type TypeSectionIntroWideProps = {
   headline?: HTMLElement | null;
@@ -9,6 +9,8 @@ type TypeSectionIntroWideProps = {
 
 const { SansLargest } = Typography;
 const { Colors, Spacing } = Tokens;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const TABLET = 500;
 const ATTRIBUTE_THEME = 'theme';

@@ -1,17 +1,13 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import {
-  ELEMENT_NAME,
-  SLOTS,
-  BREAKPOINTS,
-  ELEMENTS,
-  NAMING,
-} from 'components/accordion/globals';
-import { ELEMENT_TYPE } from 'components/accordion';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
 import { SetOpen, SetClosed } from '../services/helper';
+import { ELEMENT_NAME, SLOTS, BREAKPOINTS, ELEMENTS, NAMING } from '../globals';
+import { ELEMENT_TYPE } from '../index';
 
 const { Colors, Spacing } = Tokens;
+
+const { ConvertJSSObjectToStyles } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { HEADLINE } = SLOTS;
 const { small } = BREAKPOINTS;
@@ -134,7 +130,10 @@ export const headlineStyles = `
 
 export const CreateHeadline = ({ element }: { element: ELEMENT_TYPE }) => {
   const headlineContainer = document.createElement('button');
-  const headerSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
+  const headerSlot = SlotWithDefaultStyling({
+    element,
+    slotRef: HEADLINE,
+  });
 
   headlineContainer.classList.add(ACCORDION_HEADLINE);
   headlineContainer.ariaExpanded = element._open ? 'true' : 'false';

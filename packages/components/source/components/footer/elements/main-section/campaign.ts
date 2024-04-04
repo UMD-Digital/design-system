@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'assets/logos';
+import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'utilities/assets/logos';
 import { VARIABLES } from '../../globals';
 import { UMDFooterElement } from '../../index';
 

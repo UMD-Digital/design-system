@@ -1,4 +1,4 @@
-import { Reset } from 'helpers/styles';
+import { Styles } from 'utilities';
 import { CreateBody, bodyStyles } from './body';
 import { CreateHeadline, headlineStyles } from './headline';
 import { ELEMENT_TYPE } from '../index';
@@ -16,7 +16,7 @@ export default `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${headlineStyles}
   ${bodyStyles}
 `;

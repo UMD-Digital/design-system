@@ -3,8 +3,8 @@ import {
   CLOSE_BUTTON_ICON,
   NOTIFICATION_ICON,
   EXCLAMATION_ICON,
-} from 'assets/icons';
-import { Reset } from 'helpers/styles';
+} from 'utilities/assets/icons';
+import { Styles } from 'utilities';
 import { SetLocalString } from '../services/helper';
 import { EventClose } from '../services/events';
 import { CreateHeadline, headlineStyles } from './headline';
@@ -96,7 +96,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
 
   :host .${CONTAINER_CLASS} {
     container: ${ELEMENT_NAME} / inline-size;

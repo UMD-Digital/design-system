@@ -5,8 +5,9 @@ declare global {
 }
 
 import { SectionIntroWide } from 'elements';
-import { MakeTemplate, SlotDefaultStyling } from 'helpers/ui';
-import { Reset } from 'helpers/styles';
+import { Styles, MarkupCreate } from 'utilities';
+
+const { SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-section-intro-wide';
 const ATTRIBUTE_THEME = 'theme';
@@ -20,7 +21,7 @@ const styles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${SectionIntroWide.Styles}
 `;
 
@@ -31,8 +32,8 @@ export const CreateShadowDom = ({
 }) => {
   const { HEADLINE, ACTIONS } = element._slots;
   const theme = element.getAttribute(ATTRIBUTE_THEME);
-  const headline = SlotDefaultStyling({ element, slotRef: HEADLINE });
-  const actions = SlotDefaultStyling({ element, slotRef: ACTIONS });
+  const headline = SlotWithDefaultStyling({ element, slotRef: HEADLINE });
+  const actions = SlotWithDefaultStyling({ element, slotRef: ACTIONS });
 
   return SectionIntroWide.CreateElement({
     headline,
@@ -46,7 +47,7 @@ export class UMDSectionIntroElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

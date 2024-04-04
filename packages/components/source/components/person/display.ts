@@ -1,7 +1,9 @@
 import { PersonBlock, PersonList, PersonTabular } from 'elements';
-import { Reset } from 'helpers/styles';
-import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { CheckForImageAlt } from 'utilities/ui';
 import { UMDPersonElement } from './index';
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_DISPLAY = 'display';
@@ -14,7 +16,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${PersonBlock.Styles}
   ${PersonList.Styles}
   ${PersonTabular.Styles}
@@ -23,7 +25,7 @@ export const ComponentStyles = `
 const GetImage = ({ element }: { element: UMDPersonElement }) => {
   const { IMAGE } = element._slots;
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
+  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
 
   if (isProperImage && slotImage) {
     return slotImage.cloneNode(true) as HTMLImageElement;
@@ -50,20 +52,20 @@ const MakePersonData = ({ element }: { element: UMDPersonElement }) => {
 
   return {
     image: GetImage({ element }),
-    name: SlotDefaultStyling({ element, slotRef: NAME }),
-    job: SlotDefaultStyling({ element, slotRef: JOB_TITLE }),
-    association: SlotDefaultStyling({ element, slotRef: ASSOCIATION }),
-    pronouns: SlotDefaultStyling({ element, slotRef: PRONOUNS }),
-    phone: SlotDefaultStyling({ element, slotRef: PHONE }),
-    email: SlotDefaultStyling({ element, slotRef: EMAIL }),
-    address: SlotDefaultStyling({ element, slotRef: ADDRESS }),
-    linkendIn: SlotDefaultStyling({ element, slotRef: LINKEDIN }),
-    additionalContact: SlotDefaultStyling({
+    name: SlotWithDefaultStyling({ element, slotRef: NAME }),
+    job: SlotWithDefaultStyling({ element, slotRef: JOB_TITLE }),
+    association: SlotWithDefaultStyling({ element, slotRef: ASSOCIATION }),
+    pronouns: SlotWithDefaultStyling({ element, slotRef: PRONOUNS }),
+    phone: SlotWithDefaultStyling({ element, slotRef: PHONE }),
+    email: SlotWithDefaultStyling({ element, slotRef: EMAIL }),
+    address: SlotWithDefaultStyling({ element, slotRef: ADDRESS }),
+    linkendIn: SlotWithDefaultStyling({ element, slotRef: LINKEDIN }),
+    additionalContact: SlotWithDefaultStyling({
       element,
       slotRef: ADDITIONAL_CONTACT,
     }),
-    subText: SlotDefaultStyling({ element, slotRef: SUB_TEXT }),
-    actions: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    subText: SlotWithDefaultStyling({ element, slotRef: SUB_TEXT }),
+    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
   };
 };

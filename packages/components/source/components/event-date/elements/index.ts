@@ -4,14 +4,16 @@ import {
   Typography,
 } from '@universityofmaryland/variables';
 import { EventElements } from 'elements';
-import { ConvertJSSObjectToStyles, Reset } from 'helpers/styles';
-import { CheckForAnimationLinkSpan, SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
 import { ELEMENT_TYPE } from 'components/event-date';
 import { SLOTS, VARIABLES, REFERENCES } from 'components/event-date/globals';
 
 const { FontSize, Spacing } = Tokens;
 const { Link } = Animations;
 const { SansLarge } = Typography;
+const { ConvertJSSObjectToStyles, ResetString } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { HEADLINE, MONTH, DAY } = SLOTS;
 const { ATTRIBUTE_THEME } = VARIABLES;
@@ -78,7 +80,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${ResetString}
   ${containerStyles}
   ${headlineStyles}
   ${EventElements.Sign.Styles}
@@ -87,9 +89,12 @@ export const ComponentStyles = `
 export const CreateShadowDom = ({ element }: { element: ELEMENT_TYPE }) => {
   const theme = element._theme;
   const container = document.createElement('div');
-  const headlineSlot = SlotDefaultStyling({ element, slotRef: HEADLINE });
-  const monthSlot = SlotDefaultStyling({ element, slotRef: MONTH });
-  const daySlot = SlotDefaultStyling({ element, slotRef: DAY });
+  const headlineSlot = SlotWithDefaultStyling({
+    element,
+    slotRef: HEADLINE,
+  });
+  const monthSlot = SlotWithDefaultStyling({ element, slotRef: MONTH });
+  const daySlot = SlotWithDefaultStyling({ element, slotRef: DAY });
 
   container.classList.add(EVENT_DATE_CONTAINER);
   container.setAttribute(ATTRIBUTE_THEME, theme);

@@ -4,7 +4,7 @@ import {
   Tokens,
   Elements,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 export type TypePathwayTextContainer = {
   eyebrow: HTMLElement | null;
@@ -18,6 +18,8 @@ const { Spacing, Colors, FontSize } = Tokens;
 const { Eyebrow, Text } = Elements;
 const { GridColumnAndRows } = Layout;
 const { SansLargest } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 400;
 

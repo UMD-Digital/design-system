@@ -1,7 +1,8 @@
 import { Layout } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 const { GridColumnsWithGap } = Layout;
+const { ConvertJSSObjectToStyles } = Styles;
 
 export const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 

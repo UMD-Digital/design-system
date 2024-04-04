@@ -1,4 +1,4 @@
-import { Reset } from 'helpers/styles';
+import { Styles } from 'utilities';
 import { CreateButton, buttonStyles } from './button';
 import { CreateDrawer, drawerStyles } from './drawer';
 import { UMDNavDrawer } from '../index';
@@ -8,7 +8,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${buttonStyles}
   ${drawerStyles}
 `;

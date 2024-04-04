@@ -1,6 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { CheckForAnimationLinkSpan } from 'helpers/ui';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
+import { Styles } from 'utilities';
 
 type TypeTextProps = {
   theme?: string | null;
@@ -15,6 +15,8 @@ export type TypeTextContainerProps = TypeTextProps;
 
 const { Colors, Spacing } = Tokens;
 const { SansMedium } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
 const ATTRIBUTE_THEME = 'theme';

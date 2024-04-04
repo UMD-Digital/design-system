@@ -1,7 +1,9 @@
 import { PathwayHero, PathwayDefault, PathwayElements } from 'elements';
-import { Reset } from 'helpers/styles';
-import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { CheckForImageAlt } from 'utilities/ui';
 import { UMDPathwayElement } from './index';
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ATTRIBUTE_IMAGE_POSITION = 'image-position';
 const ATTRIBUTE_IMAGE_SCALED = 'image-scaled';
@@ -18,7 +20,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${PathwayDefault.Styles}
   ${PathwayHero.Styles}
   ${PathwayElements.Image.Styles}
@@ -28,7 +30,7 @@ export const ComponentStyles = `
 const GetImage = ({ element }: { element: UMDPathwayElement }) => {
   const { IMAGE } = element._slots;
   const isProperImage = CheckForImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotDefaultStyling({ element, slotRef: IMAGE });
+  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
 
   if (isProperImage && slotImage) {
     return slotImage.cloneNode(true) as HTMLImageElement;
@@ -61,10 +63,10 @@ export const CreateShadowDom = ({
     return PathwayHero.CreateElement({
       theme,
       isImageRight,
-      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-      text: SlotDefaultStyling({ element, slotRef: TEXT }),
-      action: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+      eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+      headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+      text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+      action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
       image: GetImage({ element }),
     });
   }
@@ -73,10 +75,10 @@ export const CreateShadowDom = ({
     theme,
     isImageRight,
     isImageScaled,
-    eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotDefaultStyling({ element, slotRef: TEXT }),
-    action: SlotDefaultStyling({ element, slotRef: ACTIONS }),
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     image: GetImage({ element }),
   });
 };

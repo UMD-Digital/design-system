@@ -1,11 +1,12 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CreatePrimarySlide, primarySliderStyles } from './primary-slide';
 import { CreateChildSlide, childSliderStyles } from './child-slides';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import { ELEMENTS, VARIABLES } from '../../globals';
 import { UMDNavDrawer } from '../../index';
 
 const { Colors, Spacing } = Tokens;
+const { ConvertJSSObjectToStyles } = Styles;
 
 const { ATTRIBUTE_ACTIVE_SLIDE, ATTRIBUTE_ACTIVE_SELECTED } = VARIABLES;
 const { DRAWER_SLIDE_SECONDARY_ACTION } = ELEMENTS;

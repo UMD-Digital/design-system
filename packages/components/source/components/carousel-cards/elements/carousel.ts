@@ -1,7 +1,9 @@
-import { MakeSlot } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { CreateButton, ButtonStyles } from './button';
 import { SLOTS, BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
 import { UMDCarouselCardsElement } from '../index';
+
+const { Node } = MarkupCreate;
 
 const { CARDS } = SLOTS;
 const { LARGE } = BREAKPOINTS;
@@ -51,7 +53,7 @@ export const CreateCarouselColumn = ({
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const slot = MakeSlot({ type: CARDS });
+  const slot = Node.slot({ type: CARDS });
   const fowardButton = CreateButton({ element });
   const backwardsButton = CreateButton({ element, isRight: false });
 

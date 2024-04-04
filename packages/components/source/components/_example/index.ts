@@ -4,10 +4,11 @@ declare global {
   }
 }
 
-import { MakeTemplate } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { VARIABLES } from './globals';
 
+const { Node } = MarkupCreate;
 const { ELEMENT_NAME } = VARIABLES;
 
 export class UMDExampleElement extends HTMLElement {
@@ -18,16 +19,10 @@ export class UMDExampleElement extends HTMLElement {
     this._shadow = this.attachShadow({ mode: 'open' });
 
     const styles = `${ComponentStyles}`;
-    const template = MakeTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }
-
-  static get observedAttributes() {
-    return [];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {}
 
   connectedCallback() {
     const container = CreateShadowDom({ element: this });

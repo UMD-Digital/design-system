@@ -1,11 +1,11 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { Styles } from 'utilities';
 import {
   CALENDAR_ICON,
   CLOCK_ICON,
   PIN_ICON,
   MULTI_DAY_ICON,
-} from 'assets/icons';
+} from 'utilities/assets/icons';
 
 type LocationType = {
   title: string;
@@ -36,6 +36,8 @@ export type TypeMetaDisplay = EventType & {
 
 const { SansSmaller } = Typography;
 const { Colors, Spacing } = Tokens;
+
+const { ConvertJSSObjectToStyles } = Styles;
 
 const BREAKPOINTS = {
   MOBILE: 400,

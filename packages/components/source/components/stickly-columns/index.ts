@@ -5,8 +5,10 @@ declare global {
 }
 
 import { StickyColumns } from 'elements';
-import { MakeSlot, MakeTemplate } from 'helpers/ui';
-import { Reset } from 'helpers/styles';
+import { MarkupCreate } from 'utilities';
+import { Styles } from 'utilities';
+
+const { Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-sticky-columns';
 const ATTRIBUTE_STICKY_FIRST = 'isStickyFirst';
@@ -21,7 +23,7 @@ const styles = `
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
   ${StickyColumns.Styles}
 `;
 
@@ -33,8 +35,8 @@ export const CreateShadowDom = ({
   const { STICKY_COLUMN, STATIC_COLUMN } = element._slots;
   const isStickyLast = element.getAttribute(ATTRIBUTE_STICKY_FIRST) === 'false';
 
-  const stickyColumn = MakeSlot({ type: STICKY_COLUMN });
-  const staticColumn = MakeSlot({ type: STATIC_COLUMN });
+  const stickyColumn = Node.slot({ type: STICKY_COLUMN });
+  const staticColumn = Node.slot({ type: STATIC_COLUMN });
 
   return StickyColumns.CreateElement({
     stickyColumn,
@@ -48,7 +50,7 @@ export class UMDStickyColumnElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MakeTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

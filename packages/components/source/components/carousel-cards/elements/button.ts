@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { FORWARD_ARROW_ICON } from 'assets/icons';
+import { FORWARD_ARROW_ICON } from 'utilities/assets/icons';
 import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
 import { UMDCarouselCardsElement } from '../index';
 

@@ -1,11 +1,12 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { CHEVRON_SMALL_ICON } from 'assets/icons';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
+import { CHEVRON_SMALL_ICON } from 'utilities/assets/icons';
+import { Styles } from 'utilities';
 import { CreateSlideAction } from './slide-action';
 import { ELEMENTS, VARIABLES } from '../../globals';
 import { UMDNavDrawer } from '../../index';
 
 const { Colors, Spacing } = Tokens;
+const { ConvertJSSObjectToStyles } = Styles;
 
 const {
   ATTRIBUTE_ACTIVE_SLIDE,

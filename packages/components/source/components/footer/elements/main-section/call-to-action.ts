@@ -1,8 +1,10 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { SlotDefaultStyling } from 'helpers/ui';
+import { MarkupCreate } from 'utilities';
 import { ELEMENTS, SLOTS, REFERENCES } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
+
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { CTA } = SLOTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -66,7 +68,7 @@ export const CreateCallToActionContainer = ({
   container.classList.add(CALL_TO_ACTION_CONTAINER);
 
   if (ctaSlot) {
-    const slot = SlotDefaultStyling({ element, slotRef: CTA });
+    const slot = SlotWithDefaultStyling({ element, slotRef: CTA });
     if (slot) container.appendChild(slot);
   } else {
     container.appendChild(makeGivingLink());

@@ -1,11 +1,11 @@
-import { Reset } from 'helpers/styles';
+import { Styles } from 'utilities';
 
 export const ComponentStyles = `
   :host {
     display: block;
   }
 
-  ${Reset}
+  ${Styles.ResetString}
 `;
 
 export const CreateShadowDom = ({ element }: { element: HTMLElement }) => {

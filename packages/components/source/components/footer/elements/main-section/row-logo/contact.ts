@@ -3,12 +3,8 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { ConvertJSSObjectToStyles } from 'helpers/styles';
-import {
-  CheckForAnimationLinkSpan,
-  CreateLinkWithSpan,
-  SlotDefaultStyling,
-} from 'helpers/ui';
+import { Styles, MarkupCreate } from 'utilities';
+import { CheckForAnimationLinkSpan } from 'utilities/ui';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import {
   BREAKPOINTS,
@@ -22,6 +18,9 @@ import { UMDFooterElement } from '../../../index';
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { InterativeMedium, SansSmall } = Typography;
+
+const { ConvertJSSObjectToStyles } = Styles;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -205,7 +204,7 @@ export const ContactContainerStyles = `
 
 const CreateDefaultHeadline = () => {
   const headline = document.createElement('p');
-  const headlineLink = CreateLinkWithSpan(DEFAULT_HEADLINE_LINK);
+  const headlineLink = Node.linkWithSpan(DEFAULT_HEADLINE_LINK);
 
   headline.classList.add(CONTACT_LIST_HEADLINE);
   headline.appendChild(headlineLink);
@@ -220,7 +219,7 @@ const CreateSlotHeadline = ({
   element: UMDFooterElement;
   slotRef: string;
 }) => {
-  const contactHeadlineElement = SlotDefaultStyling({
+  const contactHeadlineElement = SlotWithDefaultStyling({
     element,
     slotRef,
   });
@@ -258,7 +257,10 @@ const CreateSlotContactAddress = ({
   element: UMDFooterElement;
   slotRef: string;
 }) => {
-  const contactAddressElement = SlotDefaultStyling({ element, slotRef });
+  const contactAddressElement = SlotWithDefaultStyling({
+    element,
+    slotRef,
+  });
 
   if (contactAddressElement) {
     contactAddressElement.classList.add(CONTACT_LIST_ADDRESS);
@@ -272,8 +274,8 @@ const CreateDefaultContactLinks = () => {
   const contactList = document.createElement('p');
 
   contactList.classList.add(CONTACT_LINKS_LIST);
-  contactList.appendChild(CreateLinkWithSpan(DEFAULT_EMAIL));
-  contactList.appendChild(CreateLinkWithSpan(DEFAULT_PHONE));
+  contactList.appendChild(Node.linkWithSpan(DEFAULT_EMAIL));
+  contactList.appendChild(Node.linkWithSpan(DEFAULT_PHONE));
 
   return contactList;
 };
@@ -285,7 +287,7 @@ const CreateSlotContactLinks = ({
   element: UMDFooterElement;
   slotRef: string;
 }) => {
-  const contactLinksElement = SlotDefaultStyling({ element, slotRef });
+  const contactLinksElement = SlotWithDefaultStyling({ element, slotRef });
 
   if (contactLinksElement) {
     contactLinksElement.classList.add(CONTACT_LINKS_LIST);

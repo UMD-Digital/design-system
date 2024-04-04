@@ -1,9 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
 import ListImageContainer from '../list/image';
-import ListTextContainer, { TypeListText } from '../list/text';
+import LockupTextContainer, { TypeTextLockupSmall } from '../lockup/text-small';
 import ListContainer from '../list/container';
 
-type TypeListCardProps = TypeListText & {
+type TypeListCardProps = TypeTextLockupSmall & {
   image?: HTMLImageElement | null;
 };
 
@@ -22,14 +22,14 @@ const STYLES_LIST_CARD_ELEMENT = `
     margin-top: ${Spacing.md}; 
   }
 
-  ${ListTextContainer.Styles}
+  ${LockupTextContainer.Styles}
   ${ListImageContainer.Styles}
   ${ListContainer.Styles}
 `;
 
 const CreateCardListElement = (element: TypeListCardProps) => {
   const { theme, image } = element;
-  const textContainer = ListTextContainer.CreateElement(element);
+  const textContainer = LockupTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image
     ? ListImageContainer.CreateElement({ image })

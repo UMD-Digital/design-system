@@ -1,14 +1,14 @@
 import { Tokens } from '@universityofmaryland/variables';
 import ListImageContainer from '../list/image';
-import ListTextContainer, {
-  TypeListText,
-  ELEMENT_LIST_HEADLINE,
-} from '../list/text';
+import LockupTextContainer, {
+  TypeTextLockupSmall,
+  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
+} from '../lockup/text-small';
 import ListContainer, {
   ELEMENT_LIST_CONTAINER_WRAPPER,
 } from '../list/container';
 
-type TypeListEventProps = TypeListText & {
+type TypeListEventProps = TypeTextLockupSmall & {
   image?: HTMLImageElement | null;
   dateBlock: HTMLElement;
   eventDetails: HTMLElement;
@@ -66,7 +66,7 @@ const STYLES_EVENT_LIST_ELEMENT = `
   }
 
   ${ListContainer.Styles}
-  ${ListTextContainer.Styles}
+  ${LockupTextContainer.Styles}
   ${ListImageContainer.Styles}
   ${DateBlockContainerStyles}
   ${DetailsRowStyles}
@@ -75,7 +75,7 @@ const STYLES_EVENT_LIST_ELEMENT = `
 const CreateEventListElement = (element: TypeListEventProps) => {
   const { theme, image, dateBlock, eventDetails } = element;
   const elementContainer = document.createElement('div');
-  const textContainer = ListTextContainer.CreateElement(element);
+  const textContainer = LockupTextContainer.CreateElement(element);
   const imageContainer = image
     ? ListImageContainer.CreateElement({ image })
     : null;
@@ -100,7 +100,7 @@ const CreateEventListElement = (element: TypeListEventProps) => {
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
-      `.${ELEMENT_LIST_HEADLINE}`,
+      `.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`,
     ) as HTMLElement;
     eventDetails.classList.add(ELEMENT_EVENT_LIST_DETAILS);
 

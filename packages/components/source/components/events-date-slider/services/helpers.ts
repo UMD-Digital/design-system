@@ -145,7 +145,7 @@ export const SizeDatesElements = ({ element }: { element: ELEMENT_TYPE }) => {
           dateElement.style.paddingTop = `${Spacing.xs}`;
           dateElement.style.borderTop = `1px solid ${lineColor}`;
         } else {
-          dateElement.style.display = `block`;
+          dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `inherit`;
           dateElement.style.paddingRight = `${Spacing.lg}`;
 

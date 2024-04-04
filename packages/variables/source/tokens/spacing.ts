@@ -16,10 +16,10 @@ const Spacing = {
 };
 
 const MaxWidth = {
-  max: '1536px',
-  large: '1296px',
-  normal: '1180px',
-  small: '960px',
+  max: '1600px',
+  large: '1412px',
+  normal: '1170px',
+  small: '832px',
   smallest: '800px',
 };
 

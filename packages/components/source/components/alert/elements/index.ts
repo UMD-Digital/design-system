@@ -1,5 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { CLOSE_BUTTON_ICON, NOTIFICATION_ICON } from 'assets/icons';
+import {
+  CLOSE_BUTTON_ICON,
+  NOTIFICATION_ICON,
+  EXCLAMATION_ICON,
+} from 'assets/icons';
 import { Reset } from 'helpers/styles';
 import { SetLocalString } from '../services/helper';
 import { EventClose } from '../services/events';
@@ -80,7 +84,7 @@ const IconStyles = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL}px) {
-    :host .${ICON_CLASS} {
+    .${ICON_CLASS} {
       position: absolute;
       top: -20px;
     }
@@ -125,11 +129,17 @@ export const ComponentStyles = `
   ${EmergencyStyles}
 `;
 
-const CreateIcon = () => {
+const CreateIcon = ({ element }: { element: UMDAlertElement }) => {
+  const type = element.getAttribute('type');
   const iconWrapper = document.createElement('div');
+  let icon = NOTIFICATION_ICON;
+
+  if (type && type === 'emergency') {
+    icon = EXCLAMATION_ICON;
+  }
 
   iconWrapper.classList.add(ICON_CLASS);
-  iconWrapper.innerHTML = NOTIFICATION_ICON;
+  iconWrapper.innerHTML = icon;
 
   return iconWrapper;
 };
@@ -161,7 +171,7 @@ export const CreateShadowDom = ({ element }: { element: UMDAlertElement }) => {
   if (body) wrapper.appendChild(body);
   if (cta) wrapper.appendChild(cta);
 
-  container.appendChild(CreateIcon());
+  container.appendChild(CreateIcon({ element }));
   container.appendChild(wrapper);
   container.appendChild(CreateCloseButton({ element }));
 

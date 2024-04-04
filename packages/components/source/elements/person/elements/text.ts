@@ -1,7 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
-import { PHONE_ICON, EMAIL_ICON, PIN_ICON } from 'utilities/assets/icons';
-import { LINKEDIN_ICON } from 'utilities/assets/social';
+import { Styles, AssetIcon, AssetSocial } from 'utilities';
 
 type TypeContactProps = {
   phone?: HTMLElement | null;
@@ -269,7 +267,7 @@ const MakeContactLink = ({
   icon: string;
 }) => {
   if (!element) return null;
-  if (!element.getAttribute('href') && icon === PIN_ICON) {
+  if (!element.getAttribute('href') && icon === AssetIcon.PIN) {
     return MakeContactText({ element, icon });
   }
   if (!element.hasAttribute('href')) return null;
@@ -306,22 +304,31 @@ const CreateContactContainer = ({
   container.classList.add(ELEMENT_PERSON_CONTACT_CONTAINER);
 
   if (phone) {
-    const phoneLink = MakeContactLink({ element: phone, icon: PHONE_ICON });
+    const phoneLink = MakeContactLink({
+      element: phone,
+      icon: AssetIcon.PHONE,
+    });
     if (phoneLink) container.appendChild(phoneLink);
   }
 
   if (email) {
-    const emailLink = MakeContactLink({ element: email, icon: EMAIL_ICON });
+    const emailLink = MakeContactLink({
+      element: email,
+      icon: AssetIcon.EMAIL,
+    });
     if (emailLink) container.appendChild(emailLink);
   }
 
   if (linkendIn) {
-    const link = MakeContactLink({ element: linkendIn, icon: LINKEDIN_ICON });
+    const link = MakeContactLink({
+      element: linkendIn,
+      icon: AssetSocial.LINKEDIN,
+    });
     if (link) container.appendChild(link);
   }
 
   if (address) {
-    const link = MakeContactLink({ element: address, icon: PIN_ICON });
+    const link = MakeContactLink({ element: address, icon: AssetIcon.PIN });
     if (link) container.appendChild(link);
   }
 

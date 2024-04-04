@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { DARK_LOGO, LIGHT_LOGO } from 'utilities/assets/logos';
+import { AssetLogo } from 'utilities';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
   CreateCallToActionContainer,
@@ -84,7 +84,9 @@ export const CreateLogoContainer = ({
   );
 
   logoLink.innerHTML =
-    theme === THEME_OPTION_LIGHT ? `${LIGHT_LOGO}` : `${DARK_LOGO}`;
+    theme === THEME_OPTION_LIGHT
+      ? `${AssetLogo.LIGHT_LOGO}`
+      : `${AssetLogo.DARK_LOGO}`;
 
   container.classList.add(LOGO_CONTAINER);
   container.appendChild(logoLink);

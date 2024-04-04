@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { QUOTE_ICON } from 'utilities/assets/icons';
+import { AssetIcon } from 'utilities';
 import Text, {
   TEXT_CONTAINER,
   TEXT_CONTAINER_QUOTE_WRAPPER,
@@ -287,7 +287,7 @@ const CreateQuoteInlineElement = (element: TypeInlineInline) => {
 
     if (imageContainer) {
       const iconSpan = document.createElement('span');
-      iconSpan.innerHTML = QUOTE_ICON;
+      iconSpan.innerHTML = AssetIcon.QUOTE;
       imageContainer.appendChild(iconSpan);
 
       wrapper.appendChild(imageContainer);

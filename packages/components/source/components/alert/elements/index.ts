@@ -1,10 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  CLOSE_BUTTON_ICON,
-  NOTIFICATION_ICON,
-  EXCLAMATION_ICON,
-} from 'utilities/assets/icons';
-import { Styles } from 'utilities';
+import { AssetIcon, Styles } from 'utilities';
 import { SetLocalString } from '../services/helper';
 import { EventClose } from '../services/events';
 import { CreateHeadline, headlineStyles } from './headline';
@@ -132,10 +127,10 @@ export const ComponentStyles = `
 const CreateIcon = ({ element }: { element: UMDAlertElement }) => {
   const type = element.getAttribute('type');
   const iconWrapper = document.createElement('div');
-  let icon = NOTIFICATION_ICON;
+  let icon = AssetIcon.NOTIFICATION;
 
   if (type && type === 'emergency') {
-    icon = EXCLAMATION_ICON;
+    icon = AssetIcon.EXCLAMATION;
   }
 
   iconWrapper.classList.add(ICON_CLASS);
@@ -148,7 +143,7 @@ const CreateCloseButton = ({ element }: { element: UMDAlertElement }) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(CLOSE_BUTTON_CLASS);
-  closeButton.innerHTML = CLOSE_BUTTON_ICON;
+  closeButton.innerHTML = AssetIcon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
     EventClose({ element });

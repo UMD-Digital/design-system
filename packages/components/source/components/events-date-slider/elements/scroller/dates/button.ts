@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { BACK_ARROW_ICON, FORWARD_ARROW_ICON } from 'utilities/assets/icons';
+import { AssetIcon } from 'utilities';
 import { ELEMENT_TYPE } from 'components/events-date-slider';
 import { ButtonVisibilityLogic } from 'components/events-date-slider/services/helpers';
 import { EventSlideDates } from 'components/events-date-slider/services/events';
@@ -109,7 +109,7 @@ export const ButtonStyles = `
 export const CreateBackButton = ({ element }: { element: ELEMENT_TYPE }) => {
   const button = document.createElement('button');
 
-  button.innerHTML = BACK_ARROW_ICON;
+  button.innerHTML = AssetIcon.BACK_ARROW;
   button.classList.add(ARROW_CLASS);
   button.classList.add(BACK_ARROW_CLASS);
   button.style.display = 'none';
@@ -131,7 +131,7 @@ export const CreateBackButton = ({ element }: { element: ELEMENT_TYPE }) => {
 export const CreateForwardButton = ({ element }: { element: ELEMENT_TYPE }) => {
   const button = document.createElement('button');
 
-  button.innerHTML = FORWARD_ARROW_ICON;
+  button.innerHTML = AssetIcon.FORWARD_ARROW;
   button.classList.add(ARROW_CLASS);
   button.classList.add(FORWARD_ARROW_CLASS);
   button.setAttribute('type', 'button');

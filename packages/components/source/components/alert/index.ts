@@ -4,9 +4,8 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
+import { AssetIcon, MarkupCreate } from 'utilities';
 import { GetLocalString } from './services/helper';
-import { NOTIFICATION_ICON, EXCLAMATION_ICON } from 'utilities/assets/icons';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { ELEMENTS, VARIABLES } from './globals';
 
@@ -46,9 +45,9 @@ export class UMDAlertElement extends HTMLElement {
 
       if (!icon) return;
       if (newValue === TYPE_NOTIFICATION) {
-        icon.innerHTML = NOTIFICATION_ICON;
+        icon.innerHTML = AssetIcon.NOTIFICATION;
       } else {
-        icon.innerHTML = EXCLAMATION_ICON;
+        icon.innerHTML = AssetIcon.EXCLAMATION;
       }
     }
 

@@ -1,9 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  NEW_WINDOW_ICON,
-  DOCUMENT_ICON,
-  FEARLESS_ICON,
-} from 'utilities/assets/icons';
+import { AssetIcon } from 'utilities';
 import {
   STYLES_CTA_OUTLINE,
   CLASS_STYLES_REF_CTA_OUTLINE,
@@ -173,20 +169,20 @@ const CreateLinkIcon = ({
   }
 
   if (type === TYPE_SECONDARY) {
-    wrapper.innerHTML = FEARLESS_ICON;
+    wrapper.innerHTML = AssetIcon.FEARLESS;
     wrapper.appendChild(textSpan);
   }
 
   if (!isLink) return;
 
   if (isExternalTab) {
-    wrapper.innerHTML = NEW_WINDOW_ICON;
+    wrapper.innerHTML = AssetIcon.NEW_WINDOW;
     wrapper.appendChild(textSpan);
     return;
   }
 
   if (isDownload) {
-    wrapper.innerHTML = DOCUMENT_ICON;
+    wrapper.innerHTML = AssetIcon.DOCUMENT;
     wrapper.appendChild(textSpan);
     return;
   }

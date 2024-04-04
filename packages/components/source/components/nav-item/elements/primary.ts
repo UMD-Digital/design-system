@@ -1,6 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MarkupCreate } from 'utilities';
-import { CHEVRON_SMALL_ICON } from 'utilities/assets/icons';
+import { AssetIcon, MarkupCreate } from 'utilities';
 import { CreateDropdown, DropdownStyles } from './dropdown';
 import { UMDNavItemElement } from '../index';
 import { SLOTS, ELEMENTS, VARIABLES } from '../globals';
@@ -71,7 +70,7 @@ const CreateButton = ({ element }: { element: UMDNavItemElement }) => {
   const button = document.createElement('button');
 
   button.classList.add(PRIMARY_LINK_CONTAINER_BUTTON);
-  button.innerHTML = CHEVRON_SMALL_ICON;
+  button.innerHTML = AssetIcon.CHEVRON_SMALL;
   button.addEventListener('click', () => element.buttonClick());
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', `nav-links-`);

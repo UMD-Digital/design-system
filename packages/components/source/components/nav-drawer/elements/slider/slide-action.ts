@@ -1,6 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { CHEVRON_SMALL_ICON } from 'utilities/assets/icons';
-import { Styles } from 'utilities';
+import { AssetIcon, Styles } from 'utilities';
 import { VARIABLES, ELEMENTS } from '../../globals';
 import { UMDNavDrawer } from '../../index';
 
@@ -102,7 +101,7 @@ const CreateSlideButton = ({
   const button = document.createElement('button');
   button.classList.add(DRAWER_SLIDE_ACTION_BUTTON);
   button.setAttribute('type', 'button');
-  button.innerHTML = CHEVRON_SMALL_ICON;
+  button.innerHTML = AssetIcon.CHEVRON_SMALL;
   button.addEventListener('click', () => {
     element._upcomingSlide = childReference;
     element.eventSlideLeft();

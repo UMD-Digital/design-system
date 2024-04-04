@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { FORWARD_ARROW_ICON } from 'utilities/assets/icons';
+import { AssetIcon } from 'utilities';
 import { BREAKPOINTS, ELEMENTS, VARIABLES } from '../globals';
 import { UMDCarouselCardsElement } from '../index';
 
@@ -96,7 +96,7 @@ export const CreateButton = ({
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
   button.classList.add(CAROUSEL_CARDS_BUTTON);
-  button.innerHTML = FORWARD_ARROW_ICON;
+  button.innerHTML = AssetIcon.FORWARD_ARROW;
 
   if (isRight) button.classList.add(CAROUSEL_CARDS_BUTTON_FORWARDS);
 

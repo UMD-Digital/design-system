@@ -1,4 +1,4 @@
-import { PLAY_ICON, PAUSE_ICON } from 'utilities/assets/icons';
+import { AssetIcon } from 'utilities';
 
 export type TypeImageContainerProps = {
   imageRef?: HTMLElement | null;
@@ -67,12 +67,12 @@ export const CreateImageContainerElement = (
     const button = document.createElement('button');
     const setButtonPlay = () => {
       button.setAttribute('aria-label', 'Pause');
-      button.innerHTML = PAUSE_ICON;
+      button.innerHTML = AssetIcon.PAUSE;
       video.play();
     };
     const setButtonPause = () => {
       button.setAttribute('aria-label', 'Play');
-      button.innerHTML = PLAY_ICON;
+      button.innerHTML = AssetIcon.PLAY;
       video.pause();
     };
 

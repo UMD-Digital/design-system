@@ -5,16 +5,8 @@ import {
   Layout,
   Elements,
 } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
+import { AssetIcon, Performance, Styles } from 'utilities';
 import { CheckForAnimationLinkSpan } from 'utilities/ui';
-import { Performance } from 'utilities';
-import {
-  DOCUMENT_ICON,
-  NEW_WINDOW_ICON,
-  SHORT_ARROW_ICON,
-  PLAY_ICON,
-  PAUSE_ICON,
-} from 'utilities/assets/icons';
 
 type TypeTextContainer = {
   eyebrow?: HTMLElement | null;
@@ -512,13 +504,13 @@ const gifFunctionality = ({
   const button = document.createElement('button');
   const setButtonPlay = () => {
     button.setAttribute('aria-label', 'Pause');
-    button.innerHTML = PAUSE_ICON;
+    button.innerHTML = AssetIcon.PAUSE;
     canvas.style.opacity = '0';
     image.style.opacity = '1';
   };
   const setButtonPause = () => {
     button.setAttribute('aria-label', 'Play');
-    button.innerHTML = PLAY_ICON;
+    button.innerHTML = AssetIcon.PLAY;
     canvas.style.opacity = '1';
     image.style.opacity = '0';
   };
@@ -616,15 +608,15 @@ const MakeCtaIconContainer = ({ ctaIcon }: TypeCardOverlayElement) => {
     const isDownloadLink = ctaIcon.getAttribute('download') === '';
 
     if (isExternalLink) {
-      ctaIcon.innerHTML = NEW_WINDOW_ICON;
+      ctaIcon.innerHTML = AssetIcon.NEW_WINDOW;
     }
 
     if (isDownloadLink) {
-      ctaIcon.innerHTML = DOCUMENT_ICON;
+      ctaIcon.innerHTML = AssetIcon.DOCUMENT;
     }
 
     if (!isExternalLink && !isDownloadLink) {
-      ctaIcon.innerHTML = SHORT_ARROW_ICON;
+      ctaIcon.innerHTML = AssetIcon.SHORT_ARROW;
     }
   }
 

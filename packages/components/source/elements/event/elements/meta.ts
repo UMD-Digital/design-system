@@ -1,11 +1,5 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
-import {
-  CALENDAR_ICON,
-  CLOCK_ICON,
-  PIN_ICON,
-  MULTI_DAY_ICON,
-} from 'utilities/assets/icons';
+import { Styles, AssetIcon } from 'utilities';
 
 type LocationType = {
   title: string;
@@ -196,7 +190,7 @@ const DateText = ({
   }
 
   return MakeDetailItem({
-    icon: CALENDAR_ICON,
+    icon: AssetIcon.CALENDAR,
     text,
   });
 };
@@ -209,7 +203,7 @@ const TimeText = ({ startTime, endTime }: DateDisplayType) => {
   }
 
   return MakeDetailItem({
-    icon: CLOCK_ICON,
+    icon: AssetIcon.CLOCK,
     text,
   });
 };
@@ -228,7 +222,7 @@ const RowDateInfo = (info: TypeMetaDisplay) => {
   if (isMultiDay) {
     container.appendChild(
       MakeDetailItem({
-        icon: MULTI_DAY_ICON,
+        icon: AssetIcon.MULTI_DAY,
         text: 'Multi-day',
       }),
     );
@@ -249,7 +243,7 @@ const CreateEventMetaElement = (info: TypeMetaDisplay) => {
   if (location && location.length > 0) {
     wrapper.appendChild(
       MakeDetailItem({
-        icon: PIN_ICON,
+        icon: AssetIcon.PIN,
         text: location[0].title,
         style: ELEMENT_EVENTS_DATE_ROW_LOCATION,
       }),

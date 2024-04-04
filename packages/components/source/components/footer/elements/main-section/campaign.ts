@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { CAMPAIGN_LOGO, CAMPAIGN_LOGO_DARK } from 'utilities/assets/logos';
+import { AssetLogo } from 'utilities';
 import { VARIABLES } from '../../globals';
 import { UMDFooterElement } from '../../index';
 
@@ -34,7 +34,9 @@ export const CreateCampaignRow = ({
   );
 
   link.innerHTML =
-    theme === THEME_OPTION_LIGHT ? CAMPAIGN_LOGO_DARK : CAMPAIGN_LOGO;
+    theme === THEME_OPTION_LIGHT
+      ? AssetLogo.CAMPAIGN_LOGO_DARK
+      : AssetLogo.CAMPAIGN_LOGO;
 
   container.classList.add(CAMPAIGN_COLUMN_WRAPPER);
   container.appendChild(link);

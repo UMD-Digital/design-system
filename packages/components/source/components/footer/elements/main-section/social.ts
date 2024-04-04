@@ -1,12 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import {
-  FACEBOOK_ICON,
-  X_ICON,
-  INSTAGRAM_ICON,
-  YOUTUBE_ICON,
-  TWITTER_ICON,
-} from 'utilities/assets/social';
-import { Styles } from 'utilities';
+import { AssetSocial, Styles } from 'utilities';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import {
   BREAKPOINTS,
@@ -157,23 +150,23 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   if (!url) return link;
 
   if (url.match(/facebook.com/)) {
-    link.innerHTML = FACEBOOK_ICON;
+    link.innerHTML = AssetSocial.FACEBOOK;
   }
 
   if (url.match(/x.com/)) {
-    link.innerHTML = X_ICON;
+    link.innerHTML = AssetSocial.X;
   }
 
   if (url.match(/instagram.com/)) {
-    link.innerHTML = INSTAGRAM_ICON;
+    link.innerHTML = AssetSocial.INSTAGRAM;
   }
 
   if (url.match(/youtube.com/)) {
-    link.innerHTML = YOUTUBE_ICON;
+    link.innerHTML = AssetSocial.YOUTUBE;
   }
 
   if (url.match(/twitter.com/)) {
-    link.innerHTML = TWITTER_ICON;
+    link.innerHTML = AssetSocial.TWITTER;
   }
 
   return link;

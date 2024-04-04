@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { PERSON_ICON } from 'utilities/assets/icons';
+import { AssetIcon } from 'utilities';
 import BlockContainer, {
   ELEMENT_BLOCK_CONTAINER,
   TypeBlockContainer,
@@ -119,7 +119,7 @@ const CreatePersonBlockElement = (element: TypeBlockPersonProps) => {
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
   const imageContainer = BlockImageContainer.CreateElement({
-    image: providedImage || PERSON_ICON,
+    image: providedImage || AssetIcon.PERSON,
   });
   const container = BlockContainer.CreateElement({
     personContainer,

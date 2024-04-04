@@ -1,6 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { CHEVRON_SMALL_ICON } from 'utilities/assets/icons';
-import { Styles } from 'utilities';
+import { AssetIcon, Styles } from 'utilities';
 import { CreateSlideAction } from './slide-action';
 import { ELEMENTS, VARIABLES } from '../../globals';
 import { UMDNavDrawer } from '../../index';
@@ -102,7 +101,7 @@ const createSlideBackButton = ({
   const backButtonContainer = document.createElement('div');
   const slideBackButton = document.createElement('button');
 
-  slideBackButton.innerHTML = `${CHEVRON_SMALL_ICON} Back`;
+  slideBackButton.innerHTML = `${AssetIcon.CHEVRON_SMALL} Back`;
   slideBackButton.setAttribute('type', 'button');
   slideBackButton.addEventListener('click', () => {
     element._upcomingSlide = parentRef;

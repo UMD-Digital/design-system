@@ -1,11 +1,11 @@
 import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import {
-  ELEMENT_BLOCK_TEXT_CONTAINER,
-  ELEMENT_BLOCK_TEXT_HEADLINE,
-  ELEMENT_BLOCK_TEXT_DATE,
-  ELEMENT_BLOCK_TEXT_RICH_TEXT,
-} from './text';
+  ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
+  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
+  ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT,
+  ELEMENT_TEXT_LOCKUP_SMALL_DATE,
+} from '../lockup/text-small';
 import { ELEMENT_BLOCK_IMAGE_CONTAINER } from './image';
 
 export type TypeBlockContainer = {
@@ -43,14 +43,14 @@ const IS_ALIGNED = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_ALIGNED}]`;
 const IS_WITH_BORDER = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_BORDER}]`;
 const IS_WITH_IMAGE = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
 
-const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_BLOCK_TEXT_CONTAINER}`;
+const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
 const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
-const OVERWRITE_DARK_THEME_RICH_TEXT = `${IS_THEME_DARK} .${ELEMENT_BLOCK_TEXT_RICH_TEXT}`;
+const OVERWRITE_DARK_THEME_RICH_TEXT = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`;
 
-const OVERWRITE_TYPE_BORDER_TEXT_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_BLOCK_TEXT_CONTAINER}`;
+const OVERWRITE_TYPE_BORDER_TEXT_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
 const OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
 
-const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${ELEMENT_BLOCK_TEXT_CONTAINER}`;
+const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
 
 // prettier-ignore
 const VariantThemeStyles = `
@@ -136,7 +136,7 @@ const VariantWithImageStyles = `
 // prettier-ignore
 const TextContainerStyles = `
   @media (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_BLOCK_TEXT_HEADLINE} {
+    .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} {
       max-width: calc(100% - 110px);
     }
   }
@@ -144,7 +144,7 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_BLOCK_TEXT_HEADLINE}`]: SansLarger,
+        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarger,
       },
     })}
   }
@@ -152,7 +152,7 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_BLOCK_TEXT_HEADLINE} *`]: SansLarger,
+        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarger,
       },
     })}
   }
@@ -160,7 +160,7 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_BLOCK_TEXT_HEADLINE}`]: SansExtraLarge,
+        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansExtraLarge,
       },
     })}
   }
@@ -168,7 +168,7 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_BLOCK_TEXT_HEADLINE} *`]: SansExtraLarge,
+        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansExtraLarge,
       },
     })}
   }
@@ -176,7 +176,7 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_BLOCK_TEXT_DATE}`]: SansSmall,
+        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansSmall,
       },
     })}
   }
@@ -184,7 +184,7 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_BLOCK_TEXT_DATE} *`]: SansSmall,
+        [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE} *`]: SansSmall,
       },
     })}
   }
@@ -192,13 +192,13 @@ const TextContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_BLOCK_TEXT_RICH_TEXT} *`]: Typography.SansMedium,
+        [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: Typography.SansMedium,
       },
     })}
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${ELEMENT_BLOCK_TEXT_RICH_TEXT} * {
+    .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} * {
       line-height: 1.375em;
     }
   }

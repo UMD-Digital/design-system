@@ -7,7 +7,6 @@ import ListTextContainer, {
 import ListContainer, {
   ELEMENT_LIST_CONTAINER_WRAPPER,
 } from '../list/container';
-import text from 'elements/block/text';
 
 type TypeListEventProps = TypeListText & {
   image?: HTMLImageElement | null;

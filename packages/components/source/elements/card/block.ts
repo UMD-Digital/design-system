@@ -1,8 +1,8 @@
 import BlockContainer, { TypeBlockContainer } from '../block/container';
 import BlockImageContainer from '../block/image';
-import BlockTextContainer, { TypeBlockTextContainter } from '../block/text';
+import LockupTextContainer, { TypeTextLockupSmall } from '../lockup/text-small';
 
-type TypeBlockCardProps = TypeBlockTextContainter &
+type TypeBlockCardProps = TypeTextLockupSmall &
   TypeBlockContainer & {
     image?: HTMLImageElement | null;
   };
@@ -17,13 +17,13 @@ const STYLES_BLOCK_CARD_ELEMENT = `
   }
 
   ${BlockImageContainer.Styles}
-  ${BlockTextContainer.Styles}
+  ${LockupTextContainer.Styles}
   ${BlockContainer.Styles}
 `;
 
 const CreateCardBlockElement = (element: TypeBlockCardProps) => {
   const { theme, image, isAligned = false, isBordered = false } = element;
-  const textContainer = BlockTextContainer.CreateElement(element);
+  const textContainer = LockupTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image
     ? BlockImageContainer.CreateElement({ image })

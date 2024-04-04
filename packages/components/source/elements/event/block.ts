@@ -1,12 +1,12 @@
 import { Tokens } from '@universityofmaryland/variables';
 import BlockContainer, { TypeBlockContainer } from '../block/container';
 import BlockImageContainer from '../block/image';
-import BlockTextContainer, {
-  TypeBlockTextContainter,
-  ELEMENT_BLOCK_TEXT_HEADLINE,
-} from '../block/text';
+import LockupTextContainer, {
+  TypeTextLockupSmall,
+  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
+} from '../lockup/text-small';
 
-type TypeBlockEventProps = TypeBlockTextContainter &
+type TypeBlockEventProps = TypeTextLockupSmall &
   TypeBlockContainer & {
     image?: HTMLImageElement | null;
     eventDetails: HTMLElement;
@@ -37,7 +37,7 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
   }
 
   ${BlockImageContainer.Styles}
-  ${BlockTextContainer.Styles}
+  ${LockupTextContainer.Styles}
   ${BlockContainer.Styles}
   ${DetailsRowStyles}
 `;
@@ -50,7 +50,7 @@ const CreateEventBlockElement = (element: TypeBlockEventProps) => {
     isBordered = false,
     eventDetails,
   } = element;
-  const textContainer = BlockTextContainer.CreateElement(element);
+  const textContainer = LockupTextContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image
     ? BlockImageContainer.CreateElement({ image })
@@ -65,7 +65,7 @@ const CreateEventBlockElement = (element: TypeBlockEventProps) => {
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
-      `.${ELEMENT_BLOCK_TEXT_HEADLINE}`,
+      `.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`,
     ) as HTMLElement;
     eventDetails.classList.add(ELEMENT_EVENT_BLOCK_DETAILS);
     headline.insertAdjacentElement('afterend', eventDetails);

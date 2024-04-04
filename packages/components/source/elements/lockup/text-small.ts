@@ -6,7 +6,7 @@ import {
 } from '@universityofmaryland/variables';
 import { MarkupModify, Styles } from 'utilities';
 
-export type TypeBlockTextContainter = {
+export type TypeTextLockupSmall = {
   headline?: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
@@ -24,16 +24,19 @@ const { ConvertJSSObjectToStyles } = Styles;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-export const ELEMENT_BLOCK_TEXT_CONTAINER = 'block-text-container';
-export const ELEMENT_BLOCK_TEXT_WRAPPER = 'block-text-container-wrapper';
-export const ELEMENT_BLOCK_TEXT_EYEBROW = 'block-text-eyebrow';
-export const ELEMENT_BLOCK_TEXT_HEADLINE = 'block-text-headline';
-export const ELEMENT_BLOCK_TEXT_RICH_TEXT = 'block-rich-text';
-export const ELEMENT_BLOCK_TEXT_DATE = 'block-text-date';
-export const ELEMENT_BLOCK_TEXT_ACTIONS = 'block-text-actions';
+export const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER =
+  'text-lockup-small-container';
+export const ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER =
+  'text-lockup-small-container-wrapper';
+export const ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW = 'text-lockup-small-eyebrow';
+export const ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE = 'text-lockup-small-headline';
+export const ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT =
+  'text-lockup-small-rich-text';
+export const ELEMENT_TEXT_LOCKUP_SMALL_DATE = 'text-lockup-small-date';
+export const ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS = 'text-lockup-small-actions';
 
-const IS_THEME_DARK = `.${ELEMENT_BLOCK_TEXT_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-const IS_THEME_DARK_HEADLINE = `${IS_THEME_DARK} .${ELEMENT_BLOCK_TEXT_HEADLINE}`;
+const IS_THEME_DARK = `.${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_THEME_DARK_HEADLINE = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
 
 // prettier-ignore
 const DarkThemeStyles = `
@@ -58,63 +61,63 @@ const DarkThemeStyles = `
 
 // prettier-ignore
 const EyebrowStyles = `
-  .${ELEMENT_BLOCK_TEXT_EYEBROW} {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} {
     color: ${Colors.black};
   }
 
-  .${ELEMENT_BLOCK_TEXT_EYEBROW} * {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} * {
     color: currentColor;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_EYEBROW}`]: Eyebrow,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW}`]: Eyebrow,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_EYEBROW} *`]: Eyebrow,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} *`]: Eyebrow,
     },
   })}
 
-  .${ELEMENT_BLOCK_TEXT_EYEBROW} a:hover,
-  .${ELEMENT_BLOCK_TEXT_EYEBROW} a:focus {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} a:hover,
+  .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} a:focus {
     text-decoration: underline;
   }
 `;
 
 // prettier-ignore
 const HeadlineStyles = `
-  * + .${ELEMENT_BLOCK_TEXT_HEADLINE} {
+  * + .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} {
     margin-top: ${Spacing.min}
   }
 
-  .${ELEMENT_BLOCK_TEXT_HEADLINE} {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} {
     color: ${Colors.black};
   }
 
-  .${ELEMENT_BLOCK_TEXT_HEADLINE},
-  .${ELEMENT_BLOCK_TEXT_HEADLINE} * {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE},
+  .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} * {
     color: currentColor;
     font-weight: 700;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_HEADLINE}`]: SansLarge,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_HEADLINE} *`]: SansLarge,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarge,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_HEADLINE} a`]:
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} a`]:
       Link.LineSlideUnder.black,
     },
   })}
@@ -122,23 +125,23 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  * + .${ELEMENT_BLOCK_TEXT_RICH_TEXT} {
+  * + .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} {
     margin-top: ${Spacing.min}
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_RICH_TEXT} *`]: Typography.SansSmall,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: Typography.SansSmall,
     },
   })}
 
-  .${ELEMENT_BLOCK_TEXT_RICH_TEXT} a {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a {
     text-decoration: underline;
     transition: color 0.3s ease-in-out;
   }
 
-  .${ELEMENT_BLOCK_TEXT_RICH_TEXT} a:hover,
-  .${ELEMENT_BLOCK_TEXT_RICH_TEXT} a:focus {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a:hover,
+  .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a:focus {
     text-decoration: underline;
     color: ${Colors.red};
   }
@@ -146,47 +149,47 @@ const TextStyles = `
 
 // prettier-ignore
 const DateStyles = `
-  .${ELEMENT_BLOCK_TEXT_DATE} {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_DATE} {
     display: block;
   }
 
-  * + .${ELEMENT_BLOCK_TEXT_DATE} {
+  * + .${ELEMENT_TEXT_LOCKUP_SMALL_DATE} {
     margin-top: ${Spacing.min};
     display: block;
   }
 
-  .${ELEMENT_BLOCK_TEXT_DATE} * {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_DATE} * {
     color: ${Colors.gray.mediumAA};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_DATE}`]: SansMin,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`]: SansMin,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_DATE} *`]: SansMin,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE} *`]: SansMin,
     },
   })}
 `;
 
 // prettier-ignore
 const ActionStyles = `
-  .${ELEMENT_BLOCK_TEXT_ACTIONS} {
+  .${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS} {
     margin-top: ${Spacing.sm};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BLOCK_TEXT_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
     },
   })}
 `;
 
 // prettier-ignore
-const STYLES_BLOCK_TEXT_CONTAINER = `
+const STYLES_TEXT_LOCKUP_SMALL_CONTAINER = `
   ${EyebrowStyles}
   ${HeadlineStyles}
   ${TextStyles}
@@ -195,42 +198,42 @@ const STYLES_BLOCK_TEXT_CONTAINER = `
   ${DarkThemeStyles}
 `;
 
-const CreateBlockTextContainer = ({
+const CreateTextLockupSmallContainer = ({
   eyebrow,
   headline,
   text,
   actions,
   date,
   theme,
-}: TypeBlockTextContainter) => {
+}: TypeTextLockupSmall) => {
   const container = document.createElement('div');
 
-  container.classList.add(ELEMENT_BLOCK_TEXT_CONTAINER);
+  container.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
   if (eyebrow) {
-    eyebrow.classList.add(ELEMENT_BLOCK_TEXT_EYEBROW);
+    eyebrow.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW);
     container.appendChild(eyebrow);
   }
 
   if (headline) {
     MarkupModify.AnimationLinkSpan({ element: headline });
-    headline.classList.add(ELEMENT_BLOCK_TEXT_HEADLINE);
+    headline.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE);
     container.appendChild(headline);
   }
 
   if (text) {
-    text.classList.add(ELEMENT_BLOCK_TEXT_RICH_TEXT);
+    text.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT);
     container.appendChild(text);
   }
 
   if (date) {
-    date.classList.add(ELEMENT_BLOCK_TEXT_DATE);
+    date.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_DATE);
     container.appendChild(date);
   }
 
   if (actions) {
-    actions.classList.add(ELEMENT_BLOCK_TEXT_ACTIONS);
+    actions.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS);
     container.appendChild(actions);
   }
 
@@ -238,6 +241,6 @@ const CreateBlockTextContainer = ({
 };
 
 export default {
-  CreateElement: CreateBlockTextContainer,
-  Styles: STYLES_BLOCK_TEXT_CONTAINER,
+  CreateElement: CreateTextLockupSmallContainer,
+  Styles: STYLES_TEXT_LOCKUP_SMALL_CONTAINER,
 };

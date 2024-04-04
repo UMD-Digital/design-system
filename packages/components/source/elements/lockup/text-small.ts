@@ -131,6 +131,12 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: Typography.SansSmall,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: Typography.SansSmall,
     },
   })}

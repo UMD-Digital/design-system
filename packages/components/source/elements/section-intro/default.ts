@@ -9,7 +9,7 @@ type TypeSectionIntroDefaultProps = {
   theme?: string | null;
 };
 
-const { SansLargest, SansLarger } = Typography;
+const { SansLargest, SansLarger, SansMedium } = Typography;
 const { Colors, Spacing, MaxWidth } = Tokens;
 const { GridColumnAndRows } = Layout;
 
@@ -22,6 +22,7 @@ const ELEMENT_LIST_CONTAINER = 'intro-default-container';
 const ELEMENT_LIST_CONTAINER_WRAPPER = 'intro-default-container-wrapper';
 const ELEMENT_HEADLINE = 'intro-default-headline';
 const ELEMENT_RICH_TEXT = 'intro-default-rich-text';
+const ELEMENT_RICH_TEXT_SMALL = 'intro-default-rich-text-small';
 const ELEMENT_ACTIONS = 'intro-default-actions';
 
 const OVERWRITE_SEPARATOR_WRAPPER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_WITH_SEPARATOR}] .${ELEMENT_LIST_CONTAINER_WRAPPER}`;
@@ -69,7 +70,8 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  * + .${ELEMENT_RICH_TEXT} {
+  * + .${ELEMENT_RICH_TEXT},
+  * + .${ELEMENT_RICH_TEXT_SMALL} {
     margin-top: ${Spacing.sm};
   }
 
@@ -82,6 +84,12 @@ const TextStyles = `
   .${ELEMENT_RICH_TEXT} {
     font-weight: 700;
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_RICH_TEXT_SMALL}`]: SansMedium,
+    },
+  })}
 `;
 
 // prettier-ignore
@@ -139,7 +147,7 @@ const CreateSectionIntroDefaultElement = (
   }
 
   if (text) {
-    text.classList.add(ELEMENT_RICH_TEXT);
+    text.classList.add(headline ? ELEMENT_RICH_TEXT_SMALL : ELEMENT_RICH_TEXT);
     wrapper.appendChild(text);
   }
 

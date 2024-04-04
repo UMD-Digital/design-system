@@ -14,8 +14,6 @@ const SLOTS = {
   EYEBROW: 'eyebrow',
   TEXT: 'text',
   ACTIONS: 'actions',
-  HIGHLIGHT: 'highlight',
-  HIGHLIGHT_ATTRIBUTION: 'highlight-attribution',
 };
 
 export class UMDPathwayElement extends HTMLElement {

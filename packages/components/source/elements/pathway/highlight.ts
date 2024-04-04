@@ -19,6 +19,10 @@ const { Lock } = Layout;
 
 const MEDIUM = 1000;
 const LARGE = 1200;
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
+
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
 const PATHWAY_HIGHLIGHT_CONTAINER = 'pathway-highlight-container';
@@ -31,6 +35,18 @@ const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION =
   'pathway-highlight-attribution';
 
 const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_HIGHLIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
+const OVERWRITE_THEME_DARK_HIGHLIGHT = `.${PATHWAY_HIGHLIGHT_CONTAINER}${IS_THEME_DARK} .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER}`;
+
+// prettier-ignore
+const OverwriteThemeDarkStyles = `
+  ${OVERWRITE_THEME_DARK_HIGHLIGHT} {
+    background-color: ${Colors.gray.darker};
+  }
+
+  ${OVERWRITE_THEME_DARK_HIGHLIGHT} * {
+   color: ${Colors.white};
+  }
+`
 
 // prettier-ignore
 const OverwriteTextContainerStyles = `
@@ -155,6 +171,7 @@ const STYLES_PATHWAY_HIGHLIGHT = `
   ${LockStyles}
   ${OverwriteTextContainerStyles}
   ${HighlightContainer}
+  ${OverwriteThemeDarkStyles}
 `;
 
 const CreateHighlightColumn = ({
@@ -187,12 +204,14 @@ const CreateHighlightColumn = ({
 };
 
 const CreatePathwayHighlightElement = (element: TypePathwayHighlightProps) => {
+  const { theme } = element;
   const container = document.createElement('div');
   const lock = document.createElement('div');
 
   const textContainer = CreatePathwayTextContainer(element);
   const highlightContainer = CreateHighlightColumn(element);
 
+  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   container.classList.add(PATHWAY_HIGHLIGHT_CONTAINER);
   lock.classList.add(PATHWAY_HIGHLIGHT_CONTAINER_LOCK);
 

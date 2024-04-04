@@ -266,7 +266,7 @@ const CreatePathwayDefaultElement = (element: TypePathwayDefaultProps) => {
   const imageContainer = CreatePathwayImageContainer(element);
 
   container.classList.add(PATHWAY_DEFAULT_CONTAINER);
-  container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   if (isImageScaled) container.setAttribute(ATTRIBUTE_IMAGE_SCALED, '');
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,

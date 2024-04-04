@@ -12,10 +12,11 @@ import { Load as FooterLoader } from './footer';
 import { Load as HeroLoader } from './hero';
 import { Load as HeroLogoLoader } from './hero-logo';
 import { Load as HeroMinimalLoader } from './hero-minimal';
-import { Load as PersonLoader } from './person';
 import { Load as NavDrawerLoader } from './nav-drawer';
 import { Load as NavItemLoader } from './nav-item';
+import { Load as PathwayHighlightLoader } from './pathway-highlight';
 import { Load as PathwayLoader } from './pathway';
+import { Load as PersonLoader } from './person';
 import { Load as QuoteLoader } from './quote';
 import { Load as StatLoader } from './stat';
 import { Load as SectionIntroLoader } from './section-intro';
@@ -37,10 +38,11 @@ export const Components = {
   HeroLoader,
   HeroLogoLoader,
   HeroMinimalLoader,
-  PersonLoader,
   NavDrawerLoader,
   NavItemLoader,
   PathwayLoader,
+  PathwayHighlightLoader,
+  PersonLoader,
   QuoteLoader,
   StatLoader,
   SectionIntroLoader,

@@ -1,9 +1,4 @@
-import {
-  PathwayHero,
-  PathwayHighlight,
-  PathwayDefault,
-  PathwayElements,
-} from 'elements';
+import { PathwayHero, PathwayDefault, PathwayElements } from 'elements';
 import { Reset } from 'helpers/styles';
 import { CheckForImageAlt, SlotDefaultStyling } from 'helpers/ui';
 import { UMDPathwayElement } from './index';
@@ -17,7 +12,6 @@ const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
 const THEME_WHITE = 'white';
 const TYPE_HERO = 'hero';
-const TYPE_HIGHLIGHT = 'highlight';
 
 export const ComponentStyles = `
   :host {
@@ -27,7 +21,6 @@ export const ComponentStyles = `
   ${Reset}
   ${PathwayDefault.Styles}
   ${PathwayHero.Styles}
-  ${PathwayHighlight.Styles}
   ${PathwayElements.Image.Styles}
   ${PathwayElements.Text.Styles}
 `;
@@ -49,8 +42,7 @@ export const CreateShadowDom = ({
 }: {
   element: UMDPathwayElement;
 }) => {
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } =
-    element._slots;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS } = element._slots;
   const isImageRight =
     element.getAttribute(ATTRIBUTE_IMAGE_POSITION) !== 'left';
   const isImageScaled =
@@ -63,24 +55,6 @@ export const CreateShadowDom = ({
     if (themeAttribute === THEME_LIGHT) theme = THEME_LIGHT;
     if (themeAttribute === THEME_DARK) theme = THEME_DARK;
     if (themeAttribute === THEME_MARYLAND) theme = THEME_MARYLAND;
-  }
-
-  if (type === TYPE_HIGHLIGHT) {
-    return PathwayHighlight.CreateElement({
-      theme,
-      eyebrow: SlotDefaultStyling({ element, slotRef: EYEBROW }),
-      headline: SlotDefaultStyling({ element, slotRef: HEADLINE }),
-      text: SlotDefaultStyling({ element, slotRef: TEXT }),
-      action: SlotDefaultStyling({ element, slotRef: ACTIONS }),
-      quote: SlotDefaultStyling({
-        element,
-        slotRef: HIGHLIGHT,
-      }),
-      attribution: SlotDefaultStyling({
-        element,
-        slotRef: HIGHLIGHT_ATTRIBUTION,
-      }),
-    });
   }
 
   if (type === TYPE_HERO) {

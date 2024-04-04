@@ -11,7 +11,7 @@ export type TypePathwayTextContainer = {
   headline: HTMLElement | null;
   text: HTMLElement | null;
   action: HTMLElement | null;
-  theme: string;
+  theme: string | null;
 };
 
 const { Spacing, Colors, FontSize } = Tokens;
@@ -192,7 +192,7 @@ export const CreatePathwayTextContainer = ({
     wrapper.appendChild(action);
   }
 
-  container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   container.classList.add(ELEMENT_TEXT_CONTAINER);
   container.appendChild(wrapper);
 

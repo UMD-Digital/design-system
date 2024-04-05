@@ -17,7 +17,7 @@ export type TypeTextLockupSmall = {
 
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
-const { SansLarge, SansMin, Eyebrow } = Typography;
+const { SansLarger, SansMin, Eyebrow } = Typography;
 const { GridColumnAndRows } = Layout;
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -98,13 +98,13 @@ const HeadlineStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarge,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarge,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarger,
     },
   })}
 

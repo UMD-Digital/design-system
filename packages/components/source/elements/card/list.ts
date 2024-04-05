@@ -1,10 +1,6 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
+import { Tokens } from '@universityofmaryland/variables';
 import ListImageContainer from '../list/image';
-import LockupTextContainer, {
-  TypeTextLockupSmall,
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../lockup/text-small';
+import LockupTextContainer, { TypeTextLockupSmall } from '../lockup/text-small';
 import ListContainer from '../list/container';
 
 type TypeListCardProps = TypeTextLockupSmall & {
@@ -12,27 +8,9 @@ type TypeListCardProps = TypeTextLockupSmall & {
 };
 
 const { Spacing } = Tokens;
-const { SansLarger } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-card-list';
 const ELEMENT_LIST_CARD_CONTAINER = 'card-list-container';
-
-const OVERWRITE_LIST_CARD_HEADLINE = `.${ELEMENT_LIST_CARD_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
-
-const OverwriteHeadlineStyles = `
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_LIST_CARD_HEADLINE}`]: SansLarger,
-    },
-  })}
-  
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_LIST_CARD_HEADLINE} *`]: SansLarger,
-    },
-  })}
-`;
 
 // prettier-ignore
 const STYLES_LIST_CARD_ELEMENT = `
@@ -47,7 +25,6 @@ const STYLES_LIST_CARD_ELEMENT = `
   ${LockupTextContainer.Styles}
   ${ListImageContainer.Styles}
   ${ListContainer.Styles}
-  ${OverwriteHeadlineStyles}
 `;
 
 const CreateCardListElement = (element: TypeListCardProps) => {

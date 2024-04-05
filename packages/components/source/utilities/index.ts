@@ -2,6 +2,7 @@ import Accessibility from './accessibility';
 import AssetIcon from './assets/icons';
 import AssetLogo from './assets/logos';
 import AssetSocial from './assets/social';
+import AssetServices from './assets/services';
 import MarkupCreate from './markup/create';
 import MarkupModify from './markup/modify';
 import MarkupValidate from './markup/validate';
@@ -14,6 +15,7 @@ export {
   AssetIcon,
   AssetLogo,
   AssetSocial,
+  AssetServices,
   MarkupCreate,
   MarkupModify,
   MarkupValidate,

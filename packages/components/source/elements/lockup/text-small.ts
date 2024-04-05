@@ -50,13 +50,6 @@ const DarkThemeStyles = `
       Link.LineSlideUnder.white,
     },
   })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`${IS_THEME_DARK_HEADLINE}`]:
-      Link.LineSlideUnder.white,
-    },
-  })}
 `
 
 // prettier-ignore

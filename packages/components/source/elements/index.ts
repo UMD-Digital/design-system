@@ -2,6 +2,7 @@ import CallToAction from './call-to-action';
 import CardBlock from './card/block';
 import CardList from './card/list';
 import CardOverlay from './card-overlay';
+import CardOverlayImage from './card-overlay/image';
 import EventBlock from './event/block';
 import EventList from './event/list';
 import EventElements from './event/elements';
@@ -31,6 +32,7 @@ export {
   CardBlock,
   CardList,
   CardOverlay,
+  CardOverlayImage,
   EventBlock,
   EventList,
   EventElements,

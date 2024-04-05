@@ -4,7 +4,6 @@ export default {
   },
   'umd-element-card-overlay:defined': {
     display: 'block',
-    backgroundColor: 'black',
   },
   'umd-element-card-overlay.size-large': {
     minHeight: '560px',

@@ -9,6 +9,10 @@ export const SLOTS = {
 };
 export const VARIABLES = {
   ELEMENT_NAME: 'umd-element-card-overlay',
+  ATTRIBUTE_THEME: 'theme',
+  ATTRIBUTE_TYPE: 'type',
   THEME_DARK: 'dark',
   THEME_LIGHT: 'light',
+  TYPE_DEFAULT: 'default',
+  TYPE_IMAGE: 'image',
 };

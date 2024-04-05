@@ -1,11 +1,12 @@
-import { CardOverlay } from 'elements';
+import { CardOverlay, CardOverlayImage } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 import { UMDCardOverlayElement } from '../index';
-import { SLOTS } from '../globals';
+import { SLOTS, VARIABLES } from '../globals';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { IMAGE, EYEBROW, HEADLINE, TEXT, ACTIONS, CTAICON, DATE } = SLOTS;
+const { TYPE_IMAGE, ATTRIBUTE_TYPE } = VARIABLES;
 
 // prettier-ignore
 export const ComponentStyles = `
@@ -15,6 +16,7 @@ export const ComponentStyles = `
 
   ${Styles.ResetString}
   ${CardOverlay.Styles}
+  ${CardOverlayImage.Styles}
 `;
 
 const GetImage = ({ element }: { element: UMDCardOverlayElement }) => {
@@ -28,13 +30,12 @@ const GetImage = ({ element }: { element: UMDCardOverlayElement }) => {
   return null;
 };
 
-export const CreateShadowDom = ({
+const MakeOverlayContent = ({
   element,
 }: {
   element: UMDCardOverlayElement;
-}) =>
-  CardOverlay.CreateElement({
-    image: GetImage({ element }),
+}) => {
+  return {
     eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
@@ -42,4 +43,22 @@ export const CreateShadowDom = ({
     actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     ctaIcon: SlotWithDefaultStyling({ element, slotRef: CTAICON }),
     theme: element._theme,
-  });
+  };
+};
+
+export const CreateShadowDom = ({
+  element,
+}: {
+  element: UMDCardOverlayElement;
+}) => {
+  const type = element.getAttribute(ATTRIBUTE_TYPE);
+
+  if (type === TYPE_IMAGE) {
+    return CardOverlayImage.CreateElement({
+      ...MakeOverlayContent({ element }),
+      image: GetImage({ element }),
+    });
+  }
+
+  return CardOverlay.CreateElement({ ...MakeOverlayContent({ element }) });
+};

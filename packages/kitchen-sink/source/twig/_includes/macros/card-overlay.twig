@@ -55,6 +55,10 @@
     {% set attrs = attrs ~ 'class="size-large"' %}
   {% endif %}
 
+  {% if params.image %}
+    {% set attrs = attrs ~ 'type="image"' %}
+  {% endif %}
+
   <umd-element-card-overlay {{ attrs }}>
     {% if params.image %}
       <img slot="image" src="{{ params.image }}" alt="Example Alt Text" />
@@ -116,6 +120,10 @@
     {% set attrs = attrs ~ 'class="size-large"' %}
   {% endif %}
 
+  {% if params.image %}
+    {% set attrs = attrs ~ 'type="image"' %}
+  {% endif %}
+
   <umd-element-card-overlay {{ attrs }}>
     {% if params.image %}
       <img slot="image" src="{{ params.image }}" alt="Example Alt Text" />
@@ -175,6 +183,10 @@
 
   {% if isSizeBig %}
     {% set attrs = attrs ~ 'class="size-large"' %}
+  {% endif %}
+
+  {% if params.image %}
+    {% set attrs = attrs ~ 'type="image"' %}
   {% endif %}
 
   <umd-element-card-overlay {{ attrs }}>

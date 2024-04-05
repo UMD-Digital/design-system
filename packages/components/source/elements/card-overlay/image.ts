@@ -3,7 +3,7 @@ import { AssetServices, MarkupModify, Performance } from 'utilities';
 import CtaIcon from './icon-cta';
 import LockupTextContainer, {
   TypeTextLockupSmall,
-  ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
+  ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER,
 } from '../lockup/text-small';
 import ScalingFontBlock from '../block/scaling-font-container';
 
@@ -27,7 +27,7 @@ const ELEMENT_TINT_OVERLAY = 'card-overlay-image-tint';
 
 const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
 
-const OVERWRITE_CTA_ICON_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_CONTAINER}${IS_WITH_CTA_ICON} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
+const OVERWRITE_CTA_ICON_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_CONTAINER}${IS_WITH_CTA_ICON} .${ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER}`;
 
 const OverwriteCtaIcon = `
   ${OVERWRITE_CTA_ICON_TEXT_LOCKUP} {
@@ -150,6 +150,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   ${ImageStyles}
   ${ImageTint}
   ${OverwriteCtaIcon}
+  ${ScalingFontBlock.Styles}
 `;
 
 const CreateCardOverlayElement = (element: TypeCardOverlayImageElement) => {

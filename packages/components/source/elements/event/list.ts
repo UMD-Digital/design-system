@@ -1,4 +1,5 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Styles } from 'utilities';
 import ListImageContainer from '../list/image';
 import LockupTextContainer, {
   TypeTextLockupSmall,
@@ -15,6 +16,8 @@ type TypeListEventProps = TypeTextLockupSmall & {
 };
 
 const { Spacing } = Tokens;
+const { SansLarger } = Typography;
+const { ConvertJSSObjectToStyles } = Styles;
 
 const SMALL = 400;
 const MEDIUM = 500;
@@ -23,6 +26,22 @@ const ELEMENT_NAME = 'umd-list-event';
 const ELEMENT_EVENT_LIST_CONTAINER = 'event-list-container';
 const ELEMENT_EVENT_LIST_DATE_BLOCK = 'event-list-date-block';
 const ELEMENT_EVENT_LIST_DETAILS = 'event-list-details';
+
+const OVERWRITE_LIST_CARD_HEADLINE = `.${ELEMENT_EVENT_LIST_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
+
+const OverwriteHeadlineStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_LIST_CARD_HEADLINE}`]: SansLarger,
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_LIST_CARD_HEADLINE} *`]: SansLarger,
+    },
+  })}
+`;
 
 // prettier-ignore
 const DateBlockContainerStyles = `
@@ -70,6 +89,7 @@ const STYLES_EVENT_LIST_ELEMENT = `
   ${ListImageContainer.Styles}
   ${DateBlockContainerStyles}
   ${DetailsRowStyles}
+  ${OverwriteHeadlineStyles}
 `;
 
 const CreateEventListElement = (element: TypeListEventProps) => {

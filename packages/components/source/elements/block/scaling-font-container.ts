@@ -1,0 +1,99 @@
+import { Typography } from '@universityofmaryland/variables';
+import { Styles } from 'utilities';
+import {
+  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
+  ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT,
+  ELEMENT_TEXT_LOCKUP_SMALL_DATE,
+} from '../lockup/text-small';
+
+const { SansExtraLarge, SansMedium, SansSmall } = Typography;
+const { ConvertJSSObjectToStyles } = Styles;
+
+const SMALL = 400;
+const MEDIUM = 650;
+
+const ELEMENT_NAME = 'umd-scaling-font-block-container';
+const ELEMENT_BLOCK_CONTAINER = 'scaling-font-block-container';
+
+const OverwriteHeadline = `.${ELEMENT_BLOCK_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
+const OverwriteDate = `.${ELEMENT_BLOCK_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`;
+const OverwriteText = `.${ELEMENT_BLOCK_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`;
+
+// prettier-ignore
+const HeadlineStyles = `
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`${OverwriteHeadline}`]: SansExtraLarge,
+      },
+    })}
+  }
+  
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`${OverwriteHeadline} *`]: SansExtraLarge,
+      },
+    })}
+  }
+`;
+
+// prettier-ignore
+const DateStyles = `
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`${OverwriteDate}`]: SansSmall,
+      },
+    })}
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`${OverwriteDate} *`]: SansSmall,
+      },
+    })}
+  }
+`;
+
+// prettier-ignore
+const TextStyles = `
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
+        [`${OverwriteText} *`]: SansMedium,
+      },
+    })}
+  }
+  
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${OverwriteText} * {
+      line-height: 1.375em;
+    }
+  }
+`;
+
+// prettier-ignore
+const STYLES_SCALING_FONT_BLOCK_CONTAINER = `
+  .${ELEMENT_BLOCK_CONTAINER} {
+    container: ${ELEMENT_NAME} / inline-size;
+  }
+
+  ${HeadlineStyles}
+  ${DateStyles}
+  ${TextStyles}
+`;
+
+const CreateScaleFontBlockContainer = () => {
+  const container = document.createElement('div');
+
+  container.classList.add(ELEMENT_BLOCK_CONTAINER);
+
+  return container;
+};
+
+export default {
+  CreateElement: CreateScaleFontBlockContainer,
+  Styles: STYLES_SCALING_FONT_BLOCK_CONTAINER,
+};

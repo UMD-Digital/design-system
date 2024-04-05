@@ -1,5 +1,6 @@
 import {
   Animations,
+  Elements,
   Typography,
   Tokens,
   Layout,
@@ -17,6 +18,7 @@ export type TypeTextLockupSmall = {
 
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
+const { Text } = Elements;
 const { SansLarger, SansMin, Eyebrow } = Typography;
 const { GridColumnAndRows } = Layout;
 const { ConvertJSSObjectToStyles } = Styles;
@@ -37,6 +39,7 @@ export const ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS = 'text-lockup-small-actions';
 
 const IS_THEME_DARK = `.${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 const IS_THEME_DARK_HEADLINE = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
+const IS_THEME_DARK_RICH_TEXT = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`;
 
 // prettier-ignore
 const DarkThemeStyles = `
@@ -48,6 +51,12 @@ const DarkThemeStyles = `
     styleObj: {
       [`${IS_THEME_DARK_HEADLINE} a`]:
       Link.LineSlideUnder.white,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${IS_THEME_DARK_RICH_TEXT}`]: Text.RichTextDark,
     },
   })}
 `
@@ -189,6 +198,11 @@ const ActionStyles = `
 
 // prettier-ignore
 const STYLES_TEXT_LOCKUP_SMALL_CONTAINER = `
+  .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER} {
+    z-index: 9;
+    position: relative;
+  }
+  
   ${EyebrowStyles}
   ${HeadlineStyles}
   ${TextStyles}

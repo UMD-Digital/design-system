@@ -1,11 +1,11 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetServices, MarkupModify, Performance, Styles } from 'utilities';
+import { Tokens } from '@universityofmaryland/variables';
+import { AssetServices, MarkupModify, Performance } from 'utilities';
 import CtaIcon from './icon-cta';
 import LockupTextContainer, {
   TypeTextLockupSmall,
   ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
 } from '../lockup/text-small';
+import ScalingFontBlock from '../block/scaling-font-container';
 
 type TypeCardOverlayImageElement = TypeTextLockupSmall & {
   image?: HTMLImageElement | null;
@@ -13,12 +13,8 @@ type TypeCardOverlayImageElement = TypeTextLockupSmall & {
 
 const { Spacing } = Tokens;
 const { Debounce } = Performance;
-const { ConvertJSSObjectToStyles } = Styles;
-
-const { SansLarger, SansExtraLarge } = Typography;
 
 const SMALL = 300;
-const MEDIUM = 500;
 
 const ELEMENT_NAME = 'umd-card-overlay-image';
 const ATTRIBUTE_CTA_ICON = 'cta-icon';
@@ -36,36 +32,6 @@ const OVERWRITE_CTA_ICON_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_CONTAINER}
 const OverwriteCtaIcon = `
   ${OVERWRITE_CTA_ICON_TEXT_LOCKUP} {
     padding-right: ${Spacing.xl};
-  }
-`;
-
-const OverwriteHeadline = `
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarger,
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarger,
-    },
-  })}
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansExtraLarge,
-      },
-    })}
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansExtraLarge,
-      },
-    })}
   }
 `;
 
@@ -149,11 +115,6 @@ const WrapperStyles = `
     justify-content: flex-end;
     height: 100%;
   }
-
-  .${ELEMENT_CARD_OVERLAY_IMAGE_WRAPPER} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER} {
-    z-index: 9;
-    position: relative;
-  }
 `;
 
 // prettier-ignore
@@ -188,7 +149,6 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   ${WrapperStyles}
   ${ImageStyles}
   ${ImageTint}
-  ${OverwriteHeadline}
   ${OverwriteCtaIcon}
 `;
 
@@ -200,6 +160,7 @@ const CreateCardOverlayElement = (element: TypeCardOverlayImageElement) => {
   const imageWrapper = document.createElement('div');
   const tintOverlay = document.createElement('div');
   const textCopy = text?.textContent?.trim();
+  const scalingFontContainer = ScalingFontBlock.CreateElement();
   const ctaIcon = CtaIcon.CreateElement({ ...element, theme: 'dark' });
   const content = LockupTextContainer.CreateElement({
     ...element,
@@ -223,10 +184,12 @@ const CreateCardOverlayElement = (element: TypeCardOverlayImageElement) => {
   imageWrapper.classList.add(ELEMENT_IMAGE_WRAPPER);
   elementWrapper.classList.add(ELEMENT_CARD_OVERLAY_IMAGE_WRAPPER);
 
+  scalingFontContainer.appendChild(content);
+
   imageWrapper.appendChild(image);
   elementWrapper.appendChild(imageWrapper);
   elementWrapper.appendChild(tintOverlay);
-  elementWrapper.appendChild(content);
+  elementWrapper.appendChild(scalingFontContainer);
   if (ctaIcon) {
     elementContainer.setAttribute(ATTRIBUTE_CTA_ICON, '');
     elementWrapper.appendChild(ctaIcon);

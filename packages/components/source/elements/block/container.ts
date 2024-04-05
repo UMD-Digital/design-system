@@ -1,12 +1,7 @@
-import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
-import {
-  ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-  ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT,
-  ELEMENT_TEXT_LOCKUP_SMALL_DATE,
-} from '../lockup/text-small';
+import { Tokens } from '@universityofmaryland/variables';
+import { ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER } from '../lockup/text-small';
 import { ELEMENT_BLOCK_IMAGE_CONTAINER } from './image';
+import ScalingFontBlock from './scaling-font-container';
 
 export type TypeBlockContainer = {
   isAligned?: boolean;
@@ -20,10 +15,7 @@ type TypeBlockContainerProps = TypeBlockContainer & {
   personContainer?: HTMLDivElement | null;
 };
 
-const { SansExtraLarge, SansLarger, SansSmall } = Typography;
 const { Colors, Spacing } = Tokens;
-const { Text } = Elements;
-const { ConvertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_ALIGNED = 'aligned';
@@ -31,7 +23,6 @@ const ATTRIBUTE_BORDER = 'border';
 const ATTRIBUTE_WITH_IMAGE = 'image';
 const THEME_DARK = 'dark';
 
-const SMALL = 400;
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-block-container';
@@ -45,7 +36,6 @@ const IS_WITH_IMAGE = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
 
 const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
 const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
-const OVERWRITE_DARK_THEME_RICH_TEXT = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`;
 
 const OVERWRITE_TYPE_BORDER_TEXT_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
 const OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
@@ -67,12 +57,6 @@ const VariantThemeStyles = `
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER} {
     padding: ${Spacing.md};
   }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_DARK_THEME_RICH_TEXT}`]: Text.RichTextDark,
-    },
-  })}
 
   @media (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
@@ -134,77 +118,6 @@ const VariantWithImageStyles = `
 `;
 
 // prettier-ignore
-const TextContainerStyles = `
-  @media (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} {
-      max-width: calc(100% - 110px);
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarger,
-      },
-    })}
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarger,
-      },
-    })}
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansExtraLarge,
-      },
-    })}
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansExtraLarge,
-      },
-    })}
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansSmall,
-      },
-    })}
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE} *`]: SansSmall,
-      },
-    })}
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: Typography.SansMedium,
-      },
-    })}
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} * {
-      line-height: 1.375em;
-    }
-  }
-`;
-
-// prettier-ignore
 const ImageContainerStyles = `
   @media (max-width: ${MEDIUM - 1}px) {
     .${ELEMENT_BLOCK_IMAGE_CONTAINER} {
@@ -227,8 +140,8 @@ const STYLES_BLOCK_CONTAINER = `
     width: 100%;
   }
 
-  ${TextContainerStyles}
   ${ImageContainerStyles}
+  ${ScalingFontBlock.Styles}
   ${VariantWithImageStyles}
   ${VariantThemeStyles}
   ${VariantAlignedStyles}
@@ -258,7 +171,9 @@ const CreateBlockContainer = ({
   }
 
   if (textContainer) {
-    wrapper.appendChild(textContainer);
+    const scalingFontContainer = ScalingFontBlock.CreateElement();
+    scalingFontContainer.appendChild(textContainer);
+    wrapper.appendChild(scalingFontContainer);
   }
 
   if (personContainer) {

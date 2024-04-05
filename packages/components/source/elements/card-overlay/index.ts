@@ -5,6 +5,7 @@ import LockupTextContainer, {
   TypeTextLockupSmall,
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
 } from '../lockup/text-small';
+import ScalingFontBlock from '../block/scaling-font-container';
 
 type TypeCardOverlayElement = TypeTextLockupSmall;
 
@@ -96,9 +97,12 @@ const CreateCardOverlayElement = (element: TypeCardOverlayElement) => {
   const elementWrapper = document.createElement('div');
   const content = LockupTextContainer.CreateElement(element);
   const ctaIcon = CtaIcon.CreateElement(element);
+  const scalingFontContainer = ScalingFontBlock.CreateElement();
+
+  scalingFontContainer.appendChild(content);
 
   elementWrapper.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER);
-  elementWrapper.appendChild(content);
+  elementWrapper.appendChild(scalingFontContainer);
   if (ctaIcon) elementWrapper.appendChild(ctaIcon);
 
   if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);

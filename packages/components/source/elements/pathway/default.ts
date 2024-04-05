@@ -77,7 +77,7 @@ const OverwriteVarationTheme = `
   }
 
   ${OVERWRITE_THEME_LIGHT_BACKGROUND} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${Colors.gray.light};
   }
 
   ${OVERWRITE_THEME_MARYLAND_BACKGROUND} {

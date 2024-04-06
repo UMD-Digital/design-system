@@ -84,7 +84,6 @@ export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
       text: CreateText({ text: entry.summary }),
       eventDetails: EventElements.Meta.CreateElement({
         ...entry,
-        isLayoutVeritcal: false,
       }),
       isAligned: false,
     }),
@@ -98,7 +97,6 @@ export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
       text: CreateText({ text: entry.summary }),
       eventDetails: EventElements.Meta.CreateElement({
         ...entry,
-        isLayoutVeritcal: false,
       }),
       dateBlock: EventElements.Sign.CreateElement(entry),
     }),

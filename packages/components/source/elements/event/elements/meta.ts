@@ -24,9 +24,7 @@ type EventType = DateInformaitonType & {
   location: LocationType;
 };
 
-export type TypeMetaDisplay = EventType & {
-  isLayoutVeritcal?: boolean;
-};
+export type TypeMetaDisplay = EventType;
 
 const { SansSmaller } = Typography;
 const { Colors, Spacing } = Tokens;
@@ -44,19 +42,6 @@ const ELEMENT_EVENTS_DATE_ROW_ICON = 'event-date-row-icon';
 const ELEMENT_EVENTS_DATE_ROW_TEXT = 'event-date-row-text';
 const ELEMENT_EVENTS_DATE_ROW_DATE = 'event-date-row-date';
 const ELEMENT_EVENTS_DATE_ROW_LOCATION = 'event-date-row-location';
-
-// prettier-ignore
-const VariationLayoutHorizontal = `
-  .${ELEMENT_EVENTS_DATE_ROW}[layout="horizontal"] .${ELEMENT_EVENTS_DATE_ROW_DATE} {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .${ELEMENT_EVENTS_DATE_ROW}[layout="horizontal"] .${ELEMENT_EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
-    margin-top: 3px;
-    margin-left: 0;
-  }
-`
 
 // prettier-ignore
 const DateRow = `
@@ -150,7 +135,6 @@ const STYLES_EVENT_META = `
 
   ${DateRow}
   ${LocationRow}
-  ${VariationLayoutHorizontal}
 `;
 
 const MakeDetailItem = ({
@@ -238,7 +222,7 @@ const RowDateInfo = (info: TypeMetaDisplay) => {
 const CreateEventMetaElement = (info: TypeMetaDisplay) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const { location, isLayoutVeritcal = true } = info;
+  const { location } = info;
   const dateRow = RowDateInfo(info);
 
   wrapper.classList.add(ELEMENT_EVENTS_DATE_ROW_WRAPPER);
@@ -256,8 +240,6 @@ const CreateEventMetaElement = (info: TypeMetaDisplay) => {
 
   container.appendChild(wrapper);
   container.classList.add(ELEMENT_EVENTS_DATE_ROW);
-
-  if (isLayoutVeritcal) container.setAttribute('layout', 'horizontal');
 
   return container;
 };

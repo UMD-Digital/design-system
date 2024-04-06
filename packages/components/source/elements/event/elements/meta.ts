@@ -104,9 +104,13 @@ const STYLES_EVENT_META = `
   }
 
   .${ELEMENT_EVENTS_DATE_ROW_WRAPPER} {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 5px 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .${ELEMENT_EVENTS_DATE_ROW_WRAPPER} > * {
+    margin-right: 5px;
+    margin-top: 5px;
   }
 
   ${ConvertJSSObjectToStyles({

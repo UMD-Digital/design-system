@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetIcon } from 'utilities';
 
-type TypeCardOverlayCtaIcon = {
+export type TypeCardOverlayCtaIcon = {
   ctaIcon?: HTMLElement | null;
   theme?: string | null;
 };

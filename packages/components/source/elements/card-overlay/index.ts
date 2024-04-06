@@ -1,13 +1,13 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import CtaIcon from './icon-cta';
+import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
 import LockupTextContainer, {
   TypeTextLockupSmall,
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
 } from '../lockup/text-small';
 import ScalingFontBlock from '../block/scaling-font-container';
 
-type TypeCardOverlayElement = TypeTextLockupSmall;
+type TypeCardOverlayElement = TypeCardOverlayCtaIcon & TypeTextLockupSmall;
 
 const { Spacing, Colors } = Tokens;
 const { SansLarger, SansExtraLarge } = Typography;

@@ -45,35 +45,35 @@ const GetImage = ({ element }: { element: UMDCardElement }) => {
   return null;
 };
 
-const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
+const MakeCardData = ({ element }: { element: UMDCardElement }) => {
+  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
   const { EYEBROW, HEADLINE, TEXT, ACTIONS } = element._slots;
 
-  const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
-  const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const isAligned = alignmentAttr === 'true';
-  const isBordered = borderAttr === 'true';
-  const isDisplayList =
-    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
-
-  if (isDisplayList) {
-    return CardList.CreateElement({
-      image: GetImage({ element }),
-      eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-      headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-      text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-      actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-      theme,
-    });
-  }
-
-  return CardBlock.CreateElement({
+  return {
     image: GetImage({ element }),
     eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
     actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
+  };
+};
+
+const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
+  const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
+  const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
+
+  const isAligned = alignmentAttr === 'true';
+  const isBordered = borderAttr === 'true';
+  const isDisplayList =
+    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
+
+  if (isDisplayList) {
+    return CardList.CreateElement(MakeCardData({ element }));
+  }
+
+  return CardBlock.CreateElement({
+    ...MakeCardData({ element }),
     isAligned,
     isBordered,
   });

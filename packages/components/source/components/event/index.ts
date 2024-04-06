@@ -123,9 +123,21 @@ const MakeEventDetailsData = ({
   return obj;
 };
 
-const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
+const MakeCommonData = ({ element }: { element: UMDCardElement }) => {
   const { HEADLINE, TEXT, CTA, START_DATE_ISO, END_DATE_ISO } = element._slots;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+
+  return {
+    image: GetImage({ element }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    actions: SlotWithDefaultStyling({ element, slotRef: CTA }),
+    theme,
+  };
+};
+
+const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
+  const { START_DATE_ISO, END_DATE_ISO } = element._slots;
   const isDisplayList =
     element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
   const startDate = MakeDateSlot({
@@ -144,29 +156,21 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
 
   if (isDisplayList) {
     return EventList.CreateElement({
-      image: GetImage({ element }),
-      headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-      text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-      actions: SlotWithDefaultStyling({ element, slotRef: CTA }),
+      ...MakeCommonData({ element }),
       eventDetails: EventElements.Meta.CreateElement(
         MakeEventDetailsData({ element, startDate, endDate }),
       ),
       dateBlock: EventElements.Sign.CreateElement(
         MakeEventDetailsData({ element, startDate, endDate }),
       ),
-      theme,
     });
   }
 
   return EventBlock.CreateElement({
-    image: GetImage({ element }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    actions: SlotWithDefaultStyling({ element, slotRef: CTA }),
+    ...MakeCommonData({ element }),
     eventDetails: EventElements.Meta.CreateElement(
       MakeEventDetailsData({ element, startDate, endDate }),
     ),
-    theme,
   });
 };
 

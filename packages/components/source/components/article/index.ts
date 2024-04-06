@@ -46,34 +46,11 @@ const GetImage = ({ element }: { element: UMDArticleElement }) => {
   return null;
 };
 
-export const CreateShadowDom = ({
-  element,
-}: {
-  element: UMDArticleElement;
-}) => {
-  const { EYEBROW, HEADLINE, TEXT, DATE, ACTIONS } = element._slots;
-
-  const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
-  const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
+const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const isAligned = alignmentAttr === 'true';
-  const isBordered = borderAttr === 'true';
-  const isDisplayList =
-    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE } = element._slots;
 
-  if (isDisplayList) {
-    return CardList.CreateElement({
-      image: GetImage({ element }),
-      eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-      headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-      text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-      date: SlotWithDefaultStyling({ element, slotRef: DATE }),
-      actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-      theme,
-    });
-  }
-
-  return CardBlock.CreateElement({
+  return {
     image: GetImage({ element }),
     eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
@@ -81,6 +58,27 @@ export const CreateShadowDom = ({
     date: SlotWithDefaultStyling({ element, slotRef: DATE }),
     actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
+  };
+};
+
+export const CreateShadowDom = ({
+  element,
+}: {
+  element: UMDArticleElement;
+}) => {
+  const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
+  const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
+  const isAligned = alignmentAttr === 'true';
+  const isBordered = borderAttr === 'true';
+  const isDisplayList =
+    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
+
+  if (isDisplayList) {
+    return CardList.CreateElement(MakeArticleData({ element }));
+  }
+
+  return CardBlock.CreateElement({
+    ...MakeArticleData({ element }),
     isAligned,
     isBordered,
   });

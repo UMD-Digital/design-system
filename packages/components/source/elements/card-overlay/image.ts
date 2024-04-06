@@ -1,7 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import BlockImageOverlay, {
   TypeBlockOverlayImageElement,
-  ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER,
 } from '../block/overlay';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
 import { ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER } from '../lockup/text-small';

@@ -19,7 +19,7 @@ const ELEMENT_BLOCK_OVERLAY_IMAGE_DECLARATION =
 export const ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER =
   'block-overlay-image-container';
 const ELEMENT_BLOCK_OVERLAY_IMAGE_WRAPPER = 'block-overlay-image-wrapper';
-const ELEMENT_IMAGE_WRAPPER = 'block-overlay-image';
+export const ELEMENT_BLOCK_OVERLAY_IMAGE = 'block-overlay-image';
 const ELEMENT_TINT_OVERLAY = 'block-overlay-image-tint';
 
 // prettier-ignore
@@ -47,7 +47,7 @@ const ImageTint = `
 
 // prettier-ignore
 const ImageStyles = `
-  .${ELEMENT_IMAGE_WRAPPER} {
+  .${ELEMENT_BLOCK_OVERLAY_IMAGE} {
     position: absolute;
     top: 0;
     left: 0;
@@ -57,8 +57,8 @@ const ImageStyles = `
     display: flex;
   }
 
-  .${ELEMENT_IMAGE_WRAPPER} img,
-  .${ELEMENT_IMAGE_WRAPPER} canvas {
+  .${ELEMENT_BLOCK_OVERLAY_IMAGE} img,
+  .${ELEMENT_BLOCK_OVERLAY_IMAGE} canvas {
     position: absolute;
     top: 0;
     left: 0;
@@ -70,12 +70,12 @@ const ImageStyles = `
     transition: transform 0.5s ease-in-out;
   }
 
-  .${ELEMENT_IMAGE_WRAPPER} canvas {
+  .${ELEMENT_BLOCK_OVERLAY_IMAGE} canvas {
     display: block;
     opacity: 0;
   }
 
-  .${ELEMENT_IMAGE_WRAPPER} button {
+  .${ELEMENT_BLOCK_OVERLAY_IMAGE} button {
     position: absolute;
     top: 0;
     right: 0;
@@ -88,7 +88,7 @@ const ImageStyles = `
     justify-content: center;
   }
 
-  .${ELEMENT_IMAGE_WRAPPER} button svg {
+  .${ELEMENT_BLOCK_OVERLAY_IMAGE} button svg {
     fill: white;
     width: 24px;
   }
@@ -167,7 +167,7 @@ const CreateBlockOverlayElement = (element: TypeBlockOverlayImageElement) => {
   };
 
   tintOverlay.classList.add(ELEMENT_TINT_OVERLAY);
-  imageWrapper.classList.add(ELEMENT_IMAGE_WRAPPER);
+  imageWrapper.classList.add(ELEMENT_BLOCK_OVERLAY_IMAGE);
   elementWrapper.classList.add(ELEMENT_BLOCK_OVERLAY_IMAGE_WRAPPER);
 
   scalingFontContainer.appendChild(content);

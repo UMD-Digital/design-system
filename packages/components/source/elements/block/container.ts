@@ -15,7 +15,7 @@ type TypeBlockContainerProps = TypeBlockContainer & {
   personContainer?: HTMLDivElement | null;
 };
 
-const { Colors, Spacing } = Tokens;
+const { Colors, Spacing, MaxWidth } = Tokens;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_ALIGNED = 'aligned';
@@ -133,7 +133,7 @@ const ImageContainerStyles = `
 const STYLES_BLOCK_CONTAINER = `
   .${ELEMENT_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: 680px;
+    max-width: ${MaxWidth.smallest};
   }
 
   .${ELEMENT_BLOCK_CONTAINER_WRAPPER} {

@@ -24,16 +24,18 @@ type EventType = DateInformaitonType & {
   location: LocationType;
 };
 
-export type TypeMetaDisplay = EventType;
+export type TypeMetaDisplay = EventType & {
+  theme?: string | null;
+};
 
 const { SansSmaller } = Typography;
 const { Colors, Spacing } = Tokens;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
-const BREAKPOINTS = {
-  MOBILE: 400,
-};
+const MOBILE = 400;
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
 
 const ELEMENT_NAME = 'umd-event-meta';
 const ELEMENT_EVENTS_DATE_ROW = 'event-date-row';
@@ -43,9 +45,22 @@ const ELEMENT_EVENTS_DATE_ROW_TEXT = 'event-date-row-text';
 const ELEMENT_EVENTS_DATE_ROW_DATE = 'event-date-row-date';
 const ELEMENT_EVENTS_DATE_ROW_LOCATION = 'event-date-row-location';
 
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_EVENTS_DATE_ROW}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
+// prettier-ignore
+const OverwriteThemeDark = `
+  ${OVERWRITE_THEME_DARK_CONTAINER} svg path {
+     fill: ${Colors.white};
+  }
+
+  ${OVERWRITE_THEME_DARK_CONTAINER} * {
+    color: ${Colors.white};
+ }
+`;
+
 // prettier-ignore
 const DateRow = `
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${ELEMENT_EVENTS_DATE_ROW_DATE} {
       display: flex;
       align-items: center;
@@ -57,13 +72,13 @@ const DateRow = `
     align-items: center;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${ELEMENT_EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
       margin-left: ${Spacing.xs};
     }
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.MOBILE - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MOBILE - 1}px) {
     .${ELEMENT_EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
       margin-top: 3px;
     }
@@ -115,7 +130,7 @@ const STYLES_EVENT_META = `
     align-items: center;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${ELEMENT_EVENTS_DATE_ROW_ICON} {
       width: 20px;
     }
@@ -126,7 +141,7 @@ const STYLES_EVENT_META = `
     height: 12px;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${BREAKPOINTS.MOBILE}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${ELEMENT_EVENTS_DATE_ROW_ICON} svg {
       width: 14px;
       height: 14px;
@@ -135,6 +150,7 @@ const STYLES_EVENT_META = `
 
   ${DateRow}
   ${LocationRow}
+  ${OverwriteThemeDark}
 `;
 
 const MakeDetailItem = ({
@@ -220,9 +236,9 @@ const RowDateInfo = (info: TypeMetaDisplay) => {
 };
 
 const CreateEventMetaElement = (info: TypeMetaDisplay) => {
+  const { location, theme } = info;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const { location } = info;
   const dateRow = RowDateInfo(info);
 
   wrapper.classList.add(ELEMENT_EVENTS_DATE_ROW_WRAPPER);
@@ -240,6 +256,7 @@ const CreateEventMetaElement = (info: TypeMetaDisplay) => {
 
   container.appendChild(wrapper);
   container.classList.add(ELEMENT_EVENTS_DATE_ROW);
+  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
   return container;
 };

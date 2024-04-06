@@ -4,7 +4,13 @@ declare global {
   }
 }
 
-import { EventBlock, EventFeature, EventList, EventElements } from 'elements';
+import {
+  EventBlock,
+  EventElements,
+  EventFeature,
+  EventList,
+  EventPromo,
+} from 'elements';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
@@ -15,6 +21,7 @@ const ATTRIBUTE_DISPLAY = 'display';
 const THEME_LIGHT = 'light';
 const DISPLAY_LIST = 'list';
 const DISPLAY_FEATURE = 'feature';
+const DISPLAY_PROMO = 'promo';
 const SLOTS = {
   IMAGE: 'image',
   HEADLINE: 'headline',
@@ -35,6 +42,7 @@ const styles = `
   ${EventBlock.Styles}
   ${EventFeature.Styles}
   ${EventList.Styles}
+  ${EventPromo.Styles}
 `;
 
 const MakeDateSlot = ({
@@ -131,6 +139,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   const displayAttribute = element.getAttribute(ATTRIBUTE_DISPLAY);
   const isDisplayList = displayAttribute === DISPLAY_LIST;
   const isDisplayFeature = displayAttribute === DISPLAY_FEATURE;
+  const isDisplayPromo = displayAttribute === DISPLAY_PROMO;
   const startDate = MakeDateSlot({
     element,
     slot: START_DATE_ISO,
@@ -151,6 +160,19 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
       eventDetails: EventElements.Meta.CreateElement(
         MakeEventDetailsData({ element, startDate, endDate }),
       ),
+      dateSign: EventElements.Sign.CreateElement(
+        MakeEventDetailsData({ element, startDate, endDate }),
+      ),
+    });
+  }
+
+  if (isDisplayPromo) {
+    return EventPromo.CreateElement({
+      ...MakeCommonData({ element }),
+      eventDetails: EventElements.Meta.CreateElement({
+        ...MakeEventDetailsData({ element, startDate, endDate }),
+        theme: 'dark',
+      }),
       dateSign: EventElements.Sign.CreateElement(
         MakeEventDetailsData({ element, startDate, endDate }),
       ),

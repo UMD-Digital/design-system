@@ -34,24 +34,12 @@ const styles = `
   ${CardList.Styles}
 `;
 
-const GetImage = ({ element }: { element: UMDArticleElement }) => {
-  const { IMAGE } = element._slots;
-  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
-
-  if (isProperImage && slotImage) {
-    return slotImage.cloneNode(true) as HTMLImageElement;
-  }
-
-  return null;
-};
-
 const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE } = element._slots;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, IMAGE } = element._slots;
 
   return {
-    image: GetImage({ element }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
     eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
@@ -89,7 +77,7 @@ export class UMDArticleElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

@@ -21,18 +21,6 @@ export const ComponentStyles = `
   ${PersonTabular.Styles}
 `;
 
-const GetImage = ({ element }: { element: UMDPersonElement }) => {
-  const { IMAGE } = element._slots;
-  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
-
-  if (isProperImage && slotImage) {
-    return slotImage.cloneNode(true) as HTMLImageElement;
-  }
-
-  return null;
-};
-
 const MakePersonData = ({ element }: { element: UMDPersonElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
   const {
@@ -40,6 +28,7 @@ const MakePersonData = ({ element }: { element: UMDPersonElement }) => {
     JOB_TITLE,
     ASSOCIATION,
     PRONOUNS,
+    IMAGE,
     PHONE,
     EMAIL,
     LINKEDIN,
@@ -50,7 +39,7 @@ const MakePersonData = ({ element }: { element: UMDPersonElement }) => {
   } = element._slots;
 
   return {
-    image: GetImage({ element }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
     name: SlotWithDefaultStyling({ element, slotRef: NAME }),
     job: SlotWithDefaultStyling({ element, slotRef: JOB_TITLE }),
     association: SlotWithDefaultStyling({ element, slotRef: ASSOCIATION }),

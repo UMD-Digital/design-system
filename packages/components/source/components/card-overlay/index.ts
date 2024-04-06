@@ -36,19 +36,6 @@ const styles = `
   ${CardOverlayImage.Styles}
 `;
 
-const GetImage = ({ element }: { element: UMDCardOverlayElement }) => {
-  const { IMAGE } = element._slots;
-
-  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
-
-  if (isProperImage && slotImage) {
-    return slotImage.cloneNode(true) as HTMLImageElement;
-  }
-
-  return null;
-};
-
 const MakeOverlayContent = ({
   element,
 }: {
@@ -73,12 +60,13 @@ export const CreateShadowDom = ({
 }: {
   element: UMDCardOverlayElement;
 }) => {
+  const { IMAGE } = element._slots;
   const type = element.getAttribute(ATTRIBUTE_TYPE);
 
   if (type === TYPE_IMAGE) {
     const ImageOverlay = CardOverlayImage.CreateElement({
       ...MakeOverlayContent({ element }),
-      image: GetImage({ element }),
+      image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
     });
 
     if (ImageOverlay) return ImageOverlay;

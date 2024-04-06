@@ -1,3 +1,5 @@
+import { SlotWithDefaultStyling } from './create';
+
 const ImageAlt = ({
   element,
   slotRef,
@@ -26,6 +28,24 @@ const ImageAlt = ({
   return true;
 };
 
+const ImageSlot = ({
+  element,
+  ImageSlot,
+}: {
+  element: HTMLElement;
+  ImageSlot: string;
+}) => {
+  const isProperImage = ImageAlt({ element, slotRef: ImageSlot });
+  const slotImage = SlotWithDefaultStyling({ element, slotRef: ImageSlot });
+
+  if (isProperImage && slotImage) {
+    return slotImage.cloneNode(true) as HTMLImageElement;
+  }
+
+  return null;
+};
+
 export default {
   ImageAlt,
+  ImageSlot,
 };

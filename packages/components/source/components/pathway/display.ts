@@ -26,24 +26,12 @@ export const ComponentStyles = `
   ${PathwayElements.Text.Styles}
 `;
 
-const GetImage = ({ element }: { element: UMDPathwayElement }) => {
-  const { IMAGE } = element._slots;
-  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
-
-  if (isProperImage && slotImage) {
-    return slotImage.cloneNode(true) as HTMLImageElement;
-  }
-
-  return null;
-};
-
 export const CreateShadowDom = ({
   element,
 }: {
   element: UMDPathwayElement;
 }) => {
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS } = element._slots;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, IMAGE } = element._slots;
   const isImageRight =
     element.getAttribute(ATTRIBUTE_IMAGE_POSITION) !== 'left';
   const isImageScaled =
@@ -66,7 +54,7 @@ export const CreateShadowDom = ({
       headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
       text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
       action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-      image: GetImage({ element }),
+      image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
     });
   }
 
@@ -78,6 +66,6 @@ export const CreateShadowDom = ({
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
     action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-    image: GetImage({ element }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
   });
 };

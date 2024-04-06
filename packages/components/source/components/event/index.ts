@@ -35,18 +35,6 @@ const styles = `
   ${EventList.Styles}
 `;
 
-const GetImage = ({ element }: { element: UMDCardElement }) => {
-  const { IMAGE } = element._slots;
-  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
-
-  if (isProperImage && slotImage) {
-    return slotImage.cloneNode(true) as HTMLImageElement;
-  }
-
-  return null;
-};
-
 const MakeDateSlot = ({
   element,
   slot,
@@ -128,7 +116,7 @@ const MakeCommonData = ({ element }: { element: UMDCardElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
 
   return {
-    image: GetImage({ element }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: SLOTS.IMAGE }),
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
     actions: SlotWithDefaultStyling({ element, slotRef: CTA }),

@@ -33,24 +33,12 @@ const styles = `
   ${CardList.Styles}
 `;
 
-const GetImage = ({ element }: { element: UMDCardElement }) => {
-  const { IMAGE } = element._slots;
-  const isProperImage = MarkupValidate.ImageAlt({ element, slotRef: IMAGE });
-  const slotImage = SlotWithDefaultStyling({ element, slotRef: IMAGE });
-
-  if (isProperImage && slotImage) {
-    return slotImage.cloneNode(true) as HTMLImageElement;
-  }
-
-  return null;
-};
-
 const MakeCardData = ({ element }: { element: UMDCardElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS } = element._slots;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, IMAGE } = element._slots;
 
   return {
-    image: GetImage({ element }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
     eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),

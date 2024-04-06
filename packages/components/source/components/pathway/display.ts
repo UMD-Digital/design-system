@@ -26,14 +26,26 @@ export const ComponentStyles = `
   ${PathwayElements.Text.Styles}
 `;
 
+const MakeCommonData = ({ element }: { element: UMDPathwayElement }) => {
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, IMAGE } = element._slots;
+  const isImageRight =
+    element.getAttribute(ATTRIBUTE_IMAGE_POSITION) !== 'left';
+
+  return {
+    isImageRight,
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+  };
+};
+
 export const CreateShadowDom = ({
   element,
 }: {
   element: UMDPathwayElement;
 }) => {
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, IMAGE } = element._slots;
-  const isImageRight =
-    element.getAttribute(ATTRIBUTE_IMAGE_POSITION) !== 'left';
   const isImageScaled =
     element.getAttribute(ATTRIBUTE_IMAGE_SCALED) !== 'false';
   const type = element.getAttribute(ATTRIBUTE_TYPE);
@@ -48,24 +60,13 @@ export const CreateShadowDom = ({
 
   if (type === TYPE_HERO) {
     return PathwayHero.CreateElement({
-      theme,
-      isImageRight,
-      eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-      headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-      text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-      action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-      image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+      ...MakeCommonData({ element }),
     });
   }
 
   return PathwayDefault.CreateElement({
     theme,
-    isImageRight,
     isImageScaled,
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+    ...MakeCommonData({ element }),
   });
 };

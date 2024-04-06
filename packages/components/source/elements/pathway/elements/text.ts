@@ -11,7 +11,7 @@ export type TypePathwayTextContainer = {
   headline: HTMLElement | null;
   text: HTMLElement | null;
   action: HTMLElement | null;
-  theme: string | null;
+  theme?: string | null;
 };
 
 const { Spacing, Colors, FontSize } = Tokens;

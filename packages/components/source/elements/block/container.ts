@@ -151,7 +151,6 @@ const STYLES_BLOCK_CONTAINER = `
 const CreateBlockContainer = ({
   imageContainer,
   textContainer,
-  personContainer,
   theme,
   isAligned,
   isBordered,
@@ -174,10 +173,6 @@ const CreateBlockContainer = ({
     const scalingFontContainer = ScalingFontBlock.CreateElement();
     scalingFontContainer.appendChild(textContainer);
     wrapper.appendChild(scalingFontContainer);
-  }
-
-  if (personContainer) {
-    wrapper.appendChild(personContainer);
   }
 
   container.appendChild(wrapper);

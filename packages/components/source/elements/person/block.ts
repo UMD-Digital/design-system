@@ -1,18 +1,13 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetIcon } from 'utilities';
-import BlockContainer, {
-  ELEMENT_BLOCK_CONTAINER,
-  TypeBlockContainer,
-} from '../block/container';
 import BlockImageContainer, {
   ELEMENT_BLOCK_IMAGE_CONTAINER,
 } from '../block/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
 
-type TypeBlockPersonProps = TypePersonProps &
-  TypeBlockContainer & {
-    image?: HTMLImageElement | null;
-  };
+type TypeBlockPersonProps = TypePersonProps & {
+  image?: HTMLImageElement | null;
+};
 
 const { Spacing, Colors } = Tokens;
 
@@ -33,11 +28,11 @@ const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_BLOCK_CONTAINER} .${ELEMENT
 
 const OVERWRITE_DARK_THEME_PERSON_CONTAINER = `.${ELEMENT_PERSON_BLOCK_CONTAINER}${IS_THEME_DARK}`;
 
-const OVERWRITE_DARK_THEME_BLOCK_CONTAINER = `${OVERWRITE_DARK_THEME_PERSON_CONTAINER} .${ELEMENT_BLOCK_CONTAINER}`;
+const OVERWRITE_DARK_THEME_WRAPPER = `${OVERWRITE_DARK_THEME_PERSON_CONTAINER} .${ELEMENT_PERSON_BLOCK_WRAPPER}`;
 const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${OVERWRITE_DARK_THEME_PERSON_CONTAINER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
 
 const OverwriteThemeDarkStyles = `
-  ${OVERWRITE_DARK_THEME_BLOCK_CONTAINER} {
+  ${OVERWRITE_DARK_THEME_WRAPPER} {
     background-color: ${Colors.black};
   }
 
@@ -56,14 +51,7 @@ const OverwriteImagesStyles = `
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
-      float: none;
       width: 100%;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} {
-      order: 1;
     }
   }
 
@@ -101,7 +89,6 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
   }
 
   ${BlockImageContainer.Styles}
-  ${BlockContainer.Styles}
   ${PersonTextContainer.Styles}
   ${WrapperStyles}
   ${OverwriteImagesStyles}
@@ -109,29 +96,18 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
 `;
 
 const CreatePersonBlockElement = (element: TypeBlockPersonProps) => {
-  const {
-    theme,
-    image: providedImage,
-    isAligned = false,
-    isBordered = false,
-  } = element;
-  const personContainer = PersonTextContainer.CreateElement(element);
+  const { theme, image: providedImage } = element;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
+  const personContainer = PersonTextContainer.CreateElement(element);
   const imageContainer = BlockImageContainer.CreateElement({
     image: providedImage || AssetIcon.PERSON,
-  });
-  const container = BlockContainer.CreateElement({
-    personContainer,
-    imageContainer,
-    theme,
-    isAligned,
-    isBordered,
   });
 
   if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
 
-  elementWrapper.appendChild(container);
+  elementWrapper.appendChild(imageContainer);
+  elementWrapper.appendChild(personContainer);
   elementWrapper.classList.add(ELEMENT_PERSON_BLOCK_WRAPPER);
 
   elementContainer.appendChild(elementWrapper);

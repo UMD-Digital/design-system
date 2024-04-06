@@ -98,6 +98,6 @@ export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
       eventDetails: EventElements.Meta.CreateElement({
         ...entry,
       }),
-      dateBlock: EventElements.Sign.CreateElement(entry),
+      dateSign: EventElements.Sign.CreateElement(entry),
     }),
   );

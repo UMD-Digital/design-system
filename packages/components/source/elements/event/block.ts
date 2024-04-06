@@ -6,7 +6,7 @@ import LockupTextContainer, {
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
 } from '../lockup/text-small';
 
-type TypeBlockEventProps = TypeTextLockupSmall &
+type TypeEventBlockProps = TypeTextLockupSmall &
   TypeBlockContainer & {
     image?: HTMLImageElement | null;
     eventDetails: HTMLElement;
@@ -14,16 +14,12 @@ type TypeBlockEventProps = TypeTextLockupSmall &
 
 const { Spacing } = Tokens;
 
-const ELEMENT_NAME = 'umd-block-event';
+const ELEMENT_NAME = 'umd-event-block';
 const ELEMENT_EVENT_BLOCK_CONTAINER = 'event-block-container';
 const ELEMENT_EVENT_BLOCK_DETAILS = 'event-block-details-wrapper';
 
 // prettier-ignore
 const DetailsRowStyles = `
-  .${ELEMENT_EVENT_BLOCK_DETAILS} {
-    display: block;
-  }
-
   * + .${ELEMENT_EVENT_BLOCK_DETAILS} {
     margin-top: ${Spacing.min};
     display: block;
@@ -42,7 +38,7 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
   ${DetailsRowStyles}
 `;
 
-const CreateEventBlockElement = (element: TypeBlockEventProps) => {
+const CreateEventBlockElement = (element: TypeEventBlockProps) => {
   const {
     theme,
     image,

@@ -4,6 +4,7 @@ import CardList from './card/list';
 import CardOverlay from './card-overlay';
 import CardOverlayImage from './card-overlay/image';
 import EventBlock from './event/block';
+import EventFeature from './event/feature';
 import EventList from './event/list';
 import EventElements from './event/elements';
 import HeroDefault from './hero/default';
@@ -34,6 +35,7 @@ export {
   CardOverlay,
   CardOverlayImage,
   EventBlock,
+  EventFeature,
   EventList,
   EventElements,
   HeroDefault,

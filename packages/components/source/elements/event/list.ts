@@ -8,9 +8,9 @@ import ListContainer, {
   ELEMENT_LIST_CONTAINER_WRAPPER,
 } from '../list/container';
 
-type TypeListEventProps = TypeTextLockupSmall & {
+type TypeEventListProps = TypeTextLockupSmall & {
   image?: HTMLImageElement | null;
-  dateBlock: HTMLElement;
+  dateSign: HTMLElement;
   eventDetails: HTMLElement;
 };
 
@@ -19,7 +19,7 @@ const { Spacing } = Tokens;
 const SMALL = 400;
 const MEDIUM = 500;
 
-const ELEMENT_NAME = 'umd-list-event';
+const ELEMENT_NAME = 'umd-event-list';
 const ELEMENT_EVENT_LIST_CONTAINER = 'event-list-container';
 const ELEMENT_EVENT_LIST_DATE_BLOCK = 'event-list-date-block';
 const ELEMENT_EVENT_LIST_DETAILS = 'event-list-details';
@@ -72,8 +72,8 @@ const STYLES_EVENT_LIST_ELEMENT = `
   ${DetailsRowStyles}
 `;
 
-const CreateEventListElement = (element: TypeListEventProps) => {
-  const { theme, image, dateBlock, eventDetails } = element;
+const CreateEventListElement = (element: TypeEventListProps) => {
+  const { theme, image, dateSign, eventDetails } = element;
   const elementContainer = document.createElement('div');
   const textContainer = LockupTextContainer.CreateElement(element);
   const imageContainer = image
@@ -85,7 +85,7 @@ const CreateEventListElement = (element: TypeListEventProps) => {
     theme,
   });
 
-  if (dateBlock) {
+  if (dateSign) {
     const containerWrapper = container.querySelector(
       `.${ELEMENT_LIST_CONTAINER_WRAPPER}`,
     ) as HTMLElement;
@@ -93,7 +93,7 @@ const CreateEventListElement = (element: TypeListEventProps) => {
       const dateBlockContainer = document.createElement('div');
 
       dateBlockContainer.classList.add(ELEMENT_EVENT_LIST_DATE_BLOCK);
-      dateBlockContainer.appendChild(dateBlock);
+      dateBlockContainer.appendChild(dateSign);
       containerWrapper.prepend(dateBlockContainer);
     }
   }

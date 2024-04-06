@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { EventBlock, EventList, EventElements } from 'elements';
+import { EventBlock, EventFeature, EventList, EventElements } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
@@ -14,6 +14,7 @@ const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_DISPLAY = 'display';
 const THEME_LIGHT = 'light';
 const DISPLAY_LIST = 'list';
+const DISPLAY_FEATURE = 'feature';
 const SLOTS = {
   IMAGE: 'image',
   HEADLINE: 'headline',
@@ -32,6 +33,7 @@ const styles = `
   ${EventElements.Meta.Styles}
   ${EventElements.Sign.Styles}
   ${EventBlock.Styles}
+  ${EventFeature.Styles}
   ${EventList.Styles}
 `;
 
@@ -112,22 +114,23 @@ const MakeEventDetailsData = ({
 };
 
 const MakeCommonData = ({ element }: { element: UMDCardElement }) => {
-  const { HEADLINE, TEXT, CTA, START_DATE_ISO, END_DATE_ISO } = element._slots;
+  const { HEADLINE, TEXT, ACTIONS } = element._slots;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: SLOTS.IMAGE }),
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    actions: SlotWithDefaultStyling({ element, slotRef: CTA }),
+    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
   };
 };
 
 const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   const { START_DATE_ISO, END_DATE_ISO } = element._slots;
-  const isDisplayList =
-    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
+  const displayAttribute = element.getAttribute(ATTRIBUTE_DISPLAY);
+  const isDisplayList = displayAttribute === DISPLAY_LIST;
+  const isDisplayFeature = displayAttribute === DISPLAY_FEATURE;
   const startDate = MakeDateSlot({
     element,
     slot: START_DATE_ISO,
@@ -142,13 +145,25 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     return null;
   }
 
+  if (isDisplayFeature) {
+    return EventFeature.CreateElement({
+      ...MakeCommonData({ element }),
+      eventDetails: EventElements.Meta.CreateElement(
+        MakeEventDetailsData({ element, startDate, endDate }),
+      ),
+      dateSign: EventElements.Sign.CreateElement(
+        MakeEventDetailsData({ element, startDate, endDate }),
+      ),
+    });
+  }
+
   if (isDisplayList) {
     return EventList.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: EventElements.Meta.CreateElement(
         MakeEventDetailsData({ element, startDate, endDate }),
       ),
-      dateBlock: EventElements.Sign.CreateElement(
+      dateSign: EventElements.Sign.CreateElement(
         MakeEventDetailsData({ element, startDate, endDate }),
       ),
     });

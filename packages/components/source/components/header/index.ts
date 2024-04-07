@@ -4,28 +4,17 @@ declare global {
   }
 }
 
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { MarkupCreate } from 'utilities';
+import { styles, CreateShadowDom } from './display';
 
-const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
+const { Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-header';
 const SLOTS = {
-  IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
-};
-const styles = `
-  :host {
-    display: block;
-  }
-`;
-
-const CreateShadowDom = ({ element }: { element: UMDHeaderElement }) => {
-  const container = document.createElement('div');
-
-  return container;
+  LOGO: 'logo',
+  NAVIGATION: 'navigation',
+  DRAWER: 'drawer',
+  UTILITY: 'utility',
 };
 
 export class UMDHeaderElement extends HTMLElement {
@@ -42,9 +31,12 @@ export class UMDHeaderElement extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log('called');
+    const element = this;
+    const { _shadow } = element;
+    const shadowElement = CreateShadowDom({ element });
 
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
+    if (!shadowElement) return;
+    _shadow.appendChild(shadowElement);
   }
 }
 

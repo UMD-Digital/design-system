@@ -10,7 +10,7 @@ type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon &
     image?: HTMLImageElement | null;
   };
 
-const { Spacing } = Tokens;
+const { Spacing, Colors } = Tokens;
 
 const ELEMENT_NAME = 'umd-card-overlay-image';
 const ATTRIBUTE_CTA_ICON = 'cta-icon';
@@ -32,6 +32,10 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   .${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
     height: 100%;
+  }
+
+  .${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} * {
+    color: ${Colors.white};
   }
 
   ${BlockImageOverlay.Styles}

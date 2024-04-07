@@ -31,6 +31,10 @@ const OverwriteThemeDark  = `
   ${OVERWRITE_THEME_DARK_WRAPPER} {
     background-color: ${Colors.gray.darker};
   }
+
+  ${OVERWRITE_THEME_DARK_WRAPPER} * {
+    color: ${Colors.white};
+  }
 `;
 
 const OverwriteHeadline = `

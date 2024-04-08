@@ -1,0 +1,54 @@
+/* Tailwind */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Dependencies */
+
+@import './dependencies/reset.css';
+
+.hero-section {
+  margin-bottom: theme(spacing.3xl);
+  margin-top: 0;
+
+  & * {
+    margin-top: 0;
+  }
+}
+
+section {
+  margin-top: theme(spacing.2xl);
+
+  &.dark-theme + section.dark-theme {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+section > * {
+  margin-top: theme(spacing.2xl);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.dark-theme {
+  background-color: theme(colors.black);
+  color: theme(colors.white);
+  padding-bottom: theme(spacing.lg);
+  padding-top: theme(spacing.lg);
+}
+
+.umd-grid-gap-four {
+  & .wide-top-left {
+    grid-column: 1 / span 1;
+    grid-row: 1;
+
+    @media (min-width: 1200px) {
+      grid-column: 1 / span 2;
+      grid-row: 1;
+    }
+  }
+}

@@ -1,0 +1,743 @@
+{% extends './layouts/election.twig' %}
+
+{% block page %}
+  <section class="hero-section">
+    <umd-element-pathway image-position="left">
+      <div slot="image">
+        <img src="/election/election-hero.png"
+          alt="Three hands holding up their voting ballots" />
+      </div>
+
+      <p slot="eyebrow">
+        Featured Story
+      </p>
+
+      <p slot="headline">
+        Five Ways to Become Civically Engaged This Election Season (And Beyond)
+      </p>
+
+      <div slot="text">
+        <p>
+          College of Educations Professor Offers Tips for Students, UMD
+          Community
+        </p>
+      </div>
+
+      <div slot="actions">
+        <umd-element-call-to-action type="secondary">
+          <a href="/" aria-label="Resources for Media">Resources for Media</a>
+        </umd-element-call-to-action>
+        <umd-element-call-to-action type="secondary">
+          <a href="/" aria-label="Resources for Terps">Resources for Terps</a>
+        </umd-element-call-to-action>
+      </div>
+    </umd-element-pathway>
+  </section>
+  <section class="dark-theme" style="padding-top: 80px">
+    <div class="umd-watermark-container">
+      <p class="umd-watermark-dark"
+        aria-hidden="true"
+        tab-index="-1"
+        role="presentation">
+        MEDIA
+      </p>
+    </div>
+    <div class="umd-lock" style="margin-top: 0">
+      <umd-element-section-intro-wide theme="dark">
+        <h2 slot="headline">
+          RESOURCES FOR THE MEDIA
+        </h2>
+
+        <umd-element-call-to-action type="secondary"
+          theme="dark"
+          slot="actions">
+          <a href="https://today.umd.edu/"><span>See all experts</span></a>
+        </umd-element-call-to-action>
+      </umd-element-section-intro-wide>
+    </div>
+
+    <div class="umd-lock">
+      <umd-element-sticky-columns>
+        <div slot="sticky-column">
+          <umd-element-card-overlay type="image">
+            <img src="/person-4.jpg"
+              alt="Portrait of Marcus Hendricks"
+              slot="image" />
+
+            <p class="umd-sans-extralarge" slot="headline">
+              <a href="https://provost.umd.edu/news/working-together-to-advance-the-public-good"
+                class="umd-slidein-underline-white">
+                <span aria-hidden="true">Marcus Hendricks</span>
+                <span class="sr-only">Image of Marcus Hendricks</span>
+              </a>
+            </p>
+
+            <div slot="text">
+              <p>
+                Professor of American Studies and Government and Polictics
+                College of Arts and Humanities Free Speech, Lorem Ipsum, Dolor
+                Sit Ahmet
+              </p>
+            </div>
+
+            <div slot="actions">
+              <umd-element-call-to-action type="secondary" theme="dark">
+                <a href="#" aria-label="resources for Terps">
+                  More about Marccus
+                </a>
+              </umd-element-call-to-action>
+            </div>
+          </umd-element-card-overlay>
+        </div>
+
+        <div slot="static-column">
+          <umd-element-person theme="dark" display="list">
+            <img slot="image" src="/person-1.jpeg" alt="Image Description" />
+
+            <p slot="name">
+              Janelle Wong
+            </p>
+            <p slot="job-title">
+              Professor of American Studies and Government and Politics
+            </p>
+            <p slot="association">
+              College of Arts and Humanities
+            </p>
+
+            <p slot="sub-text">
+              Specialty topic, specialty topic
+            </p>
+          </umd-element-person>
+
+          <umd-element-person theme="dark" display="list">
+            <img slot="image" src="/person-3.jpeg" alt="Image Description" />
+
+            <p slot="name">
+              Melinda Baldwin
+            </p>
+            <p slot="job-title">
+              Associate Professor, History
+            </p>
+            <p slot="association">
+              College of Arts and Humanities
+            </p>
+            <p slot="sub-text">
+              Specialty topic, specialty topic
+            </p>
+          </umd-element-person>
+
+          <umd-element-person theme="dark" display="list">
+            <img slot="image" src="/person-2.jpeg" alt="Image Description" />
+
+            <p slot="name">
+              Christopher Bonner
+            </p>
+            <p slot="job-title">
+              Associate Professor, History
+            </p>
+            <p slot="association">
+              College of Arts and Humanities
+            </p>
+            <p slot="sub-text">
+              Specialty topic, specialty topic
+            </p>
+          </umd-element-person>
+
+          <umd-element-person theme="dark" display="list">
+            <img slot="image" src="/person-3.jpeg" alt="Image Description" />
+
+            <p slot="name">
+              Melinda Baldwin
+            </p>
+            <p slot="job-title">
+              Associate Professor, History
+            </p>
+            <p slot="association">
+              College of Arts and Humanities
+            </p>
+            <p slot="sub-text">
+              Specialty topic, specialty topic
+            </p>
+          </umd-element-person>
+        </div>
+      </umd-element-sticky-columns>
+    </div>
+    <div class="umd-lock">
+      <h2 class="umd-sans-larger" style="padding-top: 40px">
+        News Releases
+      </h2>
+      <div class="umd-grid-gap-four my-md">
+        <umd-element-card-overlay theme="dark">
+          <p class="umd-sans-extralarge" slot="headline">
+            <a href="https://provost.umd.edu/news/working-together-to-advance-the-public-good"
+              class="umd-slidein-underline-white">
+              <span aria-hidden="true">Lorem Ipsum Dolor Sit Amet Consect</span>
+              <span class="sr-only">Lorem Ipsum Dolor Sit Amet Consect</span>
+            </a>
+          </p>
+
+          <div slot="text">
+            <p>
+              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              vulputate libero et velit interdum, ac aliquet odio mattis.
+            </p>
+          </div>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary" theme="dark">
+              <a href="#" aria-label="Learn more about Lorem Ipsum Dolor">
+                Learn more
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-card-overlay>
+        <umd-element-card-overlay theme="dark">
+          <p class="umd-sans-extralarge" slot="headline">
+            <a href="https://provost.umd.edu/news/working-together-to-advance-the-public-good"
+              class="umd-slidein-underline-white">
+              <span aria-hidden="true">Lorem Ipsum Dolor Sit Amet Consect</span>
+              <span class="sr-only">Lorem Ipsum Dolor Sit Amet Consect</span>
+            </a>
+          </p>
+
+          <div slot="text">
+            <p>
+              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              vulputate libero et velit interdum, ac aliquet odio mattis.
+            </p>
+          </div>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary" theme="dark">
+              <a href="#" aria-label="Learn more about Lorem Ipsum Dolor">
+                Learn more
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-card-overlay>
+        <umd-element-card-overlay theme="dark">
+          <p class="umd-sans-extralarge" slot="headline">
+            <a href="https://provost.umd.edu/news/working-together-to-advance-the-public-good"
+              class="umd-slidein-underline-white">
+              <span aria-hidden="true">Lorem Ipsum Dolor Sit Amet Consect</span>
+              <span class="sr-only">Lorem Ipsum Dolor Sit Amet Consect</span>
+            </a>
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary" theme="dark">
+              <a href="#" aria-label="Learn more about Lorem Ipsum Dolor">
+                Learn more
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-card-overlay>
+        <umd-element-card-overlay theme="dark">
+          <p class="umd-sans-extralarge" slot="headline">
+            <a href="https://provost.umd.edu/news/working-together-to-advance-the-public-good"
+              class="umd-slidein-underline-white">
+              <span aria-hidden="true">Lorem Ipsum Dolor Sit Amet Consect</span>
+              <span class="sr-only">Lorem Ipsum Dolor Sit Amet Consect</span>
+            </a>
+          </p>
+
+          <div slot="text">
+            <p>
+              Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              vulputate libero et velit interdum, ac aliquet odio mattis.
+            </p>
+          </div>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary" theme="dark">
+              <a href="#" aria-label="Learn more about Lorem Ipsum Dolor">
+                Learn more
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-card-overlay>
+      </div>
+    </div>
+  </section>
+  <section style="padding: 60px 0 80px 0">
+    <div class="umd-lock">
+      <umd-element-events-date-slider theme="light">
+        <h2 slot="headline">
+          Important Dates
+        </h2>
+
+        <umd-element-call-to-action slot="link" type="secondary">
+          <a href="/"><span>View full calendar</span></a>
+        </umd-element-call-to-action>
+
+        <div slot="date-list">
+          <umd-element-events-date theme="light">
+            <p slot="month">
+              Apr
+            </p>
+            <p slot="day">
+              23
+            </p>
+
+            <p slot="headline">
+              Primary Voter Registration Deadline (Online and By Mail)
+            </p>
+          </umd-element-events-date>
+
+          <umd-element-events-date theme="light">
+            <p slot="month">
+              May
+            </p>
+            <p slot="day">
+              02
+            </p>
+
+            <p slot="headline">
+              Early Voting Begins
+            </p>
+          </umd-element-events-date>
+
+          <umd-element-events-date theme="light">
+            <p slot="month">
+              May
+            </p>
+            <p slot="day">
+              07
+            </p>
+
+            <p slot="headline">
+              Deadline to Deliver Mail-On Ballot (Mail + Fax)
+            </p>
+          </umd-element-events-date>
+
+          <umd-element-events-date theme="light">
+            <p slot="month">
+              May
+            </p>
+            <p slot="day">
+              10
+            </p>
+
+            <p slot="headline">
+              Deadline to Deliver Mail-In Ballot (Email)
+            </p>
+          </umd-element-events-date>
+        </div>
+      </umd-element-events-date-slider>
+    </div>
+  </section>
+  <section style="padding-bottom: 80px">
+    <div class="umd-watermark-container">
+      <p class="umd-watermark"
+        aria-hidden="true"
+        tab-index="-1"
+        role="presentation">
+        RESOURCES
+      </p>
+    </div>
+    <div class="umd-lock">
+      <umd-element-section-intro-wide>
+        <h2 slot="headline">
+          RESOURCES FOR TERPS
+        </h2>
+
+        <umd-element-call-to-action type="secondary" slot="actions">
+          <a href="https://today.umd.edu/"><span>See all experts</span></a>
+        </umd-element-call-to-action>
+      </umd-element-section-intro-wide>
+    </div>
+    <div class="umd-lock">
+      <div class="umd-grid-gap-four my-md">
+        <umd-element-card-overlay>
+          <h3 slot="headline">
+            <a href="https://umd.edu">
+              <span class="sr-only">Text for Screen Reader</span>
+              <span aria-hidden="false">Check your registration status</span>
+            </a>
+          </h3>
+
+          <umd-element-call-to-action slot="actions" type="secondary">
+            <a href="/"><span>Learn More</span></a>
+          </umd-element-call-to-action>
+        </umd-element-card-overlay>
+        <umd-element-card-overlay>
+          <h3 slot="headline">
+            <a href="https://umd.edu">
+              <span class="sr-only">Text for Screen Reader</span>
+              <span aria-hidden="false">
+                Lorem Ipsum Dolor Sit Amet Consectetur
+              </span>
+            </a>
+          </h3>
+
+          <umd-element-call-to-action slot="actions" type="secondary">
+            <a href="/"><span>Learn More</span></a>
+          </umd-element-call-to-action>
+        </umd-element-card-overlay>
+
+        <umd-element-card-overlay type="image" class="wide-top-left">
+          <img slot="image"
+            src="https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg"
+            alt="required alt text" />
+
+          <div slot="headline">
+            <h3>
+              <a href="https://google.com">How do I register to vote?</a>
+            </h3>
+          </div>
+
+          <umd-element-call-to-action slot="actions"
+            type="secondary"
+            theme="dark">
+            <a href="https://umd.edu"><span>Register here</span></a>
+          </umd-element-call-to-action>
+        </umd-element-card-overlay>
+        <umd-element-card-overlay>
+          <h3 slot="headline">
+            <a href="https://umd.edu">
+              <span class="sr-only">Text for Screen Reader</span>
+              <span aria-hidden="false">
+                Lorem Ipsum Dolor Sit Amet Consectetur
+              </span>
+            </a>
+          </h3>
+
+          <umd-element-call-to-action slot="actions" type="secondary">
+            <a href="/"><span>Learn More</span></a>
+          </umd-element-call-to-action>
+        </umd-element-card-overlay>
+        <umd-element-card-overlay>
+          <h3 slot="headline">
+            <a href="https://umd.edu">
+              <span class="sr-only">Text for Screen Reader</span>
+              <span aria-hidden="false">
+                Lorem Ipsum Dolor Sit Amet Consectetur
+              </span>
+            </a>
+          </h3>
+
+          <umd-element-call-to-action slot="actions" type="secondary">
+            <a href="/"><span>Learn More</span></a>
+          </umd-element-call-to-action>
+        </umd-element-card-overlay>
+
+        <umd-element-card-overlay>
+          <h3 slot="headline">
+            <a href="https://umd.edu">
+              <span class="sr-only">Text for Screen Reader</span>
+              <span aria-hidden="false">
+                Lorem Ipsum Dolor Sit Amet Consectetur
+              </span>
+            </a>
+          </h3>
+
+          <umd-element-call-to-action slot="actions" type="secondary">
+            <a href="/"><span>Learn More</span></a>
+          </umd-element-call-to-action>
+        </umd-element-card-overlay>
+        <umd-element-card-overlay>
+          <h3 slot="headline">
+            <a href="https://umd.edu">
+              <span class="sr-only">Text for Screen Reader</span>
+              <span aria-hidden="false">
+                Lorem Ipsum Dolor Sit Amet Consectetur
+              </span>
+            </a>
+          </h3>
+
+          <umd-element-call-to-action slot="actions" type="secondary">
+            <a href="/"><span>Learn More</span></a>
+          </umd-element-call-to-action>
+        </umd-element-card-overlay>
+      </div>
+    </div>
+  </section>
+  <section style="padding-bottom: 80px">
+    <div class="umd-watermark-container">
+      <p class="umd-watermark"
+        aria-hidden="true"
+        tab-index="-1"
+        role="presentation">
+        EVENTS
+      </p>
+    </div>
+    <div class="umd-lock">
+      <umd-element-section-intro-wide>
+        <h2 slot="headline">
+          ELECTION EVENTS ON CAMPUS
+        </h2>
+
+        <umd-element-call-to-action type="secondary" slot="actions">
+          <a href="https://today.umd.edu/"><span>See all</span></a>
+        </umd-element-call-to-action>
+      </umd-element-section-intro-wide>
+    </div>
+    <div class="umd-lock">
+      <umd-element-sticky-columns>
+        <div slot="sticky-column">
+          <umd-featured-event>
+            <div class="event-image-wrapper">
+              <a class="event-image"
+                href="https://calendar.umd.edu/mastering-the-art-of-pitching-crafting-and-delivering-your-compelling-startup-story?start=2024-02-19">
+                <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&h=1080&auto=compress%2Cformat&fit=crop&dm=1658178350&s=ac382dd343b5fa928647cfd0542dad28"
+                  alt="Maryland stadium bleachers" />
+              </a>
+              <div aria-hidden="true" class="event-date-tag">
+                <time datetime="2024-09-18T12:00:00+00:00">
+                  <span class="umd-sans-small">Sep</span>
+                  <span class="umd-sans-extralarge">18</span>
+                </time>
+              </div>
+            </div>
+            <div class="event-content">
+              <h3 class="umd-eyebrow">
+                Featured Event
+              </h3>
+              <h4 class="event-title umd-sans-extralarge umd-fadein-underline-black">
+                <a href="https://calendar.umd.edu/mastering-the-art-of-pitching-crafting-and-delivering-your-compelling-startup-story?start=2024-02-19">
+                  <span>Purus eu Sagittis Gravida Porttitor Sodales</span>
+                </a>
+              </h4>
+
+              <umd-event-flags>
+                <ul class="umd-sans-min">
+                  <li>
+                    <svg aria-hidden="true"
+                      title="calendar"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M15 3H27V13H71V3H83V13H90V29H7V13H15V3ZM90 35H7V88H90V35Z"></path>
+                    </svg><time datetime="2024-09-18T12:00:00+00:00">
+                      Sat Sep 18
+                    </time>
+                  </li><li>
+                    <svg aria-hidden="true"
+                      title="clock"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M48 92C72.3005 92 92 72.3005 92 48C92 23.6995 72.3005 4 48 4C23.6995 4 4 23.6995 4 48C4 72.3005 23.6995 92 48 92ZM68.9503 49.7309L50.7567 50.737L52.0969 25.3062L43.1645 16.3738L40.0052 58.6165L39.7495 61.7494L39.771 61.7476L39.7694 61.7694L50.2203 60.9162L50.221 60.9019L77.8826 58.6633L68.9503 49.7309Z"></path>
+                    </svg><time datetime="2024-09-17T16:30:00+00:00">
+                      4:30pm
+                    </time>
+                  </li>
+                  <li>
+                    <svg aria-hidden="true"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M48.5581 0C31.0163 0 16.7442 14.3556 16.7442 32.0001C16.7442 37.2969 18.0608 42.5488 20.5637 47.2071L46.8184 94.9688C47.1679 95.6055 47.8339 96 48.5581 96C49.2823 96 49.9484 95.6055 50.2979 94.9688L76.5623 47.1913C79.0555 42.5488 80.3721 37.2967 80.3721 31.9999C80.3721 14.3556 66.1 0 48.5581 0ZM48.5581 48C39.7872 48 32.6513 40.8223 32.6513 32.0001C32.6513 23.1778 39.7872 16.0001 48.5581 16.0001C57.3291 16.0001 64.465 23.1778 64.465 32.0001C64.465 40.8223 57.3291 48 48.5581 48Z"></path>
+                    </svg>
+                    <span>Location</span>
+                  </li>
+                  <li>
+                    <svg aria-hidden="true"
+                      title="multiple pages"
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M26.6702 8.75415H90.5V61.8207H75.1222V27.2119H26.6702V8.75415ZM5.5 35.1276H69.0913V47.3861V47.3862V87.9926H5.5V47.3862V47.3861V35.1276Z"></path>
+                    </svg><span>Multi-day</span>
+                  </li>
+                </ul>
+              </umd-event-flags>
+              <div class="event-summary umd-sans-medium">
+                Neque Fusce habitasse elementum integer scelerisque orci litora
+                quisque nulla rutrum
+              </div>
+              <umd-element-call-to-action type="secondary">
+                <a href="/"><span>Learn more</span></a>
+              </umd-element-call-to-action>
+            </div>
+          </umd-featured-event>
+        </div>
+
+        <div slot="static-column">
+          <umd-element-event display="list">
+            <a slot="image" href="https://umd.edu" target="_blank">
+              <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+                alt="Example Alt Text" />
+            </a>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                The 47th Annual Maryland Leadership Conference
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                The 47th Annual Maryland Leadership Conference is a FREE,
+                half-day experience that is open to all UMD students.
+              </p>
+            </div>
+
+            <div slot="start-date-iso">
+              2024-04-12T12:00:00.000Z
+            </div>
+
+            <div slot="end-date-iso">
+              2024-04-12T17:30:00.000Z
+            </div>
+
+            <div slot="location">
+              Adele H. Stamp Student Union
+            </div>
+
+            <umd-element-call-to-action slot="actions"
+              type="secondary"
+              theme="light">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-event>
+
+          <umd-element-event display="list">
+            <a slot="image" href="https://umd.edu" target="_blank">
+              <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+                alt="Example Alt Text" />
+            </a>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                The 47th Annual Maryland Leadership Conference
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                The 47th Annual Maryland Leadership Conference is a FREE,
+                half-day experience that is open to all UMD students.
+              </p>
+            </div>
+
+            <div slot="start-date-iso">
+              2024-04-12T12:00:00.000Z
+            </div>
+
+            <div slot="end-date-iso">
+              2024-04-12T17:30:00.000Z
+            </div>
+
+            <div slot="location">
+              Adele H. Stamp Student Union
+            </div>
+
+            <umd-element-call-to-action slot="actions"
+              type="secondary"
+              theme="light">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-event>
+
+          <umd-element-event display="list">
+            <a slot="image" href="https://umd.edu" target="_blank">
+              <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+                alt="Example Alt Text" />
+            </a>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                The 47th Annual Maryland Leadership Conference
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                The 47th Annual Maryland Leadership Conference is a FREE,
+                half-day experience that is open to all UMD students.
+              </p>
+            </div>
+
+            <div slot="start-date-iso">
+              2024-04-12T12:00:00.000Z
+            </div>
+
+            <div slot="end-date-iso">
+              2024-04-12T17:30:00.000Z
+            </div>
+
+            <div slot="location">
+              Adele H. Stamp Student Union
+            </div>
+
+            <umd-element-call-to-action slot="actions"
+              type="secondary"
+              theme="light">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-event>
+        </div>
+      </umd-element-sticky-columns>
+    </div>
+  </section>
+
+  <section style="padding-bottom: 60px">
+    <div class="umd-lock">
+      <umd-element-section-intro include-separator>
+        <h2 slot="headline">
+          FROM MARYLAND TODAY
+        </h2>
+
+        <umd-element-call-to-action type="secondary" slot="actions">
+          <a href="/"><span>See all election related content</span></a>
+        </umd-element-call-to-action>
+      </umd-element-section-intro>
+    </div>
+    <div class="umd-lock">
+      <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
+        categories="807700"
+        lazyload="false"
+        row-count="1"
+        show-count="4"></umd-feed-news>
+    </div>
+  </section>
+  <section>
+    <umd-element-section-intro include-separator>
+      <h2 slot="headline">
+        OTHER WAYS TO GET INVOLVED
+      </h2>
+
+      <div slot="actions">
+        <umd-element-call-to-action type="secondary">
+          <a href="https://today.umd.edu/">
+            <span>Volunteer to register voters</span>
+          </a>
+        </umd-element-call-to-action>
+        <umd-element-call-to-action type="secondary">
+          <a href="https://today.umd.edu/">
+            <span>Be a watcher/challenger at an early voting site</span>
+          </a>
+        </umd-element-call-to-action>
+        <umd-element-call-to-action type="secondary">
+          <a href="https://today.umd.edu/">
+            <span>Serve as an election judge</span>
+          </a>
+        </umd-element-call-to-action>
+        <umd-element-call-to-action type="secondary">
+          <a href="https://today.umd.edu/">
+            <span>Know your voting rights</span>
+          </a>
+        </umd-element-call-to-action>
+      </div>
+    </umd-element-section-intro>
+  </section>
+
+  {% include './components/footer-election.twig' with {
+    includeVisual: true
+  } %}
+{% endblock %}

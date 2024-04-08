@@ -11,6 +11,7 @@ module.exports = () => {
     app: path.resolve('source/scripts/app'),
     terp: path.resolve('source/scripts/terp'),
     greater: path.resolve('source/scripts/greater'),
+    election: path.resolve('source/scripts/election'),
   };
 
   const modules = {
@@ -43,6 +44,11 @@ module.exports = () => {
         {
           from: 'terp',
           to: 'terp',
+          context: 'source/assets/',
+        },
+        {
+          from: 'election',
+          to: 'election',
           context: 'source/assets/',
         },
       ],

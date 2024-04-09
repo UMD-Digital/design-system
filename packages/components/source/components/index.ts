@@ -14,6 +14,8 @@ import { Load as HeroLoader } from './hero';
 import { Load as HeroLogoLoader } from './hero-logo';
 import { Load as HeroMinimalLoader } from './hero-minimal';
 import { Load as NavDrawerLoader } from './nav-drawer';
+import { Load as NavDrawerFutureLoader } from './nav-drawer-future';
+import { Load as NavSliderLoader } from './nav-slider';
 import { Load as NavItemLoader } from './nav-item';
 import { Load as PathwayHighlightLoader } from './pathway-highlight';
 import { Load as PathwayLoader } from './pathway';
@@ -41,6 +43,8 @@ export const Components = {
   HeroLogoLoader,
   HeroMinimalLoader,
   NavDrawerLoader,
+  NavDrawerFutureLoader,
+  NavSliderLoader,
   NavItemLoader,
   PathwayLoader,
   PathwayHighlightLoader,

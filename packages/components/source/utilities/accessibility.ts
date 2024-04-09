@@ -1,5 +1,5 @@
 type EventAccessibilityFocusParams = {
-  element: HTMLElement;
+  element: HTMLElement | Element;
   action: (arg: KeyboardEvent) => void;
 };
 

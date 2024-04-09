@@ -21,9 +21,9 @@ const { Spacing, Colors } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const ELEMENT_SLIDER_FIRST_SLIDE_CONTAINER = 'nav-slider-first-slide-container';
-const ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER =
+export const ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER =
   'nav-slider-first-slide-primary-links-container';
-const ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER =
+export const ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER =
   'nav-slider-secondary-links-container';
 const ELEMENT_SLIDER_ADDITIONAL_CONTENT = 'nav-slider-additional-content';
 
@@ -49,34 +49,32 @@ const OverwriteSlidePrimaryContainer = `
   ${OVERWRITE_ACTION_PRIMARY_CONTAINER} {
     border-bottom: 1px solid ${Colors.gray.light};
     padding-bottom: ${Spacing.md};
+    margin-bottom: ${Spacing.md};
+  }
+`;
+
+//prettier-ignore;
+const SecondaryLinksContainer = `
+  .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}:last-child {
+    border-bottom: 1px solid ${Colors.gray.light};
   }
 `;
 
 //prettier-ignore;
 const AdditonalContent = `
   .${ELEMENT_SLIDER_ADDITIONAL_CONTENT} {
-    padding-top: ${Spacing['2xl']};
+    padding-top: ${Spacing.md};
   }
 `;
 
 // prettier-ignore
 const STYLES_PRIMARY_SLIDE_ELEMENT = `
-  .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} {
-    border-bottom: 1px solid ${Colors.gray.light};
-    margin-bottom: ${Spacing.md};
-  }
 
+  ${SecondaryLinksContainer}
   ${AdditonalContent}
   ${OverwriteSlidePrimaryContainer}
   ${OverwriteSlidePrimaryLink}
 `;
-
-// @media (min-width: 480px) {
-//   .${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER} * + {
-//     padding-top: ${Spacing.xs};
-//     margin-top: ${Spacing.xs};
-//   }
-// }
 
 const createPrimaryLinks = (props: TypeFirstSlideProps) => {
   const container = document.createElement('div');

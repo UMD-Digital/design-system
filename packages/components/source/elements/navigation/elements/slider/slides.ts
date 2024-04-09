@@ -154,8 +154,6 @@ const createSlideActions = (props: TypeSliderSlideActions) => {
     );
   }
 
-  // slideActionsContainer.classList.add(ELEMENT_SLIDE_ACTION_CONTAINER);
-
   return slideActionsContainer;
 };
 

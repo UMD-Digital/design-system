@@ -1,6 +1,8 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { MarkupLocate } from 'utilities';
 import Slides, { TypeSlideProps } from './slides';
+import { ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER } from './slide-first';
+import { ELEMENT_SLIDE_ACTION_CONTAINER } from './action';
 
 type TypeSubElements = TypeSlideProps;
 
@@ -25,17 +27,26 @@ const ATTRIBUTE_ACTIVE_SELECTED = 'data-selected';
 const ATTRIBUTE_DATA_SLIDE = 'data-slide';
 const ATTRIBUTE_DISPLAY_TYPE = 'display-type';
 
-const DISPLAY_TYPE_INTERIOR = 'interior-nav';
 const DISPLAY_TYPE_DRAWER = 'drawer-nav';
+const DISPLAY_TYPE_INTERIOR_NAV = 'interior-nav';
 
 const ELEMENT_NAVIGATION_SLIDER_CONTAINER = 'navigation-slider-container';
 const ELEMENT_NAVIGATION_SLIDER = 'navigation-slider';
 const ELEMENT_SLIDER_DECORATIVE_LINE = 'navigation-slider-decorative-line';
 
 const IS_DISPLAY_DRAWER = `[${ATTRIBUTE_DISPLAY_TYPE}=${DISPLAY_TYPE_DRAWER}]`;
-const OVERWRITE_DISPLAY_DRAWER_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${DISPLAY_TYPE_DRAWER}`;
-const OVERWRITE_DISPLAY_DRAWER_DECORATION = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${DISPLAY_TYPE_DRAWER} .${ELEMENT_SLIDER_DECORATIVE_LINE}`;
-const OVERWRITE_DISPLAY_DRAWER_SLIDER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${DISPLAY_TYPE_DRAWER} .${ELEMENT_NAVIGATION_SLIDER}`;
+const IS_DISPLAY_INTERIOR = `[${ATTRIBUTE_DISPLAY_TYPE}=${DISPLAY_TYPE_INTERIOR_NAV}]`;
+
+const OVERWRITE_DISPLAY_DRAWER_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER}`;
+const OVERWRITE_DISPLAY_DRAWER_DECORATION = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER} .${ELEMENT_SLIDER_DECORATIVE_LINE}`;
+const OVERWRITE_DISPLAY_DRAWER_SLIDER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER} .${ELEMENT_NAVIGATION_SLIDER}`;
+const OVERWRITE_DISPLAY_DRAWER_ACTION_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
+const OVERWRITE_DISPLAY_DRAWER_SECONDARY_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER} .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER}`;
+
+const OVERWRITE_DISPLAY_INTERIOR_ACTION_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_INTERIOR} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
+const OVERWRITE_DISPLAY_INTERIOR_SECONDARY_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_INTERIOR} .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
+
+console.log(OVERWRITE_DISPLAY_INTERIOR_SECONDARY_CONTAINER);
 
 // prettier-ignore
 const OverwriteDisplayDrawer = `
@@ -50,6 +61,19 @@ const OverwriteDisplayDrawer = `
 
   ${OVERWRITE_DISPLAY_DRAWER_SLIDER} > *{
     overflow-y: auto;
+  }
+`;
+
+// prettier-ignore
+const OverwriteDisplayInterior = `
+  ${OVERWRITE_DISPLAY_INTERIOR_SECONDARY_CONTAINER} {
+    border-bottom: 1px solid ${Colors.gray.light};
+    padding-bottom: ${Spacing.md};
+    margin-bottom: ${Spacing.md};
+  }
+
+  ${OVERWRITE_DISPLAY_INTERIOR_SECONDARY_CONTAINER}:last-child {
+    margin-bottom: 0;
   }
 `;
 
@@ -120,12 +144,16 @@ const STYLES_HEADER_NAV_DRAWER_SLIDER_ELEMENT = `
   ${SliderStyles}
   ${SelectedLinkStyles}
   ${OverwriteDisplayDrawer}
+  ${OverwriteDisplayInterior}
 `;
 
 const CreateChildrenElements = (props: TypeDrawerSliderRequirements) => {
+  const { displayType } = props;
   const sliderContainer = document.createElement('div');
   const slider = document.createElement('div');
   const decorativeLine = document.createElement('div');
+  const isDisplayDrawerNav = displayType === DISPLAY_TYPE_DRAWER;
+  let displayTypeSetting = DISPLAY_TYPE_INTERIOR_NAV;
 
   Slides.CreateElement({ ...props, slider });
 
@@ -134,6 +162,8 @@ const CreateChildrenElements = (props: TypeDrawerSliderRequirements) => {
   decorativeLine.classList.add(ELEMENT_SLIDER_DECORATIVE_LINE);
   sliderContainer.appendChild(decorativeLine);
 
+  if (isDisplayDrawerNav) displayTypeSetting = DISPLAY_TYPE_INTERIOR_NAV;
+  sliderContainer.setAttribute(ATTRIBUTE_DISPLAY_TYPE, displayTypeSetting);
   sliderContainer.classList.add(ELEMENT_NAVIGATION_SLIDER_CONTAINER);
   sliderContainer.appendChild(slider);
 
@@ -146,9 +176,7 @@ const CreateChildrenElements = (props: TypeDrawerSliderRequirements) => {
 
 const CreateHeaderNavDrawerSliderElement = (props: TypeDrawerSliderProps) =>
   (() => {
-    const { displayType } = props;
     const elementContainer = document.createElement('div');
-    const isDisplayDrawerNav = displayType === DISPLAY_TYPE_DRAWER;
     const getUpcomingSlide = () => {
       const upcomingSlide = elementContainer.querySelector(
         `[${ATTRIBUTE_PARENT_REF}=${upcomingSlideRef}]`,
@@ -255,9 +283,6 @@ const CreateHeaderNavDrawerSliderElement = (props: TypeDrawerSliderProps) =>
     });
 
     elementContainer.appendChild(children);
-    if (isDisplayDrawerNav) {
-      elementContainer.setAttribute(ATTRIBUTE_DISPLAY_TYPE, displayType);
-    }
 
     return elementContainer;
   })();

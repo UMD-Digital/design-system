@@ -13,8 +13,15 @@ export type TypeFirstSlideProps = TypeActionProps & {
   primarySlideLinks?: HTMLElement | null;
   primarySlidesSecondaryLinks?: HTMLElement | null;
   primarySlideContent?: HTMLElement | null;
-  setCurrentSlide: (arg: HTMLElement) => void;
+  setCurrentSlide: (arg: {
+    element: HTMLElement;
+    withTransition?: boolean;
+  }) => void;
   eventSlideRight: () => void;
+};
+
+export type TypeFirstSlide = TypeFirstSlideProps & {
+  isContextMenu: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -134,12 +141,12 @@ const createAdditonalContent = (element: TypeFirstSlideProps) => {
   return container;
 };
 
-const CreatePrimarySlideElement = (props: TypeFirstSlideProps) => {
+const CreatePrimarySlideElement = (props: TypeFirstSlide) => {
   const {
     setCurrentSlide,
-    currentSlide,
     ATTRIBUTE_DATA_SLIDE,
     ATTRIBUTE_ACTIVE_SLIDE,
+    isContextMenu,
   } = props;
   const sliderContainer = document.createElement('div');
   const primarlyLinkContent = createPrimaryLinks(props);
@@ -149,9 +156,9 @@ const CreatePrimarySlideElement = (props: TypeFirstSlideProps) => {
   sliderContainer.classList.add(ELEMENT_SLIDER_FIRST_SLIDE_CONTAINER);
   sliderContainer.setAttribute(`${ATTRIBUTE_DATA_SLIDE}`, '');
 
-  if (!currentSlide) {
+  if (!isContextMenu) {
     sliderContainer.setAttribute(`${ATTRIBUTE_ACTIVE_SLIDE}`, '');
-    setCurrentSlide(sliderContainer);
+    setCurrentSlide({ element: sliderContainer });
   }
 
   if (primarlyLinkContent) sliderContainer.appendChild(primarlyLinkContent);

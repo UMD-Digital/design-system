@@ -46,8 +46,6 @@ const OVERWRITE_DISPLAY_DRAWER_SECONDARY_CONTAINER = `.${ELEMENT_NAVIGATION_SLID
 const OVERWRITE_DISPLAY_INTERIOR_ACTION_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_INTERIOR} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
 const OVERWRITE_DISPLAY_INTERIOR_SECONDARY_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_INTERIOR} .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
 
-console.log(OVERWRITE_DISPLAY_INTERIOR_SECONDARY_CONTAINER);
-
 // prettier-ignore
 const OverwriteDisplayDrawer = `
   ${OVERWRITE_DISPLAY_DRAWER_CONTAINER} {
@@ -195,7 +193,11 @@ const CreateHeaderNavDrawerSliderElement = (props: TypeDrawerSliderProps) =>
 
       return parent;
     };
-    const sizeContainer = () => {
+    const sizeContainer = ({
+      withTransition = false,
+    }: {
+      withTransition?: boolean;
+    }) => {
       let containerSize = 500;
       if (currentSlide) {
         const children = Array.from(currentSlide.children) as HTMLDivElement[];
@@ -205,6 +207,12 @@ const CreateHeaderNavDrawerSliderElement = (props: TypeDrawerSliderProps) =>
       }
 
       elementContainer.style.height = `${containerSize}px`;
+      if (withTransition)
+        elementContainer.style.transition = `height ${ANIMATION_TIME}ms ease-in-out`;
+
+      setTimeout(() => {
+        elementContainer.style.transition = 'none';
+      }, ANIMATION_TIME);
     };
     const eventSlide = ({ isRight = false }: { isRight?: boolean }) => {
       const activeSlide = elementContainer.querySelector(
@@ -232,6 +240,7 @@ const CreateHeaderNavDrawerSliderElement = (props: TypeDrawerSliderProps) =>
             slide.style.transition = `transform ${ANIMATION_TIME}ms ease-in-out`;
             slide.style.transform = `translateX(${transitionPosition})`;
           });
+          setCurrentSlide({ element: upcomingSlide, withTransition: true });
         }, 100);
 
         setTimeout(() => {
@@ -255,11 +264,17 @@ const CreateHeaderNavDrawerSliderElement = (props: TypeDrawerSliderProps) =>
     const setUpcomingSlide = (arg: string) => {
       upcomingSlideRef = arg;
     };
-    const setCurrentSlide = (arg: HTMLElement) => {
-      currentSlide = arg;
+    const setCurrentSlide = ({
+      element,
+      withTransition = false,
+    }: {
+      element: HTMLElement;
+      withTransition?: boolean;
+    }) => {
+      currentSlide = element;
 
       setTimeout(() => {
-        sizeContainer();
+        sizeContainer({ withTransition });
       }, 100);
     };
     const eventSlideLeft = () => eventSlide({ isRight: false });

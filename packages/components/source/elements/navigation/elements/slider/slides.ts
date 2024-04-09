@@ -1,6 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { AssetIcon, Styles } from 'utilities';
-import FirstSlide, { TypeFirstSlideProps } from './slide-first';
+import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, {
   TypeActionProps,
   ELEMENT_SLIDE_ACTION_CONTAINER,
@@ -13,17 +13,18 @@ export type TypeSlideProps = TypeActionProps &
     childrenSlides?: HTMLElement | null;
     primarySlideLinks?: HTMLElement | null;
     primarySlidesSecondaryLinks?: HTMLElement | null;
-    setCurrentSlide: (arg: HTMLElement) => void;
     eventSlideRight: () => void;
   };
 
-type TypeDrawerChildBack = TypeSlideProps & {
+type TypeSlideBackContainer = TypeSlideProps & {
   parentRef: string;
 };
 
 type TypeDrawerChildSlide = TypeSlideProps & {
   slider: HTMLElement;
 };
+
+type TypeSlideFirstContainer = TypeDrawerChildSlide & TypeFirstSlide;
 
 type TypeSliderSlideActions = TypeSlideProps & {
   slide: HTMLDivElement;
@@ -108,7 +109,7 @@ const STYLES_CHILD_SLIDE_ELEMENT = `
   ${OverwriteActionStyles}
 `;
 
-const createSlideBackButton = (props: TypeDrawerChildBack) => {
+const createSlideBackButton = (props: TypeSlideBackContainer) => {
   const { eventSlideRight, parentRef, setUpcomingSlide } = props;
 
   if (!parentRef) return;
@@ -157,7 +158,7 @@ const createSlideActions = (props: TypeSliderSlideActions) => {
   return slideActionsContainer;
 };
 
-const CreateFirstSlide = (props: TypeDrawerChildSlide) => {
+const CreateFirstSlide = (props: TypeSlideFirstContainer) => {
   const { slider } = props;
   slider.appendChild(FirstSlide.CreateElement(props));
 };
@@ -174,9 +175,9 @@ const CreateChildSlideElement = (props: TypeDrawerChildSlide) => {
     ATTRIBUTE_ACTIVE_SLIDE,
     ATTRIBUTE_DATA_SLIDE,
   } = props;
-
+  let isContextMenu = false;
   if (!childrenSlides) {
-    CreateFirstSlide(props);
+    CreateFirstSlide({ ...props, isContextMenu });
     return;
   }
 
@@ -219,7 +220,8 @@ const CreateChildSlideElement = (props: TypeDrawerChildSlide) => {
     // Context Menu
     if (isSlideActive) {
       sliderContainer.setAttribute(`${ATTRIBUTE_ACTIVE_SLIDE}`, ``);
-      setCurrentSlide(sliderContainer);
+      setCurrentSlide({ element: sliderContainer });
+      isContextMenu = true;
     }
 
     sliderContainer.setAttribute(`${ATTRIBUTE_DATA_SLIDE}`, '');
@@ -234,7 +236,7 @@ const CreateChildSlideElement = (props: TypeDrawerChildSlide) => {
 
     if (i === slides.length - 1) {
       setTimeout(() => {
-        CreateFirstSlide(props);
+        CreateFirstSlide({ ...props, isContextMenu });
       }, 100);
     }
   });

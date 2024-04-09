@@ -38,12 +38,14 @@ export const ELEMENT_TEXT_LOCKUP_SMALL_DATE = 'text-lockup-small-date';
 export const ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS = 'text-lockup-small-actions';
 
 const IS_THEME_DARK = `.${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_THEME_DARK_EYEBROW = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW}`;
 const IS_THEME_DARK_HEADLINE = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
 const IS_THEME_DARK_RICH_TEXT = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`;
 const IS_THEME_DARK_DATE = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`;
 
 // prettier-ignore
 const DarkThemeStyles = `
+  ${IS_THEME_DARK_EYEBROW},
   ${IS_THEME_DARK_HEADLINE},
   ${IS_THEME_DARK_RICH_TEXT},
   ${IS_THEME_DARK_DATE} {
@@ -60,6 +62,12 @@ const DarkThemeStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK_RICH_TEXT}`]: Text.RichTextDark,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${IS_THEME_DARK_RICH_TEXT} *`]: Text.RichTextDark,
     },
   })}
 `

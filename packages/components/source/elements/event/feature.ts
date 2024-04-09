@@ -20,6 +20,8 @@ const { Spacing, Colors } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
 const { Eyebrow } = Elements;
 
+const MEDIUM = 650;
+
 const ELEMENT_NAME = 'umd-event-feature';
 const ELEMENT_EVENT_FEATURE_CONTAINER = 'event-feature-container';
 const ELEMENT_EVENT_FEATURE_META_WRAPPER = 'event-feature-meta-wrapper';
@@ -41,6 +43,12 @@ const OverwriteImageContainer = `
     left: ${Spacing.min};
     background-color: ${Colors.white};
     padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
+    .${ELEMENT_EVENT_SIGN_WRAPPER} {
+      display: none;
+    }
   }
 `;
 

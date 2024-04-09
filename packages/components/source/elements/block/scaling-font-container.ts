@@ -13,11 +13,11 @@ const SMALL = 400;
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-scaling-font-block-container';
-const ELEMENT_BLOCK_CONTAINER = 'scaling-font-block-container';
+export const ELEMENT_SCALABLE_FONT_CONTAINER = 'scaling-font-block-container';
 
-const OverwriteHeadline = `.${ELEMENT_BLOCK_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
-const OverwriteDate = `.${ELEMENT_BLOCK_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`;
-const OverwriteText = `.${ELEMENT_BLOCK_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`;
+const OverwriteHeadline = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
+const OverwriteDate = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`;
+const OverwriteText = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`;
 
 // prettier-ignore
 const HeadlineStyles = `
@@ -76,7 +76,7 @@ const TextStyles = `
 
 // prettier-ignore
 const STYLES_SCALING_FONT_BLOCK_CONTAINER = `
-  .${ELEMENT_BLOCK_CONTAINER} {
+  .${ELEMENT_SCALABLE_FONT_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
@@ -88,7 +88,7 @@ const STYLES_SCALING_FONT_BLOCK_CONTAINER = `
 const CreateScaleFontBlockContainer = () => {
   const container = document.createElement('div');
 
-  container.classList.add(ELEMENT_BLOCK_CONTAINER);
+  container.classList.add(ELEMENT_SCALABLE_FONT_CONTAINER);
 
   return container;
 };

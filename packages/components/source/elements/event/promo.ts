@@ -19,14 +19,6 @@ const ELEMENT_EVENT_PROMO_META_WRAPPER = 'event-promo-meta-wrapper';
 const ELEMENT_EVENT_PROMO_SIGN_WRAPPER = 'event-promo-sign-wrapper';
 
 // prettier-ignore
-const OverwriteBlockOverlayImageContainer = `
-  .${ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER} {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-`;
-
-// prettier-ignore
 const DateSign = `
   .${ELEMENT_EVENT_PROMO_SIGN_WRAPPER} {
     display: inline-block;
@@ -59,7 +51,6 @@ const STYLES_EVENT_PROMO_ELEMENT = `
   ${BlockImageOverlay.Styles}
   ${DetailsMeta}
   ${DateSign}
-  ${OverwriteBlockOverlayImageContainer}
 `;
 
 const CreateEventPromoElement = (element: TypeEventPromoProps) => {

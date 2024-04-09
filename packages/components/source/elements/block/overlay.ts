@@ -118,6 +118,9 @@ const STYLES_BLOCK_OVERLAY_ELEMENT = `
     padding-top: ${Spacing['4xl']};
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
   
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {

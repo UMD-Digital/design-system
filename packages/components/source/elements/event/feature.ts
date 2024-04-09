@@ -74,6 +74,12 @@ const EyebrowStyles = `
   .${ELEMENT_EVENT_FEATURE_EYEBROW} {
     margin-bottom: ${Spacing.sm};
   }
+
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
+    .${ELEMENT_EVENT_FEATURE_EYEBROW} {
+      display: none;
+    }
+  }
 `;
 
 // prettier-ignore

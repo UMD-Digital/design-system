@@ -57,9 +57,17 @@ const OverwriteDisplayDrawer = `
     display: block;
   }
 
-  ${OVERWRITE_DISPLAY_DRAWER_SLIDER} > *{
+  ${OVERWRITE_DISPLAY_DRAWER_SLIDER} {
+    overflow-y: auto;
+    width: calc(100vw - ${Spacing['8xl']});
+    max-width: 400px;
+    min-width: 227px;
+  }
+
+  ${OVERWRITE_DISPLAY_DRAWER_SLIDER} > * {
     overflow-y: auto;
   }
+
 `;
 
 // prettier-ignore
@@ -94,9 +102,6 @@ const SliderStyles = `
     position: relative;
     overflow: hidden;
     height: 100%;
-    width: calc(100vw - ${Spacing['8xl']});
-    max-width: 400px;
-    min-width: 227px;
   }
 
   .${ELEMENT_NAVIGATION_SLIDER} > * {

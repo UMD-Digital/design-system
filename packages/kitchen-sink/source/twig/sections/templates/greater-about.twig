@@ -21,10 +21,18 @@
 
       <div class="umd-layout-interior-navigation">
         <div>
-          <a href="">About</a>
-          <p>
-            More to Come
-          </p>
+          <umd-element-nav-slider>
+            <div slot="primary-slide-links">
+              <a href="https://google.com" data-selected><span>About</span></a>
+            </div>
+
+            <div slot="primary-slide-secondary-links">
+              <a href="https://github.com">
+                <span>Amenities & Attractions</span>
+              </a>
+              <a href="https://apple.com"><span>Discovery Distract</span></a>
+            </div>
+          </umd-element-nav-slider>
         </div>
 
         <div style="margin-top: 0">

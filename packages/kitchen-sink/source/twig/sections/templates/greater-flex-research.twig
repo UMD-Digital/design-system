@@ -21,10 +21,30 @@
 
       <div class="umd-layout-interior-navigation">
         <div>
-          <a href="">Real Estate</a>
-          <p>
-            More to Come
-          </p>
+          <umd-element-nav-slider>
+            <div slot="primary-slide-links">
+              <a href="https://google.com"><span>Community</span></a>
+              <a href="https://google.com" data-child-ref="real">
+                <span>Real Estate</span>
+              </a>
+            </div>
+
+            <div slot="children-slides">
+              <div data-parent-ref="real" data-active>
+                <a href="https://docs.google.com/"><span>Traditonal</span></a>
+                <a href="https://docs.google.com/" data-selected>
+                  <span>Flex/Research & Development</span>
+                </a>
+                <a href="https://docs.google.com/">
+                  <span>Coworking Space</span>
+                </a>
+                <a href="https://docs.google.com/"><span>Infrastrure</span></a>
+                <a href="https://docs.google.com/">
+                  <span>Development Map</span>
+                </a>
+              </div>
+            </div>
+          </umd-element-nav-slider>
         </div>
         <div style="margin-top: 0">
           <div class="umd-rich-text umd-layout-vertical-interior-child">

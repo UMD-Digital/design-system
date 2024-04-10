@@ -35,26 +35,34 @@ export const CreateShadowDom = ({
     PRIMARY_SLIDE_LINKS,
     PRIMARY_SLIDE_SECONDARY_LINKS,
     PRIMARY_SLIDE_CONTENT,
+    CHILDREN_SLIDES,
   } = element._slots;
+  const primarySlideSlot = element.querySelector(
+    `[slot="${PRIMARY_SLIDE_CONTENT}"]`,
+  ) as HTMLSlotElement;
   const primarySlideLinks = element.querySelector(
     `[slot="${PRIMARY_SLIDE_LINKS}"]`,
   ) as HTMLSlotElement;
   const primarySlidesSecondaryLinks = element.querySelector(
     `[slot="${PRIMARY_SLIDE_SECONDARY_LINKS}"]`,
   ) as HTMLSlotElement;
+  const childrenSlides = element.querySelector(
+    `[slot="${CHILDREN_SLIDES}"]`,
+  ) as HTMLSlotElement;
+  const hasPrimarySlideContent =
+    primarySlideSlot && primarySlideSlot.children.length > 0;
+  const primarySlideContent = hasPrimarySlideContent
+    ? Node.slot({
+        type: PRIMARY_SLIDE_CONTENT,
+      })
+    : null;
 
-  const test = document.createElement('div');
-
-  return test;
-
-  // return NavigationElements.Drawer.CreateElement({
-  //   primarySlideLinks,
-  //   primarySlidesSecondaryLinks,
-  //   primarySlideContent: Node.slot({
-  //     type: PRIMARY_SLIDE_CONTENT,
-  //   }),
-  //   childrenSlides: null,
-  // });
+  return NavigationElements.Drawer.CreateElement({
+    primarySlideLinks,
+    primarySlidesSecondaryLinks,
+    childrenSlides,
+    primarySlideContent,
+  });
 };
 
 export class UMDNavDrawerFeature extends HTMLElement {

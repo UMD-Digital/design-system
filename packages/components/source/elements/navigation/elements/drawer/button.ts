@@ -1,13 +1,10 @@
 import { Tokens } from '@universityofmaryland/variables';
-import NavDrawerSlider from '../slider';
 
 const { Colors, Spacing } = Tokens;
 
 export type TypeDrawerCloseButton = {
   eventClose: () => void;
 };
-
-type TypeHeaderNavDrawerContainer = TypeDrawerCloseButton;
 
 const ANIMATION_TIME = 300;
 
@@ -67,7 +64,6 @@ export const DrawerContainerStyles = `
 
 const STYLES_DRAWER_ELEMENT = `
   ${DrawerContainerStyles}
-  ${NavDrawerSlider.Styles}
 `;
 
 const CreateDrawerButton = (element: TypeDrawerCloseButton) => {
@@ -80,26 +76,7 @@ const CreateDrawerButton = (element: TypeDrawerCloseButton) => {
   return drawerCloseButton;
 };
 
-const CreateDrawerElement = (props: TypeHeaderNavDrawerContainer) => {
-  const { eventClose } = props;
-  const bodyOverlay = document.createElement('div');
-  const drawer = document.createElement('div');
-  // const slider = NavDrawerSlider.CreateElement(props);
-  const closeButton = CreateDrawerButton(props);
-
-  // drawer.appendChild(slider);
-  drawer.appendChild(closeButton);
-
-  bodyOverlay.appendChild(drawer);
-  bodyOverlay.classList.add(NAV_DRAWER_BODY_OVERLAY);
-  bodyOverlay.addEventListener('click', eventClose.bind(props));
-
-  drawer.classList.add(NAV_DRAWER_CONTAINER);
-
-  return bodyOverlay;
-};
-
 export default {
-  CreateElement: CreateDrawerElement,
+  CreateElement: CreateDrawerButton,
   Styles: STYLES_DRAWER_ELEMENT,
 };

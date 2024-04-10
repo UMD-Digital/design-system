@@ -1,21 +1,20 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Accessibility } from 'utilities';
-import NavDrawerSlider from '../slider';
-import NavDrawer, { TypeDrawerCloseButton } from './button';
+import NavCloseButton, { TypeDrawerCloseButton } from './button';
+import NavDrawerSlider, { TypeDrawerSliderRequirements } from '../slider';
+
+export type TypeDrawerRequirements = TypeDrawerSliderRequirements;
+
+export type TypeDrawerProps = TypeDrawerRequirements &
+  TypeDrawerCloseButton & {
+    getContainer: () => HTMLElement;
+    eventOpen: () => void;
+    focusCallback?: () => void;
+    setFocusCallback?: (arg: any) => void;
+  };
 
 const { Colors } = Tokens;
 const { EventAccessibilityFocus } = Accessibility;
-
-type TypeDrawerOpenButton = {
-  eventOpen: () => void;
-};
-
-type TypeHeaderNavDrawer = {
-  primarySlideLinks?: HTMLElement | null;
-  primarySlidesSecondaryLinks?: HTMLElement | null;
-  primarySlideContent?: HTMLElement | null;
-  childrenSlides?: HTMLElement | null;
-};
 
 const ANIMATION_TIME = 300;
 
@@ -24,8 +23,6 @@ const NAV_DRAWER_CONTAINER = 'umd-nav-drawer-container';
 const NAV_DRAWER_BODY_OVERLAY = 'umd-nav-drawer-body-overlay';
 const NAV_DRAWER_BUTTON = 'umd-nav-drawer-button';
 const NAV_DRAWER_BUTTON_WRAPPER = 'umd-nav-drawer-button-wrapper';
-
-const elementContainer = document.createElement('div');
 
 const DisplayButtonStyles = `
   .${NAV_DRAWER_BUTTON} {
@@ -75,6 +72,10 @@ export const DrawerContainerStyles = `
     transform: translateX(-100%);
   }
 
+  .${NAV_DRAWER_CONTAINER} > * {
+    height: 100% !important;
+  }
+
   .${NAV_DRAWER_BODY_OVERLAY} {
     position: fixed;
     top: 0;
@@ -93,45 +94,12 @@ export const DrawerContainerStyles = `
 const STYLES_HEADER_NAV_DRAWER_ELEMENT = `
   ${DisplayButtonStyles}
   ${DrawerContainerStyles}
-  ${NavDrawer.Styles}
+  ${NavCloseButton.Styles}
   ${NavDrawerSlider.Styles}
 `;
 
-const EventClose = (props: {
-  getContainer: () => Element | null;
-  focusCallback: () => void | null;
-}) => {
-  const { getContainer, focusCallback } = props;
-  const element = getContainer();
-
-  if (!element) return;
-
-  const body = document.querySelector('body') as HTMLBodyElement;
-  const bodyOverlay = element.querySelector(
-    `.${NAV_DRAWER_BODY_OVERLAY}`,
-  ) as HTMLDivElement;
-  const drawer = element.querySelector(
-    `.${NAV_DRAWER_CONTAINER}`,
-  ) as HTMLDivElement;
-
-  if (focusCallback) focusCallback();
-
-  bodyOverlay.style.opacity = '0';
-  drawer.style.transform = 'translateX(-100%)';
-
-  setTimeout(() => {
-    bodyOverlay.removeAttribute('style');
-    drawer.removeAttribute('style');
-    body.style.overflow = 'auto';
-  }, ANIMATION_TIME + 100);
-};
-
-const CreateDisplayButton = (props: {
-  getContainer: () => Element | null;
-  eventClose: () => void;
-  setFocusCallback: (arg: any) => void;
-  ATTRIBUTE_ACTIVE_SLIDE: string;
-}) => {
+const CreateDisplayButton = (props: TypeDrawerProps) => {
+  const { eventOpen } = props;
   const button = document.createElement('button');
   const wrapper = document.createElement('span');
   const spans = ['one', 'two', 'three'].map(() => {
@@ -143,61 +111,38 @@ const CreateDisplayButton = (props: {
 
   button.appendChild(wrapper);
   button.classList.add(NAV_DRAWER_BUTTON);
-  button.addEventListener('click', EventOpen.bind(null, props));
+  button.addEventListener('click', () => eventOpen());
 
   return button;
 };
 
-const EventOpen = (props: {
-  getContainer: () => Element | null;
-  eventClose: () => void;
-  setFocusCallback: (arg: any) => void;
-  ATTRIBUTE_ACTIVE_SLIDE: string;
-}) => {
-  const { getContainer, eventClose, setFocusCallback, ATTRIBUTE_ACTIVE_SLIDE } =
-    props;
+const CreateDrawerElement = (props: TypeDrawerProps) => {
+  const { eventClose } = props;
+  const bodyOverlay = document.createElement('div');
+  const drawer = document.createElement('div');
+  const slider = NavDrawerSlider.CreateElement({
+    ...props,
+    displayType: 'drawer-nav',
+  });
+  const closeButton = NavCloseButton.CreateElement(props);
 
-  const element = getContainer();
+  console.log(slider);
 
-  if (!element) return;
+  drawer.appendChild(slider);
 
-  const body = document.querySelector('body') as HTMLBodyElement;
-  const bodyOverlay = element.querySelector(
-    `.${NAV_DRAWER_BODY_OVERLAY}`,
-  ) as HTMLDivElement;
-  const drawer = element.querySelector(
-    `.${NAV_DRAWER_CONTAINER}`,
-  ) as HTMLDivElement;
-  const activeSlide = element.querySelector(
-    `[${ATTRIBUTE_ACTIVE_SLIDE}]`,
-  ) as HTMLDivElement;
+  bodyOverlay.appendChild(drawer);
+  bodyOverlay.classList.add(NAV_DRAWER_BODY_OVERLAY);
+  bodyOverlay.addEventListener('click', eventClose.bind(props));
 
-  if (!activeSlide) return;
+  drawer.classList.add(NAV_DRAWER_CONTAINER);
 
-  const firstLink = activeSlide.querySelector(`a`) as HTMLAnchorElement;
-
-  setFocusCallback(
-    EventAccessibilityFocus({
-      element,
-      action: () => eventClose(),
-    }),
-  );
-
-  bodyOverlay.style.display = 'block';
-  drawer.style.display = 'flex';
-
-  setTimeout(() => {
-    bodyOverlay.style.opacity = '1';
-    drawer.style.transform = 'translateX(0)';
-    body.style.overflow = 'hidden';
-    if (firstLink) firstLink.focus();
-  }, 100);
+  return bodyOverlay;
 };
 
-const CreateHeaderNavDrawerContainer = (element: any) => {
+const CreateHeaderNavDrawerContainer = (props: TypeDrawerProps) => {
   const container = document.createElement('div');
-  const openButton = CreateDisplayButton(element);
-  const drawer = NavDrawer.CreateElement(element);
+  const openButton = CreateDisplayButton(props);
+  const drawer = CreateDrawerElement(props);
 
   container.appendChild(openButton);
   container.appendChild(drawer);
@@ -205,73 +150,78 @@ const CreateHeaderNavDrawerContainer = (element: any) => {
   return container;
 };
 
-type TypeState = {
-  ATTRIBUTE_CHILD_REF: string;
-  ATTRIBUTE_PARENT_REF: string;
-  ATTRIBUTE_DATA_SLIDE: string;
-  ATTRIBUTE_ACTIVE_SLIDE: string;
-  ATTRIBUTE_ACTIVE_SELECTED: string;
-  upcomingSlide: HTMLElement | null;
-  previousSlide: HTMLElement | null;
-  currentSlide: HTMLElement | null;
-  previousSlideRef: string | null;
-  upcomingSlideRef: string | null;
-  parentRef: string | null;
-  focusCallback: any;
-  setFocusCallback: (arg: any) => void;
-  setPreviousSlide: () => void;
-  setUpcomingSlide: (arg: string) => void;
-  setCurrentSlide: (arg: HTMLElement) => void;
-  eventOpen: () => void;
-  eventClose: () => void;
-  eventSlideRight: () => void;
-  getContainer: () => Element | null;
-};
+const CreateHeaderNavDrawerElement = (props: TypeDrawerRequirements) =>
+  (() => {
+    const elementContainer = document.createElement('div');
+    const focusCallback = () => {
+      console.log('focus callback needs to be completed');
+    };
+    const setFocusCallback = (arg: any) => {};
 
-export const State: TypeState = {
-  ATTRIBUTE_CHILD_REF: 'data-child-ref',
-  ATTRIBUTE_PARENT_REF: 'data-parent-ref',
-  ATTRIBUTE_DATA_SLIDE: 'data-slide',
-  ATTRIBUTE_ACTIVE_SLIDE: 'data-active',
-  ATTRIBUTE_ACTIVE_SELECTED: 'data-selected',
-  upcomingSlide: null,
-  previousSlide: null,
-  previousSlideRef: null,
-  upcomingSlideRef: null,
-  parentRef: null,
-  currentSlide: null,
-  focusCallback: () => {},
-  setFocusCallback: (arg: any) => {
-    State.focusCallback = arg;
-  },
-  setPreviousSlide: () => {
-    State.previousSlide = State.currentSlide;
-  },
-  eventSlideRight: () => {},
-  setUpcomingSlide: (arg: string) => {
-    State.upcomingSlideRef = arg;
-  },
-  setCurrentSlide: (arg: HTMLElement) => {
-    State.currentSlide = arg;
-  },
-  eventOpen: () => EventOpen(State),
-  eventClose: () => EventClose(State),
-  getContainer: () => elementContainer.querySelector(`.${NAV_DECLARATION}`),
-};
+    const eventClose = () => {
+      const body = document.querySelector('body') as HTMLBodyElement;
+      const bodyOverlay = elementContainer.querySelector(
+        `.${NAV_DRAWER_BODY_OVERLAY}`,
+      ) as HTMLDivElement;
+      const drawer = elementContainer.querySelector(
+        `.${NAV_DRAWER_CONTAINER}`,
+      ) as HTMLDivElement;
 
-const CreateHeaderNavDrawerElement = (props: TypeHeaderNavDrawer) => {
-  const content = CreateHeaderNavDrawerContainer({ ...State });
-  content.classList.add(NAV_DECLARATION);
+      if (focusCallback) focusCallback();
 
-  elementContainer.classList.add('test');
-  elementContainer.appendChild(content);
+      bodyOverlay.style.opacity = '0';
+      drawer.style.transform = 'translateX(-100%)';
 
-  elementContainer.style.width = '50px';
-  elementContainer.style.height = '50px';
-  elementContainer.style.backgroundColor = 'blue';
+      setTimeout(() => {
+        bodyOverlay.removeAttribute('style');
+        drawer.removeAttribute('style');
+        body.style.overflow = 'auto';
+      }, ANIMATION_TIME + 100);
+    };
 
-  return elementContainer;
-};
+    const eventOpen = () => {
+      const body = document.querySelector('body') as HTMLBodyElement;
+      const bodyOverlay = elementContainer.querySelector(
+        `.${NAV_DRAWER_BODY_OVERLAY}`,
+      ) as HTMLDivElement;
+      const drawer = elementContainer.querySelector(
+        `.${NAV_DRAWER_CONTAINER}`,
+      ) as HTMLDivElement;
+
+      setFocusCallback(
+        EventAccessibilityFocus({
+          element: elementContainer,
+          action: () => eventClose(),
+        }),
+      );
+
+      bodyOverlay.style.display = 'block';
+      drawer.style.display = 'flex';
+
+      setTimeout(() => {
+        bodyOverlay.style.opacity = '1';
+        drawer.style.transform = 'translateX(0)';
+        body.style.overflow = 'hidden';
+        // if (firstLink) firstLink.focus();
+      }, 100);
+    };
+
+    const getContainer = () => elementContainer;
+
+    const children = CreateHeaderNavDrawerContainer({
+      ...props,
+      getContainer,
+      eventOpen,
+      eventClose,
+      setFocusCallback,
+      focusCallback,
+    });
+
+    elementContainer.classList.add(NAV_DECLARATION);
+    elementContainer.appendChild(children);
+
+    return elementContainer;
+  })();
 
 export default {
   CreateElement: CreateHeaderNavDrawerElement,

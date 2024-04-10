@@ -6,7 +6,7 @@ import { ELEMENT_SLIDE_ACTION_CONTAINER } from './action';
 
 type TypeSubElements = TypeSlideProps;
 
-type TypeDrawerSliderProps = {
+export type TypeDrawerSliderRequirements = {
   primarySlideLinks?: HTMLElement | null;
   primarySlidesSecondaryLinks?: HTMLElement | null;
   primarySlideContent?: HTMLElement | null;
@@ -14,8 +14,8 @@ type TypeDrawerSliderProps = {
   displayType?: string;
 };
 
-export type TypeDrawerSliderRequirements = TypeSubElements &
-  TypeDrawerSliderProps;
+export type TypeDrawerSliderProps = TypeSubElements &
+  TypeDrawerSliderRequirements;
 
 const { Colors, Spacing } = Tokens;
 
@@ -150,13 +150,15 @@ const STYLES_HEADER_NAV_DRAWER_SLIDER_ELEMENT = `
   ${OverwriteDisplayInterior}
 `;
 
-const CreateChildrenElements = (props: TypeDrawerSliderRequirements) => {
+const CreateChildrenElements = (props: TypeDrawerSliderProps) => {
   const { displayType } = props;
   const sliderContainer = document.createElement('div');
   const slider = document.createElement('div');
   const decorativeLine = document.createElement('div');
   const isDisplayDrawerNav = displayType === DISPLAY_TYPE_DRAWER;
   let displayTypeSetting = DISPLAY_TYPE_INTERIOR_NAV;
+
+  if (isDisplayDrawerNav) displayTypeSetting = DISPLAY_TYPE_DRAWER;
 
   Slides.CreateElement({ ...props, slider });
 
@@ -165,7 +167,6 @@ const CreateChildrenElements = (props: TypeDrawerSliderRequirements) => {
   decorativeLine.classList.add(ELEMENT_SLIDER_DECORATIVE_LINE);
   sliderContainer.appendChild(decorativeLine);
 
-  if (isDisplayDrawerNav) displayTypeSetting = DISPLAY_TYPE_INTERIOR_NAV;
   sliderContainer.setAttribute(ATTRIBUTE_DISPLAY_TYPE, displayTypeSetting);
   sliderContainer.classList.add(ELEMENT_NAVIGATION_SLIDER_CONTAINER);
   sliderContainer.appendChild(slider);
@@ -177,7 +178,9 @@ const CreateChildrenElements = (props: TypeDrawerSliderRequirements) => {
   return sliderContainer;
 };
 
-const CreateHeaderNavDrawerSliderElement = (props: TypeDrawerSliderProps) =>
+const CreateHeaderNavDrawerSliderElement = (
+  props: TypeDrawerSliderRequirements,
+) =>
   (() => {
     const elementContainer = document.createElement('div');
     const getUpcomingSlide = () => {

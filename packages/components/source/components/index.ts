@@ -1,6 +1,7 @@
 import { Load as AccordionLoader } from './accordion';
 import { Load as AlertLoader } from './alert';
 import { Load as ArticleLoader } from './article';
+import { Load as BreadcrumbLoader } from './breadcrumb';
 import { Load as CallToActionLoader } from './call-to-action';
 import { Load as CardLoader } from './card';
 import { Load as CardOverlayLoader } from './card-overlay';
@@ -30,6 +31,7 @@ export const Components = {
   AccordionLoader,
   AlertLoader,
   ArticleLoader,
+  BreadcrumbLoader,
   CardLoader,
   CallToActionLoader,
   CardOverlayLoader,

@@ -1,0 +1,39 @@
+{% extends '../../_layout.twig' %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading type-hr">
+        <span>Theme Light</span>
+        <span>Primary Styling</span>
+      </p>
+      <umd-breadcrumb class="mb-xs">
+        <div slot="paths">
+          <a href="">Home</a>
+          <a href="">Primary Link</a>
+          <a href="">Secondary Link</a>
+          <a href="">Tertiary Link</a>
+          <a href="">Current Page</a>
+        </div>
+      </umd-breadcrumb>
+    </div>
+  </section>
+
+  <section style="background-color: black; padding: 40px 0;">
+    <div class="umd-lock">
+      <p class="content-heading type-hr" style="color: white">
+        <span>Theme Dark</span>
+        <span>Primary Styling</span>
+      </p>
+      <umd-breadcrumb class="mb-xs" theme="dark">
+        <div slot="paths">
+          <a href="">Home</a>
+          <a href="">Primary Link</a>
+          <a href="">Secondary Link</a>
+          <a href="">Tertiary Link</a>
+          <a href="">Current Page</a>
+        </div>
+      </umd-breadcrumb>
+    </div>
+  </section>
+{% endblock %}

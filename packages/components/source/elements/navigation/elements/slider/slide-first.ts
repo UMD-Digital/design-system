@@ -75,8 +75,7 @@ const AdditonalContent = `
 `;
 
 // prettier-ignore
-const STYLES_PRIMARY_SLIDE_ELEMENT = `
-
+const STYLES_SLIDE_FIRST_ELEMENT = `
   ${SecondaryLinksContainer}
   ${AdditonalContent}
   ${OverwriteSlidePrimaryContainer}
@@ -141,7 +140,7 @@ const createAdditonalContent = (element: TypeFirstSlideProps) => {
   return container;
 };
 
-const CreatePrimarySlideElement = (props: TypeFirstSlide) => {
+const CreateSlideFirstElement = (props: TypeFirstSlide) => {
   const {
     setCurrentSlide,
     ATTRIBUTE_DATA_SLIDE,
@@ -169,6 +168,6 @@ const CreatePrimarySlideElement = (props: TypeFirstSlide) => {
 };
 
 export default {
-  CreateElement: CreatePrimarySlideElement,
-  Styles: STYLES_PRIMARY_SLIDE_ELEMENT,
+  CreateElement: CreateSlideFirstElement,
+  Styles: STYLES_SLIDE_FIRST_ELEMENT,
 };

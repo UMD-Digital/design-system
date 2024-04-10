@@ -6,7 +6,7 @@ import { ELEMENT_SLIDE_ACTION_CONTAINER } from './action';
 
 type TypeSubElements = TypeSlideProps;
 
-export type TypeDrawerSliderRequirements = {
+export type TypeNavSliderRequirements = {
   primarySlideLinks?: HTMLElement | null;
   primarySlidesSecondaryLinks?: HTMLElement | null;
   primarySlideContent?: HTMLElement | null;
@@ -14,8 +14,7 @@ export type TypeDrawerSliderRequirements = {
   displayType?: string;
 };
 
-export type TypeDrawerSliderProps = TypeSubElements &
-  TypeDrawerSliderRequirements;
+export type TypeNavSliderProps = TypeSubElements & TypeNavSliderRequirements;
 
 const { Colors, Spacing } = Tokens;
 
@@ -135,7 +134,7 @@ const SelectedLinkStyles = `
 `;
 
 // prettier-ignore
-const STYLES_HEADER_NAV_DRAWER_SLIDER_ELEMENT = `
+const STYLES_NAV_SLIDER_ELEMENT = `
   .${ELEMENT_NAVIGATION_SLIDER_CONTAINER} {
     position: relative;
     height: 100%;
@@ -150,7 +149,7 @@ const STYLES_HEADER_NAV_DRAWER_SLIDER_ELEMENT = `
   ${OverwriteDisplayInterior}
 `;
 
-const CreateChildrenElements = (props: TypeDrawerSliderProps) => {
+const CreateChildrenElements = (props: TypeNavSliderProps) => {
   const { displayType } = props;
   const sliderContainer = document.createElement('div');
   const slider = document.createElement('div');
@@ -178,9 +177,7 @@ const CreateChildrenElements = (props: TypeDrawerSliderProps) => {
   return sliderContainer;
 };
 
-const CreateHeaderNavDrawerSliderElement = (
-  props: TypeDrawerSliderRequirements,
-) =>
+const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
   (() => {
     const elementContainer = document.createElement('div');
     const getUpcomingSlide = () => {
@@ -311,6 +308,6 @@ const CreateHeaderNavDrawerSliderElement = (
   })();
 
 export default {
-  CreateElement: CreateHeaderNavDrawerSliderElement,
-  Styles: STYLES_HEADER_NAV_DRAWER_SLIDER_ELEMENT,
+  CreateElement: CreateNavSliderElement,
+  Styles: STYLES_NAV_SLIDER_ELEMENT,
 };

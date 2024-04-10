@@ -19,15 +19,15 @@ const EventAccessibilityFocus: EventAccessibilityFocusType = ({
   };
 
   const keyEvent = (event: KeyboardEvent) => {
-    const currentElement = event.srcElement as HTMLElement;
+    const currentElement = event.target as HTMLElement;
 
-    if (event.key === 'Tab' || event.keyCode == 9) {
+    if (event.key === 'Tab') {
       if (element && !element.contains(currentElement)) {
         action(event);
       }
     }
 
-    if (event.key === 'ArrowDown' || event.keyCode == 40) {
+    if (event.key === 'ArrowDown') {
       const nextElement = currentElement.nextElementSibling as HTMLElement;
 
       if (element && !element.contains(nextElement)) {
@@ -37,7 +37,7 @@ const EventAccessibilityFocus: EventAccessibilityFocusType = ({
       }
     }
 
-    if (event.key === 'ArrowUp' || event.keyCode == 38) {
+    if (event.key === 'ArrowUp') {
       const previousElement =
         currentElement.previousElementSibling as HTMLElement;
 

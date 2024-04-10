@@ -65,7 +65,7 @@ const ButtonStyles = `
 `;
 
 // prettier-ignore
-const STYLES_DRAWER_ACTION_ELEMENT = `
+const STYLES_SLIDER_ACTION_ELEMENT = `
   .${ELEMENT_SLIDE_ACTION_CONTAINER} {
     display: flex;
     justify-content: space-between;
@@ -105,7 +105,7 @@ const CreateSlideButton = ({
   return button;
 };
 
-const CreateDrawerActionElement = (props: TypeAction) => {
+const CreateSliderActionElement = (props: TypeAction) => {
   const { link } = props;
   const actionContainer = document.createElement('div');
   const button = CreateSlideButton(props);
@@ -121,6 +121,6 @@ const CreateDrawerActionElement = (props: TypeAction) => {
 };
 
 export default {
-  CreateElement: CreateDrawerActionElement,
-  Styles: STYLES_DRAWER_ACTION_ELEMENT,
+  CreateElement: CreateSliderActionElement,
+  Styles: STYLES_SLIDER_ACTION_ELEMENT,
 };

@@ -38,6 +38,8 @@ const QUOTE = `<svg viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/200
 
 const SHORT_ARROW = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M63.0351 40L36 13H60.214L95.5269 47.539L95.1858 47.8801L95.5269 48.2212L60.214 82.7602H36L62.795 56H5V40H63.0351Z" fill="black"/></svg>`;
 
+const X = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="25.0241" y="13.2861" width="83" height="16.6" transform="rotate(45 25.0241 13.2861)"></rect><rect x="83.7139" y="25.0241" width="83" height="16.6" transform="rotate(135 83.7139 25.0241)"></rect></svg>`;
+
 export default {
   BACK_ARROW,
   CALENDAR,
@@ -59,4 +61,5 @@ export default {
   PLAY,
   QUOTE,
   SHORT_ARROW,
+  X,
 };

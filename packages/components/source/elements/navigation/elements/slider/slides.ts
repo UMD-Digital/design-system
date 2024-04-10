@@ -33,12 +33,11 @@ type TypeSliderSlideActions = TypeSlideProps & {
 const { Colors, Spacing } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
 
-const ELEMENT_SLIDER_SLIDE_CONTAINER = 'slider-slide-container';
-const ELEMENT_SLIDER_SLIDE_HEADLINE = 'slider-slide-headline';
-const ELEMENT_SLIDER_SLIDE_ACTION_BACK_BUTTON =
-  'slider-slide-action-back-button';
+const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
+const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
+const ELEMENT_NAV_SLIDE_BACK_BUTTON = 'nav-slide-action-back-button';
 
-const OVERWRITE_ACTION_SECONDARY_CONTAINER = `.${ELEMENT_SLIDER_SLIDE_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
+const OVERWRITE_ACTION_SECONDARY_CONTAINER = `.${ELEMENT_NAV_SLIDE_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
 
 // prettier-ignore
 const OverwriteActionStyles = `
@@ -49,7 +48,7 @@ const OverwriteActionStyles = `
 
 // prettier-ignore
 const BackButtonStyles = `
-  .${ELEMENT_SLIDER_SLIDE_ACTION_BACK_BUTTON} {
+  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
     display: block;
     border-bottom: 1px solid ${Colors.gray.light};
     margin-bottom: ${Spacing.sm};
@@ -57,13 +56,13 @@ const BackButtonStyles = `
   }
 
   @media (min-width: 480px) {
-    .${ELEMENT_SLIDER_SLIDE_ACTION_BACK_BUTTON} {
+    .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
       margin-bottom: ${Spacing.md};
       padding-bottom: ${Spacing.md};
     }
   }
 
-  .${ELEMENT_SLIDER_SLIDE_ACTION_BACK_BUTTON} button {
+  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button {
     text-transform: uppercase;
     font-weight: 600;
     letter-Spacing: 1px;
@@ -72,12 +71,12 @@ const BackButtonStyles = `
     color: ${Colors.black};
   }
 
-  .${ELEMENT_SLIDER_SLIDE_ACTION_BACK_BUTTON} button:hover,
-  .${ELEMENT_SLIDER_SLIDE_ACTION_BACK_BUTTON} button:focus {
+  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button:hover,
+  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button:focus {
     text-decoration: underline;
   }
 
-  .${ELEMENT_SLIDER_SLIDE_ACTION_BACK_BUTTON} button svg {
+  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button svg {
     fill: ${Colors.red};
     width: 12px;
     height: 12px;
@@ -90,18 +89,18 @@ const BackButtonStyles = `
 const HeadlineStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDER_SLIDE_HEADLINE}`]: Typography.SansLarge,
+      [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: Typography.SansLarge,
     },
   })}
 
-  .${ELEMENT_SLIDER_SLIDE_HEADLINE} {
+  .${ELEMENT_NAV_SLIDE_HEADLINE} {
     margin-bottom: ${Spacing.md};
     font-weight: 700;
   }
 `;
 
 // prettier-ignore
-const STYLES_CHILD_SLIDE_ELEMENT = `
+const STYLES_NAV_SLIDES = `
   ${BackButtonStyles}
   ${HeadlineStyles}
   ${SlideAction.Styles}
@@ -123,7 +122,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
     eventSlideRight();
   });
 
-  backButtonContainer.classList.add(ELEMENT_SLIDER_SLIDE_ACTION_BACK_BUTTON);
+  backButtonContainer.classList.add(ELEMENT_NAV_SLIDE_BACK_BUTTON);
   backButtonContainer.appendChild(slideBackButton);
 
   return backButtonContainer;
@@ -133,7 +132,7 @@ const createSlideHeadline = ({ headline }: { headline: string }) => {
   const slideHeadline = document.createElement('p');
 
   slideHeadline.innerHTML = headline;
-  slideHeadline.classList.add(ELEMENT_SLIDER_SLIDE_HEADLINE);
+  slideHeadline.classList.add(ELEMENT_NAV_SLIDE_HEADLINE);
 
   return slideHeadline;
 };
@@ -163,7 +162,7 @@ const CreateFirstSlide = (props: TypeSlideFirstContainer) => {
   slider.appendChild(FirstSlide.CreateElement(props));
 };
 
-const CreateChildSlideElement = (props: TypeDrawerChildSlide) => {
+const CreateNavSlides = (props: TypeDrawerChildSlide) => {
   const {
     slider,
     setCurrentSlide,
@@ -225,7 +224,7 @@ const CreateChildSlideElement = (props: TypeDrawerChildSlide) => {
     }
 
     sliderContainer.setAttribute(`${ATTRIBUTE_DATA_SLIDE}`, '');
-    sliderContainer.classList.add(ELEMENT_SLIDER_SLIDE_CONTAINER);
+    sliderContainer.classList.add(ELEMENT_NAV_SLIDE_CONTAINER);
     sliderContainer.setAttribute(`${ATTRIBUTE_PARENT_REF}`, `${parentRef}`);
 
     if (slideBackButton) sliderContainer.appendChild(slideBackButton);
@@ -243,6 +242,6 @@ const CreateChildSlideElement = (props: TypeDrawerChildSlide) => {
 };
 
 export default {
-  CreateElement: CreateChildSlideElement,
-  Styles: STYLES_CHILD_SLIDE_ELEMENT,
+  CreateElement: CreateNavSlides,
+  Styles: STYLES_NAV_SLIDES,
 };

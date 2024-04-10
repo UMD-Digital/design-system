@@ -13,8 +13,11 @@ const ELEMENT_NAME = 'umd-element-header';
 const SLOTS = {
   LOGO: 'logo',
   NAVIGATION: 'navigation',
-  DRAWER: 'drawer',
   UTILITY: 'utility',
+  PRIMARY_SLIDE_LINKS: 'primary-slide-links',
+  PRIMARY_SLIDE_SECONDARY_LINKS: 'primary-slide-secondary-links',
+  PRIMARY_SLIDE_CONTENT: 'primary-slide-content',
+  CHILDREN_SLIDES: 'children-slides',
 };
 
 export class UMDHeaderElement extends HTMLElement {

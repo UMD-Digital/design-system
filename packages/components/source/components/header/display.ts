@@ -1,5 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MarkupCreate, MarkupValidate } from 'utilities';
+import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { NavigationElements } from 'elements';
 import { UMDHeaderElement } from './index';
 
 const { Colors, Spacing, Breakpoints } = Tokens;
@@ -95,6 +96,8 @@ export const styles = `
     display: block;
   }
 
+  ${Styles.ResetString}
+
   .${ELEMENT_HEADER_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -103,6 +106,7 @@ export const styles = `
   ${wrapperStyles}
   ${logoColumnStyles}
   ${navigationColumnStyles}
+  ${NavigationElements.Drawer.Styles}
 `;
 
 const CreateUtiltyRow = ({ element }: { element: UMDHeaderElement }) => {};
@@ -134,14 +138,45 @@ const CreateNavigationColumn = ({ element }: { element: UMDHeaderElement }) => {
 };
 
 const CreateLogoColumn = ({ element }: { element: UMDHeaderElement }) => {
-  const { LOGO, DRAWER } = element._slots;
+  const {
+    LOGO,
+    PRIMARY_SLIDE_LINKS,
+    PRIMARY_SLIDE_SECONDARY_LINKS,
+    PRIMARY_SLIDE_CONTENT,
+    CHILDREN_SLIDES,
+  } = element._slots;
+  const primarySlideSlot = element.querySelector(
+    `[slot="${PRIMARY_SLIDE_CONTENT}"]`,
+  ) as HTMLSlotElement;
+  const primarySlideLinks = element.querySelector(
+    `[slot="${PRIMARY_SLIDE_LINKS}"]`,
+  ) as HTMLSlotElement;
+  const primarySlidesSecondaryLinks = element.querySelector(
+    `[slot="${PRIMARY_SLIDE_SECONDARY_LINKS}"]`,
+  ) as HTMLSlotElement;
+  const childrenSlides = element.querySelector(
+    `[slot="${CHILDREN_SLIDES}"]`,
+  ) as HTMLSlotElement;
+  const hasPrimarySlideContent =
+    primarySlideSlot && primarySlideSlot.children.length > 0;
+  const primarySlideContent = hasPrimarySlideContent
+    ? Node.slot({
+        type: PRIMARY_SLIDE_CONTENT,
+      })
+    : null;
+
   const logoSlot = MarkupValidate.ImageSlot({ element, ImageSlot: LOGO });
-  const drawerSlot = SlotWithDefaultStyling({ element, slotRef: DRAWER });
+  const drawer = NavigationElements.Drawer.CreateElement({
+    primarySlideLinks,
+    primarySlidesSecondaryLinks,
+    childrenSlides,
+    primarySlideContent,
+    displayType: 'drawer-nav',
+  });
   const container = document.createElement('div');
 
-  if (drawerSlot) {
-    drawerSlot.classList.add(ELEMENT_HEADER_DRAWER);
-    container.appendChild(drawerSlot);
+  if (drawer) {
+    container.appendChild(drawer);
   }
 
   if (logoSlot) {

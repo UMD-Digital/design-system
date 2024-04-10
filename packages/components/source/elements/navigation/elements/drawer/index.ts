@@ -89,7 +89,7 @@ const STYLES_NAV_DRAWER_ELEMENT = `
   ${NavDrawerSlider.Styles}
   ${DrawerButtonClose}
   ${DrawerContainer}
-  `;
+`;
 
 const CreateDrawerButton = (element: TypeDrawerCloseButton) => {
   const drawerCloseButton = document.createElement('button');

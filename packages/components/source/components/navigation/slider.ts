@@ -19,10 +19,10 @@ export const styles = `
   ${NavigationElements.Slider.Styles}
 `;
 
-export const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
+const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
   MakeNavSlider({ element, ...SLOTS });
 
-export class UMDNavSlider extends HTMLElement {
+class UMDNavSlider extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
@@ -32,10 +32,8 @@ export class UMDNavSlider extends HTMLElement {
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
-    const shadowElement = CreateShadowDom({ element: this });
-
-    this._shadow.appendChild(shadowElement);
+  connectedCallback() {
+    this._shadow.appendChild(CreateShadowDom({ element: this }));
   }
 }
 

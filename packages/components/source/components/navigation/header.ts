@@ -4,32 +4,57 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
-import { styles, CreateShadowDom } from './display';
+import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { NavigationHeader } from 'elements';
+import { SLOTS as GlobalSlots, MakeSliderData } from './common';
 
 const { Node } = MarkupCreate;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-header';
 const SLOTS = {
   LOGO: 'logo',
   NAVIGATION: 'navigation',
   UTILITY: 'utility',
-  PRIMARY_SLIDE_LINKS: 'primary-slide-links',
-  PRIMARY_SLIDE_SECONDARY_LINKS: 'primary-slide-secondary-links',
-  PRIMARY_SLIDE_CONTENT: 'primary-slide-content',
-  CHILDREN_SLIDES: 'children-slides',
+  ...GlobalSlots,
+};
+
+const styles = `
+  :host {
+    display: block;
+  }
+
+  ${Styles.ResetString}
+  ${NavigationHeader.Styles}
+`;
+
+const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
+  const { LOGO, NAVIGATION } = SLOTS;
+  const logoSlot = element.querySelector(`[slot="${LOGO}"]`);
+
+  if (!logoSlot) {
+    console.error('UMDHeaderElement: Logo slot is required');
+    return null;
+  }
+
+  return NavigationHeader.CreateElement({
+    logo: MarkupValidate.ImageSlot({ element, ImageSlot: LOGO }),
+    navRow: SlotWithDefaultStyling({
+      element,
+      slotRef: NAVIGATION,
+    }),
+    ...MakeSliderData({ element, ...SLOTS }),
+  });
 };
 
 export class UMDHeaderElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
     const template = Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 

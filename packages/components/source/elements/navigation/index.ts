@@ -1,10 +1,19 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
-import { NavigationElements } from 'elements';
-import { UMDHeaderElement } from './index';
+import { MarkupCreate } from 'utilities';
+import NavDrawer, { TypeNavDrawerRequirements } from './elements/drawer';
+
+type TypeLogoColumn = TypeNavDrawerRequirements & {
+  logo?: HTMLElement | null;
+};
+
+type TypeNavRow = {
+  navRow?: HTMLElement | null;
+};
+
+type TypeHeaderRequirements = TypeNavRow & TypeLogoColumn;
 
 const { Colors, Spacing, Breakpoints } = Tokens;
-const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
+const { SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-header';
 const ELEMENT_HEADER_DECLARATION = 'element-header-declaration';
@@ -16,7 +25,7 @@ const ELEMENT_HEADER_LOGO = 'element-header-logo';
 const ELEMENT_HEADER_DRAWER = 'element-header-drawer';
 const ELEMENT_HEADER_NAVIGATION_ROW = 'element-header-navigation-row';
 
-const navigationColumnStyles = `
+const NavigationColumnStyles = `
   .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
     display: flex;
     alignItems: center;
@@ -42,7 +51,7 @@ const navigationColumnStyles = `
   }
 `;
 
-const logoColumnStyles = `
+const LogoColumnStyles = `
   .${ELEMENT_HEADER_LOGO_COLUMN} {
     align-items: center;
     display: flex;
@@ -73,7 +82,7 @@ const logoColumnStyles = `
   }
 `;
 
-const wrapperStyles = `
+const WrapperStyles = `
   .${ELEMENT_HEADER_WRAPPER} {
     display: flex;
     justify-content: space-between;
@@ -82,91 +91,54 @@ const wrapperStyles = `
   }
 `;
 
-const constainerStyles = `
+const STYLES_NAVIGATION_HEADER = `
+  .${ELEMENT_HEADER_DECLARATION} {
+    container: ${ELEMENT_NAME} / inline-size;
+  }
+  
   .${ELEMENT_HEADER_CONTAINTER} {
     background-color: ${Colors.white};
     display: block;
     padding: ${Spacing.md} 0;
     position: relative;
   }
+  
+  ${WrapperStyles}
+  ${LogoColumnStyles}
+  ${NavigationColumnStyles}
+  ${NavDrawer.Styles}
 `;
 
-export const styles = `
-  :host {
-    display: block;
-  }
+const CreateUtiltyRow = ({ element }: { element: any }) => {};
 
-  ${Styles.ResetString}
-
-  .${ELEMENT_HEADER_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  ${constainerStyles}
-  ${wrapperStyles}
-  ${logoColumnStyles}
-  ${navigationColumnStyles}
-  ${NavigationElements.Drawer.Styles}
-`;
-
-const CreateUtiltyRow = ({ element }: { element: UMDHeaderElement }) => {};
-
-const CreateNavigationRow = ({ element }: { element: UMDHeaderElement }) => {
-  const { NAVIGATION } = element._slots;
-  const navigationSlot = SlotWithDefaultStyling({
-    element,
-    slotRef: NAVIGATION,
-  });
-
-  if (!navigationSlot) return null;
-
-  navigationSlot.classList.add(ELEMENT_HEADER_NAVIGATION_ROW);
-  return navigationSlot;
+const CreateNavigationRow = ({ navRow }: TypeNavRow) => {
+  if (!navRow) return null;
+  navRow.classList.add(ELEMENT_HEADER_NAVIGATION_ROW);
+  return navRow;
 };
 
-const CreateNavigationColumn = ({ element }: { element: UMDHeaderElement }) => {
+const CreateNavigationColumn = (props: TypeNavRow) => {
   const container = document.createElement('div');
-  const navigationRow = CreateNavigationRow({ element });
+  const navigationRow = CreateNavigationRow(props);
 
   if (!navigationRow) return null;
 
   if (navigationRow) {
     container.appendChild(navigationRow);
   }
-
   return container;
 };
 
-const CreateLogoColumn = ({ element }: { element: UMDHeaderElement }) => {
+const CreateLogoColumn = (props: TypeLogoColumn) => {
   const {
-    LOGO,
-    PRIMARY_SLIDE_LINKS,
-    PRIMARY_SLIDE_SECONDARY_LINKS,
-    PRIMARY_SLIDE_CONTENT,
-    CHILDREN_SLIDES,
-  } = element._slots;
-  const primarySlideSlot = element.querySelector(
-    `[slot="${PRIMARY_SLIDE_CONTENT}"]`,
-  ) as HTMLSlotElement;
-  const primarySlideLinks = element.querySelector(
-    `[slot="${PRIMARY_SLIDE_LINKS}"]`,
-  ) as HTMLSlotElement;
-  const primarySlidesSecondaryLinks = element.querySelector(
-    `[slot="${PRIMARY_SLIDE_SECONDARY_LINKS}"]`,
-  ) as HTMLSlotElement;
-  const childrenSlides = element.querySelector(
-    `[slot="${CHILDREN_SLIDES}"]`,
-  ) as HTMLSlotElement;
-  const hasPrimarySlideContent =
-    primarySlideSlot && primarySlideSlot.children.length > 0;
-  const primarySlideContent = hasPrimarySlideContent
-    ? Node.slot({
-        type: PRIMARY_SLIDE_CONTENT,
-      })
-    : null;
+    logo,
+    primarySlideLinks,
+    primarySlidesSecondaryLinks,
+    childrenSlides,
+    primarySlideContent,
+  } = props;
 
-  const logoSlot = MarkupValidate.ImageSlot({ element, ImageSlot: LOGO });
-  const drawer = NavigationElements.Drawer.CreateElement({
+  const drawer = NavDrawer.CreateElement({
     primarySlideLinks,
     primarySlidesSecondaryLinks,
     childrenSlides,
@@ -174,30 +146,27 @@ const CreateLogoColumn = ({ element }: { element: UMDHeaderElement }) => {
     displayType: 'drawer-nav',
   });
   const container = document.createElement('div');
-
   if (drawer) {
     container.appendChild(drawer);
   }
-
-  if (logoSlot) {
-    logoSlot.classList.add(ELEMENT_HEADER_LOGO);
-    container.appendChild(logoSlot);
+  if (logo) {
+    logo.classList.add(ELEMENT_HEADER_LOGO);
+    container.appendChild(logo);
   }
-
   container.classList.add(ELEMENT_HEADER_LOGO_COLUMN);
-
   return container;
 };
 
-const CreateHeaderContainer = ({ element }: { element: UMDHeaderElement }) => {
+const CreateNavigationHeader = (props: TypeHeaderRequirements) => {
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const logoColumn = CreateLogoColumn({ element });
-  const navigationColumn = CreateNavigationColumn({ element });
+  const logoColumn = CreateLogoColumn(props);
+  const navigationColumn = CreateNavigationColumn(props);
 
   wrapper.classList.add(ELEMENT_HEADER_WRAPPER);
   wrapper.appendChild(logoColumn);
+
   if (navigationColumn) wrapper.appendChild(navigationColumn);
 
   container.appendChild(wrapper);
@@ -209,14 +178,7 @@ const CreateHeaderContainer = ({ element }: { element: UMDHeaderElement }) => {
   return declaration;
 };
 
-export const CreateShadowDom = ({ element }: { element: UMDHeaderElement }) => {
-  const { LOGO } = element._slots;
-  const logoSlot = element.querySelector(`[slot="${LOGO}"]`);
-
-  if (!logoSlot) {
-    console.error('UMDHeaderElement: Logo slot is required');
-    return null;
-  }
-
-  return CreateHeaderContainer({ element });
+export default {
+  CreateElement: CreateNavigationHeader,
+  Styles: STYLES_NAVIGATION_HEADER,
 };

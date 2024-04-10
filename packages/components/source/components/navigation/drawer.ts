@@ -6,7 +6,6 @@ declare global {
 
 import { MarkupCreate, Styles } from 'utilities';
 import { NavigationElements } from 'elements';
-
 import { SLOTS, MakeNavDrawer } from './common';
 
 const ELEMENT_NAME = 'umd-element-nav-drawer-future';
@@ -20,10 +19,10 @@ export const styles = `
   ${NavigationElements.Drawer.Styles}
 `;
 
-export const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
+const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
   MakeNavDrawer({ element, ...SLOTS });
 
-export class UMDNavDrawerFeature extends HTMLElement {
+class UMDNavDrawerFeature extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {

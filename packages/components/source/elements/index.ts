@@ -9,6 +9,7 @@ import EventFeature from './event/feature';
 import EventList from './event/list';
 import EventPromo from './event/promo';
 import NavigationElements from './navigation/elements';
+import NavigationHeader from './navigation';
 import HeroDefault from './hero/default';
 import HeroElements from './hero/elements';
 import HeroMinimal from './hero/minimal';
@@ -42,6 +43,7 @@ export {
   EventList,
   EventPromo,
   NavigationElements,
+  NavigationHeader,
   HeroDefault,
   HeroElements,
   HeroMinimal,

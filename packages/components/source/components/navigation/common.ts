@@ -18,7 +18,7 @@ type TypeSliderRequirements = {
   CHILDREN_SLIDES: string;
 };
 
-const MakeSliderData = ({
+export const MakeSliderData = ({
   element,
   PRIMARY_SLIDE_CONTENT,
   PRIMARY_SLIDE_LINKS,

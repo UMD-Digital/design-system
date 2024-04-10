@@ -9,12 +9,13 @@ import { Load as EventLoader } from './event';
 import { Load as EventDateLoader } from './event-date';
 import { Load as EventDateSliderLoader } from './events-date-slider';
 import { Load as FooterLoader } from './footer';
-import { Load as HeaderLoader } from './header';
+
 import { Load as HeroLoader } from './hero';
 import { Load as HeroLogoLoader } from './hero-logo';
 import { Load as HeroMinimalLoader } from './hero-minimal';
 import { Load as NavDrawerLoader } from './nav-drawer';
 import { Load as NavDrawerFutureLoader } from './navigation/drawer';
+import { Load as NavHeader } from './navigation/header';
 import { Load as NavSliderLoader } from './navigation/slider';
 import { Load as NavItemLoader } from './nav-item';
 import { Load as PathwayHighlightLoader } from './pathway-highlight';
@@ -38,7 +39,7 @@ export const Components = {
   EventDateLoader,
   EventDateSliderLoader,
   FooterLoader,
-  HeaderLoader,
+  NavHeader,
   HeroLoader,
   HeroLogoLoader,
   HeroMinimalLoader,

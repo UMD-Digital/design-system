@@ -35,17 +35,8 @@ const { ConvertJSSObjectToStyles } = Styles;
 const { CleanCopy } = MarkupModify;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
-const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
+export const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
 const ELEMENT_NAV_SLIDE_BACK_BUTTON = 'nav-slide-action-back-button';
-
-const OVERWRITE_ACTION_SECONDARY_CONTAINER = `.${ELEMENT_NAV_SLIDE_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
-
-// prettier-ignore
-const OverwriteActionStyles = `
-  ${OVERWRITE_ACTION_SECONDARY_CONTAINER} {
-    padding-left: ${Spacing.sm};
-  }
-`;
 
 // prettier-ignore
 const BackButtonStyles = `
@@ -106,7 +97,6 @@ const STYLES_NAV_SLIDES = `
   ${HeadlineStyles}
   ${SlideAction.Styles}
   ${FirstSlide.Styles}
-  ${OverwriteActionStyles}
 `;
 
 const createSlideBackButton = (props: TypeSlideBackContainer) => {

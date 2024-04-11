@@ -42,7 +42,7 @@ const ELEMENT_NAV_SLIDE_BACK_BUTTON = 'nav-slide-action-back-button';
 const BackButtonStyles = `
   .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
     display: block;
-    border-bottom: 1px solid ${Colors.gray.light};
+    border-bottom: 1px solid ${Colors.black};
     margin-bottom: ${Spacing.sm};
     padding-bottom: ${Spacing.sm};
   }
@@ -88,6 +88,7 @@ const HeadlineStyles = `
   .${ELEMENT_NAV_SLIDE_HEADLINE} {
     margin-bottom: ${Spacing.md};
     font-weight: 700;
+    color: ${Colors.black};
   }
 `;
 

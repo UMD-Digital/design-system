@@ -73,10 +73,6 @@ const OverwriteDisplayInterior = `
     margin-bottom: ${Spacing.md};
   }
 
-  ${OVERWRITE_DISPLAY_INTERIOR_ACTION_CONTAINER}:last-child {
-    border-bottom: none;
-  }
-
   ${OVERWRITE_DISPLAY_INTERIOR_SECONDARY_CONTAINER}:last-child {
     margin-bottom: 0;
   }

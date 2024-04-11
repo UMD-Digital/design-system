@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import { AssetIcon, Styles, MarkupModify } from 'utilities';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, {
   TypeActionProps,
@@ -32,6 +32,7 @@ type TypeSliderSlideActions = TypeSlideProps & {
 
 const { Colors, Spacing } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
+const { CleanCopy } = MarkupModify;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
 const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
@@ -128,10 +129,10 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
   return backButtonContainer;
 };
 
-const createSlideHeadline = ({ headline }: { headline: string }) => {
+const createSlideHeadline = ({ link }: { link: HTMLAnchorElement }) => {
   const slideHeadline = document.createElement('p');
 
-  slideHeadline.innerHTML = headline;
+  slideHeadline.appendChild(CleanCopy({ element: link }));
   slideHeadline.classList.add(ELEMENT_NAV_SLIDE_HEADLINE);
 
   return slideHeadline;
@@ -211,9 +212,8 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
       return;
     }
 
-    const headline = parentElement.textContent as string;
     const slideBackButton = createSlideBackButton({ ...props, parentRef });
-    const slideHeadline = createSlideHeadline({ headline });
+    const slideHeadline = createSlideHeadline({ link: parentElement });
     const slideActions = createSlideActions({ ...props, slide });
 
     // Context Menu

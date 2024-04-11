@@ -71,8 +71,24 @@ const TruncateText = ({
   return text;
 };
 
+const CleanCopy = ({ element }: { element: HTMLElement }) => {
+  const clonedNoded = element.cloneNode(true) as HTMLAnchorElement;
+  const attributes = Array.from(clonedNoded.attributes);
+
+  attributes.forEach((attribute) => {
+    const name = attribute.name;
+
+    if (name !== 'href') {
+      clonedNoded.removeAttribute(name);
+    }
+  });
+
+  return clonedNoded;
+};
+
 export default {
   AnimationLinkSpan,
+  CleanCopy,
   CtaStyle,
   TruncateText,
 };

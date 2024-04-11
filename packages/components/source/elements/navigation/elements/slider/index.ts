@@ -30,7 +30,7 @@ const DISPLAY_TYPE_DRAWER = 'drawer-nav';
 const DISPLAY_TYPE_INTERIOR_NAV = 'interior-nav';
 
 const ELEMENT_NAVIGATION_SLIDER_CONTAINER = 'navigation-slider-container';
-const ELEMENT_NAVIGATION_SLIDER = 'navigation-slider';
+export const ELEMENT_NAVIGATION_SLIDER = 'navigation-slider';
 const ELEMENT_SLIDER_DECORATIVE_LINE = 'navigation-slider-decorative-line';
 
 const IS_DISPLAY_DRAWER = `[${ATTRIBUTE_DISPLAY_TYPE}=${DISPLAY_TYPE_DRAWER}]`;
@@ -57,10 +57,6 @@ const OverwriteDisplayDrawer = `
 
   ${OVERWRITE_DISPLAY_DRAWER_DECORATION} {
     display: block;
-  }
-
-  ${OVERWRITE_DISPLAY_DRAWER_SLIDER} {
-    overflow-y: auto;
   }
 `;
 
@@ -103,7 +99,6 @@ const SliderStyles = `
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     background-color: ${Colors.white};
     display: none;
   }

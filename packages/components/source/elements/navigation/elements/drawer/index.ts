@@ -1,7 +1,11 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Accessibility, AssetIcon } from 'utilities';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
-import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
+import NavDrawerSlider, {
+  TypeNavSliderRequirements,
+  ELEMENT_NAVIGATION_SLIDER,
+} from '../slider';
+import slider from '../slider';
 
 export type TypeNavDrawerRequirements = TypeNavSliderRequirements & {
   context?: HTMLElement;
@@ -137,6 +141,9 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
       const bodyOverlay = elementContainer.querySelector(
         `.${ELEMENT_NAV_DRAWER_OVERLAY}`,
       ) as HTMLDivElement;
+      const slider = elementContainer.querySelector(
+        `.${ELEMENT_NAVIGATION_SLIDER}`,
+      ) as HTMLDivElement;
 
       bodyOverlay.style.opacity = '0';
       elementContainer.style.transform = 'translateX(-100%)';
@@ -146,6 +153,10 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         elementContainer.removeAttribute('style');
         body.style.overflow = 'auto';
       }, ANIMATION_TIME + 100);
+
+      if (slider) {
+        slider.style.overflowY = `hidden`;
+      }
     };
 
     const eventOpen = () => {
@@ -155,6 +166,12 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
       const closeButton = elementContainer.querySelector(
         `.${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}`,
       ) as HTMLButtonElement;
+      const slider = elementContainer.querySelector(
+        `.${ELEMENT_NAVIGATION_SLIDER}`,
+      ) as HTMLDivElement;
+      const activeSlide = elementContainer.querySelector(
+        `.${ELEMENT_NAVIGATION_SLIDER} div[data-active]`,
+      ) as HTMLDivElement;
 
       bodyOverlay.style.display = 'block';
       elementContainer.style.display = 'flex';
@@ -170,6 +187,13 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
           action: () => eventClose(),
         });
       }, 100);
+
+      setTimeout(() => {
+        if (!activeSlide || !slider) return;
+        if (activeSlide.offsetHeight > elementContainer.offsetHeight) {
+          slider.style.overflowY = `scroll`;
+        }
+      }, 200);
     };
 
     const children = CreateNavDrawerContainer({

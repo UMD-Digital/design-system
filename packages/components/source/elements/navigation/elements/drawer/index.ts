@@ -24,9 +24,9 @@ const { EventAccessibilityFocus } = Accessibility;
 
 const ANIMATION_TIME = 300;
 
-const ELEMENT_NAV_DECLARATION = 'nav-drawer-declaration';
 const ELEMENT_NAV_DRAWER_CONTAINER = 'nav-drawer-container';
-const ELEMENT_NAV_DRAWER_BODY_OVERLAY = 'nav-drawer-body-overlay';
+const ELEMENT_NAV_DRAWER_OVERLAY = 'nav-drawer-overlay';
+const ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER = 'nav-drawer-overlay-wrapper';
 const ELEMENT_NAV_DRAWER_CLOSE_BUTTON = 'nav-drawer-close-button';
 
 // prettier-ignore
@@ -63,13 +63,10 @@ export const DrawerContainer = `
     z-index: 9;
     display: none;
     transform: translateX(-100%);
+    z-index: 999999;
   }
 
-  .${ELEMENT_NAV_DRAWER_CONTAINER} > *:not(.${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}) {
-    height: 100% !important;
-  }
-
-  .${ELEMENT_NAV_DRAWER_BODY_OVERLAY} {
+  .${ELEMENT_NAV_DRAWER_OVERLAY} {
     position: fixed;
     top: 0;
     left: 0;
@@ -82,10 +79,18 @@ export const DrawerContainer = `
     display: none;
     opacity: 0;
   }
+
+  .${ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER} {
+    display: flex;
+    height: 100%;
+  }
+
+  .${ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER} > *:not(.${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}) {
+    height: 100% !important;
+  }
 `;
 
 const STYLES_NAV_DRAWER_ELEMENT = `
-  ${NavDisplayButton.Styles}
   ${NavDrawerSlider.Styles}
   ${DrawerButtonClose}
   ${DrawerContainer}
@@ -101,37 +106,26 @@ const CreateDrawerButton = (element: TypeDrawerCloseButton) => {
   return drawerCloseButton;
 };
 
-const CreateDrawerElement = (props: TypeDrawerProps) => {
+const CreateNavDrawerContainer = (props: TypeDrawerProps) => {
   const { eventClose } = props;
   const bodyOverlay = document.createElement('div');
-  const drawer = document.createElement('div');
+  const bodyOverlayWrapper = document.createElement('div');
   const closeButton = CreateDrawerButton(props);
   const slider = NavDrawerSlider.CreateElement({
     ...props,
     displayType: 'drawer-nav',
   });
 
-  drawer.appendChild(slider);
-  drawer.appendChild(closeButton);
+  bodyOverlayWrapper.classList.add(ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER);
 
-  bodyOverlay.appendChild(drawer);
-  bodyOverlay.classList.add(ELEMENT_NAV_DRAWER_BODY_OVERLAY);
+  bodyOverlayWrapper.appendChild(slider);
+  bodyOverlayWrapper.appendChild(closeButton);
+
+  bodyOverlay.classList.add(ELEMENT_NAV_DRAWER_OVERLAY);
   bodyOverlay.addEventListener('click', eventClose.bind(props));
-
-  drawer.classList.add(ELEMENT_NAV_DRAWER_CONTAINER);
+  bodyOverlay.appendChild(bodyOverlayWrapper);
 
   return bodyOverlay;
-};
-
-const CreateNavDrawerContainer = (props: TypeDrawerProps) => {
-  const container = document.createElement('div');
-  const openButton = NavDisplayButton.CreateElement(props);
-  const drawer = CreateDrawerElement(props);
-
-  container.appendChild(openButton);
-  container.appendChild(drawer);
-
-  return container;
 };
 
 const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
@@ -142,36 +136,30 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
 
     const eventClose = () => {
       const bodyOverlay = elementContainer.querySelector(
-        `.${ELEMENT_NAV_DRAWER_BODY_OVERLAY}`,
-      ) as HTMLDivElement;
-      const drawer = elementContainer.querySelector(
-        `.${ELEMENT_NAV_DRAWER_CONTAINER}`,
+        `.${ELEMENT_NAV_DRAWER_OVERLAY}`,
       ) as HTMLDivElement;
 
       bodyOverlay.style.opacity = '0';
-      drawer.style.transform = 'translateX(-100%)';
+      elementContainer.style.transform = 'translateX(-100%)';
 
       setTimeout(() => {
         bodyOverlay.removeAttribute('style');
-        drawer.removeAttribute('style');
+        elementContainer.removeAttribute('style');
         body.style.overflow = 'auto';
       }, ANIMATION_TIME + 100);
     };
 
     const eventOpen = () => {
       const bodyOverlay = elementContainer.querySelector(
-        `.${ELEMENT_NAV_DRAWER_BODY_OVERLAY}`,
-      ) as HTMLDivElement;
-      const drawer = elementContainer.querySelector(
-        `.${ELEMENT_NAV_DRAWER_CONTAINER}`,
+        `.${ELEMENT_NAV_DRAWER_OVERLAY}`,
       ) as HTMLDivElement;
 
       bodyOverlay.style.display = 'block';
-      drawer.style.display = 'flex';
+      elementContainer.style.display = 'flex';
 
       setTimeout(() => {
         bodyOverlay.style.opacity = '1';
-        drawer.style.transform = 'translateX(0)';
+        elementContainer.style.transform = 'translateX(0)';
         body.style.overflow = 'hidden';
 
         EventAccessibilityFocus({
@@ -187,10 +175,15 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
       eventClose,
     });
 
-    elementContainer.classList.add(ELEMENT_NAV_DECLARATION);
+    elementContainer.classList.add(ELEMENT_NAV_DRAWER_CONTAINER);
     elementContainer.appendChild(children);
 
-    return elementContainer;
+    return {
+      element: elementContainer,
+      events: {
+        eventOpen,
+      },
+    };
   })();
 
 export default {

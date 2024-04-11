@@ -50,6 +50,9 @@ const OverwriteDisplayDrawer = `
   ${OVERWRITE_DISPLAY_DRAWER_CONTAINER} {
     background-color: ${Colors.white};
     padding: ${Spacing['2xl']} ${Spacing.md};
+    width: calc(100vw - ${Spacing['8xl']});
+    max-width: 400px;
+    min-width: 227px;
   }
 
   ${OVERWRITE_DISPLAY_DRAWER_DECORATION} {
@@ -58,15 +61,7 @@ const OverwriteDisplayDrawer = `
 
   ${OVERWRITE_DISPLAY_DRAWER_SLIDER} {
     overflow-y: auto;
-    width: calc(100vw - ${Spacing['8xl']});
-    max-width: 400px;
-    min-width: 227px;
   }
-
-  ${OVERWRITE_DISPLAY_DRAWER_SLIDER} > * {
-    overflow-y: auto;
-  }
-
 `;
 
 // prettier-ignore

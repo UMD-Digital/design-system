@@ -17,10 +17,21 @@ export const styles = `
 
   ${Styles.ResetString}
   ${NavigationElements.Drawer.Styles}
+  ${NavigationElements.MenuButton.Styles}
 `;
 
-const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
-  MakeNavDrawer({ element, ...SLOTS });
+const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
+  const container = document.createElement('div');
+  const drawer = MakeNavDrawer({ element, ...SLOTS });
+  const button = NavigationElements.MenuButton.CreateElement({
+    eventOpen: drawer.events.eventOpen,
+  });
+
+  container.appendChild(drawer.element);
+  container.appendChild(button);
+
+  return container;
+};
 
 class UMDNavDrawerFeature extends HTMLElement {
   _shadow: ShadowRoot;

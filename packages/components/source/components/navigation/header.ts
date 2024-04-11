@@ -5,8 +5,8 @@ declare global {
 }
 
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
-import { NavigationHeader } from 'elements';
-import { SLOTS as GlobalSlots, MakeSliderData } from './common';
+import { NavigationHeader, NavigationElements } from 'elements';
+import { SLOTS as GlobalSlots, MakeSliderData, MakeNavDrawer } from './common';
 
 const { Node } = MarkupCreate;
 const { SlotWithDefaultStyling } = MarkupCreate;
@@ -25,10 +25,17 @@ const styles = `
   }
 
   ${Styles.ResetString}
+  ${NavigationElements.Drawer.Styles}
   ${NavigationHeader.Styles}
 `;
 
-const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
+const CreateHeader = ({
+  element,
+  eventOpen,
+}: {
+  element: HTMLElement;
+  eventOpen?: () => void;
+}) => {
   const { LOGO, NAVIGATION } = SLOTS;
   const logoSlot = element.querySelector(`[slot="${LOGO}"]`);
 
@@ -37,14 +44,16 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
     return null;
   }
 
-  return NavigationHeader.CreateElement({
+  const value = NavigationHeader.CreateElement({
     logo: MarkupValidate.ImageSlot({ element, ImageSlot: LOGO }),
     navRow: SlotWithDefaultStyling({
       element,
       slotRef: NAVIGATION,
     }),
-    ...MakeSliderData({ element, ...SLOTS }),
+    eventOpen,
   });
+
+  return value;
 };
 
 export class UMDHeaderElement extends HTMLElement {
@@ -61,10 +70,18 @@ export class UMDHeaderElement extends HTMLElement {
   connectedCallback() {
     const element = this;
     const { _shadow } = element;
-    const shadowElement = CreateShadowDom({ element });
+    const drawer = MakeNavDrawer({
+      element,
+      ...SLOTS,
+      displayType: 'drawer-nav',
+    });
+    const eventOpen = drawer.events.eventOpen;
+    const header = CreateHeader({ element, eventOpen });
 
-    if (!shadowElement) return;
-    _shadow.appendChild(shadowElement);
+    if (header) {
+      if (drawer) _shadow.appendChild(drawer.element);
+      _shadow.appendChild(header);
+    }
   }
 }
 

@@ -18,6 +18,10 @@ type TypeSliderRequirements = {
   CHILDREN_SLIDES: string;
 };
 
+type TypeNavDrawerRequirements = TypeSliderRequirements & {
+  displayType?: string;
+};
+
 export const MakeSliderData = ({
   element,
   PRIMARY_SLIDE_CONTENT,
@@ -53,11 +57,12 @@ export const MakeSliderData = ({
   };
 };
 
-export const MakeNavDrawer = (props: TypeSliderRequirements) => {
-  const { element } = props;
+export const MakeNavDrawer = (props: TypeNavDrawerRequirements) => {
+  const { element, displayType } = props;
   return NavigationElements.Drawer.CreateElement({
     ...MakeSliderData(props),
     context: element,
+    displayType,
   });
 };
 

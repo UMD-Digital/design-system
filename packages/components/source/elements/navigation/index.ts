@@ -1,16 +1,17 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { MarkupCreate } from 'utilities';
-import NavDrawer, { TypeNavDrawerRequirements } from './elements/drawer';
+import MenuButton from './elements/menu-button';
 
-type TypeLogoColumn = TypeNavDrawerRequirements & {
+type TypeLogoRequirments = {
   logo?: HTMLElement | null;
+  eventOpen?: () => void;
 };
 
 type TypeNavRow = {
   navRow?: HTMLElement | null;
 };
 
-type TypeHeaderRequirements = TypeNavRow & TypeLogoColumn;
+type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
 const { Colors, Spacing, Breakpoints } = Tokens;
 const { SlotWithDefaultStyling, Node } = MarkupCreate;
@@ -106,7 +107,7 @@ const STYLES_NAVIGATION_HEADER = `
   ${WrapperStyles}
   ${LogoColumnStyles}
   ${NavigationColumnStyles}
-  ${NavDrawer.Styles}
+  ${MenuButton.Styles}
 `;
 
 const CreateUtiltyRow = ({ element }: { element: any }) => {};
@@ -129,26 +130,14 @@ const CreateNavigationColumn = (props: TypeNavRow) => {
   return container;
 };
 
-const CreateLogoColumn = (props: TypeLogoColumn) => {
-  const {
-    logo,
-    primarySlideLinks,
-    primarySlidesSecondaryLinks,
-    childrenSlides,
-    primarySlideContent,
-  } = props;
-
-  const drawer = NavDrawer.CreateElement({
-    primarySlideLinks,
-    primarySlidesSecondaryLinks,
-    childrenSlides,
-    primarySlideContent,
-    displayType: 'drawer-nav',
-  });
+const CreateLogoColumn = ({ logo, eventOpen }: TypeLogoRequirments) => {
   const container = document.createElement('div');
-  if (drawer) {
-    container.appendChild(drawer);
+
+  if (eventOpen) {
+    const menuButton = MenuButton.CreateElement({ eventOpen });
+    container.appendChild(menuButton);
   }
+
   if (logo) {
     logo.classList.add(ELEMENT_HEADER_LOGO);
     container.appendChild(logo);

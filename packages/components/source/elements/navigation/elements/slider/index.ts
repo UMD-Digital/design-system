@@ -217,6 +217,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
         ? getUpcomingSlideParent()
         : getUpcomingSlide();
       const slides = [activeSlide, upcomingSlide];
+      const firstLink = upcomingSlide.querySelector('a') as HTMLAnchorElement;
 
       const animate = () => {
         let startPositionForUpcomingSlide = '100%';
@@ -248,6 +249,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
 
           upcomingSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
           activeSlide.removeAttribute(ATTRIBUTE_ACTIVE_SLIDE);
+          if (firstLink) firstLink.focus();
         }, ANIMATION_TIME + 100);
       };
 

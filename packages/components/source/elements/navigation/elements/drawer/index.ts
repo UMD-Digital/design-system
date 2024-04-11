@@ -5,7 +5,6 @@ import NavDrawerSlider, {
   TypeNavSliderRequirements,
   ELEMENT_NAVIGATION_SLIDER,
 } from '../slider';
-import slider from '../slider';
 
 export type TypeNavDrawerRequirements = TypeNavSliderRequirements & {
   context?: HTMLElement;
@@ -62,10 +61,7 @@ export const DrawerContainer = `
     bottom: 0;
     left: 0;
     top: 0;
-    transition: transform ${ANIMATION_TIME}ms ease-in-out;
-    z-index: 9;
     display: none;
-    transform: translateX(-100%);
     z-index: 999999;
   }
 
@@ -77,15 +73,15 @@ export const DrawerContainer = `
     width: 100vw;
     background-color: rgba(0,0,0,0.5);
     transition: opacity ${ANIMATION_TIME}ms ease-in-out;
-    z-index: 999999;
     cursor: pointer;
-    display: none;
     opacity: 0;
   }
 
   .${ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER} {
     display: flex;
     height: 100%;
+    transition: transform ${ANIMATION_TIME + 100}ms ease-in-out;
+    transform: translateX(-100%);
   }
 
   .${ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER} > *:not(.${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}) {
@@ -141,17 +137,21 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
       const bodyOverlay = elementContainer.querySelector(
         `.${ELEMENT_NAV_DRAWER_OVERLAY}`,
       ) as HTMLDivElement;
-      const slider = elementContainer.querySelector(
+      const bodyOverlayWrapper = bodyOverlay.querySelector(
+        `.${ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER}`,
+      ) as HTMLDivElement;
+      const slider = bodyOverlay.querySelector(
         `.${ELEMENT_NAVIGATION_SLIDER}`,
       ) as HTMLDivElement;
 
       bodyOverlay.style.opacity = '0';
-      elementContainer.style.transform = 'translateX(-100%)';
+      bodyOverlayWrapper.style.transform = 'translateX(-100%)';
 
       setTimeout(() => {
         bodyOverlay.removeAttribute('style');
-        elementContainer.removeAttribute('style');
+        bodyOverlayWrapper.removeAttribute('style');
         body.style.overflow = 'auto';
+        elementContainer.style.display = 'none';
       }, ANIMATION_TIME + 100);
 
       if (slider) {
@@ -163,22 +163,26 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
       const bodyOverlay = elementContainer.querySelector(
         `.${ELEMENT_NAV_DRAWER_OVERLAY}`,
       ) as HTMLDivElement;
-      const closeButton = elementContainer.querySelector(
+      const bodyOverlayWrapper = bodyOverlay.querySelector(
+        `.${ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER}`,
+      ) as HTMLDivElement;
+      const closeButton = bodyOverlayWrapper.querySelector(
         `.${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}`,
       ) as HTMLButtonElement;
-      const slider = elementContainer.querySelector(
+      const slider = bodyOverlayWrapper.querySelector(
         `.${ELEMENT_NAVIGATION_SLIDER}`,
       ) as HTMLDivElement;
-      const activeSlide = elementContainer.querySelector(
+      const activeSlide = bodyOverlayWrapper.querySelector(
         `.${ELEMENT_NAVIGATION_SLIDER} div[data-active]`,
       ) as HTMLDivElement;
 
+      elementContainer.style.display = 'block';
       bodyOverlay.style.display = 'block';
-      elementContainer.style.display = 'flex';
+      bodyOverlayWrapper.style.display = 'flex';
 
       setTimeout(() => {
         bodyOverlay.style.opacity = '1';
-        elementContainer.style.transform = 'translateX(0)';
+        bodyOverlayWrapper.style.transform = 'translateX(0)';
         body.style.overflow = 'hidden';
         closeButton.focus();
 

@@ -8,7 +8,7 @@ import { MarkupCreate, Styles } from 'utilities';
 import { NavigationElements } from 'elements';
 import { SLOTS, MakeNavDrawer } from './common';
 
-const ELEMENT_NAME = 'umd-element-nav-drawer-future';
+const ELEMENT_NAME = 'umd-element-nav-drawer';
 
 export const styles = `
   :host {

@@ -64,6 +64,7 @@ const OverwriteSlidePrimaryContainer = `
 const SecondaryLinksContainer = `
   .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}:last-child {
     border-bottom: 1px solid ${Colors.gray.light};
+    padding-bottom: ${Spacing.md};
   }
 `;
 

@@ -44,12 +44,13 @@ const CreateHeader = ({
     return null;
   }
 
+  const navigationSlot = element.querySelector(
+    `[slot="${NAVIGATION}"]`,
+  ) as HTMLElement;
+
   const value = NavigationHeader.CreateElement({
     logo: MarkupValidate.ImageSlot({ element, ImageSlot: LOGO }),
-    navRow: SlotWithDefaultStyling({
-      element,
-      slotRef: NAVIGATION,
-    }),
+    navRow: navigationSlot,
     eventOpen,
   });
 

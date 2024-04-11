@@ -23,7 +23,7 @@ const ELEMENT_HEADER_WRAPPER = 'element-header-wrapper';
 const ELEMENT_HEADER_LOGO_COLUMN = 'element-header-logo-column';
 const ELEMENT_HEADER_NAVIGATION_COLUMN = 'element-header-navigation-column';
 const ELEMENT_HEADER_LOGO = 'element-header-logo';
-const ELEMENT_HEADER_DRAWER = 'element-header-drawer';
+const ELEMENT_HEADER_MENU_BUTTON = 'element-header-menu-button';
 const ELEMENT_HEADER_NAVIGATION_ROW = 'element-header-navigation-row';
 
 const NavigationColumnStyles = `
@@ -60,7 +60,7 @@ const LogoColumnStyles = `
     position: relative;
   }
 
-  .${ELEMENT_HEADER_DRAWER} {
+  .${ELEMENT_HEADER_MENU_BUTTON} {
     border-right: 1px solid ${Colors.gray.light};
     padding-right: ${Spacing.min};
     margin-right: ${Spacing.sm};
@@ -114,6 +114,11 @@ const CreateUtiltyRow = ({ element }: { element: any }) => {};
 
 const CreateNavigationRow = ({ navRow }: TypeNavRow) => {
   if (!navRow) return null;
+
+  const navItem = Array.from(navRow.querySelectorAll('umd-element-nav-item'));
+
+  console.log(navItem);
+
   navRow.classList.add(ELEMENT_HEADER_NAVIGATION_ROW);
   return navRow;
 };
@@ -135,6 +140,7 @@ const CreateLogoColumn = ({ logo, eventOpen }: TypeLogoRequirments) => {
 
   if (eventOpen) {
     const menuButton = MenuButton.CreateElement({ eventOpen });
+    menuButton.classList.add(ELEMENT_HEADER_MENU_BUTTON);
     container.appendChild(menuButton);
   }
 

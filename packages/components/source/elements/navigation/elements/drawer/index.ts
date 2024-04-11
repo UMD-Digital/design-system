@@ -1,8 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Accessibility, AssetIcon } from 'utilities';
-import NavDisplayButton, {
-  TypeMenuDisplayButtonRequirements,
-} from '../menu-button';
+import { TypeMenuDisplayButtonRequirements } from '../menu-button';
 import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
 
 export type TypeNavDrawerRequirements = TypeNavSliderRequirements & {
@@ -40,6 +38,7 @@ export const DrawerButtonClose = `
     width: ${Spacing['2xl']};
     padding: 12px;
     transition: background .5s ease-in-out;
+    order: 2;
   }
 
   .${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}:hover,
@@ -118,8 +117,8 @@ const CreateNavDrawerContainer = (props: TypeDrawerProps) => {
 
   bodyOverlayWrapper.classList.add(ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER);
 
-  bodyOverlayWrapper.appendChild(slider);
   bodyOverlayWrapper.appendChild(closeButton);
+  bodyOverlayWrapper.appendChild(slider);
 
   bodyOverlay.classList.add(ELEMENT_NAV_DRAWER_OVERLAY);
   bodyOverlay.addEventListener('click', eventClose.bind(props));
@@ -153,6 +152,9 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
       const bodyOverlay = elementContainer.querySelector(
         `.${ELEMENT_NAV_DRAWER_OVERLAY}`,
       ) as HTMLDivElement;
+      const closeButton = elementContainer.querySelector(
+        `.${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}`,
+      ) as HTMLButtonElement;
 
       bodyOverlay.style.display = 'block';
       elementContainer.style.display = 'flex';
@@ -161,6 +163,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         bodyOverlay.style.opacity = '1';
         elementContainer.style.transform = 'translateX(0)';
         body.style.overflow = 'hidden';
+        closeButton.focus();
 
         EventAccessibilityFocus({
           element: context || elementContainer,

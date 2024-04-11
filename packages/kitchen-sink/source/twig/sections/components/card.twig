@@ -617,101 +617,99 @@
         </section>
 
         <section>
-          <div class="umd-lock-smallest">
-            <h3 class="content-heading type-hr">
-              <span>Card</span>
-              <span>List Style</span>
-            </h3>
+          <h3 class="content-heading type-hr">
+            <span>Card</span>
+            <span>List Style</span>
+          </h3>
 
-            <umd-element-card display="list">
-              <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <umd-element-card display="list">
+            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
 
-              <p slot="eyebrow">
-                {{ EyebrowString.EyebrowStringNormal() }}
-              </p>
-              <p slot="headline">
-                <a href="google.com">
-                  {{ HeadlineString.CardHeadlineStringNormal() }}
+            <p slot="eyebrow">
+              {{ EyebrowString.EyebrowStringNormal() }}
+            </p>
+            <p slot="headline">
+              <a href="google.com">
+                {{ HeadlineString.CardHeadlineStringNormal() }}
+              </a>
+            </p>
+            <p slot="text">
+              {{ RichTextString.CardRichTextStringNormal() }}
+            </p>
+
+            <div slot="actions">
+              <umd-element-call-to-action type="secondary">
+                <a href="https://google.com" aria-label="link to google">
+                  Learn More
                 </a>
-              </p>
-              <p slot="text">
+              </umd-element-call-to-action>
+            </div>
+          </umd-element-card>
+          <umd-element-card display="list">
+            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+
+            <p slot="headline">
+              {{ HeadlineString.CardHeadlineStringNormal() }}
+            </p>
+            <p slot="text">
+              {{ RichTextString.CardRichTextStringNormal() }}
+            </p>
+
+            <p slot="date">
+              September 1, 2021
+            </p>
+          </umd-element-card>
+          <umd-element-card display="list">
+            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+
+            <p slot="eyebrow">
+              {{ EyebrowString.EyebrowStringNormal() }}
+            </p>
+            <p slot="headline">
+              {{ HeadlineString.CardHeadlineStringNormal() }}
+            </p>
+            <p slot="text">
+              {{ RichTextString.CardRichTextStringNormal() }}
+            </p>
+
+            <p slot="date">
+              September 1, 2021
+            </p>
+
+            <div slot="actions">
+              <umd-element-call-to-action type="secondary">
+                <a href="https://google.com" aria-label="link to google">
+                  Learn More
+                </a>
+              </umd-element-call-to-action>
+            </div>
+          </umd-element-card>
+          <umd-element-card display="list">
+            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+
+            <p slot="eyebrow">
+              {{ EyebrowString.EyebrowStringNormal() }}
+            </p>
+            <p slot="headline">
+              {{ HeadlineString.CardHeadlineStringNormal() }}
+            </p>
+            <div slot="text">
+              <p>
                 {{ RichTextString.CardRichTextStringNormal() }}
               </p>
-
-              <div slot="actions">
-                <umd-element-call-to-action type="secondary">
-                  <a href="https://google.com" aria-label="link to google">
-                    Learn More
-                  </a>
-                </umd-element-call-to-action>
-              </div>
-            </umd-element-card>
-            <umd-element-card display="list">
-              <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-              <p slot="headline">
-                {{ HeadlineString.CardHeadlineStringNormal() }}
-              </p>
-              <p slot="text">
+              <p>
                 {{ RichTextString.CardRichTextStringNormal() }}
               </p>
+            </div>
 
-              <p slot="date">
-                September 1, 2021
-              </p>
-            </umd-element-card>
-            <umd-element-card display="list">
-              <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-              <p slot="eyebrow">
-                {{ EyebrowString.EyebrowStringNormal() }}
-              </p>
-              <p slot="headline">
-                {{ HeadlineString.CardHeadlineStringNormal() }}
-              </p>
-              <p slot="text">
-                {{ RichTextString.CardRichTextStringNormal() }}
-              </p>
-
-              <p slot="date">
-                September 1, 2021
-              </p>
-
-              <div slot="actions">
-                <umd-element-call-to-action type="secondary">
-                  <a href="https://google.com" aria-label="link to google">
-                    Learn More
-                  </a>
-                </umd-element-call-to-action>
-              </div>
-            </umd-element-card>
-            <umd-element-card display="list">
-              <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-              <p slot="eyebrow">
-                {{ EyebrowString.EyebrowStringNormal() }}
-              </p>
-              <p slot="headline">
-                {{ HeadlineString.CardHeadlineStringNormal() }}
-              </p>
-              <div slot="text">
-                <p>
-                  {{ RichTextString.CardRichTextStringNormal() }}
-                </p>
-                <p>
-                  {{ RichTextString.CardRichTextStringNormal() }}
-                </p>
-              </div>
-
-              <div slot="actions">
-                <umd-element-call-to-action type="secondary">
-                  <a href="https://google.com" aria-label="link to google">
-                    Learn More
-                  </a>
-                </umd-element-call-to-action>
-              </div>
-            </umd-element-card>
-          </div>
+            <div slot="actions">
+              <umd-element-call-to-action type="secondary">
+                <a href="https://google.com" aria-label="link to google">
+                  Learn More
+                </a>
+              </umd-element-call-to-action>
+            </div>
+          </umd-element-card>
         </section>
 
         <section style="background-color: black; padding; 50px 0;  margin-bottom: 40px;">

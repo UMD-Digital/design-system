@@ -1,12 +1,15 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens, Animations } from '@universityofmaryland/variables';
 import { Styles, MarkupCreate } from 'utilities';
 const { Colors } = Tokens;
+const { ConvertJSSObjectToStyles } = Styles;
+
 declare global {
   interface Window {
     UMDBreadcrumbElement: typeof UMDBreadcrumbElement;
   }
 }
 
+const { Link } = Animations;
 const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-breadcrumb';
@@ -19,6 +22,8 @@ const SLOTS = {
   PATHS: 'paths',
 };
 const styles = `
+  ${Styles.ResetString}
+
   :host {
     display: block;
   }
@@ -32,18 +37,14 @@ const styles = `
     color: ${Colors.black} !important;
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`a:not(:last-of-type)`]: Animations.Link.LineSlideUnder.gray,
+    },
+  })}
+
   a:not(:last-of-type) {
     margin-right: 14px;
-    background-image: linear-gradient(270deg, ${Colors.gray.light} 50%, ${Colors.red} 50%);
-    background-position: 100% 100%;
-    background-repeat: no-repeat;
-    background-size: 200% 2px;
-    transition: background .5s;   
-  }
-
-  a:not(:last-of-type):hover {
-    background-position: 0 100%;
-    background-size: 200% 2px;
   }
 
   a + a::before {
@@ -64,10 +65,7 @@ const styles = `
 
   ${THEME_DARK_ATTR} a + a::before {
     background-color: ${Colors.white};
-  }
-
-  ${Styles.ResetString}
-`;
+  }`;
 
 const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
   const { PATHS } = element._slots;

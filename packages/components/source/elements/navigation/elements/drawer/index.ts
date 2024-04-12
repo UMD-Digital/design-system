@@ -129,9 +129,11 @@ const CreateNavDrawerContainer = (props: TypeDrawerProps) => {
 
 const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
   (() => {
-    const { context } = props;
+    const { context, primarySlideLinks } = props;
     const body = document.querySelector('body') as HTMLBodyElement;
     const elementContainer = document.createElement('div');
+
+    if (!primarySlideLinks) return null;
 
     const eventClose = () => {
       const bodyOverlay = elementContainer.querySelector(

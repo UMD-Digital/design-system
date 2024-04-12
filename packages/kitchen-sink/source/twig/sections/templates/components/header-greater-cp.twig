@@ -1,51 +1,47 @@
 <umd-utility-header size="1400px" padding="20"></umd-utility-header>
 
 <div class="umd-lock">
-  <umd-component-header role="navigation">
-    <div class="container-wrapper">
-      <div class="logo-column">
-        <umd-element-nav-drawer>
-          <div slot="primary-slide-links"></div>
-          <div slot="primary-slide-content"></div>
-          <div slot="children-slides"></div>
-        </umd-element-nav-drawer>
+  <umd-element-header role="navigation">
+    <a href="/" slot="logo" styled>
+      <span class="umd-sans-larger-bold">Greater College Park</span>
+    </a>
 
-        <div class="logo">
-          <a href="/" class="umd-sans-larger-bold">Greater College Park</a>
-        </div>
-      </div>
-
-      <div class="nav-column">
-        <div class="nav-items" id="featured-nav">
-          <umd-element-nav-item>
-            <a href="/" slot="primary-link"><span>About</span></a>
-            <div slot="dropdown-links">
-              <a href="https://google.com"><span>Google</span></a>
-            </div>
-          </umd-element-nav-item>
-          <umd-element-nav-item>
-            <a href="/" slot="primary-link"><span>Community</span></a>
-            <div slot="dropdown-links">
-              <a href="https://google.com"><span>Google</span></a>
-            </div>
-          </umd-element-nav-item>
-          <umd-element-nav-item>
-            <a href="/" slot="primary-link"><span>News & Events</span></a>
-          </umd-element-nav-item>
-          <umd-element-nav-item>
-            <a href="/" slot="primary-link"><span>Real Estate</span></a>
-            <div slot="dropdown-links">
-              <a href="https://google.com"><span>Google</span></a>
-            </div>
-          </umd-element-nav-item>
-          <umd-element-nav-item>
-            <a href="/" slot="primary-link"><span>Contact Us</span></a>
-            <div slot="dropdown-links">
-              <a href="https://google.com"><span>Google</span></a>
-            </div>
-          </umd-element-nav-item>
-        </div>
-      </div>
+    <div slot="primary-slide-links">
+      <a href="https://google.com"><span>Google</span></a>
     </div>
-  </umd-component-header>
+
+    <div slot="main-navigation">
+      <umd-element-nav-item>
+        <a href="/" slot="primary-link"><span>About</span></a>
+        <div slot="dropdown-links">
+          <a href="https://google.com"><span>Google</span></a>
+        </div>
+      </umd-element-nav-item>
+
+      <umd-element-nav-item>
+        <a href="/" slot="primary-link"><span>Community</span></a>
+        <div slot="dropdown-links">
+          <a href="https://google.com"><span>Google</span></a>
+        </div>
+      </umd-element-nav-item>
+
+      <umd-element-nav-item>
+        <a href="/" slot="primary-link"><span>News & Events</span></a>
+      </umd-element-nav-item>
+
+      <umd-element-nav-item>
+        <a href="/" slot="primary-link"><span>Real Estate</span></a>
+        <div slot="dropdown-links">
+          <a href="https://google.com"><span>Google</span></a>
+        </div>
+      </umd-element-nav-item>
+
+      <umd-element-nav-item>
+        <a href="/" slot="primary-link"><span>Contact Us</span></a>
+        <div slot="dropdown-links">
+          <a href="https://google.com"><span>Google</span></a>
+        </div>
+      </umd-element-nav-item>
+    </div>
+  </umd-element-header>
 </div>

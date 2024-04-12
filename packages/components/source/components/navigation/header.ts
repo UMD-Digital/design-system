@@ -6,16 +6,17 @@ declare global {
 
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 import { NavigationHeader, NavigationElements } from 'elements';
-import { SLOTS as GlobalSlots, MakeSliderData, MakeNavDrawer } from './common';
+import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 
 const { Node } = MarkupCreate;
 const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-header';
+const ATTRIBUTE_SEARCH_URL = 'search-url';
 const SLOTS = {
   LOGO: 'logo',
-  NAVIGATION: 'navigation',
-  UTILITY: 'utility',
+  NAVIGATION: 'main-navigation',
+  UTILITY: 'utility-navigation',
   ...GlobalSlots,
 };
 
@@ -37,21 +38,24 @@ const CreateHeader = ({
   eventOpen?: () => void;
 }) => {
   const { LOGO, NAVIGATION } = SLOTS;
-  const logoSlot = element.querySelector(`[slot="${LOGO}"]`);
-
-  if (!logoSlot) {
-    console.error('UMDHeaderElement: Logo slot is required');
-    return null;
-  }
-
+  const logoSlot = SlotWithDefaultStyling({
+    element,
+    slotRef: LOGO,
+  });
   const navigationSlot = element.querySelector(
     `[slot="${NAVIGATION}"]`,
   ) as HTMLElement;
+  const searchUrl = element.getAttribute(ATTRIBUTE_SEARCH_URL);
+
+  if (!logoSlot) {
+    console.error('UMDHeaderElement: Logo slot is required');
+  }
 
   const value = NavigationHeader.CreateElement({
     logo: MarkupValidate.ImageSlot({ element, ImageSlot: LOGO }),
     navRow: navigationSlot,
     eventOpen,
+    searchUrl,
   });
 
   return value;
@@ -76,13 +80,16 @@ export class UMDHeaderElement extends HTMLElement {
       ...SLOTS,
       displayType: 'drawer-nav',
     });
-    const eventOpen = drawer.events.eventOpen;
-    const header = CreateHeader({ element, eventOpen });
+    const headerProps: { element: HTMLElement; eventOpen?: () => void } = {
+      element,
+    };
 
-    if (header) {
-      if (drawer) _shadow.appendChild(drawer.element);
-      _shadow.appendChild(header);
+    if (drawer) {
+      _shadow.appendChild(drawer.element);
+      headerProps.eventOpen = drawer.events.eventOpen;
     }
+
+    _shadow.appendChild(CreateHeader(headerProps));
   }
 }
 

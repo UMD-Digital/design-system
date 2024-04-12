@@ -7,3 +7,13 @@
 /* Dependencies */
 
 @import './dependencies/reset.css';
+
+.logo-size {
+  height: 48px;
+}
+
+@media (min-width: 768px) {
+  .logo-size {
+    height: 80px;
+  }
+}

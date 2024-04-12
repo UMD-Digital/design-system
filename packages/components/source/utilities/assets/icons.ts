@@ -20,6 +20,8 @@ const FORWARD_ARROW = `<svg aria-hidden="true"  viewBox="0 0 24 8" fill="none" x
 
 const MULTI_DAY = `<svg aria-hidden="true" id="multi-day-icon" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.12132 0.458984H14.7596V9.30341H12.1967V3.53528H4.12132V0.458984ZM0.592957 4.85456H11.1915V6.89765V6.89765V13.6654H0.592957V6.89765V6.89765V4.85456Z" fill="#454545"/></svg>`;
 
+const MAGNIFY_GLASS = `<svg aria-hidden="true" id="magnify-glass-icon"  width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M79.3401 42.2306C79.3401 54.1438 69.6826 63.8013 57.7694 63.8013C45.8562 63.8013 36.1987 54.1438 36.1987 42.2306C36.1987 30.3174 45.8562 20.6599 57.7694 20.6599C69.6826 20.6599 79.3401 30.3174 79.3401 42.2306ZM91 42.2306C91 60.5833 76.1222 75.4612 57.7694 75.4612C51.3447 75.4612 45.3458 73.6379 40.2619 70.4806L24.2216 86.5209H5L30.2245 60.8255C26.6351 55.5189 24.5388 49.1195 24.5388 42.2306C24.5388 23.8778 39.4167 9 57.7694 9C76.1222 9 91 23.8778 91 42.2306Z"></path></svg>`;
+
 const NEW_WINDOW = `<svg id="new-window-icon" data-name="new-window-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><defs><style>.cls-1 {fill-rule: evenodd;}</style></defs><path class="cls-1" d="m48.91,15.78l27.79-.02-9.18,9.4H11v62.73h63.83v-54l9.34-9.57v26.66s11.78-12.12,11.78-12.12V15.75s.05,0,.05,0V4h-.04s-11.78,0-11.78,0h-23.14s-12.12,11.78-12.12,11.78Zm9.19,19.04l-15.76,16.14,8.01,8.01,14.67-15.02v34.3H20.82v-43.43h37.28Z"/></svg>`;
 
 const NOTIFICATION = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="#2F7EDA"/><rect x="22" y="30" width="4" height="13" transform="rotate(-180 22 30)" fill="white"/><rect width="4" height="4" transform="matrix(-1 -8.74228e-08 -8.74228e-08 1 22 11)" fill="white"/></svg>`;
@@ -51,6 +53,7 @@ export default {
   EXCLAMATION,
   FEARLESS,
   FORWARD_ARROW,
+  MAGNIFY_GLASS,
   MULTI_DAY,
   NEW_WINDOW,
   NOTIFICATION,

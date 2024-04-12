@@ -320,7 +320,12 @@ const CreatePrimaryLink = (props: TypePrimaryLinkProps) => {
   container.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER);
   wrapper.classList.add(ELEMENT_PRIMARLY_LINK_WRAPPER);
 
-  if (primaryLinkContainer) wrapper.appendChild(primaryLinkContainer);
+  if (primaryLinkContainer) {
+    const clonedPrimaryLink = primaryLinkContainer.cloneNode(
+      true,
+    ) as HTMLElement;
+    wrapper.appendChild(clonedPrimaryLink);
+  }
 
   if (hasDropdown) {
     const button = CreateButton(props);
@@ -345,6 +350,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     const dropDownContainerLinks = dropdownLinksContainer?.children;
     const hasDropdown =
       (dropDownContainerLinks && dropDownContainerLinks.length > 0) || false;
+
     const navItemName = primaryLinkContainer.innerHTML
       .replace(/(<([^>]+)>)/gi, '')
       .trim();

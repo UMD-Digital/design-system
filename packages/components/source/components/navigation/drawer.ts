@@ -20,9 +20,14 @@ export const styles = `
   ${NavigationElements.MenuButton.Styles}
 `;
 
-const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
+const CreateNavigationDrawerElement = ({
+  element,
+}: {
+  element: HTMLElement;
+}) => {
   const container = document.createElement('div');
   const drawer = MakeNavDrawer({ element, ...SLOTS });
+  if (!drawer) return null;
   const button = NavigationElements.MenuButton.CreateElement({
     eventOpen: drawer.events.eventOpen,
   });
@@ -44,7 +49,10 @@ class UMDNavDrawerFeature extends HTMLElement {
   }
 
   connectedCallback() {
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
+    const navDrawer = CreateNavigationDrawerElement({ element: this });
+    if (!navDrawer) return;
+
+    this._shadow.appendChild(navDrawer);
   }
 }
 

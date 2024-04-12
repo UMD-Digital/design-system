@@ -1,13 +1,18 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MarkupCreate } from 'utilities';
+import { AssetIcon, MarkupCreate } from 'utilities';
 import MenuButton from './elements/menu-button';
+import { NavigationElements } from 'elements';
 
 type TypeLogoRequirments = {
   logo?: HTMLElement | null;
   eventOpen?: () => void;
 };
 
-type TypeNavRow = {
+type TypeSearchLink = {
+  searchUrl: string | null;
+};
+
+type TypeNavRow = TypeSearchLink & {
   navRow?: HTMLElement | null;
 };
 
@@ -29,10 +34,10 @@ const ELEMENT_HEADER_NAVIGATION_ROW = 'element-header-navigation-row';
 const NavigationColumnStyles = `
   .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
     display: flex;
-    alignItems: center;
+    align-items: center;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${Breakpoints.tablet.max}) {
+  @media (max-width: ${Breakpoints.tablet.max}) {
     .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
       display: none;
     }
@@ -76,7 +81,7 @@ const LogoColumnStyles = `
     max-height: 48px;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${Breakpoints.tablet.min}) {
+  @media (min-width: ${Breakpoints.tablet.min}) {
     .${ELEMENT_HEADER_LOGO} img {
       max-width: 240px;
     }
@@ -89,12 +94,13 @@ const WrapperStyles = `
     justify-content: space-between;
     align-items: center;
     gap: ${Spacing.lg};
+    z-index: 999;
   }
 `;
 
 const STYLES_NAVIGATION_HEADER = `
   .${ELEMENT_HEADER_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
+
   }
   
   .${ELEMENT_HEADER_CONTAINTER} {
@@ -108,31 +114,55 @@ const STYLES_NAVIGATION_HEADER = `
   ${LogoColumnStyles}
   ${NavigationColumnStyles}
   ${MenuButton.Styles}
+  ${NavigationElements.Item.Styles}
 `;
 
 const CreateUtiltyRow = ({ element }: { element: any }) => {};
 
-const CreateNavigationRow = ({ navRow }: TypeNavRow) => {
-  if (!navRow) return null;
+const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
+  if (!searchUrl) return null;
 
-  const navItem = Array.from(navRow.querySelectorAll('umd-element-nav-item'));
+  const searchLink = document.createElement('a');
 
-  console.log(navItem);
+  searchLink.href = searchUrl;
+  searchLink.ariaLabel = 'Visit the search page';
+  searchLink.innerHTML = AssetIcon.MAGNIFY_GLASS;
 
-  navRow.classList.add(ELEMENT_HEADER_NAVIGATION_ROW);
-  return navRow;
+  return searchLink;
 };
 
-const CreateNavigationColumn = (props: TypeNavRow) => {
-  const container = document.createElement('div');
-  const navigationRow = CreateNavigationRow(props);
+const CreateNavigationColumn = ({ navRow, searchUrl }: TypeNavRow) => {
+  if (!navRow) return null;
 
-  if (!navigationRow) return null;
+  const navColumnContainer = document.createElement('div');
+  const navRowContainer = document.createElement('div');
+  const searchLink = CreateSearchLink({
+    searchUrl,
+  });
 
-  if (navigationRow) {
-    container.appendChild(navigationRow);
-  }
-  return container;
+  const navItems = Array.from(navRow.querySelectorAll('umd-element-nav-item'));
+  const createdNavItems = navItems.map((navItem) => {
+    const primaryLinkContainer = navItem.querySelector(
+      '[slot="primary-link"]',
+    ) as HTMLElement;
+    const dropdownLinksContainer = navItem.querySelector(
+      '[slot="dropdown-links"]',
+    ) as HTMLElement;
+
+    return NavigationElements.Item.CreateElement({
+      primaryLinkContainer,
+      dropdownLinksContainer,
+    });
+  });
+
+  navRowContainer.classList.add(ELEMENT_HEADER_NAVIGATION_ROW);
+  navRowContainer.append(...createdNavItems);
+  if (searchLink) navRowContainer.appendChild(searchLink);
+
+  navColumnContainer.classList.add(ELEMENT_HEADER_NAVIGATION_COLUMN);
+  navColumnContainer.appendChild(navRowContainer);
+
+  return navColumnContainer;
 };
 
 const CreateLogoColumn = ({ logo, eventOpen }: TypeLogoRequirments) => {

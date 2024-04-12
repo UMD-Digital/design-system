@@ -38,7 +38,6 @@ const { AnimationLinkSpan } = MarkupModify;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-element-nav-item';
-const ATTRIBUTE_SHOW = 'show';
 const ATTRIBUTE_DROPDOWN = 'data-dropdown';
 const ATTRIBUTE_SHOWING = 'data-showing';
 const ATTRIBUTE_SELECTED = 'data-selected';
@@ -47,23 +46,21 @@ const BOUNDS_SHIFT = 140;
 const MAX_COLUMN_ITEMS = 8;
 
 const ELEMENT_NAV_ITEM_CONTAINER = `nav-item-container`;
-const PRIMARY_LINK_CONTAINER = 'nav-item-primary-link-container';
-const PRIMARLY_LINK_WRAPPER = `nav-item-primary-link-wrapper`;
-const PRIMARY_LINK_CONTAINER_BUTTON = `nav-item-primary-link-container-button`;
+const ELEMENT_PRIMARY_LINK_CONTAINER = 'nav-item-primary-link-container';
+const ELEMENT_PRIMARLY_LINK_WRAPPER = `nav-item-primary-link-wrapper`;
+const ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON = `nav-item-primary-link-button`;
 
-const DROPDOWN_CONTAINER = `nav-item-dropdown-container`;
-const DROPDOWN_LIST_CONTAINER = 'nav-item-dropdown-list-container';
-const TWO_COLUMN_CONTAINER = 'nav-item-dropdown-two-column-container';
+const ELEMENT_DROPDOWN_CONTAINER = `nav-item-dropdown-container`;
+const ELEMENT_DROPDOWN_LIST_CONTAINER = 'nav-item-dropdown-list';
+const ELEMENT_DROPDOWN_TWO_COLUMN = 'nav-item-dropdown-two-column';
 
 const IS_SELECTED = `[${ATTRIBUTE_SELECTED}]`;
 const IS_SHOWING = `[${ATTRIBUTE_SHOWING}]`;
 const IS_DROPDOWN = `[${ATTRIBUTE_DROPDOWN}]`;
 
-const OVERWRITE_IS_SHOWING_DROPDOWN_CONTAINER = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN}${IS_SHOWING} .${DROPDOWN_CONTAINER}`;
-const OVERWRITE_IS_SHOWING_PRIMARY_LINK = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN} .${PRIMARLY_LINK_WRAPPER}`;
-const OVERWRITE_IS_SHOWING_PRIMARY_BUTTON = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN}${IS_SHOWING} .${PRIMARY_LINK_CONTAINER_BUTTON}`;
-
-console.log(OVERWRITE_IS_SHOWING_DROPDOWN_CONTAINER);
+const OVERWRITE_IS_SHOWING_DROPDOWN_CONTAINER = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN}${IS_SHOWING} .${ELEMENT_DROPDOWN_CONTAINER}`;
+const OVERWRITE_IS_SHOWING_PRIMARY_LINK = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN} .${ELEMENT_PRIMARLY_LINK_WRAPPER}`;
+const OVERWRITE_IS_SHOWING_PRIMARY_BUTTON = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN}${IS_SHOWING} .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON}`;
 
 // prettier-ignore
 const OverwriteDropdownStyles = `
@@ -83,16 +80,16 @@ const OverwriteDropdownStyles = `
 
 // prettier-ignore
 export const PrimaryStyles = `
-  .${PRIMARY_LINK_CONTAINER} {
+  .${ELEMENT_PRIMARY_LINK_CONTAINER} {
     position: relative;
   }
 
-  .${PRIMARLY_LINK_WRAPPER} {
+  .${ELEMENT_PRIMARLY_LINK_WRAPPER} {
     display: inline-flex;
     position: relative;
   }
 
-  .${PRIMARLY_LINK_WRAPPER} > a {
+  .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a {
     color: ${Colors.black};
     font-size: ${FontSize.base};
     white-space: nowrap;
@@ -101,12 +98,12 @@ export const PrimaryStyles = `
     font-weight: 700;
   }
 
-  .${PRIMARLY_LINK_WRAPPER} > a:hover,
-  .${PRIMARLY_LINK_WRAPPER} > a:focus {
+  .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:hover,
+  .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:focus {
     color: ${Colors.red};
    }
 
-  .${PRIMARLY_LINK_WRAPPER} > a[${ATTRIBUTE_SELECTED}] span {
+  .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a[${ATTRIBUTE_SELECTED}] span {
     display: inline;
     position: relative;
     background-position: left calc(100% - 0px);
@@ -115,14 +112,14 @@ export const PrimaryStyles = `
     background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
   }
 
-  .${PRIMARY_LINK_CONTAINER_BUTTON} {
+  .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON} {
     align-self: flex-start;
     margin-top: 5px;
     margin-left: 8px;
     transition: transform .5s;
   }
 
-  .${PRIMARY_LINK_CONTAINER_BUTTON} svg {
+  .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON} svg {
     fill: ${Colors.red};
     height: 14px;
     width: 14px;
@@ -134,23 +131,30 @@ export const PrimaryStyles = `
 
 // prettier-ignore
 const DropdownColumnStyles = `
-  .${TWO_COLUMN_CONTAINER} {
+  .${ELEMENT_DROPDOWN_TWO_COLUMN} {
     display: flex;
     justify-content: space-between;
   }
 
-  .${TWO_COLUMN_CONTAINER} > * {
+  .${ELEMENT_DROPDOWN_TWO_COLUMN} > * {
     min-width: 232px;
   }
 
-  .${TWO_COLUMN_CONTAINER} > *:last-child {
+  .${ELEMENT_DROPDOWN_TWO_COLUMN} > *:last-child {
     margin-left: 40px;
   }
 `
 
 // prettier-ignore
-const DropdownLinkStyles = `
-  .${DROPDOWN_LIST_CONTAINER} a {
+const DropdownListStyles = `
+  .${ELEMENT_DROPDOWN_LIST_CONTAINER} {
+    background-color: ${Colors.white};
+    border-top: 2px solid ${Colors.red};
+    padding: ${Spacing.lg};
+    box-shadow: -1px 9px 32px -10px rgba(0,0,0,0.19);
+  }
+
+  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a {
     display: block;
     min-width: 120px;
     max-width: 230px;
@@ -161,22 +165,22 @@ const DropdownLinkStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${DROPDOWN_LIST_CONTAINER} a`]:
+      [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
       Animations.Link.LineSlideUnder.red,
     },
   })}
 
-  .${DROPDOWN_LIST_CONTAINER} a:hover,
-  .${DROPDOWN_LIST_CONTAINER} a:focus {
+  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a:hover,
+  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a:focus {
     color: ${Colors.red};
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a + a {
+  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a + a {
     margin-top: ${Spacing.md};
     display: block;
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a${IS_SELECTED} span:not(.sr-only) {
+  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a${IS_SELECTED} span:not(.sr-only) {
     display: inline;
     position: relative;
     background-position: left calc(100% - 0px);
@@ -185,15 +189,15 @@ const DropdownLinkStyles = `
     background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
   }
 
-  .${DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:hover span,
-  .${DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:focus span {
+  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:hover span,
+  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:focus span {
     border-bottom: none;
   }
 `
 
 // prettier-ignore
 export const DropdownStyles = `
-  .${DROPDOWN_CONTAINER} {
+  .${ELEMENT_DROPDOWN_CONTAINER} {
     position: absolute;
     top: 100%;
     left: 50%;
@@ -202,13 +206,6 @@ export const DropdownStyles = `
     width: auto;
     padding-top: ${Spacing.sm};
     display: none;
-  }
-
-  .${DROPDOWN_LIST_CONTAINER} {
-    background-color: ${Colors.white};
-    border-top: 2px solid ${Colors.red};
-    padding: ${Spacing.lg};
-    box-shadow: -1px 9px 32px -10px rgba(0,0,0,0.19);
   }
 `;
 
@@ -226,14 +223,14 @@ const STYLES_NAV_ITEM_ELEMENT = `
     text-decoration: none;
   }
   
-  .${ELEMENT_NAV_ITEM_CONTAINER}:foucs-within .${DROPDOWN_CONTAINER} {
+  .${ELEMENT_NAV_ITEM_CONTAINER}:foucs-within .${ELEMENT_DROPDOWN_CONTAINER} {
     display: block;
   }
 
   ${PrimaryStyles}
   ${DropdownStyles}
   ${DropdownColumnStyles}
-  ${DropdownLinkStyles}
+  ${DropdownListStyles}
   ${OverwriteDropdownStyles}
 `;
 
@@ -252,7 +249,7 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
     column2.appendChild(link);
   });
 
-  container.classList.add(TWO_COLUMN_CONTAINER);
+  container.classList.add(ELEMENT_DROPDOWN_TWO_COLUMN);
 
   container.appendChild(column1);
   container.appendChild(column2);
@@ -282,8 +279,8 @@ export const CreateDropdown = ({
   const container = document.createElement('div');
   const list = document.createElement('div');
 
-  list.classList.add(DROPDOWN_LIST_CONTAINER);
-  container.classList.add(DROPDOWN_CONTAINER);
+  list.classList.add(ELEMENT_DROPDOWN_LIST_CONTAINER);
+  container.classList.add(ELEMENT_DROPDOWN_CONTAINER);
 
   if (links.length > MAX_COLUMN_ITEMS) {
     list.appendChild(CreateMultipleColumns({ links }));
@@ -302,7 +299,7 @@ const CreateButton = ({
 }: TypePrimaryLinkButtonProps) => {
   const button = document.createElement('button');
 
-  button.classList.add(PRIMARY_LINK_CONTAINER_BUTTON);
+  button.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON);
   button.innerHTML = AssetIcon.CHEVRON_SMALL;
   button.addEventListener('click', () => buttonClick());
   button.setAttribute('aria-expanded', 'false');
@@ -319,8 +316,8 @@ const CreatePrimaryLink = (props: TypePrimaryLinkProps) => {
 
   const dropdown = CreateDropdown(props);
 
-  container.classList.add(PRIMARY_LINK_CONTAINER);
-  wrapper.classList.add(PRIMARLY_LINK_WRAPPER);
+  container.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER);
+  wrapper.classList.add(ELEMENT_PRIMARLY_LINK_WRAPPER);
 
   if (primaryLinkContainer) wrapper.appendChild(primaryLinkContainer);
 
@@ -372,7 +369,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     const DropdownPositionPerViewPort = () => {
       const elementBounds = elementContainer.getBoundingClientRect();
       const dropdownContainer = elementContainer.querySelector(
-        `.${DROPDOWN_CONTAINER}`,
+        `.${ELEMENT_DROPDOWN_CONTAINER}`,
       ) as HTMLDivElement;
       const width = elementContainer.offsetWidth;
 
@@ -423,7 +420,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
 
     const EventSize = () => {
       const wrapperElement = elementContainer.querySelector(
-        `.${PRIMARLY_LINK_WRAPPER}`,
+        `.${ELEMENT_PRIMARLY_LINK_WRAPPER}`,
       ) as HTMLDivElement;
 
       if (!wrapperElement) return;

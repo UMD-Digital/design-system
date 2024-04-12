@@ -11,7 +11,7 @@ import {
   EventList,
   EventPromo,
 } from 'elements';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
@@ -45,82 +45,6 @@ const styles = `
   ${EventPromo.Styles}
 `;
 
-const MakeDateSlot = ({
-  element,
-  slot,
-}: {
-  element: UMDCardElement;
-  slot: string;
-}) => {
-  const slotElement = element.querySelector(`[slot="${slot}"]`);
-
-  if (slotElement && slotElement.textContent) {
-    const dateString = slotElement.textContent.trim();
-    const parsedDate = Date.parse(dateString);
-    const date = new Date(parsedDate);
-    const dayOfWeek = date.toLocaleString('en-US', {
-      weekday: 'short',
-    });
-    const month = date.toLocaleString('en-US', {
-      month: 'short',
-    });
-    const day = date.toLocaleString('en-US', {
-      day: 'numeric',
-    });
-    const time = date
-      .toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        timeZone: 'America/New_York',
-      })
-      .replace(' AM', 'am')
-      .replace(' PM', 'pm');
-
-    return {
-      dayOfWeek,
-      month,
-      day,
-      time,
-    };
-  }
-
-  return null;
-};
-
-const MakeEventDetailsData = ({
-  element,
-  startDate,
-  endDate,
-}: {
-  element: UMDCardElement;
-  startDate: Record<string, string>;
-  endDate?: Record<string, string> | null;
-}) => {
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const { LOCATION } = element._slots;
-  const locationElement = element.querySelector(`[slot="${LOCATION}"]`);
-  const obj: any = {
-    startDayOfWeek: startDate.dayOfWeek,
-    startMonth: startDate.month,
-    startDay: startDate.day,
-    startTime: startDate.time,
-    theme,
-  };
-
-  if (locationElement && locationElement.textContent) {
-    obj.location = [{ title: locationElement.textContent }];
-  }
-
-  if (endDate) {
-    obj.endDayOfWeek = endDate.dayOfWeek;
-    obj.endMonth = endDate.month;
-    obj.endDay = endDate.day;
-    obj.endTime = endDate.time;
-  }
-
-  return obj;
-};
-
 const MakeCommonData = ({ element }: { element: UMDCardElement }) => {
   const { HEADLINE, TEXT, ACTIONS } = element._slots;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
@@ -135,34 +59,44 @@ const MakeCommonData = ({ element }: { element: UMDCardElement }) => {
 };
 
 const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
-  const { START_DATE_ISO, END_DATE_ISO } = element._slots;
+  const { START_DATE_ISO, END_DATE_ISO, LOCATION } = element._slots;
   const displayAttribute = element.getAttribute(ATTRIBUTE_DISPLAY);
   const isDisplayList = displayAttribute === DISPLAY_LIST;
   const isDisplayFeature = displayAttribute === DISPLAY_FEATURE;
   const isDisplayPromo = displayAttribute === DISPLAY_PROMO;
-  const startDate = MakeDateSlot({
-    element,
-    slot: START_DATE_ISO,
-  });
-  const endDate = MakeDateSlot({
-    element,
-    slot: END_DATE_ISO,
-  });
+  const startDateSlot = element.querySelector(`[slot="${START_DATE_ISO}"]`);
+  const endDateSlot = element.querySelector(`[slot="${END_DATE_ISO}"]`);
+  const locationSlot = element.querySelector(`[slot="${LOCATION}"]`);
+
+  const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
+  const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
 
   if (!startDate) {
     console.error('Missing start date for event web component');
     return null;
   }
 
+  const eventDetails = EventElements.Meta.CreateElement(
+    MarkupEvent.CreateDetailsData({
+      locationElement: locationSlot,
+      startDate,
+      endDate,
+    }),
+  );
+
+  const dateSign = EventElements.Sign.CreateElement(
+    MarkupEvent.CreateDetailsData({
+      locationElement: locationSlot,
+      startDate,
+      endDate,
+    }),
+  );
+
   if (isDisplayFeature) {
     return EventFeature.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails: EventElements.Meta.CreateElement(
-        MakeEventDetailsData({ element, startDate, endDate }),
-      ),
-      dateSign: EventElements.Sign.CreateElement(
-        MakeEventDetailsData({ element, startDate, endDate }),
-      ),
+      eventDetails,
+      dateSign,
     });
   }
 
@@ -170,32 +104,28 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     return EventPromo.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: EventElements.Meta.CreateElement({
-        ...MakeEventDetailsData({ element, startDate, endDate }),
+        ...MarkupEvent.CreateDetailsData({
+          locationElement: locationSlot,
+          startDate,
+          endDate,
+        }),
         theme: 'dark',
       }),
-      dateSign: EventElements.Sign.CreateElement(
-        MakeEventDetailsData({ element, startDate, endDate }),
-      ),
+      dateSign,
     });
   }
 
   if (isDisplayList) {
     return EventList.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails: EventElements.Meta.CreateElement(
-        MakeEventDetailsData({ element, startDate, endDate }),
-      ),
-      dateSign: EventElements.Sign.CreateElement(
-        MakeEventDetailsData({ element, startDate, endDate }),
-      ),
+      eventDetails,
+      dateSign,
     });
   }
 
   return EventBlock.CreateElement({
     ...MakeCommonData({ element }),
-    eventDetails: EventElements.Meta.CreateElement(
-      MakeEventDetailsData({ element, startDate, endDate }),
-    ),
+    eventDetails,
   });
 };
 

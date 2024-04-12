@@ -14,6 +14,9 @@ const SLOTS = {
   EYEBROW: 'eyebrow',
   TEXT: 'text',
   ACTIONS: 'actions',
+  START_DATE_ISO: 'start-date-iso',
+  END_DATE_ISO: 'end-date-iso',
+  LOCATION: 'location',
 };
 
 export class UMDPathwayElement extends HTMLElement {

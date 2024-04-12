@@ -3,7 +3,6 @@ import { Tokens } from '@universityofmaryland/variables';
 import Animations from './animations';
 import Accessibility from './accessibility';
 import Common from './common';
-import Components from './components';
 import Elements from './elements';
 import Layout from './layout';
 import WebComponents from './web-components';
@@ -48,7 +47,6 @@ export const theme = {
   Accessibility,
   Animations,
   Common,
-  Components,
   Elements,
   Layout,
   WebComponents,

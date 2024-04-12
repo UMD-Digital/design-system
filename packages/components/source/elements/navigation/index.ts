@@ -1,5 +1,5 @@
-import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon, MarkupCreate } from 'utilities';
+import { Tokens, Typography } from '@universityofmaryland/variables';
+import { AssetIcon, Styles } from 'utilities';
 import MenuButton from './elements/menu-button';
 import { NavigationElements } from 'elements';
 
@@ -19,9 +19,9 @@ type TypeNavRow = TypeSearchLink & {
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
 const { Colors, Spacing, Breakpoints } = Tokens;
-const { SlotWithDefaultStyling, Node } = MarkupCreate;
+const { SansExtraLarge } = Typography;
+const { ConvertJSSObjectToStyles } = Styles;
 
-const ELEMENT_NAME = 'umd-element-header';
 const ELEMENT_HEADER_DECLARATION = 'element-header-declaration';
 const ELEMENT_HEADER_CONTAINTER = 'element-header-container';
 const ELEMENT_HEADER_WRAPPER = 'element-header-wrapper';
@@ -75,9 +75,25 @@ const LogoColumnStyles = `
     display: block;
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_HEADER_LOGO}`]: SansExtraLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_HEADER_LOGO} *`]: SansExtraLarge,
+    },
+  })}
+
+  .${ELEMENT_HEADER_LOGO},
+  .${ELEMENT_HEADER_LOGO} * {
+    font-weight: 700;
+  }
+
   .${ELEMENT_HEADER_LOGO} img {
     width: 100%;
-    max-width: 160px;
     max-height: 48px;
   }
 

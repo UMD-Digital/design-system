@@ -13,10 +13,9 @@ const NAV_DRAWER_BUTTON_WRAPPER = 'nav-drawer-button-wrapper';
 const STYLES_MENU_DISPLAY_BUTTON = `
   .${NAV_DRAWER_BUTTON} {
     height: 44px;
-    width: 44px;
+    width: 34px;
     display: flex;
     align-items: center;
-    justify-content: center;
   }
 
   .${NAV_DRAWER_BUTTON}:hover .${NAV_DRAWER_BUTTON_WRAPPER} span,

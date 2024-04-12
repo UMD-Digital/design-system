@@ -11,7 +11,7 @@ import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 const { Node } = MarkupCreate;
 const { SlotWithDefaultStyling } = MarkupCreate;
 
-const ELEMENT_NAME = 'umd-element-header';
+const ELEMENT_NAME = 'umd-element-navigation-header';
 const ATTRIBUTE_SEARCH_URL = 'search-url';
 const SLOTS = {
   LOGO: 'logo',

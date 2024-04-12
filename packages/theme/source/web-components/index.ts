@@ -8,6 +8,7 @@ import Event from './event';
 import EventsDateSlider from './events-date-slider';
 import Footer from './footer';
 import Hero from './hero';
+import Header from './header';
 import Person from './person';
 import Pathway from './pathway';
 import Quote from './quote';
@@ -23,6 +24,7 @@ export default {
   ...CardOverlay,
   ...CarouselCards,
   ...Footer,
+  ...Header,
   ...Hero,
   ...Person,
   ...Event,

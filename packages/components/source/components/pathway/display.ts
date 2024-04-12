@@ -1,5 +1,10 @@
-import { PathwayHero, PathwayDefault, PathwayElements } from 'elements';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import {
+  PathwayHero,
+  PathwayDefault,
+  PathwayElements,
+  EventElements,
+} from 'elements';
+import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
 import { UMDPathwayElement } from './index';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
@@ -20,13 +25,21 @@ export const ComponentStyles = `
   }
 
   ${Styles.ResetString}
+  ${EventElements.Meta.Styles}
+  ${EventElements.Sign.Styles}
   ${PathwayDefault.Styles}
   ${PathwayHero.Styles}
   ${PathwayElements.Image.Styles}
   ${PathwayElements.Text.Styles}
 `;
 
-const MakeCommonData = ({ element }: { element: UMDPathwayElement }) => {
+const MakeCommonData = ({
+  element,
+  theme,
+}: {
+  element: UMDPathwayElement;
+  theme: string;
+}) => {
   const {
     EYEBROW,
     HEADLINE,
@@ -37,17 +50,38 @@ const MakeCommonData = ({ element }: { element: UMDPathwayElement }) => {
     END_DATE_ISO,
     LOCATION,
   } = element._slots;
+  const startDateSlot = element.querySelector(`[slot="${START_DATE_ISO}"]`);
+  const endDateSlot = element.querySelector(`[slot="${END_DATE_ISO}"]`);
+  const locationSlot = element.querySelector(`[slot="${LOCATION}"]`);
   const isImageRight =
     element.getAttribute(ATTRIBUTE_IMAGE_POSITION) !== 'left';
 
-  return {
+  const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
+  const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
+  const obj = {
     isImageRight,
     eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
     action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+    eventDetails: null as null | HTMLElement,
   };
+
+  if (startDate) {
+    let themeStyling = 'dark';
+    if (theme === THEME_LIGHT || theme === THEME_WHITE) themeStyling = 'light';
+    obj.eventDetails = EventElements.Meta.CreateElement({
+      ...MarkupEvent.CreateDetailsData({
+        locationElement: locationSlot,
+        startDate,
+        endDate,
+      }),
+      theme: themeStyling,
+    });
+  }
+
+  return obj;
 };
 
 export const CreateShadowDom = ({
@@ -69,13 +103,13 @@ export const CreateShadowDom = ({
 
   if (type === TYPE_HERO) {
     return PathwayHero.CreateElement({
-      ...MakeCommonData({ element }),
+      ...MakeCommonData({ element, theme }),
     });
   }
 
   return PathwayDefault.CreateElement({
     theme,
     isImageScaled,
-    ...MakeCommonData({ element }),
+    ...MakeCommonData({ element, theme }),
   });
 };

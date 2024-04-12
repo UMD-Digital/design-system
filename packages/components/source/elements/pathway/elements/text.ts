@@ -11,6 +11,7 @@ export type TypePathwayTextContainer = {
   headline: HTMLElement | null;
   text: HTMLElement | null;
   action: HTMLElement | null;
+  eventDetails?: HTMLElement | null;
   theme?: string | null;
 };
 
@@ -32,6 +33,7 @@ const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-pathway-text-container';
 export const ELEMENT_TEXT_CONTAINER = 'pathway-text-container';
 export const ELEMENT_TEXT_CONTAINER_WRAPPER = 'pathway-text-container-wrapper';
 export const ELEMENT_TEXT_CONTAINER_HEADLINE = 'pathway-text-headline';
+const ELEMENT_TEXT_CONTAINER_EVENT_DETAILS = 'pathway-text-event-details';
 const ELEMENT_TEXT_CONTAINER_EYEBROW = 'pathway-text-eyebrow';
 export const ELEMENT_TEXT_CONTAINER_RICH_TEXT = 'pathway-text-richtext';
 const ELEMENTS_TEXT_CONTAINER_ACTIONS = 'pathway-text-actions';
@@ -101,6 +103,14 @@ const HeadlineStyles = `
 `;
 
 // prettier-ignore
+const DetailsRowStyles = `
+  * + .${ELEMENT_TEXT_CONTAINER_EVENT_DETAILS} {
+    margin-top: ${Spacing.md};
+    display: block;
+  }
+`;
+
+// prettier-ignore
 const TextStyles = `
   * + .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} {
     margin-top: ${Spacing.sm};
@@ -155,6 +165,7 @@ const STYLES_PATHWAY_TEXT_CONTAINER = `
 
   ${EyebrowStyles}
   ${HeadlineStyles}
+  ${DetailsRowStyles}
   ${TextStyles}
   ${ActionStyles}
   ${VarationThemeDark}
@@ -164,6 +175,7 @@ const STYLES_PATHWAY_TEXT_CONTAINER = `
 
 export const CreatePathwayTextContainer = ({
   headline,
+  eventDetails,
   eyebrow,
   text,
   action,
@@ -182,6 +194,11 @@ export const CreatePathwayTextContainer = ({
   if (headline) {
     headline.classList.add(ELEMENT_TEXT_CONTAINER_HEADLINE);
     wrapper.appendChild(headline);
+  }
+
+  if (eventDetails) {
+    eventDetails.classList.add(ELEMENT_TEXT_CONTAINER_EVENT_DETAILS);
+    wrapper.appendChild(eventDetails);
   }
 
   if (text) {

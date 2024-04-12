@@ -213,6 +213,7 @@ const STYLES_NAV_ITEM_ELEMENT = `
   .${ELEMENT_NAV_ITEM_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     position: relative;
+    z-index: 9999;
   }
 
   .${ELEMENT_NAV_ITEM_CONTAINER} a {
@@ -334,11 +335,12 @@ const CreatePrimaryLink = (props: TypePrimaryLinkProps) => {
 
 const CreateNavItemElement = (props: TypeNavItem) =>
   (() => {
-    if (!props.primaryLinkContainer) {
+    const { dropdownLinksContainer, primaryLinkContainer } = props;
+
+    if (!primaryLinkContainer) {
       throw new Error('Primary link is required for a nav item');
     }
 
-    const { dropdownLinksContainer, primaryLinkContainer } = props;
     const elementContainer = document.createElement('div');
     const dropDownContainerLinks = dropdownLinksContainer?.children;
     const hasDropdown =

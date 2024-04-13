@@ -1,6 +1,7 @@
 import Spacing from './spacing';
 import Grid from './grid-gap';
 import GridGutterless from './grid-gutterless';
+import GridColumn from './grid-column';
 import Lock from './lock';
 
 // To Be Refactored
@@ -11,6 +12,7 @@ export default {
   ...Spacing,
   ...Grid,
   ...GridGutterless,
+  ...GridColumn,
   ...ListGroups,
   ...Lock,
 };

@@ -1,6 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Colors } = Tokens;
 const DisplayList = {
   'umd-element-person[display="list"] + umd-element-person[display="list"]': {
     marginTop: Tokens.Spacing.md,

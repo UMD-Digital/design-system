@@ -20,6 +20,7 @@ const Watermark = {
   pointerEvents: 'none',
   userSelect: 'none',
   zIndex: '-1',
+  textTransform: 'uppercase',
 
   [`@media (${Queries.large.max})`]: {
     display: 'none',

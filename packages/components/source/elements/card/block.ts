@@ -8,11 +8,11 @@ type TypeBlockCardProps = TypeTextLockupSmall &
   };
 
 const ELEMENT_NAME = 'umd-card-block';
-const ELEMENT_LIST_CONTAINER = 'card-block-container';
+const ELEMENT_CARD_BLOCK_CONTAINER = 'card-block-container';
 
 // prettier-ignore
 const STYLES_BLOCK_CARD_ELEMENT = `
-  .${ELEMENT_LIST_CONTAINER} {
+  .${ELEMENT_CARD_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
@@ -37,7 +37,7 @@ const CreateCardBlockElement = (element: TypeBlockCardProps) => {
   });
 
   elementContainer.appendChild(container);
-  elementContainer.classList.add(ELEMENT_LIST_CONTAINER);
+  elementContainer.classList.add(ELEMENT_CARD_BLOCK_CONTAINER);
 
   return elementContainer;
 };

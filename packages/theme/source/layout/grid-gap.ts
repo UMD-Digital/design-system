@@ -42,6 +42,50 @@ const GridColumnsFeatured = {
   },
 };
 
+const MasonryGrid = {
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridGap: '24px',
+
+  [`@media (${Queries.tablet.min})`]: {
+    gridTemplateColumns: '1fr 1fr',
+    paddingTop: '24px',
+  },
+
+  [`@media (${Queries.desktop.min})`]: {
+    gridGap: '32px',
+    paddingTop: '32px',
+  },
+
+  '& > *': {
+    height: '500px',
+  },
+
+  '& > *:nth-of-type(odd)': {
+    [`@media (${Queries.tablet.min})`]: {
+      marginTop: '-56px',
+    },
+  },
+
+  '& > *:nth-of-type(even)': {
+    [`@media (${Queries.tablet.min})`]: {
+      marginTop: '0',
+    },
+  },
+
+  '& > *:first-child': {
+    [`@media (${Queries.tablet.min})`]: {
+      marginTop: '0',
+    },
+  },
+
+  '& > *:nth-of-type(2)': {
+    [`@media (${Queries.tablet.min})`]: {
+      marginTop: '56px',
+    },
+  },
+};
+
 export default {
   ...GridColumnsStandard,
 
@@ -50,5 +94,8 @@ export default {
   },
   '.umd-grid-row-mobile-tablet': {
     ...GridColumnAndRows['.mobile-tablet'],
+  },
+  '.umd-grid-gap-masonry': {
+    ...MasonryGrid,
   },
 };

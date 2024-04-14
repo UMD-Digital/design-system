@@ -9,6 +9,7 @@ import EventsDateSlider from './default-styling/events-date-slider';
 import Footer from './additional-styling/footer';
 import Hero from './default-styling/hero';
 import Header from './default-styling/header';
+import Logo from './default-styling/logo';
 import Person from './additional-styling/person';
 import Pathway from './default-styling/pathway';
 import Quote from './default-styling/quote';
@@ -26,6 +27,7 @@ export default {
   ...CarouselCards,
   ...Footer,
   ...Header,
+  ...Logo,
   ...Hero,
   ...Person,
   ...Event,

@@ -16,6 +16,7 @@ import HeroMinimal from './hero/minimal';
 import HeroOverlay from './hero/overlay';
 import HeroLogo from './hero/logo';
 import HeroStacked from './hero/stacked';
+import LogoBlock from './logo/block';
 import PathwayHero from './pathway/hero';
 import PathwayHighlight from './pathway/highlight';
 import PathwayDefault from './pathway/default';
@@ -50,6 +51,7 @@ export {
   HeroOverlay,
   HeroLogo,
   HeroStacked,
+  LogoBlock,
   PathwayHero,
   PathwayHighlight,
   PathwayDefault,

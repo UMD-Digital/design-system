@@ -1,0 +1,96 @@
+{% extends '../../_layout.twig' %}
+
+{% block page %}
+  <div style="padding-bottom: 50px;">
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading type-hr">
+          <span>Logo</span>
+          <span>Default</span>
+        </p>
+
+        <umd-element-logo>
+          <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
+        </umd-element-logo>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading type-hr">
+          <span>Logo</span>
+          <span>With Border</span>
+        </p>
+
+        <div class="umd-grid-gap-three">
+          <umd-element-logo border="true">
+            <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
+          </umd-element-logo>
+        </div>
+      </div>
+    </section>
+
+    <section style="background-color: black; padding: 40px 0;">
+      <div class="umd-lock">
+        <p class="content-heading type-hr" style="color: white">
+          <span>Logo</span>
+          <span>Theme Dark</span>
+        </p>
+
+        <div class="umd-grid-gap-three">
+          <umd-element-logo border="true" theme="dark">
+            <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
+          </umd-element-logo>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading type-hr">
+          <span>Logo</span>
+          <span>Layout Example</span>
+        </p>
+
+        <div class="umd-grid-gap-three">
+          <umd-element-logo border="true">
+            <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
+          </umd-element-logo>
+
+          <umd-element-logo border="true">
+            <img src="/terp/logo-right-now.jpg" alt="Logo" slot="image" />
+          </umd-element-logo>
+
+          <umd-element-logo border="true">
+            <img src="/terp/logo-shell.jpg" alt="Logo" slot="image" />
+          </umd-element-logo>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading type-hr">
+          <span>Logo</span>
+          <span>Layout Example with max width on site layer</span>
+        </p>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <div class="umd-grid-gap-three">
+            <umd-element-logo border="true">
+              <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
+            </umd-element-logo>
+
+            <umd-element-logo border="true">
+              <img src="/terp/logo-right-now.jpg" alt="Logo" slot="image" />
+            </umd-element-logo>
+
+            <umd-element-logo border="true">
+              <img src="/terp/logo-shell.jpg" alt="Logo" slot="image" />
+            </umd-element-logo>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

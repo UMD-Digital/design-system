@@ -30,6 +30,7 @@ import QuoteInline from './quote/inline';
 import QuoteStatement from './quote/statement';
 import SectionIntro from './section-intro/default';
 import SectionIntroWide from './section-intro/wide';
+import Stat from './stat';
 import StickyColumns from './sticky-columns';
 
 export {
@@ -65,5 +66,6 @@ export {
   QuoteStatement,
   SectionIntro,
   SectionIntroWide,
+  Stat,
   StickyColumns,
 };

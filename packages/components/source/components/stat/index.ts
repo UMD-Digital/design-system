@@ -4,39 +4,55 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
-import { ComponentStyles, CreateShadowDom } from './elements';
-import { VARIABLES } from './globals';
+import { MarkupCreate, Styles } from 'utilities';
+import { Stat } from 'elements';
 
-const {
-  ELEMENT_NAME,
-  ATTRIBUTE_TYPE,
-  ATTRIBUTE_THEME,
-  ATTRIBUTE_SIZE,
-  ATTRIBUTE_HAS_LINE,
-  THEME_LIGHT,
-  TYPE_DEFAULT,
-  SIZE_DEFAULT,
-} = VARIABLES;
+const { ResetString } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
+
+const ELEMENT_NAME = 'umd-element-stat';
+const ATTRIBUTE_TYPE = 'type';
+const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_SIZE = 'size';
+const ATTRIBUTE_HAS_LINE = 'has-line';
+const SLOTS = {
+  STAT: 'stat',
+  TEXT: 'text',
+  SUB_TEXT: 'sub-text',
+};
+
+const styles = `
+  :host {
+    display: block;
+  }
+
+  ${ResetString}
+  ${Stat.Styles}
+`;
+
+const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
+  const { STAT, TEXT, SUB_TEXT } = SLOTS;
+  const lineAttr = element.hasAttribute(ATTRIBUTE_HAS_LINE);
+
+  return Stat.CreateElement({
+    theme: element.getAttribute(ATTRIBUTE_THEME),
+    type: element.getAttribute(ATTRIBUTE_TYPE),
+    size: element.getAttribute(ATTRIBUTE_SIZE),
+    hasLine: lineAttr ? true : false,
+    stat: SlotWithDefaultStyling({ element, slotRef: STAT }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    subText: SlotWithDefaultStyling({ element, slotRef: SUB_TEXT }),
+  });
+};
 
 export class UMDStatElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme: string;
-  _type: string;
-  _size: string;
-  _hasLine: boolean;
 
   constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._type = this.getAttribute(ATTRIBUTE_TYPE) || TYPE_DEFAULT;
-    this._theme = this.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-    this._size = this.getAttribute(ATTRIBUTE_SIZE) || SIZE_DEFAULT;
-    this._hasLine = this.hasAttribute(ATTRIBUTE_HAS_LINE);
-
-    const styles = `${ComponentStyles}`;
     const template = MarkupCreate.Node.stylesTemplate({ styles });
 
+    super();
+    this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 

@@ -25,5 +25,9 @@ export default {
       padding: `0 ${Spacing.sm}`,
       background: `${Colors.white}`,
     },
+
+    '& + *': {
+      marginTop: Spacing.md,
+    },
   },
 };

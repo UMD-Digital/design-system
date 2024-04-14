@@ -2,49 +2,6 @@ import { Tokens, Layout } from '@universityofmaryland/variables';
 
 const { Spacing, Queries } = Tokens;
 
-// Deprecated - Do Not Use
-const SpacingContentBase = {
-  display: 'block',
-
-  '& > *': {
-    textWrap: 'pretty',
-    marginTop: Spacing.sm,
-
-    [`@media (${Queries.large.min})`]: {
-      marginTop: Spacing.md,
-    },
-
-    '&:first-child': {
-      marginTop: '0',
-    },
-  },
-};
-
-// Deprecated - Do Not Use
-const SpacingContent = {
-  '.umd-layout-spacing-left': { ...SpacingContentBase },
-
-  '.umd-layout-spacing-right': {
-    textAlign: 'right',
-
-    '& > *': {
-      ...SpacingContentBase['& > *'],
-
-      justifyContent: 'flex-end',
-    },
-  },
-
-  '.umd-layout-spacing-center': {
-    textAlign: 'center',
-
-    '& > *': {
-      ...SpacingContentBase['& > *'],
-
-      justifyContent: 'center',
-    },
-  },
-};
-
 const HeadlineLarge = {
   marginBottom: Spacing.sm,
 
@@ -82,8 +39,6 @@ const InteriorNavigation = {
 };
 
 export default {
-  ...SpacingContent,
-
   '.umd-layout-vertical-landing': {
     ...Layout.VerticalLanding,
   },

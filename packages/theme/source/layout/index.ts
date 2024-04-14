@@ -1,18 +1,15 @@
-import Spacing from './spacing';
+import Alignment from './alignment';
 import Grid from './grid-gap';
 import GridGutterless from './grid-gutterless';
 import GridColumn from './grid-column';
 import Lock from './lock';
-
-// To Be Refactored
-
-import ListGroups from './listing-group';
+import SpacingVertical from './spacing-vertical';
 
 export default {
-  ...Spacing,
+  ...Alignment,
   ...Grid,
   ...GridGutterless,
   ...GridColumn,
-  ...ListGroups,
   ...Lock,
+  ...SpacingVertical,
 };

@@ -1,7 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
-import ListImageContainer from '../list/image';
-import LockupTextContainer, { TypeTextLockupSmall } from '../lockup/text-small';
-import ListContainer from '../list/container';
+import ListImageContainer from '../shared-elements/list/image';
+import LockupTextContainer, {
+  TypeTextLockupSmall,
+} from '../shared-elements/lockup/text-small';
+import ListContainer from '../shared-elements/list/container';
 
 type TypeListCardProps = TypeTextLockupSmall & {
   image?: HTMLImageElement | null;

@@ -2,8 +2,8 @@ import { Tokens } from '@universityofmaryland/variables';
 import BlockImageOverlay, {
   TypeBlockOverlayImageElement,
   ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER,
-} from '../block/overlay';
-import { ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE } from '../lockup/text-small';
+} from '../shared-elements/block/overlay';
+import { ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE } from '../shared-elements/lockup/text-small';
 
 type TypeEventPromoProps = TypeBlockOverlayImageElement & {
   image?: HTMLImageElement | null;

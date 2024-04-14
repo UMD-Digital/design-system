@@ -1,13 +1,15 @@
 import { Tokens, Elements } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import BlockContainer, { TypeBlockContainer } from '../block/container';
+import BlockContainer, {
+  TypeBlockContainer,
+} from '../shared-elements/block/container';
 import BlockImageContainer, {
   ELEMENT_BLOCK_IMAGE_CONTAINER,
-} from '../block/image';
+} from '../shared-elements/block/image';
 import LockupTextContainer, {
   TypeTextLockupSmall,
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../lockup/text-small';
+} from '../shared-elements/lockup/text-small';
 
 type TypeEventFeatureProps = TypeTextLockupSmall &
   TypeBlockContainer & {

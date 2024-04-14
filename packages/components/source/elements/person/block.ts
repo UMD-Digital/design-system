@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import { AssetIcon } from 'utilities';
 import BlockImageContainer, {
   ELEMENT_BLOCK_IMAGE_CONTAINER,
-} from '../block/image';
+} from '../shared-elements/block/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
 
 type TypeBlockPersonProps = TypePersonProps & {

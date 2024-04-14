@@ -4,8 +4,8 @@ import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
 import LockupTextContainer, {
   TypeTextLockupSmall,
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../lockup/text-small';
-import ScalingFontBlock from '../block/scaling-font-container';
+} from '../shared-elements/lockup/text-small';
+import ScalingFontBlock from '../shared-elements/block/scaling-font-container';
 
 type TypeCardOverlayElement = TypeCardOverlayCtaIcon & TypeTextLockupSmall;
 

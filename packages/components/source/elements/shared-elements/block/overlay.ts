@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetServices, MarkupModify, Performance } from 'utilities';
 import LockupTextContainer, { TypeTextLockupSmall } from '../lockup/text-small';
-import ScalingFontBlock from '../block/scaling-font-container';
+import ScalingFontBlock from './scaling-font-container';
 
 export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
   image?: HTMLImageElement | null;

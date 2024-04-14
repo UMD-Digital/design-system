@@ -1,6 +1,10 @@
-import BlockContainer, { TypeBlockContainer } from '../block/container';
-import BlockImageContainer from '../block/image';
-import LockupTextContainer, { TypeTextLockupSmall } from '../lockup/text-small';
+import BlockContainer, {
+  TypeBlockContainer,
+} from '../shared-elements/block/container';
+import BlockImageContainer from '../shared-elements/block/image';
+import LockupTextContainer, {
+  TypeTextLockupSmall,
+} from '../shared-elements/lockup/text-small';
 
 type TypeBlockCardProps = TypeTextLockupSmall &
   TypeBlockContainer & {

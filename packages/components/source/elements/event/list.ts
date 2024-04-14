@@ -1,12 +1,12 @@
 import { Tokens } from '@universityofmaryland/variables';
-import ListImageContainer from '../list/image';
+import ListImageContainer from '../shared-elements/list/image';
 import LockupTextContainer, {
   TypeTextLockupSmall,
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../lockup/text-small';
+} from '../shared-elements/lockup/text-small';
 import ListContainer, {
   ELEMENT_LIST_CONTAINER_WRAPPER,
-} from '../list/container';
+} from '../shared-elements/list/container';
 
 type TypeEventListProps = TypeTextLockupSmall & {
   image?: HTMLImageElement | null;

@@ -6,8 +6,12 @@ import PersonTextContainer, {
   ELEMENT_PERSON_NAME_CONTAINER,
   DISPLAY_TABULAR,
 } from './elements/text';
-import ImageContainer, { ELEMENT_LIST_IMAGE_CONTAINER } from '../list/image';
-import ListContainer, { ELEMENT_LIST_CONTAINER } from '../list/container';
+import ImageContainer, {
+  ELEMENT_LIST_IMAGE_CONTAINER,
+} from '../shared-elements/list/image';
+import ListContainer, {
+  ELEMENT_LIST_CONTAINER,
+} from '../shared-elements/list/container';
 
 type TypeTabularPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;

@@ -30,7 +30,7 @@ const DateBlockContainerStyles = `
     width: ${Spacing.xl};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${ELEMENT_EVENT_LIST_DATE_BLOCK} {
       display: none;
     }
@@ -38,7 +38,7 @@ const DateBlockContainerStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${ELEMENT_EVENT_LIST_DATE_BLOCK} {
-      width: ${Spacing['6xl']};
+      width: ${Spacing['8xl']};
     }
   }
 `;

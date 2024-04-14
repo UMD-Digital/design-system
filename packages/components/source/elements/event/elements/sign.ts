@@ -1,7 +1,7 @@
 import { Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
-const { SansLarger, Eyebrow } = Typography;
+const { SansExtraLarge, SansMin, SansLarger, SansSmall } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -10,12 +10,46 @@ const ELEMENT_EVENT_MONTH = 'event-sign-date-month';
 const ELEMENT_EVENT_DAY = 'event-sign-date-day';
 
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_MULTI_DAY = 'multi-day';
+const ATTRIBUTE_SIZE_LARGE = 'large';
 const THEME_DARK = 'dark';
 const THEME_LIGHT = 'light';
 const IS_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_MULTI_DAY = `[${ATTRIBUTE_MULTI_DAY}]`;
+const IS_SIZE_LARGE = `[${ATTRIBUTE_SIZE_LARGE}]`;
+
+export const OVERWRITE_MULTI_DAY_MONTH = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_MULTI_DAY}${IS_SIZE_LARGE} .${ELEMENT_EVENT_MONTH}`;
+export const OVERWRITE_MULTI_DAY_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_MULTI_DAY}${IS_SIZE_LARGE} .${ELEMENT_EVENT_DAY}`;
 
 // prettier-ignore
-const dateWrapperStyles = `
+const OverwriteLargeSize = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_MULTI_DAY_MONTH}`]: SansSmall,
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_MULTI_DAY_MONTH} *`]: SansSmall,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_MULTI_DAY_DAY}`]: SansExtraLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_MULTI_DAY_DAY} *`]: SansExtraLarge,
+    },
+  })}
+`;
+
+// prettier-ignore
+const WrapperStyles = `
   .${ELEMENT_EVENT_DATE_WRAPPER} {
     display: flex;
     align-items: center;
@@ -36,21 +70,21 @@ const dateWrapperStyles = `
 `;
 
 // prettier-ignore
-const monthStyles = `
+const MonthStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_MONTH}`]: Eyebrow,
+      [`.${ELEMENT_EVENT_MONTH}`]: SansMin,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_MONTH} *`]: Eyebrow,
+      [`.${ELEMENT_EVENT_MONTH} *`]: SansMin,
     },
   })}
 `;
 
-const dayStyles = `
+const DayStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EVENT_DAY}`]: SansLarger,
@@ -66,9 +100,10 @@ const dayStyles = `
 
 // prettier-ignore
 const STYLES_EVENT_SIGN = `
-  ${dateWrapperStyles}
-  ${monthStyles}
-  ${dayStyles}
+  ${WrapperStyles}
+  ${MonthStyles}
+  ${DayStyles}
+  ${OverwriteLargeSize}
 `;
 
 const makeDateElement = ({
@@ -148,8 +183,8 @@ const makeEndDateBlock = ({
     srOnly.classList.add('sr-only');
     srOnly.innerHTML = 'to';
 
-    dash.style.width = '11px';
-    dash.style.height = '4px';
+    dash.style.width = '10px';
+    dash.style.height = '3px';
     dash.style.margin = '0 5px';
     dash.style.display = 'block';
     dash.style.backgroundColor = 'black';
@@ -157,6 +192,7 @@ const makeEndDateBlock = ({
     container.appendChild(srOnly);
     container.appendChild(dash);
     container.appendChild(endWrapper);
+    container.setAttribute(ATTRIBUTE_MULTI_DAY, '');
   }
 };
 
@@ -166,18 +202,21 @@ const CreateEventSignElement = ({
   endDay,
   endMonth,
   theme = THEME_LIGHT,
+  isLargeSize = false,
 }: {
   startMonth: string | HTMLElement;
   startDay: string | HTMLElement;
   endDay?: string | HTMLElement;
   endMonth?: string | HTMLElement;
   theme?: string;
+  isLargeSize?: boolean;
 }) => {
   const container = document.createElement('div');
   const hasEnd = endDay && endMonth;
 
   container.classList.add(ELEMENT_EVENT_DATE_WRAPPER);
   container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isLargeSize) container.setAttribute(ATTRIBUTE_SIZE_LARGE, '');
 
   makeStartDateBlock({ container, startMonth, startDay });
 

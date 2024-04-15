@@ -94,6 +94,7 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
     line-height: 1.28em;
     max-width: ${MAX_WIDTH}px;
     position: relative;
+    font-family: inherit;
   }
 
   .${CLASS_BASE_CTA} svg {

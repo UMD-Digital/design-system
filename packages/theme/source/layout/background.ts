@@ -26,30 +26,7 @@ const BackgroundQuater = {
     left: 0,
     width: '100%',
     zIndex: -1,
-    backgroundColor: `${Colors.gray.lighter}`,
-
-    [`@media (${Queries.tablet.max})`]: {
-      display: 'none',
-    },
-
-    [`@media (${Queries.desktop.min})`]: {
-      width: `calc(75% + 80px)`,
-    },
-  },
-};
-
-const BackgroundQuaterDark = {
-  ...BackgroundQuater,
-
-  '&:before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    zIndex: -1,
-    backgroundColor: `${Colors.black}`,
+    backgroundColor: `${Colors.gray.lightest}`,
 
     [`@media (${Queries.tablet.max})`]: {
       display: 'none',
@@ -64,7 +41,7 @@ const BackgroundQuaterDark = {
 export default {
   '.umd-layout-background-color': {
     ...BackgroundPadding,
-    backgroundColor: `${Colors.gray.lighter}`,
+    backgroundColor: `${Colors.gray.lightest}`,
   },
   '.umd-layout-background-color-dark': {
     ...BackgroundPadding,
@@ -72,8 +49,5 @@ export default {
   },
   '.umd-layout-background-quater-color': {
     ...BackgroundQuater,
-  },
-  '.umd-layout-background-quater-color-dark': {
-    ...BackgroundQuaterDark,
   },
 };

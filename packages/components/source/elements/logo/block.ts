@@ -25,6 +25,7 @@ const OVERWRITE_BORDER_CONTAINER = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_BORDER}
 const VariantThemeStyles = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
     background-color: ${Colors.gray.darker};
+    border: 1px solid ${Colors.gray.dark};
     padding: ${Spacing.xl};
   }
 `;
@@ -47,8 +48,8 @@ const STYLES_LOGO_BLOCK_ELEMENT = `
     align-items: center;
   }
 
-  ${VariantThemeStyles}
   ${VariantBorderStyles}
+  ${VariantThemeStyles}
 `;
 
 const CreateLogoBlockElement = (element: TypeLogoRequirements) => {

@@ -18,32 +18,59 @@ const IS_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 const IS_MULTI_DAY = `[${ATTRIBUTE_MULTI_DAY}]`;
 const IS_SIZE_LARGE = `[${ATTRIBUTE_SIZE_LARGE}]`;
 
-export const OVERWRITE_MULTI_DAY_MONTH = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_MULTI_DAY}${IS_SIZE_LARGE} .${ELEMENT_EVENT_MONTH}`;
-export const OVERWRITE_MULTI_DAY_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_MULTI_DAY}${IS_SIZE_LARGE} .${ELEMENT_EVENT_DAY}`;
+export const OVERWRITE_SIZE_LARGE_MONTH = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_SIZE_LARGE} .${ELEMENT_EVENT_MONTH}`;
+export const OVERWRITE_SIZE_LARGE_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_SIZE_LARGE} .${ELEMENT_EVENT_DAY}`;
+
+export const OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_MULTI_DAY}${IS_SIZE_LARGE} .${ELEMENT_EVENT_MONTH}`;
+export const OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_MULTI_DAY}${IS_SIZE_LARGE} .${ELEMENT_EVENT_DAY}`;
 
 // prettier-ignore
 const OverwriteLargeSize = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_MULTI_DAY_MONTH}`]: SansSmall,
+      [`${OVERWRITE_SIZE_LARGE_MONTH}`]: SansSmall,
     },
   })}
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_MULTI_DAY_MONTH} *`]: SansSmall,
+      [`${OVERWRITE_SIZE_LARGE_MONTH} *`]: SansSmall,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_MULTI_DAY_DAY}`]: SansExtraLarge,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH}`]: SansMin,
+    },
+  })}
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH} *`]: SansMin,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_MULTI_DAY_DAY} *`]: SansExtraLarge,
+      [`${OVERWRITE_SIZE_LARGE_DAY}`]: SansExtraLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_SIZE_LARGE_DAY} *`]: SansExtraLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY}`]: SansLarger,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY} *`]: SansLarger,
     },
   })}
 `;

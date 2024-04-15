@@ -1,8 +1,8 @@
-import { Typography } from '@universityofmaryland/variables';
+import { Typography, Tokens } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 const { SansExtraLarge, SansMin, SansLarger, SansSmall } = Typography;
-
+const { Colors } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const ELEMENT_EVENT_DATE_WRAPPER = 'event-sign-wrapper';
@@ -90,11 +90,11 @@ const WrapperStyles = `
     text-align: center;
     max-width: 200px;
     font-weight: 700;
-    color: currentColor;
+    color: ${Colors.black} !important;
   }
 
   .${ELEMENT_EVENT_DATE_WRAPPER}${IS_DARK} * {
-    color: white !important;
+    color: ${Colors.white} !important;
   }
 `;
 

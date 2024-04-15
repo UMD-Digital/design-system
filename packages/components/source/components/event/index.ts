@@ -81,13 +81,11 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     startDate,
     endDate,
   });
-
   const EventSignData = MarkupEvent.CreateDetailsData({
     locationElement: locationSlot,
     startDate,
     endDate,
   });
-
   const eventDetails = EventElements.Meta.CreateElement(EventDetailsData);
   const eventDetailsDark = EventElements.Meta.CreateElement({
     ...EventDetailsData,
@@ -97,6 +95,11 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   const dateSignLarge = EventElements.Sign.CreateElement({
     ...EventSignData,
     isLargeSize: true,
+  });
+  const dateSignLargeLight = EventElements.Sign.CreateElement({
+    ...EventSignData,
+    isLargeSize: true,
+    theme: 'light',
   });
   const dateSignLargeDark = EventElements.Sign.CreateElement({
     ...EventSignData,
@@ -108,7 +111,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     return EventFeature.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: theme === THEME_LIGHT ? eventDetails : eventDetailsDark,
-      dateSign: theme === THEME_LIGHT ? dateSignLarge : dateSignLargeDark,
+      dateSign: theme === THEME_LIGHT ? dateSignLarge : dateSignLargeLight,
     });
   }
 
@@ -124,7 +127,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     return EventList.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: theme === THEME_LIGHT ? eventDetails : eventDetailsDark,
-      dateSign: dateSignLarge,
+      dateSign: theme === THEME_LIGHT ? dateSignLarge : dateSignLargeDark,
     });
   }
 

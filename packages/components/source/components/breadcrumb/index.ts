@@ -9,7 +9,6 @@ declare global {
   }
 }
 
-const { Link } = Animations;
 const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-breadcrumb';
@@ -25,12 +24,17 @@ const styles = `
   ${Styles.ResetString}
 
   :host {
-    display: block;
+    display: flex;
+    mask-image: linear-gradient(90deg, #fff calc(100% - 32px), transparent);
+    overflow-x: auto;
+    scrollbar-width: none;
+    white-space: nowrap;
   }
 
   a {
     color: ${Colors.gray.medium} !important;
     position: relative;
+    font-size: 16px !important;
   }
 
   a:last-of-type {
@@ -52,7 +56,7 @@ const styles = `
     display: inline-block;
     height: 14px;
     background-color: ${Colors.gray.light};
-    left: -7px;
+    left: -8px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%) rotate(15deg);

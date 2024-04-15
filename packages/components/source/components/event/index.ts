@@ -61,6 +61,7 @@ const MakeCommonData = ({ element }: { element: UMDCardElement }) => {
 const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   const { START_DATE_ISO, END_DATE_ISO, LOCATION } = element._slots;
   const displayAttribute = element.getAttribute(ATTRIBUTE_DISPLAY);
+  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
   const isDisplayList = displayAttribute === DISPLAY_LIST;
   const isDisplayFeature = displayAttribute === DISPLAY_FEATURE;
   const isDisplayPromo = displayAttribute === DISPLAY_PROMO;
@@ -97,12 +98,17 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
     ...EventSignData,
     isLargeSize: true,
   });
+  const dateSignLargeDark = EventElements.Sign.CreateElement({
+    ...EventSignData,
+    isLargeSize: true,
+    theme: 'dark',
+  });
 
   if (isDisplayFeature) {
     return EventFeature.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails,
-      dateSign: dateSignLarge,
+      eventDetails: theme === THEME_LIGHT ? eventDetails : eventDetailsDark,
+      dateSign: theme === THEME_LIGHT ? dateSignLarge : dateSignLargeDark,
     });
   }
 
@@ -117,14 +123,14 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   if (isDisplayList) {
     return EventList.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails,
+      eventDetails: theme === THEME_LIGHT ? eventDetails : eventDetailsDark,
       dateSign: dateSignLarge,
     });
   }
 
   return EventBlock.CreateElement({
     ...MakeCommonData({ element }),
-    eventDetails,
+    eventDetails: theme === THEME_LIGHT ? eventDetails : eventDetailsDark,
   });
 };
 

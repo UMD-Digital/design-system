@@ -49,27 +49,6 @@ const OverwriteLargeSize = `
 `;
 
 // prettier-ignore
-const WrapperStyles = `
-  .${ELEMENT_EVENT_DATE_WRAPPER} {
-    display: flex;
-    align-items: center;
-  }
-
-  .${ELEMENT_EVENT_DATE_WRAPPER} * {
-    display: block;
-    text-transform: uppercase;
-    text-align: center;
-    max-width: 200px;
-    font-weight: 700;
-    color: currentColor;
-  }
-
-  .${ELEMENT_EVENT_DATE_WRAPPER}${IS_DARK} * {
-    color: white !important;
-  }
-`;
-
-// prettier-ignore
 const MonthStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
@@ -96,6 +75,27 @@ const DayStyles = `
       [`.${ELEMENT_EVENT_DAY} *`]: SansLarger,
     },
   })}
+`;
+
+// prettier-ignore
+const WrapperStyles = `
+  .${ELEMENT_EVENT_DATE_WRAPPER} {
+    display: flex;
+    align-items: center;
+  }
+
+  .${ELEMENT_EVENT_DATE_WRAPPER} * {
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+    max-width: 200px;
+    font-weight: 700;
+    color: currentColor;
+  }
+
+  .${ELEMENT_EVENT_DATE_WRAPPER}${IS_DARK} * {
+    color: white !important;
+  }
 `;
 
 // prettier-ignore

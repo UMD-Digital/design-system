@@ -23,6 +23,8 @@ const { ConvertJSSObjectToStyles } = Styles;
 const { Eyebrow } = Elements;
 
 const MEDIUM = 650;
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
 
 const ELEMENT_NAME = 'umd-event-feature';
 const ELEMENT_EVENT_FEATURE_CONTAINER = 'event-feature-container';
@@ -30,7 +32,17 @@ const ELEMENT_EVENT_FEATURE_META_WRAPPER = 'event-feature-meta-wrapper';
 const ELEMENT_EVENT_SIGN_WRAPPER = 'event-feature-sign-wrapper';
 const ELEMENT_EVENT_FEATURE_EYEBROW = 'event-feature-details-eyebrow';
 
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_EVENT_FEATURE_CONTAINER} .${ELEMENT_BLOCK_IMAGE_CONTAINER} `;
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_EVENT_FEATURE_CONTAINER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
+const OVERWRITE_THEME_DARK_EYEBROW = `.${ELEMENT_EVENT_FEATURE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_EVENT_FEATURE_EYEBROW}`;
+
+// prettier-ignore
+const OverwriteThemeDark = `
+  ${OVERWRITE_THEME_DARK_EYEBROW} {
+    color: ${Colors.black} !important;
+  }
+`;
 
 // prettier-ignore
 const OverwriteImageContainer = `
@@ -96,6 +108,7 @@ const STYLES_EVENT_FEATURE_ELEMENT = `
   ${DetailsMeta}
   ${EyebrowStyles}
   ${OverwriteImageContainer}
+  ${OverwriteThemeDark}
 `;
 
 const MakeEyebrow = () => {
@@ -139,6 +152,7 @@ const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
 
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_EVENT_FEATURE_CONTAINER);
+  if (theme) elementContainer.setAttribute('theme', theme);
 
   return elementContainer;
 };

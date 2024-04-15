@@ -27,7 +27,7 @@ export const CreateLazyLoadButton = ({
     type: 'outline',
   });
 
-  button.innerHTML = 'Load More Events';
+  button.innerHTML = 'Load More';
   button.addEventListener('click', callback);
 
   container.classList.add(ID_LAZY_LOAD_BUTTON);

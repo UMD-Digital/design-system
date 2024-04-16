@@ -97,6 +97,11 @@ const SpecialAnimationsLink = {
     ...Link.LineSlideUnder.gray,
   },
 
+  '.umd-slidein-underline-graydark-red': {
+    ...baseLink,
+    ...Link.LineSlideUnder.grayDark,
+  },
+
   '.umd-fadein-simple-dark': {
     ...baseLink,
     ...Link.LineFadeUnder.dark,

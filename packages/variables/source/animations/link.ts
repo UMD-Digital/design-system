@@ -82,7 +82,23 @@ export const LineSlideUnder = {
       backgroundImage: `linear-gradient(${Colors.black}, ${Colors.black})`,
     },
   },
+  grayDark: {
+    ...baseSlideIn,
 
+    '& > *:not(svg):not(.sr-only)': {
+      ...BaseSpan,
+
+      backgroundImage: `linear-gradient(to left, ${Colors.gray.dark} 50%, ${Colors.red} 50% 100%)`,
+      backgroundPosition: 'right bottom',
+      backgroundSize: '200% 2px',
+    },
+
+    [`&:hover > *:not(svg):not(.sr-only),
+      &:focus > *:not(svg):not(.sr-only)`]: {
+      backgroundPosition: 'left bottom',
+      backgroundSize: '200% 2px',
+    },
+  },
   gray: {
     ...baseSlideIn,
 

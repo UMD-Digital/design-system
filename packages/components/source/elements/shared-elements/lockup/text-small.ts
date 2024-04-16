@@ -19,7 +19,7 @@ export type TypeTextLockupSmall = {
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { Text } = Elements;
-const { SansLarger, SansMin, Eyebrow } = Typography;
+const { SansLarger, SansSmall, SansMin, Eyebrow } = Typography;
 const { GridColumnAndRows } = Layout;
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -144,13 +144,13 @@ const TextStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: Typography.SansSmall,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: SansSmall,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: Typography.SansSmall,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: SansSmall,
     },
   })}
 

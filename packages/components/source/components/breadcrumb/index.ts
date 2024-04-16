@@ -31,11 +31,17 @@ const styles = `
     white-space: nowrap;
   }
 
+  :host::-webkit-scrollbar { 
+    display: none;
+  }
+
   a {
     color: ${Colors.gray.medium} !important;
     position: relative;
     font-size: 12px !important;
   }
+
+ 
 
   a:last-of-type {
     color: ${Colors.black} !important;

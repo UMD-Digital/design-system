@@ -34,7 +34,7 @@ const styles = `
   a {
     color: ${Colors.gray.medium} !important;
     position: relative;
-    font-size: 16px !important;
+    font-size: 12px !important;
   }
 
   a:last-of-type {

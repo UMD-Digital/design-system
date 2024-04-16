@@ -9,7 +9,6 @@ import {
 const { SansExtraLarge, SansMedium, SansSmall } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 
-const SMALL = 400;
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-scaling-font-block-container';
@@ -40,7 +39,7 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const DateStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteDate}`]: SansSmall,
@@ -48,7 +47,7 @@ const DateStyles = `
     })}
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteDate} *`]: SansSmall,
@@ -59,18 +58,12 @@ const DateStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteText} *`]: SansMedium,
       },
     })}
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OverwriteText} * {
-      line-height: 1.375em;
-    }
   }
 `;
 

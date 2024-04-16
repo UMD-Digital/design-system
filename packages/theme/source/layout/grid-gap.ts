@@ -45,25 +45,30 @@ const GridColumnsFeatured = {
 const MasonryGrid = {
   display: 'grid',
   gridTemplateColumns: '1fr',
-  gridGap: '24px',
+  gridGap: `${Spacing.md}`,
 
   [`@media (${Queries.tablet.min})`]: {
     gridTemplateColumns: '1fr 1fr',
-    paddingTop: '24px',
   },
 
   [`@media (${Queries.desktop.min})`]: {
-    gridGap: '32px',
-    paddingTop: '32px',
+    gridGap: Spacing.lg,
   },
 
   '& > *': {
-    height: '500px',
+    '& > *': {
+      width: '100%',
+      height: '100%',
+    },
   },
 
   '& > *:nth-of-type(odd)': {
     [`@media (${Queries.tablet.min})`]: {
       marginTop: '-56px',
+    },
+
+    '& > *': {
+      height: 'calc(100% - 56px)',
     },
   },
 

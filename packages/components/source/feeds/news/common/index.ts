@@ -58,22 +58,32 @@ const MakeApiVariables = ({
 }: {
   element: TypeElements;
 }): TypeAPIFeedVariables => {
-  const related = element._categories;
+  const isUnion = element._union;
   const offset = element._offset;
   const token = element._token;
-  let limit = element._showRows;
-
-  if ('_showCount' in element) {
-    limit = element._showCount * element._showRows;
-  }
-
-  return {
+  const related = element._categories;
+  const relatedToAll = element._categories;
+  const limit = element._showRows;
+  const obj: TypeAPIFeedVariables = {
     container: GetContainer({ element }),
-    limit,
-    related,
     offset,
     token,
+    limit,
+    related,
+    relatedToAll,
   };
+
+  if ('_showCount' in element) {
+    obj['limit'] = element._showCount * element._showRows;
+  }
+
+  if (isUnion) {
+    if (obj.related) delete obj.related;
+  } else {
+    if (obj.relatedToAll) delete obj.relatedToAll;
+  }
+
+  return obj;
 };
 
 const MakeLazyLoadVariables = ({
@@ -120,6 +130,7 @@ const DisplayEntries = ({
 
 const LoadMoreEntries = async ({ element }: { element: TypeElements }) => {
   const container = GetContainer({ element });
+
   RemoveLazyLoad({ container });
   DisplayLoader({ container });
   FetchFeedEntries({

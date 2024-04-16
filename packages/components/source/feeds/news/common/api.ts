@@ -4,6 +4,7 @@ import { DisplayNoResults } from 'feeds/common/ui';
 
 type TypeFetchVariables = {
   related?: string[];
+  relatedToAll?: string[];
   limit?: number;
   offset?: number;
 };
@@ -29,6 +30,7 @@ const NoResultsContent = {
 const FetchFeed = async ({
   limit,
   related,
+  relatedToAll,
   offset,
   token,
   query,
@@ -38,6 +40,7 @@ const FetchFeed = async ({
   const variables: TypeFetchVariables = {
     limit,
     related,
+    relatedToAll,
     offset,
   };
 

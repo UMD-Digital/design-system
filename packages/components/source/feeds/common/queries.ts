@@ -1,9 +1,10 @@
 export const ARTICLES_QUERY = `
-  query getArticles($related: [QueryArgument], $limit: Int, $offset: Int) {
-    entryCount(section: "articles", relatedTo: $related)
+  query getArticles($related: [QueryArgument], $relatedToAll: [QueryArgument], $limit: Int, $offset: Int) {
+    entryCount(section: "articles", relatedTo: $related,relatedToAll: $relatedToAll)
     entries(
       section: "articles",
       relatedTo: $related,
+      relatedToAll: $relatedToAll,
       limit: $limit,
       offset: $offset,
     ) {

@@ -11,6 +11,7 @@ const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';
 const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
+const ATTRIBUTE_UNION = 'union';
 
 export const ELEMENT_NAME = 'umd-feed-events-list';
 export class UMDFeedEventsList extends HTMLElement {
@@ -19,6 +20,7 @@ export class UMDFeedEventsList extends HTMLElement {
   _showRows: number;
   _lazyLoad: boolean;
   _offset: number;
+  _union: boolean;
   _totalEntries: number | null;
   _categories: string[];
 
@@ -29,6 +31,7 @@ export class UMDFeedEventsList extends HTMLElement {
     this._showRows = 5;
     this._offset = 0;
     this._lazyLoad = false;
+    this._union = false;
     this._totalEntries = null;
     this._categories = [];
 
@@ -45,6 +48,7 @@ export class UMDFeedEventsList extends HTMLElement {
     const categories = element.getAttribute(ATTRIBUTE_CATEGORIES);
 
     element._token = element.getAttribute(ATTRIBUTE_TOKEN) || null;
+    element._union = element.getAttribute(ATTRIBUTE_UNION) === 'true';
 
     if (categories) this._categories = categories.split(',');
     if (rowCount) element._showRows = parseInt(rowCount);

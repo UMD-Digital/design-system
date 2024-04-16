@@ -63,16 +63,12 @@ const MakeApiVariables = ({
   element: TypeElements;
 }): TypeAPIFeedVariables => {
   const startDate = new Date().toDateString();
+  const isUnion = element._union;
   const related = element._categories;
   const offset = element._offset;
   const token = element._token;
-  let limit = element._showRows;
-
-  if ('_showCount' in element) {
-    limit = element._showCount * element._showRows;
-  }
-
-  return {
+  const limit = element._showRows;
+  const obj: TypeAPIFeedVariables = {
     container: GetContainer({ element }),
     startDate,
     limit,
@@ -80,6 +76,16 @@ const MakeApiVariables = ({
     offset,
     token,
   };
+
+  if ('_showCount' in element) {
+    obj.limit = element._showCount * element._showRows;
+  }
+
+  if (isUnion) {
+    obj.related = ['and', ...related];
+  }
+
+  return obj;
 };
 
 const MakeLazyLoadVariables = ({

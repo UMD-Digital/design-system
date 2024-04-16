@@ -31,7 +31,7 @@ const GridColumnsFeatured = {
   },
 
   [`@media (${Queries.desktop.min})`]: {
-    gridGap: `${Spacing.lg}`,
+    gridGap: `${Spacing.xl}`,
     gridTemplateColumns: `[start-feature] calc(50% - ${Spacing.md}) [end-feature start-cards] repeat(2, 1fr) [end-cards]`,
 
     [`& > umd-element-card-overlay:first-child,
@@ -49,10 +49,11 @@ const MasonryGrid = {
 
   [`@media (${Queries.tablet.min})`]: {
     gridTemplateColumns: '1fr 1fr',
+    gridGap: Spacing.lg,
   },
 
   [`@media (${Queries.desktop.min})`]: {
-    gridGap: Spacing.lg,
+    gridGap: Spacing.xl,
   },
 
   '& > *': {
@@ -64,11 +65,21 @@ const MasonryGrid = {
 
   '& > *:nth-of-type(odd)': {
     [`@media (${Queries.tablet.min})`]: {
-      marginTop: '-56px',
+      marginTop: `-${Spacing.lg}`,
+    },
+
+    [`@media (${Queries.desktop.min})`]: {
+      marginTop: `-${Spacing.xl}`,
     },
 
     '& > *': {
-      height: 'calc(100% - 56px)',
+      [`@media (${Queries.tablet.min})`]: {
+        height: `calc(100% - ${Spacing.lg})`,
+      },
+
+      [`@media (${Queries.desktop.min})`]: {
+        height: `calc(100% - ${Spacing.xl})`,
+      },
     },
   },
 
@@ -86,7 +97,11 @@ const MasonryGrid = {
 
   '& > *:nth-of-type(2)': {
     [`@media (${Queries.tablet.min})`]: {
-      marginTop: '56px',
+      marginTop: `${Spacing.lg}`,
+    },
+
+    [`@media (${Queries.desktop.min})`]: {
+      marginTop: `${Spacing.xl}`,
     },
   },
 };

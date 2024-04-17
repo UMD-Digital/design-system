@@ -18,14 +18,8 @@ import {
   STYLES_NEWS_FEED,
   ArticleType,
 } from '../common/ui';
-import {
-  UMDFeedNewsList,
-  ELEMENT_NAME as ELEMENT_NAME_LIST,
-} from '../list/index';
-import {
-  UMDFeedNewsGrid,
-  ELEMENT_NAME as ELEMENT_NAME_GRID,
-} from '../grid/index';
+import { UMDFeedNewsList, ELEMENT_NAME as ELEMENT_NAME_LIST } from '../list';
+import { UMDFeedNewsGrid, ELEMENT_NAME as ELEMENT_NAME_GRID } from '../grid';
 
 const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 

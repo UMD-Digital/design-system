@@ -22,14 +22,8 @@ import {
   FetchFeedEntries,
   TypeAPIFeedVariables,
 } from 'feeds/events/common/api';
-import {
-  UMDFeedEventsList,
-  ELEMENT_NAME as ELEMENT_NAME_LIST,
-} from '../list/index';
-import {
-  UMDFeedEventsGrid,
-  ELEMENT_NAME as ELEMENT_NAME_GRID,
-} from '../grid/index';
+import { UMDFeedEventsList, ELEMENT_NAME as ELEMENT_NAME_LIST } from '../list';
+import { UMDFeedEventsGrid, ELEMENT_NAME as ELEMENT_NAME_GRID } from '../grid';
 
 const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
 

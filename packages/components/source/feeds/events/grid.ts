@@ -5,7 +5,7 @@ declare global {
 }
 
 import { MarkupCreate } from 'utilities';
-import { ComponentStyles, CreateShadowDom, CreateFeed } from '../common';
+import { ComponentStyles, CreateShadowDom, CreateFeed } from './common';
 
 const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';

@@ -1,11 +1,11 @@
 declare global {
   interface Window {
-    UMDFeedNewsList: typeof UMDFeedNewsList;
+    UMDFeedEventsList: typeof UMDFeedEventsList;
   }
 }
 
 import { MarkupCreate } from 'utilities';
-import { ComponentStyles, CreateShadowDom, CreateFeed } from '../common';
+import { ComponentStyles, CreateShadowDom, CreateFeed } from './common';
 
 const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';
@@ -13,8 +13,8 @@ const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
 const ATTRIBUTE_UNION = 'union';
 
-export const ELEMENT_NAME = 'umd-feed-news-list';
-export class UMDFeedNewsList extends HTMLElement {
+export const ELEMENT_NAME = 'umd-feed-events-list';
+export class UMDFeedEventsList extends HTMLElement {
   _shadow: ShadowRoot;
   _token: string | null;
   _showRows: number;
@@ -35,19 +35,10 @@ export class UMDFeedNewsList extends HTMLElement {
     this._totalEntries = null;
     this._categories = [];
 
-    const styles = `${ComponentStyles}`;
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
-
+    const template = MarkupCreate.Node.stylesTemplate({
+      styles: `${ComponentStyles}`,
+    });
     this._shadow.appendChild(template.content.cloneNode(true));
-  }
-
-  static get observedAttributes() {
-    return [
-      ATTRIBUTE_TOKEN,
-      ATTRIBUTE_ROWS,
-      ATTRIBUTE_LAZYLOAD,
-      ATTRIBUTE_CATEGORIES,
-    ];
   }
 
   async connectedCallback() {
@@ -59,11 +50,8 @@ export class UMDFeedNewsList extends HTMLElement {
     element._token = element.getAttribute(ATTRIBUTE_TOKEN) || null;
     element._union = element.getAttribute(ATTRIBUTE_UNION) === 'true';
 
+    if (categories) this._categories = categories.split(',');
     if (rowCount) element._showRows = parseInt(rowCount);
-
-    if (categories) {
-      this._categories = categories.split(',');
-    }
 
     if (shouldLazyLoad) {
       if (shouldLazyLoad === 'true') element._lazyLoad = true;
@@ -80,8 +68,8 @@ export const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDFeedNewsList = UMDFeedNewsList;
-    window.customElements.define(ELEMENT_NAME, UMDFeedNewsList);
+    window.UMDFeedEventsList = UMDFeedEventsList;
+    window.customElements.define(ELEMENT_NAME, UMDFeedEventsList);
   }
 
   return '';

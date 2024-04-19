@@ -12,7 +12,7 @@ declare global {
 const { Link } = Animations;
 const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
 
-const ELEMENT_NAME = 'umd-breadcrumb';
+const ELEMENT_NAME = 'umd-element-breadcrumb';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';

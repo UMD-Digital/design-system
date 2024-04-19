@@ -4,8 +4,9 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
-import { ComponentStyles, CreateShadowDom, CreateFeed } from './common';
+import { MarkupCreate, Styles } from 'utilities';
+import { FeedsEvents } from 'elements';
+import { TypeEventFeedRequirements } from 'elements/feeds/events';
 
 const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';
@@ -14,79 +15,50 @@ const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
 const ATTRIBUTE_UNION = 'union';
 
-export const ELEMENT_NAME = 'umd-feed-events';
-export class UMDFeedEventsGrid extends HTMLElement {
+const styles = `
+  :host {
+    display: block;
+  }
+
+  ${Styles.ResetString}
+  ${FeedsEvents.Styles}
+`;
+
+const ELEMENT_NAME = 'umd-feed-events';
+class UMDFeedEventsGrid extends HTMLElement {
   _shadow: ShadowRoot;
-  _token: string | null;
-  _showCount: number;
-  _showRows: number;
-  _lazyLoad: boolean;
-  _offset: number;
-  _union: boolean;
-  _totalEntries: number | null;
-  _categories: string[];
 
   constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._token = null;
-    this._showCount = 3;
-    this._showRows = 1;
-    this._offset = 0;
-    this._lazyLoad = false;
-    this._union = false;
-    this._totalEntries = null;
-    this._categories = [];
-
-    const styles = `${ComponentStyles}`;
     const template = MarkupCreate.Node.stylesTemplate({ styles });
 
+    super();
+    this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
-  static get observedAttributes() {
-    return [
-      ATTRIBUTE_TOKEN,
-      ATTRIBUTE_ROWS,
-      ATTRIBUTE_LAZYLOAD,
-      ATTRIBUTE_SHOW,
-      ATTRIBUTE_CATEGORIES,
-    ];
-  }
-
   async connectedCallback() {
-    const element = this;
-    const rowCount = element.getAttribute(ATTRIBUTE_ROWS);
-    const showCount = element.getAttribute(ATTRIBUTE_SHOW);
-    const shouldLazyLoad = element.getAttribute(ATTRIBUTE_LAZYLOAD);
-    const categories = element.getAttribute(ATTRIBUTE_CATEGORIES);
+    const token = this.getAttribute(ATTRIBUTE_TOKEN);
+    const categoriesAttribute = this.getAttribute(ATTRIBUTE_CATEGORIES);
 
-    element._token = element.getAttribute(ATTRIBUTE_TOKEN) || null;
-    element._union = element.getAttribute(ATTRIBUTE_UNION) === 'true';
-
-    if (categories) {
-      this._categories = categories.split(',');
+    if (!token) {
+      console.error(`${ELEMENT_NAME} requires a token to be set`);
+      return;
     }
 
-    if (shouldLazyLoad) {
-      if (shouldLazyLoad === 'true') element._lazyLoad = true;
-      if (shouldLazyLoad === 'false') element._lazyLoad = false;
+    const data: TypeEventFeedRequirements = {
+      token,
+      numberOfRowsToStart: Number(this.getAttribute(ATTRIBUTE_ROWS)) || 1,
+      numberOfColumnsToShow: Number(this.getAttribute(ATTRIBUTE_SHOW)) || 3,
+      isLazyLoad: this.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',
+      isUnion: this.getAttribute(ATTRIBUTE_UNION) === 'true',
+      isTypeGrid: true,
+    };
+
+    if (categoriesAttribute) {
+      data.categories = categoriesAttribute.split(',');
     }
 
-    if (rowCount) {
-      if (rowCount === '1') element._showRows = 1;
-      if (rowCount === '2') element._showRows = 2;
-      if (rowCount === '3') element._showRows = 3;
-    }
-
-    if (showCount) {
-      if (showCount === '2') element._showCount = 2;
-      if (showCount === '3') element._showCount = 3;
-      if (showCount === '4') element._showCount = 4;
-    }
-
-    this._shadow.appendChild(CreateShadowDom({ element }));
-    CreateFeed({ element });
+    this._shadow.appendChild(FeedsEvents.CreateElement(data));
   }
 }
 

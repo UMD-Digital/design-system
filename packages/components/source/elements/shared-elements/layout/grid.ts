@@ -1,12 +1,17 @@
 import { Layout } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
+type TypeGridDisplay = {
+  count?: number;
+  container: HTMLElement;
+};
+
 const { GridColumnsWithGap } = Layout;
 const { ConvertJSSObjectToStyles } = Styles;
 
-export const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
+const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 
-export const STYLES_GRID_LAYOUT = `
+const STYLES_GRID_LAYOUT = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="2"]`]:
@@ -30,11 +35,17 @@ export const STYLES_GRID_LAYOUT = `
   })}
 `;
 
-export const CreateGridGapLayout = ({ count }: { count: number }) => {
-  const container = document.createElement('div');
+const CreateLayoutGridGap = ({ container, count = 2 }: TypeGridDisplay) => {
+  const grid = document.createElement('div');
 
-  container.classList.add(ID_GRID_LAYOUT_CONTAINER);
-  container.setAttribute('grid-count', `${count}`);
+  grid.classList.add(ID_GRID_LAYOUT_CONTAINER);
+  grid.setAttribute('grid-count', `${count}`);
 
-  return container;
+  container.appendChild(grid);
+};
+
+export default {
+  CreateElement: CreateLayoutGridGap,
+  Styles: STYLES_GRID_LAYOUT,
+  ID: ID_GRID_LAYOUT_CONTAINER,
 };

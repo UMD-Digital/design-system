@@ -1,10 +1,10 @@
 import { Network } from 'utilities';
-import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from 'feeds/common/queries';
-import { DisplayNoResults } from 'feeds/common/ui';
+import { ARTICLES_QUERY } from 'elements/feeds/news/queries';
+import NoResults from '../no-results';
 
 type TypeFetchVariables = {
-  startDate?: string;
   related?: string[];
+  relatedToAll?: string[];
   limit?: number;
   offset?: number;
 };
@@ -20,16 +20,17 @@ type TypeFetchObject = TypeAPIFeedVariables & {
 
 const { FetchGraphQL } = Network;
 
-const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
+const TODAY_PRODUCTION_URL = 'https://today.umd.edu/graphql';
 const NoResultsContent = {
-  message: 'Error fetching events. Please visit the main site.',
-  linkUrl: 'https://calendar.umd.edu',
-  linkText: 'View All Events',
+  message: 'Error fetching articles. Please visit the main site.',
+  linkUrl: 'https://today.umd.edu',
+  linkText: 'View All Articles',
 };
 
 const FetchFeed = async ({
   limit,
   related,
+  relatedToAll,
   offset,
   token,
   query,
@@ -37,15 +38,15 @@ const FetchFeed = async ({
   if (!token) throw new Error('Token not found');
 
   const variables: TypeFetchVariables = {
-    startDate: new Date().toDateString(),
     limit,
     related,
+    relatedToAll,
     offset,
   };
 
   const feedData = await FetchGraphQL({
     query,
-    url: CALENDAR_PRODUCTION_URL,
+    url: TODAY_PRODUCTION_URL,
     token: token,
     variables,
   });
@@ -53,36 +54,15 @@ const FetchFeed = async ({
   return feedData;
 };
 
-export const FetchFeedCount = async ({
-  variables,
-}: {
-  variables: TypeAPIFeedVariables;
-}) => {
-  const feedData = await FetchFeed({
-    ...variables,
-    query: EVENTS_COUNT_QUERY,
-  });
-
-  if (!feedData) throw new Error('Feed not found');
-
-  const count = feedData?.data?.count?.events?.length;
-
-  if (count) {
-    return count;
-  }
-
-  return null;
-};
-
-export const FetchFeedEntries = async ({
+const FetchFeedEntries = async ({
   variables,
 }: {
   variables: TypeAPIFeedVariables;
 }) => {
   const { container } = variables;
-  const feedData = await FetchFeed({ ...variables, query: EVENTS_QUERY });
+  const feedData = await FetchFeed({ ...variables, query: ARTICLES_QUERY });
   const graceFail = ({ message }: { message: string }) => {
-    DisplayNoResults({ container, NoResultsContent });
+    NoResults.DisplayElement({ container, ...NoResultsContent });
     throw new Error(message);
   };
 
@@ -96,11 +76,16 @@ export const FetchFeedEntries = async ({
     if (!feedData.data) graceFail({ message: 'Feed data not found' });
     if (!feedData.data.entries)
       graceFail({ message: 'Feed entries not found' });
-    if (!feedData.data.entries.events)
-      graceFail({ message: 'Feed events not found' });
     if (!feedData.message)
       graceFail({ message: `Feed data errors: ${feedData.message}` });
   }
 
-  return feedData.data.entries.events;
+  return {
+    entries: feedData.data.entries,
+    count: feedData.data.entryCount,
+  };
+};
+
+export default {
+  Entries: FetchFeedEntries,
 };

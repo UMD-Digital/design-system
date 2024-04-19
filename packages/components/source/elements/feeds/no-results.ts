@@ -6,7 +6,7 @@ const { Spacing } = Tokens;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
-export type NoResultsContentType = {
+type NoResultsContentType = {
   message?: string;
   linkUrl?: string;
   linkText?: string;
@@ -18,7 +18,7 @@ type NoResultsType = NoResultsContentType & {
 
 const CONTAINER_NO_RESULTS = 'container-no-results';
 
-export const STYLES_NO_RESULTS = `
+const STYLES_NO_RESULTS = `
   .${CONTAINER_NO_RESULTS} {
     display: flex;
     align-items: center;
@@ -37,7 +37,7 @@ export const STYLES_NO_RESULTS = `
   }
 `;
 
-export const CreateNoResultsInterface = ({
+const CreateNoResultsInterface = ({
   container,
   message,
   linkUrl,
@@ -67,4 +67,15 @@ export const CreateNoResultsInterface = ({
   }
 
   container.appendChild(wrapper);
+};
+
+const DisplayNoResults = (props: NoResultsType) => {
+  const { container, ...NoResultsContent } = props;
+  container.innerHTML = '';
+  CreateNoResultsInterface({ container, ...NoResultsContent });
+};
+
+export default {
+  DisplayElement: DisplayNoResults,
+  Styles: STYLES_NO_RESULTS,
 };

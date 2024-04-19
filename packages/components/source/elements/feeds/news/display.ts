@@ -81,29 +81,40 @@ const CreateDate = ({
   return null;
 };
 
-export const CreateNewsCard = ({ entries }: { entries: ArticleType[] }) =>
-  entries.map((entry) =>
-    CardBlock.CreateElement({
-      image: CreateImage({ images: entry.image }),
-      headline: CreateHeadline({ text: entry.title, url: entry.url }),
-      text: CreateText({ text: entry.summary }),
-      date: CreateDate({
-        date: entry.date,
-        dateFormatted: entry.dateFormatted,
-      }),
-      isAligned: true,
-    }),
-  );
+const CommonDisplay = ({ entry }: { entry: ArticleType }) => ({
+  image: CreateImage({ images: entry.image }),
+  headline: CreateHeadline({ text: entry.title, url: entry.url }),
+  text: CreateText({ text: entry.summary }),
+  date: CreateDate({
+    date: entry.date,
+    dateFormatted: entry.dateFormatted,
+  }),
+});
 
-export const CreateNewsList = ({ entries }: { entries: ArticleType[] }) =>
-  entries.map((entry) =>
-    CardList.CreateElement({
-      image: CreateImage({ images: entry.image }),
-      headline: CreateHeadline({ text: entry.title, url: entry.url }),
-      text: CreateText({ text: entry.summary }),
-      date: CreateDate({
-        date: entry.date,
-        dateFormatted: entry.dateFormatted,
+const CreateNewsFeedDisplay = ({
+  entries,
+  isTypeGrid,
+}: {
+  entries: ArticleType[];
+  isTypeGrid?: boolean;
+}) => {
+  if (isTypeGrid) {
+    return entries.map((entry) =>
+      CardBlock.CreateElement({
+        ...CommonDisplay({ entry }),
+        isAligned: false,
       }),
+    );
+  }
+
+  return entries.map((entry) =>
+    CardList.CreateElement({
+      ...CommonDisplay({ entry }),
     }),
   );
+};
+
+export default {
+  CreateElement: CreateNewsFeedDisplay,
+  Styles: STYLES_NEWS_FEED,
+};

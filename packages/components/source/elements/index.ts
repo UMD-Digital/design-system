@@ -8,6 +8,8 @@ import EventElements from './event/elements';
 import EventFeature from './event/feature';
 import EventList from './event/list';
 import EventPromo from './event/promo';
+import FeedsEvents from './feeds/events';
+import FeedsNews from './feeds/news';
 import NavigationElements from './navigation/elements';
 import NavigationHeader from './navigation';
 import HeroDefault from './hero/default';
@@ -44,6 +46,8 @@ export {
   EventFeature,
   EventList,
   EventPromo,
+  FeedsEvents,
+  FeedsNews,
   NavigationElements,
   NavigationHeader,
   HeroDefault,

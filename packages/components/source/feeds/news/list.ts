@@ -4,8 +4,9 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
-import { ComponentStyles, CreateShadowDom, CreateFeed } from './common';
+import { MarkupCreate, Styles } from 'utilities';
+import { FeedsNews } from 'elements';
+import { TypeNewsFeedRequirements } from 'elements/feeds/news';
 
 const ATTRIBUTE_TOKEN = 'token';
 const ATTRIBUTE_ROWS = 'row-count';
@@ -13,31 +14,23 @@ const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
 const ATTRIBUTE_UNION = 'union';
 
-export const ELEMENT_NAME = 'umd-feed-news-list';
-export class UMDFeedNewsList extends HTMLElement {
+const styles = `
+  :host {
+    display: block;
+  }
+
+  ${Styles.ResetString}
+  ${FeedsNews.Styles}
+`;
+
+const ELEMENT_NAME = 'umd-feed-news-list';
+class UMDFeedNewsList extends HTMLElement {
   _shadow: ShadowRoot;
-  _token: string | null;
-  _showRows: number;
-  _lazyLoad: boolean;
-  _offset: number;
-  _union: boolean;
-  _totalEntries: number | null;
-  _categories: string[];
 
   constructor() {
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._token = null;
-    this._showRows = 5;
-    this._offset = 0;
-    this._lazyLoad = false;
-    this._union = false;
-    this._totalEntries = null;
-    this._categories = [];
-
-    const styles = `${ComponentStyles}`;
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
-
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
@@ -50,28 +43,28 @@ export class UMDFeedNewsList extends HTMLElement {
     ];
   }
 
-  async connectedCallback() {
-    const element = this;
-    const rowCount = element.getAttribute(ATTRIBUTE_ROWS);
-    const shouldLazyLoad = element.getAttribute(ATTRIBUTE_LAZYLOAD);
-    const categories = element.getAttribute(ATTRIBUTE_CATEGORIES);
+  connectedCallback() {
+    const token = this.getAttribute(ATTRIBUTE_TOKEN);
+    const categoriesAttribute = this.getAttribute(ATTRIBUTE_CATEGORIES);
 
-    element._token = element.getAttribute(ATTRIBUTE_TOKEN) || null;
-    element._union = element.getAttribute(ATTRIBUTE_UNION) === 'true';
+    if (!token) {
+      console.error(`${ELEMENT_NAME} requires a token to be set`);
+      return;
+    }
+    const data: TypeNewsFeedRequirements = {
+      token,
+      numberOfRowsToStart: Number(this.getAttribute(ATTRIBUTE_ROWS)) || 5,
+      numberOfColumnsToShow: 1,
+      isLazyLoad: this.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',
+      isUnion: this.getAttribute(ATTRIBUTE_UNION) === 'true',
+      isTypeList: true,
+    };
 
-    if (rowCount) element._showRows = parseInt(rowCount);
-
-    if (categories) {
-      this._categories = categories.split(',');
+    if (categoriesAttribute) {
+      data.categories = categoriesAttribute.split(',');
     }
 
-    if (shouldLazyLoad) {
-      if (shouldLazyLoad === 'true') element._lazyLoad = true;
-      if (shouldLazyLoad === 'false') element._lazyLoad = false;
-    }
-
-    this._shadow.appendChild(CreateShadowDom({ element }));
-    CreateFeed({ element });
+    this._shadow.appendChild(FeedsNews.CreateElement(data));
   }
 }
 

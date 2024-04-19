@@ -29,7 +29,7 @@ export type EventType = DateInformaitonType & {
   location: LocationType;
 };
 
-export const STYLES_EVENT_FEED = `
+const STYLES_EVENT_FEED = `
   ${EventBlock.Styles}
   ${EventList.Styles}
   ${EventElements.Sign.Styles}
@@ -76,28 +76,40 @@ const CreateHeadline = ({ text, url }: { text: string; url: string }) => {
   return null;
 };
 
-export const CreateEventCard = ({ entries }: { entries: EventType[] }) =>
-  entries.map((entry) =>
-    EventBlock.CreateElement({
-      image: CreateImage({ images: entry.image }),
-      headline: CreateHeadline({ text: entry.title, url: entry.url }),
-      text: CreateText({ text: entry.summary }),
-      eventDetails: EventElements.Meta.CreateElement({
-        ...entry,
-      }),
-      isAligned: false,
-    }),
-  );
+const CommonDisplay = ({ entry }: { entry: EventType }) => ({
+  image: CreateImage({ images: entry.image }),
+  headline: CreateHeadline({ text: entry.title, url: entry.url }),
+  text: CreateText({ text: entry.summary }),
+  eventDetails: EventElements.Meta.CreateElement({
+    ...entry,
+  }),
+});
 
-export const CreateEventList = ({ entries }: { entries: EventType[] }) =>
-  entries.map((entry) =>
-    EventList.CreateElement({
-      image: CreateImage({ images: entry.image }),
-      headline: CreateHeadline({ text: entry.title, url: entry.url }),
-      text: CreateText({ text: entry.summary }),
-      eventDetails: EventElements.Meta.CreateElement({
-        ...entry,
+const CreateEventFeedDisplay = ({
+  entries,
+  isTypeGrid,
+}: {
+  entries: EventType[];
+  isTypeGrid?: boolean;
+}) => {
+  if (isTypeGrid) {
+    return entries.map((entry) =>
+      EventBlock.CreateElement({
+        ...CommonDisplay({ entry }),
+        isAligned: false,
       }),
+    );
+  }
+
+  return entries.map((entry) =>
+    EventList.CreateElement({
+      ...CommonDisplay({ entry }),
       dateSign: EventElements.Sign.CreateElement(entry),
     }),
   );
+};
+
+export default {
+  CreateElement: CreateEventFeedDisplay,
+  Styles: STYLES_EVENT_FEED,
+};

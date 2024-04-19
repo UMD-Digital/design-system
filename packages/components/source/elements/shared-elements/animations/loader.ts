@@ -1,6 +1,6 @@
-export const ID_UMD_LOADER = 'umd-loader-container';
+const ID_UMD_LOADER = 'umd-loader-container';
 
-export const STYLES_LOADER = `
+const STYLES_LOADER = `
   @keyframes loader-first-animation {
     0% {
       transform: scale(0);
@@ -74,7 +74,7 @@ export const STYLES_LOADER = `
   }
 `;
 
-export const MakeLoader = () => {
+const CreateLoader = () => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const innerElmOne = document.createElement('div');
@@ -92,4 +92,23 @@ export const MakeLoader = () => {
   container.appendChild(wrapper);
 
   return container;
+};
+
+const RemoveLoader = ({ container }: { container: HTMLElement }) => {
+  const loader = container.querySelector(`.${ID_UMD_LOADER}`) as HTMLDivElement;
+
+  if (loader) loader.remove();
+};
+
+const DisplayLoader = ({ container }: { container: HTMLElement }) => {
+  const loader = CreateLoader();
+
+  container.appendChild(loader);
+};
+
+export default {
+  Create: CreateLoader,
+  Display: DisplayLoader,
+  Remove: RemoveLoader,
+  Styles: STYLES_LOADER,
 };

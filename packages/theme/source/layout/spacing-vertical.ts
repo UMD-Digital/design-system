@@ -32,7 +32,6 @@ const InteriorNavigation = {
 
   '& > *:last-child': {
     [`@media (${Queries.tablet.min})`]: {
-      marginTop: Spacing.md,
       maxWidth: '800px',
     },
   },

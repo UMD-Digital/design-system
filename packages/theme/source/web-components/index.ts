@@ -1,5 +1,6 @@
 import Alert from './default-styling/alert';
 import Article from './additional-styling/article';
+import Breadcrumb from './additional-styling/breadcrumb';
 import CallToAction from './default-styling/call-to-action';
 import Card from './additional-styling/card';
 import CardOverlay from './additional-styling/card-overlay';
@@ -21,6 +22,7 @@ import UtilityHeader from './additional-styling/utility-header';
 export default {
   ...Alert,
   ...Article,
+  ...Breadcrumb,
   ...CallToAction,
   ...Card,
   ...CardOverlay,

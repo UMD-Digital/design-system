@@ -1,3 +1,5 @@
+import { LayoutImage } from 'macros';
+
 type TypeScaleProps = {
   isImageScaled: boolean;
 };
@@ -28,9 +30,15 @@ const ImageSizeStyles = `
 
 // prettier-ignore
 const STYLES_PATHWAY_IMAGE_CONTAINER = `
+  ${LayoutImage.Styles}
+
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE} {
     z-index: 99;
     position: relative;
+  }
+
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} .${LayoutImage.Elements.container} {
+    height: 100%;
   }
 
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE} * {
@@ -65,7 +73,11 @@ export const CreatePathwayImageContainer = (
   }
 
   if (image) {
-    wrapper.appendChild(image);
+    const imageContainer = LayoutImage.CreateElement({
+      image: image as HTMLImageElement,
+      showCaption: true,
+    });
+    wrapper.appendChild(imageContainer);
 
     container.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE);
     container.appendChild(wrapper);

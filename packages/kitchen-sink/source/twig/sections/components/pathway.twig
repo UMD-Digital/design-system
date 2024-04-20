@@ -126,7 +126,7 @@
       </div>
 
       <umd-element-pathway>
-        <div slot="image">
+        <div slot="image" data-caption="Photo: Bob lastname">
           <img src="{{ image }}" alt="Image" />
         </div>
 
@@ -166,9 +166,10 @@
       </div>
 
       <umd-element-pathway image-position="left">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
+        <img slot="image"
+          src="{{ image }}"
+          alt="Image"
+          data-caption="Photo: Bob lastname" />
 
         <p slot="eyebrow">
           Optional Text
@@ -292,9 +293,10 @@
       </div>
 
       <umd-element-pathway type="hero">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
+        <img slot="image"
+          src="{{ image }}"
+          alt="Image"
+          data-caption="Photo: Bob lastname" />
 
         <p slot="eyebrow">
           Optional Text

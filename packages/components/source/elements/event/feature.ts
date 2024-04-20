@@ -7,15 +7,13 @@ import {
 } from 'macros';
 
 type TypeEventFeatureProps = {
-  headline?: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  date?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  theme?: string;
-  image?: HTMLImageElement | null;
+  headline: HTMLElement | null;
+  image: HTMLImageElement | null;
   eventDetails: HTMLElement;
   dateSign: HTMLElement;
+  text?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  theme?: string;
 };
 
 const { Spacing, Colors } = Tokens;

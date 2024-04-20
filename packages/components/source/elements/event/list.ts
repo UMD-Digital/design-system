@@ -2,15 +2,13 @@ import { Tokens } from '@universityofmaryland/variables';
 import { LayoutListContainer, LayoutListImage, TextLockupSmall } from 'macros';
 
 type TypeEventListProps = {
-  headline?: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  date?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  theme?: string;
-  image?: HTMLImageElement | null;
+  headline: HTMLElement | null;
+  image: HTMLImageElement | null;
   dateSign: HTMLElement;
   eventDetails: HTMLElement;
+  text?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  theme?: string;
 };
 
 const { Spacing } = Tokens;
@@ -70,10 +68,10 @@ const STYLES_EVENT_LIST_ELEMENT = `
   ${DetailsRowStyles}
 `;
 
-const CreateEventListElement = (element: TypeEventListProps) => {
-  const { theme, image, dateSign, eventDetails } = element;
+const CreateEventListElement = (props: TypeEventListProps) => {
+  const { theme, image, dateSign, eventDetails } = props;
   const elementContainer = document.createElement('div');
-  const textContainer = TextLockupSmall.CreateElement(element);
+  const textContainer = TextLockupSmall.CreateElement(props);
   const imageContainer = image
     ? LayoutListImage.CreateElement({ image })
     : null;

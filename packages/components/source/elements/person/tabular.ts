@@ -119,10 +119,10 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
   ${OverwriteThemeDarkStyles}
 `;
 
-const CreatePersonTabularElement = (element: TypeTabularPersonProps) => {
-  const { theme, image } = element;
+const CreatePersonTabularElement = (props: TypeTabularPersonProps) => {
+  const { theme, image } = props;
   const personContainer = PersonTextContainer.CreateElement({
-    ...element,
+    ...props,
     displayType: DISPLAY_TABULAR,
   });
   const elementContainer = document.createElement('div');

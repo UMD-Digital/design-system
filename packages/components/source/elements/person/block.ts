@@ -93,11 +93,11 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
   ${OverwriteThemeDarkStyles}
 `;
 
-const CreatePersonBlockElement = (element: TypeBlockPersonProps) => {
-  const { theme, image: providedImage } = element;
+const CreatePersonBlockElement = (props: TypeBlockPersonProps) => {
+  const { theme, image: providedImage } = props;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
-  const personContainer = PersonTextContainer.CreateElement(element);
+  const personContainer = PersonTextContainer.CreateElement(props);
   const imageContainer = LayoutBlockImage.CreateElement({
     image: providedImage || AssetIcon.PERSON,
   });

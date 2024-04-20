@@ -2,15 +2,12 @@ import { Tokens } from '@universityofmaryland/variables';
 import { TextLockupSmall, LayoutBlockOverlayContainer } from 'macros';
 
 type TypeEventPromoProps = {
-  image?: HTMLImageElement | null;
-  headline?: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  date?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  theme?: string;
+  image: HTMLImageElement | null;
+  headline: HTMLElement | null;
   eventDetails: HTMLElement;
   dateSign: HTMLElement;
+  text?: HTMLElement | null;
+  actions?: HTMLElement | null;
 };
 
 const { Spacing, Colors, MaxWidth } = Tokens;
@@ -55,10 +52,10 @@ const STYLES_EVENT_PROMO_ELEMENT = `
   ${DateSign}
 `;
 
-const CreateEventPromoElement = (element: TypeEventPromoProps) => {
-  const { eventDetails, dateSign } = element;
+const CreateEventPromoElement = (props: TypeEventPromoProps) => {
+  const { eventDetails, dateSign } = props;
   const blockOverlayContainer =
-    LayoutBlockOverlayContainer.CreateElement(element);
+    LayoutBlockOverlayContainer.CreateElement(props);
   const elementContainer = document.createElement('div');
   const signWrapper = document.createElement('div');
 

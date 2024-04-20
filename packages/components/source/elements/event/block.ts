@@ -6,15 +6,11 @@ import {
 } from 'macros';
 
 type TypeEventBlockProps = {
+  headline: HTMLElement | null;
   eventDetails: HTMLElement;
-  headline?: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
+  image: HTMLImageElement | null;
   text?: HTMLElement | null;
-  date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  image?: HTMLImageElement | null;
-  isAligned?: boolean;
-  isBordered?: boolean;
   theme?: string;
 };
 
@@ -44,15 +40,9 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
   ${DetailsRowStyles}
 `;
 
-const CreateEventBlockElement = (element: TypeEventBlockProps) => {
-  const {
-    theme,
-    image,
-    isAligned = false,
-    isBordered = false,
-    eventDetails,
-  } = element;
-  const textContainer = TextLockupSmall.CreateElement(element);
+const CreateEventBlockElement = (props: TypeEventBlockProps) => {
+  const { theme, image, eventDetails } = props;
+  const textContainer = TextLockupSmall.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image
     ? LayoutBlockImage.CreateElement({ image })
@@ -61,8 +51,8 @@ const CreateEventBlockElement = (element: TypeEventBlockProps) => {
     textContainer,
     imageContainer,
     theme,
-    isAligned,
-    isBordered,
+    isAligned: false,
+    isBordered: false,
   });
 
   if (eventDetails) {

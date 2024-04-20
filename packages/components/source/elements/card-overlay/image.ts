@@ -1,14 +1,14 @@
 import { Tokens } from '@universityofmaryland/variables';
-import BlockImageOverlay, {
-  TypeBlockOverlayImageElement,
-} from '../../macros/layout/block/overlay';
+import { LayoutBlockOverlayContainer, TextLockupSmall } from 'macros';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
-import { ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER } from '../../macros/text-lockup/small';
 
-type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon &
-  TypeBlockOverlayImageElement & {
-    image?: HTMLImageElement | null;
-  };
+type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
+  image: HTMLImageElement | null;
+  headline: HTMLElement | null;
+  text: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  actions?: HTMLElement | null;
+};
 
 const { Spacing, Colors } = Tokens;
 
@@ -19,7 +19,7 @@ const ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION = 'card-overlay-image-declaration';
 
 const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
 
-const OVERWRITE_CTA_ICON_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER}`;
+const OVERWRITE_CTA_ICON_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${TextLockupSmall.Elements.wrapper}`;
 
 const OverwriteCtaIcon = `
   ${OVERWRITE_CTA_ICON_TEXT_LOCKUP} {
@@ -38,14 +38,17 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
     color: ${Colors.white};
   }
 
-  ${BlockImageOverlay.Styles}
+  ${LayoutBlockOverlayContainer.Styles}
   ${OverwriteCtaIcon}
 `;
 
-const CreateCardOverlayElement = (element: TypeCardOverlayImageElement) => {
+const CreateCardOverlayElement = (props: TypeCardOverlayImageElement) => {
   const elementDeclaration = document.createElement('div');
-  const blockOverlayContainer = BlockImageOverlay.CreateElement(element);
-  const ctaIcon = CtaIcon.CreateElement({ ...element, theme: 'dark' });
+  const blockOverlayContainer = LayoutBlockOverlayContainer.CreateElement({
+    ...props,
+    theme: 'dark',
+  });
+  const ctaIcon = CtaIcon.CreateElement({ ...props, theme: 'dark' });
 
   if (blockOverlayContainer) {
     if (ctaIcon) {

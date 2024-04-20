@@ -2,13 +2,13 @@ import { Tokens } from '@universityofmaryland/variables';
 import { LayoutListImage, LayoutListContainer, TextLockupSmall } from 'macros';
 
 type TypeListCardProps = {
-  headline?: HTMLElement | null;
+  headline: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string;
   image?: HTMLImageElement | null;
+  theme?: string;
 };
 
 const { Spacing } = Tokens;
@@ -31,9 +31,9 @@ const STYLES_LIST_CARD_ELEMENT = `
   ${LayoutListContainer.Styles}
 `;
 
-const CreateCardListElement = (element: TypeListCardProps) => {
-  const { theme, image } = element;
-  const textContainer = TextLockupSmall.CreateElement(element);
+const CreateCardListElement = (props: TypeListCardProps) => {
+  const { theme, image } = props;
+  const textContainer = TextLockupSmall.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image
     ? LayoutListImage.CreateElement({ image })

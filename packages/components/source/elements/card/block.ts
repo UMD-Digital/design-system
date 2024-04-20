@@ -5,7 +5,7 @@ import {
 } from 'macros';
 
 type TypeBlockCardProps = {
-  headline?: HTMLElement | null;
+  headline: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   date?: HTMLElement | null;
@@ -30,9 +30,9 @@ const STYLES_BLOCK_CARD_ELEMENT = `
   ${LayoutBlockContainer.Styles}
 `;
 
-const CreateCardBlockElement = (element: TypeBlockCardProps) => {
-  const { theme, image, isAligned = false, isBordered = false } = element;
-  const textContainer = TextLockupSmall.CreateElement(element);
+const CreateCardBlockElement = (props: TypeBlockCardProps) => {
+  const { theme, image, isAligned = false, isBordered = false } = props;
+  const textContainer = TextLockupSmall.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image
     ? LayoutBlockImage.CreateElement({ image })

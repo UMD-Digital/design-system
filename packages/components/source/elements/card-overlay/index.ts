@@ -4,10 +4,9 @@ import { TextLockupSmallScaling, TextLockupSmall } from 'macros';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
 
 type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
-  headline?: HTMLElement | null;
+  headline: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
-  date?: HTMLElement | null;
   actions?: HTMLElement | null;
   theme?: string;
 };
@@ -99,12 +98,12 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   ${OverwriteHeadline}
 `;
 
-const CreateCardOverlayElement = (element: TypeCardOverlayElement) => {
-  const { theme } = element;
+const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
+  const { theme } = props;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
-  const content = TextLockupSmall.CreateElement(element);
-  const ctaIcon = CtaIcon.CreateElement(element);
+  const content = TextLockupSmall.CreateElement(props);
+  const ctaIcon = CtaIcon.CreateElement(props);
   const scalingFontContainer = TextLockupSmallScaling.CreateElement();
 
   scalingFontContainer.appendChild(content);

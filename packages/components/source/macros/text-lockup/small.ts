@@ -269,5 +269,6 @@ export default {
   Styles: STYLES_TEXT_LOCKUP_SMALL_CONTAINER,
   Elements: {
     headline: ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
+    wrapper: ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER,
   },
 };

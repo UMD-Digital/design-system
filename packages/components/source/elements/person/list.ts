@@ -85,9 +85,9 @@ const STYLES_PERSON_LIST_ELEMENT = `
   ${OverwriteThemeDarkStyles}
 `;
 
-const CreatePersonListElement = (element: TypeListPersonProps) => {
-  const { theme, image } = element;
-  const personContainer = PersonTextContainer.CreateElement(element);
+const CreatePersonListElement = (props: TypeListPersonProps) => {
+  const { theme, image } = props;
+  const personContainer = PersonTextContainer.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image
     ? LayoutListImage.CreateElement({ image })

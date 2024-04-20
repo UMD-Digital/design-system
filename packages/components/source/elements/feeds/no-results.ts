@@ -2,7 +2,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import { CallToAction } from 'elements';
 import { Styles } from 'utilities';
 
-const { Spacing } = Tokens;
+const { Spacing, Colors } = Tokens;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -10,6 +10,8 @@ type NoResultsContentType = {
   message?: string;
   linkUrl?: string;
   linkText?: string;
+  ctaType?: string;
+  isAlignedCenter?: boolean;
 };
 
 type NoResultsType = NoResultsContentType & {
@@ -21,19 +23,21 @@ const CONTAINER_NO_RESULTS = 'container-no-results';
 const STYLES_NO_RESULTS = `
   .${CONTAINER_NO_RESULTS} {
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: column;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [` .${CONTAINER_NO_RESULTS} p`]: Typography.SansLarge,
+      [` .${CONTAINER_NO_RESULTS} p`]: Typography.SansLarger,
     },
   })}
 
   .${CONTAINER_NO_RESULTS} p {
     margin-bottom: ${Spacing.md};
+    text-transform: uppercase;
+    font-weight: 800;
+    color: ${Colors.black};
   }
 `;
 
@@ -42,6 +46,8 @@ const CreateNoResultsInterface = ({
   message,
   linkUrl,
   linkText,
+  ctaType,
+  isAlignedCenter = true,
 }: NoResultsType) => {
   container.innerHTML = '';
 
@@ -50,6 +56,10 @@ const CreateNoResultsInterface = ({
   noResults.innerHTML = message || 'No results found';
   wrapper.classList.add(CONTAINER_NO_RESULTS);
   wrapper.appendChild(noResults);
+
+  if (isAlignedCenter) {
+    wrapper.style.alignItems = 'center';
+  }
 
   if (linkUrl && linkText) {
     const link = document.createElement('a');
@@ -60,7 +70,7 @@ const CreateNoResultsInterface = ({
 
     const ctaButton = CallToAction.CreateElement({
       cta: link,
-      type: 'outline',
+      type: ctaType || 'outline',
     });
 
     wrapper.appendChild(ctaButton);

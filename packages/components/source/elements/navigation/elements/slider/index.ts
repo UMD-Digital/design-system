@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MarkupLocate } from 'utilities';
+import { MarkupLocate, Performance } from 'utilities';
 import Slides, { TypeSlideProps, ELEMENT_NAV_SLIDE_HEADLINE } from './slides';
 import { ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER } from './slide-first';
 import { ELEMENT_SLIDE_ACTION_CONTAINER } from './action';
@@ -17,6 +17,7 @@ export type TypeNavSliderRequirements = {
 export type TypeNavSliderProps = TypeSubElements & TypeNavSliderRequirements;
 
 const { Colors, Spacing } = Tokens;
+const { Debounce } = Performance;
 
 const ANIMATION_TIME = 300;
 const ATTRIBUTE_CHILD_REF = 'data-child-ref';
@@ -287,6 +288,11 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
     };
     const eventSlideLeft = () => eventSlide({ isRight: false });
     const eventSlideRight = () => eventSlide({ isRight: true });
+    const eventReize = () => {
+      setTimeout(() => {
+        sizeContainer({ withTransition: false });
+      }, 200);
+    };
     const GetContainer = () => elementContainer;
     let upcomingSlideRef: string | null = null;
     let currentSlide: HTMLElement | null = null;
@@ -306,6 +312,13 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
     });
 
     elementContainer.appendChild(children);
+
+    window.addEventListener(
+      'resize',
+      Debounce(() => {
+        eventReize();
+      }, 20),
+    );
 
     return elementContainer;
   })();

@@ -57,12 +57,19 @@ const Tailwing = {
   },
 };
 
+const AdjustentLineText = {
+  paddingLeft: Spacing.sm,
+  borderLeft: `1px solid ${Colors.red}`,
+};
+
 export default {
   '.umd-eyebrow-ribbon': {
     ...Eyebrow.Ribbon,
   },
-
   '.umd-tailwings-headline': {
     ...Tailwing,
+  },
+  '.umd-adjustent-line-text': {
+    ...AdjustentLineText,
   },
 };

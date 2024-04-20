@@ -26,7 +26,6 @@ const STYLES_GRID_LAYOUT = `
     },
   })}
 
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="4"]`]:

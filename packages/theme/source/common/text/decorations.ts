@@ -54,6 +54,26 @@ const Tailwing = {
   },
 };
 
+const PillWrapper = {
+  marginTop: `-${Spacing.min}`,
+
+  '& > *': {
+    backgroundColor: Colors.gray.lightest,
+    display: 'inline-block',
+    padding: `${Spacing.min} ${Spacing.xs}`,
+    marginBottom: '0',
+    marginTop: Spacing.min,
+  },
+
+  '& a': {
+    transition: 'color .5s ease',
+  },
+
+  '& a:hover, &:focus': {
+    color: Colors.red,
+  },
+};
+
 const AdjustentLineText = {
   paddingLeft: Spacing.sm,
   borderLeft: `1px solid ${Colors.red}`,
@@ -68,5 +88,8 @@ export default {
   },
   '.umd-adjustent-line-text': {
     ...AdjustentLineText,
+  },
+  '.umd-pills': {
+    ...PillWrapper,
   },
 };

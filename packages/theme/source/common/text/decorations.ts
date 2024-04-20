@@ -1,9 +1,6 @@
-import { Elements } from '@universityofmaryland/variables';
+import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
 
 const { Eyebrow } = Elements;
-
-import { Typography, Tokens } from '@universityofmaryland/variables';
-
 const { Spacing, Colors, Queries } = Tokens;
 const { LabelSmall } = Typography;
 

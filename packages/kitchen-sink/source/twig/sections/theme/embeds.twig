@@ -1,0 +1,48 @@
+{% extends '../../_layout.twig' %}
+
+{% block page %}
+  <div style="padding-bottom: 50px;">
+    <section class="pb-xl">
+      <div class="umd-lock">
+        <h1 class="umd-campaign-extralarge font-bold mb-sm">
+          Embeds
+        </h1>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr" style="margin-bottom: 30px">
+          <span>Video</span>
+          <span>YouTube</span>
+        </h2>
+        <div class="umd-embed-video">
+          <iframe width="560"
+            height="315"
+            src="https://www.youtube.com/embed/DuWEEKeJLMI?si=JRUgNKqnczS8pvuT"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr" style="margin-bottom: 30px">
+          <span>Video</span>
+          <span>Vimeo</span>
+        </h2>
+        <div class="umd-embed-video">
+          <iframe src="https://player.vimeo.com/video/65997182?h=f03b5ff396"
+            width="640"
+            height="480"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

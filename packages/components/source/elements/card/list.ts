@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutListImage, LayoutListContainer, TextLockupSmall } from 'macros';
+import { LayoutImage, LayoutList, TextLockupSmall } from 'macros';
 
 type TypeListCardProps = {
   headline: HTMLElement | null;
@@ -27,18 +27,16 @@ const STYLES_LIST_CARD_ELEMENT = `
   }
 
   ${TextLockupSmall.Styles}
-  ${LayoutListImage.Styles}
-  ${LayoutListContainer.Styles}
+  ${LayoutImage.Styles}
+  ${LayoutList.Styles}
 `;
 
 const CreateCardListElement = (props: TypeListCardProps) => {
   const { theme, image } = props;
   const textContainer = TextLockupSmall.CreateElement(props);
   const elementContainer = document.createElement('div');
-  const imageContainer = image
-    ? LayoutListImage.CreateElement({ image })
-    : null;
-  const container = LayoutListContainer.CreateElement({
+  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
+  const container = LayoutList.CreateElement({
     textContainer,
     imageContainer,
     theme,

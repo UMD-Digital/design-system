@@ -1,8 +1,4 @@
-import {
-  LayoutBlockContainer,
-  LayoutBlockImage,
-  TextLockupSmallScaling,
-} from 'macros';
+import { LayoutBlock, LayoutImage, TextLockupSmallScaling } from 'macros';
 
 type TypeBlockCardProps = {
   headline: HTMLElement | null;
@@ -26,18 +22,16 @@ const STYLES_BLOCK_CARD_ELEMENT = `
   }
 
   ${TextLockupSmallScaling.Styles}
-  ${LayoutBlockImage.Styles}
-  ${LayoutBlockContainer.Styles}
+  ${LayoutImage.Styles}
+  ${LayoutBlock.Styles}
 `;
 
 const CreateCardBlockElement = (props: TypeBlockCardProps) => {
   const { theme, image, isAligned = false, isBordered = false } = props;
   const textContainer = TextLockupSmallScaling.CreateElement(props);
   const elementContainer = document.createElement('div');
-  const imageContainer = image
-    ? LayoutBlockImage.CreateElement({ image })
-    : null;
-  const container = LayoutBlockContainer.CreateElement({
+  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
+  const container = LayoutBlock.CreateElement({
     textContainer,
     imageContainer,
     theme,

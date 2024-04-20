@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import {
-  LayoutBlockContainer,
-  LayoutBlockImage,
+  LayoutBlock,
+  LayoutImage,
   TextLockupSmall,
   TextLockupSmallScaling,
 } from 'macros';
@@ -36,8 +36,8 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
   }
 
   ${TextLockupSmallScaling.Styles}
-  ${LayoutBlockImage.Styles}
-  ${LayoutBlockContainer.Styles}
+  ${LayoutImage.Styles}
+  ${LayoutBlock.Styles}
   ${DetailsRowStyles}
 `;
 
@@ -45,10 +45,8 @@ const CreateEventBlockElement = (props: TypeEventBlockProps) => {
   const { theme, image, eventDetails } = props;
   const textContainer = TextLockupSmallScaling.CreateElement(props);
   const elementContainer = document.createElement('div');
-  const imageContainer = image
-    ? LayoutBlockImage.CreateElement({ image })
-    : null;
-  const container = LayoutBlockContainer.CreateElement({
+  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
+  const container = LayoutBlock.CreateElement({
     textContainer,
     imageContainer,
     theme,

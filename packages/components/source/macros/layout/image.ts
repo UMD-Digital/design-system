@@ -1,4 +1,4 @@
-const ELEMENT_IMAGE_CONTAINER = 'block-image-container';
+const ELEMENT_IMAGE_CONTAINER = 'image-container';
 
 // prettier-ignore
 const STYLES_IMAGE_CONTAINER = `
@@ -14,7 +14,7 @@ const STYLES_IMAGE_CONTAINER = `
 
   .${ELEMENT_IMAGE_CONTAINER} a img {
     object-fit: cover;
-    object-position: 50% 50%;
+    object-position: center;
     transform: scale(1);
     transition: transform 0.5s;
     width: 100%;

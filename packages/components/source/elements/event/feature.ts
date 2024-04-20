@@ -1,8 +1,8 @@
 import { Tokens, Elements } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import {
-  LayoutBlockContainer,
-  LayoutBlockImage,
+  LayoutBlock,
+  LayoutImage,
   TextLockupSmall,
   TextLockupSmallScaling,
 } from 'macros';
@@ -97,8 +97,8 @@ const STYLES_EVENT_FEATURE_ELEMENT = `
   }
 
   ${TextLockupSmallScaling.Styles}
-  ${LayoutBlockImage.Styles}
-  ${LayoutBlockContainer.Styles}
+  ${LayoutImage.Styles}
+  ${LayoutBlock.Styles}
   ${DetailsMeta}
   ${EyebrowStyles}
   ${OverwriteImageContainer}
@@ -120,10 +120,8 @@ const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
     eyebrow: MakeEyebrow(),
   });
   const elementContainer = document.createElement('div');
-  const imageContainer = image
-    ? LayoutBlockImage.CreateElement({ image })
-    : null;
-  const container = LayoutBlockContainer.CreateElement({
+  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
+  const container = LayoutBlock.CreateElement({
     textContainer,
     imageContainer,
     theme,

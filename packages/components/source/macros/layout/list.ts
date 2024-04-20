@@ -1,9 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../../text-lockup/small';
-import { ELEMENT_LIST_IMAGE_CONTAINER } from './image';
+import TextLockupSmall from '../text-lockup/small';
+import ImageContainer from './image';
 
 const { Colors, Spacing } = Tokens;
 
@@ -19,9 +16,9 @@ export const ELEMENT_LIST_CONTAINER_WRAPPER = 'list-container-wrapper';
 
 const IS_THEME_DARK = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
-const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
-const OVERWRITE_TEXT_HEADLINE = `.${ELEMENT_LIST_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${ELEMENT_LIST_IMAGE_CONTAINER}`;
+const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_TEXT_HEADLINE = `.${ELEMENT_LIST_CONTAINER} .${TextLockupSmall.Elements.headline}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${ImageContainer.Elements.container}`;
 
 // prettier-ignore
 const VariationThemeStyles = `

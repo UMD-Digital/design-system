@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutListContainer, LayoutListImage, TextLockupSmall } from 'macros';
+import { LayoutList, LayoutImage, TextLockupSmall } from 'macros';
 
 type TypeEventListProps = {
   headline: HTMLElement | null;
@@ -62,8 +62,8 @@ const STYLES_EVENT_LIST_ELEMENT = `
   }
 
   ${TextLockupSmall.Styles}
-  ${LayoutListImage.Styles}
-  ${LayoutListContainer.Styles}
+  ${LayoutImage.Styles}
+  ${LayoutList.Styles}
   ${DateBlockContainerStyles}
   ${DetailsRowStyles}
 `;
@@ -72,10 +72,8 @@ const CreateEventListElement = (props: TypeEventListProps) => {
   const { theme, image, dateSign, eventDetails } = props;
   const elementContainer = document.createElement('div');
   const textContainer = TextLockupSmall.CreateElement(props);
-  const imageContainer = image
-    ? LayoutListImage.CreateElement({ image })
-    : null;
-  const container = LayoutListContainer.CreateElement({
+  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
+  const container = LayoutList.CreateElement({
     textContainer,
     imageContainer,
     theme,
@@ -83,7 +81,7 @@ const CreateEventListElement = (props: TypeEventListProps) => {
 
   if (dateSign) {
     const containerWrapper = container.querySelector(
-      `.${LayoutListContainer.Elements.wrapper}`,
+      `.${LayoutList.Elements.wrapper}`,
     ) as HTMLElement;
     if (containerWrapper) {
       const dateBlockContainer = document.createElement('div');

@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutBlockOverlayContainer, TextLockupSmall } from 'macros';
+import { LayoutBlockOverlay, TextLockupSmall } from 'macros';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
 
 type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
@@ -38,13 +38,13 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
     color: ${Colors.white};
   }
 
-  ${LayoutBlockOverlayContainer.Styles}
+  ${LayoutBlockOverlay.Styles}
   ${OverwriteCtaIcon}
 `;
 
 const CreateCardOverlayElement = (props: TypeCardOverlayImageElement) => {
   const elementDeclaration = document.createElement('div');
-  const blockOverlayContainer = LayoutBlockOverlayContainer.CreateElement({
+  const blockOverlayContainer = LayoutBlockOverlay.CreateElement({
     ...props,
     theme: 'dark',
   });

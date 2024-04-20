@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetIcon } from 'utilities';
-import { LayoutBlockImage } from 'macros';
+import { LayoutImage } from 'macros';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
 
 type TypeBlockPersonProps = TypePersonProps & {
@@ -22,12 +22,12 @@ const ELEMENT_PERSON_BLOCK_WRAPPER = 'person-block-wrapper';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_BLOCK_CONTAINER} .${LayoutBlockImage.Elements.container}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_BLOCK_CONTAINER} .${LayoutImage.Elements.container}`;
 
 const OVERWRITE_DARK_THEME_PERSON_CONTAINER = `.${ELEMENT_PERSON_BLOCK_CONTAINER}${IS_THEME_DARK}`;
 
 const OVERWRITE_DARK_THEME_WRAPPER = `${OVERWRITE_DARK_THEME_PERSON_CONTAINER} .${ELEMENT_PERSON_BLOCK_WRAPPER}`;
-const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${OVERWRITE_DARK_THEME_PERSON_CONTAINER} .${LayoutBlockImage.Elements.container}`;
+const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${OVERWRITE_DARK_THEME_PERSON_CONTAINER} .${LayoutImage.Elements.container}`;
 
 const OverwriteThemeDarkStyles = `
   ${OVERWRITE_DARK_THEME_WRAPPER} {
@@ -86,7 +86,7 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
     height: 100%;
   }
 
-  ${LayoutBlockImage.Styles}
+  ${LayoutImage.Styles}
   ${PersonTextContainer.Styles}
   ${WrapperStyles}
   ${OverwriteImagesStyles}
@@ -98,7 +98,7 @@ const CreatePersonBlockElement = (props: TypeBlockPersonProps) => {
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
   const personContainer = PersonTextContainer.CreateElement(props);
-  const imageContainer = LayoutBlockImage.CreateElement({
+  const imageContainer = LayoutImage.CreateElement({
     image: providedImage || AssetIcon.PERSON,
   });
 

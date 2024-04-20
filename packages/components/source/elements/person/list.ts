@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutListContainer, LayoutListImage } from 'macros';
+import { LayoutList, LayoutImage } from 'macros';
 import PersonTextContainer, {
   TypePersonProps,
   ELEMENT_PERSON_TEXT_CONTAINER,
@@ -21,11 +21,11 @@ const ELEMENT_PERSON_LIST_CONTAINER = 'person-list-container';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LayoutListContainer.Elements.container} .${LayoutListImage.Elements.container}`;
-const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LayoutListContainer.Elements.container} .${ELEMENT_PERSON_TEXT_CONTAINER}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LayoutList.Elements.container} .${LayoutImage.Elements.container}`;
+const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LayoutList.Elements.container} .${ELEMENT_PERSON_TEXT_CONTAINER}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutListImage.Elements.container}`;
+const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutImage.Elements.container}`;
 
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
@@ -78,8 +78,8 @@ const STYLES_PERSON_LIST_ELEMENT = `
   }
 
   ${PersonTextContainer.Styles}
-  ${LayoutListImage.Styles}
-  ${LayoutListContainer.Styles}
+  ${LayoutImage.Styles}
+  ${LayoutList.Styles}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
   ${OverwriteThemeDarkStyles}
@@ -89,10 +89,8 @@ const CreatePersonListElement = (props: TypeListPersonProps) => {
   const { theme, image } = props;
   const personContainer = PersonTextContainer.CreateElement(props);
   const elementContainer = document.createElement('div');
-  const imageContainer = image
-    ? LayoutListImage.CreateElement({ image })
-    : null;
-  const container = LayoutListContainer.CreateElement({
+  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
+  const container = LayoutList.CreateElement({
     personContainer,
     imageContainer,
     theme,

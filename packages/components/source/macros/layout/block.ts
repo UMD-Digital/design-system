@@ -1,9 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER } from '../../text-lockup/small';
-import { ELEMENT_BLOCK_IMAGE_CONTAINER } from './image';
-import ScalingFontBlock, {
-  ELEMENT_SCALABLE_FONT_CONTAINER,
-} from '../../text-lockup/small-scaling';
+import ImageContainer from './image';
+import TextLockupSmall from '../text-lockup/small';
+import ScalingTextLockup from '../text-lockup/small-scaling';
 
 export type TypeBlockContainer = {
   isAligned?: boolean;
@@ -36,15 +34,15 @@ const IS_ALIGNED = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_ALIGNED}]`;
 const IS_WITH_BORDER = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_BORDER}]`;
 const IS_WITH_IMAGE = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
 
-const OVERWRITE_SCALABLE_FONT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER} .${ELEMENT_SCALABLE_FONT_CONTAINER}`;
+const OVERWRITE_SCALABLE_FONT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER} .${ScalingTextLockup.elements.container}`;
 
-const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
-const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${IS_THEME_DARK} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
+const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${IS_THEME_DARK} .${ImageContainer.Elements.container}`;
 
-const OVERWRITE_TYPE_BORDER_TEXT_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
-const OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER = `${IS_WITH_BORDER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
+const OVERWRITE_TYPE_BORDER_TEXT_CONTAINER = `${IS_WITH_BORDER} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER = `${IS_WITH_BORDER} .${ImageContainer.Elements.container}`;
 
-const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}`;
+const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${TextLockupSmall.Elements.container}`;
 
 // prettier-ignore
 const VariantThemeStyles = `
@@ -133,7 +131,7 @@ const OverwriteScalabeFontContainer = `
 // prettier-ignore
 const ImageContainerStyles = `
   @media (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_BLOCK_IMAGE_CONTAINER} {
+    .${ImageContainer.Elements.container} {
       width: 96px;
       float: right;
       margin-bottom: 4px;
@@ -154,7 +152,6 @@ const STYLES_BLOCK_CONTAINER = `
   }
 
   ${ImageContainerStyles}
-  ${ScalingFontBlock.Styles}
   ${OverwriteScalabeFontContainer}
   ${VariantWithImageStyles}
   ${VariantThemeStyles}

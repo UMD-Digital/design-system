@@ -6,6 +6,7 @@ import TextLockupSmall, {
   ELEMENT_TEXT_LOCKUP_SMALL_DATE,
   TypeTextLockupSmall,
 } from './small';
+import elements from 'components/accordion/elements';
 
 type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
@@ -95,4 +96,7 @@ const CreateScaleFontBlockContainer = (props: TypeTextLockupSmallScaling) => {
 export default {
   CreateElement: CreateScaleFontBlockContainer,
   Styles: STYLES_SCALING_FONT_BLOCK_CONTAINER,
+  elements: {
+    container: ELEMENT_SCALABLE_FONT_CONTAINER,
+  },
 };

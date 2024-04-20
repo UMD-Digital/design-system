@@ -1,4 +1,5 @@
 import { AssetIcon } from 'utilities';
+import { LayoutImage } from 'macros';
 
 export type TypeImageContainerProps = {
   imageRef?: HTMLElement | null;
@@ -13,8 +14,15 @@ export const ELEMENT_IMAGE_CONTINATER = 'hero-image-container';
 
 // prettier-ignore
 export const STYLES_HERO_ELEMENT_IMAGE_CONTAINER = `
+  ${LayoutImage.Styles}
+
   .${ELEMENT_IMAGE_CONTINATER} {
     position: relative;
+    overflow: hidden;
+  }
+
+  .${ELEMENT_IMAGE_CONTINATER} .${LayoutImage.Elements.container} {
+    height: 100%;
   }
 
   .${ELEMENT_IMAGE_CONTINATER} video {
@@ -98,7 +106,11 @@ export const CreateImageContainerElement = (
 
   if (!videoRef && imageRef) {
     const image = imageRef.cloneNode(true) as HTMLImageElement;
-    container.appendChild(image);
+    const imageContainer = LayoutImage.CreateElement({
+      image,
+      showCaption: true,
+    });
+    container.appendChild(imageContainer);
   }
 
   if (!imageRef && !videoRef && !isTypeMinimal) {

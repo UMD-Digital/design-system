@@ -182,6 +182,7 @@ const OverwriteImageContainer = `
       width: 100%;
       height: 100%;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, .8) 85%);
+      z-index: 99;
     }
   }
 
@@ -237,24 +238,24 @@ const DefaultStyles = `
 `;
 
 export const STYLES_HERO_DEFAULT_ELEMENT = `
-.${HERO_ELEMENT_DECLARATION} {
-  container: ${ELEMENT_NAME} / inline-size;
-}
-
-${ConvertJSSObjectToStyles({
-  styleObj: {
-    [`.${HERO_LOCK}`]: Lock['.base'],
-  },
-})}
-
-${TextContainer.Styles}
-${ImageContainer.Styles}
-${OverwriteEyebrow}
-${OverwriteHeadline}
-${OverwriteRichText}
-${DefaultStyles}
-${OverwriteImageContainer}
-${OverwriteTextContainer}
+  .${HERO_ELEMENT_DECLARATION} {
+    container: ${ELEMENT_NAME} / inline-size;
+  }
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${HERO_LOCK}`]: Lock['.base'],
+    },
+  })}
+  
+  ${TextContainer.Styles}
+  ${ImageContainer.Styles}
+  ${OverwriteEyebrow}
+  ${OverwriteHeadline}
+  ${OverwriteRichText}
+  ${DefaultStyles}
+  ${OverwriteImageContainer}
+  ${OverwriteTextContainer}
 `;
 
 export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {

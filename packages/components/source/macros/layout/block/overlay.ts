@@ -1,9 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetServices, MarkupModify, Performance } from 'utilities';
-import LockupTextContainer, {
-  TypeTextLockupSmall,
-} from '../../text-lockup/small';
-import ScalingFontBlock from '../../text-lockup/scaling-font-container';
+import ScalingFontBlock from '../../text-lockup/small-scaling';
+import { TypeTextLockupSmall } from '../../text-lockup/small';
 
 export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
   image?: HTMLImageElement | null;
@@ -144,17 +142,16 @@ const STYLES_BLOCK_OVERLAY_ELEMENT = `
   ${ScalingFontBlock.Styles}
 `;
 
-const CreateBlockOverlayElement = (element: TypeBlockOverlayImageElement) => {
-  const { image, text } = element;
+const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
+  const { image, text } = props;
   const elementDeclaration = document.createElement('div');
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
   const imageWrapper = document.createElement('div');
   const tintOverlay = document.createElement('div');
   const textCopy = text?.textContent?.trim();
-  const scalingFontContainer = ScalingFontBlock.CreateElement();
-  const content = LockupTextContainer.CreateElement({
-    ...element,
+  const scalingFontContainer = ScalingFontBlock.CreateElement({
+    ...props,
     theme: 'dark',
   });
 
@@ -174,8 +171,6 @@ const CreateBlockOverlayElement = (element: TypeBlockOverlayImageElement) => {
   tintOverlay.classList.add(ELEMENT_TINT_OVERLAY);
   imageWrapper.classList.add(ELEMENT_BLOCK_OVERLAY_IMAGE);
   elementWrapper.classList.add(ELEMENT_BLOCK_OVERLAY_IMAGE_WRAPPER);
-
-  scalingFontContainer.appendChild(content);
 
   imageWrapper.appendChild(image);
   elementWrapper.appendChild(imageWrapper);

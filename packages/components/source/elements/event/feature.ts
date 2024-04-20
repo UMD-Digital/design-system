@@ -4,6 +4,7 @@ import {
   LayoutBlockContainer,
   LayoutBlockImage,
   TextLockupSmall,
+  TextLockupSmallScaling,
 } from 'macros';
 
 type TypeEventFeatureProps = {
@@ -95,7 +96,7 @@ const STYLES_EVENT_FEATURE_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${TextLockupSmall.Styles}
+  ${TextLockupSmallScaling.Styles}
   ${LayoutBlockImage.Styles}
   ${LayoutBlockContainer.Styles}
   ${DetailsMeta}
@@ -114,7 +115,7 @@ const MakeEyebrow = () => {
 const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
   const { theme, image, eventDetails, dateSign } = element;
 
-  const textContainer = TextLockupSmall.CreateElement({
+  const textContainer = TextLockupSmallScaling.CreateElement({
     ...element,
     eyebrow: MakeEyebrow(),
   });

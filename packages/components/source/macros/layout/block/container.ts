@@ -3,7 +3,7 @@ import { ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER } from '../../text-lockup/small';
 import { ELEMENT_BLOCK_IMAGE_CONTAINER } from './image';
 import ScalingFontBlock, {
   ELEMENT_SCALABLE_FONT_CONTAINER,
-} from '../../text-lockup/scaling-font-container';
+} from '../../text-lockup/small-scaling';
 
 export type TypeBlockContainer = {
   isAligned?: boolean;
@@ -184,9 +184,7 @@ const CreateBlockContainer = ({
   }
 
   if (textContainer) {
-    const scalingFontContainer = ScalingFontBlock.CreateElement();
-    scalingFontContainer.appendChild(textContainer);
-    wrapper.appendChild(scalingFontContainer);
+    wrapper.appendChild(textContainer);
   }
 
   container.appendChild(wrapper);

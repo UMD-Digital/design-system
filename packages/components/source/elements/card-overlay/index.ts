@@ -92,7 +92,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
     }
   }
 
-  ${TextLockupSmall.Styles}
+  ${TextLockupSmallScaling.Styles}
   ${CtaIcon.Styles}
   ${OverwriteThemeDark}
   ${OverwriteHeadline}
@@ -102,11 +102,8 @@ const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
   const { theme } = props;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
-  const content = TextLockupSmall.CreateElement(props);
+  const scalingFontContainer = TextLockupSmallScaling.CreateElement(props);
   const ctaIcon = CtaIcon.CreateElement(props);
-  const scalingFontContainer = TextLockupSmallScaling.CreateElement();
-
-  scalingFontContainer.appendChild(content);
 
   elementWrapper.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER);
   elementWrapper.appendChild(scalingFontContainer);

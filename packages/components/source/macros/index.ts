@@ -7,7 +7,7 @@ import LayoutBlockOverlayContainer from './layout/block/overlay';
 import LayoutListContainer from './layout/list/container';
 import LayoutListImage from './layout/list/image';
 import TextLockupSmall from './text-lockup/small';
-import TextLockupSmallScaling from './text-lockup/scaling-font-container';
+import TextLockupSmallScaling from './text-lockup/small-scaling';
 
 export {
   ButtonLazyLoad,

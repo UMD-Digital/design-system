@@ -3,6 +3,7 @@ import {
   LayoutBlockContainer,
   LayoutBlockImage,
   TextLockupSmall,
+  TextLockupSmallScaling,
 } from 'macros';
 
 type TypeEventBlockProps = {
@@ -34,15 +35,15 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
+  ${TextLockupSmallScaling.Styles}
   ${LayoutBlockImage.Styles}
-  ${TextLockupSmall.Styles}
   ${LayoutBlockContainer.Styles}
   ${DetailsRowStyles}
 `;
 
 const CreateEventBlockElement = (props: TypeEventBlockProps) => {
   const { theme, image, eventDetails } = props;
-  const textContainer = TextLockupSmall.CreateElement(props);
+  const textContainer = TextLockupSmallScaling.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image
     ? LayoutBlockImage.CreateElement({ image })

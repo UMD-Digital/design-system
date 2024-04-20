@@ -1,10 +1,13 @@
 import { Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import {
+import TextLockupSmall, {
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
   ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT,
   ELEMENT_TEXT_LOCKUP_SMALL_DATE,
+  TypeTextLockupSmall,
 } from './small';
+
+type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
 const { SansExtraLarge, SansMedium, SansSmall } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
@@ -73,15 +76,18 @@ const STYLES_SCALING_FONT_BLOCK_CONTAINER = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
+  ${TextLockupSmall.Styles}
   ${HeadlineStyles}
   ${DateStyles}
   ${TextStyles}
 `;
 
-const CreateScaleFontBlockContainer = () => {
+const CreateScaleFontBlockContainer = (props: TypeTextLockupSmallScaling) => {
   const container = document.createElement('div');
+  const textContainer = TextLockupSmall.CreateElement(props);
 
   container.classList.add(ELEMENT_SCALABLE_FONT_CONTAINER);
+  container.appendChild(textContainer);
 
   return container;
 };

@@ -96,7 +96,6 @@ const CreateEventFeedDisplay = ({
     return entries.map((entry) =>
       EventBlock.CreateElement({
         ...CommonDisplay({ entry }),
-        isAligned: false,
       }),
     );
   }

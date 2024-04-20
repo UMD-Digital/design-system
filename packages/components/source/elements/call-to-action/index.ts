@@ -23,7 +23,7 @@ const TYPE_OUTLINE = 'outline';
 const IS_DARK_THEME = `[${ATTR_THEME}="${THEME_DARK}"]`;
 const IS_LARGE_SIZE = `[${ATTR_SIZE}="${SIZE_LARGE}"]`;
 
-export const ELEMENT_BASE_CTA = 'call-to-action';
+const ELEMENT_BASE_CTA = 'call-to-action';
 const ELEMENT_CTA_OUTLINE = 'call-to-action-outline';
 const ELEMENT_CTA_PRIMARY = 'call-to-action-primary';
 const ELEMENT_CTA_SECONDARY = 'call-to-action-secondary';

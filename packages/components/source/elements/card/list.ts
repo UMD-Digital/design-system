@@ -1,11 +1,13 @@
 import { Tokens } from '@universityofmaryland/variables';
-import ListImageContainer from '../shared-elements/list/image';
-import LockupTextContainer, {
-  TypeTextLockupSmall,
-} from '../shared-elements/lockup/text-small';
-import ListContainer from '../shared-elements/list/container';
+import { LayoutListImage, LayoutListContainer, TextLockupSmall } from 'macros';
 
-type TypeListCardProps = TypeTextLockupSmall & {
+type TypeListCardProps = {
+  headline?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  date?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  theme?: string;
   image?: HTMLImageElement | null;
 };
 
@@ -24,19 +26,19 @@ const STYLES_LIST_CARD_ELEMENT = `
     margin-top: ${Spacing.md}; 
   }
 
-  ${LockupTextContainer.Styles}
-  ${ListImageContainer.Styles}
-  ${ListContainer.Styles}
+  ${TextLockupSmall.Styles}
+  ${LayoutListImage.Styles}
+  ${LayoutListContainer.Styles}
 `;
 
 const CreateCardListElement = (element: TypeListCardProps) => {
   const { theme, image } = element;
-  const textContainer = LockupTextContainer.CreateElement(element);
+  const textContainer = TextLockupSmall.CreateElement(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image
-    ? ListImageContainer.CreateElement({ image })
+    ? LayoutListImage.CreateElement({ image })
     : null;
-  const container = ListContainer.CreateElement({
+  const container = LayoutListContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,

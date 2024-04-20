@@ -1,14 +1,13 @@
 import { Tokens } from '@universityofmaryland/variables';
-import ListImageContainer from '../shared-elements/list/image';
-import LockupTextContainer, {
-  TypeTextLockupSmall,
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../shared-elements/lockup/text-small';
-import ListContainer, {
-  ELEMENT_LIST_CONTAINER_WRAPPER,
-} from '../shared-elements/list/container';
+import { LayoutListContainer, LayoutListImage, TextLockupSmall } from 'macros';
 
-type TypeEventListProps = TypeTextLockupSmall & {
+type TypeEventListProps = {
+  headline?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  date?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  theme?: string;
   image?: HTMLImageElement | null;
   dateSign: HTMLElement;
   eventDetails: HTMLElement;
@@ -16,7 +15,6 @@ type TypeEventListProps = TypeTextLockupSmall & {
 
 const { Spacing } = Tokens;
 
-const SMALL = 400;
 const MEDIUM = 500;
 
 const ELEMENT_NAME = 'umd-event-list';
@@ -65,9 +63,9 @@ const STYLES_EVENT_LIST_ELEMENT = `
     margin-top: ${Spacing.md}; 
   }
 
-  ${ListContainer.Styles}
-  ${LockupTextContainer.Styles}
-  ${ListImageContainer.Styles}
+  ${TextLockupSmall.Styles}
+  ${LayoutListImage.Styles}
+  ${LayoutListContainer.Styles}
   ${DateBlockContainerStyles}
   ${DetailsRowStyles}
 `;
@@ -75,11 +73,11 @@ const STYLES_EVENT_LIST_ELEMENT = `
 const CreateEventListElement = (element: TypeEventListProps) => {
   const { theme, image, dateSign, eventDetails } = element;
   const elementContainer = document.createElement('div');
-  const textContainer = LockupTextContainer.CreateElement(element);
+  const textContainer = TextLockupSmall.CreateElement(element);
   const imageContainer = image
-    ? ListImageContainer.CreateElement({ image })
+    ? LayoutListImage.CreateElement({ image })
     : null;
-  const container = ListContainer.CreateElement({
+  const container = LayoutListContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,
@@ -87,7 +85,7 @@ const CreateEventListElement = (element: TypeEventListProps) => {
 
   if (dateSign) {
     const containerWrapper = container.querySelector(
-      `.${ELEMENT_LIST_CONTAINER_WRAPPER}`,
+      `.${LayoutListContainer.Elements.wrapper}`,
     ) as HTMLElement;
     if (containerWrapper) {
       const dateBlockContainer = document.createElement('div');
@@ -100,7 +98,7 @@ const CreateEventListElement = (element: TypeEventListProps) => {
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
-      `.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`,
+      `.${TextLockupSmall.Elements.headline}`,
     ) as HTMLElement;
     eventDetails.classList.add(ELEMENT_EVENT_LIST_DETAILS);
 

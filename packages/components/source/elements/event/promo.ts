@@ -1,12 +1,14 @@
 import { Tokens } from '@universityofmaryland/variables';
-import BlockImageOverlay, {
-  TypeBlockOverlayImageElement,
-  ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER,
-} from '../shared-elements/block/overlay';
-import { ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE } from '../shared-elements/lockup/text-small';
+import { TextLockupSmall, LayoutBlockOverlayContainer } from 'macros';
 
-type TypeEventPromoProps = TypeBlockOverlayImageElement & {
+type TypeEventPromoProps = {
   image?: HTMLImageElement | null;
+  headline?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  date?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  theme?: string;
   eventDetails: HTMLElement;
   dateSign: HTMLElement;
 };
@@ -48,20 +50,21 @@ const STYLES_EVENT_PROMO_ELEMENT = `
     max-width: ${MaxWidth.smallest};
   }
 
-  ${BlockImageOverlay.Styles}
+  ${LayoutBlockOverlayContainer.Styles}
   ${DetailsMeta}
   ${DateSign}
 `;
 
 const CreateEventPromoElement = (element: TypeEventPromoProps) => {
   const { eventDetails, dateSign } = element;
-  const blockOverlayContainer = BlockImageOverlay.CreateElement(element);
+  const blockOverlayContainer =
+    LayoutBlockOverlayContainer.CreateElement(element);
   const elementContainer = document.createElement('div');
   const signWrapper = document.createElement('div');
 
   if (!blockOverlayContainer) return null;
   const headline = blockOverlayContainer.querySelector(
-    `.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`,
+    `.${TextLockupSmall.Elements.headline}`,
   ) as HTMLElement;
 
   if (eventDetails && headline) {

@@ -32,4 +32,7 @@ const CreateListImageContainer = ({ image }: { image: HTMLImageElement }) => {
 export default {
   CreateElement: CreateListImageContainer,
   Styles: STYLES_LIST_IMAGE_CONTAINER,
+  Elements: {
+    container: ELEMENT_LIST_IMAGE_CONTAINER,
+  },
 };

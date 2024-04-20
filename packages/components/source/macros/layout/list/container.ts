@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import {
   ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../lockup/text-small';
+} from '../../text-lockup/small';
 import { ELEMENT_LIST_IMAGE_CONTAINER } from './image';
 
 const { Colors, Spacing } = Tokens;
@@ -140,4 +140,8 @@ const CreateListContainer = ({
 export default {
   CreateElement: CreateListContainer,
   Styles: STYLES_LIST_CONTAINER,
+  Elements: {
+    container: ELEMENT_LIST_CONTAINER,
+    wrapper: ELEMENT_LIST_CONTAINER_WRAPPER,
+  },
 };

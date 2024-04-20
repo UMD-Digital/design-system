@@ -2,6 +2,10 @@ export const ELEMENT_BLOCK_IMAGE_CONTAINER = 'block-image-container';
 
 // prettier-ignore
 const STYLES_BLOCK_IMAGE_CONTAINER = `
+  .${ELEMENT_BLOCK_IMAGE_CONTAINER} {
+    position: relative;
+  }
+
   .${ELEMENT_BLOCK_IMAGE_CONTAINER} a {
     display: block;
     line-height: 0;
@@ -43,4 +47,7 @@ const CreateImageBlockContainer = ({
 export default {
   CreateElement: CreateImageBlockContainer,
   Styles: STYLES_BLOCK_IMAGE_CONTAINER,
+  Elements: {
+    container: ELEMENT_BLOCK_IMAGE_CONTAINER,
+  },
 };

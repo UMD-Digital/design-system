@@ -1,15 +1,20 @@
-import BlockContainer, {
-  TypeBlockContainer,
-} from '../shared-elements/block/container';
-import BlockImageContainer from '../shared-elements/block/image';
-import LockupTextContainer, {
-  TypeTextLockupSmall,
-} from '../shared-elements/lockup/text-small';
+import {
+  LayoutBlockContainer,
+  LayoutBlockImage,
+  TextLockupSmall,
+} from 'macros';
 
-type TypeBlockCardProps = TypeTextLockupSmall &
-  TypeBlockContainer & {
-    image?: HTMLImageElement | null;
-  };
+type TypeBlockCardProps = {
+  headline?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  date?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  image?: HTMLImageElement | null;
+  isAligned?: boolean;
+  isBordered?: boolean;
+  theme?: string;
+};
 
 const ELEMENT_NAME = 'umd-card-block';
 const ELEMENT_CARD_BLOCK_CONTAINER = 'card-block-container';
@@ -20,19 +25,19 @@ const STYLES_BLOCK_CARD_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${BlockImageContainer.Styles}
-  ${LockupTextContainer.Styles}
-  ${BlockContainer.Styles}
+  ${TextLockupSmall.Styles}
+  ${LayoutBlockImage.Styles}
+  ${LayoutBlockContainer.Styles}
 `;
 
 const CreateCardBlockElement = (element: TypeBlockCardProps) => {
   const { theme, image, isAligned = false, isBordered = false } = element;
-  const textContainer = LockupTextContainer.CreateElement(element);
+  const textContainer = TextLockupSmall.CreateElement(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image
-    ? BlockImageContainer.CreateElement({ image })
+    ? LayoutBlockImage.CreateElement({ image })
     : null;
-  const container = BlockContainer.CreateElement({
+  const container = LayoutBlockContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,

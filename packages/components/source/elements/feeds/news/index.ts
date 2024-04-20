@@ -1,12 +1,7 @@
-import { Styles } from 'utilities';
+import { AnimationLoader, ButtonLazyLoad, LayoutGridGap } from 'macros';
 import FeedDisplay, { ArticleType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
 import NoResults from '../no-results';
-import {
-  ButtonLazyLoad,
-  LayoutGridGap,
-  LoaderElement,
-} from '../../shared-elements';
 
 const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 
@@ -37,7 +32,7 @@ export const STYLES_FEED_NEWS_ELEMENT = `
   ${NoResults.Styles}
   ${LayoutGridGap.Styles}
   ${ButtonLazyLoad.Styles}
-  ${LoaderElement.Styles}
+  ${AnimationLoader.Styles}
   ${FeedDisplay.Styles}
 `;
 
@@ -99,7 +94,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
 
   setOffset(displayEntries.length);
 
-  LoaderElement.Remove({ container });
+  AnimationLoader.Remove({ container });
   ButtonLazyLoad.Remove({ container });
   displayEntries.forEach((entry) => {
     grid.appendChild(entry);
@@ -112,7 +107,7 @@ const LoadMoreEntries = async (props: TypeFeedProps) => {
   const container = getContainer();
 
   ButtonLazyLoad.Remove({ container });
-  LoaderElement.Display({ container });
+  AnimationLoader.Display({ container });
   Fetch.Entries({
     variables: MakeApiVariables(props),
   }).then((feedData) => {
@@ -148,7 +143,7 @@ const CreateFeed = async (props: TypeFeedProps) => {
 
 const CreateFeedsEventElement = (props: TypeNewsFeedRequirements) =>
   (() => {
-    const loader = LoaderElement.Create();
+    const loader = AnimationLoader.Create();
     const elementContainer = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);

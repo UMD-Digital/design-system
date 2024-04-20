@@ -1,18 +1,22 @@
 import { Tokens } from '@universityofmaryland/variables';
-import BlockContainer, {
-  TypeBlockContainer,
-} from '../shared-elements/block/container';
-import BlockImageContainer from '../shared-elements/block/image';
-import LockupTextContainer, {
-  TypeTextLockupSmall,
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../shared-elements/lockup/text-small';
+import {
+  LayoutBlockContainer,
+  LayoutBlockImage,
+  TextLockupSmall,
+} from 'macros';
 
-type TypeEventBlockProps = TypeTextLockupSmall &
-  TypeBlockContainer & {
-    image?: HTMLImageElement | null;
-    eventDetails: HTMLElement;
-  };
+type TypeEventBlockProps = {
+  eventDetails: HTMLElement;
+  headline?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  date?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  image?: HTMLImageElement | null;
+  isAligned?: boolean;
+  isBordered?: boolean;
+  theme?: string;
+};
 
 const { Spacing } = Tokens;
 
@@ -34,9 +38,9 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${BlockImageContainer.Styles}
-  ${LockupTextContainer.Styles}
-  ${BlockContainer.Styles}
+  ${LayoutBlockImage.Styles}
+  ${TextLockupSmall.Styles}
+  ${LayoutBlockContainer.Styles}
   ${DetailsRowStyles}
 `;
 
@@ -48,12 +52,12 @@ const CreateEventBlockElement = (element: TypeEventBlockProps) => {
     isBordered = false,
     eventDetails,
   } = element;
-  const textContainer = LockupTextContainer.CreateElement(element);
+  const textContainer = TextLockupSmall.CreateElement(element);
   const elementContainer = document.createElement('div');
   const imageContainer = image
-    ? BlockImageContainer.CreateElement({ image })
+    ? LayoutBlockImage.CreateElement({ image })
     : null;
-  const container = BlockContainer.CreateElement({
+  const container = LayoutBlockContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,
@@ -63,7 +67,7 @@ const CreateEventBlockElement = (element: TypeEventBlockProps) => {
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
-      `.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`,
+      `.${TextLockupSmall.Elements.headline}`,
     ) as HTMLElement;
     eventDetails.classList.add(ELEMENT_EVENT_BLOCK_DETAILS);
     headline.insertAdjacentElement('afterend', eventDetails);

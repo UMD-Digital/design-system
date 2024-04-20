@@ -1,9 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
 import BlockImageOverlay, {
   TypeBlockOverlayImageElement,
-} from '../shared-elements/block/overlay';
+} from '../../macros/layout/block/overlay';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
-import { ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER } from '../shared-elements/lockup/text-small';
+import { ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER } from '../../macros/text-lockup/small';
 
 type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon &
   TypeBlockOverlayImageElement & {

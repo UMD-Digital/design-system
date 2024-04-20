@@ -1,13 +1,16 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
+import { TextLockupSmallScaling, TextLockupSmall } from 'macros';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
-import LockupTextContainer, {
-  TypeTextLockupSmall,
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../shared-elements/lockup/text-small';
-import ScalingFontBlock from '../shared-elements/block/scaling-font-container';
 
-type TypeCardOverlayElement = TypeCardOverlayCtaIcon & TypeTextLockupSmall;
+type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
+  headline?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  date?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  theme?: string;
+};
 
 const { Spacing, Colors } = Tokens;
 const { SansLarger, SansExtraLarge } = Typography;
@@ -40,20 +43,20 @@ const OverwriteThemeDark  = `
 const OverwriteHeadline = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarger,
+      [`.${TextLockupSmall.Elements.headline}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarger,
+      [`.${TextLockupSmall.Elements.headline} *`]: SansLarger,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansExtraLarge,
+        [`.${TextLockupSmall.Elements.headline}`]: SansExtraLarge,
       },
     })}
   }
@@ -61,7 +64,7 @@ const OverwriteHeadline = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansExtraLarge,
+        [`.${TextLockupSmall.Elements.headline} *`]: SansExtraLarge,
       },
     })}
   }
@@ -90,7 +93,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
     }
   }
 
-  ${LockupTextContainer.Styles}
+  ${TextLockupSmall.Styles}
   ${CtaIcon.Styles}
   ${OverwriteThemeDark}
   ${OverwriteHeadline}
@@ -100,9 +103,9 @@ const CreateCardOverlayElement = (element: TypeCardOverlayElement) => {
   const { theme } = element;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
-  const content = LockupTextContainer.CreateElement(element);
+  const content = TextLockupSmall.CreateElement(element);
   const ctaIcon = CtaIcon.CreateElement(element);
-  const scalingFontContainer = ScalingFontBlock.CreateElement();
+  const scalingFontContainer = TextLockupSmallScaling.CreateElement();
 
   scalingFontContainer.appendChild(content);
 

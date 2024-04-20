@@ -4,7 +4,7 @@ import {
   ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
   ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT,
   ELEMENT_TEXT_LOCKUP_SMALL_DATE,
-} from '../lockup/text-small';
+} from './small';
 
 const { SansExtraLarge, SansMedium, SansSmall } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;

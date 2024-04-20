@@ -1,9 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER } from '../lockup/text-small';
+import { ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER } from '../../text-lockup/small';
 import { ELEMENT_BLOCK_IMAGE_CONTAINER } from './image';
 import ScalingFontBlock, {
   ELEMENT_SCALABLE_FONT_CONTAINER,
-} from './scaling-font-container';
+} from '../../text-lockup/scaling-font-container';
 
 export type TypeBlockContainer = {
   isAligned?: boolean;

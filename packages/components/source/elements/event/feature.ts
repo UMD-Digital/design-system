@@ -1,22 +1,22 @@
 import { Tokens, Elements } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import BlockContainer, {
-  TypeBlockContainer,
-} from '../shared-elements/block/container';
-import BlockImageContainer, {
-  ELEMENT_BLOCK_IMAGE_CONTAINER,
-} from '../shared-elements/block/image';
-import LockupTextContainer, {
-  TypeTextLockupSmall,
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-} from '../shared-elements/lockup/text-small';
+import {
+  LayoutBlockContainer,
+  LayoutBlockImage,
+  TextLockupSmall,
+} from 'macros';
 
-type TypeEventFeatureProps = TypeTextLockupSmall &
-  TypeBlockContainer & {
-    image?: HTMLImageElement | null;
-    eventDetails: HTMLElement;
-    dateSign: HTMLElement;
-  };
+type TypeEventFeatureProps = {
+  headline?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  date?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  theme?: string;
+  image?: HTMLImageElement | null;
+  eventDetails: HTMLElement;
+  dateSign: HTMLElement;
+};
 
 const { Spacing, Colors } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
@@ -34,7 +34,6 @@ const ELEMENT_EVENT_FEATURE_EYEBROW = 'event-feature-details-eyebrow';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_EVENT_FEATURE_CONTAINER} .${ELEMENT_BLOCK_IMAGE_CONTAINER}`;
 const OVERWRITE_THEME_DARK_EYEBROW = `.${ELEMENT_EVENT_FEATURE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_EVENT_FEATURE_EYEBROW}`;
 
 // prettier-ignore
@@ -46,10 +45,6 @@ const OverwriteThemeDark = `
 
 // prettier-ignore
 const OverwriteImageContainer = `
-  ${OVERWRITE_IMAGE_CONTAINER} {
-    position: relative;
-  }
-
   .${ELEMENT_EVENT_SIGN_WRAPPER} {
     position: absolute;
     z-index: 9;
@@ -102,9 +97,9 @@ const STYLES_EVENT_FEATURE_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${BlockImageContainer.Styles}
-  ${LockupTextContainer.Styles}
-  ${BlockContainer.Styles}
+  ${TextLockupSmall.Styles}
+  ${LayoutBlockImage.Styles}
+  ${LayoutBlockContainer.Styles}
   ${DetailsMeta}
   ${EyebrowStyles}
   ${OverwriteImageContainer}
@@ -121,15 +116,15 @@ const MakeEyebrow = () => {
 const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
   const { theme, image, eventDetails, dateSign } = element;
 
-  const textContainer = LockupTextContainer.CreateElement({
+  const textContainer = TextLockupSmall.CreateElement({
     ...element,
     eyebrow: MakeEyebrow(),
   });
   const elementContainer = document.createElement('div');
   const imageContainer = image
-    ? BlockImageContainer.CreateElement({ image })
+    ? LayoutBlockImage.CreateElement({ image })
     : null;
-  const container = BlockContainer.CreateElement({
+  const container = LayoutBlockContainer.CreateElement({
     textContainer,
     imageContainer,
     theme,
@@ -137,7 +132,7 @@ const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
-      `.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`,
+      `.${TextLockupSmall.Elements.headline}`,
     ) as HTMLElement;
     eventDetails.classList.add(ELEMENT_EVENT_FEATURE_META_WRAPPER);
     headline.insertAdjacentElement('afterend', eventDetails);

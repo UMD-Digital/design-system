@@ -9,6 +9,10 @@ import { Load as CarouselCardsLoader } from './carousel-cards';
 import { Load as EventLoader } from './event';
 import { Load as EventDateLoader } from './event-date';
 import { Load as EventDateSliderLoader } from './events-date-slider';
+import { Load as FeedNewsGridLoader } from './feeds/news/grid';
+import { Load as FeedNewsListLoader } from './feeds/news/list';
+import { Load as EventsNewsGridLoader } from './feeds/events/grid';
+import { Load as EventsNewsListLoader } from './feeds/events/list';
 import { Load as FooterLoader } from './footer';
 import { Load as HeroLoader } from './hero';
 import { Load as HeroLogoLoader } from './hero-logo';
@@ -39,6 +43,10 @@ export const Components = {
   EventLoader,
   EventDateLoader,
   EventDateSliderLoader,
+  FeedNewsGridLoader,
+  FeedNewsListLoader,
+  EventsNewsGridLoader,
+  EventsNewsListLoader,
   FooterLoader,
   NavHeader,
   HeroLoader,

@@ -1,13 +1,13 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import { ELEMENT_TYPE } from 'components/events-date-slider';
+import { ELEMENT_TYPE } from '../index';
 import {
   BREAKPOINTS,
   ELEMENTS,
   SLOTS,
   VARIABLES,
   REFERENCES,
-} from 'components/events-date-slider/globals';
+} from '../globals';
 import { SizeDatesElements } from '../services/helpers';
 import { CreateCoverElement, CoverStyles } from './cover';
 import { CreateScrollerWrapper, ScrollerStyles } from './scroller';

@@ -3,7 +3,7 @@ import { Styles } from 'utilities';
 import {
   EventResizeCarouselElementsWidth,
   EventResizeSetHeight,
-} from 'components/carousel-cards/services/events';
+} from '../services/events';
 import { CreateIntroColumn, IntroContainerStyles } from './intro';
 import { CreateCarouselColumn, CarouselContainerStyles } from './carousel';
 import { BREAKPOINTS, SLOTS, VARIABLES } from '../globals';

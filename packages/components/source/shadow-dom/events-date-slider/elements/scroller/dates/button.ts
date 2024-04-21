@@ -1,13 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetIcon } from 'utilities';
-import { ELEMENT_TYPE } from 'components/events-date-slider';
-import { ButtonVisibilityLogic } from 'components/events-date-slider/services/helpers';
-import { EventSlideDates } from 'components/events-date-slider/services/events';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  REFERENCES,
-} from 'components/events-date-slider/globals';
+import { ButtonVisibilityLogic } from '../../../services/helpers';
+import { EventSlideDates } from '../../../services/events';
+import { BREAKPOINTS, ELEMENTS, REFERENCES } from '../../../globals';
+import { ELEMENT_TYPE } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
 

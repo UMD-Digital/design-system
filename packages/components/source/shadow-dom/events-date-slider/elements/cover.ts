@@ -1,9 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  REFERENCES,
-} from 'components/events-date-slider/globals';
+import { BREAKPOINTS, ELEMENTS, REFERENCES } from '../globals';
 
 const { Colors } = Tokens;
 

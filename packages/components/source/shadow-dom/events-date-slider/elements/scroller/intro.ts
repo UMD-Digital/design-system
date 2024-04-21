@@ -1,11 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles, MarkupCreate, MarkupModify } from 'utilities';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  SLOTS,
-  REFERENCES,
-} from 'components/events-date-slider/globals';
+import { BREAKPOINTS, ELEMENTS, SLOTS, REFERENCES } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
 

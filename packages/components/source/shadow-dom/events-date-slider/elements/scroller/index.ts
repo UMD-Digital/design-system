@@ -1,7 +1,7 @@
-import { ELEMENT_TYPE } from 'components/events-date-slider';
-import { BREAKPOINTS } from 'components/events-date-slider/globals';
 import { CreateIntroWrapper, IntroStyles } from './intro';
 import { CreateDatesContainer, DatesStyles } from './dates';
+import { ELEMENT_TYPE } from '../../index';
+import { BREAKPOINTS } from '../../globals';
 
 const { TABLET } = BREAKPOINTS;
 

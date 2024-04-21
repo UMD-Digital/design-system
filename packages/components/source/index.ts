@@ -1,4 +1,4 @@
-import Components from './components';
+import Components from './shadow-dom';
 import Feeds from './feeds';
 
 const LoadUmdComponents = () => {

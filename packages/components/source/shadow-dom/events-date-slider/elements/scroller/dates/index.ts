@@ -1,11 +1,7 @@
 import { MarkupCreate } from 'utilities';
-import { ELEMENT_TYPE } from 'components/events-date-slider';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  SLOTS,
-} from 'components/events-date-slider/globals';
 import { CreateBackButton, CreateForwardButton, ButtonStyles } from './button';
+import { ELEMENT_TYPE } from '../../../index';
+import { BREAKPOINTS, ELEMENTS, SLOTS } from '../../../globals';
 
 const { Node } = MarkupCreate;
 

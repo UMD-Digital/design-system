@@ -29,8 +29,8 @@ const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 export const DISPLAY_TABULAR = 'tabular';
 
-export const ELEMENT_PERSON_TEXT_CONTAINER = 'person-text';
-export const ELEMENT_PERSON_NAME_CONTAINER = 'person-name';
+const ELEMENT_PERSON_TEXT_CONTAINER = 'person-text';
+const ELEMENT_PERSON_NAME_CONTAINER = 'person-name';
 const ELEMENT_PERSON_JOB_CONTAINER = 'person-job';
 const ELEMENT_PERSON_ASSOCIATION_CONTAINER = 'person-association';
 const ELEMENT_PERSON_PRONOUNS_CONTAINER = 'person-pronouns';
@@ -393,4 +393,8 @@ const CreatePersonTextContainer = (person: TypePersonProps) => {
 export default {
   CreateElement: CreatePersonTextContainer,
   Styles: STYLES_PERSON_TEXT,
+  Elements: {
+    container: ELEMENT_PERSON_TEXT_CONTAINER,
+    name: ELEMENT_PERSON_NAME_CONTAINER,
+  },
 };

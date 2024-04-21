@@ -26,8 +26,8 @@ const THEME_DARK = 'dark';
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-block-container';
-export const ELEMENT_BLOCK_CONTAINER = 'block-container';
-export const ELEMENT_BLOCK_CONTAINER_WRAPPER = 'block-container-wrapper';
+const ELEMENT_BLOCK_CONTAINER = 'block-container';
+const ELEMENT_BLOCK_CONTAINER_WRAPPER = 'block-container-wrapper';
 
 const IS_THEME_DARK = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 const IS_ALIGNED = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_ALIGNED}]`;

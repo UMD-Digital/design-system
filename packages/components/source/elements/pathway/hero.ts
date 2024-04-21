@@ -1,17 +1,8 @@
 import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import {
-  CreatePathwayTextContainer,
-  TypePathwayTextContainer,
-  ELEMENT_TEXT_CONTAINER,
-  ELEMENT_TEXT_CONTAINER_WRAPPER,
-  ELEMENT_TEXT_CONTAINER_HEADLINE,
-  ELEMENT_TEXT_CONTAINER_RICH_TEXT,
-} from './elements/text';
-import {
-  CreatePathwayImageContainer,
+import TextContainer, { TypePathwayTextContainer } from './elements/text';
+import ImageContainer, {
   TypePathwayHeroImageContainer,
-  ELEMENT_PATHWAY_CONTAINER_IMAGE,
 } from './elements/image';
 
 type TypePathwayHeroProps = TypePathwayTextContainer &
@@ -39,20 +30,20 @@ const PATHWAY_HERO_CONTAINER_LOCK = 'pathway-hero-container-lock';
 const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
 const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
 
-const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_HERO_CONTAINER} .${ELEMENT_PATHWAY_CONTAINER_IMAGE}`;
-const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
-const OVERWRITE_TEXT_HEADLINE = `.${PATHWAY_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER_HEADLINE}`;
-const OVERWRITE_TEXT_RICHTEXT = `.${PATHWAY_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
+const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.wrapper}`;
+const OVERWRITE_TEXT_HEADLINE = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
+const OVERWRITE_TEXT_RICHTEXT = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.text}`;
 
 const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
 const OVERWRITE_IMAGE_RIGHT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_WRAPPER}`;
-const OVERWRITE_IMAGE_RIGHT_CONTAINER_IMAGE = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_PATHWAY_CONTAINER_IMAGE}`;
-const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
-const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
+const OVERWRITE_IMAGE_RIGHT_CONTAINER_IMAGE = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ImageContainer.Elements.container}`;
+const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.container}`;
+const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.wrapper}`;
 
 const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
 const OVERWRITE_IMAGE_LEFT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_WRAPPER}`;
-const OVERWRITE_IMAGE_LEFT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
+const OVERWRITE_IMAGE_LEFT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${TextContainer.Elements.wrapper}`;
 
 // prettier-ignore
 const OverwriteImageRightStyles = `
@@ -201,8 +192,8 @@ const CreatePathwayHeroElement = (element: TypePathwayHeroProps) => {
   const lockWrapper = document.createElement('div');
   const { isImageRight = true } = element;
 
-  const textContainer = CreatePathwayTextContainer(element);
-  const imageContainer = CreatePathwayImageContainer(element);
+  const textContainer = TextContainer.CreateElement(element);
+  const imageContainer = ImageContainer.CreateElement(element);
 
   container.classList.add(PATHWAY_HERO_CONTAINER);
   container.setAttribute(

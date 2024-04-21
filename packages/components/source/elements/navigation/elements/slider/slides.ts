@@ -1,10 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { AssetIcon, Styles, MarkupModify } from 'utilities';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
-import SlideAction, {
-  TypeActionProps,
-  ELEMENT_SLIDE_ACTION_CONTAINER,
-} from './action';
+import SlideAction, { TypeActionProps } from './action';
 
 export type TypeSlideProps = TypeActionProps &
   TypeFirstSlideProps & {
@@ -35,7 +32,7 @@ const { ConvertJSSObjectToStyles } = Styles;
 const { CleanCopy } = MarkupModify;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
-export const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
+const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
 const ELEMENT_NAV_SLIDE_BACK_BUTTON = 'nav-slide-action-back-button';
 
 // prettier-ignore
@@ -235,4 +232,7 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
 export default {
   CreateElement: CreateNavSlides,
   Styles: STYLES_NAV_SLIDES,
+  Elements: {
+    headline: ELEMENT_NAV_SLIDE_HEADLINE,
+  },
 };

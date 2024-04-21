@@ -5,17 +5,8 @@ import {
   Elements,
 } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import ImageContainer, {
-  TypeImageContainerProps,
-  ELEMENT_IMAGE_CONTINATER,
-} from './elements/image';
-import TextContainer, {
-  TypeTextContainerProps,
-  ELEMENT_TEXT_CONTAINER,
-  ELEMENT_HERO_EYEBROW,
-  ELEMENTS_HERO_HEADLINE,
-  ELEMENTS_HERO_RICH_TEXT,
-} from './elements/text';
+import ImageContainer, { TypeImageContainerProps } from './elements/image';
+import TextContainer, { TypeTextContainerProps } from './elements/text';
 
 type TypeHeroStackedProps = TypeTextContainerProps &
   TypeImageContainerProps & {
@@ -42,13 +33,13 @@ const ELEMENT_HERO_DECLARATION = 'hero-stacked-element-declaration';
 const ELEMENT_HERO_CONTAINER = 'hero-stacked-container';
 const ELEMENT_HERO_LOCK = 'hero-stacked-lock';
 
-const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ELEMENT_IMAGE_CONTINATER}`;
-const OVERWRITE_EYEBROW = `.${ELEMENT_HERO_CONTAINER} .${ELEMENT_HERO_EYEBROW}`;
-const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${ELEMENTS_HERO_HEADLINE}`;
-const OVERWRITE_RICH_TEXT = `.${ELEMENT_HERO_CONTAINER} .${ELEMENTS_HERO_RICH_TEXT}`;
+const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.container}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
+const OVERWRITE_EYEBROW = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.eyebrow}`;
+const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
+const OVERWRITE_RICH_TEXT = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.richText}`;
 
-const OVERWRITE_WITH_LOCK_HEADLINE = `.${ELEMENT_HERO_CONTAINER}${IS_WITHIN_LOCK} .${ELEMENTS_HERO_HEADLINE}`;
+const OVERWRITE_WITH_LOCK_HEADLINE = `.${ELEMENT_HERO_CONTAINER}${IS_WITHIN_LOCK} .${TextContainer.Elements.headline}`;
 
 // prettier-ignore
 const OverwriteEyebrow = `

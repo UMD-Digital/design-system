@@ -79,7 +79,7 @@ const OverwriteDropdownStyles = `
 `
 
 // prettier-ignore
-export const PrimaryStyles = `
+const PrimaryStyles = `
   .${ELEMENT_PRIMARY_LINK_CONTAINER} {
     position: relative;
   }
@@ -196,7 +196,7 @@ const DropdownListStyles = `
 `
 
 // prettier-ignore
-export const DropdownStyles = `
+const DropdownStyles = `
   .${ELEMENT_DROPDOWN_CONTAINER} {
     position: absolute;
     top: 100%;
@@ -268,9 +268,7 @@ const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   return container;
 };
 
-export const CreateDropdown = ({
-  dropdownLinksContainer,
-}: TypeDropdownProps) => {
+const CreateDropdown = ({ dropdownLinksContainer }: TypeDropdownProps) => {
   if (!dropdownLinksContainer) return;
 
   const links = Array.from(

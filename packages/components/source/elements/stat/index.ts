@@ -202,7 +202,7 @@ const SubTextStyles = `
   }
 `;
 
-export const STYLES_STAT_ELEMENT = `
+const STYLES_STAT_ELEMENT = `
   .${ELEMENT_STAT_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }

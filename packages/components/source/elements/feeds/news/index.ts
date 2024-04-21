@@ -28,7 +28,7 @@ type TypeDisplayEntries = TypeFeedProps & {
   feedData: ArticleType[];
 };
 
-export const STYLES_FEED_NEWS_ELEMENT = `
+const STYLES_FEED_NEWS_ELEMENT = `
   ${NoResults.Styles}
   ${LayoutGridGap.Styles}
   ${ButtonLazyLoad.Styles}

@@ -30,12 +30,12 @@ const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-pathway-text-container';
-export const ELEMENT_TEXT_CONTAINER = 'pathway-text-container';
-export const ELEMENT_TEXT_CONTAINER_WRAPPER = 'pathway-text-container-wrapper';
-export const ELEMENT_TEXT_CONTAINER_HEADLINE = 'pathway-text-headline';
+const ELEMENT_TEXT_CONTAINER = 'pathway-text-container';
+const ELEMENT_TEXT_CONTAINER_WRAPPER = 'pathway-text-container-wrapper';
+const ELEMENT_TEXT_CONTAINER_HEADLINE = 'pathway-text-headline';
 const ELEMENT_TEXT_CONTAINER_EVENT_DETAILS = 'pathway-text-event-details';
 const ELEMENT_TEXT_CONTAINER_EYEBROW = 'pathway-text-eyebrow';
-export const ELEMENT_TEXT_CONTAINER_RICH_TEXT = 'pathway-text-richtext';
+const ELEMENT_TEXT_CONTAINER_RICH_TEXT = 'pathway-text-richtext';
 const ELEMENTS_TEXT_CONTAINER_ACTIONS = 'pathway-text-actions';
 
 const IS_THEME_DARK = `.${ELEMENT_TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
@@ -173,7 +173,7 @@ const STYLES_PATHWAY_TEXT_CONTAINER = `
   ${VarationThemeMaryland}
 `;
 
-export const CreatePathwayTextContainer = ({
+const CreatePathwayTextContainer = ({
   headline,
   eventDetails,
   eyebrow,
@@ -221,4 +221,12 @@ export const CreatePathwayTextContainer = ({
 export default {
   CreateElement: CreatePathwayTextContainer,
   Styles: STYLES_PATHWAY_TEXT_CONTAINER,
+  Elements: {
+    container: ELEMENT_TEXT_CONTAINER,
+    wrapper: ELEMENT_TEXT_CONTAINER_WRAPPER,
+    headline: ELEMENT_TEXT_CONTAINER_HEADLINE,
+    eyebrow: ELEMENT_TEXT_CONTAINER_EYEBROW,
+    text: ELEMENT_TEXT_CONTAINER_RICH_TEXT,
+    action: ELEMENTS_TEXT_CONTAINER_ACTIONS,
+  },
 };

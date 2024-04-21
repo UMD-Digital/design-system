@@ -1,10 +1,6 @@
 import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import {
-  CreatePathwayTextContainer,
-  TypePathwayTextContainer,
-  ELEMENT_TEXT_CONTAINER,
-} from './elements/text';
+import TextContainer, { TypePathwayTextContainer } from './elements/text';
 
 type TypePathwayHighlightContainer = {
   quote: HTMLElement | null;
@@ -36,7 +32,7 @@ const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT = 'pathway-highlight-text';
 const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION =
   'pathway-highlight-attribution';
 
-const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_HIGHLIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
+const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_HIGHLIGHT_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_THEME_DARK_HIGHLIGHT = `.${PATHWAY_HIGHLIGHT_CONTAINER}${IS_THEME_DARK} .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER}`;
 
 // prettier-ignore
@@ -210,7 +206,7 @@ const CreatePathwayHighlightElement = (element: TypePathwayHighlightProps) => {
   const container = document.createElement('div');
   const lock = document.createElement('div');
 
-  const textContainer = CreatePathwayTextContainer(element);
+  const textContainer = TextContainer.CreateElement(element);
   const highlightContainer = CreateHighlightColumn(element);
 
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);

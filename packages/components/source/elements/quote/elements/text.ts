@@ -1,4 +1,9 @@
-import { Typography, Layout, Tokens } from '@universityofmaryland/variables';
+import {
+  Typography,
+  Layout,
+  Tokens,
+  Elements,
+} from '@universityofmaryland/variables';
 import { Styles, AssetIcon } from 'utilities';
 
 export type TypeQuoteTextContainer = {
@@ -26,11 +31,11 @@ const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
 const SIZE_LARGE = 'large';
 
-export const TEXT_CONTAINER = 'quote-text-container';
-export const TEXT_CONTAINER_WRAPPER = 'quote-text-container-wrapper';
-export const TEXT_CONTAINER_QUOTE_WRAPPER = 'quote-container-quote';
+const TEXT_CONTAINER = 'quote-text-container';
+const TEXT_CONTAINER_WRAPPER = 'quote-text-container-wrapper';
+const TEXT_CONTAINER_QUOTE_WRAPPER = 'quote-container-quote';
 const TEXT_CONTAINER_ATTRIBUTION_WRAPPER = 'quote-container-attribution';
-export const TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER =
+const TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER =
   'quote-container-text-attribution-sub-text';
 const ELEMENTS_TEXT_CONTAINER_ACTIONS = 'quote-container-actions';
 
@@ -182,7 +187,7 @@ const STYLES_QUOTE_TEXT_CONTAINER = `
   ${VarationSizeLarge}
 `;
 
-export const CreateQuoteTextContainer = ({
+const CreateQuoteTextContainer = ({
   quote,
   attribution,
   attributionSubText,
@@ -233,4 +238,8 @@ export const CreateQuoteTextContainer = ({
 export default {
   CreateElement: CreateQuoteTextContainer,
   Styles: STYLES_QUOTE_TEXT_CONTAINER,
+  Elements: {
+    container: TEXT_CONTAINER,
+    quoteWrapper: TEXT_CONTAINER_QUOTE_WRAPPER,
+  },
 };

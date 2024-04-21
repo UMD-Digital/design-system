@@ -295,7 +295,7 @@ const CreateWrapper = ({ element }: { element: HTMLElement }) => {
   element.appendChild(wrapper);
 };
 
-export const CreateCallToActionElement = ({
+const CreateCallToActionElement = ({
   cta,
   type = TYPE_PRIMARY,
   size = null,

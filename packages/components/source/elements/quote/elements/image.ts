@@ -4,7 +4,7 @@ export type TypeQuoteImageContainer = {
 
 const IMAGE_CONTAINER_ELEMENT_NAME = 'umd-element-quote-image-container';
 
-export const IMAGE_CONTAINER = 'quote-image-container';
+const IMAGE_CONTAINER = 'quote-image-container';
 
 // prettier-ignore
 const STYLES_QUOTE_IMAGE_CONTAINER = `
@@ -13,9 +13,7 @@ const STYLES_QUOTE_IMAGE_CONTAINER = `
   }
 `;
 
-export const CreateQuoteImageContainer = ({
-  image,
-}: TypeQuoteImageContainer) => {
+const CreateQuoteImageContainer = ({ image }: TypeQuoteImageContainer) => {
   const container = document.createElement('div');
 
   container.classList.add(IMAGE_CONTAINER);
@@ -28,4 +26,7 @@ export const CreateQuoteImageContainer = ({
 export default {
   CreateElement: CreateQuoteImageContainer,
   Styles: STYLES_QUOTE_IMAGE_CONTAINER,
+  Elements: {
+    container: IMAGE_CONTAINER,
+  },
 };

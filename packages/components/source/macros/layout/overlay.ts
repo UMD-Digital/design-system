@@ -16,10 +16,9 @@ const ELEMENT_NAME = 'umd-block-overlay-image';
 
 const ELEMENT_BLOCK_OVERLAY_IMAGE_DECLARATION =
   'block-overlay-image-declaration';
-export const ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER =
-  'block-overlay-image-container';
+const ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER = 'block-overlay-image-container';
 const ELEMENT_BLOCK_OVERLAY_IMAGE_WRAPPER = 'block-overlay-image-wrapper';
-export const ELEMENT_BLOCK_OVERLAY_IMAGE = 'block-overlay-image';
+const ELEMENT_BLOCK_OVERLAY_IMAGE = 'block-overlay-image';
 const ELEMENT_TINT_OVERLAY = 'block-overlay-image-tint';
 
 // prettier-ignore

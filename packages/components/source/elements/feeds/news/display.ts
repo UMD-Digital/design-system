@@ -19,7 +19,7 @@ export type ArticleType = {
   }[];
 };
 
-export const STYLES_NEWS_FEED = `
+const STYLES_NEWS_FEED = `
   ${CardBlock.Styles}
   ${CardList.Styles}
 `;

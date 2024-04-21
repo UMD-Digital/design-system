@@ -1,10 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import SlideAction, {
-  TypeActionProps,
-  ELEMENT_SLIDE_ACTION_CONTAINER,
-  ELEMENT_SLIDE_ACTION_LINK,
-} from './action';
+import SlideAction, { TypeActionProps } from './action';
 
 export type TypeFirstSlideProps = TypeActionProps & {
   ATTRIBUTE_ACTIVE_SLIDE: string;
@@ -28,14 +24,14 @@ const { Spacing, Colors } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const ELEMENT_SLIDER_FIRST_SLIDE_CONTAINER = 'nav-slider-first-slide-container';
-export const ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER =
+const ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER =
   'nav-slider-first-slide-primary-links-container';
-export const ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER =
+const ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER =
   'nav-slider-secondary-links-container';
 const ELEMENT_SLIDER_ADDITIONAL_CONTENT = 'nav-slider-additional-content';
 
-const OVERWRITE_ACTION_PRIMARY_CONTAINER = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}`;
-const OVERWRITE_ACTION_PRIMARY_LINK = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER} .${ELEMENT_SLIDE_ACTION_LINK}`;
+const OVERWRITE_ACTION_PRIMARY_CONTAINER = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER} .${SlideAction.Elements.container}`;
+const OVERWRITE_ACTION_PRIMARY_LINK = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER} .${SlideAction.Elements.link}`;
 
 //prettier-ignore;
 const OverwriteSlidePrimaryLink = `
@@ -62,7 +58,7 @@ const OverwriteSlidePrimaryContainer = `
 
 //prettier-ignore;
 const SecondaryLinksContainer = `
-  .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} .${ELEMENT_SLIDE_ACTION_CONTAINER}:last-child {
+  .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} .${SlideAction.Elements.container}:last-child {
     border-bottom: 1px solid ${Colors.gray.light};
     padding-bottom: ${Spacing.md};
   }
@@ -171,4 +167,7 @@ const CreateSlideFirstElement = (props: TypeFirstSlide) => {
 export default {
   CreateElement: CreateSlideFirstElement,
   Styles: STYLES_SLIDE_FIRST_ELEMENT,
+  Elements: {
+    secondaryContainer: ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER,
+  },
 };

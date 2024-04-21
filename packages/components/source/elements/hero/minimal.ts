@@ -1,16 +1,7 @@
 import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import ImageContainer, {
-  TypeImageContainerProps,
-  ELEMENT_IMAGE_CONTINATER,
-} from './elements/image';
-import TextContainer, {
-  TypeTextContainerProps,
-  ELEMENT_TEXT_CONTAINER,
-  ELEMENT_TEXT_CONTAINER_WRAPPER,
-  ELEMENT_HERO_EYEBROW,
-  ELEMENTS_HERO_HEADLINE,
-} from './elements/text';
+import ImageContainer, { TypeImageContainerProps } from './elements/image';
+import TextContainer, { TypeTextContainerProps } from './elements/text';
 
 type TypeHeroMinimalProps = TypeTextContainerProps & TypeImageContainerProps;
 
@@ -38,21 +29,21 @@ const ELEMENT_HERO_DECLARATION = 'hero-minimal-element-declaration';
 const ELEMENT_HERO_CONTAINER = 'hero-minimal-container';
 const ELEMENT_HERO_LOCK = 'hero-minimal-lock';
 
-const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ELEMENT_IMAGE_CONTINATER}`;
+const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.container}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
 
-const OVERWRITE_TEXT_CONTAINER_WRAPPER = `.${ELEMENT_HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
-const OVERWRITE_EYEBROW = `.${ELEMENT_HERO_CONTAINER} .${ELEMENT_HERO_EYEBROW}`;
-const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${ELEMENTS_HERO_HEADLINE}`;
+const OVERWRITE_TEXT_CONTAINER_WRAPPER = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.wrapper}`;
+const OVERWRITE_EYEBROW = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.eyebrow}`;
+const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_LIGHT_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_LIGHT}`;
 const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_MARYLAND}`;
 
-const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_WITH_IMAGE} .${ELEMENT_TEXT_CONTAINER}`;
+const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_WITH_IMAGE} .${TextContainer.Elements.container}`;
 
-const OVERWRITE_THEME_DARK_TEXT_WRAPPER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_DARK} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
-const OVERWRITE_THEME_MARYLAND_TEXT_WRAPPER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_MARYLAND} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
+const OVERWRITE_THEME_DARK_TEXT_WRAPPER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_DARK} .${TextContainer.Elements.wrapper}`;
+const OVERWRITE_THEME_MARYLAND_TEXT_WRAPPER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_MARYLAND} .${TextContainer.Elements.wrapper}`;
 
 // prettier-ignore
 const OverwriteTheme = `

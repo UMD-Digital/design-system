@@ -16,8 +16,8 @@ export type TypeAction = TypeActionProps & {
 const { Colors, Spacing } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
 
-export const ELEMENT_SLIDE_ACTION_CONTAINER = 'nav-slide-action-container';
-export const ELEMENT_SLIDE_ACTION_LINK = 'nav-slide-action-link';
+const ELEMENT_SLIDE_ACTION_CONTAINER = 'nav-slide-action-container';
+const ELEMENT_SLIDE_ACTION_LINK = 'nav-slide-action-link';
 const ELEMENT_SLIDE_ACTION_BUTTON = 'nav-slide-action-button';
 
 // prettier-ignore
@@ -123,4 +123,8 @@ const CreateSliderActionElement = (props: TypeAction) => {
 export default {
   CreateElement: CreateSliderActionElement,
   Styles: STYLES_SLIDER_ACTION_ELEMENT,
+  Elements: {
+    container: ELEMENT_SLIDE_ACTION_CONTAINER,
+    link: ELEMENT_SLIDE_ACTION_LINK,
+  },
 };

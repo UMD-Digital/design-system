@@ -14,7 +14,7 @@ export type TypePathwayHeroImageContainer = TypeImageProps;
 const ATTRIBUTE_IMAGE_SCALED = 'data-image-scaled';
 const IS_WITHOUT_IMAGE_SCALED = `[${ATTRIBUTE_IMAGE_SCALED}="false"]`;
 
-export const ELEMENT_PATHWAY_CONTAINER_IMAGE = 'pathway-image-container';
+const ELEMENT_PATHWAY_CONTAINER_IMAGE = 'pathway-image-container';
 const ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER = 'pathway-image-container-image';
 
 const OVERWRITE_SCALED_IMAGE_CONTAINER = `.${ELEMENT_PATHWAY_CONTAINER_IMAGE}${IS_WITHOUT_IMAGE_SCALED}`;
@@ -57,7 +57,7 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
   ${ImageSizeStyles}
 `
 
-export const CreatePathwayImageContainer = (
+const CreatePathwayImageContainer = (
   element: TypePathwayImageContainer | TypePathwayHeroImageContainer,
 ) => {
   const container = document.createElement('div');
@@ -91,4 +91,7 @@ export const CreatePathwayImageContainer = (
 export default {
   CreateElement: CreatePathwayImageContainer,
   Styles: STYLES_PATHWAY_IMAGE_CONTAINER,
+  Elements: {
+    container: ELEMENT_PATHWAY_CONTAINER_IMAGE,
+  },
 };

@@ -5,17 +5,8 @@ import {
   Typography,
 } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import ImageContainer, {
-  TypeImageContainerProps,
-  ELEMENT_IMAGE_CONTINATER,
-} from './elements/image';
-import TextContainer, {
-  TypeTextContainerProps,
-  ELEMENT_TEXT_CONTAINER,
-  ELEMENT_HERO_EYEBROW,
-  ELEMENTS_HERO_HEADLINE,
-  ELEMENTS_HERO_RICH_TEXT,
-} from './elements/text';
+import ImageContainer, { TypeImageContainerProps } from './elements/image';
+import TextContainer, { TypeTextContainerProps } from './elements/text';
 
 type TypeHeroDefaultProps = TypeTextContainerProps &
   TypeImageContainerProps & {
@@ -47,15 +38,15 @@ const IS_TEXT_CENTER = `[${ATTRIBUTE_TEXT_ALIGN}='${TEXT_ALIGN_CENTER}']`;
 const IS_INTERIOR = `[${ATTRIBUTE_INTERIOR}]`;
 const IS_LARGE_HEADLINE = `[${ATTRIBUTE_HEADLINE_SIZE}='${HEADLINE_SIZE_LARGE}']`;
 
-const OVERWRITE_TEXT_CONTAINER = `.${HERO_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${HERO_CONTAINER} .${ELEMENT_IMAGE_CONTINATER}`;
-const OVERWRITE_EYEBROW = `.${HERO_CONTAINER} .${ELEMENT_HERO_EYEBROW}`;
-const OVERWRITE_HEADLINE = `.${HERO_CONTAINER} .${ELEMENTS_HERO_HEADLINE}`;
-const OVERWRITE_RICH_TEXT = `.${HERO_CONTAINER} .${ELEMENTS_HERO_RICH_TEXT}`;
+const OVERWRITE_TEXT_CONTAINER = `.${HERO_CONTAINER} .${TextContainer.Elements.container}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${HERO_CONTAINER} .${ImageContainer.Elements.container}`;
+const OVERWRITE_EYEBROW = `.${HERO_CONTAINER} .${TextContainer.Elements.eyebrow}`;
+const OVERWRITE_HEADLINE = `.${HERO_CONTAINER} .${TextContainer.Elements.headline}`;
+const OVERWRITE_RICH_TEXT = `.${HERO_CONTAINER} .${TextContainer.Elements.richText}`;
 
 const OVERWRITE_INTERIOR_CONTAINER = `.${HERO_CONTAINER}${IS_INTERIOR}`;
-const OVERWRITE_TEXT_CENTER_ALIGNMENT_TEXT_CONTAINER = `.${HERO_CONTAINER}${IS_TEXT_CENTER} .${ELEMENT_TEXT_CONTAINER}`;
-const OVERWRITE_SIZE_LARGE_HEADLINE = `.${HERO_CONTAINER}${IS_LARGE_HEADLINE} .${ELEMENTS_HERO_HEADLINE}`;
+const OVERWRITE_TEXT_CENTER_ALIGNMENT_TEXT_CONTAINER = `.${HERO_CONTAINER}${IS_TEXT_CENTER} .${TextContainer.Elements.container}`;
+const OVERWRITE_SIZE_LARGE_HEADLINE = `.${HERO_CONTAINER}${IS_LARGE_HEADLINE} .${TextContainer.Elements.headline}`;
 
 // prettier-ignore
 const OverwriteEyebrow = `
@@ -123,7 +114,7 @@ const OverwriteTextContainer = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
-    ${OVERWRITE_TEXT_CONTAINER}:has(.${ELEMENT_HERO_EYEBROW}) {
+    ${OVERWRITE_TEXT_CONTAINER}:has(.${TextContainer.Elements.eyebrow}) {
       margin-top: -14px;
       padding-top: 0;
     }

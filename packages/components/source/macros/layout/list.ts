@@ -11,8 +11,8 @@ const SMALL = 400;
 const LARGE = 650;
 
 const ELEMENT_NAME = 'umd-list-container';
-export const ELEMENT_LIST_CONTAINER = 'list-container';
-export const ELEMENT_LIST_CONTAINER_WRAPPER = 'list-container-wrapper';
+const ELEMENT_LIST_CONTAINER = 'list-container';
+const ELEMENT_LIST_CONTAINER_WRAPPER = 'list-container-wrapper';
 
 const IS_THEME_DARK = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 

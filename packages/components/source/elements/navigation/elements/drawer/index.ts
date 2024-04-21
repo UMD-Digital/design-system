@@ -1,10 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Accessibility, AssetIcon } from 'utilities';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
-import NavDrawerSlider, {
-  TypeNavSliderRequirements,
-  ELEMENT_NAVIGATION_SLIDER,
-} from '../slider';
+import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
 
 export type TypeNavDrawerRequirements = TypeNavSliderRequirements & {
   context?: HTMLElement;
@@ -31,7 +28,7 @@ const ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER = 'nav-drawer-overlay-wrapper';
 const ELEMENT_NAV_DRAWER_CLOSE_BUTTON = 'nav-drawer-close-button';
 
 // prettier-ignore
-export const DrawerButtonClose = `
+const DrawerButtonClose = `
   .${ELEMENT_NAV_DRAWER_CLOSE_BUTTON} {
     background-color: ${Colors.red};
     display: flex;
@@ -55,7 +52,7 @@ export const DrawerButtonClose = `
 `;
 
 // prettier-ignore
-export const DrawerContainer = `
+const DrawerContainer = `
   .${ELEMENT_NAV_DRAWER_CONTAINER} {
     position: fixed;
     bottom: 0;
@@ -143,7 +140,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         `.${ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER}`,
       ) as HTMLDivElement;
       const slider = bodyOverlay.querySelector(
-        `.${ELEMENT_NAVIGATION_SLIDER}`,
+        `.${NavDrawerSlider.Elements.slider}`,
       ) as HTMLDivElement;
 
       bodyOverlay.style.opacity = '0';
@@ -172,10 +169,10 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         `.${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}`,
       ) as HTMLButtonElement;
       const slider = bodyOverlayWrapper.querySelector(
-        `.${ELEMENT_NAVIGATION_SLIDER}`,
+        `.${NavDrawerSlider.Elements.slider}`,
       ) as HTMLDivElement;
       const activeSlide = bodyOverlayWrapper.querySelector(
-        `.${ELEMENT_NAVIGATION_SLIDER} div[data-active]`,
+        `.${NavDrawerSlider.Elements.slider} div[data-active]`,
       ) as HTMLDivElement;
 
       elementContainer.style.display = 'block';

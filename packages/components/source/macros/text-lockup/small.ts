@@ -26,16 +26,13 @@ const { ConvertJSSObjectToStyles } = Styles;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-export const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER =
-  'text-lockup-small-container';
-export const ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER =
-  'text-lockup-small-container-wrapper';
-export const ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW = 'text-lockup-small-eyebrow';
-export const ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE = 'text-lockup-small-headline';
-export const ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT =
-  'text-lockup-small-rich-text';
-export const ELEMENT_TEXT_LOCKUP_SMALL_DATE = 'text-lockup-small-date';
-export const ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS = 'text-lockup-small-actions';
+const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';
+const ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER = 'text-lockup-small-container-wrapper';
+const ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW = 'text-lockup-small-eyebrow';
+const ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE = 'text-lockup-small-headline';
+const ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT = 'text-lockup-small-rich-text';
+const ELEMENT_TEXT_LOCKUP_SMALL_DATE = 'text-lockup-small-date';
+const ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS = 'text-lockup-small-actions';
 
 const IS_THEME_DARK = `.${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 const IS_THEME_DARK_EYEBROW = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW}`;
@@ -271,5 +268,7 @@ export default {
     container: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
     wrapper: ELEMENT_TEXT_LOCKUP_SMALL_WRAPPER,
     headline: ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
+    richText: ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT,
+    date: ELEMENT_TEXT_LOCKUP_SMALL_DATE,
   },
 };

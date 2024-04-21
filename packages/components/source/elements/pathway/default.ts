@@ -1,16 +1,7 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import {
-  CreatePathwayTextContainer,
-  TypePathwayTextContainer,
-  ELEMENT_TEXT_CONTAINER,
-  ELEMENT_TEXT_CONTAINER_WRAPPER,
-} from './elements/text';
-import {
-  CreatePathwayImageContainer,
-  TypePathwayImageContainer,
-  ELEMENT_PATHWAY_CONTAINER_IMAGE,
-} from './elements/image';
+import TextContainer, { TypePathwayTextContainer } from './elements/text';
+import ImageContainer, { TypePathwayImageContainer } from './elements/image';
 
 type TypePathwayDefaultProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
@@ -48,7 +39,7 @@ const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
 const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
 
-const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_DEFAULT_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
+const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_DEFAULT_CONTAINER} .${TextContainer.Elements.wrapper}`;
 
 const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
 const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
@@ -58,12 +49,12 @@ const OVERWRITE_THEME_LIGHT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_THEME
 const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_THEME_MARYLAND}`;
 
 const OVERWRITE_IMAGE_RIGHT_BACKGROUND = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_DEFAULT_CONTAINER_BACKGROUND}`;
-const OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_PATHWAY_CONTAINER_IMAGE}`;
-const OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER}`;
-const OVERWRITE_IMAGE_RIGHT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
-const OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${ELEMENT_TEXT_CONTAINER_WRAPPER}`;
+const OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ImageContainer.Elements.container}`;
+const OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.container}`;
+const OVERWRITE_IMAGE_RIGHT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.wrapper}`;
+const OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${TextContainer.Elements.wrapper}`;
 
-const OVERWRITE_IMAGE_SCALED_IMAGE_CONTAINER = `${OVERWRITE_IMAGE_SCALED_CONTAINER} .${ELEMENT_PATHWAY_CONTAINER_IMAGE}`;
+const OVERWRITE_IMAGE_SCALED_IMAGE_CONTAINER = `${OVERWRITE_IMAGE_SCALED_CONTAINER} .${ImageContainer.Elements.container}`;
 const OVERWRITE_IMAGE_SCALED_IMAGE_LOCK = `${OVERWRITE_IMAGE_SCALED_CONTAINER} .${PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER}`;
 
 const OVERWRITE_THEME_DARK_BACKGROUND = `${OVERWRITE_THEME_DARK_CONTAINER} .${PATHWAY_DEFAULT_CONTAINER_BACKGROUND}`;
@@ -136,7 +127,7 @@ const OverwriteImagePositionStyles = `
 // prettier-ignore
 const OverwriteImageContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ELEMENT_PATHWAY_CONTAINER_IMAGE} img {
+    .${ImageContainer.Elements.container} img {
       min-height: 656px;
      }
   }
@@ -264,8 +255,8 @@ const CreatePathwayDefaultElement = (element: TypePathwayDefaultProps) => {
   const background = document.createElement('div');
   const { isImageRight = true, isImageScaled = true, theme } = element;
 
-  const textContainer = CreatePathwayTextContainer(element);
-  const imageContainer = CreatePathwayImageContainer(element);
+  const textContainer = TextContainer.CreateElement(element);
+  const imageContainer = ImageContainer.CreateElement(element);
 
   container.classList.add(PATHWAY_DEFAULT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);

@@ -25,13 +25,13 @@ const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
 const TEXT_ALIGN_CENTER = 'center';
 
-export const ELEMENT_NAME = 'umd-element-hero-text-container';
-export const ELEMENT_TEXT_CONTAINER = 'hero-text-container';
-export const ELEMENT_TEXT_CONTAINER_WRAPPER = 'hero-text-container-wrapper';
-export const ELEMENT_HERO_EYEBROW = 'hero-eyebrow';
-export const ELEMENTS_HERO_HEADLINE = 'hero-headline';
-export const ELEMENTS_HERO_RICH_TEXT = 'hero-richtext';
-export const ELEMENTS_HERO_ACTION = 'hero-actions';
+const ELEMENT_NAME = 'umd-element-hero-text-container';
+const ELEMENT_TEXT_CONTAINER = 'hero-text-container';
+const ELEMENT_TEXT_CONTAINER_WRAPPER = 'hero-text-container-wrapper';
+const ELEMENT_HERO_EYEBROW = 'hero-eyebrow';
+const ELEMENTS_HERO_HEADLINE = 'hero-headline';
+const ELEMENTS_HERO_RICH_TEXT = 'hero-richtext';
+const ELEMENTS_HERO_ACTION = 'hero-actions';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
@@ -126,7 +126,7 @@ const ActionStyles = `
 `;
 
 // prettier-ignore
-export const STYLES_HERO_ELEMENT_TEXT_CONTAINER = `
+const STYLES_HERO_ELEMENT_TEXT_CONTAINER = `
   .${ELEMENT_TEXT_CONTAINER} {
     position: relative;
     height: 100%;
@@ -179,7 +179,7 @@ const CreateBody = ({
   return container;
 };
 
-export const CreateTextContainerElement = (element: TypeTextContainerProps) => {
+const CreateTextContainerElement = (element: TypeTextContainerProps) => {
   const { theme, isTextCenter = false } = element;
   const container = document.createElement('div');
   const body = CreateBody(element);
@@ -197,4 +197,12 @@ export const CreateTextContainerElement = (element: TypeTextContainerProps) => {
 export default {
   CreateElement: CreateTextContainerElement,
   Styles: STYLES_HERO_ELEMENT_TEXT_CONTAINER,
+  Elements: {
+    container: ELEMENT_TEXT_CONTAINER,
+    wrapper: ELEMENT_TEXT_CONTAINER_WRAPPER,
+    eyebrow: ELEMENT_HERO_EYEBROW,
+    headline: ELEMENTS_HERO_HEADLINE,
+    richText: ELEMENTS_HERO_RICH_TEXT,
+    actions: ELEMENTS_HERO_ACTION,
+  },
 };

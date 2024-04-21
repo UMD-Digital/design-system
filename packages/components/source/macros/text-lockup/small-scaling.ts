@@ -1,12 +1,6 @@
 import { Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import TextLockupSmall, {
-  ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE,
-  ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT,
-  ELEMENT_TEXT_LOCKUP_SMALL_DATE,
-  TypeTextLockupSmall,
-} from './small';
-import elements from 'components/accordion/elements';
+import TextLockupSmall, { TypeTextLockupSmall } from './small';
 
 type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
@@ -16,11 +10,11 @@ const { ConvertJSSObjectToStyles } = Styles;
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-scaling-font-block-container';
-export const ELEMENT_SCALABLE_FONT_CONTAINER = 'scaling-font-block-container';
+const ELEMENT_SCALABLE_FONT_CONTAINER = 'scaling-font-block-container';
 
-const OverwriteHeadline = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`;
-const OverwriteDate = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`;
-const OverwriteText = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`;
+const OverwriteHeadline = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${TextLockupSmall.Elements.headline}`;
+const OverwriteDate = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${TextLockupSmall.Elements.date}`;
+const OverwriteText = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${TextLockupSmall.Elements.richText}`;
 
 // prettier-ignore
 const HeadlineStyles = `

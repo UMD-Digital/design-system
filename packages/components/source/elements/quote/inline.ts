@@ -1,11 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetIcon } from 'utilities';
-import Text, {
-  TEXT_CONTAINER,
-  TEXT_CONTAINER_QUOTE_WRAPPER,
-  TypeQuoteTextContainer,
-} from './elements/text';
-import Image, { IMAGE_CONTAINER } from './elements/image';
+import Text, { TypeQuoteTextContainer } from './elements/text';
+import Image from './elements/image';
 
 type TypeInlineInline = TypeQuoteTextContainer & {
   theme: string;
@@ -24,6 +20,9 @@ const ATTRIBUTE_SIZE = 'size';
 const THEME_MARYLAND = 'maryland';
 const SIZE_LARGE = 'large';
 
+const TEXT_CONTAINER = Text.Elements.container;
+const TEXT_CONTAINER_QUOTE_WRAPPER = Text.Elements.quoteWrapper;
+
 const QUOTE_INLINE_CONTAINER = 'quote-inline-container';
 const QUOTE_INLINE_CONTAINER_WRAPPER = 'quote-inline-container-wrapper';
 
@@ -35,7 +34,7 @@ const IS_SIZE_LARGE_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE}`;
 const IS_SIZE_LARGE_WITH_IMAGE_CONTAINER = `${IS_WITH_IMAGE_CONTAINER}${IS_WITH_IMAGE}`;
 
 const IS_TEXT_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${TEXT_CONTAINER}`;
-const IS_IMAGE_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${IMAGE_CONTAINER}`;
+const IS_IMAGE_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${Image.Elements.container}`;
 
 const IS_MARYLAND_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_THEME_MARYLAND}`;
 const IS_SIZE_LARGE_TEXT_CONTAINER = `${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER}`;
@@ -51,7 +50,7 @@ const OverwriteThemeMaryland = `
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_MARYLAND_CONTAINER} .${IMAGE_CONTAINER} img  {
+    ${IS_MARYLAND_CONTAINER} .${Image.Elements.container} img  {
       border-right: 2px solid ${Colors.gold};
     }
   }
@@ -69,11 +68,11 @@ const OverwriteSizeLarge = `
     }
   }
 
-  ${IS_SIZE_LARGE_CONTAINER} .${IMAGE_CONTAINER} img {
+  ${IS_SIZE_LARGE_CONTAINER} .${Image.Elements.container} img {
     max-width: 200px;
   }
 
-  ${IS_SIZE_LARGE_CONTAINER} .${IMAGE_CONTAINER} span {
+  ${IS_SIZE_LARGE_CONTAINER} .${Image.Elements.container} span {
     bottom: -7px;
     left: -2px;
     height: 26px;
@@ -81,7 +80,7 @@ const OverwriteSizeLarge = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_SIZE_LARGE_CONTAINER} .${IMAGE_CONTAINER} span {
+    ${IS_SIZE_LARGE_CONTAINER} .${Image.Elements.container} span {
       height: 30px;
       width: 41px;
       top: -14px;

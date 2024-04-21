@@ -7,6 +7,7 @@ import EventBlock from './event/block';
 import EventElements from './event/elements';
 import EventFeature from './event/feature';
 import EventList from './event/list';
+import EventLockupDate from './event/lockup-date';
 import EventPromo from './event/promo';
 import FeedsEvents from './feeds/events';
 import FeedsNews from './feeds/news';
@@ -45,6 +46,7 @@ export {
   EventElements,
   EventFeature,
   EventList,
+  EventLockupDate,
   EventPromo,
   FeedsEvents,
   FeedsNews,

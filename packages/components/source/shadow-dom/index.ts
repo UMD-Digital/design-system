@@ -7,7 +7,7 @@ import { Load as CardLoader } from './card';
 import { Load as CardOverlayLoader } from './card-overlay';
 import { Load as CarouselCardsLoader } from './carousel-cards';
 import { Load as EventLoader } from './event';
-import { Load as EventDateLoader } from './event-date';
+import { Load as EventDateLoader } from './event/lockup';
 import { Load as EventDateSliderLoader } from './events-date-slider';
 import { Load as FeedNewsGridLoader } from './feeds/news/grid';
 import { Load as FeedNewsListLoader } from './feeds/news/list';

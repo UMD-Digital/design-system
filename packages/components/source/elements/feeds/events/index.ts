@@ -36,15 +36,12 @@ const { Eyebrow } = Elements;
 const { Colors, Spacing } = Tokens;
 
 const EventsNoResults = `
-  .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} {
-
-  }
-
   .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
     border: none;
     background-color: ${Colors.black};
     height: 1px;
-    margin-bottom: ${Spacing.sm};
+    margin-top: ${Spacing.md};
+    margin-bottom: ${Spacing.md};
   }
 
   ${ConvertJSSObjectToStyles({

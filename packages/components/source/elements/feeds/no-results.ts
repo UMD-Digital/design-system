@@ -29,7 +29,7 @@ const STYLES_NO_RESULTS = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [` .${CONTAINER_NO_RESULTS} p`]: Typography.SansLarger,
+      [` .${CONTAINER_NO_RESULTS} p`]: Typography.SansExtraLarge,
     },
   })}
 

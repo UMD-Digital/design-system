@@ -1,11 +1,11 @@
-import { Typography, Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/variables';
 
-const { Spacing, Colors, Queries } = Tokens;
-const { LabelSmall } = Typography;
+const { Colors } = Tokens;
 
 const Video = {
   display: 'block',
   width: '100%',
+  backgroundColor: Colors.black,
 
   '& iframe': {
     aspectRatio: '16/9',

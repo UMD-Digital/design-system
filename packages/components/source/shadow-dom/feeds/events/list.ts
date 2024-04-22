@@ -50,7 +50,7 @@ class UMDFeedEventsList extends HTMLElement {
       numberOfRowsToStart: Number(this.getAttribute(ATTRIBUTE_ROWS)) || 5,
       numberOfColumnsToShow: 1,
       isLazyLoad: this.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',
-      isUnion: this.getAttribute(ATTRIBUTE_UNION) === 'true',
+      isUnion: this.getAttribute(ATTRIBUTE_UNION) !== 'false',
       isTypeList: true,
     };
 

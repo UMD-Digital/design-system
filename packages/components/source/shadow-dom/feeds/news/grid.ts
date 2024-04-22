@@ -49,7 +49,7 @@ class UMDFeedNewsGrid extends HTMLElement {
       numberOfRowsToStart: Number(this.getAttribute(ATTRIBUTE_ROWS)) || 1,
       numberOfColumnsToShow: Number(this.getAttribute(ATTRIBUTE_SHOW)) || 3,
       isLazyLoad: this.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',
-      isUnion: this.getAttribute(ATTRIBUTE_UNION) === 'true',
+      isUnion: this.getAttribute(ATTRIBUTE_UNION) !== 'false',
       isTypeGrid: true,
     };
 

@@ -29,9 +29,9 @@
         </div>
       </section>
 
-      {# <section style="padding-bottom: 40px">
+      <section style="padding-bottom: 40px">
         <h2 class="content-heading type-hr">
-          <span>Multiple inclusions</span>
+          <span>Multiple inclusions: (default union)</span>
           <span>Campus Leaders & Alumni Association</span>
         </h2>
 
@@ -44,14 +44,14 @@
 
       <section style="padding-bottom: 40px">
         <h2 class="content-heading type-hr">
-          <span>Multiple inclusions: union</span>
+          <span>Multiple inclusions: Intersection</span>
           <span>Campus Leaders & Alumni Association</span>
         </h2>
 
         <div style="max-width: 800px; margin: 0 auto;">
           <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
             categories="10256,10322"
-            union="true"
+            union="false"
             lazyload="true"></umd-feed-events-list>
         </div>
       </section>
@@ -68,7 +68,7 @@
             lazyload="true"
             row-count="10"></umd-feed-events-list>
         </div>
-      </section> #}
+      </section>
     </div>
   </section>
 {% endblock %}

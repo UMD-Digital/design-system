@@ -96,7 +96,7 @@ const MakeApiVariables = ({
     obj.limit = numberOfColumnsToShow * numberOfRowsToStart;
   }
 
-  if (isUnion && categories) {
+  if (!isUnion && categories) {
     obj.related = ['and', ...categories];
   }
 

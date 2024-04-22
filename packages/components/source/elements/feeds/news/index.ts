@@ -63,11 +63,11 @@ const MakeApiVariables = ({
   }
 
   if (!isUnion && categories) {
-    obj.related = categories;
+    obj.relatedToAll = categories;
   }
 
   if (isUnion && categories) {
-    obj.relatedToAll = categories;
+    obj.related = categories;
   }
 
   return obj;

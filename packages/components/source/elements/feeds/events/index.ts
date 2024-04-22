@@ -33,15 +33,20 @@ const ELEMENT_FEEDS_EVENTS_NO_RESULTS = 'feeds-events-no-results';
 
 const { ConvertJSSObjectToStyles } = Styles;
 const { Eyebrow } = Elements;
-const { Colors, Spacing } = Tokens;
+const { Colors, Spacing, Breakpoints } = Tokens;
 
 const EventsNoResults = `
   .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
     border: none;
     background-color: ${Colors.black};
     height: 1px;
-    margin-top: ${Spacing.md};
     margin-bottom: ${Spacing.md};
+  }
+
+  @media (min-width: ${Breakpoints.tablet.min}) {
+    .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
+      margin-top: ${Spacing.md};
+    }
   }
 
   ${ConvertJSSObjectToStyles({

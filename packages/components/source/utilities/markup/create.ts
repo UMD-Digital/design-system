@@ -13,6 +13,13 @@ const Node = {
     return slot;
   },
 
+  imageFromSvg: ({ SVG }: { SVG: string }) => {
+    const image = document.createElement('img');
+
+    image.src = `data:image/svg+xml;base64,${btoa(SVG)}`;
+    return image;
+  },
+
   linkWithSpan: ({
     url,
     title,

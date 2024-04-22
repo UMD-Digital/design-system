@@ -41,20 +41,20 @@ const STYLES_QUOTE_FEATURED_ELEMENT = `
   }
 
   .${QUOTE_FEATURED_CONTAINER_WRAPPER} {
-    padding: ${Spacing.xl} ${Spacing.md};
+    padding: ${Spacing.lg};
     background-color: ${Colors.gray.lightest};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${QUOTE_FEATURED_CONTAINER_WRAPPER} {
-      padding: ${Spacing['2xl']} ${Spacing.md} ${Spacing['2xl']} ${Spacing['2xl']};
+      padding: ${Spacing['2xl']} ${Spacing['2xl']} ${Spacing['2xl']} ${Spacing['2xl']};
 
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${QUOTE_FEATURED_CONTAINER_WRAPPER} {
-      padding: ${Spacing['6xl']} ${Spacing.md} ${Spacing['6xl']} ${Spacing['8xl']};
+      padding: ${Spacing['4xl']} ${Spacing['4xl']} ${Spacing['4xl']} ${Spacing['4xl']};
     }
   }
 

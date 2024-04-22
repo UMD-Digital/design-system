@@ -65,12 +65,8 @@ const PillWrapper = {
     marginTop: Spacing.min,
   },
 
-  '& a': {
-    transition: 'color .5s ease',
-  },
-
   '& a:hover, &:focus': {
-    color: Colors.red,
+    textDecoration: 'underline',
   },
 };
 

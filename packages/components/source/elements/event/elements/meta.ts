@@ -223,15 +223,6 @@ const RowDateInfo = (info: TypeMetaDisplay) => {
   container.appendChild(dateElement);
   container.appendChild(timeElement);
 
-  if (isMultiDay) {
-    container.appendChild(
-      MakeDetailItem({
-        icon: AssetIcon.MULTI_DAY,
-        text: 'Multi-day',
-      }),
-    );
-  }
-
   return container;
 };
 

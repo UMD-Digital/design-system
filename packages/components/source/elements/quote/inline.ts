@@ -3,7 +3,7 @@ import { AssetIcon } from 'utilities';
 import Text, { TypeQuoteTextContainer } from './elements/text';
 import Image from './elements/image';
 
-type TypeInlineInline = TypeQuoteTextContainer & {
+export type TypeInlineInline = TypeQuoteTextContainer & {
   theme: string;
   size: string;
   image: HTMLElement | null;
@@ -268,14 +268,14 @@ const STYLES_QUOTE_INLINE_ELEMENT = `
   ${OverwriteThemeMaryland}
 `;
 
-const CreateQuoteInlineElement = (element: TypeInlineInline) => {
-  const { size, image, theme } = element;
+const CreateQuoteInlineElement = (props: TypeInlineInline) => {
+  const { size, image, theme } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const isSizeLarge = size === 'large';
   const hasImage = image !== null;
   const textContainer = Text.CreateElement({
-    ...element,
+    ...props,
     isSizeLarge,
   });
 

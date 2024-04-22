@@ -13,7 +13,7 @@ const Colors = {
     medium: '#7f7f7f',
     light: '#e6e6e6',
     lighter: '#f1f1f1',
-    lightest: '#fafafa',
+    lightest: '#f8f8f8',
   },
 };
 

@@ -54,6 +54,30 @@ const Tailwing = {
   },
 };
 
+const TailwingRight = {
+  ...LabelSmall,
+  textTransform: 'uppercase',
+  position: 'relative',
+  overflow: 'hidden',
+
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: '9px',
+    right: `0`,
+    width: `100vw`,
+    height: '1px',
+    background: `${Colors.black}`,
+    zIndex: -1,
+  },
+
+  '& > span': {
+    position: 'relative',
+    backgroundColor: `${Colors.white}`,
+    paddingRight: Spacing.min,
+  },
+};
+
 const PillWrapper = {
   marginTop: `-${Spacing.min}`,
 
@@ -81,6 +105,9 @@ export default {
   },
   '.umd-tailwings-headline': {
     ...Tailwing,
+  },
+  '.umd-tailwing-right-headline': {
+    ...TailwingRight,
   },
   '.umd-adjustent-line-text': {
     ...AdjustentLineText,

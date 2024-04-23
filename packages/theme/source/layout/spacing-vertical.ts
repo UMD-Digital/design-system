@@ -37,6 +37,27 @@ const InteriorNavigation = {
   },
 };
 
+const SidebarNavigation = {
+  ...InteriorNavigation,
+
+  [`@media (${Queries.tablet.min})`]: {
+    display: 'flex',
+  },
+
+  '& > *:first-child': {
+    [`@media (${Queries.tablet.min})`]: {
+      maxWidth: '754px',
+    },
+  },
+
+  '& > *:last-child': {
+    [`@media (${Queries.tablet.min})`]: {
+      marginLeft: Spacing['max'],
+      width: '322px',
+    },
+  },
+};
+
 export default {
   '.umd-layout-vertical-landing': {
     ...Layout.VerticalLanding,
@@ -52,6 +73,9 @@ export default {
   },
   '.umd-layout-interior-navigation': {
     ...InteriorNavigation,
+  },
+  '.umd-layout-interior-sidebar': {
+    ...SidebarNavigation,
   },
   '.umd-layout-headline-large': {
     ...HeadlineLarge,

@@ -11,7 +11,7 @@ const SMALL = 500;
 const MEDIUM = 900;
 
 const BACKGROUND_TEXTURE_LIGHT = `<svg id="quote_background_light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 850.5 532.1"><path d="M.3,0h332.7L.3,326.6V0Z" fill="#757575" fill-rule="evenodd" isolation="isolate" opacity=".04" stroke-width="0"/><path d="M517.9,532.1h332.7L308.6,0H0v23.6l517.9,508.5Z" fill="#000" fill-rule="evenodd" isolation="isolate" opacity=".04" stroke-width="0"/></svg>`;
-const BACKGROUND_TEXTURE_DARK = `<svg id="quote_background_dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 851 534"><path d="M.3,1h332.7L.3,327.6V1Z" fill="#757575" fill-rule="evenodd" isolation="isolate" opacity=".1" stroke-width="0"/><path d="M517.9,533h332.7L308.7,1H.1v23.6l517.8,508.4Z" fill="#757575" fill-rule="evenodd" isolation="isolate" opacity=".2" stroke-width="0"/></svg>`;
+const BACKGROUND_TEXTURE_DARK = `<svg id="quote_background_dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 614.86 300.65"><defs><style>.cls-1{opacity:.25;}.cls-1,.cls-2{fill:#757575;fill-rule:evenodd;isolation:isolate;}.cls-2{opacity:.1;}</style></defs><path class="cls-2" d="m.27,0h332.67L27.46,299.93H.27V0Z"/><path class="cls-1" d="m0,0h308.65l306.21,300.65h-332.67L0,23.59V0Z"/></svg>`;
 
 const ELEMENT_NAME = 'umd-element-quote-featured';
 const ATTRIBUTE_THEME = 'theme';
@@ -45,7 +45,9 @@ const TextureStyles = `
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
+    width: 851px;
+    aspect-ratio: 8 / 3;
+    object-fit: cover;
   }
 `;
 

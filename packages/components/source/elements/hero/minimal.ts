@@ -69,7 +69,7 @@ const OverwriteTheme = `
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} .${ELEMENT_HERO_TEXTURE} {
-    opacity: 0.1;
+    opacity: 0.13;
   }
 
   ${OVERWRITE_THEME_DARK_TEXT_WRAPPER},
@@ -154,15 +154,16 @@ const OverwriteImageContainer = `
 const BackgroundTexture = `
   .${ELEMENT_HERO_TEXTURE} {
     position: absolute;
-    top: 0;
-    left: -10vw;
-    height: 100%;
+    top: -1%;
+    left: -1%;
+    height: 180%;
   }
 `;
 
 export const STYLES_HERO_MINIMAL_ELEMENT = `
   .${ELEMENT_HERO_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
+    overflow: hidden;
   }
   
   .${ELEMENT_HERO_LOCK} {

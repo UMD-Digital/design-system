@@ -139,6 +139,7 @@ const AttributionSubTextStyles = `
 
   .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} {
     color: ${Colors.gray.dark};
+    font-style: italic;
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} * {

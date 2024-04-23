@@ -1,5 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import InlineQuote, { TypeInlineInline } from './inline';
+import QuoteText from './elements/text';
 import { MarkupCreate } from 'utilities';
 
 type TypeQuoteFeatured = TypeInlineInline & {};
@@ -28,6 +29,7 @@ const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}="${THEME_MARYLAND}"]`;
 const IS_WITH_IMAGE = `[${ATTRIBUTE_HAS_IMAGE}]`;
 
 const QUOTE_FEATURED_CONTAINER = 'quote-featured-container';
+const QUOTE_FEATURED_CONTAINER_SPACER = 'quote-featured-container-spacer';
 const QUOTE_FEATURED_CONTAINER_WRAPPER = 'quote-featured-container-wrapper';
 const QUOTE_FEATURED_TEXTURE = 'quote-featured-texture';
 const QUOTE_FEATURED_TEXT = 'quote-featured-text';
@@ -35,7 +37,8 @@ const QUOTE_FEATURED_IMAGE = 'quote-featured-image';
 const QUOTE_FEATURED_IMAGE_ACTIONS = 'quote-featured-image-actions';
 
 const OVERWRITE_WITH_IMAGE_WRAPPER = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
-const OVERWRITE_WITH_IMAGE_TEXT = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QUOTE_FEATURED_TEXT}`;
+const OVERWRITE_WITH_IMAGE_QUOTE_TEXT_CONTAINER = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QuoteText.Elements.container}`;
+const OVERWRITE_WITH_IMAGE_QUOTE_TEXT = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QuoteText.Elements.quoteWrapper}`;
 
 const OVERWRITE_THEME_DARK_WRAPPER = `.${QUOTE_FEATURED_CONTAINER}${IS_THEME_DARK} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
 const OVERWRITE_THEME_MARYLAND_WRAPPER = `.${QUOTE_FEATURED_CONTAINER}${IS_THEME_MARYLAND} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
@@ -53,11 +56,9 @@ const OverwriteTheme = `
 
 // prettier-ignore
 const OverwriteWithImage = `
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_WITH_IMAGE_WRAPPER} {
-      display: flex;
-      flex-direction: column;
-    }
+  ${OVERWRITE_WITH_IMAGE_WRAPPER} {
+    display: flex;
+    flex-direction: column;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
@@ -65,6 +66,14 @@ const OverwriteWithImage = `
       display: flex;
       flex-direction: row;
     }
+  }
+
+  ${OVERWRITE_WITH_IMAGE_QUOTE_TEXT_CONTAINER} {
+    padding-top: 0;
+  }
+
+  ${OVERWRITE_WITH_IMAGE_QUOTE_TEXT} span {
+    display: none !important;
   }
 `;
 
@@ -74,22 +83,21 @@ const ImageContainer = `
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: baseline;
+    align-items: center;
+    margin-top: -${Spacing.lg};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     .${QUOTE_FEATURED_IMAGE} {
-      padding: ${Spacing.lg};
-      padding-bottom: 0;
+      padding: 0 ${Spacing.lg};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) and (max-width: ${MEDIUM - 1}px) {
     .${QUOTE_FEATURED_IMAGE} {
       margin: 0 auto;
-      align-items: center;
-      margin-top: -${Spacing.lg};
-      max-width: 400px;
+      margin-top: -${Spacing['8xl']};
+      max-width: 300px;
     }
   }
 
@@ -161,6 +169,7 @@ const TextureStyles = `
 const Wrapper = `
   .${QUOTE_FEATURED_CONTAINER_WRAPPER} {
     background-color: ${Colors.gray.lightest};
+    position: relative;
   }
 `;
 
@@ -168,6 +177,16 @@ const Wrapper = `
 const STYLES_QUOTE_FEATURED_ELEMENT = `
   .${QUOTE_FEATURED_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
+  }
+
+  .${QUOTE_FEATURED_CONTAINER_SPACER} {
+    padding-top: ${Spacing.lg};
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) and (max-width: ${MEDIUM - 1}px) {
+    .${QUOTE_FEATURED_CONTAINER_SPACER} {
+      padding-top: ${Spacing['8xl']};
+    }
   }
 
   ${Wrapper}
@@ -227,6 +246,7 @@ const CreateTextureContainer = ({ theme }: TypeQuoteFeatured) => {
 const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
   const { theme, action, image } = props;
   const container = document.createElement('div');
+  const spacer = document.createElement('div');
   const wrapper = document.createElement('div');
   const hasImage = !!image;
   const textureContainer = CreateTextureContainer(props);
@@ -237,8 +257,11 @@ const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
   if (hasImage) wrapper.appendChild(CreateImageContainer({ image, action }));
   wrapper.appendChild(textContainer);
 
+  spacer.classList.add(QUOTE_FEATURED_CONTAINER_SPACER);
+  spacer.appendChild(wrapper);
+
   container.classList.add(QUOTE_FEATURED_CONTAINER);
-  container.appendChild(wrapper);
+  container.appendChild(spacer);
   if (theme) container.setAttribute('theme', theme);
   if (hasImage) container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
 

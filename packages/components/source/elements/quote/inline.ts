@@ -97,7 +97,7 @@ const OverwriteSizeLarge = `
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_TEXT_CONTAINER} {
-      padding-left: ${Spacing['6xl']};
+      padding-left: ${Spacing.md};
     }
   }
 

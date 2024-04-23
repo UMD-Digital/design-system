@@ -11,6 +11,7 @@ import Footer from './additional-styling/footer';
 import Hero from './default-styling/hero';
 import Header from './default-styling/header';
 import Logo from './default-styling/logo';
+import Media from './additional-styling/media';
 import Person from './additional-styling/person';
 import Pathway from './default-styling/pathway';
 import Quote from './default-styling/quote';
@@ -30,6 +31,7 @@ export default {
   ...Footer,
   ...Header,
   ...Logo,
+  ...Media,
   ...Hero,
   ...Person,
   ...Event,

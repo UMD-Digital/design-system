@@ -23,6 +23,7 @@ const STYLES_HERO_ELEMENT_IMAGE_CONTAINER = `
 
   .${ELEMENT_IMAGE_CONTINATER} .${LayoutImage.Elements.container} {
     height: 100%;
+    width: 100%;
   }
 
   .${ELEMENT_IMAGE_CONTINATER} video {

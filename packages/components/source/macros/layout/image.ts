@@ -13,6 +13,7 @@ const ELEMENT_IMAGE_CONTAINER = 'image-container';
 const STYLES_IMAGE_CONTAINER = `
   .${ELEMENT_IMAGE_CONTAINER} {
     position: relative;
+    display: inline-block;
   }
 
   ${ConvertJSSObjectToStyles({
@@ -34,7 +35,6 @@ const STYLES_IMAGE_CONTAINER = `
 
   .${ELEMENT_IMAGE_CONTAINER} > img {
     display: block;
-    width: 100%;
   }
 
   .${ELEMENT_IMAGE_CONTAINER} > a {
@@ -61,7 +61,7 @@ const CreateImageContainer = ({
   image,
   showCaption = false,
 }: {
-  image: HTMLImageElement | string;
+  image: HTMLImageElement | HTMLElement | string;
   showCaption?: boolean;
 }) => {
   const container = document.createElement('div');

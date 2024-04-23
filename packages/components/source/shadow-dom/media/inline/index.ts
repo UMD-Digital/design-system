@@ -7,13 +7,14 @@ declare global {
 import { MediaInline } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-media-inline';
 
 const SLOTS = {
   IMAGE: 'image',
   CAPTION: 'caption',
+  WRAPPING_TEXT: 'wrapping-text',
 };
 
 const styles = `
@@ -26,10 +27,14 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
-  const { IMAGE } = element._slots;
+  const { IMAGE, CAPTION, WRAPPING_TEXT } = element._slots;
+  const isAlignmentRight = element.getAttribute('alignment') === 'right';
 
   return MediaInline.CreateElement({
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+    caption: SlotWithDefaultStyling({ element, slotRef: CAPTION }),
+    wrappingText: Node.slot({ type: WRAPPING_TEXT }),
+    isAlignmentRight,
   });
 };
 

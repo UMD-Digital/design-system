@@ -20,6 +20,7 @@ import HeroOverlay from './hero/overlay';
 import HeroLogo from './hero/logo';
 import HeroStacked from './hero/stacked';
 import LogoBlock from './logo/block';
+import MediaInline from './media/inline';
 import PathwayHero from './pathway/hero';
 import PathwayHighlight from './pathway/highlight';
 import PathwayDefault from './pathway/default';
@@ -59,6 +60,7 @@ export {
   HeroLogo,
   HeroStacked,
   LogoBlock,
+  MediaInline,
   PathwayHero,
   PathwayHighlight,
   PathwayDefault,

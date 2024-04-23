@@ -18,6 +18,7 @@ import { Load as HeroLoader } from './hero/default';
 import { Load as HeroLogoLoader } from './hero/logo';
 import { Load as HeroMinimalLoader } from './hero/minimal';
 import { Load as LogoLoader } from './logo';
+import { Load as MediaInlineLoader } from './media/inline';
 import { Load as NavDrawerLoader } from './navigation/drawer';
 import { Load as NavHeader } from './navigation/header';
 import { Load as NavItemLoader } from './navigation/item';
@@ -53,6 +54,7 @@ export const Components = {
   HeroLogoLoader,
   HeroMinimalLoader,
   LogoLoader,
+  MediaInlineLoader,
   NavDrawerLoader,
   NavSliderLoader,
   NavItemLoader,

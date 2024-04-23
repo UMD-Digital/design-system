@@ -92,6 +92,7 @@ const CreateMediaInline = ({
   (() => {
     const elementContainer = document.createElement('div');
     const objectContainer = document.createElement('div');
+    const hasCaption = caption && caption !== null;
     const sizeCaption = () => {
       const imageContainer = elementContainer.querySelector(
         `.${LayoutImage.Elements.container}`,
@@ -104,9 +105,23 @@ const CreateMediaInline = ({
         caption.style.width = `${imageContainer.offsetWidth}px`;
       }
     };
+    const sizeObject = () => {
+      const elementSize = elementContainer.offsetWidth;
+      const objectContainer = elementContainer.querySelector(
+        `.${ELEMENT_MEDIA_OBJECT_CONTAINER}`,
+      ) as HTMLElement;
+      const objectSize = objectContainer.offsetWidth;
+
+      if (objectSize > elementSize / 2) {
+        objectContainer.style.float = `none`;
+      } else {
+        objectContainer.style.float = isAlignmentRight ? `right` : 'left';
+      }
+    };
     const eventResize = () => {
-      if (caption) {
+      if (hasCaption) {
         sizeCaption();
+        sizeObject();
       }
     };
 
@@ -121,7 +136,7 @@ const CreateMediaInline = ({
       );
     }
 
-    if (caption) {
+    if (hasCaption) {
       caption.classList.add(ELEMENT_MEDIA_OJBECT_CAPTION);
       objectContainer.appendChild(caption);
       setTimeout(() => {
@@ -136,6 +151,9 @@ const CreateMediaInline = ({
     if (wrappingText) {
       elementContainer.appendChild(wrappingText);
       elementContainer.setAttribute(ATTRIBUTE_IS_WRAPPING_TEXT, '');
+      setTimeout(() => {
+        sizeObject();
+      }, 100);
     }
 
     elementContainer.classList.add(ELEMENT_MEDIA_INLINE_CONTAINER);

@@ -21,10 +21,11 @@ import HeroLogo from './hero/logo';
 import HeroStacked from './hero/stacked';
 import LogoBlock from './logo/block';
 import MediaInline from './media/inline';
-import PathwayHero from './pathway/hero';
-import PathwayHighlight from './pathway/highlight';
 import PathwayDefault from './pathway/default';
 import PathwayElements from './pathway/elements';
+import PathwayHero from './pathway/hero';
+import PathwayHighlight from './pathway/highlight';
+import PathwayOverlay from './pathway/overlay';
 import PersonBlock from './person/block';
 import PersonList from './person/list';
 import PersonTabular from './person/tabular';
@@ -61,10 +62,11 @@ export {
   HeroStacked,
   LogoBlock,
   MediaInline,
-  PathwayHero,
-  PathwayHighlight,
   PathwayDefault,
   PathwayElements,
+  PathwayHero,
+  PathwayHighlight,
+  PathwayOverlay,
   PersonBlock,
   PersonList,
   PersonTabular,

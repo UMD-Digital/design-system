@@ -1,7 +1,8 @@
 import {
-  PathwayHero,
   PathwayDefault,
   PathwayElements,
+  PathwayHero,
+  PathwayOverlay,
   EventElements,
 } from 'elements';
 import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
@@ -18,6 +19,7 @@ const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
 const THEME_WHITE = 'white';
 const TYPE_HERO = 'hero';
+const TYPE_OVERLAY = 'overlay';
 
 export const ComponentStyles = `
   :host {
@@ -27,10 +29,11 @@ export const ComponentStyles = `
   ${Styles.ResetString}
   ${EventElements.Meta.Styles}
   ${EventElements.Sign.Styles}
-  ${PathwayDefault.Styles}
-  ${PathwayHero.Styles}
   ${PathwayElements.Image.Styles}
   ${PathwayElements.Text.Styles}
+  ${PathwayDefault.Styles}
+  ${PathwayHero.Styles}
+  ${PathwayOverlay.Styles}
 `;
 
 const MakeCommonData = ({
@@ -103,6 +106,14 @@ export const CreateShadowDom = ({
 
   if (type === TYPE_HERO) {
     return PathwayHero.CreateElement({
+      ...MakeCommonData({ element, theme }),
+    });
+  }
+
+  if (type === TYPE_OVERLAY) {
+    return PathwayOverlay.CreateElement({
+      theme,
+      isImageScaled,
       ...MakeCommonData({ element, theme }),
     });
   }

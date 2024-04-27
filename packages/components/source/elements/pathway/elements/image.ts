@@ -21,6 +21,10 @@ const OVERWRITE_SCALED_IMAGE_CONTAINER = `.${ELEMENT_PATHWAY_CONTAINER_IMAGE}${I
 
 // prettier-ignore
 const ImageSizeStyles = `
+  ${OVERWRITE_SCALED_IMAGE_CONTAINER} .${LayoutImage.Elements.container} {
+    justify-content: center;
+  }
+
   ${OVERWRITE_SCALED_IMAGE_CONTAINER} img {
     object-fit: contain;
     height: inherit;

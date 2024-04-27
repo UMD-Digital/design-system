@@ -3,7 +3,7 @@ import { Styles, Performance } from 'utilities';
 import { LayoutImage } from 'macros';
 
 export type TypeMediaInlineRequirements = {
-  image?: HTMLElement | null;
+  image?: HTMLImageElement | null;
   caption?: HTMLElement | null;
   wrappingText?: HTMLElement | null;
   isAlignmentRight?: boolean;
@@ -14,33 +14,13 @@ const { SansSmall } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 const { Debounce } = Performance;
 
+const BREAKPOINT = 400;
+
 const ATTRIBUTE_IS_WRAPPING_TEXT = 'is-wrapping-text';
-const ATTRIBUTE_ALIGNMENT = 'alignment';
-const ALIGNMENT_RIGHT = 'right';
 
 const ELEMENT_MEDIA_INLINE_CONTAINER = 'element-media-inline-container';
 const ELEMENT_MEDIA_OBJECT_CONTAINER = 'element-media-object-container';
 const ELEMENT_MEDIA_OJBECT_CAPTION = 'element-media-object-caption';
-
-const IS_WRAPPING = `[${ATTRIBUTE_IS_WRAPPING_TEXT}]`;
-const IS_ALIGNMENT_RIGHT = `[${ATTRIBUTE_ALIGNMENT}="${ALIGNMENT_RIGHT}"]`;
-
-const OVERWRITE_WRAPPING_TEXT_OBJECT = `.${ELEMENT_MEDIA_INLINE_CONTAINER}${IS_WRAPPING} .${ELEMENT_MEDIA_OBJECT_CONTAINER}`;
-const OVERWRITE_ALIGNMENT_RIGHT = `.${ELEMENT_MEDIA_INLINE_CONTAINER}${IS_ALIGNMENT_RIGHT} .${ELEMENT_MEDIA_OBJECT_CONTAINER}`;
-
-// prettier-ignore
-const OverwriteWrapping = `
-  ${OVERWRITE_WRAPPING_TEXT_OBJECT} {
-    float: left;
-    padding-right: ${Spacing.md};
-  }
-
-  ${OVERWRITE_ALIGNMENT_RIGHT} {
-    float: right;
-    padding-right: 0;
-    padding-left: ${Spacing.md};
-  }
-`
 
 // prettier-ignore
 const CaptionStyles = `
@@ -59,6 +39,7 @@ const CaptionStyles = `
   .${ELEMENT_MEDIA_OJBECT_CAPTION} {
     margin-top: ${Spacing.sm};
     color: ${Colors.gray.mediumAA};
+    display: inline-block;
   }
 `;
 
@@ -80,8 +61,27 @@ const STYLES_MEDIA_INLINE_ELEMENT = `
   ${LayoutImage.Styles}
   ${ObjectContainer}
   ${CaptionStyles}
-  ${OverwriteWrapping}
 `;
+
+const GetObjectSize = ({
+  elementContainer,
+  image,
+}: {
+  elementContainer: HTMLElement;
+  image: HTMLImageElement;
+}) => {
+  const containerSize = elementContainer.offsetWidth;
+  const imageWidth = image.naturalWidth;
+  const isMediumView = containerSize > BREAKPOINT;
+  let width = imageWidth;
+
+  if (isMediumView) {
+    const shouldMaxSized = imageWidth > containerSize / 2;
+    if (shouldMaxSized) width = containerSize / 2;
+  }
+
+  return width;
+};
 
 const CreateMediaInline = ({
   image,
@@ -103,20 +103,42 @@ const CreateMediaInline = ({
 
       if (caption) {
         caption.style.width = `${imageContainer.offsetWidth}px`;
+        caption.style.opacity = `1`;
       }
     };
     const sizeObject = () => {
-      const elementSize = elementContainer.offsetWidth;
+      const isAboveBreakPoint = elementContainer.offsetWidth > BREAKPOINT;
       const objectContainer = elementContainer.querySelector(
         `.${ELEMENT_MEDIA_OBJECT_CONTAINER}`,
       ) as HTMLElement;
-      const objectSize = objectContainer.offsetWidth;
 
-      if (objectSize > elementSize / 2) {
-        objectContainer.style.float = `none`;
+      if (!image) return;
+
+      if (isAboveBreakPoint) {
+        const objectSize = GetObjectSize({ elementContainer, image });
+
+        objectContainer.style.width = `${objectSize}px`;
+        objectContainer.style.display = 'inline-block';
+        objectContainer.style.textAlign = 'left';
+
+        if (isAlignmentRight) {
+          objectContainer.style.float = `right`;
+          objectContainer.style.paddingLeft = `${Spacing.md}`;
+        } else {
+          objectContainer.style.float = 'left';
+          objectContainer.style.paddingRight = `${Spacing.md}`;
+        }
       } else {
-        objectContainer.style.float = isAlignmentRight ? `right` : 'left';
+        objectContainer.style.width = '100%';
+        objectContainer.style.float = 'none';
+        objectContainer.style.textAlign = 'center';
+        objectContainer.style.paddingLeft = `0`;
+        objectContainer.style.paddingRight = `0`;
       }
+
+      setTimeout(() => {
+        sizeCaption();
+      }, 100);
     };
     const eventResize = () => {
       if (hasCaption) {
@@ -138,10 +160,8 @@ const CreateMediaInline = ({
 
     if (hasCaption) {
       caption.classList.add(ELEMENT_MEDIA_OJBECT_CAPTION);
+      caption.style.opacity = `0`;
       objectContainer.appendChild(caption);
-      setTimeout(() => {
-        sizeCaption();
-      }, 100);
     }
 
     if (objectContainer.children.length > 0) {
@@ -157,7 +177,6 @@ const CreateMediaInline = ({
     }
 
     elementContainer.classList.add(ELEMENT_MEDIA_INLINE_CONTAINER);
-    if (isAlignmentRight) elementContainer.setAttribute('alignment', 'right');
 
     window.addEventListener(
       'resize',

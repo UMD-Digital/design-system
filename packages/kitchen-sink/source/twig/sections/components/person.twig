@@ -4,7 +4,7 @@
 {% set logo = random(logoOptions) %}
 
 {% block page %}
-  <section>
+  <section style="padding-bottom: 50px;">
     <div class="umd-lock">
       <h1 class="page-heading">
         Person
@@ -778,6 +778,107 @@
             Specialty topic, specialty topic
           </p>
         </umd-element-person>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          <span class="type">Bio</span>
+          <span class="type-detail">Default</span>
+        </h3>
+
+        <umd-element-person-bio>
+          <img slot="image"
+            src="https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg"
+            alt="Image Description" />
+
+          <p slot="name">
+            Gregory F. Bell
+          </p>
+          <p slot="job-title">
+            Senior coordinator of Lorem Ipsum Initatives
+          </p>
+          <a href="https://google.com" slot="association">
+            Office of Division of Research
+          </a>
+          <p slot="pronouns">
+            he/him/his
+          </p>
+
+          <a slot="phone" href="tel:3013147734">301.314.7734</a>
+          <a slot="email" href="mailto:email@umd.edu">email@umd.edu</a>
+
+          <p slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="/"><span>View Profile</span></a>
+            </umd-element-call-to-action>
+          </p>
+
+          <div class="umd-rich-text" slot="description">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        </umd-element-person-bio>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock-smallest">
+        <h3 class="content-heading type-hr">
+          <span class="type">Bio</span>
+          <span class="type-detail">Full</span>
+        </h3>
+
+        <umd-element-person-bio type="full-image">
+          <img slot="image"
+            src="https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg"
+            alt="Image Description" />
+
+          <p slot="name">
+            Gregory F. Bell
+          </p>
+          <p slot="job-title">
+            Senior coordinator of Lorem Ipsum Initatives
+          </p>
+          <a href="https://google.com" slot="association">
+            Office of Division of Research
+          </a>
+          <p slot="pronouns">
+            he/him/his
+          </p>
+
+          <a slot="phone" href="tel:3013147734">301.314.7734</a>
+          <a slot="email" href="mailto:email@umd.edu">email@umd.edu</a>
+
+          <p slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="/"><span>View Profile</span></a>
+            </umd-element-call-to-action>
+          </p>
+
+          <div class="umd-rich-text" slot="description">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+        </umd-element-person-bio>
       </div>
     </section>
   </section>

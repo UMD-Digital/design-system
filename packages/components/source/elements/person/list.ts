@@ -4,7 +4,6 @@ import PersonTextContainer, { TypePersonProps } from './elements/text';
 
 type TypeListPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
-  theme?: string;
 };
 
 const { Spacing, Colors } = Tokens;

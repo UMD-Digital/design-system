@@ -25,7 +25,8 @@ import { Load as NavItemLoader } from './navigation/item';
 import { Load as NavSliderLoader } from './navigation/slider';
 import { Load as PathwayHighlightLoader } from './pathway/highlight';
 import { Load as PathwayLoader } from './pathway/default';
-import { Load as PersonLoader } from './person';
+import { Load as PersonLoader } from './person/default';
+import { Load as PersonBioLoader } from './person/bio';
 import { Load as QuoteLoader } from './quote';
 import { Load as StatLoader } from './stat';
 import { Load as SectionIntroLoader } from './section-intro/default';
@@ -61,6 +62,7 @@ export const Components = {
   PathwayLoader,
   PathwayHighlightLoader,
   PersonLoader,
+  PersonBioLoader,
   QuoteLoader,
   StatLoader,
   SectionIntroLoader,

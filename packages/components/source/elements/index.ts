@@ -27,6 +27,8 @@ import PathwayHero from './pathway/hero';
 import PathwayHighlight from './pathway/highlight';
 import PathwayOverlay from './pathway/overlay';
 import PersonBlock from './person/block';
+import PersonBio from './person/bio';
+import PersonBioFull from './person/bio-full';
 import PersonList from './person/list';
 import PersonTabular from './person/tabular';
 import QuoteElements from './quote/elements';
@@ -68,6 +70,8 @@ export {
   PathwayHighlight,
   PathwayOverlay,
   PersonBlock,
+  PersonBio,
+  PersonBioFull,
   PersonList,
   PersonTabular,
   QuoteElements,

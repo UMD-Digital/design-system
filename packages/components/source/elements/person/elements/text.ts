@@ -16,7 +16,7 @@ export type TypePersonProps = TypeContactProps & {
   pronouns?: HTMLElement | null;
   subText?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string;
+  theme?: string | null;
   displayType?: string;
 };
 
@@ -30,6 +30,7 @@ const THEME_DARK = 'dark';
 export const DISPLAY_TABULAR = 'tabular';
 
 const ELEMENT_PERSON_TEXT_CONTAINER = 'person-text';
+const ELEMENT_PERSON_TEXT_MAIN_WRAPPER = 'person-text-main-wrapper';
 const ELEMENT_PERSON_NAME_CONTAINER = 'person-name';
 const ELEMENT_PERSON_JOB_CONTAINER = 'person-job';
 const ELEMENT_PERSON_ASSOCIATION_CONTAINER = 'person-association';
@@ -350,6 +351,8 @@ const CreatePersonTextContainer = (person: TypePersonProps) => {
   container.classList.add(ELEMENT_PERSON_TEXT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
+  wrapper.classList.add(ELEMENT_PERSON_TEXT_MAIN_WRAPPER);
+
   if (name) {
     name.classList.add(ELEMENT_PERSON_NAME_CONTAINER);
     wrapper.appendChild(name);
@@ -395,6 +398,7 @@ export default {
   Styles: STYLES_PERSON_TEXT,
   Elements: {
     container: ELEMENT_PERSON_TEXT_CONTAINER,
+    mainWrapper: ELEMENT_PERSON_TEXT_MAIN_WRAPPER,
     name: ELEMENT_PERSON_NAME_CONTAINER,
   },
 };

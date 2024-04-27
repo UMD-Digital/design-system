@@ -8,7 +8,6 @@ import PersonTextContainer, {
 
 type TypeTabularPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
-  theme?: string;
 };
 
 const { Spacing, Colors } = Tokens;

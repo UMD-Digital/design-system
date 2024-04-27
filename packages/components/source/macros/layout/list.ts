@@ -110,7 +110,7 @@ const CreateListContainer = ({
   textContainer?: HTMLDivElement;
   imageContainer?: HTMLDivElement | null;
   personContainer?: HTMLDivElement | null;
-  theme?: string;
+  theme?: string | null;
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');

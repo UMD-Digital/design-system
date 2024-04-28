@@ -1,4 +1,5 @@
 import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
+import background from 'layout/background';
 
 const { Eyebrow } = Elements;
 const { Spacing, Colors, Queries } = Tokens;
@@ -59,6 +60,7 @@ const TailwingRight = {
   textTransform: 'uppercase',
   position: 'relative',
   overflow: 'hidden',
+  backgroundColor: `${Colors.white}`,
 
   '&::before': {
     content: '""',
@@ -68,13 +70,36 @@ const TailwingRight = {
     width: `100vw`,
     height: '1px',
     background: `${Colors.black}`,
-    zIndex: -1,
+    zIndex: 1,
   },
 
   '& > span': {
     position: 'relative',
-    backgroundColor: `${Colors.white}`,
+    backgroundColor: `inherit`,
     paddingRight: Spacing.min,
+    zIndex: 2,
+  },
+};
+
+const TailwingRightLight = {
+  ...TailwingRight,
+  backgroundColor: `${Colors.gray.lightest}`,
+
+  '&::before': {
+    background: `${Colors.gray.medium}`,
+  },
+};
+
+const TailwingRightDark = {
+  ...TailwingRight,
+  backgroundColor: `${Colors.gray.darker}`,
+
+  '&::before': {
+    background: `${Colors.white}`,
+  },
+
+  '& > span': {
+    color: `${Colors.white}`,
   },
 };
 
@@ -108,6 +133,12 @@ export default {
   },
   '.umd-tailwing-right-headline': {
     ...TailwingRight,
+  },
+  '.umd-tailwing-right-headline[theme="light"]': {
+    ...TailwingRightLight,
+  },
+  '.umd-tailwing-right-headline[theme="dark"]': {
+    ...TailwingRightDark,
   },
   '.umd-adjustent-line-text': {
     ...AdjustentLineText,

@@ -38,6 +38,23 @@ const BackgroundQuater = {
   },
 };
 
+const BackgroundBox = {
+  padding: `${Spacing.md}`,
+  backgroundColor: `${Colors.gray.lightest}`,
+
+  [`@media (${Queries.tablet.min})`]: {
+    padding: `${Spacing.lg}`,
+  },
+
+  [`@media (${Queries.desktop.min})`]: {
+    padding: `${Spacing['2xl']}`,
+  },
+};
+
+const BackgroundBoxDark = {
+  backgroundColor: `${Colors.gray.darker}`,
+};
+
 export default {
   '.umd-layout-background-color': {
     ...BackgroundPadding,
@@ -49,5 +66,11 @@ export default {
   },
   '.umd-layout-background-quater-color': {
     ...BackgroundQuater,
+  },
+  '.umd-layout-background-box': {
+    ...BackgroundBox,
+  },
+  '.umd-layout-background-box[theme="dark"]': {
+    ...BackgroundBoxDark,
   },
 };

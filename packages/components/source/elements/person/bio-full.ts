@@ -1,4 +1,4 @@
-import { Tokens, Elements } from '@universityofmaryland/variables';
+import { Tokens, Elements, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
@@ -11,6 +11,7 @@ type TypePersonBioFullProps = TypePersonProps & {
 const { ConvertJSSObjectToStyles } = Styles;
 const { Spacing, Colors } = Tokens;
 const { Text } = Elements;
+const { SansExtraLarge } = Typography;
 
 const SMALL = 650;
 
@@ -24,6 +25,38 @@ const ELEMENT_PERSON_BIO_FULL_DESCRIPTION = 'person-bio-full-description';
 const ELEMENT_PERSON_BIO_FULL_ACTIONS = 'person-bio-full-actions';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
+const OverwriteTextName = `.${ELEMENT_PERSON_BIO_FULL_CONTAINER} .${PersonTextContainer.Elements.name}`;
+
+const OverwriteThemeDarkDescription = `.${ELEMENT_PERSON_BIO_FULL_CONTAINER}${IS_THEME_DARK} .${ELEMENT_PERSON_BIO_FULL_DESCRIPTION}`;
+const OverwriteThemeDarkName = `.${ELEMENT_PERSON_BIO_FULL_CONTAINER}${IS_THEME_DARK} .${PersonTextContainer.Elements.name}`;
+
+const OverwriteThemeDark = `
+  ${OverwriteThemeDarkDescription} {
+    color: ${Colors.white};
+  }
+
+  ${OverwriteThemeDarkDescription} * {
+    color: ${Colors.white};
+  }
+
+  ${OverwriteThemeDarkName} {
+    color: ${Colors.white};
+  }
+`;
+
+const OverwriteText = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OverwriteTextName}`]: SansExtraLarge,
+    },
+  })}
+  
+  ${OverwriteTextName} {
+    color: ${Colors.black};
+    text-transform: uppercase;
+  }
+`;
 
 const ActionStyles = `
   .${ELEMENT_PERSON_BIO_FULL_ACTIONS} {
@@ -39,13 +72,13 @@ const DescriptionStyles = `
   })}
 
   .${ELEMENT_PERSON_BIO_FULL_DESCRIPTION} {
-    margin-top: ${Spacing.md};
+    margin-top: ${Spacing.lg};
   }
 `;
 
 const ImageStyles = `
   .${ELEMENT_PERSON_BIO_FULL_IMAGE} {
-    margin-bottom: ${Spacing.md};
+    margin-bottom: ${Spacing.lg};
   }
 `;
 
@@ -60,12 +93,17 @@ const STYLES_PERSON_BIO_FULL_ELEMENT = `
   ${ImageStyles}
   ${DescriptionStyles}
   ${ActionStyles}
+  ${OverwriteText}
+  ${OverwriteThemeDark}
 `;
 
 const CreatePersonBioFullElement = (props: TypePersonBioFullProps) => {
   const { theme, image, actions, description, ...newProps } = props;
   const elementContainer = document.createElement('div');
-  const textContainer = PersonTextContainer.CreateElement(newProps);
+  const textContainer = PersonTextContainer.CreateElement({
+    ...newProps,
+    theme,
+  });
 
   if (image) {
     image.classList.add(ELEMENT_PERSON_BIO_FULL_IMAGE);
@@ -78,12 +116,13 @@ const CreatePersonBioFullElement = (props: TypePersonBioFullProps) => {
     elementContainer.appendChild(description);
   }
 
-  elementContainer.classList.add(ELEMENT_PERSON_BIO_FULL_CONTAINER);
-
   if (actions) {
     actions.classList.add(ELEMENT_PERSON_BIO_FULL_ACTIONS);
     elementContainer.appendChild(actions);
   }
+
+  elementContainer.classList.add(ELEMENT_PERSON_BIO_FULL_CONTAINER);
+  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
 
   return elementContainer;
 };

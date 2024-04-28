@@ -76,11 +76,16 @@ const DescriptionStyles = `
 `;
 
 const WrapperStyles = `
+  .${ELEMENT_PERSON_BIO_WRAPPER} {
+    display: grid;
+    grid-gap: ${Spacing.md};
+  }
+
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_PERSON_BIO_WRAPPER} {
-      display: grid;
       grid-template-columns: repeat(8, 1fr);
       grid-gap: ${Spacing.lg};
+      align-items: center;
     }
   }
 

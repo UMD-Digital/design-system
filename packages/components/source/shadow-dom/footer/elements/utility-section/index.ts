@@ -15,7 +15,7 @@ import {
 
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
-const { Lock } = Layout;
+const { LockMax } = Layout;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -84,7 +84,7 @@ export const UtilityContainerStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER_LOCK}`]: Lock['.base']
+      [`.${UTILITY_CONTAINER_LOCK}`]: LockMax 
     },
   })}
 

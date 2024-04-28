@@ -15,7 +15,7 @@ type TypeHeroStackedProps = TypeTextContainerProps &
     isInterior: boolean;
   };
 
-const { Lock } = Layout;
+const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignExtralarge, CampaignLarge, SansLarger } = Typography;
@@ -135,7 +135,7 @@ export const STYLES_HERO_STACKED_ELEMENT = `
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: Lock['.base'],
+      [`.${ELEMENT_HERO_LOCK}`]: LockMax,
     },
   })}
   

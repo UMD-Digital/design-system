@@ -20,10 +20,28 @@ const lockBase = {
   },
 };
 
-const Lock = {
-  '.base': {
-    ...lockBase,
-  },
+const LockMax = {
+  ...lockBase,
 };
 
-export { Lock };
+const LockLarge = {
+  ...lockBase,
+  maxWidth: `${MaxWidth.large}`,
+};
+
+const LockNormal = {
+  ...lockBase,
+  maxWidth: `${MaxWidth.normal}`,
+};
+
+const LockSmall = {
+  ...lockBase,
+  maxWidth: `${MaxWidth.small}`,
+};
+
+const LockSmallest = {
+  ...lockBase,
+  maxWidth: `${MaxWidth.smallest}`,
+};
+
+export default { LockMax, LockLarge, LockNormal, LockSmall, LockSmallest };

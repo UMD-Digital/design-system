@@ -1,30 +1,25 @@
-import { Layout, Tokens } from '@universityofmaryland/variables';
+import { Layout } from '@universityofmaryland/variables';
 
-const { Lock } = Layout;
-const { MaxWidth } = Tokens;
+const { LockMax, LockLarge, LockNormal, LockSmall, LockSmallest } = Layout;
 
 export default {
   '.umd-lock': {
-    ...Lock['.base'],
+    ...LockMax,
   },
 
   '.umd-lock-small': {
-    ...Lock['.base'],
-    maxWidth: `${MaxWidth.large}`,
+    ...LockLarge,
   },
 
   '.umd-lock-smaller': {
-    ...Lock['.base'],
-    maxWidth: `${MaxWidth.normal}`,
+    ...LockNormal,
   },
 
   '.umd-lock-extra-small': {
-    ...Lock['.base'],
-    maxWidth: `${MaxWidth.small}`,
+    ...LockSmall,
   },
 
   '.umd-lock-smallest': {
-    ...Lock['.base'],
-    maxWidth: `${MaxWidth.smallest}`,
+    ...LockSmallest,
   },
 };

@@ -5,7 +5,7 @@ import TextContainer, { TypeTextContainerProps } from './elements/text';
 
 type TypeHeroMinimalProps = TypeTextContainerProps & TypeImageContainerProps;
 
-const { Lock } = Layout;
+const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { SansLargest, SansSmaller } = Typography;
 const { Node } = MarkupCreate;
@@ -174,7 +174,7 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: Lock['.base'],
+      [`.${ELEMENT_HERO_LOCK}`]: LockMax,
     },
   })}
 

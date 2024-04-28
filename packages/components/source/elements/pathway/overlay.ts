@@ -9,7 +9,7 @@ type TypePathwayOverlayProps = TypePathwayTextContainer &
   };
 
 const { Colors, Spacing } = Tokens;
-const { Lock } = Layout;
+const { LockMax } = Layout;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -125,7 +125,7 @@ const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_TEXT_WRAPPER}`]: Lock['.base'],
+        [`${OVERWRITE_TEXT_WRAPPER}`]: LockMax ,
       },
     })}
   }
@@ -146,7 +146,7 @@ const OverwriteTextContainerStyles = `
 const LockStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_OVERLAY_CONTAINER_LOCK}`]: Lock['.base'],
+      [`.${PATHWAY_OVERLAY_CONTAINER_LOCK}`]: LockMax,
     },
   })}
 

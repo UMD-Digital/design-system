@@ -11,7 +11,7 @@ import { UMDCarouselCardsElement } from '../index';
 
 const { ConvertJSSObjectToStyles, ResetString } = Styles;
 const { Colors, Spacing } = Tokens;
-const { Lock } = Layout;
+const { LockMax } = Layout;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { CARDS } = SLOTS;
@@ -69,7 +69,7 @@ const containerLockStyles = `
   .${CAROUSEL_LOCK} {
     position: relative;
     ${ConvertJSSObjectToStyles({
-      styleObj: Lock['.base'],
+      styleObj: LockMax ,
     })}
   }
 

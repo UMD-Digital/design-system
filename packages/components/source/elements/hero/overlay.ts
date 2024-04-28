@@ -10,7 +10,7 @@ import TextContainer, { TypeTextContainerProps } from './elements/text';
 
 type TypeHeroOverlayProps = TypeTextContainerProps & TypeImageContainerProps;
 
-const { Lock } = Layout;
+const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignExtralarge, SansLarger } = Typography;
@@ -132,7 +132,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: Lock['.base'],
+      [`.${ELEMENT_HERO_LOCK}`]: LockMax,
     },
   })}
 

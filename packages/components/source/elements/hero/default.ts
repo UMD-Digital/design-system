@@ -13,7 +13,7 @@ type TypeHeroDefaultProps = TypeTextContainerProps &
     isInterior: boolean;
   };
 
-const { Lock } = Layout;
+const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignMaxium, CampaignExtralarge, SansLarger } = Typography;
@@ -235,7 +235,7 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_LOCK}`]: Lock['.base'],
+      [`.${HERO_LOCK}`]: LockMax,
     },
   })}
   

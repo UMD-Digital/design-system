@@ -7,7 +7,7 @@ type TypeQuoteStatement = {
 
 const { Spacing } = Tokens;
 const { CampaignExtralarge, SansLarger } = Typography;
-const { Lock } = Layout;
+const { LockMax } = Layout;
 
 const MEDIUM = 1000;
 const LARGE = 1300;

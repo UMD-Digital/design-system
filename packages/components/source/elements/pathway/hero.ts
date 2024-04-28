@@ -12,7 +12,7 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
 
 const { Spacing } = Tokens;
 const { CampaignExtralarge, SansLarger } = Typography;
-const { Lock } = Layout;
+const { LockMax } = Layout;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -150,7 +150,7 @@ const OverwriteTextContainerStyles = `
 const LockStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: Lock['.base'],
+      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: LockMax,
     },
   })}
 

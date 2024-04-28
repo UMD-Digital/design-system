@@ -6,7 +6,7 @@ import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
-const { Lock } = Layout;
+const { LockMax } = Layout;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -63,7 +63,7 @@ export const RowLinkStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_CONTAINER_LOCK}`]: Lock['.base']
+      [`.${ROW_LINKS_CONTAINER_LOCK}`]: LockMax 
     },
   })}
 

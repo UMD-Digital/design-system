@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import TextLockupSmall from '../text-lockup/small';
 import ImageContainer from './image';
 
-const { Colors, Spacing } = Tokens;
+const { Colors, Spacing, MaxWidth } = Tokens;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -92,7 +92,7 @@ const WrapperStyles = `
 const STYLES_LIST_CONTAINER = `
   .${ELEMENT_LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: 750px;
+    max-width: ${MaxWidth.small};
   }
 
   ${WrapperStyles}

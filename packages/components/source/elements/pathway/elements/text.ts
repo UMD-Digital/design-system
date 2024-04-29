@@ -12,6 +12,7 @@ export type TypePathwayTextContainer = {
   text: HTMLElement | null;
   action: HTMLElement | null;
   eventDetails?: HTMLElement | null;
+  stats?: HTMLElement | null;
   theme?: string | null;
 };
 
@@ -37,6 +38,7 @@ const ELEMENT_TEXT_CONTAINER_EVENT_DETAILS = 'pathway-text-event-details';
 const ELEMENT_TEXT_CONTAINER_EYEBROW = 'pathway-text-eyebrow';
 const ELEMENT_TEXT_CONTAINER_RICH_TEXT = 'pathway-text-richtext';
 const ELEMENTS_TEXT_CONTAINER_ACTIONS = 'pathway-text-actions';
+const ELEMENTS_TEXT_CONTAINER_STATS = 'pathway-text-stats';
 
 const IS_THEME_DARK = `.${ELEMENT_TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_LIGHT = `.${ELEMENT_TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
@@ -155,6 +157,26 @@ const ActionStyles = `
 `;
 
 // prettier-ignore
+const StatsStyles = `
+  .${ELEMENTS_TEXT_CONTAINER_STATS} {
+    margin-top: ${Spacing['2xl']};
+  }
+
+  .${ELEMENTS_TEXT_CONTAINER_STATS}:has(> :nth-child(2)) {
+    display: grid;
+    grid-gap: ${Spacing.md};
+  }
+
+  @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    .${ELEMENTS_TEXT_CONTAINER_STATS}:has(> :nth-child(2)) {
+      grid-gap: ${Spacing.lg};
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+`;
+
+// prettier-ignore
 const STYLES_PATHWAY_TEXT_CONTAINER = `
   .${ELEMENT_TEXT_CONTAINER} {
     container: ${TEXT_CONTAINER_ELEMENT_NAME} / inline-size;
@@ -168,6 +190,7 @@ const STYLES_PATHWAY_TEXT_CONTAINER = `
   ${DetailsRowStyles}
   ${TextStyles}
   ${ActionStyles}
+  ${StatsStyles}
   ${VarationThemeDark}
   ${VarationThemeLight}
   ${VarationThemeMaryland}
@@ -179,6 +202,7 @@ const CreatePathwayTextContainer = ({
   eyebrow,
   text,
   action,
+  stats,
   theme,
 }: TypePathwayTextContainer) => {
   const container = document.createElement('div');
@@ -209,6 +233,11 @@ const CreatePathwayTextContainer = ({
   if (action) {
     action.classList.add(ELEMENTS_TEXT_CONTAINER_ACTIONS);
     wrapper.appendChild(action);
+  }
+
+  if (stats) {
+    stats.classList.add(ELEMENTS_TEXT_CONTAINER_STATS);
+    wrapper.appendChild(stats);
   }
 
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);

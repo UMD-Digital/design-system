@@ -17,6 +17,7 @@ const SLOTS = {
   START_DATE_ISO: 'start-date-iso',
   END_DATE_ISO: 'end-date-iso',
   LOCATION: 'location',
+  STATS: 'stats',
 };
 
 export class UMDPathwayElement extends HTMLElement {

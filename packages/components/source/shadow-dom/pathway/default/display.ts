@@ -52,6 +52,7 @@ const MakeCommonData = ({
     START_DATE_ISO,
     END_DATE_ISO,
     LOCATION,
+    STATS,
   } = element._slots;
   const startDateSlot = element.querySelector(`[slot="${START_DATE_ISO}"]`);
   const endDateSlot = element.querySelector(`[slot="${END_DATE_ISO}"]`);
@@ -67,6 +68,7 @@ const MakeCommonData = ({
     headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
     action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
+    stats: SlotWithDefaultStyling({ element, slotRef: STATS }),
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
     eventDetails: null as null | HTMLElement,
   };

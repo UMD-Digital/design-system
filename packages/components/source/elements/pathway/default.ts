@@ -2,6 +2,7 @@ import { Layout, Tokens } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, { TypePathwayImageContainer } from './elements/image';
+import text from './elements/text';
 
 type TypePathwayDefaultProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
@@ -162,15 +163,15 @@ const STYLES_PATHWAY_DEFAULT_ELEMENT = `
   ${OverwriteImagePositionStyles}
 `;
 
-const CreatePathwayDefaultElement = (element: TypePathwayDefaultProps) => {
+const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
+  const { isImageRight = true, theme } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
   const lockWrapper = document.createElement('div');
-  const { isImageRight = true, isImageScaled = true, theme } = element;
 
-  const textContainer = TextContainer.CreateElement(element);
-  const imageContainer = ImageContainer.CreateElement(element);
+  const textContainer = TextContainer.CreateElement(props);
+  const imageContainer = ImageContainer.CreateElement(props);
 
   container.classList.add(PATHWAY_DEFAULT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
@@ -185,6 +186,7 @@ const CreatePathwayDefaultElement = (element: TypePathwayDefaultProps) => {
   lockWrapper.classList.add(PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER);
 
   if (imageContainer) lockWrapper.appendChild(imageContainer);
+
   lockWrapper.appendChild(textContainer);
 
   lock.appendChild(lockWrapper);

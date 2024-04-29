@@ -274,3 +274,19 @@
     })
   }}
 {% endmacro %}
+
+{% macro TextPathwayHeadlineStringSuccinct() %}
+  {{
+    _self.HeadlineString({
+      characters: 20
+    })
+  }}
+{% endmacro %}
+
+{% macro TextPathwayHeadlineStringVerbose() %}
+  {{
+    _self.HeadlineString({
+      characters: 80
+    })
+  }}
+{% endmacro %}

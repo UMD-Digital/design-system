@@ -77,3 +77,27 @@
     })
   }}
 {% endmacro %}
+
+{% macro PathwayEyebrowStringSuccinct() %}
+  {{
+    _self.EyebrowString({
+      characters: 8
+    })
+  }}
+{% endmacro %}
+
+{% macro PathwayEyebrowStringNormal() %}
+  {{
+    _self.EyebrowString({
+      characters: 17
+    })
+  }}
+{% endmacro %}
+
+{% macro PathwayEyebrowStringVerbose() %}
+  {{
+    _self.EyebrowString({
+      characters: 40
+    })
+  }}
+{% endmacro %}

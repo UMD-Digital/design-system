@@ -49,6 +49,7 @@ const ObjectContainer = `
   .${ELEMENT_MEDIA_OBJECT_CONTAINER} {
     display: inline-block;
     padding-bottom: ${Spacing.sm};
+    max-width: 100%;
   }
 `;
 
@@ -93,6 +94,7 @@ const CreateMediaInline = ({
   (() => {
     const elementContainer = document.createElement('div');
     const objectContainer = document.createElement('div');
+    const hasWrappingtext = wrappingText && wrappingText !== null;
     const hasCaption = caption && caption !== null;
     const sizeCaption = () => {
       const imageContainer = elementContainer.querySelector(
@@ -142,9 +144,11 @@ const CreateMediaInline = ({
       }, 100);
     };
     const eventResize = () => {
+      if (hasWrappingtext) {
+        sizeObject();
+      }
       if (hasCaption) {
         sizeCaption();
-        sizeObject();
       }
     };
 
@@ -169,7 +173,7 @@ const CreateMediaInline = ({
       elementContainer.appendChild(objectContainer);
     }
 
-    if (wrappingText) {
+    if (hasWrappingtext) {
       elementContainer.appendChild(wrappingText);
       elementContainer.setAttribute(ATTRIBUTE_IS_WRAPPING_TEXT, '');
       setTimeout(() => {
@@ -186,6 +190,9 @@ const CreateMediaInline = ({
       }, 20),
     );
 
+    setTimeout(() => {
+      eventResize();
+    }, 100);
     return elementContainer;
   })();
 

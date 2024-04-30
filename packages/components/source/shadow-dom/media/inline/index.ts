@@ -29,11 +29,13 @@ const styles = `
 const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
   const { IMAGE, CAPTION, WRAPPING_TEXT } = element._slots;
   const isAlignmentRight = element.getAttribute('alignment') === 'right';
+  const hasWrappingText =
+    element.querySelector(`[slot="${WRAPPING_TEXT}"]`) !== null;
 
   return MediaInline.CreateElement({
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
     caption: SlotWithDefaultStyling({ element, slotRef: CAPTION }),
-    wrappingText: Node.slot({ type: WRAPPING_TEXT }),
+    wrappingText: hasWrappingText ? Node.slot({ type: WRAPPING_TEXT }) : null,
     isAlignmentRight,
   });
 };

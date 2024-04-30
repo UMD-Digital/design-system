@@ -98,6 +98,13 @@ const OverwriteImageContainerStyles = `
       top: 0;
       left: 0;
       bottom: 0;
+      height: 100%;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${OVERWRITE_IMAGE_CONTAINER} * {
+      height: 100%;
     }
   }
 

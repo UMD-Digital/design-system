@@ -44,11 +44,7 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE} .${LayoutImage.Elements.container} {
     height: 100%;
   }
-
-  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} * {
-    height: 100%;
-  }
-
+  
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE} img {
     object-fit: cover;
     object-position: center;

@@ -1,6 +1,7 @@
 {% extends '_layout.twig' %}
 
 {% import './sections/variables/_data.twig' as VariableList %}
+{% import './sections/components/_data.twig' as ComponentsList %}
 
 {% block page %}
   <section style="padding-bottom: 10vh">
@@ -13,6 +14,17 @@
       </h2>
       <div class="umd-grid-gap-three mb-md">
         {{ VariableList.Links() }}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-bottom: 10vh">
+    <div class="umd-lock">
+      <h2 class="umd-sans-extralarge-uppercase" style="margin-bottom: 40px;">
+        Components
+      </h2>
+      <div class="umd-grid-gap-three mb-md">
+        {{ ComponentsList.Links() }}
       </div>
     </div>
   </section>

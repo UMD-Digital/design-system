@@ -16,6 +16,7 @@ const { ConvertJSSObjectToStyles } = Styles;
 
 const SMALL = 400;
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_HAS_IMAGE = 'has-image';
 const THEME_DARK = 'dark';
 
 const LayoutListContainer = LayoutList.Elements.container;
@@ -27,6 +28,7 @@ const ELEMENT_NAME = 'umd-person-tabluar';
 const ELEMENT_PERSON_TABULAR_CONTAINER = 'person-tabluar-container';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_WITH_IMAGE = `[${ATTRIBUTE_HAS_IMAGE}]`;
 
 const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutImageContainer}`;
 const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer}`;
@@ -35,10 +37,20 @@ const OVERWRITE_PERSON_NAME = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutLis
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutImageContainer}`;
 
+const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_WITH_IMAGE} .${LayoutTextContainer}`;
+
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
       background-color: ${Colors.gray.dark};
+    }
+  }
+`;
+
+const OverwriteWithImageStyles = `
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${OVERWRITE_WITH_IMAGE_TEXT_CONTAINER} {
+      width: calc(100% - 120px);
     }
   }
 `;
@@ -89,18 +101,14 @@ const OverwriteTextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
       order: 2;
-      width: calc(100% - 120px);
       display: grid;
+      width: 100%;
       grid-template-columns: 1fr 1fr;
       grid-gap: ${Spacing.md};
     }
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_TEXT_CONTAINER} > *:nth-of-type(2) {
-      justify-self: end;
-    }
-  }
+
 `;
 
 // prettier-ignore
@@ -119,6 +127,7 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
   ${OverwriteThemeDarkStyles}
+  ${OverwriteWithImageStyles}
 `;
 
 const CreatePersonTabularElement = (props: TypeTabularPersonProps) => {
@@ -139,6 +148,7 @@ const CreatePersonTabularElement = (props: TypeTabularPersonProps) => {
 
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_PERSON_TABULAR_CONTAINER);
+  if (imageContainer) elementContainer.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
 
   return elementContainer;
 };

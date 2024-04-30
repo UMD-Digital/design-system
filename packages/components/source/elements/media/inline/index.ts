@@ -40,6 +40,7 @@ const CaptionStyles = `
     margin-top: ${Spacing.sm};
     color: ${Colors.gray.mediumAA};
     display: inline-block;
+    text-align: left;
   }
 `;
 

@@ -76,12 +76,6 @@ const VariantAlignedStyles = `
     object-position: center;
     width: 100%;
   }
-
-  @media (min-width: ${MEDIUM}px) {
-    ${IS_ALIGNED} img {
-      aspect-ratio: inherit;
-    }
-  }
 `;
 
 // prettier-ignore

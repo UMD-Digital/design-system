@@ -16,10 +16,22 @@ type TypeEventBlockProps = {
 };
 
 const { Spacing } = Tokens;
+const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-event-block';
 const ELEMENT_EVENT_BLOCK_CONTAINER = 'event-block-container';
 const ELEMENT_EVENT_BLOCK_DETAILS = 'event-block-details-wrapper';
+
+const OVERWRITE_IMAGE_CONTIANER = `.${ELEMENT_EVENT_BLOCK_CONTAINER} .${LayoutImage.Elements.container}`;
+
+// prettier-ignore
+const OverwriteImageContainer = `
+  @media (min-width: ${MEDIUM}px) {
+    ${OVERWRITE_IMAGE_CONTIANER} img {
+      aspect-ratio: inherit;
+    }
+  }
+`;
 
 // prettier-ignore
 const DetailsRowStyles = `
@@ -39,6 +51,7 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
   ${LayoutImage.Styles}
   ${LayoutBlock.Styles}
   ${DetailsRowStyles}
+  ${OverwriteImageContainer}
 `;
 
 const CreateEventBlockElement = (props: TypeEventBlockProps) => {

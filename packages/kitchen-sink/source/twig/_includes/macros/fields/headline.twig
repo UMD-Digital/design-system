@@ -52,7 +52,7 @@
   {% set characters = params.characters ?? true %}
 
   {% set string =
-    'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis'
+    'Amet Consectetur Adipiscing Consectetur Elit Iacut Quis Nostrud Quamie Amet Adipiscing Quiset Iacute'
   %}
 
   {% if
@@ -284,6 +284,70 @@
 {% endmacro %}
 
 {% macro TextPathwayHeadlineStringVerbose() %}
+  {{
+    _self.HeadlineString({
+      characters: 80
+    })
+  }}
+{% endmacro %}
+
+{% macro Headline15() %}
+  {{
+    _self.HeadlineString({
+      characters: 15
+    })
+  }}
+{% endmacro %}
+
+{% macro Headline20() %}
+  {{
+    _self.HeadlineString({
+      characters: 20
+    })
+  }}
+{% endmacro %}
+
+{% macro Headline25() %}
+  {{
+    _self.HeadlineString({
+      characters: 25
+    })
+  }}
+{% endmacro %}
+
+{% macro Headline30() %}
+  {{
+    _self.HeadlineString({
+      characters: 30
+    })
+  }}
+{% endmacro %}
+
+{% macro Headline40() %}
+  {{
+    _self.HeadlineString({
+      characters: 40
+    })
+  }}
+{% endmacro %}
+
+{% macro Headline45() %}
+  {{
+    _self.HeadlineString({
+      characters: 45
+    })
+  }}
+{% endmacro %}
+
+{% macro Headline50() %}
+  {{
+    _self.HeadlineString({
+      characters: 50
+    })
+  }}
+{% endmacro %}
+
+{% macro Headline80() %}
   {{
     _self.HeadlineString({
       characters: 80

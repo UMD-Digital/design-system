@@ -21,6 +21,8 @@ import HeroLogo from './hero/logo';
 import HeroStacked from './hero/stacked';
 import LogoBlock from './logo/block';
 import MediaInline from './media/inline';
+import MediaWithCaption from './media/inline/with-caption';
+import MediaWrapped from './media/inline/wrapped';
 import PathwayDefault from './pathway/default';
 import PathwayElements from './pathway/elements';
 import PathwayHero from './pathway/hero';
@@ -64,6 +66,8 @@ export {
   HeroStacked,
   LogoBlock,
   MediaInline,
+  MediaWithCaption,
+  MediaWrapped,
   PathwayDefault,
   PathwayElements,
   PathwayHero,

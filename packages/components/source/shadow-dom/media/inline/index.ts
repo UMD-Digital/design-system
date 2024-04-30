@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { MediaInline } from 'elements';
+import { MediaInline, MediaWithCaption, MediaWrapped } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
@@ -24,6 +24,8 @@ const styles = `
   
   ${Styles.ResetString}
   ${MediaInline.Styles}
+  ${MediaWithCaption.Styles}
+  ${MediaWrapped.Styles}
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
@@ -31,12 +33,31 @@ const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
   const isAlignmentRight = element.getAttribute('alignment') === 'right';
   const hasWrappingText =
     element.querySelector(`[slot="${WRAPPING_TEXT}"]`) !== null;
+  const hasCaption = element.querySelector(`[slot="${CAPTION}"]`) !== null;
+  const obj = {
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+    isAlignmentRight,
+  };
+
+  if (hasWrappingText) {
+    return MediaWrapped.CreateElement({
+      ...obj,
+      wrappingText: Node.slot({ type: WRAPPING_TEXT }),
+      caption: hasCaption
+        ? SlotWithDefaultStyling({ element, slotRef: CAPTION })
+        : null,
+    });
+  }
+
+  if (hasCaption) {
+    return MediaWithCaption.CreateElement({
+      ...obj,
+      caption: SlotWithDefaultStyling({ element, slotRef: CAPTION }),
+    });
+  }
 
   return MediaInline.CreateElement({
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
-    caption: SlotWithDefaultStyling({ element, slotRef: CAPTION }),
-    wrappingText: hasWrappingText ? Node.slot({ type: WRAPPING_TEXT }) : null,
-    isAlignmentRight,
   });
 };
 

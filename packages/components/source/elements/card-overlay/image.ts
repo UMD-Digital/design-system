@@ -19,6 +19,8 @@ const ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION = 'card-overlay-image-declaration';
 
 const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
 
+const OVERWRITE_DATE_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} .${TextLockupSmall.Elements.date}`;
+
 const OVERWRITE_CTA_ICON_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${TextLockupSmall.Elements.wrapper}`;
 
 const OverwriteCtaIcon = `
@@ -35,7 +37,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   }
 
   .${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} * {
-    color: ${Colors.white};
+    color: ${Colors.white} !important;
   }
 
   ${LayoutBlockOverlay.Styles}

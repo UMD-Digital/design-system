@@ -1,4 +1,7 @@
+import { Tokens } from '@universityofmaryland/variables';
 import { LayoutImage } from 'macros';
+
+const { Spacing } = Tokens;
 
 type TypeScaleProps = {
   isImageScaled: boolean;
@@ -23,6 +26,7 @@ const OVERWRITE_SCALED_IMAGE_CONTAINER = `.${ELEMENT_PATHWAY_CONTAINER_IMAGE}${I
 const ImageSizeStyles = `
   ${OVERWRITE_SCALED_IMAGE_CONTAINER} .${LayoutImage.Elements.container} {
     justify-content: center;
+    padding: 0 ${Spacing.md};
   }
 
   ${OVERWRITE_SCALED_IMAGE_CONTAINER} img {

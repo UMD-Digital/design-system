@@ -2,7 +2,6 @@ import { Layout, Tokens } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, { TypePathwayImageContainer } from './elements/image';
-import text from './elements/text';
 
 type TypePathwayDefaultProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {

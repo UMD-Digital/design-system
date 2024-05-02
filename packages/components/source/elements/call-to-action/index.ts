@@ -16,11 +16,13 @@ const ATTR_SIZE = 'size';
 const ATTR_THEME = 'theme';
 const SIZE_LARGE = 'large';
 const THEME_DARK = 'dark';
+const THEME_GOLD = 'gold';
 const TYPE_PRIMARY = 'primary';
 const TYPE_SECONDARY = 'secondary';
 const TYPE_OUTLINE = 'outline';
 
-const IS_DARK_THEME = `[${ATTR_THEME}="${THEME_DARK}"]`;
+const IS_THEME_DARK = `[${ATTR_THEME}="${THEME_DARK}"]`;
+const IS_THEME_GOLD = `[${ATTR_THEME}="${THEME_GOLD}"]`;
 const IS_LARGE_SIZE = `[${ATTR_SIZE}="${SIZE_LARGE}"]`;
 
 const ELEMENT_BASE_CTA = 'call-to-action';
@@ -31,6 +33,11 @@ const ELEMENT_CTA_SECONDARY = 'call-to-action-secondary';
 const ELEMENT_CTA_ANIMATION_WRAPPER = 'call-to-action-animation-wrapper';
 const ELEMENT_CTA_WRAPPER = 'call-to-action-wrapper';
 const ELEMENT_CTA_TEXT_WRAPPER = 'call-to-action-text-wrapper';
+
+const OVERWRITE_THEME_DARK_SECONDARY = `.${ELEMENT_CTA_SECONDARY}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_GOLD_SECONDARY = `.${ELEMENT_CTA_SECONDARY}${IS_THEME_GOLD}`;
+
+const OVERWRITE_THEME_DARK_OUTLINE = `.${ELEMENT_CTA_OUTLINE}${IS_THEME_DARK}`;
 
 // prettier-ignore
 const OverwriteSecondaryStyles = `
@@ -44,21 +51,41 @@ const OverwriteSecondaryStyles = `
 `;
 
 // prettier-ignore
-const OverwriteThemeStyles = `
-  .${ELEMENT_CTA_OUTLINE} ${IS_DARK_THEME} {
+const OverwriteThemeGoldStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_THEME_GOLD_SECONDARY} > span > span`]:
+      Link.LineSlideUnder.gold,
+    },
+  })}
+
+  ${OVERWRITE_THEME_GOLD_SECONDARY} svg,
+  ${OVERWRITE_THEME_GOLD_SECONDARY} path {
+    fill: ${Colors.gold};
+    transition: fill .5s;
+  }
+
+  ${OVERWRITE_THEME_GOLD_SECONDARY} {
+    color: ${Colors.white};
+  }
+`;
+
+// prettier-ignore
+const OverwriteThemeDarkStyles = `
+  ${OVERWRITE_THEME_DARK_OUTLINE} {
     background-color: transparent;
     border: 1px solid ${Colors.white};
     color: ${Colors.white};
   }
 
-  .${ELEMENT_CTA_OUTLINE}${IS_DARK_THEME}:hover,
-  .${ELEMENT_CTA_OUTLINE}${IS_DARK_THEME}:focus {
+  ${OVERWRITE_THEME_DARK_OUTLINE}:hover,
+  ${OVERWRITE_THEME_DARK_OUTLINE}:focus {
     background-color: ${Colors.white};
     border: 1px solid ${Colors.white};
     color: ${Colors.black};
   }
 
-  .${ELEMENT_CTA_SECONDARY}${IS_DARK_THEME} {
+  ${OVERWRITE_THEME_DARK_SECONDARY} {
     color: ${Colors.white};
   }
 `
@@ -195,7 +222,8 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
   ${OutlineStyles}
   ${SecondaryStyles}
   ${OverwriteSizeStyles}
-  ${OverwriteThemeStyles}
+  ${OverwriteThemeDarkStyles}
+  ${OverwriteThemeGoldStyles}
   ${OverwriteSecondaryStyles}
 `;
 

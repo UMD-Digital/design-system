@@ -82,7 +82,7 @@
 
   <umd-element-call-to-action {{ attrs }}>
     {% if isExternalLink %}
-      <a href="{{ url }}">
+      <a href="{{ url }}" target="_blank">
         {% if hasCtaLink %}
           {{ _self.CtaOptions(params.ctaOption) }}
         {% endif %}

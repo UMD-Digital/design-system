@@ -75,9 +75,15 @@ const OverwriteThemeGoldStyles = `
     color: ${Colors.black};
   }
 
+  ${OVERWRITE_THEME_GOLD_PRIMARY}:hover,
+  ${OVERWRITE_THEME_GOLD_PRIMARY}:focus {
+    background-color: ${Colors.gray.lighter};
+  }
+
   ${OVERWRITE_THEME_GOLD_PRIMARY} svg,
   ${OVERWRITE_THEME_GOLD_PRIMARY} path {
     fill: ${Colors.red};
+    margin-right: 5px;
   }
 `;
 

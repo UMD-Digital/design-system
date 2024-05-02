@@ -57,9 +57,7 @@ const VarationThemeDark = `
 
 // prettier-ignore
 const VarationThemeLight = `
-  ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
-    color: ${Colors.black};
-  }
+
 `
 
 // prettier-ignore

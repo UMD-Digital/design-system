@@ -151,10 +151,6 @@ const STYLES_PATHWAY_DEFAULT_ELEMENT = `
     overflow: hidden;
   }
 
-  .${PATHWAY_DEFAULT_CONTAINER} * {
-    color: ${Colors.black};
-  }
-
   ${LockStyles}
   ${LockWrapperStyles}
   ${OverwriteTextContainerStyles}

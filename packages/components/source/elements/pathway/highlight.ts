@@ -126,6 +126,7 @@ const HighlightContainer = `
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT},
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT} * {
     font-weight: 700;
+    color: ${Colors.black};
   }
   
   ${ConvertJSSObjectToStyles({
@@ -133,9 +134,17 @@ const HighlightContainer = `
       [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION}`]: Typography.SansMedium,
     },
   })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} *`]: Typography.SansMedium,
+    },
+  })}
   
-  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} {
+  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION},
+  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} * {
     margin-top: ${Spacing.sm};
+    color: ${Colors.black};
   }
 `
 

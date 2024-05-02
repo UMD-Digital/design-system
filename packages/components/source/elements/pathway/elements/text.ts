@@ -158,8 +158,18 @@ const ActionStyles = `
 
 // prettier-ignore
 const StatsStyles = `
-  .${ELEMENTS_TEXT_CONTAINER_STATS} {
-    margin-top: ${Spacing['2xl']};
+  @container ${TEXT_CONTAINER_ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
+    .${ELEMENTS_TEXT_CONTAINER_STATS} {
+      margin-top: ${Spacing.lg};
+      padding-top: ${Spacing.md};
+      border-top: 1px solid ${Colors.gray.light};
+    }
+  }
+
+  @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM }px) {
+    .${ELEMENTS_TEXT_CONTAINER_STATS} {
+      margin-top: ${Spacing['2xl']};
+    }
   }
 
   .${ELEMENTS_TEXT_CONTAINER_STATS}:has(> :nth-child(2)) {
@@ -173,7 +183,6 @@ const StatsStyles = `
       grid-template-columns: repeat(2, 1fr);
     }
   }
-
 `;
 
 // prettier-ignore

@@ -34,6 +34,8 @@ const ELEMENT_CTA_ANIMATION_WRAPPER = 'call-to-action-animation-wrapper';
 const ELEMENT_CTA_WRAPPER = 'call-to-action-wrapper';
 const ELEMENT_CTA_TEXT_WRAPPER = 'call-to-action-text-wrapper';
 
+const OVERWRITE_THEME_GOLD_PRIMARY = `.${ELEMENT_CTA_PRIMARY}${IS_THEME_GOLD}`;
+
 const OVERWRITE_THEME_DARK_SECONDARY = `.${ELEMENT_CTA_SECONDARY}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_GOLD_SECONDARY = `.${ELEMENT_CTA_SECONDARY}${IS_THEME_GOLD}`;
 
@@ -62,11 +64,20 @@ const OverwriteThemeGoldStyles = `
   ${OVERWRITE_THEME_GOLD_SECONDARY} svg,
   ${OVERWRITE_THEME_GOLD_SECONDARY} path {
     fill: ${Colors.gold};
-    transition: fill .5s;
   }
 
   ${OVERWRITE_THEME_GOLD_SECONDARY} {
     color: ${Colors.white};
+  }
+
+  ${OVERWRITE_THEME_GOLD_PRIMARY} {
+    background-color: ${Colors.white};
+    color: ${Colors.black};
+  }
+
+  ${OVERWRITE_THEME_GOLD_PRIMARY} svg,
+  ${OVERWRITE_THEME_GOLD_PRIMARY} path {
+    fill: ${Colors.red};
   }
 `;
 

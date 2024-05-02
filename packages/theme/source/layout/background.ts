@@ -47,7 +47,7 @@ const BackgroundBox = {
   },
 
   [`@media (${Queries.desktop.min})`]: {
-    padding: `${Spacing['2xl']}`,
+    padding: `${Spacing['3xl']}`,
   },
 };
 

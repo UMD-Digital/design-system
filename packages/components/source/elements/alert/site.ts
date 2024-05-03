@@ -34,13 +34,13 @@ const OVERWRITE_TEXT_BODY = `.${ELEMENT_ALERT_SITE_CONTAINER} .${AlertText.Eleme
 
 const OverwriteText = `
   ${OVERWRITE_TEXT_WRAPPER} {
-    max-width: ${MaxWidth.normal};
+    max-width: ${MaxWidth.large};
   }
 
   ${OVERWRITE_TEXT_BODY},
   ${OVERWRITE_TEXT_BODY} * {
     color: ${Colors.black};
-    max-width: ${MaxWidth.normal};
+    max-width: ${MaxWidth.large};
   }
 `;
 
@@ -79,16 +79,16 @@ const STYLES_ALERT_SITE_ELEMENT = `
   .${ELEMENT_ALERT_SITE_CONTAINER} {
     display: flex;
     position: relative;
-    padding: ${Spacing.lg};
-    padding-right: ${Spacing['2xl']};
+    padding: ${Spacing.lg} 0;
     gap: ${Spacing.lg};
     background-color: ${Colors.gold};
-    border-left: 8px solid ${Colors.red};
+    border-left: 4px solid ${Colors.red};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_SITE_CONTAINER} {
-      padding-right: ${Spacing.lg};
+      border-left: 8px solid ${Colors.red};
+      padding-right: ${Spacing['2xl']};
     }
   }
 
@@ -119,10 +119,7 @@ const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
     key: ALERT_LOCAL_STORAGE_KEY,
   });
 
-  if (!lastClosedTime) {
-    Storage.SetLocalString({ key: ALERT_LOCAL_STORAGE_KEY });
-    return true;
-  }
+  if (!lastClosedTime) return false;
 
   const daysUntilAlertDisplay = daysToHide
     ? parseInt(daysToHide)
@@ -131,7 +128,7 @@ const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
     lastClosedTime + millisecondsPerDay * daysUntilAlertDisplay;
   const futureTime = new Date(futureTimeStamp).getTime();
 
-  return now > futureTime;
+  return futureTime > now;
 };
 
 export const CreateAlertSiteElement = (props: TypeAlertProps) =>
@@ -140,9 +137,9 @@ export const CreateAlertSiteElement = (props: TypeAlertProps) =>
     const container = document.createElement('div');
     const lock = document.createElement('div');
     const textWrapper = AlertText.CreateElement(props);
-    const shouldShow = ShouldShow(props);
+    const shouldHide = ShouldShow(props);
 
-    // if (!shouldShow) container.style.display = 'none';
+    if (shouldHide) container.style.display = 'none';
 
     lock.classList.add(ELEMENT_ALERT_SITE_LOCK);
     lock.appendChild(textWrapper);

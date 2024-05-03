@@ -1,6 +1,6 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 
-const { Spacing, Queries } = Tokens;
+const { Spacing, Queries, Colors } = Tokens;
 
 const HeadlineLarge = {
   marginBottom: Spacing.sm,
@@ -47,13 +47,20 @@ const SidebarNavigation = {
 
   '& > *:first-child': {
     [`@media (${Queries.tablet.min})`]: {
-      maxWidth: '754px',
+      width: `calc(100% - 322px)`,
     },
   },
 
   '& > *:last-child': {
+    paddingTop: Spacing.md,
+    borderTop: `1px solid ${Colors.black}`,
+
+    [`@media (${Queries.large.max})`]: {
+      marginTop: Spacing['3xl'],
+    },
+
     [`@media (${Queries.tablet.min})`]: {
-      marginLeft: Spacing['max'],
+      marginLeft: Spacing['7xl'],
       width: '322px',
     },
   },

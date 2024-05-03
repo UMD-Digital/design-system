@@ -100,7 +100,7 @@ const OverwriteTextContainer = `
   
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding: ${Spacing['5xl']} 0 ${Spacing['3xl']};
+      padding: ${Spacing.lg} 0 ${Spacing['3xl']};
     }
   }
 `;

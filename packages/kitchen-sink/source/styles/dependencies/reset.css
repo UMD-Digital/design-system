@@ -20,12 +20,19 @@ h6 {
   font-weight: normal;
 }
 
+li {
+  @apply text-gray-dark;
+  @apply umd-sans-medium;
+}
+
 date {
   color: black;
 }
 
 p {
   margin-bottom: 20px;
+  @apply text-gray-dark;
+  @apply umd-sans-medium;
 }
 
 p:last-child {

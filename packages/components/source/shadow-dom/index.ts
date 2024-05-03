@@ -1,5 +1,5 @@
 import { Load as AccordionLoader } from './accordion';
-import { Load as AlertLoader } from './alert';
+import { Load as AlertLoader } from './alert/page';
 import { Load as ArticleLoader } from './article';
 import { Load as BreadcrumbLoader } from './breadcrumb';
 import { Load as CallToActionLoader } from './call-to-action';

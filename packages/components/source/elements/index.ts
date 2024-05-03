@@ -1,3 +1,4 @@
+import AlertPage from './alert/page';
 import CallToAction from './call-to-action';
 import CardBlock from './card/block';
 import CardList from './card/list';
@@ -43,6 +44,7 @@ import Stat from './stat';
 import StickyColumns from './sticky-columns';
 
 export {
+  AlertPage,
   CallToAction,
   CardBlock,
   CardList,

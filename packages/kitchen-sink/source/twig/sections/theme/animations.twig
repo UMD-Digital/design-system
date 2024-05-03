@@ -70,5 +70,711 @@
         </div>
       </div>
     </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Default Hero</span>
+          <span>With Video</span>
+        </div>
+      </div>
+
+      <umd-element-hero type="default">
+        <video slot="video"
+          loop=""
+          muted=""
+          webkit-playsinline=""
+          playsinline=""
+          autoplay=""
+          preload=""
+          poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+          <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+            type="video/mp4" />
+        </video>
+
+        <p slot="eyebrow">
+          Optional Eyebrow
+        </p>
+        <p slot="headline">
+          Amet Consectetur Adi
+        </p>
+        <p slot="text">
+          Tulla ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliq
+        </p>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary" theme="dark">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-hero>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Hero</span>
+          <span>Overlay with Video</span>
+        </div>
+      </div>
+
+      <umd-element-hero type="overlay" theme="dark">
+        <video slot="video"
+          loop=""
+          muted=""
+          webkit-playsinline=""
+          playsinline=""
+          autoplay=""
+          preload=""
+          poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+          <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+            type="video/mp4" />
+        </video>
+
+        <p slot="eyebrow">
+          Optional Eyebrow
+        </p>
+        <p slot="headline">
+          Amet Consectetur Adipiscing Co
+        </p>
+        <p slot="text">
+          Tulla ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliq
+        </p>
+
+        <div slot="actions">
+          <umd-element-call-to-action type="primary" theme="dark">
+            <a href="https://google.com" aria-label="link to google">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-hero>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Overlay Card</span>
+          <span>GIF with pause button</span>
+        </div>
+
+        <div class="umd-grid-gap-three my-md">
+          <umd-element-card-overlay type="image">
+            <img slot="image"
+              src="{{ GifImageOptions[0] }}"
+              alt="Example Alt Text" />
+
+            <div slot="eyebrow">
+              <p>
+                Optional Eyebrow
+              </p>
+            </div>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                <span class="sr-only">Text for Screen Reader</span>
+                <span aria-hidden="false">
+                  Lorem Ipsum Dolor Sit Amet Consectetur A
+                </span>
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut a
+              </p>
+            </div>
+
+            <div slot="date">
+              <date>
+                June 21, 2024
+              </date>
+            </div>
+
+            <umd-element-call-to-action slot="actions"
+              type="secondary"
+              theme="dark">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-card-overlay>
+
+          <umd-element-card-overlay type="image">
+            <img slot="image"
+              src="{{ GifImageOptions[1] }}"
+              alt="Example Alt Text" />
+
+            <div slot="eyebrow">
+              <p>
+                Optional Eyebrow
+              </p>
+            </div>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                <span class="sr-only">Text for Screen Reader</span>
+                <span aria-hidden="false">
+                  Lorem Ipsum Dolor Sit Amet Consectetur A
+                </span>
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut a
+              </p>
+            </div>
+
+            <div slot="date">
+              <date>
+                March 20, 2023
+              </date>
+            </div>
+
+            <umd-element-call-to-action slot="actions"
+              type="secondary"
+              theme="dark">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-card-overlay>
+
+          <umd-element-card-overlay type="image">
+            <img slot="image"
+              src="{{ GifImageOptions[2] }}"
+              alt="Example Alt Text" />
+
+            <div slot="eyebrow">
+              <p>
+                Optional Eyebrow
+              </p>
+            </div>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                <span class="sr-only">Text for Screen Reader</span>
+                <span aria-hidden="false">
+                  Lorem Ipsum Dolor Sit Amet Consectetur A
+                </span>
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut a
+              </p>
+            </div>
+
+            <div slot="date">
+              <date>
+                March 20, 2023
+              </date>
+            </div>
+
+            <umd-element-call-to-action slot="actions"
+              type="secondary"
+              theme="dark">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-card-overlay>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Display Promo Animations</span>
+          <span>Image, title, call to action animations on hover</span>
+        </div>
+
+        <umd-element-event display="promo">
+          <a slot="image" href="https://umd.edu" target="_blank">
+            <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&amp;h=1080&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1658178350&amp;s=ac382dd343b5fa928647cfd0542dad28"
+              alt="Example Alt Text" />
+          </a>
+
+          <h2 slot="headline">
+            <a href="https://umd.edu">
+              The 47th Annual Maryland Leadership Conference
+            </a>
+          </h2>
+
+          <div slot="text">
+            <p>
+              The 47th Annual Maryland Leadership Conference is a FREE, half-day
+              experience that is open to all UMD students.
+            </p>
+          </div>
+
+          <div slot="start-date-iso">
+            2024-04-12T12:00:00.000Z
+          </div>
+
+          <div slot="end-date-iso">
+            2024-04-12T17:30:00.000Z
+          </div>
+
+          <div slot="location">
+            Adele H. Stamp Student Union
+          </div>
+
+          <umd-element-call-to-action slot="actions"
+            type="secondary"
+            theme="dark">
+            <a href="/"><span>Learn More</span></a>
+          </umd-element-call-to-action>
+        </umd-element-event>
+      </div>
+    </section>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Carousel Cards</span>
+          <span>Animation on click/manual navigation</span>
+        </div>
+
+        <umd-element-carousel-cards resize="">
+          <h2 slot="headline">
+            <a href="https://umd.edu">
+              <span class="sr-only">Text for Screen Reader</span>
+              <span aria-hidden="true">Lorem Ipsum Dolor Sit Ame</span>
+            </a>
+          </h2>
+
+          <div slot="cards"
+            style="width: 668.8px; transition: none 0s ease 0s; transform: translateX(0px); display: flex; justify-content: space-between;">
+            <umd-element-card-overlay type="image"
+              style="width: 322.4px; height: 456px;">
+              <img slot="image"
+                src="https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg"
+                alt="Example Alt Text" />
+
+              <div slot="eyebrow">
+                <p>
+                  Optional Eyebrow
+                </p>
+              </div>
+
+              <h2 slot="headline">
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">
+                    Lorem Ipsum Dolor Sit Amet Consectetur A
+                  </span>
+                </a>
+              </h2>
+
+              <div slot="text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut a
+                </p>
+              </div>
+
+              <div slot="date">
+                <date>
+                  September 31, 2023
+                </date>
+              </div>
+
+              <umd-element-call-to-action slot="actions"
+                type="secondary"
+                theme="dark">
+                <a href="/"><span>Learn More</span></a>
+              </umd-element-call-to-action>
+            </umd-element-card-overlay>
+
+            <umd-element-card-overlay type="image"
+              style="width: 322.4px; height: 456px;">
+              <img slot="image"
+                src="https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg"
+                alt="Example Alt Text" />
+
+              <div slot="eyebrow">
+                <p>
+                  Optional Eyebrow
+                </p>
+              </div>
+
+              <h2 slot="headline">
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">
+                    Lorem Ipsum Dolor Sit Amet Consectetur A
+                  </span>
+                </a>
+              </h2>
+
+              <div slot="text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut a
+                </p>
+              </div>
+
+              <div slot="date">
+                <date>
+                  March 25, 2024
+                </date>
+              </div>
+
+              <umd-element-call-to-action slot="actions"
+                type="secondary"
+                theme="dark">
+                <a href="/"><span>Learn More</span></a>
+              </umd-element-call-to-action>
+            </umd-element-card-overlay>
+
+            <umd-element-card-overlay theme="dark"
+              style="width: 322.4px; height: 456px; display: none;">
+              <div slot="eyebrow">
+                <p>
+                  Optional Eyebrow
+                </p>
+              </div>
+
+              <h2 slot="headline">
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">
+                    Lorem Ipsum Dolor Sit Amet Consectetur A
+                  </span>
+                </a>
+              </h2>
+
+              <div slot="text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut a
+                </p>
+              </div>
+
+              <div slot="date">
+                <date>
+                  February 29, 2024
+                </date>
+              </div>
+
+              <umd-element-call-to-action slot="actions"
+                type="secondary"
+                theme="dark">
+                <a href="/"><span>Learn More</span></a>
+              </umd-element-call-to-action>
+            </umd-element-card-overlay>
+
+            <umd-element-card-overlay type="image"
+              style="width: 322.4px; height: 456px; display: none;">
+              <img slot="image"
+                src="https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg"
+                alt="Example Alt Text" />
+
+              <div slot="eyebrow">
+                <p>
+                  Optional Eyebrow
+                </p>
+              </div>
+
+              <h2 slot="headline">
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">
+                    Lorem Ipsum Dolor Sit Amet Consectetur A
+                  </span>
+                </a>
+              </h2>
+
+              <div slot="text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut a
+                </p>
+              </div>
+
+              <div slot="date">
+                <date>
+                  February 29, 2024
+                </date>
+              </div>
+
+              <umd-element-call-to-action slot="actions"
+                type="secondary"
+                theme="dark">
+                <a href="/"><span>Learn More</span></a>
+              </umd-element-call-to-action>
+            </umd-element-card-overlay>
+
+            <umd-element-card-overlay type="image"
+              style="width: 322.4px; height: 456px; display: none;">
+              <img slot="image"
+                src="https://brandportal.umd.edu/m/28973b679519d5c9/Square-HornbakeLibrary_03082023_HH_1859.jpg"
+                alt="Example Alt Text" />
+
+              <div slot="eyebrow">
+                <p>
+                  Optional Eyebrow
+                </p>
+              </div>
+
+              <h2 slot="headline">
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">
+                    Lorem Ipsum Dolor Sit Amet Consectetur A
+                  </span>
+                </a>
+              </h2>
+
+              <div slot="text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut a
+                </p>
+              </div>
+
+              <div slot="date">
+                <date>
+                  March 20, 2023
+                </date>
+              </div>
+
+              <umd-element-call-to-action slot="actions"
+                type="secondary"
+                theme="dark">
+                <a href="/"><span>Learn More</span></a>
+              </umd-element-call-to-action>
+            </umd-element-card-overlay>
+
+            <umd-element-card-overlay theme="dark"
+              style="width: 322.4px; height: 456px; display: none;">
+              <div slot="eyebrow">
+                <p>
+                  Optional Eyebrow
+                </p>
+              </div>
+
+              <h2 slot="headline">
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">
+                    Lorem Ipsum Dolor Sit Amet Consectetur A
+                  </span>
+                </a>
+              </h2>
+
+              <div slot="text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut a
+                </p>
+              </div>
+
+              <div slot="date">
+                <date>
+                  March 20, 2023
+                </date>
+              </div>
+
+              <umd-element-call-to-action slot="actions"
+                type="secondary"
+                theme="dark">
+                <a href="/"><span>Learn More</span></a>
+              </umd-element-call-to-action>
+            </umd-element-card-overlay>
+          </div>
+        </umd-element-carousel-cards>
+      </div>
+    </section>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Date Slider</span>
+          <span>Animation on click/manual navigation</span>
+        </div>
+
+        <umd-element-events-date-slider theme="light" resize="">
+          <div slot="headline">
+            Lorem Ipsum Dol
+          </div>
+
+          <umd-element-call-to-action slot="link"
+            type="secondary"
+            theme="light">
+            <a href="/"><span>CTA Link</span></a>
+          </umd-element-call-to-action>
+
+          <div slot="date-list"
+            style="display: flex; position: absolute; top: 0px; left: 0px; visibility: visible; width: 2100px; transform: translateX(-600px);">
+            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
+              <p slot="month">
+                Jul
+              </p>
+              <p slot="day">
+                01
+              </p>
+
+              <p slot="headline">
+                <a href="https://umd.edu">TerrapinSTRONG In Person</a>
+              </p>
+            </umd-element-events-date>
+
+            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
+              <p slot="month">
+                Feb
+              </p>
+              <p slot="day">
+                30
+              </p>
+
+              <p slot="headline">
+                Transparency in Teaching
+              </p>
+            </umd-element-events-date>
+
+            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
+              <p slot="month">
+                Jan
+              </p>
+              <p slot="day">
+                30
+              </p>
+
+              <p slot="headline">
+                Transparency in Teaching
+              </p>
+            </umd-element-events-date>
+
+            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
+              <p slot="month">
+                Oct
+              </p>
+              <p slot="day">
+                12
+              </p>
+
+              <p slot="headline">
+                <a href="https://umd.edu">Study Abroad Fair</a>
+              </p>
+            </umd-element-events-date>
+
+            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
+              <p slot="month">
+                Dec
+              </p>
+              <p slot="day">
+                07
+              </p>
+
+              <p slot="headline">
+                Study Abroad Fair
+              </p>
+            </umd-element-events-date>
+
+            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
+              <p slot="month">
+                Apr
+              </p>
+              <p slot="day">
+                25
+              </p>
+
+              <p slot="headline">
+                Transparency in Teaching
+              </p>
+            </umd-element-events-date>
+
+            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
+              <p slot="month">
+                May
+              </p>
+              <p slot="day">
+                13
+              </p>
+
+              <p slot="headline">
+                Disrupting Grind Culture
+              </p>
+            </umd-element-events-date>
+          </div>
+        </umd-element-events-date-slider>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Accordion</span>
+          <span>Animation on click/manual navigation</span>
+        </div>
+
+        <umd-element-accordion>
+          <umd-element-accordion-item class="mb-xs" theme="dark">
+            <div slot="headline">
+              Checklist for International Freshman
+            </div>
+
+            <div slot="body" class="umd-rich-text">
+              <p>
+                <strong>Duis reprehen</strong>
+                <i>eu fugiat</i>.
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">Excepteur occaecat</span>
+                </a>, voluptate.
+                <em>Nostrud</em>
+                <u>
+                  dolore nulla
+                </u>.
+              </p>
+            </div>
+          </umd-element-accordion-item>
+          <umd-element-accordion-item theme="dark" class="mb-xs">
+            <div slot="headline">
+              Checklist for International Transfers
+            </div>
+
+            <div slot="body" class="umd-rich-text">
+              <p>
+                <strong>Duis reprehen</strong>
+                <i>eu fugiat</i>.
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">Excepteur occaecat</span>
+                </a>, voluptate. dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat. Duis aute irure do
+                <em>Nostrud</em>
+                <u>
+                  dolore nulla
+                </u>.
+              </p>
+            </div>
+          </umd-element-accordion-item>
+        </umd-element-accordion>
+      </div>
+    </section>
   </div>
 {% endblock %}

@@ -30,3 +30,21 @@ section:not(:last-of-type) {
 .umd-section-headline {
   @apply umd-serif-medium mb-md text-red;
 }
+
+.typography-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+
+  & td {
+    padding: 10px 0;
+  }
+
+  & td p:first-child {
+    color: #757575;
+  }
+
+  & td:nth-child(3) {
+    color: #757575;
+  }
+}

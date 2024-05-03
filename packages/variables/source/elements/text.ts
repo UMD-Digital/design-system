@@ -1,12 +1,14 @@
 import { Colors } from '../tokens/colors';
 import { FontSize, FontWeight } from '../tokens/fonts';
 import { Spacing } from '../tokens/spacing';
+import { SansSmall, SansMedium } from '../typography/sans';
 import Animations from '../animations';
 import Lists from './list';
 
 const { Link } = Animations;
 
 const Base = {
+  ...SansSmall,
   lineHeight: '1.5em',
 
   '& > *': {
@@ -42,7 +44,7 @@ const Base = {
 
 const RichTextBase = {
   ...Base,
-  fontSize: `${FontSize.lg}`,
+  ...SansMedium,
 
   [`& p,
     & ul,
@@ -69,7 +71,7 @@ const Simple = {
 
 const SimpleLarge = {
   ...Base,
-  fontSize: `${FontSize.lg}`,
+  ...SansMedium,
 };
 
 const RichText = {
@@ -82,6 +84,10 @@ const RichText = {
 
 const RichTextDark = {
   color: Colors.white,
+
+  '& *': {
+    color: Colors.white,
+  },
 
   '& a': {
     ...Link.LineFadeUnder.dark,

@@ -82,13 +82,18 @@ const RichTextTables = {
 };
 
 export default {
+  '.umd-text-simple': {
+    ...Text.Simple,
+  },
+  '.umd-text-simple-large': {
+    ...Text.SimpleLarge,
+  },
   '.umd-rich-text': {
     ...Text.RichText,
     ...RichTextCoding['.umd-rich-text-coding'],
     ...RichTextQuotes['.umd-rich-text-inline-quote'],
     ...RichTextTables['.umd-rich-text-inline-table'],
   },
-
   '.umd-rich-text-dark': {
     ...Text.RichTextDark,
   },

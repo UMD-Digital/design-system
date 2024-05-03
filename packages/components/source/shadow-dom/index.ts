@@ -1,5 +1,6 @@
 import { Load as AccordionLoader } from './accordion';
-import { Load as AlertLoader } from './alert/page';
+import { Load as AlertPageLoader } from './alert/page';
+import { Load as AlertSiteLoader } from './alert/site';
 import { Load as ArticleLoader } from './article';
 import { Load as BreadcrumbLoader } from './breadcrumb';
 import { Load as CallToActionLoader } from './call-to-action';
@@ -35,7 +36,8 @@ import { Load as StickyColumns } from './stickly-columns';
 
 export const Components = {
   AccordionLoader,
-  AlertLoader,
+  AlertPageLoader,
+  AlertSiteLoader,
   ArticleLoader,
   BreadcrumbLoader,
   CardLoader,

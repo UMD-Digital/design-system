@@ -13,7 +13,7 @@ export type TypeAlertTextProps = {
   actions?: HTMLElement | null;
 };
 
-const { Colors, Spacing } = Tokens;
+const { Colors, Spacing, MaxWidth } = Tokens;
 const { Link } = Animations;
 const { SansLarge } = Typography;
 const { Text } = Elements;
@@ -58,16 +58,16 @@ const headlineStyles = `
 
 // prettier-ignore
 const bodyStyles = `
-  .${ELEMENT_ALERT_TEXT_BODY} * {
-    font-weight: 500;
-    color: ${Colors.gray.dark}
-  }
-
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_ALERT_TEXT_BODY}`]: Text.RichText,
     },
   })}
+
+  .${ELEMENT_ALERT_TEXT_BODY} * {
+    font-weight: 500;
+    color: ${Colors.gray.dark}
+  }
 `;
 
 // prettier-ignore
@@ -84,6 +84,10 @@ const ctaStyles = `
 `;
 
 const STYLES_ALERT_TEXT = `
+  .${ELEMENT_ALERT_TEXT_WRAPPER} {
+     max-width: ${MaxWidth.small};
+  }
+
   ${headlineStyles}
   ${bodyStyles}
   ${ctaStyles}
@@ -119,5 +123,6 @@ export default {
   Styles: STYLES_ALERT_TEXT,
   Elements: {
     wrapper: ELEMENT_ALERT_TEXT_WRAPPER,
+    textBody: ELEMENT_ALERT_TEXT_BODY,
   },
 };

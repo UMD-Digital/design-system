@@ -17,7 +17,6 @@ type TypeAlertButtonProps = {
 
 const { Colors, Spacing } = Tokens;
 
-const SMALL = 260;
 const MEDUM = 500;
 
 const ELEMENT_NAME = 'umd-element-alert-page';
@@ -69,12 +68,6 @@ const STYLES_ALERT_PAGE_ELEMENT = `
     border: solid 4px ${Colors.gold};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${SMALL}px) {
-    .${ELEMENT_ALERT_PAGE_CONTAINER} {
-      display: none
-    }
-  }
-
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_PAGE_CONTAINER} {
       padding-right: ${Spacing.lg};
@@ -122,7 +115,7 @@ export const CreateAlertPageElement = (props: TypeAlertProps) =>
     container.appendChild(CreateCloseButton({ container: elementContainer }));
 
     elementContainer.appendChild(container);
-    elementContainer.classList.add(ELEMENT_NAME);
+    elementContainer.classList.add(ELEMENT_ALERT_PAGE_DECLARATION);
 
     return elementContainer;
   })();

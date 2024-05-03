@@ -92,7 +92,7 @@ const OverwriteRichText = `
 // prettier-ignore
 const OverwriteTextContainer = `
   ${OVERWRITE_TEXT_CONTAINER} {
-    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
+    padding: ${Spacing.lg};
     display: flex;
     justify-content: center;
     text-align: center;

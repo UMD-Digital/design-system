@@ -24,7 +24,7 @@ const MAGNIFY_GLASS = `<svg aria-hidden="true" id="magnify-glass-icon"  width="9
 
 const NEW_WINDOW = `<svg id="new-window-icon" data-name="new-window-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><defs><style>.cls-1 {fill-rule: evenodd;}</style></defs><path class="cls-1" d="m48.91,15.78l27.79-.02-9.18,9.4H11v62.73h63.83v-54l9.34-9.57v26.66s11.78-12.12,11.78-12.12V15.75s.05,0,.05,0V4h-.04s-11.78,0-11.78,0h-23.14s-12.12,11.78-12.12,11.78Zm9.19,19.04l-15.76,16.14,8.01,8.01,14.67-15.02v34.3H20.82v-43.43h37.28Z"/></svg>`;
 
-const NOTIFICATION = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="#2F7EDA"/><rect x="22" y="30" width="4" height="13" transform="rotate(-180 22 30)" fill="white"/><rect width="4" height="4" transform="matrix(-1 -8.74228e-08 -8.74228e-08 1 22 11)" fill="white"/></svg>`;
+const NOTIFICATION = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="#ffd200"/><rect x="22" y="30" width="4" height="13" transform="rotate(-180 22 30)" fill="white"/><rect width="4" height="4" transform="matrix(-1 -8.74228e-08 -8.74228e-08 1 22 11)" fill="white"/></svg>`;
 
 const PAUSE = `<svg aria-hidden="true" id="pause-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 96 97" style="enable-background:new 0 0 96 97;" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><path class="st0" d="M36.6,8.8c0-0.6-0.4-1-1-1H21c-0.6,0-1,0.4-1,1v81c0,0.6,0.4,1,1,1h14.6c0.6,0,1-0.4,1-1V8.8z M75.6,8.8c0-0.6-0.4-1-1-1H60c-0.6,0-1,0.4-1,1v81c0,0.6,0.4,1,1,1h14.6c0.6,0,1-0.4,1-1V8.8z"/></svg>`;
 

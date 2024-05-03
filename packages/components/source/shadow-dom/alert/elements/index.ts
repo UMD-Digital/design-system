@@ -13,46 +13,10 @@ const { Colors, Spacing } = Tokens;
 const { SMALL } = BREAKPOINTS;
 const { ICON_CLASS } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
-const {
-  IS_TYPE_ALERT,
-  IS_TYPE_NOTIFICATION,
-  IS_TYPE_EMEMERGENCY,
-  IS_WITH_ICON,
-  IS_WITHOUT_ICON,
-} = REFERENCES;
+const { IS_WITH_ICON, IS_WITHOUT_ICON } = REFERENCES;
 
 const CONTAINER_CLASS = 'umd-element-alert-container';
 const CLOSE_BUTTON_CLASS = 'umd-element-alert-close-button';
-
-const AlertStyles = `
-  .${CONTAINER_CLASS}${IS_TYPE_ALERT} {
-    border: solid 4px ${Colors.gold};
-  }
-
-  .${CONTAINER_CLASS}${IS_TYPE_ALERT} .${ICON_CLASS} svg circle {
-    fill: ${Colors.gold};
-  }
-`;
-
-const NotificationStyles = `
-  .${CONTAINER_CLASS}${IS_TYPE_NOTIFICATION} {
-    border: solid 4px ${Colors.blue};
-  }
-
-  .${CONTAINER_CLASS}${IS_TYPE_NOTIFICATION} .${ICON_CLASS} svg circle {
-    fill: ${Colors.blue};
-  }
-`;
-
-const EmergencyStyles = `
-  .${CONTAINER_CLASS}${IS_TYPE_EMEMERGENCY} {
-    border: solid 4px ${Colors.red};
-  }
-
-  .${CONTAINER_CLASS}${IS_TYPE_EMEMERGENCY} .${ICON_CLASS} svg circle {
-    fill: ${Colors.red};
-  }
-`;
 
 const ButtonStyles = `
   .${CLOSE_BUTTON_CLASS} {
@@ -72,6 +36,7 @@ const ButtonStyles = `
 const IconStyles = `
   .${CONTAINER_CLASS}${IS_WITH_ICON} .${ICON_CLASS} {
     display: block;
+    fill: ${Colors.gold};
   }
 
   .${CONTAINER_CLASS}${IS_WITHOUT_ICON} .${ICON_CLASS} {
@@ -100,6 +65,7 @@ export const ComponentStyles = `
     padding: ${Spacing.lg};
     padding-right: ${Spacing['2xl']};
     gap: ${Spacing.lg};
+    border: solid 4px ${Colors.gold};
   }
 
   @container ${ELEMENT_NAME} (max-width: 260px) {
@@ -119,9 +85,6 @@ export const ComponentStyles = `
   ${headlineStyles}
   ${bodyStyles}
   ${ctaStyles}
-  ${AlertStyles}
-  ${NotificationStyles}
-  ${EmergencyStyles}
 `;
 
 const CreateIcon = ({ element }: { element: UMDAlertElement }) => {

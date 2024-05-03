@@ -10,14 +10,7 @@ import { ComponentStyles, CreateShadowDom } from './elements';
 import { ELEMENTS, VARIABLES } from './globals';
 
 const { ICON_CLASS } = ELEMENTS;
-const {
-  ELEMENT_NAME,
-  ATTRIBUTE_TYPE,
-  ATTRIBUTE_DAYS,
-  ATTRIBUTE_ICON,
-  TYPE_ALERT,
-  TYPE_NOTIFICATION,
-} = VARIABLES;
+const { ELEMENT_NAME, ATTRIBUTE_DAYS, ATTRIBUTE_ICON } = VARIABLES;
 
 export class UMDAlertElement extends HTMLElement {
   _shadow: ShadowRoot;
@@ -35,22 +28,10 @@ export class UMDAlertElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_TYPE, ATTRIBUTE_DAYS, ATTRIBUTE_ICON];
+    return [ATTRIBUTE_DAYS, ATTRIBUTE_ICON];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name === ATTRIBUTE_TYPE && newValue) {
-      const icon = this._container?.querySelector(`.${ICON_CLASS}`);
-      this._container?.setAttribute(ATTRIBUTE_TYPE, newValue);
-
-      if (!icon) return;
-      if (newValue === TYPE_NOTIFICATION) {
-        icon.innerHTML = AssetIcon.NOTIFICATION;
-      } else {
-        icon.innerHTML = AssetIcon.EXCLAMATION;
-      }
-    }
-
     if (name === ATTRIBUTE_DAYS && newValue) {
       this._defaultTime = parseInt(newValue);
     }
@@ -66,7 +47,6 @@ export class UMDAlertElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    const type = this.getAttribute(ATTRIBUTE_TYPE) || TYPE_ALERT;
     const days = this.getAttribute(ATTRIBUTE_DAYS) || '10';
     const isShowIcon = this.getAttribute(ATTRIBUTE_ICON) || 'true';
     const lastClosedTime = GetLocalString();
@@ -86,7 +66,6 @@ export class UMDAlertElement extends HTMLElement {
     }
 
     this._container = domContent;
-    this._container.setAttribute(ATTRIBUTE_TYPE, type);
     this._container.setAttribute(ATTRIBUTE_ICON, isShowIcon);
     this._shadow.appendChild(domContent);
   }

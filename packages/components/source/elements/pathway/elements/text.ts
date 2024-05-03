@@ -130,8 +130,8 @@ const TextStyles = `
     },
   })}
 
+  .${ELEMENT_TEXT_CONTAINER_RICH_TEXT},
   .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} * {
-    font-size: ${FontSize['lg']};
     line-height: 1.5em;
     color: ${Colors.gray.dark};
   }

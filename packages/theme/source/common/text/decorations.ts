@@ -79,6 +79,10 @@ const TailwingRight = {
     paddingRight: Spacing.min,
     zIndex: 2,
   },
+
+  '& + *': {
+    marginTop: Spacing.xl,
+  },
 };
 
 const TailwingRightLight = {

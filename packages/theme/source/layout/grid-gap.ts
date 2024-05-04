@@ -1,24 +1,31 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
-const { GridColumnsWithGap, GridColumnAndRowsMobileTablet } = Layout;
+const {
+  GridColumnsBaseWithGap,
+  GridColumnsThreeWithGap,
+  GridColumnsFourWithGap,
+  GridColumnAndRowsMobileTablet,
+} = Layout;
 const { Queries, Spacing } = Tokens;
 
 export const GridColumnsStandard = {
   '.umd-grid-gap': {
-    ...GridColumnsWithGap['.base'],
+    ...GridColumnsBaseWithGap,
   },
 
   '.umd-grid-gap-three': {
-    ...GridColumnsWithGap['.base-three'],
+    ...GridColumnsThreeWithGap,
   },
 
   '.umd-grid-gap-four': {
-    ...GridColumnsWithGap['.base-four'],
+    ...GridColumnsFourWithGap,
   },
 };
 
 const GridColumnsFeatured = {
-  ...GridColumnsWithGap,
+  ...GridColumnsBaseWithGap,
+  ...GridColumnsThreeWithGap,
+  ...GridColumnsFourWithGap,
 
   [`@media (${Queries.medium.min})`]: {
     gridGap: `${Spacing.md}`,

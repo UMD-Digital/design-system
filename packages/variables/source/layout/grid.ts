@@ -23,70 +23,64 @@ const GridGapBaseQueries = {
   },
 };
 
-const GridColumns = {
-  '.base': {
-    ...GridBase,
-    ...GridBaseQueries,
-  },
+const GridColumnsBase = {
+  ...GridBase,
+  ...GridBaseQueries,
+};
 
-  '.base-three': {
-    ...GridBase,
-    ...GridBaseQueries,
+const GridColumnsThree = {
+  ...GridBase,
+  ...GridBaseQueries,
 
-    [`@media (${Queries.desktop.min})`]: {
-      gridTemplateColumns: 'repeat(3, 1fr)',
-    },
-  },
-
-  '.base-four': {
-    ...GridBase,
-    ...GridBaseQueries,
-
-    [`@media (${Queries.highDef.min})`]: {
-      gridTemplateColumns: 'repeat(4, 1fr)',
-    },
+  [`@media (${Queries.desktop.min})`]: {
+    gridTemplateColumns: 'repeat(3, 1fr)',
   },
 };
 
-const GridColumnsWithGap = {
-  '.base': {
-    ...GridBase,
-    ...GridGapBaseQueries,
-    gridGap: Spacing.lg,
+const GridColumnsFour = {
+  ...GridBase,
+  ...GridBaseQueries,
 
-    [`@media (${Queries.desktop.min})`]: {
-      gridGap: Spacing.xl,
-    },
-  },
-
-  '.base-three': {
-    ...GridBase,
-    ...GridGapBaseQueries,
-    gridGap: Spacing.lg,
-
-    [`@media (${Queries.desktop.min})`]: {
-      gridTemplateColumns: 'repeat(3, 1fr)',
-      gridGap: Spacing.xl,
-    },
-  },
-
-  '.base-four': {
-    ...GridBase,
-    ...GridGapBaseQueries,
-    gridGap: Spacing.lg,
-
-    [`@media (${Queries.highDef.min})`]: {
-      gridTemplateColumns: 'repeat(4, 1fr)',
-      gridGap: Spacing.xl,
-    },
+  [`@media (${Queries.highDef.min})`]: {
+    gridTemplateColumns: 'repeat(4, 1fr)',
   },
 };
 
-const GridRowsWithGap = {
-  '.base': {
-    ...GridBase,
-    gridGap: Spacing.md,
+const GridColumnsBaseWithGap = {
+  ...GridBase,
+  ...GridGapBaseQueries,
+  gridGap: Spacing.lg,
+
+  [`@media (${Queries.desktop.min})`]: {
+    gridGap: Spacing.xl,
   },
+};
+
+const GridColumnsThreeWithGap = {
+  ...GridBase,
+  ...GridGapBaseQueries,
+  gridGap: Spacing.lg,
+
+  [`@media (${Queries.desktop.min})`]: {
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gridGap: Spacing.xl,
+  },
+};
+
+const GridColumnsFourWithGap = {
+  ...GridBase,
+  ...GridGapBaseQueries,
+  gridGap: Spacing.lg,
+
+  [`@media (${Queries.highDef.min})`]: {
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridGap: Spacing.xl,
+  },
+};
+
+const GridRowsWithGapBase = {
+  ...GridBase,
+  gridGap: Spacing.md,
 };
 
 const GridColumnAndRows = {
@@ -108,9 +102,13 @@ const GridColumnAndRowsMobileTablet = {
 };
 
 export default {
-  GridColumns,
-  GridColumnsWithGap,
-  GridRowsWithGap,
+  GridColumnsBase,
+  GridColumnsThree,
+  GridColumnsFour,
+  GridRowsWithGapBase,
+  GridColumnsBaseWithGap,
+  GridColumnsThreeWithGap,
+  GridColumnsFourWithGap,
   GridColumnAndRows,
   GridColumnAndRowsMobileTablet,
 };

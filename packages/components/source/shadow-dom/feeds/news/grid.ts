@@ -6,14 +6,7 @@ declare global {
 
 import { MarkupCreate, Styles } from 'utilities';
 import { FeedsNews } from 'elements';
-import { TypeNewsFeedRequirements } from 'elements/feeds/news';
-
-const ATTRIBUTE_TOKEN = 'token';
-const ATTRIBUTE_ROWS = 'row-count';
-const ATTRIBUTE_SHOW = 'show-count';
-const ATTRIBUTE_LAZYLOAD = 'lazyload';
-const ATTRIBUTE_CATEGORIES = 'categories';
-const ATTRIBUTE_UNION = 'union';
+import { CommonFeedNewsData } from './common';
 
 const styles = `
   :host {
@@ -36,28 +29,16 @@ class UMDFeedNewsGrid extends HTMLElement {
   }
 
   connectedCallback() {
-    const token = this.getAttribute(ATTRIBUTE_TOKEN);
-    const categoriesAttribute = this.getAttribute(ATTRIBUTE_CATEGORIES);
+    const data = CommonFeedNewsData({
+      element: this,
+      numberOfColumnsToShowDefault: 3,
+      numberOfRowsToStartDefault: 1,
+    });
+    if (!data) return;
 
-    if (!token) {
-      console.error(`${ELEMENT_NAME} requires a token to be set`);
-      return;
-    }
-
-    const data: TypeNewsFeedRequirements = {
-      token,
-      numberOfRowsToStart: Number(this.getAttribute(ATTRIBUTE_ROWS)) || 1,
-      numberOfColumnsToShow: Number(this.getAttribute(ATTRIBUTE_SHOW)) || 3,
-      isLazyLoad: this.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',
-      isUnion: this.getAttribute(ATTRIBUTE_UNION) !== 'false',
-      isTypeGrid: true,
-    };
-
-    if (categoriesAttribute) {
-      data.categories = categoriesAttribute.split(',');
-    }
-
-    this._shadow.appendChild(FeedsNews.CreateElement(data));
+    this._shadow.appendChild(
+      FeedsNews.CreateElement({ ...data, isTypeGrid: true }),
+    );
   }
 }
 

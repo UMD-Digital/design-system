@@ -29,7 +29,7 @@ class UMDFeedEventsGrid extends HTMLElement {
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     const data = CommonFeedEventsData({
       element: this,
       numberOfColumnsToShowDefault: 3,

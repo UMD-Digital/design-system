@@ -1,0 +1,46 @@
+import { TypeNewsFeedRequirements } from 'elements/feeds/news';
+
+const ATTRIBUTE_TOKEN = 'token';
+const ATTRIBUTE_ROWS = 'row-count';
+const ATTRIBUTE_SHOW = 'show-count';
+const ATTRIBUTE_LAZYLOAD = 'lazyload';
+const ATTRIBUTE_CATEGORIES = 'categories';
+const ATTRIBUTE_UNION = 'union';
+
+export const CommonFeedNewsData = ({
+  element,
+  numberOfColumnsToShowDefault = 1,
+  numberOfRowsToStartDefault = 5,
+}: {
+  element: HTMLElement;
+  numberOfColumnsToShowDefault?: number;
+  numberOfRowsToStartDefault?: number;
+}) => {
+  const token = element.getAttribute(ATTRIBUTE_TOKEN);
+  const categoriesAttribute = element.getAttribute(ATTRIBUTE_CATEGORIES);
+
+  if (!token) {
+    console.error(`Feed events requires a token to be set`);
+    return;
+  }
+
+  const numberOfRowsToStart =
+    Number(element.getAttribute(ATTRIBUTE_ROWS)) || numberOfRowsToStartDefault;
+  const numberOfColumnsToShow =
+    Number(element.getAttribute(ATTRIBUTE_SHOW)) ||
+    numberOfColumnsToShowDefault;
+
+  const data: TypeNewsFeedRequirements = {
+    token,
+    numberOfRowsToStart,
+    numberOfColumnsToShow,
+    isLazyLoad: element.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',
+    isUnion: element.getAttribute(ATTRIBUTE_UNION) !== 'false',
+  };
+
+  if (categoriesAttribute) {
+    data.categories = categoriesAttribute.split(',');
+  }
+
+  return data;
+};

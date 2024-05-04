@@ -6,15 +6,12 @@ declare global {
 
 import { SectionIntroWide } from 'elements';
 import { Styles, MarkupCreate } from 'utilities';
+import { SLOTS as CommonSlots, CommonIntroData } from '../common';
 
-const { SlotWithDefaultStyling, Node } = MarkupCreate;
+const { Node, SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-section-intro-wide';
 const ATTRIBUTE_THEME = 'theme';
-const SLOTS = {
-  HEADLINE: 'headline',
-  ACTIONS: 'actions',
-};
 
 const styles = `
   :host {
@@ -29,18 +26,14 @@ export const CreateShadowDom = ({
   element,
 }: {
   element: UMDSectionIntroElement;
-}) => {
-  const { HEADLINE, ACTIONS } = element._slots;
-  const theme = element.getAttribute(ATTRIBUTE_THEME);
-  const headline = SlotWithDefaultStyling({ element, slotRef: HEADLINE });
-  const actions = SlotWithDefaultStyling({ element, slotRef: ACTIONS });
-
-  return SectionIntroWide.CreateElement({
-    headline,
-    actions,
-    theme,
-  });
-};
+}) =>
+  SectionIntroWide.CreateElement(
+    CommonIntroData({
+      element,
+      slots: element._slots,
+      theme: element.getAttribute(ATTRIBUTE_THEME),
+    }),
+  );
 
 export class UMDSectionIntroElement extends HTMLElement {
   _shadow: ShadowRoot;
@@ -51,12 +44,22 @@ export class UMDSectionIntroElement extends HTMLElement {
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
+    this._slots = CommonSlots;
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
+    const element = this;
+    const shadowDom = this._shadow;
+
+    shadowDom.appendChild(CreateShadowDom({ element }));
+
+    SlotOberserver({
+      element,
+      shadowDom,
+      slots: CommonSlots,
+      CreateShadowDom,
+    });
   }
 }
 

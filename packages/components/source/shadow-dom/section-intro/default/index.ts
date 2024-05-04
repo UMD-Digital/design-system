@@ -6,15 +6,15 @@ declare global {
 
 import { SectionIntro } from 'elements';
 import { Styles, MarkupCreate } from 'utilities';
+import { SLOTS as CommonSlots, CommonIntroData } from '../common';
 
-const { SlotWithDefaultStyling, Node } = MarkupCreate;
+const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-section-intro';
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
 const ATTRIBUTE_THEME = 'theme';
 const SLOTS = {
-  HEADLINE: 'headline',
-  ACTIONS: 'actions',
+  ...CommonSlots,
   TEXT: 'text',
 };
 
@@ -31,22 +31,16 @@ export const CreateShadowDom = ({
   element,
 }: {
   element: UMDSectionIntroElement;
-}) => {
-  const { HEADLINE, ACTIONS, TEXT } = element._slots;
-  const hasSeparator = element.hasAttribute(ATTRIBUTE_WITH_SEPARATOR);
-  const theme = element.getAttribute(ATTRIBUTE_THEME);
-  const headline = SlotWithDefaultStyling({ element, slotRef: HEADLINE });
-  const text = SlotWithDefaultStyling({ element, slotRef: TEXT });
-  const actions = SlotWithDefaultStyling({ element, slotRef: ACTIONS });
-
-  return SectionIntro.CreateElement({
-    headline,
-    text,
-    actions,
-    hasSeparator,
-    theme,
+}) =>
+  SectionIntro.CreateElement({
+    ...CommonIntroData({
+      element,
+      slots: element._slots,
+      theme: element.getAttribute(ATTRIBUTE_THEME),
+    }),
+    text: SlotWithDefaultStyling({ element, slotRef: SLOTS.TEXT }),
+    hasSeparator: element.hasAttribute(ATTRIBUTE_WITH_SEPARATOR),
   });
-};
 
 export class UMDSectionIntroElement extends HTMLElement {
   _shadow: ShadowRoot;
@@ -62,7 +56,17 @@ export class UMDSectionIntroElement extends HTMLElement {
   }
 
   connectedCallback() {
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
+    const element = this;
+    const shadowDom = this._shadow;
+
+    shadowDom.appendChild(CreateShadowDom({ element }));
+
+    SlotOberserver({
+      element,
+      shadowDom,
+      slots: CommonSlots,
+      CreateShadowDom,
+    });
   }
 }
 

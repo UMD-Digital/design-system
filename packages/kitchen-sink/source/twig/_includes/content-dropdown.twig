@@ -4,15 +4,36 @@
       Choose content variation
     </label>
     <select id="content-variation" aria-live="polite">
-      <option value="content-succinct">
+      <option value="succinct">
         Succinct
       </option>
 
-      <option value="content-normal" selected="">
+      <option value="normal" selected="">
         Normal
       </option>
 
-      <option value="content-verbose">
+      <option value="verbose">
+        Verbose
+      </option>
+    </select>
+  </div>
+{% endmacro %}
+
+{% macro ContentVariationsJs() %}
+  <div class="umd-input-select">
+    <label class="sr-only" for="content-variation">
+      Choose content variation
+    </label>
+    <select id="content-variation-js" aria-live="polite">
+      <option value="succinct">
+        Succinct
+      </option>
+
+      <option value="normal" selected="">
+        Normal
+      </option>
+
+      <option value="verbose">
         Verbose
       </option>
     </select>

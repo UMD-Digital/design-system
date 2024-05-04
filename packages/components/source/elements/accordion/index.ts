@@ -30,6 +30,7 @@ type ActionAnimationProps = StateProps & {
 const { Colors, Spacing } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
 const { Debounce } = Performance;
+const { SansMedium, SansLarge } = Typography;
 
 const SMALL = 480;
 
@@ -44,26 +45,62 @@ const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 const ANIMATION_TIME = 500;
 
-const THEME_DARK_ATTR = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+
+const OVERWRITE_THEME_DARK_HEADLINE = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_HEADLINE}`;
+const OVERWRITE_THEME_DARK_BODY_WRAPPER = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_BODY_WRAPPER}`;
+const OVERWRITE_THEME_DARK_BODY = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_BODY}`;
+
+// prettier-ignore
+const OverwriteThemeDark = `
+  ${OVERWRITE_THEME_DARK_HEADLINE} {
+    background-color: ${Colors.black};
+  }
+
+  ${OVERWRITE_THEME_DARK_HEADLINE} > * {
+    color: ${Colors.white}
+  }
+
+  ${OVERWRITE_THEME_DARK_HEADLINE}:before,
+  ${OVERWRITE_THEME_DARK_HEADLINE}:after {
+    background-color: ${Colors.gold};
+  }
+
+  ${OVERWRITE_THEME_DARK_HEADLINE}[aria-expanded='true'],
+  ${OVERWRITE_THEME_DARK_HEADLINE}:hover,
+  ${OVERWRITE_THEME_DARK_HEADLINE}:focus {
+    background-color: ${Colors.gray.dark};
+    border-top: 1px solid ${Colors.gold};
+  }
+
+  ${OVERWRITE_THEME_DARK_HEADLINE}[aria-expanded='true'] > *,
+  ${OVERWRITE_THEME_DARK_HEADLINE}:hover > *,
+  ${OVERWRITE_THEME_DARK_HEADLINE}:focus > * {
+    color: ${Colors.gold};
+  }
+
+  ${OVERWRITE_THEME_DARK_BODY_WRAPPER} {
+    background-color: ${Colors.gray.darker};
+  }
+
+  ${OVERWRITE_THEME_DARK_BODY},
+  ${OVERWRITE_THEME_DARK_BODY} * {
+    color: ${Colors.white};
+  }
+`;
 
 // prettier-ignore
 const bodyStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_BODY_WRAPPER}`]: SansMedium
+    },
+  })}
+
   .${ELEMENT_BODY_WRAPPER} {
     background-color: ${Colors.gray.lightest};
     height: 0;
     overflow: hidden;
-  }
-
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_BODY_WRAPPER} {
-    background-color: ${Colors.gray.darker};
-  }
-
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_BODY} {
-    color: ${Colors.white} !important;
-  }
-
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_BODY} > * {
-    color: ${Colors.white} !important;
   }
 
   .${ELEMENT_BODY} {
@@ -89,22 +126,16 @@ const bodyStyles = `
       margin-top: ${Spacing.lg};
     }
   }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    .${ELEMENT_BODY}:first-child {
-      margin-top: 0;
-    }
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_BODY_WRAPPER}`]: Typography.SansMedium
-    },
-  })}
 `;
 
 // prettier-ignore
 const headlineStyles = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_HEADLINE}`]: SansLarge,
+    },
+  })}
+
   .${ELEMENT_HEADLINE} {
     display: flex;
     border-top: 1px solid transparent;
@@ -117,15 +148,7 @@ const headlineStyles = `
     text-align: left;
   }
 
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE} {
-    background-color: ${Colors.black};
-  }
-
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE} > * {
-    color: ${Colors.white}
-  }
-
-  .${ELEMENT_CONTAINER} .${ELEMENT_HEADLINE} > * {
+  .${ELEMENT_HEADLINE} > * {
     color: ${Colors.gray.dark}
   }
 
@@ -144,11 +167,6 @@ const headlineStyles = `
     right: ${Spacing.md};
     transition: background 0.5s, height 0.5s, right 0.5s, top 0.5s,
     transform 0.5s, width 0.5s;
-  }
-
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE}:before,
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE}:after {
-    background-color: ${Colors.gold};
   }
 
   .${ELEMENT_HEADLINE}:before {
@@ -186,35 +204,15 @@ const headlineStyles = `
     border-top: 1px solid ${Colors.red};
   }
 
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE}[aria-expanded='true'],
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE}:hover,
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE}:focus {
-    background-color: ${Colors.gray.dark};
-    border-top: 1px solid ${Colors.gold};
-  }
-
   .${ELEMENT_HEADLINE}[aria-expanded='true'] > *,
   .${ELEMENT_HEADLINE}:hover > *,
   .${ELEMENT_HEADLINE}:focus > * {
-    color: ${Colors.red} !important;
-  }
-
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE}[aria-expanded='true'] > *,
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE}:hover > *,
-  .${ELEMENT_CONTAINER}${THEME_DARK_ATTR} .${ELEMENT_HEADLINE}:focus > * {
-    color: ${Colors.gold} !important;
+    color: ${Colors.red};
   }
 
   .${ELEMENT_HEADLINE}[aria-expanded='true']:after {
     transform: rotate(90deg);
   }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_HEADLINE}`]:
-        Typography.SansLarge,
-    },
-  })}
 `;
 
 const STYLES_ACCORDION_ELEMENT = `
@@ -222,12 +220,9 @@ const STYLES_ACCORDION_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  .${ELEMENT_CONTAINER} {
-
-  }
-
   ${headlineStyles}
   ${bodyStyles}
+  ${OverwriteThemeDark}
 `;
 
 const CreateBody = ({ body, isOpen }: TypeBodyProps) => {
@@ -360,11 +355,11 @@ const CreateAccordionElement = (props: TypeAccordionProps) =>
     declaration.appendChild(container);
     declaration.classList.add(ELEMENT_DECLARATION);
 
-    window.addEventListener('resize', Debounce(resize, 20));
-
     if (shouldBeOpen) {
       SetOpen({ hasAnimation: false });
     }
+
+    window.addEventListener('resize', Debounce(resize, 20));
 
     return {
       element: declaration,

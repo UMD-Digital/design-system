@@ -1,3 +1,4 @@
+import Accordion from './accordion';
 import AlertPage from './alert/page';
 import AlertSite from './alert/site';
 import CallToAction from './call-to-action';
@@ -45,6 +46,7 @@ import Stat from './stat';
 import StickyColumns from './sticky-columns';
 
 export {
+  Accordion,
   AlertPage,
   AlertSite,
   CallToAction,

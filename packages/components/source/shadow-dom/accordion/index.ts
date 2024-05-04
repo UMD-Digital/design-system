@@ -4,36 +4,45 @@ declare global {
   }
 }
 
-import { Performance } from 'utilities';
-import { MarkupCreate } from 'utilities';
-import ComponentStyles, { CreateShadowDom } from './elements';
-import { ELEMENT_NAME, VARIABLES } from './globals';
-import { SetClosed, SetOpen } from './services/helper';
-import { EventSize } from './services/events';
+import { MarkupCreate, Styles } from 'utilities';
+import { Accordion } from 'elements';
 
-const { Debounce } = Performance;
+const { SlotWithDefaultStyling, Node } = MarkupCreate;
 
-const {
-  THEME_LIGHT,
-  ATTRIBUTE_THEME,
-  ATTRIBUTE_RESIZE,
-  ATTRIBUTE_STATE,
-  STATE_OPEN,
-  STATE_CLOSED,
-} = VARIABLES;
-export type ELEMENT_TYPE = UMDAccordionElement;
+const ELEMENT_NAME = 'umd-element-accordion-item';
+const ATTRIBUTE_RESIZE = 'resize';
+const ATTRIBUTE_STATE = 'state';
+const ATTRIBUTE_THEME = 'theme';
+const THEME_LIGHT = 'light';
+const STATE_OPEN = 'open';
+const STATE_CLOSED = 'closed';
+
+const SLOTS = { HEADLINE: 'headline', BODY: 'body' };
+
+const styles = `
+  :host {
+    display: block;
+  }
+
+  ${Styles.ResetString}
+  ${Accordion.Styles}
+`;
 
 export class UMDAccordionElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _theme = THEME_LIGHT;
-  _open = false;
+  _elementRef: {
+    element: HTMLDivElement;
+    events: {
+      SetOpen: (arg: { hasAnimation?: boolean }) => void;
+      SetClosed: (arg: { hasAnimation?: boolean }) => void;
+    };
+  } | null;
 
   constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-
-    const styles = `${ComponentStyles}`;
     const template = MarkupCreate.Node.stylesTemplate({ styles });
+    super();
+    this._elementRef = null;
+    this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
@@ -42,8 +51,10 @@ export class UMDAccordionElement extends HTMLElement {
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (!this._elementRef) return;
+
     if (name === ATTRIBUTE_RESIZE && newValue === 'true') {
-      SetOpen({ element: this, hasAnimation: false });
+      this._elementRef.events.SetOpen({ hasAnimation: false });
     }
 
     if (
@@ -51,7 +62,7 @@ export class UMDAccordionElement extends HTMLElement {
       newValue === STATE_CLOSED &&
       oldValue === STATE_OPEN
     ) {
-      SetClosed({ element: this });
+      this._elementRef.events.SetClosed({});
     }
 
     if (
@@ -59,27 +70,27 @@ export class UMDAccordionElement extends HTMLElement {
       newValue === STATE_OPEN &&
       oldValue === STATE_CLOSED
     ) {
-      SetOpen({ element: this });
+      this._elementRef.events.SetOpen({});
     }
   }
 
   connectedCallback() {
     const element = this;
-    const theme = element.getAttribute(ATTRIBUTE_THEME);
+    const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
     const state = element.getAttribute(ATTRIBUTE_STATE);
-    const isOpen = state && state === STATE_OPEN;
+    const shouldBeOpen = state === STATE_OPEN;
+    element._elementRef = Accordion.CreateElement({
+      theme,
+      shouldBeOpen,
+      body: Node.slot({ type: SLOTS.BODY }),
+      headline: SlotWithDefaultStyling({
+        element,
+        slotRef: SLOTS.HEADLINE,
+      }),
+    });
 
-    element._theme = theme || element._theme;
-    element._open = isOpen || element._open;
-    element._shadow.appendChild(CreateShadowDom({ element }));
-
-    const resize = () => {
-      EventSize({ element: element });
-    };
-
-    window.addEventListener('resize', Debounce(resize, 20));
-    if (element._open) {
-      SetOpen({ element: element, hasAnimation: false });
+    if (element._elementRef) {
+      element._shadow.appendChild(element._elementRef.element);
     }
   }
 }

@@ -6,19 +6,16 @@ declare global {
 
 import { PathwayHighlight, PathwayElements } from 'elements';
 import { Styles, MarkupCreate } from 'utilities';
+import { SLOTS as CommonSlots, CommonPathwayData } from '../common';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 const SLOTS = {
-  IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
+  ...CommonSlots,
   HIGHLIGHT: 'highlight',
   HIGHLIGHT_ATTRIBUTION: 'highlight-attribution',
 };
@@ -39,9 +36,7 @@ const CreateShadowDom = ({
 }: {
   element: UMDPathwayHighlightElement;
 }) => {
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } =
-    element._slots;
-
+  const { HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } = element._slots;
   const themeAttribute = element.getAttribute(ATTRIBUTE_THEME);
   let theme = null;
 
@@ -51,11 +46,10 @@ const CreateShadowDom = ({
   }
 
   return PathwayHighlight.CreateElement({
-    theme,
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
+    ...CommonPathwayData({
+      element,
+      slots: element._slots,
+    }),
     quote: SlotWithDefaultStyling({
       element,
       slotRef: HIGHLIGHT,
@@ -64,6 +58,7 @@ const CreateShadowDom = ({
       element,
       slotRef: HIGHLIGHT_ATTRIBUTION,
     }),
+    theme,
   });
 };
 
@@ -81,7 +76,17 @@ export class UMDPathwayHighlightElement extends HTMLElement {
   }
 
   connectedCallback() {
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
+    const element = this;
+    const shadowDom = this._shadow;
+
+    shadowDom.appendChild(CreateShadowDom({ element }));
+
+    SlotOberserver({
+      element,
+      shadowDom,
+      slots: CommonSlots,
+      CreateShadowDom,
+    });
   }
 }
 

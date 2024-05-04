@@ -6,14 +6,14 @@ declare global {
 
 import { MarkupCreate } from 'utilities';
 import { ComponentStyles, CreateShadowDom } from './display';
+import { SLOTS as CommonSlots } from '../common';
+
+const { SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-pathway';
 const SLOTS = {
+  ...CommonSlots,
   IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
   START_DATE_ISO: 'start-date-iso',
   END_DATE_ISO: 'end-date-iso',
   LOCATION: 'location',
@@ -36,7 +36,17 @@ export class UMDPathwayElement extends HTMLElement {
   }
 
   connectedCallback() {
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
+    const element = this;
+    const shadowDom = this._shadow;
+
+    shadowDom.appendChild(CreateShadowDom({ element }));
+
+    SlotOberserver({
+      element,
+      shadowDom,
+      slots: CommonSlots,
+      CreateShadowDom,
+    });
   }
 }
 

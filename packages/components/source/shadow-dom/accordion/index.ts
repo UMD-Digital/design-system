@@ -7,7 +7,7 @@ declare global {
 import { MarkupCreate, Styles } from 'utilities';
 import { Accordion } from 'elements';
 
-const { SlotWithDefaultStyling, Node } = MarkupCreate;
+const { SlotWithDefaultStyling, SlotOberserver, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-accordion-item';
 const ATTRIBUTE_RESIZE = 'resize';
@@ -27,6 +27,23 @@ const styles = `
   ${Styles.ResetString}
   ${Accordion.Styles}
 `;
+
+const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
+  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const state = element.getAttribute(ATTRIBUTE_STATE);
+  const shouldBeOpen = state === STATE_OPEN;
+  element._elementRef = Accordion.CreateElement({
+    theme,
+    shouldBeOpen,
+    body: Node.slot({ type: SLOTS.BODY }),
+    headline: SlotWithDefaultStyling({
+      element,
+      slotRef: SLOTS.HEADLINE,
+    }),
+  });
+
+  return element._elementRef.element;
+};
 
 export class UMDAccordionElement extends HTMLElement {
   _shadow: ShadowRoot;
@@ -76,22 +93,16 @@ export class UMDAccordionElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-    const state = element.getAttribute(ATTRIBUTE_STATE);
-    const shouldBeOpen = state === STATE_OPEN;
-    element._elementRef = Accordion.CreateElement({
-      theme,
-      shouldBeOpen,
-      body: Node.slot({ type: SLOTS.BODY }),
-      headline: SlotWithDefaultStyling({
-        element,
-        slotRef: SLOTS.HEADLINE,
-      }),
-    });
+    const shadowDom = this._shadow;
 
-    if (element._elementRef) {
-      element._shadow.appendChild(element._elementRef.element);
-    }
+    element._shadow.appendChild(CreateShadowDom({ element }));
+
+    SlotOberserver({
+      element,
+      shadowDom,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 }
 

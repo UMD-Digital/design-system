@@ -17,263 +17,186 @@
         Content Variations
       </h2>
 
-      {{ Dropdown.ContentVariations() }}
+      {{ Dropdown.ContentVariationsJs() }}
     </div>
   </section>
 
-  <div id="normal" class="dropdown-selection" aria-hidden="false">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading type-hr">
-          Light Variant (First Item Default Open)
-        </p>
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading type-hr">
+        Light Variant (First Item Default Open)
+      </p>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" state="open" resize>
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
+      <umd-element-accordion>
+        <umd-element-accordion-item class="mb-xs" state="open" resize>
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <p class="content-heading type-hr">
-          Light Variant (Default Closed)
-        </p>
+          <div slot="body" class="umd-rich-text">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
+          <div slot="body" class="umd-rich-text">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <p class="content-heading type-hr">
-          Dark Variant (First Item Default Open)
-        </p>
+          <div slot="body" class="umd-rich-text">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+      </umd-element-accordion>
+    </div>
+  </section>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs"
-            theme="dark"
-            state="open"
-            resize>
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading type-hr">
+        Light Variant (Default Closed)
+      </p>
 
-        <p class="content-heading type-hr">
-          Dark Variant (Default Closed)
-        </p>
+      <umd-element-accordion>
+        <umd-element-accordion-item class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" theme="dark">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineNormal() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-      </div>
-    </section>
-  </div>
+          <div slot="body" class="umd-rich-text">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-  <div id="succinct" class="dropdown-selection" aria-hidden="true">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading type-hr">
-          Light Variant (First Item Default Open)
-        </p>
+          <div slot="body" class="umd-rich-text">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" state="open" resize>
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
+          <div slot="body" class="umd-rich-text">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+      </umd-element-accordion>
+    </div>
+  </section>
 
-          <umd-element-accordion-item class="mb-xs" state="closed">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading type-hr">
+        Dark Variant (First Item Default Open)
+      </p>
 
-        <p class="content-heading type-hr">
-          Light Variant (Default Closed)
-        </p>
+      <umd-element-accordion>
+        <umd-element-accordion-item class="mb-xs"
+          theme="dark"
+          state="open"
+          resize>
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
+          <div slot="body" class="umd-rich-text-dark">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item theme="dark" class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <p class="content-heading type-hr">
-          Dark Variant (First Item Default Open)
-        </p>
+          <div slot="body" class="umd-rich-text-dark">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item theme="dark" class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs"
-            theme="dark"
-            state="open"
-            resize>
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
+          <div slot="body" class="umd-rich-text-dark">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+      </umd-element-accordion>
+    </div>
+  </section>
 
-        <p class="content-heading type-hr">
-          Dark Variant (Default Closed)
-        </p>
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading type-hr">
+        Dark Variant (Default Closed)
+      </p>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" theme="dark">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineSuccinct() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-      </div>
-    </section>
-  </div>
+      <umd-element-accordion>
+        <umd-element-accordion-item class="mb-xs" theme="dark">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-  <div id="verbose" class="dropdown-selection" aria-hidden="true">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading type-hr">
-          Light Variant (First Item Default Open)
-        </p>
+          <div slot="body" class="umd-rich-text-dark">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item theme="dark" class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" state="open" resize>
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
+          <div slot="body" class="umd-rich-text-dark">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+        <umd-element-accordion-item theme="dark" class="mb-xs">
+          <h2 slot="headline">
+            <a href="">Loading Example Headline Data</a>
+          </h2>
 
-        <p class="content-heading type-hr">
-          Light Variant (Default Closed)
-        </p>
-
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-
-        <p class="content-heading type-hr">
-          Dark Variant (First Item Default Open)
-        </p>
-
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs"
-            state="open"
-            resize
-            theme="dark">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-
-        <p class="content-heading type-hr">
-          Dark Variant (Default Closed)
-        </p>
-
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" theme="dark">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextSuccinct() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextNormal() }}
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            {{ Headline.AccordionHeadlineVerbose() }}
-            {{ RichText.AccordionRichTextVerbose() }}
-          </umd-element-accordion-item>
-        </umd-element-accordion>
-      </div>
-    </section>
-  </div>
+          <div slot="body" class="umd-rich-text-dark">
+            <p>
+              Loading Example Text Data
+            </p>
+          </div>
+        </umd-element-accordion-item>
+      </umd-element-accordion>
+    </div>
+  </section>
 {% endblock %}

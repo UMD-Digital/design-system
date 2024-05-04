@@ -88,15 +88,23 @@ const SlotOberserver = ({
 }) => {
   const observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
+      const ReloadElement = () => {
+        const firstChild = shadowDom.querySelector('div');
+
+        if (firstChild) {
+          firstChild.remove();
+          shadowDom.appendChild(CreateShadowDom({ element }));
+        }
+      };
+
       if (mutation.type === 'attributes') {
         if (mutation.attributeName === 'styled') {
-          const firstChild = shadowDom.querySelector('div');
-
-          if (firstChild) {
-            firstChild.remove();
-            shadowDom.appendChild(CreateShadowDom({ element }));
-          }
+          ReloadElement();
         }
+      }
+
+      if (mutation.type === 'childList') {
+        ReloadElement();
       }
     });
   });
@@ -107,7 +115,7 @@ const SlotOberserver = ({
     ) as HTMLSlotElement;
 
     if (slot) {
-      observer.observe(slot, { attributes: true });
+      observer.observe(slot, { attributes: true, childList: true });
     }
   });
 };

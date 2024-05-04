@@ -6,13 +6,7 @@ declare global {
 
 import { MarkupCreate, Styles } from 'utilities';
 import { FeedsEvents } from 'elements';
-import { TypeEventFeedRequirements } from 'elements/feeds/events';
-
-const ATTRIBUTE_TOKEN = 'token';
-const ATTRIBUTE_ROWS = 'row-count';
-const ATTRIBUTE_LAZYLOAD = 'lazyload';
-const ATTRIBUTE_CATEGORIES = 'categories';
-const ATTRIBUTE_UNION = 'union';
+import { CommonFeedEventsData } from './common';
 
 const styles = `
   :host {
@@ -38,27 +32,12 @@ class UMDFeedEventsList extends HTMLElement {
   }
 
   connectedCallback() {
-    const token = this.getAttribute(ATTRIBUTE_TOKEN);
-    const categoriesAttribute = this.getAttribute(ATTRIBUTE_CATEGORIES);
+    const data = CommonFeedEventsData({ element: this });
+    if (!data) return;
 
-    if (!token) {
-      console.error(`${ELEMENT_NAME} requires a token to be set`);
-      return;
-    }
-    const data: TypeEventFeedRequirements = {
-      token,
-      numberOfRowsToStart: Number(this.getAttribute(ATTRIBUTE_ROWS)) || 5,
-      numberOfColumnsToShow: 1,
-      isLazyLoad: this.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',
-      isUnion: this.getAttribute(ATTRIBUTE_UNION) !== 'false',
-      isTypeList: true,
-    };
-
-    if (categoriesAttribute) {
-      data.categories = categoriesAttribute.split(',');
-    }
-
-    this._shadow.appendChild(FeedsEvents.CreateElement(data));
+    this._shadow.appendChild(
+      FeedsEvents.CreateElement({ ...data, isTypeList: true }),
+    );
   }
 }
 

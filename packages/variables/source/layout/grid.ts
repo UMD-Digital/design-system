@@ -90,18 +90,20 @@ const GridRowsWithGap = {
 };
 
 const GridColumnAndRows = {
-  '.mobile-tablet': {
-    alignItems: 'flex-start',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: Spacing.sm,
-    justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: Spacing.sm,
+  justifyContent: 'flex-start',
+};
 
-    [`@media (${Queries.large.min})`]: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignItems: 'center',
-    },
+const GridColumnAndRowsMobileTablet = {
+  ...GridColumnAndRows,
+
+  [`@media (${Queries.large.min})`]: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
   },
 };
 
@@ -110,4 +112,5 @@ export default {
   GridColumnsWithGap,
   GridRowsWithGap,
   GridColumnAndRows,
+  GridColumnAndRowsMobileTablet,
 };

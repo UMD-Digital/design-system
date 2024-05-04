@@ -19,7 +19,7 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
 };
 
 const { Spacing, Colors } = Tokens;
-const { GridColumnAndRows } = Layout;
+const { GridColumnAndRowsMobileTablet } = Layout;
 const { SansExtraLarge, SansLarger, SansMedium, SansSmaller } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
@@ -167,7 +167,7 @@ const ActionStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },
   })}
 `;

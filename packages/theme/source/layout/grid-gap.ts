@@ -1,6 +1,6 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
-const { GridColumnsWithGap, GridColumnAndRows } = Layout;
+const { GridColumnsWithGap, GridColumnAndRowsMobileTablet } = Layout;
 const { Queries, Spacing } = Tokens;
 
 export const GridColumnsStandard = {
@@ -113,7 +113,7 @@ export default {
     ...GridColumnsFeatured,
   },
   '.umd-grid-row-mobile-tablet': {
-    ...GridColumnAndRows['.mobile-tablet'],
+    ...GridColumnAndRowsMobileTablet,
   },
   '.umd-grid-gap-masonry': {
     ...MasonryGrid,

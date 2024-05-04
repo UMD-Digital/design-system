@@ -17,7 +17,7 @@ const { Colors, Spacing, MaxWidth } = Tokens;
 const { Link } = Animations;
 const { SansLarge } = Typography;
 const { Text } = Elements;
-const { GridColumnAndRows } = Layout;
+const { GridColumnAndRowsMobileTablet } = Layout;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const ELEMENT_ALERT_TEXT_WRAPPER = 'alert-text-wrapper';
@@ -78,7 +78,7 @@ const ctaStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_TEXT_CTA}`]: GridColumnAndRows['.mobile-tablet'],
+      [`.${ELEMENT_ALERT_TEXT_CTA}`]: GridColumnAndRowsMobileTablet,
     },
   })}
 `;

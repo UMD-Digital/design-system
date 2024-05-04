@@ -18,7 +18,7 @@ export type TypePathwayTextContainer = {
 
 const { Spacing, Colors, FontSize } = Tokens;
 const { Eyebrow, Text } = Elements;
-const { GridColumnAndRows } = Layout;
+const { GridColumnAndRowsMobileTablet } = Layout;
 const { SansLargest } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
@@ -151,7 +151,7 @@ const ActionStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },
   })}
 `;

@@ -11,7 +11,7 @@ type TypeSectionIntroDefaultProps = {
 
 const { SansLargest, SansLarger, SansMedium } = Typography;
 const { Colors, Spacing, MaxWidth } = Tokens;
-const { GridColumnAndRows } = Layout;
+const { GridColumnAndRowsMobileTablet } = Layout;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -102,7 +102,7 @@ const ActionStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
+      [`.${ELEMENT_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },
   })}
 

@@ -20,7 +20,7 @@ const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { Text } = Elements;
 const { SansLarger, SansSmall, SansMin, Eyebrow } = Typography;
-const { GridColumnAndRows } = Layout;
+const { GridColumnAndRowsMobileTablet } = Layout;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -199,7 +199,7 @@ const ActionStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: GridColumnAndRows['.mobile-tablet'],
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },
   })}
 `;

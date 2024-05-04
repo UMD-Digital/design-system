@@ -7,7 +7,7 @@ declare global {
 import { Styles, MarkupCreate } from 'utilities';
 import { AlertSite } from 'elements';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-alert-site';
 const ATTRIBUTE_DAYS = 'days-to-hide';
@@ -27,6 +27,17 @@ export const styles = `
   ${AlertSite.Styles}
 `;
 
+const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
+  AlertSite.CreateElement({
+    headline: SlotWithDefaultStyling({
+      element,
+      slotRef: SLOTS.HEADLINE,
+    }),
+    text: SlotWithDefaultStyling({ element, slotRef: SLOTS.BODY }),
+    actions: SlotWithDefaultStyling({ element, slotRef: SLOTS.ACTIONS }),
+    daysToHide: element.getAttribute(ATTRIBUTE_DAYS) || '10',
+  });
+
 export class UMDAlertSiteElement extends HTMLElement {
   _shadow: ShadowRoot;
   _container: HTMLDivElement | null = null;
@@ -40,18 +51,16 @@ export class UMDAlertSiteElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
+    const shadowDom = this._shadow;
 
-    element._shadow.appendChild(
-      AlertSite.CreateElement({
-        text: SlotWithDefaultStyling({ element, slotRef: SLOTS.BODY }),
-        headline: SlotWithDefaultStyling({
-          element,
-          slotRef: SLOTS.HEADLINE,
-        }),
-        actions: SlotWithDefaultStyling({ element, slotRef: SLOTS.ACTIONS }),
-        daysToHide: this.getAttribute(ATTRIBUTE_DAYS) || '10',
-      }),
-    );
+    element._shadow.appendChild(CreateShadowDom({ element }));
+
+    SlotOberserver({
+      element,
+      shadowDom,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 }
 

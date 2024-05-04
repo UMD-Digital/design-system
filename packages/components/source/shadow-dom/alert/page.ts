@@ -7,7 +7,7 @@ declare global {
 import { Styles, MarkupCreate } from 'utilities';
 import { AlertPage } from 'elements';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-alert-page';
 const ATTRIBUTE_ICON = 'icon';
@@ -18,7 +18,7 @@ const SLOTS = {
   ACTIONS: 'actions',
 };
 
-export const styles = `
+const styles = `
   :host {
     display: block;
   }
@@ -26,6 +26,18 @@ export const styles = `
   ${Styles.ResetString}
   ${AlertPage.Styles}
 `;
+
+const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
+  AlertPage.CreateElement({
+    text: SlotWithDefaultStyling({ element, slotRef: SLOTS.BODY }),
+    headline: SlotWithDefaultStyling({
+      element,
+      slotRef: SLOTS.HEADLINE,
+    }),
+    actions: SlotWithDefaultStyling({ element, slotRef: SLOTS.ACTIONS }),
+
+    isShowIcon: element.getAttribute(ATTRIBUTE_ICON) === 'true',
+  });
 
 export class UMDAlertPageElement extends HTMLElement {
   _shadow: ShadowRoot;
@@ -40,19 +52,16 @@ export class UMDAlertPageElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
+    const shadowDom = this._shadow;
 
-    element._shadow.appendChild(
-      AlertPage.CreateElement({
-        text: SlotWithDefaultStyling({ element, slotRef: SLOTS.BODY }),
-        headline: SlotWithDefaultStyling({
-          element,
-          slotRef: SLOTS.HEADLINE,
-        }),
-        actions: SlotWithDefaultStyling({ element, slotRef: SLOTS.ACTIONS }),
+    element._shadow.appendChild(CreateShadowDom({ element }));
 
-        isShowIcon: this.getAttribute(ATTRIBUTE_ICON) === 'true',
-      }),
-    );
+    SlotOberserver({
+      element,
+      shadowDom,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 }
 

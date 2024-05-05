@@ -1,5 +1,14 @@
 const CreateVisualFormattedDate = (date: Date) => {
   return {
+    full: date.toLocaleString('en-US', {
+      timeZone: 'UTC',
+      month: 'short',
+      year: 'numeric',
+      day: 'numeric',
+    }),
+    dayOfWeekLong: date.toLocaleString('en-US', {
+      weekday: 'long',
+    }),
     dayOfWeek: date.toLocaleString('en-US', {
       weekday: 'short',
     }),
@@ -20,6 +29,14 @@ const CreateVisualFormattedDate = (date: Date) => {
   };
 };
 
+const CreateDateCompareString = (date: Date) => {
+  return {
+    // format date as "2021-09-01"
+    palindromeTruncated: date.toISOString().slice(0, 10),
+  };
+};
+
 export default {
   CreateVisualFormattedDate,
+  CreateDateCompareString,
 };

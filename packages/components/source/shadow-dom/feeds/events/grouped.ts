@@ -41,7 +41,7 @@ class UMDFeedEventsGrouped extends HTMLElement {
     this._shadow.appendChild(
       FeedsEvents.CreateElement({
         ...data,
-        isTypeList: true,
+        isTypeGrouped: true,
       }),
     );
   }

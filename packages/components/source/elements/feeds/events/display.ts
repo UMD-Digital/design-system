@@ -1,4 +1,5 @@
 import { EventBlock, EventList, EventElements } from 'elements';
+import { DateUtility } from 'utilities';
 
 type ImageType = {
   url: string;
@@ -11,6 +12,7 @@ type LocationType = {
 
 type DateInformaitonType = {
   startDayOfWeek: string;
+  startStamp: string;
   startMonth: string;
   startDay: string;
   startTime: string;
@@ -85,6 +87,66 @@ const CommonDisplay = ({ entry }: { entry: EventType }) => ({
   }),
 });
 
+const CreateEventsGrouped = ({ entries }: { entries: EventType[] }) => {
+  const currentDateStamp = new Date();
+  const weekFromDateStamp = new Date(
+    new Date().setDate(new Date().getDate() + 7),
+  );
+  const currentDate =
+    DateUtility.CreateDateCompareString(currentDateStamp).palindromeTruncated;
+  const weekDate =
+    DateUtility.CreateDateCompareString(weekFromDateStamp).palindromeTruncated;
+
+  const getDateBanner = (entry: EventType) => {
+    const entryDate = new Date(entry.startStamp);
+    const entryDatePalindrom =
+      DateUtility.CreateDateCompareString(entryDate).palindromeTruncated;
+    const formattedDate = DateUtility.CreateVisualFormattedDate(
+      new Date(entry.startStamp),
+    );
+
+    if (entryDatePalindrom === currentDate) {
+      return 'Today';
+    }
+
+    if (weekDate > entryDatePalindrom) {
+      return formattedDate.dayOfWeekLong;
+    }
+
+    return `${formattedDate.dayOfWeek}, ${formattedDate.month} ${formattedDate.day}`;
+  };
+  const entriesMapping = entries.map((entry) => ({
+    dateBanner: getDateBanner(entry),
+    html: EventList.CreateElement({
+      ...CommonDisplay({ entry }),
+      dateSign: EventElements.Sign.CreateElement(entry),
+    }),
+  }));
+  const groupTypes: Array<string> = entriesMapping
+    .reduce(
+      (acc, entry) => {
+        const banner: string = entry.dateBanner;
+        if (acc.indexOf(banner) < 0) acc.push(banner);
+
+        return acc;
+      },
+      [''],
+    )
+    .filter((banner) => banner !== '');
+  const groupEntriesMapping = groupTypes.map((groupType) => {
+    const groupEntries = entriesMapping.filter(
+      (entry) => entry.dateBanner === groupType,
+    );
+
+    return {
+      dateBanner: groupType,
+      entries: groupEntries.map((entry) => entry.html),
+    };
+  });
+
+  return groupEntriesMapping;
+};
+
 const CreateEventFeedDisplay = ({
   entries,
   isTypeGrid,
@@ -110,5 +172,6 @@ const CreateEventFeedDisplay = ({
 
 export default {
   CreateElement: CreateEventFeedDisplay,
+  CreateGroupedElement: CreateEventsGrouped,
   Styles: STYLES_EVENT_FEED,
 };

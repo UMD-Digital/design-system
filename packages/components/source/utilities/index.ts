@@ -4,6 +4,7 @@ import AssetIcon from './assets/icons';
 import AssetLogo from './assets/logos';
 import AssetSocial from './assets/social';
 import AssetServices from './assets/services';
+import DateUtility from './date';
 import MarkupCreate from './markup/create';
 import MarkupEvent from './markup/event';
 import MarkupLocate from './markup/locate';
@@ -21,6 +22,7 @@ export {
   AssetLogo,
   AssetSocial,
   AssetServices,
+  DateUtility,
   MarkupCreate,
   MarkupEvent,
   MarkupLocate,

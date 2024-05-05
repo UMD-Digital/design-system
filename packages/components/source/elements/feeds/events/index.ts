@@ -14,6 +14,7 @@ export type TypeEventFeedRequirements = {
   isUnion: boolean;
   isTypeGrid?: boolean;
   isTypeList?: boolean;
+  isTypeGrouped?: boolean;
 };
 
 type TypeFeedProps = TypeEventFeedRequirements & {
@@ -30,10 +31,28 @@ type TypeDisplayEntries = TypeFeedProps & {
 
 const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
 const ELEMENT_FEEDS_EVENTS_NO_RESULTS = 'feeds-events-no-results';
+const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
+const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
 
 const { ConvertJSSObjectToStyles } = Styles;
 const { Eyebrow } = Elements;
 const { Colors, Spacing, Breakpoints } = Tokens;
+
+const EventsGrouped = `
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE}`]: Eyebrow.Ribbon,
+    },
+  })}
+
+  .${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE} {
+    margin-bottom: ${Spacing.lg};
+  }
+
+  .${ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER} {
+    margin-bottom: ${Spacing.lg};
+  }
+`;
 
 const EventsNoResults = `
   .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
@@ -67,6 +86,7 @@ const STYLES_FEED_EVENT_ELEMENT = `
   ${AnimationLoader.Styles}
   ${FeedDisplay.Styles}
   ${EventsNoResults}
+  ${EventsGrouped}
 `;
 
 const NoResultsContent = {
@@ -111,7 +131,7 @@ const MakeLazyLoadVariables = (props: TypeFeedProps) => ({
   lazyLoadCallback: { callback: () => LoadMoreEntries(props) },
 });
 
-const DisplayEntries = (props: TypeDisplayEntries) => {
+const DisplayDefault = (props: TypeDisplayEntries) => {
   const { isTypeGrid, getContainer, setOffset, feedData } = props;
   const container = getContainer();
   const grid = container.querySelector(
@@ -123,12 +143,62 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   });
 
   setOffset(entries.length);
-
-  AnimationLoader.Remove({ container });
-  ButtonLazyLoad.Remove({ container });
   entries.forEach((entry) => {
     grid.appendChild(entry);
   });
+};
+
+const DisplayGrouped = (props: TypeDisplayEntries) => {
+  const { getContainer, setOffset, feedData } = props;
+  const container = getContainer();
+  const aggregatedEntries = FeedDisplay.CreateGroupedElement({
+    entries: feedData,
+  });
+  const entriesLength = aggregatedEntries.reduce((acc, entries) => {
+    return acc + entries.entries.length;
+  }, 0);
+
+  setOffset(entriesLength);
+
+  aggregatedEntries.forEach((group) => {
+    const id = `feeds-group-${group.dateBanner}`;
+    const existingGroup = container.querySelector(`#${id}`);
+
+    if (existingGroup) {
+      group.entries.forEach((entry) => {
+        existingGroup.appendChild(entry);
+      });
+    } else {
+      const groupContainer = document.createElement('div');
+      const groupHeader = document.createElement('h2');
+
+      groupHeader.innerHTML = group.dateBanner;
+      groupHeader.classList.add(ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE);
+
+      groupContainer.setAttribute('id', id);
+      groupContainer.classList.add(ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER);
+      groupContainer.appendChild(groupHeader);
+
+      group.entries.forEach((entry) => {
+        groupContainer.appendChild(entry);
+      });
+
+      container.appendChild(groupContainer);
+    }
+  });
+};
+
+const DisplayEntries = (props: TypeDisplayEntries) => {
+  const { isTypeGrouped, getContainer } = props;
+  const container = getContainer();
+
+  AnimationLoader.Remove({ container });
+  ButtonLazyLoad.Remove({ container });
+  if (isTypeGrouped) {
+    DisplayGrouped(props);
+  } else {
+    DisplayDefault(props);
+  }
   ButtonLazyLoad.Display(MakeLazyLoadVariables(props));
 };
 

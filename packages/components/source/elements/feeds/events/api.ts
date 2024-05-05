@@ -20,7 +20,7 @@ type TypeFetchObject = TypeAPIFeedVariables & {
 
 const { FetchGraphQL } = Network;
 
-const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
+const CALENDAR_PRODUCTION_URL = 'https://events.umd-staging.com/graphql';
 const NoResultsContent = {
   message: 'Error fetching events. Please visit the main site.',
   linkUrl: 'https://calendar.umd.edu',

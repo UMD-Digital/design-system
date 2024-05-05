@@ -7,14 +7,14 @@
         Feed Events Grouped (Not Completed)
       </h1>
 
-      <section style="max-width: 800px;">
+      {# <section style="max-width: 800px;">
         <h2 class="content-heading type-hr">
           No Results
         </h2>
 
         <umd-feed-events-grouped token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
           categories="104"></umd-feed-events-grouped>
-      </section>
+      </section> #}
 
       <section>
         <h2 class="content-heading type-hr">
@@ -22,8 +22,9 @@
           <span>Limit 10</span>
         </h2>
 
-        <div style="max-width: 800px; margin: 0 auto;">
-          <umd-feed-events-grouped token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-grouped>
+        <div style="max-width: 800px; margin: 50px auto;">
+          <umd-feed-events-grouped lazyload="true"
+            token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-grouped>
         </div>
       </section>
     </div>

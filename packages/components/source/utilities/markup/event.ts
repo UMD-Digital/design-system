@@ -1,4 +1,4 @@
-import DateUtility from '../date';
+import { DateUtility } from 'utilities';
 
 const CreateDate = ({ element }: { element: HTMLElement | Element | null }) => {
   if (element && element.textContent) {

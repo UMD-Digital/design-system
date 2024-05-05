@@ -12,8 +12,9 @@ import { Load as EventDateLoader } from './event/lockup';
 import { Load as EventDateSliderLoader } from './slider/events';
 import { Load as FeedNewsGridLoader } from './feeds/news/grid';
 import { Load as FeedNewsListLoader } from './feeds/news/list';
-import { Load as EventsNewsGridLoader } from './feeds/events/grid';
-import { Load as EventsNewsListLoader } from './feeds/events/list';
+import { Load as FeedEventsGridLoader } from './feeds/events/grid';
+import { Load as FeedEventsGroupedLoader } from './feeds/events/grouped';
+import { Load as FeedEventsListLoader } from './feeds/events/list';
 import { Load as FooterLoader } from './footer';
 import { Load as HeroLoader } from './hero/default';
 import { Load as HeroLogoLoader } from './hero/logo';
@@ -49,8 +50,9 @@ export const Components = {
   EventDateSliderLoader,
   FeedNewsGridLoader,
   FeedNewsListLoader,
-  EventsNewsGridLoader,
-  EventsNewsListLoader,
+  FeedEventsGridLoader,
+  FeedEventsGroupedLoader,
+  FeedEventsListLoader,
   FooterLoader,
   NavHeader,
   HeroLoader,

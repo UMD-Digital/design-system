@@ -16,11 +16,11 @@ const Spacing = {
 };
 
 const MaxWidth = {
-  max: '1600px',
-  large: '1412px',
-  normal: '1170px',
-  small: '832px',
-  smallest: '800px',
+  max: '1728px',
+  large: '1552px',
+  normal: '1234',
+  small: '1056px',
+  smallest: '880px',
 };
 
 export { Spacing, MaxWidth };

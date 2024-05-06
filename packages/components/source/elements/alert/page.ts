@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { Animation, AssetIcon, Storage } from 'utilities';
+import { Animation, AssetIcon } from 'utilities';
 import AlertText, { TypeAlertTextProps } from './elements/text';
 
 type TypeShouldShowProps = {

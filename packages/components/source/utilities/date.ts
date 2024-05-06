@@ -7,15 +7,19 @@ const CreateVisualFormattedDate = (date: Date) => {
       day: 'numeric',
     }),
     dayOfWeekLong: date.toLocaleString('en-US', {
+      timeZone: 'UTC',
       weekday: 'long',
     }),
     dayOfWeek: date.toLocaleString('en-US', {
+      timeZone: 'UTC',
       weekday: 'short',
     }),
     month: date.toLocaleString('en-US', {
+      timeZone: 'UTC',
       month: 'short',
     }),
     day: date.toLocaleString('en-US', {
+      timeZone: 'UTC',
       day: 'numeric',
     }),
     time: date

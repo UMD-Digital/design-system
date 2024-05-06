@@ -161,7 +161,7 @@ const DisplayGrouped = (props: TypeDisplayEntries) => {
   setOffset(entriesLength);
 
   aggregatedEntries.forEach((group) => {
-    const id = `feeds-group-${group.dateBanner}`;
+    const id = `feeds-group-${group.timestamp}`;
     const existingGroup = container.querySelector(`#${id}`);
 
     if (existingGroup) {

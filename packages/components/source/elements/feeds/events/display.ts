@@ -117,6 +117,7 @@ const CreateEventsGrouped = ({ entries }: { entries: EventType[] }) => {
   };
   const entriesMapping = entries.map((entry) => ({
     dateBanner: getDateBanner(entry),
+    timeStamp: entry.startStamp,
     html: EventList.CreateElement({
       ...CommonDisplay({ entry }),
       dateSign: EventElements.Sign.CreateElement(entry),
@@ -140,6 +141,7 @@ const CreateEventsGrouped = ({ entries }: { entries: EventType[] }) => {
 
     return {
       dateBanner: groupType,
+      timestamp: groupEntries[0].timeStamp,
       entries: groupEntries.map((entry) => entry.html),
     };
   });

@@ -492,10 +492,12 @@ const SizeDatesElements = ({
   container,
   dataSlider,
   isThemeDark,
+  SetButtonVisibility,
 }: {
   container: HTMLElement;
   dataSlider: HTMLElement;
   isThemeDark: boolean;
+  SetButtonVisibility: () => void;
 }) => {
   const sliderWrapper = container.querySelector(
     `.${ELEMENT_SLIDER_EVENT_SLIDE_WRAPPER}`,
@@ -566,6 +568,7 @@ const SizeDatesElements = ({
     setWidthPerDate();
     setHeight();
     sliderVisibility({ show: true });
+    SetButtonVisibility();
   };
 
   sizing({ sliderWrapper });
@@ -700,21 +703,30 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
     const wrapper = document.createElement('div');
     const coverElement = document.createElement('div');
     const isThemeDark = theme === 'dark';
+    const CommonDomElements = {
+      container,
+      dataSlider,
+    };
+
     const SetCountForward = () => (currentPosition = currentPosition + 1);
     const SetCountBackward = () => (currentPosition = currentPosition - 1);
     const SetButtonVisibility = () =>
-      ButtonVisibilityLogic({ container, dataSlider, currentPosition });
+      ButtonVisibilityLogic({ ...CommonDomElements, currentPosition });
     const SetDateElementsSizes = () =>
-      SizeDatesElements({ container, dataSlider, isThemeDark });
-    const SetJumpToDate = () => JumpToDate({ dataSlider, currentPosition });
+      SizeDatesElements({
+        ...CommonDomElements,
+        isThemeDark,
+        SetButtonVisibility,
+      });
+    const SetJumpToDate = () =>
+      JumpToDate({ ...CommonDomElements, currentPosition });
     const SetSlideDatesForward = () =>
-      EventSlideDates({ dataSlider, forward: true });
+      EventSlideDates({ ...CommonDomElements, forward: true });
     const SetSlideDatesBackwards = () =>
-      EventSlideDates({ dataSlider, forward: false });
+      EventSlideDates({ ...CommonDomElements, forward: false });
     const SetEventSwipe = () =>
       EventSwipe({
-        container,
-        dataSlider,
+        ...CommonDomElements,
         currentPosition,
         SetCountBackward,
         SetCountForward,
@@ -735,6 +747,11 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
       SetSlideDatesBackwards,
       SetSlideDatesForward,
     });
+    const Load = () => {
+      OnLoadStyles({ dataSlider });
+      EventResize();
+      SetEventSwipe();
+    };
 
     let currentPosition = 0;
 
@@ -754,10 +771,7 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
     declaration.classList.add(ELEMENT_SLIDER_EVENT_DECLRATION);
     declaration.appendChild(container);
 
-    EventResize();
-    OnLoadStyles({ dataSlider });
-    SetButtonVisibility();
-    SetEventSwipe();
+    Load();
     window.addEventListener('resize', Debounce(EventResize, 20));
 
     return {

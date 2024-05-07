@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Performance, Styles } from 'utilities';
+import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;
@@ -637,13 +637,6 @@ const EventSwipe = ({
     dataSlider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
   const count = ShowNumberOfDates({ container });
-  const threshold = 20;
-  const allowedTime = 100;
-  let startX = 0;
-  let dist = 0;
-  let elapsedTime = 0;
-  let startTime = 0;
-
   const swipes = (isrightswipe: Boolean) => {
     if (isrightswipe) {
       if (currentPosition > 0) {
@@ -660,32 +653,7 @@ const EventSwipe = ({
     SetButtonVisibility();
   };
 
-  container.addEventListener(
-    'touchstart',
-    (event) => {
-      const touchObject = event.changedTouches[0];
-
-      dist = 0;
-      startX = touchObject.pageX;
-      startTime = new Date().getTime();
-    },
-    { passive: false },
-  );
-
-  container.addEventListener(
-    'touchend',
-    (event) => {
-      const touchObject = event.changedTouches[0];
-
-      dist = touchObject.pageX - startX;
-      elapsedTime = new Date().getTime() - startTime;
-
-      if (elapsedTime > allowedTime && Math.abs(dist) >= threshold) {
-        swipes(dist > 0);
-      }
-    },
-    { passive: false },
-  );
+  EventsUtility.CreateEventSwipe({ container, callback: swipes });
 };
 
 const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {

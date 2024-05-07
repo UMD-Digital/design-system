@@ -217,6 +217,12 @@ const IntroStyles = `
     }
   }
 
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    .${ELEMENT_SLIDER_EVENT_INTRO} {
+      width: 320px;
+    }
+  }
+
   .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE} {
     color: ${Colors.black};
     font-weight: 700;

@@ -31,20 +31,20 @@ const HeadlineTextMap = ({
     'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud Quamie ';
   let text = maxiumString.slice(0, 20);
 
-  if (isLarge) text = maxiumString.slice(0, 30);
+  if (isLarge) text = maxiumString.slice(0, 60);
   if (isSmall) text = maxiumString.slice(0, 10);
 
-  if (isSmallBucket && isLarge) text = maxiumString.slice(0, 25);
-  if (isSmallBucket && isNormal) text = maxiumString.slice(0, 15);
+  if (isSmallBucket && isLarge) text = maxiumString.slice(0, 100);
+  if (isSmallBucket && isNormal) text = maxiumString.slice(0, 50);
   if (isSmallBucket && isSmall) text = maxiumString.slice(0, 8);
 
   if (isMediumBucket && isLarge) text = maxiumString.slice(0, 60);
-  if (isMediumBucket && isNormal) text = maxiumString.slice(0, 40);
-  if (isMediumBucket && isSmall) text = maxiumString.slice(0, 20);
+  if (isMediumBucket && isNormal) text = maxiumString.slice(0, 30);
+  if (isMediumBucket && isSmall) text = maxiumString.slice(0, 8);
 
   if (isLargeBucket && isLarge) text = maxiumString;
   if (isLargeBucket && isNormal) text = maxiumString.slice(0, 80);
-  if (isLargeBucket && isSmall) text = maxiumString.slice(0, 60);
+  if (isLargeBucket && isSmall) text = maxiumString.slice(0, 40);
 
   return text;
 };

@@ -55,6 +55,7 @@ const OverwriteText = `
   ${OverwriteTextName} {
     color: ${Colors.black};
     text-transform: uppercase;
+    font-weight: 800;
   }
 `;
 

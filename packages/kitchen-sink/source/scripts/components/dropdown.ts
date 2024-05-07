@@ -5,22 +5,57 @@ const DROPDOWN_NORMAL = 'normal';
 const DROPDOWN_VERBOSE = 'verbose';
 const DROPDOWN_IDS = [DROPDOWN_SUCCINCT, DROPDOWN_NORMAL, DROPDOWN_VERBOSE];
 
-const HeadlineSlot = ({ type }: { type?: string }) => {
+const SMALL_CONTENT_ELEMENTS = ['umd-element-events-date'];
+const MEDIUM_CONTENT_ELEMENTS = ['umd-element-slider-events'];
+const LARGE_CONTENT_ELEMENTS = ['umd-element-hero'];
+
+const isTypeInBucket = (element: HTMLElement, bucket: string[]) =>
+  bucket.some((name) => name === element.nodeName.toLowerCase());
+
+const HeadlineTextMap = ({
+  type,
+  element,
+}: {
+  type?: string;
+  element: HTMLElement;
+}) => {
+  const elementParent = element.parentElement as HTMLElement;
+  const isSmallBucket = isTypeInBucket(elementParent, SMALL_CONTENT_ELEMENTS);
+  const isMediumBucket = isTypeInBucket(elementParent, MEDIUM_CONTENT_ELEMENTS);
+  const isLargeBucket = isTypeInBucket(elementParent, LARGE_CONTENT_ELEMENTS);
   const isLarge = type === DROPDOWN_VERBOSE;
+  const isNormal = type === DROPDOWN_NORMAL;
   const isSmall = type === DROPDOWN_SUCCINCT;
+
+  const maxiumString =
+    'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud Quamie ';
+  let text = maxiumString.slice(0, 20);
+
+  if (isLarge) text = maxiumString.slice(0, 30);
+  if (isSmall) text = maxiumString.slice(0, 10);
+
+  if (isSmallBucket && isLarge) text = maxiumString.slice(0, 25);
+  if (isSmallBucket && isNormal) text = maxiumString.slice(0, 15);
+  if (isSmallBucket && isSmall) text = maxiumString.slice(0, 8);
+
+  if (isMediumBucket && isLarge) text = maxiumString.slice(0, 60);
+  if (isMediumBucket && isNormal) text = maxiumString.slice(0, 40);
+  if (isMediumBucket && isSmall) text = maxiumString.slice(0, 20);
+
+  if (isLargeBucket && isLarge) text = maxiumString;
+  if (isLargeBucket && isNormal) text = maxiumString.slice(0, 80);
+  if (isLargeBucket && isSmall) text = maxiumString.slice(0, 60);
+
+  return text;
+};
+
+const HeadlineSlot = ({ type }: { type?: string }) => {
   const headlineSlots = Array.from(
     document.querySelectorAll('[slot="headline"]'),
   ) as HTMLSlotElement[];
-  const textLarge =
-    'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis';
-  const textNormal = 'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit ';
-  const textSmall = 'Lorem Ipsum Dolor Sit Amet ';
-  let text = textNormal;
-
-  if (isLarge) text = textLarge;
-  if (isSmall) text = textSmall;
 
   headlineSlots.forEach((slot) => {
+    const text = HeadlineTextMap({ type, element: slot });
     const hasLink = slot.querySelector('a') || slot.nodeName === 'A';
     const setSlot = (content: string) => {
       slot.innerHTML = `${content}`;

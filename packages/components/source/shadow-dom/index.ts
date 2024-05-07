@@ -9,7 +9,6 @@ import { Load as CardOverlayLoader } from './card/overlay';
 import { Load as CarouselCardsLoader } from './carousel/cards';
 import { Load as EventLoader } from './event';
 import { Load as EventDateLoader } from './event/lockup';
-import { Load as EventDateSliderLoader } from './slider/events';
 import { Load as FeedNewsGridLoader } from './feeds/news/grid';
 import { Load as FeedNewsListLoader } from './feeds/news/list';
 import { Load as FeedEventsGridLoader } from './feeds/events/grid';
@@ -33,6 +32,7 @@ import { Load as QuoteLoader } from './quote';
 import { Load as StatLoader } from './stat';
 import { Load as SectionIntroLoader } from './section-intro/default';
 import { Load as SectionIntroWideLoader } from './section-intro/wide';
+import { Load as SliderEventLoader } from './slider/events';
 import { Load as StickyColumns } from './stickly-columns';
 
 export const Components = {
@@ -47,7 +47,6 @@ export const Components = {
   CarouselCardsLoader,
   EventLoader,
   EventDateLoader,
-  EventDateSliderLoader,
   FeedNewsGridLoader,
   FeedNewsListLoader,
   FeedEventsGridLoader,
@@ -71,6 +70,7 @@ export const Components = {
   StatLoader,
   SectionIntroLoader,
   SectionIntroWideLoader,
+  SliderEventLoader,
   StickyColumns,
 };
 

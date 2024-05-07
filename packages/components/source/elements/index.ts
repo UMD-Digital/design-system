@@ -42,6 +42,7 @@ import QuoteInline from './quote/inline';
 import QuoteStatement from './quote/statement';
 import SectionIntro from './section-intro/default';
 import SectionIntroWide from './section-intro/wide';
+import SliderEvents from './slider/events';
 import Stat from './stat';
 import StickyColumns from './sticky-columns';
 
@@ -90,6 +91,7 @@ export {
   QuoteStatement,
   SectionIntro,
   SectionIntroWide,
+  SliderEvents,
   Stat,
   StickyColumns,
 };

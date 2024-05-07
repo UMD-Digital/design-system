@@ -4,39 +4,82 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
-import { Performance } from 'utilities';
-import { ComponentStyles, CreateContainer, OnLoadStyles } from './elements';
-import { EventResize, EventSwipe } from './services/events';
-import { ButtonVisibilityLogic, SizeDatesElements } from './services/helpers';
-import { VARIABLES } from './globals';
+import { MarkupCreate, Styles } from 'utilities';
+import { SliderEvents } from 'elements';
 
-const { Debounce } = Performance;
+const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
 
-const { ATTRIBUTE_RESIZE, ATTRIBUTE_THEME, THEME_LIGHT } = VARIABLES;
+const ATTRIBUTE_RESIZE = 'resize';
+const ATTRIBUTE_THEME = 'theme';
+const THEME_LIGHT = 'light';
+const SLOTS = {
+  EVENT_LIST: 'event-list',
+  HEADLINE: 'headline',
+  ACTIONS: 'actions',
+};
 
-export const ELEMENT_NAME = 'umd-element-events-date-slider';
-export type ELEMENT_TYPE = UMDEventsDateSliderElement;
+const ELEMENT_NAME = 'umd-element-slider-events';
+
+const styles = `
+  :host {
+    display: block;
+  }
+
+  ${Styles.ResetString}
+  ${SliderEvents.Styles}
+`;
+
+const CreateShadowDom = ({
+  element,
+}: {
+  element: UMDEventsDateSliderElement;
+}) => {
+  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const dataSlider = document.createElement('div');
+  const dataSliderSlot = element.querySelector(`[slot=${SLOTS.EVENT_LIST}]`);
+
+  if (!dataSliderSlot) {
+    throw new Error(`Slot ${SLOTS.EVENT_LIST} is required`);
+  }
+
+  dataSlider.innerHTML = dataSliderSlot.innerHTML;
+
+  element._elementRef = SliderEvents.CreateElement({
+    theme,
+    dataSlider,
+    headline: SlotWithDefaultStyling({
+      element,
+      slotRef: SLOTS.HEADLINE,
+    }),
+    actions: SlotWithDefaultStyling({
+      element,
+      slotRef: SLOTS.ACTIONS,
+    }),
+  });
+
+  return element._elementRef.element;
+};
+
 export class UMDEventsDateSliderElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _element: null | HTMLElement = null;
-  _theme: string;
-  _count = 0;
+  _elementRef: {
+    element: HTMLDivElement;
+    events: {
+      SetDateElementsSizes: () => void;
+    };
+  } | null;
 
   constructor() {
+    const template = MarkupCreate.Node.stylesTemplate({ styles });
     super();
 
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._theme = THEME_LIGHT;
-
-    const styles = `${ComponentStyles}`;
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
-
     this._shadow.appendChild(template.content.cloneNode(true));
+    this._elementRef = null;
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_THEME, ATTRIBUTE_RESIZE];
+    return [ATTRIBUTE_RESIZE];
   }
 
   attributeChangedCallback(
@@ -45,34 +88,24 @@ export class UMDEventsDateSliderElement extends HTMLElement {
     newValue: string | null,
   ) {
     if (name == ATTRIBUTE_RESIZE && newValue === 'true') {
-      SizeDatesElements({ element: this });
+      if (this._elementRef) this._elementRef.events.SetDateElementsSizes();
     }
   }
 
   connectedCallback() {
     const element = this;
-    const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+    const shadowDom = this._shadow;
 
-    const resize = () => {
-      EventResize({ element });
-    };
+    element._shadow.appendChild(CreateShadowDom({ element }));
+    if (element._elementRef) element._elementRef.events.SetDateElementsSizes();
 
-    element._theme = theme;
-    element._shadow.appendChild(CreateContainer({ element }));
-
-    OnLoadStyles({ element });
-    EventSwipe({ element });
-    ButtonVisibilityLogic({ element });
-    window.addEventListener('resize', Debounce(resize, 20));
+    SlotOberserver({
+      element,
+      shadowDom,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
-
-  setCountForward = () => {
-    this._count = this._count + 1;
-  };
-
-  setCountBackward = () => {
-    this._count = this._count - 1;
-  };
 }
 
 export const Load = () => {

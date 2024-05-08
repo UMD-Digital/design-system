@@ -44,6 +44,7 @@ const IS_THEME_DARK_DATE = `${IS_THEME_DARK} .${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`
 const DarkThemeStyles = `
   ${IS_THEME_DARK_EYEBROW},
   ${IS_THEME_DARK_HEADLINE},
+  ${IS_THEME_DARK_HEADLINE} *,
   ${IS_THEME_DARK_RICH_TEXT},
   ${IS_THEME_DARK_DATE} {
     color: ${Colors.white};
@@ -103,14 +104,10 @@ const HeadlineStyles = `
     margin-top: ${Spacing.min}
   }
 
-  .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} {
-    color: ${Colors.black};
-  }
-
   .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE},
   .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} * {
-    color: currentColor;
     font-weight: 700;
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({

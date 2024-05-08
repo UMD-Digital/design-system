@@ -33,6 +33,7 @@ const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
 const ELEMENT_FEEDS_EVENTS_NO_RESULTS = 'feeds-events-no-results';
 const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
 const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
+const ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE = 'text-lockup-small-headline';
 
 const { ConvertJSSObjectToStyles } = Styles;
 const { Eyebrow } = Elements;
@@ -80,6 +81,10 @@ const EventsNoResults = `
 `;
 
 const STYLES_FEED_EVENT_ELEMENT = `
+  .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} * {
+    color: ${Colors.black} !important;
+  }
+
   ${NoResults.Styles}
   ${LayoutGridGap.Styles}
   ${ButtonLazyLoad.Styles}

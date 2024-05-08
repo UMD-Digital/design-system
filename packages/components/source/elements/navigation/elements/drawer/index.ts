@@ -115,7 +115,7 @@ const CreateNavDrawerContainer = (props: TypeDrawerProps) => {
   bodyOverlayWrapper.classList.add(ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER);
 
   bodyOverlayWrapper.appendChild(closeButton);
-  bodyOverlayWrapper.appendChild(slider);
+  bodyOverlayWrapper.appendChild(slider.container);
 
   bodyOverlay.classList.add(ELEMENT_NAV_DRAWER_OVERLAY);
   bodyOverlay.addEventListener('click', eventClose.bind(props));

@@ -320,7 +320,12 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
       }, 20),
     );
 
-    return elementContainer;
+    return {
+      container: elementContainer,
+      events: {
+        resize: eventReize,
+      },
+    };
   })();
 
 export default {

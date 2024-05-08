@@ -13,7 +13,7 @@ type TypeEventLockupDate = {
   theme?: string;
 };
 
-const { FontSize, Spacing } = Tokens;
+const { FontSize, Spacing, Colors } = Tokens;
 const { Link } = Animations;
 const { SansLarge } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
@@ -29,6 +29,14 @@ const EVENT_HEADLINE = 'event-lockup-headline';
 const HeadlineStyles = `
   .${EVENT_HEADLINE} {
     margin-left: ${Spacing.sm};
+  }
+
+  .${EVENT_HEADLINE} * {
+    color: ${Colors.black};
+  }
+
+  .${EVENT_DATE_CONTAINER}${IS_THEME_DARK} * {
+    color: ${Colors.white};
   }
 
   ${ConvertJSSObjectToStyles({

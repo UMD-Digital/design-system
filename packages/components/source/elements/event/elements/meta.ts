@@ -120,7 +120,7 @@ const STYLES_EVENT_META = `
   })}
 
   .${ELEMENT_EVENTS_DATE_ROW_TEXT} {
-    color: ${Colors.gray.darker};
+    color: ${Colors.gray.dark};
     font-weight: 400;
   }
 

@@ -138,6 +138,7 @@ const ContentOptionsWithJS = () => {
 const ElementNames = [
   'umd-element-carousel-cards',
   'umd-element-events-date-slider',
+  'umd-element-nav-slider',
 ];
 
 const ShowSubElements = ({ container }: { container: HTMLElement }) => {

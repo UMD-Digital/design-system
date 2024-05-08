@@ -288,7 +288,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
     };
     const eventSlideLeft = () => eventSlide({ isRight: false });
     const eventSlideRight = () => eventSlide({ isRight: true });
-    const eventReize = () => {
+    const eventResize = () => {
       setTimeout(() => {
         sizeContainer({ withTransition: false });
       }, 200);
@@ -316,7 +316,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
     window.addEventListener(
       'resize',
       Debounce(() => {
-        eventReize();
+        eventResize();
       }, 20),
     );
 

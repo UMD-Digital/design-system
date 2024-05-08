@@ -7,8 +7,8 @@ declare global {
 import { MarkupCreate, Styles } from 'utilities';
 import { NavigationElements } from 'elements';
 import { MakeNavSlider, SLOTS } from './common';
-
 const ELEMENT_NAME = 'umd-element-nav-slider';
+const ATTRIBUTE_RESIZE = 'resize';
 
 export const styles = `
   :host {
@@ -32,6 +32,25 @@ class UMDNavSlider extends HTMLElement {
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
+  static get observedAttributes() {
+    return [ATTRIBUTE_RESIZE];
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (name == ATTRIBUTE_RESIZE && newValue === 'true') {
+      const elementContainer = this._shadow.querySelector('div');
+      if (!elementContainer) {
+        throw new Error('Nav slider container not found.');
+      }
+      elementContainer.style.height = '500px';
+      console.log(elementContainer);
+    }
+  }
+
   connectedCallback() {
     this._shadow.appendChild(CreateShadowDom({ element: this }));
   }
@@ -40,7 +59,6 @@ class UMDNavSlider extends HTMLElement {
 export const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
     window.UMDNavSlider = UMDNavSlider;
     window.customElements.define(ELEMENT_NAME, UMDNavSlider);

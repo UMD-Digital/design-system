@@ -6,9 +6,11 @@ declare global {
 
 import { CardBlock, CardList } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { Tokens } from '@universityofmaryland/variables';
 
 const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
 
+const { Colors } = Tokens;
 const ELEMENT_NAME = 'umd-element-card';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_ALIGNED = 'aligned';
@@ -16,6 +18,12 @@ const ATTRIBUTE_BORDER = 'border';
 const ATTRIBUTE_DISPLAY = 'display';
 const THEME_LIGHT = 'light';
 const DISPLAY_LIST = 'list';
+
+const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';
+const ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE = 'text-lockup-small-headline';
+const THEME_DARK = 'dark';
+const IS_DARK_THEME = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+
 const SLOTS = {
   IMAGE: 'image',
   HEADLINE: 'headline',
@@ -26,6 +34,15 @@ const SLOTS = {
 const styles = `
   :host {
     display: block;
+  }
+  .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE},
+  .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} * {
+    color: ${Colors.black};
+  }
+
+  .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}${IS_DARK_THEME} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE},
+  .${ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER}${IS_DARK_THEME} .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} * {
+    color: ${Colors.white};
   }
   
   ${Styles.ResetString}

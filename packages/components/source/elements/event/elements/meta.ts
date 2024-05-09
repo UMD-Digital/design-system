@@ -88,7 +88,6 @@ const DateRow = `
 const LocationRow = `
   .${ELEMENT_EVENTS_DATE_ROW_LOCATION} {
     display: flex;
-    align-items: center;
     width: 100%;
   }
 `;

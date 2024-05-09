@@ -63,7 +63,6 @@ const DateRow = `
   @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${ELEMENT_EVENTS_DATE_ROW_DATE} {
       display: flex;
-      align-items: center;
     }
   }
 

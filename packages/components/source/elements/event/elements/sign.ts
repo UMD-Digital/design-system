@@ -181,12 +181,14 @@ const makeEndDateBlock = ({
   startDay,
   endMonth,
   endDay,
+  theme,
 }: {
   container: HTMLElement;
   startMonth: string | HTMLElement;
   startDay: string | HTMLElement;
   endDay: string | HTMLElement;
   endMonth: string | HTMLElement;
+  theme?: string | null;
 }) => {
   const endWrapper = document.createElement('p');
   const isTheSameMonth = endMonth === startMonth;
@@ -214,7 +216,7 @@ const makeEndDateBlock = ({
     dash.style.height = '3px';
     dash.style.margin = '0 5px';
     dash.style.display = 'block';
-    dash.style.backgroundColor = 'black';
+    dash.style.backgroundColor = theme == THEME_DARK ? 'white' : 'black';
 
     container.appendChild(srOnly);
     container.appendChild(dash);
@@ -223,14 +225,7 @@ const makeEndDateBlock = ({
   }
 };
 
-const CreateEventSignElement = ({
-  startMonth,
-  startDay,
-  endDay,
-  endMonth,
-  theme = THEME_LIGHT,
-  isLargeSize = false,
-}: {
+const CreateEventSignElement = (props: {
   startMonth: string | HTMLElement;
   startDay: string | HTMLElement;
   endDay?: string | HTMLElement;
@@ -238,6 +233,14 @@ const CreateEventSignElement = ({
   theme?: string | null;
   isLargeSize?: boolean;
 }) => {
+  const {
+    startMonth,
+    startDay,
+    endDay,
+    endMonth,
+    theme = THEME_LIGHT,
+    isLargeSize = false,
+  } = props;
   const container = document.createElement('div');
   const hasEnd = endDay && endMonth;
 
@@ -248,7 +251,14 @@ const CreateEventSignElement = ({
   makeStartDateBlock({ container, startMonth, startDay });
 
   if (hasEnd) {
-    makeEndDateBlock({ container, startMonth, startDay, endDay, endMonth });
+    makeEndDateBlock({
+      container,
+      startMonth,
+      startDay,
+      endDay,
+      endMonth,
+      theme,
+    });
   }
 
   return container;

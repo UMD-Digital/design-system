@@ -8,7 +8,7 @@ type TypeListCardProps = {
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
   image?: HTMLImageElement | null;
-  theme?: string;
+  theme?: string | null;
 };
 
 const { Spacing } = Tokens;

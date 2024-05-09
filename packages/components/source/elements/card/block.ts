@@ -9,7 +9,7 @@ type TypeBlockCardProps = {
   image?: HTMLImageElement | null;
   isAligned?: boolean;
   isBordered?: boolean;
-  theme?: string;
+  theme?: string | null;
 };
 
 const ELEMENT_NAME = 'umd-card-block';

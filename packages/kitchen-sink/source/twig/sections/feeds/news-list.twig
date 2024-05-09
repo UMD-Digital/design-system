@@ -6,8 +6,10 @@
       <h1 class="page-heading">
         Feed News List
       </h1>
+    </div>
 
-      <section>
+    <section>
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
           No Results
         </h2>
@@ -16,9 +18,11 @@
           row-count="2"
           show-count="4"
           categories="104"></umd-feed-news-list>
-      </section>
+      </div>
+    </section>
 
-      <section>
+    <section>
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
           <span>All Events</span>
           <span>Limit 5</span>
@@ -27,9 +31,11 @@
         <div style="max-width: 800px; margin: 0 auto;">
           <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"></umd-feed-news-list>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
+    <section>
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
           <span>Multiple inclusions: Intersection</span>
           <span>Events for Research and Arts & Culture</span>
@@ -40,34 +46,24 @@
             union="false"
             token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"></umd-feed-news-list>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
+    <section style="padding: 50px 0; background-color: black;">
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
-          <span>Lazy Load with Do Good Category</span>
-          <span>Limit 5</span>
+          <span style="color: white;">Lazy Load with Do Good Category</span>
+          <span style="color: white;">Limit 10</span>
         </h2>
 
         <div style="max-width: 800px; margin: 0 auto;">
           <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
             categories="10461"
-            lazyload="true"></umd-feed-news-list>
-        </div>
-      </section>
-
-      <section style="padding-bottom: 20vh">
-        <h2 class="content-heading type-hr">
-          <span>Lazy Load with Do Good Category</span>
-          <span>Limit 10</span>
-        </h2>
-
-        <div style="max-width: 800px; margin: 0 auto;">
-          <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"
-            categories="10461"
+            theme="dark"
             lazyload="true"
             row-count="10"></umd-feed-news-list>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </section>
 {% endblock %}

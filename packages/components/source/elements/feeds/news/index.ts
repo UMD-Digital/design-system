@@ -7,6 +7,7 @@ const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 
 export type TypeNewsFeedRequirements = {
   token: string;
+  theme?: string | null;
   numberOfRowsToStart: number;
   numberOfColumnsToShow?: number;
   categories?: string[];
@@ -82,7 +83,7 @@ const MakeLazyLoadVariables = (props: TypeFeedProps) => ({
 });
 
 const DisplayEntries = (props: TypeDisplayEntries) => {
-  const { isTypeGrid, getContainer, setOffset, feedData } = props;
+  const { isTypeGrid, getContainer, setOffset, feedData, theme } = props;
   const container = getContainer();
   const grid = container.querySelector(
     `.${LayoutGridGap.ID}`,
@@ -90,6 +91,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   const displayEntries = FeedDisplay.CreateElement({
     entries: feedData,
     isTypeGrid,
+    theme,
   });
 
   setOffset(displayEntries.length);

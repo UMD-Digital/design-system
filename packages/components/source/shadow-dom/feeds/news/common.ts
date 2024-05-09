@@ -1,6 +1,7 @@
 import { TypeNewsFeedRequirements } from 'elements/feeds/news';
 
 const ATTRIBUTE_TOKEN = 'token';
+const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_ROWS = 'row-count';
 const ATTRIBUTE_SHOW = 'show-count';
 const ATTRIBUTE_LAZYLOAD = 'lazyload';
@@ -17,6 +18,7 @@ export const CommonFeedNewsData = ({
   numberOfRowsToStartDefault?: number;
 }) => {
   const token = element.getAttribute(ATTRIBUTE_TOKEN);
+  const theme = element.getAttribute(ATTRIBUTE_THEME);
   const categoriesAttribute = element.getAttribute(ATTRIBUTE_CATEGORIES);
 
   if (!token) {
@@ -32,6 +34,7 @@ export const CommonFeedNewsData = ({
 
   const data: TypeNewsFeedRequirements = {
     token,
+    theme,
     numberOfRowsToStart,
     numberOfColumnsToShow,
     isLazyLoad: element.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',

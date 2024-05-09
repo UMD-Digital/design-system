@@ -81,7 +81,13 @@ const CreateDate = ({
   return null;
 };
 
-const CommonDisplay = ({ entry }: { entry: ArticleType }) => ({
+const CommonDisplay = ({
+  entry,
+  theme,
+}: {
+  entry: ArticleType;
+  theme?: string | null;
+}) => ({
   image: CreateImage({ images: entry.image }),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),
@@ -89,19 +95,22 @@ const CommonDisplay = ({ entry }: { entry: ArticleType }) => ({
     date: entry.date,
     dateFormatted: entry.dateFormatted,
   }),
+  theme,
 });
 
 const CreateNewsFeedDisplay = ({
   entries,
   isTypeGrid,
+  theme,
 }: {
   entries: ArticleType[];
   isTypeGrid?: boolean;
+  theme?: string | null;
 }) => {
   if (isTypeGrid) {
     return entries.map((entry) =>
       CardBlock.CreateElement({
-        ...CommonDisplay({ entry }),
+        ...CommonDisplay({ entry, theme }),
         isAligned: false,
       }),
     );
@@ -109,7 +118,7 @@ const CreateNewsFeedDisplay = ({
 
   return entries.map((entry) =>
     CardList.CreateElement({
-      ...CommonDisplay({ entry }),
+      ...CommonDisplay({ entry, theme }),
     }),
   );
 };

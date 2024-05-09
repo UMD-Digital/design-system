@@ -13,7 +13,7 @@ export type TypeTextLockupSmall = {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string;
+  theme?: string | null;
 };
 
 const { Colors, Spacing } = Tokens;

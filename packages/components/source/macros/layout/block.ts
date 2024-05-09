@@ -6,7 +6,7 @@ import ScalingTextLockup from '../text-lockup/small-scaling';
 export type TypeBlockContainer = {
   isAligned?: boolean;
   isBordered?: boolean;
-  theme?: string;
+  theme?: string | null;
 };
 
 type TypeBlockContainerProps = TypeBlockContainer & {

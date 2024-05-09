@@ -235,14 +235,14 @@ const CreateEventSignElement = ({
   startDay: string | HTMLElement;
   endDay?: string | HTMLElement;
   endMonth?: string | HTMLElement;
-  theme?: string;
+  theme?: string | null;
   isLargeSize?: boolean;
 }) => {
   const container = document.createElement('div');
   const hasEnd = endDay && endMonth;
 
   container.classList.add(ELEMENT_EVENT_DATE_WRAPPER);
-  container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   if (isLargeSize) container.setAttribute(ATTRIBUTE_SIZE_LARGE, '');
 
   makeStartDateBlock({ container, startMonth, startDay });

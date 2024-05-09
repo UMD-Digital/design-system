@@ -78,16 +78,30 @@ const CreateHeadline = ({ text, url }: { text: string; url: string }) => {
   return null;
 };
 
-const CommonDisplay = ({ entry }: { entry: EventType }) => ({
+const CommonDisplay = ({
+  entry,
+  theme,
+}: {
+  entry: EventType;
+  theme?: string | null;
+}) => ({
   image: CreateImage({ images: entry.image }),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),
   eventDetails: EventElements.Meta.CreateElement({
     ...entry,
+    theme,
   }),
+  theme,
 });
 
-const CreateEventsGrouped = ({ entries }: { entries: EventType[] }) => {
+const CreateEventsGrouped = ({
+  entries,
+  theme,
+}: {
+  entries: EventType[];
+  theme?: string | null;
+}) => {
   const currentDateStamp = new Date();
   const weekFromDateStamp = new Date(
     new Date().setDate(new Date().getDate() + 7),
@@ -119,8 +133,9 @@ const CreateEventsGrouped = ({ entries }: { entries: EventType[] }) => {
     dateBanner: getDateBanner(entry),
     timeStamp: entry.startStamp,
     html: EventList.CreateElement({
-      ...CommonDisplay({ entry }),
-      dateSign: EventElements.Sign.CreateElement(entry),
+      ...CommonDisplay({ entry, theme }),
+      dateSign: EventElements.Sign.CreateElement({ ...entry, theme }),
+      theme,
     }),
   }));
   const groupTypes: Array<string> = entriesMapping
@@ -152,22 +167,24 @@ const CreateEventsGrouped = ({ entries }: { entries: EventType[] }) => {
 const CreateEventFeedDisplay = ({
   entries,
   isTypeGrid,
+  theme,
 }: {
   entries: EventType[];
   isTypeGrid?: boolean;
+  theme?: string | null;
 }) => {
   if (isTypeGrid) {
     return entries.map((entry) =>
       EventBlock.CreateElement({
-        ...CommonDisplay({ entry }),
+        ...CommonDisplay({ entry, theme }),
       }),
     );
   }
 
   return entries.map((entry) =>
     EventList.CreateElement({
-      ...CommonDisplay({ entry }),
-      dateSign: EventElements.Sign.CreateElement(entry),
+      ...CommonDisplay({ entry, theme }),
+      dateSign: EventElements.Sign.CreateElement({ ...entry, theme }),
     }),
   );
 };

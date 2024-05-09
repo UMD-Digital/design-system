@@ -12,7 +12,7 @@ type TypeEventBlockProps = {
   image: HTMLImageElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string;
+  theme?: string | null;
 };
 
 const { Spacing } = Tokens;

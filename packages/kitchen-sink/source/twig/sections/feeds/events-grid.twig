@@ -6,8 +6,10 @@
       <h1 class="page-heading">
         Feed Events Grid
       </h1>
+    </div>
 
-      <section style="max-width: 800px;">
+    <section style="max-width: 800px;">
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
           No Results
         </h2>
@@ -16,9 +18,11 @@
           row-count="2"
           show-count="4"
           categories="104"></umd-feed-events>
-      </section>
+      </div>
+    </section>
 
-      <section style="padding-bottom: 40px">
+    <section style="padding-bottom: 40px">
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
           <span>Multiple inclusions: Default Union</span>
           <span>Campus Leaders & Alumni Association</span>
@@ -28,9 +32,11 @@
           categories="10256,10322"
           lazyload="true"
           show-count="3"></umd-feed-events>
-      </section>
+      </div>
+    </section>
 
-      <section style="padding-bottom: 40px">
+    <section style="padding-bottom: 40px">
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
           <span>Multiple inclusions: Intersection</span>
           <span>Campus Leaders & Alumni Association</span>
@@ -41,20 +47,23 @@
           lazyload="true"
           union="false"
           show-count="3"></umd-feed-events>
-      </section>
+      </div>
+    </section>
 
-      <section style="padding: 50px 0; background-color: black;">
+    <section style="padding: 50px 0; background-color: black;">
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
-          <span>Grid Two</span>
-          <span>Lazy Load with Stamp Events</span>
+          <span style="color: white;">Grid Two</span>
+          <span style="color: white;">Lazy Load with Stamp Events</span>
         </h2>
 
         <umd-feed-events token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
           categories="92369"
           lazyload="true"
+          theme="dark"
           row-count="2"
           show-count="3"></umd-feed-events>
-      </section>
-    </div>
+      </div>
+    </section>
   </section>
 {% endblock %}

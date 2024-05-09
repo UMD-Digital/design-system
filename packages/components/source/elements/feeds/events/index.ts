@@ -7,6 +7,7 @@ import NoResults from '../no-results';
 
 export type TypeEventFeedRequirements = {
   token: string;
+  theme?: string | null;
   numberOfRowsToStart: number;
   numberOfColumnsToShow?: number;
   categories?: string[];
@@ -132,7 +133,7 @@ const MakeLazyLoadVariables = (props: TypeFeedProps) => ({
 });
 
 const DisplayDefault = (props: TypeDisplayEntries) => {
-  const { isTypeGrid, getContainer, setOffset, feedData } = props;
+  const { isTypeGrid, getContainer, setOffset, feedData, theme } = props;
   const container = getContainer();
   const grid = container.querySelector(
     `.${LayoutGridGap.ID}`,
@@ -140,6 +141,7 @@ const DisplayDefault = (props: TypeDisplayEntries) => {
   const entries = FeedDisplay.CreateElement({
     entries: feedData,
     isTypeGrid,
+    theme,
   });
 
   setOffset(entries.length);
@@ -149,10 +151,11 @@ const DisplayDefault = (props: TypeDisplayEntries) => {
 };
 
 const DisplayGrouped = (props: TypeDisplayEntries) => {
-  const { getContainer, setOffset, feedData } = props;
+  const { getContainer, setOffset, feedData, theme } = props;
   const container = getContainer();
   const aggregatedEntries = FeedDisplay.CreateGroupedElement({
     entries: feedData,
+    theme,
   });
   const entriesLength = aggregatedEntries.reduce((acc, entries) => {
     return acc + entries.entries.length;

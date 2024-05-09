@@ -6,17 +6,10 @@
       <h1 class="page-heading">
         Feed Events Grouped
       </h1>
+    </div>
 
-      {# <section style="max-width: 800px;">
-        <h2 class="content-heading type-hr">
-          No Results
-        </h2>
-
-        <umd-feed-events-grouped token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
-          categories="104"></umd-feed-events-grouped>
-      </section> #}
-
-      <section>
+    <section>
+      <div class="umd-lock">
         <h2 class="content-heading type-hr">
           <span>All Events</span>
           <span>Limit 10</span>
@@ -26,7 +19,22 @@
           <umd-feed-events-grouped lazyload="true"
             token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-grouped>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    <section style="padding: 50px 0; background-color: black;">
+      <div class="umd-lock">
+        <h2 class="content-heading type-hr">
+          <span style="color: white;">All Events (Dark Background)</span>
+          <span style="color: white;">Limit 10</span>
+        </h2>
+
+        <div style="max-width: 800px; margin: 50px auto;">
+          <umd-feed-events-grouped lazyload="true"
+            theme="dark"
+            token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-grouped>
+        </div>
+      </div>
+    </section>
   </section>
 {% endblock %}

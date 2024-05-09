@@ -19,681 +19,229 @@
         Content Variations
       </h2>
 
-      {{ Dropdown.ContentVariations() }}
+      {{ Dropdown.ContentVariationsJs() }}
     </div>
 
-    <div id="succinct" class="dropdown-selection" aria-hidden="true">
-      <section>
-        <div class="umd-lock">
-          <h3 class="content-heading type-hr">
-            Default
-          </h3>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false,
-                date: true
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading type-hr">
+          Default
+        </h3>
+        <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              image: imageSquare,
+              date: true
+            })
+          }}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Type</span>
-            <span>Outlined</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                image: imageOne,
-                aligned: true,
-                border: true,
-                date: true
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Type</span>
+          <span>Outlined</span>
         </div>
-      </section>
+        <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              image: imageOne,
+              aligned: true,
+              border: true,
+              date: true
+            })
+          }}
+        </div>
+      </div>
+    </section>
 
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Aligned</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                image: imageOne,
-                date: true,
-                aligned: true,
-                border: false
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Layout</span>
+          <span>Aligned</span>
         </div>
-      </section>
+        <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              image: imageOne,
+              date: true,
+              aligned: true,
+              border: false
+            })
+          }}
+        </div>
+      </div>
+    </section>
 
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Field Options</span>
-            <span>Required Only</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                date: true,
-                aligned: false,
-                border: false,
-                eyebrow: false,
-                ctaLink: false,
-                eyebrow: false,
-                text: false
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Field Options</span>
+          <span>Required Only</span>
         </div>
-      </section>
+        <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              date: true,
+              aligned: false,
+              border: false,
+              eyebrow: false,
+              ctaLink: false,
+              text: false
+            })
+          }}
+        </div>
+      </div>
+    </section>
 
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Field Options</span>
-            <span>Minimal</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                image: imageOne,
-                date: true,
-                aligned: true,
-                border: false,
-                eyebrow: false,
-                ctaLink: false,
-                text: false
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Field Options</span>
+          <span>Minimal</span>
         </div>
-      </section>
+        <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              image: imageOne,
+              date: true,
+              aligned: true,
+              border: false,
+              eyebrow: false,
+              ctaLink: false,
+              text: false
+            })
+          }}
+        </div>
+      </div>
+    </section>
 
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Theme</span>
-            <span>Dark</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false,
-                theme: 'dark'
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Theme</span>
+          <span>Dark</span>
         </div>
-      </section>
+        <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              image: imageOne,
+              aligned: true,
+              theme: 'dark'
+            })
+          }}
+        </div>
+      </div>
+    </section>
 
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (3)</span>
-          </div>
-          <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.SuccinctCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.SuccinctCardBody({
-                image: imageThree,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Layout</span>
+          <span>Grouping (3)</span>
         </div>
-      </section>
+        <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              image: imageOne,
+              aligned: true,
+              border: false,
+              date: true,
+              ctaLink: false
+            })
+          }}
+          {{
+            Article.NormalCardBody({
+              image: imageTwo,
+              aligned: true,
+              border: false,
+              date: true,
+              ctaLink: false
+            })
+          }}
+          {{
+            Article.NormalCardBody({
+              image: imageThree,
+              aligned: true,
+              border: false,
+              date: true,
+              ctaLink: false
+            })
+          }}
+        </div>
+      </div>
+    </section>
 
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (4)</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.SuccinctCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.SuccinctCardBody({
-                image: imageThree,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.SuccinctCardBody({
-                image: imageWeird,
-                aligned: true,
-                border: false
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Layout</span>
+          <span>Grouping (4)</span>
         </div>
-      </section>
+        <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              image: imageOne,
+              aligned: true,
+              border: false
+            })
+          }}
+          {{
+            Article.NormalCardBody({
+              image: imageTwo,
+              aligned: true,
+              border: false
+            })
+          }}
+          {{
+            Article.NormalCardBody({
+              image: imageThree,
+              aligned: true,
+              border: false
+            })
+          }}
+          {{
+            Article.NormalCardBody({
+              image: imageWeird,
+              aligned: true,
+              border: false
+            })
+          }}
+        </div>
+      </div>
+    </section>
 
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (2)</span>
-          </div>
-          <div class="umd-grid-gap mb-md" style="margin-top: 24px">
-            {{
-              Article.SuccinctCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.SuccinctCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading type-hr">
+          <span>Layout</span>
+          <span>Grouping (2)</span>
         </div>
-      </section>
-    </div>
-
-    <div id="normal" class="dropdown-selection" aria-hidden="false">
-      <section>
-        <div class="umd-lock">
-          <h3 class="content-heading type-hr">
-            Default
-          </h3>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                image: imageSquare,
-                date: true
-              })
-            }}
-          </div>
+        <div class="umd-grid-gap mb-md" style="margin-top: 24px">
+          {{
+            Article.NormalCardBody({
+              image: imageOne,
+              aligned: true,
+              border: false,
+              date: true,
+              ctaLink: false
+            })
+          }}
+          {{
+            Article.NormalCardBody({
+              image: imageTwo,
+              aligned: true,
+              border: false,
+              date: true,
+              ctaLink: false
+            })
+          }}
         </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Type</span>
-            <span>Outlined</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                image: imageOne,
-                aligned: true,
-                border: true,
-                date: true
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Aligned</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                image: imageOne,
-                date: true,
-                aligned: true,
-                border: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Field Options</span>
-            <span>Required Only</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                date: true,
-                aligned: false,
-                border: false,
-                eyebrow: false,
-                ctaLink: false,
-                text: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Field Options</span>
-            <span>Minimal</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                image: imageOne,
-                date: true,
-                aligned: true,
-                border: false,
-                eyebrow: false,
-                ctaLink: false,
-                text: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Theme</span>
-            <span>Dark</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                image: imageOne,
-                aligned: true,
-                theme: 'dark'
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (3)</span>
-          </div>
-          <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.NormalCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.NormalCardBody({
-                image: imageThree,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (4)</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.NormalCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.NormalCardBody({
-                image: imageThree,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.NormalCardBody({
-                image: imageWeird,
-                aligned: true,
-                border: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (2)</span>
-          </div>
-          <div class="umd-grid-gap mb-md" style="margin-top: 24px">
-            {{
-              Article.NormalCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.NormalCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div id="verbose" class="dropdown-selection" aria-hidden="true">
-      <section>
-        <div class="umd-lock">
-          <h3 class="content-heading type-hr">
-            Default
-          </h3>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                image: imageSquare,
-                date: true
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Type</span>
-            <span>Outlined</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                image: imageOne,
-                aligned: true,
-                border: true,
-                date: true
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Aligned</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                image: imageOne,
-                date: true,
-                aligned: true,
-                border: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Field Options</span>
-            <span>Required Only</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                date: true,
-                aligned: false,
-                border: false,
-                eyebrow: false,
-                ctaLink: false,
-                text: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Field Options</span>
-            <span>Minimal</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                image: imageOne,
-                date: true,
-                aligned: true,
-                border: false,
-                eyebrow: false,
-                text: false,
-                ctaLink: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Theme</span>
-            <span>Dark</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                image: imageOne,
-                aligned: true,
-                theme: 'dark'
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (3)</span>
-          </div>
-          <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.VerboseCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.VerboseCardBody({
-                image: imageThree,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (4)</span>
-          </div>
-          <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.VerboseCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.VerboseCardBody({
-                image: imageThree,
-                aligned: true,
-                border: false
-              })
-            }}
-            {{
-              Article.VerboseCardBody({
-                image: imageWeird,
-                aligned: true,
-                border: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="umd-lock">
-          <div class="content-heading type-hr">
-            <span>Layout</span>
-            <span>Grouping (2)</span>
-          </div>
-          <div class="umd-grid-gap mb-md" style="margin-top: 24px">
-            {{
-              Article.VerboseCardBody({
-                image: imageOne,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-            {{
-              Article.VerboseCardBody({
-                image: imageTwo,
-                aligned: true,
-                border: false,
-                date: true,
-                ctaLink: false
-              })
-            }}
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
     <section>
       <div class="umd-lock">

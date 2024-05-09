@@ -126,7 +126,6 @@ const STYLES_EVENT_META = `
   .${ELEMENT_EVENTS_DATE_ROW_ICON} {
     width: 18px;
     display: flex;
-    align-items: center;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {

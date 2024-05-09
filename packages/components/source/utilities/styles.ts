@@ -7,6 +7,10 @@ const postcssNesting = require('postcss-nesting');
 const postcssJs = require('postcss-js');
 
 const Reset = `
+  :host {
+    color: ${Colors.black};
+  }
+  
   :host * {
     margin: 0;
     padding: 0;

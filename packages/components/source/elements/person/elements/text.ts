@@ -80,6 +80,7 @@ const NameStyles = `
   .${ELEMENT_PERSON_NAME_CONTAINER} {
     font-weight: 700;
     margin-bottom: ${Spacing.min};
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({

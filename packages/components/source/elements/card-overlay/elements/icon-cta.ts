@@ -1,4 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
+import { TextLockupSmall } from 'macros';
 import { AssetIcon } from 'utilities';
 
 export type TypeCardOverlayCtaIcon = {
@@ -65,6 +66,7 @@ const STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT = `
     right: ${Spacing.sm};
     z-index: 9999;
   }
+
   
   .${ELEMENT_CTA_ICON_CONTAINER} a {
     border-radius: 50%;

@@ -1,7 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import { TextLockupSmallScaling, TextLockupSmall } from 'macros';
-import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
+import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 
 type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
   headline: HTMLElement | null;

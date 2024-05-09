@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { LayoutBlockOverlay, TextLockupSmall } from 'macros';
-import CtaIcon, { TypeCardOverlayCtaIcon } from './icon-cta';
+import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 
 type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
   image: HTMLImageElement | null;
@@ -19,13 +19,21 @@ const ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION = 'card-overlay-image-declaration';
 
 const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
 
-const OVERWRITE_DATE_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} .${TextLockupSmall.Elements.date}`;
-
-const OVERWRITE_CTA_ICON_TEXT_LOCKUP = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${TextLockupSmall.Elements.wrapper}`;
+const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${LayoutBlockOverlay.Elements.container}`;
+const OVERWRITE_CTA_ICON_BLOCK_RICH_TEXT = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${TextLockupSmall.Elements.richText}`;
+const OVERWRITE_CTA_ICON_BLOCK_DATE = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${TextLockupSmall.Elements.date}`;
 
 const OverwriteCtaIcon = `
-  ${OVERWRITE_CTA_ICON_TEXT_LOCKUP} {
+  ${OVERWRITE_CTA_ICON_BLOCK_CONTAINER} {
     padding-right: ${Spacing.xl};
+  }
+
+  ${OVERWRITE_CTA_ICON_BLOCK_RICH_TEXT} {
+    padding-right: ${Spacing.xs};
+  }
+
+  ${OVERWRITE_CTA_ICON_BLOCK_DATE} {
+    padding-right: ${Spacing.xs};
   }
 `;
 

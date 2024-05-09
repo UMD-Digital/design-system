@@ -192,4 +192,7 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
 export default {
   CreateElement: CreateBlockOverlayElement,
   Styles: STYLES_BLOCK_OVERLAY_ELEMENT,
+  Elements: {
+    container: ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER,
+  },
 };

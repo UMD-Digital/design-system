@@ -34,9 +34,9 @@ const { ConvertJSSObjectToStyles } = Styles;
 const { Colors, Spacing } = Tokens;
 const { SansLarger } = Typography;
 
-const TABLET = 650;
-const DESKTOP = 850;
-const LARGE = 1000;
+const TABLET = 750;
+const DESKTOP = 1000;
+const LARGE = 1300;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';

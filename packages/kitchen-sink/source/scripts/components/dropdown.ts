@@ -111,6 +111,30 @@ const RichTextSlot = ({ type }: { type?: string }) => {
   });
 };
 
+const Eyebrow = ({ type }: { type?: string }) => {
+  const isLarge = type === DROPDOWN_VERBOSE;
+  const isSmall = type === DROPDOWN_SUCCINCT;
+  const slots = Array.from(
+    document.querySelectorAll('[slot="eyebrow"]'),
+  ) as HTMLSlotElement[];
+
+  const textLarge = 'Optional Eyebrow Long Text';
+  const textNormal = 'Optional Eyebrow';
+  const textSmall = 'Optional';
+  let text = textNormal;
+
+  if (isLarge) text = textLarge;
+  if (isSmall) text = textSmall;
+
+  slots.forEach((slot) => {
+    const setSlot = (content: string) => {
+      slot.innerHTML = `${content}`;
+    };
+
+    setSlot(text);
+  });
+};
+
 const ContentOptionsWithJS = () => {
   const dropdown = document.getElementById(
     'content-variation-js',
@@ -122,6 +146,7 @@ const ContentOptionsWithJS = () => {
     const type = dropdown.value;
     HeadlineSlot({ type });
     RichTextSlot({ type });
+    Eyebrow({ type });
   };
 
   if (dropdown) {

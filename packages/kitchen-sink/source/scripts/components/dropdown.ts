@@ -5,9 +5,26 @@ const DROPDOWN_NORMAL = 'normal';
 const DROPDOWN_VERBOSE = 'verbose';
 const DROPDOWN_IDS = [DROPDOWN_SUCCINCT, DROPDOWN_NORMAL, DROPDOWN_VERBOSE];
 
-const SMALL_CONTENT_ELEMENTS = ['umd-element-events-date'];
-const MEDIUM_CONTENT_ELEMENTS = ['umd-element-slider-events'];
-const LARGE_CONTENT_ELEMENTS = ['umd-element-hero'];
+const SMALL_CONTENT_ELEMENTS = [
+  'umd-element-slider-events',
+  'umd-element-events-date',
+  'umd-element-stat',
+];
+const MEDIUM_CONTENT_ELEMENTS = [
+  'umd-element-accordion-item',
+  'umd-element-alert-page',
+  'umd-element-alert-site',
+];
+const LARGE_CONTENT_ELEMENTS = [
+  'umd-element-hero',
+  'umd-element-hero-minimal',
+  'umd-element-hero-logo',
+  'umd-element-pathway',
+  'umd-element-pathway-highlight',
+  'umd-element-carousel-cards',
+  'umd-element-quote',
+  'umd-element-section-intro',
+];
 
 const isTypeInBucket = (element: HTMLElement, bucket: string[]) =>
   bucket.some((name) => name === element.nodeName.toLowerCase());
@@ -34,17 +51,93 @@ const HeadlineTextMap = ({
   if (isLarge) text = maxiumString.slice(0, 60);
   if (isSmall) text = maxiumString.slice(0, 10);
 
-  if (isSmallBucket && isLarge) text = maxiumString.slice(0, 100);
-  if (isSmallBucket && isNormal) text = maxiumString.slice(0, 50);
-  if (isSmallBucket && isSmall) text = maxiumString.slice(0, 8);
+  if (isLargeBucket && isLarge) text = maxiumString;
+  if (isLargeBucket && isNormal) text = maxiumString.slice(0, 80);
+  if (isLargeBucket && isSmall) text = maxiumString.slice(0, 40);
 
   if (isMediumBucket && isLarge) text = maxiumString.slice(0, 60);
   if (isMediumBucket && isNormal) text = maxiumString.slice(0, 30);
   if (isMediumBucket && isSmall) text = maxiumString.slice(0, 8);
 
-  if (isLargeBucket && isLarge) text = maxiumString;
-  if (isLargeBucket && isNormal) text = maxiumString.slice(0, 80);
-  if (isLargeBucket && isSmall) text = maxiumString.slice(0, 40);
+  if (isSmallBucket && isLarge) text = maxiumString.slice(0, 100);
+  if (isSmallBucket && isNormal) text = maxiumString.slice(0, 50);
+  if (isSmallBucket && isSmall) text = maxiumString.slice(0, 8);
+
+  return text;
+};
+
+const RichTextMap = ({
+  type,
+  element,
+}: {
+  type?: string;
+  element: HTMLElement;
+}) => {
+  const elementParent = element.parentElement as HTMLElement;
+  const isSmallBucket = isTypeInBucket(elementParent, SMALL_CONTENT_ELEMENTS);
+  const isMediumBucket = isTypeInBucket(elementParent, MEDIUM_CONTENT_ELEMENTS);
+  const isLargeBucket = isTypeInBucket(elementParent, LARGE_CONTENT_ELEMENTS);
+  const isLarge = type === DROPDOWN_VERBOSE;
+  const isNormal = type === DROPDOWN_NORMAL;
+  const isSmall = type === DROPDOWN_SUCCINCT;
+
+  const richTextLarge = `<p>Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit <strong>Duis reprehen</strong><i>eu fugiat</i>. Lorem Ipsum Dolor Sit <a href="/">Excepteur occaecat</a>, voluptate Consectetur Adipiscing Elit. Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit voluptate Consectetur Adipiscing Elit</p>`;
+  const richTextNormal = `<p>Lorem Ipsum Consectetur Elit <strong>Duis reprehen</strong>. Lorem Ipsum Dolor Sit <a href="/">Excepteur occaecat</a>, voluptate Adipiscing Elit.</p>`;
+  const richTextSmall = `<p>Lorem Ipsum Consectetur Adipis <a href="/">Excepteur occaecat</a> Adipiscing Elit Lorem Ipsum Consectetur.</p> `;
+
+  let text = richTextNormal;
+
+  if (isLarge) text = richTextLarge;
+  if (isSmall) text = richTextSmall;
+
+  if (isLargeBucket && isLarge) text = `${richTextLarge} ${richTextNormal}`;
+  if (isLargeBucket && isNormal) text = `${richTextNormal} ${richTextNormal}`;
+  if (isLargeBucket && isSmall) text = `${richTextNormal} ${richTextSmall}`;
+
+  if (isMediumBucket && isLarge) text = `${richTextLarge} ${richTextSmall}`;
+  if (isMediumBucket && isNormal) text = `${richTextNormal} ${richTextSmall}`;
+  if (isMediumBucket && isSmall) text = richTextSmall;
+
+  if (isSmallBucket && isLarge) text = richTextNormal;
+  if (isSmallBucket && isNormal) text = richTextSmall;
+  if (isSmallBucket && isSmall) text = richTextSmall;
+
+  return text;
+};
+
+const BodyTextMap = ({
+  type,
+  element,
+}: {
+  type?: string;
+  element: HTMLElement;
+}) => {
+  const elementParent = element.parentElement as HTMLElement;
+  const isSmallBucket = isTypeInBucket(elementParent, SMALL_CONTENT_ELEMENTS);
+  const isMediumBucket = isTypeInBucket(elementParent, MEDIUM_CONTENT_ELEMENTS);
+  const isLargeBucket = isTypeInBucket(elementParent, LARGE_CONTENT_ELEMENTS);
+  const isLarge = type === DROPDOWN_VERBOSE;
+  const isNormal = type === DROPDOWN_NORMAL;
+  const isSmall = type === DROPDOWN_SUCCINCT;
+
+  const maxiumString =
+    'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud Quamie   Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud Quamie   Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis.';
+  let text = maxiumString.slice(0, 100);
+
+  if (isLarge) text = maxiumString.slice(0, 200);
+  if (isSmall) text = maxiumString.slice(0, 50);
+
+  if (isLargeBucket && isLarge) text = maxiumString.slice(0, 400);
+  if (isLargeBucket && isNormal) text = maxiumString.slice(0, 200);
+  if (isLargeBucket && isSmall) text = maxiumString.slice(0, 140);
+
+  if (isMediumBucket && isLarge) text = maxiumString.slice(0, 250);
+  if (isMediumBucket && isNormal) text = maxiumString.slice(0, 170);
+  if (isMediumBucket && isSmall) text = maxiumString.slice(0, 100);
+
+  if (isSmallBucket && isLarge) text = maxiumString.slice(0, 140);
+  if (isSmallBucket && isNormal) text = maxiumString.slice(0, 80);
+  if (isSmallBucket && isSmall) text = maxiumString.slice(0, 60);
 
   return text;
 };
@@ -73,8 +166,6 @@ const HeadlineSlot = ({ type }: { type?: string }) => {
 };
 
 const RichTextSlot = ({ type }: { type?: string }) => {
-  const isLarge = type === DROPDOWN_VERBOSE;
-  const isSmall = type === DROPDOWN_SUCCINCT;
   const bodySlots = Array.from(
     document.querySelectorAll('[slot="body"]'),
   ) as HTMLSlotElement[];
@@ -82,20 +173,7 @@ const RichTextSlot = ({ type }: { type?: string }) => {
     document.querySelectorAll('[slot="text"]'),
   ) as HTMLSlotElement[];
   const slots = [...bodySlots, ...textSlots];
-
-  const richTextLarge = `<p>Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit <strong>Duis reprehen</strong><i>eu fugiat</i>. Lorem Ipsum Dolor Sit <a href="/">Excepteur occaecat</a>, voluptate Consectetur Adipiscing Elit. Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit voluptate Consectetur Adipiscing Elit</p><p>Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Lorem Ipsum Dolor Sit Amet Consectetur</p>`;
-  const richTextNormal = `<p>Lorem Ipsum Consectetur Adipiscing Elit <strong>Duis reprehen</strong> Adipiscing <i>eu fugiat</i>. Lorem Ipsum Dolor Sit <a href="/">Excepteur occaecat</a>, voluptate Adipiscing Elit.</p>`;
-  const richTextSmall = `<p>Lorem Ipsum Consectetur Adipis <a href="/">Excepteur occaecat</a> Adipiscing Elit.</p>`;
-  const textLarge =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. Heri, inquam, ludis commissis ex urbe profectus veni ad vesperum. Fortitudinis quaedam praecepta sunt ac paene leges, quae effeminari virum vetant in dolore. Ut optime, secundum naturam affectum esse possit. Quis tibi ergo istud dabit praeter Pyrrhonem, Aristonem eorumve similes, quos tu non probas? ';
-  const textNormal =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.';
-  const textSmall =
-    'Lorem Ipsum Dolor Sit Amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ';
-  let text = textNormal;
-
-  if (isLarge) text = textLarge;
-  if (isSmall) text = textSmall;
+  let text = '';
 
   slots.forEach((slot) => {
     const isRichText = slot.classList.contains('umd-rich-text');
@@ -104,7 +182,9 @@ const RichTextSlot = ({ type }: { type?: string }) => {
     };
 
     if (isRichText) {
-      text = isLarge ? richTextLarge : isSmall ? richTextSmall : richTextNormal;
+      text = RichTextMap({ type, element: slot });
+    } else {
+      text = BodyTextMap({ type, element: slot });
     }
 
     setSlot(text);

@@ -133,7 +133,11 @@ const HeadlineStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} {
-    margin-top: ${Spacing.min}
+    margin-top: ${Spacing.min};
+  }
+
+  .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} {
+    color: ${Colors.gray.dark};
   }
 
   ${ConvertJSSObjectToStyles({

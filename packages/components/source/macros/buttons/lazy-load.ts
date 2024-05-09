@@ -1,12 +1,16 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { CallToAction } from 'elements';
 
-export type TypeLazyLoad = {
+type LazyLoadCreate = {
+  callback: (args: any) => void;
+  theme?: string | null;
+};
+
+export type TypeLazyLoad = LazyLoadCreate & {
   container: HTMLElement;
   isLazyLoad: boolean;
   totalEntries: number | null;
   offset: number;
-  lazyLoadCallback: { callback: (args: any) => void };
 };
 
 const { Spacing } = Tokens;
@@ -23,16 +27,13 @@ const STYLES_LAZY_LOAD_BUTTON = `
   }
 `;
 
-const CreateLazyLoadButton = ({
-  callback,
-}: {
-  callback: (args: any) => void;
-}) => {
+const CreateLazyLoadButton = ({ callback, theme }: LazyLoadCreate) => {
   const container = document.createElement('div');
   const button = document.createElement('button');
   const ctaButton = CallToAction.CreateElement({
     cta: button,
     type: 'outline',
+    theme,
   });
 
   button.innerHTML = 'Load More';
@@ -57,15 +58,19 @@ const DisplayLazyLoad = ({
   isLazyLoad,
   totalEntries,
   offset,
-  lazyLoadCallback,
+  theme,
+  callback,
 }: TypeLazyLoad) => {
   if (!isLazyLoad) return;
   if (!totalEntries) return;
   if (!offset) return;
-  if (!lazyLoadCallback) return;
+  if (!callback) return;
   if (offset >= totalEntries) return;
 
-  const lazyLoadButton = CreateLazyLoadButton(lazyLoadCallback);
+  const lazyLoadButton = CreateLazyLoadButton({
+    callback,
+    theme,
+  });
   container.appendChild(lazyLoadButton);
 };
 

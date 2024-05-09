@@ -79,7 +79,7 @@ const MakeLazyLoadVariables = (props: TypeFeedProps) => ({
   totalEntries: props.getTotalEntries(),
   offset: props.getOffset(),
   container: props.getContainer(),
-  lazyLoadCallback: { callback: () => LoadMoreEntries(props) },
+  callback: () => LoadMoreEntries(props),
 });
 
 const DisplayEntries = (props: TypeDisplayEntries) => {

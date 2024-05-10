@@ -3,6 +3,11 @@
   padding-bottom: 40px;
 }
 
+.page-sub-heading {
+  @apply umd-sans-larger;
+  padding-bottom: 30px;
+}
+
 .content-heading {
   @apply umd-sans-large;
   display: block;

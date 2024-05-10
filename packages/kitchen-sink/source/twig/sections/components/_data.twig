@@ -83,61 +83,81 @@
 
 {% set BlockPages = [
   {
-    name: 'Block - Article',
+    name: 'Article',
     link: 'article'
   },
   {
-    name: 'Block - Card',
+    name: 'Card',
     link: 'card'
   },
   {
-    name: 'Block - Card Overlay',
+    name: 'Card Overlay',
     link: 'card-overlay'
   },
   {
-    name: 'Block - Event',
+    name: 'Event',
     link: 'event'
   },
   {
-    name: 'Block - Event Featured',
+    name: 'Event Featured',
     link: 'event-featured'
   },
   {
-    name: 'Block - Event Promo',
+    name: 'Event Promo',
     link: 'event-promo'
+  },
+  {
+    name: 'Feed Events',
+    link: 'feed-events'
+  },
+  {
+    name: 'Feed News',
+    link: 'feed-news'
   }
 ] %}
 
 {% set ListPages = [
   {
-    name: 'List - Article',
+    name: 'Article',
     link: 'article'
   },
   {
-    name: 'List - Card',
+    name: 'Card',
     link: 'card'
   },
   {
-    name: 'List - Event',
+    name: 'Event',
     link: 'event'
+  },
+  {
+    name: 'Feed Events',
+    link: 'feed-event'
+  },
+  {
+    name: 'Feed Events Grouped',
+    link: 'feed-events-grouped'
+  },
+  {
+    name: 'Feed News',
+    link: 'feed-news'
   }
 ] %}
 
 {% set NavigationPages = [
   {
-    name: 'Nav - Drawer',
+    name: 'Drawer',
     link: 'drawer'
   },
   {
-    name: 'Nav - Item',
+    name: 'Item',
     link: 'item'
   },
   {
-    name: 'Nav - Header',
+    name: 'Header',
     link: 'header'
   },
   {
-    name: 'Nav - Slider',
+    name: 'Slider',
     link: 'Slider'
   }
 ] %}
@@ -167,15 +187,19 @@
   {% endfor %}
 {% endmacro %}
 
-{% macro SubLinks() %}
+{% macro SubLinksBlock() %}
   {% for item in BlockPages %}
     <a href="{{ _self.GetUrl ~ 'blocks/' ~ item.link }}">{{ item.name }}</a>
   {% endfor %}
+{% endmacro %}
 
+{% macro SubLinksList() %}
   {% for item in ListPages %}
     <a href="{{ _self.GetUrl ~ 'lists/' ~ item.link }}">{{ item.name }}</a>
   {% endfor %}
+{% endmacro %}
 
+{% macro SubLinksNavigation() %}
   {% for item in NavigationPages %}
     <a href="{{ _self.GetUrl ~ 'lists/' ~ item.link }}">{{ item.name }}</a>
   {% endfor %}

@@ -9,7 +9,7 @@
   {% set imageThree = random(RecImageOptions) %}
 
   <div style="padding-bottom: 50px;">
-    <div class="umd-lock">
+    <div class="umd-lock-smaller">
       <h1 class="page-heading">
         Display Type List
       </h1>
@@ -20,7 +20,7 @@
     </div>
 
     <section>
-      <div class="umd-lock">
+      <div class="umd-lock-smaller">
         <div class="content-heading" style="margin-bottom: 24px">
           <span>Article</span>
           <a href="{{ Data.GetUrl() }}lists/article">View More Examples</a>
@@ -74,7 +74,7 @@
     </section>
 
     <section>
-      <div class="umd-lock">
+      <div class="umd-lock-smaller">
         <div class="content-heading" style="margin-bottom: 24px;">
           <span>Card</span>
           <a href="{{ Data.GetUrl() }}lists/card">View More Examples</a>
@@ -124,7 +124,7 @@
     </section>
 
     <section>
-      <div class="umd-lock">
+      <div class="umd-lock-smaller">
         <h3 class="content-heading">
           <span>Event</span>
           <a href="{{ Data.GetUrl() }}lists/event">View More Examples</a>
@@ -167,6 +167,42 @@
             <a href="/"><span>Learn More</span></a>
           </umd-element-call-to-action>
         </umd-element-event>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock-smaller">
+        <h2 class="content-heading">
+          <span>Feed - Events</span>
+          <a href="{{ Data.GetUrl() }}lists/feed-events">View More Examples</a>
+        </h2>
+
+        <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
+          union="false"></umd-feed-events-list>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock-smaller">
+        <h2 class="content-heading">
+          <span>Feed - News</span>
+          <a href="{{ Data.GetUrl() }}lists/feed-events-grouped">
+            View More Examples
+          </a>
+        </h2>
+
+        <umd-feed-events-grouped token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-grouped>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock-smaller">
+        <h2 class="content-heading">
+          <span>Feed - News</span>
+          <a href="{{ Data.GetUrl() }}lists/feed-news">View More Examples</a>
+        </h2>
+
+        <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"></umd-feed-news-list>
       </div>
     </section>
   </div>

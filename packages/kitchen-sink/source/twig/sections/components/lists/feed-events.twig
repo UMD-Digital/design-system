@@ -1,15 +1,15 @@
-{% extends '../../_layout.twig' %}
+{% extends '_layout.twig' %}
 
 {% block page %}
   <section>
-    <div class="umd-lock">
+    <div class="umd-lock-smaller">
       <h1 class="page-heading">
         Feed Events List
       </h1>
     </div>
 
-    <section style="max-width: 800px;">
-      <div class="umd-lock">
+    <section>
+      <div class="umd-lock-smaller">
         <h2 class="content-heading">
           No Results
         </h2>
@@ -21,14 +21,14 @@
       </div>
     </section>
 
-    <section style="padding-bottom: 40px">
-      <div class="umd-lock">
+    <section>
+      <div class="umd-lock-smaller">
         <h2 class="content-heading">
           <span>Multiple inclusions: (default union)</span>
           <span>Campus Leaders & Alumni Association</span>
         </h2>
 
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div>
           <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
             categories="10256,10322"
             lazyload="true"></umd-feed-events-list>
@@ -36,14 +36,14 @@
       </div>
     </section>
 
-    <section style="padding-bottom: 40px">
-      <div class="umd-lock">
+    <section>
+      <div class="umd-lock-smaller">
         <h2 class="content-heading">
           <span>Multiple inclusions: Intersection</span>
           <span>Campus Leaders & Alumni Association</span>
         </h2>
 
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div>
           <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
             categories="10256,10322"
             union="false"
@@ -53,13 +53,13 @@
     </section>
 
     <section style="padding: 50px 0; background-color: black;">
-      <div class="umd-lock">
+      <div class="umd-lock-smaller">
         <h2 class="content-heading">
           <span style="color: white;">Lazy Load with Stamp Events</span>
           <span style="color: white;">Limit 10</span>
         </h2>
 
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div>
           <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
             categories="92369"
             theme="dark"

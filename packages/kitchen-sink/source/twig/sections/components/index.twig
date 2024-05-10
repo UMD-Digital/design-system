@@ -3,7 +3,7 @@
 {% block page %}
   {% import './_data.twig' as List %}
 
-  <section>
+  <section style="padding-bottom: 50px;">
     <div class="umd-lock">
       <h1 class="page-heading">
         Main Pages
@@ -15,12 +15,32 @@
 
       <hr />
 
-      <h1 class="page-heading">
-        Sub Pages
-      </h1>
+      <h2 class="page-sub-heading">
+        Sub Pages - Blocks
+      </h2>
 
       <div class="umd-grid-gap-four mb-md">
-        {{ List.SubLinks() }}
+        {{ List.SubLinksBlock() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
+        Sub Pages - Lists
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ List.SubLinksList() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
+        Sub Pages - Navigation
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ List.SubLinksNavigation() }}
       </div>
     </div>
   </section>

@@ -28,10 +28,6 @@
     link: 'carousel-cards'
   },
   {
-    name: 'Event',
-    link: 'event'
-  },
-  {
     name: 'Footer',
     link: 'footer'
   },
@@ -85,6 +81,67 @@
   }
 ] %}
 
+{% set BlockPages = [
+  {
+    name: 'Block - Article',
+    link: 'article'
+  },
+  {
+    name: 'Block - Card',
+    link: 'card'
+  },
+  {
+    name: 'Block - Card Overlay',
+    link: 'card-overlay'
+  },
+  {
+    name: 'Block - Event',
+    link: 'event'
+  },
+  {
+    name: 'Block - Event Featured',
+    link: 'event-featured'
+  },
+  {
+    name: 'Block - Event Promo',
+    link: 'event-promo'
+  }
+] %}
+
+{% set ListPages = [
+  {
+    name: 'List - Article',
+    link: 'article'
+  },
+  {
+    name: 'List - Card',
+    link: 'card'
+  },
+  {
+    name: 'List - Event',
+    link: 'event'
+  }
+] %}
+
+{% set NavigationPages = [
+  {
+    name: 'Nav - Drawer',
+    link: 'drawer'
+  },
+  {
+    name: 'Nav - Item',
+    link: 'item'
+  },
+  {
+    name: 'Nav - Header',
+    link: 'header'
+  },
+  {
+    name: 'Nav - Slider',
+    link: 'Slider'
+  }
+] %}
+
 {% macro GetUrl() %}
   {% set URL = '/sections/components/' %}
   {{ URL }}
@@ -107,5 +164,19 @@
 {% macro Links() %}
   {% for item in list %}
     <a href="{{ _self.GetUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in BlockPages %}
+    <a href="{{ _self.GetUrl ~ 'blocks/' ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+
+  {% for item in ListPages %}
+    <a href="{{ _self.GetUrl ~ 'lists/' ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+
+  {% for item in NavigationPages %}
+    <a href="{{ _self.GetUrl ~ 'lists/' ~ item.link }}">{{ item.name }}</a>
   {% endfor %}
 {% endmacro %}

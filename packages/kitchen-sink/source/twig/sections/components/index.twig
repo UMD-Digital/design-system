@@ -2,6 +2,7 @@
 
 {% block page %}
   {% import './_data.twig' as List %}
+  {% import './atomic/index.twig' as Atomic %}
   {% import './blocks/index.twig' as Blocks %}
   {% import './lists/index.twig' as Lists %}
   {% import './navigation/index.twig' as Navigation %}
@@ -15,6 +16,16 @@
 
       <div class="umd-grid-gap-four mb-md">
         {{ List.Links() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
+        Sub Pages - <a href="{{ Atomic.GetChildUrl() }}">Atomic</a>
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ Atomic.SubLinks() }}
       </div>
 
       <hr />

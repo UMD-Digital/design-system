@@ -1,0 +1,143 @@
+{% extends '_layout.twig' %}
+{% import '_includes/macros/call-to-action-options.twig'
+  as CallToActionOption
+%}
+
+{% set AtomicPages = [
+  {
+    name: 'Call To Action',
+    link: 'call-to-action'
+  },
+  {
+    name: 'Call To Action (button)',
+    link: 'call-to-action-button'
+  }
+] %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'atomic/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in AtomicPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
+
+{% block page %}
+  <div style="padding-bottom: 50px;">
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Atomic Elements (small reusable components)
+      </h1>
+
+      <p>
+        View Other Components
+      </p>
+
+      <ul>
+        {% for item in AtomicPages %}
+          <li>
+            <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Call To Actions</span>
+          <a href="{{ _self.GetChildUrl() }}call-to-action">
+            View More Examples
+          </a>
+        </div>
+
+        <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
+          <div>
+            {{
+              CallToActionOption.NormalCTA({
+                ctaSpan: true,
+                ctaLink: false,
+                externalLink: false,
+                download: false
+              })
+            }}
+          </div>
+
+          <div>
+            {{
+              CallToActionOption.NormalCTA({
+                outline: true,
+                large: false,
+                ctaOption: 'chevron',
+                button: false
+              })
+            }}
+          </div>
+
+          <div>
+            {{
+              CallToActionOption.NormalCTA({
+                secondary: true,
+                large: false,
+                ctaOption: 'chevron',
+                button: false
+              })
+            }}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Call To Actions (Button)</span>
+          <a href="{{ _self.GetChildUrl() }}call-to-action-button">
+            View More Examples
+          </a>
+        </div>
+
+        <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
+          <div>
+            {{
+              CallToActionOption.NormalCTA({
+                ctaSpan: true,
+                ctaLink: false,
+                externalLink: false,
+                download: false,
+                button: true
+              })
+            }}
+          </div>
+
+          <div>
+            {{
+              CallToActionOption.NormalCTA({
+                outline: true,
+                large: false,
+                ctaOption: 'chevron',
+                button: true
+              })
+            }}
+          </div>
+
+          <div>
+            {{
+              CallToActionOption.NormalCTA({
+                secondary: true,
+                large: false,
+                ctaOption: 'chevron',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

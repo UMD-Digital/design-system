@@ -1,9 +1,7 @@
-{% extends '../../_layout.twig' %}
+{% extends '_layout.twig' %}
 
-{% import '../../_includes/content-dropdown.twig' as Dropdown %}
-{% import '../../_includes/macros/card-overlay.twig' as CardOverlay %}
-
-{% set var = value %}
+{% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import '_includes/macros/card-overlay.twig' as CardOverlay %}
 
 {% block page %}
   {% set imageOne = random(RecImageOptions) %}

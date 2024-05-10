@@ -1,6 +1,7 @@
 {% extends '_layout.twig' %}
 {% import '_includes/macros/article.twig' as Article %}
 {% import '_includes/macros/card.twig' as Card %}
+{% import '_includes/macros/card-overlay.twig' as CardOverlay %}
 {% import '../_data.twig' as Data %}
 
 {% block page %}
@@ -86,6 +87,41 @@
               aligned: true,
               border: false,
               ctaLink: false
+            })
+          }}
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Card Overlay</span>
+          <a href="{{ Data.GetUrl() }}blocks/card-overlay">
+            View More Examples
+          </a>
+        </div>
+        <div class="umd-grid-gap-three my-md">
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageOne,
+              ctaLink: false,
+              ctaOption: 'external'
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              ctaOption: 'download',
+              ctaLink: false
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              theme: 'dark',
+              ctaLink: false,
+              ctaOption: 'internal'
             })
           }}
         </div>

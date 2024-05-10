@@ -1,3 +1,4 @@
+import Accordion from './additional-styling/accordion';
 import Alert from './default-styling/alert';
 import Article from './additional-styling/article';
 import Breadcrumb from './additional-styling/breadcrumb';
@@ -21,6 +22,7 @@ import SectionIntro from './additional-styling/section-intro';
 import UtilityHeader from './additional-styling/utility-header';
 
 export default {
+  ...Accordion,
   ...Alert,
   ...Article,
   ...Breadcrumb,

@@ -1,0 +1,146 @@
+{% extends '_layout.twig' %}
+{% import '../_data.twig' as Data %}
+
+{% block page %}
+  <div style="padding-bottom: 50px;">
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Navigation Components
+      </h1>
+
+      <p>
+        View other navigation components:
+      </p>
+      <ul>
+        <li><a href="{{ Data.GetUrl() }}navigation/header">Header</a></li>
+        <li><a href="{{ Data.GetUrl() }}navigation/drawer">Drawer</a></li>
+        <li><a href="{{ Data.GetUrl() }}navigation/slider">Slider</a></li>
+        <li><a href="{{ Data.GetUrl() }}navigation/item">Item</a></li>
+      </ul>
+    </div>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Header: Provost</span>
+          <a href="{{ Data.GetUrl() }}navigation/header">View More Examples</a>
+        </div>
+
+        <umd-element-navigation-header role="navigation" search-url="/search">
+          <a href="/" slot="logo">
+            <img src="https://provost.umd.edu/logos/provost-logo-primary-light.png"
+              alt="Office of the Provost, Division of Academic Affairs, University of Maryland" />
+          </a>
+
+          <div slot="main-navigation">
+            <umd-element-nav-item>
+              <a href="/" slot="primary-link"><span>About</span></a>
+            </umd-element-nav-item>
+
+            <umd-element-nav-item>
+              <a href="/" slot="primary-link">
+                <span>Provost Initiatives</span>
+              </a>
+              <div slot="dropdown-links">
+                <a href="https://google.com"><span>Google</span></a>
+              </div>
+            </umd-element-nav-item>
+
+            <umd-element-nav-item>
+              <a href="/" slot="primary-link"><span>Leadership Areas</span></a>
+
+              <div slot="dropdown-links">
+                <a href="https://google.com"><span>Google</span></a>
+              </div>
+            </umd-element-nav-item>
+
+            <umd-element-nav-item>
+              <a href="/" slot="primary-link"><span>Resources</span></a>
+
+              <div slot="dropdown-links">
+                <a href="https://google.com"><span>Google</span></a>
+              </div>
+            </umd-element-nav-item>
+          </div>
+
+          <div slot="primary-slide-links">
+            <a href="https://google.com" data-child-ref="slide-1">
+              <span>Google</span>
+            </a>
+
+            <a href="https://wwe2.glitch.me/app.html" data-child-ref="slide-1">
+              <span>
+                Design super long nav item text example that links to someplace
+                awesome
+              </span>
+            </a>
+
+            <a href="https://github.com"><span>Github</span></a>
+
+            <a href="https://apple.com" data-child-ref="slide-3">
+              <span>Apple</span>
+            </a>
+
+            <a href="https://apple.com" data-selected>
+              <span>Selected Example</span>
+            </a>
+          </div>
+
+          <div slot="children-slides">
+            <div data-parent-ref="slide-1">
+              <a href="https://docs.google.com/" data-child-ref="doc-slide-1">
+                <span>Google Docs</span>
+              </a>
+              <a href="https://images.google.com/">
+                <span>Google Images</span>
+              </a>
+              <a href="https://maps.google.com/"><span>Google Maps</span></a>
+            </div>
+
+            <div data-parent-ref="slide-3">
+              <a href="https://www.apple.com/macbook-pro/">
+                <span>Apple Macbook Pro</span>
+              </a>
+            </div>
+
+            <div data-parent-ref="doc-slide-1">
+              <a href="https://images.google.com/">
+                <span>Example Tier 3</span>
+              </a>
+            </div>
+          </div>
+        </umd-element-navigation-header>
+      </div>
+      <umd-element-hero-minimal theme="light">
+        <p slot="eyebrow">
+          Landing Hero
+        </p>
+        <p slot="headline">
+          Academic & Budgetary Affaris
+        </p>
+      </umd-element-hero-minimal>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading">
+          <span>Interior Slider</span>
+          <a href="{{ Data.GetUrl() }}navigation/slider">View More Examples</a>
+        </p>
+
+        <umd-element-nav-slider style="max-width: 500px;">
+          <div slot="primary-slide-links">
+            <a href="https://google.com" data-selected><span>About</span></a>
+          </div>
+
+          <div slot="primary-slide-secondary-links">
+            <a href="https://github.com">
+              <span>Amenities & Attractions</span>
+            </a>
+            <a href="https://apple.com"><span>Discovery Distract</span></a>
+          </div>
+        </umd-element-nav-slider>
+      </div>
+    </section>
+  </div>
+{% endblock %}

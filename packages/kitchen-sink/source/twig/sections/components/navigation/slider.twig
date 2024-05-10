@@ -1,0 +1,153 @@
+{% extends '_layout.twig' %}
+
+{% block page %}
+  <div>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Navigation Header
+      </h1>
+    </div>
+
+    <section style="min-height: 20vh;">
+      <div class="umd-lock">
+        <p class="content-heading">
+          Interior Navigation slider - One Teir
+        </p>
+
+        <umd-element-nav-slider style="max-width: 500px;">
+          <div slot="primary-slide-links">
+            <a href="https://google.com" data-selected><span>About</span></a>
+          </div>
+
+          <div slot="primary-slide-secondary-links">
+            <a href="https://github.com">
+              <span>Amenities & Attractions</span>
+            </a>
+            <a href="https://apple.com"><span>Discovery Distract</span></a>
+          </div>
+        </umd-element-nav-slider>
+      </div>
+    </section>
+
+    <section style="min-height: 20vh; padding-bottom: 50px;">
+      <div class="umd-lock">
+        <p class="content-heading">
+          Interior Navigation slider - Multiple Teirs
+        </p>
+
+        <umd-element-nav-slider style="max-width: 500px;">
+          <div slot="primary-slide-links">
+            <a href="https://google.com"><span>About</span></a>
+          </div>
+
+          <div slot="primary-slide-secondary-links">
+            <a href="https://github.com" data-child-ref="slide-1">
+              <span>Real estate</span>
+            </a>
+            <a href="https://github.com" data-child-ref="slide-2">
+              <span>Amenities & Attractions</span>
+            </a>
+            <a href="https://apple.com"><span>Discovery Distract</span></a>
+          </div>
+
+          <div slot="children-slides">
+            <div data-parent-ref="slide-1">
+              <a href="https://docs.google.com/"><span>About Child</span></a>
+            </div>
+
+            <div data-parent-ref="slide-2">
+              <a href="https://docs.google.com/" data-child-ref="slide-level-3">
+                <span>More Levels</span>
+              </a>
+              <a href="https://docs.google.com/">
+                <span>Just Another Link</span>
+              </a>
+              <a href="https://docs.google.com/">
+                <span>Just Another Link Part II</span>
+              </a>
+            </div>
+
+            <div data-parent-ref="slide-level-3">
+              <a href="https://docs.google.com/"><span>Level 3 One</span></a>
+              <a href="https://docs.google.com/"><span>Level 3 Two</span></a>
+            </div>
+          </div>
+
+          <div slot="primary-slide-content">
+            <p style="line-height: 1.5em;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+
+            <p style="padding-top: 12px; line-height: 1.5em;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+
+            <p style="padding-top: 12px; line-height: 1.5em;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        </umd-element-nav-slider>
+      </div>
+    </section>
+
+    <section style="min-height: 20vh;">
+      <div class="umd-lock">
+        <p class="content-heading">
+          Interior Navigation slider - Context Menu
+        </p>
+
+        <umd-element-nav-slider style="max-width: 500px;">
+          <div slot="primary-slide-links">
+            <a href="https://google.com" data-child-ref="slide-1">
+              <span>About</span>
+            </a>
+            <a href="https://google.com" data-child-ref="slide-2">
+              <span>Design super long nav item text example</span>
+            </a>
+          </div>
+
+          <div slot="primary-slide-secondary-links">
+            <a href="https://github.com">
+              <span>Amenities & Attractions</span>
+            </a>
+            <a href="https://apple.com"><span>Discovery Distract</span></a>
+          </div>
+
+          <div slot="children-slides">
+            <div data-parent-ref="slide-1">
+              <a href="https://docs.google.com/" data-child-ref="doc-slide-1">
+                <span>About Child</span>
+              </a>
+            </div>
+
+            <div data-parent-ref="slide-2" data-active>
+              <a href="https://docs.google.com/" data-child-ref="slide-level-3">
+                <span>More Levels</span>
+              </a>
+              <a href="https://docs.google.com/" data-selected>
+                <span>Just Another Link</span>
+              </a>
+              <a href="https://docs.google.com/">
+                <span>Just Another Link Part II</span>
+              </a>
+            </div>
+
+            <div data-parent-ref="slide-level-3">
+              <a href="https://docs.google.com/"><span>Level 3 One</span></a>
+              <a href="https://docs.google.com/"><span>Level 3 Two</span></a>
+            </div>
+          </div>
+        </umd-element-nav-slider>
+      </div>
+    </section>
+  </div>
+{% endblock %}

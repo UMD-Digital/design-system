@@ -1,0 +1,58 @@
+{% extends '_layout.twig' %}
+
+{% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import '_includes/macros/date.twig' as DateDisplay %}
+{% import '_includes/macros/fields/headline.twig' as Headline %}
+{% import '_includes/macros/fields/link.twig' as Link %}
+{% import '../_data.twig' as Data %}
+
+{% block page %}
+  <div style="padding-bottom: 50px;">
+    <section>
+      <div class="umd-lock">
+        <h1 class="page-heading">
+          Sliders
+        </h1>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading">
+          <span>Events</span>
+          <a href="{{ Data.GetUrl() }}sliders/events">View More Examples</a>
+        </h3>
+
+        <umd-element-slider-events>
+          <div slot="headline">
+            Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit
+          </div>
+
+          <umd-element-call-to-action slot="actions"
+            type="secondary"
+            theme="light">
+            <a href="/"><span>CTA Link</span></a>
+          </umd-element-call-to-action>
+
+          <div slot="event-list">
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+            {{ DateDisplay.DateWithNormalTitle() }}
+            {{ DateDisplay.DateWithNormalTitle() }}
+            {{
+              DateDisplay.DateWithNormalTitle({
+                link: true
+              })
+            }}
+            {{ DateDisplay.DateWithNormalTitle() }}
+            {{ DateDisplay.DateWithNormalTitle() }}
+            {{ DateDisplay.DateWithNormalTitle() }}
+          </div>
+        </umd-element-slider-events>
+      </div>
+    </section>
+  </div>
+{% endblock %}

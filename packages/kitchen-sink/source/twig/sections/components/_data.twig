@@ -73,7 +73,7 @@
   },
   {
     name: 'Sliders',
-    link: 'sliders'
+    link: 'sliders/index'
   },
   {
     name: 'Sticky Columns',
@@ -162,6 +162,13 @@
   }
 ] %}
 
+{% set SliderPages = [
+  {
+    name: 'Events',
+    link: 'events'
+  }
+] %}
+
 {% macro GetUrl() %}
   {% set URL = '/sections/components/' %}
   {{ URL }}
@@ -201,6 +208,12 @@
 
 {% macro SubLinksNavigation() %}
   {% for item in NavigationPages %}
-    <a href="{{ _self.GetUrl ~ 'lists/' ~ item.link }}">{{ item.name }}</a>
+    <a href="{{ _self.GetUrl ~ 'navigation/' ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
+
+{% macro SubLinksSlider() %}
+  {% for item in SliderPages %}
+    <a href="{{ _self.GetUrl ~ 'sliders/' ~ item.link }}">{{ item.name }}</a>
   {% endfor %}
 {% endmacro %}

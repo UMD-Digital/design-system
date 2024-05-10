@@ -6,6 +6,10 @@
 .page-sub-heading {
   @apply umd-sans-larger;
   padding-bottom: 30px;
+
+  & a {
+    text-decoration: underline;
+  }
 }
 
 .content-heading {

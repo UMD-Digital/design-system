@@ -4,7 +4,26 @@
 {% import '_includes/macros/date.twig' as DateDisplay %}
 {% import '_includes/macros/fields/headline.twig' as Headline %}
 {% import '_includes/macros/fields/link.twig' as Link %}
-{% import '../_data.twig' as Data %}
+
+{% set SliderPages = [
+  {
+    name: 'Events',
+    link: 'events'
+  }
+] %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'sliders/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in SliderPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
 
 {% block page %}
   <div style="padding-bottom: 50px;">
@@ -13,6 +32,17 @@
         <h1 class="page-heading">
           Sliders
         </h1>
+
+        <p>
+          View other slider components:
+        </p>
+        <ul>
+          {% for item in SliderPages %}
+            <li>
+              <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     </section>
 
@@ -20,7 +50,7 @@
       <div class="umd-lock">
         <h3 class="content-heading">
           <span>Events</span>
-          <a href="{{ Data.GetUrl() }}sliders/events">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}events">View More Examples</a>
         </h3>
 
         <umd-element-slider-events>

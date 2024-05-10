@@ -81,94 +81,6 @@
   }
 ] %}
 
-{% set BlockPages = [
-  {
-    name: 'Article',
-    link: 'article'
-  },
-  {
-    name: 'Card',
-    link: 'card'
-  },
-  {
-    name: 'Card Overlay',
-    link: 'card-overlay'
-  },
-  {
-    name: 'Event',
-    link: 'event'
-  },
-  {
-    name: 'Event Featured',
-    link: 'event-featured'
-  },
-  {
-    name: 'Event Promo',
-    link: 'event-promo'
-  },
-  {
-    name: 'Feed Events',
-    link: 'feed-events'
-  },
-  {
-    name: 'Feed News',
-    link: 'feed-news'
-  }
-] %}
-
-{% set ListPages = [
-  {
-    name: 'Article',
-    link: 'article'
-  },
-  {
-    name: 'Card',
-    link: 'card'
-  },
-  {
-    name: 'Event',
-    link: 'event'
-  },
-  {
-    name: 'Feed Events',
-    link: 'feed-event'
-  },
-  {
-    name: 'Feed Events Grouped',
-    link: 'feed-events-grouped'
-  },
-  {
-    name: 'Feed News',
-    link: 'feed-news'
-  }
-] %}
-
-{% set NavigationPages = [
-  {
-    name: 'Drawer',
-    link: 'drawer'
-  },
-  {
-    name: 'Item',
-    link: 'item'
-  },
-  {
-    name: 'Header',
-    link: 'header'
-  },
-  {
-    name: 'Slider',
-    link: 'Slider'
-  }
-] %}
-
-{% set SliderPages = [
-  {
-    name: 'Events',
-    link: 'events'
-  }
-] %}
-
 {% macro GetUrl() %}
   {% set URL = '/sections/components/' %}
   {{ URL }}
@@ -191,29 +103,5 @@
 {% macro Links() %}
   {% for item in list %}
     <a href="{{ _self.GetUrl ~ item.link }}">{{ item.name }}</a>
-  {% endfor %}
-{% endmacro %}
-
-{% macro SubLinksBlock() %}
-  {% for item in BlockPages %}
-    <a href="{{ _self.GetUrl ~ 'blocks/' ~ item.link }}">{{ item.name }}</a>
-  {% endfor %}
-{% endmacro %}
-
-{% macro SubLinksList() %}
-  {% for item in ListPages %}
-    <a href="{{ _self.GetUrl ~ 'lists/' ~ item.link }}">{{ item.name }}</a>
-  {% endfor %}
-{% endmacro %}
-
-{% macro SubLinksNavigation() %}
-  {% for item in NavigationPages %}
-    <a href="{{ _self.GetUrl ~ 'navigation/' ~ item.link }}">{{ item.name }}</a>
-  {% endfor %}
-{% endmacro %}
-
-{% macro SubLinksSlider() %}
-  {% for item in SliderPages %}
-    <a href="{{ _self.GetUrl ~ 'sliders/' ~ item.link }}">{{ item.name }}</a>
   {% endfor %}
 {% endmacro %}

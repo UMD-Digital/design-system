@@ -4,6 +4,54 @@
 {% import '_includes/macros/card-overlay.twig' as CardOverlay %}
 {% import '../_data.twig' as Data %}
 
+{% set BlockPages = [
+  {
+    name: 'Article',
+    link: 'article'
+  },
+  {
+    name: 'Card',
+    link: 'card'
+  },
+  {
+    name: 'Card Overlay',
+    link: 'card-overlay'
+  },
+  {
+    name: 'Event',
+    link: 'event'
+  },
+  {
+    name: 'Event Featured',
+    link: 'event-featured'
+  },
+  {
+    name: 'Event Promo',
+    link: 'event-promo'
+  },
+  {
+    name: 'Feed Events',
+    link: 'feed-events'
+  },
+  {
+    name: 'Feed News',
+    link: 'feed-news'
+  }
+] %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'blocks/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in BlockPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
+
 {% block page %}
   {% set imageOne = random(RecImageOptions) %}
   {% set imageTwo = random(RecImageOptions) %}
@@ -16,15 +64,23 @@
       </h1>
 
       <p>
-        Uses the small text lockup styles.
+        Uses the small text lockup styles. View Other Components
       </p>
+
+      <ul>
+        {% for item in BlockPages %}
+          <li>
+            <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
 
     <section>
       <div class="umd-lock">
         <div class="content-heading">
           <span>Article</span>
-          <a href="{{ Data.GetUrl() }}blocks/article">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}article">View More Examples</a>
         </div>
         <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
           {{
@@ -62,7 +118,7 @@
       <div class="umd-lock">
         <div class="content-heading">
           <span>Card</span>
-          <a href="{{ Data.GetUrl() }}blocks/card">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}card">View More Examples</a>
         </div>
         <div class="umd-grid-gap-three mb-md">
           {{
@@ -97,9 +153,7 @@
       <div class="umd-lock">
         <div class="content-heading">
           <span>Card Overlay</span>
-          <a href="{{ Data.GetUrl() }}blocks/card-overlay">
-            View More Examples
-          </a>
+          <a href="{{ _self.GetChildUrl() }}card-overlay">View More Examples</a>
         </div>
         <div class="umd-grid-gap-three my-md">
           {{
@@ -132,7 +186,7 @@
       <div class="umd-lock">
         <h3 class="content-heading">
           <span>Event</span>
-          <a href="{{ Data.GetUrl() }}blocks/event">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}event">View More Examples</a>
         </h3>
         <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
           <umd-element-event>
@@ -256,7 +310,7 @@
       <div class="umd-lock">
         <h3 class="content-heading">
           <span>Event Featured</span>
-          <a href="{{ Data.GetUrl() }}blocks/event-featured">
+          <a href="{{ _self.GetChildUrl() }}event-featured">
             View More Examples
           </a>
         </h3>
@@ -306,7 +360,7 @@
       <div class="umd-lock">
         <h3 class="content-heading">
           <span>Display Promo</span>
-          <a href="{{ Data.GetUrl() }}blocks/event-promo">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}event-promo">View More Examples</a>
         </h3>
         <div class="umd-grid-gap mb-md" style="margin-top: 24px">
           <umd-element-event display="promo">
@@ -354,7 +408,7 @@
       <div class="umd-lock">
         <h2 class="content-heading">
           <span>Feed - Events</span>
-          <a href="{{ Data.GetUrl() }}blocks/feed-events">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}feed-events">View More Examples</a>
         </h2>
 
         <umd-feed-events token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
@@ -366,7 +420,7 @@
       <div class="umd-lock">
         <h2 class="content-heading">
           <span>Feed - News</span>
-          <a href="{{ Data.GetUrl() }}blocks/feed-news">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}feed-news">View More Examples</a>
         </h2>
 
         <umd-feed-news token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"

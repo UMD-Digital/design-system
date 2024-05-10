@@ -208,7 +208,7 @@ const STYLES_STAT_ELEMENT = `
   }
 
   .${ELEMENT_STAT_WRAPPER} {
-    max-width: 480px;
+    max-width: 720px;
   }
 
   ${StatDisplayStyles}

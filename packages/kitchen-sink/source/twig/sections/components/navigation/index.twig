@@ -1,5 +1,36 @@
 {% extends '_layout.twig' %}
-{% import '../_data.twig' as Data %}
+
+{% set NavigationPages = [
+  {
+    name: 'Drawer',
+    link: 'drawer'
+  },
+  {
+    name: 'Item',
+    link: 'item'
+  },
+  {
+    name: 'Header',
+    link: 'header'
+  },
+  {
+    name: 'Slider',
+    link: 'Slider'
+  }
+] %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'navigation/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in NavigationPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
 
 {% block page %}
   <div style="padding-bottom: 50px;">
@@ -12,10 +43,11 @@
         View other navigation components:
       </p>
       <ul>
-        <li><a href="{{ Data.GetUrl() }}navigation/header">Header</a></li>
-        <li><a href="{{ Data.GetUrl() }}navigation/drawer">Drawer</a></li>
-        <li><a href="{{ Data.GetUrl() }}navigation/slider">Slider</a></li>
-        <li><a href="{{ Data.GetUrl() }}navigation/item">Item</a></li>
+        {% for item in NavigationPages %}
+          <li>
+            <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+          </li>
+        {% endfor %}
       </ul>
     </div>
 
@@ -23,7 +55,7 @@
       <div class="umd-lock">
         <div class="content-heading">
           <span>Header: Provost</span>
-          <a href="{{ Data.GetUrl() }}navigation/header">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}header">View More Examples</a>
         </div>
 
         <umd-element-navigation-header role="navigation" search-url="/search">
@@ -125,7 +157,7 @@
       <div class="umd-lock">
         <p class="content-heading">
           <span>Interior Slider</span>
-          <a href="{{ Data.GetUrl() }}navigation/slider">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}slider">View More Examples</a>
         </p>
 
         <umd-element-nav-slider style="max-width: 500px;">

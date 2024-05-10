@@ -3,6 +3,46 @@
 {% import '_includes/macros/card.twig' as Card %}
 {% import '../_data.twig' as Data %}
 
+{% set ListPages = [
+  {
+    name: 'Article',
+    link: 'article'
+  },
+  {
+    name: 'Card',
+    link: 'card'
+  },
+  {
+    name: 'Event',
+    link: 'event'
+  },
+  {
+    name: 'Feed Events',
+    link: 'feed-events'
+  },
+  {
+    name: 'Feed Events Grouped',
+    link: 'feed-events-grouped'
+  },
+  {
+    name: 'Feed News',
+    link: 'feed-news'
+  }
+] %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'lists/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in ListPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
+
 {% block page %}
   {% set imageOne = random(RecImageOptions) %}
   {% set imageTwo = random(RecImageOptions) %}
@@ -15,15 +55,23 @@
       </h1>
 
       <p>
-        Uses the small text lockup styles.
+        Uses the small text lockup styles. View other list components:
       </p>
+
+      <ul>
+        {% for item in ListPages %}
+          <li>
+            <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
 
     <section>
       <div class="umd-lock-smaller">
         <div class="content-heading" style="margin-bottom: 24px">
           <span>Article</span>
-          <a href="{{ Data.GetUrl() }}lists/article">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}article">View More Examples</a>
         </div>
 
         <umd-element-article display="list">
@@ -77,7 +125,7 @@
       <div class="umd-lock-smaller">
         <div class="content-heading" style="margin-bottom: 24px;">
           <span>Card</span>
-          <a href="{{ Data.GetUrl() }}lists/card">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}card">View More Examples</a>
         </div>
 
         <umd-element-card display="list">
@@ -127,7 +175,7 @@
       <div class="umd-lock-smaller">
         <h3 class="content-heading">
           <span>Event</span>
-          <a href="{{ Data.GetUrl() }}lists/event">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}event">View More Examples</a>
         </h3>
 
         <umd-element-event display="list">
@@ -174,7 +222,7 @@
       <div class="umd-lock-smaller">
         <h2 class="content-heading">
           <span>Feed - Events</span>
-          <a href="{{ Data.GetUrl() }}lists/feed-events">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}feed-events">View More Examples</a>
         </h2>
 
         <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
@@ -199,7 +247,7 @@
       <div class="umd-lock-smaller">
         <h2 class="content-heading">
           <span>Feed - News</span>
-          <a href="{{ Data.GetUrl() }}lists/feed-news">View More Examples</a>
+          <a href="{{ _self.GetChildUrl() }}feed-news">View More Examples</a>
         </h2>
 
         <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"></umd-feed-news-list>

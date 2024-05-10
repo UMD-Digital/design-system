@@ -2,6 +2,10 @@
 
 {% block page %}
   {% import './_data.twig' as List %}
+  {% import './blocks/index.twig' as Blocks %}
+  {% import './lists/index.twig' as Lists %}
+  {% import './navigation/index.twig' as Navigation %}
+  {% import './sliders/index.twig' as Sliders %}
 
   <section style="padding-bottom: 50px;">
     <div class="umd-lock">
@@ -16,41 +20,41 @@
       <hr />
 
       <h2 class="page-sub-heading">
-        Sub Pages - Blocks
+        Sub Pages - <a href="{{ Blocks.GetChildUrl() }}">Blocks</a>
       </h2>
 
       <div class="umd-grid-gap-four mb-md">
-        {{ List.SubLinksBlock() }}
+        {{ Blocks.SubLinks() }}
       </div>
 
       <hr />
 
       <h2 class="page-sub-heading">
-        Sub Pages - Lists
+        Sub Pages - <a href="{{ Lists.GetChildUrl() }}">Lists</a>
       </h2>
 
       <div class="umd-grid-gap-four mb-md">
-        {{ List.SubLinksList() }}
+        {{ Lists.SubLinks() }}
       </div>
 
       <hr />
 
       <h2 class="page-sub-heading">
-        Sub Pages - Navigation
+        Sub Pages - <a href="{{ Navigation.GetChildUrl() }}">Navigation</a>
       </h2>
 
       <div class="umd-grid-gap-four mb-md">
-        {{ List.SubLinksNavigation() }}
+        {{ Navigation.SubLinks() }}
       </div>
 
       <hr />
 
       <h2 class="page-sub-heading">
-        Sub Pages - Sliders
+        Sub Pages - <a href="{{ Sliders.GetChildUrl() }}">Sliders</a>
       </h2>
 
       <div class="umd-grid-gap-four mb-md">
-        {{ List.SubLinksSlider() }}
+        {{ Sliders.SubLinks() }}
       </div>
     </div>
   </section>

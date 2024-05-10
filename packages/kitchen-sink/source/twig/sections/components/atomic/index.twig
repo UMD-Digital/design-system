@@ -17,6 +17,10 @@
     link: 'call-to-action-button'
   },
   {
+    name: 'Logo',
+    link: 'logo'
+  },
+  {
     name: 'Stat',
     link: 'stat'
   }
@@ -162,6 +166,20 @@
               })
             }}
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Logo</span>
+          <a href="{{ _self.GetChildUrl() }}logo">View More Examples</a>
+        </div>
+        <div class="umd-grid-gap-three">
+          <umd-element-logo border="true">
+            <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
+          </umd-element-logo>
         </div>
       </div>
     </section>

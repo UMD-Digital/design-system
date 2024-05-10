@@ -49,6 +49,7 @@ const twigTask = () =>
     .src(twigSource)
     .pipe(
       twig({
+        base: 'source/twig',
         data: {
           RecImageOptions,
           SquareImageOptions,

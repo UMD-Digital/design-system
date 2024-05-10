@@ -1,10 +1,10 @@
-{% extends '../../_layout.twig' %}
-{% import '../../_includes/content-dropdown.twig' as Dropdown %}
-{% import '../../_includes/macros/card.twig' as Card %}
+{% extends '_layout.twig' %}
+{% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import '_includes/macros/card.twig' as Card %}
 
-{% import '../../_includes/macros/fields/eyebrow.twig' as EyebrowString %}
-{% import '../../_includes/macros/fields/headline.twig' as HeadlineString %}
-{% import '../../_includes/macros/fields/text-slot-rich-text.twig'
+{% import '_includes/macros/fields/eyebrow.twig' as EyebrowString %}
+{% import '_includes/macros/fields/headline.twig' as HeadlineString %}
+{% import '_includes/macros/fields/text-slot-rich-text.twig'
   as RichTextString
 %}
 
@@ -30,7 +30,7 @@
 
     <section>
       <div class="umd-lock">
-        <h3 class="content-heading type-hr">
+        <h3 class="content-heading">
           Default
         </h3>
         <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
@@ -45,7 +45,7 @@
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Type</span>
           <span>Outlined</span>
         </div>
@@ -63,7 +63,7 @@
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Layout</span>
           <span>Aligned</span>
         </div>
@@ -81,7 +81,7 @@
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Field Options</span>
           <span>Required Only</span>
         </div>
@@ -101,7 +101,7 @@
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Field Options</span>
           <span>Minimal</span>
         </div>
@@ -122,7 +122,7 @@
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Theme</span>
           <span>Dark</span>
         </div>
@@ -140,7 +140,7 @@
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Layout</span>
           <span>Grouping (3)</span>
         </div>
@@ -175,7 +175,7 @@
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Layout</span>
           <span>Grouping (4)</span>
         </div>
@@ -214,7 +214,7 @@
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Layout</span>
           <span>Grouping (2)</span>
         </div>
@@ -239,209 +239,15 @@
       </div>
     </section>
 
-    <section>
-      <div class="umd-lock">
-        <h3 class="content-heading type-hr">
-          <span>Card</span>
-          <span>List Style</span>
-        </h3>
-
-        <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="eyebrow">
-            {{ EyebrowString.EyebrowStringNormal() }}
-          </p>
-          <p slot="headline">
-            <a href="google.com">
-              {{ HeadlineString.CardHeadlineStringNormal() }}
-            </a>
-          </p>
-          <p slot="text">
-            {{ RichTextString.CardRichTextStringNormal() }}
-          </p>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary">
-              <a href="https://google.com" aria-label="link to google">
-                Learn More
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card>
-        <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="headline">
-            {{ HeadlineString.CardHeadlineStringNormal() }}
-          </p>
-          <p slot="text">
-            {{ RichTextString.CardRichTextStringNormal() }}
-          </p>
-
-          <p slot="date">
-            September 1, 2021
-          </p>
-        </umd-element-card>
-        <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="eyebrow">
-            {{ EyebrowString.EyebrowStringNormal() }}
-          </p>
-          <p slot="headline">
-            {{ HeadlineString.CardHeadlineStringNormal() }}
-          </p>
-          <p slot="text">
-            {{ RichTextString.CardRichTextStringNormal() }}
-          </p>
-
-          <p slot="date">
-            September 1, 2021
-          </p>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary">
-              <a href="https://google.com" aria-label="link to google">
-                Learn More
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card>
-        <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="eyebrow">
-            {{ EyebrowString.EyebrowStringNormal() }}
-          </p>
-          <p slot="headline">
-            {{ HeadlineString.CardHeadlineStringNormal() }}
-          </p>
-          <div slot="text">
-            <p>
-              {{ RichTextString.CardRichTextStringNormal() }}
-            </p>
-            <p>
-              {{ RichTextString.CardRichTextStringNormal() }}
-            </p>
-          </div>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary">
-              <a href="https://google.com" aria-label="link to google">
-                Learn More
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding; 50px 0;  margin-bottom: 40px;">
-      <div class="umd-lock">
-        <h3 class="content-heading type-hr">
-          <span style="color: white">Card</span>
-          <span>List Style - Theme Dark</span>
-        </h3>
-
-        <umd-element-card display="list" theme="dark">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="eyebrow">
-            {{ EyebrowString.EyebrowStringNormal() }}
-          </p>
-          <p slot="headline">
-            {{ HeadlineString.CardHeadlineStringNormal() }}
-          </p>
-          <p slot="text">
-            {{ RichTextString.CardRichTextStringNormal() }}
-          </p>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary" theme="dark">
-              <a href="https://google.com" aria-label="link to google">
-                Learn More
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card>
-        <umd-element-card display="list" theme="dark">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="headline">
-            {{ HeadlineString.CardHeadlineStringNormal() }}
-          </p>
-          <p slot="text">
-            {{ RichTextString.CardRichTextStringNormal() }}
-          </p>
-
-          <p slot="date">
-            September 1, 2021
-          </p>
-        </umd-element-card>
-        <umd-element-card display="list" theme="dark">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="eyebrow">
-            {{ EyebrowString.EyebrowStringNormal() }}
-          </p>
-          <p slot="headline">
-            {{ HeadlineString.CardHeadlineStringNormal() }}
-          </p>
-          <p slot="text">
-            {{ RichTextString.CardRichTextStringNormal() }}
-          </p>
-
-          <p slot="date">
-            September 1, 2021
-          </p>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary" theme="dark">
-              <a href="https://google.com" aria-label="link to google">
-                Learn More
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card>
-        <umd-element-card display="list" theme="dark">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="eyebrow">
-            {{ EyebrowString.EyebrowStringNormal() }}
-          </p>
-          <p slot="headline">
-            <a href="google.com">
-              {{ HeadlineString.CardHeadlineStringNormal() }}
-            </a>
-          </p>
-          <div slot="text">
-            <p>
-              {{ RichTextString.CardRichTextStringNormal() }}
-            </p>
-            <p>
-              {{ RichTextString.CardRichTextStringNormal() }}
-            </p>
-          </div>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary" theme="dark">
-              <a href="https://google.com" aria-label="link to google">
-                Learn More
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card>
-      </div>
-    </section>
-
-    <h1 class="page-heading">
-      Edge Cases
-    </h1>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Edge Cases
+      </h1>
+    </div>
 
     <section>
       <div class="umd-lock">
-        <div class="content-heading type-hr">
+        <div class="content-heading">
           <span>Layout</span>
           <span>Grouping (4)</span>
         </div>

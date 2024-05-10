@@ -1,0 +1,126 @@
+{% extends '_layout.twig' %}
+{% import '_includes/macros/article.twig' as Article %}
+{% import '_includes/macros/card.twig' as Card %}
+{% import '../_data.twig' as Data %}
+
+{% block page %}
+  {% set imageOne = random(RecImageOptions) %}
+  {% set imageTwo = random(RecImageOptions) %}
+  {% set imageThree = random(RecImageOptions) %}
+
+  <div style="padding-bottom: 50px;">
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Display Type List
+      </h1>
+
+      <p>
+        Uses the small text lockup styles.
+      </p>
+    </div>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading" style="margin-bottom: 24px">
+          <span>Article</span>
+          <a href="{{ Data.GetUrl() }}lists/article">View More Examples</a>
+        </div>
+
+        <umd-element-article display="list">
+          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+
+          <p slot="eyebrow">
+            Eyebrow Text
+          </p>
+          <p slot="headline">
+            <a href="google.com">Headline Text</a>
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <p slot="date">
+            September 1, 2021
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-article>
+
+        <umd-element-article display="list">
+          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <p slot="date">
+            September 1, 2021
+          </p>
+        </umd-element-article>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading" style="margin-bottom: 24px;">
+          <span>Card</span>
+          <a href="{{ Data.GetUrl() }}lists/card">View More Examples</a>
+        </div>
+
+        <umd-element-card display="list">
+          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+
+          <p slot="eyebrow">
+            Eyebrow Text
+          </p>
+          <p slot="headline">
+            <a href="google.com">Headline Text</a>
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+
+          <p slot="date">
+            September 1, 2021
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-card>
+
+        <umd-element-card display="list">
+          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+        </umd-element-card>
+      </div>
+    </section>
+  </div>
+{% endblock %}

@@ -5,12 +5,20 @@
 
 {% set AtomicPages = [
   {
+    name: 'Breadcrumb',
+    link: 'breadcrumb'
+  },
+  {
     name: 'Call To Action',
     link: 'call-to-action'
   },
   {
     name: 'Call To Action (button)',
     link: 'call-to-action-button'
+  },
+  {
+    name: 'Stat',
+    link: 'stat'
   }
 ] %}
 
@@ -46,6 +54,24 @@
         {% endfor %}
       </ul>
     </div>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Breadcrumb</span>
+          <a href="{{ _self.GetChildUrl() }}breadcrumb">View More Examples</a>
+        </div>
+        <umd-element-breadcrumb>
+          <div slot="paths">
+            <a href="">Home</a>
+            <a href="">Primary Link</a>
+            <a href="">Secondary Link</a>
+            <a href="">Tertiary Link</a>
+            <a href="">Current Page</a>
+          </div>
+        </umd-element-breadcrumb>
+      </div>
+    </section>
 
     <section>
       <div class="umd-lock">
@@ -137,6 +163,27 @@
             }}
           </div>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Stat</span>
+          <a href="{{ _self.GetChildUrl() }}stat">View More Examples</a>
+        </div>
+        <umd-element-stat>
+          <div slot="stat">
+            10th
+          </div>
+          <div slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut
+          </div>
+          <div slot="sub-text">
+            Source: 2022-23 U.S. News & World Report
+          </div>
+        </umd-element-stat>
       </div>
     </section>
   </div>

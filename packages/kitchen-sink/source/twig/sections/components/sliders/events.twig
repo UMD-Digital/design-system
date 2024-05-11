@@ -1,11 +1,15 @@
 {% extends '_layout.twig' %}
 
 {% import '_includes/content-dropdown.twig' as Dropdown %}
-{% import '_includes/macros/date.twig' as DateDisplay %}
 {% import '_includes/macros/fields/headline.twig' as Headline %}
 {% import '_includes/macros/fields/link.twig' as Link %}
+{% import _self as macros %}
 
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent() %}
   <div style="padding-bottom: 50px;">
     <section>
       <div class="umd-lock">
@@ -28,35 +32,7 @@
           <span>Default</span>
         </h3>
 
-        <umd-element-slider-events theme="light">
-          <div slot="headline">
-            Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit
-          </div>
-
-          <umd-element-call-to-action slot="actions"
-            type="secondary"
-            theme="light">
-            <a href="/"><span>CTA Link</span></a>
-          </umd-element-call-to-action>
-
-          <div slot="event-list">
-            {{
-              DateDisplay.DateWithNormalTitle({
-                link: true
-              })
-            }}
-            {{ DateDisplay.DateWithNormalTitle() }}
-            {{ DateDisplay.DateWithNormalTitle() }}
-            {{
-              DateDisplay.DateWithNormalTitle({
-                link: true
-              })
-            }}
-            {{ DateDisplay.DateWithNormalTitle() }}
-            {{ DateDisplay.DateWithNormalTitle() }}
-            {{ DateDisplay.DateWithNormalTitle() }}
-          </div>
-        </umd-element-slider-events>
+        {{ macros.example() }}
       </div>
     </section>
 
@@ -80,34 +56,34 @@
 
           <div slot="event-list">
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 theme: 'dark'
               })
             }}
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 theme: 'dark',
                 link: true
               })
             }}
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 theme: 'dark',
                 link: true
               })
             }}
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 theme: 'dark'
               })
             }}
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 theme: 'dark'
               })
             }}
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 theme: 'dark',
                 link: true
               })
@@ -131,17 +107,17 @@
 
           <div slot="event-list">
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 link: true
               })
             }}
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 link: true
               })
             }}
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 link: true
               })
             }}
@@ -164,12 +140,12 @@
 
           <div slot="event-list">
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 link: true
               })
             }}
             {{
-              DateDisplay.DateWithNormalTitle({
+              macros.content({
                 link: true
               })
             }}
@@ -178,4 +154,99 @@
       </div>
     </section>
   </div>
-{% endblock %}
+{% endmacro %}
+
+{% macro example() %}
+  <umd-element-slider-events>
+    <div slot="headline">
+      Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit
+    </div>
+
+    <umd-element-call-to-action slot="actions" type="secondary" theme="light">
+      <a href="/"><span>CTA Link</span></a>
+    </umd-element-call-to-action>
+
+    <div slot="event-list">
+      {{
+        macros.content({
+          link: true
+        })
+      }}
+      {{ macros.content() }}
+      {{ macros.content() }}
+      {{
+        macros.content({
+          link: true
+        })
+      }}
+      {{ macros.content() }}
+      {{ macros.content() }}
+      {{ macros.content() }}
+    </div>
+  </umd-element-slider-events>
+{% endmacro %}
+
+{% macro content(params) %}
+  {% set attrs = '' %}
+  {% set date = params.date
+    ?? random(['01', '05', '07', '12', '13', '21', '25', '28', '30', '31'])
+  %}
+  {% set text = params.text ?? 'default' %}
+  {% set month = params.month
+    ?? random(
+      [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+      ]
+    )
+  %}
+  {% set normalString = params.string
+    ?? random(
+      [
+        'Study Abroad Fair',
+        'TerrapinSTRONG In Person',
+        'Topography Competition',
+        'Disrupting Grind Culture',
+        'Transparency in Teaching',
+        'Revolutionizing AI'
+      ]
+    )
+  %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% set hasDate = params.date ?? true %}
+  {% set isLink = params.link ?? false %}
+
+  <umd-element-events-date {{ attrs }}>
+    {% if hasDate %}
+      <p slot="month">
+        {{ month }}
+      </p>
+      <p slot="day">
+        {{ date }}
+      </p>
+    {% endif %}
+
+    <p slot="headline">
+      {% if isLink == false %}
+        {{ normalString }}
+      {% endif %}
+      {% if isLink %}
+        <a href="{{ url }}">{{ normalString }}</a>
+      {% endif %}
+    </p>
+  </umd-element-events-date>
+{% endmacro %}

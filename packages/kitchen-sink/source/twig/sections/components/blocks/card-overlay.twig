@@ -10,6 +10,10 @@
 ] %}
 
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent() %}
   <section>
     <div class="umd-lock">
       <h1 class="page-heading">
@@ -440,9 +444,9 @@
       </div>
     </section>
   </section>
-{% endblock %}
+{% endmacro %}
 
-{% macro examplegrouped() %}
+{% macro example() %}
   {{
     macros.content({
       image: true,

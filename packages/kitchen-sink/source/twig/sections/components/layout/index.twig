@@ -1,0 +1,77 @@
+{% extends '_layout.twig' %}
+
+{% import _self as macros %}
+
+{% set LayoutPages = [
+  {
+    name: 'Sticky Columns',
+    link: 'sticky-columns'
+  },
+  {
+    name: 'Section Intro',
+    link: 'section-intro'
+  }
+] %}
+
+{% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'layout/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in LayoutPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
+
+{% macro pagecontent() %}
+  <div style="padding-bottom: 50px;">
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Layout Elements
+      </h1>
+
+      <p>
+        Additonal Component Examples:
+      </p>
+
+      <ul>
+        {% for item in LayoutPages %}
+          <li>
+            <umd-element-call-to-action type="secondary">
+              <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            </umd-element-call-to-action>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Sticky Columns</span>
+          <a href="{{ _self.GetChildUrl() }}sticky-columns">
+            View More Examples
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Section Intro</span>
+          <a href="{{ _self.GetChildUrl() }}section-intro">
+            View More Examples
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endmacro %}

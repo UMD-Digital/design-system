@@ -1,0 +1,290 @@
+{% extends '_layout.twig' %}
+
+{% import _self as macros %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>Simple with default content</span>
+      </p>
+    </div>
+
+    <umd-element-footer></umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>Simple with default content and styled light theme</span>
+      </p>
+    </div>
+
+    <umd-element-footer type="simple" theme="light"></umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>
+          Simple with information overwrites for contact, social, and utility
+          links
+        </span>
+      </p>
+    </div>
+
+    <umd-element-footer type="simple">
+      {{ macros.ContactOverwrite() }}
+      {{ macros.SocialOverwrite() }}
+      {{ macros.UtilityOverwrite() }}
+    </umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>Mega with default content</span>
+      </p>
+    </div>
+
+    <umd-element-footer type="mega"></umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>Mega with default content and styled light theme</span>
+      </p>
+    </div>
+
+    <umd-element-footer type="mega" theme="light"></umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>
+          Mega with information overwrites for contact, social, and utility
+          links
+        </span>
+      </p>
+    </div>
+
+    <umd-element-footer type="mega">
+      {{ macros.ContactOverwrite() }}
+      {{ macros.SocialOverwrite() }}
+      {{ macros.ColumnLinkOverwrite() }}
+      {{ macros.UtilityOverwrite() }}
+      {{ macros.CtaOverwrite() }}
+    </umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>Visual with default content</span>
+      </p>
+    </div>
+
+    <umd-element-footer type="visual"></umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>Visual with default content with light theme</span>
+      </p>
+    </div>
+
+    <umd-element-footer type="visual" theme="light"></umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>
+          Visual with information overwrites for contact, social, link columns,
+          cta, image and utility links
+        </span>
+      </p>
+    </div>
+
+    <umd-element-footer type="visual">
+      {{ macros.CtaOverwrite() }}
+      {{ macros.ContactOverwrite() }}
+      {{ macros.SocialOverwrite() }}
+      {{ macros.UtilityOverwrite() }}
+      {{ macros.ColumnLinkOverwrite() }}
+
+      <img slot="background-image"
+        src="/footer-option.jpg"
+        alt="University of Maryland Logo" />
+    </umd-element-footer>
+  </section>
+
+  <section>
+    <div class="umd-lock">
+      <p class="content-heading">
+        <span>Default Styling</span>
+        <span>Visual with simiple type</span>
+      </p>
+    </div>
+
+    <umd-element-footer type="simple">
+      {{ macros.ContactOverwrite() }}
+      {{ macros.SocialOverwrite() }}
+      {{ macros.UtilityOverwrite() }}
+
+      <img slot="background-image"
+        src="/footer-option.jpg"
+        alt="University of Maryland Logo" />
+    </umd-element-footer>
+  </section>
+{% endblock %}
+
+{% macro ColumnLinkOverwrite(params) %}
+  <ul slot="link-column-one" data-headline="Important Links">
+    <li>
+      <a href="https://provost.umd-staging.com/calendar">
+        <span>Academic Calendars</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://strategicplan.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Strategic Plan</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" rel="noopener noreferrer">
+        <span>Request an Appearance</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul slot="link-column-two">
+    <li>
+      <a href="https://admissions.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Undergraduate Admissions</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://financialaid.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Student Financial Aid</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://faculty.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Faculty Affairs</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul slot="link-column-three">
+    <li>
+      <a href="https://registrar.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Office of the Registrar</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://billpay.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>Student Financial Services and Cashiering</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://policies.umd.edu/"
+        rel="noopener noreferrer"
+        target="_blank">
+        <span>University Policies</span>
+      </a>
+    </li>
+  </ul>
+{% endmacro %}
+
+{% macro ContactOverwrite() %}
+  <p slot="contact-headline">
+    <a href="https://provost.umd.edu">
+      Office of the Senior Vice President &amp; Provost
+    </a>
+  </p>
+
+  <address slot="contact-address">
+    <p>
+      Suite 1132, Main Administration Building
+    </p>
+    <span>7901 Regents Drive College Park, MD 20742</span>
+  </address>
+
+  <div slot="contact-links">
+    <a href="mailto:provost@umd.edu"><span>provost@umd.edu</span></a>
+    <a href="tel:3014055252"><span>301.405.5252</span></a>
+  </div>
+{% endmacro %}
+
+{% macro SocialOverwrite() %}
+  <div slot="social-links">
+    <a href="https://www.youtube.com/user/UMD2101"
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Link to the youtube channel for the University of Maryland">
+
+    </a>
+    <a href="https://www.facebook.com/UnivofMaryland"
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Link to the facebook page for the University of Maryland">
+
+    </a>
+    <a href="https://x.com/UofMaryland"
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Link to the twitter page for the University of Maryland">
+
+    </a>
+    <a href="https://www.instagram.com/univofmaryland/"
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Link to the instagram page for the University of Maryland">
+
+    </a>
+  </div>
+{% endmacro %}
+
+{% macro UtilityOverwrite() %}
+  <div slot="utility-links">
+    <a href="http://calendar.umd.edu/"
+      target="_blank"
+      rel="noopener noreferrer">
+      UMD Calendar
+    </a>
+  </div>
+{% endmacro %}
+
+{% macro CtaOverwrite() %}
+  <a slot="call-to-action"
+    href="https://giving.umd.edu"
+    target="_blank"
+    rel="noopener noreferrer">
+    Support Example
+  </a>
+{% endmacro %}

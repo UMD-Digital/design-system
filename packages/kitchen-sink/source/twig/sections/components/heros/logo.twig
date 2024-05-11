@@ -1,0 +1,1868 @@
+{% extends '_layout.twig' %}
+{% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import '_includes/macros/fields/headline.twig' as Headline %}
+{% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
+{% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
+
+{% set image = random(RecImageOptions) %}
+{% set logo = 'https://provost.umd.edu/logos/provost-logo-primary-light.png' %}
+
+{% block page %}
+  <section>
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Hero
+      </h1>
+    </div>
+
+    <div class="umd-lock">
+      <h2 class="content-heading">
+        Content Variations
+      </h2>
+
+      {{ Dropdown.ContentVariations() }}
+    </div>
+
+    <div id="succinct" class="dropdown-selection" aria-hidden="true">
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default
+          </h3>
+        </div>
+
+        <umd-element-hero>
+          <img slot="image"
+            src="{{ image }}"
+            alt="Image Description"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            Duis Fugiat
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with Centered Text
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-centered">
+          <img slot="image"
+            src="{{ image }}"
+            alt="Image Description"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            Duis Fugiat
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with Default Image
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-centered">
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with video
+          </h3>
+        </div>
+
+        <umd-element-hero type="default">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            Duis Fugiat
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default Interior
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-interior">
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="light">
+          <div slot="image">
+            <img src="{{ logo }}"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            Headline Text
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo - Dark Theme
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="dark">
+          <div slot="image">
+            <img src="https://creepy-cormorant.files.svdcdn.com/production/icons/logo.svg?dm=1618930939"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="text">
+            Energizing innovative companies to bring quantum technologies
+          </p>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo - Dark Theme (headline example)
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="dark">
+          <div slot="image">
+            <img src="https://creepy-cormorant.files.svdcdn.com/production/icons/logo.svg?dm=1618930939"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="headline">
+            Energizing innovative companies to bring quantum technologies
+          </p>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline20() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline20() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked Interior
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked-interior">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            What Does it take to change the world
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked Interior with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked-interior">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          </p>
+          <p slot="headline">
+            What Does it take to change the world
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked without image
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <p slot="headline">
+            {{ Headline.Headline20() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked without image (Homecoming Example)
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <p slot="headline">
+            {{ Headline.Headline20() }}
+          </p>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString8() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline15() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString8() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline15() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay with default image
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString8() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline15() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText60() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with Dark Theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="dark">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            <p slot="eyebrow">
+              {{ Eyebrow.EyebrowString15() }}
+            </p>
+          </p>
+          <p slot="headline">
+            Academic & Budgetary
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with light theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="light">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString15() }}
+          </p>
+          <p slot="headline">
+            Academic & Budgetary
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with maryland theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="maryland">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString15() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline20() }}
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with white theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="white">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString15() }}
+          </p>
+          <p slot="headline">
+            Academic & Budgetary
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with light theme without image
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="light">
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString15() }}
+          </p>
+          <p slot="headline">
+            Academic & Budgetary
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+    </div>
+
+    <div id="normal" class="dropdown-selection" aria-hidden="false">
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default
+          </h3>
+        </div>
+
+        <umd-element-hero>
+          <img slot="image"
+            src="{{ image }}"
+            alt="Image Description"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            Live From College Park
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with Centered Text
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-centered">
+          <img slot="image"
+            src="{{ image }}"
+            alt="Image Description"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            Live From College Park
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with Default Image
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-centered">
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            Live From College Park
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with video
+          </h3>
+        </div>
+
+        <umd-element-hero type="default">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline20() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default Interior
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-interior">
+          <p slot="headline">
+            Live From College Park
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="light">
+          <div slot="image">
+            <img src="{{ logo }}"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            Live From College Park
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo - Dark Theme
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="dark">
+          <div slot="image">
+            <img src="https://creepy-cormorant.files.svdcdn.com/production/icons/logo.svg?dm=1618930939"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="text">
+            Energizing innovative companies to bring quantum technologies to
+            market enim ad minim veniam, qullamco laboris nisi ute.
+          </p>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo - Dark Theme (headline example)
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="dark">
+          <div slot="image">
+            <img src="https://creepy-cormorant.files.svdcdn.com/production/icons/logo.svg?dm=1618930939"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="headline">
+            Energizing innovative companies to bring quantum technologies to
+            market enim ad minim veniam, qullamco laboris nisi ute.
+          </p>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline40() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline40() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked Interior
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked-interior">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            What Does it take to change the world
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked Interior with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked-interior">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          </p>
+          <p slot="headline">
+            What Does it take to change the world
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked without image
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <p slot="headline">
+            {{ Headline.Headline40() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked without image (Homecoming Example)
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <p slot="headline">
+            {{ Headline.Headline40() }}
+          </p>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString16() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline30() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString16() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline30() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay with default image
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString16() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline30() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText120() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with Dark Theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="dark">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString30() }}
+          </p>
+          <p slot="headline">
+            Academic Affairs Finance and Personnel
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with light theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="light">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString30() }}
+          </p>
+          <p slot="headline">
+            Academic Affairs Finance and Personnel
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with maryland theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="maryland">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString30() }}
+          </p>
+          <p slot="headline">
+            Academic Affairs Finance and Personnel
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with white theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="white">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString30() }}
+          </p>
+          <p slot="headline">
+            Academic Affairs Finance and Personnel
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with light theme without image
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="light">
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString30() }}
+          </p>
+          <p slot="headline">
+            Academic Affairs Finance and Personnel
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+    </div>
+
+    <div id="verbose" class="dropdown-selection" aria-hidden="true">
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default
+          </h3>
+        </div>
+
+        <umd-element-hero>
+          <img slot="image"
+            src="{{ image }}"
+            alt="Image Description"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            Gov. Wes Moore Named 2024 Commencement Speaker
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with Centered Text
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-centered">
+          <img slot="image"
+            src="{{ image }}"
+            alt="Image Description"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            Gov. Wes Moore Named 2024 Commencement Speaker
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with Default Image
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-centered">
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            Gov. Wes Moore Named 2024 Commencement Speaker
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default with video
+          </h3>
+        </div>
+
+        <umd-element-hero type="default">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            Gov. Wes Moore Named 2024 Commencement Speaker
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default Interior
+          </h3>
+        </div>
+
+        <umd-element-hero type="default-interior">
+          <p slot="headline">
+            Gov. Wes Moore Named 2024 Commencement Speaker
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="light">
+          <div slot="image">
+            <img src="{{ logo }}"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            Gov. Wes Moore Named 2024 Commencement Speaker
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo - Dark Theme
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="dark">
+          <div slot="image">
+            <img src="https://creepy-cormorant.files.svdcdn.com/production/icons/logo.svg?dm=1618930939"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="text">
+            Energizing innovative companies to bring quantum technologies to
+            market enim ad minim veniam, qullamco laboris nisi ute voluptate
+            velit esse cillum dolore voluptate velit esse cillum dolore
+            ullamcole.
+          </p>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Logo - Dark Theme (headline example)
+          </h3>
+        </div>
+
+        <umd-element-hero-logo theme="dark">
+          <div slot="image">
+            <img src="https://creepy-cormorant.files.svdcdn.com/production/icons/logo.svg?dm=1618930939"
+              alt="Image Description"
+              style="width: 600px" />
+          </div>
+
+          <p slot="headline">
+            Energizing innovative companies to bring quantum technologies to
+            market enim ad minim veniam, qullamco laboris nisi ute voluptate
+            velit esse cillum dolore voluptate velit esse cillum dolore
+            ullamcole.
+          </p>
+        </umd-element-hero-logo>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline80() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline80() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked Interior
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked-interior">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            What Does it take to change the world
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked Interior with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked-interior">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.PathwayEyebrowStringVerbose() }}
+          </p>
+          <p slot="headline">
+            What Does it take to change the world
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked without image
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <p slot="headline">
+            {{ Headline.Headline80() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText200() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Stacked without image (Homecoming Example)
+          </h3>
+        </div>
+
+        <umd-element-hero type="stacked">
+          <p slot="headline">
+            {{ Headline.Headline80() }}
+          </p>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString32() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline45() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText190() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay with Video
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <video slot="video"
+            loop=""
+            muted=""
+            webkit-playsinline=""
+            playsinline=""
+            autoplay=""
+            preload=""
+            poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+            <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+              type="video/mp4" />
+          </video>
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString32() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline45() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText190() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Overlay with default image
+          </h3>
+        </div>
+
+        <umd-element-hero type="overlay" theme="dark">
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString32() }}
+          </p>
+          <p slot="headline">
+            {{ Headline.Headline45() }}
+          </p>
+          <p slot="text">
+            {{ RichText.RichText190() }}
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="primary" theme="dark">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-hero>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with Dark Theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="dark">
+          <img src="{{ image }}"
+            alt="Image Description"
+            slot="image"
+            data-caption="Photo: Bob lastname" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString60() }}
+          </p>
+          <p slot="headline">
+            Office of Institutional Research, Planning and Assessment Duis
+            Lorems Excepteure
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with light theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="light">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString60() }}
+          </p>
+          <p slot="headline">
+            Office of Institutional Research, Planning and Assessment Duis
+            Lorems Excepteure
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with maryland theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="maryland">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString60() }}
+          </p>
+          <p slot="headline">
+            Office of Institutional Research, Planning and Assessment Duis
+            Lorems Excepteure
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with white theme
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="white">
+          <img src="{{ image }}" alt="Image Description" slot="image" />
+
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString60() }}
+          </p>
+          <p slot="headline">
+            Office of Institutional Research, Planning and Assessment Duis
+            Lorems Excepteure
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Minimal with light theme without image
+          </h3>
+        </div>
+
+        <umd-element-hero-minimal theme="light">
+          <p slot="eyebrow">
+            {{ Eyebrow.EyebrowString60() }}
+          </p>
+          <p slot="headline">
+            Office of Institutional Research, Planning and Assessment Duis
+            Lorems Excepteure
+          </p>
+        </umd-element-hero-minimal>
+      </section>
+    </div>
+  </section>
+{% endblock %}

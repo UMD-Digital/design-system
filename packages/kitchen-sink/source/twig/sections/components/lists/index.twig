@@ -46,17 +46,27 @@
   <div style="padding-bottom: 50px;">
     <div class="umd-lock-smaller">
       <h1 class="page-heading">
-        Display Type List
+        List Elements
       </h1>
 
       <p>
-        Uses the small text lockup styles. View other list components:
+        Display Type of List.
+      </p>
+
+      <p>
+        Uses the small text lockup styles.
+      </p>
+
+      <p>
+        View Other Components
       </p>
 
       <ul>
         {% for item in ListPages %}
           <li>
-            <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            <umd-element-call-to-action type="secondary">
+              <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            </umd-element-call-to-action>
           </li>
         {% endfor %}
       </ul>

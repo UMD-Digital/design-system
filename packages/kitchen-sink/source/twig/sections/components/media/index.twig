@@ -1,12 +1,11 @@
 {% extends '_layout.twig' %}
 
-{% import './cards.twig' as Cards %}
 {% import _self as macros %}
 
-{% set CarouselPages = [
+{% set MediaPages = [
   {
-    name: 'Cards',
-    link: 'cards'
+    name: 'Wrapping Text',
+    link: 'wrapping-text'
   }
 ] %}
 
@@ -14,19 +13,32 @@
   {{ macros.pagecontent() }}
 {% endblock %}
 
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'media/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in MediaPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
+
 {% macro pagecontent() %}
   <div style="padding-bottom: 50px;">
     <div class="umd-lock">
       <h1 class="page-heading">
-        Carousels Elements
+        Media Elements
       </h1>
 
       <p>
-        Additonal Component Examples
+        Additonal Component Examples:
       </p>
 
       <ul>
-        {% for item in CarouselPages %}
+        {% for item in MediaPages %}
           <li>
             <umd-element-call-to-action type="secondary">
               <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
@@ -35,28 +47,16 @@
         {% endfor %}
       </ul>
     </div>
+
     <section>
       <div class="umd-lock">
         <div class="content-heading">
-          <span>Cards</span>
-          <a href="{{ _self.GetChildUrl() }}cards">View More Examples</a>
+          <span>Wrapping Text</span>
+          <a href="{{ _self.GetChildUrl() }}wrapping-text">
+            View More Examples
+          </a>
         </div>
       </div>
-
-      {{ Cards.example() }}
     </section>
   </div>
-{% endmacro %}
-
-{% macro GetChildUrl() %}
-  {% import '../_data.twig' as Data %}
-
-  {% set URL = Data.GetUrl() ~ 'carousels/' %}
-  {{ URL }}
-{% endmacro %}
-
-{% macro SubLinks() %}
-  {% for item in CarouselPages %}
-    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
-  {% endfor %}
 {% endmacro %}

@@ -1,10 +1,8 @@
-{% extends '../../_layout.twig' %}
-{% import '../../_includes/content-dropdown.twig' as Dropdown %}
-{% import '../../_includes/macros/fields/headline.twig' as Headline %}
-{% import '../../_includes/macros/fields/text-slot-rich-text.twig'
-  as RichText
-%}
-{% import '../../_includes/macros/fields/eyebrow.twig' as Eyebrow %}
+{% extends '_layout.twig' %}
+{% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import '_includes/macros/fields/headline.twig' as Headline %}
+{% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
+{% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
 
 {% set image = random(RecImageOptions) %}
 {% set logo = 'https://provost.umd.edu/logos/provost-logo-primary-light.png' %}

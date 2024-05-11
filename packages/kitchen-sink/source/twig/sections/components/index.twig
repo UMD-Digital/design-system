@@ -2,11 +2,17 @@
 
 {% block page %}
   {% import './_data.twig' as List %}
+  {% import './accessories/index.twig' as Accessories %}
   {% import './atomic/index.twig' as Atomic %}
   {% import './blocks/index.twig' as Blocks %}
   {% import './carousels/index.twig' as Carousels %}
+  {% import './footer/index.twig' as Footer %}
+  {% import './heros/index.twig' as Heros %}
+  {% import './layout/index.twig' as Layout %}
   {% import './lists/index.twig' as Lists %}
+  {% import './media/index.twig' as Media %}
   {% import './navigation/index.twig' as Navigation %}
+  {% import './pathways/index.twig' as Pathways %}
   {% import './sliders/index.twig' as Sliders %}
 
   <section style="padding-bottom: 50px;">
@@ -17,6 +23,16 @@
 
       <div class="umd-grid-gap-four mb-md">
         {{ List.Links() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
+        <a href="{{ Accessories.GetChildUrl() }}">Accessories</a>
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ Accessories.SubLinks() }}
       </div>
 
       <hr />
@@ -52,6 +68,36 @@
       <hr />
 
       <h2 class="page-sub-heading">
+        <a href="{{ Footer.GetChildUrl() }}">Footer</a>
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ Footer.SubLinks() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
+        <a href="{{ Heros.GetChildUrl() }}">Heros</a>
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ Heros.SubLinks() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
+        <a href="{{ Layout.GetChildUrl() }}">Layout</a>
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ Layout.SubLinks() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
         <a href="{{ Lists.GetChildUrl() }}">Lists</a>
       </h2>
 
@@ -62,11 +108,31 @@
       <hr />
 
       <h2 class="page-sub-heading">
+        <a href="{{ Media.GetChildUrl() }}">Media</a>
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ Media.SubLinks() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
         <a href="{{ Navigation.GetChildUrl() }}">Navigation</a>
       </h2>
 
       <div class="umd-grid-gap-four mb-md">
         {{ Navigation.SubLinks() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
+        <a href="{{ Pathways.GetChildUrl() }}">Pathways</a>
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ Pathways.SubLinks() }}
       </div>
 
       <hr />

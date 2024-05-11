@@ -2,7 +2,9 @@
 {% import '_includes/content-dropdown.twig' as Dropdown %}
 
 {% block page %}
-  {% set imageOne = random(RecImageOptions) %}
+  {% set imageUrl =
+    'https://brandportal.umd.edu/m/7be4cb700f7b7518/Hero_web-KnoxMural_06042018_8081.jpg'
+  %}
 
   <div style="padding-bottom: 50px;">
     <div class="umd-lock">
@@ -25,7 +27,7 @@
         </h3>
 
         <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <img slot="image" src="{{ imageUrl }}" alt="Image Description" />
 
           <p slot="eyebrow">
             {{ EyebrowString.EyebrowStringNormal() }}
@@ -48,7 +50,7 @@
           </div>
         </umd-element-card>
         <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <img slot="image" src="{{ imageUrl }}" alt="Image Description" />
 
           <p slot="headline">
             {{ HeadlineString.CardHeadlineStringNormal() }}
@@ -62,7 +64,7 @@
           </p>
         </umd-element-card>
         <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <img slot="image" src="{{ imageUrl }}" alt="Image Description" />
 
           <p slot="eyebrow">
             {{ EyebrowString.EyebrowStringNormal() }}
@@ -87,7 +89,7 @@
           </div>
         </umd-element-card>
         <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <img slot="image" src="{{ imageUrl }}" alt="Image Description" />
 
           <p slot="eyebrow">
             {{ EyebrowString.EyebrowStringNormal() }}
@@ -123,7 +125,7 @@
         </h3>
 
         <umd-element-card display="list" theme="dark">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <img slot="image" src="{{ imageUrl }}" alt="Image Description" />
 
           <p slot="eyebrow">
             {{ EyebrowString.EyebrowStringNormal() }}
@@ -144,7 +146,7 @@
           </div>
         </umd-element-card>
         <umd-element-card display="list" theme="dark">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <img slot="image" src="{{ imageUrl }}" alt="Image Description" />
 
           <p slot="headline">
             {{ HeadlineString.CardHeadlineStringNormal() }}
@@ -158,7 +160,7 @@
           </p>
         </umd-element-card>
         <umd-element-card display="list" theme="dark">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <img slot="image" src="{{ imageUrl }}" alt="Image Description" />
 
           <p slot="eyebrow">
             {{ EyebrowString.EyebrowStringNormal() }}
@@ -183,7 +185,7 @@
           </div>
         </umd-element-card>
         <umd-element-card display="list" theme="dark">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          <img slot="image" src="{{ imageUrl }}" alt="Image Description" />
 
           <p slot="eyebrow">
             {{ EyebrowString.EyebrowStringNormal() }}

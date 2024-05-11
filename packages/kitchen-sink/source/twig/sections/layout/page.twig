@@ -1,8 +1,6 @@
 {% extends '../../_layout.twig' %}
 
-{% set imageOne = random(RecImageOptions) %}
-{% set imageTwo = random(RecImageOptions) %}
-{% set imageThree = random(RecImageOptions) %}
+{% import 'sections/components/blocks/card.twig' as Card %}
 
 {% block page %}
   <section class="pb-xl">
@@ -67,73 +65,8 @@
           <section class="umd-layout-vertical-interior">
             <div class="umd-layout-vertical-interior-child">
               <div class="umd-grid-gap">
-                <umd-element-card aligned="" border="">
-                  <img src="{{ imageOne }}"
-                    alt="Close up on a branch of clustered light pink cherry blossoms opening up to the spring day in front of a bright blue sky."
-                    slot="image"
-                    style="object-position: 50% 50%;" />
-
-                  <p slot="headline">
-                    <a href="/#" rel="noopener noreferrer" target="_self">
-                      <span>Example Card</span>
-                    </a>
-                  </p>
-
-                  <div slot="text">
-                    <p>
-                      <strong>Lorem ipsum dolor sit amet</strong>, <i>
-                        consectetur adipiscing elit
-                      </i>, <a href="#">sed do eiusmod tempor incididunt ut</a> labore
-                      et dolore magna aliqua
-                    </p>
-                  </div>
-
-                  <div slot="actions">
-                    <umd-element-call-to-action type="secondary"
-                      size="standard"
-                      theme="light">
-                      <a href="/#" rel="noopener noreferrer" target="_self">
-                        <span>Example link on a card</span>
-                      </a>
-                    </umd-element-call-to-action>
-                  </div>
-                </umd-element-card>
-
-                <umd-element-card aligned="" border="">
-                  <img src="{{ imageTwo }}"
-                    alt="Students on the Mall looking towards ODK Fountain and McKeldin Library."
-                    slot="image"
-                    style="object-position: 50% 50%;" />
-
-                  <p slot="eyebrow">
-                    Can eyebrows your CD collection?
-                  </p>
-
-                  <p slot="headline">
-                    <a href="/#" rel="noopener noreferrer" target="_self">
-                      <span>Example Card again</span>
-                    </a>
-                  </p>
-
-                  <div slot="text">
-                    <p>
-                      <strong>Lorem ipsum dolor sit amet</strong>, <i>
-                        consectetur adipiscing elit
-                      </i>, <a href="#">sed do eiusmod tempor incididunt ut</a> labore
-                      et dolore magna aliqua
-                    </p>
-                  </div>
-
-                  <div slot="actions">
-                    <umd-element-call-to-action type="secondary"
-                      size="standard"
-                      theme="light">
-                      <a href="/#" rel="noopener noreferrer" target="_self">
-                        <span>Example link on a second card</span>
-                      </a>
-                    </umd-element-call-to-action>
-                  </div>
-                </umd-element-card>
+                {{ Card.example() }}
+                {{ Card.example() }}
               </div>
             </div>
           </section>

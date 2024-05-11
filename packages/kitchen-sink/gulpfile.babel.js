@@ -20,30 +20,6 @@ const RecImageOptions = [
   'https://brandportal.umd.edu/m/763f805f9e280e6a/Hero_web-Students_Mall_09192019_0744-tif.jpg',
 ];
 
-const SquareImageOptions = [
-  'https://brandportal.umd.edu/m/20eb228a112cb1d3/Square-Students_Outdoors_09292017_7118.jpg',
-  'https://brandportal.umd.edu/m/28973b679519d5c9/Square-HornbakeLibrary_03082023_HH_1859.jpg',
-  'https://brandportal.umd.edu/m/8ffda3d340165e1/Square-Campus_Fall_11012022_JC_6055-JPG.jpg',
-];
-
-const WeirdImageOptions = [
-  'https://brandportal.umd.edu/m/45baf65f957027a8/Hero_web-Campus_Fall_11012022_JC_5990.jpg',
-  'https://brandportal.umd.edu/m/13da92f7a9906748/Hero_web-Students_Outdoors_04052023_HH_2696.jpg',
-  'https://brandportal.umd.edu/m/4f1c9589ac5fa49d/Hero_web-Students_ESJLTC_03292023_SC_5429.jpg',
-];
-
-const GifImageOptions = [
-  'https://umd-today.files.svdcdn.com/production/gifs/music_collage.gif_1920x1080.gif?dm=1707945389',
-  'https://umd-today.files.svdcdn.com/production/gifs/ezgif.com-optimize.gif?dm=1694719244',
-  'https://umd-today.files.svdcdn.com/production/gifs/MT-Accolades_23-04_v4.gif?dm=1680887361',
-];
-
-const logoOptions = [
-  'https://provost.umd.edu/logos/provost-logo-primary-light.png',
-];
-
-const personOptions = ['/person-1.jpeg', '/person-2.jpeg', '/person-3.jpeg'];
-
 const twigTask = () =>
   gulp
     .src(twigSource)
@@ -52,11 +28,6 @@ const twigTask = () =>
         base: 'source/twig',
         data: {
           RecImageOptions,
-          SquareImageOptions,
-          WeirdImageOptions,
-          GifImageOptions,
-          logoOptions,
-          personOptions,
         },
       }),
     )

@@ -1,20 +1,12 @@
 {% extends '_layout.twig' %}
 {% import '_includes/content-dropdown.twig' as Dropdown %}
-{% import '_includes/macros/card.twig' as Card %}
-
-{% import '_includes/macros/fields/eyebrow.twig' as EyebrowString %}
-{% import '_includes/macros/fields/headline.twig' as HeadlineString %}
-{% import '_includes/macros/fields/text-slot-rich-text.twig'
-  as RichTextString
-%}
+{% import _self as macros %}
 
 {% block page %}
-  {% set imageOne = random(RecImageOptions) %}
-  {% set imageTwo = random(RecImageOptions) %}
-  {% set imageThree = random(RecImageOptions) %}
-  {% set imageSquare = random(SquareImageOptions) %}
-  {% set imageWeird = random(WeirdImageOptions) %}
+  {{ macros.pagecontent() }}
+{% endblock %}
 
+{% macro pagecontent() %}
   <section>
     <div class="umd-lock">
       <h1 class="page-heading">
@@ -35,8 +27,8 @@
         </h3>
         <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
-              image: imageSquare
+            macros.content({
+              image: true
             })
           }}
         </div>
@@ -51,8 +43,8 @@
         </div>
         <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
-              image: imageOne,
+            macros.content({
+              image: true,
               aligned: true,
               border: true
             })
@@ -69,8 +61,8 @@
         </div>
         <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
-              image: imageOne,
+            macros.content({
+              image: true,
               aligned: true,
               border: false
             })
@@ -87,7 +79,7 @@
         </div>
         <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
+            macros.content({
               aligned: false,
               border: false,
               eyebrow: false,
@@ -107,8 +99,8 @@
         </div>
         <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
-              image: imageOne,
+            macros.content({
+              image: true,
               aligned: true,
               border: false,
               eyebrow: false,
@@ -128,8 +120,8 @@
         </div>
         <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
-              image: imageOne,
+            macros.content({
+              image: true,
               aligned: true,
               theme: 'dark'
             })
@@ -146,24 +138,24 @@
         </div>
         <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
-              image: imageOne,
+            macros.content({
+              image: true,
               aligned: true,
               border: false,
               ctaLink: false
             })
           }}
           {{
-            Card.NormalCardBody({
-              image: imageTwo,
+            macros.content({
+              image: true,
               aligned: true,
               border: false,
               ctaLink: false
             })
           }}
           {{
-            Card.NormalCardBody({
-              image: imageThree,
+            macros.content({
+              image: true,
               aligned: true,
               border: false,
               ctaLink: false
@@ -181,28 +173,28 @@
         </div>
         <div class="umd-grid-gap-four mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
-              image: imageOne,
+            macros.content({
+              image: true,
               aligned: true,
               border: false
             })
           }}
           {{
-            Card.NormalCardBody({
-              image: imageTwo,
+            macros.content({
+              image: true,
               aligned: true,
               border: false
             })
           }}
           {{
-            Card.NormalCardBody({
-              image: imageThree,
+            macros.content({
+              image: true,
               aligned: true,
               border: false
             })
           }}
           {{
-            Card.NormalCardBody({
+            macros.content({
               image: imageWeird,
               aligned: true,
               border: false
@@ -220,16 +212,16 @@
         </div>
         <div class="umd-grid-gap mb-md" style="margin-top: 24px">
           {{
-            Card.NormalCardBody({
-              image: imageOne,
+            macros.content({
+              image: true,
               aligned: true,
               border: false,
               ctaLink: false
             })
           }}
           {{
-            Card.NormalCardBody({
-              image: imageTwo,
+            macros.content({
+              image: true,
               aligned: true,
               border: false,
               ctaLink: false
@@ -469,4 +461,105 @@
       </div>
     </section>
   </section>
-{% endblock %}
+{% endmacro %}
+
+{% macro example() %}
+  <div class="umd-grid-gap-three mb-md">
+    {{
+      macros.content({
+        image: true,
+        aligned: true,
+        border: false,
+        ctaLink: false
+      })
+    }}
+    {{
+      macros.content({
+        image: true,
+        aligned: true,
+        border: false,
+        ctaLink: false
+      })
+    }}
+    {{
+      macros.content({
+        image: true,
+        aligned: true,
+        border: false,
+        ctaLink: false
+      })
+    }}
+  </div>
+{% endmacro %}
+
+{% macro content(params) %}
+  {% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
+  {% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
+  {% import '_includes/macros/fields/headline.twig' as Headline %}
+  {% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
+
+  {% set images = [
+    'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
+    'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
+    'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
+    'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
+    'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
+    'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
+    'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
+    'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
+    'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
+    'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
+    'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
+  ] %}
+
+  {% set url = params.url ?? 'https://umd.edu' %}
+  {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasRichText = params.text ?? true %}
+
+  {% set attrs = '' %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% if params.aligned %}
+    {% set attrs = attrs ~ 'aligned="true"' %}
+  {% endif %}
+
+  {% if params.border %}
+    {% set attrs = attrs ~ 'border="true"' %}
+  {% endif %}
+
+  <umd-element-card {{ attrs }}>
+    {% if params.image %}
+      <a slot="image"
+        href="{{ url }}"
+        target="_blank"
+        data-caption="Lorem ipsum dolor">
+        <img src="{{ random(images) }}" alt="Example Alt Text" />
+      </a>
+    {% endif %}
+
+    {% if hasEyebrow %}
+      {{ Eyebrow.EyebrowNormal() }}
+    {% endif %}
+
+    {% if hasHeadline %}
+      {{ Headline.CardHeadlineNormal() }}
+    {% endif %}
+
+    {% if hasRichText %}
+      {{ RichText.CardRichTextNormal() }}
+    {% endif %}
+
+    {% if hasCtaLink %}
+      {{
+        CallToAction.InternalCallToAction({
+          theme: params.theme
+        })
+      }}
+    {% endif %}
+  </umd-element-card>
+{% endmacro %}

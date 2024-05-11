@@ -1,8 +1,9 @@
 {% extends '_layout.twig' %}
-{% import '_includes/macros/card.twig' as Card %}
+
 {% import '_includes/macros/card-overlay.twig' as CardOverlay %}
 
 {% import './article.twig' as Article %}
+{% import './card.twig' as Card %}
 {% import '../_data.twig' as Data %}
 
 {% import _self as macros %}
@@ -89,32 +90,7 @@
           <span>Card</span>
           <a href="{{ _self.GetChildUrl() }}card">View More Examples</a>
         </div>
-        <div class="umd-grid-gap-three mb-md">
-          {{
-            Card.NormalCardBody({
-              image: imageOne,
-              aligned: true,
-              border: false,
-              ctaLink: false
-            })
-          }}
-          {{
-            Card.NormalCardBody({
-              image: imageTwo,
-              aligned: true,
-              border: false,
-              ctaLink: false
-            })
-          }}
-          {{
-            Card.NormalCardBody({
-              image: imageThree,
-              aligned: true,
-              border: false,
-              ctaLink: false
-            })
-          }}
-        </div>
+        {{ Card.example() }}
       </div>
     </section>
 

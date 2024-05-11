@@ -1,5 +1,10 @@
 {% extends '_layout.twig' %}
 
+{% import './accordion.twig' as Accordion %}
+{% import './alert-page.twig' as AlertPage %}
+{% import './alert-site.twig' as AlertSite %}
+{% import './quote-simple.twig' as QuoteSimple %}
+{% import './quote-featured.twig' as QuoteFeatured %}
 {% import _self as macros %}
 
 {% set AccessoryPages = [
@@ -8,12 +13,20 @@
     link: 'accordion'
   },
   {
-    name: 'Alert',
-    link: 'alert'
+    name: 'Alert Page',
+    link: 'alert-page'
   },
   {
-    name: 'Quote',
-    link: 'quote'
+    name: 'Alert Site',
+    link: 'alert-site'
+  },
+  {
+    name: 'Quote Simple',
+    link: 'quote-simple'
+  },
+  {
+    name: 'Quote Featured',
+    link: 'quote-featured'
   }
 ] %}
 
@@ -62,24 +75,55 @@
           <span>Accordion</span>
           <a href="{{ _self.GetChildUrl() }}accordion">View More Examples</a>
         </div>
+
+        {{ Accordion.exampleOpen() }}
+        {{ Accordion.exampleClosed() }}
       </div>
     </section>
 
     <section>
       <div class="umd-lock">
         <div class="content-heading">
-          <span>Alert</span>
-          <a href="{{ _self.GetChildUrl() }}alert">View More Examples</a>
+          <span>Alert Page</span>
+          <a href="{{ _self.GetChildUrl() }}alert-page">View More Examples</a>
         </div>
+
+        {{ AlertPage.example() }}
       </div>
     </section>
 
     <section>
       <div class="umd-lock">
         <div class="content-heading">
-          <span>Quote</span>
-          <a href="{{ _self.GetChildUrl() }}quote">View More Examples</a>
+          <span>Alert Site</span>
+          <a href="{{ _self.GetChildUrl() }}alert-site">View More Examples</a>
         </div>
+      </div>
+
+      {{ AlertSite.example() }}
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Quote Featured</span>
+          <a href="{{ _self.GetChildUrl() }}quote-featured">
+            View More Examples
+          </a>
+        </div>
+
+        {{ QuoteFeatured.example() }}
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Quote Simple</span>
+          <a href="{{ _self.GetChildUrl() }}quote-simple">View More Examples</a>
+        </div>
+
+        {{ QuoteSimple.example() }}
       </div>
     </section>
   </div>

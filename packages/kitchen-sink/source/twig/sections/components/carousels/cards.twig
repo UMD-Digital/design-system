@@ -1,12 +1,10 @@
-{% extends '../../_layout.twig' %}
+{% extends '_layout.twig' %}
 
-{% import '../../_includes/content-dropdown.twig' as Dropdown %}
-{% import '../../_includes/macros/card-overlay.twig' as CardOverlay %}
-{% import '../../_includes/macros/fields/headline.twig' as Headline %}
-{% import '../../_includes/macros/fields/text-slot-rich-text.twig'
-  as RichText
-%}
-{% import '../../_includes/macros/fields/call-to-action.twig' as CallToAction %}
+{% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import '_includes/macros/card-overlay.twig' as CardOverlay %}
+{% import '_includes/macros/fields/headline.twig' as Headline %}
+{% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
+{% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
 
 {% block page %}
   {% set imageOne = random(RecImageOptions) %}
@@ -28,6 +26,150 @@
       {{ Dropdown.ContentVariations() }}
     </div>
   </section>
+
+  <div id="normal" class="dropdown-selection" aria-hidden="false">
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading">
+          Default
+        </h3>
+      </div>
+      <umd-element-carousel-cards resize>
+        {{ Headline.CarouselHeadlineSuccinct() }}
+
+        {{ RichText.CardRichTextSuccinct() }}
+
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+
+        <div slot="cards">
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageOne
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageTwo
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              theme: 'dark'
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageThree
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageSquare
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              theme: 'dark'
+            })
+          }}
+        </div>
+      </umd-element-carousel-cards>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Field Options</span>
+          <span>Required Only</span>
+        </div>
+      </div>
+      <umd-element-carousel-cards resize>
+        {{ Headline.CarouselHeadlineNormal() }}
+
+        <div slot="cards">
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageOne
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageTwo
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              theme: 'dark'
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageThree
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageSquare
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              theme: 'dark'
+            })
+          }}
+        </div>
+      </umd-element-carousel-cards>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Edge Cases</span>
+          <span>Two Cards</span>
+        </div>
+      </div>
+
+      <umd-element-carousel-cards resize>
+        {{ Headline.CarouselHeadlineNormal() }}
+
+        {{ RichText.CardRichTextNormal() }}
+
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+
+        <div slot="cards">
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageTwo
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageOne
+            })
+          }}
+        </div>
+      </umd-element-carousel-cards>
+    </section>
+  </div>
 
   <div id="succinct" class="dropdown-selection" aria-hidden="true">
     <div class="umd-lock">
@@ -173,150 +315,6 @@
     </section>
   </div>
 
-  <div id="normal" class="dropdown-selection" aria-hidden="false">
-    <div class="umd-lock">
-      <h3 class="content-heading">
-        Default
-      </h3>
-    </div>
-    <section>
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineNormal() }}
-
-        {{ RichText.CardRichTextNormal() }}
-
-        {{
-          CallToAction.InternalCallToAction({
-            theme: 'dark'
-          })
-        }}
-
-        <div slot="cards">
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              theme: 'dark'
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageThree
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              theme: 'dark'
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <div class="content-heading">
-          <span>Field Options</span>
-          <span>Required Only</span>
-        </div>
-      </div>
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineNormal() }}
-
-        <div slot="cards">
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              theme: 'dark'
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageThree
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              theme: 'dark'
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <div class="content-heading">
-          <span>Edge Cases</span>
-          <span>Two Cards</span>
-        </div>
-      </div>
-
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineNormal() }}
-
-        {{ RichText.CardRichTextNormal() }}
-
-        {{
-          CallToAction.InternalCallToAction({
-            theme: 'dark'
-          })
-        }}
-
-        <div slot="cards">
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
-  </div>
-
   <div id="verbose" class="dropdown-selection" aria-hidden="true">
     <div class="umd-lock">
       <h3 class="content-heading">
@@ -325,9 +323,9 @@
     </div>
     <section>
       <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineVerbose() }}
+        {{ Headline.CarouselHeadlineSuccinct() }}
 
-        {{ RichText.CardRichTextVerbose() }}
+        {{ RichText.CardRichTextSuccinct() }}
 
         {{
           CallToAction.InternalCallToAction({

@@ -1,7 +1,11 @@
 {% extends '_layout.twig' %}
-{% import '_includes/macros/call-to-action-options.twig'
-  as CallToActionOption
-%}
+
+{% import './breadcrumb.twig' as Breadcrumb %}
+{% import './call-to-action.twig' as CallToAction %}
+{% import './call-to-action-button.twig' as CallToActionButton %}
+{% import './logo.twig' as Logo %}
+{% import './stat.twig' as Stat %}
+{% import _self as macros %}
 
 {% set AtomicPages = [
   {
@@ -26,6 +30,10 @@
   }
 ] %}
 
+{% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
 {% macro GetChildUrl() %}
   {% import '../_data.twig' as Data %}
 
@@ -39,21 +47,27 @@
   {% endfor %}
 {% endmacro %}
 
-{% block page %}
+{% macro pagecontent() %}
   <div style="padding-bottom: 50px;">
     <div class="umd-lock">
       <h1 class="page-heading">
-        Atomic Elements (small reusable components)
+        Atomic Elements
       </h1>
 
       <p>
-        View Other Components
+        Small reusable components
+      </p>
+
+      <p>
+        Additonal Component Examples:
       </p>
 
       <ul>
         {% for item in AtomicPages %}
           <li>
-            <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            <umd-element-call-to-action type="secondary">
+              <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            </umd-element-call-to-action>
           </li>
         {% endfor %}
       </ul>
@@ -65,15 +79,7 @@
           <span>Breadcrumb</span>
           <a href="{{ _self.GetChildUrl() }}breadcrumb">View More Examples</a>
         </div>
-        <umd-element-breadcrumb>
-          <div slot="paths">
-            <a href="">Home</a>
-            <a href="">Primary Link</a>
-            <a href="">Secondary Link</a>
-            <a href="">Tertiary Link</a>
-            <a href="">Current Page</a>
-          </div>
-        </umd-element-breadcrumb>
+        {{ Breadcrumb.example() }}
       </div>
     </section>
 
@@ -85,41 +91,7 @@
             View More Examples
           </a>
         </div>
-
-        <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
-          <div>
-            {{
-              CallToActionOption.NormalCTA({
-                ctaSpan: true,
-                ctaLink: false,
-                externalLink: false,
-                download: false
-              })
-            }}
-          </div>
-
-          <div>
-            {{
-              CallToActionOption.NormalCTA({
-                outline: true,
-                large: false,
-                ctaOption: 'chevron',
-                button: false
-              })
-            }}
-          </div>
-
-          <div>
-            {{
-              CallToActionOption.NormalCTA({
-                secondary: true,
-                large: false,
-                ctaOption: 'chevron',
-                button: false
-              })
-            }}
-          </div>
-        </div>
+        {{ CallToAction.example() }}
       </div>
     </section>
 
@@ -131,42 +103,7 @@
             View More Examples
           </a>
         </div>
-
-        <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
-          <div>
-            {{
-              CallToActionOption.NormalCTA({
-                ctaSpan: true,
-                ctaLink: false,
-                externalLink: false,
-                download: false,
-                button: true
-              })
-            }}
-          </div>
-
-          <div>
-            {{
-              CallToActionOption.NormalCTA({
-                outline: true,
-                large: false,
-                ctaOption: 'chevron',
-                button: true
-              })
-            }}
-          </div>
-
-          <div>
-            {{
-              CallToActionOption.NormalCTA({
-                secondary: true,
-                large: false,
-                ctaOption: 'chevron',
-                button: true
-              })
-            }}
-          </div>
-        </div>
+        {{ CallToActionButton.example() }}
       </div>
     </section>
 
@@ -176,11 +113,7 @@
           <span>Logo</span>
           <a href="{{ _self.GetChildUrl() }}logo">View More Examples</a>
         </div>
-        <div class="umd-grid-gap-three">
-          <umd-element-logo border="true">
-            <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
-          </umd-element-logo>
-        </div>
+        {{ Logo.example() }}
       </div>
     </section>
 
@@ -190,19 +123,9 @@
           <span>Stat</span>
           <a href="{{ _self.GetChildUrl() }}stat">View More Examples</a>
         </div>
-        <umd-element-stat>
-          <div slot="stat">
-            10th
-          </div>
-          <div slot="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut
-          </div>
-          <div slot="sub-text">
-            Source: 2022-23 U.S. News & World Report
-          </div>
-        </umd-element-stat>
+
+        {{ Stat.example() }}
       </div>
     </section>
   </div>
-{% endblock %}
+{% endmacro %}

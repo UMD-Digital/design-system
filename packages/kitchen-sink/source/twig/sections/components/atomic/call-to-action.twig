@@ -1354,3 +1354,40 @@
     </div>
   </section>
 {% endblock %}
+
+{% macro example() %}
+  <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
+    <div>
+      {{
+        CallToActionOption.NormalCTA({
+          ctaSpan: true,
+          ctaLink: false,
+          externalLink: false,
+          download: false
+        })
+      }}
+    </div>
+
+    <div>
+      {{
+        CallToActionOption.NormalCTA({
+          outline: true,
+          large: false,
+          ctaOption: 'chevron',
+          button: false
+        })
+      }}
+    </div>
+
+    <div>
+      {{
+        CallToActionOption.NormalCTA({
+          secondary: true,
+          large: false,
+          ctaOption: 'chevron',
+          button: false
+        })
+      }}
+    </div>
+  </div>
+{% endmacro %}

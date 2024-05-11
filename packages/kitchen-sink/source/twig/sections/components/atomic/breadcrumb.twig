@@ -1,5 +1,7 @@
 {% extends '_layout.twig' %}
 
+{% import _self as macros %}
+
 {% block page %}
   <section>
     <div class="umd-lock">
@@ -7,15 +9,8 @@
         <span>Theme Light</span>
         <span>Primary Styling</span>
       </p>
-      <umd-element-breadcrumb class="mb-xs">
-        <div slot="paths">
-          <a href="">Home</a>
-          <a href="">Primary Link</a>
-          <a href="">Secondary Link</a>
-          <a href="">Tertiary Link</a>
-          <a href="">Current Page</a>
-        </div>
-      </umd-element-breadcrumb>
+
+      {{ macros.example() }}
     </div>
   </section>
 
@@ -37,3 +32,15 @@
     </div>
   </section>
 {% endblock %}
+
+{% macro example() %}
+  <umd-element-breadcrumb class="mb-xs">
+    <div slot="paths">
+      <a href="">Home</a>
+      <a href="">Primary Link</a>
+      <a href="">Secondary Link</a>
+      <a href="">Tertiary Link</a>
+      <a href="">Current Page</a>
+    </div>
+  </umd-element-breadcrumb>
+{% endmacro %}

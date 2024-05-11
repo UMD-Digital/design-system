@@ -4,6 +4,7 @@
   {% import './_data.twig' as List %}
   {% import './atomic/index.twig' as Atomic %}
   {% import './blocks/index.twig' as Blocks %}
+  {% import './carousels/index.twig' as Carousels %}
   {% import './lists/index.twig' as Lists %}
   {% import './navigation/index.twig' as Navigation %}
   {% import './sliders/index.twig' as Sliders %}
@@ -36,6 +37,16 @@
 
       <div class="umd-grid-gap-four mb-md">
         {{ Blocks.SubLinks() }}
+      </div>
+
+      <hr />
+
+      <h2 class="page-sub-heading">
+        Sub Pages - <a href="{{ Carousels.GetChildUrl() }}">Carousels</a>
+      </h2>
+
+      <div class="umd-grid-gap-four mb-md">
+        {{ Carousels.SubLinks() }}
       </div>
 
       <hr />

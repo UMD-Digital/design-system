@@ -1,0 +1,117 @@
+{% extends '_layout.twig' %}
+
+{% import './cards.twig' as Cards %}
+
+{% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import '_includes/macros/card-overlay.twig' as CardOverlay %}
+{% import '_includes/macros/fields/headline.twig' as Headline %}
+{% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
+{% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
+
+{% set CarouselPages = [
+  {
+    name: 'Cards',
+    link: 'cards'
+  }
+] %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'carousels/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in CarouselPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}
+
+{% block page %}
+  {% set imageOne = random(RecImageOptions) %}
+  {% set imageTwo = random(RecImageOptions) %}
+  {% set imageThree = random(RecImageOptions) %}
+  {% set imageSquare = random(SquareImageOptions) %}
+  {% set imageWeird = random(WeirdImageOptions) %}
+
+  <div style="padding-bottom: 50px;">
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Carousels
+      </h1>
+
+      <p>
+        Additonal Component Examples
+      </p>
+
+      <ul>
+        {% for item in CarouselPages %}
+          <li>
+            <umd-element-call-to-action type="secondary">
+              <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            </umd-element-call-to-action>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Cards</span>
+          <a href="{{ _self.GetChildUrl() }}cards">View More Examples</a>
+        </div>
+      </div>
+      <umd-element-carousel-cards resize>
+        {{ Headline.CarouselHeadlineSuccinct() }}
+
+        {{ RichText.CardRichTextSuccinct() }}
+
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+
+        <div slot="cards">
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageOne
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageTwo
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              theme: 'dark'
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageThree
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              image: imageSquare
+            })
+          }}
+
+          {{
+            CardOverlay.NormalCardBody({
+              theme: 'dark'
+            })
+          }}
+        </div>
+      </umd-element-carousel-cards>
+    </section>
+  </div>
+{% endblock %}

@@ -1,5 +1,7 @@
 {% extends '_layout.twig' %}
 
+{% import _self as macros %}
+
 {% block page %}
   <div style="padding-bottom: 50px;">
     <section>
@@ -22,11 +24,7 @@
           <span>With Border</span>
         </p>
 
-        <div class="umd-grid-gap-three">
-          <umd-element-logo border="true">
-            <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
-          </umd-element-logo>
-        </div>
+        {{ macros.example() }}
       </div>
     </section>
 
@@ -94,3 +92,11 @@
     </section>
   </div>
 {% endblock %}
+
+{% macro example() %}
+  <div class="umd-grid-gap-three">
+    <umd-element-logo border="true">
+      <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
+    </umd-element-logo>
+  </div>
+{% endmacro %}

@@ -525,3 +525,41 @@
     </section>
   </div>
 {% endblock %}
+
+{% macro example() %}
+  <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
+    <div>
+      {{
+        CallToActionOption.NormalCTA({
+          ctaSpan: true,
+          ctaLink: false,
+          externalLink: false,
+          download: false,
+          button: true
+        })
+      }}
+    </div>
+
+    <div>
+      {{
+        CallToActionOption.NormalCTA({
+          outline: true,
+          large: false,
+          ctaOption: 'chevron',
+          button: true
+        })
+      }}
+    </div>
+
+    <div>
+      {{
+        CallToActionOption.NormalCTA({
+          secondary: true,
+          large: false,
+          ctaOption: 'chevron',
+          button: true
+        })
+      }}
+    </div>
+  </div>
+{% endmacro %}

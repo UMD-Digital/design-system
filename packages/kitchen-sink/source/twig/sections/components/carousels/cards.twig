@@ -8,308 +8,314 @@
 {% import _self as macros %}
 
 {% block page %}
-  <section>
-    <div class="umd-lock">
-      <h1 class="page-heading">
-        Carousel Cards
-      </h1>
+  {{ macros.pagecontent() }}
+{% endblock %}
 
-      <h2 class="content-heading">
-        Content Variations
-      </h2>
-
-      {{ Dropdown.ContentVariations() }}
-    </div>
-  </section>
-
-  <div id="normal" class="dropdown-selection" aria-hidden="false">
+{% macro pagecontent() %}
+  <div>
     <section>
+      <div class="umd-lock">
+        <h1 class="page-heading">
+          Carousel Cards
+        </h1>
+
+        <h2 class="content-heading">
+          Content Variations
+        </h2>
+
+        {{ Dropdown.ContentVariations() }}
+      </div>
+    </section>
+
+    <div id="normal" class="dropdown-selection" aria-hidden="false">
+      <section>
+        <div class="umd-lock">
+          <h3 class="content-heading">
+            Default
+          </h3>
+        </div>
+        {{ macros.example() }}
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <div class="content-heading">
+            <span>Field Options</span>
+            <span>Required Only</span>
+          </div>
+        </div>
+        <umd-element-carousel-cards resize>
+          {{ Headline.CarouselHeadlineNormal() }}
+
+          <div slot="cards">
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                theme: 'dark'
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                theme: 'dark'
+              })
+            }}
+          </div>
+        </umd-element-carousel-cards>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <div class="content-heading">
+            <span>Edge Cases</span>
+            <span>Two Cards</span>
+          </div>
+        </div>
+
+        <umd-element-carousel-cards resize>
+          {{ Headline.CarouselHeadlineNormal() }}
+
+          {{ RichText.CardRichTextNormal() }}
+
+          {{
+            CallToAction.InternalCallToAction({
+              theme: 'dark'
+            })
+          }}
+
+          <div slot="cards">
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+          </div>
+        </umd-element-carousel-cards>
+      </section>
+    </div>
+
+    <div id="succinct" class="dropdown-selection" aria-hidden="true">
       <div class="umd-lock">
         <h3 class="content-heading">
           Default
         </h3>
       </div>
-      {{ macros.example() }}
-    </section>
+      <section>
+        {{ macros.example() }}
+      </section>
 
-    <section>
-      <div class="umd-lock">
-        <div class="content-heading">
-          <span>Field Options</span>
-          <span>Required Only</span>
+      <section>
+        <div class="umd-lock">
+          <div class="content-heading">
+            <span>Field Options</span>
+            <span>Required Only</span>
+          </div>
         </div>
-      </div>
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineNormal() }}
+        <umd-element-carousel-cards resize>
+          {{ Headline.CarouselHeadlineSuccinct() }}
 
-        <div slot="cards">
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
+          <div slot="cards">
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                theme: 'dark'
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                theme: 'dark'
+              })
+            }}
+          </div>
+        </umd-element-carousel-cards>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <div class="content-heading">
+            <span>Edge Cases</span>
+            <span>Two Cards</span>
+          </div>
+        </div>
+
+        <umd-element-carousel-cards resize>
+          {{ Headline.CarouselHeadlineSuccinct() }}
+
+          {{ RichText.CardRichTextSuccinct() }}
 
           {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
+            CallToAction.InternalCallToAction({
               theme: 'dark'
             })
           }}
 
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
+          <div slot="cards">
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
 
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              theme: 'dark'
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <div class="content-heading">
-          <span>Edge Cases</span>
-          <span>Two Cards</span>
-        </div>
-      </div>
-
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineNormal() }}
-
-        {{ RichText.CardRichTextNormal() }}
-
-        {{
-          CallToAction.InternalCallToAction({
-            theme: 'dark'
-          })
-        }}
-
-        <div slot="cards">
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
-  </div>
-
-  <div id="succinct" class="dropdown-selection" aria-hidden="true">
-    <div class="umd-lock">
-      <h3 class="content-heading">
-        Default
-      </h3>
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+          </div>
+        </umd-element-carousel-cards>
+      </section>
     </div>
-    <section>
-      {{ macros.example() }}
-    </section>
 
-    <section>
+    <div id="verbose" class="dropdown-selection" aria-hidden="true">
       <div class="umd-lock">
-        <div class="content-heading">
-          <span>Field Options</span>
-          <span>Required Only</span>
-        </div>
+        <h3 class="content-heading">
+          Default
+        </h3>
       </div>
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineSuccinct() }}
+      <section>
+        {{ macros.example() }}
+      </section>
 
-        <div slot="cards">
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
+      <section>
+        <div class="umd-lock">
+          <div class="content-heading">
+            <span>Field Options</span>
+            <span>Required Only</span>
+          </div>
+        </div>
+        <umd-element-carousel-cards resize>
+          {{ Headline.CarouselHeadlineVerbose() }}
+
+          <div slot="cards">
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                theme: 'dark'
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+
+            {{
+              CardOverlay.content({
+                theme: 'dark'
+              })
+            }}
+          </div>
+        </umd-element-carousel-cards>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <div class="content-heading">
+            <span>Edge Cases</span>
+            <span>Two Cards</span>
+          </div>
+        </div>
+
+        <umd-element-carousel-cards resize>
+          {{ Headline.CarouselHeadlineVerbose() }}
+
+          {{ RichText.CardRichTextVerbose() }}
 
           {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
+            CallToAction.InternalCallToAction({
               theme: 'dark'
             })
           }}
 
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
+          <div slot="cards">
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
 
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              theme: 'dark'
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <div class="content-heading">
-          <span>Edge Cases</span>
-          <span>Two Cards</span>
-        </div>
-      </div>
-
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineSuccinct() }}
-
-        {{ RichText.CardRichTextSuccinct() }}
-
-        {{
-          CallToAction.InternalCallToAction({
-            theme: 'dark'
-          })
-        }}
-
-        <div slot="cards">
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
-  </div>
-
-  <div id="verbose" class="dropdown-selection" aria-hidden="true">
-    <div class="umd-lock">
-      <h3 class="content-heading">
-        Default
-      </h3>
+            {{
+              CardOverlay.content({
+                image: true
+              })
+            }}
+          </div>
+        </umd-element-carousel-cards>
+      </section>
     </div>
-    <section>
-      {{ macros.example() }}
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <div class="content-heading">
-          <span>Field Options</span>
-          <span>Required Only</span>
-        </div>
-      </div>
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineVerbose() }}
-
-        <div slot="cards">
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              theme: 'dark'
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              theme: 'dark'
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <div class="content-heading">
-          <span>Edge Cases</span>
-          <span>Two Cards</span>
-        </div>
-      </div>
-
-      <umd-element-carousel-cards resize>
-        {{ Headline.CarouselHeadlineVerbose() }}
-
-        {{ RichText.CardRichTextVerbose() }}
-
-        {{
-          CallToAction.InternalCallToAction({
-            theme: 'dark'
-          })
-        }}
-
-        <div slot="cards">
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-
-          {{
-            CardOverlay.content({
-              image: true
-            })
-          }}
-        </div>
-      </umd-element-carousel-cards>
-    </section>
   </div>
-{% endblock %}
+{% endmacro %}
 
 {% macro example() %}
   <umd-element-carousel-cards resize>

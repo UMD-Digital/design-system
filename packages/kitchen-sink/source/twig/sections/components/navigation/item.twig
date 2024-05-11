@@ -1,6 +1,12 @@
 {% extends '_layout.twig' %}
 
+{% import _self as macros %}
+
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent() %}
   <div class="umd-lock">
     <h1 class="page-heading">
       Navigation Item
@@ -336,4 +342,4 @@
       </div>
     </section>
   </div>
-{% endblock %}
+{% endmacro %}

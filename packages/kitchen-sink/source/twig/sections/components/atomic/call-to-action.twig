@@ -7,1388 +7,1406 @@
 {% set url = params.url ?? 'https://umd.edu' %}
 
 {% block page %}
-  <section>
-    <div class="umd-lock">
-      <h1 class="page-heading">
-        Call to Action
-      </h1>
-
-      <h2 class="content-heading">
-        Content Variations
-      </h2>
-
-      {{ Dropdown.ContentVariations() }}
-    </div>
-  </section>
-  <div id="succinct" class="dropdown-selection" aria-hidden="true">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Primary Styling
-        </p>
-        {{
-          macros.SuccinctCTA({
-            ctaSpan: true,
-            ctaLink: false,
-            externalLink: false,
-            download: false
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Icon options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              large: false,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              large: false,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              large: false,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              large: true,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              large: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              large: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Secondary Styling
-        </p>
-
-        {{
-          macros.SuccinctCTA({
-            secondary: true,
-            primary: false,
-            large: false,
-            ctaOption: 'chevron'
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Icon options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              large: false,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              large: false
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              large: false,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              large: true,
-              ctaOption: 'alert'
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              large: true
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              large: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Outline Styling
-        </p>
-
-        {{
-          macros.SuccinctCTA({
-            outline: true,
-            large: false,
-            externalLink: false
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Icon Options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              outline: true,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              outline: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              outline: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              outline: true,
-              large: true,
-              ctaOption: 'alert'
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              outline: true,
-              large: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              outline: true,
-              large: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Combo
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              externalLink: false,
-              large: true
-            })
-          }}
-
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              outline: false,
-              large: true,
-              ctaOption: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Combo</span>
-          <span>Primary with Plain Text Slot</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              externalLink: false,
-              large: true,
-              plainText: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Combo</span>
-          <span>Secondary with Plain Text Slot</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              externalLink: false,
-              plainText: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Primary Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              primary: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Secondary Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              secondary: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Outline Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.SuccinctCTA({
-              outline: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div id="normal" class="dropdown-selection" aria-hidden="false">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Primary Styling
-        </p>
-        {{
-          macros.NormalCTA({
-            ctaSpan: true,
-            externalLink: false
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Icon options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              primary: true,
-              large: false,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              primary: true,
-              large: false,
-              ctaOption: false,
-              externalLink: true
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              primary: true,
-              large: false,
-              download: true,
-              externalLink: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              primary: true,
-              large: true,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              primary: true,
-              large: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              primary: true,
-              large: true,
-              download: true,
-              externalLink: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Secondary Styling
-        </p>
-
-        {{
-          macros.NormalCTA({
-            secondary: true,
-            primary: false,
-            large: false,
-            ctaOption: 'chevron'
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Icon options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              large: false,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              large: false
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              large: false,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              large: true,
-              ctaOption: 'alert'
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              large: true
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              large: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Outline Styling
-        </p>
-
-        {{
-          macros.NormalCTA({
-            outline: true,
-            large: false,
-            externalLink: false
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Icon Options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              outline: true,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              outline: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              outline: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              outline: true,
-              large: true,
-              ctaOption: 'alert'
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              outline: true,
-              large: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              outline: true,
-              large: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Combo
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              primary: true,
-              externalLink: false,
-              large: true
-            })
-          }}
-
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              outline: false,
-              large: true,
-              ctaOption: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Combo</span>
-          <span>Primary with Plain Text Slot</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              primary: true,
-              externalLink: false,
-              large: true,
-              plainText: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Combo</span>
-          <span>Secondary with Plain Text Slot</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              externalLink: false,
-              plainText: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Primary Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              primary: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Secondary Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              secondary: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Outline Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.NormalCTA({
-              outline: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div id="verbose" class="dropdown-selection" aria-hidden="true">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Primary Styling
-        </p>
-        {{
-          macros.VerboseCTA({
-            ctaSpan: true,
-            ctaLink: false,
-            externalLink: false,
-            download: false
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Icon options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              large: false,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              large: false,
-              ctaOption: false,
-              externalLink: true
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              large: false,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              large: true,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              large: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              large: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Secondary Styling
-        </p>
-
-        {{
-          macros.VerboseCTA({
-            secondary: true,
-            primary: false,
-            large: false,
-            ctaOption: 'chevron'
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Icon options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              large: false,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              large: false
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              large: false,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              large: true,
-              ctaOption: 'alert'
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              large: true
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              large: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Outline Styling
-        </p>
-
-        {{
-          macros.VerboseCTA({
-            outline: true,
-            large: false,
-            externalLink: false
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Icon Options</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              outline: true,
-              ctaOption: 'arrow'
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              outline: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              outline: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              outline: true,
-              large: true,
-              ctaOption: 'alert'
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              outline: true,
-              large: true,
-              ctaOption: false
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              outline: true,
-              large: true,
-              download: true,
-              externalLink: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Combo
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              externalLink: false,
-              large: true
-            })
-          }}
-
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              outline: false,
-              large: true,
-              ctaOption: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Combo</span>
-          <span>Primary with Plain Text Slot</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              externalLink: false,
-              large: true,
-              plainText: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Combo</span>
-          <span>Secondary with Plain Text Slot</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              externalLink: false,
-              plainText: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Primary Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              primary: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Secondary Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              secondary: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section style="background-color: black; padding: 40px 0;">
-      <div class="umd-lock">
-        <p class="content-heading" style="color: white">
-          <span>Theme Dark</span>
-          <span>Outline Styling</span>
-        </p>
-
-        <div class="umd-grid-row-mobile-tablet">
-          {{
-            macros.VerboseCTA({
-              outline: true,
-              externalLink: false,
-              theme: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <section style="margin-bottom: 40px; padding: 50px 0; background-color: #e21833">
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span style="color: white;">Edge Case</span>
-        <span style="color: white;">Gold Option</span>
-      </p>
-
-      <div class="umd-grid-gap-three" style="align-items: center;">
-        <umd-element-call-to-action type="secondary" theme="gold">
-          <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
-            rel="noopener noreferrer"
-            aria-label="View the PDF for the Visa Data Collection Form">
-            Visit and blah
-          </a>
-        </umd-element-call-to-action>
-
-        <umd-element-call-to-action type="primary" theme="gold">
-          <a href="https://google.com"
-            rel="noopener noreferrer"
-            target="_blank"
-            aria-label="View the PDF for the Visa Data Collection Form">
-            Learn More
-          </a>
-        </umd-element-call-to-action>
-      </div>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 40px">
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Edge Case</span>
-        <span>SVG Styling in Card</span>
-      </p>
-
-      <div class="umd-grid-gap-three">
-        <umd-element-card-overlay theme="dark" data-image>
-          <img src="https://umd-provost.transforms.svdcdn.com/local/images/Testudo_Riggs_04122018_6779-1.jpg?w=1849&h=1812&auto=compress%2Cformat&fit=crop&dm=1696343036&s=69d2a355810e402f6dff1326e4e1728f"
-            alt="Testudo in front of Riggs"
-            slot="image"
-            style="object-position: 50% 50%;" />
-
-          <p slot="eyebrow">
-            <span>Duis aute irure</span>
-          </p>
-
-          <p class="umd-sans-larger" slot="headline">
-            <a class="umd-slidein-underline-white"
-              href="https://google.com"
-              rel="noopener noreferrer">
-              <span aria-hidden="true">Lorem ipsum dolor sit amet</span>
-            </a>
-          </p>
-
-          <div class="umd-rich-text-dark" slot="text">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary"
-              size="standard"
-              theme="dark">
-              <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
-                rel="noopener noreferrer"
-                aria-label="View the PDF for the Visa Data Collection Form">
-                <svg aria-hidden="true"
-                  color="white"
-                  width="96"
-                  height="96"
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-                </svg>
-                <span aria-hidden="true">Visit and blah</span>
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay theme="dark" data-image>
-          <img src="https://umd-provost.transforms.svdcdn.com/local/images/Testudo_Riggs_04122018_6779-1.jpg?w=1849&h=1812&auto=compress%2Cformat&fit=crop&dm=1696343036&s=69d2a355810e402f6dff1326e4e1728f"
-            alt="Testudo in front of Riggs"
-            slot="image"
-            style="object-position: 50% 50%;" />
-
-          <p slot="eyebrow">
-            <span>Duis aute irure</span>
-          </p>
-
-          <p class="umd-sans-larger" slot="headline">
-            <a class="umd-slidein-underline-white"
-              href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
-              rel="noopener noreferrer"
-              aria-label="View the PDF for the Visa Data Collection Form">
-              <span aria-hidden="true">Lorem ipsum dolor sit amet</span>
-            </a>
-          </p>
-
-          <div class="umd-rich-text-dark umd-sans-small" slot="text">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="primary"
-              size="standard"
-              theme="dark">
-              <a href="https://google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Blah">
-                <span aria-hidden="true">Blah Blah Blah</span>
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card-overlay>
-
-        <umd-element-card-overlay data-image>
-          <img src="https://umd-provost.transforms.svdcdn.com/local/images/Testudo_Riggs_04122018_6779-1.jpg?w=1849&h=1812&auto=compress%2Cformat&fit=crop&dm=1696343036&s=69d2a355810e402f6dff1326e4e1728f"
-            alt="Testudo in front of Riggs"
-            slot="image"
-            style="object-position: 50% 50%;" />
-
-          <p slot="eyebrow">
-            <span>Duis aute irure</span>
-          </p>
-
-          <p class="umd-sans-larger" slot="headline">
-            <a class="umd-slidein-underline-white"
-              href="https://google.com"
-              rel="noopener noreferrer">
-              <span aria-hidden="true">Lorem ipsum dolor sit amet</span>
-            </a>
-          </p>
-
-          <div class="umd-rich-text-dark umd-sans-small" slot="text">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary" size="standard">
-              <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
-                rel="noopener noreferrer"
-                download
-                aria-label="View the PDF for the Visa Data Collection Form">
-                <span aria-hidden="true">Visa Data Collection Form</span>
-              </a>
-
-              <a class="umd-link-accessible"
-                href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022-PLAIN-TEXT.txt?dm=1701987454"
-                rel="noopener noreferrer"
-                aria-label="View the PDF for the Visa Data Collection Form as plain text document"
-                slot="plain-text"
-                target="_blank">
-                <span aria-hidden="true">Plain Text</span>
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card-overlay>
-      </div>
-    </div>
-  </section>
+  {{ macros.pagecontent() }}
 {% endblock %}
 
-{% macro example() %}
+{% macro pagecontent() %}
+  <div style="padding-bottom: 50px;">
+    <section>
+      <div class="umd-lock">
+        <h1 class="page-heading">
+          Call to Action
+        </h1>
+
+        <h2 class="content-heading">
+          Content Variations
+        </h2>
+
+        {{ Dropdown.ContentVariations() }}
+      </div>
+    </section>
+    <div id="succinct" class="dropdown-selection" aria-hidden="true">
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Primary Styling
+          </p>
+          {{
+            macros.SuccinctCTA({
+              ctaSpan: true,
+              ctaLink: false,
+              externalLink: false,
+              download: false
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Icon options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                large: false,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                large: false,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                large: false,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                large: true,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                large: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                large: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Secondary Styling
+          </p>
+
+          {{
+            macros.SuccinctCTA({
+              secondary: true,
+              primary: false,
+              large: false,
+              ctaOption: 'chevron'
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Icon options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                large: false,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                large: false
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                large: false,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                large: true,
+                ctaOption: 'alert'
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                large: true
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                large: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Outline Styling
+          </p>
+
+          {{
+            macros.SuccinctCTA({
+              outline: true,
+              large: false,
+              externalLink: false
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Icon Options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                outline: true,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                outline: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                outline: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                outline: true,
+                large: true,
+                ctaOption: 'alert'
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                outline: true,
+                large: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                outline: true,
+                large: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Combo
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                externalLink: false,
+                large: true
+              })
+            }}
+
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                outline: false,
+                large: true,
+                ctaOption: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Combo</span>
+            <span>Primary with Plain Text Slot</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                externalLink: false,
+                large: true,
+                plainText: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Combo</span>
+            <span>Secondary with Plain Text Slot</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                externalLink: false,
+                plainText: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Primary Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                primary: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Secondary Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                secondary: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Outline Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.SuccinctCTA({
+                outline: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="normal" class="dropdown-selection" aria-hidden="false">
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Primary Styling
+          </p>
+          {{
+            macros.NormalCTA({
+              ctaSpan: true,
+              externalLink: false
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Icon options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                primary: true,
+                large: false,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                primary: true,
+                large: false,
+                ctaOption: false,
+                externalLink: true
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                primary: true,
+                large: false,
+                download: true,
+                externalLink: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                primary: true,
+                large: true,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                primary: true,
+                large: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                primary: true,
+                large: true,
+                download: true,
+                externalLink: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Secondary Styling
+          </p>
+
+          {{
+            macros.NormalCTA({
+              secondary: true,
+              primary: false,
+              large: false,
+              ctaOption: 'chevron'
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Icon options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                large: false,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                large: false
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                large: false,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                large: true,
+                ctaOption: 'alert'
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                large: true
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                large: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Outline Styling
+          </p>
+
+          {{
+            macros.NormalCTA({
+              outline: true,
+              large: false,
+              externalLink: false
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Icon Options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                outline: true,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                outline: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                outline: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                outline: true,
+                large: true,
+                ctaOption: 'alert'
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                outline: true,
+                large: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                outline: true,
+                large: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Combo
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                primary: true,
+                externalLink: false,
+                large: true
+              })
+            }}
+
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                outline: false,
+                large: true,
+                ctaOption: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Combo</span>
+            <span>Primary with Plain Text Slot</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                primary: true,
+                externalLink: false,
+                large: true,
+                plainText: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Combo</span>
+            <span>Secondary with Plain Text Slot</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                externalLink: false,
+                plainText: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Primary Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                primary: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Secondary Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                secondary: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Outline Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.NormalCTA({
+                outline: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="verbose" class="dropdown-selection" aria-hidden="true">
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Primary Styling
+          </p>
+          {{
+            macros.VerboseCTA({
+              ctaSpan: true,
+              ctaLink: false,
+              externalLink: false,
+              download: false
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Icon options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                large: false,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                large: false,
+                ctaOption: false,
+                externalLink: true
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                large: false,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                large: true,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                large: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                large: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Secondary Styling
+          </p>
+
+          {{
+            macros.VerboseCTA({
+              secondary: true,
+              primary: false,
+              large: false,
+              ctaOption: 'chevron'
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Icon options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                large: false,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                large: false
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                large: false,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                large: true,
+                ctaOption: 'alert'
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                large: true
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                large: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Outline Styling
+          </p>
+
+          {{
+            macros.VerboseCTA({
+              outline: true,
+              large: false,
+              externalLink: false
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Icon Options</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                outline: true,
+                ctaOption: 'arrow'
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                outline: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                outline: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                outline: true,
+                large: true,
+                ctaOption: 'alert'
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                outline: true,
+                large: true,
+                ctaOption: false
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                outline: true,
+                large: true,
+                download: true,
+                externalLink: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Combo
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                externalLink: false,
+                large: true
+              })
+            }}
+
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                outline: false,
+                large: true,
+                ctaOption: false
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Combo</span>
+            <span>Primary with Plain Text Slot</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                externalLink: false,
+                large: true,
+                plainText: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Combo</span>
+            <span>Secondary with Plain Text Slot</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                externalLink: false,
+                plainText: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Primary Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                primary: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Secondary Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                secondary: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section style="background-color: black; padding: 40px 0;">
+        <div class="umd-lock">
+          <p class="content-heading" style="color: white">
+            <span>Theme Dark</span>
+            <span>Outline Styling</span>
+          </p>
+
+          <div class="umd-grid-row-mobile-tablet">
+            {{
+              macros.VerboseCTA({
+                outline: true,
+                externalLink: false,
+                theme: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section style="margin-bottom: 40px; padding: 50px 0; background-color: #e21833">
+      <div class="umd-lock">
+        <p class="content-heading">
+          <span style="color: white;">Edge Case</span>
+          <span style="color: white;">Gold Option</span>
+        </p>
+
+        <div class="umd-grid-gap-three" style="align-items: center;">
+          <umd-element-call-to-action type="secondary" theme="gold">
+            <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
+              rel="noopener noreferrer"
+              aria-label="View the PDF for the Visa Data Collection Form">
+              Visit and blah
+            </a>
+          </umd-element-call-to-action>
+
+          <umd-element-call-to-action type="primary" theme="gold">
+            <a href="https://google.com"
+              rel="noopener noreferrer"
+              target="_blank"
+              aria-label="View the PDF for the Visa Data Collection Form">
+              Learn More
+            </a>
+          </umd-element-call-to-action>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 40px">
+      <div class="umd-lock">
+        <p class="content-heading">
+          <span>Edge Case</span>
+          <span>SVG Styling in Card</span>
+        </p>
+
+        <div class="umd-grid-gap-three">
+          <umd-element-card-overlay theme="dark" data-image>
+            <img src="https://umd-provost.transforms.svdcdn.com/local/images/Testudo_Riggs_04122018_6779-1.jpg?w=1849&h=1812&auto=compress%2Cformat&fit=crop&dm=1696343036&s=69d2a355810e402f6dff1326e4e1728f"
+              alt="Testudo in front of Riggs"
+              slot="image"
+              style="object-position: 50% 50%;" />
+
+            <p slot="eyebrow">
+              <span>Duis aute irure</span>
+            </p>
+
+            <p class="umd-sans-larger" slot="headline">
+              <a class="umd-slidein-underline-white"
+                href="https://google.com"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">Lorem ipsum dolor sit amet</span>
+              </a>
+            </p>
+
+            <div class="umd-rich-text-dark" slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div slot="actions">
+              <umd-element-call-to-action type="secondary"
+                size="standard"
+                theme="dark">
+                <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
+                  rel="noopener noreferrer"
+                  aria-label="View the PDF for the Visa Data Collection Form">
+                  <svg aria-hidden="true"
+                    color="white"
+                    width="96"
+                    height="96"
+                    viewBox="0 0 96 96"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
+                  </svg>
+                  <span aria-hidden="true">Visit and blah</span>
+                </a>
+              </umd-element-call-to-action>
+            </div>
+          </umd-element-card-overlay>
+
+          <umd-element-card-overlay theme="dark" data-image>
+            <img src="https://umd-provost.transforms.svdcdn.com/local/images/Testudo_Riggs_04122018_6779-1.jpg?w=1849&h=1812&auto=compress%2Cformat&fit=crop&dm=1696343036&s=69d2a355810e402f6dff1326e4e1728f"
+              alt="Testudo in front of Riggs"
+              slot="image"
+              style="object-position: 50% 50%;" />
+
+            <p slot="eyebrow">
+              <span>Duis aute irure</span>
+            </p>
+
+            <p class="umd-sans-larger" slot="headline">
+              <a class="umd-slidein-underline-white"
+                href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
+                rel="noopener noreferrer"
+                aria-label="View the PDF for the Visa Data Collection Form">
+                <span aria-hidden="true">Lorem ipsum dolor sit amet</span>
+              </a>
+            </p>
+
+            <div class="umd-rich-text-dark umd-sans-small" slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div slot="actions">
+              <umd-element-call-to-action type="primary"
+                size="standard"
+                theme="dark">
+                <a href="https://google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Blah">
+                  <span aria-hidden="true">Blah Blah Blah</span>
+                </a>
+              </umd-element-call-to-action>
+            </div>
+          </umd-element-card-overlay>
+
+          <umd-element-card-overlay data-image>
+            <img src="https://umd-provost.transforms.svdcdn.com/local/images/Testudo_Riggs_04122018_6779-1.jpg?w=1849&h=1812&auto=compress%2Cformat&fit=crop&dm=1696343036&s=69d2a355810e402f6dff1326e4e1728f"
+              alt="Testudo in front of Riggs"
+              slot="image"
+              style="object-position: 50% 50%;" />
+
+            <p slot="eyebrow">
+              <span>Duis aute irure</span>
+            </p>
+
+            <p class="umd-sans-larger" slot="headline">
+              <a class="umd-slidein-underline-white"
+                href="https://google.com"
+                rel="noopener noreferrer">
+                <span aria-hidden="true">Lorem ipsum dolor sit amet</span>
+              </a>
+            </p>
+
+            <div class="umd-rich-text-dark umd-sans-small" slot="text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div slot="actions">
+              <umd-element-call-to-action type="secondary" size="standard">
+                <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
+                  rel="noopener noreferrer"
+                  download
+                  aria-label="View the PDF for the Visa Data Collection Form">
+                  <span aria-hidden="true">Visa Data Collection Form</span>
+                </a>
+
+                <a class="umd-link-accessible"
+                  href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022-PLAIN-TEXT.txt?dm=1701987454"
+                  rel="noopener noreferrer"
+                  aria-label="View the PDF for the Visa Data Collection Form as plain text document"
+                  slot="plain-text"
+                  target="_blank">
+                  <span aria-hidden="true">Plain Text</span>
+                </a>
+              </umd-element-call-to-action>
+            </div>
+          </umd-element-card-overlay>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endmacro %}
+
+{% macro primary() %}
+  {{
+    macros.NormalCTA({
+      ctaSpan: true,
+      ctaLink: false,
+      externalLink: false,
+      download: false
+    })
+  }}
+{% endmacro %}
+
+{% macro outline() %}
+  {{
+    macros.NormalCTA({
+      outline: true,
+      large: false,
+      ctaOption: 'chevron',
+      button: false
+    })
+  }}
+{% endmacro %}
+
+{% macro secondary() %}
+  {{
+    macros.NormalCTA({
+      secondary: true,
+      large: false,
+      ctaOption: 'chevron',
+      button: false
+    })
+  }}
+{% endmacro %}
+
+{% macro examplegrouped() %}
   <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
     <div>
-      {{
-        macros.NormalCTA({
-          ctaSpan: true,
-          ctaLink: false,
-          externalLink: false,
-          download: false
-        })
-      }}
+      {{ macros.primary() }}
     </div>
 
     <div>
-      {{
-        macros.NormalCTA({
-          outline: true,
-          large: false,
-          ctaOption: 'chevron',
-          button: false
-        })
-      }}
+      {{ macros.outline() }}
     </div>
 
     <div>
-      {{
-        macros.NormalCTA({
-          secondary: true,
-          large: false,
-          ctaOption: 'chevron',
-          button: false
-        })
-      }}
+      {{ macros.secondary() }}
     </div>
   </div>
 {% endmacro %}

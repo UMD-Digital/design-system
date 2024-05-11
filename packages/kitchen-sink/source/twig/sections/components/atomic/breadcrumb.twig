@@ -3,6 +3,10 @@
 {% import _self as macros %}
 
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent() %}
   <section>
     <div class="umd-lock">
       <p class="content-heading">
@@ -31,7 +35,7 @@
       </umd-element-breadcrumb>
     </div>
   </section>
-{% endblock %}
+{% endmacro %}
 
 {% macro example() %}
   <umd-element-breadcrumb class="mb-xs">

@@ -3,6 +3,10 @@
 {% import _self as macros %}
 
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro example() %}
   <section>
     <div class="umd-lock">
       <h1 class="page-heading">
@@ -151,7 +155,7 @@
       </div>
     </section>
   </section>
-{% endblock %}
+{% endmacro %}
 
 {% macro example() %}
   <umd-element-stat>

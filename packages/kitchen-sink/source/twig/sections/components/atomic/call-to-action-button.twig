@@ -2,562 +2,581 @@
 
 {% import '_includes/content-dropdown.twig' as Dropdown %}
 {% import './call-to-action.twig' as CallToActionOption %}
+{% import _self as macros %}
 
 {% block page %}
-  <section>
-    <div class="umd-lock">
-      <h1 class="page-heading">
-        Call to Action (Button)
-      </h1>
-
-      <h2 class="content-heading">
-        Content Variations
-      </h2>
-
-      {{ Dropdown.ContentVariations() }}
-    </div>
-  </section>
-  <div id="succinct" class="dropdown-selection" aria-hidden="true">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Primary Styling
-        </p>
-        {{
-          CallToActionOption.SuccinctCTA({
-            ctaSpan: true,
-            ctaLink: false,
-            externalLink: false,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.SuccinctCTA({
-              primary: true,
-              large: false,
-              ctaOption: 'arrow',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        {{
-          CallToActionOption.SuccinctCTA({
-            primary: true,
-            externalLink: false,
-            large: true,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Secondary Styling
-        </p>
-
-        {{
-          CallToActionOption.SuccinctCTA({
-            secondary: true,
-            large: false,
-            ctaOption: 'chevron',
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.SuccinctCTA({
-              secondary: true,
-              large: false,
-              ctaOption: 'alert'
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.SuccinctCTA({
-              secondary: true,
-              large: true,
-              ctaOption: 'chevron',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Outline Styling
-        </p>
-
-        {{
-          CallToActionOption.SuccinctCTA({
-            outline: true,
-            large: false,
-            externalLink: false,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.SuccinctCTA({
-              outline: true,
-              ctaOption: 'arrow',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.SuccinctCTA({
-              outline: true,
-              externalLink: false,
-              large: true,
-              ctaOption: false,
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div id="normal" class="dropdown-selection" aria-hidden="false">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Primary Styling
-        </p>
-        {{
-          CallToActionOption.NormalCTA({
-            ctaSpan: true,
-            ctaLink: false,
-            externalLink: false,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.NormalCTA({
-              primary: true,
-              large: false,
-              ctaOption: 'arrow',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        {{
-          CallToActionOption.NormalCTA({
-            primary: true,
-            externalLink: false,
-            large: true,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Secondary Styling
-        </p>
-
-        {{
-          CallToActionOption.NormalCTA({
-            secondary: true,
-            large: false,
-            ctaOption: 'chevron',
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.NormalCTA({
-              secondary: true,
-              large: false,
-              ctaOption: 'alert'
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.NormalCTA({
-              secondary: true,
-              large: true,
-              ctaOption: 'chevron',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Outline Styling
-        </p>
-
-        {{
-          CallToActionOption.NormalCTA({
-            outline: true,
-            large: false,
-            externalLink: false,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.NormalCTA({
-              outline: true,
-              ctaOption: 'arrow',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.NormalCTA({
-              outline: true,
-              externalLink: false,
-              large: true,
-              ctaOption: false,
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-  </div>
-  <div id="verbose" class="dropdown-selection" aria-hidden="true">
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Primary Styling
-        </p>
-        {{
-          CallToActionOption.VerboseCTA({
-            ctaSpan: true,
-            ctaLink: false,
-            externalLink: false,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.VerboseCTA({
-              primary: true,
-              large: false,
-              ctaOption: 'arrow',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Primary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        {{
-          CallToActionOption.VerboseCTA({
-            primary: true,
-            externalLink: false,
-            large: true,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Secondary Styling
-        </p>
-
-        {{
-          CallToActionOption.VerboseCTA({
-            secondary: true,
-            large: false,
-            ctaOption: 'chevron',
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.VerboseCTA({
-              secondary: true,
-              large: false,
-              ctaOption: 'alert'
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Secondary Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.VerboseCTA({
-              secondary: true,
-              large: true,
-              ctaOption: 'chevron',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          Outline Styling
-        </p>
-
-        {{
-          CallToActionOption.VerboseCTA({
-            outline: true,
-            large: false,
-            externalLink: false,
-            button: true
-          })
-        }}
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span class="theme">Outline Styling</span>
-          <span>Icon Example</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.VerboseCTA({
-              outline: true,
-              ctaOption: 'arrow',
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <p class="content-heading">
-          <span>Outline Styling</span>
-          <span>Sized Large</span>
-        </p>
-
-        <div class="cta-layout">
-          {{
-            CallToActionOption.VerboseCTA({
-              outline: true,
-              externalLink: false,
-              large: true,
-              ctaOption: false,
-              button: true
-            })
-          }}
-        </div>
-      </div>
-    </section>
-  </div>
+  {{ macros.pagecontent() }}
 {% endblock %}
 
-{% macro example() %}
+{% macro pagecontent() %}
+  <div style="padding-bottom: 50px;">
+    <section>
+      <div class="umd-lock">
+        <h1 class="page-heading">
+          Call to Action (Button)
+        </h1>
+
+        <h2 class="content-heading">
+          Content Variations
+        </h2>
+
+        {{ Dropdown.ContentVariations() }}
+      </div>
+    </section>
+    <div id="succinct" class="dropdown-selection" aria-hidden="true">
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Primary Styling
+          </p>
+          {{
+            CallToActionOption.SuccinctCTA({
+              ctaSpan: true,
+              ctaLink: false,
+              externalLink: false,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.SuccinctCTA({
+                primary: true,
+                large: false,
+                ctaOption: 'arrow',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          {{
+            CallToActionOption.SuccinctCTA({
+              primary: true,
+              externalLink: false,
+              large: true,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Secondary Styling
+          </p>
+
+          {{
+            CallToActionOption.SuccinctCTA({
+              secondary: true,
+              large: false,
+              ctaOption: 'chevron',
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.SuccinctCTA({
+                secondary: true,
+                large: false,
+                ctaOption: 'alert'
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.SuccinctCTA({
+                secondary: true,
+                large: true,
+                ctaOption: 'chevron',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Outline Styling
+          </p>
+
+          {{
+            CallToActionOption.SuccinctCTA({
+              outline: true,
+              large: false,
+              externalLink: false,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.SuccinctCTA({
+                outline: true,
+                ctaOption: 'arrow',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.SuccinctCTA({
+                outline: true,
+                externalLink: false,
+                large: true,
+                ctaOption: false,
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="normal" class="dropdown-selection" aria-hidden="false">
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Primary Styling
+          </p>
+          {{
+            CallToActionOption.NormalCTA({
+              ctaSpan: true,
+              ctaLink: false,
+              externalLink: false,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.NormalCTA({
+                primary: true,
+                large: false,
+                ctaOption: 'arrow',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          {{
+            CallToActionOption.NormalCTA({
+              primary: true,
+              externalLink: false,
+              large: true,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Secondary Styling
+          </p>
+
+          {{
+            CallToActionOption.NormalCTA({
+              secondary: true,
+              large: false,
+              ctaOption: 'chevron',
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.NormalCTA({
+                secondary: true,
+                large: false,
+                ctaOption: 'alert'
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.NormalCTA({
+                secondary: true,
+                large: true,
+                ctaOption: 'chevron',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Outline Styling
+          </p>
+
+          {{
+            CallToActionOption.NormalCTA({
+              outline: true,
+              large: false,
+              externalLink: false,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.NormalCTA({
+                outline: true,
+                ctaOption: 'arrow',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.NormalCTA({
+                outline: true,
+                externalLink: false,
+                large: true,
+                ctaOption: false,
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+    </div>
+    <div id="verbose" class="dropdown-selection" aria-hidden="true">
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Primary Styling
+          </p>
+          {{
+            CallToActionOption.VerboseCTA({
+              ctaSpan: true,
+              ctaLink: false,
+              externalLink: false,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.VerboseCTA({
+                primary: true,
+                large: false,
+                ctaOption: 'arrow',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Primary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          {{
+            CallToActionOption.VerboseCTA({
+              primary: true,
+              externalLink: false,
+              large: true,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Secondary Styling
+          </p>
+
+          {{
+            CallToActionOption.VerboseCTA({
+              secondary: true,
+              large: false,
+              ctaOption: 'chevron',
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.VerboseCTA({
+                secondary: true,
+                large: false,
+                ctaOption: 'alert'
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Secondary Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.VerboseCTA({
+                secondary: true,
+                large: true,
+                ctaOption: 'chevron',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            Outline Styling
+          </p>
+
+          {{
+            CallToActionOption.VerboseCTA({
+              outline: true,
+              large: false,
+              externalLink: false,
+              button: true
+            })
+          }}
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span class="theme">Outline Styling</span>
+            <span>Icon Example</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.VerboseCTA({
+                outline: true,
+                ctaOption: 'arrow',
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="umd-lock">
+          <p class="content-heading">
+            <span>Outline Styling</span>
+            <span>Sized Large</span>
+          </p>
+
+          <div class="cta-layout">
+            {{
+              CallToActionOption.VerboseCTA({
+                outline: true,
+                externalLink: false,
+                large: true,
+                ctaOption: false,
+                button: true
+              })
+            }}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro primary() %}
+  {{
+    CallToActionOption.NormalCTA({
+      ctaSpan: true,
+      ctaLink: false,
+      externalLink: false,
+      download: false,
+      button: true
+    })
+  }}
+{% endmacro %}
+
+{% macro outline() %}
+  {{
+    CallToActionOption.NormalCTA({
+      outline: true,
+      large: false,
+      ctaOption: 'chevron',
+      button: true
+    })
+  }}
+{% endmacro %}
+
+{% macro secondary() %}
+  {{
+    CallToActionOption.NormalCTA({
+      secondary: true,
+      large: false,
+      ctaOption: 'chevron',
+      button: true
+    })
+  }}
+{% endmacro %}
+
+{% macro examplegrouped() %}
   <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
     <div>
-      {{
-        CallToActionOption.NormalCTA({
-          ctaSpan: true,
-          ctaLink: false,
-          externalLink: false,
-          download: false,
-          button: true
-        })
-      }}
+      {{ macros.primary() }}
     </div>
 
     <div>
-      {{
-        CallToActionOption.NormalCTA({
-          outline: true,
-          large: false,
-          ctaOption: 'chevron',
-          button: true
-        })
-      }}
+      {{ macros.outline() }}
     </div>
 
     <div>
-      {{
-        CallToActionOption.NormalCTA({
-          secondary: true,
-          large: false,
-          ctaOption: 'chevron',
-          button: true
-        })
-      }}
+      {{ macros.secondary() }}
     </div>
   </div>
 {% endmacro %}

@@ -3,6 +3,10 @@
 {% import _self as macros %}
 
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent() %}
   <div style="padding-bottom: 50px;">
     <section>
       <div class="umd-lock">
@@ -91,7 +95,7 @@
       </div>
     </section>
   </div>
-{% endblock %}
+{% endmacro %}
 
 {% macro example() %}
   <div class="umd-grid-gap-three">

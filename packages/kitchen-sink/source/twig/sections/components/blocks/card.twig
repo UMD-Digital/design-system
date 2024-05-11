@@ -464,6 +464,17 @@
 {% endmacro %}
 
 {% macro example() %}
+  {{
+    macros.content({
+      image: true,
+      aligned: true,
+      border: false,
+      ctaLink: false
+    })
+  }}
+{% endmacro %}
+
+{% macro examplegrouped() %}
   <div class="umd-grid-gap-three mb-md">
     {{
       macros.content({

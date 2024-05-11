@@ -1,10 +1,9 @@
 {% extends '_layout.twig' %}
 
-{% import '_includes/macros/card-overlay.twig' as CardOverlay %}
-
 {% import '../_data.twig' as Data %}
 {% import './article.twig' as Article %}
 {% import './card.twig' as Card %}
+{% import './card-overlay.twig' as CardOverlay %}
 {% import _self as macros %}
 
 {% set BlockPages = [
@@ -89,7 +88,7 @@
           <span>Card</span>
           <a href="{{ _self.GetChildUrl() }}card">View More Examples</a>
         </div>
-        {{ Card.example() }}
+        {{ Card.examplegrouped() }}
       </div>
     </section>
 
@@ -99,30 +98,8 @@
           <span>Card Overlay</span>
           <a href="{{ _self.GetChildUrl() }}card-overlay">View More Examples</a>
         </div>
-        <div class="umd-grid-gap-three my-md">
-          {{
-            CardOverlay.NormalCardBody({
-              image: imageOne,
-              ctaLink: false,
-              ctaOption: 'external'
-            })
-          }}
 
-          {{
-            CardOverlay.NormalCardBody({
-              ctaOption: 'download',
-              ctaLink: false
-            })
-          }}
-
-          {{
-            CardOverlay.NormalCardBody({
-              theme: 'dark',
-              ctaLink: false,
-              ctaOption: 'internal'
-            })
-          }}
-        </div>
+        {{ CardOverlay.examplegrouped() }}
       </div>
     </section>
 

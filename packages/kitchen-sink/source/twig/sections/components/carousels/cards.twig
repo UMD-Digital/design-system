@@ -1,17 +1,11 @@
 {% extends '_layout.twig' %}
 
 {% import '_includes/content-dropdown.twig' as Dropdown %}
-{% import '_includes/macros/card-overlay.twig' as CardOverlay %}
 {% import '_includes/macros/fields/headline.twig' as Headline %}
 {% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
 {% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
+{% import '../blocks/card-overlay.twig' as CardOverlay %}
 {% import _self as macros %}
-
-{% set imageOne = random(RecImageOptions) %}
-{% set imageTwo = random(RecImageOptions) %}
-{% set imageThree = random(RecImageOptions) %}
-{% set imageSquare = random(SquareImageOptions) %}
-{% set imageWeird = random(WeirdImageOptions) %}
 
 {% block page %}
   <section>
@@ -50,37 +44,37 @@
 
         <div slot="cards">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
+            CardOverlay.content({
               theme: 'dark'
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageThree
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
+            CardOverlay.content({
               theme: 'dark'
             })
           }}
@@ -109,14 +103,14 @@
 
         <div slot="cards">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
+            CardOverlay.content({
+              image: true
             })
           }}
         </div>
@@ -146,37 +140,37 @@
 
         <div slot="cards">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
+            CardOverlay.content({
               theme: 'dark'
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageThree
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
+            CardOverlay.content({
               theme: 'dark'
             })
           }}
@@ -205,14 +199,14 @@
 
         <div slot="cards">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
+            CardOverlay.content({
+              image: true
             })
           }}
         </div>
@@ -242,37 +236,37 @@
 
         <div slot="cards">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
+            CardOverlay.content({
               theme: 'dark'
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageThree
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
+            CardOverlay.content({
               theme: 'dark'
             })
           }}
@@ -301,14 +295,14 @@
 
         <div slot="cards">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
+            CardOverlay.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
+            CardOverlay.content({
+              image: true
             })
           }}
         </div>
@@ -331,37 +325,37 @@
 
     <div slot="cards">
       {{
-        CardOverlay.NormalCardBody({
-          image: imageOne
+        CardOverlay.content({
+          image: true
         })
       }}
 
       {{
-        CardOverlay.NormalCardBody({
-          image: imageTwo
+        CardOverlay.content({
+          image: true
         })
       }}
 
       {{
-        CardOverlay.NormalCardBody({
+        CardOverlay.content({
           theme: 'dark'
         })
       }}
 
       {{
-        CardOverlay.NormalCardBody({
-          image: imageThree
+        CardOverlay.content({
+          image: true
         })
       }}
 
       {{
-        CardOverlay.NormalCardBody({
-          image: imageSquare
+        CardOverlay.content({
+          image: true
         })
       }}
 
       {{
-        CardOverlay.NormalCardBody({
+        CardOverlay.content({
           theme: 'dark'
         })
       }}

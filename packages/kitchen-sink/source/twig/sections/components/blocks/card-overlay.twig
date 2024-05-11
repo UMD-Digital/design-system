@@ -1,15 +1,9 @@
 {% extends '_layout.twig' %}
 
 {% import '_includes/content-dropdown.twig' as Dropdown %}
-{% import '_includes/macros/card-overlay.twig' as CardOverlay %}
+{% import _self as macros %}
 
 {% block page %}
-  {% set imageOne = random(RecImageOptions) %}
-  {% set imageTwo = random(RecImageOptions) %}
-  {% set imageThree = random(RecImageOptions) %}
-  {% set imageSquare = random(SquareImageOptions) %}
-  {% set imageWeird = random(WeirdImageOptions) %}
-
   <section>
     <div class="umd-lock">
       <h1 class="page-heading">
@@ -30,8 +24,8 @@
         </h3>
         <div class="umd-grid-gap-three my-md">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo,
+            macros.content({
+              image: true,
               date: false
             })
           }}
@@ -47,8 +41,8 @@
         </div>
         <div class="umd-grid-gap-three my-md">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageThree,
+            macros.content({
+              image: true,
               date: false,
               text: false,
               eyebrow: false,
@@ -67,8 +61,8 @@
         </div>
         <div class="umd-grid-gap-three my-md">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageWeird,
+            macros.content({
+              image: true,
               date: true
             })
           }}
@@ -84,22 +78,22 @@
         </div>
         <div class="umd-grid-gap-three my-md">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare,
+            macros.content({
+              image: true,
               ctaLink: false,
               ctaOption: 'external'
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
+            macros.content({
               ctaOption: 'download',
               ctaLink: false
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
+            macros.content({
               theme: 'dark',
               ctaLink: false,
               ctaOption: 'internal'
@@ -117,7 +111,7 @@
         </div>
         <div class="umd-grid-gap-three my-md">
           {{
-            CardOverlay.NormalCardBody({
+            macros.content({
               theme: 'dark',
               eyebrow: true,
               date: true
@@ -135,7 +129,7 @@
         </div>
         <div class="umd-grid-gap-three my-md">
           {{
-            CardOverlay.NormalCardBody({
+            macros.content({
               theme: 'light',
               eyebrow: true,
               date: true
@@ -154,22 +148,22 @@
 
         <div class="umd-grid-three my-md">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageWeird,
+            macros.content({
+              image: true,
               sizeBig: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo,
+            macros.content({
+              image: true,
               sizeBig: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare,
+            macros.content({
+              image: true,
               sizeBig: true
             })
           }}
@@ -186,29 +180,29 @@
 
         <div class="umd-grid-four my-md">
           {{
-            CardOverlay.NormalCardBody({
+            macros.content({
               image: WeirdImageOptions,
               sizeBig: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo,
+            macros.content({
+              image: true,
               sizeBig: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageThree,
+            macros.content({
+              image: true,
               sizeBig: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare,
+            macros.content({
+              image: true,
               sizeBig: true
             })
           }}
@@ -225,20 +219,20 @@
 
         <div class="umd-grid-gap-three my-md">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare
+            macros.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageWeird
+            macros.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageTwo
+            macros.content({
+              image: true
             })
           }}
         </div>
@@ -254,26 +248,26 @@
 
         <div class="umd-grid-gap-four my-md">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageWeird
+            macros.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare
+            macros.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageOne
+            macros.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageThree
+            macros.content({
+              image: true
             })
           }}
         </div>
@@ -289,14 +283,14 @@
 
         <div class="umd-grid-gap my-md">
           {{
-            CardOverlay.NormalCardBody({
-              image: imageSquare
+            macros.content({
+              image: true
             })
           }}
 
           {{
-            CardOverlay.NormalCardBody({
-              image: imageWeird
+            macros.content({
+              image: true
             })
           }}
         </div>
@@ -441,3 +435,153 @@
     </section>
   </section>
 {% endblock %}
+
+{% macro examplegrouped() %}
+  {{
+    macros.content({
+      image: true,
+      ctaLink: false,
+      ctaOption: 'external'
+    })
+  }}
+{% endmacro %}
+
+{% macro examplegrouped() %}
+  <div class="umd-grid-gap-three my-md">
+    {{
+      macros.content({
+        image: true,
+        ctaLink: false,
+        ctaOption: 'external'
+      })
+    }}
+
+    {{
+      macros.content({
+        ctaOption: 'download',
+        ctaLink: false
+      })
+    }}
+
+    {{
+      macros.content({
+        theme: 'dark',
+        ctaLink: false,
+        ctaOption: 'internal'
+      })
+    }}
+  </div>
+{% endmacro %}
+
+{% macro content(params) %}
+  {% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
+  {% import '_includes/macros/fields/headline.twig' as Headline %}
+  {% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
+  {% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
+  {% import '_includes/macros/fields/date.twig' as Date %}
+  {% set url = params.url ?? 'https://umd.edu' %}
+
+  {% set images = [
+    'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
+    'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
+    'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
+    'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
+    'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
+    'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
+    'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
+    'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
+    'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
+    'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
+    'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
+  ] %}
+
+  {% set attrs = '' %}
+
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasDate = params.date ?? true %}
+  {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasRichText = params.text ?? true %}
+  {% set isSizeBig = params.sizeBig ?? false %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  {% if isSizeBig %}
+    {% set attrs = attrs ~ 'class="size-large"' %}
+  {% endif %}
+
+  {% if params.image %}
+    {% set attrs = attrs ~ 'type="image"' %}
+  {% endif %}
+
+  <umd-element-card-overlay {{ attrs }}>
+    {% if params.image %}
+      <img slot="image" src="{{ random(images) }}" alt="Example Alt Text" />
+    {% endif %}
+
+    {% if hasEyebrow %}
+      {{ Eyebrow.EyebrowNormal() }}
+    {% endif %}
+
+    {% if hasHeadline %}
+      {{ Headline.OverlayHeadlineNormal() }}
+    {% endif %}
+
+    {% if hasRichText %}
+      {{ RichText.OverlayRichTextNormal() }}
+    {% endif %}
+
+    {% if hasDate %}
+      {{ Date.RandomDate() }}
+    {% endif %}
+
+    {% if hasCtaLink %}
+      {% if params.image %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: 'dark'
+          })
+        }}
+      {% else %}
+        {{
+          CallToAction.InternalCallToAction({
+            theme: params.theme == 'dark' ? 'dark' : 'light'
+          })
+        }}
+      {% endif %}
+    {% endif %}
+
+    {% if params.ctaOption %}
+      {% if params.ctaOption == 'download' %}
+        <a href="{{ url }}"
+          rel="noopener noreferrer"
+          download
+          slot="cta-icon"
+          aria-label="example label">
+
+        </a>
+      {% endif %}
+
+      {% if params.ctaOption == 'external' %}
+        <a href="{{ url }}"
+          rel="noopener noreferrer"
+          target="_blank"
+          slot="cta-icon"
+          aria-label="example label">
+
+        </a>
+      {% endif %}
+
+      {% if params.ctaOption == 'internal' %}
+        <a href="{{ url }}"
+          rel="noopener noreferrer"
+          slot="cta-icon"
+          aria-label="example label">
+
+        </a>
+      {% endif %}
+    {% endif %}
+  </umd-element-card-overlay>
+{% endmacro %}

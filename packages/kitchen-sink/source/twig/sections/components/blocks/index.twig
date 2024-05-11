@@ -1,8 +1,11 @@
 {% extends '_layout.twig' %}
-{% import '_includes/macros/article.twig' as Article %}
 {% import '_includes/macros/card.twig' as Card %}
 {% import '_includes/macros/card-overlay.twig' as CardOverlay %}
+
+{% import './article.twig' as Article %}
 {% import '../_data.twig' as Data %}
+
+{% import _self as macros %}
 
 {% set BlockPages = [
   {
@@ -39,20 +42,11 @@
   }
 ] %}
 
-{% macro GetChildUrl() %}
-  {% import '../_data.twig' as Data %}
-
-  {% set URL = Data.GetUrl() ~ 'blocks/' %}
-  {{ URL }}
-{% endmacro %}
-
-{% macro SubLinks() %}
-  {% for item in BlockPages %}
-    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
-  {% endfor %}
-{% endmacro %}
-
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent() %}
   {% set imageOne = random(RecImageOptions) %}
   {% set imageTwo = random(RecImageOptions) %}
   {% set imageThree = random(RecImageOptions) %}
@@ -70,7 +64,9 @@
       <ul>
         {% for item in BlockPages %}
           <li>
-            <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            <umd-element-call-to-action type="secondary">
+              <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+            </umd-element-call-to-action>
           </li>
         {% endfor %}
       </ul>
@@ -82,35 +78,8 @@
           <span>Article</span>
           <a href="{{ _self.GetChildUrl() }}article">View More Examples</a>
         </div>
-        <div class="umd-grid-gap-three mb-md" style="margin-top: 24px">
-          {{
-            Article.NormalCardBody({
-              image: imageOne,
-              aligned: true,
-              border: false,
-              date: true,
-              ctaLink: false
-            })
-          }}
-          {{
-            Article.NormalCardBody({
-              image: imageTwo,
-              aligned: true,
-              border: false,
-              date: true,
-              ctaLink: false
-            })
-          }}
-          {{
-            Article.NormalCardBody({
-              image: imageThree,
-              aligned: true,
-              border: false,
-              date: true,
-              ctaLink: false
-            })
-          }}
-        </div>
+
+        {{ Article.example() }}
       </div>
     </section>
 
@@ -428,4 +397,17 @@
       </div>
     </section>
   </div>
-{% endblock %}
+{% endmacro %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'blocks/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in BlockPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}

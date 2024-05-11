@@ -3,153 +3,54 @@
 {% import _self as macros %}
 
 {% block page %}
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>Simple with default content</span>
-      </p>
-    </div>
-
-    <umd-element-footer></umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>Simple with default content and styled light theme</span>
-      </p>
-    </div>
-
-    <umd-element-footer type="simple" theme="light"></umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>
-          Simple with information overwrites for contact, social, and utility
-          links
-        </span>
-      </p>
-    </div>
-
-    <umd-element-footer type="simple">
-      {{ macros.ContactOverwrite() }}
-      {{ macros.SocialOverwrite() }}
-      {{ macros.UtilityOverwrite() }}
-    </umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>Mega with default content</span>
-      </p>
-    </div>
-
-    <umd-element-footer type="mega"></umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>Mega with default content and styled light theme</span>
-      </p>
-    </div>
-
-    <umd-element-footer type="mega" theme="light"></umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>
-          Mega with information overwrites for contact, social, and utility
-          links
-        </span>
-      </p>
-    </div>
-
-    <umd-element-footer type="mega">
-      {{ macros.ContactOverwrite() }}
-      {{ macros.SocialOverwrite() }}
-      {{ macros.ColumnLinkOverwrite() }}
-      {{ macros.UtilityOverwrite() }}
-      {{ macros.CtaOverwrite() }}
-    </umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>Visual with default content</span>
-      </p>
-    </div>
-
-    <umd-element-footer type="visual"></umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>Visual with default content with light theme</span>
-      </p>
-    </div>
-
-    <umd-element-footer type="visual" theme="light"></umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>
-          Visual with information overwrites for contact, social, link columns,
-          cta, image and utility links
-        </span>
-      </p>
-    </div>
-
-    <umd-element-footer type="visual">
-      {{ macros.CtaOverwrite() }}
-      {{ macros.ContactOverwrite() }}
-      {{ macros.SocialOverwrite() }}
-      {{ macros.UtilityOverwrite() }}
-      {{ macros.ColumnLinkOverwrite() }}
-
-      <img slot="background-image"
-        src="/footer-option.jpg"
-        alt="University of Maryland Logo" />
-    </umd-element-footer>
-  </section>
-
-  <section>
-    <div class="umd-lock">
-      <p class="content-heading">
-        <span>Default Styling</span>
-        <span>Visual with simiple type</span>
-      </p>
-    </div>
-
-    <umd-element-footer type="simple">
-      {{ macros.ContactOverwrite() }}
-      {{ macros.SocialOverwrite() }}
-      {{ macros.UtilityOverwrite() }}
-
-      <img slot="background-image"
-        src="/footer-option.jpg"
-        alt="University of Maryland Logo" />
-    </umd-element-footer>
-  </section>
+  {{ macros.pagecontent() }}
 {% endblock %}
+
+{% macro pagecontent(params) %}
+  <div style="padding-bottom: 400px;">
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading">
+          <span>Default Styling</span>
+          <span>Mega with default content</span>
+        </p>
+      </div>
+
+      <umd-element-footer type="mega"></umd-element-footer>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading">
+          <span>Default Styling</span>
+          <span>Mega with default content and styled light theme</span>
+        </p>
+      </div>
+
+      <umd-element-footer type="mega" theme="light"></umd-element-footer>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <p class="content-heading">
+          <span>Default Styling</span>
+          <span>
+            Mega with information overwrites for contact, social, and utility
+            links
+          </span>
+        </p>
+      </div>
+
+      <umd-element-footer type="mega">
+        {{ macros.ContactOverwrite() }}
+        {{ macros.SocialOverwrite() }}
+        {{ macros.ColumnLinkOverwrite() }}
+        {{ macros.UtilityOverwrite() }}
+        {{ macros.CtaOverwrite() }}
+      </umd-element-footer>
+    </section>
+  </div>
+{% endmacro %}
 
 {% macro ColumnLinkOverwrite(params) %}
   <ul slot="link-column-one" data-headline="Important Links">

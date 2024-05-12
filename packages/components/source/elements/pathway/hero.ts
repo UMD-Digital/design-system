@@ -105,12 +105,14 @@ const OverwriteImageContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_CONTAINER} * {
       height: 100%;
+      width: 100%;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_CONTAINER} img {
       min-height: inherit;
+      width: 100%;
     }
   }
 `;
@@ -168,6 +170,7 @@ const LockStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HERO_CONTAINER_LOCK} {
       display: flex;
+      align-items: center;
       min-height: 832px;
     }
   }

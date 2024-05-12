@@ -27,6 +27,7 @@ const STYLES_IMAGE_CONTAINER = `
     bottom: 0;
     right: 0;
     height: auto !important;
+    width: auto !important;
     padding: ${Spacing.min};
     background-color: rgba(0, 0, 0, 0.5);
     color: ${Colors.white};

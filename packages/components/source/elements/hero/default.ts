@@ -172,7 +172,7 @@ const OverwriteImageContainer = `
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, .8) 85%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .8) 85%);
       z-index: 99;
     }
   }
@@ -204,7 +204,7 @@ const DefaultStyles = `
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_INTERIOR_CONTAINER} {
       min-height: 400px;
-      height: 40vh;
+      height: auto;
     }
   }
 

@@ -1,5 +1,10 @@
 {% extends '_layout.twig' %}
 
+{% import './default.twig' as Default %}
+{% import './logo.twig' as Logo %}
+{% import './minimal.twig' as Minimal %}
+{% import './overlay.twig' as Overlay %}
+{% import './stacked.twig' as Stacked %}
 {% import _self as macros %}
 
 {% set HeroPages = [
@@ -71,6 +76,8 @@
           <a href="{{ _self.GetChildUrl() }}default">View More Examples</a>
         </div>
       </div>
+
+      {{ Default.example() }}
     </section>
 
     <section>
@@ -80,6 +87,8 @@
           <a href="{{ _self.GetChildUrl() }}logo">View More Examples</a>
         </div>
       </div>
+
+      {{ Logo.example() }}
     </section>
 
     <section>
@@ -89,6 +98,8 @@
           <a href="{{ _self.GetChildUrl() }}minimal">View More Examples</a>
         </div>
       </div>
+
+      {{ Minimal.example() }}
     </section>
 
     <section>
@@ -98,6 +109,7 @@
           <a href="{{ _self.GetChildUrl() }}overlay">View More Examples</a>
         </div>
       </div>
+      {{ Overlay.example() }}
     </section>
 
     <section>
@@ -107,6 +119,8 @@
           <a href="{{ _self.GetChildUrl() }}stacked">View More Examples</a>
         </div>
       </div>
+
+      {{ Stacked.example() }}
     </section>
   </div>
 {% endmacro %}

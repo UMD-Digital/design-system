@@ -1,4 +1,5 @@
-import { Typography, Tokens, Layout } from '@universityofmaryland/variables';
+import { Tokens, Layout } from '@universityofmaryland/variables';
+import { Styles } from 'utilities';
 
 type TypeStickyProps = {
   stickyColumn?: HTMLElement | null;
@@ -7,6 +8,7 @@ type TypeStickyProps = {
 };
 
 const { Spacing, Breakpoints } = Tokens;
+const { ConvertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-sticky-columns';
 const ATTRIBUTE_STICKY_LAST = 'sticky-last';
@@ -44,23 +46,14 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: start;
-    grid-gap: ${Spacing.md};
-  }
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: Layout.GridColumnsBaseWithGap,
+    },
+  })}
 
-  @media (min-width: ${Breakpoints.tablet.min}) {
-    .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (min-width: ${Breakpoints.desktop.min}) {
-    .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
-      grid-gap: ${Spacing.lg};
-    }
+  .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
+    align-items: start;
   }
 
   ${ColumnSticky}

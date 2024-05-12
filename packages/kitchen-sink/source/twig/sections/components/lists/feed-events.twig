@@ -1,6 +1,12 @@
 {% extends '_layout.twig' %}
 
+{% import _self as macros %}
+
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent(params) %}
   <section>
     <div class="umd-lock-smaller">
       <h1 class="page-heading">
@@ -29,9 +35,7 @@
         </h2>
 
         <div>
-          <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
-            categories="10256,10322"
-            lazyload="true"></umd-feed-events-list>
+          {{ macros.example() }}
         </div>
       </div>
     </section>
@@ -69,4 +73,10 @@
       </div>
     </section>
   </section>
-{% endblock %}
+{% endmacro %}
+
+{% macro example() %}
+  <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
+    categories="10256,10322"
+    lazyload="true"></umd-feed-events-list>
+{% endmacro %}

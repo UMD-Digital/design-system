@@ -1,6 +1,12 @@
 {% extends '_layout.twig' %}
 
-{% import '../_data.twig' as Data %}
+{% import './article.twig' as Article %}
+{% import './card.twig' as Card %}
+{% import './event.twig' as Event %}
+{% import './feed-events.twig' as FeedEvents %}
+{% import './feed-events-grouped.twig' as FeedEventsGrouped %}
+{% import './feed-news.twig' as FeedNews %}
+{% import _self as macros %}
 
 {% set ListPages = [
   {
@@ -29,20 +35,12 @@
   }
 ] %}
 
-{% macro GetChildUrl() %}
-  {% import '../_data.twig' as Data %}
-
-  {% set URL = Data.GetUrl() ~ 'lists/' %}
-  {{ URL }}
-{% endmacro %}
-
-{% macro SubLinks() %}
-  {% for item in ListPages %}
-    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
-  {% endfor %}
-{% endmacro %}
-
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent() %}
+  {{ app }}
   <div style="padding-bottom: 50px;">
     <div class="umd-lock-smaller">
       <h1 class="page-heading">
@@ -79,50 +77,8 @@
           <a href="{{ _self.GetChildUrl() }}article">View More Examples</a>
         </div>
 
-        <umd-element-article display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="eyebrow">
-            Eyebrow Text
-          </p>
-          <p slot="headline">
-            <a href="google.com">Headline Text</a>
-          </p>
-          <p slot="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam
-          </p>
-
-          <p slot="date">
-            September 1, 2021
-          </p>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary">
-              <a href="https://google.com" aria-label="link to google">
-                Learn More
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-article>
-
-        <umd-element-article display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="headline">
-            Headline Text
-          </p>
-          <p slot="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam
-          </p>
-
-          <p slot="date">
-            September 1, 2021
-          </p>
-        </umd-element-article>
+        {{ Article.example() }}
+        {{ Article.example() }}
       </div>
     </section>
 
@@ -133,46 +89,8 @@
           <a href="{{ _self.GetChildUrl() }}card">View More Examples</a>
         </div>
 
-        <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="eyebrow">
-            Eyebrow Text
-          </p>
-          <p slot="headline">
-            <a href="google.com">Headline Text</a>
-          </p>
-          <p slot="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam
-          </p>
-
-          <p slot="date">
-            September 1, 2021
-          </p>
-
-          <div slot="actions">
-            <umd-element-call-to-action type="secondary">
-              <a href="https://google.com" aria-label="link to google">
-                Learn More
-              </a>
-            </umd-element-call-to-action>
-          </div>
-        </umd-element-card>
-
-        <umd-element-card display="list">
-          <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-          <p slot="headline">
-            Headline Text
-          </p>
-          <p slot="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam
-          </p>
-        </umd-element-card>
+        {{ Card.example() }}
+        {{ Card.example() }}
       </div>
     </section>
 
@@ -183,43 +101,8 @@
           <a href="{{ _self.GetChildUrl() }}event">View More Examples</a>
         </h3>
 
-        <umd-element-event display="list">
-          <a slot="image" href="https://umd.edu" target="_blank">
-            <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&h=1407&auto=compress%2Cformat&fit=crop&dm=1708449967&s=e3f7b7973f30be6234dbe136f6d2a57a"
-              alt="Example Alt Text" />
-          </a>
-
-          <h2 slot="headline">
-            <a href="https://umd.edu">
-              The 47th Annual Maryland Leadership Conference
-            </a>
-          </h2>
-
-          <div slot="text">
-            <p>
-              The 47th Annual Maryland Leadership Conference is a FREE, half-day
-              experience that is open to all UMD students.
-            </p>
-          </div>
-
-          <div slot="start-date-iso">
-            2024-04-12T12:00:00.000Z
-          </div>
-
-          <div slot="end-date-iso">
-            2024-04-12T17:30:00.000Z
-          </div>
-
-          <div slot="location">
-            Adele H. Stamp Student Union
-          </div>
-
-          <umd-element-call-to-action slot="actions"
-            type="secondary"
-            theme="light">
-            <a href="/"><span>Learn More</span></a>
-          </umd-element-call-to-action>
-        </umd-element-event>
+        {{ Event.example() }}
+        {{ Event.example() }}
       </div>
     </section>
 
@@ -230,8 +113,7 @@
           <a href="{{ _self.GetChildUrl() }}feed-events">View More Examples</a>
         </h2>
 
-        <umd-feed-events-list token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"
-          union="false"></umd-feed-events-list>
+        {{ FeedEvents.example() }}
       </div>
     </section>
 
@@ -244,7 +126,7 @@
           </a>
         </h2>
 
-        <umd-feed-events-grouped token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-grouped>
+        {{ FeedEventsGrouped.example() }}
       </div>
     </section>
 
@@ -255,8 +137,21 @@
           <a href="{{ _self.GetChildUrl() }}feed-news">View More Examples</a>
         </h2>
 
-        <umd-feed-news-list token="a3hwwnbL1aQtDZHr0-KhBC_XuyOZoG9l"></umd-feed-news-list>
+        {{ FeedNews.example() }}
       </div>
     </section>
   </div>
-{% endblock %}
+{% endmacro %}
+
+{% macro GetChildUrl() %}
+  {% import '../_data.twig' as Data %}
+
+  {% set URL = Data.GetUrl() ~ 'lists/' %}
+  {{ URL }}
+{% endmacro %}
+
+{% macro SubLinks() %}
+  {% for item in ListPages %}
+    <a href="{{ _self.GetChildUrl ~ item.link }}">{{ item.name }}</a>
+  {% endfor %}
+{% endmacro %}

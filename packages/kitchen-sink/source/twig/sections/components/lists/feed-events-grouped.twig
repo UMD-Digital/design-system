@@ -1,6 +1,12 @@
 {% extends '_layout.twig' %}
 
+{% import _self as macros %}
+
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent(params) %}
   <section>
     <div class="umd-lock">
       <h1 class="page-heading">
@@ -16,8 +22,7 @@
         </h2>
 
         <div style="max-width: 800px; margin: 50px auto;">
-          <umd-feed-events-grouped lazyload="true"
-            token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-grouped>
+          {{ macros.example() }}
         </div>
       </div>
     </section>
@@ -37,4 +42,9 @@
       </div>
     </section>
   </section>
-{% endblock %}
+{% endmacro %}
+
+{% macro example() %}
+  <umd-feed-events-grouped lazyload="true"
+    token="4zVU8phSIImj9Pb_XhvCLEj-OU5N6Rxw"></umd-feed-events-grouped>
+{% endmacro %}

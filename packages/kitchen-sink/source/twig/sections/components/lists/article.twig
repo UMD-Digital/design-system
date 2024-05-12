@@ -1,9 +1,29 @@
 {% extends '_layout.twig' %}
+
 {% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import _self as macros %}
+
+{% set images = [
+  'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
+  'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
+  'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
+  'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
+  'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
+  'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
+  'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
+  'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
+  'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
+  'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
+  'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
+] %}
+
+{% set imageOne = random(images) %}
 
 {% block page %}
-  {% set imageOne = random(RecImageOptions) %}
+  {{ macros.pagecontent() }}
+{% endblock %}
 
+{% macro pagecontent(params) %}
   <section>
     <div class="umd-lock">
       <h1 class="page-heading">
@@ -25,33 +45,7 @@
             <span>List Style</span>
           </h3>
 
-          <umd-element-article display="list">
-            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-            <p slot="eyebrow">
-              Eyebrow Text
-            </p>
-            <p slot="headline">
-              <a href="google.com">Headline Text</a>
-            </p>
-            <p slot="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam
-            </p>
-
-            <p slot="date">
-              September 1, 2021
-            </p>
-
-            <div slot="actions">
-              <umd-element-call-to-action type="secondary">
-                <a href="https://google.com" aria-label="link to google">
-                  Learn More
-                </a>
-              </umd-element-call-to-action>
-            </div>
-          </umd-element-article>
+          {{ macros.example() }}
           <umd-element-article display="list">
             <img slot="image" src="{{ imageOne }}" alt="Image Description" />
 
@@ -249,4 +243,32 @@
       </div>
     </section>
   </section>
-{% endblock %}
+{% endmacro %}
+
+{% macro example() %}
+  <umd-element-article display="list">
+    <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+
+    <p slot="eyebrow">
+      Eyebrow Text
+    </p>
+    <p slot="headline">
+      <a href="google.com">Headline Text</a>
+    </p>
+    <p slot="text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam
+    </p>
+
+    <p slot="date">
+      September 1, 2021
+    </p>
+
+    <div slot="actions">
+      <umd-element-call-to-action type="secondary">
+        <a href="https://google.com" aria-label="link to google">Learn More</a>
+      </umd-element-call-to-action>
+    </div>
+  </umd-element-article>
+{% endmacro %}

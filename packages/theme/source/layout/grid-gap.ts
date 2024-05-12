@@ -8,7 +8,7 @@ const {
 } = Layout;
 const { Queries, Spacing } = Tokens;
 
-export const GridColumnsStandard = {
+const GridColumnsStandard = {
   '.umd-grid-gap': {
     ...GridColumnsBaseWithGap,
   },
@@ -19,6 +19,16 @@ export const GridColumnsStandard = {
 
   '.umd-grid-gap-four': {
     ...GridColumnsFourWithGap,
+  },
+};
+
+const GridColumnsStacked = {
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridGap: `${Spacing.md}`,
+
+  [`@media (${Queries.desktop.min})`]: {
+    gridGap: `${Spacing.xl}`,
   },
 };
 
@@ -124,5 +134,8 @@ export default {
   },
   '.umd-grid-gap-masonry': {
     ...MasonryGrid,
+  },
+  '.umd-grid-gap-stacked': {
+    ...GridColumnsStacked,
   },
 };

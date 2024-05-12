@@ -1,5 +1,7 @@
 {% extends '../../_layout.twig' %}
 
+{% import 'sections/components/atomic/stat.twig' as Stat %}
+
 {% block page %}
   <div style="padding-bottom: 50px;">
     <section class="pb-2xl">
@@ -181,6 +183,25 @@
 
     <section>
       <div class="umd-lock">
+        <h2 class="content-heading" style="margin-bottom: 50px">
+          <span>Stacked Grid</span>
+        </h2>
+      </div>
+      <div class="umd-lock-smallest">
+        <div class="umd-grid-gap-stacked">
+          {{ Stat.example }}
+          {{ Stat.example }}
+          {{ Stat.example }}
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h2 class="content-heading" style="margin-bottom: 50px">
+          <span>Masonry Grid</span>
+        </h2>
+
         <div class="umd-grid-gap-masonry">
           <div>
             <umd-element-event display="promo">

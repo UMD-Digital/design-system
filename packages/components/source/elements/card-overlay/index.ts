@@ -1,6 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import { TextLockupSmallScaling, TextLockupSmall } from 'macros';
+
 import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 
 type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
@@ -19,14 +20,25 @@ const MEDIUM = 500;
 
 const ELEMENT_NAME = 'umd-card-overla-default';
 const ATTRIBUTE_THEME = 'data-theme';
+const ATTRIBUTE_CTA_ICON = 'cta-icon';
 const THEME_DARK = 'dark';
 
 const ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER = 'card-overlay-default-container';
 const ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER = 'card-overlay-default-wrapper';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
 
 const OVERWRITE_THEME_DARK_WRAPPER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER} `;
+
+const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_WITH_CTA_ICON} .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER}`;
+
+// prettier-ignore
+const OverwriteCtaIcon  = `
+  ${OVERWRITE_CTA_ICON_BLOCK_CONTAINER} {
+    padding-right: ${Spacing['2xl']};
+  }
+`;
 
 // prettier-ignore
 const OverwriteThemeDark  = `
@@ -94,8 +106,9 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
 
   ${TextLockupSmallScaling.Styles}
   ${CtaIcon.Styles}
-  ${OverwriteThemeDark}
   ${OverwriteHeadline}
+  ${OverwriteThemeDark}
+  ${OverwriteCtaIcon}
 `;
 
 const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
@@ -107,7 +120,10 @@ const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
 
   elementWrapper.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER);
   elementWrapper.appendChild(scalingFontContainer);
-  if (ctaIcon) elementWrapper.appendChild(ctaIcon);
+  if (ctaIcon) {
+    elementWrapper.appendChild(ctaIcon);
+    elementContainer.setAttribute(ATTRIBUTE_CTA_ICON, '');
+  }
 
   if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
   elementContainer.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER);

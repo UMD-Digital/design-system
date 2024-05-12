@@ -1,5 +1,9 @@
 {% extends '_layout.twig' %}
 
+{% import './hero.twig' as Hero %}
+{% import './highlight.twig' as Highlight %}
+{% import './overlay.twig' as Overlay %}
+{% import './standard.twig' as Standard %}
 {% import _self as macros %}
 
 {% set PathwayPages = [
@@ -67,6 +71,8 @@
           <a href="{{ _self.GetChildUrl() }}hero">View More Examples</a>
         </div>
       </div>
+
+      {{ Hero.example() }}
     </section>
 
     <section>
@@ -75,6 +81,7 @@
           <span>Highlight</span>
           <a href="{{ _self.GetChildUrl() }}highlight">View More Examples</a>
         </div>
+        {{ Highlight.example() }}
       </div>
     </section>
 
@@ -85,6 +92,7 @@
           <a href="{{ _self.GetChildUrl() }}overlay">View More Examples</a>
         </div>
       </div>
+      {{ Overlay.example() }}
     </section>
 
     <section>
@@ -93,6 +101,8 @@
           <span>Standard</span>
           <a href="{{ _self.GetChildUrl() }}standard">View More Examples</a>
         </div>
+
+        {{ Standard.example() }}
       </div>
     </section>
   </div>

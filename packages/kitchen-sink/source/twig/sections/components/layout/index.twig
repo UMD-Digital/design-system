@@ -1,15 +1,22 @@
 {% extends '_layout.twig' %}
 
+{% import './section-intro.twig' as SectionIntro %}
+{% import './section-intro-wide.twig' as SectionIntroWide %}
+{% import './sticky-columns.twig' as StickyColumns %}
 {% import _self as macros %}
 
 {% set LayoutPages = [
   {
-    name: 'Sticky Columns',
-    link: 'sticky-columns'
-  },
-  {
     name: 'Section Intro',
     link: 'section-intro'
+  },
+  {
+    name: 'Section Intro Wide',
+    link: 'section-intro-wide'
+  },
+  {
+    name: 'Sticky Columns',
+    link: 'sticky-columns'
   }
 ] %}
 
@@ -55,22 +62,39 @@
     <section>
       <div class="umd-lock">
         <div class="content-heading">
-          <span>Sticky Columns</span>
-          <a href="{{ _self.GetChildUrl() }}sticky-columns">
+          <span>Section Intro</span>
+          <a href="{{ _self.GetChildUrl() }}section-intro">
             View More Examples
           </a>
         </div>
+
+        {{ SectionIntro.example() }}
       </div>
     </section>
 
     <section>
       <div class="umd-lock">
         <div class="content-heading">
-          <span>Section Intro</span>
-          <a href="{{ _self.GetChildUrl() }}section-intro">
+          <span>Section Intro Wide</span>
+          <a href="{{ _self.GetChildUrl() }}section-intro-wide">
             View More Examples
           </a>
         </div>
+
+        {{ SectionIntroWide.example() }}
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Sticky Columns</span>
+          <a href="{{ _self.GetChildUrl() }}sticky-columns">
+            View More Examples
+          </a>
+        </div>
+
+        {{ StickyColumns.example() }}
       </div>
     </section>
   </div>

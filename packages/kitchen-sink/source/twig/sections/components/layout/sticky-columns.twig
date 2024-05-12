@@ -1,6 +1,12 @@
 {% extends '_layout.twig' %}
 
+{% import _self as macros %}
+
 {% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent(params) %}
   <section>
     <div class="umd-lock">
       <h1 class="umd-sans-largest" style="margin-bottom: 50px">
@@ -14,277 +20,7 @@
           <span>Type</span>
           <span>Default</span>
         </div>
-        <umd-element-sticky-columns>
-          <div slot="sticky-column">
-            <umd-element-event display="feature">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&amp;h=1080&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1658178350&amp;s=ac382dd343b5fa928647cfd0542dad28"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-12T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="light">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
-          </div>
-
-          <div slot="static-column">
-            <umd-element-event display="list">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-12T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="light">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
-
-            <umd-element-event display="list">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-12T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="light">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
-
-            <umd-element-event display="list">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-12T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="light">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
-
-            <umd-element-event display="list">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-12T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="light">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
-
-            <umd-element-event display="list">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-12T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="light">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
-
-            <umd-element-event display="list">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-12T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="light">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
-          </div>
-        </umd-element-sticky-columns>
+        {{ macros.example() }}
       </div>
     </section>
 
@@ -788,4 +524,278 @@
       </div>
     </section>
   </section>
-{% endblock %}
+{% endmacro %}
+
+{% macro example() %}
+  <umd-element-sticky-columns>
+    <div slot="sticky-column">
+      <umd-element-event display="feature">
+        <a slot="image" href="https://umd.edu" target="_blank">
+          <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&amp;h=1080&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1658178350&amp;s=ac382dd343b5fa928647cfd0542dad28"
+            alt="Example Alt Text" />
+        </a>
+
+        <h2 slot="headline">
+          <a href="https://umd.edu">
+            The 47th Annual Maryland Leadership Conference
+          </a>
+        </h2>
+
+        <div slot="text">
+          <p>
+            The 47th Annual Maryland Leadership Conference is a FREE, half-day
+            experience that is open to all UMD students.
+          </p>
+        </div>
+
+        <div slot="start-date-iso">
+          2024-04-12T12:00:00.000Z
+        </div>
+
+        <div slot="end-date-iso">
+          2024-04-12T17:30:00.000Z
+        </div>
+
+        <div slot="location">
+          Adele H. Stamp Student Union
+        </div>
+
+        <umd-element-call-to-action slot="actions"
+          type="secondary"
+          theme="light">
+          <a href="/"><span>Learn More</span></a>
+        </umd-element-call-to-action>
+      </umd-element-event>
+    </div>
+
+    <div slot="static-column">
+      <umd-element-event display="list">
+        <a slot="image" href="https://umd.edu" target="_blank">
+          <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+            alt="Example Alt Text" />
+        </a>
+
+        <h2 slot="headline">
+          <a href="https://umd.edu">
+            The 47th Annual Maryland Leadership Conference
+          </a>
+        </h2>
+
+        <div slot="text">
+          <p>
+            The 47th Annual Maryland Leadership Conference is a FREE, half-day
+            experience that is open to all UMD students.
+          </p>
+        </div>
+
+        <div slot="start-date-iso">
+          2024-04-12T12:00:00.000Z
+        </div>
+
+        <div slot="end-date-iso">
+          2024-04-12T17:30:00.000Z
+        </div>
+
+        <div slot="location">
+          Adele H. Stamp Student Union
+        </div>
+
+        <umd-element-call-to-action slot="actions"
+          type="secondary"
+          theme="light">
+          <a href="/"><span>Learn More</span></a>
+        </umd-element-call-to-action>
+      </umd-element-event>
+
+      <umd-element-event display="list">
+        <a slot="image" href="https://umd.edu" target="_blank">
+          <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+            alt="Example Alt Text" />
+        </a>
+
+        <h2 slot="headline">
+          <a href="https://umd.edu">
+            The 47th Annual Maryland Leadership Conference
+          </a>
+        </h2>
+
+        <div slot="text">
+          <p>
+            The 47th Annual Maryland Leadership Conference is a FREE, half-day
+            experience that is open to all UMD students.
+          </p>
+        </div>
+
+        <div slot="start-date-iso">
+          2024-04-12T12:00:00.000Z
+        </div>
+
+        <div slot="end-date-iso">
+          2024-04-12T17:30:00.000Z
+        </div>
+
+        <div slot="location">
+          Adele H. Stamp Student Union
+        </div>
+
+        <umd-element-call-to-action slot="actions"
+          type="secondary"
+          theme="light">
+          <a href="/"><span>Learn More</span></a>
+        </umd-element-call-to-action>
+      </umd-element-event>
+
+      <umd-element-event display="list">
+        <a slot="image" href="https://umd.edu" target="_blank">
+          <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+            alt="Example Alt Text" />
+        </a>
+
+        <h2 slot="headline">
+          <a href="https://umd.edu">
+            The 47th Annual Maryland Leadership Conference
+          </a>
+        </h2>
+
+        <div slot="text">
+          <p>
+            The 47th Annual Maryland Leadership Conference is a FREE, half-day
+            experience that is open to all UMD students.
+          </p>
+        </div>
+
+        <div slot="start-date-iso">
+          2024-04-12T12:00:00.000Z
+        </div>
+
+        <div slot="end-date-iso">
+          2024-04-12T17:30:00.000Z
+        </div>
+
+        <div slot="location">
+          Adele H. Stamp Student Union
+        </div>
+
+        <umd-element-call-to-action slot="actions"
+          type="secondary"
+          theme="light">
+          <a href="/"><span>Learn More</span></a>
+        </umd-element-call-to-action>
+      </umd-element-event>
+
+      <umd-element-event display="list">
+        <a slot="image" href="https://umd.edu" target="_blank">
+          <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+            alt="Example Alt Text" />
+        </a>
+
+        <h2 slot="headline">
+          <a href="https://umd.edu">
+            The 47th Annual Maryland Leadership Conference
+          </a>
+        </h2>
+
+        <div slot="text">
+          <p>
+            The 47th Annual Maryland Leadership Conference is a FREE, half-day
+            experience that is open to all UMD students.
+          </p>
+        </div>
+
+        <div slot="start-date-iso">
+          2024-04-12T12:00:00.000Z
+        </div>
+
+        <div slot="end-date-iso">
+          2024-04-12T17:30:00.000Z
+        </div>
+
+        <div slot="location">
+          Adele H. Stamp Student Union
+        </div>
+
+        <umd-element-call-to-action slot="actions"
+          type="secondary"
+          theme="light">
+          <a href="/"><span>Learn More</span></a>
+        </umd-element-call-to-action>
+      </umd-element-event>
+
+      <umd-element-event display="list">
+        <a slot="image" href="https://umd.edu" target="_blank">
+          <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+            alt="Example Alt Text" />
+        </a>
+
+        <h2 slot="headline">
+          <a href="https://umd.edu">
+            The 47th Annual Maryland Leadership Conference
+          </a>
+        </h2>
+
+        <div slot="text">
+          <p>
+            The 47th Annual Maryland Leadership Conference is a FREE, half-day
+            experience that is open to all UMD students.
+          </p>
+        </div>
+
+        <div slot="start-date-iso">
+          2024-04-12T12:00:00.000Z
+        </div>
+
+        <div slot="end-date-iso">
+          2024-04-12T17:30:00.000Z
+        </div>
+
+        <div slot="location">
+          Adele H. Stamp Student Union
+        </div>
+
+        <umd-element-call-to-action slot="actions"
+          type="secondary"
+          theme="light">
+          <a href="/"><span>Learn More</span></a>
+        </umd-element-call-to-action>
+      </umd-element-event>
+
+      <umd-element-event display="list">
+        <a slot="image" href="https://umd.edu" target="_blank">
+          <img src="https://optimise2.assets-servd.host/umd-calendar/production/hero-images/SP24_LCLS_MLC24_1200x675_Twitter.jpg?w=2500&amp;h=1407&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1708449967&amp;s=e3f7b7973f30be6234dbe136f6d2a57a"
+            alt="Example Alt Text" />
+        </a>
+
+        <h2 slot="headline">
+          <a href="https://umd.edu">
+            The 47th Annual Maryland Leadership Conference
+          </a>
+        </h2>
+
+        <div slot="text">
+          <p>
+            The 47th Annual Maryland Leadership Conference is a FREE, half-day
+            experience that is open to all UMD students.
+          </p>
+        </div>
+
+        <div slot="start-date-iso">
+          2024-04-12T12:00:00.000Z
+        </div>
+
+        <div slot="end-date-iso">
+          2024-04-12T17:30:00.000Z
+        </div>
+
+        <div slot="location">
+          Adele H. Stamp Student Union
+        </div>
+
+        <umd-element-call-to-action slot="actions"
+          type="secondary"
+          theme="light">
+          <a href="/"><span>Learn More</span></a>
+        </umd-element-call-to-action>
+      </umd-element-event>
+    </div>
+  </umd-element-sticky-columns>
+{% endmacro %}

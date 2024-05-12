@@ -1,215 +1,185 @@
 {% extends '_layout.twig' %}
 
+{% import _self as macros %}
+
 {% block page %}
-  <div class="umd-lock">
-    <h1 class="umd-sans-largest" style="margin-bottom: 50px">
-      Section Intro
-    </h1>
-  </div>
-
-  <section style="margin-bottom: 100px">
-    <div class="umd-lock">
-      <div class="content-heading">
-        <span>Type</span>
-        <span>Default</span>
-      </div>
-      <umd-element-section-intro>
-        <h2 slot="headline">
-          FROM MARYLAND TODAY
-        </h2>
-        <umd-element-call-to-action type="secondary" slot="actions">
-          <a href="/"><span>See all election related content</span></a>
-        </umd-element-call-to-action>
-      </umd-element-section-intro>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 100px">
-    <div class="umd-lock">
-      <div class="content-heading">
-        <span>Type</span>
-        <span>Default with text</span>
-      </div>
-      <umd-element-section-intro>
-        <h2 slot="text">
-          We are activating fearless ideas for transformational impact by
-          fostering research and industry partnerships, supporting small
-          businesses, and nurturing the growth of next generation technology
-          ventures.
-        </h2>
-        <umd-element-call-to-action type="secondary" slot="actions">
-          <a href="/"><span>See all election related content</span></a>
-        </umd-element-call-to-action>
-      </umd-element-section-intro>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 100px">
-    <div class="umd-lock">
-      <div class="content-heading">
-        <span>Type</span>
-        <span>Default with text and line</span>
-      </div>
-      <umd-element-section-intro include-separator>
-        <h2 slot="text">
-          We are activating fearless ideas for transformational impact by
-          fostering research and industry partnerships, supporting small
-          businesses, and nurturing the growth of next generation technology
-          ventures.
-        </h2>
-        <umd-element-call-to-action type="secondary" slot="actions">
-          <a href="/"><span>See all election related content</span></a>
-        </umd-element-call-to-action>
-      </umd-element-section-intro>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 100px">
-    <div class="umd-lock">
-      <div class="content-heading">
-        <span>Type</span>
-        <span>Default With Line</span>
-      </div>
-      <umd-element-section-intro include-separator>
-        <h2 slot="headline">
-          FROM MARYLAND TODAY
-        </h2>
-        <umd-element-call-to-action type="secondary" slot="actions">
-          <a href="/"><span>See all election related content</span></a>
-        </umd-element-call-to-action>
-      </umd-element-section-intro>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 100px">
-    <div class="umd-lock">
-      <div class="content-heading">
-        <span>Type</span>
-        <span>Default with text</span>
-      </div>
-      <umd-element-section-intro include-separator>
-        <h2 slot="headline">
-          FROM MARYLAND TODAY
-        </h2>
-        <h2 slot="text">
-          We are activating fearless ideas for transformational impact by
-          fostering research and industry partnerships, supporting small
-          businesses, and nurturing the growth of next generation technology
-          ventures.
-        </h2>
-        <umd-element-call-to-action type="secondary" slot="actions">
-          <a href="/"><span>See all election related content</span></a>
-        </umd-element-call-to-action>
-      </umd-element-section-intro>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 100px; background-color: black; padding: 50px 0;">
-    <div class="umd-lock">
-      <div class="content-heading">
-        <span style="color: white">Type</span>
-        <span style="color: white">Default with text</span>
-      </div>
-      <umd-element-section-intro include-separator theme="dark">
-        <h2 slot="headline">
-          FROM MARYLAND TODAY
-        </h2>
-        <h2 slot="text">
-          We are activating fearless ideas for transformational impact by
-          fostering research and industry partnerships, supporting small
-          businesses, and nurturing the growth of next generation technology
-          ventures.
-        </h2>
-        <umd-element-call-to-action type="secondary"
-          theme="dark"
-          slot="actions">
-          <a href="/"><span>See all election related content</span></a>
-        </umd-element-call-to-action>
-      </umd-element-section-intro>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 100px">
-    <div class="umd-lock">
-      <div class="content-heading">
-        <span>Type</span>
-        <span>Multiple Actions</span>
-      </div>
-      <umd-element-section-intro include-separator>
-        <h2 slot="headline">
-          OTHER WAYS TO GET INVOLVED
-        </h2>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="secondary">
-            <a href="https://today.umd.edu/">
-              <span>Volunteer to register voters</span>
-            </a>
-          </umd-element-call-to-action>
-          <umd-element-call-to-action type="secondary">
-            <a href="https://today.umd.edu/">
-              <span>Be a watcher/challenger at an early voting site</span>
-            </a>
-          </umd-element-call-to-action>
-          <umd-element-call-to-action type="secondary">
-            <a href="https://today.umd.edu/">
-              <span>Serve as an election judge</span>
-            </a>
-          </umd-element-call-to-action>
-          <umd-element-call-to-action type="secondary">
-            <a href="https://today.umd.edu/">
-              <span>Know your voting rights</span>
-            </a>
-          </umd-element-call-to-action>
-          <umd-element-call-to-action type="secondary">
-            <a href="https://today.umd.edu/">
-              <span>See all election related content</span>
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-section-intro>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 100px">
-    <div class="umd-lock">
-      <div class="content-heading" style="margin-bottom: 40px">
-        <span>Type</span>
-        <span>Wide</span>
-      </div>
-      <umd-element-section-intro-wide>
-        <h2 slot="headline">
-          FROM MARYLAND TODAY
-        </h2>
-
-        <umd-element-call-to-action type="secondary" slot="actions">
-          <a href="https://today.umd.edu/">
-            <span>See all election related content</span>
-          </a>
-        </umd-element-call-to-action>
-      </umd-element-section-intro-wide>
-    </div>
-  </section>
-
-  <section style="margin-bottom: 100px; background-color: black; padding: 50px 0;">
-    <div class="umd-lock">
-      <div class="content-heading" style="margin-bottom: 40px">
-        <span style="color: white">Type</span>
-        <span style="color: white">Wide</span>
-      </div>
-      <umd-element-section-intro-wide theme="dark">
-        <h2 slot="headline">
-          FROM MARYLAND TODAY
-        </h2>
-
-        <umd-element-call-to-action type="secondary"
-          theme="dark"
-          slot="actions">
-          <a href="https://today.umd.edu/">
-            <span>See all election related content</span>
-          </a>
-        </umd-element-call-to-action>
-      </umd-element-section-intro-wide>
-    </div>
-  </section>
+  {{ macros.pagecontent() }}
 {% endblock %}
+
+{% macro pagecontent(params) %}
+  <div>
+    <div class="umd-lock">
+      <h1 class="umd-sans-largest" style="margin-bottom: 50px">
+        Section Intro
+      </h1>
+    </div>
+
+    <section style="margin-bottom: 100px">
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Type</span>
+          <span>Default</span>
+        </div>
+        <umd-element-section-intro>
+          <h2 slot="headline">
+            FROM MARYLAND TODAY
+          </h2>
+          <umd-element-call-to-action type="secondary" slot="actions">
+            <a href="/"><span>See all election related content</span></a>
+          </umd-element-call-to-action>
+        </umd-element-section-intro>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 100px">
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Type</span>
+          <span>Default with text</span>
+        </div>
+        <umd-element-section-intro>
+          <h2 slot="text">
+            We are activating fearless ideas for transformational impact by
+            fostering research and industry partnerships, supporting small
+            businesses, and nurturing the growth of next generation technology
+            ventures.
+          </h2>
+          <umd-element-call-to-action type="secondary" slot="actions">
+            <a href="/"><span>See all election related content</span></a>
+          </umd-element-call-to-action>
+        </umd-element-section-intro>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 100px">
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Type</span>
+          <span>Default with text and line</span>
+        </div>
+        <umd-element-section-intro include-separator>
+          <h2 slot="text">
+            We are activating fearless ideas for transformational impact by
+            fostering research and industry partnerships, supporting small
+            businesses, and nurturing the growth of next generation technology
+            ventures.
+          </h2>
+          <umd-element-call-to-action type="secondary" slot="actions">
+            <a href="/"><span>See all election related content</span></a>
+          </umd-element-call-to-action>
+        </umd-element-section-intro>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 100px">
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Type</span>
+          <span>Default With Line</span>
+        </div>
+        {{ macros.example() }}
+      </div>
+    </section>
+
+    <section style="margin-bottom: 100px">
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Type</span>
+          <span>Default with text</span>
+        </div>
+        <umd-element-section-intro include-separator>
+          <h2 slot="headline">
+            FROM MARYLAND TODAY
+          </h2>
+          <h2 slot="text">
+            We are activating fearless ideas for transformational impact by
+            fostering research and industry partnerships, supporting small
+            businesses, and nurturing the growth of next generation technology
+            ventures.
+          </h2>
+          <umd-element-call-to-action type="secondary" slot="actions">
+            <a href="/"><span>See all election related content</span></a>
+          </umd-element-call-to-action>
+        </umd-element-section-intro>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 100px; background-color: black; padding: 50px 0;">
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span style="color: white">Type</span>
+          <span style="color: white">Default with text</span>
+        </div>
+        <umd-element-section-intro include-separator theme="dark">
+          <h2 slot="headline">
+            FROM MARYLAND TODAY
+          </h2>
+          <h2 slot="text">
+            We are activating fearless ideas for transformational impact by
+            fostering research and industry partnerships, supporting small
+            businesses, and nurturing the growth of next generation technology
+            ventures.
+          </h2>
+          <umd-element-call-to-action type="secondary"
+            theme="dark"
+            slot="actions">
+            <a href="/"><span>See all election related content</span></a>
+          </umd-element-call-to-action>
+        </umd-element-section-intro>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 100px">
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Type</span>
+          <span>Multiple Actions</span>
+        </div>
+        <umd-element-section-intro include-separator>
+          <h2 slot="headline">
+            OTHER WAYS TO GET INVOLVED
+          </h2>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://today.umd.edu/">
+                <span>Volunteer to register voters</span>
+              </a>
+            </umd-element-call-to-action>
+            <umd-element-call-to-action type="secondary">
+              <a href="https://today.umd.edu/">
+                <span>Be a watcher/challenger at an early voting site</span>
+              </a>
+            </umd-element-call-to-action>
+            <umd-element-call-to-action type="secondary">
+              <a href="https://today.umd.edu/">
+                <span>Serve as an election judge</span>
+              </a>
+            </umd-element-call-to-action>
+            <umd-element-call-to-action type="secondary">
+              <a href="https://today.umd.edu/">
+                <span>Know your voting rights</span>
+              </a>
+            </umd-element-call-to-action>
+            <umd-element-call-to-action type="secondary">
+              <a href="https://today.umd.edu/">
+                <span>See all election related content</span>
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-section-intro>
+      </div>
+    </section>
+  </div>
+{% endmacro %}
+
+{% macro example() %}
+  <umd-element-section-intro include-separator>
+    <h2 slot="headline">
+      FROM MARYLAND TODAY
+    </h2>
+    <umd-element-call-to-action type="secondary" slot="actions">
+      <a href="/"><span>See all election related content</span></a>
+    </umd-element-call-to-action>
+  </umd-element-section-intro>
+{% endmacro %}

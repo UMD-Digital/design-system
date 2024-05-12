@@ -1,8 +1,14 @@
 {% extends '_layout.twig' %}
 
+{% import './caption.twig' as Caption %}
+{% import './wrapping-text.twig' as WrappingText %}
 {% import _self as macros %}
 
 {% set MediaPages = [
+  {
+    name: 'Caption',
+    link: 'caption'
+  },
   {
     name: 'Wrapping Text',
     link: 'wrapping-text'
@@ -51,11 +57,24 @@
     <section>
       <div class="umd-lock">
         <div class="content-heading">
+          <span>Caption</span>
+          <a href="{{ _self.GetChildUrl() }}caption">View More Examples</a>
+        </div>
+
+        {{ Caption.example() }}
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
           <span>Wrapping Text</span>
           <a href="{{ _self.GetChildUrl() }}wrapping-text">
             View More Examples
           </a>
         </div>
+
+        {{ WrappingText.example() }}
       </div>
     </section>
   </div>

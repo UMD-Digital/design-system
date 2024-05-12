@@ -4,6 +4,7 @@ import AlertSite from './alert/site';
 import CallToAction from './call-to-action';
 import CardBlock from './card/block';
 import CardList from './card/list';
+import CardIconBlock from './card-icon/block';
 import CardOverlay from './card-overlay';
 import CardOverlayImage from './card-overlay/image';
 import EventBlock from './event/block';
@@ -53,6 +54,7 @@ export {
   CallToAction,
   CardBlock,
   CardList,
+  CardIconBlock,
   CardOverlay,
   CardOverlayImage,
   EventBlock,

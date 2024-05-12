@@ -2,6 +2,7 @@
 
 {% import './article.twig' as Article %}
 {% import './card.twig' as Card %}
+{% import './card-icon.twig' as CardIcon %}
 {% import './card-overlay.twig' as CardOverlay %}
 {% import './event.twig' as Event %}
 {% import './event-featured.twig' as EventFeatured %}
@@ -22,6 +23,10 @@
   {
     name: 'Card Overlay',
     link: 'card-overlay'
+  },
+  {
+    name: 'Card Icon',
+    link: 'card-icon'
   },
   {
     name: 'Event',
@@ -97,6 +102,17 @@
           <a href="{{ _self.GetChildUrl() }}card">View More Examples</a>
         </div>
         {{ Card.examplegrouped() }}
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Card Icon</span>
+          <a href="{{ _self.GetChildUrl() }}card-icon">View More Examples</a>
+        </div>
+
+        {{ CardIcon.examplegrouped() }}
       </div>
     </section>
 

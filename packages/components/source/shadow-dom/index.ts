@@ -5,6 +5,7 @@ import { Load as ArticleLoader } from './article';
 import { Load as BreadcrumbLoader } from './breadcrumb';
 import { Load as CallToActionLoader } from './call-to-action';
 import { Load as CardLoader } from './card/default';
+import { Load as CardIconLoader } from './card/icon';
 import { Load as CardOverlayLoader } from './card/overlay';
 import { Load as CarouselCardsLoader } from './carousel/cards';
 import { Load as EventLoader } from './event';
@@ -41,36 +42,37 @@ export const Components = {
   AlertSiteLoader,
   ArticleLoader,
   BreadcrumbLoader,
-  CardLoader,
   CallToActionLoader,
+  CardIconLoader,
+  CardLoader,
   CardOverlayLoader,
   CarouselCardsLoader,
-  EventLoader,
   EventDateLoader,
-  FeedNewsGridLoader,
-  FeedNewsListLoader,
+  EventLoader,
   FeedEventsGridLoader,
   FeedEventsGroupedLoader,
   FeedEventsListLoader,
+  FeedNewsGridLoader,
+  FeedNewsListLoader,
   FooterLoader,
-  NavHeader,
   HeroLoader,
   HeroLogoLoader,
   HeroMinimalLoader,
   LogoLoader,
   MediaInlineLoader,
   NavDrawerLoader,
-  NavSliderLoader,
+  NavHeader,
   NavItemLoader,
-  PathwayLoader,
+  NavSliderLoader,
   PathwayHighlightLoader,
-  PersonLoader,
+  PathwayLoader,
   PersonBioLoader,
+  PersonLoader,
   QuoteLoader,
-  StatLoader,
   SectionIntroLoader,
   SectionIntroWideLoader,
   SliderEventLoader,
+  StatLoader,
   StickyColumns,
 };
 

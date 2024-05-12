@@ -1,0 +1,97 @@
+{% extends '_layout.twig' %}
+
+{% import '_includes/content-dropdown.twig' as Dropdown %}
+{% import _self as macros %}
+
+{% block page %}
+  {{ macros.pagecontent() }}
+{% endblock %}
+
+{% macro pagecontent() %}
+  <div style="padding-bottom: 50px;">
+    <div class="umd-lock">
+      <h1 class="page-heading">
+        Card Icon
+      </h1>
+
+      <h2 class="content-heading">
+        Content Variations
+      </h2>
+
+      {{ Dropdown.ContentVariationsJs() }}
+    </div>
+
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading">
+          Default
+        </h3>
+        <div class="umd-grid-gap-three my-md">
+          {{ macros.content() }}
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <h3 class="content-heading">
+          Theme Dark
+        </h3>
+        <div class="umd-grid-gap-three my-md">
+          {{
+            macros.content({
+              theme: 'dark',
+              text: true
+            })
+          }}
+        </div>
+      </div>
+    </section>
+  </div>
+{% endmacro %}
+
+{% macro example() %}
+  {{
+    macros.content({
+      theme: 'light',
+      text: true
+    })
+  }}
+{% endmacro %}
+
+{% macro examplegrouped() %}
+  <div class="umd-grid-gap-three my-md">
+    {{ macros.example() }}
+    {{ macros.example() }}
+    {{ macros.example() }}
+  </div>
+{% endmacro %}
+
+{% macro content(params) %}
+  {% import '_includes/macros/fields/headline.twig' as Headline %}
+  {% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
+
+  {% set image = '/card-icon-dark.svg' %}
+
+  {% if params.theme == 'dark' %}
+    {% set image = '/card-icon-light.svg' %}
+  {% endif %}
+
+  {% set attrs = '' %}
+
+  {% set hasRichText = params.text ?? true %}
+
+  {% if params.theme == 'dark' %}
+    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
+  {% endif %}
+
+  <umd-element-card-icon {{ attrs }}>
+    <img slot="image" src="{{ image }}" alt="Example Alt Text" />
+
+    {{ Headline.OverlayHeadlineNormal() }}
+
+    {% if hasRichText %}
+      {{ RichText.OverlayRichTextNormal() }}
+    {% endif %}
+  </umd-element-card-icon>
+{% endmacro %}

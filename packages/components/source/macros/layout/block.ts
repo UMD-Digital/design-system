@@ -44,6 +44,8 @@ const OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER = `${IS_WITH_BORDER} .${ImageContain
 
 const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${TextLockupSmall.Elements.container}`;
 
+const OVERWRITE_ALIGNED_IMAGE_CONTAINER = `${IS_ALIGNED} .${ImageContainer.Elements.container}`;
+
 // prettier-ignore
 const VariantThemeStyles = `
   ${IS_THEME_DARK} {
@@ -75,6 +77,18 @@ const VariantAlignedStyles = `
     object-fit: cover;
     object-position: center;
     width: 100%;
+  }
+
+  @media (min-width: ${MEDIUM }px) {
+    ${OVERWRITE_ALIGNED_IMAGE_CONTAINER} {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: ${MEDIUM }px) {
+    ${OVERWRITE_ALIGNED_IMAGE_CONTAINER} a {
+      width: 100%;
+    }
   }
 `;
 

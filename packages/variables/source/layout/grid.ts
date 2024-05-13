@@ -13,6 +13,8 @@ const GridBaseQueries = {
 };
 
 const GridGapBaseQueries = {
+  gridGap: Spacing.md,
+
   [`@media (${Queries.large.min})`]: {
     gridGap: Spacing.lg,
     gridTemplateColumns: 'repeat(2, 1fr)',
@@ -49,7 +51,6 @@ const GridColumnsFour = {
 const GridColumnsBaseWithGap = {
   ...GridBase,
   ...GridGapBaseQueries,
-  gridGap: Spacing.lg,
 
   [`@media (${Queries.desktop.min})`]: {
     gridGap: Spacing.xl,
@@ -59,7 +60,6 @@ const GridColumnsBaseWithGap = {
 const GridColumnsThreeWithGap = {
   ...GridBase,
   ...GridGapBaseQueries,
-  gridGap: Spacing.lg,
 
   [`@media (${Queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -70,7 +70,6 @@ const GridColumnsThreeWithGap = {
 const GridColumnsFourWithGap = {
   ...GridBase,
   ...GridGapBaseQueries,
-  gridGap: Spacing.lg,
 
   [`@media (${Queries.highDef.min})`]: {
     gridTemplateColumns: 'repeat(4, 1fr)',

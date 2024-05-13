@@ -18,6 +18,11 @@ const lockBase = {
     paddingLeft: Spacing['4xl'],
     paddingRight: Spacing['4xl'],
   },
+
+  [`@media (${Queries.highDef.min})`]: {
+    paddingLeft: Spacing.max,
+    paddingRight: Spacing.max,
+  },
 };
 
 const LockMax = {

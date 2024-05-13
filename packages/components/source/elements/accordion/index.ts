@@ -146,10 +146,11 @@ const headlineStyles = `
     transition: background 0.5s, border 0.5s, color 0.5s, padding 0.5s;
     width: 100%;
     text-align: left;
+    color: ${Colors.black};
   }
 
   .${ELEMENT_HEADLINE} > * {
-    color: ${Colors.gray.dark}
+    color: ${Colors.black};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {

@@ -16,7 +16,7 @@ export type TypePathwayTextContainer = {
   theme?: string | null;
 };
 
-const { Spacing, Colors, FontSize } = Tokens;
+const { Spacing, Colors } = Tokens;
 const { Eyebrow, Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
 const { SansLargest } = Typography;
@@ -24,6 +24,7 @@ const { SansLargest } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 400;
+const LARGE = 600;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_LIGHT = 'light';
@@ -101,6 +102,12 @@ const HeadlineStyles = `
     color: ${Colors.black};
     font-weight: 800;
     text-transform: uppercase;
+  }
+
+  @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${LARGE}px) {
+    .${ELEMENT_TEXT_CONTAINER_HEADLINE} {
+      max-width: 90%;
+    }
   }
 `;
 

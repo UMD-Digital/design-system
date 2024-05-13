@@ -36,7 +36,7 @@ import { Load as SectionIntroWideLoader } from './section-intro/wide';
 import { Load as SliderEventLoader } from './slider/events';
 import { Load as StickyColumns } from './stickly-columns';
 
-export const Components = {
+export {
   AccordionLoader,
   AlertPageLoader,
   AlertSiteLoader,
@@ -74,11 +74,4 @@ export const Components = {
   SliderEventLoader,
   StatLoader,
   StickyColumns,
-};
-
-export default () => {
-  for (const key in Components) {
-    // @ts-ignore
-    Components[key]();
-  }
 };

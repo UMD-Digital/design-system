@@ -29,7 +29,7 @@ const SizeLarge = {
 
 export const CampaignMaxium = {
   ...FontBase,
-  fontSize: '150px',
+  fontSize: '120px',
   lineHeight: `0.9em`,
 
   [`@media (${breakpointDesktop})`]: {

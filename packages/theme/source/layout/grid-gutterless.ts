@@ -42,27 +42,25 @@ const GutterlessFourColumn = {
 
 const GutterlessBoarder = {
   border: `1px solid ${Colors.gray.light}`,
-
-  '& > *': {
-    borderRight: `1px solid ${Colors.gray.light}`,
-  },
+  borderBottom: `none`,
 };
 
 const GutterlessBoarderDark = {
   border: `1px solid ${Colors.gray.dark}`,
-
-  '& > *': {
-    borderRight: `1px solid ${Colors.gray.dark}`,
-  },
+  borderBottom: `none`,
 };
 
 const GutterlessTwoColumnBorder = {
   ...GutterlessTwoColumn,
   ...GutterlessBoarder,
 
+  '& > *': {
+    borderBottom: `1px solid ${Colors.gray.light}`,
+    borderRight: `1px solid ${Colors.gray.light}`,
+  },
+
   '& > *:first-child, & > *:nth-child(2)': {
     borderTop: `none`,
-    borderBottom: `1px solid ${Colors.gray.light}`,
   },
 
   '& > *:nth-of-type(2n)': {
@@ -74,9 +72,13 @@ const GutterlessThreeColumnBorder = {
   ...GutterlessThreeColumn,
   ...GutterlessBoarder,
 
+  '& > *': {
+    borderBottom: `1px solid ${Colors.gray.light}`,
+    borderRight: `1px solid ${Colors.gray.light}`,
+  },
+
   '& > *:first-child, & > *:nth-child(2), & > *:nth-child(3)': {
     borderTop: `none`,
-    borderBottom: `1px solid ${Colors.gray.light}`,
   },
 
   '& > *:nth-of-type(3n)': {
@@ -88,10 +90,14 @@ const GutterlessFourColumnBorder = {
   ...GutterlessFourColumn,
   ...GutterlessBoarder,
 
+  '& > *': {
+    borderBottom: `1px solid ${Colors.gray.light}`,
+    borderRight: `1px solid ${Colors.gray.light}`,
+  },
+
   '& > *:first-child, & > *:nth-child(2), & > *:nth-child(3), & > *:nth-child(4)':
     {
       borderTop: `none`,
-      borderBottom: `1px solid ${Colors.gray.light}`,
     },
 
   '& > *:nth-of-type(4n)': {
@@ -132,8 +138,17 @@ const GridColumnsGutterlessBorderDark = {
     ...GutterlessTwoColumnBorder,
     ...GutterlessBoarderDark,
 
-    '& > *:first-child, & > *:nth-child(2)': {
+    '& > *': {
       borderBottom: `1px solid ${Colors.gray.dark}`,
+      borderRight: `1px solid ${Colors.gray.dark}`,
+    },
+
+    '& > *:first-child, & > *:nth-child(2)': {
+      borderTop: `none`,
+    },
+
+    '& > *:nth-of-type(2n)': {
+      borderRight: `none`,
     },
   },
 
@@ -141,8 +156,17 @@ const GridColumnsGutterlessBorderDark = {
     ...GutterlessThreeColumnBorder,
     ...GutterlessBoarderDark,
 
-    '& > *:first-child, & > *:nth-child(2), & > *:nth-child(3)': {
+    '& > *': {
       borderBottom: `1px solid ${Colors.gray.dark}`,
+      borderRight: `1px solid ${Colors.gray.dark}`,
+    },
+
+    '& > *:first-child, & > *:nth-child(2), & > *:nth-child(3)': {
+      borderTop: `none`,
+    },
+
+    '& > *:nth-of-type(3n)': {
+      borderRight: `none`,
     },
   },
 
@@ -150,10 +174,19 @@ const GridColumnsGutterlessBorderDark = {
     ...GutterlessFourColumnBorder,
     ...GutterlessBoarderDark,
 
+    '& > *': {
+      borderBottom: `1px solid ${Colors.gray.dark}`,
+      borderRight: `1px solid ${Colors.gray.dark}`,
+    },
+
     '& > *:first-child, & > *:nth-child(2), & > *:nth-child(3), & > *:nth-child(4)':
       {
-        borderBottom: `1px solid ${Colors.gray.dark}`,
+        borderTop: `none`,
       },
+
+    '& > *:nth-of-type(4n)': {
+      borderRight: `none`,
+    },
   },
 };
 

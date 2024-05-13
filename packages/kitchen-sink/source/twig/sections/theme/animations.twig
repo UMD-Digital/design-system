@@ -1,5 +1,8 @@
 {% extends '../../_layout.twig' %}
 
+{% import '../components/sliders/events.twig' as SliderEvents %}
+{% import '../components/accessories/accordion.twig' as Accordion %}
+
 {% set GifImageOptions = [
   'https://umd-today.files.svdcdn.com/production/gifs/music_collage.gif_1920x1080.gif?dm=1707945389',
   'https://umd-today.files.svdcdn.com/production/gifs/ezgif.com-optimize.gif?dm=1694719244',
@@ -8,9 +11,9 @@
 
 {% block page %}
   <div style="padding-bottom: 50px;">
-    <section class="pb-xl">
+    <section>
       <div class="umd-lock">
-        <h1 class="umd-campaign-extralarge font-bold">
+        <h1 class="umd-campaign-extralarge">
           Animations
         </h1>
       </div>
@@ -621,111 +624,7 @@
           <span>Animation on click/manual navigation</span>
         </div>
 
-        <umd-element-events-date-slider theme="light" resize="">
-          <div slot="headline">
-            Lorem Ipsum Dol
-          </div>
-
-          <umd-element-call-to-action slot="link"
-            type="secondary"
-            theme="light">
-            <a href="/"><span>CTA Link</span></a>
-          </umd-element-call-to-action>
-
-          <div slot="date-list"
-            style="display: flex; position: absolute; top: 0px; left: 0px; visibility: visible; width: 2100px; transform: translateX(-600px);">
-            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
-              <p slot="month">
-                Jul
-              </p>
-              <p slot="day">
-                01
-              </p>
-
-              <p slot="headline">
-                <a href="https://umd.edu">TerrapinSTRONG In Person</a>
-              </p>
-            </umd-element-events-date>
-
-            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
-              <p slot="month">
-                Feb
-              </p>
-              <p slot="day">
-                30
-              </p>
-
-              <p slot="headline">
-                Transparency in Teaching
-              </p>
-            </umd-element-events-date>
-
-            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
-              <p slot="month">
-                Jan
-              </p>
-              <p slot="day">
-                30
-              </p>
-
-              <p slot="headline">
-                Transparency in Teaching
-              </p>
-            </umd-element-events-date>
-
-            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
-              <p slot="month">
-                Oct
-              </p>
-              <p slot="day">
-                12
-              </p>
-
-              <p slot="headline">
-                <a href="https://umd.edu">Study Abroad Fair</a>
-              </p>
-            </umd-element-events-date>
-
-            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
-              <p slot="month">
-                Dec
-              </p>
-              <p slot="day">
-                07
-              </p>
-
-              <p slot="headline">
-                Study Abroad Fair
-              </p>
-            </umd-element-events-date>
-
-            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
-              <p slot="month">
-                Apr
-              </p>
-              <p slot="day">
-                25
-              </p>
-
-              <p slot="headline">
-                Transparency in Teaching
-              </p>
-            </umd-element-events-date>
-
-            <umd-element-events-date style="width: 300px; display: flex; justify-content: inherit; padding-right: 32px; margin-top: 0px; padding-top: 0px; border-top: none;">
-              <p slot="month">
-                May
-              </p>
-              <p slot="day">
-                13
-              </p>
-
-              <p slot="headline">
-                Disrupting Grind Culture
-              </p>
-            </umd-element-events-date>
-          </div>
-        </umd-element-events-date-slider>
+        {{ SliderEvents.example() }}
       </div>
     </section>
 
@@ -736,50 +635,8 @@
           <span>Animation on click/manual navigation</span>
         </div>
 
-        <umd-element-accordion>
-          <umd-element-accordion-item class="mb-xs" theme="dark">
-            <div slot="headline">
-              Checklist for International Freshman
-            </div>
-
-            <div slot="body" class="umd-rich-text">
-              <p>
-                <strong>Duis reprehen</strong>
-                <i>eu fugiat</i>.
-                <a href="https://umd.edu">
-                  <span class="sr-only">Text for Screen Reader</span>
-                  <span aria-hidden="true">Excepteur occaecat</span>
-                </a>, voluptate.
-                <em>Nostrud</em>
-                <u>
-                  dolore nulla
-                </u>.
-              </p>
-            </div>
-          </umd-element-accordion-item>
-          <umd-element-accordion-item theme="dark" class="mb-xs">
-            <div slot="headline">
-              Checklist for International Transfers
-            </div>
-
-            <div slot="body" class="umd-rich-text">
-              <p>
-                <strong>Duis reprehen</strong>
-                <i>eu fugiat</i>.
-                <a href="https://umd.edu">
-                  <span class="sr-only">Text for Screen Reader</span>
-                  <span aria-hidden="true">Excepteur occaecat</span>
-                </a>, voluptate. dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat. Duis aute irure do
-                <em>Nostrud</em>
-                <u>
-                  dolore nulla
-                </u>.
-              </p>
-            </div>
-          </umd-element-accordion-item>
-        </umd-element-accordion>
+        {{ Accordion.exampleOpen() }}
+        {{ Accordion.exampleClosed() }}
       </div>
     </section>
   </div>

@@ -203,7 +203,7 @@ const DefaultStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_INTERIOR_CONTAINER} {
-      min-height: 400px;
+      min-height: auto;
       height: auto;
     }
   }
@@ -224,6 +224,14 @@ const DefaultStyles = `
     .${HERO_CONTAINER} .${HERO_LOCK} {
       padding-top: ${Spacing['2xl']};
       padding-bottom: ${Spacing['2xl']};
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
+    ${OVERWRITE_INTERIOR_CONTAINER} .${HERO_LOCK} {
+      min-height: 400px;
+      align-items: center;
+      display: flex;
     }
   }
 `;

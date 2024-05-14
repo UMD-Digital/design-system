@@ -1,19 +1,23 @@
 {% extends '../../_layout.twig' %}
 
 {% block page %}
-  <section>
-    <div class="umd-lock">
-      <div class="umd-layout-vertical-interior-child">
-        <h1 class="umd-sans-extralarge-bold font-bold mb-sm">
-          Rich Text Styles
+  <div style="padding-bottom: 100px;">
+    <section>
+      <div class="umd-lock">
+        <h1 class="umd-campaign-extralarge">
+          Rich Text
         </h1>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Rich Text</span>
+          <span>.umd-rich-text</span>
+        </div>
 
         <div class="umd-rich-text">
-          <div class="umd-sans-large">
-            <span>Rich Text</span>
-            <span>Formatting options</span>
-          </div>
-
           <p>
             Rich Text fields support a number of formatting options including
             <strong>Bold</strong>, <em>Italics</em>,<del>
@@ -47,419 +51,1068 @@
           <p>
             Sub<sub>script</sub>
           </p>
+        </div>
+      </div>
+    </section>
 
-          <div class="umd-rich-text umd-layout-vertical-interior-child">
-            <div class="umd-sans-large">
-              <span>Rich Text</span>
-              <span>Multiple paragraphs within .umd-lock</span>
-            </div>
-            <div class="umd-lock">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum.
-              </p>
-              <p>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Text Simple</span>
+          <span>.umd-text-simple</span>
+        </div>
 
-          <div class="umd-rich-text umd-layout-vertical-interior-child">
-            <div class="umd-sans-large">
-              <span>Rich Text</span>
-              <span>
-                Heading examples and multiple paragraphs within .umd-lock
-              </span>
-            </div>
-            <div class="umd-lock">
-              <h2 class="umd-sans-extralarge-bold" style="padding-bottom: 15px">
-                Large Header
-              </h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <h2 class="umd-sans-larger-bold" style="padding-bottom: 15px">
-                Medium Header
-              </h2>
-              <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-              <h2 class="umd-sans-large" style="padding-bottom: 15px">
-                Small Header
-              </h2>
-              <p>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
+        <div class="umd-text-simple">
+          <p class="umd-text-simple">
+            Rich Text fields support a number of formatting options including
+            <strong>Bold</strong>, <em>Italics</em>,<del>
+              Strikethrough
+            </del>, Bulleted and ordered lists,
+            <a href="#">links</a>, line separator, and text alignment.
+          </p>
 
-              <p>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-          </div>
+          <p class="umd-text-simple">
+            <strong>Normal text formatted with bold</strong>
+          </p>
+          <p class="umd-text-simple">
+            <u>
+              Normal text formatted with underline
+            </u>
+          </p>
+          <p class="umd-text-simple">
+            <em>Normal text formatted with italics</em>
+          </p>
+          <p class="umd-text-simple">
+            <del>
+              Normal text formatted with Strikethrough
+            </del>
+          </p>
+          <p class="umd-text-simple">
+            <a href="#">Links are formatted to semi-bold and underlined</a>.
+          </p>
+          <p class="umd-text-simple">
+            Super<sup>script</sup>
+          </p>
+          <p class="umd-text-simple">
+            Sub<sub>script</sub>
+          </p>
+        </div>
+      </div>
+    </section>
 
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-maximum</span>
-          </div>
-          <h2 class="umd-sans-maximum">
-            Heading class umd-sans-maximum
-          </h2>
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Text Simple Large</span>
+          <span>.umd-text-simple-large</span>
+        </div>
 
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-largest-uppercase</span>
-          </div>
-          <h2 class="umd-sans-largest-uppercase">
-            Heading umd-sans-largest-uppercase
-          </h2>
+        <div class="umd-text-simple-large">
+          <p>
+            Rich Text fields support a number of formatting options including
+            <strong>Bold</strong>, <em>Italics</em>,<del>
+              Strikethrough
+            </del>, Bulleted and ordered lists,
+            <a href="#">links</a>, line separator, and text alignment.
+          </p>
 
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-extralarge-uppercase</span>
-          </div>
-          <h2 class="umd-sans-extralarge-uppercase">
-            Heading class umd-sans-extralarge-uppercase
-          </h2>
+          <p>
+            <strong>Normal text formatted with bold</strong>
+          </p>
+          <p>
+            <u>
+              Normal text formatted with underline
+            </u>
+          </p>
+          <p>
+            <em>Normal text formatted with italics</em>
+          </p>
+          <p>
+            <del>
+              Normal text formatted with Strikethrough
+            </del>
+          </p>
+          <p>
+            <a href="#">Links are formatted to semi-bold and underlined</a>.
+          </p>
+          <p>
+            Super<sup>script</sup>
+          </p>
+          <p>
+            Sub<sub>script</sub>
+          </p>
+        </div>
+      </div>
+    </section>
 
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-largest</span>
-          </div>
-          <h2 class="umd-sans-largest">
-            Heading class umd-sans-largest
-          </h2>
-
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-extralarge-bold</span>
-          </div>
-          <h2 class="umd-sans-extralarge-bold">
-            Heading class umd-sans-extralarge-bold
-          </h2>
-
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-extralarge</span>
-          </div>
-          <h2 class="umd-sans-extralarge">
-            Heading umd-sans-extralarge
-          </h2>
-
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-larger-bold</span>
-          </div>
-          <h2 class="umd-sans-larger-bold">
-            Heading class umd-sans-larger-bold
-          </h2>
-
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-larger</span>
-          </div>
-          <h2 class="umd-sans-larger">
-            Heading class umd-sans-larger
-          </h2>
-
-          <div class="umd-sans-large">
-            <span>Heading</span>
-            <span>Class .umd-sans-large</span>
-          </div>
-          <h3 class="umd-sans-large">
-            Heading class umd-sans-large
-          </h3>
-
-          <div class="umd-sans-large">
+    <section>
+      <div class="umd-lock">
+        <div class="umd-layout-vertical-interior-child">
+          <h2 class="content-heading">
             <span>Rich Text</span>
-            <span>List options</span>
-          </div>
-
+            <span>.umd-rich-text</span>
+          </h2>
+        </div>
+        <div class="umd-lock-extra-small umd-rich-text">
           <p>
-            <strong>Bulleted List</strong>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <ul>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.<ul>
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.
-                </li>
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.<ul>
-                    <li>
-                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
-                      turpis tincidunt id aliquet risus feugiat in ante metus.
-                      Non enim praesent elementum facilisis. Sed id semper risus
-                      in hendrerit gravida rutrum quisque non. Cursus risus at
-                      ultrices mi.
-                    </li>
-                    <li>
-                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
-                      turpis tincidunt id aliquet risus feugiat in ante metus.
-                      Non enim praesent elementum facilisis. Sed id semper risus
-                      in hendrerit gravida rutrum quisque non. Cursus risus at
-                      ultrices mi.
-                    </li>
-                  </ul>
-                </li>
-
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.
-                </li>
-              </ul>
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-          </ul>
           <p>
-            <strong>Ordered List</strong>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
           </p>
-          <ol>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.<ol>
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.
-                </li>
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.<ol>
-                    <li>
-                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
-                      turpis tincidunt id aliquet risus feugiat in ante metus.
-                      Non enim praesent elementum facilisis. Sed id semper risus
-                      in hendrerit gravida rutrum quisque non. Cursus risus at
-                      ultrices mi.
-                    </li>
-                    <li>
-                      Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                      cursus risus at ultrices mi tempus imperdiet nulla. Sed
-                      turpis tincidunt id aliquet risus feugiat in ante metus.
-                      Non enim praesent elementum facilisis. Sed id semper risus
-                      in hendrerit gravida rutrum quisque non. Cursus risus at
-                      ultrices mi.
-                    </li>
-                  </ol>
-                </li>
-
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.
-                </li>
-              </ol>
-            </li>
-
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-          </ol>
           <p>
-            <strong>Mixed List</strong>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <ol>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.<ul>
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.
-                </li>
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.
-                </li>
-              </ul>
-            </li>
+        </div>
+      </div>
+    </section>
 
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-          </ol>
+    <section>
+      <div class="umd-lock">
+        <div class="umd-layout-vertical-interior-child">
+          <h2 class="content-heading">
+            <span>Text Simple</span>
+            <span>.umd-text-simple</span>
+          </h2>
+        </div>
+        <div class="umd-lock-extra-small umd-text-simple">
+          <p class="umd-text-simple">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <p class="umd-text-simple">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
+          <p class="umd-text-simple">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+    </section>
 
-          <ul>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.<ol>
-                <li>
-                  Fusce ut placerat orci nolla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.
-                </li>
-                <li>
-                  Fusce ut placerat orci nulla pellentesque. Morbi blandit
-                  cursus risus at ultrices mi tempus imperdiet nulla. Sed turpis
-                  tincidunt id aliquet risus feugiat in ante metus. Non enim
-                  praesent elementum facilisis. Sed id semper risus in hendrerit
-                  gravida rutrum quisque non. Cursus risus at ultrices mi.
-                </li>
-              </ol>
-            </li>
+    <section>
+      <div class="umd-lock">
+        <div class="umd-layout-vertical-interior-child">
+          <h2 class="content-heading">
+            <span>Text Simple Large</span>
+            <span>.umd-text-simple-large</span>
+          </h2>
+        </div>
+        <div class="umd-lock-extra-small umd-text-simple-large">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <p>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
+          <p>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+    </section>
 
-            <li>
-              Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
-              risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt
-              id aliquet risus feugiat in ante metus. Non enim praesent
-              elementum facilisis. Sed id semper risus in hendrerit gravida
-              rutrum quisque non. Cursus risus at ultrices mi.
-            </li>
-          </ul>
-
-          <div class="umd-sans-large">
+    <section>
+      <div class="umd-lock">
+        <div class="umd-layout-vertical-interior-child">
+          <div class="content-heading">
             <span>Rich Text</span>
-            <span>Contact Elements</span>
+            <span>.umd-rich-text</span>
           </div>
+        </div>
+      </div>
+      <div class="umd-lock-extra-small umd-rich-text">
+        <h2 class="umd-sans-extralarge-bold">
+          Et Enim Veniam Quis Nostrud Exercitation Ullamcoo
+        </h2>
+        <p>
+          Academic units planning to create, modify, suspend, or discontinue
+          academic programs or departments need to follow the campus Programs,
+          Curricula, and Courses (PCC) procedures for review. Individual courses
+          are approved or modified by a different process through the Course
+          Approval (VPAC) process. Important: even if an explicit statement in a
+          program proposal indicates that a specific course will be modified,
+          whether it is a change in restriction or the addition of a
+          prerequisite or corequisite, a course modification proposal must also
+          go through the regular course review process and approved before that
+          statement can take effect.
+        </p>
+        <h2 class="umd-sans-larger-bold">
+          Duis Aute Irure Dolor Voluptate Velit Esse
+        </h2>
+        <p>
+          Academic units that want to create, modify, suspend, or discontinue a
+          program must use the online CourseLeaf Curriculum Management System
+          (a.k.a. CIM, pronounced Kim). Academic program proposals move through
+          different levels of approval via the CIM system. CIM makes it easy to
+          find information on current programs as well as the status of
+          submitted program proposals. The system is also integrated with both
+          the Undergraduate Catalog and Graduate Catalog. Approved proposals
+          will automatically update the next version of the catalog, eliminating
+          the need to enter the same program information twice (once in the
+          proposal and then a second time in the catalog).
+        </p>
 
+        <umd-element-media-inline class="umd-layout-vertical-interior-child">
+          <img src="/rich-text-image-1.jpg" alt="Logo" slot="image" />
+          <p slot="caption">
+            Optional text block. Lorem ipsum dol sit amet, con adipiscing elit
+          </p>
+          <div slot="wrapping-text" class="umd-rich-text">
+            <p>
+              Although proposals must be submitted through the CIM system, a
+              worksheet based on the CIM proposal is provided to help prepare
+              new program proposals. Please note that this worksheet is only
+              provided to help formulate responses to the CIM proposal form
+              prompts, and will not be accepted in lieu of the CIM proposal. A
+              PCC Manual is also available for detailed information on the
+              structure, content, and requirements for PCC proposals.
+            </p>
+            <p>
+              Please note that proposals to create, modify, or discontinue
+              academic units (such as departments or colleges) will still be
+              handled through a paper
+            </p>
+          </div>
+        </umd-element-media-inline>
+
+        <h2 class="umd-sans-large">
+          Cillum Dolore Eu Fugiat Nulla Pariatur
+        </h2>
+        <p>
+          All proposals (with a few exceptions listed below) follow this
+          approval path before being submitted to Academic Affairs:
+        </p>
+
+        <umd-element-media-inline>
+          <img src="/rich-text-image-2.jpg"
+            alt="cicadia crawling up tree bark"
+            data-caption="Optional Photo credit"
+            slot="image" />
+          <p slot="caption">
+            Optional text block. Lorem ipsum dol sit amet, con adipiscing elit
+          </p>
+        </umd-element-media-inline>
+
+        <ul>
+          <li>
+            The Special Assistant to the Provost for Strategic Initiatives
+            oversees the implementation of the campus Fearlessly Forward
+            Strategic Plan.
+          </li>
+          <li>
+            The Assistant Provost for Academic Planning provides general
+            oversight for the establishment, modification, review, and
+            discontinuance of academic programs, academic units, centers,
+            institutes, and courses.<ul>
+              <li>
+                Conubia scelerisque ultrices suspendisse per risus faucibus
+                quisque felis aliquam praesent
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ol>
+          <li>
+            Feugiat nulla eu facilisi fames potenti, ridiculus turpis metus
+            taciti erat, pretium conubia viverra nibh.
+          </li>
+          <li>
+            Phasellus senectus sociosqu varius malesuada aenean ac condimentum
+            quam purus placerat, arcu molestie porta ultricies.<ol>
+              <li>
+                Phasellus senectus sociosqu varius malesuada aenean ac
+                condimentum quam purus placerat, arcu molestie porta ultricies.
+              </li>
+            </ol>
+          </li>
+        </ol>
+
+        <p>
+          This procedure can be modified for non-departmentalized Colleges or
+          for interdisci programs.
+        </p>
+
+        <umd-element-quote>
+          <p slot="quote">
+            Our diversity is integral to our excellence. And ours is a community
+            that is intrinsically connected to our surrounding neighborhoods and
+            our stae, our nation, and our world.
+          </p>
+
+          <p slot="attribution">
+            Joseph Smithson, Class of 2025
+          </p>
+
+          <p slot="attribution-sub-text">
+            Optional Attribution
+          </p>
+        </umd-element-quote>
+
+        <umd-element-media-inline alignment="right"
+          class="umd-layout-vertical-interior-child">
+          <img src="/rich-text-image-1.jpg"
+            alt="Logo"
+            data-caption="Lorem ipsum dolor"
+            slot="image" />
+
+          <div slot="wrapping-text" class="umd-rich-text">
+            <p>
+              Although proposals must be submitted through the CIM system, a
+              worksheet based on the CIM proposal is provided to help prepare
+              new program proposals. Please note that this worksheet is only
+              provided to help formulate responses to the CIM proposal form
+              prompts, and will not be accepted in lieu of the CIM proposal. A
+              PCC Manual is also available for detailed information on the
+              structure, content, and requirements for PCC proposals.
+            </p>
+
+            <p>
+              Discontinue academic units (such as departments or colleges) will
+              still be handled through a paper process. Please contact our
+              office at pcc-submissions@umd.edu for more information about
+              submitting these kinds of proposals.
+            </p>
+          </div>
+        </umd-element-media-inline>
+
+        <hr />
+
+        <h2 class="umd-sans-extralarge-bold">
+          Article level components
+        </h2>
+
+        <h3 class="umd-sans-large">
+          Styling of a quote on an article page
+        </h3>
+
+        <umd-element-quote>
+          <img src="/person-1.jpeg" alt="Person 1" slot="image" />
+
+          <p slot="quote">
+            Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            vulputate libero et velit interdum, ac aliquet odio mattis.
+          </p>
+
+          <p slot="attribution">
+            Joseph Smithson, Class of 2025
+          </p>
+
+          <p slot="attribution-sub-text">
+            Optional Attribution
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="/components" aria-label="link to components">
+                More on Research & Innovation
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-quote>
+
+        <h3 class="umd-sans-large">
+          Image layouts
+        </h3>
+
+        <div class="umd-grid-gap">
+          <umd-element-media-inline>
+            <img src="/rich-text-image-4.jpg"
+              alt="Logo"
+              data-caption="Optional Photo credit"
+              slot="image" />
+            <p slot="caption">
+              Optional Caption
+            </p>
+          </umd-element-media-inline>
+
+          <umd-element-media-inline>
+            <img src="/rich-text-image-3.jpg" alt="Logo" slot="image" />
+            <p slot="caption">
+              Optional Caption
+            </p>
+          </umd-element-media-inline>
+        </div>
+
+        <p>
+          Yorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+          vulputate libero et velit interdum, ac aliquet odio mattis. Class
+          aptent taciti sociosqu ad litora torquent per conubia nostra, per
+          inceptos himenaeos.
+        </p>
+
+        <h3 class="umd-sans-large">
+          Inline stats
+        </h3>
+
+        <div class="umd-grid-gap">
+          <umd-element-stat>
+            <div slot="stat">
+              10th
+            </div>
+            <div slot="text">
+              Among public institutions for reasearch devedlopment & spending
+            </div>
+            <div slot="sub-text">
+              Source: 2022-23 U.S. News &amp; World Report
+            </div>
+          </umd-element-stat>
+
+          <umd-element-stat>
+            <div slot="stat">
+              #19
+            </div>
+            <div slot="text">
+              Top public national university
+            </div>
+            <div slot="sub-text">
+              Source: 2022-23 U.S. News &amp; World Report
+            </div>
+          </umd-element-stat>
+        </div>
+
+        <h3 class="umd-sans-larger" style="margin-top: 60px">
+          Let Them Eat Cake
+        </h3>
+
+        <div class="umd-grid-gap">
+          <div>
+            <p>
+              Some 3,000 volunteers rolled up their sleeves that first year to
+              prep campus for guests who showed up to “explore our world,” as
+              the inaugural theme instructed, through activities like musical
+              performances, bounce houses and a football scrimmage.
+            </p>
+            <p>
+              To celebrate 25 years of this Maryland merriment, we’re unwrapping
+              the tradition, revealing backstories, secrets, stats and memories
+              from longtime volunteers and other participants about the big day.
+            </p>
+          </div>
+          <umd-element-media-inline>
+            <img src="/rich-text-image-7.jpg"
+              alt="Logo"
+              data-caption="Photography by John Consoli"
+              slot="image" />
+          </umd-element-media-inline>
+        </div>
+
+        <h3 class="umd-sans-large" style="margin-top: 56px">
+          Standard Cards
+        </h3>
+
+        <div class="umd-grid-gap">
+          <umd-element-card>
+            <a slot="image"
+              href="https://umd.edu"
+              target="_blank"
+              data-caption="Lorem ipsum dolor">
+              <img src="/rich-text-image-3.jpg" alt="Example Alt Text" />
+            </a>
+
+            <div slot="eyebrow">
+              <p>
+                Optional Eyebrow
+              </p>
+            </div>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                <span class="sr-only">Text for Screen Reader</span>
+                <span aria-hidden="true">
+                  Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing
+                </span>
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                <strong>Duis reprehen</strong>
+                <i>eu fugiat</i>.
+                <a href="https://umd.edu">
+                  <span class="sr-only">Text for Screen Reader</span>
+                  <span aria-hidden="true">Excepteur occaecat</span>
+                </a> voluptate. dolore magna aliqua.
+              </p>
+            </div>
+
+            <umd-element-call-to-action slot="actions"
+              type="secondary"
+              theme="light">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-card>
+
+          <umd-element-card>
+            <a slot="image"
+              href="https://umd.edu"
+              target="_blank"
+              data-caption="Lorem ipsum dolor">
+              <img src="/rich-text-image-4.jpg" alt="Example Alt Text" />
+            </a>
+
+            <div slot="eyebrow">
+              <p>
+                Optional Eyebrow
+              </p>
+            </div>
+
+            <h2 slot="headline">
+              <a href="https://umd.edu">
+                <span class="sr-only">Text for Screen Reader</span>
+                <span aria-hidden="true">
+                  Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing
+                </span>
+              </a>
+            </h2>
+
+            <div slot="text">
+              <p>
+                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                vulputate libero et velit interdum, ac aliquet odio mattis.
+              </p>
+            </div>
+
+            <umd-element-call-to-action slot="actions"
+              type="secondary"
+              theme="light">
+              <a href="/"><span>Learn More</span></a>
+            </umd-element-call-to-action>
+          </umd-element-card>
+        </div>
+
+        <umd-element-card display="list">
+          <img slot="image"
+            src="https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg"
+            alt="Image Description" />
+
+          <p slot="eyebrow">
+            Research
+          </p>
+          <p slot="headline">
+            <a href="google.com">
+              Rising to a Grand Challenge: Childhood Literacy
+            </a>
+          </p>
+          <p slot="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a
+          </p>
+
+          <div slot="actions">
+            <umd-element-call-to-action type="secondary">
+              <a href="https://google.com" aria-label="link to google">
+                Learn More
+              </a>
+            </umd-element-call-to-action>
+          </div>
+        </umd-element-card>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="umd-layout-vertical-interior-child">
+          <div class="content-heading">
+            <span>Text Simple</span>
+            <span>.umd-text-simple</span>
+          </div>
+        </div>
+      </div>
+      <div class="umd-lock-extra-small umd-text-simple">
+        <h2 class="umd-sans-extralarge-bold">
+          Et Enim Veniam Quis Nostrud Exercitation Ullamcoo
+        </h2>
+        <p class="umd-text-simple">
+          Academic units planning to create, modify, suspend, or discontinue
+          academic programs or departments need to follow the campus Programs,
+          Curricula, and Courses (PCC) procedures for review. Individual courses
+          are approved or modified by a different process through the Course
+          Approval (VPAC) process. Important: even if an explicit statement in a
+          program proposal indicates that a specific course will be modified,
+          whether it is a change in restriction or the addition of a
+          prerequisite or corequisite, a course modification proposal must also
+          go through the regular course review process and approved before that
+          statement can take effect.
+        </p>
+        <h2 class="umd-sans-larger-bold">
+          Duis Aute Irure Dolor Voluptate Velit Esse
+        </h2>
+        <p class="umd-text-simple">
+          Academic units that want to create, modify, suspend, or discontinue a
+          program must use the online CourseLeaf Curriculum Management System
+          (a.k.a. CIM, pronounced Kim). Academic program proposals move through
+          different levels of approval via the CIM system. CIM makes it easy to
+          find information on current programs as well as the status of
+          submitted program proposals. The system is also integrated with both
+          the Undergraduate Catalog and Graduate Catalog. Approved proposals
+          will automatically update the next version of the catalog, eliminating
+          the need to enter the same program information twice (once in the
+          proposal and then a second time in the catalog).
+        </p>
+
+        <umd-element-media-inline class="umd-layout-vertical-interior-child">
+          <img src="/rich-text-image-1.jpg" alt="Logo" slot="image" />
+          <p slot="caption">
+            Optional text block. Lorem ipsum dol sit amet, con adipiscing elit
+          </p>
+          <div slot="wrapping-text" class="umd-rich-text">
+            <p class="umd-text-simple">
+              Although proposals must be submitted through the CIM system, a
+              worksheet based on the CIM proposal is provided to help prepare
+              new program proposals. Please note that this worksheet is only
+              provided to help formulate responses to the CIM proposal form
+              prompts, and will not be accepted in lieu of the CIM proposal. A
+              PCC Manual is also available for detailed information on the
+              structure, content, and requirements for PCC proposals.
+            </p>
+            <p class="umd-text-simple">
+              Please note that proposals to create, modify, or discontinue
+              academic units (such as departments or colleges) will still be
+              handled through a paper
+            </p>
+          </div>
+        </umd-element-media-inline>
+
+        <h2 class="umd-sans-large">
+          Cillum Dolore Eu Fugiat Nulla Pariatur
+        </h2>
+        <p class="umd-text-simple">
+          All proposals (with a few exceptions listed below) follow this
+          approval path before being submitted to Academic Affairs:
+        </p>
+
+        <umd-element-media-inline alignment="right"
+          class="umd-layout-vertical-interior-child">
+          <img src="/rich-text-image-1.jpg"
+            alt="Logo"
+            data-caption="Lorem ipsum dolor"
+            slot="image" />
+
+          <div slot="wrapping-text" class="umd-rich-text">
+            <p class="umd-text-simple">
+              Although proposals must be submitted through the CIM system, a
+              worksheet based on the CIM proposal is provided to help prepare
+              new program proposals. Please note that this worksheet is only
+              provided to help formulate responses to the CIM proposal form
+              prompts, and will not be accepted in lieu of the CIM proposal. A
+              PCC Manual is also available for detailed information on the
+              structure, content, and requirements for PCC proposals.
+            </p>
+
+            <p class="umd-text-simple">
+              Discontinue academic units (such as departments or colleges) will
+              still be handled through a paper process. Please contact our
+              office at pcc-submissions@umd.edu for more information about
+              submitting these kinds of proposals.
+            </p>
+          </div>
+        </umd-element-media-inline>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="umd-layout-vertical-interior-child">
+          <div class="content-heading">
+            <span>Text Simple Large</span>
+            <span>.umd-text-simple-large</span>
+          </div>
+        </div>
+      </div>
+      <div class="umd-lock-extra-small umd-text-simple-large">
+        <h2 class="umd-sans-extralarge-bold">
+          Et Enim Veniam Quis Nostrud Exercitation Ullamcoo
+        </h2>
+        <p>
+          Academic units planning to create, modify, suspend, or discontinue
+          academic programs or departments need to follow the campus Programs,
+          Curricula, and Courses (PCC) procedures for review. Individual courses
+          are approved or modified by a different process through the Course
+          Approval (VPAC) process. Important: even if an explicit statement in a
+          program proposal indicates that a specific course will be modified,
+          whether it is a change in restriction or the addition of a
+          prerequisite or corequisite, a course modification proposal must also
+          go through the regular course review process and approved before that
+          statement can take effect.
+        </p>
+        <h2 class="umd-sans-larger-bold">
+          Duis Aute Irure Dolor Voluptate Velit Esse
+        </h2>
+        <p>
+          Academic units that want to create, modify, suspend, or discontinue a
+          program must use the online CourseLeaf Curriculum Management System
+          (a.k.a. CIM, pronounced Kim). Academic program proposals move through
+          different levels of approval via the CIM system. CIM makes it easy to
+          find information on current programs as well as the status of
+          submitted program proposals. The system is also integrated with both
+          the Undergraduate Catalog and Graduate Catalog. Approved proposals
+          will automatically update the next version of the catalog, eliminating
+          the need to enter the same program information twice (once in the
+          proposal and then a second time in the catalog).
+        </p>
+
+        <umd-element-media-inline class="umd-layout-vertical-interior-child">
+          <img src="/rich-text-image-1.jpg" alt="Logo" slot="image" />
+          <p slot="caption">
+            Optional text block. Lorem ipsum dol sit amet, con adipiscing elit
+          </p>
+          <div slot="wrapping-text" class="umd-rich-text">
+            <p>
+              Although proposals must be submitted through the CIM system, a
+              worksheet based on the CIM proposal is provided to help prepare
+              new program proposals. Please note that this worksheet is only
+              provided to help formulate responses to the CIM proposal form
+              prompts, and will not be accepted in lieu of the CIM proposal. A
+              PCC Manual is also available for detailed information on the
+              structure, content, and requirements for PCC proposals.
+            </p>
+            <p>
+              Please note that proposals to create, modify, or discontinue
+              academic units (such as departments or colleges) will still be
+              handled through a paper
+            </p>
+          </div>
+        </umd-element-media-inline>
+
+        <h2 class="umd-sans-large">
+          Cillum Dolore Eu Fugiat Nulla Pariatur
+        </h2>
+        <p>
+          All proposals (with a few exceptions listed below) follow this
+          approval path before being submitted to Academic Affairs:
+        </p>
+
+        <umd-element-media-inline alignment="right"
+          class="umd-layout-vertical-interior-child">
+          <img src="/rich-text-image-1.jpg"
+            alt="Logo"
+            data-caption="Lorem ipsum dolor"
+            slot="image" />
+
+          <div slot="wrapping-text" class="umd-rich-text">
+            <p>
+              Although proposals must be submitted through the CIM system, a
+              worksheet based on the CIM proposal is provided to help prepare
+              new program proposals. Please note that this worksheet is only
+              provided to help formulate responses to the CIM proposal form
+              prompts, and will not be accepted in lieu of the CIM proposal. A
+              PCC Manual is also available for detailed information on the
+              structure, content, and requirements for PCC proposals.
+            </p>
+
+            <p>
+              Discontinue academic units (such as departments or colleges) will
+              still be handled through a paper process. Please contact our
+              office at pcc-submissions@umd.edu for more information about
+              submitting these kinds of proposals.
+            </p>
+          </div>
+        </umd-element-media-inline>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Rich Text</span>
+          <span>.umd-rich-text</span>
+        </div>
+      </div>
+      <div class="umd-rich-text umd-lock-smaller">
+        <p>
+          <strong>Bulleted List</strong>
+        </p>
+        <ul>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.<ul>
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </li>
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.<ul>
+                  <li>
+                    Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                    cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                    turpis tincidunt id aliquet risus feugiat in ante metus. Non
+                    enim praesent elementum facilisis. Sed id semper risus in
+                    hendrerit gravida rutrum quisque non. Cursus risus at
+                    ultrices mi.
+                  </li>
+                  <li>
+                    Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                    cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                    turpis tincidunt id aliquet risus feugiat in ante metus. Non
+                    enim praesent elementum facilisis. Sed id semper risus in
+                    hendrerit gravida rutrum quisque non. Cursus risus at
+                    ultrices mi.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+        </ul>
+        <p>
+          <strong>Ordered List</strong>
+        </p>
+        <ol>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.<ol>
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </li>
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.<ol>
+                  <li>
+                    Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                    cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                    turpis tincidunt id aliquet risus feugiat in ante metus. Non
+                    enim praesent elementum facilisis. Sed id semper risus in
+                    hendrerit gravida rutrum quisque non. Cursus risus at
+                    ultrices mi.
+                  </li>
+                  <li>
+                    Fusce ut placerat orci nulla pellentesque. Morbi blandit
+                    cursus risus at ultrices mi tempus imperdiet nulla. Sed
+                    turpis tincidunt id aliquet risus feugiat in ante metus. Non
+                    enim praesent elementum facilisis. Sed id semper risus in
+                    hendrerit gravida rutrum quisque non. Cursus risus at
+                    ultrices mi.
+                  </li>
+                </ol>
+              </li>
+
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </li>
+            </ol>
+          </li>
+
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+        </ol>
+        <p>
+          <strong>Mixed List</strong>
+        </p>
+        <ol>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.<ul>
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </li>
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+        </ol>
+
+        <ul>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.<ol>
+              <li>
+                Fusce ut placerat orci nolla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </li>
+              <li>
+                Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+                risus at ultrices mi tempus imperdiet nulla. Sed turpis
+                tincidunt id aliquet risus feugiat in ante metus. Non enim
+                praesent elementum facilisis. Sed id semper risus in hendrerit
+                gravida rutrum quisque non. Cursus risus at ultrices mi.
+              </li>
+            </ol>
+          </li>
+
+          <li>
+            Fusce ut placerat orci nulla pellentesque. Morbi blandit cursus
+            risus at ultrices mi tempus imperdiet nulla. Sed turpis tincidunt id
+            aliquet risus feugiat in ante metus. Non enim praesent elementum
+            facilisis. Sed id semper risus in hendrerit gravida rutrum quisque
+            non. Cursus risus at ultrices mi.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Rich Text</span>
+          <span>Contact Elements</span>
+        </div>
+        <div class="umd-rich-text">
           <h2 class="umd-sans-larger-bold">
             Mailing Address
           </h2>
@@ -499,12 +1152,17 @@
               @PresidentPines
             </a>
           </address>
+        </div>
+      </div>
+    </section>
 
-          <div class="umd-sans-large">
-            <span>Rich Text</span>
-            <span>Blockquote</span>
-          </div>
-
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Rich Text</span>
+          <span>Blockquote</span>
+        </div>
+        <div class="umd-rich-text" style="margin: 40px 0">
           <blockquote>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa
@@ -512,12 +1170,17 @@
             tincidunt id aliquet risus feugiat. Nunc pulvinar sapien et ligula.
             Quam adipiscing vitae proin sagittis.
           </blockquote>
+        </div>
+      </div>
+    </section>
 
-          <div class="umd-sans-large">
-            <span>Rich Text</span>
-            <span>Codeblock</span>
-          </div>
-
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Rich Text</span>
+          <span>Codeblock</span>
+        </div>
+        <div class="umd-rich-text" style="margin: 40px 0">
           {# prettier-ignore #}
           <pre>
 &lt;html&gt;
@@ -528,109 +1191,121 @@
     &lt;h1&gt;Hello World&lt;/h1&gt;
   &lt;/body&gt;
 &lt;/html&gt;</pre>
+        </div>
+      </div>
+    </section>
 
-          <div class="umd-sans-large">
-            <span>Rich Text</span>
-            <span>Inline code</span>
-          </div>
-
+    <section>
+      <div class="umd-lock">
+        <div class="content-heading">
+          <span>Rich Text</span>
+          <span>Inline code</span>
+        </div>
+        <div class="umd-rich-text" style="margin: 40px 0">
           <p>
             Lorem ipsum dolor
             <code>&lt;code&gt;inline code&lt;/code&gt;</code> sit amet, consectetur
             adipiscing elit.
           </p>
-
-          <div class="umd-sans-large">
-            <span>Rich Text</span>
-            <span>Table</span>
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  Header Cell 1
-                </th>
-                <th>
-                  Header Cell 2
-                </th>
-                <th>
-                  Header Cell 3
-                </th>
-                <th>
-                  Header Cell 4
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <p>
-                    Row 1: Column 1
-                  </p>
-                </td>
-                <td>
-                  Row 1: Column 2
-                </td>
-                <td>
-                  Row 1: Column 3
-                </td>
-                <td>
-                  Row 1: Column 4
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Row 2: Column 1
-                </td>
-                <td>
-                  Row 2: Column 2
-                </td>
-                <td>
-                  Row 2: Column 3
-                </td>
-                <td>
-                  Row 2: Column 4
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Row 3: Column 1
-                </td>
-                <td>
-                  Row 3: Column 2
-                </td>
-                <td>
-                  Row 3: Column 3
-                </td>
-                <td>
-                  Row 3: Column 4
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </td>
-                <td>
-                  sed do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua
-                </td>
-                <td>
-                  Massa sed elementum tempus egestas
-                </td>
-                <td>
-                  Duis ultricies lacus sed turpis tincidunt id aliquet risus
-                  feugiat
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
+    </section>
 
+    <div class="umd-lock">
+      <div class="content-heading">
+        <span>Rich Text</span>
+        <span>Table</span>
+      </div>
+      <div class="umd-rich-text">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Header Cell 1
+              </th>
+              <th>
+                Header Cell 2
+              </th>
+              <th>
+                Header Cell 3
+              </th>
+              <th>
+                Header Cell 4
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>
+                  Row 1: Column 1
+                </p>
+              </td>
+              <td>
+                Row 1: Column 2
+              </td>
+              <td>
+                Row 1: Column 3
+              </td>
+              <td>
+                Row 1: Column 4
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Row 2: Column 1
+              </td>
+              <td>
+                Row 2: Column 2
+              </td>
+              <td>
+                Row 2: Column 3
+              </td>
+              <td>
+                Row 2: Column 4
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Row 3: Column 1
+              </td>
+              <td>
+                Row 3: Column 2
+              </td>
+              <td>
+                Row 3: Column 3
+              </td>
+              <td>
+                Row 3: Column 4
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              </td>
+              <td>
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua
+              </td>
+              <td>
+                Massa sed elementum tempus egestas
+              </td>
+              <td>
+                Duis ultricies lacus sed turpis tincidunt id aliquet risus
+                feugiat
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="umd-lock">
       <div class="umd-layout-vertical-interior-child">
         <div class="umd-rich-text umd-rich-text-dark bg-black p-md">
-          <div class="umd-sans-large">
+          <div class="content-heading">
             <span style="white">Rich Text</span>
             <span>Dark background</span>
           </div>
@@ -663,7 +1338,7 @@
             <a href="#">Links are formatted to semi-bold and underlined</a>.
           </p>
 
-          <div class="umd-sans-large">
+          <div class="content-heading">
             <span>Rich Text</span>
             <span>Bulleted List</span>
           </div>
@@ -692,7 +1367,7 @@
             </li>
           </ul>
 
-          <div class="umd-sans-large">
+          <div class="content-heading">
             <span>Rich Text</span>
             <span>Ordered List</span>
           </div>
@@ -721,8 +1396,13 @@
           </ol>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="umd-lock">
       <div class="bg-black p-sm text-white">
-        <div class="umd-sans-large" style="padding-bottom: 20px">
+        <div class="content-heading" style="padding-bottom: 20px">
           <span style="white">Links within Rich Text</span>
           <span>Dark background</span>
         </div>

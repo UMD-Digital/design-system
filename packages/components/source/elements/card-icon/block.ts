@@ -36,10 +36,18 @@ const OverwriteThemeDark = `
 // prettier-ignore
 const ImageStyles = `
   .${ELEMENT_CARD_BLOCK_IMAGE} {
-    position: absolute;
-    top: -${Spacing['2xl']};
-    right: -${Spacing['2xl']};
-    height: 200px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (min-width: ${LARGE}px) {
+    .${ELEMENT_CARD_BLOCK_IMAGE} {
+      margin-bottom: ${Spacing.lg};
+    }
+  }
+
+  .${ELEMENT_CARD_BLOCK_IMAGE} * {
+    max-height: 160px;
   }
 `;
 
@@ -49,9 +57,23 @@ const WrapperStyles = `
     position: relative;
   }
 
-  @media (min-width: ${LARGE}px) {
+  @media (max-width: ${LARGE - 1}px) {
     .${ELEMENT_CARD_BLOCK_WRAPPER} {
-       padding-top: calc(200px - ${Spacing.md});
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+
+  @media (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_CARD_BLOCK_WRAPPER} > *:first-child {
+      width: 100px;
+    }
+  }
+
+  @media (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_CARD_BLOCK_WRAPPER} > *:not(:first-child) {
+      width: calc(100% - 100px);
+      padding-right: ${Spacing.md}; 
     }
   }
 `;
@@ -65,9 +87,8 @@ const STYLES_BLOCK_CARD_ICON_ELEMENT = `
   .${ELEMENT_CARD_BLOCK_CONTAINER} {
     background-color: ${Colors.gray.lightest};
     height: 100%;
-    padding: ${Spacing.md};
-    padding-top: ${Spacing.lg};
-    padding-bottom: ${Spacing.lg};
+    padding: ${Spacing.sm};
+    padding-bottom: ${Spacing.md};
     overflow: hidden;
   }
 

@@ -1,8 +1,5 @@
 {% extends '_layout.twig' %}
 {% import '_includes/content-dropdown.twig' as Dropdown %}
-{% import '_includes/macros/fields/headline.twig' as Headline %}
-{% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
-{% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
 {% import _self as macros %}
 
 {% set images = [
@@ -55,7 +52,7 @@
       <div class="umd-lock">
         <h2 class="content-heading">
           <span>Standard</span>
-          <span>Image position right</span>
+          <span>Image Position Left</span>
         </h2>
       </div>
 
@@ -66,16 +63,16 @@
           data-caption="Photo: Bob lastname" />
 
         <p slot="eyebrow">
-          {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          Eyebrow Text
         </p>
 
         <p slot="headline">
-          What does it take to change the world?
+          Headline Text
         </p>
 
         <div slot="text">
           <p>
-            {{ RichText.PathwayRichTextStringNormal() }}
+            Body Text
           </p>
         </div>
 
@@ -103,7 +100,7 @@
         </div>
 
         <p slot="headline">
-          Homecoming scarf giveaway
+          Headline Text
         </p>
 
         <div slot="start-date-iso">
@@ -120,7 +117,7 @@
 
         <div slot="text">
           <p>
-            {{ RichText.PathwayRichTextStringNormal() }}
+            Body Text
           </p>
         </div>
 
@@ -148,12 +145,12 @@
         </div>
 
         <p slot="headline">
-          Cursus fames porta nisi suscipit maecenas
+          Headline Text
         </p>
 
         <div slot="text">
           <p>
-            {{ RichText.PathwayRichTextStringNormal() }}
+            Body Text
           </p>
         </div>
 
@@ -196,8 +193,8 @@
     <section>
       <div class="umd-lock">
         <h2 class="content-heading">
-          <span class="type">Standard</span>
-          <span>Image scaling off</span>
+          <span>Standard</span>
+          <span>Image Scaling Off</span>
         </h2>
       </div>
 
@@ -207,31 +204,16 @@
         </div>
 
         <p slot="eyebrow">
-          {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          Eyebrow Text
         </p>
 
         <p slot="headline">
-          What does it take to change the world?
+          Headline Text
         </p>
 
         <div slot="text">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
-          <p>
-            Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat.
-          </p>
-          <p>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua.
+            Body Text
           </p>
         </div>
 
@@ -248,7 +230,7 @@
     <section>
       <div class="umd-lock">
         <h2 class="content-heading">
-          <span class="type">Standard</span>
+          <span>Standard</span>
           <span>Quantum Example</span>
         </h2>
       </div>
@@ -263,16 +245,7 @@
 
         <div slot="text">
           <p>
-            The Mid-Atlantic Quantum Alliance (MQA) was formally launched in
-            January 2020 to accelerate advances in quantum science and
-            engineering and further enhance the region’s primacy in a field that
-            promises to revolutionize society. This alliance brings together
-            world-leading quantum expertise from academia, industry, government
-            agencies, laboratories and research centers with a presence in the
-            region. The MQA serves as an inclusive forum, facilitated by the
-            University of Maryland, for its members to engage and collaborate
-            with each other on education, global thought leadership and building
-            a vibrant and diverse ecosystem to support quantum innovation.
+            Body Text
           </p>
         </div>
 
@@ -289,7 +262,7 @@
     <section style="padding: 50px 0; background-color: #f1f1f1;">
       <div class="umd-lock">
         <h2 class="content-heading">
-          <span class="type">Standard</span>
+          <span>Standard</span>
           <span>Theme Light</span>
         </h2>
       </div>
@@ -300,11 +273,11 @@
         </div>
 
         <p slot="eyebrow">
-          {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          Eyebrow Text
         </p>
 
         <p slot="headline">
-          What does it take to change the world?
+          Headline Text
         </p>
 
         <div slot="start-date-iso">
@@ -321,7 +294,7 @@
 
         <div slot="text">
           <p>
-            {{ RichText.PathwayRichTextStringNormal() }}
+            Body Text
           </p>
         </div>
 
@@ -338,7 +311,7 @@
     <section style="padding: 50px 0; background-color: black;">
       <div class="umd-lock">
         <h2 class="content-heading">
-          <span style="color: white;" class="type">Standard</span>
+          <span style="color: white;">Standard</span>
           <span style="color: white;">Theme Dark</span>
         </h2>
       </div>
@@ -349,11 +322,11 @@
         </div>
 
         <p slot="eyebrow">
-          {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          Eyebrow Text
         </p>
 
         <p slot="headline">
-          What does it take to change the world?
+          Headline Text
         </p>
 
         <div slot="start-date-iso">
@@ -370,20 +343,7 @@
 
         <div slot="text">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-
-          <p>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat.
+            Body Text
           </p>
         </div>
 
@@ -406,7 +366,7 @@
     <section style="padding: 100px 0; background-color: #f1f1f1;">
       <div class="umd-lock" style="margin-bottom: 100px;">
         <h2 class="content-heading">
-          <span class="type">Standard</span>
+          <span>Standard</span>
           <span>Theme Light with Intro Text</span>
         </h2>
       </div>
@@ -426,11 +386,11 @@
         </div>
 
         <p slot="eyebrow">
-          {{ Eyebrow.PathwayEyebrowStringSuccinct() }}
+          Eyebrow Text
         </p>
 
         <p slot="headline">
-          {{ Headline.TextPathwayHeadlineStringSuccinct() }}
+          Headline Text
         </p>
 
         <div slot="start-date-iso">
@@ -447,7 +407,7 @@
 
         <div slot="text">
           <p>
-            {{ RichText.PathwayRichTextStringSuccinct() }}
+            Body Text
           </p>
         </div>
 
@@ -475,8 +435,9 @@
 
     <div slot="text">
       <p>
-        {{ RichText.PathwayRichTextStringNormal() }}
-        <a href="">commodo consequat</a>.
+        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis
+        Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud
+        Quamie Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute
       </p>
       <ul>
         <li>Item 1</li>

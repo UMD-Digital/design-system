@@ -1,9 +1,6 @@
 {% extends '_layout.twig' %}
 
 {% import '_includes/content-dropdown.twig' as Dropdown %}
-{% import '_includes/macros/fields/headline.twig' as Headline %}
-{% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
-{% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
 {% import _self as macros %}
 
 {% block page %}
@@ -28,7 +25,7 @@
 
     <section>
       <div class="umd-lock">
-        <h2 class="content-heading default">
+        <h2 class="content-heading">
           <span>Highlight</span>
           <span>Light Theme</span>
         </h2>
@@ -62,19 +59,16 @@
         </p>
 
         <p slot="eyebrow">
-          {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          Eyebrow Text
         </p>
 
         <p slot="headline">
-          What does it take to change the world?
+          Headline Text
         </p>
 
         <div slot="text">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Body Text
           </p>
         </div>
 
@@ -111,19 +105,18 @@
     </p>
 
     <p slot="eyebrow">
-      {{ Eyebrow.PathwayEyebrowStringNormal() }}
+      Optional Eyebrow
     </p>
 
     <p slot="headline">
-      What does it take to change the world?
+      LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISCING
     </p>
 
     <div slot="text">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis
+        Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud
+        Quamie Quis Nostrud Quamie Amet Consectetur Adipiscing Iacut
       </p>
     </div>
 

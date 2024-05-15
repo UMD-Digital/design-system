@@ -1,9 +1,6 @@
 {% extends '_layout.twig' %}
 
 {% import '_includes/content-dropdown.twig' as Dropdown %}
-{% import '_includes/macros/fields/headline.twig' as Headline %}
-{% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
-{% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
 {% import _self as macros %}
 
 {% set images = [
@@ -11,13 +8,7 @@
   'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
   'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
   'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
-  'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
-  'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
-  'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
-  'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
-  'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
-  'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
-  'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
+  'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg'
 ] %}
 
 {% set image = random(images) %}
@@ -45,7 +36,7 @@
     <section>
       <div class="umd-lock">
         <h2 class="content-heading">
-          <span class="type">Overlay</span>
+          <span>Overlay</span>
           <span>Theme Dark</span>
         </h2>
       </div>
@@ -55,7 +46,7 @@
     <section>
       <div class="umd-lock">
         <h2 class="content-heading">
-          <span class="type">Overlay</span>
+          <span>Overlay</span>
           <span>Theme Light</span>
         </h2>
       </div>
@@ -66,11 +57,11 @@
         </div>
 
         <p slot="eyebrow">
-          {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          Eyebrow Text
         </p>
 
         <p slot="headline">
-          What does it take to change the world?
+          Headline Text
         </p>
 
         <div slot="start-date-iso">
@@ -87,7 +78,7 @@
 
         <div slot="text">
           <p>
-            {{ RichText.PathwayRichTextStringNormal() }}
+            Body Text
           </p>
         </div>
 
@@ -115,11 +106,11 @@
         </div>
 
         <p slot="eyebrow">
-          {{ Eyebrow.PathwayEyebrowStringNormal() }}
+          Eyebrow Text
         </p>
 
         <p slot="headline">
-          What does it take to change the world?
+          Headline Text
         </p>
 
         <div slot="start-date-iso">
@@ -136,7 +127,7 @@
 
         <div slot="text">
           <p>
-            {{ RichText.PathwayRichTextStringNormal() }}
+            Body Text
           </p>
         </div>
 
@@ -174,7 +165,7 @@
     </div>
 
     <p slot="eyebrow">
-      {{ Eyebrow.PathwayEyebrowStringNormal() }}
+      Optional Eyebrow
     </p>
 
     <div slot="start-date-iso">
@@ -190,24 +181,14 @@
     </div>
 
     <p slot="headline">
-      What does it take to change the world?
+      LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISCING ELIT
     </p>
 
     <div slot="text">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua.
-      </p>
-
-      <p>
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-        ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis
+        Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud
+        Quamie Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute
       </p>
     </div>
 

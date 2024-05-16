@@ -82,6 +82,7 @@ const WrapperStyles = `
 const STYLES_BLOCK_CARD_ICON_ELEMENT = `
   .${ELEMENT_CARD_BLOCK_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
+    height: 100%;
   }
 
   .${ELEMENT_CARD_BLOCK_CONTAINER} {

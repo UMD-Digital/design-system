@@ -93,6 +93,12 @@ const STYLES_BLOCK_CARD_ICON_ELEMENT = `
     overflow: hidden;
   }
 
+  @media (min-width: ${LARGE}px) {
+    .${ELEMENT_CARD_BLOCK_CONTAINER} {
+      padding: ${Spacing.md};
+    }
+  }
+
   ${ImageStyles}
   ${WrapperStyles}
   ${TextLockupSmallScaling.Styles}

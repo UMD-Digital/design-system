@@ -399,47 +399,7 @@
             </umd-element-call-to-action>
           </umd-element-card-overlay>
 
-          <umd-element-card-overlay type="image">
-            <img slot="image"
-              src="{{ GifImageOptions[2] }}"
-              alt="Example Alt Text" />
-
-            <div slot="eyebrow">
-              <p>
-                Optional Eyebrow
-              </p>
-            </div>
-
-            <h2 slot="headline">
-              <a href="https://umd.edu">
-                <span class="sr-only">Text for Screen Reader</span>
-                <span aria-hidden="false">
-                  Lorem Ipsum Dolor Sit Amet Consectetur A
-                </span>
-              </a>
-            </h2>
-
-            <div slot="text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut a
-              </p>
-            </div>
-
-            <div slot="date">
-              <date>
-                March 20, 2023
-              </date>
-            </div>
-
-            <umd-element-call-to-action slot="actions"
-              type="secondary"
-              theme="dark">
-              <a href="/"><span>Learn More</span></a>
-            </umd-element-call-to-action>
-          </umd-element-card-overlay>
+          {{ macros.exampleGif() }}
         </div>
       </div>
     </section>
@@ -481,6 +441,45 @@
       })
     }}
   </div>
+{% endmacro %}
+
+{% macro exampleGif() %}
+  <umd-element-card-overlay type="image">
+    <img slot="image" src="{{ GifImageOptions[2] }}" alt="Example Alt Text" />
+
+    <div slot="eyebrow">
+      <p>
+        Optional Eyebrow
+      </p>
+    </div>
+
+    <h2 slot="headline">
+      <a href="https://umd.edu">
+        <span class="sr-only">Text for Screen Reader</span>
+        <span aria-hidden="false">
+          Lorem Ipsum Dolor Sit Amet Consectetur A
+        </span>
+      </a>
+    </h2>
+
+    <div slot="text">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut a
+      </p>
+    </div>
+
+    <div slot="date">
+      <date>
+        March 20, 2023
+      </date>
+    </div>
+
+    <umd-element-call-to-action slot="actions" type="secondary" theme="dark">
+      <a href="/"><span>Learn More</span></a>
+    </umd-element-call-to-action>
+  </umd-element-card-overlay>
 {% endmacro %}
 
 {% macro content(params) %}

@@ -3,22 +3,6 @@
 {% import '_includes/content-dropdown.twig' as Dropdown %}
 {% import _self as macros %}
 
-{% set images = [
-  'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
-  'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
-  'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
-  'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
-  'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
-  'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
-  'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
-  'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
-  'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
-  'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
-  'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
-] %}
-
-{% set imageOne = random(images) %}
-
 {% block page %}
   {{ macros.pagecontent() }}
 {% endblock %}
@@ -45,84 +29,26 @@
             <span>List Style</span>
           </h3>
 
-          {{ macros.example() }}
-          <umd-element-article display="list">
-            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          {{ macros.displayWithOptions() }}
 
-            <p slot="headline">
-              Headline Text
-            </p>
-            <p slot="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam
-            </p>
+          {{
+            macros.displayWithOptions({
+              ctaLink: false,
+              eyebrow: false
+            })
+          }}
 
-            <p slot="date">
-              September 1, 2021
-            </p>
-          </umd-element-article>
-          <umd-element-article display="list">
-            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+          {{
+            macros.displayWithOptions({
+              ctaLink: false
+            })
+          }}
 
-            <p slot="eyebrow">
-              Eyebrow Text
-            </p>
-            <p slot="headline">
-              Headline Text
-            </p>
-            <p slot="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam
-            </p>
-
-            <p slot="date">
-              September 1, 2021
-            </p>
-
-            <div slot="actions">
-              <umd-element-call-to-action type="secondary">
-                <a href="https://google.com" aria-label="link to google">
-                  Learn More
-                </a>
-              </umd-element-call-to-action>
-            </div>
-          </umd-element-article>
-          <umd-element-article display="list">
-            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-            <p slot="eyebrow">
-              Eyebrow Text
-            </p>
-            <p slot="headline">
-              Headline Text
-            </p>
-            <div slot="text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam
-              </p>
-            </div>
-
-            <p slot="date">
-              September 1, 2021
-            </p>
-
-            <div slot="actions">
-              <umd-element-call-to-action type="secondary">
-                <a href="https://google.com" aria-label="link to google">
-                  Learn More
-                </a>
-              </umd-element-call-to-action>
-            </div>
-          </umd-element-article>
+          {{
+            macros.displayWithOptions({
+              hasEyebrow: false
+            })
+          }}
         </div>
       </div>
     </section>
@@ -135,110 +61,29 @@
             <span style="color: white;">List Style - Theme Dark</span>
           </h3>
 
-          <umd-element-article display="list" theme="dark">
-            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-            <p slot="eyebrow">
-              Eyebrow Text
-            </p>
-            <p slot="headline">
-              Headline Text
-            </p>
-            <p slot="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam
-            </p>
-
-            <p slot="date">
-              September 1, 2021
-            </p>
-
-            <div slot="actions">
-              <umd-element-call-to-action type="secondary" theme="dark">
-                <a href="https://google.com" aria-label="link to google">
-                  Learn More
-                </a>
-              </umd-element-call-to-action>
-            </div>
-          </umd-element-article>
-          <umd-element-article display="list" theme="dark">
-            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-            <p slot="headline">
-              Headline Text
-            </p>
-            <p slot="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam
-            </p>
-
-            <p slot="date">
-              September 1, 2021
-            </p>
-          </umd-element-article>
-          <umd-element-article display="list" theme="dark">
-            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-            <p slot="eyebrow">
-              Eyebrow Text
-            </p>
-            <p slot="headline">
-              Headline Text
-            </p>
-            <p slot="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam
-            </p>
-
-            <p slot="date">
-              September 1, 2021
-            </p>
-
-            <div slot="actions">
-              <umd-element-call-to-action type="secondary" theme="dark">
-                <a href="https://google.com" aria-label="link to google">
-                  Learn More
-                </a>
-              </umd-element-call-to-action>
-            </div>
-          </umd-element-article>
-          <umd-element-article display="list" theme="dark">
-            <img slot="image" src="{{ imageOne }}" alt="Image Description" />
-
-            <p slot="eyebrow">
-              Eyebrow Text
-            </p>
-            <p slot="headline">
-              <a href="google.com">Headline Text</a>
-            </p>
-            <div slot="text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam
-              </p>
-            </div>
-
-            <p slot="date">
-              September 1, 2021
-            </p>
-
-            <div slot="actions">
-              <umd-element-call-to-action type="secondary" theme="dark">
-                <a href="https://google.com" aria-label="link to google">
-                  Learn More
-                </a>
-              </umd-element-call-to-action>
-            </div>
-          </umd-element-article>
+          {{
+            macros.displayWithOptions({
+              theme: 'dark'
+            })
+          }}
+          {{
+            macros.displayWithOptions({
+              theme: 'dark',
+              eyebrow: false,
+              ctaLink: false
+            })
+          }}
+          {{
+            macros.displayWithOptions({
+              theme: 'dark'
+            })
+          }}
+          {{
+            macros.displayWithOptions({
+              theme: 'dark',
+              eyebrow: false
+            })
+          }}
         </div>
       </div>
     </section>
@@ -246,29 +91,73 @@
 {% endmacro %}
 
 {% macro example() %}
-  <umd-element-article display="list">
-    <img slot="image" src="{{ imageOne }}" alt="Image Description" />
+  {{ macros.displayWithOptions() }}
+{% endmacro %}
 
-    <p slot="eyebrow">
-      Eyebrow Text
-    </p>
-    <p slot="headline">
-      <a href="google.com">Headline Text</a>
-    </p>
-    <p slot="text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam
-    </p>
+{% macro displayWithOptions(params) %}
+  {% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
+  {% import '_includes/macros/fields/date.twig' as Date %}
 
-    <p slot="date">
-      September 1, 2021
-    </p>
+  {% set hasImage = params.image ?? true %}
+  {% set hasDate = params.date ?? true %}
+  {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasRichText = params.text ?? true %}
 
-    <div slot="actions">
-      <umd-element-call-to-action type="secondary">
-        <a href="https://google.com" aria-label="link to google">Learn More</a>
-      </umd-element-call-to-action>
-    </div>
+  {% set themeAttrs = '' %}
+
+  {% set images = [
+    'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
+    'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
+    'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
+    'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
+    'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
+    'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
+    'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
+    'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
+    'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
+    'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
+    'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
+  ] %}
+
+  {% set themeAttrs = themeAttrs ~ 'theme="' ~ params.theme ~ '"' %}
+
+  <umd-element-article {{ themeAttrs }} display="list">
+    {% if hasImage %}
+      <a slot="image" href="/" target="_blank">
+        <img src="{{ random(images) }}" alt="Example Alt Text" />
+      </a>
+    {% endif %}
+
+    {% if hasEyebrow %}
+      <p slot="eyebrow">
+        Eyebrow Text
+      </p>
+    {% endif %}
+
+    {% if hasHeadline %}
+      <h2 slot="headline">
+        Headline Text
+      </h2>
+    {% endif %}
+
+    {% if hasRichText %}
+      <p slot="text" class="umd-rich-text">
+        Rich Text
+      </p>
+    {% endif %}
+
+    {% if hasDate %}
+      {{ Date.RandomDate() }}
+    {% endif %}
+
+    {% if hasCtaLink %}
+      {{
+        CallToAction.InternalCallToAction({
+          theme: params.theme
+        })
+      }}
+    {% endif %}
   </umd-element-article>
 {% endmacro %}

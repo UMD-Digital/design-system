@@ -1,4 +1,5 @@
 {% extends '_layout.twig' %}
+
 {% import '_includes/content-dropdown.twig' as Dropdown %}
 {% import '_includes/macros/fields/headline.twig' as Headline %}
 {% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
@@ -49,37 +50,7 @@
         </h3>
       </div>
 
-      <umd-element-hero type="overlay" theme="dark">
-        <video slot="video"
-          loop=""
-          muted=""
-          webkit-playsinline=""
-          playsinline=""
-          autoplay=""
-          preload=""
-          poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
-          <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
-            type="video/mp4" />
-        </video>
-
-        <p slot="eyebrow">
-          {{ Eyebrow.EyebrowString16() }}
-        </p>
-        <p slot="headline">
-          {{ Headline.Headline30() }}
-        </p>
-        <p slot="text">
-          {{ RichText.RichText120() }}
-        </p>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="primary" theme="dark">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-hero>
+      {{ macros.exampleVideo() }}
     </section>
 
     <section>
@@ -118,6 +89,38 @@
       alt="Image Description"
       slot="image"
       data-caption="Photo: Bob lastname" />
+
+    <p slot="eyebrow">
+      {{ Eyebrow.EyebrowString16() }}
+    </p>
+    <p slot="headline">
+      {{ Headline.Headline30() }}
+    </p>
+    <p slot="text">
+      {{ RichText.RichText120() }}
+    </p>
+
+    <div slot="actions">
+      <umd-element-call-to-action type="primary" theme="dark">
+        <a href="https://google.com" aria-label="link to google">Learn More</a>
+      </umd-element-call-to-action>
+    </div>
+  </umd-element-hero>
+{% endmacro %}
+
+{% macro exampleVideo() %}
+  <umd-element-hero type="overlay" theme="dark">
+    <video slot="video"
+      loop=""
+      muted=""
+      webkit-playsinline=""
+      playsinline=""
+      autoplay=""
+      preload=""
+      poster="https://umd-admissions.transforms.svdcdn.com/production/rich-text/admissions-hero-compressed.00_00_00_00.Still001.jpg?w=1280&amp;h=720&amp;auto=compress%2Cformat&amp;fit=crop&amp;dm=1686155647&amp;s=dc3fcae2347455d4992609b4481b30f7">
+      <source src="https://servd-umd-admissions.b-cdn.net/production/videos/admissions-hero-compressed_6.mp4"
+        type="video/mp4" />
+    </video>
 
     <p slot="eyebrow">
       {{ Eyebrow.EyebrowString16() }}

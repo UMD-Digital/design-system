@@ -19,6 +19,7 @@ const ELEMENT_CARD_BLOCK_CONTAINER = 'card-block-container';
 const STYLES_BLOCK_CARD_ELEMENT = `
   .${ELEMENT_CARD_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
+    height: 100%;
   }
 
   ${TextLockupSmallScaling.Styles}

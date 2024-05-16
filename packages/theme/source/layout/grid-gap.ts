@@ -4,23 +4,11 @@ const {
   GridColumnsBaseWithGap,
   GridColumnsThreeWithGap,
   GridColumnsFourWithGap,
+  GridColumnsThreeWithGapLarge,
+  GridColumnsFourWithGapLarge,
   GridColumnAndRowsMobileTablet,
 } = Layout;
 const { Queries, Spacing } = Tokens;
-
-const GridColumnsStandard = {
-  '.umd-grid-gap': {
-    ...GridColumnsBaseWithGap,
-  },
-
-  '.umd-grid-gap-three': {
-    ...GridColumnsThreeWithGap,
-  },
-
-  '.umd-grid-gap-four': {
-    ...GridColumnsFourWithGap,
-  },
-};
 
 const GridColumnsStacked = {
   display: 'grid',
@@ -124,8 +112,21 @@ const MasonryGrid = {
 };
 
 export default {
-  ...GridColumnsStandard,
-
+  '.umd-grid-gap': {
+    ...GridColumnsBaseWithGap,
+  },
+  '.umd-grid-gap-three': {
+    ...GridColumnsThreeWithGap,
+  },
+  '.umd-grid-gap-four': {
+    ...GridColumnsFourWithGap,
+  },
+  '.umd-grid-gap-three-large': {
+    ...GridColumnsThreeWithGapLarge,
+  },
+  '.umd-grid-gap-four-large': {
+    ...GridColumnsFourWithGapLarge,
+  },
   '.umd-grid-featured-card': {
     ...GridColumnsFeatured,
   },

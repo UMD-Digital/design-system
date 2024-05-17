@@ -90,10 +90,6 @@
   </section>
 {% endmacro %}
 
-{% macro example() %}
-  {{ macros.displayWithOptions() }}
-{% endmacro %}
-
 {% macro displayWithOptions(params) %}
   {% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
   {% import '_includes/macros/fields/date.twig' as Date %}

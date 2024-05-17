@@ -220,19 +220,15 @@ const ContentOptionsWithJS = () => {
     'content-variation-js',
   ) as HTMLSelectElement | null;
 
-  if (!dropdown) return;
-
   const UpdateSlotContent = () => {
-    const type = dropdown.value;
+    const type = dropdown ? dropdown.value : DROPDOWN_NORMAL;
     HeadlineSlot({ type });
     RichTextSlot({ type });
     Eyebrow({ type });
   };
 
   if (dropdown) {
-    dropdown.addEventListener('change', () => {
-      UpdateSlotContent();
-    });
+    dropdown.addEventListener('change', UpdateSlotContent);
   }
 
   UpdateSlotContent();

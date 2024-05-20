@@ -3,12 +3,6 @@
 {% import '_includes/content-dropdown.twig' as Dropdown %}
 {% import _self as macros %}
 
-{% set GifImageOptions = [
-  'https://umd-today.files.svdcdn.com/production/gifs/music_collage.gif_1920x1080.gif?dm=1707945389',
-  'https://umd-today.files.svdcdn.com/production/gifs/ezgif.com-optimize.gif?dm=1694719244',
-  'https://umd-today.files.svdcdn.com/production/gifs/MT-Accolades_23-04_v4.gif?dm=1680887361'
-] %}
-
 {% block page %}
   {{ macros.pagecontent() }}
 {% endblock %}
@@ -34,8 +28,7 @@
         </h3>
         <div class="umd-grid-gap-three">
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               date: false
             })
           }}
@@ -51,8 +44,7 @@
         </div>
         <div class="umd-grid-gap-three">
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               date: false,
               text: false,
               eyebrow: false,
@@ -70,12 +62,7 @@
           <span>Optional Date</span>
         </div>
         <div class="umd-grid-gap-three">
-          {{
-            macros.content({
-              image: true,
-              date: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -88,22 +75,24 @@
         </div>
         <div class="umd-grid-gap-three">
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
+              image: false,
               ctaLink: false,
               ctaOption: 'external'
             })
           }}
 
           {{
-            macros.content({
+            macros.displayWithOptions({
+              image: false,
               ctaOption: 'download',
               ctaLink: false
             })
           }}
 
           {{
-            macros.content({
+            macros.displayWithOptions({
+              image: false,
               theme: 'dark',
               ctaLink: false,
               ctaOption: 'internal'
@@ -121,10 +110,9 @@
         </div>
         <div class="umd-grid-gap-three">
           {{
-            macros.content({
+            macros.displayWithOptions({
               theme: 'dark',
-              eyebrow: true,
-              date: true
+              image: false
             })
           }}
         </div>
@@ -139,10 +127,8 @@
         </div>
         <div class="umd-grid-gap-three">
           {{
-            macros.content({
-              theme: 'light',
-              eyebrow: true,
-              date: true
+            macros.displayWithOptions({
+              image: false
             })
           }}
         </div>
@@ -158,22 +144,19 @@
 
         <div class="umd-grid-three">
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               sizeBig: true
             })
           }}
 
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               sizeBig: true
             })
           }}
 
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               sizeBig: true
             })
           }}
@@ -190,29 +173,25 @@
 
         <div class="umd-grid-four">
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               sizeBig: true
             })
           }}
 
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               sizeBig: true
             })
           }}
 
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               sizeBig: true
             })
           }}
 
           {{
-            macros.content({
-              image: true,
+            macros.displayWithOptions({
               sizeBig: true
             })
           }}
@@ -228,23 +207,11 @@
         </div>
 
         <div class="umd-grid-gap-three">
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
 
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
 
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -257,29 +224,13 @@
         </div>
 
         <div class="umd-grid-gap-four">
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
 
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
 
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
 
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -292,17 +243,9 @@
         </div>
 
         <div class="umd-grid-gap">
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
 
-          {{
-            macros.content({
-              image: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -315,180 +258,30 @@
         </div>
 
         <div class="umd-grid-gap-three">
-          <umd-element-card-overlay type="image">
-            <img slot="image"
-              src="{{ GifImageOptions[0] }}"
-              alt="Example Alt Text" />
-
-            <div slot="eyebrow">
-              <p>
-                Optional Eyebrow
-              </p>
-            </div>
-
-            <h2 slot="headline">
-              <a href="https://umd.edu">
-                <span class="sr-only">Text for Screen Reader</span>
-                <span aria-hidden="false">
-                  Lorem Ipsum Dolor Sit Amet Consectetur A
-                </span>
-              </a>
-            </h2>
-
-            <div slot="text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut a
-              </p>
-            </div>
-
-            <div slot="date">
-              <date>
-                June 21, 2024
-              </date>
-            </div>
-
-            <umd-element-call-to-action slot="actions"
-              type="secondary"
-              theme="dark">
-              <a href="/"><span>Learn More</span></a>
-            </umd-element-call-to-action>
-          </umd-element-card-overlay>
-
-          <umd-element-card-overlay type="image">
-            <img slot="image"
-              src="{{ GifImageOptions[1] }}"
-              alt="Example Alt Text" />
-
-            <div slot="eyebrow">
-              <p>
-                Optional Eyebrow
-              </p>
-            </div>
-
-            <h2 slot="headline">
-              <a href="https://umd.edu">
-                <span class="sr-only">Text for Screen Reader</span>
-                <span aria-hidden="false">
-                  Lorem Ipsum Dolor Sit Amet Consectetur A
-                </span>
-              </a>
-            </h2>
-
-            <div slot="text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut a
-              </p>
-            </div>
-
-            <div slot="date">
-              <date>
-                March 20, 2023
-              </date>
-            </div>
-
-            <umd-element-call-to-action slot="actions"
-              type="secondary"
-              theme="dark">
-              <a href="/"><span>Learn More</span></a>
-            </umd-element-call-to-action>
-          </umd-element-card-overlay>
-
-          {{ macros.exampleGif() }}
+          {{
+            macros.displayWithOptions({
+              gif: true
+            })
+          }}
+          {{
+            macros.displayWithOptions({
+              gif: true
+            })
+          }}
+          {{
+            macros.displayWithOptions({
+              gif: true
+            })
+          }}
         </div>
       </div>
     </section>
   </section>
 {% endmacro %}
 
-{% macro example() %}
-  {{
-    macros.content({
-      image: true,
-      ctaLink: false,
-      ctaOption: 'external'
-    })
-  }}
-{% endmacro %}
-
-{% macro examplegrouped() %}
-  <div class="umd-grid-gap-three">
-    {{
-      macros.content({
-        image: true,
-        ctaLink: false,
-        ctaOption: 'external'
-      })
-    }}
-
-    {{
-      macros.content({
-        ctaOption: 'download',
-        ctaLink: false
-      })
-    }}
-
-    {{
-      macros.content({
-        theme: 'dark',
-        ctaLink: false,
-        ctaOption: 'internal'
-      })
-    }}
-  </div>
-{% endmacro %}
-
-{% macro exampleGif() %}
-  <umd-element-card-overlay type="image">
-    <img slot="image" src="{{ GifImageOptions[2] }}" alt="Example Alt Text" />
-
-    <div slot="eyebrow">
-      <p>
-        Optional Eyebrow
-      </p>
-    </div>
-
-    <h2 slot="headline">
-      <a href="https://umd.edu">
-        <span class="sr-only">Text for Screen Reader</span>
-        <span aria-hidden="false">
-          Lorem Ipsum Dolor Sit Amet Consectetur A
-        </span>
-      </a>
-    </h2>
-
-    <div slot="text">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut a
-      </p>
-    </div>
-
-    <div slot="date">
-      <date>
-        March 20, 2023
-      </date>
-    </div>
-
-    <umd-element-call-to-action slot="actions" type="secondary" theme="dark">
-      <a href="/"><span>Learn More</span></a>
-    </umd-element-call-to-action>
-  </umd-element-card-overlay>
-{% endmacro %}
-
-{% macro content(params) %}
-  {% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
-  {% import '_includes/macros/fields/headline.twig' as Headline %}
-  {% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
+{% macro displayWithOptions(params) %}
   {% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
   {% import '_includes/macros/fields/date.twig' as Date %}
-  {% set url = params.url ?? 'https://umd.edu' %}
 
   {% set images = [
     'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
@@ -504,42 +297,65 @@
     'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
   ] %}
 
+  {% set GifImageOptions = [
+    'https://umd-today.files.svdcdn.com/production/gifs/music_collage.gif_1920x1080.gif?dm=1707945389',
+    'https://umd-today.files.svdcdn.com/production/gifs/ezgif.com-optimize.gif?dm=1694719244',
+    'https://umd-today.files.svdcdn.com/production/gifs/MT-Accolades_23-04_v4.gif?dm=1680887361'
+  ] %}
+
   {% set attrs = '' %}
 
+  {% set hasImage = params.image ?? true %}
+  {% set hasGif = params.gif ?? false %}
   {% set hasEyebrow = params.eyebrow ?? true %}
   {% set hasHeadline = params.headline ?? true %}
+  {% set hasHeadlineLink = params.headlineLink ?? true %}
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasRichText = params.text ?? true %}
   {% set isSizeBig = params.sizeBig ?? false %}
 
-  {% if params.theme == 'dark' %}
-    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
-  {% endif %}
+  {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
 
   {% if isSizeBig %}
     {% set attrs = attrs ~ 'class="size-large"' %}
   {% endif %}
 
-  {% if params.image %}
+  {% if hasImage %}
     {% set attrs = attrs ~ 'type="image"' %}
   {% endif %}
 
   <umd-element-card-overlay {{ attrs }}>
-    {% if params.image %}
+    {% if hasImage %}
+      {% if hasGif %}
+        <img slot="image"
+          src="{{ random(GifImageOptions) }}"
+          alt="Example Alt Text" />
+      {% endif %}
+
       <img slot="image" src="{{ random(images) }}" alt="Example Alt Text" />
     {% endif %}
 
     {% if hasEyebrow %}
-      {{ Eyebrow.EyebrowNormal() }}
+      <p slot="eyebrow">
+        Eyebrow Text
+      </p>
     {% endif %}
 
     {% if hasHeadline %}
-      {{ Headline.OverlayHeadlineNormal() }}
+      <h2 slot="headline">
+        {% if hasHeadlineLink %}
+          <a href="/">Headline Text</a>
+        {% else %}
+          Headline Text
+        {% endif %}
+      </h2>
     {% endif %}
 
     {% if hasRichText %}
-      {{ RichText.OverlayRichTextNormal() }}
+      <p slot="text" class="umd-rich-text">
+        Rich Text
+      </p>
     {% endif %}
 
     {% if hasDate %}
@@ -547,7 +363,7 @@
     {% endif %}
 
     {% if hasCtaLink %}
-      {% if params.image %}
+      {% if hasImage %}
         {{
           CallToAction.InternalCallToAction({
             theme: 'dark'
@@ -556,7 +372,7 @@
       {% else %}
         {{
           CallToAction.InternalCallToAction({
-            theme: params.theme == 'dark' ? 'dark' : 'light'
+            theme: params.theme
           })
         }}
       {% endif %}
@@ -564,7 +380,7 @@
 
     {% if params.ctaOption %}
       {% if params.ctaOption == 'download' %}
-        <a href="{{ url }}"
+        <a href="/"
           rel="noopener noreferrer"
           download
           slot="cta-icon"
@@ -574,7 +390,7 @@
       {% endif %}
 
       {% if params.ctaOption == 'external' %}
-        <a href="{{ url }}"
+        <a href="/"
           rel="noopener noreferrer"
           target="_blank"
           slot="cta-icon"
@@ -584,7 +400,7 @@
       {% endif %}
 
       {% if params.ctaOption == 'internal' %}
-        <a href="{{ url }}"
+        <a href="/"
           rel="noopener noreferrer"
           slot="cta-icon"
           aria-label="example label">

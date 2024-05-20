@@ -91,7 +91,24 @@
           <a href="{{ _self.GetChildUrl() }}article">View More Examples</a>
         </div>
 
-        {{ Article.example() }}
+        <div class="umd-grid-gap-three" style="margin-top: 24px">
+          {{
+            Article.displayWithOptions({
+              ctaLink: false
+            })
+          }}
+          {{
+            Article.displayWithOptions({
+              ctaLink: false
+            })
+          }}
+          {{
+            Article.displayWithOptions({
+              ctaLink: false,
+              headlineLink: false
+            })
+          }}
+        </div>
       </div>
     </section>
 
@@ -101,7 +118,24 @@
           <span>Card</span>
           <a href="{{ _self.GetChildUrl() }}card">View More Examples</a>
         </div>
-        {{ Card.examplegrouped() }}
+        <div class="umd-grid-gap-three">
+          {{
+            Card.displayWithOptions({
+              ctaLink: false
+            })
+          }}
+          {{
+            Card.displayWithOptions({
+              ctaLink: false,
+              headlineLink: false
+            })
+          }}
+          {{
+            Card.displayWithOptions({
+              ctaLink: false
+            })
+          }}
+        </div>
       </div>
     </section>
 
@@ -112,7 +146,15 @@
           <a href="{{ _self.GetChildUrl() }}card-icon">View More Examples</a>
         </div>
 
-        {{ CardIcon.examplegrouped() }}
+        <div class="umd-grid-gap-three">
+          {{
+            CardIcon.displayWithOptions({
+              headlineLink: false
+            })
+          }}
+          {{ CardIcon.displayWithOptions() }}
+          {{ CardIcon.displayWithOptions() }}
+        </div>
       </div>
     </section>
 
@@ -123,7 +165,33 @@
           <a href="{{ _self.GetChildUrl() }}card-overlay">View More Examples</a>
         </div>
 
-        {{ CardOverlay.examplegrouped() }}
+        <div class="umd-grid-gap-three">
+          {{
+            CardOverlay.displayWithOptions({
+              image: false,
+              ctaLink: false,
+              ctaOption: 'external'
+            })
+          }}
+
+          {{
+            CardOverlay.displayWithOptions({
+              image: false,
+              ctaOption: 'download',
+              ctaLink: false
+            })
+          }}
+
+          {{
+            CardOverlay.displayWithOptions({
+              image: false,
+              theme: 'dark',
+              ctaLink: false,
+              ctaOption: 'internal',
+              headlineLink: false
+            })
+          }}
+        </div>
       </div>
     </section>
 
@@ -150,7 +218,7 @@
           </a>
         </h3>
         <div class="umd-grid-gap" style="margin-top: 24px">
-          {{ EventFeatured.example() }}
+          {{ EventFeatured.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -162,7 +230,7 @@
           <a href="{{ _self.GetChildUrl() }}event-promo">View More Examples</a>
         </h3>
         <div class="umd-grid-gap" style="margin-top: 24px">
-          {{ EventPromo.example() }}
+          {{ EventPromo.displayWithOptions() }}
         </div>
       </div>
     </section>

@@ -1,8 +1,6 @@
 {% extends '_layout.twig' %}
 
 {% import '_includes/content-dropdown.twig' as Dropdown %}
-{% import '_includes/macros/fields/headline.twig' as Headline %}
-{% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
 {% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
 {% import '../blocks/card-overlay.twig' as CardOverlay %}
 {% import _self as macros %}
@@ -45,41 +43,43 @@
           </div>
         </div>
         <umd-element-carousel-cards resize>
-          {{ Headline.CarouselHeadlineNormal() }}
+          <h2 slot="headline">
+            Headline Text
+          </h2>
 
           <div slot="cards">
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 theme: 'dark'
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 theme: 'dark'
               })
             }}
@@ -96,9 +96,13 @@
         </div>
 
         <umd-element-carousel-cards resize>
-          {{ Headline.CarouselHeadlineNormal() }}
+          <h2 slot="headline">
+            Headline Text
+          </h2>
 
-          {{ RichText.CardRichTextNormal() }}
+          <p slot="text" class="umd-rich-text">
+            Rich Text
+          </p>
 
           {{
             CallToAction.InternalCallToAction({
@@ -108,13 +112,13 @@
 
           <div slot="cards">
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
@@ -141,41 +145,43 @@
           </div>
         </div>
         <umd-element-carousel-cards resize>
-          {{ Headline.CarouselHeadlineSuccinct() }}
+          <h2 slot="headline">
+            Headline Text
+          </h2>
 
           <div slot="cards">
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 theme: 'dark'
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 theme: 'dark'
               })
             }}
@@ -192,9 +198,13 @@
         </div>
 
         <umd-element-carousel-cards resize>
-          {{ Headline.CarouselHeadlineSuccinct() }}
+          <h2 slot="headline">
+            Headline Text
+          </h2>
 
-          {{ RichText.CardRichTextSuccinct() }}
+          <p slot="text" class="umd-rich-text">
+            Rich Text
+          </p>
 
           {{
             CallToAction.InternalCallToAction({
@@ -204,13 +214,13 @@
 
           <div slot="cards">
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
@@ -237,41 +247,43 @@
           </div>
         </div>
         <umd-element-carousel-cards resize>
-          {{ Headline.CarouselHeadlineVerbose() }}
+          <h2 slot="headline">
+            Headline Text
+          </h2>
 
           <div slot="cards">
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 theme: 'dark'
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 theme: 'dark'
               })
             }}
@@ -288,7 +300,9 @@
         </div>
 
         <umd-element-carousel-cards resize>
-          {{ Headline.CarouselHeadlineVerbose() }}
+          <h2 slot="headline">
+            Headline Text
+          </h2>
 
           {{ RichText.CardRichTextVerbose() }}
 
@@ -300,13 +314,13 @@
 
           <div slot="cards">
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
 
             {{
-              CardOverlay.content({
+              CardOverlay.displayWithOptions({
                 image: true
               })
             }}
@@ -319,9 +333,13 @@
 
 {% macro example() %}
   <umd-element-carousel-cards resize>
-    {{ Headline.CarouselHeadlineSuccinct() }}
+    <h2 slot="headline">
+      Headline Text
+    </h2>
 
-    {{ RichText.CardRichTextSuccinct() }}
+    <p slot="text" class="umd-rich-text">
+      Rich Text
+    </p>
 
     {{
       CallToAction.InternalCallToAction({
@@ -331,37 +349,37 @@
 
     <div slot="cards">
       {{
-        CardOverlay.content({
+        CardOverlay.displayWithOptions({
           image: true
         })
       }}
 
       {{
-        CardOverlay.content({
+        CardOverlay.displayWithOptions({
           image: true
         })
       }}
 
       {{
-        CardOverlay.content({
+        CardOverlay.displayWithOptions({
           theme: 'dark'
         })
       }}
 
       {{
-        CardOverlay.content({
+        CardOverlay.displayWithOptions({
           image: true
         })
       }}
 
       {{
-        CardOverlay.content({
+        CardOverlay.displayWithOptions({
           image: true
         })
       }}
 
       {{
-        CardOverlay.content({
+        CardOverlay.displayWithOptions({
           theme: 'dark'
         })
       }}

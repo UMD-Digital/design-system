@@ -18,10 +18,10 @@
       <section>
         <div class="umd-lock">
           <h3 class="content-heading">
-            <span>Display Promo</span>
+            Display Promo
           </h3>
           <div style="margin-top: 24px">
-            {{ macros.example() }}
+            {{ macros.displayWithOptions() }}
           </div>
         </div>
       </section>
@@ -33,43 +33,11 @@
             <span>Multi Day</span>
           </h3>
           <div style="margin-top: 24px">
-            <umd-element-event display="promo">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&h=1080&auto=compress%2Cformat&fit=crop&dm=1658178350&s=ac382dd343b5fa928647cfd0542dad28"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-13T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="dark">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
+            {{
+              macros.displayWithOptions({
+                multiDay: true
+              })
+            }}
           </div>
         </div>
       </section>
@@ -81,43 +49,7 @@
             <span style="color: white">Theme Dark</span>
           </h3>
           <div style="margin-top: 24px">
-            <umd-element-event display="promo">
-              <a slot="image" href="https://umd.edu" target="_blank">
-                <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&h=1080&auto=compress%2Cformat&fit=crop&dm=1658178350&s=ac382dd343b5fa928647cfd0542dad28"
-                  alt="Example Alt Text" />
-              </a>
-
-              <h2 slot="headline">
-                <a href="https://umd.edu">
-                  The 47th Annual Maryland Leadership Conference
-                </a>
-              </h2>
-
-              <div slot="text">
-                <p>
-                  The 47th Annual Maryland Leadership Conference is a FREE,
-                  half-day experience that is open to all UMD students.
-                </p>
-              </div>
-
-              <div slot="start-date-iso">
-                2024-04-12T12:00:00.000Z
-              </div>
-
-              <div slot="end-date-iso">
-                2024-04-12T17:30:00.000Z
-              </div>
-
-              <div slot="location">
-                Adele H. Stamp Student Union
-              </div>
-
-              <umd-element-call-to-action slot="actions"
-                type="secondary"
-                theme="dark">
-                <a href="/"><span>Learn More</span></a>
-              </umd-element-call-to-action>
-            </umd-element-event>
+            {{ macros.displayWithOptions() }}
           </div>
         </div>
       </section>
@@ -125,40 +57,63 @@
   </div>
 {% endmacro %}
 
-{% macro example() %}
+{% macro displayWithOptions(params) %}
+  {% set hasImage = params.image ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set isMultiDay = params.multiDay ?? false %}
+  {% set hasCtaLink = params.ctaLink ?? true %}
+  {% set hasRichText = params.text ?? true %}
+  {% set hasLocation = params.location ?? true %}
+
   <umd-element-event display="promo">
-    <a slot="image" href="https://umd.edu" target="_blank">
-      <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&h=1080&auto=compress%2Cformat&fit=crop&dm=1658178350&s=ac382dd343b5fa928647cfd0542dad28"
-        alt="Example Alt Text" />
-    </a>
-
-    <h2 slot="headline">
-      <a href="https://umd.edu">
-        The 47th Annual Maryland Leadership Conference
+    {% if hasImage %}
+      <a slot="image" href="https://umd.edu" target="_blank">
+        <img src="https://optimise2.assets-servd.host/umd-calendar/production/placeholders/placeholder-2.jpg?w=1920&h=1080&auto=compress%2Cformat&fit=crop&dm=1658178350&s=ac382dd343b5fa928647cfd0542dad28"
+          alt="Example Alt Text" />
       </a>
-    </h2>
+    {% endif %}
 
-    <div slot="text">
-      <p>
-        The 47th Annual Maryland Leadership Conference is a FREE, half-day
-        experience that is open to all UMD students.
-      </p>
-    </div>
+    {% if hasHeadline %}
+      <h2 slot="headline">
+        <a href="https://umd.edu">
+          The 47th Annual Maryland Leadership Conference
+        </a>
+      </h2>
+    {% endif %}
+
+    {% if hasRichText %}
+      <div slot="text">
+        <p>
+          The 47th Annual Maryland Leadership Conference is a FREE, half-day
+          experience that is open to all UMD students.
+        </p>
+      </div>
+    {% endif %}
 
     <div slot="start-date-iso">
       2024-04-12T12:00:00.000Z
     </div>
 
-    <div slot="end-date-iso">
-      2024-04-12T17:30:00.000Z
-    </div>
+    {% if isMultiDay %}
+      <div slot="end-date-iso">
+        2024-04-13T17:30:00.000Z
+      </div>
+    {% else %}
+      <div slot="end-date-iso">
+        2024-04-12T17:30:00.000Z
+      </div>
+    {% endif %}
 
-    <div slot="location">
-      Adele H. Stamp Student Union
-    </div>
+    {% if hasLocation %}
+      <div slot="location">
+        Adele H. Stamp Student Union
+      </div>
+    {% endif %}
 
-    <umd-element-call-to-action slot="actions" type="secondary" theme="dark">
-      <a href="/"><span>Learn More</span></a>
-    </umd-element-call-to-action>
+    {% if hasCtaLink %}
+      <umd-element-call-to-action slot="actions" type="secondary" theme="dark">
+        <a href="/"><span>Learn More</span></a>
+      </umd-element-call-to-action>
+    {% endif %}
   </umd-element-event>
 {% endmacro %}

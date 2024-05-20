@@ -27,7 +27,7 @@
           Default
         </h3>
         <div class="umd-grid-gap-three">
-          {{ macros.content() }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -39,9 +39,8 @@
         </h3>
         <div class="umd-grid-gap-three">
           {{
-            macros.content({
-              theme: 'dark',
-              text: true
+            macros.displayWithOptions({
+              theme: 'dark'
             })
           }}
         </div>
@@ -127,35 +126,9 @@
           <span>Layout with options</span>
         </h3>
         <div class="umd-grid-gap-three">
-          {{ macros.content() }}
-
-          <umd-element-card-icon>
-            <img slot="image"
-              src="/card-icon-dark.svg"
-              alt="Example Alt Text" />
-
-            <h2 slot="headline">
-              Headline
-            </h2>
-
-            <h2 slot="text">
-              Text
-            </h2>
-          </umd-element-card-icon>
-
-          <umd-element-card-icon>
-            <img slot="image"
-              src="/card-icon-dark.svg"
-              alt="Example Alt Text" />
-
-            <h2 slot="headline">
-              Headline
-            </h2>
-
-            <h2 slot="text">
-              Text
-            </h2>
-          </umd-element-card-icon>
+          {{ macros.displayWithOptions() }}
+          {{ macros.displayWithOptions() }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -168,63 +141,28 @@
         </h3>
         <div class="umd-grid-gap-three">
           {{
-            macros.content({
-              theme: 'dark',
-              text: true
+            macros.displayWithOptions({
+              theme: 'dark'
             })
           }}
-
-          <umd-element-card-icon theme="dark">
-            <img slot="image"
-              src="/card-icon-light.svg"
-              alt="Example Alt Text" />
-
-            <h2 slot="headline">
-              Headline
-            </h2>
-
-            <h2 slot="text">
-              Text
-            </h2>
-          </umd-element-card-icon>
-
-          <umd-element-card-icon theme="dark">
-            <img slot="image"
-              src="/card-icon-light.svg"
-              alt="Example Alt Text" />
-
-            <h2 slot="headline">
-              Headline
-            </h2>
-
-            <h2 slot="text">
-              Text
-            </h2>
-          </umd-element-card-icon>
+          {{
+            macros.displayWithOptions({
+              theme: 'dark'
+            })
+          }}
+          {{
+            macros.displayWithOptions({
+              theme: 'dark',
+              headlineLink: false
+            })
+          }}
         </div>
       </div>
     </section>
   </div>
 {% endmacro %}
 
-{% macro example() %}
-  {{
-    macros.content({
-      theme: 'light',
-      text: true
-    })
-  }}
-{% endmacro %}
-
-{% macro examplegrouped() %}
-  <div class="umd-grid-gap-three">
-    {{ macros.example() }}
-    {{ macros.example() }}
-    {{ macros.example() }}
-  </div>
-{% endmacro %}
-
-{% macro content(params) %}
+{% macro displayWithOptions(params) %}
   {% import '_includes/macros/fields/headline.twig' as Headline %}
   {% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
 
@@ -236,19 +174,32 @@
 
   {% set attrs = '' %}
 
+  {% set hasImage = params.image ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasHeadlineLink = params.headlineLink ?? true %}
   {% set hasRichText = params.text ?? true %}
 
-  {% if params.theme == 'dark' %}
-    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
-  {% endif %}
+  {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
 
   <umd-element-card-icon {{ attrs }}>
-    <img slot="image" src="{{ image }}" alt="Example Alt Text" />
+    {% if hasImage %}
+      <img slot="image" src="{{ image }}" alt="Example Alt Text" />
+    {% endif %}
 
-    {{ Headline.OverlayHeadlineNormal() }}
+    {% if hasHeadline %}
+      <h2 slot="headline">
+        {% if hasHeadlineLink %}
+          <a href="/">Headline Text</a>
+        {% else %}
+          Headline Text
+        {% endif %}
+      </h2>
+    {% endif %}
 
     {% if hasRichText %}
-      {{ RichText.OverlayRichTextNormal() }}
+      <p slot="text" class="umd-rich-text">
+        Rich Text
+      </p>
     {% endif %}
   </umd-element-card-icon>
 {% endmacro %}

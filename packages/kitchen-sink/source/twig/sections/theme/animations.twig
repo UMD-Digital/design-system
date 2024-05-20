@@ -108,7 +108,11 @@
         </div>
 
         <div class="umd-grid-gap-three">
-          {{ CardOverlay.exampleGif() }}
+          {{
+            CardOverlay.displayWithOptions({
+              gif: true
+            })
+          }}
         </div>
       </div>
     </section>

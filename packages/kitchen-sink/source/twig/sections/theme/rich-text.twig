@@ -1,5 +1,7 @@
 {% extends '../../_layout.twig' %}
 
+{% import 'sections/components/blocks/card.twig' as Card %}
+
 {% block page %}
   <div style="padding-bottom: 100px;">
     <section>
@@ -541,83 +543,8 @@
         </h3>
 
         <div class="umd-grid-gap">
-          <umd-element-card>
-            <a slot="image"
-              href="https://umd.edu"
-              target="_blank"
-              data-caption="Lorem ipsum dolor">
-              <img src="/rich-text-image-3.jpg" alt="Example Alt Text" />
-            </a>
-
-            <div slot="eyebrow">
-              <p>
-                Optional Eyebrow
-              </p>
-            </div>
-
-            <h2 slot="headline">
-              <a href="https://umd.edu">
-                <span class="sr-only">Text for Screen Reader</span>
-                <span aria-hidden="true">
-                  Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing
-                </span>
-              </a>
-            </h2>
-
-            <div slot="text">
-              <p>
-                <strong>Duis reprehen</strong>
-                <i>eu fugiat</i>.
-                <a href="https://umd.edu">
-                  <span class="sr-only">Text for Screen Reader</span>
-                  <span aria-hidden="true">Excepteur occaecat</span>
-                </a> voluptate. dolore magna aliqua.
-              </p>
-            </div>
-
-            <umd-element-call-to-action slot="actions"
-              type="secondary"
-              theme="light">
-              <a href="/"><span>Learn More</span></a>
-            </umd-element-call-to-action>
-          </umd-element-card>
-
-          <umd-element-card>
-            <a slot="image"
-              href="https://umd.edu"
-              target="_blank"
-              data-caption="Lorem ipsum dolor">
-              <img src="/rich-text-image-4.jpg" alt="Example Alt Text" />
-            </a>
-
-            <div slot="eyebrow">
-              <p>
-                Optional Eyebrow
-              </p>
-            </div>
-
-            <h2 slot="headline">
-              <a href="https://umd.edu">
-                <span class="sr-only">Text for Screen Reader</span>
-                <span aria-hidden="true">
-                  Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing
-                </span>
-              </a>
-            </h2>
-
-            <div slot="text">
-              <p>
-                Rorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-
-            <umd-element-call-to-action slot="actions"
-              type="secondary"
-              theme="light">
-              <a href="/"><span>Learn More</span></a>
-            </umd-element-call-to-action>
-          </umd-element-card>
+          {{ Card.displayWithOptions() }}
+          {{ Card.displayWithOptions() }}
         </div>
 
         <umd-element-card display="list">

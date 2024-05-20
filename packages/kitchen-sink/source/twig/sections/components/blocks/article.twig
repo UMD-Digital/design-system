@@ -27,12 +27,7 @@
           Default
         </h3>
         <div class="umd-grid-gap-four" style="margin-top: 24px">
-          {{
-            macros.content({
-              image: true,
-              date: true
-            })
-          }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -45,11 +40,8 @@
         </div>
         <div class="umd-grid-gap-four" style="margin-top: 24px">
           {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: true,
-              date: true
+            macros.displayWithOptions({
+              border: true
             })
           }}
         </div>
@@ -63,35 +55,7 @@
           <span>Aligned</span>
         </div>
         <div class="umd-grid-gap-four" style="margin-top: 24px">
-          {{
-            macros.content({
-              image: true,
-              date: true,
-              aligned: true,
-              border: false
-            })
-          }}
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="umd-lock">
-        <div class="content-heading">
-          <span>Field Options</span>
-          <span>Required Only</span>
-        </div>
-        <div class="umd-grid-gap-four" style="margin-top: 24px">
-          {{
-            macros.content({
-              date: true,
-              aligned: false,
-              border: false,
-              eyebrow: false,
-              ctaLink: false,
-              text: false
-            })
-          }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -104,11 +68,7 @@
         </div>
         <div class="umd-grid-gap-four" style="margin-top: 24px">
           {{
-            macros.content({
-              image: true,
-              date: true,
-              aligned: true,
-              border: false,
+            macros.displayWithOptions({
               eyebrow: false,
               ctaLink: false,
               text: false
@@ -126,9 +86,7 @@
         </div>
         <div class="umd-grid-gap-four" style="margin-top: 24px">
           {{
-            macros.content({
-              image: true,
-              aligned: true,
+            macros.displayWithOptions({
               theme: 'dark'
             })
           }}
@@ -144,29 +102,17 @@
         </div>
         <div class="umd-grid-gap-three" style="margin-top: 24px">
           {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false,
-              date: true,
+            macros.displayWithOptions({
               ctaLink: false
             })
           }}
           {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false,
-              date: true,
+            macros.displayWithOptions({
               ctaLink: false
             })
           }}
           {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false,
-              date: true,
+            macros.displayWithOptions({
               ctaLink: false
             })
           }}
@@ -181,34 +127,10 @@
           <span>Grouping (4)</span>
         </div>
         <div class="umd-grid-gap-four" style="margin-top: 24px">
-          {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false
-            })
-          }}
-          {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false
-            })
-          }}
-          {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false
-            })
-          }}
-          {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false
-            })
-          }}
+          {{ macros.displayWithOptions() }}
+          {{ macros.displayWithOptions() }}
+          {{ macros.displayWithOptions() }}
+          {{ macros.displayWithOptions() }}
         </div>
       </div>
     </section>
@@ -221,20 +143,12 @@
         </div>
         <div class="umd-grid-gap" style="margin-top: 24px">
           {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false,
-              date: true,
+            macros.displayWithOptions({
               ctaLink: false
             })
           }}
           {{
-            macros.content({
-              image: true,
-              aligned: true,
-              border: false,
-              date: true,
+            macros.displayWithOptions({
               ctaLink: false
             })
           }}
@@ -247,48 +161,36 @@
 {% macro example() %}
   <div class="umd-grid-gap-three" style="margin-top: 24px">
     {{
-      macros.content({
-        image: true,
-        aligned: true,
-        border: false,
-        date: true,
+      macros.displayWithOptions({
         ctaLink: false
       })
     }}
     {{
-      macros.content({
-        image: true,
-        aligned: true,
-        border: false,
-        date: true,
+      macros.displayWithOptions({
         ctaLink: false
       })
     }}
     {{
-      macros.content({
-        image: true,
-        aligned: true,
-        border: false,
-        date: true,
+      macros.displayWithOptions({
         ctaLink: false
       })
     }}
   </div>
 {% endmacro %}
 
-{% macro content(params) %}
+{% macro displayWithOptions(params) %}
   {% import '_includes/macros/fields/call-to-action.twig' as CallToAction %}
-  {% import '_includes/macros/fields/eyebrow.twig' as Eyebrow %}
-  {% import '_includes/macros/fields/headline.twig' as Headline %}
-  {% import '_includes/macros/fields/text-slot-rich-text.twig' as RichText %}
   {% import '_includes/macros/fields/date.twig' as Date %}
-  {% set attrs = '' %}
 
+  {% set hasImage = params.image ?? true %}
   {% set hasDate = params.date ?? true %}
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasEyebrow = params.eyebrow ?? true %}
   {% set hasHeadline = params.headline ?? true %}
+  {% set hasHeadlineLink = params.headlineLink ?? true %}
   {% set hasRichText = params.text ?? true %}
+  {% set hasBorder = params.border ?? false %}
+  {% set isAligned = params.aligned ?? true %}
 
   {% set images = [
     'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
@@ -304,38 +206,39 @@
     'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
   ] %}
 
-  {% if params.theme == 'dark' %}
-    {% set attrs = attrs ~ 'theme="' ~ params.theme ~ '"' %}
-  {% endif %}
+  {% set attributes = {
+    theme: params.theme ? 'theme="' ~ params.theme ~ '"' : '',
+    aligned: params.aligned ? 'aligned="true"' : '',
+    border: params.border ? 'border="true"' : ''
+  } %}
 
-  {% if params.aligned %}
-    {% set attrs = attrs ~ 'aligned="true"' %}
-  {% endif %}
-
-  {% if params.border %}
-    {% set attrs = attrs ~ 'border="true"' %}
-  {% endif %}
-
-  <umd-element-article {{ attrs }}>
-    {% if params.image %}
-      <a slot="image"
-        href="{{ url }}"
-        target="_blank"
-        data-caption="Lorem ipsum dolor">
+  <umd-element-article {{ attributes|join(' ') }}>
+    {% if hasImage %}
+      <a slot="image" href="/" target="_blank" data-caption="Lorem ipsum dolor">
         <img src="{{ random(images) }}" alt="Example Alt Text" />
       </a>
     {% endif %}
 
     {% if hasEyebrow %}
-      {{ Eyebrow.EyebrowNormal() }}
+      <p slot="eyebrow">
+        Eyebrow Text
+      </p>
     {% endif %}
 
     {% if hasHeadline %}
-      {{ Headline.CardHeadlineNormal() }}
+      <h2 slot="headline">
+        {% if hasHeadlineLink %}
+          <a href="/">Headline Text</a>
+        {% else %}
+          Headline Text
+        {% endif %}
+      </h2>
     {% endif %}
 
     {% if hasRichText %}
-      {{ RichText.CardRichTextNormal() }}
+      <p slot="text" class="umd-rich-text">
+        Rich Text
+      </p>
     {% endif %}
 
     {% if hasDate %}

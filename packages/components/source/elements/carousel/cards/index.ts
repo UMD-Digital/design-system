@@ -10,13 +10,14 @@ type TypeCarouselCardsRequirements = {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  sliderWrapper: HTMLElement;
+  slide: HTMLElement;
+  shadowRef?: HTMLElement;
   cards: HTMLElement[];
 };
 
 type TypeCommonData = {
   GetContainer: () => HTMLDivElement;
-  GetCarouselSlider: () => HTMLElement;
+  GetCarouselSlide: () => HTMLElement;
   GetCards: () => HTMLElement[];
   GetNumberOfCards: () => number;
   GetIsTabletView: () => boolean;
@@ -34,7 +35,7 @@ const { Debounce } = Performance;
 const { ConvertJSSObjectToStyles } = Styles;
 const { Text } = Elements;
 const { Colors, Spacing } = Tokens;
-const { SansLarger, SansMedium, SansLargest } = Typography;
+const { SansMedium, SansLargest } = Typography;
 const { LockMax } = Layout;
 
 const CARD_BREAK = 650;
@@ -59,15 +60,15 @@ const INTRO_CONTAINER_HEADLINE = 'carousel-cards-intro-container-headline';
 const INTRO_CONTAINER_TEXT = 'carousel-cards-intro-container-text';
 const INTRO_CONTAINER_CTA = 'carousel-cards-intro-container-cta';
 
-const CAROUSEL_CONTAINER_TEST = 'carousel-cards-carousel-container';
-const CAROUSEL_CONTAINER_WRAPPER = 'carousel-cards-carousel-container-wrapper';
-const CAROUSEL_CARDS_BUTTON = `carousel-cards-button`;
+const CAROUSEL_SLIDER_CONTAINER = 'carousel-cards-slider-container';
+const CAROUSEL_SLIDER_WRAPPER = 'carousel-cards-slider-wrapper';
+const CAROUSEL_SLIDER_BUTTON = `carousel-slider-button`;
 const CAROUSEL_CARDS_BUTTON_FORWARDS = 'carousel-cards-button-forwards';
 const CAROUSEL_CARDS_BUTTON_BACKWARDS = 'carousel-cards-button-backwards';
 
 // prettier-ignore
 const CarouselButtonStyles = `
-  .${CAROUSEL_CARDS_BUTTON} {
+  .${CAROUSEL_SLIDER_BUTTON} {
     background-color: ${Colors.red};
     padding: ${Spacing.xs};
     position: absolute;
@@ -80,23 +81,23 @@ const CarouselButtonStyles = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${CAROUSEL_CARDS_BUTTON} {
+    .${CAROUSEL_SLIDER_BUTTON} {
       bottom: 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${CAROUSEL_CARDS_BUTTON} {
+    .${CAROUSEL_SLIDER_BUTTON} {
       top: 50%;
       transform: translateY(-50%);
     }
   }
 
-  .${CAROUSEL_CARDS_BUTTON}:disabled {
+  .${CAROUSEL_SLIDER_BUTTON}:disabled {
     opacity: 0.5;
   }
 
-  .${CAROUSEL_CARDS_BUTTON} svg {
+  .${CAROUSEL_SLIDER_BUTTON} svg {
     width: 24px;
     height: 24px;
     fill: ${Colors.white};
@@ -133,20 +134,32 @@ const CarouselButtonStyles = `
 
 // prettier-ignore
 const CarouselContainerStyles = `
-  .${CAROUSEL_CONTAINER_TEST} {
+  .${CAROUSEL_SLIDER_CONTAINER} {
     position: relative;
-    overflow: hidden;
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${CAROUSEL_CONTAINER_TEST} {
+    .${CAROUSEL_SLIDER_CONTAINER} {
       padding-bottom: 60px;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${CAROUSEL_CONTAINER_TEST} {
+    .${CAROUSEL_SLIDER_CONTAINER} {
       width: 60%;
+    }
+  }
+
+  .${CAROUSEL_SLIDER_WRAPPER} {
+    overflow: hidden;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  @media (min-width: ${LARGE}px) {
+    .${CAROUSEL_SLIDER_WRAPPER} {
+      max-width: inherit;
+      padding: 0;
     }
   }
 `;
@@ -311,14 +324,15 @@ const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
 const EventScrollCarousel = (props: TypeEventScroll) => {
   const {
-    GetCarouselSlider,
+    GetCarouselSlide,
     GetIsTabletView,
-    GetCards,
     SetCarouselSize,
     isDirectionRight = true,
   } = props;
-  const carouselSlider = GetCarouselSlider();
-  const slotContent = GetCards();
+  const carouselSlider = GetCarouselSlide();
+  const slotContent = Array.from(
+    carouselSlider.querySelectorAll(':scope > *'),
+  ) as HTMLDivElement[];
   const isShowTwo = GetIsTabletView();
   const elementCount = isShowTwo ? 2 : 1;
   const firstElement = slotContent[0];
@@ -486,7 +500,7 @@ const CreateButton = ({
   const button = document.createElement('button');
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
-  button.classList.add(CAROUSEL_CARDS_BUTTON);
+  button.classList.add(CAROUSEL_SLIDER_BUTTON);
   button.innerHTML = AssetIcon.FORWARD_ARROW;
 
   if (isRight) button.classList.add(CAROUSEL_CARDS_BUTTON_FORWARDS);
@@ -539,20 +553,16 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
 
 const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
   (() => {
-    const { sliderWrapper, cards } = props;
+    const { slide, shadowRef, cards } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
     const carouselContainer = document.createElement('div');
+    const carouselWrapper = document.createElement('div');
     const introContainer = CreateIntro(props);
 
-    // To Do: fix to query for certain;
-    const slide = sliderWrapper.querySelector('div') as HTMLElement;
-
-    console.log(slide);
-
     const GetContainer = () => container;
-    const GetCarouselSlider = () => slide;
+    const GetCarouselSlide = () => slide;
     const GetCards = () => cards;
     const GetNumberOfCards = () => cards.length;
     const GetCarouselContainerSize = () => carouselContainer.offsetWidth;
@@ -571,8 +581,6 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     const SetCardHeight = () => {
       const minimumHeight = 450;
       const maxHeight = cards.reduce((acc, currentElement) => {
-        console.log(currentElement.offsetHeight);
-
         if (acc > currentElement.offsetHeight) return acc;
         return currentElement.offsetHeight;
       }, minimumHeight);
@@ -592,9 +600,9 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
       const elementSize = GetCardWidthBasedOnCarousel();
       const elementSizeTotal = elementSize * 2 + spaceBetween;
 
-      sliderWrapper.style.width = `${elementSizeTotal}px`;
-      sliderWrapper.style.transition = 'none';
-      sliderWrapper.style.transform = 'translateX(0)';
+      slide.style.width = `${elementSizeTotal}px`;
+      slide.style.transition = 'none';
+      slide.style.transform = 'translateX(0)';
     };
     const SetSizeCarouselElements = () => {
       SetCardWidth();
@@ -607,7 +615,7 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
 
     const CommonData = {
       GetContainer,
-      GetCarouselSlider,
+      GetCarouselSlide,
       GetCards,
       GetNumberOfCards,
       GetIsTabletView,
@@ -620,9 +628,7 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     const Resize = () => {
       SetSizeCarouselElements();
       EventResizeButtonLogic({ ...CommonData });
-      setTimeout(() => {
-        SetCardHeight();
-      }, 100);
+      SetCardHeight();
     };
 
     const Load = () => {
@@ -639,7 +645,6 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
       }, 100);
     };
 
-    carouselContainer.classList.add(CAROUSEL_CONTAINER_TEST);
     carouselContainer.appendChild(
       CreateButton({
         SetEventMoveForward,
@@ -653,7 +658,17 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
         SetEventMoveBackward,
       }),
     );
-    carouselContainer.appendChild(sliderWrapper);
+
+    carouselWrapper.classList.add(CAROUSEL_SLIDER_WRAPPER);
+
+    if (shadowRef) {
+      carouselWrapper.appendChild(shadowRef);
+    } else {
+      carouselWrapper.appendChild(slide);
+    }
+
+    carouselContainer.classList.add(CAROUSEL_SLIDER_CONTAINER);
+    carouselContainer.appendChild(carouselWrapper);
 
     wrapper.classList.add(CAROUSEL_LOCK);
     wrapper.appendChild(introContainer);
@@ -666,7 +681,7 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(Resize, 20));
+    window.addEventListener('resize', Debounce(Resize, 10));
     Load();
 
     return {
@@ -681,17 +696,3 @@ export default {
   CreateElement: CreateCarouselCardsElement,
   Styles: STYLES_CAROUSEL_CARDS_ELEMENT,
 };
-
-// .${CAROUSEL_CONTAINER_WRAPPER} {
-//   overflow: hidden;
-//   padding-right: 0;
-//
-//   width: 100%;
-// }
-
-// @media (min-width: ${LARGE}px) {
-//   .${CAROUSEL_CONTAINER_WRAPPER} {
-//     max-width: inherit;
-//     padding: 0;
-//   }
-// }

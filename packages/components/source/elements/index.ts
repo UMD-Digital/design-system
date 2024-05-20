@@ -7,6 +7,7 @@ import CardList from './card/list';
 import CardIconBlock from './card-icon/block';
 import CardOverlay from './card-overlay';
 import CardOverlayImage from './card-overlay/image';
+import CarouselCards from './carousel/cards';
 import EventBlock from './event/block';
 import EventElements from './event/elements';
 import EventFeature from './event/feature';
@@ -57,6 +58,7 @@ export {
   CardIconBlock,
   CardOverlay,
   CardOverlayImage,
+  CarouselCards,
   EventBlock,
   EventElements,
   EventFeature,

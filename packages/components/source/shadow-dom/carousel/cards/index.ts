@@ -4,33 +4,81 @@ declare global {
   }
 }
 
-import { Performance, MarkupCreate } from 'utilities';
-import {
-  EventResizeButtonLogic,
-  EventResizeCarouselElementsWidth,
-  EventResizeSetHeight,
-  EventScrollCarousel,
-  EventSwipe,
-} from './services/events';
-import { CreateShadowDom, OnLoadStyles, ComponentStyles } from './elements';
-import { SLOTS, VARIABLES } from './globals';
+import { CarouselCards } from 'elements';
+import { MarkupCreate, Styles } from 'utilities';
 
-const { Debounce } = Performance;
-const { SlotOberserver, Node } = MarkupCreate;
+const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
 
-const { ATTRIBUTE_RESIZE, ELEMENT_NAME } = VARIABLES;
+const ELEMENT_NAME = 'umd-element-carousel-cards';
+const ATTRIBUTE_RESIZE = 'resize';
+const SLOTS = {
+  HEADLINE: 'headline',
+  TEXT: 'text',
+  ACTIONS: 'actions',
+  CARDS: 'cards',
+};
+
+const styles = `
+  :host {
+    display: block;
+  }
+
+  ${Styles.ResetString}
+  ${CarouselCards.Styles}
+`;
+
+const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
+  const slide = element.querySelector(`[slot="${SLOTS.CARDS}"]`) as HTMLElement;
+  const cards = Array.from(
+    slide.querySelectorAll(':scope > *'),
+  ) as HTMLElement[];
+
+  const createCardShadowRef = () => {
+    const slot = Node.slot({ type: SLOTS.CARDS });
+    element._shadow.appendChild(slot);
+  };
+
+  createCardShadowRef();
+
+  const shadowRef = shadow.querySelector(
+    `[name="${SLOTS.CARDS}"]`,
+  ) as HTMLElement;
+  const carousel = CarouselCards.CreateElement({
+    slide,
+    shadowRef,
+    cards,
+    headline: SlotWithDefaultStyling({
+      element,
+      slotRef: SLOTS.HEADLINE,
+    }),
+    text: SlotWithDefaultStyling({ element, slotRef: SLOTS.TEXT }),
+    actions: SlotWithDefaultStyling({
+      element,
+      slotRef: SLOTS.ACTIONS,
+    }),
+  });
+
+  element._elementRef = carousel;
+  shadow.appendChild(carousel.element);
+};
 
 export class UMDCarouselCardsElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _elementRef: {
+    element: HTMLDivElement;
+    events: {
+      SetEventReize: () => void;
+    };
+  } | null;
 
   constructor() {
-    super();
-
-    const styles = `${ComponentStyles}`;
     const template = Node.stylesTemplate({ styles });
+    super();
 
     this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));
+    this._elementRef = null;
   }
 
   static get observedAttributes() {
@@ -42,42 +90,20 @@ export class UMDCarouselCardsElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == ATTRIBUTE_RESIZE && newValue === 'true') {
-      EventResizeCarouselElementsWidth({ element: this });
-      EventResizeSetHeight({ element: this });
-      EventResizeButtonLogic({ element: this });
+    if (name == ATTRIBUTE_RESIZE && newValue === 'true' && this._elementRef) {
+      this._elementRef.events.SetEventReize();
     }
   }
 
   connectedCallback() {
-    const element = this;
-    const content = CreateShadowDom({ element });
-    const resize = () => {
-      EventResizeCarouselElementsWidth({ element });
-      EventResizeSetHeight({ element });
-      EventResizeButtonLogic({ element });
-    };
+    CreateShadowDom({ element: this });
 
-    this._shadow.appendChild(content);
-    OnLoadStyles({ element });
-
-    window.addEventListener('resize', Debounce(resize, 20));
-    EventSwipe({ container: content, element });
-    EventResizeButtonLogic({ element });
-    SlotOberserver({
-      element,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
-  }
-
-  eventMoveForward() {
-    EventScrollCarousel({ element: this });
-  }
-
-  eventMoveBackwards() {
-    EventScrollCarousel({ element: this, isDirectionRight: false });
+    // SlotOberserver({
+    //   element: this,
+    //   shadowDom: this._shadow,
+    //   slots: SLOTS,
+    //   CreateShadowDom,
+    // });
   }
 }
 

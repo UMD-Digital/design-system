@@ -1,12 +1,12 @@
 import path from 'path';
 
-const baseConfig = {
-  mode: 'production',
-  optimization: {
+module.exports = (env) => {
+  const devMode = env.NODE_ENV;
+  const optimization = {
     minimize: true,
-  },
-  plugins: [],
-  stats: {
+  };
+  const plugins = [];
+  const stats = {
     assets: false,
     cached: false,
     cachedAssets: false,
@@ -20,24 +20,8 @@ const baseConfig = {
     source: false,
     timings: false,
     warnings: false,
-  },
-};
-
-const componentsFiles = {
-  index: path.resolve('source/index'),
-};
-
-const componentBundle = {
-  ...baseConfig,
-  entry: componentsFiles,
-  devtool: 'eval',
-  output: {
-    path: path.resolve('dist'),
-    filename: '[name].js',
-    umdNamedDefine: true,
-    libraryTarget: 'umd',
-  },
-  module: {
+  };
+  const modules = {
     rules: [
       {
         test: /\.ts?$/,
@@ -60,13 +44,27 @@ const componentBundle = {
         ],
       },
     ],
-  },
-  resolve: {
-    extensions: ['.ts', '.js', '.css'],
-    modules: [path.resolve('source'), path.resolve('../../node_modules')],
-  },
-};
+  };
 
-module.exports = (env) => {
-  return [componentBundle];
+  return {
+    entry: {
+      index: path.resolve('source/index'),
+    },
+    mode: devMode,
+    optimization: optimization,
+    stats: stats,
+    devtool: 'eval',
+    module: modules,
+    plugins: plugins,
+    resolve: {
+      extensions: ['.ts', '.js', '.css'],
+      modules: [path.resolve('source'), path.resolve('../../node_modules')],
+    },
+    output: {
+      path: path.resolve('dist'),
+      filename: '[name].js',
+      umdNamedDefine: true,
+      libraryTarget: 'umd',
+    },
+  };
 };

@@ -11,9 +11,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "webpack",
-    "clean": "rm -rf dist",
-    "start": "webpack -w"
+    "clean": "rm -rf build",
+    "release": "npx run build && npm publish --access public",
+    "build": "webpack --env NODE_ENV=production",
+    "webpack": "webpack -w --env NODE_ENV=development",
+    "start": "npm run webpack"
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",

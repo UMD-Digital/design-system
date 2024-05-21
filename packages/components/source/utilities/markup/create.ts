@@ -86,6 +86,10 @@ const SlotOberserver = ({
   slots: { [key: string]: string };
   CreateShadowDom: ({ element }: { element: any }) => void;
 }) => {
+  const isProduction = process?.env?.NODE_ENV === 'production';
+
+  if (isProduction) return;
+
   const observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
       const ReloadElement = () => {

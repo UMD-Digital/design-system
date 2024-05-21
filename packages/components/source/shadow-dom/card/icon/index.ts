@@ -26,9 +26,11 @@ const styles = `
   ${CardIconBlock.Styles}
 `;
 
+const styleTemplate = Node.stylesTemplate({ styles });
+
 const MakeCardData = ({ element }: { element: UMDCardIconElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const { HEADLINE, TEXT, IMAGE } = element._slots;
+  const { HEADLINE, TEXT, IMAGE } = SLOTS;
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
@@ -38,33 +40,30 @@ const MakeCardData = ({ element }: { element: UMDCardIconElement }) => {
   };
 };
 
-const CreateShadowDom = ({ element }: { element: UMDCardIconElement }) =>
-  CardIconBlock.CreateElement({
+const CreateShadowDom = ({ element }: { element: UMDCardIconElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
+  const card = CardIconBlock.CreateElement({
     ...MakeCardData({ element }),
   });
 
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+  shadow.appendChild(card);
+};
+
 export class UMDCardIconElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
+      element: this,
+      shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,
     });

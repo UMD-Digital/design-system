@@ -27,6 +27,7 @@ const styles = `
   ${CarouselCards.Styles}
 `;
 
+const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const slide = element.querySelector(`[slot="${SLOTS.CARDS}"]`) as HTMLElement;
@@ -60,6 +61,7 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
   });
 
   element._elementRef = carousel;
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
   shadow.appendChild(carousel.element);
 };
 
@@ -73,11 +75,9 @@ export class UMDCarouselCardsElement extends HTMLElement {
   } | null;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
     super();
 
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
     this._elementRef = null;
   }
 
@@ -98,12 +98,12 @@ export class UMDCarouselCardsElement extends HTMLElement {
   connectedCallback() {
     CreateShadowDom({ element: this });
 
-    // SlotOberserver({
-    //   element: this,
-    //   shadowDom: this._shadow,
-    //   slots: SLOTS,
-    //   CreateShadowDom,
-    // });
+    SlotOberserver({
+      element: this,
+      shadowDom: this._shadow,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 }
 

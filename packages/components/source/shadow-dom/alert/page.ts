@@ -27,8 +27,11 @@ const styles = `
   ${AlertPage.Styles}
 `;
 
-const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
-  AlertPage.CreateElement({
+const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+
+const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
+  const alert = AlertPage.CreateElement({
     text: SlotWithDefaultStyling({ element, slotRef: SLOTS.BODY }),
     headline: SlotWithDefaultStyling({
       element,
@@ -39,26 +42,25 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
     isShowIcon: element.getAttribute(ATTRIBUTE_ICON) === 'true',
   });
 
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+  shadow.appendChild(alert);
+};
+
 export class UMDAlertPageElement extends HTMLElement {
   _shadow: ShadowRoot;
   _container: HTMLDivElement | null = null;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    element._shadow.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
+      element: this,
+      shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,
     });

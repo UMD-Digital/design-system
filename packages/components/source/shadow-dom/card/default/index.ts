@@ -33,9 +33,11 @@ const styles = `
   ${CardList.Styles}
 `;
 
+const styleTemplate = Node.stylesTemplate({ styles });
+
 const MakeCardData = ({ element }: { element: UMDCardElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, IMAGE } = element._slots;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, IMAGE } = SLOTS;
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
@@ -48,6 +50,7 @@ const MakeCardData = ({ element }: { element: UMDCardElement }) => {
 };
 
 const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
   const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
 
@@ -56,39 +59,36 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   const isDisplayList =
     element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
 
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+
   if (isDisplayList) {
-    return CardList.CreateElement(MakeCardData({ element }));
+    shadow.appendChild(CardList.CreateElement(MakeCardData({ element })));
+    return;
   }
 
-  return CardBlock.CreateElement({
-    ...MakeCardData({ element }),
-    isAligned,
-    isBordered,
-  });
+  shadow.appendChild(
+    CardBlock.CreateElement({
+      ...MakeCardData({ element }),
+      isAligned,
+      isBordered,
+    }),
+  );
 };
 
 export class UMDCardElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
+      element: this,
+      shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,
     });

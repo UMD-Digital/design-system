@@ -84,17 +84,13 @@ const SlotOberserver = ({
   element: HTMLElement;
   shadowDom: ShadowRoot;
   slots: { [key: string]: string };
-  CreateShadowDom: ({ element }: { element: any }) => HTMLElement;
+  CreateShadowDom: ({ element }: { element: any }) => void;
 }) => {
   const observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
       const ReloadElement = () => {
-        const firstChild = shadowDom.querySelector('div');
-
-        if (firstChild) {
-          firstChild.remove();
-          shadowDom.appendChild(CreateShadowDom({ element }));
-        }
+        shadowDom.innerHTML = '';
+        CreateShadowDom({ element });
       };
 
       if (mutation.type === 'attributes') {

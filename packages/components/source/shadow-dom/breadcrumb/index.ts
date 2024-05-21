@@ -93,9 +93,11 @@ const styles = `
     },
   })}`;
 
+const styleTemplate = Node.stylesTemplate({ styles });
+
 const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
-  const { PATHS } = element._slots;
-  const theme = element._theme;
+  const { PATHS } = SLOTS;
+  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
   const pathsSlot = SlotWithDefaultStyling({
     element,
     slotRef: PATHS,
@@ -125,40 +127,30 @@ export const CreateShadowDom = ({
 }: {
   element: UMDBreadcrumbElement;
 }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const breadcrumbPaths = CreatePaths({ element: element });
 
   if (!breadcrumbPaths) {
     throw new Error('Paths slot not found.');
   }
 
-  return breadcrumbPaths;
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+  shadow.appendChild(breadcrumbPaths);
 };
 
 export class UMDBreadcrumbElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
-  _theme = THEME_LIGHT;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-    const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-
-    element._theme = theme || element._theme;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
+      element: this,
       shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,

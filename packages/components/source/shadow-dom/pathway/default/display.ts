@@ -86,11 +86,14 @@ export const CreateShadowDom = ({
 }: {
   element: UMDPathwayElement;
 }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const isImageScaled =
     element.getAttribute(ATTRIBUTE_IMAGE_SCALED) !== 'false';
   const type = element.getAttribute(ATTRIBUTE_TYPE);
   const themeAttribute = element.getAttribute(ATTRIBUTE_THEME);
   let theme = THEME_WHITE;
+
+  shadow.appendChild(element._styles.content.cloneNode(true));
 
   if (themeAttribute) {
     if (themeAttribute === THEME_LIGHT) theme = THEME_LIGHT;
@@ -99,22 +102,32 @@ export const CreateShadowDom = ({
   }
 
   if (type === TYPE_HERO) {
-    return PathwayHero.CreateElement({
-      ...MakeCommonDefaultData({ element, theme }),
-    });
+    shadow.appendChild(
+      PathwayHero.CreateElement({
+        ...MakeCommonDefaultData({ element, theme }),
+      }),
+    );
+
+    return;
   }
 
   if (type === TYPE_OVERLAY) {
-    return PathwayOverlay.CreateElement({
+    shadow.appendChild(
+      PathwayOverlay.CreateElement({
+        theme,
+        isImageScaled,
+        ...MakeCommonDefaultData({ element, theme }),
+      }),
+    );
+
+    return;
+  }
+
+  shadow.appendChild(
+    PathwayDefault.CreateElement({
       theme,
       isImageScaled,
       ...MakeCommonDefaultData({ element, theme }),
-    });
-  }
-
-  return PathwayDefault.CreateElement({
-    theme,
-    isImageScaled,
-    ...MakeCommonDefaultData({ element, theme }),
-  });
+    }),
+  );
 };

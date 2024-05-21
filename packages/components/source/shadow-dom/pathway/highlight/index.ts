@@ -31,12 +31,15 @@ const styles = `
   ${PathwayElements.Text.Styles}
 `;
 
+const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+
 const CreateShadowDom = ({
   element,
 }: {
   element: UMDPathwayHighlightElement;
 }) => {
-  const { HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } = element._slots;
+  const shadow = element.shadowRoot as ShadowRoot;
+  const { HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } = SLOTS;
   const themeAttribute = element.getAttribute(ATTRIBUTE_THEME);
   let theme = null;
 
@@ -45,46 +48,42 @@ const CreateShadowDom = ({
     if (themeAttribute === THEME_DARK) theme = THEME_DARK;
   }
 
-  return PathwayHighlight.CreateElement({
-    ...CommonPathwayData({
-      element,
-      slots: element._slots,
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+
+  shadow.appendChild(
+    PathwayHighlight.CreateElement({
+      ...CommonPathwayData({
+        element,
+        slots: SLOTS,
+      }),
+      quote: SlotWithDefaultStyling({
+        element,
+        slotRef: HIGHLIGHT,
+      }),
+      attribution: SlotWithDefaultStyling({
+        element,
+        slotRef: HIGHLIGHT_ATTRIBUTION,
+      }),
+      theme,
     }),
-    quote: SlotWithDefaultStyling({
-      element,
-      slotRef: HIGHLIGHT,
-    }),
-    attribution: SlotWithDefaultStyling({
-      element,
-      slotRef: HIGHLIGHT_ATTRIBUTION,
-    }),
-    theme,
-  });
+  );
 };
 
 export class UMDPathwayHighlightElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
-      slots: CommonSlots,
+      element: this,
+      shadowDom: this._shadow,
+      slots: SLOTS,
       CreateShadowDom,
     });
   }

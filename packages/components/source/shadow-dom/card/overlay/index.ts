@@ -36,13 +36,15 @@ const styles = `
   ${CardOverlayImage.Styles}
 `;
 
+const styleTemplate = Node.stylesTemplate({ styles });
+
 const MakeOverlayContent = ({
   element,
 }: {
   element: UMDCardOverlayElement;
 }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, CTAICON } = element._slots;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, CTAICON } = SLOTS;
 
   return {
     eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
@@ -55,48 +57,43 @@ const MakeOverlayContent = ({
   };
 };
 
-export const CreateShadowDom = ({
-  element,
-}: {
-  element: UMDCardOverlayElement;
-}) => {
-  const { IMAGE } = element._slots;
+const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const type = element.getAttribute(ATTRIBUTE_TYPE);
+
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
 
   if (type === TYPE_IMAGE) {
     const ImageOverlay = CardOverlayImage.CreateElement({
       ...MakeOverlayContent({ element }),
-      image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+      image: MarkupValidate.ImageSlot({ element, ImageSlot: SLOTS.IMAGE }),
     });
 
-    if (ImageOverlay) return ImageOverlay;
+    if (ImageOverlay) {
+      shadow.appendChild(ImageOverlay);
+      return;
+    }
   }
 
-  return CardOverlay.CreateElement({ ...MakeOverlayContent({ element }) });
+  shadow.appendChild(
+    CardOverlay.CreateElement({ ...MakeOverlayContent({ element }) }),
+  );
 };
 
 export class UMDCardOverlayElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
+      element: this,
+      shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,
     });

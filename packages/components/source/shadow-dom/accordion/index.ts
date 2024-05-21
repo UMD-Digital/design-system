@@ -28,11 +28,14 @@ const styles = `
   ${Accordion.Styles}
 `;
 
+const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
   const state = element.getAttribute(ATTRIBUTE_STATE);
   const shouldBeOpen = state === STATE_OPEN;
-  element._elementRef = Accordion.CreateElement({
+
+  const accordion = Accordion.CreateElement({
     theme,
     shouldBeOpen,
     body: Node.slot({ type: SLOTS.BODY }),
@@ -42,7 +45,9 @@ const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
     }),
   });
 
-  return element._elementRef.element;
+  element._elementRef = accordion;
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+  shadow.appendChild(accordion.element);
 };
 
 export class UMDAccordionElement extends HTMLElement {
@@ -56,11 +61,9 @@ export class UMDAccordionElement extends HTMLElement {
   } | null;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
     super();
     this._elementRef = null;
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   static get observedAttributes() {
@@ -92,14 +95,11 @@ export class UMDAccordionElement extends HTMLElement {
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    element._shadow.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
+      element: this,
+      shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,
     });

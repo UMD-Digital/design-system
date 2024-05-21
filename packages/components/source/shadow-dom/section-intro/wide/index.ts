@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    UMDSectionIntroElement: typeof UMDSectionIntroElement;
+    UMDSectionIntroWideElement: typeof UMDSectionIntroWideElement;
   }
 }
 
@@ -22,41 +22,40 @@ const styles = `
   ${SectionIntroWide.Styles}
 `;
 
+const styleTemplate = Node.stylesTemplate({ styles });
+
 export const CreateShadowDom = ({
   element,
 }: {
-  element: UMDSectionIntroElement;
-}) =>
-  SectionIntroWide.CreateElement(
+  element: UMDSectionIntroWideElement;
+}) => {
+  const shadow = element.shadowRoot as ShadowRoot;
+  const intro = SectionIntroWide.CreateElement(
     CommonIntroData({
       element,
-      slots: element._slots,
+      slots: CommonSlots,
       theme: element.getAttribute(ATTRIBUTE_THEME),
     }),
   );
 
-export class UMDSectionIntroElement extends HTMLElement {
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+  shadow.appendChild(intro);
+};
+
+export class UMDSectionIntroWideElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = CommonSlots;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
+      element: this,
+      shadowDom: this._shadow,
       slots: CommonSlots,
       CreateShadowDom,
     });
@@ -68,7 +67,7 @@ export const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDSectionIntroElement = UMDSectionIntroElement;
-    window.customElements.define(ELEMENT_NAME, UMDSectionIntroElement);
+    window.UMDSectionIntroWideElement = UMDSectionIntroWideElement;
+    window.customElements.define(ELEMENT_NAME, UMDSectionIntroWideElement);
   }
 };

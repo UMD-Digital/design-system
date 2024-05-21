@@ -29,11 +29,14 @@ const styles = `
   ${SliderEvents.Styles}
 `;
 
+const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+
 const CreateShadowDom = ({
   element,
 }: {
   element: UMDEventsDateSliderElement;
 }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
   const dataSlider = document.createElement('div');
   const dataSliderSlot = element.querySelector(`[slot=${SLOTS.EVENT_LIST}]`);
@@ -44,7 +47,7 @@ const CreateShadowDom = ({
 
   dataSlider.innerHTML = dataSliderSlot.innerHTML;
 
-  element._elementRef = SliderEvents.CreateElement({
+  const slider = SliderEvents.CreateElement({
     theme,
     dataSlider,
     headline: SlotWithDefaultStyling({
@@ -57,7 +60,10 @@ const CreateShadowDom = ({
     }),
   });
 
-  return element._elementRef.element;
+  element._elementRef = slider;
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+  shadow.appendChild(slider.element);
+  slider.events.SetDateElementsSizes();
 };
 
 export class UMDEventsDateSliderElement extends HTMLElement {
@@ -70,11 +76,9 @@ export class UMDEventsDateSliderElement extends HTMLElement {
   } | null;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
     super();
 
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
     this._elementRef = null;
   }
 
@@ -93,15 +97,11 @@ export class UMDEventsDateSliderElement extends HTMLElement {
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    element._shadow.appendChild(CreateShadowDom({ element }));
-    if (element._elementRef) element._elementRef.events.SetDateElementsSizes();
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
+      element: this,
+      shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,
     });

@@ -23,28 +23,26 @@ const SLOTS = {
 export class UMDPathwayElement extends HTMLElement {
   _shadow: ShadowRoot;
   _slots: Record<string, string>;
+  _styles: HTMLTemplateElement;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({
+    const styleTemplate = MarkupCreate.Node.stylesTemplate({
       styles: `${ComponentStyles}`,
     });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._slots = SLOTS;
-    this._shadow.appendChild(template.content.cloneNode(true));
+    this._styles = styleTemplate;
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
-      slots: CommonSlots,
+      element: this,
+      shadowDom: this._shadow,
+      slots: SLOTS,
       CreateShadowDom,
     });
   }

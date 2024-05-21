@@ -29,27 +29,42 @@ export const styles = `
   ${PersonTabular.Styles}
 `;
 
+const styleTemplate = Node.stylesTemplate({
+  styles,
+});
+
 export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const isDisplayList =
     element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
   const isDisplayTabular =
     element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_TABULAR;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
 
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+
   if (isDisplayList) {
-    return PersonList.CreateElement(
-      CommonPersonData({ element, slots: element._slots, theme }),
+    shadow.appendChild(
+      PersonList.CreateElement(
+        CommonPersonData({ element, slots: element._slots, theme }),
+      ),
     );
+    return;
   }
 
   if (isDisplayTabular) {
-    return PersonTabular.CreateElement(
-      CommonPersonData({ element, slots: element._slots, theme }),
+    shadow.appendChild(
+      PersonTabular.CreateElement(
+        CommonPersonData({ element, slots: element._slots, theme }),
+      ),
     );
+    return;
   }
 
-  return PersonBlock.CreateElement(
-    CommonPersonData({ element, slots: element._slots, theme }),
+  shadow.appendChild(
+    PersonBlock.CreateElement(
+      CommonPersonData({ element, slots: element._slots, theme }),
+    ),
   );
 };
 
@@ -58,26 +73,18 @@ export class UMDPersonElement extends HTMLElement {
   _slots: Record<string, string>;
 
   constructor() {
-    const template = Node.stylesTemplate({
-      styles,
-    });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._slots = CommonSlots;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
-      slots: CommonSlots,
+      element: this,
+      shadowDom: this._shadow,
+      slots: this._slots,
       CreateShadowDom,
     });
   }

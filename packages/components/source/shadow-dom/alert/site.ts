@@ -27,8 +27,11 @@ export const styles = `
   ${AlertSite.Styles}
 `;
 
-const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
-  AlertSite.CreateElement({
+const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+
+const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
+  const alert = AlertSite.CreateElement({
     headline: SlotWithDefaultStyling({
       element,
       slotRef: SLOTS.HEADLINE,
@@ -38,26 +41,25 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
     daysToHide: element.getAttribute(ATTRIBUTE_DAYS) || '10',
   });
 
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+  shadow.appendChild(alert);
+};
+
 export class UMDAlertSiteElement extends HTMLElement {
   _shadow: ShadowRoot;
   _container: HTMLDivElement | null = null;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    element._shadow.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
+      element: this,
+      shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,
     });

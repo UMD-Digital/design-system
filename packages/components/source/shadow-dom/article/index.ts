@@ -34,9 +34,11 @@ const styles = `
   ${CardList.Styles}
 `;
 
+const styleTemplate = Node.stylesTemplate({ styles });
+
 const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, IMAGE } = element._slots;
+  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, IMAGE } = SLOTS;
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
@@ -54,6 +56,7 @@ export const CreateShadowDom = ({
 }: {
   element: UMDArticleElement;
 }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
   const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
   const isAligned = alignmentAttr === 'true';
@@ -61,38 +64,35 @@ export const CreateShadowDom = ({
   const isDisplayList =
     element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
 
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+
   if (isDisplayList) {
-    return CardList.CreateElement(MakeArticleData({ element }));
+    shadow.appendChild(CardList.CreateElement(MakeArticleData({ element })));
+    return;
   }
 
-  return CardBlock.CreateElement({
-    ...MakeArticleData({ element }),
-    isAligned,
-    isBordered,
-  });
+  shadow.appendChild(
+    CardBlock.CreateElement({
+      ...MakeArticleData({ element }),
+      isAligned,
+      isBordered,
+    }),
+  );
 };
 
 export class UMDArticleElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
+      element: this,
       shadowDom: this._shadow,
       slots: SLOTS,
       CreateShadowDom,

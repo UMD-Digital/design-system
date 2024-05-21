@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    UMDCardElement: typeof UMDCardElement;
+    UMDEventElement: typeof UMDEventElement;
   }
 }
 
@@ -45,7 +45,7 @@ const styles = `
   ${EventPromo.Styles}
 `;
 
-const MakeCommonData = ({ element }: { element: UMDCardElement }) => {
+const MakeCommonData = ({ element }: { element: UMDEventElement }) => {
   const { HEADLINE, TEXT, ACTIONS } = element._slots;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
 
@@ -58,7 +58,7 @@ const MakeCommonData = ({ element }: { element: UMDCardElement }) => {
   };
 };
 
-const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
+const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const { START_DATE_ISO, END_DATE_ISO, LOCATION } = element._slots;
   const displayAttribute = element.getAttribute(ATTRIBUTE_DISPLAY);
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
@@ -137,7 +137,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   });
 };
 
-export class UMDCardElement extends HTMLElement {
+export class UMDEventElement extends HTMLElement {
   _shadow: ShadowRoot;
   _slots: Record<string, string>;
 
@@ -166,7 +166,7 @@ export const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDCardElement = UMDCardElement;
-    window.customElements.define(ELEMENT_NAME, UMDCardElement);
+    window.UMDEventElement = UMDEventElement;
+    window.customElements.define(ELEMENT_NAME, UMDEventElement);
   }
 };

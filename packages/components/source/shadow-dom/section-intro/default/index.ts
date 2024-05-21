@@ -27,44 +27,43 @@ const styles = `
   ${SectionIntro.Styles}
 `;
 
+const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+
 export const CreateShadowDom = ({
   element,
 }: {
   element: UMDSectionIntroElement;
-}) =>
-  SectionIntro.CreateElement({
+}) => {
+  const shadow = element.shadowRoot as ShadowRoot;
+  const intro = SectionIntro.CreateElement({
     ...CommonIntroData({
       element,
-      slots: element._slots,
+      slots: SLOTS,
       theme: element.getAttribute(ATTRIBUTE_THEME),
     }),
     text: SlotWithDefaultStyling({ element, slotRef: SLOTS.TEXT }),
     hasSeparator: element.hasAttribute(ATTRIBUTE_WITH_SEPARATOR),
   });
 
+  shadow.appendChild(styleTemplate.content.cloneNode(true));
+  shadow.appendChild(intro);
+};
+
 export class UMDSectionIntroElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
-
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
-    this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-
-    shadowDom.appendChild(CreateShadowDom({ element }));
+    CreateShadowDom({ element: this });
 
     SlotOberserver({
-      element,
-      shadowDom,
-      slots: CommonSlots,
+      element: this,
+      shadowDom: this._shadow,
+      slots: SLOTS,
       CreateShadowDom,
     });
   }

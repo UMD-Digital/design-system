@@ -57,6 +57,25 @@
   }
 }
 
+.call-to-action-outline {
+  background-color: theme(colors.red);
+  color: theme(colors.white);
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1.2em;
+  letter-spacing: 0.5px;
+  margin-bottom: theme(spacing.sm);
+  padding: theme(spacing.xs) theme(spacing.md);
+  text-align: center;
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out,
+    border 0.5s ease-in-out;
+
+  &:hover,
+  &:focus {
+    background-color: theme(colors.redDark);
+  }
+}
+
 .two-cards-hr::after {
   content: '';
   background-color: theme(colors.gray.light);

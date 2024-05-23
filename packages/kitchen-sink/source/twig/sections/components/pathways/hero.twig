@@ -19,7 +19,7 @@
 {% macro pagecontent() %}
   <section style="padding-bottom: 20vh">
     <div class="umd-lock">
-      <h1 class="page-heading">
+      <h1 class="page-heading component-title">
         Pathway Hero
       </h1>
     </div>
@@ -89,8 +89,7 @@
 
       <umd-element-pathway type="hero" image-position="left">
         <div slot="image">
-          <img src="https://qasystem.umd-staging.com/uploads/heros/default/23_Turner-Hall-Holiday-Party-Invitation.png"
-            alt="Image" />
+          <img src="{{ image }}" alt="Image" />
         </div>
 
         <p slot="headline">

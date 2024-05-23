@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      {{ Hero.example() }}
+      {{ Hero.displayWithOptions() }}
     </section>
 
     <section>
@@ -82,7 +82,7 @@
           <a href="{{ _self.GetChildUrl() }}highlight">View More Examples</a>
         </div>
       </div>
-      {{ Highlight.example() }}
+      {{ Highlight.displayWithOptions() }}
     </section>
 
     <section>
@@ -92,7 +92,11 @@
           <a href="{{ _self.GetChildUrl() }}overlay">View More Examples</a>
         </div>
       </div>
-      {{ Overlay.example() }}
+      {{
+        Overlay.displayWithOptions({
+          theme: 'dark'
+        })
+      }}
     </section>
 
     <section>
@@ -102,7 +106,11 @@
           <a href="{{ _self.GetChildUrl() }}standard">View More Examples</a>
         </div>
       </div>
-      {{ Standard.example() }}
+      {{
+        Standard.displayWithOptions({
+          eyebrow: false
+        })
+      }}
     </section>
   </div>
 {% endmacro %}

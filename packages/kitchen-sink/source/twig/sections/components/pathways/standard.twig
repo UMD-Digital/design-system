@@ -2,22 +2,6 @@
 {% import '_includes/content-dropdown.twig' as Dropdown %}
 {% import _self as macros %}
 
-{% set images = [
-  'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
-  'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
-  'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
-  'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
-  'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
-  'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
-  'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
-  'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
-  'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
-  'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
-  'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
-] %}
-
-{% set image = random(images) %}
-
 {% block page %}
   {{ macros.pagecontent() }}
 {% endblock %}
@@ -45,7 +29,11 @@
         </h2>
       </div>
 
-      {{ macros.example() }}
+      {{
+        macros.displayWithOptions({
+          eyebrow: false
+        })
+      }}
     </section>
 
     <section>
@@ -56,34 +44,11 @@
         </h2>
       </div>
 
-      <umd-element-pathway image-position="left">
-        <img slot="image"
-          src="{{ image }}"
-          alt="Image"
-          data-caption="Photo: Bob lastname" />
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="secondary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          position: 'left'
+        })
+      }}
     </section>
 
     <section>
@@ -94,41 +59,12 @@
         </h2>
       </div>
 
-      <umd-element-pathway>
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="start-date-iso">
-          2024-04-12T12:00:00.000Z
-        </div>
-
-        <div slot="end-date-iso">
-          2024-04-12T17:30:00.000Z
-        </div>
-
-        <div slot="location">
-          Adele H. Stamp Student Union
-        </div>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="secondary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          event: true,
+          eyebrow: false
+        })
+      }}
     </section>
 
     <section>
@@ -139,55 +75,12 @@
         </h2>
       </div>
 
-      <umd-element-pathway>
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="secondary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-
-        <div slot="stats">
-          <umd-element-stat size="large">
-            <div slot="stat">
-              #19
-            </div>
-            <div slot="text">
-              Top public university
-            </div>
-            <div slot="sub-text">
-              Source: 2022-23 U.S. News & World Report
-            </div>
-          </umd-element-stat>
-
-          <umd-element-stat size="large">
-            <div slot="stat">
-              10th
-            </div>
-            <div slot="text">
-              among public institutions for research development & spending
-            </div>
-            <div slot="sub-text">
-              Source: 2022-23 U.S. News & World Report
-            </div>
-          </umd-element-stat>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          stats: true,
+          eyebrow: false
+        })
+      }}
     </section>
 
     <section>
@@ -198,33 +91,11 @@
         </h2>
       </div>
 
-      <umd-element-pathway image-scaled="false">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="secondary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          scaled: false
+        })
+      }}
     </section>
 
     <section>
@@ -267,45 +138,14 @@
         </h2>
       </div>
 
-      <umd-element-pathway theme="light">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="start-date-iso">
-          2024-04-12T12:00:00.000Z
-        </div>
-
-        <div slot="end-date-iso">
-          2024-04-12T17:30:00.000Z
-        </div>
-
-        <div slot="location">
-          Adele H. Stamp Student Union
-        </div>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="primary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          scaled: false,
+          theme: 'light',
+          event: true,
+          ctaType: 'primary'
+        })
+      }}
     </section>
 
     <section style="padding: 50px 0; background-color: black;">
@@ -316,45 +156,14 @@
         </h2>
       </div>
 
-      <umd-element-pathway theme="dark" image-position="left">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="start-date-iso">
-          2024-04-12T12:00:00.000Z
-        </div>
-
-        <div slot="end-date-iso">
-          2024-04-12T17:30:00.000Z
-        </div>
-
-        <div slot="location">
-          Adele H. Stamp Student Union
-        </div>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="primary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          position: 'left',
+          theme: 'dark',
+          event: true,
+          ctaType: 'primary'
+        })
+      }}
     </section>
 
     <div class="umd-lock" style="margin: 50px 0;">
@@ -380,75 +189,122 @@
         </h2>
       </umd-element-section-intro>
 
-      <umd-element-pathway theme="light">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="start-date-iso">
-          2024-04-12T12:00:00.000Z
-        </div>
-
-        <div slot="end-date-iso">
-          2024-04-12T17:30:00.000Z
-        </div>
-
-        <div slot="location">
-          Adele H. Stamp Student Union
-        </div>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="primary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          theme: 'light',
+          event: true,
+          ctaType: 'primary'
+        })
+      }}
     </section>
   </section>
 {% endmacro %}
 
-{% macro example() %}
-  <umd-element-pathway>
-    <div slot="image" data-caption="Photo: Bob lastname">
-      <img src="{{ image }}" alt="Image" />
-    </div>
+{% macro displayWithOptions(params) %}
+  {% set hasImage = params.image ?? true %}
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasRichText = params.text ?? true %}
+  {% set imageScaled = params.scaled ?? true %}
+  {% set hasEvent = params.event ?? false %}
+  {% set hasStats = params.stats ?? false %}
+  {% set theme = params.theme ?? null %}
+  {% set ctaType = params.ctaType ?? 'secondary' %}
+  {% set imagePosition = params.position ?? 'right' %}
 
-    <p slot="headline">
-      What does it take to change the world?
-    </p>
+  {% set images = [
+    'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
+    'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
+    'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
+    'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
+    'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg',
+    'https://brandportal.umd.edu/m/36b2e06f0db27eda/Hero_web-IribeDedication_MM_04272019_6208.jpg',
+    'https://brandportal.umd.edu/m/55565fbba3b510d6/Hero_web-Campus_Snow_01032022_JC_8215.jpg',
+    'https://brandportal.umd.edu/m/2af0dd6b6ef78a48/Hero_web-Students_Outdoors_02052019_7673.jpg',
+    'https://brandportal.umd.edu/m/3b312bf001fda9f3/Hero_web-DriskellCenter_PosingBeauty_SC_02012019_4311.jpg',
+    'https://brandportal.umd.edu/m/4f2058b2174fdcfc/Hero_web-Campus_Snow_02202019_3724.jpg',
+    'https://brandportal.umd.edu/m/25a6294e01fab473/Hero_web-Students_ESJLTC_07282020_EH_1593.jpg'
+  ] %}
 
-    <div slot="text">
-      <p>
-        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis
-        Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud
-        Quamie Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute
+  {% set classList = [] %}
+  {% if theme == 'dark' %}
+    {% set classList = classList|merge(['umd-layout-background-color-dark']) %}
+  {% endif %}
+
+  <umd-element-pathway class="{{ classList|join('') }}"
+    theme="{{ theme }}"
+    image-position="{{ imagePosition }}"
+    image-scaled="{{ imageScaled }}">
+    {% if hasImage %}
+      <div slot="image">
+        <img src="{{ random(images) }}" alt="Image" />
+      </div>
+    {% endif %}
+
+    {% if hasEyebrow %}
+      <p slot="eyebrow">
+        Optional Eyebrow
       </p>
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-      </ul>
-    </div>
+    {% endif %}
+
+    {% if hasHeadline %}
+      <h2 slot="headline">
+        Headline Text
+      </h2>
+    {% endif %}
+
+    {% if hasEvent %}
+      <div slot="start-date-iso">
+        2024-04-12T12:00:00.000Z
+      </div>
+
+      <div slot="end-date-iso">
+        2024-04-12T17:30:00.000Z
+      </div>
+
+      <div slot="location">
+        Adele H. Stamp Student Union
+      </div>
+    {% endif %}
+
+    {% if hasRichText %}
+      <p slot="text">
+        Rich Text
+      </p>
+    {% endif %}
 
     <div slot="actions">
-      <umd-element-call-to-action type="secondary">
-        <a href="https://google.com" aria-label="link to google">Learn More</a>
+      <umd-element-call-to-action type="{{ ctaType }}" theme="{{ theme }}">
+        <a href="/" aria-label="link to google">Learn More</a>
       </umd-element-call-to-action>
     </div>
+
+    {% if hasStats %}
+      <div slot="stats">
+        <umd-element-stat size="large">
+          <div slot="stat">
+            #19
+          </div>
+          <div slot="text">
+            Top public university
+          </div>
+          <div slot="sub-text">
+            Source: 2022-23 U.S. News & World Report
+          </div>
+        </umd-element-stat>
+
+        <umd-element-stat size="large">
+          <div slot="stat">
+            10th
+          </div>
+          <div slot="text">
+            among public institutions for research development & spending
+          </div>
+          <div slot="sub-text">
+            Source: 2022-23 U.S. News & World Report
+          </div>
+        </umd-element-stat>
+      </div>
+    {% endif %}
   </umd-element-pathway>
 {% endmacro %}

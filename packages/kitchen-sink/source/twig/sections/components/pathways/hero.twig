@@ -3,15 +3,6 @@
 {% import '_includes/content-dropdown.twig' as Dropdown %}
 {% import _self as macros %}
 
-{% set images = [
-  'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
-  'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
-  'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
-  'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg'
-] %}
-
-{% set image = random(images) %}
-
 {% block page %}
   {{ macros.pagecontent() }}
 {% endblock %}
@@ -39,7 +30,7 @@
         </h2>
       </div>
 
-      {{ macros.example() }}
+      {{ macros.displayWithOptions() }}
     </section>
 
     <section>
@@ -50,33 +41,11 @@
         </h2>
       </div>
 
-      <umd-element-pathway type="hero" image-position="left">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="primary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          position: 'left'
+        })
+      }}
     </section>
 
     <section>
@@ -87,58 +56,58 @@
         </h2>
       </div>
 
-      <umd-element-pathway type="hero" image-position="left">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="primary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          position: 'left',
+          eyebrow: false
+        })
+      }}
     </section>
   </section>
 {% endmacro %}
 
-{% macro example() %}
-  <umd-element-pathway type="hero">
-    <img slot="image"
-      src="{{ image }}"
-      alt="Image"
-      data-caption="Photo: Bob lastname" />
+{% macro displayWithOptions(params) %}
+  {% set hasImage = params.image ?? true %}
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasRichText = params.text ?? true %}
+  {% set ctaType = params.ctaType ?? 'primary' %}
+  {% set imagePosition = params.position ?? 'right' %}
 
-    <p slot="eyebrow">
-      Optional Eyebrow
-    </p>
+  {% set images = [
+    'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
+    'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
+    'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
+    'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg'
+  ] %}
 
-    <p slot="headline">
-      LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISCING ELIT
-    </p>
+  <umd-element-pathway type="hero" image-position="{{ imagePosition }}">
+    {% if hasImage %}
+      <div slot="image">
+        <img src="{{ random(images) }}" alt="Image" />
+      </div>
+    {% endif %}
 
-    <div slot="text">
-      <p>
-        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis
-        Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud
-        Quamie Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute
+    {% if hasEyebrow %}
+      <p slot="eyebrow">
+        Optional Eyebrow
       </p>
-    </div>
+    {% endif %}
+
+    {% if hasHeadline %}
+      <h2 slot="headline">
+        Headline Text
+      </h2>
+    {% endif %}
+
+    {% if hasRichText %}
+      <p slot="text">
+        Rich Text
+      </p>
+    {% endif %}
 
     <div slot="actions">
-      <umd-element-call-to-action type="primary">
+      <umd-element-call-to-action type="{{ ctaType }}">
         <a href="https://google.com" aria-label="link to google">Learn More</a>
       </umd-element-call-to-action>
     </div>

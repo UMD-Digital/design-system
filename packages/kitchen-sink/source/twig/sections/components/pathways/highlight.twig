@@ -31,7 +31,7 @@
         </h2>
       </div>
 
-      {{ macros.example() }}
+      {{ macros.displayWithOptions() }}
     </section>
 
     <section style="background-color: black; padding: 50px 0">
@@ -42,53 +42,23 @@
         </h2>
       </div>
 
-      <umd-element-pathway-highlight theme="dark">
-        <p slot="highlight">
-          To improve the lives of every person on Earth, we will reimagine
-          teaching and learning; accelerate solutions to the grand challenges of
-          our time through creativity and discovery; and forge a diverse and
-          inclusive community where our differences are celebrated and equity is
-          relentlessly pursued. Together, we will dedicate ourselves to
-          advancing the public good because our individual well-being is
-          enduringly bound to our collective well-being.
-        </p>
-
-        <p slot="highlight-attribution">
-          - The University of Maryland Strategic Plan, <i>Fearlessly Forward: In
-            Pursuit of Excellence and Impact for the Public Good</i>
-        </p>
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="secondary" theme="dark">
-            <a href="/" aria-label="link to homepage">Home Link</a>
-          </umd-element-call-to-action>
-          <umd-element-call-to-action type="secondary" theme="dark">
-            <a href="/components" aria-label="link to components">
-              Components Link
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway-highlight>
+      {{
+        macros.displayWithOptions({
+          theme: 'dark'
+        })
+      }}
     </section>
   </section>
 {% endmacro %}
 
-{% macro example() %}
-  <umd-element-pathway-highlight>
+{% macro displayWithOptions(params) %}
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasRichText = params.text ?? true %}
+  {% set ctaType = params.ctaType ?? 'secondary' %}
+  {% set theme = params.theme ?? null %}
+
+  <umd-element-pathway-highlight theme="{{ theme }}">
     <p slot="highlight">
       To improve the lives of every person on Earth, we will reimagine teaching
       and learning; accelerate solutions to the grand challenges of our time
@@ -104,27 +74,29 @@
         Pursuit of Excellence and Impact for the Public Good</i>
     </p>
 
-    <p slot="eyebrow">
-      Optional Eyebrow
-    </p>
-
-    <p slot="headline">
-      LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISCING
-    </p>
-
-    <div slot="text">
-      <p>
-        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis
-        Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud
-        Quamie Quis Nostrud Quamie Amet Consectetur Adipiscing Iacut
+    {% if hasEyebrow %}
+      <p slot="eyebrow">
+        Optional Eyebrow
       </p>
-    </div>
+    {% endif %}
+
+    {% if hasHeadline %}
+      <h2 slot="headline">
+        Headline Text
+      </h2>
+    {% endif %}
+
+    {% if hasRichText %}
+      <p slot="text">
+        Rich Text
+      </p>
+    {% endif %}
 
     <div slot="actions">
-      <umd-element-call-to-action type="secondary">
+      <umd-element-call-to-action type="{{ ctaType }}" theme="{{ theme }}">
         <a href="/" aria-label="link to homepage">Home Link</a>
       </umd-element-call-to-action>
-      <umd-element-call-to-action type="secondary">
+      <umd-element-call-to-action type="{{ ctaType }}" theme="{{ theme }}">
         <a href="/components" aria-label="link to components">
           Components Link
         </a>

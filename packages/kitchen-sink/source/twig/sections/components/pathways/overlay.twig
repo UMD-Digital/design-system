@@ -3,16 +3,6 @@
 {% import '_includes/content-dropdown.twig' as Dropdown %}
 {% import _self as macros %}
 
-{% set images = [
-  'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
-  'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
-  'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
-  'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
-  'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg'
-] %}
-
-{% set image = random(images) %}
-
 {% block page %}
   {{ macros.pagecontent() }}
 {% endblock %}
@@ -40,7 +30,11 @@
           <span>Theme Dark</span>
         </h2>
       </div>
-      {{ macros.example() }}
+      {{
+        macros.displayWithOptions({
+          theme: 'dark'
+        })
+      }}
     </section>
 
     <section>
@@ -51,45 +45,12 @@
         </h2>
       </div>
 
-      <umd-element-pathway type="overlay" theme="light" image-position="left">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="start-date-iso">
-          2024-04-12T12:00:00.000Z
-        </div>
-
-        <div slot="end-date-iso">
-          2024-04-12T17:30:00.000Z
-        </div>
-
-        <div slot="location">
-          Adele H. Stamp Student Union
-        </div>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="primary">
-            <a href="https://google.com" aria-label="link to google">
-              Learn More
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          theme: 'light',
+          position: 'left'
+        })
+      }}
     </section>
 
     <section>
@@ -100,100 +61,77 @@
         </h2>
       </div>
 
-      <umd-element-pathway type="overlay" theme="maryland">
-        <div slot="image">
-          <img src="{{ image }}" alt="Image" />
-        </div>
-
-        <p slot="eyebrow">
-          Eyebrow Text
-        </p>
-
-        <p slot="headline">
-          Headline Text
-        </p>
-
-        <div slot="start-date-iso">
-          2024-04-12T12:00:00.000Z
-        </div>
-
-        <div slot="end-date-iso">
-          2024-04-12T17:30:00.000Z
-        </div>
-
-        <div slot="location">
-          Adele H. Stamp Student Union
-        </div>
-
-        <div slot="text">
-          <p>
-            Body Text
-          </p>
-        </div>
-
-        <div slot="actions">
-          <umd-element-call-to-action type="secondary"
-            size="standard"
-            theme="dark">
-            <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
-              rel="noopener noreferrer"
-              aria-label="View the PDF for the Visa Data Collection Form">
-              <svg aria-hidden="true"
-                color="white"
-                width="96"
-                height="96"
-                viewBox="0 0 96 96"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M52.9255 47.8801L18 13H42.214L77.5269 47.539L77.1858 47.8801L77.5269 48.2212L42.214 82.7602H18L52.9255 47.8801Z"></path>
-              </svg>
-              <span aria-hidden="true">Visit and blah</span>
-            </a>
-          </umd-element-call-to-action>
-        </div>
-      </umd-element-pathway>
+      {{
+        macros.displayWithOptions({
+          theme: 'maryland',
+          ctaLink: 'secondary'
+        })
+      }}
     </section>
   </section>
 {% endmacro %}
 
-{% macro example() %}
-  <umd-element-pathway type="overlay" theme="dark">
-    <div slot="image">
-      <img src="{{ image }}" alt="Image" />
-    </div>
+{% macro displayWithOptions(params) %}
+  {% set hasImage = params.image ?? true %}
+  {% set hasEyebrow = params.eyebrow ?? true %}
+  {% set hasHeadline = params.headline ?? true %}
+  {% set hasRichText = params.text ?? true %}
+  {% set ctaType = params.ctaType ?? 'primary' %}
+  {% set imagePosition = params.position ?? 'right' %}
+  {% set hasEvent = params.event ?? true %}
+  {% set theme = params.theme ?? null %}
 
-    <p slot="eyebrow">
-      Optional Eyebrow
-    </p>
+  {% set images = [
+    'https://brandportal.umd.edu/m/226baa823376ccd2/original/CommencementVirtualBackgrounds_UMD_0001-JPG.png',
+    'https://brandportal.umd.edu/m/7ba14bfbef057298/Hero_web-221008_as_fb_purdue_00024-Final-tif.jpg',
+    'https://brandportal.umd.edu/m/32a10cb61438d320/Hero_web-PaintBranchBridge_Lights_07152018_6745_Final.jpg',
+    'https://brandportal.umd.edu/m/5575d79a05956663/Hero_web-AntietamBlush_Harvesting_10302018_2825_edit.jpg',
+    'https://brandportal.umd.edu/m/745a4beb711b75f8/Hero_web-Mall_09112017_2982-tif.jpg'
+  ] %}
 
-    <div slot="start-date-iso">
-      2024-04-12T12:00:00.000Z
-    </div>
+  <umd-element-pathway type="overlay"
+    theme="{{ theme }}"
+    image-position="{{ imagePosition }}">
+    {% if hasImage %}
+      <div slot="image">
+        <img src="{{ random(images) }}" alt="Image" />
+      </div>
+    {% endif %}
 
-    <div slot="end-date-iso">
-      2024-04-12T17:30:00.000Z
-    </div>
-
-    <div slot="location">
-      Adele H. Stamp Student Union
-    </div>
-
-    <p slot="headline">
-      LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISCING ELIT
-    </p>
-
-    <div slot="text">
-      <p>
-        Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis
-        Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud
-        Quamie Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute
+    {% if hasEyebrow %}
+      <p slot="eyebrow">
+        Optional Eyebrow
       </p>
-    </div>
+    {% endif %}
+
+    {% if hasEvent %}
+      <div slot="start-date-iso">
+        2024-04-12T12:00:00.000Z
+      </div>
+
+      <div slot="end-date-iso">
+        2024-04-12T17:30:00.000Z
+      </div>
+
+      <div slot="location">
+        Adele H. Stamp Student Union
+      </div>
+    {% endif %}
+
+    {% if hasHeadline %}
+      <h2 slot="headline">
+        Headline Text
+      </h2>
+    {% endif %}
+
+    {% if hasRichText %}
+      <p slot="text">
+        Rich Text
+      </p>
+    {% endif %}
 
     <div slot="actions">
-      <umd-element-call-to-action type="primary">
+      <umd-element-call-to-action type="{{ ctaType }}" theme="{{ theme }}">
         <a href="https://google.com" aria-label="link to google">Learn More</a>
       </umd-element-call-to-action>
     </div>

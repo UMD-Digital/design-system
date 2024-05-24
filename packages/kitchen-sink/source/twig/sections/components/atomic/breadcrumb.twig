@@ -18,7 +18,7 @@
         <span>Primary Styling</span>
       </p>
 
-      {{ macros.example() }}
+      {{ macros.displayWithOptions() }}
     </div>
   </section>
 
@@ -28,21 +28,19 @@
         <span>Theme Dark</span>
         <span>Primary Styling</span>
       </p>
-      <umd-element-breadcrumb theme="dark">
-        <div slot="paths">
-          <a href="">Home</a>
-          <a href="">Primary Link</a>
-          <a href="">Secondary Link</a>
-          <a href="">Tertiary Link</a>
-          <a href="">Current Page</a>
-        </div>
-      </umd-element-breadcrumb>
+      {{
+        macros.displayWithOptions({
+          theme: 'dark'
+        })
+      }}
     </div>
   </section>
 {% endmacro %}
 
-{% macro example() %}
-  <umd-element-breadcrumb>
+{% macro displayWithOptions(params) %}
+  {% set theme = params.theme ?? null %}
+
+  <umd-element-breadcrumb theme="{{ theme }}">
     <div slot="paths">
       <a href="">Home</a>
       <a href="">Primary Link</a>

@@ -18,10 +18,11 @@
           <span>Logo</span>
           <span>Default</span>
         </p>
-
-        <umd-element-logo>
-          <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
-        </umd-element-logo>
+        {{
+          macros.displayWithOptions({
+            border: false
+          })
+        }}
       </div>
     </section>
 
@@ -31,8 +32,9 @@
           <span>Logo</span>
           <span>With Border</span>
         </p>
-
-        {{ macros.example() }}
+        <div class="umd-grid-gap-three">
+          {{ macros.displayWithOptions() }}
+        </div>
       </div>
     </section>
 
@@ -44,9 +46,11 @@
         </p>
 
         <div class="umd-grid-gap-three">
-          <umd-element-logo border="true" theme="dark">
-            <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
-          </umd-element-logo>
+          {{
+            macros.displayWithOptions({
+              theme: 'dark'
+            })
+          }}
         </div>
       </div>
     </section>
@@ -59,17 +63,17 @@
         </p>
 
         <div class="umd-grid-gap-three">
-          <umd-element-logo border="true">
-            <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
-          </umd-element-logo>
-
-          <umd-element-logo border="true">
-            <img src="/terp/logo-right-now.jpg" alt="Logo" slot="image" />
-          </umd-element-logo>
-
-          <umd-element-logo border="true">
-            <img src="/terp/logo-shell.jpg" alt="Logo" slot="image" />
-          </umd-element-logo>
+          {{ macros.displayWithOptions() }}
+          {{
+            macros.displayWithOptions({
+              type: 'rightNow'
+            })
+          }}
+          {{
+            macros.displayWithOptions({
+              type: 'theShell'
+            })
+          }}
         </div>
       </div>
     </section>
@@ -83,17 +87,17 @@
 
         <div style="max-width: 800px; margin: 0 auto;">
           <div class="umd-grid-gap-three">
-            <umd-element-logo border="true">
-              <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
-            </umd-element-logo>
-
-            <umd-element-logo border="true">
-              <img src="/terp/logo-right-now.jpg" alt="Logo" slot="image" />
-            </umd-element-logo>
-
-            <umd-element-logo border="true">
-              <img src="/terp/logo-shell.jpg" alt="Logo" slot="image" />
-            </umd-element-logo>
+            {{ macros.displayWithOptions() }}
+            {{
+              macros.displayWithOptions({
+                type: 'rightNow'
+              })
+            }}
+            {{
+              macros.displayWithOptions({
+                type: 'theShell'
+              })
+            }}
           </div>
         </div>
       </div>
@@ -101,10 +105,25 @@
   </div>
 {% endmacro %}
 
-{% macro example() %}
-  <div class="umd-grid-gap-three">
-    <umd-element-logo border="true">
-      <img src="/terp/marylandtoday.svg" alt="Logo" slot="image" />
-    </umd-element-logo>
-  </div>
+{% macro displayWithOptions(params) %}
+  {% set border = params.border ?? true %}
+  {% set theme = params.theme ?? null %}
+  {% set type = params.type ?? 'today' %}
+  {% set imageSrc = params.imageSrc ?? '/terp/marylandtoday.svg' %}
+
+  {% if type == 'today' %}
+    {% set imageSrc = '/terp/marylandtoday.svg' %}
+  {% endif %}
+
+  {% if type == 'rightNow' %}
+    {% set imageSrc = '/terp/logo-right-now.jpg' %}
+  {% endif %}
+
+  {% if type == 'theShell' %}
+    {% set imageSrc = '/terp/logo-shell.jpg' %}
+  {% endif %}
+
+  <umd-element-logo border="{{ border }}" theme="{{ theme }}">
+    <img src="{{ imageSrc }}" alt="Logo" slot="image" />
+  </umd-element-logo>
 {% endmacro %}

@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-components-library",
-  "version": "0.19.4",
+  "version": "0.19.5",
   "description": "UMD Web Components",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "clean": "rm -rf build",
-    "release": "npx run build && npm publish --access public",
+    "release": "npm run build && npm publish --access public",
     "build": "webpack --env NODE_ENV=production",
     "webpack": "webpack -w --env NODE_ENV=development",
     "start": "npm run webpack"

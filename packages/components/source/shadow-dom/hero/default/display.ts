@@ -66,32 +66,48 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
 };
 
 export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
+  const shadow = element.shadowRoot as ShadowRoot;
   const { VIDEO } = element._slots;
   const type = element.getAttribute('type');
   const videoRef = SlotWithDefaultStyling({ element, slotRef: VIDEO });
 
+  shadow.appendChild(element._styles.content.cloneNode(true));
+
   if (type === TYPE_STACKED || type === TYPE_STACKED_INTERIOR) {
-    return HeroStacked.CreateElement({
-      ...MakeHeroData({ element }),
-      videoRef,
-    });
+    shadow.appendChild(
+      HeroStacked.CreateElement({
+        ...MakeHeroData({ element }),
+        videoRef,
+      }),
+    );
+    return;
   }
 
   if (type === TYPE_MINIMAL) {
-    return HeroMinimal.CreateElement({
-      ...MakeHeroData({ element }),
-    });
+    shadow.appendChild(
+      HeroMinimal.CreateElement({
+        ...MakeHeroData({ element }),
+      }),
+    );
+
+    return;
   }
 
   if (type === TYPE_OVERLAY) {
-    return HeroOverlay.CreateElement({
-      ...MakeHeroData({ element }),
-      videoRef,
-    });
+    shadow.appendChild(
+      HeroOverlay.CreateElement({
+        ...MakeHeroData({ element }),
+        videoRef,
+      }),
+    );
+
+    return;
   }
 
-  return HeroDefault.CreateElement({
-    ...MakeHeroData({ element }),
-    videoRef,
-  });
+  shadow.appendChild(
+    HeroDefault.CreateElement({
+      ...MakeHeroData({ element }),
+      videoRef,
+    }),
+  );
 };

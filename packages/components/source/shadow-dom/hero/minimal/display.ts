@@ -34,7 +34,14 @@ export const CreateShadowDom = ({
   element,
 }: {
   element: UMDHeroMinimalElement;
-}) =>
-  HeroMinimal.CreateElement({
-    ...MakeHeroData({ element }),
-  });
+}) => {
+  const shadow = element.shadowRoot as ShadowRoot;
+
+  shadow.appendChild(element._styles.content.cloneNode(true));
+
+  shadow.appendChild(
+    HeroMinimal.CreateElement({
+      ...MakeHeroData({ element }),
+    }),
+  );
+};

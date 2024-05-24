@@ -5,7 +5,9 @@ declare global {
 }
 
 import { MarkupCreate } from 'utilities';
-import { ComponentStyles, CreateShadowDom } from './display';
+import { ComponentStyles as styles, CreateShadowDom } from './display';
+
+const { SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-hero-minimal';
 const SLOTS = {
@@ -16,27 +18,29 @@ const SLOTS = {
   ACTIONS: 'actions',
 };
 
+const template = MarkupCreate.Node.stylesTemplate({ styles });
+
 export class UMDHeroMinimalElement extends HTMLElement {
   _shadow: ShadowRoot;
   _slots: Record<string, string>;
+  _styles: HTMLTemplateElement;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._slots = SLOTS;
-
-    const styles = `${ComponentStyles}`;
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
-
-    this._shadow.appendChild(template.content.cloneNode(true));
+    this._styles = template;
   }
 
   connectedCallback() {
-    const UI = CreateShadowDom({ element: this });
+    CreateShadowDom({ element: this });
 
-    if (UI) {
-      this._shadow.appendChild(UI);
-    }
+    SlotOberserver({
+      element: this,
+      shadowDom: this._shadow,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 }
 

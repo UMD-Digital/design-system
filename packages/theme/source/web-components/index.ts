@@ -7,7 +7,7 @@ import Card from './additional-styling/card';
 import CardOverlay from './additional-styling/card-overlay';
 import CarouselCards from './default-styling/carousel-cards';
 import Event from './additional-styling/event';
-import EventsDateSlider from './default-styling/events-date-slider';
+import EventsDateSlider from './default-styling/slider-events';
 import Footer from './additional-styling/footer';
 import Hero from './default-styling/hero';
 import Header from './default-styling/header';

@@ -39,28 +39,28 @@ const HeadlineTextMap = ({
   const isSmallBucket = isTypeInBucket(elementParent, SMALL_CONTENT_ELEMENTS);
   const isMediumBucket = isTypeInBucket(elementParent, MEDIUM_CONTENT_ELEMENTS);
   const isLargeBucket = isTypeInBucket(elementParent, LARGE_CONTENT_ELEMENTS);
-  const isLarge = type === DROPDOWN_VERBOSE;
+  const isVerbose = type === DROPDOWN_VERBOSE;
   const isNormal = type === DROPDOWN_NORMAL;
-  const isSmall = type === DROPDOWN_SUCCINCT;
+  const isSuccinct = type === DROPDOWN_SUCCINCT;
 
   const maxiumString =
     'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud Quamie ';
   let text = maxiumString.slice(0, 20);
 
-  if (isLarge) text = maxiumString.slice(0, 60);
-  if (isSmall) text = maxiumString.slice(0, 10);
+  if (isVerbose) text = maxiumString.slice(0, 60);
+  if (isSuccinct) text = maxiumString.slice(0, 10);
 
-  if (isLargeBucket && isLarge) text = maxiumString;
-  if (isLargeBucket && isNormal) text = maxiumString.slice(0, 80);
-  if (isLargeBucket && isSmall) text = maxiumString.slice(0, 40);
+  if (isLargeBucket && isVerbose) text = maxiumString.slice(0, 60);
+  if (isLargeBucket && isNormal) text = maxiumString.slice(0, 30);
+  if (isLargeBucket && isSuccinct) text = maxiumString.slice(0, 8);
 
-  if (isMediumBucket && isLarge) text = maxiumString.slice(0, 60);
-  if (isMediumBucket && isNormal) text = maxiumString.slice(0, 30);
-  if (isMediumBucket && isSmall) text = maxiumString.slice(0, 8);
+  if (isMediumBucket && isVerbose) text = maxiumString.slice(0, 110);
+  if (isMediumBucket && isNormal) text = maxiumString.slice(0, 60);
+  if (isMediumBucket && isSuccinct) text = maxiumString.slice(0, 20);
 
-  if (isSmallBucket && isLarge) text = maxiumString.slice(0, 100);
+  if (isSmallBucket && isVerbose) text = maxiumString.slice(0, 100);
   if (isSmallBucket && isNormal) text = maxiumString.slice(0, 50);
-  if (isSmallBucket && isSmall) text = maxiumString.slice(0, 8);
+  if (isSmallBucket && isSuccinct) text = maxiumString.slice(0, 8);
 
   return text;
 };
@@ -76,9 +76,9 @@ const RichTextMap = ({
   const isSmallBucket = isTypeInBucket(elementParent, SMALL_CONTENT_ELEMENTS);
   const isMediumBucket = isTypeInBucket(elementParent, MEDIUM_CONTENT_ELEMENTS);
   const isLargeBucket = isTypeInBucket(elementParent, LARGE_CONTENT_ELEMENTS);
-  const isLarge = type === DROPDOWN_VERBOSE;
+  const isVerbose = type === DROPDOWN_VERBOSE;
   const isNormal = type === DROPDOWN_NORMAL;
-  const isSmall = type === DROPDOWN_SUCCINCT;
+  const isSuccinct = type === DROPDOWN_SUCCINCT;
 
   const richTextLarge = `<p>Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit <strong>Duis reprehen</strong><i>eu fugiat</i>. Lorem Ipsum Dolor Sit <a href="/">Excepteur occaecat</a>, voluptate Consectetur Adipiscing Elit. Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit voluptate Consectetur Adipiscing Elit</p>`;
   const richTextNormal = `<p>Lorem Ipsum Consectetur Elit <strong>Duis reprehen</strong>. Lorem Ipsum Dolor Sit <a href="/">Excepteur occaecat</a>, voluptate Adipiscing Elit.</p>`;
@@ -86,20 +86,20 @@ const RichTextMap = ({
 
   let text = richTextNormal;
 
-  if (isLarge) text = richTextLarge;
-  if (isSmall) text = richTextSmall;
+  if (isVerbose) text = richTextLarge;
+  if (isSuccinct) text = richTextSmall;
 
-  if (isLargeBucket && isLarge) text = `${richTextLarge} ${richTextNormal}`;
+  if (isLargeBucket && isVerbose) text = `${richTextLarge} ${richTextNormal}`;
   if (isLargeBucket && isNormal) text = `${richTextNormal} ${richTextNormal}`;
-  if (isLargeBucket && isSmall) text = `${richTextNormal} ${richTextSmall}`;
+  if (isLargeBucket && isSuccinct) text = `${richTextNormal} ${richTextSmall}`;
 
-  if (isMediumBucket && isLarge) text = `${richTextLarge} ${richTextSmall}`;
+  if (isMediumBucket && isVerbose) text = `${richTextLarge} ${richTextSmall}`;
   if (isMediumBucket && isNormal) text = `${richTextNormal} ${richTextSmall}`;
-  if (isMediumBucket && isSmall) text = richTextSmall;
+  if (isMediumBucket && isSuccinct) text = richTextSmall;
 
-  if (isSmallBucket && isLarge) text = richTextNormal;
+  if (isSmallBucket && isVerbose) text = richTextNormal;
   if (isSmallBucket && isNormal) text = richTextSmall;
-  if (isSmallBucket && isSmall) text = richTextSmall;
+  if (isSmallBucket && isSuccinct) text = richTextSmall;
 
   return text;
 };
@@ -115,28 +115,28 @@ const BodyTextMap = ({
   const isSmallBucket = isTypeInBucket(elementParent, SMALL_CONTENT_ELEMENTS);
   const isMediumBucket = isTypeInBucket(elementParent, MEDIUM_CONTENT_ELEMENTS);
   const isLargeBucket = isTypeInBucket(elementParent, LARGE_CONTENT_ELEMENTS);
-  const isLarge = type === DROPDOWN_VERBOSE;
+  const isVerbose = type === DROPDOWN_VERBOSE;
   const isNormal = type === DROPDOWN_NORMAL;
-  const isSmall = type === DROPDOWN_SUCCINCT;
+  const isSuccinct = type === DROPDOWN_SUCCINCT;
 
   const maxiumString =
     'Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud Quamie   Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Iacut Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis. Quis Nostrud Quamie   Quis Nostrud Quamie Amet Consectetur Adipiscing Iacute Quis.';
   let text = maxiumString.slice(0, 100);
 
-  if (isLarge) text = maxiumString.slice(0, 200);
-  if (isSmall) text = maxiumString.slice(0, 50);
+  if (isVerbose) text = maxiumString.slice(0, 200);
+  if (isSuccinct) text = maxiumString.slice(0, 50);
 
-  if (isLargeBucket && isLarge) text = maxiumString.slice(0, 400);
-  if (isLargeBucket && isNormal) text = maxiumString.slice(0, 200);
-  if (isLargeBucket && isSmall) text = maxiumString.slice(0, 140);
+  if (isLargeBucket && isVerbose) text = maxiumString.slice(0, 700);
+  if (isLargeBucket && isNormal) text = maxiumString.slice(0, 300);
+  if (isLargeBucket && isSuccinct) text = maxiumString.slice(0, 10);
 
-  if (isMediumBucket && isLarge) text = maxiumString.slice(0, 250);
-  if (isMediumBucket && isNormal) text = maxiumString.slice(0, 170);
-  if (isMediumBucket && isSmall) text = maxiumString.slice(0, 100);
+  if (isMediumBucket && isVerbose) text = maxiumString.slice(0, 500);
+  if (isMediumBucket && isNormal) text = maxiumString.slice(0, 250);
+  if (isMediumBucket && isSuccinct) text = maxiumString.slice(0, 20);
 
-  if (isSmallBucket && isLarge) text = maxiumString.slice(0, 140);
-  if (isSmallBucket && isNormal) text = maxiumString.slice(0, 80);
-  if (isSmallBucket && isSmall) text = maxiumString.slice(0, 60);
+  if (isSmallBucket && isVerbose) text = maxiumString.slice(0, 400);
+  if (isSmallBucket && isNormal) text = maxiumString.slice(0, 200);
+  if (isSmallBucket && isSuccinct) text = maxiumString.slice(0, 10);
 
   return text;
 };
@@ -191,19 +191,19 @@ const RichTextSlot = ({ type }: { type?: string }) => {
 };
 
 const Eyebrow = ({ type }: { type?: string }) => {
-  const isLarge = type === DROPDOWN_VERBOSE;
-  const isSmall = type === DROPDOWN_SUCCINCT;
+  const isVerbose = type === DROPDOWN_VERBOSE;
+  const isSuccinct = type === DROPDOWN_SUCCINCT;
   const slots = Array.from(
     document.querySelectorAll('[slot="eyebrow"]'),
   ) as HTMLSlotElement[];
 
-  const textLarge = 'Optional Eyebrow Long Text';
+  const textVerbose = 'Optional Eyebrow Long Text';
   const textNormal = 'Optional Eyebrow';
-  const textSmall = 'Optional';
+  const textSuccinct = 'Optional';
   let text = textNormal;
 
-  if (isLarge) text = textLarge;
-  if (isSmall) text = textSmall;
+  if (isVerbose) text = textVerbose;
+  if (isSuccinct) text = textSuccinct;
 
   slots.forEach((slot) => {
     const setSlot = (content: string) => {

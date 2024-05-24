@@ -23,7 +23,7 @@ const CreateDetailsData = ({
   startDate,
   endDate,
 }: {
-  locationElement: HTMLElement | Element | null;
+  locationElement?: HTMLElement | Element | null;
   startDate: Record<string, string>;
   endDate?: Record<string, string> | null;
 }) => {

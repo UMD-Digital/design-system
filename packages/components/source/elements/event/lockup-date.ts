@@ -8,8 +8,7 @@ import { MarkupModify, Styles } from 'utilities';
 
 type TypeEventLockupDate = {
   headline: HTMLElement | null;
-  month: HTMLElement | null;
-  day: HTMLElement | null;
+  dateSign?: HTMLElement | null;
   theme?: string;
 };
 
@@ -82,20 +81,14 @@ export const ComponentStyles = `
 `;
 
 const CreateEventLockupDate = (props: TypeEventLockupDate) => {
-  const { headline, month, day, theme } = props;
+  const { headline, dateSign, theme } = props;
   const container = document.createElement('div');
 
   container.classList.add(EVENT_DATE_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
-  if (month && day) {
-    const dateBlock = EventElements.Sign.CreateElement({
-      startMonth: month,
-      startDay: day,
-      theme,
-    });
-
-    container.appendChild(dateBlock);
+  if (dateSign) {
+    container.appendChild(dateSign);
   }
 
   if (headline) {

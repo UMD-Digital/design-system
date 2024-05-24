@@ -1,6 +1,7 @@
 {% extends '../../_layout.twig' %}
 
 {% import 'sections/components/blocks/card.twig' as Card %}
+{% import 'sections/components/atomic/stat.twig' as Stat %}
 
 {% block page %}
   <div style="padding-bottom: 100px;">
@@ -487,29 +488,12 @@
         </h3>
 
         <div class="umd-grid-gap">
-          <umd-element-stat>
-            <div slot="stat">
-              10th
-            </div>
-            <div slot="text">
-              Among public institutions for reasearch devedlopment & spending
-            </div>
-            <div slot="sub-text">
-              Source: 2022-23 U.S. News &amp; World Report
-            </div>
-          </umd-element-stat>
-
-          <umd-element-stat>
-            <div slot="stat">
-              #19
-            </div>
-            <div slot="text">
-              Top public national university
-            </div>
-            <div slot="sub-text">
-              Source: 2022-23 U.S. News &amp; World Report
-            </div>
-          </umd-element-stat>
+          {{ Stat.displayWithOptions({}) }}
+          {{
+            Stat.displayWithOptions({
+              stat: '#19'
+            })
+          }}
         </div>
 
         <h3 class="umd-sans-larger" style="margin-top: 60px">

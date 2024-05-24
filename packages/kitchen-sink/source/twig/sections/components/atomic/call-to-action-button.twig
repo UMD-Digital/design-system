@@ -198,14 +198,7 @@
           <p class="content-heading">
             Primary Styling
           </p>
-          {{
-            CallToActionOption.NormalCTA({
-              ctaSpan: true,
-              ctaLink: false,
-              externalLink: false,
-              button: true
-            })
-          }}
+          {{ CallToActionOption.NormalCTA() }}
         </div>
       </section>
 
@@ -219,10 +212,7 @@
           <div class="cta-layout">
             {{
               CallToActionOption.NormalCTA({
-                primary: true,
-                large: false,
-                ctaOption: 'arrow',
-                button: true
+                ctaOption: 'arrow'
               })
             }}
           </div>
@@ -238,10 +228,7 @@
 
           {{
             CallToActionOption.NormalCTA({
-              primary: true,
-              externalLink: false,
-              large: true,
-              button: true
+              large: true
             })
           }}
         </div>
@@ -255,10 +242,8 @@
 
           {{
             CallToActionOption.NormalCTA({
-              secondary: true,
-              large: false,
-              ctaOption: 'chevron',
-              button: true
+              ctaType: 'secondary',
+              ctaOption: 'chevron'
             })
           }}
         </div>
@@ -274,8 +259,7 @@
           <div class="cta-layout">
             {{
               CallToActionOption.NormalCTA({
-                secondary: true,
-                large: false,
+                ctaType: 'secondary',
                 ctaOption: 'alert'
               })
             }}
@@ -293,10 +277,9 @@
           <div class="cta-layout">
             {{
               CallToActionOption.NormalCTA({
-                secondary: true,
-                large: true,
+                ctaType: 'secondary',
                 ctaOption: 'chevron',
-                button: true
+                large: true
               })
             }}
           </div>
@@ -311,10 +294,7 @@
 
           {{
             CallToActionOption.NormalCTA({
-              outline: true,
-              large: false,
-              externalLink: false,
-              button: true
+              ctaType: 'outline'
             })
           }}
         </div>
@@ -330,9 +310,8 @@
           <div class="cta-layout">
             {{
               CallToActionOption.NormalCTA({
-                outline: true,
-                ctaOption: 'arrow',
-                button: true
+                ctaType: 'outline',
+                ctaOption: 'arrow'
               })
             }}
           </div>
@@ -349,11 +328,8 @@
           <div class="cta-layout">
             {{
               CallToActionOption.NormalCTA({
-                outline: true,
-                externalLink: false,
-                large: true,
-                ctaOption: false,
-                button: true
+                ctaType: 'outline',
+                large: true
               })
             }}
           </div>
@@ -532,24 +508,14 @@
 {% endmacro %}
 
 {% macro primary() %}
-  {{
-    CallToActionOption.NormalCTA({
-      ctaSpan: true,
-      ctaLink: false,
-      externalLink: false,
-      download: false,
-      button: true
-    })
-  }}
+  {{ CallToActionOption.NormalCTA() }}
 {% endmacro %}
 
 {% macro outline() %}
   {{
     CallToActionOption.NormalCTA({
-      outline: true,
-      large: false,
-      ctaOption: 'chevron',
-      button: true
+      ctaType: 'outline',
+      ctaOption: 'chevron'
     })
   }}
 {% endmacro %}
@@ -557,10 +523,8 @@
 {% macro secondary() %}
   {{
     CallToActionOption.NormalCTA({
-      secondary: true,
-      large: false,
-      ctaOption: 'chevron',
-      button: true
+      ctaType: 'secondary',
+      ctaOption: 'chevron'
     })
   }}
 {% endmacro %}

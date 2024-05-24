@@ -4,8 +4,6 @@
 {% import '_includes/macros/fields/span.twig' as CTASpan %}
 {% import _self as macros %}
 
-{% set url = params.url ?? 'https://umd.edu' %}
-
 {% block page %}
   {{ macros.pagecontent() }}
 {% endblock %}
@@ -31,14 +29,7 @@
           <p class="content-heading">
             Primary Styling
           </p>
-          {{
-            macros.SuccinctCTA({
-              ctaSpan: true,
-              ctaLink: false,
-              externalLink: false,
-              download: false
-            })
-          }}
+          {{ macros.SuccinctCTA() }}
         </div>
       </section>
 
@@ -52,26 +43,15 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                primary: true,
-                large: false,
                 ctaOption: 'arrow'
               })
             }}
 
-            {{
-              macros.SuccinctCTA({
-                primary: true,
-                large: false,
-                ctaOption: false
-              })
-            }}
+            {{ macros.SuccinctCTA() }}
 
             {{
               macros.SuccinctCTA({
-                primary: true,
-                large: false,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -88,7 +68,6 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                primary: true,
                 large: true,
                 ctaOption: 'arrow'
               })
@@ -96,18 +75,14 @@
 
             {{
               macros.SuccinctCTA({
-                primary: true,
-                large: true,
-                ctaOption: false
+                large: true
               })
             }}
 
             {{
               macros.SuccinctCTA({
-                primary: true,
                 large: true,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -122,9 +97,7 @@
 
           {{
             macros.SuccinctCTA({
-              secondary: true,
-              primary: false,
-              large: false,
+              ctaType: 'secondary',
               ctaOption: 'chevron'
             })
           }}
@@ -141,25 +114,21 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                secondary: true,
-                large: false,
+                ctaType: 'secondary',
                 ctaOption: 'arrow'
               })
             }}
 
             {{
               macros.SuccinctCTA({
-                secondary: true,
-                large: false
+                ctaType: 'secondary'
               })
             }}
 
             {{
               macros.SuccinctCTA({
-                secondary: true,
-                large: false,
-                download: true,
-                externalLink: false
+                ctaType: 'secondary',
+                download: true
               })
             }}
           </div>
@@ -176,7 +145,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true,
                 ctaOption: 'alert'
               })
@@ -184,17 +153,16 @@
 
             {{
               macros.SuccinctCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true
               })
             }}
 
             {{
               macros.SuccinctCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -209,9 +177,7 @@
 
           {{
             macros.SuccinctCTA({
-              outline: true,
-              large: false,
-              externalLink: false
+              ctaType: 'outline'
             })
           }}
         </div>
@@ -227,23 +193,22 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                outline: true,
+                ctaType: 'outline',
                 ctaOption: 'arrow'
               })
             }}
 
             {{
               macros.SuccinctCTA({
-                outline: true,
+                ctaType: 'outline',
                 ctaOption: false
               })
             }}
 
             {{
               macros.SuccinctCTA({
-                outline: true,
-                download: true,
-                externalLink: false
+                ctaType: 'outline',
+                download: true
               })
             }}
           </div>
@@ -260,7 +225,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                outline: true,
+                ctaType: 'outline',
                 large: true,
                 ctaOption: 'alert'
               })
@@ -268,18 +233,16 @@
 
             {{
               macros.SuccinctCTA({
-                outline: true,
-                large: true,
-                ctaOption: false
+                ctaType: 'outline',
+                large: true
               })
             }}
 
             {{
               macros.SuccinctCTA({
-                outline: true,
+                ctaType: 'outline',
                 large: true,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -295,18 +258,13 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                primary: true,
-                externalLink: false,
                 large: true
               })
             }}
 
             {{
               macros.SuccinctCTA({
-                secondary: true,
-                outline: false,
-                large: true,
-                ctaOption: false
+                ctaType: 'secondary'
               })
             }}
           </div>
@@ -323,8 +281,6 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                primary: true,
-                externalLink: false,
                 large: true,
                 plainText: true
               })
@@ -343,8 +299,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                secondary: true,
-                externalLink: false,
+                ctaType: 'secondary',
                 plainText: true
               })
             }}
@@ -362,9 +317,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                primary: true,
-                externalLink: false,
-                theme: true
+                theme: 'dark'
               })
             }}
           </div>
@@ -381,9 +334,8 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                secondary: true,
-                externalLink: false,
-                theme: true
+                ctaType: 'secondary',
+                theme: 'dark'
               })
             }}
           </div>
@@ -400,9 +352,8 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.SuccinctCTA({
-                outline: true,
-                externalLink: false,
-                theme: true
+                ctaType: 'outline',
+                theme: 'dark'
               })
             }}
           </div>
@@ -416,12 +367,7 @@
           <p class="content-heading">
             Primary Styling
           </p>
-          {{
-            macros.NormalCTA({
-              ctaSpan: true,
-              externalLink: false
-            })
-          }}
+          {{ macros.NormalCTA() }}
         </div>
       </section>
 
@@ -435,27 +381,15 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                primary: true,
-                large: false,
                 ctaOption: 'arrow'
               })
             }}
 
-            {{
-              macros.NormalCTA({
-                primary: true,
-                large: false,
-                ctaOption: false,
-                externalLink: true
-              })
-            }}
+            {{ macros.NormalCTA() }}
 
             {{
               macros.NormalCTA({
-                primary: true,
-                large: false,
-                download: true,
-                externalLink: true
+                download: true
               })
             }}
           </div>
@@ -472,7 +406,6 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                primary: true,
                 large: true,
                 ctaOption: 'arrow'
               })
@@ -480,18 +413,14 @@
 
             {{
               macros.NormalCTA({
-                primary: true,
-                large: true,
-                ctaOption: false
+                large: true
               })
             }}
 
             {{
               macros.NormalCTA({
-                primary: true,
                 large: true,
-                download: true,
-                externalLink: true
+                download: true
               })
             }}
           </div>
@@ -506,9 +435,7 @@
 
           {{
             macros.NormalCTA({
-              secondary: true,
-              primary: false,
-              large: false,
+              ctaType: 'secondary',
               ctaOption: 'chevron'
             })
           }}
@@ -525,25 +452,21 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                secondary: true,
-                large: false,
+                ctaType: 'secondary',
                 ctaOption: 'arrow'
               })
             }}
 
             {{
               macros.NormalCTA({
-                secondary: true,
-                large: false
+                ctaType: 'secondary'
               })
             }}
 
             {{
               macros.NormalCTA({
-                secondary: true,
-                large: false,
-                download: true,
-                externalLink: false
+                ctaType: 'secondary',
+                download: true
               })
             }}
           </div>
@@ -560,7 +483,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true,
                 ctaOption: 'alert'
               })
@@ -568,17 +491,16 @@
 
             {{
               macros.NormalCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true
               })
             }}
 
             {{
               macros.NormalCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -593,9 +515,7 @@
 
           {{
             macros.NormalCTA({
-              outline: true,
-              large: false,
-              externalLink: false
+              ctaType: 'outline'
             })
           }}
         </div>
@@ -611,23 +531,21 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                outline: true,
+                ctaType: 'outline',
                 ctaOption: 'arrow'
               })
             }}
 
             {{
               macros.NormalCTA({
-                outline: true,
-                ctaOption: false
+                ctaType: 'outline'
               })
             }}
 
             {{
               macros.NormalCTA({
-                outline: true,
-                download: true,
-                externalLink: false
+                ctaType: 'outline',
+                download: true
               })
             }}
           </div>
@@ -644,7 +562,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                outline: true,
+                ctaType: 'outline',
                 large: true,
                 ctaOption: 'alert'
               })
@@ -652,18 +570,16 @@
 
             {{
               macros.NormalCTA({
-                outline: true,
-                large: true,
-                ctaOption: false
+                ctaType: 'outline',
+                large: true
               })
             }}
 
             {{
               macros.NormalCTA({
-                outline: true,
+                ctaType: 'outline',
                 large: true,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -679,18 +595,13 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                primary: true,
-                externalLink: false,
                 large: true
               })
             }}
 
             {{
               macros.NormalCTA({
-                secondary: true,
-                outline: false,
-                large: true,
-                ctaOption: false
+                ctaType: 'secondary'
               })
             }}
           </div>
@@ -707,8 +618,6 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                primary: true,
-                externalLink: false,
                 large: true,
                 plainText: true
               })
@@ -727,8 +636,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                secondary: true,
-                externalLink: false,
+                ctaType: 'secondary',
                 plainText: true
               })
             }}
@@ -746,9 +654,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                primary: true,
-                externalLink: false,
-                theme: true
+                theme: 'dark'
               })
             }}
           </div>
@@ -765,9 +671,8 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                secondary: true,
-                externalLink: false,
-                theme: true
+                ctaType: 'secondary',
+                theme: 'dark'
               })
             }}
           </div>
@@ -784,9 +689,8 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.NormalCTA({
-                outline: true,
-                externalLink: false,
-                theme: true
+                ctaType: 'outline',
+                theme: 'dark'
               })
             }}
           </div>
@@ -800,14 +704,7 @@
           <p class="content-heading">
             Primary Styling
           </p>
-          {{
-            macros.VerboseCTA({
-              ctaSpan: true,
-              ctaLink: false,
-              externalLink: false,
-              download: false
-            })
-          }}
+          {{ macros.VerboseCTA() }}
         </div>
       </section>
 
@@ -821,27 +718,15 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                primary: true,
-                large: false,
                 ctaOption: 'arrow'
               })
             }}
 
-            {{
-              macros.VerboseCTA({
-                primary: true,
-                large: false,
-                ctaOption: false,
-                externalLink: true
-              })
-            }}
+            {{ macros.VerboseCTA() }}
 
             {{
               macros.VerboseCTA({
-                primary: true,
-                large: false,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -858,7 +743,6 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                primary: true,
                 large: true,
                 ctaOption: 'arrow'
               })
@@ -866,18 +750,14 @@
 
             {{
               macros.VerboseCTA({
-                primary: true,
-                large: true,
-                ctaOption: false
+                large: true
               })
             }}
 
             {{
               macros.VerboseCTA({
-                primary: true,
                 large: true,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -892,9 +772,7 @@
 
           {{
             macros.VerboseCTA({
-              secondary: true,
-              primary: false,
-              large: false,
+              ctaType: 'secondary',
               ctaOption: 'chevron'
             })
           }}
@@ -911,25 +789,21 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                secondary: true,
-                large: false,
+                ctaType: 'secondary',
                 ctaOption: 'arrow'
               })
             }}
 
             {{
               macros.VerboseCTA({
-                secondary: true,
-                large: false
+                ctaType: 'secondary'
               })
             }}
 
             {{
               macros.VerboseCTA({
-                secondary: true,
-                large: false,
-                download: true,
-                externalLink: false
+                ctaType: 'secondary',
+                download: true
               })
             }}
           </div>
@@ -946,7 +820,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true,
                 ctaOption: 'alert'
               })
@@ -954,17 +828,16 @@
 
             {{
               macros.VerboseCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true
               })
             }}
 
             {{
               macros.VerboseCTA({
-                secondary: true,
+                ctaType: 'secondary',
                 large: true,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -979,9 +852,7 @@
 
           {{
             macros.VerboseCTA({
-              outline: true,
-              large: false,
-              externalLink: false
+              ctaType: 'outline'
             })
           }}
         </div>
@@ -997,23 +868,21 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                outline: true,
+                ctaType: 'outline',
                 ctaOption: 'arrow'
               })
             }}
 
             {{
               macros.VerboseCTA({
-                outline: true,
-                ctaOption: false
+                ctaType: 'outline'
               })
             }}
 
             {{
               macros.VerboseCTA({
-                outline: true,
-                download: true,
-                externalLink: false
+                ctaType: 'outline',
+                download: true
               })
             }}
           </div>
@@ -1030,7 +899,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                outline: true,
+                ctaType: 'outline',
                 large: true,
                 ctaOption: 'alert'
               })
@@ -1038,18 +907,16 @@
 
             {{
               macros.VerboseCTA({
-                outline: true,
-                large: true,
-                ctaOption: false
+                ctaType: 'outline',
+                large: true
               })
             }}
 
             {{
               macros.VerboseCTA({
-                outline: true,
+                ctaType: 'outline',
                 large: true,
-                download: true,
-                externalLink: false
+                download: true
               })
             }}
           </div>
@@ -1065,18 +932,13 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                primary: true,
-                externalLink: false,
                 large: true
               })
             }}
 
             {{
               macros.VerboseCTA({
-                secondary: true,
-                outline: false,
-                large: true,
-                ctaOption: false
+                ctaType: 'secondary'
               })
             }}
           </div>
@@ -1093,8 +955,6 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                primary: true,
-                externalLink: false,
                 large: true,
                 plainText: true
               })
@@ -1113,8 +973,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                secondary: true,
-                externalLink: false,
+                ctaType: 'secondary',
                 plainText: true
               })
             }}
@@ -1132,9 +991,7 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                primary: true,
-                externalLink: false,
-                theme: true
+                theme: 'dark'
               })
             }}
           </div>
@@ -1151,9 +1008,8 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                secondary: true,
-                externalLink: false,
-                theme: true
+                ctaType: 'secondary',
+                theme: 'dark'
               })
             }}
           </div>
@@ -1170,9 +1026,8 @@
           <div class="umd-grid-row-mobile-tablet">
             {{
               macros.VerboseCTA({
-                outline: true,
-                externalLink: false,
-                theme: true
+                ctaType: 'outline',
+                theme: 'dark'
               })
             }}
           </div>
@@ -1188,13 +1043,12 @@
         </p>
 
         <div class="umd-grid-gap-three" style="align-items: center;">
-          <umd-element-call-to-action type="secondary" theme="gold">
-            <a href="https://umd-provost.files.svdcdn.com/local/files/Visa_Data_Collection_Form_2022.pdf?dm=1701959069"
-              rel="noopener noreferrer"
-              aria-label="View the PDF for the Visa Data Collection Form">
-              Visit and blah
-            </a>
-          </umd-element-call-to-action>
+          {{
+            macros.NormalCTA({
+              ctaType: 'secondary',
+              theme: 'gold'
+            })
+          }}
 
           <umd-element-call-to-action type="primary" theme="gold">
             <a href="https://google.com"
@@ -1363,23 +1217,14 @@
 {% endmacro %}
 
 {% macro primary() %}
-  {{
-    macros.NormalCTA({
-      ctaSpan: true,
-      ctaLink: false,
-      externalLink: false,
-      download: false
-    })
-  }}
+  {{ macros.NormalCTA() }}
 {% endmacro %}
 
 {% macro outline() %}
   {{
     macros.NormalCTA({
-      outline: true,
-      large: false,
-      ctaOption: 'chevron',
-      button: false
+      ctaType: 'outline',
+      ctaOption: 'chevron'
     })
   }}
 {% endmacro %}
@@ -1387,10 +1232,8 @@
 {% macro secondary() %}
   {{
     macros.NormalCTA({
-      secondary: true,
-      large: false,
-      ctaOption: 'chevron',
-      button: false
+      ctaType: 'secondary',
+      ctaOption: 'chevron'
     })
   }}
 {% endmacro %}
@@ -1453,32 +1296,21 @@
 {% endmacro %}
 
 {% macro SuccinctCTA(params) %}
-  {% set attrs = '' %}
+  {% set sizeAttrs = '' %}
   {% set buttonAttr = '' %}
 
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasCtaSpan = params.ctaSpan ?? true %}
   {% set isExternalLink = params.externalLink ?? true %}
   {% set hasPlainText = params.plainText ?? false %}
+  {% set isPrimary = params.primary ?? true %}
+  {% set hasOutline = params.outline ?? false %}
+  {% set isLarge = params.large ?? false %}
+  {% set theme = params.theme ?? 'light' %}
+  {% set ctaType = params.ctaType ?? 'primary' %}
 
-  {% if params.primary %}
-    {% set attrs = attrs ~ 'type="primary"' %}
-  {% endif %}
-
-  {% if params.secondary %}
-    {% set attrs = attrs ~ 'type="secondary"' %}
-  {% endif %}
-
-  {% if params.outline %}
-    {% set attrs = attrs ~ 'type="outline"' %}
-  {% endif %}
-
-  {% if params.theme %}
-    {% set attrs = attrs ~ 'theme="dark"' %}
-  {% endif %}
-
-  {% if params.large %}
-    {% set attrs = attrs ~ 'size="large"' %}
+  {% if isLarge %}
+    {% set sizeAttrs = sizeAttrs ~ 'size="large"' %}
   {% endif %}
 
   {% if params.download %}
@@ -1489,9 +1321,22 @@
     {% set buttonAttr = buttonAttr ~ 'type="button"' %}
   {% endif %}
 
-  <umd-element-call-to-action {{ attrs }}>
+  <umd-element-call-to-action type="{{ ctaType }}"
+    theme="{{ theme }}"
+    {{ sizeAttrs }}>
+    {% if isInternalLink %}
+      <a href="/" {{ buttonAttr }}>
+        {% if hasCtaLink %}
+          {{ _self.CtaOptions(params.ctaOption) }}
+        {% endif %}
+        {% if hasCtaSpan %}
+          {{ CTASpan.CTASpanSuccinct() }}
+        {% endif %}
+      </a>
+    {% endif %}
+
     {% if isExternalLink %}
-      <a href="{{ url }}" target="_blank">
+      <a href="/" target="_blank" rel="noopener noreferrer">
         {% if hasCtaLink %}
           {{ _self.CtaOptions(params.ctaOption) }}
         {% endif %}
@@ -1500,49 +1345,36 @@
           {{ CTASpan.CTASpanSuccinct() }}
         {% endif %}
       </a>
-    {% else %}
-      <a href="/" {{ buttonAttr }}>
-        {% if hasCtaSpan %}
-          {{ CTASpan.CTASpanSuccinct() }}
-        {% endif %}
-      </a>
     {% endif %}
+
     {% if hasPlainText %}
-      <a href="" slot="plain-text">Plain Text</a>
+      <a href="/" slot="plain-text">Plain Text</a>
     {% endif %}
   </umd-element-call-to-action>
 {% endmacro %}
 
 {% macro NormalCTA(params) %}
-  {% set attrs = '' %}
+  {% set sizeAttrs = '' %}
   {% set buttonAttr = '' %}
 
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasCtaSpan = params.ctaSpan ?? true %}
-  {% set isExternalLink = params.externalLink ?? true %}
+  {% set isInternalLink = params.internalLink ?? true %}
+  {% set isExternalLink = params.externalLink ?? false %}
+  {% set hasIconOption = params.iconOption ?? 'arrow' %}
   {% set hasPlainText = params.plainText ?? false %}
+  {% set isPrimary = params.primary ?? true %}
+  {% set hasOutline = params.outline ?? false %}
+  {% set isLarge = params.large ?? false %}
+  {% set isDownload = params.download ?? false %}
+  {% set theme = params.theme ?? 'light' %}
+  {% set ctaType = params.ctaType ?? 'primary' %}
 
-  {% if params.primary %}
-    {% set attrs = attrs ~ 'type="primary"' %}
+  {% if isLarge %}
+    {% set sizeAttrs = sizeAttrs ~ 'size="large"' %}
   {% endif %}
 
-  {% if params.secondary %}
-    {% set attrs = attrs ~ 'type="secondary"' %}
-  {% endif %}
-
-  {% if params.outline %}
-    {% set attrs = attrs ~ 'type="outline"' %}
-  {% endif %}
-
-  {% if params.theme %}
-    {% set attrs = attrs ~ 'theme="dark"' %}
-  {% endif %}
-
-  {% if params.large %}
-    {% set attrs = attrs ~ 'size="large"' %}
-  {% endif %}
-
-  {% if params.download %}
+  {% if isDownload %}
     {% set buttonAttr = buttonAttr ~ 'type="button" download' %}
   {% endif %}
 
@@ -1550,9 +1382,22 @@
     {% set buttonAttr = buttonAttr ~ 'type="button"' %}
   {% endif %}
 
-  <umd-element-call-to-action {{ attrs }}>
+  <umd-element-call-to-action type="{{ ctaType }}"
+    theme="{{ theme }}"
+    {{ sizeAttrs }}>
+    {% if isInternalLink %}
+      <a href="/" {{ buttonAttr }}>
+        {% if hasCtaLink %}
+          {{ _self.CtaOptions(params.ctaOption) }}
+        {% endif %}
+        {% if hasCtaSpan %}
+          {{ CTASpan.CTASpanNormal() }}
+        {% endif %}
+      </a>
+    {% endif %}
+
     {% if isExternalLink %}
-      <a href="{{ url }}" {{ buttonAttr }}>
+      <a href="/" target="_blank" rel="noopener noreferrer">
         {% if hasCtaLink %}
           {{ _self.CtaOptions(params.ctaOption) }}
         {% endif %}
@@ -1561,13 +1406,8 @@
           {{ CTASpan.CTASpanNormal() }}
         {% endif %}
       </a>
-    {% else %}
-      <a href="/" {{ buttonAttr }}>
-        {% if hasCtaSpan %}
-          {{ CTASpan.CTASpanNormal() }}
-        {% endif %}
-      </a>
     {% endif %}
+
     {% if hasPlainText %}
       <a href="" slot="plain-text">Plain Text</a>
     {% endif %}
@@ -1575,35 +1415,27 @@
 {% endmacro %}
 
 {% macro VerboseCTA(params) %}
-  {% set attrs = '' %}
+  {% set sizeAttrs = '' %}
   {% set buttonAttr = '' %}
 
   {% set hasCtaLink = params.ctaLink ?? true %}
   {% set hasCtaSpan = params.ctaSpan ?? true %}
-  {% set isExternalLink = params.externalLink ?? true %}
+  {% set isInternalLink = params.internalLink ?? true %}
+  {% set isExternalLink = params.externalLink ?? false %}
+  {% set hasIconOption = params.iconOption ?? 'arrow' %}
   {% set hasPlainText = params.plainText ?? false %}
+  {% set isPrimary = params.primary ?? true %}
+  {% set hasOutline = params.outline ?? false %}
+  {% set isLarge = params.large ?? false %}
+  {% set isDownload = params.download ?? false %}
+  {% set theme = params.theme ?? 'light' %}
+  {% set ctaType = params.ctaType ?? 'primary' %}
 
-  {% if params.primary %}
-    {% set attrs = attrs ~ 'type="primary"' %}
+  {% if isLarge %}
+    {% set sizeAttrs = sizeAttrs ~ 'size="large"' %}
   {% endif %}
 
-  {% if params.secondary %}
-    {% set attrs = attrs ~ 'type="secondary"' %}
-  {% endif %}
-
-  {% if params.outline %}
-    {% set attrs = attrs ~ 'type="outline"' %}
-  {% endif %}
-
-  {% if params.theme %}
-    {% set attrs = attrs ~ 'theme="dark"' %}
-  {% endif %}
-
-  {% if params.large %}
-    {% set attrs = attrs ~ 'size="large"' %}
-  {% endif %}
-
-  {% if params.download %}
+  {% if isDownload %}
     {% set buttonAttr = buttonAttr ~ 'type="button" download' %}
   {% endif %}
 
@@ -1611,9 +1443,22 @@
     {% set buttonAttr = buttonAttr ~ 'type="button"' %}
   {% endif %}
 
-  <umd-element-call-to-action {{ attrs }}>
+  <umd-element-call-to-action type="{{ ctaType }}"
+    theme="{{ theme }}"
+    {{ sizeAttrs }}>
+    {% if isInternalLink %}
+      <a href="/" {{ buttonAttr }}>
+        {% if hasCtaLink %}
+          {{ _self.CtaOptions(params.ctaOption) }}
+        {% endif %}
+        {% if hasCtaSpan %}
+          {{ CTASpan.CTASpanVerbose() }}
+        {% endif %}
+      </a>
+    {% endif %}
+
     {% if isExternalLink %}
-      <a href="{{ url }}" {{ buttonAttr }}>
+      <a href="/" target="_blank" rel="noopener noreferrer">
         {% if hasCtaLink %}
           {{ _self.CtaOptions(params.ctaOption) }}
         {% endif %}
@@ -1622,13 +1467,8 @@
           {{ CTASpan.CTASpanVerbose() }}
         {% endif %}
       </a>
-    {% else %}
-      <a href="/" {{ buttonAttr }}>
-        {% if hasCtaSpan %}
-          {{ CTASpan.CTASpanVerbose() }}
-        {% endif %}
-      </a>
     {% endif %}
+
     {% if hasPlainText %}
       <a href="" slot="plain-text">Plain Text</a>
     {% endif %}

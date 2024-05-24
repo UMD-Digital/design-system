@@ -79,7 +79,7 @@
           <span>Breadcrumb</span>
           <a href="{{ _self.GetChildUrl() }}breadcrumb">View More Examples</a>
         </div>
-        {{ Breadcrumb.example() }}
+        {{ Breadcrumb.displayWithOptions() }}
       </div>
     </section>
 
@@ -113,7 +113,9 @@
           <span>Logo</span>
           <a href="{{ _self.GetChildUrl() }}logo">View More Examples</a>
         </div>
-        {{ Logo.example() }}
+        <div class="umd-grid-gap-three">
+          {{ Logo.displayWithOptions() }}
+        </div>
       </div>
     </section>
 
@@ -124,7 +126,7 @@
           <a href="{{ _self.GetChildUrl() }}stat">View More Examples</a>
         </div>
 
-        {{ Stat.example() }}
+        {{ Stat.displayWithOptions() }}
       </div>
     </section>
   </div>

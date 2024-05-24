@@ -3,7 +3,6 @@ require('styles/dependencies/dropdown.css');
 const DROPDOWN_SUCCINCT = 'succinct';
 const DROPDOWN_NORMAL = 'normal';
 const DROPDOWN_VERBOSE = 'verbose';
-const DROPDOWN_IDS = [DROPDOWN_SUCCINCT, DROPDOWN_NORMAL, DROPDOWN_VERBOSE];
 
 const SMALL_CONTENT_ELEMENTS = [
   'umd-element-slider-events',
@@ -215,7 +214,7 @@ const Eyebrow = ({ type }: { type?: string }) => {
   });
 };
 
-const ContentOptionsWithJS = () => {
+const ContentOptions = () => {
   const dropdown = document.getElementById(
     'content-variation-js',
   ) as HTMLSelectElement | null;
@@ -234,73 +233,6 @@ const ContentOptionsWithJS = () => {
   UpdateSlotContent();
 };
 
-// To Be Removed when elements are refactored to JS
-
-const ElementNames = [
-  'umd-element-carousel-cards',
-  'umd-element-events-date-slider',
-];
-
-const ShowSubElements = ({ container }: { container: HTMLElement }) => {
-  const hiddenElements = Array.from(
-    container.querySelectorAll('[resize]'),
-  ) as HTMLDivElement[];
-
-  hiddenElements.forEach((element) => {
-    const isTogglableElement = ElementNames.some(
-      (name) => name === element.nodeName.toLowerCase(),
-    );
-
-    if (isTogglableElement) {
-      element.setAttribute('resize', 'true');
-    }
-
-    // Edge Case for Accordion
-
-    if (element.nodeName.toLowerCase() === 'umd-element-accordion-item') {
-      const isOpen = element.getAttribute('state') === 'open';
-      if (isOpen) {
-        element.setAttribute('resize', 'true');
-      }
-    }
-  });
-};
-
-const UpdateHTMLSlotContent = () => {
-  const dropdownSelection = document.getElementById(
-    'content-variation',
-  ) as HTMLSelectElement | null;
-
-  const toggleContentVisibility = (selectedId: string): void => {
-    const selectedContainer = document.getElementById(
-      selectedId,
-    ) as HTMLDivElement;
-
-    const display = () => {
-      DROPDOWN_IDS.forEach((id) => {
-        const container = document.getElementById(id) as HTMLDivElement;
-
-        if (selectedContainer !== container) {
-          container.setAttribute('aria-hidden', 'true');
-        } else {
-          container.setAttribute('aria-hidden', 'false');
-          ShowSubElements({ container });
-        }
-      });
-    };
-
-    if (selectedContainer) display();
-  };
-
-  if (dropdownSelection) {
-    dropdownSelection.addEventListener('change', (event: Event) => {
-      const selectElement = event.target as HTMLSelectElement;
-      toggleContentVisibility(selectElement.value);
-    });
-  }
-};
-
 export default () => {
-  ContentOptionsWithJS();
-  UpdateHTMLSlotContent();
+  ContentOptions();
 };

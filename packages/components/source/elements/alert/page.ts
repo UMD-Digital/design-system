@@ -9,6 +9,7 @@ type TypeShouldShowProps = {
 type TypeAlertProps = TypeShouldShowProps &
   TypeAlertTextProps & {
     isShowIcon?: boolean;
+    theme?: string | null;
   };
 
 type TypeAlertButtonProps = {
@@ -18,12 +19,24 @@ type TypeAlertButtonProps = {
 const { Colors, Spacing } = Tokens;
 
 const MEDUM = 500;
+const ATTRIBUTE_THEME = 'theme';
+const THEME_DARK = 'dark';
+
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 const ELEMENT_NAME = 'umd-element-alert-page';
 const ELEMENT_ALERT_PAGE_DECLARATION = 'alert-page-declaration';
 const ELEMENT_ALERT_PAGE_CONTAINER = 'alert-page-container';
 const ELEMENT_ALERT_PAGE_CLOSE_BUTTON = 'alert-page-close-button';
 const ELEMENT_ALERT_PAGE_ICON = 'alert-page-icon';
+
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_ALERT_PAGE_CONTAINER}${IS_THEME_DARK}`;
+
+const OverwriteThemeStyles = `
+  ${OVERWRITE_THEME_DARK_CONTAINER} * {
+    color: ${Colors.white};
+  }
+`;
 
 const ButtonStyles = `
   .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} {
@@ -77,6 +90,7 @@ const STYLES_ALERT_PAGE_ELEMENT = `
   ${AlertText.Styles}
   ${IconStyles}
   ${ButtonStyles}
+  ${OverwriteThemeStyles}
 `;
 
 const CreateIcon = () => {
@@ -104,13 +118,14 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
 
 export const CreateAlertPageElement = (props: TypeAlertProps) =>
   (() => {
-    const { isShowIcon = true } = props;
+    const { isShowIcon = true, theme } = props;
     const elementContainer = document.createElement('div');
     const container = document.createElement('div');
     const textWrapper = AlertText.CreateElement(props);
 
     container.classList.add(ELEMENT_ALERT_PAGE_CONTAINER);
     if (isShowIcon) container.appendChild(CreateIcon());
+    if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
     container.appendChild(textWrapper);
     container.appendChild(CreateCloseButton({ container: elementContainer }));
 

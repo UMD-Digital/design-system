@@ -31,6 +31,8 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
+  const theme = element.getAttribute('theme');
+
   const alert = AlertPage.CreateElement({
     text: SlotWithDefaultStyling({ element, slotRef: SLOTS.BODY }),
     headline: SlotWithDefaultStyling({
@@ -38,8 +40,8 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
       slotRef: SLOTS.HEADLINE,
     }),
     actions: SlotWithDefaultStyling({ element, slotRef: SLOTS.ACTIONS }),
-
     isShowIcon: element.getAttribute(ATTRIBUTE_ICON) === 'true',
+    theme,
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

@@ -1,0 +1,3 @@
+[submodule "packages/design-system-ui"]
+	path = packages/design-system-ui
+	url = git@github.com:UMD-Digital/design-system-ui.git

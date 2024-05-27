@@ -1,7 +1,8 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { LayoutImage } from 'macros';
+import event from 'utilities/markup/event';
 
-const { Spacing } = Tokens;
+const { Spacing, Colors } = Tokens;
 
 type TypeScaleProps = {
   isImageScaled: boolean;
@@ -9,6 +10,7 @@ type TypeScaleProps = {
 
 type TypeImageProps = {
   image: HTMLElement | null;
+  eventSign?: HTMLElement | null;
 };
 
 export type TypePathwayImageContainer = TypeScaleProps & TypeImageProps;
@@ -19,8 +21,21 @@ const IS_WITHOUT_IMAGE_SCALED = `[${ATTRIBUTE_IMAGE_SCALED}="false"]`;
 
 const ELEMENT_PATHWAY_CONTAINER_IMAGE = 'pathway-image-container';
 const ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER = 'pathway-image-container-image';
+const ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN = 'pathway-image-container-sign';
 
 const OVERWRITE_SCALED_IMAGE_CONTAINER = `.${ELEMENT_PATHWAY_CONTAINER_IMAGE}${IS_WITHOUT_IMAGE_SCALED}`;
+
+// prettier-ignore
+const EventSignStyles = `
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN} {
+    position: absolute;
+    z-index: 9;
+    bottom: ${Spacing.min};
+    left: ${Spacing.min};
+    background-color: ${Colors.white};
+    padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
+  }
+`;
 
 // prettier-ignore
 const ImageSizeStyles = `
@@ -59,6 +74,7 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
   }
 
   ${ImageSizeStyles}
+  ${EventSignStyles}
 `
 
 const CreatePathwayImageContainer = (
@@ -66,7 +82,7 @@ const CreatePathwayImageContainer = (
 ) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const { image } = element;
+  const { image, eventSign } = element;
 
   wrapper.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER);
 
@@ -85,6 +101,12 @@ const CreatePathwayImageContainer = (
 
     container.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE);
     container.appendChild(wrapper);
+
+    if (eventSign) {
+      eventSign.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN);
+      container.setAttribute(ATTRIBUTE_IMAGE_SCALED, 'true');
+      container.appendChild(eventSign);
+    }
 
     return container;
   }

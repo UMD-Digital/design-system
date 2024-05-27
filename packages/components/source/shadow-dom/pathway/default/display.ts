@@ -63,18 +63,28 @@ const MakeCommonDefaultData = ({
     stats: SlotWithDefaultStyling({ element, slotRef: STATS }),
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
     eventDetails: null as null | HTMLElement,
+    eventSign: null as null | HTMLElement,
   };
 
   if (startDate) {
+    const eventData = MarkupEvent.CreateDetailsData({
+      locationElement: locationSlot,
+      startDate,
+      endDate,
+    });
     let themeStyling = 'dark';
-    if (theme === THEME_LIGHT || theme === THEME_WHITE) themeStyling = 'light';
+    if (theme === THEME_LIGHT || theme === THEME_WHITE) {
+      themeStyling = 'light';
+    }
+
     obj.eventDetails = EventElements.Meta.CreateElement({
-      ...MarkupEvent.CreateDetailsData({
-        locationElement: locationSlot,
-        startDate,
-        endDate,
-      }),
+      ...eventData,
       theme: themeStyling,
+    });
+
+    obj.eventSign = EventElements.Sign.CreateElement({
+      ...eventData,
+      isLargeSize: true,
     });
   }
 

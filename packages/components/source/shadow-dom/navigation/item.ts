@@ -39,9 +39,12 @@ class UMDNavItemElement extends HTMLElement {
     const primaryLinkContainer = element.querySelector(
       `[slot="${SLOTS.PRIMARY_LINK}"]`,
     ) as HTMLElement;
-    const dropdownLinksContainer = element.querySelector(
-      `[slot="${SLOTS.DROPDOWN_LINKS}"]`,
+    const dropdownLinksSlot = element.querySelector(
+      '[slot="dropdown-links"]',
     ) as HTMLElement;
+    const dropdownLinksContainer = dropdownLinksSlot
+      ? (dropdownLinksSlot.cloneNode(true) as HTMLElement)
+      : null;
 
     if (!primaryLinkContainer) {
       throw new Error('Primary link is required for a nav item');

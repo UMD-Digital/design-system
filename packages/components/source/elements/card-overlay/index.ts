@@ -29,9 +29,15 @@ const ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER = 'card-overlay-default-wrapper';
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
 
-const OVERWRITE_THEME_DARK_WRAPPER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER} `;
+const OVERWRITE_THEME_DARK_WRAPPER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER}`;
 
 const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_WITH_CTA_ICON} .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER}`;
+
+const OVERWRITE_SCALING_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmallScaling.Elements.container}`;
+const OVERWRITE_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_TEXT_LOCK_HEADLINE = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.headline}`;
+const OVERWRITE_TEXT_LOCK_DATE = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.date}`;
+const OVERWRITE_TEXT_LOCK_ACTIONS = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.actions}`;
 
 // prettier-ignore
 const OverwriteCtaIcon  = `
@@ -54,20 +60,20 @@ const OverwriteThemeDark  = `
 const OverwriteHeadline = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TextLockupSmall.Elements.headline}`]: SansLarger,
+      [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${TextLockupSmall.Elements.headline} *`]: SansLarger,
+      [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: SansLarger,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${TextLockupSmall.Elements.headline}`]: SansExtraLarge,
+        [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: SansExtraLarge,
       },
     })}
   }
@@ -75,9 +81,29 @@ const OverwriteHeadline = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
-        [`.${TextLockupSmall.Elements.headline} *`]: SansExtraLarge,
+        [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: SansExtraLarge,
       },
     })}
+  }
+`;
+
+const OverwriteTextContainer = `
+  ${OVERWRITE_SCALING_TEXT_LOCK_CONTAINER} {
+    height: 100%;
+  }
+
+  ${OVERWRITE_TEXT_LOCK_CONTAINER} {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  ${OVERWRITE_TEXT_LOCK_DATE} {
+    margin-bottom: ${Spacing.sm};
+  }
+
+  ${OVERWRITE_TEXT_LOCK_ACTIONS} {
+    margin-top: auto;
   }
 `;
 
@@ -95,6 +121,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
     padding-top: ${Spacing.lg};
     padding-bottom: ${Spacing.lg};
     overflow: hidden;
+
   }
 
   @media (min-width: 768px) {
@@ -109,6 +136,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   ${OverwriteHeadline}
   ${OverwriteThemeDark}
   ${OverwriteCtaIcon}
+  ${OverwriteTextContainer}
 `;
 
 const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {

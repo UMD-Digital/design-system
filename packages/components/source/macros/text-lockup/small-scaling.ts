@@ -90,7 +90,7 @@ const CreateScaleFontBlockContainer = (props: TypeTextLockupSmallScaling) => {
 export default {
   CreateElement: CreateScaleFontBlockContainer,
   Styles: STYLES_SCALING_FONT_BLOCK_CONTAINER,
-  elements: {
+  Elements: {
     container: ELEMENT_SCALABLE_FONT_CONTAINER,
   },
 };

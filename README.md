@@ -1,3 +1,3 @@
-# University of Maryland Design System: _Theming, and Components_
+# University of Maryland Design System: Web Components & Theme
 
 ## Coming Soon

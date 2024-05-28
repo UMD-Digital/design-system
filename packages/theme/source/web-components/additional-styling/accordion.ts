@@ -8,6 +8,6 @@ export default {
     display: 'block',
   },
   'umd-element-accordion-item + umd-element-accordion-item': {
-    marginTop: Tokens.Spacing.xs,
+    marginTop: Tokens.Spacing.min,
   },
 };

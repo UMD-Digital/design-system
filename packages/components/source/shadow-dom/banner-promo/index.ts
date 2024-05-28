@@ -11,6 +11,7 @@ const { SlotWithDefaultStyling, SlotOberserver, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-banner-promo';
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_HAS_LOGO = 'hasLogo';
 
 const SLOTS = { HEADLINE: 'headline', TEXT: 'text', ACTIONS: 'actions' };
 
@@ -26,6 +27,10 @@ const styles = `
 const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
+  const hasLogo = element.getAttribute(ATTRIBUTE_HAS_LOGO);
+  let includeSeal = true;
+
+  if (hasLogo === 'false') includeSeal = false;
 
   const banner = BannerPromo.CreateElement({
     theme: element.getAttribute(ATTRIBUTE_THEME),
@@ -41,6 +46,7 @@ const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
       element,
       slotRef: SLOTS.ACTIONS,
     }),
+    includeSeal,
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

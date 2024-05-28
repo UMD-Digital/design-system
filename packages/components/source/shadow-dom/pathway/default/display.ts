@@ -84,7 +84,6 @@ const MakeCommonDefaultData = ({
 
     obj.eventSign = EventElements.Sign.CreateElement({
       ...eventData,
-      isLargeSize: true,
     });
   }
 

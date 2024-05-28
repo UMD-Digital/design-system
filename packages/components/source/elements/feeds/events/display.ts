@@ -184,7 +184,11 @@ const CreateEventFeedDisplay = ({
   return entries.map((entry) =>
     EventList.CreateElement({
       ...CommonDisplay({ entry, theme }),
-      dateSign: EventElements.Sign.CreateElement({ ...entry, theme }),
+      dateSign: EventElements.Sign.CreateElement({
+        ...entry,
+        theme,
+        isLargeSize: true,
+      }),
     }),
   );
 };

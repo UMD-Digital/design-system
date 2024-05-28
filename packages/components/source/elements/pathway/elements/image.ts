@@ -1,8 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { LayoutImage } from 'macros';
-import event from 'utilities/markup/event';
 
-const { Spacing, Colors } = Tokens;
+const { Spacing, Colors, Queries } = Tokens;
 
 type TypeScaleProps = {
   isImageScaled: boolean;
@@ -33,7 +32,13 @@ const EventSignStyles = `
     bottom: ${Spacing.min};
     left: ${Spacing.min};
     background-color: ${Colors.white};
-    padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
+    padding: ${Spacing.min};
+  }
+
+  @media (${Queries.tablet.min}) {
+    .${ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN} {
+      padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
+    }
   }
 `;
 

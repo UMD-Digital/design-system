@@ -10,7 +10,7 @@ type TypeEventPromoProps = {
   actions?: HTMLElement | null;
 };
 
-const { Spacing, Colors, MaxWidth } = Tokens;
+const { Spacing, Colors, MaxWidth, Queries } = Tokens;
 
 const ELEMENT_NAME = 'umd-event-promo';
 const ELEMENT_EVENT_PROMO_CONTAINER = 'event-promo-container';
@@ -24,7 +24,13 @@ const DateSign = `
     bottom: ${Spacing.min};
     left: ${Spacing.min};
     background-color: ${Colors.white};
-    padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
+    padding: ${Spacing.min};
+  }
+
+  @media (${Queries.tablet.min}) {
+    .${ELEMENT_EVENT_PROMO_SIGN_WRAPPER} {
+      padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
+    }
   }
 `;
 

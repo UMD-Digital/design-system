@@ -6,18 +6,11 @@ declare global {
 
 import { MarkupCreate } from 'utilities';
 import { ComponentStyles as styles, CreateShadowDom } from './display';
+import { SLOTS } from '../common';
 
 const { SlotOberserver } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-hero-minimal';
-const SLOTS = {
-  IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
-};
-
 const template = MarkupCreate.Node.stylesTemplate({ styles });
 
 export class UMDHeroMinimalElement extends HTMLElement {

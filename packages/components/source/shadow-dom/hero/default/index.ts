@@ -6,6 +6,7 @@ declare global {
 
 import { MarkupCreate } from 'utilities';
 import { ComponentStyles as styles, CreateShadowDom } from './display';
+import { SLOTS as CommonSlots } from '../common';
 
 const { SlotOberserver } = MarkupCreate;
 
@@ -13,12 +14,8 @@ const template = MarkupCreate.Node.stylesTemplate({ styles });
 
 const ELEMENT_NAME = 'umd-element-hero';
 const SLOTS = {
-  IMAGE: 'image',
   VIDEO: 'video',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
+  ...CommonSlots,
 };
 
 export class UMDHeroElement extends HTMLElement {

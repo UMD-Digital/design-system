@@ -1,9 +1,7 @@
 import { Styles } from 'utilities';
-import { MarkupCreate } from 'utilities';
 import { HeroMinimal, HeroElements } from 'elements';
 import { UMDHeroMinimalElement } from './index';
-
-const { SlotWithDefaultStyling } = MarkupCreate;
+import { CommonHeroData } from '../common';
 
 export const ComponentStyles = `
   :host {
@@ -16,20 +14,6 @@ export const ComponentStyles = `
   ${HeroMinimal.Styles}
 `;
 
-const MakeHeroData = ({ element }: { element: UMDHeroMinimalElement }) => {
-  const { IMAGE, HEADLINE, EYEBROW, TEXT, ACTIONS } = element._slots;
-  const theme = element.getAttribute('theme');
-
-  return {
-    theme,
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    richText: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    imageRef: SlotWithDefaultStyling({ element, slotRef: IMAGE }),
-    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-  };
-};
-
 export const CreateShadowDom = ({
   element,
 }: {
@@ -41,7 +25,11 @@ export const CreateShadowDom = ({
 
   shadow.appendChild(
     HeroMinimal.CreateElement({
-      ...MakeHeroData({ element }),
+      theme: element.getAttribute('theme'),
+      ...CommonHeroData({
+        element,
+        slots: element._slots,
+      }),
     }),
   );
 };

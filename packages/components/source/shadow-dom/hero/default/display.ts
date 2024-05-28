@@ -7,6 +7,7 @@ import {
   HeroStacked,
 } from 'elements';
 import { UMDHeroElement } from './index';
+import { CommonHeroData } from '../common';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
 
@@ -33,7 +34,6 @@ export const ComponentStyles = `
 `;
 
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
-  const { IMAGE, HEADLINE, EYEBROW, TEXT, ACTIONS } = element._slots;
   const type = element.getAttribute('type');
   const theme = element.getAttribute('theme');
   let isTextCenter = element.getAttribute('text-align') === TEXT_ALIGN_CENTER;
@@ -57,11 +57,10 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
     isTextCenter,
     isInterior,
     isWithLock,
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    richText: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    imageRef: SlotWithDefaultStyling({ element, slotRef: IMAGE }),
-    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
+    ...CommonHeroData({
+      element,
+      slots: element._slots,
+    }),
   };
 };
 

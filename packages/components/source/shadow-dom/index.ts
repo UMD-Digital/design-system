@@ -3,6 +3,7 @@ import { Load as AlertPageLoader } from './alert/page';
 import { Load as AlertSiteLoader } from './alert/site';
 import { Load as ArticleLoader } from './article';
 import { Load as BreadcrumbLoader } from './breadcrumb';
+import { Load as BannerPromo } from './banner-promo';
 import { Load as CallToActionLoader } from './call-to-action';
 import { Load as CardLoader } from './card/default';
 import { Load as CardIconLoader } from './card/icon';
@@ -42,6 +43,7 @@ export {
   AlertSiteLoader,
   ArticleLoader,
   BreadcrumbLoader,
+  BannerPromo,
   CallToActionLoader,
   CardIconLoader,
   CardLoader,

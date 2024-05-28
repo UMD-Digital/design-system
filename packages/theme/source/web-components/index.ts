@@ -1,6 +1,8 @@
 import Accordion from './additional-styling/accordion';
-import Alert from './default-styling/alert';
+import AlertPage from './default-styling/alert-page';
+import AlertSite from './default-styling/alert-site';
 import Article from './additional-styling/article';
+import BannerPromo from './default-styling/banner-promo';
 import Breadcrumb from './additional-styling/breadcrumb';
 import CallToAction from './default-styling/call-to-action';
 import Card from './additional-styling/card';
@@ -23,9 +25,11 @@ import UtilityHeader from './additional-styling/utility-header';
 
 export default {
   ...Accordion,
-  ...Alert,
+  ...AlertPage,
+  ...AlertSite,
   ...Article,
   ...Breadcrumb,
+  ...BannerPromo,
   ...CallToAction,
   ...Card,
   ...CardOverlay,

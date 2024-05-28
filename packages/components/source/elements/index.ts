@@ -1,6 +1,7 @@
 import Accordion from './accordion';
 import AlertPage from './alert/page';
 import AlertSite from './alert/site';
+import BannerPromo from './banner-promo';
 import CallToAction from './call-to-action';
 import CardBlock from './card/block';
 import CardList from './card/list';
@@ -52,6 +53,7 @@ export {
   Accordion,
   AlertPage,
   AlertSite,
+  BannerPromo,
   CallToAction,
   CardBlock,
   CardList,

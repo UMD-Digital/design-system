@@ -628,7 +628,10 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     const Resize = () => {
       SetSizeCarouselElements();
       EventResizeButtonLogic({ ...CommonData });
-      SetCardHeight();
+
+      setTimeout(() => {
+        SetCardHeight();
+      }, 100);
     };
 
     const Load = () => {

@@ -18,10 +18,8 @@ const SMALL = 480;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
-const THEME_WHITE = 'white';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-const IS_THEME_WHITE = `[${ATTRIBUTE_THEME}="${THEME_WHITE}"]`;
 
 const ELEMENT_NAME = 'umd-element-banner-promo';
 const ELEMENT_DECLARATION = 'banner-promo-declaration';
@@ -35,19 +33,6 @@ const ELEMENT_ACTIONS = 'banner-promo-actions';
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_HEADLINE = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_HEADLINE}`;
 const OVERWRITE_THEME_DARK_RICH_TEXT = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_RICH_TEXT}`;
-
-const OVERWRITE_THEME_WHITE_CONTAINER = `.${ELEMENT_CONTAINER}${IS_THEME_WHITE}`;
-
-// prettier-ignore
-const OverwriteThemeWhite = `
-  ${OVERWRITE_THEME_WHITE_CONTAINER} {
-    background-color: ${Colors.white};
-  }
-
-  ${OVERWRITE_THEME_WHITE_CONTAINER} > svg {
-    fill: ${Colors.gray.lighter};
-  }
-`;
 
 // prettier-ignore
 const OverwriteThemeDark = `
@@ -164,7 +149,6 @@ const STYLES_BANNER_PROMO_ELEMENT = `
   ${TextStyles}
   ${ActionsStyles}
   ${OverwriteThemeDark}
-  ${OverwriteThemeWhite}
 `;
 
 const CreateTextContainer = (props: TypeBannerPromoProps) => {
@@ -206,7 +190,6 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
       let seal = AssetLogo.SEAL_WHITE;
 
       if (theme === THEME_DARK) seal = AssetLogo.SEAL_GRAY_DARK;
-      if (theme === THEME_WHITE) seal = AssetLogo.SEAL_GRAY_LIGHT;
 
       container.innerHTML = `${seal}`;
     }

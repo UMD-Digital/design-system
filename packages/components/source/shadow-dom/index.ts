@@ -31,10 +31,11 @@ import PathwayHighlight from './pathway/highlight';
 import Person from './person/default';
 import PersonBio from './person/bio';
 import Quote from './quote';
-import Stat from './stat';
+import ScrollTop from './scroll-top';
 import SectionIntro from './section-intro/default';
 import SectionIntroWide from './section-intro/wide';
 import SliderEvent from './slider/events';
+import Stat from './stat';
 import StickyColumns from './stickly-columns';
 
 export {
@@ -71,6 +72,7 @@ export {
   PersonBio,
   Person,
   Quote,
+  ScrollTop,
   SectionIntro,
   SectionIntroWide,
   SliderEvent,

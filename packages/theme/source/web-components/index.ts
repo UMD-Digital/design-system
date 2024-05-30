@@ -20,6 +20,7 @@ import Pathway from './default-styling/pathway';
 import Quote from './default-styling/quote';
 import NavDrawer from './additional-styling/nav-drawer';
 import NavItem from './default-styling/nav-item';
+import ScrollTop from './default-styling/scroll-top';
 import SectionIntro from './additional-styling/section-intro';
 import UtilityHeader from './additional-styling/utility-header';
 
@@ -46,6 +47,7 @@ export default {
   ...Quote,
   ...NavDrawer,
   ...NavItem,
+  ...ScrollTop,
   ...SectionIntro,
   ...UtilityHeader,
 };

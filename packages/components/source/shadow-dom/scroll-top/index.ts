@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { CardBlock, CardList } from 'elements';
+import { ScrollTop } from 'elements';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -17,6 +17,7 @@ const styles = `
   }
   
   ${Styles.ResetString}
+  ${ScrollTop.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({ styles });
@@ -26,7 +27,7 @@ const CreateShadowDom = ({ element }: { element: UMDScrollTopElement }) => {
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
-  // shadow.appendChild(CardBlock.CreateElement({}));
+  shadow.appendChild(ScrollTop.CreateElement({}));
 };
 
 class UMDScrollTopElement extends HTMLElement {

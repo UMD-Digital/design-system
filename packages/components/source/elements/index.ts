@@ -43,6 +43,7 @@ import QuoteElements from './quote/elements';
 import QuoteFeatured from './quote/featured';
 import QuoteInline from './quote/inline';
 import QuoteStatement from './quote/statement';
+import ScrollTop from './scroll-top';
 import SectionIntro from './section-intro/default';
 import SectionIntroWide from './section-intro/wide';
 import SliderEvents from './slider/events';
@@ -95,6 +96,7 @@ export {
   QuoteFeatured,
   QuoteInline,
   QuoteStatement,
+  ScrollTop,
   SectionIntro,
   SectionIntroWide,
   SliderEvents,

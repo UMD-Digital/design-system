@@ -1,79 +1,79 @@
-import { Load as AccordionLoader } from './accordion';
-import { Load as AlertPageLoader } from './alert/page';
-import { Load as AlertSiteLoader } from './alert/site';
-import { Load as ArticleLoader } from './article';
-import { Load as BreadcrumbLoader } from './breadcrumb';
-import { Load as BannerPromo } from './banner-promo';
-import { Load as CallToActionLoader } from './call-to-action';
-import { Load as CardLoader } from './card/default';
-import { Load as CardIconLoader } from './card/icon';
-import { Load as CardOverlayLoader } from './card/overlay';
-import { Load as CarouselCardsLoader } from './carousel/cards';
-import { Load as EventLoader } from './event';
-import { Load as EventDateLoader } from './event/lockup';
-import { Load as FeedNewsGridLoader } from './feeds/news/grid';
-import { Load as FeedNewsListLoader } from './feeds/news/list';
-import { Load as FeedEventsGridLoader } from './feeds/events/grid';
-import { Load as FeedEventsGroupedLoader } from './feeds/events/grouped';
-import { Load as FeedEventsListLoader } from './feeds/events/list';
-import { Load as FooterLoader } from './footer';
-import { Load as HeroLoader } from './hero/default';
-import { Load as HeroLogoLoader } from './hero/logo';
-import { Load as HeroMinimalLoader } from './hero/minimal';
-import { Load as LogoLoader } from './logo';
-import { Load as MediaInlineLoader } from './media/inline';
-import { Load as NavDrawerLoader } from './navigation/drawer';
-import { Load as NavHeader } from './navigation/header';
-import { Load as NavItemLoader } from './navigation/item';
-import { Load as NavSliderLoader } from './navigation/slider';
-import { Load as PathwayHighlightLoader } from './pathway/highlight';
-import { Load as PathwayLoader } from './pathway/default';
-import { Load as PersonLoader } from './person/default';
-import { Load as PersonBioLoader } from './person/bio';
-import { Load as QuoteLoader } from './quote';
-import { Load as StatLoader } from './stat';
-import { Load as SectionIntroLoader } from './section-intro/default';
-import { Load as SectionIntroWideLoader } from './section-intro/wide';
-import { Load as SliderEventLoader } from './slider/events';
-import { Load as StickyColumns } from './stickly-columns';
+import Accordion from './accordion';
+import AlertPage from './alert/page';
+import AlertSite from './alert/site';
+import Article from './article';
+import Breadcrumb from './breadcrumb';
+import BannerPromo from './banner-promo';
+import CallToAction from './call-to-action';
+import Card from './card/default';
+import CardIcon from './card/icon';
+import CardOverlay from './card/overlay';
+import CarouselCards from './carousel/cards';
+import Event from './event';
+import EventDate from './event/lockup';
+import FeedNewsGrid from './feeds/news/grid';
+import FeedNewsList from './feeds/news/list';
+import FeedEventsGrid from './feeds/events/grid';
+import FeedEventsGrouped from './feeds/events/grouped';
+import FeedEventsList from './feeds/events/list';
+import Footer from './footer';
+import Hero from './hero/default';
+import HeroLogo from './hero/logo';
+import HeroMinimal from './hero/minimal';
+import Logo from './logo';
+import MediaInline from './media/inline';
+import NavDrawer from './navigation/drawer';
+import NavHeader from './navigation/header';
+import NavItem from './navigation/item';
+import NavSlider from './navigation/slider';
+import Pathway from './pathway/default';
+import PathwayHighlight from './pathway/highlight';
+import Person from './person/default';
+import PersonBio from './person/bio';
+import Quote from './quote';
+import Stat from './stat';
+import SectionIntro from './section-intro/default';
+import SectionIntroWide from './section-intro/wide';
+import SliderEvent from './slider/events';
+import StickyColumns from './stickly-columns';
 
 export {
-  AccordionLoader,
-  AlertPageLoader,
-  AlertSiteLoader,
-  ArticleLoader,
-  BreadcrumbLoader,
+  Accordion,
+  AlertPage,
+  AlertSite,
+  Article,
+  Breadcrumb,
   BannerPromo,
-  CallToActionLoader,
-  CardIconLoader,
-  CardLoader,
-  CardOverlayLoader,
-  CarouselCardsLoader,
-  EventDateLoader,
-  EventLoader,
-  FeedEventsGridLoader,
-  FeedEventsGroupedLoader,
-  FeedEventsListLoader,
-  FeedNewsGridLoader,
-  FeedNewsListLoader,
-  FooterLoader,
-  HeroLoader,
-  HeroLogoLoader,
-  HeroMinimalLoader,
-  LogoLoader,
-  MediaInlineLoader,
-  NavDrawerLoader,
+  CallToAction,
+  CardIcon,
+  Card,
+  CardOverlay,
+  CarouselCards,
+  EventDate,
+  Event,
+  FeedEventsGrid,
+  FeedEventsGrouped,
+  FeedEventsList,
+  FeedNewsGrid,
+  FeedNewsList,
+  Footer,
+  Hero,
+  HeroLogo,
+  HeroMinimal,
+  Logo,
+  MediaInline,
+  NavDrawer,
   NavHeader,
-  NavItemLoader,
-  NavSliderLoader,
-  PathwayHighlightLoader,
-  PathwayLoader,
-  PersonBioLoader,
-  PersonLoader,
-  QuoteLoader,
-  SectionIntroLoader,
-  SectionIntroWideLoader,
-  SliderEventLoader,
-  StatLoader,
+  NavItem,
+  NavSlider,
+  Pathway,
+  PathwayHighlight,
+  PersonBio,
+  Person,
+  Quote,
+  SectionIntro,
+  SectionIntroWide,
+  SliderEvent,
+  Stat,
   StickyColumns,
 };

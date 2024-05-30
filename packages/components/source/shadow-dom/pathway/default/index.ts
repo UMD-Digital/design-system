@@ -48,7 +48,7 @@ export class UMDPathwayElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -56,4 +56,8 @@ export const Load = () => {
     window.UMDPathwayElement = UMDPathwayElement;
     window.customElements.define(ELEMENT_NAME, UMDPathwayElement);
   }
+};
+
+export default {
+  Load,
 };

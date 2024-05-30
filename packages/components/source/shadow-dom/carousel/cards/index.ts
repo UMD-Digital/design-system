@@ -65,7 +65,7 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
   shadow.appendChild(carousel.element);
 };
 
-export class UMDCarouselCardsElement extends HTMLElement {
+class UMDCarouselCardsElement extends HTMLElement {
   _shadow: ShadowRoot;
   _elementRef: {
     element: HTMLDivElement;
@@ -107,7 +107,7 @@ export class UMDCarouselCardsElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -115,4 +115,8 @@ export const Load = () => {
     window.UMDCarouselCardsElement = UMDCarouselCardsElement;
     window.customElements.define(ELEMENT_NAME, UMDCarouselCardsElement);
   }
+};
+
+export default {
+  Load,
 };

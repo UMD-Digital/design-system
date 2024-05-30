@@ -4,7 +4,7 @@ import * as UmdElements from './elements';
 const LoadUmdComponents = () => {
   for (const key in UmdComponents) {
     // @ts-ignore
-    UmdComponents[key]();
+    UmdComponents[key].Load();
   }
 };
 

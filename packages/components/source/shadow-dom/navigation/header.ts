@@ -61,7 +61,7 @@ const CreateHeader = ({
   return value;
 };
 
-export class UMDHeaderElement extends HTMLElement {
+class UMDHeaderElement extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
@@ -93,7 +93,7 @@ export class UMDHeaderElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -101,4 +101,8 @@ export const Load = () => {
     window.UMDHeaderElement = UMDHeaderElement;
     window.customElements.define(ELEMENT_NAME, UMDHeaderElement);
   }
+};
+
+export default {
+  Load,
 };

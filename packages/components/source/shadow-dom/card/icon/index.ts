@@ -50,7 +50,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardIconElement }) => {
   shadow.appendChild(card);
 };
 
-export class UMDCardIconElement extends HTMLElement {
+class UMDCardIconElement extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
@@ -70,7 +70,7 @@ export class UMDCardIconElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -78,4 +78,8 @@ export const Load = () => {
     window.UMDCardIconElement = UMDCardIconElement;
     window.customElements.define(ELEMENT_NAME, UMDCardIconElement);
   }
+};
+
+export default {
+  Load,
 };

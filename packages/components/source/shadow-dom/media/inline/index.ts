@@ -61,7 +61,7 @@ const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
   });
 };
 
-export class UMDMediaInlineElement extends HTMLElement {
+class UMDMediaInlineElement extends HTMLElement {
   _shadow: ShadowRoot;
   _slots: Record<string, string>;
 
@@ -79,7 +79,7 @@ export class UMDMediaInlineElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -87,4 +87,8 @@ export const Load = () => {
     window.UMDMediaInlineElement = UMDMediaInlineElement;
     window.customElements.define(ELEMENT_NAME, UMDMediaInlineElement);
   }
+};
+
+export default {
+  Load,
 };

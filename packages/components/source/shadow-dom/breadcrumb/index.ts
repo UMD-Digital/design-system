@@ -138,7 +138,7 @@ export const CreateShadowDom = ({
   shadow.appendChild(breadcrumbPaths);
 };
 
-export class UMDBreadcrumbElement extends HTMLElement {
+class UMDBreadcrumbElement extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
@@ -158,7 +158,7 @@ export class UMDBreadcrumbElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -166,4 +166,8 @@ export const Load = () => {
     window.UMDBreadcrumbElement = UMDBreadcrumbElement;
     window.customElements.define(ELEMENT_NAME, UMDBreadcrumbElement);
   }
+};
+
+export default {
+  Load,
 };

@@ -50,7 +50,7 @@ const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
   shadow.appendChild(accordion.element);
 };
 
-export class UMDAccordionElement extends HTMLElement {
+class UMDAccordionElement extends HTMLElement {
   _shadow: ShadowRoot;
   _elementRef: {
     element: HTMLDivElement;
@@ -106,7 +106,7 @@ export class UMDAccordionElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -114,4 +114,8 @@ export const Load = () => {
     window.UMDAccordionElement = UMDAccordionElement;
     window.customElements.define(ELEMENT_NAME, UMDAccordionElement);
   }
+};
+
+export default {
+  Load,
 };

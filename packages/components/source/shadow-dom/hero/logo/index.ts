@@ -37,7 +37,7 @@ export class UMDHeroLogoElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -45,4 +45,8 @@ export const Load = () => {
     window.UMDHeroLogoElement = UMDHeroLogoElement;
     window.customElements.define(ELEMENT_NAME, UMDHeroLogoElement);
   }
+};
+
+export default {
+  Load,
 };

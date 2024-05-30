@@ -48,7 +48,7 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   shadow.appendChild(alert);
 };
 
-export class UMDAlertPageElement extends HTMLElement {
+class UMDAlertPageElement extends HTMLElement {
   _shadow: ShadowRoot;
   _container: HTMLDivElement | null = null;
 
@@ -69,7 +69,7 @@ export class UMDAlertPageElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -77,4 +77,8 @@ export const Load = () => {
     window.UMDAlertPageElement = UMDAlertPageElement;
     window.customElements.define(ELEMENT_NAME, UMDAlertPageElement);
   }
+};
+
+export default {
+  Load,
 };

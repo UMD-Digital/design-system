@@ -53,7 +53,7 @@ const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
   shadow.appendChild(banner);
 };
 
-export class UMDBannerPromoElement extends HTMLElement {
+class UMDBannerPromoElement extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
@@ -73,7 +73,7 @@ export class UMDBannerPromoElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -81,4 +81,8 @@ export const Load = () => {
     window.UMDBannerPromoElement = UMDBannerPromoElement;
     window.customElements.define(ELEMENT_NAME, UMDBannerPromoElement);
   }
+};
+
+export default {
+  Load,
 };

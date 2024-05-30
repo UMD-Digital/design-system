@@ -137,7 +137,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   });
 };
 
-export class UMDEventElement extends HTMLElement {
+class UMDEventElement extends HTMLElement {
   _shadow: ShadowRoot;
   _slots: Record<string, string>;
 
@@ -161,7 +161,7 @@ export class UMDEventElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -169,4 +169,8 @@ export const Load = () => {
     window.UMDEventElement = UMDEventElement;
     window.customElements.define(ELEMENT_NAME, UMDEventElement);
   }
+};
+
+export default {
+  Load,
 };

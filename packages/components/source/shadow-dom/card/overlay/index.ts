@@ -80,7 +80,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
   );
 };
 
-export class UMDCardOverlayElement extends HTMLElement {
+class UMDCardOverlayElement extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
@@ -100,7 +100,7 @@ export class UMDCardOverlayElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -108,4 +108,8 @@ export const Load = () => {
     window.UMDCardOverlayElement = UMDCardOverlayElement;
     window.customElements.define(ELEMENT_NAME, UMDCardOverlayElement);
   }
+};
+
+export default {
+  Load,
 };

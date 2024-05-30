@@ -63,7 +63,7 @@ export class UMDStickyColumnElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -71,4 +71,8 @@ export const Load = () => {
     window.UMDStickyColumnElement = UMDStickyColumnElement;
     window.customElements.define(ELEMENT_NAME, UMDStickyColumnElement);
   }
+};
+
+export default {
+  Load,
 };

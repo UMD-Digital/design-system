@@ -40,7 +40,7 @@ const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
   });
 };
 
-export class UMDLogoElement extends HTMLElement {
+class UMDLogoElement extends HTMLElement {
   _shadow: ShadowRoot;
   _slots: Record<string, string>;
 
@@ -62,7 +62,7 @@ export class UMDLogoElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -70,4 +70,8 @@ export const Load = () => {
     window.UMDLogoElement = UMDLogoElement;
     window.customElements.define(ELEMENT_NAME, UMDLogoElement);
   }
+};
+
+export default {
+  Load,
 };

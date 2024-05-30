@@ -98,7 +98,7 @@ export class UMDElementQuote extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -106,4 +106,8 @@ export const Load = () => {
     window.UMDElementQuote = UMDElementQuote;
     window.customElements.define(ELEMENT_NAME, UMDElementQuote);
   }
+};
+
+export default {
+  Load,
 };

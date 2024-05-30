@@ -59,7 +59,7 @@ class UMDNavSlider extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -67,4 +67,8 @@ export const Load = () => {
     window.UMDNavSlider = UMDNavSlider;
     window.customElements.define(ELEMENT_NAME, UMDNavSlider);
   }
+};
+
+export default {
+  Load,
 };

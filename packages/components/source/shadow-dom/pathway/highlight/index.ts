@@ -89,7 +89,7 @@ export class UMDPathwayHighlightElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -97,4 +97,8 @@ export const Load = () => {
     window.UMDPathwayHighlightElement = UMDPathwayHighlightElement;
     window.customElements.define(ELEMENT_NAME, UMDPathwayHighlightElement);
   }
+};
+
+export default {
+  Load,
 };

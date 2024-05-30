@@ -37,7 +37,7 @@ export class UMDHeroMinimalElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -45,4 +45,8 @@ export const Load = () => {
     window.UMDHeroMinimalElement = UMDHeroMinimalElement;
     window.customElements.define(ELEMENT_NAME, UMDHeroMinimalElement);
   }
+};
+
+export default {
+  Load,
 };

@@ -61,7 +61,7 @@ export class UMDStatElement extends HTMLElement {
   }
 }
 
-export const Load = () => {
+const Load = () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -69,4 +69,8 @@ export const Load = () => {
     window.UMDStatElement = UMDStatElement;
     window.customElements.define(ELEMENT_NAME, UMDStatElement);
   }
+};
+
+export default {
+  Load,
 };

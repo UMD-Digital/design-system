@@ -1,4 +1,6 @@
-const BACK_ARROW = `<svg aria-hidden="true" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.98162 5.05487L6.93058 8H4.15376L0.104145 4.03913L0.143276 4L0.104143 3.96087L4.15376 0L6.93058 0L3.70637 3.22002H24V5.05487H3.98162Z"/></svg>`;
+const ARROW = `<svg id="arrow-icon" aria-hidden="true" width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.33333 6.86768L0.708333 12.5L0.708333 7.45542L7.90396 0.0985589L7.97502 0.169624L8.04608 0.0985618L15.2417 7.45542V12.5L9.66667 6.91771V18.9583H6.33333L6.33333 6.86768Z" fill="white"/></svg>`;
+
+const BACK_ARROW = `<svg id="arrow-back-icon" aria-hidden="true" viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.98162 5.05487L6.93058 8H4.15376L0.104145 4.03913L0.143276 4L0.104143 3.96087L4.15376 0L6.93058 0L3.70637 3.22002H24V5.05487H3.98162Z"/></svg>`;
 
 const CALENDAR = `<svg aria-hidden="true" id="calendar-icon" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.48311 0H3.46959V1.66667H10.7534V0H12.7399V1.66667H13.8986V4.33333H0.158783V1.66667H1.48311V0ZM13.8986 5.33333H0.158783V14.1667H13.8986V5.33333Z" fill="#454545"/></svg>`;
 
@@ -43,6 +45,7 @@ const SHORT_ARROW = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0
 const X = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="25.0241" y="13.2861" width="83" height="16.6" transform="rotate(45 25.0241 13.2861)"></rect><rect x="83.7139" y="25.0241" width="83" height="16.6" transform="rotate(135 83.7139 25.0241)"></rect></svg>`;
 
 export default {
+  ARROW,
   BACK_ARROW,
   CALENDAR,
   CLOCK,

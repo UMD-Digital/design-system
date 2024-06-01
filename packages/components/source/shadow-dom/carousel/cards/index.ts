@@ -97,13 +97,6 @@ class UMDCarouselCardsElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

@@ -9,6 +9,7 @@ import Card from './card/default';
 import CardIcon from './card/icon';
 import CardOverlay from './card/overlay';
 import CarouselCards from './carousel/cards';
+import CarouselImageStandard from './carousel/image/standard';
 import Event from './event';
 import EventDate from './event/lockup';
 import FeedNewsGrid from './feeds/news/grid';
@@ -50,6 +51,7 @@ export {
   Card,
   CardOverlay,
   CarouselCards,
+  CarouselImageStandard,
   EventDate,
   Event,
   FeedEventsGrid,

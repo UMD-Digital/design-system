@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-export default {
+const Default = {
   'umd-element-accordion-item:not(:defined)': {
     display: 'none',
   },
@@ -10,4 +10,8 @@ export default {
   'umd-element-accordion-item + umd-element-accordion-item': {
     marginTop: Tokens.Spacing.min,
   },
+};
+
+export default {
+  ...Default,
 };

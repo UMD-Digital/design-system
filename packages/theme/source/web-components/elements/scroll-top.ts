@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 
 const { Queries, Spacing } = Tokens;
 
-export default {
+const Default = {
   'umd-element-scroll-top:not(:defined)': {
     display: 'none',
   },
@@ -14,6 +14,9 @@ export default {
   '* + umd-element-scroll-top': {
     marginTop: `${Spacing.md}`,
   },
+};
+
+const Fixed = {
   'umd-element-scroll-top[fixed]': {
     display: 'block',
     position: 'fixed',
@@ -27,4 +30,9 @@ export default {
       right: '40px',
     },
   },
+};
+
+export default {
+  ...Default,
+  ...Fixed,
 };

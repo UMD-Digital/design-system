@@ -1,12 +1,21 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const DisplayList = {
+const Block = {
+  'umd-element-person:not(:defined)': {
+    display: 'none',
+  },
+  'umd-element-person:defined': {
+    display: 'block',
+  },
+};
+
+const List = {
   'umd-element-person[display="list"] + umd-element-person[display="list"]': {
     marginTop: Tokens.Spacing.md,
   },
 };
 
-const DisplayTabular = {
+const Tabular = {
   'umd-element-person[display="tabular"] + umd-element-person[display="tabular"]':
     {
       marginTop: Tokens.Spacing.md,
@@ -14,12 +23,7 @@ const DisplayTabular = {
 };
 
 export default {
-  'umd-element-person:not(:defined)': {
-    display: 'none',
-  },
-  'umd-element-person:defined': {
-    display: 'block',
-  },
-  ...DisplayList,
-  ...DisplayTabular,
+  ...Block,
+  ...List,
+  ...Tabular,
 };

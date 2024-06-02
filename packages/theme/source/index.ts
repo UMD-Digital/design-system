@@ -6,7 +6,6 @@ import Common from './common';
 import Elements from './elements';
 import Layout from './layout';
 import WebComponents from './web-components';
-import WebFeeds from './web-feeds';
 
 const { Colors, FontFamily, FontSize } = Tokens;
 
@@ -50,5 +49,4 @@ export const theme = {
   Elements,
   Layout,
   WebComponents,
-  WebFeeds,
 };

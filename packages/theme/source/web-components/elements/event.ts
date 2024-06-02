@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 
 const { Queries, Colors, Spacing } = Tokens;
 
-export default {
+const Default = {
   'umd-element-event:not(:defined)': {
     display: 'none',
   },
@@ -12,10 +12,18 @@ export default {
   'umd-element-event[display="list"] + umd-element-event[display="list"]': {
     marginTop: Tokens.Spacing.md,
   },
+};
+
+const Featured = {
   'umd-element-event[display="feature"]': {
     [`@media (${Queries.large.max})`]: {
       borderBottom: `1px solid ${Colors.gray.light}`,
       paddingBottom: `${Spacing.md}`,
     },
   },
+};
+
+export default {
+  ...Default,
+  ...Featured,
 };

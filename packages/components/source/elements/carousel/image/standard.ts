@@ -1,20 +1,17 @@
+import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
+import { AssetIcon, Performance, Styles } from 'utilities';
 import { LayoutImage } from 'macros';
-import { Tokens } from '@universityofmaryland/variables';
-
-import { AssetIcon, Performance } from 'utilities';
 
 const { Colors, Spacing } = Tokens;
+const { SansLarge } = Typography;
+const { Text } = Elements;
 const { Debounce } = Performance;
-
-type TypeTextContainer = {
-  headline?: HTMLElement | null;
-  richText?: HTMLElement | null;
-};
+const { ConvertJSSObjectToStyles } = Styles;
 
 type TypeCarouselImageStandardProps = {
   images: HTMLImageElement[];
   headlines?: HTMLElement[] | null;
-  richTexts?: HTMLElement[] | null;
+  texts?: HTMLElement[] | null;
   isFullScreenOption?: boolean;
   theme?: string | null;
 };
@@ -37,38 +34,55 @@ const ELEMENT_CAROUSEL_IMAGE_CONTAINER = 'carousel-image-standard-container';
 const ELEMENT_SLIDER_CONTAINER = 'carousel-image-standard-slider';
 const ELEMENT_SLIDE = 'carousel-image-standard-slide';
 const ELEMENT_SLIDE_IMAGE_CONTAINER = 'carousel-image-standard-slide-image';
+const ELEMENT_SLIDE_IMAGE_WRAPPER = 'carousel-image-standard-slide-wrapper';
 const ELEMENT_SLIDE_TEXT_CONTAINER = 'carousel-image-standard-slide-text';
 const ELEMENT_SLIDE_HEADLINE = 'carousel-image-standard-slide-headline';
 const ELEMENT_SLIDE_RICH_TEXT = 'carousel-image-standard-slide-rich-text';
-
 const CAROUSEL_SLIDER_BUTTON = 'carousel-slider-button';
-const CAROUSEL_CARDS_BUTTON_FORWARDS = 'carousel-slider-button-forwards';
-const CAROUSEL_CARDS_BUTTON_BACKWARDS = 'carousel-slider-button-backwards';
 
 const OVERWRITE_ACTIVE_SLIDE = `.${ELEMENT_SLIDE}[${ATTRIBUTE_ACTIVE_SLIDE}]`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_DARK_TEXT_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDE_TEXT_CONTAINER}`;
 
 // prettier-ignore
 const OverwriteThemeDark = `
-  ${OVERWRITE_THEME_DARK_CONTAINER} {
+  ${OVERWRITE_THEME_DARK_TEXT_CONTAINER} {
+    background-color: ${Colors.black};
+  }
 
+  ${OVERWRITE_THEME_DARK_TEXT_CONTAINER} * {
+    color: ${Colors.white};
   }
 `;
 
 // prettier-ignore
 const TextContainerStyles = `
   .${ELEMENT_SLIDE_TEXT_CONTAINER} {
-
+    padding: ${Spacing.lg};
+    background-color: ${Colors.gray.lighter};
   }
 
   .${ELEMENT_SLIDE_HEADLINE} {
     
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_SLIDE_HEADLINE}`]: SansLarge,
+    },
+  })}
+
   .${ELEMENT_SLIDE_RICH_TEXT} {
-    
+    margin-top: ${Spacing.min};
+    color: ${Colors.gray.dark}
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_SLIDE_RICH_TEXT}`]: Text.RichText,
+    },
+  })}
 `
 
 // prettier-ignore
@@ -76,6 +90,9 @@ const ImageContainerStyles = `
   .${ELEMENT_SLIDE_IMAGE_CONTAINER} {
     position: relative;
     background-color: ${Colors.black};
+  }
+
+  .${ELEMENT_SLIDE_IMAGE_WRAPPER} {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -87,7 +104,7 @@ const ImageContainerStyles = `
     align-items: center;
   }
 
-  .${ELEMENT_SLIDE_IMAGE_CONTAINER} > * {
+  .${ELEMENT_SLIDE_IMAGE_WRAPPER} > * {
     height: 100%;
   }
 
@@ -108,7 +125,6 @@ const SliderButtons = `
     width: 40px;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     z-index: 99;
   }
 
@@ -172,62 +188,6 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreateTextContainer = ({ headline, richText }: TypeTextContainer) => {
-  const textContainer = document.createElement('div');
-
-  textContainer.classList.add(ELEMENT_SLIDE_TEXT_CONTAINER);
-
-  if (headline) {
-    headline.classList.add(ELEMENT_SLIDE_HEADLINE);
-    textContainer.appendChild(headline);
-  }
-
-  if (richText) {
-    richText.classList.add(ELEMENT_SLIDE_RICH_TEXT);
-    textContainer.appendChild(richText);
-  }
-
-  return textContainer;
-};
-
-const CreateSlide = ({
-  images,
-  headlines,
-  richTexts,
-}: TypeCarouselImageStandardProps) =>
-  images.map((image) => {
-    const reference = image.getAttribute(ATTRIBUTE_REFERENCE);
-    const slide = document.createElement('div');
-    const imageContainer = document.createElement('div');
-    const imageWrapper = LayoutImage.CreateElement({
-      image,
-      showCaption: true,
-    });
-    const headline = headlines?.find(
-      (headline) => headline.getAttribute(ATTRIBUTE_REFERENCE) === reference,
-    );
-    const richText = richTexts?.find(
-      (text) => text.getAttribute(ATTRIBUTE_REFERENCE) === reference,
-    );
-
-    slide.classList.add(ELEMENT_SLIDE);
-    imageContainer.classList.add(ELEMENT_SLIDE_IMAGE_CONTAINER);
-
-    imageContainer.appendChild(imageWrapper);
-
-    slide.appendChild(imageContainer);
-
-    if (headline || richText) {
-      const textContainer = CreateTextContainer({
-        headline,
-        richText,
-      });
-      slide.appendChild(textContainer);
-    }
-
-    return slide;
-  });
-
 const CreateButton = ({
   SetEventSlideForward,
   SetEventSlideBackward,
@@ -261,6 +221,78 @@ const CreateButton = ({
   return button;
 };
 
+const CreateTextContainer = ({
+  headlines,
+  texts,
+  reference,
+}: {
+  headlines?: HTMLElement[] | null;
+  texts?: HTMLElement[] | null;
+  reference: string | null;
+}) => {
+  const textContainer = document.createElement('div');
+
+  const headline = headlines?.find(
+    (headline) => headline.getAttribute(ATTRIBUTE_REFERENCE) === reference,
+  );
+  const richText = texts?.find(
+    (text) => text.getAttribute(ATTRIBUTE_REFERENCE) === reference,
+  );
+
+  textContainer.classList.add(ELEMENT_SLIDE_TEXT_CONTAINER);
+
+  if (headline || richText) {
+    if (headline) {
+      headline.classList.add(ELEMENT_SLIDE_HEADLINE);
+      textContainer.appendChild(headline);
+    }
+
+    if (richText) {
+      richText.classList.add(ELEMENT_SLIDE_RICH_TEXT);
+      textContainer.appendChild(richText);
+    }
+
+    return textContainer;
+  }
+
+  return null;
+};
+
+const CreateImageContainer = (image: HTMLImageElement) => {
+  const imageContainer = document.createElement('div');
+  const imageWrapper = document.createElement('div');
+  const imageBlock = LayoutImage.CreateElement({
+    image,
+    showCaption: true,
+  });
+
+  imageContainer.classList.add(ELEMENT_SLIDE_IMAGE_CONTAINER);
+
+  imageWrapper.classList.add(ELEMENT_SLIDE_IMAGE_WRAPPER);
+  imageWrapper.appendChild(imageBlock);
+
+  imageContainer.appendChild(imageWrapper);
+
+  return imageContainer;
+};
+
+const CreateSlide = (props: TypeCarouselImageStandardProps) => {
+  const { images } = props;
+  return images.map((image) => {
+    const { images } = props;
+    const reference = image.getAttribute(ATTRIBUTE_REFERENCE);
+    const slide = document.createElement('div');
+    const imageContainer = CreateImageContainer(image);
+    const textContainer = CreateTextContainer({ ...props, reference });
+
+    slide.classList.add(ELEMENT_SLIDE);
+    slide.appendChild(imageContainer);
+    if (textContainer) slide.appendChild(textContainer);
+
+    return slide;
+  });
+};
+
 const GetImageSize = ({
   image,
   parentNode,
@@ -286,10 +318,23 @@ const SetCarouselSize = ({
   slider: HTMLElement;
   activeSlide: HTMLElement;
 }) => {
+  const textContainer = activeSlide.querySelector(
+    `.${ELEMENT_SLIDE_TEXT_CONTAINER}`,
+  ) as HTMLElement;
+  const imageContainer = activeSlide.querySelector(
+    `.${ELEMENT_SLIDE_IMAGE_CONTAINER}`,
+  ) as HTMLElement;
+  const buttons = Array.from(
+    slider.querySelectorAll(`.${CAROUSEL_SLIDER_BUTTON}`),
+  ) as HTMLButtonElement[];
   const img = activeSlide.querySelector('img') as HTMLImageElement;
   const imageSize = GetImageSize({ image: img, parentNode: slider });
+  const size = textContainer.offsetHeight + imageSize;
 
-  slider.style.height = `${imageSize}px`;
+  imageContainer.style.height = `${imageSize}px`;
+  buttons.forEach((button) => (button.style.top = `${imageSize / 2}px`));
+
+  slider.style.height = `${size}px`;
 };
 
 const SetActiveSlide = ({ activeSlide }: { activeSlide: HTMLElement }) => {};

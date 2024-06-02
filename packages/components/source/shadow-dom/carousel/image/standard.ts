@@ -17,6 +17,7 @@ const ATTRIBUTE_FULLSCREEN = 'option-full-screen';
 const SLOTS = {
   IMAGES: 'images',
   HEADLINES: 'headlines',
+  TEXTS: 'texts',
 };
 
 const styles = `
@@ -44,8 +45,14 @@ const CreateShadowDom = ({
   const slottedHeadlines = Array.from(
     element.querySelectorAll(`[slot="${SLOTS.HEADLINES}"] > *`),
   );
+  const slottedTexts = Array.from(
+    element.querySelectorAll(`[slot="${SLOTS.TEXTS}"] > *`),
+  );
   const headlines = slottedHeadlines.map((headline) =>
     headline.cloneNode(true),
+  ) as HTMLElement[];
+  const texts = slottedTexts.map((text) =>
+    text.cloneNode(true),
   ) as HTMLElement[];
 
   const images = slottedImages
@@ -62,6 +69,7 @@ const CreateShadowDom = ({
   const carousel = CarouselImageStandard.CreateElement({
     images,
     headlines,
+    texts,
     theme,
     isFullScreenOption,
   });

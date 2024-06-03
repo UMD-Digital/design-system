@@ -17,6 +17,7 @@ type TypeCarouselImageStandardProps = {
 };
 
 const ANIMATION_DURATION = 500;
+const MEDIUM = 500;
 
 const ATTRIBUTE_REFERENCE = 'data-reference';
 const ATTRIBUTE_THEME = 'data-theme';
@@ -41,6 +42,8 @@ const CAROUSEL_SLIDER_BUTTON = 'carousel-slider-button';
 
 const OVERWRITE_ACTIVE_SLIDE = `.${ELEMENT_SLIDE}[${ATTRIBUTE_ACTIVE_SLIDE}]`;
 const OVERWRITE_THEME_DARK_TEXT_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDE_TEXT_CONTAINER}`;
+const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDE_IMAGE_CONTAINER}`;
+const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${CAROUSEL_SLIDER_BUTTON}`;
 
 // prettier-ignore
 const OverwriteThemeDark = `
@@ -48,16 +51,34 @@ const OverwriteThemeDark = `
     background-color: ${Colors.black};
   }
 
+  ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
+    background-color: ${Colors.gray.dark};
+  }
+
   ${OVERWRITE_THEME_DARK_TEXT_CONTAINER} * {
     color: ${Colors.white};
+  }
+
+  ${OVERWRITE_THEME_DARK_BUTTON} {
+    background-color: ${Colors.black};
+  }
+
+  ${OVERWRITE_THEME_DARK_BUTTON} > svg {
+    fill: ${Colors.white};
   }
 `;
 
 // prettier-ignore
 const TextContainerStyles = `
   .${ELEMENT_SLIDE_TEXT_CONTAINER} {
-    padding: ${Spacing.lg};
+    padding: ${Spacing.md};
     background-color: ${Colors.gray.lighter};
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    .${ELEMENT_SLIDE_TEXT_CONTAINER} {
+      padding: ${Spacing.lg};
+    }
   }
 
   .${ELEMENT_SLIDE_HEADLINE} {

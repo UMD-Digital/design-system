@@ -1,5 +1,5 @@
 import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Performance, Styles } from 'utilities';
+import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
 import { LayoutImage } from 'macros';
 
 const { Colors, Spacing } = Tokens;
@@ -17,7 +17,6 @@ type TypeCarouselImageStandardProps = {
 };
 
 const ANIMATION_DURATION = 500;
-const IMAGE_MIN_HEIGHT = 200;
 
 const ATTRIBUTE_REFERENCE = 'data-reference';
 const ATTRIBUTE_THEME = 'data-theme';
@@ -41,8 +40,6 @@ const ELEMENT_SLIDE_RICH_TEXT = 'carousel-image-standard-slide-rich-text';
 const CAROUSEL_SLIDER_BUTTON = 'carousel-slider-button';
 
 const OVERWRITE_ACTIVE_SLIDE = `.${ELEMENT_SLIDE}[${ATTRIBUTE_ACTIVE_SLIDE}]`;
-
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_TEXT_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDE_TEXT_CONTAINER}`;
 
 // prettier-ignore
@@ -153,11 +150,15 @@ const SlideStyles = `
     width: 100%;
     position: absolute;
     left: 100%;
+    display: none;
+    transition: transform ${ANIMATION_DURATION}ms ease-in-out;
   }
 
   ${OVERWRITE_ACTIVE_SLIDE} {
-    z-index: 9;
+    z-index: 99;
     left: 0;
+    display: block;
+    transform: translateX(0);
   }
 `
 
@@ -165,7 +166,6 @@ const SlideStyles = `
 const SliderStyles = `
   .${ELEMENT_SLIDER_CONTAINER} {
     position: relative;
-
   }
 `
 
@@ -189,12 +189,10 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
 `;
 
 const CreateButton = ({
-  SetEventSlideForward,
-  SetEventSlideBackward,
+  EventSlide,
   isRight = true,
 }: {
-  SetEventSlideForward: () => void;
-  SetEventSlideBackward: () => void;
+  EventSlide: ({ forward }: { forward?: boolean }) => void;
   isRight?: boolean;
 }) => {
   const button = document.createElement('button');
@@ -209,8 +207,8 @@ const CreateButton = ({
   }
 
   button.addEventListener('click', () => {
-    if (isRight) SetEventSlideForward();
-    if (!isRight) SetEventSlideBackward();
+    if (isRight) EventSlide({});
+    if (!isRight) EventSlide({ forward: false });
     button.disabled = true;
 
     setTimeout(() => {
@@ -314,9 +312,11 @@ const GetImageSize = ({
 const SetCarouselSize = ({
   slider,
   activeSlide,
+  transition = true,
 }: {
   slider: HTMLElement;
   activeSlide: HTMLElement;
+  transition?: boolean;
 }) => {
   const textContainer = activeSlide.querySelector(
     `.${ELEMENT_SLIDE_TEXT_CONTAINER}`,
@@ -329,79 +329,149 @@ const SetCarouselSize = ({
   ) as HTMLButtonElement[];
   const img = activeSlide.querySelector('img') as HTMLImageElement;
   const imageSize = GetImageSize({ image: img, parentNode: slider });
-  const size = textContainer.offsetHeight + imageSize;
+  let size = imageSize;
+
+  if (textContainer) size = textContainer.offsetHeight + imageSize;
 
   imageContainer.style.height = `${imageSize}px`;
   buttons.forEach((button) => (button.style.top = `${imageSize / 2}px`));
 
+  if (transition) {
+    slider.style.transition = `height ${ANIMATION_DURATION}ms ease-in-out`;
+  } else {
+    slider.style.transition = `none`;
+  }
   slider.style.height = `${size}px`;
 };
 
-const SetActiveSlide = ({ activeSlide }: { activeSlide: HTMLElement }) => {};
+const SlideActiveSlide = ({
+  slide,
+  isRight = true,
+}: {
+  slide: HTMLElement;
+  isRight: boolean;
+}) => {
+  const transformDirection = isRight ? 'translateX(-100%)' : 'translateX(100%)';
+  slide.style.transform = `${transformDirection}`;
+
+  setTimeout(() => {
+    slide.removeAttribute(ATTRIBUTE_ACTIVE_SLIDE);
+  }, ANIMATION_DURATION);
+
+  setTimeout(() => {
+    slide.style.transform = 'none';
+  }, ANIMATION_DURATION + 100);
+};
+
+const SlideUpcomingSlide = ({
+  slide,
+  isRight = true,
+}: {
+  slide: HTMLElement;
+  isRight: boolean;
+}) => {
+  const amount = '90';
+  const transformDirection = isRight
+    ? `translateX(-${amount}%)`
+    : `translateX(${amount}%)`;
+  const startingPosition = isRight ? `${amount}%` : `-${amount}%`;
+
+  slide.style.zIndex = '9';
+  slide.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
+  slide.style.display = 'block';
+  slide.style.left = `${startingPosition}`;
+
+  setTimeout(() => {
+    slide.style.transform = `${transformDirection}`;
+  }, 1);
+
+  setTimeout(() => {
+    slide.style.transition = 'none';
+    slide.style.left = '0';
+    slide.style.transform = 'none';
+    slide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
+  }, ANIMATION_DURATION);
+
+  setTimeout(() => {
+    slide.removeAttribute('style');
+  }, ANIMATION_DURATION + 100);
+};
 
 const CreateCarouselImageStandardElement = (
   props: TypeCarouselImageStandardProps,
-) => {
-  const { isFullScreenOption = true, theme } = props;
-  const elementDeclaration = document.createElement('div');
-  const elementContainer = document.createElement('div');
-  const slider = document.createElement('div');
-  const slides = CreateSlide(props);
-  const SetEventSlideForward = () => {
-    const activeSlide = slides[activeIndex];
-    activeSlide.removeAttribute(ATTRIBUTE_ACTIVE_SLIDE);
-    activeIndex = activeIndex + 1;
-    if (activeIndex >= slides.length) activeIndex = 0;
-    const nextSlide = slides[activeIndex];
-    SetCarouselSize({ slider, activeSlide: nextSlide });
-    nextSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
-  };
-  const SetEventSlideBackward = () => {
-    const activeSlide = slides[activeIndex];
-    activeSlide.removeAttribute(ATTRIBUTE_ACTIVE_SLIDE);
-    activeIndex = activeIndex - 1;
-    if (activeIndex < 0) activeIndex = slides.length - 1;
-    const nextSlide = slides[activeIndex];
-    SetCarouselSize({ slider, activeSlide: nextSlide });
-    nextSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
-  };
-  const DataEventSlide = { SetEventSlideForward, SetEventSlideBackward };
-  const EventResize = () => {
-    SetCarouselSize({ slider, activeSlide: slides[activeIndex] });
-  };
-  const Load = () => {
-    setTimeout(() => {
-      const activeSlide = slides[activeIndex];
-      SetCarouselSize({ slider, activeSlide });
-      activeSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
-    }, 100);
-  };
-  let activeIndex = 0;
+) =>
+  (() => {
+    const { isFullScreenOption = true, theme } = props;
+    const elementDeclaration = document.createElement('div');
+    const elementContainer = document.createElement('div');
+    const slider = document.createElement('div');
+    const slides = CreateSlide(props);
+    const EventSlide = ({ forward = true }: { forward?: boolean }) => {
+      SlideActiveSlide({ slide: slides[activeIndex], isRight: forward });
 
-  slider.classList.add(ELEMENT_SLIDER_CONTAINER);
-  slider.append(...slides);
-  slider.appendChild(CreateButton({ ...DataEventSlide }));
-  slider.appendChild(
-    CreateButton({
-      ...DataEventSlide,
-      isRight: true,
-    }),
-  );
+      if (forward) {
+        activeIndex = activeIndex + 1;
+        if (activeIndex >= slides.length) activeIndex = 0;
+      } else {
+        activeIndex = activeIndex - 1;
+        if (activeIndex < 0) activeIndex = slides.length - 1;
+      }
 
-  elementContainer.classList.add(ELEMENT_CAROUSEL_IMAGE_CONTAINER);
-  elementContainer.appendChild(slider);
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+      SlideUpcomingSlide({ slide: slides[activeIndex], isRight: forward });
+      SetCarouselSize({ slider, activeSlide: slides[activeIndex] });
+    };
+    const EventSwipe = () => {
+      const swipes = (isrightswipe: Boolean) => {
+        if (!isrightswipe) {
+          EventSlide({ forward: false });
+        } else {
+          EventSlide({ forward: true });
+        }
+      };
 
-  elementDeclaration.classList.add(ELEMENT_CAROUSEL_IMAGE_DECLARATION);
-  elementDeclaration.appendChild(elementContainer);
+      EventsUtility.CreateEventSwipe({ container: slider, callback: swipes });
+    };
 
-  window.addEventListener('resize', Debounce(EventResize, 10));
+    const EventResize = () => {
+      SetCarouselSize({ slider, activeSlide: slides[activeIndex] });
+    };
+    const Load = () => {
+      const setSize = () => {
+        const activeSlide = slides[activeIndex];
+        SetCarouselSize({ slider, activeSlide, transition: false });
+        activeSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
+      };
+      setTimeout(setSize, 100);
+      setTimeout(setSize, 300);
+      setTimeout(setSize, 1000);
+    };
+    let activeIndex = 0;
 
-  return {
-    element: elementDeclaration,
-    events: { Load },
-  };
-};
+    slider.classList.add(ELEMENT_SLIDER_CONTAINER);
+    slider.append(...slides);
+    slider.appendChild(CreateButton({ EventSlide, isRight: false }));
+    slider.appendChild(
+      CreateButton({
+        EventSlide,
+        isRight: true,
+      }),
+    );
+
+    elementContainer.classList.add(ELEMENT_CAROUSEL_IMAGE_CONTAINER);
+    elementContainer.appendChild(slider);
+    if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+
+    elementDeclaration.classList.add(ELEMENT_CAROUSEL_IMAGE_DECLARATION);
+    elementDeclaration.appendChild(elementContainer);
+
+    window.addEventListener('resize', Debounce(EventResize, 10));
+    EventSwipe();
+
+    return {
+      element: elementDeclaration,
+      events: { Load },
+    };
+  })();
 
 export default {
   CreateElement: CreateCarouselImageStandardElement,

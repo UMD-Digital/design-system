@@ -18,9 +18,9 @@ const Spacing = {
 const MaxWidth = {
   max: '1728px',
   large: '1552px',
-  normal: '1234px',
-  small: '1056px',
-  smallest: '880px',
+  normal: '1384px',
+  small: '1200px',
+  smallest: '992px',
 };
 
 export { Spacing, MaxWidth };

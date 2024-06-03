@@ -1,5 +1,11 @@
 import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
+import {
+  AssetIcon,
+  AssetServices,
+  EventsUtility,
+  Performance,
+  Styles,
+} from 'utilities';
 import { LayoutImage } from 'macros';
 
 const { Colors, Spacing } = Tokens;
@@ -7,6 +13,7 @@ const { SansLarge } = Typography;
 const { Text } = Elements;
 const { Debounce } = Performance;
 const { ConvertJSSObjectToStyles } = Styles;
+const { GetResponsiveImageSize } = AssetServices;
 
 type TypeCarouselImageStandardProps = {
   images: HTMLImageElement[];
@@ -312,24 +319,6 @@ const CreateSlide = (props: TypeCarouselImageStandardProps) => {
   });
 };
 
-const GetImageSize = ({
-  image,
-  parentNode,
-}: {
-  image: HTMLImageElement;
-  parentNode: HTMLElement;
-}) => {
-  const imgHeight = image.naturalHeight;
-  const aspectRatio = image.naturalWidth / imgHeight;
-  const maxElementHeight = parentNode.offsetWidth / aspectRatio;
-  const maxWindowHeight = 500;
-  const maxHeight =
-    maxElementHeight > maxWindowHeight ? maxWindowHeight : maxElementHeight;
-  const defaultImageHeight = imgHeight > maxHeight ? maxHeight : imgHeight;
-
-  return defaultImageHeight;
-};
-
 const SetCarouselSize = ({
   slider,
   activeSlide,
@@ -349,7 +338,7 @@ const SetCarouselSize = ({
     slider.querySelectorAll(`.${CAROUSEL_SLIDER_BUTTON}`),
   ) as HTMLButtonElement[];
   const img = activeSlide.querySelector('img') as HTMLImageElement;
-  const imageSize = GetImageSize({ image: img, parentNode: slider });
+  const imageSize = GetResponsiveImageSize({ image: img, parentNode: slider });
   let size = imageSize;
 
   if (textContainer) size = textContainer.offsetHeight + imageSize;
@@ -422,7 +411,7 @@ const CreateCarouselImageStandardElement = (
   props: TypeCarouselImageStandardProps,
 ) =>
   (() => {
-    const { isFullScreenOption = true, theme } = props;
+    const { isFullScreenOption = true, images, theme } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const slider = document.createElement('div');
@@ -464,7 +453,6 @@ const CreateCarouselImageStandardElement = (
       };
       setTimeout(setSize, 100);
       setTimeout(setSize, 300);
-      setTimeout(setSize, 1000);
     };
     let activeIndex = 0;
 
@@ -486,6 +474,7 @@ const CreateCarouselImageStandardElement = (
     elementDeclaration.appendChild(elementContainer);
 
     window.addEventListener('resize', Debounce(EventResize, 10));
+    images[images.length - 1].addEventListener('load', Load);
     EventSwipe();
 
     return {

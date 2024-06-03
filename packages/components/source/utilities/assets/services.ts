@@ -65,6 +65,26 @@ const CreateGif = ({ container }: { container: HTMLDivElement | null }) => {
   });
 };
 
+const GetResponsiveImageSize = ({
+  image,
+  parentNode,
+  maxWindowHeight = 500,
+}: {
+  image: HTMLImageElement;
+  parentNode: HTMLElement;
+  maxWindowHeight?: number;
+}) => {
+  const imgHeight = image.naturalHeight;
+  const aspectRatio = image.naturalWidth / imgHeight;
+  const maxElementHeight = parentNode.offsetWidth / aspectRatio;
+  const maxHeight =
+    maxElementHeight > maxWindowHeight ? maxWindowHeight : maxElementHeight;
+  const defaultImageHeight = imgHeight > maxHeight ? maxHeight : imgHeight;
+
+  return defaultImageHeight;
+};
+
 export default {
   CreateGif,
+  GetResponsiveImageSize,
 };

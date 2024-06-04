@@ -27,7 +27,7 @@ const ButtonStyles = `
   .${ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER} {
     width: 80px;
     height: 100%;
-    background-color: ${Colors.gray.lightest};
+    background-color: ${Colors.gray.light};
   }
 `
 
@@ -136,7 +136,8 @@ const CreateSlideIndicator = ({
       let spacerColor = Colors.white;
 
       if (theme === 'dark' && !overlayColor) spacerColor = Colors.black;
-      if (theme === 'light' && !overlayColor) spacerColor = Colors.gray.lighter;
+      if (theme === 'light' && !overlayColor)
+        spacerColor = Colors.gray.lightest;
 
       spacer.style.backgroundColor = spacerColor;
 

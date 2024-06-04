@@ -85,7 +85,7 @@ const OverwriteThemeDark = `
 const indicatorContainerStyles = `
   .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
     padding: ${Spacing.md};
-    background-color: ${Colors.gray.lighter};
+    background-color: ${Colors.gray.lightest};
     display: flex;
     justify-content: center;
   }
@@ -102,7 +102,7 @@ const TextContainerStyles = `
   .${ELEMENT_SLIDE_TEXT_CONTAINER} {
     padding: ${Spacing.md};
     padding-bottom: 0;
-    background-color: ${Colors.gray.lighter};
+    background-color: ${Colors.gray.lightest};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
@@ -225,7 +225,7 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
 
   .${ELEMENT_CAROUSEL_IMAGE_CONTAINER} {
     overflow: hidden;
-    background-color: ${Colors.gray.lighter};
+    background-color: ${Colors.gray.lightest};
   }
 
   ${LayoutImage.Styles}

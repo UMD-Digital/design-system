@@ -10,7 +10,7 @@ export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
 const { Spacing } = Tokens;
 const { Debounce } = Performance;
 
-const SMALL = 300;
+const SMALL = 350;
 
 const ELEMENT_NAME = 'umd-block-overlay-image';
 
@@ -124,14 +124,14 @@ const STYLES_BLOCK_OVERLAY_ELEMENT = `
   
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     .${ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER} {
-      min-height: 400px;
+      min-height: 360px;
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER} {
       padding-top: ${Spacing['8xl']};
-      min-height: 456px;
+      min-height: 450px;
     }
   }
 

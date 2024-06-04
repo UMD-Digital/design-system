@@ -579,7 +579,7 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
       return (containerWidth / count) * multiplier - additonalSpace;
     };
     const SetCardHeight = () => {
-      const minimumHeight = 450;
+      const minimumHeight = window.innerWidth > 768 ? 450 : 360;
       const maxHeight = cards.reduce((acc, currentElement) => {
         if (acc > currentElement.offsetHeight) return acc;
         return currentElement.offsetHeight;

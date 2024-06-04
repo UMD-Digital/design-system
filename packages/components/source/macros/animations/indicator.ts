@@ -27,7 +27,7 @@ const ButtonStyles = `
   .${ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER} {
     width: 80px;
     height: 100%;
-    background-color: ${Colors.gray.light};
+    background-color: ${Colors.gray.lightest};
   }
 `
 
@@ -37,6 +37,8 @@ const STYLES_INDICATOR = `
     height: 2px;
     display: flex;
     align-items: center;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .${ELEMENT_SLIDE_INDICATOR_CONTAINER} > span {
@@ -97,10 +99,12 @@ const CreateSlideIndicator = ({
 
     const eventResize = () => {
       sizeButtons();
+      positionLine(position);
     };
 
     const eventPosition = (index: number) => {
       positionLine(index);
+      position = index;
     };
 
     const load = () => {

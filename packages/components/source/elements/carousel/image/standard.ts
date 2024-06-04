@@ -6,7 +6,7 @@ import {
   Performance,
   Styles,
 } from 'utilities';
-import { LayoutImage } from 'macros';
+import { AnimationIndicator, LayoutImage } from 'macros';
 
 const { Colors, Spacing } = Tokens;
 const { SansLarge } = Typography;
@@ -45,16 +45,22 @@ const ELEMENT_SLIDE_IMAGE_WRAPPER = 'carousel-image-standard-slide-wrapper';
 const ELEMENT_SLIDE_TEXT_CONTAINER = 'carousel-image-standard-slide-text';
 const ELEMENT_SLIDE_HEADLINE = 'carousel-image-standard-slide-headline';
 const ELEMENT_SLIDE_RICH_TEXT = 'carousel-image-standard-slide-rich-text';
-const CAROUSEL_SLIDER_BUTTON = 'carousel-slider-button';
+const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-slider-button';
+const ELEMENT_CAROUSEL_INDICATOR_WRAPPER = 'carousel-indicator-wrapper';
 
 const OVERWRITE_ACTIVE_SLIDE = `.${ELEMENT_SLIDE}[${ATTRIBUTE_ACTIVE_SLIDE}]`;
 const OVERWRITE_THEME_DARK_TEXT_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDE_TEXT_CONTAINER}`;
 const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDE_IMAGE_CONTAINER}`;
-const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${CAROUSEL_SLIDER_BUTTON}`;
+const OVERWRITE_THEME_DARK_INDICATOR = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER}`;
+const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_SLIDER_BUTTON}`;
 
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_TEXT_CONTAINER} {
+    background-color: ${Colors.black};
+  }
+
+  ${OVERWRITE_THEME_DARK_INDICATOR} {
     background-color: ${Colors.black};
   }
 
@@ -76,20 +82,34 @@ const OverwriteThemeDark = `
 `;
 
 // prettier-ignore
+const indicatorContainerStyles = `
+  .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
+    padding: ${Spacing.md};
+    background-color: ${Colors.gray.lighter};
+    display: flex;
+    justify-content: center;
+  }
+  
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
+      padding: ${Spacing.lg};
+    }
+  }
+`;
+
+// prettier-ignore
 const TextContainerStyles = `
   .${ELEMENT_SLIDE_TEXT_CONTAINER} {
     padding: ${Spacing.md};
+    padding-bottom: 0;
     background-color: ${Colors.gray.lighter};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${ELEMENT_SLIDE_TEXT_CONTAINER} {
       padding: ${Spacing.lg};
+      padding-bottom: 0;
     }
-  }
-
-  .${ELEMENT_SLIDE_HEADLINE} {
-    
   }
 
   ${ConvertJSSObjectToStyles({
@@ -141,7 +161,7 @@ const ImageContainerStyles = `
 
 // prettier-ignore
 const SliderButtons = `
-  .${CAROUSEL_SLIDER_BUTTON} {
+  .${ELEMENT_CAROUSEL_SLIDER_BUTTON} {
     background-color: ${Colors.white};
     display: flex;
     justify-content: center;
@@ -153,19 +173,19 @@ const SliderButtons = `
     z-index: 99;
   }
 
-  .${CAROUSEL_SLIDER_BUTTON}:first-of-type {
+  .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:first-of-type {
     left: ${Spacing.sm};
   }
 
-  .${CAROUSEL_SLIDER_BUTTON}:first-of-type svg {
+  .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:first-of-type svg {
     transform: rotate(180deg);
   }
 
-  .${CAROUSEL_SLIDER_BUTTON}:last-of-type {
+  .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:last-of-type {
     right: ${Spacing.sm};
   }
 
-  .${CAROUSEL_SLIDER_BUTTON} svg {
+  .${ELEMENT_CAROUSEL_SLIDER_BUTTON} svg {
     fill: ${Colors.black};
     width: 16px;
   }
@@ -208,11 +228,13 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   }
 
   ${LayoutImage.Styles}
+  ${AnimationIndicator.Styles}
   ${SliderStyles}
   ${SlideStyles}
   ${SliderButtons}
   ${ImageContainerStyles}
   ${TextContainerStyles}
+  ${indicatorContainerStyles}
   ${OverwriteThemeDark}
 `;
 
@@ -225,7 +247,7 @@ const CreateButton = ({
 }) => {
   const button = document.createElement('button');
   button.setAttribute('type', 'button');
-  button.classList.add(CAROUSEL_SLIDER_BUTTON);
+  button.classList.add(ELEMENT_CAROUSEL_SLIDER_BUTTON);
   button.innerHTML = AssetIcon.FORWARD_ARROW;
 
   if (!isRight) {
@@ -335,7 +357,7 @@ const SetCarouselSize = ({
     `.${ELEMENT_SLIDE_IMAGE_CONTAINER}`,
   ) as HTMLElement;
   const buttons = Array.from(
-    slider.querySelectorAll(`.${CAROUSEL_SLIDER_BUTTON}`),
+    slider.querySelectorAll(`.${ELEMENT_CAROUSEL_SLIDER_BUTTON}`),
   ) as HTMLButtonElement[];
   const img = activeSlide.querySelector('img') as HTMLImageElement;
   const imageSize = GetResponsiveImageSize({ image: img, parentNode: slider });
@@ -414,6 +436,7 @@ const CreateCarouselImageStandardElement = (
     const { isFullScreenOption = true, images, theme } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
+    const elementIndicator = document.createElement('div');
     const slider = document.createElement('div');
     const slides = CreateSlide(props);
     const EventSlide = ({ forward = true }: { forward?: boolean }) => {
@@ -429,6 +452,14 @@ const CreateCarouselImageStandardElement = (
 
       SlideUpcomingSlide({ slide: slides[activeIndex], isRight: forward });
       SetCarouselSize({ slider, activeSlide: slides[activeIndex] });
+      indicator.position(activeIndex);
+    };
+    const EventMoveTo = (index: number) => {
+      SlideActiveSlide({ slide: slides[activeIndex], isRight: true });
+      activeIndex = index;
+      SlideUpcomingSlide({ slide: slides[activeIndex], isRight: true });
+      SetCarouselSize({ slider, activeSlide: slides[activeIndex] });
+      indicator.position(activeIndex);
     };
     const EventSwipe = () => {
       const swipes = (isrightswipe: Boolean) => {
@@ -454,6 +485,11 @@ const CreateCarouselImageStandardElement = (
       setTimeout(setSize, 100);
       setTimeout(setSize, 300);
     };
+    const indicator = AnimationIndicator.CreateElement({
+      count: images.length || 0,
+      callback: EventMoveTo,
+      theme: theme || 'light',
+    });
     let activeIndex = 0;
 
     slider.classList.add(ELEMENT_SLIDER_CONTAINER);
@@ -466,8 +502,12 @@ const CreateCarouselImageStandardElement = (
       }),
     );
 
+    elementIndicator.classList.add(ELEMENT_CAROUSEL_INDICATOR_WRAPPER);
+    elementIndicator.appendChild(indicator.element);
+
     elementContainer.classList.add(ELEMENT_CAROUSEL_IMAGE_CONTAINER);
     elementContainer.appendChild(slider);
+    elementContainer.appendChild(elementIndicator);
     if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
 
     elementDeclaration.classList.add(ELEMENT_CAROUSEL_IMAGE_DECLARATION);

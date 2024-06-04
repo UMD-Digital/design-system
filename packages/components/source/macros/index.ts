@@ -1,3 +1,4 @@
+import AnimationIndicator from './animations/indicator';
 import AnimationLoader from './animations/loader';
 import ButtonLazyLoad from './buttons/lazy-load';
 import LayoutGridGap from './layout/grid';
@@ -9,8 +10,9 @@ import TextLockupSmall from './text-lockup/small';
 import TextLockupSmallScaling from './text-lockup/small-scaling';
 
 export {
-  ButtonLazyLoad,
+  AnimationIndicator,
   AnimationLoader,
+  ButtonLazyLoad,
   LayoutBlock,
   LayoutImage,
   LayoutBlockOverlay,

@@ -106,7 +106,7 @@ const GutterlessFourColumnBorder = {
 };
 
 export const GridColumnsGutterless = {
-  '.umd-grid-two': {
+  '.umd-grid': {
     ...GutterlessTwoColumn,
   },
 

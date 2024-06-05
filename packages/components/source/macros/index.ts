@@ -1,3 +1,4 @@
+import AnimationCarousel from './animations/carousel';
 import AnimationIndicator from './animations/indicator';
 import AnimationLoader from './animations/loader';
 import ButtonLazyLoad from './buttons/lazy-load';
@@ -10,6 +11,7 @@ import TextLockupSmall from './text-lockup/small';
 import TextLockupSmallScaling from './text-lockup/small-scaling';
 
 export {
+  AnimationCarousel,
   AnimationIndicator,
   AnimationLoader,
   ButtonLazyLoad,

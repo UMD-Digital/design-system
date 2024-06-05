@@ -75,24 +75,16 @@ const CreateShadowDom = ({
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(carousel.element);
-  carousel.events.Load();
+  shadow.appendChild(carousel);
 };
 
 class UMDCarouselImageStandardElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _elementRef: {
-    element: HTMLDivElement;
-    events: {
-      Load: () => void;
-    };
-  } | null;
 
   constructor() {
     super();
 
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._elementRef = null;
   }
 
   connectedCallback() {

@@ -20,9 +20,6 @@ const THEME_MARYLAND = 'maryland';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_HAS_IMAGE = 'has-image';
 
-const BACKGROUND_TEXTURE_LIGHT = `<svg id="hero_background_light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1526.52 400.56"><defs><style>.cls-1{opacity:0;}.cls-1,.cls-2{fill-rule:evenodd;}.cls-1,.cls-2,.cls-3{fill:#454545;isolation:isolate;}.cls-2,.cls-3{opacity:.03;}</style></defs><g><polygon class="cls-3" points="1225.11 400.56 1459.86 400.56 1526.52 333.75 1193.52 0 958.76 0 1291.77 333.75 1225.11 400.56"/><polygon class="cls-3" points="266.34 400.56 501.23 400.56 567.75 333.75 234.75 0 0 0 333 333.75 266.34 400.56"/></g><polygon class="cls-1" points="630.37 400.49 567.75 333.75 812.03 84.97 1059.31 332.81 993.63 400.56 1225.11 400.56 1292.06 333.81 959.06 .06 812.06 .06 812 .06 663 .06 333 333.75 397.6 400.61 630.37 400.49"/><polygon class="cls-2" points="993.63 400.56 1059.31 332.81 812.38 85.45 811.38 85.39 568.18 334.19 630.28 400.5 630.28 400.5 993.63 400.56"/></svg>`;
-const BACKGROUND_TEXTURE_DARK = `<svg id="hero_background_dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 717 668"><defs><style>.cls-1 {opacity: .8;}.cls-1, .cls-2 {fill: #242424;fill-rule: evenodd;isolation: isolate;stroke-width: 0px;}.cls-2 {opacity: .5;}</style></defs><path class="cls-2" d="M149.1.5H0v85.9l247.3,247.9L0,582.1v85.9h149.1l333-333.8L149.1.5Z"/><path class="cls-1" d="M148.3.5h234.8l333,333.8-333,333.7h-234.8l333-333.8L148.3.5ZM0,244l79.2-79.2L0,85.5v158.5Z"/></svg>`;
-
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
 const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
@@ -32,7 +29,6 @@ const ELEMENT_NAME = 'umd-element-hero-minimal';
 const ELEMENT_HERO_DECLARATION = 'hero-minimal-element-declaration';
 const ELEMENT_HERO_CONTAINER = 'hero-minimal-container';
 const ELEMENT_HERO_LOCK = 'hero-minimal-lock';
-const ELEMENT_HERO_TEXTURE = 'hero-minimal-texture';
 
 const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
@@ -56,20 +52,12 @@ const OverwriteTheme = `
     background-color: ${Colors.black};
   }
 
-  ${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_HERO_TEXTURE} {
-    opacity: 0.8;
-  }
-
   ${OVERWRITE_THEME_LIGHT_CONTAINER} {
     background-color: ${Colors.gray.lightest};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
     background-color: ${Colors.red};
-  }
-
-  ${OVERWRITE_THEME_MARYLAND_CONTAINER} .${ELEMENT_HERO_TEXTURE} {
-    opacity: 0.13;
   }
 
   ${OVERWRITE_THEME_DARK_TEXT_WRAPPER},
@@ -150,16 +138,6 @@ const OverwriteImageContainer = `
   }
 `;
 
-// prettier-ignore
-const BackgroundTexture = `
-  .${ELEMENT_HERO_TEXTURE} {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    height: 100%;
-  }
-`;
-
 export const STYLES_HERO_MINIMAL_ELEMENT = `
   .${ELEMENT_HERO_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
@@ -186,7 +164,6 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
     }
   }
   
-  ${BackgroundTexture}
   ${OverwriteEyebrow}
   ${OverwriteHeadline}
   ${OverwriteTextContainer}
@@ -204,18 +181,12 @@ export const CreateHeroMinimalElement = (element: TypeHeroMinimalProps) => {
     ...element,
     isTypeMinimal: true,
   });
-  const isDarkText = theme === THEME_DARK || theme === THEME_MARYLAND;
-  const backgroundTexture = Node.imageFromSvg({
-    SVG: isDarkText ? BACKGROUND_TEXTURE_LIGHT : BACKGROUND_TEXTURE_LIGHT,
-  });
-
-  backgroundTexture.classList.add(ELEMENT_HERO_TEXTURE);
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
 
   lock.classList.add(ELEMENT_HERO_LOCK);
-  lock.appendChild(backgroundTexture);
+
   lock.appendChild(text);
 
   if (asset) {

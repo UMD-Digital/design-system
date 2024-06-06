@@ -83,13 +83,26 @@ const TextStyles = `
     },
   })}
 
-  .${ELEMENT_RICH_TEXT} {
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_RICH_TEXT} *`]: SansLarger,
+    },
+  })}
+
+  .${ELEMENT_RICH_TEXT},
+  .${ELEMENT_RICH_TEXT} * {
     font-weight: 700;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT_SMALL}`]: SansMedium,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_RICH_TEXT_SMALL} *`]: SansMedium,
     },
   })}
 `;

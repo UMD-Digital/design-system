@@ -175,6 +175,7 @@ const DateStyles = `
     display: block;
   }
 
+  .${ELEMENT_TEXT_LOCKUP_SMALL_DATE},
   .${ELEMENT_TEXT_LOCKUP_SMALL_DATE} * {
     color: ${Colors.gray.mediumAA};
   }

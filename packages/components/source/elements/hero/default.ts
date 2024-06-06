@@ -94,6 +94,12 @@ const OverwriteRichText = `
       [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
     },
   })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_RICH_TEXT} *`]: SansLarger,
+    },
+  })}
   
   ${OVERWRITE_RICH_TEXT} {
     font-weight: 400;

@@ -271,7 +271,12 @@ const CreateCarouselImageStandardElement = (
 
     images[images.length - 1].addEventListener('load', carousel.events.Load);
 
-    return elementDeclaration;
+    return {
+      element: elementDeclaration,
+      events: {
+        SetEventReize: carousel.events.EventResize,
+      },
+    };
   })();
 
 export default {

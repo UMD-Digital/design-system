@@ -292,7 +292,7 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
 
     return {
       element: container,
-      events: { Load, EventMoveTo },
+      events: { Load, EventMoveTo, EventResize },
     };
   })();
 

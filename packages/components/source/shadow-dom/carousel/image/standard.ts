@@ -11,6 +11,7 @@ const { Node } = MarkupCreate;
 const { ImageHasAlt } = MarkupValidate;
 
 const ELEMENT_NAME = 'umd-element-carousel-image';
+const ATTRIBUTE_RESIZE = 'resize';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_FULLSCREEN = 'option-full-screen';
 
@@ -74,17 +75,39 @@ const CreateShadowDom = ({
     isFullScreenOption,
   });
 
+  element._elementRef = carousel;
   shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(carousel);
+  shadow.appendChild(carousel.element);
 };
 
 class UMDCarouselImageStandardElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _elementRef: {
+    element: HTMLDivElement;
+    events: {
+      SetEventReize: () => void;
+    };
+  } | null;
 
   constructor() {
     super();
 
     this._shadow = this.attachShadow({ mode: 'open' });
+    this._elementRef = null;
+  }
+
+  static get observedAttributes() {
+    return [ATTRIBUTE_RESIZE];
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (name == ATTRIBUTE_RESIZE && newValue === 'true' && this._elementRef) {
+      this._elementRef.events.SetEventReize();
+    }
   }
 
   connectedCallback() {

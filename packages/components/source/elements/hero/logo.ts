@@ -11,7 +11,7 @@ import TextContainer, { TypeTextContainerProps } from './elements/text';
 type TypeHeroLogoProps = TypeTextContainerProps & TypeImageContainerProps;
 
 const { LockSmall } = Layout;
-const { Colors, Spacing, MaxWidth } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignLarge, SansLarger } = Typography;
 

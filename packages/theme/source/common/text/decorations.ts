@@ -1,5 +1,4 @@
 import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
-import background from 'layout/background';
 
 const { Eyebrow } = Elements;
 const { Spacing, Colors, Queries } = Tokens;

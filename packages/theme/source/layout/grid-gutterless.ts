@@ -120,7 +120,7 @@ export const GridColumnsGutterless = {
 };
 
 const GridColumnsGutterlessBorder = {
-  '.umd-grid-two-border': {
+  '.umd-grid-border': {
     ...GutterlessTwoColumnBorder,
   },
 
@@ -134,7 +134,7 @@ const GridColumnsGutterlessBorder = {
 };
 
 const GridColumnsGutterlessBorderDark = {
-  '.umd-grid-two-border-dark': {
+  '.umd-grid-border-dark': {
     ...GutterlessTwoColumnBorder,
     ...GutterlessBoarderDark,
 

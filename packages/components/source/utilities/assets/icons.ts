@@ -20,6 +20,8 @@ const FEARLESS = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96
 
 const FORWARD_ARROW = `<svg aria-hidden="true"  viewBox="0 0 24 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.0184 5.05487L17.0694 8H19.8462L23.8959 4.03913L23.8567 4L23.8959 3.96087L19.8462 0L17.0694 0L20.2936 3.22002H0L0 5.05487H20.0184Z"/></svg>`;
 
+const FULL_SCREEN = `<svg aria-hidden="true" id="icon_full_screen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0172 4.97734L12.0154 7.75584L13.3244 6.44684L13.3662 2.67066H13.3293L13.3293 2.63376L9.55316 2.6756L8.24415 3.98461L11.282 3.98263L8.28453 6.98009L9.14949 7.84505L12.0172 4.97734Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M3.9828 11.0227L3.98461 8.24416L2.67561 9.55316L2.63377 13.3293H2.67066V13.3662L6.44684 13.3244L7.75585 12.0154L4.71801 12.0174L7.71547 9.01991L6.85051 8.15495L3.9828 11.0227Z" fill="white"/></svg>`;
+
 const MULTI_DAY = `<svg aria-hidden="true" id="multi-day-icon" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.12132 0.458984H14.7596V9.30341H12.1967V3.53528H4.12132V0.458984ZM0.592957 4.85456H11.1915V6.89765V6.89765V13.6654H0.592957V6.89765V6.89765V4.85456Z" fill="#454545"/></svg>`;
 
 const MAGNIFY_GLASS = `<svg aria-hidden="true" id="magnify-glass-icon"  width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M79.3401 42.2306C79.3401 54.1438 69.6826 63.8013 57.7694 63.8013C45.8562 63.8013 36.1987 54.1438 36.1987 42.2306C36.1987 30.3174 45.8562 20.6599 57.7694 20.6599C69.6826 20.6599 79.3401 30.3174 79.3401 42.2306ZM91 42.2306C91 60.5833 76.1222 75.4612 57.7694 75.4612C51.3447 75.4612 45.3458 73.6379 40.2619 70.4806L24.2216 86.5209H5L30.2245 60.8255C26.6351 55.5189 24.5388 49.1195 24.5388 42.2306C24.5388 23.8778 39.4167 9 57.7694 9C76.1222 9 91 23.8778 91 42.2306Z"></path></svg>`;
@@ -56,6 +58,7 @@ export default {
   EXCLAMATION,
   FEARLESS,
   FORWARD_ARROW,
+  FULL_SCREEN,
   MAGNIFY_GLASS,
   MULTI_DAY,
   NEW_WINDOW,

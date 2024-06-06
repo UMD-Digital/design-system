@@ -12,7 +12,8 @@ const { GetResponsiveImageSize } = AssetServices;
 
 type TypeCarouselImageProps = {
   slides: HTMLElement[];
-  callback: (index: number) => void;
+  callback?: (index: number) => void;
+  maxHeight?: number;
 };
 
 const ANIMATION_DURATION = 500;
@@ -112,7 +113,8 @@ const CreateButton = ({
     button.setAttribute('aria-label', 'Next');
   }
 
-  button.addEventListener('click', () => {
+  button.addEventListener('click', (event) => {
+    event.stopPropagation();
     if (isRight) EventSlide({});
     if (!isRight) EventSlide({ forward: false });
     button.disabled = true;
@@ -128,18 +130,24 @@ const CreateButton = ({
 const SetCarouselSize = ({
   slider,
   activeSlide,
-  transition = true,
+  transition = false,
+  maxHeight,
 }: {
   slider: HTMLElement;
   activeSlide: HTMLElement;
   transition?: boolean;
+  maxHeight?: number;
 }) => {
   const children = Array.from(activeSlide.children) as HTMLDivElement[];
   const buttons = Array.from(
     slider.querySelectorAll(`.${ELEMENT_CAROUSEL_SLIDER_BUTTON}`),
   ) as HTMLButtonElement[];
   const img = activeSlide.querySelector('img') as HTMLImageElement;
-  const imageSize = GetResponsiveImageSize({ image: img, parentNode: slider });
+  const imageSize = GetResponsiveImageSize({
+    image: img,
+    parentNode: slider,
+    maxWindowHeight: maxHeight,
+  });
   const imageContainer = children.find((child) =>
     child.contains(img),
   ) as HTMLElement;
@@ -218,7 +226,7 @@ const SlideUpcomingSlide = ({
 
 const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
   (() => {
-    const { slides, callback } = props;
+    const { slides, callback, maxHeight } = props;
     const container = document.createElement('div');
     const slider = document.createElement('div');
     let activeIndex = 0;
@@ -235,17 +243,30 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
       }
 
       SlideUpcomingSlide({ slide: slides[activeIndex], isRight: forward });
-      SetCarouselSize({ slider, activeSlide: slides[activeIndex] });
-      callback(activeIndex);
+      SetCarouselSize({
+        slider,
+        activeSlide: slides[activeIndex],
+        transition: true,
+        maxHeight,
+      });
+      if (callback) callback(activeIndex);
     };
 
     const EventMoveTo = (index: number) => {
       SlideActiveSlide({ slide: slides[activeIndex], isRight: true });
       activeIndex = index;
       SlideUpcomingSlide({ slide: slides[activeIndex], isRight: true });
-      SetCarouselSize({ slider, activeSlide: slides[activeIndex] });
-      callback(activeIndex);
+      SetCarouselSize({
+        slider,
+        activeSlide: slides[activeIndex],
+        transition: true,
+        maxHeight,
+      });
+      if (callback) callback(activeIndex);
     };
+
+    const EventSlideLeft = () => EventSlide({ forward: false });
+    const EventSlideRight = () => EventSlide({ forward: true });
 
     const EventSwipe = () => {
       const swipes = (isrightswipe: Boolean) => {
@@ -260,13 +281,13 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
     };
 
     const EventResize = () => {
-      SetCarouselSize({ slider, activeSlide: slides[activeIndex] });
+      SetCarouselSize({ slider, activeSlide: slides[activeIndex], maxHeight });
     };
 
     const Load = () => {
       const setSize = () => {
         const activeSlide = slides[activeIndex];
-        SetCarouselSize({ slider, activeSlide, transition: false });
+        SetCarouselSize({ slider, activeSlide, maxHeight });
         activeSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
       };
       setTimeout(setSize, 100);
@@ -292,7 +313,13 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
 
     return {
       element: container,
-      events: { Load, EventMoveTo, EventResize },
+      events: {
+        Load,
+        EventMoveTo,
+        EventResize,
+        EventSlideLeft,
+        EventSlideRight,
+      },
     };
   })();
 

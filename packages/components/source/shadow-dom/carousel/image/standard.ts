@@ -77,6 +77,7 @@ const CreateShadowDom = ({
 
   element._elementRef = carousel;
   shadow.appendChild(styleTemplate.content.cloneNode(true));
+  if (carousel.overlay) shadow.appendChild(carousel.overlay);
   shadow.appendChild(carousel.element);
 };
 

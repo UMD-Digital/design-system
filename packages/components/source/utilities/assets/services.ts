@@ -68,12 +68,14 @@ const CreateGif = ({ container }: { container: HTMLDivElement | null }) => {
 const GetResponsiveImageSize = ({
   image,
   parentNode,
-  maxWindowHeight = 500,
+  maxWindowHeight = window.innerHeight,
 }: {
   image: HTMLImageElement;
   parentNode: HTMLElement;
   maxWindowHeight?: number;
 }) => {
+  if (!image) return maxWindowHeight;
+
   const imgHeight = image.naturalHeight;
   const aspectRatio = image.naturalWidth / imgHeight;
   const maxElementHeight = parentNode.offsetWidth / aspectRatio;

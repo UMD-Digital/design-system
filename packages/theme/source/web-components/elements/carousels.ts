@@ -13,6 +13,7 @@ const ImageStandard = {
   },
   'umd-element-carousel-image:defined': {
     display: 'block',
+    position: 'relative',
   },
 };
 

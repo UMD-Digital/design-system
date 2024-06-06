@@ -58,6 +58,38 @@ const EventAccessibilityFocus: EventAccessibilityFocusType = ({
   };
 };
 
+const EventAccessibilityFocusTrap: EventAccessibilityFocusType = ({
+  element,
+  action,
+}) => {
+  const escapeEvent = (event: KeyboardEvent) => {
+    if (event.key == 'Escape') {
+      action(event);
+    }
+  };
+
+  const keyEvent = (event: KeyboardEvent) => {
+    const currentElement = event.composedPath()[0] as HTMLElement;
+
+    if (event.key === 'Tab') {
+      const firstElement = element?.firstElementChild as HTMLElement;
+
+      if (element && !element.contains(currentElement)) {
+        firstElement.focus();
+      }
+    }
+  };
+
+  window.addEventListener('keydown', escapeEvent);
+  window.addEventListener('keyup', keyEvent);
+
+  return () => {
+    window.removeEventListener('keydown', escapeEvent);
+    window.removeEventListener('keyup', keyEvent);
+  };
+};
+
 export default {
   EventAccessibilityFocus,
+  EventAccessibilityFocusTrap,
 };

@@ -136,7 +136,7 @@ const FullScreenButtonStyles = `
     color: ${Colors.white};
     text-transform: uppercase;
     font-weight: 700;
-    padding: ${Spacing.min} ${Spacing.sm};
+    padding: ${Spacing.min};
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
@@ -153,7 +153,7 @@ const FullScreenButtonStyles = `
     height: 12px;
     width: 1px;
     background-color: ${Colors.gray.mediumAA};
-    margin: 0 ${Spacing.min};
+    margin: 0 4px;
   }
 `;
 

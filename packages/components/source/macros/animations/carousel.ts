@@ -138,15 +138,21 @@ const SetCarouselSize = ({
   transition?: boolean;
   maxHeight?: number;
 }) => {
+  const windowHeight = window.innerHeight - 48;
   const children = Array.from(activeSlide.children) as HTMLDivElement[];
   const buttons = Array.from(
     slider.querySelectorAll(`.${ELEMENT_CAROUSEL_SLIDER_BUTTON}`),
   ) as HTMLButtonElement[];
   const img = activeSlide.querySelector('img') as HTMLImageElement;
+  const maxWindowHeight = maxHeight
+    ? maxHeight > windowHeight
+      ? windowHeight
+      : maxHeight
+    : windowHeight;
   const imageSize = GetResponsiveImageSize({
     image: img,
     parentNode: slider,
-    maxWindowHeight: maxHeight,
+    maxWindowHeight,
   });
   const imageContainer = children.find((child) =>
     child.contains(img),

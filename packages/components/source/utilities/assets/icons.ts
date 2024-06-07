@@ -40,6 +40,8 @@ const PHONE = `<svg aria-hidden="true" id="phone-icon"  width="16" height="16" v
 
 const PLAY = `<svg aria-hidden="true" id="play-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 96 97" style="enable-background:new 0 0 96 97;" xml:space="preserve"><path d="M21.1,16.4c0-0.8,0.8-1.2,1.5-0.9l56.7,32.1c0.7,0.4,0.7,1.4,0,1.7L22.6,81.5c-0.7,0.4-1.5-0.1-1.5-0.9V16.4z"/></svg>`;
 
+const PRINTER = `<svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 0.25H4.5V4.58333H17.5M18.5833 10C18.296 10 18.0205 9.88586 17.8173 9.6827C17.6141 9.47953 17.5 9.20398 17.5 8.91667C17.5 8.62935 17.6141 8.3538 17.8173 8.15063C18.0205 7.94747 18.296 7.83333 18.5833 7.83333C18.8707 7.83333 19.1462 7.94747 19.3494 8.15063C19.5525 8.3538 19.6667 8.62935 19.6667 8.91667C19.6667 9.20398 19.5525 9.47953 19.3494 9.6827C19.1462 9.88586 18.8707 10 18.5833 10ZM15.3333 17.5833H6.66667V12.1667H15.3333M18.5833 5.66667H3.41667C2.55471 5.66667 1.72806 6.00908 1.11857 6.61857C0.509077 7.22806 0.166667 8.05471 0.166667 8.91667V15.4167H4.5V19.75H17.5V15.4167H21.8333V8.91667C21.8333 8.05471 21.4909 7.22806 20.8814 6.61857C20.2719 6.00908 19.4453 5.66667 18.5833 5.66667Z" fill="black"/></svg>`;
+
 const QUOTE = `<svg viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.27381 0.25L7.32143 8V15H0V8L5.32024 0.25H9.27381ZM20.5 0.25L18.5476 8V15H11.2262V8L16.5952 0.25H20.5Z"/></svg>`;
 
 const SHORT_ARROW = `<svg aria-hidden="true" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M63.0351 40L36 13H60.214L95.5269 47.539L95.1858 47.8801L95.5269 48.2212L60.214 82.7602H36L62.795 56H5V40H63.0351Z" fill="black"/></svg>`;
@@ -68,6 +70,7 @@ export default {
   PIN,
   PHONE,
   PLAY,
+  PRINTER,
   QUOTE,
   SHORT_ARROW,
   X,

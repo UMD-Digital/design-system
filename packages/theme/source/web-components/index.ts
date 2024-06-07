@@ -19,6 +19,7 @@ import Quotes from './elements/quotes';
 import ScrollTop from './elements/scroll-top';
 import SectionIntro from './elements/section-intro';
 import Sliders from './elements/sliders';
+import SocialSharing from './elements/social-sharing';
 
 export default {
   ...Accordion,
@@ -42,4 +43,5 @@ export default {
   ...ScrollTop,
   ...SectionIntro,
   ...Sliders,
+  ...SocialSharing,
 };

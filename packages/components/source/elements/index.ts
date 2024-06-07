@@ -48,6 +48,7 @@ import ScrollTop from './scroll-top';
 import SectionIntro from './section-intro/default';
 import SectionIntroWide from './section-intro/wide';
 import SliderEvents from './slider/events';
+import SocialSharing from './social-sharing';
 import Stat from './stat';
 import StickyColumns from './sticky-columns';
 
@@ -102,6 +103,7 @@ export {
   SectionIntro,
   SectionIntroWide,
   SliderEvents,
+  SocialSharing,
   Stat,
   StickyColumns,
 };

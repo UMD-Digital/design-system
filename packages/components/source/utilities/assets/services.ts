@@ -1,4 +1,7 @@
+import { Tokens } from '@universityofmaryland/variables';
 import AssetIcon from './icons';
+
+const { Spacing } = Tokens;
 
 const CreateGif = ({ container }: { container: HTMLDivElement | null }) => {
   if (!container) return;
@@ -68,7 +71,7 @@ const CreateGif = ({ container }: { container: HTMLDivElement | null }) => {
 const GetResponsiveImageSize = ({
   image,
   parentNode,
-  maxWindowHeight = window.innerHeight,
+  maxWindowHeight = window.innerHeight - 48,
 }: {
   image: HTMLImageElement;
   parentNode: HTMLElement;

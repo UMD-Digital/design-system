@@ -271,9 +271,9 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
     const EventSwipe = () => {
       const swipes = (isrightswipe: Boolean) => {
         if (!isrightswipe) {
-          EventSlide({ forward: false });
-        } else {
           EventSlide({ forward: true });
+        } else {
+          EventSlide({ forward: false });
         }
       };
 

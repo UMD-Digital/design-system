@@ -56,11 +56,15 @@ const CreateFixedFullScreen = ({
   callback,
 }: TypeFixedFullScreenProps) => {
   const body = document.body;
+  const html = document.documentElement;
   const container = document.createElement('div');
   const closeButton = document.createElement('button');
   const show = () => {
     container.style.display = 'block';
     body.style.overflow = 'hidden';
+    body.style.height = '100%';
+    html.style.overflow = 'hidden';
+    html.style.height = '100%';
     eventReference = container.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
 
@@ -77,6 +81,9 @@ const CreateFixedFullScreen = ({
   };
   const hide = () => {
     body.style.overflow = 'visible';
+    body.style.height = 'inherit';
+    html.style.overflow = 'visible';
+    html.style.height = 'inherit';
     container.style.display = 'none';
 
     if (accessibiltyEventReference) accessibiltyEventReference();

@@ -123,7 +123,13 @@ const OverlayImageContainerStyles = `
   .${ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER} {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: ${Colors.gray.dark};
+  }
+
+  .${ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER} img {
+    object-fit: contain;
+    max-height: 100%;
   }
 `;
 

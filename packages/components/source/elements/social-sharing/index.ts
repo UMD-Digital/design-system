@@ -63,6 +63,16 @@ const ContainerStyles = `
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} svg path {
     fill: ${Colors.black};
   }
+
+  .${ELEMENT_SOCIAL_SHARING_CONTAINER} svg#icon_facebook {
+    width: 34px;
+    height: 30px;
+  }
+
+  .${ELEMENT_SOCIAL_SHARING_CONTAINER} svg#icon_email {
+    width: 21px;
+    height: 20px;
+  }
 `
 
 // prettier-ignore

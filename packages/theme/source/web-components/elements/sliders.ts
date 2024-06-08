@@ -7,6 +7,16 @@ const Events = {
   },
 };
 
+const EventsFeed = {
+  'umd-element-slider-events-feed:not(:defined)': {
+    display: 'none',
+  },
+  'umd-element-slider-events-feed:defined': {
+    display: 'block',
+  },
+};
+
 export default {
   ...Events,
+  ...EventsFeed,
 };

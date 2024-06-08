@@ -1,24 +1,23 @@
 declare global {
   interface Window {
-    UMDSliderEventsElement: typeof UMDSliderEventsElement;
+    UMDSliderEventsFeedElement: typeof UMDSliderEventsFeedElement;
   }
 }
 
 import { MarkupCreate, Styles } from 'utilities';
-import { SliderEvents } from 'elements';
+import { SliderEvents, FeedsSlides } from 'elements';
 
-const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
+const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ATTRIBUTE_RESIZE = 'resize';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_LIGHT = 'light';
 const SLOTS = {
-  EVENT_LIST: 'event-list',
   HEADLINE: 'headline',
   ACTIONS: 'actions',
 };
 
-const ELEMENT_NAME = 'umd-element-slider-events';
+const ELEMENT_NAME = 'umd-element-slider-events-feed';
 
 const styles = `
   :host {
@@ -27,21 +26,33 @@ const styles = `
 
   ${Styles.ResetString}
   ${SliderEvents.Styles}
+  ${FeedsSlides.Styles}
 `;
 
 const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
-const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
+const CreateShadowDom = async ({
+  element,
+}: {
+  element: UMDSliderEventsFeedElement;
+}) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const token = element.getAttribute('token');
+  const categories = element.getAttribute('categories');
+
+  if (!token) throw new Error('Token is required for this component');
+
   const dataSlider = document.createElement('div');
-  const dataSliderSlot = element.querySelector(`[slot=${SLOTS.EVENT_LIST}]`);
+  const slides: HTMLElement[] = await FeedsSlides.CreateElement({
+    token,
+    categories,
+    theme,
+  });
 
-  if (!dataSliderSlot) {
-    throw new Error(`Slot ${SLOTS.EVENT_LIST} is required`);
-  }
+  if (!slides) return;
 
-  dataSlider.innerHTML = dataSliderSlot.innerHTML;
+  slides.forEach((slide) => dataSlider.appendChild(slide));
 
   const slider = SliderEvents.CreateElement({
     theme,
@@ -62,7 +73,7 @@ const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   slider.events.SetDateElementsSizes();
 };
 
-export class UMDSliderEventsElement extends HTMLElement {
+export class UMDSliderEventsFeedElement extends HTMLElement {
   _shadow: ShadowRoot;
   _elementRef: {
     element: HTMLDivElement;
@@ -94,13 +105,6 @@ export class UMDSliderEventsElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 
@@ -109,8 +113,8 @@ const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDSliderEventsElement = UMDSliderEventsElement;
-    window.customElements.define(ELEMENT_NAME, UMDSliderEventsElement);
+    window.UMDSliderEventsFeedElement = UMDSliderEventsFeedElement;
+    window.customElements.define(ELEMENT_NAME, UMDSliderEventsFeedElement);
   }
 };
 

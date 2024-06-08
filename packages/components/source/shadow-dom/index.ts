@@ -36,6 +36,7 @@ import ScrollTop from './scroll-top';
 import SectionIntro from './section-intro/default';
 import SectionIntroWide from './section-intro/wide';
 import SliderEvent from './slider/events';
+import SliderEventFeed from './slider/events/feed';
 import SocialSharing from './social-sharing';
 import Stat from './stat';
 import StickyColumns from './stickly-columns';
@@ -79,6 +80,7 @@ export {
   SectionIntro,
   SectionIntroWide,
   SliderEvent,
+  SliderEventFeed,
   SocialSharing,
   Stat,
   StickyColumns,

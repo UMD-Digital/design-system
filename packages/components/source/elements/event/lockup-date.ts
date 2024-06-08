@@ -9,7 +9,7 @@ import { MarkupModify, Styles } from 'utilities';
 type TypeEventLockupDate = {
   headline: HTMLElement | null;
   dateSign?: HTMLElement | null;
-  theme?: string;
+  theme?: string | null;
 };
 
 const { FontSize, Spacing } = Tokens;
@@ -64,7 +64,7 @@ const HeadlineStyles = `
 `;
 
 // prettier-ignore
-export const ComponentStyles = `
+const ComponentStyles = `
   .${EVENT_DATE_CONTAINER} {
     display: flex;
     align-items: center;

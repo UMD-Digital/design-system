@@ -18,6 +18,7 @@ import EventLockupDate from './event/lockup-date';
 import EventPromo from './event/promo';
 import FeedsEvents from './feeds/events';
 import FeedsNews from './feeds/news';
+import FeedsSlides from './feeds/slides';
 import NavigationElements from './navigation/elements';
 import NavigationHeader from './navigation';
 import HeroDefault from './hero/default';
@@ -73,6 +74,7 @@ export {
   EventPromo,
   FeedsEvents,
   FeedsNews,
+  FeedsSlides,
   NavigationElements,
   NavigationHeader,
   HeroDefault,

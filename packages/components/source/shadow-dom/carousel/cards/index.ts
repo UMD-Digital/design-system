@@ -7,7 +7,7 @@ declare global {
 import { CarouselCards } from 'elements';
 import { MarkupCreate, Styles } from 'utilities';
 
-const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
+const { SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-carousel-cards';
 const ATTRIBUTE_RESIZE = 'resize';

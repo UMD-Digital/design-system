@@ -4,7 +4,8 @@ import {
   Layout,
   Elements,
 } from '@universityofmaryland/variables';
-import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
+import { AnimationCarouselBlocks } from 'macros';
+import { Styles } from 'utilities';
 
 type TypeCarouselCardsRequirements = {
   headline?: HTMLElement | null;
@@ -15,33 +16,14 @@ type TypeCarouselCardsRequirements = {
   cards: HTMLElement[];
 };
 
-type TypeCommonData = {
-  GetContainer: () => HTMLDivElement;
-  GetCarouselSlide: () => HTMLElement;
-  GetCards: () => HTMLElement[];
-  GetNumberOfCards: () => number;
-  GetIsTabletView: () => boolean;
-  GetCarouselContainerSize: () => number;
-  GetCarouselCardShowCount: () => number;
-  GetCardWidthBasedOnCarousel: () => number;
-  SetCarouselSize: () => void;
-};
-
-type TypeEventScroll = TypeCommonData & {
-  isDirectionRight?: boolean;
-};
-
-const { Debounce } = Performance;
 const { ConvertJSSObjectToStyles } = Styles;
 const { Text } = Elements;
 const { Colors, Spacing } = Tokens;
 const { SansMedium, SansLargest } = Typography;
 const { LockMax } = Layout;
 
-const CARD_BREAK = 650;
 const MEDIUM = 768;
 const LARGE = 1024;
-const ANIMATION_DURATION = 500;
 const MOBILE_COUNT = 1;
 const TABLET_COUNT = 2;
 
@@ -60,106 +42,57 @@ const INTRO_CONTAINER_HEADLINE = 'carousel-cards-intro-container-headline';
 const INTRO_CONTAINER_TEXT = 'carousel-cards-intro-container-text';
 const INTRO_CONTAINER_CTA = 'carousel-cards-intro-container-cta';
 
-const CAROUSEL_SLIDER_CONTAINER = 'carousel-cards-slider-container';
-const CAROUSEL_SLIDER_WRAPPER = 'carousel-cards-slider-wrapper';
-const CAROUSEL_SLIDER_BUTTON = `carousel-slider-button`;
-const CAROUSEL_CARDS_BUTTON_FORWARDS = 'carousel-cards-button-forwards';
-const CAROUSEL_CARDS_BUTTON_BACKWARDS = 'carousel-cards-button-backwards';
+const OVERWRITE_ANIMATION_CAROUSEL_DECLARATION = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.declaration}`;
+const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.button}`;
 
 // prettier-ignore
-const CarouselButtonStyles = `
-  .${CAROUSEL_SLIDER_BUTTON} {
-    background-color: ${Colors.red};
-    padding: ${Spacing.xs};
-    position: absolute;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    display: none;
-  }
-
+const OverwriteCarouselStyles = `
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${CAROUSEL_SLIDER_BUTTON} {
-      bottom: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${CAROUSEL_SLIDER_BUTTON} {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-
-  .${CAROUSEL_SLIDER_BUTTON}:disabled {
-    opacity: 0.5;
-  }
-
-  .${CAROUSEL_SLIDER_BUTTON} svg {
-    width: 24px;
-    height: 24px;
-    fill: ${Colors.white};
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${CAROUSEL_CARDS_BUTTON_FORWARDS} {
-      left: 49px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${CAROUSEL_CARDS_BUTTON_FORWARDS} {
-      right: -52px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${CAROUSEL_CARDS_BUTTON_BACKWARDS} {
-      left: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${CAROUSEL_CARDS_BUTTON_BACKWARDS} {
-      left: -52px;
-    }
-  }
-
-  .${CAROUSEL_CARDS_BUTTON_BACKWARDS} svg {
-    transform: rotate(180deg);
-  }
-`;
-
-// prettier-ignore
-const CarouselContainerStyles = `
-  .${CAROUSEL_SLIDER_CONTAINER} {
-    position: relative;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${CAROUSEL_SLIDER_CONTAINER} {
+    ${OVERWRITE_ANIMATION_CAROUSEL_DECLARATION} {
       padding-bottom: 60px;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${CAROUSEL_SLIDER_CONTAINER} {
+    ${OVERWRITE_ANIMATION_CAROUSEL_DECLARATION} {
       width: 60%;
     }
   }
 
-  .${CAROUSEL_SLIDER_WRAPPER} {
-    overflow: hidden;
-    padding-right: 0;
-    width: 100%;
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
+    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
+      bottom: 0;
+    }
   }
 
-  @media (min-width: ${LARGE}px) {
-    .${CAROUSEL_SLIDER_WRAPPER} {
-      max-width: inherit;
-      padding: 0;
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
+    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:first-of-type {
+      left: 49px;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:first-of-type {
+      right: -52px;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
+    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {
+      left: 0;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {
+      left: -52px;
     }
   }
 `;
@@ -310,218 +243,15 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
     color: ${Colors.white};
   }
   
+  ${AnimationCarouselBlocks.Styles}
   ${ContainerStyles}
   ${ContainerLock}
   ${HeadlineStyles}
   ${TextStyles}
   ${ActionStyles}
   ${IntroContainer}
-  ${CarouselContainerStyles}
-  ${CarouselButtonStyles}
+  ${OverwriteCarouselStyles}
 `;
-
-const spaceBetween = parseInt(Spacing.md.replace('px', ''));
-
-const EventScrollCarousel = (props: TypeEventScroll) => {
-  const {
-    GetCarouselSlide,
-    GetIsTabletView,
-    SetCarouselSize,
-    isDirectionRight = true,
-  } = props;
-  const carouselSlider = GetCarouselSlide();
-  const slotContent = Array.from(
-    carouselSlider.querySelectorAll(':scope > *'),
-  ) as HTMLDivElement[];
-  const isShowTwo = GetIsTabletView();
-  const elementCount = isShowTwo ? 2 : 1;
-  const firstElement = slotContent[0];
-  const lastElement = slotContent[slotContent.length - 1];
-  const nextElement = slotContent[elementCount];
-  const elementSize = firstElement.offsetWidth;
-  const elementSizeWithSpace = elementSize + spaceBetween;
-
-  if (!nextElement) return;
-
-  const scrollTabletRight = () => {
-    const temporaryCarouselSize =
-      elementSize * elementCount +
-      spaceBetween / elementCount +
-      elementSizeWithSpace;
-
-    const animateRight = () => {
-      carouselSlider.style.width = `${temporaryCarouselSize}px`;
-      nextElement.style.display = 'block';
-      carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
-      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
-
-      setTimeout(() => {
-        const clonedElement = firstElement.cloneNode(true) as HTMLDivElement;
-        carouselSlider.appendChild(clonedElement);
-        clonedElement.style.display = 'none';
-
-        carouselSlider.removeChild(firstElement);
-        SetCarouselSize();
-      }, ANIMATION_DURATION - 50);
-    };
-
-    const animateLeft = () => {
-      const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
-      const removedElement = slotContent[1];
-
-      carouselSlider.style.width = `${temporaryCarouselSize}px`;
-      carouselSlider.prepend(clonedElement);
-      clonedElement.style.display = 'block';
-      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
-
-      setTimeout(() => {
-        carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
-        carouselSlider.style.transform = `translateX(0)`;
-      }, 10);
-
-      setTimeout(() => {
-        removedElement.style.display = 'none';
-        carouselSlider.removeChild(lastElement);
-
-        SetCarouselSize();
-      }, ANIMATION_DURATION - 50);
-    };
-
-    isDirectionRight ? animateRight() : animateLeft();
-  };
-
-  const scrollMobileRight = () => {
-    const isOnlyTwo = slotContent.length === 2;
-    const temporaryCarouselSize = elementSize * 3 + spaceBetween * 2;
-
-    const animateRight = () => {
-      const clonedElement = firstElement.cloneNode(true) as HTMLElement;
-      const upcomingElement = isOnlyTwo ? clonedElement : slotContent[2];
-      clonedElement.style.display = 'none';
-      carouselSlider.appendChild(clonedElement);
-
-      carouselSlider.style.width = `${temporaryCarouselSize}px`;
-      upcomingElement.style.display = 'block';
-      carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
-      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
-
-      setTimeout(() => {
-        carouselSlider.removeChild(firstElement);
-
-        SetCarouselSize();
-      }, ANIMATION_DURATION + 100);
-    };
-
-    const animateLeft = () => {
-      const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
-      const removedElement = slotContent[1];
-
-      carouselSlider.style.width = `${temporaryCarouselSize}px`;
-      carouselSlider.prepend(clonedElement);
-      clonedElement.style.display = 'block';
-      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
-
-      setTimeout(() => {
-        carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
-        carouselSlider.style.transform = `translateX(0)`;
-      }, 10);
-
-      setTimeout(() => {
-        removedElement.style.display = 'none';
-        carouselSlider.removeChild(lastElement);
-
-        SetCarouselSize();
-      }, ANIMATION_DURATION - 50);
-    };
-
-    isDirectionRight ? animateRight() : animateLeft();
-  };
-
-  isShowTwo ? scrollTabletRight() : scrollMobileRight();
-};
-
-const EventSwipe = (props: TypeCommonData) => {
-  const { GetContainer } = props;
-  const container = GetContainer();
-
-  const swipes = (isrightswipe: Boolean) => {
-    if (!isrightswipe) {
-      EventScrollCarousel(props);
-    } else {
-      EventScrollCarousel({ ...props, isDirectionRight: false });
-    }
-  };
-
-  EventsUtility.CreateEventSwipe({ container, callback: swipes });
-};
-
-const EventResizeButtonLogic = (props: TypeCommonData) => {
-  const { GetContainer, GetIsTabletView, GetNumberOfCards } = props;
-  const container = GetContainer();
-  const forwardButton = container.querySelector(
-    `.${CAROUSEL_CARDS_BUTTON_FORWARDS}`,
-  ) as HTMLButtonElement;
-  const backwardButton = container.querySelector(
-    `.${CAROUSEL_CARDS_BUTTON_BACKWARDS}`,
-  ) as HTMLButtonElement;
-  const buttons = [forwardButton, backwardButton];
-
-  const count = GetNumberOfCards();
-  const isShowTwo = GetIsTabletView();
-  const isButtonShownMobile = count > MOBILE_COUNT;
-  const isButtonShownTablet = count > TABLET_COUNT;
-
-  if (isShowTwo && isButtonShownTablet) {
-    buttons.forEach((button) => (button.style.display = 'block'));
-  }
-
-  if (isShowTwo && !isButtonShownTablet) {
-    buttons.forEach((button) => (button.style.display = 'none'));
-  }
-
-  if (!isShowTwo && isButtonShownMobile) {
-    buttons.forEach((button) => (button.style.display = 'block'));
-  }
-
-  if (!isShowTwo && !isButtonShownMobile) {
-    buttons.forEach((button) => (button.style.display = 'none'));
-  }
-};
-
-const CreateButton = ({
-  SetEventMoveForward,
-  SetEventMoveBackward,
-  isRight = true,
-}: {
-  SetEventMoveForward: () => void;
-  SetEventMoveBackward: () => void;
-  isRight?: boolean;
-}) => {
-  const button = document.createElement('button');
-  button.setAttribute('type', 'button');
-  button.setAttribute('aria-label', 'Next');
-  button.classList.add(CAROUSEL_SLIDER_BUTTON);
-  button.innerHTML = AssetIcon.FORWARD_ARROW;
-
-  if (isRight) button.classList.add(CAROUSEL_CARDS_BUTTON_FORWARDS);
-
-  if (!isRight) {
-    button.classList.add(CAROUSEL_CARDS_BUTTON_BACKWARDS);
-    button.setAttribute('aria-label', 'Previous');
-  }
-
-  button.addEventListener('click', () => {
-    if (isRight) SetEventMoveForward();
-    if (!isRight) SetEventMoveBackward();
-    button.disabled = true;
-
-    setTimeout(() => {
-      button.disabled = false;
-    }, ANIMATION_DURATION + 100);
-  });
-
-  return button;
-};
 
 const CreateIntro = (props: TypeCarouselCardsRequirements) => {
   const { headline, text, actions } = props;
@@ -553,129 +283,15 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
 
 const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
   (() => {
-    const { slide, shadowRef, cards } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
-    const carouselContainer = document.createElement('div');
-    const carouselWrapper = document.createElement('div');
+    const carouselContainer = AnimationCarouselBlocks.CreateElement(props);
     const introContainer = CreateIntro(props);
-
-    const GetContainer = () => container;
-    const GetCarouselSlide = () => slide;
-    const GetCards = () => cards;
-    const GetNumberOfCards = () => cards.length;
-    const GetCarouselContainerSize = () => carouselContainer.offsetWidth;
-    const GetIsTabletView = () => GetCarouselContainerSize() > CARD_BREAK;
-    const GetCarouselCardShowCount = () =>
-      GetIsTabletView() ? TABLET_COUNT : MOBILE_COUNT;
-    const GetCardWidthBasedOnCarousel = () => {
-      const containerWidth = GetCarouselContainerSize();
-      const count = GetCarouselCardShowCount();
-
-      const multiplier = count == TABLET_COUNT ? 1 : 0.8;
-      const additonalSpace = spaceBetween / 2;
-
-      return (containerWidth / count) * multiplier - additonalSpace;
-    };
-    const SetCardHeight = () => {
-      const minimumHeight = window.innerWidth > 768 ? 450 : 360;
-      const maxHeight = cards.reduce((acc, currentElement) => {
-        if (acc > currentElement.offsetHeight) return acc;
-        return currentElement.offsetHeight;
-      }, minimumHeight);
-
-      cards.forEach((card) => {
-        card.style.height = `${maxHeight}px`;
-      });
-    };
-    const SetCardWidth = () => {
-      const elementSize = GetCardWidthBasedOnCarousel();
-
-      cards.forEach((card) => {
-        card.style.width = `${elementSize}px`;
-      });
-    };
-    const SetCarouselSize = () => {
-      const elementSize = GetCardWidthBasedOnCarousel();
-      const elementSizeTotal = elementSize * 2 + spaceBetween;
-
-      slide.style.width = `${elementSizeTotal}px`;
-      slide.style.transition = 'none';
-      slide.style.transform = 'translateX(0)';
-    };
-    const SetSizeCarouselElements = () => {
-      SetCardWidth();
-      SetCarouselSize();
-    };
-    const SetEventMoveForward = () => EventScrollCarousel({ ...CommonData });
-    const SetEventMoveBackward = () =>
-      EventScrollCarousel({ ...CommonData, isDirectionRight: false });
-    const SetEventReize = () => Resize();
-
-    const CommonData = {
-      GetContainer,
-      GetCarouselSlide,
-      GetCards,
-      GetNumberOfCards,
-      GetIsTabletView,
-      GetCarouselContainerSize,
-      GetCarouselCardShowCount,
-      GetCardWidthBasedOnCarousel,
-      SetCarouselSize,
-    };
-
-    const Resize = () => {
-      SetSizeCarouselElements();
-      EventResizeButtonLogic({ ...CommonData });
-
-      setTimeout(() => {
-        SetCardHeight();
-      }, 100);
-    };
-
-    const Load = () => {
-      cards.forEach((card, index) => {
-        if (index > 1) card.style.display = 'none';
-      });
-
-      slide.style.display = 'flex';
-      slide.style.justifyContent = 'space-between';
-
-      setTimeout(() => {
-        Resize();
-        EventSwipe({ ...CommonData });
-      }, 100);
-    };
-
-    carouselContainer.appendChild(
-      CreateButton({
-        SetEventMoveForward,
-        SetEventMoveBackward,
-        isRight: false,
-      }),
-    );
-    carouselContainer.appendChild(
-      CreateButton({
-        SetEventMoveForward,
-        SetEventMoveBackward,
-      }),
-    );
-
-    carouselWrapper.classList.add(CAROUSEL_SLIDER_WRAPPER);
-
-    if (shadowRef) {
-      carouselWrapper.appendChild(shadowRef);
-    } else {
-      carouselWrapper.appendChild(slide);
-    }
-
-    carouselContainer.classList.add(CAROUSEL_SLIDER_CONTAINER);
-    carouselContainer.appendChild(carouselWrapper);
 
     wrapper.classList.add(CAROUSEL_LOCK);
     wrapper.appendChild(introContainer);
-    wrapper.appendChild(carouselContainer);
+    wrapper.appendChild(carouselContainer.element);
 
     container.classList.add(CAROUSEL_CONTAINER);
     container.innerHTML = BACKGROUND_TEXTURE;
@@ -684,13 +300,10 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(Resize, 10));
-    Load();
-
     return {
       element: declaration,
       events: {
-        SetEventReize,
+        SetEventReize: carouselContainer.events.SetEventReize,
       },
     };
   })();

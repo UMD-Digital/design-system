@@ -4,7 +4,7 @@ import { AssetIcon, EventsUtility, Performance } from 'utilities';
 type TypeAnimationCarouselBlockProps = {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
-  cards: HTMLElement[];
+  blocks: HTMLElement[];
   mobileCount?: number;
   mobileBreakpoint?: number;
   tabletCount?: number;
@@ -16,7 +16,7 @@ type TypeHelpers = {
   GetElements: {
     container: () => HTMLDivElement;
     slide: () => HTMLElement;
-    cards: () => HTMLElement[];
+    blocks: () => HTMLElement[];
   };
   GetOptions: {
     isTabletView: () => boolean;
@@ -240,7 +240,7 @@ const ButtonDisplay = (props: TypeHelpers) => {
     ),
   ) as HTMLButtonElement[];
 
-  const cardsTotal = GetElements.cards().length;
+  const cardsTotal = GetElements.blocks().length;
   const showCount = GetOptions.showCount();
 
   if (cardsTotal === showCount) {
@@ -287,7 +287,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const {
       slide,
       shadowRef,
-      cards,
+      blocks,
       mobileCount = 1,
       mobileBreakpoint = 650,
       tabletCount = 2,
@@ -301,7 +301,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const GetElements = {
       container: () => container,
       slide: () => slide,
-      cards: () => cards,
+      blocks: () => blocks,
     };
 
     const GetOptions = {
@@ -348,20 +348,20 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const SetSizes = {
       cardHeight: () => {
         const minimumHeight = window.innerWidth > 768 ? 450 : 360;
-        const maxHeight = cards.reduce((acc, currentElement) => {
+        const maxHeight = blocks.reduce((acc, currentElement) => {
           if (acc > currentElement.offsetHeight) return acc;
           return currentElement.offsetHeight;
         }, minimumHeight);
 
-        cards.forEach((card) => {
-          card.style.height = `${maxHeight}px`;
+        blocks.forEach((block) => {
+          block.style.height = `${maxHeight}px`;
         });
       },
       cardWidth: () => {
         const elementSize = GetSizes.cardWidth();
 
-        cards.forEach((card) => {
-          card.style.width = `${elementSize}px`;
+        blocks.forEach((block) => {
+          block.style.width = `${elementSize}px`;
         });
       },
       carouselWidth: () => {
@@ -395,8 +395,8 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         }, 100);
       },
       load: () => {
-        cards.forEach((card, index) => {
-          if (index > 1) card.style.display = 'none';
+        blocks.forEach((block, index) => {
+          if (index > 1) block.style.display = 'none';
         });
 
         slide.style.display = 'flex';

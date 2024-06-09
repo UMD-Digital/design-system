@@ -285,7 +285,10 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
-    const carouselContainer = AnimationCarouselBlocks.CreateElement(props);
+    const carouselContainer = AnimationCarouselBlocks.CreateElement({
+      ...props,
+      blocks: props.cards,
+    });
     const introContainer = CreateIntro(props);
 
     wrapper.classList.add(CAROUSEL_LOCK);

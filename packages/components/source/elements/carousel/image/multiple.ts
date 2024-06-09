@@ -23,7 +23,6 @@ const ELEMENT_NAME = 'umd-carousel-image-standard';
 const ELEMENT_CAROUSEL_MULTIPLE_DECLARATION =
   'carousel-image-multiple-declaration';
 const ELEMENT_CAROUSEL_MULTIPLE_CONTAINER = 'carousel-image-multiple-container';
-const ELEMENT_SLIDE = 'carousel-image-multiple-slide';
 const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-multiple-button';
 const ELEMENT_CAROUSEL_INDICATOR_WRAPPER =
   'carousel-multiple-indicator-wrapper';
@@ -92,7 +91,7 @@ const CreateCarouselImageStandardElement = (props: TypeCarouselMultipleProps) =>
     ) as HTMLImageElement[];
 
     const slide = document.createElement('div');
-    const cards = clonedImages.map((image) =>
+    const blocks = clonedImages.map((image) =>
       LayoutImage.CreateElement({
         image,
         showCaption: true,
@@ -100,7 +99,7 @@ const CreateCarouselImageStandardElement = (props: TypeCarouselMultipleProps) =>
     );
 
     const carousel = AnimationCarouselBlocks.CreateElement({
-      cards,
+      blocks,
       slide,
     });
 

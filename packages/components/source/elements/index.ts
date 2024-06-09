@@ -10,6 +10,7 @@ import CardOverlay from './card-overlay';
 import CardOverlayImage from './card-overlay/image';
 import CarouselCards from './carousel/cards';
 import CarouselImageStandard from './carousel/image/standard';
+import CarouselImageMultiple from './carousel/image/multiple';
 import EventBlock from './event/block';
 import EventElements from './event/elements';
 import EventFeature from './event/feature';
@@ -66,6 +67,7 @@ export {
   CardOverlayImage,
   CarouselCards,
   CarouselImageStandard,
+  CarouselImageMultiple,
   EventBlock,
   EventElements,
   EventFeature,

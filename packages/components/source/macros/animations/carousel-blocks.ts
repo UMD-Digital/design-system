@@ -447,12 +447,12 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.appendChild(container);
 
     window.addEventListener('resize', Debounce(Event.resize, 10));
-    Event.load();
 
     return {
       element: declaration,
       events: {
         resize: Event.resize,
+        load: Event.load,
       },
     };
   })();

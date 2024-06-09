@@ -299,6 +299,8 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);
 
+    carouselContainer.events.load();
+
     return {
       element: declaration,
       events: {

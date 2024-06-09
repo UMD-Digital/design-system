@@ -7,7 +7,7 @@ type TypeAnimationCarouselBlockProps = {
   cards: HTMLElement[];
 };
 
-type TypeCommonData = {
+type TypeHelpers = {
   GetElements: {
     container: () => HTMLDivElement;
     slide: () => HTMLElement;
@@ -20,10 +20,14 @@ type TypeCommonData = {
   GetSizes: {
     cardWidth: () => number | undefined;
   };
-  SetCarouselSize: () => void;
+  SetSizes: {
+    cardHeight: () => void;
+    cardWidth: () => void;
+    carouselWidth: () => void;
+  };
 };
 
-type TypeEventScroll = TypeCommonData & {
+type TypeEventScroll = TypeHelpers & {
   isDirectionRight?: boolean;
 };
 
@@ -120,12 +124,7 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
 const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
 const EventScrollCarousel = (props: TypeEventScroll) => {
-  const {
-    GetElements,
-    GetOptions,
-    SetCarouselSize,
-    isDirectionRight = true,
-  } = props;
+  const { GetElements, GetOptions, SetSizes, isDirectionRight = true } = props;
   const carouselSlider = GetElements.slide();
   const slotContent = Array.from(
     carouselSlider.querySelectorAll(':scope > *'),
@@ -158,7 +157,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
         clonedElement.style.display = 'none';
 
         carouselSlider.removeChild(firstElement);
-        SetCarouselSize();
+        SetSizes.carouselWidth();
       }, ANIMATION_DURATION - 50);
     };
 
@@ -180,7 +179,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
         removedElement.style.display = 'none';
         carouselSlider.removeChild(lastElement);
 
-        SetCarouselSize();
+        SetSizes.carouselWidth();
       }, ANIMATION_DURATION - 50);
     };
 
@@ -205,7 +204,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
       setTimeout(() => {
         carouselSlider.removeChild(firstElement);
 
-        SetCarouselSize();
+        SetSizes.carouselWidth();
       }, ANIMATION_DURATION + 100);
     };
 
@@ -227,7 +226,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
         removedElement.style.display = 'none';
         carouselSlider.removeChild(lastElement);
 
-        SetCarouselSize();
+        SetSizes.carouselWidth();
       }, ANIMATION_DURATION - 50);
     };
 
@@ -237,7 +236,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
   isShowTwo ? scrollTabletRight() : scrollMobileRight();
 };
 
-const EventSwipe = (props: TypeCommonData) => {
+const EventSwipe = (props: TypeHelpers) => {
   const { GetElements } = props;
   const container = GetElements.container();
 
@@ -252,7 +251,7 @@ const EventSwipe = (props: TypeCommonData) => {
   EventsUtility.CreateEventSwipe({ container, callback: swipes });
 };
 
-const EventResizeButtonLogic = (props: TypeCommonData) => {
+const EventResizeButtonLogic = (props: TypeHelpers) => {
   const { GetElements, GetOptions } = props;
   const buttons = Array.from(
     GetElements.container().querySelectorAll(
@@ -283,12 +282,12 @@ const EventResizeButtonLogic = (props: TypeCommonData) => {
 };
 
 const CreateButton = ({
-  SetEventMoveForward,
-  SetEventMoveBackward,
+  EventMoveForward,
+  EventMoveBackward,
   isRight = true,
 }: {
-  SetEventMoveForward: () => void;
-  SetEventMoveBackward: () => void;
+  EventMoveForward: () => void;
+  EventMoveBackward: () => void;
   isRight?: boolean;
 }) => {
   const button = document.createElement('button');
@@ -302,8 +301,8 @@ const CreateButton = ({
   }
 
   button.addEventListener('click', () => {
-    if (isRight) SetEventMoveForward();
-    if (!isRight) SetEventMoveBackward();
+    if (isRight) EventMoveForward();
+    if (!isRight) EventMoveBackward();
     button.disabled = true;
 
     setTimeout(() => {
@@ -320,11 +319,13 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
+
     const GetElements = {
       container: () => container,
       slide: () => slide,
       cards: () => cards,
     };
+
     const GetOptions = {
       isTabletView: () => container.offsetWidth > CARD_BREAK,
       showCount: function () {
@@ -335,6 +336,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         }
       },
     };
+
     const GetSizes = {
       cardWidth: function () {
         if (this) {
@@ -348,87 +350,89 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       },
     };
 
-    const SetCardHeight = () => {
-      const minimumHeight = window.innerWidth > 768 ? 450 : 360;
-      const maxHeight = cards.reduce((acc, currentElement) => {
-        if (acc > currentElement.offsetHeight) return acc;
-        return currentElement.offsetHeight;
-      }, minimumHeight);
+    const SetSizes = {
+      cardHeight: () => {
+        const minimumHeight = window.innerWidth > 768 ? 450 : 360;
+        const maxHeight = cards.reduce((acc, currentElement) => {
+          if (acc > currentElement.offsetHeight) return acc;
+          return currentElement.offsetHeight;
+        }, minimumHeight);
 
-      cards.forEach((card) => {
-        card.style.height = `${maxHeight}px`;
-      });
+        cards.forEach((card) => {
+          card.style.height = `${maxHeight}px`;
+        });
+      },
+      cardWidth: () => {
+        const elementSize = GetSizes.cardWidth();
+
+        cards.forEach((card) => {
+          card.style.width = `${elementSize}px`;
+        });
+      },
+      carouselWidth: () => {
+        const elementSize = GetSizes.cardWidth();
+
+        if (elementSize) {
+          const elementSizeTotal = elementSize * 2 + spaceBetween;
+
+          slide.style.width = `${elementSizeTotal}px`;
+          slide.style.transition = 'none';
+          slide.style.transform = 'translateX(0)';
+        }
+      },
     };
 
-    const SetCardWidth = () => {
-      const elementSize = GetSizes.cardWidth();
-
-      cards.forEach((card) => {
-        card.style.width = `${elementSize}px`;
-      });
-    };
-
-    const SetCarouselSize = () => {
-      const elementSize = GetSizes.cardWidth();
-
-      if (elementSize) {
-        const elementSizeTotal = elementSize * 2 + spaceBetween;
-
-        slide.style.width = `${elementSizeTotal}px`;
-        slide.style.transition = 'none';
-        slide.style.transform = 'translateX(0)';
-      }
-    };
-
-    const SetSizeCarouselElements = () => {
-      SetCardWidth();
-      SetCarouselSize();
-    };
-
-    const SetEventMoveForward = () => EventScrollCarousel({ ...CommonData });
-    const SetEventMoveBackward = () =>
-      EventScrollCarousel({ ...CommonData, isDirectionRight: false });
-
-    const CommonData = {
+    const Helpers = {
       GetElements,
       GetOptions,
       GetSizes,
-      SetCarouselSize,
+      SetSizes,
     };
 
-    const EventResize = () => {
-      SetSizeCarouselElements();
-      EventResizeButtonLogic({ ...CommonData });
+    const Event = {
+      resize: () => {
+        SetSizes.cardWidth();
+        SetSizes.carouselWidth();
+        EventResizeButtonLogic({ ...Helpers });
 
-      setTimeout(() => {
-        SetCardHeight();
-      }, 100);
-    };
+        setTimeout(() => {
+          SetSizes.cardHeight();
+        }, 100);
+      },
+      load: () => {
+        cards.forEach((card, index) => {
+          if (index > 1) card.style.display = 'none';
+        });
 
-    const Load = () => {
-      cards.forEach((card, index) => {
-        if (index > 1) card.style.display = 'none';
-      });
+        slide.style.display = 'flex';
+        slide.style.justifyContent = 'space-between';
 
-      slide.style.display = 'flex';
-      slide.style.justifyContent = 'space-between';
-
-      setTimeout(() => {
-        EventResize();
-        EventSwipe({ ...CommonData });
-      }, 100);
+        setTimeout(() => {
+          Event.resize();
+          EventSwipe({ ...Helpers });
+        }, 100);
+      },
+      forward: () =>
+        EventScrollCarousel({
+          ...Helpers,
+        }),
+      backward: () =>
+        EventScrollCarousel({
+          ...Helpers,
+          isDirectionRight: false,
+        }),
     };
 
     container.appendChild(
       CreateButton({
-        SetEventMoveForward,
-        SetEventMoveBackward,
+        EventMoveForward: Event.forward,
+        EventMoveBackward: Event.backward,
       }),
     );
     container.appendChild(
       CreateButton({
-        SetEventMoveForward,
-        SetEventMoveBackward,
+        EventMoveForward: Event.forward,
+        EventMoveBackward: Event.backward,
         isRight: false,
       }),
     );
@@ -447,13 +451,13 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(EventResize, 10));
-    Load();
+    window.addEventListener('resize', Debounce(Event.resize, 10));
+    Event.load();
 
     return {
       element: declaration,
       events: {
-        EventResize,
+        resize: Event.resize,
       },
     };
   })();

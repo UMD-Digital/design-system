@@ -1,12 +1,11 @@
 import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
 import { AssetIcon, Styles } from 'utilities';
 import {
-  AnimationCarousel,
+  AnimationCarouselImage,
   AnimationIndicator,
   LayoutFixedFullScreen,
   LayoutImage,
 } from 'macros';
-import overlay from 'macros/layout/overlay';
 
 type TypeImage = {
   image: HTMLImageElement;
@@ -239,7 +238,7 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   ${LayoutImage.Styles}
   ${LayoutFixedFullScreen.Styles}
   ${AnimationIndicator.Styles}
-  ${AnimationCarousel.Styles}
+  ${AnimationCarouselImage.Styles}
   ${ImageContainerStyles}
   ${TextContainerStyles}
   ${FullScreenButtonStyles}
@@ -394,14 +393,14 @@ const CreateCarouselImageStandardElement = (
     };
     const slides = CreateSlide({ ...props, setFullScreen });
     const overlaySlides = CreateOverlaySlide({ ...props, setFullScreen });
-    const carousel = AnimationCarousel.CreateElement({
+    const carousel = AnimationCarouselImage.CreateElement({
       slides,
       callback: (activeIndex) => {
         indicator.position(activeIndex);
       },
       maxHeight: 500,
     });
-    const overlayCarousel = AnimationCarousel.CreateElement({
+    const overlayCarousel = AnimationCarouselImage.CreateElement({
       slides: overlaySlides,
       maxHeight: (window.innerHeight / 10) * 8,
     });

@@ -5,11 +5,7 @@ type TypeAnimationCarouselBlockProps = {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
   blocks: HTMLElement[];
-  mobileCount?: number;
-  mobileBreakpoint?: number;
-  tabletCount?: number;
-  tabletBreakpoint?: number;
-  desktopCount?: number;
+  overwriteDisplayLogic?: Record<string, number>;
 };
 
 type TypeHelpers = {
@@ -284,19 +280,25 @@ const CreateButton = ({
 
 const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
   (() => {
-    const {
-      slide,
-      shadowRef,
-      blocks,
-      mobileCount = 1,
-      mobileBreakpoint = 650,
-      tabletCount = 2,
-      tabletBreakpoint = 1024,
-      desktopCount = 2,
-    } = props;
+    const { slide, shadowRef, blocks, overwriteDisplayLogic } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
+    const displayLogic: Record<string, number> = {
+      mobileCount: 1,
+      mobileBreakpoint: 650,
+      tabletCount: 2,
+      tabletBreakpoint: 1024,
+      desktopCount: 2,
+      desktopBreakpoint: 1200,
+      maxCount: 2,
+    };
+
+    if (overwriteDisplayLogic) {
+      Object.keys(overwriteDisplayLogic).forEach((key) => {
+        displayLogic[key] = overwriteDisplayLogic[key];
+      });
+    }
 
     const GetElements = {
       container: () => container,
@@ -305,21 +307,27 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     };
 
     const GetOptions = {
-      isMobileView: () => container.offsetWidth <= mobileBreakpoint,
+      isMobileView: () =>
+        container.offsetWidth <= displayLogic.mobileBreakpoint,
       isTabletView: () =>
-        container.offsetWidth > mobileBreakpoint &&
-        container.offsetWidth <= tabletBreakpoint,
-      isDesktopView: () => container.offsetWidth > tabletBreakpoint,
+        container.offsetWidth > displayLogic.mobileBreakpoint &&
+        container.offsetWidth <= displayLogic.tabletBreakpoint,
+      isDesktopView: () =>
+        container.offsetWidth > displayLogic.tabletBreakpoint &&
+        container.offsetWidth <= displayLogic.desktopBreakpoint,
+      isHighView: () => container.offsetWidth > displayLogic.desktopBreakpoint,
       showCount: function () {
         if (this) {
           const isMobile = this.isMobileView();
           const isTablet = this.isTabletView();
           const isDesktop = this.isDesktopView();
+          const isHighDef = this.isHighView();
           let count = 1;
 
-          if (isMobile) count = mobileCount;
-          if (isTablet) count = tabletCount;
-          if (isDesktop) count = desktopCount;
+          if (isMobile) count = displayLogic.mobileCount;
+          if (isTablet) count = displayLogic.tabletCount;
+          if (isDesktop) count = displayLogic.desktopCount;
+          if (isHighDef) count = displayLogic.maxCount;
 
           return count;
         } else {
@@ -352,6 +360,8 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
           if (acc > currentElement.offsetHeight) return acc;
           return currentElement.offsetHeight;
         }, minimumHeight);
+
+        console.log(maxHeight, 'maxHeight');
 
         blocks.forEach((block) => {
           block.style.height = `${maxHeight}px`;
@@ -437,6 +447,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     if (shadowRef) {
       wrapper.appendChild(shadowRef);
     } else {
+      blocks.forEach((block) => slide.appendChild(block));
       wrapper.appendChild(slide);
     }
 

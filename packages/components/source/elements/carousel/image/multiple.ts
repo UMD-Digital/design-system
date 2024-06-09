@@ -27,14 +27,16 @@ const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-multiple-button';
 const ELEMENT_CAROUSEL_INDICATOR_WRAPPER =
   'carousel-multiple-indicator-wrapper';
 
+const OVERWRITE_LAYOUT_IMAGE = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${LayoutImage.Elements.container}`;
+
+const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
+
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_INDICATOR = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER}`;
 const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_SLIDER_BUTTON}`;
 
 // prettier-ignore
 const OverwriteThemeDark = `
-  ${OVERWRITE_THEME_DARK_CONTAINER},
-  ${OVERWRITE_THEME_DARK_INDICATOR} {
+  ${OVERWRITE_THEME_DARK_CONTAINER} {
     background-color: ${Colors.black};
   }
 
@@ -48,10 +50,34 @@ const OverwriteThemeDark = `
 `;
 
 // prettier-ignore
+const OverwriteImageStyles = `
+  ${OVERWRITE_LAYOUT_IMAGE} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`
+
+// prettier-ignore
+const OverwriteCarouselStyles = `
+  ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {
+    left: 0;
+  }
+
+  ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:first-of-type {
+    right: 0;
+  }
+`;
+
+// prettier-ignore
 const IndicatorContainerStyles = `
   .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
     padding: ${Spacing.md};
-    background-color: ${Colors.gray.lightest};
     display: flex;
     justify-content: center;
   }
@@ -64,7 +90,7 @@ const IndicatorContainerStyles = `
 `;
 
 // prettier-ignore
-const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
+const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
   .${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -77,10 +103,12 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   ${AnimationIndicator.Styles}
   ${AnimationCarouselBlocks.Styles}
   ${IndicatorContainerStyles}
+  ${OverwriteImageStyles}
+  ${OverwriteCarouselStyles}
   ${OverwriteThemeDark}
 `;
 
-const CreateCarouselImageStandardElement = (props: TypeCarouselMultipleProps) =>
+const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
   (() => {
     const { images, theme } = props;
     const elementDeclaration = document.createElement('div');
@@ -101,6 +129,13 @@ const CreateCarouselImageStandardElement = (props: TypeCarouselMultipleProps) =>
     const carousel = AnimationCarouselBlocks.CreateElement({
       blocks,
       slide,
+      overwriteDisplayLogic: {
+        mobileBreakpoint: 500,
+        tabletBreakpoint: 700,
+        desktopCount: 3,
+        desktopBreakpoint: 1000,
+        maxCount: 4,
+      },
     });
 
     const indicator = AnimationIndicator.CreateElement({
@@ -131,6 +166,6 @@ const CreateCarouselImageStandardElement = (props: TypeCarouselMultipleProps) =>
   })();
 
 export default {
-  CreateElement: CreateCarouselImageStandardElement,
-  Styles: STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT,
+  CreateElement: CreateCarouselImageMultipleElement,
+  Styles: STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT,
 };

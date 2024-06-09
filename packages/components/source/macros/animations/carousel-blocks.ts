@@ -5,6 +5,11 @@ type TypeAnimationCarouselBlockProps = {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
   cards: HTMLElement[];
+  mobileCount?: number;
+  mobileBreakpoint?: number;
+  tabletCount?: number;
+  tabletBreakpoint?: number;
+  desktopCount?: number;
 };
 
 type TypeHelpers = {
@@ -34,14 +39,9 @@ type TypeEventScroll = TypeHelpers & {
 const { Debounce } = Performance;
 const { Colors, Spacing } = Tokens;
 
-const CARD_BREAK = 650;
-const LARGE = 1024;
 const ANIMATION_DURATION = 500;
-const MOBILE_COUNT = 1;
-const TABLET_COUNT = 2;
 
 const ELEMENT_NAME = 'umd-element-animation-carousel-block';
-
 const ELEMENT_ANIMATION_CAROUSEL_DECLARATION =
   'animation-carousel-block-declaration';
 const ELEMENT_ANIMATION_CAROUSEL_CONTAINER =
@@ -84,29 +84,10 @@ const ContainerStyles = `
     position: relative;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ELEMENT_ANIMATION_CAROUSEL_CONTAINER} {
-      padding-bottom: 60px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ELEMENT_ANIMATION_CAROUSEL_CONTAINER} {
-      width: 60%;
-    }
-  }
-
   .${ELEMENT_ANIMATION_CAROUSEL_WRAPPER} {
     overflow: hidden;
     padding-right: 0;
     width: 100%;
-  }
-
-  @media (min-width: ${LARGE}px) {
-    .${ELEMENT_ANIMATION_CAROUSEL_WRAPPER} {
-      max-width: inherit;
-      padding: 0;
-    }
   }
 `;
 
@@ -251,7 +232,7 @@ const EventSwipe = (props: TypeHelpers) => {
   EventsUtility.CreateEventSwipe({ container, callback: swipes });
 };
 
-const EventResizeButtonLogic = (props: TypeHelpers) => {
+const ButtonDisplay = (props: TypeHelpers) => {
   const { GetElements, GetOptions } = props;
   const buttons = Array.from(
     GetElements.container().querySelectorAll(
@@ -259,25 +240,13 @@ const EventResizeButtonLogic = (props: TypeHelpers) => {
     ),
   ) as HTMLButtonElement[];
 
-  const count = GetElements.cards().length;
-  const isShowTwo = GetOptions.isTabletView();
-  const isButtonShownMobile = count > MOBILE_COUNT;
-  const isButtonShownTablet = count > TABLET_COUNT;
+  const cardsTotal = GetElements.cards().length;
+  const showCount = GetOptions.showCount();
 
-  if (isShowTwo && isButtonShownTablet) {
-    buttons.forEach((button) => (button.style.display = 'block'));
-  }
-
-  if (isShowTwo && !isButtonShownTablet) {
+  if (cardsTotal === showCount) {
     buttons.forEach((button) => (button.style.display = 'none'));
-  }
-
-  if (!isShowTwo && isButtonShownMobile) {
+  } else {
     buttons.forEach((button) => (button.style.display = 'block'));
-  }
-
-  if (!isShowTwo && !isButtonShownMobile) {
-    buttons.forEach((button) => (button.style.display = 'none'));
   }
 };
 
@@ -315,7 +284,16 @@ const CreateButton = ({
 
 const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
   (() => {
-    const { slide, shadowRef, cards } = props;
+    const {
+      slide,
+      shadowRef,
+      cards,
+      mobileCount = 1,
+      mobileBreakpoint = 650,
+      tabletCount = 2,
+      tabletBreakpoint = 1024,
+      desktopCount = 2,
+    } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
@@ -327,12 +305,25 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     };
 
     const GetOptions = {
-      isTabletView: () => container.offsetWidth > CARD_BREAK,
+      isMobileView: () => container.offsetWidth <= mobileBreakpoint,
+      isTabletView: () =>
+        container.offsetWidth > mobileBreakpoint &&
+        container.offsetWidth <= tabletBreakpoint,
+      isDesktopView: () => container.offsetWidth > tabletBreakpoint,
       showCount: function () {
         if (this) {
-          return this.isTabletView() ? TABLET_COUNT : MOBILE_COUNT;
+          const isMobile = this.isMobileView();
+          const isTablet = this.isTabletView();
+          const isDesktop = this.isDesktopView();
+          let count = 1;
+
+          if (isMobile) count = mobileCount;
+          if (isTablet) count = tabletCount;
+          if (isDesktop) count = desktopCount;
+
+          return count;
         } else {
-          return MOBILE_COUNT;
+          return 1;
         }
       },
     };
@@ -342,8 +333,12 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         if (this) {
           const containerWidth = container.offsetWidth;
           const count = GetOptions.showCount();
-          const multiplier = count == TABLET_COUNT ? 1 : 0.8;
           const additonalSpace = spaceBetween / 2;
+          let multiplier = 1;
+
+          if (count === 1) {
+            multiplier = 0.8;
+          }
 
           return (containerWidth / count) * multiplier - additonalSpace;
         }
@@ -393,7 +388,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       resize: () => {
         SetSizes.cardWidth();
         SetSizes.carouselWidth();
-        EventResizeButtonLogic({ ...Helpers });
+        ButtonDisplay({ ...Helpers });
 
         setTimeout(() => {
           SetSizes.cardHeight();
@@ -467,6 +462,7 @@ export default {
   Styles: STYLES_CAROUSEL_CARDS_ELEMENT,
   Elements: {
     declaration: ELEMENT_ANIMATION_CAROUSEL_DECLARATION,
+    container: ELEMENT_ANIMATION_CAROUSEL_CONTAINER,
     button: ELEMENT_ANIMATION_CAROUSEL_BUTTON,
   },
 };

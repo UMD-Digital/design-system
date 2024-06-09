@@ -8,14 +8,18 @@ type TypeAnimationCarouselBlockProps = {
 };
 
 type TypeCommonData = {
-  GetContainer: () => HTMLDivElement;
-  GetCarouselSlide: () => HTMLElement;
-  GetCards: () => HTMLElement[];
-  GetNumberOfCards: () => number;
-  GetIsTabletView: () => boolean;
-  GetcontainerSize: () => number;
-  GetCarouselCardShowCount: () => number;
-  GetCardWidthBasedOnCarousel: () => number;
+  GetElements: {
+    container: () => HTMLDivElement;
+    slide: () => HTMLElement;
+    cards: () => HTMLElement[];
+  };
+  GetOptions: {
+    isTabletView: () => boolean;
+    showCount: () => number;
+  };
+  GetSizes: {
+    cardWidth: () => number | undefined;
+  };
   SetCarouselSize: () => void;
 };
 
@@ -40,10 +44,6 @@ const ELEMENT_ANIMATION_CAROUSEL_CONTAINER =
   'animation-carousel-block-container';
 const ELEMENT_ANIMATION_CAROUSEL_WRAPPER = 'animation-carousel-block-wrapper';
 const ELEMENT_ANIMATION_CAROUSEL_BUTTON = `animation-carousel-block-button`;
-const ELEMENT_ANIMATION_BUTTON_FORWARDS =
-  'animation-carousel-block-button-forwards';
-const ELEMENT_ANIMATION_BUTTON_BACKWARDS =
-  'animation-carousel-block-button-backwards';
 
 // prettier-ignore
 const ButtonStyles = `
@@ -121,16 +121,16 @@ const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
 const EventScrollCarousel = (props: TypeEventScroll) => {
   const {
-    GetCarouselSlide,
-    GetIsTabletView,
+    GetElements,
+    GetOptions,
     SetCarouselSize,
     isDirectionRight = true,
   } = props;
-  const carouselSlider = GetCarouselSlide();
+  const carouselSlider = GetElements.slide();
   const slotContent = Array.from(
     carouselSlider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
-  const isShowTwo = GetIsTabletView();
+  const isShowTwo = GetOptions.isTabletView();
   const elementCount = isShowTwo ? 2 : 1;
   const firstElement = slotContent[0];
   const lastElement = slotContent[slotContent.length - 1];
@@ -238,8 +238,8 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
 };
 
 const EventSwipe = (props: TypeCommonData) => {
-  const { GetContainer } = props;
-  const container = GetContainer();
+  const { GetElements } = props;
+  const container = GetElements.container();
 
   const swipes = (isrightswipe: Boolean) => {
     if (!isrightswipe) {
@@ -253,14 +253,15 @@ const EventSwipe = (props: TypeCommonData) => {
 };
 
 const EventResizeButtonLogic = (props: TypeCommonData) => {
-  const { GetContainer, GetIsTabletView, GetNumberOfCards } = props;
-  const container = GetContainer();
+  const { GetElements, GetOptions } = props;
   const buttons = Array.from(
-    container.querySelectorAll(`.${ELEMENT_ANIMATION_CAROUSEL_BUTTON}`),
+    GetElements.container().querySelectorAll(
+      `.${ELEMENT_ANIMATION_CAROUSEL_BUTTON}`,
+    ),
   ) as HTMLButtonElement[];
 
-  const count = GetNumberOfCards();
-  const isShowTwo = GetIsTabletView();
+  const count = GetElements.cards().length;
+  const isShowTwo = GetOptions.isTabletView();
   const isButtonShownMobile = count > MOBILE_COUNT;
   const isButtonShownTablet = count > TABLET_COUNT;
 
@@ -319,25 +320,32 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
+    const GetElements = {
+      container: () => container,
+      slide: () => slide,
+      cards: () => cards,
+    };
+    const GetOptions = {
+      isTabletView: () => container.offsetWidth > CARD_BREAK,
+      showCount: function () {
+        if (this) {
+          return this.isTabletView() ? TABLET_COUNT : MOBILE_COUNT;
+        } else {
+          return MOBILE_COUNT;
+        }
+      },
+    };
+    const GetSizes = {
+      cardWidth: function () {
+        if (this) {
+          const containerWidth = container.offsetWidth;
+          const count = GetOptions.showCount();
+          const multiplier = count == TABLET_COUNT ? 1 : 0.8;
+          const additonalSpace = spaceBetween / 2;
 
-    const GetContainer = () => container;
-    const GetCarouselSlide = () => slide;
-    const GetCards = () => cards;
-    const GetNumberOfCards = () => cards.length;
-    const GetcontainerSize = () => container.offsetWidth;
-    const GetIsTabletView = () => GetcontainerSize() > CARD_BREAK;
-
-    const GetCarouselCardShowCount = () =>
-      GetIsTabletView() ? TABLET_COUNT : MOBILE_COUNT;
-
-    const GetCardWidthBasedOnCarousel = () => {
-      const containerWidth = GetcontainerSize();
-      const count = GetCarouselCardShowCount();
-
-      const multiplier = count == TABLET_COUNT ? 1 : 0.8;
-      const additonalSpace = spaceBetween / 2;
-
-      return (containerWidth / count) * multiplier - additonalSpace;
+          return (containerWidth / count) * multiplier - additonalSpace;
+        }
+      },
     };
 
     const SetCardHeight = () => {
@@ -353,7 +361,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     };
 
     const SetCardWidth = () => {
-      const elementSize = GetCardWidthBasedOnCarousel();
+      const elementSize = GetSizes.cardWidth();
 
       cards.forEach((card) => {
         card.style.width = `${elementSize}px`;
@@ -361,12 +369,15 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     };
 
     const SetCarouselSize = () => {
-      const elementSize = GetCardWidthBasedOnCarousel();
-      const elementSizeTotal = elementSize * 2 + spaceBetween;
+      const elementSize = GetSizes.cardWidth();
 
-      slide.style.width = `${elementSizeTotal}px`;
-      slide.style.transition = 'none';
-      slide.style.transform = 'translateX(0)';
+      if (elementSize) {
+        const elementSizeTotal = elementSize * 2 + spaceBetween;
+
+        slide.style.width = `${elementSizeTotal}px`;
+        slide.style.transition = 'none';
+        slide.style.transform = 'translateX(0)';
+      }
     };
 
     const SetSizeCarouselElements = () => {
@@ -377,21 +388,15 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const SetEventMoveForward = () => EventScrollCarousel({ ...CommonData });
     const SetEventMoveBackward = () =>
       EventScrollCarousel({ ...CommonData, isDirectionRight: false });
-    const SetEventReize = () => Resize();
 
     const CommonData = {
-      GetContainer,
-      GetCarouselSlide,
-      GetCards,
-      GetNumberOfCards,
-      GetIsTabletView,
-      GetcontainerSize,
-      GetCarouselCardShowCount,
-      GetCardWidthBasedOnCarousel,
+      GetElements,
+      GetOptions,
+      GetSizes,
       SetCarouselSize,
     };
 
-    const Resize = () => {
+    const EventResize = () => {
       SetSizeCarouselElements();
       EventResizeButtonLogic({ ...CommonData });
 
@@ -409,7 +414,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       slide.style.justifyContent = 'space-between';
 
       setTimeout(() => {
-        Resize();
+        EventResize();
         EventSwipe({ ...CommonData });
       }, 100);
     };
@@ -442,13 +447,13 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(Resize, 10));
+    window.addEventListener('resize', Debounce(EventResize, 10));
     Load();
 
     return {
       element: declaration,
       events: {
-        SetEventReize,
+        EventResize,
       },
     };
   })();

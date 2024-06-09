@@ -303,7 +303,7 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     return {
       element: declaration,
       events: {
-        SetEventReize: carouselContainer.events.SetEventReize,
+        SetEventReize: carouselContainer.events.EventResize,
       },
     };
   })();

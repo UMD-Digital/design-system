@@ -63,6 +63,7 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
   element._elementRef = carousel;
   shadow.appendChild(styleTemplate.content.cloneNode(true));
   shadow.appendChild(carousel.element);
+  carousel.events.Load();
 };
 
 class UMDCarouselCardsElement extends HTMLElement {

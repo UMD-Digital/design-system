@@ -129,6 +129,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
     const carousel = AnimationCarouselBlocks.CreateElement({
       blocks,
       slide,
+      showHint: false,
       overwriteDisplayLogic: {
         mobileBreakpoint: 500,
         tabletBreakpoint: 700,

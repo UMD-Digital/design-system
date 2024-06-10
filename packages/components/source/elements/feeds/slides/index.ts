@@ -57,8 +57,6 @@ const CreateFeedSlideEvent = async ({
     variables.related = related;
   }
 
-  console.log(variables);
-
   const graceFail = ({ message }: { message: string }) => {
     throw new Error(message);
   };

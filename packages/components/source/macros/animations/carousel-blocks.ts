@@ -5,6 +5,7 @@ type TypeAnimationCarouselBlockProps = {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
   blocks: HTMLElement[];
+  showHint?: boolean;
   overwriteDisplayLogic?: Record<string, number>;
 };
 
@@ -17,13 +18,15 @@ type TypeHelpers = {
   GetOptions: {
     isTabletView: () => boolean;
     showCount: () => number;
+    shouldShowHint: () => boolean;
   };
   GetSizes: {
-    cardWidth: () => number | undefined;
+    blockWidth: () => number | undefined;
+    carouselWidth: () => number;
   };
-  SetSizes: {
+  SetLayout: {
     cardHeight: () => void;
-    cardWidth: () => void;
+    blockWidth: () => void;
     carouselWidth: () => void;
   };
 };
@@ -36,6 +39,7 @@ const { Debounce } = Performance;
 const { Colors, Spacing } = Tokens;
 
 const ANIMATION_DURATION = 500;
+const HINT_MULTIPLER_SIZING = 0.2;
 
 const ELEMENT_NAME = 'umd-element-animation-carousel-block';
 const ELEMENT_ANIMATION_CAROUSEL_DECLARATION =
@@ -101,116 +105,85 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
 const spaceBetween = parseInt(Spacing.md.replace('px', ''));
 
 const EventScrollCarousel = (props: TypeEventScroll) => {
-  const { GetElements, GetOptions, SetSizes, isDirectionRight = true } = props;
+  const {
+    GetElements,
+    GetOptions,
+    GetSizes,
+    SetLayout,
+    isDirectionRight = true,
+  } = props;
   const carouselSlider = GetElements.slide();
   const slotContent = Array.from(
     carouselSlider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
-  const isShowTwo = GetOptions.isTabletView();
-  const elementCount = isShowTwo ? 2 : 1;
-  const firstElement = slotContent[0];
-  const lastElement = slotContent[slotContent.length - 1];
-  const nextElement = slotContent[elementCount];
-  const elementSize = firstElement.offsetWidth;
-  const elementSizeWithSpace = elementSize + spaceBetween;
 
-  if (!nextElement) return;
+  const isShowHint = GetOptions.shouldShowHint();
+  const elementCount = GetOptions.showCount();
+  const elementSize = GetSizes.blockWidth();
+  const carouselSize = GetSizes.carouselWidth();
 
-  const scrollTabletRight = () => {
-    const temporaryCarouselSize =
-      elementSize * elementCount +
-      spaceBetween / elementCount +
-      elementSizeWithSpace;
+  if (!elementSize) return;
 
-    const animateRight = () => {
-      carouselSlider.style.width = `${temporaryCarouselSize}px`;
-      nextElement.style.display = 'block';
-      carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
-      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+  const elementSizeWithSpace = elementSize + spaceBetween * 2;
+  const temporaryCarouselSize = carouselSize + elementSizeWithSpace;
 
-      setTimeout(() => {
-        const clonedElement = firstElement.cloneNode(true) as HTMLDivElement;
-        carouselSlider.appendChild(clonedElement);
-        clonedElement.style.display = 'none';
+  const animateRight = () => {
+    const firstElement = slotContent[0];
+    const clonedElement = firstElement.cloneNode(true) as HTMLDivElement;
+    const upcomingElement = slotContent[elementCount];
+    const hintElement = slotContent[elementCount + 1];
 
-        carouselSlider.removeChild(firstElement);
-        SetSizes.carouselWidth();
-      }, ANIMATION_DURATION - 50);
-    };
+    carouselSlider.style.width = `${temporaryCarouselSize}px`;
+    upcomingElement.style.display = 'block';
+    carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
+    carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
-    const animateLeft = () => {
-      const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
-      const removedElement = slotContent[1];
+    setTimeout(() => {
+      if (isShowHint) {
+        hintElement.style.display = 'block';
+      }
 
-      carouselSlider.style.width = `${temporaryCarouselSize}px`;
-      carouselSlider.prepend(clonedElement);
-      clonedElement.style.display = 'block';
-      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
-
-      setTimeout(() => {
-        carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
-        carouselSlider.style.transform = `translateX(0)`;
-      }, 10);
-
-      setTimeout(() => {
-        removedElement.style.display = 'none';
-        carouselSlider.removeChild(lastElement);
-
-        SetSizes.carouselWidth();
-      }, ANIMATION_DURATION - 50);
-    };
-
-    isDirectionRight ? animateRight() : animateLeft();
-  };
-
-  const scrollMobileRight = () => {
-    const isOnlyTwo = slotContent.length === 2;
-    const temporaryCarouselSize = elementSize * 3 + spaceBetween * 2;
-
-    const animateRight = () => {
-      const clonedElement = firstElement.cloneNode(true) as HTMLElement;
-      const upcomingElement = isOnlyTwo ? clonedElement : slotContent[2];
-      clonedElement.style.display = 'none';
       carouselSlider.appendChild(clonedElement);
+      clonedElement.style.display = 'none';
+    }, 10);
 
-      carouselSlider.style.width = `${temporaryCarouselSize}px`;
-      upcomingElement.style.display = 'block';
-      carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
-      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+    setTimeout(() => {
+      carouselSlider.removeChild(firstElement);
 
-      setTimeout(() => {
-        carouselSlider.removeChild(firstElement);
-
-        SetSizes.carouselWidth();
-      }, ANIMATION_DURATION + 100);
-    };
-
-    const animateLeft = () => {
-      const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
-      const removedElement = slotContent[1];
-
-      carouselSlider.style.width = `${temporaryCarouselSize}px`;
-      carouselSlider.prepend(clonedElement);
-      clonedElement.style.display = 'block';
-      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
-
-      setTimeout(() => {
-        carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
-        carouselSlider.style.transform = `translateX(0)`;
-      }, 10);
-
-      setTimeout(() => {
-        removedElement.style.display = 'none';
-        carouselSlider.removeChild(lastElement);
-
-        SetSizes.carouselWidth();
-      }, ANIMATION_DURATION - 50);
-    };
-
-    isDirectionRight ? animateRight() : animateLeft();
+      SetLayout.carouselWidth();
+    }, ANIMATION_DURATION - 10);
   };
 
-  isShowTwo ? scrollTabletRight() : scrollMobileRight();
+  const animateLeft = () => {
+    const lastElement = slotContent[slotContent.length - 1];
+    const removedElement = slotContent[elementCount - 1];
+    const hintElementSibiling = slotContent[elementCount];
+    const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
+
+    carouselSlider.style.width = `${temporaryCarouselSize}px`;
+    carouselSlider.prepend(clonedElement);
+    clonedElement.style.display = 'block';
+    carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+
+    setTimeout(() => {
+      carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
+      carouselSlider.style.transform = `translateX(0)`;
+    }, 10);
+
+    setTimeout(() => {
+      carouselSlider.removeChild(lastElement);
+
+      if (!isShowHint) {
+        removedElement.style.display = 'none';
+      } else {
+        hintElementSibiling.style.display = 'none';
+      }
+
+      SetLayout.carouselWidth();
+    }, ANIMATION_DURATION - 10);
+  };
+
+  isDirectionRight ? animateRight() : animateLeft();
 };
 
 const EventSwipe = (props: TypeHelpers) => {
@@ -280,7 +253,13 @@ const CreateButton = ({
 
 const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
   (() => {
-    const { slide, shadowRef, blocks, overwriteDisplayLogic } = props;
+    const {
+      slide,
+      shadowRef,
+      blocks,
+      showHint = true,
+      overwriteDisplayLogic,
+    } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
@@ -334,26 +313,42 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
           return 1;
         }
       },
+      shouldShowHint: () => showHint && GetOptions.isMobileView(),
     };
 
     const GetSizes = {
-      cardWidth: function () {
+      blockWidth: function () {
         if (this) {
+          const isShowHint = GetOptions.shouldShowHint();
           const containerWidth = container.offsetWidth;
           const count = GetOptions.showCount();
-          const additonalSpace = spaceBetween / 2;
-          let multiplier = 1;
 
-          if (count === 1) {
-            multiplier = 0.8;
+          if (isShowHint) {
+            const hintElementSize = containerWidth * HINT_MULTIPLER_SIZING;
+
+            return (containerWidth - hintElementSize) / count;
           }
 
-          return (containerWidth / count) * multiplier - additonalSpace;
+          return containerWidth / count;
         }
+      },
+      carouselWidth: () => {
+        const isShowHint = GetOptions.shouldShowHint();
+        const count = GetOptions.showCount();
+        const elementSize = GetSizes.blockWidth();
+
+        if (!elementSize) return window.innerWidth;
+
+        if (isShowHint) {
+          const updatedCount = count + 1;
+          return elementSize * updatedCount + spaceBetween;
+        }
+
+        return elementSize * count + spaceBetween;
       },
     };
 
-    const SetSizes = {
+    const SetLayout = {
       cardHeight: () => {
         const minimumHeight = window.innerWidth > 768 ? 450 : 360;
         const maxHeight = blocks.reduce((acc, currentElement) => {
@@ -361,69 +356,73 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
           return currentElement.offsetHeight;
         }, minimumHeight);
 
-        console.log(maxHeight, 'maxHeight');
-
         blocks.forEach((block) => {
           block.style.height = `${maxHeight}px`;
         });
       },
-      cardWidth: () => {
-        const elementSize = GetSizes.cardWidth();
+      blockWidth: () => {
+        const elementSize = GetSizes.blockWidth();
 
         blocks.forEach((block) => {
           block.style.width = `${elementSize}px`;
         });
       },
       carouselWidth: () => {
-        const elementSize = GetSizes.cardWidth();
+        const elementSize = GetSizes.carouselWidth();
 
-        if (elementSize) {
-          const elementSizeTotal = elementSize * 2 + spaceBetween;
-
-          slide.style.width = `${elementSizeTotal}px`;
-          slide.style.transition = 'none';
-          slide.style.transform = 'translateX(0)';
-        }
+        slide.style.width = `${elementSize}px`;
+        slide.style.transition = 'none';
+        slide.style.transform = 'translateX(0)';
       },
-    };
+      blockDisplay: () => {
+        const count = GetOptions.showCount() - 1;
 
-    const Helpers = {
-      GetElements,
-      GetOptions,
-      GetSizes,
-      SetSizes,
+        blocks.forEach((block, index) => {
+          if (index > count) {
+            block.style.display = 'none';
+          } else {
+            block.style.display = 'block';
+          }
+        });
+
+        if (showHint) blocks[1].style.display = 'block';
+      },
     };
 
     const Event = {
+      helpers: {
+        GetElements,
+        GetOptions,
+        GetSizes,
+        SetLayout,
+      },
       resize: () => {
-        SetSizes.cardWidth();
-        SetSizes.carouselWidth();
-        ButtonDisplay({ ...Helpers });
+        SetLayout.blockWidth();
+        SetLayout.carouselWidth();
+        SetLayout.blockDisplay();
+        ButtonDisplay({ ...Event.helpers });
 
         setTimeout(() => {
-          SetSizes.cardHeight();
+          SetLayout.cardHeight();
         }, 100);
       },
       load: () => {
-        blocks.forEach((block, index) => {
-          if (index > 1) block.style.display = 'none';
-        });
-
+        SetLayout.blockDisplay();
         slide.style.display = 'flex';
-        slide.style.justifyContent = 'space-between';
+        slide.style.gap = `${Spacing.md}`;
 
         setTimeout(() => {
           Event.resize();
-          EventSwipe({ ...Helpers });
+          EventSwipe({ ...Event.helpers });
         }, 100);
       },
       forward: () =>
         EventScrollCarousel({
-          ...Helpers,
+          ...Event.helpers,
         }),
       backward: () =>
         EventScrollCarousel({
-          ...Helpers,
+          ...Event.helpers,
           isDirectionRight: false,
         }),
     };

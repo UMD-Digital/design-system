@@ -52,7 +52,7 @@ const CreateHeader = ({
   }
 
   const value = NavigationHeader.CreateElement({
-    logo: MarkupValidate.ImageSlot({ element, ImageSlot: LOGO }),
+    logo: logoSlot,
     navRow: navigationSlot,
     eventOpen,
     searchUrl,

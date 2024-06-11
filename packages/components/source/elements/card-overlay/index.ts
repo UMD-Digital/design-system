@@ -36,7 +36,6 @@ const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONT
 const OVERWRITE_SCALING_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmallScaling.Elements.container}`;
 const OVERWRITE_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.container}`;
 const OVERWRITE_TEXT_LOCK_HEADLINE = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.headline}`;
-const OVERWRITE_TEXT_LOCK_DATE = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.date}`;
 const OVERWRITE_TEXT_LOCK_ACTIONS = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.actions}`;
 
 // prettier-ignore
@@ -98,12 +97,14 @@ const OverwriteTextContainer = `
     height: 100%;
   }
 
-  ${OVERWRITE_TEXT_LOCK_DATE} {
-    margin-bottom: ${Spacing.sm};
+  ${OVERWRITE_TEXT_LOCK_ACTIONS} {
+    margin-top: ${Spacing.sm};
   }
 
-  ${OVERWRITE_TEXT_LOCK_ACTIONS} {
-    margin-top: auto;
+  @media (min-width: 768px) {
+    ${OVERWRITE_TEXT_LOCK_ACTIONS} {
+      margin-top: auto;
+    }
   }
 `;
 

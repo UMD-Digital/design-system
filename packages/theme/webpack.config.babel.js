@@ -44,7 +44,7 @@ module.exports = (env) => {
     plugins.push(
       new WebpackShellPlugin({
         onAfterDone: {
-          scripts: ['cd ../kitchen-sink && npx yarn build'],
+          scripts: ['cd ../design-system-ui && npx yarn build'],
         },
       }),
     );

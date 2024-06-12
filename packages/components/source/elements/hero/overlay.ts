@@ -81,7 +81,7 @@ const OverwriteTextContainer = `
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      width: 60%;
+      width: 55%;
       padding: ${Spacing['5xl']} 0;
     }
   }
@@ -92,7 +92,7 @@ const OverwriteImageContainer = `
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       position: absolute;
-      width: 50%;
+      width: 60%;
       height: calc(100% - ${Spacing['5xl']});
       right: 0;
       top: 0;
@@ -105,9 +105,10 @@ const OverwriteImageContainer = `
       position: absolute;
       left: 0;
       top: 0;
-      width: 50%;
+      width: 60%;
       height: 100%;
       background: linear-gradient(90deg, rgba(0, 0, 0, .9) 0%, rgba(0, 0, 0, 0) 80%);
+      z-index: 99;
     }
   }
 

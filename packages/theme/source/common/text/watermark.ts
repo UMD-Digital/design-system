@@ -2,48 +2,44 @@ import { Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Queries, FontSize } = Tokens;
 
-const WatermarkContainer = {
-  position: 'relative',
-};
-
-const Watermark = {
-  alignItems: 'center',
-  color: Colors.gray.lighter,
+const Child = {
   position: 'absolute',
-  width: '100%',
   top: '0',
   left: '-2%',
+  color: Colors.gray.lighter,
   fontWeight: 'bold',
-  display: 'flex',
-  justifyContent: 'flex-start',
+  textTransform: 'uppercase',
+  fontSize: `min(calc(${FontSize['5xl']} + 13vw), 240px)`,
+  lineHeight: '0',
   opacity: ' 0.6',
   pointerEvents: 'none',
   userSelect: 'none',
   zIndex: '-1',
-  textTransform: 'uppercase',
 
   [`@media (${Queries.large.max})`]: {
     display: 'none',
   },
+};
 
-  [`@media (${Queries.large.min})`]: {
-    fontSize: `min(calc(${FontSize['5xl']} + 13vw), 240px)`,
+const Watermark = {
+  position: 'relative',
+
+  '> *': {
+    ...Child,
   },
 };
 
 const WatermarkDark = {
   ...Watermark,
-  ...{
+
+  '> *': {
+    ...Child,
     opacity: '0.2',
-    zIndex: '0',
+    zIndex: '9',
   },
 };
 
 export default {
-  '.umd-watermark-container': {
-    ...WatermarkContainer,
-  },
-
   '.umd-watermark': {
     ...Watermark,
   },

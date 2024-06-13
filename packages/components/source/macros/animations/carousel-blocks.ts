@@ -424,9 +424,9 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         SetLayout,
       },
       resize: () => {
+        SetLayout.blockDisplay();
         SetLayout.blockWidth();
         SetLayout.carouselWidth();
-        SetLayout.blockDisplay();
         ButtonDisplay({ ...Event.helpers });
 
         setTimeout(() => {

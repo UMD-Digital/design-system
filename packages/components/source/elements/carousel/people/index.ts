@@ -11,6 +11,10 @@ const { Colors, Spacing } = Tokens;
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
 
+const mobileBreakpoint = 600;
+const tabletBreakpoint = 900;
+const desktopBreakpoint = 1200;
+
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 const ELEMENT_NAME = 'umd-carousel-people';
@@ -59,7 +63,12 @@ const OverwriteCarouselStyles = `
 const PersonSlideStyles = `
   .${ELEMENT_PERSON_SLIDE} {
     border: 1px solid ${Colors.gray.light};
+    border-left: none;
     padding: ${Spacing.md};
+  }
+
+  .${ELEMENT_PEOPLE_CONTAINER} .${ELEMENT_PERSON_SLIDE}:first-child {
+    border-left: 1px solid ${Colors.gray.light};
   }
 `;
 
@@ -106,10 +115,10 @@ const CreateCarouselPeopleElement = (props: TypeCarouselPeopleProps) =>
       slide,
       showHint: false,
       overwriteDisplayLogic: {
-        mobileBreakpoint: 600,
-        tabletBreakpoint: 900,
+        mobileBreakpoint,
+        tabletBreakpoint,
         desktopCount: 3,
-        desktopBreakpoint: 1400,
+        desktopBreakpoint,
         maxCount: 4,
         blockGap: 0,
         minBlockHeightTablet: 320,

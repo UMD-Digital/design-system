@@ -1,12 +1,27 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetIcon, EventsUtility, Performance } from 'utilities';
 
+type TypeDisplayLogic = {
+  mobileCount: number;
+  mobileBreakpoint: number;
+  tabletCount: number;
+  tabletBreakpoint: number;
+  desktopCount: number;
+  desktopBreakpoint: number;
+  maxCount: number;
+  blockGap: number;
+  minBlockHeightMobile: number;
+  minBlockHeightTablet: number;
+};
+
+type TypeDisplayLogicProps = Partial<TypeDisplayLogic>;
+
 type TypeAnimationCarouselBlockProps = {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
   blocks: HTMLElement[];
   showHint?: boolean;
-  overwriteDisplayLogic?: Record<string, number>;
+  overwriteDisplayLogic?: TypeDisplayLogicProps;
 };
 
 type TypeHelpers = {
@@ -263,7 +278,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
-    const displayLogic: Record<string, number> = {
+    const displayLogic: TypeDisplayLogic = {
       mobileCount: 1,
       mobileBreakpoint: 650,
       tabletCount: 2,
@@ -272,11 +287,18 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       desktopBreakpoint: 1200,
       maxCount: 2,
       blockGap: parseInt(Spacing.md.replace('px', '')),
+      minBlockHeightMobile: 360,
+      minBlockHeightTablet: 400,
     };
 
     if (overwriteDisplayLogic) {
       Object.keys(overwriteDisplayLogic).forEach((key) => {
-        displayLogic[key] = overwriteDisplayLogic[key];
+        const refKey = key as keyof typeof displayLogic;
+        const refValue = overwriteDisplayLogic[refKey] as number;
+
+        if (displayLogic[refKey]) {
+          displayLogic[refKey] = refValue;
+        }
       });
     }
 
@@ -351,7 +373,10 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
     const SetLayout = {
       cardHeight: () => {
-        const minimumHeight = window.innerWidth > 768 ? 450 : 360;
+        const minimumHeight =
+          window.innerWidth > 768
+            ? displayLogic.minBlockHeightTablet
+            : displayLogic.minBlockHeightMobile;
         const maxHeight = blocks.reduce((acc, currentElement) => {
           if (acc > currentElement.offsetHeight) return acc;
           return currentElement.offsetHeight;
@@ -411,7 +436,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       load: () => {
         SetLayout.blockDisplay();
         slide.style.display = 'flex';
-        slide.style.gap = `${Spacing.md}`;
+        slide.style.gap = `${displayLogic.blockGap}px`;
 
         setTimeout(() => {
           Event.resize();

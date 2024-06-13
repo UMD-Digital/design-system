@@ -10,9 +10,7 @@ type TypeCarouselMultipleProps = {
   theme?: string | null;
 };
 
-const { Colors, Spacing } = Tokens;
-
-const MEDIUM = 500;
+const { Colors } = Tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
@@ -61,7 +59,12 @@ const OverwriteCarouselStyles = `
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
     top: 50%;
     transform: translateY(-50%);
+    background-color: ${Colors.white};
   }
+
+  ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} svg {
+    fill: ${Colors.black};
+  };
 
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {
     left: 0;
@@ -112,11 +115,13 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
       slide,
       showHint: false,
       overwriteDisplayLogic: {
-        mobileBreakpoint: 500,
-        tabletBreakpoint: 700,
+        mobileBreakpoint: 600,
+        tabletBreakpoint: 900,
         desktopCount: 3,
-        desktopBreakpoint: 1000,
+        desktopBreakpoint: 1400,
         maxCount: 4,
+        minBlockHeightTablet: 320,
+        minBlockHeightMobile: 240,
       },
     });
 

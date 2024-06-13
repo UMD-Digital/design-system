@@ -11,6 +11,7 @@ import CardOverlay from './card/overlay';
 import CarouselCards from './carousel/cards';
 import CarouselImageStandard from './carousel/image/standard';
 import CarouselImageMultiple from './carousel/image/multiple';
+import CarouselPeople from './carousel/people';
 import Event from './event';
 import EventDate from './event/lockup';
 import FeedNewsGrid from './feeds/news/grid';
@@ -56,6 +57,7 @@ export {
   CarouselCards,
   CarouselImageStandard,
   CarouselImageMultiple,
+  CarouselPeople,
   EventDate,
   Event,
   FeedEventsGrid,

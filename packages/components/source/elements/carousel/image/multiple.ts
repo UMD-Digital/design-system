@@ -24,8 +24,6 @@ const ELEMENT_CAROUSEL_MULTIPLE_DECLARATION =
   'carousel-image-multiple-declaration';
 const ELEMENT_CAROUSEL_MULTIPLE_CONTAINER = 'carousel-image-multiple-container';
 const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-multiple-button';
-const ELEMENT_CAROUSEL_INDICATOR_WRAPPER =
-  'carousel-multiple-indicator-wrapper';
 
 const OVERWRITE_LAYOUT_IMAGE = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${LayoutImage.Elements.container}`;
 
@@ -75,21 +73,6 @@ const OverwriteCarouselStyles = `
 `;
 
 // prettier-ignore
-const IndicatorContainerStyles = `
-  .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
-    padding: ${Spacing.md};
-    display: flex;
-    justify-content: center;
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
-      padding: ${Spacing.lg};
-    }
-  }
-`;
-
-// prettier-ignore
 const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
   .${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
@@ -102,7 +85,6 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
   ${LayoutImage.Styles}
   ${AnimationIndicator.Styles}
   ${AnimationCarouselBlocks.Styles}
-  ${IndicatorContainerStyles}
   ${OverwriteImageStyles}
   ${OverwriteCarouselStyles}
   ${OverwriteThemeDark}
@@ -113,7 +95,6 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
     const { images, theme } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
-    const elementIndicator = document.createElement('div');
     const clonedImages = images.map((image) =>
       image.cloneNode(true),
     ) as HTMLImageElement[];
@@ -139,17 +120,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
       },
     });
 
-    const indicator = AnimationIndicator.CreateElement({
-      count: images.length || 0,
-      callback: () => {},
-      theme: theme || 'light',
-    });
-
-    elementIndicator.classList.add(ELEMENT_CAROUSEL_INDICATOR_WRAPPER);
-    elementIndicator.appendChild(indicator.element);
-
     elementContainer.appendChild(carousel.element);
-    elementContainer.appendChild(elementIndicator);
     elementContainer.classList.add(ELEMENT_CAROUSEL_MULTIPLE_CONTAINER);
     if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
 

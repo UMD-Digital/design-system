@@ -10,6 +10,7 @@ type TypeAnimationCarouselBlockProps = {
 };
 
 type TypeHelpers = {
+  displayLogic: Record<string, number>;
   GetElements: {
     container: () => HTMLDivElement;
     slide: () => HTMLElement;
@@ -102,10 +103,9 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
   ${ButtonStyles}
 `;
 
-const spaceBetween = parseInt(Spacing.md.replace('px', ''));
-
 const EventScrollCarousel = (props: TypeEventScroll) => {
   const {
+    displayLogic,
     GetElements,
     GetOptions,
     GetSizes,
@@ -124,7 +124,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
 
   if (!elementSize) return;
 
-  const elementSizeWithSpace = elementSize + spaceBetween * 2;
+  const elementSizeWithSpace = elementSize + displayLogic.blockGap * 2;
   const temporaryCarouselSize = carouselSize + elementSizeWithSpace;
 
   const animateRight = () => {
@@ -271,6 +271,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       desktopCount: 2,
       desktopBreakpoint: 1200,
       maxCount: 2,
+      blockGap: parseInt(Spacing.md.replace('px', '')),
     };
 
     if (overwriteDisplayLogic) {
@@ -341,10 +342,10 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
         if (isShowHint) {
           const updatedCount = count + 1;
-          return elementSize * updatedCount + spaceBetween;
+          return elementSize * updatedCount + displayLogic.blockGap;
         }
 
-        return elementSize * count + spaceBetween;
+        return elementSize * count + displayLogic.blockGap;
       },
     };
 
@@ -391,6 +392,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
     const Event = {
       helpers: {
+        displayLogic,
         GetElements,
         GetOptions,
         GetSizes,

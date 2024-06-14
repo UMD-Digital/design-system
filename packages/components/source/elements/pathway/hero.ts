@@ -172,6 +172,7 @@ const LockStyles = `
       display: flex;
       align-items: center;
       min-height: 832px;
+      padding-left: ${Spacing['2xl']};
     }
   }
 

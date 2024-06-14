@@ -4,6 +4,7 @@ import AnimationCarouselOverlay from './animations/carousel-overlay';
 import AnimationIndicator from './animations/indicator';
 import AnimationLoader from './animations/loader';
 import ButtonLazyLoad from './buttons/lazy-load';
+import ButtonFullScreen from './buttons/full-screen';
 import LayoutBlock from './layout/block';
 import LayoutBlockOverlay from './layout/overlay';
 import LayoutFixedFullScreen from './layout/fixed-full-screen';
@@ -20,6 +21,7 @@ export {
   AnimationIndicator,
   AnimationLoader,
   ButtonLazyLoad,
+  ButtonFullScreen,
   LayoutBlock,
   LayoutBlockOverlay,
   LayoutFixedFullScreen,

@@ -1,9 +1,10 @@
 import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import { Styles } from 'utilities';
 import {
   AnimationCarouselOverlay,
   AnimationCarouselImage,
   AnimationIndicator,
+  ButtonFullScreen,
   LayoutImage,
 } from 'macros';
 
@@ -41,7 +42,7 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
   };
 
 const { Colors, Spacing } = Tokens;
-const { SansLarge, SansMin } = Typography;
+const { SansLarge } = Typography;
 const { Text } = Elements;
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -65,7 +66,7 @@ const ELEMENT_SLIDE_TEXT_CONTAINER = 'carousel-image-standard-slide-text';
 const ELEMENT_SLIDE_HEADLINE = 'carousel-image-standard-slide-headline';
 const ELEMENT_SLIDE_RICH_TEXT = 'carousel-image-standard-slide-rich-text';
 const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-slider-button';
-const ELEMENT_CAROUSEL_FULL_SCREEN = 'carousel-full-screen';
+
 const ELEMENT_CAROUSEL_INDICATOR_WRAPPER = 'carousel-indicator-wrapper';
 const ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER =
   'carousel-overlay-image-container';
@@ -129,36 +130,6 @@ const OverlayImageContainerStyles = `
   .${ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER} img {
     object-fit: contain;
     max-height: 100%;
-  }
-`;
-
-// prettier-ignore
-const FullScreenButtonStyles = `
-  .${ELEMENT_CAROUSEL_FULL_SCREEN} {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    color: ${Colors.white};
-    text-transform: uppercase;
-    font-weight: 700;
-    padding: ${Spacing.min};
-    display: flex;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_CAROUSEL_FULL_SCREEN}`]: SansMin,
-    },
-  })}
-
-  .${ELEMENT_CAROUSEL_FULL_SCREEN} > span {
-    display: block;
-    height: 12px;
-    width: 1px;
-    background-color: ${Colors.gray.mediumAA};
-    margin: 0 4px;
   }
 `;
 
@@ -235,13 +206,13 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
     background-color: ${Colors.gray.lightest};
   }
 
-  ${LayoutImage.Styles}
   ${AnimationIndicator.Styles}
   ${AnimationCarouselImage.Styles}
   ${AnimationCarouselOverlay.Styles}
+  ${ButtonFullScreen.Styles}
+  ${LayoutImage.Styles}
   ${ImageContainerStyles}
   ${TextContainerStyles}
-  ${FullScreenButtonStyles}
   ${OverlayImageContainerStyles}
   ${IndicatorContainerStyles}
   ${OverwriteThemeDark}
@@ -303,14 +274,12 @@ const CreateImageContainer = ({
   imageWrapper.appendChild(imageBlock);
 
   if (isFullScreenOption) {
-    const fullScreenbutton = document.createElement('button');
-    fullScreenbutton.classList.add(ELEMENT_CAROUSEL_FULL_SCREEN);
-    fullScreenbutton.addEventListener('click', () => {
-      setFullScreen(index);
-    });
-    fullScreenbutton.innerHTML = `Full Screen <span></span>${AssetIcon.FULL_SCREEN}`;
-
-    imageBlock.appendChild(fullScreenbutton);
+    imageBlock.appendChild(
+      ButtonFullScreen.CreateElement({
+        callback: setFullScreen,
+        index,
+      }),
+    );
   }
 
   imageContainer.appendChild(imageWrapper);

@@ -50,8 +50,6 @@ const OverwriteThemeDark = `
   }
 `;
 
-console.log(OVERWRITE_LAYOUT_IMAGE);
-
 // prettier-ignore
 const OverwriteFullScreenOption = `
   ${OVERWRITE_FULL_SCREEN_BUTTON} {

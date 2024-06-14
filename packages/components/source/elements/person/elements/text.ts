@@ -26,6 +26,7 @@ const { SansLarger, SansSmall, SansSmaller } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_HAS_CONTACT = 'has-contact';
 const THEME_DARK = 'dark';
 export const DISPLAY_TABULAR = 'tabular';
 
@@ -42,9 +43,12 @@ const ELEMENT_PERSON_CONTACT_ITEM = 'person-contact-item';
 const ELEMENT_PERSON_ADDITONAL_CONTACT = 'person-additonal-contact';
 
 const IS_DARK_THEME = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_HAS_CONTACT = `[${ATTRIBUTE_HAS_CONTACT}]`;
 
 const IS_DARK_THEME_CONTAINER = `.${ELEMENT_PERSON_TEXT_CONTAINER}${IS_DARK_THEME}`;
 const IS_DARK_THEME_CONTACT_ITEM = `.${ELEMENT_PERSON_TEXT_CONTAINER}${IS_DARK_THEME} .${ELEMENT_PERSON_CONTACT_ITEM}`;
+
+const OVERWRITE_HAS_CONTACT_CONTAINER = `.${ELEMENT_PERSON_TEXT_CONTAINER}${IS_HAS_CONTACT}`;
 
 // prettier-ignore
 const ThemeDarkStyles = `
@@ -230,10 +234,6 @@ const ActionsStyles = `
 
 // prettier-ignore
 const STYLES_PERSON_TEXT = `
-  .${ELEMENT_PERSON_TEXT_CONTAINER} {
-
-  }
-
   ${NameStyles}
   ${JobStyles}
   ${AssociationStyles}
@@ -384,6 +384,7 @@ const CreatePersonTextContainer = (person: TypePersonProps) => {
   container.appendChild(wrapper);
 
   if (contactContainer) {
+    container.setAttribute(ATTRIBUTE_HAS_CONTACT, '');
     if (actions && isDisplayTabular) wrapper.appendChild(actions);
 
     container.appendChild(contactContainer);
@@ -399,6 +400,7 @@ export default {
   Styles: STYLES_PERSON_TEXT,
   Elements: {
     container: ELEMENT_PERSON_TEXT_CONTAINER,
+    containerWithContact: OVERWRITE_HAS_CONTACT_CONTAINER,
     mainWrapper: ELEMENT_PERSON_TEXT_MAIN_WRAPPER,
     name: ELEMENT_PERSON_NAME_CONTAINER,
     job: ELEMENT_PERSON_JOB_CONTAINER,

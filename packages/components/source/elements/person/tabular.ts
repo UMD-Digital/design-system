@@ -22,6 +22,8 @@ const THEME_DARK = 'dark';
 const LayoutListContainer = LayoutList.Elements.container;
 const LayoutImageContainer = LayoutImage.Elements.container;
 const LayoutTextContainer = PersonTextContainer.Elements.container;
+const LayoutTextContainerOverwrite =
+  PersonTextContainer.Elements.containerWithContact;
 const LayoutTextName = PersonTextContainer.Elements.name;
 
 const ELEMENT_NAME = 'umd-person-tabluar';
@@ -38,7 +40,7 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS
 const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutImageContainer}`;
 
 const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_WITH_IMAGE} .${LayoutTextContainer}`;
-
+const OVERWRITE_TEXT_CONTAINE_WITH_CONTACT = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} ${LayoutTextContainerOverwrite}`;
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
@@ -101,14 +103,17 @@ const OverwriteTextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
       order: 2;
-      display: grid;
       width: 100%;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${OVERWRITE_TEXT_CONTAINE_WITH_CONTACT} {
+      display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: ${Spacing.md};
     }
   }
-
-
 `;
 
 // prettier-ignore

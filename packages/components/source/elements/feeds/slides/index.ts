@@ -3,7 +3,6 @@ import { EventLockupDate, EventElements } from 'elements';
 
 type TypeSlideFeedResponse = {
   title: string;
-  url: string;
   startMonth: string;
   startDay: string;
   endMonth?: string;
@@ -12,8 +11,18 @@ type TypeSlideFeedResponse = {
 
 const { FetchGraphQL } = Network;
 const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
+const ACADEMICS_PRODUCTION_URL = 'https://provost.umd.edu/graphql';
 
-const EVENTS_QUERY = `
+const QUERY_DATA = `
+  title
+  url
+  startMonth: startDate @formatDateTime(format: "M")
+  startDay: startDate @formatDateTime(format: "d")
+  endMonth: endDate @formatDateTime(format: "M")
+  endDay: endDate @formatDateTime(format: "d")
+`;
+
+const CALENDAR_QUERY = `
   query getEvents($startDate: String!, $related: [QueryArgument]) {
     entries: solspace_calendar {
       events(
@@ -23,13 +32,23 @@ const EVENTS_QUERY = `
         limit: 12
       ) {
         ... on submission_Event {
-          title
-          url
-          startMonth: startDate @formatDateTime(format: "M")
-          startDay: startDate @formatDateTime(format: "d")
-          endMonth: endDate @formatDateTime(format: "M")
-          endDay: endDate @formatDateTime(format: "d")
+          ${QUERY_DATA}
         }
+      }
+    }
+  }
+`;
+
+const ACADEMICS_QUERY = `
+  query getEvents($startDate: String!, $related: [QueryArgument]) {
+    entries: solspace_calendar {
+      events(
+        relatedTo: $related
+        loadOccurrences: true
+        startsAfterOrAt: $startDate
+        limit: 12
+      ) {
+          ${QUERY_DATA}
       }
     }
   }
@@ -43,13 +62,16 @@ const STYLES_FEEDS_SLIDE_ELEMENT = `
 
 const CreateFeedSlideEvent = async ({
   token,
+  type = 'academic',
   categories,
   theme,
 }: {
   token: string;
+  type?: string | null;
   categories?: string | null;
   theme?: string | null;
 }) => {
+  const isCalendar = type === 'calendar';
   let variables: any = { startDate: new Date().toDateString() };
 
   if (categories) {
@@ -61,12 +83,19 @@ const CreateFeedSlideEvent = async ({
     throw new Error(message);
   };
 
-  const feedData = await FetchGraphQL({
-    query: EVENTS_QUERY,
-    url: CALENDAR_PRODUCTION_URL,
+  const fetchVariables = {
+    query: ACADEMICS_QUERY,
+    url: ACADEMICS_PRODUCTION_URL,
     token,
     variables,
-  });
+  };
+
+  if (isCalendar) {
+    fetchVariables.query = CALENDAR_QUERY;
+    fetchVariables.url = CALENDAR_PRODUCTION_URL;
+  }
+
+  const feedData = await FetchGraphQL(fetchVariables);
 
   if (
     !feedData ||

@@ -11,6 +11,8 @@ const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ATTRIBUTE_RESIZE = 'resize';
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_TYPE = 'type';
+const ATTRIBUTE_TOKEN = 'token';
 const THEME_LIGHT = 'light';
 const SLOTS = {
   HEADLINE: 'headline',
@@ -38,7 +40,8 @@ const CreateShadowDom = async ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const token = element.getAttribute('token');
+  const token = element.getAttribute(ATTRIBUTE_TOKEN);
+  const type = element.getAttribute(ATTRIBUTE_TYPE) || 'academic';
   const categories = element.getAttribute('categories');
 
   if (!token) throw new Error('Token is required for this component');
@@ -46,9 +49,12 @@ const CreateShadowDom = async ({
   const dataSlider = document.createElement('div');
   const slides: HTMLElement[] = await FeedsSlides.CreateElement({
     token,
+    type,
     categories,
     theme,
   });
+
+  console.log(slides);
 
   if (!slides) return;
 

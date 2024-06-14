@@ -1,13 +1,17 @@
 import { Tokens } from '@universityofmaryland/variables';
 import {
+  AnimationCarouselOverlay,
   AnimationCarouselBlocks,
   AnimationIndicator,
+  ButtonFullScreen,
   LayoutImage,
 } from 'macros';
+import fullScreen from 'macros/buttons/full-screen';
 
 type TypeCarouselMultipleProps = {
   images: HTMLImageElement[];
   theme?: string | null;
+  isFullScreenOption?: boolean;
 };
 
 const { Colors } = Tokens;
@@ -26,6 +30,7 @@ const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-multiple-button';
 const OVERWRITE_LAYOUT_IMAGE = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${LayoutImage.Elements.container}`;
 
 const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
+const OVERWRITE_FULL_SCREEN_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${fullScreen.Elements.button}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_SLIDER_BUTTON}`;
@@ -44,6 +49,28 @@ const OverwriteThemeDark = `
     fill: ${Colors.white};
   }
 `;
+
+console.log(OVERWRITE_LAYOUT_IMAGE);
+
+// prettier-ignore
+const OverwriteFullScreenOption = `
+  ${OVERWRITE_FULL_SCREEN_BUTTON} {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
+  ${OVERWRITE_FULL_SCREEN_BUTTON}:focus {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  ${OVERWRITE_LAYOUT_IMAGE}:focus-within .${fullScreen.Elements.button},
+  ${OVERWRITE_LAYOUT_IMAGE}:hover .${fullScreen.Elements.button} {
+    visibility: visible;
+    opacity: 1;
+  }
+`
 
 // prettier-ignore
 const OverwriteImageStyles = `
@@ -85,30 +112,46 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
     overflow: hidden;
   }
 
-  ${LayoutImage.Styles}
   ${AnimationIndicator.Styles}
   ${AnimationCarouselBlocks.Styles}
+  ${AnimationCarouselOverlay.Styles}
+  ${ButtonFullScreen.Styles}
+  ${LayoutImage.Styles}
   ${OverwriteImageStyles}
   ${OverwriteCarouselStyles}
+  ${OverwriteFullScreenOption}
   ${OverwriteThemeDark}
 `;
 
 const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
   (() => {
-    const { images, theme } = props;
+    const { images, theme, isFullScreenOption } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const clonedImages = images.map((image) =>
       image.cloneNode(true),
     ) as HTMLImageElement[];
-
+    const overlayCarousel = AnimationCarouselOverlay.CreateElement({
+      images,
+    });
     const slide = document.createElement('div');
-    const blocks = clonedImages.map((image) =>
-      LayoutImage.CreateElement({
+    const blocks = clonedImages.map((image, index) => {
+      const block = LayoutImage.CreateElement({
         image,
         showCaption: true,
-      }),
-    );
+      });
+
+      if (isFullScreenOption) {
+        block.appendChild(
+          ButtonFullScreen.CreateElement({
+            callback: overlayCarousel.events.setFullScreen,
+            index,
+          }),
+        );
+      }
+
+      return block;
+    });
 
     const carousel = AnimationCarouselBlocks.CreateElement({
       blocks,
@@ -136,6 +179,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
 
     return {
       element: elementDeclaration,
+      overlay: isFullScreenOption ? overlayCarousel.element : null,
       events: {
         SetEventReize: carousel.events.resize,
       },

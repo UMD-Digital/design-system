@@ -13,6 +13,7 @@ const { ImageHasAlt } = MarkupValidate;
 const ELEMENT_NAME = 'umd-element-carousel-multiple-image';
 const ATTRIBUTE_RESIZE = 'resize';
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_FULLSCREEN = 'option-full-screen';
 
 const SLOTS = {
   IMAGES: 'images',
@@ -35,6 +36,8 @@ const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME);
+  const isFullScreenOption =
+    element.getAttribute(ATTRIBUTE_FULLSCREEN) !== 'false';
   const slottedImages = Array.from(
     element.querySelectorAll(`[slot="${SLOTS.IMAGES}"] > *`),
   ) as HTMLImageElement[];
@@ -53,10 +56,12 @@ const CreateShadowDom = ({
   const carousel = CarouselImageMultiple.CreateElement({
     images,
     theme,
+    isFullScreenOption,
   });
 
   element._elementRef = carousel;
   shadow.appendChild(styleTemplate.content.cloneNode(true));
+  if (carousel.overlay) shadow.appendChild(carousel.overlay);
   shadow.appendChild(carousel.element);
 };
 

@@ -23,7 +23,7 @@ const OVERWRITE_STICKY_LAST_STICKY = `.${ELEMENT_STICKY_CONTAINER}[${ATTRIBUTE_S
 
 // prettier-ignore
 const OverwriteStickyLast = `
-  @media (min-width: ${Breakpoints.tablet.min}) {
+  @media (min-width: ${Breakpoints.highDef.min}) {
     ${OVERWRITE_STICKY_LAST_STICKY} {
        order: 2;
      }
@@ -32,7 +32,7 @@ const OverwriteStickyLast = `
 
 // prettier-ignore
 const ColumnSticky = `
-  @media (min-width: ${Breakpoints.tablet.min}) {
+  @media (min-width: ${Breakpoints.highDef.min}) {
     .${ELEMENT_STICKY_COLUMN} {
       position: sticky;
       top: 32px;
@@ -54,6 +54,13 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
 
   .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
     align-items: start;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: ${Breakpoints.highDef.min}) {
+    .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   ${ColumnSticky}

@@ -1,9 +1,9 @@
 import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
 import { AssetIcon, Styles } from 'utilities';
 import {
+  AnimationCarouselOverlay,
   AnimationCarouselImage,
   AnimationIndicator,
-  LayoutFixedFullScreen,
   LayoutImage,
 } from 'macros';
 
@@ -236,9 +236,9 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   }
 
   ${LayoutImage.Styles}
-  ${LayoutFixedFullScreen.Styles}
   ${AnimationIndicator.Styles}
   ${AnimationCarouselImage.Styles}
+  ${AnimationCarouselOverlay.Styles}
   ${ImageContainerStyles}
   ${TextContainerStyles}
   ${FullScreenButtonStyles}
@@ -286,7 +286,7 @@ const CreateTextContainer = ({
 
 const CreateImageContainer = ({
   image,
-  isFullScreenOption = true,
+  isFullScreenOption,
   setFullScreen,
   index,
 }: TypeImageContainerProps) => {
@@ -328,6 +328,7 @@ const CreateSlide = (props: TypeCarouselSlideProps) => {
     const reference = image.getAttribute(ATTRIBUTE_REFERENCE);
     const slide = document.createElement('div');
     const imageContainer = CreateImageContainer({
+      ...props,
       image,
       setFullScreen,
       index,
@@ -342,57 +343,21 @@ const CreateSlide = (props: TypeCarouselSlideProps) => {
   });
 };
 
-const CreateOverlaySlide = ({ images }: TypeCarouselSlideProps) =>
-  images.map((image) => {
-    const slide = document.createElement('div');
-    const imageContainer = document.createElement('div');
-    const imageBlock = LayoutImage.CreateElement({
-      image,
-      showCaption: true,
-    });
-
-    imageContainer.classList.add(ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER);
-    imageContainer.appendChild(imageBlock);
-
-    slide.appendChild(imageContainer);
-    slide.classList.add(ELEMENT_SLIDE);
-
-    return slide;
-  });
-
 const CreateCarouselImageStandardElement = (
   props: TypeCarouselImageStandardProps,
 ) =>
   (() => {
-    const { images, theme } = props;
+    const { images, theme, isFullScreenOption } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const elementIndicator = document.createElement('div');
-    const setFullScreen = (index: number) => {
-      let canMove = true;
-
-      const checkKeyEvents = (event: KeyboardEvent) => {
-        if (!canMove) return;
-        canMove = false;
-        if (event.key == 'ArrowLeft') overlayCarousel.events.EventSlideLeft();
-        if (event.key == 'ArrowRight') overlayCarousel.events.EventSlideRight();
-
-        setTimeout(() => {
-          canMove = true;
-        }, 700);
-      };
-
-      overlayCarousel.events.EventMoveTo(index);
-      setTimeout(() => fixedFullScreen.events.show(), 100);
-
-      setTimeout(() => {
-        overlayCarousel.events.EventResize();
-      }, 100);
-
-      isFullScreenEvents = window.addEventListener('keyup', checkKeyEvents);
-    };
-    const slides = CreateSlide({ ...props, setFullScreen });
-    const overlaySlides = CreateOverlaySlide({ ...props, setFullScreen });
+    const overlayCarousel = AnimationCarouselOverlay.CreateElement({
+      images,
+    });
+    const slides = CreateSlide({
+      ...props,
+      setFullScreen: overlayCarousel.events.setFullScreen,
+    });
     const carousel = AnimationCarouselImage.CreateElement({
       slides,
       callback: (activeIndex) => {
@@ -400,25 +365,12 @@ const CreateCarouselImageStandardElement = (
       },
       maxHeight: 500,
     });
-    const overlayCarousel = AnimationCarouselImage.CreateElement({
-      slides: overlaySlides,
-      maxHeight: (window.innerHeight / 10) * 8,
-    });
-
-    const fixedFullScreen = LayoutFixedFullScreen.CreateElement({
-      content: overlayCarousel.element,
-      callback: () => {
-        if (isFullScreenEvents)
-          window.removeEventListener('keyup', isFullScreenEvents);
-      },
-    });
 
     const indicator = AnimationIndicator.CreateElement({
       count: images.length || 0,
       callback: carousel.events.EventMoveTo,
       theme: theme || 'light',
     });
-    let isFullScreenEvents: any = null;
 
     elementIndicator.classList.add(ELEMENT_CAROUSEL_INDICATOR_WRAPPER);
     elementIndicator.appendChild(indicator.element);
@@ -435,7 +387,7 @@ const CreateCarouselImageStandardElement = (
 
     return {
       element: elementDeclaration,
-      overlay: fixedFullScreen ? fixedFullScreen.element : null,
+      overlay: isFullScreenOption ? overlayCarousel.element : null,
       events: {
         SetEventReize: carousel.events.EventResize,
       },

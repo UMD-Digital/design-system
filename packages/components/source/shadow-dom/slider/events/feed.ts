@@ -54,8 +54,6 @@ const CreateShadowDom = async ({
     theme,
   });
 
-  console.log(slides);
-
   if (!slides) return;
 
   slides.forEach((slide) => dataSlider.appendChild(slide));

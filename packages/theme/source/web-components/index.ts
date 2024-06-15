@@ -20,6 +20,7 @@ import ScrollTop from './elements/scroll-top';
 import SectionIntro from './elements/section-intro';
 import Sliders from './elements/sliders';
 import SocialSharing from './elements/social-sharing';
+import Tabs from './elements/tabs';
 
 export default {
   ...Accordion,
@@ -44,4 +45,5 @@ export default {
   ...SectionIntro,
   ...Sliders,
   ...SocialSharing,
+  ...Tabs,
 };

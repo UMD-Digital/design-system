@@ -42,6 +42,7 @@ import SliderEventFeed from './slider/events/feed';
 import SocialSharing from './social-sharing';
 import Stat from './stat';
 import StickyColumns from './stickly-columns';
+import Tabs from './tabs';
 
 export {
   Accordion,
@@ -88,4 +89,5 @@ export {
   SocialSharing,
   Stat,
   StickyColumns,
+  Tabs,
 };

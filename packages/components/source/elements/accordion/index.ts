@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { MarkupCreate, Performance, Styles } from 'utilities';
+import { Performance, Styles } from 'utilities';
 
 type TypeHeadlineText = { headline?: HTMLElement | null };
 type TypeBodyText = { body?: HTMLElement | null };

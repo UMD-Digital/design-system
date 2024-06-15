@@ -54,6 +54,7 @@ import SliderEvents from './slider/events';
 import SocialSharing from './social-sharing';
 import Stat from './stat';
 import StickyColumns from './sticky-columns';
+import Tabs from './tabs';
 
 export {
   Accordion,
@@ -112,4 +113,5 @@ export {
   SocialSharing,
   Stat,
   StickyColumns,
+  Tabs,
 };

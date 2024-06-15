@@ -41,9 +41,12 @@ const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
     tabs,
   });
 
+  if (!tabsElement) return;
+
   element._elementRef = tabsElement;
   shadow.appendChild(styleTemplate.content.cloneNode(true));
   shadow.appendChild(tabsElement.element);
+  tabsElement.events.load();
 };
 
 class UMDTabsElement extends HTMLElement {
@@ -52,6 +55,7 @@ class UMDTabsElement extends HTMLElement {
     element: HTMLDivElement;
     events: {
       resize: () => void;
+      load: () => void;
     };
   } | null;
 

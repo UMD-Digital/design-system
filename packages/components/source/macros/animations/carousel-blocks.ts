@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon, EventsUtility, Performance } from 'utilities';
+import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -53,6 +53,7 @@ type TypeEventScroll = TypeHelpers & {
 
 const { Debounce } = Performance;
 const { Colors, Spacing } = Tokens;
+const { ConvertPixelStringToNumber } = Styles;
 
 const ANIMATION_DURATION = 500;
 const HINT_MULTIPLER_SIZING = 0.2;
@@ -286,7 +287,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       desktopCount: 2,
       desktopBreakpoint: 1200,
       maxCount: 2,
-      blockGap: parseInt(Spacing.md.replace('px', '')),
+      blockGap: ConvertPixelStringToNumber(Spacing.md),
       minBlockHeightMobile: 360,
       minBlockHeightTablet: 400,
     };

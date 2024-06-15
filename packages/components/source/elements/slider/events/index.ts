@@ -30,7 +30,7 @@ type TypeSliderEventProps = TypeSliderEventSlideContentProps &
   };
 
 const { Debounce } = Performance;
-const { ConvertJSSObjectToStyles } = Styles;
+const { ConvertJSSObjectToStyles, ConvertPixelStringToNumber } = Styles;
 const { Colors, Spacing } = Tokens;
 const { SansLarger } = Typography;
 
@@ -518,7 +518,7 @@ const SizeDatesElements = ({
       })[0];
       const height =
         maxHeightElement.offsetHeight +
-        parseInt(maxHeightElement.style.marginTop.replace('px', ''));
+        ConvertPixelStringToNumber(maxHeightElement.style.marginTop);
 
       sliderWrapper.style.height = `${height}px`;
     };

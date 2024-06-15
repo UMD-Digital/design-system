@@ -41,6 +41,13 @@ const OVERWRITE_VERTICAL_LAYOUT_ACTIVE_BUTTON = `${OVERWRITE_VERTICAL_LAYOUT_CON
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CONTAINER}${IS_THEME_DARK}`;
 
 // prettier-ignore
+const OverwriteDarkTheme = `
+  ${OVERWRITE_THEME_DARK_CONTAINER} * {
+    color: ${Colors.white};
+  }
+`;
+
+// prettier-ignore
 const ContentStyles = `
   .${ELEMENT_CONTENT} {
     display: none;
@@ -126,6 +133,7 @@ const STYLES_TABS_ELEMENT = `
   ${ContainerStyles}
   ${ButtonStyles}
   ${ContentStyles}
+  ${OverwriteDarkTheme}
 `;
 
 const CreateDomStrcuture = ({

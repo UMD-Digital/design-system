@@ -5,9 +5,9 @@ declare global {
 }
 
 import { MarkupCreate, Styles } from 'utilities';
-import { Tabs } from 'elements';
+import { Tabs, TabsElements } from 'elements';
 
-const { SlotOberserver } = MarkupCreate;
+const { SlotOberserver, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-tabs';
 const ATTRIBUTE_RESIZE = 'resize';
@@ -30,23 +30,36 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const slottedTabs = Array.from(
-    element.querySelectorAll(`[slot="${SLOTS.TABS}"] > *`),
-  ) as HTMLElement[];
+  const slot = Node.slot({ type: SLOTS.TABS });
+  const markup = element.querySelector(`[slot="${SLOTS.TABS}"]`);
 
-  const tabs = slottedTabs.map((tab) => tab.cloneNode(true)) as HTMLElement[];
+  const modifyDom = () => {
+    if (!markup) return;
 
-  const tabsElement = Tabs.CreateElement({
-    theme,
-    tabs,
-  });
+    const updateDom = TabsElements.DomStrcuture.ModifyElement({
+      markup,
+    });
 
-  if (!tabsElement) return;
+    markup.innerHTML = '';
+    markup.appendChild(updateDom);
+  };
+  const createTabs = () => {
+    const tabsElement = Tabs.CreateElement({
+      theme,
+      tabsContainer: markup?.children[0] as HTMLElement,
+      shadowContent: slot,
+    });
 
-  element._elementRef = tabsElement;
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(tabsElement.element);
-  tabsElement.events.load();
+    if (!tabsElement) return;
+
+    element._elementRef = tabsElement;
+    shadow.appendChild(styleTemplate.content.cloneNode(true));
+    shadow.appendChild(tabsElement.element);
+    tabsElement.events.load();
+  };
+
+  modifyDom();
+  createTabs();
 };
 
 class UMDTabsElement extends HTMLElement {

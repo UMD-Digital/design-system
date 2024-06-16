@@ -55,6 +55,7 @@ import SocialSharing from './social-sharing';
 import Stat from './stat';
 import StickyColumns from './sticky-columns';
 import Tabs from './tabs';
+import TabsElements from './tabs/elements';
 
 export {
   Accordion,
@@ -114,4 +115,5 @@ export {
   Stat,
   StickyColumns,
   Tabs,
+  TabsElements,
 };

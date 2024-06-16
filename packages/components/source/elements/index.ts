@@ -8,6 +8,7 @@ import CardList from './card/list';
 import CardIconBlock from './card-icon/block';
 import CardOverlay from './card-overlay';
 import CardOverlayImage from './card-overlay/image';
+import Carousel from './carousel/default';
 import CarouselCards from './carousel/cards';
 import CarouselImageStandard from './carousel/image/standard';
 import CarouselImageMultiple from './carousel/image/multiple';
@@ -68,6 +69,7 @@ export {
   CardIconBlock,
   CardOverlay,
   CardOverlayImage,
+  Carousel,
   CarouselCards,
   CarouselImageStandard,
   CarouselImageMultiple,

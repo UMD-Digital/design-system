@@ -8,6 +8,7 @@ import CallToAction from './call-to-action';
 import Card from './card/default';
 import CardIcon from './card/icon';
 import CardOverlay from './card/overlay';
+import Carousel from './carousel/default';
 import CarouselCards from './carousel/cards';
 import CarouselImageStandard from './carousel/image/standard';
 import CarouselImageMultiple from './carousel/image/multiple';
@@ -55,6 +56,7 @@ export {
   CardIcon,
   Card,
   CardOverlay,
+  Carousel,
   CarouselCards,
   CarouselImageStandard,
   CarouselImageMultiple,

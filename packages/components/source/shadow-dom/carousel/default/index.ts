@@ -28,12 +28,21 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
+  const theme = element.getAttribute('theme');
+  const attributeLeftButton = element.getAttribute('left-button');
+  const attributeRightButton = element.getAttribute('right-button');
   const slide = element.querySelector(
     `[slot="${SLOTS.BLOCKS}"]`,
   ) as HTMLElement;
   const blocks = Array.from(
     slide.querySelectorAll(':scope > *'),
   ) as HTMLElement[];
+
+  let hasLeftButton = true;
+  let hasRightButton = true;
+
+  if (attributeLeftButton === 'false') hasLeftButton = false;
+  if (attributeRightButton === 'false') hasRightButton = false;
 
   const createCardShadowRef = () => {
     const slot = Node.slot({ type: SLOTS.BLOCKS });
@@ -49,6 +58,9 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
     slide,
     shadowRef,
     blocks,
+    theme,
+    hasLeftButton,
+    hasRightButton,
   });
 
   element._elementRef = carousel;

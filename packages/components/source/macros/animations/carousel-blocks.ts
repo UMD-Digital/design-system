@@ -12,6 +12,8 @@ type TypeDisplayLogic = {
   blockGap: number;
   minBlockHeightMobile: number;
   minBlockHeightTablet: number;
+  hasRightButton: boolean;
+  hasLeftButton: boolean;
 };
 
 type TypeDisplayLogicProps = Partial<TypeDisplayLogic>;
@@ -25,7 +27,7 @@ type TypeAnimationCarouselBlockProps = {
 };
 
 type TypeHelpers = {
-  displayLogic: Record<string, number>;
+  displayLogic: Record<string, number | boolean>;
   GetElements: {
     container: () => HTMLDivElement;
     slide: () => HTMLElement;
@@ -65,6 +67,8 @@ const ELEMENT_ANIMATION_CAROUSEL_CONTAINER =
   'animation-carousel-block-container';
 const ELEMENT_ANIMATION_CAROUSEL_WRAPPER = 'animation-carousel-block-wrapper';
 const ELEMENT_ANIMATION_CAROUSEL_BUTTON = `animation-carousel-block-button`;
+const ELEMENT_ANIMATION_CAROUSEL_NEXT = `animation-carousel-block-button-next`;
+const ELEMENT_ANIMATION_CAROUSEL_PREVIOUS = `animation-carousel-block-button-previous`;
 
 // prettier-ignore
 const ButtonStyles = `
@@ -90,7 +94,7 @@ const ButtonStyles = `
     fill: ${Colors.white};
   }
 
-  .${ELEMENT_ANIMATION_CAROUSEL_BUTTON}:last-of-type svg {
+  .${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS} svg {
     transform: rotate(180deg);
   }
 `;
@@ -140,7 +144,8 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
 
   if (!elementSize) return;
 
-  const elementSizeWithSpace = elementSize + displayLogic.blockGap * 2;
+  const displayGap = displayLogic.blockGap as number;
+  const elementSizeWithSpace = elementSize + displayGap * 2;
   const temporaryCarouselSize = carouselSize + elementSizeWithSpace;
 
   const animateRight = () => {
@@ -250,8 +255,13 @@ const CreateButton = ({
   button.classList.add(ELEMENT_ANIMATION_CAROUSEL_BUTTON);
   button.innerHTML = AssetIcon.FORWARD_ARROW;
 
+  if (isRight) {
+    button.classList.add(ELEMENT_ANIMATION_CAROUSEL_NEXT);
+  }
+
   if (!isRight) {
     button.setAttribute('aria-label', 'Previous');
+    button.classList.add(ELEMENT_ANIMATION_CAROUSEL_PREVIOUS);
   }
 
   button.addEventListener('click', () => {
@@ -290,12 +300,14 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       blockGap: ConvertPixelStringToNumber(Spacing.md),
       minBlockHeightMobile: 360,
       minBlockHeightTablet: 400,
+      hasRightButton: true,
+      hasLeftButton: true,
     };
 
     if (overwriteDisplayLogic) {
       Object.keys(overwriteDisplayLogic).forEach((key) => {
         const refKey = key as keyof typeof displayLogic;
-        const refValue = overwriteDisplayLogic[refKey] as number;
+        const refValue = overwriteDisplayLogic[refKey] as never;
 
         if (displayLogic[refKey]) {
           displayLogic[refKey] = refValue;
@@ -341,20 +353,18 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     };
 
     const GetSizes = {
-      blockWidth: function () {
-        if (this) {
-          const isShowHint = GetOptions.shouldShowHint();
-          const containerWidth = container.offsetWidth;
-          const count = GetOptions.showCount();
+      blockWidth: () => {
+        const isShowHint = GetOptions.shouldShowHint();
+        const containerWidth = container.offsetWidth;
+        const count = GetOptions.showCount();
 
-          if (isShowHint) {
-            const hintElementSize = containerWidth * HINT_MULTIPLER_SIZING;
+        if (isShowHint) {
+          const hintElementSize = containerWidth * HINT_MULTIPLER_SIZING;
 
-            return (containerWidth - hintElementSize) / count;
-          }
-
-          return containerWidth / count;
+          return (containerWidth - hintElementSize) / count;
         }
+
+        return containerWidth / count;
       },
       carouselWidth: () => {
         const isShowHint = GetOptions.shouldShowHint();
@@ -365,10 +375,10 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
         if (isShowHint) {
           const updatedCount = count + 1;
-          return elementSize * updatedCount + displayLogic.blockGap;
+          return elementSize * updatedCount;
         }
 
-        return elementSize * count + displayLogic.blockGap;
+        return elementSize * count;
       },
     };
 
@@ -455,19 +465,24 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         }),
     };
 
-    container.appendChild(
-      CreateButton({
-        EventMoveForward: Event.forward,
-        EventMoveBackward: Event.backward,
-      }),
-    );
-    container.appendChild(
-      CreateButton({
-        EventMoveForward: Event.forward,
-        EventMoveBackward: Event.backward,
-        isRight: false,
-      }),
-    );
+    if (displayLogic.hasRightButton) {
+      container.appendChild(
+        CreateButton({
+          EventMoveForward: Event.forward,
+          EventMoveBackward: Event.backward,
+        }),
+      );
+    }
+
+    if (displayLogic.hasLeftButton) {
+      container.appendChild(
+        CreateButton({
+          EventMoveForward: Event.forward,
+          EventMoveBackward: Event.backward,
+          isRight: false,
+        }),
+      );
+    }
 
     wrapper.classList.add(ELEMENT_ANIMATION_CAROUSEL_WRAPPER);
 
@@ -502,5 +517,7 @@ export default {
     declaration: ELEMENT_ANIMATION_CAROUSEL_DECLARATION,
     container: ELEMENT_ANIMATION_CAROUSEL_CONTAINER,
     button: ELEMENT_ANIMATION_CAROUSEL_BUTTON,
+    nextButton: ELEMENT_ANIMATION_CAROUSEL_NEXT,
+    previousButton: ELEMENT_ANIMATION_CAROUSEL_PREVIOUS,
   },
 };

@@ -14,6 +14,7 @@ type TypeDisplayLogic = {
   minBlockHeightTablet: number;
   hasRightButton: boolean;
   hasLeftButton: boolean;
+  showMobileHint: boolean;
 };
 
 type TypeDisplayLogicProps = Partial<TypeDisplayLogic>;
@@ -36,16 +37,16 @@ type TypeHelpers = {
   GetOptions: {
     isTabletView: () => boolean;
     showCount: () => number;
-    shouldShowHint: () => boolean;
+    shouldShowMobileHint: () => boolean;
   };
   GetSizes: {
     blockWidth: () => number | undefined;
-    carouselWidth: () => number;
+    carouselWidthBasedOnBlock: () => number;
   };
   SetLayout: {
     cardHeight: () => void;
     blockWidth: () => void;
-    carouselWidth: () => void;
+    carouselWidthBasedOnBlock: () => void;
   };
 };
 
@@ -137,10 +138,10 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     carouselSlider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
 
-  const isShowHint = GetOptions.shouldShowHint();
+  const isShowHint = GetOptions.shouldShowMobileHint();
   const elementCount = GetOptions.showCount();
   const elementSize = GetSizes.blockWidth();
-  const carouselSize = GetSizes.carouselWidth();
+  const carouselSize = GetSizes.carouselWidthBasedOnBlock();
 
   if (!elementSize) return;
 
@@ -171,7 +172,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     setTimeout(() => {
       carouselSlider.removeChild(firstElement);
 
-      SetLayout.carouselWidth();
+      SetLayout.carouselWidthBasedOnBlock();
     }, ANIMATION_DURATION - 10);
   };
 
@@ -200,7 +201,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
         hintElementSibiling.style.display = 'none';
       }
 
-      SetLayout.carouselWidth();
+      SetLayout.carouselWidthBasedOnBlock();
     }, ANIMATION_DURATION - 10);
   };
 
@@ -279,13 +280,7 @@ const CreateButton = ({
 
 const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
   (() => {
-    const {
-      slide,
-      shadowRef,
-      blocks,
-      showHint = true,
-      overwriteDisplayLogic,
-    } = props;
+    const { slide, shadowRef, blocks, overwriteDisplayLogic } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
@@ -302,6 +297,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       minBlockHeightTablet: 400,
       hasRightButton: true,
       hasLeftButton: true,
+      showMobileHint: false,
     };
 
     if (overwriteDisplayLogic) {
@@ -309,9 +305,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         const refKey = key as keyof typeof displayLogic;
         const refValue = overwriteDisplayLogic[refKey] as never;
 
-        if (displayLogic[refKey]) {
-          displayLogic[refKey] = refValue;
-        }
+        displayLogic[refKey] = refValue;
       });
     }
 
@@ -322,39 +316,51 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     };
 
     const GetOptions = {
-      isMobileView: () =>
-        container.offsetWidth <= displayLogic.mobileBreakpoint,
-      isTabletView: () =>
-        container.offsetWidth > displayLogic.mobileBreakpoint &&
-        container.offsetWidth <= displayLogic.tabletBreakpoint,
-      isDesktopView: () =>
-        container.offsetWidth > displayLogic.tabletBreakpoint &&
-        container.offsetWidth <= displayLogic.desktopBreakpoint,
-      isHighView: () => container.offsetWidth > displayLogic.desktopBreakpoint,
-      showCount: function () {
-        if (this) {
-          const isMobile = this.isMobileView();
-          const isTablet = this.isTabletView();
-          const isDesktop = this.isDesktopView();
-          const isHighDef = this.isHighView();
-          let count = 1;
-
-          if (isMobile) count = displayLogic.mobileCount;
-          if (isTablet) count = displayLogic.tabletCount;
-          if (isDesktop) count = displayLogic.desktopCount;
-          if (isHighDef) count = displayLogic.maxCount;
-
-          return count;
-        } else {
-          return 1;
-        }
+      isMobileView: () => {
+        return (
+          GetSizes.carouselWidthMinusGap() <= displayLogic.mobileBreakpoint
+        );
       },
-      shouldShowHint: () => showHint && GetOptions.isMobileView(),
+      isTabletView: () => {
+        return (
+          GetSizes.carouselWidthMinusGap() > displayLogic.mobileBreakpoint &&
+          GetSizes.carouselWidthMinusGap() <= displayLogic.tabletBreakpoint
+        );
+      },
+
+      isDesktopView: () => {
+        return (
+          GetSizes.carouselWidthMinusGap() > displayLogic.tabletBreakpoint &&
+          GetSizes.carouselWidthMinusGap() <= displayLogic.desktopBreakpoint
+        );
+      },
+      isHighView: () => {
+        return (
+          GetSizes.carouselWidthMinusGap() > displayLogic.desktopBreakpoint
+        );
+      },
+      showCount: () => {
+        const isMobile = GetOptions.isMobileView();
+        const isTablet = GetOptions.isTabletView();
+        const isDesktop = GetOptions.isDesktopView();
+        const isHighDef = GetOptions.isHighView();
+        let count = 1;
+
+        if (isMobile) count = displayLogic.mobileCount;
+        if (isTablet) count = displayLogic.tabletCount;
+        if (isDesktop) count = displayLogic.desktopCount;
+        if (isHighDef) count = displayLogic.maxCount;
+
+        return count;
+      },
+      shouldShowMobileHint: () => {
+        return displayLogic.showMobileHint && GetOptions.isMobileView();
+      },
     };
 
     const GetSizes = {
       blockWidth: () => {
-        const isShowHint = GetOptions.shouldShowHint();
+        const isShowHint = GetOptions.shouldShowMobileHint();
         const containerWidth = container.offsetWidth;
         const count = GetOptions.showCount();
 
@@ -366,8 +372,8 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
         return containerWidth / count;
       },
-      carouselWidth: () => {
-        const isShowHint = GetOptions.shouldShowHint();
+      carouselWidthBasedOnBlock: () => {
+        const isShowHint = GetOptions.shouldShowMobileHint();
         const count = GetOptions.showCount();
         const elementSize = GetSizes.blockWidth();
 
@@ -379,6 +385,9 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         }
 
         return elementSize * count;
+      },
+      carouselWidthMinusGap: () => {
+        return container.offsetWidth - displayLogic.blockGap;
       },
     };
 
@@ -404,8 +413,8 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
           block.style.width = `${elementSize}px`;
         });
       },
-      carouselWidth: () => {
-        const elementSize = GetSizes.carouselWidth();
+      carouselWidthBasedOnBlock: () => {
+        const elementSize = GetSizes.carouselWidthBasedOnBlock();
 
         slide.style.width = `${elementSize}px`;
         slide.style.transition = 'none';
@@ -422,7 +431,9 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
           }
         });
 
-        if (showHint) blocks[1].style.display = 'block';
+        if (displayLogic.showMobileHint) {
+          blocks[1].style.display = 'block';
+        }
       },
     };
 
@@ -437,7 +448,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       resize: () => {
         SetLayout.blockDisplay();
         SetLayout.blockWidth();
-        SetLayout.carouselWidth();
+        SetLayout.carouselWidthBasedOnBlock();
         ButtonDisplay({ ...Event.helpers });
 
         setTimeout(() => {
@@ -499,7 +510,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(Event.resize, 10));
+    window.addEventListener('resize', Debounce(Event.resize, 5));
 
     return {
       element: declaration,

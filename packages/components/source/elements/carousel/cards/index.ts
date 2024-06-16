@@ -288,6 +288,9 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     const carouselContainer = AnimationCarouselBlocks.CreateElement({
       ...props,
       blocks: props.cards,
+      overwriteDisplayLogic: {
+        showMobileHint: true,
+      },
     });
     const introContainer = CreateIntro(props);
 

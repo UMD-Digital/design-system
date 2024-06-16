@@ -6,8 +6,10 @@ type TypeCarouselRequirements = {
   shadowRef?: HTMLElement;
   blocks: HTMLElement[];
   theme?: string | null;
+  gridGap?: string | null;
   hasLeftButton?: boolean;
   hasRightButton?: boolean;
+  mobileHint?: boolean;
 };
 
 const { Colors } = Tokens;
@@ -81,22 +83,39 @@ const STYLES_CAROUSEL_ELEMENT = `
 
 const CreateCarouselElement = (props: TypeCarouselRequirements) =>
   (() => {
-    const { theme, hasLeftButton = true, hasRightButton = true } = props;
+    const {
+      theme,
+      gridGap,
+      hasLeftButton = true,
+      hasRightButton = true,
+      mobileHint = true,
+    } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
+    const overwriteDisplayLogic: Record<string, number | boolean> = {
+      mobileBreakpoint: 600,
+      tabletBreakpoint: 1000,
+      desktopBreakpoint: 1400,
+      desktopCount: 3,
+      maxCount: 4,
+      hasLeftButton,
+      hasRightButton,
+      showMobileHint: true,
+    };
+
+    if (gridGap) {
+      overwriteDisplayLogic.blockGap = parseInt(gridGap);
+      overwriteDisplayLogic.tabletBreakpoint = 1000 + parseInt(gridGap);
+      overwriteDisplayLogic.desktopBreakpoint = 1400 + parseInt(gridGap);
+    }
+
+    if (!mobileHint) overwriteDisplayLogic.showMobileHint = false;
+
     const carouselContainer = AnimationCarouselBlocks.CreateElement({
       ...props,
       blocks: props.blocks,
-      overwriteDisplayLogic: {
-        mobileBreakpoint: 600,
-        tabletBreakpoint: 900,
-        desktopCount: 3,
-        desktopBreakpoint: 1400,
-        maxCount: 4,
-        hasLeftButton,
-        hasRightButton,
-      },
+      overwriteDisplayLogic,
     });
 
     wrapper.appendChild(carouselContainer.element);

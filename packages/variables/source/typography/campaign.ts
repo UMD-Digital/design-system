@@ -1,8 +1,8 @@
 import { FontFamily, FontSize, FontWeight } from '../tokens/fonts';
 import { Queries } from '../tokens/breakpoints';
 
-const breakpointLarge = Queries.large.max;
-const breakpointDesktop = Queries.desktop.max;
+const breakpointLarge = Queries.large.min;
+const breakpointDesktop = Queries.desktop.min;
 
 const FontBase = {
   fontFamily: FontFamily['campaign'],

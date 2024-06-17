@@ -2,8 +2,8 @@ import { FontFamily, FontSize, FontWeight } from '../tokens/fonts';
 import { Queries } from '../tokens/breakpoints';
 import { Colors } from '../tokens/colors';
 
-const breakpointMobile = Queries.medium.max;
-const breakpointDesktop = Queries.desktop.max;
+const breakpointLarge = Queries.large.min;
+const breakpointDesktop = Queries.desktop.min;
 
 export const Eyebrow = {
   fontWeight: 700,
@@ -16,17 +16,17 @@ export const Eyebrow = {
 
 export const LabelMedium = {
   fontFamily: FontFamily['sans'],
-  fontSize: FontSize['base'],
-  letterSpacing: '0.16em',
-  lineHeight: `1.5em`,
+  fontSize: FontSize['sm'],
+  lineHeight: `1.42em`,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['sm']} + 0.16vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    fontSize: FontSize['sm'],
-    lineHeight: `1.42em`,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['base'],
+    letterSpacing: '0.16em',
+    lineHeight: `1.5em`,
   },
 };
 
@@ -39,18 +39,18 @@ export const LabelSmall = {
 
 export const InterativeMedium = {
   fontFamily: FontFamily['sans'],
-  fontSize: FontSize['lg'],
-  fontWeight: FontWeight['bold'],
-  letterSpacing: '-0.01em',
-  lineHeight: `1.11em`,
+  fontSize: FontSize['base'],
+  lineHeight: `1.125em`,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['base']} + 0.16vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    fontSize: FontSize['base'],
-    lineHeight: `1.125em`,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['lg'],
+    fontWeight: FontWeight['bold'],
+    letterSpacing: '-0.01em',
+    lineHeight: `1.11em`,
   },
 };
 
@@ -64,33 +64,33 @@ export const InterativeSmall = {
 
 export const StatisticsLarge = {
   fontFamily: FontFamily['campaign'],
-  fontSize: FontSize['max'],
-  fontStyle: 'italic',
+  fontSize: FontSize['9xl'],
   fontWeight: FontWeight['extraBold'],
+  fontStyle: 'italic',
   lineHeight: '1',
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['9xl']} + 3.33vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    fontSize: FontSize['9xl'],
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['max'],
   },
 };
 
 export const StatisticsMedium = {
   fontFamily: FontFamily['campaign'],
-  fontSize: FontSize['10xl'],
+  fontSize: FontSize['7xl'],
   fontStyle: 'italic',
   fontWeight: FontWeight['extraBold'],
   lineHeight: '1',
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['7xl']} + 1.33vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    fontSize: FontSize['7xl'],
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['10xl'],
   },
 };
 

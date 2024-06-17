@@ -1,8 +1,8 @@
 import { FontFamily, FontSize, FontWeight } from '../tokens/fonts';
 import { Queries } from '../tokens/breakpoints';
 
-const breakpointMobile = Queries.medium.max;
-const breakpointDesktop = Queries.desktop.max;
+const breakpointLarge = Queries.large.min;
+const breakpointDesktop = Queries.desktop.min;
 
 const SizeExtraLarge = {
   fontSize: FontSize['4xl'],
@@ -36,58 +36,49 @@ const SizeMin = {
 
 export const SansMaxium = {
   fontFamily: FontFamily['sans'],
-  fontSize: FontSize['8xl'],
   fontWeight: FontWeight['bold'],
-  lineHeight: `1.05em`,
-
-  [`@media (${breakpointDesktop})`]: {
-    fontSize: `calc(${FontSize['4xl']} + 3.33vw)`,
-  },
-
-  [`@media (${breakpointMobile})`]: {
-    ...SizeExtraLarge,
-  },
+  ...SizeExtraLarge,
 };
 
 export const SansLargest = {
   fontFamily: FontFamily['sans'],
-  fontSize: FontSize['5xl'],
   fontWeight: FontWeight['bold'],
-  lineHeight: `1.04em`,
+  ...SizeLarger,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['3xl']} + 2vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeLarger,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['5xl'],
+    lineHeight: `1.04em`,
   },
 };
 
 export const SansExtraLarge = {
   fontFamily: FontFamily['sans'],
-  ...SizeExtraLarge,
+  ...SizeLarge,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['lg']} + 1.16vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeLarge,
+  [`@media (${breakpointDesktop})`]: {
+    ...SizeExtraLarge,
   },
 };
 
 export const SansLarger = {
   fontFamily: FontFamily['sans'],
-  ...SizeLarger,
+  ...SizeLarge,
+  lineHeight: `1.40em`,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['lg']} + 0.5vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeLarge,
-    lineHeight: `1.40em`,
+  [`@media (${breakpointDesktop})`]: {
+    ...SizeLarger,
   },
 };
 
@@ -99,15 +90,15 @@ export const SansLarge = {
 
 export const SansMedium = {
   fontFamily: FontFamily['sans'],
-  fontSize: FontSize['lg'],
-  lineHeight: `1.55em`,
+  ...SizeSmall,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['base']} + 0.16vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeSmall,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['lg'],
+    lineHeight: `1.55em`,
   },
 };
 
@@ -115,11 +106,11 @@ export const SansSmall = {
   fontFamily: FontFamily['sans'],
   ...SizeSmall,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['sm']} + 0.16vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
+  [`@media (${breakpointDesktop})`]: {
     ...SizeSmall,
   },
 };
@@ -128,11 +119,11 @@ export const SansSmaller = {
   fontFamily: FontFamily['sans'],
   ...SizeSmaller,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['min']} + 0.16vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
+  [`@media (${breakpointDesktop})`]: {
     ...SizeSmaller,
   },
 };

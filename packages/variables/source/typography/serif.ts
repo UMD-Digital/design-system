@@ -1,8 +1,8 @@
 import { FontFamily, FontSize, FontWeight } from '../tokens/fonts';
 import { Queries } from '../tokens/breakpoints';
 
-const breakpointMobile = Queries.medium.max;
-const breakpointDesktop = Queries.desktop.max;
+const breakpointLarge = Queries.large.min;
+const breakpointDesktop = Queries.desktop.min;
 
 const FontBase = {
   fontFamily: FontFamily['serif'],
@@ -23,58 +23,56 @@ const SizeMedium = {
 
 export const SerifMaxium = {
   ...FontBase,
+  ...SizeLarger,
 
-  fontSize: FontSize['9xl'],
-  fontWeight: FontWeight['light'],
-  lineHeight: `1.025em`,
-
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['4xl']} + 4vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeLarger,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['9xl'],
+    fontWeight: FontWeight['light'],
+    lineHeight: `1.025em`,
   },
 };
 
 export const SerifExtralarge = {
   ...FontBase,
+  ...SizeLarger,
 
-  fontSize: FontSize['6xl'],
-  lineHeight: `1.07em`,
-
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['4xl']} + 2vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeLarger,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['6xl'],
+    lineHeight: `1.07em`,
   },
 };
 
 export const SerifLarger = {
   ...FontBase,
-  ...SizeLarger,
+  ...SizeLarge,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['3xl']} + 0.66vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeLarge,
+  [`@media (${breakpointDesktop})`]: {
+    ...SizeLarger,
   },
 };
 
 export const SerifLarge = {
   ...FontBase,
-  ...SizeLarge,
+  ...SizeMedium,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['xl']} + 0.33vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeMedium,
+  [`@media (${breakpointDesktop})`]: {
+    ...SizeLarge,
   },
 };
 

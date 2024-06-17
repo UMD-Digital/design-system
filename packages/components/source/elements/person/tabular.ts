@@ -40,7 +40,9 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS
 const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutImageContainer}`;
 
 const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_WITH_IMAGE} .${LayoutTextContainer}`;
-const OVERWRITE_TEXT_CONTAINE_WITH_CONTACT = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} ${LayoutTextContainerOverwrite}`;
+const OVERWRITE_TEXT_CONTAINER_WITH_CONTACT = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} ${LayoutTextContainerOverwrite}`;
+const OVERWRITE_TEXT_CONTAINER_CONTACT = `${OVERWRITE_TEXT_CONTAINER_WITH_CONTACT} .${PersonTextContainer.Elements.contactContainer}`;
+
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
@@ -108,10 +110,16 @@ const OverwriteTextStyles = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_TEXT_CONTAINE_WITH_CONTACT} {
+    ${OVERWRITE_TEXT_CONTAINER_WITH_CONTACT} {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: ${Spacing.md};
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    ${OVERWRITE_TEXT_CONTAINER_CONTACT} {
+      margin-top: 0;
     }
   }
 `;

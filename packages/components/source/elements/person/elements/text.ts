@@ -401,6 +401,7 @@ export default {
   Elements: {
     container: ELEMENT_PERSON_TEXT_CONTAINER,
     containerWithContact: OVERWRITE_HAS_CONTACT_CONTAINER,
+    contactContainer: ELEMENT_PERSON_CONTACT_CONTAINER,
     mainWrapper: ELEMENT_PERSON_TEXT_MAIN_WRAPPER,
     name: ELEMENT_PERSON_NAME_CONTAINER,
     job: ELEMENT_PERSON_JOB_CONTAINER,

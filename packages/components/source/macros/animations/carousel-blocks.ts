@@ -38,6 +38,8 @@ type TypeHelpers = {
     isTabletView: () => boolean;
     showCount: () => number;
     shouldShowMobileHint: () => boolean;
+    shouldShowLeftButton: () => boolean;
+    shouldShowRightButton: () => boolean;
   };
   GetSizes: {
     blockWidth: () => number | undefined;
@@ -225,19 +227,38 @@ const EventSwipe = (props: TypeHelpers) => {
 
 const ButtonDisplay = (props: TypeHelpers) => {
   const { GetElements, GetOptions } = props;
-  const buttons = Array.from(
-    GetElements.container().querySelectorAll(
-      `.${ELEMENT_ANIMATION_CAROUSEL_BUTTON}`,
-    ),
-  ) as HTMLButtonElement[];
+  const prevousButton = GetElements.container().querySelector(
+    `.${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS}`,
+  ) as HTMLButtonElement;
+  const nextButton = GetElements.container().querySelector(
+    `.${ELEMENT_ANIMATION_CAROUSEL_NEXT}`,
+  ) as HTMLButtonElement;
+  const buttons = [nextButton, prevousButton];
 
   const cardsTotal = GetElements.blocks().length;
   const showCount = GetOptions.showCount();
+  const containerWidth = GetElements.container().offsetWidth;
+  const shouldShowLeftButton = GetOptions.shouldShowLeftButton();
+  const shouldShowRightButton = GetOptions.shouldShowRightButton();
+  const shouldHideLeftButton = containerWidth >= 1024 && !shouldShowLeftButton;
+  const shouldHideRightButton =
+    containerWidth >= 1024 && !shouldShowRightButton;
 
   if (cardsTotal === showCount) {
     buttons.forEach((button) => (button.style.display = 'none'));
+    return;
+  }
+
+  if (shouldHideLeftButton) {
+    prevousButton.style.display = 'none';
   } else {
-    buttons.forEach((button) => (button.style.display = 'block'));
+    prevousButton.style.display = 'block';
+  }
+
+  if (shouldHideRightButton) {
+    nextButton.style.display = 'none';
+  } else {
+    nextButton.style.display = 'block';
   }
 };
 
@@ -355,6 +376,12 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       },
       shouldShowMobileHint: () => {
         return displayLogic.showMobileHint && GetOptions.isMobileView();
+      },
+      shouldShowLeftButton: () => {
+        return displayLogic.hasLeftButton;
+      },
+      shouldShowRightButton: () => {
+        return displayLogic.hasRightButton;
       },
     };
 
@@ -476,24 +503,20 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         }),
     };
 
-    if (displayLogic.hasRightButton) {
-      container.appendChild(
-        CreateButton({
-          EventMoveForward: Event.forward,
-          EventMoveBackward: Event.backward,
-        }),
-      );
-    }
+    container.appendChild(
+      CreateButton({
+        EventMoveForward: Event.forward,
+        EventMoveBackward: Event.backward,
+      }),
+    );
 
-    if (displayLogic.hasLeftButton) {
-      container.appendChild(
-        CreateButton({
-          EventMoveForward: Event.forward,
-          EventMoveBackward: Event.backward,
-          isRight: false,
-        }),
-      );
-    }
+    container.appendChild(
+      CreateButton({
+        EventMoveForward: Event.forward,
+        EventMoveBackward: Event.backward,
+        isRight: false,
+      }),
+    );
 
     wrapper.classList.add(ELEMENT_ANIMATION_CAROUSEL_WRAPPER);
 

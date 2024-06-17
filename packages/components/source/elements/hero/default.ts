@@ -74,17 +74,9 @@ const OverwriteHeadline = `
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: CampaignExtralarge,
+      [`${OVERWRITE_HEADLINE}`]: CampaignMaxium,
     },
   })}
-
-  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
-    ${ConvertJSSObjectToStyles({
-      styleObj: {
-        [`${OVERWRITE_SIZE_LARGE_HEADLINE}`]: CampaignMaxium,
-      },
-    })}
-  }
 `;
 
 // prettier-ignore

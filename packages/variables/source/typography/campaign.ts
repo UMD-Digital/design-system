@@ -1,7 +1,7 @@
 import { FontFamily, FontSize, FontWeight } from '../tokens/fonts';
 import { Queries } from '../tokens/breakpoints';
 
-const breakpointMobile = Queries.medium.max;
+const breakpointLarge = Queries.large.max;
 const breakpointDesktop = Queries.desktop.max;
 
 const FontBase = {
@@ -22,77 +22,73 @@ const SizeSmall = {
   lineHeight: `0.91em`,
 };
 
-const SizeLarge = {
-  fontSize: FontSize['9xl'],
-  lineHeight: `0.91em`,
-};
-
 export const CampaignMaxium = {
   ...FontBase,
-  fontSize: '120px',
-  lineHeight: `0.9em`,
+  ...SizeSmall,
 
-  [`@media (${breakpointDesktop})`]: {
-    fontSize: `calc(${FontSize['9xl']} + 5.83vw)`,
+  [`@media (${breakpointLarge})`]: {
+    fontSize: `calc(${FontSize['9xl']} + 2vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeLarge,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: '120px',
+    lineHeight: `0.9em`,
   },
 };
 
 export const CampaignExtralarge = {
   ...FontBase,
-  fontSize: FontSize['10xl'],
-  lineHeight: `0.91em`,
+  ...SizeSmall,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['5xl']} + 4vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeSmall,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['10xl'],
+    lineHeight: `0.91em`,
   },
 };
 
 export const CampaignLarge = {
   ...FontBase,
-  ...SizeLarge,
+  ...SizeSmall,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['5xl']} + 2.66vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeSmall,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['9xl'],
+    lineHeight: `0.91em`,
   },
 };
 
 export const CampaignMedium = {
   ...FontBase,
-  fontSize: FontSize['7xl'],
-  letterSpacing: '0.02em',
-  lineHeight: `0.94em`,
+  ...SizeSmall,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['5xl']} + 1.33vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeSmall,
+  [`@media (${breakpointDesktop})`]: {
+    fontSize: FontSize['7xl'],
+    letterSpacing: '0.02em',
+    lineHeight: `0.94em`,
   },
 };
 
 export const CampaignSmall = {
   ...FontBase,
-  ...SizeSmall,
+  ...SizeExtraSmall,
 
-  [`@media (${breakpointDesktop})`]: {
+  [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${FontSize['4xl']} + 1.33vw)`,
   },
 
-  [`@media (${breakpointMobile})`]: {
-    ...SizeExtraSmall,
+  [`@media (${breakpointDesktop})`]: {
+    ...SizeSmall,
   },
 };
 

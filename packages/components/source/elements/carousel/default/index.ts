@@ -137,6 +137,7 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
       hasLeftButton,
       hasRightButton,
       showMobileHint: true,
+      showHint: true,
     };
 
     if (gridGap) {

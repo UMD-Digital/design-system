@@ -289,12 +289,17 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
       ...props,
       blocks: props.cards,
       overwriteDisplayLogic: {
-        mobileBreakpoint: 600,
-        tabletBreakpoint: 1000,
-        desktopBreakpoint: 1400,
+        mobileBreakpoint: 650,
+        tabletBreakpoint: 1024,
+        desktopBreakpoint: 1024,
+        mobileCount: 1,
+        tabletCount: 2,
         desktopCount: 2,
         maxCount: 2,
         showMobileHint: true,
+        showHint: false,
+        minBlockHeightMobile: 360,
+        minBlockHeightTablet: 400,
       },
     });
     const introContainer = CreateIntro(props);

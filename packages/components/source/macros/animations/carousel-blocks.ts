@@ -304,19 +304,19 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
     const displayLogic: TypeDisplayLogic = {
-      mobileCount: 1,
       mobileBreakpoint: 650,
-      tabletCount: 2,
       tabletBreakpoint: 1024,
-      desktopCount: 2,
       desktopBreakpoint: 1200,
-      maxCount: 2,
+      mobileCount: 1,
+      tabletCount: 2,
+      desktopCount: 3,
+      maxCount: 4,
       blockGap: ConvertPixelStringToNumber(Spacing.md),
-      minBlockHeightMobile: 360,
-      minBlockHeightTablet: 400,
+      minBlockHeightMobile: 240,
+      minBlockHeightTablet: 300,
       hasRightButton: true,
       hasLeftButton: true,
-      showMobileHint: false,
+      showMobileHint: true,
       showHint: true,
     };
 

@@ -157,8 +157,8 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
       overwriteDisplayLogic: {
         mobileBreakpoint: 600,
         tabletBreakpoint: 900,
-        desktopCount: 3,
         desktopBreakpoint: 1400,
+        desktopCount: 3,
         maxCount: 4,
         minBlockHeightTablet: 320,
         minBlockHeightMobile: 240,

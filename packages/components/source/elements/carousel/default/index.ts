@@ -130,8 +130,8 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
     const wrapper = document.createElement('div');
     const overwriteDisplayLogic: Record<string, number | boolean> = {
       mobileBreakpoint: 600,
-      tabletBreakpoint: 1000,
-      desktopBreakpoint: 1400,
+      tabletBreakpoint: 1200,
+      desktopBreakpoint: 1500,
       desktopCount: 3,
       maxCount: 4,
       hasLeftButton,

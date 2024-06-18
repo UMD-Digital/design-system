@@ -128,7 +128,6 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
 
 const EventScrollCarousel = (props: TypeEventScroll) => {
   const {
-    displayLogic,
     GetElements,
     GetOptions,
     GetSizes,
@@ -147,8 +146,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
 
   if (!elementSize) return;
 
-  const displayGap = displayLogic.blockGap as number;
-  const elementSizeWithSpace = elementSize + displayGap * 2;
+  const elementSizeWithSpace = elementSize;
   const temporaryCarouselSize = carouselSize + elementSizeWithSpace;
 
   const animateRight = () => {
@@ -157,9 +155,9 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     const upcomingElement = slotContent[elementCount];
     const hintElement = slotContent[elementCount + 1];
 
-    carouselSlider.style.width = `${temporaryCarouselSize}px`;
     upcomingElement.style.display = 'block';
-    carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
+    carouselSlider.style.width = `${temporaryCarouselSize}px`;
+    carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
     carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
     setTimeout(() => {
@@ -172,10 +170,10 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     }, 10);
 
     setTimeout(() => {
-      carouselSlider.removeChild(firstElement);
-
       SetLayout.carouselWidthBasedOnBlock();
-    }, ANIMATION_DURATION - 10);
+
+      carouselSlider.removeChild(firstElement);
+    }, ANIMATION_DURATION + 10);
   };
 
   const animateLeft = () => {
@@ -190,7 +188,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
     setTimeout(() => {
-      carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms`;
+      carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
       carouselSlider.style.transform = `translateX(0)`;
     }, 10);
 

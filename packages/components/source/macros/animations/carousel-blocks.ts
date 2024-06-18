@@ -15,6 +15,7 @@ type TypeDisplayLogic = {
   hasRightButton: boolean;
   hasLeftButton: boolean;
   showMobileHint: boolean;
+  showHint: boolean;
 };
 
 type TypeDisplayLogicProps = Partial<TypeDisplayLogic>;
@@ -23,7 +24,6 @@ type TypeAnimationCarouselBlockProps = {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
   blocks: HTMLElement[];
-  showHint?: boolean;
   overwriteDisplayLogic?: TypeDisplayLogicProps;
 };
 
@@ -139,7 +139,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     carouselSlider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
 
-  const isShowHint = GetOptions.shouldShowMobileHint();
+  const isShowMobileHint = GetOptions.shouldShowMobileHint();
   const elementCount = GetOptions.showCount();
   const elementSize = GetSizes.blockWidth();
   const carouselSize = GetSizes.carouselWidthBasedOnBlock();
@@ -161,7 +161,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
     setTimeout(() => {
-      if (isShowHint) {
+      if (isShowMobileHint) {
         hintElement.style.display = 'block';
       }
 
@@ -195,7 +195,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     setTimeout(() => {
       carouselSlider.removeChild(lastElement);
 
-      if (!isShowHint) {
+      if (!isShowMobileHint) {
         removedElement.style.display = 'none';
       } else {
         hintElementSibiling.style.display = 'none';
@@ -317,6 +317,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: false,
+      showHint: true,
     };
 
     if (overwriteDisplayLogic) {
@@ -375,6 +376,9 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       shouldShowMobileHint: () => {
         return displayLogic.showMobileHint && GetOptions.isMobileView();
       },
+      shouldShowHint: () => {
+        return displayLogic.showMobileHint && !GetOptions.isMobileView();
+      },
       shouldShowLeftButton: () => {
         return displayLogic.hasLeftButton;
       },
@@ -385,11 +389,11 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
     const GetSizes = {
       blockWidth: () => {
-        const isShowHint = GetOptions.shouldShowMobileHint();
+        const isShowMobileHint = GetOptions.shouldShowMobileHint();
         const containerWidth = container.offsetWidth;
         const count = GetOptions.showCount();
 
-        if (isShowHint) {
+        if (isShowMobileHint) {
           const hintElementSize = containerWidth * HINT_MULTIPLER_SIZING;
 
           return (containerWidth - hintElementSize) / count;
@@ -398,13 +402,13 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         return containerWidth / count;
       },
       carouselWidthBasedOnBlock: () => {
-        const isShowHint = GetOptions.shouldShowMobileHint();
+        const isShowMobileHint = GetOptions.shouldShowMobileHint();
         const count = GetOptions.showCount();
         const elementSize = GetSizes.blockWidth();
 
         if (!elementSize) return window.innerWidth;
 
-        if (isShowHint) {
+        if (isShowMobileHint) {
           const updatedCount = count + 1;
           return elementSize * updatedCount;
         }
@@ -531,7 +535,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(Event.resize, 5));
+    window.addEventListener('resize', Debounce(Event.resize, 10));
 
     return {
       element: declaration,

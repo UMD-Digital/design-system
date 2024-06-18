@@ -289,6 +289,11 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
       ...props,
       blocks: props.cards,
       overwriteDisplayLogic: {
+        mobileBreakpoint: 600,
+        tabletBreakpoint: 1000,
+        desktopBreakpoint: 1400,
+        desktopCount: 2,
+        maxCount: 2,
         showMobileHint: true,
       },
     });

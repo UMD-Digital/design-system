@@ -113,7 +113,6 @@ const CreateCarouselPeopleElement = (props: TypeCarouselPeopleProps) =>
     const carousel = AnimationCarouselBlocks.CreateElement({
       blocks,
       slide,
-      showHint: false,
       overwriteDisplayLogic: {
         mobileBreakpoint,
         tabletBreakpoint,
@@ -123,6 +122,7 @@ const CreateCarouselPeopleElement = (props: TypeCarouselPeopleProps) =>
         blockGap: 0,
         minBlockHeightTablet: 320,
         minBlockHeightMobile: 240,
+        showHint: false,
       },
     });
 

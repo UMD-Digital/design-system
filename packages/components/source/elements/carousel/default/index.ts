@@ -10,13 +10,19 @@ type TypeCarouselRequirements = {
   hasLeftButton?: boolean;
   hasRightButton?: boolean;
   mobileHint?: boolean;
+  hint?: boolean;
+  mobileSize?: number | null;
+  tabletSize?: number | null;
+  desktopSize?: number | null;
+  mobileCount?: number | null;
+  tabletCount?: number | null;
+  desktopCount?: number | null;
 };
 
 const { Colors, Spacing } = Tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
-const LARGE = 1024;
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
@@ -32,6 +38,11 @@ const OVERWRITE_ANIMATION_BUTTON_NEXT = `.${CAROUSEL_CONTAINER} .${AnimationCaro
 const OVERWRITE_THEME_DARK_CONTAINER = `.${CAROUSEL_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_BUTTON = `${OVERWRITE_THEME_DARK_CONTAINER} .${AnimationCarouselBlocks.Elements.button}`;
 
+const OVERWRITE_SINGLE_COLUMN = `.${CAROUSEL_CONTAINER} ${AnimationCarouselBlocks.Elements.containerSingleBlock}`;
+const OVERWRITE_SINGLE_COLUMN_BUTTONS = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCarouselBlocks.Elements.button}`;
+const OVERWRITE_SINGLE_COLUMN_PREVIOUS = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCarouselBlocks.Elements.previousButton}`;
+const OVERWRITE_SINGLE_COLUMN_NEXT = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCarouselBlocks.Elements.nextButton}`;
+
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_BUTTON} {
@@ -45,6 +56,20 @@ const OverwriteThemeDark = `
 
 // prettier-ignore
 const OverwriteCarouselStyles = `
+  .${OVERWRITE_ANIMATION_CAROUSEL_CONTAINER} {
+    padding-bottom: 0;
+  }
+
+  ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: ${Colors.white};
+  }
+
+  ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} > svg {
+    fill: ${Colors.black};
+  }
+
   ${OVERWRITE_ANIMATION_BUTTON_PREVIOUS} {
     left: 0;
   }
@@ -53,42 +78,27 @@ const OverwriteCarouselStyles = `
     right: 0;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_CONTAINER} {
-      padding-bottom: 60px;
-    }
+  ${OVERWRITE_SINGLE_COLUMN} {
+    padding-bottom: 60px;
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
-      bottom: 0;
-    }
+  ${OVERWRITE_SINGLE_COLUMN_BUTTONS} {
+    bottom: -20px;
+    top: inherit;
+    background-color: ${Colors.red};
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: ${Colors.white};
-    }
-
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} > svg {
-      fill: ${Colors.black};
-    }
+  ${OVERWRITE_SINGLE_COLUMN_BUTTONS} > svg {
+    fill: ${Colors.white};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_BUTTON_PREVIOUS} {
-      left: ${Spacing.md};
-      right: inherit;
-    }
+  ${OVERWRITE_SINGLE_COLUMN_PREVIOUS} {
+    left: ${Spacing.md};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_BUTTON_NEXT} {
-      left: 74px;
-      right: inherit;
-    }
+  ${OVERWRITE_SINGLE_COLUMN_NEXT} {
+    left: 74px;
+    right: inherit;
   }
 `;
 
@@ -123,16 +133,26 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
       gridGap,
       hasLeftButton = true,
       hasRightButton = true,
-      mobileHint = true,
+      mobileHint,
+      hint,
+      mobileSize,
+      tabletSize,
+      desktopSize,
+      mobileCount,
+      tabletCount,
+      desktopCount,
     } = props;
+
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
     const overwriteDisplayLogic: Record<string, number | boolean> = {
-      mobileBreakpoint: 600,
-      tabletBreakpoint: 1200,
-      desktopBreakpoint: 1500,
-      desktopCount: 3,
+      mobileBreakpoint: mobileSize || 600,
+      tabletBreakpoint: tabletSize || 1200,
+      desktopBreakpoint: desktopSize || 1500,
+      mobileCount: mobileCount || 1,
+      tabletCount: tabletCount || 2,
+      desktopCount: desktopCount || 3,
       maxCount: 4,
       hasLeftButton,
       hasRightButton,
@@ -147,6 +167,7 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
     }
 
     if (!mobileHint) overwriteDisplayLogic.showMobileHint = false;
+    if (!hint) overwriteDisplayLogic.showHint = false;
 
     const carouselContainer = AnimationCarouselBlocks.CreateElement({
       ...props,

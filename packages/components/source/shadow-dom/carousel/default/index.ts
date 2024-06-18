@@ -32,6 +32,13 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const attributeLeftButton = element.getAttribute('left-button');
   const attributeRightButton = element.getAttribute('right-button');
   const attributeMobileHint = element.getAttribute('mobile-hint');
+  const attributeHint = element.getAttribute('hint');
+  const mobileSize = element.getAttribute('mobile-size');
+  const tabletSize = element.getAttribute('tablet-size');
+  const desktopSize = element.getAttribute('desktop-size');
+  const mobileCount = element.getAttribute('mobile-count');
+  const tabletCount = element.getAttribute('tablet-count');
+  const desktopCount = element.getAttribute('desktop-count');
   const gridGap = element.getAttribute('grid-gap-pixels');
   const slide = element.querySelector(
     `[slot="${SLOTS.BLOCKS}"]`,
@@ -42,10 +49,12 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   let hasLeftButton = true;
   let hasRightButton = true;
   let mobileHint = true;
+  let hint = true;
 
   if (attributeLeftButton === 'false') hasLeftButton = false;
   if (attributeRightButton === 'false') hasRightButton = false;
   if (attributeMobileHint === 'false') mobileHint = false;
+  if (attributeHint === 'false') hint = false;
 
   const createCardShadowRef = () => {
     const slot = Node.slot({ type: SLOTS.BLOCKS });
@@ -65,6 +74,13 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
     hasLeftButton,
     hasRightButton,
     mobileHint,
+    hint,
+    mobileSize: mobileSize ? parseInt(mobileSize) : undefined,
+    tabletSize: tabletSize ? parseInt(tabletSize) : undefined,
+    desktopSize: desktopSize ? parseInt(desktopSize) : undefined,
+    mobileCount: mobileCount ? parseInt(mobileCount) : undefined,
+    tabletCount: tabletCount ? parseInt(tabletCount) : undefined,
+    desktopCount: desktopCount ? parseInt(desktopCount) : undefined,
     gridGap,
   });
 

@@ -61,9 +61,12 @@ const { Debounce } = Performance;
 const { Colors, Spacing } = Tokens;
 const { ConvertPixelStringToNumber } = Styles;
 
+const ATTRIBUTE_SINGLE_BLOCK = 'single';
 const ANIMATION_DURATION = 500;
 const HINT_MULTIPLER_MOBILE_SIZING = 0.2;
 const HINT_MULTIPLER_SIZING = 0.7;
+
+const IS_SINGLE_BLOCK = `[${ATTRIBUTE_SINGLE_BLOCK}]`;
 
 const ELEMENT_NAME = 'umd-element-animation-carousel-block';
 const ELEMENT_ANIMATION_CAROUSEL_DECLARATION =
@@ -74,6 +77,8 @@ const ELEMENT_ANIMATION_CAROUSEL_WRAPPER = 'animation-carousel-block-wrapper';
 const ELEMENT_ANIMATION_CAROUSEL_BUTTON = `animation-carousel-block-button`;
 const ELEMENT_ANIMATION_CAROUSEL_NEXT = `animation-carousel-block-button-next`;
 const ELEMENT_ANIMATION_CAROUSEL_PREVIOUS = `animation-carousel-block-button-previous`;
+
+const OVERWRITE_SINGLE_BLOCK_CONTAINER = `.${ELEMENT_ANIMATION_CAROUSEL_CONTAINER}${IS_SINGLE_BLOCK}`;
 
 // prettier-ignore
 const ButtonStyles = `
@@ -240,12 +245,10 @@ const ButtonDisplay = (props: TypeHelpers) => {
 
   const cardsTotal = GetElements.blocks().length;
   const showCount = GetOptions.showCount();
-  const containerWidth = GetElements.container().offsetWidth;
   const shouldShowLeftButton = GetOptions.shouldShowLeftButton();
   const shouldShowRightButton = GetOptions.shouldShowRightButton();
-  const shouldHideLeftButton = containerWidth >= 1024 && !shouldShowLeftButton;
-  const shouldHideRightButton =
-    containerWidth >= 1024 && !shouldShowRightButton;
+  const shouldHideLeftButton = showCount > 1 && !shouldShowLeftButton;
+  const shouldHideRightButton = showCount > 1 && !shouldShowRightButton;
 
   if (cardsTotal === showCount) {
     buttons.forEach((button) => (button.style.display = 'none'));
@@ -496,9 +499,14 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         SetLayout.carouselWidthBasedOnBlock();
         ButtonDisplay({ ...Event.helpers });
 
-        setTimeout(() => {
-          SetLayout.cardHeight();
-        }, 100);
+        const count = GetOptions.showCount();
+        SetLayout.cardHeight();
+
+        if (count === 1) {
+          container.setAttribute(ATTRIBUTE_SINGLE_BLOCK, '');
+        } else {
+          container.removeAttribute(ATTRIBUTE_SINGLE_BLOCK);
+        }
       },
       load: () => {
         SetLayout.blockDisplay();
@@ -568,6 +576,7 @@ export default {
   Elements: {
     declaration: ELEMENT_ANIMATION_CAROUSEL_DECLARATION,
     container: ELEMENT_ANIMATION_CAROUSEL_CONTAINER,
+    containerSingleBlock: OVERWRITE_SINGLE_BLOCK_CONTAINER,
     button: ELEMENT_ANIMATION_CAROUSEL_BUTTON,
     nextButton: ELEMENT_ANIMATION_CAROUSEL_NEXT,
     previousButton: ELEMENT_ANIMATION_CAROUSEL_PREVIOUS,

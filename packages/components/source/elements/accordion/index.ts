@@ -98,7 +98,7 @@ const bodyStyles = `
   })}
 
   .${ELEMENT_BODY_WRAPPER} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${Colors.gray.lighter};
     height: 0;
     overflow: hidden;
   }
@@ -141,7 +141,7 @@ const headlineStyles = `
     border-top: 1px solid transparent;
     padding: ${Spacing.md};
     padding-right: ${Spacing['4xl']};
-    background-color: ${Colors.gray.lightest};
+    background-color: ${Colors.gray.lighter};
     position: relative;
     transition: background 0.5s, border 0.5s, color 0.5s, padding 0.5s;
     width: 100%;
@@ -201,7 +201,7 @@ const headlineStyles = `
   .${ELEMENT_HEADLINE}[aria-expanded='true'],
   .${ELEMENT_HEADLINE}:hover,
   .${ELEMENT_HEADLINE}:focus {
-    background-color: ${Colors.gray.lighter};
+    background-color: ${Colors.gray.lightest};
     border-top: 1px solid ${Colors.red};
   }
 

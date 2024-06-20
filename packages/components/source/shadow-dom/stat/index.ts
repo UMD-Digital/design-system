@@ -11,7 +11,7 @@ const { ResetString } = Styles;
 const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-stat';
-const ATTRIBUTE_TYPE = 'type';
+const ATTRIBUTE_TYPE = 'display-type';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_SIZE = 'size';
 const ATTRIBUTE_HAS_LINE = 'has-line';
@@ -36,7 +36,7 @@ const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
 
   return Stat.CreateElement({
     theme: element.getAttribute(ATTRIBUTE_THEME),
-    type: element.getAttribute(ATTRIBUTE_TYPE),
+    displayType: element.getAttribute(ATTRIBUTE_TYPE),
     size: element.getAttribute(ATTRIBUTE_SIZE),
     hasLine: lineAttr ? true : false,
     stat: SlotWithDefaultStyling({ element, slotRef: STAT }),

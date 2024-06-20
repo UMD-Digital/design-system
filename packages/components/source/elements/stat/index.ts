@@ -7,7 +7,7 @@ type TypeStatElement = {
 
 type TypeStatRequirements = TypeStatElement & {
   theme?: string | null;
-  type?: string | null;
+  displayType?: string | null;
   size?: string | null;
   hasLine?: boolean;
   text?: HTMLElement | null;
@@ -25,9 +25,9 @@ const {
   StatisticsLarge,
 } = Typography;
 
+const BLOCK_SMALL = 300;
 const SMALL = 400;
 const ELEMENT_NAME = 'umd-element-stat';
-const ATTRIBUTE_TYPE = 'type';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_SIZE = 'size';
 const ATTRIBUTE_HAS_LINE = 'has-line';
@@ -39,6 +39,7 @@ const ELEMENT_STAT_WRAPPER = `stat-wrapper`;
 const ELEMENT_STAT_DISPLAY = `stat-display`;
 const ELEMENT_STAT_TEXT = `stat-text`;
 const ELEMENT_STAT_SUB_TEXT = `stat-sub-text`;
+const ELEMENT_DISPLAY_BLOCK = `stat-display-block`;
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_SIZE_LARGE = `[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
@@ -65,6 +66,24 @@ const VarationThemeDarkStyles = `
 
   ${OVERWRITE_THEME_DARK_SUB_TEXT} {
     color: ${Colors.gray.light};
+  }
+`;
+
+// prettier-ignore
+const VarationDisplayBlockStyles = `
+  .${ELEMENT_DISPLAY_BLOCK} {
+    padding: ${Spacing.md};
+    border-top: 2px solid ${Colors.red};
+    background-color: ${Colors.gray.lightest};
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${BLOCK_SMALL}px) {
+    .${ELEMENT_DISPLAY_BLOCK} {
+      padding: ${Spacing['2xl']} ${Spacing.lg};
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
   }
 `;
 
@@ -205,6 +224,7 @@ const SubTextStyles = `
 const STYLES_STAT_ELEMENT = `
   .${ELEMENT_STAT_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
+    height: 100%;
   }
 
   .${ELEMENT_STAT_WRAPPER} {
@@ -217,6 +237,7 @@ const STYLES_STAT_ELEMENT = `
   ${VarationSizeLargeStyles}
   ${VarationWithLineStyles}
   ${VarationThemeDarkStyles}
+  ${VarationDisplayBlockStyles}
 `;
 
 const MakeStat = ({ stat }: TypeStatElement) => {
@@ -241,18 +262,15 @@ const MakeStat = ({ stat }: TypeStatElement) => {
   return null;
 };
 
-export const CreateStatElement = (props: TypeStatRequirements) => {
-  const { theme, type, size, hasLine, stat, text, subText } = props;
+const MakeDefaultLayout = (props: TypeStatRequirements) => {
+  const { theme, size, text, subText } = props;
 
-  const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const statElement = MakeStat(props);
 
-  container.classList.add(ELEMENT_STAT_CONTAINER);
   if (theme) wrapper.setAttribute(ATTRIBUTE_THEME, theme);
-  if (type) wrapper.setAttribute(ATTRIBUTE_TYPE, type);
   if (size) wrapper.setAttribute(ATTRIBUTE_SIZE, size);
-  if (hasLine) wrapper.setAttribute(ATTRIBUTE_HAS_LINE, '');
+
   wrapper.classList.add(ELEMENT_STAT_WRAPPER);
 
   if (statElement) wrapper.appendChild(statElement);
@@ -267,6 +285,26 @@ export const CreateStatElement = (props: TypeStatRequirements) => {
     wrapper.appendChild(subText);
   }
 
+  return wrapper;
+};
+
+export const CreateStatElement = (props: TypeStatRequirements) => {
+  const { displayType, hasLine } = props;
+  const container = document.createElement('div');
+  const wrapper = MakeDefaultLayout(props);
+
+  container.classList.add(ELEMENT_STAT_CONTAINER);
+
+  if (displayType === 'block') {
+    const block = document.createElement('div');
+    block.classList.add(ELEMENT_DISPLAY_BLOCK);
+    block.appendChild(wrapper);
+
+    container.appendChild(block);
+    return container;
+  }
+
+  if (hasLine) wrapper.setAttribute(ATTRIBUTE_HAS_LINE, '');
   container.appendChild(wrapper);
 
   return container;

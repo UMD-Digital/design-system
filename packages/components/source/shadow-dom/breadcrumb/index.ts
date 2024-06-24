@@ -1,72 +1,69 @@
-import { Tokens, Animations } from '@universityofmaryland/variables';
-import { Styles, MarkupCreate, MarkupModify } from 'utilities';
-const { Colors } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
-
 declare global {
   interface Window {
     UMDBreadcrumbElement: typeof UMDBreadcrumbElement;
   }
 }
 
-const { Link } = Animations;
+import { Tokens, Animations } from '@universityofmaryland/variables';
+import { Styles, MarkupCreate, MarkupModify } from 'utilities';
+
+const { Colors } = Tokens;
+const { ConvertJSSObjectToStyles } = Styles;
 const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
-
-const ELEMENT_NAME = 'umd-element-breadcrumb';
-const ATTRIBUTE_THEME = 'theme';
-const THEME_LIGHT = 'light';
-const THEME_DARK = 'dark';
-const THEME_DARK_ATTR = `[${ATTRIBUTE_THEME}=${THEME_DARK}]`;
-const BREADCRUMB_CONTAINER = 'breadcrumb-container';
-const BREADCRUMB_PATH = 'breadcrumb-path';
-
 const SLOTS = {
   PATHS: 'paths',
 };
-const styles = `
-  ${Styles.ResetString}
 
-  :host {
-    display: block;
+const ELEMENT_NAME = 'umd-element-breadcrumb';
+
+const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_THEME_LIGHT = 'light';
+const ATTRIBUTE_THEME_DARK = 'dark';
+
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}=${ATTRIBUTE_THEME_DARK}]`;
+
+const ELEMENT_CONTAINER = 'breadcrumb-container';
+const ELEMENT_PATH = 'breadcrumb-path';
+
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_DARK_PATH = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_PATH}`;
+
+const OverwriteThemeStyles = `
+  ${OVERWRITE_THEME_DARK_PATH} {
+    color: ${Colors.gray.light};
   }
 
-  .${BREADCRUMB_CONTAINER} {
-    display: flex;
-    mask-image: linear-gradient(90deg, ${
-      Colors.white
-    } calc(100% - 24px), transparent);
-    overflow-x: auto;
-    scrollbar-width: none;
-    white-space: nowrap;
-    padding-right: 24px;
-    font-size: 12px;
-    padding-bottom: 1px;
+  ${OVERWRITE_THEME_DARK_PATH} + .${ELEMENT_PATH}::before {
+    background-color: ${Colors.gray.dark};
   }
+  
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_THEME_DARK_PATH}:not(:last-of-type)`]:
+        Animations.Link.LineSlideUnder.grayDark,
+    },
+  })}
+`;
 
-  .${BREADCRUMB_PATH}::-webkit-scrollbar { 
+const PathStyles = `
+  .${ELEMENT_PATH}::-webkit-scrollbar { 
     display: none;
   }
 
-  .${BREADCRUMB_PATH} {
+  .${ELEMENT_PATH} {
     color: ${Colors.gray.medium};
     position: relative;
   }
 
-  .${BREADCRUMB_PATH}:last-of-type {
+  .${ELEMENT_PATH}:last-of-type {
     color: ${Colors.black};
   }
 
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`a:not(:last-of-type)`]: Animations.Link.LineSlideUnder.gray,
-    },
-  })}
-
-  .${BREADCRUMB_PATH}:not(:last-of-type) {
+  .${ELEMENT_PATH}:not(:last-of-type) {
     margin-right: 14px;
   }
 
-  .${BREADCRUMB_PATH} + .${BREADCRUMB_PATH}::before {
+  .${ELEMENT_PATH} + .${ELEMENT_PATH}::before {
     content: '';
     display: inline-block;
     height: 14px;
@@ -77,27 +74,47 @@ const styles = `
     transform: translateY(-50%) rotate(15deg);
     width: 1px;
   }
+`;
 
-  ${THEME_DARK_ATTR} .${BREADCRUMB_PATH} {
-    color: ${Colors.gray.light};
+const ContainerStyles = `
+  .${ELEMENT_CONTAINER} {
+    display: flex;
+    padding-right: 24px;
+    font-size: 12px;
+    padding-bottom: 1px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    white-space: nowrap;
+    mask-image: linear-gradient(90deg, ${
+      Colors.white
+    } calc(100% - 24px), transparent);
   }
 
-  ${THEME_DARK_ATTR} .${BREADCRUMB_PATH} + .${BREADCRUMB_PATH}::before {
-    background-color: ${Colors.gray.dark};
-  }
-  
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${THEME_DARK_ATTR} .${BREADCRUMB_PATH}:not(:last-of-type)`]:
-        Animations.Link.LineSlideUnder.grayDark,
+      [`.${ELEMENT_CONTAINER} a:not(:last-of-type)`]:
+        Animations.Link.LineSlideUnder.gray,
     },
-  })}`;
+  })}
+`;
+
+const styles = `
+  ${Styles.ResetString}
+
+  :host {
+    display: block;
+  }
+
+  ${ContainerStyles}
+  ${PathStyles}
+  ${OverwriteThemeStyles}
+`;
 
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
   const { PATHS } = SLOTS;
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const theme = element.getAttribute(ATTRIBUTE_THEME) || ATTRIBUTE_THEME_LIGHT;
   const pathsSlot = SlotWithDefaultStyling({
     element,
     slotRef: PATHS,
@@ -107,10 +124,10 @@ const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
     const links = pathsSlot.querySelectorAll('a') as NodeListOf<HTMLElement>;
 
     pathsSlot.setAttribute(ATTRIBUTE_THEME, theme);
-    pathsSlot.classList.add(BREADCRUMB_CONTAINER);
+    pathsSlot.classList.add(ELEMENT_CONTAINER);
 
     for (const linkElement of links) {
-      linkElement.classList.add(BREADCRUMB_PATH);
+      linkElement.classList.add(ELEMENT_PATH);
       MarkupModify.AnimationLinkSpan({
         element: linkElement,
       });

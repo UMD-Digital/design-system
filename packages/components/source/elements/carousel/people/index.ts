@@ -23,6 +23,7 @@ const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_PEOPLE_DECLARATION} .${A
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PEOPLE_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_PEOPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_PEOPLE_BUTTON}`;
+const OVERWRITE_THEME_DARK_SLIDE = `.${ELEMENT_PEOPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_PERSON_SLIDE}`;
 
 // prettier-ignore
 const OverwriteThemeDark = `
@@ -36,6 +37,15 @@ const OverwriteThemeDark = `
 
   ${OVERWRITE_THEME_DARK_BUTTON} > svg {
     fill: ${Colors.white};
+  }
+
+  ${OVERWRITE_THEME_DARK_SLIDE} {
+    border: 1px solid ${Colors.gray.dark};
+    border-left: none;
+  }
+
+  ${OVERWRITE_THEME_DARK_SLIDE}:first-child {
+    border-left: 1px solid ${Colors.gray.dark};
   }
 `;
 

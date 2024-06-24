@@ -98,7 +98,7 @@ const bodyStyles = `
   })}
 
   .${ELEMENT_BODY_WRAPPER} {
-    background-color: ${Colors.gray.lighter};
+    background-color: ${Colors.gray.lightest};
     height: 0;
     overflow: hidden;
   }
@@ -141,7 +141,7 @@ const headlineStyles = `
     border-top: 1px solid transparent;
     padding: ${Spacing.md};
     padding-right: ${Spacing['4xl']};
-    background-color: ${Colors.gray.lighter};
+    background-color: ${Colors.gray.lightest};
     position: relative;
     transition: background 0.5s, border 0.5s, color 0.5s, padding 0.5s;
     width: 100%;

@@ -29,17 +29,17 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_PATH = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_PATH}`;
 
 const OverwriteThemeStyles = `
-  ${OVERWRITE_THEME_DARK_PATH} {
+  .${OVERWRITE_THEME_DARK_CONTAINER} * {
     color: ${Colors.gray.light};
   }
 
-  ${OVERWRITE_THEME_DARK_PATH} + .${ELEMENT_PATH}::before {
+  ${OVERWRITE_THEME_DARK_PATH} + *::before {
     background-color: ${Colors.gray.dark};
   }
   
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_PATH}:not(:last-of-type)`]:
+      [`${OVERWRITE_THEME_DARK_PATH}:not(:last-child)`]:
         Animations.Link.LineSlideUnder.grayDark,
     },
   })}
@@ -50,20 +50,15 @@ const PathStyles = `
     display: none;
   }
 
-  .${ELEMENT_PATH} {
-    color: ${Colors.gray.medium};
-    position: relative;
-  }
-
-  .${ELEMENT_PATH}:last-of-type {
+  .${ELEMENT_PATH}:last-child {
     color: ${Colors.black};
   }
 
-  .${ELEMENT_PATH}:not(:last-of-type) {
+  .${ELEMENT_PATH}:not(:last-child) {
     margin-right: 14px;
   }
 
-  .${ELEMENT_PATH} + .${ELEMENT_PATH}::before {
+  .${ELEMENT_PATH} + *::before {
     content: '';
     display: inline-block;
     height: 14px;
@@ -90,9 +85,14 @@ const ContainerStyles = `
     } calc(100% - 24px), transparent);
   }
 
+  .${ELEMENT_CONTAINER} * {
+    color: ${Colors.gray.medium};
+    position: relative;
+  }
+
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_CONTAINER} a:not(:last-of-type)`]:
+      [`.${ELEMENT_CONTAINER} a:not(:last-child)`]:
         Animations.Link.LineSlideUnder.gray,
     },
   })}

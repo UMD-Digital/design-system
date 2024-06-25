@@ -39,7 +39,9 @@ const OverwriteThemeLight = `
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover svg,
-  ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover path {
+  ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover path,
+  ${OVERWRITE_THEME_LIGHT_CONTAINER} a:focus svg,
+  ${OVERWRITE_THEME_LIGHT_CONTAINER} a:focus path {
     fill: ${Colors.gray.darker};
   }
 `;

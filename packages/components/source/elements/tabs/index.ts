@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { Performance, Styles } from 'utilities';
+import { Animation, Performance, Styles } from 'utilities';
 
 type TypeTabsProps = {
   tabsContainer: HTMLElement;
@@ -28,6 +28,7 @@ const { Spacing, Colors } = Tokens;
 const { SansLarge } = Typography;
 const { Debounce } = Performance;
 const { ConvertPixelStringToNumber } = Styles;
+const { ScrollTo } = Animation;
 
 const ATTRIBUTE_LAYOUT_HORIZONTAL = 'data-layout-horizontal';
 const ATTRIBUTE_ARIA_EXPANDED = 'aria-expanded';
@@ -151,6 +152,10 @@ const SetDisplay = ({
 
       strip.style.height = `${activeContent.offsetHeight + space}px`;
       activeContent.style.top = `${tabsContainer.offsetHeight + space}px`;
+
+      if (!isFlexLayout && transition) {
+        ScrollTo({ element: activeContent, spread: 0 });
+      }
     }
   };
 

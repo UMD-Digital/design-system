@@ -20,17 +20,31 @@ export const CommonFeedEventsData = ({
   const token = element.getAttribute(ATTRIBUTE_TOKEN);
   const theme = element.getAttribute(ATTRIBUTE_THEME);
   const categoriesAttribute = element.getAttribute(ATTRIBUTE_CATEGORIES);
+  const numberOfRowsAttribute = element.getAttribute(ATTRIBUTE_ROWS);
+  const numberOfColumnsAttribute = element.getAttribute(ATTRIBUTE_SHOW);
+  const isValidRowAttribute =
+    numberOfRowsAttribute &&
+    Number(numberOfRowsAttribute) > 0 &&
+    Number(numberOfRowsAttribute) < 3;
+  const isValidColumnAttribute =
+    numberOfColumnsAttribute &&
+    Number(numberOfColumnsAttribute) > 1 &&
+    Number(numberOfColumnsAttribute) < 5;
+  let numberOfRowsToStart = numberOfRowsToStartDefault;
+  let numberOfColumnsToShow = numberOfColumnsToShowDefault;
 
   if (!token) {
     console.error(`Feed events requires a token to be set`);
     return;
   }
 
-  const numberOfRowsToStart =
-    Number(element.getAttribute(ATTRIBUTE_ROWS)) || numberOfRowsToStartDefault;
-  const numberOfColumnsToShow =
-    Number(element.getAttribute(ATTRIBUTE_SHOW)) ||
-    numberOfColumnsToShowDefault;
+  if (isValidRowAttribute) {
+    numberOfRowsToStart = Number(numberOfRowsAttribute);
+  }
+
+  if (isValidColumnAttribute) {
+    numberOfColumnsToShow = Number(numberOfColumnsAttribute);
+  }
 
   const data: TypeEventFeedRequirements = {
     token,

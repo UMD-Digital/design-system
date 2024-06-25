@@ -46,11 +46,11 @@ const OVERWRITE_SINGLE_COLUMN_NEXT = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCar
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_BUTTON} {
-    background-color: ${Colors.red};
+    background-color: ${Colors.red} !important;
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} > svg {
-    fill: ${Colors.white};
+    fill: ${Colors.white} !important;
   }
 `;
 
@@ -79,25 +79,21 @@ const OverwriteCarouselStyles = `
   }
 
   ${OVERWRITE_SINGLE_COLUMN} {
-    padding-bottom: 60px;
+    padding-bottom: 70px;
   }
 
   ${OVERWRITE_SINGLE_COLUMN_BUTTONS} {
-    bottom: -20px;
+    bottom: -19px;
     top: inherit;
-    background-color: ${Colors.red};
-  }
-
-  ${OVERWRITE_SINGLE_COLUMN_BUTTONS} > svg {
-    fill: ${Colors.white};
+    background-color: ${Colors.gray.lighter};
   }
 
   ${OVERWRITE_SINGLE_COLUMN_PREVIOUS} {
-    left: ${Spacing.md};
+    left: calc(50% - 24px);
   }
 
   ${OVERWRITE_SINGLE_COLUMN_NEXT} {
-    left: 74px;
+    left: calc(50% + 24px);
     right: inherit;
   }
 `;

@@ -500,7 +500,6 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         ButtonDisplay({ ...Event.helpers });
 
         const count = GetOptions.showCount();
-        SetLayout.cardHeight();
 
         if (count === 1) {
           container.setAttribute(ATTRIBUTE_SINGLE_BLOCK, '');
@@ -559,7 +558,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(Event.resize, 10));
+    window.addEventListener('resize', Event.resize);
 
     return {
       element: declaration,

@@ -84,7 +84,7 @@ const OVERWRITE_SINGLE_BLOCK_CONTAINER = `.${ELEMENT_ANIMATION_CAROUSEL_CONTAINE
 const ButtonStyles = `
   .${ELEMENT_ANIMATION_CAROUSEL_BUTTON} {
     background-color: ${Colors.red};
-    padding: ${Spacing.xs};
+    padding: 10px ${Spacing.xs};
     position: absolute;
     z-index: 9999;
     display: flex;
@@ -99,8 +99,8 @@ const ButtonStyles = `
   }
 
   .${ELEMENT_ANIMATION_CAROUSEL_BUTTON} svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     fill: ${Colors.white};
   }
 

@@ -22,6 +22,7 @@ type TypeGetState = {
   getIsFlexLayout: () => boolean;
   getButtonWidths: () => number;
   getButtonHeights: () => number;
+  getIsThemeDark: () => boolean;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -43,9 +44,20 @@ const ELEMENT_ACTIVE_LINE_STRIP = 'tab-active-line-strip';
 const ELEMENT_ACTIVE_LINE = 'tab-active-line';
 
 const IS_LAYOUT_HORIZONTAL = `[${ATTRIBUTE_LAYOUT_HORIZONTAL}]`;
+const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
 const OVERWRITE_VERTICAL_LAYOUT_CONTAINER = `.${ELEMENT_CONTAINER}${IS_LAYOUT_HORIZONTAL}`;
 const OVERWRITE_VERTICAL_LAYOUT_LINE = `${OVERWRITE_VERTICAL_LAYOUT_CONTAINER} .${ELEMENT_ACTIVE_LINE_STRIP}`;
+
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_DARK_LINE = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_ACTIVE_LINE_STRIP}`;
+
+// prettier-ignore
+const OverwriteThemeStyles = `
+  ${OVERWRITE_THEME_DARK_LINE} {
+    background-color: ${Colors.gray.dark};
+  }
+`;
 
 // prettier-ignore
 const DisplayLineStyles = `
@@ -82,6 +94,7 @@ const STYLES_TABS_ELEMENT = `
   }
 
   ${DisplayLineStyles}
+  ${OverwriteThemeStyles}
 `;
 
 const SetDisplay = ({
@@ -102,8 +115,13 @@ const SetDisplay = ({
     getButtons,
     getContents,
   } = GetElements;
-  const { getActiveTab, getIsFlexLayout, getButtonWidths, getButtonHeights } =
-    GetState;
+  const {
+    getActiveTab,
+    getIsFlexLayout,
+    getButtonWidths,
+    getButtonHeights,
+    getIsThemeDark,
+  } = GetState;
 
   const container = getContainer();
   const tabsContainer = getTabsContainer();
@@ -113,6 +131,7 @@ const SetDisplay = ({
   const buttons = getButtons();
   const contents = getContents();
   const isFlexLayout = getIsFlexLayout();
+  const isThemeDark = getIsThemeDark();
   const activeTab = getActiveTab();
   const buttonWidths = getButtonWidths();
   const buttonHeights = getButtonHeights();
@@ -132,8 +151,10 @@ const SetDisplay = ({
     buttons.map((button, index) => {
       if (index === activeTab) {
         button.setAttribute(ATTRIBUTE_ARIA_EXPANDED, 'true');
+        if (isThemeDark) button.style.color = `${Colors.white}`;
       } else {
         button.setAttribute(ATTRIBUTE_ARIA_EXPANDED, 'false');
+        if (isThemeDark) button.style.color = `${Colors.gray.light}`;
       }
     });
 
@@ -154,7 +175,10 @@ const SetDisplay = ({
       activeContent.style.top = `${tabsContainer.offsetHeight + space}px`;
 
       if (!isFlexLayout && transition) {
-        ScrollTo({ element: activeContent, spread: 0 });
+        ScrollTo({
+          element: activeContent,
+          spread: ConvertPixelStringToNumber(Spacing.md),
+        });
       }
     }
   };
@@ -258,6 +282,7 @@ const CreateTabsElement = (props: TypeTabsProps) =>
       getIsFlexLayout: () => isFlexLayout,
       getButtonWidths: () => buttonWidths,
       getButtonHeights: () => buttonHeights,
+      getIsThemeDark: () => theme === THEME_DARK,
     };
     const GetContext = { GetElements, GetState };
     const SetActiveTab = (index: number) => {

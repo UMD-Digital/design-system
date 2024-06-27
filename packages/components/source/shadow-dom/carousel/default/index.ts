@@ -33,12 +33,11 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const attributeRightButton = element.getAttribute('right-button');
   const attributeMobileHint = element.getAttribute('mobile-hint');
   const attributeHint = element.getAttribute('hint');
-  const mobileSize = element.getAttribute('mobile-size');
   const tabletSize = element.getAttribute('tablet-size');
   const desktopSize = element.getAttribute('desktop-size');
-  const mobileCount = element.getAttribute('mobile-count');
   const tabletCount = element.getAttribute('tablet-count');
   const desktopCount = element.getAttribute('desktop-count');
+  const maxCount = element.getAttribute('max-count');
   const gridGap = element.getAttribute('grid-gap-pixels');
   const slide = element.querySelector(
     `[slot="${SLOTS.BLOCKS}"]`,
@@ -75,12 +74,11 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
     hasRightButton,
     mobileHint,
     hint,
-    mobileSize: mobileSize ? parseInt(mobileSize) : undefined,
     tabletSize: tabletSize ? parseInt(tabletSize) : undefined,
     desktopSize: desktopSize ? parseInt(desktopSize) : undefined,
-    mobileCount: mobileCount ? parseInt(mobileCount) : undefined,
     tabletCount: tabletCount ? parseInt(tabletCount) : undefined,
     desktopCount: desktopCount ? parseInt(desktopCount) : undefined,
+    maxCount: maxCount ? parseInt(maxCount) : undefined,
     gridGap,
   });
 

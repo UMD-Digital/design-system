@@ -17,6 +17,7 @@ type TypeCarouselRequirements = {
   mobileCount?: number | null;
   tabletCount?: number | null;
   desktopCount?: number | null;
+  maxCount?: number | null;
 };
 
 const { Colors, Spacing } = Tokens;
@@ -131,25 +132,22 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
       hasRightButton = true,
       mobileHint,
       hint,
-      mobileSize,
       tabletSize,
       desktopSize,
-      mobileCount,
       tabletCount,
       desktopCount,
+      maxCount,
     } = props;
 
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
     const overwriteDisplayLogic: Record<string, number | boolean> = {
-      mobileBreakpoint: mobileSize || 600,
-      tabletBreakpoint: tabletSize || 1200,
-      desktopBreakpoint: desktopSize || 1500,
-      mobileCount: mobileCount || 1,
+      tabletBreakpoint: tabletSize || 768,
+      desktopBreakpoint: desktopSize || 1024,
       tabletCount: tabletCount || 2,
       desktopCount: desktopCount || 3,
-      maxCount: 4,
+      maxCount: maxCount || 4,
       hasLeftButton,
       hasRightButton,
       showMobileHint: true,

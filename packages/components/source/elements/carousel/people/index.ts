@@ -126,8 +126,6 @@ const CreateCarouselPeopleElement = (props: TypeCarouselPeopleProps) =>
         desktopCount: 3,
         maxCount: 4,
         blockGap: 0,
-        minBlockHeightTablet: 320,
-        minBlockHeightMobile: 240,
         showHint: false,
         showMobileHint: false,
       },

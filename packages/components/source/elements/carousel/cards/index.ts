@@ -40,21 +40,23 @@ const INTRO_CONTAINER_HEADLINE = 'carousel-cards-intro-container-headline';
 const INTRO_CONTAINER_TEXT = 'carousel-cards-intro-container-text';
 const INTRO_CONTAINER_CTA = 'carousel-cards-intro-container-cta';
 
+const SLIDE_CONTAINER = 'carousel-cards-slide-container';
+
 const OVERWRITE_ANIMATION_CAROUSEL_DECLARATION = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.declaration}`;
 const OVERWRITE_ANIMATION_CAROUSEL_CONTAINER = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.container}`;
 const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.button}`;
 
 // prettier-ignore
 const OverwriteCarouselStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_DECLARATION} {
-      width: 60%;
+  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
+    ${OVERWRITE_ANIMATION_CAROUSEL_CONTAINER} {
+      padding-bottom: 60px;
     }
   }
 
-    @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_CONTAINER} {
-      padding-bottom: 60px;
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    ${OVERWRITE_ANIMATION_CAROUSEL_DECLARATION} {
+      width: 60%;
     }
   }
 
@@ -282,9 +284,14 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
 
 const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
   (() => {
+    const { slide, shadowRef } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
+
+    if (slide) slide.style.minHeight = '450px';
+    if (shadowRef) shadowRef.style.minHeight = '450px';
+
     const carouselContainer = AnimationCarouselBlocks.CreateElement({
       ...props,
       blocks: props.cards,
@@ -298,8 +305,6 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
         maxCount: 2,
         showMobileHint: true,
         showHint: false,
-        minBlockHeightMobile: 360,
-        minBlockHeightTablet: 400,
       },
     });
     const introContainer = CreateIntro(props);

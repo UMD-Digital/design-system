@@ -10,8 +10,6 @@ type TypeDisplayLogic = {
   desktopBreakpoint: number;
   maxCount: number;
   blockGap: number;
-  minBlockHeightMobile: number;
-  minBlockHeightTablet: number;
   hasRightButton: boolean;
   hasLeftButton: boolean;
   showMobileHint: boolean;
@@ -34,7 +32,7 @@ type TypeHelpers = {
     slide: () => HTMLElement;
     blocks: () => HTMLElement[];
   };
-  GetOptions: {
+  GetViewOptions: {
     isTabletView: () => boolean;
     showCount: () => number;
     shouldShowMobileHint: () => boolean;
@@ -43,13 +41,11 @@ type TypeHelpers = {
     shouldShowRightButton: () => boolean;
   };
   GetSizes: {
-    blockWidth: () => number | undefined;
-    carouselWidthBasedOnBlock: () => number;
+    carouselWidthBasedOnBlock: ({ count }: { count: number }) => number;
   };
   SetLayout: {
-    cardHeight: () => void;
-    blockWidth: () => void;
-    carouselWidthBasedOnBlock: () => void;
+    blockWidth: ({ count }: { count: number }) => void;
+    carouselWidth: ({ count }: { count: number }) => void;
   };
 };
 
@@ -62,9 +58,9 @@ const { Colors, Spacing } = Tokens;
 const { ConvertPixelStringToNumber } = Styles;
 
 const ATTRIBUTE_SINGLE_BLOCK = 'single';
-const ANIMATION_DURATION = 500;
+const ANIMATION_DURATION = 750;
 const HINT_MULTIPLER_MOBILE_SIZING = 0.2;
-const HINT_MULTIPLER_SIZING = 0.7;
+const HINT_MULTIPLER_SIZING = 0.6;
 
 const IS_SINGLE_BLOCK = `[${ATTRIBUTE_SINGLE_BLOCK}]`;
 
@@ -136,7 +132,7 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
 const EventScrollCarousel = (props: TypeEventScroll) => {
   const {
     GetElements,
-    GetOptions,
+    GetViewOptions,
     GetSizes,
     SetLayout,
     isDirectionRight = true,
@@ -146,11 +142,11 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     carouselSlider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
 
-  const isShowMobileHint = GetOptions.shouldShowMobileHint();
-  const isShowHint = GetOptions.shouldShowHint();
-  const elementCount = GetOptions.showCount();
-  const elementSize = GetSizes.blockWidth();
-  const carouselSize = GetSizes.carouselWidthBasedOnBlock();
+  const isShowMobileHint = GetViewOptions.shouldShowMobileHint();
+  const isShowHint = GetViewOptions.shouldShowHint();
+  const count = GetViewOptions.showCount();
+  const elementSize = slotContent[0]?.offsetWidth || 0;
+  const carouselSize = GetSizes.carouselWidthBasedOnBlock({ count });
 
   if (!elementSize) return;
 
@@ -160,34 +156,35 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
   const animateRight = () => {
     const firstElement = slotContent[0];
     const clonedElement = firstElement.cloneNode(true) as HTMLDivElement;
-    const upcomingElement = slotContent[elementCount];
-    const hintElement = slotContent[elementCount + 1];
+    const upcomingElement = slotContent[count];
+    const hintElement = slotContent[count + 1];
 
     upcomingElement.style.display = 'block';
     carouselSlider.style.width = `${temporaryCarouselSize}px`;
-    carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
-    carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+
+    if (hintElement && (isShowMobileHint || isShowHint)) {
+      hintElement.style.display = 'block';
+    }
+
+    carouselSlider.appendChild(clonedElement);
+    clonedElement.style.display = 'none';
 
     setTimeout(() => {
-      if (isShowMobileHint || isShowHint) {
-        hintElement.style.display = 'block';
-      }
-
-      carouselSlider.appendChild(clonedElement);
-      clonedElement.style.display = 'none';
+      carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
+      carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
     }, 10);
 
     setTimeout(() => {
-      SetLayout.carouselWidthBasedOnBlock();
+      SetLayout.carouselWidth({ count });
 
       carouselSlider.removeChild(firstElement);
-    }, ANIMATION_DURATION + 10);
+    }, ANIMATION_DURATION + 100);
   };
 
   const animateLeft = () => {
     const lastElement = slotContent[slotContent.length - 1];
-    const removedElement = slotContent[elementCount - 1];
-    const hintElementSibiling = slotContent[elementCount];
+    const removedElement = slotContent[count - 1];
+    const hintElementSibiling = slotContent[count];
     const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
 
     carouselSlider.style.width = `${temporaryCarouselSize}px`;
@@ -211,8 +208,8 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
         hintElementSibiling.style.display = 'none';
       }
 
-      SetLayout.carouselWidthBasedOnBlock();
-    }, ANIMATION_DURATION - 10);
+      SetLayout.carouselWidth({ count });
+    }, ANIMATION_DURATION + 10);
   };
 
   isDirectionRight ? animateRight() : animateLeft();
@@ -234,7 +231,7 @@ const EventSwipe = (props: TypeHelpers) => {
 };
 
 const ButtonDisplay = (props: TypeHelpers) => {
-  const { GetElements, GetOptions } = props;
+  const { GetElements, GetViewOptions } = props;
   const prevousButton = GetElements.container().querySelector(
     `.${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS}`,
   ) as HTMLButtonElement;
@@ -244,9 +241,9 @@ const ButtonDisplay = (props: TypeHelpers) => {
   const buttons = [nextButton, prevousButton];
 
   const cardsTotal = GetElements.blocks().length;
-  const showCount = GetOptions.showCount();
-  const shouldShowLeftButton = GetOptions.shouldShowLeftButton();
-  const shouldShowRightButton = GetOptions.shouldShowRightButton();
+  const showCount = GetViewOptions.showCount();
+  const shouldShowLeftButton = GetViewOptions.shouldShowLeftButton();
+  const shouldShowRightButton = GetViewOptions.shouldShowRightButton();
   const shouldHideLeftButton = showCount > 1 && !shouldShowLeftButton;
   const shouldHideRightButton = showCount > 1 && !shouldShowRightButton;
 
@@ -312,21 +309,20 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
     const displayLogic: TypeDisplayLogic = {
-      mobileBreakpoint: 650,
-      tabletBreakpoint: 1024,
-      desktopBreakpoint: 1200,
+      mobileBreakpoint: 550,
+      tabletBreakpoint: 768,
+      desktopBreakpoint: 1000,
       mobileCount: 1,
       tabletCount: 2,
       desktopCount: 3,
       maxCount: 4,
       blockGap: ConvertPixelStringToNumber(Spacing.md),
-      minBlockHeightMobile: 240,
-      minBlockHeightTablet: 300,
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: true,
       showHint: true,
     };
+    let blockWidth = 0;
 
     if (overwriteDisplayLogic) {
       Object.keys(overwriteDisplayLogic).forEach((key) => {
@@ -343,35 +339,31 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       blocks: () => blocks,
     };
 
-    const GetOptions = {
+    const GetViewOptions = {
       isMobileView: () => {
-        return (
-          GetSizes.carouselWidthMinusGap() <= displayLogic.mobileBreakpoint
-        );
+        return GetSizes.containerWidth() <= displayLogic.mobileBreakpoint;
       },
       isTabletView: () => {
         return (
-          GetSizes.carouselWidthMinusGap() > displayLogic.mobileBreakpoint &&
-          GetSizes.carouselWidthMinusGap() <= displayLogic.tabletBreakpoint
+          GetSizes.containerWidth() > displayLogic.mobileBreakpoint &&
+          GetSizes.containerWidth() <= displayLogic.tabletBreakpoint
         );
       },
 
       isDesktopView: () => {
         return (
-          GetSizes.carouselWidthMinusGap() > displayLogic.tabletBreakpoint &&
-          GetSizes.carouselWidthMinusGap() <= displayLogic.desktopBreakpoint
+          GetSizes.containerWidth() > displayLogic.tabletBreakpoint &&
+          GetSizes.containerWidth() <= displayLogic.desktopBreakpoint
         );
       },
       isHighView: () => {
-        return (
-          GetSizes.carouselWidthMinusGap() > displayLogic.desktopBreakpoint
-        );
+        return GetSizes.containerWidth() > displayLogic.desktopBreakpoint;
       },
       showCount: () => {
-        const isMobile = GetOptions.isMobileView();
-        const isTablet = GetOptions.isTabletView();
-        const isDesktop = GetOptions.isDesktopView();
-        const isHighDef = GetOptions.isHighView();
+        const isMobile = GetViewOptions.isMobileView();
+        const isTablet = GetViewOptions.isTabletView();
+        const isDesktop = GetViewOptions.isDesktopView();
+        const isHighDef = GetViewOptions.isHighView();
         let count = 1;
 
         if (isMobile) count = displayLogic.mobileCount;
@@ -382,10 +374,16 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         return count;
       },
       shouldShowMobileHint: () => {
-        return displayLogic.showMobileHint && GetOptions.isMobileView();
+        const isMobileView = GetViewOptions.isMobileView();
+        const isShowMobileHint = displayLogic.showMobileHint;
+        const isShowHint = displayLogic.showHint;
+
+        return (
+          (isShowMobileHint && isMobileView) || (isShowHint && isMobileView)
+        );
       },
       shouldShowHint: () => {
-        return displayLogic.showHint && !GetOptions.isMobileView();
+        return displayLogic.showHint && !GetViewOptions.isMobileView();
       },
       shouldShowLeftButton: () => {
         return displayLogic.hasLeftButton;
@@ -396,92 +394,59 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     };
 
     const GetSizes = {
-      blockWidth: () => {
-        const isShowMobileHint = GetOptions.shouldShowMobileHint();
-        const isShowHint = GetOptions.shouldShowHint();
+      mobileHintWidth: ({ count }: { count: number }) => {
         const containerWidth = container.offsetWidth;
-        const count = GetOptions.showCount();
-
-        if (isShowMobileHint) {
-          const hintElementSize = containerWidth * HINT_MULTIPLER_MOBILE_SIZING;
-
-          return (containerWidth - hintElementSize) / count;
-        }
-
-        if (isShowHint) {
-          const hintElementSize =
-            (containerWidth / (count + 1)) * HINT_MULTIPLER_SIZING;
-
-          return (containerWidth - hintElementSize) / count;
-        }
-
-        return containerWidth / count;
+        return (containerWidth / count) * HINT_MULTIPLER_MOBILE_SIZING;
       },
-      carouselWidthBasedOnBlock: () => {
-        const isShowMobileHint = GetOptions.shouldShowMobileHint();
-        const isShowHint = GetOptions.shouldShowHint();
-        const count = GetOptions.showCount();
-        const elementSize = GetSizes.blockWidth();
+      hintWidth: ({ count }: { count: number }) => {
+        const containerWidth = container.offsetWidth;
+        return (containerWidth / count) * HINT_MULTIPLER_SIZING;
+      },
+      carouselWidthBasedOnBlock: ({ count }: { count: number }) => {
+        const elementSize = blockWidth;
+        const isShowMobileHint = GetViewOptions.shouldShowMobileHint();
+        const isShowHint = GetViewOptions.shouldShowHint();
 
         if (!elementSize) return window.innerWidth;
 
         if (isShowMobileHint || isShowHint) {
-          const updatedCount = count + 1;
-          return elementSize * updatedCount;
+          return elementSize * (count + 1);
         }
 
         return elementSize * count;
       },
-      carouselWidthMinusGap: () => {
-        return container.offsetWidth - displayLogic.blockGap;
+      containerWidth: () => {
+        return container.offsetWidth;
       },
     };
 
     const SetLayout = {
-      cardHeight: () => {
-        const minimumHeight =
-          window.innerWidth > 768
-            ? displayLogic.minBlockHeightTablet
-            : displayLogic.minBlockHeightMobile;
-        const maxHeight = blocks.reduce((acc, currentElement) => {
-          if (acc > currentElement.offsetHeight) return acc;
-          return currentElement.offsetHeight;
-        }, minimumHeight);
-
-        blocks.forEach((block) => {
-          block.style.height = `${maxHeight}px`;
-        });
-      },
-      blockWidth: () => {
-        const elementSize = GetSizes.blockWidth();
-
-        blocks.forEach((block) => {
-          block.style.width = `${elementSize}px`;
-        });
-      },
-      carouselWidthBasedOnBlock: () => {
-        const elementSize = GetSizes.carouselWidthBasedOnBlock();
+      blockWidth: () =>
+        blocks.forEach((block) => (block.style.width = `${blockWidth}px`)),
+      carouselWidth: ({ count }: { count: number }) => {
+        const elementSize = GetSizes.carouselWidthBasedOnBlock({ count });
 
         slide.style.width = `${elementSize}px`;
         slide.style.transition = 'none';
         slide.style.transform = 'translateX(0)';
       },
-      blockDisplay: () => {
-        const count = GetOptions.showCount() - 1;
-        const isShowMobileHint = GetOptions.shouldShowMobileHint();
-        const isShowHint = GetOptions.shouldShowHint();
+      blockDisplay: ({ count }: { count: number }) => {
+        const containerBlocks = Array.from(
+          slide.querySelectorAll(':scope > *'),
+        ) as HTMLElement[];
+        const isHint = GetViewOptions.shouldShowHint();
+        const isShowMobileHint = GetViewOptions.shouldShowMobileHint();
 
-        blocks.forEach((block, index) => {
-          if (index > count) {
+        containerBlocks.forEach((block, index) => {
+          if (index >= count) {
             block.style.display = 'none';
           } else {
             block.style.display = 'block';
           }
         });
 
-        if (isShowMobileHint || isShowHint) {
-          blocks[count + 1].style.display = 'block';
-        }
+        if (isShowMobileHint) containerBlocks[1].style.display = 'block';
+        if (isHint) containerBlocks[count].style.display = 'block';
       },
     };
 
@@ -489,17 +454,35 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       helpers: {
         displayLogic,
         GetElements,
-        GetOptions,
+        GetViewOptions,
         GetSizes,
         SetLayout,
       },
       resize: () => {
-        SetLayout.blockDisplay();
-        SetLayout.blockWidth();
-        SetLayout.carouselWidthBasedOnBlock();
-        ButtonDisplay({ ...Event.helpers });
+        const count = GetViewOptions.showCount();
+        const cacluateBlockWidth = ({ count }: { count: number }) => {
+          const isShowMobileHint = GetViewOptions.shouldShowMobileHint();
+          const isShowHint = GetViewOptions.shouldShowHint();
+          const containerWidth = container.offsetWidth;
 
-        const count = GetOptions.showCount();
+          if (isShowMobileHint || isShowHint) {
+            let hintElementSize = GetSizes.hintWidth({ count });
+
+            if (isShowMobileHint) {
+              hintElementSize = GetSizes.mobileHintWidth({ count });
+            }
+
+            blockWidth = (containerWidth - hintElementSize) / count;
+          } else {
+            blockWidth = containerWidth / count;
+          }
+        };
+
+        cacluateBlockWidth({ count });
+        SetLayout.blockWidth();
+        SetLayout.blockDisplay({ count });
+        SetLayout.carouselWidth({ count });
+        ButtonDisplay({ ...Event.helpers });
 
         if (count === 1) {
           container.setAttribute(ATTRIBUTE_SINGLE_BLOCK, '');
@@ -508,7 +491,6 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         }
       },
       load: () => {
-        SetLayout.blockDisplay();
         slide.style.display = 'flex';
         slide.style.gap = `${displayLogic.blockGap}px`;
 
@@ -558,7 +540,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Event.resize);
+    window.addEventListener('resize', Debounce(Event.resize, 30));
 
     return {
       element: declaration,

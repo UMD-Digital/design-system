@@ -1,6 +1,8 @@
 import { SlotWithDefaultStyling } from './create';
 
 const ImageHasAlt = ({ image }: { image: HTMLImageElement }) => {
+  if (!image) return true;
+
   const altText = image.getAttribute('alt');
   if (!altText) {
     console.error('Image elements require alt text');

@@ -26,9 +26,15 @@ const OVERWRITE_IMAGE_CONTIANER = `.${ELEMENT_EVENT_BLOCK_CONTAINER} .${LayoutIm
 
 // prettier-ignore
 const OverwriteImageContainer = `
+  ${OVERWRITE_IMAGE_CONTIANER} {
+    display: flex;
+    justify-content: center;
+  }
+
   @media (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_CONTIANER} img {
       aspect-ratio: inherit;
+      max-height: 500px;
     }
   }
 `;

@@ -17,6 +17,7 @@ type TypeCarouselRequirements = {
   mobileCount?: number | null;
   tabletCount?: number | null;
   desktopCount?: number | null;
+  maxCount?: number | null;
 };
 
 const { Colors, Spacing } = Tokens;
@@ -46,11 +47,11 @@ const OVERWRITE_SINGLE_COLUMN_NEXT = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCar
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_BUTTON} {
-    background-color: ${Colors.red};
+    background-color: ${Colors.red} !important;
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} > svg {
-    fill: ${Colors.white};
+    fill: ${Colors.white} !important;
   }
 `;
 
@@ -79,25 +80,21 @@ const OverwriteCarouselStyles = `
   }
 
   ${OVERWRITE_SINGLE_COLUMN} {
-    padding-bottom: 60px;
+    padding-bottom: 70px;
   }
 
   ${OVERWRITE_SINGLE_COLUMN_BUTTONS} {
-    bottom: -20px;
+    bottom: -19px;
     top: inherit;
-    background-color: ${Colors.red};
-  }
-
-  ${OVERWRITE_SINGLE_COLUMN_BUTTONS} > svg {
-    fill: ${Colors.white};
+    background-color: ${Colors.gray.lighter};
   }
 
   ${OVERWRITE_SINGLE_COLUMN_PREVIOUS} {
-    left: ${Spacing.md};
+    left: calc(50% - 24px);
   }
 
   ${OVERWRITE_SINGLE_COLUMN_NEXT} {
-    left: 74px;
+    left: calc(50% + 24px);
     right: inherit;
   }
 `;
@@ -135,25 +132,22 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
       hasRightButton = true,
       mobileHint,
       hint,
-      mobileSize,
       tabletSize,
       desktopSize,
-      mobileCount,
       tabletCount,
       desktopCount,
+      maxCount,
     } = props;
 
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
     const overwriteDisplayLogic: Record<string, number | boolean> = {
-      mobileBreakpoint: mobileSize || 600,
-      tabletBreakpoint: tabletSize || 1200,
-      desktopBreakpoint: desktopSize || 1500,
-      mobileCount: mobileCount || 1,
+      tabletBreakpoint: tabletSize || 768,
+      desktopBreakpoint: desktopSize || 1024,
       tabletCount: tabletCount || 2,
       desktopCount: desktopCount || 3,
-      maxCount: 4,
+      maxCount: maxCount || 4,
       hasLeftButton,
       hasRightButton,
       showMobileHint: true,

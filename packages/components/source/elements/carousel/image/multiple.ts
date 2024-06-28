@@ -129,6 +129,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
     const clonedImages = images.map((image) =>
       image.cloneNode(true),
     ) as HTMLImageElement[];
+
     const overlayCarousel = AnimationCarouselOverlay.CreateElement({
       images,
     });
@@ -160,8 +161,6 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
         desktopBreakpoint: 1400,
         desktopCount: 3,
         maxCount: 4,
-        minBlockHeightTablet: 320,
-        minBlockHeightMobile: 240,
         showHint: false,
       },
     });
@@ -173,7 +172,18 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
     elementDeclaration.classList.add(ELEMENT_CAROUSEL_MULTIPLE_DECLARATION);
     elementDeclaration.appendChild(elementContainer);
 
-    images[images.length - 1].addEventListener('load', carousel.events.load);
+    images[images.length - 1].addEventListener('load', () => {
+      carousel.events.load();
+
+      setTimeout(() => {
+        const maxHeight = clonedImages.reduce(
+          (acc, image) => (image.offsetHeight > acc ? image.offsetHeight : acc),
+          300,
+        );
+
+        slide.style.minHeight = `${maxHeight}px`;
+      }, 100);
+    });
 
     return {
       element: elementDeclaration,

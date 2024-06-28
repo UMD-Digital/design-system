@@ -201,7 +201,7 @@ const headlineStyles = `
   .${ELEMENT_HEADLINE}[aria-expanded='true'],
   .${ELEMENT_HEADLINE}:hover,
   .${ELEMENT_HEADLINE}:focus {
-    background-color: ${Colors.gray.lighter};
+    background-color: ${Colors.gray.lightest};
     border-top: 1px solid ${Colors.red};
   }
 

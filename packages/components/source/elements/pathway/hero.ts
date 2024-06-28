@@ -171,8 +171,14 @@ const LockStyles = `
     .${PATHWAY_HERO_CONTAINER_LOCK} {
       display: flex;
       align-items: center;
-      min-height: 832px;
+      min-height: 720px;
       padding-left: ${Spacing['2xl']};
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    .${PATHWAY_HERO_CONTAINER_LOCK} {
+      padding-left: ${Spacing['4xl']};
     }
   }
 

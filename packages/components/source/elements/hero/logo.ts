@@ -130,7 +130,7 @@ const OverwriteImageContainer = `
   }
 `;
 
-export const STYLES_HERO_LOGO_ELEMENT = `
+const STYLES_HERO_LOGO_ELEMENT = `
   .${ELEMENT_HERO_ELEMENT_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
   }

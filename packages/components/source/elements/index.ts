@@ -24,6 +24,7 @@ import FeedsNews from './feeds/news';
 import FeedsSlides from './feeds/slides';
 import NavigationElements from './navigation/elements';
 import NavigationHeader from './navigation';
+import HeroBrandVideo from './hero/brand-video';
 import HeroDefault from './hero/default';
 import HeroElements from './hero/elements';
 import HeroMinimal from './hero/minimal';
@@ -85,6 +86,7 @@ export {
   FeedsSlides,
   NavigationElements,
   NavigationHeader,
+  HeroBrandVideo,
   HeroDefault,
   HeroElements,
   HeroMinimal,

@@ -22,6 +22,7 @@ import FeedEventsGrouped from './feeds/events/grouped';
 import FeedEventsList from './feeds/events/list';
 import Footer from './footer';
 import Hero from './hero/default';
+import HeroBrandVideo from './hero/brand/video';
 import HeroLogo from './hero/logo';
 import HeroMinimal from './hero/minimal';
 import Logo from './logo';
@@ -70,6 +71,7 @@ export {
   FeedNewsList,
   Footer,
   Hero,
+  HeroBrandVideo,
   HeroLogo,
   HeroMinimal,
   Logo,

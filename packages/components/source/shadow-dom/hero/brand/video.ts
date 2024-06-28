@@ -38,12 +38,13 @@ const CreateShadowDom = ({
 
   if (!video) return;
 
+  const videoElement = HeroBrandVideo.CreateElement({
+    video,
+  });
+
   shadow.appendChild(template.content.cloneNode(true));
-  shadow.appendChild(
-    HeroBrandVideo.CreateElement({
-      video,
-    }),
-  );
+  shadow.appendChild(videoElement.element);
+  videoElement.events.load();
 };
 
 export class UMDHeroBrandVideoElement extends HTMLElement {

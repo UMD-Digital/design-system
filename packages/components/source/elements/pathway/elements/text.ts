@@ -98,7 +98,8 @@ const HeadlineStyles = `
     },
   })}
 
-  .${ELEMENT_TEXT_CONTAINER_HEADLINE} {
+  .${ELEMENT_TEXT_CONTAINER_HEADLINE},
+  .${ELEMENT_TEXT_CONTAINER_HEADLINE} * {
     color: ${Colors.black};
     font-weight: 800;
     text-transform: uppercase;

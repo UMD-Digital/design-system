@@ -33,6 +33,8 @@ const MainArrowStyles = `
     transform: translate(-100%, -50%);
     height: 100%;
     z-index: 9;
+    display: flex;
+    align-items: center;
   }
 
   .${ELEMENT_GENERIC_ARROW} {

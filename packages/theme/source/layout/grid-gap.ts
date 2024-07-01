@@ -121,6 +121,15 @@ export default {
   '.umd-grid-gap-four': {
     ...GridColumnsFourWithGap,
   },
+  '.umd-grid-gap-four-center': {
+    ...GridColumnsFourWithGap,
+
+    '& > *:first-child': {
+      [`@media (${Queries.desktop.min})`]: {
+        gridColumnStart: '2',
+      },
+    },
+  },
   '.umd-grid-gap-three-large': {
     ...GridColumnsThreeWithGapLarge,
   },

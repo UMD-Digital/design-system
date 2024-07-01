@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 
 import Animations from './animations';
 import Accessibility from './accessibility';
@@ -8,6 +8,50 @@ import Layout from './layout';
 import WebComponents from './web-components';
 
 const { Colors, FontFamily, FontSize } = Tokens;
+const { SansMedium } = Typography;
+
+const Reset = {
+  body: {
+    overscrollBehavior: 'none',
+  },
+
+  'h1, h2, h3, h4, h5, h6': {
+    marginBottom: '0',
+    fontSize: '16px',
+    lineHeight: '1.4em',
+    fontWeight: 'normal',
+  },
+
+  hr: {
+    margin: `${Tokens.Spacing.lg} 0`,
+    backgroundColor: Colors.gray.light,
+    border: 'none',
+    height: '1px',
+  },
+
+  li: {
+    ...SansMedium,
+    color: Colors.gray.dark,
+  },
+
+  date: {
+    color: Colors.black,
+  },
+
+  p: {
+    ...SansMedium,
+    color: Colors.gray.dark,
+    marginBottom: Tokens.Spacing.md,
+
+    '&:last-child': {
+      marginBottom: '0',
+    },
+  },
+
+  address: {
+    fontStyle: 'normal',
+  },
+};
 
 const root = {
   ':root': {
@@ -32,12 +76,7 @@ const root = {
     lineHeight: '1.5em',
   },
 
-  hr: {
-    margin: `${Tokens.Spacing.lg} 0`,
-    backgroundColor: Colors.gray.light,
-    border: 'none',
-    height: '1px',
-  },
+  ...Reset,
 };
 
 export const base = Tokens;

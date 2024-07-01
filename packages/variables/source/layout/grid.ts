@@ -13,10 +13,9 @@ const GridBaseQueries = {
 };
 
 const GridGapBaseQueries = {
-  gridGap: Spacing.md,
+  gridGap: Spacing.lg,
 
   [`@media (${Queries.large.min})`]: {
-    gridGap: Spacing.lg,
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
 
@@ -97,7 +96,7 @@ const GridColumnsFourWithGapLarge = {
 
 const GridRowsWithGapBase = {
   ...GridBase,
-  gridGap: Spacing.md,
+  gridGap: Spacing.lg,
 };
 
 const GridColumnAndRows = {

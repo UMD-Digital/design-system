@@ -92,6 +92,7 @@ const TextStyles = `
   .${ELEMENT_RICH_TEXT},
   .${ELEMENT_RICH_TEXT} * {
     font-weight: 700;
+    color: ${Colors.black};
   }
 
   ${ConvertJSSObjectToStyles({

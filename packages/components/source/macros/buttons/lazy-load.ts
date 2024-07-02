@@ -15,7 +15,7 @@ export type TypeLazyLoad = LazyLoadCreate & {
 
 const { Spacing } = Tokens;
 
-const ID_LAZY_LOAD_BUTTON = 'umd-feeds-events-lazy-load-button';
+const ID_LAZY_LOAD_BUTTON = 'button-lazy-load';
 
 const STYLES_LAZY_LOAD_BUTTON = `
   ${CallToAction.Styles}

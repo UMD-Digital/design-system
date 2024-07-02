@@ -1,4 +1,4 @@
-import { AnimationOverlayBrand } from 'macros';
+import { AnimationOverlayBrand, ButtonVideoState } from 'macros';
 
 type TypeHeroBrandVideoProps = {
   video: HTMLVideoElement;
@@ -41,6 +41,7 @@ const STYLES_HERO_BRAND_VIDEO_ELEMENT = `
   }
 
   ${VideoStyles}
+  ${ButtonVideoState.Styles}
   ${AnimationOverlayBrand.Styles}
 `;
 
@@ -53,12 +54,18 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
     sizedContainer: container,
     sizedWrapper: wrapper,
   });
+  const buttonMacro = ButtonVideoState.CreateElement({ video });
+  const eventLoad = () => {
+    overlay.events.load();
+    buttonMacro.events.setButtonPlay();
+  };
 
   video.classList.add(ELEMENT_HERO_ELEMENT_VIDEO);
 
   wrapper.classList.add(ELEMENT_HERO_ELEMENT_WRAPPER);
   wrapper.appendChild(video);
   wrapper.appendChild(overlay.element);
+  wrapper.appendChild(buttonMacro.elements.button);
 
   container.classList.add(ELEMENT_HERO_ELEMENT_CONTAINER);
   container.appendChild(wrapper);
@@ -69,7 +76,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
   return {
     element: declaration,
     events: {
-      load: overlay.events.load,
+      load: eventLoad,
     },
   };
 };

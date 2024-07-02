@@ -5,7 +5,7 @@ const { Colors, Spacing } = Tokens;
 const { SansMin } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 
-const ELEMENT_BUTTON = 'full-screen-button';
+const ELEMENT_BUTTON = 'button-full-screen';
 
 // prettier-ignore
 const STYLES_FULL_SCREEN_BUTTON = `

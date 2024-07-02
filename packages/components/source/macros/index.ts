@@ -6,6 +6,7 @@ import AnimationLoader from './animations/loader';
 import AnimationOverlayBrand from './animations/overlay-brand';
 import ButtonLazyLoad from './buttons/lazy-load';
 import ButtonFullScreen from './buttons/full-screen';
+import ButtonVideoState from './buttons/video-state';
 import LayoutBlock from './layout/block';
 import LayoutBlockOverlay from './layout/overlay';
 import LayoutFixedFullScreen from './layout/fixed-full-screen';
@@ -24,6 +25,7 @@ export {
   AnimationOverlayBrand,
   ButtonLazyLoad,
   ButtonFullScreen,
+  ButtonVideoState,
   LayoutBlock,
   LayoutBlockOverlay,
   LayoutFixedFullScreen,

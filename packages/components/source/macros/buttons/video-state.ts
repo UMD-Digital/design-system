@@ -19,7 +19,7 @@ const STYLES_BUTTON_VIDEO_STATE = `
 
   .${ELEMENT_BUTTON} svg {
     fill: white;
-    width: 24px;
+    width: 20px;
   }
 `;
 

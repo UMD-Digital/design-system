@@ -6,6 +6,7 @@ declare global {
 
 import { MarkupCreate, Styles } from 'utilities';
 import { HeroBrandVideo } from 'elements';
+import { SlotWithDefaultStyling } from 'utilities/markup/create';
 
 const { SlotOberserver, Node } = MarkupCreate;
 
@@ -40,6 +41,8 @@ const CreateShadowDom = ({
 
   const videoElement = HeroBrandVideo.CreateElement({
     video,
+    headline: SlotWithDefaultStyling({ element, slotRef: 'headline' }),
+    text: SlotWithDefaultStyling({ element, slotRef: 'text' }),
   });
 
   shadow.appendChild(template.content.cloneNode(true));

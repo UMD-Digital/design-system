@@ -4,6 +4,7 @@ type TypeAnimationProps = {
   container: HTMLDivElement;
   getHeightDiff: () => number;
   getContainerHeight: () => number;
+  completedCallback?: () => void;
 };
 
 type TypeArrowProps = TypeAnimationProps & {
@@ -24,6 +25,7 @@ const ID_SLIDE_IN_RED = 'slide-in-red-arrow';
 const ID_ARROW_BEHIND_OVERLAY = 'animation-overlay-arrow';
 
 const TIMING_ANIMATION_ARROW_FIRST_TIME_IN = 1200;
+const TIMING_ANIMATION_ARROW_FIRST_TIME_OUT = 4000;
 
 const MainArrowStyles = `
   .${ELEMENT_LAYER_RED_ARROW_CONTAINER} {
@@ -147,7 +149,6 @@ const AnimateMainArrow = (props: TypeAnimationProps) => {
     `#${ID_OVERLAY_LEFT}`,
   ) as SVGElement;
   const diff = getHeightDiff();
-  const TIME_OUT = 5000;
 
   const alignment =
     overlayLeft.getBoundingClientRect().width / 2 +
@@ -159,13 +160,13 @@ const AnimateMainArrow = (props: TypeAnimationProps) => {
   arrow.style.transform = `translateX(${alignment}px)`;
 
   setTimeout(() => {
-    arrow.style.transition = `transform ${TIME_OUT}ms ease-in-out`;
+    arrow.style.transition = `transform ${TIMING_ANIMATION_ARROW_FIRST_TIME_OUT}ms ease-in-out`;
     arrow.style.transform = `translateX(${alignment * 3}px)`;
   }, TIMING_ANIMATION_ARROW_FIRST_TIME_IN);
 };
 
 const AnimateOverlay = (props: TypeAnimationProps) => {
-  const { container } = props;
+  const { container, completedCallback } = props;
   const partOne = container.querySelector(`#${ID_OVERLAY_LEFT}`) as SVGElement;
   const partTwo = container.querySelector(`#${ID_OVERLAY_RIGHT}`) as SVGElement;
   const partThree = container.querySelector(
@@ -182,16 +183,21 @@ const AnimateOverlay = (props: TypeAnimationProps) => {
   }, TIMING_ANIMATION_ARROW_FIRST_TIME_IN - 200);
 
   setTimeout(() => {
-    partOne.style.transition = `transform ${FIRST_ELEMENT_TIME_OUT}ms ease-in-out`;
+    partOne.style.transition = `transform ${TIMING_ANIMATION_ARROW_FIRST_TIME_OUT}ms ease-in-out`;
     partOne.style.transform = `translateX(${endPosition}px`;
-  }, SYNC_TIME);
+  }, SYNC_TIME + 100);
 
   setTimeout(() => {
-    partThree.style.transition = `transform ${
-      FIRST_ELEMENT_TIME_OUT + 300
-    }ms ease-in-out`;
+    partThree.style.transition = `transform ${TIMING_ANIMATION_ARROW_FIRST_TIME_OUT}ms ease-in-out`;
     partThree.style.transform = `translate(${endPosition}px, -50%)`;
-  }, SYNC_TIME - 100);
+  }, SYNC_TIME + 50);
+
+  if (completedCallback) {
+    setTimeout(
+      () => completedCallback(),
+      TIMING_ANIMATION_ARROW_FIRST_TIME_OUT,
+    );
+  }
 };
 
 const AnimationSequence = (props: TypeAnimationProps) => {
@@ -202,9 +208,11 @@ const AnimationSequence = (props: TypeAnimationProps) => {
 const CreateAnimationOverlayBrandElement = ({
   sizedContainer,
   sizedWrapper,
+  completedCallback,
 }: {
   sizedContainer: HTMLDivElement;
   sizedWrapper: HTMLDivElement;
+  completedCallback?: () => void;
 }) => {
   const container = document.createElement('div');
 
@@ -216,6 +224,7 @@ const CreateAnimationOverlayBrandElement = ({
     container: container,
     getHeightDiff,
     getContainerHeight,
+    completedCallback,
   };
   const overlay = CreateAnimatioOverlayContainer(data);
   const overlayArrow = CreateAnimationArrowContainer({
@@ -240,19 +249,15 @@ const CreateAnimationOverlayBrandElement = ({
     }
   };
   const EventResize = () => {
-    SizeElements.All(data);
+    window.removeEventListener('resize', EventResize);
+    container.style.display = 'none';
   };
 
   container.appendChild(overlay);
   container.appendChild(overlayArrow);
   container.appendChild(slideInArrow);
 
-  window.addEventListener(
-    'resize',
-    Debounce(() => {
-      EventResize();
-    }, 100),
-  );
+  window.addEventListener('resize', EventResize);
 
   return {
     element: container,

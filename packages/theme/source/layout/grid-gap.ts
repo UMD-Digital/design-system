@@ -50,7 +50,6 @@ const GridColumnsFeatured = {
 const MasonryGrid = {
   display: 'grid',
   gridTemplateColumns: '1fr',
-  gridGap: `${Spacing.md}`,
 
   [`@media (${Queries.tablet.min})`]: {
     gridTemplateColumns: '1fr 1fr',
@@ -71,20 +70,12 @@ const MasonryGrid = {
   '& > *:nth-of-type(odd)': {
     [`@media (${Queries.tablet.min})`]: {
       marginTop: `-${Spacing.lg}`,
+      marginBottom: `${Spacing.lg}`,
     },
 
     [`@media (${Queries.desktop.min})`]: {
       marginTop: `-${Spacing.xl}`,
-    },
-
-    '& > *': {
-      [`@media (${Queries.tablet.min})`]: {
-        height: `calc(100% - ${Spacing.lg})`,
-      },
-
-      [`@media (${Queries.desktop.min})`]: {
-        height: `calc(100% - ${Spacing.xl})`,
-      },
+      marginBottom: `${Spacing.xl}`,
     },
   },
 

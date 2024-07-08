@@ -15,7 +15,7 @@ type TypeStatRequirements = TypeStatElement & {
 };
 
 const { ConvertJSSObjectToStyles } = Styles;
-const { Colors, Spacing } = Tokens;
+const { Colors, Spacing, Breakpoints } = Tokens;
 const {
   SansLarger,
   SansMedium,
@@ -84,7 +84,13 @@ const VarationDisplayBlockStyles = `
     align-items: center;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${BLOCK_SMALL}px) {
+  @media (min-width: ${Breakpoints.large.min}) {
+    .${ELEMENT_DISPLAY_BLOCK} {
+      padding: ${Spacing.lg};
+    }
+  }
+
+  @media (min-width: ${Breakpoints.highDef.min}) {
     .${ELEMENT_DISPLAY_BLOCK} {
       padding: ${Spacing['2xl']} ${Spacing['3xl']};
     }

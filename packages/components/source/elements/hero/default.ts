@@ -228,7 +228,7 @@ const DefaultStyles = `
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_INTERIOR_CONTAINER} .${HERO_LOCK} {
       min-height: 400px;
-      align-items: center;
+      align-items: flex-end;
       display: flex;
     }
   }

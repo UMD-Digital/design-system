@@ -27,7 +27,7 @@ const {
 
 const BLOCK_TEXTURE = `<svg id="stat_block-texture" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 526 491"><defs><style>.cls-1{opacity:.02;}.cls-1,.cls-2{fill:#454545;fill-rule:evenodd;isolation:isolate;stroke-width:0px;}.cls-2{opacity:.04;}</style></defs><path class="cls-1" d="M109.49,0H0v63.18l181.67,182.32L0,427.82v63.18h109.49l244.61-245.5L109.49,0Z"/><path class="cls-2" d="M108.94,0h172.44l244.61,245.5-244.61,245.5H108.94l244.61-245.5L108.94,0ZM0,179.11l58.16-58.29L0,62.54v116.57Z"/></svg>`;
 
-const BLOCK_SMALL = 600;
+const BLOCK_SMALL = 300;
 const SMALL = 400;
 const ELEMENT_NAME = 'umd-element-stat';
 const ATTRIBUTE_THEME = 'theme';
@@ -79,14 +79,14 @@ const VarationDisplayBlockStyles = `
     background-color: ${Colors.gray.lightest};
     position: relative;
     overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${BLOCK_SMALL}px) {
     .${ELEMENT_DISPLAY_BLOCK} {
       padding: ${Spacing['2xl']} ${Spacing['3xl']};
-      height: 100%;
-      display: flex;
-      align-items: center;
     }
   }
 

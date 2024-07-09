@@ -6,6 +6,7 @@ type TypeHeroBrandVideoProps = {
   video: HTMLVideoElement;
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
+  isAnimationOnLoad?: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -184,7 +185,7 @@ const AnimationSequence = ({ container }: { container: HTMLDivElement }) => {
 };
 
 const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
-  const { video } = props;
+  const { video, isAnimationOnLoad } = props;
   const declaration = document.createElement('section');
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -194,6 +195,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
     sizedContainer: container,
     sizedWrapper: wrapper,
     completedCallback,
+    isAnimationOnLoad,
   });
   const buttonMacro = ButtonVideoState.CreateElement({ video });
   const eventLoad = () => {

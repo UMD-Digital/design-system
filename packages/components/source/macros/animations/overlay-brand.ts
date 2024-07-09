@@ -1,5 +1,3 @@
-import { Performance } from 'utilities';
-
 type TypeAnimationProps = {
   container: HTMLDivElement;
   getHeightDiff: () => number;
@@ -11,8 +9,6 @@ type TypeArrowProps = TypeAnimationProps & {
   id: string;
   wrapperStyleRef?: string;
 };
-
-const { Debounce } = Performance;
 
 const ELEMENT_LAYER_OVERLAY_CONTAINER = 'animation-overlay-layer-container';
 const ELEMENT_LAYER_RED_ARROW_CONTAINER =
@@ -148,11 +144,14 @@ const AnimateMainArrow = (props: TypeAnimationProps) => {
   const overlayLeft = container.querySelector(
     `#${ID_OVERLAY_LEFT}`,
   ) as SVGElement;
+  const overlayPosition = overlayLeft.getBoundingClientRect();
+  const arrowPosition = arrow.getBoundingClientRect();
   const diff = getHeightDiff();
 
   const alignment =
-    overlayLeft.getBoundingClientRect().width / 2 +
-    Math.abs(arrow.getBoundingClientRect().left) +
+    overlayPosition.width / 2 +
+    Math.abs(arrowPosition.left) +
+    Math.abs(overlayPosition.left) +
     diff;
 
   SizeElements.Arrow({ arrow, height });
@@ -209,10 +208,12 @@ const CreateAnimationOverlayBrandElement = ({
   sizedContainer,
   sizedWrapper,
   completedCallback,
+  isAnimationOnLoad = true,
 }: {
   sizedContainer: HTMLDivElement;
   sizedWrapper: HTMLDivElement;
   completedCallback?: () => void;
+  isAnimationOnLoad?: boolean;
 }) => {
   const container = document.createElement('div');
 
@@ -237,16 +238,22 @@ const CreateAnimationOverlayBrandElement = ({
     wrapperStyleRef: ELEMENT_LAYER_RED_ARROW_CONTAINER,
   });
   const EventLoad = () => {
-    if (window.innerWidth > 768) {
-      const scrollEvent = () => {
+    if (isAnimationOnLoad) {
+      AnimationSequence(data);
+      return;
+    }
+
+    const scrollEvent = () => {
+      const containerPosition = container.getBoundingClientRect();
+      const top = containerPosition.top;
+
+      if (top < window.innerHeight && window.scrollY !== 0) {
         AnimationSequence(data);
         window.removeEventListener('scroll', scrollEvent);
-      };
+      }
+    };
 
-      window.addEventListener('scroll', scrollEvent);
-    } else {
-      AnimationSequence(data);
-    }
+    window.addEventListener('scroll', scrollEvent);
   };
   const EventResize = () => {
     window.removeEventListener('resize', EventResize);

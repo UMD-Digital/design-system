@@ -33,6 +33,7 @@ const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const videoSlot = Node.slot({ type: SLOTS.VIDEO });
+  const animationTriggerAttribute = element.getAttribute('animation-trigger');
   shadow.appendChild(videoSlot);
 
   const video = element.querySelector('video') as HTMLVideoElement;
@@ -43,6 +44,7 @@ const CreateShadowDom = ({
     video,
     headline: SlotWithDefaultStyling({ element, slotRef: 'headline' }),
     text: SlotWithDefaultStyling({ element, slotRef: 'text' }),
+    isAnimationOnLoad: animationTriggerAttribute === 'load',
   });
 
   shadow.appendChild(template.content.cloneNode(true));

@@ -32,13 +32,13 @@ export const MakeSliderData = ({
   const primarySlideSlot = element.querySelector(
     `[slot="${PRIMARY_SLIDE_CONTENT}"]`,
   ) as HTMLSlotElement;
-  const primarySlideLinks = element.querySelector(
+  const primarySlideLinksSlot = element.querySelector(
     `[slot="${PRIMARY_SLIDE_LINKS}"]`,
   ) as HTMLSlotElement;
-  const primarySlidesSecondaryLinks = element.querySelector(
+  const primarySlidesSecondaryLinksSlot = element.querySelector(
     `[slot="${PRIMARY_SLIDE_SECONDARY_LINKS}"]`,
   ) as HTMLSlotElement;
-  const childrenSlides = element.querySelector(
+  const childrenSlidesSlot = element.querySelector(
     `[slot="${CHILDREN_SLIDES}"]`,
   ) as HTMLSlotElement;
   const hasPrimarySlideContent =
@@ -48,6 +48,23 @@ export const MakeSliderData = ({
         type: PRIMARY_SLIDE_CONTENT,
       })
     : null;
+  let primarySlideLinks;
+  let primarySlidesSecondaryLinks;
+  let childrenSlides;
+
+  if (primarySlideLinksSlot) {
+    primarySlideLinks = primarySlideLinksSlot.cloneNode(true) as HTMLElement;
+  }
+
+  if (primarySlidesSecondaryLinksSlot) {
+    primarySlidesSecondaryLinks = primarySlidesSecondaryLinksSlot.cloneNode(
+      true,
+    ) as HTMLElement;
+  }
+
+  if (childrenSlides) {
+    childrenSlides = childrenSlidesSlot.cloneNode(true) as HTMLElement;
+  }
 
   return {
     primarySlideLinks,

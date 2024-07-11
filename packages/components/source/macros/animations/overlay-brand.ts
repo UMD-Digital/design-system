@@ -13,15 +13,38 @@ type TypeArrowProps = TypeAnimationProps & {
 const ELEMENT_LAYER_OVERLAY_CONTAINER = 'animation-overlay-layer-container';
 const ELEMENT_LAYER_RED_ARROW_CONTAINER =
   'animation-overlay-layer-red-arrow-container';
+const ELEMENT_LAYER_BLACK_ARROW_CONTAINER =
+  'animation-overlay-layer-black-arrow-container';
 const ELEMENT_GENERIC_ARROW = 'aninmation-arrow';
 
 const ID_OVERLAY_LEFT = 'animation-overlay-left';
 const ID_OVERLAY_RIGHT = 'animation-overlay-right';
 const ID_SLIDE_IN_RED = 'slide-in-red-arrow';
 const ID_ARROW_BEHIND_OVERLAY = 'animation-overlay-arrow';
+const ID_ARROW_BEHIND_FOLLOWING = 'animation-following-arrow';
+const ID_ARROW_BEHIND_FOLLOWING_TWO = 'animation-following-arrow-two';
 
 const TIMING_ANIMATION_ARROW_FIRST_TIME_IN = 1200;
-const TIMING_ANIMATION_ARROW_FIRST_TIME_OUT = 4000;
+const TIMING_ANIMATION_ARROW_FIRST_TIME_OUT = 6000;
+
+const FollowingArrowStyles = `
+  .${ELEMENT_LAYER_BLACK_ARROW_CONTAINER} {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-140%, -50%);
+    height: 100%;
+    z-index: 99;
+  }
+
+  .${ELEMENT_LAYER_BLACK_ARROW_CONTAINER} path {
+    fill: #000;
+  }
+
+  #${ID_ARROW_BEHIND_FOLLOWING} {
+    transform: translateX(-40%);
+  }
+`;
 
 const MainArrowStyles = `
   .${ELEMENT_LAYER_RED_ARROW_CONTAINER} {
@@ -30,7 +53,7 @@ const MainArrowStyles = `
     left: 0;
     transform: translate(-100%, -50%);
     height: 100%;
-    z-index: 9;
+    z-index: 999;
     display: flex;
     align-items: center;
   }
@@ -85,6 +108,7 @@ const OverlayStyles = `
 const STYLES_ANIMATION_BRAND_OVERLAY_ELEMENT = `
   ${OverlayStyles}
   ${MainArrowStyles}
+  ${FollowingArrowStyles}
 `;
 
 const CreateAnimatioOverlayContainer = (props: TypeAnimationProps) => {
@@ -135,6 +159,34 @@ const SizeElements = {
   },
 };
 
+const AnimateFollowingArrows = (props: TypeAnimationProps) => {
+  const { container, getContainerHeight } = props;
+  const arrow = container.querySelector(
+    `#${ID_ARROW_BEHIND_FOLLOWING}`,
+  ) as HTMLDivElement;
+  const arrowTwo = container.querySelector(
+    `#${ID_ARROW_BEHIND_FOLLOWING_TWO}`,
+  ) as HTMLDivElement;
+  const height = getContainerHeight();
+
+  SizeElements.Arrow({ arrow, height });
+  SizeElements.Arrow({ arrow: arrowTwo, height });
+
+  setTimeout(() => {
+    arrow.style.transition = `transform ${
+      TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 2200
+    }ms ease-in-out`;
+    arrow.style.transform = `translateX(320%)`;
+  }, TIMING_ANIMATION_ARROW_FIRST_TIME_IN + 120);
+
+  setTimeout(() => {
+    arrowTwo.style.transition = `transform ${
+      TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 2800
+    }ms ease-in-out`;
+    arrowTwo.style.transform = `translateX(350%)`;
+  }, TIMING_ANIMATION_ARROW_FIRST_TIME_IN + 200);
+};
+
 const AnimateMainArrow = (props: TypeAnimationProps) => {
   const { container, getContainerHeight, getHeightDiff } = props;
   const arrow = container.querySelector(
@@ -182,12 +234,16 @@ const AnimateOverlay = (props: TypeAnimationProps) => {
   }, TIMING_ANIMATION_ARROW_FIRST_TIME_IN - 200);
 
   setTimeout(() => {
-    partOne.style.transition = `transform ${TIMING_ANIMATION_ARROW_FIRST_TIME_OUT}ms ease-in-out`;
+    partOne.style.transition = `transform ${
+      TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 3600
+    }ms ease-in-out`;
     partOne.style.transform = `translateX(${endPosition}px`;
   }, SYNC_TIME + 100);
 
   setTimeout(() => {
-    partThree.style.transition = `transform ${TIMING_ANIMATION_ARROW_FIRST_TIME_OUT}ms ease-in-out`;
+    partThree.style.transition = `transform ${
+      TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 3600
+    }ms ease-in-out`;
     partThree.style.transform = `translate(${endPosition}px, -50%)`;
   }, SYNC_TIME + 50);
 
@@ -202,6 +258,7 @@ const AnimateOverlay = (props: TypeAnimationProps) => {
 const AnimationSequence = (props: TypeAnimationProps) => {
   AnimateOverlay(props);
   AnimateMainArrow(props);
+  AnimateFollowingArrows(props);
 };
 
 const CreateAnimationOverlayBrandElement = ({
@@ -237,6 +294,16 @@ const CreateAnimationOverlayBrandElement = ({
     id: ID_SLIDE_IN_RED,
     wrapperStyleRef: ELEMENT_LAYER_RED_ARROW_CONTAINER,
   });
+  const slideInArrowBlackOne = CreateAnimationArrowContainer({
+    ...data,
+    id: ID_ARROW_BEHIND_FOLLOWING,
+    wrapperStyleRef: ELEMENT_LAYER_BLACK_ARROW_CONTAINER,
+  });
+  const slideInArrowBlackTwo = CreateAnimationArrowContainer({
+    ...data,
+    id: ID_ARROW_BEHIND_FOLLOWING_TWO,
+    wrapperStyleRef: ELEMENT_LAYER_BLACK_ARROW_CONTAINER,
+  });
   const EventLoad = () => {
     if (isAnimationOnLoad) {
       AnimationSequence(data);
@@ -263,6 +330,8 @@ const CreateAnimationOverlayBrandElement = ({
   container.appendChild(overlay);
   container.appendChild(overlayArrow);
   container.appendChild(slideInArrow);
+  container.appendChild(slideInArrowBlackOne);
+  container.appendChild(slideInArrowBlackTwo);
 
   window.addEventListener('resize', EventResize);
 

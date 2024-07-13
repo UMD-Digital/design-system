@@ -6,9 +6,10 @@ import Common from './common';
 import Elements from './elements';
 import Layout from './layout';
 import WebComponents from './web-components';
+import background from 'layout/background';
 
-const { Colors, FontFamily, FontSize } = Tokens;
-const { SansMedium } = Typography;
+const { Colors, FontFamily, FontSize, Spacing } = Tokens;
+const { SansMedium, SansSmall } = Typography;
 
 const Reset = {
   body: {

@@ -62,7 +62,7 @@ export const MakeSliderData = ({
     ) as HTMLElement;
   }
 
-  if (childrenSlides) {
+  if (childrenSlidesSlot) {
     childrenSlides = childrenSlidesSlot.cloneNode(true) as HTMLElement;
   }
 

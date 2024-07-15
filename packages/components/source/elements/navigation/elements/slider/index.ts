@@ -229,6 +229,11 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
         ? getUpcomingSlideParent()
         : getUpcomingSlide();
       const slides = [activeSlide, upcomingSlide];
+
+      if (!upcomingSlide) {
+        console.error('Missing slide for slide event');
+        return null;
+      }
       const firstLink = upcomingSlide.querySelector('a') as HTMLAnchorElement;
 
       const animate = () => {

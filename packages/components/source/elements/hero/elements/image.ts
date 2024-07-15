@@ -58,7 +58,7 @@ const CreateImageContainerElement = (element: TypeImageContainerProps) => {
     return null;
   }
 
-  if (!imageRef && isTypeStacked) {
+  if (!imageRef && !videoRef && isTypeStacked) {
     return null;
   }
 

@@ -116,7 +116,7 @@ export default {
     ...GridColumnsFourWithGap,
 
     '& > *:first-child': {
-      [`@media (${Queries.desktop.min})`]: {
+      [`@media (${Queries.highDef.min})`]: {
         gridColumnStart: '2',
       },
     },

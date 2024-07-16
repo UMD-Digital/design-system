@@ -1,16 +1,13 @@
-import { Tokens, Typography, Layout } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import Assets from '../../assets';
 import State from './state';
 
 const { Colors, Spacing, Queries } = Tokens;
 const { Icons } = Assets;
 const { FormFieldValidation } = State;
-const CONTAINER_QUERY_NAME = `umd-forms-layout`;
 
 const FormLayoutWrapper = {
   backgroundColor: Colors.gray.lightest,
-  containerType: 'inline-size',
-  containerName: CONTAINER_QUERY_NAME,
   padding: `${Spacing.md}`,
 
   [`@media (${Queries.tablet.min})`]: {
@@ -24,7 +21,7 @@ const FormLayoutWrapper = {
   '& > *': {
     marginTop: Spacing.md,
 
-    [`@container ${CONTAINER_QUERY_NAME} (${Queries.large.min})`]: {
+    [`@media (${Queries.tablet.min})`]: {
       marginTop: Spacing.xl,
     },
 
@@ -34,7 +31,7 @@ const FormLayoutWrapper = {
   },
 };
 
-const FormLayoutHeadline = {
+const FormLayoutHeadlineWithAction = {
   display: 'flex',
   flexWrap: 'wrap',
   gap: Spacing.sm,
@@ -146,20 +143,29 @@ const FormLayoutBaseFieldset = {
   },
 };
 
-const FormLayoutFieldsetGrid = {
-  ...Layout.GridColumnsBase,
-  ...FormLayoutBaseFieldset,
-
+const FormLayoutBaseFieldsetGrid = {
+  display: 'grid',
+  gridTemplateColumns: '1fr',
   gridGap: `${Spacing.sm} ${Spacing.xl}`,
   justifyItems: 'start',
+
+  [`@media (${Queries.large.min})`]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
+};
+
+const FormLayoutFieldsetGridTwo = {
+  ...FormLayoutBaseFieldsetGrid,
+  ...FormLayoutBaseFieldset,
 };
 
 const FormLayoutFieldsetGridThree = {
-  ...Layout.GridColumnsThree,
+  ...FormLayoutBaseFieldsetGrid,
   ...FormLayoutBaseFieldset,
 
-  gridGap: `${Spacing.sm} ${Spacing.xl}`,
-  justifyItems: 'start',
+  [`@media (${Queries.desktop.min})`]: {
+    gridTemplateColumns: 'repeat(3, 1fr)',
+  },
 };
 
 const FormLayoutFieldsetList = {
@@ -218,16 +224,16 @@ const FormLayouts = {
     ...FormLayoutWrapper,
   },
 
-  '.umd-forms-layout-headline': {
-    ...FormLayoutHeadline,
+  '.umd-forms-layout-headline-with-action': {
+    ...FormLayoutHeadlineWithAction,
   },
 
   '.umd-forms-layout-field': {
     ...FormLayoutField,
   },
 
-  '.umd-forms-layout-fieldset-grid': {
-    ...FormLayoutFieldsetGrid,
+  '.umd-forms-layout-fieldset-grid-two': {
+    ...FormLayoutFieldsetGridTwo,
   },
 
   '.umd-forms-layout-fieldset-grid-three': {

@@ -25,7 +25,7 @@ const ID_ARROW_BEHIND_FOLLOWING = 'animation-following-arrow';
 const ID_ARROW_BEHIND_FOLLOWING_TWO = 'animation-following-arrow-two';
 
 const TIMING_ANIMATION_ARROW_FIRST_TIME_IN = 1200;
-const TIMING_ANIMATION_ARROW_FIRST_TIME_OUT = 5000;
+const TIMING_ANIMATION_ARROW_FIRST_TIME_OUT = 4500;
 
 const FollowingArrowStyles = `
   .${ELEMENT_LAYER_BLACK_ARROW_CONTAINER} {
@@ -42,7 +42,7 @@ const FollowingArrowStyles = `
   }
 
   #${ID_ARROW_BEHIND_FOLLOWING} {
-    transform: translateX(-40%);
+    transform: translateX(-90%);
   }
 `;
 
@@ -154,30 +154,26 @@ const SizeElements = {
 };
 
 const AnimateFollowingArrows = (props: TypeAnimationProps) => {
-  const { container, getContainerHeight } = props;
+  const { container } = props;
   const arrow = container.querySelector(
     `#${ID_ARROW_BEHIND_FOLLOWING}`,
   ) as HTMLDivElement;
   const arrowTwo = container.querySelector(
     `#${ID_ARROW_BEHIND_FOLLOWING_TWO}`,
   ) as HTMLDivElement;
-  const height = getContainerHeight();
-
-  SizeElements.Arrow({ arrow, height });
-  SizeElements.Arrow({ arrow: arrowTwo, height });
 
   setTimeout(() => {
     arrow.style.transition = `transform ${
       TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 2400
     }ms ease-in-out`;
-    arrow.style.transform = `translateX(320%)`;
+    arrow.style.transform = `translateX(200vw)`;
   }, TIMING_ANIMATION_ARROW_FIRST_TIME_IN + 120);
 
   setTimeout(() => {
     arrowTwo.style.transition = `transform ${
       TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 2800
     }ms ease-in-out`;
-    arrowTwo.style.transform = `translateX(350%)`;
+    arrowTwo.style.transform = `translateX(200vw)`;
   }, TIMING_ANIMATION_ARROW_FIRST_TIME_IN + 200);
 };
 

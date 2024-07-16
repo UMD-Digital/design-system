@@ -7,7 +7,7 @@ declare global {
 import { LogoBlock } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
-const { SlotOberserver, Node } = MarkupCreate;
+const { SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-logo';
 const ATTRIBUTE_THEME = 'theme';
@@ -15,6 +15,7 @@ const ATTRIBUTE_BORDER = 'border';
 const THEME_LIGHT = 'light';
 const SLOTS = {
   IMAGE: 'image',
+  TEXT: 'text',
 };
 
 const styles = `
@@ -27,7 +28,7 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
-  const { IMAGE } = element._slots;
+  const { IMAGE, TEXT } = element._slots;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
   const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
 
@@ -35,6 +36,7 @@ const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
 
   return LogoBlock.CreateElement({
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
     theme,
     isBordered,
   });

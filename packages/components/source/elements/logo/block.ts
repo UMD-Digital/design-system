@@ -42,15 +42,10 @@ const VariantThemeStyles = `
     padding: ${Spacing.xl};
   }
 
-  ${OVERWRITE_THEME_DARK_TEXT} {
+  ${OVERWRITE_THEME_DARK_TEXT},
+  ${OVERWRITE_THEME_DARK_TEXT} * {
     color: ${Colors.white};
   };
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_THEME_DARK_TEXT} a`]: Link.LineSlideUnder.white,
-    },
-  })}
 `;
 
 // prettier-ignore
@@ -64,7 +59,8 @@ const VariantBorderStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  .${ELEMENT_LOGO_BLOCK_TEXT} {
+  .${ELEMENT_LOGO_BLOCK_TEXT},
+  .${ELEMENT_LOGO_BLOCK_TEXT} * {
     color: ${Colors.gray.darker};
   }
 
@@ -80,11 +76,10 @@ const TextStyles = `
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_LOGO_BLOCK_TEXT} a`]: Link.LineSlideUnder.black,
-    },
-  })}
+  .${ELEMENT_LOGO_BLOCK_TEXT} a:hover,
+  .${ELEMENT_LOGO_BLOCK_TEXT} a:focus {
+    text-decoration: underline;
+   }
 `;
 
 // prettier-ignore
@@ -100,7 +95,7 @@ const STYLES_LOGO_BLOCK_ELEMENT = `
   }
 
   .${ELEMENT_LOGO_BLOCK_ASSET} + * {
-    margin-top: ${Spacing.sm};
+    margin-top: ${Spacing.min};
   }
 
   ${TextStyles}

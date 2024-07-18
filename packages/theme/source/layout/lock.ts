@@ -1,8 +1,13 @@
 import { Layout } from '@universityofmaryland/variables';
 
-const { LockMax, LockLarge, LockNormal, LockSmall, LockSmallest } = Layout;
+const { LockFull, LockMax, LockLarge, LockNormal, LockSmall, LockSmallest } =
+  Layout;
 
 export default {
+  '.umd-lock-full': {
+    ...LockFull,
+  },
+
   '.umd-lock': {
     ...LockMax,
   },

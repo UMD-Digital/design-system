@@ -25,6 +25,11 @@ const lockBase = {
   },
 };
 
+const LockFull = {
+  ...lockBase,
+  maxWidth: '100%',
+};
+
 const LockMax = {
   ...lockBase,
 };
@@ -49,4 +54,11 @@ const LockSmallest = {
   maxWidth: `${MaxWidth.smallest}`,
 };
 
-export default { LockMax, LockLarge, LockNormal, LockSmall, LockSmallest };
+export default {
+  LockFull,
+  LockMax,
+  LockLarge,
+  LockNormal,
+  LockSmall,
+  LockSmallest,
+};

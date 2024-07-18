@@ -1,37 +1,9 @@
 import { Queries } from '../tokens/breakpoints';
 import { Spacing } from '../tokens/spacing';
 
-const GridBase = {
+const GridColumnsThree = {
   display: 'grid',
   gridTemplateColumns: '1fr',
-};
-
-const GridBaseQueries = {
-  [`@media (${Queries.large.min})`]: {
-    gridTemplateColumns: 'repeat(2, 1fr)',
-  },
-};
-
-const GridGapBaseQueries = {
-  gridGap: Spacing.lg,
-
-  [`@media (${Queries.large.min})`]: {
-    gridTemplateColumns: 'repeat(2, 1fr)',
-  },
-
-  [`@media (${Queries.desktop.min})`]: {
-    gridGap: Spacing.lg,
-  },
-};
-
-const GridColumnsBase = {
-  ...GridBase,
-  ...GridBaseQueries,
-};
-
-const GridColumnsThree = {
-  ...GridBase,
-  ...GridBaseQueries,
 
   [`@media (${Queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -39,8 +11,12 @@ const GridColumnsThree = {
 };
 
 const GridColumnsFour = {
-  ...GridBase,
-  ...GridBaseQueries,
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+
+  [`@media (${Queries.large.min})`]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
 
   [`@media (${Queries.highDef.min})`]: {
     gridTemplateColumns: 'repeat(4, 1fr)',
@@ -48,8 +24,13 @@ const GridColumnsFour = {
 };
 
 const GridColumnsBaseWithGap = {
-  ...GridBase,
-  ...GridGapBaseQueries,
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridGap: Spacing.lg,
+
+  [`@media (${Queries.large.min})`]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
 
   [`@media (${Queries.desktop.min})`]: {
     gridGap: Spacing.xl,
@@ -57,8 +38,9 @@ const GridColumnsBaseWithGap = {
 };
 
 const GridColumnsThreeWithGap = {
-  ...GridBase,
-  ...GridGapBaseQueries,
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridGap: Spacing.lg,
 
   [`@media (${Queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -66,8 +48,13 @@ const GridColumnsThreeWithGap = {
 };
 
 const GridColumnsFourWithGap = {
-  ...GridBase,
-  ...GridGapBaseQueries,
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridGap: Spacing.lg,
+
+  [`@media (${Queries.large.min})`]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
 
   [`@media (${Queries.highDef.min})`]: {
     gridTemplateColumns: 'repeat(4, 1fr)',
@@ -75,8 +62,9 @@ const GridColumnsFourWithGap = {
 };
 
 const GridColumnsThreeWithGapLarge = {
-  ...GridBase,
-  ...GridGapBaseQueries,
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridGap: Spacing.lg,
 
   [`@media (${Queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -85,8 +73,13 @@ const GridColumnsThreeWithGapLarge = {
 };
 
 const GridColumnsFourWithGapLarge = {
-  ...GridBase,
-  ...GridGapBaseQueries,
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridGap: Spacing.lg,
+
+  [`@media (${Queries.large.min})`]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
 
   [`@media (${Queries.highDef.min})`]: {
     gridTemplateColumns: 'repeat(4, 1fr)',
@@ -95,7 +88,8 @@ const GridColumnsFourWithGapLarge = {
 };
 
 const GridRowsWithGapBase = {
-  ...GridBase,
+  display: 'grid',
+  gridTemplateColumns: '1fr',
   gridGap: Spacing.lg,
 };
 
@@ -118,7 +112,6 @@ const GridColumnAndRowsMobileTablet = {
 };
 
 export default {
-  GridColumnsBase,
   GridColumnsThree,
   GridColumnsFour,
   GridRowsWithGapBase,

@@ -18,7 +18,6 @@ const GutterlessThreeColumn = {
 
   [`@media (${Queries.large.min})`]: {
     gridGap: `0px`,
-    gridTemplateColumns: 'repeat(2, 1fr)',
   },
 
   [`@media (${Queries.desktop.min})`]: {

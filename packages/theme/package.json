@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/theme",
-  "version": "1.0.2",
+  "version": "1.2.0-beta.0",
   "description": "A configuration of the tokens and other styles from UMD Design system for use with CSS frameworks that support JSS (CSS-in-JS).",
   "keywords": [],
   "author": "UMD Web Services <digital@umd.edu>",
@@ -12,7 +12,12 @@
   "scripts": {
     "build": "webpack",
     "bundle": "webpack -w --env BUNDLE",
+    "compile": "npx tailwindcss -c ./tailwind.config.babel.js -i compiled/index.css -o dist/compiled.css --minify",
+    "release": "npm run build && npm run compile && npm publish --access public",
     "clean": "rm -rf dist",
     "start": "webpack -w"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.3.5"
   }
 }

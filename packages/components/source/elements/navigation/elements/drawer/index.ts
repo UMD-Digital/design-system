@@ -186,7 +186,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         closeButton.focus();
 
         EventAccessibilityFocus({
-          element: context || elementContainer,
+          element: elementContainer,
           action: () => eventClose(),
         });
       }, 100);

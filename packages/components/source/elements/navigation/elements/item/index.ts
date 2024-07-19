@@ -407,18 +407,20 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     };
 
     const EventButtonClick = () => {
-      if (isShowing) {
-        const firstElement = elementContainer.querySelector(
-          'a',
-        ) as HTMLAnchorElement;
-
+      if (isShowing && dropdownLinksContainer) {
         ShowDropdown();
-        if (firstElement) firstElement.focus();
-
         focusCallback = EventAccessibilityFocus({
           element: elementContainer,
           action: () => HideDropdown(),
         });
+
+        setTimeout(() => {
+          const firstElement = dropdownLinksContainer.querySelector(
+            'a',
+          ) as HTMLAnchorElement;
+
+          if (firstElement) firstElement.focus();
+        }, 100);
       }
 
       if (!isShowing) HideDropdown();

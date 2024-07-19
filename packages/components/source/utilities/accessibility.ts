@@ -19,10 +19,14 @@ const EventAccessibilityFocus: EventAccessibilityFocusType = ({
   };
 
   const keyEvent = (event: KeyboardEvent) => {
-    const currentElement = event.target as HTMLElement;
+    const currentElement = event.composedPath()[0] as HTMLElement;
 
     if (event.key === 'Tab') {
-      if (element && !element.contains(currentElement)) {
+      if (
+        element &&
+        !element.contains(currentElement) &&
+        currentElement !== element
+      ) {
         action(event);
       }
     }

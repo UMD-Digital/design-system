@@ -5,6 +5,6 @@
     "rootDir": "source",
     "baseUrl": "source"
   },
-  "include": ["source", "compiled"],
+  "include": ["source"],
   "exclude": ["dist"]
 }

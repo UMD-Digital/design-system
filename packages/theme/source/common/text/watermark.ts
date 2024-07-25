@@ -4,7 +4,7 @@ const { Colors, Queries, FontSize } = Tokens;
 
 const Child = {
   position: 'absolute',
-  top: '0',
+  top: '20px',
   left: '-2%',
   color: Colors.gray.lighter,
   fontWeight: 'bold',
@@ -14,7 +14,6 @@ const Child = {
   opacity: ' 0.6',
   pointerEvents: 'none',
   userSelect: 'none',
-  zIndex: '-1',
 
   [`@media (${Queries.large.max})`]: {
     display: 'none',
@@ -35,7 +34,6 @@ const WatermarkDark = {
   '> *': {
     ...Child,
     opacity: '0.2',
-    zIndex: '9',
   },
 };
 

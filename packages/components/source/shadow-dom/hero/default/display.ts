@@ -12,6 +12,7 @@ import { CommonHeroData } from '../common';
 const { SlotWithDefaultStyling } = MarkupCreate;
 
 const TYPE_DEFAULT_INTERIOR = 'default-interior';
+const TYPE_DEFAULT_INTERIOR_CENTERED = 'default-interior-centered';
 const TYPE_DEFAULT_CENTERED = 'default-centered';
 const TYPE_STACKED = 'stacked';
 const TYPE_STACKED_INTERIOR = 'stacked-interior';
@@ -46,6 +47,11 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
 
   if (type === TYPE_DEFAULT_INTERIOR) {
     isInterior = true;
+  }
+
+  if (type === TYPE_DEFAULT_INTERIOR_CENTERED) {
+    isInterior = true;
+    isTextCenter = true;
   }
 
   if (type === TYPE_STACKED_INTERIOR) {

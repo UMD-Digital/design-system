@@ -3,6 +3,7 @@ import {
   PathwayElements,
   PathwayHero,
   PathwayOverlay,
+  PathwaySticky,
   EventElements,
 } from 'elements';
 import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
@@ -21,6 +22,7 @@ const THEME_MARYLAND = 'maryland';
 const THEME_WHITE = 'white';
 const TYPE_HERO = 'hero';
 const TYPE_OVERLAY = 'overlay';
+const TYPE_STICKY = 'sticky';
 
 export const ComponentStyles = `
   :host {
@@ -35,6 +37,7 @@ export const ComponentStyles = `
   ${PathwayDefault.Styles}
   ${PathwayHero.Styles}
   ${PathwayOverlay.Styles}
+  ${PathwaySticky.Styles}
 `;
 
 const MakeCommonDefaultData = ({
@@ -123,6 +126,18 @@ export const CreateShadowDom = ({
   if (type === TYPE_OVERLAY) {
     shadow.appendChild(
       PathwayOverlay.CreateElement({
+        theme,
+        isImageScaled,
+        ...MakeCommonDefaultData({ element, theme }),
+      }),
+    );
+
+    return;
+  }
+
+  if (type === TYPE_STICKY) {
+    shadow.appendChild(
+      PathwaySticky.CreateElement({
         theme,
         isImageScaled,
         ...MakeCommonDefaultData({ element, theme }),

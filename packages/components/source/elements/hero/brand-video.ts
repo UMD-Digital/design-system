@@ -1,5 +1,5 @@
 import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
+import { Performance, Styles } from 'utilities';
 import { AnimationOverlayBrand, ButtonVideoState } from 'macros';
 
 type TypeHeroBrandVideoProps = {
@@ -13,6 +13,7 @@ const { Spacing, Colors } = Tokens;
 const { CampaignMaxium, SansLarger } = Typography;
 const { Text } = Elements;
 const { ConvertJSSObjectToStyles } = Styles;
+const { Debounce } = Performance;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
 const ELEMENT_HERO_ELEMENT_DECLARATION = 'hero-logo-brand-video-declaration';
@@ -121,6 +122,7 @@ const STYLES_HERO_BRAND_VIDEO_ELEMENT = `
 
   .${ELEMENT_HERO_ELEMENT_CONTAINER} {
     aspect-ratio: 16 / 9;
+    width: 100%;
   }
 
   .${ELEMENT_HERO_ELEMENT_WRAPPER} {
@@ -128,7 +130,6 @@ const STYLES_HERO_BRAND_VIDEO_ELEMENT = `
     overflow: hidden;
     height: 100%;
     width: 100%;
-    max-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -198,9 +199,15 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
     isAnimationOnLoad,
   });
   const buttonMacro = ButtonVideoState.CreateElement({ video });
+  const eventRize = () => {
+    if (container.offsetHeight > window.innerHeight) {
+      container.style.height = `${(window.innerHeight / 10) * 9}px`;
+    }
+  };
   const eventLoad = () => {
     overlay.events.load();
     buttonMacro.events.setButtonPlay();
+    eventRize();
   };
 
   video.classList.add(ELEMENT_HERO_ELEMENT_VIDEO);
@@ -216,6 +223,13 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
 
   declaration.classList.add(ELEMENT_HERO_ELEMENT_DECLARATION);
   declaration.appendChild(container);
+
+  window.addEventListener(
+    'resize',
+    Debounce(() => {
+      eventRize();
+    }, 20),
+  );
 
   return {
     element: declaration,

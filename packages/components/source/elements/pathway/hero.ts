@@ -72,6 +72,18 @@ const OverwriteImageRightStyles = `
       padding-left: 0;
     }
   }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
+      padding-right: ${Spacing['2xl']};
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    ${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
+      padding-right: ${Spacing['4xl']};
+    }
+  }
 `;
 
 // prettier-ignore
@@ -85,6 +97,18 @@ const OverwriteImageLeftStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_LEFT_CONTAINER_TEXT_WRAPPER} {
       padding-right: 0;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    ${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
+      padding-left: ${Spacing['2xl']};
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
+    ${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
+      padding-left: ${Spacing['4xl']};
     }
   }
 `;
@@ -172,13 +196,6 @@ const LockStyles = `
       display: flex;
       align-items: center;
       min-height: 720px;
-      padding-left: ${Spacing['2xl']};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-left: ${Spacing['4xl']};
     }
   }
 

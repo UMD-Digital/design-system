@@ -73,6 +73,7 @@ const CreateSlideIndicator = ({
 
       button.classList.add(ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER);
       button.addEventListener('click', () => callback(i));
+      button.setAttribute('aria-hidden', `true`);
 
       return button;
     });

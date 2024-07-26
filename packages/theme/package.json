@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/theme",
-  "version": "1.3.0-beta.0",
+  "version": "1.3.0-beta.1",
   "description": "A configuration of the tokens and other styles from UMD Design system for use with CSS frameworks that support JSS (CSS-in-JS).",
   "keywords": [],
   "author": "UMD Web Services <digital@umd.edu>",

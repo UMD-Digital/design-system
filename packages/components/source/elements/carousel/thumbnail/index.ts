@@ -1,8 +1,8 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AnimationCarouselBlocks } from 'macros';
 
-type TypeCarouselPeopleProps = {
-  people: HTMLElement[];
+type TypeCarouselThumbnailProps = {
+  blocks: HTMLElement[];
   theme?: string | null;
 };
 
@@ -13,17 +13,17 @@ const THEME_DARK = 'dark';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 
-const ELEMENT_NAME = 'umd-carousel-people';
-const ELEMENT_PEOPLE_DECLARATION = 'carousel-people-declaration';
-const ELEMENT_PEOPLE_CONTAINER = 'carousel-people-container';
+const ELEMENT_NAME = 'umd-carousel-thumbnail';
+const ELEMENT_THUMBNAIL_DECLARATION = 'carousel-thumbnail-declaration';
+const ELEMENT_THUMBNAIL_CONTAINER = 'carousel-thumbnail-container';
 const ELEMENT_PERSON_SLIDE = 'carousel-person-slide';
-const ELEMENT_CAROUSEL_PEOPLE_BUTTON = 'carousel-people-button';
+const ELEMENT_CAROUSEL_THUMBNAIL_BUTTON = 'carousel-thumbnail-button';
 
-const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_PEOPLE_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
+const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_THUMBNAIL_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
 
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PEOPLE_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_PEOPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_PEOPLE_BUTTON}`;
-const OVERWRITE_THEME_DARK_SLIDE = `.${ELEMENT_PEOPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_PERSON_SLIDE}`;
+const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_THUMBNAIL_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_THUMBNAIL_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_THUMBNAIL_BUTTON}`;
+const OVERWRITE_THEME_DARK_SLIDE = `.${ELEMENT_THUMBNAIL_CONTAINER}${IS_THEME_DARK} .${ELEMENT_PERSON_SLIDE}`;
 
 // prettier-ignore
 const OverwriteThemeDark = `
@@ -73,18 +73,18 @@ const PersonSlideStyles = `
     padding: ${Spacing.md};
   }
 
-  .${ELEMENT_PEOPLE_CONTAINER} .${ELEMENT_PERSON_SLIDE}:first-child {
+  .${ELEMENT_THUMBNAIL_CONTAINER} .${ELEMENT_PERSON_SLIDE}:first-child {
     border-left: 1px solid ${Colors.gray.light};
   }
 `;
 
 // prettier-ignore
-const STYLES_CAROUSEL_PEOPLE_ELEMENT = `
-  .${ELEMENT_PEOPLE_DECLARATION} {
+const STYLES_CAROUSEL_THUMBNAIL_ELEMENT = `
+  .${ELEMENT_THUMBNAIL_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  .${ELEMENT_PEOPLE_CONTAINER} {
+  .${ELEMENT_THUMBNAIL_CONTAINER} {
     overflow: hidden;
     padding: 0 ${Spacing.md};
   }
@@ -95,29 +95,29 @@ const STYLES_CAROUSEL_PEOPLE_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreatePerson = ({ person }: { person: HTMLElement }) => {
+const CreatePerson = ({ block }: { block: HTMLElement }) => {
   const container = document.createElement('div');
 
-  container.appendChild(person);
+  container.appendChild(block);
   container.classList.add(ELEMENT_PERSON_SLIDE);
 
   return container;
 };
 
-const CreateCarouselPeopleElement = (props: TypeCarouselPeopleProps) =>
+const CreateCarouselThumbnailElement = (props: TypeCarouselThumbnailProps) =>
   (() => {
-    const { people, theme } = props;
+    const { blocks, theme } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const slide = document.createElement('div');
-    const blocks = people.map((person) =>
+    const blocksWrapper = blocks.map((block) =>
       CreatePerson({
-        person,
+        block,
       }),
     );
 
     const carousel = AnimationCarouselBlocks.CreateElement({
-      blocks,
+      blocks: blocksWrapper,
       slide,
       overwriteDisplayLogic: {
         mobileBreakpoint: 500,
@@ -132,10 +132,10 @@ const CreateCarouselPeopleElement = (props: TypeCarouselPeopleProps) =>
     });
 
     elementContainer.appendChild(carousel.element);
-    elementContainer.classList.add(ELEMENT_PEOPLE_CONTAINER);
+    elementContainer.classList.add(ELEMENT_THUMBNAIL_CONTAINER);
     if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
 
-    elementDeclaration.classList.add(ELEMENT_PEOPLE_DECLARATION);
+    elementDeclaration.classList.add(ELEMENT_THUMBNAIL_DECLARATION);
     elementDeclaration.appendChild(elementContainer);
 
     return {
@@ -148,6 +148,6 @@ const CreateCarouselPeopleElement = (props: TypeCarouselPeopleProps) =>
   })();
 
 export default {
-  CreateElement: CreateCarouselPeopleElement,
-  Styles: STYLES_CAROUSEL_PEOPLE_ELEMENT,
+  CreateElement: CreateCarouselThumbnailElement,
+  Styles: STYLES_CAROUSEL_THUMBNAIL_ELEMENT,
 };

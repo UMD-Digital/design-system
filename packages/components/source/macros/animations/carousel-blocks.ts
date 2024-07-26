@@ -247,6 +247,9 @@ const ButtonDisplay = (props: TypeHelpers) => {
   const shouldHideLeftButton = showCount > 1 && !shouldShowLeftButton;
   const shouldHideRightButton = showCount > 1 && !shouldShowRightButton;
 
+  prevousButton.setAttribute('aria-label', 'Previous');
+  nextButton.setAttribute('aria-label', 'Next');
+
   if (cardsTotal === showCount) {
     buttons.forEach((button) => (button.style.display = 'none'));
     return;

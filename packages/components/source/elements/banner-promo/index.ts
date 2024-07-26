@@ -14,7 +14,7 @@ const { ConvertJSSObjectToStyles } = Styles;
 const { SansExtraLarge } = Typography;
 const { Text } = Elements;
 
-const SMALL = 480;
+const SMALL = 650;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -60,6 +60,13 @@ const ActionsStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     .${ELEMENT_ACTIONS} {
       margin-top: ${Spacing.sm};
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
+    .${ELEMENT_ACTIONS} {
+      max-width: 30%;
+      margin-left: ${Spacing.md};
     }
   }
 `;

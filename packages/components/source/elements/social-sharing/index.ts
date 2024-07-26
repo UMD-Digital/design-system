@@ -50,6 +50,7 @@ const ContainerStyles = `
     align-items: center;
     justify-content: center;
     border: 1px solid ${Colors.gray.light};
+    background-color: ${Colors.white};
   }
 
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} > *:not(:last-child) {
@@ -89,6 +90,7 @@ const CreateFacebook = () => {
   const button = document.createElement('button');
 
   button.innerHTML = AssetSocial.FACEBOOK;
+  button.setAttribute('aria-label', 'share this page on facebook');
 
   button.addEventListener('click', () => {
     const shareURL = `http://www.facebook.com/share.php?u=${encodeURIComponent(
@@ -109,6 +111,7 @@ const CreateTwitter = ({ url, title }: { url: string; title: string }) => {
   const button = document.createElement('button');
 
   button.innerHTML = AssetSocial.X;
+  button.setAttribute('aria-label', 'share this page on twitter');
 
   button.addEventListener('click', () => {
     const shareURL = `http://twitter.com/share?url=${url}&text=${title}`;

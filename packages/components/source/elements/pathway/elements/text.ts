@@ -39,6 +39,7 @@ const ELEMENT_TEXT_CONTAINER_EVENT_DETAILS = 'pathway-text-event-details';
 const ELEMENT_TEXT_CONTAINER_EYEBROW = 'pathway-text-eyebrow';
 const ELEMENT_TEXT_CONTAINER_RICH_TEXT = 'pathway-text-richtext';
 const ELEMENTS_TEXT_CONTAINER_ACTIONS = 'pathway-text-actions';
+const ELEMENTS_TEXT_CONTAINER_ACTIONS_LIST = 'pathway-text-actions-list';
 const ELEMENTS_TEXT_CONTAINER_STATS = 'pathway-text-stats';
 
 const IS_THEME_DARK = `.${ELEMENT_TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
@@ -162,6 +163,10 @@ const ActionStyles = `
       [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },
   })}
+
+  .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
+    display: grid;
+  }
 `;
 
 // prettier-ignore
@@ -248,7 +253,10 @@ const CreatePathwayTextContainer = ({
   }
 
   if (action) {
+    const isListStyle = action.children.length > 2;
+
     action.classList.add(ELEMENTS_TEXT_CONTAINER_ACTIONS);
+    if (isListStyle) action.classList.add(ELEMENTS_TEXT_CONTAINER_ACTIONS_LIST);
     wrapper.appendChild(action);
   }
 

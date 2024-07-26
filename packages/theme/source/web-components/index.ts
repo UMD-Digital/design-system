@@ -20,6 +20,7 @@ import ScrollTop from './elements/scroll-top';
 import SectionIntro from './elements/section-intro';
 import Sliders from './elements/sliders';
 import SocialSharing from './elements/social-sharing';
+import Stat from './elements/stat';
 import Tabs from './elements/tabs';
 
 export default {
@@ -45,5 +46,6 @@ export default {
   ...SectionIntro,
   ...Sliders,
   ...SocialSharing,
+  ...Stat,
   ...Tabs,
 };

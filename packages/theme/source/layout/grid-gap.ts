@@ -102,6 +102,24 @@ const MasonryGrid = {
   },
 };
 
+const OffsetGrid = {
+  '& > *': {
+    height: 'inherit !important',
+  },
+
+  '& > *:first-child': {
+    [`@media (${Queries.desktop.min})`]: {
+      marginTop: `${Spacing['2xl']}`,
+    },
+  },
+
+  '& > *:nth-child(2)': {
+    [`@media (${Queries.desktop.min})`]: {
+      marginTop: `${Spacing['8xl']}`,
+    },
+  },
+};
+
 export default {
   '.umd-grid-gap': {
     ...GridColumnsBaseWithGap,
@@ -138,5 +156,9 @@ export default {
   },
   '.umd-grid-gap-stacked': {
     ...GridColumnsStacked,
+  },
+  '.umd-grid-gap-three-offset': {
+    ...GridColumnsThreeWithGapLarge,
+    ...OffsetGrid,
   },
 };

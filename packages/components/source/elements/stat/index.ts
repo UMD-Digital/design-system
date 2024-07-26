@@ -101,6 +101,7 @@ const VarationDisplayBlockStyles = `
     top: 0;
     left: 0;
     width: 120%;
+    height: 110%;
   }
 `;
 
@@ -241,7 +242,7 @@ const SubTextStyles = `
 const STYLES_STAT_ELEMENT = `
   .${ELEMENT_STAT_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    height: 100%;
+    height: inherit;
   }
 
   .${ELEMENT_STAT_WRAPPER} {

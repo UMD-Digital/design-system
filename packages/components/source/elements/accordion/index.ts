@@ -101,6 +101,7 @@ const bodyStyles = `
     background-color: ${Colors.gray.lightest};
     height: 0;
     overflow: hidden;
+    display: none;
   }
 
   .${ELEMENT_BODY} {
@@ -297,11 +298,19 @@ const ActionAnimation = ({
     bodyWrapperElement.style.transition = `height ${ANIMATION_TIME}ms ease-in-out`;
 
   if (isOpening) {
-    headlineContainer.ariaExpanded = 'true';
-    bodyWrapperElement.ariaHidden = 'false';
+    bodyWrapperElement.style.display = 'block';
+
+    setTimeout(() => {
+      headlineContainer.ariaExpanded = 'true';
+      bodyWrapperElement.ariaHidden = 'false';
+    }, 100);
   } else {
     headlineContainer.ariaExpanded = 'false';
     bodyWrapperElement.ariaHidden = 'true';
+
+    setTimeout(() => {
+      bodyWrapperElement.style.display = 'none';
+    }, ANIMATION_TIME + 50);
   }
 
   setTimeout(() => {

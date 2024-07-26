@@ -12,6 +12,7 @@ const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-card-overlay';
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_QUOTE = 'quote';
 const ATTRIBUTE_TYPE = 'type';
 const THEME_LIGHT = 'light';
 const TYPE_IMAGE = 'image';
@@ -44,6 +45,7 @@ const MakeOverlayContent = ({
   element: UMDCardOverlayElement;
 }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const isQuote = element.getAttribute(ATTRIBUTE_QUOTE) === 'true';
   const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, CTAICON } = SLOTS;
 
   return {
@@ -53,6 +55,7 @@ const MakeOverlayContent = ({
     date: SlotWithDefaultStyling({ element, slotRef: DATE }),
     actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     ctaIcon: SlotWithDefaultStyling({ element, slotRef: CTAICON }),
+    isQuote,
     theme,
   };
 };

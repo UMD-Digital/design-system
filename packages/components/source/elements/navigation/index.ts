@@ -95,12 +95,7 @@ const LogoColumnStyles = `
   .${ELEMENT_HEADER_LOGO} img {
     width: 100%;
     max-height: 48px;
-  }
-
-  @media (min-width: ${Breakpoints.tablet.min}) {
-    .${ELEMENT_HEADER_LOGO} img {
-      max-width: 240px;
-    }
+    max-width: 240px;
   }
 `;
 

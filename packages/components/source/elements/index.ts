@@ -40,6 +40,7 @@ import PathwayElements from './pathway/elements';
 import PathwayHero from './pathway/hero';
 import PathwayHighlight from './pathway/highlight';
 import PathwayOverlay from './pathway/overlay';
+import PathwaySticky from './pathway/sticky';
 import PersonBlock from './person/block';
 import PersonBio from './person/bio';
 import PersonBioFull from './person/bio-full';
@@ -102,6 +103,7 @@ export {
   PathwayHero,
   PathwayHighlight,
   PathwayOverlay,
+  PathwaySticky,
   PersonBlock,
   PersonBio,
   PersonBioFull,

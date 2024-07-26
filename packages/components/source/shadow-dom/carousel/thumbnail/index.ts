@@ -1,21 +1,20 @@
 declare global {
   interface Window {
-    UMDCarouselPeopleElement: typeof UMDCarouselPeopleElement;
+    UMDCarouselThumbnailElement: typeof UMDCarouselThumbnailElement;
   }
 }
 
-import { CarouselPeople } from 'elements';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { CarouselThumbnail } from 'elements';
+import { MarkupCreate, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
-const { ImageHasAlt } = MarkupValidate;
+const { Node, SlotOberserver } = MarkupCreate;
 
-const ELEMENT_NAME = 'umd-element-carousel-people';
+const ELEMENT_NAME = 'umd-element-carousel-thumbnail';
 const ATTRIBUTE_RESIZE = 'resize';
 const ATTRIBUTE_THEME = 'theme';
 
 const SLOTS = {
-  PEOPLE: 'people',
+  blocks: 'blocks',
 };
 
 const styles = `
@@ -24,27 +23,27 @@ const styles = `
   }
 
   ${Styles.ResetString}
-  ${CarouselPeople.Styles}
+  ${CarouselThumbnail.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({
   element,
 }: {
-  element: UMDCarouselPeopleElement;
+  element: UMDCarouselThumbnailElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME);
-  const slottedPeople = Array.from(
-    element.querySelectorAll(`[slot="${SLOTS.PEOPLE}"] > *`),
+  const slottedBlocks = Array.from(
+    element.querySelectorAll(`[slot="${SLOTS.blocks}"] > *`),
   ) as HTMLElement[];
 
-  const people = slottedPeople.map((person) =>
-    person.cloneNode(true),
+  const blocks = slottedBlocks.map((block) =>
+    block.cloneNode(true),
   ) as HTMLElement[];
 
-  const carousel = CarouselPeople.CreateElement({
-    people,
+  const carousel = CarouselThumbnail.CreateElement({
+    blocks,
     theme,
   });
 
@@ -54,7 +53,7 @@ const CreateShadowDom = ({
   carousel.events.Load();
 };
 
-class UMDCarouselPeopleElement extends HTMLElement {
+class UMDCarouselThumbnailElement extends HTMLElement {
   _shadow: ShadowRoot;
   _elementRef: {
     element: HTMLDivElement;
@@ -87,6 +86,13 @@ class UMDCarouselPeopleElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
+
+    SlotOberserver({
+      element: this,
+      shadowDom: this._shadow,
+      slots: SLOTS,
+      CreateShadowDom,
+    });
   }
 }
 
@@ -95,8 +101,8 @@ const Load = () => {
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDCarouselPeopleElement = UMDCarouselPeopleElement;
-    window.customElements.define(ELEMENT_NAME, UMDCarouselPeopleElement);
+    window.UMDCarouselThumbnailElement = UMDCarouselThumbnailElement;
+    window.customElements.define(ELEMENT_NAME, UMDCarouselThumbnailElement);
   }
 };
 

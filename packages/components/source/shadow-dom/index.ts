@@ -35,6 +35,7 @@ import Pathway from './pathway/default';
 import PathwayHighlight from './pathway/highlight';
 import Person from './person/default';
 import PersonBio from './person/bio';
+import PersonHero from './person/hero';
 import Quote from './quote';
 import ScrollTop from './scroll-top';
 import SectionIntro from './section-intro/default';
@@ -82,8 +83,9 @@ export {
   NavSlider,
   Pathway,
   PathwayHighlight,
-  PersonBio,
   Person,
+  PersonBio,
+  PersonHero,
   Quote,
   ScrollTop,
   SectionIntro,

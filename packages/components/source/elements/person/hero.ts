@@ -18,6 +18,8 @@ type TypeImageBlockContainer = TypeContactProps & {
 type TypePersonHeroProps = TypeTextContainer &
   TypeImageBlockContainer & {
     theme?: string | null;
+    breadcrumbMobile?: HTMLElement | null;
+    breadcrumbDesktop?: HTMLElement | null;
   };
 
 const { ConvertJSSObjectToStyles } = Styles;
@@ -34,13 +36,17 @@ const ELEMENT_NAME = 'umd-person-hero';
 const ELEMENT_PERSON_HERO_CONTAINER = 'person-hero-container';
 const ELEMENT_PERSON_HERO_LOCK = 'person-hero-lock';
 const ELEMENT_PERSON_HERO_WRAPPER = 'person-hero-wrapper';
+const ELEMENT_PERSON_HERO_BREADCRUMB = 'person-hero-breadcrumb';
 
+const ELEMENT_PERSON_HERO_TEXT_COLUMN = 'person-hero-text-column';
 const ELEMENT_PERSON_HERO_TEXT_CONTAINER = 'person-hero-text-container';
 const ELEMENT_PERSON_HERO_TEXT_CONTAINER_WRAPPER =
   'person-hero-text-container-wrapper';
 const ELEMENT_PERSON_HERO_TEXT_JOB = 'person-hero-text-job';
 const ELEMENT_PERSON_HERO_TEXT_NAME = 'person-hero-text-name';
 const ELEMENT_PERSON_HERO_TEXT_SUBTEXT = 'person-hero-text-subtext';
+const ELEMENT_PERSON_HERO_TEXT_COLUMN_BREADCRUMB =
+  'person-hero-text-column-breadcrumb';
 
 const ELEMENT_PERSON_HERO_IMAGE_BLOCK = 'person-hero-image-block';
 const ELEMENT_PERSON_HERO_IMAGE_BLOCK_WRAPPER =
@@ -154,6 +160,12 @@ const ImageBlockStyles = `
 `;
 
 const TextContainerStyles = `
+  @container (min-width: ${MEDIUM}px) {
+    .${ELEMENT_PERSON_HERO_TEXT_COLUMN} {
+      width: 70%;
+    }
+  }
+
   .${ELEMENT_PERSON_HERO_TEXT_CONTAINER} {
     background-color: ${Colors.gray.lightest};
     padding-top: ${Spacing['3xl']};
@@ -250,6 +262,12 @@ const TextContainerStyles = `
     font-weight: 700;
     display: block;
   }
+
+  @container (max-width: ${MEDIUM - 1}px) {
+    .${ELEMENT_PERSON_HERO_TEXT_COLUMN_BREADCRUMB} {
+      display: none;
+    }
+  }
 `;
 
 const WrapperStyles = `
@@ -281,6 +299,18 @@ const STYLES_PERSON_HERO_ELEMENT = `
   .${ELEMENT_PERSON_HERO_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     overflow: hidden;
+  }
+    
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_PERSON_HERO_BREADCRUMB}`]: LockMax,
+    },
+  })}
+
+  @container (min-width: ${MEDIUM}px) {
+    .${ELEMENT_PERSON_HERO_BREADCRUMB} {
+      display: none;
+    }
   }
 
   ${PersonImage.Styles}
@@ -350,20 +380,35 @@ const CreateTextContainer = ({ name, job, subText }: TypeTextContainer) => {
   }
 
   container.appendChild(wrapper);
+
   container.classList.add(ELEMENT_PERSON_HERO_TEXT_CONTAINER);
   return container;
 };
 
 const CreatePersonHeroElement = (props: TypePersonHeroProps) => {
-  const { theme } = props;
+  const { theme, breadcrumbMobile, breadcrumbDesktop } = props;
   const elementContainer = document.createElement('div');
   const elementLock = document.createElement('div');
   const elementWrapper = document.createElement('div');
+  const textColumns = document.createElement('div');
   const textContainer = CreateTextContainer(props);
   const imageBlock = CreateImageBlock(props);
 
+  textColumns.appendChild(textContainer);
+  textColumns.classList.add(ELEMENT_PERSON_HERO_TEXT_COLUMN);
+
+  if (breadcrumbDesktop) {
+    const textColumnBreadcrumb = document.createElement('div');
+    textColumnBreadcrumb.classList.add(
+      ELEMENT_PERSON_HERO_TEXT_COLUMN_BREADCRUMB,
+    );
+
+    textColumnBreadcrumb.appendChild(breadcrumbDesktop);
+    textColumns.appendChild(textColumnBreadcrumb);
+  }
+
   elementWrapper.classList.add(ELEMENT_PERSON_HERO_WRAPPER);
-  elementWrapper.appendChild(textContainer);
+  elementWrapper.appendChild(textColumns);
   elementWrapper.appendChild(imageBlock);
 
   elementLock.classList.add(ELEMENT_PERSON_HERO_LOCK);
@@ -372,6 +417,13 @@ const CreatePersonHeroElement = (props: TypePersonHeroProps) => {
   if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
   elementContainer.appendChild(elementLock);
   elementContainer.classList.add(ELEMENT_PERSON_HERO_CONTAINER);
+
+  if (breadcrumbMobile) {
+    const mainBreadcrumb = document.createElement('div');
+    mainBreadcrumb.classList.add(ELEMENT_PERSON_HERO_BREADCRUMB);
+    mainBreadcrumb.appendChild(breadcrumbMobile);
+    elementContainer.appendChild(mainBreadcrumb);
+  }
 
   return elementContainer;
 };

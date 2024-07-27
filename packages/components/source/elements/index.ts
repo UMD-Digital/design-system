@@ -44,6 +44,7 @@ import PathwaySticky from './pathway/sticky';
 import PersonBlock from './person/block';
 import PersonBio from './person/bio';
 import PersonBioFull from './person/bio-full';
+import PersonHero from './person/hero';
 import PersonList from './person/list';
 import PersonTabular from './person/tabular';
 import QuoteElements from './quote/elements';
@@ -107,6 +108,7 @@ export {
   PersonBlock,
   PersonBio,
   PersonBioFull,
+  PersonHero,
   PersonList,
   PersonTabular,
   QuoteElements,

@@ -35,13 +35,25 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const breadcrumbSlot = Node.slot({ type: 'breadcrumb' });
+
+  if (breadcrumbSlot) {
+    const breadcrumb = element.querySelector('[slot="breadcrumb"]');
+    if (!breadcrumb) return;
+    const copy = breadcrumb.cloneNode(true);
+
+    element.appendChild(copy);
+    breadcrumb.setAttribute('slot', 'breadcrumb-copy');
+  }
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
   shadow.appendChild(
-    PersonHero.CreateElement(
-      CommonPersonData({ element, slots: element._slots, theme }),
-    ),
+    PersonHero.CreateElement({
+      ...CommonPersonData({ element, slots: element._slots, theme }),
+      breadcrumbDesktop: Node.slot({ type: 'breadcrumb' }),
+      breadcrumbMobile: Node.slot({ type: 'breadcrumb-copy' }),
+    }),
   );
 };
 

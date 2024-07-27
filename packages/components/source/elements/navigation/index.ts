@@ -95,7 +95,13 @@ const LogoColumnStyles = `
   .${ELEMENT_HEADER_LOGO} img {
     width: 100%;
     max-height: 48px;
-    max-width: 240px;
+    max-width: 190px;
+  }
+
+  @media (min-width: ${Breakpoints.tablet.min}) {
+    .${ELEMENT_HEADER_LOGO} img {
+      max-width: 240px;
+    }
   }
 `;
 
@@ -109,11 +115,7 @@ const WrapperStyles = `
   }
 `;
 
-const STYLES_NAVIGATION_HEADER = `
-  .${ELEMENT_HEADER_DECLARATION} {
-
-  }
-  
+const STYLES_NAVIGATION_HEADER = `  
   .${ELEMENT_HEADER_CONTAINTER} {
     background-color: ${Colors.white};
     display: block;

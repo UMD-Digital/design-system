@@ -51,11 +51,7 @@ const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
   };
 };
 
-export const CreateShadowDom = ({
-  element,
-}: {
-  element: UMDArticleElement;
-}) => {
+const CreateShadowDom = ({ element }: { element: UMDArticleElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
   const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);

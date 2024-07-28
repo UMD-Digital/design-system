@@ -1,0 +1,167 @@
+import { Tokens } from '@universityofmaryland/variables';
+
+type TypeUtilitySearchProps = {
+  searchType?: string;
+};
+
+const { Colors } = Tokens;
+
+const SEARCH_URL = 'https://search.umd.edu';
+const ANIMATION_IN_SPEED = 800;
+const ANIMATION_OUT_SPEED = 400;
+const LARGE = 1024;
+
+const ELEMENT_UTILITY_FORM = 'element-utility-form';
+const ELEMENT_UTILITY_FORM_WRAPPER = 'element-utility-form-wrapper';
+
+// prettier-ignore
+const FormElementsStyles = `
+  .${ELEMENT_UTILITY_FORM} input[type="text"] {
+    width: calc(100% - 120px);
+    display: block;
+    padding: 0 10px;
+    height: 44px;
+    font-family: Source Sans,Source Sans Pro,sans-serif;
+    font-size: 13px;
+    line-height: 1.3;
+    border: 1px solid #ccc;
+  }
+
+  .${ELEMENT_UTILITY_FORM} input[type="submit"] {
+    border: none;
+    background-color: ${Colors.red};
+    color: ${Colors.white};
+    font-weight: 700;
+    font-size: 12px;
+    transition: background ${ANIMATION_OUT_SPEED}ms;
+    padding: 15px 30px;
+    min-width: 120px;
+    height: 44px;
+  }
+
+  .${ELEMENT_UTILITY_FORM} input[type="submit"]:hover,
+  .${ELEMENT_UTILITY_FORM} input[type="submit"]:focus {
+    background-color: ${Colors.redDark};
+    transition: background ${ANIMATION_IN_SPEED}ms;
+  }
+`;
+
+// prettier-ignore
+const FormWrapperStyles = `
+  .${ELEMENT_UTILITY_FORM_WRAPPER} {
+    display: flex;
+  }
+
+  @container (min-width: ${LARGE}px) {
+    .${ELEMENT_UTILITY_FORM_WRAPPER} {
+      padding: 10px;
+    }
+  }
+`;
+
+// prettier-ignore
+const STYLES_NAV_UTILITY_SEARCH = `
+  .${ELEMENT_UTILITY_FORM} {
+    margin: 0;
+    display: none;
+  }
+
+  @container (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_UTILITY_FORM} {
+      padding: 20px 15px;
+      order: 1;
+      display: block;
+      height: auto;
+    }
+  }
+
+  @container (min-width: ${LARGE}px) {
+    .${ELEMENT_UTILITY_FORM} {
+      position: absolute;
+      top: 48px;
+      right: 0;
+      background-color: ${Colors.white};
+      min-width: 420px;
+      height: 0;
+      overflow: hidden;
+      transition: height ${ANIMATION_OUT_SPEED}ms;
+    }
+  }
+
+  @container (min-width: ${LARGE}px) {
+    .${ELEMENT_UTILITY_FORM}[aria-hidden="true"] {
+      transition: height ${ANIMATION_OUT_SPEED}ms;
+    }
+  }
+
+  @container (min-width: ${LARGE}px) {
+    .${ELEMENT_UTILITY_FORM}[aria-hidden="false"] {
+      transition: height ${ANIMATION_IN_SPEED}ms;
+    }
+  }
+
+  ${FormWrapperStyles}
+  ${FormElementsStyles}
+`
+
+const isDesktop = () => window.innerWidth >= LARGE;
+
+const CreateNavUtilitySearch = ({ searchType }: TypeUtilitySearchProps) =>
+  (() => {
+    const form = document.createElement('form');
+    const wrapper = document.createElement('div');
+    const inputTextLabel = document.createElement('label');
+    const inputText = document.createElement('input');
+    const inputSubmit = document.createElement('input');
+
+    inputTextLabel.innerHTML = 'Search input';
+    inputTextLabel.setAttribute('for', 'input-text');
+    inputTextLabel.classList.add('sr-only');
+
+    inputText.setAttribute('type', 'text');
+    inputText.setAttribute('id', 'input-text');
+    inputText.setAttribute('name', 'query');
+    inputText.setAttribute(
+      'placeholder',
+      'Search for People, places and things',
+    );
+    inputText.setAttribute('required', '');
+
+    inputSubmit.setAttribute('type', 'submit');
+    inputSubmit.value = 'Submit';
+
+    wrapper.appendChild(inputTextLabel);
+    wrapper.appendChild(inputText);
+    wrapper.appendChild(inputSubmit);
+
+    form.setAttribute('id', ELEMENT_UTILITY_FORM);
+    form.classList.add(ELEMENT_UTILITY_FORM);
+    form.setAttribute('aria-hidden', isDesktop().toString());
+    form.appendChild(wrapper);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      let searchString = `#gsc.tab=0&gsc`;
+
+      if (searchType === 'domain') {
+        searchString += `.q=site:${window.location.hostname} ${inputText.value}`;
+      } else {
+        searchString += `.q=${inputText.value}`;
+      }
+
+      searchString += `&gsc.sort=`;
+
+      window.open(`${SEARCH_URL}${encodeURI(searchString)}`, '_blank');
+    });
+
+    return form;
+  })();
+
+export default {
+  CreateElement: CreateNavUtilitySearch,
+  Styles: STYLES_NAV_UTILITY_SEARCH,
+  Elements: {
+    form: ELEMENT_UTILITY_FORM,
+  },
+};

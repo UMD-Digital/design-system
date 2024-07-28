@@ -1,5 +1,10 @@
-import { Tokens, Elements, Layout } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
+import {
+  Tokens,
+  Elements,
+  Layout,
+  Typography,
+} from '@universityofmaryland/variables';
+import { AssetIcon, Styles } from 'utilities';
 
 type TypeAlertDataType = {
   alert_title: string;
@@ -14,7 +19,8 @@ export type TypeAlertProps = {
 
 const { ConvertJSSObjectToStyles } = Styles;
 const { Colors, Spacing } = Tokens;
-const { LockMax } = Layout;
+const { LockFull } = Layout;
+const { SansLarge } = Typography;
 const { Text } = Elements;
 
 const DEFAULT_ALERT_URL = 'https://umd.edu/api/alerts';
@@ -27,13 +33,14 @@ const MEDIUM = 768;
 
 const ATTRIBUTE_TYPE = 'type';
 const TYPE_GENERAL = 'general';
-const TYPE_CLOSED = 'close';
+const TYPE_CLOSED = 'closed';
 const TYPE_OPEN = 'open';
 
 const ELEMENT_NAME = 'umd-element-nav-alert';
 const ELEMENT_ALERT_DECLARATION = 'umd-element-nav-alert-declaration';
 const ELEMENT_ALERT_CONTAINER = 'umd-element-nav-alert-container';
 const ELEMENT_ALERT_LOCK = 'umd-element-nav-alert-lock';
+const ELEMENT_ALERT_WRAPPER = 'umd-element-nav-alert-wrapper';
 const ELEMENT_ALERT_TITLE = 'umd-element-nav-alert-title';
 const ELEMENT_ALERT_TEXT = 'umd-element-nav-alert-text';
 const ELEMENT_ALERT_CLOSE_BUTTON = 'umd-element-nav-alert-close';
@@ -56,14 +63,22 @@ const OverwriteTypeGeneral = `
 // prettier-ignore
 const OverwriteTypeOpen = `
   ${OVERWRITE_CONTAINER_TYPE_OPEN} {
-    background-color: ${Colors.gold};
+
   }
 `
 
 // prettier-ignore
 const OverwriteTypeClosed = `
   ${OVERWRITE_CONTAINER_TYPE_CLOSED} {
-    background-color:  #70ebd6;
+    background-color: ${Colors.black};
+  }
+
+  ${OVERWRITE_CONTAINER_TYPE_CLOSED} * {
+    color: ${Colors.white};
+  }
+
+   ${OVERWRITE_CONTAINER_TYPE_CLOSED} .${ELEMENT_ALERT_CLOSE_BUTTON} > svg {
+    fill: ${Colors.white};
   }
 `
 
@@ -81,22 +96,11 @@ const CloseButtonStyles = `
       right: 5px;
     }
   }
-  
-  .${ELEMENT_ALERT_CLOSE_BUTTON}:before,
-  .${ELEMENT_ALERT_CLOSE_BUTTON}:after {
-    content: '';
-    display: inline-block;
-    width: 2px;
-    height: 20px;
-    background-color: ${Colors.gray};
-  }
-  
-  .${ELEMENT_ALERT_CLOSE_BUTTON}:before {
-    transform: rotate(135deg) translateX(-1px);
-  }
-  
-  .${ELEMENT_ALERT_CLOSE_BUTTON}:after {
-    transform: rotate(45deg) translateX(-1px);
+
+  .${ELEMENT_ALERT_CLOSE_BUTTON} > svg {
+    fill: ${Colors.black};
+    width: 24px;
+    height: 24px;
   }
 `
 
@@ -104,7 +108,7 @@ const CloseButtonStyles = `
 const TextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_TITLE}`]: LockMax,
+      [`.${ELEMENT_ALERT_TITLE}`]: SansLarge,
     },
   })}
 
@@ -117,37 +121,46 @@ const TextStyles = `
       [`.${ELEMENT_ALERT_TEXT}`]: Text.RichText,
     },
   })}
+
+  .${ELEMENT_ALERT_TEXT},
+  .${ELEMENT_ALERT_TEXT} * {
+    font-size: 16px;;
+  }
+`
+
+// prettier-ignore
+const WrapperStyles = `
+  .${ELEMENT_ALERT_WRAPPER} {
+    position: relative;
+    padding-right: ${Spacing.lg};
+  }
 `
 
 // prettier-ignore
 const LockStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_LOCK}`]: LockMax,
+      [`.${ELEMENT_ALERT_LOCK}`]: LockFull,
     },
   })}
-
-  .${ELEMENT_ALERT_LOCK} {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  
-  @container (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_ALERT_LOCK} {
-      padding-top: 40px;
-    }
-  }
 `
 
 // prettier-ignore
 const ContainerStyles = `
   .${ELEMENT_ALERT_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    text-align: center;
     background-color: ${Colors.gray.lighter};
+    border-left: 5px solid ${Colors.red};
+    padding: ${Spacing.md} 0;
     transition: height ${ANIMATION_IN_SPEED}ms;
     overflow: hidden;
     position: relative;
+  }
+
+  @container (min-width: ${MEDIUM}px) {
+    .${ELEMENT_ALERT_CONTAINER} {
+      padding: ${Spacing.lg} 0 ;
+    }
   }
 `
 
@@ -165,6 +178,7 @@ const STYLES_NAV_ALERT = `
 
   ${ContainerStyles}
   ${LockStyles}
+  ${WrapperStyles}
   ${TextStyles}
   ${CloseButtonStyles}
   ${OverwriteTypeGeneral}
@@ -207,8 +221,9 @@ const checkAlertTime = () => {
 
 const CreateAlertComponent = (data: TypeAlertDataType) => {
   const declaration = document.createElement('div');
-  const wrapper = document.createElement('div');
+  const container = document.createElement('div');
   const lock = document.createElement('div');
+  const wrapper = document.createElement('div');
   const titleElement = document.createElement('p');
   const textElement = document.createElement('div');
   const closeButton = document.createElement('button');
@@ -221,6 +236,7 @@ const CreateAlertComponent = (data: TypeAlertDataType) => {
 
   closeButton.classList.add(ELEMENT_ALERT_CLOSE_BUTTON);
   closeButton.setAttribute('aria-label', 'remove alert');
+  closeButton.innerHTML = AssetIcon.X;
   closeButton.addEventListener('click', () => {
     wrapper.style.height = `${wrapper.offsetHeight}px`;
     window.localStorage.setItem(ALERT_ID_REF, data.alert_id);
@@ -234,17 +250,20 @@ const CreateAlertComponent = (data: TypeAlertDataType) => {
     }, ANIMATION_IN_SPEED + 100);
   });
 
+  wrapper.classList.add(ELEMENT_ALERT_WRAPPER);
+  wrapper.appendChild(closeButton);
+  wrapper.appendChild(titleElement);
+  wrapper.appendChild(textElement);
+
   lock.classList.add(ELEMENT_ALERT_LOCK);
-  lock.appendChild(closeButton);
-  lock.appendChild(titleElement);
-  lock.appendChild(textElement);
+  lock.appendChild(wrapper);
 
-  wrapper.setAttribute('data-type', data.alert_type);
-  wrapper.setAttribute('id', ALERT_ELEMENT_ID);
-  wrapper.classList.add(ELEMENT_ALERT_CONTAINER);
-  wrapper.appendChild(lock);
+  container.setAttribute(ATTRIBUTE_TYPE, data.alert_type);
+  container.setAttribute('id', ALERT_ELEMENT_ID);
+  container.classList.add(ELEMENT_ALERT_CONTAINER);
+  container.appendChild(lock);
 
-  declaration.appendChild(wrapper);
+  declaration.appendChild(container);
   declaration.classList.add(ELEMENT_ALERT_DECLARATION);
 
   return declaration;

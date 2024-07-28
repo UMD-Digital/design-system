@@ -14,7 +14,10 @@ The example provided should be used to prototype rapidly as proof of concept.
   </head>
 
   <body>
-    <umd-utility-header size="1400px" padding="20"></umd-utility-header>
+    <umd-element-utility-header
+      size="1400px"
+      padding="20"
+    ></umd-element-utility-header>
     <main>
       <!-- Insert components and theme class here -->
     </main>

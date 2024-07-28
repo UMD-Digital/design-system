@@ -37,7 +37,7 @@ const CreateHeader = ({
   element: HTMLElement;
   eventOpen?: () => void;
 }) => {
-  const { LOGO, NAVIGATION } = SLOTS;
+  const { LOGO, NAVIGATION, UTILITY } = SLOTS;
   const logoSlot = SlotWithDefaultStyling({
     element,
     slotRef: LOGO,
@@ -45,6 +45,7 @@ const CreateHeader = ({
   const navigationSlot = element.querySelector(
     `[slot="${NAVIGATION}"]`,
   ) as HTMLElement;
+  const utilitySlot = Node.slot({ type: UTILITY });
   const searchUrl = element.getAttribute(ATTRIBUTE_SEARCH_URL);
 
   if (!logoSlot) {
@@ -54,6 +55,7 @@ const CreateHeader = ({
   const value = NavigationHeader.CreateElement({
     logo: logoSlot,
     navRow: navigationSlot,
+    utilityRow: utilitySlot,
     eventOpen,
     searchUrl,
   });

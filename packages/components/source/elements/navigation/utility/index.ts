@@ -1,5 +1,5 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
+import { Accessibility, AssetIcon, Styles } from 'utilities';
 import UtilityAlert, { TypeAlertProps } from './alert';
 import UtilitySearch from './search';
 
@@ -18,7 +18,8 @@ type TypeMenuItemsRequirements = {
 type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps & {};
 
 const { ConvertJSSObjectToStyles } = Styles;
-const { Colors, Spacing } = Tokens;
+const { EventAccessibilityFocus } = Accessibility;
+const { Colors } = Tokens;
 const { LockMax } = Layout;
 
 const flagIcon = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28"><title>Flag</title><path d="M5 4c0 .72-.39 1.36-1 1.72V25.5c0 .266-.234.5-.5.5h-1c-.266 0-.5-.234-.5-.5V5.72c-.61-.36-1-1-1-1.72 0-1.11.89-2 2-2s2 .89 2 2zm23 1v11.922c0 .578-.36.797-.812 1.03-1.766.954-3.72 1.814-5.766 1.814-2.875 0-4.25-2.188-7.656-2.188-2.484 0-5.094 1.125-7.25 2.28-.172.095-.328.142-.516.142-.547 0-1-.453-1-1V7.406c0-.375.187-.64.484-.86.375-.25.828-.468 1.234-.67 1.97-1 4.36-1.876 6.578-1.876 2.453 0 4.375.812 6.547 1.828.438.22.89.297 1.375.297C23.67 6.125 26.312 4 26.998 4c.548 0 1 .453 1 1z"></path></svg>`;
@@ -27,9 +28,7 @@ const starIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" wi
 const calendarIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28"><title>Calendar</title><path d="M2 26h22V10H2v16zM8 7V2.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5zm12 0V2.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5zm6-1v20c0 1.094-.906 2-2 2H2c-1.094 0-2-.906-2-2V6c0-1.094.906-2 2-2h2V2.5C4 1.125 5.125 0 6.5 0h1C8.875 0 10 1.125 10 2.5V4h6V2.5C16 1.125 17.125 0 18.5 0h1C20.875 0 22 1.125 22 2.5V4h2c1.094 0 2 .906 2 2z"></path></svg>`;
 const mIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 35 28"><title>Gift</title><path d="M16 1.4C7.937 1.4 1.4 7.937 1.4 16S7.937 30.6 16 30.6c8.063 0 14.6-6.537 14.6-14.6S24.063 1.4 16 1.4zm3.38 22.66v-2.55h2L21 13l-4.68 8.36h-.38L11.11 13l-.27 8.55h2v2.55H6.08v-2.55H8l.45-11.5H6.42V7.5h4.54l5.16 9.19 5-9.27h4.51v2.55h-2.04l.61 11.49h2v2.55z"></path></svg>`;
 const searchIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28"><title>Search</title><path d="M18 13c0-3.86-3.14-7-7-7s-7 3.14-7 7 3.14 7 7 7 7-3.14 7-7zm8 13c0 1.094-.906 2-2 2-.53 0-1.047-.22-1.406-.594l-5.36-5.344C15.408 23.328 13.22 24 11.002 24 4.924 24 0 19.076 0 13S4.924 2 11 2s11 4.92 11 11c0 2.218-.67 4.405-1.936 6.233l5.36 5.36c.358.358.577.874.577 1.405z"></path></svg>`;
-const chevronIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 28 28"><title>Menu</title><path d="M26.297 12.625L14.703 24.203c-.39.39-1.016.39-1.406 0L1.703 12.625c-.39-.39-.39-1.03 0-1.422l2.594-2.578c.39-.39 1.016-.39 1.406 0L14 16.922l8.297-8.297c.39-.39 1.016-.39 1.406 0l2.594 2.578c.39.39.39 1.03 0 1.422z"></path></svg>`;
 
-const MEDIUM = 768;
 const LARGE = 1024;
 
 const ELEMENT_NAME = 'umd-utility-header';
@@ -71,7 +70,14 @@ const WrapperStyles = `
 // prettier-ignore
 const MenuStyles = `
   .${ELEMENT_UTILITY_MENU} {
+    display: flex;
 
+  }
+
+  @container (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_UTILITY_MENU} {
+      flex-direction: column;
+    }
   }
 
   @container (min-width: ${LARGE}px) {
@@ -79,21 +85,31 @@ const MenuStyles = `
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: ${Spacing.lg}
     }
   }
 
-  .${ELEMENT_UTILITY_MENU} * {
+  .${ELEMENT_UTILITY_MENU} > * {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 4px;
+    padding: 10px 15px;
     font-weight: 700;
     font-size: 13px;
+    transition: background ${ANIMATION_IN_SPEED}ms;
   }
 
-  @container (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} > * {
+  @container (min-width: ${LARGE}px) {
+   .${ELEMENT_UTILITY_MENU} > * {
+      justify-content: space-between;
+    }
+  }
+
+  .${ELEMENT_UTILITY_MENU} > *[aria-expanded="true"] {
+    background-color: ${Colors.redDark};
+  }
+
+  @container (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_UTILITY_CONTAINTER} .${ELEMENT_UTILITY_MENU} > * {
       border-top: 1px solid ${Colors.gray.lighter};
       color: ${Colors.red};
       order: 2;
@@ -101,15 +117,15 @@ const MenuStyles = `
     }
   }
 
-  @container (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} > *:first-child {
+  @container (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_UTILITY_MENU} > *:first-child {
       border-top: none;
     }
   }
 
-  @container (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} > a:hover,
-    .${ELEMENT_UTILITY_MOBILE_MENU} > a:focus {
+  @container (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_UTILITY_MENU} > a:hover,
+    .${ELEMENT_UTILITY_MENU} > a:focus {
       background-color: ${Colors.red};
       color: ${Colors.white};
       transition: background ${ANIMATION_IN_SPEED}ms, color ${ANIMATION_IN_SPEED}ms;
@@ -117,16 +133,33 @@ const MenuStyles = `
   }
 
   @container (min-width: ${LARGE}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} > a:hover,
-    .${ELEMENT_UTILITY_MOBILE_MENU} > a:focus {
+    .${ELEMENT_UTILITY_MENU} > *:hover,
+    .${ELEMENT_UTILITY_MENU} > *:focus {
       background-color: ${Colors.redDark};
-      transition: background ${ANIMATION_IN_SPEED}ms;
     }
   }
 
-  @container (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} > a:hover svg,
-    .${ELEMENT_UTILITY_MOBILE_MENU}> a:focus svg {
+  @container (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_UTILITY_MENU} > a:hover svg,
+    .${ELEMENT_UTILITY_MENU} > a:focus svg {
+      fill: ${Colors.white};
+    }
+  }
+
+  .${ELEMENT_UTILITY_MENU} svg {
+    max-width: 15px;
+    transition: fill ${ANIMATION_OUT_SPEED}ms;
+  }
+
+  @container (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_UTILITY_MENU} svg {
+      fill: ${Colors.red};
+      transition: fill ${ANIMATION_IN_SPEED}ms;
+    }
+  }
+
+  @container (min-width: ${LARGE}px) {
+    .${ELEMENT_UTILITY_MENU} svg {
       fill: ${Colors.white};
     }
   }
@@ -134,12 +167,12 @@ const MenuStyles = `
 
 // prettier-ignore
 const MobileMenuStyles = `
-  @container (max-width: ${MEDIUM - 1}px) {
+  @container (max-width: ${LARGE - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU} {
       position: absolute;
       width: 100%;
       left: 0;
-      top: 39px;
+      top: 44px;
       box-shadow: 0 5px 5px 1px rgba(0, 0, 0, .2);
       height: 0;
       overflow: hidden;
@@ -160,22 +193,21 @@ const MobileMenuStyles = `
     }
   }
 
-  @container (max-width: ${MEDIUM - 1}px) {
+  @container (max-width: ${LARGE - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU}[aria-hidden="true"] {
       transition: height ${ANIMATION_OUT_SPEED}ms;
       display: none;
     }
   }
 
-  @container (max-width: ${MEDIUM - 1}px) {
+  @container (max-width: ${LARGE - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU}[aria-hidden="false"] {
       transition: height ${ANIMATION_IN_SPEED}ms;
     }
   }
 
-
-  @container (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} button {
+  @container (max-width: ${LARGE - 1}px) {
+    .${ELEMENT_UTILITY_MOBILE_MENU} > button {
       display: none;
     }
   }
@@ -185,16 +217,18 @@ const MobileMenuStyles = `
       transition: background ${ANIMATION_OUT_SPEED}ms;
     }
   }
-
-  .${ELEMENT_UTILITY_MOBILE_MENU} > * > span {
-    margin-left: 10px;
-  }
 `
 
 // prettier-ignore
 const MobileButtonStyles = `
   .${ELEMENT_UTILITY_MOBILE_BUTTON} {
     margin-left: auto;
+    height: 100%;
+    padding: 12px 15px;
+    margin-right: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @container (min-width: ${LARGE}px) {
@@ -208,16 +242,11 @@ const MobileButtonStyles = `
     background-color: ${Colors.redDark};
   }
 
-  @container (max-width: ${MEDIUM - 1}px) {
+  @container (max-width: ${LARGE - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_BUTTON} svg {
       fill: ${Colors.white};
-      max-width: 20px;
-    }
-  }
-
-  @container (min-width: ${LARGE}px) {
-    .${ELEMENT_UTILITY_MOBILE_BUTTON} {
-      display: none;
+      width: 20px;
+      height: 20px;
     }
   }
 `;
@@ -244,33 +273,10 @@ const STYLES_NAVIGATION_UTILITY = `
     z-index: 999;
   }
 
-  .${ELEMENT_UTILITY_CONTAINTER} p {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
   .${ELEMENT_UTILITY_CONTAINTER} a {
     color: ${Colors.white};
     text-decoration: none;
     text-transform: uppercase;
-  }
-
-  .${ELEMENT_UTILITY_CONTAINTER} svg {
-    max-width: 15px;
-    transition: fill ${ANIMATION_OUT_SPEED}ms;
-  }
-
-  @container (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_UTILITY_CONTAINTER} svg {
-      fill: ${Colors.red};
-      transition: fill ${ANIMATION_IN_SPEED}ms;
-    }
-  }
-
-  @container (min-width: ${LARGE}px) {
-    .${ELEMENT_UTILITY_CONTAINTER} svg {
-      fill: ${Colors.white};
-    }
   }
 
   ${LockStyles}
@@ -283,82 +289,37 @@ const STYLES_NAVIGATION_UTILITY = `
   ${UtilitySearch.Styles}
 `;
 
-const toggleExpandElements = ({
+const CreateSearchFormButton = ({
   expandElement,
-  elements,
-  button,
 }: {
-  expandElement: HTMLElement;
-  elements: Array<HTMLElement>;
-  button: HTMLButtonElement;
+  expandElement: HTMLDivElement | HTMLFormElement;
 }) => {
-  const isOpen = expandElement.getAttribute('aria-hidden') === 'false';
+  const button = document.createElement('button');
+  const elements = Array.from(expandElement.querySelectorAll('div'));
+  let focusCallback = () => {};
 
-  const elementToFocus = () => {
-    const formElement = elements.find(
-      (element: HTMLElement) => element.nodeName === 'DIV',
-    ) as HTMLFormElement;
-    const isFirstNodeAnchor = elements[0].nodeName === 'A';
+  const eventClose = () => {
+    expandElement.style.height = `0`;
 
-    if (!formElement) return elements[0];
+    setTimeout(() => {
+      expandElement.style.display = 'none';
+      expandElement.setAttribute('aria-hidden', 'true');
+      button.setAttribute('aria-expanded', 'false');
+      button.focus();
 
-    if (!isFirstNodeAnchor && formElement) {
-      const input = formElement.querySelector('input') as HTMLInputElement;
-
-      return input;
-    }
-
-    return elements[0];
-  };
-
-  const eventKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Esc' || event.keyCode == 27) {
-      close(true);
-    }
-  };
-
-  const eventKeyUp = (event: KeyboardEvent) => {
-    const path = event.composedPath();
-    const currentElement = path[0] as HTMLElement;
-
-    if (!expandElement) return;
-
-    if (event.key === 'Tab' || event.keyCode == 9) {
-      if (!expandElement.contains(currentElement)) {
-        close();
+      if (focusCallback) {
+        focusCallback();
+        focusCallback = () => {};
       }
-    }
-
-    if (event.key === 'ArrowDown' || event.keyCode == 40) {
-      const nextElement = currentElement.nextElementSibling as HTMLElement;
-
-      if (expandElement.contains(nextElement)) {
-        nextElement.focus();
-      }
-    }
-
-    if (event.key === 'ArrowUp' || event.keyCode == 38) {
-      const previousElement =
-        currentElement.previousElementSibling as HTMLElement;
-
-      if (expandElement.contains(previousElement)) {
-        previousElement.focus();
-      }
-    }
+    }, ANIMATION_OUT_SPEED + 100);
   };
 
-  const eventClick = (event: MouseEvent) => {
-    const globalHeaderElement = event.target as HTMLElement;
+  const eventOpen = () => {
+    const focusElement = expandElement.querySelector(
+      'input[type="text"]',
+    ) as HTMLInputElement;
 
-    if (globalHeaderElement.nodeName !== ELEMENT_NAME.toUpperCase()) {
-      close();
-    }
-  };
-
-  const open = () => {
-    const focusElement = elementToFocus();
-    expandElement.style.display =
-      expandElement.nodeName === 'FORM' ? 'block' : 'flex';
+    expandElement.style.display = 'block';
 
     setTimeout(() => {
       const size = elements.reduce((accumulator, currentValue) => {
@@ -367,49 +328,30 @@ const toggleExpandElements = ({
 
       expandElement.setAttribute('aria-hidden', 'false');
       expandElement.style.height = `${size}px`;
-      focusElement.focus();
-
-      window.addEventListener('keydown', eventKeyDown);
-      window.addEventListener('keyup', eventKeyUp);
-      window.addEventListener('click', eventClick);
+      button.setAttribute('aria-expanded', 'true');
+      if (focusElement) focusElement.focus();
     }, 100);
+
+    focusCallback = EventAccessibilityFocus({
+      element: expandElement,
+      action: () => eventClose(),
+    });
   };
-
-  const close = (focus = false) => {
-    expandElement.style.height = `0`;
-
-    setTimeout(() => {
-      expandElement.style.display = 'none';
-      expandElement.setAttribute('aria-hidden', 'true');
-
-      if (focus) {
-        button.focus();
-      }
-
-      window.removeEventListener('keydown', eventKeyDown);
-      window.removeEventListener('keyup', eventKeyUp);
-      window.removeEventListener('click', eventClick);
-    }, ANIMATION_OUT_SPEED + 100);
-  };
-
-  isOpen ? close() : open();
-};
-
-const CreateSearchFormButton = ({
-  expandElement,
-}: {
-  expandElement: HTMLDivElement | HTMLFormElement;
-}) => {
-  const button = document.createElement('button');
-  const elements = Array.from(expandElement.querySelectorAll('div'));
 
   button.setAttribute('aria-label', 'enable the search form');
   button.setAttribute('type', 'button');
   button.innerHTML = `${searchIcon}`;
   button.setAttribute('aria-controls', UtilitySearch.Elements.form);
+  button.setAttribute('aria-expanded', 'false');
 
   button.addEventListener('click', () => {
-    toggleExpandElements({ expandElement, elements, button });
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+    if (isExpanded) {
+      eventClose();
+    } else {
+      eventOpen();
+    }
   });
 
   return button;
@@ -421,18 +363,59 @@ const CreateMobileMenuButton = ({
   expandElement: HTMLDivElement;
 }) => {
   const button = document.createElement('button');
-  const elements = Array.from(
-    expandElement.querySelectorAll('a, form'),
-  ) as Array<HTMLElement>;
+  let focusCallback = () => {};
 
-  button.innerHTML = `${chevronIcon}`;
+  const eventClose = () => {
+    expandElement.style.height = `0`;
+
+    setTimeout(() => {
+      expandElement.style.display = 'none';
+      expandElement.setAttribute('aria-hidden', 'true');
+      button.setAttribute('aria-expanded', 'false');
+      button.focus();
+
+      if (focusCallback) {
+        focusCallback();
+        focusCallback = () => {};
+      }
+    }, ANIMATION_OUT_SPEED + 100);
+  };
+
+  const eventOpen = () => {
+    const wrapper = expandElement.querySelector(
+      `.${ELEMENT_UTILITY_MENU}`,
+    ) as HTMLElement;
+    const focusElement = expandElement.querySelector('a') as HTMLAnchorElement;
+
+    expandElement.style.display = 'block';
+
+    setTimeout(() => {
+      expandElement.setAttribute('aria-hidden', 'false');
+      expandElement.style.height = `${wrapper.offsetHeight}px`;
+      button.setAttribute('aria-expanded', 'true');
+      if (focusElement) focusElement.focus();
+    }, 100);
+
+    focusCallback = EventAccessibilityFocus({
+      element: expandElement,
+      action: () => eventClose(),
+    });
+  };
+
+  button.innerHTML = `${AssetIcon.CHEVRON_SMALL}`;
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'toggle mobile menu');
-  button.setAttribute('aria-controls', `#${ELEMENT_UTILITY_MOBILE_MENU}`);
+  button.setAttribute('aria-controls', `${ELEMENT_UTILITY_MOBILE_MENU}`);
   button.classList.add(ELEMENT_UTILITY_MOBILE_BUTTON);
 
   button.addEventListener('click', () => {
-    toggleExpandElements({ expandElement, elements, button });
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+    if (isExpanded) {
+      eventClose();
+    } else {
+      eventOpen();
+    }
   });
 
   return button;
@@ -461,6 +444,7 @@ const CreateMenuItems = ({
   searchType,
 }: TypeMenuItemsRequirements) => {
   const container = document.createElement('div');
+
   const isValidUrl = (url: string) => {
     try {
       new URL(url);
@@ -585,57 +569,56 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       const lock = document.createElement('div');
       const wrapper = document.createElement('div');
       const logoElement = CreateLogoElement();
-      let shouldReize = false;
 
-      const layoutWithItems = () => {
+      const setLayout = () => {
+        const menuItems = CreateMenuItems({ ...props });
+        const mobileMenu = document.createElement('div');
         const mobileMenuButton = CreateMobileMenuButton({
-          expandElement: container,
+          expandElement: mobileMenu,
         });
 
-        mobileMenuButton.setAttribute('id', `#${ELEMENT_UTILITY_MOBILE_MENU}`);
-        mobileMenuButton.setAttribute('aria-hidden', (!isDesktop()).toString());
+        mobileMenu.setAttribute('id', `${ELEMENT_UTILITY_MOBILE_MENU}`);
+        mobileMenu.classList.add(ELEMENT_UTILITY_MOBILE_MENU);
+        mobileMenu.setAttribute('aria-hidden', (!isDesktop()).toString());
 
-        wrapper.appendChild(mobileMenuButton);
-
-        shouldReize = true;
-      };
-
-      const layoutWithOutItems = () => {
-        wrapper.style.display = 'flex';
-        wrapper.style.justifyContent = 'center';
+        if (menuItems) {
+          mobileMenu.appendChild(menuItems);
+          wrapper.appendChild(mobileMenuButton);
+          wrapper.appendChild(mobileMenu);
+        } else {
+          wrapper.style.display = 'flex';
+          wrapper.style.justifyContent = 'center';
+        }
       };
 
       const resizeEvent = () => {
+        const isDesktop = window.innerWidth >= LARGE;
+
         const form = container.querySelector(`.${UtilitySearch.Elements.form}`);
-        const menu = container.querySelector(`#${ELEMENT_UTILITY_MOBILE_MENU}`);
+        const menu = container.querySelector(`.${ELEMENT_UTILITY_MOBILE_MENU}`);
 
-        if (menu) {
-          menu.setAttribute('aria-hidden', (!isDesktop()).toString());
-        }
+        if (!form || !menu) return;
 
-        if (form) {
-          form.setAttribute('aria-hidden', isDesktop().toString());
+        if (isDesktop) {
+          menu.setAttribute('aria-hidden', 'true');
+          form.setAttribute('aria-hidden', 'true');
+          form.setAttribute('layout', 'desktop');
+        } else {
+          menu.setAttribute('aria-hidden', 'false');
+          form.setAttribute('aria-hidden', 'false');
+          form.setAttribute('layout', 'mobile');
         }
       };
 
       const load = async () => {
         const alert = await UtilityAlert.CreateElement(props);
-        const menu = CreateMenuItems({ ...props });
 
         if (alert) {
           container.insertBefore(alert, container.firstChild);
         }
 
-        if (menu) {
-          layoutWithItems();
-          wrapper.appendChild(menu);
-        } else {
-          layoutWithOutItems();
-        }
-
-        if (shouldReize) {
-          window.addEventListener('resize', () => resizeEvent());
-        }
+        setLayout();
+        resizeEvent();
       };
 
       wrapper.appendChild(logoElement);
@@ -651,6 +634,7 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       declaration.classList.add(ELEMENT_UTILITY_DECLARATION);
 
       load();
+      window.addEventListener('resize', resizeEvent);
 
       return declaration;
     }

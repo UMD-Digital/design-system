@@ -11,8 +11,51 @@ const ANIMATION_IN_SPEED = 800;
 const ANIMATION_OUT_SPEED = 400;
 const LARGE = 1024;
 
+const ATTRIBUTE_LAYOUT = 'layout';
+const LAYOUT_DESKTOP = 'desktop';
+const LAYOUT_MOBILE = 'mobile';
+
+const IS_LAYOUT_DESKTOP = `[${ATTRIBUTE_LAYOUT}=${LAYOUT_DESKTOP}]`;
+const IS_LAYOUT_MOBILE = `[${ATTRIBUTE_LAYOUT}=${LAYOUT_MOBILE}]`;
+
 const ELEMENT_UTILITY_FORM = 'element-utility-form';
 const ELEMENT_UTILITY_FORM_WRAPPER = 'element-utility-form-wrapper';
+
+const OVERWRITE_UTILITY_FORM_LAYOUT_DESKTOP = `.${ELEMENT_UTILITY_FORM}${IS_LAYOUT_DESKTOP}`;
+const OVERWRITE_UTILITY_FORM_LAYOUT_MOBILE = `.${ELEMENT_UTILITY_FORM}${IS_LAYOUT_MOBILE}`;
+
+const OverwriteLayoutDesktop = `
+  ${OVERWRITE_UTILITY_FORM_LAYOUT_DESKTOP} {
+    margin: 0;
+    padding: 0;
+    display: none;
+    overflow: hidden;
+    min-width: 420px;
+    height: 0;
+    position: absolute;
+    top: 48px;
+    right: 0;
+    background-color: ${Colors.white};
+    transition: height ${ANIMATION_OUT_SPEED}ms;
+  }
+
+  ${ELEMENT_UTILITY_FORM}[aria-hidden="true"] {
+    transition: height ${ANIMATION_OUT_SPEED}ms;
+  }
+
+  ${ELEMENT_UTILITY_FORM}[aria-hidden="false"] {
+    transition: height ${ANIMATION_IN_SPEED}ms;
+  }
+`;
+
+const OverwriteLayoutMobile = `
+  ${OVERWRITE_UTILITY_FORM_LAYOUT_MOBILE} {
+    padding: 20px 15px;
+    order: 1;
+    display: block;
+    height: auto;
+  }
+`;
 
 // prettier-ignore
 const FormElementsStyles = `
@@ -61,53 +104,15 @@ const FormWrapperStyles = `
 
 // prettier-ignore
 const STYLES_NAV_UTILITY_SEARCH = `
-  .${ELEMENT_UTILITY_FORM} {
-    margin: 0;
-    display: none;
-  }
-
-  @container (max-width: ${LARGE - 1}px) {
-    .${ELEMENT_UTILITY_FORM} {
-      padding: 20px 15px;
-      order: 1;
-      display: block;
-      height: auto;
-    }
-  }
-
-  @container (min-width: ${LARGE}px) {
-    .${ELEMENT_UTILITY_FORM} {
-      position: absolute;
-      top: 48px;
-      right: 0;
-      background-color: ${Colors.white};
-      min-width: 420px;
-      height: 0;
-      overflow: hidden;
-      transition: height ${ANIMATION_OUT_SPEED}ms;
-    }
-  }
-
-  @container (min-width: ${LARGE}px) {
-    .${ELEMENT_UTILITY_FORM}[aria-hidden="true"] {
-      transition: height ${ANIMATION_OUT_SPEED}ms;
-    }
-  }
-
-  @container (min-width: ${LARGE}px) {
-    .${ELEMENT_UTILITY_FORM}[aria-hidden="false"] {
-      transition: height ${ANIMATION_IN_SPEED}ms;
-    }
-  }
-
   ${FormWrapperStyles}
   ${FormElementsStyles}
+  ${OverwriteLayoutDesktop}
+  ${OverwriteLayoutMobile}
 `
-
-const isDesktop = () => window.innerWidth >= LARGE;
 
 const CreateNavUtilitySearch = ({ searchType }: TypeUtilitySearchProps) =>
   (() => {
+    const isDesktop = window.innerWidth >= LARGE;
     const form = document.createElement('form');
     const wrapper = document.createElement('div');
     const inputTextLabel = document.createElement('label');
@@ -133,12 +138,10 @@ const CreateNavUtilitySearch = ({ searchType }: TypeUtilitySearchProps) =>
     wrapper.appendChild(inputTextLabel);
     wrapper.appendChild(inputText);
     wrapper.appendChild(inputSubmit);
+    wrapper.classList.add(ELEMENT_UTILITY_FORM_WRAPPER);
 
     form.setAttribute('id', ELEMENT_UTILITY_FORM);
     form.classList.add(ELEMENT_UTILITY_FORM);
-    form.setAttribute('aria-hidden', isDesktop().toString());
-    form.appendChild(wrapper);
-
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
@@ -154,6 +157,16 @@ const CreateNavUtilitySearch = ({ searchType }: TypeUtilitySearchProps) =>
 
       window.open(`${SEARCH_URL}${encodeURI(searchString)}`, '_blank');
     });
+
+    if (isDesktop) {
+      form.setAttribute('aria-hidden', 'true');
+      form.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_DESKTOP);
+    } else {
+      form.setAttribute('aria-hidden', 'false');
+      form.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_MOBILE);
+    }
+
+    form.appendChild(wrapper);
 
     return form;
   })();

@@ -24,6 +24,7 @@ import FeedsNews from './feeds/news';
 import FeedsSlides from './feeds/slides';
 import NavigationElements from './navigation/elements';
 import NavigationHeader from './navigation';
+import NavigationUtility from './navigation/utility';
 import HeroBrandVideo from './hero/brand-video';
 import HeroDefault from './hero/default';
 import HeroElements from './hero/elements';
@@ -86,8 +87,6 @@ export {
   FeedsEvents,
   FeedsNews,
   FeedsSlides,
-  NavigationElements,
-  NavigationHeader,
   HeroBrandVideo,
   HeroDefault,
   HeroElements,
@@ -99,6 +98,9 @@ export {
   MediaInline,
   MediaWithCaption,
   MediaWrapped,
+  NavigationElements,
+  NavigationHeader,
+  NavigationUtility,
   PathwayDefault,
   PathwayElements,
   PathwayHero,

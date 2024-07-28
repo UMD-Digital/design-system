@@ -31,6 +31,7 @@ import NavDrawer from './navigation/drawer';
 import NavHeader from './navigation/header';
 import NavItem from './navigation/item';
 import NavSlider from './navigation/slider';
+import NavUtility from './navigation/utility';
 import Pathway from './pathway/default';
 import PathwayHighlight from './pathway/highlight';
 import Person from './person/default';
@@ -81,6 +82,7 @@ export {
   NavHeader,
   NavItem,
   NavSlider,
+  NavUtility,
   Pathway,
   PathwayHighlight,
   Person,

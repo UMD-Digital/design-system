@@ -14,6 +14,7 @@ type TypeSearchLink = {
 
 type TypeNavRow = TypeSearchLink & {
   navRow?: HTMLElement | null;
+  utilityRow?: HTMLElement | null;
 };
 
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
@@ -30,11 +31,11 @@ const ELEMENT_HEADER_NAVIGATION_COLUMN = 'element-header-navigation-column';
 const ELEMENT_HEADER_LOGO = 'element-header-logo';
 const ELEMENT_HEADER_MENU_BUTTON = 'element-header-menu-button';
 const ELEMENT_HEADER_NAVIGATION_ROW = 'element-header-navigation-row';
+const ELEMENT_HEADER_UTILITY_ROW = 'element-header-utility-row';
 
 const NavigationColumnStyles = `
   .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
-    display: flex;
-    align-items: center;
+
   }
 
   @media (max-width: ${Breakpoints.tablet.max}) {
@@ -54,6 +55,18 @@ const NavigationColumnStyles = `
     width: 24px;
     height: 24px;
     fill: ${Colors.black};
+  }
+
+  .${ELEMENT_HEADER_UTILITY_ROW} {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: ${Spacing.sm};
+  }
+
+  .${ELEMENT_HEADER_UTILITY_ROW} ::slotted(*) {
+    display: flex;
+    justify-content: flex-end;
+    gap: ${Spacing.md};
   }
 `;
 
@@ -109,13 +122,13 @@ const WrapperStyles = `
   .${ELEMENT_HEADER_WRAPPER} {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     gap: ${Spacing.lg};
     z-index: 999;
   }
 `;
 
-const STYLES_NAVIGATION_HEADER = `  
+const STYLES_NAVIGATION_HEADER = `
   .${ELEMENT_HEADER_CONTAINTER} {
     background-color: ${Colors.white};
     display: block;
@@ -130,8 +143,6 @@ const STYLES_NAVIGATION_HEADER = `
   ${NavigationElements.Item.Styles}
 `;
 
-const CreateUtiltyRow = ({ element }: { element: any }) => {};
-
 const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
   if (!searchUrl) return null;
 
@@ -144,14 +155,25 @@ const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
   return searchLink;
 };
 
-const CreateNavigationColumn = ({ navRow, searchUrl }: TypeNavRow) => {
+const CreateNavigationColumn = ({
+  navRow,
+  utilityRow,
+  searchUrl,
+}: TypeNavRow) => {
   if (!navRow) return null;
 
   const navColumnContainer = document.createElement('div');
+  const utilityRowContainer = document.createElement('div');
   const navRowContainer = document.createElement('div');
   const searchLink = CreateSearchLink({
     searchUrl,
   });
+
+  if (utilityRow) {
+    utilityRowContainer.classList.add(ELEMENT_HEADER_UTILITY_ROW);
+    utilityRowContainer.appendChild(utilityRow);
+    navColumnContainer.appendChild(utilityRowContainer);
+  }
 
   const navItems = Array.from(navRow.querySelectorAll('umd-element-nav-item'));
   const createdNavItems = navItems.map((navItem) => {

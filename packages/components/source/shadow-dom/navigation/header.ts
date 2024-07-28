@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { MarkupCreate, Styles } from 'utilities';
 import { NavigationHeader, NavigationElements } from 'elements';
 import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 

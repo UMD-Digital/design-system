@@ -31,7 +31,7 @@ const searchIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" 
 
 const LARGE = 1024;
 
-const ELEMENT_NAME = 'umd-utility-header';
+const ELEMENT_NAME = 'umd-element-utility-header';
 
 const ELEMENT_UTILITY_DECLARATION = 'element-utility-declaration';
 const ELEMENT_UTILITY_CONTAINTER = 'element-utility-container';

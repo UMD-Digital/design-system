@@ -36,16 +36,22 @@ const Navigation = {
   },
 };
 
-const Utility = {
-  'umd-utility-header:not(:defined)': {
-    display: 'block',
-    height: Spacing['2xl'],
-
-    '& > *': {
-      display: 'none',
-    },
+const Sticky = {
+  'umd-element-navigation-sticky:not(:defined)': {
+    display: 'none',
   },
-  'umd-utility-header:defined': {
+  'umd-element-navigation-sticky:defined': {
+    display: 'block',
+    position: 'relative',
+    zIndex: '99999',
+  },
+};
+
+const Utility = {
+  'umd-element-utility-header:not(:defined)': {
+    display: 'block',
+  },
+  'umd-element-utility-header:defined': {
     display: 'block',
   },
 };
@@ -55,4 +61,5 @@ export default {
   ...Item,
   ...Navigation,
   ...Utility,
+  ...Sticky,
 };

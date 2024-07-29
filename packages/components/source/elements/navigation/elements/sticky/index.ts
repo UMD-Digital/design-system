@@ -21,6 +21,7 @@ const STYLES_NAV_STICKY_ELEMENT = `
   .${ELEMENT_NAV_STIKCY_WRAPPER_FIXED} {
     position: fixed;
     top: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
 

@@ -13,6 +13,7 @@ const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-navigation-header';
 const ATTRIBUTE_SEARCH_URL = 'search-url';
+const ATTRIBUTE_STICKY = 'sticky';
 const SLOTS = {
   LOGO: 'logo',
   NAVIGATION: 'main-navigation',
@@ -65,6 +66,12 @@ const CreateHeader = ({
 
 class UMDHeaderElement extends HTMLElement {
   _shadow: ShadowRoot;
+  _elementRef: {
+    element: HTMLDivElement;
+    events: {
+      sticky: ({ isSticky }: { isSticky: boolean }) => void;
+    };
+  } | null;
 
   constructor() {
     const template = Node.stylesTemplate({ styles });
@@ -72,6 +79,25 @@ class UMDHeaderElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));
+    this._elementRef = null;
+  }
+
+  static get observedAttributes() {
+    return [ATTRIBUTE_STICKY];
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (name == ATTRIBUTE_STICKY && newValue === 'true' && this._elementRef) {
+      this._elementRef.events.sticky({ isSticky: true });
+    }
+
+    if (name == ATTRIBUTE_STICKY && newValue !== 'true' && this._elementRef) {
+      this._elementRef.events.sticky({ isSticky: false });
+    }
   }
 
   connectedCallback() {
@@ -91,7 +117,8 @@ class UMDHeaderElement extends HTMLElement {
       headerProps.eventOpen = drawer.events.eventOpen;
     }
 
-    _shadow.appendChild(CreateHeader(headerProps));
+    this._elementRef = CreateHeader(headerProps);
+    if (this._elementRef) _shadow.appendChild(this._elementRef.element);
   }
 }
 

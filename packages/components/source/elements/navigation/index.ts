@@ -22,6 +22,11 @@ type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 const { Colors, Spacing, Breakpoints } = Tokens;
 const { SansExtraLarge } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
+const ANIMATION_TIME = 500;
+
+const ATTRIBUTE_STICKY = 'sticky';
+
+const IS_STICKY = `[${ATTRIBUTE_STICKY}="true"]`;
 
 const ELEMENT_HEADER_DECLARATION = 'element-header-declaration';
 const ELEMENT_HEADER_CONTAINTER = 'element-header-container';
@@ -32,6 +37,23 @@ const ELEMENT_HEADER_LOGO = 'element-header-logo';
 const ELEMENT_HEADER_MENU_BUTTON = 'element-header-menu-button';
 const ELEMENT_HEADER_NAVIGATION_ROW = 'element-header-navigation-row';
 const ELEMENT_HEADER_UTILITY_ROW = 'element-header-utility-row';
+
+const OVERWRITE_STICKY_CONTAINER = `.${ELEMENT_HEADER_CONTAINTER}${IS_STICKY}`;
+const OVERWRITE_STICKY_LOGO = `${OVERWRITE_STICKY_CONTAINER} .${ELEMENT_HEADER_LOGO}`;
+
+const OverwriteStickyStyles = `
+  ${OVERWRITE_STICKY_CONTAINER} {
+    padding: ${Spacing.xs} 0;
+  }
+
+  .${ELEMENT_HEADER_WRAPPER} {
+     align-items: center;
+  }
+
+  ${OVERWRITE_STICKY_LOGO} img {
+    max-height: 30px;
+  }
+`;
 
 const NavigationColumnStyles = `
   .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
@@ -134,13 +156,15 @@ const STYLES_NAVIGATION_HEADER = `
     display: block;
     padding: ${Spacing.md} 0;
     position: relative;
+    transition: padding ${ANIMATION_TIME}ms;
   }
-  
+
   ${WrapperStyles}
   ${LogoColumnStyles}
   ${NavigationColumnStyles}
-  ${MenuButton.Styles}
+  ${OverwriteStickyStyles}
   ${NavigationElements.Item.Styles}
+  ${MenuButton.Styles}
 `;
 
 const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
@@ -223,6 +247,31 @@ const CreateNavigationHeader = (props: TypeHeaderRequirements) => {
   const wrapper = document.createElement('div');
   const logoColumn = CreateLogoColumn(props);
   const navigationColumn = CreateNavigationColumn(props);
+  const eventSticky = ({ isSticky }: { isSticky: boolean }) => {
+    const utility = container.querySelector(
+      `.${ELEMENT_HEADER_UTILITY_ROW}`,
+    ) as HTMLDivElement;
+
+    if (isSticky && isElementSticky) return;
+
+    if (isSticky) {
+      isElementSticky = true;
+      container.setAttribute(ATTRIBUTE_STICKY, 'true');
+
+      if (utility) {
+        utility.style.display = 'none';
+      }
+    }
+    if (!isSticky) {
+      isElementSticky = false;
+      container.removeAttribute(ATTRIBUTE_STICKY);
+
+      if (utility) {
+        utility.style.display = 'block';
+      }
+    }
+  };
+  let isElementSticky = false;
 
   wrapper.classList.add(ELEMENT_HEADER_WRAPPER);
   wrapper.appendChild(logoColumn);
@@ -235,7 +284,12 @@ const CreateNavigationHeader = (props: TypeHeaderRequirements) => {
   declaration.classList.add(ELEMENT_HEADER_DECLARATION);
   declaration.appendChild(container);
 
-  return declaration;
+  return {
+    element: declaration,
+    events: {
+      sticky: eventSticky,
+    },
+  };
 };
 
 export default {

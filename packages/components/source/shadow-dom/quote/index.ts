@@ -16,6 +16,7 @@ const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-quote';
 
+const ATTRIBUTE_TRANSPARENT = 'transparent';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_TYPE = 'type';
 const ATTRIBUTE_SIZE = 'size';
@@ -45,6 +46,7 @@ const styles = `
 
 const MakeData = ({ element }: { element: UMDElementQuote }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const isTransparent = element.getAttribute(ATTRIBUTE_TRANSPARENT) === 'true';
 
   const { IMAGE, QUOTE, ATTRIBUTION, ATTRIBUTION_SUB_TEXT, ACTIONS } =
     element._slots;
@@ -59,6 +61,7 @@ const MakeData = ({ element }: { element: UMDElementQuote }) => {
       slotRef: ATTRIBUTION_SUB_TEXT,
     }),
     action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
+    isTransparent,
   };
 };
 

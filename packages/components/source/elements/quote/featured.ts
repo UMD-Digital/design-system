@@ -3,7 +3,9 @@ import InlineQuote, { TypeInlineInline } from './inline';
 import QuoteText from './elements/text';
 import { MarkupCreate } from 'utilities';
 
-type TypeQuoteFeatured = TypeInlineInline & {};
+type TypeQuoteFeatured = TypeInlineInline & {
+  isTransparent: boolean;
+};
 
 type TypeQuoteFeaturedText = TypeQuoteFeatured & {
   hasImage: boolean;
@@ -20,6 +22,7 @@ const BACKGROUND_TEXTURE_DARK = `<svg id="quote_background_dark" aria-hidden="tr
 
 const ELEMENT_NAME = 'umd-element-quote-featured';
 const ATTRIBUTE_HAS_IMAGE = 'has-image';
+const ATTRIBUTE_TRANSPARENT = 'transparent';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
@@ -27,6 +30,7 @@ const THEME_MARYLAND = 'maryland';
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
 const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}="${THEME_MARYLAND}"]`;
 const IS_WITH_IMAGE = `[${ATTRIBUTE_HAS_IMAGE}]`;
+const IS_TRANSPARENT = `[${ATTRIBUTE_TRANSPARENT}="true"]`;
 
 const QUOTE_FEATURED_CONTAINER = 'quote-featured-container';
 const QUOTE_FEATURED_CONTAINER_SPACER = 'quote-featured-container-spacer';
@@ -42,6 +46,25 @@ const OVERWRITE_WITH_IMAGE_QUOTE_TEXT = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_I
 
 const OVERWRITE_THEME_DARK_WRAPPER = `.${QUOTE_FEATURED_CONTAINER}${IS_THEME_DARK} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
 const OVERWRITE_THEME_MARYLAND_WRAPPER = `.${QUOTE_FEATURED_CONTAINER}${IS_THEME_MARYLAND} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
+
+const OVERWRITE_TRANSPARENT_CONTAINER = `.${QUOTE_FEATURED_CONTAINER}${IS_TRANSPARENT}`;
+const OVERWRITE_TRANSPARENT_WRAPPER = `${OVERWRITE_TRANSPARENT_CONTAINER} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
+const OVERWRITE_TRANSPARENT_SPACER = `${OVERWRITE_TRANSPARENT_CONTAINER} .${QUOTE_FEATURED_CONTAINER_SPACER}`;
+const OVERWRITE_TRANSPARENT_TEXT = `${OVERWRITE_TRANSPARENT_CONTAINER} .${QUOTE_FEATURED_TEXT}`;
+
+console.log(OVERWRITE_TRANSPARENT_TEXT);
+
+// prettier-ignore
+const OverwriteTransparent = `
+  ${OVERWRITE_TRANSPARENT_WRAPPER} {
+    background-color: transparent;
+  }
+
+  ${OVERWRITE_TRANSPARENT_TEXT},
+  ${OVERWRITE_TRANSPARENT_SPACER} {
+    padding: 0;
+  }
+`;
 
 // prettier-ignore
 const OverwriteTheme = `
@@ -195,6 +218,7 @@ const STYLES_QUOTE_FEATURED_ELEMENT = `
   ${ImageContainer}
   ${OverwriteTheme}
   ${OverwriteWithImage}
+  ${OverwriteTransparent}
 `;
 
 const CreateImageContainer = ({
@@ -244,7 +268,7 @@ const CreateTextureContainer = ({ theme }: TypeQuoteFeatured) => {
 };
 
 const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
-  const { theme, action, image } = props;
+  const { theme, action, image, isTransparent } = props;
   const container = document.createElement('div');
   const spacer = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -253,7 +277,8 @@ const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
   const textContainer = CreateTextContainer({ ...props, hasImage });
 
   wrapper.classList.add(QUOTE_FEATURED_CONTAINER_WRAPPER);
-  wrapper.appendChild(textureContainer);
+
+  if (!isTransparent) wrapper.appendChild(textureContainer);
   if (hasImage) wrapper.appendChild(CreateImageContainer({ image, action }));
   wrapper.appendChild(textContainer);
 
@@ -264,6 +289,7 @@ const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
   container.appendChild(spacer);
   if (theme) container.setAttribute('theme', theme);
   if (hasImage) container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
+  if (isTransparent) container.setAttribute(ATTRIBUTE_TRANSPARENT, 'true');
 
   return container;
 };

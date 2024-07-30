@@ -32,6 +32,7 @@ import HeroMinimal from './hero/minimal';
 import HeroOverlay from './hero/overlay';
 import HeroLogo from './hero/logo';
 import HeroStacked from './hero/stacked';
+import LayoutImageExpand from './layout/image-expand';
 import LogoBlock from './logo/block';
 import MediaInline from './media/inline';
 import MediaWithCaption from './media/inline/with-caption';
@@ -94,6 +95,7 @@ export {
   HeroOverlay,
   HeroLogo,
   HeroStacked,
+  LayoutImageExpand,
   LogoBlock,
   MediaInline,
   MediaWithCaption,

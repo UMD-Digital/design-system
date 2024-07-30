@@ -127,6 +127,21 @@ const AdjustentLineText = {
   borderLeft: `1px solid ${Colors.red}`,
 };
 
+const AdjanctLineText = {
+  position: 'relative',
+
+  '&::before': {
+    content: '""',
+    display: 'block',
+    position: 'absolute',
+    top: 0,
+    left: '-24px',
+    width: '2px',
+    height: '100%',
+    backgroundColor: Colors.red,
+  },
+};
+
 export default {
   '.umd-eyebrow-ribbon': {
     ...Eyebrow.Ribbon,
@@ -145,6 +160,9 @@ export default {
   },
   '.umd-adjustent-line-text': {
     ...AdjustentLineText,
+  },
+  '.umd-adjacent-line-text': {
+    ...AdjanctLineText,
   },
   '.umd-pills': {
     ...PillWrapper,

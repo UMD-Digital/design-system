@@ -25,6 +25,7 @@ import Hero from './hero/default';
 import HeroBrandVideo from './hero/brand/video';
 import HeroLogo from './hero/logo';
 import HeroMinimal from './hero/minimal';
+import ImageExpand from './image-expand';
 import Logo from './logo';
 import MediaInline from './media/inline';
 import NavDrawer from './navigation/drawer';
@@ -77,6 +78,7 @@ export {
   HeroBrandVideo,
   HeroLogo,
   HeroMinimal,
+  ImageExpand,
   Logo,
   MediaInline,
   NavDrawer,

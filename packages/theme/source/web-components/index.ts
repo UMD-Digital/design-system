@@ -10,9 +10,10 @@ import Event from './elements/event';
 import Feeds from './elements/feeds';
 import Footer from './elements/footer';
 import Heros from './elements/heros';
-import Navigation from './elements/navigation';
+import Layout from './elements/layout';
 import Logo from './elements/logo';
 import Media from './elements/media';
+import Navigation from './elements/navigation';
 import People from './elements/people';
 import Pathways from './elements/pathways';
 import Quotes from './elements/quotes';
@@ -36,6 +37,7 @@ export default {
   ...Footer,
   ...Feeds,
   ...Heros,
+  ...Layout,
   ...Logo,
   ...Media,
   ...Navigation,

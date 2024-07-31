@@ -10,6 +10,7 @@ import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-article';
+const ATTRIBUTE_TRANSPARENT = 'transparent';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_ALIGNED = 'aligned';
 const ATTRIBUTE_BORDER = 'border';
@@ -38,6 +39,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const isTransparent = element.getAttribute(ATTRIBUTE_TRANSPARENT) === 'true';
   const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, IMAGE } = SLOTS;
 
   return {
@@ -48,6 +50,7 @@ const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
     date: SlotWithDefaultStyling({ element, slotRef: DATE }),
     actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
+    isTransparent,
   };
 };
 

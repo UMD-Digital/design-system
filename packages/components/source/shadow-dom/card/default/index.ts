@@ -10,6 +10,7 @@ import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-card';
+const ATTRIBUTE_TRANSPARENT = 'transparent';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_ALIGNED = 'aligned';
 const ATTRIBUTE_BORDER = 'border';
@@ -37,6 +38,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeCardData = ({ element }: { element: UMDCardElement }) => {
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const isTransparent = element.getAttribute(ATTRIBUTE_TRANSPARENT) === 'true';
   const { EYEBROW, HEADLINE, TEXT, ACTIONS, IMAGE } = SLOTS;
 
   return {
@@ -46,6 +48,7 @@ const MakeCardData = ({ element }: { element: UMDCardElement }) => {
     text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
     actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
     theme,
+    isTransparent,
   };
 };
 

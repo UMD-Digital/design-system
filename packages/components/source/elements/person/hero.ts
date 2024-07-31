@@ -208,13 +208,14 @@ const TextContainerStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_TEXT_SUBTEXT}`]: SansMedium,
+      [`.${ELEMENT_PERSON_HERO_TEXT_SUBTEXT}`]: SansSmaller,
     },
   })}
 
   .${ELEMENT_PERSON_HERO_TEXT_SUBTEXT} {
     display: block;
     text-transform: uppercase;
+    font-weight: 700;
     max-width: 650px;
   }
 
@@ -251,15 +252,7 @@ const TextContainerStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_PERSON_HERO_TEXT_JOB}`]: SansSmaller,
-    },
-  })}
-
   .${ELEMENT_PERSON_HERO_TEXT_JOB} {
-    text-transform: uppercase;
-    font-weight: 700;
     display: block;
   }
 

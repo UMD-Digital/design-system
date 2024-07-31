@@ -80,7 +80,7 @@ const TextAnimation = `
 
   @media (prefers-reduced-motion: no-preference) {
     .${ELEMENT_EXPAND_TEXT_ANIMATION} {
-      transform: translateY(300vh);
+      transform: translateY(200vh);
     }
   }
 `;
@@ -134,7 +134,7 @@ const ImageSizeContainer = `
         animation: img-size ease-in-out forwards;
         animation-timeline: view();
         animation-range-start: cover;
-        animation-range-end: 250vh;
+        animation-range-end: 200vh;
       }
     }
   }
@@ -157,7 +157,7 @@ const ImagePosition = `
         animation: img-position ease-in-out forwards;
         animation-timeline: view();
         animation-range-start: cover;
-        animation-range-end: 250vh;
+        animation-range-end: 200vh;
       }
     }
   }
@@ -189,7 +189,7 @@ const STYLES_LAYOUT_IMAGE_EXPAND = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPLAND_DECLARATION} {
-        height: 400vh;
+        height: 300vh;
       }
     }
   }

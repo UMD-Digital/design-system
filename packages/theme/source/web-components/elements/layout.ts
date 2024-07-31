@@ -1,14 +1,9 @@
-import { Tokens } from '@universityofmaryland/variables';
-
-const { Colors } = Tokens;
-
 const ImageExpand = {
   'umd-layout-image-expand:not(:defined)': {
     display: 'none',
   },
   'umd-layout-image-expand:defined': {
     display: 'block',
-    backgroundColor: Colors.black,
   },
   'umd-layout-image-expand *[slot="content"]': {
     width: '100%',

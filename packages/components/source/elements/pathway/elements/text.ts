@@ -207,6 +207,10 @@ const STYLES_PATHWAY_TEXT_CONTAINER = `
     z-index: 99;
   }
 
+  .${ELEMENT_TEXT_CONTAINER_WRAPPER} {
+    width: 100%;
+  }
+
   ${EyebrowStyles}
   ${HeadlineStyles}
   ${DetailsRowStyles}

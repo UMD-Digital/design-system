@@ -47,6 +47,10 @@ const OverwriteTheme = `
     background-color: ${Colors.black};
   }
 
+  ${OVERWRITE_THEME_DARK_CONTAINER} .${TextContainer.Elements.eyebrow} {
+    color: ${Colors.black};
+  }
+
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
     color: ${Colors.white};
   }

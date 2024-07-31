@@ -7,6 +7,7 @@ export type TypeBlockContainer = {
   isAligned?: boolean;
   isBordered?: boolean;
   theme?: string | null;
+  isTransparent?: boolean;
 };
 
 type TypeBlockContainerProps = TypeBlockContainer & {
@@ -18,6 +19,7 @@ type TypeBlockContainerProps = TypeBlockContainer & {
 const { Colors, Spacing, MaxWidth } = Tokens;
 
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_TRANSPARENT = 'transparent';
 const ATTRIBUTE_ALIGNED = 'aligned';
 const ATTRIBUTE_BORDER = 'border';
 const ATTRIBUTE_WITH_IMAGE = 'image';
@@ -33,6 +35,7 @@ const IS_THEME_DARK = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_D
 const IS_ALIGNED = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_ALIGNED}]`;
 const IS_WITH_BORDER = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_BORDER}]`;
 const IS_WITH_IMAGE = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
+const IS_TRANSPARENT = `[${ATTRIBUTE_TRANSPARENT}="true"]`;
 
 const OVERWRITE_SCALABLE_FONT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER} .${ScalingTextLockup.Elements.container}`;
 
@@ -45,6 +48,21 @@ const OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER = `${IS_WITH_BORDER} .${ImageContain
 const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${TextLockupSmall.Elements.container}`;
 
 const OVERWRITE_ALIGNED_IMAGE_CONTAINER = `${IS_ALIGNED} .${ImageContainer.Elements.container}`;
+
+const OVERWRITE_TRANSPARENT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER}${IS_TRANSPARENT}`;
+const OVERWRITE_TRANSPARENT_TEXT_CONTAINER = `${OVERWRITE_TRANSPARENT_CONTAINER} .${TextLockupSmall.Elements.container}`;
+
+// prettier-ignore
+const OverwriteTransparent = `
+  ${OVERWRITE_TRANSPARENT_CONTAINER} {
+    background-color: transparent;
+  }
+
+  ${OVERWRITE_TRANSPARENT_TEXT_CONTAINER} {
+    padding-left: 0;
+    padding-right: 0;
+  }
+`;
 
 // prettier-ignore
 const VariantThemeStyles = `
@@ -165,6 +183,7 @@ const STYLES_BLOCK_CONTAINER = `
   ${VariantThemeStyles}
   ${VariantAlignedStyles}
   ${VariantBorderStyles}
+  ${OverwriteTransparent}
 `;
 
 const CreateBlockContainer = ({
@@ -173,11 +192,13 @@ const CreateBlockContainer = ({
   theme,
   isAligned,
   isBordered,
+  isTransparent,
 }: TypeBlockContainerProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
 
   container.classList.add(ELEMENT_BLOCK_CONTAINER);
+  if (isTransparent) container.setAttribute(ATTRIBUTE_TRANSPARENT, 'true');
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   if (isAligned) container.setAttribute(ATTRIBUTE_ALIGNED, '');
   if (isBordered) container.setAttribute(ATTRIBUTE_BORDER, '');

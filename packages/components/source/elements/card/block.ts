@@ -10,6 +10,7 @@ type TypeBlockCardProps = {
   isAligned?: boolean;
   isBordered?: boolean;
   theme?: string | null;
+  isTransparent?: boolean;
 };
 
 const ELEMENT_NAME = 'umd-card-block';
@@ -28,7 +29,13 @@ const STYLES_BLOCK_CARD_ELEMENT = `
 `;
 
 const CreateCardBlockElement = (props: TypeBlockCardProps) => {
-  const { theme, image, isAligned = false, isBordered = false } = props;
+  const {
+    theme,
+    image,
+    isAligned = false,
+    isBordered = false,
+    isTransparent,
+  } = props;
   const textContainer = TextLockupSmallScaling.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
@@ -38,6 +45,7 @@ const CreateCardBlockElement = (props: TypeBlockCardProps) => {
     theme,
     isAligned,
     isBordered,
+    isTransparent,
   });
 
   elementContainer.appendChild(container);

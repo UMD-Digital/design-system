@@ -1,4 +1,4 @@
-import { Typography, Tokens, Layout } from '@universityofmaryland/variables';
+import { Tokens, Layout } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 type TypeLayoutImageExpandProps = {
@@ -255,8 +255,6 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
   const imageContainer = CreateImageContainer(props);
   const textContainer = CreateTextContainer(props);
 
-  const eventLoad = () => {};
-
   container.appendChild(imageContainer);
   container.appendChild(textContainer);
   container.classList.add(ELEMENT_EXPAND_CONTAINER);
@@ -264,12 +262,7 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
   declaration.appendChild(container);
   declaration.classList.add(ELEMENT_EXPLAND_DECLARATION);
 
-  return {
-    element: declaration,
-    events: {
-      load: eventLoad,
-    },
-  };
+  return declaration;
 };
 
 export default {

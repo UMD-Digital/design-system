@@ -1,3 +1,4 @@
+import AnimationBrandLogo from './animations/brand-logo';
 import AnimationCarouselBlocks from './animations/carousel-blocks';
 import AnimationCarouselImage from './animations/carousel-image';
 import AnimationCarouselOverlay from './animations/carousel-overlay';
@@ -17,6 +18,7 @@ import TextLockupSmall from './text-lockup/small';
 import TextLockupSmallScaling from './text-lockup/small-scaling';
 
 export {
+  AnimationBrandLogo,
   AnimationCarouselBlocks,
   AnimationCarouselImage,
   AnimationCarouselOverlay,

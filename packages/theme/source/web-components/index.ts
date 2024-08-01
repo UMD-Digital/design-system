@@ -1,5 +1,6 @@
 import Accordion from './elements/accordion';
 import Alerts from './elements/alerts';
+import Animations from './elements/animations';
 import Article from './elements/article';
 import Banners from './elements/banners';
 import Breadcrumb from './elements/breadcrumb';
@@ -27,6 +28,7 @@ import Tabs from './elements/tabs';
 export default {
   ...Accordion,
   ...Alerts,
+  ...Animations,
   ...Article,
   ...Breadcrumb,
   ...Banners,

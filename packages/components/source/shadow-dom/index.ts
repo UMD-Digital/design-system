@@ -4,6 +4,7 @@ import AlertSite from './alert/site';
 import Article from './article';
 import Breadcrumb from './breadcrumb';
 import BannerPromo from './banner-promo';
+import BrandLogoAnimation from './brand/logo-animation';
 import CallToAction from './call-to-action';
 import Card from './card/default';
 import CardIcon from './card/icon';
@@ -57,6 +58,7 @@ export {
   Article,
   Breadcrumb,
   BannerPromo,
+  BrandLogoAnimation,
   CallToAction,
   CardIcon,
   Card,

@@ -18,6 +18,9 @@ const styles = `
 `;
 
 const ELEMENT_NAME = 'umd-feed-news';
+const ATTRIBUTE_TYPE = 'type';
+const ATTRIBUTE_TRANSPARENT = 'transparent';
+
 class UMDFeedNewsGrid extends HTMLElement {
   _shadow: ShadowRoot;
 
@@ -29,6 +32,11 @@ class UMDFeedNewsGrid extends HTMLElement {
   }
 
   connectedCallback() {
+    const attributeType = this.getAttribute(ATTRIBUTE_TYPE);
+    const isTransparent = this.getAttribute(ATTRIBUTE_TRANSPARENT) === 'true';
+    const isTypeGrid = attributeType === 'grid' || !attributeType;
+    const isTypeOverlay = attributeType === 'overlay';
+
     const data = CommonFeedNewsData({
       element: this,
       numberOfColumnsToShowDefault: 3,
@@ -37,7 +45,12 @@ class UMDFeedNewsGrid extends HTMLElement {
     if (!data) return;
 
     this._shadow.appendChild(
-      FeedsNews.CreateElement({ ...data, isTypeGrid: true }),
+      FeedsNews.CreateElement({
+        ...data,
+        isTypeGrid,
+        isTypeOverlay,
+        isTransparent,
+      }),
     );
   }
 }

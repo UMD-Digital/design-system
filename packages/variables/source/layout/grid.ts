@@ -1,6 +1,15 @@
 import { Queries } from '../tokens/breakpoints';
 import { Spacing } from '../tokens/spacing';
 
+const GridColumnsTwo = {
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+
+  [`@media (${Queries.large.min})`]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
+};
+
 const GridColumnsThree = {
   display: 'grid',
   gridTemplateColumns: '1fr',
@@ -112,6 +121,7 @@ const GridColumnAndRowsMobileTablet = {
 };
 
 export default {
+  GridColumnsTwo,
   GridColumnsThree,
   GridColumnsFour,
   GridRowsWithGapBase,

@@ -14,7 +14,9 @@ export type TypeNewsFeedRequirements = {
   isLazyLoad: boolean;
   isUnion: boolean;
   isTypeGrid?: boolean;
+  isTypeOverlay?: boolean;
   isTypeList?: boolean;
+  isTransparent?: boolean;
 };
 
 type TypeFeedProps = TypeNewsFeedRequirements & {
@@ -83,7 +85,15 @@ const MakeLazyLoadVariables = (props: TypeFeedProps) => ({
 });
 
 const DisplayEntries = (props: TypeDisplayEntries) => {
-  const { isTypeGrid, getContainer, setOffset, feedData, theme } = props;
+  const {
+    isTypeGrid,
+    isTypeOverlay,
+    getContainer,
+    setOffset,
+    feedData,
+    theme,
+    isTransparent,
+  } = props;
   const container = getContainer();
   const grid = container.querySelector(
     `.${LayoutGridGap.ID}`,
@@ -91,7 +101,9 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   const displayEntries = FeedDisplay.CreateElement({
     entries: feedData,
     isTypeGrid,
+    isTypeOverlay,
     theme,
+    isTransparent,
   });
 
   setOffset(displayEntries.length);
@@ -99,7 +111,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   AnimationLoader.Remove({ container });
   ButtonLazyLoad.Remove({ container });
   displayEntries.forEach((entry) => {
-    grid.appendChild(entry);
+    if (entry) grid.appendChild(entry);
   });
   ButtonLazyLoad.Display(MakeLazyLoadVariables(props));
 };
@@ -118,7 +130,12 @@ const LoadMoreEntries = async (props: TypeFeedProps) => {
 };
 
 const CreateFeed = async (props: TypeFeedProps) => {
-  const { getContainer, numberOfColumnsToShow, setTotalEntries } = props;
+  const {
+    getContainer,
+    numberOfColumnsToShow,
+    setTotalEntries,
+    isTypeOverlay,
+  } = props;
   const container = getContainer();
 
   Fetch.Entries({
@@ -134,10 +151,13 @@ const CreateFeed = async (props: TypeFeedProps) => {
     if (totalEntries > 0) {
       const count =
         'numberOfColumnsToShow' in props ? numberOfColumnsToShow : 1;
+      let isTypeGap = true;
+
+      if (isTypeOverlay) isTypeGap = false;
 
       setTotalEntries(totalEntries);
 
-      LayoutGridGap.CreateElement({ container, count });
+      LayoutGridGap.CreateElement({ container, count, isTypeGap });
       DisplayEntries({ ...props, feedData: feedData.entries });
     }
   });

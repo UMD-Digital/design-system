@@ -1,4 +1,4 @@
-import { CardBlock, CardList } from 'elements';
+import { CardBlock, CardList, CardOverlayImage } from 'elements';
 
 type ImageType = {
   url: string;
@@ -22,6 +22,7 @@ export type ArticleType = {
 const STYLES_NEWS_FEED = `
   ${CardBlock.Styles}
   ${CardList.Styles}
+  ${CardOverlayImage.Styles}
 `;
 
 const CreateImage = ({ images }: { images: ImageType }) => {
@@ -101,19 +102,34 @@ const CommonDisplay = ({
 const CreateNewsFeedDisplay = ({
   entries,
   isTypeGrid,
+  isTypeOverlay,
   theme,
+  isTransparent,
 }: {
   entries: ArticleType[];
   isTypeGrid?: boolean;
+  isTypeOverlay?: boolean;
   theme?: string | null;
+  isTransparent?: boolean;
 }) => {
   if (isTypeGrid) {
     return entries.map((entry) =>
       CardBlock.CreateElement({
         ...CommonDisplay({ entry, theme }),
         isAligned: false,
+        isTransparent,
       }),
     );
+  }
+
+  if (isTypeOverlay) {
+    return entries
+      .map((entry) =>
+        CardOverlayImage.CreateElement({
+          ...CommonDisplay({ entry, theme }),
+        }),
+      )
+      .filter((entry) => entry);
   }
 
   return entries.map((entry) =>

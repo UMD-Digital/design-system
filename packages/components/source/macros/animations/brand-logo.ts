@@ -14,13 +14,13 @@ const ELEMENT_THIRD_CHEVRON = 'brand-logo-third-chevron';
 
 const FirstChevronStyles = `
   @keyframes chevron-one {
-    from { transform: translateX(30%); }
-    to { transform: translateX(130%); }
+    from { transform: translateX(-80%); }
+    to { transform: translateX(40%); }
   }
 
   .${ELEMENT_FIRST_CHEVRON} {
     top: 0;
-    transform: translateX(30%);
+    transform: translateX(-80%);
   }
 
   .${ELEMENT_FIRST_CHEVRON} svg {
@@ -30,7 +30,7 @@ const FirstChevronStyles = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_FIRST_CHEVRON} {
-        transform: translateX(130%);
+        transform: translateX(40%);
         animation: chevron-one forwards;
         animation-timeline: view();
         animation-range-start: cover;
@@ -42,14 +42,20 @@ const FirstChevronStyles = `
 
 const SecondChevronStyles = `
   @keyframes chevron-two {
-    from { transform: translate(-30%, -50%); }
-    to { transform: translate(30%, -50%); }
+    from { transform: translateX(-40%); }
+    to { transform: translateX(24%); }
   }
 
   .${ELEMENT_SECOND_CHEVRON} {
-    top: 50%;
+    top: 20%;
     z-index: 99;
-    transform: translate(-30%, -50%);
+    transform: translateX(-40%);
+  }
+
+  @media (${Queries.desktop.min}) {
+    .${ELEMENT_SECOND_CHEVRON} {
+       top: 95px;
+    }
   }
 
   .${ELEMENT_SECOND_CHEVRON} svg {
@@ -59,7 +65,7 @@ const SecondChevronStyles = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_SECOND_CHEVRON} {
-        transform: transform: translate(30%, -50%);
+        transform: translateX(24%);
         animation: chevron-two forwards;
         animation-timeline: view();
         animation-range-start: cover;
@@ -71,13 +77,19 @@ const SecondChevronStyles = `
 
 const ThirdChevronStyles = `
   @keyframes chevron-three {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(80%); }
+    from { transform: translateX(-30%); }
+    to { transform: translateX(60%); }
   }
 
   .${ELEMENT_THIRD_CHEVRON} {
-    top: 45%;
-    transform: translateX(-50%);
+    top: 40%;
+    transform: translateX(-30%);
+  }
+
+  @media (${Queries.desktop.min}) {
+    .${ELEMENT_THIRD_CHEVRON} {
+       top: 195px;
+    }
   }
 
   .${ELEMENT_THIRD_CHEVRON} svg {
@@ -87,11 +99,11 @@ const ThirdChevronStyles = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_THIRD_CHEVRON} {
-        transform: translateX(80%);
+        transform: translateX(60%);
         animation: chevron-three forwards;
         animation-timeline: view();
-        animation-range-start: cover;
-        animation-range-end: contain;
+        animation-range-start: 0;
+        animation-range-end: 100vh;
       }
     }
   }
@@ -100,13 +112,41 @@ const ThirdChevronStyles = `
 const STYLES_ANIMATION_BRAND_LOGO = `
   .${ELEMENT_ANIMATION_BRAND_LOGO} {
     position: relative;
-    width: 278px;
-    height: 514px;
+    height: 50vw;
+    width: 100vw;
   }
 
   .${ELEMENT_ANIMATION_BRAND_LOGO} > * {
     position: absolute;
-    left: 0;
+    height: 100%;
+    right: 0;
+    transform: none;
+  }
+
+  .${ELEMENT_SECOND_CHEVRON} svg,
+  .${ELEMENT_THIRD_CHEVRON} svg {
+    height: 30vw;
+    width: 24.7vw;
+  }
+
+  @media (${Queries.desktop.min}) {
+    .${ELEMENT_SECOND_CHEVRON} svg,
+    .${ELEMENT_THIRD_CHEVRON} svg {
+      height: 306px;
+      width: 252px;
+    }
+  }
+
+  .${FirstChevronStyles} svg {
+    height: 22vw;
+    width: 15.6vw;
+  }
+
+  @media (${Queries.desktop.min}) {
+    .${FirstChevronStyles} svg {
+      height: 202px;
+      width: 144px;
+    }
   }
 
   ${FirstChevronStyles} 

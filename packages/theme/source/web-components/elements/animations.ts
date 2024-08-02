@@ -7,7 +7,8 @@ const BrandLogo = {
     position: 'absolute',
     right: '0',
     top: '-50%',
-    zIndex: '-1',
+    zIndex: '9',
+    overflow: 'clip',
   },
 };
 

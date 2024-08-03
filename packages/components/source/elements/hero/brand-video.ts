@@ -205,9 +205,17 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
     }
   };
   const eventLoad = () => {
+    const isReduced =
+      window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
     overlay.events.load();
     buttonMacro.events.setButtonPlay();
     eventRize();
+
+    if (isReduced) {
+      video.pause();
+      buttonMacro.events.setButtonPause();
+    }
   };
 
   video.classList.add(ELEMENT_HERO_ELEMENT_VIDEO);

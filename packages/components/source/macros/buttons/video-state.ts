@@ -49,6 +49,7 @@ const CreateButtonVideoState = ({ video }: { video: HTMLVideoElement }) =>
       },
       events: {
         setButtonPlay,
+        setButtonPause,
       },
     };
   })();

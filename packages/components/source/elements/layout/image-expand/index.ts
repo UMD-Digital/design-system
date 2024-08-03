@@ -72,15 +72,17 @@ const TextContainer = `
 // prettier-ignore
 const TextAnimation = `
   .${ELEMENT_EXPAND_TEXT_ANIMATION} {
-    position: absolute;
-    top: 0;
-    height: 100vh;
     width: 100vw;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .${ELEMENT_EXPAND_TEXT_ANIMATION} {
-      transform: translateY(200vh);
+    @supports (animation-timeline: view()) {
+      .${ELEMENT_EXPAND_TEXT_ANIMATION} {
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        transform: translateY(200vh);
+      }
     }
   }
 `;
@@ -138,6 +140,18 @@ const ImageSizeContainer = `
       }
     }
   }
+
+  @supports not (animation-timeline: view()) {
+    .${ELEMENT_EXPAND_IMAGE_SIZE} {
+      height: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .${ELEMENT_EXPAND_IMAGE_SIZE} {
+      height: 100%;
+    }
+  }
 `;
 
 // prettier-ignore
@@ -145,13 +159,13 @@ const ImagePosition = `
   .${ELEMENT_EXPAND_IMAGE_POSITION} {
     width: 100%;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_POSITION} {
+        display: flex;
+        justify-content: center;
         position: sticky;
         top: 0; 
         animation: img-position ease-in-out forwards;
@@ -161,13 +175,36 @@ const ImagePosition = `
       }
     }
   }
+
+  @supports not (animation-timeline: view()) {
+    .${ELEMENT_EXPAND_IMAGE_POSITION} {
+      height: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .${ELEMENT_EXPAND_IMAGE_POSITION} {
+      height: 100%;
+    }
+  }
 `;
 
 // prettier-ignore
 const ImageContainer = `
   .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
+        position: relative;
+      }
+    }
   }
 `;
 
@@ -184,6 +221,7 @@ const Container = `
 const STYLES_LAYOUT_IMAGE_EXPAND = `
   .${ELEMENT_EXPLAND_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
+    overflow: clip;
   }
 
   @media (prefers-reduced-motion: no-preference) {

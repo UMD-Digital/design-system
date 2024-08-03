@@ -89,6 +89,7 @@ const AssociationStyles = `
 
   .${ELEMENT_PERSON_ASSOCIATION_CONTAINER} {
     line-height: 1.2em;
+    display: block;
   }
 `;
 

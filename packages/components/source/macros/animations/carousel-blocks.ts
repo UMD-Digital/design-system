@@ -418,6 +418,12 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
         return elementSize * count;
       },
+      carouselHeightBasedOnBlock: () => {
+        return blocks.reduce(
+          (acc, image) => (image.offsetHeight > acc ? image.offsetHeight : acc),
+          300,
+        );
+      },
       containerWidth: () => {
         return container.offsetWidth;
       },
@@ -432,6 +438,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         slide.style.width = `${elementSize}px`;
         slide.style.transition = 'none';
         slide.style.transform = 'translateX(0)';
+        slide.style.height = `${GetSizes.carouselHeightBasedOnBlock()}px`;
       },
       blockDisplay: ({ count }: { count: number }) => {
         const containerBlocks = Array.from(

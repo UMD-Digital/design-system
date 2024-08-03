@@ -47,12 +47,12 @@ const SecondChevronStyles = `
   }
 
   .${ELEMENT_SECOND_CHEVRON} {
-    top: 20%;
+    top: 10%;
     z-index: 99;
     transform: translateX(-40%);
   }
 
-  @media (${Queries.desktop.min}) {
+  @media (${Queries.highDef.min}) {
     .${ELEMENT_SECOND_CHEVRON} {
        top: 95px;
     }
@@ -82,11 +82,11 @@ const ThirdChevronStyles = `
   }
 
   .${ELEMENT_THIRD_CHEVRON} {
-    top: 40%;
+    top: 25%;
     transform: translateX(-30%);
   }
 
-  @media (${Queries.desktop.min}) {
+  @media (${Queries.highDef.min}) {
     .${ELEMENT_THIRD_CHEVRON} {
        top: 195px;
     }
@@ -125,11 +125,11 @@ const STYLES_ANIMATION_BRAND_LOGO = `
 
   .${ELEMENT_SECOND_CHEVRON} svg,
   .${ELEMENT_THIRD_CHEVRON} svg {
-    height: 30vw;
-    width: 24.7vw;
+    height: 10vw;
+    width: 8.2vw;
   }
 
-  @media (${Queries.desktop.min}) {
+  @media (${Queries.highDef.min}) {
     .${ELEMENT_SECOND_CHEVRON} svg,
     .${ELEMENT_THIRD_CHEVRON} svg {
       height: 306px;
@@ -138,11 +138,11 @@ const STYLES_ANIMATION_BRAND_LOGO = `
   }
 
   .${FirstChevronStyles} svg {
-    height: 22vw;
-    width: 15.6vw;
+    height: 7vw;
+    width: 5vw;
   }
 
-  @media (${Queries.desktop.min}) {
+  @media (${Queries.highDef.min}) {
     .${FirstChevronStyles} svg {
       height: 202px;
       width: 144px;

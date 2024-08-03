@@ -106,6 +106,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
 
   slideBackButton.innerHTML = `${AssetIcon.CHEVRON_SMALL} Back`;
   slideBackButton.setAttribute('type', 'button');
+  slideBackButton.setAttribute('aria-label', 'Previous level of navigation');
   slideBackButton.addEventListener('click', () => {
     setUpcomingSlide(parentRef);
     eventSlideRight();

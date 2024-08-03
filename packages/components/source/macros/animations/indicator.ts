@@ -14,7 +14,7 @@ const LineStyles = `
     position: absolute;
     left: 0;
     top: 0;
-    height: 2px;
+    height: 24px;
     width: 80px;
     transition: left 500ms;
     background-color: ${Colors.red};
@@ -28,15 +28,27 @@ const ButtonStyles = `
     width: 80px;
     height: 100%;
     background-color: ${Colors.gray.light};
+    position: relative;
+  }
+
+  .${ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER} > span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 22px;
+    display: block;
+    background-color: ${Colors.gray.lightest};
+    z-index: 99;
   }
 `
 
 const STYLES_INDICATOR = `
   .${ELEMENT_SLIDE_INDICATOR_CONTAINER} {
     position: relative;
-    height: 2px;
+    height: 24px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     max-width: 100%;
     overflow: hidden;
   }
@@ -44,8 +56,9 @@ const STYLES_INDICATOR = `
   .${ELEMENT_SLIDE_INDICATOR_CONTAINER} > span {
     display: block;
     width: ${Spacing.sm};
-    height: 4px;
+    height:  22px;
     z-index: 999;
+    position: relative;
   }
   
   ${LineStyles}
@@ -134,14 +147,21 @@ const CreateSlideIndicator = ({
     container.appendChild(line);
     buttons.forEach((button) => {
       const spacer = document.createElement('span');
+      const overlay = document.createElement('span');
       let spacerColor = Colors.white;
 
-      if (theme === 'dark' && !overlayColor) spacerColor = Colors.black;
-      if (theme === 'light' && !overlayColor)
+      if (theme === 'dark' && !overlayColor) {
+        spacerColor = Colors.black;
+      }
+
+      if (theme === 'light' && !overlayColor) {
         spacerColor = Colors.gray.lightest;
+      }
 
       spacer.style.backgroundColor = spacerColor;
+      overlay.style.backgroundColor = spacerColor;
 
+      button.appendChild(overlay);
       container.appendChild(button);
       container.appendChild(spacer);
     });

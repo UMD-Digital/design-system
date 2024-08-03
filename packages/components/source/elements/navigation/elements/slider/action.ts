@@ -96,6 +96,7 @@ const CreateSlideButton = ({
   const button = document.createElement('button');
   button.classList.add(ELEMENT_SLIDE_ACTION_BUTTON);
   button.setAttribute('type', 'button');
+  button.setAttribute('aria-label', 'Next level of navigation');
   button.innerHTML = AssetIcon.CHEVRON_SMALL;
   button.addEventListener('click', () => {
     setUpcomingSlide(childReference);

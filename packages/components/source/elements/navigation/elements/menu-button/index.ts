@@ -56,6 +56,7 @@ const CreateMenuDisplayButton = (props: TypeMenuDisplayButtonRequirements) => {
   spans.forEach((span) => wrapper.appendChild(span));
 
   button.appendChild(wrapper);
+  button.setAttribute('aria-label', 'Open Navigation Drawer');
   button.classList.add(NAV_DRAWER_BUTTON);
   button.addEventListener('click', () => eventOpen());
 

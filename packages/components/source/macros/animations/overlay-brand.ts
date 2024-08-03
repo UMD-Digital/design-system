@@ -10,6 +10,7 @@ type TypeArrowProps = TypeAnimationProps & {
   wrapperStyleRef?: string;
 };
 
+const ELEMENT_CONTAINER = 'animation-overlay-container';
 const ELEMENT_LAYER_OVERLAY_CONTAINER = 'animation-overlay-layer-container';
 const ELEMENT_LAYER_RED_ARROW_CONTAINER =
   'animation-overlay-layer-red-arrow-container';
@@ -103,6 +104,12 @@ const STYLES_ANIMATION_BRAND_OVERLAY_ELEMENT = `
   ${OverlayStyles}
   ${MainArrowStyles}
   ${FollowingArrowStyles}
+
+  @media (prefers-reduced-motion: reduce) {
+    .${ELEMENT_CONTAINER} svg {
+      display: none;
+    }
+  }
 `;
 
 const CreateAnimatioOverlayContainer = (props: TypeAnimationProps) => {
@@ -320,6 +327,7 @@ const CreateAnimationOverlayBrandElement = ({
       }
     };
 
+    container.classList.add(ELEMENT_CONTAINER);
     container.appendChild(overlay);
     container.appendChild(overlayArrow);
     container.appendChild(slideInArrow);

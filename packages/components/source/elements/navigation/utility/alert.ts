@@ -4,26 +4,70 @@ import {
   Layout,
   Typography,
 } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import Actions from 'elements/call-to-action';
+import { AssetIcon, Network, Styles } from 'utilities';
 
-type TypeAlertDataType = {
-  alert_title: string;
-  alert_message: string;
-  alert_type: string;
-  alert_id: string;
+type TypeAlertCTA = {
+  title: string;
+  alt: string;
+  entry: {
+    url: string;
+  }[];
+  url: string;
+};
+
+type TypeAlertId = {
+  id: string;
+};
+
+type TypeAlertData = TypeAlertId & {
+  type: string;
+  title: string;
+  headline: string;
+  message: string;
+  cta: TypeAlertCTA[];
+};
+
+type TypeAlertResponse = {
+  data: TypeAlertData[];
 };
 
 export type TypeAlertProps = {
   alertUrl?: string | null;
 };
 
+const { FetchGraphQL } = Network;
 const { ConvertJSSObjectToStyles } = Styles;
 const { Colors, Spacing } = Tokens;
 const { LockFull } = Layout;
 const { SansLarge } = Typography;
 const { Text } = Elements;
 
-const DEFAULT_ALERT_URL = 'https://umd.edu/api/alerts';
+const QUERY = `
+  query CampusAlertsQuery {
+    data: entries(section: "mainCampusAlerts") {
+      ... on mainElementsCampusAlert_Entry {
+        id: uid
+        alert_type: type
+        alert_headline: headline
+        alert_title: title
+        alert_message: text
+        cta {
+          ... on umdElementsLink_Entry {
+            title
+            alt: linksAlt
+            entry(limit: 1) {
+              url
+            }
+            url: linksUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+const DEFAULT_ALERT_URL = 'https://umd-staging.com/api/alerts';
 const ALERT_ELEMENT_ID = 'umd-global-alert';
 const ALERT_TIME_REF = 'umd-alert-time';
 const ALERT_REF = 'umd-alert';
@@ -43,6 +87,7 @@ const ELEMENT_ALERT_LOCK = 'umd-element-nav-alert-lock';
 const ELEMENT_ALERT_WRAPPER = 'umd-element-nav-alert-wrapper';
 const ELEMENT_ALERT_TITLE = 'umd-element-nav-alert-title';
 const ELEMENT_ALERT_TEXT = 'umd-element-nav-alert-text';
+const ELEMENT_ALERT_CTA = 'umd-element-nav-alert-cta';
 const ELEMENT_ALERT_CLOSE_BUTTON = 'umd-element-nav-alert-close';
 
 const IS_TYPE_GENERAL = `[${ATTRIBUTE_TYPE}=${TYPE_GENERAL}]`;
@@ -56,7 +101,19 @@ const OVERWRITE_CONTAINER_TYPE_CLOSED = `.${ELEMENT_ALERT_CONTAINER}${IS_TYPE_CL
 // prettier-ignore
 const OverwriteTypeGeneral = `
   ${OVERWRITE_CONTAINER_TYPE_GENERAL} {
-    background-color: ${Colors.gray.lighter};
+    background-color: ${Colors.black};
+  }
+
+  ${OVERWRITE_CONTAINER_TYPE_GENERAL} * {
+    color: ${Colors.white};
+  }
+
+  ${OVERWRITE_CONTAINER_TYPE_GENERAL} .${ELEMENT_ALERT_TITLE} {
+    color: ${Colors.gold};
+  }
+
+   ${OVERWRITE_CONTAINER_TYPE_GENERAL} .${ELEMENT_ALERT_CLOSE_BUTTON} > svg {
+    fill: ${Colors.white};
   }
 `
 
@@ -70,15 +127,15 @@ const OverwriteTypeOpen = `
 // prettier-ignore
 const OverwriteTypeClosed = `
   ${OVERWRITE_CONTAINER_TYPE_CLOSED} {
-    background-color: ${Colors.black};
+    background-color: ${Colors.gold};
   }
 
   ${OVERWRITE_CONTAINER_TYPE_CLOSED} * {
-    color: ${Colors.white};
+    color: ${Colors.black};
   }
 
    ${OVERWRITE_CONTAINER_TYPE_CLOSED} .${ELEMENT_ALERT_CLOSE_BUTTON} > svg {
-    fill: ${Colors.white};
+    fill: ${Colors.black};
   }
 `
 
@@ -112,6 +169,10 @@ const TextStyles = `
     },
   })}
 
+  .${ELEMENT_ALERT_TITLE} {
+    text-transform: uppercase;
+  }
+
   * + .${ELEMENT_ALERT_TEXT} {
     margin-top: ${Spacing.sm};
   }
@@ -125,6 +186,14 @@ const TextStyles = `
   .${ELEMENT_ALERT_TEXT},
   .${ELEMENT_ALERT_TEXT} * {
     font-size: 16px;;
+  }
+
+  .${ELEMENT_ALERT_TEXT} + * {
+    margin-top: ${Spacing.lg};
+  }
+
+  .${ELEMENT_ALERT_CTA} {
+    text-decoration: none;
   }
 `
 
@@ -170,12 +239,7 @@ const STYLES_NAV_ALERT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  .${ELEMENT_ALERT_DECLARATION} a {
-    color: currentColor;
-    text-transform: inherit;
-    text-decoration: underline;
-  }
-
+  ${Actions.Styles}
   ${ContainerStyles}
   ${LockStyles}
   ${WrapperStyles}
@@ -186,7 +250,7 @@ const STYLES_NAV_ALERT = `
   ${OverwriteTypeClosed}
 `;
 
-const setAlertStorage = (alert: TypeAlertDataType) => {
+const setAlertStorage = (alert: TypeAlertId) => {
   window.localStorage.setItem(ALERT_REF, JSON.stringify(alert));
 };
 
@@ -219,7 +283,12 @@ const checkAlertTime = () => {
   return shouldCheckMessage(alertDate);
 };
 
-const CreateAlertComponent = (data: TypeAlertDataType) => {
+const CreateAlertComponent = ({ alerts }: { alerts: TypeAlertResponse }) => {
+  const alert = alerts.data[0];
+
+  if (!alert) return;
+
+  const { id, title, headline, message, type, cta } = alert;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
@@ -229,17 +298,17 @@ const CreateAlertComponent = (data: TypeAlertDataType) => {
   const closeButton = document.createElement('button');
 
   titleElement.classList.add(ELEMENT_ALERT_TITLE);
-  titleElement.innerHTML = data.alert_title;
+  titleElement.innerHTML = headline || title;
 
   textElement.classList.add(ELEMENT_ALERT_TEXT);
-  textElement.innerHTML = data.alert_message;
+  textElement.innerHTML = message;
 
   closeButton.classList.add(ELEMENT_ALERT_CLOSE_BUTTON);
   closeButton.setAttribute('aria-label', 'remove alert');
   closeButton.innerHTML = AssetIcon.X;
   closeButton.addEventListener('click', () => {
     wrapper.style.height = `${wrapper.offsetHeight}px`;
-    window.localStorage.setItem(ALERT_ID_REF, data.alert_id);
+    window.localStorage.setItem(ALERT_ID_REF, id);
 
     setTimeout(() => {
       wrapper.style.height = '0px';
@@ -255,10 +324,29 @@ const CreateAlertComponent = (data: TypeAlertDataType) => {
   wrapper.appendChild(titleElement);
   wrapper.appendChild(textElement);
 
+  if (cta) {
+    const link = cta[0];
+    if (!link) return;
+
+    const ctaElement = document.createElement('a');
+
+    ctaElement.classList.add(ELEMENT_ALERT_CTA);
+    ctaElement.href = link.url;
+    ctaElement.innerHTML = link.title;
+    ctaElement.setAttribute('rel', 'noopener noreferrer');
+
+    wrapper.appendChild(
+      Actions.CreateElement({
+        cta: ctaElement,
+        type: 'secondary',
+      }),
+    );
+  }
+
   lock.classList.add(ELEMENT_ALERT_LOCK);
   lock.appendChild(wrapper);
 
-  container.setAttribute(ATTRIBUTE_TYPE, data.alert_type);
+  container.setAttribute(ATTRIBUTE_TYPE, type);
   container.setAttribute('id', ALERT_ELEMENT_ID);
   container.classList.add(ELEMENT_ALERT_CONTAINER);
   container.appendChild(lock);
@@ -270,25 +358,18 @@ const CreateAlertComponent = (data: TypeAlertDataType) => {
 };
 
 const fetchAlerts = async ({ alertUrl }: TypeAlertProps) => {
-  const ALERTS_URL = alertUrl || DEFAULT_ALERT_URL;
-
-  try {
-    const params: {
-      method: 'GET';
-      headers: {
-        'Content-Type': string;
-      };
-      body?: string;
-    } = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    };
-
-    const response = await fetch(ALERTS_URL, params);
+  if (alertUrl) {
+    const response = await fetch(alertUrl);
     return response.json();
-  } catch (ex) {
-    throw ex;
   }
+
+  const feedData = await FetchGraphQL({
+    query: QUERY,
+    url: DEFAULT_ALERT_URL,
+    token: '',
+  });
+
+  return feedData;
 };
 
 const CreateNavAlert = ({ alertUrl }: TypeAlertProps) =>
@@ -298,11 +379,9 @@ const CreateNavAlert = ({ alertUrl }: TypeAlertProps) =>
     if (data.length === 0) return;
     if (data[0] == '') return;
 
-    const alertResponse = data[0];
-
     // if (shouldAlertHide({ alert_id: data.alert_id })) return;
 
-    return CreateAlertComponent(alertResponse);
+    return CreateAlertComponent({ alerts: data });
   })();
 
 export default {

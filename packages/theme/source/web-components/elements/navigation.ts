@@ -48,11 +48,13 @@ const Sticky = {
 };
 
 const Utility = {
-  'umd-element-utility-header:not(:defined)': {
+  'umd-element-navigation-utility:not(:defined)': {
     display: 'block',
   },
-  'umd-element-utility-header:defined': {
+  'umd-element-navigation-utility:defined': {
     display: 'block',
+    position: 'relative',
+    zIndex: '99999',
   },
 };
 

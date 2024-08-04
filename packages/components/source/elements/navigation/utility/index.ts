@@ -19,7 +19,7 @@ type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps & {};
 
 const { ConvertJSSObjectToStyles } = Styles;
 const { EventAccessibilityFocus } = Accessibility;
-const { Colors } = Tokens;
+const { Colors, Spacing } = Tokens;
 const { LockMax } = Layout;
 
 const flagIcon = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28"><title>Flag</title><path d="M5 4c0 .72-.39 1.36-1 1.72V25.5c0 .266-.234.5-.5.5h-1c-.266 0-.5-.234-.5-.5V5.72c-.61-.36-1-1-1-1.72 0-1.11.89-2 2-2s2 .89 2 2zm23 1v11.922c0 .578-.36.797-.812 1.03-1.766.954-3.72 1.814-5.766 1.814-2.875 0-4.25-2.188-7.656-2.188-2.484 0-5.094 1.125-7.25 2.28-.172.095-.328.142-.516.142-.547 0-1-.453-1-1V7.406c0-.375.187-.64.484-.86.375-.25.828-.468 1.234-.67 1.97-1 4.36-1.876 6.578-1.876 2.453 0 4.375.812 6.547 1.828.438.22.89.297 1.375.297C23.67 6.125 26.312 4 26.998 4c.548 0 1 .453 1 1z"></path></svg>`;
@@ -27,9 +27,9 @@ const homeIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" wi
 const starIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28"><title>Star</title><path d="M26 10.11c0 .28-.203.546-.406.75l-5.672 5.53 1.344 7.812c.016.11.016.203.016.313 0 .406-.187.78-.64.78-.22 0-.44-.077-.626-.186L13 21.42 5.984 25.11c-.203.108-.406.186-.625.186-.454 0-.657-.375-.657-.78 0-.11.016-.204.03-.314L6.08 16.39.39 10.86c-.187-.204-.39-.47-.39-.75 0-.47.483-.657.874-.72l7.844-1.14 3.516-7.11c.14-.297.406-.64.766-.64s.625.343.766.64l3.516 7.11 7.844 1.14c.375.063.875.25.875.72z"></path></svg>`;
 const calendarIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28"><title>Calendar</title><path d="M2 26h22V10H2v16zM8 7V2.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5zm12 0V2.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5zm6-1v20c0 1.094-.906 2-2 2H2c-1.094 0-2-.906-2-2V6c0-1.094.906-2 2-2h2V2.5C4 1.125 5.125 0 6.5 0h1C8.875 0 10 1.125 10 2.5V4h6V2.5C16 1.125 17.125 0 18.5 0h1C20.875 0 22 1.125 22 2.5V4h2c1.094 0 2 .906 2 2z"></path></svg>`;
 const mIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 35 28"><title>Gift</title><path d="M16 1.4C7.937 1.4 1.4 7.937 1.4 16S7.937 30.6 16 30.6c8.063 0 14.6-6.537 14.6-14.6S24.063 1.4 16 1.4zm3.38 22.66v-2.55h2L21 13l-4.68 8.36h-.38L11.11 13l-.27 8.55h2v2.55H6.08v-2.55H8l.45-11.5H6.42V7.5h4.54l5.16 9.19 5-9.27h4.51v2.55h-2.04l.61 11.49h2v2.55z"></path></svg>`;
-const searchIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28"><title>Search</title><path d="M18 13c0-3.86-3.14-7-7-7s-7 3.14-7 7 3.14 7 7 7 7-3.14 7-7zm8 13c0 1.094-.906 2-2 2-.53 0-1.047-.22-1.406-.594l-5.36-5.344C15.408 23.328 13.22 24 11.002 24 4.924 24 0 19.076 0 13S4.924 2 11 2s11 4.92 11 11c0 2.218-.67 4.405-1.936 6.233l5.36 5.36c.358.358.577.874.577 1.405z"></path></svg>`;
 
-const LARGE = 1024;
+const TABLET = 768;
+const DESKTOP = 1024;
 
 const ELEMENT_NAME = 'umd-element-utility-header';
 
@@ -41,11 +41,12 @@ const ELEMENT_UTILITY_LOGO = 'umd-element-nav-utility-logo';
 const ELEMENT_UTILITY_MENU = 'umd-element-nav-utility-menu';
 const ELEMENT_UTILITY_MOBILE_MENU = 'umd-element-nav-utility-mobile-menu';
 const ELEMENT_UTILITY_MOBILE_BUTTON = 'umd-element-nav-utility-mobile-button';
+const ELEMENT_UTILITY_SEARCH_BUTTON = 'umd-element-nav-utility-search-button';
 
 const ANIMATION_OUT_SPEED = 400;
 const ANIMATION_IN_SPEED = 800;
 
-const isDesktop = () => window.innerWidth >= LARGE;
+const isDesktop = () => window.innerWidth >= DESKTOP;
 
 // prettier-ignore
 const LockStyles = `
@@ -74,13 +75,13 @@ const MenuStyles = `
 
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MENU} {
       flex-direction: column;
     }
   }
 
-  @container (min-width: ${LARGE}px) {
+  @container (min-width: ${DESKTOP}px) {
     .${ELEMENT_UTILITY_MENU} {
       display: flex;
       align-items: center;
@@ -92,13 +93,14 @@ const MenuStyles = `
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 10px 15px;
+    height: 100%;
+    padding: ${Spacing.sm} ${Spacing.md};
     font-weight: 700;
     font-size: 13px;
     transition: background ${ANIMATION_IN_SPEED}ms;
   }
 
-  @container (min-width: ${LARGE}px) {
+  @container (min-width: ${DESKTOP}px) {
    .${ELEMENT_UTILITY_MENU} > * {
       justify-content: space-between;
     }
@@ -108,7 +110,7 @@ const MenuStyles = `
     background-color: ${Colors.redDark};
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_CONTAINTER} .${ELEMENT_UTILITY_MENU} > * {
       border-top: 1px solid ${Colors.gray.lighter};
       color: ${Colors.red};
@@ -117,13 +119,13 @@ const MenuStyles = `
     }
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MENU} > *:first-child {
       border-top: none;
     }
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MENU} > a:hover,
     .${ELEMENT_UTILITY_MENU} > a:focus {
       background-color: ${Colors.red};
@@ -132,17 +134,28 @@ const MenuStyles = `
     }
   }
 
-  @container (min-width: ${LARGE}px) {
+  @container (min-width: ${DESKTOP}px) {
     .${ELEMENT_UTILITY_MENU} > *:hover,
     .${ELEMENT_UTILITY_MENU} > *:focus {
       background-color: ${Colors.redDark};
     }
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MENU} > a:hover svg,
     .${ELEMENT_UTILITY_MENU} > a:focus svg {
       fill: ${Colors.white};
+    }
+  }
+
+  .${ELEMENT_UTILITY_SEARCH_BUTTON} svg {
+    height: 22px;
+    width: inherit;
+  }
+
+  @container (max-width: ${DESKTOP - 1}px) {
+    .${ELEMENT_UTILITY_SEARCH_BUTTON} {
+      display: none;
     }
   }
 
@@ -151,14 +164,14 @@ const MenuStyles = `
     transition: fill ${ANIMATION_OUT_SPEED}ms;
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MENU} svg {
       fill: ${Colors.red};
       transition: fill ${ANIMATION_IN_SPEED}ms;
     }
   }
 
-  @container (min-width: ${LARGE}px) {
+  @container (min-width: ${DESKTOP}px) {
     .${ELEMENT_UTILITY_MENU} svg {
       fill: ${Colors.white};
     }
@@ -167,52 +180,59 @@ const MenuStyles = `
 
 // prettier-ignore
 const MobileMenuStyles = `
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU} {
       position: absolute;
-      width: 100%;
-      left: 0;
+      left: -${Spacing['2xl']};
+      right: -${Spacing['2xl']};
       top: 44px;
       box-shadow: 0 5px 5px 1px rgba(0, 0, 0, .2);
       height: 0;
       overflow: hidden;
       transition: height ${ANIMATION_OUT_SPEED}ms;
       display: flex;
-      -ms-flex-direction: column;
       flex-direction: column;
       background-color: ${Colors.white};
     }
   }
 
-  @container (min-width: ${LARGE}px) {
+  @container (max-width: ${TABLET - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU} {
-      display: flex;
-      height: inherit;
-      margin-left: auto;
-      position: relative;
+      left: -${Spacing.md};
+      right: -${Spacing.md};
     }
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (min-width: ${DESKTOP}px) {
+    .${ELEMENT_UTILITY_MOBILE_MENU} {
+      display: flex;
+      height: inherit !important;
+      margin-left: auto;
+      position: relative;
+      margin-right: -${Spacing.md};
+    }
+  }
+
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU}[aria-hidden="true"] {
       transition: height ${ANIMATION_OUT_SPEED}ms;
       display: none;
     }
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU}[aria-hidden="false"] {
       transition: height ${ANIMATION_IN_SPEED}ms;
     }
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU} > button {
       display: none;
     }
   }
 
-  @container (min-width: ${LARGE}px) {
+  @container (min-width: ${DESKTOP}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU} > button {
       transition: background ${ANIMATION_OUT_SPEED}ms;
     }
@@ -224,14 +244,19 @@ const MobileButtonStyles = `
   .${ELEMENT_UTILITY_MOBILE_BUTTON} {
     margin-left: auto;
     height: 100%;
-    padding: 12px 15px;
-    margin-right: -8px;
+    padding: ${Spacing.xs} ${Spacing.md};
+    margin-right: -${Spacing.md};
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  @container (min-width: ${LARGE}px) {
+  @media (min-width: ${TABLET}px) {
+    margin-right: -${Spacing['2xl']};
+  }
+
+  @container (min-width: ${DESKTOP}px) {
     .${ELEMENT_UTILITY_MOBILE_BUTTON} {
       display: none;
     }
@@ -242,11 +267,11 @@ const MobileButtonStyles = `
     background-color: ${Colors.redDark};
   }
 
-  @container (max-width: ${LARGE - 1}px) {
+  @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_BUTTON} svg {
       fill: ${Colors.white};
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
   }
 `;
@@ -340,8 +365,9 @@ const CreateSearchFormButton = ({
 
   button.setAttribute('aria-label', 'enable the search form');
   button.setAttribute('type', 'button');
-  button.innerHTML = `${searchIcon}`;
+  button.innerHTML = `${AssetIcon.MAGNIFY_GLASS}`;
   button.setAttribute('aria-controls', UtilitySearch.Elements.form);
+  button.classList.add(ELEMENT_UTILITY_SEARCH_BUTTON);
   button.setAttribute('aria-expanded', 'false');
 
   button.addEventListener('click', () => {
@@ -592,7 +618,7 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       };
 
       const resizeEvent = () => {
-        const isDesktop = window.innerWidth >= LARGE;
+        const isDesktop = window.innerWidth >= DESKTOP;
 
         const form = container.querySelector(`.${UtilitySearch.Elements.form}`);
         const menu = container.querySelector(`.${ELEMENT_UTILITY_MOBILE_MENU}`);

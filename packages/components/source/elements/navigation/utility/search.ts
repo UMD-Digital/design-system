@@ -4,7 +4,7 @@ type TypeUtilitySearchProps = {
   searchType?: string;
 };
 
-const { Colors } = Tokens;
+const { Colors, Spacing } = Tokens;
 
 const SEARCH_URL = 'https://search.umd.edu';
 const ANIMATION_IN_SPEED = 800;
@@ -50,7 +50,7 @@ const OverwriteLayoutDesktop = `
 
 const OverwriteLayoutMobile = `
   ${OVERWRITE_UTILITY_FORM_LAYOUT_MOBILE} {
-    padding: 20px 15px;
+    padding: ${Spacing.md} ${Spacing.lg};
     order: 1;
     display: block;
     height: auto;
@@ -77,7 +77,6 @@ const FormElementsStyles = `
     font-weight: 700;
     font-size: 12px;
     transition: background ${ANIMATION_OUT_SPEED}ms;
-    padding: 15px 30px;
     min-width: 120px;
     height: 44px;
   }

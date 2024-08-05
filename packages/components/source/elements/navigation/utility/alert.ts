@@ -326,21 +326,21 @@ const CreateAlertComponent = ({ alerts }: { alerts: TypeAlertResponse }) => {
 
   if (cta) {
     const link = cta[0];
-    if (!link) return;
+    if (link) {
+      const ctaElement = document.createElement('a');
 
-    const ctaElement = document.createElement('a');
+      ctaElement.classList.add(ELEMENT_ALERT_CTA);
+      ctaElement.href = link.url;
+      ctaElement.innerHTML = link.title;
+      ctaElement.setAttribute('rel', 'noopener noreferrer');
 
-    ctaElement.classList.add(ELEMENT_ALERT_CTA);
-    ctaElement.href = link.url;
-    ctaElement.innerHTML = link.title;
-    ctaElement.setAttribute('rel', 'noopener noreferrer');
-
-    wrapper.appendChild(
-      Actions.CreateElement({
-        cta: ctaElement,
-        type: 'secondary',
-      }),
-    );
+      wrapper.appendChild(
+        Actions.CreateElement({
+          cta: ctaElement,
+          type: 'secondary',
+        }),
+      );
+    }
   }
 
   lock.classList.add(ELEMENT_ALERT_LOCK);

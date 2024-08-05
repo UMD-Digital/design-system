@@ -107,7 +107,7 @@ const MenuStyles = `
     align-items: center;
     gap: 4px;
     height: 100%;
-    padding: ${Spacing.sm} ${Spacing.md};
+    padding: ${Spacing.min} ${Spacing.sm};
     font-weight: 700;
     font-size: 13px;
     transition: background ${ANIMATION_IN_SPEED}ms;

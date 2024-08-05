@@ -74,6 +74,7 @@ const ALERT_REF = 'umd-alert';
 const ALERT_ID_REF = 'umd-alert-id';
 const ANIMATION_IN_SPEED = 800;
 const MEDIUM = 768;
+const LARGE = 1024;
 
 const ATTRIBUTE_TYPE = 'type';
 const TYPE_GENERAL = 'general';
@@ -219,7 +220,7 @@ const ContainerStyles = `
   .${ELEMENT_ALERT_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     background-color: ${Colors.gray.lighter};
-    border-left: 5px solid ${Colors.red};
+    border-left: 4px solid ${Colors.red};
     padding: ${Spacing.md} 0;
     transition: height ${ANIMATION_IN_SPEED}ms;
     overflow: hidden;
@@ -229,6 +230,12 @@ const ContainerStyles = `
   @container (min-width: ${MEDIUM}px) {
     .${ELEMENT_ALERT_CONTAINER} {
       padding: ${Spacing.lg} 0 ;
+    }
+  }
+
+  @container (min-width: ${LARGE}px) {
+    .${ELEMENT_ALERT_CONTAINER} {
+    border-left: 8px solid ${Colors.red};
     }
   }
 `

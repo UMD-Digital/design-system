@@ -41,31 +41,10 @@ const TextLock = `
 const TextContainer = `
   .${ELEMENT_EXPAND_TEXT_CONTAINER} {
     position: relative;
-    padding-top: ${Spacing.md};
-    padding-bottom: ${Spacing.md};
+    padding-top: ${Spacing.max};
+    padding-bottom: ${Spacing.max};
     height: 100%;
     z-index: 9999;
-  }
-
-  @media (${Queries.tablet.min}) {
-    .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-      padding-top: ${Spacing['2xl']};
-      padding-bottom: ${Spacing['2xl']};
-    }
-  }
-
-  @media (${Queries.desktop.min}) {
-    .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-      padding-top: ${Spacing['4xl']};
-      padding-bottom: ${Spacing['4xl']};
-    }
-  }
-
-  @media (${Queries.highDef.min}) {
-    .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-      padding-top: ${Spacing.max};
-      padding-bottom: ${Spacing.max};
-    }
   }
 `;
 

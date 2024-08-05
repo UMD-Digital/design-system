@@ -25,6 +25,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDHeaderUtilityElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const alertUrl = element.getAttribute('alert-url');
+  const lockAttribute = element.getAttribute('lock');
   const giftAttribute = element.getAttribute('gift');
   const searchAttribute = element.getAttribute('search');
   const hasAdmissions = element.hasAttribute('admissions');
@@ -35,6 +36,7 @@ const CreateShadowDom = ({ element }: { element: UMDHeaderUtilityElement }) => {
   const hasSearch = searchAttribute !== null && searchAttribute !== undefined;
   const giftUrl = hasGifts ? giftAttribute : '';
   const searchType = hasSearch ? searchAttribute : '';
+  const isFullLock = lockAttribute === 'full';
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
@@ -49,6 +51,7 @@ const CreateShadowDom = ({ element }: { element: UMDHeaderUtilityElement }) => {
       hasSearch,
       giftUrl,
       searchType,
+      isFullLock,
     }),
   );
 };

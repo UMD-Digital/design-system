@@ -28,7 +28,7 @@ const CreateShadowDom = ({ element }: { element: UMDSocialSharingElement }) => {
   const title = element.getAttribute('data-title');
   const url = element.getAttribute('data-url');
   const facebook = element.getAttribute('data-facebook');
-  const twitter = element.getAttribute('data-facebook');
+  const twitter = element.getAttribute('data-twitter');
   const print = element.getAttribute('data-print');
   const email = element.getAttribute('data-email');
 

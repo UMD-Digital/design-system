@@ -7,6 +7,7 @@ type TypeFetchVariables = {
   relatedToAll?: string[];
   limit?: number;
   offset?: number;
+  not?: Array<string | number>;
 };
 
 export type TypeAPIFeedVariables = TypeFetchVariables & {
@@ -32,6 +33,7 @@ const FetchFeed = async ({
   related,
   relatedToAll,
   offset,
+  not,
   token,
   query,
 }: TypeFetchObject) => {
@@ -42,6 +44,7 @@ const FetchFeed = async ({
     related,
     relatedToAll,
     offset,
+    not,
   };
 
   const feedData = await FetchGraphQL({

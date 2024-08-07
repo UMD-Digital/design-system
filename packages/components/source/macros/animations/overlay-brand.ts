@@ -223,6 +223,7 @@ const AnimateOverlay = (props: TypeAnimationProps) => {
   const FIRST_ELEMENT_TIME_OUT = 3500;
   const SYNC_TIME =
     TIMING_ANIMATION_ARROW_FIRST_TIME_IN + FIRST_ELEMENT_TIME_OUT - 3000;
+  const completedTiming = TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 3600;
 
   setTimeout(() => {
     partTwo.style.transition = `transform ${FIRST_ELEMENT_TIME_OUT}ms ease-in-out`;
@@ -230,24 +231,17 @@ const AnimateOverlay = (props: TypeAnimationProps) => {
   }, TIMING_ANIMATION_ARROW_FIRST_TIME_IN - 200);
 
   setTimeout(() => {
-    partOne.style.transition = `transform ${
-      TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 3600
-    }ms ease-in-out`;
+    partOne.style.transition = `transform ${completedTiming}ms ease-in-out`;
     partOne.style.transform = `translateX(${endPosition}px`;
   }, SYNC_TIME + 100);
 
   setTimeout(() => {
-    partThree.style.transition = `transform ${
-      TIMING_ANIMATION_ARROW_FIRST_TIME_OUT - 3600
-    }ms ease-in-out`;
+    partThree.style.transition = `transform ${completedTiming}ms ease-in-out`;
     partThree.style.transform = `translate(${endPosition}px, -50%)`;
   }, SYNC_TIME + 50);
 
   if (completedCallback) {
-    setTimeout(
-      () => completedCallback(),
-      TIMING_ANIMATION_ARROW_FIRST_TIME_OUT,
-    );
+    setTimeout(() => completedCallback(), SYNC_TIME);
   }
 };
 
@@ -259,7 +253,6 @@ const AnimationSequence = (props: TypeAnimationProps) => {
 
 const CreateAnimationOverlayBrandElement = ({
   sizedContainer,
-  sizedWrapper,
   completedCallback,
   isAnimationOnLoad = true,
 }: {

@@ -89,6 +89,7 @@ const CommonDisplay = ({
   entry: ArticleType;
   theme?: string | null;
 }) => ({
+  id: entry.id.toString(),
   image: CreateImage({ images: entry.image }),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),

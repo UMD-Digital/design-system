@@ -7,6 +7,7 @@ const ATTRIBUTE_SHOW = 'show-count';
 const ATTRIBUTE_LAZYLOAD = 'lazyload';
 const ATTRIBUTE_CATEGORIES = 'categories';
 const ATTRIBUTE_UNION = 'union';
+const ATTRIBUTE_ENTRIES_TO_REMOVE = 'not';
 
 export const CommonFeedNewsData = ({
   element,
@@ -20,6 +21,7 @@ export const CommonFeedNewsData = ({
   const token = element.getAttribute(ATTRIBUTE_TOKEN);
   const theme = element.getAttribute(ATTRIBUTE_THEME);
   const categoriesAttribute = element.getAttribute(ATTRIBUTE_CATEGORIES);
+  const entriesToRemove = element.getAttribute(ATTRIBUTE_ENTRIES_TO_REMOVE);
 
   if (!token) {
     console.error(`Feed events requires a token to be set`);
@@ -43,6 +45,10 @@ export const CommonFeedNewsData = ({
 
   if (categoriesAttribute) {
     data.categories = categoriesAttribute.split(',');
+  }
+
+  if (entriesToRemove) {
+    data.entriesToRemove = entriesToRemove.split(',');
   }
 
   return data;

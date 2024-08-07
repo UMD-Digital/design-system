@@ -17,6 +17,7 @@ export type TypeNewsFeedRequirements = {
   isTypeOverlay?: boolean;
   isTypeList?: boolean;
   isTransparent?: boolean;
+  entriesToRemove?: string[];
 };
 
 type TypeFeedProps = TypeNewsFeedRequirements & {
@@ -53,6 +54,7 @@ const MakeApiVariables = ({
   token,
   numberOfColumnsToShow,
   numberOfRowsToStart,
+  entriesToRemove,
 }: TypeFeedProps): TypeAPIFeedVariables => {
   const obj: TypeAPIFeedVariables = {
     container: getContainer(),
@@ -71,6 +73,10 @@ const MakeApiVariables = ({
 
   if (isUnion && categories) {
     obj.related = categories;
+  }
+
+  if (entriesToRemove) {
+    obj.not = ['not', ...entriesToRemove];
   }
 
   return obj;

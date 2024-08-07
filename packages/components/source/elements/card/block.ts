@@ -1,6 +1,7 @@
 import { LayoutBlock, LayoutImage, TextLockupSmallScaling } from 'macros';
 
 type TypeBlockCardProps = {
+  id?: string;
   headline: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
@@ -30,6 +31,7 @@ const STYLES_BLOCK_CARD_ELEMENT = `
 
 const CreateCardBlockElement = (props: TypeBlockCardProps) => {
   const {
+    id,
     theme,
     image,
     isAligned = false,
@@ -48,6 +50,7 @@ const CreateCardBlockElement = (props: TypeBlockCardProps) => {
     isTransparent,
   });
 
+  if (id) elementContainer.setAttribute('news-id', id);
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_CARD_BLOCK_CONTAINER);
 

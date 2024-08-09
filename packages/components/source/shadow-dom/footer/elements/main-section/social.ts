@@ -169,6 +169,14 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
     link.innerHTML = AssetSocial.TWITTER;
   }
 
+  if (url.match(/linkedin.com/)) {
+    link.innerHTML = AssetSocial.LINKEDIN;
+  }
+
+  if (url.match(/threads.net/)) {
+    link.innerHTML = AssetSocial.THREADS;
+  }
+
   return link;
 };
 

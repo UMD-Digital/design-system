@@ -20,10 +20,45 @@ const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT } = REFERENCES;
 
+const ATTRIBUTE_LAYOUT = 'layout';
+const LAYOUT_GRID = 'grid';
+
 export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
 const SOCIAL_CONTAINER_WRAPPER = 'umd-footer-social-container_wrapper';
 const SOCIAL_CONTAINER_HEADLINE = 'umd-footer-social-container_headline';
+
+const IS_LAYOUT_GRID = `[${ATTRIBUTE_LAYOUT}="${LAYOUT_GRID}"]`;
+
+const OVERWRITE_GRID_CONTAINER = `.${SOCIAL_CONTAINER}${IS_LAYOUT_GRID}`;
+const OVERWRITE_GRID_WRAPPER = `${OVERWRITE_GRID_CONTAINER} .${SOCIAL_CONTAINER_WRAPPER}`;
+
+const OverwriteGridStyle = `
+  ${OVERWRITE_GRID_CONTAINER} {
+    flex-direction: column;
+    padding-left: 0;
+    align-items: flex-start;
+    margin-left: 0;
+  }
+
+  @media (min-width: ${LARGE}px) {
+    ${OVERWRITE_GRID_CONTAINER} {
+      align-items: center;
+    }
+  }
+
+  @media (min-width: ${LARGE}px) {
+    ${OVERWRITE_GRID_CONTAINER} > p {
+      align-self: center;
+    }
+  }
+
+  ${OVERWRITE_GRID_WRAPPER} {
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 0;
+    margin-top: ${Spacing.sm};
+  }
+`;
 
 const campaignOverwriteStyles = `
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
@@ -79,6 +114,7 @@ export const SocialContainerStyles = `
   .${SOCIAL_CONTAINER} > p {
     align-self: flex-start;
     padding-top: 3px;
+    font-weight: 700;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px) {
@@ -98,13 +134,12 @@ export const SocialContainerStyles = `
 
   .${SOCIAL_CONTAINER_WRAPPER} {
     display: grid;
-    grid-gap: ${Spacing.xs};
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: ${Spacing.xs};
     margin-left: ${Spacing.xs};
   }
 
   .${SOCIAL_CONTAINER_WRAPPER}[count="4"] {
-    display: grid;
     grid-template-columns: repeat(4, 1fr);
   }
 
@@ -141,6 +176,7 @@ export const SocialContainerStyles = `
 
   ${campaignOverwriteStyles}
   ${themeOverwriteStyles}
+  ${OverwriteGridStyle}
 `;
 
 // Enforce known social link types logos
@@ -243,6 +279,9 @@ const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
 
   container.appendChild(headline);
   container.appendChild(linksWrapper);
+  if (socialLinks.length >= 4) {
+    container.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_GRID);
+  }
 
   return container;
 };

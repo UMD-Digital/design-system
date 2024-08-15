@@ -104,7 +104,12 @@ const MasonryGrid = {
 
 const OffsetGrid = {
   '& > *': {
-    height: 'inherit !important',
+    alignSelf: 'start',
+    display: 'grid',
+
+    [`@media (${Queries.desktop.min})`]: {
+      minHeight: '400px',
+    },
   },
 
   '& > *:first-child': {
@@ -116,6 +121,12 @@ const OffsetGrid = {
   '& > *:nth-child(2)': {
     [`@media (${Queries.desktop.min})`]: {
       marginTop: `${Spacing['8xl']}`,
+    },
+  },
+
+  '& umd-element-stat': {
+    [`@media (${Queries.desktop.min})`]: {
+      height: `100%`,
     },
   },
 };

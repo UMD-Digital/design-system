@@ -29,8 +29,8 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_PATH = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_PATH}`;
 
 const OverwriteThemeStyles = `
-  .${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${Colors.gray.light};
+  ${OVERWRITE_THEME_DARK_CONTAINER} * {
+    color: ${Colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_PATH} + *::before {

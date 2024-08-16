@@ -29,9 +29,13 @@ const ImageTint = `
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .55) 60%, rgba(0, 0, 0, 0.9) 100%);
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
+  }
+
+  .${ELEMENT_TINT_OVERLAY}[size="large"] {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .55) 30%, rgba(0, 0, 0, 0.9) 100%);
   }
 
   .${ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER}:hover .${ELEMENT_TINT_OVERLAY} {
@@ -164,6 +168,10 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
       });
 
       text.innerHTML = modifiedText;
+
+      if (modifiedText.length >= 220) {
+        tintOverlay.setAttribute('size', 'large');
+      }
     }
   };
 

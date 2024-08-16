@@ -45,9 +45,9 @@ const TruncateText = ({
   size,
   breakpointLarge = 400,
   breakpointMax = 600,
-  textSizeSmall = 80,
-  textSizeLarge = 110,
-  textSizeMax = 232,
+  textSizeSmall = 220,
+  textSizeLarge = 260,
+  textSizeMax = 280,
 }: {
   text: string;
   size: number;

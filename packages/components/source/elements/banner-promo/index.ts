@@ -53,6 +53,10 @@ const OverwriteThemeDark = `
       [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: Text.RichTextDark,
     },
   })}
+
+  ${OVERWRITE_THEME_DARK_RICH_TEXT} * {
+    color: ${Colors.white};
+  }
 `;
 
 // prettier-ignore
@@ -81,6 +85,10 @@ const TextStyles = `
 
   .${ELEMENT_RICH_TEXT} {
     margin-top: ${Spacing.min};
+  }
+
+  .${ELEMENT_RICH_TEXT} * {
+    color: ${Colors.black};
   }
 `;
 

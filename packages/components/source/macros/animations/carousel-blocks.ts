@@ -252,9 +252,6 @@ const ButtonVisibility = (props: TypeHelpers) => {
     return;
   }
 
-  console.log(shouldShowLeftButton);
-  console.log(shouldHideLeftButton);
-
   if (shouldHideLeftButton) {
     prevousButton.style.display = 'none';
   } else {
@@ -405,7 +402,6 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         return displayLogic.showHint && !GetViewOptions.isMobileView();
       },
       shouldShowLeftButton: () => {
-        console.log(displayLogic.hasLeftButton);
         return displayLogic.hasLeftButton || hasInteractionOccured;
       },
       shouldShowRightButton: () => {

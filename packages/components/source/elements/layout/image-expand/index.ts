@@ -1,5 +1,5 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
+import { Accessibility, Styles } from 'utilities';
 
 type TypeLayoutImageExpandProps = {
   content: HTMLElement;
@@ -7,8 +7,9 @@ type TypeLayoutImageExpandProps = {
 };
 
 const { ConvertJSSObjectToStyles } = Styles;
-const { Spacing, Queries, MaxWidth } = Tokens;
+const { Spacing, MaxWidth } = Tokens;
 const { LockMax } = Layout;
+const { IsPrefferdReducedMotion, IsScreenZoomed } = Accessibility;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'layout-image-expand-declaration';
@@ -271,6 +272,11 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
   const container = document.createElement('div');
   const imageContainer = CreateImageContainer(props);
   const textContainer = CreateTextContainer(props);
+
+  if (IsScreenZoomed() && !IsPrefferdReducedMotion()) {
+    textContainer.style.height = '90vh';
+    textContainer.style.transform = 'translateY(120vh)';
+  }
 
   container.appendChild(imageContainer);
   container.appendChild(textContainer);

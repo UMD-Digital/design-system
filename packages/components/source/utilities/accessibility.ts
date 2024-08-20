@@ -93,7 +93,22 @@ const EventAccessibilityFocusTrap: EventAccessibilityFocusType = ({
   };
 };
 
+const IsScreenZoomed = () => {
+  const isHighDPI = window.devicePixelRatio > 1;
+  const browserZoomLevel = Math.round(window.devicePixelRatio * 100);
+
+  if (isHighDPI && browserZoomLevel > 200) return true;
+  if (!isHighDPI && browserZoomLevel > 100) return true;
+
+  return false;
+};
+
+const IsPrefferdReducedMotion = () =>
+  window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
 export default {
   EventAccessibilityFocus,
   EventAccessibilityFocusTrap,
+  IsScreenZoomed,
+  IsPrefferdReducedMotion,
 };

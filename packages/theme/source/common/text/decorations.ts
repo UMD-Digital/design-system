@@ -1,4 +1,5 @@
 import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
+import background from 'layout/background';
 
 const { Eyebrow } = Elements;
 const { Spacing, Colors, Queries } = Tokens;
@@ -122,6 +123,34 @@ const PillWrapper = {
   },
 };
 
+const PillList = {
+  marginTop: `-${Spacing.min}`,
+
+  '& > *': {
+    backgroundColor: Colors.gray.lightest,
+    display: 'inline-block',
+    padding: `${Spacing.min} ${Spacing.xs}`,
+    marginBottom: '0',
+    marginTop: Spacing.min,
+    transition: 'background-color 0.3s',
+
+    '& > span': {
+      display: 'flex',
+      gap: '4px',
+      whiteSpace: 'nowrap',
+    },
+  },
+
+  '& svg': {
+    height: '12px',
+    width: '12px',
+  },
+
+  '& a:hover, & a:focus': {
+    backgroundColor: Colors.gold,
+  },
+};
+
 const AdjustentLineText = {
   paddingLeft: Spacing.sm,
   borderLeft: `1px solid ${Colors.red}`,
@@ -166,5 +195,8 @@ export default {
   },
   '.umd-pills': {
     ...PillWrapper,
+  },
+  '.umd-pill-list': {
+    ...PillList,
   },
 };

@@ -1,5 +1,5 @@
 import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
-import { Styles, MarkupCreate } from 'utilities';
+import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
 
@@ -7,8 +7,7 @@ type TypeHeroMinimalProps = TypeTextContainerProps & TypeImageContainerProps;
 
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
-const { SansLargest, SansSmaller } = Typography;
-const { Node } = MarkupCreate;
+const { CampaignLarge, SansSmaller } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -88,12 +87,13 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: SansLargest,
+      [`${OVERWRITE_HEADLINE}`]: CampaignLarge,
     },
   })}
   
   ${OVERWRITE_HEADLINE} {
     font-weight: 800;
+    text-transform: none;
   }
 `;
 

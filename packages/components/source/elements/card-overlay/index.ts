@@ -101,6 +101,10 @@ const OverwriteTextContainer = `
     margin-top: ${Spacing.sm};
   }
 
+  ${OVERWRITE_SCALING_TEXT_LOCK_CONTAINER} > div > *:not(.${TextLockupSmall.Elements.actions}) {
+    margin-bottom: ${Spacing.sm};
+  }
+
   @media (min-width: 768px) {
     ${OVERWRITE_TEXT_LOCK_ACTIONS} {
       margin-top: auto;

@@ -31,10 +31,15 @@ const ELEMENT_ALERT_PAGE_CLOSE_BUTTON = 'alert-page-close-button';
 const ELEMENT_ALERT_PAGE_ICON = 'alert-page-icon';
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_ALERT_PAGE_CONTAINER}${IS_THEME_DARK}`;
+const OVERWRITE_THEME_DARK_CLOSE_BUTTON = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON}`;
 
 const OverwriteThemeStyles = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
     color: ${Colors.white};
+  }
+
+  ${OVERWRITE_THEME_DARK_CLOSE_BUTTON} rect {
+    fill: ${Colors.white};
   }
 `;
 

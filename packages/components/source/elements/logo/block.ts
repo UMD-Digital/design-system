@@ -86,12 +86,23 @@ const TextStyles = `
 const STYLES_LOGO_BLOCK_ELEMENT = `
   .${ELEMENT_LOGO_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
+    height: 100%;
   }
 
   .${ELEMENT_LOGO_BLOCK_ASSET} {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .${ELEMENT_LOGO_BLOCK_ASSET} > * {
+    max-height: 50px;
+    max-width: 150px;
+    display: flex;
+  }
+
+  .${ELEMENT_LOGO_BLOCK_ASSET} img {
+    object-fit: contain;
   }
 
   .${ELEMENT_LOGO_BLOCK_ASSET} + * {

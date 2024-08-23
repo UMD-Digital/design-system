@@ -39,7 +39,8 @@ const FetchGraphQL = async ({
 
     return responseData;
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    return error;
   }
 };
 

@@ -147,7 +147,7 @@ const OverwriteTextContainer = `
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_TEXT_CENTER_ALIGNMENT_TEXT_CONTAINER} {
-      width: 80vw;
+      width: 80%;
     }
   }
 `;

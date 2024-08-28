@@ -26,6 +26,7 @@ type EventType = DateInformaitonType & {
 
 export type TypeMetaDisplay = EventType & {
   theme?: string | null;
+  showTime?: boolean;
 };
 
 const { SansSmaller } = Typography;
@@ -211,15 +212,19 @@ const TimeText = ({ startTime, endTime }: DateDisplayType) => {
 };
 
 const RowDateInfo = (info: TypeMetaDisplay) => {
+  const { showTime } = info;
   const container = document.createElement('div');
   const { startMonth, startDay, endDay, endMonth } = info;
   const isMultiDay = startDay != endDay || startMonth != endMonth;
   const dateElement = DateText({ ...info, isMultiDay });
-  const timeElement = TimeText({ ...info, isMultiDay });
 
   container.classList.add(ELEMENT_EVENTS_DATE_ROW_DATE);
   container.appendChild(dateElement);
-  container.appendChild(timeElement);
+
+  if (showTime) {
+    const timeElement = TimeText({ ...info, isMultiDay });
+    container.appendChild(timeElement);
+  }
 
   return container;
 };

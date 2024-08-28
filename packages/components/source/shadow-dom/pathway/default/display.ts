@@ -16,6 +16,7 @@ const ATTRIBUTE_IMAGE_POSITION = 'image-position';
 const ATTRIBUTE_IMAGE_SCALED = 'image-scaled';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_TYPE = 'type';
+const ATTRIBUTE_SHOW_TIME = 'show-time';
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
@@ -54,6 +55,7 @@ const MakeCommonDefaultData = ({
   const locationSlot = element.querySelector(`[slot="${LOCATION}"]`);
   const isImageRight =
     element.getAttribute(ATTRIBUTE_IMAGE_POSITION) !== 'left';
+  const showTime = element.getAttribute(ATTRIBUTE_SHOW_TIME) !== 'false';
 
   const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
   const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
@@ -83,6 +85,7 @@ const MakeCommonDefaultData = ({
     obj.eventDetails = EventElements.Meta.CreateElement({
       ...eventData,
       theme: themeStyling,
+      showTime,
     });
 
     obj.eventSign = EventElements.Sign.CreateElement({

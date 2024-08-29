@@ -20,6 +20,7 @@ type DateInformaitonType = {
   endMonth: string;
   endDay: string;
   endTime: string;
+  allDay: boolean;
 };
 
 export type EventType = DateInformaitonType & {
@@ -81,9 +82,11 @@ const CreateHeadline = ({ text, url }: { text: string; url: string }) => {
 const CommonDisplay = ({
   entry,
   theme,
+  showTime,
 }: {
   entry: EventType;
   theme?: string | null;
+  showTime?: boolean;
 }) => ({
   image: CreateImage({ images: entry.image }),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
@@ -91,6 +94,7 @@ const CommonDisplay = ({
   eventDetails: EventElements.Meta.CreateElement({
     ...entry,
     theme,
+    showTime,
   }),
   theme,
 });
@@ -133,11 +137,12 @@ const CreateEventsGrouped = ({
     dateBanner: getDateBanner(entry),
     timeStamp: entry.startStamp,
     html: EventList.CreateElement({
-      ...CommonDisplay({ entry, theme }),
+      ...CommonDisplay({ entry, theme, showTime: entry.allDay ? false : true }),
       dateSign: EventElements.Sign.CreateElement({ ...entry, theme }),
       theme,
     }),
   }));
+
   const groupTypes: Array<string> = entriesMapping
     .reduce(
       (acc, entry) => {
@@ -176,14 +181,18 @@ const CreateEventFeedDisplay = ({
   if (isTypeGrid) {
     return entries.map((entry) =>
       EventBlock.CreateElement({
-        ...CommonDisplay({ entry, theme }),
+        ...CommonDisplay({
+          entry,
+          theme,
+          showTime: entry.allDay ? false : true,
+        }),
       }),
     );
   }
 
   return entries.map((entry) =>
     EventList.CreateElement({
-      ...CommonDisplay({ entry, theme }),
+      ...CommonDisplay({ entry, theme, showTime: entry.allDay ? false : true }),
       dateSign: EventElements.Sign.CreateElement({
         ...entry,
         theme,

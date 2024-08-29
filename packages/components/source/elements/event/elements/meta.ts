@@ -212,7 +212,7 @@ const TimeText = ({ startTime, endTime }: DateDisplayType) => {
 };
 
 const RowDateInfo = (info: TypeMetaDisplay) => {
-  const { showTime } = info;
+  const { showTime = true } = info;
   const container = document.createElement('div');
   const { startMonth, startDay, endDay, endMonth } = info;
   const isMultiDay = startDay != endDay || startMonth != endMonth;

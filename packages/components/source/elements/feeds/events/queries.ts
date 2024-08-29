@@ -36,6 +36,7 @@ query getEvents($startDate: String!, $related: [QueryArgument], $limit: Int, $of
         endMonth: endDate @formatDateTime(format: "M")
         endDay: endDate @formatDateTime(format: "d")
         endTime: endDate @formatDateTime(format: "g:ia")
+        allDay
         desciption: commonRichText
         summary: commonRichTextTwo
         image: commonAssetHeroImageSingle {
@@ -72,6 +73,7 @@ query getEvents($startDate: String!, $related: [QueryArgument], $limit: Int, $of
         endMonth: endDate @formatDateTime(format: "M")
         endDay: endDate @formatDateTime(format: "d")
         endTime: endDate @formatDateTime(format: "g:ia")
+        allDay
         desciption: commonRichText
         summary: commonRichTextTwo
         image: commonAssetHeroImageSingle {

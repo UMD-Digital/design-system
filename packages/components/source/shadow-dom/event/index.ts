@@ -18,6 +18,7 @@ const { Node, SlotWithDefaultStyling } = MarkupCreate;
 const ELEMENT_NAME = 'umd-element-event';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_DISPLAY = 'display';
+const ATTRIBUTE_SHOW_TIME = 'show-time';
 const THEME_LIGHT = 'light';
 const DISPLAY_LIST = 'list';
 const DISPLAY_FEATURE = 'feature';
@@ -62,6 +63,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const { START_DATE_ISO, END_DATE_ISO, LOCATION } = element._slots;
   const displayAttribute = element.getAttribute(ATTRIBUTE_DISPLAY);
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const showTime = element.getAttribute(ATTRIBUTE_SHOW_TIME) !== 'false';
   const isDisplayList = displayAttribute === DISPLAY_LIST;
   const isDisplayFeature = displayAttribute === DISPLAY_FEATURE;
   const isDisplayPromo = displayAttribute === DISPLAY_PROMO;
@@ -81,14 +83,16 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
     startDate,
     endDate,
   });
+  const EventDetailMeta = { ...EventDetailsData, showTime };
+
   const EventSignData = MarkupEvent.CreateDetailsData({
     locationElement: locationSlot,
     startDate,
     endDate,
   });
-  const eventDetails = EventElements.Meta.CreateElement(EventDetailsData);
+  const eventDetails = EventElements.Meta.CreateElement(EventDetailMeta);
   const eventDetailsDark = EventElements.Meta.CreateElement({
-    ...EventDetailsData,
+    ...EventDetailMeta,
     theme: 'dark',
   });
   const dateSign = EventElements.Sign.CreateElement(EventSignData);

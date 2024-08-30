@@ -47,7 +47,7 @@ const ImageStyles = `
   }
 
   .${ELEMENT_CARD_BLOCK_IMAGE} * {
-    max-height: 160px;
+    max-height: 120px;
   }
 `;
 

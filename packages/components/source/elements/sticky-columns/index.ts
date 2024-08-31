@@ -5,6 +5,7 @@ type TypeStickyProps = {
   stickyColumn?: HTMLElement | null;
   staticColumn?: HTMLElement | null;
   isStickyLast?: boolean | null;
+  topPosition?: string | null;
 };
 
 const { Spacing, Breakpoints } = Tokens;
@@ -68,16 +69,24 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
 `;
 
 const CreateStickyColumnsElement = (element: TypeStickyProps) => {
-  const { stickyColumn, staticColumn, isStickyLast } = element;
+  const { stickyColumn, staticColumn, isStickyLast, topPosition } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
+  const stickyElement = document.createElement('div');
+
+  const setPosition = ({ value }: { value: string | null }) => {
+    if (value) {
+      stickyElement.style.top = value;
+    } else {
+      stickyElement.style.removeProperty('top');
+    }
+  };
 
   if (isStickyLast) container.setAttribute(ATTRIBUTE_STICKY_LAST, '');
   container.classList.add(ELEMENT_STICKY_CONTAINER);
   wrapper.classList.add(ELEMENT_STICKY_CONTAINER_WRAPPER);
 
   if (stickyColumn) {
-    const stickyElement = document.createElement('div');
     stickyElement.classList.add(ELEMENT_STICKY_COLUMN);
     stickyElement.appendChild(stickyColumn);
     wrapper.appendChild(stickyElement);
@@ -90,7 +99,16 @@ const CreateStickyColumnsElement = (element: TypeStickyProps) => {
 
   container.appendChild(wrapper);
 
-  return container;
+  if (topPosition) {
+    setPosition({ value: topPosition });
+  }
+
+  return {
+    element: container,
+    events: {
+      SetPosition: setPosition,
+    },
+  };
 };
 
 export default {

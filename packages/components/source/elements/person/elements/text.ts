@@ -53,6 +53,7 @@ const NameStyles = `
     font-weight: 700;
     margin-bottom: ${Spacing.min};
     color: ${Colors.black};
+    display: block;
   }
 
   ${ConvertJSSObjectToStyles({

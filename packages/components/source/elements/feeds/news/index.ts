@@ -16,6 +16,7 @@ export type TypeNewsFeedRequirements = {
   isTypeGrid?: boolean;
   isTypeOverlay?: boolean;
   isTypeList?: boolean;
+  isTypeFeatured?: boolean;
   isTransparent?: boolean;
   entriesToRemove?: string[];
 };
@@ -94,6 +95,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   const {
     isTypeGrid,
     isTypeOverlay,
+    isTypeFeatured,
     getContainer,
     setOffset,
     feedData,
@@ -104,10 +106,12 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   const grid = container.querySelector(
     `.${LayoutGridGap.ID}`,
   ) as HTMLDivElement;
+
   const displayEntries = FeedDisplay.CreateElement({
     entries: feedData,
     isTypeGrid,
     isTypeOverlay,
+    isTypeFeatured,
     theme,
     isTransparent,
   });
@@ -154,18 +158,15 @@ const CreateFeed = async (props: TypeFeedProps) => {
       return;
     }
 
-    if (totalEntries > 0) {
-      const count =
-        'numberOfColumnsToShow' in props ? numberOfColumnsToShow : 1;
-      let isTypeGap = true;
+    const count = 'numberOfColumnsToShow' in props ? numberOfColumnsToShow : 1;
+    let isTypeGap = true;
 
-      if (isTypeOverlay) isTypeGap = false;
+    if (isTypeOverlay) isTypeGap = false;
 
-      setTotalEntries(totalEntries);
+    setTotalEntries(totalEntries);
 
-      LayoutGridGap.CreateElement({ container, count, isTypeGap });
-      DisplayEntries({ ...props, feedData: feedData.entries });
-    }
+    LayoutGridGap.CreateElement({ container, count, isTypeGap });
+    DisplayEntries({ ...props, feedData: feedData.entries });
   });
 };
 

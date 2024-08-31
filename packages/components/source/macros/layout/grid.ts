@@ -66,6 +66,13 @@ const STYLES_GRID_LAYOUT = `
       min-height: 560px;
     }
   }
+
+  @media (${Queries.large.min}) {
+    .umd-grid-column-double {
+      grid-column: span 2;
+      min-height: 560px;
+    }
+  }
 `;
 
 const CreateLayoutGridGap = ({

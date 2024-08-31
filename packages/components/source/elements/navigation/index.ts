@@ -20,7 +20,7 @@ type TypeNavRow = TypeSearchLink & {
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
 const { Colors, Spacing, Breakpoints } = Tokens;
-const { SansExtraLarge } = Typography;
+const { SansLarger, SansExtraLarge } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 const ANIMATION_TIME = 500;
 
@@ -108,17 +108,35 @@ const LogoColumnStyles = `
 
   .${ELEMENT_HEADER_LOGO} {
     display: block;
+    max-width: 350px;
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}`]: SansExtraLarge,
+      [`.${ELEMENT_HEADER_LOGO}`]: SansLarger,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO} *`]: SansExtraLarge,
+      [`.${ELEMENT_HEADER_LOGO} *`]: SansLarger,
+    },
+  })}
+
+  .${ELEMENT_HEADER_LOGO},
+  .${ELEMENT_HEADER_LOGO} * {
+    line-height: 1.05em;
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: SansExtraLarge,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: SansExtraLarge,
     },
   })}
 
@@ -234,7 +252,21 @@ const CreateLogoColumn = ({ logo, eventOpen }: TypeLogoRequirments) => {
   }
 
   if (logo) {
+    const childrenText = Array.from(logo.children).reduce((acc, child) => {
+      if (child.nodeName === 'IMG') return acc;
+
+      if (child.textContent) {
+        return acc + child.textContent.length;
+      }
+
+      return acc;
+    }, 0);
     logo.classList.add(ELEMENT_HEADER_LOGO);
+
+    if (childrenText < 30) {
+      logo.setAttribute('size', 'large');
+    }
+
     container.appendChild(logo);
   }
   container.classList.add(ELEMENT_HEADER_LOGO_COLUMN);

@@ -67,7 +67,7 @@ const TruncateText = ({
   const isRequriesTrunciation = text.length > textSize;
 
   if (isRequriesTrunciation) {
-    text = `${text.substring(0, textSize)} ...`;
+    text = `${text.slice(0, textSize)} ...`;
   }
 
   return text;

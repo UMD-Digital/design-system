@@ -1,6 +1,7 @@
 type EventAccessibilityFocusParams = {
   element: HTMLElement | Element;
   action: (arg: KeyboardEvent) => void;
+  shadowDomContext?: HTMLElement | null;
 };
 
 export type EventAccessibilityFocusType = (
@@ -11,6 +12,7 @@ export type EventAccessibilityEventsType = () => void | undefined;
 const EventAccessibilityFocus: EventAccessibilityFocusType = ({
   element,
   action,
+  shadowDomContext,
 }) => {
   const escapeEvent = (event: KeyboardEvent) => {
     if (event.keyCode == 27) {
@@ -22,11 +24,13 @@ const EventAccessibilityFocus: EventAccessibilityFocusType = ({
     const currentElement = event.composedPath()[0] as HTMLElement;
 
     if (event.key === 'Tab') {
-      if (
-        element &&
-        !element.contains(currentElement) &&
-        currentElement !== element
-      ) {
+      if (!element) return;
+
+      const hasElement = element.contains(currentElement);
+      const hasShadowDomContext = shadowDomContext?.contains(currentElement);
+      const isCurrentElement = currentElement === element;
+
+      if (!hasElement && !hasShadowDomContext && !isCurrentElement) {
         action(event);
       }
     }

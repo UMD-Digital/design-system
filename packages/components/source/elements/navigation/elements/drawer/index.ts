@@ -188,6 +188,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         EventAccessibilityFocus({
           element: elementContainer,
           action: () => eventClose(),
+          shadowDomContext: context,
         });
       }, 100);
 

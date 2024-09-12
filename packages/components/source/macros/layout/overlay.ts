@@ -152,7 +152,9 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
   const elementWrapper = document.createElement('div');
   const imageWrapper = document.createElement('div');
   const tintOverlay = document.createElement('div');
-  const textCopy = text?.innerHTML?.trim();
+  const textCopy = text?.innerHTML
+    ?.replace(/\/\*[\s\S]*?\*\/|(?<=[^:])\/\/.*|^\/\/.*/g, '')
+    .trim();
 
   const scalingFontContainer = ScalingFontBlock.CreateElement({
     ...props,

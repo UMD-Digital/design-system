@@ -152,7 +152,8 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
   const elementWrapper = document.createElement('div');
   const imageWrapper = document.createElement('div');
   const tintOverlay = document.createElement('div');
-  const textCopy = text?.textContent?.trim();
+  const textCopy = text?.innerHTML?.trim();
+
   const scalingFontContainer = ScalingFontBlock.CreateElement({
     ...props,
     theme: 'dark',

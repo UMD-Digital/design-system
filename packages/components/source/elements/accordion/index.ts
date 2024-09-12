@@ -54,7 +54,7 @@ const OVERWRITE_THEME_DARK_BODY = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEM
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_HEADLINE} {
-    background-color: ${Colors.black};
+    background-color: ${Colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE} > * {

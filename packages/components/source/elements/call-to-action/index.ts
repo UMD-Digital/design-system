@@ -235,6 +235,10 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
     display: flex;
   }
 
+  .${ELEMENT_CTA_WRAPPER}[data-email] svg {
+    padding-top: 3px;
+  }
+
   ${PrimaryStyles}
   ${OutlineStyles}
   ${SecondaryStyles}
@@ -281,6 +285,7 @@ const CreateLinkIcon = ({
   ) as HTMLSpanElement;
   const isExternalTab = element.getAttribute('target') === '_blank';
   const isDownload = element.getAttribute('download') !== null;
+  const isMail = element.getAttribute('href')?.includes('mailto:');
 
   if (!wrapper || !textSpan) return;
 
@@ -295,6 +300,13 @@ const CreateLinkIcon = ({
   }
 
   if (!isLink) return;
+
+  if (isMail) {
+    wrapper.innerHTML = AssetIcon.EMAIL;
+    wrapper.appendChild(textSpan);
+    wrapper.setAttribute('data-email', '');
+    return;
+  }
 
   if (isExternalTab) {
     wrapper.innerHTML = AssetIcon.NEW_WINDOW;

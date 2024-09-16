@@ -2,7 +2,7 @@ import { Typography, Elements, Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Spacing, FontFamily } = Tokens;
 const { Text } = Elements;
-const { SansSmaller, SansLarge, SansLarger } = Typography;
+const { SansSmall, SansLarge, SansLarger } = Typography;
 
 const RichTextCoding = {
   '.umd-rich-text-coding': {
@@ -49,18 +49,18 @@ const RichTextTables = {
       maxWidth: '100%',
 
       '& th': SansLarge,
-      '& td': SansSmaller,
+      '& td': SansSmall,
 
       '& th, & td': {
-        padding: `${Spacing.lg} ${Spacing.md}`,
+        padding: `${Spacing.md}`,
         verticalAlign: 'top',
 
         '&:first-child': {
-          paddingLeft: Spacing.lg,
+          paddingLeft: Spacing.md,
         },
 
         '&:last-Child': {
-          paddingRight: Spacing.lg,
+          paddingRight: Spacing.md,
         },
       },
 

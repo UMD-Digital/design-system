@@ -64,6 +64,12 @@ const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
 class UMDMediaInlineElement extends HTMLElement {
   _shadow: ShadowRoot;
   _slots: Record<string, string>;
+  _shadowRef: {
+    element: HTMLDivElement;
+    events?: {
+      SetLoad?: () => void;
+    };
+  } | null;
 
   constructor() {
     const template = Node.stylesTemplate({ styles });
@@ -71,11 +77,17 @@ class UMDMediaInlineElement extends HTMLElement {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._slots = SLOTS;
+    this._shadowRef = null;
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
+    this._shadowRef = CreateShadowDom({ element: this });
+    this._shadow.appendChild(this._shadowRef?.element);
+
+    if (this._shadowRef?.events?.SetLoad) {
+      this._shadowRef.events.SetLoad();
+    }
   }
 }
 

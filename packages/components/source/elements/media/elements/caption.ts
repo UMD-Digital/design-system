@@ -30,6 +30,7 @@ const STYLES_MEDIA_CAPTIONS_ELEMENT = `
     color: ${Colors.gray.mediumAA};
     display: inline-block;
     text-align: left;
+    opacity: 0;
   }
 `;
 

@@ -27,10 +27,15 @@ const STYLES_MEDIA_CAPTIONS_ELEMENT = `
 
   .${ELEMENT_MEDIA_CAPTIONS_CONTAINER} {
     margin-top: ${Spacing.sm};
-    color: ${Colors.gray.mediumAA};
     display: inline-block;
     text-align: left;
     opacity: 0;
+    width: 100%;
+  }
+
+  .${ELEMENT_MEDIA_CAPTIONS_CONTAINER},
+  .${ELEMENT_MEDIA_CAPTIONS_CONTAINER} > * {
+    color: ${Colors.gray.mediumAA};
   }
 `;
 

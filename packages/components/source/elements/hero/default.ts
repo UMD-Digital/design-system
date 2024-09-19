@@ -245,6 +245,7 @@ const DefaultStyles = `
 export const STYLES_HERO_DEFAULT_ELEMENT = `
   .${HERO_ELEMENT_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
+    position: relative;
   }
   
   ${ConvertJSSObjectToStyles({

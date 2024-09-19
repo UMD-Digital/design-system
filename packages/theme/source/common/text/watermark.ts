@@ -14,6 +14,7 @@ const Child = {
   opacity: ' 0.6',
   pointerEvents: 'none',
   userSelect: 'none',
+  zIndex: '-1',
 
   [`@media (${Queries.large.max})`]: {
     display: 'none',

@@ -1,5 +1,5 @@
 import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
-import { Styles, MarkupCreate } from 'utilities';
+import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
 
@@ -8,7 +8,6 @@ type TypeHeroMinimalProps = TypeTextContainerProps & TypeImageContainerProps;
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { SansLargest, SansSmaller } = Typography;
-const { Node } = MarkupCreate;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -142,6 +141,7 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
   .${ELEMENT_HERO_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
     overflow: hidden;
+    position: relative;
   }
   
   .${ELEMENT_HERO_LOCK} {

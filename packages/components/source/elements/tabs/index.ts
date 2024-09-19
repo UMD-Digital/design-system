@@ -91,6 +91,7 @@ const DisplayLineStyles = `
 const STYLES_TABS_ELEMENT = `
   .${ELEMENT_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
+    position: relative;
   }
 
   ${DisplayLineStyles}

@@ -210,6 +210,7 @@ const LockStyles = `
 const STYLES_PATHWAY_HERO_ELEMENT = `
   .${PATHWAY_HERO_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
+    position: relative;
   }
 
   ${LockStyles}

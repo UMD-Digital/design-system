@@ -136,6 +136,7 @@ const STYLES_BANNER_PROMO_ELEMENT = `
   .${ELEMENT_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
     overflow: hidden;
+    position: relative;
   }
 
   .${ELEMENT_CONTAINER} {

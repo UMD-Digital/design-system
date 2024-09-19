@@ -7,7 +7,7 @@ type TypeHeroMinimalProps = TypeTextContainerProps & TypeImageContainerProps;
 
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
-const { CampaignLarge, SansSmaller } = Typography;
+const { SansLargest, SansSmaller } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -87,13 +87,12 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: CampaignLarge,
+      [`${OVERWRITE_HEADLINE}`]: SansLargest,
     },
   })}
   
   ${OVERWRITE_HEADLINE} {
     font-weight: 800;
-    text-transform: none;
   }
 `;
 
@@ -142,6 +141,7 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
   .${ELEMENT_HERO_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
     overflow: hidden;
+    position: relative;
   }
   
   .${ELEMENT_HERO_LOCK} {

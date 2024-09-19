@@ -35,6 +35,7 @@ const WatermarkDark = {
   '> *': {
     ...Child,
     opacity: '0.2',
+    zIndex: 'inherit',
   },
 };
 

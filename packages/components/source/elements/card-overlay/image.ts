@@ -58,6 +58,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   .${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
     height: 100%;
+    position: relative;
   }
 
   .${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} * {

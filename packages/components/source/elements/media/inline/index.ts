@@ -32,7 +32,9 @@ const CreateMediaInline = (props: TypeMediaInlineRequirements) =>
 
     elementContainer.classList.add(ELEMENT_MEDIA_INLINE_CONTAINER);
 
-    return elementContainer;
+    return {
+      element: elementContainer,
+    };
   })();
 
 export default {

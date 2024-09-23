@@ -46,7 +46,8 @@ const DarkThemeStyles = `
   ${IS_THEME_DARK_HEADLINE},
   ${IS_THEME_DARK_HEADLINE} *,
   ${IS_THEME_DARK_RICH_TEXT},
-  ${IS_THEME_DARK_DATE} {
+  ${IS_THEME_DARK_DATE},
+  ${IS_THEME_DARK_DATE} * {
     color: ${Colors.white};
   }
 

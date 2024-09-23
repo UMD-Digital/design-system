@@ -4,6 +4,7 @@ import ImageContainer from './image';
 
 const { Colors, Spacing, MaxWidth } = Tokens;
 
+const ATTRIBUTE_ALIGNED = 'aligned';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
@@ -15,15 +16,34 @@ const ELEMENT_LIST_CONTAINER = 'list-container';
 const ELEMENT_LIST_CONTAINER_WRAPPER = 'list-container-wrapper';
 
 const IS_THEME_DARK = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const IS_ALIGNED = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_ALIGNED}]`;
 
 const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${TextLockupSmall.Elements.container}`;
 const OVERWRITE_TEXT_HEADLINE = `.${ELEMENT_LIST_CONTAINER} .${TextLockupSmall.Elements.headline}`;
 const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${ImageContainer.Elements.container}`;
 
+const OVERWRITE_ALIGNED_IMAGE_CONTAINER = `${IS_ALIGNED} .${ImageContainer.Elements.container}`;
+
 // prettier-ignore
 const VariationThemeStyles = `
   ${IS_THEME_DARK} .${ELEMENT_LIST_CONTAINER_WRAPPER} {
     border-bottom: 1px solid ${Colors.gray.dark};
+  }
+`;
+
+// prettier-ignore
+const VariantAlignedStyles = `
+  ${OVERWRITE_ALIGNED_IMAGE_CONTAINER} {
+    aspect-ratio: 4/3;
+    display: block;
+  }
+
+  ${OVERWRITE_ALIGNED_IMAGE_CONTAINER} img {
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -99,6 +119,7 @@ const STYLES_LIST_CONTAINER = `
   ${TextContainerStyles}
   ${ImageContainerStyles}
   ${VariationThemeStyles}
+  ${VariantAlignedStyles}
 `;
 
 const CreateListContainer = ({
@@ -106,17 +127,21 @@ const CreateListContainer = ({
   textContainer,
   personContainer,
   theme,
+  isAligned,
 }: {
   textContainer?: HTMLDivElement;
   imageContainer?: HTMLDivElement | null;
   personContainer?: HTMLDivElement | null;
   theme?: string | null;
+  isAligned?: boolean;
 }) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
 
   container.classList.add(ELEMENT_LIST_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isAligned) container.setAttribute(ATTRIBUTE_ALIGNED, '');
+
   wrapper.classList.add(ELEMENT_LIST_CONTAINER_WRAPPER);
 
   if (imageContainer) wrapper.appendChild(imageContainer);

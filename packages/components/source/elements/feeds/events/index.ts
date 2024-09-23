@@ -1,6 +1,11 @@
 import { Tokens, Elements } from '@universityofmaryland/variables';
+import {
+  AriaLive,
+  AnimationLoader,
+  ButtonLazyLoad,
+  LayoutGridGap,
+} from 'macros';
 import { Styles } from 'utilities';
-import { AnimationLoader, ButtonLazyLoad, LayoutGridGap } from 'macros';
 import FeedDisplay, { EventType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
 import NoResults from '../no-results';
@@ -192,8 +197,27 @@ const DisplayGrouped = (props: TypeDisplayEntries) => {
 };
 
 const DisplayEntries = (props: TypeDisplayEntries) => {
-  const { isTypeGrouped, getContainer } = props;
+  const {
+    isTypeGrouped,
+    isTypeGrid,
+    getContainer,
+    getTotalEntries,
+    isLazyLoad,
+    numberOfColumnsToShow,
+  } = props;
   const container = getContainer();
+  const allEntriesCount = getTotalEntries();
+  let showAmount = props.numberOfRowsToStart;
+
+  if (isTypeGrid) {
+    showAmount = numberOfColumnsToShow
+      ? numberOfColumnsToShow * props.numberOfRowsToStart
+      : props.numberOfRowsToStart;
+  }
+
+  const message = isLazyLoad
+    ? `Showing ${showAmount} of ${allEntriesCount} events`
+    : `Showing ${showAmount} events`;
 
   AnimationLoader.Remove({ container });
   ButtonLazyLoad.Remove({ container });
@@ -203,9 +227,15 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
     DisplayDefault(props);
   }
   ButtonLazyLoad.Display(MakeLazyLoadVariables(props));
+
+  container.appendChild(
+    AriaLive.Create({
+      message,
+    }),
+  );
 };
 
-const SetCount = async (props: TypeFeedProps) => {
+const FetchCount = async (props: TypeFeedProps) => {
   const { setTotalEntries } = props;
   const count = await Fetch.Count({
     variables: MakeApiVariables(props),
@@ -218,8 +248,9 @@ const SetCount = async (props: TypeFeedProps) => {
 };
 
 const LoadMoreEntries = async (props: TypeFeedProps) => {
-  const { getContainer } = props;
+  const { getContainer, getOffset } = props;
   const container = getContainer();
+  const currentCount = getOffset();
 
   ButtonLazyLoad.Remove({ container });
   AnimationLoader.Display({ container });
@@ -227,6 +258,13 @@ const LoadMoreEntries = async (props: TypeFeedProps) => {
     variables: MakeApiVariables(props),
   }).then((feedData) => {
     DisplayEntries({ ...props, feedData });
+
+    AriaLive.Update({
+      container,
+      message: `Showing ${
+        currentCount + feedData.length
+      } of ${props.getTotalEntries()} events`,
+    });
   });
 };
 
@@ -273,20 +311,24 @@ const CreateNoResult = (props: TypeFeedProps) => {
 const CreateFeed = (props: TypeFeedProps) => {
   const { getContainer, numberOfColumnsToShow } = props;
   const container = getContainer();
+  let count = 1;
+
+  if (numberOfColumnsToShow) {
+    count = numberOfColumnsToShow;
+  }
 
   Fetch.Entries({
     variables: MakeApiVariables(props),
   }).then((feedData) => {
-    const count = 'numberOfColumnsToShow' in props ? numberOfColumnsToShow : 1;
+    const totalEntries = feedData.length;
 
-    if (feedData.length === 0) {
+    if (totalEntries === 0) {
       CreateNoResult(props);
     }
 
-    if (feedData.length > 0) {
+    if (totalEntries > 0) {
       LayoutGridGap.CreateElement({ container, count });
       DisplayEntries({ ...props, feedData });
-      SetCount({ ...props });
     }
   });
 };
@@ -302,18 +344,23 @@ const CreateFeedsEventElement = (props: TypeEventFeedRequirements) =>
     const getOffset = () => offset;
     let totalEntries = 0;
     let offset = 0;
-
-    elementContainer.classList.add(FEEDS_EVENTS_CONTAINER);
-    elementContainer.appendChild(loader);
-
-    CreateFeed({
+    const data = {
       ...props,
       getTotalEntries,
       getOffset,
       getContainer,
       setTotalEntries,
       setOffset,
-    });
+    };
+
+    const load = async () => {
+      await FetchCount(data);
+      CreateFeed(data);
+    };
+
+    elementContainer.classList.add(FEEDS_EVENTS_CONTAINER);
+    elementContainer.appendChild(loader);
+    load();
 
     return elementContainer;
   })();

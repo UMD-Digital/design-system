@@ -65,7 +65,9 @@ const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
   if (isDisplayList) {
-    shadow.appendChild(CardList.CreateElement(MakeCardData({ element })));
+    shadow.appendChild(
+      CardList.CreateElement({ ...MakeCardData({ element }), isAligned }),
+    );
     return;
   }
 

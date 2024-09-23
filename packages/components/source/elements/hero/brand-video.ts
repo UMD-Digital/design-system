@@ -1,5 +1,5 @@
 import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
-import { Performance, Styles } from 'utilities';
+import { Accessibility, Performance, Styles } from 'utilities';
 import { AnimationOverlayBrand, ButtonVideoState } from 'macros';
 
 type TypeHeroBrandVideoProps = {
@@ -14,6 +14,7 @@ const { CampaignMaxium, SansLarger } = Typography;
 const { Text } = Elements;
 const { ConvertJSSObjectToStyles } = Styles;
 const { Debounce } = Performance;
+const { IsPrefferdReducedMotion } = Accessibility;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
 const ELEMENT_HERO_ELEMENT_DECLARATION = 'hero-logo-brand-video-declaration';
@@ -205,14 +206,11 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
     }
   };
   const eventLoad = () => {
-    const isReduced =
-      window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
-
     overlay.events.load();
     buttonMacro.events.setButtonPlay();
     eventRize();
 
-    if (isReduced) {
+    if (IsPrefferdReducedMotion()) {
       video.pause();
       buttonMacro.events.setButtonPause();
     }

@@ -104,15 +104,52 @@ const CreateNewsFeedDisplay = ({
   entries,
   isTypeGrid,
   isTypeOverlay,
+  isTypeFeatured,
   theme,
   isTransparent,
 }: {
   entries: ArticleType[];
   isTypeGrid?: boolean;
   isTypeOverlay?: boolean;
+  isTypeFeatured?: boolean;
   theme?: string | null;
   isTransparent?: boolean;
 }) => {
+  if (isTypeFeatured) {
+    if (entries.length >= 3) {
+      const entriesCopy = entries.slice(0, 3);
+
+      const overlayCard = CardOverlayImage.CreateElement({
+        ...CommonDisplay({ entry: entriesCopy[0], theme }),
+      });
+
+      if (overlayCard) {
+        overlayCard.classList.add('umd-grid-column-double');
+        overlayCard.classList.add('size-large');
+      }
+
+      entriesCopy.shift();
+
+      const standardCards = entriesCopy.map((entry) =>
+        CardBlock.CreateElement({
+          ...CommonDisplay({ entry, theme }),
+          isAligned: false,
+          isTransparent,
+        }),
+      );
+
+      return [overlayCard, ...standardCards];
+    } else {
+      return entries.map((entry) =>
+        CardBlock.CreateElement({
+          ...CommonDisplay({ entry, theme }),
+          isAligned: false,
+          isTransparent,
+        }),
+      );
+    }
+  }
+
   if (isTypeGrid) {
     return entries.map((entry) =>
       CardBlock.CreateElement({

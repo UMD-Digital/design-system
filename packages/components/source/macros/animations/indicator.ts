@@ -86,7 +86,7 @@ const CreateSlideIndicator = ({
 
       button.classList.add(ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER);
       button.addEventListener('click', () => callback(i));
-      button.setAttribute('aria-hidden', `true`);
+      button.setAttribute('aria-label', `Slide ${i + 1}`);
 
       return button;
     });

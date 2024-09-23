@@ -640,11 +640,11 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
         if (!form || !menu) return;
 
         if (isDesktop) {
-          menu.setAttribute('aria-hidden', 'true');
+          menu.setAttribute('aria-hidden', 'false');
           form.setAttribute('aria-hidden', 'true');
           form.setAttribute('layout', 'desktop');
         } else {
-          menu.setAttribute('aria-hidden', 'false');
+          menu.setAttribute('aria-hidden', 'true');
           form.setAttribute('aria-hidden', 'false');
           form.setAttribute('layout', 'mobile');
         }

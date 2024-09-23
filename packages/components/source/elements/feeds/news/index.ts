@@ -1,4 +1,9 @@
-import { AnimationLoader, ButtonLazyLoad, LayoutGridGap } from 'macros';
+import {
+  AriaLive,
+  AnimationLoader,
+  ButtonLazyLoad,
+  LayoutGridGap,
+} from 'macros';
 import FeedDisplay, { ArticleType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
 import NoResults from '../no-results';
@@ -16,6 +21,7 @@ export type TypeNewsFeedRequirements = {
   isTypeGrid?: boolean;
   isTypeOverlay?: boolean;
   isTypeList?: boolean;
+  isTypeFeatured?: boolean;
   isTransparent?: boolean;
   entriesToRemove?: string[];
 };
@@ -94,6 +100,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   const {
     isTypeGrid,
     isTypeOverlay,
+    isTypeFeatured,
     getContainer,
     setOffset,
     feedData,
@@ -104,10 +111,12 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   const grid = container.querySelector(
     `.${LayoutGridGap.ID}`,
   ) as HTMLDivElement;
+
   const displayEntries = FeedDisplay.CreateElement({
     entries: feedData,
     isTypeGrid,
     isTypeOverlay,
+    isTypeFeatured,
     theme,
     isTransparent,
   });
@@ -123,8 +132,9 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
 };
 
 const LoadMoreEntries = async (props: TypeFeedProps) => {
-  const { getContainer } = props;
+  const { getContainer, getOffset } = props;
   const container = getContainer();
+  const currentCount = getOffset();
 
   ButtonLazyLoad.Remove({ container });
   AnimationLoader.Display({ container });
@@ -132,6 +142,13 @@ const LoadMoreEntries = async (props: TypeFeedProps) => {
     variables: MakeApiVariables(props),
   }).then((feedData) => {
     DisplayEntries({ ...props, feedData: feedData.entries });
+
+    AriaLive.Update({
+      container,
+      message: `Showing ${
+        currentCount + feedData.entries.length
+      } of ${props.getTotalEntries()} articles`,
+    });
   });
 };
 
@@ -141,8 +158,15 @@ const CreateFeed = async (props: TypeFeedProps) => {
     numberOfColumnsToShow,
     setTotalEntries,
     isTypeOverlay,
+    isLazyLoad,
   } = props;
   const container = getContainer();
+  let count = 1;
+  let isTypeGap = true;
+
+  if (numberOfColumnsToShow) {
+    count = numberOfColumnsToShow;
+  }
 
   Fetch.Entries({
     variables: MakeApiVariables(props),
@@ -151,21 +175,32 @@ const CreateFeed = async (props: TypeFeedProps) => {
 
     if (totalEntries === 0) {
       NoResults.DisplayElement({ container, ...NoResultsContent });
+      container.appendChild(
+        AriaLive.Create({
+          message: NoResultsContent.message,
+        }),
+      );
+
       return;
     }
 
-    if (totalEntries > 0) {
-      const count =
-        'numberOfColumnsToShow' in props ? numberOfColumnsToShow : 1;
-      let isTypeGap = true;
+    const showAmount = count * props.numberOfRowsToStart;
+    const message = isLazyLoad
+      ? `Showing ${showAmount} of ${totalEntries} articles`
+      : `Showing ${showAmount} articles`;
 
-      if (isTypeOverlay) isTypeGap = false;
+    if (isTypeOverlay) isTypeGap = false;
 
-      setTotalEntries(totalEntries);
+    setTotalEntries(totalEntries);
 
-      LayoutGridGap.CreateElement({ container, count, isTypeGap });
-      DisplayEntries({ ...props, feedData: feedData.entries });
-    }
+    LayoutGridGap.CreateElement({ container, count, isTypeGap });
+    DisplayEntries({ ...props, feedData: feedData.entries });
+
+    container.appendChild(
+      AriaLive.Create({
+        message,
+      }),
+    );
   });
 };
 

@@ -79,7 +79,6 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
 
       if (caption) {
         caption.style.width = `${imageContainer.offsetWidth}px`;
-        caption.style.opacity = `1`;
       }
     };
     const sizeObject = () => {
@@ -125,6 +124,18 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
       }
     };
 
+    const load = () => {
+      setTimeout(() => {
+        const caption = objectContainer.querySelector(
+          `.${CaptionContainer.Elements.container}`,
+        ) as HTMLElement;
+
+        if (caption) {
+          caption.style.opacity = `1`;
+        }
+      }, 500);
+    };
+
     objectContainer.classList.add(ELEMENT_OBJECT_WRAPPED_CONTAINER);
 
     if (image) {
@@ -166,7 +177,13 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
     setTimeout(() => {
       eventResize();
     }, 200);
-    return elementContainer;
+
+    return {
+      element: elementContainer,
+      events: {
+        SetLoad: load,
+      },
+    };
   })();
 
 export default {

@@ -123,6 +123,13 @@ const ImageContainer = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    .${QUOTE_FEATURED_IMAGE}[data-aligned="center"] {
+      margin-top: 0;
+      justify-content: center;
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${QUOTE_FEATURED_IMAGE} {
       padding-left: ${Spacing['6xl']};
       width: calc(300px + ${Spacing['6xl']});
@@ -223,7 +230,7 @@ const CreateImageContainer = ({
   image,
   action,
 }: {
-  image: HTMLElement;
+  image: HTMLImageElement | HTMLElement;
   action?: HTMLElement | null;
 }) => {
   const container = document.createElement('div');
@@ -234,6 +241,21 @@ const CreateImageContainer = ({
   if (action) {
     action.classList.add(QUOTE_FEATURED_IMAGE_ACTIONS);
     container.appendChild(action);
+  }
+
+  if (window.innerWidth >= MEDIUM) {
+    if (image instanceof HTMLImageElement) {
+      image.addEventListener('load', () => {
+        const parent = image.parentElement as HTMLElement;
+        if (!parent) return;
+
+        const aspectRatio = image.offsetHeight / parent.offsetHeight;
+
+        if (aspectRatio < 0.5) {
+          container.setAttribute('data-aligned', 'center');
+        }
+      });
+    }
   }
 
   return container;

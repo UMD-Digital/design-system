@@ -54,7 +54,7 @@ const OVERWRITE_THEME_DARK_BODY = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEM
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_HEADLINE} {
-    background-color: ${Colors.black};
+    background-color: ${Colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE} > * {
@@ -69,8 +69,8 @@ const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_HEADLINE}[aria-expanded='true'],
   ${OVERWRITE_THEME_DARK_HEADLINE}:hover,
   ${OVERWRITE_THEME_DARK_HEADLINE}:focus {
-    background-color: ${Colors.gray.dark};
-    border-top: 1px solid ${Colors.gold};
+    background-color: ${Colors.gray.darker};
+    border-top: 2px solid ${Colors.gold};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE}[aria-expanded='true'] > *,
@@ -139,7 +139,7 @@ const headlineStyles = `
 
   .${ELEMENT_HEADLINE} {
     display: flex;
-    border-top: 1px solid transparent;
+    border-top: 2px solid transparent;
     padding: ${Spacing.md};
     padding-right: ${Spacing['4xl']};
     background-color: ${Colors.gray.lightest};
@@ -203,7 +203,7 @@ const headlineStyles = `
   .${ELEMENT_HEADLINE}:hover,
   .${ELEMENT_HEADLINE}:focus {
     background-color: ${Colors.gray.lightest};
-    border-top: 1px solid ${Colors.red};
+    border-top: 2px solid ${Colors.red};
   }
 
   .${ELEMENT_HEADLINE}[aria-expanded='true'] > *,

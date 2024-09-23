@@ -1,3 +1,4 @@
+import AriaLive from './accessibility/aria-live';
 import AnimationBrandLogo from './animations/brand-logo';
 import AnimationCarouselBlocks from './animations/carousel-blocks';
 import AnimationCarouselImage from './animations/carousel-image';
@@ -18,6 +19,7 @@ import TextLockupSmall from './text-lockup/small';
 import TextLockupSmallScaling from './text-lockup/small-scaling';
 
 export {
+  AriaLive,
   AnimationBrandLogo,
   AnimationCarouselBlocks,
   AnimationCarouselImage,

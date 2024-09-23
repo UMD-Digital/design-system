@@ -230,7 +230,7 @@ const EventSwipe = (props: TypeHelpers) => {
   EventsUtility.CreateEventSwipe({ container, callback: swipes });
 };
 
-const ButtonDisplay = (props: TypeHelpers) => {
+const ButtonVisibility = (props: TypeHelpers) => {
   const { GetElements, GetViewOptions } = props;
   const prevousButton = GetElements.container().querySelector(
     `.${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS}`,
@@ -240,15 +240,12 @@ const ButtonDisplay = (props: TypeHelpers) => {
   ) as HTMLButtonElement;
   const buttons = [nextButton, prevousButton];
 
-  const cardsTotal = GetElements.blocks().length;
-  const showCount = GetViewOptions.showCount();
   const shouldShowLeftButton = GetViewOptions.shouldShowLeftButton();
   const shouldShowRightButton = GetViewOptions.shouldShowRightButton();
+  const showCount = GetViewOptions.showCount();
+  const cardsTotal = GetElements.blocks().length;
   const shouldHideLeftButton = showCount > 1 && !shouldShowLeftButton;
   const shouldHideRightButton = showCount > 1 && !shouldShowRightButton;
-
-  prevousButton.setAttribute('aria-label', 'Previous');
-  nextButton.setAttribute('aria-label', 'Next');
 
   if (cardsTotal === showCount) {
     buttons.forEach((button) => (button.style.display = 'none'));
@@ -266,6 +263,21 @@ const ButtonDisplay = (props: TypeHelpers) => {
   } else {
     nextButton.style.display = 'block';
   }
+};
+
+const ButtonDisplay = (props: TypeHelpers) => {
+  const { GetElements } = props;
+  const prevousButton = GetElements.container().querySelector(
+    `.${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS}`,
+  ) as HTMLButtonElement;
+  const nextButton = GetElements.container().querySelector(
+    `.${ELEMENT_ANIMATION_CAROUSEL_NEXT}`,
+  ) as HTMLButtonElement;
+
+  prevousButton.setAttribute('aria-label', 'Previous');
+  nextButton.setAttribute('aria-label', 'Next');
+
+  ButtonVisibility(props);
 };
 
 const CreateButton = ({
@@ -326,6 +338,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       showHint: true,
     };
     let blockWidth = 0;
+    let hasInteractionOccured = false;
 
     if (overwriteDisplayLogic) {
       Object.keys(overwriteDisplayLogic).forEach((key) => {
@@ -389,10 +402,10 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         return displayLogic.showHint && !GetViewOptions.isMobileView();
       },
       shouldShowLeftButton: () => {
-        return displayLogic.hasLeftButton;
+        return displayLogic.hasLeftButton || hasInteractionOccured;
       },
       shouldShowRightButton: () => {
-        return displayLogic.hasRightButton;
+        return displayLogic.hasRightButton || hasInteractionOccured;
       },
     };
 
@@ -502,15 +515,21 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
           EventSwipe({ ...Event.helpers });
         }, 100);
       },
-      forward: () =>
+      forward: () => {
+        hasInteractionOccured = true;
         EventScrollCarousel({
           ...Event.helpers,
-        }),
-      backward: () =>
+        });
+        ButtonVisibility({ ...Event.helpers });
+      },
+      backward: () => {
+        hasInteractionOccured = true;
         EventScrollCarousel({
           ...Event.helpers,
           isDirectionRight: false,
-        }),
+        });
+        ButtonVisibility({ ...Event.helpers });
+      },
     };
 
     container.appendChild(

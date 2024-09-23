@@ -8,7 +8,7 @@ type TypePathwayDefaultProps = TypePathwayTextContainer &
     isImageRight: boolean;
   };
 
-const { Colors, Spacing } = Tokens;
+const { Spacing } = Tokens;
 const { LockMax } = Layout;
 
 const { ConvertJSSObjectToStyles } = Styles;

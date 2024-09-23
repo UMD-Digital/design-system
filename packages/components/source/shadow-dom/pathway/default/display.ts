@@ -20,7 +20,6 @@ const ATTRIBUTE_SHOW_TIME = 'show-time';
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
-const THEME_WHITE = 'white';
 const TYPE_HERO = 'hero';
 const TYPE_OVERLAY = 'overlay';
 const TYPE_STICKY = 'sticky';
@@ -46,7 +45,7 @@ const MakeCommonDefaultData = ({
   theme,
 }: {
   element: UMDPathwayElement;
-  theme: string;
+  theme: string | null;
 }) => {
   const { IMAGE, START_DATE_ISO, END_DATE_ISO, LOCATION, STATS } =
     element._slots;
@@ -78,7 +77,7 @@ const MakeCommonDefaultData = ({
       endDate,
     });
     let themeStyling = 'dark';
-    if (theme === THEME_LIGHT || theme === THEME_WHITE) {
+    if (theme === THEME_LIGHT) {
       themeStyling = 'light';
     }
 
@@ -106,7 +105,7 @@ export const CreateShadowDom = ({
     element.getAttribute(ATTRIBUTE_IMAGE_SCALED) !== 'false';
   const type = element.getAttribute(ATTRIBUTE_TYPE);
   const themeAttribute = element.getAttribute(ATTRIBUTE_THEME);
-  let theme = THEME_WHITE;
+  let theme = null;
 
   shadow.appendChild(element._styles.content.cloneNode(true));
 

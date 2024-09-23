@@ -68,6 +68,16 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
       );
     }
 
+    const load = () => {
+      setTimeout(() => {
+        const caption = objectContainer.querySelector(
+          `.${CaptionContainer.Elements.container}`,
+        ) as HTMLElement;
+
+        caption.style.opacity = `1`;
+      }, 500);
+    };
+
     if (hasCaption) {
       const captionElement = CaptionContainer.CreateElement({ caption });
       captionElement.style.display = `none`;
@@ -91,7 +101,13 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
     setTimeout(() => {
       eventResize();
     }, 100);
-    return elementContainer;
+
+    return {
+      element: elementContainer,
+      events: {
+        SetLoad: load,
+      },
+    };
   })();
 
 export default {

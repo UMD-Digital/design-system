@@ -90,11 +90,11 @@ const OverwriteCarouselStyles = `
   }
 
   ${OVERWRITE_SINGLE_COLUMN_PREVIOUS} {
-    left: calc(50% - 24px);
+    left: calc(50% - 44px);
   }
 
   ${OVERWRITE_SINGLE_COLUMN_NEXT} {
-    left: calc(50% + 24px);
+    left: calc(50% + 4px);
     right: inherit;
   }
 `;

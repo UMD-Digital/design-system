@@ -17,6 +17,7 @@ import CarouselThumbnail from './carousel/thumbnail';
 import Event from './event';
 import EventDate from './event/lockup';
 import FeedNewsGrid from './feeds/news/grid';
+import FeedNewsGridFeatured from './feeds/news/grid-featured';
 import FeedNewsList from './feeds/news/list';
 import FeedEventsGrid from './feeds/events/grid';
 import FeedEventsGrouped from './feeds/events/grouped';
@@ -74,6 +75,7 @@ export {
   FeedEventsGrouped,
   FeedEventsList,
   FeedNewsGrid,
+  FeedNewsGridFeatured,
   FeedNewsList,
   Footer,
   Hero,

@@ -8,6 +8,7 @@ type TypeListCardProps = {
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
   image?: HTMLImageElement | null;
+  isAligned?: boolean;
   theme?: string | null;
 };
 
@@ -32,7 +33,7 @@ const STYLES_LIST_CARD_ELEMENT = `
 `;
 
 const CreateCardListElement = (props: TypeListCardProps) => {
-  const { theme, image } = props;
+  const { theme, image, isAligned } = props;
   const textContainer = TextLockupSmall.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
@@ -40,6 +41,7 @@ const CreateCardListElement = (props: TypeListCardProps) => {
     textContainer,
     imageContainer,
     theme,
+    isAligned,
   });
 
   elementContainer.appendChild(container);

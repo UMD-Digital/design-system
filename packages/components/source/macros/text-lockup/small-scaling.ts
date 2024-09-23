@@ -1,12 +1,14 @@
-import { Typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import TextLockupSmall, { TypeTextLockupSmall } from './small';
 
 type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
+const { FontSize } = Tokens;
 const { SansExtraLarge, SansMedium, SansSmall } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 
+const SMALL = 300;
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-scaling-font-block-container';
@@ -32,6 +34,13 @@ const HeadlineStyles = `
         [`${OverwriteHeadline} *`]: SansExtraLarge,
       },
     })}
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    ${OverwriteHeadline},
+    ${OverwriteHeadline} * {
+      font-size: ${FontSize.lg};
+    }
   }
 `;
 

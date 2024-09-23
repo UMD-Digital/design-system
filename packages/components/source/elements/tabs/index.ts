@@ -174,6 +174,7 @@ const SetDisplay = ({
 
       strip.style.height = `${activeContent.offsetHeight + space}px`;
       activeContent.style.top = `${tabsContainer.offsetHeight + space}px`;
+      activeContent.style.width = '100%';
 
       if (!isFlexLayout && transition) {
         ScrollTo({

@@ -1,7 +1,7 @@
 import { Colors } from '../tokens/colors';
 import { FontSize, FontWeight } from '../tokens/fonts';
 import { Spacing } from '../tokens/spacing';
-import { SansSmall, SansMedium } from '../typography/sans';
+import { SansSmall, SansMedium, SansSmaller } from '../typography/sans';
 import Animations from '../animations';
 import Lists from './list';
 
@@ -62,6 +62,19 @@ const RichTextBase = {
 
   '& img': {
     maxWidth: '100%',
+  },
+
+  '& sup': {
+    fontSize: FontSize.min,
+  },
+
+  '& sub': {
+    fontSize: FontSize.min,
+  },
+
+  '& small': {
+    ...SansSmaller,
+    display: 'inline-block',
   },
 };
 

@@ -1,5 +1,4 @@
 import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
-import background from 'layout/background';
 
 const { Eyebrow } = Elements;
 const { Spacing, Colors, Queries } = Tokens;
@@ -87,7 +86,7 @@ const TailwingRight = {
 
 const TailwingRightLight = {
   ...TailwingRight,
-  backgroundColor: `${Colors.gray.lightest}`,
+  backgroundColor: `${Colors.gray.lighter}`,
 
   '&::before': {
     background: `${Colors.gray.medium}`,

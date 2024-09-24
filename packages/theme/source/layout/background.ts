@@ -40,7 +40,7 @@ const BackgroundQuater = {
 
 const BackgroundBox = {
   padding: `${Spacing.md}`,
-  backgroundColor: `${Colors.gray.lightest}`,
+  backgroundColor: `${Colors.gray.lighter}`,
   borderLeft: `2px solid ${Colors.red}`,
 
   [`@media (${Queries.tablet.min})`]: {

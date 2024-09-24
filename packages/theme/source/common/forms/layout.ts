@@ -7,7 +7,7 @@ const { Icons } = Assets;
 const { FormFieldValidation } = State;
 
 const FormLayoutWrapper = {
-  backgroundColor: Colors.gray.lightest,
+  backgroundColor: Colors.gray.lighter,
   padding: `${Spacing.md}`,
 
   [`@media (${Queries.tablet.min})`]: {

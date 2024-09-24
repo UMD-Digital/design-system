@@ -1,4 +1,4 @@
-import { Typography, Tokens } from '@universityofmaryland/variables';
+import { Typography, Tokens, Elements } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 type TypeStatElement = {
@@ -15,6 +15,7 @@ type TypeStatRequirements = TypeStatElement & {
 };
 
 const { ConvertJSSObjectToStyles } = Styles;
+const { Text } = Elements;
 const { Colors, Spacing, Breakpoints } = Tokens;
 const {
   SansLarger,
@@ -190,6 +191,12 @@ const StatDisplayStyles = `
 const TextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
+      [`.${ELEMENT_STAT_TEXT}`]: Text.RichText,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
       [`.${ELEMENT_STAT_TEXT}`]: SansMedium,
     },
   })}
@@ -246,6 +253,7 @@ const STYLES_STAT_ELEMENT = `
 
   .${ELEMENT_STAT_WRAPPER} {
     max-width: 720px;
+    position: relative;
   }
 
   ${StatDisplayStyles}

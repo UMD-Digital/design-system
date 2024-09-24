@@ -158,7 +158,7 @@ const OverwriteScalabeFontContainer = `
 const ImageContainerStyles = `
   @media (max-width: ${MEDIUM - 1}px) {
     .${ImageContainer.Elements.container} {
-      width: 96px;
+      width: 120px;
       float: right;
       margin-bottom: 4px;
       margin-left: ${Spacing.sm};

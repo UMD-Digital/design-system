@@ -1,5 +1,9 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
+import {
+  Animations,
+  Tokens,
+  Typography,
+} from '@universityofmaryland/variables';
+import { MarkupModify, Styles } from 'utilities';
 import PersonContact, { TypeContactProps } from './contact';
 
 export type TypePersonProps = TypeContactProps & {
@@ -14,6 +18,7 @@ export type TypePersonProps = TypeContactProps & {
 };
 
 const { Spacing, Colors } = Tokens;
+const { Link } = Animations;
 const { SansLarger, SansSmall, SansSmaller } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
@@ -45,6 +50,12 @@ const ThemeDarkStyles = `
   ${IS_DARK_THEME_CONTAINER} * {
     color: ${Colors.white};
   }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Link.LineSlideUnder.white,
+    },
+  })}
 `;
 
 // prettier-ignore
@@ -59,6 +70,12 @@ const NameStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_NAME_CONTAINER}`]: SansLarger,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Link.LineSlideUnder.black,
     },
   })}
 `;
@@ -169,6 +186,7 @@ const CreatePersonTextContainer = (person: TypePersonProps) => {
 
   if (name) {
     name.classList.add(ELEMENT_PERSON_NAME_CONTAINER);
+    MarkupModify.AnimationLinkSpan({ element: name });
     wrapper.appendChild(name);
   }
 

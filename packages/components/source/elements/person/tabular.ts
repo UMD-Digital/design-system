@@ -34,7 +34,9 @@ const IS_WITH_IMAGE = `[${ATTRIBUTE_HAS_IMAGE}]`;
 
 const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutImageContainer}`;
 const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer}`;
+const OVERWRITE_TEXT_CONTAINER_WRAPPER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer} .${PersonTextContainer.Elements.mainWrapper}`;
 const OVERWRITE_PERSON_NAME = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextName}`;
+const OVERWRITE_PERSON_CONTACT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${PersonTextContainer.Elements.contactContainer}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutImageContainer}`;
@@ -92,7 +94,14 @@ const OverwriteImagesStyles = `
 const OverwriteTextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_CONTAINER} *`]: SansSmaller,
+      [`${OVERWRITE_TEXT_CONTAINER_WRAPPER} > *:not(.${LayoutTextName})`]:
+        SansSmaller,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_PERSON_CONTACT_CONTAINER} > *`]: SansSmaller,
     },
   })}
 

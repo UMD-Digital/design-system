@@ -47,7 +47,7 @@ const MakeCommonDefaultData = ({
   element: UMDPathwayElement;
   theme: string | null;
 }) => {
-  const { IMAGE, START_DATE_ISO, END_DATE_ISO, LOCATION, STATS } =
+  const { IMAGE, VIDEO, START_DATE_ISO, END_DATE_ISO, LOCATION, STATS } =
     element._slots;
   const startDateSlot = element.querySelector(`[slot="${START_DATE_ISO}"]`);
   const endDateSlot = element.querySelector(`[slot="${END_DATE_ISO}"]`);
@@ -66,6 +66,7 @@ const MakeCommonDefaultData = ({
     isImageRight,
     stats: SlotWithDefaultStyling({ element, slotRef: STATS }),
     image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+    video: SlotWithDefaultStyling({ element, slotRef: VIDEO }),
     eventDetails: null as null | HTMLElement,
     eventSign: null as null | HTMLElement,
   };

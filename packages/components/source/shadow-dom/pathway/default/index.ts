@@ -14,6 +14,7 @@ const ELEMENT_NAME = 'umd-element-pathway';
 const SLOTS = {
   ...CommonSlots,
   IMAGE: 'image',
+  VIDEO: 'video',
   START_DATE_ISO: 'start-date-iso',
   END_DATE_ISO: 'end-date-iso',
   LOCATION: 'location',

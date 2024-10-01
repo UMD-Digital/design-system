@@ -127,7 +127,7 @@ const OverwriteImageContainerStyles = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} * {
+    ${OVERWRITE_IMAGE_CONTAINER} div {
       height: 100%;
       width: 100%;
     }
@@ -137,7 +137,15 @@ const OverwriteImageContainerStyles = `
     ${OVERWRITE_IMAGE_CONTAINER} img {
       min-height: inherit;
       width: 100%;
+      height: 100%;
     }
+  }
+
+  ${OVERWRITE_IMAGE_CONTAINER} video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 `;
 

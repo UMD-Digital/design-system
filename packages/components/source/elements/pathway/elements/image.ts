@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutImage } from 'macros';
+import { LayoutImage, ButtonVideoState } from 'macros';
 
 const { Spacing, Colors, Queries } = Tokens;
 
@@ -9,6 +9,7 @@ type TypeScaleProps = {
 
 type TypeImageProps = {
   image: HTMLElement | null;
+  video: HTMLElement | null;
   eventSign?: HTMLElement | null;
 };
 
@@ -80,6 +81,7 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
 
   ${ImageSizeStyles}
   ${EventSignStyles}
+  ${ButtonVideoState.Styles}
 `
 
 const CreatePathwayImageContainer = (
@@ -87,7 +89,8 @@ const CreatePathwayImageContainer = (
 ) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const { image, eventSign } = element;
+  const { image, video, eventSign } = element;
+  const isVideo = video instanceof HTMLVideoElement;
 
   wrapper.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER);
 
@@ -97,15 +100,29 @@ const CreatePathwayImageContainer = (
     }
   }
 
-  if (image) {
-    const imageContainer = LayoutImage.CreateElement({
-      image: image as HTMLImageElement,
-      showCaption: true,
-    });
-    wrapper.appendChild(imageContainer);
+  if (image || video) {
+    if (image) {
+      const imageContainer = LayoutImage.CreateElement({
+        image: image as HTMLImageElement,
+        showCaption: true,
+      });
+      wrapper.appendChild(imageContainer);
 
-    container.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE);
-    container.appendChild(wrapper);
+      container.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE);
+      container.appendChild(wrapper);
+    }
+
+    if (video && isVideo) {
+      const videoRef = video as HTMLVideoElement;
+      const buttonMacro = ButtonVideoState.CreateElement({ video: videoRef });
+
+      wrapper.appendChild(videoRef);
+      wrapper.appendChild(buttonMacro.elements.button);
+      buttonMacro.events.setButtonPlay();
+
+      container.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE);
+      container.appendChild(wrapper);
+    }
 
     if (eventSign) {
       eventSign.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN);

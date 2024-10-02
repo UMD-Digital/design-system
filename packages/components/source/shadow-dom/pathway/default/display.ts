@@ -78,7 +78,7 @@ const MakeCommonDefaultData = ({
       endDate,
     });
     let themeStyling = 'dark';
-    if (theme === THEME_LIGHT) {
+    if (theme === THEME_LIGHT || !theme) {
       themeStyling = 'light';
     }
 

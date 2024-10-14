@@ -252,6 +252,12 @@ const TextContainerStyles = `
     }
   }
 
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_PERSON_HERO_TEXT_JOB}`]: SansMedium,
+    },
+  })}
+
   .${ELEMENT_PERSON_HERO_TEXT_JOB} {
     display: block;
   }

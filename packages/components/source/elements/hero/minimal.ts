@@ -7,7 +7,7 @@ type TypeHeroMinimalProps = TypeTextContainerProps & TypeImageContainerProps;
 
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
-const { SansLargest, SansSmaller } = Typography;
+const { SansLargest, SansSmaller, CampaignLarge } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -87,7 +87,7 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: SansLargest,
+      [`${OVERWRITE_HEADLINE}`]: CampaignLarge,
     },
   })}
   

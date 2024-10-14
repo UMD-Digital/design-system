@@ -39,11 +39,12 @@ export const CreateShadowDom = ({
 
   if (breadcrumbSlot) {
     const breadcrumb = element.querySelector('[slot="breadcrumb"]');
-    if (!breadcrumb) return;
-    const copy = breadcrumb.cloneNode(true);
+    if (breadcrumb) {
+      const copy = breadcrumb.cloneNode(true);
 
-    element.appendChild(copy);
-    breadcrumb.setAttribute('slot', 'breadcrumb-copy');
+      element.appendChild(copy);
+      breadcrumb.setAttribute('slot', 'breadcrumb-copy');
+    }
   }
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

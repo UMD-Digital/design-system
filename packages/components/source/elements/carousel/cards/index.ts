@@ -40,8 +40,6 @@ const INTRO_CONTAINER_HEADLINE = 'carousel-cards-intro-container-headline';
 const INTRO_CONTAINER_TEXT = 'carousel-cards-intro-container-text';
 const INTRO_CONTAINER_CTA = 'carousel-cards-intro-container-cta';
 
-const SLIDE_CONTAINER = 'carousel-cards-slide-container';
-
 const OVERWRITE_ANIMATION_CAROUSEL_DECLARATION = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.declaration}`;
 const OVERWRITE_ANIMATION_CAROUSEL_CONTAINER = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.container}`;
 const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.button}`;
@@ -180,6 +178,12 @@ const ContainerLock = `
     ${ConvertJSSObjectToStyles({
       styleObj: LockMax ,
     })}
+  }
+
+  @media (max-width: ${MEDIUM - 1}px) {
+    .${CAROUSEL_LOCK} {
+      padding-right: 0;
+    }
   }
 
   @media (min-width: ${LARGE}px) {

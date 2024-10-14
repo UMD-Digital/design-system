@@ -331,7 +331,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       tabletCount: 2,
       desktopCount: 3,
       maxCount: 4,
-      blockGap: ConvertPixelStringToNumber(Spacing.md),
+      blockGap: ConvertPixelStringToNumber(Spacing.lg),
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: true,

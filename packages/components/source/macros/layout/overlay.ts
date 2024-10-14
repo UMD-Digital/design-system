@@ -166,7 +166,7 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
 
   const sizeElements = () => {
     if (text && textCopy) {
-      const modifiedText = MarkupModify.TruncateText({
+      const modifiedText = MarkupModify.TruncateTextBasedOnSize({
         text: textCopy,
         size: elementContainer.offsetWidth,
       });

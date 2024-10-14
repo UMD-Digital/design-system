@@ -92,6 +92,12 @@ const CreateEventLockupDate = (props: TypeEventLockupDate) => {
   }
 
   if (headline) {
+    const modifiedText = MarkupModify.TruncateText({
+      text: headline.innerHTML,
+      maxTextSize: 50,
+    });
+
+    headline.innerHTML = modifiedText;
     headline.classList.add(EVENT_HEADLINE);
     MarkupModify.AnimationLinkSpan({ element: headline });
     container.appendChild(headline);

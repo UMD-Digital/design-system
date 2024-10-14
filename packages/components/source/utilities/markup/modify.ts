@@ -42,6 +42,22 @@ const CtaStyle = ({
 
 const TruncateText = ({
   text,
+  maxTextSize,
+}: {
+  text: string;
+  maxTextSize: number;
+}) => {
+  const isRequriesTrunciation = text.length > maxTextSize;
+
+  if (isRequriesTrunciation) {
+    text = `${text.slice(0, maxTextSize)} ...`;
+  }
+
+  return text;
+};
+
+const TruncateTextBasedOnSize = ({
+  text,
   size,
   breakpointLarge = 400,
   breakpointMax = 600,
@@ -64,13 +80,7 @@ const TruncateText = ({
   if (isContainerLarge) textSize = textSizeLarge;
   if (isContainerMax) textSize = textSizeMax;
 
-  const isRequriesTrunciation = text.length > textSize;
-
-  if (isRequriesTrunciation) {
-    text = `${text.slice(0, textSize)} ...`;
-  }
-
-  return text;
+  return TruncateText({ text, maxTextSize: textSize });
 };
 
 const CleanCopy = ({ element }: { element: HTMLElement }) => {
@@ -92,5 +102,6 @@ export default {
   AnimationLinkSpan,
   CleanCopy,
   CtaStyle,
+  TruncateTextBasedOnSize,
   TruncateText,
 };

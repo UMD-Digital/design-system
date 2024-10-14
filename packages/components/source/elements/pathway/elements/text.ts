@@ -209,6 +209,7 @@ const STYLES_PATHWAY_TEXT_CONTAINER = `
 
   .${ELEMENT_TEXT_CONTAINER_WRAPPER} {
     width: 100%;
+    position: relative;
   }
 
   ${EyebrowStyles}

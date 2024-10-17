@@ -19,7 +19,7 @@ export type TypePathwayTextContainer = {
 const { Spacing, Colors } = Tokens;
 const { Eyebrow, Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
-const { SansLargest } = Typography;
+const { SansLargest, SansLarger } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -136,6 +136,24 @@ const TextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: Text.RichText,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: Text.RichText,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: SansLarger,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: SansLarger,
     },
   })}
 

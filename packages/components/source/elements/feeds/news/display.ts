@@ -73,7 +73,7 @@ const CreateDate = ({
   dateFormatted: string;
 }) => {
   if (date && dateFormatted) {
-    const dateElement = document.createElement('date');
+    const dateElement = document.createElement('time');
     dateElement.innerHTML = dateFormatted;
     dateElement.setAttribute('datetime', date);
     return dateElement;

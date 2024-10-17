@@ -3,7 +3,7 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { Styles, MarkupCreate } from 'utilities';
+import { Styles, MarkupCreate, MarkupModify } from 'utilities';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -18,6 +18,7 @@ const { SansSmaller, InterativeMedium } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { AnimationLinkSpan } = MarkupModify;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -303,6 +304,7 @@ const CreateSlotColumn = ({
         (link) => {
           const linkWrapper = document.createElement('div');
           linkWrapper.classList.add(ROW_LINKS_COLUMN_LINKS);
+          AnimationLinkSpan({ element: link });
           linkWrapper.appendChild(link);
           return linkWrapper;
         },

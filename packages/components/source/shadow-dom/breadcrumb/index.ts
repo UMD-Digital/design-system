@@ -86,7 +86,7 @@ const ContainerStyles = `
   }
 
   .${ELEMENT_CONTAINER} * {
-    color: ${Colors.gray.medium};
+    color: ${Colors.gray.mediumAA};
     position: relative;
   }
 

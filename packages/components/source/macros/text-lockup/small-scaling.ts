@@ -68,6 +68,12 @@ const TextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${ConvertJSSObjectToStyles({
       styleObj: {
+        [`${OverwriteText}`]: SansMedium,
+      },
+    })}
+
+    ${ConvertJSSObjectToStyles({
+      styleObj: {
         [`${OverwriteText} *`]: SansMedium,
       },
     })}

@@ -69,10 +69,12 @@ const socialOverwriteStyles = `
 const HeadlineStyles = `
   .${CONTACT_LIST_HEADLINE} {
     margin-bottom: ${Spacing.min};
+    color: ${Colors.white};
   }
 
   .${CONTACT_LIST_HEADLINE} * {
     font-weight: 700;
+    color: ${Colors.white};
   }
 
   ${ConvertJSSObjectToStyles({
@@ -88,6 +90,7 @@ const HeadlineStyles = `
     },
   })}
 
+  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE},
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} * {
     color: ${Colors.black};
   }

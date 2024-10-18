@@ -47,13 +47,37 @@ const TruncateText = ({
   text: string;
   maxTextSize: number;
 }) => {
-  const isRequriesTrunciation = text.length > maxTextSize;
+  const wrapper = document.createElement('div');
+  const textLength = text.split(/[\s,\t,\n]+/).join(' ').length;
 
-  if (isRequriesTrunciation) {
-    text = `${text.slice(0, maxTextSize)} ...`;
+  wrapper.innerHTML = text;
+
+  let textContent = wrapper.textContent || wrapper.innerText;
+
+  textContent = textContent.slice(0, maxTextSize);
+
+  const walkAndReplace = (node: any) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const newText = textContent.slice(0, node.nodeValue.length);
+      textContent = textContent.slice(node.nodeValue.length);
+
+      node.nodeValue = newText;
+    } else {
+      node.childNodes.forEach(walkAndReplace);
+    }
+  };
+
+  walkAndReplace(wrapper);
+
+  if (textLength >= maxTextSize) {
+    const lastChild = wrapper.children[
+      wrapper.children.length - 1
+    ] as HTMLElement;
+
+    if (lastChild) lastChild.innerHTML = lastChild.innerHTML + ' ...';
   }
 
-  return text;
+  return wrapper.innerHTML;
 };
 
 const TruncateTextBasedOnSize = ({

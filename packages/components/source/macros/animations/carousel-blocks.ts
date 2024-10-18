@@ -1,5 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
+import { AnimationCarouselOverlay, ButtonFullScreen } from 'macros';
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -14,6 +15,7 @@ type TypeDisplayLogic = {
   hasLeftButton: boolean;
   showMobileHint: boolean;
   showHint: boolean;
+  fullScreenCallback?: (index: number) => void;
 };
 
 type TypeDisplayLogicProps = Partial<TypeDisplayLogic>;
@@ -26,7 +28,7 @@ type TypeAnimationCarouselBlockProps = {
 };
 
 type TypeHelpers = {
-  displayLogic: Record<string, number | boolean>;
+  displayLogic: Record<string, any>;
   GetElements: {
     container: () => HTMLDivElement;
     slide: () => HTMLElement;
@@ -136,6 +138,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     GetSizes,
     SetLayout,
     isDirectionRight = true,
+    displayLogic,
   } = props;
   const carouselSlider = GetElements.slide();
   const slotContent = Array.from(
@@ -147,11 +150,35 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
   const count = GetViewOptions.showCount();
   const elementSize = slotContent[0]?.offsetWidth || 0;
   const carouselSize = GetSizes.carouselWidthBasedOnBlock({ count });
+  const { fullScreenCallback } = displayLogic;
 
   if (!elementSize) return;
 
   const elementSizeWithSpace = elementSize;
   const temporaryCarouselSize = carouselSize + elementSizeWithSpace;
+
+  const cloneReferenceEvents = ({
+    orginal,
+    clone,
+  }: {
+    orginal: HTMLElement;
+    clone: HTMLElement;
+  }) => {
+    const orginalFullScreen = orginal.querySelector(
+      `.${ButtonFullScreen.Elements.button}`,
+    );
+    const cloneFullScreen = clone.querySelector(
+      `.${ButtonFullScreen.Elements.button}`,
+    );
+
+    if (orginalFullScreen && cloneFullScreen) {
+      const indexAttr = orginalFullScreen.getAttribute('data-index');
+      const index = indexAttr ? parseInt(indexAttr) : 0;
+      cloneFullScreen.addEventListener('click', () =>
+        fullScreenCallback(index),
+      );
+    }
+  };
 
   const animateRight = () => {
     const firstElement = slotContent[0];
@@ -161,6 +188,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
 
     upcomingElement.style.display = 'block';
     carouselSlider.style.width = `${temporaryCarouselSize}px`;
+    cloneReferenceEvents({ orginal: firstElement, clone: clonedElement });
 
     if (hintElement && (isShowMobileHint || isShowHint)) {
       hintElement.style.display = 'block';
@@ -191,6 +219,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     carouselSlider.prepend(clonedElement);
     clonedElement.style.display = 'block';
     carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+    cloneReferenceEvents({ orginal: lastElement, clone: clonedElement });
 
     setTimeout(() => {
       carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
@@ -336,6 +365,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       hasLeftButton: true,
       showMobileHint: true,
       showHint: true,
+      fullScreenCallback: undefined,
     };
     let blockWidth = 0;
     let hasInteractionOccured = false;

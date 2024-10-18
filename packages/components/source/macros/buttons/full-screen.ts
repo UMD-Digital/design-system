@@ -47,6 +47,7 @@ const CreateFullScreenButton = ({
   (() => {
     const button = document.createElement('button');
     button.classList.add(ELEMENT_BUTTON);
+    button.setAttribute('data-index', index.toString());
     button.addEventListener('click', () => {
       callback(index);
     });

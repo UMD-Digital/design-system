@@ -162,6 +162,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
         desktopCount: 3,
         maxCount: 4,
         showHint: false,
+        fullScreenCallback: overlayCarousel.events.setFullScreen,
       },
     });
 

@@ -38,6 +38,8 @@ const TABLET = 750;
 const DESKTOP = 1000;
 const LARGE = 1300;
 
+const ANIMATION_DURATION = 500;
+
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
@@ -111,7 +113,7 @@ const ButtonStyles = `
     align-items: center;
     justify-content: center;
     background-color: ${Colors.gray.light};
-    transition: background-color .5s;
+    transition: background-color ${ANIMATION_DURATION}ms;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -330,6 +332,7 @@ const CreateBackButton = ({
   button.setAttribute('aria-label', 'see previous date');
 
   const clickEvent = () => {
+    if (button.hasAttribute('disabled')) return;
     SetCountBackward();
     SetButtonVisibility();
     SetSlideDatesBackwards();
@@ -355,6 +358,7 @@ const CreateForwardButton = ({
   button.setAttribute('aria-label', 'see next date');
 
   const clickEvent = () => {
+    if (button.hasAttribute('disabled')) return;
     SetCountForward();
     SetButtonVisibility();
     SetSlideDatesForward();
@@ -472,7 +476,7 @@ const ButtonVisibilityLogic = ({
 
     setTimeout(() => {
       button.removeAttribute('disabled');
-    }, 500);
+    }, ANIMATION_DURATION + 100);
   });
 
   if (currentPosition === 0) {

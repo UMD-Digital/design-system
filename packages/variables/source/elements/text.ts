@@ -96,6 +96,7 @@ const RichText = {
 };
 
 const RichTextDark = {
+  ...RichText,
   color: Colors.white,
 
   '& *': {

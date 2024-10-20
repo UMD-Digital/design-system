@@ -5,6 +5,7 @@ type TypeTabsProps = {
   tabsContainer: HTMLElement;
   theme?: string;
   shadowContent?: HTMLSlotElement;
+  topPosition?: string | null;
 };
 
 type TypeGetElements = {
@@ -102,10 +103,12 @@ const SetDisplay = ({
   GetElements,
   GetState,
   transition = true,
+  additionalSpread,
 }: {
   GetElements: TypeGetElements;
   GetState: TypeGetState;
   transition?: boolean;
+  additionalSpread?: number | null;
 }) => {
   const {
     getContainer,
@@ -177,9 +180,14 @@ const SetDisplay = ({
       activeContent.style.width = '100%';
 
       if (!isFlexLayout && transition) {
+        const convertedSpace = ConvertPixelStringToNumber(Spacing.md);
+        const spread = additionalSpread
+          ? convertedSpace + additionalSpread
+          : convertedSpace;
+
         ScrollTo({
           element: activeContent,
-          spread: ConvertPixelStringToNumber(Spacing.md),
+          spread,
         });
       }
     }
@@ -256,7 +264,7 @@ const SetDisplay = ({
 
 const CreateTabsElement = (props: TypeTabsProps) =>
   (() => {
-    const { theme, tabsContainer, shadowContent } = props;
+    const { theme, tabsContainer, shadowContent, topPosition } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const contentStrip = document.createElement('div');
@@ -264,6 +272,7 @@ const CreateTabsElement = (props: TypeTabsProps) =>
     const displayLine = document.createElement('span');
     const children = Array.from(tabsContainer.children);
     const buttons = Array.from(tabsContainer.querySelectorAll('button'));
+    const additionalSpread = topPosition ? parseInt(topPosition) : null;
     const contents = children.filter((child) =>
       buttons.find(
         (button) =>
@@ -289,7 +298,7 @@ const CreateTabsElement = (props: TypeTabsProps) =>
     const GetContext = { GetElements, GetState };
     const SetActiveTab = (index: number) => {
       activeTab = index;
-      SetDisplay({ ...GetContext });
+      SetDisplay({ ...GetContext, additionalSpread });
     };
     const SetDisplayLayout = () => {
       buttonWidths = buttons.reduce(

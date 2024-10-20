@@ -12,6 +12,7 @@ const { SlotOberserver, Node } = MarkupCreate;
 const ELEMENT_NAME = 'umd-element-tabs';
 const ATTRIBUTE_RESIZE = 'resize';
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_POSITION_TOP = 'position-top';
 const THEME_LIGHT = 'light';
 
 const SLOTS = { TABS: 'tabs' };
@@ -30,8 +31,11 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const topPosition = element.getAttribute(ATTRIBUTE_POSITION_TOP);
   const slot = Node.slot({ type: SLOTS.TABS });
   const markup = element.querySelector(`[slot="${SLOTS.TABS}"]`);
+
+  console.log(topPosition);
 
   const modifyDom = () => {
     if (!markup) return;
@@ -48,6 +52,7 @@ const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
       theme,
       tabsContainer: markup?.children[0] as HTMLElement,
       shadowContent: slot,
+      topPosition,
     });
 
     if (!tabsElement) return;

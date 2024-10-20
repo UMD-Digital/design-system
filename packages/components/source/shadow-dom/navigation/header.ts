@@ -13,6 +13,8 @@ const { SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-navigation-header';
 const ATTRIBUTE_SEARCH_URL = 'search-url';
+const ATTRIBUTE_CTA_URL = 'cta-url';
+const ATTRIBUTE_CTA_TEXT = 'cta-text';
 const ATTRIBUTE_STICKY = 'sticky';
 const SLOTS = {
   LOGO: 'logo',
@@ -48,6 +50,8 @@ const CreateHeader = ({
   ) as HTMLElement;
   const utilitySlot = Node.slot({ type: UTILITY });
   const searchUrl = element.getAttribute(ATTRIBUTE_SEARCH_URL);
+  const ctaUrl = element.getAttribute(ATTRIBUTE_CTA_URL);
+  const ctaText = element.getAttribute(ATTRIBUTE_CTA_TEXT);
 
   if (!logoSlot) {
     console.error('UMDHeaderElement: Logo slot is required');
@@ -59,6 +63,8 @@ const CreateHeader = ({
     utilityRow: utilitySlot,
     eventOpen,
     searchUrl,
+    ctaUrl,
+    ctaText,
   });
 
   return value;

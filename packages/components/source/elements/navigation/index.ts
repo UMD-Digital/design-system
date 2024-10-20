@@ -1,7 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { AssetIcon, Styles } from 'utilities';
 import MenuButton from './elements/menu-button';
-import { NavigationElements } from 'elements';
+import { NavigationElements, CallToAction } from 'elements';
 
 type TypeLogoRequirments = {
   logo?: HTMLElement | null;
@@ -12,10 +12,16 @@ type TypeSearchLink = {
   searchUrl: string | null;
 };
 
-type TypeNavRow = TypeSearchLink & {
-  navRow?: HTMLElement | null;
-  utilityRow?: HTMLElement | null;
+type TypeCtaLink = {
+  ctaUrl: string | null;
+  ctaText: string | null;
 };
+
+type TypeNavRow = TypeSearchLink &
+  TypeCtaLink & {
+    navRow?: HTMLElement | null;
+    utilityRow?: HTMLElement | null;
+  };
 
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
@@ -183,6 +189,7 @@ const STYLES_NAVIGATION_HEADER = `
   ${OverwriteStickyStyles}
   ${NavigationElements.Item.Styles}
   ${MenuButton.Styles}
+  ${CallToAction.Styles}
 `;
 
 const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
@@ -197,10 +204,24 @@ const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
   return searchLink;
 };
 
+const CreateCtaLink = ({ ctaUrl, ctaText }: TypeCtaLink) => {
+  if (!ctaUrl || !ctaText) return null;
+
+  const cta = document.createElement('a');
+
+  cta.innerHTML = ctaText;
+  cta.setAttribute('target', '_blank');
+  cta.setAttribute('href', ctaUrl);
+
+  return CallToAction.CreateElement({ cta });
+};
+
 const CreateNavigationColumn = ({
   navRow,
   utilityRow,
   searchUrl,
+  ctaText,
+  ctaUrl,
 }: TypeNavRow) => {
   if (!navRow) return null;
 
@@ -210,6 +231,7 @@ const CreateNavigationColumn = ({
   const searchLink = CreateSearchLink({
     searchUrl,
   });
+  const ctaLink = CreateCtaLink({ ctaText, ctaUrl });
 
   if (utilityRow) {
     utilityRowContainer.classList.add(ELEMENT_HEADER_UTILITY_ROW);
@@ -235,6 +257,7 @@ const CreateNavigationColumn = ({
   navRowContainer.classList.add(ELEMENT_HEADER_NAVIGATION_ROW);
   navRowContainer.append(...createdNavItems);
   if (searchLink) navRowContainer.appendChild(searchLink);
+  if (ctaLink) navRowContainer.appendChild(ctaLink);
 
   navColumnContainer.classList.add(ELEMENT_HEADER_NAVIGATION_COLUMN);
   navColumnContainer.appendChild(navRowContainer);

@@ -186,10 +186,10 @@ const OverwriteTextContainerStyles = `
       [`${OVERWRITE_TEXT_RICHTEXT} *`]: SansLarger,
     },
   })}
-
-  ${ConvertJSSObjectToStyles({
+  
+    ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_RICHTEXT}`]: SansLarger,
+      [`.${OVERWRITE_TEXT_RICHTEXT}`]: SansLarger,
     },
   })}
 `;

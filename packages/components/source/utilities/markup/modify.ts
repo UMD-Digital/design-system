@@ -48,13 +48,13 @@ const TruncateText = ({
   maxTextSize: number;
 }) => {
   const wrapper = document.createElement('div');
-  const textLength = text.split(/[\s,\t,\n]+/).join(' ').length;
 
   wrapper.innerHTML = text;
 
   let textContent = wrapper.textContent || wrapper.innerText;
+  let textContentTrimmed = textContent.trim();
 
-  textContent = textContent.slice(0, maxTextSize);
+  textContent = textContentTrimmed.slice(0, maxTextSize);
 
   const walkAndReplace = (node: any) => {
     if (node.nodeType === Node.TEXT_NODE) {
@@ -69,12 +69,16 @@ const TruncateText = ({
 
   walkAndReplace(wrapper);
 
-  if (textLength >= maxTextSize) {
+  if (textContentTrimmed.length >= maxTextSize) {
     const lastChild = wrapper.children[
       wrapper.children.length - 1
     ] as HTMLElement;
 
-    if (lastChild) lastChild.innerHTML = lastChild.innerHTML + ' ...';
+    if (lastChild) {
+      lastChild.innerHTML = lastChild.innerHTML + ' ...';
+    } else {
+      wrapper.innerHTML += ' ...';
+    }
   }
 
   return wrapper.innerHTML;

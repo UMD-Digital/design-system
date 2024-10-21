@@ -28,6 +28,7 @@ import NavigationUtility from './navigation/utility';
 import HeroBrandVideo from './hero/brand-video';
 import HeroDefault from './hero/default';
 import HeroElements from './hero/elements';
+import HeroExpand from './hero/expand';
 import HeroMinimal from './hero/minimal';
 import HeroOverlay from './hero/overlay';
 import HeroLogo from './hero/logo';
@@ -91,6 +92,7 @@ export {
   HeroBrandVideo,
   HeroDefault,
   HeroElements,
+  HeroExpand,
   HeroMinimal,
   HeroOverlay,
   HeroLogo,

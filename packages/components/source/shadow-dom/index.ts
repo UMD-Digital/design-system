@@ -26,6 +26,7 @@ import Footer from './footer';
 import Hero from './hero/default';
 import HeroBrandVideo from './hero/brand/video';
 import HeroLogo from './hero/logo';
+import HeroExpand from './hero/expand';
 import HeroMinimal from './hero/minimal';
 import ImageExpand from './image-expand';
 import Logo from './logo';
@@ -80,6 +81,7 @@ export {
   Footer,
   Hero,
   HeroBrandVideo,
+  HeroExpand,
   HeroLogo,
   HeroMinimal,
   ImageExpand,

@@ -1,7 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { AssetIcon, Styles } from 'utilities';
 import MenuButton from './elements/menu-button';
-import { NavigationElements, CallToAction } from 'elements';
+import { NavigationElements } from 'elements';
 
 type TypeLogoRequirments = {
   logo?: HTMLElement | null;
@@ -25,7 +25,7 @@ type TypeNavRow = TypeSearchLink &
 
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
-const { Colors, Spacing, Breakpoints } = Tokens;
+const { Colors, Spacing, Breakpoints, FontWeight, FontSize } = Tokens;
 const { SansLarger, SansExtraLarge } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 const ANIMATION_TIME = 500;
@@ -41,6 +41,7 @@ const ELEMENT_HEADER_LOGO_COLUMN = 'element-header-logo-column';
 const ELEMENT_HEADER_NAVIGATION_COLUMN = 'element-header-navigation-column';
 const ELEMENT_HEADER_LOGO = 'element-header-logo';
 const ELEMENT_HEADER_MENU_BUTTON = 'element-header-menu-button';
+const ELEMENT_HEADER_MENU_CTA = 'element-header-menu-cta';
 const ELEMENT_HEADER_NAVIGATION_ROW = 'element-header-navigation-row';
 const ELEMENT_HEADER_UTILITY_ROW = 'element-header-utility-row';
 
@@ -61,11 +62,23 @@ const OverwriteStickyStyles = `
   }
 `;
 
-const NavigationColumnStyles = `
-  .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
-
+const CtaStyles = `
+  .${ELEMENT_HEADER_MENU_CTA} {
+    color: ${Colors.white};
+    font-weight: ${FontWeight.bold};
+    font-size: ${FontSize.sm};
+    padding: ${Spacing.xs};
+    background-color: ${Colors.red};
+    transition: background .5s;
   }
 
+  .${ELEMENT_HEADER_MENU_CTA}:hover,
+  .${ELEMENT_HEADER_MENU_CTA}:focus {
+    background-color: ${Colors.redDark};
+  }
+`;
+
+const NavigationColumnStyles = `
   @media (max-width: ${Breakpoints.tablet.max}) {
     .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
       display: none;
@@ -186,10 +199,10 @@ const STYLES_NAVIGATION_HEADER = `
   ${WrapperStyles}
   ${LogoColumnStyles}
   ${NavigationColumnStyles}
+  ${CtaStyles}
   ${OverwriteStickyStyles}
   ${NavigationElements.Item.Styles}
   ${MenuButton.Styles}
-  ${CallToAction.Styles}
 `;
 
 const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
@@ -212,8 +225,9 @@ const CreateCtaLink = ({ ctaUrl, ctaText }: TypeCtaLink) => {
   cta.innerHTML = ctaText;
   cta.setAttribute('target', '_blank');
   cta.setAttribute('href', ctaUrl);
+  cta.classList.add(ELEMENT_HEADER_MENU_CTA);
 
-  return CallToAction.CreateElement({ cta });
+  return cta;
 };
 
 const CreateNavigationColumn = ({

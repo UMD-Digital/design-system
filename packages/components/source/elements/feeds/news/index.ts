@@ -49,7 +49,7 @@ const STYLES_FEED_NEWS_ELEMENT = `
 const NoResultsContent = {
   message: 'No results found',
   linkUrl: 'https://today.umd.edu',
-  linkText: 'View All Articles',
+  linkText: 'View all articles',
 };
 
 const MakeApiVariables = ({

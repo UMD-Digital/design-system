@@ -36,7 +36,7 @@ const CreateLazyLoadButton = ({ callback, theme }: LazyLoadCreate) => {
     theme,
   });
 
-  button.innerHTML = 'Load More';
+  button.innerHTML = 'Load more';
   button.addEventListener('click', callback);
 
   container.classList.add(ID_LAZY_LOAD_BUTTON);

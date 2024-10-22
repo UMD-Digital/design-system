@@ -25,7 +25,7 @@ const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
 const NoResultsContent = {
   message: 'Error fetching events. Please visit the main site.',
   linkUrl: 'https://calendar.umd.edu',
-  linkText: 'View All Events',
+  linkText: 'View all events',
 };
 
 const FetchFeed = async ({

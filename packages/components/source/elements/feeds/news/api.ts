@@ -25,7 +25,7 @@ const TODAY_PRODUCTION_URL = 'https://today.umd.edu/graphql';
 const NoResultsContent = {
   message: 'Error fetching articles. Please visit the main site.',
   linkUrl: 'https://today.umd.edu',
-  linkText: 'View All Articles',
+  linkText: 'View all articles',
 };
 
 const FetchFeed = async ({

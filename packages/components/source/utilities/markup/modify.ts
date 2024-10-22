@@ -65,7 +65,7 @@ const TruncateText = ({
       let newText = textContent.slice(0, node.nodeValue.length);
       textContent = textContent.slice(node.nodeValue.length);
 
-      node.nodeValue = `${newText.trimStart()}`;
+      node.nodeValue = `${newText.trimStart()} `;
     } else {
       node.childNodes.forEach(walkAndReplace);
     }

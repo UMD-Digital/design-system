@@ -32,8 +32,8 @@ const LinkStyles = `
     transition: color 0.3s ease-in-out;
   }
 
-  .${ELEMENT_SLIDE_ACTION_LINK}:hover,
-  .${ELEMENT_SLIDE_ACTION_LINK}:focus {
+  a.${ELEMENT_SLIDE_ACTION_LINK}:hover,
+  a.${ELEMENT_SLIDE_ACTION_LINK}:focus {
     color: ${Colors.red};
   }
 `;

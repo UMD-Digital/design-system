@@ -177,7 +177,7 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
     ? Array.from(primarySlideLinks.querySelectorAll('a'))
     : [];
   const secondaryLinks = primarySlidesSecondaryLinks
-    ? Array.from(primarySlidesSecondaryLinks.querySelectorAll('a'))
+    ? Array.from(primarySlidesSecondaryLinks.querySelectorAll(':scope > *'))
     : [];
   const childLinks = Array.from(
     childrenSlides.querySelectorAll(`[${ATTRIBUTE_CHILD_REF}]`),

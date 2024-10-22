@@ -108,14 +108,14 @@ const createSecondaryLinks = (props: TypeFirstSlideProps) => {
 
   if (!primarySlidesSecondaryLinks) return null;
 
-  const links = Array.from(
-    primarySlidesSecondaryLinks.querySelectorAll('a'),
+  const elements = Array.from(
+    primarySlidesSecondaryLinks.querySelectorAll(':scope > *'),
   ) as HTMLAnchorElement[];
 
-  if (links.length > 0) {
+  if (elements.length > 0) {
     container.classList.add(ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER);
 
-    links.forEach((link) =>
+    elements.forEach((link) =>
       container.appendChild(SlideAction.CreateElement({ ...props, link })),
     );
 

@@ -145,18 +145,6 @@ const TextStyles = `
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: SansLarger,
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: SansLarger,
-    },
-  })}
-
   .${ELEMENT_TEXT_CONTAINER_RICH_TEXT},
   .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} * {
     line-height: 1.5em;

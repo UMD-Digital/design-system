@@ -186,6 +186,12 @@ const OverwriteTextContainerStyles = `
       [`${OVERWRITE_TEXT_RICHTEXT} *`]: SansLarger,
     },
   })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_TEXT_RICHTEXT}`]: SansLarger,
+    },
+  })}
 `;
 
 const LockStyles = `

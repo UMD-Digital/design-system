@@ -60,8 +60,8 @@ const TextAnimation = `
       .${ELEMENT_EXPAND_TEXT_ANIMATION} {
         position: absolute;
         top: 0;
-        height: 100vh;
-        transform: translateY(200vh);
+        height: 80vh;
+        transform: translateY(100vh);
       }
     }
   }
@@ -207,7 +207,7 @@ const STYLES_LAYOUT_IMAGE_EXPAND = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPLAND_DECLARATION} {
-        height: 300vh;
+        height: 200vh;
       }
     }
   }
@@ -275,7 +275,7 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
 
   if (IsScreenZoomed() && !IsPrefferdReducedMotion()) {
     textContainer.style.height = '90vh';
-    textContainer.style.transform = 'translateY(120vh)';
+    textContainer.style.transform = 'translateY(0)';
   }
 
   container.appendChild(imageContainer);

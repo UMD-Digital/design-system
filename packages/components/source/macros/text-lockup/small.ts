@@ -60,13 +60,13 @@ const DarkThemeStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK_RICH_TEXT}`]: Text.RichTextDark,
+      [`${IS_THEME_DARK_RICH_TEXT}`]: Text.RichTextDarkAnimations,
     },
   })}
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK_RICH_TEXT} *`]: Text.RichTextDark,
+      [`${IS_THEME_DARK_RICH_TEXT} *`]: Text.RichTextDarkAnimations,
     },
   })}
 `

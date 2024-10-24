@@ -95,8 +95,7 @@ const RichText = {
   ...Lists.Unordered,
 };
 
-const RichTextDark = {
-  ...RichText,
+const RichTextDarkAnimations = {
   color: Colors.white,
 
   '& *': {
@@ -108,4 +107,15 @@ const RichTextDark = {
   },
 };
 
-export default { Simple, SimpleLarge, RichText, RichTextDark };
+const RichTextDark = {
+  ...RichText,
+  ...RichTextDarkAnimations,
+};
+
+export default {
+  Simple,
+  SimpleLarge,
+  RichText,
+  RichTextDarkAnimations,
+  RichTextDark,
+};

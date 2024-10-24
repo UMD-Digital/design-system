@@ -13,6 +13,7 @@ type TypePrimaryLinkRequirements = {
 
 type TypeDropdownProps = {
   dropdownLinksContainer?: HTMLElement | null;
+  dropdownCalloutsSlot?: HTMLElement | null;
 };
 
 type TypePrimaryLinkButtonProps = {
@@ -52,7 +53,8 @@ const ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON = `nav-item-primary-link-button`;
 
 const ELEMENT_DROPDOWN_CONTAINER = `nav-item-dropdown-container`;
 const ELEMENT_DROPDOWN_LIST_CONTAINER = 'nav-item-dropdown-list';
-const ELEMENT_DROPDOWN_TWO_COLUMN = 'nav-item-dropdown-two-column';
+const ELEMENT_DROPDOWN_MULTIPLE_COLUMN = 'nav-item-dropdown-multiple-column';
+const ELEMENT_DROPDOWN_CTA_COLUMN = 'nav-item-dropdown-cta-column';
 
 const IS_SELECTED = `[${ATTRIBUTE_SELECTED}]`;
 const IS_SHOWING = `[${ATTRIBUTE_SHOWING}]`;
@@ -126,21 +128,27 @@ const PrimaryStyles = `
     transform: rotate(0deg) translateY(0);
     transition: fill .5s,transform .5s;
   }
-
 `;
 
 // prettier-ignore
-const DropdownColumnStyles = `
-  .${ELEMENT_DROPDOWN_TWO_COLUMN} {
+const DropdownCtaStyles = `
+  .${ELEMENT_DROPDOWN_CTA_COLUMN} > * {
+
+  }
+`;
+
+// prettier-ignore
+const DropdownMultipleColumnStyles = `
+  .${ELEMENT_DROPDOWN_MULTIPLE_COLUMN} {
     display: flex;
     justify-content: space-between;
   }
 
-  .${ELEMENT_DROPDOWN_TWO_COLUMN} > * {
+  .${ELEMENT_DROPDOWN_MULTIPLE_COLUMN} > * {
     min-width: 232px;
   }
 
-  .${ELEMENT_DROPDOWN_TWO_COLUMN} > *:last-child {
+  .${ELEMENT_DROPDOWN_MULTIPLE_COLUMN} > *:not(:first-child) {
     margin-left: 40px;
   }
 `
@@ -230,13 +238,13 @@ const STYLES_NAV_ITEM_ELEMENT = `
 
   ${PrimaryStyles}
   ${DropdownStyles}
-  ${DropdownColumnStyles}
+  ${DropdownMultipleColumnStyles}
   ${DropdownListStyles}
+  ${DropdownCtaStyles}
   ${OverwriteDropdownStyles}
 `;
 
 const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
-  const container = document.createElement('div');
   const column1 = document.createElement('div');
   const column2 = document.createElement('div');
   const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
@@ -250,12 +258,7 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
     column2.appendChild(link);
   });
 
-  container.classList.add(ELEMENT_DROPDOWN_TWO_COLUMN);
-
-  container.appendChild(column1);
-  container.appendChild(column2);
-
-  return container;
+  return [column1, column2];
 };
 
 const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
@@ -268,7 +271,10 @@ const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   return container;
 };
 
-const CreateDropdown = ({ dropdownLinksContainer }: TypeDropdownProps) => {
+const CreateDropdown = ({
+  dropdownLinksContainer,
+  dropdownCalloutsSlot,
+}: TypeDropdownProps) => {
   if (!dropdownLinksContainer) return;
 
   const links = Array.from(
@@ -276,18 +282,34 @@ const CreateDropdown = ({ dropdownLinksContainer }: TypeDropdownProps) => {
   ) as HTMLAnchorElement[];
 
   const container = document.createElement('div');
-  const list = document.createElement('div');
+  const wrapper = document.createElement('div');
 
-  list.classList.add(ELEMENT_DROPDOWN_LIST_CONTAINER);
+  wrapper.classList.add(ELEMENT_DROPDOWN_LIST_CONTAINER);
   container.classList.add(ELEMENT_DROPDOWN_CONTAINER);
 
   if (links.length > MAX_COLUMN_ITEMS) {
-    list.appendChild(CreateMultipleColumns({ links }));
+    const columns = CreateMultipleColumns({ links });
+    columns.forEach((column) => {
+      wrapper.appendChild(column);
+    });
+    wrapper.classList.add(ELEMENT_DROPDOWN_MULTIPLE_COLUMN);
   } else {
-    list.appendChild(CreateSingleColumn({ links }));
+    wrapper.appendChild(CreateSingleColumn({ links }));
+
+    if (dropdownCalloutsSlot) {
+      wrapper.classList.add(ELEMENT_DROPDOWN_MULTIPLE_COLUMN);
+    }
   }
 
-  container.appendChild(list);
+  if (dropdownCalloutsSlot) {
+    const dropdownWrapper = document.createElement('div');
+
+    dropdownWrapper.classList.add(ELEMENT_DROPDOWN_CTA_COLUMN);
+    dropdownWrapper.appendChild(dropdownCalloutsSlot);
+    wrapper.appendChild(dropdownWrapper);
+  }
+
+  container.appendChild(wrapper);
 
   return container;
 };
@@ -388,7 +410,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
         dropdownContainer.style.transform = 'translateX(0)';
       }
 
-      if (window.innerWidth - (elementBounds.right + width) < BOUNDS_SHIFT) {
+      if (window.innerWidth - elementBounds.right < size / 2) {
         dropdownContainer.style.right = '0';
         dropdownContainer.style.left = 'inherit';
         dropdownContainer.style.transform = 'translateX(0)';

@@ -7,9 +7,12 @@ declare global {
 import { MarkupCreate, Styles } from 'utilities';
 import { NavigationElements } from 'elements';
 
+const { SlotWithDefaultStyling, Node } = MarkupCreate;
+
 const SLOTS = {
   PRIMARY_LINK: 'primary-link',
   DROPDOWN_LINKS: 'dropdown-links',
+  DROPDOWN_CALLOUT: 'dropdown-callout',
 };
 
 const ELEMENT_NAME = 'umd-element-nav-item';
@@ -28,7 +31,7 @@ class UMDNavItemElement extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
+    const template = Node.stylesTemplate({ styles });
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));
@@ -42,6 +45,10 @@ class UMDNavItemElement extends HTMLElement {
     const dropdownLinksSlot = element.querySelector(
       '[slot="dropdown-links"]',
     ) as HTMLElement;
+    const dropdownCalloutsSlot = SlotWithDefaultStyling({
+      element,
+      slotRef: SLOTS.DROPDOWN_CALLOUT,
+    });
     const dropdownLinksContainer = dropdownLinksSlot
       ? (dropdownLinksSlot.cloneNode(true) as HTMLElement)
       : null;
@@ -53,6 +60,7 @@ class UMDNavItemElement extends HTMLElement {
     const navItem = NavigationElements.Item.CreateElement({
       primaryLinkContainer,
       dropdownLinksContainer,
+      dropdownCalloutsSlot,
     });
 
     element._shadow.appendChild(navItem);

@@ -4,7 +4,7 @@ import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 import { AssetIcon, MarkupCreate } from 'utilities';
 
 type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
-  image: HTMLImageElement | null;
+  image: HTMLImageElement | HTMLAnchorElement | null;
   headline: HTMLElement | null;
   text: HTMLElement | null;
   eyebrow?: HTMLElement | null;

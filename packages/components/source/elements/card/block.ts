@@ -7,7 +7,7 @@ type TypeBlockCardProps = {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  image?: HTMLImageElement | null;
+  image?: HTMLImageElement | HTMLAnchorElement | null;
   isAligned?: boolean;
   isBordered?: boolean;
   theme?: string | null;
@@ -38,6 +38,7 @@ const CreateCardBlockElement = (props: TypeBlockCardProps) => {
     isBordered = false,
     isTransparent,
   } = props;
+
   const textContainer = TextLockupSmallScaling.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;

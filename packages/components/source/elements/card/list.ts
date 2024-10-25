@@ -7,7 +7,7 @@ type TypeListCardProps = {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  image?: HTMLImageElement | null;
+  image?: HTMLImageElement | HTMLAnchorElement | null;
   isAligned?: boolean;
   theme?: string | null;
 };

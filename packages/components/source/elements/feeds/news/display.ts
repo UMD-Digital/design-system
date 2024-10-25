@@ -25,15 +25,26 @@ const STYLES_NEWS_FEED = `
   ${CardOverlayImage.Styles}
 `;
 
-const CreateImage = ({ images }: { images: ImageType }) => {
-  if (images.length > 0) {
-    const image = document.createElement('img');
-    image.src = images[0].url;
-    image.alt = images[0].altText;
-    return image;
+const CreateImage = ({ images, url }: { images: ImageType; url?: string }) => {
+  if (!images || !Array.isArray(images) || images.length === 0) return null;
+
+  const image = images[0];
+  const imageElement = document.createElement('img');
+  imageElement.src = image.url;
+  imageElement.alt = image.altText;
+
+  if (url) {
+    const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', url);
+    link.setAttribute('aria-label', 'Maryland Today Article');
+
+    link.appendChild(imageElement);
+
+    return link;
   }
 
-  return null;
+  return imageElement;
 };
 
 const CreateText = ({ text }: { text: string }) => {
@@ -90,7 +101,7 @@ const CommonDisplay = ({
   theme?: string | null;
 }) => ({
   id: entry.id.toString(),
-  image: CreateImage({ images: entry.image }),
+
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),
   date: CreateDate({
@@ -115,12 +126,33 @@ const CreateNewsFeedDisplay = ({
   theme?: string | null;
   isTransparent?: boolean;
 }) => {
+  const standardCardType = ({ entry }: { entry: ArticleType }) =>
+    CardBlock.CreateElement({
+      ...CommonDisplay({ entry, theme }),
+      image: CreateImage({ images: entry.image, url: entry.url }),
+      isAligned: false,
+      isTransparent,
+    });
+
+  const overlayCardType = ({ entry }: { entry: ArticleType }) =>
+    CardOverlayImage.CreateElement({
+      ...CommonDisplay({ entry, theme }),
+      image: CreateImage({ images: entry.image }),
+    });
+
+  const listCardType = ({ entry }: { entry: ArticleType }) =>
+    CardList.CreateElement({
+      ...CommonDisplay({ entry, theme }),
+      image: CreateImage({ images: entry.image, url: entry.url }),
+    });
+
   if (isTypeFeatured) {
     if (entries.length >= 3) {
       const entriesCopy = entries.slice(0, 3);
 
       const overlayCard = CardOverlayImage.CreateElement({
         ...CommonDisplay({ entry: entriesCopy[0], theme }),
+        image: CreateImage({ images: entriesCopy[0].image }),
       });
 
       if (overlayCard) {
@@ -131,50 +163,26 @@ const CreateNewsFeedDisplay = ({
       entriesCopy.shift();
 
       const standardCards = entriesCopy.map((entry) =>
-        CardBlock.CreateElement({
-          ...CommonDisplay({ entry, theme }),
-          isAligned: false,
-          isTransparent,
-        }),
+        standardCardType({ entry }),
       );
 
       return [overlayCard, ...standardCards];
     } else {
-      return entries.map((entry) =>
-        CardBlock.CreateElement({
-          ...CommonDisplay({ entry, theme }),
-          isAligned: false,
-          isTransparent,
-        }),
-      );
+      return entries.map((entry) => standardCardType({ entry }));
     }
   }
 
   if (isTypeGrid) {
-    return entries.map((entry) =>
-      CardBlock.CreateElement({
-        ...CommonDisplay({ entry, theme }),
-        isAligned: false,
-        isTransparent,
-      }),
-    );
+    return entries.map((entry) => standardCardType({ entry }));
   }
 
   if (isTypeOverlay) {
     return entries
-      .map((entry) =>
-        CardOverlayImage.CreateElement({
-          ...CommonDisplay({ entry, theme }),
-        }),
-      )
+      .map((entry) => overlayCardType({ entry }))
       .filter((entry) => entry);
   }
 
-  return entries.map((entry) =>
-    CardList.CreateElement({
-      ...CommonDisplay({ entry, theme }),
-    }),
-  );
+  return entries.map((entry) => listCardType({ entry }));
 };
 
 export default {

@@ -8,6 +8,7 @@ export type TypeSlideProps = TypeActionProps &
     ATTRIBUTE_DATA_SLIDE: string;
     ATTRIBUTE_ACTIVE_SLIDE: string;
     childrenSlides?: HTMLElement | null;
+    childrenSlideContent?: HTMLSlotElement[];
     primarySlideLinks?: HTMLElement | null;
     primarySlidesSecondaryLinks?: HTMLElement | null;
     eventSlideRight: () => void;
@@ -32,8 +33,17 @@ const { ConvertJSSObjectToStyles } = Styles;
 const { CleanCopy } = MarkupModify;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
+const ELEMENT_NAV_SLIDE_WRAPPER = 'nav-slide-wrapper';
 const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
 const ELEMENT_NAV_SLIDE_BACK_BUTTON = 'nav-slide-action-back-button';
+const ELEMENT_NAV_SLIDE_CONTENT = 'nav-slide-action-content';
+
+// prettier-ignore
+const ContentStyles = `
+  * + .${ELEMENT_NAV_SLIDE_CONTENT} {
+    margin-top: ${Spacing.lg};
+  }
+`;
 
 // prettier-ignore
 const BackButtonStyles = `
@@ -93,6 +103,7 @@ const HeadlineStyles = `
 const STYLES_NAV_SLIDES = `
   ${BackButtonStyles}
   ${HeadlineStyles}
+  ${ContentStyles}
   ${SlideAction.Styles}
   ${FirstSlide.Styles}
 `;
@@ -157,6 +168,7 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
     slider,
     setCurrentSlide,
     childrenSlides,
+    childrenSlideContent,
     primarySlideLinks,
     primarySlidesSecondaryLinks,
     ATTRIBUTE_PARENT_REF,
@@ -189,7 +201,9 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
   ] as HTMLAnchorElement[];
 
   slides.forEach((slide, i) => {
+    const contentRef = slide.getAttribute('content-slot');
     const sliderContainer = document.createElement('div');
+    const sliderWrapper = document.createElement('div');
     const isSlideActive = slide.hasAttribute(ATTRIBUTE_ACTIVE_SLIDE);
     const parentRef = slide.getAttribute(ATTRIBUTE_PARENT_REF) as string;
     const parentElement = parentOptions.find(
@@ -216,9 +230,27 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
     sliderContainer.classList.add(ELEMENT_NAV_SLIDE_CONTAINER);
     sliderContainer.setAttribute(`${ATTRIBUTE_PARENT_REF}`, `${parentRef}`);
 
-    if (slideBackButton) sliderContainer.appendChild(slideBackButton);
-    sliderContainer.appendChild(slideHeadline);
-    sliderContainer.appendChild(slideActions);
+    if (slideBackButton) sliderWrapper.appendChild(slideBackButton);
+    sliderWrapper.appendChild(slideHeadline);
+    sliderWrapper.appendChild(slideActions);
+
+    sliderWrapper.classList.add(ELEMENT_NAV_SLIDE_WRAPPER);
+    sliderContainer.appendChild(sliderWrapper);
+
+    if (contentRef) {
+      const additionalContent = childrenSlideContent?.find(
+        (element) => element.getAttribute('name') === contentRef,
+      );
+
+      if (additionalContent) {
+        const contentContainer = document.createElement('div');
+
+        contentContainer.appendChild(additionalContent);
+        contentContainer.classList.add(ELEMENT_NAV_SLIDE_CONTENT);
+
+        sliderContainer.appendChild(contentContainer);
+      }
+    }
 
     slider.appendChild(sliderContainer);
 
@@ -234,6 +266,8 @@ export default {
   CreateElement: CreateNavSlides,
   Styles: STYLES_NAV_SLIDES,
   Elements: {
+    container: ELEMENT_NAV_SLIDE_CONTAINER,
+    wrapper: ELEMENT_NAV_SLIDE_WRAPPER,
     headline: ELEMENT_NAV_SLIDE_HEADLINE,
   },
 };

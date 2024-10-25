@@ -11,6 +11,7 @@ export type TypeNavSliderRequirements = {
   primarySlidesSecondaryLinks?: HTMLElement | null;
   primarySlideContent?: HTMLElement | null;
   childrenSlides?: HTMLElement | null;
+  childrenSlideContent?: HTMLSlotElement[];
   displayType?: string;
 };
 
@@ -39,6 +40,7 @@ const IS_DISPLAY_INTERIOR = `[${ATTRIBUTE_DISPLAY_TYPE}=${DISPLAY_TYPE_INTERIOR_
 
 const OVERWRITE_DISPLAY_DRAWER_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER}`;
 const OVERWRITE_DISPLAY_DRAWER_DECORATION = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER} .${ELEMENT_SLIDER_DECORATIVE_LINE}`;
+const OVERWRITE_DISPLAY_DRAWER_SLIDE_WRAPPER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER} .${Slides.Elements.wrapper}`;
 const OVERWRITE_DISPLAY_DRAWER_ACTION_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_DRAWER} .${SlideAction.Elements.container}`;
 
 const OVERWRITE_DISPLAY_INTERIOR_ACTION_CONTAINER = `.${ELEMENT_NAVIGATION_SLIDER_CONTAINER}${IS_DISPLAY_INTERIOR} .${SlideAction.Elements.container}`;
@@ -49,10 +51,14 @@ const OVERWRITE_DISPLAY_INTERIOR_HEADLINE = `.${ELEMENT_NAVIGATION_SLIDER_CONTAI
 const OverwriteDisplayDrawer = `
   ${OVERWRITE_DISPLAY_DRAWER_CONTAINER} {
     background-color: ${Colors.white};
-    padding: ${Spacing['2xl']} ${Spacing.md};
+    padding: ${Spacing['2xl']} 0;
     width: calc(100vw - ${Spacing['8xl']});
     max-width: 400px;
     min-width: 227px;
+  }
+
+  ${OVERWRITE_DISPLAY_DRAWER_SLIDE_WRAPPER} {
+    padding: 0 ${Spacing.md};
   }
 
   ${OVERWRITE_DISPLAY_DRAWER_DECORATION} {
@@ -62,8 +68,6 @@ const OverwriteDisplayDrawer = `
   ${OVERWRITE_DISPLAY_DRAWER_ACTION_CONTAINER} {
     padding-left: ${Spacing.sm};
   }
-
-
 `;
 
 // prettier-ignore

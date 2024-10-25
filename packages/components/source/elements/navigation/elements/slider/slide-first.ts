@@ -1,5 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
+import Slides from './slides';
 import SlideAction, { TypeActionProps } from './action';
 
 export type TypeFirstSlideProps = TypeActionProps & {
@@ -145,6 +146,7 @@ const CreateSlideFirstElement = (props: TypeFirstSlide) => {
     isContextMenu,
   } = props;
   const sliderContainer = document.createElement('div');
+  const wrapper = document.createElement('div');
   const primarlyLinkContent = createPrimaryLinks(props);
   const secondaryLinkContent = createSecondaryLinks(props);
   const additionalContent = createAdditonalContent(props);
@@ -157,9 +159,12 @@ const CreateSlideFirstElement = (props: TypeFirstSlide) => {
     setCurrentSlide({ element: sliderContainer });
   }
 
-  if (primarlyLinkContent) sliderContainer.appendChild(primarlyLinkContent);
-  if (secondaryLinkContent) sliderContainer.appendChild(secondaryLinkContent);
-  if (additionalContent) sliderContainer.appendChild(additionalContent);
+  if (primarlyLinkContent) wrapper.appendChild(primarlyLinkContent);
+  if (secondaryLinkContent) wrapper.appendChild(secondaryLinkContent);
+  if (additionalContent) wrapper.appendChild(additionalContent);
+
+  wrapper.classList.add(Slides.Elements.wrapper);
+  sliderContainer.appendChild(wrapper);
 
   return sliderContainer;
 };

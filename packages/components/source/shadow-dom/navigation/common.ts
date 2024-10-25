@@ -3,11 +3,15 @@ import { NavigationElements } from 'elements';
 
 const { Node } = MarkupCreate;
 
-export const SLOTS = {
+const DRAWER_SLOTS = {
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',
   PRIMARY_SLIDE_SECONDARY_LINKS: 'primary-slide-secondary-links',
   PRIMARY_SLIDE_CONTENT: 'primary-slide-content',
   CHILDREN_SLIDES: 'children-slides',
+};
+
+export const SLOTS = {
+  ...DRAWER_SLOTS,
 };
 
 type TypeSliderRequirements = {
@@ -29,18 +33,27 @@ export const MakeSliderData = ({
   PRIMARY_SLIDE_SECONDARY_LINKS,
   CHILDREN_SLIDES,
 }: TypeSliderRequirements) => {
-  const primarySlideSlot = element.querySelector(
-    `[slot="${PRIMARY_SLIDE_CONTENT}"]`,
+  const allSlots = Array.from(element.querySelectorAll(':scope > [slot]'));
+
+  const primarySlideSlot = allSlots.find(
+    (slot) => slot.getAttribute('slot') === PRIMARY_SLIDE_CONTENT,
   ) as HTMLSlotElement;
-  const primarySlideLinksSlot = element.querySelector(
-    `[slot="${PRIMARY_SLIDE_LINKS}"]`,
+  const primarySlideLinksSlot = allSlots.find(
+    (slot) => slot.getAttribute('slot') === PRIMARY_SLIDE_LINKS,
   ) as HTMLSlotElement;
-  const primarySlidesSecondaryLinksSlot = element.querySelector(
-    `[slot="${PRIMARY_SLIDE_SECONDARY_LINKS}"]`,
+  const primarySlidesSecondaryLinksSlot = allSlots.find(
+    (slot) => slot.getAttribute('slot') === PRIMARY_SLIDE_SECONDARY_LINKS,
   ) as HTMLSlotElement;
-  const childrenSlidesSlot = element.querySelector(
-    `[slot="${CHILDREN_SLIDES}"]`,
+  const childrenSlidesSlot = allSlots.find(
+    (slot) => slot.getAttribute('slot') === CHILDREN_SLIDES,
   ) as HTMLSlotElement;
+
+  const childrenSlotContent = allSlots.filter((element) => {
+    return !Object.values(DRAWER_SLOTS).find(
+      (value) => value == element.getAttribute('slot'),
+    );
+  });
+
   const hasPrimarySlideContent =
     primarySlideSlot && primarySlideSlot.children.length > 0;
   const primarySlideContent = hasPrimarySlideContent
@@ -48,9 +61,11 @@ export const MakeSliderData = ({
         type: PRIMARY_SLIDE_CONTENT,
       })
     : null;
+
   let primarySlideLinks;
   let primarySlidesSecondaryLinks;
   let childrenSlides;
+  let childrenSlideContent: Array<HTMLSlotElement> = [];
 
   if (primarySlideLinksSlot) {
     primarySlideLinks = primarySlideLinksSlot.cloneNode(true) as HTMLElement;
@@ -66,11 +81,25 @@ export const MakeSliderData = ({
     childrenSlides = childrenSlidesSlot.cloneNode(true) as HTMLElement;
   }
 
+  if (childrenSlotContent) {
+    childrenSlotContent.forEach((element) => {
+      const type = element.getAttribute('slot');
+      if (type) {
+        const reference = Node.slot({
+          type,
+        });
+
+        childrenSlideContent.push(reference);
+      }
+    });
+  }
+
   return {
     primarySlideLinks,
     primarySlidesSecondaryLinks,
     childrenSlides,
     primarySlideContent,
+    childrenSlideContent,
   };
 };
 

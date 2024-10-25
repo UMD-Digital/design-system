@@ -50,6 +50,17 @@ const CreateNavStickyElement = ({
         if (headerElement) {
           headerElement.removeAttribute('sticky');
           elementWrapper.classList.remove(ELEMENT_NAV_STIKCY_WRAPPER_FIXED);
+
+          if (hasIncorrectHeight) {
+            setTimeout(() => {
+              eventResize();
+            }, 200);
+            setTimeout(() => {
+              eventResize();
+              console.log('called');
+            }, 500);
+            hasIncorrectHeight = false;
+          }
         }
       }
     };
@@ -61,6 +72,7 @@ const CreateNavStickyElement = ({
         elementContainer.style.height = `${wrapperSize}px`;
       }
     };
+    let hasIncorrectHeight = false;
 
     elementWrapper.classList.add(ELEMENT_NAV_STICKY_WRAPPER);
     elementWrapper.appendChild(content);
@@ -76,9 +88,15 @@ const CreateNavStickyElement = ({
       }, 20),
     );
 
-    setTimeout(() => {
-      eventResize();
-    }, 500);
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        eventResize();
+      }, 500);
+    });
+
+    if (window.scrollY > 0) {
+      hasIncorrectHeight = true;
+    }
 
     return elementContainer;
   })();

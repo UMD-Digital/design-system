@@ -19,6 +19,8 @@ const styles = `
 
 const ELEMENT_NAME = 'umd-feed-news-featured';
 const ATTRIBUTE_TRANSPARENT = 'transparent';
+const ATTRIBUTE_LAYOUT = 'layout';
+const LAYOUT_REVERSED = 'reversed';
 
 class UMDFeedNewsGridFeatured extends HTMLElement {
   _shadow: ShadowRoot;
@@ -32,6 +34,8 @@ class UMDFeedNewsGridFeatured extends HTMLElement {
 
   connectedCallback() {
     const isTransparent = this.getAttribute(ATTRIBUTE_TRANSPARENT) === 'true';
+    const isLayoutReversed =
+      this.getAttribute(ATTRIBUTE_LAYOUT) === LAYOUT_REVERSED;
 
     const data = CommonFeedNewsData({
       element: this,
@@ -46,6 +50,7 @@ class UMDFeedNewsGridFeatured extends HTMLElement {
         isTransparent,
         isTypeGrid: true,
         isTypeFeatured: true,
+        isLayoutReversed,
       }),
     );
   }

@@ -23,6 +23,7 @@ export type TypeNewsFeedRequirements = {
   isTypeList?: boolean;
   isTypeFeatured?: boolean;
   isTransparent?: boolean;
+  isLayoutReversed?: boolean;
   entriesToRemove?: string[];
 };
 
@@ -106,6 +107,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
     feedData,
     theme,
     isTransparent,
+    isLayoutReversed,
   } = props;
   const container = getContainer();
   const grid = container.querySelector(
@@ -122,6 +124,8 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   });
 
   setOffset(displayEntries.length);
+
+  if (isLayoutReversed) grid.setAttribute('data-reversed', '');
 
   AnimationLoader.Remove({ container });
   ButtonLazyLoad.Remove({ container });

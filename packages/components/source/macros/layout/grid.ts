@@ -73,6 +73,12 @@ const STYLES_GRID_LAYOUT = `
       min-height: 560px;
     }
   }
+
+  @media (${Queries.highDef.min}) {
+    .${ID_GRID_LAYOUT_CONTAINER}[data-reversed] > *:first-child {
+      order: 2;
+    }
+  }
 `;
 
 const CreateLayoutGridGap = ({

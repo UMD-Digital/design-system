@@ -17,7 +17,9 @@ export const ComponentStyles = `
 
   .${ELEMENT_WRAPPER} {
     container: ${ELEMENT_NAME} / inline-size;
+    overflow: hidden;
   }
+    
   ${MainContainerStyles}
   ${UtilityContainerStyles}
 `;

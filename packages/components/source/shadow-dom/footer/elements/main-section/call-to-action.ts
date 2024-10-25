@@ -21,29 +21,14 @@ export const CallToActionStyles = `
     display: inline-block;
     padding: ${Spacing.xs} ${Spacing['lg']};
     background-color: ${Colors.red};
-    color: ${Colors.white};
-    border: 1px solid ${Colors.red};
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    color: ${Colors.white} !important;
+    transition: background-color 0.3s ease-in-out;
     font-weight: 700;
   }
 
   .${CALL_TO_ACTION_CONTAINER} a:hover,
   .${CALL_TO_ACTION_CONTAINER} a:focus {
-    background-size: none;
-    color: ${Colors.white};
-    background-color: ${Colors.black};
-  }
-
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CALL_TO_ACTION_CONTAINER} a {
-    background-color: ${Colors.black};
-    color: ${Colors.white};
-    border: 1px solid ${Colors.black};
-  }
-
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CALL_TO_ACTION_CONTAINER} a:hover,
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CALL_TO_ACTION_CONTAINER} a:focus {
-    color: ${Colors.black};
-    background-color: ${Colors.gray.lightest};
+    background-color: ${Colors.redDark};
   }
 `;
 

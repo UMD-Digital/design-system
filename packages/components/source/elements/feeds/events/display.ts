@@ -39,15 +39,29 @@ const STYLES_EVENT_FEED = `
   ${EventElements.Meta.Styles}
 `;
 
-const CreateImage = ({ images }: { images: ImageType }) => {
-  if (images.length > 0) {
-    const image = document.createElement('img');
-    image.src = images[0].url;
-    image.alt = images[0].altText;
-    return image;
+const CreateImage = ({ images, url }: { images: ImageType; url?: string }) => {
+  if (!images || !Array.isArray(images) || images.length === 0) return null;
+
+  const image = images[0];
+  const imageElement = document.createElement('img');
+  imageElement.src = image.url;
+  imageElement.alt = image.altText;
+
+  if (url) {
+    const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', url);
+    link.setAttribute(
+      'aria-label',
+      `Maryland Event with image ${image.altText}`,
+    );
+
+    link.appendChild(imageElement);
+
+    return link;
   }
 
-  return null;
+  return imageElement;
 };
 
 const CreateText = ({ text }: { text: string }) => {
@@ -88,7 +102,7 @@ const CommonDisplay = ({
   theme?: string | null;
   showTime?: boolean;
 }) => ({
-  image: CreateImage({ images: entry.image }),
+  image: CreateImage({ images: entry.image, url: entry.url }),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),
   eventDetails: EventElements.Meta.CreateElement({

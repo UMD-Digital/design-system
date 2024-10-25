@@ -9,7 +9,7 @@ import {
 type TypeEventBlockProps = {
   headline: HTMLElement | null;
   eventDetails: HTMLElement;
-  image: HTMLImageElement | null;
+  image: HTMLImageElement | HTMLAnchorElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
   theme?: string | null;

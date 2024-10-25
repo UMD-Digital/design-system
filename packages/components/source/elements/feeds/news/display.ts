@@ -37,7 +37,10 @@ const CreateImage = ({ images, url }: { images: ImageType; url?: string }) => {
     const link = document.createElement('a');
     link.setAttribute('target', '_blank');
     link.setAttribute('href', url);
-    link.setAttribute('aria-label', 'Maryland Today Article');
+    link.setAttribute(
+      'aria-label',
+      `Maryland Today Article with image ${image.altText}`,
+    );
 
     link.appendChild(imageElement);
 

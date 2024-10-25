@@ -3,7 +3,7 @@ import { LayoutList, LayoutImage, TextLockupSmall } from 'macros';
 
 type TypeEventListProps = {
   headline: HTMLElement | null;
-  image: HTMLImageElement | null;
+  image: HTMLImageElement | HTMLAnchorElement | null;
   dateSign: HTMLElement;
   eventDetails: HTMLElement;
   text?: HTMLElement | null;

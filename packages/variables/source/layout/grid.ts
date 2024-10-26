@@ -1,5 +1,48 @@
+import ScrollAnimations from '../animations/scroll';
 import { Queries } from '../tokens/breakpoints';
 import { Spacing } from '../tokens/spacing';
+
+const { FadeInFromBottom } = ScrollAnimations;
+
+const GridAnimationTwo = {
+  '& > *': {
+    ...FadeInFromBottom,
+    animationRangeStart: '10%',
+    animationRangeEnd: 'contain',
+  },
+
+  '& > *:nth-of-type(2n)': {
+    animationRangeStart: '30%',
+  },
+};
+
+const GridAnimationThree = {
+  ...GridAnimationTwo,
+
+  '& > *:nth-of-type(2n)': {
+    animationRangeStart: '30%',
+  },
+
+  '& > *:nth-of-type(3n)': {
+    animationRangeStart: '50%',
+  },
+};
+
+const GridAnimationFour = {
+  ...GridAnimationTwo,
+
+  '& > *:nth-of-type(2n)': {
+    animationRangeStart: '20%',
+  },
+
+  '& > *:nth-of-type(3n)': {
+    animationRangeStart: '30%',
+  },
+
+  '& > *:nth-of-type(4n)': {
+    animationRangeStart: '40%',
+  },
+};
 
 const GridColumnsTwo = {
   display: 'grid',
@@ -132,4 +175,7 @@ export default {
   GridColumnsFourWithGapLarge,
   GridColumnAndRows,
   GridColumnAndRowsMobileTablet,
+  GridAnimationTwo,
+  GridAnimationThree,
+  GridAnimationFour,
 };

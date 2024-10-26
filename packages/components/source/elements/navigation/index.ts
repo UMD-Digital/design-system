@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import { AssetIcon, MarkupCreate, Styles } from 'utilities';
 import MenuButton from './elements/menu-button';
 import { NavigationElements } from 'elements';
 
@@ -28,6 +28,7 @@ type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 const { Colors, Spacing, Breakpoints, FontWeight, FontSize } = Tokens;
 const { SansLarger, SansExtraLarge } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
+const { SlotWithDefaultStyling } = MarkupCreate;
 const ANIMATION_TIME = 500;
 
 const ATTRIBUTE_STICKY = 'sticky';
@@ -253,7 +254,9 @@ const CreateNavigationColumn = ({
     navColumnContainer.appendChild(utilityRowContainer);
   }
 
-  const navItems = Array.from(navRow.querySelectorAll('umd-element-nav-item'));
+  const navItems = Array.from(
+    navRow.querySelectorAll('umd-element-nav-item'),
+  ) as HTMLElement[];
   const createdNavItems = navItems.map((navItem) => {
     const primaryLinkContainer = navItem.querySelector(
       '[slot="primary-link"]',
@@ -261,10 +264,15 @@ const CreateNavigationColumn = ({
     const dropdownLinksContainer = navItem.querySelector(
       '[slot="dropdown-links"]',
     ) as HTMLElement;
+    const dropdownCalloutsSlot = SlotWithDefaultStyling({
+      element: navItem,
+      slotRef: 'dropdown-callout',
+    });
 
     return NavigationElements.Item.CreateElement({
       primaryLinkContainer,
       dropdownLinksContainer,
+      dropdownCalloutsSlot,
     });
   });
 

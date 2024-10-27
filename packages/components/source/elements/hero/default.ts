@@ -1,4 +1,5 @@
 import {
+  Animations,
   Layout,
   Tokens,
   Elements,
@@ -26,6 +27,7 @@ const DESKTOP = 1024;
 const ATTRIBUTE_TEXT_ALIGN = 'text-align';
 const ATTRIBUTE_INTERIOR = 'interior';
 const ATTRIBUTE_HEADLINE_SIZE = 'headline-size';
+const ATTRIBUTE_IS_VIDEO = 'data-video';
 const TEXT_ALIGN_CENTER = 'center';
 const HEADLINE_SIZE_LARGE = 'extra-large';
 
@@ -39,6 +41,7 @@ const IS_INTERIOR = `[${ATTRIBUTE_INTERIOR}]`;
 const IS_LARGE_HEADLINE = `[${ATTRIBUTE_HEADLINE_SIZE}='${HEADLINE_SIZE_LARGE}']`;
 
 const OVERWRITE_TEXT_CONTAINER = `.${HERO_CONTAINER} .${TextContainer.Elements.container}`;
+const OVERWRITE_IMAGE_WRAPPER = `.${HERO_CONTAINER} .${TextContainer.Elements.wrapper}`;
 const OVERWRITE_IMAGE_CONTAINER = `.${HERO_CONTAINER} .${ImageContainer.Elements.container}`;
 const OVERWRITE_EYEBROW = `.${HERO_CONTAINER} .${TextContainer.Elements.eyebrow}`;
 const OVERWRITE_HEADLINE = `.${HERO_CONTAINER} .${TextContainer.Elements.headline}`;
@@ -47,6 +50,11 @@ const OVERWRITE_RICH_TEXT = `.${HERO_CONTAINER} .${TextContainer.Elements.richTe
 const OVERWRITE_INTERIOR_CONTAINER = `.${HERO_CONTAINER}${IS_INTERIOR}`;
 const OVERWRITE_TEXT_CENTER_ALIGNMENT_TEXT_CONTAINER = `.${HERO_CONTAINER}${IS_TEXT_CENTER} .${TextContainer.Elements.container}`;
 const OVERWRITE_SIZE_LARGE_HEADLINE = `.${HERO_CONTAINER}${IS_LARGE_HEADLINE} .${TextContainer.Elements.headline}`;
+
+const OVERWRITE_VIDEO_CONTAINER = `.${HERO_CONTAINER}[${ATTRIBUTE_IS_VIDEO}]`;
+const OVERWRITE_VIDEO_IMAGE_WRAPPER = `${OVERWRITE_VIDEO_CONTAINER} .${TextContainer.Elements.wrapper}`;
+
+console.log(OVERWRITE_VIDEO_IMAGE_WRAPPER);
 
 // prettier-ignore
 const OverwriteEyebrow = `
@@ -108,6 +116,11 @@ const OverwriteRichText = `
 
 // prettier-ignore
 const OverwriteTextContainer = `
+  @keyframes hero-slide-up {
+    from { transform: translateY(10vh); opacity: .2 }
+    to { transform: translateY(0); opacity: 1 }
+  }
+
   ${OVERWRITE_TEXT_CONTAINER} {
     display: flex;
     align-items: flex-end;
@@ -138,6 +151,16 @@ const OverwriteTextContainer = `
     }
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_IMAGE_WRAPPER} {
+      animation: hero-slide-up forwards 1s;
+    }
+  }
+
+  ${OVERWRITE_VIDEO_IMAGE_WRAPPER} {
+    animation: none;
+  }
+
   ${OVERWRITE_TEXT_CENTER_ALIGNMENT_TEXT_CONTAINER} {
     justify-content: center;
     margin-left: auto;
@@ -154,6 +177,11 @@ const OverwriteTextContainer = `
 
 // prettier-ignore
 const OverwriteImageContainer = `
+  @keyframes hero-scale-down {
+    from { transform: scale(1.2); }
+    to { transform: scale(1); }
+  }
+
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       aspect-ratio: 16 / 9;
@@ -189,6 +217,12 @@ const OverwriteImageContainer = `
     object-position: center;
     height: 100%;
     width: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_IMAGE_CONTAINER} img {
+      animation: hero-scale-down forwards 1s;
+    }
   }
 `;
 
@@ -246,6 +280,7 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
   .${HERO_ELEMENT_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
     position: relative;
+    overflow: hidden;
   }
   
   ${ConvertJSSObjectToStyles({
@@ -265,7 +300,7 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
 `;
 
 export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
-  const { headline, isTextCenter, isInterior } = element;
+  const { headline, isTextCenter, isInterior, videoRef } = element;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
@@ -275,6 +310,7 @@ export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
   lock.classList.add(HERO_LOCK);
   lock.appendChild(text);
   if (asset) container.appendChild(asset);
+  if (videoRef) container.setAttribute(ATTRIBUTE_IS_VIDEO, '');
 
   if (!isInterior && headline) {
     const characterCount = headline.textContent?.trim().length || 0;

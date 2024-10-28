@@ -19,11 +19,11 @@ const GridAnimationTwo = {
 const GridAnimationThree = {
   ...GridAnimationTwo,
 
-  '& > *:nth-of-type(2n)': {
+  '& > *:nth-child(2n)': {
     animationRangeStart: '30%',
   },
 
-  '& > *:nth-of-type(3n)': {
+  '& > *:nth-child(3n)': {
     animationRangeStart: '50%',
   },
 };
@@ -31,15 +31,15 @@ const GridAnimationThree = {
 const GridAnimationFour = {
   ...GridAnimationTwo,
 
-  '& > *:nth-of-type(2n)': {
+  '& > *:nth-child(2n)': {
     animationRangeStart: '20%',
   },
 
-  '& > *:nth-of-type(3n)': {
+  '& > *:nth-child(3n)': {
     animationRangeStart: '30%',
   },
 
-  '& > *:nth-of-type(4n)': {
+  '& > *:nth-child(4n)': {
     animationRangeStart: '40%',
   },
 };

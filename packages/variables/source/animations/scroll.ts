@@ -7,11 +7,19 @@ const KeyFrameFadeInEnd = {
 };
 
 const KeyFrameSlideUpStart = {
-  transform: 'translateY(15vh)',
+  transform: 'translateY(50px)',
 };
 
 const KeyFrameSlideUpEnd = {
   transform: 'translateY(0)',
+};
+
+const KeyFrameSlideRightStart = {
+  transform: 'translateX(-15vw)',
+};
+
+const KeyFrameSlideRightEnd = {
+  transform: 'translateX(0)',
 };
 
 const KeyFrameFadeInFromBottom = {
@@ -27,6 +35,17 @@ const KeyFrameFadeInFromBottom = {
   },
 };
 
+const KeyFrameSlideInFromLeft = {
+  '@keyframes slide-in-from-left': {
+    from: {
+      ...KeyFrameSlideRightStart,
+    },
+    to: {
+      ...KeyFrameSlideRightEnd,
+    },
+  },
+};
+
 const FadeInFromBottom = {
   ...KeyFrameFadeInFromBottom,
 
@@ -37,11 +56,26 @@ const FadeInFromBottom = {
       animationRangeStart: '0',
       animationRangeEnd: '30vh',
       opacity: '0',
-      transform: 'translateY(15vh)',
+      transform: 'translateY(50px)',
+    },
+  },
+};
+
+const SlideInFromLeft = {
+  ...KeyFrameSlideInFromLeft,
+
+  [`@media (prefers-reduced-motion: no-preference)`]: {
+    [`@supports (animation-timeline: view())`]: {
+      animation: 'slide-in-from-left forwards',
+      animationTimeline: 'view()',
+      animationRangeStart: '0',
+      animationRangeEnd: '100vh',
+      transform: 'translateX(-15vw)',
     },
   },
 };
 
 export default {
   FadeInFromBottom,
+  SlideInFromLeft,
 };

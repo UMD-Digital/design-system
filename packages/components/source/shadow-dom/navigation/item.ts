@@ -45,9 +45,8 @@ class UMDNavItemElement extends HTMLElement {
     const dropdownLinksSlot = element.querySelector(
       '[slot="dropdown-links"]',
     ) as HTMLElement;
-    const dropdownCalloutsSlot = SlotWithDefaultStyling({
-      element,
-      slotRef: SLOTS.DROPDOWN_CALLOUT,
+    const dropdownCalloutsSlot = Node.slot({
+      type: SLOTS.DROPDOWN_CALLOUT,
     });
     const dropdownLinksContainer = dropdownLinksSlot
       ? (dropdownLinksSlot.cloneNode(true) as HTMLElement)

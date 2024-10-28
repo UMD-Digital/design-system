@@ -8,39 +8,57 @@ const GridAnimationTwo = {
   '& > *': {
     ...FadeInFromBottom,
     animationRangeStart: '10%',
-    animationRangeEnd: 'contain',
+    animationRangeEnd: '30%',
   },
 
   '& > *:nth-of-type(2n)': {
-    animationRangeStart: '30%',
+    animationRangeStart: '20%',
+    animationRangeEnd: '50%',
   },
 };
 
 const GridAnimationThree = {
   ...GridAnimationTwo,
 
+  '& > *': {
+    ...FadeInFromBottom,
+    animationRangeStart: '10%',
+    animationRangeEnd: '30%',
+  },
+
   '& > *:nth-child(2n)': {
-    animationRangeStart: '30%',
+    animationRangeStart: '20%',
+    animationRangeEnd: '50%',
   },
 
   '& > *:nth-child(3n)': {
-    animationRangeStart: '50%',
+    animationRangeStart: '30%',
+    animationRangeEnd: '70%',
   },
 };
 
 const GridAnimationFour = {
   ...GridAnimationTwo,
 
+  '& > *': {
+    ...FadeInFromBottom,
+    animationRangeStart: '10%',
+    animationRangeEnd: '30%',
+  },
+
   '& > *:nth-child(2n)': {
     animationRangeStart: '20%',
+    animationRangeEnd: '50%',
   },
 
   '& > *:nth-child(3n)': {
     animationRangeStart: '30%',
+    animationRangeEnd: '60%',
   },
 
   '& > *:nth-child(4n)': {
     animationRangeStart: '40%',
+    animationRangeEnd: '70%',
   },
 };
 

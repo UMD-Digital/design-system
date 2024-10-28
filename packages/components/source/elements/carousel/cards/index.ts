@@ -204,11 +204,16 @@ const ContainerLock = `
 
 // prettier-ignore
 const ContainerStyles = `
+  @keyframes card-carousel-slide-in {
+    from { transform: translateX(-25vw); }
+    to { transform: translateX(0);}
+  }
+
   .${CAROUSEL_CONTAINER} {
     background-color: ${Colors.black};
     padding: ${Spacing['3xl']} 0;
     position: relative;
-    overflow: hidden;
+    overflow: clip;
   }
 
   @container ${ELEMENT_NAME} (max-width: 300px) {
@@ -235,6 +240,18 @@ const ContainerStyles = `
     object-fit: cover;
     position: absolute;
     top: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .${CAROUSEL_CONTAINER} > svg {
+        animation: card-carousel-slide-in ease-in-out forwards;
+        animation-timeline: view();
+        animation-range-start: 0;
+        animation-range-end: 100vh;
+        transform: translateX(-15vw);
+      }
+    }
   }
 `
 

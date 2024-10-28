@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Animations, Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Queries, FontSize } = Tokens;
 
@@ -26,6 +26,7 @@ const Watermark = {
 
   '> *': {
     ...Child,
+    ...Animations.Scroll.SlideInFromLeft,
   },
 };
 
@@ -34,6 +35,7 @@ const WatermarkDark = {
 
   '> *': {
     ...Child,
+    ...Animations.Scroll.SlideInFromLeft,
     opacity: '0.2',
     zIndex: 'inherit',
   },

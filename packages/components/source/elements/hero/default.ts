@@ -54,8 +54,6 @@ const OVERWRITE_SIZE_LARGE_HEADLINE = `.${HERO_CONTAINER}${IS_LARGE_HEADLINE} .$
 const OVERWRITE_VIDEO_CONTAINER = `.${HERO_CONTAINER}[${ATTRIBUTE_IS_VIDEO}]`;
 const OVERWRITE_VIDEO_IMAGE_WRAPPER = `${OVERWRITE_VIDEO_CONTAINER} .${TextContainer.Elements.wrapper}`;
 
-console.log(OVERWRITE_VIDEO_IMAGE_WRAPPER);
-
 // prettier-ignore
 const OverwriteEyebrow = `
   ${ConvertJSSObjectToStyles({
@@ -117,7 +115,7 @@ const OverwriteRichText = `
 // prettier-ignore
 const OverwriteTextContainer = `
   @keyframes hero-slide-up {
-    from { transform: translateY(10vh); opacity: .2 }
+    from { transform: translateY(25px); opacity: .2 }
     to { transform: translateY(0); opacity: 1 }
   }
 
@@ -178,7 +176,7 @@ const OverwriteTextContainer = `
 // prettier-ignore
 const OverwriteImageContainer = `
   @keyframes hero-scale-down {
-    from { transform: scale(1.2); }
+    from { transform: scale(1.1); }
     to { transform: scale(1); }
   }
 

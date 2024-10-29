@@ -110,6 +110,10 @@ const NavigationColumnStyles = `
     justify-content: flex-end;
     gap: ${Spacing.md};
   }
+
+  .${ELEMENT_HEADER_MENU_SEARCH} {
+    margin-left: ${Spacing.md};
+  }
 `;
 
 const LogoColumnStyles = `

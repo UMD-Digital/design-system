@@ -33,6 +33,34 @@ const styles = `
   ${NavigationHeader.Styles}
 `;
 
+const CreateNavItemSlots = ({ element }: { element: HTMLElement }) => {
+  const { NAVIGATION } = SLOTS;
+  const navigationSlot = element.querySelector(
+    `[slot="${NAVIGATION}"]`,
+  ) as HTMLElement;
+  let navItems: HTMLElement[] = [];
+
+  if (navigationSlot) {
+    const navItem = Array.from(
+      navigationSlot.querySelectorAll('umd-element-nav-item'),
+    ) as HTMLElement[];
+
+    navigationSlot.removeAttribute('slot');
+
+    navItem.forEach((item, i) => {
+      const slotAttr = `nav-item-${i}`;
+      item.setAttribute(`slot`, slotAttr);
+
+      navItems.push(Node.slot({ type: slotAttr }));
+      element.appendChild(item);
+    });
+
+    navigationSlot.remove();
+  }
+
+  return navItems;
+};
+
 const CreateHeader = ({
   element,
   eventOpen,
@@ -40,14 +68,12 @@ const CreateHeader = ({
   element: HTMLElement;
   eventOpen?: () => void;
 }) => {
-  const { LOGO, NAVIGATION, UTILITY } = SLOTS;
+  const { LOGO, UTILITY } = SLOTS;
   const logoSlot = SlotWithDefaultStyling({
     element,
     slotRef: LOGO,
   });
-  const navigationSlot = element.querySelector(
-    `[slot="${NAVIGATION}"]`,
-  ) as HTMLElement;
+
   const utilitySlot = Node.slot({ type: UTILITY });
   const searchUrl = element.getAttribute(ATTRIBUTE_SEARCH_URL);
   const ctaUrl = element.getAttribute(ATTRIBUTE_CTA_URL);
@@ -59,8 +85,8 @@ const CreateHeader = ({
 
   const value = NavigationHeader.CreateElement({
     logo: logoSlot,
-    navRow: navigationSlot,
     utilityRow: utilitySlot,
+    navItems: CreateNavItemSlots({ element }),
     eventOpen,
     searchUrl,
     ctaUrl,

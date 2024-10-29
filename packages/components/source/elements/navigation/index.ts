@@ -19,8 +19,8 @@ type TypeCtaLink = {
 
 type TypeNavRow = TypeSearchLink &
   TypeCtaLink & {
-    navRow?: HTMLElement | null;
     utilityRow?: HTMLElement | null;
+    navItems?: HTMLElement[];
   };
 
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
@@ -28,7 +28,6 @@ type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 const { Colors, Spacing, Breakpoints, FontWeight, FontSize } = Tokens;
 const { SansLarger, SansExtraLarge } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
-const { SlotWithDefaultStyling } = MarkupCreate;
 const ANIMATION_TIME = 500;
 
 const ATTRIBUTE_STICKY = 'sticky';
@@ -43,6 +42,7 @@ const ELEMENT_HEADER_NAVIGATION_COLUMN = 'element-header-navigation-column';
 const ELEMENT_HEADER_LOGO = 'element-header-logo';
 const ELEMENT_HEADER_MENU_BUTTON = 'element-header-menu-button';
 const ELEMENT_HEADER_MENU_CTA = 'element-header-menu-cta';
+const ELEMENT_HEADER_MENU_SEARCH = 'element-header-menu-search';
 const ELEMENT_HEADER_NAVIGATION_ROW = 'element-header-navigation-row';
 const ELEMENT_HEADER_UTILITY_ROW = 'element-header-utility-row';
 
@@ -88,7 +88,6 @@ const NavigationColumnStyles = `
 
   .${ELEMENT_HEADER_NAVIGATION_ROW} {
     display: flex;
-    gap: ${Spacing.md};
     justify-content flex-end;
     align-items: center;
   }
@@ -109,6 +108,10 @@ const NavigationColumnStyles = `
     display: flex;
     justify-content: flex-end;
     gap: ${Spacing.md};
+  }
+
+  .${ELEMENT_HEADER_MENU_SEARCH} {
+    margin-left: ${Spacing.md};
   }
 `;
 
@@ -214,6 +217,7 @@ const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
   searchLink.href = searchUrl;
   searchLink.ariaLabel = 'Visit the search page';
   searchLink.innerHTML = AssetIcon.MAGNIFY_GLASS;
+  searchLink.classList.add(ELEMENT_HEADER_MENU_SEARCH);
 
   return searchLink;
 };
@@ -232,13 +236,13 @@ const CreateCtaLink = ({ ctaUrl, ctaText }: TypeCtaLink) => {
 };
 
 const CreateNavigationColumn = ({
-  navRow,
   utilityRow,
+  navItems,
   searchUrl,
   ctaText,
   ctaUrl,
 }: TypeNavRow) => {
-  if (!navRow) return null;
+  if (!navItems) return;
 
   const navColumnContainer = document.createElement('div');
   const utilityRowContainer = document.createElement('div');
@@ -254,30 +258,11 @@ const CreateNavigationColumn = ({
     navColumnContainer.appendChild(utilityRowContainer);
   }
 
-  const navItems = Array.from(
-    navRow.querySelectorAll('umd-element-nav-item'),
-  ) as HTMLElement[];
-  const createdNavItems = navItems.map((navItem) => {
-    const primaryLinkContainer = navItem.querySelector(
-      '[slot="primary-link"]',
-    ) as HTMLElement;
-    const dropdownLinksContainer = navItem.querySelector(
-      '[slot="dropdown-links"]',
-    ) as HTMLElement;
-    const dropdownCalloutsSlot = SlotWithDefaultStyling({
-      element: navItem,
-      slotRef: 'dropdown-callout',
-    });
-
-    return NavigationElements.Item.CreateElement({
-      primaryLinkContainer,
-      dropdownLinksContainer,
-      dropdownCalloutsSlot,
-    });
-  });
-
   navRowContainer.classList.add(ELEMENT_HEADER_NAVIGATION_ROW);
-  navRowContainer.append(...createdNavItems);
+
+  navItems.forEach((item) => {
+    navRowContainer.appendChild(item);
+  });
   if (searchLink) navRowContainer.appendChild(searchLink);
   if (ctaLink) navRowContainer.appendChild(ctaLink);
 

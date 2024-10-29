@@ -35,8 +35,6 @@ const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const slot = Node.slot({ type: SLOTS.TABS });
   const markup = element.querySelector(`[slot="${SLOTS.TABS}"]`);
 
-  console.log(topPosition);
-
   const modifyDom = () => {
     if (!markup) return;
 

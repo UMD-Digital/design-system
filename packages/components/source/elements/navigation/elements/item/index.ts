@@ -13,7 +13,7 @@ type TypePrimaryLinkRequirements = {
 
 type TypeDropdownProps = {
   dropdownLinksContainer?: HTMLElement | null;
-  dropdownCalloutsSlot?: HTMLElement | null;
+  dropdownCalloutsSlot?: HTMLSlotElement | null;
 };
 
 type TypePrimaryLinkButtonProps = {

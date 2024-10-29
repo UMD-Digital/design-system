@@ -90,6 +90,7 @@ const NavigationColumnStyles = `
     display: flex;
     justify-content flex-end;
     align-items: center;
+    gap: ${Spacing.md};
   }
 
   .${ELEMENT_HEADER_NAVIGATION_ROW} svg {
@@ -108,10 +109,6 @@ const NavigationColumnStyles = `
     display: flex;
     justify-content: flex-end;
     gap: ${Spacing.md};
-  }
-
-  .${ELEMENT_HEADER_MENU_SEARCH} {
-    margin-left: ${Spacing.md};
   }
 `;
 

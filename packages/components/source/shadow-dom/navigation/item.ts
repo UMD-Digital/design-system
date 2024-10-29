@@ -39,27 +39,41 @@ class UMDNavItemElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
+    const calloutSlot = element.querySelector(
+      `[slot="${SLOTS.DROPDOWN_CALLOUT}"]`,
+    ) as HTMLElement;
     const primaryLinkContainer = element.querySelector(
       `[slot="${SLOTS.PRIMARY_LINK}"]`,
     ) as HTMLElement;
     const dropdownLinksSlot = element.querySelector(
       '[slot="dropdown-links"]',
     ) as HTMLElement;
-    const dropdownCalloutsSlot = Node.slot({
-      type: SLOTS.DROPDOWN_CALLOUT,
-    });
+
     const dropdownLinksContainer = dropdownLinksSlot
       ? (dropdownLinksSlot.cloneNode(true) as HTMLElement)
       : null;
+    let elementData: {
+      primaryLinkContainer: HTMLElement;
+      dropdownLinksContainer: HTMLElement | null;
+      dropdownCalloutsSlot?: HTMLSlotElement;
+    } = {
+      primaryLinkContainer,
+      dropdownLinksContainer,
+    };
+
+    if (calloutSlot && calloutSlot.children.length > 0) {
+      const dropdownCalloutsSlot = Node.slot({
+        type: SLOTS.DROPDOWN_CALLOUT,
+      });
+      elementData = { ...elementData, dropdownCalloutsSlot };
+    }
 
     if (!primaryLinkContainer) {
       throw new Error('Primary link is required for a nav item');
     }
 
     const navItem = NavigationElements.Item.CreateElement({
-      primaryLinkContainer,
-      dropdownLinksContainer,
-      dropdownCalloutsSlot,
+      ...elementData,
     });
 
     element._shadow.appendChild(navItem);

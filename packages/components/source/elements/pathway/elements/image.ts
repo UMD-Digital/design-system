@@ -73,6 +73,7 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE} img {
     object-fit: cover;
     object-position: center;
+    width: 100%;
   }
 
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER} > * {

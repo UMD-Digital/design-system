@@ -9,6 +9,7 @@ import {
 
 type TypePrimaryLinkRequirements = {
   primaryLinkContainer?: HTMLElement | null;
+  context?: HTMLElement;
 };
 
 type TypeDropdownProps = {
@@ -360,7 +361,7 @@ const CreatePrimaryLink = (props: TypePrimaryLinkProps) => {
 
 const CreateNavItemElement = (props: TypeNavItem) =>
   (() => {
-    const { dropdownLinksContainer, primaryLinkContainer } = props;
+    const { dropdownLinksContainer, primaryLinkContainer, context } = props;
 
     if (!primaryLinkContainer) {
       throw new Error('Primary link is required for a nav item');
@@ -434,6 +435,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
         focusCallback = EventAccessibilityFocus({
           element: elementContainer,
           action: () => HideDropdown(),
+          shadowDomContext: context,
         });
 
         setTimeout(() => {

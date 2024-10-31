@@ -56,9 +56,11 @@ class UMDNavItemElement extends HTMLElement {
       primaryLinkContainer: HTMLElement;
       dropdownLinksContainer: HTMLElement | null;
       dropdownCalloutsSlot?: HTMLSlotElement;
+      context: HTMLElement;
     } = {
       primaryLinkContainer,
       dropdownLinksContainer,
+      context: element,
     };
 
     if (calloutSlot && calloutSlot.children.length > 0) {

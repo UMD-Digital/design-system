@@ -1,3 +1,6 @@
+import { Animations } from '@universityofmaryland/variables';
+import { Accessibility, Styles } from 'utilities';
+
 const ShrinkThenRemove = ({ container }: { container: HTMLElement }) => {
   const frames = 30;
   const startingHeight = container.clientHeight;
@@ -82,7 +85,103 @@ const ScrollTo = ({
   window.requestAnimationFrame(scroll);
 };
 
+const Load = () => {
+  const { IsPrefferdReducedMotion } = Accessibility;
+  const { ConvertJSSObjectToStyles } = Styles;
+  const { Scroll } = Animations;
+
+  if (IsPrefferdReducedMotion()) return;
+
+  const idGridFadeIn = `umd-grid-fade-in`;
+  const idOffsetAttr = `data-animation`;
+
+  const ApplyStyles = () => {
+    const body = document.body;
+    const styleElement = document.createElement('style');
+
+    styleElement.innerHTML = `
+      @keyframes fade-in-from-bottom {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      ${ConvertJSSObjectToStyles({
+        styleObj: {
+          [`.${idGridFadeIn}`]: Scroll.FadeInFromBottom,
+        },
+      })}
+    `;
+
+    body.appendChild(styleElement);
+  };
+
+  const Interactions = () => {
+    const gridElements = Array.from(
+      document.querySelectorAll('.umd-grid-animation > *'),
+    );
+
+    const setAlignment = () => {
+      let previousPosition = 0;
+
+      gridElements.forEach((entry) => {
+        const top = entry.getBoundingClientRect().top;
+        if (previousPosition === top) {
+          entry.setAttribute(idOffsetAttr, 'offset');
+        } else {
+          previousPosition = top;
+        }
+      });
+    };
+
+    const gridAnimation: IntersectionObserverCallback = (entries, observer) => {
+      let delay = 0;
+
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
+        const offset = 400;
+
+        if (entry.isIntersecting) {
+          if (target.getAttribute(idOffsetAttr) === 'offset') {
+            delay = delay + offset;
+          } else {
+            delay = 0;
+          }
+
+          target.style.animationDelay = `${delay}ms`;
+          target.classList.add(idGridFadeIn);
+          observer.unobserve(target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(gridAnimation, {
+      rootMargin: '0px',
+      threshold: [0.35],
+    });
+
+    gridElements.forEach((element) => {
+      observer.observe(element);
+    });
+
+    window.addEventListener('resize', () => {
+      setAlignment();
+    });
+    setAlignment();
+  };
+
+  ApplyStyles();
+  Interactions();
+};
+
 export default {
+  Load,
   ShrinkThenRemove,
   ScrollTo,
 };

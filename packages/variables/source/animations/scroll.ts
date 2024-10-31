@@ -50,14 +50,9 @@ const FadeInFromBottom = {
   ...KeyFrameFadeInFromBottom,
 
   [`@media (prefers-reduced-motion: no-preference)`]: {
-    [`@supports (animation-timeline: view())`]: {
-      animation: 'fade-in-from-bottom forwards',
-      animationTimeline: 'view()',
-      animationRangeStart: '0',
-      animationRangeEnd: '30vh',
-      opacity: '0',
-      transform: 'translateY(50px)',
-    },
+    animation: 'fade-in-from-bottom 1s forwards',
+    opacity: '0',
+    transform: 'translateY(50px)',
   },
 };
 
@@ -76,6 +71,10 @@ const SlideInFromLeft = {
 };
 
 export default {
+  KeyFrameFadeInStart,
+  KeyFrameFadeInEnd,
+  KeyFrameSlideUpStart,
+  KeyFrameSlideUpEnd,
   FadeInFromBottom,
   SlideInFromLeft,
 };

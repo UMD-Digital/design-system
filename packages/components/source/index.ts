@@ -7,6 +7,7 @@ const LoadUmdComponents = () => {
     // @ts-ignore
     UmdComponents[key].Load();
   }
+  UmdUtilities.Animation.Load();
 };
 
 export const Components = {

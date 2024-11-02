@@ -19,6 +19,7 @@ const LARGE = 1200;
 const ELEMENT_NAME = 'umd-element-pathway-image';
 const ATTRIBUTE_IMAGE_POSITION = 'image-position';
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_ANIMATION = 'data-animation';
 
 const PATHWAY_DEFAULT_CONTAINER = 'pathway-default-container';
 const PATHWAY_DEFAULT_CONTAINER_WRAPPER = 'pathway-default-container-wrapper';
@@ -28,8 +29,11 @@ const PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER =
 
 const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
 const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
+const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
 
+const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_DEFAULT_CONTAINER} .${TextContainer.Elements.wrapper}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER} .${ImageContainer.Elements.container}`;
 
 const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
 const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
@@ -38,6 +42,63 @@ const OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER
 const OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_IMAGE_RIGHT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.wrapper}`;
 const OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${TextContainer.Elements.wrapper}`;
+
+const OVERWRITE_CONTAINER_ANIMATION = `.${PATHWAY_DEFAULT_CONTAINER}${IS_ANIMATION}`;
+const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
+const OVERWRITE_ANIMATION_IMAGE_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
+
+// prettier-ignore
+const AnimationStyles = `
+  @keyframes pathway-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+   }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_TEXT_CONTAINER}, 
+    ${OVERWRITE_IMAGE_CONTAINER} {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER}, 
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
+      animation: pathway-fade-in 1s forwards;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
+      animation-delay: 0.5s;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
+      animation-delay: 0s;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER} {
+       animation-delay: 0s;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER} {
+      animation-delay: 0.5s;
+    }
+  }
+`;
 
 // prettier-ignore
 const OverwriteImagePositionStyles = `
@@ -153,6 +214,7 @@ const STYLES_PATHWAY_DEFAULT_ELEMENT = `
 
   ${LockStyles}
   ${LockWrapperStyles}
+  ${AnimationStyles}
   ${OverwriteTextContainerStyles}
   ${OverwriteImageContainerStyles}
   ${OverwriteImagePositionStyles}
@@ -167,6 +229,22 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
 
   const textContainer = TextContainer.CreateElement(props);
   const imageContainer = ImageContainer.CreateElement(props);
+
+  const animation: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      const target = entry.target as HTMLElement;
+
+      if (entry.isIntersecting) {
+        target.setAttribute(ATTRIBUTE_ANIMATION, '');
+        observer.unobserve(target);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(animation, {
+    rootMargin: '0px',
+    threshold: [0.35],
+  });
 
   container.classList.add(PATHWAY_DEFAULT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
@@ -187,6 +265,8 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
   lock.appendChild(lockWrapper);
   wrapper.appendChild(lock);
   container.appendChild(wrapper);
+  observer.observe(container);
+
   return container;
 };
 

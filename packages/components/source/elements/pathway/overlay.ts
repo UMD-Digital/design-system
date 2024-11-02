@@ -19,6 +19,7 @@ const LARGE = 1200;
 const ELEMENT_NAME = 'umd-element-pathway-overlay';
 const ATTRIBUTE_IMAGE_POSITION = 'image-position';
 const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_ANIMATION = 'data-animation';
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 const THEME_MARYLAND = 'maryland';
@@ -36,8 +37,11 @@ const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
 const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
+const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
 
+const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_OVERLAY_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_OVERLAY_CONTAINER} .${TextContainer.Elements.wrapper}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_OVERLAY_CONTAINER} .${ImageContainer.Elements.container}`;
 
 const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_OVERLAY_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
 const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_OVERLAY_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
@@ -54,6 +58,108 @@ const OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${
 const OVERWRITE_THEME_DARK_BACKGROUND = `${OVERWRITE_THEME_DARK_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_BACKGROUND}`;
 const OVERWRITE_THEME_LIGHT_BACKGROUND = `${OVERWRITE_THEME_LIGHT_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_BACKGROUND}`;
 const OVERWRITE_THEME_MARYLAND_BACKGROUND = `${OVERWRITE_THEME_MARYLAND_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_BACKGROUND}`;
+
+const OVERWRITE_CONTAINER_ANIMATION = `.${PATHWAY_OVERLAY_CONTAINER}${IS_ANIMATION}`;
+const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
+const OVERWRITE_ANIMATION_IMAGE_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
+
+// prettier-ignore
+const AnimationStyles = `
+  @keyframes pathway-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+   }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_TEXT_CONTAINER}, 
+    ${OVERWRITE_IMAGE_CONTAINER} {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER}, 
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
+      animation: pathway-fade-in 1s forwards;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
+      animation-delay: 0.5s;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
+      animation-delay: 0s;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER} {
+       animation-delay: 0s;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER} {
+      animation-delay: 0.5s;
+    }
+  }
+`;
+
+// prettier-ignore
+const BackgroundAnimationStyles = `
+  @keyframes pathway-overlay-background {
+    from {
+      transform: translateX(30vw);
+   }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pathway-overlay-background-right {
+    from {
+      transform: translateX(-30vw);
+   }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .${PATHWAY_OVERLAY_CONTAINER_BACKGROUND} {
+        animation: pathway-overlay-background forwards;
+        animation-timeline: view();
+        animation-range-start: entry;
+        animation-range-end: contain;
+        transform: translateX(30vw);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      ${OVERWRITE_IMAGE_RIGHT_BACKGROUND} {
+        animation: pathway-overlay-background-right forwards;
+        animation-timeline: view();
+        animation-range-start: entry;
+        animation-range-end: contain;
+        transform: translateX(-30vw);
+      }
+    }
+  }
+`
 
 // prettier-ignore
 const OverwriteVarationTheme = `
@@ -80,6 +186,7 @@ const OverwriteVarationTheme = `
 
 // prettier-ignore
 const OverwriteImagePositionStyles = `
+
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER} {
       order: 2;
@@ -211,7 +318,7 @@ const STYLES_PATHWAY_OVERLAY_ELEMENT = `
   .${PATHWAY_OVERLAY_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     position: relative;
-    overflow: hidden;
+    overflow: clip;
   }
 
   .${PATHWAY_OVERLAY_CONTAINER} * {
@@ -221,6 +328,8 @@ const STYLES_PATHWAY_OVERLAY_ELEMENT = `
   ${LockStyles}
   ${LockWrapperStyles}
   ${BackgroundStyles}
+  ${AnimationStyles}
+  ${BackgroundAnimationStyles}
   ${OverwriteTextContainerStyles}
   ${OverwriteImageContainerStyles}
   ${OverwriteImagePositionStyles}
@@ -233,13 +342,30 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
   const lock = document.createElement('div');
   const lockWrapper = document.createElement('div');
   const background = document.createElement('div');
-  const { isImageRight = true, isImageScaled = true, theme } = element;
+  const { isImageRight = true, theme } = element;
 
   const textContainer = TextContainer.CreateElement(element);
   const imageContainer = ImageContainer.CreateElement(element);
 
+  const animation: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      const target = entry.target as HTMLElement;
+
+      if (entry.isIntersecting) {
+        target.setAttribute(ATTRIBUTE_ANIMATION, '');
+        observer.unobserve(target);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(animation, {
+    rootMargin: '0px',
+    threshold: [0.35],
+  });
+
   container.classList.add(PATHWAY_OVERLAY_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,
     isImageRight ? 'right' : 'left',
@@ -259,6 +385,8 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
   lock.appendChild(lockWrapper);
   wrapper.appendChild(lock);
   container.appendChild(wrapper);
+  observer.observe(container);
+
   return container;
 };
 

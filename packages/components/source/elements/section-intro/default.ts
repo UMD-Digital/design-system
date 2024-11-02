@@ -16,19 +16,82 @@ const { GridColumnAndRowsMobileTablet } = Layout;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
+const ATTRIBUTE_ANIMATION = 'data-animation';
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
+const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
+
 const ELEMENT_NAME = 'umd-section-intro-default';
-const ELEMENT_LIST_CONTAINER = 'intro-default-container';
-const ELEMENT_LIST_CONTAINER_WRAPPER = 'intro-default-container-wrapper';
+const ELEMENT_INTRO_CONTAINER = 'intro-default-container';
+const ELEMENT_INTRO_CONTAINER_WRAPPER = 'intro-default-container-wrapper';
+const ELEMENT_INTRO_TEXT_CONTAINER = 'intro-default-container-text';
 const ELEMENT_HEADLINE = 'intro-default-headline';
 const ELEMENT_RICH_TEXT = 'intro-default-rich-text';
 const ELEMENT_RICH_TEXT_SMALL = 'intro-default-rich-text-small';
 const ELEMENT_ACTIONS = 'intro-default-actions';
 
-const OVERWRITE_SEPARATOR_WRAPPER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_WITH_SEPARATOR}] .${ELEMENT_LIST_CONTAINER_WRAPPER}`;
-const OVERWRITE_THEME_DARK_CONTAINTER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+const OVERWRITE_SEPARATOR_WRAPPER = `.${ELEMENT_INTRO_CONTAINER}[${ATTRIBUTE_WITH_SEPARATOR}] .${ELEMENT_INTRO_CONTAINER_WRAPPER}`;
+const OVERWRITE_THEME_DARK_CONTAINTER = `.${ELEMENT_INTRO_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+
+const OVERWRITE_CONTAINER_ANIMATION = `.${ELEMENT_INTRO_CONTAINER}${IS_ANIMATION}`;
+const OVERWRITE_ANIMATION_WRAPPER = `${OVERWRITE_CONTAINER_ANIMATION} .${ELEMENT_INTRO_CONTAINER_WRAPPER}`;
+const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ELEMENT_INTRO_TEXT_CONTAINER}`;
+
+// prettier-ignore
+const OverwriteAnimationLine = `
+  @keyframes intro-line {
+    from {
+      height: 0;
+      transform: translateY(${Spacing['lg']});
+   }
+    to {
+      height: ${Spacing['4xl']};
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_SEPARATOR_WRAPPER}:before {
+      height: 0;
+      transform: translateY(${Spacing['lg']});
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_ANIMATION_WRAPPER}:before {
+      animation: intro-line 1.2s forwards;
+    }
+  }
+`;
+
+// prettier-ignore
+const OverwriteAnimationText = `
+  @keyframes intro-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+   }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .${ELEMENT_INTRO_TEXT_CONTAINER} {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
+      animation: intro-fade-in 1s forwards;
+      animation-delay: 0.2s;
+    }
+  }
+`;
 
 // prettier-ignore
 const OverwriteTheme = `
@@ -128,13 +191,13 @@ const ActionStyles = `
 
 // prettier-ignore
 const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
-  .${ELEMENT_LIST_CONTAINER} {
+  .${ELEMENT_INTRO_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     max-width: ${MaxWidth.small};
     margin: 0 auto;
   }
 
-  .${ELEMENT_LIST_CONTAINER_WRAPPER} {
+  .${ELEMENT_INTRO_CONTAINER_WRAPPER} {
     text-align: center;
   }
 
@@ -143,6 +206,8 @@ const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
   ${ActionStyles}
   ${OverwriteSeparator}
   ${OverwriteTheme}
+  ${OverwriteAnimationText}
+  ${OverwriteAnimationLine}
 `;
 
 const CreateSectionIntroDefaultElement = (
@@ -151,28 +216,51 @@ const CreateSectionIntroDefaultElement = (
   const { headline, actions, text, theme, hasSeparator = false } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
+  const textContainer = document.createElement('div');
 
-  container.classList.add(ELEMENT_LIST_CONTAINER);
-  wrapper.classList.add(ELEMENT_LIST_CONTAINER_WRAPPER);
+  const animation: IntersectionObserverCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      const target = entry.target as HTMLElement;
+
+      if (entry.isIntersecting) {
+        target.setAttribute(ATTRIBUTE_ANIMATION, '');
+        observer.unobserve(target);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(animation, {
+    rootMargin: '0px',
+    threshold: [0.35],
+  });
+
+  textContainer.classList.add(ELEMENT_INTRO_TEXT_CONTAINER);
+
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   if (hasSeparator) container.setAttribute(ATTRIBUTE_WITH_SEPARATOR, '');
 
   if (headline) {
     headline.classList.add(ELEMENT_HEADLINE);
-    wrapper.appendChild(headline);
+    textContainer.appendChild(headline);
   }
 
   if (text) {
     text.classList.add(headline ? ELEMENT_RICH_TEXT_SMALL : ELEMENT_RICH_TEXT);
-    wrapper.appendChild(text);
+    textContainer.appendChild(text);
   }
 
   if (actions) {
     actions.classList.add(ELEMENT_ACTIONS);
-    wrapper.appendChild(actions);
+    textContainer.appendChild(actions);
   }
 
+  wrapper.classList.add(ELEMENT_INTRO_CONTAINER_WRAPPER);
+  wrapper.appendChild(textContainer);
+
+  container.classList.add(ELEMENT_INTRO_CONTAINER);
   container.appendChild(wrapper);
+
+  observer.observe(container);
 
   return container;
 };

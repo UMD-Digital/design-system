@@ -95,6 +95,8 @@ const Load = () => {
   const idGridFadeIn = `umd-grid-fade-in`;
   const idOffsetAttr = `data-animation`;
 
+  const animationOffset = `offset`;
+
   const ApplyStyles = () => {
     const body = document.body;
     const styleElement = document.createElement('style');
@@ -133,7 +135,7 @@ const Load = () => {
       gridElements.forEach((entry) => {
         const top = entry.getBoundingClientRect().top;
         if (previousPosition === top) {
-          entry.setAttribute(idOffsetAttr, 'offset');
+          entry.setAttribute(idOffsetAttr, animationOffset);
         } else {
           previousPosition = top;
         }
@@ -145,10 +147,10 @@ const Load = () => {
 
       entries.forEach((entry) => {
         const target = entry.target as HTMLElement;
-        const offset = 400;
+        const offset = 350;
 
         if (entry.isIntersecting) {
-          if (target.getAttribute(idOffsetAttr) === 'offset') {
+          if (target.getAttribute(idOffsetAttr) === animationOffset) {
             delay = delay + offset;
           } else {
             delay = 0;

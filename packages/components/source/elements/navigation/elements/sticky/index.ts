@@ -57,7 +57,6 @@ const CreateNavStickyElement = ({
             }, 200);
             setTimeout(() => {
               eventResize();
-              console.log('called');
             }, 500);
             hasIncorrectHeight = false;
           }

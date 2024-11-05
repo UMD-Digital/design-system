@@ -1,70 +1,46 @@
-import { Tokens, Layout } from '@universityofmaryland/variables';
-import { Accessibility, Styles } from 'utilities';
+import {
+  Elements,
+  Layout,
+  Tokens,
+  Typography,
+} from '@universityofmaryland/variables';
+import event from 'shadow-dom/event';
+import { Styles } from 'utilities';
 
-type TypeLayoutImageExpandProps = {
-  image: HTMLImageElement;
+type TypeContent = {
+  eyebrow?: HTMLElement | null;
+  headline?: HTMLElement | null;
+  actions?: HTMLElement | null;
+  additional?: HTMLSlotElement | null;
 };
 
+type TypeAssets = {
+  image?: HTMLImageElement;
+  video?: HTMLVideoElement;
+};
+
+type TypeLayoutImageExpandProps = TypeContent & TypeAssets;
+
 const { ConvertJSSObjectToStyles } = Styles;
-const { Spacing, MaxWidth } = Tokens;
-const { LockMax } = Layout;
-const { IsPrefferdReducedMotion, IsScreenZoomed } = Accessibility;
+const { Colors, Spacing, Queries } = Tokens;
+const { Eyebrow } = Elements;
+const { CampaignMaxium } = Typography;
 
 const ELEMENT_NAME = 'umd-hero-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'hero-expand-declaration';
-const ELEMENT_EXPAND_CONTAINER = 'hero-expand-container';
+const ELEMENT_EXPAND_STICKY = 'hero-expand-sticky';
 
 const ELEMENT_EXPAND_IMAGE_CONTAINER = 'hero-expand-image-container';
-const ELEMENT_EXPAND_IMAGE_POSITION = 'hero-expand-image-position';
 const ELEMENT_EXPAND_IMAGE_SIZE = 'hero-expand-image-size';
 const ELEMENT_EXPAND_IMAGE_OVERLAY = 'hero-expand-image-overlay';
 
 const ELEMENT_EXPAND_TEXT_CONTAINER = 'hero-expand-text-container';
-const ELEMENT_EXPAND_TEXT_LOCK = 'hero-expand-text-lock';
-const ELEMENT_EXPAND_TEXT_ANIMATION = 'hero-expand-text-animation';
-
-// prettier-ignore
-const TextLock = `
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: LockMax,
-    },
-  })}
-
-  .${ELEMENT_EXPAND_TEXT_LOCK} {
-    display: flex;
-    height: 100%;
-  }
-`;
-
-// prettier-ignore
-const TextContainer = `
-  .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-    position: relative;
-    padding-top: ${Spacing.max};
-    padding-bottom: ${Spacing.max};
-    height: 100%;
-    z-index: 9999;
-  }
-`;
-
-// prettier-ignore
-const TextAnimation = `
-  .${ELEMENT_EXPAND_TEXT_ANIMATION} {
-    width: 100vw;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .${ELEMENT_EXPAND_TEXT_ANIMATION} {
-        position: absolute;
-        top: 0;
-        height: 100vh;
-        transform: translateY(200vh);
-      }
-    }
-  }
-`;
+const ELEMENT_EXPAND_TEXT_TOP_CONTAINER = 'hero-expand-text-top-container';
+const ELEMENT_EXPAND_TEXT_BOTTOM_CONTAINER =
+  'hero-expand-text-bottom-container';
+const ELEMENT_EXPAND_TEXT_EYEBROW = 'hero-expand-text-eyebrow';
+const ELEMENT_EXPAND_TEXT_HEADLINE = 'hero-expand-text-headline';
+const ELEMENT_EXPAND_TEXT_ACTIONS = 'hero-expand-text-actions';
 
 // prettier-ignore
 const ImageOverlayContainer = `
@@ -86,7 +62,7 @@ const ImageOverlayContainer = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_OVERLAY} {
-        opacity: 1;
+        opacity: 0;
         animation: img-overlay forwards;
         animation-timeline: view();
         animation-range-start: 70vh;
@@ -99,100 +75,154 @@ const ImageOverlayContainer = `
 // prettier-ignore
 const ImageSizeContainer = `
   @keyframes img-size {
-    to { width: 100%; height: 100vh; }
+    from { height: 50vh; }
+    to { height: 100vh; }
   }
 
   .${ELEMENT_EXPAND_IMAGE_SIZE} {
     overflow: hidden;
     position: relative;
+    height: 100%;
+    width: 100%;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_SIZE} {
-        width: ${MaxWidth.smallest};
-        height: 70vh;
+        height: 50vh;
         animation: img-size ease-in-out forwards;
         animation-timeline: view();
-        animation-range-start: cover;
-        animation-range-end: 200vh;
+        animation-range-start: 60vh;
+        animation-range-end: 140vh;
       }
     }
   }
 
-  @supports not (animation-timeline: view()) {
-    .${ELEMENT_EXPAND_IMAGE_SIZE} {
-      height: 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .${ELEMENT_EXPAND_IMAGE_SIZE} {
-      height: 100%;
-    }
-  }
-`;
-
-// prettier-ignore
-const ImagePosition = `
-  .${ELEMENT_EXPAND_IMAGE_POSITION} {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .${ELEMENT_EXPAND_IMAGE_POSITION} {
-        display: flex;
-        justify-content: center;
-        position: sticky;
-        top: 0; 
-        animation: img-position ease-in-out forwards;
-        animation-timeline: view();
-        animation-range-start: cover;
-        animation-range-end: 200vh;
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .${ELEMENT_EXPAND_IMAGE_SIZE} {
+          animation: img-size ease-in-out forwards;
+          animation-timeline: view();
+          animation-range-start: 40vh;
+          animation-range-end: 200vh;
+        }
       }
-    }
-  }
-
-  @supports not (animation-timeline: view()) {
-    .${ELEMENT_EXPAND_IMAGE_POSITION} {
-      height: 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .${ELEMENT_EXPAND_IMAGE_POSITION} {
-      height: 100%;
     }
   }
 `;
 
 // prettier-ignore
 const ImageContainer = `
+  @keyframes component-size {
+    from { width: 10%; }
+    to { width: 100vw; }
+  }
+
+  @keyframes component-size-tablet {
+    from { width: 100%; }
+    to { width: 100vw; }
+  }
+
   .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
+    width: 100%;
+    overflow: clip;
+    display: flex;
+    align-items: center;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
-        position: relative;
+        animation: component-size ease-in-out forwards;
+        animation-timeline: view();
+        animation-range-start: 60vh;
+        animation-range-end: 120vh;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
+          animation: component-size-tablet ease-in-out forwards;
+          animation-timeline: view();
+          animation-range-start: 60vh;
+          animation-range-end: 200vh;
+        }
       }
     }
   }
 `;
 
 // prettier-ignore
-const Container = `
-  .${ELEMENT_EXPAND_CONTAINER} {
-    height: 100%;
-    width: 100%;
+const TextContainer = `
+  .${ELEMENT_EXPAND_TEXT_CONTAINER} {
     position: relative;
+    height: 100%;
+    z-index: 9999;
+    text-align: center;
+    padding: ${Spacing.md} 0;
+  }
+
+  @media (${Queries.tablet.min}) {
+    .${ELEMENT_EXPAND_TEXT_CONTAINER} {
+      padding: ${Spacing.lg} 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  .${ELEMENT_EXPAND_TEXT_EYEBROW} + * {
+    margin-top: ${Spacing.md};
+  }
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: Eyebrow.Ribbon,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_EXPAND_TEXT_HEADLINE}`]: CampaignMaxium,
+    },
+  })}
+
+  .${ELEMENT_EXPAND_TEXT_HEADLINE} {
+    color: ${Colors.white};
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .${ELEMENT_EXPAND_TEXT_ACTIONS} {
+    margin-top: 30vh;
+  }
+`;
+
+// prettier-ignore
+const elementPosition = `
+  .${ELEMENT_EXPAND_STICKY} {
+    position: relative;
+  }
+
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .${ELEMENT_EXPAND_STICKY} {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+        }
+      }
+    }
   }
 `;
 
@@ -200,91 +230,129 @@ const Container = `
 const STYLES_HERO_EXPAND = `
   .${ELEMENT_EXPLAND_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
-    overflow: clip;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPLAND_DECLARATION} {
-        height: 300vh;
+        position: relative;
       }
     }
   }
 
-  .${ELEMENT_EXPLAND_DECLARATION} img {
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .${ELEMENT_EXPLAND_DECLARATION} {
+          height: 200vh;
+        }
+      }
+    }
+  }
+
+  .${ELEMENT_EXPLAND_DECLARATION} img,
+  .${ELEMENT_EXPLAND_DECLARATION} video {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  ${Container}
+  ${elementPosition}
+  ${TextContainer}
   ${ImageContainer}
   ${ImageSizeContainer}
-  ${ImagePosition}
   ${ImageOverlayContainer}
-  ${TextAnimation}
-  ${TextContainer}
-  ${TextLock}
 `;
 
-const CreateImageContainer = ({ image }: TypeLayoutImageExpandProps) => {
-  const imageContainer = document.createElement('div');
-  const imagePosition = document.createElement('div');
+const CreateAssetContainer = ({ image, video }: TypeAssets) => {
+  const container = document.createElement('div');
   const imageSize = document.createElement('div');
   const imageOverlay = document.createElement('div');
 
   imageOverlay.classList.add(ELEMENT_EXPAND_IMAGE_OVERLAY);
 
   imageSize.classList.add(ELEMENT_EXPAND_IMAGE_SIZE);
-  imageSize.appendChild(image);
+
+  if (video) {
+    imageSize.appendChild(video);
+  } else {
+    if (image) imageSize.appendChild(image);
+  }
+
   imageSize.appendChild(imageOverlay);
 
-  imagePosition.classList.add(ELEMENT_EXPAND_IMAGE_POSITION);
-  imagePosition.appendChild(imageSize);
+  container.appendChild(imageSize);
+  container.classList.add(ELEMENT_EXPAND_IMAGE_CONTAINER);
 
-  imageContainer.appendChild(imagePosition);
-  imageContainer.classList.add(ELEMENT_EXPAND_IMAGE_CONTAINER);
-
-  return imageContainer;
+  container.classList.add(ELEMENT_EXPAND_IMAGE_CONTAINER);
+  return container;
 };
 
-// const CreateTextContainer = ({ content }: TypeLayoutImageExpandProps) => {
-//   const textAnimation = document.createElement('div');
-//   const textContainer = document.createElement('div');
-//   const textLock = document.createElement('div');
+const CreateTextContainer = ({
+  headline,
+  eyebrow,
+  actions,
+  additional,
+}: TypeContent) => {
+  const textContainer = document.createElement('div');
 
-//   textLock.classList.add(ELEMENT_EXPAND_TEXT_LOCK);
-//   textLock.appendChild(content);
+  textContainer.classList.add(ELEMENT_EXPAND_TEXT_CONTAINER);
 
-//   textContainer.appendChild(textLock);
-//   textContainer.classList.add(ELEMENT_EXPAND_TEXT_CONTAINER);
+  if (eyebrow || headline) {
+    const topText = document.createElement('div');
 
-//   textAnimation.classList.add(ELEMENT_EXPAND_TEXT_ANIMATION);
-//   textAnimation.appendChild(textContainer);
+    if (eyebrow) {
+      eyebrow.classList.add(ELEMENT_EXPAND_TEXT_EYEBROW);
+      topText.appendChild(eyebrow);
+    }
 
-//   return textAnimation;
-// };
+    if (headline) {
+      headline.classList.add(ELEMENT_EXPAND_TEXT_HEADLINE);
+      topText.appendChild(headline);
+    }
+
+    topText.classList.add(ELEMENT_EXPAND_TEXT_TOP_CONTAINER);
+    textContainer.appendChild(topText);
+  }
+
+  if (actions || additional) {
+    const bottomText = document.createElement('div');
+
+    if (actions) {
+      const actionsContainer = document.createElement('div');
+      actionsContainer.appendChild(actions);
+      actionsContainer.classList.add(ELEMENT_EXPAND_TEXT_ACTIONS);
+      bottomText.appendChild(actionsContainer);
+    }
+
+    bottomText.classList.add(ELEMENT_EXPAND_TEXT_BOTTOM_CONTAINER);
+    textContainer.appendChild(bottomText);
+  }
+
+  return textContainer;
+};
 
 const CreateHeroExpand = (props: TypeLayoutImageExpandProps) => {
   const declaration = document.createElement('div');
-  const container = document.createElement('div');
-  const imageContainer = CreateImageContainer(props);
-  // const textContainer = CreateTextContainer(props);
+  const sticky = document.createElement('div');
+  const SetPosition = ({ value }: { value: string | null }) => {
+    sticky.style.top = value || '0';
+  };
 
-  // if (IsScreenZoomed() && !IsPrefferdReducedMotion()) {
-  //   textContainer.style.height = '90vh';
-  //   textContainer.style.transform = 'translateY(120vh)';
-  // }
+  sticky.appendChild(CreateAssetContainer(props));
+  sticky.appendChild(CreateTextContainer(props));
+  sticky.classList.add(ELEMENT_EXPAND_STICKY);
 
-  container.appendChild(imageContainer);
-  // container.appendChild(textContainer);
-  container.classList.add(ELEMENT_EXPAND_CONTAINER);
-
-  declaration.appendChild(container);
+  declaration.appendChild(sticky);
   declaration.classList.add(ELEMENT_EXPLAND_DECLARATION);
 
-  return declaration;
+  return {
+    element: declaration,
+    events: {
+      SetPosition,
+    },
+  };
 };
 
 export default {

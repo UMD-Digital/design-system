@@ -28,9 +28,9 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const hasLogo = element.getAttribute(ATTRIBUTE_HAS_LOGO);
-  let includeSeal = true;
+  let includeSeal = false;
 
-  if (hasLogo === 'false') includeSeal = false;
+  if (hasLogo === 'true') includeSeal = true;
 
   const banner = BannerPromo.CreateElement({
     theme: element.getAttribute(ATTRIBUTE_THEME),

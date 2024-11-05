@@ -152,11 +152,10 @@ const STYLES_BANNER_PROMO_ELEMENT = `
 
   .${ELEMENT_CONTAINER} > svg {
     position: absolute;
-    right: -${Spacing.md};
-    bottom: -${Spacing.md};
-    height: 100%;
-    max-height: 110px;
-    object-fit: cover;
+    right: -50px;
+    top: -40px;
+    height: 231px;
+    width: 234px;
   }
 
   ${WrapperStyles}
@@ -188,7 +187,7 @@ const CreateTextContainer = (props: TypeBannerPromoProps) => {
 
 const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
   (() => {
-    const { theme, includeSeal = true, actions } = props;
+    const { theme, includeSeal = false, actions } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
@@ -204,8 +203,6 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
 
     if (includeSeal) {
       let seal = AssetLogo.SEAL_WHITE;
-
-      if (theme === THEME_DARK) seal = AssetLogo.SEAL_GRAY_DARK;
 
       container.innerHTML = `${seal}`;
     }

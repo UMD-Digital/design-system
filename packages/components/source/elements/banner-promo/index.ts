@@ -158,6 +158,12 @@ const STYLES_BANNER_PROMO_ELEMENT = `
     width: 234px;
   }
 
+  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
+    .${ELEMENT_CONTAINER} > svg {
+      display: none;
+    }
+  }
+
   ${WrapperStyles}
   ${TextContainerStyles}
   ${HeadlineStyles}

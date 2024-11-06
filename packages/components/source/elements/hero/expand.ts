@@ -249,11 +249,9 @@ const elementPosition = `
     }
   }
 
-  @media (${Queries.tablet.min}) {
-    @supports (not (animation-timeline: view())) {
-      .${ELEMENT_EXPAND_STICKY} {
-        top: 0 !important;
-      }
+  @supports (not (animation-timeline: view())) {
+    .${ELEMENT_EXPAND_STICKY} {
+      top: 0 !important;
     }
   }
 `;

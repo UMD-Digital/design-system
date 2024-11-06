@@ -41,6 +41,7 @@ const ELEMENT_EXPAND_TEXT_BOTTOM_CONTAINER =
 const ELEMENT_EXPAND_TEXT_EYEBROW = 'hero-expand-text-eyebrow';
 const ELEMENT_EXPAND_TEXT_HEADLINE = 'hero-expand-text-headline';
 const ELEMENT_EXPAND_TEXT_ACTIONS = 'hero-expand-text-actions';
+const ELEMENT_EXPAND_TEXT_ADDITIONAL = 'hero-expand-text-additional';
 
 // prettier-ignore
 const ImageOverlayContainer = `
@@ -125,24 +126,35 @@ const ImageContainer = `
   }
 
   .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
     height: 100%;
-    width: 100%;
     overflow: clip;
     display: flex;
     align-items: center;
   }
 
+ @supports (not (animation-timeline: view())) {
+    .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
+      height: 56vw;
+    }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
-        animation: component-size ease-in-out forwards;
-        animation-timeline: view();
-        animation-range-start: 60vh;
-        animation-range-end: 120vh;
+        width: 10%;
         position: absolute;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
+        animation: component-size ease-in-out forwards;
+        animation-timeline: view();
+        animation-range-start: 60vh;
+        animation-range-end: 120vh;
       }
     }
   }
@@ -151,6 +163,7 @@ const ImageContainer = `
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
+          width: 100%;
           animation: component-size-tablet ease-in-out forwards;
           animation-timeline: view();
           animation-range-start: 60vh;
@@ -173,11 +186,21 @@ const TextContainer = `
 
   @media (${Queries.tablet.min}) {
     .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-      padding: ${Spacing.lg} 0;
+      padding: ${Spacing['3xl']} 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
+  }
+
+  @media (${Queries.highDef.min}) {
+    .${ELEMENT_EXPAND_TEXT_CONTAINER} {
+      padding: ${Spacing['6xl']} 0;
+    }
+  }
+
+  .${ELEMENT_EXPAND_TEXT_TOP_CONTAINER} + * {
+    margin-top: ${Spacing.lg};
   }
 
   .${ELEMENT_EXPAND_TEXT_EYEBROW} + * {
@@ -200,10 +223,11 @@ const TextContainer = `
     color: ${Colors.white};
     font-weight: 800;
     text-transform: uppercase;
+    text-wrap: balance;
   }
 
-  .${ELEMENT_EXPAND_TEXT_ACTIONS} {
-    margin-top: 30vh;
+  .${ELEMENT_EXPAND_TEXT_ACTIONS} + * {
+    margin-top: ${Spacing.lg};
   }
 `;
 
@@ -221,6 +245,14 @@ const elementPosition = `
           top: 0;
           height: 100vh;
         }
+      }
+    }
+  }
+
+  @media (${Queries.tablet.min}) {
+    @supports (not (animation-timeline: view())) {
+      .${ELEMENT_EXPAND_STICKY} {
+        top: 0 !important;
       }
     }
   }
@@ -324,6 +356,13 @@ const CreateTextContainer = ({
       actionsContainer.appendChild(actions);
       actionsContainer.classList.add(ELEMENT_EXPAND_TEXT_ACTIONS);
       bottomText.appendChild(actionsContainer);
+    }
+
+    if (additional) {
+      const additionalContainer = document.createElement('div');
+      additionalContainer.classList.add(ELEMENT_EXPAND_TEXT_ADDITIONAL);
+      additionalContainer.appendChild(additional);
+      bottomText.appendChild(additionalContainer);
     }
 
     bottomText.classList.add(ELEMENT_EXPAND_TEXT_BOTTOM_CONTAINER);

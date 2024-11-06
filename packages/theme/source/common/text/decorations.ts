@@ -122,31 +122,63 @@ const PillWrapper = {
   },
 };
 
+const PillListChild = {
+  display: 'inline-block',
+  padding: `${Spacing.min} ${Spacing.xs}`,
+  marginBottom: '0',
+  marginTop: Spacing.min,
+  transition: 'background-color 0.3s',
+
+  '& > span': {
+    display: 'flex',
+    gap: '4px',
+    whiteSpace: 'nowrap',
+  },
+};
+
+const PillListChildSvg = {
+  height: '12px',
+  width: '12px',
+};
+
 const PillList = {
   marginTop: `-${Spacing.min}`,
 
   '& > *': {
+    ...PillListChild,
     backgroundColor: Colors.gray.lightest,
-    display: 'inline-block',
-    padding: `${Spacing.min} ${Spacing.xs}`,
-    marginBottom: '0',
-    marginTop: Spacing.min,
-    transition: 'background-color 0.3s',
-
-    '& > span': {
-      display: 'flex',
-      gap: '4px',
-      whiteSpace: 'nowrap',
-    },
   },
 
   '& svg': {
-    height: '12px',
-    width: '12px',
+    ...PillListChildSvg,
   },
 
   '& a:hover, & a:focus': {
     backgroundColor: Colors.gold,
+  },
+};
+
+const PillListDark = {
+  ...PillList,
+
+  '& > *': {
+    ...PillListChild,
+    backgroundColor: Colors.gray.dark,
+    color: Colors.white,
+  },
+
+  '& svg': {
+    ...PillListChildSvg,
+    fill: Colors.white,
+  },
+
+  '& a:hover, & a:focus': {
+    backgroundColor: Colors.gray.lighter,
+    color: Colors.black,
+
+    '& svg': {
+      fill: Colors.black,
+    },
   },
 };
 
@@ -197,5 +229,8 @@ export default {
   },
   '.umd-pill-list': {
     ...PillList,
+  },
+  '.umd-pill-list-dark': {
+    ...PillListDark,
   },
 };

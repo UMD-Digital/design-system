@@ -2,7 +2,7 @@ import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
 
 const { Eyebrow } = Elements;
 const { Spacing, Colors, Queries } = Tokens;
-const { LabelSmall } = Typography;
+const { LabelSmall, SansMin } = Typography;
 
 const Tailwing = {
   ...LabelSmall,
@@ -123,6 +123,7 @@ const PillWrapper = {
 };
 
 const PillListChild = {
+  ...SansMin,
   display: 'inline-block',
   padding: `${Spacing.min} ${Spacing.xs}`,
   marginBottom: '0',

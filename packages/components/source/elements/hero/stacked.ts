@@ -101,7 +101,7 @@ const OverwriteTextContainer = `
   }
 
   ${OVERWRITE_TEXT_CONTAINER} {
-    padding: ${Spacing.lg};
+    padding: ${Spacing.lg} 0;
     display: flex;
     justify-content: center;
     text-align: center;

@@ -36,7 +36,7 @@ const WatermarkDark = {
   '> *': {
     ...Child,
     ...Animations.Scroll.SlideInFromLeft,
-    opacity: '0.2',
+    opacity: '0.12',
     zIndex: 'inherit',
   },
 };

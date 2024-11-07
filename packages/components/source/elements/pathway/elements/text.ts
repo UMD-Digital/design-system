@@ -104,6 +104,7 @@ const HeadlineStyles = `
     color: ${Colors.black};
     font-weight: 800;
     text-transform: uppercase;
+    text-wrap: balance;
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${LARGE}px) {

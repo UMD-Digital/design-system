@@ -77,6 +77,7 @@ const HeadlineStyles = `
   .${ELEMENTS_HERO_HEADLINE} {
     text-transform: uppercase;
     color: ${Colors.black};
+    text-wrap: balance;
   }
 
   .${ELEMENTS_HERO_HEADLINE} + * {

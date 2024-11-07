@@ -38,6 +38,7 @@ const HeadlineStyles = `
     opacity: 0;
     transition: opacity 1000ms ease-in-out;
     transition-delay: 600ms;
+    text-wrap: balance;
   }
 `;
 

@@ -105,14 +105,11 @@ const TextOverlayStyles = `
 
 const VideoStyles = `
   .${ELEMENT_HERO_ELEMENT_VIDEO} {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    height: auto;
-    min-width: 100%;
-    min-height: 100%;
+    top: 0;
+    left: 0;
   }
 `;
 

@@ -1,10 +1,4 @@
-import {
-  Elements,
-  Layout,
-  Tokens,
-  Typography,
-} from '@universityofmaryland/variables';
-import event from 'shadow-dom/event';
+import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 type TypeContent = {

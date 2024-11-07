@@ -16,7 +16,7 @@ type TypeHeroStackedProps = TypeTextContainerProps &
   };
 
 const { LockMax } = Layout;
-const { Colors, Spacing } = Tokens;
+const { Colors, Spacing, Queries } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignExtralarge, CampaignLarge, SansLarger } = Typography;
 
@@ -113,15 +113,17 @@ const OverwriteTextContainer = `
     }
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      ${OVERWRITE_RICH_TEXT},
-      ${OVERWRITE_RICH_TEXT} *,
-      ${OVERWRITE_HEADLINE} {
-        animation: hero-stacked-font-color ease-in-out forwards;
-        animation-timeline: view();
-        animation-range-start: 50vh;
-        animation-range-end: 160vh;
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        ${OVERWRITE_RICH_TEXT},
+        ${OVERWRITE_RICH_TEXT} *,
+        ${OVERWRITE_HEADLINE} {
+          animation: hero-stacked-font-color ease-in-out forwards;
+          animation-timeline: view();
+          animation-range-start: 50vh;
+          animation-range-end: 160vh;
+        }
       }
     }
   }
@@ -161,13 +163,15 @@ const OverwriteImageContainer = `
     opacity: 0;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .${ELEMENT_HERO_IMAGE_OVERLAY} {
-        animation: hero-stacked-fade-over ease-in-out forwards;
-        animation-timeline: view();
-        animation-range-start: 30vh;
-        animation-range-end: 70vh;
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .${ELEMENT_HERO_IMAGE_OVERLAY} {
+          animation: hero-stacked-fade-over ease-in-out forwards;
+          animation-timeline: view();
+          animation-range-start: 30vh;
+          animation-range-end: 70vh;
+        }
       }
     }
   }
@@ -189,13 +193,15 @@ export const STYLES_HERO_STACKED_ELEMENT = `
     position: relative;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      ${OVERWRITE_TEXT_CONTAINER} {
-        position: sticky;
-        top: 0;
-        overflow: clip;
-        z-index: 999;
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        ${OVERWRITE_TEXT_CONTAINER} {
+          position: sticky;
+          top: 0;
+          overflow: clip;
+          z-index: 999;
+        }
       }
     }
   }

@@ -9,7 +9,7 @@ type TypeHeroBrandVideoProps = {
   isAnimationOnLoad?: boolean;
 };
 
-const { Spacing, Colors } = Tokens;
+const { Spacing, Colors, Queries } = Tokens;
 const { CampaignMaxium, SansLarger } = Typography;
 const { Text } = Elements;
 const { ConvertJSSObjectToStyles } = Styles;
@@ -110,6 +110,18 @@ const VideoStyles = `
     position: absolute;
     top: 0;
     left: 0;
+  }
+
+  @media (${Queries.tablet.min}) {
+    .${ELEMENT_HERO_ELEMENT_VIDEO} {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+    }
   }
 `;
 

@@ -6,8 +6,8 @@ type TypeLayoutImageExpandProps = {
   image: HTMLImageElement;
 };
 
-const { ConvertJSSObjectToStyles } = Styles;
-const { Spacing, MaxWidth } = Tokens;
+const { ConvertJSSObjectToStyles, ConvertPixelStringToNumber } = Styles;
+const { Spacing, MaxWidth, Queries } = Tokens;
 const { LockMax } = Layout;
 const { IsPrefferdReducedMotion, IsScreenZoomed } = Accessibility;
 
@@ -61,7 +61,17 @@ const TextAnimation = `
         position: absolute;
         top: 0;
         height: 80vh;
-        transform: translateY(100vh);
+        transform: translateY(80vh);
+      }
+    }
+  }
+
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .${ELEMENT_EXPAND_TEXT_ANIMATION} {
+          transform: translateY(100vh);
+        }
       }
     }
   }
@@ -207,7 +217,17 @@ const STYLES_LAYOUT_IMAGE_EXPAND = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPLAND_DECLARATION} {
-        height: 200vh;
+        height: 180vh;
+      }
+    }
+  }
+
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .${ELEMENT_EXPLAND_DECLARATION} {
+          height: 200vh;
+        }
       }
     }
   }
@@ -272,10 +292,29 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
   const container = document.createElement('div');
   const imageContainer = CreateImageContainer(props);
   const textContainer = CreateTextContainer(props);
+  const sizeImageForText = () => {
+    const textContainerHeight =
+      textContainer.clientHeight +
+      ConvertPixelStringToNumber(Spacing['2xl']) * 2;
+    const imageContainerHeight = container.clientHeight;
+
+    console.log(textContainerHeight);
+
+    if (textContainerHeight > imageContainerHeight) {
+      container.style.minHeight = `${textContainerHeight}px`;
+    }
+  };
 
   if (IsScreenZoomed() && !IsPrefferdReducedMotion()) {
     textContainer.style.height = '90vh';
     textContainer.style.transform = 'translateY(0)';
+  }
+
+  if (!CSS.supports('animation-timeline', 'view()')) {
+    setTimeout(() => {
+      sizeImageForText();
+    }, 1000);
+    window.addEventListener('resize', () => sizeImageForText());
   }
 
   container.appendChild(imageContainer);

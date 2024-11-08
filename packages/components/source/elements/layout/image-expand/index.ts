@@ -298,8 +298,6 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
       ConvertPixelStringToNumber(Spacing['2xl']) * 2;
     const imageContainerHeight = container.clientHeight;
 
-    console.log(textContainerHeight);
-
     if (textContainerHeight > imageContainerHeight) {
       container.style.minHeight = `${textContainerHeight}px`;
     }

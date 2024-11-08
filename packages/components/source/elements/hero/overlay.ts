@@ -77,6 +77,16 @@ const OverwriteTextContainer = `
   ${OVERWRITE_TEXT_CONTAINER} {
     padding: ${Spacing.lg} 0;
     display: flex;
+    position: relative;
+    z-index: 99;
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
+    @media (prefers-reduced-motion: no-preference) {
+      ${OVERWRITE_TEXT_CONTAINER} {
+        animation: hero-slide-up forwards 1.5s;
+      }
+    }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
@@ -89,6 +99,11 @@ const OverwriteTextContainer = `
 
 // prettier-ignore
 const OverwriteImageContainer = `
+  @keyframes hero-overlay-resize {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+  }
+
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       position: absolute;
@@ -96,19 +111,7 @@ const OverwriteImageContainer = `
       height: calc(100% - ${Spacing['5xl']});
       right: 0;
       top: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    ${OVERWRITE_IMAGE_CONTAINER}:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(0, 0, 0, .9) 0%, rgba(0, 0, 0, 0) 80%);
-      z-index: 99;
+      overflow: visible;
     }
   }
 
@@ -119,16 +122,39 @@ const OverwriteImageContainer = `
     height: 100%;
     width: 100%;
   }
+
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
+    @media (prefers-reduced-motion: no-preference) {
+      ${OVERWRITE_IMAGE_CONTAINER} img,
+      ${OVERWRITE_IMAGE_CONTAINER} video{
+        animation: hero-overlay-resize forwards 1.5s;
+      }
+    }
+  }
 `;
 
 export const STYLES_HERO_OVERLAY_ELEMENT = `
   .${ELEMENT_HERO_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
+    overflow: clip;
   }
 
   .${ELEMENT_HERO_CONTAINER} {
     position: relative;
     background-color: ${Colors.black};
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
+    .${ELEMENT_HERO_CONTAINER}:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      z-index: 999;
+    }
   }
 
   ${ConvertJSSObjectToStyles({
@@ -141,6 +167,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
     height: 100%;
     width: 100%;
     position: relative;
+    z-index: 999;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {

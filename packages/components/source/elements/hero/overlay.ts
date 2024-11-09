@@ -152,7 +152,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
       top: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      background: linear-gradient(90deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, .8) 50%, rgba(0, 0, 0, 0) 75%);
       z-index: 999;
     }
   }

@@ -68,14 +68,7 @@ const OverwriteImagesStyles = `
 
 const WrapperStyles = `
   .${ELEMENT_PERSON_BLOCK_WRAPPER} {
-    padding: ${Spacing.md};
     height: 100%;
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${PADDING_BREAKPOINT}px) {
-    .${ELEMENT_PERSON_BLOCK_WRAPPER} {
-      padding: ${Spacing['2xl']};
-    }
   }
 `;
 

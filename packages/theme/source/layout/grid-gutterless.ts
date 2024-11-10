@@ -2,6 +2,14 @@ import { Tokens } from '@universityofmaryland/variables';
 
 const { Queries, Spacing, Colors } = Tokens;
 
+const BorderedChildren = {
+  padding: Spacing.md,
+
+  [`@media (${Queries.highDef.min})`]: {
+    padding: Spacing['2xl'],
+  },
+};
+
 const GutterlessTwoColumn = {
   display: 'grid',
   gridGap: Spacing.min,
@@ -56,6 +64,7 @@ const GutterlessTwoColumnBorder = {
   '& > *': {
     borderBottom: `1px solid ${Colors.gray.light}`,
     borderRight: `1px solid ${Colors.gray.light}`,
+    ...BorderedChildren,
   },
 
   '&:not(:has(> :last-child:nth-child(2)))': {
@@ -79,6 +88,7 @@ const GutterlessThreeColumnBorder = {
   '& > *': {
     borderBottom: `1px solid ${Colors.gray.light}`,
     borderRight: `1px solid ${Colors.gray.light}`,
+    ...BorderedChildren,
   },
 
   '&:not(:has(> :last-child:nth-child(3)))': {
@@ -106,6 +116,7 @@ const GutterlessFourColumnBorder = {
   '& > *': {
     borderBottom: `1px solid ${Colors.gray.light}`,
     borderRight: `1px solid ${Colors.gray.light}`,
+    ...BorderedChildren,
   },
 
   '&:not(:has(> :last-child:nth-child(4)))': {
@@ -166,6 +177,7 @@ const GridColumnsGutterlessBorderDark = {
     '& > *': {
       borderBottom: `1px solid ${Colors.gray.dark}`,
       borderRight: `1px solid ${Colors.gray.dark}`,
+      ...BorderedChildren,
     },
 
     '&:not(:has(> :last-child:nth-child(2)))': {
@@ -189,6 +201,7 @@ const GridColumnsGutterlessBorderDark = {
     '& > *': {
       borderBottom: `1px solid ${Colors.gray.dark}`,
       borderRight: `1px solid ${Colors.gray.dark}`,
+      ...BorderedChildren,
     },
 
     '&:not(:has(> :last-child:nth-child(3)))': {
@@ -216,6 +229,7 @@ const GridColumnsGutterlessBorderDark = {
     '& > *': {
       borderBottom: `1px solid ${Colors.gray.dark}`,
       borderRight: `1px solid ${Colors.gray.dark}`,
+      ...BorderedChildren,
     },
 
     '&:not(:has(> :last-child:nth-child(4)))': {

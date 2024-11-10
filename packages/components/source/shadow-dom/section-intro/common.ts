@@ -1,26 +1,16 @@
-import { MarkupCreate } from 'utilities';
+import { MarkupCreate, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-
-export const SLOTS = {
-  HEADLINE: 'headline',
-  ACTIONS: 'actions',
-};
+const { Slots } = WebComponents;
 
 export const CommonIntroData = ({
   element,
-  slots,
   theme,
 }: {
   element: HTMLElement;
-  slots: Record<string, string>;
   theme?: string | null;
-}) => {
-  const { HEADLINE, ACTIONS } = slots;
-
-  return {
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-    theme,
-  };
-};
+}) => ({
+  headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
+  actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+  theme,
+});

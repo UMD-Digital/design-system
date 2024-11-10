@@ -4,19 +4,13 @@ declare global {
   }
 }
 
-import { Styles, MarkupCreate } from 'utilities';
 import { AlertSite } from 'elements';
+import { Styles, MarkupCreate, WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
+const { SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-alert-site';
-const ATTRIBUTE_DAYS = 'days-to-hide';
-
-const SLOTS = {
-  HEADLINE: 'headline',
-  BODY: 'body',
-  ACTIONS: 'actions',
-};
 
 export const styles = `
   :host {
@@ -34,11 +28,11 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const alert = AlertSite.CreateElement({
     headline: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.HEADLINE,
+      slotRef: Slots.HEADLINE,
     }),
-    text: SlotWithDefaultStyling({ element, slotRef: SLOTS.BODY }),
-    actions: SlotWithDefaultStyling({ element, slotRef: SLOTS.ACTIONS }),
-    daysToHide: element.getAttribute(ATTRIBUTE_DAYS) || '10',
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
+    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    daysToHide: element.getAttribute(Attributes.VISUAL_DAYS_TO_HIDE) || '10',
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
@@ -56,13 +50,6 @@ class UMDAlertSiteElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

@@ -5,17 +5,12 @@ declare global {
 }
 
 import { CarouselThumbnail } from 'elements';
-import { MarkupCreate, Styles } from 'utilities';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
-const { Node, SlotOberserver } = MarkupCreate;
+const { Node } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-carousel-thumbnail';
-const ATTRIBUTE_RESIZE = 'resize';
-const ATTRIBUTE_THEME = 'theme';
-
-const SLOTS = {
-  blocks: 'blocks',
-};
 
 const styles = `
   :host {
@@ -33,9 +28,9 @@ const CreateShadowDom = ({
   element: UMDCarouselThumbnailElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(ATTRIBUTE_THEME);
+  const theme = element.getAttribute(Attributes.THEME);
   const slottedBlocks = Array.from(
-    element.querySelectorAll(`[slot="${SLOTS.blocks}"] > *`),
+    element.querySelectorAll(`[slot="${Slots.BLOCKS}"] > *`),
   ) as HTMLElement[];
 
   const blocks = slottedBlocks.map((block) =>
@@ -71,7 +66,7 @@ class UMDCarouselThumbnailElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE];
+    return [Attributes.RESIZE];
   }
 
   attributeChangedCallback(
@@ -79,20 +74,13 @@ class UMDCarouselThumbnailElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == ATTRIBUTE_RESIZE && newValue === 'true' && this._elementRef) {
+    if (name == Attributes.RESIZE && newValue === 'true' && this._elementRef) {
       this._elementRef.events.SetEventReize();
     }
   }
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

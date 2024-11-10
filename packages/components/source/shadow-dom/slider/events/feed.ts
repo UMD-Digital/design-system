@@ -4,20 +4,11 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { SliderEvents, FeedsSlides } from 'elements';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-
-const ATTRIBUTE_RESIZE = 'resize';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_TYPE = 'type';
-const ATTRIBUTE_TOKEN = 'token';
-const THEME_LIGHT = 'light';
-const SLOTS = {
-  HEADLINE: 'headline',
-  ACTIONS: 'actions',
-};
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-slider-events-feed';
 
@@ -39,9 +30,10 @@ const CreateShadowDom = async ({
   element: UMDSliderEventsFeedElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const token = element.getAttribute(ATTRIBUTE_TOKEN);
-  const type = element.getAttribute(ATTRIBUTE_TYPE) || 'academic';
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+  const token = element.getAttribute(Attributes.FEED_TOKEN);
+  const type = element.getAttribute(Attributes.TYPE) || 'academic';
   const categories = element.getAttribute('categories');
 
   if (!token) throw new Error('Token is required for this component');
@@ -63,11 +55,11 @@ const CreateShadowDom = async ({
     dataSlider,
     headline: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.HEADLINE,
+      slotRef: Slots.HEADLINE,
     }),
     actions: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.ACTIONS,
+      slotRef: Slots.ACTIONS,
     }),
   });
 
@@ -94,7 +86,7 @@ export class UMDSliderEventsFeedElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE];
+    return [Attributes.RESIZE];
   }
 
   attributeChangedCallback(
@@ -102,7 +94,7 @@ export class UMDSliderEventsFeedElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == ATTRIBUTE_RESIZE && newValue === 'true') {
+    if (name == Attributes.RESIZE && newValue === 'true') {
       if (this._elementRef) this._elementRef.events.SetDateElementsSizes();
     }
   }

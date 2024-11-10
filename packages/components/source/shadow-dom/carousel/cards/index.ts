@@ -5,18 +5,12 @@ declare global {
 }
 
 import { CarouselCards } from 'elements';
-import { MarkupCreate, Styles } from 'utilities';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling, Node } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-carousel-cards';
-const ATTRIBUTE_RESIZE = 'resize';
-const SLOTS = {
-  HEADLINE: 'headline',
-  TEXT: 'text',
-  ACTIONS: 'actions',
-  CARDS: 'cards',
-};
 
 const styles = `
   :host {
@@ -30,20 +24,20 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const slide = element.querySelector(`[slot="${SLOTS.CARDS}"]`) as HTMLElement;
+  const slide = element.querySelector(`[slot="${Slots.CARDS}"]`) as HTMLElement;
   const cards = Array.from(
     slide.querySelectorAll(':scope > *'),
   ) as HTMLElement[];
 
   const createCardShadowRef = () => {
-    const slot = Node.slot({ type: SLOTS.CARDS });
+    const slot = Node.slot({ type: Slots.CARDS });
     element._shadow.appendChild(slot);
   };
 
   createCardShadowRef();
 
   const shadowRef = shadow.querySelector(
-    `[name="${SLOTS.CARDS}"]`,
+    `[name="${Slots.CARDS}"]`,
   ) as HTMLElement;
   const carousel = CarouselCards.CreateElement({
     slide,
@@ -51,12 +45,12 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
     cards,
     headline: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.HEADLINE,
+      slotRef: Slots.HEADLINE,
     }),
-    text: SlotWithDefaultStyling({ element, slotRef: SLOTS.TEXT }),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
     actions: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.ACTIONS,
+      slotRef: Slots.ACTIONS,
     }),
   });
 
@@ -83,7 +77,7 @@ class UMDCarouselCardsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE];
+    return [Attributes.RESIZE];
   }
 
   attributeChangedCallback(
@@ -91,7 +85,7 @@ class UMDCarouselCardsElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == ATTRIBUTE_RESIZE && newValue === 'true' && this._elementRef) {
+    if (name == Attributes.RESIZE && newValue === 'true' && this._elementRef) {
       this._elementRef.events.SetEventReize();
     }
   }

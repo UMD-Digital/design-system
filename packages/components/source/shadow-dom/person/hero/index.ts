@@ -4,16 +4,14 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { PersonHero } from 'elements';
-import { SLOTS as CommonSlots, CommonPersonData } from '../common';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
+import { CommonPersonData } from '../common';
 
-const { Node, SlotOberserver } = MarkupCreate;
+const { Node } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-person-hero';
-
-const ATTRIBUTE_THEME = 'theme';
-const THEME_LIGHT = 'light';
 
 export const styles = `
   :host {
@@ -34,16 +32,17 @@ export const CreateShadowDom = ({
   element: UMDPersonHeroElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const breadcrumbSlot = Node.slot({ type: 'breadcrumb' });
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+  const breadcrumbSlot = Node.slot({ type: Slots.BREADCRUMB });
 
   if (breadcrumbSlot) {
-    const breadcrumb = element.querySelector('[slot="breadcrumb"]');
+    const breadcrumb = element.querySelector(`[slot="${Slots.BREADCRUMB}"]`);
     if (breadcrumb) {
       const copy = breadcrumb.cloneNode(true);
 
       element.appendChild(copy);
-      breadcrumb.setAttribute('slot', 'breadcrumb-copy');
+      breadcrumb.setAttribute('slot', Slots.BREADCRUMB_COPY);
     }
   }
 
@@ -51,32 +50,23 @@ export const CreateShadowDom = ({
 
   shadow.appendChild(
     PersonHero.CreateElement({
-      ...CommonPersonData({ element, slots: element._slots, theme }),
-      breadcrumbDesktop: Node.slot({ type: 'breadcrumb' }),
-      breadcrumbMobile: Node.slot({ type: 'breadcrumb-copy' }),
+      ...CommonPersonData({ element, theme }),
+      breadcrumbDesktop: Node.slot({ type: Slots.BREADCRUMB }),
+      breadcrumbMobile: Node.slot({ type: Slots.BREADCRUMB_COPY }),
     }),
   );
 };
 
 export class UMDPersonHeroElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = CommonSlots;
   }
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: this._slots,
-      CreateShadowDom,
-    });
   }
 }
 

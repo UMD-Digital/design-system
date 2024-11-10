@@ -5,20 +5,13 @@ declare global {
 }
 
 import { PathwayHighlight, PathwayElements } from 'elements';
-import { Styles, MarkupCreate } from 'utilities';
-import { SLOTS as CommonSlots, CommonPathwayData } from '../common';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
+import { CommonPathwayData } from '../common';
 
-const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
+const { SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
-const ATTRIBUTE_THEME = 'theme';
-const THEME_LIGHT = 'light';
-const THEME_DARK = 'dark';
-const SLOTS = {
-  ...CommonSlots,
-  HIGHLIGHT: 'highlight',
-  HIGHLIGHT_ATTRIBUTION: 'highlight-attribution',
-};
 
 const styles = `
   :host {
@@ -39,13 +32,14 @@ const CreateShadowDom = ({
   element: UMDPathwayHighlightElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const { HIGHLIGHT, HIGHLIGHT_ATTRIBUTION } = SLOTS;
-  const themeAttribute = element.getAttribute(ATTRIBUTE_THEME);
+  const themeAttribute = element.getAttribute(Attributes.THEME);
   let theme = null;
 
   if (themeAttribute) {
-    if (themeAttribute === THEME_LIGHT) theme = THEME_LIGHT;
-    if (themeAttribute === THEME_DARK) theme = THEME_DARK;
+    if (themeAttribute === AttributesValues.THEME_LIGHT)
+      theme = AttributesValues.THEME_LIGHT;
+    if (themeAttribute === AttributesValues.THEME_DARK)
+      theme = AttributesValues.THEME_DARK;
   }
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
@@ -54,15 +48,14 @@ const CreateShadowDom = ({
     PathwayHighlight.CreateElement({
       ...CommonPathwayData({
         element,
-        slots: SLOTS,
       }),
       quote: SlotWithDefaultStyling({
         element,
-        slotRef: HIGHLIGHT,
+        slotRef: Slots.HIGHLIGHT,
       }),
       attribution: SlotWithDefaultStyling({
         element,
-        slotRef: HIGHLIGHT_ATTRIBUTION,
+        slotRef: Slots.HIGHLIGHT_ATTRIBUTION,
       }),
       theme,
     }),
@@ -79,13 +72,6 @@ export class UMDPathwayHighlightElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

@@ -4,19 +4,11 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { SliderEvents } from 'elements';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
-
-const ATTRIBUTE_RESIZE = 'resize';
-const ATTRIBUTE_THEME = 'theme';
-const THEME_LIGHT = 'light';
-const SLOTS = {
-  EVENT_LIST: 'event-list',
-  HEADLINE: 'headline',
-  ACTIONS: 'actions',
-};
+const { SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-slider-events';
 
@@ -33,12 +25,13 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
   const dataSlider = document.createElement('div');
-  const dataSliderSlot = element.querySelector(`[slot=${SLOTS.EVENT_LIST}]`);
+  const dataSliderSlot = element.querySelector(`[slot=${Slots.EVENT_LIST}]`);
 
   if (!dataSliderSlot) {
-    throw new Error(`Slot ${SLOTS.EVENT_LIST} is required`);
+    throw new Error(`Slot ${Slots.EVENT_LIST} is required`);
   }
 
   dataSlider.innerHTML = dataSliderSlot.innerHTML;
@@ -48,11 +41,11 @@ const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
     dataSlider,
     headline: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.HEADLINE,
+      slotRef: Slots.HEADLINE,
     }),
     actions: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.ACTIONS,
+      slotRef: Slots.ACTIONS,
     }),
   });
 
@@ -79,7 +72,7 @@ export class UMDSliderEventsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE];
+    return [Attributes.RESIZE];
   }
 
   attributeChangedCallback(
@@ -87,20 +80,13 @@ export class UMDSliderEventsElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == ATTRIBUTE_RESIZE && newValue === 'true') {
+    if (name == Attributes.RESIZE && newValue === 'true') {
       if (this._elementRef) this._elementRef.events.SetDateElementsSizes();
     }
   }
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

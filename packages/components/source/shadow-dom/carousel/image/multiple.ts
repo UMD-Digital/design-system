@@ -5,20 +5,13 @@ declare global {
 }
 
 import { CarouselImageMultiple } from 'elements';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
 const { ImageHasAlt } = MarkupValidate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-carousel-multiple-image';
-const ATTRIBUTE_RESIZE = 'resize';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_FULLSCREEN = 'option-full-screen';
-
-const SLOTS = {
-  IMAGES: 'images',
-};
-
 const styles = `
   :host {
     display: block;
@@ -35,11 +28,12 @@ const CreateShadowDom = ({
   element: UMDCarouselImageMultipleElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(ATTRIBUTE_THEME);
+  const theme = element.getAttribute(Attributes.THEME);
   const isFullScreenOption =
-    element.getAttribute(ATTRIBUTE_FULLSCREEN) !== 'false';
+    element.getAttribute(Attributes.OPTIONAL_FULLSCREEN) !==
+    AttributesValues.STATE_FALSE;
   const slottedImages = Array.from(
-    element.querySelectorAll(`[slot="${SLOTS.IMAGES}"] > *`),
+    element.querySelectorAll(`[slot="${Slots.IMAGES}"] > *`),
   ) as HTMLImageElement[];
 
   const images = slottedImages
@@ -82,7 +76,7 @@ class UMDCarouselImageMultipleElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE];
+    return [Attributes.RESIZE];
   }
 
   attributeChangedCallback(
@@ -90,7 +84,7 @@ class UMDCarouselImageMultipleElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == ATTRIBUTE_RESIZE && newValue === 'true' && this._elementRef) {
+    if (name == Attributes.RESIZE && newValue === 'true' && this._elementRef) {
       this._elementRef.events.SetEventReize();
     }
   }

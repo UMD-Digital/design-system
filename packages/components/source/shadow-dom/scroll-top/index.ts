@@ -5,12 +5,12 @@ declare global {
 }
 
 import { ScrollTop } from 'elements';
-import { MarkupCreate, Styles } from 'utilities';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { Attributes } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-scroll-top';
-const ATTRIBUTE_FIXED = 'fixed';
 
 const styles = `
   :host {
@@ -26,7 +26,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDScrollTopElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const scrollTop = ScrollTop.CreateElement({
-    isFixed: element.hasAttribute(ATTRIBUTE_FIXED),
+    isFixed: element.hasAttribute(Attributes.LAYOUT_FIXED),
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

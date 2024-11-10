@@ -5,15 +5,12 @@ declare global {
 }
 
 import { LayoutImageExpand } from 'elements';
-import { Styles, MarkupCreate, MarkupValidate } from 'utilities';
+import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
-const { SlotOberserver, Node } = MarkupCreate;
+const { Node } = MarkupCreate;
+const { Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
-const SLOTS = {
-  CONTENT: 'content',
-  IMAGE: 'image',
-};
 
 const styles = `
   :host {
@@ -33,7 +30,7 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const content = Node.slot({ type: 'content' });
-  const image = MarkupValidate.ImageSlot({ element, ImageSlot: SLOTS.IMAGE });
+  const image = MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE });
 
   if (content && image) {
     const component = LayoutImageExpand.CreateElement({
@@ -56,13 +53,6 @@ export class UMDLayoutImageExpand extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

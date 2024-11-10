@@ -5,18 +5,13 @@ declare global {
 }
 
 import { CardIconBlock } from 'elements';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
-const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-card-icon';
-const ATTRIBUTE_THEME = 'theme';
-const THEME_LIGHT = 'light';
-const SLOTS = {
-  IMAGE: 'image',
-  HEADLINE: 'headline',
-  TEXT: 'text',
-};
+
 const styles = `
   :host {
     display: block;
@@ -29,13 +24,13 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeCardData = ({ element }: { element: UMDCardIconElement }) => {
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const { HEADLINE, TEXT, IMAGE } = SLOTS;
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
 
   return {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
     theme,
   };
 };
@@ -60,13 +55,6 @@ class UMDCardIconElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

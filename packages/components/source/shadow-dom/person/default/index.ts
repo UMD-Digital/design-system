@@ -4,19 +4,14 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { PersonBlock, PersonList, PersonTabular } from 'elements';
-import { SLOTS as CommonSlots, CommonPersonData } from '../common';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
+import { CommonPersonData } from '../common';
 
-const { Node, SlotOberserver } = MarkupCreate;
+const { Node } = MarkupCreate;
+const { Attributes, AttributesValues } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-person';
-
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_DISPLAY = 'display';
-const THEME_LIGHT = 'light';
-const DISPLAY_LIST = 'list';
-const DISPLAY_TABULAR = 'tabular';
 
 export const styles = `
   :host {
@@ -36,57 +31,44 @@ const styleTemplate = Node.stylesTemplate({
 export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const isDisplayList =
-    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
+    element.getAttribute(Attributes.DISPLAY) === AttributesValues.DISPLAY_LIST;
   const isDisplayTabular =
-    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_TABULAR;
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
+    element.getAttribute(Attributes.DISPLAY) ===
+    AttributesValues.DISPLAY_TABULAR;
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
   if (isDisplayList) {
     shadow.appendChild(
-      PersonList.CreateElement(
-        CommonPersonData({ element, slots: element._slots, theme }),
-      ),
+      PersonList.CreateElement(CommonPersonData({ element, theme })),
     );
     return;
   }
 
   if (isDisplayTabular) {
     shadow.appendChild(
-      PersonTabular.CreateElement(
-        CommonPersonData({ element, slots: element._slots, theme }),
-      ),
+      PersonTabular.CreateElement(CommonPersonData({ element, theme })),
     );
     return;
   }
 
   shadow.appendChild(
-    PersonBlock.CreateElement(
-      CommonPersonData({ element, slots: element._slots, theme }),
-    ),
+    PersonBlock.CreateElement(CommonPersonData({ element, theme })),
   );
 };
 
 export class UMDPersonElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = CommonSlots;
   }
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: this._slots,
-      CreateShadowDom,
-    });
   }
 }
 

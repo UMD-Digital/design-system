@@ -5,18 +5,13 @@ declare global {
 }
 
 import { SectionIntro } from 'elements';
-import { Styles, MarkupCreate } from 'utilities';
-import { SLOTS as CommonSlots, CommonIntroData } from '../common';
+import { Styles, MarkupCreate, WebComponents } from 'utilities';
+import { CommonIntroData } from '../common';
 
-const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
+const { SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-section-intro';
-const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
-const ATTRIBUTE_THEME = 'theme';
-const SLOTS = {
-  ...CommonSlots,
-  TEXT: 'text',
-};
 
 const styles = `
   :host {
@@ -38,11 +33,10 @@ export const CreateShadowDom = ({
   const intro = SectionIntro.CreateElement({
     ...CommonIntroData({
       element,
-      slots: SLOTS,
-      theme: element.getAttribute(ATTRIBUTE_THEME),
+      theme: element.getAttribute(Attributes.THEME),
     }),
-    text: SlotWithDefaultStyling({ element, slotRef: SLOTS.TEXT }),
-    hasSeparator: element.hasAttribute(ATTRIBUTE_WITH_SEPARATOR),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    hasSeparator: element.hasAttribute(Attributes.OPTIONAL_HAS_SEPARATOR),
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
@@ -59,13 +53,6 @@ export class UMDSectionIntroElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

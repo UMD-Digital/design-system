@@ -1,5 +1,5 @@
-import { MarkupCreate } from 'utilities';
 import { NavigationElements } from 'elements';
+import { MarkupCreate } from 'utilities';
 
 const { Node } = MarkupCreate;
 

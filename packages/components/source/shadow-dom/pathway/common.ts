@@ -1,27 +1,11 @@
-import { MarkupCreate } from 'utilities';
+import { MarkupCreate, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { Slots } = WebComponents;
 
-export const SLOTS = {
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
-};
-
-export const CommonPathwayData = ({
-  element,
-  slots,
-}: {
-  element: HTMLElement;
-  slots: Record<string, string>;
-}) => {
-  const { HEADLINE, ACTIONS, EYEBROW, TEXT } = slots;
-
-  return {
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    action: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-  };
-};
+export const CommonPathwayData = ({ element }: { element: HTMLElement }) => ({
+  eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
+  headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
+  text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+  action: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+});

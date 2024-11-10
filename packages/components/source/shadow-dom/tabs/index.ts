@@ -4,18 +4,13 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { Tabs, TabsElements } from 'elements';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
-const { SlotOberserver, Node } = MarkupCreate;
+const { Node } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-tabs';
-const ATTRIBUTE_RESIZE = 'resize';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_POSITION_TOP = 'position-top';
-const THEME_LIGHT = 'light';
-
-const SLOTS = { TABS: 'tabs' };
 
 const styles = `
   :host {
@@ -30,10 +25,11 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const topPosition = element.getAttribute(ATTRIBUTE_POSITION_TOP);
-  const slot = Node.slot({ type: SLOTS.TABS });
-  const markup = element.querySelector(`[slot="${SLOTS.TABS}"]`);
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+  const topPosition = element.getAttribute(Attributes.LAYOUT_STICKY_TOP);
+  const slot = Node.slot({ type: Slots.TABS });
+  const markup = element.querySelector(`[slot="${Slots.TABS}"]`);
 
   const modifyDom = () => {
     if (!markup) return;
@@ -82,26 +78,19 @@ class UMDTabsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE];
+    return [Attributes.RESIZE];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (!this._elementRef) return;
 
-    if (name === ATTRIBUTE_RESIZE && newValue === 'true') {
+    if (name === Attributes.RESIZE && newValue === 'true') {
       this._elementRef.events.resize();
     }
   }
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

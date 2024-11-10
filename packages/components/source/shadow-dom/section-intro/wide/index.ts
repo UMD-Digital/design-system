@@ -5,13 +5,13 @@ declare global {
 }
 
 import { SectionIntroWide } from 'elements';
-import { Styles, MarkupCreate } from 'utilities';
-import { SLOTS as CommonSlots, CommonIntroData } from '../common';
+import { Styles, MarkupCreate, WebComponents } from 'utilities';
+import { CommonIntroData } from '../common';
 
-const { Node, SlotOberserver } = MarkupCreate;
+const { Node } = MarkupCreate;
+const { Attributes } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-section-intro-wide';
-const ATTRIBUTE_THEME = 'theme';
 
 const styles = `
   :host {
@@ -33,8 +33,7 @@ export const CreateShadowDom = ({
   const intro = SectionIntroWide.CreateElement(
     CommonIntroData({
       element,
-      slots: CommonSlots,
-      theme: element.getAttribute(ATTRIBUTE_THEME),
+      theme: element.getAttribute(Attributes.THEME),
     }),
   );
 
@@ -52,13 +51,6 @@ export class UMDSectionIntroWideElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: CommonSlots,
-      CreateShadowDom,
-    });
   }
 }
 

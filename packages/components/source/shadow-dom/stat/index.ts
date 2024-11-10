@@ -4,44 +4,34 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { Stat } from 'elements';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
-const { ResetString } = Styles;
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-stat';
-const ATTRIBUTE_TYPE = 'display-type';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_SIZE = 'size';
-const ATTRIBUTE_HAS_LINE = 'has-line';
-const SLOTS = {
-  STAT: 'stat',
-  TEXT: 'text',
-  SUB_TEXT: 'sub-text',
-};
 
 const styles = `
   :host {
     display: block;
   }
 
-  ${ResetString}
+  ${Styles.ResetString}
   ${Stat.Styles}
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
-  const { STAT, TEXT, SUB_TEXT } = SLOTS;
-  const lineAttr = element.hasAttribute(ATTRIBUTE_HAS_LINE);
+  const lineAttr = element.hasAttribute(Attributes.OPTIONAL_HAS_LINE);
 
   return Stat.CreateElement({
-    theme: element.getAttribute(ATTRIBUTE_THEME),
-    displayType: element.getAttribute(ATTRIBUTE_TYPE),
-    size: element.getAttribute(ATTRIBUTE_SIZE),
+    theme: element.getAttribute(Attributes.THEME),
+    displayType: element.getAttribute(Attributes.DISPLAY_TYPE),
+    size: element.getAttribute(Attributes.DISPLAY_SIZE),
     hasLine: lineAttr ? true : false,
-    stat: SlotWithDefaultStyling({ element, slotRef: STAT }),
-    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    subText: SlotWithDefaultStyling({ element, slotRef: SUB_TEXT }),
+    stat: SlotWithDefaultStyling({ element, slotRef: Slots.STAT }),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    subText: SlotWithDefaultStyling({ element, slotRef: Slots.SUB_TEXT }),
   });
 };
 

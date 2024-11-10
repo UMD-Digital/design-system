@@ -4,16 +4,13 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 import { BannerPromo } from 'elements';
 
-const { SlotWithDefaultStyling, SlotOberserver, Node } = MarkupCreate;
+const { SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-banner-promo';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_HAS_LOGO = 'hasLogo';
-
-const SLOTS = { HEADLINE: 'headline', TEXT: 'text', ACTIONS: 'actions' };
 
 const styles = `
   :host {
@@ -27,24 +24,24 @@ const styles = `
 const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const hasLogo = element.getAttribute(ATTRIBUTE_HAS_LOGO);
+  const hasLogo = element.getAttribute(Attributes.VISUAL_HAS_LOGO);
   let includeSeal = false;
 
   if (hasLogo === 'true') includeSeal = true;
 
   const banner = BannerPromo.CreateElement({
-    theme: element.getAttribute(ATTRIBUTE_THEME),
+    theme: element.getAttribute(Attributes.THEME),
     text: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.TEXT,
+      slotRef: Slots.TEXT,
     }),
     headline: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.HEADLINE,
+      slotRef: Slots.HEADLINE,
     }),
     actions: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.ACTIONS,
+      slotRef: Slots.ACTIONS,
     }),
     includeSeal,
   });
@@ -63,13 +60,6 @@ class UMDBannerPromoElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

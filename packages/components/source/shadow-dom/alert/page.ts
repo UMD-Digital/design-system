@@ -4,19 +4,13 @@ declare global {
   }
 }
 
-import { Styles, MarkupCreate } from 'utilities';
 import { AlertPage } from 'elements';
+import { Styles, MarkupCreate, WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling, SlotOberserver } = MarkupCreate;
+const { SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-alert-page';
-const ATTRIBUTE_ICON = 'icon';
-
-const SLOTS = {
-  HEADLINE: 'headline',
-  BODY: 'body',
-  ACTIONS: 'actions',
-};
 
 const styles = `
   :host {
@@ -34,13 +28,15 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const theme = element.getAttribute('theme');
 
   const alert = AlertPage.CreateElement({
-    text: SlotWithDefaultStyling({ element, slotRef: SLOTS.BODY }),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
     headline: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.HEADLINE,
+      slotRef: Slots.HEADLINE,
     }),
-    actions: SlotWithDefaultStyling({ element, slotRef: SLOTS.ACTIONS }),
-    isShowIcon: element.getAttribute(ATTRIBUTE_ICON) === 'true',
+    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    isShowIcon:
+      element.getAttribute(Attributes.VISUAL_ICON) ===
+      AttributesValues.STATE_TRUE,
     theme,
   });
 
@@ -59,13 +55,6 @@ class UMDAlertPageElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

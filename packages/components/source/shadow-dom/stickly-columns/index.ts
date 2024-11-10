@@ -5,19 +5,12 @@ declare global {
 }
 
 import { StickyColumns } from 'elements';
-import { MarkupCreate } from 'utilities';
-import { Styles } from 'utilities';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-sticky-columns';
-const ATTRIBUTE_STICKY_FIRST = 'isStickyFirst';
-const ATTRIBUTE_POSITION_TOP = 'position-top';
-
-const SLOTS = {
-  STICKY_COLUMN: 'sticky-column',
-  STATIC_COLUMN: 'static-column',
-};
 
 const styles = `
   :host {
@@ -33,12 +26,13 @@ export const CreateShadowDom = ({
 }: {
   element: UMDStickyColumnElement;
 }) => {
-  const { STICKY_COLUMN, STATIC_COLUMN } = element._slots;
-  const isStickyLast = element.getAttribute(ATTRIBUTE_STICKY_FIRST) === 'false';
-  const topPosition = element.getAttribute(ATTRIBUTE_POSITION_TOP);
+  const isStickyLast =
+    element.getAttribute(Attributes.OPTIONAL_STICKY_FIRST) ===
+    AttributesValues.STATE_FALSE;
+  const topPosition = element.getAttribute(Attributes.LAYOUT_STICKY_TOP);
 
-  const stickyColumn = Node.slot({ type: STICKY_COLUMN });
-  const staticColumn = Node.slot({ type: STATIC_COLUMN });
+  const stickyColumn = Node.slot({ type: Slots.STICKY_COLUMN });
+  const staticColumn = Node.slot({ type: Slots.STATIC_COLUMN });
 
   const component = StickyColumns.CreateElement({
     stickyColumn,
@@ -53,7 +47,6 @@ export const CreateShadowDom = ({
 
 export class UMDStickyColumnElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
   _elementRef: {
     element: HTMLDivElement;
     events: {
@@ -66,19 +59,18 @@ export class UMDStickyColumnElement extends HTMLElement {
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
     this._shadow.appendChild(template.content.cloneNode(true));
     this._elementRef = null;
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_POSITION_TOP];
+    return [Attributes.LAYOUT_STICKY_TOP];
   }
 
   attributeChangedCallback(name: string) {
-    if (name == ATTRIBUTE_POSITION_TOP && this._elementRef) {
+    if (name == Attributes.LAYOUT_STICKY_TOP && this._elementRef) {
       this._elementRef.events.SetPosition({
-        value: this.getAttribute(ATTRIBUTE_POSITION_TOP),
+        value: this.getAttribute(Attributes.LAYOUT_STICKY_TOP),
       });
     }
   }

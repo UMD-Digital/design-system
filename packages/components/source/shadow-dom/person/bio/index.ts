@@ -4,16 +4,14 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { PersonBio, PersonBioFull } from 'elements';
-import { SLOTS as CommonSlots, CommonPersonData } from '../common';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
+import { CommonPersonData } from '../common';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-person-bio';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_TYPE = 'type';
-const TYPE_FULL_IMAGE = 'full-image';
 
 export const styles = `
   :host {
@@ -30,26 +28,30 @@ export const CreateShadowDom = ({
 }: {
   element: UMDPersonBioElement;
 }) => {
-  const theme = element.getAttribute(ATTRIBUTE_THEME);
-  const type = element.getAttribute(ATTRIBUTE_TYPE);
-  const { DESCRIPTION } = element._slots;
+  const theme = element.getAttribute(Attributes.THEME);
+  const type = element.getAttribute(Attributes.TYPE);
 
-  if (type === TYPE_FULL_IMAGE) {
+  if (type === AttributesValues.LAYOUT_FULL_IMAGE) {
     return PersonBioFull.CreateElement({
-      ...CommonPersonData({ element, slots: element._slots, theme }),
-      description: SlotWithDefaultStyling({ element, slotRef: DESCRIPTION }),
+      ...CommonPersonData({ element, theme }),
+      description: SlotWithDefaultStyling({
+        element,
+        slotRef: Slots.DESCRIPTION,
+      }),
     });
   }
 
   return PersonBio.CreateElement({
-    ...CommonPersonData({ element, slots: element._slots, theme }),
-    description: SlotWithDefaultStyling({ element, slotRef: DESCRIPTION }),
+    ...CommonPersonData({ element, theme }),
+    description: SlotWithDefaultStyling({
+      element,
+      slotRef: Slots.DESCRIPTION,
+    }),
   });
 };
 
 export class UMDPersonBioElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
 
   constructor() {
     const template = Node.stylesTemplate({
@@ -58,10 +60,6 @@ export class UMDPersonBioElement extends HTMLElement {
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = {
-      ...CommonSlots,
-      DESCRIPTION: 'description',
-    };
     this._shadow.appendChild(template.content.cloneNode(true));
   }
 

@@ -4,23 +4,13 @@ declare global {
   }
 }
 
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 import { HeroExpand } from 'elements';
-import { SlotWithDefaultStyling } from 'utilities/markup/create';
+import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-hero-expand';
-const ATTRIBUTE_POSITION_TOP = 'position-top';
-
-const SLOTS = {
-  VIDEO: 'video',
-  IMAGE: 'image',
-  EYEBROW: 'eyebrow',
-  HEADLINE: 'headline',
-  ACTIONS: 'actions',
-  ADDITIONAL: 'additional',
-};
 
 const styles = `
   :host {
@@ -35,11 +25,11 @@ const template = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const topPosition = element.getAttribute(ATTRIBUTE_POSITION_TOP);
+  const topPosition = element.getAttribute(Attributes.LAYOUT_STICKY_TOP);
 
-  const image = MarkupValidate.ImageSlot({ element, ImageSlot: SLOTS.IMAGE });
+  const image = MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE });
   const videoSlot = element.querySelector(
-    `[slot="${SLOTS.VIDEO}"]`,
+    `[slot="${Slots.VIDEO}"]`,
   ) as HTMLElement;
 
   const elementData: {
@@ -51,10 +41,10 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
     additional?: HTMLSlotElement | null;
     topPosition?: string | null;
   } = {
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: SLOTS.EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: SLOTS.HEADLINE }),
-    actions: Node.slot({ type: SLOTS.ACTIONS }),
-    additional: Node.slot({ type: SLOTS.ADDITIONAL }),
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
+    actions: Node.slot({ type: Slots.ACTIONS }),
+    additional: Node.slot({ type: Slots.ADDITIONAL }),
     topPosition,
   };
   const isVideo = videoSlot instanceof HTMLVideoElement;
@@ -98,13 +88,13 @@ export class UMDHeroExpandElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_POSITION_TOP];
+    return [Attributes.LAYOUT_STICKY_TOP];
   }
 
   attributeChangedCallback(name: string) {
-    if (name == ATTRIBUTE_POSITION_TOP && this._elementRef) {
+    if (name == Attributes.LAYOUT_STICKY_TOP && this._elementRef) {
       this._elementRef.events.SetPosition({
-        value: this.getAttribute(ATTRIBUTE_POSITION_TOP),
+        value: this.getAttribute(Attributes.LAYOUT_STICKY_TOP),
       });
     }
   }

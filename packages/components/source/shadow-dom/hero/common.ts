@@ -1,29 +1,12 @@
-import { MarkupCreate } from 'utilities';
+import { MarkupCreate, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { Slots } = WebComponents;
 
-export const SLOTS = {
-  IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
-};
-
-export const CommonHeroData = ({
-  element,
-  slots,
-}: {
-  element: HTMLElement;
-  slots: Record<string, string>;
-}) => {
-  const { HEADLINE, ACTIONS, EYEBROW, TEXT, IMAGE } = slots;
-
-  return {
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    richText: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    imageRef: SlotWithDefaultStyling({ element, slotRef: IMAGE }),
-    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-  };
-};
+export const CommonHeroData = ({ element }: { element: HTMLElement }) => ({
+  eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
+  headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
+  richText: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+  imageRef: SlotWithDefaultStyling({ element, slotRef: Slots.IMAGE }),
+  actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+});

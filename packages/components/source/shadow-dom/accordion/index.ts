@@ -4,20 +4,13 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { Accordion } from 'elements';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling, SlotOberserver, Node } = MarkupCreate;
+const { SlotWithDefaultStyling, Node } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-accordion-item';
-const ATTRIBUTE_RESIZE = 'resize';
-const ATTRIBUTE_STATE = 'state';
-const ATTRIBUTE_THEME = 'theme';
-const THEME_LIGHT = 'light';
-const STATE_OPEN = 'open';
-const STATE_CLOSED = 'closed';
-
-const SLOTS = { HEADLINE: 'headline', BODY: 'body' };
 
 const styles = `
   :host {
@@ -31,17 +24,18 @@ const styles = `
 const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const state = element.getAttribute(ATTRIBUTE_STATE);
-  const shouldBeOpen = state === STATE_OPEN;
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+  const state = element.getAttribute(Attributes.STATE);
+  const shouldBeOpen = state === AttributesValues.STATE_OPENED;
 
   const accordion = Accordion.CreateElement({
     theme,
     shouldBeOpen,
-    body: Node.slot({ type: SLOTS.BODY }),
+    body: Node.slot({ type: Slots.BODY }),
     headline: SlotWithDefaultStyling({
       element,
-      slotRef: SLOTS.HEADLINE,
+      slotRef: Slots.HEADLINE,
     }),
   });
 
@@ -67,28 +61,28 @@ class UMDAccordionElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE, ATTRIBUTE_STATE];
+    return [Attributes.RESIZE, Attributes.STATE];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (!this._elementRef) return;
 
-    if (name === ATTRIBUTE_RESIZE && newValue === 'true') {
+    if (name === Attributes.RESIZE && newValue === 'true') {
       this._elementRef.events.SetOpen({ hasAnimation: false });
     }
 
     if (
-      name == ATTRIBUTE_STATE &&
-      newValue === STATE_CLOSED &&
-      oldValue === STATE_OPEN
+      name == Attributes.STATE &&
+      newValue === AttributesValues.STATE_CLOSED &&
+      oldValue === AttributesValues.STATE_OPENED
     ) {
       this._elementRef.events.SetClosed({});
     }
 
     if (
-      name == ATTRIBUTE_STATE &&
-      newValue === STATE_OPEN &&
-      oldValue === STATE_CLOSED
+      name == Attributes.STATE &&
+      newValue === AttributesValues.STATE_OPENED &&
+      oldValue === AttributesValues.STATE_CLOSED
     ) {
       this._elementRef.events.SetOpen({});
     }
@@ -96,13 +90,6 @@ class UMDAccordionElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

@@ -5,17 +5,12 @@ declare global {
 }
 
 import { MediaInline, MediaWithCaption, MediaWrapped } from 'elements';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-media-inline';
-
-const SLOTS = {
-  IMAGE: 'image',
-  CAPTION: 'caption',
-  WRAPPING_TEXT: 'wrapping-text',
-};
 
 const styles = `
   :host {
@@ -29,22 +24,22 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
-  const { IMAGE, CAPTION, WRAPPING_TEXT } = element._slots;
   const isAlignmentRight = element.getAttribute('alignment') === 'right';
   const hasWrappingText =
-    element.querySelector(`[slot="${WRAPPING_TEXT}"]`) !== null;
-  const hasCaption = element.querySelector(`[slot="${CAPTION}"]`) !== null;
+    element.querySelector(`[slot="${Slots.WRAPPING_TEXT}"]`) !== null;
+  const hasCaption =
+    element.querySelector(`[slot="${Slots.CAPTION}"]`) !== null;
   const obj = {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
     isAlignmentRight,
   };
 
   if (hasWrappingText) {
     return MediaWrapped.CreateElement({
       ...obj,
-      wrappingText: Node.slot({ type: WRAPPING_TEXT }),
+      wrappingText: Node.slot({ type: Slots.WRAPPING_TEXT }),
       caption: hasCaption
-        ? SlotWithDefaultStyling({ element, slotRef: CAPTION })
+        ? SlotWithDefaultStyling({ element, slotRef: Slots.CAPTION })
         : null,
     });
   }
@@ -52,18 +47,17 @@ const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
   if (hasCaption) {
     return MediaWithCaption.CreateElement({
       ...obj,
-      caption: SlotWithDefaultStyling({ element, slotRef: CAPTION }),
+      caption: SlotWithDefaultStyling({ element, slotRef: Slots.CAPTION }),
     });
   }
 
   return MediaInline.CreateElement({
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
   });
 };
 
 class UMDMediaInlineElement extends HTMLElement {
   _shadow: ShadowRoot;
-  _slots: Record<string, string>;
   _shadowRef: {
     element: HTMLDivElement;
     events?: {
@@ -76,7 +70,6 @@ class UMDMediaInlineElement extends HTMLElement {
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
-    this._slots = SLOTS;
     this._shadowRef = null;
     this._shadow.appendChild(template.content.cloneNode(true));
   }

@@ -4,18 +4,13 @@ declare global {
   }
 }
 
-import { MarkupCreate, MarkupEvent, Styles } from 'utilities';
 import { EventLockupDate, EventElements } from 'elements';
+import { MarkupCreate, MarkupEvent, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { ResetString } = Styles;
 const { SlotWithDefaultStyling } = MarkupCreate;
-
-const SLOTS = {
-  START_DATE_ISO: 'start-date-iso',
-  END_DATE_ISO: 'end-date-iso',
-  HEADLINE: 'headline',
-};
+const { ResetString } = Styles;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 // prettier-ignore
 const styles = `
@@ -28,15 +23,16 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
-  const theme = element.getAttribute('theme') || 'light';
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
   const headline = SlotWithDefaultStyling({
     element,
-    slotRef: SLOTS.HEADLINE,
+    slotRef: Slots.HEADLINE,
   });
   const startDateSlot = element.querySelector(
-    `[slot="${SLOTS.START_DATE_ISO}"]`,
+    `[slot="${Slots.DATE_START_ISO}"]`,
   );
-  const endDateSlot = element.querySelector(`[slot="${SLOTS.END_DATE_ISO}"]`);
+  const endDateSlot = element.querySelector(`[slot="${Slots.DATE_END_ISO}"]`);
   const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
   const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
 

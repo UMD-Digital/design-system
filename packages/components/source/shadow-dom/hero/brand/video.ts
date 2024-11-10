@@ -4,16 +4,13 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
 import { HeroBrandVideo } from 'elements';
-import { SlotWithDefaultStyling } from 'utilities/markup/create';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
-const { SlotOberserver, Node } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
-const SLOTS = {
-  VIDEO: 'video',
-};
 
 const styles = `
   :host {
@@ -32,7 +29,7 @@ const CreateShadowDom = ({
   element: UMDHeroBrandVideoElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const videoSlot = Node.slot({ type: SLOTS.VIDEO });
+  const videoSlot = Node.slot({ type: Slots.VIDEO });
   const animationTriggerAttribute = element.getAttribute('animation-trigger');
   shadow.appendChild(videoSlot);
 
@@ -62,13 +59,6 @@ export class UMDHeroBrandVideoElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

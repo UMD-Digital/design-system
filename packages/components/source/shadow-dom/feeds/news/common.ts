@@ -1,13 +1,7 @@
+import { WebComponents } from 'utilities';
 import { TypeNewsFeedRequirements } from 'elements/feeds/news';
 
-const ATTRIBUTE_TOKEN = 'token';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_ROWS = 'row-count';
-const ATTRIBUTE_SHOW = 'show-count';
-const ATTRIBUTE_LAZYLOAD = 'lazyload';
-const ATTRIBUTE_CATEGORIES = 'categories';
-const ATTRIBUTE_UNION = 'union';
-const ATTRIBUTE_ENTRIES_TO_REMOVE = 'not';
+const { Attributes, AttributesValues } = WebComponents;
 
 export const CommonFeedNewsData = ({
   element,
@@ -18,10 +12,10 @@ export const CommonFeedNewsData = ({
   numberOfColumnsToShowDefault?: number;
   numberOfRowsToStartDefault?: number;
 }) => {
-  const token = element.getAttribute(ATTRIBUTE_TOKEN);
-  const theme = element.getAttribute(ATTRIBUTE_THEME);
-  const categoriesAttribute = element.getAttribute(ATTRIBUTE_CATEGORIES);
-  const entriesToRemove = element.getAttribute(ATTRIBUTE_ENTRIES_TO_REMOVE);
+  const token = element.getAttribute(Attributes.FEED_TOKEN);
+  const theme = element.getAttribute(Attributes.THEME);
+  const categoriesAttribute = element.getAttribute(Attributes.FEED_CATEGORIES);
+  const entriesToRemove = element.getAttribute(Attributes.FEED_NOT_ENTRIES);
 
   if (!token) {
     console.error(`Feed events requires a token to be set`);
@@ -29,9 +23,10 @@ export const CommonFeedNewsData = ({
   }
 
   const numberOfRowsToStart =
-    Number(element.getAttribute(ATTRIBUTE_ROWS)) || numberOfRowsToStartDefault;
+    Number(element.getAttribute(Attributes.FEED_ROW_COUNT)) ||
+    numberOfRowsToStartDefault;
   const numberOfColumnsToShow =
-    Number(element.getAttribute(ATTRIBUTE_SHOW)) ||
+    Number(element.getAttribute(Attributes.FEED_COLUMN_COUNT)) ||
     numberOfColumnsToShowDefault;
 
   const data: TypeNewsFeedRequirements = {
@@ -39,8 +34,12 @@ export const CommonFeedNewsData = ({
     theme,
     numberOfRowsToStart,
     numberOfColumnsToShow,
-    isLazyLoad: element.getAttribute(ATTRIBUTE_LAZYLOAD) === 'true',
-    isUnion: element.getAttribute(ATTRIBUTE_UNION) !== 'false',
+    isLazyLoad:
+      element.getAttribute(Attributes.FEED_LAZY_LOAD) ===
+      AttributesValues.STATE_TRUE,
+    isUnion:
+      element.getAttribute(Attributes.FEED_UNION) !==
+      AttributesValues.STATE_FALSE,
   };
 
   if (categoriesAttribute) {

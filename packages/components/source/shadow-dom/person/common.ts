@@ -1,62 +1,29 @@
-import { MarkupCreate, MarkupValidate } from 'utilities';
+import { MarkupCreate, MarkupValidate, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-
-export const SLOTS = {
-  IMAGE: 'image',
-  NAME: 'name',
-  JOB_TITLE: 'job-title',
-  ASSOCIATION: 'association',
-  PRONOUNS: 'pronouns',
-  PHONE: 'phone',
-  EMAIL: 'email',
-  LINKEDIN: 'linkedin',
-  ADDRESS: 'address',
-  ADDITIONAL_CONTACT: 'additional-contact',
-  SUB_TEXT: 'sub-text',
-  ACTIONS: 'actions',
-};
+const { Slots } = WebComponents;
 
 export const CommonPersonData = ({
   element,
-  slots,
   theme,
 }: {
   element: HTMLElement;
-  slots: Record<string, string>;
   theme?: string | null;
-}) => {
-  const {
-    NAME,
-    JOB_TITLE,
-    ASSOCIATION,
-    PRONOUNS,
-    IMAGE,
-    PHONE,
-    EMAIL,
-    LINKEDIN,
-    ADDRESS,
-    ADDITIONAL_CONTACT,
-    SUB_TEXT,
-    ACTIONS,
-  } = slots;
-
-  return {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
-    name: SlotWithDefaultStyling({ element, slotRef: NAME }),
-    job: SlotWithDefaultStyling({ element, slotRef: JOB_TITLE }),
-    association: SlotWithDefaultStyling({ element, slotRef: ASSOCIATION }),
-    pronouns: SlotWithDefaultStyling({ element, slotRef: PRONOUNS }),
-    phone: SlotWithDefaultStyling({ element, slotRef: PHONE }),
-    email: SlotWithDefaultStyling({ element, slotRef: EMAIL }),
-    address: SlotWithDefaultStyling({ element, slotRef: ADDRESS }),
-    linkendIn: SlotWithDefaultStyling({ element, slotRef: LINKEDIN }),
-    additionalContact: SlotWithDefaultStyling({
-      element,
-      slotRef: ADDITIONAL_CONTACT,
-    }),
-    subText: SlotWithDefaultStyling({ element, slotRef: SUB_TEXT }),
-    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-    theme,
-  };
-};
+}) => ({
+  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+  name: SlotWithDefaultStyling({ element, slotRef: Slots.NAME }),
+  job: SlotWithDefaultStyling({ element, slotRef: Slots.JOB_TITLE }),
+  association: SlotWithDefaultStyling({ element, slotRef: Slots.ASSOCIATION }),
+  pronouns: SlotWithDefaultStyling({ element, slotRef: Slots.PRONOUNS }),
+  phone: SlotWithDefaultStyling({ element, slotRef: Slots.PHONE }),
+  email: SlotWithDefaultStyling({ element, slotRef: Slots.EMAIL }),
+  address: SlotWithDefaultStyling({ element, slotRef: Slots.ADDRESS }),
+  linkendIn: SlotWithDefaultStyling({ element, slotRef: Slots.LINKEDIN }),
+  additionalContact: SlotWithDefaultStyling({
+    element,
+    slotRef: Slots.ADDITIONAL_CONTACT,
+  }),
+  subText: SlotWithDefaultStyling({ element, slotRef: Slots.SUB_TEXT }),
+  actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+  theme,
+});

@@ -5,27 +5,13 @@ declare global {
 }
 
 import { CardOverlay, CardOverlayImage } from 'elements';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
-const { SlotOberserver, Node } = MarkupCreate;
+const { Node } = MarkupCreate;
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-card-overlay';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_QUOTE = 'quote';
-const ATTRIBUTE_TYPE = 'type';
-const THEME_LIGHT = 'light';
-const TYPE_IMAGE = 'image';
-
-const SLOTS = {
-  IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
-  CTAICON: 'cta-icon',
-  DATE: 'date',
-};
 
 const styles = `
   :host {
@@ -44,17 +30,18 @@ const MakeOverlayContent = ({
 }: {
   element: UMDCardOverlayElement;
 }) => {
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const isQuote = element.getAttribute(ATTRIBUTE_QUOTE) === 'true';
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, CTAICON } = SLOTS;
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+  const isQuote =
+    element.getAttribute(Attributes.TYPE_QUOTE) === AttributesValues.STATE_TRUE;
 
   return {
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    date: SlotWithDefaultStyling({ element, slotRef: DATE }),
-    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
-    ctaIcon: SlotWithDefaultStyling({ element, slotRef: CTAICON }),
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    date: SlotWithDefaultStyling({ element, slotRef: Slots.DATE }),
+    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.CTA_ICON }),
     isQuote,
     theme,
   };
@@ -62,14 +49,14 @@ const MakeOverlayContent = ({
 
 const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const type = element.getAttribute(ATTRIBUTE_TYPE);
+  const type = element.getAttribute(Attributes.TYPE);
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
-  if (type === TYPE_IMAGE) {
+  if (type === AttributesValues.DISPLAY_IMAGE) {
     const ImageOverlay = CardOverlayImage.CreateElement({
       ...MakeOverlayContent({ element }),
-      image: MarkupValidate.ImageSlot({ element, ImageSlot: SLOTS.IMAGE }),
+      image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
     });
 
     if (ImageOverlay) {
@@ -93,13 +80,6 @@ class UMDCardOverlayElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

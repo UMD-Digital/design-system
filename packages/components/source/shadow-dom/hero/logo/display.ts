@@ -27,7 +27,6 @@ export const CreateShadowDom = ({
       theme: element.getAttribute('theme'),
       ...CommonHeroData({
         element,
-        slots: element._slots,
       }),
     }),
   );

@@ -5,26 +5,13 @@ declare global {
 }
 
 import { CardBlock, CardList } from 'elements';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
-const { SlotOberserver, SlotWithDefaultStyling, Node } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-article';
-const ATTRIBUTE_TRANSPARENT = 'transparent';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_ALIGNED = 'aligned';
-const ATTRIBUTE_BORDER = 'border';
-const ATTRIBUTE_DISPLAY = 'display';
-const THEME_LIGHT = 'light';
-const DISPLAY_LIST = 'list';
-const SLOTS = {
-  IMAGE: 'image',
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  DATE: 'date',
-  ACTIONS: 'actions',
-};
+
 const styles = `
   :host {
     display: block;
@@ -38,17 +25,18 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
-  const theme = element.getAttribute(ATTRIBUTE_THEME) || THEME_LIGHT;
-  const isTransparent = element.getAttribute(ATTRIBUTE_TRANSPARENT) === 'true';
-  const { EYEBROW, HEADLINE, TEXT, ACTIONS, DATE, IMAGE } = SLOTS;
+  const theme =
+    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+  const isTransparent =
+    element.getAttribute(Attributes.VISUAL_TRANSPARENT) === 'true';
 
   return {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: IMAGE }),
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: TEXT }),
-    date: SlotWithDefaultStyling({ element, slotRef: DATE }),
-    actions: SlotWithDefaultStyling({ element, slotRef: ACTIONS }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+    eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
+    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    date: SlotWithDefaultStyling({ element, slotRef: Slots.DATE }),
+    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
     theme,
     isTransparent,
   };
@@ -56,12 +44,13 @@ const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
 
 const CreateShadowDom = ({ element }: { element: UMDArticleElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const alignmentAttr = element.getAttribute(ATTRIBUTE_ALIGNED);
-  const borderAttr = element.getAttribute(ATTRIBUTE_BORDER);
+  const alignmentAttr = element.getAttribute(Attributes.VISUAL_ALIGN);
+  const borderAttr = element.getAttribute(Attributes.VISUAL_BORDER);
   const isAligned = alignmentAttr === 'true';
   const isBordered = borderAttr === 'true';
   const isDisplayList =
-    element.getAttribute(ATTRIBUTE_DISPLAY) === DISPLAY_LIST;
+    element.getAttribute(Attributes.VISUAL_DISPLAY) ===
+    AttributesValues.DISPLAY_LIST;
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
@@ -91,13 +80,6 @@ class UMDArticleElement extends HTMLElement {
 
   connectedCallback() {
     CreateShadowDom({ element: this });
-
-    SlotOberserver({
-      element: this,
-      shadowDom: this._shadow,
-      slots: SLOTS,
-      CreateShadowDom,
-    });
   }
 }
 

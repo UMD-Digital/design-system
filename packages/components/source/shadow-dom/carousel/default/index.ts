@@ -5,15 +5,12 @@ declare global {
 }
 
 import { Carousel } from 'elements';
-import { MarkupCreate, Styles } from 'utilities';
+import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-carousel';
-const ATTRIBUTE_RESIZE = 'resize';
-const SLOTS = {
-  BLOCKS: 'blocks',
-};
 
 const styles = `
   :host {
@@ -40,7 +37,7 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const maxCount = element.getAttribute('max-count');
   const gridGap = element.getAttribute('grid-gap-pixels');
   const slide = element.querySelector(
-    `[slot="${SLOTS.BLOCKS}"]`,
+    `[slot="${Slots.BLOCKS}"]`,
   ) as HTMLElement;
   const blocks = Array.from(
     slide.querySelectorAll(':scope > *'),
@@ -56,14 +53,14 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   if (attributeHint === 'false') hint = false;
 
   const createCardShadowRef = () => {
-    const slot = Node.slot({ type: SLOTS.BLOCKS });
+    const slot = Node.slot({ type: Slots.BLOCKS });
     element._shadow.appendChild(slot);
   };
 
   createCardShadowRef();
 
   const shadowRef = shadow.querySelector(
-    `[name="${SLOTS.BLOCKS}"]`,
+    `[name="${Slots.BLOCKS}"]`,
   ) as HTMLElement;
   const carousel = Carousel.CreateElement({
     slide,
@@ -105,7 +102,7 @@ class UMDCarouselElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE];
+    return [Attributes.RESIZE];
   }
 
   attributeChangedCallback(
@@ -113,7 +110,7 @@ class UMDCarouselElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == ATTRIBUTE_RESIZE && newValue === 'true' && this._elementRef) {
+    if (name == Attributes.RESIZE && newValue === 'true' && this._elementRef) {
       this._elementRef.events.resize();
     }
   }

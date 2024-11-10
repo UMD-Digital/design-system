@@ -39,8 +39,8 @@ const CreateShadowDom = ({
 
   const videoElement = HeroBrandVideo.CreateElement({
     video,
-    headline: SlotWithDefaultStyling({ element, slotRef: 'headline' }),
-    text: SlotWithDefaultStyling({ element, slotRef: 'text' }),
+    headline: Slots.SlottedHeadline({ element }),
+    text: Slots.SlottedText({ element }),
     isAnimationOnLoad: animationTriggerAttribute === 'load',
   });
 

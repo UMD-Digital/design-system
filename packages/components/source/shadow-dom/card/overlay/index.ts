@@ -36,11 +36,11 @@ const MakeOverlayContent = ({
     element.getAttribute(Attributes.TYPE_QUOTE) === AttributesValues.STATE_TRUE;
 
   return {
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    eyebrow: Slots.SlottedEyebrow({ element }),
+    headline: Slots.SlottedHeadline({ element }),
+    text: Slots.SlottedText({ element }),
     date: SlotWithDefaultStyling({ element, slotRef: Slots.DATE }),
-    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    actions: Slots.SlottedActions({ element }),
     ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.CTA_ICON }),
     isQuote,
     theme,

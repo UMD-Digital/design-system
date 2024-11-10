@@ -1,3 +1,16 @@
+import { MarkupCreate } from 'utilities';
+
+type SlotProps = {
+  element: HTMLElement;
+  isDefaultStyling?: boolean;
+};
+
+type SlotOptionProps = SlotProps & {
+  type: string;
+};
+
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
+
 const CommonSlotNames = {
   ACTIONS: 'actions',
   ADDITIONAL_CONTACT: 'additional-contact',
@@ -51,6 +64,39 @@ const CommonSlotNames = {
   WRAPPING_TEXT: 'wrapping-text',
 };
 
+const SlotOptions = ({
+  element,
+  type,
+  isDefaultStyling = true,
+}: SlotOptionProps) => {
+  if (isDefaultStyling) {
+    return SlotWithDefaultStyling({ element, slotRef: type });
+  }
+
+  return Node.slot({ type });
+};
+
+const SlottedHeadline = (props: SlotProps) =>
+  SlotOptions({ ...props, type: CommonSlotNames.HEADLINE });
+
+const SlottedEyebrow = (props: SlotProps) =>
+  SlotOptions({ ...props, type: CommonSlotNames.EYEBROW });
+
+const SlottedDate = (props: SlotProps) =>
+  SlotOptions({ ...props, type: CommonSlotNames.DATE });
+
+const SlottedText = (props: SlotProps) =>
+  SlotOptions({ ...props, type: CommonSlotNames.TEXT });
+
+const SlottedActions = (props: SlotProps) =>
+  SlotOptions({ ...props, type: CommonSlotNames.ACTIONS });
+
 export default {
   ...CommonSlotNames,
+  SlotOptions,
+  SlottedHeadline,
+  SlottedEyebrow,
+  SlottedDate,
+  SlottedText,
+  SlottedActions,
 };

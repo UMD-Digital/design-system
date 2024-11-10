@@ -30,7 +30,7 @@ const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
     size: element.getAttribute(Attributes.DISPLAY_SIZE),
     hasLine: lineAttr ? true : false,
     stat: SlotWithDefaultStyling({ element, slotRef: Slots.STAT }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    text: Slots.SlottedText({ element }),
     subText: SlotWithDefaultStyling({ element, slotRef: Slots.SUB_TEXT }),
   });
 };

@@ -30,7 +30,7 @@ const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
 
   return LogoBlock.CreateElement({
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    text: Slots.SlottedText({ element }),
     theme,
     isBordered,
   });

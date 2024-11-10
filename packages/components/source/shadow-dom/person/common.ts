@@ -24,6 +24,6 @@ export const CommonPersonData = ({
     slotRef: Slots.ADDITIONAL_CONTACT,
   }),
   subText: SlotWithDefaultStyling({ element, slotRef: Slots.SUB_TEXT }),
-  actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+  actions: Slots.SlottedActions({ element }),
   theme,
 });

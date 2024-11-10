@@ -31,18 +31,9 @@ const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
 
   const banner = BannerPromo.CreateElement({
     theme: element.getAttribute(Attributes.THEME),
-    text: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.TEXT,
-    }),
-    headline: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.HEADLINE,
-    }),
-    actions: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.ACTIONS,
-    }),
+    text: Slots.SlottedText({ element }),
+    headline: Slots.SlottedHeadline({ element }),
+    actions: Slots.SlottedActions({ element }),
     includeSeal,
   });
 

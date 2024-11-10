@@ -33,10 +33,7 @@ const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
     theme,
     shouldBeOpen,
     body: Node.slot({ type: Slots.BODY }),
-    headline: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.HEADLINE,
-    }),
+    headline: Slots.SlottedHeadline({ element }),
   });
 
   element._elementRef = accordion;

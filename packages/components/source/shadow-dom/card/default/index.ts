@@ -32,10 +32,10 @@ const MakeCardData = ({ element }: { element: UMDCardElement }) => {
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
-    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    eyebrow: Slots.SlottedEyebrow({ element }),
+    headline: Slots.SlottedHeadline({ element }),
+    text: Slots.SlottedText({ element }),
+    actions: Slots.SlottedActions({ element }),
     theme,
     isTransparent,
   };

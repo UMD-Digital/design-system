@@ -1,6 +1,5 @@
-import { MarkupCreate, WebComponents } from 'utilities';
+import { WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
 const { Slots } = WebComponents;
 
 export const CommonIntroData = ({
@@ -10,7 +9,7 @@ export const CommonIntroData = ({
   element: HTMLElement;
   theme?: string | null;
 }) => ({
-  headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
-  actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+  headline: Slots.SlottedHeadline({ element }),
+  actions: Slots.SlottedActions({ element }),
   theme,
 });

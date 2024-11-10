@@ -29,8 +29,8 @@ const MakeCardData = ({ element }: { element: UMDCardIconElement }) => {
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    headline: Slots.SlottedHeadline({ element }),
+    text: Slots.SlottedText({ element }),
     theme,
   };
 };

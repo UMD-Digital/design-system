@@ -26,12 +26,9 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const alert = AlertSite.CreateElement({
-    headline: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.HEADLINE,
-    }),
+    headline: Slots.SlottedHeadline({ element }),
     text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
-    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    actions: Slots.SlottedActions({ element }),
     daysToHide: element.getAttribute(Attributes.VISUAL_DAYS_TO_HIDE) || '10',
   });
 

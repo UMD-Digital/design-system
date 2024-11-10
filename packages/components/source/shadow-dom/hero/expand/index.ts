@@ -41,8 +41,8 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
     additional?: HTMLSlotElement | null;
     topPosition?: string | null;
   } = {
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
+    eyebrow: Slots.SlottedEyebrow({ element }),
+    headline: Slots.SlottedHeadline({ element }),
     actions: Node.slot({ type: Slots.ACTIONS }),
     additional: Node.slot({ type: Slots.ADDITIONAL }),
     topPosition,

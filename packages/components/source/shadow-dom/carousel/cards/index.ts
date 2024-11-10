@@ -43,15 +43,9 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
     slide,
     shadowRef,
     cards,
-    headline: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.HEADLINE,
-    }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
-    actions: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.ACTIONS,
-    }),
+    headline: Slots.SlottedHeadline({ element }),
+    text: Slots.SlottedText({ element }),
+    actions: Slots.SlottedActions({ element }),
   });
 
   element._elementRef = carousel;

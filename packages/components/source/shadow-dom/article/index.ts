@@ -7,7 +7,7 @@ declare global {
 import { CardBlock, CardList } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
-const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Node } = MarkupCreate;
 const { Attributes, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-article';
@@ -24,7 +24,7 @@ const styles = `
 
 const styleTemplate = Node.stylesTemplate({ styles });
 
-const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
+const MakeArticleData = ({ element }: { element: HTMLElement }) => {
   const theme =
     element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
   const isTransparent =
@@ -32,11 +32,11 @@ const MakeArticleData = ({ element }: { element: UMDArticleElement }) => {
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    eyebrow: SlotWithDefaultStyling({ element, slotRef: Slots.EYEBROW }),
-    headline: SlotWithDefaultStyling({ element, slotRef: Slots.HEADLINE }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
-    date: SlotWithDefaultStyling({ element, slotRef: Slots.DATE }),
-    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    eyebrow: Slots.SlottedEyebrow({ element }),
+    headline: Slots.SlottedHeadline({ element }),
+    text: Slots.SlottedText({ element }),
+    date: Slots.SlottedDate({ element }),
+    actions: Slots.SlottedActions({ element }),
     theme,
     isTransparent,
   };

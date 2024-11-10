@@ -29,11 +29,8 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
 
   const alert = AlertPage.CreateElement({
     text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
-    headline: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.HEADLINE,
-    }),
-    actions: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    headline: Slots.SlottedHeadline({ element }),
+    actions: Slots.SlottedActions({ element }),
     isShowIcon:
       element.getAttribute(Attributes.VISUAL_ICON) ===
       AttributesValues.STATE_TRUE,

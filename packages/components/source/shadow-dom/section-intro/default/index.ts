@@ -35,7 +35,7 @@ export const CreateShadowDom = ({
       element,
       theme: element.getAttribute(Attributes.THEME),
     }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
+    text: Slots.SlottedText({ element }),
     hasSeparator: element.hasAttribute(Attributes.OPTIONAL_HAS_SEPARATOR),
   });
 

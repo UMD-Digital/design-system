@@ -39,14 +39,8 @@ const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   const slider = SliderEvents.CreateElement({
     theme,
     dataSlider,
-    headline: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.HEADLINE,
-    }),
-    actions: SlotWithDefaultStyling({
-      element,
-      slotRef: Slots.ACTIONS,
-    }),
+    headline: Slots.SlottedHeadline({ element }),
+    actions: Slots.SlottedActions({ element }),
   });
 
   element._elementRef = slider;

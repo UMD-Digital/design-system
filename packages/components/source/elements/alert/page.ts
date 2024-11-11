@@ -8,8 +8,9 @@ type TypeShouldShowProps = {
 
 type TypeAlertProps = TypeShouldShowProps &
   TypeAlertTextProps & {
+    isThemeLight?: boolean;
+    isThemeDark?: boolean;
     isShowIcon?: boolean;
-    theme?: string | null;
   };
 
 type TypeAlertButtonProps = {
@@ -123,14 +124,15 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
 
 export const CreateAlertPageElement = (props: TypeAlertProps) =>
   (() => {
-    const { isShowIcon = true, theme } = props;
+    const { isShowIcon = true, isThemeDark, isThemeLight } = props;
     const elementContainer = document.createElement('div');
     const container = document.createElement('div');
     const textWrapper = AlertText.CreateElement(props);
 
     container.classList.add(ELEMENT_ALERT_PAGE_CONTAINER);
     if (isShowIcon) container.appendChild(CreateIcon());
-    if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeLight) container.setAttribute(ATTRIBUTE_THEME, 'light');
+    if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
     container.appendChild(textWrapper);
     container.appendChild(CreateCloseButton({ container: elementContainer }));
 

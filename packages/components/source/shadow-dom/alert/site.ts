@@ -7,8 +7,8 @@ declare global {
 import { AlertSite } from 'elements';
 import { Styles, MarkupCreate, WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
-const { AttributesNames, Slots } = WebComponents;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-alert-site';
 
@@ -21,7 +21,7 @@ export const styles = `
   ${AlertSite.Styles}
 `;
 
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
@@ -29,8 +29,7 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
     headline: Slots.SlottedHeadline({ element }),
     text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
     actions: Slots.SlottedActions({ element }),
-    daysToHide:
-      element.getAttribute(AttributesNames.VISUAL_DAYS_TO_HIDE) || '10',
+    daysToHide: Attributes.daysToHide({ element }),
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

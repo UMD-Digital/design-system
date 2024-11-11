@@ -7,8 +7,8 @@ declare global {
 import { AlertPage } from 'elements';
 import { Styles, MarkupCreate, WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
-const { AttributesNames, AttributesValues, Slots } = WebComponents;
+const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Attributes, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-alert-page';
 
@@ -21,20 +21,25 @@ const styles = `
   ${AlertPage.Styles}
 `;
 
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute('theme');
+  const isThemeLight = Attributes.isThemeLight({
+    element,
+  });
+  const isThemeDark = Attributes.isThemeDark({
+    element,
+  });
+  const isShowIcon = Attributes.isShowIcon({ element });
 
   const alert = AlertPage.CreateElement({
     text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
     headline: Slots.SlottedHeadline({ element }),
     actions: Slots.SlottedActions({ element }),
-    isShowIcon:
-      element.getAttribute(AttributesNames.VISUAL_ICON) ===
-      AttributesValues.STATE_TRUE,
-    theme,
+    isThemeLight,
+    isThemeDark,
+    isShowIcon,
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

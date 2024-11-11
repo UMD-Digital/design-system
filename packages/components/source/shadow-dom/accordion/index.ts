@@ -21,7 +21,7 @@ const styles = `
   ${Accordion.Styles}
 `;
 
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const isThemeLight = Attributes.isThemeLight({

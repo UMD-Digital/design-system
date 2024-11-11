@@ -8,8 +8,7 @@ import { SectionIntro } from 'elements';
 import { Styles, MarkupCreate, WebComponents } from 'utilities';
 import { CommonIntroData } from '../common';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, Slots } = WebComponents;
+const { AttributesNames, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-section-intro';
 
@@ -33,10 +32,10 @@ export const CreateShadowDom = ({
   const intro = SectionIntro.CreateElement({
     ...CommonIntroData({
       element,
-      theme: element.getAttribute(Attributes.THEME),
+      theme: element.getAttribute(AttributesNames.THEME),
     }),
     text: Slots.SlottedText({ element }),
-    hasSeparator: element.hasAttribute(Attributes.OPTIONAL_HAS_SEPARATOR),
+    hasSeparator: element.hasAttribute(AttributesNames.OPTIONAL_HAS_SEPARATOR),
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

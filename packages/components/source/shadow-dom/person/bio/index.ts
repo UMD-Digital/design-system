@@ -9,7 +9,7 @@ import { MarkupCreate, Styles, WebComponents } from 'utilities';
 import { CommonPersonData } from '../common';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-person-bio';
 
@@ -28,8 +28,8 @@ export const CreateShadowDom = ({
 }: {
   element: UMDPersonBioElement;
 }) => {
-  const theme = element.getAttribute(Attributes.THEME);
-  const type = element.getAttribute(Attributes.TYPE);
+  const theme = element.getAttribute(AttributesNames.THEME);
+  const type = element.getAttribute(AttributesNames.TYPE);
 
   if (type === AttributesValues.LAYOUT_FULL_IMAGE) {
     return PersonBioFull.CreateElement({

@@ -10,7 +10,7 @@ import { MarkupCreate, MarkupEvent, Styles, WebComponents } from 'utilities';
 const { Node } = MarkupCreate;
 const { SlotWithDefaultStyling } = MarkupCreate;
 const { ResetString } = Styles;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 // prettier-ignore
 const styles = `
@@ -24,7 +24,7 @@ const styles = `
 
 const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
   const headline = SlotWithDefaultStyling({
     element,
     slotRef: Slots.HEADLINE,

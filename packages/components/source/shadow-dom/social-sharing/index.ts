@@ -8,7 +8,7 @@ import { SocialSharing } from 'elements';
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { Attributes } = WebComponents;
+const { AttributesNames } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-social-sharing';
 
@@ -25,18 +25,18 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDSocialSharingElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const title = element.getAttribute(Attributes.INFORMATION_TITLE);
-  const url = element.getAttribute(Attributes.INFORMATION_URL);
-  const facebook = element.getAttribute(Attributes.SOCIAL_FACEBOOK);
-  const twitter = element.getAttribute(Attributes.SOCIAL_TWITTER);
-  const print = element.getAttribute(Attributes.SHARING_PRINT);
-  const email = element.getAttribute(Attributes.SHARING_EMAIL);
+  const title = element.getAttribute(AttributesNames.INFORMATION_TITLE);
+  const url = element.getAttribute(AttributesNames.INFORMATION_URL);
+  const facebook = element.getAttribute(AttributesNames.SOCIAL_FACEBOOK);
+  const twitter = element.getAttribute(AttributesNames.SOCIAL_TWITTER);
+  const print = element.getAttribute(AttributesNames.SHARING_PRINT);
+  const email = element.getAttribute(AttributesNames.SHARING_EMAIL);
 
   const includeFacebook = facebook ? facebook === 'true' : true;
   const includeTwitter = twitter ? twitter === 'true' : true;
 
   const socialSharing = SocialSharing.CreateElement({
-    isFixed: element.hasAttribute(Attributes.LAYOUT_FIXED),
+    isFixed: element.hasAttribute(AttributesNames.LAYOUT_FIXED),
     title,
     url,
     includeFacebook,

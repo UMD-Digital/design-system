@@ -8,7 +8,7 @@ import { LogoBlock } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-logo';
 
@@ -23,8 +23,8 @@ const styles = `
 
 const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
-  const borderAttr = element.getAttribute(Attributes.VISUAL_BORDER);
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
+  const borderAttr = element.getAttribute(AttributesNames.VISUAL_BORDER);
 
   const isBordered = borderAttr === 'true';
 

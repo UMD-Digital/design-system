@@ -9,7 +9,7 @@ import { MarkupCreate, Styles, WebComponents } from 'utilities';
 import { CommonPersonData } from '../common';
 
 const { Node } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-person-hero';
 
@@ -33,7 +33,7 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
   const breadcrumbSlot = Node.slot({ type: Slots.BREADCRUMB });
 
   if (breadcrumbSlot) {

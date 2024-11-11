@@ -7,8 +7,8 @@ declare global {
 import { Accordion } from 'elements';
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
-const { SlotWithDefaultStyling, Node } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { Node } = MarkupCreate;
+const { Attributes, AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-accordion-item';
 
@@ -24,16 +24,22 @@ const styles = `
 const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
-  const state = element.getAttribute(Attributes.STATE);
-  const shouldBeOpen = state === AttributesValues.STATE_OPENED;
+  const isThemeLight = Attributes.isThemeLight({
+    element,
+  });
+  const isThemeDark = Attributes.isThemeDark({
+    element,
+  });
+  const isStateOpen = Attributes.isStateOpen({
+    element,
+  });
 
   const accordion = Accordion.CreateElement({
-    theme,
-    shouldBeOpen,
     body: Node.slot({ type: Slots.BODY }),
     headline: Slots.SlottedHeadline({ element }),
+    isThemeLight,
+    isThemeDark,
+    isStateOpen,
   });
 
   element._elementRef = accordion;
@@ -58,18 +64,18 @@ class UMDAccordionElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [Attributes.RESIZE, Attributes.STATE];
+    return [AttributesNames.RESIZE, AttributesNames.STATE];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (!this._elementRef) return;
 
-    if (name === Attributes.RESIZE && newValue === 'true') {
+    if (name === AttributesNames.RESIZE && newValue === 'true') {
       this._elementRef.events.SetOpen({ hasAnimation: false });
     }
 
     if (
-      name == Attributes.STATE &&
+      name == AttributesNames.STATE &&
       newValue === AttributesValues.STATE_CLOSED &&
       oldValue === AttributesValues.STATE_OPENED
     ) {
@@ -77,7 +83,7 @@ class UMDAccordionElement extends HTMLElement {
     }
 
     if (
-      name == Attributes.STATE &&
+      name == AttributesNames.STATE &&
       newValue === AttributesValues.STATE_OPENED &&
       oldValue === AttributesValues.STATE_CLOSED
     ) {

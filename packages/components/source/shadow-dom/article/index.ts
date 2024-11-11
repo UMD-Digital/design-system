@@ -8,7 +8,7 @@ import { CardBlock, CardList } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-article';
 
@@ -26,9 +26,9 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeArticleData = ({ element }: { element: HTMLElement }) => {
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
   const isTransparent =
-    element.getAttribute(Attributes.VISUAL_TRANSPARENT) === 'true';
+    element.getAttribute(AttributesNames.VISUAL_TRANSPARENT) === 'true';
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
@@ -44,12 +44,12 @@ const MakeArticleData = ({ element }: { element: HTMLElement }) => {
 
 const CreateShadowDom = ({ element }: { element: UMDArticleElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const alignmentAttr = element.getAttribute(Attributes.VISUAL_ALIGN);
-  const borderAttr = element.getAttribute(Attributes.VISUAL_BORDER);
+  const alignmentAttr = element.getAttribute(AttributesNames.VISUAL_ALIGN);
+  const borderAttr = element.getAttribute(AttributesNames.VISUAL_BORDER);
   const isAligned = alignmentAttr === 'true';
   const isBordered = borderAttr === 'true';
   const isDisplayList =
-    element.getAttribute(Attributes.VISUAL_DISPLAY) ===
+    element.getAttribute(AttributesNames.VISUAL_DISPLAY) ===
     AttributesValues.DISPLAY_LIST;
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

@@ -8,7 +8,7 @@ import { Tabs, TabsElements } from 'elements';
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-tabs';
 
@@ -26,8 +26,8 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
-  const topPosition = element.getAttribute(Attributes.LAYOUT_STICKY_TOP);
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
+  const topPosition = element.getAttribute(AttributesNames.LAYOUT_STICKY_TOP);
   const slot = Node.slot({ type: Slots.TABS });
   const markup = element.querySelector(`[slot="${Slots.TABS}"]`);
 
@@ -78,13 +78,13 @@ class UMDTabsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [Attributes.RESIZE];
+    return [AttributesNames.RESIZE];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (!this._elementRef) return;
 
-    if (name === Attributes.RESIZE && newValue === 'true') {
+    if (name === AttributesNames.RESIZE && newValue === 'true') {
       this._elementRef.events.resize();
     }
   }

@@ -8,7 +8,7 @@ import { AlertPage } from 'elements';
 import { Styles, MarkupCreate, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-alert-page';
 
@@ -32,7 +32,7 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
     headline: Slots.SlottedHeadline({ element }),
     actions: Slots.SlottedActions({ element }),
     isShowIcon:
-      element.getAttribute(Attributes.VISUAL_ICON) ===
+      element.getAttribute(AttributesNames.VISUAL_ICON) ===
       AttributesValues.STATE_TRUE,
     theme,
   });

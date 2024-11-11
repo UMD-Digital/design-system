@@ -10,11 +10,11 @@ import { MarkupCreate, MarkupModify, Styles, WebComponents } from 'utilities';
 const { Colors } = Tokens;
 const { ConvertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-breadcrumb';
 
-const IS_THEME_DARK = `[${Attributes.THEME}=${AttributesValues.THEME_DARK}]`;
+const IS_THEME_DARK = `[${AttributesNames.THEME}=${AttributesValues.THEME_DARK}]`;
 
 const ELEMENT_CONTAINER = 'breadcrumb-container';
 const ELEMENT_PATH = 'breadcrumb-path';
@@ -108,7 +108,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
   const pathsSlot = SlotWithDefaultStyling({
     element,
     slotRef: Slots.PATHS,
@@ -117,7 +117,7 @@ const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
   if (pathsSlot) {
     const links = pathsSlot.querySelectorAll('a') as NodeListOf<HTMLElement>;
 
-    pathsSlot.setAttribute(Attributes.THEME, theme);
+    pathsSlot.setAttribute(AttributesNames.THEME, theme);
     pathsSlot.classList.add(ELEMENT_CONTAINER);
 
     for (const linkElement of links) {

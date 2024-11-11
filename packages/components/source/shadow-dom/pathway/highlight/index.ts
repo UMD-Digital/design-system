@@ -9,7 +9,7 @@ import { MarkupCreate, Styles, WebComponents } from 'utilities';
 import { CommonPathwayData } from '../common';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
 
@@ -32,7 +32,7 @@ const CreateShadowDom = ({
   element: UMDPathwayHighlightElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const themeAttribute = element.getAttribute(Attributes.THEME);
+  const themeAttribute = element.getAttribute(AttributesNames.THEME);
   let theme = null;
 
   if (themeAttribute) {

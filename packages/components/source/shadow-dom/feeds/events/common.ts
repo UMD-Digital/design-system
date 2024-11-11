@@ -1,7 +1,7 @@
 import { WebComponents } from 'utilities';
 import { TypeEventFeedRequirements } from 'elements/feeds/events';
 
-const { Attributes, AttributesValues } = WebComponents;
+const { AttributesNames, AttributesValues } = WebComponents;
 
 export const CommonFeedEventsData = ({
   element,
@@ -12,12 +12,16 @@ export const CommonFeedEventsData = ({
   numberOfColumnsToShowDefault?: number;
   numberOfRowsToStartDefault?: number;
 }) => {
-  const token = element.getAttribute(Attributes.FEED_TOKEN);
-  const theme = element.getAttribute(Attributes.THEME);
-  const categoriesAttribute = element.getAttribute(Attributes.FEED_CATEGORIES);
-  const numberOfRowsAttribute = element.getAttribute(Attributes.FEED_ROW_COUNT);
+  const token = element.getAttribute(AttributesNames.FEED_TOKEN);
+  const theme = element.getAttribute(AttributesNames.THEME);
+  const categoriesAttribute = element.getAttribute(
+    AttributesNames.FEED_CATEGORIES,
+  );
+  const numberOfRowsAttribute = element.getAttribute(
+    AttributesNames.FEED_ROW_COUNT,
+  );
   const numberOfColumnsAttribute = element.getAttribute(
-    Attributes.FEED_COLUMN_COUNT,
+    AttributesNames.FEED_COLUMN_COUNT,
   );
   const isValidRowAttribute =
     numberOfRowsAttribute &&
@@ -49,10 +53,10 @@ export const CommonFeedEventsData = ({
     numberOfRowsToStart,
     numberOfColumnsToShow,
     isLazyLoad:
-      element.getAttribute(Attributes.FEED_LAZY_LOAD) ===
+      element.getAttribute(AttributesNames.FEED_LAZY_LOAD) ===
       AttributesValues.STATE_TRUE,
     isUnion:
-      element.getAttribute(Attributes.FEED_UNION) !==
+      element.getAttribute(AttributesNames.FEED_UNION) !==
       AttributesValues.STATE_FALSE,
   };
 

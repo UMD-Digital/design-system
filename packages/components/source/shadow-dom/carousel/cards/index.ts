@@ -8,7 +8,7 @@ import { CarouselCards } from 'elements';
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, Slots } = WebComponents;
+const { AttributesNames, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-carousel-cards';
 
@@ -71,7 +71,7 @@ class UMDCarouselCardsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [Attributes.RESIZE];
+    return [AttributesNames.RESIZE];
   }
 
   attributeChangedCallback(
@@ -79,7 +79,11 @@ class UMDCarouselCardsElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == Attributes.RESIZE && newValue === 'true' && this._elementRef) {
+    if (
+      name == AttributesNames.RESIZE &&
+      newValue === 'true' &&
+      this._elementRef
+    ) {
       this._elementRef.events.SetEventReize();
     }
   }

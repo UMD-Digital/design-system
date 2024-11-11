@@ -8,7 +8,7 @@ import { AlertSite } from 'elements';
 import { Styles, MarkupCreate, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, Slots } = WebComponents;
+const { AttributesNames, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-alert-site';
 
@@ -29,7 +29,8 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
     headline: Slots.SlottedHeadline({ element }),
     text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
     actions: Slots.SlottedActions({ element }),
-    daysToHide: element.getAttribute(Attributes.VISUAL_DAYS_TO_HIDE) || '10',
+    daysToHide:
+      element.getAttribute(AttributesNames.VISUAL_DAYS_TO_HIDE) || '10',
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

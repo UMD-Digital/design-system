@@ -9,7 +9,7 @@ import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
 const { ImageHasAlt } = MarkupValidate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-carousel-image';
 
@@ -29,9 +29,9 @@ const CreateShadowDom = ({
   element: UMDCarouselImageStandardElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(Attributes.THEME);
+  const theme = element.getAttribute(AttributesNames.THEME);
   const isFullScreenOption =
-    element.getAttribute(Attributes.OPTIONAL_FULLSCREEN) !==
+    element.getAttribute(AttributesNames.OPTIONAL_FULLSCREEN) !==
     AttributesValues.STATE_FALSE;
   const slottedImages = Array.from(
     element.querySelectorAll(`[slot="${Slots.IMAGES}"] > *`),
@@ -91,7 +91,7 @@ class UMDCarouselImageStandardElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [Attributes.RESIZE];
+    return [AttributesNames.RESIZE];
   }
 
   attributeChangedCallback(
@@ -99,7 +99,11 @@ class UMDCarouselImageStandardElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == Attributes.RESIZE && newValue === 'true' && this._elementRef) {
+    if (
+      name == AttributesNames.RESIZE &&
+      newValue === 'true' &&
+      this._elementRef
+    ) {
       this._elementRef.events.SetEventReize();
     }
   }

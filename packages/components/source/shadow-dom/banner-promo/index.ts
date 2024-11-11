@@ -8,7 +8,7 @@ import { MarkupCreate, Styles, WebComponents } from 'utilities';
 import { BannerPromo } from 'elements';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, Slots } = WebComponents;
+const { AttributesNames, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-banner-promo';
 
@@ -24,13 +24,13 @@ const styles = `
 const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const hasLogo = element.getAttribute(Attributes.VISUAL_HAS_LOGO);
+  const hasLogo = element.getAttribute(AttributesNames.VISUAL_HAS_LOGO);
   let includeSeal = false;
 
   if (hasLogo === 'true') includeSeal = true;
 
   const banner = BannerPromo.CreateElement({
-    theme: element.getAttribute(Attributes.THEME),
+    theme: element.getAttribute(AttributesNames.THEME),
     text: Slots.SlottedText({ element }),
     headline: Slots.SlottedHeadline({ element }),
     actions: Slots.SlottedActions({ element }),

@@ -1,7 +1,7 @@
 import { WebComponents } from 'utilities';
 import { TypeNewsFeedRequirements } from 'elements/feeds/news';
 
-const { Attributes, AttributesValues } = WebComponents;
+const { AttributesNames, AttributesValues } = WebComponents;
 
 export const CommonFeedNewsData = ({
   element,
@@ -12,10 +12,14 @@ export const CommonFeedNewsData = ({
   numberOfColumnsToShowDefault?: number;
   numberOfRowsToStartDefault?: number;
 }) => {
-  const token = element.getAttribute(Attributes.FEED_TOKEN);
-  const theme = element.getAttribute(Attributes.THEME);
-  const categoriesAttribute = element.getAttribute(Attributes.FEED_CATEGORIES);
-  const entriesToRemove = element.getAttribute(Attributes.FEED_NOT_ENTRIES);
+  const token = element.getAttribute(AttributesNames.FEED_TOKEN);
+  const theme = element.getAttribute(AttributesNames.THEME);
+  const categoriesAttribute = element.getAttribute(
+    AttributesNames.FEED_CATEGORIES,
+  );
+  const entriesToRemove = element.getAttribute(
+    AttributesNames.FEED_NOT_ENTRIES,
+  );
 
   if (!token) {
     console.error(`Feed events requires a token to be set`);
@@ -23,10 +27,10 @@ export const CommonFeedNewsData = ({
   }
 
   const numberOfRowsToStart =
-    Number(element.getAttribute(Attributes.FEED_ROW_COUNT)) ||
+    Number(element.getAttribute(AttributesNames.FEED_ROW_COUNT)) ||
     numberOfRowsToStartDefault;
   const numberOfColumnsToShow =
-    Number(element.getAttribute(Attributes.FEED_COLUMN_COUNT)) ||
+    Number(element.getAttribute(AttributesNames.FEED_COLUMN_COUNT)) ||
     numberOfColumnsToShowDefault;
 
   const data: TypeNewsFeedRequirements = {
@@ -35,10 +39,10 @@ export const CommonFeedNewsData = ({
     numberOfRowsToStart,
     numberOfColumnsToShow,
     isLazyLoad:
-      element.getAttribute(Attributes.FEED_LAZY_LOAD) ===
+      element.getAttribute(AttributesNames.FEED_LAZY_LOAD) ===
       AttributesValues.STATE_TRUE,
     isUnion:
-      element.getAttribute(Attributes.FEED_UNION) !==
+      element.getAttribute(AttributesNames.FEED_UNION) !==
       AttributesValues.STATE_FALSE,
   };
 

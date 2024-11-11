@@ -10,7 +10,7 @@ import { UMDHeroElement } from './index';
 import { CommonHeroData } from '../common';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 export const ComponentStyles = `
   :host {
@@ -27,8 +27,8 @@ export const ComponentStyles = `
 `;
 
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
-  const type = element.getAttribute(Attributes.TYPE);
-  const theme = element.getAttribute(Attributes.THEME);
+  const type = element.getAttribute(AttributesNames.TYPE);
+  const theme = element.getAttribute(AttributesNames.THEME);
   let isTextCenter =
     element.getAttribute('text-align') === AttributesValues.LAYOUT_TEXT_CENTER;
   let isInterior = false;

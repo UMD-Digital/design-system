@@ -20,7 +20,7 @@ import {
 } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-event';
 
@@ -40,7 +40,7 @@ const styles = `
 
 const MakeCommonData = ({ element }: { element: UMDEventElement }) => {
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
@@ -52,11 +52,11 @@ const MakeCommonData = ({ element }: { element: UMDEventElement }) => {
 };
 
 const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
-  const displayAttribute = element.getAttribute(Attributes.VISUAL_DISPLAY);
+  const displayAttribute = element.getAttribute(AttributesNames.VISUAL_DISPLAY);
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
   const showTime =
-    element.getAttribute(Attributes.OPTIONAL_SHOW_TIME) !== 'false';
+    element.getAttribute(AttributesNames.OPTIONAL_SHOW_TIME) !== 'false';
   const isDisplayList = displayAttribute === AttributesValues.DISPLAY_LIST;
   const isDisplayFeature =
     displayAttribute === AttributesValues.DISPLAY_FEATURE;

@@ -8,7 +8,7 @@ import { StickyColumns } from 'elements';
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-sticky-columns';
 
@@ -27,9 +27,9 @@ export const CreateShadowDom = ({
   element: UMDStickyColumnElement;
 }) => {
   const isStickyLast =
-    element.getAttribute(Attributes.OPTIONAL_STICKY_FIRST) ===
+    element.getAttribute(AttributesNames.OPTIONAL_STICKY_FIRST) ===
     AttributesValues.STATE_FALSE;
-  const topPosition = element.getAttribute(Attributes.LAYOUT_STICKY_TOP);
+  const topPosition = element.getAttribute(AttributesNames.LAYOUT_STICKY_TOP);
 
   const stickyColumn = Node.slot({ type: Slots.STICKY_COLUMN });
   const staticColumn = Node.slot({ type: Slots.STATIC_COLUMN });
@@ -64,13 +64,13 @@ export class UMDStickyColumnElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [Attributes.LAYOUT_STICKY_TOP];
+    return [AttributesNames.LAYOUT_STICKY_TOP];
   }
 
   attributeChangedCallback(name: string) {
-    if (name == Attributes.LAYOUT_STICKY_TOP && this._elementRef) {
+    if (name == AttributesNames.LAYOUT_STICKY_TOP && this._elementRef) {
       this._elementRef.events.SetPosition({
-        value: this.getAttribute(Attributes.LAYOUT_STICKY_TOP),
+        value: this.getAttribute(AttributesNames.LAYOUT_STICKY_TOP),
       });
     }
   }

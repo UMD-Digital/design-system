@@ -8,7 +8,7 @@ import { CardIconBlock } from 'elements';
 import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-card-icon';
 
@@ -25,7 +25,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeCardData = ({ element }: { element: UMDCardIconElement }) => {
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),

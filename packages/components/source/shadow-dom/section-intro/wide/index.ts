@@ -9,7 +9,7 @@ import { Styles, MarkupCreate, WebComponents } from 'utilities';
 import { CommonIntroData } from '../common';
 
 const { Node } = MarkupCreate;
-const { Attributes } = WebComponents;
+const { AttributesNames } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-section-intro-wide';
 
@@ -33,7 +33,7 @@ export const CreateShadowDom = ({
   const intro = SectionIntroWide.CreateElement(
     CommonIntroData({
       element,
-      theme: element.getAttribute(Attributes.THEME),
+      theme: element.getAttribute(AttributesNames.THEME),
     }),
   );
 

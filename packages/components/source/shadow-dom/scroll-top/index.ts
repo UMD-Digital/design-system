@@ -8,7 +8,7 @@ import { ScrollTop } from 'elements';
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { Attributes } = WebComponents;
+const { AttributesNames } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-scroll-top';
 
@@ -26,7 +26,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDScrollTopElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const scrollTop = ScrollTop.CreateElement({
-    isFixed: element.hasAttribute(Attributes.LAYOUT_FIXED),
+    isFixed: element.hasAttribute(AttributesNames.LAYOUT_FIXED),
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

@@ -10,8 +10,9 @@ type StateProps = {
 
 type TypeAccordionProps = TypeHeadlineText &
   TypeBodyText & {
-    theme?: string | null;
-    shouldBeOpen?: boolean;
+    isThemeLight?: boolean;
+    isThemeDark?: boolean;
+    isStateOpen: boolean;
   };
 
 type TypeHeadlineProps = TypeHeadlineText &
@@ -325,10 +326,10 @@ const ActionAnimation = ({
 
 const CreateAccordionElement = (props: TypeAccordionProps) =>
   (() => {
-    const { theme, shouldBeOpen } = props;
+    const { isThemeDark, isThemeLight, isStateOpen = false } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
-    let isOpen = shouldBeOpen || false;
+    let isOpen = isStateOpen;
 
     const SetOpen = (props: StateProps) => {
       ActionAnimation({ ...props, container, isOpening: true });
@@ -360,12 +361,13 @@ const CreateAccordionElement = (props: TypeAccordionProps) =>
     if (body) container.appendChild(body);
 
     container.classList.add(ELEMENT_CONTAINER);
-    if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeLight) container.setAttribute(ATTRIBUTE_THEME, 'light');
+    if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
 
     declaration.appendChild(container);
     declaration.classList.add(ELEMENT_DECLARATION);
 
-    if (shouldBeOpen) {
+    if (isStateOpen) {
       SetOpen({ hasAnimation: false });
     }
 

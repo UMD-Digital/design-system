@@ -8,7 +8,7 @@ import { Stat } from 'elements';
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, Slots } = WebComponents;
+const { AttributesNames, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-stat';
 
@@ -22,12 +22,12 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
-  const lineAttr = element.hasAttribute(Attributes.OPTIONAL_HAS_LINE);
+  const lineAttr = element.hasAttribute(AttributesNames.OPTIONAL_HAS_LINE);
 
   return Stat.CreateElement({
-    theme: element.getAttribute(Attributes.THEME),
-    displayType: element.getAttribute(Attributes.DISPLAY_TYPE),
-    size: element.getAttribute(Attributes.DISPLAY_SIZE),
+    theme: element.getAttribute(AttributesNames.THEME),
+    displayType: element.getAttribute(AttributesNames.DISPLAY_TYPE),
+    size: element.getAttribute(AttributesNames.DISPLAY_SIZE),
     hasLine: lineAttr ? true : false,
     stat: SlotWithDefaultStyling({ element, slotRef: Slots.STAT }),
     text: Slots.SlottedText({ element }),

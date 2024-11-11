@@ -9,7 +9,7 @@ import { MarkupCreate, MarkupValidate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-card-overlay';
 
@@ -31,9 +31,10 @@ const MakeOverlayContent = ({
   element: UMDCardOverlayElement;
 }) => {
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
   const isQuote =
-    element.getAttribute(Attributes.TYPE_QUOTE) === AttributesValues.STATE_TRUE;
+    element.getAttribute(AttributesNames.TYPE_QUOTE) ===
+    AttributesValues.STATE_TRUE;
 
   return {
     eyebrow: Slots.SlottedEyebrow({ element }),
@@ -49,7 +50,7 @@ const MakeOverlayContent = ({
 
 const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const type = element.getAttribute(Attributes.TYPE);
+  const type = element.getAttribute(AttributesNames.TYPE);
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 

@@ -13,7 +13,7 @@ import {
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-quote';
 
@@ -31,9 +31,9 @@ const styles = `
 
 const MakeData = ({ element }: { element: UMDElementQuote }) => {
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
   const isTransparent =
-    element.getAttribute(Attributes.VISUAL_TRANSPARENT) === 'true';
+    element.getAttribute(AttributesNames.VISUAL_TRANSPARENT) === 'true';
 
   return {
     theme,
@@ -53,9 +53,9 @@ const MakeData = ({ element }: { element: UMDElementQuote }) => {
 };
 
 const CreateShadowDom = ({ element }: { element: UMDElementQuote }) => {
-  const typeAttribute = element.getAttribute(Attributes.TYPE);
+  const typeAttribute = element.getAttribute(AttributesNames.TYPE);
   const size =
-    element.getAttribute(Attributes.DISPLAY_SIZE) ||
+    element.getAttribute(AttributesNames.DISPLAY_SIZE) ||
     AttributesValues.SIZE_NORMAL;
 
   const isTypeStatement = typeAttribute === AttributesValues.DISPLAY_STATEMENT;

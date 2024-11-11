@@ -17,7 +17,7 @@ import { CommonPathwayData } from '../common';
 import { UMDPathwayElement } from './index';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { Attributes, AttributesValues, Slots } = WebComponents;
+const { AttributesNames, AttributesValues, Slots } = WebComponents;
 
 export const ComponentStyles = `
   :host {
@@ -48,9 +48,9 @@ const MakeCommonDefaultData = ({
   const endDateSlot = element.querySelector(`[slot="${Slots.DATE_END_ISO}"]`);
   const locationSlot = element.querySelector(`[slot="${Slots.LOCATION}"]`);
   const isImageRight =
-    element.getAttribute(Attributes.LAYOUT_IMAGE_POSITION) !== 'left';
+    element.getAttribute(AttributesNames.LAYOUT_IMAGE_POSITION) !== 'left';
   const showTime =
-    element.getAttribute(Attributes.OPTIONAL_SHOW_TIME) !== 'false';
+    element.getAttribute(AttributesNames.OPTIONAL_SHOW_TIME) !== 'false';
 
   const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
   const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
@@ -98,9 +98,9 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const isImageScaled =
-    element.getAttribute(Attributes.LAYOUT_IMAGE_SCALED) !== 'false';
-  const type = element.getAttribute(Attributes.TYPE);
-  const themeAttribute = element.getAttribute(Attributes.THEME);
+    element.getAttribute(AttributesNames.LAYOUT_IMAGE_SCALED) !== 'false';
+  const type = element.getAttribute(AttributesNames.TYPE);
+  const themeAttribute = element.getAttribute(AttributesNames.THEME);
   let theme = null;
 
   shadow.appendChild(element._styles.content.cloneNode(true));

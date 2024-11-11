@@ -8,7 +8,7 @@ import { CarouselThumbnail } from 'elements';
 import { MarkupCreate, Styles, WebComponents } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { Attributes, Slots } = WebComponents;
+const { AttributesNames, Slots } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-carousel-thumbnail';
 
@@ -28,7 +28,7 @@ const CreateShadowDom = ({
   element: UMDCarouselThumbnailElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(Attributes.THEME);
+  const theme = element.getAttribute(AttributesNames.THEME);
   const slottedBlocks = Array.from(
     element.querySelectorAll(`[slot="${Slots.BLOCKS}"] > *`),
   ) as HTMLElement[];
@@ -66,7 +66,7 @@ class UMDCarouselThumbnailElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [Attributes.RESIZE];
+    return [AttributesNames.RESIZE];
   }
 
   attributeChangedCallback(
@@ -74,7 +74,11 @@ class UMDCarouselThumbnailElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == Attributes.RESIZE && newValue === 'true' && this._elementRef) {
+    if (
+      name == AttributesNames.RESIZE &&
+      newValue === 'true' &&
+      this._elementRef
+    ) {
       this._elementRef.events.SetEventReize();
     }
   }

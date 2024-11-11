@@ -9,7 +9,7 @@ import { MarkupCreate, Styles, WebComponents } from 'utilities';
 import { CommonPersonData } from '../common';
 
 const { Node } = MarkupCreate;
-const { Attributes, AttributesValues } = WebComponents;
+const { AttributesNames, AttributesValues } = WebComponents;
 
 const ELEMENT_NAME = 'umd-element-person';
 
@@ -31,12 +31,13 @@ const styleTemplate = Node.stylesTemplate({
 export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const isDisplayList =
-    element.getAttribute(Attributes.DISPLAY) === AttributesValues.DISPLAY_LIST;
+    element.getAttribute(AttributesNames.DISPLAY) ===
+    AttributesValues.DISPLAY_LIST;
   const isDisplayTabular =
-    element.getAttribute(Attributes.DISPLAY) ===
+    element.getAttribute(AttributesNames.DISPLAY) ===
     AttributesValues.DISPLAY_TABULAR;
   const theme =
-    element.getAttribute(Attributes.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 

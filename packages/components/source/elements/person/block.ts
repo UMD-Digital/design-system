@@ -10,7 +10,6 @@ type TypeBlockPersonProps = TypePersonProps & {
 const { Spacing, Colors } = Tokens;
 
 const IMAGE_BREAKPOINT = 349;
-const PADDING_BREAKPOINT = 400;
 const SMALL = 650;
 
 const ATTRIBUTE_THEME = 'theme';

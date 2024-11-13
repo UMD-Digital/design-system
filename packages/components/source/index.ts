@@ -1,4 +1,4 @@
-import * as UmdComponents from './shadow-dom';
+import * as UmdComponents from './shadow-dom-api';
 import * as UmdElements from './elements';
 import * as UmdUtilities from './utilities';
 

@@ -15,7 +15,6 @@ import Network from './network';
 import Performance from './performance';
 import Storage from './storage';
 import Styles from './styles';
-import WebComponents from './web-components';
 
 export {
   Accessibility,
@@ -35,5 +34,4 @@ export {
   Performance,
   Storage,
   Styles,
-  WebComponents,
 };

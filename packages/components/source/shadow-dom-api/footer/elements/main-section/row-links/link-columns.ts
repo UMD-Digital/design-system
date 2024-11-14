@@ -284,10 +284,12 @@ const CreateSlotColumn = ({
   element,
   slotRef,
   hasHeadlines,
+  isColumnOne,
 }: {
   element: HTMLElement;
   slotRef: string;
   hasHeadlines: boolean;
+  isColumnOne: boolean;
 }) => {
   const slot = SlotWithDefaultStyling({
     element,
@@ -312,15 +314,18 @@ const CreateSlotColumn = ({
 
       if (hasHeadlines) {
         const headline = slot.getAttribute(HEADLINE_ATTRIBUTE) as string;
-
         const headlineElement = document.createElement('p');
         headlineElement.classList.add(ROW_LINKS_COLUMN_HEADLINE);
         headlineElement.innerHTML = headline;
 
-        if (!headline)
+        if (!headline && !isColumnOne) {
           headlineElement.setAttribute(HEADLINE_ATTRIBUTE_EMPTY, 'true');
+          wrapper.appendChild(headlineElement);
+        }
 
-        wrapper.appendChild(headlineElement);
+        if (headline) {
+          wrapper.appendChild(headlineElement);
+        }
       }
 
       links.forEach((link) => {
@@ -328,7 +333,6 @@ const CreateSlotColumn = ({
       });
 
       elementToAppend = wrapper;
-    } else {
     }
 
     elementToAppend.classList.add(ROW_LINKS_COLUMN_WRAPPER);
@@ -357,8 +361,13 @@ export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
       return false;
     });
 
-    slotList.forEach(({ slotRef }) => {
-      const slotToAppend = CreateSlotColumn({ element, slotRef, hasHeadlines });
+    slotList.forEach(({ slotRef }, index) => {
+      const slotToAppend = CreateSlotColumn({
+        element,
+        slotRef,
+        hasHeadlines,
+        isColumnOne: index === 0,
+      });
       if (slotToAppend) container.appendChild(slotToAppend);
     });
 

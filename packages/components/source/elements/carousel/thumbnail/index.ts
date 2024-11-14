@@ -70,7 +70,7 @@ const PersonSlideStyles = `
   .${ELEMENT_PERSON_SLIDE} {
     border: 1px solid ${Colors.gray.light};
     border-left: none;
-    padding: ${Spacing.md};
+    padding: ${Spacing.lg};
   }
 
   .${ELEMENT_THUMBNAIL_CONTAINER} .${ELEMENT_PERSON_SLIDE}:first-child {

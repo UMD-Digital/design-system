@@ -239,6 +239,10 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
     padding-top: 3px;
   }
 
+  .${ELEMENT_CTA_WRAPPER}[data-email] svg path {
+    fill: ${Colors.red};
+  }
+
   ${PrimaryStyles}
   ${OutlineStyles}
   ${SecondaryStyles}

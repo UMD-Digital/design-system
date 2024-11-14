@@ -34,7 +34,7 @@ const OverwriteThemeDarkStyles = `
   }
 
   ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
-    background-color: ${Colors.gray.dark};
+    background-color: ${Colors.gray.darker};
   }
 `;
 

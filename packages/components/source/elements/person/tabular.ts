@@ -48,7 +48,7 @@ const OVERWRITE_TEXT_CONTAINER_CONTACT = `${OVERWRITE_TEXT_CONTAINER_WITH_CONTAC
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
-      background-color: ${Colors.gray.dark};
+      background-color: ${Colors.gray.darker};
     }
   }
 `;

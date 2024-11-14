@@ -30,7 +30,7 @@ const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} 
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
-      background-color: ${Colors.gray.dark};
+      background-color: ${Colors.gray.darker};
     }
   }
 `;

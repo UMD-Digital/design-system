@@ -31,6 +31,7 @@ const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
 const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
 
 const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
+const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.wrapper}`;
 const OVERWRITE_TEXT_HEADLINE = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
 const OVERWRITE_TEXT_RICHTEXT = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.text}`;
@@ -115,6 +116,11 @@ const OverwriteImageLeftStyles = `
 
 // prettier-ignore
 const OverwriteImageContainerStyles = `
+  @keyframes pathway-hero-resize {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+  }
+
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       width: 50%;
@@ -130,6 +136,7 @@ const OverwriteImageContainerStyles = `
     ${OVERWRITE_IMAGE_CONTAINER} div {
       height: 100%;
       width: 100%;
+      overflow: clip;
     }
   }
 
@@ -147,10 +154,24 @@ const OverwriteImageContainerStyles = `
     object-fit: cover;
     object-position: center;
   }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    @media (prefers-reduced-motion: no-preference) {
+      ${OVERWRITE_IMAGE_CONTAINER} img,
+      ${OVERWRITE_IMAGE_CONTAINER} video{
+        animation: pathway-hero-resize forwards 1.5s;
+      }
+    }
+  }
 `;
 
 // prettier-ignore
 const OverwriteTextContainerStyles = `
+  @keyframes pathway-hero-slide-up {
+    from { transform: translateY(25px); opacity: .2 }
+    to { transform: translateY(0); opacity: 1 }
+  }
+
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
       padding: ${Spacing.md} 0;
@@ -192,6 +213,14 @@ const OverwriteTextContainerStyles = `
       [`.${OVERWRITE_TEXT_RICHTEXT}`]: SansLarger,
     },
   })}
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    @media (prefers-reduced-motion: no-preference) {
+      ${OVERWRITE_TEXT_CONTAINER} {
+        animation: pathway-hero-slide-up forwards 1.5s;
+      }
+    }
+  }
 `;
 
 const LockStyles = `

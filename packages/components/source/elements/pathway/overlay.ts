@@ -378,12 +378,12 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
   const lock = document.createElement('div');
   const lockWrapper = document.createElement('div');
   const background = document.createElement('div');
-  const { isImageRight = true, theme } = element;
+  const { isImageRight = true, includesAnimation, theme } = element;
 
   const textContainer = TextContainer.CreateElement(element);
   const imageContainer = ImageContainer.CreateElement(element);
   const loadAnimation = () => {
-    Animation({ includesAnimation: element.includesAnimation, container });
+    Animation({ includesAnimation, container });
   };
 
   container.classList.add(PATHWAY_OVERLAY_CONTAINER);

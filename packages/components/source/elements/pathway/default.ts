@@ -6,6 +6,7 @@ import ImageContainer, { TypePathwayImageContainer } from './elements/image';
 type TypePathwayDefaultProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
     isImageRight: boolean;
+    includesAnimation?: boolean;
   };
 
 const { Spacing } = Tokens;
@@ -30,6 +31,7 @@ const PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER =
 const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
 const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
 const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
+const IS_ANIMATION_START = `[${ATTRIBUTE_ANIMATION}="true"]`;
 
 const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_DEFAULT_CONTAINER} .${TextContainer.Elements.wrapper}`;
@@ -44,8 +46,11 @@ const OVERWRITE_IMAGE_RIGHT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .
 const OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${TextContainer.Elements.wrapper}`;
 
 const OVERWRITE_CONTAINER_ANIMATION = `.${PATHWAY_DEFAULT_CONTAINER}${IS_ANIMATION}`;
+const OVERWRITE_CONTAINER_ANIMATION_START = `.${PATHWAY_DEFAULT_CONTAINER}${IS_ANIMATION_START}`;
 const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
 const OVERWRITE_ANIMATION_IMAGE_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
+const OVERWRITE_ANIMATION_TEXT_CONTAINE_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${TextContainer.Elements.container}`;
+const OVERWRITE_ANIMATION_IMAGE_CONTAINER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${ImageContainer.Elements.container}`;
 
 // prettier-ignore
 const AnimationStyles = `
@@ -61,16 +66,16 @@ const AnimationStyles = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_TEXT_CONTAINER}, 
-    ${OVERWRITE_IMAGE_CONTAINER} {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER}, 
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
       opacity: 0;
       transform: translateY(100px);
     }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINER}, 
-    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINE_START}, 
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER_START} {
       animation: pathway-fade-in 1s forwards;
     }
   }
@@ -220,8 +225,37 @@ const STYLES_PATHWAY_DEFAULT_ELEMENT = `
   ${OverwriteImagePositionStyles}
 `;
 
+const Animation = ({
+  includesAnimation = true,
+  container,
+}: {
+  includesAnimation?: boolean;
+  container: HTMLElement;
+}) => {
+  if (includesAnimation) {
+    const animation: IntersectionObserverCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
+
+        if (entry.isIntersecting) {
+          target.setAttribute(ATTRIBUTE_ANIMATION, 'true');
+          observer.unobserve(target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(animation, {
+      rootMargin: '0px',
+      threshold: [0.35],
+    });
+
+    observer.observe(container);
+    container.setAttribute(ATTRIBUTE_ANIMATION, '');
+  }
+};
+
 const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
-  const { isImageRight = true, theme } = props;
+  const { isImageRight = true, includesAnimation, theme } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
@@ -229,22 +263,9 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
 
   const textContainer = TextContainer.CreateElement(props);
   const imageContainer = ImageContainer.CreateElement(props);
-
-  const animation: IntersectionObserverCallback = (entries, observer) => {
-    entries.forEach((entry) => {
-      const target = entry.target as HTMLElement;
-
-      if (entry.isIntersecting) {
-        target.setAttribute(ATTRIBUTE_ANIMATION, '');
-        observer.unobserve(target);
-      }
-    });
+  const loadAnimation = () => {
+    Animation({ includesAnimation, container });
   };
-
-  const observer = new IntersectionObserver(animation, {
-    rootMargin: '0px',
-    threshold: [0.35],
-  });
 
   container.classList.add(PATHWAY_DEFAULT_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
@@ -265,9 +286,13 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
   lock.appendChild(lockWrapper);
   wrapper.appendChild(lock);
   container.appendChild(wrapper);
-  observer.observe(container);
 
-  return container;
+  return {
+    element: container,
+    events: {
+      loadAnimation,
+    },
+  };
 };
 
 export default {

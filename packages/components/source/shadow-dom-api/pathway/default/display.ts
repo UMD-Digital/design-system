@@ -114,18 +114,16 @@ export const CreateShadowDom = ({
       theme = AttributesValues.THEME_MARYLAND;
   }
 
-  if (type === AttributesValues.DISPLAY_HERO) {
+  const makeHeroType = () => {
     shadow.appendChild(
       PathwayHero.CreateElement({
         ...MakeCommonDefaultData({ element, theme }),
         includesAnimation,
       }),
     );
+  };
 
-    return;
-  }
-
-  if (type === AttributesValues.DISPLAY_OVERLAY) {
+  const makeOverlayType = () => {
     const overlay = PathwayOverlay.CreateElement({
       theme,
       isImageScaled,
@@ -140,11 +138,9 @@ export const CreateShadowDom = ({
         overlay.events.loadAnimation();
       }
     }, 10);
+  };
 
-    return;
-  }
-
-  if (type === AttributesValues.DISPLAY_STICKY) {
+  const makeStickyType = () => {
     shadow.appendChild(
       PathwaySticky.CreateElement({
         theme,
@@ -152,16 +148,41 @@ export const CreateShadowDom = ({
         ...MakeCommonDefaultData({ element, theme }),
       }),
     );
+  };
 
-    return;
-  }
-
-  shadow.appendChild(
-    PathwayDefault.CreateElement({
+  const makeDefaultType = () => {
+    const defaultElement = PathwayDefault.CreateElement({
       theme,
       isImageScaled,
       includesAnimation,
       ...MakeCommonDefaultData({ element, theme }),
-    }),
-  );
+    });
+
+    shadow.appendChild(defaultElement.element);
+
+    setTimeout(() => {
+      if (defaultElement.element.getBoundingClientRect().top > 0) {
+        defaultElement.events.loadAnimation();
+      }
+    }, 10);
+  };
+
+  if (type === AttributesValues.DISPLAY_HERO) {
+    makeHeroType();
+    return;
+  }
+
+  if (type === AttributesValues.DISPLAY_OVERLAY) {
+    makeOverlayType();
+
+    return;
+  }
+
+  if (type === AttributesValues.DISPLAY_STICKY) {
+    makeStickyType();
+
+    return;
+  }
+
+  makeDefaultType();
 };

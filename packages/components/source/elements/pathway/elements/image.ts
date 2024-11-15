@@ -1,7 +1,9 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { LayoutImage, ButtonVideoState } from 'macros';
+import { Accessibility } from 'utilities';
 
 const { Spacing, Colors, Queries } = Tokens;
+const { IsPrefferdReducedMotion } = Accessibility;
 
 type TypeScaleProps = {
   isImageScaled: boolean;
@@ -119,7 +121,12 @@ const CreatePathwayImageContainer = (
 
       wrapper.appendChild(videoRef);
       wrapper.appendChild(buttonMacro.elements.button);
-      buttonMacro.events.setButtonPlay();
+      if (!IsPrefferdReducedMotion()) {
+        buttonMacro.events.setButtonPlay();
+      } else {
+        buttonMacro.events.setButtonPause();
+        video.pause();
+      }
 
       container.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE);
       container.appendChild(wrapper);

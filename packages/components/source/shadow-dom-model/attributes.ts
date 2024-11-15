@@ -8,19 +8,29 @@ type AttributeElementProps = {
 type AttributeProps = AttributeElementProps & {
   attributeName: string;
   attributeValue: string;
+  defaultValue?: boolean;
 };
 
 const isAttributesEqual = ({
   element,
   attributeName,
   attributeValue,
+  defaultValue = false,
 }: AttributeProps) => {
   const name = element.getAttribute(attributeName);
 
-  if (name && name === attributeValue) return true;
+  if (name && name === attributeValue) return !defaultValue;
 
-  return false;
+  return defaultValue;
 };
+
+const includesAnimation = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.ANIMATION_STATE,
+    attributeValue: AttributesValues.STATE_FALSE,
+    defaultValue: true,
+  });
 
 const isThemeLight = (props: AttributeElementProps) =>
   isAttributesEqual({
@@ -62,6 +72,7 @@ const daysToHide = ({ element }: AttributeElementProps) => {
 };
 
 export default {
+  includesAnimation,
   isThemeLight,
   isThemeDark,
   isStateOpen,

@@ -1,3 +1,7 @@
+const AnimationNames = {
+  ANIMATION_STATE: 'data-animation',
+};
+
 const DisplayNames = {
   DISPLAY_SIZE: 'size',
   DISPLAY_TYPE: 'display-type',
@@ -69,6 +73,7 @@ const VisualNames = {
 };
 
 export default {
+  ...AnimationNames,
   ...DisplayNames,
   ...FeedNames,
   ...InformationNames,

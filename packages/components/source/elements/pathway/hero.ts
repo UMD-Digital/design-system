@@ -8,6 +8,7 @@ import ImageContainer, {
 type TypePathwayHeroProps = TypePathwayTextContainer &
   TypePathwayHeroImageContainer & {
     isImageRight: boolean;
+    includesAnimation?: boolean;
   };
 
 const { Spacing } = Tokens;
@@ -22,6 +23,7 @@ const LARGE = 1300;
 const ELEMENT_NAME = 'umd-element-pathway';
 const ATTRIBUTE_IMAGE_POSITION = 'image-position';
 const ATTRIBUTE_HERO = 'hero';
+const ATTRIBUTE_ANIMATION = 'data-animation';
 
 const PATHWAY_HERO_CONTAINER = 'pathway-hero-container';
 const PATHWAY_HERO_CONTAINER_WRAPPER = 'pathway-hero-container-wrapper';
@@ -29,9 +31,9 @@ const PATHWAY_HERO_CONTAINER_LOCK = 'pathway-hero-container-lock';
 
 const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
 const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
+const IS_WITH_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
 
 const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
-const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.wrapper}`;
 const OVERWRITE_TEXT_HEADLINE = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
 const OVERWRITE_TEXT_RICHTEXT = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.text}`;
@@ -45,6 +47,10 @@ const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CO
 const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
 const OVERWRITE_IMAGE_LEFT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_WRAPPER}`;
 const OVERWRITE_IMAGE_LEFT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${TextContainer.Elements.wrapper}`;
+
+const OVERWRITE_CONTAINER_ANIMATION = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_ANIMATION}`;
+const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
+const OVERWRITE_ANIMATION_IMAGE_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
 
 // prettier-ignore
 const OverwriteImageRightStyles = `
@@ -116,11 +122,6 @@ const OverwriteImageLeftStyles = `
 
 // prettier-ignore
 const OverwriteImageContainerStyles = `
-  @keyframes pathway-hero-resize {
-    from { transform: scale(1.1); }
-    to { transform: scale(1); }
-  }
-
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       width: 50%;
@@ -154,24 +155,10 @@ const OverwriteImageContainerStyles = `
     object-fit: cover;
     object-position: center;
   }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    @media (prefers-reduced-motion: no-preference) {
-      ${OVERWRITE_IMAGE_CONTAINER} img,
-      ${OVERWRITE_IMAGE_CONTAINER} video{
-        animation: pathway-hero-resize forwards 1.5s;
-      }
-    }
-  }
 `;
 
 // prettier-ignore
 const OverwriteTextContainerStyles = `
-  @keyframes pathway-hero-slide-up {
-    from { transform: translateY(25px); opacity: .2 }
-    to { transform: translateY(0); opacity: 1 }
-  }
-
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
       padding: ${Spacing.md} 0;
@@ -213,10 +200,32 @@ const OverwriteTextContainerStyles = `
       [`.${OVERWRITE_TEXT_RICHTEXT}`]: SansLarger,
     },
   })}
+`;
+
+// prettier-ignore
+const AnimationStyles = `
+  @keyframes pathway-hero-resize {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+  }
+
+  @keyframes pathway-hero-slide-up {
+    from { transform: translateY(25px); opacity: .2 }
+    to { transform: translateY(0); opacity: 1 }
+  }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     @media (prefers-reduced-motion: no-preference) {
-      ${OVERWRITE_TEXT_CONTAINER} {
+      ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} img,
+      ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} video{
+        animation: pathway-hero-resize forwards 1.5s;
+      }
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
+    @media (prefers-reduced-motion: no-preference) {
+      ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
         animation: pathway-hero-slide-up forwards 1.5s;
       }
     }
@@ -257,6 +266,7 @@ const STYLES_PATHWAY_HERO_ELEMENT = `
   }
 
   ${LockStyles}
+  ${AnimationStyles}
   ${OverwriteTextContainerStyles}
   ${OverwriteImageContainerStyles}
   ${OverwriteImageRightStyles}
@@ -268,7 +278,7 @@ const CreatePathwayHeroElement = (element: TypePathwayHeroProps) => {
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
   const lockWrapper = document.createElement('div');
-  const { isImageRight = true } = element;
+  const { isImageRight = true, includesAnimation = true } = element;
 
   const textContainer = TextContainer.CreateElement(element);
   const imageContainer = ImageContainer.CreateElement(element);
@@ -288,6 +298,7 @@ const CreatePathwayHeroElement = (element: TypePathwayHeroProps) => {
   if (imageContainer) wrapper.appendChild(imageContainer);
   wrapper.appendChild(lock);
 
+  if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
   container.setAttribute(ATTRIBUTE_HERO, '');
   container.appendChild(wrapper);
   return container;

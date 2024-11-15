@@ -6,7 +6,12 @@ import {
   PathwaySticky,
   EventElements,
 } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import {
+  Attributes,
+  AttributesNames,
+  AttributesValues,
+  Slots,
+} from 'shadow-dom-model';
 import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 import { UMDPathwayElement } from './index';
@@ -112,6 +117,7 @@ export const CreateShadowDom = ({
     shadow.appendChild(
       PathwayHero.CreateElement({
         ...MakeCommonDefaultData({ element, theme }),
+        includesAnimation: Attributes.includesAnimation({ element }),
       }),
     );
 

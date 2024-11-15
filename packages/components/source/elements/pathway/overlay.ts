@@ -6,6 +6,7 @@ import ImageContainer, { TypePathwayImageContainer } from './elements/image';
 type TypePathwayOverlayProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
     isImageRight: boolean;
+    includesAnimation?: boolean;
   };
 
 const { Colors, Spacing } = Tokens;
@@ -38,10 +39,9 @@ const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
 const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
 const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
+const IS_ANIMATION_START = `[${ATTRIBUTE_ANIMATION}="true"]`;
 
-const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_OVERLAY_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_OVERLAY_CONTAINER} .${TextContainer.Elements.wrapper}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_OVERLAY_CONTAINER} .${ImageContainer.Elements.container}`;
 
 const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_OVERLAY_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
 const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_OVERLAY_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
@@ -60,8 +60,15 @@ const OVERWRITE_THEME_LIGHT_BACKGROUND = `${OVERWRITE_THEME_LIGHT_CONTAINER} .${
 const OVERWRITE_THEME_MARYLAND_BACKGROUND = `${OVERWRITE_THEME_MARYLAND_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_BACKGROUND}`;
 
 const OVERWRITE_CONTAINER_ANIMATION = `.${PATHWAY_OVERLAY_CONTAINER}${IS_ANIMATION}`;
+const OVERWRITE_CONTAINER_ANIMATION_START = `.${PATHWAY_OVERLAY_CONTAINER}${IS_ANIMATION_START}`;
 const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
 const OVERWRITE_ANIMATION_IMAGE_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
+const OVERWRITE_ANIMATION_TEXT_CONTAINER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${TextContainer.Elements.container}`;
+const OVERWRITE_ANIMATION_IMAGE_CONTAINER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${ImageContainer.Elements.container}`;
+
+console.log(
+  `.${PATHWAY_OVERLAY_CONTAINER}${IS_WITH_IMAGE_RIGHT}${IS_ANIMATION_START}`,
+);
 
 // prettier-ignore
 const AnimationStyles = `
@@ -77,28 +84,28 @@ const AnimationStyles = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_TEXT_CONTAINER}, 
-    ${OVERWRITE_IMAGE_CONTAINER} {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER}, 
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
       opacity: 0;
       transform: translateY(100px);
     }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINER}, 
-    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER_START}, 
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER_START} {
       animation: pathway-fade-in 1s forwards;
     }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER_START} {
       animation-delay: 0.5s;
     }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
+    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER_START} {
       animation-delay: 0s;
     }
   }
@@ -138,7 +145,7 @@ const BackgroundAnimationStyles = `
 
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
-      .${PATHWAY_OVERLAY_CONTAINER_BACKGROUND} {
+      ${OVERWRITE_CONTAINER_ANIMATION} .${PATHWAY_OVERLAY_CONTAINER_BACKGROUND} {
         animation: pathway-overlay-background forwards;
         animation-timeline: view();
         animation-range-start: entry;
@@ -150,7 +157,7 @@ const BackgroundAnimationStyles = `
 
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
-      ${OVERWRITE_IMAGE_RIGHT_BACKGROUND} {
+      .${PATHWAY_OVERLAY_CONTAINER}${IS_WITH_IMAGE_RIGHT}${IS_ANIMATION} .${PATHWAY_OVERLAY_CONTAINER_BACKGROUND} {
         animation: pathway-overlay-background-right forwards;
         animation-timeline: view();
         animation-range-start: entry;
@@ -186,7 +193,6 @@ const OverwriteVarationTheme = `
 
 // prettier-ignore
 const OverwriteImagePositionStyles = `
-
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER} {
       order: 2;
@@ -336,6 +342,36 @@ const STYLES_PATHWAY_OVERLAY_ELEMENT = `
   ${OverwriteVarationTheme}
 `;
 
+const Animation = ({
+  includesAnimation = true,
+  container,
+}: {
+  includesAnimation?: boolean;
+  container: HTMLElement;
+}) => {
+  if (includesAnimation) {
+    const animation: IntersectionObserverCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
+
+        if (entry.isIntersecting) {
+          target.setAttribute(ATTRIBUTE_ANIMATION, 'true');
+          observer.unobserve(target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(animation, {
+      root: null,
+      rootMargin: '0px',
+      threshold: [0.35],
+    });
+
+    observer.observe(container);
+    container.setAttribute(ATTRIBUTE_ANIMATION, '');
+  }
+};
+
 const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -346,22 +382,9 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
 
   const textContainer = TextContainer.CreateElement(element);
   const imageContainer = ImageContainer.CreateElement(element);
-
-  const animation: IntersectionObserverCallback = (entries, observer) => {
-    entries.forEach((entry) => {
-      const target = entry.target as HTMLElement;
-
-      if (entry.isIntersecting) {
-        target.setAttribute(ATTRIBUTE_ANIMATION, '');
-        observer.unobserve(target);
-      }
-    });
+  const loadAnimation = () => {
+    Animation({ includesAnimation: element.includesAnimation, container });
   };
-
-  const observer = new IntersectionObserver(animation, {
-    rootMargin: '0px',
-    threshold: [0.35],
-  });
 
   container.classList.add(PATHWAY_OVERLAY_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
@@ -385,9 +408,13 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
   lock.appendChild(lockWrapper);
   wrapper.appendChild(lock);
   container.appendChild(wrapper);
-  observer.observe(container);
 
-  return container;
+  return {
+    element: container,
+    events: {
+      loadAnimation,
+    },
+  };
 };
 
 export default {

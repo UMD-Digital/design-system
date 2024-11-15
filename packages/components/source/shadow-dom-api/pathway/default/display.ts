@@ -100,6 +100,7 @@ export const CreateShadowDom = ({
     element.getAttribute(AttributesNames.LAYOUT_IMAGE_SCALED) !== 'false';
   const type = element.getAttribute(AttributesNames.TYPE);
   const themeAttribute = element.getAttribute(AttributesNames.THEME);
+  const includesAnimation = Attributes.includesAnimation({ element });
   let theme = null;
 
   shadow.appendChild(element._styles.content.cloneNode(true));
@@ -117,7 +118,7 @@ export const CreateShadowDom = ({
     shadow.appendChild(
       PathwayHero.CreateElement({
         ...MakeCommonDefaultData({ element, theme }),
-        includesAnimation: Attributes.includesAnimation({ element }),
+        includesAnimation,
       }),
     );
 
@@ -125,13 +126,20 @@ export const CreateShadowDom = ({
   }
 
   if (type === AttributesValues.DISPLAY_OVERLAY) {
-    shadow.appendChild(
-      PathwayOverlay.CreateElement({
-        theme,
-        isImageScaled,
-        ...MakeCommonDefaultData({ element, theme }),
-      }),
-    );
+    const overlay = PathwayOverlay.CreateElement({
+      theme,
+      isImageScaled,
+      includesAnimation,
+      ...MakeCommonDefaultData({ element, theme }),
+    });
+
+    shadow.appendChild(overlay.element);
+
+    setTimeout(() => {
+      if (overlay.element.getBoundingClientRect().top > 0) {
+        overlay.events.loadAnimation();
+      }
+    }, 10);
 
     return;
   }
@@ -152,6 +160,7 @@ export const CreateShadowDom = ({
     PathwayDefault.CreateElement({
       theme,
       isImageScaled,
+      includesAnimation,
       ...MakeCommonDefaultData({ element, theme }),
     }),
   );

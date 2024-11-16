@@ -7,6 +7,7 @@ type TypeSectionIntroDefaultProps = {
   text?: HTMLElement | null;
   hasSeparator?: boolean;
   theme?: string | null;
+  includesAnimation?: boolean;
 };
 
 const { SansLargest, SansLarger, SansMedium } = Typography;
@@ -21,6 +22,7 @@ const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
 const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
+const IS_ANIMATION_START = `[${ATTRIBUTE_ANIMATION}="true"]`;
 
 const ELEMENT_NAME = 'umd-section-intro-default';
 const ELEMENT_INTRO_CONTAINER = 'intro-default-container';
@@ -35,8 +37,11 @@ const OVERWRITE_SEPARATOR_WRAPPER = `.${ELEMENT_INTRO_CONTAINER}[${ATTRIBUTE_WIT
 const OVERWRITE_THEME_DARK_CONTAINTER = `.${ELEMENT_INTRO_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
 
 const OVERWRITE_CONTAINER_ANIMATION = `.${ELEMENT_INTRO_CONTAINER}${IS_ANIMATION}`;
-const OVERWRITE_ANIMATION_WRAPPER = `${OVERWRITE_CONTAINER_ANIMATION} .${ELEMENT_INTRO_CONTAINER_WRAPPER}`;
+const OVERWRITE_CONTAINER_ANIMATION_START = `.${ELEMENT_INTRO_CONTAINER}${IS_ANIMATION_START}`;
 const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ELEMENT_INTRO_TEXT_CONTAINER}`;
+const OVERWRITE_ANIMATION_WRAPPER = `${OVERWRITE_CONTAINER_ANIMATION} .${ELEMENT_INTRO_CONTAINER_WRAPPER}`;
+const OVERWRITE_ANIMATION_TEXT_CONTAINER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${ELEMENT_INTRO_TEXT_CONTAINER}`;
+const OVERWRITE_ANIMATION_WRAPPER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${ELEMENT_INTRO_CONTAINER_WRAPPER}`;
 
 // prettier-ignore
 const OverwriteAnimationLine = `
@@ -52,14 +57,14 @@ const OverwriteAnimationLine = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_SEPARATOR_WRAPPER}:before {
+    ${OVERWRITE_ANIMATION_WRAPPER}:before {
       height: 0;
       transform: translateY(${Spacing['lg']});
     }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_WRAPPER}:before {
+    ${OVERWRITE_ANIMATION_WRAPPER_START}:before {
       animation: intro-line 1.2s forwards;
     }
   }
@@ -79,14 +84,14 @@ const OverwriteAnimationText = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .${ELEMENT_INTRO_TEXT_CONTAINER} {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
       opacity: 0;
       transform: translateY(100px);
     }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
+    ${OVERWRITE_ANIMATION_TEXT_CONTAINER_START} {
       animation: intro-fade-in 1s forwards;
       animation-delay: 0.2s;
     }
@@ -210,29 +215,53 @@ const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
   ${OverwriteAnimationLine}
 `;
 
+const Animation = ({
+  includesAnimation = true,
+  container,
+}: {
+  includesAnimation?: boolean;
+  container: HTMLElement;
+}) => {
+  if (includesAnimation) {
+    const animation: IntersectionObserverCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
+
+        if (entry.isIntersecting) {
+          target.setAttribute(ATTRIBUTE_ANIMATION, 'true');
+          observer.unobserve(target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(animation, {
+      root: null,
+      rootMargin: '0px',
+      threshold: [0.35],
+    });
+
+    observer.observe(container);
+    container.setAttribute(ATTRIBUTE_ANIMATION, '');
+  }
+};
+
 const CreateSectionIntroDefaultElement = (
   element: TypeSectionIntroDefaultProps,
 ) => {
-  const { headline, actions, text, theme, hasSeparator = false } = element;
+  const {
+    headline,
+    actions,
+    text,
+    theme,
+    hasSeparator = false,
+    includesAnimation,
+  } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const textContainer = document.createElement('div');
-
-  const animation: IntersectionObserverCallback = (entries, observer) => {
-    entries.forEach((entry) => {
-      const target = entry.target as HTMLElement;
-
-      if (entry.isIntersecting) {
-        target.setAttribute(ATTRIBUTE_ANIMATION, '');
-        observer.unobserve(target);
-      }
-    });
+  const loadAnimation = () => {
+    Animation({ includesAnimation, container });
   };
-
-  const observer = new IntersectionObserver(animation, {
-    rootMargin: '0px',
-    threshold: [0.35],
-  });
 
   textContainer.classList.add(ELEMENT_INTRO_TEXT_CONTAINER);
 
@@ -260,9 +289,12 @@ const CreateSectionIntroDefaultElement = (
   container.classList.add(ELEMENT_INTRO_CONTAINER);
   container.appendChild(wrapper);
 
-  observer.observe(container);
-
-  return container;
+  return {
+    element: container,
+    events: {
+      loadAnimation,
+    },
+  };
 };
 
 export default {

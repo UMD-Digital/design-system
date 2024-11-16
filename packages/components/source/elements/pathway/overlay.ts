@@ -66,10 +66,6 @@ const OVERWRITE_ANIMATION_IMAGE_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .$
 const OVERWRITE_ANIMATION_TEXT_CONTAINER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${TextContainer.Elements.container}`;
 const OVERWRITE_ANIMATION_IMAGE_CONTAINER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${ImageContainer.Elements.container}`;
 
-console.log(
-  `.${PATHWAY_OVERLAY_CONTAINER}${IS_WITH_IMAGE_RIGHT}${IS_ANIMATION_START}`,
-);
-
 // prettier-ignore
 const AnimationStyles = `
   @keyframes pathway-fade-in {

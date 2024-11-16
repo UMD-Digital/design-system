@@ -13,6 +13,7 @@ type TypeHeroStackedProps = TypeTextContainerProps &
     isTextCenter: boolean;
     isWithLock: boolean;
     isInterior: boolean;
+    includesAnimation?: boolean;
   };
 
 const { LockMax } = Layout;
@@ -25,8 +26,10 @@ const { ConvertJSSObjectToStyles } = Styles;
 const TABLET = 768;
 
 const ATTRIBUTE_WITHIN_LOCK = 'within-lock';
+const ATTRIBUTE_ANIMATION = 'data-animation';
 
 const IS_WITHIN_LOCK = `[${ATTRIBUTE_WITHIN_LOCK}]`;
+const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
 
 const ELEMENT_NAME = 'umd-element-hero-stacked';
 const ELEMENT_HERO_DECLARATION = 'hero-stacked-element-declaration';
@@ -42,6 +45,12 @@ const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements
 const OVERWRITE_RICH_TEXT = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.richText}`;
 
 const OVERWRITE_WITH_LOCK_HEADLINE = `.${ELEMENT_HERO_CONTAINER}${IS_WITHIN_LOCK} .${TextContainer.Elements.headline}`;
+
+const OVERWRITE_CONTAINER_ANIMATION = `.${ELEMENT_HERO_CONTAINER}${IS_ANIMATION}`;
+const OVERWRITE_TEXT_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
+const OVERWRITE_HEADLINE_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.headline}`;
+const OVERWRITE_RICH_TEXT_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.richText}`;
+const OVERWRITE_IMAGE_OVERLAY_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${ELEMENT_HERO_IMAGE_OVERLAY}`;
 
 // prettier-ignore
 const OverwriteEyebrow = `
@@ -95,11 +104,6 @@ const OverwriteRichText = `
 
 // prettier-ignore
 const OverwriteTextContainer = `
-  @keyframes hero-stacked-font-color {
-    from { color: ${Colors.black}; }
-    to { color: ${Colors.white}; }
-  }
-
   ${OVERWRITE_TEXT_CONTAINER} {
     padding: ${Spacing.lg} 0;
     display: flex;
@@ -112,30 +116,10 @@ const OverwriteTextContainer = `
       padding: ${Spacing.lg} 0 ${Spacing['3xl']};
     }
   }
-
-  @media (${Queries.tablet.min}) {
-    @media (prefers-reduced-motion: no-preference) {
-      @supports (animation-timeline: view()) {
-        ${OVERWRITE_RICH_TEXT},
-        ${OVERWRITE_RICH_TEXT} *,
-        ${OVERWRITE_HEADLINE} {
-          animation: hero-stacked-font-color ease-in-out forwards;
-          animation-timeline: view();
-          animation-range-start: 50vh;
-          animation-range-end: 160vh;
-        }
-      }
-    }
-  }
 `;
 
 // prettier-ignore
 const OverwriteImageContainer = `
-  @keyframes hero-stacked-fade-over {
-    from { opacity: 0;}
-    to { opacity: 1; }
-  }
-
   ${OVERWRITE_IMAGE_CONTAINER} {
     overflow: clip;
   }
@@ -162,15 +146,55 @@ const OverwriteImageContainer = `
     z-index: 99;
     opacity: 0;
   }
+`;
+
+const AnimationStyles = `
+  @keyframes hero-stacked-fade-over {
+    from { opacity: 0;}
+    to { opacity: 1; }
+  }
+
+  @keyframes hero-stacked-font-color {
+    from { color: ${Colors.black}; }
+    to { color: ${Colors.white}; }
+  }
 
   @media (${Queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
-        .${ELEMENT_HERO_IMAGE_OVERLAY} {
+        ${OVERWRITE_TEXT_CONTAINER_ANIMATION} {
+          position: sticky;
+          top: 0;
+          overflow: clip;
+          z-index: 999;
+        }
+      }
+    }
+  }
+
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        ${OVERWRITE_IMAGE_OVERLAY_ANIMATION} {
           animation: hero-stacked-fade-over ease-in-out forwards;
           animation-timeline: view();
           animation-range-start: 30vh;
           animation-range-end: 70vh;
+        }
+      }
+    }
+  }
+
+  @media (${Queries.tablet.min}) {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        ${OVERWRITE_RICH_TEXT_ANIMATION},
+        ${OVERWRITE_RICH_TEXT_ANIMATION} *,
+        ${OVERWRITE_HEADLINE_ANIMATION} {
+          animation: hero-stacked-font-color ease-in-out forwards;
+          animation-timeline: view();
+          animation-range-start: 50vh;
+          animation-range-end: 160vh;
         }
       }
     }
@@ -193,19 +217,6 @@ export const STYLES_HERO_STACKED_ELEMENT = `
     position: relative;
   }
 
-  @media (${Queries.tablet.min}) {
-    @media (prefers-reduced-motion: no-preference) {
-      @supports (animation-timeline: view()) {
-        ${OVERWRITE_TEXT_CONTAINER} {
-          position: sticky;
-          top: 0;
-          overflow: clip;
-          z-index: 999;
-        }
-      }
-    }
-  }
-
   ${OVERWRITE_TEXT_WRAPPER} > * {
     position: relative;
   }
@@ -216,6 +227,7 @@ export const STYLES_HERO_STACKED_ELEMENT = `
     },
   })}
 
+  ${AnimationStyles}
   ${OverwriteEyebrow}
   ${OverwriteHeadline}
   ${OverwriteRichText}
@@ -224,7 +236,7 @@ export const STYLES_HERO_STACKED_ELEMENT = `
 `;
 
 export const CreateHeroStackedElement = (element: TypeHeroStackedProps) => {
-  const { isWithLock } = element;
+  const { isWithLock, includesAnimation } = element;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
@@ -235,6 +247,7 @@ export const CreateHeroStackedElement = (element: TypeHeroStackedProps) => {
   });
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
+  if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
 
   lock.classList.add(ELEMENT_HERO_LOCK);
 

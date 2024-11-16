@@ -5,7 +5,12 @@ import {
   HeroOverlay,
   HeroStacked,
 } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import {
+  Attributes,
+  AttributesNames,
+  AttributesValues,
+  Slots,
+} from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { UMDHeroElement } from './index';
 import { CommonHeroData } from '../common';
@@ -29,6 +34,7 @@ export const ComponentStyles = `
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
   const type = element.getAttribute(AttributesNames.TYPE);
   const theme = element.getAttribute(AttributesNames.THEME);
+  const includesAnimation = Attributes.includesAnimation({ element });
   let isTextCenter =
     element.getAttribute('text-align') === AttributesValues.LAYOUT_TEXT_CENTER;
   let isInterior = false;
@@ -56,6 +62,7 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
     isTextCenter,
     isInterior,
     isWithLock,
+    includesAnimation,
     ...CommonHeroData({
       element,
     }),

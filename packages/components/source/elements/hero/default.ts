@@ -11,6 +11,7 @@ import TextContainer, { TypeTextContainerProps } from './elements/text';
 type TypeHeroDefaultProps = TypeTextContainerProps &
   TypeImageContainerProps & {
     isInterior: boolean;
+    includesAnimation?: boolean;
   };
 
 const { LockMax } = Layout;
@@ -27,6 +28,7 @@ const ATTRIBUTE_TEXT_ALIGN = 'text-align';
 const ATTRIBUTE_INTERIOR = 'interior';
 const ATTRIBUTE_HEADLINE_SIZE = 'headline-size';
 const ATTRIBUTE_IS_VIDEO = 'data-video';
+const ATTRIBUTE_ANIMATION = 'data-animation';
 const TEXT_ALIGN_CENTER = 'center';
 const HEADLINE_SIZE_LARGE = 'extra-large';
 
@@ -38,9 +40,9 @@ const HERO_LOCK = 'hero-default-lock';
 const IS_TEXT_CENTER = `[${ATTRIBUTE_TEXT_ALIGN}='${TEXT_ALIGN_CENTER}']`;
 const IS_INTERIOR = `[${ATTRIBUTE_INTERIOR}]`;
 const IS_LARGE_HEADLINE = `[${ATTRIBUTE_HEADLINE_SIZE}='${HEADLINE_SIZE_LARGE}']`;
+const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
 
 const OVERWRITE_TEXT_CONTAINER = `.${HERO_CONTAINER} .${TextContainer.Elements.container}`;
-const OVERWRITE_IMAGE_WRAPPER = `.${HERO_CONTAINER} .${TextContainer.Elements.wrapper}`;
 const OVERWRITE_IMAGE_CONTAINER = `.${HERO_CONTAINER} .${ImageContainer.Elements.container}`;
 const OVERWRITE_EYEBROW = `.${HERO_CONTAINER} .${TextContainer.Elements.eyebrow}`;
 const OVERWRITE_HEADLINE = `.${HERO_CONTAINER} .${TextContainer.Elements.headline}`;
@@ -52,6 +54,10 @@ const OVERWRITE_SIZE_LARGE_HEADLINE = `.${HERO_CONTAINER}${IS_LARGE_HEADLINE} .$
 
 const OVERWRITE_VIDEO_CONTAINER = `.${HERO_CONTAINER}[${ATTRIBUTE_IS_VIDEO}]`;
 const OVERWRITE_VIDEO_IMAGE_WRAPPER = `${OVERWRITE_VIDEO_CONTAINER} .${TextContainer.Elements.wrapper}`;
+
+const OVERWRITE_CONTAINER_ANIMATION = `.${HERO_CONTAINER}${IS_ANIMATION}`;
+const OVERWRITE_IMAGE_WRAPPER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.wrapper}`;
+const OVERWRITE_IMAGE_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
 
 // prettier-ignore
 const OverwriteEyebrow = `
@@ -113,11 +119,6 @@ const OverwriteRichText = `
 
 // prettier-ignore
 const OverwriteTextContainer = `
-  @keyframes hero-slide-up {
-    from { transform: translateY(25px); opacity: .2 }
-    to { transform: translateY(0); opacity: 1 }
-  }
-
   ${OVERWRITE_TEXT_CONTAINER} {
     display: flex;
     align-items: flex-end;
@@ -148,16 +149,6 @@ const OverwriteTextContainer = `
     }
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_IMAGE_WRAPPER} {
-      animation: hero-slide-up forwards 1s;
-    }
-  }
-
-  ${OVERWRITE_VIDEO_IMAGE_WRAPPER} {
-    animation: none;
-  }
-
   ${OVERWRITE_TEXT_CENTER_ALIGNMENT_TEXT_CONTAINER} {
     justify-content: center;
     margin-left: auto;
@@ -174,11 +165,6 @@ const OverwriteTextContainer = `
 
 // prettier-ignore
 const OverwriteImageContainer = `
-  @keyframes hero-scale-down {
-    from { transform: scale(1.1); }
-    to { transform: scale(1); }
-  }
-
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       aspect-ratio: 16 / 9;
@@ -215,11 +201,33 @@ const OverwriteImageContainer = `
     height: 100%;
     width: 100%;
   }
+`;
+
+const AnimationStyles = `
+  @keyframes hero-scale-down {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+  }
+
+  @keyframes hero-slide-up {
+    from { transform: translateY(25px); opacity: .2 }
+    to { transform: translateY(0); opacity: 1 }
+  }
 
   @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_IMAGE_CONTAINER} img {
+    ${OVERWRITE_IMAGE_CONTAINER_ANIMATION} img {
       animation: hero-scale-down forwards 1s;
     }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${OVERWRITE_IMAGE_WRAPPER_ANIMATION} {
+      animation: hero-slide-up forwards 1s;
+    }
+  }
+
+  ${OVERWRITE_VIDEO_IMAGE_WRAPPER} {
+    animation: none;
   }
 `;
 
@@ -292,12 +300,14 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
   ${OverwriteHeadline}
   ${OverwriteRichText}
   ${DefaultStyles}
+  ${AnimationStyles}
   ${OverwriteImageContainer}
   ${OverwriteTextContainer}
 `;
 
 export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
-  const { headline, isTextCenter, isInterior, videoRef } = element;
+  const { headline, isTextCenter, isInterior, videoRef, includesAnimation } =
+    element;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
@@ -319,6 +329,7 @@ export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
   if (isTextCenter)
     container.setAttribute(ATTRIBUTE_TEXT_ALIGN, TEXT_ALIGN_CENTER);
   if (isInterior) container.setAttribute(ATTRIBUTE_INTERIOR, '');
+  if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
   container.classList.add(HERO_CONTAINER);
   container.appendChild(lock);
 

@@ -8,7 +8,10 @@ import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
 
-type TypeHeroOverlayProps = TypeTextContainerProps & TypeImageContainerProps;
+type TypeHeroOverlayProps = TypeTextContainerProps &
+  TypeImageContainerProps & {
+    includesAnimation?: boolean;
+  };
 
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
@@ -16,9 +19,12 @@ const { Eyebrow } = Elements;
 const { CampaignExtralarge, SansLarger } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
+const ATTRIBUTE_ANIMATION = 'data-animation';
 
 const TABLET = 768;
 const DESKTOP = 1024;
+
+const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
 
 const ELEMENT_NAME = 'umd-element-hero-overlay';
 const ELEMENT_HERO_DECLARATION = 'hero-overlay-element-declaration';
@@ -30,6 +36,10 @@ const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ImageContainer.
 const OVERWRITE_EYEBROW = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.eyebrow}`;
 const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
 const OVERWRITE_RICH_TEXT = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.richText}`;
+
+const OVERWRITE_CONTAINER_ANIMATION = `.${ELEMENT_HERO_CONTAINER}${IS_ANIMATION}`;
+const OVERWRITE_TEXT_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
+const OVERWRITE_IMAGE_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
 
 // prettier-ignore
 const OverwriteEyebrow = `
@@ -82,14 +92,6 @@ const OverwriteTextContainer = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    @media (prefers-reduced-motion: no-preference) {
-      ${OVERWRITE_TEXT_CONTAINER} {
-        animation: hero-slide-up forwards 1.5s;
-      }
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
       width: 55%;
       padding: ${Spacing['5xl']} 0;
@@ -99,11 +101,6 @@ const OverwriteTextContainer = `
 
 // prettier-ignore
 const OverwriteImageContainer = `
-  @keyframes hero-overlay-resize {
-    from { transform: scale(1.1); }
-    to { transform: scale(1); }
-  }
-
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       position: absolute;
@@ -122,12 +119,27 @@ const OverwriteImageContainer = `
     height: 100%;
     width: 100%;
   }
+`;
+
+const AnimationStyles = `
+  @keyframes hero-overlay-resize {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+  }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     @media (prefers-reduced-motion: no-preference) {
-      ${OVERWRITE_IMAGE_CONTAINER} img,
-      ${OVERWRITE_IMAGE_CONTAINER} video{
+      ${OVERWRITE_IMAGE_CONTAINER_ANIMATION} img,
+      ${OVERWRITE_IMAGE_CONTAINER_ANIMATION} video{
         animation: hero-overlay-resize forwards 1.5s;
+      }
+    }
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
+    @media (prefers-reduced-motion: no-preference) {
+      ${OVERWRITE_TEXT_CONTAINER_ANIMATION} {
+        animation: hero-slide-up forwards 1.5s;
       }
     }
   }
@@ -184,6 +196,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
     }
   }
   
+  ${AnimationStyles}
   ${OverwriteEyebrow}
   ${OverwriteHeadline}
   ${OverwriteRichText}
@@ -192,6 +205,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
 `;
 
 export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
+  const { includesAnimation } = element;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
@@ -205,6 +219,7 @@ export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
     container.appendChild(asset);
   }
 
+  if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
   container.classList.add(ELEMENT_HERO_CONTAINER);
   container.appendChild(lock);
 

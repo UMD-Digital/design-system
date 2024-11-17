@@ -88,6 +88,13 @@ const isVisuallyBordered = (props: AttributeElementProps) =>
     attributeValue: AttributesValues.STATE_TRUE,
   });
 
+const isVisuallyLogo = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_HAS_LOGO,
+    attributeValue: AttributesValues.STATE_TRUE,
+  });
+
 const daysToHide = ({ element }: AttributeElementProps) => {
   const defaultDaysToHide = '10';
   const value = element.getAttribute(AttributesNames.VISUAL_DAYS_TO_HIDE);
@@ -109,5 +116,6 @@ export default {
   isShowIcon,
   isVisuallyAligned,
   isVisuallyBordered,
+  isVisuallyLogo,
   daysToHide,
 };

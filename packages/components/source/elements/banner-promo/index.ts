@@ -5,7 +5,7 @@ type TypeBannerPromoProps = {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
   includeSeal?: boolean;
 };
 
@@ -193,7 +193,7 @@ const CreateTextContainer = (props: TypeBannerPromoProps) => {
 
 const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
   (() => {
-    const { theme, includeSeal = false, actions } = props;
+    const { isThemeDark, includeSeal = false, actions } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
@@ -212,7 +212,7 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
 
       container.innerHTML = `${seal}`;
     }
-    if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
     container.classList.add(ELEMENT_CONTAINER);
     container.appendChild(wrapper);
 

@@ -5,7 +5,7 @@ declare global {
 }
 
 import { BannerPromo } from 'elements';
-import { AttributesNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const ELEMENT_NAME = 'umd-element-banner-promo';
@@ -22,17 +22,17 @@ const styles = `
 const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const hasLogo = element.getAttribute(AttributesNames.VISUAL_HAS_LOGO);
-  let includeSeal = false;
-
-  if (hasLogo === 'true') includeSeal = true;
+  const includeSeal = Attributes.isVisuallyLogo({ element });
+  const isThemeDark = Attributes.isThemeDark({
+    element,
+  });
 
   const banner = BannerPromo.CreateElement({
-    theme: element.getAttribute(AttributesNames.THEME),
     text: Slots.SlottedText({ element }),
     headline: Slots.SlottedHeadline({ element }),
     actions: Slots.SlottedActions({ element }),
     includeSeal,
+    isThemeDark,
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

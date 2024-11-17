@@ -3,12 +3,12 @@ import AttributesValues from './attributes-value';
 
 type AttributeElementProps = {
   element: HTMLElement;
+  defaultValue?: boolean;
 };
 
 type AttributeProps = AttributeElementProps & {
   attributeName: string;
   attributeValue: string;
-  defaultValue?: boolean;
 };
 
 const isAttributesEqual = ({
@@ -40,6 +40,35 @@ const includesFullScreenOption = (props: AttributeElementProps) =>
     defaultValue: true,
   });
 
+const includesVisualTime = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.OPTIONAL_SHOW_TIME,
+    attributeValue: AttributesValues.STATE_FALSE,
+    defaultValue: true,
+  });
+
+const isDisplayFeature = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_DISPLAY,
+    attributeValue: AttributesValues.DISPLAY_FEATURE,
+  });
+
+const isDisplayList = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_DISPLAY,
+    attributeValue: AttributesValues.DISPLAY_LIST,
+  });
+
+const isDisplayPromo = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_DISPLAY,
+    attributeValue: AttributesValues.DISPLAY_PROMO,
+  });
+
 const isThemeLight = (props: AttributeElementProps) =>
   isAttributesEqual({
     ...props,
@@ -59,13 +88,6 @@ const isTransparent = (props: AttributeElementProps) =>
     ...props,
     attributeName: AttributesNames.VISUAL_TRANSPARENT,
     attributeValue: AttributesValues.STATE_TRUE,
-  });
-
-const isDisplayList = (props: AttributeElementProps) =>
-  isAttributesEqual({
-    ...props,
-    attributeName: AttributesNames.VISUAL_DISPLAY,
-    attributeValue: AttributesValues.DISPLAY_LIST,
   });
 
 const isStateOpen = (props: AttributeElementProps) =>
@@ -131,10 +153,13 @@ const daysToHide = ({ element }: AttributeElementProps) => {
 export default {
   includesAnimation,
   includesFullScreenOption,
+  includesVisualTime,
+  isDisplayFeature,
+  isDisplayList,
+  isDisplayPromo,
   isThemeLight,
   isThemeDark,
   isTransparent,
-  isDisplayList,
   isStateOpen,
   isShowIcon,
   isTypeImage,

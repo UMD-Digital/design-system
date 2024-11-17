@@ -13,6 +13,7 @@ type TypeEventBlockProps = {
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
   theme?: string | null;
+  isThemeDark?: boolean;
 };
 
 const { Spacing } = Tokens;
@@ -61,14 +62,14 @@ const STYLES_EVENT_BLOCK_ELEMENT = `
 `;
 
 const CreateEventBlockElement = (props: TypeEventBlockProps) => {
-  const { theme, image, eventDetails } = props;
+  const { isThemeDark, image, eventDetails } = props;
   const textContainer = TextLockupSmallScaling.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
   const container = LayoutBlock.CreateElement({
     textContainer,
     imageContainer,
-    theme,
+    isThemeDark,
     isAligned: false,
     isBordered: false,
   });

@@ -14,7 +14,7 @@ type TypeEventFeatureProps = {
   dateSign: HTMLElement;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string;
+  isThemeDark?: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -113,7 +113,7 @@ const MakeEyebrow = () => {
 };
 
 const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
-  const { theme, image, eventDetails, dateSign } = element;
+  const { isThemeDark, image, eventDetails, dateSign } = element;
 
   const textContainer = TextLockupSmallScaling.CreateElement({
     ...element,
@@ -124,7 +124,7 @@ const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
   const container = LayoutBlock.CreateElement({
     textContainer,
     imageContainer,
-    theme,
+    isThemeDark,
   });
 
   if (eventDetails) {
@@ -144,7 +144,7 @@ const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
 
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_EVENT_FEATURE_CONTAINER);
-  if (theme) elementContainer.setAttribute('theme', theme);
+  if (isThemeDark) elementContainer.setAttribute('theme', THEME_DARK);
 
   return elementContainer;
 };

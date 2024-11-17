@@ -9,6 +9,7 @@ type TypeEventListProps = {
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
   theme?: string | null;
+  isThemeDark?: boolean;
 };
 
 const { Spacing } = Tokens;
@@ -69,14 +70,14 @@ const STYLES_EVENT_LIST_ELEMENT = `
 `;
 
 const CreateEventListElement = (props: TypeEventListProps) => {
-  const { theme, image, dateSign, eventDetails } = props;
+  const { isThemeDark, image, dateSign, eventDetails } = props;
   const elementContainer = document.createElement('div');
   const textContainer = TextLockupSmall.CreateElement(props);
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
   const container = LayoutList.CreateElement({
     textContainer,
     imageContainer,
-    theme,
+    isThemeDark,
   });
 
   if (dateSign) {

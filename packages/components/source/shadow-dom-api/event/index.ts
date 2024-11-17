@@ -11,7 +11,7 @@ import {
   EventList,
   EventPromo,
 } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -32,29 +32,18 @@ const styles = `
   ${EventPromo.Styles}
 `;
 
-const MakeCommonData = ({ element }: { element: UMDEventElement }) => {
-  const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
-
-  return {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    headline: Slots.SlottedHeadline({ element }),
-    text: Slots.SlottedText({ element }),
-    actions: Slots.SlottedActions({ element }),
-    theme,
-  };
-};
+const MakeCommonData = ({ element }: { element: UMDEventElement }) => ({
+  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+  headline: Slots.SlottedHeadline({ element }),
+  text: Slots.SlottedText({ element }),
+  actions: Slots.SlottedActions({ element }),
+  isThemeDark: Attributes.isThemeDark({ element }),
+});
 
 const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
-  const displayAttribute = element.getAttribute(AttributesNames.VISUAL_DISPLAY);
-  const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
-  const showTime =
-    element.getAttribute(AttributesNames.OPTIONAL_SHOW_TIME) !== 'false';
-  const isDisplayList = displayAttribute === AttributesValues.DISPLAY_LIST;
-  const isDisplayFeature =
-    displayAttribute === AttributesValues.DISPLAY_FEATURE;
-  const isDisplayPromo = displayAttribute === AttributesValues.DISPLAY_PROMO;
+  const isThemeDark = Attributes.isThemeDark({ element });
+  const showTime = Attributes.includesVisualTime({ element });
+
   const startDateSlot = element.querySelector(
     `[slot="${Slots.DATE_START_ISO}"]`,
   );
@@ -62,7 +51,6 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const locationSlot = element.querySelector(`[slot="${Slots.LOCATION}"]`);
   const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
   const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
-  const isThemeLight = theme === AttributesValues.THEME_LIGHT;
 
   if (!startDate) {
     console.error('Missing start date for event web component');
@@ -102,15 +90,15 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
     theme: 'dark',
   });
 
-  if (isDisplayFeature) {
+  if (Attributes.isDisplayFeature({ element })) {
     return EventFeature.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails: isThemeLight ? eventDetails : eventDetailsDark,
-      dateSign: isThemeLight ? dateSignLarge : dateSignLargeLight,
+      eventDetails: isThemeDark ? eventDetailsDark : eventDetails,
+      dateSign: isThemeDark ? dateSignLargeLight : dateSignLarge,
     });
   }
 
-  if (isDisplayPromo) {
+  if (Attributes.isDisplayPromo({ element })) {
     return EventPromo.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: eventDetailsDark,
@@ -118,17 +106,17 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
     });
   }
 
-  if (isDisplayList) {
+  if (Attributes.isDisplayList({ element })) {
     return EventList.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails: isThemeLight ? eventDetails : eventDetailsDark,
-      dateSign: isThemeLight ? dateSignLarge : dateSignLargeDark,
+      eventDetails: isThemeDark ? eventDetailsDark : eventDetails,
+      dateSign: isThemeDark ? dateSignLargeDark : dateSignLarge,
     });
   }
 
   return EventBlock.CreateElement({
     ...MakeCommonData({ element }),
-    eventDetails: isThemeLight ? eventDetails : eventDetailsDark,
+    eventDetails: isThemeDark ? eventDetailsDark : eventDetails,
   });
 };
 

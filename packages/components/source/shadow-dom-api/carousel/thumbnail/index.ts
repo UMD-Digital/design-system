@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CarouselThumbnail } from 'elements';
-import { AttributesNames, Slots } from 'shadow-dom-model';
+import { Attributes, AttributesNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -28,7 +28,7 @@ const CreateShadowDom = ({
   element: UMDCarouselThumbnailElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(AttributesNames.THEME);
+  const isThemeDark = Attributes.isThemeDark({ element });
   const slottedBlocks = Array.from(
     element.querySelectorAll(`[slot="${Slots.BLOCKS}"] > *`),
   ) as HTMLElement[];
@@ -39,7 +39,7 @@ const CreateShadowDom = ({
 
   const carousel = CarouselThumbnail.CreateElement({
     blocks,
-    theme,
+    isThemeDark,
   });
 
   element._elementRef = carousel;

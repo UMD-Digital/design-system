@@ -3,7 +3,7 @@ import { AnimationCarouselBlocks } from 'macros';
 
 type TypeCarouselThumbnailProps = {
   blocks: HTMLElement[];
-  theme?: string | null;
+  isThemeDark?: boolean;
 };
 
 const { Colors, Spacing } = Tokens;
@@ -106,7 +106,7 @@ const CreatePerson = ({ block }: { block: HTMLElement }) => {
 
 const CreateCarouselThumbnailElement = (props: TypeCarouselThumbnailProps) =>
   (() => {
-    const { blocks, theme } = props;
+    const { blocks, isThemeDark } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const slide = document.createElement('div');
@@ -133,7 +133,7 @@ const CreateCarouselThumbnailElement = (props: TypeCarouselThumbnailProps) =>
 
     elementContainer.appendChild(carousel.element);
     elementContainer.classList.add(ELEMENT_THUMBNAIL_CONTAINER);
-    if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
     elementDeclaration.classList.add(ELEMENT_THUMBNAIL_DECLARATION);
     elementDeclaration.appendChild(elementContainer);

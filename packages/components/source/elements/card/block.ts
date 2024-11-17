@@ -11,6 +11,7 @@ type TypeBlockCardProps = {
   isAligned?: boolean;
   isBordered?: boolean;
   theme?: string | null;
+  isThemeDark?: boolean;
   isTransparent?: boolean;
 };
 
@@ -30,25 +31,15 @@ const STYLES_BLOCK_CARD_ELEMENT = `
 `;
 
 const CreateCardBlockElement = (props: TypeBlockCardProps) => {
-  const {
-    id,
-    theme,
-    image,
-    isAligned = false,
-    isBordered = false,
-    isTransparent,
-  } = props;
+  const { id, image } = props;
 
   const textContainer = TextLockupSmallScaling.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
   const container = LayoutBlock.CreateElement({
-    textContainer,
+    ...props,
     imageContainer,
-    theme,
-    isAligned,
-    isBordered,
-    isTransparent,
+    textContainer,
   });
 
   if (id) elementContainer.setAttribute('news-id', id);

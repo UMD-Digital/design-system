@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CardBlock, CardList } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -25,10 +25,10 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeArticleData = ({ element }: { element: HTMLElement }) => {
-  const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
-  const isTransparent =
-    element.getAttribute(AttributesNames.VISUAL_TRANSPARENT) === 'true';
+  const isThemeDark = Attributes.isThemeDark({
+    element,
+  });
+  const isTransparent = Attributes.isTransparent({ element });
 
   return {
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
@@ -37,20 +37,16 @@ const MakeArticleData = ({ element }: { element: HTMLElement }) => {
     text: Slots.SlottedText({ element }),
     date: Slots.SlottedDate({ element }),
     actions: Slots.SlottedActions({ element }),
-    theme,
+    isThemeDark,
     isTransparent,
   };
 };
 
 const CreateShadowDom = ({ element }: { element: UMDArticleElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const alignmentAttr = element.getAttribute(AttributesNames.VISUAL_ALIGN);
-  const borderAttr = element.getAttribute(AttributesNames.VISUAL_BORDER);
-  const isAligned = alignmentAttr === 'true';
-  const isBordered = borderAttr === 'true';
-  const isDisplayList =
-    element.getAttribute(AttributesNames.VISUAL_DISPLAY) ===
-    AttributesValues.DISPLAY_LIST;
+  const isAligned = Attributes.isVisuallyAligned({ element });
+  const isBordered = Attributes.isVisuallyBordered({ element });
+  const isDisplayList = Attributes.isDisplayList({ element });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 

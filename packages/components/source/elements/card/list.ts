@@ -8,8 +8,9 @@ type TypeListCardProps = {
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
   image?: HTMLImageElement | HTMLAnchorElement | null;
-  isAligned?: boolean;
   theme?: string | null;
+  isAligned?: boolean;
+  isThemeDark?: boolean;
 };
 
 const { Spacing } = Tokens;
@@ -33,15 +34,14 @@ const STYLES_LIST_CARD_ELEMENT = `
 `;
 
 const CreateCardListElement = (props: TypeListCardProps) => {
-  const { theme, image, isAligned } = props;
+  const { image } = props;
   const textContainer = TextLockupSmall.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
   const container = LayoutList.CreateElement({
     textContainer,
     imageContainer,
-    theme,
-    isAligned,
+    ...props,
   });
 
   elementContainer.appendChild(container);

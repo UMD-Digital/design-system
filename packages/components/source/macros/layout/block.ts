@@ -4,9 +4,10 @@ import TextLockupSmall from '../text-lockup/small';
 import ScalingTextLockup from '../text-lockup/small-scaling';
 
 export type TypeBlockContainer = {
+  theme?: string | null;
   isAligned?: boolean;
   isBordered?: boolean;
-  theme?: string | null;
+  isThemeDark?: boolean;
   isTransparent?: boolean;
 };
 
@@ -189,7 +190,7 @@ const STYLES_BLOCK_CONTAINER = `
 const CreateBlockContainer = ({
   imageContainer,
   textContainer,
-  theme,
+  isThemeDark,
   isAligned,
   isBordered,
   isTransparent,
@@ -199,7 +200,7 @@ const CreateBlockContainer = ({
 
   container.classList.add(ELEMENT_BLOCK_CONTAINER);
   if (isTransparent) container.setAttribute(ATTRIBUTE_TRANSPARENT, 'true');
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   if (isAligned) container.setAttribute(ATTRIBUTE_ALIGNED, '');
   if (isBordered) container.setAttribute(ATTRIBUTE_BORDER, '');
   wrapper.classList.add(ELEMENT_BLOCK_CONTAINER_WRAPPER);

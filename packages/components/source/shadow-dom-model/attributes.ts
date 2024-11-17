@@ -46,6 +46,20 @@ const isThemeDark = (props: AttributeElementProps) =>
     attributeValue: AttributesValues.THEME_DARK,
   });
 
+const isTransparent = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_TRANSPARENT,
+    attributeValue: AttributesValues.STATE_TRUE,
+  });
+
+const isDisplayList = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_DISPLAY,
+    attributeValue: AttributesValues.DISPLAY_LIST,
+  });
+
 const isStateOpen = (props: AttributeElementProps) =>
   isAttributesEqual({
     ...props,
@@ -57,6 +71,20 @@ const isShowIcon = (props: AttributeElementProps) =>
   isAttributesEqual({
     ...props,
     attributeName: AttributesNames.VISUAL_ICON,
+    attributeValue: AttributesValues.STATE_TRUE,
+  });
+
+const isVisuallyAligned = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_ALIGN,
+    attributeValue: AttributesValues.STATE_TRUE,
+  });
+
+const isVisuallyBordered = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_BORDER,
     attributeValue: AttributesValues.STATE_TRUE,
   });
 
@@ -75,7 +103,11 @@ export default {
   includesAnimation,
   isThemeLight,
   isThemeDark,
+  isTransparent,
+  isDisplayList,
   isStateOpen,
   isShowIcon,
+  isVisuallyAligned,
+  isVisuallyBordered,
   daysToHide,
 };

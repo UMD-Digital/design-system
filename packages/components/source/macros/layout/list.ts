@@ -127,12 +127,14 @@ const CreateListContainer = ({
   textContainer,
   personContainer,
   theme,
+  isThemeDark,
   isAligned,
 }: {
   textContainer?: HTMLDivElement;
   imageContainer?: HTMLDivElement | null;
   personContainer?: HTMLDivElement | null;
   theme?: string | null;
+  isThemeDark?: boolean;
   isAligned?: boolean;
 }) => {
   const container = document.createElement('div');
@@ -140,6 +142,7 @@ const CreateListContainer = ({
 
   container.classList.add(ELEMENT_LIST_CONTAINER);
   if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   if (isAligned) container.setAttribute(ATTRIBUTE_ALIGNED, '');
 
   wrapper.classList.add(ELEMENT_LIST_CONTAINER_WRAPPER);

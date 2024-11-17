@@ -38,7 +38,7 @@ type TypeCarouselSlideProps = TypeSlideContent &
 
 type TypeCarouselImageStandardProps = TypeSlideContent &
   TypeFullScreen & {
-    theme?: string | null;
+    isThemeDark?: boolean;
   };
 
 const { Colors, Spacing } = Tokens;
@@ -316,7 +316,7 @@ const CreateCarouselImageStandardElement = (
   props: TypeCarouselImageStandardProps,
 ) =>
   (() => {
-    const { images, theme, isFullScreenOption } = props;
+    const { images, isThemeDark, isFullScreenOption } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const elementIndicator = document.createElement('div');
@@ -338,7 +338,8 @@ const CreateCarouselImageStandardElement = (
     const indicator = AnimationIndicator.CreateElement({
       count: images.length || 0,
       callback: carousel.events.EventMoveTo,
-      theme: theme || 'light',
+      isThemeDark,
+      isThemeLight: !isThemeDark,
     });
 
     elementIndicator.classList.add(ELEMENT_CAROUSEL_INDICATOR_WRAPPER);
@@ -347,7 +348,7 @@ const CreateCarouselImageStandardElement = (
     elementContainer.classList.add(ELEMENT_CAROUSEL_IMAGE_CONTAINER);
     elementContainer.appendChild(carousel.element);
     elementContainer.appendChild(elementIndicator);
-    if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
     elementDeclaration.classList.add(ELEMENT_CAROUSEL_IMAGE_DECLARATION);
     elementDeclaration.appendChild(elementContainer);

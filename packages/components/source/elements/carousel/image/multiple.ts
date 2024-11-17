@@ -10,7 +10,7 @@ import fullScreen from 'macros/buttons/full-screen';
 
 type TypeCarouselMultipleProps = {
   images: HTMLImageElement[];
-  theme?: string | null;
+  isThemeDark?: boolean;
   isFullScreenOption?: boolean;
 };
 
@@ -123,7 +123,7 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
 
 const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
   (() => {
-    const { images, theme, isFullScreenOption } = props;
+    const { images, isThemeDark, isFullScreenOption } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const clonedImages = images.map((image) =>
@@ -168,7 +168,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
 
     elementContainer.appendChild(carousel.element);
     elementContainer.classList.add(ELEMENT_CAROUSEL_MULTIPLE_CONTAINER);
-    if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
     elementDeclaration.classList.add(ELEMENT_CAROUSEL_MULTIPLE_DECLARATION);
     elementDeclaration.appendChild(elementContainer);

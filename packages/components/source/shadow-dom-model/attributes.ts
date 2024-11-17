@@ -32,6 +32,14 @@ const includesAnimation = (props: AttributeElementProps) =>
     defaultValue: true,
   });
 
+const includesFullScreenOption = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.OPTIONAL_FULLSCREEN,
+    attributeValue: AttributesValues.STATE_FALSE,
+    defaultValue: true,
+  });
+
 const isThemeLight = (props: AttributeElementProps) =>
   isAttributesEqual({
     ...props,
@@ -122,6 +130,7 @@ const daysToHide = ({ element }: AttributeElementProps) => {
 
 export default {
   includesAnimation,
+  includesFullScreenOption,
   isThemeLight,
   isThemeDark,
   isTransparent,

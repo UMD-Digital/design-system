@@ -70,11 +70,15 @@ const CreateSlideIndicator = ({
   count,
   overlayColor,
   theme,
+  isThemeDark,
+  isThemeLight,
   callback,
 }: {
   count: number;
   overlayColor?: string;
   theme?: string | null;
+  isThemeDark?: boolean;
+  isThemeLight?: boolean;
   callback: (arg: number) => void;
 }) =>
   (() => {
@@ -150,11 +154,11 @@ const CreateSlideIndicator = ({
       const overlay = document.createElement('span');
       let spacerColor = Colors.white;
 
-      if (theme === 'dark' && !overlayColor) {
+      if (isThemeDark && !overlayColor) {
         spacerColor = Colors.black;
       }
 
-      if (theme === 'light' && !overlayColor) {
+      if (isThemeLight && !overlayColor) {
         spacerColor = Colors.gray.lightest;
       }
 

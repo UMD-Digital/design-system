@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CarouselImageStandard } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, AttributesNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -29,10 +29,8 @@ const CreateShadowDom = ({
   element: UMDCarouselImageStandardElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute(AttributesNames.THEME);
-  const isFullScreenOption =
-    element.getAttribute(AttributesNames.OPTIONAL_FULLSCREEN) !==
-    AttributesValues.STATE_FALSE;
+  const isThemeDark = Attributes.isThemeDark({ element });
+  const isFullScreenOption = Attributes.includesFullScreenOption({ element });
   const slottedImages = Array.from(
     element.querySelectorAll(`[slot="${Slots.IMAGES}"] > *`),
   ) as HTMLImageElement[];
@@ -64,7 +62,7 @@ const CreateShadowDom = ({
     images,
     headlines,
     texts,
-    theme,
+    isThemeDark,
     isFullScreenOption,
   });
 

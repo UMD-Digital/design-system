@@ -9,7 +9,7 @@ type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string;
+  isThemeDark?: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -144,7 +144,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
 `;
 
 const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
-  const { theme } = props;
+  const { isThemeDark } = props;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
   const scalingFontContainer = TextLockupSmallScaling.CreateElement(props);
@@ -157,7 +157,7 @@ const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
     elementContainer.setAttribute(ATTRIBUTE_CTA_ICON, '');
   }
 
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   elementContainer.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER);
   elementContainer.appendChild(elementWrapper);
 

@@ -48,7 +48,6 @@ const ThemeNames = {
 };
 
 const TypeNames = {
-  TYPE_QUOTE: 'quote',
   TYPE: 'type',
 };
 
@@ -70,6 +69,7 @@ const VisualNames = {
   VISUAL_HAS_LOGO: 'hasLogo',
   VISUAL_ICON: 'icon',
   VISUAL_TRANSPARENT: 'transparent',
+  VISUAL_QUOTE: 'quote',
 };
 
 export default {

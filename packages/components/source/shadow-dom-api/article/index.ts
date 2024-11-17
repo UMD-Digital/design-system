@@ -24,23 +24,18 @@ const styles = `
 
 const styleTemplate = Node.stylesTemplate({ styles });
 
-const MakeArticleData = ({ element }: { element: HTMLElement }) => {
-  const isThemeDark = Attributes.isThemeDark({
+const MakeArticleData = ({ element }: { element: HTMLElement }) => ({
+  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+  eyebrow: Slots.SlottedEyebrow({ element }),
+  headline: Slots.SlottedHeadline({ element }),
+  text: Slots.SlottedText({ element }),
+  date: Slots.SlottedDate({ element }),
+  actions: Slots.SlottedActions({ element }),
+  isTransparent: Attributes.isTransparent({ element }),
+  isThemeDark: Attributes.isThemeDark({
     element,
-  });
-  const isTransparent = Attributes.isTransparent({ element });
-
-  return {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    eyebrow: Slots.SlottedEyebrow({ element }),
-    headline: Slots.SlottedHeadline({ element }),
-    text: Slots.SlottedText({ element }),
-    date: Slots.SlottedDate({ element }),
-    actions: Slots.SlottedActions({ element }),
-    isThemeDark,
-    isTransparent,
-  };
-};
+  }),
+});
 
 const CreateShadowDom = ({ element }: { element: UMDArticleElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;

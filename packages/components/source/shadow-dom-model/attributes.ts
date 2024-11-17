@@ -74,6 +74,13 @@ const isShowIcon = (props: AttributeElementProps) =>
     attributeValue: AttributesValues.STATE_TRUE,
   });
 
+const isTypeImage = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.TYPE,
+    attributeValue: AttributesValues.DISPLAY_IMAGE,
+  });
+
 const isVisuallyAligned = (props: AttributeElementProps) =>
   isAttributesEqual({
     ...props,
@@ -92,6 +99,13 @@ const isVisuallyLogo = (props: AttributeElementProps) =>
   isAttributesEqual({
     ...props,
     attributeName: AttributesNames.VISUAL_HAS_LOGO,
+    attributeValue: AttributesValues.STATE_TRUE,
+  });
+
+const isVisuallyQuote = (props: AttributeElementProps) =>
+  isAttributesEqual({
+    ...props,
+    attributeName: AttributesNames.VISUAL_QUOTE,
     attributeValue: AttributesValues.STATE_TRUE,
   });
 
@@ -114,8 +128,10 @@ export default {
   isDisplayList,
   isStateOpen,
   isShowIcon,
+  isTypeImage,
   isVisuallyAligned,
   isVisuallyBordered,
   isVisuallyLogo,
+  isVisuallyQuote,
   daysToHide,
 };

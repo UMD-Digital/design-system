@@ -24,22 +24,17 @@ const styles = `
 
 const styleTemplate = Node.stylesTemplate({ styles });
 
-const MakeCardData = ({ element }: { element: UMDCardElement }) => {
-  const isThemeDark = Attributes.isThemeDark({
+const MakeCardData = ({ element }: { element: UMDCardElement }) => ({
+  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+  eyebrow: Slots.SlottedEyebrow({ element }),
+  headline: Slots.SlottedHeadline({ element }),
+  text: Slots.SlottedText({ element }),
+  actions: Slots.SlottedActions({ element }),
+  isTransparent: Attributes.isTransparent({ element }),
+  isThemeDark: Attributes.isThemeDark({
     element,
-  });
-  const isTransparent = Attributes.isTransparent({ element });
-
-  return {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    eyebrow: Slots.SlottedEyebrow({ element }),
-    headline: Slots.SlottedHeadline({ element }),
-    text: Slots.SlottedText({ element }),
-    actions: Slots.SlottedActions({ element }),
-    isThemeDark,
-    isTransparent,
-  };
-};
+  }),
+});
 
 const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;

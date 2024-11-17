@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CardOverlay, CardOverlayImage } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -29,32 +29,22 @@ const MakeOverlayContent = ({
   element,
 }: {
   element: UMDCardOverlayElement;
-}) => {
-  const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
-  const isQuote =
-    element.getAttribute(AttributesNames.TYPE_QUOTE) ===
-    AttributesValues.STATE_TRUE;
-
-  return {
-    eyebrow: Slots.SlottedEyebrow({ element }),
-    headline: Slots.SlottedHeadline({ element }),
-    text: Slots.SlottedText({ element }),
-    date: SlotWithDefaultStyling({ element, slotRef: Slots.DATE }),
-    actions: Slots.SlottedActions({ element }),
-    ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.CTA_ICON }),
-    isQuote,
-    theme,
-  };
-};
+}) => ({
+  eyebrow: Slots.SlottedEyebrow({ element }),
+  headline: Slots.SlottedHeadline({ element }),
+  text: Slots.SlottedText({ element }),
+  date: SlotWithDefaultStyling({ element, slotRef: Slots.DATE }),
+  actions: Slots.SlottedActions({ element }),
+  ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.CTA_ICON }),
+  isQuote: Attributes.isVisuallyQuote({ element }),
+  isThemeDark: Attributes.isThemeDark({ element }),
+});
 
 const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const type = element.getAttribute(AttributesNames.TYPE);
-
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
-  if (type === AttributesValues.DISPLAY_IMAGE) {
+  if (Attributes.isTypeImage({ element })) {
     const ImageOverlay = CardOverlayImage.CreateElement({
       ...MakeOverlayContent({ element }),
       image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),

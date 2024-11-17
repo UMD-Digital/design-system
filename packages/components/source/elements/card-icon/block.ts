@@ -5,7 +5,7 @@ type TypeBlockCardIconProps = {
   headline: HTMLElement | null;
   text?: HTMLElement | null;
   image?: HTMLImageElement | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
 };
 
 const { Colors, Spacing } = Tokens;
@@ -13,7 +13,6 @@ const { Colors, Spacing } = Tokens;
 const LARGE = 500;
 
 const ATTRIBUTE_THEME = 'theme';
-const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
@@ -106,7 +105,7 @@ const STYLES_BLOCK_CARD_ICON_ELEMENT = `
 `;
 
 const CreateCardIconBlockElement = (props: TypeBlockCardIconProps) => {
-  const { theme = THEME_LIGHT, image } = props;
+  const { isThemeDark, image } = props;
   const elementContainer = document.createElement('div');
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -126,7 +125,7 @@ const CreateCardIconBlockElement = (props: TypeBlockCardIconProps) => {
   }
 
   container.appendChild(wrapper);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   container.classList.add(ELEMENT_CARD_BLOCK_CONTAINER);
   elementContainer.classList.add(ELEMENT_CARD_BLOCK_DECLARATION);

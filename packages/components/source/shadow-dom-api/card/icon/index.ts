@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CardIconBlock } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -23,17 +23,12 @@ const styles = `
 
 const styleTemplate = Node.stylesTemplate({ styles });
 
-const MakeCardData = ({ element }: { element: UMDCardIconElement }) => {
-  const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
-
-  return {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    headline: Slots.SlottedHeadline({ element }),
-    text: Slots.SlottedText({ element }),
-    theme,
-  };
-};
+const MakeCardData = ({ element }: { element: UMDCardIconElement }) => ({
+  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+  headline: Slots.SlottedHeadline({ element }),
+  text: Slots.SlottedText({ element }),
+  isThemeDark: Attributes.isThemeDark({ element }),
+});
 
 const CreateShadowDom = ({ element }: { element: UMDCardIconElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;

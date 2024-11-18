@@ -11,6 +11,12 @@ type AttributeProps = AttributeElementProps & {
   attributeValue: string;
 };
 
+type DepcreatedAttributeProps = AttributeElementProps & {
+  attributeNameOld: string;
+  attributeNameNew: string;
+  attributeValue: string;
+};
+
 const isAttributesEqual = ({
   element,
   attributeName,
@@ -22,6 +28,25 @@ const isAttributesEqual = ({
   if (name && name === attributeValue) return !defaultValue;
 
   return defaultValue;
+};
+
+const isDepcreated = (props: DepcreatedAttributeProps) => {
+  const { element, attributeNameOld, attributeValue, attributeNameNew } = props;
+
+  const isDepcratedUsed = isAttributesEqual({
+    ...props,
+    attributeName: attributeNameOld,
+    attributeValue: attributeValue,
+  });
+
+  if (isDepcratedUsed) {
+    console.warn(
+      `UMD Web Component: ${element.nodeName} - Attribute ${attributeNameOld} is deprecated. Use ${attributeNameNew} instead. This attribute will be removed with release 2.0.`,
+    );
+    return true;
+  }
+
+  return false;
 };
 
 const includesAnimation = (props: AttributeElementProps) =>
@@ -70,16 +95,18 @@ const isDisplayPromo = (props: AttributeElementProps) =>
   });
 
 const isThemeLight = (props: AttributeElementProps) =>
+  isThemeLightDepcreated(props) ||
   isAttributesEqual({
     ...props,
-    attributeName: AttributesNames.THEME,
+    attributeName: AttributesNames.THEME_DATA,
     attributeValue: AttributesValues.THEME_LIGHT,
   });
 
 const isThemeDark = (props: AttributeElementProps) =>
+  isThemeDarkDepcreated(props) ||
   isAttributesEqual({
     ...props,
-    attributeName: AttributesNames.THEME,
+    attributeName: AttributesNames.THEME_DATA,
     attributeValue: AttributesValues.THEME_DARK,
   });
 
@@ -150,10 +177,31 @@ const daysToHide = ({ element }: AttributeElementProps) => {
   return defaultDaysToHide;
 };
 
-export default {
+// Depcrated
+
+const isThemeLightDepcreated = (props: AttributeElementProps) =>
+  isDepcreated({
+    ...props,
+    attributeNameOld: AttributesNames.THEME,
+    attributeNameNew: AttributesNames.THEME_DATA,
+    attributeValue: AttributesValues.THEME_LIGHT,
+  });
+
+const isThemeDarkDepcreated = (props: AttributeElementProps) =>
+  isDepcreated({
+    ...props,
+    attributeNameOld: AttributesNames.THEME,
+    attributeNameNew: AttributesNames.THEME_DATA,
+    attributeValue: AttributesValues.THEME_DARK,
+  });
+
+const attributesDefaultFalse = {
   includesAnimation,
   includesFullScreenOption,
   includesVisualTime,
+};
+
+const attributesDefaultTrue = {
   isDisplayFeature,
   isDisplayList,
   isDisplayPromo,
@@ -167,5 +215,14 @@ export default {
   isVisuallyBordered,
   isVisuallyLogo,
   isVisuallyQuote,
+};
+
+const attributesWithValue = {
   daysToHide,
+};
+
+export default {
+  ...attributesDefaultFalse,
+  ...attributesDefaultTrue,
+  ...attributesWithValue,
 };

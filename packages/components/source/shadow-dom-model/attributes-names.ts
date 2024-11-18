@@ -45,6 +45,7 @@ const StateNames = {
 
 const ThemeNames = {
   THEME: 'theme',
+  THEME_DATA: 'data-theme',
 };
 
 const TypeNames = {

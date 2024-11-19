@@ -1,8 +1,6 @@
-import WebpackShellPlugin from 'webpack-shell-plugin-next';
 const path = require('path');
 
 module.exports = (env) => {
-  const isBundled = env && env.BUNDLE;
   const mode = 'production';
 
   const optimization = {
@@ -39,16 +37,6 @@ module.exports = (env) => {
   };
 
   const plugins = [];
-
-  if (isBundled) {
-    plugins.push(
-      new WebpackShellPlugin({
-        onAfterDone: {
-          scripts: ['cd ../design-system-ui && npx yarn build'],
-        },
-      }),
-    );
-  }
 
   const output = {
     path: path.resolve('dist'),

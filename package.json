@@ -6,20 +6,18 @@
   "repository": "",
   "private": true,
   "scripts": {
+    "build": "npx lerna run build",
     "clean": "npx lerna run clean",
     "components": "npx lerna run start --scope=@universityofmaryland/web-components-library",
-    "components:build": "npx lerna run build --scope=@universityofmaryland/web-components-library",
     "variables": "npx lerna run start --scope=@universityofmaryland/variables",
-    "variables:build": "npx lerna run build --scope=@universityofmaryland/variables",
     "theme": "npx lerna run start --scope=@universityofmaryland/theme",
-    "theme:build": "npx lerna run build --scope=@universityofmaryland/theme",
-    "kitchen": "npx lerna run start --scope=@universityofmaryland/umd-design-system-kitchen-sink",
-    "kitchen:build": "npx lerna run build --scope=@universityofmaryland/umd-design-system-kitchen-sink",
     "reset": "yarn clean && rm -rf node_modules && rm -rf packages/*/node_modules && yarn install --frozen-lock",
-    "scaffold": "yarn variables:build && yarn theme:build && yarn components:build && yarn kitchen:build",
-    "start": "yarn run variables & yarn run theme & yarn run components & yarn run kitchen"
+    "start": "yarn lerna -- watch -- lerna run build "
   },
   "workspaces": [
+    "packages/variables",
+    "packages/theme",
+    "packages/components",
     "packages/*"
   ],
   "devDependencies": {

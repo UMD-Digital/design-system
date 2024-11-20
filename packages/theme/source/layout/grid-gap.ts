@@ -50,6 +50,7 @@ const GridColumnsFeatured = {
 const MasonryGrid = {
   display: 'grid',
   gridTemplateColumns: '1fr',
+  gridGap: Spacing.md,
 
   [`@media (${Queries.tablet.min})`]: {
     gridTemplateColumns: '1fr 1fr',

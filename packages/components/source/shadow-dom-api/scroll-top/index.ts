@@ -5,7 +5,7 @@ declare global {
 }
 
 import { ScrollTop } from 'elements';
-import { AttributesNames } from 'shadow-dom-model';
+import { AttributeNames } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -26,7 +26,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDScrollTopElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const scrollTop = ScrollTop.CreateElement({
-    isFixed: element.hasAttribute(AttributesNames.LAYOUT_FIXED),
+    isFixed: element.hasAttribute(AttributeNames.LAYOUT_FIXED),
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

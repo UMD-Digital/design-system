@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SliderEvents } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const ELEMENT_NAME = 'umd-element-slider-events';
@@ -24,7 +24,7 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
   const dataSlider = document.createElement('div');
   const dataSliderSlot = element.querySelector(`[slot=${Slots.EVENT_LIST}]`);
 
@@ -64,7 +64,7 @@ export class UMDSliderEventsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.RESIZE];
+    return [AttributeNames.RESIZE];
   }
 
   attributeChangedCallback(
@@ -72,7 +72,7 @@ export class UMDSliderEventsElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == AttributesNames.RESIZE && newValue === 'true') {
+    if (name == AttributeNames.RESIZE && newValue === 'true') {
       if (this._elementRef) this._elementRef.events.SetDateElementsSizes();
     }
   }

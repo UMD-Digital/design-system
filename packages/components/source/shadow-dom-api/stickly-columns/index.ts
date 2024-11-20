@@ -7,7 +7,7 @@ declare global {
 import { StickyColumns } from 'elements';
 import {
   Attributes,
-  AttributesNames,
+  AttributeNames,
   AttributesValues,
   Slots,
 } from 'shadow-dom-model';
@@ -32,7 +32,7 @@ export const CreateShadowDom = ({
   element: UMDStickyColumnElement;
 }) => {
   const isStickyLast =
-    element.getAttribute(AttributesNames.OPTIONAL_STICKY_FIRST) ===
+    element.getAttribute(AttributeNames.OPTIONAL_STICKY_FIRST) ===
     AttributesValues.STATE_FALSE;
   const topPosition = Attributes.valueTopPosition({ element });
 
@@ -69,13 +69,13 @@ export class UMDStickyColumnElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.LAYOUT_STICKY_TOP];
+    return [AttributeNames.LAYOUT_STICKY_TOP];
   }
 
   attributeChangedCallback(name: string) {
-    if (name == AttributesNames.LAYOUT_STICKY_TOP && this._elementRef) {
+    if (name == AttributeNames.LAYOUT_STICKY_TOP && this._elementRef) {
       this._elementRef.events.SetPosition({
-        value: this.getAttribute(AttributesNames.LAYOUT_STICKY_TOP),
+        value: this.getAttribute(AttributeNames.LAYOUT_STICKY_TOP),
       });
     }
   }

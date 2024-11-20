@@ -1,4 +1,4 @@
-import { AttributesNames, AttributesValues } from 'shadow-dom-model';
+import { AttributeNames, AttributesValues } from 'shadow-dom-model';
 import { TypeNewsFeedRequirements } from 'elements/feeds/news';
 
 export const CommonFeedNewsData = ({
@@ -10,14 +10,12 @@ export const CommonFeedNewsData = ({
   numberOfColumnsToShowDefault?: number;
   numberOfRowsToStartDefault?: number;
 }) => {
-  const token = element.getAttribute(AttributesNames.FEED_TOKEN);
-  const theme = element.getAttribute(AttributesNames.THEME);
+  const token = element.getAttribute(AttributeNames.FEED_TOKEN);
+  const theme = element.getAttribute(AttributeNames.THEME);
   const categoriesAttribute = element.getAttribute(
-    AttributesNames.FEED_CATEGORIES,
+    AttributeNames.FEED_CATEGORIES,
   );
-  const entriesToRemove = element.getAttribute(
-    AttributesNames.FEED_NOT_ENTRIES,
-  );
+  const entriesToRemove = element.getAttribute(AttributeNames.FEED_NOT_ENTRIES);
 
   if (!token) {
     console.error(`Feed events requires a token to be set`);
@@ -25,10 +23,10 @@ export const CommonFeedNewsData = ({
   }
 
   const numberOfRowsToStart =
-    Number(element.getAttribute(AttributesNames.FEED_ROW_COUNT)) ||
+    Number(element.getAttribute(AttributeNames.FEED_ROW_COUNT)) ||
     numberOfRowsToStartDefault;
   const numberOfColumnsToShow =
-    Number(element.getAttribute(AttributesNames.FEED_COLUMN_COUNT)) ||
+    Number(element.getAttribute(AttributeNames.FEED_COLUMN_COUNT)) ||
     numberOfColumnsToShowDefault;
 
   const data: TypeNewsFeedRequirements = {
@@ -37,10 +35,10 @@ export const CommonFeedNewsData = ({
     numberOfRowsToStart,
     numberOfColumnsToShow,
     isLazyLoad:
-      element.getAttribute(AttributesNames.FEED_LAZY_LOAD) ===
+      element.getAttribute(AttributeNames.FEED_LAZY_LOAD) ===
       AttributesValues.STATE_TRUE,
     isUnion:
-      element.getAttribute(AttributesNames.FEED_UNION) !==
+      element.getAttribute(AttributeNames.FEED_UNION) !==
       AttributesValues.STATE_FALSE,
   };
 

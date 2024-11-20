@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SectionIntro } from 'elements';
-import { Attributes, AttributesNames, Slots } from 'shadow-dom-model';
+import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
 import { Styles, MarkupCreate } from 'utilities';
 import { CommonIntroData } from '../common';
 
@@ -32,10 +32,10 @@ export const CreateShadowDom = ({
   const intro = SectionIntro.CreateElement({
     ...CommonIntroData({
       element,
-      theme: element.getAttribute(AttributesNames.THEME),
+      theme: element.getAttribute(AttributeNames.THEME),
     }),
     text: Slots.SlottedText({ element }),
-    hasSeparator: element.hasAttribute(AttributesNames.OPTIONAL_HAS_SEPARATOR),
+    hasSeparator: element.hasAttribute(AttributeNames.OPTIONAL_HAS_SEPARATOR),
     includesAnimation,
   });
 

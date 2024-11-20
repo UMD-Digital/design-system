@@ -5,7 +5,7 @@ declare global {
 }
 
 import { PersonHero } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
@@ -33,7 +33,7 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
   const breadcrumbSlot = Node.slot({ type: Slots.BREADCRUMB });
 
   if (breadcrumbSlot) {

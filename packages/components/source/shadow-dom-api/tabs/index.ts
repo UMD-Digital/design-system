@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Tabs, TabsElements } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -26,8 +26,8 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
-  const topPosition = element.getAttribute(AttributesNames.LAYOUT_STICKY_TOP);
+    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const topPosition = element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP);
   const slot = Node.slot({ type: Slots.TABS });
   const markup = element.querySelector(`[slot="${Slots.TABS}"]`);
 
@@ -78,13 +78,13 @@ class UMDTabsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.RESIZE];
+    return [AttributeNames.RESIZE];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (!this._elementRef) return;
 
-    if (name === AttributesNames.RESIZE && newValue === 'true') {
+    if (name === AttributeNames.RESIZE && newValue === 'true') {
       this._elementRef.events.resize();
     }
   }

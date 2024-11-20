@@ -5,7 +5,7 @@ declare global {
 }
 
 import { EventLockupDate, EventElements } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupEvent, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -24,7 +24,7 @@ const styles = `
 
 const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
+    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
   const headline = SlotWithDefaultStyling({
     element,
     slotRef: Slots.HEADLINE,

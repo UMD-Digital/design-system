@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SliderEvents, FeedsSlides } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const ELEMENT_NAME = 'umd-element-slider-events-feed';
@@ -29,9 +29,9 @@ const CreateShadowDom = async ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const theme =
-    element.getAttribute(AttributesNames.THEME) || AttributesValues.THEME_LIGHT;
-  const token = element.getAttribute(AttributesNames.FEED_TOKEN);
-  const type = element.getAttribute(AttributesNames.TYPE) || 'academic';
+    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const token = element.getAttribute(AttributeNames.FEED_TOKEN);
+  const type = element.getAttribute(AttributeNames.TYPE) || 'academic';
   const categories = element.getAttribute('categories');
 
   if (!token) throw new Error('Token is required for this component');
@@ -78,7 +78,7 @@ export class UMDSliderEventsFeedElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.RESIZE];
+    return [AttributeNames.RESIZE];
   }
 
   attributeChangedCallback(
@@ -86,7 +86,7 @@ export class UMDSliderEventsFeedElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == AttributesNames.RESIZE && newValue === 'true') {
+    if (name == AttributeNames.RESIZE && newValue === 'true') {
       if (this._elementRef) this._elementRef.events.SetDateElementsSizes();
     }
   }

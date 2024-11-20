@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CarouselImageMultiple } from 'elements';
-import { Attributes, AttributesNames, Slots } from 'shadow-dom-model';
+import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -74,7 +74,7 @@ class UMDCarouselImageMultipleElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.RESIZE];
+    return [AttributeNames.RESIZE];
   }
 
   attributeChangedCallback(
@@ -83,7 +83,7 @@ class UMDCarouselImageMultipleElement extends HTMLElement {
     newValue: string | null,
   ) {
     if (
-      name == AttributesNames.RESIZE &&
+      name == AttributeNames.RESIZE &&
       newValue === 'true' &&
       this._elementRef
     ) {

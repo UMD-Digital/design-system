@@ -1,5 +1,5 @@
 import { TypeEventFeedRequirements } from 'elements/feeds/events';
-import { AttributesNames, AttributesValues } from 'shadow-dom-model';
+import { AttributeNames, AttributesValues } from 'shadow-dom-model';
 
 export const CommonFeedEventsData = ({
   element,
@@ -10,16 +10,16 @@ export const CommonFeedEventsData = ({
   numberOfColumnsToShowDefault?: number;
   numberOfRowsToStartDefault?: number;
 }) => {
-  const token = element.getAttribute(AttributesNames.FEED_TOKEN);
-  const theme = element.getAttribute(AttributesNames.THEME);
+  const token = element.getAttribute(AttributeNames.FEED_TOKEN);
+  const theme = element.getAttribute(AttributeNames.THEME);
   const categoriesAttribute = element.getAttribute(
-    AttributesNames.FEED_CATEGORIES,
+    AttributeNames.FEED_CATEGORIES,
   );
   const numberOfRowsAttribute = element.getAttribute(
-    AttributesNames.FEED_ROW_COUNT,
+    AttributeNames.FEED_ROW_COUNT,
   );
   const numberOfColumnsAttribute = element.getAttribute(
-    AttributesNames.FEED_COLUMN_COUNT,
+    AttributeNames.FEED_COLUMN_COUNT,
   );
   const isValidRowAttribute =
     numberOfRowsAttribute &&
@@ -51,10 +51,10 @@ export const CommonFeedEventsData = ({
     numberOfRowsToStart,
     numberOfColumnsToShow,
     isLazyLoad:
-      element.getAttribute(AttributesNames.FEED_LAZY_LOAD) ===
+      element.getAttribute(AttributeNames.FEED_LAZY_LOAD) ===
       AttributesValues.STATE_TRUE,
     isUnion:
-      element.getAttribute(AttributesNames.FEED_UNION) !==
+      element.getAttribute(AttributeNames.FEED_UNION) !==
       AttributesValues.STATE_FALSE,
   };
 

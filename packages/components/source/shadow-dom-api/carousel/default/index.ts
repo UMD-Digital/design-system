@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Carousel } from 'elements';
-import { AttributesNames, Slots } from 'shadow-dom-model';
+import { AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -102,7 +102,7 @@ class UMDCarouselElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.RESIZE];
+    return [AttributeNames.RESIZE];
   }
 
   attributeChangedCallback(
@@ -111,7 +111,7 @@ class UMDCarouselElement extends HTMLElement {
     newValue: string | null,
   ) {
     if (
-      name == AttributesNames.RESIZE &&
+      name == AttributeNames.RESIZE &&
       newValue === 'true' &&
       this._elementRef
     ) {

@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CarouselCards } from 'elements';
-import { AttributesNames, Slots } from 'shadow-dom-model';
+import { AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -71,7 +71,7 @@ class UMDCarouselCardsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.RESIZE];
+    return [AttributeNames.RESIZE];
   }
 
   attributeChangedCallback(
@@ -80,7 +80,7 @@ class UMDCarouselCardsElement extends HTMLElement {
     newValue: string | null,
   ) {
     if (
-      name == AttributesNames.RESIZE &&
+      name == AttributeNames.RESIZE &&
       newValue === 'true' &&
       this._elementRef
     ) {

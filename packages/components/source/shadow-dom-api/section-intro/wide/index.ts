@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SectionIntroWide } from 'elements';
-import { AttributesNames } from 'shadow-dom-model';
+import { AttributeNames } from 'shadow-dom-model';
 import { Styles, MarkupCreate } from 'utilities';
 import { CommonIntroData } from '../common';
 
@@ -33,7 +33,7 @@ export const CreateShadowDom = ({
   const intro = SectionIntroWide.CreateElement(
     CommonIntroData({
       element,
-      theme: element.getAttribute(AttributesNames.THEME),
+      theme: element.getAttribute(AttributeNames.THEME),
     }),
   );
 

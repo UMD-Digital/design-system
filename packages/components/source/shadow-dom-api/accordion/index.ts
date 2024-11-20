@@ -7,7 +7,7 @@ declare global {
 import { Accordion } from 'elements';
 import {
   Attributes,
-  AttributesNames,
+  AttributeNames,
   AttributesValues,
   Slots,
 } from 'shadow-dom-model';
@@ -69,18 +69,18 @@ class UMDAccordionElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.RESIZE, AttributesNames.STATE];
+    return [AttributeNames.RESIZE, AttributeNames.STATE];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (!this._elementRef) return;
 
-    if (name === AttributesNames.RESIZE && newValue === 'true') {
+    if (name === AttributeNames.RESIZE && newValue === 'true') {
       this._elementRef.events.SetOpen({ hasAnimation: false });
     }
 
     if (
-      name == AttributesNames.STATE &&
+      name == AttributeNames.STATE &&
       newValue === AttributesValues.STATE_CLOSED &&
       oldValue === AttributesValues.STATE_OPENED
     ) {
@@ -88,7 +88,7 @@ class UMDAccordionElement extends HTMLElement {
     }
 
     if (
-      name == AttributesNames.STATE &&
+      name == AttributeNames.STATE &&
       newValue === AttributesValues.STATE_OPENED &&
       oldValue === AttributesValues.STATE_CLOSED
     ) {

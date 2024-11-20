@@ -1,14 +1,45 @@
-const AnimationNames = {
+// Types
+
+type AnimationKeys = keyof typeof AnimationAttributes;
+type DisplayKeys = keyof typeof DisplayAttributes;
+type FeedKeys = keyof typeof FeedAttributes;
+type OptionKeys = keyof typeof OptionAttributes;
+type InformationKeys = keyof typeof InformationAttributes;
+type LayoutKeys = keyof typeof LayoutAttributes;
+type StateKeys = keyof typeof StateAttributes;
+type ThemeKeys = keyof typeof ThemeAttributes;
+type TypeKeys = keyof typeof TypeAttributes;
+type SharingKeys = keyof typeof SharingAttributes;
+type SocialKeys = keyof typeof SocialAttributes;
+type VisualKeys = keyof typeof VisualAttributes;
+
+export type AttributeName =
+  | AnimationKeys
+  | DisplayKeys
+  | FeedKeys
+  | OptionKeys
+  | InformationKeys
+  | LayoutKeys
+  | StateKeys
+  | ThemeKeys
+  | TypeKeys
+  | SharingKeys
+  | SocialKeys
+  | VisualKeys;
+
+// Options
+
+const AnimationAttributes = {
   ANIMATION_STATE: 'data-animation',
 };
 
-const DisplayNames = {
+const DisplayAttributes = {
   DISPLAY_SIZE: 'size',
   DISPLAY_TYPE: 'display-type',
   DISPLAY: 'display',
 };
 
-const FeedNames = {
+const FeedAttributes = {
   FEED_CATEGORIES: 'categories',
   FEED_COLUMN_COUNT: 'show-count',
   FEED_LAZY_LOAD: 'lazyload',
@@ -18,7 +49,7 @@ const FeedNames = {
   FEED_UNION: 'union',
 };
 
-const OptionNames = {
+const OptionAttributes = {
   OPTIONAL_FULLSCREEN: 'option-full-screen',
   OPTIONAL_HAS_LINE: 'has-line',
   OPTIONAL_HAS_SEPARATOR: 'include-separator',
@@ -26,43 +57,43 @@ const OptionNames = {
   OPTIONAL_STICKY_FIRST: 'isStickyFirst',
 };
 
-const InformationNames = {
+const InformationAttributes = {
   INFORMATION_TITLE: 'data-title',
   INFORMATION_URL: 'data-url',
 };
 
-const LayoutNames = {
+const LayoutAttributes = {
   LAYOUT_FIXED: 'fixed',
   LAYOUT_IMAGE_POSITION: 'image-position',
   LAYOUT_IMAGE_SCALED: 'image-scaled',
   LAYOUT_STICKY_TOP: 'position-top',
 };
 
-const StateNames = {
+const StateAttributes = {
   RESIZE: 'resize',
   STATE: 'state',
 };
 
-const ThemeNames = {
+const ThemeAttributes = {
   THEME: 'theme',
   THEME_DATA: 'data-theme',
 };
 
-const TypeNames = {
+const TypeAttributes = {
   TYPE: 'type',
 };
 
-const SharingNames = {
+const SharingAttributes = {
   SHARING_EMAIL: 'data-email',
   SHARING_PRINT: 'data-print',
 };
 
-const SocialNames = {
+const SocialAttributes = {
   SOCIAL_FACEBOOK: 'data-facebook',
   SOCIAL_TWITTER: 'data-twitter',
 };
 
-const VisualNames = {
+const VisualAttributes = {
   VISUAL_ALIGN: 'aligned',
   VISUAL_BORDER: 'border',
   VISUAL_DAYS_TO_HIDE: 'days-to-hide',
@@ -73,17 +104,19 @@ const VisualNames = {
   VISUAL_QUOTE: 'quote',
 };
 
-export default {
-  ...AnimationNames,
-  ...DisplayNames,
-  ...FeedNames,
-  ...InformationNames,
-  ...LayoutNames,
-  ...OptionNames,
-  ...SharingNames,
-  ...SocialNames,
-  ...StateNames,
-  ...ThemeNames,
-  ...TypeNames,
-  ...VisualNames,
-};
+const AttributeNames = {
+  ...AnimationAttributes,
+  ...DisplayAttributes,
+  ...FeedAttributes,
+  ...InformationAttributes,
+  ...LayoutAttributes,
+  ...OptionAttributes,
+  ...SharingAttributes,
+  ...SocialAttributes,
+  ...StateAttributes,
+  ...ThemeAttributes,
+  ...TypeAttributes,
+  ...VisualAttributes,
+} as const;
+
+export default AttributeNames;

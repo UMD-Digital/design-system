@@ -5,7 +5,7 @@ declare global {
 }
 
 import { HeroExpand } from 'elements';
-import { AttributesNames, Slots } from 'shadow-dom-model';
+import { AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -24,7 +24,7 @@ const template = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const topPosition = element.getAttribute(AttributesNames.LAYOUT_STICKY_TOP);
+  const topPosition = element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP);
 
   const image = MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE });
   const videoSlot = element.querySelector(
@@ -87,13 +87,13 @@ export class UMDHeroExpandElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributesNames.LAYOUT_STICKY_TOP];
+    return [AttributeNames.LAYOUT_STICKY_TOP];
   }
 
   attributeChangedCallback(name: string) {
-    if (name == AttributesNames.LAYOUT_STICKY_TOP && this._elementRef) {
+    if (name == AttributeNames.LAYOUT_STICKY_TOP && this._elementRef) {
       this._elementRef.events.SetPosition({
-        value: this.getAttribute(AttributesNames.LAYOUT_STICKY_TOP),
+        value: this.getAttribute(AttributeNames.LAYOUT_STICKY_TOP),
       });
     }
   }

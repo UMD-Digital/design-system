@@ -7,7 +7,7 @@ import {
 } from 'elements';
 import {
   Attributes,
-  AttributesNames,
+  AttributeNames,
   AttributesValues,
   Slots,
 } from 'shadow-dom-model';
@@ -32,8 +32,8 @@ export const ComponentStyles = `
 `;
 
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
-  const type = element.getAttribute(AttributesNames.TYPE);
-  const theme = element.getAttribute(AttributesNames.THEME);
+  const type = element.getAttribute(AttributeNames.TYPE);
+  const theme = element.getAttribute(AttributeNames.THEME);
   const includesAnimation = Attributes.includesAnimation({ element });
   let isTextCenter =
     element.getAttribute('text-align') === AttributesValues.LAYOUT_TEXT_CENTER;

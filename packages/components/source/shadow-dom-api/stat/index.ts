@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Stat } from 'elements';
-import { AttributesNames, Slots } from 'shadow-dom-model';
+import { AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
@@ -22,12 +22,12 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
-  const lineAttr = element.hasAttribute(AttributesNames.OPTIONAL_HAS_LINE);
+  const lineAttr = element.hasAttribute(AttributeNames.OPTIONAL_HAS_LINE);
 
   return Stat.CreateElement({
-    theme: element.getAttribute(AttributesNames.THEME),
-    displayType: element.getAttribute(AttributesNames.DISPLAY_TYPE),
-    size: element.getAttribute(AttributesNames.DISPLAY_SIZE),
+    theme: element.getAttribute(AttributeNames.THEME),
+    displayType: element.getAttribute(AttributeNames.DISPLAY_TYPE),
+    size: element.getAttribute(AttributeNames.DISPLAY_SIZE),
     hasLine: lineAttr ? true : false,
     stat: SlotWithDefaultStyling({ element, slotRef: Slots.STAT }),
     text: Slots.SlottedText({ element }),

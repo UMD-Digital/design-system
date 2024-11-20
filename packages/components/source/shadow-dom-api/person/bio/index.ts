@@ -5,7 +5,7 @@ declare global {
 }
 
 import { PersonBio, PersonBioFull } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
@@ -28,8 +28,8 @@ export const CreateShadowDom = ({
 }: {
   element: UMDPersonBioElement;
 }) => {
-  const theme = element.getAttribute(AttributesNames.THEME);
-  const type = element.getAttribute(AttributesNames.TYPE);
+  const theme = element.getAttribute(AttributeNames.THEME);
+  const type = element.getAttribute(AttributeNames.TYPE);
 
   if (type === AttributesValues.LAYOUT_FULL_IMAGE) {
     return PersonBioFull.CreateElement({

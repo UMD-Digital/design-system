@@ -5,7 +5,12 @@ declare global {
 }
 
 import { StickyColumns } from 'elements';
-import { AttributesNames, AttributesValues, Slots } from 'shadow-dom-model';
+import {
+  Attributes,
+  AttributesNames,
+  AttributesValues,
+  Slots,
+} from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -29,7 +34,7 @@ export const CreateShadowDom = ({
   const isStickyLast =
     element.getAttribute(AttributesNames.OPTIONAL_STICKY_FIRST) ===
     AttributesValues.STATE_FALSE;
-  const topPosition = element.getAttribute(AttributesNames.LAYOUT_STICKY_TOP);
+  const topPosition = Attributes.valueTopPosition({ element });
 
   const stickyColumn = Node.slot({ type: Slots.STICKY_COLUMN });
   const staticColumn = Node.slot({ type: Slots.STATIC_COLUMN });

@@ -360,13 +360,15 @@ const CreateCallToActionElement = ({
   cta,
   type = TYPE_PRIMARY,
   size = null,
-  theme = null,
+  isThemeDark,
+  isThemeGold,
   styleProps = null,
 }: {
   cta?: HTMLElement | null;
   type?: string;
   size?: string | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
+  isThemeGold?: boolean;
   styleProps?: string | null;
 }) => {
   const element = cta || document.createElement('a');
@@ -386,8 +388,12 @@ const CreateCallToActionElement = ({
     element.classList.add(ELEMENT_CTA_OUTLINE);
   }
 
-  if (theme) {
-    element.setAttribute(ATTR_THEME, theme);
+  if (isThemeDark) {
+    element.setAttribute(ATTR_THEME, THEME_DARK);
+  }
+
+  if (isThemeGold) {
+    element.setAttribute(ATTR_THEME, THEME_GOLD);
   }
 
   if (size) {

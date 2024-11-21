@@ -17,7 +17,7 @@ type TypeImageBlockContainer = TypeContactProps & {
 
 type TypePersonHeroProps = TypeTextContainer &
   TypeImageBlockContainer & {
-    theme?: string | null;
+    isThemeDark?: boolean;
     breadcrumbMobile?: HTMLElement | null;
     breadcrumbDesktop?: HTMLElement | null;
   };
@@ -323,12 +323,12 @@ const STYLES_PERSON_HERO_ELEMENT = `
 `;
 
 const CreateImageBlock = (props: TypeImageBlockContainer) => {
-  const { image, association, pronouns, theme } = props;
+  const { image, association, pronouns, isThemeDark } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const contactContainer = PersonContact.CreateElement({
     ...props,
-    theme: theme === THEME_DARK ? THEME_LIGHT : THEME_DARK,
+    isThemeDark: !isThemeDark,
   });
 
   wrapper.classList.add(ELEMENT_PERSON_HERO_IMAGE_BLOCK_WRAPPER);
@@ -385,7 +385,7 @@ const CreateTextContainer = ({ name, job, subText }: TypeTextContainer) => {
 };
 
 const CreatePersonHeroElement = (props: TypePersonHeroProps) => {
-  const { theme, breadcrumbMobile, breadcrumbDesktop } = props;
+  const { isThemeDark, breadcrumbMobile, breadcrumbDesktop } = props;
   const elementContainer = document.createElement('div');
   const elementLock = document.createElement('div');
   const elementWrapper = document.createElement('div');
@@ -413,7 +413,7 @@ const CreatePersonHeroElement = (props: TypePersonHeroProps) => {
   elementLock.classList.add(ELEMENT_PERSON_HERO_LOCK);
   elementLock.appendChild(elementWrapper);
 
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   elementContainer.appendChild(elementLock);
   elementContainer.classList.add(ELEMENT_PERSON_HERO_CONTAINER);
 

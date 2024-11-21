@@ -3,7 +3,7 @@ import { CallToAction } from 'elements';
 
 type LazyLoadCreate = {
   callback: (args: any) => void;
-  theme?: string | null;
+  isThemeDark?: boolean;
 };
 
 export type TypeLazyLoad = LazyLoadCreate & {
@@ -27,13 +27,13 @@ const STYLES_LAZY_LOAD_BUTTON = `
   }
 `;
 
-const CreateLazyLoadButton = ({ callback, theme }: LazyLoadCreate) => {
+const CreateLazyLoadButton = ({ callback, isThemeDark }: LazyLoadCreate) => {
   const container = document.createElement('div');
   const button = document.createElement('button');
   const ctaButton = CallToAction.CreateElement({
     cta: button,
     type: 'outline',
-    theme,
+    isThemeDark,
   });
 
   button.innerHTML = 'Load more';
@@ -58,7 +58,7 @@ const DisplayLazyLoad = ({
   isLazyLoad,
   totalEntries,
   offset,
-  theme,
+  isThemeDark,
   callback,
 }: TypeLazyLoad) => {
   if (!isLazyLoad) return;
@@ -69,7 +69,7 @@ const DisplayLazyLoad = ({
 
   const lazyLoadButton = CreateLazyLoadButton({
     callback,
-    theme,
+    isThemeDark,
   });
   container.appendChild(lazyLoadButton);
 };

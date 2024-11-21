@@ -13,7 +13,6 @@ export type TypeTextLockupSmall = {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string | null;
   isThemeDark?: boolean;
 };
 
@@ -229,13 +228,11 @@ const CreateTextLockupSmallContainer = ({
   text,
   actions,
   date,
-  theme,
   isThemeDark,
 }: TypeTextLockupSmall) => {
   const container = document.createElement('div');
 
   container.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   if (eyebrow) {

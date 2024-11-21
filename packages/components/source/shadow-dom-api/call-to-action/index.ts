@@ -5,6 +5,7 @@ declare global {
 }
 
 import { MarkupCreate } from 'utilities';
+import { Attributes } from 'shadow-dom-model';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { VARIABLES } from './globals';
 
@@ -15,7 +16,6 @@ const {
   THEME_LIGHT,
   ATTRIBUTE_TYPE,
   ATTRIBUTE_SIZE,
-  ATTRIBUTE_THEME,
   ATTRIBUTE_STYLE_PROPS,
 } = VARIABLES;
 
@@ -24,7 +24,9 @@ export class UMDCallToActionElement extends HTMLElement {
   _styleProps: null | string;
   _type = TYPE_PRIMARY;
   _size = SIZE_STANDARD;
-  _theme = THEME_LIGHT;
+  _isThemeLight = true;
+  _isThemeDark = false;
+  _isThemeGold = false;
 
   constructor() {
     super();
@@ -50,10 +52,13 @@ export class UMDCallToActionElement extends HTMLElement {
   connectedCallback() {
     const element = this;
     const styleAttrubutes = element.getAttribute(ATTRIBUTE_STYLE_PROPS);
+    const isThemeDark = Attributes.isThemeDark({ element });
+    const isThemeGold = Attributes.isThemeGold({ element });
 
     element._size = element.getAttribute(ATTRIBUTE_SIZE) || element._size;
     element._type = element.getAttribute(ATTRIBUTE_TYPE) || element._type;
-    element._theme = element.getAttribute(ATTRIBUTE_THEME) || element._theme;
+    element._isThemeDark = isThemeDark;
+    element._isThemeGold = isThemeGold;
 
     if (styleAttrubutes) {
       element._styleProps = styleAttrubutes;

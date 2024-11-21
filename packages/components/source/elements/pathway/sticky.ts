@@ -165,7 +165,7 @@ const STYLES_PATHWAY_STICKY_ELEMENT = `
 `;
 
 const CreatePathwayStickyElement = (props: TypePathwayStickyProps) => {
-  const { isImageRight = true, theme } = props;
+  const { isImageRight = true, isThemeDark } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
@@ -175,7 +175,7 @@ const CreatePathwayStickyElement = (props: TypePathwayStickyProps) => {
   const imageContainer = ImageContainer.CreateElement(props);
 
   container.classList.add(PATHWAY_STICKY_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,
     isImageRight ? 'right' : 'left',

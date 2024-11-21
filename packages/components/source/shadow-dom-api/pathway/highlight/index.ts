@@ -5,7 +5,12 @@ declare global {
 }
 
 import { PathwayHighlight, PathwayElements } from 'elements';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import {
+  Attributes,
+  AttributeNames,
+  AttributesValues,
+  Slots,
+} from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 
@@ -32,15 +37,8 @@ const CreateShadowDom = ({
   element: UMDPathwayHighlightElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const themeAttribute = element.getAttribute(AttributeNames.THEME);
-  let theme = null;
-
-  if (themeAttribute) {
-    if (themeAttribute === AttributesValues.THEME_LIGHT)
-      theme = AttributesValues.THEME_LIGHT;
-    if (themeAttribute === AttributesValues.THEME_DARK)
-      theme = AttributesValues.THEME_DARK;
-  }
+  const isThemeDark = Attributes.isThemeDark({ element });
+  const isThemeLight = Attributes.isThemeLight({ element });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
@@ -57,7 +55,7 @@ const CreateShadowDom = ({
         element,
         slotRef: Slots.HIGHLIGHT_ATTRIBUTION,
       }),
-      theme,
+      isThemeDark,
     }),
   );
 };

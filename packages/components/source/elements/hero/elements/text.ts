@@ -2,12 +2,12 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import { MarkupModify, Styles } from 'utilities';
 
 type TypeTextProps = {
-  theme?: string | null;
   isTextCenter?: boolean;
   eyebrow?: HTMLElement | null;
   headline: HTMLElement | null;
   richText?: HTMLElement | null;
   actions?: HTMLElement | null;
+  isThemeDark?: boolean;
 };
 
 export type TypeTextContainerProps = TypeTextProps;
@@ -181,12 +181,14 @@ const CreateBody = ({
 };
 
 const CreateTextContainerElement = (element: TypeTextContainerProps) => {
-  const { theme, isTextCenter = false } = element;
+  const { isThemeDark, isTextCenter = false } = element;
   const container = document.createElement('div');
   const body = CreateBody(element);
 
   container.classList.add(ELEMENT_TEXT_CONTAINER);
-  if (theme) container.setAttribute('theme', theme);
+
+  if (isThemeDark) container.setAttribute('theme', THEME_DARK);
+
   if (isTextCenter)
     container.setAttribute(ATTRIBUTE_TEXT_ALIGN, TEXT_ALIGN_CENTER);
 

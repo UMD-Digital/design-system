@@ -5,7 +5,12 @@ declare global {
 }
 
 import { LogoBlock } from 'elements';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import {
+  Attributes,
+  AttributeNames,
+  AttributesValues,
+  Slots,
+} from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -22,8 +27,7 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
-  const theme =
-    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const isThemeDark = Attributes.isThemeDark({ element });
   const borderAttr = element.getAttribute(AttributeNames.VISUAL_BORDER);
 
   const isBordered = borderAttr === 'true';
@@ -31,7 +35,7 @@ const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
   return LogoBlock.CreateElement({
     image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
     text: Slots.SlottedText({ element }),
-    theme,
+    isThemeDark,
     isBordered,
   });
 };

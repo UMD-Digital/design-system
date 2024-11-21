@@ -64,12 +64,12 @@ const CreateFeedSlideEvent = async ({
   token,
   type = 'academic',
   categories,
-  theme,
+  isThemeDark,
 }: {
   token: string;
   type?: string | null;
   categories?: string | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
 }) => {
   const isCalendar = type === 'calendar';
   let variables: any = { startDate: new Date().toDateString() };
@@ -122,14 +122,14 @@ const CreateFeedSlideEvent = async ({
       startDay: data.startDay,
       endDay: data.endDay,
       endMonth: data.endMonth,
-      theme: theme,
+      isThemeDark,
     });
 
     headline.textContent = data.title;
 
     return EventLockupDate.CreateElement({
       headline,
-      theme,
+      isThemeDark,
       dateSign,
     });
   });

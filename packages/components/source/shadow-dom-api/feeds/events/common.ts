@@ -1,5 +1,5 @@
 import { TypeEventFeedRequirements } from 'elements/feeds/events';
-import { AttributeNames, AttributesValues } from 'shadow-dom-model';
+import { Attributes, AttributeNames, AttributesValues } from 'shadow-dom-model';
 
 export const CommonFeedEventsData = ({
   element,
@@ -11,7 +11,7 @@ export const CommonFeedEventsData = ({
   numberOfRowsToStartDefault?: number;
 }) => {
   const token = element.getAttribute(AttributeNames.FEED_TOKEN);
-  const theme = element.getAttribute(AttributeNames.THEME);
+  const isThemeDark = Attributes.isThemeDark({ element });
   const categoriesAttribute = element.getAttribute(
     AttributeNames.FEED_CATEGORIES,
   );
@@ -47,7 +47,7 @@ export const CommonFeedEventsData = ({
 
   const data: TypeEventFeedRequirements = {
     token,
-    theme,
+    isThemeDark,
     numberOfRowsToStart,
     numberOfColumnsToShow,
     isLazyLoad:

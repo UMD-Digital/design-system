@@ -12,7 +12,7 @@ const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 
 export type TypeNewsFeedRequirements = {
   token: string;
-  theme?: string | null;
+  isThemeDark?: boolean;
   numberOfRowsToStart: number;
   numberOfColumnsToShow?: number;
   categories?: string[];
@@ -105,7 +105,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
     getContainer,
     setOffset,
     feedData,
-    theme,
+    isThemeDark,
     isTransparent,
     isLayoutReversed,
   } = props;
@@ -119,7 +119,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
     isTypeGrid,
     isTypeOverlay,
     isTypeFeatured,
-    theme,
+    isThemeDark,
     isTransparent,
   });
 

@@ -255,7 +255,7 @@ const Animation = ({
 };
 
 const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
-  const { isImageRight = true, includesAnimation, theme } = props;
+  const { isImageRight = true, includesAnimation, isThemeDark } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
@@ -268,7 +268,7 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
   };
 
   container.classList.add(PATHWAY_DEFAULT_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,
     isImageRight ? 'right' : 'left',

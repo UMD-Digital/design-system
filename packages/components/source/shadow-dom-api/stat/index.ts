@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Stat } from 'elements';
-import { AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
@@ -25,7 +25,7 @@ const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
   const lineAttr = element.hasAttribute(AttributeNames.OPTIONAL_HAS_LINE);
 
   return Stat.CreateElement({
-    theme: element.getAttribute(AttributeNames.THEME),
+    isThemeDark: Attributes.isThemeDark({ element }),
     displayType: element.getAttribute(AttributeNames.DISPLAY_TYPE),
     size: element.getAttribute(AttributeNames.DISPLAY_SIZE),
     hasLine: lineAttr ? true : false,

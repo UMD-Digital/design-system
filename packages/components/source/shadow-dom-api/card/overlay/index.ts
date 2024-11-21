@@ -38,6 +38,7 @@ const MakeOverlayContent = ({
   ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.CTA_ICON }),
   isQuote: Attributes.isVisuallyQuote({ element }),
   isThemeDark: Attributes.isThemeDark({ element }),
+  isThemeLight: Attributes.isThemeLight({ element }),
 });
 
 const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {

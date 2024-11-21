@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Carousel } from 'elements';
-import { AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -25,7 +25,9 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme = element.getAttribute('theme');
+  const isThemeDark = Attributes.isThemeDark({
+    element,
+  });
   const attributeLeftButton = element.getAttribute('left-button');
   const attributeRightButton = element.getAttribute('right-button');
   const attributeMobileHint = element.getAttribute('mobile-hint');
@@ -66,7 +68,7 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
     slide,
     shadowRef,
     blocks,
-    theme,
+    isThemeDark,
     hasLeftButton,
     hasRightButton,
     mobileHint,

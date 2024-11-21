@@ -86,7 +86,7 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
 `;
 
 const CreatePersonBlockElement = (props: TypeBlockPersonProps) => {
-  const { theme, image: providedImage } = props;
+  const { isThemeDark, image: providedImage } = props;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
   const personContainer = PersonTextContainer.CreateElement(props);
@@ -94,7 +94,7 @@ const CreatePersonBlockElement = (props: TypeBlockPersonProps) => {
     image: providedImage || AssetIcon.PERSON,
   });
 
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   elementWrapper.appendChild(imageContainer);
   elementWrapper.appendChild(personContainer);

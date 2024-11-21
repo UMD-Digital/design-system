@@ -6,7 +6,7 @@ type TypeSectionIntroDefaultProps = {
   actions?: HTMLElement | null;
   text?: HTMLElement | null;
   hasSeparator?: boolean;
-  theme?: string | null;
+  isThemeDark?: boolean;
   includesAnimation?: boolean;
 };
 
@@ -252,7 +252,7 @@ const CreateSectionIntroDefaultElement = (
     headline,
     actions,
     text,
-    theme,
+    isThemeDark,
     hasSeparator = false,
     includesAnimation,
   } = element;
@@ -265,7 +265,7 @@ const CreateSectionIntroDefaultElement = (
 
   textContainer.classList.add(ELEMENT_INTRO_TEXT_CONTAINER);
 
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   if (hasSeparator) container.setAttribute(ATTRIBUTE_WITH_SEPARATOR, '');
 
   if (headline) {

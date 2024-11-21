@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Tabs, TabsElements } from 'elements';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -25,8 +25,7 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme =
-    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const isThemeDark = Attributes.isThemeDark({ element });
   const topPosition = element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP);
   const slot = Node.slot({ type: Slots.TABS });
   const markup = element.querySelector(`[slot="${Slots.TABS}"]`);
@@ -43,7 +42,7 @@ const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   };
   const createTabs = () => {
     const tabsElement = Tabs.CreateElement({
-      theme,
+      isThemeDark,
       tabsContainer: markup?.children[0] as HTMLElement,
       shadowContent: slot,
       topPosition,

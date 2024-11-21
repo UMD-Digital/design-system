@@ -1,4 +1,4 @@
-import { AttributeNames, AttributesValues } from 'shadow-dom-model';
+import { Attributes, AttributeNames, AttributesValues } from 'shadow-dom-model';
 import { TypeNewsFeedRequirements } from 'elements/feeds/news';
 
 export const CommonFeedNewsData = ({
@@ -11,7 +11,7 @@ export const CommonFeedNewsData = ({
   numberOfRowsToStartDefault?: number;
 }) => {
   const token = element.getAttribute(AttributeNames.FEED_TOKEN);
-  const theme = element.getAttribute(AttributeNames.THEME);
+  const isThemeDark = Attributes.isThemeDark({ element });
   const categoriesAttribute = element.getAttribute(
     AttributeNames.FEED_CATEGORIES,
   );
@@ -31,7 +31,7 @@ export const CommonFeedNewsData = ({
 
   const data: TypeNewsFeedRequirements = {
     token,
-    theme,
+    isThemeDark,
     numberOfRowsToStart,
     numberOfColumnsToShow,
     isLazyLoad:

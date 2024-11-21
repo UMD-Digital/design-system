@@ -36,10 +36,13 @@ export const ComponentStyles = `
 
 const MakeCommonDefaultData = ({
   element,
-  theme,
+  isThemeDark,
+  isThemeMaryland,
 }: {
   element: UMDPathwayElement;
-  theme: string | null;
+  isThemeDark?: boolean;
+  isThemeLight?: boolean;
+  isThemeMaryland?: boolean;
 }) => {
   const startDateSlot = element.querySelector(
     `[slot="${Slots.DATE_START_ISO}"]`,
@@ -64,6 +67,10 @@ const MakeCommonDefaultData = ({
     eventDetails: null as null | HTMLElement,
     eventSign: null as null | HTMLElement,
   };
+  let themeToggle = true;
+
+  if (isThemeMaryland) themeToggle = false;
+  if (isThemeDark) themeToggle = false;
 
   if (startDate) {
     const eventData = MarkupEvent.CreateDetailsData({
@@ -71,14 +78,10 @@ const MakeCommonDefaultData = ({
       startDate,
       endDate,
     });
-    let themeStyling = 'dark';
-    if (theme === AttributesValues.THEME_LIGHT || !theme) {
-      themeStyling = 'light';
-    }
 
     obj.eventDetails = EventElements.Meta.CreateElement({
       ...eventData,
-      theme: themeStyling,
+      isThemeDark: themeToggle,
       showTime,
     });
 
@@ -99,25 +102,23 @@ export const CreateShadowDom = ({
   const isImageScaled =
     element.getAttribute(AttributeNames.LAYOUT_IMAGE_SCALED) !== 'false';
   const type = element.getAttribute(AttributeNames.TYPE);
-  const themeAttribute = element.getAttribute(AttributeNames.THEME);
+  const isThemeDark = Attributes.isThemeDark({ element });
+  const isThemeLight = Attributes.isThemeLight({ element });
+  const isThemeMaryland = Attributes.isThemeMaryland({ element });
   const includesAnimation = Attributes.includesAnimation({ element });
-  let theme = null;
 
   shadow.appendChild(element._styles.content.cloneNode(true));
 
-  if (themeAttribute) {
-    if (themeAttribute === AttributesValues.THEME_LIGHT)
-      theme = AttributesValues.THEME_LIGHT;
-    if (themeAttribute === AttributesValues.THEME_DARK)
-      theme = AttributesValues.THEME_DARK;
-    if (themeAttribute === AttributesValues.THEME_MARYLAND)
-      theme = AttributesValues.THEME_MARYLAND;
-  }
+  const themes = {
+    isThemeDark,
+    isThemeLight,
+    isThemeMaryland,
+  };
 
   const makeHeroType = () => {
     shadow.appendChild(
       PathwayHero.CreateElement({
-        ...MakeCommonDefaultData({ element, theme }),
+        ...MakeCommonDefaultData({ element, ...themes }),
         includesAnimation,
       }),
     );
@@ -125,10 +126,10 @@ export const CreateShadowDom = ({
 
   const makeOverlayType = () => {
     const overlay = PathwayOverlay.CreateElement({
-      theme,
       isImageScaled,
+      ...themes,
       includesAnimation,
-      ...MakeCommonDefaultData({ element, theme }),
+      ...MakeCommonDefaultData({ element, ...themes }),
     });
 
     shadow.appendChild(overlay.element);
@@ -143,19 +144,22 @@ export const CreateShadowDom = ({
   const makeStickyType = () => {
     shadow.appendChild(
       PathwaySticky.CreateElement({
-        theme,
+        isThemeDark: Attributes.isThemeDark({ element }),
         isImageScaled,
-        ...MakeCommonDefaultData({ element, theme }),
+        ...MakeCommonDefaultData({ element, ...themes }),
       }),
     );
   };
 
   const makeDefaultType = () => {
     const defaultElement = PathwayDefault.CreateElement({
-      theme,
+      ...themes,
       isImageScaled,
       includesAnimation,
-      ...MakeCommonDefaultData({ element, theme }),
+      ...MakeCommonDefaultData({
+        element,
+        ...themes,
+      }),
     });
 
     shadow.appendChild(defaultElement.element);

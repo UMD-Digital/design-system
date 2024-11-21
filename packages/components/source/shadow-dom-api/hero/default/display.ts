@@ -33,8 +33,8 @@ export const ComponentStyles = `
 
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
   const type = element.getAttribute(AttributeNames.TYPE);
-  const theme = element.getAttribute(AttributeNames.THEME);
   const includesAnimation = Attributes.includesAnimation({ element });
+  const isThemeDark = Attributes.isThemeDark({ element });
   let isTextCenter =
     element.getAttribute('text-align') === AttributesValues.LAYOUT_TEXT_CENTER;
   let isInterior = false;
@@ -58,7 +58,7 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
   }
 
   return {
-    theme,
+    isThemeDark,
     isTextCenter,
     isInterior,
     isWithLock,

@@ -98,10 +98,10 @@ const CreateDate = ({
 
 const CommonDisplay = ({
   entry,
-  theme,
+  isThemeDark,
 }: {
   entry: ArticleType;
-  theme?: string | null;
+  isThemeDark?: boolean;
 }) => ({
   id: entry.id.toString(),
 
@@ -111,7 +111,7 @@ const CommonDisplay = ({
     date: entry.date,
     dateFormatted: entry.dateFormatted,
   }),
-  theme,
+  isThemeDark,
 });
 
 const CreateNewsFeedDisplay = ({
@@ -119,19 +119,19 @@ const CreateNewsFeedDisplay = ({
   isTypeGrid,
   isTypeOverlay,
   isTypeFeatured,
-  theme,
+  isThemeDark,
   isTransparent,
 }: {
   entries: ArticleType[];
   isTypeGrid?: boolean;
   isTypeOverlay?: boolean;
   isTypeFeatured?: boolean;
-  theme?: string | null;
+  isThemeDark?: boolean;
   isTransparent?: boolean;
 }) => {
   const standardCardType = ({ entry }: { entry: ArticleType }) =>
     CardBlock.CreateElement({
-      ...CommonDisplay({ entry, theme }),
+      ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image, url: entry.url }),
       isAligned: false,
       isTransparent,
@@ -139,13 +139,13 @@ const CreateNewsFeedDisplay = ({
 
   const overlayCardType = ({ entry }: { entry: ArticleType }) =>
     CardOverlayImage.CreateElement({
-      ...CommonDisplay({ entry, theme }),
+      ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image }),
     });
 
   const listCardType = ({ entry }: { entry: ArticleType }) =>
     CardList.CreateElement({
-      ...CommonDisplay({ entry, theme }),
+      ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image, url: entry.url }),
     });
 
@@ -154,7 +154,7 @@ const CreateNewsFeedDisplay = ({
       const entriesCopy = entries.slice(0, 3);
 
       const overlayCard = CardOverlayImage.CreateElement({
-        ...CommonDisplay({ entry: entriesCopy[0], theme }),
+        ...CommonDisplay({ entry: entriesCopy[0], isThemeDark }),
         image: CreateImage({ images: entriesCopy[0].image }),
       });
 

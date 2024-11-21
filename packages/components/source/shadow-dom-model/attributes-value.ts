@@ -52,6 +52,7 @@ const StateValues = {
 
 const ThemeValues = {
   THEME_DARK: 'dark',
+  THEME_GOLD: 'gold',
   THEME_LIGHT: 'light',
   THEME_MARYLAND: 'maryland',
 };

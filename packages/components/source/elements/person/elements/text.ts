@@ -13,8 +13,8 @@ export type TypePersonProps = TypeContactProps & {
   pronouns?: HTMLElement | null;
   subText?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string | null;
   displayType?: string;
+  isThemeDark?: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -173,14 +173,15 @@ const STYLES_PERSON_TEXT = `
 `;
 
 const CreatePersonTextContainer = (person: TypePersonProps) => {
-  const { name, job, association, pronouns, subText, actions, theme } = person;
+  const { name, job, association, pronouns, subText, actions, isThemeDark } =
+    person;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const contactContainer = PersonContact.CreateElement(person);
   const isDisplayTabular = person.displayType === DISPLAY_TABULAR;
 
   container.classList.add(ELEMENT_PERSON_TEXT_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   wrapper.classList.add(ELEMENT_PERSON_TEXT_MAIN_WRAPPER);
 

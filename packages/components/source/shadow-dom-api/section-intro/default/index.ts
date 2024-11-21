@@ -32,7 +32,7 @@ export const CreateShadowDom = ({
   const intro = SectionIntro.CreateElement({
     ...CommonIntroData({
       element,
-      theme: element.getAttribute(AttributeNames.THEME),
+      isThemeDark: Attributes.isThemeDark({ element }),
     }),
     text: Slots.SlottedText({ element }),
     hasSeparator: element.hasAttribute(AttributeNames.OPTIONAL_HAS_SEPARATOR),

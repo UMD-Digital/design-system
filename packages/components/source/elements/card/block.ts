@@ -10,7 +10,6 @@ type TypeBlockCardProps = {
   image?: HTMLImageElement | HTMLAnchorElement | null;
   isAligned?: boolean;
   isBordered?: boolean;
-  theme?: string | null;
   isThemeDark?: boolean;
   isTransparent?: boolean;
 };

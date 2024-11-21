@@ -181,14 +181,14 @@ const makeEndDateBlock = ({
   startDay,
   endMonth,
   endDay,
-  theme,
+  isThemeDark,
 }: {
   container: HTMLElement;
   startMonth: string | HTMLElement;
   startDay: string | HTMLElement;
   endDay: string | HTMLElement;
   endMonth: string | HTMLElement;
-  theme?: string | null;
+  isThemeDark?: boolean;
 }) => {
   const endWrapper = document.createElement('p');
   const isTheSameMonth = endMonth === startMonth;
@@ -216,7 +216,7 @@ const makeEndDateBlock = ({
     dash.style.height = '3px';
     dash.style.margin = '0 5px';
     dash.style.display = 'block';
-    dash.style.backgroundColor = theme == THEME_DARK ? 'white' : 'black';
+    dash.style.backgroundColor = isThemeDark ? 'white' : 'black';
 
     container.appendChild(srOnly);
     container.appendChild(dash);
@@ -230,7 +230,7 @@ const CreateEventSignElement = (props: {
   startDay: string | HTMLElement;
   endDay?: string | HTMLElement;
   endMonth?: string | HTMLElement;
-  theme?: string | null;
+  isThemeDark?: boolean;
   isLargeSize?: boolean;
 }) => {
   const {
@@ -238,14 +238,14 @@ const CreateEventSignElement = (props: {
     startDay,
     endDay,
     endMonth,
-    theme = THEME_LIGHT,
+    isThemeDark,
     isLargeSize = false,
   } = props;
   const container = document.createElement('div');
   const hasEnd = endDay && endMonth;
 
   container.classList.add(ELEMENT_EVENT_DATE_WRAPPER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   if (isLargeSize) container.setAttribute(ATTRIBUTE_SIZE_LARGE, '');
 
   makeStartDateBlock({ container, startMonth, startDay });
@@ -257,7 +257,7 @@ const CreateEventSignElement = (props: {
       startDay,
       endDay,
       endMonth,
-      theme,
+      isThemeDark,
     });
   }
 

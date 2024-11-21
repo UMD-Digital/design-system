@@ -153,7 +153,7 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
 `;
 
 const CreatePersonTabularElement = (props: TypeTabularPersonProps) => {
-  const { theme, image } = props;
+  const { isThemeDark, image } = props;
   const personContainer = PersonTextContainer.CreateElement({
     ...props,
     displayType: DISPLAY_TABULAR,
@@ -163,10 +163,10 @@ const CreatePersonTabularElement = (props: TypeTabularPersonProps) => {
   const container = LayoutList.CreateElement({
     personContainer,
     imageContainer,
-    theme,
+    isThemeDark,
   });
 
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_PERSON_TABULAR_CONTAINER);

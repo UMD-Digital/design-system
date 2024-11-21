@@ -13,8 +13,6 @@ const { Spacing, Colors } = Tokens;
 const { Text } = Elements;
 const { SansExtraLarge } = Typography;
 
-const SMALL = 650;
-
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
@@ -99,11 +97,11 @@ const STYLES_PERSON_BIO_FULL_ELEMENT = `
 `;
 
 const CreatePersonBioFullElement = (props: TypePersonBioFullProps) => {
-  const { theme, image, actions, description, ...newProps } = props;
+  const { isThemeDark, image, actions, description, ...newProps } = props;
   const elementContainer = document.createElement('div');
   const textContainer = PersonTextContainer.CreateElement({
     ...newProps,
-    theme,
+    isThemeDark,
   });
 
   if (image) {
@@ -123,7 +121,7 @@ const CreatePersonBioFullElement = (props: TypePersonBioFullProps) => {
   }
 
   elementContainer.classList.add(ELEMENT_PERSON_BIO_FULL_CONTAINER);
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   return elementContainer;
 };

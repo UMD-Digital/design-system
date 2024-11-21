@@ -5,7 +5,12 @@ declare global {
 }
 
 import { PersonHero } from 'elements';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import {
+  Attributes,
+  AttributeNames,
+  AttributesValues,
+  Slots,
+} from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
@@ -32,8 +37,9 @@ export const CreateShadowDom = ({
   element: UMDPersonHeroElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme =
-    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const isThemeDark = Attributes.isThemeDark({
+    element,
+  });
   const breadcrumbSlot = Node.slot({ type: Slots.BREADCRUMB });
 
   if (breadcrumbSlot) {
@@ -50,7 +56,7 @@ export const CreateShadowDom = ({
 
   shadow.appendChild(
     PersonHero.CreateElement({
-      ...CommonPersonData({ element, theme }),
+      ...CommonPersonData({ element, isThemeDark }),
       breadcrumbDesktop: Node.slot({ type: Slots.BREADCRUMB }),
       breadcrumbMobile: Node.slot({ type: Slots.BREADCRUMB_COPY }),
     }),

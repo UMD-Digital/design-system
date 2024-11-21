@@ -5,6 +5,8 @@ import { MarkupCreate } from 'utilities';
 
 type TypeQuoteFeatured = TypeInlineInline & {
   isTransparent: boolean;
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
 };
 
 type TypeQuoteFeaturedText = TypeQuoteFeatured & {
@@ -274,9 +276,12 @@ const CreateTextContainer = (props: TypeQuoteFeaturedText) => {
   return container;
 };
 
-const CreateTextureContainer = ({ theme }: TypeQuoteFeatured) => {
+const CreateTextureContainer = ({
+  isThemeDark,
+  isThemeMaryland,
+}: TypeQuoteFeatured) => {
   const container = document.createElement('div');
-  const isDarkText = theme === THEME_DARK || theme === THEME_MARYLAND;
+  const isDarkText = isThemeDark || isThemeMaryland;
   const backgroundTexture = Node.imageFromSvg({
     SVG: isDarkText ? BACKGROUND_TEXTURE_DARK : BACKGROUND_TEXTURE_LIGHT,
   });
@@ -288,7 +293,7 @@ const CreateTextureContainer = ({ theme }: TypeQuoteFeatured) => {
 };
 
 const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
-  const { theme, action, image, isTransparent } = props;
+  const { isThemeDark, isThemeMaryland, action, image, isTransparent } = props;
   const container = document.createElement('div');
   const spacer = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -307,7 +312,8 @@ const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
 
   container.classList.add(QUOTE_FEATURED_CONTAINER);
   container.appendChild(spacer);
-  if (theme) container.setAttribute('theme', theme);
+  if (isThemeDark) container.setAttribute('theme', THEME_DARK);
+  if (isThemeMaryland) container.setAttribute('theme', THEME_MARYLAND);
   if (hasImage) container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
   if (isTransparent) container.setAttribute(ATTRIBUTE_TRANSPARENT, 'true');
 

@@ -85,17 +85,17 @@ const STYLES_PERSON_LIST_ELEMENT = `
 `;
 
 const CreatePersonListElement = (props: TypeListPersonProps) => {
-  const { theme, image } = props;
+  const { isThemeDark, image } = props;
   const personContainer = PersonTextContainer.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
   const container = LayoutList.CreateElement({
     personContainer,
     imageContainer,
-    theme,
+    isThemeDark,
   });
 
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_PERSON_LIST_CONTAINER);

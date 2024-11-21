@@ -26,7 +26,7 @@ type TypeSliderEventScrollerProps = TypeSliderEventSlideProps &
 
 type TypeSliderEventProps = TypeSliderEventSlideContentProps &
   TypeSliderEventIntroProps & {
-    theme: string;
+    isThemeDark?: boolean;
   };
 
 const { Debounce } = Performance;
@@ -500,7 +500,7 @@ const SizeDatesElements = ({
 }: {
   container: HTMLElement;
   dataSlider: HTMLElement;
-  isThemeDark: boolean;
+  isThemeDark?: boolean;
   SetButtonVisibility: () => void;
 }) => {
   const sliderWrapper = container.querySelector(
@@ -669,12 +669,11 @@ const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {
 
 const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
   (() => {
-    const { theme, dataSlider } = props;
+    const { isThemeDark, dataSlider } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
     const coverElement = document.createElement('div');
-    const isThemeDark = theme === 'dark';
     const CommonDomElements = {
       container,
       dataSlider,
@@ -736,7 +735,7 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
     wrapper.appendChild(containerWrapper);
     wrapper.appendChild(coverElement);
 
-    container.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
     container.classList.add(ELEMENT_SLIDER_EVENT_CONTAINER);
     container.appendChild(wrapper);
 

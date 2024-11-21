@@ -156,7 +156,7 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
 
   const scalingFontContainer = ScalingFontBlock.CreateElement({
     ...props,
-    theme: 'dark',
+    isThemeDark: true,
   });
 
   if (!image) return;

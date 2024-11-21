@@ -1,9 +1,4 @@
-import {
-  Typography,
-  Layout,
-  Tokens,
-  Elements,
-} from '@universityofmaryland/variables';
+import { Typography, Layout, Tokens } from '@universityofmaryland/variables';
 import { Styles, AssetIcon } from 'utilities';
 
 export type TypeQuoteTextContainer = {
@@ -11,7 +6,8 @@ export type TypeQuoteTextContainer = {
   attribution: HTMLElement | null;
   attributionSubText: HTMLElement | null;
   action: HTMLElement | null;
-  theme: string;
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
 };
 
 type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
@@ -193,7 +189,8 @@ const CreateQuoteTextContainer = ({
   attribution,
   attributionSubText,
   action,
-  theme,
+  isThemeDark,
+  isThemeMaryland,
   isSizeLarge = false,
 }: TypeQuoteTextContainerProps) => {
   const container = document.createElement('div');
@@ -227,7 +224,8 @@ const CreateQuoteTextContainer = ({
     wrapper.appendChild(action);
   }
 
-  container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  if (isThemeMaryland) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   if (isSizeLarge) container.setAttribute(ATTRIBUTE_SIZE, SIZE_LARGE);
 
   container.classList.add(TEXT_CONTAINER);

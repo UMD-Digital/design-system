@@ -72,12 +72,13 @@ export const ComponentStyles = `
 const CreateCtaElement = ({ element }: { element: UMDCallToActionElement }) => {
   const type = element._type;
   const size = element._size;
-  const theme = element._theme;
+  const isThemeDark = element._isThemeDark;
+  const isThemeGold = element._isThemeGold;
   const styleProps = element._styleProps;
 
   const linkElement = element.querySelector(`a`);
   const buttonElement = element.querySelector(`button`);
-  const styleObj = { type, size, theme, styleProps };
+  const styleObj = { type, size, isThemeDark, isThemeGold, styleProps };
 
   if (linkElement) {
     const cta = linkElement.cloneNode(true) as HTMLAnchorElement;

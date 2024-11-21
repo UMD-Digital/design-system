@@ -9,7 +9,7 @@ import { MarkupModify, Styles } from 'utilities';
 type TypeEventLockupDate = {
   headline: HTMLElement | null;
   dateSign?: HTMLElement | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
 };
 
 const { FontSize, Spacing } = Tokens;
@@ -81,11 +81,11 @@ const ComponentStyles = `
 `;
 
 const CreateEventLockupDate = (props: TypeEventLockupDate) => {
-  const { headline, dateSign, theme } = props;
+  const { headline, dateSign, isThemeDark } = props;
   const container = document.createElement('div');
 
   container.classList.add(EVENT_DATE_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   if (dateSign) {
     container.appendChild(dateSign);

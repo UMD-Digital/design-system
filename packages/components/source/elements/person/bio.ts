@@ -118,7 +118,7 @@ const STYLES_PERSON_BIO_ELEMENT = `
 `;
 
 const CreatePersonBioElement = (props: TypePersonBioProps) => {
-  const { theme, image, description } = props;
+  const { isThemeDark, image, description } = props;
   const elementContainer = document.createElement('div');
   const wrapper = document.createElement('div');
   const textContainer = PersonTextContainer.CreateElement(props);
@@ -135,7 +135,7 @@ const CreatePersonBioElement = (props: TypePersonBioProps) => {
   }
 
   elementContainer.classList.add(ELEMENT_PERSON_BIO_CONTAINER);
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   return elementContainer;
 };

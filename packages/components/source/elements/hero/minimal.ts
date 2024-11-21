@@ -3,11 +3,15 @@ import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
 
-type TypeHeroMinimalProps = TypeTextContainerProps & TypeImageContainerProps;
+type TypeHeroMinimalProps = TypeTextContainerProps &
+  TypeImageContainerProps & {
+    isThemeLight?: boolean;
+    isThemeMaryland?: boolean;
+  };
 
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
-const { SansLargest, SansSmaller, CampaignLarge } = Typography;
+const { SansSmaller, CampaignLarge } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -172,18 +176,23 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
 `;
 
 export const CreateHeroMinimalElement = (element: TypeHeroMinimalProps) => {
-  const { theme } = element;
+  const { isThemeDark, isThemeLight, isThemeMaryland } = element;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const lock = document.createElement('div');
-  const text = TextContainer.CreateElement(element);
+  const text = TextContainer.CreateElement({
+    ...element,
+    isThemeDark: isThemeDark || isThemeMaryland,
+  });
   const asset = ImageContainer.CreateElement({
     ...element,
     isTypeMinimal: true,
   });
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  if (isThemeLight) container.setAttribute(ATTRIBUTE_THEME, THEME_LIGHT);
+  if (isThemeMaryland) container.setAttribute(ATTRIBUTE_THEME, THEME_MARYLAND);
 
   lock.classList.add(ELEMENT_HERO_LOCK);
 

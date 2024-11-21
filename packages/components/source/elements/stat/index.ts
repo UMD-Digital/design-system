@@ -6,7 +6,7 @@ type TypeStatElement = {
 };
 
 type TypeStatRequirements = TypeStatElement & {
-  theme?: string | null;
+  isThemeDark?: boolean;
   displayType?: string | null;
   size?: string | null;
   hasLine?: boolean;
@@ -73,7 +73,7 @@ const VarationThemeDarkStyles = `
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_TEXT}`]: Text.RichTextDark,
+      [`${OVERWRITE_THEME_DARK_TEXT}`]: Text.RichTextDarkAnimations,
     },
   })}
 
@@ -296,12 +296,12 @@ const MakeStat = ({ stat }: TypeStatElement) => {
 };
 
 const MakeDefaultLayout = (props: TypeStatRequirements) => {
-  const { theme, size, text, subText } = props;
+  const { isThemeDark, size, text, subText } = props;
 
   const wrapper = document.createElement('div');
   const statElement = MakeStat(props);
 
-  if (theme) wrapper.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) wrapper.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   if (size) wrapper.setAttribute(ATTRIBUTE_SIZE, size);
 
   wrapper.classList.add(ELEMENT_STAT_WRAPPER);

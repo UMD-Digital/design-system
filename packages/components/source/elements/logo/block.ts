@@ -7,12 +7,11 @@ import { Styles } from 'utilities';
 
 export type TypeLogoRequirements = {
   isBordered?: boolean;
-  theme?: string;
+  isThemeDark?: boolean;
   image?: HTMLElement | null;
   text?: HTMLElement | null;
 };
 
-const { Link } = Animations;
 const { Colors, Spacing } = Tokens;
 const { SansMin } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
@@ -115,7 +114,7 @@ const STYLES_LOGO_BLOCK_ELEMENT = `
 `;
 
 const CreateLogoBlockElement = (element: TypeLogoRequirements) => {
-  const { theme, image, text, isBordered = false } = element;
+  const { isThemeDark, image, text, isBordered = false } = element;
   if (!image) return null;
 
   const elementContainer = document.createElement('div');
@@ -125,7 +124,7 @@ const CreateLogoBlockElement = (element: TypeLogoRequirements) => {
   assetContainer.classList.add(ELEMENT_LOGO_BLOCK_ASSET);
 
   elementContainer.classList.add(ELEMENT_LOGO_BLOCK_CONTAINER);
-  if (theme) elementContainer.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   if (isBordered) elementContainer.setAttribute(ATTRIBUTE_BORDER, '');
   elementContainer.appendChild(assetContainer);
 

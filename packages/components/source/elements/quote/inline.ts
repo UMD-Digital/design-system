@@ -4,7 +4,8 @@ import Text, { TypeQuoteTextContainer } from './elements/text';
 import Image from './elements/image';
 
 export type TypeInlineInline = TypeQuoteTextContainer & {
-  theme: string;
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
   size: string;
   image: HTMLElement | null;
 };
@@ -269,7 +270,7 @@ const STYLES_QUOTE_INLINE_ELEMENT = `
 `;
 
 const CreateQuoteInlineElement = (props: TypeInlineInline) => {
-  const { size, image, theme } = props;
+  const { size, image, isThemeDark, isThemeMaryland } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const isSizeLarge = size === 'large';
@@ -298,7 +299,8 @@ const CreateQuoteInlineElement = (props: TypeInlineInline) => {
   wrapper.appendChild(textContainer);
 
   container.classList.add(QUOTE_INLINE_CONTAINER);
-  container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
+  if (isThemeMaryland) container.setAttribute(ATTRIBUTE_THEME, THEME_MARYLAND);
   container.setAttribute(ATTRIBUTE_SIZE, size);
   container.appendChild(wrapper);
 

@@ -1,5 +1,4 @@
 const ATTRIBUTE_BUTTON_TITLE = 'data-title';
-const ATTRIBUTE_INDEX = 'data-index';
 
 const ATTRIBUTE_ARIA_EXPANDED = 'aria-expanded';
 const ATTRIBUTE_ARIA_CONTROLS = 'aria-controls';

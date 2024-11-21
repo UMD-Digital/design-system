@@ -75,9 +75,9 @@ const CreateCardOverlayElement = (props: TypeCardOverlayImageElement) => {
   const elementDeclaration = document.createElement('div');
   const blockOverlayContainer = LayoutBlockOverlay.CreateElement({
     ...props,
-    theme: 'dark',
+    isThemeDark: true,
   });
-  const ctaIcon = CtaIcon.CreateElement({ ...props, theme: 'dark' });
+  const ctaIcon = CtaIcon.CreateElement({ ...props, isThemeDark: true });
 
   if (blockOverlayContainer) {
     if (isQuote) {

@@ -4,7 +4,7 @@ import { Styles } from 'utilities';
 type TypeSectionIntroWideProps = {
   headline?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
 };
 
 const { SansLargest } = Typography;
@@ -75,11 +75,11 @@ const STYLES_SECTION_INTRO_WIDE_ELEMENT = `
 `;
 
 const CreateSectionIntroWideElement = (element: TypeSectionIntroWideProps) => {
-  const { headline, actions, theme } = element;
+  const { headline, actions, isThemeDark } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
 
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   container.classList.add(ELEMENT_LIST_CONTAINER);
   wrapper.classList.add(ELEMENT_LIST_CONTAINER_WRAPPER);
 

@@ -3,7 +3,7 @@ import { Animation, Performance, Styles } from 'utilities';
 
 type TypeTabsProps = {
   tabsContainer: HTMLElement;
-  theme?: string;
+  isThemeDark?: boolean;
   shadowContent?: HTMLSlotElement;
   topPosition?: string | null;
 };
@@ -23,7 +23,7 @@ type TypeGetState = {
   getIsFlexLayout: () => boolean;
   getButtonWidths: () => number;
   getButtonHeights: () => number;
-  getIsThemeDark: () => boolean;
+  getIsThemeDark: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -135,7 +135,6 @@ const SetDisplay = ({
   const buttons = getButtons();
   const contents = getContents();
   const isFlexLayout = getIsFlexLayout();
-  const isThemeDark = getIsThemeDark();
   const activeTab = getActiveTab();
   const buttonWidths = getButtonWidths();
   const buttonHeights = getButtonHeights();
@@ -155,10 +154,10 @@ const SetDisplay = ({
     buttons.map((button, index) => {
       if (index === activeTab) {
         button.setAttribute(ATTRIBUTE_ARIA_EXPANDED, 'true');
-        if (isThemeDark) button.style.color = `${Colors.white}`;
+        if (getIsThemeDark) button.style.color = `${Colors.white}`;
       } else {
         button.setAttribute(ATTRIBUTE_ARIA_EXPANDED, 'false');
-        if (isThemeDark) button.style.color = `${Colors.gray.light}`;
+        if (getIsThemeDark) button.style.color = `${Colors.gray.light}`;
       }
     });
 
@@ -264,7 +263,7 @@ const SetDisplay = ({
 
 const CreateTabsElement = (props: TypeTabsProps) =>
   (() => {
-    const { theme, tabsContainer, shadowContent, topPosition } = props;
+    const { isThemeDark, tabsContainer, shadowContent, topPosition } = props;
     const declaration = document.createElement('div');
     const container = document.createElement('div');
     const contentStrip = document.createElement('div');
@@ -293,7 +292,7 @@ const CreateTabsElement = (props: TypeTabsProps) =>
       getIsFlexLayout: () => isFlexLayout,
       getButtonWidths: () => buttonWidths,
       getButtonHeights: () => buttonHeights,
-      getIsThemeDark: () => theme === THEME_DARK,
+      getIsThemeDark: isThemeDark || false,
     };
     const GetContext = { GetElements, GetState };
     const SetActiveTab = (index: number) => {
@@ -326,7 +325,7 @@ const CreateTabsElement = (props: TypeTabsProps) =>
           button.style[keyRef] = SansLarge[keyRef];
         });
 
-        if (theme === THEME_DARK) {
+        if (isThemeDark) {
           button.style.color = Colors.white;
         }
       });
@@ -370,7 +369,7 @@ const CreateTabsElement = (props: TypeTabsProps) =>
 
     container.appendChild(contentStrip);
     container.classList.add(ELEMENT_CONTAINER);
-    if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);

@@ -5,7 +5,12 @@ declare global {
 }
 
 import { Tokens, Animations } from '@universityofmaryland/variables';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import {
+  Attributes,
+  AttributeNames,
+  AttributesValues,
+  Slots,
+} from 'shadow-dom-model';
 import { MarkupCreate, MarkupModify, Styles } from 'utilities';
 
 const { Colors } = Tokens;
@@ -107,8 +112,8 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
-  const theme =
-    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const isThemeDark = Attributes.isThemeDark({ element });
+
   const pathsSlot = SlotWithDefaultStyling({
     element,
     slotRef: Slots.PATHS,
@@ -117,7 +122,8 @@ const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
   if (pathsSlot) {
     const links = pathsSlot.querySelectorAll('a') as NodeListOf<HTMLElement>;
 
-    pathsSlot.setAttribute(AttributeNames.THEME, theme);
+    if (isThemeDark)
+      pathsSlot.setAttribute(AttributeNames.THEME, AttributesValues.THEME_DARK);
     pathsSlot.classList.add(ELEMENT_CONTAINER);
 
     for (const linkElement of links) {

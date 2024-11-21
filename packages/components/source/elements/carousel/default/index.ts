@@ -5,7 +5,7 @@ type TypeCarouselRequirements = {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
   blocks: HTMLElement[];
-  theme?: string | null;
+  isThemeDark?: boolean;
   gridGap?: string | null;
   hasLeftButton?: boolean;
   hasRightButton?: boolean;
@@ -126,7 +126,7 @@ const STYLES_CAROUSEL_ELEMENT = `
 const CreateCarouselElement = (props: TypeCarouselRequirements) =>
   (() => {
     const {
-      theme,
+      isThemeDark,
       gridGap,
       hasLeftButton = true,
       hasRightButton = true,
@@ -173,7 +173,7 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
 
     container.classList.add(CAROUSEL_CONTAINER);
     container.appendChild(wrapper);
-    if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+    if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);

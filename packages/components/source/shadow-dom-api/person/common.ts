@@ -5,10 +5,10 @@ const { SlotWithDefaultStyling } = MarkupCreate;
 
 export const CommonPersonData = ({
   element,
-  theme,
+  isThemeDark,
 }: {
   element: HTMLElement;
-  theme?: string | null;
+  isThemeDark?: boolean;
 }) => ({
   image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
   name: SlotWithDefaultStyling({ element, slotRef: Slots.NAME }),
@@ -25,5 +25,5 @@ export const CommonPersonData = ({
   }),
   subText: SlotWithDefaultStyling({ element, slotRef: Slots.SUB_TEXT }),
   actions: Slots.SlottedActions({ element }),
-  theme,
+  isThemeDark,
 });

@@ -8,7 +8,6 @@ type TypeEventListProps = {
   eventDetails: HTMLElement;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string | null;
   isThemeDark?: boolean;
 };
 

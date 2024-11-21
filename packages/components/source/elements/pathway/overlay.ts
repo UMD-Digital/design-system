@@ -7,6 +7,8 @@ type TypePathwayOverlayProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
     isImageRight: boolean;
     includesAnimation?: boolean;
+    isThemeLight?: boolean;
+    isThemeMaryland?: boolean;
   };
 
 const { Colors, Spacing } = Tokens;
@@ -374,7 +376,13 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
   const lock = document.createElement('div');
   const lockWrapper = document.createElement('div');
   const background = document.createElement('div');
-  const { isImageRight = true, includesAnimation, theme } = element;
+  const {
+    isImageRight = true,
+    includesAnimation,
+    isThemeDark,
+    isThemeLight,
+    isThemeMaryland,
+  } = element;
 
   const textContainer = TextContainer.CreateElement(element);
   const imageContainer = ImageContainer.CreateElement(element);
@@ -383,7 +391,9 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
   };
 
   container.classList.add(PATHWAY_OVERLAY_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  if (isThemeLight) container.setAttribute(ATTRIBUTE_THEME, THEME_LIGHT);
+  if (isThemeMaryland) container.setAttribute(ATTRIBUTE_THEME, THEME_MARYLAND);
 
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,

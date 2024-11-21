@@ -2,7 +2,7 @@ import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 type TypeQuoteStatement = {
-  theme: string;
+  isThemeDark?: boolean;
 };
 
 const { Spacing } = Tokens;

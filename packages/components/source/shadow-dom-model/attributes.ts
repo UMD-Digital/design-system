@@ -105,6 +105,22 @@ const isDisplayPromo = createAttributeCheck(
 
 // Theme checks with deprecated fallbacks
 
+const isThemeDarkDeprecated = (props: AttributeElementProps): boolean =>
+  checkDeprecatedAttribute({
+    ...props,
+    attributeNameOld: AttributeNames.THEME,
+    attributeNameNew: AttributeNames.THEME_DATA,
+    attributeValue: AttributesValues.THEME_DARK,
+  });
+
+const isThemeGoldDeprecated = (props: AttributeElementProps): boolean =>
+  checkDeprecatedAttribute({
+    ...props,
+    attributeNameOld: AttributeNames.THEME,
+    attributeNameNew: AttributeNames.THEME_DATA,
+    attributeValue: AttributesValues.THEME_GOLD,
+  });
+
 const isThemeLightDeprecated = (props: AttributeElementProps): boolean =>
   checkDeprecatedAttribute({
     ...props,
@@ -113,12 +129,28 @@ const isThemeLightDeprecated = (props: AttributeElementProps): boolean =>
     attributeValue: AttributesValues.THEME_LIGHT,
   });
 
-const isThemeDarkDeprecated = (props: AttributeElementProps): boolean =>
+const isThemeMarylandDeprecated = (props: AttributeElementProps): boolean =>
   checkDeprecatedAttribute({
     ...props,
     attributeNameOld: AttributeNames.THEME,
     attributeNameNew: AttributeNames.THEME_DATA,
+    attributeValue: AttributesValues.THEME_MARYLAND,
+  });
+
+const isThemeDark = (props: AttributeElementProps): boolean =>
+  isThemeDarkDeprecated(props) ||
+  isAttributeEqual({
+    ...props,
+    attributeName: AttributeNames.THEME_DATA,
     attributeValue: AttributesValues.THEME_DARK,
+  });
+
+const isThemeGold = (props: AttributeElementProps): boolean =>
+  isThemeGoldDeprecated(props) ||
+  isAttributeEqual({
+    ...props,
+    attributeName: AttributeNames.THEME_DATA,
+    attributeValue: AttributesValues.THEME_GOLD,
   });
 
 const isThemeLight = (props: AttributeElementProps): boolean =>
@@ -129,12 +161,12 @@ const isThemeLight = (props: AttributeElementProps): boolean =>
     attributeValue: AttributesValues.THEME_LIGHT,
   });
 
-const isThemeDark = (props: AttributeElementProps): boolean =>
-  isThemeDarkDeprecated(props) ||
+const isThemeMaryland = (props: AttributeElementProps): boolean =>
+  isThemeMarylandDeprecated(props) ||
   isAttributeEqual({
     ...props,
     attributeName: AttributeNames.THEME_DATA,
-    attributeValue: AttributesValues.THEME_DARK,
+    attributeValue: AttributesValues.THEME_MARYLAND,
   });
 
 // Visual state checks
@@ -199,8 +231,10 @@ export default {
   isDisplayFeature,
   isDisplayList,
   isDisplayPromo,
-  isThemeLight,
   isThemeDark,
+  isThemeGold,
+  isThemeLight,
+  isThemeMaryland,
   isTransparent,
   isStateOpen,
   isShowIcon,

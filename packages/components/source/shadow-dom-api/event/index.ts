@@ -72,7 +72,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const eventDetails = EventElements.Meta.CreateElement(EventDetailMeta);
   const eventDetailsDark = EventElements.Meta.CreateElement({
     ...EventDetailMeta,
-    theme: 'dark',
+    isThemeDark: true,
   });
   const dateSign = EventElements.Sign.CreateElement(EventSignData);
   const dateSignLarge = EventElements.Sign.CreateElement({
@@ -82,18 +82,18 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const dateSignLargeLight = EventElements.Sign.CreateElement({
     ...EventSignData,
     isLargeSize: true,
-    theme: 'light',
+    isThemeDark: false,
   });
   const dateSignLargeDark = EventElements.Sign.CreateElement({
     ...EventSignData,
     isLargeSize: true,
-    theme: 'dark',
+    isThemeDark: true,
   });
 
   if (Attributes.isDisplayFeature({ element })) {
     return EventFeature.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails: isThemeDark ? eventDetailsDark : eventDetails,
+      eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
       dateSign: isThemeDark ? dateSignLargeLight : dateSignLarge,
     });
   }
@@ -101,7 +101,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   if (Attributes.isDisplayPromo({ element })) {
     return EventPromo.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails: eventDetailsDark,
+      eventDetails: eventDetails,
       dateSign,
     });
   }
@@ -109,14 +109,14 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   if (Attributes.isDisplayList({ element })) {
     return EventList.CreateElement({
       ...MakeCommonData({ element }),
-      eventDetails: isThemeDark ? eventDetailsDark : eventDetails,
+      eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
       dateSign: isThemeDark ? dateSignLargeDark : dateSignLarge,
     });
   }
 
   return EventBlock.CreateElement({
     ...MakeCommonData({ element }),
-    eventDetails: isThemeDark ? eventDetailsDark : eventDetails,
+    eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
   });
 };
 

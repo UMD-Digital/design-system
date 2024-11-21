@@ -5,6 +5,7 @@ declare global {
 }
 
 import { MarkupCreate } from 'utilities';
+import { Attributes } from 'shadow-dom-model';
 import { ComponentStyles, CreateElement } from './elements';
 import { VARIABLES } from './globals';
 
@@ -26,14 +27,10 @@ export class UMDFooterElement extends HTMLElement {
     this.style.display = 'block';
   }
 
-  static get observedAttributes() {
-    return ['type', 'theme'];
-  }
-
   connectedCallback() {
     const element = this;
     element._type = this.getAttribute('type') || VERSION_TYPE_SIMPLE;
-    element._theme = this.getAttribute('theme') || THEME_OPTION_DARK;
+    element._theme = Attributes.isThemeLight({ element }) ? 'light' : 'dark';
 
     this._shadow.appendChild(CreateElement({ element }));
   }

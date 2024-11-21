@@ -69,14 +69,12 @@ const STYLES_INDICATOR = `
 const CreateSlideIndicator = ({
   count,
   overlayColor,
-  theme,
   isThemeDark,
   isThemeLight,
   callback,
 }: {
   count: number;
   overlayColor?: string;
-  theme?: string | null;
   isThemeDark?: boolean;
   isThemeLight?: boolean;
   callback: (arg: number) => void;

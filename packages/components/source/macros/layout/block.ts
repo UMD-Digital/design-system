@@ -4,7 +4,6 @@ import TextLockupSmall from '../text-lockup/small';
 import ScalingTextLockup from '../text-lockup/small-scaling';
 
 export type TypeBlockContainer = {
-  theme?: string | null;
   isAligned?: boolean;
   isBordered?: boolean;
   isThemeDark?: boolean;

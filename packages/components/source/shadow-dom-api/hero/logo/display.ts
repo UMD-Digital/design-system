@@ -3,6 +3,8 @@ import { HeroLogo, HeroElements } from 'elements';
 import { UMDHeroLogoElement } from './index';
 import { CommonHeroData } from '../common';
 
+import { Attributes } from 'shadow-dom-model';
+
 export const ComponentStyles = `
   :host {
     display: block;
@@ -24,7 +26,9 @@ export const CreateShadowDom = ({
 
   shadow.appendChild(
     HeroLogo.CreateElement({
-      theme: element.getAttribute('theme'),
+      isThemeDark: Attributes.isThemeDark({
+        element,
+      }),
       ...CommonHeroData({
         element,
       }),

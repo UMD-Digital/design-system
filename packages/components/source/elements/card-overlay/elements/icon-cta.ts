@@ -1,10 +1,10 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { TextLockupSmall } from 'macros';
 import { AssetIcon } from 'utilities';
 
 export type TypeCardOverlayCtaIcon = {
   ctaIcon?: HTMLElement | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
+  isThemeLight?: boolean;
 };
 
 const { Colors, Spacing } = Tokens;
@@ -92,7 +92,11 @@ const STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const MakeCtaIconContainer = ({ ctaIcon, theme }: TypeCardOverlayCtaIcon) => {
+const MakeCtaIconContainer = ({
+  ctaIcon,
+  isThemeDark,
+  isThemeLight,
+}: TypeCardOverlayCtaIcon) => {
   const container = document.createElement('div');
 
   if (!ctaIcon) return null;
@@ -122,7 +126,8 @@ const MakeCtaIconContainer = ({ ctaIcon, theme }: TypeCardOverlayCtaIcon) => {
   }
 
   container.appendChild(ctaIcon);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  if (isThemeLight) container.setAttribute(ATTRIBUTE_THEME, THEME_LIGHT);
 
   return container;
 };

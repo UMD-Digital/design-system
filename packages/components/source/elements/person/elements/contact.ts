@@ -7,7 +7,7 @@ export type TypeContactProps = {
   linkendIn?: HTMLElement | null;
   address?: HTMLElement | null;
   additionalContact?: HTMLElement | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
@@ -172,13 +172,13 @@ const CreatePersonContactContainer = ({
   linkendIn,
   address,
   additionalContact,
-  theme,
+  isThemeDark,
 }: TypeContactProps) => {
   if (!phone && !email && !linkendIn && !address && !additionalContact)
     return null;
 
   const container = document.createElement('div');
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   container.classList.add(ELEMENT_PERSON_CONTACT_CONTAINER);
 
   if (phone) {

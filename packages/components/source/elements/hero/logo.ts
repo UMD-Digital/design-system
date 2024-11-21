@@ -158,7 +158,7 @@ const STYLES_HERO_LOGO_ELEMENT = `
 `;
 
 export const CreateHeroLogoElement = (element: TypeHeroLogoProps) => {
-  const { theme } = element;
+  const { isThemeDark } = element;
 
   const declaration = document.createElement('div');
   const container = document.createElement('div');
@@ -167,7 +167,7 @@ export const CreateHeroLogoElement = (element: TypeHeroLogoProps) => {
   const asset = ImageContainer.CreateElement(element);
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   if (asset) {
     lock.appendChild(asset);

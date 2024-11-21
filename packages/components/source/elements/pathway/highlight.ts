@@ -211,14 +211,14 @@ const CreateHighlightColumn = ({
 };
 
 const CreatePathwayHighlightElement = (element: TypePathwayHighlightProps) => {
-  const { theme } = element;
+  const { isThemeDark } = element;
   const container = document.createElement('div');
   const lock = document.createElement('div');
 
   const textContainer = TextContainer.CreateElement(element);
   const highlightContainer = CreateHighlightColumn(element);
 
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   container.classList.add(PATHWAY_HIGHLIGHT_CONTAINER);
   lock.classList.add(PATHWAY_HIGHLIGHT_CONTAINER_LOCK);
 

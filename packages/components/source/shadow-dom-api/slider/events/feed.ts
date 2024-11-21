@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SliderEvents, FeedsSlides } from 'elements';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const ELEMENT_NAME = 'umd-element-slider-events-feed';
@@ -28,8 +28,7 @@ const CreateShadowDom = async ({
   element: UMDSliderEventsFeedElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme =
-    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const isThemeDark = Attributes.isThemeDark({ element });
   const token = element.getAttribute(AttributeNames.FEED_TOKEN);
   const type = element.getAttribute(AttributeNames.TYPE) || 'academic';
   const categories = element.getAttribute('categories');
@@ -41,7 +40,7 @@ const CreateShadowDom = async ({
     token,
     type,
     categories,
-    theme,
+    isThemeDark,
   });
 
   if (!slides) return;
@@ -49,7 +48,7 @@ const CreateShadowDom = async ({
   slides.forEach((slide) => dataSlider.appendChild(slide));
 
   const slider = SliderEvents.CreateElement({
-    theme,
+    isThemeDark,
     dataSlider,
     headline: Slots.SlottedHeadline({ element }),
     actions: Slots.SlottedActions({ element }),

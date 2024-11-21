@@ -10,7 +10,12 @@ import {
   QuoteInline,
   QuoteStatement,
 } from 'elements';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import {
+  Attributes,
+  AttributeNames,
+  AttributesValues,
+  Slots,
+} from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
@@ -30,13 +35,12 @@ const styles = `
 `;
 
 const MakeData = ({ element }: { element: UMDElementQuote }) => {
-  const theme =
-    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const isThemeDark = Attributes.isThemeDark({ element });
+  const isThemeMaryland = Attributes.isThemeMaryland({ element });
   const isTransparent =
     element.getAttribute(AttributeNames.VISUAL_TRANSPARENT) === 'true';
 
   return {
-    theme,
     quote: SlotWithDefaultStyling({ element, slotRef: Slots.QUOTE }),
     image: SlotWithDefaultStyling({ element, slotRef: Slots.IMAGE }),
     attribution: SlotWithDefaultStyling({
@@ -49,6 +53,8 @@ const MakeData = ({ element }: { element: UMDElementQuote }) => {
     }),
     action: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
     isTransparent,
+    isThemeDark,
+    isThemeMaryland,
   };
 };
 

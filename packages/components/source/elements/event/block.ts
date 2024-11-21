@@ -12,7 +12,6 @@ type TypeEventBlockProps = {
   image: HTMLImageElement | HTMLAnchorElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  theme?: string | null;
   isThemeDark?: boolean;
 };
 

@@ -13,13 +13,14 @@ export type TypePathwayTextContainer = {
   action: HTMLElement | null;
   eventDetails?: HTMLElement | null;
   stats?: HTMLElement | null;
-  theme?: string | null;
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
 };
 
 const { Spacing, Colors } = Tokens;
 const { Eyebrow, Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
-const { SansLargest, SansLarger } = Typography;
+const { SansLargest } = Typography;
 
 const { ConvertJSSObjectToStyles } = Styles;
 
@@ -237,7 +238,8 @@ const CreatePathwayTextContainer = ({
   text,
   action,
   stats,
-  theme,
+  isThemeDark,
+  isThemeMaryland,
 }: TypePathwayTextContainer) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -277,7 +279,8 @@ const CreatePathwayTextContainer = ({
     wrapper.appendChild(stats);
   }
 
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  if (isThemeMaryland) container.setAttribute(ATTRIBUTE_THEME, THEME_MARYLAND);
   container.classList.add(ELEMENT_TEXT_CONTAINER);
   container.appendChild(wrapper);
 

@@ -25,7 +25,7 @@ type EventType = DateInformaitonType & {
 };
 
 export type TypeMetaDisplay = EventType & {
-  theme?: string | null;
+  isThemeDark?: boolean;
   showTime?: boolean;
 };
 
@@ -230,7 +230,7 @@ const RowDateInfo = (info: TypeMetaDisplay) => {
 };
 
 const CreateEventMetaElement = (info: TypeMetaDisplay) => {
-  const { location, theme } = info;
+  const { location, isThemeDark } = info;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const dateRow = RowDateInfo(info);
@@ -250,7 +250,7 @@ const CreateEventMetaElement = (info: TypeMetaDisplay) => {
 
   container.appendChild(wrapper);
   container.classList.add(ELEMENT_EVENTS_DATE_ROW);
-  if (theme) container.setAttribute(ATTRIBUTE_THEME, theme);
+  if (!isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   return container;
 };

@@ -10,6 +10,7 @@ type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
+  isThemeLight?: boolean;
 };
 
 const { Spacing, Colors } = Tokens;

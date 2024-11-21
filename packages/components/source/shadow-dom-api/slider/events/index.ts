@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SliderEvents } from 'elements';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const ELEMENT_NAME = 'umd-element-slider-events';
@@ -23,8 +23,7 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const theme =
-    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const isThemeDark = Attributes.isThemeDark({ element });
   const dataSlider = document.createElement('div');
   const dataSliderSlot = element.querySelector(`[slot=${Slots.EVENT_LIST}]`);
 
@@ -35,7 +34,7 @@ const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   dataSlider.innerHTML = dataSliderSlot.innerHTML;
 
   const slider = SliderEvents.CreateElement({
-    theme,
+    isThemeDark,
     dataSlider,
     headline: Slots.SlottedHeadline({ element }),
     actions: Slots.SlottedActions({ element }),

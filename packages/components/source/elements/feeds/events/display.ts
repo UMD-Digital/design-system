@@ -95,11 +95,11 @@ const CreateHeadline = ({ text, url }: { text: string; url: string }) => {
 
 const CommonDisplay = ({
   entry,
-  theme,
+  isThemeDark,
   showTime,
 }: {
   entry: EventType;
-  theme?: string | null;
+  isThemeDark?: boolean;
   showTime?: boolean;
 }) => ({
   image: CreateImage({ images: entry.image, url: entry.url }),
@@ -107,18 +107,18 @@ const CommonDisplay = ({
   text: CreateText({ text: entry.summary }),
   eventDetails: EventElements.Meta.CreateElement({
     ...entry,
-    theme,
+    isThemeDark: !isThemeDark,
     showTime,
   }),
-  theme,
+  isThemeDark,
 });
 
 const CreateEventsGrouped = ({
   entries,
-  theme,
+  isThemeDark,
 }: {
   entries: EventType[];
-  theme?: string | null;
+  isThemeDark?: boolean;
 }) => {
   const currentDateStamp = new Date();
   const weekFromDateStamp = new Date(
@@ -151,9 +151,13 @@ const CreateEventsGrouped = ({
     dateBanner: getDateBanner(entry),
     timeStamp: entry.startStamp,
     html: EventList.CreateElement({
-      ...CommonDisplay({ entry, theme, showTime: entry.allDay ? false : true }),
-      dateSign: EventElements.Sign.CreateElement({ ...entry, theme }),
-      theme,
+      ...CommonDisplay({
+        entry,
+        isThemeDark,
+        showTime: entry.allDay ? false : true,
+      }),
+      dateSign: EventElements.Sign.CreateElement({ ...entry, isThemeDark }),
+      isThemeDark,
     }),
   }));
 
@@ -186,18 +190,18 @@ const CreateEventsGrouped = ({
 const CreateEventFeedDisplay = ({
   entries,
   isTypeGrid,
-  theme,
+  isThemeDark,
 }: {
   entries: EventType[];
   isTypeGrid?: boolean;
-  theme?: string | null;
+  isThemeDark?: boolean;
 }) => {
   if (isTypeGrid) {
     return entries.map((entry) =>
       EventBlock.CreateElement({
         ...CommonDisplay({
           entry,
-          theme,
+          isThemeDark,
           showTime: entry.allDay ? false : true,
         }),
       }),
@@ -206,10 +210,14 @@ const CreateEventFeedDisplay = ({
 
   return entries.map((entry) =>
     EventList.CreateElement({
-      ...CommonDisplay({ entry, theme, showTime: entry.allDay ? false : true }),
+      ...CommonDisplay({
+        entry,
+        isThemeDark,
+        showTime: entry.allDay ? false : true,
+      }),
       dateSign: EventElements.Sign.CreateElement({
         ...entry,
-        theme,
+        isThemeDark,
         isLargeSize: true,
       }),
     }),

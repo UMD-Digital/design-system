@@ -5,7 +5,7 @@ declare global {
 }
 
 import { EventLockupDate, EventElements } from 'elements';
-import { AttributeNames, AttributesValues, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupEvent, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -23,8 +23,8 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
-  const theme =
-    element.getAttribute(AttributeNames.THEME) || AttributesValues.THEME_LIGHT;
+  const isThemeDark = Attributes.isThemeDark({ element });
+
   const headline = SlotWithDefaultStyling({
     element,
     slotRef: Slots.HEADLINE,
@@ -39,7 +39,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   if (!startDate) {
     return EventLockupDate.CreateElement({
       headline,
-      theme,
+      isThemeDark,
     });
   }
 
@@ -49,13 +49,13 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   });
   const dateSign = EventElements.Sign.CreateElement({
     ...EventSignData,
-    theme,
+    isThemeDark,
   });
 
   return EventLockupDate.CreateElement({
     headline,
     dateSign,
-    theme,
+    isThemeDark,
   });
 };
 

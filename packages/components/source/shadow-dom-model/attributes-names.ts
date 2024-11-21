@@ -71,12 +71,13 @@ const LayoutAttributes = {
 
 const StateAttributes = {
   RESIZE: 'resize',
-  STATE: 'state',
+  STATE_DEPRECATD: 'state',
+  STATE: 'data-state',
 };
 
 const ThemeAttributes = {
-  THEME: 'theme',
-  THEME_DATA: 'data-theme',
+  THEME_DEPRECATD: 'theme',
+  THEME: 'data-theme',
 };
 
 const TypeAttributes = {

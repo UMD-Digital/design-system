@@ -108,32 +108,32 @@ const isDisplayPromo = createAttributeCheck(
 const isThemeDarkDeprecated = (props: AttributeElementProps): boolean =>
   checkDeprecatedAttribute({
     ...props,
-    attributeNameOld: AttributeNames.THEME,
-    attributeNameNew: AttributeNames.THEME_DATA,
+    attributeNameOld: AttributeNames.THEME_DEPRECATD,
+    attributeNameNew: AttributeNames.THEME,
     attributeValue: AttributesValues.THEME_DARK,
   });
 
 const isThemeGoldDeprecated = (props: AttributeElementProps): boolean =>
   checkDeprecatedAttribute({
     ...props,
-    attributeNameOld: AttributeNames.THEME,
-    attributeNameNew: AttributeNames.THEME_DATA,
+    attributeNameOld: AttributeNames.THEME_DEPRECATD,
+    attributeNameNew: AttributeNames.THEME,
     attributeValue: AttributesValues.THEME_GOLD,
   });
 
 const isThemeLightDeprecated = (props: AttributeElementProps): boolean =>
   checkDeprecatedAttribute({
     ...props,
-    attributeNameOld: AttributeNames.THEME,
-    attributeNameNew: AttributeNames.THEME_DATA,
+    attributeNameOld: AttributeNames.THEME_DEPRECATD,
+    attributeNameNew: AttributeNames.THEME,
     attributeValue: AttributesValues.THEME_LIGHT,
   });
 
 const isThemeMarylandDeprecated = (props: AttributeElementProps): boolean =>
   checkDeprecatedAttribute({
     ...props,
-    attributeNameOld: AttributeNames.THEME,
-    attributeNameNew: AttributeNames.THEME_DATA,
+    attributeNameOld: AttributeNames.THEME_DEPRECATD,
+    attributeNameNew: AttributeNames.THEME,
     attributeValue: AttributesValues.THEME_MARYLAND,
   });
 
@@ -141,7 +141,7 @@ const isThemeDark = (props: AttributeElementProps): boolean =>
   isThemeDarkDeprecated(props) ||
   isAttributeEqual({
     ...props,
-    attributeName: AttributeNames.THEME_DATA,
+    attributeName: AttributeNames.THEME,
     attributeValue: AttributesValues.THEME_DARK,
   });
 
@@ -149,7 +149,7 @@ const isThemeGold = (props: AttributeElementProps): boolean =>
   isThemeGoldDeprecated(props) ||
   isAttributeEqual({
     ...props,
-    attributeName: AttributeNames.THEME_DATA,
+    attributeName: AttributeNames.THEME,
     attributeValue: AttributesValues.THEME_GOLD,
   });
 
@@ -157,7 +157,7 @@ const isThemeLight = (props: AttributeElementProps): boolean =>
   isThemeLightDeprecated(props) ||
   isAttributeEqual({
     ...props,
-    attributeName: AttributeNames.THEME_DATA,
+    attributeName: AttributeNames.THEME,
     attributeValue: AttributesValues.THEME_LIGHT,
   });
 
@@ -165,20 +165,33 @@ const isThemeMaryland = (props: AttributeElementProps): boolean =>
   isThemeMarylandDeprecated(props) ||
   isAttributeEqual({
     ...props,
-    attributeName: AttributeNames.THEME_DATA,
+    attributeName: AttributeNames.THEME,
     attributeValue: AttributesValues.THEME_MARYLAND,
   });
 
-// Visual state checks
+// State checks
+
+const isStateOpenDeprecated = (props: AttributeElementProps): boolean =>
+  checkDeprecatedAttribute({
+    ...props,
+    attributeNameOld: AttributeNames.STATE_DEPRECATD,
+    attributeNameNew: AttributeNames.STATE,
+    attributeValue: AttributesValues.STATE_OPENED,
+  });
+
+const isStateOpen = (props: AttributeElementProps): boolean =>
+  isStateOpenDeprecated(props) ||
+  isAttributeEqual({
+    ...props,
+    attributeName: AttributeNames.STATE,
+    attributeValue: AttributesValues.STATE_OPENED,
+  });
+
+// Visual checks
 
 const isTransparent = createAttributeCheck(
   AttributeNames.VISUAL_TRANSPARENT,
   AttributesValues.STATE_TRUE,
-);
-
-const isStateOpen = createAttributeCheck(
-  AttributeNames.STATE,
-  AttributesValues.STATE_OPENED,
 );
 
 const isShowIcon = createAttributeCheck(

@@ -5,13 +5,15 @@ type SlotProps = {
   isDefaultStyling?: boolean;
 };
 
-type SlotOptionProps = SlotProps & {
+type LightDomElementProps = {
   type: string;
 };
 
+type SlotOptionProps = SlotProps & LightDomElementProps;
+
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
-const CommonSlotNames = {
+const name = {
   ACTIONS: 'actions',
   ADDITIONAL_CONTACT: 'additional-contact',
   ADDITIONAL: 'additional',
@@ -76,27 +78,32 @@ const SlotOptions = ({
   return Node.slot({ type });
 };
 
-const SlottedHeadline = (props: SlotProps) =>
-  SlotOptions({ ...props, type: CommonSlotNames.HEADLINE });
+const headline = (props: SlotProps) =>
+  SlotOptions({ ...props, type: name.HEADLINE });
 
-const SlottedEyebrow = (props: SlotProps) =>
-  SlotOptions({ ...props, type: CommonSlotNames.EYEBROW });
+const eyebrow = (props: SlotProps) =>
+  SlotOptions({ ...props, type: name.EYEBROW });
 
-const SlottedDate = (props: SlotProps) =>
-  SlotOptions({ ...props, type: CommonSlotNames.DATE });
+const date = (props: SlotProps) => SlotOptions({ ...props, type: name.DATE });
 
-const SlottedText = (props: SlotProps) =>
-  SlotOptions({ ...props, type: CommonSlotNames.TEXT });
+const text = (props: SlotProps) => SlotOptions({ ...props, type: name.TEXT });
 
-const SlottedActions = (props: SlotProps) =>
-  SlotOptions({ ...props, type: CommonSlotNames.ACTIONS });
+const body = (props: SlotProps) => SlotOptions({ ...props, type: name.BODY });
+
+const actions = (props: SlotProps) =>
+  SlotOptions({ ...props, type: name.ACTIONS });
+
+const defined = {
+  headline,
+  eyebrow,
+  body,
+  date,
+  text,
+  actions,
+};
 
 export default {
-  ...CommonSlotNames,
+  name,
+  defined,
   SlotOptions,
-  SlottedHeadline,
-  SlottedEyebrow,
-  SlottedDate,
-  SlottedText,
-  SlottedActions,
 };

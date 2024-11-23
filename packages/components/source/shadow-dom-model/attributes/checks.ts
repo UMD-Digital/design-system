@@ -1,5 +1,5 @@
-import AttributeNames from './attributes-names';
-import AttributesValues from './attributes-value';
+import AttributeNames from './names';
+import AttributesValues from './values';
 
 // Types
 

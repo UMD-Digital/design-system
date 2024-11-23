@@ -1,18 +1,3 @@
-// Types
-
-export type DisplayValue = (typeof DisplayValues)[keyof typeof DisplayValues];
-export type LayoutValue = (typeof LayoutValues)[keyof typeof LayoutValues];
-export type SizeValue = (typeof SizeValues)[keyof typeof SizeValues];
-export type StateValue = (typeof StateValues)[keyof typeof StateValues];
-export type ThemeValue = (typeof ThemeValues)[keyof typeof ThemeValues];
-
-export type AttributeValue =
-  | DisplayValue
-  | LayoutValue
-  | SizeValue
-  | StateValue
-  | ThemeValue;
-
 // Values
 
 const DisplayValues = {

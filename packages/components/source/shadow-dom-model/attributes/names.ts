@@ -1,32 +1,3 @@
-// Types
-
-type AnimationKeys = keyof typeof AnimationAttributes;
-type DisplayKeys = keyof typeof DisplayAttributes;
-type FeedKeys = keyof typeof FeedAttributes;
-type OptionKeys = keyof typeof OptionAttributes;
-type InformationKeys = keyof typeof InformationAttributes;
-type LayoutKeys = keyof typeof LayoutAttributes;
-type StateKeys = keyof typeof StateAttributes;
-type ThemeKeys = keyof typeof ThemeAttributes;
-type TypeKeys = keyof typeof TypeAttributes;
-type SharingKeys = keyof typeof SharingAttributes;
-type SocialKeys = keyof typeof SocialAttributes;
-type VisualKeys = keyof typeof VisualAttributes;
-
-export type AttributeName =
-  | AnimationKeys
-  | DisplayKeys
-  | FeedKeys
-  | OptionKeys
-  | InformationKeys
-  | LayoutKeys
-  | StateKeys
-  | ThemeKeys
-  | TypeKeys
-  | SharingKeys
-  | SocialKeys
-  | VisualKeys;
-
 // Options
 
 const AnimationAttributes = {

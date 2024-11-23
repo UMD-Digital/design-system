@@ -1,114 +1,59 @@
-declare global {
-  interface Window {
-    UMDAccordionElement: typeof UMDAccordionElement;
-  }
-}
-
 import { Accordion } from 'elements';
-import {
-  Attributes,
-  AttributeNames,
-  AttributesValues,
-  Slots,
-} from 'shadow-dom-model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'shadow-dom-model';
 
-const { Node } = MarkupCreate;
+const tagName = 'umd-element-accordion-item';
 
-const ELEMENT_NAME = 'umd-element-accordion-item';
-
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.ResetString}
-  ${Accordion.Styles}
-`;
-
-const styleTemplate = Node.stylesTemplate({ styles });
-const CreateShadowDom = ({ element }: { element: UMDAccordionElement }) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeLight = Attributes.isThemeLight({
-    element,
-  });
-  const isThemeDark = Attributes.isThemeDark({
-    element,
-  });
-  const isStateOpen = Attributes.isStateOpen({
-    element,
+const createComponent = (element: HTMLElement) =>
+  Accordion.CreateElement({
+    body: Slots.defined.body({ element, isDefaultStyling: false }),
+    headline: Slots.defined.headline({ element }),
+    isThemeLight: Attributes.checks.isThemeLight({
+      element,
+    }),
+    isThemeDark: Attributes.checks.isThemeDark({
+      element,
+    }),
+    isStateOpen: Attributes.checks.isStateOpen({
+      element,
+    }),
   });
 
-  const accordion = Accordion.CreateElement({
-    body: Node.slot({ type: Slots.BODY }),
-    headline: Slots.SlottedHeadline({ element }),
-    isThemeLight,
-    isThemeDark,
-    isStateOpen,
-  });
-
-  element._elementRef = accordion;
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(accordion.element);
+const slots = {
+  headline: {
+    required: true,
+    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+  },
+  body: {
+    required: true,
+    allowedElements: ['div', 'p'],
+  },
 };
 
-class UMDAccordionElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _elementRef: {
-    element: HTMLDivElement;
-    events: {
-      SetOpen: (arg: { hasAnimation?: boolean }) => void;
-      SetClosed: (arg: { hasAnimation?: boolean }) => void;
-    };
-  } | null;
-
-  constructor() {
-    super();
-    this._elementRef = null;
-    this._shadow = this.attachShadow({ mode: 'open' });
-  }
-
-  static get observedAttributes() {
-    return [AttributeNames.RESIZE, AttributeNames.STATE];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (!this._elementRef) return;
-
-    if (name === AttributeNames.RESIZE && newValue === 'true') {
-      this._elementRef.events.SetOpen({ hasAnimation: false });
-    }
-
-    if (
-      name == AttributeNames.STATE &&
-      newValue === AttributesValues.STATE_CLOSED &&
-      oldValue === AttributesValues.STATE_OPENED
-    ) {
-      this._elementRef.events.SetClosed({});
-    }
-
-    if (
-      name == AttributeNames.STATE &&
-      newValue === AttributesValues.STATE_OPENED &&
-      oldValue === AttributesValues.STATE_CLOSED
-    ) {
-      this._elementRef.events.SetOpen({});
-    }
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.resize({
+    callback: (element) => element.events?.SetOpen({ hasAnimation: false }),
+  }),
+  Attributes.handler.observe.stateClosed({
+    callback: (element) => element.events?.SetClosed({ hasAnimation: true }),
+  }),
+  Attributes.handler.observe.stateOpen({
+    callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
+  }),
+);
 
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
+  const UMDAccordionElement = Model.createCustomElement({
+    tagName,
+    styles: `${Accordion.Styles}`,
+    slots,
+    createComponent,
+    attributes,
+  });
 
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDAccordionElement = UMDAccordionElement;
-    window.customElements.define(ELEMENT_NAME, UMDAccordionElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: UMDAccordionElement,
+  });
 };
 
 export default {

@@ -5,7 +5,7 @@ declare global {
 }
 
 import { HeroExpand } from 'elements';
-import { AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -24,11 +24,14 @@ const template = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const topPosition = element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP);
+  const topPosition = element.getAttribute(Attributes.names.LAYOUT_STICKY_TOP);
 
-  const image = MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE });
+  const image = MarkupValidate.ImageSlot({
+    element,
+    ImageSlot: Slots.name.IMAGE,
+  });
   const videoSlot = element.querySelector(
-    `[slot="${Slots.VIDEO}"]`,
+    `[slot="${Slots.name.VIDEO}"]`,
   ) as HTMLElement;
 
   const elementData: {
@@ -40,10 +43,10 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
     additional?: HTMLSlotElement | null;
     topPosition?: string | null;
   } = {
-    eyebrow: Slots.SlottedEyebrow({ element }),
-    headline: Slots.SlottedHeadline({ element }),
-    actions: Node.slot({ type: Slots.ACTIONS }),
-    additional: Node.slot({ type: Slots.ADDITIONAL }),
+    eyebrow: Slots.defined.eyebrow({ element }),
+    headline: Slots.defined.headline({ element }),
+    actions: Node.slot({ type: Slots.name.ACTIONS }),
+    additional: Node.slot({ type: Slots.name.ADDITIONAL }),
     topPosition,
   };
   const isVideo = videoSlot instanceof HTMLVideoElement;
@@ -87,13 +90,13 @@ export class UMDHeroExpandElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributeNames.LAYOUT_STICKY_TOP];
+    return [Attributes.names.LAYOUT_STICKY_TOP];
   }
 
   attributeChangedCallback(name: string) {
-    if (name == AttributeNames.LAYOUT_STICKY_TOP && this._elementRef) {
+    if (name == Attributes.names.LAYOUT_STICKY_TOP && this._elementRef) {
       this._elementRef.events.SetPosition({
-        value: this.getAttribute(AttributeNames.LAYOUT_STICKY_TOP),
+        value: this.getAttribute(Attributes.names.LAYOUT_STICKY_TOP),
       });
     }
   }

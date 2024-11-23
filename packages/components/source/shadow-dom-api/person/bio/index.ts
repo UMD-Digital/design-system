@@ -5,12 +5,7 @@ declare global {
 }
 
 import { PersonBio, PersonBioFull } from 'elements';
-import {
-  Attributes,
-  AttributeNames,
-  AttributesValues,
-  Slots,
-} from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
@@ -33,15 +28,15 @@ export const CreateShadowDom = ({
 }: {
   element: UMDPersonBioElement;
 }) => {
-  const isThemeDark = Attributes.isThemeDark({ element });
-  const type = element.getAttribute(AttributeNames.TYPE);
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const type = element.getAttribute(Attributes.names.TYPE);
 
-  if (type === AttributesValues.LAYOUT_FULL_IMAGE) {
+  if (type === Attributes.values.LAYOUT_FULL_IMAGE) {
     return PersonBioFull.CreateElement({
       ...CommonPersonData({ element, isThemeDark }),
       description: SlotWithDefaultStyling({
         element,
-        slotRef: Slots.DESCRIPTION,
+        slotRef: Slots.name.DESCRIPTION,
       }),
     });
   }
@@ -50,7 +45,7 @@ export const CreateShadowDom = ({
     ...CommonPersonData({ element, isThemeDark }),
     description: SlotWithDefaultStyling({
       element,
-      slotRef: Slots.DESCRIPTION,
+      slotRef: Slots.name.DESCRIPTION,
     }),
   });
 };

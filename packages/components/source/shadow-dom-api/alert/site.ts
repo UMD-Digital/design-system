@@ -26,10 +26,10 @@ const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const alert = AlertSite.CreateElement({
-    headline: Slots.SlottedHeadline({ element }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
-    actions: Slots.SlottedActions({ element }),
-    daysToHide: Attributes.valueDaysToHide({ element }),
+    headline: Slots.defined.headline({ element }),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.name.BODY }),
+    actions: Slots.defined.actions({ element }),
+    daysToHide: Attributes.checks.valueDaysToHide({ element }),
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

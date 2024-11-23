@@ -5,12 +5,7 @@ declare global {
 }
 
 import { PersonHero } from 'elements';
-import {
-  Attributes,
-  AttributeNames,
-  AttributesValues,
-  Slots,
-} from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
@@ -37,18 +32,20 @@ export const CreateShadowDom = ({
   element: UMDPersonHeroElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.isThemeDark({
+  const isThemeDark = Attributes.checks.isThemeDark({
     element,
   });
-  const breadcrumbSlot = Node.slot({ type: Slots.BREADCRUMB });
+  const breadcrumbSlot = Node.slot({ type: Slots.name.BREADCRUMB });
 
   if (breadcrumbSlot) {
-    const breadcrumb = element.querySelector(`[slot="${Slots.BREADCRUMB}"]`);
+    const breadcrumb = element.querySelector(
+      `[slot="${Slots.name.BREADCRUMB}"]`,
+    );
     if (breadcrumb) {
       const copy = breadcrumb.cloneNode(true);
 
       element.appendChild(copy);
-      breadcrumb.setAttribute('slot', Slots.BREADCRUMB_COPY);
+      breadcrumb.setAttribute('slot', Slots.name.BREADCRUMB_COPY);
     }
   }
 
@@ -57,8 +54,8 @@ export const CreateShadowDom = ({
   shadow.appendChild(
     PersonHero.CreateElement({
       ...CommonPersonData({ element, isThemeDark }),
-      breadcrumbDesktop: Node.slot({ type: Slots.BREADCRUMB }),
-      breadcrumbMobile: Node.slot({ type: Slots.BREADCRUMB_COPY }),
+      breadcrumbDesktop: Node.slot({ type: Slots.name.BREADCRUMB }),
+      breadcrumbMobile: Node.slot({ type: Slots.name.BREADCRUMB_COPY }),
     }),
   );
 };

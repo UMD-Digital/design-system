@@ -24,10 +24,10 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeCardData = ({ element }: { element: UMDCardIconElement }) => ({
-  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-  headline: Slots.SlottedHeadline({ element }),
-  text: Slots.SlottedText({ element }),
-  isThemeDark: Attributes.isThemeDark({ element }),
+  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
+  headline: Slots.defined.headline({ element }),
+  text: Slots.defined.text({ element }),
+  isThemeDark: Attributes.checks.isThemeDark({ element }),
 });
 
 const CreateShadowDom = ({ element }: { element: UMDCardIconElement }) => {

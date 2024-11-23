@@ -30,7 +30,9 @@ export class UMDFooterElement extends HTMLElement {
   connectedCallback() {
     const element = this;
     element._type = this.getAttribute('type') || VERSION_TYPE_SIMPLE;
-    element._theme = Attributes.isThemeLight({ element }) ? 'light' : 'dark';
+    element._theme = Attributes.checks.isThemeLight({ element })
+      ? 'light'
+      : 'dark';
 
     this._shadow.appendChild(CreateElement({ element }));
   }

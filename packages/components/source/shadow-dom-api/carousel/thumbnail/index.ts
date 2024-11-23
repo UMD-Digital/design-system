@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CarouselThumbnail } from 'elements';
-import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -28,9 +28,9 @@ const CreateShadowDom = ({
   element: UMDCarouselThumbnailElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.isThemeDark({ element });
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
   const slottedBlocks = Array.from(
-    element.querySelectorAll(`[slot="${Slots.BLOCKS}"] > *`),
+    element.querySelectorAll(`[slot="${Slots.name.BLOCKS}"] > *`),
   ) as HTMLElement[];
 
   const blocks = slottedBlocks.map((block) =>
@@ -66,7 +66,7 @@ class UMDCarouselThumbnailElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributeNames.RESIZE];
+    return [Attributes.names.RESIZE];
   }
 
   attributeChangedCallback(
@@ -75,7 +75,7 @@ class UMDCarouselThumbnailElement extends HTMLElement {
     newValue: string | null,
   ) {
     if (
-      name == AttributeNames.RESIZE &&
+      name == Attributes.names.RESIZE &&
       newValue === 'true' &&
       this._elementRef
     ) {

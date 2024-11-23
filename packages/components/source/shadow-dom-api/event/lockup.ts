@@ -23,16 +23,18 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
-  const isThemeDark = Attributes.isThemeDark({ element });
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
 
   const headline = SlotWithDefaultStyling({
     element,
-    slotRef: Slots.HEADLINE,
+    slotRef: Slots.name.HEADLINE,
   });
   const startDateSlot = element.querySelector(
-    `[slot="${Slots.DATE_START_ISO}"]`,
+    `[slot="${Slots.name.DATE_START_ISO}"]`,
   );
-  const endDateSlot = element.querySelector(`[slot="${Slots.DATE_END_ISO}"]`);
+  const endDateSlot = element.querySelector(
+    `[slot="${Slots.name.DATE_END_ISO}"]`,
+  );
   const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
   const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
 

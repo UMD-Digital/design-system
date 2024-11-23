@@ -4,9 +4,9 @@ import { MarkupCreate } from 'utilities';
 const { SlotWithDefaultStyling } = MarkupCreate;
 
 export const CommonHeroData = ({ element }: { element: HTMLElement }) => ({
-  eyebrow: Slots.SlottedEyebrow({ element }),
-  headline: Slots.SlottedHeadline({ element }),
-  richText: SlotWithDefaultStyling({ element, slotRef: Slots.TEXT }),
-  imageRef: SlotWithDefaultStyling({ element, slotRef: Slots.IMAGE }),
-  actions: Slots.SlottedActions({ element }),
+  eyebrow: Slots.defined.eyebrow({ element }),
+  headline: Slots.defined.headline({ element }),
+  richText: SlotWithDefaultStyling({ element, slotRef: Slots.name.TEXT }),
+  imageRef: SlotWithDefaultStyling({ element, slotRef: Slots.name.IMAGE }),
+  actions: Slots.defined.actions({ element }),
 });

@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CarouselCards } from 'elements';
-import { AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -24,28 +24,30 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const slide = element.querySelector(`[slot="${Slots.CARDS}"]`) as HTMLElement;
+  const slide = element.querySelector(
+    `[slot="${Slots.name.CARDS}"]`,
+  ) as HTMLElement;
   const cards = Array.from(
     slide.querySelectorAll(':scope > *'),
   ) as HTMLElement[];
 
   const createCardShadowRef = () => {
-    const slot = Node.slot({ type: Slots.CARDS });
+    const slot = Node.slot({ type: Slots.name.CARDS });
     element._shadow.appendChild(slot);
   };
 
   createCardShadowRef();
 
   const shadowRef = shadow.querySelector(
-    `[name="${Slots.CARDS}"]`,
+    `[name="${Slots.name.CARDS}"]`,
   ) as HTMLElement;
   const carousel = CarouselCards.CreateElement({
     slide,
     shadowRef,
     cards,
-    headline: Slots.SlottedHeadline({ element }),
-    text: Slots.SlottedText({ element }),
-    actions: Slots.SlottedActions({ element }),
+    headline: Slots.defined.headline({ element }),
+    text: Slots.defined.text({ element }),
+    actions: Slots.defined.actions({ element }),
   });
 
   element._elementRef = carousel;
@@ -71,7 +73,7 @@ class UMDCarouselCardsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributeNames.RESIZE];
+    return [Attributes.names.RESIZE];
   }
 
   attributeChangedCallback(
@@ -80,7 +82,7 @@ class UMDCarouselCardsElement extends HTMLElement {
     newValue: string | null,
   ) {
     if (
-      name == AttributeNames.RESIZE &&
+      name == Attributes.names.RESIZE &&
       newValue === 'true' &&
       this._elementRef
     ) {

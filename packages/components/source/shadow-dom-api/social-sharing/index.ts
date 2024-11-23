@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SocialSharing } from 'elements';
-import { AttributeNames } from 'shadow-dom-model';
+import { Attributes } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -25,18 +25,18 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDSocialSharingElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const title = element.getAttribute(AttributeNames.INFORMATION_TITLE);
-  const url = element.getAttribute(AttributeNames.INFORMATION_URL);
-  const facebook = element.getAttribute(AttributeNames.SOCIAL_FACEBOOK);
-  const twitter = element.getAttribute(AttributeNames.SOCIAL_TWITTER);
-  const print = element.getAttribute(AttributeNames.SHARING_PRINT);
-  const email = element.getAttribute(AttributeNames.SHARING_EMAIL);
+  const title = element.getAttribute(Attributes.names.INFORMATION_TITLE);
+  const url = element.getAttribute(Attributes.names.INFORMATION_URL);
+  const facebook = element.getAttribute(Attributes.names.SOCIAL_FACEBOOK);
+  const twitter = element.getAttribute(Attributes.names.SOCIAL_TWITTER);
+  const print = element.getAttribute(Attributes.names.SHARING_PRINT);
+  const email = element.getAttribute(Attributes.names.SHARING_EMAIL);
 
   const includeFacebook = facebook ? facebook === 'true' : true;
   const includeTwitter = twitter ? twitter === 'true' : true;
 
   const socialSharing = SocialSharing.CreateElement({
-    isFixed: element.hasAttribute(AttributeNames.LAYOUT_FIXED),
+    isFixed: element.hasAttribute(Attributes.names.LAYOUT_FIXED),
     title,
     url,
     includeFacebook,

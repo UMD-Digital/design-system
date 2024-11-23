@@ -26,7 +26,7 @@ export const CreateShadowDom = ({
 
   shadow.appendChild(
     HeroLogo.CreateElement({
-      isThemeDark: Attributes.isThemeDark({
+      isThemeDark: Attributes.checks.isThemeDark({
         element,
       }),
       ...CommonHeroData({

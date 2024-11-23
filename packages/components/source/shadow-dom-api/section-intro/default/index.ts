@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SectionIntro } from 'elements';
-import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { Styles, MarkupCreate } from 'utilities';
 import { CommonIntroData } from '../common';
 
@@ -28,14 +28,14 @@ export const CreateShadowDom = ({
   element: UMDSectionIntroElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const includesAnimation = Attributes.includesAnimation({ element });
+  const includesAnimation = Attributes.checks.includesAnimation({ element });
   const intro = SectionIntro.CreateElement({
     ...CommonIntroData({
       element,
-      isThemeDark: Attributes.isThemeDark({ element }),
+      isThemeDark: Attributes.checks.isThemeDark({ element }),
     }),
-    text: Slots.SlottedText({ element }),
-    hasSeparator: element.hasAttribute(AttributeNames.OPTIONAL_HAS_SEPARATOR),
+    text: Slots.defined.text({ element }),
+    hasSeparator: element.hasAttribute(Attributes.names.OPTIONAL_HAS_SEPARATOR),
     includesAnimation,
   });
 

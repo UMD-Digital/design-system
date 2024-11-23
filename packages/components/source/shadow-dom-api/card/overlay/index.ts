@@ -30,25 +30,25 @@ const MakeOverlayContent = ({
 }: {
   element: UMDCardOverlayElement;
 }) => ({
-  eyebrow: Slots.SlottedEyebrow({ element }),
-  headline: Slots.SlottedHeadline({ element }),
-  text: Slots.SlottedText({ element }),
-  date: SlotWithDefaultStyling({ element, slotRef: Slots.DATE }),
-  actions: Slots.SlottedActions({ element }),
-  ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.CTA_ICON }),
-  isQuote: Attributes.isVisuallyQuote({ element }),
-  isThemeDark: Attributes.isThemeDark({ element }),
-  isThemeLight: Attributes.isThemeLight({ element }),
+  eyebrow: Slots.defined.eyebrow({ element }),
+  headline: Slots.defined.headline({ element }),
+  text: Slots.defined.text({ element }),
+  date: SlotWithDefaultStyling({ element, slotRef: Slots.name.DATE }),
+  actions: Slots.defined.actions({ element }),
+  ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.name.CTA_ICON }),
+  isQuote: Attributes.checks.isVisuallyQuote({ element }),
+  isThemeDark: Attributes.checks.isThemeDark({ element }),
+  isThemeLight: Attributes.checks.isThemeLight({ element }),
 });
 
 const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
-  if (Attributes.isTypeImage({ element })) {
+  if (Attributes.checks.isTypeImage({ element })) {
     const ImageOverlay = CardOverlayImage.CreateElement({
       ...MakeOverlayContent({ element }),
-      image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+      image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
     });
 
     if (ImageOverlay) {

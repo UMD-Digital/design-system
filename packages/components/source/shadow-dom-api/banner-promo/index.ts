@@ -22,15 +22,15 @@ const styles = `
 const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const includeSeal = Attributes.isVisuallyLogo({ element });
-  const isThemeDark = Attributes.isThemeDark({
+  const includeSeal = Attributes.checks.isVisuallyLogo({ element });
+  const isThemeDark = Attributes.checks.isThemeDark({
     element,
   });
 
   const banner = BannerPromo.CreateElement({
-    text: Slots.SlottedText({ element }),
-    headline: Slots.SlottedHeadline({ element }),
-    actions: Slots.SlottedActions({ element }),
+    text: Slots.defined.text({ element }),
+    headline: Slots.defined.headline({ element }),
+    actions: Slots.defined.actions({ element }),
     includeSeal,
     isThemeDark,
   });

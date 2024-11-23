@@ -5,7 +5,7 @@ declare global {
 }
 
 import { SliderEvents } from 'elements';
-import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const ELEMENT_NAME = 'umd-element-slider-events';
@@ -23,12 +23,14 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.isThemeDark({ element });
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
   const dataSlider = document.createElement('div');
-  const dataSliderSlot = element.querySelector(`[slot=${Slots.EVENT_LIST}]`);
+  const dataSliderSlot = element.querySelector(
+    `[slot=${Slots.name.EVENT_LIST}]`,
+  );
 
   if (!dataSliderSlot) {
-    throw new Error(`Slot ${Slots.EVENT_LIST} is required`);
+    throw new Error(`Slot ${Slots.name.EVENT_LIST} is required`);
   }
 
   dataSlider.innerHTML = dataSliderSlot.innerHTML;
@@ -36,8 +38,8 @@ const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   const slider = SliderEvents.CreateElement({
     isThemeDark,
     dataSlider,
-    headline: Slots.SlottedHeadline({ element }),
-    actions: Slots.SlottedActions({ element }),
+    headline: Slots.defined.headline({ element }),
+    actions: Slots.defined.actions({ element }),
   });
 
   element._elementRef = slider;
@@ -63,7 +65,7 @@ export class UMDSliderEventsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributeNames.RESIZE];
+    return [Attributes.names.RESIZE];
   }
 
   attributeChangedCallback(
@@ -71,7 +73,7 @@ export class UMDSliderEventsElement extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name == AttributeNames.RESIZE && newValue === 'true') {
+    if (name == Attributes.names.RESIZE && newValue === 'true') {
       if (this._elementRef) this._elementRef.events.SetDateElementsSizes();
     }
   }

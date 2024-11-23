@@ -29,7 +29,7 @@ const CreateShadowDom = ({
   element: UMDHeroBrandVideoElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const videoSlot = Node.slot({ type: Slots.VIDEO });
+  const videoSlot = Node.slot({ type: Slots.name.VIDEO });
   const animationTriggerAttribute = element.getAttribute('animation-trigger');
   shadow.appendChild(videoSlot);
 
@@ -39,8 +39,8 @@ const CreateShadowDom = ({
 
   const videoElement = HeroBrandVideo.CreateElement({
     video,
-    headline: Slots.SlottedHeadline({ element }),
-    text: Slots.SlottedText({ element }),
+    headline: Slots.defined.headline({ element }),
+    text: Slots.defined.text({ element }),
     isAnimationOnLoad: animationTriggerAttribute === 'load',
   });
 

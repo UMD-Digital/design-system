@@ -10,20 +10,23 @@ export const CommonPersonData = ({
   element: HTMLElement;
   isThemeDark?: boolean;
 }) => ({
-  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-  name: SlotWithDefaultStyling({ element, slotRef: Slots.NAME }),
-  job: SlotWithDefaultStyling({ element, slotRef: Slots.JOB_TITLE }),
-  association: SlotWithDefaultStyling({ element, slotRef: Slots.ASSOCIATION }),
-  pronouns: SlotWithDefaultStyling({ element, slotRef: Slots.PRONOUNS }),
-  phone: SlotWithDefaultStyling({ element, slotRef: Slots.PHONE }),
-  email: SlotWithDefaultStyling({ element, slotRef: Slots.EMAIL }),
-  address: SlotWithDefaultStyling({ element, slotRef: Slots.ADDRESS }),
-  linkendIn: SlotWithDefaultStyling({ element, slotRef: Slots.LINKEDIN }),
+  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
+  name: SlotWithDefaultStyling({ element, slotRef: Slots.name.NAME }),
+  job: SlotWithDefaultStyling({ element, slotRef: Slots.name.JOB_TITLE }),
+  association: SlotWithDefaultStyling({
+    element,
+    slotRef: Slots.name.ASSOCIATION,
+  }),
+  pronouns: SlotWithDefaultStyling({ element, slotRef: Slots.name.PRONOUNS }),
+  phone: SlotWithDefaultStyling({ element, slotRef: Slots.name.PHONE }),
+  email: SlotWithDefaultStyling({ element, slotRef: Slots.name.EMAIL }),
+  address: SlotWithDefaultStyling({ element, slotRef: Slots.name.ADDRESS }),
+  linkendIn: SlotWithDefaultStyling({ element, slotRef: Slots.name.LINKEDIN }),
   additionalContact: SlotWithDefaultStyling({
     element,
-    slotRef: Slots.ADDITIONAL_CONTACT,
+    slotRef: Slots.name.ADDITIONAL_CONTACT,
   }),
-  subText: SlotWithDefaultStyling({ element, slotRef: Slots.SUB_TEXT }),
-  actions: Slots.SlottedActions({ element }),
+  subText: SlotWithDefaultStyling({ element, slotRef: Slots.name.SUB_TEXT }),
+  actions: Slots.defined.actions({ element }),
   isThemeDark,
 });

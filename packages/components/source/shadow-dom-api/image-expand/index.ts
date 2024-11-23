@@ -30,7 +30,10 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const content = Node.slot({ type: 'content' });
-  const image = MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE });
+  const image = MarkupValidate.ImageSlot({
+    element,
+    ImageSlot: Slots.name.IMAGE,
+  });
 
   if (content && image) {
     const component = LayoutImageExpand.CreateElement({

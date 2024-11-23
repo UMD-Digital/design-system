@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Carousel } from 'elements';
-import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -25,7 +25,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.isThemeDark({
+  const isThemeDark = Attributes.checks.isThemeDark({
     element,
   });
   const attributeLeftButton = element.getAttribute('left-button');
@@ -39,7 +39,7 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const maxCount = element.getAttribute('max-count');
   const gridGap = element.getAttribute('grid-gap-pixels');
   const slide = element.querySelector(
-    `[slot="${Slots.BLOCKS}"]`,
+    `[slot="${Slots.name.BLOCKS}"]`,
   ) as HTMLElement;
   const blocks = Array.from(
     slide.querySelectorAll(':scope > *'),
@@ -55,14 +55,14 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   if (attributeHint === 'false') hint = false;
 
   const createCardShadowRef = () => {
-    const slot = Node.slot({ type: Slots.BLOCKS });
+    const slot = Node.slot({ type: Slots.name.BLOCKS });
     element._shadow.appendChild(slot);
   };
 
   createCardShadowRef();
 
   const shadowRef = shadow.querySelector(
-    `[name="${Slots.BLOCKS}"]`,
+    `[name="${Slots.name.BLOCKS}"]`,
   ) as HTMLElement;
   const carousel = Carousel.CreateElement({
     slide,
@@ -104,7 +104,7 @@ class UMDCarouselElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributeNames.RESIZE];
+    return [Attributes.names.RESIZE];
   }
 
   attributeChangedCallback(
@@ -113,7 +113,7 @@ class UMDCarouselElement extends HTMLElement {
     newValue: string | null,
   ) {
     if (
-      name == AttributeNames.RESIZE &&
+      name == Attributes.names.RESIZE &&
       newValue === 'true' &&
       this._elementRef
     ) {

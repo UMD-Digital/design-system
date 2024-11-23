@@ -5,12 +5,7 @@ declare global {
 }
 
 import { Tokens, Animations } from '@universityofmaryland/variables';
-import {
-  Attributes,
-  AttributeNames,
-  AttributesValues,
-  Slots,
-} from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupModify, Styles } from 'utilities';
 
 const { Colors } = Tokens;
@@ -19,7 +14,7 @@ const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-breadcrumb';
 
-const IS_THEME_DARK = `[${AttributeNames.THEME}=${AttributesValues.THEME_DARK}]`;
+const IS_THEME_DARK = `[${Attributes.names.THEME}=${Attributes.values.THEME_DARK}]`;
 
 const ELEMENT_CONTAINER = 'breadcrumb-container';
 const ELEMENT_PATH = 'breadcrumb-path';
@@ -112,18 +107,21 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
-  const isThemeDark = Attributes.isThemeDark({ element });
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
 
   const pathsSlot = SlotWithDefaultStyling({
     element,
-    slotRef: Slots.PATHS,
+    slotRef: Slots.name.PATHS,
   });
 
   if (pathsSlot) {
     const links = pathsSlot.querySelectorAll('a') as NodeListOf<HTMLElement>;
 
     if (isThemeDark)
-      pathsSlot.setAttribute(AttributeNames.THEME, AttributesValues.THEME_DARK);
+      pathsSlot.setAttribute(
+        Attributes.names.THEME,
+        Attributes.values.THEME_DARK,
+      );
     pathsSlot.classList.add(ELEMENT_CONTAINER);
 
     for (const linkElement of links) {

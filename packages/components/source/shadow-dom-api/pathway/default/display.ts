@@ -6,12 +6,7 @@ import {
   PathwaySticky,
   EventElements,
 } from 'elements';
-import {
-  Attributes,
-  AttributeNames,
-  AttributesValues,
-  Slots,
-} from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 import { UMDPathwayElement } from './index';
@@ -45,14 +40,16 @@ const MakeCommonDefaultData = ({
   isThemeMaryland?: boolean;
 }) => {
   const startDateSlot = element.querySelector(
-    `[slot="${Slots.DATE_START_ISO}"]`,
+    `[slot="${Slots.name.DATE_START_ISO}"]`,
   );
-  const endDateSlot = element.querySelector(`[slot="${Slots.DATE_END_ISO}"]`);
-  const locationSlot = element.querySelector(`[slot="${Slots.LOCATION}"]`);
+  const endDateSlot = element.querySelector(
+    `[slot="${Slots.name.DATE_END_ISO}"]`,
+  );
+  const locationSlot = element.querySelector(`[slot="${Slots.name.LOCATION}"]`);
   const isImageRight =
-    element.getAttribute(AttributeNames.LAYOUT_IMAGE_POSITION) !== 'left';
+    element.getAttribute(Attributes.names.LAYOUT_IMAGE_POSITION) !== 'left';
   const showTime =
-    element.getAttribute(AttributeNames.OPTIONAL_SHOW_TIME) !== 'false';
+    element.getAttribute(Attributes.names.OPTIONAL_SHOW_TIME) !== 'false';
 
   const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
   const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
@@ -61,9 +58,9 @@ const MakeCommonDefaultData = ({
       element,
     }),
     isImageRight,
-    stats: SlotWithDefaultStyling({ element, slotRef: Slots.STATS }),
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-    video: SlotWithDefaultStyling({ element, slotRef: Slots.VIDEO }),
+    stats: SlotWithDefaultStyling({ element, slotRef: Slots.name.STATS }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
+    video: SlotWithDefaultStyling({ element, slotRef: Slots.name.VIDEO }),
     eventDetails: null as null | HTMLElement,
     eventSign: null as null | HTMLElement,
   };
@@ -100,12 +97,12 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const isImageScaled =
-    element.getAttribute(AttributeNames.LAYOUT_IMAGE_SCALED) !== 'false';
-  const type = element.getAttribute(AttributeNames.TYPE);
-  const isThemeDark = Attributes.isThemeDark({ element });
-  const isThemeLight = Attributes.isThemeLight({ element });
-  const isThemeMaryland = Attributes.isThemeMaryland({ element });
-  const includesAnimation = Attributes.includesAnimation({ element });
+    element.getAttribute(Attributes.names.LAYOUT_IMAGE_SCALED) !== 'false';
+  const type = element.getAttribute(Attributes.names.TYPE);
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeLight = Attributes.checks.isThemeLight({ element });
+  const isThemeMaryland = Attributes.checks.isThemeMaryland({ element });
+  const includesAnimation = Attributes.checks.includesAnimation({ element });
 
   shadow.appendChild(element._styles.content.cloneNode(true));
 
@@ -144,7 +141,7 @@ export const CreateShadowDom = ({
   const makeStickyType = () => {
     shadow.appendChild(
       PathwaySticky.CreateElement({
-        isThemeDark: Attributes.isThemeDark({ element }),
+        isThemeDark: Attributes.checks.isThemeDark({ element }),
         isImageScaled,
         ...MakeCommonDefaultData({ element, ...themes }),
       }),
@@ -171,18 +168,18 @@ export const CreateShadowDom = ({
     }, 10);
   };
 
-  if (type === AttributesValues.DISPLAY_HERO) {
+  if (type === Attributes.values.DISPLAY_HERO) {
     makeHeroType();
     return;
   }
 
-  if (type === AttributesValues.DISPLAY_OVERLAY) {
+  if (type === Attributes.values.DISPLAY_OVERLAY) {
     makeOverlayType();
 
     return;
   }
 
-  if (type === AttributesValues.DISPLAY_STICKY) {
+  if (type === Attributes.values.DISPLAY_STICKY) {
     makeStickyType();
 
     return;

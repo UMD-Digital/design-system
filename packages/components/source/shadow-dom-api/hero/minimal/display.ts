@@ -22,13 +22,13 @@ export const CreateShadowDom = ({
   element: UMDHeroMinimalElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeLight = Attributes.isThemeLight({
+  const isThemeLight = Attributes.checks.isThemeLight({
     element,
   });
-  const isThemeDark = Attributes.isThemeDark({
+  const isThemeDark = Attributes.checks.isThemeDark({
     element,
   });
-  const isThemeMaryland = Attributes.isThemeMaryland({
+  const isThemeMaryland = Attributes.checks.isThemeMaryland({
     element,
   });
 

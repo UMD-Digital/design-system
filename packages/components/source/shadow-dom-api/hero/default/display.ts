@@ -5,12 +5,7 @@ import {
   HeroOverlay,
   HeroStacked,
 } from 'elements';
-import {
-  Attributes,
-  AttributeNames,
-  AttributesValues,
-  Slots,
-} from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { UMDHeroElement } from './index';
 import { CommonHeroData } from '../common';
@@ -32,28 +27,28 @@ export const ComponentStyles = `
 `;
 
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
-  const type = element.getAttribute(AttributeNames.TYPE);
-  const includesAnimation = Attributes.includesAnimation({ element });
-  const isThemeDark = Attributes.isThemeDark({ element });
+  const type = element.getAttribute(Attributes.names.TYPE);
+  const includesAnimation = Attributes.checks.includesAnimation({ element });
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
   let isTextCenter =
-    element.getAttribute('text-align') === AttributesValues.LAYOUT_TEXT_CENTER;
+    element.getAttribute('text-align') === Attributes.values.LAYOUT_TEXT_CENTER;
   let isInterior = false;
   let isWithLock = false;
 
-  if (type === AttributesValues.LAYOUT_DEFAULT_CENTERED) {
+  if (type === Attributes.values.LAYOUT_DEFAULT_CENTERED) {
     isTextCenter = true;
   }
 
-  if (type === AttributesValues.LAYOUT_DEFAULT_INTERIOR) {
+  if (type === Attributes.values.LAYOUT_DEFAULT_INTERIOR) {
     isInterior = true;
   }
 
-  if (type === AttributesValues.LAYOUT_DEFAULT_INTERIOR_CENTERED) {
+  if (type === Attributes.values.LAYOUT_DEFAULT_INTERIOR_CENTERED) {
     isInterior = true;
     isTextCenter = true;
   }
 
-  if (type === AttributesValues.LAYOUT_STACKED_INTERIOR) {
+  if (type === Attributes.values.LAYOUT_STACKED_INTERIOR) {
     isWithLock = true;
   }
 
@@ -72,13 +67,16 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
 export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const type = element.getAttribute('type');
-  const videoRef = SlotWithDefaultStyling({ element, slotRef: Slots.VIDEO });
+  const videoRef = SlotWithDefaultStyling({
+    element,
+    slotRef: Slots.name.VIDEO,
+  });
 
   shadow.appendChild(element._styles.content.cloneNode(true));
 
   if (
-    type === AttributesValues.DISPLAY_STACKED ||
-    type === AttributesValues.LAYOUT_STACKED_INTERIOR
+    type === Attributes.values.DISPLAY_STACKED ||
+    type === Attributes.values.LAYOUT_STACKED_INTERIOR
   ) {
     shadow.appendChild(
       HeroStacked.CreateElement({
@@ -89,7 +87,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
     return;
   }
 
-  if (type === AttributesValues.DISPLAY_MINIMAL) {
+  if (type === Attributes.values.DISPLAY_MINIMAL) {
     shadow.appendChild(
       HeroMinimal.CreateElement({
         ...MakeHeroData({ element }),
@@ -99,7 +97,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
     return;
   }
 
-  if (type === AttributesValues.DISPLAY_OVERLAY) {
+  if (type === Attributes.values.DISPLAY_OVERLAY) {
     shadow.appendChild(
       HeroOverlay.CreateElement({
         ...MakeHeroData({ element }),

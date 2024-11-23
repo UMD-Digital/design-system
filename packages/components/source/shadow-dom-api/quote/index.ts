@@ -10,12 +10,7 @@ import {
   QuoteInline,
   QuoteStatement,
 } from 'elements';
-import {
-  Attributes,
-  AttributeNames,
-  AttributesValues,
-  Slots,
-} from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
@@ -35,23 +30,23 @@ const styles = `
 `;
 
 const MakeData = ({ element }: { element: UMDElementQuote }) => {
-  const isThemeDark = Attributes.isThemeDark({ element });
-  const isThemeMaryland = Attributes.isThemeMaryland({ element });
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeMaryland = Attributes.checks.isThemeMaryland({ element });
   const isTransparent =
-    element.getAttribute(AttributeNames.VISUAL_TRANSPARENT) === 'true';
+    element.getAttribute(Attributes.names.VISUAL_TRANSPARENT) === 'true';
 
   return {
-    quote: SlotWithDefaultStyling({ element, slotRef: Slots.QUOTE }),
-    image: SlotWithDefaultStyling({ element, slotRef: Slots.IMAGE }),
+    quote: SlotWithDefaultStyling({ element, slotRef: Slots.name.QUOTE }),
+    image: SlotWithDefaultStyling({ element, slotRef: Slots.name.IMAGE }),
     attribution: SlotWithDefaultStyling({
       element,
-      slotRef: Slots.ATTRIBUTION,
+      slotRef: Slots.name.ATTRIBUTION,
     }),
     attributionSubText: SlotWithDefaultStyling({
       element,
-      slotRef: Slots.ATTRIBUTION_SUB_TEXT,
+      slotRef: Slots.name.ATTRIBUTION_SUB_TEXT,
     }),
-    action: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+    action: SlotWithDefaultStyling({ element, slotRef: Slots.name.ACTIONS }),
     isTransparent,
     isThemeDark,
     isThemeMaryland,
@@ -59,13 +54,13 @@ const MakeData = ({ element }: { element: UMDElementQuote }) => {
 };
 
 const CreateShadowDom = ({ element }: { element: UMDElementQuote }) => {
-  const typeAttribute = element.getAttribute(AttributeNames.TYPE);
+  const typeAttribute = element.getAttribute(Attributes.names.TYPE);
   const size =
-    element.getAttribute(AttributeNames.DISPLAY_SIZE) ||
-    AttributesValues.SIZE_NORMAL;
+    element.getAttribute(Attributes.names.DISPLAY_SIZE) ||
+    Attributes.values.SIZE_NORMAL;
 
-  const isTypeStatement = typeAttribute === AttributesValues.DISPLAY_STATEMENT;
-  const isTypeFeatured = typeAttribute === AttributesValues.DISPLAY_FEATURED;
+  const isTypeStatement = typeAttribute === Attributes.values.DISPLAY_STATEMENT;
+  const isTypeFeatured = typeAttribute === Attributes.values.DISPLAY_FEATURED;
 
   if (isTypeStatement) {
     return QuoteStatement.CreateElement({ ...MakeData({ element }) });

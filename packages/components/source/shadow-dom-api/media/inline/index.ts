@@ -26,20 +26,20 @@ const styles = `
 const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
   const isAlignmentRight = element.getAttribute('alignment') === 'right';
   const hasWrappingText =
-    element.querySelector(`[slot="${Slots.WRAPPING_TEXT}"]`) !== null;
+    element.querySelector(`[slot="${Slots.name.WRAPPING_TEXT}"]`) !== null;
   const hasCaption =
-    element.querySelector(`[slot="${Slots.CAPTION}"]`) !== null;
+    element.querySelector(`[slot="${Slots.name.CAPTION}"]`) !== null;
   const obj = {
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
     isAlignmentRight,
   };
 
   if (hasWrappingText) {
     return MediaWrapped.CreateElement({
       ...obj,
-      wrappingText: Node.slot({ type: Slots.WRAPPING_TEXT }),
+      wrappingText: Node.slot({ type: Slots.name.WRAPPING_TEXT }),
       caption: hasCaption
-        ? SlotWithDefaultStyling({ element, slotRef: Slots.CAPTION })
+        ? SlotWithDefaultStyling({ element, slotRef: Slots.name.CAPTION })
         : null,
     });
   }
@@ -47,12 +47,12 @@ const CreateShadowDom = ({ element }: { element: UMDMediaInlineElement }) => {
   if (hasCaption) {
     return MediaWithCaption.CreateElement({
       ...obj,
-      caption: SlotWithDefaultStyling({ element, slotRef: Slots.CAPTION }),
+      caption: SlotWithDefaultStyling({ element, slotRef: Slots.name.CAPTION }),
     });
   }
 
   return MediaInline.CreateElement({
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
+    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
   });
 };
 

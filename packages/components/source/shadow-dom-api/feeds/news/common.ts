@@ -1,4 +1,4 @@
-import { Attributes, AttributeNames, AttributesValues } from 'shadow-dom-model';
+import { Attributes } from 'shadow-dom-model';
 import { TypeNewsFeedRequirements } from 'elements/feeds/news';
 
 export const CommonFeedNewsData = ({
@@ -10,12 +10,14 @@ export const CommonFeedNewsData = ({
   numberOfColumnsToShowDefault?: number;
   numberOfRowsToStartDefault?: number;
 }) => {
-  const token = element.getAttribute(AttributeNames.FEED_TOKEN);
-  const isThemeDark = Attributes.isThemeDark({ element });
+  const token = element.getAttribute(Attributes.names.FEED_TOKEN);
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
   const categoriesAttribute = element.getAttribute(
-    AttributeNames.FEED_CATEGORIES,
+    Attributes.names.FEED_CATEGORIES,
   );
-  const entriesToRemove = element.getAttribute(AttributeNames.FEED_NOT_ENTRIES);
+  const entriesToRemove = element.getAttribute(
+    Attributes.names.FEED_NOT_ENTRIES,
+  );
 
   if (!token) {
     console.error(`Feed events requires a token to be set`);
@@ -23,10 +25,10 @@ export const CommonFeedNewsData = ({
   }
 
   const numberOfRowsToStart =
-    Number(element.getAttribute(AttributeNames.FEED_ROW_COUNT)) ||
+    Number(element.getAttribute(Attributes.names.FEED_ROW_COUNT)) ||
     numberOfRowsToStartDefault;
   const numberOfColumnsToShow =
-    Number(element.getAttribute(AttributeNames.FEED_COLUMN_COUNT)) ||
+    Number(element.getAttribute(Attributes.names.FEED_COLUMN_COUNT)) ||
     numberOfColumnsToShowDefault;
 
   const data: TypeNewsFeedRequirements = {
@@ -35,11 +37,11 @@ export const CommonFeedNewsData = ({
     numberOfRowsToStart,
     numberOfColumnsToShow,
     isLazyLoad:
-      element.getAttribute(AttributeNames.FEED_LAZY_LOAD) ===
-      AttributesValues.STATE_TRUE,
+      element.getAttribute(Attributes.names.FEED_LAZY_LOAD) ===
+      Attributes.values.STATE_TRUE,
     isUnion:
-      element.getAttribute(AttributeNames.FEED_UNION) !==
-      AttributesValues.STATE_FALSE,
+      element.getAttribute(Attributes.names.FEED_UNION) !==
+      Attributes.values.STATE_FALSE,
   };
 
   if (categoriesAttribute) {

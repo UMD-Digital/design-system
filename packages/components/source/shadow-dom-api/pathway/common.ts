@@ -4,8 +4,8 @@ import { MarkupCreate } from 'utilities';
 const { SlotWithDefaultStyling } = MarkupCreate;
 
 export const CommonPathwayData = ({ element }: { element: HTMLElement }) => ({
-  eyebrow: Slots.SlottedEyebrow({ element }),
-  headline: Slots.SlottedHeadline({ element }),
-  text: Slots.SlottedText({ element }),
-  action: SlotWithDefaultStyling({ element, slotRef: Slots.ACTIONS }),
+  eyebrow: Slots.defined.eyebrow({ element }),
+  headline: Slots.defined.headline({ element }),
+  text: Slots.defined.text({ element }),
+  action: SlotWithDefaultStyling({ element, slotRef: Slots.name.ACTIONS }),
 });

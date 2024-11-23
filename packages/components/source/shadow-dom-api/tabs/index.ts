@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Tabs, TabsElements } from 'elements';
-import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -25,10 +25,10 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.isThemeDark({ element });
-  const topPosition = element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP);
-  const slot = Node.slot({ type: Slots.TABS });
-  const markup = element.querySelector(`[slot="${Slots.TABS}"]`);
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const topPosition = element.getAttribute(Attributes.names.LAYOUT_STICKY_TOP);
+  const slot = Node.slot({ type: Slots.name.TABS });
+  const markup = element.querySelector(`[slot="${Slots.name.TABS}"]`);
 
   const modifyDom = () => {
     if (!markup) return;
@@ -77,13 +77,13 @@ class UMDTabsElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributeNames.RESIZE];
+    return [Attributes.names.RESIZE];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (!this._elementRef) return;
 
-    if (name === AttributeNames.RESIZE && newValue === 'true') {
+    if (name === Attributes.names.RESIZE && newValue === 'true') {
       this._elementRef.events.resize();
     }
   }

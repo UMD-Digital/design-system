@@ -25,18 +25,18 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeLight = Attributes.isThemeLight({
+  const isThemeLight = Attributes.checks.isThemeLight({
     element,
   });
-  const isThemeDark = Attributes.isThemeDark({
+  const isThemeDark = Attributes.checks.isThemeDark({
     element,
   });
-  const isShowIcon = Attributes.isShowIcon({ element });
+  const isShowIcon = Attributes.checks.isShowIcon({ element });
 
   const alert = AlertPage.CreateElement({
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.BODY }),
-    headline: Slots.SlottedHeadline({ element }),
-    actions: Slots.SlottedActions({ element }),
+    text: SlotWithDefaultStyling({ element, slotRef: Slots.name.BODY }),
+    headline: Slots.defined.headline({ element }),
+    actions: Slots.defined.actions({ element }),
     isThemeLight,
     isThemeDark,
     isShowIcon,

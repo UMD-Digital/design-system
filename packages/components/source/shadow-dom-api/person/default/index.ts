@@ -5,7 +5,7 @@ declare global {
 }
 
 import { PersonBlock, PersonList, PersonTabular } from 'elements';
-import { Attributes, AttributeNames, AttributesValues } from 'shadow-dom-model';
+import { Attributes } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
@@ -31,12 +31,12 @@ const styleTemplate = Node.stylesTemplate({
 export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const isDisplayList =
-    element.getAttribute(AttributeNames.DISPLAY) ===
-    AttributesValues.DISPLAY_LIST;
+    element.getAttribute(Attributes.names.DISPLAY) ===
+    Attributes.values.DISPLAY_LIST;
   const isDisplayTabular =
-    element.getAttribute(AttributeNames.DISPLAY) ===
-    AttributesValues.DISPLAY_TABULAR;
-  const isThemeDark = Attributes.isThemeDark({ element });
+    element.getAttribute(Attributes.names.DISPLAY) ===
+    Attributes.values.DISPLAY_TABULAR;
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 

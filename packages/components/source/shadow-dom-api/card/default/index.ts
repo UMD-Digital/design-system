@@ -25,22 +25,22 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeCardData = ({ element }: { element: UMDCardElement }) => ({
-  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.IMAGE }),
-  eyebrow: Slots.SlottedEyebrow({ element }),
-  headline: Slots.SlottedHeadline({ element }),
-  text: Slots.SlottedText({ element }),
-  actions: Slots.SlottedActions({ element }),
-  isTransparent: Attributes.isTransparent({ element }),
-  isThemeDark: Attributes.isThemeDark({
+  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
+  eyebrow: Slots.defined.eyebrow({ element }),
+  headline: Slots.defined.headline({ element }),
+  text: Slots.defined.text({ element }),
+  actions: Slots.defined.actions({ element }),
+  isTransparent: Attributes.checks.isTransparent({ element }),
+  isThemeDark: Attributes.checks.isThemeDark({
     element,
   }),
 });
 
 const CreateShadowDom = ({ element }: { element: UMDCardElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isAligned = Attributes.isVisuallyAligned({ element });
-  const isBordered = Attributes.isVisuallyBordered({ element });
-  const isDisplayList = Attributes.isDisplayList({ element });
+  const isAligned = Attributes.checks.isVisuallyAligned({ element });
+  const isBordered = Attributes.checks.isVisuallyBordered({ element });
+  const isDisplayList = Attributes.checks.isDisplayList({ element });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 

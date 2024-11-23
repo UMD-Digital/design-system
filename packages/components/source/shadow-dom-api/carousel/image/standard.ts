@@ -5,7 +5,7 @@ declare global {
 }
 
 import { CarouselImageStandard } from 'elements';
-import { Attributes, AttributeNames, Slots } from 'shadow-dom-model';
+import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
@@ -29,16 +29,18 @@ const CreateShadowDom = ({
   element: UMDCarouselImageStandardElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.isThemeDark({ element });
-  const isFullScreenOption = Attributes.includesFullScreenOption({ element });
+  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isFullScreenOption = Attributes.checks.includesFullScreenOption({
+    element,
+  });
   const slottedImages = Array.from(
-    element.querySelectorAll(`[slot="${Slots.IMAGES}"] > *`),
+    element.querySelectorAll(`[slot="${Slots.name.IMAGES}"] > *`),
   ) as HTMLImageElement[];
   const slottedHeadlines = Array.from(
-    element.querySelectorAll(`[slot="${Slots.HEADLINES}"] > *`),
+    element.querySelectorAll(`[slot="${Slots.name.HEADLINES}"] > *`),
   );
   const slottedTexts = Array.from(
-    element.querySelectorAll(`[slot="${Slots.TEXTS}"] > *`),
+    element.querySelectorAll(`[slot="${Slots.name.TEXTS}"] > *`),
   );
   const headlines = slottedHeadlines.map((headline) =>
     headline.cloneNode(true),
@@ -89,7 +91,7 @@ class UMDCarouselImageStandardElement extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [AttributeNames.RESIZE];
+    return [Attributes.names.RESIZE];
   }
 
   attributeChangedCallback(
@@ -98,7 +100,7 @@ class UMDCarouselImageStandardElement extends HTMLElement {
     newValue: string | null,
   ) {
     if (
-      name == AttributeNames.RESIZE &&
+      name == Attributes.names.RESIZE &&
       newValue === 'true' &&
       this._elementRef
     ) {

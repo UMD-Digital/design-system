@@ -7,6 +7,7 @@ interface AttributeConfig {
 
 interface ElementRef {
   element: HTMLElement;
+  styles: string;
   events?: Record<string, Function>;
 }
 
@@ -24,7 +25,6 @@ interface SlotValidationError {
 
 interface ComponentConfig {
   tagName: string;
-  styles: string;
   attributes?: AttributeConfig[];
   slots?: Record<string, SlotConfig>;
   createComponent: (host: HTMLElement) => ElementRef;
@@ -95,7 +95,6 @@ class BaseComponent extends HTMLElement {
   protected validateConfig(): void {
     const requiredFields: (keyof ComponentConfig)[] = [
       'tagName',
-      'styles',
       'createComponent',
     ];
 
@@ -129,18 +128,18 @@ class BaseComponent extends HTMLElement {
       }
 
       this.elementRef = componentRef;
-      this.setupShadowDom(componentRef.element);
+      this.setupShadowDom(componentRef);
       this.afterInit();
     } catch (error) {
       this.handleError('Failed to initialize component', error);
     }
   }
 
-  protected setupShadowDom(component: HTMLElement): void {
+  protected setupShadowDom(component: ElementRef): void {
     this.shadow.appendChild(
-      StylesTemplate({ styles: this.config.styles }).content.cloneNode(true),
+      StylesTemplate({ styles: component.styles }).content.cloneNode(true),
     );
-    this.shadow.appendChild(component);
+    this.shadow.appendChild(component.element);
   }
 
   private validateSlots(): void {

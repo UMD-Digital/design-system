@@ -219,10 +219,10 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);
 
-    return declaration;
+    return {
+      element: declaration,
+      styles: STYLES_BANNER_PROMO_ELEMENT,
+    };
   })();
 
-export default {
-  CreateElement: CreateBannerPromoElement,
-  Styles: STYLES_BANNER_PROMO_ELEMENT,
-};
+export default CreateBannerPromoElement;

@@ -375,6 +375,7 @@ const CreateAccordionElement = (props: TypeAccordionProps) =>
 
     return {
       element: declaration,
+      styles: STYLES_ACCORDION_ELEMENT,
       events: {
         SetOpen,
         SetClosed,
@@ -382,7 +383,4 @@ const CreateAccordionElement = (props: TypeAccordionProps) =>
     };
   })();
 
-export default {
-  CreateElement: CreateAccordionElement,
-  Styles: STYLES_ACCORDION_ELEMENT,
-};
+export default CreateAccordionElement;

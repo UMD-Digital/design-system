@@ -4,7 +4,7 @@ import { Attributes, Model, Register, Slots } from 'shadow-dom-model';
 const tagName = 'umd-element-accordion-item';
 
 const createComponent = (element: HTMLElement) =>
-  Accordion.CreateElement({
+  Accordion({
     body: Slots.defined.body({ element, isDefaultStyling: false }),
     headline: Slots.defined.headline({ element }),
     isThemeLight: Attributes.checks.isThemeLight({
@@ -21,7 +21,7 @@ const createComponent = (element: HTMLElement) =>
 const slots = {
   headline: {
     required: true,
-    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+    allowedElements: ['span', 'p'],
   },
   body: {
     required: true,
@@ -44,7 +44,6 @@ const attributes = Attributes.handler.combine(
 const Load = () => {
   const UMDAccordionElement = Model.createCustomElement({
     tagName,
-    styles: `${Accordion.Styles}`,
     slots,
     createComponent,
     attributes,

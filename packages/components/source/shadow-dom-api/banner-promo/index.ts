@@ -1,65 +1,39 @@
-declare global {
-  interface Window {
-    UMDBannerPromoElement: typeof UMDBannerPromoElement;
-  }
-}
-
 import { BannerPromo } from 'elements';
-import { Attributes, Slots } from 'shadow-dom-model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'shadow-dom-model';
 
-const ELEMENT_NAME = 'umd-element-banner-promo';
+const tagName = 'umd-element-banner-promo';
 
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.ResetString}
-  ${BannerPromo.Styles}
-`;
-
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
-const CreateShadowDom = ({ element }: { element: UMDBannerPromoElement }) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  const includeSeal = Attributes.checks.isVisuallyLogo({ element });
-  const isThemeDark = Attributes.checks.isThemeDark({
-    element,
-  });
-
-  const banner = BannerPromo.CreateElement({
-    text: Slots.defined.text({ element }),
+const createComponent = (element: HTMLElement) =>
+  BannerPromo({
     headline: Slots.defined.headline({ element }),
+    text: Slots.defined.text({ element }),
     actions: Slots.defined.actions({ element }),
-    includeSeal,
-    isThemeDark,
+    includeSeal: Attributes.checks.isVisuallyLogo({ element }),
+    isThemeDark: Attributes.checks.isThemeDark({
+      element,
+    }),
   });
 
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(banner);
+const slots = {
+  headline: {
+    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+  },
+  text: {
+    allowedElements: ['div', 'p'],
+  },
 };
 
-class UMDBannerPromoElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
+  const Element = Model.createCustomElement({
+    tagName,
+    slots,
+    createComponent,
+  });
 
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDBannerPromoElement = UMDBannerPromoElement;
-    window.customElements.define(ELEMENT_NAME, UMDBannerPromoElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Element,
+  });
 };
 
 export default {

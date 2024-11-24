@@ -149,7 +149,10 @@ const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
   const scalingFontContainer = TextLockupSmallScaling.CreateElement(props);
-  const ctaIcon = CtaIcon.CreateElement(props);
+  const ctaIcon = CtaIcon.CreateElement({
+    ...props,
+    isThemeLight: !isThemeDark,
+  });
 
   elementWrapper.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER);
   elementWrapper.appendChild(scalingFontContainer);

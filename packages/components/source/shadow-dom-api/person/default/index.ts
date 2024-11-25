@@ -36,7 +36,7 @@ export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
   const isDisplayTabular =
     element.getAttribute(Attributes.names.DISPLAY) ===
     Attributes.values.DISPLAY_TABULAR;
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 

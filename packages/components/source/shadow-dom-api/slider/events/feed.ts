@@ -28,7 +28,7 @@ const CreateShadowDom = async ({
   element: UMDSliderEventsFeedElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
   const token = element.getAttribute(Attributes.names.FEED_TOKEN);
   const type = element.getAttribute(Attributes.names.TYPE) || 'academic';
   const categories = element.getAttribute('categories');

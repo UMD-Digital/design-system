@@ -11,7 +11,7 @@ export const CommonFeedNewsData = ({
   numberOfRowsToStartDefault?: number;
 }) => {
   const token = element.getAttribute(Attributes.names.FEED_TOKEN);
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
   const categoriesAttribute = element.getAttribute(
     Attributes.names.FEED_CATEGORIES,
   );

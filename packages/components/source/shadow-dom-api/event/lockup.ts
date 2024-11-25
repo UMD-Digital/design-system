@@ -23,7 +23,7 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
 
   const headline = SlotWithDefaultStyling({
     element,

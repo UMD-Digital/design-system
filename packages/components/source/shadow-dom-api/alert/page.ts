@@ -25,13 +25,13 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeLight = Attributes.checks.isThemeLight({
+  const isThemeLight = Attributes.isTheme.light({
     element,
   });
-  const isThemeDark = Attributes.checks.isThemeDark({
+  const isThemeDark = Attributes.isTheme.dark({
     element,
   });
-  const isShowIcon = Attributes.checks.isShowIcon({ element });
+  const isShowIcon = Attributes.isVisual.showIcon({ element });
 
   const alert = AlertPage.CreateElement({
     text: SlotWithDefaultStyling({ element, slotRef: Slots.name.BODY }),

@@ -31,17 +31,17 @@ const MakeArticleData = ({ element }: { element: HTMLElement }) => ({
   text: Slots.defined.text({ element }),
   date: Slots.defined.date({ element }),
   actions: Slots.defined.actions({ element }),
-  isTransparent: Attributes.checks.isTransparent({ element }),
-  isThemeDark: Attributes.checks.isThemeDark({
+  isTransparent: Attributes.isVisual.transparent({ element }),
+  isThemeDark: Attributes.isTheme.dark({
     element,
   }),
 });
 
 const CreateShadowDom = ({ element }: { element: UMDArticleElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isAligned = Attributes.checks.isVisuallyAligned({ element });
-  const isBordered = Attributes.checks.isVisuallyBordered({ element });
-  const isDisplayList = Attributes.checks.isDisplayList({ element });
+  const isAligned = Attributes.isVisual.aligned({ element });
+  const isBordered = Attributes.isVisual.bordered({ element });
+  const isDisplayList = Attributes.isVisual.list({ element });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 

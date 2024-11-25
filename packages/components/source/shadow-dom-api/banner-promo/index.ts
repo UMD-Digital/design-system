@@ -8,8 +8,8 @@ const createComponent = (element: HTMLElement) =>
     headline: Slots.defined.headline({ element }),
     text: Slots.defined.text({ element }),
     actions: Slots.defined.actions({ element }),
-    includeSeal: Attributes.checks.isVisuallyLogo({ element }),
-    isThemeDark: Attributes.checks.isThemeDark({
+    includeSeal: Attributes.isVisual.logo({ element }),
+    isThemeDark: Attributes.isTheme.dark({
       element,
     }),
   });
@@ -24,15 +24,13 @@ const slots = {
 };
 
 const Load = () => {
-  const Element = Model.createCustomElement({
-    tagName,
-    slots,
-    createComponent,
-  });
-
   Register.registerWebComponent({
     name: tagName,
-    element: Element,
+    element: Model.createCustomElement({
+      tagName,
+      slots,
+      createComponent,
+    }),
   });
 };
 

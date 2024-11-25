@@ -7,13 +7,13 @@ const createComponent = (element: HTMLElement) =>
   Accordion({
     body: Slots.defined.body({ element, isDefaultStyling: false }),
     headline: Slots.defined.headline({ element }),
-    isThemeLight: Attributes.checks.isThemeLight({
+    isThemeLight: Attributes.isTheme.light({
       element,
     }),
-    isThemeDark: Attributes.checks.isThemeDark({
+    isThemeDark: Attributes.isTheme.dark({
       element,
     }),
-    isStateOpen: Attributes.checks.isStateOpen({
+    isStateOpen: Attributes.isVisual.open({
       element,
     }),
   });
@@ -42,16 +42,14 @@ const attributes = Attributes.handler.combine(
 );
 
 const Load = () => {
-  const UMDAccordionElement = Model.createCustomElement({
-    tagName,
-    slots,
-    createComponent,
-    attributes,
-  });
-
   Register.registerWebComponent({
     name: tagName,
-    element: UMDAccordionElement,
+    element: Model.createCustomElement({
+      tagName,
+      slots,
+      createComponent,
+      attributes,
+    }),
   });
 };
 

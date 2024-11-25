@@ -28,8 +28,8 @@ export const ComponentStyles = `
 
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
   const type = element.getAttribute(Attributes.names.TYPE);
-  const includesAnimation = Attributes.checks.includesAnimation({ element });
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const includesAnimation = Attributes.includesFeature.animation({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
   let isTextCenter =
     element.getAttribute('text-align') === Attributes.values.LAYOUT_TEXT_CENTER;
   let isInterior = false;

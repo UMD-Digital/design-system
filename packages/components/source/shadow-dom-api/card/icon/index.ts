@@ -27,7 +27,7 @@ const MakeCardData = ({ element }: { element: UMDCardIconElement }) => ({
   image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
   headline: Slots.defined.headline({ element }),
   text: Slots.defined.text({ element }),
-  isThemeDark: Attributes.checks.isThemeDark({ element }),
+  isThemeDark: Attributes.isTheme.dark({ element }),
 });
 
 const CreateShadowDom = ({ element }: { element: UMDCardIconElement }) => {

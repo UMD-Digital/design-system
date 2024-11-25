@@ -23,7 +23,7 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
   const dataSlider = document.createElement('div');
   const dataSliderSlot = element.querySelector(
     `[slot=${Slots.name.EVENT_LIST}]`,

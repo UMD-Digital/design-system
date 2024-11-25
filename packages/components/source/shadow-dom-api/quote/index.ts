@@ -30,8 +30,8 @@ const styles = `
 `;
 
 const MakeData = ({ element }: { element: UMDElementQuote }) => {
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
-  const isThemeMaryland = Attributes.checks.isThemeMaryland({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
+  const isThemeMaryland = Attributes.isTheme.maryland({ element });
   const isTransparent =
     element.getAttribute(Attributes.names.VISUAL_TRANSPARENT) === 'true';
 

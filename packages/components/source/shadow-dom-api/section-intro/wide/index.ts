@@ -33,7 +33,7 @@ export const CreateShadowDom = ({
   const intro = SectionIntroWide.CreateElement(
     CommonIntroData({
       element,
-      isThemeDark: Attributes.checks.isThemeDark({ element }),
+      isThemeDark: Attributes.isTheme.dark({ element }),
     }),
   );
 

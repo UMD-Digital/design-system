@@ -107,7 +107,7 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
 
   const pathsSlot = SlotWithDefaultStyling({
     element,

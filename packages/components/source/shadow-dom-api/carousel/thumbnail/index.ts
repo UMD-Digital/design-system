@@ -28,7 +28,7 @@ const CreateShadowDom = ({
   element: UMDCarouselThumbnailElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
   const slottedBlocks = Array.from(
     element.querySelectorAll(`[slot="${Slots.name.BLOCKS}"] > *`),
   ) as HTMLElement[];

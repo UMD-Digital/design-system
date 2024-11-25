@@ -1,8 +1,8 @@
+import list from 'macros/layout/list';
 import AttributeNames from './names';
 import AttributesValues from './values';
 
 // Types
-
 interface AttributeElementProps {
   element: HTMLElement;
   defaultValue?: boolean;
@@ -13,12 +13,15 @@ interface AttributeProps extends AttributeElementProps {
   attributeValue: string;
 }
 
+type AttributeNullProps = Omit<AttributeProps, 'attributeValue'>;
+
 interface DeprecatedAttributeProps extends AttributeElementProps {
   attributeNameOld: string;
   attributeNameNew: string;
   attributeValue: string;
 }
 
+// Core attribute check utilities
 const isAttributeEqual = ({
   element,
   attributeName,
@@ -28,6 +31,11 @@ const isAttributeEqual = ({
   const value = element.getAttribute(attributeName);
   return value === attributeValue ? !defaultValue : defaultValue;
 };
+
+const isAttributeNotNull = ({
+  element,
+  attributeName,
+}: AttributeNullProps): boolean => element.getAttribute(attributeName) !== null;
 
 const checkDeprecatedAttribute = ({
   element,
@@ -54,8 +62,6 @@ const checkDeprecatedAttribute = ({
   return false;
 };
 
-// Attribute check functions with default value = true
-
 const createAttributeCheck =
   (attributeName: string, attributeValue: string, defaultValue = false) =>
   (props: AttributeElementProps): boolean =>
@@ -66,197 +72,220 @@ const createAttributeCheck =
       defaultValue,
     });
 
-// Feature toggles (defaultValue = true)
+// Feature checks
+const includesFeature = {
+  animation: createAttributeCheck(
+    AttributeNames.ANIMATION_STATE,
+    AttributesValues.STATE_FALSE,
+    true,
+  ),
+  fullScreenOption: createAttributeCheck(
+    AttributeNames.OPTIONAL_FULLSCREEN,
+    AttributesValues.STATE_FALSE,
+    true,
+  ),
+  visualTime: createAttributeCheck(
+    AttributeNames.OPTIONAL_SHOW_TIME,
+    AttributesValues.STATE_FALSE,
+    true,
+  ),
+} as const;
 
-const includesAnimation = createAttributeCheck(
-  AttributeNames.ANIMATION_STATE,
-  AttributesValues.STATE_FALSE,
-  true,
-);
+// Display checks
+const isDisplay = {
+  feature: createAttributeCheck(
+    AttributeNames.VISUAL_DISPLAY,
+    AttributesValues.DISPLAY_FEATURE,
+  ),
+  list: createAttributeCheck(
+    AttributeNames.VISUAL_DISPLAY,
+    AttributesValues.DISPLAY_LIST,
+  ),
+  promo: createAttributeCheck(
+    AttributeNames.VISUAL_DISPLAY,
+    AttributesValues.DISPLAY_PROMO,
+  ),
+} as const;
 
-const includesFullScreenOption = createAttributeCheck(
-  AttributeNames.OPTIONAL_FULLSCREEN,
-  AttributesValues.STATE_FALSE,
-  true,
-);
+// Information checks
+const isInfo = {
+  admissions: createAttributeCheck(
+    AttributeNames.INFORMATION_ADMISSIONS,
+    AttributesValues.STATE_TRUE,
+  ),
+  events: createAttributeCheck(
+    AttributeNames.INFORMATION_EVENTS,
+    AttributesValues.STATE_TRUE,
+  ),
+  news: createAttributeCheck(
+    AttributeNames.INFORMATION_NEWS,
+    AttributesValues.STATE_TRUE,
+  ),
+  schools: createAttributeCheck(
+    AttributeNames.INFORMATION_SCHOOLS,
+    AttributesValues.STATE_TRUE,
+  ),
+  searchDomain: createAttributeCheck(
+    AttributeNames.INFORMATION_SEARCH_TYPE,
+    AttributesValues.SEARCH_DOMAIN,
+  ),
+} as const;
 
-const includesVisualTime = createAttributeCheck(
-  AttributeNames.OPTIONAL_SHOW_TIME,
-  AttributesValues.STATE_FALSE,
-  true,
-);
+const hasInfo = {
+  gifts: (props: AttributeElementProps) =>
+    isAttributeNotNull({
+      ...props,
+      attributeName: AttributeNames.INFORMATION_GIFT,
+    }),
+  search: (props: AttributeElementProps) =>
+    isAttributeNotNull({
+      ...props,
+      attributeName: AttributeNames.INFORMATION_SEARCH_TYPE,
+    }),
+};
 
-// Display types (defaultValue = false)
+// Layout checks
+const isLayout = {
+  lockFull: createAttributeCheck(
+    AttributeNames.LAYOUT_LOCK,
+    AttributesValues.LAYOUT_FULL,
+  ),
+  image: createAttributeCheck(
+    AttributeNames.TYPE,
+    AttributesValues.DISPLAY_IMAGE,
+  ),
+} as const;
 
-const isDisplayFeature = createAttributeCheck(
-  AttributeNames.VISUAL_DISPLAY,
-  AttributesValues.DISPLAY_FEATURE,
-);
-
-const isDisplayList = createAttributeCheck(
-  AttributeNames.VISUAL_DISPLAY,
-  AttributesValues.DISPLAY_LIST,
-);
-
-const isDisplayPromo = createAttributeCheck(
-  AttributeNames.VISUAL_DISPLAY,
-  AttributesValues.DISPLAY_PROMO,
-);
-
-// Theme checks with deprecated fallbacks
-
-const isThemeDarkDeprecated = (props: AttributeElementProps): boolean =>
-  checkDeprecatedAttribute({
-    ...props,
-    attributeNameOld: AttributeNames.THEME_DEPRECATD,
-    attributeNameNew: AttributeNames.THEME,
-    attributeValue: AttributesValues.THEME_DARK,
-  });
-
-const isThemeGoldDeprecated = (props: AttributeElementProps): boolean =>
-  checkDeprecatedAttribute({
-    ...props,
-    attributeNameOld: AttributeNames.THEME_DEPRECATD,
-    attributeNameNew: AttributeNames.THEME,
-    attributeValue: AttributesValues.THEME_GOLD,
-  });
-
-const isThemeLightDeprecated = (props: AttributeElementProps): boolean =>
-  checkDeprecatedAttribute({
-    ...props,
-    attributeNameOld: AttributeNames.THEME_DEPRECATD,
-    attributeNameNew: AttributeNames.THEME,
-    attributeValue: AttributesValues.THEME_LIGHT,
-  });
-
-const isThemeMarylandDeprecated = (props: AttributeElementProps): boolean =>
-  checkDeprecatedAttribute({
-    ...props,
-    attributeNameOld: AttributeNames.THEME_DEPRECATD,
-    attributeNameNew: AttributeNames.THEME,
-    attributeValue: AttributesValues.THEME_MARYLAND,
-  });
-
-const isThemeDark = (props: AttributeElementProps): boolean =>
-  isThemeDarkDeprecated(props) ||
-  isAttributeEqual({
-    ...props,
-    attributeName: AttributeNames.THEME,
-    attributeValue: AttributesValues.THEME_DARK,
-  });
-
-const isThemeGold = (props: AttributeElementProps): boolean =>
-  isThemeGoldDeprecated(props) ||
-  isAttributeEqual({
-    ...props,
-    attributeName: AttributeNames.THEME,
-    attributeValue: AttributesValues.THEME_GOLD,
-  });
-
-const isThemeLight = (props: AttributeElementProps): boolean =>
-  isThemeLightDeprecated(props) ||
-  isAttributeEqual({
-    ...props,
-    attributeName: AttributeNames.THEME,
-    attributeValue: AttributesValues.THEME_LIGHT,
-  });
-
-const isThemeMaryland = (props: AttributeElementProps): boolean =>
-  isThemeMarylandDeprecated(props) ||
-  isAttributeEqual({
-    ...props,
-    attributeName: AttributeNames.THEME,
-    attributeValue: AttributesValues.THEME_MARYLAND,
-  });
-
-// State checks
-
-const isStateOpenDeprecated = (props: AttributeElementProps): boolean =>
-  checkDeprecatedAttribute({
-    ...props,
-    attributeNameOld: AttributeNames.STATE_DEPRECATD,
-    attributeNameNew: AttributeNames.STATE,
-    attributeValue: AttributesValues.STATE_OPENED,
-  });
-
-const isStateOpen = (props: AttributeElementProps): boolean =>
-  isStateOpenDeprecated(props) ||
-  isAttributeEqual({
-    ...props,
-    attributeName: AttributeNames.STATE,
-    attributeValue: AttributesValues.STATE_OPENED,
-  });
+// Theme checks
+const isTheme = {
+  dark: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.THEME_DEPRECATD,
+      attributeNameNew: AttributeNames.THEME,
+      attributeValue: AttributesValues.THEME_DARK,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.THEME,
+      attributeValue: AttributesValues.THEME_DARK,
+    }),
+  gold: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.THEME_DEPRECATD,
+      attributeNameNew: AttributeNames.THEME,
+      attributeValue: AttributesValues.THEME_GOLD,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.THEME,
+      attributeValue: AttributesValues.THEME_GOLD,
+    }),
+  light: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.THEME_DEPRECATD,
+      attributeNameNew: AttributeNames.THEME,
+      attributeValue: AttributesValues.THEME_LIGHT,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.THEME,
+      attributeValue: AttributesValues.THEME_LIGHT,
+    }),
+  maryland: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.THEME_DEPRECATD,
+      attributeNameNew: AttributeNames.THEME,
+      attributeValue: AttributesValues.THEME_MARYLAND,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.THEME,
+      attributeValue: AttributesValues.THEME_MARYLAND,
+    }),
+} as const;
 
 // Visual checks
-
-const isTransparent = createAttributeCheck(
-  AttributeNames.VISUAL_TRANSPARENT,
-  AttributesValues.STATE_TRUE,
-);
-
-const isShowIcon = createAttributeCheck(
-  AttributeNames.VISUAL_ICON,
-  AttributesValues.STATE_TRUE,
-);
-
-const isTypeImage = createAttributeCheck(
-  AttributeNames.TYPE,
-  AttributesValues.DISPLAY_IMAGE,
-);
-
-const isVisuallyAligned = createAttributeCheck(
-  AttributeNames.VISUAL_ALIGN,
-  AttributesValues.STATE_TRUE,
-);
-
-const isVisuallyBordered = createAttributeCheck(
-  AttributeNames.VISUAL_BORDER,
-  AttributesValues.STATE_TRUE,
-);
-
-const isVisuallyLogo = createAttributeCheck(
-  AttributeNames.VISUAL_HAS_LOGO,
-  AttributesValues.STATE_TRUE,
-);
-
-const isVisuallyQuote = createAttributeCheck(
-  AttributeNames.VISUAL_QUOTE,
-  AttributesValues.STATE_TRUE,
-);
-
-const isStickyLast = createAttributeCheck(
-  AttributeNames.OPTIONAL_STICKY_FIRST,
-  AttributesValues.STATE_FALSE,
-);
+const isVisual = {
+  transparent: createAttributeCheck(
+    AttributeNames.VISUAL_TRANSPARENT,
+    AttributesValues.STATE_TRUE,
+  ),
+  showIcon: createAttributeCheck(
+    AttributeNames.VISUAL_ICON,
+    AttributesValues.STATE_TRUE,
+  ),
+  aligned: createAttributeCheck(
+    AttributeNames.VISUAL_ALIGN,
+    AttributesValues.STATE_TRUE,
+  ),
+  bordered: createAttributeCheck(
+    AttributeNames.VISUAL_BORDER,
+    AttributesValues.STATE_TRUE,
+  ),
+  list: createAttributeCheck(
+    AttributeNames.VISUAL_DISPLAY,
+    AttributesValues.DISPLAY_LIST,
+  ),
+  logo: createAttributeCheck(
+    AttributeNames.VISUAL_HAS_LOGO,
+    AttributesValues.STATE_TRUE,
+  ),
+  quote: createAttributeCheck(
+    AttributeNames.VISUAL_QUOTE,
+    AttributesValues.STATE_TRUE,
+  ),
+  open: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.STATE_DEPRECATD,
+      attributeNameNew: AttributeNames.STATE,
+      attributeValue: AttributesValues.STATE_OPENED,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.STATE,
+      attributeValue: AttributesValues.STATE_OPENED,
+    }),
+  stickyLast: createAttributeCheck(
+    AttributeNames.OPTIONAL_STICKY_FIRST,
+    AttributesValues.STATE_FALSE,
+  ),
+} as const;
 
 // Value getters
-
-const valueDaysToHide = ({ element }: AttributeElementProps): string =>
-  element.getAttribute(AttributeNames.VISUAL_DAYS_TO_HIDE) ?? '10';
-
-const valueTopPosition = ({ element }: AttributeElementProps): string | null =>
-  element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP);
-
-export default {
-  includesAnimation,
-  includesFullScreenOption,
-  includesVisualTime,
-  isDisplayFeature,
-  isDisplayList,
-  isDisplayPromo,
-  isThemeDark,
-  isThemeGold,
-  isThemeLight,
-  isThemeMaryland,
-  isTransparent,
-  isStateOpen,
-  isShowIcon,
-  isTypeImage,
-  isVisuallyAligned,
-  isVisuallyBordered,
-  isVisuallyLogo,
-  isVisuallyQuote,
-  isStickyLast,
-  valueDaysToHide,
-  valueTopPosition,
+const getValue = {
+  alertUrl: ({ element }: AttributeElementProps): string | null =>
+    element.getAttribute(AttributeNames.VALUE_ALERT_URL) || null,
+  daysToHide: ({ element }: AttributeElementProps): string =>
+    element.getAttribute(AttributeNames.VISUAL_DAYS_TO_HIDE) ?? '10',
+  giftUrl: ({ element }: AttributeElementProps): string =>
+    element.getAttribute(AttributeNames.INFORMATION_GIFT) ||
+    'https://giving.umd.edu/giving',
+  layoutLock: ({ element }: AttributeElementProps): string | null =>
+    element.getAttribute(AttributeNames.LAYOUT_LOCK),
+  topPosition: ({ element }: AttributeElementProps): string | null =>
+    element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP),
 } as const;
+
+// Public API
+export {
+  includesFeature,
+  isDisplay,
+  isInfo,
+  hasInfo,
+  isLayout,
+  isTheme,
+  isVisual,
+  getValue,
+};
+
+export type {
+  AttributeElementProps,
+  AttributeProps,
+  AttributeNullProps,
+  DeprecatedAttributeProps,
+};

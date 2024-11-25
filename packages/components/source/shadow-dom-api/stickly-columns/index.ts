@@ -29,7 +29,7 @@ export const CreateShadowDom = ({
   const isStickyLast =
     element.getAttribute(Attributes.names.OPTIONAL_STICKY_FIRST) ===
     Attributes.values.STATE_FALSE;
-  const topPosition = Attributes.checks.valueTopPosition({ element });
+  const topPosition = Attributes.getValue.topPosition({ element });
 
   const stickyColumn = Node.slot({ type: Slots.name.STICKY_COLUMN });
   const staticColumn = Node.slot({ type: Slots.name.STATIC_COLUMN });

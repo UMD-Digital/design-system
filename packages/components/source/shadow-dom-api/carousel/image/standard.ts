@@ -29,8 +29,8 @@ const CreateShadowDom = ({
   element: UMDCarouselImageStandardElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
-  const isFullScreenOption = Attributes.checks.includesFullScreenOption({
+  const isThemeDark = Attributes.isTheme.dark({ element });
+  const isFullScreenOption = Attributes.includesFeature.fullScreenOption({
     element,
   });
   const slottedImages = Array.from(

@@ -25,7 +25,7 @@ const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
   const topPosition = element.getAttribute(Attributes.names.LAYOUT_STICKY_TOP);
   const slot = Node.slot({ type: Slots.name.TABS });
   const markup = element.querySelector(`[slot="${Slots.name.TABS}"]`);

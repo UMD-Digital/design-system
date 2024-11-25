@@ -25,7 +25,7 @@ const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
   const lineAttr = element.hasAttribute(Attributes.names.OPTIONAL_HAS_LINE);
 
   return Stat.CreateElement({
-    isThemeDark: Attributes.checks.isThemeDark({ element }),
+    isThemeDark: Attributes.isTheme.dark({ element }),
     displayType: element.getAttribute(Attributes.names.DISPLAY_TYPE),
     size: element.getAttribute(Attributes.names.DISPLAY_SIZE),
     hasLine: lineAttr ? true : false,

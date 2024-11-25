@@ -99,10 +99,10 @@ export const CreateShadowDom = ({
   const isImageScaled =
     element.getAttribute(Attributes.names.LAYOUT_IMAGE_SCALED) !== 'false';
   const type = element.getAttribute(Attributes.names.TYPE);
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
-  const isThemeLight = Attributes.checks.isThemeLight({ element });
-  const isThemeMaryland = Attributes.checks.isThemeMaryland({ element });
-  const includesAnimation = Attributes.checks.includesAnimation({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
+  const isThemeLight = Attributes.isTheme.light({ element });
+  const isThemeMaryland = Attributes.isTheme.maryland({ element });
+  const includesAnimation = Attributes.includesFeature.animation({ element });
 
   shadow.appendChild(element._styles.content.cloneNode(true));
 
@@ -141,7 +141,7 @@ export const CreateShadowDom = ({
   const makeStickyType = () => {
     shadow.appendChild(
       PathwaySticky.CreateElement({
-        isThemeDark: Attributes.checks.isThemeDark({ element }),
+        isThemeDark: Attributes.isTheme.dark({ element }),
         isImageScaled,
         ...MakeCommonDefaultData({ element, ...themes }),
       }),

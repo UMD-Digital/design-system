@@ -37,12 +37,12 @@ const MakeCommonData = ({ element }: { element: UMDEventElement }) => ({
   headline: Slots.defined.headline({ element }),
   text: Slots.defined.text({ element }),
   actions: Slots.defined.actions({ element }),
-  isThemeDark: Attributes.checks.isThemeDark({ element }),
+  isThemeDark: Attributes.isTheme.dark({ element }),
 });
 
 const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
-  const showTime = Attributes.checks.includesVisualTime({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
+  const showTime = Attributes.includesFeature.visualTime({ element });
 
   const startDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_START_ISO}"]`,
@@ -92,7 +92,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
     isThemeDark: true,
   });
 
-  if (Attributes.checks.isDisplayFeature({ element })) {
+  if (Attributes.isDisplay.feature({ element })) {
     return EventFeature.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
@@ -100,7 +100,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
     });
   }
 
-  if (Attributes.checks.isDisplayPromo({ element })) {
+  if (Attributes.isDisplay.promo({ element })) {
     return EventPromo.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: eventDetails,
@@ -108,7 +108,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
     });
   }
 
-  if (Attributes.checks.isDisplayList({ element })) {
+  if (Attributes.isDisplay.list({ element })) {
     return EventList.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: isThemeDark ? eventDetails : eventDetailsDark,

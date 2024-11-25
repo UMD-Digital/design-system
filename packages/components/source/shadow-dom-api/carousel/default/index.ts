@@ -25,7 +25,7 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.checks.isThemeDark({
+  const isThemeDark = Attributes.isTheme.dark({
     element,
   });
   const attributeLeftButton = element.getAttribute('left-button');

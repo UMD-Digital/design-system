@@ -32,8 +32,7 @@ const CreateShadowDom = ({
   element: UMDPathwayHighlightElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
-  const isThemeLight = Attributes.checks.isThemeLight({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 

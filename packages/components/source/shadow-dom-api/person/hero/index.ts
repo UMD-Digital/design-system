@@ -32,7 +32,7 @@ export const CreateShadowDom = ({
   element: UMDPersonHeroElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.checks.isThemeDark({
+  const isThemeDark = Attributes.isTheme.dark({
     element,
   });
   const breadcrumbSlot = Node.slot({ type: Slots.name.BREADCRUMB });

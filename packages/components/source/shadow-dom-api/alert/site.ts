@@ -29,7 +29,7 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
     headline: Slots.defined.headline({ element }),
     text: SlotWithDefaultStyling({ element, slotRef: Slots.name.BODY }),
     actions: Slots.defined.actions({ element }),
-    daysToHide: Attributes.checks.valueDaysToHide({ element }),
+    daysToHide: Attributes.getValue.daysToHide({ element }),
   });
 
   shadow.appendChild(styleTemplate.content.cloneNode(true));

@@ -28,11 +28,11 @@ export const CreateShadowDom = ({
   element: UMDSectionIntroElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const includesAnimation = Attributes.checks.includesAnimation({ element });
+  const includesAnimation = Attributes.includesFeature.animation({ element });
   const intro = SectionIntro.CreateElement({
     ...CommonIntroData({
       element,
-      isThemeDark: Attributes.checks.isThemeDark({ element }),
+      isThemeDark: Attributes.isTheme.dark({ element }),
     }),
     text: Slots.defined.text({ element }),
     hasSeparator: element.hasAttribute(Attributes.names.OPTIONAL_HAS_SEPARATOR),

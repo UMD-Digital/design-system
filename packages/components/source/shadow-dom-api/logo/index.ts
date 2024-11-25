@@ -22,7 +22,7 @@ const styles = `
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
   const borderAttr = element.getAttribute(Attributes.names.VISUAL_BORDER);
 
   const isBordered = borderAttr === 'true';

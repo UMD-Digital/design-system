@@ -28,7 +28,7 @@ export const CreateShadowDom = ({
 }: {
   element: UMDPersonBioElement;
 }) => {
-  const isThemeDark = Attributes.checks.isThemeDark({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
   const type = element.getAttribute(Attributes.names.TYPE);
 
   if (type === Attributes.values.LAYOUT_FULL_IMAGE) {

@@ -52,8 +52,8 @@ export class UMDCallToActionElement extends HTMLElement {
   connectedCallback() {
     const element = this;
     const styleAttrubutes = element.getAttribute(ATTRIBUTE_STYLE_PROPS);
-    const isThemeDark = Attributes.checks.isThemeDark({ element });
-    const isThemeGold = Attributes.checks.isThemeGold({ element });
+    const isThemeDark = Attributes.isTheme.dark({ element });
+    const isThemeGold = Attributes.isTheme.gold({ element });
 
     element._size = element.getAttribute(ATTRIBUTE_SIZE) || element._size;
     element._type = element.getAttribute(ATTRIBUTE_TYPE) || element._type;

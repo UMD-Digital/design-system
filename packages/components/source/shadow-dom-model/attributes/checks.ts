@@ -186,6 +186,10 @@ const hasInfo = {
 
 // Layout checks
 const isLayout = {
+  alertOff: createAttributeCheck(
+    AttributeNames.layout.ALERT_OFF,
+    AttributesValues.state.TRUE,
+  ),
   fullImage: createAttributeCheck(
     AttributeNames.TYPE,
     AttributesValues.Layout.FULL_IMAGE,

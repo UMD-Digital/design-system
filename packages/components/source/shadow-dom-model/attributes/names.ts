@@ -18,6 +18,7 @@ const information = {
 
 const layout = {
   LOCK: 'data-layout-lock',
+  ALERT_OFF: 'data-alert-off',
 };
 
 const sharing = {

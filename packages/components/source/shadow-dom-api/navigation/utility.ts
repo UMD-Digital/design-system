@@ -8,6 +8,7 @@ const createComponent = (element: HTMLElement) =>
     alertUrl: Attributes.getValue.alertUrl({ element }),
     giftUrl: Attributes.getValue.giftUrl({ element }),
     isAdmissionsFeed: Attributes.isInfo.admissions({ element }),
+    isAlertOff: Attributes.isLayout.alertOff({ element }),
     isEventsFeed: Attributes.isInfo.events({ element }),
     isGiftsFeed: Attributes.hasInfo.gifts({ element }),
     isLockFull: Attributes.isLayout.lockFull({ element }),

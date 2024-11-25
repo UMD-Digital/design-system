@@ -5,14 +5,15 @@ import UtilitySearch from './search';
 
 type TypeMenuItemsRequirements = {
   alertUrl?: string | null;
+  giftUrl?: string;
   isAdmissionsFeed: boolean;
+  isAlertOff?: boolean;
   isEventsFeed: boolean;
   isGiftsFeed: boolean;
   isLockFull?: boolean;
   isNewsFeed: boolean;
   isSchoolsFeed: boolean;
   isSearch: boolean;
-  giftUrl?: string;
   isSearchDomain?: boolean;
 };
 
@@ -603,7 +604,7 @@ const CreateMenuItems = ({
 const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
   (() => {
     {
-      const { isLockFull } = props;
+      const { isLockFull, isAlertOff } = props;
       const declaration = document.createElement('div');
       const container = document.createElement('div');
       const lock = document.createElement('div');
@@ -651,10 +652,12 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       };
 
       const load = async () => {
-        const alert = await UtilityAlert.CreateElement(props);
+        if (!isAlertOff) {
+          const alert = await UtilityAlert.CreateElement(props);
 
-        if (alert) {
-          container.insertBefore(alert, container.firstChild);
+          if (alert) {
+            container.insertBefore(alert, container.firstChild);
+          }
         }
 
         setLayout();

@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 
 type TypeUtilitySearchProps = {
-  searchType?: string;
+  isSearchDomain?: boolean;
 };
 
 const { Colors, Spacing } = Tokens;
@@ -109,7 +109,7 @@ const STYLES_NAV_UTILITY_SEARCH = `
   ${OverwriteLayoutMobile}
 `
 
-const CreateNavUtilitySearch = ({ searchType }: TypeUtilitySearchProps) =>
+const CreateNavUtilitySearch = ({ isSearchDomain }: TypeUtilitySearchProps) =>
   (() => {
     const isDesktop = window.innerWidth >= LARGE;
     const form = document.createElement('form');
@@ -146,7 +146,7 @@ const CreateNavUtilitySearch = ({ searchType }: TypeUtilitySearchProps) =>
 
       let searchString = `#gsc.tab=0&gsc`;
 
-      if (searchType === 'domain') {
+      if (isSearchDomain) {
         searchString += `.q=site:${window.location.hostname} ${inputText.value}`;
       } else {
         searchString += `.q=${inputText.value}`;

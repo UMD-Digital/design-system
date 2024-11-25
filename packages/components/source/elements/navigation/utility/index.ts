@@ -5,15 +5,15 @@ import UtilitySearch from './search';
 
 type TypeMenuItemsRequirements = {
   alertUrl?: string | null;
-  hasAdmissions: boolean;
-  hasSchools: boolean;
-  hasNews: boolean;
-  hasEvents: boolean;
-  hasGifts: boolean;
-  hasSearch: boolean;
+  isAdmissionsFeed: boolean;
+  isEventsFeed: boolean;
+  isGiftsFeed: boolean;
+  isLockFull?: boolean;
+  isNewsFeed: boolean;
+  isSchoolsFeed: boolean;
+  isSearch: boolean;
   giftUrl?: string;
-  searchType?: string;
-  isFullLock?: boolean;
+  isSearchDomain?: boolean;
 };
 
 type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps & {};
@@ -473,14 +473,14 @@ const CreateLogoElement = () => {
 };
 
 const CreateMenuItems = ({
-  hasAdmissions,
-  hasSchools,
-  hasEvents,
-  hasGifts,
-  hasNews,
-  hasSearch,
+  isAdmissionsFeed,
+  isEventsFeed,
+  isGiftsFeed,
+  isNewsFeed,
+  isSchoolsFeed,
+  isSearch,
   giftUrl,
-  searchType,
+  isSearchDomain,
 }: TypeMenuItemsRequirements) => {
   const container = document.createElement('div');
 
@@ -514,7 +514,7 @@ const CreateMenuItems = ({
 
   let hasItems = false;
 
-  if (hasAdmissions) {
+  if (isAdmissionsFeed) {
     hasItems = true;
 
     container.appendChild(
@@ -526,7 +526,7 @@ const CreateMenuItems = ({
     );
   }
 
-  if (hasSchools) {
+  if (isSchoolsFeed) {
     hasItems = true;
 
     container.appendChild(
@@ -538,7 +538,7 @@ const CreateMenuItems = ({
     );
   }
 
-  if (hasNews) {
+  if (isNewsFeed) {
     hasItems = true;
 
     container.appendChild(
@@ -550,7 +550,7 @@ const CreateMenuItems = ({
     );
   }
 
-  if (hasEvents) {
+  if (isEventsFeed) {
     hasItems = true;
 
     container.appendChild(
@@ -562,7 +562,7 @@ const CreateMenuItems = ({
     );
   }
 
-  if (hasGifts) {
+  if (isGiftsFeed) {
     hasItems = true;
     const getURL = () => {
       const defaultURL = 'https://giving.umd.edu/giving';
@@ -582,9 +582,9 @@ const CreateMenuItems = ({
     );
   }
 
-  if (hasSearch) {
+  if (isSearch) {
     hasItems = true;
-    const formElement = UtilitySearch.CreateElement({ searchType });
+    const formElement = UtilitySearch.CreateElement({ isSearchDomain });
     const button = CreateSearchFormButton({
       expandElement: formElement,
     });
@@ -603,7 +603,7 @@ const CreateMenuItems = ({
 const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
   (() => {
     {
-      const { isFullLock } = props;
+      const { isLockFull } = props;
       const declaration = document.createElement('div');
       const container = document.createElement('div');
       const lock = document.createElement('div');
@@ -669,7 +669,7 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
 
       container.appendChild(lock);
       container.classList.add(ELEMENT_UTILITY_CONTAINTER);
-      if (isFullLock) container.setAttribute(ATTRIBUTE_LOCK, LOCK_FULL);
+      if (isLockFull) container.setAttribute(ATTRIBUTE_LOCK, LOCK_FULL);
 
       declaration.appendChild(container);
       declaration.classList.add(ELEMENT_UTILITY_DECLARATION);
@@ -677,11 +677,11 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       load();
       window.addEventListener('resize', resizeEvent);
 
-      return declaration;
+      return {
+        element: declaration,
+        styles: STYLES_NAVIGATION_UTILITY,
+      };
     }
   })();
 
-export default {
-  CreateElement: CreateNavigationUtility,
-  Styles: STYLES_NAVIGATION_UTILITY,
-};
+export default CreateNavigationUtility;

@@ -22,6 +22,11 @@ const LayoutValues = {
   LAYOUT_FULL_IMAGE: 'full-image',
   LAYOUT_STACKED_INTERIOR: 'stacked-interior',
   LAYOUT_TEXT_CENTER: 'center',
+  LAYOUT_FULL: 'full',
+};
+
+const SearchValues = {
+  SEARCH_DOMAIN: 'domain',
 };
 
 const SizeValues = {
@@ -45,6 +50,7 @@ const ThemeValues = {
 const AttributeValues = {
   ...DisplayValues,
   ...LayoutValues,
+  ...SearchValues,
   ...SizeValues,
   ...StateValues,
   ...ThemeValues,

@@ -31,6 +31,13 @@ const OptionAttributes = {
 const InformationAttributes = {
   INFORMATION_TITLE: 'data-title',
   INFORMATION_URL: 'data-url',
+  INFORMATION_SEARCH: 'data-search',
+  INFORMATION_SEARCH_TYPE: 'data-search-type',
+  INFORMATION_GIFT: 'data-gift',
+  INFORMATION_ADMISSIONS: 'data-admissions',
+  INFORMATION_SCHOOLS: 'data-schools',
+  INFORMATION_NEWS: 'data-news',
+  INFORMATION_EVENTS: 'data-events',
 };
 
 const LayoutAttributes = {
@@ -38,6 +45,7 @@ const LayoutAttributes = {
   LAYOUT_IMAGE_POSITION: 'image-position',
   LAYOUT_IMAGE_SCALED: 'image-scaled',
   LAYOUT_STICKY_TOP: 'position-top',
+  LAYOUT_LOCK: 'data-layout-lock',
 };
 
 const StateAttributes = {
@@ -76,6 +84,10 @@ const VisualAttributes = {
   VISUAL_QUOTE: 'quote',
 };
 
+const ValueAttributes = {
+  VALUE_ALERT_URL: 'alert-url',
+};
+
 const AttributeNames = {
   ...AnimationAttributes,
   ...DisplayAttributes,
@@ -89,6 +101,7 @@ const AttributeNames = {
   ...ThemeAttributes,
   ...TypeAttributes,
   ...VisualAttributes,
+  ...ValueAttributes,
 } as const;
 
 export default AttributeNames;

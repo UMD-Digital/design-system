@@ -25,12 +25,12 @@ const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDSocialSharingElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const title = element.getAttribute(Attributes.names.INFORMATION_TITLE);
-  const url = element.getAttribute(Attributes.names.INFORMATION_URL);
-  const facebook = element.getAttribute(Attributes.names.SOCIAL_FACEBOOK);
-  const twitter = element.getAttribute(Attributes.names.SOCIAL_TWITTER);
-  const print = element.getAttribute(Attributes.names.SHARING_PRINT);
-  const email = element.getAttribute(Attributes.names.SHARING_EMAIL);
+  const title = element.getAttribute(Attributes.names.information.TITLE);
+  const url = element.getAttribute(Attributes.names.information.URL);
+  const facebook = element.getAttribute(Attributes.names.social.FACEBOOK);
+  const twitter = element.getAttribute(Attributes.names.social.TWITTER);
+  const print = element.getAttribute(Attributes.names.sharing.PRINT);
+  const email = element.getAttribute(Attributes.names.sharing.EMAIL);
 
   const includeFacebook = facebook ? facebook === 'true' : true;
   const includeTwitter = twitter ? twitter === 'true' : true;

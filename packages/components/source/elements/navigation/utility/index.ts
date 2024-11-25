@@ -582,7 +582,7 @@ const CreateMenuItems = ({
     );
   }
 
-  if (isSearch) {
+  if (isSearch || isSearchDomain) {
     hasItems = true;
     const formElement = UtilitySearch.CreateElement({ isSearchDomain });
     const button = CreateSearchFormButton({

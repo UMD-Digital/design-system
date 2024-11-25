@@ -3,31 +3,19 @@ import { Attributes, Model, Register } from 'shadow-dom-model';
 
 const tagName = 'umd-element-navigation-utility';
 
-const createComponent = (element: HTMLElement) => {
-  const alertUrl = Attributes.getValue.alertUrl({ element });
-  const giftUrl = Attributes.getValue.giftUrl({ element });
-  const isAdmissionsFeed = Attributes.isInfo.admissions({ element });
-  const isEventsFeed = Attributes.isInfo.events({ element });
-  const isLockFull = Attributes.isLayout.lockFull({ element });
-  const isNewsFeed = Attributes.isInfo.news({ element });
-  const isSchoolsFeed = Attributes.isInfo.schools({ element });
-  const isSearchDomain = Attributes.isInfo.searchDomain({ element });
-  const isGiftsFeed = Attributes.hasInfo.gifts({ element });
-  const isSearch = Attributes.hasInfo.search({ element });
-
-  return NavigationUtility({
-    alertUrl,
-    isAdmissionsFeed,
-    isEventsFeed,
-    isGiftsFeed,
-    isLockFull,
-    isNewsFeed,
-    isSchoolsFeed,
-    isSearch,
-    giftUrl,
-    isSearchDomain,
+const createComponent = (element: HTMLElement) =>
+  NavigationUtility({
+    alertUrl: Attributes.getValue.alertUrl({ element }),
+    giftUrl: Attributes.getValue.giftUrl({ element }),
+    isAdmissionsFeed: Attributes.isInfo.admissions({ element }),
+    isEventsFeed: Attributes.isInfo.events({ element }),
+    isGiftsFeed: Attributes.hasInfo.gifts({ element }),
+    isLockFull: Attributes.isLayout.lockFull({ element }),
+    isNewsFeed: Attributes.isInfo.news({ element }),
+    isSchoolsFeed: Attributes.isInfo.schools({ element }),
+    isSearch: Attributes.hasInfo.search({ element }),
+    isSearchDomain: Attributes.isInfo.searchDomain({ element }),
   });
-};
 
 const Load = () => {
   Register.registerWebComponent({

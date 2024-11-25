@@ -1,4 +1,3 @@
-import list from 'macros/layout/list';
 import AttributeNames from './names';
 import AttributesValues from './values';
 
@@ -75,18 +74,31 @@ const createAttributeCheck =
 // Feature checks
 const includesFeature = {
   animation: createAttributeCheck(
-    AttributeNames.ANIMATION_STATE,
-    AttributesValues.STATE_FALSE,
+    AttributeNames.feature.ANIMATION,
+    AttributesValues.state.FALSE,
     true,
   ),
   fullScreenOption: createAttributeCheck(
-    AttributeNames.OPTIONAL_FULLSCREEN,
-    AttributesValues.STATE_FALSE,
+    AttributeNames.FULLSCREEN,
+    AttributesValues.state.FALSE,
     true,
   ),
   visualTime: createAttributeCheck(
-    AttributeNames.OPTIONAL_SHOW_TIME,
-    AttributesValues.STATE_FALSE,
+    AttributeNames.SHOW_TIME,
+    AttributesValues.state.FALSE,
+    true,
+  ),
+  lazyLoad: createAttributeCheck(
+    AttributeNames.FEED_LAZY_LOAD,
+    AttributesValues.state.TRUE,
+  ),
+} as const;
+
+// Data checks
+const isData = {
+  union: createAttributeCheck(
+    AttributeNames.FEED_UNION,
+    AttributesValues.state.FALSE,
     true,
   ),
 } as const;
@@ -94,40 +106,68 @@ const includesFeature = {
 // Display checks
 const isDisplay = {
   feature: createAttributeCheck(
-    AttributeNames.VISUAL_DISPLAY,
-    AttributesValues.DISPLAY_FEATURE,
+    AttributeNames.DISPLAY,
+    AttributesValues.display.FEATURE,
   ),
+  featured: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.TYPE,
+      attributeNameNew: AttributeNames.display,
+      attributeValue: AttributesValues.display.FEATURED,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.display,
+      attributeValue: AttributesValues.display.FEATURED,
+    }),
   list: createAttributeCheck(
-    AttributeNames.VISUAL_DISPLAY,
-    AttributesValues.DISPLAY_LIST,
+    AttributeNames.DISPLAY,
+    AttributesValues.display.LIST,
   ),
   promo: createAttributeCheck(
-    AttributeNames.VISUAL_DISPLAY,
-    AttributesValues.DISPLAY_PROMO,
+    AttributeNames.DISPLAY,
+    AttributesValues.display.PROMO,
+  ),
+  statement: createAttributeCheck(
+    AttributeNames.DISPLAY,
+    AttributesValues.display.STATEMENT,
+  ),
+  sticky: createAttributeCheck(
+    AttributeNames.DISPLAY,
+    AttributesValues.display.STICKY,
+  ),
+  stacked: createAttributeCheck(
+    AttributeNames.DISPLAY,
+    AttributesValues.display.STACKED,
+  ),
+  tabular: createAttributeCheck(
+    AttributeNames.DISPLAY,
+    AttributesValues.display.TABULAR,
   ),
 } as const;
 
 // Information checks
 const isInfo = {
   admissions: createAttributeCheck(
-    AttributeNames.INFORMATION_ADMISSIONS,
-    AttributesValues.STATE_TRUE,
+    AttributeNames.information.ADMISSIONS,
+    AttributesValues.state.TRUE,
   ),
   events: createAttributeCheck(
-    AttributeNames.INFORMATION_EVENTS,
-    AttributesValues.STATE_TRUE,
+    AttributeNames.information.EVENTS,
+    AttributesValues.state.TRUE,
   ),
   news: createAttributeCheck(
-    AttributeNames.INFORMATION_NEWS,
-    AttributesValues.STATE_TRUE,
+    AttributeNames.information.NEWS,
+    AttributesValues.state.TRUE,
   ),
   schools: createAttributeCheck(
-    AttributeNames.INFORMATION_SCHOOLS,
-    AttributesValues.STATE_TRUE,
+    AttributeNames.information.SCHOOLS,
+    AttributesValues.state.TRUE,
   ),
   searchDomain: createAttributeCheck(
-    AttributeNames.INFORMATION_SEARCH_TYPE,
-    AttributesValues.SEARCH_DOMAIN,
+    AttributeNames.information.SEARCH_TYPE,
+    AttributesValues.search.DOMAIN,
   ),
 } as const;
 
@@ -135,24 +175,28 @@ const hasInfo = {
   gifts: (props: AttributeElementProps) =>
     isAttributeNotNull({
       ...props,
-      attributeName: AttributeNames.INFORMATION_GIFT,
+      attributeName: AttributeNames.information.GIFT,
     }),
   search: (props: AttributeElementProps) =>
     isAttributeNotNull({
       ...props,
-      attributeName: AttributeNames.INFORMATION_SEARCH_TYPE,
+      attributeName: AttributeNames.information.SEARCH,
     }),
 };
 
 // Layout checks
 const isLayout = {
-  lockFull: createAttributeCheck(
-    AttributeNames.LAYOUT_LOCK,
-    AttributesValues.LAYOUT_FULL,
+  fullImage: createAttributeCheck(
+    AttributeNames.TYPE,
+    AttributesValues.Layout.FULL_IMAGE,
   ),
   image: createAttributeCheck(
     AttributeNames.TYPE,
-    AttributesValues.DISPLAY_IMAGE,
+    AttributesValues.display.IMAGE,
+  ),
+  lockFull: createAttributeCheck(
+    AttributeNames.layout.LOCK,
+    AttributesValues.Layout.FULL,
   ),
 } as const;
 
@@ -162,111 +206,123 @@ const isTheme = {
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.THEME_DEPRECATD,
-      attributeNameNew: AttributeNames.THEME,
-      attributeValue: AttributesValues.THEME_DARK,
+      attributeNameNew: AttributeNames.theme,
+      attributeValue: AttributesValues.theme.DARK,
     }) ||
     isAttributeEqual({
       ...props,
-      attributeName: AttributeNames.THEME,
-      attributeValue: AttributesValues.THEME_DARK,
+      attributeName: AttributeNames.theme,
+      attributeValue: AttributesValues.theme.DARK,
     }),
   gold: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.THEME_DEPRECATD,
-      attributeNameNew: AttributeNames.THEME,
-      attributeValue: AttributesValues.THEME_GOLD,
+      attributeNameNew: AttributeNames.theme,
+      attributeValue: AttributesValues.theme.GOLD,
     }) ||
     isAttributeEqual({
       ...props,
-      attributeName: AttributeNames.THEME,
-      attributeValue: AttributesValues.THEME_GOLD,
+      attributeName: AttributeNames.theme,
+      attributeValue: AttributesValues.theme.GOLD,
     }),
   light: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.THEME_DEPRECATD,
-      attributeNameNew: AttributeNames.THEME,
-      attributeValue: AttributesValues.THEME_LIGHT,
+      attributeNameNew: AttributeNames.theme,
+      attributeValue: AttributesValues.theme.LIGHT,
     }) ||
     isAttributeEqual({
       ...props,
-      attributeName: AttributeNames.THEME,
-      attributeValue: AttributesValues.THEME_LIGHT,
+      attributeName: AttributeNames.theme,
+      attributeValue: AttributesValues.theme.LIGHT,
     }),
   maryland: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.THEME_DEPRECATD,
-      attributeNameNew: AttributeNames.THEME,
-      attributeValue: AttributesValues.THEME_MARYLAND,
+      attributeNameNew: AttributeNames.theme,
+      attributeValue: AttributesValues.theme.MARYLAND,
     }) ||
     isAttributeEqual({
       ...props,
-      attributeName: AttributeNames.THEME,
-      attributeValue: AttributesValues.THEME_MARYLAND,
+      attributeName: AttributeNames.theme,
+      attributeValue: AttributesValues.theme.MARYLAND,
     }),
 } as const;
 
 // Visual checks
 const isVisual = {
-  transparent: createAttributeCheck(
-    AttributeNames.VISUAL_TRANSPARENT,
-    AttributesValues.STATE_TRUE,
-  ),
-  showIcon: createAttributeCheck(
-    AttributeNames.VISUAL_ICON,
-    AttributesValues.STATE_TRUE,
-  ),
   aligned: createAttributeCheck(
     AttributeNames.VISUAL_ALIGN,
-    AttributesValues.STATE_TRUE,
+    AttributesValues.state.TRUE,
   ),
   bordered: createAttributeCheck(
     AttributeNames.VISUAL_BORDER,
-    AttributesValues.STATE_TRUE,
+    AttributesValues.state.TRUE,
   ),
   list: createAttributeCheck(
-    AttributeNames.VISUAL_DISPLAY,
-    AttributesValues.DISPLAY_LIST,
+    AttributeNames.DISPLAY,
+    AttributesValues.display.LIST,
   ),
   logo: createAttributeCheck(
     AttributeNames.VISUAL_HAS_LOGO,
-    AttributesValues.STATE_TRUE,
-  ),
-  quote: createAttributeCheck(
-    AttributeNames.VISUAL_QUOTE,
-    AttributesValues.STATE_TRUE,
+    AttributesValues.state.TRUE,
   ),
   open: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.STATE_DEPRECATD,
       attributeNameNew: AttributeNames.STATE,
-      attributeValue: AttributesValues.STATE_OPENED,
+      attributeValue: AttributesValues.state.OPENED,
     }) ||
     isAttributeEqual({
       ...props,
       attributeName: AttributeNames.STATE,
-      attributeValue: AttributesValues.STATE_OPENED,
+      attributeValue: AttributesValues.state.OPENED,
     }),
+  quote: createAttributeCheck(
+    AttributeNames.VISUAL_QUOTE,
+    AttributesValues.state.TRUE,
+  ),
+  showIcon: createAttributeCheck(
+    AttributeNames.VISUAL_ICON,
+    AttributesValues.state.TRUE,
+  ),
+  sizeNormal: createAttributeCheck(
+    AttributeNames.DISPLAY_SIZE,
+    AttributesValues.size.NORMAL,
+  ),
+  sizeLarge: createAttributeCheck(
+    AttributeNames.DISPLAY_SIZE,
+    AttributesValues.size.LARGE,
+  ),
   stickyLast: createAttributeCheck(
     AttributeNames.OPTIONAL_STICKY_FIRST,
-    AttributesValues.STATE_FALSE,
+    AttributesValues.state.FALSE,
+  ),
+  textCentered: createAttributeCheck(
+    AttributeNames.VISUAL_TEXT_CENTER,
+    AttributesValues.Layout.TEXT_CENTER,
+  ),
+  transparent: createAttributeCheck(
+    AttributeNames.VISUAL_TRANSPARENT,
+    AttributesValues.state.TRUE,
   ),
 } as const;
 
 // Value getters
 const getValue = {
   alertUrl: ({ element }: AttributeElementProps): string | null =>
-    element.getAttribute(AttributeNames.VALUE_ALERT_URL) || null,
+    element.getAttribute(AttributeNames.value.ALERT_URL) || null,
   daysToHide: ({ element }: AttributeElementProps): string =>
     element.getAttribute(AttributeNames.VISUAL_DAYS_TO_HIDE) ?? '10',
   giftUrl: ({ element }: AttributeElementProps): string =>
-    element.getAttribute(AttributeNames.INFORMATION_GIFT) ||
+    element.getAttribute(AttributeNames.information.GIFT) ||
     'https://giving.umd.edu/giving',
   layoutLock: ({ element }: AttributeElementProps): string | null =>
-    element.getAttribute(AttributeNames.LAYOUT_LOCK),
+    element.getAttribute(AttributeNames.layout.LOCK),
   topPosition: ({ element }: AttributeElementProps): string | null =>
     element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP),
 } as const;
@@ -275,6 +331,7 @@ const getValue = {
 export {
   includesFeature,
   isDisplay,
+  isData,
   isInfo,
   hasInfo,
   isLayout,

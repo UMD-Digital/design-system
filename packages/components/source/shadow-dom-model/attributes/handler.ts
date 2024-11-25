@@ -58,7 +58,7 @@ const resize = ({
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
   name: AttributeNames.RESIZE,
   handler: (ref, _, newValue) => {
-    if (newValue === AttributeValues.STATE_TRUE) {
+    if (newValue === AttributeValues.state.TRUE) {
       callback(ref);
     }
   },
@@ -70,8 +70,8 @@ const stateOpen = ({
   name: AttributeNames.STATE,
   handler: (ref, oldValue, newValue) => {
     if (
-      newValue === AttributeValues.STATE_OPENED &&
-      oldValue === AttributeValues.STATE_CLOSED
+      newValue === AttributeValues.state.OPENED &&
+      oldValue === AttributeValues.state.CLOSED
     ) {
       callback(ref);
     }
@@ -84,8 +84,8 @@ const stateClosed = ({
   name: AttributeNames.STATE,
   handler: (ref, oldValue, newValue) => {
     if (
-      newValue === AttributeValues.STATE_CLOSED &&
-      oldValue === AttributeValues.STATE_OPENED
+      newValue === AttributeValues.state.CLOSED &&
+      oldValue === AttributeValues.state.OPENED
     ) {
       callback(ref);
     }

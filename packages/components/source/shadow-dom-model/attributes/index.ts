@@ -5,6 +5,7 @@ import values from './values';
 export {
   includesFeature,
   isDisplay,
+  isData,
   isInfo,
   hasInfo,
   isLayout,

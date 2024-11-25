@@ -1,16 +1,55 @@
-// Options
+const display = 'data-display';
 
-const AnimationAttributes = {
-  ANIMATION_STATE: 'data-animation',
+const feature = {
+  ANIMATION: 'data-animation',
 };
 
-const DisplayAttributes = {
+const information = {
+  TITLE: 'data-title',
+  URL: 'data-url',
+  SEARCH: 'data-search',
+  SEARCH_TYPE: 'data-search-type',
+  GIFT: 'data-gift',
+  ADMISSIONS: 'data-admissions',
+  SCHOOLS: 'data-schools',
+  NEWS: 'data-news',
+  EVENTS: 'data-events',
+};
+
+const layout = {
+  LOCK: 'data-layout-lock',
+};
+
+const sharing = {
+  EMAIL: 'data-email',
+  PRINT: 'data-print',
+};
+
+const social = {
+  FACEBOOK: 'data-facebook',
+  TWITTER: 'data-twitter',
+};
+
+const theme = 'data-theme';
+
+const value = {
+  ALERT_URL: 'data-alert-url',
+};
+
+// Depracted
+
+const depractedFeature = {
+  FULLSCREEN: 'option-full-screen',
+  SHOW_TIME: 'show-time',
+};
+
+const depractedDisplay = {
   DISPLAY_SIZE: 'size',
   DISPLAY_TYPE: 'display-type',
   DISPLAY: 'display',
 };
 
-const FeedAttributes = {
+const depractedFeed = {
   FEED_CATEGORIES: 'categories',
   FEED_COLUMN_COUNT: 'show-count',
   FEED_LAZY_LOAD: 'lazyload',
@@ -20,88 +59,63 @@ const FeedAttributes = {
   FEED_UNION: 'union',
 };
 
-const OptionAttributes = {
-  OPTIONAL_FULLSCREEN: 'option-full-screen',
+const depractedOption = {
   OPTIONAL_HAS_LINE: 'has-line',
   OPTIONAL_HAS_SEPARATOR: 'include-separator',
-  OPTIONAL_SHOW_TIME: 'show-time',
   OPTIONAL_STICKY_FIRST: 'isStickyFirst',
 };
 
-const InformationAttributes = {
-  INFORMATION_TITLE: 'data-title',
-  INFORMATION_URL: 'data-url',
-  INFORMATION_SEARCH: 'data-search',
-  INFORMATION_SEARCH_TYPE: 'data-search-type',
-  INFORMATION_GIFT: 'data-gift',
-  INFORMATION_ADMISSIONS: 'data-admissions',
-  INFORMATION_SCHOOLS: 'data-schools',
-  INFORMATION_NEWS: 'data-news',
-  INFORMATION_EVENTS: 'data-events',
-};
-
-const LayoutAttributes = {
+const depractedLayout = {
   LAYOUT_FIXED: 'fixed',
   LAYOUT_IMAGE_POSITION: 'image-position',
   LAYOUT_IMAGE_SCALED: 'image-scaled',
   LAYOUT_STICKY_TOP: 'position-top',
-  LAYOUT_LOCK: 'data-layout-lock',
 };
 
-const StateAttributes = {
+const depractedState = {
   RESIZE: 'resize',
   STATE_DEPRECATD: 'state',
   STATE: 'data-state',
 };
 
-const ThemeAttributes = {
+const depractedTheme = {
   THEME_DEPRECATD: 'theme',
-  THEME: 'data-theme',
 };
 
-const TypeAttributes = {
+const depractedType = {
   TYPE: 'type',
 };
 
-const SharingAttributes = {
-  SHARING_EMAIL: 'data-email',
-  SHARING_PRINT: 'data-print',
-};
-
-const SocialAttributes = {
-  SOCIAL_FACEBOOK: 'data-facebook',
-  SOCIAL_TWITTER: 'data-twitter',
-};
-
-const VisualAttributes = {
+const depractedVisual = {
   VISUAL_ALIGN: 'aligned',
   VISUAL_BORDER: 'border',
   VISUAL_DAYS_TO_HIDE: 'days-to-hide',
-  VISUAL_DISPLAY: 'display',
   VISUAL_HAS_LOGO: 'hasLogo',
   VISUAL_ICON: 'icon',
   VISUAL_TRANSPARENT: 'transparent',
   VISUAL_QUOTE: 'quote',
-};
-
-const ValueAttributes = {
-  VALUE_ALERT_URL: 'alert-url',
+  VISUAL_TEXT_CENTER: 'text-center',
 };
 
 const AttributeNames = {
-  ...AnimationAttributes,
-  ...DisplayAttributes,
-  ...FeedAttributes,
-  ...InformationAttributes,
-  ...LayoutAttributes,
-  ...OptionAttributes,
-  ...SharingAttributes,
-  ...SocialAttributes,
-  ...StateAttributes,
-  ...ThemeAttributes,
-  ...TypeAttributes,
-  ...VisualAttributes,
-  ...ValueAttributes,
+  display,
+  feature,
+  ...depractedFeature,
+  ...depractedDisplay,
+  ...depractedFeed,
+  ...depractedOption,
+  information,
+  layout,
+  ...depractedLayout,
+  ...Option,
+  sharing,
+  social,
+  ...depractedState,
+  theme,
+  ...depractedTheme,
+  ...depractedType,
+  ...depractedVisual,
+  value,
 } as const;
 
 export default AttributeNames;

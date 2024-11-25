@@ -14,7 +14,7 @@ const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-breadcrumb';
 
-const IS_THEME_DARK = `[${Attributes.names.THEME}=${Attributes.values.THEME_DARK}]`;
+const IS_THEME_DARK = `[${Attributes.names.theme}=${Attributes.values.theme.DARK}]`;
 
 const ELEMENT_CONTAINER = 'breadcrumb-container';
 const ELEMENT_PATH = 'breadcrumb-path';
@@ -119,8 +119,8 @@ const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
 
     if (isThemeDark)
       pathsSlot.setAttribute(
-        Attributes.names.THEME,
-        Attributes.values.THEME_DARK,
+        Attributes.names.theme,
+        Attributes.values.theme.DARK,
       );
     pathsSlot.classList.add(ELEMENT_CONTAINER);
 

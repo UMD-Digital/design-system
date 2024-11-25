@@ -32,8 +32,7 @@ const styles = `
 const MakeData = ({ element }: { element: UMDElementQuote }) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });
-  const isTransparent =
-    element.getAttribute(Attributes.names.VISUAL_TRANSPARENT) === 'true';
+  const isTransparent = Attributes.isVisual.transparent({ element });
 
   return {
     quote: SlotWithDefaultStyling({ element, slotRef: Slots.name.QUOTE }),
@@ -54,23 +53,22 @@ const MakeData = ({ element }: { element: UMDElementQuote }) => {
 };
 
 const CreateShadowDom = ({ element }: { element: UMDElementQuote }) => {
-  const typeAttribute = element.getAttribute(Attributes.names.TYPE);
-  const size =
-    element.getAttribute(Attributes.names.DISPLAY_SIZE) ||
-    Attributes.values.SIZE_NORMAL;
-
-  const isTypeStatement = typeAttribute === Attributes.values.DISPLAY_STATEMENT;
-  const isTypeFeatured = typeAttribute === Attributes.values.DISPLAY_FEATURED;
+  const isSizeLarge = Attributes.isVisual.sizeLarge({ element });
+  const isTypeStatement = Attributes.isDisplay.statement({ element });
+  const isTypeFeatured = Attributes.isDisplay.featured({ element });
 
   if (isTypeStatement) {
     return QuoteStatement.CreateElement({ ...MakeData({ element }) });
   }
 
   if (isTypeFeatured) {
-    return QuoteFeatured.CreateElement({ ...MakeData({ element }), size });
+    return QuoteFeatured.CreateElement({
+      ...MakeData({ element }),
+      isSizeLarge,
+    });
   }
 
-  return QuoteInline.CreateElement({ ...MakeData({ element }), size });
+  return QuoteInline.CreateElement({ ...MakeData({ element }), isSizeLarge });
 };
 
 export class UMDElementQuote extends HTMLElement {

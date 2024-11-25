@@ -50,12 +50,8 @@ export const CommonFeedEventsData = ({
     isThemeDark,
     numberOfRowsToStart,
     numberOfColumnsToShow,
-    isLazyLoad:
-      element.getAttribute(Attributes.names.FEED_LAZY_LOAD) ===
-      Attributes.values.STATE_TRUE,
-    isUnion:
-      element.getAttribute(Attributes.names.FEED_UNION) !==
-      Attributes.values.STATE_FALSE,
+    isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
+    isUnion: Attributes.isData.union({ element }),
   };
 
   if (categoriesAttribute) {

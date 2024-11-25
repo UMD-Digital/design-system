@@ -48,8 +48,7 @@ const MakeCommonDefaultData = ({
   const locationSlot = element.querySelector(`[slot="${Slots.name.LOCATION}"]`);
   const isImageRight =
     element.getAttribute(Attributes.names.LAYOUT_IMAGE_POSITION) !== 'left';
-  const showTime =
-    element.getAttribute(Attributes.names.OPTIONAL_SHOW_TIME) !== 'false';
+  const showTime = element.getAttribute(Attributes.names.SHOW_TIME) !== 'false';
 
   const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
   const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
@@ -98,11 +97,14 @@ export const CreateShadowDom = ({
   const shadow = element.shadowRoot as ShadowRoot;
   const isImageScaled =
     element.getAttribute(Attributes.names.LAYOUT_IMAGE_SCALED) !== 'false';
-  const type = element.getAttribute(Attributes.names.TYPE);
+
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeLight = Attributes.isTheme.light({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });
   const includesAnimation = Attributes.includesFeature.animation({ element });
+
+  // Type Attribute should be deprecated for display
+  const type = element.getAttribute(Attributes.names.TYPE);
 
   shadow.appendChild(element._styles.content.cloneNode(true));
 
@@ -168,18 +170,18 @@ export const CreateShadowDom = ({
     }, 10);
   };
 
-  if (type === Attributes.values.DISPLAY_HERO) {
+  if (type === Attributes.values.display.HERO) {
     makeHeroType();
     return;
   }
 
-  if (type === Attributes.values.DISPLAY_OVERLAY) {
+  if (type === Attributes.values.display.OVERLAY) {
     makeOverlayType();
 
     return;
   }
 
-  if (type === Attributes.values.DISPLAY_STICKY) {
+  if (type === Attributes.values.display.STICKY) {
     makeStickyType();
 
     return;

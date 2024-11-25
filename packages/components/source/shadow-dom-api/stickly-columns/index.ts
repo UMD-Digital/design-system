@@ -26,9 +26,7 @@ export const CreateShadowDom = ({
 }: {
   element: UMDStickyColumnElement;
 }) => {
-  const isStickyLast =
-    element.getAttribute(Attributes.names.OPTIONAL_STICKY_FIRST) ===
-    Attributes.values.STATE_FALSE;
+  const isStickyLast = Attributes.isVisual.stickyLast({ element });
   const topPosition = Attributes.getValue.topPosition({ element });
 
   const stickyColumn = Node.slot({ type: Slots.name.STICKY_COLUMN });

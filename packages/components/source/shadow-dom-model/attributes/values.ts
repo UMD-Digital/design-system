@@ -1,59 +1,60 @@
 // Values
 
-const DisplayValues = {
-  DISPLAY_FEATURE: 'feature',
-  DISPLAY_FEATURED: 'featured',
-  DISPLAY_HERO: 'hero',
-  DISPLAY_IMAGE: 'image',
-  DISPLAY_LIST: 'list',
-  DISPLAY_MINIMAL: 'minimal',
-  DISPLAY_OVERLAY: 'overlay',
-  DISPLAY_PROMO: 'promo',
-  DISPLAY_STACKED: 'stacked',
-  DISPLAY_STATEMENT: 'statement',
-  DISPLAY_STICKY: 'sticky',
-  DISPLAY_TABULAR: 'tabular',
+const display = {
+  FEATURE: 'feature',
+  FEATURED: 'featured',
+  HERO: 'hero',
+  IMAGE: 'image',
+  LIST: 'list',
+  MINIMAL: 'minimal',
+  OVERLAY: 'overlay',
+  PROMO: 'promo',
+  STACKED: 'stacked',
+  STATEMENT: 'statement',
+  STICKY: 'sticky',
+  TABULAR: 'tabular',
 };
 
-const LayoutValues = {
-  LAYOUT_DEFAULT_CENTERED: 'default-centered',
-  LAYOUT_DEFAULT_INTERIOR_CENTERED: 'default-interior-centered',
-  LAYOUT_DEFAULT_INTERIOR: 'default-interior',
-  LAYOUT_FULL_IMAGE: 'full-image',
-  LAYOUT_STACKED_INTERIOR: 'stacked-interior',
-  LAYOUT_TEXT_CENTER: 'center',
-  LAYOUT_FULL: 'full',
+const Layout = {
+  DEFAULT_CENTERED: 'default-centered',
+  DEFAULT_INTERIOR_CENTERED: 'default-interior-centered',
+  DEFAULT_INTERIOR: 'default-interior',
+  FULL_IMAGE: 'full-image',
+  STACKED_INTERIOR: 'stacked-interior',
+  TEXT_CENTER: 'center',
+  FULL: 'full',
 };
 
-const SearchValues = {
-  SEARCH_DOMAIN: 'domain',
+const search = {
+  DOMAIN: 'domain',
 };
 
-const SizeValues = {
-  SIZE_NORMAL: 'normal',
+const size = {
+  NORMAL: 'normal',
+  LARGE: 'large',
 };
 
-const StateValues = {
-  STATE_CLOSED: 'closed',
-  STATE_FALSE: 'false',
-  STATE_OPENED: 'open',
-  STATE_TRUE: 'true',
+const state = {
+  CLOSED: 'closed',
+  FALSE: 'false',
+  OPENED: 'open',
+  TRUE: 'true',
 };
 
-const ThemeValues = {
-  THEME_DARK: 'dark',
-  THEME_GOLD: 'gold',
-  THEME_LIGHT: 'light',
-  THEME_MARYLAND: 'maryland',
+const theme = {
+  DARK: 'dark',
+  GOLD: 'gold',
+  LIGHT: 'light',
+  MARYLAND: 'maryland',
 };
 
 const AttributeValues = {
-  ...DisplayValues,
-  ...LayoutValues,
-  ...SearchValues,
-  ...SizeValues,
-  ...StateValues,
-  ...ThemeValues,
+  display,
+  Layout,
+  search,
+  size,
+  state,
+  theme,
 };
 
 export default AttributeValues;

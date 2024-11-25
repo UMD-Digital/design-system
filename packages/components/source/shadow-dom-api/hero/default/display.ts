@@ -30,25 +30,25 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
   const type = element.getAttribute(Attributes.names.TYPE);
   const includesAnimation = Attributes.includesFeature.animation({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
-  let isTextCenter =
-    element.getAttribute('text-align') === Attributes.values.LAYOUT_TEXT_CENTER;
+  let isTextCenter = Attributes.isVisual.textCentered({ element });
+
   let isInterior = false;
   let isWithLock = false;
 
-  if (type === Attributes.values.LAYOUT_DEFAULT_CENTERED) {
+  if (type === Attributes.values.Layout.DEFAULT_CENTERED) {
     isTextCenter = true;
   }
 
-  if (type === Attributes.values.LAYOUT_DEFAULT_INTERIOR) {
+  if (type === Attributes.values.Layout.DEFAULT_INTERIOR) {
     isInterior = true;
   }
 
-  if (type === Attributes.values.LAYOUT_DEFAULT_INTERIOR_CENTERED) {
+  if (type === Attributes.values.Layout.DEFAULT_INTERIOR_CENTERED) {
     isInterior = true;
     isTextCenter = true;
   }
 
-  if (type === Attributes.values.LAYOUT_STACKED_INTERIOR) {
+  if (type === Attributes.values.Layout.STACKED_INTERIOR) {
     isWithLock = true;
   }
 
@@ -66,17 +66,20 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
 
 export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const type = element.getAttribute('type');
+
   const videoRef = SlotWithDefaultStyling({
     element,
     slotRef: Slots.name.VIDEO,
   });
 
+  // Type Attribute should be deprecated for display
+  const type = element.getAttribute('type');
+
   shadow.appendChild(element._styles.content.cloneNode(true));
 
   if (
-    type === Attributes.values.DISPLAY_STACKED ||
-    type === Attributes.values.LAYOUT_STACKED_INTERIOR
+    type === Attributes.values.display.STACKED ||
+    type === Attributes.values.Layout.STACKED_INTERIOR
   ) {
     shadow.appendChild(
       HeroStacked.CreateElement({
@@ -87,7 +90,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
     return;
   }
 
-  if (type === Attributes.values.DISPLAY_MINIMAL) {
+  if (type === Attributes.values.display.MINIMAL) {
     shadow.appendChild(
       HeroMinimal.CreateElement({
         ...MakeHeroData({ element }),
@@ -97,7 +100,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
     return;
   }
 
-  if (type === Attributes.values.DISPLAY_OVERLAY) {
+  if (type === Attributes.values.display.OVERLAY) {
     shadow.appendChild(
       HeroOverlay.CreateElement({
         ...MakeHeroData({ element }),

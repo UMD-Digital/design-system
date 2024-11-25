@@ -1,72 +1,41 @@
-declare global {
-  interface Window {
-    UMDAlertPageElement: typeof UMDAlertPageElement;
-  }
-}
-
 import { AlertPage } from 'elements';
-import { Attributes, Slots } from 'shadow-dom-model';
-import { Styles, MarkupCreate } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'shadow-dom-model';
 
-const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const tagName = 'umd-element-alert-page';
 
-const ELEMENT_NAME = 'umd-element-alert-page';
-
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.ResetString}
-  ${AlertPage.Styles}
-`;
-
-const styleTemplate = Node.stylesTemplate({ styles });
-
-const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeLight = Attributes.isTheme.light({
-    element,
-  });
-  const isThemeDark = Attributes.isTheme.dark({
-    element,
-  });
-  const isShowIcon = Attributes.isVisual.showIcon({ element });
-
-  const alert = AlertPage.CreateElement({
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.name.BODY }),
+const createComponent = (element: HTMLElement) =>
+  AlertPage({
     headline: Slots.defined.headline({ element }),
+    body: Slots.defined.body({ element, isDefaultStyling: true }),
     actions: Slots.defined.actions({ element }),
-    isThemeLight,
-    isThemeDark,
-    isShowIcon,
+    isThemeLight: Attributes.isTheme.light({
+      element,
+    }),
+    isThemeDark: Attributes.isTheme.dark({
+      element,
+    }),
+    isShowIcon: Attributes.isVisual.showIcon({ element }),
   });
 
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(alert);
+const slots = {
+  headline: {
+    required: true,
+    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+  },
+  body: {
+    allowedElements: ['div', 'p'],
+  },
 };
 
-class UMDAlertPageElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDAlertPageElement = UMDAlertPageElement;
-    window.customElements.define(ELEMENT_NAME, UMDAlertPageElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      slots,
+      createComponent,
+    }),
+  });
 };
 
 export default {

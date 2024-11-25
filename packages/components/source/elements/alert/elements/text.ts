@@ -9,7 +9,7 @@ import { MarkupModify, Styles } from 'utilities';
 
 export type TypeAlertTextProps = {
   headline?: HTMLElement | null;
-  text?: HTMLElement | null;
+  body?: HTMLElement | null;
   actions?: HTMLElement | null;
 };
 
@@ -94,7 +94,7 @@ const STYLES_ALERT_TEXT = `
 `;
 
 export const CreateAlertText = (props: TypeAlertTextProps) => {
-  const { headline, text, actions } = props;
+  const { headline, body, actions } = props;
   const wrapper = document.createElement('div');
 
   if (headline) {
@@ -103,9 +103,9 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
     wrapper.appendChild(headline);
   }
 
-  if (text) {
-    text.classList.add(ELEMENT_ALERT_TEXT_BODY);
-    wrapper.appendChild(text);
+  if (body) {
+    body.classList.add(ELEMENT_ALERT_TEXT_BODY);
+    wrapper.appendChild(body);
   }
 
   if (actions) {

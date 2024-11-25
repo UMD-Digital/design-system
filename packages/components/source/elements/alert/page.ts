@@ -139,10 +139,10 @@ export const CreateAlertPageElement = (props: TypeAlertProps) =>
     elementContainer.appendChild(container);
     elementContainer.classList.add(ELEMENT_ALERT_PAGE_DECLARATION);
 
-    return elementContainer;
+    return {
+      element: elementContainer,
+      styles: STYLES_ALERT_PAGE_ELEMENT,
+    };
   })();
 
-export default {
-  CreateElement: CreateAlertPageElement,
-  Styles: STYLES_ALERT_PAGE_ELEMENT,
-};
+export default CreateAlertPageElement;

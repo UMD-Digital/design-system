@@ -151,10 +151,10 @@ export const CreateAlertSiteElement = (props: TypeAlertProps) =>
     elementContainer.appendChild(container);
     elementContainer.classList.add(ELEMENT_ALERT_SITE_DECLARATION);
 
-    return elementContainer;
+    return {
+      element: elementContainer,
+      styles: STYLES_ALERT_SITE_ELEMENT,
+    };
   })();
 
-export default {
-  CreateElement: CreateAlertSiteElement,
-  Styles: STYLES_ALERT_SITE_ELEMENT,
-};
+export default CreateAlertSiteElement;

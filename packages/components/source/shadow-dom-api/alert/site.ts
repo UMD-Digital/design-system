@@ -1,63 +1,35 @@
-declare global {
-  interface Window {
-    UMDAlertSiteElement: typeof UMDAlertSiteElement;
-  }
-}
-
 import { AlertSite } from 'elements';
-import { Attributes, Slots } from 'shadow-dom-model';
-import { Styles, MarkupCreate } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'shadow-dom-model';
 
-const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const tagName = 'umd-element-alert-site';
 
-const ELEMENT_NAME = 'umd-element-alert-site';
-
-export const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.ResetString}
-  ${AlertSite.Styles}
-`;
-
-const styleTemplate = Node.stylesTemplate({ styles });
-
-const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  const alert = AlertSite.CreateElement({
+const createComponent = (element: HTMLElement) =>
+  AlertSite({
     headline: Slots.defined.headline({ element }),
-    text: SlotWithDefaultStyling({ element, slotRef: Slots.name.BODY }),
+    body: Slots.defined.body({ element, isDefaultStyling: true }),
     actions: Slots.defined.actions({ element }),
     daysToHide: Attributes.getValue.daysToHide({ element }),
   });
 
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(alert);
+const slots = {
+  headline: {
+    required: true,
+    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+  },
+  body: {
+    allowedElements: ['div', 'p'],
+  },
 };
 
-class UMDAlertSiteElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _container: HTMLDivElement | null = null;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDAlertSiteElement = UMDAlertSiteElement;
-    window.customElements.define(ELEMENT_NAME, UMDAlertSiteElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      slots,
+      createComponent,
+    }),
+  });
 };
 
 export default {

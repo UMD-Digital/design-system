@@ -290,10 +290,18 @@ const isVisual = {
     AttributeNames.VISUAL_QUOTE,
     AttributesValues.state.TRUE,
   ),
-  showIcon: createAttributeCheck(
-    AttributeNames.VISUAL_ICON,
-    AttributesValues.state.TRUE,
-  ),
+  showIcon: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.VISUAL_ICON,
+      attributeNameNew: AttributeNames.visual.icon,
+      attributeValue: AttributesValues.state.TRUE,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.visual.icon,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
   sizeNormal: createAttributeCheck(
     AttributeNames.DISPLAY_SIZE,
     AttributesValues.size.NORMAL,

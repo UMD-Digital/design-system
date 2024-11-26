@@ -37,6 +37,10 @@ const value = {
   ALERT_URL: 'data-alert-url',
 };
 
+const visual = {
+  icon: 'data-visual-icon',
+};
+
 // Depracted
 
 const depractedFeature = {
@@ -117,6 +121,7 @@ const AttributeNames = {
   ...depractedType,
   ...depractedVisual,
   value,
+  visual,
 } as const;
 
 export default AttributeNames;

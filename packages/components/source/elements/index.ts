@@ -1,133 +1,98 @@
-import Accordion from './accordion';
-import AlertPage from './alert/page';
-import AlertSite from './alert/site';
-import BannerPromo from './banner-promo';
-import CallToAction from './call-to-action';
-import CardBlock from './card/block';
-import CardList from './card/list';
-import CardIconBlock from './card-icon/block';
-import CardOverlay from './card-overlay';
-import CardOverlayImage from './card-overlay/image';
-import Carousel from './carousel/default';
-import CarouselCards from './carousel/cards';
-import CarouselImageStandard from './carousel/image/standard';
-import CarouselImageMultiple from './carousel/image/multiple';
-import CarouselThumbnail from './carousel/thumbnail';
-import EventBlock from './event/block';
-import EventElements from './event/elements';
-import EventFeature from './event/feature';
-import EventList from './event/list';
-import EventLockupDate from './event/lockup-date';
-import EventPromo from './event/promo';
-import FeedsEvents from './feeds/events';
-import FeedsNews from './feeds/news';
-import FeedsSlides from './feeds/slides';
-import NavigationElements from './navigation/elements';
-import NavigationHeader from './navigation';
-import NavigationUtility from './navigation/utility';
-import HeroBrandVideo from './hero/brand-video';
-import HeroDefault from './hero/default';
-import HeroElements from './hero/elements';
-import HeroExpand from './hero/expand';
-import HeroMinimal from './hero/minimal';
-import HeroOverlay from './hero/overlay';
-import HeroLogo from './hero/logo';
-import HeroStacked from './hero/stacked';
-import LayoutImageExpand from './layout/image-expand';
-import LogoBlock from './logo/block';
-import MediaInline from './media/inline';
-import MediaWithCaption from './media/inline/with-caption';
-import MediaWrapped from './media/inline/wrapped';
-import PathwayDefault from './pathway/default';
-import PathwayElements from './pathway/elements';
-import PathwayHero from './pathway/hero';
-import PathwayHighlight from './pathway/highlight';
-import PathwayOverlay from './pathway/overlay';
-import PathwaySticky from './pathway/sticky';
-import PersonBlock from './person/block';
-import PersonBio from './person/bio';
-import PersonBioFull from './person/bio-full';
-import PersonHero from './person/hero';
-import PersonList from './person/list';
-import PersonTabular from './person/tabular';
-import QuoteElements from './quote/elements';
-import QuoteFeatured from './quote/featured';
-import QuoteInline from './quote/inline';
-import QuoteStatement from './quote/statement';
-import ScrollTop from './scroll-top';
-import SectionIntro from './section-intro/default';
-import SectionIntroWide from './section-intro/wide';
-import SliderEvents from './slider/events';
-import SocialSharing from './social-sharing';
-import Stat from './stat';
-import StickyColumns from './sticky-columns';
-import Tabs from './tabs';
-import TabsElements from './tabs/elements';
+// Base components
+export { default as Accordion } from './accordion';
+export { default as BannerPromo } from './banner-promo';
+export { default as CallToAction } from './call-to-action';
+export { default as ScrollTop } from './scroll-top';
+export { default as SocialSharing } from './social-sharing';
+export { default as Stat } from './stat';
+export { default as StickyColumns } from './sticky-columns';
 
-export {
-  Accordion,
-  AlertPage,
-  AlertSite,
-  BannerPromo,
-  CallToAction,
-  CardBlock,
-  CardList,
-  CardIconBlock,
-  CardOverlay,
-  CardOverlayImage,
-  Carousel,
-  CarouselCards,
-  CarouselImageStandard,
-  CarouselImageMultiple,
-  CarouselThumbnail,
-  EventBlock,
-  EventElements,
-  EventFeature,
-  EventList,
-  EventLockupDate,
-  EventPromo,
-  FeedsEvents,
-  FeedsNews,
-  FeedsSlides,
-  HeroBrandVideo,
-  HeroDefault,
-  HeroElements,
-  HeroExpand,
-  HeroMinimal,
-  HeroOverlay,
-  HeroLogo,
-  HeroStacked,
-  LayoutImageExpand,
-  LogoBlock,
-  MediaInline,
-  MediaWithCaption,
-  MediaWrapped,
-  NavigationElements,
-  NavigationHeader,
-  NavigationUtility,
-  PathwayDefault,
-  PathwayElements,
-  PathwayHero,
-  PathwayHighlight,
-  PathwayOverlay,
-  PathwaySticky,
-  PersonBlock,
-  PersonBio,
-  PersonBioFull,
-  PersonHero,
-  PersonList,
-  PersonTabular,
-  QuoteElements,
-  QuoteFeatured,
-  QuoteInline,
-  QuoteStatement,
-  ScrollTop,
-  SectionIntro,
-  SectionIntroWide,
-  SliderEvents,
-  SocialSharing,
-  Stat,
-  StickyColumns,
-  Tabs,
-  TabsElements,
-};
+// Alert components
+export { default as AlertPage } from './alert/page';
+export { default as AlertSite } from './alert/site';
+
+// Card components
+export { default as CardBlock, STYLES_BLOCK_CARD_ELEMENT } from './card/block';
+export { default as CardList, STYLES_LIST_CARD_ELEMENT } from './card/list';
+export { default as CardIconBlock } from './card-icon/block';
+export { default as CardOverlay } from './card-overlay';
+export { default as CardOverlayImage } from './card-overlay/image';
+
+// Carousel components
+export { default as Carousel } from './carousel/default';
+export { default as CarouselCards } from './carousel/cards';
+export { default as CarouselImageStandard } from './carousel/image/standard';
+export { default as CarouselImageMultiple } from './carousel/image/multiple';
+export { default as CarouselThumbnail } from './carousel/thumbnail';
+
+// Event components
+export { default as EventBlock } from './event/block';
+export { default as EventElements } from './event/elements';
+export { default as EventFeature } from './event/feature';
+export { default as EventList } from './event/list';
+export { default as EventLockupDate } from './event/lockup-date';
+export { default as EventPromo } from './event/promo';
+
+// Feed components
+export { default as FeedsEvents } from './feeds/events';
+export { default as FeedsNews } from './feeds/news';
+export { default as FeedsSlides } from './feeds/slides';
+
+// Hero components
+export { default as HeroBrandVideo } from './hero/brand-video';
+export { default as HeroDefault } from './hero/default';
+export { default as HeroElements } from './hero/elements';
+export { default as HeroExpand } from './hero/expand';
+export { default as HeroMinimal } from './hero/minimal';
+export { default as HeroOverlay } from './hero/overlay';
+export { default as HeroLogo } from './hero/logo';
+export { default as HeroStacked } from './hero/stacked';
+
+// Layout components
+export { default as LayoutImageExpand } from './layout/image-expand';
+
+// Logo components
+export { default as LogoBlock } from './logo/block';
+
+// Media components
+export { default as MediaInline } from './media/inline';
+export { default as MediaWithCaption } from './media/inline/with-caption';
+export { default as MediaWrapped } from './media/inline/wrapped';
+
+// Navigation components
+export { default as NavigationElements } from './navigation/elements';
+export { default as NavigationHeader } from './navigation';
+export { default as NavigationUtility } from './navigation/utility';
+
+// Pathway components
+export { default as PathwayDefault } from './pathway/default';
+export { default as PathwayElements } from './pathway/elements';
+export { default as PathwayHero } from './pathway/hero';
+export { default as PathwayHighlight } from './pathway/highlight';
+export { default as PathwayOverlay } from './pathway/overlay';
+export { default as PathwaySticky } from './pathway/sticky';
+
+// Person components
+export { default as PersonBlock } from './person/block';
+export { default as PersonBio } from './person/bio';
+export { default as PersonBioFull } from './person/bio-full';
+export { default as PersonHero } from './person/hero';
+export { default as PersonList } from './person/list';
+export { default as PersonTabular } from './person/tabular';
+
+// Quote components
+export { default as QuoteElements } from './quote/elements';
+export { default as QuoteFeatured } from './quote/featured';
+export { default as QuoteInline } from './quote/inline';
+export { default as QuoteStatement } from './quote/statement';
+
+// Section components
+export { default as SectionIntro } from './section-intro/default';
+export { default as SectionIntroWide } from './section-intro/wide';
+
+// Slider components
+export { default as SliderEvents } from './slider/events';
+
+// Tab components
+export { default as Tabs } from './tabs';
+export { default as TabsElements } from './tabs/elements';

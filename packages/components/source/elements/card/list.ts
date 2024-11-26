@@ -18,7 +18,7 @@ const ELEMENT_NAME = 'umd-card-list';
 const ELEMENT_LIST_CARD_CONTAINER = 'card-list-container';
 
 // prettier-ignore
-const STYLES_LIST_CARD_ELEMENT = `
+export const STYLES_LIST_CARD_ELEMENT = `
   .${ELEMENT_LIST_CARD_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -46,10 +46,10 @@ const CreateCardListElement = (props: TypeListCardProps) => {
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_LIST_CARD_CONTAINER);
 
-  return elementContainer;
+  return {
+    element: elementContainer,
+    styles: STYLES_LIST_CARD_ELEMENT,
+  };
 };
 
-export default {
-  CreateElement: CreateCardListElement,
-  Styles: STYLES_LIST_CARD_ELEMENT,
-};
+export default CreateCardListElement;

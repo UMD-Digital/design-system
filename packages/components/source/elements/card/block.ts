@@ -18,7 +18,7 @@ const ELEMENT_NAME = 'umd-card-block';
 const ELEMENT_CARD_BLOCK_CONTAINER = 'card-block-container';
 
 // prettier-ignore
-const STYLES_BLOCK_CARD_ELEMENT = `
+export const STYLES_BLOCK_CARD_ELEMENT = `
   .${ELEMENT_CARD_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     height: 100%;
@@ -45,10 +45,7 @@ const CreateCardBlockElement = (props: TypeBlockCardProps) => {
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_CARD_BLOCK_CONTAINER);
 
-  return elementContainer;
+  return { element: elementContainer, styles: STYLES_BLOCK_CARD_ELEMENT };
 };
 
-export default {
-  CreateElement: CreateCardBlockElement,
-  Styles: STYLES_BLOCK_CARD_ELEMENT,
-};
+export default CreateCardBlockElement;

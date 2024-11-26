@@ -1,4 +1,10 @@
-import { CardBlock, CardList, CardOverlayImage } from 'elements';
+import {
+  CardBlock,
+  STYLES_BLOCK_CARD_ELEMENT,
+  CardList,
+  STYLES_LIST_CARD_ELEMENT,
+  CardOverlayImage,
+} from 'elements';
 
 type ImageType = {
   url: string;
@@ -20,8 +26,8 @@ export type ArticleType = {
 };
 
 const STYLES_NEWS_FEED = `
-  ${CardBlock.Styles}
-  ${CardList.Styles}
+  ${STYLES_LIST_CARD_ELEMENT}
+  ${STYLES_BLOCK_CARD_ELEMENT}
   ${CardOverlayImage.Styles}
 `;
 
@@ -129,13 +135,14 @@ const CreateNewsFeedDisplay = ({
   isThemeDark?: boolean;
   isTransparent?: boolean;
 }) => {
-  const standardCardType = ({ entry }: { entry: ArticleType }) =>
-    CardBlock.CreateElement({
+  const standardCardType = ({ entry }: { entry: ArticleType }) => {
+    return CardBlock({
       ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image, url: entry.url }),
       isAligned: false,
       isTransparent,
-    });
+    }).element;
+  };
 
   const overlayCardType = ({ entry }: { entry: ArticleType }) =>
     CardOverlayImage.CreateElement({
@@ -143,11 +150,12 @@ const CreateNewsFeedDisplay = ({
       image: CreateImage({ images: entry.image }),
     });
 
-  const listCardType = ({ entry }: { entry: ArticleType }) =>
-    CardList.CreateElement({
+  const listCardType = ({ entry }: { entry: ArticleType }) => {
+    return CardList({
       ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image, url: entry.url }),
-    });
+    }).element;
+  };
 
   if (isTypeFeatured) {
     if (entries.length >= 3) {

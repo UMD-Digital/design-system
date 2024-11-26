@@ -1,4 +1,9 @@
-import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
+import {
+  Animations,
+  Tokens,
+  Typography,
+  Elements,
+} from '@universityofmaryland/variables';
 import { Styles, AssetLogo } from 'utilities';
 
 type TypeBannerPromoProps = {
@@ -80,6 +85,12 @@ const TextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT}`]: Text.RichText,
+    },
+  })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENT_RICH_TEXT} a`]: Animations.Link.LineFadeUnder.yellow,
     },
   })}
 

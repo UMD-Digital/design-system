@@ -18,6 +18,7 @@ interface AlertPageProps extends AlertBaseProps {
 
 interface AlertBannerProps extends AlertBaseProps {
   includeSeal: boolean;
+  isThemeDark: boolean;
 }
 
 interface AlertProps extends AlertBaseProps {

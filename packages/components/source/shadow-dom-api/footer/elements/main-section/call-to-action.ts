@@ -1,14 +1,12 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { MarkupCreate } from 'utilities';
-import { ELEMENTS, SLOTS, REFERENCES } from '../../globals';
+import { SLOTS } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
 
 const { SlotWithDefaultStyling } = MarkupCreate;
 
 const { CTA } = SLOTS;
-const { ELEMENT_WRAPPER } = ELEMENTS;
-const { IS_THEME_LIGHT } = REFERENCES;
 
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 
@@ -29,6 +27,10 @@ export const CallToActionStyles = `
   .${CALL_TO_ACTION_CONTAINER} a:hover,
   .${CALL_TO_ACTION_CONTAINER} a:focus {
     background-color: ${Colors.redDark};
+  }
+
+  .${CALL_TO_ACTION_CONTAINER} a * {
+    color: ${Colors.white} !important;
   }
 `;
 

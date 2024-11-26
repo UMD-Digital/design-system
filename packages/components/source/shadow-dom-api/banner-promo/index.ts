@@ -1,39 +1,11 @@
 import { BannerPromo } from 'elements';
-import { Attributes, Model, Register, Slots } from 'shadow-dom-model';
+import { Attributes } from 'shadow-dom-model';
+import { createAlertComponent, type AlertBannerProps } from '../_models/alert';
 
-const tagName = 'umd-element-banner-promo';
-
-const createComponent = (element: HTMLElement) =>
-  BannerPromo({
-    headline: Slots.defined.headline({ element }),
-    text: Slots.defined.text({ element }),
-    actions: Slots.defined.actions({ element }),
+export default createAlertComponent<AlertBannerProps>({
+  tagName: 'umd-element-banner-promo',
+  renderer: BannerPromo,
+  getAdditionalProps: (element: HTMLElement) => ({
     includeSeal: Attributes.isVisual.logo({ element }),
-    isThemeDark: Attributes.isTheme.dark({
-      element,
-    }),
-  });
-
-const slots = {
-  headline: {
-    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
-  },
-  text: {
-    allowedElements: ['div', 'p'],
-  },
-};
-
-const Load = () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-    }),
-  });
-};
-
-export default {
-  Load,
-};
+  }),
+});

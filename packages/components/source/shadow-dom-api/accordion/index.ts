@@ -5,7 +5,9 @@ const tagName = 'umd-element-accordion-item';
 
 const createComponent = (element: HTMLElement) =>
   Accordion({
-    body: Slots.defined.body({ element, isDefaultStyling: false }),
+    text:
+      Slots.defined.body({ element, isDefaultStyling: true }) ||
+      Slots.defined.text({ element, isDefaultStyling: true }),
     headline: Slots.defined.headline({ element }),
     isThemeLight: Attributes.isTheme.light({
       element,
@@ -24,6 +26,11 @@ const slots = {
     allowedElements: ['span', 'p'],
   },
   body: {
+    deprecated:
+      'Use "text" instead. This attribute will be removed in version 2.0.',
+    allowedElements: ['div', 'p'],
+  },
+  text: {
     required: true,
     allowedElements: ['div', 'p'],
   },

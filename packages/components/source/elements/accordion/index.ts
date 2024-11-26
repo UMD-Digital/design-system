@@ -2,7 +2,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Performance, Styles } from 'utilities';
 
 type TypeHeadlineText = { headline?: HTMLElement | null };
-type TypeBodyText = { body?: HTMLElement | null };
+type TypeBodyText = { text?: HTMLElement | null };
 type TypeAccordionState = { isOpen: boolean };
 type StateProps = {
   hasAnimation?: boolean;
@@ -228,16 +228,16 @@ const STYLES_ACCORDION_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreateBody = ({ body, isOpen }: TypeBodyProps) => {
+const CreateBody = ({ text, isOpen }: TypeBodyProps) => {
   const contentWrapper = document.createElement('div');
 
   contentWrapper.classList.add(ELEMENT_BODY_WRAPPER);
 
-  if (body) {
+  if (text) {
     const wrapper = document.createElement('div');
     wrapper.classList.add(ELEMENT_BODY);
     contentWrapper.ariaHidden = isOpen ? 'false' : 'true';
-    wrapper.appendChild(body);
+    wrapper.appendChild(text);
     contentWrapper.appendChild(wrapper);
 
     return contentWrapper;

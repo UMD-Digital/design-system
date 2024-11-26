@@ -329,13 +329,13 @@ const isVisual = {
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.STATE_DEPRECATD,
-      attributeNameNew: AttributeNames.STATE,
+      attributeNameNew: AttributeNames.visual.open,
       attributeValue: AttributesValues.state.OPENED,
     }) ||
     isAttributeEqual({
       ...props,
-      attributeName: AttributeNames.STATE,
-      attributeValue: AttributesValues.state.OPENED,
+      attributeName: AttributeNames.visual.open,
+      attributeValue: AttributesValues.state.TRUE,
     }),
   quote: createAttributeCheck(
     AttributeNames.VISUAL_QUOTE,

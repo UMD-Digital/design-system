@@ -1,7 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-type TypeAnimationBrandLogoProps = {};
-
 const { Colors, Queries } = Tokens;
 
 const ICON_CHEVRON_BIG = `<svg width="252" height="306" viewBox="0 0 252 306" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M126 0H0L126 152.706L0 305.411H126L252 152.706L126 0Z" /></svg>`;
@@ -154,7 +152,7 @@ const STYLES_ANIMATION_BRAND_LOGO = `
   ${ThirdChevronStyles} 
 `;
 
-const CreateAnimationBrandLogo = ({}: TypeAnimationBrandLogoProps) =>
+const CreateAnimationBrandLogo = () =>
   (() => {
     const container = document.createElement('div');
     const first = document.createElement('div');
@@ -174,10 +172,10 @@ const CreateAnimationBrandLogo = ({}: TypeAnimationBrandLogoProps) =>
     container.appendChild(first);
     container.appendChild(second);
     container.appendChild(third);
-    return container;
+    return {
+      element: container,
+      styles: STYLES_ANIMATION_BRAND_LOGO,
+    };
   })();
 
-export default {
-  CreateElement: CreateAnimationBrandLogo,
-  Styles: STYLES_ANIMATION_BRAND_LOGO,
-};
+export default CreateAnimationBrandLogo;

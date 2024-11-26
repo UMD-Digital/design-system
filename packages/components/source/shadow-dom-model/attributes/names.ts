@@ -39,6 +39,7 @@ const value = {
 
 const visual = {
   icon: 'data-visual-icon',
+  hidden_days: 'data-days-to-hide',
 };
 
 // Depracted

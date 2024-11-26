@@ -6,7 +6,10 @@ const tagName = 'umd-element-navigation-utility';
 const createComponent = (element: HTMLElement) =>
   NavigationUtility({
     alertUrl: Attributes.getValue.alertUrl({ element }),
-    giftUrl: Attributes.getValue.giftUrl({ element }),
+    giftUrl:
+      Attributes.getValue.giftUrl({
+        element,
+      }) || 'https://giving.umd.edu/giving',
     isAdmissionsFeed: Attributes.isInfo.admissions({ element }),
     isAlertOff: Attributes.isLayout.alertOff({ element }),
     isEventsFeed: Attributes.isInfo.events({ element }),

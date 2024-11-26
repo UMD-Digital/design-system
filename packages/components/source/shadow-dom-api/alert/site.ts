@@ -6,6 +6,6 @@ export default createAlertComponent<AlertSiteProps>({
   tagName: 'umd-element-alert-site',
   renderer: AlertSite,
   getAdditionalProps: (element: HTMLElement) => ({
-    daysToHide: Attributes.getValue.daysToHide({ element }),
+    daysToHide: Attributes.getValue.daysToHide({ element }) || '10',
   }),
 });

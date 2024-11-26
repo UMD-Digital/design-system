@@ -20,6 +20,11 @@ interface DeprecatedAttributeProps extends AttributeElementProps {
   attributeValue: string;
 }
 
+interface ValueGetterConfig {
+  currentName: string;
+  deprecatedName?: string;
+}
+
 // Core attribute check utilities
 const isAttributeEqual = ({
   element,
@@ -36,13 +41,29 @@ const isAttributeNotNull = ({
   attributeName,
 }: AttributeNullProps): boolean => element.getAttribute(attributeName) !== null;
 
-const checkDeprecatedAttribute = ({
+const depcreationWarning = ({
   element,
   attributeNameOld,
   attributeNameNew,
-  attributeValue,
-  ...rest
-}: DeprecatedAttributeProps): boolean => {
+}: {
+  element: HTMLElement;
+  attributeNameOld: string;
+  attributeNameNew: string;
+}) => {
+  console.warn(
+    `UMD Web Component: ${element.nodeName} - Attribute "${attributeNameOld}" is deprecated. ` +
+      `Use "${attributeNameNew}" instead. This attribute will be removed in version 2.0.`,
+  );
+};
+
+const checkDeprecatedAttribute = (props: DeprecatedAttributeProps): boolean => {
+  const {
+    element,
+    attributeNameOld,
+    attributeNameNew,
+    attributeValue,
+    ...rest
+  } = props;
   const isDeprecatedUsed = isAttributeEqual({
     ...rest,
     element,
@@ -51,10 +72,7 @@ const checkDeprecatedAttribute = ({
   });
 
   if (isDeprecatedUsed) {
-    console.warn(
-      `UMD Web Component: ${element.nodeName} - Attribute "${attributeNameOld}" is deprecated. ` +
-        `Use "${attributeNameNew}" instead. This attribute will be removed in version 2.0.`,
-    );
+    depcreationWarning(props);
     return true;
   }
 
@@ -70,6 +88,31 @@ const createAttributeCheck =
       attributeValue,
       defaultValue,
     });
+
+const createValueGetter = ({
+  currentName,
+  deprecatedName,
+}: ValueGetterConfig) => {
+  return ({ element }: AttributeElementProps): string | null => {
+    if (deprecatedName) {
+      const deprecatedValue = element.getAttribute(deprecatedName);
+      if (deprecatedValue !== null) {
+        depcreationWarning({
+          element,
+          attributeNameOld: deprecatedName,
+          attributeNameNew: currentName,
+        });
+      }
+    }
+
+    const value = element.getAttribute(currentName);
+    if (value !== null) {
+      return value;
+    }
+
+    return null;
+  };
+};
 
 // Feature checks
 const includesFeature = {
@@ -326,17 +369,22 @@ const isVisual = {
 
 // Value getters
 const getValue = {
-  alertUrl: ({ element }: AttributeElementProps): string | null =>
-    element.getAttribute(AttributeNames.value.ALERT_URL) || null,
-  daysToHide: ({ element }: AttributeElementProps): string =>
-    element.getAttribute(AttributeNames.VISUAL_DAYS_TO_HIDE) ?? '10',
-  giftUrl: ({ element }: AttributeElementProps): string =>
-    element.getAttribute(AttributeNames.information.GIFT) ||
-    'https://giving.umd.edu/giving',
-  layoutLock: ({ element }: AttributeElementProps): string | null =>
-    element.getAttribute(AttributeNames.layout.LOCK),
-  topPosition: ({ element }: AttributeElementProps): string | null =>
-    element.getAttribute(AttributeNames.LAYOUT_STICKY_TOP),
+  alertUrl: createValueGetter({
+    currentName: AttributeNames.value.ALERT_URL,
+  }),
+  daysToHide: createValueGetter({
+    currentName: AttributeNames.visual.hidden_days,
+    deprecatedName: AttributeNames.VISUAL_DAYS_TO_HIDE,
+  }),
+  giftUrl: createValueGetter({
+    currentName: AttributeNames.information.GIFT,
+  }),
+  layoutLock: createValueGetter({
+    currentName: AttributeNames.layout.LOCK,
+  }),
+  topPosition: createValueGetter({
+    currentName: AttributeNames.LAYOUT_STICKY_TOP,
+  }),
 } as const;
 
 // Public API

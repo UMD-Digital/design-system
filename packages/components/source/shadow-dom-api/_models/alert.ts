@@ -2,7 +2,7 @@ import { Model, Register, Slots } from 'shadow-dom-model';
 
 interface AlertBaseProps {
   headline: HTMLElement | null;
-  body: HTMLElement | null;
+  text: HTMLElement | null;
   actions: HTMLElement | null;
 }
 
@@ -35,17 +35,23 @@ interface AlertConfig<T extends AlertBaseProps> {
 
 const slots = {
   headline: {
-    required: true,
     allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
   },
   body: {
+    allowedElements: ['div', 'p'],
+    deprecated:
+      'Use "text" instead. This attribute will be removed in version 2.0.',
+  },
+  text: {
     allowedElements: ['div', 'p'],
   },
 };
 
 const createBaseProps = (element: HTMLElement): AlertBaseProps => ({
   headline: Slots.defined.headline({ element }),
-  body: Slots.defined.body({ element, isDefaultStyling: true }),
+  text:
+    Slots.defined.body({ element, isDefaultStyling: true }) ||
+    Slots.defined.text({ element, isDefaultStyling: true }),
   actions: Slots.defined.actions({ element }),
 });
 

@@ -13,12 +13,13 @@ interface ElementRef {
 
 interface SlotConfig {
   required?: boolean;
+  deprecated?: string;
   allowedElements?: string[];
 }
 
 interface SlotValidationError {
   slot: string;
-  error: 'missing' | 'invalid-elements';
+  error: 'missing' | 'deprecated' | 'invalid-elements';
   message: string;
   invalidElements?: Element[];
 }
@@ -159,6 +160,17 @@ class BaseComponent extends HTMLElement {
         }
       }
 
+      if (config.deprecated) {
+        const slotElement = this.querySelector(`[slot="${name}"]`);
+        if (slotElement) {
+          errors.push({
+            slot: name,
+            error: 'deprecated',
+            message: `Slot "${name}" is deprecated. ${config.deprecated}`,
+          });
+        }
+      }
+
       if (config.allowedElements) {
         const slotElements = Array.from(
           this.querySelectorAll(`[slot="${name}"]`),
@@ -183,6 +195,10 @@ class BaseComponent extends HTMLElement {
 
     if (errors.length > 0) {
       this.handleError('Slot validation failed', errors);
+
+      errors.forEach((error) => {
+        console.warn(`[${this.config.tagName}]`, error.message, error);
+      });
     }
   }
 

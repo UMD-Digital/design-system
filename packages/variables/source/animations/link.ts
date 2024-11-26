@@ -69,6 +69,25 @@ export const LineFadeUnder = {
       textDecoration: 'none',
     },
   },
+
+  yellow: {
+    ...BaseLink,
+
+    backgroundImage: `linear-gradient(currentColor, currentColor)`,
+    backgroundPosition: 'left calc(100% - 1px)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 1px',
+    color: 'currentColor',
+    transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
+
+    [`&:hover,
+    &:focus`]: {
+      backgroundImage: `linear-gradient(${Colors.red}, ${Colors.red})`,
+      backgroundPosition: 'left calc(100%)',
+      color: Colors.black,
+      textDecoration: 'none',
+    },
+  },
 };
 
 export const LineSlideUnder = {

@@ -6,6 +6,6 @@ export default createAlertComponent<AlertBannerProps>({
   tagName: 'umd-element-banner-promo',
   renderer: BannerPromo,
   getAdditionalProps: (element: HTMLElement) => ({
-    includeSeal: Attributes.isVisual.logo({ element }),
+    includeSeal: Attributes.isVisual.icon_seal({ element }),
   }),
 });

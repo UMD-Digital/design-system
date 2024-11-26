@@ -313,10 +313,18 @@ const isVisual = {
     AttributeNames.DISPLAY,
     AttributesValues.display.LIST,
   ),
-  logo: createAttributeCheck(
-    AttributeNames.VISUAL_HAS_LOGO,
-    AttributesValues.state.TRUE,
-  ),
+  icon_seal: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.VISUAL_HAS_LOGO,
+      attributeNameNew: AttributeNames.visual.icon_seal,
+      attributeValue: AttributesValues.state.TRUE,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.visual.icon_seal,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
   open: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,

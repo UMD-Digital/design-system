@@ -39,6 +39,7 @@ const value = {
 
 const visual = {
   icon: 'data-visual-icon',
+  icon_seal: 'data-visual-icon-seal',
   hidden_days: 'data-days-to-hide',
 };
 

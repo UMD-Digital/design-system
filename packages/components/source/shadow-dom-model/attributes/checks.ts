@@ -33,7 +33,19 @@ const isAttributeEqual = ({
   defaultValue = false,
 }: AttributeProps): boolean => {
   const value = element.getAttribute(attributeName);
-  return value === attributeValue ? !defaultValue : defaultValue;
+  if (value === null) {
+    return defaultValue;
+  }
+
+  if (attributeValue === 'true' || attributeValue === 'false') {
+    return value.toLowerCase() === 'true';
+  }
+
+  if (value === '') {
+    return true;
+  }
+
+  return value === attributeValue;
 };
 
 const isAttributeNotNull = ({
@@ -241,9 +253,47 @@ const isLayout = {
     AttributeNames.TYPE,
     AttributesValues.display.IMAGE,
   ),
+  fixed: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.LAYOUT_FIXED,
+      attributeNameNew: AttributeNames.theme,
+      attributeValue: '',
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.layout.FIXED,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
   lockFull: createAttributeCheck(
     AttributeNames.layout.LOCK,
     AttributesValues.Layout.FULL,
+  ),
+} as const;
+
+// Social checks
+
+const isSharing = {
+  email: createAttributeCheck(
+    AttributeNames.sharing.EMAIL,
+    AttributesValues.state.TRUE,
+  ),
+  print: createAttributeCheck(
+    AttributeNames.sharing.PRINT,
+    AttributesValues.state.TRUE,
+  ),
+} as const;
+
+const includesSharing = {
+  facebook: createAttributeCheck(
+    AttributeNames.social.FACEBOOK,
+    AttributesValues.state.TRUE,
+    true,
+  ),
+  twitter: createAttributeCheck(
+    AttributeNames.social.TWITTER,
+    AttributesValues.state.TRUE,
+    true,
   ),
 } as const;
 
@@ -390,8 +440,14 @@ const getValue = {
   layoutLock: createValueGetter({
     currentName: AttributeNames.layout.LOCK,
   }),
+  title: createValueGetter({
+    currentName: AttributeNames.information.TITLE,
+  }),
   topPosition: createValueGetter({
     currentName: AttributeNames.LAYOUT_STICKY_TOP,
+  }),
+  url: createValueGetter({
+    currentName: AttributeNames.information.URL,
   }),
 } as const;
 
@@ -403,6 +459,8 @@ export {
   isInfo,
   hasInfo,
   isLayout,
+  isSharing,
+  includesSharing,
   isTheme,
   isVisual,
   getValue,

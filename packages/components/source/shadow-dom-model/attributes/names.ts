@@ -17,6 +17,7 @@ const information = {
 };
 
 const layout = {
+  FIXED: 'data-layout-fixed',
   LOCK: 'data-layout-lock',
   ALERT_OFF: 'data-alert-off',
 };

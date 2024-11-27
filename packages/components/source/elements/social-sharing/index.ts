@@ -266,10 +266,8 @@ const CreateSocialSharingElement = (props: TypeSocialSharingProps) =>
       events: {
         load,
       },
+      styles: STYLES_SOCIAL_SHARING_ELEMENT,
     };
   })();
 
-export default {
-  CreateElement: CreateSocialSharingElement,
-  Styles: STYLES_SOCIAL_SHARING_ELEMENT,
-};
+export default CreateSocialSharingElement;

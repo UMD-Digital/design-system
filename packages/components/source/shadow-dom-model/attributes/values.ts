@@ -22,6 +22,7 @@ const Layout = {
   FULL_IMAGE: 'full-image',
   STACKED_INTERIOR: 'stacked-interior',
   TEXT_CENTER: 'center',
+  FIXED: 'fixed',
   FULL: 'full',
 };
 

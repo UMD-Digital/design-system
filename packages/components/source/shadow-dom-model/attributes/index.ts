@@ -9,6 +9,8 @@ export {
   isInfo,
   hasInfo,
   isLayout,
+  isSharing,
+  includesSharing,
   isTheme,
   isVisual,
   getValue,

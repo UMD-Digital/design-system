@@ -17,9 +17,10 @@ const information = {
 };
 
 const layout = {
+  ALERT_OFF: 'data-alert-off',
+  ALIGNMENT: 'data-layout-alignment',
   FIXED: 'data-layout-fixed',
   LOCK: 'data-layout-lock',
-  ALERT_OFF: 'data-alert-off',
 };
 
 const sharing = {
@@ -76,6 +77,7 @@ const depractedOption = {
 
 const depractedLayout = {
   LAYOUT_FIXED: 'fixed',
+  LAYOUT_ALIGNMENT: 'alignment',
   LAYOUT_IMAGE_POSITION: 'image-position',
   LAYOUT_IMAGE_SCALED: 'image-scaled',
   LAYOUT_STICKY_TOP: 'position-top',

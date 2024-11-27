@@ -21,7 +21,7 @@ const styles = `
   ${Stat.Styles}
 `;
 
-const CreateShadowDom = ({ element }: { element: UMDStatElement }) => {
+const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const lineAttr = element.hasAttribute(Attributes.names.OPTIONAL_HAS_LINE);
 
   return Stat.CreateElement({

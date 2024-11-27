@@ -35,20 +35,20 @@ const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
   let isInterior = false;
   let isWithLock = false;
 
-  if (type === Attributes.values.Layout.DEFAULT_CENTERED) {
+  if (type === Attributes.values.layout.DEFAULT_CENTERED) {
     isTextCenter = true;
   }
 
-  if (type === Attributes.values.Layout.DEFAULT_INTERIOR) {
+  if (type === Attributes.values.layout.DEFAULT_INTERIOR) {
     isInterior = true;
   }
 
-  if (type === Attributes.values.Layout.DEFAULT_INTERIOR_CENTERED) {
+  if (type === Attributes.values.layout.DEFAULT_INTERIOR_CENTERED) {
     isInterior = true;
     isTextCenter = true;
   }
 
-  if (type === Attributes.values.Layout.STACKED_INTERIOR) {
+  if (type === Attributes.values.layout.STACKED_INTERIOR) {
     isWithLock = true;
   }
 
@@ -79,7 +79,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
 
   if (
     type === Attributes.values.display.STACKED ||
-    type === Attributes.values.Layout.STACKED_INTERIOR
+    type === Attributes.values.layout.STACKED_INTERIOR
   ) {
     shadow.appendChild(
       HeroStacked.CreateElement({

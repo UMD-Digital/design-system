@@ -34,10 +34,8 @@ const CreateMediaInline = (props: TypeMediaInlineRequirements) =>
 
     return {
       element: elementContainer,
+      styles: STYLES_MEDIA_INLINE_ELEMENT,
     };
   })();
 
-export default {
-  CreateElement: CreateMediaInline,
-  Styles: STYLES_MEDIA_INLINE_ELEMENT,
-};
+export default CreateMediaInline;

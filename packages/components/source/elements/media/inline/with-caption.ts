@@ -105,12 +105,10 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
     return {
       element: elementContainer,
       events: {
-        SetLoad: load,
+        load,
       },
+      styles: STYLES_MEDIA_INLINE_ELEMENT,
     };
   })();
 
-export default {
-  CreateElement: CreateMediaWithCaption,
-  Styles: STYLES_MEDIA_INLINE_ELEMENT,
-};
+export default CreateMediaWithCaption;

@@ -245,9 +245,21 @@ const isLayout = {
     AttributeNames.layout.ALERT_OFF,
     AttributesValues.state.TRUE,
   ),
+  alignmentRight: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.LAYOUT_ALIGNMENT,
+      attributeNameNew: AttributeNames.layout.ALIGNMENT,
+      attributeValue: AttributesValues.layout.RIGHT,
+    }) ||
+    isAttributeEqual({
+      ...props,
+      attributeName: AttributeNames.layout.ALIGNMENT,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
   fullImage: createAttributeCheck(
     AttributeNames.TYPE,
-    AttributesValues.Layout.FULL_IMAGE,
+    AttributesValues.layout.FULL_IMAGE,
   ),
   image: createAttributeCheck(
     AttributeNames.TYPE,
@@ -267,7 +279,7 @@ const isLayout = {
     }),
   lockFull: createAttributeCheck(
     AttributeNames.layout.LOCK,
-    AttributesValues.Layout.FULL,
+    AttributesValues.layout.FULL,
   ),
 } as const;
 
@@ -417,7 +429,7 @@ const isVisual = {
   ),
   textCentered: createAttributeCheck(
     AttributeNames.VISUAL_TEXT_CENTER,
-    AttributesValues.Layout.TEXT_CENTER,
+    AttributesValues.layout.CENTER,
   ),
   transparent: createAttributeCheck(
     AttributeNames.VISUAL_TRANSPARENT,

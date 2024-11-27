@@ -181,12 +181,10 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
     return {
       element: elementContainer,
       events: {
-        SetLoad: load,
+        load,
       },
+      styles: STYLES_MEDIA_INLINE_WRAPPED_ELEMENT,
     };
   })();
 
-export default {
-  CreateElement: CreateMediaInlineWrapped,
-  Styles: STYLES_MEDIA_INLINE_WRAPPED_ELEMENT,
-};
+export default CreateMediaInlineWrapped;

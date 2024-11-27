@@ -15,13 +15,15 @@ const display = {
   TABULAR: 'tabular',
 };
 
-const Layout = {
+const layout = {
   DEFAULT_CENTERED: 'default-centered',
   DEFAULT_INTERIOR_CENTERED: 'default-interior-centered',
   DEFAULT_INTERIOR: 'default-interior',
   FULL_IMAGE: 'full-image',
   STACKED_INTERIOR: 'stacked-interior',
-  TEXT_CENTER: 'center',
+  CENTER: 'center',
+  RIGHT: 'right',
+  LEFT: 'left',
   FIXED: 'fixed',
   FULL: 'full',
 };
@@ -51,7 +53,7 @@ const theme = {
 
 const AttributeValues = {
   display,
-  Layout,
+  layout,
   search,
   size,
   state,

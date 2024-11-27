@@ -257,7 +257,7 @@ const isLayout = {
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.LAYOUT_FIXED,
-      attributeNameNew: AttributeNames.theme,
+      attributeNameNew: AttributeNames.layout.FIXED,
       attributeValue: '',
     }) ||
     isAttributeEqual({

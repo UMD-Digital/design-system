@@ -24,12 +24,17 @@ interface SlotValidationError {
   invalidElements?: Element[];
 }
 
-interface ComponentConfig {
+interface ComponentLifecycle {
+  beforeConnect?: (ref: ElementRef) => void;
+  afterConnect?: (ref: ElementRef) => void;
+  onReady?: (ref: ElementRef) => void;
+}
+
+interface ComponentConfig extends ComponentLifecycle {
   tagName: string;
   attributes?: AttributeConfig[];
   slots?: Record<string, SlotConfig>;
   createComponent: (host: HTMLElement) => ElementRef;
-  afterConnect?: (host: HTMLElement) => void;
 }
 
 // Store the config on the constructor itself
@@ -93,29 +98,6 @@ class BaseComponent extends HTMLElement {
     }
   }
 
-  protected validateConfig(): void {
-    const requiredFields: (keyof ComponentConfig)[] = [
-      'tagName',
-      'createComponent',
-    ];
-
-    requiredFields.forEach((field) => {
-      if (!this.config[field]) {
-        throw new Error(`Missing required config field: ${field}`);
-      }
-    });
-
-    if (this.config.attributes) {
-      this.config.attributes.forEach((attr) => {
-        if (!attr.name || !attr.handler) {
-          throw new Error(
-            'Invalid attribute config: requires name and handler',
-          );
-        }
-      });
-    }
-  }
-
   protected initializeComponent(): void {
     try {
       this.validateSlots();
@@ -141,6 +123,69 @@ class BaseComponent extends HTMLElement {
       StylesTemplate({ styles: component.styles }).content.cloneNode(true),
     );
     this.shadow.appendChild(component.element);
+  }
+
+  protected validateConfig(): void {
+    const requiredFields: (keyof ComponentConfig)[] = [
+      'tagName',
+      'createComponent',
+    ];
+
+    requiredFields.forEach((field) => {
+      if (!this.config[field]) {
+        throw new Error(`Missing required config field: ${field}`);
+      }
+    });
+
+    if (this.config.attributes) {
+      this.config.attributes.forEach((attr) => {
+        if (!attr.name || !attr.handler) {
+          throw new Error(
+            'Invalid attribute config: requires name and handler',
+          );
+        }
+      });
+    }
+  }
+
+  protected async afterInit(): Promise<void> {
+    if (!this.elementRef) {
+      this.handleError('Cannot initialize - missing element reference', null);
+      return;
+    }
+
+    await this.executeLifecycleCallbacks();
+  }
+
+  protected handleAttributeChange(
+    name: string,
+    oldValue: string,
+    newValue: string,
+  ): void {
+    if (!this.elementRef) return;
+
+    const handler = this.config.attributes?.find(
+      (attr) => attr.name === name,
+    )?.handler;
+
+    if (handler) {
+      handler(this.elementRef, oldValue, newValue);
+    }
+  }
+
+  protected cleanup(): void {
+    this.elementRef = null;
+  }
+
+  protected handleError(message: string, error: unknown): void {
+    console.error(`[${this.config.tagName}]`, message, error);
+    this.dispatchEvent(
+      new CustomEvent('component-error', {
+        detail: { message, error },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   private validateSlots(): void {
@@ -202,41 +247,30 @@ class BaseComponent extends HTMLElement {
     }
   }
 
-  protected handleAttributeChange(
-    name: string,
-    oldValue: string,
-    newValue: string,
-  ): void {
-    if (!this.elementRef) return;
+  private async executeLifecycleCallbacks(): Promise<void> {
+    const lifecycleMethods = [
+      'beforeConnect',
+      'afterConnect',
+      'onReady',
+    ] as const;
 
-    const handler = this.config.attributes?.find(
-      (attr) => attr.name === name,
-    )?.handler;
-
-    if (handler) {
-      handler(this.elementRef, oldValue, newValue);
+    for (const method of lifecycleMethods) {
+      await this.executeCallback(method);
     }
   }
 
-  protected afterInit(): void {
-    if (this.config.afterConnect) {
-      this.config.afterConnect(this);
+  private async executeCallback(name: keyof ComponentLifecycle): Promise<void> {
+    const callback = this.config[name];
+
+    if (!callback) {
+      return;
     }
-  }
 
-  protected cleanup(): void {
-    this.elementRef = null;
-  }
-
-  protected handleError(message: string, error: unknown): void {
-    console.error(`[${this.config.tagName}]`, message, error);
-    this.dispatchEvent(
-      new CustomEvent('component-error', {
-        detail: { message, error },
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    try {
+      await Promise.resolve(callback(this.elementRef!));
+    } catch (error) {
+      this.handleError(`Failed to execute ${name} callback`, error);
+    }
   }
 
   public getRef(): ElementRef | null {

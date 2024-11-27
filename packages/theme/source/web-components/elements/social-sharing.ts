@@ -14,17 +14,24 @@ const Default = {
   },
 };
 
+const FixedStyles = {
+  display: 'block',
+  position: 'fixed',
+  left: '8px',
+  top: '30vh',
+  zIndex: '9999',
+
+  [`@media (${Queries.tablet.min})`]: {
+    left: '40px',
+  },
+};
+
 const Fixed = {
   'umd-element-social-sharing[fixed]': {
-    display: 'block',
-    position: 'fixed',
-    left: '8px',
-    top: '30vh',
-    zIndex: '9999',
-
-    [`@media (${Queries.tablet.min})`]: {
-      left: '40px',
-    },
+    ...FixedStyles,
+  },
+  'umd-element-social-sharing[data-layout-fixed="true"]': {
+    ...FixedStyles,
   },
 };
 

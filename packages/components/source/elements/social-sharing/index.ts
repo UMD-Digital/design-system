@@ -51,6 +51,18 @@ const ContainerStyles = `
     justify-content: center;
     border: 1px solid ${Colors.gray.light};
     background-color: ${Colors.white};
+    transition: background-color 250ms ease-in-out;
+  }
+
+  .${ELEMENT_SOCIAL_SHARING_CONTAINER} > button:hover,
+  .${ELEMENT_SOCIAL_SHARING_CONTAINER} > button:focus,
+  .${ELEMENT_SOCIAL_SHARING_CONTAINER} > a:hover,
+  .${ELEMENT_SOCIAL_SHARING_CONTAINER} > a:focus {
+    background-color: ${Colors.gray.dark};
+
+    & svg path {
+      fill: ${Colors.white};
+    }
   }
 
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} > *:not(:last-child) {
@@ -59,6 +71,7 @@ const ContainerStyles = `
   
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} svg {
     display: block;
+    transition: fill 250ms ease-in-out;
   }
   
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} svg path {

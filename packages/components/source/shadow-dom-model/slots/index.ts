@@ -1,109 +1,35 @@
-import { MarkupCreate } from 'utilities';
+import { SlotNames, type SlotName } from './names';
+import { createSlot, type BaseProps, type OptionalProps } from './factory';
 
-type SlotProps = {
-  element: HTMLElement;
-  isDefaultStyling?: boolean;
-};
+type SlotProps = BaseProps & Partial<OptionalProps>;
 
-type LightDomElementProps = {
-  type: string;
-};
+const createSlotFactory =
+  (type: SlotName, config: Partial<SlotProps> = {}) =>
+  (props: SlotProps) =>
+    createSlot({ ...props, type, ...config });
 
-type SlotOptionProps = SlotProps & LightDomElementProps;
+// Defined common usage
 
-const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const CommonSlots = {
+  actions: createSlotFactory(SlotNames.ACTIONS),
+  caption: createSlotFactory(SlotNames.CAPTION),
+  date: createSlotFactory(SlotNames.DATE),
+  image: createSlotFactory(SlotNames.IMAGE),
+  eyebrow: createSlotFactory(SlotNames.EYEBROW),
+  headline: createSlotFactory(SlotNames.HEADLINE),
+  text: createSlotFactory(SlotNames.TEXT),
+} as const;
 
-const name = {
-  ACTIONS: 'actions',
-  ADDITIONAL_CONTACT: 'additional-contact',
-  ADDITIONAL: 'additional',
-  ADDRESS: 'address',
-  ASSOCIATION: 'association',
-  ATTRIBUTION_SUB_TEXT: 'attribution-sub-text',
-  ATTRIBUTION: 'attribution',
-  BLOCKS: 'blocks',
-  BODY: 'body',
-  BREADCRUMB_COPY: 'breadcrumb-copy',
-  BREADCRUMB: 'breadcrumb',
-  CAPTION: 'caption',
-  CARDS: 'cards',
-  CHILDREN_SLIDES: 'children-slides',
-  CONTENT: 'content',
-  CTA_ICON: 'cta-icon',
-  DATE_END_ISO: 'end-date-iso',
-  DATE_START_ISO: 'start-date-iso',
-  DATE: 'date',
-  DESCRIPTION: 'description',
-  EMAIL: 'email',
-  EVENT_LIST: 'event-list',
-  EYEBROW: 'eyebrow',
-  HEADLINE: 'headline',
-  HEADLINES: 'headlines',
-  HIGHLIGHT_ATTRIBUTION: 'highlight-attribution',
-  HIGHLIGHT: 'highlight',
-  IMAGE: 'image',
-  IMAGES: 'images',
-  JOB_TITLE: 'job-title',
-  LINKEDIN: 'linkedin',
-  LOCATION: 'location',
-  NAME: 'name',
-  PATHS: 'paths',
-  PHONE: 'phone',
-  PRIMARY_SLIDE_CONTENT: 'primary-slide-content',
-  PRIMARY_SLIDE_LINKS: 'primary-slide-links',
-  PRIMARY_SLIDE_SECONDARY_LINKS: 'primary-slide-secondary-links',
-  PRONOUNS: 'pronouns',
-  QUOTE: 'quote',
-  STAT: 'stat',
-  STATIC_COLUMN: 'static-column',
-  STATS: 'stats',
-  STICKY_COLUMN: 'sticky-column',
-  SUB_TEXT: 'sub-text',
-  TABS: 'tabs',
-  TEXT: 'text',
-  TEXTS: 'texts',
-  VIDEO: 'video',
-  WRAPPING_TEXT: 'wrapping-text',
-};
-
-const SlotOptions = ({
-  element,
-  type,
-  isDefaultStyling = true,
-}: SlotOptionProps) => {
-  if (isDefaultStyling) {
-    return SlotWithDefaultStyling({ element, slotRef: type });
-  }
-
-  return Node.slot({ type });
-};
-
-const headline = (props: SlotProps) =>
-  SlotOptions({ ...props, type: name.HEADLINE });
-
-const eyebrow = (props: SlotProps) =>
-  SlotOptions({ ...props, type: name.EYEBROW });
-
-const date = (props: SlotProps) => SlotOptions({ ...props, type: name.DATE });
-
-const text = (props: SlotProps) => SlotOptions({ ...props, type: name.TEXT });
-
-const body = (props: SlotProps) => SlotOptions({ ...props, type: name.BODY });
-
-const actions = (props: SlotProps) =>
-  SlotOptions({ ...props, type: name.ACTIONS });
-
-const defined = {
-  headline,
-  eyebrow,
-  body,
-  date,
-  text,
-  actions,
-};
+// Deprecated slots (marked for removal)
+/** @deprecated Use CommonSlots instead */
+const LegacySlots = {
+  body: createSlotFactory(SlotNames.BODY),
+  wrappingText: createSlotFactory(SlotNames.WRAPPING_TEXT),
+} as const;
 
 export default {
-  name,
-  defined,
-  SlotOptions,
-};
+  name: SlotNames,
+  defined: { ...CommonSlots, ...LegacySlots },
+} as const;
+
+export type { SlotName };

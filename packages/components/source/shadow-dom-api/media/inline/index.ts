@@ -6,10 +6,10 @@ const tagName = 'umd-element-media-inline';
 
 const Load = () => {
   const createComponent = (element: HTMLElement) => {
-    const caption = Slots.defined.caption({ element });
+    const caption = Slots.text.caption({ element });
     const wrappingText =
-      Slots.defined.text({ element, isDefaultStyling: false }) ||
-      Slots.defined.wrappingText({ element, isDefaultStyling: false });
+      Slots.text.default({ element, isDefaultStyling: false }) ||
+      Slots.deprecated.wrappingText({ element, isDefaultStyling: false });
     const isAlignmentRight = Attributes.isLayout.alignmentRight({ element });
     const hasWrappingText = wrappingText !== null;
     const hasCaption = caption !== null;
@@ -17,7 +17,10 @@ const Load = () => {
     const content = {
       isAlignmentRight,
       caption,
-      image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
+      image: MarkupValidate.ImageSlot({
+        element,
+        ImageSlot: Slots.name.assets.image,
+      }),
       wrappingText,
     };
 

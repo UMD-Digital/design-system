@@ -30,8 +30,8 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
     size: element.getAttribute(Attributes.names.DISPLAY_SIZE),
     hasLine: lineAttr ? true : false,
     stat: SlotWithDefaultStyling({ element, slotRef: Slots.name.STAT }),
-    text: Slots.defined.text({ element }),
-    subText: SlotWithDefaultStyling({ element, slotRef: Slots.name.SUB_TEXT }),
+    text: Slots.text.default({ element }),
+    subText: Slots.text.subText({ element }),
   });
 };
 

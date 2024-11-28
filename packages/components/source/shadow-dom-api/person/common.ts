@@ -1,7 +1,6 @@
 import { Slots } from 'shadow-dom-model';
-import { MarkupCreate, MarkupValidate } from 'utilities';
-
-const { SlotWithDefaultStyling } = MarkupCreate;
+import slots from 'shadow-dom-model/slots';
+import { MarkupValidate } from 'utilities';
 
 export const CommonPersonData = ({
   element,
@@ -10,23 +9,20 @@ export const CommonPersonData = ({
   element: HTMLElement;
   isThemeDark?: boolean;
 }) => ({
-  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
-  name: SlotWithDefaultStyling({ element, slotRef: Slots.name.NAME }),
-  job: SlotWithDefaultStyling({ element, slotRef: Slots.name.JOB_TITLE }),
-  association: SlotWithDefaultStyling({
+  address: Slots.contact.address({ element }),
+  association: Slots.person.association({ element }),
+  name: Slots.person.name({ element }),
+  email: slots.contact.email({ element }),
+  job: Slots.person.jobTitle({ element }),
+  pronouns: Slots.person.pronouns({ element }),
+  phone: Slots.contact.phone({ element }),
+  linkendIn: Slots.social.linkedin({ element }),
+  image: MarkupValidate.ImageSlot({
     element,
-    slotRef: Slots.name.ASSOCIATION,
+    ImageSlot: Slots.name.assets.image,
   }),
-  pronouns: SlotWithDefaultStyling({ element, slotRef: Slots.name.PRONOUNS }),
-  phone: SlotWithDefaultStyling({ element, slotRef: Slots.name.PHONE }),
-  email: SlotWithDefaultStyling({ element, slotRef: Slots.name.EMAIL }),
-  address: SlotWithDefaultStyling({ element, slotRef: Slots.name.ADDRESS }),
-  linkendIn: SlotWithDefaultStyling({ element, slotRef: Slots.name.LINKEDIN }),
-  additionalContact: SlotWithDefaultStyling({
-    element,
-    slotRef: Slots.name.ADDITIONAL_CONTACT,
-  }),
-  subText: SlotWithDefaultStyling({ element, slotRef: Slots.name.SUB_TEXT }),
-  actions: Slots.defined.actions({ element }),
+  additionalContact: Slots.contact.additional({ element }),
+  subText: Slots.text.subText({ element }),
+  actions: Slots.actions.default({ element }),
   isThemeDark,
 });

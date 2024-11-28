@@ -6,9 +6,9 @@ const tagName = 'umd-element-accordion-item';
 const createComponent = (element: HTMLElement) =>
   Accordion({
     text:
-      Slots.defined.body({ element, isDefaultStyling: true }) ||
-      Slots.defined.text({ element, isDefaultStyling: true }),
-    headline: Slots.defined.headline({ element }),
+      Slots.deprecated.body({ element, isDefaultStyling: true }) ||
+      Slots.text.default({ element, isDefaultStyling: true }),
+    headline: Slots.headline.default({ element }),
     isThemeLight: Attributes.isTheme.light({
       element,
     }),

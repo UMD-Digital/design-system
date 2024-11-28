@@ -45,7 +45,9 @@ const MakeCommonDefaultData = ({
   const endDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_END_ISO}"]`,
   );
-  const locationSlot = element.querySelector(`[slot="${Slots.name.LOCATION}"]`);
+  const locationSlot = element.querySelector(
+    `[slot="${Slots.name.contact.location}"]`,
+  );
   const isImageRight =
     element.getAttribute(Attributes.names.LAYOUT_IMAGE_POSITION) !== 'left';
   const showTime = element.getAttribute(Attributes.names.SHOW_TIME) !== 'false';
@@ -58,7 +60,10 @@ const MakeCommonDefaultData = ({
     }),
     isImageRight,
     stats: SlotWithDefaultStyling({ element, slotRef: Slots.name.STATS }),
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
+    image: MarkupValidate.ImageSlot({
+      element,
+      ImageSlot: Slots.name.assets.image,
+    }),
     video: SlotWithDefaultStyling({ element, slotRef: Slots.name.VIDEO }),
     eventDetails: null as null | HTMLElement,
     eventSign: null as null | HTMLElement,

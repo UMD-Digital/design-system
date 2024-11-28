@@ -1,11 +1,8 @@
 import { Slots } from 'shadow-dom-model';
-import { MarkupCreate } from 'utilities';
-
-const { SlotWithDefaultStyling } = MarkupCreate;
 
 export const CommonPathwayData = ({ element }: { element: HTMLElement }) => ({
-  eyebrow: Slots.defined.eyebrow({ element }),
-  headline: Slots.defined.headline({ element }),
-  text: Slots.defined.text({ element }),
-  action: SlotWithDefaultStyling({ element, slotRef: Slots.name.ACTIONS }),
+  action: Slots.actions.default({ element }),
+  eyebrow: Slots.eyebrow.default({ element }),
+  headline: Slots.headline.default({ element }),
+  text: Slots.text.default({ element }),
 });

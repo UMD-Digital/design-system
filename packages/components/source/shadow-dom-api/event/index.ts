@@ -33,10 +33,13 @@ const styles = `
 `;
 
 const MakeCommonData = ({ element }: { element: UMDEventElement }) => ({
-  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
-  headline: Slots.defined.headline({ element }),
-  text: Slots.defined.text({ element }),
-  actions: Slots.defined.actions({ element }),
+  image: MarkupValidate.ImageSlot({
+    element,
+    ImageSlot: Slots.name.assets.image,
+  }),
+  headline: Slots.headline.default({ element }),
+  text: Slots.text.default({ element }),
+  actions: Slots.actions.default({ element }),
   isThemeDark: Attributes.isTheme.dark({ element }),
 });
 
@@ -50,7 +53,9 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const endDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_END_ISO}"]`,
   );
-  const locationSlot = element.querySelector(`[slot="${Slots.name.LOCATION}"]`);
+  const locationSlot = element.querySelector(
+    `[slot="${Slots.name.contact.location}"]`,
+  );
   const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
   const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
 

@@ -25,10 +25,7 @@ const styles = `
 const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
 
-  const headline = SlotWithDefaultStyling({
-    element,
-    slotRef: Slots.name.HEADLINE,
-  });
+  const headline = Slots.headline.default({ element });
   const startDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_START_ISO}"]`,
   );

@@ -31,12 +31,15 @@ const createCardComponent = ({ tagName }: CardConfig) => {
   };
 
   const createComponentData = (element: HTMLElement): CardData => ({
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
-    eyebrow: Slots.defined.eyebrow({ element }),
-    headline: Slots.defined.headline({ element }),
-    text: Slots.defined.text({ element }),
-    date: Slots.defined.date({ element }),
-    actions: Slots.defined.actions({ element }),
+    image: MarkupValidate.ImageSlot({
+      element,
+      ImageSlot: Slots.name.assets.image,
+    }),
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+    date: Slots.date.default({ element }),
+    actions: Slots.actions.default({ element }),
     isTransparent: Attributes.isVisual.transparent({ element }),
     isThemeDark: Attributes.isTheme.dark({ element }),
   });

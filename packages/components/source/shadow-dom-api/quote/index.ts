@@ -36,7 +36,10 @@ const MakeData = ({ element }: { element: UMDElementQuote }) => {
 
   return {
     quote: SlotWithDefaultStyling({ element, slotRef: Slots.name.QUOTE }),
-    image: SlotWithDefaultStyling({ element, slotRef: Slots.name.IMAGE }),
+    image: SlotWithDefaultStyling({
+      element,
+      slotRef: Slots.name.assets.image,
+    }),
     attribution: SlotWithDefaultStyling({
       element,
       slotRef: Slots.name.ATTRIBUTION,
@@ -45,7 +48,7 @@ const MakeData = ({ element }: { element: UMDElementQuote }) => {
       element,
       slotRef: Slots.name.ATTRIBUTION_SUB_TEXT,
     }),
-    action: SlotWithDefaultStyling({ element, slotRef: Slots.name.ACTIONS }),
+    action: Slots.actions.default({ element }),
     isTransparent,
     isThemeDark,
     isThemeMaryland,

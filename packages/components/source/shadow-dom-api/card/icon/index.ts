@@ -24,9 +24,12 @@ const styles = `
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeCardData = ({ element }: { element: UMDCardIconElement }) => ({
-  image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
-  headline: Slots.defined.headline({ element }),
-  text: Slots.defined.text({ element }),
+  image: MarkupValidate.ImageSlot({
+    element,
+    ImageSlot: Slots.name.assets.image,
+  }),
+  headline: Slots.headline.default({ element }),
+  text: Slots.text.default({ element }),
   isThemeDark: Attributes.isTheme.dark({ element }),
 });
 

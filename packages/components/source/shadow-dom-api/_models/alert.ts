@@ -49,11 +49,11 @@ const slots = {
 };
 
 const createBaseProps = (element: HTMLElement): AlertBaseProps => ({
-  headline: Slots.defined.headline({ element }),
+  headline: Slots.headline.default({ element }),
   text:
-    Slots.defined.body({ element, isDefaultStyling: true }) ||
-    Slots.defined.text({ element, isDefaultStyling: true }),
-  actions: Slots.defined.actions({ element }),
+    Slots.deprecated.body({ element, isDefaultStyling: true }) ||
+    Slots.text.default({ element, isDefaultStyling: true }),
+  actions: Slots.actions.default({ element }),
 });
 
 const createAlertComponent = <T extends AlertBaseProps>({

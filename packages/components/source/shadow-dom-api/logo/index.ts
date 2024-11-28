@@ -28,8 +28,11 @@ const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
   const isBordered = borderAttr === 'true';
 
   return LogoBlock.CreateElement({
-    image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
-    text: Slots.defined.text({ element }),
+    image: MarkupValidate.ImageSlot({
+      element,
+      ImageSlot: Slots.name.assets.image,
+    }),
+    text: Slots.text.default({ element }),
     isThemeDark,
     isBordered,
   });

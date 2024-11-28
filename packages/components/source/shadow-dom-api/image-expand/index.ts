@@ -32,7 +32,7 @@ export const CreateShadowDom = ({
   const content = Node.slot({ type: 'content' });
   const image = MarkupValidate.ImageSlot({
     element,
-    ImageSlot: Slots.name.IMAGE,
+    ImageSlot: Slots.name.assets.image,
   });
 
   if (content && image) {

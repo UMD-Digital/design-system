@@ -1,73 +1,101 @@
-type SlotName = (typeof SlotNames)[keyof typeof SlotNames];
+type SlotName = string;
 
 // Slot Names
 
-const TEXT_LOCKUPS = {
-  HEADLINE: 'headline',
-  EYEBROW: 'eyebrow',
-  TEXT: 'text',
-  ACTIONS: 'actions',
+const actions = {
+  default: 'actions',
 };
 
-const DEPRECATED = {
-  BODY: 'body',
-  WRAPPING_TEXT: 'wrapping-text',
+const assets = {
+  image: 'image',
 };
 
-const PERSON = {
-  NAME: 'name',
-  JOB_TITLE: 'job-title',
-  PRONOUNS: 'pronouns',
-  LOCATION: 'location',
-  EMAIL: 'email',
-  PHONE: 'phone',
-  ADDRESS: 'address',
-  LINKEDIN: 'linkedin',
+const date = {
+  default: 'date',
+};
+
+const deprecated = {
+  body: 'body',
+  wrappingText: 'wrapping-text',
+};
+
+const contact = {
+  additional: 'additional-contact',
+  address: 'address',
+  email: 'email',
+  location: 'location',
+  phone: 'phone',
+};
+
+const eyebrows = {
+  default: 'eyebrow',
+};
+
+const headline = {
+  default: 'headline',
+};
+
+const person = {
+  association: 'association',
+  jobTitle: 'job-title',
+  name: 'name',
+  pronouns: 'pronouns',
+};
+
+const text = {
+  caption: 'caption',
+  default: 'text',
+  sub: 'sub-text',
+};
+
+const social = {
+  linkedin: 'linkedin',
 };
 
 const NEEDS_CLEANUP = {
-  DESCRIPTION: 'description',
-  SUB_TEXT: 'sub-text',
-  QUOTE: 'quote',
-  CTA_ICON: 'cta-icon',
-  IMAGE: 'image',
-  IMAGES: 'images',
-  VIDEO: 'video',
-  DATE: 'date',
-  DATE_START_ISO: 'start-date-iso',
-  DATE_END_ISO: 'end-date-iso',
-  BREADCRUMB: 'breadcrumb',
-  BREADCRUMB_COPY: 'breadcrumb-copy',
-  TABS: 'tabs',
-  BLOCKS: 'blocks',
-  CARDS: 'cards',
-  CONTENT: 'content',
-  STATIC_COLUMN: 'static-column',
-  STICKY_COLUMN: 'sticky-column',
-  ATTRIBUTION: 'attribution',
-  ATTRIBUTION_SUB_TEXT: 'attribution-sub-text',
-  HIGHLIGHT_ATTRIBUTION: 'highlight-attribution',
   ADDITIONAL: 'additional',
-  ADDITIONAL_CONTACT: 'additional-contact',
-  ASSOCIATION: 'association',
-  CAPTION: 'caption',
+  ATTRIBUTION_SUB_TEXT: 'attribution-sub-text',
+  ATTRIBUTION: 'attribution',
+  BLOCKS: 'blocks',
+  BREADCRUMB_COPY: 'breadcrumb-copy',
+  BREADCRUMB: 'breadcrumb',
+  CARDS: 'cards',
+  CHILDREN_SLIDES: 'children-slides',
+  CONTENT: 'content',
+  CTA_ICON: 'cta-icon',
+  DATE_END_ISO: 'end-date-iso',
+  DATE_START_ISO: 'start-date-iso',
+  DESCRIPTION: 'description',
   EVENT_LIST: 'event-list',
   HEADLINES: 'headlines',
+  HIGHLIGHT_ATTRIBUTION: 'highlight-attribution',
   HIGHLIGHT: 'highlight',
+  IMAGES: 'images',
   PATHS: 'paths',
   PRIMARY_SLIDE_CONTENT: 'primary-slide-content',
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',
   PRIMARY_SLIDE_SECONDARY_LINKS: 'primary-slide-secondary-links',
-  CHILDREN_SLIDES: 'children-slides',
+  QUOTE: 'quote',
   STAT: 'stat',
+  STATIC_COLUMN: 'static-column',
   STATS: 'stats',
+  STICKY_COLUMN: 'sticky-column',
+  TABS: 'tabs',
   TEXTS: 'texts',
+  VIDEO: 'video',
 };
 
 const SlotNames = {
-  ...DEPRECATED,
-  ...TEXT_LOCKUPS,
-  ...PERSON,
+  actions,
+  assets,
+  contact,
+  eyebrows,
+  date,
+  deprecated,
+  headline,
+  text,
+  social,
+  person,
   ...NEEDS_CLEANUP,
 } as const;
 

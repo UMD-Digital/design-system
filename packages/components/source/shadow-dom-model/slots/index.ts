@@ -10,26 +10,70 @@ const createSlotFactory =
 
 // Defined common usage
 
-const CommonSlots = {
-  actions: createSlotFactory(SlotNames.ACTIONS),
-  caption: createSlotFactory(SlotNames.CAPTION),
-  date: createSlotFactory(SlotNames.DATE),
-  image: createSlotFactory(SlotNames.IMAGE),
-  eyebrow: createSlotFactory(SlotNames.EYEBROW),
-  headline: createSlotFactory(SlotNames.HEADLINE),
-  text: createSlotFactory(SlotNames.TEXT),
+const actions = {
+  default: createSlotFactory(SlotNames.actions.default),
+} as const;
+
+const assets = {
+  image: createSlotFactory(SlotNames.assets.image),
+} as const;
+
+const contact = {
+  additional: createSlotFactory(SlotNames.contact.additional),
+  address: createSlotFactory(SlotNames.contact.address),
+  email: createSlotFactory(SlotNames.contact.email),
+  location: createSlotFactory(SlotNames.contact.location),
+  phone: createSlotFactory(SlotNames.contact.phone),
+} as const;
+
+const date = {
+  default: createSlotFactory(SlotNames.date.default),
+} as const;
+
+const eyebrow = {
+  default: createSlotFactory(SlotNames.eyebrows.default),
+} as const;
+
+const headline = {
+  default: createSlotFactory(SlotNames.headline.default),
+} as const;
+
+const person = {
+  association: createSlotFactory(SlotNames.person.association),
+  name: createSlotFactory(SlotNames.person.name),
+  jobTitle: createSlotFactory(SlotNames.person.jobTitle),
+  pronouns: createSlotFactory(SlotNames.person.pronouns),
+} as const;
+
+const social = {
+  linkedin: createSlotFactory(SlotNames.social.linkedin),
+} as const;
+
+const text = {
+  caption: createSlotFactory(SlotNames.text.caption),
+  default: createSlotFactory(SlotNames.text.default),
+  subText: createSlotFactory(SlotNames.text.sub),
 } as const;
 
 // Deprecated slots (marked for removal)
 /** @deprecated Use CommonSlots instead */
-const LegacySlots = {
-  body: createSlotFactory(SlotNames.BODY),
-  wrappingText: createSlotFactory(SlotNames.WRAPPING_TEXT),
+const deprecated = {
+  body: createSlotFactory(SlotNames.deprecated.body),
+  wrappingText: createSlotFactory(SlotNames.deprecated.wrappingText),
 } as const;
 
 export default {
+  actions,
+  assets,
+  contact,
+  date,
+  deprecated,
+  eyebrow,
+  person,
   name: SlotNames,
-  defined: { ...CommonSlots, ...LegacySlots },
+  headline,
+  social,
+  text,
 } as const;
 
 export type { SlotName };

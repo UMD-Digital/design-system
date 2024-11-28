@@ -30,11 +30,11 @@ const MakeOverlayContent = ({
 }: {
   element: UMDCardOverlayElement;
 }) => ({
-  eyebrow: Slots.defined.eyebrow({ element }),
-  headline: Slots.defined.headline({ element }),
-  text: Slots.defined.text({ element }),
-  date: SlotWithDefaultStyling({ element, slotRef: Slots.name.DATE }),
-  actions: Slots.defined.actions({ element }),
+  eyebrow: Slots.eyebrow.default({ element }),
+  headline: Slots.headline.default({ element }),
+  text: Slots.text.default({ element }),
+  date: Slots.date.default({ element }),
+  actions: Slots.actions.default({ element }),
   ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.name.CTA_ICON }),
   isQuote: Attributes.isVisual.quote({ element }),
   isThemeDark: Attributes.isTheme.dark({ element }),
@@ -48,7 +48,10 @@ const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
   if (Attributes.isLayout.image({ element })) {
     const ImageOverlay = CardOverlayImage.CreateElement({
       ...MakeOverlayContent({ element }),
-      image: MarkupValidate.ImageSlot({ element, ImageSlot: Slots.name.IMAGE }),
+      image: MarkupValidate.ImageSlot({
+        element,
+        ImageSlot: Slots.name.assets.image,
+      }),
     });
 
     if (ImageOverlay) {

@@ -50,8 +50,8 @@ const CreateShadowDom = async ({
   const slider = SliderEvents.CreateElement({
     isThemeDark,
     dataSlider,
-    headline: Slots.defined.headline({ element }),
-    actions: Slots.defined.actions({ element }),
+    headline: Slots.headline.default({ element }),
+    actions: Slots.actions.default({ element }),
   });
 
   element._elementRef = slider;

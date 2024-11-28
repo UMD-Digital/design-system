@@ -28,7 +28,7 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
 
   const image = MarkupValidate.ImageSlot({
     element,
-    ImageSlot: Slots.name.IMAGE,
+    ImageSlot: Slots.name.assets.image,
   });
   const videoSlot = element.querySelector(
     `[slot="${Slots.name.VIDEO}"]`,
@@ -43,9 +43,9 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
     additional?: HTMLSlotElement | null;
     topPosition?: string | null;
   } = {
-    eyebrow: Slots.defined.eyebrow({ element }),
-    headline: Slots.defined.headline({ element }),
-    actions: Node.slot({ type: Slots.name.ACTIONS }),
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    actions: Slots.actions.default({ element }),
     additional: Node.slot({ type: Slots.name.ADDITIONAL }),
     topPosition,
   };

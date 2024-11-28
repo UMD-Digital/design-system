@@ -7,7 +7,7 @@ export const CommonIntroData = ({
   element: HTMLElement;
   isThemeDark?: boolean;
 }) => ({
-  headline: Slots.defined.headline({ element }),
-  actions: Slots.defined.actions({ element }),
+  headline: Slots.headline.default({ element }),
+  actions: Slots.actions.default({ element }),
   isThemeDark,
 });

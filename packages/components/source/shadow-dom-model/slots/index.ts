@@ -1,5 +1,5 @@
-import { SlotNames, type SlotName } from './names';
-import { createSlot, type BaseProps, type OptionalProps } from './factory';
+import { SlotNames, type SlotName } from './mapping';
+import { createSlot, type BaseProps, type OptionalProps } from './create';
 
 type SlotProps = BaseProps & Partial<OptionalProps>;
 

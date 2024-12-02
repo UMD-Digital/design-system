@@ -25,11 +25,13 @@ const Load = () => {
       Slots.text.default({ element, isDefaultStyling: false }) ||
       Slots.deprecated.wrappingText({ element, isDefaultStyling: false });
     const isAlignmentRight = Attributes.isLayout.alignmentRight({ element });
+    const isThemeDark = Attributes.isTheme.dark({ element });
     const hasWrappingText = wrappingText !== null;
     const hasCaption = caption !== null;
 
     const content = {
       isAlignmentRight,
+      isThemeDark,
       caption,
       image: MarkupValidate.ImageSlot({
         element,

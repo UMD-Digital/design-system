@@ -8,6 +8,7 @@ export type TypeMediaInlineWrappedRequirements = {
   caption?: HTMLElement | null;
   wrappingText?: HTMLElement | null;
   isAlignmentRight?: boolean;
+  isThemeDark?: boolean;
 };
 
 const { Spacing } = Tokens;
@@ -63,7 +64,8 @@ const GetObjectSize = ({
 
 const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
   (() => {
-    const { image, isAlignmentRight, caption, wrappingText } = props;
+    const { image, isAlignmentRight, isThemeDark, caption, wrappingText } =
+      props;
 
     const elementContainer = document.createElement('div');
     const objectContainer = document.createElement('div');
@@ -148,7 +150,10 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
     }
 
     if (hasCaption) {
-      const captionElement = CaptionContainer.CreateElement({ caption });
+      const captionElement = CaptionContainer.CreateElement({
+        caption,
+        isThemeDark,
+      });
       captionElement.style.opacity = `0`;
       objectContainer.appendChild(captionElement);
     }

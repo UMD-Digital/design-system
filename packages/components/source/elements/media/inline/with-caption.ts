@@ -6,6 +6,7 @@ import CaptionContainer from '../elements/caption';
 export type TypeMediaInlineRequirements = {
   image?: HTMLImageElement | null;
   caption?: HTMLElement | null;
+  isThemeDark?: boolean;
 };
 
 const { Spacing } = Tokens;
@@ -38,7 +39,7 @@ const STYLES_MEDIA_INLINE_ELEMENT = `
 
 const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
   (() => {
-    const { caption, image } = props;
+    const { caption, image, isThemeDark } = props;
     const hasCaption = caption && caption !== null;
     const elementContainer = document.createElement('div');
     const objectContainer = document.createElement('div');
@@ -79,7 +80,10 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
     };
 
     if (hasCaption) {
-      const captionElement = CaptionContainer.CreateElement({ caption });
+      const captionElement = CaptionContainer.CreateElement({
+        caption,
+        isThemeDark,
+      });
       captionElement.style.display = `none`;
       objectContainer.appendChild(captionElement);
     }

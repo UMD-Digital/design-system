@@ -255,7 +255,7 @@ const isLayout = {
     isAttributeEqual({
       ...props,
       attributeName: AttributeNames.layout.ALIGNMENT,
-      attributeValue: AttributesValues.state.TRUE,
+      attributeValue: AttributesValues.layout.RIGHT,
     }),
   fullImage: createAttributeCheck(
     AttributeNames.TYPE,

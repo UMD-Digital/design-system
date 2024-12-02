@@ -127,7 +127,7 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
     };
 
     const load = () => {
-      setTimeout(() => {
+      const checkSizing = () => {
         const caption = objectContainer.querySelector(
           `.${CaptionContainer.Elements.container}`,
         ) as HTMLElement;
@@ -135,7 +135,14 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
         if (caption) {
           caption.style.opacity = `1`;
         }
+      };
+      setTimeout(() => {
+        checkSizing();
       }, 500);
+
+      setTimeout(() => {
+        checkSizing();
+      }, 1500);
     };
 
     objectContainer.classList.add(ELEMENT_OBJECT_WRAPPED_CONTAINER);

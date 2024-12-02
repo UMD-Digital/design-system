@@ -194,31 +194,35 @@ class BaseComponent extends HTMLElement {
     const errors: SlotValidationError[] = [];
 
     Object.entries(this.config.slots).forEach(([name, config]) => {
+      const type = name
+        .replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)
+        .replace(/^-/, '');
+
       if (config.required) {
-        const slotElement = this.querySelector(`[slot="${name}"]`);
+        const slotElement = this.querySelector(`[slot="${type}"]`);
         if (!slotElement) {
           errors.push({
             slot: name,
             error: 'missing',
-            message: `Required slot "${name}" is missing`,
+            message: `Required slot "${type}" is missing`,
           });
         }
       }
 
       if (config.deprecated) {
-        const slotElement = this.querySelector(`[slot="${name}"]`);
+        const slotElement = this.querySelector(`[slot="${type}"]`);
         if (slotElement) {
           errors.push({
             slot: name,
             error: 'deprecated',
-            message: `Slot "${name}" is deprecated. ${config.deprecated}`,
+            message: `Slot "${type}" is deprecated. ${config.deprecated}`,
           });
         }
       }
 
       if (config.allowedElements) {
         const slotElements = Array.from(
-          this.querySelectorAll(`[slot="${name}"]`),
+          this.querySelectorAll(`[slot="${type}"]`),
         );
         const invalidElements = slotElements.filter(
           (element) =>
@@ -229,7 +233,7 @@ class BaseComponent extends HTMLElement {
           errors.push({
             slot: name,
             error: 'invalid-elements',
-            message: `Slot "${name}" contains invalid elements. Allowed: ${config.allowedElements.join(
+            message: `Slot "${type}" contains invalid elements. Allowed: ${config.allowedElements.join(
               ', ',
             )}`,
             invalidElements,

@@ -4,6 +4,20 @@ import { MarkupValidate } from 'utilities';
 
 const tagName = 'umd-element-media-inline';
 
+const slots = {
+  caption: {
+    allowedElements: ['div', 'p'],
+  },
+  text: {
+    allowedElements: ['div', 'p'],
+  },
+  wrappingText: {
+    allowedElements: ['div', 'p'],
+    deprecated:
+      'Use "text" instead. This attribute will be removed in version 2.0.',
+  },
+};
+
 const Load = () => {
   const createComponent = (element: HTMLElement) => {
     const caption = Slots.text.caption({ element });
@@ -39,6 +53,7 @@ const Load = () => {
     name: tagName,
     element: Model.createCustomElement({
       tagName,
+      slots,
       createComponent,
       onReady: (element: Model.ElementRef) => element?.events?.load(),
     }),

@@ -1,6 +1,6 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 import { Accessibility, AssetIcon, Styles } from 'utilities';
-import UtilityAlert, { TypeAlertProps } from './alert';
+import { createNavAlert, STYLES_NAV_ALERT, TypeAlertProps } from './alert';
 import UtilitySearch from './search';
 
 type TypeMenuItemsRequirements = {
@@ -300,7 +300,7 @@ const LogoStyles = `
   }
 `;
 
-const STYLES_NAVIGATION_UTILITY = `
+let STYLES_NAVIGATION_UTILITY = `
   .${ELEMENT_UTILITY_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -324,7 +324,7 @@ const STYLES_NAVIGATION_UTILITY = `
   ${MenuStyles}
   ${MobileButtonStyles}
   ${MobileMenuStyles}
-  ${UtilityAlert.Styles}
+  ${STYLES_NAV_ALERT}
   ${UtilitySearch.Styles}
 `;
 
@@ -653,10 +653,10 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
 
       const load = async () => {
         if (!isAlertOff) {
-          const alert = await UtilityAlert.CreateElement(props);
+          const alert = await createNavAlert(props);
 
           if (alert) {
-            container.insertBefore(alert, container.firstChild);
+            container.insertBefore(alert?.element, container.firstChild);
           }
         }
 

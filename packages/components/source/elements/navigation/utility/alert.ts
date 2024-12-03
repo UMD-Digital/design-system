@@ -7,33 +7,42 @@ import {
 import Actions from 'elements/call-to-action';
 import { AssetIcon, Network, Styles } from 'utilities';
 
-type TypeAlertCTA = {
+type AlertCTA = {
   title: string;
   alt: string;
-  entry: {
-    url: string;
-  }[];
+  entry: { url: string }[];
   url: string;
 };
 
-type TypeAlertId = {
+type AlertData = {
   id: string;
-};
-
-type TypeAlertData = TypeAlertId & {
   type: string;
   title: string;
   headline: string;
   message: string;
-  cta: TypeAlertCTA[];
+  cta: AlertCTA[];
+  hidden?: boolean;
 };
 
-type TypeAlertResponse = {
-  data: TypeAlertData[];
+type AlertResponse = {
+  data: {
+    entries: AlertData[];
+  };
+};
+
+type AlertProps = {
+  alertUrl?: string | null;
 };
 
 export type TypeAlertProps = {
   alertUrl?: string | null;
+};
+
+type ElementAttributes = Record<string, string>;
+
+type CacheCheckResult = {
+  shouldCheck: boolean;
+  cachedData: AlertData | null;
 };
 
 const { FetchGraphQL } = Network;
@@ -45,13 +54,13 @@ const { Text } = Elements;
 
 const QUERY = `
   query CampusAlertsQuery {
-    data: entries(section: "mainCampusAlerts") {
+    entries: entries(section: "mainCampusAlerts") {
       ... on mainElementsCampusAlert_Entry {
         id: uid
-        alert_type: type
-        alert_headline: headline
-        alert_title: title
-        alert_message: text
+        type: alert_type
+        headline: alert_headline
+        title: alert_title
+        text: alert_message
         cta {
           ... on umdElementsLink_Entry {
             title
@@ -67,37 +76,63 @@ const QUERY = `
   }
 `;
 
-const DEFAULT_ALERT_URL = 'https://umd-staging.com/api/alerts';
-const ALERT_ELEMENT_ID = 'umd-global-alert';
-const ALERT_TIME_REF = 'umd-alert-time';
-const ALERT_REF = 'umd-alert';
-const ALERT_ID_REF = 'umd-alert-id';
-const ANIMATION_IN_SPEED = 800;
-const MEDIUM = 768;
-const LARGE = 1024;
-
-const ATTRIBUTE_TYPE = 'type';
-const TYPE_GENERAL = 'general';
-const TYPE_CLOSED = 'closed';
-const TYPE_OPEN = 'open';
-
 const ELEMENT_NAME = 'umd-element-nav-alert';
-const ELEMENT_ALERT_DECLARATION = 'umd-element-nav-alert-declaration';
-const ELEMENT_ALERT_CONTAINER = 'umd-element-nav-alert-container';
-const ELEMENT_ALERT_LOCK = 'umd-element-nav-alert-lock';
-const ELEMENT_ALERT_WRAPPER = 'umd-element-nav-alert-wrapper';
-const ELEMENT_ALERT_TITLE = 'umd-element-nav-alert-title';
-const ELEMENT_ALERT_TEXT = 'umd-element-nav-alert-text';
-const ELEMENT_ALERT_CTA = 'umd-element-nav-alert-cta';
-const ELEMENT_ALERT_CLOSE_BUTTON = 'umd-element-nav-alert-close';
+const ALERT_CONSTANTS = {
+  URLS: {
+    DEFAULT: 'https://umd.edu/api/alerts',
+    TESTING: 'https://umd-main.production.servd.dev/api/alerts',
+  },
+  STORAGE_KEYS: {
+    ALERT_TIME: 'umd-alert-time',
+    ALERT: 'umd-alert',
+    ALERT_ID: 'umd-alert-id',
+  },
+  ELEMENTS: {
+    ALERT_ID: 'umd-global-alert',
+    DECLARATION: 'umd-element-nav-alert-declaration',
+    CONTAINER: 'umd-element-nav-alert-container',
+    LOCK: 'umd-element-nav-alert-lock',
+    WRAPPER: 'umd-element-nav-alert-wrapper',
+    TITLE: 'umd-element-nav-alert-title',
+    TEXT: 'umd-element-nav-alert-text',
+    CTA: 'umd-element-nav-alert-cta',
+    CLOSE_BUTTON: 'umd-element-nav-alert-close',
+  },
+  ATTRIBUTES: {
+    TYPE: 'type',
+  },
+  TYPES: {
+    GENERAL: 'general',
+    CLOSED: 'closed',
+    OPEN: 'open',
+  },
+  ANIMATION: {
+    SPEED: 800,
+  },
+  BREAKPOINTS: {
+    MEDIUM: 768,
+    LARGE: 1024,
+  },
+  CACHE: {
+    DURATION: 60 * 1000, // One minute in milliseconds
+  },
+} as const;
 
-const IS_TYPE_GENERAL = `[${ATTRIBUTE_TYPE}=${TYPE_GENERAL}]`;
-const IS_TYPE_OPEN = `[${ATTRIBUTE_TYPE}=${TYPE_OPEN}]`;
-const IS_TYPE_CLOSED = `[${ATTRIBUTE_TYPE}=${TYPE_CLOSED}]`;
+const { ATTRIBUTES, ANIMATION, BREAKPOINTS, ELEMENTS, TYPES } = ALERT_CONSTANTS;
+const IS_TYPE_GENERAL = `[${ATTRIBUTES.TYPE}=${TYPES.GENERAL}]`;
+const IS_TYPE_CLOSED = `[${ATTRIBUTES.TYPE}=${TYPES.CLOSED}]`;
 
-const OVERWRITE_CONTAINER_TYPE_GENERAL = `.${ELEMENT_ALERT_CONTAINER}${IS_TYPE_GENERAL}`;
-const OVERWRITE_CONTAINER_TYPE_OPEN = `.${ELEMENT_ALERT_CONTAINER}${IS_TYPE_OPEN}`;
-const OVERWRITE_CONTAINER_TYPE_CLOSED = `.${ELEMENT_ALERT_CONTAINER}${IS_TYPE_CLOSED}`;
+const DECLARATION = `.${ELEMENTS.DECLARATION}`;
+const CONTAINER = `.${ELEMENTS.CONTAINER}`;
+const WRAPPER = `.${ELEMENTS.WRAPPER}`;
+const LOCK = `.${ELEMENTS.LOCK}`;
+const ALERT_TITLE = `.${ELEMENTS.TITLE}`;
+const ALERT_TEXT = `.${ELEMENTS.TEXT}`;
+const CLOSE_BUTTON = `.${ELEMENTS.CLOSE_BUTTON}`;
+const CTA = `.${ELEMENTS.CTA}`;
+
+const OVERWRITE_CONTAINER_TYPE_GENERAL = `${CONTAINER}${IS_TYPE_GENERAL}`;
+const OVERWRITE_CONTAINER_TYPE_CLOSED = `${CONTAINER}${IS_TYPE_CLOSED}`;
 
 // prettier-ignore
 const OverwriteTypeGeneral = `
@@ -109,19 +144,12 @@ const OverwriteTypeGeneral = `
     color: ${Colors.white};
   }
 
-  ${OVERWRITE_CONTAINER_TYPE_GENERAL} .${ELEMENT_ALERT_TITLE} {
+  ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${ALERT_TITLE} {
     color: ${Colors.gold};
   }
 
-   ${OVERWRITE_CONTAINER_TYPE_GENERAL} .${ELEMENT_ALERT_CLOSE_BUTTON} > svg {
+   ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${CLOSE_BUTTON} > svg {
     fill: ${Colors.white};
-  }
-`
-
-// prettier-ignore
-const OverwriteTypeOpen = `
-  ${OVERWRITE_CONTAINER_TYPE_OPEN} {
-
   }
 `
 
@@ -135,27 +163,27 @@ const OverwriteTypeClosed = `
     color: ${Colors.black};
   }
 
-   ${OVERWRITE_CONTAINER_TYPE_CLOSED} .${ELEMENT_ALERT_CLOSE_BUTTON} > svg {
+   ${OVERWRITE_CONTAINER_TYPE_CLOSED} .${CLOSE_BUTTON} > svg {
     fill: ${Colors.black};
   }
 `
 
 // prettier-ignore
 const CloseButtonStyles = `
-  .${ELEMENT_ALERT_CLOSE_BUTTON} {
+  ${CLOSE_BUTTON} {
     position: absolute;
-    top: 10px;
+    top: 30px;
     right: 10px;
   }
   
-  @container (max-width: ${MEDIUM - 1}px) {
-    .${ELEMENT_ALERT_CLOSE_BUTTON} {
-      top: 5px;
+  @container (max-width: ${BREAKPOINTS.MEDIUM - 1}px) {
+    ${CLOSE_BUTTON} {
+      top: 25px;
       right: 5px;
     }
   }
 
-  .${ELEMENT_ALERT_CLOSE_BUTTON} > svg {
+  ${CLOSE_BUTTON} > svg {
     fill: ${Colors.black};
     width: 24px;
     height: 24px;
@@ -166,43 +194,52 @@ const CloseButtonStyles = `
 const TextStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_TITLE}`]: SansLarge,
+      [`${ALERT_TITLE}`]: SansLarge,
     },
   })}
 
-  .${ELEMENT_ALERT_TITLE} {
+  ${ALERT_TITLE} {
     text-transform: uppercase;
   }
 
-  * + .${ELEMENT_ALERT_TEXT} {
+  ${ALERT_TITLE} + * {
     margin-top: ${Spacing.sm};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_TEXT}`]: Text.RichText,
+      [`${ALERT_TEXT}`]: Text.RichText,
     },
   })}
 
-  .${ELEMENT_ALERT_TEXT},
-  .${ELEMENT_ALERT_TEXT} * {
+  ${ALERT_TEXT},
+  ${ALERT_TEXT} * {
     font-size: 16px;;
   }
 
-  .${ELEMENT_ALERT_TEXT} + * {
+  ${ALERT_TEXT} + * {
     margin-top: ${Spacing.lg};
   }
 
-  .${ELEMENT_ALERT_CTA} {
+  ${CTA} {
     text-decoration: none;
   }
 `
 
 // prettier-ignore
 const WrapperStyles = `
-  .${ELEMENT_ALERT_WRAPPER} {
+  ${WRAPPER} {
     position: relative;
+    padding-top: ${Spacing.md};
+    padding-bottom: ${Spacing.md};
     padding-right: ${Spacing.lg};
+  }
+
+  @container (min-width: ${BREAKPOINTS.MEDIUM}px) {
+    ${WRAPPER} {
+      padding-top: ${Spacing.lg};
+      padding-bottom: ${Spacing.lg};
+    }
   }
 `
 
@@ -210,39 +247,32 @@ const WrapperStyles = `
 const LockStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_LOCK}`]: LockFull,
+      [`${LOCK}`]: LockFull,
     },
   })}
 `
 
 // prettier-ignore
 const ContainerStyles = `
-  .${ELEMENT_ALERT_CONTAINER} {
+  ${CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     background-color: ${Colors.gray.lighter};
     border-left: 4px solid ${Colors.red};
-    padding: ${Spacing.md} 0;
-    transition: height ${ANIMATION_IN_SPEED}ms;
+    transition: height ${ANIMATION.SPEED}ms;
     overflow: hidden;
     position: relative;
   }
 
-  @container (min-width: ${MEDIUM}px) {
-    .${ELEMENT_ALERT_CONTAINER} {
-      padding: ${Spacing.lg} 0 ;
-    }
-  }
-
-  @container (min-width: ${LARGE}px) {
-    .${ELEMENT_ALERT_CONTAINER} {
-    border-left: 8px solid ${Colors.red};
+  @container (min-width: ${BREAKPOINTS.LARGE}px) {
+    ${CONTAINER} {
+      border-left: 8px solid ${Colors.red};
     }
   }
 `
 
 // prettier-ignore
-const STYLES_NAV_ALERT = `
-  .${ELEMENT_ALERT_DECLARATION} {
+export const STYLES_NAV_ALERT = `
+  ${DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
@@ -253,145 +283,228 @@ const STYLES_NAV_ALERT = `
   ${TextStyles}
   ${CloseButtonStyles}
   ${OverwriteTypeGeneral}
-  ${OverwriteTypeOpen}
   ${OverwriteTypeClosed}
 `;
 
-const setAlertStorage = (alert: TypeAlertId) => {
-  window.localStorage.setItem(ALERT_REF, JSON.stringify(alert));
+// storage.ts
+const logStorageError = (operation: string, error: Error): void => {
+  console.error(`UMD Component - Alert Storage: ${operation} failed:`, error);
 };
 
-const getAlertStorage = () => window.localStorage.getItem(ALERT_REF);
+const getStoredValue = <T>(key: string): T | null => {
+  try {
+    const value = window.localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  } catch (error) {
+    logStorageError(`Reading ${key}`, error as Error);
+    return null;
+  }
+};
 
-const shouldAlertHide = ({ alert_id }: { alert_id: string }) =>
-  window.localStorage.getItem(ALERT_ID_REF) === alert_id;
+const setStoredValue = (key: string, value: unknown): void => {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    logStorageError('Saving value', error as Error);
+  }
+};
 
-const checkAlertTime = () => {
-  const alertDate = window.localStorage.getItem(ALERT_TIME_REF);
-  const currentDate = new Date();
-  const futureDate = new Date(currentDate.getTime() + 1000 * 60);
+const clearAlertStorage = (): void => {
+  const { STORAGE_KEYS } = ALERT_CONSTANTS;
+  window.localStorage.removeItem(STORAGE_KEYS.ALERT_TIME);
+  window.localStorage.removeItem(STORAGE_KEYS.ALERT);
+};
 
-  const shouldCheckMessage = (alertDate: string) => {
-    const storedDate = new Date(Date.parse(alertDate));
+const checkAlertCache = (): CacheCheckResult => {
+  const currentTime = new Date().getTime();
+  const { STORAGE_KEYS, CACHE } = ALERT_CONSTANTS;
 
-    if (storedDate instanceof Date && currentDate > storedDate) {
-      localStorage.setItem(ALERT_TIME_REF, futureDate.toString());
-      return true;
+  try {
+    const alertTimeStr = getStoredValue<string>(STORAGE_KEYS.ALERT_TIME);
+    const cachedResponse = getStoredValue<AlertData>(STORAGE_KEYS.ALERT);
+
+    if (!alertTimeStr) {
+      setStoredValue(STORAGE_KEYS.ALERT_TIME, currentTime.toString());
+      return { shouldCheck: true, cachedData: null };
     }
 
-    return false;
-  };
+    const alertTime = parseInt(alertTimeStr, 10);
+    const timeElapsed = currentTime - alertTime;
 
-  if (!alertDate) {
-    localStorage.setItem(ALERT_TIME_REF, futureDate.toString());
-    return true;
+    if (timeElapsed < CACHE.DURATION && cachedResponse) {
+      return { shouldCheck: false, cachedData: cachedResponse };
+    }
+
+    setStoredValue(STORAGE_KEYS.ALERT_TIME, currentTime.toString());
+    return { shouldCheck: true, cachedData: null };
+  } catch (error) {
+    console.error('Cache check failed:', error);
+    return { shouldCheck: true, cachedData: null };
   }
-
-  return shouldCheckMessage(alertDate);
 };
 
-const CreateAlertComponent = ({ alerts }: { alerts: TypeAlertResponse }) => {
-  const alert = alerts.data[0];
+const updateAlertCache = (alert: AlertData): void => {
+  setStoredValue(ALERT_CONSTANTS.STORAGE_KEYS.ALERT, alert);
+};
 
-  if (!alert) return;
+const createElement = (
+  tag: string,
+  className?: string,
+  attributes?: ElementAttributes,
+): HTMLElement => {
+  const element = document.createElement(tag);
+  if (className) element.classList.add(className);
+  if (attributes) {
+    Object.entries(attributes).forEach(([key, value]) => {
+      element.setAttribute(key, value);
+    });
+  }
+  return element;
+};
 
-  const { id, title, headline, message, type, cta } = alert;
-  const declaration = document.createElement('div');
-  const container = document.createElement('div');
-  const lock = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const titleElement = document.createElement('p');
-  const textElement = document.createElement('div');
-  const closeButton = document.createElement('button');
+const createCloseButton = (container: HTMLElement): HTMLButtonElement => {
+  const { ELEMENTS, ANIMATION } = ALERT_CONSTANTS;
+  const button = createElement('button', ELEMENTS.CLOSE_BUTTON, {
+    'aria-label': 'remove alert',
+  }) as HTMLButtonElement;
 
-  titleElement.classList.add(ELEMENT_ALERT_TITLE);
-  titleElement.innerHTML = headline || title;
+  button.innerHTML = AssetIcon.X;
+  button.addEventListener('click', () => {
+    const cachedAlert = getStoredValue<AlertData>(
+      ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
+    );
+    if (cachedAlert) {
+      // Animate close
+      container.style.height = `${container.offsetHeight}px`;
+      container.style.transition = `height ${ANIMATION.SPEED}ms`;
 
-  textElement.classList.add(ELEMENT_ALERT_TEXT);
-  textElement.innerHTML = message;
+      updateAlertCache({ ...cachedAlert, hidden: true });
 
-  closeButton.classList.add(ELEMENT_ALERT_CLOSE_BUTTON);
-  closeButton.setAttribute('aria-label', 'remove alert');
-  closeButton.innerHTML = AssetIcon.X;
-  closeButton.addEventListener('click', () => {
-    wrapper.style.height = `${wrapper.offsetHeight}px`;
-    window.localStorage.setItem(ALERT_ID_REF, id);
+      setTimeout(() => {
+        container.style.height = '0px';
+      }, 100);
 
-    setTimeout(() => {
-      wrapper.style.height = '0px';
-    }, 100);
-
-    setTimeout(() => {
-      wrapper.remove();
-    }, ANIMATION_IN_SPEED + 100);
+      setTimeout(() => {
+        container.remove();
+      }, ANIMATION.SPEED + 100);
+    }
   });
 
-  wrapper.classList.add(ELEMENT_ALERT_WRAPPER);
-  wrapper.appendChild(closeButton);
-  wrapper.appendChild(titleElement);
-  wrapper.appendChild(textElement);
+  return button;
+};
 
-  if (cta) {
-    const link = cta[0];
-    if (link) {
-      const ctaElement = document.createElement('a');
+const createCTAElement = (cta: AlertCTA): HTMLElement => {
+  const link = createElement('a', ALERT_CONSTANTS.ELEMENTS.CTA, {
+    href: cta.url,
+    rel: 'noopener noreferrer',
+  });
+  link.innerHTML = cta.title;
 
-      ctaElement.classList.add(ELEMENT_ALERT_CTA);
-      ctaElement.href = link.url;
-      ctaElement.innerHTML = link.title;
-      ctaElement.setAttribute('rel', 'noopener noreferrer');
+  return Actions.CreateElement({
+    cta: link,
+    type: 'secondary',
+  });
+};
 
-      wrapper.appendChild(
-        Actions.CreateElement({
-          cta: ctaElement,
-          type: 'secondary',
-        }),
-      );
-    }
+const createAlertContent = (
+  alert: AlertData,
+  container: HTMLElement,
+): HTMLElement => {
+  const { ELEMENTS } = ALERT_CONSTANTS;
+  const wrapper = createElement('div', ELEMENTS.WRAPPER);
+  const lock = createElement('div', ELEMENTS.LOCK);
+
+  // Create elements
+  const title = createElement('p', ELEMENTS.TITLE);
+  title.innerHTML = alert.headline || alert.title;
+
+  const message = createElement('div', ELEMENTS.TEXT);
+  message.innerHTML = alert.message;
+
+  const closeButton = createCloseButton(container);
+
+  // Assemble content
+  wrapper.append(closeButton, title, message);
+
+  // Add CTA if exists
+  if (alert.cta?.[0]) {
+    wrapper.appendChild(createCTAElement(alert.cta[0]));
   }
 
-  lock.classList.add(ELEMENT_ALERT_LOCK);
   lock.appendChild(wrapper);
+  return lock;
+};
 
-  container.setAttribute(ATTRIBUTE_TYPE, type);
-  container.setAttribute('id', ALERT_ELEMENT_ID);
-  container.classList.add(ELEMENT_ALERT_CONTAINER);
-  container.appendChild(lock);
+const createAlertComponent = (alert: AlertData): HTMLElement => {
+  const { ELEMENTS, ATTRIBUTES } = ALERT_CONSTANTS;
 
+  const declaration = createElement('div', ELEMENTS.DECLARATION);
+  const container = createElement('div', ELEMENTS.CONTAINER, {
+    id: ELEMENTS.ALERT_ID,
+    [ATTRIBUTES.TYPE]: alert.type,
+  });
+
+  const content = createAlertContent(alert, container);
+  container.appendChild(content);
   declaration.appendChild(container);
-  declaration.classList.add(ELEMENT_ALERT_DECLARATION);
 
   return declaration;
 };
 
-const fetchAlerts = async ({ alertUrl }: TypeAlertProps) => {
-  if (alertUrl) {
-    const response = await fetch(alertUrl);
-    return response.json();
+const fetchAlerts = async ({
+  alertUrl,
+}: AlertProps): Promise<AlertResponse | null> => {
+  try {
+    if (alertUrl) {
+      const response = await fetch(alertUrl);
+      return response.json();
+    }
+
+    return await FetchGraphQL({
+      query: QUERY,
+      url:
+        process.env.NODE_ENV === 'development'
+          ? ALERT_CONSTANTS.URLS.TESTING
+          : ALERT_CONSTANTS.URLS.DEFAULT,
+      token: '',
+    });
+  } catch (error) {
+    console.error('Failed to fetch alerts:', error);
+    return null;
   }
-
-  const feedData = await FetchGraphQL({
-    query: QUERY,
-    url: DEFAULT_ALERT_URL,
-    token: '',
-  });
-
-  return feedData;
 };
 
-const CreateNavAlert = ({ alertUrl }: TypeAlertProps) =>
-  (async () => {
-    const { data = [] } = await fetchAlerts({ alertUrl });
+export const createNavAlert = async ({ alertUrl }: AlertProps) => {
+  const alertCache = checkAlertCache();
 
-    if (data.length === 0) return;
-    if (data[0] == '') return;
+  // Show cached alert if valid
+  if (
+    !alertCache.shouldCheck &&
+    alertCache.cachedData &&
+    !alertCache.cachedData.hidden
+  ) {
+    return { element: createAlertComponent(alertCache.cachedData) };
+  }
 
-    // if (shouldAlertHide({ alert_id: data.alert_id })) return;
+  // Fetch new alerts
+  const response = await fetchAlerts({ alertUrl });
+  if (!response?.data?.entries?.[0]) return null;
 
-    return CreateAlertComponent({ alerts: data });
-  })();
+  const alert = response.data.entries[0];
+  const cachedAlert = getStoredValue<AlertData>(
+    ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
+  );
 
-export default {
-  CreateElement: CreateNavAlert,
-  Styles: STYLES_NAV_ALERT,
+  // Handle alert updates
+  if (cachedAlert?.id === alert.id) {
+    if (!cachedAlert.hidden && alertCache.shouldCheck) {
+      return { element: createAlertComponent(cachedAlert) };
+    }
+  } else {
+    clearAlertStorage();
+    updateAlertCache(alert);
+    return { element: createAlertComponent(alert) };
+  }
+
+  return null;
 };

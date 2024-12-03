@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
 import AnimationCarouselImage from './carousel-image';
 import LayoutImage from '../layout/image';
-import LayoutFixedFullScreen from '../layout/fixed-full-screen';
+import LayoutFixedFullScreen from '../layout/carousel-full-screen';
 
 const { Colors } = Tokens;
 

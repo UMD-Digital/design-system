@@ -1,18 +1,17 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { Accessibility, AssetIcon } from 'utilities';
+import { Accessibility } from 'utilities';
 
 type TypeFixedFullScreenProps = {
   content: HTMLElement;
   callback: () => void;
 };
 
-const { Colors, Queries, Spacing } = Tokens;
+const { Queries, Spacing } = Tokens;
 const { EventAccessibilityFocusTrap } = Accessibility;
 
-const ELEMENT_CONTAINER = 'fixed-full-screen-container';
-const ELEMENT_CLOSE_BUTTON = 'fixed-full-screen-button';
+const ELEMENT_CONTAINER = 'modal-screen-container';
 
-const STYLES_FIXED_FULL_SCREEN = `
+export const STYLES_MODAL = `
   .${ELEMENT_CONTAINER} {
     display: none;
     position: fixed;
@@ -30,35 +29,15 @@ const STYLES_FIXED_FULL_SCREEN = `
       padding: 10vh 10vw;
     }
   }
-
-  .${ELEMENT_CLOSE_BUTTON} {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-
-  @media (${Queries.tablet.min}) {
-    .${ELEMENT_CLOSE_BUTTON} {
-      top: calc(10vh - 22px);
-      right: calc(10vw - 22px);
-    }
-  }
-
-  .${ELEMENT_CLOSE_BUTTON} > svg {
-    fill: ${Colors.white};
-    width: 20px;
-    height: 20px;
-  }
 `;
 
-const CreateFixedFullScreen = ({
+export const CreateModal = ({
   content,
   callback,
 }: TypeFixedFullScreenProps) => {
   const body = document.body;
   const html = document.documentElement;
   const container = document.createElement('div');
-  const closeButton = document.createElement('button');
   const show = () => {
     container.style.display = 'block';
     body.style.overflow = 'hidden';
@@ -95,14 +74,7 @@ const CreateFixedFullScreen = ({
   let eventReference: any = null;
   let accessibiltyEventReference: any = null;
 
-  closeButton.setAttribute('type', 'button');
-  closeButton.setAttribute('aria-label', 'Close');
-  closeButton.classList.add(ELEMENT_CLOSE_BUTTON);
-  closeButton.innerHTML = AssetIcon.X;
-  closeButton.addEventListener('click', hide);
-
   container.classList.add(ELEMENT_CONTAINER);
-  container.appendChild(closeButton);
   container.appendChild(content);
 
   return {
@@ -112,9 +84,4 @@ const CreateFixedFullScreen = ({
       hide,
     },
   };
-};
-
-export default {
-  CreateElement: CreateFixedFullScreen,
-  Styles: STYLES_FIXED_FULL_SCREEN,
 };

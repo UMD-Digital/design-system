@@ -11,7 +11,7 @@ import ButtonFullScreen from './buttons/full-screen';
 import ButtonVideoState from './buttons/video-state';
 import LayoutBlock from './layout/block';
 import LayoutBlockOverlay from './layout/overlay';
-import LayoutFixedFullScreen from './layout/fixed-full-screen';
+import LayoutFixedFullScreen from './layout/carousel-full-screen';
 import LayoutGridGap from './layout/grid';
 import LayoutImage from './layout/image';
 import LayoutList from './layout/list';

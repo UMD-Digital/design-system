@@ -19,7 +19,7 @@ type AlertData = {
   type: string;
   title: string;
   headline: string;
-  message: string;
+  text: string;
   cta: AlertCTA[];
   hidden?: boolean;
 };
@@ -54,13 +54,13 @@ const { Text } = Elements;
 
 const QUERY = `
   query CampusAlertsQuery {
-    entries: entries(section: "mainCampusAlerts") {
+    entries: entries(section: "mainCampusAlerts", limit: 1) {
       ... on mainElementsCampusAlert_Entry {
         id: uid
-        type: alert_type
-        headline: alert_headline
-        title: alert_title
-        text: alert_message
+        type: optionsType
+        headline
+        title
+        text
         cta {
           ... on umdElementsLink_Entry {
             title
@@ -418,13 +418,15 @@ const createAlertContent = (
   const title = createElement('p', ELEMENTS.TITLE);
   title.innerHTML = alert.headline || alert.title;
 
-  const message = createElement('div', ELEMENTS.TEXT);
-  message.innerHTML = alert.message;
-
   const closeButton = createCloseButton(container);
 
-  // Assemble content
-  wrapper.append(closeButton, title, message);
+  wrapper.append(closeButton, title);
+
+  if (alert.text) {
+    const message = createElement('div', ELEMENTS.TEXT);
+    message.innerHTML = alert.text;
+    wrapper.append(closeButton, title, message);
+  }
 
   // Add CTA if exists
   if (alert.cta?.[0]) {

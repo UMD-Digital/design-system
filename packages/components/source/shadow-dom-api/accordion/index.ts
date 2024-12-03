@@ -40,11 +40,19 @@ const attributes = Attributes.handler.combine(
   Attributes.handler.observe.resize({
     callback: (element) => element.events?.SetOpen({ hasAnimation: false }),
   }),
+  // Deprecated
   Attributes.handler.observe.stateClosed({
     callback: (element) => element.events?.SetClosed({ hasAnimation: true }),
   }),
+  // Deprecated
   Attributes.handler.observe.stateOpen({
     callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
+  }),
+  Attributes.handler.observe.visuallyOpen({
+    callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
+  }),
+  Attributes.handler.observe.visuallyClosed({
+    callback: (element) => element.events?.SetClosed({ hasAnimation: true }),
   }),
 );
 

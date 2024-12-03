@@ -32,16 +32,20 @@ const styles = `
   ${EventPromo.Styles}
 `;
 
-const MakeCommonData = ({ element }: { element: UMDEventElement }) => ({
-  image: MarkupValidate.ImageSlot({
-    element,
-    ImageSlot: Slots.name.assets.image,
-  }),
-  headline: Slots.headline.default({ element }),
-  text: Slots.text.default({ element }),
-  actions: Slots.actions.default({ element }),
-  isThemeDark: Attributes.isTheme.dark({ element }),
-});
+const MakeCommonData = ({ element }: { element: UMDEventElement }) => {
+  console.log(Attributes.isTheme.dark({ element }));
+
+  return {
+    image: MarkupValidate.ImageSlot({
+      element,
+      ImageSlot: Slots.name.assets.image,
+    }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+    actions: Slots.actions.default({ element }),
+    isThemeDark: Attributes.isTheme.dark({ element }),
+  };
+};
 
 const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const isThemeDark = Attributes.isTheme.dark({ element });

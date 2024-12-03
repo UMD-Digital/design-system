@@ -33,16 +33,9 @@ const isAttributeEqual = ({
   defaultValue = false,
 }: AttributeProps): boolean => {
   const value = element.getAttribute(attributeName);
+
   if (value === null) {
     return defaultValue;
-  }
-
-  if (attributeValue === 'true' || attributeValue === 'false') {
-    return value.toLowerCase() === 'true';
-  }
-
-  if (value === '') {
-    return true;
   }
 
   return value === attributeValue;

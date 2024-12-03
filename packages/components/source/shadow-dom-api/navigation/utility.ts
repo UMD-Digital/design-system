@@ -24,11 +24,11 @@ const createComponent = (element: HTMLElement) =>
 const attributes = Attributes.handler.combine(
   Attributes.handler.observe.visuallyShow({
     name: Attributes.names.layout.ALERT_OFF,
-    callback: (element) => element.events?.hideAlert(),
+    callback: (element) => element.events?.showAlert(),
   }),
   Attributes.handler.observe.visuallyHide({
     name: Attributes.names.layout.ALERT_OFF,
-    callback: (element) => element.events?.showAlert(),
+    callback: (element) => element.events?.hideAlert(),
   }),
 );
 

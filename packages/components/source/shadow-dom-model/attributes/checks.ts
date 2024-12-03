@@ -250,14 +250,6 @@ const isLayout = {
       attributeName: AttributeNames.layout.ALIGNMENT,
       attributeValue: AttributesValues.layout.RIGHT,
     }),
-  fullImage: createAttributeCheck(
-    AttributeNames.TYPE,
-    AttributesValues.layout.FULL_IMAGE,
-  ),
-  image: createAttributeCheck(
-    AttributeNames.TYPE,
-    AttributesValues.display.IMAGE,
-  ),
   fixed: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
@@ -270,6 +262,19 @@ const isLayout = {
       attributeName: AttributeNames.layout.FIXED,
       attributeValue: AttributesValues.state.TRUE,
     }),
+  fullImage: createAttributeCheck(
+    AttributeNames.TYPE,
+    AttributesValues.layout.FULL_IMAGE,
+  ),
+  hidden: createAttributeCheck(
+    AttributeNames.layout.HIDDEN,
+    AttributesValues.state.TRUE,
+  ),
+  image: createAttributeCheck(
+    AttributeNames.TYPE,
+    AttributesValues.display.IMAGE,
+  ),
+
   lockFull: createAttributeCheck(
     AttributeNames.layout.LOCK,
     AttributesValues.layout.FULL,

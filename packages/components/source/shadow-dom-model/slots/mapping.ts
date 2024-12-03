@@ -14,17 +14,21 @@ const date = {
   default: 'date',
 };
 
-const deprecated = {
-  body: 'body',
-  wrappingText: 'wrapping-text',
-};
-
 const contact = {
   additional: 'additional-contact',
   address: 'address',
   email: 'email',
   location: 'location',
   phone: 'phone',
+};
+
+const content = {
+  default: 'content',
+};
+
+const deprecated = {
+  body: 'body',
+  wrappingText: 'wrapping-text',
 };
 
 const eyebrows = {
@@ -61,7 +65,7 @@ const NEEDS_CLEANUP = {
   BREADCRUMB: 'breadcrumb',
   CARDS: 'cards',
   CHILDREN_SLIDES: 'children-slides',
-  CONTENT: 'content',
+
   CTA_ICON: 'cta-icon',
   DATE_END_ISO: 'end-date-iso',
   DATE_START_ISO: 'start-date-iso',
@@ -88,6 +92,7 @@ const NEEDS_CLEANUP = {
 const SlotNames = {
   actions,
   assets,
+  content,
   contact,
   eyebrows,
   date,

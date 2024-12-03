@@ -1,111 +1,80 @@
-import Accordion from './accordion';
-import AlertPage from './alert/page';
-import AlertSite from './alert/site';
-import Article from './article';
-import Breadcrumb from './breadcrumb';
-import BannerPromo from './banner-promo';
-import BrandLogoAnimation from './brand/logo-animation';
-import CallToAction from './call-to-action';
-import Card from './card/default';
-import CardIcon from './card/icon';
-import CardOverlay from './card/overlay';
-import Carousel from './carousel/default';
-import CarouselCards from './carousel/cards';
-import CarouselImageStandard from './carousel/image/standard';
-import CarouselImageMultiple from './carousel/image/multiple';
-import CarouselThumbnail from './carousel/thumbnail';
-import Event from './event';
-import EventDate from './event/lockup';
-import FeedNewsGrid from './feeds/news/grid';
-import FeedNewsGridFeatured from './feeds/news/grid-featured';
-import FeedNewsList from './feeds/news/list';
-import FeedEventsGrid from './feeds/events/grid';
-import FeedEventsGrouped from './feeds/events/grouped';
-import FeedEventsList from './feeds/events/list';
-import Footer from './footer';
-import Hero from './hero/default';
-import HeroBrandVideo from './hero/brand/video';
-import HeroLogo from './hero/logo';
-import HeroExpand from './hero/expand';
-import HeroMinimal from './hero/minimal';
-import ImageExpand from './image-expand';
-import Logo from './logo';
-import MediaInline from './media/inline';
-import NavDrawer from './navigation/drawer';
-import NavHeader from './navigation/header';
-import NavItem from './navigation/item';
-import NavSlider from './navigation/slider';
-import NavSticky from './navigation/sticky';
-import NavUtility from './navigation/utility';
-import Pathway from './pathway/default';
-import PathwayHighlight from './pathway/highlight';
-import Person from './person/default';
-import PersonBio from './person/bio';
-import PersonHero from './person/hero';
-import Quote from './quote';
-import ScrollTop from './scroll-top';
-import SectionIntro from './section-intro/default';
-import SectionIntroWide from './section-intro/wide';
-import SliderEvent from './slider/events';
-import SliderEventFeed from './slider/events/feed';
-import SocialSharing from './social-sharing';
-import Stat from './stat';
-import StickyColumns from './stickly-columns';
-import Tabs from './tabs';
+// alert/index.ts
+export { default as AlertPage } from './alert/page';
+export { default as AlertSite } from './alert/site';
 
-export {
-  Accordion,
-  AlertPage,
-  AlertSite,
-  Article,
-  Breadcrumb,
-  BannerPromo,
-  BrandLogoAnimation,
-  CallToAction,
-  CardIcon,
-  Card,
-  CardOverlay,
-  Carousel,
-  CarouselCards,
-  CarouselImageStandard,
-  CarouselImageMultiple,
-  CarouselThumbnail,
-  EventDate,
-  Event,
-  FeedEventsGrid,
-  FeedEventsGrouped,
-  FeedEventsList,
-  FeedNewsGrid,
-  FeedNewsGridFeatured,
-  FeedNewsList,
-  Footer,
-  Hero,
-  HeroBrandVideo,
-  HeroExpand,
-  HeroLogo,
-  HeroMinimal,
-  ImageExpand,
-  Logo,
-  MediaInline,
-  NavDrawer,
-  NavHeader,
-  NavItem,
-  NavSlider,
-  NavSticky,
-  NavUtility,
-  Pathway,
-  PathwayHighlight,
-  Person,
-  PersonBio,
-  PersonHero,
-  Quote,
-  ScrollTop,
-  SectionIntro,
-  SectionIntroWide,
-  SliderEvent,
-  SliderEventFeed,
-  SocialSharing,
-  Stat,
-  StickyColumns,
-  Tabs,
-};
+// brand/index.ts
+export { default as BrandLogoAnimation } from './brand/logo-animation';
+export { default as Logo } from './logo';
+
+// card/index.ts
+export { default as Card } from './card/default';
+export { default as CardIcon } from './card/icon';
+export { default as CardOverlay } from './card/overlay';
+
+// carousel/index.ts
+export { default as Carousel } from './carousel/default';
+export { default as CarouselCards } from './carousel/cards';
+export { default as CarouselImageStandard } from './carousel/image/standard';
+export { default as CarouselImageMultiple } from './carousel/image/multiple';
+export { default as CarouselThumbnail } from './carousel/thumbnail';
+
+// event/index.ts
+export { default as Event } from './event';
+export { default as EventDate } from './event/lockup';
+
+// feeds/index.ts
+export { default as FeedNewsGrid } from './feeds/news/grid';
+export { default as FeedNewsGridFeatured } from './feeds/news/grid-featured';
+export { default as FeedNewsList } from './feeds/news/list';
+export { default as FeedEventsGrid } from './feeds/events/grid';
+export { default as FeedEventsGrouped } from './feeds/events/grouped';
+export { default as FeedEventsList } from './feeds/events/list';
+
+// hero/index.ts
+export { default as Hero } from './hero/default';
+export { default as HeroBrandVideo } from './hero/brand/video';
+export { default as HeroLogo } from './hero/logo';
+export { default as HeroExpand } from './hero/expand';
+export { default as HeroMinimal } from './hero/minimal';
+
+// navigation/index.ts
+export { default as NavDrawer } from './navigation/drawer';
+export { default as NavHeader } from './navigation/header';
+export { default as NavItem } from './navigation/item';
+export { default as NavSlider } from './navigation/slider';
+export { default as NavSticky } from './navigation/sticky';
+export { default as NavUtility } from './navigation/utility';
+
+// pathway/index.ts
+export { default as Pathway } from './pathway/default';
+export { default as PathwayHighlight } from './pathway/highlight';
+
+// person/index.ts
+export { default as Person } from './person/default';
+export { default as PersonBio } from './person/bio';
+export { default as PersonHero } from './person/hero';
+
+// section/index.ts
+export { default as SectionIntro } from './section-intro/default';
+export { default as SectionIntroWide } from './section-intro/wide';
+
+// slider/index.ts
+export { default as SliderEvent } from './slider/events';
+export { default as SliderEventFeed } from './slider/events/feed';
+
+// standalone/index.ts
+export { default as Accordion } from './accordion';
+export { default as Article } from './article';
+export { default as BannerPromo } from './banner-promo';
+export { default as Breadcrumb } from './breadcrumb';
+export { default as CallToAction } from './call-to-action';
+export { default as Footer } from './footer';
+export { default as ImageExpand } from './image-expand';
+export { default as MediaInline } from './media/inline';
+export { default as Modal } from './modal';
+export { default as Quote } from './quote';
+export { default as ScrollTop } from './scroll-top';
+export { default as SocialSharing } from './social-sharing';
+export { default as Stat } from './stat';
+export { default as StickyColumns } from './stickly-columns';
+export { default as Tabs } from './tabs';

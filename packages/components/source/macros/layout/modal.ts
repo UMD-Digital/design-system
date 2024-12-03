@@ -2,8 +2,9 @@ import { Tokens } from '@universityofmaryland/variables';
 import { Accessibility } from 'utilities';
 
 type TypeFixedFullScreenProps = {
-  content: HTMLElement;
-  callback: () => void;
+  content: HTMLElement | null;
+  isHidden?: boolean;
+  callback?: () => void;
 };
 
 const { Queries, Spacing } = Tokens;
@@ -34,6 +35,7 @@ export const STYLES_MODAL = `
 export const CreateModal = ({
   content,
   callback,
+  isHidden,
 }: TypeFixedFullScreenProps) => {
   const body = document.body;
   const html = document.documentElement;
@@ -49,13 +51,15 @@ export const CreateModal = ({
 
       if (target === container) hide();
     });
+
     accessibiltyEventReference = EventAccessibilityFocusTrap({
       element: container,
       action: hide,
+      shadowDomContext: content || null,
     });
 
     setTimeout(() => {
-      content.focus();
+      if (content) content.focus();
     }, 100);
   };
   const hide = () => {
@@ -69,19 +73,23 @@ export const CreateModal = ({
     if (eventReference)
       eventReference.removeEventListener('click', () => hide());
 
-    callback();
+    if (callback) callback();
   };
   let eventReference: any = null;
   let accessibiltyEventReference: any = null;
 
   container.classList.add(ELEMENT_CONTAINER);
-  container.appendChild(content);
+  if (content) container.appendChild(content);
+  if (isHidden) container.style.display = 'none';
 
   return {
     element: container,
+    styles: STYLES_MODAL,
     events: {
       show,
       hide,
     },
   };
 };
+
+export default CreateModal;

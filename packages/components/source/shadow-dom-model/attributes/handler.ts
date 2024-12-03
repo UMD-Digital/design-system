@@ -130,11 +130,11 @@ const visuallyShow = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.layout.hidden,
+  name: name || AttributeNames.layout.HIDDEN,
   handler: (ref, oldValue, newValue) => {
     if (
-      newValue === AttributeValues.state.TRUE &&
-      oldValue === AttributeValues.state.FALSE
+      newValue === AttributeValues.state.FALSE &&
+      oldValue === AttributeValues.state.TRUE
     ) {
       callback(ref);
     }
@@ -145,11 +145,11 @@ const visuallyHide = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.layout.hidden,
+  name: name || AttributeNames.layout.HIDDEN,
   handler: (ref, oldValue, newValue) => {
     if (
-      newValue === AttributeValues.state.FALSE &&
-      oldValue === AttributeValues.state.TRUE
+      newValue === AttributeValues.state.TRUE &&
+      oldValue === AttributeValues.state.FALSE
     ) {
       callback(ref);
     }

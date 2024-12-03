@@ -1,31 +1,29 @@
-import { NavigationUtility } from 'elements';
-import { Attributes, Model, Register } from 'shadow-dom-model';
+import { Modal } from 'macros';
+import { Attributes, Model, Slots, Register } from 'shadow-dom-model';
 
 const tagName = 'umd-element-modal';
 
 const createComponent = (element: HTMLElement) =>
-  NavigationUtility({
-    alertUrl: Attributes.getValue.alertUrl({ element }),
-    giftUrl:
-      Attributes.getValue.giftUrl({
-        element,
-      }) || 'https://giving.umd.edu/giving',
-    isAdmissionsFeed: Attributes.isInfo.admissions({ element }),
-    isAlertOff: Attributes.isLayout.alertOff({ element }),
-    isEventsFeed: Attributes.isInfo.events({ element }),
-    isGiftsFeed: Attributes.hasInfo.gifts({ element }),
-    isLockFull: Attributes.isLayout.lockFull({ element }),
-    isNewsFeed: Attributes.isInfo.news({ element }),
-    isSchoolsFeed: Attributes.isInfo.schools({ element }),
-    isSearch: Attributes.hasInfo.search({ element }),
-    isSearchDomain: Attributes.isInfo.searchDomain({ element }),
+  Modal({
+    content: Slots.content.default({ element, isDefaultStyling: false }),
+    isHidden: Attributes.isLayout.hidden({ element }),
   });
+
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.visuallyShow({
+    callback: (element) => element.events?.show(),
+  }),
+  Attributes.handler.observe.visuallyHide({
+    callback: (element) => element.events?.hide(),
+  }),
+);
 
 const Load = () => {
   Register.registerWebComponent({
     name: tagName,
     element: Model.createCustomElement({
       tagName,
+      attributes,
       createComponent,
     }),
   });

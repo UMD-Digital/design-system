@@ -15,6 +15,7 @@ import LayoutFixedFullScreen from './layout/carousel-full-screen';
 import LayoutGridGap from './layout/grid';
 import LayoutImage from './layout/image';
 import LayoutList from './layout/list';
+import Modal from './layout/modal';
 import TextLockupSmall from './text-lockup/small';
 import TextLockupSmallScaling from './text-lockup/small-scaling';
 
@@ -36,6 +37,7 @@ export {
   LayoutImage,
   LayoutList,
   LayoutGridGap,
+  Modal,
   TextLockupSmall,
   TextLockupSmallScaling,
 };

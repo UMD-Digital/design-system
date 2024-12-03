@@ -26,6 +26,10 @@ const contact = {
   phone: createSlotFactory(SlotNames.contact.phone),
 } as const;
 
+const content = {
+  default: createSlotFactory(SlotNames.content.default),
+} as const;
+
 const date = {
   default: createSlotFactory(SlotNames.date.default),
 } as const;
@@ -66,6 +70,7 @@ export default {
   actions,
   assets,
   contact,
+  content,
   date,
   deprecated,
   eyebrow,

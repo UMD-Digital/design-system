@@ -20,6 +20,7 @@ const layout = {
   ALERT_OFF: 'data-alert-off',
   ALIGNMENT: 'data-layout-alignment',
   FIXED: 'data-layout-fixed',
+  hidden: 'data-layout-hidden',
   LOCK: 'data-layout-lock',
 };
 

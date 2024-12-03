@@ -1,6 +1,11 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 import { Accessibility, AssetIcon, Styles } from 'utilities';
-import { createNavAlert, STYLES_NAV_ALERT, TypeAlertProps } from './alert';
+import {
+  createNavAlert,
+  STYLES_NAV_ALERT,
+  ALERT_CONSTANTS,
+  TypeAlertProps,
+} from './alert';
 import UtilitySearch from './search';
 
 type TypeMenuItemsRequirements = {
@@ -664,6 +669,30 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
         resizeEvent();
       };
 
+      const showAlert = async () => {
+        const isCurrentAlert = container.querySelector(
+          `.${ALERT_CONSTANTS.ELEMENTS.CONTAINER}`,
+        );
+
+        if (isCurrentAlert) return;
+
+        const alert = await createNavAlert(props);
+
+        if (alert) {
+          container.insertBefore(alert?.element, container.firstChild);
+        }
+      };
+
+      const hideAlert = () => {
+        const alert = container.querySelector(
+          `.${ALERT_CONSTANTS.ELEMENTS.CONTAINER}`,
+        );
+
+        if (alert) {
+          alert.remove();
+        }
+      };
+
       wrapper.appendChild(logoElement);
       wrapper.classList.add(ELEMENT_UTILITY_WRAPPER);
 
@@ -683,6 +712,10 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       return {
         element: declaration,
         styles: STYLES_NAVIGATION_UTILITY,
+        events: {
+          showAlert,
+          hideAlert,
+        },
       };
     }
   })();

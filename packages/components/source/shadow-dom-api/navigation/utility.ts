@@ -21,11 +21,23 @@ const createComponent = (element: HTMLElement) =>
     isSearchDomain: Attributes.isInfo.searchDomain({ element }),
   });
 
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.visuallyShow({
+    name: Attributes.names.layout.ALERT_OFF,
+    callback: (element) => element.events?.hideAlert(),
+  }),
+  Attributes.handler.observe.visuallyHide({
+    name: Attributes.names.layout.ALERT_OFF,
+    callback: (element) => element.events?.showAlert(),
+  }),
+);
+
 const Load = () => {
   Register.registerWebComponent({
     name: tagName,
     element: Model.createCustomElement({
       tagName,
+      attributes,
       createComponent,
     }),
   });

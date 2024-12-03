@@ -20,6 +20,7 @@ export namespace AttributeHandlerTypes {
 
   export interface Props {
     callback: Callback;
+    name?: string;
   }
 }
 
@@ -55,8 +56,9 @@ const combine = (
 
 const resize = ({
   callback,
+  name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: AttributeNames.RESIZE,
+  name: name || AttributeNames.RESIZE,
   handler: (ref, _, newValue) => {
     if (newValue === AttributeValues.state.TRUE) {
       callback(ref);
@@ -66,8 +68,9 @@ const resize = ({
 
 const stateOpen = ({
   callback,
+  name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: AttributeNames.STATE,
+  name: name || AttributeNames.STATE,
   handler: (ref, oldValue, newValue) => {
     if (
       newValue === AttributeValues.state.OPENED &&
@@ -80,8 +83,9 @@ const stateOpen = ({
 
 const stateClosed = ({
   callback,
+  name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: AttributeNames.STATE,
+  name: name || AttributeNames.STATE,
   handler: (ref, oldValue, newValue) => {
     if (
       newValue === AttributeValues.state.CLOSED &&
@@ -92,10 +96,74 @@ const stateClosed = ({
   },
 });
 
+const visuallyOpen = ({
+  callback,
+  name,
+}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+  name: name || AttributeNames.visual.open,
+  handler: (ref, oldValue, newValue) => {
+    if (
+      newValue === AttributeValues.state.TRUE &&
+      oldValue === AttributeValues.state.FALSE
+    ) {
+      callback(ref);
+    }
+  },
+});
+
+const visuallyClosed = ({
+  callback,
+  name,
+}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+  name: name || AttributeNames.visual.open,
+  handler: (ref, oldValue, newValue) => {
+    if (
+      newValue === AttributeValues.state.FALSE &&
+      oldValue === AttributeValues.state.TRUE
+    ) {
+      callback(ref);
+    }
+  },
+});
+
+const visuallyShow = ({
+  callback,
+  name,
+}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+  name: name || AttributeNames.layout.hidden,
+  handler: (ref, oldValue, newValue) => {
+    if (
+      newValue === AttributeValues.state.TRUE &&
+      oldValue === AttributeValues.state.FALSE
+    ) {
+      callback(ref);
+    }
+  },
+});
+
+const visuallyHide = ({
+  callback,
+  name,
+}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+  name: name || AttributeNames.layout.hidden,
+  handler: (ref, oldValue, newValue) => {
+    if (
+      newValue === AttributeValues.state.FALSE &&
+      oldValue === AttributeValues.state.TRUE
+    ) {
+      callback(ref);
+    }
+  },
+});
+
 const observe = {
   resize,
   stateOpen,
   stateClosed,
+  visuallyOpen,
+  visuallyClosed,
+  visuallyShow,
+  visuallyHide,
 };
 
 export default { combine, observe };

@@ -77,7 +77,7 @@ const QUERY = `
 `;
 
 const ELEMENT_NAME = 'umd-element-nav-alert';
-const ALERT_CONSTANTS = {
+export const ALERT_CONSTANTS = {
   URLS: {
     DEFAULT: 'https://umd.edu/api/alerts',
     TESTING: 'https://umd-main.production.servd.dev/api/alerts',

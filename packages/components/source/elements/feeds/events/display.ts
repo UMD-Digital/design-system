@@ -53,8 +53,6 @@ const CreateImage = ({
   const image = images[0];
   const imageElement = document.createElement('img');
   imageElement.src = image.url;
-
-  console.log(image);
   imageElement.alt = image.altText || title;
 
   if (url) {

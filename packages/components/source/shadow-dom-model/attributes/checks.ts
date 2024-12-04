@@ -26,7 +26,7 @@ interface ValueGetterConfig {
 }
 
 // Core attribute check utilities
-const isAttributeEqual = ({
+const isAttributeTrue = ({
   element,
   attributeName,
   attributeValue,
@@ -36,6 +36,10 @@ const isAttributeEqual = ({
 
   if (value === null) {
     return defaultValue;
+  }
+
+  if (value === 'false') {
+    return false;
   }
 
   return value === attributeValue;
@@ -69,7 +73,7 @@ const checkDeprecatedAttribute = (props: DeprecatedAttributeProps): boolean => {
     attributeValue,
     ...rest
   } = props;
-  const isDeprecatedUsed = isAttributeEqual({
+  const isDeprecatedUsed = isAttributeTrue({
     ...rest,
     element,
     attributeName: attributeNameOld,
@@ -87,7 +91,7 @@ const checkDeprecatedAttribute = (props: DeprecatedAttributeProps): boolean => {
 const createAttributeCheck =
   (attributeName: string, attributeValue: string, defaultValue = false) =>
   (props: AttributeElementProps): boolean =>
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName,
       attributeValue,
@@ -164,7 +168,7 @@ const isDisplay = {
       attributeNameNew: AttributeNames.display,
       attributeValue: AttributesValues.display.FEATURED,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.display,
       attributeValue: AttributesValues.display.FEATURED,
@@ -245,7 +249,7 @@ const isLayout = {
       attributeNameNew: AttributeNames.layout.ALIGNMENT,
       attributeValue: AttributesValues.layout.RIGHT,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.layout.ALIGNMENT,
       attributeValue: AttributesValues.layout.RIGHT,
@@ -257,7 +261,7 @@ const isLayout = {
       attributeNameNew: AttributeNames.layout.FIXED,
       attributeValue: '',
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.layout.FIXED,
       attributeValue: AttributesValues.state.TRUE,
@@ -316,7 +320,7 @@ const isTheme = {
       attributeNameNew: AttributeNames.theme,
       attributeValue: AttributesValues.theme.DARK,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.theme,
       attributeValue: AttributesValues.theme.DARK,
@@ -328,7 +332,7 @@ const isTheme = {
       attributeNameNew: AttributeNames.theme,
       attributeValue: AttributesValues.theme.GOLD,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.theme,
       attributeValue: AttributesValues.theme.GOLD,
@@ -340,7 +344,7 @@ const isTheme = {
       attributeNameNew: AttributeNames.theme,
       attributeValue: AttributesValues.theme.LIGHT,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.theme,
       attributeValue: AttributesValues.theme.LIGHT,
@@ -352,7 +356,7 @@ const isTheme = {
       attributeNameNew: AttributeNames.theme,
       attributeValue: AttributesValues.theme.MARYLAND,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.theme,
       attributeValue: AttributesValues.theme.MARYLAND,
@@ -380,7 +384,7 @@ const isVisual = {
       attributeNameNew: AttributeNames.visual.icon_seal,
       attributeValue: AttributesValues.state.TRUE,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.visual.icon_seal,
       attributeValue: AttributesValues.state.TRUE,
@@ -392,7 +396,7 @@ const isVisual = {
       attributeNameNew: AttributeNames.visual.open,
       attributeValue: AttributesValues.state.OPENED,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.visual.open,
       attributeValue: AttributesValues.state.TRUE,
@@ -408,7 +412,7 @@ const isVisual = {
       attributeNameNew: AttributeNames.visual.icon,
       attributeValue: AttributesValues.state.TRUE,
     }) ||
-    isAttributeEqual({
+    isAttributeTrue({
       ...props,
       attributeName: AttributeNames.visual.icon,
       attributeValue: AttributesValues.state.TRUE,

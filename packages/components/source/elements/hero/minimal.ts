@@ -16,6 +16,7 @@ const { SansSmaller, CampaignLarge } = Typography;
 const { ConvertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
+const DESKTOP = 1024;
 
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
@@ -55,12 +56,20 @@ const OverwriteTheme = `
     background-color: ${Colors.black};
   }
 
+  ${OVERWRITE_THEME_DARK_CONTAINER} .${TextContainer.Elements.eyebrow} {
+    color: ${Colors.white};
+  }
+
   ${OVERWRITE_THEME_LIGHT_CONTAINER} {
     background-color: ${Colors.gray.lightest};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
     background-color: ${Colors.red};
+  }
+
+  ${OVERWRITE_THEME_MARYLAND_CONTAINER} .${TextContainer.Elements.eyebrow} {
+    color: ${Colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_TEXT_WRAPPER},
@@ -80,6 +89,7 @@ const OverwriteEyebrow = `
   ${OVERWRITE_EYEBROW} {
     text-transform: uppercase;
     font-weight: 600;
+    color: ${Colors.black};
   }
   
   ${OVERWRITE_EYEBROW} + * {
@@ -116,6 +126,12 @@ const OverwriteTextContainer = `
   ${OVERWRITE_TEXT_CONTAINER_WRAPPER} {
     padding-left: ${Spacing.md};
     border-left: 2px solid ${Colors.red};
+  }
+
+  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
+    ${OVERWRITE_TEXT_CONTAINER_WRAPPER} {
+      padding-left: ${Spacing.lg};
+    }
   }
 `;
 

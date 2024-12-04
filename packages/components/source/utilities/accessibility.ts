@@ -69,7 +69,9 @@ const EventAccessibilityFocus: EventAccessibilityFocusType = ({
 const EventAccessibilityFocusTrap: EventAccessibilityFocusType = ({
   element,
   action,
+  shadowDomContext,
 }) => {
+  const container = shadowDomContext || element;
   const escapeEvent = (event: KeyboardEvent) => {
     if (event.key == 'Escape') {
       action(event);
@@ -80,9 +82,10 @@ const EventAccessibilityFocusTrap: EventAccessibilityFocusType = ({
     const currentElement = event.composedPath()[0] as HTMLElement;
 
     if (event.key === 'Tab') {
-      const firstElement = element?.firstElementChild as HTMLElement;
+      const firstElement = container?.querySelector('button') as HTMLElement;
+      const hasElement = container.contains(currentElement);
 
-      if (element && !element.contains(currentElement)) {
+      if (!hasElement) {
         firstElement.focus();
       }
     }

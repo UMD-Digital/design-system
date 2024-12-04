@@ -5,6 +5,7 @@ type TypeFixedFullScreenProps = {
   content: HTMLElement | null;
   isHidden?: boolean;
   callback?: () => void;
+  context?: HTMLElement | null;
 };
 
 const { Queries, Spacing } = Tokens;
@@ -36,10 +37,14 @@ export const CreateModal = ({
   content,
   callback,
   isHidden,
+  context,
 }: TypeFixedFullScreenProps) => {
   const body = document.body;
   const html = document.documentElement;
   const container = document.createElement('div');
+  let eventReference: any = null;
+  let accessibiltyEventReference: any = null;
+
   const show = () => {
     container.style.display = 'block';
     body.style.overflow = 'hidden';
@@ -55,7 +60,7 @@ export const CreateModal = ({
     accessibiltyEventReference = EventAccessibilityFocusTrap({
       element: container,
       action: hide,
-      shadowDomContext: content || null,
+      shadowDomContext: context || null,
     });
 
     setTimeout(() => {
@@ -75,8 +80,6 @@ export const CreateModal = ({
 
     if (callback) callback();
   };
-  let eventReference: any = null;
-  let accessibiltyEventReference: any = null;
 
   container.classList.add(ELEMENT_CONTAINER);
   if (content) container.appendChild(content);

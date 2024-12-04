@@ -42,7 +42,7 @@ const CreateNavItemSlots = ({ element }: { element: HTMLElement }) => {
 
   if (navigationSlot) {
     const navItem = Array.from(
-      navigationSlot.querySelectorAll('umd-element-nav-item'),
+      navigationSlot.querySelectorAll(':scope > umd-element-nav-item'),
     ) as HTMLElement[];
 
     navigationSlot.removeAttribute('slot');

@@ -7,7 +7,7 @@ declare global {
 import { MarkupCreate, Styles } from 'utilities';
 import { NavigationElements } from 'elements';
 
-const { SlotWithDefaultStyling, Node } = MarkupCreate;
+const { Node } = MarkupCreate;
 
 const SLOTS = {
   PRIMARY_LINK: 'primary-link',
@@ -39,19 +39,28 @@ class UMDNavItemElement extends HTMLElement {
 
   connectedCallback() {
     const element = this;
-    const calloutSlot = element.querySelector(
+    const calloutSlot = element.querySelector<HTMLElement>(
       `[slot="${SLOTS.DROPDOWN_CALLOUT}"]`,
-    ) as HTMLElement;
-    const primaryLinkContainer = element.querySelector(
-      `[slot="${SLOTS.PRIMARY_LINK}"]`,
-    ) as HTMLElement;
-    const dropdownLinksSlot = element.querySelector(
-      '[slot="dropdown-links"]',
-    ) as HTMLElement;
+    );
 
-    const dropdownLinksContainer = dropdownLinksSlot
-      ? (dropdownLinksSlot.cloneNode(true) as HTMLElement)
-      : null;
+    const primaryLinkSlot = element.querySelector<HTMLElement>(
+      `[slot="${SLOTS.PRIMARY_LINK}"]`,
+    );
+    const primaryLinkContainer = primaryLinkSlot?.cloneNode(
+      true,
+    ) as HTMLElement | null;
+
+    const dropdownLinksSlot = element.querySelector<HTMLElement>(
+      '[slot="dropdown-links"]',
+    );
+    const dropdownLinksContainer = dropdownLinksSlot?.cloneNode(
+      true,
+    ) as HTMLElement | null;
+
+    if (!primaryLinkContainer) {
+      throw new Error('Primary link is required for a nav item');
+    }
+
     let elementData: {
       primaryLinkContainer: HTMLElement;
       dropdownLinksContainer: HTMLElement | null;
@@ -79,6 +88,8 @@ class UMDNavItemElement extends HTMLElement {
     });
 
     element._shadow.appendChild(navItem);
+    dropdownLinksSlot?.remove();
+    primaryLinkSlot?.remove();
   }
 }
 

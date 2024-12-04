@@ -41,7 +41,7 @@ query getEvents($startDate: String!, $related: [QueryArgument], $limit: Int, $of
         summary: commonRichTextTwo
         image: commonAssetHeroImageSingle {
           title
-          alt
+          commonPlainTextTwo: alt
           url
         }
         location: categoriesCampusBuildingSingle {
@@ -77,8 +77,8 @@ query getEvents($startDate: String!, $related: [QueryArgument], $limit: Int, $of
         desciption: commonRichText
         summary: commonRichTextTwo
         image: commonAssetHeroImageSingle {
-          alt
           title
+          commonPlainTextTwo: alt
           url
         }
         location: categoriesCampusBuildingSingle {

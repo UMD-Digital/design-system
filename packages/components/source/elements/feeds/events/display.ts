@@ -39,13 +39,23 @@ const STYLES_EVENT_FEED = `
   ${EventElements.Meta.Styles}
 `;
 
-const CreateImage = ({ images, url }: { images: ImageType; url?: string }) => {
+const CreateImage = ({
+  images,
+  title,
+  url,
+}: {
+  images: ImageType;
+  title: string;
+  url?: string;
+}) => {
   if (!images || !Array.isArray(images) || images.length === 0) return null;
 
   const image = images[0];
   const imageElement = document.createElement('img');
   imageElement.src = image.url;
-  imageElement.alt = image.altText;
+
+  console.log(image);
+  imageElement.alt = image.altText || title;
 
   if (url) {
     const link = document.createElement('a');
@@ -102,7 +112,11 @@ const CommonDisplay = ({
   isThemeDark?: boolean;
   showTime?: boolean;
 }) => ({
-  image: CreateImage({ images: entry.image, url: entry.url }),
+  image: CreateImage({
+    images: entry.image,
+    title: entry.title,
+    url: entry.url,
+  }),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),
   eventDetails: EventElements.Meta.CreateElement({

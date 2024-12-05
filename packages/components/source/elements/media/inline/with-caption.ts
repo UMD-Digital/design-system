@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { Performance } from 'utilities';
-import { LayoutImage } from 'macros';
+import { Image as LayoutImage } from 'layout';
 import CaptionContainer from '../elements/caption';
 
 export type TypeMediaInlineRequirements = {

@@ -1,4 +1,4 @@
-import { LayoutImage } from 'macros';
+import { Image as LayoutImage } from 'layout';
 
 export type TypeMediaInlineRequirements = {
   image?: HTMLImageElement | null;

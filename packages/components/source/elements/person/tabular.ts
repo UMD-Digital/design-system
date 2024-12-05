@@ -1,6 +1,6 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import { LayoutList, LayoutImage } from 'macros';
+import { List as LayoutList, Image as LayoutImage } from 'layout';
 import PersonTextContainer, {
   TypePersonProps,
   DISPLAY_TABULAR,

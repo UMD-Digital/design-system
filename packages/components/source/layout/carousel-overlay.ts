@@ -1,7 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
-import AnimationCarouselImage from './carousel-image';
-import LayoutImage from '../layout/image';
-import LayoutFixedFullScreen from '../layout/carousel-full-screen';
+import AnimationCarouselImage from '../macros/animations/carousel-image';
+import LayoutImage from './image';
+import FixedFullScreen from './carousel-full-screen';
 
 const { Colors } = Tokens;
 
@@ -25,7 +25,7 @@ const OverlayImageContainerStyles = `
 // prettier-ignore
 const STYLES_CAROUSEL_OVERLAY_ELEMENT = `
   ${LayoutImage.Styles}
-  ${LayoutFixedFullScreen.Styles}
+  ${FixedFullScreen.Styles}
   ${AnimationCarouselImage.Styles}
   ${OverlayImageContainerStyles}
 `;
@@ -84,7 +84,7 @@ const CreateCarouselOverlayElement = ({
       maxHeight: (window.innerHeight / 10) * 8,
     });
 
-    const fixedFullScreen = LayoutFixedFullScreen.CreateElement({
+    const fixedFullScreen = FixedFullScreen.CreateElement({
       content: overlayCarousel.element,
       callback: () => {
         if (isFullScreenEvents)

@@ -1,12 +1,12 @@
 import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
+import { ButtonFullScreen } from 'atomic';
+import { Image as LayoutImage } from 'layout';
 import {
   AnimationCarouselOverlay,
   AnimationCarouselImage,
   AnimationIndicator,
-  ButtonFullScreen,
-  LayoutImage,
 } from 'macros';
+import { Styles } from 'utilities';
 
 type TypeImage = {
   image: HTMLImageElement;

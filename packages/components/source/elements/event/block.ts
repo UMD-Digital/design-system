@@ -1,10 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  LayoutBlock,
-  LayoutImage,
-  TextLockupSmall,
-  TextLockupSmallScaling,
-} from 'macros';
+import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
+import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 
 type TypeEventBlockProps = {
   headline: HTMLElement | null;

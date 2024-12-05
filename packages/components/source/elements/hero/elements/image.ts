@@ -1,4 +1,5 @@
-import { LayoutImage, ButtonVideoState } from 'macros';
+import { ButtonVideoState } from 'atomic';
+import { Image as LayoutImage } from 'layout';
 
 export type TypeImageContainerProps = {
   imageRef?: HTMLElement | null;

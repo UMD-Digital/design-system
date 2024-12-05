@@ -1,5 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { TextLockupSmall, LayoutBlockOverlay } from 'macros';
+import { BlockOverlay as LayoutBlockOverlay } from 'layout';
+import { TextLockupSmall } from 'macros';
 
 type TypeEventPromoProps = {
   image: HTMLImageElement | null;

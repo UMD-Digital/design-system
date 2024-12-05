@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import TextLockupSmall from '../text-lockup/small';
+import { TextLockupSmall } from 'macros';
 import ImageContainer from './image';
 
 const { Colors, Spacing, MaxWidth } = Tokens;

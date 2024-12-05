@@ -1,7 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { AssetServices, MarkupModify, Performance } from 'utilities';
-import ScalingFontBlock from '../text-lockup/small-scaling';
-import { TypeTextLockupSmall } from '../text-lockup/small';
+import { TextLockupSmallScaling, type TypeTextLockupSmall } from 'macros';
 
 export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
   image?: HTMLImageElement | HTMLAnchorElement | null;
@@ -142,7 +141,7 @@ const STYLES_BLOCK_OVERLAY_ELEMENT = `
   ${WrapperStyles}
   ${ImageStyles}
   ${ImageTint}
-  ${ScalingFontBlock.Styles}
+  ${TextLockupSmallScaling.Styles}
 `;
 
 const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
@@ -154,7 +153,7 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
   const tintOverlay = document.createElement('div');
   const textCopy = text?.innerHTML;
 
-  const scalingFontContainer = ScalingFontBlock.CreateElement({
+  const scalingFontContainer = TextLockupSmallScaling.CreateElement({
     ...props,
     isThemeDark: true,
   });

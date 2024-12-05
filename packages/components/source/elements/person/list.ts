@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutList, LayoutImage } from 'macros';
+import { List as LayoutList, Image as LayoutImage } from 'layout';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
 
 type TypeListPersonProps = TypePersonProps & {

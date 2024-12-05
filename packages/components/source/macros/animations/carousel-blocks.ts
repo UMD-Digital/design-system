@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
+import { ButtonFullScreen } from 'atomic';
 import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
-import { AnimationCarouselOverlay, ButtonFullScreen } from 'macros';
 
 type TypeDisplayLogic = {
   mobileCount: number;

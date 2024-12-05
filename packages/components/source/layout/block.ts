@@ -1,7 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import ImageContainer from './image';
-import TextLockupSmall from '../text-lockup/small';
-import ScalingTextLockup from '../text-lockup/small-scaling';
+import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 
 export type TypeBlockContainer = {
   isAligned?: boolean;
@@ -37,7 +36,7 @@ const IS_WITH_BORDER = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_BORDER}]`;
 const IS_WITH_IMAGE = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
 const IS_TRANSPARENT = `[${ATTRIBUTE_TRANSPARENT}="true"]`;
 
-const OVERWRITE_SCALABLE_FONT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER} .${ScalingTextLockup.Elements.container}`;
+const OVERWRITE_SCALABLE_FONT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER} .${TextLockupSmallScaling.Elements.container}`;
 
 const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${TextLockupSmall.Elements.container}`;
 const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${IS_THEME_DARK} .${ImageContainer.Elements.container}`;

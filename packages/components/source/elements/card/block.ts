@@ -1,4 +1,5 @@
-import { LayoutBlock, LayoutImage, TextLockupSmallScaling } from 'macros';
+import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
+import { TextLockupSmallScaling } from 'macros';
 
 type TypeBlockCardProps = {
   id?: string;

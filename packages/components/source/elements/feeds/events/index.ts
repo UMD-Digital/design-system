@@ -1,10 +1,7 @@
 import { Tokens, Elements } from '@universityofmaryland/variables';
-import {
-  AriaLive,
-  AnimationLoader,
-  ButtonLazyLoad,
-  LayoutGridGap,
-} from 'macros';
+import { ButtonLazyLoad } from 'atomic';
+import { GridGap as LayoutGridGap } from 'layout';
+import { AriaLive, AnimationLoader } from 'macros';
 import { Styles } from 'utilities';
 import FeedDisplay, { EventType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';

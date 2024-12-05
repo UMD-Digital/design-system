@@ -1,5 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutList, LayoutImage, TextLockupSmall } from 'macros';
+import { List as LayoutList, Image as LayoutImage } from 'layout';
+import { TextLockupSmall } from 'macros';
 
 type TypeEventListProps = {
   headline: HTMLElement | null;

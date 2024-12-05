@@ -1,12 +1,11 @@
 import { Tokens } from '@universityofmaryland/variables';
+import { ButtonFullScreen } from 'atomic';
+import { Image as LayoutImage } from 'layout';
 import {
   AnimationCarouselOverlay,
   AnimationCarouselBlocks,
   AnimationIndicator,
-  ButtonFullScreen,
-  LayoutImage,
 } from 'macros';
-import fullScreen from 'macros/buttons/full-screen';
 
 type TypeCarouselMultipleProps = {
   images: HTMLImageElement[];
@@ -30,7 +29,7 @@ const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-multiple-button';
 const OVERWRITE_LAYOUT_IMAGE = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${LayoutImage.Elements.container}`;
 
 const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
-const OVERWRITE_FULL_SCREEN_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${fullScreen.Elements.button}`;
+const OVERWRITE_FULL_SCREEN_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${ButtonFullScreen.Elements.button}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_SLIDER_BUTTON}`;
@@ -63,8 +62,8 @@ const OverwriteFullScreenOption = `
     opacity: 1;
   }
 
-  ${OVERWRITE_LAYOUT_IMAGE}:focus-within .${fullScreen.Elements.button},
-  ${OVERWRITE_LAYOUT_IMAGE}:hover .${fullScreen.Elements.button} {
+  ${OVERWRITE_LAYOUT_IMAGE}:focus-within .${ButtonFullScreen.Elements.button},
+  ${OVERWRITE_LAYOUT_IMAGE}:hover .${ButtonFullScreen.Elements.button} {
     visibility: visible;
     opacity: 1;
   }

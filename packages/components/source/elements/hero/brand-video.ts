@@ -1,6 +1,7 @@
 import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
+import { ButtonVideoState } from 'atomic';
+import { AnimationOverlayBrand } from 'macros';
 import { Accessibility, Performance, Styles } from 'utilities';
-import { AnimationOverlayBrand, ButtonVideoState } from 'macros';
 
 type TypeHeroBrandVideoProps = {
   video: HTMLVideoElement;

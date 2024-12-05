@@ -1,5 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutImage, ButtonVideoState } from 'macros';
+import { ButtonVideoState } from 'atomic';
+import { Image as LayoutImage } from 'layout';
 import { Accessibility } from 'utilities';
 
 const { Spacing, Colors, Queries } = Tokens;

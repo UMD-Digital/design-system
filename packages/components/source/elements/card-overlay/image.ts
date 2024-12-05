@@ -1,7 +1,8 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { LayoutBlockOverlay, TextLockupSmall } from 'macros';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
-import { AssetIcon, MarkupCreate } from 'utilities';
+import { BlockOverlay as LayoutBlockOverlay } from 'layout';
+import { TextLockupSmall } from 'macros';
+import { AssetIcon } from 'utilities';
 
 type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
   image: HTMLImageElement | HTMLAnchorElement | null;

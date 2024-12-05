@@ -1,11 +1,7 @@
 import { Tokens, Elements } from '@universityofmaryland/variables';
+import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
+import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 import { Styles } from 'utilities';
-import {
-  LayoutBlock,
-  LayoutImage,
-  TextLockupSmall,
-  TextLockupSmallScaling,
-} from 'macros';
 
 type TypeEventFeatureProps = {
   headline: HTMLElement | null;

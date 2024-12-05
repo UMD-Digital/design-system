@@ -1,9 +1,6 @@
-import {
-  AriaLive,
-  AnimationLoader,
-  ButtonLazyLoad,
-  LayoutGridGap,
-} from 'macros';
+import { ButtonLazyLoad } from 'atomic';
+import { GridGap as LayoutGridGap } from 'layout';
+import { AriaLive, AnimationLoader } from 'macros';
 import FeedDisplay, { ArticleType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
 import NoResults from '../no-results';

@@ -123,8 +123,14 @@ const VariantBorderStyles = `
 
   @media (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER} {
-      margin-top: ${Spacing.md};
-      margin-right: ${Spacing.md};
+      margin: ${Spacing.md};
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: 380px) and (max-width: ${MEDIUM - 1}px) {
+    ${OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER} {
+      margin-left: ${Spacing.sm};
     }
   }
 `;
@@ -158,10 +164,16 @@ const OverwriteScalabeFontContainer = `
 const ImageContainerStyles = `
   @media (max-width: ${MEDIUM - 1}px) {
     .${ImageContainer.Elements.container} {
+      max-width: 100%;
+      margin-bottom: 4px;
+      margin-bottom: ${Spacing.md};
+    }
+  }
+
+  @media (min-width: 380px) and (max-width: ${MEDIUM - 1}px) {
+    .${ImageContainer.Elements.container} {
       width: 120px;
       float: right;
-      margin-bottom: 4px;
-      margin-left: ${Spacing.sm};
     }
   }
 `;

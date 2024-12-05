@@ -127,17 +127,17 @@ const createValueGetter = ({
 const includesFeature = {
   animation: createAttributeCheck(
     AttributeNames.feature.ANIMATION,
-    AttributesValues.state.FALSE,
+    AttributesValues.state.TRUE,
     true,
   ),
   fullScreenOption: createAttributeCheck(
     AttributeNames.FULLSCREEN,
-    AttributesValues.state.FALSE,
+    AttributesValues.state.TRUE,
     true,
   ),
   visualTime: createAttributeCheck(
     AttributeNames.SHOW_TIME,
-    AttributesValues.state.FALSE,
+    AttributesValues.state.TRUE,
     true,
   ),
   lazyLoad: createAttributeCheck(

@@ -1,16 +1,12 @@
-import {
-  HeroDefault,
-  HeroElements,
-  HeroMinimal,
-  HeroOverlay,
-  HeroStacked,
-} from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { UMDHeroElement } from './index';
 import { CommonHeroData } from '../common';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { HeroDefault, HeroElements, HeroMinimal, HeroOverlay, HeroStacked } =
+  Components;
 
 export const ComponentStyles = `
   :host {

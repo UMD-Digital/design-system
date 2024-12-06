@@ -1,5 +1,7 @@
-import { Accordion } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'shadow-dom-model';
+
+const { Accordion } = Components;
 
 const tagName = 'umd-element-accordion-item';
 

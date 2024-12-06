@@ -4,10 +4,11 @@ declare global {
   }
 }
 
-import { CarouselImageStandard } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
+const { CarouselImageStandard } = Components;
 const { Node } = MarkupCreate;
 const { ImageHasAlt } = MarkupValidate;
 

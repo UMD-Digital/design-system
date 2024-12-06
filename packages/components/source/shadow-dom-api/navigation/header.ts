@@ -5,11 +5,12 @@ declare global {
 }
 
 import { MarkupCreate, Styles } from 'utilities';
-import { NavigationHeader, NavigationElements } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 
 const { Node } = MarkupCreate;
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { NavigationHeader, NavigationElements } = Components;
 
 const ELEMENT_NAME = 'umd-element-navigation-header';
 const ATTRIBUTE_SEARCH_URL = 'search-url';

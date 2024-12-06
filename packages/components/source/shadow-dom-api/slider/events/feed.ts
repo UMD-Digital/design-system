@@ -4,9 +4,12 @@ declare global {
   }
 }
 
-import { SliderEvents, FeedsSlides } from 'elements';
+import { Components, Feeds } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
+
+const { SliderEvents } = Components;
+const { FeedsSlides } = Feeds;
 
 const ELEMENT_NAME = 'umd-element-slider-events-feed';
 

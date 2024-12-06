@@ -4,11 +4,12 @@ declare global {
   }
 }
 
-import { StickyColumns } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { StickyColumns } = Components;
 
 const ELEMENT_NAME = 'umd-element-sticky-columns';
 

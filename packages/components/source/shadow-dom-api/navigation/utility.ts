@@ -1,5 +1,7 @@
-import { NavigationUtility } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register } from 'shadow-dom-model';
+
+const { NavigationUtility } = Components;
 
 const tagName = 'umd-element-navigation-utility';
 

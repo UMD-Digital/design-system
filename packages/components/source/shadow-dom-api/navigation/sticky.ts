@@ -4,10 +4,11 @@ declare global {
   }
 }
 
+import { Components } from '@universityofmaryland/web-elements-library';
 import { MarkupCreate, Styles } from 'utilities';
-import { NavigationElements } from 'elements';
 
 const { Node } = MarkupCreate;
+const { NavigationElements } = Components;
 
 const ELEMENT_NAME = 'umd-element-navigation-sticky';
 

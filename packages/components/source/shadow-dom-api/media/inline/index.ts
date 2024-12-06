@@ -1,6 +1,8 @@
-import { MediaInline, MediaWithCaption, MediaWrapped } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Slots, Register } from 'shadow-dom-model';
 import { MarkupValidate } from 'utilities';
+
+const { MediaInline, MediaWithCaption, MediaWrapped } = Components;
 
 const tagName = 'umd-element-media-inline';
 

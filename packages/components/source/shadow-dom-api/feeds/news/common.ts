@@ -1,5 +1,5 @@
+import { TypeNewsFeedRequirements } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'shadow-dom-model';
-import { TypeNewsFeedRequirements } from 'elements/feeds/news';
 
 export const CommonFeedNewsData = ({
   element,

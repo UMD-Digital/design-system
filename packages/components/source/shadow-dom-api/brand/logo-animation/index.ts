@@ -1,5 +1,7 @@
-import { AnimationBrandLogo } from 'macros';
+import { Macros } from '@universityofmaryland/web-elements-library';
 import { Model, Register } from 'shadow-dom-model';
+
+const { AnimationBrandLogo } = Macros;
 
 const tagName = 'umd-element-brand-logo-animation';
 

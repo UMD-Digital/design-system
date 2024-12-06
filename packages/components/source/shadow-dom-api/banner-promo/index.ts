@@ -1,6 +1,8 @@
-import { BannerPromo } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'shadow-dom-model';
 import { createAlertComponent, type AlertBannerProps } from '../_models/alert';
+
+const { BannerPromo } = Components;
 
 export default createAlertComponent<AlertBannerProps>({
   tagName: 'umd-element-banner-promo',

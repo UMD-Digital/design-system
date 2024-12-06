@@ -4,16 +4,12 @@ declare global {
   }
 }
 
-import {
-  EventBlock,
-  EventElements,
-  EventFeature,
-  EventList,
-  EventPromo,
-} from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
 
+const { EventBlock, EventElements, EventFeature, EventList, EventPromo } =
+  Components;
 const { Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-event';

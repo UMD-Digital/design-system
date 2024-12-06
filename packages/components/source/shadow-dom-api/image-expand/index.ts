@@ -4,11 +4,12 @@ declare global {
   }
 }
 
-import { LayoutImageExpand } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { LayoutImageExpand } = Components;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 

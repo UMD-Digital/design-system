@@ -4,11 +4,12 @@ declare global {
   }
 }
 
-import { CarouselThumbnail } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { CarouselThumbnail } = Components;
 
 const ELEMENT_NAME = 'umd-element-carousel-thumbnail';
 

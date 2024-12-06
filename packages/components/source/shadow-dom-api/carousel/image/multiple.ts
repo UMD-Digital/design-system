@@ -4,12 +4,13 @@ declare global {
   }
 }
 
-import { CarouselImageMultiple } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
 const { ImageHasAlt } = MarkupValidate;
+const { CarouselImageMultiple } = Components;
 
 const ELEMENT_NAME = 'umd-element-carousel-multiple-image';
 const styles = `

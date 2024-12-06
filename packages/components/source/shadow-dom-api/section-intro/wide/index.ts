@@ -4,11 +4,12 @@ declare global {
   }
 }
 
-import { SectionIntroWide } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'shadow-dom-model';
 import { Styles, MarkupCreate } from 'utilities';
 import { CommonIntroData } from '../common';
 
+const { SectionIntroWide } = Components;
 const { Node } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-section-intro-wide';

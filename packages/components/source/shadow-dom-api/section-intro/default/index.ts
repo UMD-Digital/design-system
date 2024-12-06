@@ -4,10 +4,12 @@ declare global {
   }
 }
 
-import { SectionIntro } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { Styles, MarkupCreate } from 'utilities';
 import { CommonIntroData } from '../common';
+
+const { SectionIntro } = Components;
 
 const ELEMENT_NAME = 'umd-element-section-intro';
 

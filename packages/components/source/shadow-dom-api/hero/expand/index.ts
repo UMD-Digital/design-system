@@ -4,11 +4,13 @@ declare global {
   }
 }
 
-import { HeroExpand } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { HeroExpand } = Components;
+
 const ELEMENT_NAME = 'umd-element-hero-expand';
 
 const styles = `

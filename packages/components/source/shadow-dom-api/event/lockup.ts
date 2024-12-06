@@ -4,12 +4,12 @@ declare global {
   }
 }
 
-import { EventLockupDate, EventElements } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupEvent, Styles } from 'utilities';
 
+const { EventLockupDate, EventElements } = Components;
 const { Node } = MarkupCreate;
-const { SlotWithDefaultStyling } = MarkupCreate;
 const { ResetString } = Styles;
 
 // prettier-ignore

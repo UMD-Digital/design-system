@@ -1,5 +1,5 @@
 import * as UmdComponents from './shadow-dom-api';
-import * as UmdElements from './elements';
+import * as UmdElements from '@universityofmaryland/web-elements-library';
 import * as UmdUtilities from './utilities';
 
 const LoadUmdComponents = () => {

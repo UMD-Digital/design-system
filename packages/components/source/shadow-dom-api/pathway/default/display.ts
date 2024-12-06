@@ -1,17 +1,18 @@
-import {
-  PathwayDefault,
-  PathwayElements,
-  PathwayHero,
-  PathwayOverlay,
-  PathwaySticky,
-  EventElements,
-} from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 import { UMDPathwayElement } from './index';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
+const {
+  PathwayDefault,
+  PathwayElements,
+  PathwayHero,
+  PathwayOverlay,
+  PathwaySticky,
+  EventElements,
+} = Components;
 
 export const ComponentStyles = `
   :host {

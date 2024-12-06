@@ -1,10 +1,11 @@
-import { CallToAction } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Tokens } from '@universityofmaryland/variables';
 import { Styles, MarkupCreate } from 'utilities';
 import { ELEMENTS, SLOTS, VARIABLES, REFERENCES } from '../globals';
 import { UMDCallToActionElement } from '../index';
 
 const { Colors, FontSize, Spacing } = Tokens;
+const { CallToAction } = Components;
 const { Node } = MarkupCreate;
 
 const { PLAIN_TEXT } = SLOTS;

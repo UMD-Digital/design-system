@@ -4,12 +4,13 @@ declare global {
   }
 }
 
-import { PersonHero } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
 const { Node } = MarkupCreate;
+const { PersonHero } = Components;
 
 const ELEMENT_NAME = 'umd-element-person-hero';
 

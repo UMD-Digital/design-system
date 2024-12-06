@@ -1,6 +1,8 @@
-import { CardBlock, CardList } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'shadow-dom-model';
 import { MarkupValidate } from 'utilities';
+
+const { CardBlock, CardList } = Components;
 
 interface CardData {
   image: HTMLImageElement | null;

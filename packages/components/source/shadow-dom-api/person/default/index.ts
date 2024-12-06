@@ -4,12 +4,13 @@ declare global {
   }
 }
 
-import { PersonBlock, PersonList, PersonTabular } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
 const { Node } = MarkupCreate;
+const { PersonBlock, PersonList, PersonTabular } = Components;
 
 const ELEMENT_NAME = 'umd-element-person';
 

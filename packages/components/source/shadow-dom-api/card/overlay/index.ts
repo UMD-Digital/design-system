@@ -4,12 +4,13 @@ declare global {
   }
 }
 
-import { CardOverlay, CardOverlayImage } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { CardOverlay, CardOverlayImage } = Components;
 
 const ELEMENT_NAME = 'umd-element-card-overlay';
 

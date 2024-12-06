@@ -1,9 +1,10 @@
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Styles } from 'utilities';
-import { HeroLogo, HeroElements } from 'elements';
+import { Attributes } from 'shadow-dom-model';
 import { UMDHeroLogoElement } from './index';
 import { CommonHeroData } from '../common';
 
-import { Attributes } from 'shadow-dom-model';
+const { HeroLogo, HeroElements } = Components;
 
 export const ComponentStyles = `
   :host {

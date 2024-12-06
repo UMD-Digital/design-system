@@ -4,11 +4,12 @@ declare global {
   }
 }
 
-import { LogoBlock } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { LogoBlock } = Components;
 
 const ELEMENT_NAME = 'umd-element-logo';
 

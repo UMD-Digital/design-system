@@ -4,9 +4,11 @@ declare global {
   }
 }
 
+import { Feeds } from '@universityofmaryland/web-elements-library';
 import { MarkupCreate, Styles } from 'utilities';
-import { FeedsEvents } from 'elements';
 import { CommonFeedEventsData } from './common';
+
+const { FeedsEvents } = Feeds;
 
 const styles = `
   :host {

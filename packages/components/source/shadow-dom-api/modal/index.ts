@@ -1,5 +1,7 @@
-import { Modal } from 'macros';
+import { Macros } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Slots, Register } from 'shadow-dom-model';
+
+const { Modal } = Macros;
 
 const tagName = 'umd-element-modal';
 

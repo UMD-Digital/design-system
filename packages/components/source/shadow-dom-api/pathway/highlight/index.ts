@@ -4,12 +4,13 @@ declare global {
   }
 }
 
-import { PathwayHighlight, PathwayElements } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
+const { PathwayHighlight, PathwayElements } = Components;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
 

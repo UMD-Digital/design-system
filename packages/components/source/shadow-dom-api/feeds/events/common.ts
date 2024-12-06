@@ -1,4 +1,4 @@
-import { TypeEventFeedRequirements } from 'elements/feeds/events';
+import { TypeEventFeedRequirements } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'shadow-dom-model';
 
 export const CommonFeedEventsData = ({

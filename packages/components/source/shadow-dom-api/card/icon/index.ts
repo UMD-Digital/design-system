@@ -4,11 +4,12 @@ declare global {
   }
 }
 
-import { CardIconBlock } from 'elements';
+import { Components } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'shadow-dom-model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
+const { CardIconBlock } = Components;
 
 const ELEMENT_NAME = 'umd-element-card-icon';
 

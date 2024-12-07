@@ -1,4 +1,4 @@
-import * as UmdComponents from './shadow-dom-api';
+import * as UmdComponents from './api';
 import * as UmdElements from '@universityofmaryland/web-elements-library';
 import * as UmdUtilities from './utilities';
 

@@ -1,4 +1,9 @@
+import postcss from 'postcss';
 import { Tokens } from '@universityofmaryland/variables';
+
+const postcssDuplicates = require('postcss-discard-duplicates');
+const CreateStyleString = (styles: string) =>
+  postcss([postcssDuplicates]).process(styles, {}).css;
 
 const { Colors } = Tokens;
 
@@ -75,7 +80,7 @@ const Reset = `
 
 const StylesTemplate = ({ styles }: { styles: string }) => {
   const template = document.createElement('template');
-  template.innerHTML = `<style>${Reset}${styles}</style>`;
+  template.innerHTML = `<style>${Reset}${CreateStyleString(styles)}</style>`;
 
   return template;
 };

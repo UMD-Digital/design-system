@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "lerna": "^7.4.1",
+    "postcss-discard-duplicates": "^7.0.1",
     "tailwindcss": "^3.3.5"
   }
 }

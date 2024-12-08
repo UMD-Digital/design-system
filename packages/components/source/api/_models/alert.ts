@@ -50,9 +50,7 @@ const slots = {
 
 const createBaseProps = (element: HTMLElement): AlertBaseProps => ({
   headline: Slots.headline.default({ element }),
-  text:
-    Slots.deprecated.body({ element, isDefaultStyling: true }) ||
-    Slots.text.default({ element, isDefaultStyling: true }),
+  text: Slots.deprecated.body({ element }) || Slots.text.default({ element }),
   actions: Slots.actions.default({ element }),
 });
 

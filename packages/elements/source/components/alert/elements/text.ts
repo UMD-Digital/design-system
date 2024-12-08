@@ -1,12 +1,6 @@
-import {
-  Tokens,
-  Animations,
-  Typography,
-  Elements,
-  Layout,
-} from '@universityofmaryland/variables';
-import { Headline } from 'atomic';
-import { MarkupModify, Styles } from 'utilities';
+import { Tokens, Layout } from '@universityofmaryland/variables';
+import { TextElementModel, HeadlineConfig, RichTextConfig } from 'atomic';
+import { Styles } from 'utilities';
 
 export type TypeAlertTextProps = {
   headline?: HTMLElement | null;
@@ -15,9 +9,7 @@ export type TypeAlertTextProps = {
 };
 
 const { Colors, Spacing, MaxWidth } = Tokens;
-const { Link } = Animations;
-const { SansLarge } = Typography;
-const { Text } = Elements;
+
 const { GridColumnAndRowsMobileTablet } = Layout;
 const { ConvertJSSObjectToStyles, Fonts } = Styles;
 
@@ -31,20 +23,6 @@ export const CONSTANTS = {
 };
 
 const { className } = CONSTANTS;
-
-// prettier-ignore
-const textStyles = `
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${className.text}`]: Text.RichText,
-    },
-  })}
-
-  .${className.text} * {
-    font-weight: 500;
-    color: ${Colors.gray.dark}
-  }
-`;
 
 // prettier-ignore
 const ctaStyles = `
@@ -64,11 +42,9 @@ const STYLES_ALERT_TEXT = `
      max-width: ${MaxWidth.small};
   }
 
-  ${textStyles}
   ${ctaStyles}
 `;
 
-// prettier-ignore
 const headlineStyles = {
   element: `
     color: ${Colors.black};
@@ -79,28 +55,51 @@ const headlineStyles = {
   `,
   subElement: `
       color: currentColor;
-  `
-}
+  `,
+};
+
+const richTextStyles = {
+  element: `
+    font-weight: 500;
+    color: ${Colors.gray.dark}
+  `,
+  siblingAfter: `
+    margin-top: ${Spacing.sm};
+  `,
+};
 
 export const CreateAlertText = (props: TypeAlertTextProps) => {
   const { headline, text, actions } = props;
+
   const wrapper = document.createElement('div');
   let styles = STYLES_ALERT_TEXT;
 
   if (headline) {
-    const headlineObj = Headline({
+    const { className, fontStyles } = Fonts.SansFontOptions(
+      Fonts.SansFontSize.Large,
+    );
+    const headlineModel = new TextElementModel(HeadlineConfig).createElement({
       element: headline,
-      fontStyle: Fonts.getSansFont(Fonts.SansFontSize.Large),
-      additonalStyles: headlineStyles,
+      className,
+      fontStyles,
+      additionalStyles: headlineStyles,
     });
 
-    wrapper.appendChild(headlineObj.element);
-    styles += headlineObj.styles;
+    wrapper.appendChild(headlineModel.element);
+    styles += headlineModel.styles;
   }
 
   if (text) {
-    text.classList.add(className.text);
-    wrapper.appendChild(text);
+    const textSimpleModel = new TextElementModel(
+      RichTextConfig.simple,
+    ).createElement({
+      element: text,
+      className: 'umd-rich-text-simple',
+      additionalStyles: richTextStyles,
+    });
+
+    wrapper.appendChild(textSimpleModel.element);
+    styles += textSimpleModel.styles;
   }
 
   if (actions) {

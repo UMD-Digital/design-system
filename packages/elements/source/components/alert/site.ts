@@ -74,7 +74,7 @@ const LockStyles = `
   }
 `;
 
-let STYLES_ALERT_SITE_ELEMENT = `
+const STYLES_ALERT_SITE_ELEMENT = `
   .${ELEMENT_ALERT_SITE_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -141,13 +141,14 @@ export const CreateAlertSiteElement = (props: TypeAlertProps) =>
     const lock = document.createElement('div');
     const textWrapper = AlertText(props);
     const shouldHide = ShouldShow(props);
+    let styles = STYLES_ALERT_SITE_ELEMENT;
 
     if (shouldHide) container.style.display = 'none';
 
     lock.classList.add(ELEMENT_ALERT_SITE_LOCK);
     lock.appendChild(textWrapper.element);
 
-    STYLES_ALERT_SITE_ELEMENT += textWrapper.styles;
+    styles += textWrapper.styles;
 
     container.classList.add(ELEMENT_ALERT_SITE_CONTAINER);
     container.appendChild(lock);
@@ -158,7 +159,7 @@ export const CreateAlertSiteElement = (props: TypeAlertProps) =>
 
     return {
       element: elementContainer,
-      styles: STYLES_ALERT_SITE_ELEMENT,
+      styles,
     };
   })();
 

@@ -1,5 +1,4 @@
 import { Typography } from '@universityofmaryland/variables';
-import { Tokens } from '@universityofmaryland/variables';
 
 const {
   ElementFonts,

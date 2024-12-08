@@ -1,6 +1,9 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 import { Animation, AssetIcon, Storage, Styles } from 'utilities';
-import AlertText, { TypeAlertTextProps } from './elements/text';
+import AlertText, {
+  CONSTANTS as TEXT_CONSTANTS,
+  TypeAlertTextProps,
+} from './elements/text';
 
 type TypeShouldShowProps = {
   daysToHide?: string;
@@ -29,8 +32,8 @@ const ELEMENT_ALERT_SITE_CONTAINER = 'alert-site-container';
 const ELEMENT_ALERT_SITE_LOCK = 'alert-site-lock';
 const ELEMENT_ALERT_SITE_CLOSE_BUTTON = 'alert-site-close-button';
 
-const OVERWRITE_TEXT_WRAPPER = `.${ELEMENT_ALERT_SITE_CONTAINER} .${AlertText.Elements.textBody}`;
-const OVERWRITE_TEXT_BODY = `.${ELEMENT_ALERT_SITE_CONTAINER} .${AlertText.Elements.wrapper}`;
+const OVERWRITE_TEXT_WRAPPER = `.${ELEMENT_ALERT_SITE_CONTAINER} .${TEXT_CONSTANTS.className.text}`;
+const OVERWRITE_TEXT_BODY = `.${ELEMENT_ALERT_SITE_CONTAINER} .${TEXT_CONSTANTS.className.wrapper}`;
 
 const OverwriteText = `
   ${OVERWRITE_TEXT_WRAPPER} {
@@ -71,7 +74,7 @@ const LockStyles = `
   }
 `;
 
-const STYLES_ALERT_SITE_ELEMENT = `
+let STYLES_ALERT_SITE_ELEMENT = `
   .${ELEMENT_ALERT_SITE_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -92,7 +95,7 @@ const STYLES_ALERT_SITE_ELEMENT = `
     }
   }
 
-  ${AlertText.Styles}
+
   ${ButtonStyles}
   ${LockStyles}
   ${OverwriteText}
@@ -136,13 +139,15 @@ export const CreateAlertSiteElement = (props: TypeAlertProps) =>
     const elementContainer = document.createElement('div');
     const container = document.createElement('div');
     const lock = document.createElement('div');
-    const textWrapper = AlertText.CreateElement(props);
+    const textWrapper = AlertText(props);
     const shouldHide = ShouldShow(props);
 
     if (shouldHide) container.style.display = 'none';
 
     lock.classList.add(ELEMENT_ALERT_SITE_LOCK);
-    lock.appendChild(textWrapper);
+    lock.appendChild(textWrapper.element);
+
+    STYLES_ALERT_SITE_ELEMENT += textWrapper.styles;
 
     container.classList.add(ELEMENT_ALERT_SITE_CONTAINER);
     container.appendChild(lock);

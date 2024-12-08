@@ -93,7 +93,7 @@ const STYLES_ALERT_PAGE_ELEMENT = `
     }
   }
 
-  ${AlertText.Styles}
+
   ${IconStyles}
   ${ButtonStyles}
   ${OverwriteThemeStyles}
@@ -127,13 +127,17 @@ export const CreateAlertPageElement = (props: TypeAlertProps) =>
     const { isShowIcon = true, isThemeDark, isThemeLight } = props;
     const elementContainer = document.createElement('div');
     const container = document.createElement('div');
-    const textWrapper = AlertText.CreateElement(props);
+    const textWrapper = AlertText(props);
+    let styles = STYLES_ALERT_PAGE_ELEMENT;
 
     container.classList.add(ELEMENT_ALERT_PAGE_CONTAINER);
     if (isShowIcon) container.appendChild(CreateIcon());
     if (isThemeLight) container.setAttribute(ATTRIBUTE_THEME, 'light');
     if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
-    container.appendChild(textWrapper);
+
+    container.appendChild(textWrapper.element);
+    styles += textWrapper.styles;
+
     container.appendChild(CreateCloseButton({ container: elementContainer }));
 
     elementContainer.appendChild(container);
@@ -141,7 +145,7 @@ export const CreateAlertPageElement = (props: TypeAlertProps) =>
 
     return {
       element: elementContainer,
-      styles: STYLES_ALERT_PAGE_ELEMENT,
+      styles,
     };
   })();
 

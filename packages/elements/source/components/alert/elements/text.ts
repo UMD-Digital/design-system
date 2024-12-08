@@ -5,6 +5,7 @@ import {
   Elements,
   Layout,
 } from '@universityofmaryland/variables';
+import { Headline } from 'atomic';
 import { MarkupModify, Styles } from 'utilities';
 
 export type TypeAlertTextProps = {
@@ -18,53 +19,28 @@ const { Link } = Animations;
 const { SansLarge } = Typography;
 const { Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
-const { ConvertJSSObjectToStyles } = Styles;
+const { ConvertJSSObjectToStyles, Fonts } = Styles;
 
-const ELEMENT_ALERT_TEXT_WRAPPER = 'alert-text-wrapper';
-const ELEMENT_ALERT_TEXT_HEADLINE = 'alert-text-headline';
-const ELEMENT_ALERT_TEXT_BODY = 'alert-text-body';
-const ELEMENT_ALERT_TEXT_CTA = 'alert-text-cta';
+export const CONSTANTS = {
+  className: {
+    wrapper: 'wrapper',
+    headline: 'headline',
+    text: 'text',
+    actions: 'actions',
+  },
+};
 
-// prettier-ignore
-const headlineStyles = `
-  .${ELEMENT_ALERT_TEXT_HEADLINE} {
-    margin-bottom: ${Spacing.sm};
-    color: ${Colors.black};
-    padding-right: ${Spacing.md};
-  }
-
-  .${ELEMENT_ALERT_TEXT_HEADLINE} * {
-    color: currentColor;
-  }
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_ALERT_TEXT_HEADLINE}`]: SansLarge,
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_ALERT_TEXT_HEADLINE} *`]: SansLarge,
-    },
-  })}
-
-  ${ConvertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_ALERT_TEXT_HEADLINE} a`]: Link.LineSlideUnder.black,
-    },
-  })}
-`;
+const { className } = CONSTANTS;
 
 // prettier-ignore
-const bodyStyles = `
+const textStyles = `
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_TEXT_BODY}`]: Text.RichText,
+      [`.${className.text}`]: Text.RichText,
     },
   })}
 
-  .${ELEMENT_ALERT_TEXT_BODY} * {
+  .${className.text} * {
     font-weight: 500;
     color: ${Colors.gray.dark}
   }
@@ -72,57 +48,72 @@ const bodyStyles = `
 
 // prettier-ignore
 const ctaStyles = `
-  * + .${ELEMENT_ALERT_TEXT_CTA} {
+  * + .${className.actions} {
     margin-top: ${Spacing.sm};
   }
 
   ${ConvertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_TEXT_CTA}`]: GridColumnAndRowsMobileTablet,
+      [`.${className.actions}`]: GridColumnAndRowsMobileTablet,
     },
   })}
 `;
 
 const STYLES_ALERT_TEXT = `
-  .${ELEMENT_ALERT_TEXT_WRAPPER} {
+  .${className.wrapper} {
      max-width: ${MaxWidth.small};
   }
 
-  ${headlineStyles}
-  ${bodyStyles}
+  ${textStyles}
   ${ctaStyles}
 `;
+
+// prettier-ignore
+const headlineStyles = {
+  element: `
+    color: ${Colors.black};
+    padding-right: ${Spacing.md};
+  `,
+  siblingAfter: `
+    margin-top: ${Spacing.sm};
+  `,
+  subElement: `
+      color: currentColor;
+  `
+}
 
 export const CreateAlertText = (props: TypeAlertTextProps) => {
   const { headline, text, actions } = props;
   const wrapper = document.createElement('div');
+  let styles = STYLES_ALERT_TEXT;
 
   if (headline) {
-    MarkupModify.AnimationLinkSpan({ element: headline });
-    headline.classList.add(ELEMENT_ALERT_TEXT_HEADLINE);
-    wrapper.appendChild(headline);
+    const headlineObj = Headline({
+      element: headline,
+      fontStyle: Fonts.getSansFont(Fonts.SansFontSize.Large),
+      additonalStyles: headlineStyles,
+    });
+
+    wrapper.appendChild(headlineObj.element);
+    styles += headlineObj.styles;
   }
 
   if (text) {
-    text.classList.add(ELEMENT_ALERT_TEXT_BODY);
+    text.classList.add(className.text);
     wrapper.appendChild(text);
   }
 
   if (actions) {
-    actions.classList.add(ELEMENT_ALERT_TEXT_CTA);
+    actions.classList.add(className.actions);
     wrapper.appendChild(actions);
   }
 
-  wrapper.classList.add(ELEMENT_ALERT_TEXT_WRAPPER);
+  wrapper.classList.add(className.wrapper);
 
-  return wrapper;
+  return {
+    element: wrapper,
+    styles,
+  };
 };
 
-export default {
-  CreateElement: CreateAlertText,
-  Styles: STYLES_ALERT_TEXT,
-  Elements: {
-    wrapper: ELEMENT_ALERT_TEXT_WRAPPER,
-    textBody: ELEMENT_ALERT_TEXT_BODY,
-  },
-};
+export default CreateAlertText;

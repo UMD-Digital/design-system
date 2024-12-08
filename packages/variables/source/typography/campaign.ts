@@ -96,3 +96,35 @@ export const CampaignExtraSmall = {
   ...FontBase,
   ...SizeExtraSmall,
 };
+
+export const CampaignFonts = {
+  maximum: {
+    class: 'umd-campaign-maximum',
+    ...CampaignMaxium,
+  },
+
+  extraLarge: {
+    class: 'umd-campaign-extralarge',
+    ...CampaignExtralarge,
+  },
+
+  large: {
+    class: 'umd-campaign-large',
+    ...CampaignLarge,
+  },
+
+  medium: {
+    class: 'umd-campaign-medium',
+    ...CampaignMedium,
+  },
+
+  small: {
+    class: 'umd-campaign-small',
+    ...CampaignSmall,
+  },
+
+  extraSmall: {
+    class: 'umd-campaign-extrasmall',
+    ...CampaignExtraSmall,
+  },
+};

@@ -136,13 +136,14 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
           caption.style.opacity = `1`;
         }
       };
-      setTimeout(() => {
-        checkSizing();
-      }, 500);
 
-      setTimeout(() => {
+      image?.addEventListener('load', () => {
         checkSizing();
-      }, 1500);
+
+        setTimeout(() => {
+          checkSizing();
+        }, 500);
+      });
     };
 
     objectContainer.classList.add(ELEMENT_OBJECT_WRAPPED_CONTAINER);

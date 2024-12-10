@@ -93,6 +93,12 @@ const OverwriteRichText = `
       [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
     },
   })}
+
+  ${ConvertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_RICH_TEXT} *`]: SansLarger,
+    },
+  })}
   
   ${OVERWRITE_RICH_TEXT} {
     color: ${Colors.gray.dark};
@@ -113,7 +119,7 @@ const OverwriteTextContainer = `
   
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding: ${Spacing.lg} 0 ${Spacing['3xl']};
+      padding: ${Spacing['6xl']} 0 ${Spacing['3xl']};
     }
   }
 `;

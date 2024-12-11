@@ -5,6 +5,8 @@ const postcssNesting = require('postcss-nesting');
 
 const postcssJs = require('postcss-js');
 
+const CombineStyles = (...styles: string[]) => styles.join('');
+
 const ConvertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
   postcss([postcssNesting]).process(styleObj, {
     parser: postcssJs,
@@ -15,6 +17,7 @@ const ConvertPixelStringToNumber = (styleStr: string) =>
 
 export default {
   Fonts,
+  CombineStyles,
   ConvertJSSObjectToStyles,
   ConvertPixelStringToNumber,
 };

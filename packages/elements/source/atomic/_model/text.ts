@@ -6,38 +6,49 @@ interface ElementStyles {
   subElement?: string;
 }
 
-export interface TextModelProps {
-  element: HTMLElement;
-  className: string;
+interface ElementConfigOptions {
   fontStyles?: Record<string, any>;
   additionalStyles?: ElementStyles;
   isColorWhite?: boolean;
 }
 
-export interface ElementConfigStyleProps extends TextModelProps {
-  styles: string;
+export interface ModifierProps extends ElementConfigOptions {
+  className: string;
 }
 
 interface ElementConfig {
-  type: string;
-  styleModifiers?: ((arg: ElementConfigStyleProps) => string)[];
-  elementModifiers?: ((arg: TextModelProps) => void)[];
+  styleModifiers?: (arg: ModifierProps) => string;
+  elementModifiers?: ((element: HTMLElement) => void)[];
+}
+
+export interface ModelProps {
+  config: ElementConfig;
+  options?: ElementConfigOptions;
+}
+
+export interface ElementConfigStyleProps extends ModelProps {
+  styles: string;
 }
 
 export default class TextElementModel {
-  private config: ElementConfig;
+  private className: string;
+  private element: HTMLElement;
 
-  constructor(config: ElementConfig) {
-    this.config = config;
+  constructor(className: string, element: HTMLElement) {
+    this.className = className;
+    this.element = element;
   }
 
-  createElement(props: TextModelProps) {
-    const config = this.config;
-    if (!config) {
-      throw new Error(`Unknown element type`);
+  createElement(props: ModelProps) {
+    const { config, options = {} } = props;
+    const className = this.className;
+    const element = this.element;
+
+    if (!className || !element) {
+      throw new Error(`element & className is required for TextElementModel`);
     }
 
-    const { element, className, fontStyles, additionalStyles = {} } = props;
+    const { fontStyles = {}, additionalStyles = {} } = options;
 
     let styles = this.createBaseStyles({
       className,
@@ -46,14 +57,12 @@ export default class TextElementModel {
     });
 
     if (config.styleModifiers) {
-      for (const modifier of config.styleModifiers) {
-        styles = modifier({ styles, ...props });
-      }
+      styles += config.styleModifiers({ ...options, className });
     }
 
     if (config.elementModifiers) {
       for (const modifier of config.elementModifiers) {
-        modifier(props);
+        modifier(element);
       }
     }
 

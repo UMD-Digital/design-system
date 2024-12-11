@@ -13,7 +13,7 @@ const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { SansSmaller, CampaignLarge } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
 const DESKTOP = 1024;
@@ -80,7 +80,7 @@ const OverwriteTheme = `
 
 // prettier-ignore
 const OverwriteEyebrow = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_EYEBROW}`]: SansSmaller,
     },
@@ -99,7 +99,7 @@ const OverwriteEyebrow = `
 
 // prettier-ignore
 const OverwriteHeadline = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_HEADLINE}`]: CampaignLarge,
     },
@@ -170,7 +170,7 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
     position: relative;
   }
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HERO_LOCK}`]: LockMax,
     },

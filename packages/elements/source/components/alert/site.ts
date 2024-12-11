@@ -1,5 +1,5 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { Animation, AssetIcon, Storage, Styles } from 'utilities';
+import { AssetIcon, Storage, Styles } from 'utilities';
 import AlertText, {
   CONSTANTS as TEXT_CONSTANTS,
   TypeAlertTextProps,
@@ -20,7 +20,7 @@ type TypeAlertButtonProps = {
 
 const { Colors, Spacing, MaxWidth } = Tokens;
 const { LockMax } = Layout;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const MEDUM = 500;
 const DEFAULT_HIDE_TIME = 30;
@@ -63,7 +63,7 @@ const ButtonStyles = `
 `;
 
 const LockStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_ALERT_SITE_LOCK}`]: LockMax,
     },
@@ -108,7 +108,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   closeButton.innerHTML = AssetIcon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
-    Animation.ShrinkThenRemove({ container });
+    Styles.animations.shrinkThenRemove({ container });
     Storage.SetLocalString({ key: ALERT_LOCAL_STORAGE_KEY });
   });
 

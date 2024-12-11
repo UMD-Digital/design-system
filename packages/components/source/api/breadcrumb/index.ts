@@ -9,7 +9,7 @@ import { Attributes, Slots } from 'model';
 import { MarkupCreate, MarkupModify, Styles } from 'utilities';
 
 const { Colors } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
 const ELEMENT_NAME = 'umd-element-breadcrumb';
@@ -31,7 +31,7 @@ const OverwriteThemeStyles = `
     background-color: ${Colors.gray.dark};
   }
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_PATH}:not(:last-child)`]:
         Animations.Link.LineSlideUnder.grayDark,
@@ -84,7 +84,7 @@ const ContainerStyles = `
     position: relative;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CONTAINER} a:not(:last-child)`]:
         Animations.Link.LineSlideUnder.gray,

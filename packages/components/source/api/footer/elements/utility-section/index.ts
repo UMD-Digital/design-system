@@ -17,7 +17,7 @@ const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { LockMax } = Layout;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -39,7 +39,7 @@ const LinkStyles = `
     color: ${Colors.gray.light};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:
       Link.LineSlideUnder.white,
@@ -50,7 +50,7 @@ const LinkStyles = `
     color: ${Colors.black};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
       Link.LineSlideUnder.black,
@@ -82,7 +82,7 @@ export const UtilityContainerStyles = `
     background-color: ${Colors.gray.darker};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER_LOCK}`]: LockMax 
     },
@@ -95,7 +95,7 @@ export const UtilityContainerStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} *`]: Typography.SansSmaller
     },

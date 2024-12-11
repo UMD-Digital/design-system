@@ -6,7 +6,7 @@ type TypeLayoutImageExpandProps = {
   image: HTMLImageElement;
 };
 
-const { ConvertJSSObjectToStyles, ConvertPixelStringToNumber } = Styles;
+const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
 const { Spacing, MaxWidth, Queries } = Tokens;
 const { LockMax } = Layout;
 const { IsPrefferdReducedMotion, IsScreenZoomed } = Accessibility;
@@ -26,7 +26,7 @@ const ELEMENT_EXPAND_TEXT_ANIMATION = 'layout-image-expand-text-animation';
 
 // prettier-ignore
 const TextLock = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: LockMax,
     },
@@ -295,7 +295,7 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
   const sizeImageForText = () => {
     const textContainerHeight =
       textContainer.clientHeight +
-      ConvertPixelStringToNumber(Spacing['2xl']) * 2;
+      convertPixelStringToNumber(Spacing['2xl']) * 2;
     const imageContainerHeight = container.clientHeight;
 
     if (textContainerHeight > imageContainerHeight) {

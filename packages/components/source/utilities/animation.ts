@@ -87,7 +87,7 @@ const ScrollTo = ({
 
 const Load = () => {
   const { IsPrefferdReducedMotion } = Accessibility;
-  const { ConvertJSSObjectToStyles } = Styles;
+  const { convertJSSObjectToStyles } = Styles;
   const { Scroll } = Animations;
 
   if (IsPrefferdReducedMotion()) return;
@@ -114,7 +114,7 @@ const Load = () => {
         }
       }
 
-      ${ConvertJSSObjectToStyles({
+      ${convertJSSObjectToStyles({
         styleObj: {
           [`.${idGridFadeIn}`]: Scroll.FadeInFromBottom,
         },

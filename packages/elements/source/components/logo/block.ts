@@ -14,7 +14,7 @@ export type TypeLogoRequirements = {
 
 const { Colors, Spacing } = Tokens;
 const { SansMin } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_BORDER = 'border';
@@ -63,13 +63,13 @@ const TextStyles = `
     color: ${Colors.gray.darker};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_LOGO_BLOCK_TEXT}`]: SansMin,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_LOGO_BLOCK_TEXT} *`]: SansMin,
     },

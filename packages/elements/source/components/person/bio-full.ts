@@ -8,7 +8,7 @@ type TypePersonBioFullProps = TypePersonProps & {
   description?: HTMLElement | null;
 };
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Spacing, Colors } = Tokens;
 const { Text } = Elements;
 const { SansExtraLarge } = Typography;
@@ -44,7 +44,7 @@ const OverwriteThemeDark = `
 `;
 
 const OverwriteText = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OverwriteTextName}`]: SansExtraLarge,
     },
@@ -64,7 +64,7 @@ const ActionStyles = `
 `;
 
 const DescriptionStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_BIO_FULL_DESCRIPTION}`]: Text.RichText,
     },

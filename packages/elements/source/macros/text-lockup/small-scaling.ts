@@ -6,7 +6,7 @@ type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
 const { FontSize } = Tokens;
 const { SansExtraLarge, SansMedium, SansSmall } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const SMALL = 300;
 const MEDIUM = 650;
@@ -21,7 +21,7 @@ const OverwriteText = `.${ELEMENT_SCALABLE_FONT_CONTAINER} .${TextLockupSmall.El
 // prettier-ignore
 const HeadlineStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteHeadline}`]: SansExtraLarge,
       },
@@ -29,7 +29,7 @@ const HeadlineStyles = `
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteHeadline} *`]: SansExtraLarge,
       },
@@ -47,7 +47,7 @@ const HeadlineStyles = `
 // prettier-ignore
 const DateStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteDate}`]: SansSmall,
       },
@@ -55,7 +55,7 @@ const DateStyles = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteDate} *`]: SansSmall,
       },
@@ -66,13 +66,13 @@ const DateStyles = `
 // prettier-ignore
 const TextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteText}`]: SansMedium,
       },
     })}
 
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`${OverwriteText} *`]: SansMedium,
       },

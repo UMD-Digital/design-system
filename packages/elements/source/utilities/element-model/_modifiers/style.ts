@@ -1,6 +1,21 @@
 import { Animations } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import { ModifierProps } from '../_model/text';
+
+export interface ElementStyles {
+  element?: string;
+  siblingAfter?: string;
+  subElement?: string;
+}
+
+export interface ElementStyleOptions {
+  fontStyles?: Record<string, any>;
+  elementStyles?: ElementStyles;
+  isColorWhite?: boolean;
+}
+
+export interface ModifierProps extends ElementStyleOptions {
+  className: string;
+}
 
 const TextColors = {
   white: { color: 'white' },
@@ -16,7 +31,7 @@ const getColorConfig = (isColorWhite?: boolean) =>
   isColorWhite ? 'black' : 'white';
 
 const generateStyles = (className: string, styles: any) =>
-  Styles.ConvertJSSObjectToStyles({
+  Styles.convertJSSObjectToStyles({
     styleObj: { [`.${className}`]: styles },
   });
 
@@ -31,10 +46,10 @@ const modifiers = {
   animationLink: createStyleModifier(({ isColorWhite }) => ({
     a: LinkAnimations[getColorConfig(isColorWhite)],
   })),
+  fontStyles: createStyleModifier(({ fontStyles }) => fontStyles || {}),
   textColor: createStyleModifier(
     ({ isColorWhite }) => TextColors[getColorConfig(isColorWhite)],
   ),
-  fontStyles: createStyleModifier(({ fontStyles }) => fontStyles || {}),
 };
 
 export { modifiers };

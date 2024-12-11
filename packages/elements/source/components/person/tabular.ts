@@ -12,7 +12,7 @@ type TypeTabularPersonProps = TypePersonProps & {
 
 const { Spacing, Colors } = Tokens;
 const { SansLarge, SansSmaller } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const SMALL = 400;
 const ATTRIBUTE_THEME = 'theme';
@@ -92,20 +92,20 @@ const OverwriteImagesStyles = `
 `;
 
 const OverwriteTextStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_CONTAINER_WRAPPER} > *:not(.${LayoutTextName})`]:
         SansSmaller,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_PERSON_CONTACT_CONTAINER} > *`]: SansSmaller,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_PERSON_NAME}`]: SansLarge,
     },

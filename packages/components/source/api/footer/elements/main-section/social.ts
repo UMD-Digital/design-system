@@ -12,7 +12,7 @@ import { UMDFooterElement } from '../../index';
 
 const { Spacing, Colors } = Tokens;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const { SOCIAL } = SLOTS;
 const { LARGE, MEDIUM } = BREAKPOINTS;
@@ -168,7 +168,7 @@ export const SocialContainerStyles = `
     fill: ${Colors.gray.dark} !important;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${SOCIAL_CONTAINER_HEADLINE}`]: Typography.InterativeMedium,
     },

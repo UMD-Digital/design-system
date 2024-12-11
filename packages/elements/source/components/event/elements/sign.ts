@@ -3,7 +3,7 @@ import { Styles } from 'utilities';
 
 const { SansExtraLarge, SansMin, SansLarger, SansSmall } = Typography;
 const { Colors } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_EVENT_DATE_WRAPPER = 'event-sign-wrapper';
 const ELEMENT_EVENT_MONTH = 'event-sign-date-month';
@@ -26,49 +26,49 @@ const OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_M
 
 // prettier-ignore
 const OverwriteLargeSize = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_MONTH}`]: SansSmall,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_MONTH} *`]: SansSmall,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH}`]: SansMin,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH} *`]: SansMin,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_DAY}`]: SansExtraLarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_DAY} *`]: SansExtraLarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY} *`]: SansLarger,
     },
@@ -77,13 +77,13 @@ const OverwriteLargeSize = `
 
 // prettier-ignore
 const MonthStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EVENT_MONTH}`]: SansMin,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EVENT_MONTH} *`]: SansMin,
     },
@@ -91,13 +91,13 @@ const MonthStyles = `
 `;
 
 const DayStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EVENT_DAY}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EVENT_DAY} *`]: SansLarger,
     },

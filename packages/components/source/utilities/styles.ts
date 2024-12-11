@@ -77,16 +77,16 @@ const Reset = `
   }
 `;
 
-const ConvertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
+const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
   postcss(postcssNesting).process(styleObj, {
     parser: postcssJs,
   }).css;
 
-const ConvertPixelStringToNumber = (styleStr: string) =>
+const convertPixelStringToNumber = (styleStr: string) =>
   parseInt(styleStr.replace('px', ''));
 
 export default {
   ResetString: Reset,
-  ConvertJSSObjectToStyles,
-  ConvertPixelStringToNumber,
+  convertJSSObjectToStyles,
+  convertPixelStringToNumber,
 };

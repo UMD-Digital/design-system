@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { Animation, Performance, Styles } from 'utilities';
+import { Performance, Styles } from 'utilities';
 
 type TypeTabsProps = {
   tabsContainer: HTMLElement;
@@ -29,8 +29,7 @@ type TypeGetState = {
 const { Spacing, Colors } = Tokens;
 const { SansLarge } = Typography;
 const { Debounce } = Performance;
-const { ConvertPixelStringToNumber } = Styles;
-const { ScrollTo } = Animation;
+const { convertPixelStringToNumber } = Styles;
 
 const ATTRIBUTE_LAYOUT_HORIZONTAL = 'data-layout-horizontal';
 const ATTRIBUTE_ARIA_EXPANDED = 'aria-expanded';
@@ -164,8 +163,8 @@ const SetDisplay = ({
   const SetContentPosition = () => {
     const activeContent = contents[activeTab];
     const space = isFlexLayout
-      ? ConvertPixelStringToNumber(Spacing.xl)
-      : ConvertPixelStringToNumber(Spacing.md);
+      ? convertPixelStringToNumber(Spacing.xl)
+      : convertPixelStringToNumber(Spacing.md);
 
     if (activeContent) {
       if (transition) {
@@ -179,12 +178,12 @@ const SetDisplay = ({
       activeContent.style.width = '100%';
 
       if (!isFlexLayout && transition) {
-        const convertedSpace = ConvertPixelStringToNumber(Spacing.md);
+        const convertedSpace = convertPixelStringToNumber(Spacing.md);
         const spread = additionalSpread
           ? convertedSpace + additionalSpread
           : convertedSpace;
 
-        ScrollTo({
+        Styles.animations.scrollTo({
           element: activeContent,
           spread,
         });

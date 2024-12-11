@@ -57,7 +57,7 @@ type TypeEventScroll = TypeHelpers & {
 
 const { Debounce } = Performance;
 const { Colors, Spacing } = Tokens;
-const { ConvertPixelStringToNumber } = Styles;
+const { convertPixelStringToNumber } = Styles;
 
 const ATTRIBUTE_SINGLE_BLOCK = 'single';
 const ANIMATION_DURATION = 750;
@@ -360,7 +360,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       tabletCount: 2,
       desktopCount: 3,
       maxCount: 4,
-      blockGap: ConvertPixelStringToNumber(Spacing.lg),
+      blockGap: convertPixelStringToNumber(Spacing.lg),
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: true,

@@ -15,7 +15,7 @@ export type TypeTextContainerProps = TypeTextProps;
 const { Colors, Queries, Spacing } = Tokens;
 const { SansMedium } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
 const ATTRIBUTE_THEME = 'theme';
@@ -96,13 +96,13 @@ const TextStyles = `
     max-width: 860px;
   }
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS_HERO_RICH_TEXT}`]: SansMedium,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS_HERO_RICH_TEXT} *`]: SansMedium,
     },

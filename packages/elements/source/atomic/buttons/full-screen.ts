@@ -3,7 +3,7 @@ import { AssetIcon, Styles } from 'utilities';
 
 const { Colors, Spacing } = Tokens;
 const { SansMin } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_BUTTON = 'button-full-screen';
 
@@ -22,7 +22,7 @@ const STYLES_FULL_SCREEN_BUTTON = `
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_BUTTON}`]: SansMin,
     },

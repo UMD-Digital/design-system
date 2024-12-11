@@ -9,7 +9,7 @@ type TypeStickyProps = {
 };
 
 const { Spacing, Breakpoints } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-sticky-columns';
 const ATTRIBUTE_STICKY_LAST = 'sticky-last';
@@ -47,7 +47,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: Layout.GridColumnsBaseWithGap,
     },

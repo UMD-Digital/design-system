@@ -27,7 +27,7 @@ type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
 const { Colors, Spacing, Breakpoints, FontWeight, FontSize } = Tokens;
 const { SansLarger, SansExtraLarge } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const ANIMATION_TIME = 500;
 
 const ATTRIBUTE_STICKY = 'sticky';
@@ -135,13 +135,13 @@ const LogoColumnStyles = `
     max-width: 350px;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO} *`]: SansLarger,
     },
@@ -152,13 +152,13 @@ const LogoColumnStyles = `
     line-height: 1.05em;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: SansExtraLarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: SansExtraLarge,
     },

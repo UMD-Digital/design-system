@@ -37,12 +37,12 @@ const ELEMENT_FEEDS_EVENTS_NO_RESULTS = 'feeds-events-no-results';
 const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
 const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Eyebrow } = Elements;
 const { Colors, Spacing, Breakpoints } = Tokens;
 
 const EventsGrouped = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE}`]: Eyebrow.Ribbon,
     },
@@ -71,7 +71,7 @@ const EventsNoResults = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p`]: Eyebrow.Ribbon,
     },

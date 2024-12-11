@@ -21,7 +21,7 @@ const { Colors, Spacing, Queries } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignExtralarge, CampaignLarge, SansLarger } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
 
@@ -54,7 +54,7 @@ const OVERWRITE_IMAGE_OVERLAY_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${E
 
 // prettier-ignore
 const OverwriteEyebrow = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_EYEBROW}`]: Eyebrow.Ribbon,
     },
@@ -67,13 +67,13 @@ const OverwriteEyebrow = `
 
 // prettier-ignore
 const OverwriteHeadline = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_HEADLINE}`]: CampaignExtralarge,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_WITH_LOCK_HEADLINE}`]: CampaignLarge,
     },
@@ -88,13 +88,13 @@ const OverwriteHeadline = `
 
 // prettier-ignore
 const OverwriteRichText = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_RICH_TEXT} *`]: SansLarger,
     },
@@ -227,7 +227,7 @@ export const STYLES_HERO_STACKED_ELEMENT = `
     position: relative;
   }
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HERO_LOCK}`]: LockMax,
     },

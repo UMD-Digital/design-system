@@ -14,7 +14,7 @@ const { SansLargest, SansLarger, SansMedium } = Typography;
 const { Colors, Spacing, MaxWidth } = Tokens;
 const { GridColumnAndRowsMobileTablet } = Layout;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
 const ATTRIBUTE_ANIMATION = 'data-animation';
@@ -125,7 +125,7 @@ const OverwriteSeparator = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: SansLargest,
     },
@@ -145,13 +145,13 @@ const TextStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT} *`]: SansLarger,
     },
@@ -163,13 +163,13 @@ const TextStyles = `
     color: ${Colors.black};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT_SMALL}`]: SansMedium,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT_SMALL} *`]: SansMedium,
     },
@@ -182,7 +182,7 @@ const ActionStyles = `
     margin-top: ${Spacing.md};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },

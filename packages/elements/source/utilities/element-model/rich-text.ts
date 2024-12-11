@@ -1,7 +1,7 @@
 import { Elements } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
-import TextElementModel, { ModifierProps } from 'atomic/_model/text';
-import { modifiers } from '../_modifiers/style';
+import TextElementModel from './_model/text';
+import { modifiers, ModifierProps } from './_modifiers/style';
 
 const { Text } = Elements;
 
@@ -21,7 +21,7 @@ type RichTextFactoryProps = RichTextProps & FontOptions;
 const simpleConfig = {
   type: 'Rich Text Simple',
   styleModifiers: (props: ModifierProps) =>
-    Styles.CombineStyles(
+    Styles.combineStyles(
       modifiers.fontStyles({ ...props, fontStyles: Text.SimpleLarge }),
     ),
 };

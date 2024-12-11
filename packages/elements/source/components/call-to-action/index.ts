@@ -7,7 +7,7 @@ import { AssetIcon, Styles } from 'utilities';
 
 const { InterativeSmall } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Colors, FontSize, Spacing, Queries } = Tokens;
 const { Link } = Animations;
 
@@ -54,7 +54,7 @@ const OverwriteSecondaryStyles = `
 
 // prettier-ignore
 const OverwriteThemeGoldStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_GOLD_SECONDARY} > span > span`]:
       Link.LineSlideUnder.gold,
@@ -157,7 +157,7 @@ const OutlineStyles = `
 
 // prettier-ignore
 const PrimaryStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CTA_PRIMARY}`]: InterativeSmall,
     },
@@ -193,7 +193,7 @@ const SecondaryStyles = `
     width: calc(100% - 16px);
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CTA_SECONDARY} > span > span`]:
       Link.LineSlideUnder.red,

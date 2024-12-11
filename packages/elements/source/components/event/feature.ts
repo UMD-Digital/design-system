@@ -14,7 +14,7 @@ type TypeEventFeatureProps = {
 };
 
 const { Spacing, Colors } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Eyebrow } = Elements;
 
 const MEDIUM = 650;
@@ -69,7 +69,7 @@ const DetailsMeta = `
 
 // prettier-ignore
 const EyebrowStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: Eyebrow.Ribbon,
     },

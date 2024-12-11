@@ -1,6 +1,5 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { TextElementModel, HeadlineConfig, RichTextConfig } from 'atomic';
-import { Styles } from 'utilities';
+import { ElementModel, Styles } from 'utilities';
 
 export type TypeAlertTextProps = {
   headline?: HTMLElement | null;
@@ -12,7 +11,7 @@ export type TypeAlertTextProps = {
 const { Colors, Spacing, MaxWidth } = Tokens;
 
 const { GridColumnAndRowsMobileTablet } = Layout;
-const { ConvertJSSObjectToStyles, Fonts } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 export const CONSTANTS = {
   className: {
@@ -31,7 +30,7 @@ const ctaStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${className.actions}`]: GridColumnAndRowsMobileTablet,
     },
@@ -76,7 +75,7 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   let styles = STYLES_ALERT_TEXT;
 
   if (headline) {
-    const headlineModel = HeadlineConfig.SansLargeHeadline({
+    const headlineModel = ElementModel.headline.SansLargeHeadline({
       ...props,
       elementStyles: headlineStyles,
       element: headline,
@@ -87,7 +86,7 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   }
 
   if (text) {
-    const textModel = RichTextConfig.simple({
+    const textModel = ElementModel.richText.simple({
       ...props,
       elementStyles: richTextStyles,
       element: text,

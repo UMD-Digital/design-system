@@ -1,8 +1,6 @@
 import { MarkupModify, Styles } from 'utilities';
-import TextElementModel, { ModifierProps } from '../_model/text';
-import { modifiers } from '../_modifiers/style';
-
-const { Fonts } = Styles;
+import TextElementModel from './_model/text';
+import { modifiers, type ModifierProps } from './_modifiers/style';
 
 interface FontOptions {
   className: string;
@@ -23,10 +21,10 @@ const applyMarkupAnimaitonSpan = (element: HTMLElement) => {
 
 const HeadlineConfig = {
   styleModifiers: (props: ModifierProps) =>
-    Styles.CombineStyles(
+    Styles.combineStyles(
+      modifiers.animationLink(props),
       modifiers.fontStyles(props),
       modifiers.textColor(props),
-      modifiers.animationLink(props),
     ),
   elementModifiers: [applyMarkupAnimaitonSpan],
 };
@@ -45,17 +43,17 @@ const createHeadlineFactory = (props: HeadlineFactoryProps) => {
 };
 
 export const SansLargeHeadline = (props: HeadlineProps) => {
-  const { className, fontStyles } = Fonts.getSansLargeFont();
+  const { className, fontStyles } = Styles.fonts.getSansLargeFont();
   return createHeadlineFactory({ ...props, className, fontStyles });
 };
 
 export const SansMediumHeadline = (props: HeadlineProps) => {
-  const { className, fontStyles } = Fonts.getSansMediumFont();
+  const { className, fontStyles } = Styles.fonts.getSansMediumFont();
   return createHeadlineFactory({ ...props, className, fontStyles });
 };
 
 export const CampaignLargeHeadline = (props: HeadlineProps) => {
-  const { className, fontStyles } = Fonts.getCampaignLargeFont();
+  const { className, fontStyles } = Styles.fonts.getCampaignLargeFont();
   return createHeadlineFactory({ ...props, className, fontStyles });
 };
 

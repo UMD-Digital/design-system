@@ -4,7 +4,7 @@ import { Styles } from 'utilities';
 
 const { Spacing, Colors } = Tokens;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 type NoResultsContentType = {
   message?: string;
@@ -27,7 +27,7 @@ const STYLES_NO_RESULTS = `
     flex-direction: column;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [` .${CONTAINER_NO_RESULTS} p`]: Typography.SansExtraLarge,
     },

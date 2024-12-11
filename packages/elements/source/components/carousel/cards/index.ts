@@ -16,7 +16,7 @@ type TypeCarouselCardsRequirements = {
   cards: HTMLElement[];
 };
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Text } = Elements;
 const { Colors, Spacing } = Tokens;
 const { SansMedium, SansLargest } = Typography;
@@ -98,13 +98,13 @@ const OverwriteCarouselStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE}`]: SansLargest,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE} *`]: SansLargest,
     },
@@ -124,13 +124,13 @@ const TextStyles = `
     margin-top: ${Spacing.md};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_TEXT}`]: Text.RichTextDark,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_TEXT}`]: SansMedium,
     },
@@ -175,7 +175,7 @@ const IntroContainer = `
 const ContainerLock = `
   .${CAROUSEL_LOCK} {
     position: relative;
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: LockMax ,
     })}
   }

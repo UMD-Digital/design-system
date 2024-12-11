@@ -14,7 +14,7 @@ export type TypeAction = TypeActionProps & {
 };
 
 const { Colors, Spacing } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_SLIDE_ACTION_CONTAINER = 'nav-slide-action-container';
 const ELEMENT_SLIDE_ACTION_LINK = 'nav-slide-action-link';
@@ -22,7 +22,7 @@ const ELEMENT_SLIDE_ACTION_BUTTON = 'nav-slide-action-button';
 
 // prettier-ignore
 const LinkStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_ACTION_LINK}`]: Typography.SansSmall,
     },

@@ -15,7 +15,7 @@ type TypeBannerPromoProps = {
 };
 
 const { Colors, Spacing } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { SansExtraLarge } = Typography;
 const { Text } = Elements;
 
@@ -53,7 +53,7 @@ const OverwriteThemeDark = `
     color: ${Colors.white};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: Text.RichTextDark,
     },
@@ -82,13 +82,13 @@ const ActionsStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT}`]: Text.RichText,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT} a`]: Animations.Link.LineFadeUnder.yellow,
     },
@@ -105,7 +105,7 @@ const TextStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: SansExtraLarge,
     },

@@ -34,7 +34,6 @@ export type TypeNavItemRequirements = TypeDropdownProps &
 type TypeNavItem = TypeNavItemRequirements;
 
 const { Colors, Spacing, FontFamily, FontSize } = Tokens;
-const { EventAccessibilityFocus } = Accessibility;
 const { AnimationLinkSpan } = MarkupModify;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -431,7 +430,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     const EventButtonClick = () => {
       if (isShowing && dropdownLinksContainer) {
         ShowDropdown();
-        focusCallback = EventAccessibilityFocus({
+        focusCallback = Accessibility.eventAccessibilityFocus({
           element: elementContainer,
           action: () => HideDropdown(),
           shadowDomContext: context,

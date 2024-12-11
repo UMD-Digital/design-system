@@ -82,11 +82,7 @@ const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
     parser: postcssJs,
   }).css;
 
-const convertPixelStringToNumber = (styleStr: string) =>
-  parseInt(styleStr.replace('px', ''));
-
 export default {
   ResetString: Reset,
   convertJSSObjectToStyles,
-  convertPixelStringToNumber,
 };

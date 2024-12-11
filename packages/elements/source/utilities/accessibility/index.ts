@@ -9,7 +9,7 @@ export type EventAccessibilityFocusType = (
 ) => () => void;
 export type EventAccessibilityEventsType = () => void | undefined;
 
-const EventAccessibilityFocus: EventAccessibilityFocusType = ({
+export const eventAccessibilityFocus: EventAccessibilityFocusType = ({
   element,
   action,
   shadowDomContext,
@@ -66,7 +66,7 @@ const EventAccessibilityFocus: EventAccessibilityFocusType = ({
   };
 };
 
-const EventAccessibilityFocusTrap: EventAccessibilityFocusType = ({
+export const eventAccessibilityFocusTrap: EventAccessibilityFocusType = ({
   element,
   action,
   shadowDomContext,
@@ -100,7 +100,7 @@ const EventAccessibilityFocusTrap: EventAccessibilityFocusType = ({
   };
 };
 
-const IsScreenZoomed = () => {
+export const isScreenZoomed = () => {
   const isHighDPI = window.devicePixelRatio > 1;
   const browserZoomLevel = Math.round(window.devicePixelRatio * 100);
 
@@ -110,12 +110,5 @@ const IsScreenZoomed = () => {
   return false;
 };
 
-const IsPrefferdReducedMotion = () =>
+export const isPrefferdReducedMotion = () =>
   window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
-
-export default {
-  EventAccessibilityFocus,
-  EventAccessibilityFocusTrap,
-  IsScreenZoomed,
-  IsPrefferdReducedMotion,
-};

@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
+import { AssetIcon, JavascriptEvents, Performance, Styles } from 'utilities';
 
 const { Colors, Spacing } = Tokens;
 
@@ -276,7 +276,10 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
         }
       };
 
-      EventsUtility.CreateEventSwipe({ container: slider, callback: swipes });
+      JavascriptEvents.CreateEventSwipe({
+        container: slider,
+        callback: swipes,
+      });
     };
 
     const EventResize = () => {

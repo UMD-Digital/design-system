@@ -1,4 +1,4 @@
-const CreateEventSwipe = ({
+export const CreateEventSwipe = ({
   container,
   callback,
 }: {
@@ -38,8 +38,4 @@ const CreateEventSwipe = ({
     },
     { passive: false },
   );
-};
-
-export default {
-  CreateEventSwipe,
 };

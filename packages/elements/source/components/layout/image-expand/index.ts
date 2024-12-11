@@ -9,7 +9,6 @@ type TypeLayoutImageExpandProps = {
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
 const { Spacing, MaxWidth, Queries } = Tokens;
 const { LockMax } = Layout;
-const { IsPrefferdReducedMotion, IsScreenZoomed } = Accessibility;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'layout-image-expand-declaration';
@@ -303,7 +302,10 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
     }
   };
 
-  if (IsScreenZoomed() && !IsPrefferdReducedMotion()) {
+  if (
+    Accessibility.isScreenZoomed() &&
+    !Accessibility.isPrefferdReducedMotion()
+  ) {
     textContainer.style.height = '90vh';
     textContainer.style.transform = 'translateY(0)';
   }

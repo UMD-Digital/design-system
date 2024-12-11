@@ -30,7 +30,6 @@ type ActionAnimationProps = StateProps & {
 
 const { Colors, Spacing } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
-const { Debounce } = Performance;
 const { SansMedium, SansLarge } = Typography;
 
 const SMALL = 480;
@@ -371,7 +370,7 @@ const CreateAccordionElement = (props: TypeAccordionProps) =>
       SetOpen({ hasAnimation: false });
     }
 
-    window.addEventListener('resize', Debounce(resize, 20));
+    window.addEventListener('resize', Performance.debounce(resize, 20));
 
     return {
       element: declaration,

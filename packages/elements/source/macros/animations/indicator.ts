@@ -2,7 +2,6 @@ import { Tokens } from '@universityofmaryland/variables';
 import { Performance } from 'utilities';
 
 const { Colors, Spacing } = Tokens;
-const { Debounce } = Performance;
 
 const ELEMENT_SLIDE_INDICATOR_CONTAINER = 'slide-indicator-container';
 const ELEMENT_SLIDE_INDICATOR_LINE = 'slide-indicator-line';
@@ -170,7 +169,7 @@ const CreateSlideIndicator = ({
 
     load();
 
-    window.addEventListener('resize', Debounce(eventResize, 20));
+    window.addEventListener('resize', Performance.debounce(eventResize, 20));
 
     return {
       element: container,

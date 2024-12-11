@@ -5,8 +5,6 @@ const ELEMENT_NAV_STICKY_WRAPPER = 'nav-sticky-wrapper';
 
 const ELEMENT_NAV_STIKCY_WRAPPER_FIXED = 'nav-sticky-wrapper-fixed';
 
-const { Debounce } = Performance;
-
 // prettier-ignore
 const STYLES_NAV_STICKY_ELEMENT = `
   .${ELEMENT_NAV_STICKY_CONTAINER} {
@@ -82,7 +80,7 @@ const CreateNavStickyElement = ({
     window.addEventListener('scroll', eventScroll);
     window.addEventListener(
       'resize',
-      Debounce(() => {
+      Performance.debounce(() => {
         eventResize();
       }, 20),
     );

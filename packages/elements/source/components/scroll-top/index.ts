@@ -5,8 +5,7 @@ type TypeScrollTopProps = {
   isFixed?: boolean;
 };
 
-const { Colors, Queries } = Tokens;
-const { Debounce } = Performance;
+const { Colors } = Tokens;
 
 const ELEMENT_NAME = 'umd-element-scroll-top';
 const ELEMENT_SCROLL_TOP_DECLARATION = 'scroll-top-declarion';
@@ -130,12 +129,12 @@ const CreateScrollTopElement = (props: TypeScrollTopProps) =>
 
       window.addEventListener(
         'scroll',
-        Debounce(() => eventScroll(), 10),
+        Performance.debounce(() => eventScroll(), 10),
       );
 
       window.addEventListener(
         'resize',
-        Debounce(() => eventResize(), 20),
+        Performance.debounce(() => eventResize(), 20),
       );
     }
 

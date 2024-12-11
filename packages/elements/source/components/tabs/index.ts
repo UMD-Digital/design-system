@@ -28,7 +28,6 @@ type TypeGetState = {
 
 const { Spacing, Colors } = Tokens;
 const { SansLarge } = Typography;
-const { Debounce } = Performance;
 const { convertPixelStringToNumber } = Styles;
 
 const ATTRIBUTE_LAYOUT_HORIZONTAL = 'data-layout-horizontal';
@@ -373,7 +372,7 @@ const CreateTabsElement = (props: TypeTabsProps) =>
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(EventResize, 10));
+    window.addEventListener('resize', Performance.debounce(EventResize, 10));
 
     return {
       element: declaration,

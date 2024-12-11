@@ -34,7 +34,6 @@ export type TypeNavItemRequirements = TypeDropdownProps &
 type TypeNavItem = TypeNavItemRequirements;
 
 const { Colors, Spacing, FontFamily, FontSize } = Tokens;
-const { Debounce } = Performance;
 const { EventAccessibilityFocus } = Accessibility;
 const { AnimationLinkSpan } = MarkupModify;
 const { convertJSSObjectToStyles } = Styles;
@@ -485,7 +484,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
 
     window.addEventListener(
       'resize',
-      Debounce(() => {
+      Performance.debounce(() => {
         EventSize();
       }, 20),
     );

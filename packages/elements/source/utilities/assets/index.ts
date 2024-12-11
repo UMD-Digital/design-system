@@ -1,6 +1,3 @@
-import AssetIcon from './icons';
-import AssetLogo from './logos';
-import AssetSocial from './social';
-import AssetServices from './services';
-
-export { AssetIcon, AssetLogo, AssetSocial, AssetServices };
+export * as AssetIcon from './icons';
+export * as AssetLogo from './logos';
+export * as AssetSocial from './social';

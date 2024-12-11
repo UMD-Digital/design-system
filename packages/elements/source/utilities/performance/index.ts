@@ -1,4 +1,4 @@
-const Debounce = function <T extends Function>(cb: T, wait = 50) {
+export const debounce = function <T extends Function>(cb: T, wait = 50) {
   let timer: number = 0;
   const callable = (...args: any) => {
     clearTimeout(timer);
@@ -6,8 +6,4 @@ const Debounce = function <T extends Function>(cb: T, wait = 50) {
     timer = setTimeout(() => cb(...args), wait);
   };
   return <T>(<any>callable);
-};
-
-export default {
-  Debounce,
 };

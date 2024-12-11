@@ -55,7 +55,6 @@ type TypeEventScroll = TypeHelpers & {
   isDirectionRight?: boolean;
 };
 
-const { Debounce } = Performance;
 const { Colors, Spacing } = Tokens;
 const { convertPixelStringToNumber } = Styles;
 
@@ -592,7 +591,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Debounce(Event.resize, 30));
+    window.addEventListener('resize', Performance.debounce(Event.resize, 30));
 
     return {
       element: declaration,

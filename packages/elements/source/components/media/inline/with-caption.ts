@@ -10,7 +10,6 @@ export type TypeMediaInlineRequirements = {
 };
 
 const { Spacing } = Tokens;
-const { Debounce } = Performance;
 
 const ELEMENT_MEDIA_INLINE_CONTAINER = 'element-media-with-caption-container';
 const ELEMENT_OBJECT_CAPTION_CONTAINER = 'element-media-caption-container';
@@ -97,7 +96,7 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
 
     window.addEventListener(
       'resize',
-      Debounce(() => {
+      Performance.debounce(() => {
         eventResize();
       }, 20),
     );

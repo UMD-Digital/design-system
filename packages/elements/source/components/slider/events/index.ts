@@ -29,7 +29,6 @@ type TypeSliderEventProps = TypeSliderEventSlideContentProps &
     isThemeDark?: boolean;
   };
 
-const { Debounce } = Performance;
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
 const { Colors, Spacing } = Tokens;
 const { SansLarger } = Typography;
@@ -743,7 +742,7 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
     declaration.appendChild(container);
 
     Load();
-    window.addEventListener('resize', Debounce(EventResize, 20));
+    window.addEventListener('resize', Performance.debounce(EventResize, 20));
 
     return {
       element: declaration,

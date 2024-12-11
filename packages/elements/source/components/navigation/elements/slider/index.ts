@@ -18,7 +18,6 @@ export type TypeNavSliderRequirements = {
 export type TypeNavSliderProps = TypeSubElements & TypeNavSliderRequirements;
 
 const { Colors, Spacing } = Tokens;
-const { Debounce } = Performance;
 
 const ANIMATION_TIME = 300;
 const ATTRIBUTE_CHILD_REF = 'data-child-ref';
@@ -324,7 +323,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
 
     window.addEventListener(
       'resize',
-      Debounce(() => {
+      Performance.debounce(() => {
         eventReize();
       }, 20),
     );

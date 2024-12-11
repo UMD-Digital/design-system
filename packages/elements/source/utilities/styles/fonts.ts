@@ -32,3 +32,9 @@ export const SansFontOptions = (size: SansFontSize) => ({
   className: SansFonts[size].class,
   fontStyles: SansFonts[size],
 });
+
+export const getSansLargeFont = () => SansFontOptions(SansFontSize.Large);
+export const getSansMediumFont = () => SansFontOptions(SansFontSize.Medium);
+
+export const getCampaignLargeFont = () =>
+  CampaignFontOptions(CampaignFontSize.Large);

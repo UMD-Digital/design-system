@@ -17,45 +17,45 @@ const {
   GridColumnsThreeWithGap,
   GridColumnsFourWithGap,
 } = Layout;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 
 const STYLES_GRID_LAYOUT = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="2"]`]:
         GridColumnsBaseWithGap,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="3"]`]:
         GridColumnsThreeWithGap,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="4"]`]:
         GridColumnsFourWithGap,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="2"]`]: GridColumnsTwo,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="3"]`]: GridColumnsThree,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="4"]`]: GridColumnsFour,
     },

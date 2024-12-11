@@ -1,37 +1,18 @@
-import Accessibility from './accessibility';
-import Animation from './animation';
-import AssetIcon from './assets/icons';
-import AssetLogo from './assets/logos';
-import AssetSocial from './assets/social';
-import AssetServices from './assets/services';
-import DateUtility from './date';
-import EventsUtility from './events';
-import MarkupCreate from './markup/create';
-import MarkupEvent from './markup/event';
-import MarkupLocate from './markup/locate';
-import MarkupModify from './markup/modify';
-import MarkupValidate from './markup/validate';
-import Network from './network';
-import Performance from './performance';
-import Storage from './storage';
-import Styles from './styles';
+export { default as Accessibility } from './accessibility';
+export { default as DateUtility } from './date';
+export { default as ElementModel } from './element-model';
+export { default as EventsUtility } from './events';
+export { default as Network } from './network';
+export { default as Performance } from './performance';
+export { default as Storage } from './storage';
+export { default as Styles } from './styles';
+
+export { AssetIcon, AssetLogo, AssetSocial, AssetServices } from './assets';
 
 export {
-  Accessibility,
-  Animation,
-  AssetIcon,
-  AssetLogo,
-  AssetSocial,
-  AssetServices,
-  DateUtility,
-  EventsUtility,
   MarkupCreate,
   MarkupEvent,
   MarkupLocate,
   MarkupModify,
   MarkupValidate,
-  Network,
-  Performance,
-  Storage,
-  Styles,
-};
+} from './markup';

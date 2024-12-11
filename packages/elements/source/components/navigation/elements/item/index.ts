@@ -37,7 +37,7 @@ const { Colors, Spacing, FontFamily, FontSize } = Tokens;
 const { Debounce } = Performance;
 const { EventAccessibilityFocus } = Accessibility;
 const { AnimationLinkSpan } = MarkupModify;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-element-nav-item';
 const ATTRIBUTE_DROPDOWN = 'data-dropdown';
@@ -172,7 +172,7 @@ const DropdownListStyles = `
     line-height: 1.5em;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
       Animations.Link.LineSlideUnder.red,

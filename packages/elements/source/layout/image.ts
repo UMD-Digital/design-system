@@ -3,7 +3,7 @@ import { Styles } from 'utilities';
 
 const { Spacing, Colors } = Tokens;
 const { SansMin } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 
@@ -16,7 +16,7 @@ const STYLES_IMAGE_CONTAINER = `
     display: inline-block;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_IMAGE_CONTAINER} > span`]: SansMin,
     },

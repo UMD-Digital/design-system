@@ -8,7 +8,7 @@ export type TypeMediaCaptionRequirements = {
 
 const { Colors, Spacing } = Tokens;
 const { SansSmall } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const ATTRIBUTE_THEME_DARK = 'dark';
@@ -21,13 +21,13 @@ const OVERWRITE_CONTAINER_DARK = `.${ELEMENT_MEDIA_CAPTIONS_CONTAINER}${IS_THEME
 
 // prettier-ignore
 const STYLES_MEDIA_CAPTIONS_ELEMENT = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_MEDIA_CAPTIONS_CONTAINER}`]: SansSmall,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${ELEMENT_MEDIA_CAPTIONS_CONTAINER} *`]: SansSmall,
     },

@@ -16,7 +16,7 @@ const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { SansSmaller, InterativeMedium } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { SlotWithDefaultStyling } = MarkupCreate;
 const { AnimationLinkSpan } = MarkupModify;
 
@@ -131,7 +131,7 @@ const COLUMN_THREE_DEFAULT_LINKS = [
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_HEADLINE}`]: InterativeMedium
     },
@@ -159,13 +159,13 @@ const LinkStyles = `
     margin-bottom: ${Spacing.sm};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]: SansSmaller,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
       Link.LineSlideUnder.white
@@ -177,7 +177,7 @@ const LinkStyles = `
     color: ${Colors.gray.light};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
       Link.LineSlideUnder.black

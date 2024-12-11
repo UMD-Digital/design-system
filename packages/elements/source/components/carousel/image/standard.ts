@@ -44,7 +44,7 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
 const { Colors, Spacing } = Tokens;
 const { SansLarge } = Typography;
 const { Text } = Elements;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 500;
 
@@ -148,7 +148,7 @@ const TextContainerStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_HEADLINE}`]: SansLarge,
     },
@@ -159,7 +159,7 @@ const TextContainerStyles = `
     color: ${Colors.gray.dark}
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_RICH_TEXT}`]: Text.RichText,
     },

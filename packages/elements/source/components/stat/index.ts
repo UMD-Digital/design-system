@@ -14,7 +14,7 @@ type TypeStatRequirements = TypeStatElement & {
   subText?: HTMLElement | null;
 };
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Text } = Elements;
 const { Colors, Spacing, Breakpoints } = Tokens;
 const {
@@ -71,7 +71,7 @@ const VarationThemeDarkStyles = `
     color: ${Colors.gray.light};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_TEXT}`]: Text.RichTextDarkAnimations,
     },
@@ -115,37 +115,37 @@ const VarationDisplayBlockStyles = `
 
 // prettier-ignore
 const VarationSizeLargeStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_STAT_DISPLAY}`]: StatisticsLarge,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_STAT_DISPLAY} *`]: StatisticsLarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_STAT_TEXT}`]: SansLarger,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_STAT_TEXT} *`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_SUB_TEXT}`]: SansSmaller,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_SUB_TEXT} *`]: SansSmaller,
     },
@@ -168,13 +168,13 @@ const VarationWithLineStyles = `
 
 // prettier-ignore
 const StatDisplayStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_DISPLAY}`]: StatisticsMedium,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_DISPLAY} *`]: StatisticsMedium,
     },
@@ -197,19 +197,19 @@ const StatDisplayStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_TEXT}`]: Text.RichText,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_TEXT}`]: SansMedium,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_TEXT} *`]: SansMedium,
     },
@@ -231,13 +231,13 @@ const TextStyles = `
 
 // prettier-ignore
 const SubTextStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_SUB_TEXT}`]: SansMin,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_SUB_TEXT} *`]: SansMin,
     },

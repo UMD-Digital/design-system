@@ -46,7 +46,7 @@ type CacheCheckResult = {
 };
 
 const { FetchGraphQL } = Network;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Colors, Spacing } = Tokens;
 const { LockFull } = Layout;
 const { SansLarge } = Typography;
@@ -192,7 +192,7 @@ const CloseButtonStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${ALERT_TITLE}`]: SansLarge,
     },
@@ -206,7 +206,7 @@ const TextStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${ALERT_TEXT}`]: Text.RichText,
     },
@@ -245,7 +245,7 @@ const WrapperStyles = `
 
 // prettier-ignore
 const LockStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${LOCK}`]: LockFull,
     },

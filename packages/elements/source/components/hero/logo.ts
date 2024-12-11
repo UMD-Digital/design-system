@@ -15,7 +15,7 @@ const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignLarge, SansLarger } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const THEME_LIGHT = 'light';
 const THEME_DARK = 'dark';
@@ -66,7 +66,7 @@ const OverwriteTheme = `
 
 // prettier-ignore
 const OverwriteEyebrow = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_EYEBROW}`]: Eyebrow.Ribbon,
     },
@@ -79,13 +79,13 @@ const OverwriteEyebrow = `
 
 // prettier-ignore
 const OverwriteHeadline = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_HEADLINE}`]: CampaignLarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_HEADLINE} *`]: CampaignLarge,
     },
@@ -94,7 +94,7 @@ const OverwriteHeadline = `
 
 // prettier-ignore
 const OverwriteRichText = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
     },
@@ -143,7 +143,7 @@ const STYLES_HERO_LOGO_ELEMENT = `
     padding: ${Spacing['5xl']} 0 ${Spacing.lg};
   }
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HERO_LOCK}`]: LockSmall,
     },

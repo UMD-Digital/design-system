@@ -18,7 +18,7 @@ const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { InterativeMedium, SansSmall } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = MarkupCreate;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
@@ -77,14 +77,14 @@ const HeadlineStyles = `
     color: ${Colors.white};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE} a`]:
       Link.LineSlideUnder.white,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE}`]: InterativeMedium,
     },
@@ -95,7 +95,7 @@ const HeadlineStyles = `
     color: ${Colors.black};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
       Link.LineSlideUnder.black,
@@ -113,7 +113,7 @@ const AddressStyles = `
     display: block;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_ADDRESS} *`]: SansSmall,
     },
@@ -126,7 +126,7 @@ const LinkListStyles = `
     display: flex;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} *`]: SansSmall,
     },
@@ -136,14 +136,14 @@ const LinkListStyles = `
     display: block;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} a`]:
       Link.LineSlideUnder.white,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
       Link.LineSlideUnder.black,

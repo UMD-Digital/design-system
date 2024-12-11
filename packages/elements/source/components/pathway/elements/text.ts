@@ -22,7 +22,7 @@ const { Eyebrow, Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
 const { SansLargest } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 400;
 const LARGE = 600;
@@ -79,7 +79,7 @@ const EyebrowStyles = `
     color: ${Colors.black} !important;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: Eyebrow.Ribbon,
     },
@@ -88,13 +88,13 @@ const EyebrowStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_HEADLINE}`]: SansLargest,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_HEADLINE} *`]: SansLargest,
     },
@@ -135,13 +135,13 @@ const TextStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: Text.RichText,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: Text.RichText,
     },
@@ -166,7 +166,7 @@ const ActionStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },

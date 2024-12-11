@@ -15,7 +15,7 @@ type TypeAssets = {
 
 type TypeLayoutImageExpandProps = TypeContent & TypeAssets;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Colors, Spacing, Queries } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignMaxium } = Typography;
@@ -201,13 +201,13 @@ const TextContainer = `
     margin-top: ${Spacing.md};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: Eyebrow.Ribbon,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EXPAND_TEXT_HEADLINE}`]: CampaignMaxium,
     },

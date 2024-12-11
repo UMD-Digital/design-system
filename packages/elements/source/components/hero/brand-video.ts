@@ -13,7 +13,7 @@ type TypeHeroBrandVideoProps = {
 const { Spacing, Colors, Queries } = Tokens;
 const { CampaignMaxium, SansLarger } = Typography;
 const { Text } = Elements;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { Debounce } = Performance;
 const { IsPrefferdReducedMotion } = Accessibility;
 
@@ -28,7 +28,7 @@ const ELEMENT_HERO_ELEMENT_HEADLINE = 'hero-logo-brand-headline';
 const ELEMENT_HERO_ELEMENT_TEXT = 'hero-logo-brand-text';
 
 const HeadlineStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HERO_ELEMENT_HEADLINE}`]: CampaignMaxium,
     },
@@ -44,14 +44,14 @@ const HeadlineStyles = `
 `;
 
 const TextStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: Text.SimpleLarge,
     },
   })}
 
   @media (min-width: 1024px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: SansLarger,
       },

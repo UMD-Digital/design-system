@@ -15,7 +15,7 @@ const { Spacing } = Tokens;
 const { CampaignExtralarge, SansLarger } = Typography;
 const { LockMax } = Layout;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 1000;
 const LARGE = 1300;
@@ -177,25 +177,25 @@ const OverwriteTextContainerStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_HEADLINE}`]: CampaignExtralarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_HEADLINE} *`]: CampaignExtralarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_RICHTEXT} *`]: SansLarger,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${OVERWRITE_TEXT_RICHTEXT}`]: SansLarger,
     },
@@ -233,7 +233,7 @@ const AnimationStyles = `
 `;
 
 const LockStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: LockMax,
     },

@@ -29,7 +29,7 @@ type TypeSliderSlideActions = TypeSlideProps & {
 };
 
 const { Colors, Spacing } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { CleanCopy } = MarkupModify;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
@@ -86,7 +86,7 @@ const BackButtonStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: Typography.SansLarge,
     },

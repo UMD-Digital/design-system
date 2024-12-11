@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { Animation, AssetIcon } from 'utilities';
+import { AssetIcon, Styles } from 'utilities';
 import AlertText, { TypeAlertTextProps } from './elements/text';
 
 type TypeShouldShowProps = {
@@ -116,7 +116,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   closeButton.innerHTML = AssetIcon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
-    Animation.ShrinkThenRemove({ container });
+    Styles.animations.shrinkThenRemove({ container });
   });
 
   return closeButton;

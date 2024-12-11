@@ -22,7 +22,7 @@ export type TypeFirstSlide = TypeFirstSlideProps & {
 };
 
 const { Spacing, Colors } = Tokens;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_SLIDER_FIRST_SLIDE_CONTAINER = 'nav-slider-first-slide-container';
 const ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER =
@@ -36,7 +36,7 @@ const OVERWRITE_ACTION_PRIMARY_LINK = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LIN
 
 //prettier-ignore;
 const OverwriteSlidePrimaryLink = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_ACTION_PRIMARY_LINK}`]: Typography.SansLarge,
     },

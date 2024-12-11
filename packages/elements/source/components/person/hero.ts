@@ -22,7 +22,7 @@ type TypePersonHeroProps = TypeTextContainer &
     breadcrumbDesktop?: HTMLElement | null;
   };
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { SansSmaller, CampaignLarge, SansMedium, SansLarge } = Typography;
 const { Spacing, Colors } = Tokens;
 const { LockMax } = Layout;
@@ -117,7 +117,7 @@ const ImageBlockStyles = `
   }
 
   @container (max-width: ${MEDIUM - 1}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`.${ELEMENT_PERSON_HERO_IMAGE_BLOCK}`]: LockMax,
       },
@@ -140,7 +140,7 @@ const ImageBlockStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_HERO_IMAGE_ASSOCIATION}`]: SansLarge,
     },
@@ -174,7 +174,7 @@ const TextContainerStyles = `
   }
 
   @container (max-width: ${MEDIUM - 1}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`.${ELEMENT_PERSON_HERO_TEXT_CONTAINER}`]: LockMax,
       },
@@ -206,7 +206,7 @@ const TextContainerStyles = `
     position: relative;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_HERO_TEXT_SUBTEXT}`]: SansSmaller,
     },
@@ -229,7 +229,7 @@ const TextContainerStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_HERO_TEXT_NAME}`]: CampaignLarge,
     },
@@ -252,7 +252,7 @@ const TextContainerStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_HERO_TEXT_JOB}`]: SansMedium,
     },
@@ -280,7 +280,7 @@ const WrapperStyles = `
 `;
 
 const LockStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_HERO_LOCK}`]: LockMax,
     },
@@ -300,7 +300,7 @@ const STYLES_PERSON_HERO_ELEMENT = `
     overflow: hidden;
   }
     
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_HERO_BREADCRUMB}`]: LockMax,
     },

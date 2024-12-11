@@ -15,7 +15,7 @@ type TypeEventLockupDate = {
 const { FontSize, Spacing } = Tokens;
 const { Link } = Animations;
 const { SansLarge } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -30,13 +30,13 @@ const HeadlineStyles = `
     margin-left: ${Spacing.sm};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE}`]: SansLarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE} *`]: SansLarge,
     },
@@ -50,13 +50,13 @@ const HeadlineStyles = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE} a`]: Link.LineSlideUnder.black,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: Link.LineSlideUnder.white, 
     },

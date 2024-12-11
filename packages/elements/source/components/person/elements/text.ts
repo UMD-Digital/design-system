@@ -21,7 +21,7 @@ const { Spacing, Colors } = Tokens;
 const { Link } = Animations;
 const { SansLarger, SansSmall, SansSmaller } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_HAS_CONTACT = 'has-contact';
@@ -51,7 +51,7 @@ const ThemeDarkStyles = `
     color: ${Colors.white};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Link.LineSlideUnder.white,
     },
@@ -67,13 +67,13 @@ const NameStyles = `
     display: block;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_NAME_CONTAINER}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Link.LineSlideUnder.black,
     },
@@ -82,7 +82,7 @@ const NameStyles = `
 
 // prettier-ignore
 const JobStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_JOB_CONTAINER}`]: SansSmall,
     },
@@ -99,7 +99,7 @@ const AssociationStyles = `
     margin-top: 4px;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_ASSOCIATION_CONTAINER}`]: SansSmall,
     },
@@ -121,7 +121,7 @@ const PronounsStyles = `
     font-style: italic;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_PRONOUNS_CONTAINER}`]: SansSmaller,
     },
@@ -145,7 +145,7 @@ const SubTextStyles = `
     font-style: italic;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_SUB_TEXT_CONTAINER}`]: SansSmaller,
     },

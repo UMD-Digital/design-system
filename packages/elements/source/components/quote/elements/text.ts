@@ -18,7 +18,7 @@ const { Spacing, Colors } = Tokens;
 const { GridColumnAndRowsMobileTablet } = Layout;
 const { SansExtraLarge, SansLarger, SansMedium, SansSmaller } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
 const ATTRIBUTE_THEME = 'theme';
@@ -41,13 +41,13 @@ const IS_SIZE_LARGE = `.${TEXT_CONTAINER}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
 
 // prettier-ignore
 const VarationSizeLarge = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: SansExtraLarge,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: SansExtraLarge,
     },
@@ -83,13 +83,13 @@ const QuoteStyles = `
     color: currentColor;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: SansLarger,
     },
@@ -114,13 +114,13 @@ const AttributionStyles = `
     color: currentColor;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: SansMedium,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: SansMedium,
     },
@@ -142,13 +142,13 @@ const AttributionSubTextStyles = `
     color: currentColor;
   }
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: SansSmaller,
     },
   })}
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: SansSmaller,
     },
@@ -161,7 +161,7 @@ const ActionStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },

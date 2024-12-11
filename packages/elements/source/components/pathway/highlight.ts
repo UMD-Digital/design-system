@@ -13,7 +13,7 @@ type TypePathwayHighlightProps = TypePathwayTextContainer &
 const { Colors, Spacing } = Tokens;
 const { LockMax } = Layout;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 1000;
 const LARGE = 1200;
@@ -117,7 +117,7 @@ const HighlightContainer = `
     }
   }
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT}`]: Typography.SansLarger,
     },
@@ -129,13 +129,13 @@ const HighlightContainer = `
     color: ${Colors.black};
   }
   
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION}`]: Typography.SansMedium,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} *`]: Typography.SansMedium,
     },
@@ -149,7 +149,7 @@ const HighlightContainer = `
 `
 
 const LockStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: LockMax,
     },

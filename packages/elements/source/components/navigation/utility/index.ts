@@ -24,7 +24,7 @@ type TypeMenuItemsRequirements = {
 
 type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps & {};
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const { EventAccessibilityFocus } = Accessibility;
 const { Colors, Spacing } = Tokens;
 const { LockMax, LockFull } = Layout;
@@ -63,13 +63,13 @@ const isDesktop = () => window.innerWidth >= DESKTOP;
 
 // prettier-ignore
 const LockStyles = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_UTILITY_LOCK}`]: LockMax,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_LOCK_FULL}`]: LockFull,
     },

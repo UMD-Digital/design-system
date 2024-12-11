@@ -32,7 +32,7 @@ export type TypeMetaDisplay = EventType & {
 const { SansSmaller } = Typography;
 const { Colors, Spacing } = Tokens;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const MOBILE = 400;
 const ATTRIBUTE_THEME = 'theme';
@@ -113,7 +113,7 @@ const STYLES_EVENT_META = `
     margin-top: 5px;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EVENTS_DATE_ROW_TEXT}`]: SansSmaller,
     },

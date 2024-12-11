@@ -30,7 +30,7 @@ type TypeSliderEventProps = TypeSliderEventSlideContentProps &
   };
 
 const { Debounce } = Performance;
-const { ConvertJSSObjectToStyles, ConvertPixelStringToNumber } = Styles;
+const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
 const { Colors, Spacing } = Tokens;
 const { SansLarger } = Typography;
 
@@ -234,7 +234,7 @@ const IntroStyles = `
     margin-top: ${Spacing.min};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: SansLarger,
     },
@@ -522,7 +522,7 @@ const SizeDatesElements = ({
       })[0];
       const height =
         maxHeightElement.offsetHeight +
-        ConvertPixelStringToNumber(maxHeightElement.style.marginTop);
+        convertPixelStringToNumber(maxHeightElement.style.marginTop);
 
       sliderWrapper.style.height = `${height}px`;
     };

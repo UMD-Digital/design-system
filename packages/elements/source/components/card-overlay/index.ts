@@ -15,7 +15,7 @@ type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
 
 const { Spacing, Colors } = Tokens;
 const { SansLarger, SansExtraLarge } = Typography;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 500;
 
@@ -58,20 +58,20 @@ const OverwriteThemeDark  = `
 `;
 
 const OverwriteHeadline = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: SansLarger,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: SansExtraLarge,
       },
@@ -79,7 +79,7 @@ const OverwriteHeadline = `
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${ConvertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: {
         [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: SansExtraLarge,
       },

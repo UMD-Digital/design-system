@@ -18,7 +18,7 @@ const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignExtralarge, SansLarger } = Typography;
 
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 const ATTRIBUTE_ANIMATION = 'data-animation';
 
 const TABLET = 768;
@@ -43,7 +43,7 @@ const OVERWRITE_IMAGE_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .$
 
 // prettier-ignore
 const OverwriteEyebrow = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_EYEBROW}`]: Eyebrow.Ribbon,
     },
@@ -56,7 +56,7 @@ const OverwriteEyebrow = `
 
 // prettier-ignore
 const OverwriteHeadline = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_HEADLINE}`]: CampaignExtralarge,
     },
@@ -65,7 +65,7 @@ const OverwriteHeadline = `
 
 // prettier-ignore
 const OverwriteRichText = `
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
     },
@@ -169,7 +169,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
     }
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HERO_LOCK}`]: LockMax,
     },

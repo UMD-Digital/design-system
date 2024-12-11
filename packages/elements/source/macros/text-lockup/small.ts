@@ -21,7 +21,7 @@ const { Link } = Animations;
 const { Text } = Elements;
 const { SansLarger, SansSmall, SansMin, Eyebrow } = Typography;
 const { GridColumnAndRowsMobileTablet } = Layout;
-const { ConvertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -51,20 +51,20 @@ const DarkThemeStyles = `
     color: ${Colors.white};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK_HEADLINE} a`]:
       Link.LineSlideUnder.white,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK_RICH_TEXT}`]: Text.RichTextDarkAnimations,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK_RICH_TEXT} *`]: Text.RichTextDarkAnimations,
     },
@@ -81,13 +81,13 @@ const EyebrowStyles = `
     color: currentColor;
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW}`]: Eyebrow,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} *`]: Eyebrow,
     },
@@ -111,19 +111,19 @@ const HeadlineStyles = `
     color: ${Colors.black};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarger,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} a`]:
       Link.LineSlideUnder.black,
@@ -141,13 +141,13 @@ const TextStyles = `
     color: ${Colors.gray.dark};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: SansSmall,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: SansSmall,
     },
@@ -181,13 +181,13 @@ const DateStyles = `
     color: ${Colors.gray.mediumAA};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`]: SansMin,
     },
   })}
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE} *`]: SansMin,
     },
@@ -200,7 +200,7 @@ const ActionStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  ${ConvertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: GridColumnAndRowsMobileTablet,
     },

@@ -11,7 +11,7 @@ interface FontOptions {
 
 interface HeadlineProps {
   element: HTMLElement;
-  additionalStyles: Record<string, string>;
+  elementStyles: Record<string, string>;
   isThemeDark?: boolean;
 }
 
@@ -32,14 +32,13 @@ const HeadlineConfig = {
 };
 
 const createHeadlineFactory = (props: HeadlineFactoryProps) => {
-  const { element, className, additionalStyles, fontStyles, isThemeDark } =
-    props;
+  const { element, className, elementStyles, fontStyles, isThemeDark } = props;
 
   return new TextElementModel(className, element).createElement({
     config: HeadlineConfig,
     options: {
       fontStyles,
-      additionalStyles,
+      elementStyles,
       isColorWhite: !isThemeDark,
     },
   });

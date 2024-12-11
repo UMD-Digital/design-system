@@ -23,15 +23,15 @@ export enum SansFontSize {
   Min = 'min',
 }
 
-export const CampaignFontOptions = (size: CampaignFontSize) => ({
-  className: CampaignFonts[size].class,
-  fontStyles: CampaignFonts[size],
-});
+export const CampaignFontOptions = (size: CampaignFontSize) => {
+  const { class: className, ...fontStyles } = CampaignFonts[size];
+  return { className, fontStyles };
+};
 
-export const SansFontOptions = (size: SansFontSize) => ({
-  className: SansFonts[size].class,
-  fontStyles: SansFonts[size],
-});
+export const SansFontOptions = (size: SansFontSize) => {
+  const { class: className, ...fontStyles } = SansFonts[size];
+  return { className, fontStyles };
+};
 
 export const getSansLargeFont = () => SansFontOptions(SansFontSize.Large);
 export const getSansMediumFont = () => SansFontOptions(SansFontSize.Medium);

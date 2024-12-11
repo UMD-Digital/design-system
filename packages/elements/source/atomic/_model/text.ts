@@ -8,7 +8,7 @@ interface ElementStyles {
 
 interface ElementConfigOptions {
   fontStyles?: Record<string, any>;
-  additionalStyles?: ElementStyles;
+  elementStyles?: ElementStyles;
   isColorWhite?: boolean;
 }
 
@@ -48,12 +48,11 @@ export default class TextElementModel {
       throw new Error(`element & className is required for TextElementModel`);
     }
 
-    const { fontStyles = {}, additionalStyles = {} } = options;
+    const { elementStyles = {} } = options;
 
     let styles = this.createBaseStyles({
       className,
-      fontStyles,
-      additionalStyles,
+      elementStyles,
     });
 
     if (config.styleModifiers) {
@@ -77,43 +76,33 @@ export default class TextElementModel {
 
   private createBaseStyles({
     className,
-    fontStyles,
-    additionalStyles,
+    elementStyles,
   }: {
     className: string;
-    fontStyles?: Record<string, any>;
-    additionalStyles: ElementStyles;
+    elementStyles: ElementStyles;
   }): string {
     let styles = '';
 
-    if (fontStyles) {
-      styles += Styles.ConvertJSSObjectToStyles({
-        styleObj: {
-          [`.${className}`]: fontStyles,
-        },
-      });
-    }
-
-    if (additionalStyles.element) {
+    if (elementStyles.element) {
       styles += `
         .${className} { 
-          ${additionalStyles.element} 
+          ${elementStyles.element} 
         }
       `;
     }
 
-    if (additionalStyles.siblingAfter) {
+    if (elementStyles.siblingAfter) {
       styles += `
         .${className} + * {
-          ${additionalStyles.siblingAfter}
+          ${elementStyles.siblingAfter}
         }
       `;
     }
 
-    if (additionalStyles.subElement) {
+    if (elementStyles.subElement) {
       styles += `
         .${className} * { 
-          ${additionalStyles.subElement} 
+          ${elementStyles.subElement} 
         }
       `;
     }

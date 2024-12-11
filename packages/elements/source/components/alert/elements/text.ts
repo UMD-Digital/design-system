@@ -78,7 +78,7 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   if (headline) {
     const headlineModel = HeadlineConfig.SansLargeHeadline({
       ...props,
-      additionalStyles: headlineStyles,
+      elementStyles: headlineStyles,
       element: headline,
     });
 
@@ -89,7 +89,7 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   if (text) {
     const textModel = RichTextConfig.simple({
       ...props,
-      additionalStyles: richTextStyles,
+      elementStyles: richTextStyles,
       element: text,
     });
 

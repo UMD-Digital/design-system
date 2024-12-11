@@ -12,7 +12,7 @@ interface FontOptions {
 
 interface RichTextProps {
   element: HTMLElement;
-  additionalStyles: Record<string, string>;
+  elementStyles: Record<string, string>;
   isThemeDark?: boolean;
 }
 
@@ -27,12 +27,12 @@ const simpleConfig = {
 };
 
 const createRichTextFactory = (props: RichTextFactoryProps) => {
-  const { element, className, additionalStyles, isThemeDark } = props;
+  const { element, className, elementStyles, isThemeDark } = props;
 
   return new TextElementModel(className, element).createElement({
     config: simpleConfig,
     options: {
-      additionalStyles,
+      elementStyles,
     },
   });
 };

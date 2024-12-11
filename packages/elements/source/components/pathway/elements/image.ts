@@ -4,7 +4,6 @@ import { Image as LayoutImage } from 'layout';
 import { Accessibility } from 'utilities';
 
 const { Spacing, Colors, Queries } = Tokens;
-const { IsPrefferdReducedMotion } = Accessibility;
 
 type TypeScaleProps = {
   isImageScaled: boolean;
@@ -122,7 +121,7 @@ const CreatePathwayImageContainer = (
 
       wrapper.appendChild(videoRef);
       wrapper.appendChild(buttonMacro.elements.button);
-      if (!IsPrefferdReducedMotion()) {
+      if (!Accessibility.isPrefferdReducedMotion()) {
         buttonMacro.events.setButtonPlay();
       } else {
         buttonMacro.events.setButtonPause();

@@ -18,7 +18,6 @@ type CombinedNavDrawerProps = TypeNavDrawerRequirements &
 export type TypeDrawerProps = CombinedNavDrawerProps;
 
 const { Colors, Spacing } = Tokens;
-const { EventAccessibilityFocus } = Accessibility;
 
 const ANIMATION_TIME = 300;
 
@@ -185,7 +184,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         body.style.overflow = 'hidden';
         closeButton.focus();
 
-        EventAccessibilityFocus({
+        Accessibility.eventAccessibilityFocus({
           element: elementContainer,
           action: () => eventClose(),
           shadowDomContext: context,

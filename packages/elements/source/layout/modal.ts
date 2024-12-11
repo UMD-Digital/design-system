@@ -9,7 +9,6 @@ type TypeFixedFullScreenProps = {
 };
 
 const { Queries, Spacing } = Tokens;
-const { EventAccessibilityFocusTrap } = Accessibility;
 
 const ELEMENT_CONTAINER = 'modal-screen-container';
 
@@ -57,7 +56,7 @@ export const CreateModal = ({
       if (target === container) hide();
     });
 
-    accessibiltyEventReference = EventAccessibilityFocusTrap({
+    accessibiltyEventReference = Accessibility.eventAccessibilityFocusTrap({
       element: container,
       action: hide,
       shadowDomContext: context || null,

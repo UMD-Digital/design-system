@@ -25,7 +25,6 @@ type TypeMenuItemsRequirements = {
 type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps & {};
 
 const { convertJSSObjectToStyles } = Styles;
-const { EventAccessibilityFocus } = Accessibility;
 const { Colors, Spacing } = Tokens;
 const { LockMax, LockFull } = Layout;
 
@@ -376,7 +375,7 @@ const CreateSearchFormButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = EventAccessibilityFocus({
+    focusCallback = Accessibility.eventAccessibilityFocus({
       element: expandElement,
       action: () => eventClose(),
     });
@@ -441,7 +440,7 @@ const CreateMobileMenuButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = EventAccessibilityFocus({
+    focusCallback = Accessibility.eventAccessibilityFocus({
       element: expandElement,
       action: () => eventClose(),
     });

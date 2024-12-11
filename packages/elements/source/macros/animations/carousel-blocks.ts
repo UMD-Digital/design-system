@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { ButtonFullScreen } from 'atomic';
-import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
+import { AssetIcon, JavascriptEvents, Performance, Styles } from 'utilities';
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -255,7 +255,7 @@ const EventSwipe = (props: TypeHelpers) => {
     }
   };
 
-  EventsUtility.CreateEventSwipe({ container, callback: swipes });
+  JavascriptEvents.CreateEventSwipe({ container, callback: swipes });
 };
 
 const ButtonVisibility = (props: TypeHelpers) => {

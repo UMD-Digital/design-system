@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
+import { AssetIcon, JavascriptEvents, Performance, Styles } from 'utilities';
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;
@@ -656,7 +656,7 @@ const EventSwipe = ({
     SetButtonVisibility();
   };
 
-  EventsUtility.CreateEventSwipe({ container, callback: swipes });
+  JavascriptEvents.CreateEventSwipe({ container, callback: swipes });
 };
 
 const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {

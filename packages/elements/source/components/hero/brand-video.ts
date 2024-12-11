@@ -14,7 +14,6 @@ const { Spacing, Colors, Queries } = Tokens;
 const { CampaignMaxium, SansLarger } = Typography;
 const { Text } = Elements;
 const { convertJSSObjectToStyles } = Styles;
-const { IsPrefferdReducedMotion } = Accessibility;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
 const ELEMENT_HERO_ELEMENT_DECLARATION = 'hero-logo-brand-video-declaration';
@@ -220,7 +219,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
     buttonMacro.events.setButtonPlay();
     eventRize();
 
-    if (IsPrefferdReducedMotion()) {
+    if (Accessibility.isPrefferdReducedMotion()) {
       video.pause();
       buttonMacro.events.setButtonPause();
     }

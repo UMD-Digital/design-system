@@ -1,4 +1,3 @@
-import Accessibility from './accessibility';
 import Animation from './animation';
 import DateUtility from './date';
 import MarkupCreate from './markup/create';
@@ -8,7 +7,6 @@ import MarkupValidate from './markup/validate';
 import Styles from './styles';
 
 export {
-  Accessibility,
   Animation,
   DateUtility,
   MarkupCreate,

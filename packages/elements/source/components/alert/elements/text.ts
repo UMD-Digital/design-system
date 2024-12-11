@@ -6,6 +6,7 @@ export type TypeAlertTextProps = {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
+  isThemeDark?: boolean;
 };
 
 const { Colors, Spacing, MaxWidth } = Tokens;
@@ -75,14 +76,10 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   let styles = STYLES_ALERT_TEXT;
 
   if (headline) {
-    const { className, fontStyles } = Fonts.SansFontOptions(
-      Fonts.SansFontSize.Large,
-    );
-    const headlineModel = new TextElementModel(HeadlineConfig).createElement({
-      element: headline,
-      className,
-      fontStyles,
+    const headlineModel = HeadlineConfig.SansLargeHeadline({
+      ...props,
       additionalStyles: headlineStyles,
+      element: headline,
     });
 
     wrapper.appendChild(headlineModel.element);
@@ -90,16 +87,14 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   }
 
   if (text) {
-    const textSimpleModel = new TextElementModel(
-      RichTextConfig.simple,
-    ).createElement({
-      element: text,
-      className: 'umd-rich-text-simple',
+    const textModel = RichTextConfig.simple({
+      ...props,
       additionalStyles: richTextStyles,
+      element: text,
     });
 
-    wrapper.appendChild(textSimpleModel.element);
-    styles += textSimpleModel.styles;
+    wrapper.appendChild(textModel.element);
+    styles += textModel.styles;
   }
 
   if (actions) {

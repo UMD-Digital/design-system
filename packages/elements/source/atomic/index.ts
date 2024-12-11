@@ -4,7 +4,7 @@ export { default as ButtonFullScreen } from './buttons/full-screen';
 export { default as ButtonVideoState } from './buttons/video-state';
 
 // Configurations
-export { default as HeadlineConfig } from './configuration/headline';
+export * as HeadlineConfig from './configuration/headline';
 export { default as RichTextConfig } from './configuration/rich-text';
 
 // Models

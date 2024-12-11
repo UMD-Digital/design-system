@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetSocial, Styles } from 'utilities';
+import { Utilites } from '@universityofmaryland/web-elements-library';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import {
   BREAKPOINTS,
@@ -11,6 +11,7 @@ import {
 import { UMDFooterElement } from '../../index';
 
 const { Spacing, Colors } = Tokens;
+const { AssetSocial, Styles } = Utilites;
 
 const { convertJSSObjectToStyles } = Styles;
 

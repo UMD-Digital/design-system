@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetLogo } from 'utilities';
+import { Utilites } from '@universityofmaryland/web-elements-library';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
   CreateCallToActionContainer,
@@ -9,6 +9,7 @@ import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
 const { Spacing } = Tokens;
+const { AssetLogo } = Utilites;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;

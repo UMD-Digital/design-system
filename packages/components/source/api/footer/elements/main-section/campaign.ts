@@ -1,9 +1,10 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetLogo } from 'utilities';
+import { Utilites } from '@universityofmaryland/web-elements-library';
 import { VARIABLES } from '../../globals';
 import { UMDFooterElement } from '../../index';
 
 const { Spacing } = Tokens;
+const { AssetLogo } = Utilites;
 
 const { THEME_OPTION_LIGHT } = VARIABLES;
 

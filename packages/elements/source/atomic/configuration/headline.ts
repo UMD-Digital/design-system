@@ -1,6 +1,6 @@
 import { MarkupModify, Styles } from 'utilities';
 import TextElementModel, { ModifierProps } from '../_model/text';
-import { modifiers } from './_style-modifiers';
+import { modifiers } from '../_modifiers/style';
 
 const { Fonts } = Styles;
 

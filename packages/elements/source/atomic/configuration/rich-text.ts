@@ -1,7 +1,7 @@
 import { Elements } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import TextElementModel, { ModifierProps } from 'atomic/_model/text';
-import { modifiers } from './_style-modifiers';
+import { modifiers } from '../_modifiers/style';
 
 const { Text } = Elements;
 

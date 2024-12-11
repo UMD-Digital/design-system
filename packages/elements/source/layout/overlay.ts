@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetServices, MarkupModify, Performance } from 'utilities';
+import { MarkupCreate, MarkupModify, Performance } from 'utilities';
 import { TextLockupSmallScaling, type TypeTextLockupSmall } from 'macros';
 
 export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
@@ -7,7 +7,6 @@ export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
 };
 
 const { Spacing } = Tokens;
-const { Debounce } = Performance;
 
 const SMALL = 350;
 
@@ -191,8 +190,8 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
   elementDeclaration.appendChild(elementContainer);
 
   sizeElements();
-  AssetServices.CreateGif({ container: imageWrapper });
-  window.addEventListener('resize', Debounce(sizeElements, 50));
+  MarkupCreate.CreateGif({ container: imageWrapper });
+  window.addEventListener('resize', Performance.debounce(sizeElements, 50));
 
   return elementDeclaration;
 };

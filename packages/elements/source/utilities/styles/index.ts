@@ -1,5 +1,6 @@
 import postcss from 'postcss';
 import * as animations from './animations';
+import * as assets from './assets';
 import * as fonts from './fonts';
 
 const postcssNesting = require('postcss-nesting');
@@ -18,6 +19,7 @@ const convertPixelStringToNumber = (styleStr: string) =>
 
 export default {
   animations,
+  assets,
   fonts,
   combineStyles,
   convertJSSObjectToStyles,

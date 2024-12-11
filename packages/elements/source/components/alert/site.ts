@@ -109,7 +109,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
     Styles.animations.shrinkThenRemove({ container });
-    Storage.SetLocalString({ key: ALERT_LOCAL_STORAGE_KEY });
+    Storage.local.set({ key: ALERT_LOCAL_STORAGE_KEY });
   });
 
   return closeButton;
@@ -118,7 +118,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
 const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
   const now = new Date().getTime();
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
-  const lastClosedTime = Storage.GetLocalString({
+  const lastClosedTime = Storage.local.get({
     key: ALERT_LOCAL_STORAGE_KEY,
   });
 

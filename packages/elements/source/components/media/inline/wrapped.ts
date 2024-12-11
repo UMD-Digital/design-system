@@ -12,7 +12,6 @@ export type TypeMediaInlineWrappedRequirements = {
 };
 
 const { Spacing } = Tokens;
-const { Debounce } = Performance;
 
 const BREAKPOINT = 400;
 
@@ -182,7 +181,7 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
 
     window.addEventListener(
       'resize',
-      Debounce(() => {
+      Performance.debounce(() => {
         eventResize();
       }, 20),
     );

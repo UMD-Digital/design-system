@@ -1,14 +1,7 @@
 import { Tokens } from '@universityofmaryland/variables';
-import {
-  AssetIcon,
-  AssetServices,
-  EventsUtility,
-  Performance,
-} from 'utilities';
+import { AssetIcon, EventsUtility, Performance, Styles } from 'utilities';
 
 const { Colors, Spacing } = Tokens;
-const { Debounce } = Performance;
-const { GetResponsiveImageSize } = AssetServices;
 
 type TypeCarouselImageProps = {
   slides: HTMLElement[];
@@ -149,7 +142,7 @@ const SetCarouselSize = ({
       ? windowHeight
       : maxHeight
     : windowHeight;
-  const imageSize = GetResponsiveImageSize({
+  const imageSize = Styles.assets.getResponsiveImageSize({
     image: img,
     parentNode: slider,
     maxWindowHeight,
@@ -314,7 +307,7 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
     container.classList.add(ELEMENT_CAROUSEL_DECLARATION);
     container.appendChild(slider);
 
-    window.addEventListener('resize', Debounce(EventResize, 10));
+    window.addEventListener('resize', Performance.debounce(EventResize, 10));
     EventSwipe();
 
     return {

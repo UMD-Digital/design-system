@@ -12,7 +12,6 @@ type TypeSocialSharingProps = {
 };
 
 const { Colors, Queries, Spacing } = Tokens;
-const { Debounce } = Performance;
 
 const ATTRIBUTE_FIXED = 'fixed';
 
@@ -269,12 +268,12 @@ const CreateSocialSharingElement = (props: TypeSocialSharingProps) =>
       container.setAttribute(ATTRIBUTE_FIXED, '');
       window.addEventListener(
         'scroll',
-        Debounce(() => eventScroll(), 20),
+        Performance.debounce(() => eventScroll(), 20),
       );
 
       window.addEventListener(
         'resize',
-        Debounce(() => eventResize(), 20),
+        Performance.debounce(() => eventResize(), 20),
       );
     }
 

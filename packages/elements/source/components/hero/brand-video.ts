@@ -14,7 +14,6 @@ const { Spacing, Colors, Queries } = Tokens;
 const { CampaignMaxium, SansLarger } = Typography;
 const { Text } = Elements;
 const { convertJSSObjectToStyles } = Styles;
-const { Debounce } = Performance;
 const { IsPrefferdReducedMotion } = Accessibility;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
@@ -243,7 +242,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
 
   window.addEventListener(
     'resize',
-    Debounce(() => {
+    Performance.debounce(() => {
       eventRize();
     }, 20),
   );

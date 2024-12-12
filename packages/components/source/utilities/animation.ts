@@ -1,8 +1,8 @@
 import { Animations } from '@universityofmaryland/variables';
-import { Utilites } from '@universityofmaryland/web-elements-library';
+import { Utilities } from '@universityofmaryland/web-elements-library';
 
 const Load = () => {
-  const { Accessibility, Styles } = Utilites;
+  const { Accessibility, Styles } = Utilities;
   const { convertJSSObjectToStyles } = Styles;
   const { Scroll } = Animations;
 

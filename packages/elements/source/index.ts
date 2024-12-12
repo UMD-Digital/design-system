@@ -5,4 +5,4 @@ export * as Components from './components';
 export * as Feeds from './feeds';
 export * as Layout from './layout';
 export * as Macros from './macros';
-export * as Utilites from './utilities';
+export * as Utilities from './utilities';

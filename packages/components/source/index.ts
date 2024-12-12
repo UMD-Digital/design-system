@@ -20,6 +20,7 @@ export const Elements = {
 
 export const Utilties = {
   ...UmdUtilities,
+  ...UmdElements.Utilites,
 };
 
 export default LoadUmdComponents;

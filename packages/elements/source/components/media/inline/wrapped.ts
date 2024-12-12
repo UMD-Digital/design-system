@@ -137,11 +137,13 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
       };
 
       image?.addEventListener('load', () => {
-        checkSizing();
-
         setTimeout(() => {
           checkSizing();
         }, 500);
+
+        setTimeout(() => {
+          checkSizing();
+        }, 1500);
       });
     };
 

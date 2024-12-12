@@ -425,9 +425,10 @@ const isVisual = {
     AttributeNames.DISPLAY_SIZE,
     AttributesValues.size.LARGE,
   ),
-  stickyLast: createAttributeCheck(
+  stickyFirst: createAttributeCheck(
     AttributeNames.OPTIONAL_STICKY_FIRST,
-    AttributesValues.state.FALSE,
+    AttributesValues.state.TRUE,
+    true,
   ),
   textCentered: createAttributeCheck(
     AttributeNames.VISUAL_TEXT_CENTER,

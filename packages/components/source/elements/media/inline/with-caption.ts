@@ -70,13 +70,23 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
     }
 
     const load = () => {
-      setTimeout(() => {
+      const checkSizing = () => {
         const caption = objectContainer.querySelector(
           `.${CaptionContainer.Elements.container}`,
         ) as HTMLElement;
 
-        caption.style.opacity = `1`;
-      }, 500);
+        if (caption) {
+          caption.style.opacity = `1`;
+        }
+      };
+
+      image?.addEventListener('load', () => {
+        checkSizing();
+
+        setTimeout(() => {
+          checkSizing();
+        }, 500);
+      });
     };
 
     if (hasCaption) {

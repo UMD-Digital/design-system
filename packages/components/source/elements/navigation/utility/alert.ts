@@ -4,23 +4,17 @@ import {
   Layout,
   Typography,
 } from '@universityofmaryland/variables';
-import Actions from 'elements/call-to-action';
+import Actions from '../../call-to-action';
 import { AssetIcon, Network, Styles } from 'utilities';
-
-type AlertCTA = {
-  title: string;
-  alt: string;
-  entry: { url: string }[];
-  url: string;
-};
 
 type AlertData = {
   id: string;
   type: string;
   title: string;
-  headline: string;
+  headline?: string;
   text: string;
-  cta: AlertCTA[];
+  ctaUrl: string;
+  ctaText?: string;
   hidden?: boolean;
 };
 
@@ -54,24 +48,17 @@ const { Text } = Elements;
 
 const QUERY = `
   query CampusAlertsQuery {
-    entries: entries(section: "mainCampusAlerts", limit: 1) {
-      ... on mainElementsCampusAlert_Entry {
+    entries: entries(
+      limit: 1
+      type: "mainElementsCampusAlert"
+    ) {
         id: uid
         type: optionsType
         headline
         title
         text
-        cta {
-          ... on umdElementsLink_Entry {
-            title
-            alt: linksAlt
-            entry(limit: 1) {
-              url
-            }
-            url: linksUrl
-          }
-        }
-      }
+        ctaUrl: cta
+        ctaText
     }
   }
 `;
@@ -80,7 +67,6 @@ const ELEMENT_NAME = 'umd-element-nav-alert';
 export const ALERT_CONSTANTS = {
   URLS: {
     DEFAULT: 'https://umd.edu/api/alerts',
-    TESTING: 'https://umd-main.production.servd.dev/api/alerts',
   },
   STORAGE_KEYS: {
     ALERT_TIME: 'umd-alert-time',
@@ -393,12 +379,19 @@ const createCloseButton = (container: HTMLElement): HTMLButtonElement => {
   return button;
 };
 
-const createCTAElement = (cta: AlertCTA): HTMLElement => {
+const createCTAElement = ({
+  ctaText,
+  ctaUrl,
+}: {
+  ctaText: string;
+  ctaUrl: string;
+}): HTMLElement => {
   const link = createElement('a', ALERT_CONSTANTS.ELEMENTS.CTA, {
-    href: cta.url,
+    href: ctaUrl,
     rel: 'noopener noreferrer',
+    target: '_blank',
   });
-  link.innerHTML = cta.title;
+  link.innerHTML = ctaText;
 
   return Actions.CreateElement({
     cta: link,
@@ -413,10 +406,11 @@ const createAlertContent = (
   const { ELEMENTS } = ALERT_CONSTANTS;
   const wrapper = createElement('div', ELEMENTS.WRAPPER);
   const lock = createElement('div', ELEMENTS.LOCK);
+  const headlineText = alert.headline || alert.title;
 
   // Create elements
   const title = createElement('p', ELEMENTS.TITLE);
-  title.innerHTML = alert.headline || alert.title;
+  title.innerHTML = headlineText;
 
   const closeButton = createCloseButton(container);
 
@@ -429,8 +423,13 @@ const createAlertContent = (
   }
 
   // Add CTA if exists
-  if (alert.cta?.[0]) {
-    wrapper.appendChild(createCTAElement(alert.cta[0]));
+  if (alert.ctaUrl) {
+    wrapper.appendChild(
+      createCTAElement({
+        ctaText: alert.ctaText || headlineText,
+        ctaUrl: alert.ctaUrl,
+      }),
+    );
   }
 
   lock.appendChild(wrapper);
@@ -457,18 +456,12 @@ const fetchAlerts = async ({
   alertUrl,
 }: AlertProps): Promise<AlertResponse | null> => {
   try {
-    if (alertUrl) {
-      const response = await fetch(alertUrl);
-      return response.json();
-    }
+    const url = alertUrl || ALERT_CONSTANTS.URLS.DEFAULT;
 
     return await FetchGraphQL({
       query: QUERY,
-      url:
-        process.env.NODE_ENV === 'development'
-          ? ALERT_CONSTANTS.URLS.TESTING
-          : ALERT_CONSTANTS.URLS.DEFAULT,
-      token: '',
+      url,
+      token: 'VIDnMeNYHTrLvWPtPpK5MNpjuv5WmmhU',
     });
   } catch (error) {
     console.error('Failed to fetch alerts:', error);
@@ -490,9 +483,9 @@ export const createNavAlert = async ({ alertUrl }: AlertProps) => {
 
   // Fetch new alerts
   const response = await fetchAlerts({ alertUrl });
-  if (!response?.data?.entries?.[0]) return null;
+  if (!response?.data?.entries[0]) return null;
 
-  const alert = response.data.entries[0];
+  const alert = response.data?.entries[0];
   const cachedAlert = getStoredValue<AlertData>(
     ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
   );

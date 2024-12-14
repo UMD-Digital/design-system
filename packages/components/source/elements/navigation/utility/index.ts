@@ -25,7 +25,6 @@ type TypeMenuItemsRequirements = {
 type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps & {};
 
 const { ConvertJSSObjectToStyles } = Styles;
-const { EventAccessibilityFocus } = Accessibility;
 const { Colors, Spacing } = Tokens;
 const { LockMax, LockFull } = Layout;
 
@@ -85,13 +84,22 @@ const WrapperStyles = `
     position: relative;
     min-height: 44px;
   }
+
+  .${ELEMENT_UTILITY_WRAPPER} > a {
+    color: ${Colors.white};
+    text-transform: uppercase;
+  }
+
+  .${ELEMENT_UTILITY_WRAPPER} > a:hover,
+  .${ELEMENT_UTILITY_WRAPPER} > a:focus {
+    text-decoration: underline;
+  }
 `;
 
 // prettier-ignore
 const MenuStyles = `
   .${ELEMENT_UTILITY_MENU} {
     display: flex;
-
   }
 
   @container (max-width: ${DESKTOP - 1}px) {
@@ -106,6 +114,12 @@ const MenuStyles = `
       align-items: center;
       justify-content: space-between;
     }
+  }
+
+  .${ELEMENT_UTILITY_MENU} a {
+    color: ${Colors.white};
+    text-decoration: none;
+    text-transform: uppercase;
   }
 
   .${ELEMENT_UTILITY_MENU} > * {
@@ -317,12 +331,6 @@ let STYLES_NAVIGATION_UTILITY = `
     z-index: 999;
   }
 
-  .${ELEMENT_UTILITY_CONTAINTER} a {
-    color: ${Colors.white};
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
   ${LockStyles}
   ${WrapperStyles}
   ${LogoStyles}
@@ -376,7 +384,7 @@ const CreateSearchFormButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = EventAccessibilityFocus({
+    focusCallback = Accessibility.EventAccessibilityFocus({
       element: expandElement,
       action: () => eventClose(),
     });
@@ -441,7 +449,7 @@ const CreateMobileMenuButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = EventAccessibilityFocus({
+    focusCallback = Accessibility.EventAccessibilityFocus({
       element: expandElement,
       action: () => eventClose(),
     });

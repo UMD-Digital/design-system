@@ -1,6 +1,10 @@
 import { MarkupModify, Styles } from 'utilities';
 import TextElementModel from './_model/text';
-import { modifiers, type ModifierProps } from './_modifiers/style';
+import {
+  modifiers,
+  type ModifierProps,
+  type ElementStyles,
+} from './_modifiers/style';
 
 interface FontOptions {
   className: string;
@@ -9,7 +13,7 @@ interface FontOptions {
 
 interface HeadlineProps {
   element: HTMLElement;
-  elementStyles: Record<string, string>;
+  elementStyles: ElementStyles;
   isThemeDark?: boolean;
 }
 
@@ -25,6 +29,9 @@ const HeadlineConfig = {
       modifiers.animationLink(props),
       modifiers.fontStyles(props),
       modifiers.textColor(props),
+      modifiers.element(props),
+      modifiers.elementChild(props),
+      modifiers.elementSiblingAfter(props),
     ),
   elementModifiers: [applyMarkupAnimaitonSpan],
 };
@@ -36,7 +43,7 @@ const createHeadlineFactory = (props: HeadlineFactoryProps) => {
     config: HeadlineConfig,
     options: {
       fontStyles,
-      elementStyles,
+      ...elementStyles,
       isColorWhite: !isThemeDark,
     },
   });

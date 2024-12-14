@@ -16,7 +16,6 @@ const { convertJSSObjectToStyles } = Styles;
 export const CONSTANTS = {
   className: {
     wrapper: 'wrapper',
-    headline: 'headline',
     text: 'text',
     actions: 'actions',
   },
@@ -46,26 +45,26 @@ const STYLES_ALERT_TEXT = `
 `;
 
 const headlineStyles = {
-  element: `
-    color: ${Colors.black};
-    padding-right: ${Spacing.md};
-  `,
-  siblingAfter: `
-    margin-top: ${Spacing.sm};
-  `,
-  subElement: `
-      color: currentColor;
-  `,
+  element: {
+    color: Colors.black,
+    paddingRigh: Spacing.md,
+  },
+  siblingAfter: {
+    marginTop: Spacing.sm,
+  },
+  subElement: {
+    color: 'currentColor',
+  },
 };
 
 const richTextStyles = {
-  element: `
-    font-weight: 500;
-    color: ${Colors.gray.dark}
-  `,
-  siblingAfter: `
-    margin-top: ${Spacing.sm};
-  `,
+  element: {
+    color: Colors.gray.dark,
+    fontWeight: 500,
+  },
+  siblingAfter: {
+    marginTop: Spacing.sm,
+  },
 };
 
 export const CreateAlertText = (props: TypeAlertTextProps) => {

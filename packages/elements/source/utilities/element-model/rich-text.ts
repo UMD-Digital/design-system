@@ -1,7 +1,11 @@
 import { Elements } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import TextElementModel from './_model/text';
-import { modifiers, ModifierProps } from './_modifiers/style';
+import {
+  modifiers,
+  type ModifierProps,
+  type ElementStyles,
+} from './_modifiers/style';
 
 const { Text } = Elements;
 
@@ -12,7 +16,7 @@ interface FontOptions {
 
 interface RichTextProps {
   element: HTMLElement;
-  elementStyles: Record<string, string>;
+  elementStyles: ElementStyles;
   isThemeDark?: boolean;
 }
 
@@ -32,7 +36,7 @@ const createRichTextFactory = (props: RichTextFactoryProps) => {
   return new TextElementModel(className, element).createElement({
     config: simpleConfig,
     options: {
-      elementStyles,
+      ...elementStyles,
     },
   });
 };

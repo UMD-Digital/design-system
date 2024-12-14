@@ -66,7 +66,7 @@ const QUERY = `
 const ELEMENT_NAME = 'umd-element-nav-alert';
 export const ALERT_CONSTANTS = {
   URLS: {
-    DEFAULT: 'https://umd.edu/api/alerts',
+    DEFAULT: 'https://umd.edu/api/v2',
   },
   STORAGE_KEYS: {
     ALERT_TIME: 'umd-alert-time',

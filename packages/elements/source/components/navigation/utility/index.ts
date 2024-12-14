@@ -84,13 +84,22 @@ const WrapperStyles = `
     position: relative;
     min-height: 44px;
   }
+
+  .${ELEMENT_UTILITY_WRAPPER} > a {
+    color: ${Colors.white};
+    text-transform: uppercase;
+  }
+
+  .${ELEMENT_UTILITY_WRAPPER} > a:hover,
+  .${ELEMENT_UTILITY_WRAPPER} > a:focus {
+    text-decoration: underline;
+  }
 `;
 
 // prettier-ignore
 const MenuStyles = `
   .${ELEMENT_UTILITY_MENU} {
     display: flex;
-
   }
 
   @container (max-width: ${DESKTOP - 1}px) {
@@ -105,6 +114,12 @@ const MenuStyles = `
       align-items: center;
       justify-content: space-between;
     }
+  }
+
+  .${ELEMENT_UTILITY_MENU} a {
+    color: ${Colors.white};
+    text-decoration: none;
+    text-transform: uppercase;
   }
 
   .${ELEMENT_UTILITY_MENU} > * {
@@ -314,12 +329,6 @@ let STYLES_NAVIGATION_UTILITY = `
     background-color: ${Colors.red};
     position: relative;
     z-index: 999;
-  }
-
-  .${ELEMENT_UTILITY_CONTAINTER} a {
-    color: ${Colors.white};
-    text-decoration: none;
-    text-transform: uppercase;
   }
 
   ${LockStyles}

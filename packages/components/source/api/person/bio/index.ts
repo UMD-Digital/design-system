@@ -19,7 +19,7 @@ export const styles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${PersonBio.Styles}
   ${PersonBioFull.Styles}
 `;

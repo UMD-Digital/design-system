@@ -17,7 +17,7 @@ export const styles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${NavigationElements.Drawer.Styles}
   ${NavigationElements.MenuButton.Styles}
 `;

@@ -19,7 +19,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${PathwayHighlight.Styles}
   ${PathwayElements.Image.Styles}
   ${PathwayElements.Text.Styles}

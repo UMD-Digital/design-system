@@ -1,23 +1,9 @@
 const Node = {
-  span: ({ text }: { text: string }) => {
-    const span = document.createElement('span');
-    span.innerHTML = text;
-
-    return span;
-  },
-
   slot: ({ type }: { type: string }) => {
     const slot = document.createElement('slot');
     slot.setAttribute('name', type);
 
     return slot;
-  },
-
-  imageFromSvg: ({ SVG }: { SVG: string }) => {
-    const image = document.createElement('img');
-
-    image.src = `data:image/svg+xml;base64,${btoa(SVG)}`;
-    return image;
   },
 
   linkWithSpan: ({
@@ -43,6 +29,7 @@ const Node = {
 
     return link;
   },
+
   stylesTemplate: ({ styles }: { styles: string }) => {
     const template = document.createElement('template');
 

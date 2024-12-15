@@ -63,7 +63,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${CallToAction.Styles}
   ${PlainTextSlotStyles}
   ${OverwritePrimaryLayoutStyles}

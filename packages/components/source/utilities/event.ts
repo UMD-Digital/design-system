@@ -1,11 +1,38 @@
-import { DateUtility } from 'utilities';
+const createVisualFormattedDate = (date: Date) => {
+  return {
+    full: date.toLocaleString('en-US', {
+      month: 'short',
+      year: 'numeric',
+      day: 'numeric',
+    }),
+    dayOfWeekLong: date.toLocaleString('en-US', {
+      weekday: 'long',
+    }),
+    dayOfWeek: date.toLocaleString('en-US', {
+      weekday: 'short',
+    }),
+    month: date.toLocaleString('en-US', {
+      month: 'short',
+    }),
+    day: date.toLocaleString('en-US', {
+      day: 'numeric',
+    }),
+    time: date
+      .toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+      })
+      .replace(' AM', 'am')
+      .replace(' PM', 'pm'),
+  };
+};
 
-const CreateDate = ({ element }: { element: HTMLElement | Element | null }) => {
+const createDate = ({ element }: { element: HTMLElement | Element | null }) => {
   if (element && element.textContent) {
     const dateString = element.textContent.trim();
     const parsedDate = Date.parse(dateString);
     const date = new Date(parsedDate);
-    const formattedDate = DateUtility.CreateVisualFormattedDate(date);
+    const formattedDate = createVisualFormattedDate(date);
 
     return {
       dayOfWeek: formattedDate.dayOfWeek,
@@ -18,7 +45,7 @@ const CreateDate = ({ element }: { element: HTMLElement | Element | null }) => {
   return null;
 };
 
-const CreateDetailsData = ({
+const createDetailsData = ({
   locationElement,
   startDate,
   endDate,
@@ -49,6 +76,6 @@ const CreateDetailsData = ({
 };
 
 export default {
-  CreateDate,
-  CreateDetailsData,
+  createDate,
+  createDetailsData,
 };

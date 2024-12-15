@@ -7,7 +7,7 @@ const CreateStyleString = (styles: string) =>
 
 const { Colors } = Tokens;
 
-const Reset = `
+const reset = `
   :host {
     color: ${Colors.black};
   }
@@ -78,11 +78,11 @@ const Reset = `
   }
 `;
 
-const StylesTemplate = ({ styles }: { styles: string }) => {
+const stylesTemplate = ({ styles }: { styles: string }) => {
   const template = document.createElement('template');
-  template.innerHTML = `<style>${Reset}${CreateStyleString(styles)}</style>`;
+  template.innerHTML = `<style>${reset}${CreateStyleString(styles)}</style>`;
 
   return template;
 };
 
-export default StylesTemplate;
+export default stylesTemplate;

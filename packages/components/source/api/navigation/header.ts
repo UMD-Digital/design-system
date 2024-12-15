@@ -29,7 +29,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${NavigationElements.Drawer.Styles}
   ${NavigationHeader.Styles}
 `;

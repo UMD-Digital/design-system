@@ -93,7 +93,7 @@ const ContainerStyles = `
 `;
 
 const styles = `
-  ${Styles.ResetString}
+  ${Styles.resetString}
 
   :host {
     display: block;

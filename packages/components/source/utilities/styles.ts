@@ -83,6 +83,6 @@ const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
   }).css;
 
 export default {
-  ResetString: Reset,
+  resetString: Reset,
   convertJSSObjectToStyles,
 };

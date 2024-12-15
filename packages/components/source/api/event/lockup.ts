@@ -10,7 +10,6 @@ import { MarkupCreate, MarkupEvent, Styles } from 'utilities';
 
 const { EventLockupDate, EventElements } = Composite;
 const { Node } = MarkupCreate;
-const { ResetString } = Styles;
 
 // prettier-ignore
 const styles = `
@@ -18,7 +17,7 @@ const styles = `
     display: block;
   }
 
-  ${ResetString}
+  ${Styles.resetString}
   ${EventLockupDate.Styles}
 `;
 
@@ -32,8 +31,8 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   const endDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_END_ISO}"]`,
   );
-  const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
-  const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
+  const startDate = MarkupEvent.createDate({ element: startDateSlot });
+  const endDate = MarkupEvent.createDate({ element: endDateSlot });
 
   if (!startDate) {
     return EventLockupDate.CreateElement({
@@ -42,7 +41,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
     });
   }
 
-  const EventSignData = MarkupEvent.CreateDetailsData({
+  const EventSignData = MarkupEvent.createDetailsData({
     startDate,
     endDate,
   });

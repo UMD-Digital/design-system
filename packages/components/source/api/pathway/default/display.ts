@@ -19,7 +19,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${EventElements.Meta.Styles}
   ${EventElements.Sign.Styles}
   ${PathwayElements.Image.Styles}
@@ -53,8 +53,8 @@ const MakeCommonDefaultData = ({
     element.getAttribute(Attributes.names.LAYOUT_IMAGE_POSITION) !== 'left';
   const showTime = element.getAttribute(Attributes.names.SHOW_TIME) !== 'false';
 
-  const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
-  const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
+  const startDate = MarkupEvent.createDate({ element: startDateSlot });
+  const endDate = MarkupEvent.createDate({ element: endDateSlot });
   const obj = {
     ...CommonPathwayData({
       element,
@@ -75,7 +75,7 @@ const MakeCommonDefaultData = ({
   if (isThemeDark) themeToggle = false;
 
   if (startDate) {
-    const eventData = MarkupEvent.CreateDetailsData({
+    const eventData = MarkupEvent.createDetailsData({
       locationElement: locationSlot,
       startDate,
       endDate,

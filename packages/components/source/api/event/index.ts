@@ -19,7 +19,7 @@ const styles = `
     display: block;
   }
   
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${EventElements.Meta.Styles}
   ${EventElements.Sign.Styles}
   ${EventBlock.Styles}
@@ -52,22 +52,22 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const locationSlot = element.querySelector(
     `[slot="${Slots.name.contact.location}"]`,
   );
-  const startDate = MarkupEvent.CreateDate({ element: startDateSlot });
-  const endDate = MarkupEvent.CreateDate({ element: endDateSlot });
+  const startDate = MarkupEvent.createDate({ element: startDateSlot });
+  const endDate = MarkupEvent.createDate({ element: endDateSlot });
 
   if (!startDate) {
     console.error('Missing start date for event web component');
     return null;
   }
 
-  const EventDetailsData = MarkupEvent.CreateDetailsData({
+  const EventDetailsData = MarkupEvent.createDetailsData({
     locationElement: locationSlot,
     startDate,
     endDate,
   });
   const EventDetailMeta = { ...EventDetailsData, showTime };
 
-  const EventSignData = MarkupEvent.CreateDetailsData({
+  const EventSignData = MarkupEvent.createDetailsData({
     locationElement: locationSlot,
     startDate,
     endDate,

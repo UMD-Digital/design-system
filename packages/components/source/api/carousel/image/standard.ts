@@ -19,7 +19,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${CarouselImageStandard.Styles}
 `;
 

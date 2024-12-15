@@ -11,7 +11,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${HeroElements.Image.Styles}
   ${HeroElements.Text.Styles}
   ${HeroMinimal.Styles}

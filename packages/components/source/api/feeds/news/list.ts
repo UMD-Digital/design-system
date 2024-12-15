@@ -15,7 +15,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${FeedsNews.Styles}
 `;
 

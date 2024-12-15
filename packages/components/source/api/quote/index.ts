@@ -18,7 +18,7 @@ const styles = `
     display: block;
   }
   
-  ${Styles.ResetString}
+  ${Styles.resetString}
   ${QuoteElements.Text.Styles}
   ${QuoteFeatured.Styles}
   ${QuoteInline.Styles}

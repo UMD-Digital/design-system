@@ -1,7 +1,6 @@
 export * as Accessibility from './accessibility';
 export { AssetIcon, AssetLogo, AssetSocial } from './assets';
 export { default as DateUtility } from './date';
-export { default as ElementModel } from './element-model';
 export * as JavascriptEvents from './js-events';
 export * as Network from './network';
 export * as Performance from './performance';

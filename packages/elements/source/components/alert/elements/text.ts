@@ -1,5 +1,6 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { ElementModel, Styles } from 'utilities';
+import { Styles } from 'utilities';
+import { ElementModel } from 'model';
 
 export type TypeAlertTextProps = {
   headline?: HTMLElement | null;
@@ -74,7 +75,7 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   let styles = STYLES_ALERT_TEXT;
 
   if (headline) {
-    const headlineModel = ElementModel.headline.SansLargeHeadline({
+    const headlineModel = ElementModel.headline.sansLarge({
       ...props,
       elementStyles: headlineStyles,
       element: headline,

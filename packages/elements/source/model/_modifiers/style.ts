@@ -1,25 +1,11 @@
 import { Animations } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
+import { StyleModifierProps } from '../_types';
 
 export enum StyleType {
   Element = 'element',
   Child = 'child',
   SiblingAfter = 'sibling-after',
-}
-
-export interface ElementStyles {
-  element?: Record<string, any>;
-  siblingAfter?: Record<string, any>;
-  subElement?: Record<string, any>;
-}
-
-export interface ElementStyleOptions extends ElementStyles {
-  fontStyles?: Record<string, any>;
-  isColorWhite?: boolean;
-}
-
-export interface ModifierProps extends ElementStyleOptions {
-  className: string;
 }
 
 const Colors = {
@@ -54,22 +40,23 @@ const createStyleGenerator =
 
 const createModifier = (
   type: StyleType,
-  styleGetter: (props: ModifierProps) => Record<string, any>,
+  styleGetter: (props: StyleModifierProps) => Record<string, any>,
 ) => {
   const generateStyles = createStyleGenerator(type);
-  return (props: ModifierProps) =>
+  return (props: StyleModifierProps) =>
     generateStyles(props.className, styleGetter(props));
 };
 
 const styleGetters = {
-  animation: ({ isColorWhite }: ModifierProps) => ({
+  animation: ({ isColorWhite }: StyleModifierProps) => ({
     a: LinkAnimations[getColor(isColorWhite)],
   }),
-  font: ({ fontStyles }: ModifierProps) => fontStyles || {},
-  color: ({ isColorWhite }: ModifierProps) => Colors[getColor(isColorWhite)],
-  element: ({ element }: ModifierProps) => element || {},
-  sibling: ({ siblingAfter }: ModifierProps) => siblingAfter || {},
-  child: ({ subElement }: ModifierProps) => subElement || {},
+  font: ({ fontStyles }: StyleModifierProps) => fontStyles || {},
+  color: ({ isColorWhite }: StyleModifierProps) =>
+    Colors[getColor(isColorWhite)],
+  element: ({ element }: StyleModifierProps) => element || {},
+  sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
+  child: ({ subElement }: StyleModifierProps) => subElement || {},
 };
 
 export const modifiers = {

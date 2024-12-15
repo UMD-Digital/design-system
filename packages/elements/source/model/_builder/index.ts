@@ -1,23 +1,6 @@
-import {
-  type ElementStyleOptions,
-  type ModifierProps,
-} from '../_modifiers/style';
+import { type BuilderProps } from '../_types';
 
-interface ElementConfig {
-  styleModifiers?: (arg: ModifierProps) => string;
-  elementModifiers?: ((element: HTMLElement) => void)[];
-}
-
-export interface ModelProps {
-  config: ElementConfig;
-  options?: ElementStyleOptions;
-}
-
-export interface ElementConfigStyleProps extends ModelProps {
-  styles: string;
-}
-
-export default class TextElementModel {
+export default class ElementBuilder {
   private className: string;
   private element: HTMLElement;
 
@@ -26,13 +9,13 @@ export default class TextElementModel {
     this.element = element;
   }
 
-  createElement(props: ModelProps) {
+  createElement(props: BuilderProps) {
     const { config, options = {} } = props;
     const className = this.className;
     const element = this.element;
 
     if (!className || !element) {
-      throw new Error(`element & className is required for TextElementModel`);
+      throw new Error(`element & className is required for Element Builder`);
     }
 
     let styles = '';

@@ -15,13 +15,15 @@ const Default = {
 };
 
 const FixedStyles = {
-  display: 'block',
-  position: 'fixed',
-  left: '8px',
-  top: '30vh',
-  zIndex: '9999',
-
   [`@media (${Queries.tablet.min})`]: {
+    display: 'block',
+    position: 'fixed',
+    left: '0',
+    top: '30vh',
+    zIndex: '9999',
+  },
+
+  [`@media (${Queries.desktop.min})`]: {
     left: '40px',
   },
 };

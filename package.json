@@ -8,16 +8,10 @@
   "scripts": {
     "clean": "npx lerna run clean",
     "components": "npx lerna run start --scope=@universityofmaryland/web-components-library",
-    "components:build": "npx lerna run build --scope=@universityofmaryland/web-components-library",
+    "elemenbts": "npx lerna run start --scope=@universityofmaryland/web-elements-library",
     "variables": "npx lerna run start --scope=@universityofmaryland/variables",
-    "variables:build": "npx lerna run build --scope=@universityofmaryland/variables",
     "theme": "npx lerna run start --scope=@universityofmaryland/theme",
-    "theme:build": "npx lerna run build --scope=@universityofmaryland/theme",
-    "kitchen": "npx lerna run start --scope=@universityofmaryland/umd-design-system-kitchen-sink",
-    "kitchen:build": "npx lerna run build --scope=@universityofmaryland/umd-design-system-kitchen-sink",
-    "reset": "yarn clean && rm -rf node_modules && rm -rf packages/*/node_modules && yarn install --frozen-lock",
-    "scaffold": "yarn variables:build && yarn theme:build && yarn components:build && yarn kitchen:build",
-    "start": "yarn run variables & yarn run theme & yarn run components & yarn run kitchen"
+    "start": "yarn run variables & yarn run theme & yarn run elements & yarn run components"
   },
   "workspaces": [
     "packages/*"
@@ -40,10 +34,12 @@
     "typescript": "^5.5.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-shell-plugin-next": "^2.3.2"
   },
   "dependencies": {
     "lerna": "^7.4.1",
+    "postcss-discard-duplicates": "^7.0.1",
     "tailwindcss": "^3.3.5"
   }
 }

@@ -1,18 +1,6 @@
 import { SlotWithDefaultStyling } from './create';
 
-const ImageHasAlt = ({ image }: { image: HTMLImageElement }) => {
-  if (!image) return true;
-
-  const altText = image.getAttribute('alt');
-  if (!altText) {
-    console.error('Image elements require alt text');
-    return false;
-  }
-
-  return true;
-};
-
-const ImageAlt = ({
+const imageAlt = ({
   element,
   slotRef,
 }: {
@@ -32,6 +20,18 @@ const ImageAlt = ({
   return ImageHasAlt({ image });
 };
 
+const ImageHasAlt = ({ image }: { image: HTMLImageElement }) => {
+  if (!image) return true;
+
+  const altText = image.getAttribute('alt');
+  if (!altText) {
+    console.error('Image elements require alt text');
+    return false;
+  }
+
+  return true;
+};
+
 const ImageSlot = ({
   element,
   ImageSlot,
@@ -39,7 +39,7 @@ const ImageSlot = ({
   element: HTMLElement;
   ImageSlot: string;
 }) => {
-  const isProperImage = ImageAlt({ element, slotRef: ImageSlot });
+  const isProperImage = imageAlt({ element, slotRef: ImageSlot });
   const slotImage = SlotWithDefaultStyling({ element, slotRef: ImageSlot });
 
   if (isProperImage && slotImage) {
@@ -51,6 +51,5 @@ const ImageSlot = ({
 
 export default {
   ImageHasAlt,
-  ImageAlt,
   ImageSlot,
 };

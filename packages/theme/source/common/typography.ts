@@ -1,163 +1,59 @@
 import { Typography } from '@universityofmaryland/variables';
-import { Tokens } from '@universityofmaryland/variables';
 
-const fontWeight = Tokens.FontWeight;
+const {
+  ElementFonts,
+  CampaignFonts,
+  SansFonts,
+  SerifFonts,
+  StatisticFonts,
+  SansTransformationsFonts,
+} = Typography;
 
-export const campaign = {
-  '.umd-campaign-maximum': {
-    ...Typography.CampaignMaxium,
-  },
+interface FontEntry {
+  class: string;
+  [key: string]: any;
+}
 
-  '.umd-campaign-extralarge': {
-    ...Typography.CampaignExtralarge,
-  },
+interface FontInputFormat {
+  [key: string]: FontEntry;
+}
 
-  '.umd-campaign-large': {
-    ...Typography.CampaignLarge,
-  },
+interface FontOutputFormat {
+  [className: string]: {
+    [key: string]: any;
+  };
+}
 
-  '.umd-campaign-medium': {
-    ...Typography.CampaignMedium,
-  },
+interface FontFormatConverter {
+  (originalObject: FontInputFormat): FontOutputFormat;
+}
 
-  '.umd-campaign-small': {
-    ...Typography.CampaignSmall,
-  },
+const convertFontFormat: FontFormatConverter = (originalObject) => {
+  const newFormat: FontOutputFormat = {};
 
-  '.umd-campaign-extrasmall': {
-    ...Typography.CampaignExtraSmall,
-  },
+  for (const [key, value] of Object.entries(originalObject)) {
+    const typographyKey = `.${value.class}`;
+
+    newFormat[typographyKey] = {
+      ...value,
+    };
+  }
+
+  return newFormat;
 };
 
-export const serif = {
-  '.umd-serif-maximum': {
-    ...Typography.SerifMaxium,
-  },
-
-  '.umd-serif-extralarge': {
-    ...Typography.SerifExtralarge,
-  },
-
-  '.umd-serif-larger': {
-    ...Typography.SerifLarger,
-  },
-
-  '.umd-serif-large': {
-    ...Typography.SerifLarge,
-  },
-
-  '.umd-serif-medium': {
-    ...Typography.SerifMedium,
-  },
-};
-
-export const sans = {
-  '.umd-sans-maximum': {
-    ...Typography.SansMaxium,
-  },
-
-  '.umd-sans-largest': {
-    ...Typography.SansLargest,
-  },
-
-  '.umd-sans-extralarge': {
-    ...Typography.SansExtraLarge,
-  },
-
-  '.umd-sans-larger': {
-    ...Typography.SansLarger,
-  },
-
-  '.umd-sans-large': {
-    ...Typography.SansLarge,
-  },
-
-  '.umd-sans-medium': {
-    ...Typography.SansMedium,
-  },
-
-  '.umd-sans-small': {
-    ...Typography.SansSmall,
-  },
-
-  '.umd-sans-smaller': {
-    ...Typography.SansSmaller,
-  },
-
-  '.umd-sans-min': {
-    ...Typography.SansMin,
-  },
-};
-
-export const transforms = {
-  '.umd-sans-largest-uppercase': {
-    ...Typography.SansLargest,
-
-    fontWeight: fontWeight['extraBold'],
-    textTransform: 'uppercase',
-  },
-
-  '.umd-sans-extralarge-uppercase': {
-    ...Typography.SansExtraLarge,
-
-    fontWeight: fontWeight['extraBold'],
-    textTransform: 'uppercase',
-  },
-
-  '.umd-sans-extralarge-bold': {
-    ...Typography.SansExtraLarge,
-
-    fontWeight: fontWeight['bold'],
-  },
-
-  '.umd-sans-larger-bold': {
-    ...Typography.SansLarger,
-
-    fontWeight: fontWeight['bold'],
-  },
-};
-
-export const elements = {
-  '.umd-eyebrow': {
-    ...Typography.Eyebrow,
-  },
-
-  '.umd-label-sans-medium': {
-    ...Typography.LabelMedium,
-  },
-
-  '.umd-label-sans-small': {
-    ...Typography.LabelSmall,
-  },
-
-  '.umd-interactive-sans-medium': {
-    ...Typography.InterativeMedium,
-  },
-
-  '.umd-interactive-sans-small': {
-    ...Typography.InterativeSmall,
-  },
-};
-
-export const statistics = {
-  '.umd-statistic-sans-large': {
-    ...Typography.StatisticsLarge,
-  },
-
-  '.umd-statistic-sans-medium': {
-    ...Typography.StatisticsMedium,
-  },
-
-  '.umd-statistic-sans-small': {
-    ...Typography.StatisticsSmall,
-  },
-};
+export const campaign = convertFontFormat(CampaignFonts);
+export const elements = convertFontFormat(ElementFonts);
+export const sans = convertFontFormat(SansFonts);
+export const sansTransforms = convertFontFormat(SansTransformationsFonts);
+export const serif = convertFontFormat(SerifFonts);
+export const statistics = convertFontFormat(StatisticFonts);
 
 export default {
   ...campaign,
   ...serif,
   ...sans,
-  ...transforms,
+  ...sansTransforms,
   ...elements,
   ...statistics,
 };

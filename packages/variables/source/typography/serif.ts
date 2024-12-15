@@ -80,3 +80,30 @@ export const SerifMedium = {
   ...FontBase,
   ...SizeMedium,
 };
+
+export const SerifFonts = {
+  maximum: {
+    class: 'umd-serif-maximum',
+    ...SerifMaxium,
+  },
+
+  extraLarge: {
+    class: 'umd-serif-extralarge',
+    ...SerifExtralarge,
+  },
+
+  larger: {
+    class: 'umd-serif-larger',
+    ...SerifLarger,
+  },
+
+  large: {
+    class: 'umd-serif-large',
+    ...SerifLarge,
+  },
+
+  medium: {
+    class: 'umd-serif-medium',
+    ...SerifMedium,
+  },
+};

@@ -101,3 +101,47 @@ export const StatisticsSmall = {
   fontWeight: FontWeight['extraBold'],
   lineHeight: '0.87em',
 };
+
+export const ElementFonts = {
+  eyebrow: {
+    class: 'umd-eyebrow',
+    ...Eyebrow,
+  },
+
+  labelMedium: {
+    class: 'umd-label-sans-medium',
+    ...LabelMedium,
+  },
+
+  labelSmall: {
+    class: 'umd-label-sans-small',
+    ...LabelSmall,
+  },
+
+  medium: {
+    class: 'umd-interactive-sans-medium',
+    ...InterativeMedium,
+  },
+
+  small: {
+    class: 'umd-interactive-sans-small',
+    ...InterativeSmall,
+  },
+};
+
+export const StatisticFonts = {
+  eyebrow: {
+    class: 'umd-statistic-sans-large',
+    ...StatisticsLarge,
+  },
+
+  labelMedium: {
+    class: 'umd-statistic-sans-medium',
+    ...StatisticsMedium,
+  },
+
+  labelSmall: {
+    class: 'umd-statistic-sans-small',
+    ...StatisticsSmall,
+  },
+};

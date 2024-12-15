@@ -1,37 +1,15 @@
-import Accessibility from './accessibility';
-import Animation from './animation';
-import AssetIcon from './assets/icons';
-import AssetLogo from './assets/logos';
-import AssetSocial from './assets/social';
-import AssetServices from './assets/services';
-import DateUtility from './date';
-import EventsUtility from './events';
+// Deprecated - To be removed after conversion to the model
 import MarkupCreate from './markup/create';
-import MarkupEvent from './markup/event';
-import MarkupLocate from './markup/locate';
+
+import MarkupEvent from './event';
+
+// Deprecated - To be removed after conversion of the footer to elements
 import MarkupModify from './markup/modify';
+
+// Deprecated - To be removed after model slot conversion for extract and query
 import MarkupValidate from './markup/validate';
-import Network from './network';
-import Performance from './performance';
-import Storage from './storage';
+
+// Deprecated - To be removed after conversion to model
 import Styles from './styles';
 
-export {
-  Accessibility,
-  Animation,
-  AssetIcon,
-  AssetLogo,
-  AssetSocial,
-  AssetServices,
-  DateUtility,
-  EventsUtility,
-  MarkupCreate,
-  MarkupEvent,
-  MarkupLocate,
-  MarkupModify,
-  MarkupValidate,
-  Network,
-  Performance,
-  Storage,
-  Styles,
-};
+export { MarkupCreate, MarkupEvent, MarkupModify, MarkupValidate, Styles };

@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 ```js
 import { Components }
 
-const { CallToAction } = Components;
+const { CallToAction } = Composite;
 
 CallToAction.Load();
 ```

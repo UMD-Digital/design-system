@@ -132,3 +132,82 @@ export const SansMin = {
   fontFamily: FontFamily['sans'],
   ...SizeMin,
 };
+
+export const SansFonts = {
+  maximum: {
+    class: 'umd-sans-maximum',
+    ...SansMaxium,
+  },
+
+  largest: {
+    class: 'umd-sans-largest',
+    ...SansLargest,
+  },
+
+  extraLarge: {
+    class: 'umd-sans-extralarge',
+    ...SansExtraLarge,
+  },
+
+  larger: {
+    class: 'umd-sans-larger',
+    ...SansLarger,
+  },
+
+  large: {
+    class: 'umd-sans-large',
+    ...SansLarge,
+  },
+
+  medium: {
+    class: 'umd-sans-medium',
+    ...SansMedium,
+  },
+
+  small: {
+    class: 'umd-sans-small',
+    ...SansSmall,
+  },
+
+  smaller: {
+    class: 'umd-sans-smaller',
+    ...SansSmaller,
+  },
+
+  min: {
+    class: 'umd-sans-min',
+    ...SansMin,
+  },
+};
+
+export const SansTransformationsFonts = {
+  largestUppercase: {
+    class: 'umd-sans-largest-uppercase',
+    ...SansLargest,
+
+    fontWeight: FontWeight['extraBold'],
+    textTransform: 'uppercase',
+  },
+
+  extraLargeUppercase: {
+    class: 'umd-sans-extralarge-uppercase',
+    ...SansExtraLarge,
+
+    fontWeight: FontWeight['extraBold'],
+    textTransform: 'uppercase',
+  },
+
+  extraLargeBold: {
+    class: 'umd-sans-extralarge-bold',
+    ...SansExtraLarge,
+
+    fontWeight: FontWeight['bold'],
+  },
+
+  largerBold: {
+    class: 'umd-sans-larger-bold',
+    ...SansLarger,
+
+    fontWeight: FontWeight['bold'],
+  },
+};

@@ -1,7 +1,7 @@
 import { Macros } from '@universityofmaryland/web-elements-library';
 import { Model, Register } from 'model';
 
-const { AnimationBrandLogo } = Macros;
+const { FearlessScrollChevrons } = Macros;
 
 const tagName = 'umd-element-brand-logo-animation';
 
@@ -10,7 +10,7 @@ const Load = () => {
     name: tagName,
     element: Model.createCustomElement({
       tagName,
-      createComponent: () => AnimationBrandLogo(),
+      createComponent: () => FearlessScrollChevrons(),
     }),
   });
 };

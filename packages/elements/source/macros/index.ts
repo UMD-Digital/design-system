@@ -1,11 +1,12 @@
 // Accessibility
 export { default as AriaLive } from './accessibility/aria-live';
 
-// Animations
-export { default as AnimationBrandLogo } from './animations/brand-logo';
 export { default as AnimationOverlayBrand } from './animations/overlay-brand';
 export { default as AnimationLoader } from './animations/loader';
 export { default as AnimationIndicator } from './animations/indicator';
+
+// Brand
+export { default as FearlessScrollChevrons } from './brand/fearless-scroll-chevrons';
 
 // Carousel Animations
 export { default as AnimationCarouselBlocks } from './animations/carousel-blocks';

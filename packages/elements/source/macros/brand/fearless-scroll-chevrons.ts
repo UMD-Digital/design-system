@@ -2,8 +2,8 @@ import { Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Queries } = Tokens;
 
-const ICON_CHEVRON_BIG = `<svg width="252" height="306" viewBox="0 0 252 306" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M126 0H0L126 152.706L0 305.411H126L252 152.706L126 0Z" /></svg>`;
-const ICON_CHEVRON_SMALL = `<svg width="144" height="202" viewBox="0 0 144 202" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60.3972 0H0L83.6028 100.765L0 201.529H60.3972L144 100.765L60.3972 0Z" /></svg>`;
+const ICON_CHEVRON_BIG = `<svg width="252" height="306" aria-hidden="true" viewBox="0 0 252 306" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M126 0H0L126 152.706L0 305.411H126L252 152.706L126 0Z" /></svg>`;
+const ICON_CHEVRON_SMALL = `<svg width="144" height="202" aria-hidden="true"  viewBox="0 0 144 202" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60.3972 0H0L83.6028 100.765L0 201.529H60.3972L144 100.765L60.3972 0Z" /></svg>`;
 
 const ELEMENT_ANIMATION_BRAND_LOGO = 'brand-logo-container';
 const ELEMENT_FIRST_CHEVRON = 'brand-logo-first-chevron';
@@ -152,7 +152,7 @@ const STYLES_ANIMATION_BRAND_LOGO = `
   ${ThirdChevronStyles} 
 `;
 
-const CreateAnimationBrandLogo = () =>
+const CreateFearlessScrollChevrons = () =>
   (() => {
     const container = document.createElement('div');
     const first = document.createElement('div');
@@ -172,10 +172,11 @@ const CreateAnimationBrandLogo = () =>
     container.appendChild(first);
     container.appendChild(second);
     container.appendChild(third);
+
     return {
       element: container,
       styles: STYLES_ANIMATION_BRAND_LOGO,
     };
   })();
 
-export default CreateAnimationBrandLogo;
+export default CreateFearlessScrollChevrons;

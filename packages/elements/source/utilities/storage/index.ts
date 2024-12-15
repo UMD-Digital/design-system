@@ -1,5 +1,1 @@
-import * as local from './local';
-
-export default {
-  local,
-};
+export * as local from './local';

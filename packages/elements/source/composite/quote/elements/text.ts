@@ -1,5 +1,5 @@
 import { Typography, Layout, Tokens } from '@universityofmaryland/variables';
-import { Styles, AssetIcon } from 'utilities';
+import { Styles, Asset } from 'utilities';
 
 export type TypeQuoteTextContainer = {
   quote: HTMLElement | null;
@@ -200,7 +200,7 @@ const CreateQuoteTextContainer = ({
 
   if (quote) {
     const iconSpan = document.createElement('span');
-    iconSpan.innerHTML = AssetIcon.QUOTE;
+    iconSpan.innerHTML = Asset.icon.QUOTE;
 
     quote.appendChild(iconSpan);
     quote.classList.add(TEXT_CONTAINER_QUOTE_WRAPPER);

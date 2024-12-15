@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import { Asset, Styles } from 'utilities';
 
 export type TypeActionProps = {
   GetContainer: () => Element | null;
@@ -97,7 +97,7 @@ const CreateSlideButton = ({
   button.classList.add(ELEMENT_SLIDE_ACTION_BUTTON);
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next level of navigation');
-  button.innerHTML = AssetIcon.CHEVRON_SMALL;
+  button.innerHTML = Asset.icon.CHEVRON_SMALL;
   button.addEventListener('click', () => {
     setUpcomingSlide(childReference);
     eventSlideLeft();

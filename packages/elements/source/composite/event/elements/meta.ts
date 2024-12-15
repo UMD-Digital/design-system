@@ -1,5 +1,5 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
-import { Styles, AssetIcon } from 'utilities';
+import { Asset, Styles } from 'utilities';
 
 type LocationType = {
   title: string;
@@ -193,7 +193,7 @@ const DateText = ({
   }
 
   return MakeDetailItem({
-    icon: AssetIcon.CALENDAR,
+    icon: Asset.icon.CALENDAR,
     text,
   });
 };
@@ -206,7 +206,7 @@ const TimeText = ({ startTime, endTime }: DateDisplayType) => {
   }
 
   return MakeDetailItem({
-    icon: AssetIcon.CLOCK,
+    icon: Asset.icon.CLOCK,
     text,
   });
 };
@@ -241,7 +241,7 @@ const CreateEventMetaElement = (info: TypeMetaDisplay) => {
   if (location && location.length > 0) {
     wrapper.appendChild(
       MakeDetailItem({
-        icon: AssetIcon.PIN,
+        icon: Asset.icon.PIN,
         text: location[0].title,
         style: ELEMENT_EVENTS_DATE_ROW_LOCATION,
       }),

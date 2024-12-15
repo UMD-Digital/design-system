@@ -1,5 +1,5 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { AssetIcon, Storage, Styles } from 'utilities';
+import { Asset, Storage, Styles } from 'utilities';
 import AlertText, {
   CONSTANTS as TEXT_CONSTANTS,
   TypeAlertTextProps,
@@ -105,7 +105,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(ELEMENT_ALERT_SITE_CLOSE_BUTTON);
-  closeButton.innerHTML = AssetIcon.CLOSE_BUTTON;
+  closeButton.innerHTML = Asset.icon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
     Styles.animations.shrinkThenRemove({ container });

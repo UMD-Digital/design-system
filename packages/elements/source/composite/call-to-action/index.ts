@@ -3,7 +3,7 @@ import {
   Typography,
   Animations,
 } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import { Asset, Styles } from 'utilities';
 
 const { InterativeSmall } = Typography;
 
@@ -299,27 +299,27 @@ const CreateLinkIcon = ({
   }
 
   if (type === TYPE_SECONDARY) {
-    wrapper.innerHTML = AssetIcon.FEARLESS;
+    wrapper.innerHTML = Asset.icon.FEARLESS;
     wrapper.appendChild(textSpan);
   }
 
   if (!isLink) return;
 
   if (isMail) {
-    wrapper.innerHTML = AssetIcon.EMAIL;
+    wrapper.innerHTML = Asset.icon.EMAIL;
     wrapper.appendChild(textSpan);
     wrapper.setAttribute('data-email', '');
     return;
   }
 
   if (isExternalTab) {
-    wrapper.innerHTML = AssetIcon.NEW_WINDOW;
+    wrapper.innerHTML = Asset.icon.NEW_WINDOW;
     wrapper.appendChild(textSpan);
     return;
   }
 
   if (isDownload) {
-    wrapper.innerHTML = AssetIcon.DOCUMENT;
+    wrapper.innerHTML = Asset.icon.DOCUMENT;
     wrapper.appendChild(textSpan);
     return;
   }

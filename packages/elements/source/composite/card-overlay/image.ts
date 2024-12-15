@@ -2,7 +2,7 @@ import { Tokens } from '@universityofmaryland/variables';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 import { BlockOverlay as LayoutBlockOverlay } from 'layout';
 import { TextLockupSmall } from 'macros';
-import { AssetIcon } from 'utilities';
+import { Asset } from 'utilities';
 
 type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
   image: HTMLImageElement | HTMLAnchorElement | null;
@@ -14,7 +14,6 @@ type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
 };
 
 const { Spacing, Colors } = Tokens;
-const { QUOTE } = AssetIcon;
 
 const ELEMENT_NAME = 'umd-card-overlay-image';
 const ATTRIBUTE_CTA_ICON = 'cta-icon';
@@ -89,7 +88,7 @@ const CreateCardOverlayElement = (props: TypeCardOverlayImageElement) => {
       if (lockup) {
         const quoteWrapper = document.createElement('div');
         quoteWrapper.classList.add(ELEMENT_CARD_OVERLAY_QUOTE);
-        quoteWrapper.innerHTML = QUOTE;
+        quoteWrapper.innerHTML = Asset.icon.QUOTE;
 
         lockup.insertBefore(quoteWrapper, lockup.firstChild);
       }

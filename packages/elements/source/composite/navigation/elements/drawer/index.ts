@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { Accessibility, AssetIcon } from 'utilities';
+import { Accessibility, Asset } from 'utilities';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
 import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
 
@@ -94,7 +94,7 @@ const STYLES_NAV_DRAWER_ELEMENT = `
 const CreateDrawerButton = (element: TypeDrawerCloseButton) => {
   const drawerCloseButton = document.createElement('button');
 
-  drawerCloseButton.innerHTML = AssetIcon.X;
+  drawerCloseButton.innerHTML = Asset.icon.X;
   drawerCloseButton.classList.add(ELEMENT_NAV_DRAWER_CLOSE_BUTTON);
   drawerCloseButton.addEventListener('click', element.eventClose.bind(element));
 

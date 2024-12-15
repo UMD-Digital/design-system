@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 import { ButtonFullScreen } from 'atomic';
-import { AssetIcon, JavascriptEvents, Performance, Styles } from 'utilities';
+import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -321,7 +321,7 @@ const CreateButton = ({
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
   button.classList.add(ELEMENT_ANIMATION_CAROUSEL_BUTTON);
-  button.innerHTML = AssetIcon.FORWARD_ARROW;
+  button.innerHTML = Asset.icon.FORWARD_ARROW;
 
   if (isRight) {
     button.classList.add(ELEMENT_ANIMATION_CAROUSEL_NEXT);

@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon, AssetSocial } from 'utilities';
+import { Asset } from 'utilities';
 
 export type TypeContactProps = {
   phone?: HTMLElement | null;
@@ -143,7 +143,7 @@ const MakeContactLink = ({
   icon: string;
 }) => {
   if (!element) return null;
-  if (!element.getAttribute('href') && icon === AssetIcon.PIN) {
+  if (!element.getAttribute('href') && icon === Asset.icon.PIN) {
     return MakeContactText({ element, icon });
   }
   if (!element.hasAttribute('href')) return null;
@@ -184,7 +184,7 @@ const CreatePersonContactContainer = ({
   if (phone) {
     const phoneLink = MakeContactLink({
       element: phone,
-      icon: AssetIcon.PHONE,
+      icon: Asset.icon.PHONE,
     });
     if (phoneLink) container.appendChild(phoneLink);
   }
@@ -192,7 +192,7 @@ const CreatePersonContactContainer = ({
   if (email) {
     const emailLink = MakeContactLink({
       element: email,
-      icon: AssetIcon.EMAIL,
+      icon: Asset.icon.EMAIL,
     });
     if (emailLink) container.appendChild(emailLink);
   }
@@ -200,13 +200,13 @@ const CreatePersonContactContainer = ({
   if (linkendIn) {
     const link = MakeContactLink({
       element: linkendIn,
-      icon: AssetSocial.LINKEDIN,
+      icon: Asset.social.LINKEDIN,
     });
     if (link) container.appendChild(link);
   }
 
   if (address) {
-    const link = MakeContactLink({ element: address, icon: AssetIcon.PIN });
+    const link = MakeContactLink({ element: address, icon: Asset.icon.PIN });
     if (link) container.appendChild(link);
   }
 

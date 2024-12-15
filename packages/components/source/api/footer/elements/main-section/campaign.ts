@@ -4,7 +4,7 @@ import { VARIABLES } from '../../globals';
 import { UMDFooterElement } from '../../index';
 
 const { Spacing } = Tokens;
-const { AssetLogo } = Utilities;
+const { Asset } = Utilities;
 
 const { THEME_OPTION_LIGHT } = VARIABLES;
 
@@ -36,8 +36,8 @@ export const CreateCampaignRow = ({
 
   link.innerHTML =
     theme === THEME_OPTION_LIGHT
-      ? AssetLogo.CAMPAIGN_LOGO_DARK
-      : AssetLogo.CAMPAIGN_LOGO;
+      ? Asset.logo.CAMPAIGN_LOGO_DARK
+      : Asset.logo.CAMPAIGN_LOGO;
 
   container.classList.add(CAMPAIGN_COLUMN_WRAPPER);
   container.appendChild(link);

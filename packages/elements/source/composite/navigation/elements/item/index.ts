@@ -1,11 +1,5 @@
 import { Tokens, Animations } from '@universityofmaryland/variables';
-import {
-  AssetIcon,
-  Accessibility,
-  Performance,
-  Markup,
-  Styles,
-} from 'utilities';
+import { Asset, Accessibility, Performance, Markup, Styles } from 'utilities';
 
 type TypePrimaryLinkRequirements = {
   primaryLinkContainer?: HTMLElement | null;
@@ -319,7 +313,7 @@ const CreateButton = ({
   const button = document.createElement('button');
 
   button.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON);
-  button.innerHTML = AssetIcon.CHEVRON_SMALL;
+  button.innerHTML = Asset.icon.CHEVRON_SMALL;
   button.addEventListener('click', () => buttonClick());
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', `nav-links-`);

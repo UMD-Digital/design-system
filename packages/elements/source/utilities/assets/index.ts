@@ -1,3 +1,3 @@
-export * as AssetIcon from './icons';
-export * as AssetLogo from './logos';
-export * as AssetSocial from './social';
+export * as icon from './icons';
+export * as logo from './logos';
+export * as social from './social';

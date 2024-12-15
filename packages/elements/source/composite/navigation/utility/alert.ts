@@ -5,7 +5,7 @@ import {
   Typography,
 } from '@universityofmaryland/variables';
 import Actions from 'composite/call-to-action';
-import { AssetIcon, Network, Styles } from 'utilities';
+import { Asset, Network, Styles } from 'utilities';
 
 type AlertData = {
   id: string;
@@ -354,7 +354,7 @@ const createCloseButton = (container: HTMLElement): HTMLButtonElement => {
     'aria-label': 'remove alert',
   }) as HTMLButtonElement;
 
-  button.innerHTML = AssetIcon.X;
+  button.innerHTML = Asset.icon.X;
   button.addEventListener('click', () => {
     const cachedAlert = getStoredValue<AlertData>(
       ALERT_CONSTANTS.STORAGE_KEYS.ALERT,

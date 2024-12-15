@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Styles, Markup } from 'utilities';
+import { Asset, Markup, Styles } from 'utilities';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';
 
@@ -114,7 +114,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
   const backButtonContainer = document.createElement('div');
   const slideBackButton = document.createElement('button');
 
-  slideBackButton.innerHTML = `${AssetIcon.CHEVRON_SMALL} Back`;
+  slideBackButton.innerHTML = `${Asset.icon.CHEVRON_SMALL} Back`;
   slideBackButton.setAttribute('type', 'button');
   slideBackButton.setAttribute('aria-label', 'Previous level of navigation');
   slideBackButton.addEventListener('click', () => {

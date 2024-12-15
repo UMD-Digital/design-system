@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import { Asset, Styles } from 'utilities';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item/';
 
@@ -217,7 +217,7 @@ const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
 
   searchLink.href = searchUrl;
   searchLink.ariaLabel = 'Visit the search page';
-  searchLink.innerHTML = AssetIcon.MAGNIFY_GLASS;
+  searchLink.innerHTML = Asset.icon.MAGNIFY_GLASS;
   searchLink.classList.add(ELEMENT_HEADER_MENU_SEARCH);
 
   return searchLink;

@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon } from 'utilities';
+import { Asset } from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
 
@@ -91,7 +91,7 @@ const CreatePersonBlockElement = (props: TypeBlockPersonProps) => {
   const elementWrapper = document.createElement('div');
   const personContainer = PersonTextContainer.CreateElement(props);
   const imageContainer = PersonImage.CreateElement({
-    image: providedImage || AssetIcon.PERSON,
+    image: providedImage || Asset.icon.PERSON,
   });
 
   if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);

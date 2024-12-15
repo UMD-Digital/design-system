@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import { Asset, Styles } from 'utilities';
 import AlertText, { TypeAlertTextProps } from './elements/text';
 
 type TypeShouldShowProps = {
@@ -101,7 +101,7 @@ const STYLES_ALERT_PAGE_ELEMENT = `
 
 const CreateIcon = () => {
   const iconWrapper = document.createElement('div');
-  let icon = AssetIcon.NOTIFICATION;
+  let icon = Asset.icon.NOTIFICATION;
 
   iconWrapper.classList.add(ELEMENT_ALERT_PAGE_ICON);
   iconWrapper.innerHTML = icon;
@@ -113,7 +113,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(ELEMENT_ALERT_PAGE_CLOSE_BUTTON);
-  closeButton.innerHTML = AssetIcon.CLOSE_BUTTON;
+  closeButton.innerHTML = Asset.icon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
     Styles.animations.shrinkThenRemove({ container });

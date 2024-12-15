@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon } from 'utilities';
+import { Asset } from 'utilities';
 import { CreateModal, STYLES_MODAL } from './modal';
 
 type TypeFixedFullScreenProps = {
@@ -44,7 +44,7 @@ const CreateFixedFullScreen = ({
   closeButton.setAttribute('type', 'button');
   closeButton.setAttribute('aria-label', 'Close');
   closeButton.classList.add(ELEMENT_CLOSE_BUTTON);
-  closeButton.innerHTML = AssetIcon.X;
+  closeButton.innerHTML = Asset.icon.X;
   closeButton.addEventListener('click', modal.events.hide);
 
   modal.element.appendChild(closeButton);

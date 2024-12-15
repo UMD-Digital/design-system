@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Styles } from 'utilities';
+import { Asset, Styles } from 'utilities';
 
 const { Colors, Spacing } = Tokens;
 const { SansMin } = Typography;
@@ -51,7 +51,7 @@ const CreateFullScreenButton = ({
     button.addEventListener('click', () => {
       callback(index);
     });
-    button.innerHTML = `Full Screen <span></span>${AssetIcon.FULL_SCREEN}`;
+    button.innerHTML = `Full Screen <span></span>${Asset.icon.FULL_SCREEN}`;
 
     return button;
   })();

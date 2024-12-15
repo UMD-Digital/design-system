@@ -4,7 +4,7 @@ import {
   Typography,
   Elements,
 } from '@universityofmaryland/variables';
-import { Styles, AssetLogo } from 'utilities';
+import { Styles, Asset } from 'utilities';
 
 type TypeBannerPromoProps = {
   headline?: HTMLElement | null;
@@ -219,7 +219,7 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
     }
 
     if (includeSeal) {
-      let seal = AssetLogo.SEAL_WHITE;
+      let seal = Asset.logo.SEAL_WHITE;
 
       container.innerHTML = `${seal}`;
     }

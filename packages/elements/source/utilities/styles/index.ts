@@ -1,27 +1,18 @@
 import postcss from 'postcss';
-import * as animations from './animations';
-import * as assets from './assets';
-import * as fonts from './fonts';
 
 const postcssNesting = require('postcss-nesting');
-
 const postcssJs = require('postcss-js');
 
-const combineStyles = (...styles: string[]) => styles.join('');
+export * as animations from './animations';
+export * as assets from './assets';
+export * as fonts from './fonts';
 
-const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
+export const combineStyles = (...styles: string[]) => styles.join('');
+
+export const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
   postcss([postcssNesting]).process(styleObj, {
     parser: postcssJs,
   }).css;
 
-const convertPixelStringToNumber = (styleStr: string) =>
+export const convertPixelStringToNumber = (styleStr: string) =>
   parseInt(styleStr.replace('px', ''));
-
-export default {
-  animations,
-  assets,
-  fonts,
-  combineStyles,
-  convertJSSObjectToStyles,
-  convertPixelStringToNumber,
-};

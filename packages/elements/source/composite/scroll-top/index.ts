@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon, Performance } from 'utilities';
+import { Asset, Performance } from 'utilities';
 
 type TypeScrollTopProps = {
   isFixed?: boolean;
@@ -118,7 +118,7 @@ const CreateScrollTopElement = (props: TypeScrollTopProps) =>
         behavior: 'smooth',
       });
     });
-    container.innerHTML = AssetIcon.ARROW;
+    container.innerHTML = Asset.icon.ARROW;
     container.appendChild(text);
 
     declaration.appendChild(container);

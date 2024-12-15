@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, JavascriptEvents, Performance, Styles } from 'utilities';
+import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;
@@ -323,7 +323,7 @@ const CreateBackButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = AssetIcon.BACK_ARROW;
+  button.innerHTML = Asset.icon.BACK_ARROW;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK);
   button.style.display = 'none';
@@ -350,7 +350,7 @@ const CreateForwardButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = AssetIcon.FORWARD_ARROW;
+  button.innerHTML = Asset.icon.FORWARD_ARROW;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD);
   button.setAttribute('type', 'button');

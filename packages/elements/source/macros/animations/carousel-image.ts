@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon, JavascriptEvents, Performance, Styles } from 'utilities';
+import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
 
 const { Colors, Spacing } = Tokens;
 
@@ -98,7 +98,7 @@ const CreateButton = ({
   const button = document.createElement('button');
   button.setAttribute('type', 'button');
   button.classList.add(ELEMENT_CAROUSEL_SLIDER_BUTTON);
-  button.innerHTML = AssetIcon.FORWARD_ARROW;
+  button.innerHTML = Asset.icon.FORWARD_ARROW;
 
   if (!isRight) {
     button.setAttribute('aria-label', 'Previous');

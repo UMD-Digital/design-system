@@ -1,5 +1,5 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
-import { Accessibility, AssetIcon, Styles } from 'utilities';
+import { Accessibility, Asset, Styles } from 'utilities';
 import {
   createNavAlert,
   STYLES_NAV_ALERT,
@@ -392,7 +392,7 @@ const CreateSearchFormButton = ({
 
   button.setAttribute('aria-label', 'enable the search form');
   button.setAttribute('type', 'button');
-  button.innerHTML = `${AssetIcon.MAGNIFY_GLASS}`;
+  button.innerHTML = `${Asset.icon.MAGNIFY_GLASS}`;
   button.setAttribute('aria-controls', UtilitySearch.Elements.form);
   button.classList.add(ELEMENT_UTILITY_SEARCH_BUTTON);
   button.setAttribute('aria-expanded', 'false');
@@ -455,7 +455,7 @@ const CreateMobileMenuButton = ({
     });
   };
 
-  button.innerHTML = `${AssetIcon.CHEVRON_SMALL}`;
+  button.innerHTML = `${Asset.icon.CHEVRON_SMALL}`;
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'toggle mobile menu');
   button.setAttribute('aria-controls', `${ELEMENT_UTILITY_MOBILE_MENU}`);

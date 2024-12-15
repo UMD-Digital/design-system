@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { AssetIcon, AssetSocial, Performance } from 'utilities';
+import { Asset, Performance } from 'utilities';
 
 type TypeSocialSharingProps = {
   isFixed?: boolean;
@@ -105,7 +105,7 @@ const STYLES_SOCIAL_SHARING_ELEMENT = `
 const CreateFacebook = () => {
   const button = document.createElement('button');
 
-  button.innerHTML = AssetSocial.FACEBOOK;
+  button.innerHTML = Asset.social.FACEBOOK;
   button.setAttribute('aria-label', 'share this page on facebook');
 
   button.addEventListener('click', () => {
@@ -126,7 +126,7 @@ const CreateFacebook = () => {
 const CreateTwitter = ({ url, title }: { url: string; title: string }) => {
   const button = document.createElement('button');
 
-  button.innerHTML = AssetSocial.X;
+  button.innerHTML = Asset.social.X;
   button.setAttribute('aria-label', 'share this page on twitter');
 
   button.addEventListener('click', () => {
@@ -145,7 +145,7 @@ const CreateEmail = ({ url, title }: { url: string; title: string }) => {
   link.setAttribute('aria-label', 'email this page');
   link.setAttribute('target', '_blank');
 
-  link.innerHTML = AssetIcon.EMAIL;
+  link.innerHTML = Asset.icon.EMAIL;
 
   return link;
 };
@@ -153,7 +153,7 @@ const CreateEmail = ({ url, title }: { url: string; title: string }) => {
 const CreatePrint = () => {
   const button = document.createElement('button');
 
-  button.innerHTML = AssetIcon.PRINTER;
+  button.innerHTML = Asset.icon.PRINTER;
   button.setAttribute('aria-label', 'print this page');
   button.addEventListener('click', () => window.print());
 

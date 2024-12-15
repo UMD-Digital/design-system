@@ -3,7 +3,7 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { MarkupModify, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import PersonContact, { TypeContactProps } from './contact';
 
 export type TypePersonProps = TypeContactProps & {
@@ -187,7 +187,7 @@ const CreatePersonTextContainer = (person: TypePersonProps) => {
 
   if (name) {
     name.classList.add(ELEMENT_PERSON_NAME_CONTAINER);
-    MarkupModify.AnimationLinkSpan({ element: name });
+    Markup.modify.animationLinkSpan({ element: name });
     wrapper.appendChild(name);
   }
 

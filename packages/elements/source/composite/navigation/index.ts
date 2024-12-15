@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, MarkupCreate, Styles } from 'utilities';
+import { AssetIcon, Styles } from 'utilities';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item/';
 

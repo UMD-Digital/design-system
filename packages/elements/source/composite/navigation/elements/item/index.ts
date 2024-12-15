@@ -3,7 +3,7 @@ import {
   AssetIcon,
   Accessibility,
   Performance,
-  MarkupModify,
+  Markup,
   Styles,
 } from 'utilities';
 
@@ -34,7 +34,6 @@ export type TypeNavItemRequirements = TypeDropdownProps &
 type TypeNavItem = TypeNavItemRequirements;
 
 const { Colors, Spacing, FontFamily, FontSize } = Tokens;
-const { AnimationLinkSpan } = MarkupModify;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-element-nav-item';
@@ -249,11 +248,11 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
   const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
 
   firstColumnLinks.forEach((link) => {
-    MarkupModify.AnimationLinkSpan({ element: link });
+    Markup.modify.animationLinkSpan({ element: link });
     column1.appendChild(link);
   });
   links.forEach((link) => {
-    MarkupModify.AnimationLinkSpan({ element: link });
+    Markup.modify.animationLinkSpan({ element: link });
     column2.appendChild(link);
   });
 
@@ -263,7 +262,7 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
 const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   const container = document.createElement('div');
   links.forEach((link) => {
-    MarkupModify.AnimationLinkSpan({ element: link });
+    Markup.modify.animationLinkSpan({ element: link });
     container.appendChild(link);
   });
 
@@ -387,7 +386,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
         const hasSpan = link.querySelector('span');
 
         if (!hasSpan) {
-          AnimationLinkSpan({ element: link });
+          Markup.modify.animationLinkSpan({ element: link });
           link.appendChild(link);
         }
       });

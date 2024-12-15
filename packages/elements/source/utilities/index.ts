@@ -7,10 +7,4 @@ export * as Performance from './performance';
 export { default as Storage } from './storage';
 export { default as Styles } from './styles';
 
-export {
-  MarkupCreate,
-  MarkupEvent,
-  MarkupLocate,
-  MarkupModify,
-  MarkupValidate,
-} from './markup';
+export * as Markup from './markup';

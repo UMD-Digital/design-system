@@ -4,7 +4,7 @@ import {
   Typography,
 } from '@universityofmaryland/variables';
 import EventElements from './elements';
-import { MarkupModify, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
 type TypeEventLockupDate = {
   headline: HTMLElement | null;
@@ -92,14 +92,14 @@ const CreateEventLockupDate = (props: TypeEventLockupDate) => {
   }
 
   if (headline) {
-    const modifiedText = MarkupModify.TruncateText({
+    const modifiedText = Markup.modify.truncateText({
       text: headline.innerHTML,
       maxTextSize: 50,
     });
 
     headline.innerHTML = modifiedText;
     headline.classList.add(EVENT_HEADLINE);
-    MarkupModify.AnimationLinkSpan({ element: headline });
+    Markup.modify.animationLinkSpan({ element: headline });
     container.appendChild(headline);
   }
 

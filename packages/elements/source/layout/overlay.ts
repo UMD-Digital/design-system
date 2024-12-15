@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MarkupCreate, MarkupModify, Performance } from 'utilities';
+import { Markup, Performance } from 'utilities';
 import { TextLockupSmallScaling, type TypeTextLockupSmall } from 'macros';
 
 export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
@@ -161,7 +161,7 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
 
   const sizeElements = () => {
     if (text && textCopy) {
-      const modifiedText = MarkupModify.TruncateTextBasedOnSize({
+      const modifiedText = Markup.modify.truncateTextBasedOnSize({
         text: textCopy,
         size: elementContainer.offsetWidth,
       });
@@ -190,7 +190,7 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
   elementDeclaration.appendChild(elementContainer);
 
   sizeElements();
-  MarkupCreate.CreateGif({ container: imageWrapper });
+  Markup.create.gif({ container: imageWrapper });
   window.addEventListener('resize', Performance.debounce(sizeElements, 50));
 
   return elementDeclaration;

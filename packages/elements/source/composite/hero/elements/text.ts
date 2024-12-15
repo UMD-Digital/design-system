@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { MarkupModify, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
 type TypeTextProps = {
   isTextCenter?: boolean;
@@ -162,7 +162,7 @@ const CreateBody = ({
   }
 
   if (headline) {
-    MarkupModify.AnimationLinkSpan({ element: headline });
+    Markup.modify.animationLinkSpan({ element: headline });
     headline.classList.add(ELEMENTS_HERO_HEADLINE);
     container.appendChild(headline);
   }

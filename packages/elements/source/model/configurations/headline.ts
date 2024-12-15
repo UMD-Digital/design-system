@@ -1,4 +1,4 @@
-import { MarkupModify, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { modifiers } from '../_modifiers/style';
 import { createElement } from './_base';
 import { type BuilderConfig, type ElementProps } from '../_types';
@@ -13,7 +13,7 @@ const HeadlineConfig: BuilderConfig = {
       modifiers.elementChild(props),
       modifiers.elementSiblingAfter(props),
     ),
-  elementModifiers: [(element) => MarkupModify.AnimationLinkSpan({ element })],
+  elementModifiers: [(element) => Markup.modify.animationLinkSpan({ element })],
 };
 
 export const createHeadline = (

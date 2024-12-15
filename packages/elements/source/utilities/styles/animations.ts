@@ -1,6 +1,3 @@
-import { Animations } from '@universityofmaryland/variables';
-import { Accessibility, Styles } from 'utilities';
-
 export const shrinkThenRemove = ({ container }: { container: HTMLElement }) => {
   const frames = 30;
   const startingHeight = container.clientHeight;

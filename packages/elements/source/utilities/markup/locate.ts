@@ -1,4 +1,4 @@
-const FindParent = ({
+export const findParent = ({
   element,
   attr,
 }: {
@@ -28,8 +28,4 @@ const FindParent = ({
   if (foundElement) parent = foundElement;
 
   return parent;
-};
-
-export default {
-  FindParent,
 };

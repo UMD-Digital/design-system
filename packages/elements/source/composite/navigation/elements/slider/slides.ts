@@ -1,5 +1,5 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
-import { AssetIcon, Styles, MarkupModify } from 'utilities';
+import { AssetIcon, Styles, Markup } from 'utilities';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';
 
@@ -30,7 +30,6 @@ type TypeSliderSlideActions = TypeSlideProps & {
 
 const { Colors, Spacing } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
-const { CleanCopy } = MarkupModify;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
 const ELEMENT_NAV_SLIDE_WRAPPER = 'nav-slide-wrapper';
@@ -132,7 +131,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
 const createSlideHeadline = ({ link }: { link: HTMLAnchorElement }) => {
   const slideHeadline = document.createElement('p');
 
-  slideHeadline.appendChild(CleanCopy({ element: link }));
+  slideHeadline.appendChild(Markup.modify.cleanCopy({ element: link }));
   slideHeadline.classList.add(ELEMENT_NAV_SLIDE_HEADLINE);
 
   return slideHeadline;

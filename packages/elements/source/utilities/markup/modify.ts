@@ -1,4 +1,4 @@
-const AnimationLinkSpan = ({
+export const animationLinkSpan = ({
   element,
 }: {
   element: HTMLElement | HTMLAnchorElement;
@@ -21,26 +21,7 @@ const AnimationLinkSpan = ({
   }
 };
 
-// To Do - Verify still a need
-
-const CtaStyle = ({
-  element,
-  styleClass,
-}: {
-  element: HTMLElement | HTMLAnchorElement;
-  styleClass: string;
-}) => {
-  if (element.nodeName === 'A') {
-    element.classList.add(styleClass);
-  } else {
-    const link = element.querySelector('a');
-    if (link) {
-      link.classList.add(styleClass);
-    }
-  }
-};
-
-const TruncateText = ({
+export const truncateText = ({
   text,
   maxTextSize,
 }: {
@@ -88,7 +69,7 @@ const TruncateText = ({
   return wrapper.innerHTML;
 };
 
-const TruncateTextBasedOnSize = ({
+export const truncateTextBasedOnSize = ({
   text,
   size,
   breakpointLarge = 400,
@@ -112,10 +93,10 @@ const TruncateTextBasedOnSize = ({
   if (isContainerLarge) textSize = textSizeLarge;
   if (isContainerMax) textSize = textSizeMax;
 
-  return TruncateText({ text, maxTextSize: textSize });
+  return truncateText({ text, maxTextSize: textSize });
 };
 
-const CleanCopy = ({ element }: { element: HTMLElement }) => {
+export const cleanCopy = ({ element }: { element: HTMLElement }) => {
   const clonedNoded = element.cloneNode(true) as HTMLAnchorElement;
   const attributes = Array.from(clonedNoded.attributes);
 
@@ -128,12 +109,4 @@ const CleanCopy = ({ element }: { element: HTMLElement }) => {
   });
 
   return clonedNoded;
-};
-
-export default {
-  AnimationLinkSpan,
-  CleanCopy,
-  CtaStyle,
-  TruncateTextBasedOnSize,
-  TruncateText,
 };

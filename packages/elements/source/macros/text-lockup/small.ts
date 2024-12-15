@@ -5,7 +5,7 @@ import {
   Tokens,
   Layout,
 } from '@universityofmaryland/variables';
-import { MarkupModify, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
 export type TypeTextLockupSmall = {
   headline?: HTMLElement | null;
@@ -241,7 +241,7 @@ const CreateTextLockupSmallContainer = ({
   }
 
   if (headline) {
-    MarkupModify.AnimationLinkSpan({ element: headline });
+    Markup.modify.animationLinkSpan({ element: headline });
     headline.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE);
     container.appendChild(headline);
   }

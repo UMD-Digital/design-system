@@ -1,4 +1,4 @@
-const CreateVisualFormattedDate = (date: Date) => {
+const createVisualFormattedDate = (date: Date) => {
   return {
     full: date.toLocaleString('en-US', {
       month: 'short',
@@ -27,7 +27,7 @@ const CreateVisualFormattedDate = (date: Date) => {
   };
 };
 
-const CreateDateCompareString = (date: Date) => {
+const createDateCompareString = (date: Date) => {
   return {
     // format date as "2021-09-01"
     palindromeTruncated: date.toISOString().slice(0, 10),
@@ -35,6 +35,6 @@ const CreateDateCompareString = (date: Date) => {
 };
 
 export default {
-  CreateVisualFormattedDate,
-  CreateDateCompareString,
+  createVisualFormattedDate,
+  createDateCompareString,
 };

@@ -137,15 +137,15 @@ const CreateEventsGrouped = ({
     new Date().setDate(new Date().getDate() + 7),
   );
   const currentDate =
-    DateUtility.CreateDateCompareString(currentDateStamp).palindromeTruncated;
+    DateUtility.createDateCompareString(currentDateStamp).palindromeTruncated;
   const weekDate =
-    DateUtility.CreateDateCompareString(weekFromDateStamp).palindromeTruncated;
+    DateUtility.createDateCompareString(weekFromDateStamp).palindromeTruncated;
 
   const getDateBanner = (entry: EventType) => {
     const entryDate = new Date(entry.startStamp);
     const entryDatePalindrom =
-      DateUtility.CreateDateCompareString(entryDate).palindromeTruncated;
-    const formattedDate = DateUtility.CreateVisualFormattedDate(
+      DateUtility.createDateCompareString(entryDate).palindromeTruncated;
+    const formattedDate = DateUtility.createVisualFormattedDate(
       new Date(entry.startStamp),
     );
 

@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MarkupLocate, Performance } from 'utilities';
+import { Markup, Performance } from 'utilities';
 import Slides, { TypeSlideProps } from './slides';
 import SlideFirst from './slide-first';
 import SlideAction from './action';
@@ -196,7 +196,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
       const upcomingSlide = elementContainer.querySelector(
         `[${ATTRIBUTE_CHILD_REF}=${upcomingSlideRef}]`,
       ) as HTMLDivElement;
-      const parent = MarkupLocate.FindParent({
+      const parent = Markup.locate.findParent({
         element: upcomingSlide,
         attr: ATTRIBUTE_DATA_SLIDE,
       });

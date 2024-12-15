@@ -6,10 +6,10 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling } = Markup.create;
 const { PathwayHighlight, PathwayElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
@@ -19,13 +19,13 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${PathwayHighlight.Styles}
   ${PathwayElements.Image.Styles}
   ${PathwayElements.Text.Styles}
 `;
 
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({
   element,

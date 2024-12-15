@@ -6,10 +6,10 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { Node } = Markup.create;
+const { SlotWithDefaultStyling } = Markup.create;
 const { CardOverlay, CardOverlayImage } = Composite;
 
 const ELEMENT_NAME = 'umd-element-card-overlay';
@@ -19,7 +19,7 @@ const styles = `
     display: block;
   }
   
-  ${Styles.resetString}
+  ${Styles.reset}
   ${CardOverlay.Styles}
   ${CardOverlayImage.Styles}
 `;
@@ -49,7 +49,7 @@ const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
   if (Attributes.isLayout.image({ element })) {
     const ImageOverlay = CardOverlayImage.CreateElement({
       ...MakeOverlayContent({ element }),
-      image: MarkupValidate.ImageSlot({
+      image: Markup.validate.ImageSlot({
         element,
         ImageSlot: Slots.name.assets.image,
       }),

@@ -6,10 +6,10 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
-const { ImageHasAlt } = MarkupValidate;
+const { Node } = Markup.create;
+const { ImageHasAlt } = Markup.validate;
 const { CarouselImageMultiple } = Composite;
 
 const ELEMENT_NAME = 'umd-element-carousel-multiple-image';
@@ -18,7 +18,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${CarouselImageMultiple.Styles}
 `;
 

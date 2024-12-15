@@ -6,7 +6,7 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
 const { SliderEvents } = Composite;
 
@@ -17,11 +17,11 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${SliderEvents.Styles}
 `;
 
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDSliderEventsElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;

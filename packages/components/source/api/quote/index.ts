@@ -6,9 +6,9 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling } = Markup.create;
 const { QuoteElements, QuoteFeatured, QuoteInline, QuoteStatement } = Composite;
 
 const ELEMENT_NAME = 'umd-element-quote';
@@ -18,7 +18,7 @@ const styles = `
     display: block;
   }
   
-  ${Styles.resetString}
+  ${Styles.reset}
   ${QuoteElements.Text.Styles}
   ${QuoteFeatured.Styles}
   ${QuoteInline.Styles}
@@ -74,7 +74,7 @@ export class UMDElementQuote extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
+    const template = Markup.create.Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

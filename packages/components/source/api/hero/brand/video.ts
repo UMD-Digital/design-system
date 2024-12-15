@@ -6,9 +6,9 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Slots } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { HeroBrandVideo } = Composite;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
@@ -18,11 +18,11 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${HeroBrandVideo.Styles}
 `;
 
-const template = MarkupCreate.Node.stylesTemplate({ styles });
+const template = Markup.create.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({
   element,

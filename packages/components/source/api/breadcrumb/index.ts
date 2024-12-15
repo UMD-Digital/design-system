@@ -6,11 +6,11 @@ declare global {
 
 import { Tokens, Animations } from '@universityofmaryland/variables';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupModify, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
 const { Colors } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
-const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = Markup.create;
 
 const ELEMENT_NAME = 'umd-element-breadcrumb';
 
@@ -93,7 +93,7 @@ const ContainerStyles = `
 `;
 
 const styles = `
-  ${Styles.resetString}
+  ${Styles.reset}
 
   :host {
     display: block;
@@ -126,7 +126,7 @@ const CreatePaths = ({ element }: { element: UMDBreadcrumbElement }) => {
 
     for (const linkElement of links) {
       linkElement.classList.add(ELEMENT_PATH);
-      MarkupModify.AnimationLinkSpan({
+      Markup.modify.AnimationLinkSpan({
         element: linkElement,
       });
     }

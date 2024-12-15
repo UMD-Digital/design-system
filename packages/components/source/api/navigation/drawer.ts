@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { SLOTS, MakeNavDrawer } from './common';
 
 const { NavigationElements } = Composite;
@@ -17,7 +17,7 @@ export const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${NavigationElements.Drawer.Styles}
   ${NavigationElements.MenuButton.Styles}
 `;
@@ -44,7 +44,7 @@ class UMDNavDrawerFeature extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
+    const template = Markup.create.Node.stylesTemplate({ styles });
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));

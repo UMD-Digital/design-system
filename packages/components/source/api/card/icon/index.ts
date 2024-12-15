@@ -6,9 +6,9 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { CardIconBlock } = Composite;
 
 const ELEMENT_NAME = 'umd-element-card-icon';
@@ -18,14 +18,14 @@ const styles = `
     display: block;
   }
   
-  ${Styles.resetString}
+  ${Styles.reset}
   ${CardIconBlock.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const MakeCardData = ({ element }: { element: UMDCardIconElement }) => ({
-  image: MarkupValidate.ImageSlot({
+  image: Markup.validate.ImageSlot({
     element,
     ImageSlot: Slots.name.assets.image,
   }),

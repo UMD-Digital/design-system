@@ -6,9 +6,9 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { ScrollTop } = Composite;
 
 const ELEMENT_NAME = 'umd-element-scroll-top';
@@ -18,7 +18,7 @@ const styles = `
     display: block;
   }
   
-  ${Styles.resetString}
+  ${Styles.reset}
   ${ScrollTop.Styles}
 `;
 

@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
-import { MarkupValidate } from 'utilities';
+import { Markup } from 'utilities';
 
 const { CardBlock, CardList } = Composite;
 
@@ -33,7 +33,7 @@ const createCardComponent = ({ tagName }: CardConfig) => {
   };
 
   const createComponentData = (element: HTMLElement): CardData => ({
-    image: MarkupValidate.ImageSlot({
+    image: Markup.validate.ImageSlot({
       element,
       ImageSlot: Slots.name.assets.image,
     }),

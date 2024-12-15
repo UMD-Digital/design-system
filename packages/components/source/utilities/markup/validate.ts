@@ -1,6 +1,6 @@
 import { SlotWithDefaultStyling } from './create';
 
-const imageAlt = ({
+export const imageAlt = ({
   element,
   slotRef,
 }: {
@@ -20,7 +20,7 @@ const imageAlt = ({
   return ImageHasAlt({ image });
 };
 
-const ImageHasAlt = ({ image }: { image: HTMLImageElement }) => {
+export const ImageHasAlt = ({ image }: { image: HTMLImageElement }) => {
   if (!image) return true;
 
   const altText = image.getAttribute('alt');
@@ -32,7 +32,7 @@ const ImageHasAlt = ({ image }: { image: HTMLImageElement }) => {
   return true;
 };
 
-const ImageSlot = ({
+export const ImageSlot = ({
   element,
   ImageSlot,
 }: {
@@ -47,9 +47,4 @@ const ImageSlot = ({
   }
 
   return null;
-};
-
-export default {
-  ImageHasAlt,
-  ImageSlot,
 };

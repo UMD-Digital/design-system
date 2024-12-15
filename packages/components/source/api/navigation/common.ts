@@ -1,7 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { MarkupCreate } from 'utilities';
+import { Markup } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { NavigationElements } = Composite;
 
 const DRAWER_SLOTS = {

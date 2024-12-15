@@ -3,7 +3,7 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { MarkupCreate, MarkupModify, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import {
   BREAKPOINTS,
@@ -19,7 +19,7 @@ const { Link } = Animations;
 const { InterativeMedium, SansSmall } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
-const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = Markup.create;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -226,7 +226,7 @@ const CreateSlotHeadline = ({
   });
 
   if (contactHeadlineElement) {
-    MarkupModify.AnimationLinkSpan({ element: contactHeadlineElement });
+    Markup.modify.AnimationLinkSpan({ element: contactHeadlineElement });
     contactHeadlineElement.classList.add(CONTACT_LIST_HEADLINE);
 
     return contactHeadlineElement;

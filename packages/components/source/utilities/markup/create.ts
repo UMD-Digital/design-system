@@ -1,4 +1,4 @@
-const Node = {
+export const Node = {
   slot: ({ type }: { type: string }) => {
     const slot = document.createElement('slot');
     slot.setAttribute('name', type);
@@ -62,7 +62,7 @@ export const SlotWithDefaultStyling = ({
   return clonedElement;
 };
 
-const SlotOberserver = ({
+export const SlotOberserver = ({
   element,
   shadowDom,
   slots,
@@ -105,10 +105,4 @@ const SlotOberserver = ({
       observer.observe(slot, { attributes: true, childList: true });
     }
   });
-};
-
-export default {
-  Node,
-  SlotWithDefaultStyling,
-  SlotOberserver,
 };

@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Feeds } from '@universityofmaryland/web-elements-library';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { CommonFeedEventsData } from './common';
 
 const { FeedsEvents } = Feeds;
@@ -15,7 +15,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${FeedsEvents.Styles}
 `;
 
@@ -24,7 +24,7 @@ class UMDFeedEventsGrouped extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({
+    const template = Markup.create.Node.stylesTemplate({
       styles,
     });
 

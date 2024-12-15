@@ -6,7 +6,7 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { Styles, MarkupCreate } from 'utilities';
+import { Styles, Markup } from 'utilities';
 import { CommonIntroData } from '../common';
 
 const { SectionIntro } = Composite;
@@ -18,11 +18,11 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${SectionIntro.Styles}
 `;
 
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
 
 export const CreateShadowDom = ({
   element,

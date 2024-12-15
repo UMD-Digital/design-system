@@ -5,9 +5,9 @@ declare global {
 }
 
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { NavigationElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-navigation-sticky';
@@ -17,7 +17,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${NavigationElements.Sticky.Styles}
 `;
 

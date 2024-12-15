@@ -1,6 +1,6 @@
 import { Slots } from 'model';
 import slots from 'model/slots';
-import { MarkupValidate } from 'utilities';
+import { Markup } from 'utilities';
 
 export const CommonPersonData = ({
   element,
@@ -17,7 +17,7 @@ export const CommonPersonData = ({
   pronouns: Slots.person.pronouns({ element }),
   phone: Slots.contact.phone({ element }),
   linkendIn: Slots.social.linkedin({ element }),
-  image: MarkupValidate.ImageSlot({
+  image: Markup.validate.ImageSlot({
     element,
     ImageSlot: Slots.name.assets.image,
   }),

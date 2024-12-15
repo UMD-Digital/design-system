@@ -4,12 +4,12 @@ declare global {
   }
 }
 
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 
-const { Node } = MarkupCreate;
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { Node } = Markup.create;
+const { SlotWithDefaultStyling } = Markup.create;
 const { NavigationHeader, NavigationElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-navigation-header';
@@ -29,7 +29,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${NavigationElements.Drawer.Styles}
   ${NavigationHeader.Styles}
 `;

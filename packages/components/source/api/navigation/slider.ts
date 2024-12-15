@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { MakeNavSlider, SLOTS } from './common';
 
 const { NavigationElements } = Composite;
@@ -18,7 +18,7 @@ export const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${NavigationElements.Slider.Styles}
 `;
 
@@ -35,7 +35,7 @@ class UMDNavSlider extends HTMLElement {
   } | null;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
+    const template = Markup.create.Node.stylesTemplate({ styles });
     super();
     this._elementRef = null;
     this._shadow = this.attachShadow({ mode: 'open' });

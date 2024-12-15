@@ -6,9 +6,9 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { LogoBlock } = Composite;
 
 const ELEMENT_NAME = 'umd-element-logo';
@@ -18,7 +18,7 @@ const styles = `
     display: block;
   }
   
-  ${Styles.resetString}
+  ${Styles.reset}
   ${LogoBlock.Styles}
 `;
 
@@ -29,7 +29,7 @@ const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
   const isBordered = borderAttr === 'true';
 
   return LogoBlock.CreateElement({
-    image: MarkupValidate.ImageSlot({
+    image: Markup.validate.ImageSlot({
       element,
       ImageSlot: Slots.name.assets.image,
     }),

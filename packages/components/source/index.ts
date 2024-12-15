@@ -1,14 +1,13 @@
 import * as UmdComponents from './api';
 import * as UmdElements from '@universityofmaryland/web-elements-library';
 import * as UmdUtilities from './utilities';
-import animations from './animations';
 
 const LoadUmdComponents = () => {
   for (const key in UmdComponents) {
     // @ts-ignore
     UmdComponents[key].Load();
   }
-  animations();
+  UmdUtilities.Animations.loadIntersectionObserver();
 };
 
 export const Components = {

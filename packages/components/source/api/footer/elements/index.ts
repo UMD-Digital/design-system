@@ -13,7 +13,7 @@ export const ComponentStyles = `
     position: relative !important;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
 
   .${ELEMENT_WRAPPER} {
     container: ${ELEMENT_NAME} / inline-size;

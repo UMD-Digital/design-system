@@ -1,4 +1,4 @@
-const AnimationLinkSpan = ({
+export const AnimationLinkSpan = ({
   element,
 }: {
   element: HTMLElement | HTMLAnchorElement;
@@ -19,8 +19,4 @@ const AnimationLinkSpan = ({
     link.innerHTML = '';
     link.appendChild(span);
   }
-};
-
-export default {
-  AnimationLinkSpan,
 };

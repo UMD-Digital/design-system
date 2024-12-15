@@ -6,9 +6,9 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling } = Markup.create;
 const { Stat } = Composite;
 
 const ELEMENT_NAME = 'umd-element-stat';
@@ -18,7 +18,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${Stat.Styles}
 `;
 
@@ -40,7 +40,7 @@ export class UMDStatElement extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
+    const template = Markup.create.Node.stylesTemplate({ styles });
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

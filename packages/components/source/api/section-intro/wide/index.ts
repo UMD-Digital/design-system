@@ -6,11 +6,11 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
-import { Styles, MarkupCreate } from 'utilities';
+import { Styles, Markup } from 'utilities';
 import { CommonIntroData } from '../common';
 
 const { SectionIntroWide } = Composite;
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 
 const ELEMENT_NAME = 'umd-element-section-intro-wide';
 
@@ -19,7 +19,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${SectionIntroWide.Styles}
 `;
 

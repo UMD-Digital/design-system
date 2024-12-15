@@ -6,9 +6,9 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Slots } from 'model';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { LayoutImageExpand } = Composite;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
@@ -18,11 +18,11 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${LayoutImageExpand.Styles}
 `;
 
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
 
 export const CreateShadowDom = ({
   element,
@@ -31,7 +31,7 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const content = Node.slot({ type: 'content' });
-  const image = MarkupValidate.ImageSlot({
+  const image = Markup.validate.ImageSlot({
     element,
     ImageSlot: Slots.name.assets.image,
   });

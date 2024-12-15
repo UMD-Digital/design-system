@@ -4,10 +4,10 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
+import { Markup } from 'utilities';
 import { ComponentStyles as styles, CreateShadowDom } from './display';
 
-const template = MarkupCreate.Node.stylesTemplate({ styles });
+const template = Markup.create.Node.stylesTemplate({ styles });
 
 const ELEMENT_NAME = 'umd-element-hero';
 

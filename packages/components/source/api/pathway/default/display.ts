@@ -1,10 +1,10 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 import { UMDPathwayElement } from './index';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling } = Markup.create;
 const {
   PathwayDefault,
   PathwayElements,
@@ -19,7 +19,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${EventElements.Meta.Styles}
   ${EventElements.Sign.Styles}
   ${PathwayElements.Image.Styles}
@@ -53,15 +53,15 @@ const MakeCommonDefaultData = ({
     element.getAttribute(Attributes.names.LAYOUT_IMAGE_POSITION) !== 'left';
   const showTime = element.getAttribute(Attributes.names.SHOW_TIME) !== 'false';
 
-  const startDate = MarkupEvent.createDate({ element: startDateSlot });
-  const endDate = MarkupEvent.createDate({ element: endDateSlot });
+  const startDate = Markup.event.createDate({ element: startDateSlot });
+  const endDate = Markup.event.createDate({ element: endDateSlot });
   const obj = {
     ...CommonPathwayData({
       element,
     }),
     isImageRight,
     stats: SlotWithDefaultStyling({ element, slotRef: Slots.name.STATS }),
-    image: MarkupValidate.ImageSlot({
+    image: Markup.validate.ImageSlot({
       element,
       ImageSlot: Slots.name.assets.image,
     }),
@@ -75,7 +75,7 @@ const MakeCommonDefaultData = ({
   if (isThemeDark) themeToggle = false;
 
   if (startDate) {
-    const eventData = MarkupEvent.createDetailsData({
+    const eventData = Markup.event.createDetailsData({
       locationElement: locationSlot,
       startDate,
       endDate,

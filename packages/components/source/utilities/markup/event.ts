@@ -27,7 +27,11 @@ const createVisualFormattedDate = (date: Date) => {
   };
 };
 
-const createDate = ({ element }: { element: HTMLElement | Element | null }) => {
+export const createDate = ({
+  element,
+}: {
+  element: HTMLElement | Element | null;
+}) => {
   if (element && element.textContent) {
     const dateString = element.textContent.trim();
     const parsedDate = Date.parse(dateString);
@@ -45,7 +49,7 @@ const createDate = ({ element }: { element: HTMLElement | Element | null }) => {
   return null;
 };
 
-const createDetailsData = ({
+export const createDetailsData = ({
   locationElement,
   startDate,
   endDate,
@@ -73,9 +77,4 @@ const createDetailsData = ({
   }
 
   return obj;
-};
-
-export default {
-  createDate,
-  createDetailsData,
 };

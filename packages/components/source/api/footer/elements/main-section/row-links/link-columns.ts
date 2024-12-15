@@ -3,7 +3,7 @@ import {
   Tokens,
   Typography,
 } from '@universityofmaryland/variables';
-import { Styles, MarkupCreate, MarkupModify } from 'utilities';
+import { Styles, Markup } from 'utilities';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -17,8 +17,8 @@ const { Link } = Animations;
 const { SansSmaller, InterativeMedium } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
-const { SlotWithDefaultStyling } = MarkupCreate;
-const { AnimationLinkSpan } = MarkupModify;
+const { SlotWithDefaultStyling } = Markup.create;
+const { AnimationLinkSpan } = Markup.modify;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;

@@ -6,10 +6,10 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
-const { Node, SlotWithDefaultStyling } = MarkupCreate;
+const { Node, SlotWithDefaultStyling } = Markup.create;
 const { PersonBio, PersonBioFull } = Composite;
 
 const ELEMENT_NAME = 'umd-element-person-bio';
@@ -19,7 +19,7 @@ export const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${PersonBio.Styles}
   ${PersonBioFull.Styles}
 `;

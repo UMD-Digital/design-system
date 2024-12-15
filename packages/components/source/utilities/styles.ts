@@ -6,7 +6,7 @@ const { Colors } = Tokens;
 const postcssNesting = require('postcss-nesting');
 const postcssJs = require('postcss-js');
 
-const Reset = `
+export const reset = `
   :host {
     color: ${Colors.black};
   }
@@ -77,12 +77,7 @@ const Reset = `
   }
 `;
 
-const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
+export const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
   postcss(postcssNesting).process(styleObj, {
     parser: postcssJs,
   }).css;
-
-export default {
-  resetString: Reset,
-  convertJSSObjectToStyles,
-};

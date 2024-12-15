@@ -6,11 +6,11 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
 const { EventBlock, EventElements, EventFeature, EventList, EventPromo } =
   Composite;
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 
 const ELEMENT_NAME = 'umd-element-event';
 
@@ -19,7 +19,7 @@ const styles = `
     display: block;
   }
   
-  ${Styles.resetString}
+  ${Styles.reset}
   ${EventElements.Meta.Styles}
   ${EventElements.Sign.Styles}
   ${EventBlock.Styles}
@@ -29,7 +29,7 @@ const styles = `
 `;
 
 const MakeCommonData = ({ element }: { element: UMDEventElement }) => ({
-  image: MarkupValidate.ImageSlot({
+  image: Markup.validate.ImageSlot({
     element,
     ImageSlot: Slots.name.assets.image,
   }),
@@ -52,22 +52,22 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   const locationSlot = element.querySelector(
     `[slot="${Slots.name.contact.location}"]`,
   );
-  const startDate = MarkupEvent.createDate({ element: startDateSlot });
-  const endDate = MarkupEvent.createDate({ element: endDateSlot });
+  const startDate = Markup.event.createDate({ element: startDateSlot });
+  const endDate = Markup.event.createDate({ element: endDateSlot });
 
   if (!startDate) {
     console.error('Missing start date for event web component');
     return null;
   }
 
-  const EventDetailsData = MarkupEvent.createDetailsData({
+  const EventDetailsData = Markup.event.createDetailsData({
     locationElement: locationSlot,
     startDate,
     endDate,
   });
   const EventDetailMeta = { ...EventDetailsData, showTime };
 
-  const EventSignData = MarkupEvent.createDetailsData({
+  const EventSignData = Markup.event.createDetailsData({
     locationElement: locationSlot,
     startDate,
     endDate,

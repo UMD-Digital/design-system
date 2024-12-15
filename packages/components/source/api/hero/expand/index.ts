@@ -6,9 +6,9 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { HeroExpand } = Composite;
 
 const ELEMENT_NAME = 'umd-element-hero-expand';
@@ -18,17 +18,17 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${HeroExpand.Styles}
 `;
 
-const template = MarkupCreate.Node.stylesTemplate({ styles });
+const template = Markup.create.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const topPosition = element.getAttribute(Attributes.names.LAYOUT_STICKY_TOP);
 
-  const image = MarkupValidate.ImageSlot({
+  const image = Markup.validate.ImageSlot({
     element,
     ImageSlot: Slots.name.assets.image,
   });

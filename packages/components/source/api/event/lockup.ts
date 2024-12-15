@@ -6,10 +6,10 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, MarkupEvent, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
 const { EventLockupDate, EventElements } = Composite;
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 
 // prettier-ignore
 const styles = `
@@ -17,7 +17,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${EventLockupDate.Styles}
 `;
 
@@ -31,8 +31,8 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   const endDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_END_ISO}"]`,
   );
-  const startDate = MarkupEvent.createDate({ element: startDateSlot });
-  const endDate = MarkupEvent.createDate({ element: endDateSlot });
+  const startDate = Markup.event.createDate({ element: startDateSlot });
+  const endDate = Markup.event.createDate({ element: endDateSlot });
 
   if (!startDate) {
     return EventLockupDate.CreateElement({
@@ -41,7 +41,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
     });
   }
 
-  const EventSignData = MarkupEvent.createDetailsData({
+  const EventSignData = Markup.event.createDetailsData({
     startDate,
     endDate,
   });

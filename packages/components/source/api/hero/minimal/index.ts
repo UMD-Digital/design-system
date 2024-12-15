@@ -4,11 +4,11 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
+import { Markup } from 'utilities';
 import { ComponentStyles as styles, CreateShadowDom } from './display';
 
 const ELEMENT_NAME = 'umd-element-hero-minimal';
-const template = MarkupCreate.Node.stylesTemplate({ styles });
+const template = Markup.create.Node.stylesTemplate({ styles });
 
 export class UMDHeroMinimalElement extends HTMLElement {
   _shadow: ShadowRoot;

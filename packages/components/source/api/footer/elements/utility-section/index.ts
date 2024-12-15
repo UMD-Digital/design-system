@@ -4,7 +4,7 @@ import {
   Layout,
   Typography,
 } from '@universityofmaryland/variables';
-import { MarkupCreate, MarkupModify, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import {
   BREAKPOINTS,
   ELEMENTS,
@@ -163,7 +163,7 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
     ) as HTMLAnchorElement[];
 
     slottedLinks.forEach((link) => {
-      MarkupModify.AnimationLinkSpan({ element: link });
+      Markup.modify.AnimationLinkSpan({ element: link });
       link.classList.add(UTILITY_CONTAINER_LINK);
 
       wrapper.appendChild(link);
@@ -171,7 +171,7 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
   }
 
   requiredSubLinks.forEach((link) =>
-    wrapper.appendChild(MarkupCreate.Node.linkWithSpan(link)),
+    wrapper.appendChild(Markup.create.Node.linkWithSpan(link)),
   );
   copyRight.classList.add(UTILITY_CONTAINER_LINK);
   copyRight.innerHTML = `©${new Date().getFullYear()} UNIVERSITY OF MARYLAND`;

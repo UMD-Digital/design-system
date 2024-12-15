@@ -6,10 +6,10 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 const { PersonBlock, PersonList, PersonTabular } = Composite;
 
 const ELEMENT_NAME = 'umd-element-person';
@@ -19,7 +19,7 @@ export const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${PersonBlock.Styles}
   ${PersonList.Styles}
   ${PersonTabular.Styles}

@@ -6,7 +6,7 @@ declare global {
 
 import { Composite, Feeds } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 
 const { SliderEvents } = Composite;
 const { FeedsSlides } = Feeds;
@@ -18,12 +18,12 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${SliderEvents.Styles}
   ${FeedsSlides.Styles}
 `;
 
-const styleTemplate = MarkupCreate.Node.stylesTemplate({ styles });
+const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
 
 const CreateShadowDom = async ({
   element,

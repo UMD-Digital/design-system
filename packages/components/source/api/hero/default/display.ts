@@ -1,10 +1,10 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { UMDHeroElement } from './index';
 import { CommonHeroData } from '../common';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling } = Markup.create;
 const { HeroDefault, HeroElements, HeroMinimal, HeroOverlay, HeroStacked } =
   Composite;
 
@@ -13,7 +13,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${HeroElements.Image.Styles}
   ${HeroElements.Text.Styles}
   ${HeroOverlay.Styles}

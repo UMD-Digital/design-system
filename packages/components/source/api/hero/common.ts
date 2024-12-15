@@ -1,7 +1,7 @@
 import { Slots } from 'model';
-import { MarkupCreate } from 'utilities';
+import { Markup } from 'utilities';
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling } = Markup.create;
 
 export const CommonHeroData = ({ element }: { element: HTMLElement }) => ({
   eyebrow: Slots.eyebrow.default({ element }),

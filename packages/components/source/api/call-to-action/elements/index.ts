@@ -1,12 +1,12 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Tokens } from '@universityofmaryland/variables';
-import { Styles, MarkupCreate } from 'utilities';
+import { Styles, Markup } from 'utilities';
 import { ELEMENTS, SLOTS, VARIABLES, REFERENCES } from '../globals';
 import { UMDCallToActionElement } from '../index';
 
 const { Colors, FontSize, Spacing } = Tokens;
 const { CallToAction } = Composite;
-const { Node } = MarkupCreate;
+const { Node } = Markup.create;
 
 const { PLAIN_TEXT } = SLOTS;
 const { CTA_CONTAINER } = ELEMENTS;
@@ -63,7 +63,7 @@ export const ComponentStyles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${CallToAction.Styles}
   ${PlainTextSlotStyles}
   ${OverwritePrimaryLayoutStyles}

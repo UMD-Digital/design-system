@@ -1,10 +1,10 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { MarkupCreate } from 'utilities';
+import { Markup } from 'utilities';
 import { SLOTS } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
 
-const { SlotWithDefaultStyling } = MarkupCreate;
+const { SlotWithDefaultStyling } = Markup.create;
 
 const { CTA } = SLOTS;
 

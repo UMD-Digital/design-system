@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { MarkupCreate } from 'utilities';
+import { Markup } from 'utilities';
 import { Attributes } from 'model';
 import { ComponentStyles, CreateShadowDom } from './elements';
 import { VARIABLES } from './globals';
@@ -34,7 +34,7 @@ export class UMDCallToActionElement extends HTMLElement {
     this._styleProps = null;
 
     const styles = `${ComponentStyles}`;
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
+    const template = Markup.create.Node.stylesTemplate({ styles });
 
     this._shadow.appendChild(template.content.cloneNode(true));
   }

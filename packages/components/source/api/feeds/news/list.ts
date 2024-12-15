@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Feeds } from '@universityofmaryland/web-elements-library';
-import { MarkupCreate, Styles } from 'utilities';
+import { Markup, Styles } from 'utilities';
 import { CommonFeedNewsData } from './common';
 
 const { FeedsNews } = Feeds;
@@ -15,7 +15,7 @@ const styles = `
     display: block;
   }
 
-  ${Styles.resetString}
+  ${Styles.reset}
   ${FeedsNews.Styles}
 `;
 
@@ -24,7 +24,7 @@ class UMDFeedNewsList extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
-    const template = MarkupCreate.Node.stylesTemplate({ styles });
+    const template = Markup.create.Node.stylesTemplate({ styles });
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));

@@ -1,7 +1,7 @@
 import { Animations } from '@universityofmaryland/variables';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 
-const loadIntersectionObserverAnimations = () => {
+export const loadIntersectionObserver = () => {
   const { Accessibility, Styles } = Utilities;
   const { convertJSSObjectToStyles } = Styles;
   const { Scroll } = Animations;
@@ -97,5 +97,3 @@ const loadIntersectionObserverAnimations = () => {
   ApplyStyles();
   Interactions();
 };
-
-export default loadIntersectionObserverAnimations;

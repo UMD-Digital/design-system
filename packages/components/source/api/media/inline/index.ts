@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Slots, Register } from 'model';
-import { MarkupValidate } from 'utilities';
+import { Markup } from 'utilities';
 
 const { MediaInline, MediaWithCaption, MediaWrapped } = Composite;
 
@@ -35,7 +35,7 @@ const Load = () => {
       isAlignmentRight,
       isThemeDark,
       caption,
-      image: MarkupValidate.ImageSlot({
+      image: Markup.validate.ImageSlot({
         element,
         ImageSlot: Slots.name.assets.image,
       }),

@@ -4,12 +4,12 @@ declare global {
   }
 }
 
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Slots } from 'model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { LayoutImageExpand } = Components;
+const { LayoutImageExpand } = Composite;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 

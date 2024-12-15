@@ -1,4 +1,4 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { MarkupCreate, MarkupEvent, MarkupValidate, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
@@ -12,7 +12,7 @@ const {
   PathwayOverlay,
   PathwaySticky,
   EventElements,
-} = Components;
+} = Composite;
 
 export const ComponentStyles = `
   :host {

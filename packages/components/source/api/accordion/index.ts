@@ -1,7 +1,7 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 
-const { Accordion } = Components;
+const { Accordion } = Composite;
 
 const tagName = 'umd-element-accordion-item';
 

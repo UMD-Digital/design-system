@@ -4,12 +4,12 @@ declare global {
   }
 }
 
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { ScrollTop } = Components;
+const { ScrollTop } = Composite;
 
 const ELEMENT_NAME = 'umd-element-scroll-top';
 

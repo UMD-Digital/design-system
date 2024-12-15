@@ -1,8 +1,8 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
 import { createAlertComponent, type AlertBannerProps } from '../_models/alert';
 
-const { BannerPromo } = Components;
+const { BannerPromo } = Composite;
 
 export default createAlertComponent<AlertBannerProps>({
   tagName: 'umd-element-banner-promo',

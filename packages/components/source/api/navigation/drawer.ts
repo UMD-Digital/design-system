@@ -4,11 +4,11 @@ declare global {
   }
 }
 
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { MarkupCreate, Styles } from 'utilities';
 import { SLOTS, MakeNavDrawer } from './common';
 
-const { NavigationElements } = Components;
+const { NavigationElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-nav-drawer';
 

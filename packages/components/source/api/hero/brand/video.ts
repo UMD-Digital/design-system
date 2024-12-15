@@ -4,12 +4,12 @@ declare global {
   }
 }
 
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Slots } from 'model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { HeroBrandVideo } = Components;
+const { HeroBrandVideo } = Composite;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
 

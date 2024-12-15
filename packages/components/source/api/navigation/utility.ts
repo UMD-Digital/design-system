@@ -1,7 +1,7 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register } from 'model';
 
-const { NavigationUtility } = Components;
+const { NavigationUtility } = Composite;
 
 const tagName = 'umd-element-navigation-utility';
 

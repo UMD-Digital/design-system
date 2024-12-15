@@ -1,8 +1,8 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { MarkupCreate } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { NavigationElements } = Components;
+const { NavigationElements } = Composite;
 
 const DRAWER_SLOTS = {
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',

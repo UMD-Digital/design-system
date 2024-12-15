@@ -4,7 +4,7 @@ import {
   CardList,
   STYLES_LIST_CARD_ELEMENT,
   CardOverlayImage,
-} from 'components';
+} from 'composite';
 
 type ImageType = {
   url: string;

@@ -1,10 +1,10 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
 import { Styles } from 'utilities';
 import { UMDHeroMinimalElement } from './index';
 import { CommonHeroData } from '../common';
 
-const { HeroMinimal, HeroElements } = Components;
+const { HeroMinimal, HeroElements } = Composite;
 
 export const ComponentStyles = `
   :host {

@@ -4,7 +4,7 @@ import {
   Layout,
   Typography,
 } from '@universityofmaryland/variables';
-import Actions from 'components/call-to-action';
+import Actions from 'composite/call-to-action';
 import { AssetIcon, Network, Styles } from 'utilities';
 
 type AlertData = {

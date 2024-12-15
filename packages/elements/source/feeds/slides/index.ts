@@ -1,5 +1,5 @@
 import { Network } from 'utilities';
-import { EventLockupDate, EventElements } from 'components';
+import { EventLockupDate, EventElements } from 'composite';
 
 type TypeSlideFeedResponse = {
   title: string;

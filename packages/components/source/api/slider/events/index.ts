@@ -4,11 +4,11 @@ declare global {
   }
 }
 
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { MarkupCreate, Styles } from 'utilities';
 
-const { SliderEvents } = Components;
+const { SliderEvents } = Composite;
 
 const ELEMENT_NAME = 'umd-element-slider-events';
 

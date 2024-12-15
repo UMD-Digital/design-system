@@ -1,8 +1,8 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
 import { createAlertComponent, type AlertSiteProps } from '../_models/alert';
 
-const { AlertSite } = Components;
+const { AlertSite } = Composite;
 
 export default createAlertComponent<AlertSiteProps>({
   tagName: 'umd-element-alert-site',

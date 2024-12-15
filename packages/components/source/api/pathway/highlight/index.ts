@@ -4,13 +4,13 @@ declare global {
   }
 }
 
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { MarkupCreate, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
-const { PathwayHighlight, PathwayElements } = Components;
+const { PathwayHighlight, PathwayElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
 

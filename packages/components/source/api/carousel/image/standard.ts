@@ -4,11 +4,11 @@ declare global {
   }
 }
 
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { MarkupCreate, MarkupValidate, Styles } from 'utilities';
 
-const { CarouselImageStandard } = Components;
+const { CarouselImageStandard } = Composite;
 const { Node } = MarkupCreate;
 const { ImageHasAlt } = MarkupValidate;
 

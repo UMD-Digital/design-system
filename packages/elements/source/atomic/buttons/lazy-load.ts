@@ -1,5 +1,5 @@
 import { Tokens } from '@universityofmaryland/variables';
-import { CallToAction } from 'components';
+import { CallToAction } from 'composite';
 
 type LazyLoadCreate = {
   callback: (args: any) => void;

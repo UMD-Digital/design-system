@@ -1,7 +1,7 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register } from 'model';
 
-const { SocialSharing } = Components;
+const { SocialSharing } = Composite;
 
 const tagName = 'umd-element-social-sharing';
 

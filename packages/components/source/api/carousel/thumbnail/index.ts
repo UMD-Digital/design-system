@@ -4,12 +4,12 @@ declare global {
   }
 }
 
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { MarkupCreate, Styles } from 'utilities';
 
 const { Node } = MarkupCreate;
-const { CarouselThumbnail } = Components;
+const { CarouselThumbnail } = Composite;
 
 const ELEMENT_NAME = 'umd-element-carousel-thumbnail';
 

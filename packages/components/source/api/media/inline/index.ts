@@ -1,8 +1,8 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Slots, Register } from 'model';
 import { MarkupValidate } from 'utilities';
 
-const { MediaInline, MediaWithCaption, MediaWrapped } = Components;
+const { MediaInline, MediaWithCaption, MediaWrapped } = Composite;
 
 const tagName = 'umd-element-media-inline';
 

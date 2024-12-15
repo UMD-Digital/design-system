@@ -1,8 +1,8 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { MarkupValidate } from 'utilities';
 
-const { CardBlock, CardList } = Components;
+const { CardBlock, CardList } = Composite;
 
 interface CardData {
   image: HTMLImageElement | null;

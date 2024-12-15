@@ -1,4 +1,4 @@
-import { Components } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { MarkupCreate, Styles } from 'utilities';
 import { UMDHeroElement } from './index';
@@ -6,7 +6,7 @@ import { CommonHeroData } from '../common';
 
 const { SlotWithDefaultStyling } = MarkupCreate;
 const { HeroDefault, HeroElements, HeroMinimal, HeroOverlay, HeroStacked } =
-  Components;
+  Composite;
 
 export const ComponentStyles = `
   :host {

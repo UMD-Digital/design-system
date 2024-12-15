@@ -1,4 +1,4 @@
-import { EventBlock, EventList, EventElements } from 'components';
+import { EventBlock, EventList, EventElements } from 'composite';
 import { DateUtility } from 'utilities';
 
 type ImageType = {

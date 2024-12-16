@@ -69,9 +69,9 @@ export const ALERT_CONSTANTS = {
     DEFAULT: 'https://umd.edu/api/v2',
   },
   STORAGE_KEYS: {
-    ALERT_TIME: 'umd-alert-time',
-    ALERT: 'umd-alert',
-    ALERT_ID: 'umd-alert-id',
+    ALERT_TIME: 'umd-utility-alert-time',
+    ALERT: 'umd-utility-alert',
+    ALERT_ID: 'umd-utility-alert-id',
   },
   ELEMENTS: {
     ALERT_ID: 'umd-global-alert',

@@ -1,7 +1,5 @@
 import { Colors, Spacing } from '../tokens';
-import Typography from '../typography';
-
-const { SansLarge } = Typography;
+import { sans } from '../typography';
 
 const Base = {
   [`& ul,
@@ -17,7 +15,7 @@ const Base = {
     },
 
     '& li:before': {
-      ...SansLarge,
+      ...sans.large,
       ...{
         content: '"•"',
         counterIncrement: 'item',
@@ -49,7 +47,7 @@ const Base = {
     },
 
     '& li:before': {
-      ...SansLarge,
+      ...sans.large,
       ...{
         content: 'counter(item) "."',
         counterIncrement: 'item',

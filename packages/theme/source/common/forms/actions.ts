@@ -3,7 +3,7 @@ import { Typography, Tokens } from '@universityofmaryland/variables';
 const { Colors, Spacing } = Tokens;
 
 const FormActionsBase = {
-  ...Typography.InterativeSmall,
+  ...Typography.elements.interativeSmall,
 
   padding: `${Spacing.xs} ${Spacing.lg}`,
   transition:

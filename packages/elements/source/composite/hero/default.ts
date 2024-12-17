@@ -17,7 +17,6 @@ type TypeHeroDefaultProps = TypeTextContainerProps &
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
-const { CampaignMaxium, CampaignExtralarge, SansLarger } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -85,14 +84,14 @@ const OverwriteHeadline = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: CampaignExtralarge,
+      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.extralarge,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_SIZE_LARGE_HEADLINE}`]: CampaignMaxium,
+        [`${OVERWRITE_SIZE_LARGE_HEADLINE}`]: Typography.campaign.maxium,
       },
     })}
   }
@@ -102,13 +101,13 @@ const OverwriteHeadline = `
 const OverwriteRichText = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
+      [`${OVERWRITE_RICH_TEXT}`]: Typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT} *`]: SansLarger,
+      [`${OVERWRITE_RICH_TEXT} *`]: Typography.sans.larger,
     },
   })}
   

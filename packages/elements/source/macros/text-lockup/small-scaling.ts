@@ -5,7 +5,6 @@ import TextLockupSmall, { TypeTextLockupSmall } from './small';
 type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
 const { Font } = Tokens;
-const { SansExtraLarge, SansMedium, SansSmall } = Typography;
 const { convertJSSObjectToStyles } = Styles;
 
 const SMALL = 300;
@@ -23,7 +22,7 @@ const HeadlineStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteHeadline}`]: SansExtraLarge,
+        [`${OverwriteHeadline}`]: Typography.sans.extraLarge,
       },
     })}
   }
@@ -31,7 +30,7 @@ const HeadlineStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteHeadline} *`]: SansExtraLarge,
+        [`${OverwriteHeadline} *`]: Typography.sans.extraLarge,
       },
     })}
   }
@@ -49,7 +48,7 @@ const DateStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteDate}`]: SansSmall,
+        [`${OverwriteDate}`]: Typography.sans.small,
       },
     })}
   }
@@ -57,7 +56,7 @@ const DateStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteDate} *`]: SansSmall,
+        [`${OverwriteDate} *`]: Typography.sans.small,
       },
     })}
   }
@@ -68,13 +67,13 @@ const TextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteText}`]: SansMedium,
+        [`${OverwriteText}`]: Typography.sans.medium,
       },
     })}
 
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteText} *`]: SansMedium,
+        [`${OverwriteText} *`]: Typography.sans.medium,
       },
     })}
   }

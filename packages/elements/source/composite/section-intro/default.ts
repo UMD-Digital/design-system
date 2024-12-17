@@ -10,7 +10,6 @@ type TypeSectionIntroDefaultProps = {
   includesAnimation?: boolean;
 };
 
-const { SansLargest, SansLarger, SansMedium } = Typography;
 const { Colors, Spacing, SpaceLayout } = Tokens;
 const { GridColumnAndRowsMobileTablet } = Layout;
 
@@ -127,7 +126,7 @@ const OverwriteSeparator = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: SansLargest,
+      [`.${ELEMENT_HEADLINE}`]: Typography.sans.largest,
     },
   })}
 
@@ -147,13 +146,13 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT}`]: SansLarger,
+      [`.${ELEMENT_RICH_TEXT}`]: Typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT} *`]: SansLarger,
+      [`.${ELEMENT_RICH_TEXT} *`]: Typography.sans.larger,
     },
   })}
 
@@ -165,13 +164,13 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT_SMALL}`]: SansMedium,
+      [`.${ELEMENT_RICH_TEXT_SMALL}`]: Typography.sans.medium,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT_SMALL} *`]: SansMedium,
+      [`.${ELEMENT_RICH_TEXT_SMALL} *`]: Typography.sans.medium,
     },
   })}
 `;

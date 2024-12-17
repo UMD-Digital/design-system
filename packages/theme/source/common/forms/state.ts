@@ -7,7 +7,7 @@ const FormFieldValidation = {
     border: `1px solid ${Colors.redDark}`,
 
     '&[aria-errormessage] + [id]': {
-      ...Typography.Eyebrow,
+      ...Typography.elements.eyebrow,
 
       color: Colors.redDark,
       display: 'block',

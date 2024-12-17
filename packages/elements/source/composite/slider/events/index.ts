@@ -31,7 +31,6 @@ type TypeSliderEventProps = TypeSliderEventSlideContentProps &
 
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
 const { Colors, Spacing } = Tokens;
-const { SansLarger } = Typography;
 
 const TABLET = 750;
 const DESKTOP = 1000;
@@ -235,7 +234,7 @@ const IntroStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: SansLarger,
+      [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: Typography.sans.larger,
     },
   })}
 

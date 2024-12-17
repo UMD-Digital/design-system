@@ -20,7 +20,6 @@ export type TypePathwayTextContainer = {
 const { Spacing, Colors } = Tokens;
 const { Eyebrow, Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
-const { SansLargest } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -90,13 +89,13 @@ const EyebrowStyles = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE}`]: SansLargest,
+      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE}`]: Typography.sans.largest,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE} *`]: SansLargest,
+      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE} *`]: Typography.sans.largest,
     },
   })}
 

@@ -51,7 +51,7 @@ const FormLayoutHeadlineWithAction = {
 };
 
 const FormFieldInstructions = {
-  ...Typography.SansSmaller,
+  ...Typography.sans.smaller,
 
   display: 'block',
   fontStyle: 'italic',
@@ -69,7 +69,7 @@ const FormFieldInstructions = {
 
 const FormLayoutField = {
   '& label': {
-    ...Typography.SansLarge,
+    ...Typography.sans.large,
 
     display: 'inline-block',
     position: 'relative',
@@ -111,7 +111,7 @@ const FormLayoutField = {
 
 const FormLayoutBaseFieldset = {
   '& > legend': {
-    ...Typography.SansLarge,
+    ...Typography.sans.large,
 
     marginBottom: Spacing.sm,
     position: 'relative',

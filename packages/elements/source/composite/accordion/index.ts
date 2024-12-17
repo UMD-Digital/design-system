@@ -30,7 +30,6 @@ type ActionAnimationProps = StateProps & {
 
 const { Colors, Spacing } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
-const { SansMedium, SansLarge } = Typography;
 
 const SMALL = 480;
 
@@ -93,7 +92,7 @@ const OverwriteThemeDark = `
 const bodyStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BODY_WRAPPER}`]: SansMedium
+      [`.${ELEMENT_BODY_WRAPPER}`]: Typography.sans.medium
     },
   })}
 
@@ -133,7 +132,7 @@ const bodyStyles = `
 const headlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: SansLarge,
+      [`.${ELEMENT_HEADLINE}`]: Typography.sans.large,
     },
   })}
 

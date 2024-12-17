@@ -1,8 +1,4 @@
-import {
-  Tokens,
-  Animations,
-  Typography,
-} from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 export type TypeLogoRequirements = {
@@ -13,7 +9,6 @@ export type TypeLogoRequirements = {
 };
 
 const { Colors, Spacing } = Tokens;
-const { SansMin } = Typography;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -65,13 +60,13 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_LOGO_BLOCK_TEXT}`]: SansMin,
+      [`.${ELEMENT_LOGO_BLOCK_TEXT}`]: Typography.sans.min,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_LOGO_BLOCK_TEXT} *`]: SansMin,
+      [`.${ELEMENT_LOGO_BLOCK_TEXT} *`]: Typography.sans.min,
     },
   })}
 

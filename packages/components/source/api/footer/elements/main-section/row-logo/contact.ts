@@ -16,7 +16,6 @@ import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
-const { InterativeMedium, SansSmall } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = Markup.create;
@@ -86,7 +85,7 @@ const HeadlineStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_HEADLINE}`]: InterativeMedium,
+      [`.${CONTACT_LIST_HEADLINE}`]: Typography.elements.interativeMedium,
     },
   })}
 
@@ -115,7 +114,7 @@ const AddressStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_ADDRESS} *`]: SansSmall,
+      [`.${CONTACT_LIST_ADDRESS} *`]: Typography.sans.small,
     },
   })}
 `;
@@ -128,7 +127,7 @@ const LinkListStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LINKS_LIST} *`]: SansSmall,
+      [`.${CONTACT_LINKS_LIST} *`]: Typography.sans.small,
     },
   })}
 

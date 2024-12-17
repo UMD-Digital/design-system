@@ -19,7 +19,6 @@ export type TypePersonProps = TypeContactProps & {
 
 const { Spacing, Colors } = Tokens;
 const { Link } = Animations;
-const { SansLarger, SansSmall, SansSmaller } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -69,7 +68,7 @@ const NameStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_NAME_CONTAINER}`]: SansLarger,
+      [`.${ELEMENT_PERSON_NAME_CONTAINER}`]: Typography.sans.larger,
     },
   })}
 
@@ -84,7 +83,7 @@ const NameStyles = `
 const JobStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_JOB_CONTAINER}`]: SansSmall,
+      [`.${ELEMENT_PERSON_JOB_CONTAINER}`]: Typography.sans.small,
     },
   })}
 
@@ -101,7 +100,7 @@ const AssociationStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_ASSOCIATION_CONTAINER}`]: SansSmall,
+      [`.${ELEMENT_PERSON_ASSOCIATION_CONTAINER}`]: Typography.sans.small,
     },
   })}
 
@@ -123,7 +122,7 @@ const PronounsStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_PRONOUNS_CONTAINER}`]: SansSmaller,
+      [`.${ELEMENT_PERSON_PRONOUNS_CONTAINER}`]: Typography.sans.small,
     },
   })}
 `;
@@ -147,7 +146,7 @@ const SubTextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_SUB_TEXT_CONTAINER}`]: SansSmaller,
+      [`.${ELEMENT_PERSON_SUB_TEXT_CONTAINER}`]: Typography.sans.small,
     },
   })}
 `;

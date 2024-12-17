@@ -19,7 +19,6 @@ type TypeHeroStackedProps = TypeTextContainerProps &
 const { LockMax } = Layout;
 const { Colors, Media, Spacing } = Tokens;
 const { Eyebrow } = Elements;
-const { CampaignExtralarge, CampaignLarge, SansLarger } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -69,13 +68,13 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: CampaignExtralarge,
+      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.extralarge,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_WITH_LOCK_HEADLINE}`]: CampaignLarge,
+      [`${OVERWRITE_WITH_LOCK_HEADLINE}`]: Typography.campaign.large,
     },
   })}
   
@@ -90,13 +89,13 @@ const OverwriteHeadline = `
 const OverwriteRichText = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
+      [`${OVERWRITE_RICH_TEXT}`]: Typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT} *`]: SansLarger,
+      [`${OVERWRITE_RICH_TEXT} *`]: Typography.sans.larger,
     },
   })}
 

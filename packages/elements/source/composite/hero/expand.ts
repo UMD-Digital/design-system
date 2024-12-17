@@ -18,7 +18,6 @@ type TypeLayoutImageExpandProps = TypeContent & TypeAssets;
 const { convertJSSObjectToStyles } = Styles;
 const { Colors, Spacing, Media } = Tokens;
 const { Eyebrow } = Elements;
-const { CampaignMaxium } = Typography;
 
 const ELEMENT_NAME = 'umd-hero-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'hero-expand-declaration';
@@ -209,7 +208,7 @@ const TextContainer = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_HEADLINE}`]: CampaignMaxium,
+      [`.${ELEMENT_EXPAND_TEXT_HEADLINE}`]: Typography.campaign.maxium,
     },
   })}
 

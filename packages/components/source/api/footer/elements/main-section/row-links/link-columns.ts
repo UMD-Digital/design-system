@@ -14,7 +14,6 @@ import {
 
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
-const { SansSmaller, InterativeMedium } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 const { SlotWithDefaultStyling } = Markup.create;
@@ -133,7 +132,7 @@ const COLUMN_THREE_DEFAULT_LINKS = [
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_COLUMN_HEADLINE}`]: InterativeMedium
+      [`.${ROW_LINKS_COLUMN_HEADLINE}`]: Typography.elements.interativeMedium,
     },
   })}
 
@@ -161,7 +160,7 @@ const LinkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_COLUMN_LINKS} a`]: SansSmaller,
+      [`.${ROW_LINKS_COLUMN_LINKS} a`]: Typography.sans.smaller,
     },
   })}
 

@@ -16,7 +16,6 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
 
 const { Spacing, Colors } = Tokens;
 const { GridColumnAndRowsMobileTablet } = Layout;
-const { SansExtraLarge, SansLarger, SansMedium, SansSmaller } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -43,13 +42,13 @@ const IS_SIZE_LARGE = `.${TEXT_CONTAINER}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
 const VarationSizeLarge = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: SansExtraLarge,
+      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: Typography.sans.extraLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: SansExtraLarge,
+      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: Typography.sans.extraLarge,
     },
   })}
 `
@@ -85,13 +84,13 @@ const QuoteStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: SansLarger,
+      [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: Typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: SansLarger,
+      [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: Typography.sans.larger,
     },
   })}
 
@@ -116,13 +115,13 @@ const AttributionStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: SansMedium,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: Typography.sans.medium,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: SansMedium,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: Typography.sans.medium,
     },
   })}
 `;
@@ -144,13 +143,13 @@ const AttributionSubTextStyles = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: SansSmaller,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: Typography.sans.small,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: SansSmaller,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: Typography.sans.small,
     },
   })}
 `;

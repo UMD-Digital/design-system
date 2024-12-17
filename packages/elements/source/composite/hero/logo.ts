@@ -13,7 +13,6 @@ type TypeHeroLogoProps = TypeTextContainerProps & TypeImageContainerProps;
 const { LockSmall } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
-const { CampaignLarge, SansLarger } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -81,13 +80,13 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: CampaignLarge,
+      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.large,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE} *`]: CampaignLarge,
+      [`${OVERWRITE_HEADLINE} *`]: Typography.campaign.large,
     },
   })}
 `;
@@ -96,7 +95,7 @@ const OverwriteHeadline = `
 const OverwriteRichText = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
+      [`${OVERWRITE_RICH_TEXT}`]: Typography.sans.larger,
     },
   })}
   

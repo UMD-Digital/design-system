@@ -19,7 +19,6 @@ export type TypeTextLockupSmall = {
 const { Colors, Spacing } = Tokens;
 const { Link } = Animations;
 const { Text } = Elements;
-const { SansLarger, SansSmall, SansMin, Eyebrow } = Typography;
 const { GridColumnAndRowsMobileTablet } = Layout;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -83,13 +82,13 @@ const EyebrowStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW}`]: Eyebrow,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW}`]: Typography.elements.eyebrow,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} *`]: Eyebrow,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} *`]: Typography.elements.eyebrow,
     },
   })}
 
@@ -113,13 +112,13 @@ const HeadlineStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: SansLarger,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: Typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: SansLarger,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: Typography.sans.larger,
     },
   })}
 
@@ -143,13 +142,13 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: SansSmall,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: Typography.sans.small,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: SansSmall,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: Typography.sans.small,
     },
   })}
 
@@ -183,13 +182,13 @@ const DateStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`]: SansMin,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`]: Typography.sans.min,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE} *`]: SansMin,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE} *`]: Typography.sans.min,
     },
   })}
 `;

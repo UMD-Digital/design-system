@@ -8,7 +8,6 @@ import Layout from './layout';
 import WebComponents from './web-components';
 
 const { Colors, Font } = Tokens;
-const { SansMedium } = Typography;
 
 const Reset = {
   body: {
@@ -30,7 +29,7 @@ const Reset = {
   },
 
   li: {
-    ...SansMedium,
+    ...Typography.sans.medium,
     color: Colors.gray.dark,
   },
 
@@ -39,7 +38,7 @@ const Reset = {
   },
 
   p: {
-    ...SansMedium,
+    ...Typography.sans.medium,
     color: Colors.gray.dark,
     marginBottom: Tokens.Spacing.md,
 

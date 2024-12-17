@@ -2,7 +2,6 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 const { Spacing, Colors } = Tokens;
-const { SansMin } = Typography;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_CAPTION = 'data-caption';
@@ -18,7 +17,7 @@ const STYLES_IMAGE_CONTAINER = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_IMAGE_CONTAINER} > span`]: SansMin,
+      [`.${ELEMENT_IMAGE_CONTAINER} > span`]: Typography.sans.min,
     },
   })}
 

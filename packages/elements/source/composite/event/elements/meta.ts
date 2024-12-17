@@ -29,7 +29,6 @@ export type TypeMetaDisplay = EventType & {
   showTime?: boolean;
 };
 
-const { SansSmaller } = Typography;
 const { Colors, Spacing } = Tokens;
 
 const { convertJSSObjectToStyles } = Styles;
@@ -115,7 +114,7 @@ const STYLES_EVENT_META = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENTS_DATE_ROW_TEXT}`]: SansSmaller,
+      [`.${ELEMENT_EVENTS_DATE_ROW_TEXT}`]: Typography.sans.small,
     },
   })}
 

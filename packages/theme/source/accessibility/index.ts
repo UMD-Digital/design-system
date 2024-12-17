@@ -1,7 +1,6 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
 
 const { Colors, Spacing } = Tokens;
-const { InterativeSmall } = Typography;
 
 export default {
   '.sr-only': {
@@ -16,7 +15,7 @@ export default {
     width: '1px',
   },
   '.umd-skip-content': {
-    ...InterativeSmall,
+    ...Typography.elements.interativeSmall,
     ...{
       backgroundColor: Colors.white,
       color: Colors.red,

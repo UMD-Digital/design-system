@@ -42,7 +42,6 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
   };
 
 const { Colors, Spacing } = Tokens;
-const { SansLarge } = Typography;
 const { Text } = Elements;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -150,7 +149,7 @@ const TextContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDE_HEADLINE}`]: SansLarge,
+      [`.${ELEMENT_SLIDE_HEADLINE}`]: Typography.sans.large,
     },
   })}
 

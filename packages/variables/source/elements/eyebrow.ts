@@ -1,8 +1,8 @@
 import { Colors, Spacing } from '../tokens';
-import { Eyebrow } from '../typography/elements';
+import { elements } from '../typography';
 
 const Ribbon = {
-  ...Eyebrow,
+  ...elements.eyebrow,
   backgroundColor: Colors.gold,
   padding: `${Spacing.min} ${Spacing.md}`,
   display: `inline-block`,

@@ -5,8 +5,6 @@ import {
 } from '@universityofmaryland/variables';
 import { Asset, Styles } from 'utilities';
 
-const { InterativeSmall } = Typography;
-
 const { convertJSSObjectToStyles } = Styles;
 const { Colors, Font, Spacing, Media } = Tokens;
 const { Link } = Animations;
@@ -159,7 +157,7 @@ const OutlineStyles = `
 const PrimaryStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_CTA_PRIMARY}`]: InterativeSmall,
+      [`.${ELEMENT_CTA_PRIMARY}`]: Typography.elements.interativeSmall,
     },
   })}
 

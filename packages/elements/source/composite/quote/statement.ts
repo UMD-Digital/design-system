@@ -1,21 +1,10 @@
-import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
-import { Styles } from 'utilities';
-
 type TypeQuoteStatement = {
   isThemeDark?: boolean;
 };
 
-const { Spacing } = Tokens;
-const { CampaignExtralarge, SansLarger } = Typography;
-const { LockMax } = Layout;
-
-const MEDIUM = 1000;
-const LARGE = 1300;
-
 const ELEMENT_NAME = 'umd-element-quote-statement';
 
 const QUOTE_STATEMENT_CONTAINER = 'quote-statement-container';
-const QUOTE_STATEMENT_CONTAINER_WRAPPER = 'quote-statement-container-wrapper';
 
 // prettier-ignore
 const STYLES_QUOTE_STATEMENT_ELEMENT = `

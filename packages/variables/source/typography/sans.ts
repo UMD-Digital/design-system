@@ -3,46 +3,46 @@ import { Font, Media } from '../tokens';
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
 
-const SizeExtraLarge = {
+const sizeExtraLarge = {
   fontSize: Font.size['4xl'],
   lineHeight: `1.125em`,
 };
 
-const SizeLarger = {
+const sizeLarger = {
   fontSize: Font.size['3xl'],
   lineHeight: `1.25em`,
 };
 
-const SizeLarge = {
+const sizeLarge = {
   fontSize: Font.size['lg'],
   lineHeight: `1.25em`,
 };
 
-const SizeSmall = {
+const sizeSmall = {
   fontSize: Font.size['base'],
   lineHeight: `1.375em`,
 };
 
-const SizeSmaller = {
+const sizeSmaller = {
   fontSize: Font.size['sm'],
   lineHeight: `1.28em`,
 };
 
-const SizeMin = {
+const sizeMin = {
   fontSize: Font.size['min'],
   lineHeight: `1.16em`,
 };
 
-export const SansMaxium = {
+export const maxium = {
   fontFamily: Font.family['sans'],
   fontWeight: Font.weight['bold'],
-  ...SizeExtraLarge,
+  ...sizeExtraLarge,
 };
 
-export const SansLargest = {
+export const largest = {
   fontFamily: Font.family['sans'],
   fontWeight: Font.weight['bold'],
-  ...SizeLarger,
+  ...sizeLarger,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['3xl']} + 2vw)`,
@@ -54,22 +54,22 @@ export const SansLargest = {
   },
 };
 
-export const SansExtraLarge = {
+export const extraLarge = {
   fontFamily: Font.family['sans'],
-  ...SizeLarge,
+  ...sizeLarge,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['lg']} + 1.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    ...SizeExtraLarge,
+    ...sizeExtraLarge,
   },
 };
 
-export const SansLarger = {
+export const larger = {
   fontFamily: Font.family['sans'],
-  ...SizeLarge,
+  ...sizeLarge,
   lineHeight: `1.40em`,
 
   [`@media (${breakpointLarge})`]: {
@@ -77,19 +77,19 @@ export const SansLarger = {
   },
 
   [`@media (${breakpointDesktop})`]: {
-    ...SizeLarger,
+    ...sizeLarger,
   },
 };
 
-export const SansLarge = {
+export const large = {
   fontFamily: Font.family['sans'],
   fontWeight: Font.weight['bold'],
-  ...SizeLarge,
+  ...sizeLarge,
 };
 
-export const SansMedium = {
+export const medium = {
   fontFamily: Font.family['sans'],
-  ...SizeSmall,
+  ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['base']} + 0.16vw)`,
@@ -101,88 +101,88 @@ export const SansMedium = {
   },
 };
 
-export const SansSmall = {
+export const small = {
   fontFamily: Font.family['sans'],
-  ...SizeSmall,
+  ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['sm']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    ...SizeSmall,
+    ...sizeSmall,
   },
 };
 
-export const SansSmaller = {
+export const smaller = {
   fontFamily: Font.family['sans'],
-  ...SizeSmaller,
+  ...sizeSmaller,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['min']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    ...SizeSmaller,
+    ...sizeSmaller,
   },
 };
 
-export const SansMin = {
+export const min = {
   fontFamily: Font.family['sans'],
-  ...SizeMin,
+  ...sizeMin,
 };
 
-export const SansFonts = {
+export const fonts = {
   maximum: {
     class: 'umd-sans-maximum',
-    ...SansMaxium,
+    ...maxium,
   },
 
   largest: {
     class: 'umd-sans-largest',
-    ...SansLargest,
+    ...largest,
   },
 
   extraLarge: {
     class: 'umd-sans-extralarge',
-    ...SansExtraLarge,
+    ...extraLarge,
   },
 
   larger: {
     class: 'umd-sans-larger',
-    ...SansLarger,
+    ...larger,
   },
 
   large: {
     class: 'umd-sans-large',
-    ...SansLarge,
+    ...large,
   },
 
   medium: {
     class: 'umd-sans-medium',
-    ...SansMedium,
+    ...medium,
   },
 
   small: {
     class: 'umd-sans-small',
-    ...SansSmall,
+    ...small,
   },
 
   smaller: {
     class: 'umd-sans-smaller',
-    ...SansSmaller,
+    ...smaller,
   },
 
   min: {
     class: 'umd-sans-min',
-    ...SansMin,
+    ...min,
   },
 };
 
-export const SansTransformationsFonts = {
+export const transformations = {
   largestUppercase: {
     class: 'umd-sans-largest-uppercase',
-    ...SansLargest,
+    ...largest,
 
     fontWeight: Font.weight['extraBold'],
     textTransform: 'uppercase',
@@ -190,7 +190,7 @@ export const SansTransformationsFonts = {
 
   extraLargeUppercase: {
     class: 'umd-sans-extralarge-uppercase',
-    ...SansExtraLarge,
+    ...extraLarge,
 
     fontWeight: Font.weight['extraBold'],
     textTransform: 'uppercase',
@@ -198,14 +198,14 @@ export const SansTransformationsFonts = {
 
   extraLargeBold: {
     class: 'umd-sans-extralarge-bold',
-    ...SansExtraLarge,
+    ...extraLarge,
 
     fontWeight: Font.weight['bold'],
   },
 
   largerBold: {
     class: 'umd-sans-larger-bold',
-    ...SansLarger,
+    ...larger,
 
     fontWeight: Font.weight['bold'],
   },

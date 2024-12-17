@@ -3,26 +3,26 @@ import { Font, Media } from '../tokens';
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
 
-const FontBase = {
+const base = {
   FontFamily: Font.family['serif'],
 };
 
-const SizeLarger = {
+const sizeLarger = {
   fontSize: Font.size['4xl'],
   lineHeight: `1.18em`,
 };
-const SizeLarge = {
+const sizeLarge = {
   fontSize: Font.size['3xl'],
   lineHeight: `1em`,
 };
-const SizeMedium = {
+const sizeMedium = {
   fontSize: Font.size['xl'],
   lineHeight: `1.5em`,
 };
 
-export const SerifMaxium = {
-  ...FontBase,
-  ...SizeLarger,
+export const maxium = {
+  ...base,
+  ...sizeLarger,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['4xl']} + 4vw)`,
@@ -35,9 +35,9 @@ export const SerifMaxium = {
   },
 };
 
-export const SerifExtralarge = {
-  ...FontBase,
-  ...SizeLarger,
+export const extralarge = {
+  ...base,
+  ...sizeLarger,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['4xl']} + 2vw)`,
@@ -49,60 +49,60 @@ export const SerifExtralarge = {
   },
 };
 
-export const SerifLarger = {
-  ...FontBase,
-  ...SizeLarge,
+export const larger = {
+  ...base,
+  ...sizeLarge,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['3xl']} + 0.66vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    ...SizeLarger,
+    ...sizeLarger,
   },
 };
 
-export const SerifLarge = {
-  ...FontBase,
-  ...SizeMedium,
+export const large = {
+  ...base,
+  ...sizeMedium,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['xl']} + 0.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    ...SizeLarge,
+    ...sizeLarge,
   },
 };
 
-export const SerifMedium = {
-  ...FontBase,
-  ...SizeMedium,
+export const medium = {
+  ...base,
+  ...sizeMedium,
 };
 
-export const SerifFonts = {
+export const fonts = {
   maximum: {
     class: 'umd-serif-maximum',
-    ...SerifMaxium,
+    ...maxium,
   },
 
   extraLarge: {
     class: 'umd-serif-extralarge',
-    ...SerifExtralarge,
+    ...extralarge,
   },
 
   larger: {
     class: 'umd-serif-larger',
-    ...SerifLarger,
+    ...larger,
   },
 
   large: {
     class: 'umd-serif-large',
-    ...SerifLarge,
+    ...large,
   },
 
   medium: {
     class: 'umd-serif-medium',
-    ...SerifMedium,
+    ...medium,
   },
 };

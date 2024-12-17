@@ -24,7 +24,7 @@ const ELEMENT_SLIDE_ACTION_BUTTON = 'nav-slide-action-button';
 const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDE_ACTION_LINK}`]: Typography.SansSmall,
+      [`.${ELEMENT_SLIDE_ACTION_LINK}`]: Typography.sans.small,
     },
   })}
 

@@ -97,7 +97,7 @@ export const UtilityContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER} *`]: Typography.SansSmaller
+      [`.${UTILITY_CONTAINER} *`]: Typography.sans.smaller
     },
   })}
 

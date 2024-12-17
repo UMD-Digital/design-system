@@ -1,4 +1,8 @@
-import { Tokens, Elements, Typography } from '@universityofmaryland/variables';
+import {
+  ElementStyles,
+  Tokens,
+  Typography,
+} from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
@@ -10,7 +14,6 @@ type TypePersonBioProps = TypePersonProps & {
 
 const { convertJSSObjectToStyles } = Styles;
 const { Spacing, Colors } = Tokens;
-const { Text } = Elements;
 
 const SMALL = 650;
 
@@ -66,7 +69,7 @@ const OverwriteText = `
 const DescriptionStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_BIO_DESCRIPTION}`]: Text.RichText,
+      [`.${ELEMENT_PERSON_BIO_DESCRIPTION}`]: ElementStyles.richText.advanced,
     },
   })}
 

@@ -1,7 +1,7 @@
 import {
+  ElementStyles,
   Layout,
   Tokens,
-  Elements,
   Typography,
 } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
@@ -12,7 +12,6 @@ type TypeHeroLogoProps = TypeTextContainerProps & TypeImageContainerProps;
 
 const { LockSmall } = Layout;
 const { Colors, Spacing } = Tokens;
-const { Eyebrow } = Elements;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -67,7 +66,7 @@ const OverwriteTheme = `
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: Eyebrow.Ribbon,
+      [`${OVERWRITE_EYEBROW}`]: ElementStyles.text.ribbon,
     },
   })}
   

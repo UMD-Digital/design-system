@@ -1,7 +1,7 @@
 import { Colors, Spacing } from '../tokens';
 import { sans } from '../typography';
 
-const Base = {
+const base = {
   [`& ul,
     & ol ul`]: {
     padding: '0',
@@ -88,7 +88,8 @@ const Base = {
   },
 };
 
-const Unordered = {
+export const unordered = {
+  ...base,
   // disc
 
   [`& ul[style*='list-style-type:disc'] > li:before,
@@ -111,7 +112,8 @@ const Unordered = {
   },
 };
 
-const Ordered = {
+export const ordered = {
+  ...base,
   // decimal
 
   [`& ol[style*='list-style-type:decimal'] > li:before,
@@ -231,10 +233,4 @@ const Ordered = {
     & > ol[style*='list-style-type: upper-alpha'] > li:before`]: {
     content: 'counter(item, upper-alpha)',
   },
-};
-
-export default {
-  Base,
-  Unordered,
-  Ordered,
 };

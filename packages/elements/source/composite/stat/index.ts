@@ -1,4 +1,8 @@
-import { Typography, Tokens, Elements } from '@universityofmaryland/variables';
+import {
+  ElementStyles,
+  Typography,
+  Tokens,
+} from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 type TypeStatElement = {
@@ -15,7 +19,6 @@ type TypeStatRequirements = TypeStatElement & {
 };
 
 const { convertJSSObjectToStyles } = Styles;
-const { Text } = Elements;
 const { Colors, Media, Spacing } = Tokens;
 
 const BLOCK_TEXTURE = `<svg id="stat_block-texture" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" ><defs><style>.cls-1{opacity:.02;}.cls-1,.cls-2{fill:#454545;fill-rule:evenodd;isolation:isolate;stroke-width:0px;}.cls-2{opacity:.04;}</style></defs><path class="cls-1" d="M109.49,0H0v63.18l181.67,182.32L0,427.82v63.18h109.49l244.61-245.5L109.49,0Z"/><path class="cls-2" d="M108.94,0h172.44l244.61,245.5-244.61,245.5H108.94l244.61-245.5L108.94,0ZM0,179.11l58.16-58.29L0,62.54v116.57Z"/></svg>`;
@@ -65,7 +68,7 @@ const VarationThemeDarkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_TEXT}`]: Text.RichTextDarkAnimations,
+      [`${OVERWRITE_THEME_DARK_TEXT}`]: ElementStyles.richText.advancedDarkAnimations,
     },
   })}
 
@@ -191,7 +194,7 @@ const StatDisplayStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_TEXT}`]: Text.RichText,
+      [`.${ELEMENT_STAT_TEXT}`]: ElementStyles.richText.advanced,
     },
   })}
 

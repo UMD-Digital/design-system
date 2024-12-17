@@ -1,9 +1,9 @@
 import { Colors, Font, Spacing } from '../tokens';
 import { sans } from '../typography';
 import { line as lineAnimations } from '../animations';
-import Lists from './list';
+import * as lists from './list';
 
-const Base = {
+export const simpleBase = {
   ...sans.small,
   lineHeight: '1.5em',
 
@@ -38,8 +38,8 @@ const Base = {
   },
 };
 
-const RichTextBase = {
-  ...Base,
+export const advancedBase = {
+  ...simpleBase,
   ...sans.medium,
 
   [`& p,
@@ -74,24 +74,23 @@ const RichTextBase = {
   },
 };
 
-const Simple = {
-  ...Base,
+export const simple = {
+  ...simpleBase,
 };
 
-const SimpleLarge = {
-  ...Base,
+export const simpleLarge = {
+  ...simpleBase,
   ...sans.medium,
 };
 
-const RichText = {
+export const advanced = {
   FontWeight: Font.weight.normal,
-  ...RichTextBase,
-  ...Lists.Base,
-  ...Lists.Ordered,
-  ...Lists.Unordered,
+  ...advancedBase,
+  ...lists.ordered,
+  ...lists.unordered,
 };
 
-const RichTextDarkAnimations = {
+export const advancedDarkAnimations = {
   color: Colors.white,
 
   '& *': {
@@ -103,15 +102,7 @@ const RichTextDarkAnimations = {
   },
 };
 
-const RichTextDark = {
-  ...RichText,
-  ...RichTextDarkAnimations,
-};
-
-export default {
-  Simple,
-  SimpleLarge,
-  RichText,
-  RichTextDarkAnimations,
-  RichTextDark,
+export const advancedDark = {
+  ...advanced,
+  ...advancedDarkAnimations,
 };

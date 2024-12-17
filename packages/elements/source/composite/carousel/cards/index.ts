@@ -1,8 +1,8 @@
 import {
+  ElementStyles,
+  Layout,
   Tokens,
   Typography,
-  Layout,
-  Elements,
 } from '@universityofmaryland/variables';
 import { AnimationCarouselBlocks } from 'macros';
 import { Styles } from 'utilities';
@@ -17,7 +17,6 @@ type TypeCarouselCardsRequirements = {
 };
 
 const { convertJSSObjectToStyles } = Styles;
-const { Text } = Elements;
 const { Colors, Spacing } = Tokens;
 const { LockMax } = Layout;
 
@@ -125,7 +124,7 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: Text.RichTextDark,
+      [`.${INTRO_CONTAINER_TEXT}`]: ElementStyles.richText.advancedDark,
     },
   })}
 

@@ -1,8 +1,8 @@
 import {
-  Typography,
+  ElementStyles,
   Layout,
   Tokens,
-  Elements,
+  Typography,
 } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
@@ -18,7 +18,6 @@ export type TypePathwayTextContainer = {
 };
 
 const { Spacing, Colors } = Tokens;
-const { Eyebrow, Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
 
 const { convertJSSObjectToStyles } = Styles;
@@ -80,7 +79,7 @@ const EyebrowStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: Eyebrow.Ribbon,
+      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: ElementStyles.text.ribbon,
     },
   })}
 `;
@@ -136,13 +135,13 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: Text.RichText,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: ElementStyles.richText.advanced,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: Text.RichText,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: ElementStyles.richText.advanced,
     },
   })}
 

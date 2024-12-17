@@ -1,4 +1,8 @@
-import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
+import {
+  ElementStyles,
+  Tokens,
+  Typography,
+} from '@universityofmaryland/variables';
 import { ButtonFullScreen } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import {
@@ -42,7 +46,6 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
   };
 
 const { Colors, Spacing } = Tokens;
-const { Text } = Elements;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 500;
@@ -160,7 +163,7 @@ const TextContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDE_RICH_TEXT}`]: Text.RichText,
+      [`.${ELEMENT_SLIDE_RICH_TEXT}`]: ElementStyles.richText.advanced,
     },
   })}
 `

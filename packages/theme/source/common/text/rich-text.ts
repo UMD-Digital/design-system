@@ -1,7 +1,10 @@
-import { Typography, Elements, Tokens } from '@universityofmaryland/variables';
+import {
+  Typography,
+  ElementStyles,
+  Tokens,
+} from '@universityofmaryland/variables';
 
 const { Colors, Spacing, Font } = Tokens;
-const { Text } = Elements;
 
 const RichTextCoding = {
   '.umd-rich-text-coding': {
@@ -82,18 +85,18 @@ const RichTextTables = {
 
 export default {
   '.umd-text-simple': {
-    ...Text.Simple,
+    ...ElementStyles.richText.simple,
   },
   '.umd-text-simple-large': {
-    ...Text.SimpleLarge,
+    ...ElementStyles.richText.simpleLarge,
   },
   '.umd-rich-text': {
-    ...Text.RichText,
+    ...ElementStyles.richText.advanced,
     ...RichTextCoding['.umd-rich-text-coding'],
     ...RichTextQuotes['.umd-rich-text-inline-quote'],
     ...RichTextTables['.umd-rich-text-inline-table'],
   },
   '.umd-rich-text-dark': {
-    ...Text.RichTextDark,
+    ...ElementStyles.richText.advancedBase,
   },
 };

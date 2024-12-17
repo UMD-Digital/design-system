@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Queries, Spacing } = Tokens;
+const { Media, Spacing } = Tokens;
 
 const Default = {
   'umd-element-social-sharing:not(:defined)': {
@@ -15,7 +15,7 @@ const Default = {
 };
 
 const FixedStyles = {
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     display: 'block',
     position: 'fixed',
     left: '0',
@@ -23,7 +23,7 @@ const FixedStyles = {
     zIndex: '9999',
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     left: '40px',
   },
 };

@@ -1,23 +1,22 @@
-import { FontFamily, FontSize, FontWeight } from '../tokens/fonts';
-import { Queries } from '../tokens/breakpoints';
+import { Font, Media } from '../tokens';
 
-const breakpointLarge = Queries.large.min;
-const breakpointDesktop = Queries.desktop.min;
+const breakpointLarge = Media.queries.large.min;
+const breakpointDesktop = Media.queries.desktop.min;
 
 const FontBase = {
-  fontFamily: FontFamily['serif'],
+  FontFamily: Font.family['serif'],
 };
 
 const SizeLarger = {
-  fontSize: FontSize['4xl'],
+  fontSize: Font.size['4xl'],
   lineHeight: `1.18em`,
 };
 const SizeLarge = {
-  fontSize: FontSize['3xl'],
+  fontSize: Font.size['3xl'],
   lineHeight: `1em`,
 };
 const SizeMedium = {
-  fontSize: FontSize['xl'],
+  fontSize: Font.size['xl'],
   lineHeight: `1.5em`,
 };
 
@@ -26,12 +25,12 @@ export const SerifMaxium = {
   ...SizeLarger,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${FontSize['4xl']} + 4vw)`,
+    fontSize: `calc(${Font.size['4xl']} + 4vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: FontSize['9xl'],
-    fontWeight: FontWeight['light'],
+    fontSize: Font.size['9xl'],
+    fontWeight: Font.weight['light'],
     lineHeight: `1.025em`,
   },
 };
@@ -41,11 +40,11 @@ export const SerifExtralarge = {
   ...SizeLarger,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${FontSize['4xl']} + 2vw)`,
+    fontSize: `calc(${Font.size['4xl']} + 2vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: FontSize['6xl'],
+    fontSize: Font.size['6xl'],
     lineHeight: `1.07em`,
   },
 };
@@ -55,7 +54,7 @@ export const SerifLarger = {
   ...SizeLarge,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${FontSize['3xl']} + 0.66vw)`,
+    fontSize: `calc(${Font.size['3xl']} + 0.66vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -68,7 +67,7 @@ export const SerifLarge = {
   ...SizeMedium,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${FontSize['xl']} + 0.33vw)`,
+    fontSize: `calc(${Font.size['xl']} + 0.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {

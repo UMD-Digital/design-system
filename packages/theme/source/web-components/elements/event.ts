@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Queries, Colors, Spacing } = Tokens;
+const { Media, Colors, Spacing } = Tokens;
 
 const Default = {
   'umd-element-event:not(:defined)': {
@@ -16,7 +16,7 @@ const Default = {
 
 const Featured = {
   'umd-element-event[display="feature"]': {
-    [`@media (${Queries.large.max})`]: {
+    [`@media (${Media.queries.large.max})`]: {
       borderBottom: `1px solid ${Colors.gray.light}`,
       paddingBottom: `${Spacing.md}`,
     },

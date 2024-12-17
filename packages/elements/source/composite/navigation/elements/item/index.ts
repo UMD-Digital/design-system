@@ -27,7 +27,7 @@ export type TypeNavItemRequirements = TypeDropdownProps &
 
 type TypeNavItem = TypeNavItemRequirements;
 
-const { Colors, Spacing, FontFamily, FontSize } = Tokens;
+const { Colors, Font, Spacing } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-element-nav-item';
@@ -85,7 +85,7 @@ const PrimaryStyles = `
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a {
     color: ${Colors.black};
-    font-size: ${FontSize.base};
+    font-size: ${Font.size.base};
     white-space: nowrap;
     transition: color 0.2s ease-in-out;
     line-height: 1.45em;
@@ -217,8 +217,8 @@ const STYLES_NAV_ITEM_ELEMENT = `
   }
 
   .${ELEMENT_NAV_ITEM_CONTAINER} a {
-    font-family: ${FontFamily.sans};
-    font-size: ${FontSize.sm};
+    font-family: ${Font.family.sans};
+    font-size: ${Font.size.sm};
     font-weight: 700;
     color: ${Colors.black};
     text-decoration: none;

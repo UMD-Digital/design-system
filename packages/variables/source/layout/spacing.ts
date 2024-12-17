@@ -1,14 +1,13 @@
-import { Queries } from '../tokens/breakpoints';
-import { Spacing } from '../tokens/spacing';
+import { Media, Spacing } from '../tokens';
 
 const VerticalLanding = {
   marginBottom: Spacing['3xl'],
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     marginBottom: Spacing['6xl'],
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     marginBottom: '120px',
   },
 };
@@ -16,11 +15,11 @@ const VerticalLanding = {
 const VerticalLandingChild = {
   marginBottom: Spacing.lg,
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     marginBottom: Spacing['xl'],
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     marginBottom: Spacing['2xl'],
   },
 };
@@ -28,7 +27,7 @@ const VerticalLandingChild = {
 const VerticalInterior = {
   marginBottom: Spacing['3xl'],
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     marginBottom: Spacing['6xl'],
   },
 };

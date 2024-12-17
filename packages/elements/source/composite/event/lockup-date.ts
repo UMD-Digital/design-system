@@ -12,7 +12,7 @@ type TypeEventLockupDate = {
   isThemeDark?: boolean;
 };
 
-const { FontSize, Spacing } = Tokens;
+const { Font, Spacing } = Tokens;
 const { Link } = Animations;
 const { SansLarge } = Typography;
 const { convertJSSObjectToStyles } = Styles;
@@ -45,7 +45,7 @@ const HeadlineStyles = `
   @media (max-width: 767px) {
     .${EVENT_HEADLINE},
     .${EVENT_HEADLINE} * {
-      font-size: ${FontSize.sm};
+      font-size: ${Font.size.sm};
       font-weight: 600;
     }
   }

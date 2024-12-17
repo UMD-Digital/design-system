@@ -1,11 +1,11 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Queries, Spacing, Colors } = Tokens;
+const { Media, Spacing, Colors } = Tokens;
 
 const BorderedChildren = {
   padding: Spacing.md,
 
-  [`@media (${Queries.highDef.min})`]: {
+  [`@media (${Media.queries.highDef.min})`]: {
     padding: Spacing['2xl'],
   },
 };
@@ -14,7 +14,7 @@ const GutterlessTwoColumn = {
   display: 'grid',
   gridGap: Spacing.min,
 
-  [`@media (${Queries.large.min})`]: {
+  [`@media (${Media.queries.large.min})`]: {
     gridGap: `0px`,
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
@@ -24,11 +24,11 @@ const GutterlessThreeColumn = {
   display: 'grid',
   gridGap: Spacing.min,
 
-  [`@media (${Queries.large.min})`]: {
+  [`@media (${Media.queries.large.min})`]: {
     gridGap: `0px`,
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
   },
 };
@@ -37,12 +37,12 @@ const GutterlessFourColumn = {
   display: 'grid',
   gridGap: Spacing.min,
 
-  [`@media (${Queries.large.min})`]: {
+  [`@media (${Media.queries.large.min})`]: {
     gridGap: `0px`,
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(4, 1fr)',
   },
 };

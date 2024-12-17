@@ -18,7 +18,7 @@ type TypeAlertButtonProps = {
   container: HTMLElement;
 };
 
-const { Colors, Spacing, MaxWidth } = Tokens;
+const { Colors, Spacing, SpaceLayout } = Tokens;
 const { LockMax } = Layout;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -37,13 +37,13 @@ const OVERWRITE_TEXT_BODY = `.${ELEMENT_ALERT_SITE_CONTAINER} .${TEXT_CONSTANTS.
 
 const OverwriteText = `
   ${OVERWRITE_TEXT_WRAPPER} {
-    max-width: ${MaxWidth.large};
+    max-width: ${SpaceLayout.maxWidth.large};
   }
 
   ${OVERWRITE_TEXT_BODY},
   ${OVERWRITE_TEXT_BODY} * {
     color: ${Colors.black};
-    max-width: ${MaxWidth.large};
+    max-width: ${SpaceLayout.maxWidth.large};
   }
 `;
 

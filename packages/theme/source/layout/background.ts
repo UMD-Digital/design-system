@@ -1,15 +1,15 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Spacing, Queries, Colors } = Tokens;
+const { Spacing, Media, Colors } = Tokens;
 
 const BackgroundPadding = {
   padding: `${Spacing['2xl']} 0`,
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     padding: `${Spacing['6xl']} 0`,
   },
 
-  [`@media (${Queries.highDef})`]: {
+  [`@media (${Media.queries.highDef})`]: {
     padding: `${Spacing['8xl']} 0`,
   },
 };
@@ -28,11 +28,11 @@ const BackgroundQuater = {
     zIndex: -1,
     backgroundColor: `${Colors.gray.lightest}`,
 
-    [`@media (${Queries.tablet.max})`]: {
+    [`@media (${Media.queries.tablet.max})`]: {
       display: 'none',
     },
 
-    [`@media (${Queries.desktop.min})`]: {
+    [`@media (${Media.queries.desktop.min})`]: {
       width: `calc(75% + 80px)`,
     },
   },
@@ -43,11 +43,11 @@ const BackgroundBox = {
   backgroundColor: `${Colors.gray.lighter}`,
   borderLeft: `2px solid ${Colors.red}`,
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     padding: `${Spacing.lg}`,
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     padding: `${Spacing['3xl']}`,
   },
 };

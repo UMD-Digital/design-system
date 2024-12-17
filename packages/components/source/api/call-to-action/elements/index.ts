@@ -4,7 +4,7 @@ import { Styles, Markup } from 'utilities';
 import { ELEMENTS, SLOTS, VARIABLES, REFERENCES } from '../globals';
 import { UMDCallToActionElement } from '../index';
 
-const { Colors, FontSize, Spacing } = Tokens;
+const { Colors, Font, Spacing } = Tokens;
 const { CallToAction } = Composite;
 const { Node } = Markup.create;
 
@@ -46,7 +46,7 @@ const PlainTextSlotStyles = `
   .${CTA_PLAIN_TEXT_SLOT} {
     text-decoration: underline;
     display: inline-block;
-    font-size: ${FontSize.min};
+    font-size: ${Font.size.min};
     transition: color .5s;
     position: relative;
   }

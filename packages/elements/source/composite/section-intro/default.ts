@@ -11,7 +11,7 @@ type TypeSectionIntroDefaultProps = {
 };
 
 const { SansLargest, SansLarger, SansMedium } = Typography;
-const { Colors, Spacing, MaxWidth } = Tokens;
+const { Colors, Spacing, SpaceLayout } = Tokens;
 const { GridColumnAndRowsMobileTablet } = Layout;
 
 const { convertJSSObjectToStyles } = Styles;
@@ -198,7 +198,7 @@ const ActionStyles = `
 const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
   .${ELEMENT_INTRO_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: ${MaxWidth.small};
+    max-width: ${SpaceLayout.maxWidth.small};
     margin: 0 auto;
   }
 

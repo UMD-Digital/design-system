@@ -1,5 +1,4 @@
-import { Queries } from '../tokens/breakpoints';
-import { Spacing, MaxWidth } from '../tokens/spacing';
+import { Media, Spacing, SpaceLayout } from '../tokens';
 
 const lockBase = {
   display: 'block',
@@ -7,19 +6,19 @@ const lockBase = {
   marginRight: 'auto',
   paddingLeft: Spacing['md'],
   paddingRight: Spacing['md'],
-  maxWidth: `${MaxWidth.max}`,
+  maxWidth: `${SpaceLayout.maxWidth.max}`,
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     paddingLeft: Spacing['2xl'],
     paddingRight: Spacing['2xl'],
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     paddingLeft: Spacing['4xl'],
     paddingRight: Spacing['4xl'],
   },
 
-  [`@media (${Queries.highDef.min})`]: {
+  [`@media (${Media.queries.highDef.min})`]: {
     paddingLeft: Spacing.max,
     paddingRight: Spacing.max,
   },
@@ -36,22 +35,22 @@ const LockMax = {
 
 const LockLarge = {
   ...lockBase,
-  maxWidth: `${MaxWidth.large}`,
+  maxWidth: `${SpaceLayout.maxWidth.large}`,
 };
 
 const LockNormal = {
   ...lockBase,
-  maxWidth: `${MaxWidth.normal}`,
+  maxWidth: `${SpaceLayout.maxWidth.normal}`,
 };
 
 const LockSmall = {
   ...lockBase,
-  maxWidth: `${MaxWidth.small}`,
+  maxWidth: `${SpaceLayout.maxWidth.small}`,
 };
 
 const LockSmallest = {
   ...lockBase,
-  maxWidth: `${MaxWidth.smallest}`,
+  maxWidth: `${SpaceLayout.maxWidth.smallest}`,
 };
 
 export default {

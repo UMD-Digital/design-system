@@ -1,104 +1,102 @@
-import { FontFamily, FontSize, FontWeight } from '../tokens/fonts';
-import { Queries } from '../tokens/breakpoints';
-import { Colors } from '../tokens/colors';
+import { Colors, Font, Media } from '../tokens';
 
-const breakpointLarge = Queries.large.min;
-const breakpointDesktop = Queries.desktop.min;
+const breakpointLarge = Media.queries.large.min;
+const breakpointDesktop = Media.queries.desktop.min;
 
 export const Eyebrow = {
   fontWeight: 700,
   color: Colors.black,
-  fontSize: FontSize.min,
+  fontSize: Font.size.min,
   lineHeight: 1,
   textTransform: `uppercase`,
   letterSpacing: `.05em`,
 };
 
 export const LabelMedium = {
-  fontFamily: FontFamily['sans'],
-  fontSize: FontSize['sm'],
+  fontFamily: Font.family['sans'],
+  fontSize: Font.size['sm'],
   lineHeight: `1.42em`,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${FontSize['sm']} + 0.16vw)`,
+    fontSize: `calc(${Font.size['sm']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: FontSize['base'],
+    fontSize: Font.size['base'],
     letterSpacing: '0.16em',
     lineHeight: `1.5em`,
   },
 };
 
 export const LabelSmall = {
-  fontFamily: FontFamily['sans'],
-  fontSize: FontSize['sm'],
+  fontFamily: Font.family['sans'],
+  fontSize: Font.size['sm'],
   letterSpacing: '0.16em',
   lineHeight: `1.42em`,
 };
 
 export const InterativeMedium = {
-  fontFamily: FontFamily['sans'],
-  fontSize: FontSize['base'],
+  fontFamily: Font.family['sans'],
+  fontSize: Font.size['base'],
   lineHeight: `1.125em`,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${FontSize['base']} + 0.16vw)`,
+    fontSize: `calc(${Font.size['base']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: FontSize['lg'],
-    fontWeight: FontWeight['bold'],
+    fontSize: Font.size['lg'],
+    fontWeight: Font.weight['bold'],
     letterSpacing: '-0.01em',
     lineHeight: `1.11em`,
   },
 };
 
 export const InterativeSmall = {
-  fontFamily: FontFamily['sans'],
-  fontSize: FontSize['base'],
-  fontWeight: FontWeight['bold'],
+  fontFamily: Font.family['sans'],
+  fontSize: Font.size['base'],
+  fontWeight: Font.weight['bold'],
   letterSpacing: '-0.01em',
   lineHeight: `1.125.em`,
 };
 
 export const StatisticsLarge = {
-  fontFamily: FontFamily['campaign'],
-  fontSize: FontSize['9xl'],
-  fontWeight: FontWeight['extraBold'],
+  fontFamily: Font.family['campaign'],
+  fontSize: Font.size['9xl'],
+  fontWeight: Font.weight['extraBold'],
   fontStyle: 'italic',
   lineHeight: '1',
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${FontSize['9xl']} + 3.33vw)`,
+    fontSize: `calc(${Font.size['9xl']} + 3.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: FontSize['max'],
+    fontSize: Font.size['max'],
   },
 };
 
 export const StatisticsMedium = {
-  fontFamily: FontFamily['campaign'],
-  fontSize: FontSize['7xl'],
+  fontFamily: Font.family['campaign'],
+  fontSize: Font.size['7xl'],
   fontStyle: 'italic',
-  fontWeight: FontWeight['extraBold'],
+  fontWeight: Font.weight['extraBold'],
   lineHeight: '1',
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${FontSize['7xl']} + 1.33vw)`,
+    fontSize: `calc(${Font.size['7xl']} + 1.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: FontSize['10xl'],
+    fontSize: Font.size['10xl'],
   },
 };
 
 export const StatisticsSmall = {
-  fontFamily: FontFamily['campaign'],
-  fontSize: FontSize['7xl'],
+  fontFamily: Font.family['campaign'],
+  fontSize: Font.size['7xl'],
   fontStyle: 'italic',
-  fontWeight: FontWeight['extraBold'],
+  fontWeight: Font.weight['extraBold'],
   lineHeight: '0.87em',
 };
 

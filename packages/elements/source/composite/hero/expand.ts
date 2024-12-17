@@ -16,7 +16,7 @@ type TypeAssets = {
 type TypeLayoutImageExpandProps = TypeContent & TypeAssets;
 
 const { convertJSSObjectToStyles } = Styles;
-const { Colors, Spacing, Queries } = Tokens;
+const { Colors, Spacing, Media } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignMaxium } = Typography;
 
@@ -93,7 +93,7 @@ const ImageSizeContainer = `
     }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_IMAGE_SIZE} {
@@ -153,7 +153,7 @@ const ImageContainer = `
     }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
@@ -178,7 +178,7 @@ const TextContainer = `
     padding: ${Spacing.md} 0;
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     .${ELEMENT_EXPAND_TEXT_CONTAINER} {
       padding: ${Spacing['3xl']} 0;
       display: flex;
@@ -187,7 +187,7 @@ const TextContainer = `
     }
   }
 
-  @media (${Queries.highDef.min}) {
+  @media (${Media.queries.highDef.min}) {
     .${ELEMENT_EXPAND_TEXT_CONTAINER} {
       padding: ${Spacing['6xl']} 0;
     }
@@ -231,7 +231,7 @@ const elementPosition = `
     position: relative;
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_STICKY} {
@@ -264,7 +264,7 @@ const STYLES_HERO_EXPAND = `
     }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPLAND_DECLARATION} {

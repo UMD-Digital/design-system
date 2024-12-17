@@ -4,7 +4,7 @@ import TextLockupSmall, { TypeTextLockupSmall } from './small';
 
 type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
-const { FontSize } = Tokens;
+const { Font } = Tokens;
 const { SansExtraLarge, SansMedium, SansSmall } = Typography;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -39,7 +39,7 @@ const HeadlineStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OverwriteHeadline},
     ${OverwriteHeadline} * {
-      font-size: ${FontSize.lg};
+      font-size: ${Font.size.lg};
     }
   }
 `;

@@ -3,7 +3,7 @@ import { ButtonVideoState } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import { Accessibility } from 'utilities';
 
-const { Spacing, Colors, Queries } = Tokens;
+const { Media, Colors, Spacing } = Tokens;
 
 type TypeScaleProps = {
   isImageScaled: boolean;
@@ -38,7 +38,7 @@ const EventSignStyles = `
     padding: ${Spacing.min};
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     .${ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN} {
       padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
     }

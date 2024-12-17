@@ -8,7 +8,7 @@ import { Asset, Styles } from 'utilities';
 const { InterativeSmall } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
-const { Colors, FontSize, Spacing, Queries } = Tokens;
+const { Colors, Font, Spacing, Media } = Tokens;
 const { Link } = Animations;
 
 const MAX_WIDTH = 380;
@@ -109,14 +109,14 @@ const OverwriteThemeDarkStyles = `
 
 // prettier-ignore
 const OverwriteSizeStyles = `
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     ${IS_LARGE_SIZE} {
-      font-size: ${FontSize.lg};
+      font-size: ${Font.size.lg};
       padding: ${Spacing.sm} ${Spacing.lg};
     }
   }
   
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     ${IS_LARGE_SIZE} svg {
       height: 17px;
       width: 17px;
@@ -206,7 +206,7 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
   .${ELEMENT_BASE_CTA} {
     display: inline-block;
     padding: ${Spacing.xs} ${Spacing.lg};
-    font-size: ${FontSize.base};
+    font-size: ${Font.size.base};
     display: inline-block;
     font-weight: 700;
     text-align: left;

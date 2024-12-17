@@ -1,7 +1,7 @@
 import { Tokens, Typography } from '@universityofmaryland/variables';
 import Assets from '../../assets';
 
-const { Colors, Queries, Spacing } = Tokens;
+const { Colors, Media, Spacing } = Tokens;
 const { Icons } = Assets;
 
 const CONTAINER_QUERY_NAME = `umd-forms-layout`;
@@ -245,7 +245,7 @@ const FormElementDateTime = {
     display: 'none',
   },
 
-  [`@container ${CONTAINER_QUERY_NAME} (${Queries.medium.min})`]: {
+  [`@container ${CONTAINER_QUERY_NAME} (${Media.queries.medium.min})`]: {
     backgroundPosition: `calc(100% - ${Spacing.sm}) center`,
     padding: Spacing.sm,
   },

@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Spacing, Queries } = Tokens;
+const { Spacing, Media } = Tokens;
 
 const BrandLogo = {
   'umd-element-brand-logo-animation:not(:defined)': {
@@ -15,7 +15,7 @@ const BrandLogo = {
     zIndex: '9',
     overflow: 'clip',
 
-    [`@media (${Queries.highDef.min})`]: {
+    [`@media (${Media.queries.highDef.min})`]: {
       top: '-11vw',
       height: '50vw',
     },

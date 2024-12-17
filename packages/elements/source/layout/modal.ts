@@ -8,7 +8,7 @@ type TypeFixedFullScreenProps = {
   context?: HTMLElement | null;
 };
 
-const { Queries, Spacing } = Tokens;
+const { Media, Spacing } = Tokens;
 
 const ELEMENT_CONTAINER = 'modal-screen-container';
 
@@ -25,7 +25,7 @@ export const STYLES_MODAL = `
     padding: ${Spacing.xl} ${Spacing.md};
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     .${ELEMENT_CONTAINER} {
       padding: 10vh 10vw;
     }

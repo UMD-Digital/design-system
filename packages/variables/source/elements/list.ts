@@ -1,6 +1,5 @@
+import { Colors, Spacing } from '../tokens';
 import Typography from '../typography';
-import { Colors } from '../tokens/colors';
-import { Spacing } from '../tokens/spacing';
 
 const { SansLarge } = Typography;
 

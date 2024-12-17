@@ -1,5 +1,4 @@
-import { Colors } from '../tokens/colors';
-import { Spacing } from '../tokens/spacing';
+import { Colors, Spacing } from '../tokens';
 import { Eyebrow } from '../typography/elements';
 
 const Ribbon = {

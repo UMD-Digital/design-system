@@ -1,4 +1,4 @@
-const FontSize = {
+export const size = {
   min: '12px',
   sm: '14px',
   base: '16px',
@@ -16,7 +16,7 @@ const FontSize = {
   max: '120px',
 };
 
-const FontWeight = {
+export const weight = {
   thin: '100',
   extraLight: '200',
   light: '300',
@@ -29,11 +29,9 @@ const FontWeight = {
   extraBlack: '950',
 };
 
-const FontFamily = {
+export const family = {
   campaign: "'Barlow Condensed', Arial Narrow, sans-serif",
   sans: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
   serif: "'Crimson Pro', Georgia, serif",
   mono: 'monospace',
 };
-
-export { FontFamily, FontSize, FontWeight };

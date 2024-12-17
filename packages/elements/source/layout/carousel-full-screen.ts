@@ -7,7 +7,7 @@ type TypeFixedFullScreenProps = {
   callback: () => void;
 };
 
-const { Colors, Queries } = Tokens;
+const { Colors, Media } = Tokens;
 
 const ELEMENT_CLOSE_BUTTON = 'carousel-fixed-screen-button';
 
@@ -20,7 +20,7 @@ const STYLES_FIXED_FULL_SCREEN = `
     right: 10px;
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     .${ELEMENT_CLOSE_BUTTON} {
       top: calc(10vh - 22px);
       right: calc(10vw - 22px);

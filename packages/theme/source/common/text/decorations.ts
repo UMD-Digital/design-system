@@ -2,10 +2,9 @@ import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
 
 const { Eyebrow } = Elements;
 const { Spacing, Colors, Media } = Tokens;
-const { LabelSmall, SansMin } = Typography;
 
 const Tailwing = {
-  ...LabelSmall,
+  ...Typography.elements.labelSmall,
   textAlign: 'center',
   textTransform: 'uppercase',
   overflow: 'hidden',
@@ -55,7 +54,7 @@ const Tailwing = {
 };
 
 const TailwingRight = {
-  ...LabelSmall,
+  ...Typography.elements.labelSmall,
   textTransform: 'uppercase',
   position: 'relative',
   overflow: 'hidden',
@@ -123,7 +122,7 @@ const PillWrapper = {
 };
 
 const PillListChild = {
-  ...SansMin,
+  ...Typography.sans.min,
   display: 'inline-block',
   padding: `${Spacing.min} ${Spacing.xs}`,
   marginBottom: '0',

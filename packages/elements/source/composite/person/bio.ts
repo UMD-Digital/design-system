@@ -11,7 +11,6 @@ type TypePersonBioProps = TypePersonProps & {
 const { convertJSSObjectToStyles } = Styles;
 const { Spacing, Colors } = Tokens;
 const { Text } = Elements;
-const { SansExtraLarge } = Typography;
 
 const SMALL = 650;
 
@@ -53,7 +52,7 @@ const OverwriteText = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OverwriteTextName}`]: SansExtraLarge,
+      [`${OverwriteTextName}`]: Typography.sans.extraLarge,
     },
   })}
 

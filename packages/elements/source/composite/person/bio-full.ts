@@ -11,7 +11,6 @@ type TypePersonBioFullProps = TypePersonProps & {
 const { convertJSSObjectToStyles } = Styles;
 const { Spacing, Colors } = Tokens;
 const { Text } = Elements;
-const { SansExtraLarge } = Typography;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -46,7 +45,7 @@ const OverwriteThemeDark = `
 const OverwriteText = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OverwriteTextName}`]: SansExtraLarge,
+      [`${OverwriteTextName}`]: Typography.sans.extraLarge,
     },
   })}
   

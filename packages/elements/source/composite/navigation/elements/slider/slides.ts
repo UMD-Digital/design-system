@@ -87,7 +87,7 @@ const BackButtonStyles = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: Typography.SansLarge,
+      [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: Typography.sans.large,
     },
   })}
 

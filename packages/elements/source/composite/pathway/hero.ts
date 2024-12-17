@@ -12,7 +12,6 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
   };
 
 const { Spacing } = Tokens;
-const { CampaignExtralarge, SansLarger } = Typography;
 const { LockMax } = Layout;
 
 const { convertJSSObjectToStyles } = Styles;
@@ -179,25 +178,25 @@ const OverwriteTextContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_HEADLINE}`]: CampaignExtralarge,
+      [`${OVERWRITE_TEXT_HEADLINE}`]: Typography.campaign.extralarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_HEADLINE} *`]: CampaignExtralarge,
+      [`${OVERWRITE_TEXT_HEADLINE} *`]: Typography.campaign.extralarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_RICHTEXT} *`]: SansLarger,
+      [`${OVERWRITE_TEXT_RICHTEXT} *`]: Typography.sans.larger,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${OVERWRITE_TEXT_RICHTEXT}`]: SansLarger,
+      [`.${OVERWRITE_TEXT_RICHTEXT}`]: Typography.sans.larger,
     },
   })}
 `;

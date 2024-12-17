@@ -1,7 +1,5 @@
 import { Typography } from '@universityofmaryland/variables';
 
-const { CampaignFonts, SansFonts } = Typography;
-
 export enum CampaignFontSize {
   Maximum = 'maximum',
   ExtraLarge = 'extraLarge',
@@ -24,12 +22,12 @@ export enum SansFontSize {
 }
 
 export const CampaignFontOptions = (size: CampaignFontSize) => {
-  const { class: className, ...fontStyles } = CampaignFonts[size];
+  const { class: className, ...fontStyles } = Typography.campaign.fonts[size];
   return { className, fontStyles };
 };
 
 export const SansFontOptions = (size: SansFontSize) => {
-  const { class: className, ...fontStyles } = SansFonts[size];
+  const { class: className, ...fontStyles } = Typography.sans.fonts[size];
   return { className, fontStyles };
 };
 

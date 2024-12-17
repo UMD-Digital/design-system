@@ -7,7 +7,7 @@ const { Icons } = Assets;
 const CONTAINER_QUERY_NAME = `umd-forms-layout`;
 
 const FormElementBaseOverride = {
-  ...Typography.SansSmall,
+  ...Typography.sans.small,
 
   backgroundColor: Colors.white,
   border: 0,

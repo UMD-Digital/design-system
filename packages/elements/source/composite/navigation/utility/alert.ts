@@ -43,7 +43,6 @@ const { FetchGraphQL } = Network;
 const { convertJSSObjectToStyles } = Styles;
 const { Colors, Spacing } = Tokens;
 const { LockFull } = Layout;
-const { SansLarge } = Typography;
 const { Text } = Elements;
 
 const QUERY = `
@@ -180,7 +179,7 @@ const CloseButtonStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${ALERT_TITLE}`]: SansLarge,
+      [`${ALERT_TITLE}`]: Typography.sans.large,
     },
   })}
 

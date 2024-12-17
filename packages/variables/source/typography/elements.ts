@@ -3,7 +3,7 @@ import { Colors, Font, Media } from '../tokens';
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
 
-export const Eyebrow = {
+export const eyebrow = {
   fontWeight: 700,
   color: Colors.black,
   fontSize: Font.size.min,
@@ -12,7 +12,7 @@ export const Eyebrow = {
   letterSpacing: `.05em`,
 };
 
-export const LabelMedium = {
+export const labelMedium = {
   fontFamily: Font.family['sans'],
   fontSize: Font.size['sm'],
   lineHeight: `1.42em`,
@@ -28,14 +28,14 @@ export const LabelMedium = {
   },
 };
 
-export const LabelSmall = {
+export const labelSmall = {
   fontFamily: Font.family['sans'],
   fontSize: Font.size['sm'],
   letterSpacing: '0.16em',
   lineHeight: `1.42em`,
 };
 
-export const InterativeMedium = {
+export const interativeMedium = {
   fontFamily: Font.family['sans'],
   fontSize: Font.size['base'],
   lineHeight: `1.125em`,
@@ -52,7 +52,7 @@ export const InterativeMedium = {
   },
 };
 
-export const InterativeSmall = {
+export const interativeSmall = {
   fontFamily: Font.family['sans'],
   fontSize: Font.size['base'],
   fontWeight: Font.weight['bold'],
@@ -60,86 +60,29 @@ export const InterativeSmall = {
   lineHeight: `1.125.em`,
 };
 
-export const StatisticsLarge = {
-  fontFamily: Font.family['campaign'],
-  fontSize: Font.size['9xl'],
-  fontWeight: Font.weight['extraBold'],
-  fontStyle: 'italic',
-  lineHeight: '1',
-
-  [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['9xl']} + 3.33vw)`,
-  },
-
-  [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['max'],
-  },
-};
-
-export const StatisticsMedium = {
-  fontFamily: Font.family['campaign'],
-  fontSize: Font.size['7xl'],
-  fontStyle: 'italic',
-  fontWeight: Font.weight['extraBold'],
-  lineHeight: '1',
-
-  [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['7xl']} + 1.33vw)`,
-  },
-
-  [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['10xl'],
-  },
-};
-
-export const StatisticsSmall = {
-  fontFamily: Font.family['campaign'],
-  fontSize: Font.size['7xl'],
-  fontStyle: 'italic',
-  fontWeight: Font.weight['extraBold'],
-  lineHeight: '0.87em',
-};
-
-export const ElementFonts = {
+export const fonts = {
   eyebrow: {
     class: 'umd-eyebrow',
-    ...Eyebrow,
+    ...eyebrow,
   },
 
   labelMedium: {
     class: 'umd-label-sans-medium',
-    ...LabelMedium,
+    ...labelMedium,
   },
 
   labelSmall: {
     class: 'umd-label-sans-small',
-    ...LabelSmall,
+    ...labelSmall,
   },
 
   medium: {
     class: 'umd-interactive-sans-medium',
-    ...InterativeMedium,
+    ...interativeMedium,
   },
 
   small: {
     class: 'umd-interactive-sans-small',
-    ...InterativeSmall,
-  },
-};
-
-export const StatisticFonts = {
-  eyebrow: {
-    class: 'umd-statistic-sans-large',
-    ...StatisticsLarge,
-  },
-
-  labelMedium: {
-    class: 'umd-statistic-sans-medium',
-    ...StatisticsMedium,
-  },
-
-  labelSmall: {
-    class: 'umd-statistic-sans-small',
-    ...StatisticsSmall,
+    ...interativeSmall,
   },
 };

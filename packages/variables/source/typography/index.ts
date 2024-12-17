@@ -1,13 +1,6 @@
-import * as FontFaces from './font-face';
-import * as SansFonts from './sans';
-import * as SerifFonts from './serif';
-import * as CampaignFonts from './campaign';
-import * as ElementFonts from './elements';
-
-export default {
-  ...FontFaces,
-  ...CampaignFonts,
-  ...ElementFonts,
-  ...SansFonts,
-  ...SerifFonts,
-};
+export * as fontFace from './font-face';
+export * as campaign from './campaign';
+export * as elements from './elements';
+export * as sans from './sans';
+export * as serif from './serif';
+export * as stats from './stats';

@@ -26,7 +26,6 @@ type TypeNavRow = TypeSearchLink &
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
 const { Colors, Font, Media, Spacing } = Tokens;
-const { SansLarger, SansExtraLarge } = Typography;
 const { convertJSSObjectToStyles } = Styles;
 const ANIMATION_TIME = 500;
 
@@ -139,13 +138,13 @@ const LogoColumnStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}`]: SansLarger,
+      [`.${ELEMENT_HEADER_LOGO}`]: Typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO} *`]: SansLarger,
+      [`.${ELEMENT_HEADER_LOGO} *`]: Typography.sans.larger,
     },
   })}
 
@@ -157,13 +156,13 @@ const LogoColumnStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: SansExtraLarge,
+      [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: Typography.sans.extraLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: SansExtraLarge,
+      [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: Typography.sans.extraLarge,
     },
   })}
 

@@ -19,7 +19,6 @@ type TypeCarouselCardsRequirements = {
 const { convertJSSObjectToStyles } = Styles;
 const { Text } = Elements;
 const { Colors, Spacing } = Tokens;
-const { SansMedium, SansLargest } = Typography;
 const { LockMax } = Layout;
 
 const MEDIUM = 768;
@@ -100,13 +99,13 @@ const OverwriteCarouselStyles = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE}`]: SansLargest,
+      [`.${INTRO_CONTAINER_HEADLINE}`]: Typography.sans.largest,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE} *`]: SansLargest,
+      [`.${INTRO_CONTAINER_HEADLINE} *`]: Typography.sans.largest,
     },
   })}
 
@@ -132,7 +131,7 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: SansMedium,
+      [`.${INTRO_CONTAINER_TEXT}`]: Typography.sans.medium,
     },
   })}
 `;

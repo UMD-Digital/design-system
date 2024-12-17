@@ -11,8 +11,6 @@ type TypeHeroMinimalProps = TypeTextContainerProps &
 
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
-const { SansSmaller, CampaignLarge } = Typography;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
@@ -82,7 +80,7 @@ const OverwriteTheme = `
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: SansSmaller,
+      [`${OVERWRITE_EYEBROW}`]: Typography.sans.small,
     },
   })}
   
@@ -101,7 +99,7 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: CampaignLarge,
+      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.large,
     },
   })}
   

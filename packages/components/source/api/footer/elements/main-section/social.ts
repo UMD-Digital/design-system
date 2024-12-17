@@ -171,7 +171,7 @@ export const SocialContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${SOCIAL_CONTAINER_HEADLINE}`]: Typography.InterativeMedium,
+      [`.${SOCIAL_CONTAINER_HEADLINE}`]: Typography.elements.interativeMedium,
     },
   })}
 

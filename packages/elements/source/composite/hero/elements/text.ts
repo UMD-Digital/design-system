@@ -13,7 +13,6 @@ type TypeTextProps = {
 export type TypeTextContainerProps = TypeTextProps;
 
 const { Colors, Media, Spacing } = Tokens;
-const { SansMedium } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -97,13 +96,13 @@ const TextStyles = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_HERO_RICH_TEXT}`]: SansMedium,
+      [`.${ELEMENTS_HERO_RICH_TEXT}`]: Typography.sans.medium,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_HERO_RICH_TEXT} *`]: SansMedium,
+      [`.${ELEMENTS_HERO_RICH_TEXT} *`]: Typography.sans.medium,
     },
   })}
 

@@ -1,12 +1,12 @@
 import { Colors, Font, Spacing } from '../tokens';
-import { SansSmall, SansMedium, SansSmaller } from '../typography/sans';
+import { sans } from '../typography';
 import Animations from '../animations';
 import Lists from './list';
 
 const { Link } = Animations;
 
 const Base = {
-  ...SansSmall,
+  ...sans.small,
   lineHeight: '1.5em',
 
   '& > *': {
@@ -42,7 +42,7 @@ const Base = {
 
 const RichTextBase = {
   ...Base,
-  ...SansMedium,
+  ...sans.medium,
 
   [`& p,
     & ul,
@@ -71,7 +71,7 @@ const RichTextBase = {
   },
 
   '& small': {
-    ...SansSmaller,
+    ...sans.smaller,
     display: 'inline-block',
   },
 };
@@ -82,7 +82,7 @@ const Simple = {
 
 const SimpleLarge = {
   ...Base,
-  ...SansMedium,
+  ...sans.medium,
 };
 
 const RichText = {

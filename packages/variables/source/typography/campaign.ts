@@ -3,27 +3,27 @@ import { Font, Media } from '../tokens';
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
 
-const FontBase = {
+const base = {
   fontFamily: Font.family['campaign'],
   fontStyle: 'italic',
   fontWeight: Font.weight['bold'],
 };
 
-const SizeExtraSmall = {
+const sizeExtraSmall = {
   fontSize: Font.size['4xl'],
   letterSpacing: '0.02em',
   lineHeight: `0.94em`,
 };
 
-const SizeSmall = {
+const sizeSmall = {
   fontSize: Font.size['5xl'],
   letterSpacing: '0.02em',
   lineHeight: `0.91em`,
 };
 
-export const CampaignMaxium = {
-  ...FontBase,
-  ...SizeSmall,
+export const maxium = {
+  ...base,
+  ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['9xl']} + 2vw)`,
@@ -35,9 +35,9 @@ export const CampaignMaxium = {
   },
 };
 
-export const CampaignExtralarge = {
-  ...FontBase,
-  ...SizeSmall,
+export const extralarge = {
+  ...base,
+  ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['5xl']} + 4vw)`,
@@ -49,9 +49,9 @@ export const CampaignExtralarge = {
   },
 };
 
-export const CampaignLarge = {
-  ...FontBase,
-  ...SizeSmall,
+export const large = {
+  ...base,
+  ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['5xl']} + 2.66vw)`,
@@ -63,9 +63,9 @@ export const CampaignLarge = {
   },
 };
 
-export const CampaignMedium = {
-  ...FontBase,
-  ...SizeSmall,
+export const medium = {
+  ...base,
+  ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['5xl']} + 1.33vw)`,
@@ -79,42 +79,42 @@ export const CampaignMedium = {
 };
 
 export const CampaignSmall = {
-  ...FontBase,
-  ...SizeExtraSmall,
+  ...base,
+  ...sizeExtraSmall,
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${Font.size['4xl']} + 1.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    ...SizeSmall,
+    ...sizeSmall,
   },
 };
 
-export const CampaignExtraSmall = {
-  ...FontBase,
-  ...SizeExtraSmall,
+export const extraSmall = {
+  ...base,
+  ...sizeExtraSmall,
 };
 
-export const CampaignFonts = {
+export const fonts = {
   maximum: {
     class: 'umd-campaign-maximum',
-    ...CampaignMaxium,
+    ...maxium,
   },
 
   extraLarge: {
     class: 'umd-campaign-extralarge',
-    ...CampaignExtralarge,
+    ...extralarge,
   },
 
   large: {
     class: 'umd-campaign-large',
-    ...CampaignLarge,
+    ...large,
   },
 
   medium: {
     class: 'umd-campaign-medium',
-    ...CampaignMedium,
+    ...medium,
   },
 
   small: {
@@ -124,6 +124,6 @@ export const CampaignFonts = {
 
   extraSmall: {
     class: 'umd-campaign-extrasmall',
-    ...CampaignExtraSmall,
+    ...extraSmall,
   },
 };

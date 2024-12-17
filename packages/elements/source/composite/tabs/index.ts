@@ -27,7 +27,6 @@ type TypeGetState = {
 };
 
 const { Spacing, Colors } = Tokens;
-const { SansLarge } = Typography;
 const { convertPixelStringToNumber } = Styles;
 
 const ATTRIBUTE_LAYOUT_HORIZONTAL = 'data-layout-horizontal';
@@ -318,9 +317,9 @@ const CreateTabsElement = (props: TypeTabsProps) =>
         button.style.display = 'inline-block';
         button.style.padding = `${Spacing.sm} ${Spacing.md}`;
 
-        Object.keys(SansLarge).forEach((key) => {
-          const keyRef = key as keyof typeof SansLarge;
-          button.style[keyRef] = SansLarge[keyRef];
+        Object.keys(Typography.sans.large).forEach((key) => {
+          const keyRef = key as keyof typeof Typography.sans.large;
+          button.style[keyRef] = Typography.sans.large[keyRef];
         });
 
         if (isThemeDark) {

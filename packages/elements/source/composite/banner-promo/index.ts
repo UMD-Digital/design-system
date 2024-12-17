@@ -16,7 +16,6 @@ type TypeBannerPromoProps = {
 
 const { Colors, Spacing } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
-const { SansExtraLarge } = Typography;
 const { Text } = Elements;
 
 const SMALL = 650;
@@ -107,7 +106,7 @@ const TextStyles = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: SansExtraLarge,
+      [`.${ELEMENT_HEADLINE}`]: Typography.sans.extraLarge,
     },
   })}
 

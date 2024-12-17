@@ -16,7 +16,6 @@ type TypeHeroOverlayProps = TypeTextContainerProps &
 const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { Eyebrow } = Elements;
-const { CampaignExtralarge, SansLarger } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 const ATTRIBUTE_ANIMATION = 'data-animation';
@@ -58,7 +57,7 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: CampaignExtralarge,
+      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.extralarge,
     },
   })}
 `;
@@ -67,7 +66,7 @@ const OverwriteHeadline = `
 const OverwriteRichText = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: SansLarger,
+      [`${OVERWRITE_RICH_TEXT}`]: Typography.sans.larger,
     },
   })}
   

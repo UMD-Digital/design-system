@@ -11,7 +11,6 @@ type TypeHeroBrandVideoProps = {
 };
 
 const { Colors, Media, Spacing } = Tokens;
-const { CampaignMaxium, SansLarger } = Typography;
 const { Text } = Elements;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -28,7 +27,7 @@ const ELEMENT_HERO_ELEMENT_TEXT = 'hero-logo-brand-text';
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_ELEMENT_HEADLINE}`]: CampaignMaxium,
+      [`.${ELEMENT_HERO_ELEMENT_HEADLINE}`]: Typography.campaign.maxium,
     },
   })}
 
@@ -51,7 +50,7 @@ const TextStyles = `
   @media (min-width: 1024px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: SansLarger,
+        [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: Typography.sans.larger,
       },
     })}
   }

@@ -1,7 +1,6 @@
 import { Typography, Tokens } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
-const { SansExtraLarge, SansMin, SansLarger, SansSmall } = Typography;
 const { Colors } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -28,49 +27,49 @@ const OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_M
 const OverwriteLargeSize = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MONTH}`]: SansSmall,
+      [`${OVERWRITE_SIZE_LARGE_MONTH}`]: Typography.sans.small,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MONTH} *`]: SansSmall,
+      [`${OVERWRITE_SIZE_LARGE_MONTH} *`]: Typography.sans.small,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH}`]: SansMin,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH}`]: Typography.sans.min,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH} *`]: SansMin,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH} *`]: Typography.sans.min,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_DAY}`]: SansExtraLarge,
+      [`${OVERWRITE_SIZE_LARGE_DAY}`]: Typography.sans.extraLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_DAY} *`]: SansExtraLarge,
+      [`${OVERWRITE_SIZE_LARGE_DAY} *`]: Typography.sans.extraLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY}`]: SansLarger,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY}`]: Typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY} *`]: SansLarger,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY} *`]: Typography.sans.larger,
     },
   })}
 `;
@@ -79,13 +78,13 @@ const OverwriteLargeSize = `
 const MonthStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_MONTH}`]: SansMin,
+      [`.${ELEMENT_EVENT_MONTH}`]: Typography.sans.min,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_MONTH} *`]: SansMin,
+      [`.${ELEMENT_EVENT_MONTH} *`]: Typography.sans.min,
     },
   })}
 `;
@@ -93,13 +92,13 @@ const MonthStyles = `
 const DayStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_DAY}`]: SansLarger,
+      [`.${ELEMENT_EVENT_DAY}`]: Typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_DAY} *`]: SansLarger,
+      [`.${ELEMENT_EVENT_DAY} *`]: Typography.sans.larger,
     },
   })}
 `;

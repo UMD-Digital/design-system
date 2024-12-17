@@ -7,7 +7,6 @@ type TypeSectionIntroWideProps = {
   isThemeDark?: boolean;
 };
 
-const { SansLargest } = Typography;
 const { Colors, Spacing } = Tokens;
 
 const { convertJSSObjectToStyles } = Styles;
@@ -35,7 +34,7 @@ const OverwriteTheme = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: SansLargest,
+      [`.${ELEMENT_HEADLINE}`]: Typography.sans.largest,
     },
   })}
 

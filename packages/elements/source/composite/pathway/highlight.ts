@@ -119,7 +119,7 @@ const HighlightContainer = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT}`]: Typography.SansLarger,
+      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT}`]: Typography.sans.larger,
     },
   })}
   
@@ -131,13 +131,13 @@ const HighlightContainer = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION}`]: Typography.SansMedium,
+      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION}`]: Typography.sans.medium,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} *`]: Typography.SansMedium,
+      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} *`]: Typography.sans.medium,
     },
   })}
   

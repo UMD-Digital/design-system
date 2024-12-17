@@ -38,7 +38,7 @@ const OVERWRITE_ACTION_PRIMARY_LINK = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LIN
 const OverwriteSlidePrimaryLink = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_ACTION_PRIMARY_LINK}`]: Typography.SansLarge,
+      [`${OVERWRITE_ACTION_PRIMARY_LINK}`]: Typography.sans.large,
     },
   })}
 

@@ -23,7 +23,6 @@ type TypePersonHeroProps = TypeTextContainer &
   };
 
 const { convertJSSObjectToStyles } = Styles;
-const { SansSmaller, CampaignLarge, SansMedium, SansLarge } = Typography;
 const { Spacing, Colors } = Tokens;
 const { LockMax } = Layout;
 
@@ -142,7 +141,7 @@ const ImageBlockStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_IMAGE_ASSOCIATION}`]: SansLarge,
+      [`.${ELEMENT_PERSON_HERO_IMAGE_ASSOCIATION}`]: Typography.sans.large,
     },
   })}
 
@@ -208,7 +207,7 @@ const TextContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_TEXT_SUBTEXT}`]: SansSmaller,
+      [`.${ELEMENT_PERSON_HERO_TEXT_SUBTEXT}`]: Typography.sans.small,
     },
   })}
 
@@ -231,7 +230,7 @@ const TextContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_TEXT_NAME}`]: CampaignLarge,
+      [`.${ELEMENT_PERSON_HERO_TEXT_NAME}`]: Typography.campaign.large,
     },
   })}
 
@@ -254,7 +253,7 @@ const TextContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_TEXT_JOB}`]: SansMedium,
+      [`.${ELEMENT_PERSON_HERO_TEXT_JOB}`]: Typography.sans.medium,
     },
   })}
 

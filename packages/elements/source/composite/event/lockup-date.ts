@@ -14,7 +14,6 @@ type TypeEventLockupDate = {
 
 const { Font, Spacing } = Tokens;
 const { Link } = Animations;
-const { SansLarge } = Typography;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -32,13 +31,13 @@ const HeadlineStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE}`]: SansLarge,
+      [`.${EVENT_HEADLINE}`]: Typography.sans.large,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} *`]: SansLarge,
+      [`.${EVENT_HEADLINE} *`]: Typography.sans.large,
     },
   })}
 

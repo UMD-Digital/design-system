@@ -2,7 +2,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import { Asset, Styles } from 'utilities';
 
 const { Colors, Spacing } = Tokens;
-const { SansMin } = Typography;
+
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_BUTTON = 'button-full-screen';
@@ -24,7 +24,7 @@ const STYLES_FULL_SCREEN_BUTTON = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BUTTON}`]: SansMin,
+      [`.${ELEMENT_BUTTON}`]: Typography.sans.min,
     },
   })}
 

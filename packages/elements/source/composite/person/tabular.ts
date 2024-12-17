@@ -11,7 +11,6 @@ type TypeTabularPersonProps = TypePersonProps & {
 };
 
 const { Spacing, Colors } = Tokens;
-const { SansLarge, SansSmaller } = Typography;
 const { convertJSSObjectToStyles } = Styles;
 
 const SMALL = 400;
@@ -95,19 +94,19 @@ const OverwriteTextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_CONTAINER_WRAPPER} > *:not(.${LayoutTextName})`]:
-        SansSmaller,
+        Typography.sans.small,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_PERSON_CONTACT_CONTAINER} > *`]: SansSmaller,
+      [`${OVERWRITE_PERSON_CONTACT_CONTAINER} > *`]: Typography.sans.small,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_PERSON_NAME}`]: SansLarge,
+      [`${OVERWRITE_PERSON_NAME}`]: Typography.sans.large,
     },
   })}
 

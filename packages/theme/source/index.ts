@@ -7,7 +7,7 @@ import Elements from './elements';
 import Layout from './layout';
 import WebComponents from './web-components';
 
-const { Colors, FontFamily, FontSize } = Tokens;
+const { Colors, Font } = Tokens;
 const { SansMedium } = Typography;
 
 const Reset = {
@@ -69,17 +69,20 @@ const root = {
     '--grayLight': Colors.gray.light,
     '--grayLighter': Colors.gray.lighter,
     '--grayLightest': Colors.gray.lightest,
-    '--serif': FontFamily.serif,
-    '--sanSerif': FontFamily.sans,
-    FontFamily: FontFamily.sans,
-    FontSize: FontSize.base,
+    '--serif': Font.family.serif,
+    '--sanSerif': Font.family.sans,
+    FontFamily: Font.family.sans,
+    FontSize: Font.size.base,
     lineHeight: '1.5em',
   },
 
   ...Reset,
 };
 
-export const base = Tokens;
+export const base = {
+  ...Tokens,
+  breakpoints: Tokens.Media.breakpoints,
+};
 export const theme = {
   root,
   Accessibility,

@@ -2,7 +2,7 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 import Assets from '../../assets';
 import State from './state';
 
-const { Colors, Spacing, Queries } = Tokens;
+const { Colors, Media, Spacing } = Tokens;
 const { Icons } = Assets;
 const { FormFieldValidation } = State;
 
@@ -10,18 +10,18 @@ const FormLayoutWrapper = {
   backgroundColor: Colors.gray.lighter,
   padding: `${Spacing.md}`,
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     padding: `${Spacing.lg}`,
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     padding: `${Spacing['3xl']}`,
   },
 
   '& > *': {
     marginTop: Spacing.md,
 
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       marginTop: Spacing.xl,
     },
 
@@ -116,7 +116,7 @@ const FormLayoutBaseFieldset = {
     marginBottom: Spacing.sm,
     position: 'relative',
 
-    [`@media (${Queries.large.min})`]: {
+    [`@media (${Media.queries.large.min})`]: {
       gridColumn: 'span 2',
     },
   },
@@ -149,7 +149,7 @@ const FormLayoutBaseFieldsetGrid = {
   gridGap: `${Spacing.sm} ${Spacing.xl}`,
   justifyItems: 'start',
 
-  [`@media (${Queries.large.min})`]: {
+  [`@media (${Media.queries.large.min})`]: {
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
 };
@@ -163,7 +163,7 @@ const FormLayoutFieldsetGridThree = {
   ...FormLayoutBaseFieldsetGrid,
   ...FormLayoutBaseFieldset,
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
   },
 };

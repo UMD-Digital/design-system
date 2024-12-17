@@ -10,7 +10,7 @@ type TypeHeroBrandVideoProps = {
   isAnimationOnLoad?: boolean;
 };
 
-const { Spacing, Colors, Queries } = Tokens;
+const { Colors, Media, Spacing } = Tokens;
 const { CampaignMaxium, SansLarger } = Typography;
 const { Text } = Elements;
 const { convertJSSObjectToStyles } = Styles;
@@ -112,7 +112,7 @@ const VideoStyles = `
     left: 0;
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     .${ELEMENT_HERO_ELEMENT_VIDEO} {
       top: 50%;
       left: 50%;

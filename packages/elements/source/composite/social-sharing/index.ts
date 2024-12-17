@@ -11,7 +11,7 @@ type TypeSocialSharingProps = {
   url?: string | null;
 };
 
-const { Colors, Queries, Spacing } = Tokens;
+const { Colors, Media, Spacing } = Tokens;
 
 const ATTRIBUTE_FIXED = 'fixed';
 
@@ -25,13 +25,13 @@ const OVERWRITE_FIXED_CONTAINER = `.${ELEMENT_SOCIAL_SHARING_CONTAINER}${IS_FIXE
 
 // prettier-ignore
 const OverwriteFixed = `
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     ${OVERWRITE_FIXED_CONTAINER} {
       flex-direction: column;
     }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     ${OVERWRITE_FIXED_CONTAINER} > *:not(:last-child) {
       border-right: 1px solid ${Colors.gray.light};
       border-bottom: none;

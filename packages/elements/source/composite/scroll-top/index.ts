@@ -37,7 +37,7 @@ const STYLES_SCROLL_TOP_ELEMENT = `
   }
 `;
 
-// @media (${Queries.medium.max}) {
+// @media (${Media.queries.medium.max}) {
 //   .${ELEMENT_SCROLL_TOP_CONTAINER} {
 //     display: none;
 //   }

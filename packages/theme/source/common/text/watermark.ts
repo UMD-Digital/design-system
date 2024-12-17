@@ -1,6 +1,6 @@
 import { Animations, Tokens } from '@universityofmaryland/variables';
 
-const { Colors, Queries, FontSize } = Tokens;
+const { Colors, Media, Font } = Tokens;
 
 const Child = {
   position: 'absolute',
@@ -9,14 +9,14 @@ const Child = {
   color: Colors.gray.lighter,
   fontWeight: 'bold',
   textTransform: 'uppercase',
-  fontSize: `min(calc(${FontSize['5xl']} + 13vw), 240px)`,
+  fontSize: `min(calc(${Font.size['5xl']} + 13vw), 240px)`,
   lineHeight: '0',
   opacity: ' 0.6',
   pointerEvents: 'none',
   userSelect: 'none',
   zIndex: '-1',
 
-  [`@media (${Queries.large.max})`]: {
+  [`@media (${Media.queries.large.max})`]: {
     display: 'none',
   },
 };

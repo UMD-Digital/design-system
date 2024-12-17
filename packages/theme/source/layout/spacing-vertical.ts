@@ -1,11 +1,11 @@
 import { Tokens, Layout } from '@universityofmaryland/variables';
 
-const { Spacing, Queries, Colors } = Tokens;
+const { Spacing, Media, Colors } = Tokens;
 
 const HeadlineLarge = {
   marginBottom: Spacing.sm,
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     marginBottom: Spacing.md,
   },
 };
@@ -15,23 +15,23 @@ const HeadlineMedium = {
 };
 
 const InteriorNavigation = {
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     display: 'flex',
   },
 
   '& > *:first-child': {
-    [`@media (${Queries.tablet.max})`]: {
+    [`@media (${Media.queries.tablet.max})`]: {
       display: 'none',
     },
 
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       marginRight: Spacing['max'],
       width: '242px',
     },
   },
 
   '& > *:last-child': {
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       maxWidth: '800px',
       width: '100%',
     },
@@ -41,12 +41,12 @@ const InteriorNavigation = {
 const SidebarNavigation = {
   ...InteriorNavigation,
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     display: 'flex',
   },
 
   '& > *:first-child': {
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       width: `calc(100% - 322px)`,
     },
   },
@@ -55,11 +55,11 @@ const SidebarNavigation = {
     paddingTop: Spacing.md,
     borderTop: `1px solid ${Colors.black}`,
 
-    [`@media (${Queries.large.max})`]: {
+    [`@media (${Media.queries.large.max})`]: {
       marginTop: Spacing['3xl'],
     },
 
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       marginLeft: Spacing['7xl'],
       width: '322px',
     },

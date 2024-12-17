@@ -1,11 +1,11 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Spacing, Queries } = Tokens;
+const { Spacing, Media } = Tokens;
 
 const sectionIntroSpacing = {
   marginBottom: `${Spacing.lg}`,
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     marginBottom: `${Spacing['2xl']}`,
   },
 };

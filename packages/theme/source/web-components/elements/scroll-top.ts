@@ -1,6 +1,6 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Queries, Spacing } = Tokens;
+const { Media, Spacing } = Tokens;
 
 const Default = {
   'umd-element-scroll-top:not(:defined)': {
@@ -24,7 +24,7 @@ const Fixed = {
     bottom: '10vh',
     zIndex: '9999',
 
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       height: '52px',
       width: '52px',
       right: '40px',

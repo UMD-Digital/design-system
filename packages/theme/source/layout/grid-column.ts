@@ -1,10 +1,10 @@
 import { Tokens } from '@universityofmaryland/variables';
 
-const { Queries } = Tokens;
+const { Media } = Tokens;
 
 const GridColumn = {
   '.umd-grid-column-double': {
-    [`@media (${Queries.large.min})`]: {
+    [`@media (${Media.queries.large.min})`]: {
       gridColumn: 'span 2',
     },
   },

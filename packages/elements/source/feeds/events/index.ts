@@ -39,7 +39,7 @@ const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
 
 const { convertJSSObjectToStyles } = Styles;
 const { Eyebrow } = Elements;
-const { Colors, Spacing, Breakpoints } = Tokens;
+const { Colors, Media, Spacing } = Tokens;
 
 const EventsGrouped = `
   ${convertJSSObjectToStyles({
@@ -65,7 +65,7 @@ const EventsNoResults = `
     margin-bottom: ${Spacing.md};
   }
 
-  @media (min-width: ${Breakpoints.tablet.min}) {
+  @media (min-width: ${Media.breakpoints.tablet.min}) {
     .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
       margin-top: ${Spacing.md};
     }

@@ -17,7 +17,7 @@ type TypeHeroStackedProps = TypeTextContainerProps &
   };
 
 const { LockMax } = Layout;
-const { Colors, Spacing, Queries } = Tokens;
+const { Colors, Media, Spacing } = Tokens;
 const { Eyebrow } = Elements;
 const { CampaignExtralarge, CampaignLarge, SansLarger } = Typography;
 
@@ -165,7 +165,7 @@ const AnimationStyles = `
     to { color: ${Colors.white}; }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_TEXT_CONTAINER_ANIMATION} {
@@ -178,7 +178,7 @@ const AnimationStyles = `
     }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_IMAGE_OVERLAY_ANIMATION} {
@@ -191,7 +191,7 @@ const AnimationStyles = `
     }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_RICH_TEXT_ANIMATION},

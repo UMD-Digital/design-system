@@ -12,12 +12,11 @@ type TypeTextProps = {
 
 export type TypeTextContainerProps = TypeTextProps;
 
-const { Colors, Queries, Spacing } = Tokens;
+const { Colors, Media, Spacing } = Tokens;
 const { SansMedium } = Typography;
 
 const { convertJSSObjectToStyles } = Styles;
 
-const TABLET = 768;
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_TEXT_ALIGN = 'text-align';
 const THEME_LIGHT = 'light';
@@ -119,7 +118,7 @@ const ActionStyles = `
     margin-top: ${Spacing.sm};
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     * + .${ELEMENTS_HERO_ACTION} {
       margin-top: ${Spacing.lg};
     }

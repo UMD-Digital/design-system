@@ -9,7 +9,7 @@ export type TypeAlertTextProps = {
   isThemeDark?: boolean;
 };
 
-const { Colors, Spacing, MaxWidth } = Tokens;
+const { Colors, Spacing, SpaceLayout } = Tokens;
 
 const { GridColumnAndRowsMobileTablet } = Layout;
 const { convertJSSObjectToStyles } = Styles;
@@ -39,7 +39,7 @@ const ctaStyles = `
 
 const STYLES_ALERT_TEXT = `
   .${className.wrapper} {
-     max-width: ${MaxWidth.small};
+     max-width: ${SpaceLayout.maxWidth.small};
   }
 
   ${ctaStyles}

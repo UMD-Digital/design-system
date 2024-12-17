@@ -7,7 +7,7 @@ type TypeGridDisplay = {
   isTypeGap?: boolean;
 };
 
-const { Queries } = Tokens;
+const { Media } = Tokens;
 
 const {
   GridColumnsTwo,
@@ -61,20 +61,20 @@ const STYLES_GRID_LAYOUT = `
     },
   })}
 
-  @media (${Queries.large.min}) {
+  @media (${Media.queries.large.min}) {
     .${ID_GRID_LAYOUT_CONTAINER}[grid-count] > * {
       min-height: 560px;
     }
   }
 
-  @media (${Queries.large.min}) {
+  @media (${Media.queries.large.min}) {
     .umd-grid-column-double {
       grid-column: span 2;
       min-height: 560px;
     }
   }
 
-  @media (${Queries.highDef.min}) {
+  @media (${Media.queries.highDef.min}) {
     .${ID_GRID_LAYOUT_CONTAINER}[data-reversed] > *:first-child {
       order: 2;
     }

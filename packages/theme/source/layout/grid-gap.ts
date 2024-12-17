@@ -8,14 +8,14 @@ const {
   GridColumnsFourWithGapLarge,
   GridColumnAndRowsMobileTablet,
 } = Layout;
-const { Queries, Spacing } = Tokens;
+const { Media, Spacing } = Tokens;
 
 const GridColumnsStacked = {
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: `${Spacing.md}`,
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     gridGap: `${Spacing.xl}`,
   },
 };
@@ -25,7 +25,7 @@ const GridColumnsFeatured = {
   ...GridColumnsThreeWithGap,
   ...GridColumnsFourWithGap,
 
-  [`@media (${Queries.medium.min})`]: {
+  [`@media (${Media.queries.medium.min})`]: {
     gridGap: `${Spacing.md}`,
     gridTemplateColumns: 'repeat(2, 1fr)',
 
@@ -35,7 +35,7 @@ const GridColumnsFeatured = {
     },
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     gridGap: `${Spacing.xl}`,
     gridTemplateColumns: `[start-feature] calc(50% - ${Spacing.md}) [end-feature start-cards] repeat(2, 1fr) [end-cards]`,
 
@@ -52,12 +52,12 @@ const MasonryGrid = {
   gridTemplateColumns: '1fr',
   gridGap: Spacing.md,
 
-  [`@media (${Queries.tablet.min})`]: {
+  [`@media (${Media.queries.tablet.min})`]: {
     gridTemplateColumns: '1fr 1fr',
     gridGap: Spacing.lg,
   },
 
-  [`@media (${Queries.desktop.min})`]: {
+  [`@media (${Media.queries.desktop.min})`]: {
     gridGap: Spacing.xl,
   },
 
@@ -69,35 +69,35 @@ const MasonryGrid = {
   },
 
   '& > *:nth-of-type(odd)': {
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       marginTop: `-${Spacing.lg}`,
       marginBottom: `${Spacing.lg}`,
     },
 
-    [`@media (${Queries.desktop.min})`]: {
+    [`@media (${Media.queries.desktop.min})`]: {
       marginTop: `-${Spacing.xl}`,
       marginBottom: `${Spacing.xl}`,
     },
   },
 
   '& > *:nth-of-type(even)': {
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       marginTop: '0',
     },
   },
 
   '& > *:first-child': {
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       marginTop: '0',
     },
   },
 
   '& > *:nth-of-type(2)': {
-    [`@media (${Queries.tablet.min})`]: {
+    [`@media (${Media.queries.tablet.min})`]: {
       marginTop: `${Spacing.lg}`,
     },
 
-    [`@media (${Queries.desktop.min})`]: {
+    [`@media (${Media.queries.desktop.min})`]: {
       marginTop: `${Spacing.xl}`,
     },
   },
@@ -108,25 +108,25 @@ const OffsetGrid = {
     alignSelf: 'start',
     display: 'grid',
 
-    [`@media (${Queries.desktop.min})`]: {
+    [`@media (${Media.queries.desktop.min})`]: {
       minHeight: '400px',
     },
   },
 
   '& > *:first-child': {
-    [`@media (${Queries.desktop.min})`]: {
+    [`@media (${Media.queries.desktop.min})`]: {
       marginTop: `${Spacing['2xl']}`,
     },
   },
 
   '& > *:nth-child(2)': {
-    [`@media (${Queries.desktop.min})`]: {
+    [`@media (${Media.queries.desktop.min})`]: {
       marginTop: `${Spacing['8xl']}`,
     },
   },
 
   '& umd-element-stat': {
-    [`@media (${Queries.desktop.min})`]: {
+    [`@media (${Media.queries.desktop.min})`]: {
       height: `100%`,
     },
   },
@@ -146,7 +146,7 @@ export default {
     ...GridColumnsFourWithGap,
 
     '& > *:first-child': {
-      [`@media (${Queries.highDef.min})`]: {
+      [`@media (${Media.queries.highDef.min})`]: {
         gridColumnStart: '2',
       },
     },

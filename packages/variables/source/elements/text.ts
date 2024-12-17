@@ -1,6 +1,4 @@
-import { Colors } from '../tokens/colors';
-import { FontSize, FontWeight } from '../tokens/fonts';
-import { Spacing } from '../tokens/spacing';
+import { Colors, Font, Spacing } from '../tokens';
 import { SansSmall, SansMedium, SansSmaller } from '../typography/sans';
 import Animations from '../animations';
 import Lists from './list';
@@ -24,7 +22,7 @@ const Base = {
   },
 
   '& strong, & b': {
-    FontWeight: FontWeight.bold,
+    FontWeight: Font.weight.bold,
   },
 
   '& u': {
@@ -65,11 +63,11 @@ const RichTextBase = {
   },
 
   '& sup': {
-    fontSize: FontSize.min,
+    fontSize: Font.size.min,
   },
 
   '& sub': {
-    fontSize: FontSize.min,
+    fontSize: Font.size.min,
   },
 
   '& small': {
@@ -88,7 +86,7 @@ const SimpleLarge = {
 };
 
 const RichText = {
-  FontWeight: FontWeight.normal,
+  FontWeight: Font.weight.normal,
   ...RichTextBase,
   ...Lists.Base,
   ...Lists.Ordered,

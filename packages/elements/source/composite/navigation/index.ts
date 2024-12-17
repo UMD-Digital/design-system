@@ -25,7 +25,7 @@ type TypeNavRow = TypeSearchLink &
 
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
-const { Colors, Spacing, Breakpoints, FontWeight, FontSize } = Tokens;
+const { Colors, Font, Media, Spacing } = Tokens;
 const { SansLarger, SansExtraLarge } = Typography;
 const { convertJSSObjectToStyles } = Styles;
 const ANIMATION_TIME = 500;
@@ -66,8 +66,8 @@ const OverwriteStickyStyles = `
 const CtaStyles = `
   .${ELEMENT_HEADER_MENU_CTA} {
     color: ${Colors.white};
-    font-weight: ${FontWeight.bold};
-    font-size: ${FontSize.sm};
+    font-weight: ${Font.weight.bold};
+    font-size: ${Font.size.sm};
     padding: ${Spacing.xs};
     background-color: ${Colors.red};
     transition: background .5s;
@@ -80,7 +80,7 @@ const CtaStyles = `
 `;
 
 const NavigationColumnStyles = `
-  @media (max-width: ${Breakpoints.tablet.max}) {
+  @media (max-width: ${Media.breakpoints.tablet.max}) {
     .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
       display: none;
     }
@@ -178,7 +178,7 @@ const LogoColumnStyles = `
     max-width: 190px;
   }
 
-  @media (min-width: ${Breakpoints.tablet.min}) {
+  @media (min-width: ${Media.breakpoints.tablet.min}) {
     .${ELEMENT_HEADER_LOGO} img {
       max-width: 240px;
     }

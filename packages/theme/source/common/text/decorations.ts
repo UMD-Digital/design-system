@@ -1,7 +1,7 @@
 import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
 
 const { Eyebrow } = Elements;
-const { Spacing, Colors, Queries } = Tokens;
+const { Spacing, Colors, Media } = Tokens;
 const { LabelSmall, SansMin } = Typography;
 
 const Tailwing = {
@@ -37,12 +37,12 @@ const Tailwing = {
       backgroundColor: `${Colors.white}`,
       zIndex: -1,
 
-      [`@media (${Queries.medium.min})`]: {
+      [`@media (${Media.queries.medium.min})`]: {
         left: `-${Spacing.min}`,
         right: `-${Spacing.min}`,
       },
 
-      [`@media (${Queries.large.min})`]: {
+      [`@media (${Media.queries.large.min})`]: {
         left: `-${Spacing.sm}`,
         right: `-${Spacing.sm}`,
       },

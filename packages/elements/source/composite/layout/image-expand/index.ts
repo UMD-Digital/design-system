@@ -7,7 +7,7 @@ type TypeLayoutImageExpandProps = {
 };
 
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
-const { Spacing, MaxWidth, Queries } = Tokens;
+const { Media, Spacing, SpaceLayout } = Tokens;
 const { LockMax } = Layout;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
@@ -65,7 +65,7 @@ const TextAnimation = `
     }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_TEXT_ANIMATION} {
@@ -120,7 +120,7 @@ const ImageSizeContainer = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_SIZE} {
-        width: ${MaxWidth.smallest};
+        width: ${SpaceLayout.maxWidth.smallest};
         height: 70vh;
         animation: img-size ease-in-out forwards;
         animation-timeline: view();
@@ -221,7 +221,7 @@ const STYLES_LAYOUT_IMAGE_EXPAND = `
     }
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPLAND_DECLARATION} {

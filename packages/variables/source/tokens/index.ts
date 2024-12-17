@@ -1,15 +1,8 @@
-import { Breakpoints, Queries } from './breakpoints';
-import { Colors } from './colors';
-import { FontFamily, FontSize, FontWeight } from './fonts';
-import { Spacing, MaxWidth } from './spacing';
+import Colors from './colors';
+import Spacing from './spacing';
 
-export default {
-  Breakpoints,
-  Queries,
-  Colors,
-  FontFamily,
-  FontSize,
-  FontWeight,
-  Spacing,
-  MaxWidth,
-};
+export * as Media from './media';
+export * as Font from './fonts';
+export * as SpaceLayout from './spacing';
+
+export { Colors, Spacing };

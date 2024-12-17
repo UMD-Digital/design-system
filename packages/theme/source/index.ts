@@ -81,6 +81,9 @@ const root = {
 
 export const base = {
   ...Tokens,
+  fontFamily: Font.family,
+  fontSize: Font.size,
+  fontWeight: Font.weight,
   breakpoints: Tokens.Media.breakpoints,
 };
 export const theme = {

@@ -4,7 +4,6 @@ import { Utilities } from '@universityofmaryland/web-elements-library';
 export const loadIntersectionObserver = () => {
   const { Accessibility, Styles } = Utilities;
   const { convertJSSObjectToStyles } = Styles;
-  const { Scroll } = Animations;
 
   if (Accessibility.isPrefferdReducedMotion()) return;
 
@@ -32,7 +31,7 @@ export const loadIntersectionObserver = () => {
 
       ${convertJSSObjectToStyles({
         styleObj: {
-          [`.${idGridFadeIn}`]: Scroll.FadeInFromBottom,
+          [`.${idGridFadeIn}`]: Animations.element.fadeInFromBottom,
         },
       })}
     `;

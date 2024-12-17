@@ -34,7 +34,7 @@ const OverwriteThemeStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_PATH}:not(:last-child)`]:
-        Animations.Link.LineSlideUnder.grayDark,
+        Animations.line.slideUnder.grayDark,
     },
   })}
 `;
@@ -87,7 +87,7 @@ const ContainerStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CONTAINER} a:not(:last-child)`]:
-        Animations.Link.LineSlideUnder.gray,
+        Animations.line.slideUnder.gray,
     },
   })}
 `;

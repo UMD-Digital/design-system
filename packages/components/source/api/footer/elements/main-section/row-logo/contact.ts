@@ -15,7 +15,6 @@ import {
 import { UMDFooterElement } from '../../../index';
 
 const { Colors, Spacing } = Tokens;
-const { Link } = Animations;
 
 const { convertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = Markup.create;
@@ -79,7 +78,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE} a`]:
-      Link.LineSlideUnder.white,
+      Animations.line.slideUnder.white,
     },
   })}
 
@@ -97,7 +96,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
-      Link.LineSlideUnder.black,
+      Animations.line.slideUnder.black,
     },
   })}
 `;
@@ -138,14 +137,14 @@ const LinkListStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} a`]:
-      Link.LineSlideUnder.white,
+      Animations.line.slideUnder.white,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
-      Link.LineSlideUnder.black,
+      Animations.line.slideUnder.black,
     },
   })}
 

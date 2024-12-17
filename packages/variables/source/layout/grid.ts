@@ -1,11 +1,9 @@
-import ScrollAnimations from '../animations/scroll';
+import { element as elementAnimation } from '../animations';
 import { Media, Spacing } from '../tokens';
-
-const { FadeInFromBottom } = ScrollAnimations;
 
 const GridAnimationTwo = {
   '& > *': {
-    ...FadeInFromBottom,
+    ...elementAnimation.fadeInFromBottom,
     animationRangeStart: '10%',
     animationRangeEnd: '30%',
   },
@@ -20,7 +18,7 @@ const GridAnimationThree = {
   ...GridAnimationTwo,
 
   '& > *': {
-    ...FadeInFromBottom,
+    ...elementAnimation.fadeInFromBottom,
     animationRangeStart: '10%',
     animationRangeEnd: '30%',
   },
@@ -40,7 +38,7 @@ const GridAnimationFour = {
   ...GridAnimationTwo,
 
   '& > *': {
-    ...FadeInFromBottom,
+    ...elementAnimation.fadeInFromBottom,
     animationRangeStart: '10%',
     animationRangeEnd: '30%',
   },

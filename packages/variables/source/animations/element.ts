@@ -46,7 +46,7 @@ const KeyFrameSlideInFromLeft = {
   },
 };
 
-const FadeInFromBottom = {
+export const fadeInFromBottom = {
   ...KeyFrameFadeInFromBottom,
 
   [`@media (prefers-reduced-motion: no-preference)`]: {
@@ -56,7 +56,7 @@ const FadeInFromBottom = {
   },
 };
 
-const SlideInFromLeft = {
+export const slideInFromLeft = {
   ...KeyFrameSlideInFromLeft,
 
   [`@media (prefers-reduced-motion: no-preference)`]: {
@@ -68,13 +68,4 @@ const SlideInFromLeft = {
       transform: 'translateX(-15vw)',
     },
   },
-};
-
-export default {
-  KeyFrameFadeInStart,
-  KeyFrameFadeInEnd,
-  KeyFrameSlideUpStart,
-  KeyFrameSlideUpEnd,
-  FadeInFromBottom,
-  SlideInFromLeft,
 };

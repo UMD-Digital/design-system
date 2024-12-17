@@ -1,6 +1,6 @@
 import { Colors } from '../tokens';
 
-const BaseSpan = {
+const baseSpan = {
   display: 'inline',
   position: 'relative',
   backgroundPosition: 'left bottom',
@@ -8,13 +8,13 @@ const BaseSpan = {
   transition: 'background 0.5s',
 };
 
-const BaseLink = {
+const baseLink = {
   position: 'relative',
   textDecoration: 'none',
 };
 
 const baseSlideIn = {
-  ...BaseLink,
+  ...baseLink,
 
   [`&:hover > *:not(svg):not(.sr-only),
     &:focus > *:not(svg):not(.sr-only)`]: {
@@ -22,9 +22,9 @@ const baseSlideIn = {
   },
 };
 
-export const LineFadeUnder = {
+export const fadeUnder = {
   base: {
-    ...BaseLink,
+    ...baseLink,
 
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
@@ -33,7 +33,7 @@ export const LineFadeUnder = {
   },
 
   dark: {
-    ...BaseLink,
+    ...baseLink,
 
     backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
     backgroundPosition: 'left calc(100% - 1px)',
@@ -52,7 +52,7 @@ export const LineFadeUnder = {
   },
 
   light: {
-    ...BaseLink,
+    ...baseLink,
 
     backgroundImage: `linear-gradient(currentColor, currentColor)`,
     backgroundPosition: 'left calc(100% - 1px)',
@@ -71,7 +71,7 @@ export const LineFadeUnder = {
   },
 
   yellow: {
-    ...BaseLink,
+    ...baseLink,
 
     backgroundImage: `linear-gradient(currentColor, currentColor)`,
     backgroundPosition: 'left calc(100% - 1px)',
@@ -90,12 +90,12 @@ export const LineFadeUnder = {
   },
 };
 
-export const LineSlideUnder = {
+export const slideUnder = {
   black: {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...BaseSpan,
+      ...baseSpan,
 
       backgroundSize: '0 2px',
       backgroundImage: `linear-gradient(${Colors.black}, ${Colors.black})`,
@@ -105,7 +105,7 @@ export const LineSlideUnder = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...BaseSpan,
+      ...baseSpan,
 
       backgroundImage: `linear-gradient(to left, ${Colors.gray.dark} 50%, ${Colors.red} 50% 100%)`,
       backgroundPosition: 'right bottom',
@@ -122,7 +122,7 @@ export const LineSlideUnder = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...BaseSpan,
+      ...baseSpan,
 
       backgroundImage: `linear-gradient(to left, ${Colors.gray.light} 50%, ${Colors.red} 50% 100%)`,
       backgroundPosition: 'right bottom',
@@ -140,7 +140,7 @@ export const LineSlideUnder = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...BaseSpan,
+      ...baseSpan,
 
       backgroundSize: '0 2px',
       backgroundImage: `linear-gradient(${Colors.gold}, ${Colors.gold})`,
@@ -151,7 +151,7 @@ export const LineSlideUnder = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...BaseSpan,
+      ...baseSpan,
 
       backgroundSize: '0 2px',
       backgroundImage: `linear-gradient(${Colors.red}, ${Colors.red})`,
@@ -162,15 +162,10 @@ export const LineSlideUnder = {
     ...baseSlideIn,
 
     '& > *:not(svg):not(.sr-only)': {
-      ...BaseSpan,
+      ...baseSpan,
 
       backgroundSize: '0 2px',
       backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
     },
   },
-};
-
-export default {
-  LineSlideUnder,
-  LineFadeUnder,
 };

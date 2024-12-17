@@ -1,9 +1,7 @@
 import { Colors, Font, Spacing } from '../tokens';
 import { sans } from '../typography';
-import Animations from '../animations';
+import { line as lineAnimations } from '../animations';
 import Lists from './list';
-
-const { Link } = Animations;
 
 const Base = {
   ...sans.small,
@@ -101,7 +99,7 @@ const RichTextDarkAnimations = {
   },
 
   '& a': {
-    ...Link.LineFadeUnder.dark,
+    ...lineAnimations.fadeUnder.dark,
   },
 };
 

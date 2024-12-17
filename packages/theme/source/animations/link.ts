@@ -1,7 +1,6 @@
 import { Tokens, Animations } from '@universityofmaryland/variables';
 
 const { Colors } = Tokens;
-const { Link } = Animations;
 
 const baseSpan = {
   display: 'inline',
@@ -18,25 +17,25 @@ const baseLink = {
 
 const SlideInUnderlineLink = {
   '.umd-slidein-underline-red': {
-    ...Link.LineSlideUnder.red,
+    ...Animations.line.slideUnder.red,
   },
 
   '.umd-slidein-underline-black': {
-    ...Link.LineSlideUnder.black,
+    ...Animations.line.slideUnder.black,
   },
 
   '.umd-slidein-underline-white': {
-    ...Link.LineSlideUnder.white,
+    ...Animations.line.slideUnder.white,
   },
 
   '.umd-slidein-underline-gold': {
-    ...Link.LineSlideUnder.gold,
+    ...Animations.line.slideUnder.gold,
   },
 };
 
 const FadeInUnderlineLink = {
   '.umd-fadein-underline-red': {
-    ...Link.LineFadeUnder.base,
+    ...Animations.line.fadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -47,7 +46,7 @@ const FadeInUnderlineLink = {
   },
 
   '.umd-fadein-underline-gray': {
-    ...Link.LineFadeUnder.base,
+    ...Animations.line.fadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -58,7 +57,7 @@ const FadeInUnderlineLink = {
   },
 
   '.umd-fadein-underline-gold': {
-    ...Link.LineFadeUnder.base,
+    ...Animations.line.fadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -69,7 +68,7 @@ const FadeInUnderlineLink = {
   },
 
   '.umd-fadein-underline-black': {
-    ...Link.LineFadeUnder.base,
+    ...Animations.line.fadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -80,7 +79,7 @@ const FadeInUnderlineLink = {
   },
 
   '.umd-fadein-underline-white': {
-    ...Link.LineFadeUnder.base,
+    ...Animations.line.fadeUnder.base,
 
     '& > *:not(svg):not(.sr-only)': {
       ...baseSpan,
@@ -94,22 +93,22 @@ const FadeInUnderlineLink = {
 const SpecialAnimationsLink = {
   '.umd-slidein-underline-gray-red': {
     ...baseLink,
-    ...Link.LineSlideUnder.gray,
+    ...Animations.line.slideUnder.gray,
   },
 
   '.umd-slidein-underline-graydark-red': {
     ...baseLink,
-    ...Link.LineSlideUnder.grayDark,
+    ...Animations.line.slideUnder.grayDark,
   },
 
   '.umd-fadein-simple-dark': {
     ...baseLink,
-    ...Link.LineFadeUnder.dark,
+    ...Animations.line.fadeUnder.dark,
   },
 
   '.umd-fadein-simple-light': {
     ...baseLink,
-    ...Link.LineFadeUnder.light,
+    ...Animations.line.fadeUnder.light,
   },
 };
 

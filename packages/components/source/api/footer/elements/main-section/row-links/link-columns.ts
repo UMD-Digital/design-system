@@ -13,7 +13,6 @@ import {
 } from '../../../globals';
 
 const { Colors, Spacing } = Tokens;
-const { Link } = Animations;
 
 const { convertJSSObjectToStyles } = Styles;
 const { SlotWithDefaultStyling } = Markup.create;
@@ -167,7 +166,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
-      Link.LineSlideUnder.white
+      Animations.line.slideUnder.white
     },
   })}
 
@@ -179,7 +178,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
-      Link.LineSlideUnder.black
+      Animations.line.slideUnder.black
     },
   })}
 `;

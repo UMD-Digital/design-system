@@ -1,7 +1,2 @@
-import Link from './link';
-import Scroll from './scroll';
-
-export default {
-  Link,
-  Scroll,
-};
+export * as line from './line';
+export * as element from './element';

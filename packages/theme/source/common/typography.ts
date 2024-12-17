@@ -1,7 +1,8 @@
 import { Typography } from '@universityofmaryland/variables';
 import { Transform } from 'utilities';
 
-const fontsToTransform = {
+export default {
+  '@font-face': Object.values(Typography.FontFaces),
   ...Transform.objectWithName(Typography.CampaignFonts),
   ...Transform.objectWithName(Typography.SerifFonts),
   ...Transform.objectWithName(Typography.SansFonts),
@@ -9,5 +10,3 @@ const fontsToTransform = {
   ...Transform.objectWithName(Typography.ElementFonts),
   ...Transform.objectWithName(Typography.StatisticFonts),
 };
-
-export default fontsToTransform;

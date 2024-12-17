@@ -1,8 +1,8 @@
 import {
+  ElementStyles,
   Layout,
   Tokens,
   Typography,
-  Elements,
 } from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
@@ -18,7 +18,6 @@ type TypeHeroStackedProps = TypeTextContainerProps &
 
 const { LockMax } = Layout;
 const { Colors, Media, Spacing } = Tokens;
-const { Eyebrow } = Elements;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -55,7 +54,7 @@ const OVERWRITE_IMAGE_OVERLAY_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${E
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: Eyebrow.Ribbon,
+      [`${OVERWRITE_EYEBROW}`]: ElementStyles.text.ribbon,
     },
   })}
 

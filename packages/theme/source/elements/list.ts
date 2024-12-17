@@ -1,7 +1,8 @@
-import { Elements } from '@universityofmaryland/variables';
+import { ElementStyles } from '@universityofmaryland/variables';
 
 export const ListStyles = {
   '.umd-lists': {
-    ...Elements.List,
+    ...ElementStyles.list.ordered,
+    ...ElementStyles.list.unordered,
   },
 };

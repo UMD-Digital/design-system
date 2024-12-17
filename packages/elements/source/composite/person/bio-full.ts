@@ -1,4 +1,8 @@
-import { Tokens, Elements, Typography } from '@universityofmaryland/variables';
+import {
+  Tokens,
+  ElementStyles,
+  Typography,
+} from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
@@ -10,7 +14,6 @@ type TypePersonBioFullProps = TypePersonProps & {
 
 const { convertJSSObjectToStyles } = Styles;
 const { Spacing, Colors } = Tokens;
-const { Text } = Elements;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -65,7 +68,8 @@ const ActionStyles = `
 const DescriptionStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_BIO_FULL_DESCRIPTION}`]: Text.RichText,
+      [`.${ELEMENT_PERSON_BIO_FULL_DESCRIPTION}`]:
+        ElementStyles.richText.advanced,
     },
   })}
 

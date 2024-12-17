@@ -1,4 +1,8 @@
-import { Elements, Tokens, Typography } from '@universityofmaryland/variables';
+import {
+  ElementStyles,
+  Tokens,
+  Typography,
+} from '@universityofmaryland/variables';
 import { Styles } from 'utilities';
 
 type TypeContent = {
@@ -17,7 +21,6 @@ type TypeLayoutImageExpandProps = TypeContent & TypeAssets;
 
 const { convertJSSObjectToStyles } = Styles;
 const { Colors, Spacing, Media } = Tokens;
-const { Eyebrow } = Elements;
 
 const ELEMENT_NAME = 'umd-hero-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'hero-expand-declaration';
@@ -202,7 +205,7 @@ const TextContainer = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: Eyebrow.Ribbon,
+      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: ElementStyles.text.ribbon,
     },
   })}
 

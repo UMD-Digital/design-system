@@ -1,4 +1,8 @@
-import { Tokens, Typography, Elements } from '@universityofmaryland/variables';
+import {
+  ElementStyles,
+  Tokens,
+  Typography,
+} from '@universityofmaryland/variables';
 import { ButtonVideoState } from 'atomic';
 import { AnimationOverlayBrand } from 'macros';
 import { Accessibility, Performance, Styles } from 'utilities';
@@ -11,7 +15,6 @@ type TypeHeroBrandVideoProps = {
 };
 
 const { Colors, Media, Spacing } = Tokens;
-const { Text } = Elements;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
@@ -43,7 +46,7 @@ const HeadlineStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: Text.SimpleLarge,
+      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: ElementStyles.richText.simpleLarge,
     },
   })}
 

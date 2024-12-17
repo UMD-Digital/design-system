@@ -1,6 +1,9 @@
-import { Elements, Typography, Tokens } from '@universityofmaryland/variables';
+import {
+  ElementStyles,
+  Typography,
+  Tokens,
+} from '@universityofmaryland/variables';
 
-const { Eyebrow } = Elements;
 const { Spacing, Colors, Media } = Tokens;
 
 const Tailwing = {
@@ -204,7 +207,7 @@ const AdjanctLineText = {
 
 export default {
   '.umd-eyebrow-ribbon': {
-    ...Eyebrow.Ribbon,
+    ...ElementStyles.text.ribbon,
   },
   '.umd-tailwings-headline': {
     ...Tailwing,

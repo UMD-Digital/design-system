@@ -1,7 +1,7 @@
 import {
-  Tokens,
-  Elements,
+  ElementStyles,
   Layout,
+  Tokens,
   Typography,
 } from '@universityofmaryland/variables';
 import Actions from 'composite/call-to-action';
@@ -43,7 +43,6 @@ const { FetchGraphQL } = Network;
 const { convertJSSObjectToStyles } = Styles;
 const { Colors, Spacing } = Tokens;
 const { LockFull } = Layout;
-const { Text } = Elements;
 
 const QUERY = `
   query CampusAlertsQuery {
@@ -193,7 +192,7 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${ALERT_TEXT}`]: Text.RichText,
+      [`${ALERT_TEXT}`]: ElementStyles.richText.advanced,
     },
   })}
 

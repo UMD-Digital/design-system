@@ -1,8 +1,8 @@
 import {
   Animations,
+  ElementStyles,
   Tokens,
   Typography,
-  Elements,
 } from '@universityofmaryland/variables';
 import { Styles, Asset } from 'utilities';
 
@@ -16,7 +16,6 @@ type TypeBannerPromoProps = {
 
 const { Colors, Spacing } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
-const { Text } = Elements;
 
 const SMALL = 650;
 
@@ -54,7 +53,7 @@ const OverwriteThemeDark = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: Text.RichTextDark,
+      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: ElementStyles.richText.advancedDark,
     },
   })}
 
@@ -83,7 +82,7 @@ const ActionsStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT}`]: Text.RichText,
+      [`.${ELEMENT_RICH_TEXT}`]: ElementStyles.richText.advanced,
     },
   })}
 

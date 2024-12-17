@@ -1,4 +1,4 @@
-import { Tokens, Elements } from '@universityofmaryland/variables';
+import { ElementStyles, Tokens } from '@universityofmaryland/variables';
 import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 import { Styles } from 'utilities';
@@ -15,7 +15,6 @@ type TypeEventFeatureProps = {
 
 const { Spacing, Colors } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
-const { Eyebrow } = Elements;
 
 const MEDIUM = 650;
 const ATTRIBUTE_THEME = 'theme';
@@ -71,7 +70,7 @@ const DetailsMeta = `
 const EyebrowStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: Eyebrow.Ribbon,
+      [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: ElementStyles.text.ribbon,
     },
   })}
 

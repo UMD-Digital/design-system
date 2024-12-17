@@ -1,9 +1,9 @@
 import {
   Animations,
-  Elements,
+  ElementStyles,
+  Layout,
   Typography,
   Tokens,
-  Layout,
 } from '@universityofmaryland/variables';
 import { Markup, Styles } from 'utilities';
 
@@ -17,7 +17,6 @@ export type TypeTextLockupSmall = {
 };
 
 const { Colors, Spacing } = Tokens;
-const { Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -58,13 +57,13 @@ const DarkThemeStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK_RICH_TEXT}`]: Text.RichTextDarkAnimations,
+      [`${IS_THEME_DARK_RICH_TEXT}`]: ElementStyles.richText.advancedDarkAnimations,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK_RICH_TEXT} *`]: Text.RichTextDarkAnimations,
+      [`${IS_THEME_DARK_RICH_TEXT} *`]: ElementStyles.richText.advancedDarkAnimations,
     },
   })}
 `

@@ -1,4 +1,4 @@
-import { Tokens, Elements } from '@universityofmaryland/variables';
+import { ElementStyles, Tokens } from '@universityofmaryland/variables';
 import { ButtonLazyLoad } from 'atomic';
 import { GridGap as LayoutGridGap } from 'layout';
 import { AriaLive, AnimationLoader } from 'macros';
@@ -38,13 +38,12 @@ const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
 const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
 
 const { convertJSSObjectToStyles } = Styles;
-const { Eyebrow } = Elements;
 const { Colors, Media, Spacing } = Tokens;
 
 const EventsGrouped = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE}`]: Eyebrow.Ribbon,
+      [`.${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE}`]: ElementStyles.text.ribbon,
     },
   })}
 
@@ -73,7 +72,7 @@ const EventsNoResults = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p`]: Eyebrow.Ribbon,
+      [`.${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p`]: ElementStyles.text.ribbon,
     },
   })}
 

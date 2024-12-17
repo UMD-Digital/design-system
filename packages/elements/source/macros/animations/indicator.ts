@@ -149,7 +149,7 @@ const CreateSlideIndicator = ({
     buttons.forEach((button) => {
       const spacer = document.createElement('span');
       const overlay = document.createElement('span');
-      let spacerColor = Colors.white;
+      let spacerColor: string = Colors.white;
 
       if (isThemeDark && !overlayColor) {
         spacerColor = Colors.black;

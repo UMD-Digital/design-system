@@ -13,7 +13,6 @@ type TypeEventLockupDate = {
 };
 
 const { Font, Spacing } = Tokens;
-const { Link } = Animations;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -51,13 +50,13 @@ const HeadlineStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} a`]: Link.LineSlideUnder.black,
+      [`.${EVENT_HEADLINE} a`]: Animations.line.slideUnder.black,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: Link.LineSlideUnder.white, 
+      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: Animations.line.slideUnder.white, 
     },
   })}
 `;

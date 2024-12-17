@@ -17,7 +17,6 @@ export type TypeTextLockupSmall = {
 };
 
 const { Colors, Spacing } = Tokens;
-const { Link } = Animations;
 const { Text } = Elements;
 const { GridColumnAndRowsMobileTablet } = Layout;
 const { convertJSSObjectToStyles } = Styles;
@@ -53,7 +52,7 @@ const DarkThemeStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK_HEADLINE} a`]:
-      Link.LineSlideUnder.white,
+      Animations.line.slideUnder.white,
     },
   })}
 
@@ -125,7 +124,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} a`]:
-      Link.LineSlideUnder.black,
+      Animations.line.slideUnder.black,
     },
   })}
 `;

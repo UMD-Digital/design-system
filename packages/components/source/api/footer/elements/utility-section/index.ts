@@ -14,7 +14,6 @@ import {
 } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
-const { Link } = Animations;
 const { LockMax } = Layout;
 
 const { convertJSSObjectToStyles } = Styles;
@@ -42,7 +41,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:
-      Link.LineSlideUnder.white,
+      Animations.line.slideUnder.white,
     },
   })}
 
@@ -53,7 +52,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
-      Link.LineSlideUnder.black,
+      Animations.line.slideUnder.black,
     },
   })}
 `;

@@ -18,7 +18,6 @@ export type TypePersonProps = TypeContactProps & {
 };
 
 const { Spacing, Colors } = Tokens;
-const { Link } = Animations;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -52,7 +51,7 @@ const ThemeDarkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Link.LineSlideUnder.white,
+      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Animations.line.slideUnder.white,
     },
   })}
 `;
@@ -74,7 +73,7 @@ const NameStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Link.LineSlideUnder.black,
+      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Animations.line.slideUnder.black,
     },
   })}
 `;

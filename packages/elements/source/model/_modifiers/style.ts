@@ -14,8 +14,8 @@ const Colors = {
 } as const;
 
 const LinkAnimations = {
-  white: Animations.Link.LineSlideUnder.white,
-  black: Animations.Link.LineSlideUnder.black,
+  white: Animations.line.slideUnder.white,
+  black: Animations.line.slideUnder.black,
 } as const;
 
 const getColor = (isColorWhite?: boolean) => (isColorWhite ? 'black' : 'white');

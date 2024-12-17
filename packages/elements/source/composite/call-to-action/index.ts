@@ -7,7 +7,6 @@ import { Asset, Styles } from 'utilities';
 
 const { convertJSSObjectToStyles } = Styles;
 const { Colors, Font, Spacing, Media } = Tokens;
-const { Link } = Animations;
 
 const MAX_WIDTH = 380;
 const ATTR_SIZE = 'size';
@@ -55,7 +54,7 @@ const OverwriteThemeGoldStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_GOLD_SECONDARY} > span > span`]:
-      Link.LineSlideUnder.gold,
+      Animations.line.slideUnder.gold,
     },
   })}
 
@@ -194,7 +193,7 @@ const SecondaryStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CTA_SECONDARY} > span > span`]:
-      Link.LineSlideUnder.red,
+      Animations.line.slideUnder.red,
     },
   })}
 `;

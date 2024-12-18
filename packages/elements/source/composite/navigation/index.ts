@@ -122,6 +122,8 @@ const LogoColumnStyles = `
     display: flex;
     justify-content: flex-start;
     position: relative;
+    width: 100%;
+    max-width: 400px;
   }
 
   .${ELEMENT_HEADER_MENU_BUTTON} {
@@ -150,6 +152,7 @@ const LogoColumnStyles = `
   .${ELEMENT_HEADER_LOGO},
   .${ELEMENT_HEADER_LOGO} * {
     line-height: 1.05em;
+    width: 100%;
   }
 
   ${convertJSSObjectToStyles({

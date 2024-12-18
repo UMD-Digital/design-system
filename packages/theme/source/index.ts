@@ -85,6 +85,7 @@ export const base = {
   fontWeight: Font.weight,
   breakpoints: Tokens.Media.breakpoints,
 };
+
 export const theme = {
   root,
   Accessibility,

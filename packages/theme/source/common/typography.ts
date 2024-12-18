@@ -1,12 +1,11 @@
-import { Typography } from '@universityofmaryland/variables';
-import { Transform } from 'utilities';
+import { Typography, Utilities } from '@universityofmaryland/variables';
 
 export default {
   '@font-face': Object.values(Typography.fontFace),
-  ...Transform.objectWithName(Typography.campaign.fonts),
-  ...Transform.objectWithName(Typography.serif.fonts),
-  ...Transform.objectWithName(Typography.sans.fonts),
-  ...Transform.objectWithName(Typography.sans.transformations),
-  ...Transform.objectWithName(Typography.elements.fonts),
-  ...Transform.objectWithName(Typography.stats.fonts),
+  ...Utilities.transform.objectWithName(Typography.campaign.fonts),
+  ...Utilities.transform.objectWithName(Typography.serif.fonts),
+  ...Utilities.transform.objectWithName(Typography.sans.fonts),
+  ...Utilities.transform.objectWithName(Typography.sans.transformations),
+  ...Utilities.transform.objectWithName(Typography.elements.fonts),
+  ...Utilities.transform.objectWithName(Typography.stats.fonts),
 };

@@ -9,7 +9,6 @@ type TypeHeroMinimalProps = TypeTextContainerProps &
     isThemeMaryland?: boolean;
   };
 
-const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
 const { convertJSSObjectToStyles } = Styles;
 
@@ -170,7 +169,7 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: LockMax,
+      [`.${ELEMENT_HERO_LOCK}`]: Layout.lock.max,
     },
   })}
 

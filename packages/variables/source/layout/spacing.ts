@@ -1,6 +1,6 @@
 import { Media, Spacing } from '../tokens';
 
-const VerticalLanding = {
+export const verticalLanding = {
   marginBottom: Spacing['3xl'],
 
   [`@media (${Media.queries.tablet.min})`]: {
@@ -12,7 +12,7 @@ const VerticalLanding = {
   },
 };
 
-const VerticalLandingChild = {
+export const verticalLandingChild = {
   marginBottom: Spacing.lg,
 
   [`@media (${Media.queries.tablet.min})`]: {
@@ -24,7 +24,7 @@ const VerticalLandingChild = {
   },
 };
 
-const VerticalInterior = {
+export const verticalInterior = {
   marginBottom: Spacing['3xl'],
 
   [`@media (${Media.queries.desktop.min})`]: {
@@ -32,13 +32,6 @@ const VerticalInterior = {
   },
 };
 
-const VerticalInteriorChild = {
+export const verticalInteriorChild = {
   marginBottom: Spacing.lg,
-};
-
-export default {
-  VerticalLanding,
-  VerticalLandingChild,
-  VerticalInterior,
-  VerticalInteriorChild,
 };

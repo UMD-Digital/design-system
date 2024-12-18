@@ -10,8 +10,6 @@ export type TypeAlertTextProps = {
 };
 
 const { Colors, Spacing, SpaceLayout } = Tokens;
-
-const { GridColumnAndRowsMobileTablet } = Layout;
 const { convertJSSObjectToStyles } = Styles;
 
 export const CONSTANTS = {
@@ -32,7 +30,7 @@ const ctaStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${className.actions}`]: GridColumnAndRowsMobileTablet,
+      [`.${className.actions}`]: Layout.grid.columnAndRowsMobileTablet,
     },
   })}
 `;

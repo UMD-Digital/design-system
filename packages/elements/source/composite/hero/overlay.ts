@@ -13,10 +13,9 @@ type TypeHeroOverlayProps = TypeTextContainerProps &
     includesAnimation?: boolean;
   };
 
-const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
-
 const { convertJSSObjectToStyles } = Styles;
+
 const ATTRIBUTE_ANIMATION = 'data-animation';
 
 const TABLET = 768;
@@ -169,7 +168,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: LockMax,
+      [`.${ELEMENT_HERO_LOCK}`]: Layout.lock.max,
     },
   })}
 

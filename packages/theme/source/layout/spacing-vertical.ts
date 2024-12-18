@@ -68,16 +68,16 @@ const SidebarNavigation = {
 
 export default {
   '.umd-layout-vertical-landing': {
-    ...Layout.VerticalLanding,
+    ...Layout.spacing.verticalLanding,
   },
   '.umd-layout-vertical-landing-child': {
-    ...Layout.VerticalLandingChild,
+    ...Layout.spacing.verticalLandingChild,
   },
   '.umd-layout-vertical-interior': {
-    ...Layout.VerticalInterior,
+    ...Layout.spacing.verticalInterior,
   },
   '.umd-layout-vertical-interior-child': {
-    ...Layout.VerticalInteriorChild,
+    ...Layout.spacing.verticalInteriorChild,
   },
   '.umd-layout-interior-navigation': {
     ...InteriorNavigation,

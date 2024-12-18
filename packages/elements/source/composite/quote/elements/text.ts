@@ -15,8 +15,6 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
 };
 
 const { Spacing, Colors } = Tokens;
-const { GridColumnAndRowsMobileTablet } = Layout;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
@@ -162,7 +160,7 @@ const ActionStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: GridColumnAndRowsMobileTablet,
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: Layout.grid.columnAndRowsMobileTablet,
     },
   })}
 `;

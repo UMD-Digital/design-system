@@ -1,9 +1,3 @@
-import Lock from './lock';
-import Grid from './grid';
-import Spacing from './spacing';
-
-export default {
-  ...Lock,
-  ...Grid,
-  ...Spacing,
-};
+export * as grid from './grid';
+export * as lock from './lock';
+export * as spacing from './spacing';

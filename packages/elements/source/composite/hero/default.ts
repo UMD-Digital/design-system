@@ -14,9 +14,7 @@ type TypeHeroDefaultProps = TypeTextContainerProps &
     includesAnimation?: boolean;
   };
 
-const { LockMax } = Layout;
 const { Colors, Spacing } = Tokens;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
@@ -288,7 +286,7 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_LOCK}`]: LockMax,
+      [`.${HERO_LOCK}`]: Layout.lock.max,
     },
   })}
   

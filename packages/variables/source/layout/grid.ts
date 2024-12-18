@@ -1,7 +1,7 @@
 import { element as elementAnimation } from '../animations';
 import { Media, Spacing } from '../tokens';
 
-const GridAnimationTwo = {
+export const animationTwo = {
   '& > *': {
     ...elementAnimation.fadeInFromBottom,
     animationRangeStart: '10%',
@@ -14,8 +14,8 @@ const GridAnimationTwo = {
   },
 };
 
-const GridAnimationThree = {
-  ...GridAnimationTwo,
+export const animationThree = {
+  ...animationTwo,
 
   '& > *': {
     ...elementAnimation.fadeInFromBottom,
@@ -34,8 +34,8 @@ const GridAnimationThree = {
   },
 };
 
-const GridAnimationFour = {
-  ...GridAnimationTwo,
+export const animationFour = {
+  ...animationTwo,
 
   '& > *': {
     ...elementAnimation.fadeInFromBottom,
@@ -59,7 +59,7 @@ const GridAnimationFour = {
   },
 };
 
-const GridColumnsTwo = {
+export const columnsTwo = {
   display: 'grid',
   gridTemplateColumns: '1fr',
 
@@ -68,7 +68,7 @@ const GridColumnsTwo = {
   },
 };
 
-const GridColumnsThree = {
+export const columnsThree = {
   display: 'grid',
   gridTemplateColumns: '1fr',
 
@@ -77,7 +77,7 @@ const GridColumnsThree = {
   },
 };
 
-const GridColumnsFour = {
+export const columnsFour = {
   display: 'grid',
   gridTemplateColumns: '1fr',
 
@@ -90,7 +90,7 @@ const GridColumnsFour = {
   },
 };
 
-const GridColumnsBaseWithGap = {
+export const columnsBaseWithGap = {
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: Spacing.lg,
@@ -104,7 +104,7 @@ const GridColumnsBaseWithGap = {
   },
 };
 
-const GridColumnsThreeWithGap = {
+export const columnsThreeWithGap = {
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: Spacing.lg,
@@ -114,7 +114,7 @@ const GridColumnsThreeWithGap = {
   },
 };
 
-const GridColumnsFourWithGap = {
+export const columnsFourWithGap = {
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: Spacing.lg,
@@ -128,7 +128,7 @@ const GridColumnsFourWithGap = {
   },
 };
 
-const GridColumnsThreeWithGapLarge = {
+export const columnsThreeWithGapLarge = {
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: Spacing.lg,
@@ -139,7 +139,7 @@ const GridColumnsThreeWithGapLarge = {
   },
 };
 
-const GridColumnsFourWithGapLarge = {
+export const columnsFourWithGapLarge = {
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: Spacing.lg,
@@ -154,13 +154,13 @@ const GridColumnsFourWithGapLarge = {
   },
 };
 
-const GridRowsWithGapBase = {
+export const rowsWithGapBase = {
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: Spacing.lg,
 };
 
-const GridColumnAndRows = {
+export const columnAndRows = {
   alignItems: 'flex-start',
   display: 'flex',
   flexDirection: 'column',
@@ -168,29 +168,12 @@ const GridColumnAndRows = {
   justifyContent: 'flex-start',
 };
 
-const GridColumnAndRowsMobileTablet = {
-  ...GridColumnAndRows,
+export const columnAndRowsMobileTablet = {
+  ...columnAndRows,
 
   [`@media (${Media.queries.large.min})`]: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
   },
-};
-
-export default {
-  GridColumnsTwo,
-  GridColumnsThree,
-  GridColumnsFour,
-  GridRowsWithGapBase,
-  GridColumnsBaseWithGap,
-  GridColumnsThreeWithGap,
-  GridColumnsFourWithGap,
-  GridColumnsThreeWithGapLarge,
-  GridColumnsFourWithGapLarge,
-  GridColumnAndRows,
-  GridColumnAndRowsMobileTablet,
-  GridAnimationTwo,
-  GridAnimationThree,
-  GridAnimationFour,
 };

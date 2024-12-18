@@ -8,15 +8,6 @@ type TypeGridDisplay = {
 };
 
 const { Media } = Tokens;
-
-const {
-  GridColumnsTwo,
-  GridColumnsThree,
-  GridColumnsFour,
-  GridColumnsBaseWithGap,
-  GridColumnsThreeWithGap,
-  GridColumnsFourWithGap,
-} = Layout;
 const { convertJSSObjectToStyles } = Styles;
 
 const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
@@ -25,39 +16,40 @@ const STYLES_GRID_LAYOUT = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="2"]`]:
-        GridColumnsBaseWithGap,
+        Layout.grid.columnsBaseWithGap,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="3"]`]:
-        GridColumnsThreeWithGap,
+        Layout.grid.columnsThreeWithGap,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="4"]`]:
-        GridColumnsFourWithGap,
+        Layout.grid.columnsFourWithGap,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="2"]`]: GridColumnsTwo,
+      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="2"]`]: Layout.grid.columnsTwo,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="3"]`]: GridColumnsThree,
+      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="3"]`]:
+        Layout.grid.columnsThree,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="4"]`]: GridColumnsFour,
+      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="4"]`]: Layout.grid.columnsFour,
     },
   })}
 

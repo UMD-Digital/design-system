@@ -9,8 +9,6 @@ type TypePathwayStickyProps = TypePathwayTextContainer &
   };
 
 const { Spacing } = Tokens;
-const { LockMax } = Layout;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 800;
@@ -94,7 +92,7 @@ const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_TEXT_WRAPPER}`]: LockMax ,
+        [`${OVERWRITE_TEXT_WRAPPER}`]: Layout.lock.max,
       },
     })}
   }
@@ -115,7 +113,7 @@ const OverwriteTextContainerStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_STICKY_CONTAINER_LOCK}`]: LockMax,
+      [`.${PATHWAY_STICKY_CONTAINER_LOCK}`]: Layout.lock.max,
     },
   })}
 

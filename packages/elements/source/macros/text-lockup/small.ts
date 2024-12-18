@@ -17,7 +17,6 @@ export type TypeTextLockupSmall = {
 };
 
 const { Colors, Spacing } = Tokens;
-const { GridColumnAndRowsMobileTablet } = Layout;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -199,7 +198,7 @@ const ActionStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: GridColumnAndRowsMobileTablet,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: Layout.grid.columnAndRowsMobileTablet,
     },
   })}
 `;

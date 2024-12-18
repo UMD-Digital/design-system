@@ -12,8 +12,6 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
   };
 
 const { Spacing } = Tokens;
-const { LockMax } = Layout;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 1000;
@@ -234,7 +232,7 @@ const AnimationStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: LockMax,
+      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: Layout.lock.max,
     },
   })}
 

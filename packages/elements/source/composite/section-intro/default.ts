@@ -11,8 +11,6 @@ type TypeSectionIntroDefaultProps = {
 };
 
 const { Colors, Spacing, SpaceLayout } = Tokens;
-const { GridColumnAndRowsMobileTablet } = Layout;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
@@ -183,7 +181,7 @@ const ActionStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ACTIONS}`]: GridColumnAndRowsMobileTablet,
+      [`.${ELEMENT_ACTIONS}`]: Layout.grid.columnAndRowsMobileTablet,
     },
   })}
 

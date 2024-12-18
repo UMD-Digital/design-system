@@ -49,7 +49,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: Layout.GridColumnsBaseWithGap,
+      [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: Layout.grid.columnsBaseWithGap,
     },
   })}
 

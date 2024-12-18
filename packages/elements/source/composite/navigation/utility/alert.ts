@@ -42,7 +42,6 @@ type CacheCheckResult = {
 const { FetchGraphQL } = Network;
 const { convertJSSObjectToStyles } = Styles;
 const { Colors, Spacing } = Tokens;
-const { LockFull } = Layout;
 
 const QUERY = `
   query CampusAlertsQuery {
@@ -231,7 +230,7 @@ const WrapperStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${LOCK}`]: LockFull,
+      [`${LOCK}`]: Layout.lock.full,
     },
   })}
 `

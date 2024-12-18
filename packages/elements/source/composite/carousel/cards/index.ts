@@ -18,7 +18,6 @@ type TypeCarouselCardsRequirements = {
 
 const { convertJSSObjectToStyles } = Styles;
 const { Colors, Spacing } = Tokens;
-const { LockMax } = Layout;
 
 const MEDIUM = 768;
 const LARGE = 1024;
@@ -174,7 +173,7 @@ const ContainerLock = `
   .${CAROUSEL_LOCK} {
     position: relative;
     ${convertJSSObjectToStyles({
-      styleObj: LockMax ,
+      styleObj: Layout.lock.max,
     })}
   }
 

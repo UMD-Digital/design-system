@@ -24,12 +24,10 @@ type TypePersonHeroProps = TypeTextContainer &
 
 const { convertJSSObjectToStyles } = Styles;
 const { Spacing, Colors } = Tokens;
-const { LockMax } = Layout;
 
 const MEDIUM = 768;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
-const THEME_LIGHT = 'light';
 
 const ELEMENT_NAME = 'umd-person-hero';
 const ELEMENT_PERSON_HERO_CONTAINER = 'person-hero-container';
@@ -118,7 +116,7 @@ const ImageBlockStyles = `
   @container (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_PERSON_HERO_IMAGE_BLOCK}`]: LockMax,
+        [`.${ELEMENT_PERSON_HERO_IMAGE_BLOCK}`]: Layout.lock.max,
       },
     })}
   }
@@ -175,7 +173,7 @@ const TextContainerStyles = `
   @container (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_PERSON_HERO_TEXT_CONTAINER}`]: LockMax,
+        [`.${ELEMENT_PERSON_HERO_TEXT_CONTAINER}`]: Layout.lock.max,
       },
     })}
   }
@@ -281,7 +279,7 @@ const WrapperStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_LOCK}`]: LockMax,
+      [`.${ELEMENT_PERSON_HERO_LOCK}`]: Layout.lock.max,
     },
   })}
 
@@ -301,7 +299,7 @@ const STYLES_PERSON_HERO_ELEMENT = `
     
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_BREADCRUMB}`]: LockMax,
+      [`.${ELEMENT_PERSON_HERO_BREADCRUMB}`]: Layout.lock.max,
     },
   })}
 

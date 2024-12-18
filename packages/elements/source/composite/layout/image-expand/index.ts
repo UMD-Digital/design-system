@@ -8,7 +8,6 @@ type TypeLayoutImageExpandProps = {
 
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
 const { Media, Spacing, SpaceLayout } = Tokens;
-const { LockMax } = Layout;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'layout-image-expand-declaration';
@@ -27,7 +26,7 @@ const ELEMENT_EXPAND_TEXT_ANIMATION = 'layout-image-expand-text-animation';
 const TextLock = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: LockMax,
+      [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: Layout.lock.max,
     },
   })}
 

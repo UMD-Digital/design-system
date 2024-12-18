@@ -19,7 +19,6 @@ type TypeAlertButtonProps = {
 };
 
 const { Colors, Spacing, SpaceLayout } = Tokens;
-const { LockMax } = Layout;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDUM = 500;
@@ -65,7 +64,7 @@ const ButtonStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_SITE_LOCK}`]: LockMax,
+      [`.${ELEMENT_ALERT_SITE_LOCK}`]: Layout.lock.max,
     },
   })}
 

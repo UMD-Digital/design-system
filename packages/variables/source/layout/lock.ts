@@ -24,40 +24,31 @@ const lockBase = {
   },
 };
 
-const LockFull = {
+export const full = {
   ...lockBase,
   maxWidth: '100%',
 };
 
-const LockMax = {
+export const max = {
   ...lockBase,
 };
 
-const LockLarge = {
+export const large = {
   ...lockBase,
   maxWidth: `${SpaceLayout.maxWidth.large}`,
 };
 
-const LockNormal = {
+export const normal = {
   ...lockBase,
   maxWidth: `${SpaceLayout.maxWidth.normal}`,
 };
 
-const LockSmall = {
+export const small = {
   ...lockBase,
   maxWidth: `${SpaceLayout.maxWidth.small}`,
 };
 
-const LockSmallest = {
+export const smallest = {
   ...lockBase,
   maxWidth: `${SpaceLayout.maxWidth.smallest}`,
-};
-
-export default {
-  LockFull,
-  LockMax,
-  LockLarge,
-  LockNormal,
-  LockSmall,
-  LockSmallest,
 };

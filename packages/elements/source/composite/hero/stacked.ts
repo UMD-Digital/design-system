@@ -16,9 +16,7 @@ type TypeHeroStackedProps = TypeTextContainerProps &
     includesAnimation?: boolean;
   };
 
-const { LockMax } = Layout;
 const { Colors, Media, Spacing } = Tokens;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
@@ -227,7 +225,7 @@ export const STYLES_HERO_STACKED_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: LockMax,
+      [`.${ELEMENT_HERO_LOCK}`]: Layout.lock.max,
     },
   })}
 

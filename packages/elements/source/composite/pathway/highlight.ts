@@ -11,8 +11,6 @@ type TypePathwayHighlightProps = TypePathwayTextContainer &
   TypePathwayHighlightContainer;
 
 const { Colors, Spacing } = Tokens;
-const { LockMax } = Layout;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 1000;
@@ -151,7 +149,7 @@ const HighlightContainer = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: LockMax,
+      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: Layout.lock.max,
     },
   })}
 

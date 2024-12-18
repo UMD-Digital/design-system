@@ -14,7 +14,6 @@ import {
 } from '../../globals';
 
 const { Colors, Spacing } = Tokens;
-const { LockMax } = Layout;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -83,7 +82,7 @@ export const UtilityContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER_LOCK}`]: LockMax 
+      [`.${UTILITY_CONTAINER_LOCK}`]: Layout.lock.max,
     },
   })}
 

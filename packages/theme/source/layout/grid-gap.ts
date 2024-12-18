@@ -1,13 +1,5 @@
 import { Layout, Tokens } from '@universityofmaryland/variables';
 
-const {
-  GridColumnsBaseWithGap,
-  GridColumnsThreeWithGap,
-  GridColumnsFourWithGap,
-  GridColumnsThreeWithGapLarge,
-  GridColumnsFourWithGapLarge,
-  GridColumnAndRowsMobileTablet,
-} = Layout;
 const { Media, Spacing } = Tokens;
 
 const GridColumnsStacked = {
@@ -21,9 +13,9 @@ const GridColumnsStacked = {
 };
 
 const GridColumnsFeatured = {
-  ...GridColumnsBaseWithGap,
-  ...GridColumnsThreeWithGap,
-  ...GridColumnsFourWithGap,
+  ...Layout.grid.columnsBaseWithGap,
+  ...Layout.grid.columnsThreeWithGap,
+  ...Layout.grid.columnsFourWithGap,
 
   [`@media (${Media.queries.medium.min})`]: {
     gridGap: `${Spacing.md}`,
@@ -134,16 +126,16 @@ const OffsetGrid = {
 
 export default {
   '.umd-grid-gap': {
-    ...GridColumnsBaseWithGap,
+    ...Layout.grid.columnsBaseWithGap,
   },
   '.umd-grid-gap-three': {
-    ...GridColumnsThreeWithGap,
+    ...Layout.grid.columnsThreeWithGap,
   },
   '.umd-grid-gap-four': {
-    ...GridColumnsFourWithGap,
+    ...Layout.grid.columnsFourWithGap,
   },
   '.umd-grid-gap-four-center': {
-    ...GridColumnsFourWithGap,
+    ...Layout.grid.columnsFourWithGap,
 
     '& > *:first-child': {
       [`@media (${Media.queries.highDef.min})`]: {
@@ -152,16 +144,16 @@ export default {
     },
   },
   '.umd-grid-gap-three-large': {
-    ...GridColumnsThreeWithGapLarge,
+    ...Layout.grid.columnsThreeWithGapLarge,
   },
   '.umd-grid-gap-four-large': {
-    ...GridColumnsFourWithGapLarge,
+    ...Layout.grid.columnsFourWithGapLarge,
   },
   '.umd-grid-featured-card': {
     ...GridColumnsFeatured,
   },
   '.umd-grid-row-mobile-tablet': {
-    ...GridColumnAndRowsMobileTablet,
+    ...Layout.grid.columnAndRowsMobileTablet,
   },
   '.umd-grid-gap-masonry': {
     ...MasonryGrid,
@@ -170,7 +162,7 @@ export default {
     ...GridColumnsStacked,
   },
   '.umd-grid-gap-three-offset': {
-    ...GridColumnsThreeWithGapLarge,
+    ...Layout.grid.columnsFourWithGapLarge,
     ...OffsetGrid,
   },
 };

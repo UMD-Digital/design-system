@@ -10,9 +10,7 @@ import TextContainer, { TypeTextContainerProps } from './elements/text';
 
 type TypeHeroLogoProps = TypeTextContainerProps & TypeImageContainerProps;
 
-const { LockSmall } = Layout;
 const { Colors, Spacing } = Tokens;
-
 const { convertJSSObjectToStyles } = Styles;
 
 const THEME_LIGHT = 'light';
@@ -143,7 +141,7 @@ const STYLES_HERO_LOGO_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: LockSmall,
+      [`.${ELEMENT_HERO_LOCK}`]: Layout.lock.small,
     },
   })}
   

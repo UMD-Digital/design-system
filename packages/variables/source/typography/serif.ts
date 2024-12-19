@@ -4,17 +4,19 @@ const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
 
 const base = {
-  FontFamily: Font.family['serif'],
+  fontFamily: Font.family['serif'],
 };
 
 const sizeLarger = {
   fontSize: Font.size['4xl'],
   lineHeight: `1.18em`,
 };
+
 const sizeLarge = {
   fontSize: Font.size['3xl'],
   lineHeight: `1em`,
 };
+
 const sizeMedium = {
   fontSize: Font.size['xl'],
   lineHeight: `1.5em`,

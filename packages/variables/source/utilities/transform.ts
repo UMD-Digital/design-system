@@ -22,9 +22,10 @@ export const objectWithName: JssNameConverter = (originalObject) => {
 
   for (const [key, value] of Object.entries(originalObject)) {
     const typographyKey = `.${value.class}`;
+    const { class: _, ...rest } = value;
 
     newFormat[typographyKey] = {
-      ...value,
+      ...rest,
     };
   }
 

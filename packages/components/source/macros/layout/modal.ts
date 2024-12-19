@@ -64,7 +64,10 @@ export const CreateModal = ({
     });
 
     setTimeout(() => {
-      if (content) content.focus();
+      if (context) {
+        const firstItem = context.querySelector('button, a') as HTMLElement;
+        firstItem?.focus();
+      }
     }, 100);
   };
   const hide = () => {

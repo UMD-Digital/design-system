@@ -11,6 +11,7 @@ type TypeFixedFullScreenProps = {
 const { Queries, Spacing } = Tokens;
 
 const ELEMENT_CONTAINER = 'modal-screen-container';
+const ELEMENT_CONTAINER_BACKGROUND = 'modal-screen-container-background';
 
 export const STYLES_MODAL = `
   .${ELEMENT_CONTAINER} {
@@ -20,13 +21,18 @@ export const STYLES_MODAL = `
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
     z-index: 999999;
+  }
+
+  .${ELEMENT_CONTAINER_BACKGROUND} {
+    background-color: rgba(0, 0, 0, 0.9);
     padding: ${Spacing.xl} ${Spacing.md};
+    width: 100%;
+    height: 100%;
   }
 
   @media (${Queries.tablet.min}) {
-    .${ELEMENT_CONTAINER} {
+    .${ELEMENT_CONTAINER_BACKGROUND} {
       padding: 10vh 10vw;
     }
   }
@@ -41,6 +47,7 @@ export const CreateModal = ({
   const body = document.body;
   const html = document.documentElement;
   const container = document.createElement('div');
+  const background = document.createElement('div');
   let eventReference: any = null;
   let accessibiltyEventReference: any = null;
 
@@ -77,11 +84,19 @@ export const CreateModal = ({
     if (eventReference)
       eventReference.removeEventListener('click', () => hide());
 
-    if (callback) callback();
+    setTimeout(() => {
+      if (context) {
+        const firstItem = context.querySelector('button, a') as HTMLElement;
+        firstItem?.focus();
+      }
+    }, 100);
   };
 
+  background.classList.add(ELEMENT_CONTAINER_BACKGROUND);
+  if (content) background.appendChild(content);
+
   container.classList.add(ELEMENT_CONTAINER);
-  if (content) container.appendChild(content);
+  container.appendChild(background);
   if (isHidden) container.style.display = 'none';
 
   return {

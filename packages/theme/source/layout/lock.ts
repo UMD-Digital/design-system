@@ -10,7 +10,7 @@ export default {
   },
 
   '.umd-lock-small': {
-    ...Layout.lock.small,
+    ...Layout.lock.large,
   },
 
   '.umd-lock-smaller': {

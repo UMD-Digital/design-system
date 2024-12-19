@@ -8,7 +8,7 @@ type TypeFixedFullScreenProps = {
   context?: HTMLElement | null;
 };
 
-const { Queries, Spacing } = Tokens;
+const { Media, Spacing } = Tokens;
 
 const ELEMENT_CONTAINER = 'modal-screen-container';
 const ELEMENT_CONTAINER_BACKGROUND = 'modal-screen-container-background';
@@ -31,7 +31,7 @@ export const STYLES_MODAL = `
     height: 100%;
   }
 
-  @media (${Queries.tablet.min}) {
+  @media (${Media.queries.tablet.min}) {
     .${ELEMENT_CONTAINER_BACKGROUND} {
       padding: 10vh 10vw;
     }

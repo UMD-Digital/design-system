@@ -1,4 +1,5 @@
 import { Font, Media } from '../tokens';
+import { create } from '../utilities';
 
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
@@ -133,80 +134,80 @@ export const min = {
 };
 
 export const fonts = {
-  maximum: {
-    class: 'umd-sans-maximum',
+  maximum: create.jssObject({
+    className: 'umd-sans-maximum',
     ...maxium,
-  },
+  }),
 
-  largest: {
-    class: 'umd-sans-largest',
+  largest: create.jssObject({
+    className: 'umd-sans-largest',
     ...largest,
-  },
+  }),
 
-  extraLarge: {
-    class: 'umd-sans-extralarge',
+  extraLarge: create.jssObject({
+    className: 'umd-sans-extralarge',
     ...extraLarge,
-  },
+  }),
 
-  larger: {
-    class: 'umd-sans-larger',
+  larger: create.jssObject({
+    className: 'umd-sans-larger',
     ...larger,
-  },
+  }),
 
-  large: {
-    class: 'umd-sans-large',
+  large: create.jssObject({
+    className: 'umd-sans-large',
     ...large,
-  },
+  }),
 
-  medium: {
-    class: 'umd-sans-medium',
+  medium: create.jssObject({
+    className: 'umd-sans-medium',
     ...medium,
-  },
+  }),
 
-  small: {
-    class: 'umd-sans-small',
+  small: create.jssObject({
+    className: 'umd-sans-small',
     ...small,
-  },
+  }),
 
-  smaller: {
-    class: 'umd-sans-smaller',
+  smaller: create.jssObject({
+    className: 'umd-sans-smaller',
     ...smaller,
-  },
+  }),
 
-  min: {
-    class: 'umd-sans-min',
+  min: create.jssObject({
+    className: 'umd-sans-min',
     ...min,
-  },
+  }),
 };
 
 export const transformations = {
-  largestUppercase: {
-    class: 'umd-sans-largest-uppercase',
+  largestUppercase: create.jssObject({
+    className: 'umd-sans-largest-uppercase',
     ...largest,
 
     fontWeight: Font.weight['extraBold'],
     textTransform: 'uppercase',
-  },
+  }),
 
-  extraLargeUppercase: {
-    class: 'umd-sans-extralarge-uppercase',
+  extraLargeUppercase: create.jssObject({
+    className: 'umd-sans-extralarge-uppercase',
     ...extraLarge,
 
     fontWeight: Font.weight['extraBold'],
     textTransform: 'uppercase',
-  },
+  }),
 
-  extraLargeBold: {
-    class: 'umd-sans-extralarge-bold',
+  extraLargeBold: create.jssObject({
+    className: 'umd-sans-extralarge-bold',
     ...extraLarge,
 
     fontWeight: Font.weight['bold'],
-  },
+  }),
 
-  largerBold: {
-    class: 'umd-sans-larger-bold',
+  largerBold: create.jssObject({
+    className: 'umd-sans-larger-bold',
     ...larger,
 
     fontWeight: Font.weight['bold'],
-  },
+  }),
 };

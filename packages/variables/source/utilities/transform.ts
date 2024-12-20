@@ -1,13 +1,13 @@
-interface JssEntry {
-  class: string;
+export interface JssEntry {
+  className: string;
   [key: string]: any;
 }
 
-interface JssInputFormat {
+export interface JssInputFormat {
   [key: string]: JssEntry;
 }
 
-interface JssNamedOutputFormat {
+export interface JssNamedOutputFormat {
   [className: string]: {
     [key: string]: any;
   };
@@ -21,8 +21,8 @@ export const objectWithName: JssNameConverter = (originalObject) => {
   const newFormat: JssNamedOutputFormat = {};
 
   for (const [key, value] of Object.entries(originalObject)) {
-    const typographyKey = `.${value.class}`;
-    const { class: _, ...rest } = value;
+    const { className, ...rest } = value;
+    const typographyKey = `.${className}`;
 
     newFormat[typographyKey] = {
       ...rest,

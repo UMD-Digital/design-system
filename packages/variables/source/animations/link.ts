@@ -1,4 +1,5 @@
 import { Colors } from '../tokens';
+import { create } from '../utilities';
 import * as line from './effects/line';
 
 const baseSpan = {
@@ -14,28 +15,28 @@ const baseLink = {
   textDecoration: 'none',
 };
 
-export const slideUnderRed = {
-  class: 'umd-slidein-underline-red',
+export const slideUnderRed = create.jssObject({
+  className: 'umd-slidein-underline-red',
   ...line.slideUnder.red,
-};
+});
 
-export const slideUnderBlack = {
-  class: 'umd-slidein-underline-black',
+export const slideUnderBlack = create.jssObject({
+  className: 'umd-slidein-underline-black',
   ...line.slideUnder.black,
-};
+});
 
-export const slideUnderWhite = {
-  class: 'umd-slidein-underline-white',
+export const slideUnderWhite = create.jssObject({
+  className: 'umd-slidein-underline-white',
   ...line.slideUnder.white,
-};
+});
 
-export const slideUnderGold = {
-  class: 'umd-slidein-underline-gold',
+export const slideUnderGold = create.jssObject({
+  className: 'umd-slidein-underline-gold',
   ...line.slideUnder.gold,
-};
+});
 
-export const fadeUnderRed = {
-  class: 'umd-fadein-underline-red',
+export const fadeUnderRed = create.jssObject({
+  className: 'umd-fadein-underline-red',
   ...{
     ...line.fadeUnder.base,
 
@@ -46,10 +47,10 @@ export const fadeUnderRed = {
       backgroundImage: `linear-gradient(${Colors.red}, ${Colors.red})`,
     },
   },
-};
+});
 
-export const fadeUnderGray = {
-  class: 'umd-fadein-underline-gray',
+export const fadeUnderGray = create.jssObject({
+  className: 'umd-fadein-underline-gray',
   ...{
     ...line.fadeUnder.base,
 
@@ -60,10 +61,10 @@ export const fadeUnderGray = {
       backgroundImage: `linear-gradient(${Colors.gray.mediumAA}, ${Colors.gray.mediumAA})`,
     },
   },
-};
+});
 
-export const fadeUnderGold = {
-  class: 'umd-fadein-underline-gold',
+export const fadeUnderGold = create.jssObject({
+  className: 'umd-fadein-underline-gold',
   ...{
     ...line.fadeUnder.base,
 
@@ -74,10 +75,10 @@ export const fadeUnderGold = {
       backgroundImage: `linear-gradient(${Colors.gold}, ${Colors.gold})`,
     },
   },
-};
+});
 
-export const fadeUnderBlack = {
-  class: 'umd-fadein-underline-black',
+export const fadeUnderBlack = create.jssObject({
+  className: 'umd-fadein-underline-black',
   ...{
     ...line.fadeUnder.base,
 
@@ -88,10 +89,10 @@ export const fadeUnderBlack = {
       backgroundImage: `linear-gradient(${Colors.black}, ${Colors.black})`,
     },
   },
-};
+});
 
-export const fadeUnderWhite = {
-  class: 'umd-fadein-underline-white',
+export const fadeUnderWhite = create.jssObject({
+  className: 'umd-fadein-underline-white',
   ...{
     ...line.fadeUnder.base,
 
@@ -102,28 +103,28 @@ export const fadeUnderWhite = {
       backgroundImage: `linear-gradient(${Colors.white}, ${Colors.white})`,
     },
   },
-};
+});
 
-export const slideInGrayRed = {
-  class: 'umd-slidein-underline-gray-red',
+export const slideInGrayRed = create.jssObject({
+  className: 'umd-slidein-underline-gray-red',
   ...baseLink,
   ...line.slideUnder.gray,
-};
+});
 
-export const slideInDarkGrayRed = {
-  class: 'umd-slidein-underline-graydark-red',
+export const slideInDarkGrayRed = create.jssObject({
+  className: 'umd-slidein-underline-graydark-red',
   ...baseLink,
   ...line.slideUnder.grayDark,
-};
+});
 
-export const fadeInSimpleDark = {
-  class: 'umd-fadein-simple-dark',
+export const fadeInSimpleDark = create.jssObject({
+  className: 'umd-fadein-simple-dark',
   ...baseLink,
   ...line.fadeUnder.dark,
-};
+});
 
-export const fadeInSimpleLight = {
-  class: 'umd-fadein-simple-light',
+export const fadeInSimpleLight = create.jssObject({
+  className: 'umd-fadein-simple-light',
   ...baseLink,
   ...line.fadeUnder.light,
-};
+});

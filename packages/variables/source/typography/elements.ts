@@ -1,4 +1,5 @@
 import { Colors, Font, Media } from '../tokens';
+import { create } from '../utilities';
 
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
@@ -61,28 +62,28 @@ export const interativeSmall = {
 };
 
 export const fonts = {
-  eyebrow: {
-    class: 'umd-eyebrow',
+  eyebrow: create.jssObject({
+    className: 'umd-eyebrow',
     ...eyebrow,
-  },
+  }),
 
-  labelMedium: {
-    class: 'umd-label-sans-medium',
+  labelMedium: create.jssObject({
+    className: 'umd-label-sans-medium',
     ...labelMedium,
-  },
+  }),
 
-  labelSmall: {
-    class: 'umd-label-sans-small',
+  labelSmall: create.jssObject({
+    className: 'umd-label-sans-small',
     ...labelSmall,
-  },
+  }),
 
-  medium: {
-    class: 'umd-interactive-sans-medium',
+  medium: create.jssObject({
+    className: 'umd-interactive-sans-medium',
     ...interativeMedium,
-  },
+  }),
 
-  small: {
-    class: 'umd-interactive-sans-small',
+  small: create.jssObject({
+    className: 'umd-interactive-sans-small',
     ...interativeSmall,
-  },
+  }),
 };

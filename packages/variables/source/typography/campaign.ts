@@ -1,4 +1,5 @@
 import { Font, Media } from '../tokens';
+import { create } from '../utilities';
 
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
@@ -97,33 +98,33 @@ export const extraSmall = {
 };
 
 export const fonts = {
-  maximum: {
-    class: 'umd-campaign-maximum',
+  maximum: create.jssObject({
+    className: 'umd-campaign-maximum',
     ...maxium,
-  },
+  }),
 
-  extraLarge: {
-    class: 'umd-campaign-extralarge',
+  extraLarge: create.jssObject({
+    className: 'umd-campaign-extralarge',
     ...extralarge,
-  },
+  }),
 
-  large: {
-    class: 'umd-campaign-large',
+  large: create.jssObject({
+    className: 'umd-campaign-large',
     ...large,
-  },
+  }),
 
-  medium: {
-    class: 'umd-campaign-medium',
+  medium: create.jssObject({
+    className: 'umd-campaign-medium',
     ...medium,
-  },
+  }),
 
-  small: {
-    class: 'umd-campaign-small',
+  small: create.jssObject({
+    className: 'umd-campaign-small',
     ...CampaignSmall,
-  },
+  }),
 
-  extraSmall: {
-    class: 'umd-campaign-extrasmall',
+  extraSmall: create.jssObject({
+    className: 'umd-campaign-extrasmall',
     ...extraSmall,
-  },
+  }),
 };

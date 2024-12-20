@@ -1,4 +1,5 @@
 import { Font, Media } from '../tokens';
+import { create } from '../utilities';
 
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
@@ -83,28 +84,28 @@ export const medium = {
 };
 
 export const fonts = {
-  maximum: {
-    class: 'umd-serif-maximum',
+  maximum: create.jssObject({
+    className: 'umd-serif-maximum',
     ...maxium,
-  },
+  }),
 
-  extraLarge: {
-    class: 'umd-serif-extralarge',
+  extraLarge: create.jssObject({
+    className: 'umd-serif-extralarge',
     ...extralarge,
-  },
+  }),
 
-  larger: {
-    class: 'umd-serif-larger',
+  larger: create.jssObject({
+    className: 'umd-serif-larger',
     ...larger,
-  },
+  }),
 
-  large: {
-    class: 'umd-serif-large',
+  large: create.jssObject({
+    className: 'umd-serif-large',
     ...large,
-  },
+  }),
 
-  medium: {
-    class: 'umd-serif-medium',
+  medium: create.jssObject({
+    className: 'umd-serif-medium',
     ...medium,
-  },
+  }),
 };

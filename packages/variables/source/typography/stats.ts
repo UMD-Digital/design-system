@@ -1,4 +1,5 @@
 import { Font, Media } from '../tokens';
+import { create } from '../utilities';
 
 const breakpointLarge = Media.queries.large.min;
 const breakpointDesktop = Media.queries.desktop.min;
@@ -44,18 +45,18 @@ export const small = {
 };
 
 export const fonts = {
-  statLarge: {
-    class: 'umd-statistic-sans-large',
+  statLarge: create.jssObject({
+    className: 'umd-statistic-sans-large',
     ...large,
-  },
+  }),
 
-  statMedium: {
-    class: 'umd-statistic-sans-medium',
+  statMedium: create.jssObject({
+    className: 'umd-statistic-sans-medium',
     ...medium,
-  },
+  }),
 
-  statSmall: {
-    class: 'umd-statistic-sans-small',
+  statSmall: create.jssObject({
+    className: 'umd-statistic-sans-small',
     ...small,
-  },
+  }),
 };

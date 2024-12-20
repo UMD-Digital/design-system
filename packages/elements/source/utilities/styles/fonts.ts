@@ -22,12 +22,12 @@ export enum SansFontSize {
 }
 
 export const CampaignFontOptions = (size: CampaignFontSize) => {
-  const { class: className, ...fontStyles } = Typography.campaign.fonts[size];
+  const { className, ...fontStyles } = Typography.campaign.fonts[size];
   return { className, fontStyles };
 };
 
 export const SansFontOptions = (size: SansFontSize) => {
-  const { class: className, ...fontStyles } = Typography.sans.fonts[size];
+  const { className, ...fontStyles } = Typography.sans.fonts[size];
   return { className, fontStyles };
 };
 

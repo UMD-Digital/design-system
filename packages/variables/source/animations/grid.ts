@@ -1,6 +1,7 @@
+import { create } from '../utilities';
 import { fadeInFromBottom } from './effects/object';
 
-export const gridFadeIn = {
-  class: 'umd-grid-fade-in',
+export const gridFadeIn = create.jssObject({
+  className: 'umd-grid-fade-in',
   ...fadeInFromBottom,
-};
+});

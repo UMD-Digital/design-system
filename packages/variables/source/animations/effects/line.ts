@@ -1,4 +1,4 @@
-import { Colors } from '../tokens';
+import { Colors } from '../../tokens';
 
 const baseSpan = {
   display: 'inline',

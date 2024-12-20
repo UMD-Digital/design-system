@@ -9,7 +9,6 @@ export const loadIntersectionObserver = () => {
 
   const idGridFadeIn = `umd-grid-fade-in`;
   const idOffsetAttr = `data-animation`;
-
   const animationOffset = `offset`;
 
   const ApplyStyles = () => {
@@ -31,7 +30,7 @@ export const loadIntersectionObserver = () => {
 
       ${convertJSSObjectToStyles({
         styleObj: {
-          [`.${idGridFadeIn}`]: Animations.element.fadeInFromBottom,
+          [`.${idGridFadeIn}`]: Animations.object.fadeInFromBottom,
         },
       })}
     `;

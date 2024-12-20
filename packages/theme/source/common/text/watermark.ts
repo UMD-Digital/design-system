@@ -26,7 +26,7 @@ const Watermark = {
 
   '> *': {
     ...Child,
-    ...Animations.element.slideInFromLeft,
+    ...Animations.object.slideInFromLeft,
   },
 };
 
@@ -35,7 +35,7 @@ const WatermarkDark = {
 
   '> *': {
     ...Child,
-    ...Animations.element.slideInFromLeft,
+    ...Animations.object.slideInFromLeft,
     opacity: '0.12',
     zIndex: 'inherit',
   },

@@ -2,7 +2,6 @@ import { Tokens, Typography } from '@universityofmaryland/variables';
 
 import transforms from './transforms';
 
-import Animations from './animations';
 import Common from './common';
 import Elements from './elements';
 import Layout from './layout';
@@ -91,7 +90,6 @@ export const theme = {
   root,
   transforms,
 
-  Animations,
   Common,
   Elements,
   Layout,

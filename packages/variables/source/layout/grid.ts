@@ -1,9 +1,9 @@
-import { element as elementAnimation } from '../animations';
+import { object as objectAnimation } from '../animations';
 import { Media, Spacing } from '../tokens';
 
 export const animationTwo = {
   '& > *': {
-    ...elementAnimation.fadeInFromBottom,
+    ...objectAnimation.fadeInFromBottom,
     animationRangeStart: '10%',
     animationRangeEnd: '30%',
   },
@@ -18,7 +18,7 @@ export const animationThree = {
   ...animationTwo,
 
   '& > *': {
-    ...elementAnimation.fadeInFromBottom,
+    ...objectAnimation.fadeInFromBottom,
     animationRangeStart: '10%',
     animationRangeEnd: '30%',
   },
@@ -38,7 +38,7 @@ export const animationFour = {
   ...animationTwo,
 
   '& > *': {
-    ...elementAnimation.fadeInFromBottom,
+    ...objectAnimation.fadeInFromBottom,
     animationRangeStart: '10%',
     animationRangeEnd: '30%',
   },

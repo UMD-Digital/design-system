@@ -88,7 +88,7 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT} a`]: Animations.line.fadeUnder.yellow,
+      [`.${ELEMENT_RICH_TEXT} a`]: Animations.line.fadeUnderRed,
     },
   })}
 

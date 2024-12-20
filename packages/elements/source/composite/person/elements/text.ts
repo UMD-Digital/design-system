@@ -51,7 +51,7 @@ const ThemeDarkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Animations.line.slideUnder.white,
+      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Animations.line.slideUnderWhite,
     },
   })}
 `;
@@ -73,7 +73,7 @@ const NameStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Animations.line.slideUnder.black,
+      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Animations.line.slideUnderBlack,
     },
   })}
 `;

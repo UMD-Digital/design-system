@@ -78,7 +78,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE} a`]:
-      Animations.line.slideUnder.white,
+      Animations.line.slideUnderWhite,
     },
   })}
 
@@ -96,7 +96,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
-      Animations.line.slideUnder.black,
+      Animations.line.slideUnderBlack,
     },
   })}
 `;
@@ -137,14 +137,14 @@ const LinkListStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} a`]:
-      Animations.line.slideUnder.white,
+      Animations.line.slideUnderWhite,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
-      Animations.line.slideUnder.black,
+      Animations.line.slideUnderBlack,
     },
   })}
 

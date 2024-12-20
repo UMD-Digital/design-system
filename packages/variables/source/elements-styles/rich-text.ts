@@ -1,6 +1,6 @@
 import { Colors, Font, Spacing } from '../tokens';
 import { sans } from '../typography';
-import { line as lineAnimations } from '../animations';
+import { line } from '../animations';
 import * as lists from './list';
 
 export const simpleBase = {
@@ -98,7 +98,7 @@ export const advancedDarkAnimations = {
   },
 
   '& a': {
-    ...lineAnimations.fadeUnder.dark,
+    ...line.fadeUnderBlack,
   },
 };
 

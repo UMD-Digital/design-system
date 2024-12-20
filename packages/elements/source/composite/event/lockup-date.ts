@@ -50,13 +50,13 @@ const HeadlineStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} a`]: Animations.line.slideUnder.black,
+      [`.${EVENT_HEADLINE} a`]: Animations.line.slideUnderBlack,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: Animations.line.slideUnder.white, 
+      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: Animations.line.slideUnderWhite, 
     },
   })}
 `;

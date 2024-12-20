@@ -166,7 +166,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
-      Animations.line.slideUnder.white
+      Animations.line.slideUnderWhite
     },
   })}
 
@@ -178,7 +178,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
-      Animations.line.slideUnder.black
+      Animations.line.slideUnderBlack
     },
   })}
 `;

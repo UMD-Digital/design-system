@@ -1,5 +1,5 @@
 export interface JssEntry {
-  className: string;
+  className: string | string[];
   [key: string]: any;
 }
 
@@ -22,11 +22,16 @@ export const objectWithName: JssNameConverter = (originalObject) => {
 
   for (const [key, value] of Object.entries(originalObject)) {
     const { className, ...rest } = value;
-    const typographyKey = `.${className}`;
 
-    newFormat[typographyKey] = {
-      ...rest,
-    };
+    if (Array.isArray(className)) {
+      className.forEach((name) => {
+        const typographyKey = `.${name}`;
+        newFormat[typographyKey] = { ...rest };
+      });
+    } else {
+      const typographyKey = `.${className}`;
+      newFormat[typographyKey] = { ...rest };
+    }
   }
 
   return newFormat;

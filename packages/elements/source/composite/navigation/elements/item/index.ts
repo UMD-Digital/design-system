@@ -166,7 +166,7 @@ const DropdownListStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
-      Animations.line.slideUnder.red,
+      Animations.line.slideUnderRed,
     },
   })}
 

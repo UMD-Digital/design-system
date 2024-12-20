@@ -54,7 +54,7 @@ const OverwriteThemeGoldStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_GOLD_SECONDARY} > span > span`]:
-      Animations.line.slideUnder.gold,
+      Animations.line.slideUnderGold,
     },
   })}
 
@@ -193,7 +193,7 @@ const SecondaryStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CTA_SECONDARY} > span > span`]:
-      Animations.line.slideUnder.red,
+      Animations.line.slideUnderRed,
     },
   })}
 `;

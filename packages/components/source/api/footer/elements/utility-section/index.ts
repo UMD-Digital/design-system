@@ -40,7 +40,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:
-      Animations.line.slideUnder.white,
+      Animations.line.slideUnderWhite,
     },
   })}
 
@@ -51,7 +51,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
-      Animations.line.slideUnder.black,
+      Animations.line.slideUnderBlack,
     },
   })}
 `;

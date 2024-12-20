@@ -11,7 +11,7 @@ const accessibility = {
 
 const animations = {
   ...Utilities.transform.objectWithName(Animations.grid),
-  ...Utilities.transform.objectWithName(Animations.link),
+  ...Utilities.transform.objectWithName(Animations.line),
 };
 
 const typography = {

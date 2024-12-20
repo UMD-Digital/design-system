@@ -50,7 +50,7 @@ const DarkThemeStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK_HEADLINE} a`]:
-      Animations.line.slideUnder.white,
+      Animations.line.slideUnderWhite,
     },
   })}
 
@@ -122,7 +122,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} a`]:
-      Animations.line.slideUnder.black,
+      Animations.line.slideUnderBlack,
     },
   })}
 `;

@@ -30,7 +30,7 @@ export const loadIntersectionObserver = () => {
 
       ${convertJSSObjectToStyles({
         styleObj: {
-          [`.${idGridFadeIn}`]: Animations.object.fadeInFromBottom,
+          [`.${idGridFadeIn}`]: Animations.transition.fadeInFromBottom,
         },
       })}
     `;

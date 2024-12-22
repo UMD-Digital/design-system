@@ -1,3 +1,5 @@
+import { create } from '../utilities';
+
 const KeyFrameFadeInStart = {
   opacity: 0,
 };
@@ -46,17 +48,12 @@ const KeyFrameSlideInFromLeft = {
   },
 };
 
-export const fadeInFromBottom = {
-  ...KeyFrameFadeInFromBottom,
+// Consistent naming
+const classNamePrefix = 'umd-animation-transition';
 
-  [`@media (prefers-reduced-motion: no-preference)`]: {
-    animation: 'fade-in-from-bottom 1s forwards',
-    opacity: '0',
-    transform: 'translateY(50px)',
-  },
-};
-
-export const slideInFromLeft = {
+// umd-animation-transition-slide-right
+export const slideRight = create.jssObject({
+  className: `${classNamePrefix}-slide-right`,
   ...KeyFrameSlideInFromLeft,
 
   [`@media (prefers-reduced-motion: no-preference)`]: {
@@ -68,4 +65,20 @@ export const slideInFromLeft = {
       transform: 'translateX(-15vw)',
     },
   },
-};
+});
+
+// umd-animation-transition-fade-bottom
+export const fadeInFromBottom = create.jssObject({
+  className: [
+    `${classNamePrefix}-fade-bottom`,
+    /** @deprecated Use 'umd-animation-transition-fade-bottom' instead */
+    'umd-grid-fade-in',
+  ],
+  ...KeyFrameFadeInFromBottom,
+
+  [`@media (prefers-reduced-motion: no-preference)`]: {
+    animation: 'fade-in-from-bottom 1s forwards',
+    opacity: '0',
+    transform: 'translateY(50px)',
+  },
+});

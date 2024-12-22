@@ -10,8 +10,8 @@ const accessibility = {
 };
 
 const animations = {
-  ...Utilities.transform.objectWithName(Animations.grid),
   ...Utilities.transform.objectWithName(Animations.line),
+  ...Utilities.transform.objectWithName(Animations.transition),
 };
 
 const typography = {

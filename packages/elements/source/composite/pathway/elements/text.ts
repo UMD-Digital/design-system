@@ -77,7 +77,7 @@ const EyebrowStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: ElementStyles.text.ribbon,
+      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
     },
   })}
 `;

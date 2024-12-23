@@ -1,6 +1,7 @@
 import {
   Accessibility,
   Animations,
+  ElementStyles,
   Typography,
   Utilities,
 } from '@universityofmaryland/variables';
@@ -12,6 +13,12 @@ const accessibility = {
 const animations = {
   ...Utilities.transform.objectWithName(Animations.line),
   ...Utilities.transform.objectWithName(Animations.transition),
+};
+
+const elementStyles = {
+  ...Utilities.transform.objectWithName(ElementStyles.text.cluster),
+  ...Utilities.transform.objectWithName(ElementStyles.text.decoration),
+  ...Utilities.transform.objectWithName(ElementStyles.text.line),
 };
 
 const typography = {
@@ -26,6 +33,7 @@ const typography = {
 
 export default {
   ...accessibility,
+  ...elementStyles,
   ...animations,
   ...typography,
 };

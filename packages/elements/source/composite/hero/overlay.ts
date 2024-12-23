@@ -42,7 +42,7 @@ const OVERWRITE_IMAGE_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .$
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: ElementStyles.text.ribbon,
+      [`${OVERWRITE_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
     },
   })}
 

@@ -43,7 +43,8 @@ const { Colors, Media, Spacing } = Tokens;
 const EventsGrouped = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE}`]: ElementStyles.text.ribbon,
+      [`.${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE}`]:
+        ElementStyles.text.decoration.ribbon,
     },
   })}
 
@@ -72,7 +73,8 @@ const EventsNoResults = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p`]: ElementStyles.text.ribbon,
+      [`.${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p`]:
+        ElementStyles.text.decoration.ribbon,
     },
   })}
 

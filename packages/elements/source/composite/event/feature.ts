@@ -70,7 +70,7 @@ const DetailsMeta = `
 const EyebrowStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: ElementStyles.text.ribbon,
+      [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
     },
   })}
 

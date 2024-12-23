@@ -1,3 +1,5 @@
-export * as list from './list';
-export * as richText from './rich-text';
-export * as text from './text';
+import * as list from './list';
+import * as richText from './rich-text';
+import * as text from './text';
+
+export { list, richText, text };

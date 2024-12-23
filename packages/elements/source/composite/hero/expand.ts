@@ -205,7 +205,7 @@ const TextContainer = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: ElementStyles.text.ribbon,
+      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
     },
   })}
 

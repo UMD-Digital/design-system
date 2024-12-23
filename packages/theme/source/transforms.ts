@@ -12,6 +12,7 @@ const accessibility = {
 
 const animations = {
   ...Utilities.transform.objectWithName(Animations.line),
+  ...Utilities.transform.objectWithName(Animations.loader),
   ...Utilities.transform.objectWithName(Animations.transition),
 };
 

@@ -36,3 +36,23 @@ export const objectWithName: JssNameConverter = (originalObject) => {
 
   return newFormat;
 };
+
+export const processNestedObjects = <T extends object>(
+  obj: T,
+): JssNamedOutputFormat => {
+  const result: JssNamedOutputFormat = {};
+
+  const process = (value: any) => {
+    if (!value || typeof value !== 'object') return;
+
+    if ('className' in value) {
+      const transformed = objectWithName({ key: value });
+      Object.assign(result, transformed);
+    } else {
+      Object.values(value).forEach(process);
+    }
+  };
+
+  process(obj);
+  return result;
+};

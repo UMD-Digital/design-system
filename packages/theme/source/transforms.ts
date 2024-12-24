@@ -17,6 +17,7 @@ const animations = {
 };
 
 const elementStyles = {
+  ...Utilities.transform.objectWithName(ElementStyles.list),
   ...Utilities.transform.objectWithName(ElementStyles.text.cluster),
   ...Utilities.transform.objectWithName(ElementStyles.text.decoration),
   ...Utilities.transform.objectWithName(ElementStyles.text.line),

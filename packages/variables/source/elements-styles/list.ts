@@ -1,72 +1,92 @@
 import { Colors, Spacing } from '../tokens';
 import { sans } from '../typography';
+import { create } from '../utilities';
 
-const base = {
-  [`& ul,
-    & ol ul`]: {
-    padding: '0',
-    counterReset: 'item',
-    listStyleType: 'none !important',
+let orderedListBase: Record<string, any> = {
+  padding: '0',
+  counterReset: 'item',
+  listStyleType: 'none !important',
+  lineHeight: '1.4em',
 
-    '& li': {
-      paddingLeft: Spacing.md,
-      position: 'relative',
-      lineHeight: '1.4em',
-    },
+  '& li ': {
+    paddingLeft: Spacing.xl,
+    position: 'relative',
+  },
 
-    '& li:before': {
+  '& li': {
+    '&:before': {
       ...sans.large,
-      ...{
-        content: '"•"',
-        counterIncrement: 'item',
-        position: 'absolute',
-        top: '2px',
-        right: `calc(100% - ${Spacing.xs})`,
-      },
-    },
+      content: 'counter(item)',
+      counterIncrement: 'item',
 
-    '& li li': {
-      paddingLeft: Spacing.xl,
-
-      '&:before': {
-        right: `calc(100% - ${Spacing.md})`,
-      },
+      fontVariantNumeric: 'tabular-nums',
+      position: 'absolute',
+      top: '1px',
+      right: `calc(100% - ${Spacing.md})`,
+      unicodeBidi: 'isolate',
+      whiteSpace: 'pre',
     },
   },
 
-  [`& ol,
-    & ul ol`]: {
-    padding: '0',
+  '& > li li': {
+    '&:before': {
+      content: 'counter(item) "."',
+    },
+  },
+
+  '& ol': {
     counterReset: 'item',
-    listStyleType: 'none !important',
+  },
+
+  '& li + li, & li > ul, & li > ol': {
+    marginTop: Spacing.sm,
+  },
+};
+
+const unorderedListBase = {
+  padding: '0',
+  counterReset: 'item',
+  listStyleType: 'none !important',
+
+  '& li': {
+    paddingLeft: Spacing.md,
+    position: 'relative',
     lineHeight: '1.4em',
 
-    '& li ': {
-      paddingLeft: Spacing.xl,
-      position: 'relative',
-    },
-
-    '& li:before': {
-      ...sans.large,
-      ...{
-        content: 'counter(item) "."',
-        counterIncrement: 'item',
-        fontVariantNumeric: 'tabular-nums',
-        position: 'absolute',
-        top: '1px',
-        right: `calc(100% - ${Spacing.md})`,
-        unicodeBidi: 'isolate',
-        whiteSpace: 'pre',
-      },
+    '&:before': {
+      content: '"•"',
+      fontWeight: 'bold',
+      counterIncrement: 'item',
+      position: 'absolute',
+      top: '1px',
+      right: `calc(100% - ${Spacing.xs})`,
     },
   },
 
-  '& > ol': {
-    '& > li': {
-      paddingLeft: Spacing.xl,
-    },
+  '& li + li, & li > ul, & li > ol': {
+    marginTop: Spacing.sm,
+  },
 
-    '& > li:before': {
+  '& li li': {
+    paddingLeft: Spacing.xl,
+
+    '&:before': {
+      right: `calc(100% - ${Spacing.md})`,
+    },
+  },
+
+  '& ol': {
+    ...orderedListBase,
+  },
+};
+
+orderedListBase = {
+  ...orderedListBase,
+
+  '& > li': {
+    paddingLeft: Spacing.xl,
+
+    '&:before': {
       content: 'counter(item)',
       borderRight: `1px solid ${Colors.red}`,
       paddingRight: Spacing.min,
@@ -74,22 +94,24 @@ const base = {
     },
   },
 
-  '& li': {
-    marginTop: Spacing.sm,
-
-    '&:first-child': {
-      marginTop: '0',
-    },
-
-    [`& > ul,
-      & > ol`]: {
-      marginTop: Spacing.sm,
-    },
+  '& ul': {
+    ...unorderedListBase,
   },
 };
 
-export const unordered = {
-  ...base,
+const nested = {
+  [`& ul, 
+    & ol ul`]: {
+    ...unorderedListBase,
+  },
+
+  [`& ol,
+    & ul ol`]: {
+    ...orderedListBase,
+  },
+};
+
+const unordered = {
   // disc
 
   [`& ul[style*='list-style-type:disc'] > li:before,
@@ -112,8 +134,7 @@ export const unordered = {
   },
 };
 
-export const ordered = {
-  ...base,
+const ordered = {
   // decimal
 
   [`& ol[style*='list-style-type:decimal'] > li:before,
@@ -234,3 +255,35 @@ export const ordered = {
     content: 'counter(item, upper-alpha)',
   },
 };
+
+// umd-list
+export const listNested = create.jssObject({
+  className: [
+    `umd-list`,
+    /** @deprecated Use 'umd-list' instead */
+    `umd-lists`,
+  ],
+
+  ...nested,
+  ...ordered,
+  ...unordered,
+});
+
+// '& + ol, &ol + ul': {
+//   marginTop: Spacing.sm,
+// },
+
+// umd-list-ordered
+export const listOrdered = create.jssObject({
+  className: `umd-list-ordered`,
+  ...orderedListBase,
+  ...ordered,
+});
+
+// umd-list-ordered
+export const listUnordered = create.jssObject({
+  className: `umd-list-unordered`,
+
+  ...unorderedListBase,
+  ...unordered,
+});

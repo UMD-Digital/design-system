@@ -1,7 +1,7 @@
 import { Colors, Font, Spacing } from '../tokens';
 import { sans } from '../typography';
 import { line } from '../animations';
-import * as lists from './list';
+import { listNested } from './list';
 
 export const simpleBase = {
   ...sans.small,
@@ -86,8 +86,7 @@ export const simpleLarge = {
 export const advanced = {
   FontWeight: Font.weight.normal,
   ...advancedBase,
-  ...lists.ordered,
-  ...lists.unordered,
+  ...listNested,
 };
 
 export const advancedDarkAnimations = {

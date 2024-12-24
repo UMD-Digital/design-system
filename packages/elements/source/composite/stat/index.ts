@@ -68,7 +68,7 @@ const VarationThemeDarkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_TEXT}`]: ElementStyles.richText.advancedDarkAnimations,
+      [`${OVERWRITE_THEME_DARK_TEXT}`]: ElementStyles.text.rich.advancedDarkAnimations,
     },
   })}
 
@@ -194,7 +194,7 @@ const StatDisplayStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_TEXT}`]: ElementStyles.richText.advanced,
+      [`.${ELEMENT_STAT_TEXT}`]: ElementStyles.text.rich.advanced,
     },
   })}
 

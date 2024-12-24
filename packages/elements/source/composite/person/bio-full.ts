@@ -69,7 +69,7 @@ const DescriptionStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_PERSON_BIO_FULL_DESCRIPTION}`]:
-        ElementStyles.richText.advanced,
+        ElementStyles.text.rich.advanced,
     },
   })}
 

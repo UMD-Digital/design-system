@@ -9,7 +9,7 @@ const RichTextConfig: BuilderConfig = {
     Styles.combineStyles(
       modifiers.fontStyles({
         ...props,
-        fontStyles: ElementStyles.richText.simpleLarge,
+        fontStyles: ElementStyles.text.rich.simpleLarge,
       }),
     ),
 };

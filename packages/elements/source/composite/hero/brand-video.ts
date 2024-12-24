@@ -46,7 +46,7 @@ const HeadlineStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: ElementStyles.richText.simpleLarge,
+      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: ElementStyles.text.rich.simpleLarge,
     },
   })}
 

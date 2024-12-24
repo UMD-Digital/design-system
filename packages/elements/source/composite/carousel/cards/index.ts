@@ -123,7 +123,7 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: ElementStyles.richText.advancedDark,
+      [`.${INTRO_CONTAINER_TEXT}`]: ElementStyles.text.rich.advancedDark,
     },
   })}
 

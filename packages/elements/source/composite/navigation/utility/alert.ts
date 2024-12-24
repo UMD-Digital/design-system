@@ -191,7 +191,7 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${ALERT_TEXT}`]: ElementStyles.richText.advanced,
+      [`${ALERT_TEXT}`]: ElementStyles.text.rich.advanced,
     },
   })}
 

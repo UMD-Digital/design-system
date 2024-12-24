@@ -53,7 +53,7 @@ const OverwriteThemeDark = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: ElementStyles.richText.advancedDark,
+      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: ElementStyles.text.rich.advancedDark,
     },
   })}
 
@@ -82,7 +82,7 @@ const ActionsStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT}`]: ElementStyles.richText.advanced,
+      [`.${ELEMENT_RICH_TEXT}`]: ElementStyles.text.rich.advanced,
     },
   })}
 

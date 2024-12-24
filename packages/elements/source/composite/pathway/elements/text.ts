@@ -133,13 +133,13 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: ElementStyles.richText.advanced,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: ElementStyles.text.rich.advanced,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: ElementStyles.richText.advanced,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: ElementStyles.text.rich.advanced,
     },
   })}
 

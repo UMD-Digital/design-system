@@ -69,7 +69,7 @@ const OverwriteText = `
 const DescriptionStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_BIO_DESCRIPTION}`]: ElementStyles.richText.advanced,
+      [`.${ELEMENT_PERSON_BIO_DESCRIPTION}`]: ElementStyles.text.rich.advanced,
     },
   })}
 

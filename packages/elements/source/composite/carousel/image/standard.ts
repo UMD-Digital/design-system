@@ -163,7 +163,7 @@ const TextContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDE_RICH_TEXT}`]: ElementStyles.richText.advanced,
+      [`.${ELEMENT_SLIDE_RICH_TEXT}`]: ElementStyles.text.rich.advanced,
     },
   })}
 `

@@ -1,5 +1,5 @@
 import * as list from './list';
-import * as richText from './rich-text';
+import * as table from './table';
 import * as text from './text';
 
-export { list, richText, text };
+export { list, text, table };

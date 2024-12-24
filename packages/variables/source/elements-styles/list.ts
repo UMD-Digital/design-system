@@ -2,7 +2,7 @@ import { Colors, Spacing } from '../tokens';
 import { sans } from '../typography';
 import { create } from '../utilities';
 
-let orderedListBase: Record<string, any> = {
+let orderedBase: Record<string, any> = {
   padding: '0',
   counterReset: 'item',
   listStyleType: 'none !important',
@@ -43,7 +43,7 @@ let orderedListBase: Record<string, any> = {
   },
 };
 
-const unorderedListBase = {
+const unorderedBase = {
   padding: '0',
   counterReset: 'item',
   listStyleType: 'none !important',
@@ -76,12 +76,12 @@ const unorderedListBase = {
   },
 
   '& ol': {
-    ...orderedListBase,
+    ...orderedBase,
   },
 };
 
-orderedListBase = {
-  ...orderedListBase,
+orderedBase = {
+  ...orderedBase,
 
   '& > li': {
     paddingLeft: Spacing.xl,
@@ -95,23 +95,11 @@ orderedListBase = {
   },
 
   '& ul': {
-    ...unorderedListBase,
+    ...unorderedBase,
   },
 };
 
-const nested = {
-  [`& ul, 
-    & ol ul`]: {
-    ...unorderedListBase,
-  },
-
-  [`& ol,
-    & ul ol`]: {
-    ...orderedListBase,
-  },
-};
-
-const unordered = {
+const unorderedListBase = {
   // disc
 
   [`& ul[style*='list-style-type:disc'] > li:before,
@@ -134,7 +122,7 @@ const unordered = {
   },
 };
 
-const ordered = {
+const orderedListBase = {
   // decimal
 
   [`& ol[style*='list-style-type:decimal'] > li:before,
@@ -256,34 +244,17 @@ const ordered = {
   },
 };
 
-// umd-list
-export const listNested = create.jssObject({
-  className: [
-    `umd-list`,
-    /** @deprecated Use 'umd-list' instead */
-    `umd-lists`,
-  ],
-
-  ...nested,
-  ...ordered,
-  ...unordered,
-});
-
-// '& + ol, &ol + ul': {
-//   marginTop: Spacing.sm,
-// },
-
 // umd-list-ordered
-export const listOrdered = create.jssObject({
+export const ordered = create.jssObject({
   className: `umd-list-ordered`,
+  ...orderedBase,
   ...orderedListBase,
-  ...ordered,
 });
 
 // umd-list-ordered
-export const listUnordered = create.jssObject({
+export const unordered = create.jssObject({
   className: `umd-list-unordered`,
 
+  ...unorderedBase,
   ...unorderedListBase,
-  ...unordered,
 });

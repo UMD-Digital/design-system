@@ -1,6 +1,6 @@
 import { Colors, Font, Spacing } from '../../tokens';
 import { sans } from '../../typography';
-import { line } from '../../animations';
+import * as animations from '../../animations';
 import { create } from '../../utilities';
 import * as list from '../list';
 import * as table from '../table';
@@ -9,19 +9,6 @@ import { quote } from './quote';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-rich';
-
-// To Do - Move to animations
-export const advancedDarkAnimations = {
-  color: Colors.white,
-
-  '& *': {
-    color: Colors.white,
-  },
-
-  '& a': {
-    ...line.fadeUnderBlack,
-  },
-};
 
 const simpleBase = {
   '& > *': {
@@ -154,7 +141,13 @@ export const advanced = create.jssObject({
 // umd-text-rich-advanced-dark
 export const advancedDark = create.jssObject({
   ...advanced,
-  ...advancedDarkAnimations,
+  ...animations.nestedElements.linksDark,
+
+  color: Colors.white,
+
+  '& *': {
+    color: Colors.white,
+  },
 
   className: [
     `${classNamePrefix}-advanced-dark`,

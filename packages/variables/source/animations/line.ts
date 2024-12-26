@@ -17,6 +17,7 @@ const baseStyles = {
 
 const createSolidGradient = (color: string) =>
   `linear-gradient(${color}, ${color})`;
+
 const createTwoColorGradient = (color1: string, color2: string) =>
   `linear-gradient(to left, ${color1} 50%, ${color2} 50% 100%)`;
 
@@ -42,6 +43,7 @@ const getFadeUnderStyle = (color: string) => ({
 const slideUnder = {
   base: {
     ...baseStyles.link,
+
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
       backgroundSize: '100% 2px',
@@ -49,19 +51,23 @@ const slideUnder = {
   },
   black: {
     ...baseStyles.link,
+
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
       backgroundSize: '100% 2px',
     },
+
     '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(Colors.black),
   },
   grayDarkRed: {
     ...baseStyles.link,
+
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
       backgroundPosition: 'left bottom',
       backgroundSize: '200% 2px',
     },
+
     '& > *:not(svg):not(.sr-only)': getSlideUnderTwoColorStyle(
       Colors.gray.dark,
       Colors.red,
@@ -69,11 +75,13 @@ const slideUnder = {
   },
   grayRed: {
     ...baseStyles.link,
+
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
       backgroundPosition: 'left bottom',
       backgroundSize: '200% 2px',
     },
+
     '& > *:not(svg):not(.sr-only)': getSlideUnderTwoColorStyle(
       Colors.gray.light,
       Colors.red,
@@ -81,33 +89,40 @@ const slideUnder = {
   },
   gold: {
     ...baseStyles.link,
+
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
       backgroundSize: '100% 2px',
     },
+
     '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(Colors.gold),
   },
   red: {
     ...baseStyles.link,
+
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
       backgroundSize: '100% 2px',
     },
+
     '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(Colors.red),
   },
   white: {
     ...baseStyles.link,
+
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
       backgroundSize: '100% 2px',
     },
+
     '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(Colors.white),
   },
 };
 
-const fadeUnder = {
+export const fadeUnder = {
   base: {
     ...baseStyles.link,
+
     [`&:hover > *:not(svg):not(.sr-only),
       &:focus > *:not(svg):not(.sr-only)`]: {
       backgroundSize: '100% 2px',
@@ -121,6 +136,7 @@ const fadeUnder = {
     backgroundSize: '100% 1px',
     color: Colors.white,
     transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
+
     [`&:hover, &:focus`]: {
       backgroundImage: createSolidGradient(Colors.gold),
       backgroundPosition: 'left calc(100%)',
@@ -136,6 +152,7 @@ const fadeUnder = {
     backgroundSize: '100% 1px',
     color: 'currentColor',
     transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
+
     [`&:hover, &:focus`]: {
       backgroundImage: createSolidGradient(Colors.red),
       backgroundPosition: 'left calc(100%)',
@@ -151,6 +168,7 @@ const fadeUnder = {
     backgroundSize: '100% 1px',
     color: 'currentColor',
     transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
+
     [`&:hover, &:focus`]: {
       backgroundImage: createSolidGradient(Colors.red),
       backgroundPosition: 'left calc(100%)',

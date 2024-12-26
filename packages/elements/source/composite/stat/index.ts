@@ -1,4 +1,5 @@
 import {
+  Animations,
   ElementStyles,
   Typography,
   Tokens,
@@ -68,7 +69,7 @@ const VarationThemeDarkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_TEXT}`]: ElementStyles.text.rich.advancedDarkAnimations,
+      [`${OVERWRITE_THEME_DARK_TEXT}`]: Animations.nestedElements.linksDark,
     },
   })}
 

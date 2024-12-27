@@ -3,8 +3,6 @@ import Background from './background';
 import Grid from './grid-gap';
 import GridGutterless from './grid-gutterless';
 import GridColumn from './grid-column';
-import Lock from './lock';
-import SpacingVertical from './spacing-vertical';
 
 export default {
   ...Alignment,
@@ -12,6 +10,4 @@ export default {
   ...Grid,
   ...GridGutterless,
   ...GridColumn,
-  ...Lock,
-  ...SpacingVertical,
 };

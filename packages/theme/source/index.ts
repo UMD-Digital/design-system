@@ -5,7 +5,7 @@ import Common from './common';
 import Elements from './elements';
 import Layout from './layout';
 
-const { Colors, Font } = Tokens;
+const { Font } = Tokens;
 
 export const base = {
   ...Tokens,

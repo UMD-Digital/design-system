@@ -44,7 +44,7 @@ export const reset = {
   },
 };
 
-export const root = {
+export const Root = {
   ':root': {
     '--red': Colors.red,
     '--gold': Colors.gold,

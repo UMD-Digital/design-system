@@ -234,7 +234,7 @@ const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_TEXT_WRAPPER}`]: Layout.lock.max,
+        [`${OVERWRITE_TEXT_WRAPPER}`]: Layout.space.horizontal.max,
       },
     })}
   }
@@ -255,7 +255,7 @@ const OverwriteTextContainerStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_OVERLAY_CONTAINER_LOCK}`]: Layout.lock.max,
+      [`.${PATHWAY_OVERLAY_CONTAINER_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
 

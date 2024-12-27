@@ -168,7 +168,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: Layout.lock.max,
+      [`.${ELEMENT_HERO_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
 

@@ -232,7 +232,7 @@ const AnimationStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: Layout.lock.max,
+      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
 

@@ -116,7 +116,7 @@ const ImageBlockStyles = `
   @container (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_PERSON_HERO_IMAGE_BLOCK}`]: Layout.lock.max,
+        [`.${ELEMENT_PERSON_HERO_IMAGE_BLOCK}`]: Layout.space.horizontal.max,
       },
     })}
   }
@@ -173,7 +173,7 @@ const TextContainerStyles = `
   @container (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_PERSON_HERO_TEXT_CONTAINER}`]: Layout.lock.max,
+        [`.${ELEMENT_PERSON_HERO_TEXT_CONTAINER}`]: Layout.space.horizontal.max,
       },
     })}
   }
@@ -279,7 +279,7 @@ const WrapperStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_LOCK}`]: Layout.lock.max,
+      [`.${ELEMENT_PERSON_HERO_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
 
@@ -299,7 +299,7 @@ const STYLES_PERSON_HERO_ELEMENT = `
     
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_BREADCRUMB}`]: Layout.lock.max,
+      [`.${ELEMENT_PERSON_HERO_BREADCRUMB}`]: Layout.space.horizontal.max,
     },
   })}
 

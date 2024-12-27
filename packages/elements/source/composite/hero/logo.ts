@@ -141,7 +141,7 @@ const STYLES_HERO_LOGO_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: Layout.lock.small,
+      [`.${ELEMENT_HERO_LOCK}`]: Layout.space.horizontal.small,
     },
   })}
   

@@ -278,7 +278,6 @@ const isLayout = {
     AttributeNames.TYPE,
     AttributesValues.display.IMAGE,
   ),
-
   lockFull: createAttributeCheck(
     AttributeNames.layout.LOCK,
     AttributesValues.layout.FULL,

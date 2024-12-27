@@ -84,7 +84,7 @@ export const RowLogoStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LOGO_CONTAINER_LOCK}`]: Layout.lock.max 
+      [`.${ROW_LOGO_CONTAINER_LOCK}`]: Layout.space.horizontal.max 
     },
   })}
 

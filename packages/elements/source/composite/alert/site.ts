@@ -64,7 +64,7 @@ const ButtonStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_SITE_LOCK}`]: Layout.lock.max,
+      [`.${ELEMENT_ALERT_SITE_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
 

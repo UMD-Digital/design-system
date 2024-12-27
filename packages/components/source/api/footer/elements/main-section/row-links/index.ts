@@ -62,7 +62,7 @@ export const RowLinkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_CONTAINER_LOCK}`]: Layout.lock.max, 
+      [`.${ROW_LINKS_CONTAINER_LOCK}`]: Layout.space.horizontal.max, 
     },
   })}
 

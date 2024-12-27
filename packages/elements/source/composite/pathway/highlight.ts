@@ -149,7 +149,7 @@ const HighlightContainer = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: Layout.lock.max,
+      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
 

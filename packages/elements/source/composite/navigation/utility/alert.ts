@@ -230,7 +230,7 @@ const WrapperStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${LOCK}`]: Layout.lock.full,
+      [`${LOCK}`]: Layout.space.horizontal.full,
     },
   })}
 `

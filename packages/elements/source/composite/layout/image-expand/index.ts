@@ -26,7 +26,7 @@ const ELEMENT_EXPAND_TEXT_ANIMATION = 'layout-image-expand-text-animation';
 const TextLock = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: Layout.lock.max,
+      [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
 

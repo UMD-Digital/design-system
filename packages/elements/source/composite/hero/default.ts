@@ -286,7 +286,7 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_LOCK}`]: Layout.lock.max,
+      [`.${HERO_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
   

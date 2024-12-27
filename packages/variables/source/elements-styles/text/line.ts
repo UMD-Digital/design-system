@@ -1,5 +1,5 @@
 import { Colors, Spacing, Media } from '../../tokens';
-import { elements, sans } from '../../typography';
+import { elements } from '../../typography';
 import { create } from '../../utilities';
 
 // Consistent naming

@@ -63,13 +63,13 @@ const isDesktop = () => window.innerWidth >= DESKTOP;
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_UTILITY_LOCK}`]: Layout.lock.max,
+      [`.${ELEMENT_UTILITY_LOCK}`]: Layout.space.horizontal.max,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_LOCK_FULL}`]: Layout.lock.full,
+      [`${OVERWRITE_LOCK_FULL}`]: Layout.space.horizontal.full,
     },
   })}
 `;

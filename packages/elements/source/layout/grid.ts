@@ -15,22 +15,21 @@ const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 const STYLES_GRID_LAYOUT = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="2"]`]:
-        Layout.grid.columnsBaseWithGap,
+      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="2"]`]: Layout.grid.gap.two,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="3"]`]:
-        Layout.grid.columnsThreeWithGap,
+        Layout.grid.gap.three,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="4"]`]:
-        Layout.grid.columnsFourWithGap,
+        Layout.grid.gap.four,
     },
   })}
 

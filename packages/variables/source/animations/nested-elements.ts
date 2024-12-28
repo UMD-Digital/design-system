@@ -1,5 +1,5 @@
 import { Colors } from '../tokens';
-import { fadeUnder } from './line';
+import { create } from '../utilities';
 
 export const linksDark = {
   '& a': {
@@ -19,3 +19,19 @@ export const linksDark = {
     },
   },
 };
+
+// umd-animation-grid
+export const gridSetup = create.jssObject({
+  '& > *': {
+    [`@media (prefers-reduced-motion: no-preference)`]: {
+      opacity: '0',
+      transform: 'translateY(50px)',
+    },
+  },
+
+  className: [
+    `umd-animation-grid`,
+    /** @deprecated Use 'umd-animation-grid' instead */
+    'umd-grid-animation',
+  ],
+});

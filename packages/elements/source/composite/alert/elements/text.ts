@@ -30,7 +30,7 @@ const ctaStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${className.actions}`]: Layout.grid.columnAndRowsMobileTablet,
+      [`.${className.actions}`]: Layout.grid.inline.tabletRows,
     },
   })}
 `;

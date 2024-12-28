@@ -192,7 +192,7 @@ const ActionStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: Layout.grid.columnAndRowsMobileTablet,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: Layout.grid.inline.tabletRows,
     },
   })}
 `;

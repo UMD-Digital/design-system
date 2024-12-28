@@ -40,7 +40,9 @@ export const loadIntersectionObserver = () => {
 
   const Interactions = () => {
     const gridElements = Array.from(
-      document.querySelectorAll('.umd-grid-animation > *'),
+      document.querySelectorAll(
+        '.umd-grid-animation > *, .umd-animation-grid > *',
+      ),
     );
 
     const setAlignment = () => {

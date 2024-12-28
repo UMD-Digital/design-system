@@ -160,7 +160,7 @@ const ActionStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: Layout.grid.columnAndRowsMobileTablet,
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: Layout.grid.inline.tabletRows,
     },
   })}
 `;

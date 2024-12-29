@@ -1,4 +1,4 @@
-import { Tokens, Root, WebComponents } from '@universityofmaryland/variables';
+import { Tokens, Root } from '@universityofmaryland/variables';
 
 import transforms from './transforms';
 import Common from './common';
@@ -18,5 +18,4 @@ export const theme = {
   transforms,
 
   Common,
-  WebComponents,
 };

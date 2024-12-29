@@ -5,5 +5,5 @@ export * as Layout from './layout';
 export { Root } from './root';
 export * as Tokens from './tokens';
 export * as Typography from './typography';
-export * as WebComponents from './web-components';
+export { default as WebComponents } from './web-components';
 export * as Utilities from './utilities';

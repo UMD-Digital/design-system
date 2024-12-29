@@ -48,7 +48,7 @@ const baseElements = [
 );
 
 // Complex elements with additional styles
-export const elements = {
+const elements = {
   ...baseElements,
   ...createElementStyles('umd-element-accordion-item', {
     custom: {
@@ -88,7 +88,7 @@ export const elements = {
 };
 
 // Footer with specific styling
-export const footer = createElementStyles('umd-element-footer', {
+const footer = createElementStyles('umd-element-footer', {
   notDefined: {
     backgroundColor: Colors.black,
     height: `calc(${Spacing.md} * 20)`,
@@ -97,7 +97,7 @@ export const footer = createElementStyles('umd-element-footer', {
 });
 
 // Navigation components
-export const navigation = {
+const navigation = {
   ...['nav-item', 'navigation-header'].reduce(
     (acc, name) => ({
       ...acc,
@@ -116,7 +116,7 @@ export const navigation = {
 };
 
 // Scroll top component with responsive styling
-export const scrollTop = createElementStyles('umd-element-scroll-top', {
+const scrollTop = createElementStyles('umd-element-scroll-top', {
   defined: {
     height: '40px',
     width: '40px',
@@ -136,8 +136,27 @@ export const scrollTop = createElementStyles('umd-element-scroll-top', {
   },
 });
 
+// Section Intro
+const sectionIntro = {
+  ...['section-intro-wide', 'section-intro'].reduce(
+    (acc, name) => ({
+      ...acc,
+      ...createElementStyles(`umd-element-${name}`, {
+        defined: {
+          marginBottom: `${Spacing.lg}`,
+
+          [`@media (${Media.queries.tablet.min})`]: {
+            marginBottom: `${Spacing['2xl']}`,
+          },
+        },
+      }),
+    }),
+    {},
+  ),
+};
+
 // Social sharing with responsive layout
-export const socialSharing = createElementStyles('umd-element-social-sharing', {
+const socialSharing = createElementStyles('umd-element-social-sharing', {
   custom: {
     '* + &': { marginTop: Spacing.md },
     '[fixed], [data-layout-fixed="true"]': {
@@ -153,3 +172,12 @@ export const socialSharing = createElementStyles('umd-element-social-sharing', {
     },
   },
 });
+
+export default {
+  ...elements,
+  ...footer,
+  ...navigation,
+  ...scrollTop,
+  ...sectionIntro,
+  ...socialSharing,
+};

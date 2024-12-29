@@ -4,6 +4,7 @@ import {
   ElementStyles,
   Layout,
   Typography,
+  WebComponents,
   Utilities,
 } from '@universityofmaryland/variables';
 
@@ -14,4 +15,5 @@ export default {
   ...Utilities.transform.processNestedObjects(ElementStyles),
   ...Utilities.transform.processNestedObjects(Layout),
   ...Utilities.transform.processNestedObjects(Typography),
+  ...WebComponents,
 };

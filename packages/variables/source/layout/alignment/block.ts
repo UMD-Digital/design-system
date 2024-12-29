@@ -1,3 +1,4 @@
+import { Spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -12,5 +13,25 @@ export const center = create.jssObject({
     `${classNamePrefix}-center`,
     /** @deprecated Use 'umd-layout-alignment-block-center' instead */
     'umd-layout-element-alignment-center',
+  ],
+});
+
+// umd-layout-alignment-block-stacked
+export const stacked = create.jssObject({
+  display: 'flex',
+  flexDirection: 'column',
+
+  '& > *': {
+    marginTop: Spacing.sm,
+
+    '&:first-child': {
+      marginTop: '0',
+    },
+  },
+
+  className: [
+    `${classNamePrefix}-stacked`,
+    /** @deprecated Use 'umd-layout-alignment-block-stacked' instead */
+    'umd-media-with-caption',
   ],
 });

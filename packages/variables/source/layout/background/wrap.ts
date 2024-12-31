@@ -6,7 +6,6 @@ const classNamePrefix = 'umd-layout-background-wrap';
 
 const box = {
   padding: `${Spacing.md}`,
-  borderLeft: `2px solid ${Colors.red}`,
 
   [`@media (${Media.queries.tablet.min})`]: {
     padding: `${Spacing.lg}`,
@@ -21,11 +20,7 @@ const box = {
 export const white = create.jssObject({
   ...box,
 
-  className: [
-    `${classNamePrefix}`,
-    /** @deprecated Use 'umd-layout-background-wrap' instead */
-    'umd-layout-background-box',
-  ],
+  className: `${classNamePrefix}`,
 });
 
 // umd-layout-background-wrap-light
@@ -36,7 +31,7 @@ export const light = create.jssObject({
   className: [
     `${classNamePrefix}-light`,
     /** @deprecated Use 'umd-layout-background-wrap-light' instead */
-    'umd-layout-background-box',
+    'umd-forms-layout',
   ],
 });
 
@@ -45,9 +40,5 @@ export const dark = create.jssObject({
   ...box,
   backgroundColor: `${Colors.gray.darker}`,
 
-  className: [
-    `${classNamePrefix}-dark`,
-    /** @deprecated Use 'umd-layout-background-wrap-dark' instead */
-    'umd-layout-background-box[theme="dark"]',
-  ],
+  className: `${classNamePrefix}-dark`,
 });

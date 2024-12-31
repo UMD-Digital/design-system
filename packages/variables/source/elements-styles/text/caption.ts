@@ -8,7 +8,6 @@ const classNamePrefix = 'umd-text-caption';
 // umd-text-caption-smaller
 export const smaller = create.jssObject({
   ...sans.smaller,
-  captionSide: 'bottom',
   color: Colors.gray.mediumAA,
   paddingTop: Spacing.xs,
 
@@ -16,5 +15,18 @@ export const smaller = create.jssObject({
     `${classNamePrefix}-smaller`,
     /** @deprecated Use 'umd-text-caption-smaller' instead */
     `umd-caption`,
+  ],
+});
+
+// umd-text-caption-smaller-italic
+export const smallerItalic = create.jssObject({
+  ...smaller,
+  color: Colors.gray.darker,
+  fontStyle: 'italic',
+
+  className: [
+    `${classNamePrefix}-smaller-italic`,
+    /** @deprecated Use 'umd-text-caption-smaller-italic' instead */
+    `umd-forms-instructions`,
   ],
 });

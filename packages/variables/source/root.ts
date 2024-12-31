@@ -42,9 +42,43 @@ export const reset = {
   address: {
     fontStyle: 'normal',
   },
+
+  [`input,
+    select,
+    textarea`]: {
+    ...sans.small,
+    backgroundColor: Colors.white,
+    border: `1px solid ${Colors.gray.light}`,
+    color: Colors.black,
+    cursor: 'text',
+    display: 'block',
+    outlineOffset: '1px',
+    padding: `${Spacing.xs} ${Spacing.sm}`,
+    position: 'relative',
+    textOverflow: 'ellipsis',
+    transition: 'border 0.5s ease-in-out, color 0.5s ease-in-out',
+    width: '100%',
+
+    '&::placeholder': {
+      color: Colors.gray.mediumAA,
+    },
+
+    '&[readonly]': {
+      color: Colors.gray.mediumAA,
+      fontStyle: 'italic',
+      cursor: 'default',
+    },
+
+    [`&:focus, &:focus-within`]: {
+      borderBottom: `1px solid ${Colors.black}`,
+    },
+  },
 };
 
-export const Root = {
+// border: 0,
+// borderBottom: '1px solid transparent',
+
+export const root = {
   ':root': {
     '--red': Colors.red,
     '--gold': Colors.gold,

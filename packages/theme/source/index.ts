@@ -1,7 +1,6 @@
-import { Tokens, Root } from '@universityofmaryland/variables';
+import { Tokens, root } from '@universityofmaryland/variables';
 
 import transforms from './transforms';
-import Common from './common';
 
 const { Font } = Tokens;
 
@@ -14,8 +13,6 @@ export const base = {
 };
 
 export const theme = {
-  Root,
+  root,
   transforms,
-
-  Common,
 };

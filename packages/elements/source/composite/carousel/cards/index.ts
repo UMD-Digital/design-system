@@ -3,7 +3,7 @@ import {
   Layout,
   Tokens,
   Typography,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { AnimationCarouselBlocks } from 'macros';
 import { Styles } from 'utilities';
 

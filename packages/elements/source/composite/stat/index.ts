@@ -3,7 +3,7 @@ import {
   ElementStyles,
   Typography,
   Tokens,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
 type TypeStatElement = {

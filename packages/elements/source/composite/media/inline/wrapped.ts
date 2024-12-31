@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import { Performance } from 'utilities';
 import { Image as LayoutImage } from 'layout';
 import CaptionContainer from '../elements/caption';

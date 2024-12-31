@@ -2,7 +2,7 @@ import {
   Tokens,
   ElementStyles,
   Typography,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';

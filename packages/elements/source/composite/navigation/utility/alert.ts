@@ -3,7 +3,7 @@ import {
   Layout,
   Tokens,
   Typography,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import Actions from 'composite/call-to-action';
 import { Asset, Network, Styles } from 'utilities';
 

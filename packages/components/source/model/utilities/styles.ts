@@ -1,5 +1,5 @@
 import postcss from 'postcss';
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 
 const postcssDuplicates = require('postcss-discard-duplicates');
 const CreateStyleString = (styles: string) =>

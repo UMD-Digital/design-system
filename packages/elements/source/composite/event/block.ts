@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 

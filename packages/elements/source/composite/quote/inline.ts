@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import { Asset } from 'utilities';
 import Text, { TypeQuoteTextContainer } from './elements/text';
 import Image from './elements/image';

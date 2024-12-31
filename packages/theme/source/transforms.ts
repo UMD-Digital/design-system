@@ -6,7 +6,7 @@ import {
   Typography,
   WebComponents,
   Utilities,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 
 export default {
   ...Typography.fontFace.browserString,

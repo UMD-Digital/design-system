@@ -2,7 +2,7 @@ import {
   Animations,
   Tokens,
   Typography,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import {

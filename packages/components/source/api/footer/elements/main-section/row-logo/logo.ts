@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {

@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
 import { Asset, Styles } from 'utilities';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item/';

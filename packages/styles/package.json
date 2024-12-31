@@ -1,7 +1,7 @@
 {
-  "name": "@universityofmaryland/variables",
-  "version": "0.3.6",
-  "description": "Base tokens, variables, and classes for use in the University of Maryland Design System",
+  "name": "@universityofmaryland/web-elements-styles",
+  "version": "0.4.0",
+  "description": "Styles used for use in the University of Maryland Design System",
   "main": "dist/index.js",
   "author": "UMD Web Services <digital@umd.edu>",
   "module": "dist/index.js",

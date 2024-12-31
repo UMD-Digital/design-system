@@ -1,4 +1,4 @@
-import { Tokens, Animations } from '@universityofmaryland/variables';
+import { Tokens, Animations } from '@universityofmaryland/web-elements-styles';
 import { Asset, Accessibility, Performance, Markup, Styles } from 'utilities';
 
 type TypePrimaryLinkRequirements = {

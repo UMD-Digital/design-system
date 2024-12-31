@@ -2,7 +2,7 @@ import {
   Tokens,
   Typography,
   Animations,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { Asset, Styles } from 'utilities';
 
 const { convertJSSObjectToStyles } = Styles;

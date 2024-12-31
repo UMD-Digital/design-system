@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
 import { Asset, Styles } from 'utilities';
 
 export type TypeActionProps = {

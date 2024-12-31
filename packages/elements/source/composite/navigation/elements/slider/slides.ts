@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
 import { Asset, Markup, Styles } from 'utilities';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';

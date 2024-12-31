@@ -1,4 +1,4 @@
-import { Animations } from '@universityofmaryland/variables';
+import { Animations } from '@universityofmaryland/web-elements-styles';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 
 export const loadIntersectionObserver = () => {

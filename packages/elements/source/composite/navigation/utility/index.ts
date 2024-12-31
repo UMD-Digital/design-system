@@ -1,4 +1,4 @@
-import { Tokens, Layout } from '@universityofmaryland/variables';
+import { Tokens, Layout } from '@universityofmaryland/web-elements-styles';
 import { Accessibility, Asset, Styles } from 'utilities';
 import {
   createNavAlert,

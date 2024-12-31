@@ -1,4 +1,8 @@
-import { Layout, Tokens, Typography } from '@universityofmaryland/variables';
+import {
+  Layout,
+  Tokens,
+  Typography,
+} from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';

@@ -4,7 +4,7 @@ import {
   Layout,
   Typography,
   Tokens,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
 
 export type TypeTextLockupSmall = {

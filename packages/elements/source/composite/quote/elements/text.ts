@@ -1,4 +1,8 @@
-import { Typography, Layout, Tokens } from '@universityofmaryland/variables';
+import {
+  Typography,
+  Layout,
+  Tokens,
+} from '@universityofmaryland/web-elements-styles';
 import { Styles, Asset } from 'utilities';
 
 export type TypeQuoteTextContainer = {

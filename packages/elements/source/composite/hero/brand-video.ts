@@ -2,7 +2,7 @@ import {
   ElementStyles,
   Tokens,
   Typography,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { ButtonVideoState } from 'atomic';
 import { AnimationOverlayBrand } from 'macros';
 import { Accessibility, Performance, Styles } from 'utilities';

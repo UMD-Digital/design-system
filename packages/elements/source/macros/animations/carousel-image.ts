@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
 
 const { Colors, Spacing } = Tokens;

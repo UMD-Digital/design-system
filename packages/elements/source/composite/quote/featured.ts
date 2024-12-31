@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import InlineQuote, { TypeInlineInline } from './inline';
 import QuoteText from './elements/text';
 import { Markup } from 'utilities';

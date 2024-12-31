@@ -1,4 +1,4 @@
-import { ElementStyles } from '@universityofmaryland/variables';
+import { ElementStyles } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import { createElement } from './_base';
 import { modifiers } from '../_modifiers/style';

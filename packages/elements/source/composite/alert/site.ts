@@ -1,4 +1,4 @@
-import { Tokens, Layout } from '@universityofmaryland/variables';
+import { Tokens, Layout } from '@universityofmaryland/web-elements-styles';
 import { Asset, Storage, Styles } from 'utilities';
 import AlertText, {
   CONSTANTS as TEXT_CONSTANTS,

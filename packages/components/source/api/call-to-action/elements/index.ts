@@ -1,5 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles, Markup } from 'utilities';
 import { ELEMENTS, SLOTS, VARIABLES, REFERENCES } from '../globals';
 import { UMDCallToActionElement } from '../index';

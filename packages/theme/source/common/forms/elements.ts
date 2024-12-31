@@ -1,42 +1,10 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
 import Assets from '../../assets';
 
 const { Colors, Media, Spacing } = Tokens;
 const { Icons } = Assets;
 
 const CONTAINER_QUERY_NAME = `umd-forms-layout`;
-
-const FormElementBaseOverride = {
-  ...Typography.sans.small,
-
-  backgroundColor: Colors.white,
-  border: 0,
-  borderBottom: '1px solid transparent',
-  color: Colors.black,
-  cursor: 'text',
-  display: 'block',
-  outlineOffset: '1px',
-  padding: `${Spacing.xs} ${Spacing.sm}`,
-  position: 'relative',
-  textOverflow: 'ellipsis',
-  transition: 'border 0.5s ease-in-out, color 0.5s ease-in-out',
-  width: '100%',
-
-  '&::placeholder': {
-    color: Colors.gray.mediumAA,
-  },
-
-  '&[readonly]': {
-    color: Colors.gray.mediumAA,
-    fontStyle: 'italic',
-    cursor: 'default',
-  },
-
-  [`&:focus,
-    &:focus-within`]: {
-    borderBottom: `1px solid ${Colors.black}`,
-  },
-};
 
 const FormElementOverridesNumber = {
   [`&::-webkit-inner-spin-button`]: {
@@ -328,12 +296,6 @@ const FormElementTimeWrapper = {
 };
 
 const FormElements = {
-  [`input,
-    select,
-    textarea`]: {
-    ...FormElementBaseOverride,
-  },
-
   'select[multiple]': {
     ...FormElementOverridesSelectMultiple,
   },

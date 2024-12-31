@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import { Markup, Performance } from 'utilities';
 import { TextLockupSmallScaling, type TypeTextLockupSmall } from 'macros';
 

@@ -1,71 +1,10 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
 import Assets from '../../assets';
 import State from './state';
 
 const { Colors, Media, Spacing } = Tokens;
 const { Icons } = Assets;
 const { FormFieldValidation } = State;
-
-const FormLayoutWrapper = {
-  backgroundColor: Colors.gray.lighter,
-  padding: `${Spacing.md}`,
-
-  [`@media (${Media.queries.tablet.min})`]: {
-    padding: `${Spacing.lg}`,
-  },
-
-  [`@media (${Media.queries.desktop.min})`]: {
-    padding: `${Spacing['3xl']}`,
-  },
-
-  '& > *': {
-    marginTop: Spacing.md,
-
-    [`@media (${Media.queries.tablet.min})`]: {
-      marginTop: Spacing.xl,
-    },
-
-    '&:first-child': {
-      marginTop: 0,
-    },
-  },
-};
-
-const FormLayoutHeadlineWithAction = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: Spacing.sm,
-  justifyContent: 'space-between',
-  position: 'relative',
-
-  '& > *:first-child': {
-    maxWidth: '100%',
-    flex: '1 0 auto',
-  },
-
-  '& > *:first-child + *:last-child:not(:first-child)': {
-    margin: 0,
-    position: 'relative',
-    zIndex: 999,
-  },
-};
-
-const FormFieldInstructions = {
-  ...Typography.sans.smaller,
-
-  display: 'block',
-  fontStyle: 'italic',
-  marginTop: Spacing.xs,
-
-  '& *': {
-    margin: 0,
-    marginTop: Spacing.min,
-
-    '&:first-child': {
-      marginTop: 0,
-    },
-  },
-};
 
 const FormLayoutField = {
   '& label': {
@@ -103,10 +42,6 @@ const FormLayoutField = {
       backgroundImage: `url('${Icons.DOCUMENT_GREEN}')`,
     },
   },
-
-  '& .umd-forms-instructions': {
-    ...FormFieldInstructions,
-  },
 };
 
 const FormLayoutBaseFieldset = {
@@ -136,10 +71,6 @@ const FormLayoutBaseFieldset = {
     ...FormFieldValidation.valid,
 
     border: 0,
-  },
-
-  '& .umd-forms-instructions': {
-    ...FormFieldInstructions,
   },
 };
 
@@ -220,14 +151,6 @@ const FormLayoutSearchSubmit = {
 };
 
 const FormLayouts = {
-  '.umd-forms-layout': {
-    ...FormLayoutWrapper,
-  },
-
-  '.umd-forms-layout-headline-with-action': {
-    ...FormLayoutHeadlineWithAction,
-  },
-
   '.umd-forms-layout-field': {
     ...FormLayoutField,
   },

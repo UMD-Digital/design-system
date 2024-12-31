@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
 
 type TypeTextProps = {

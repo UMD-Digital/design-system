@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/variables';
+import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import { List as LayoutList, Image as LayoutImage } from 'layout';
 import PersonTextContainer, {

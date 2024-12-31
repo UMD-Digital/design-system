@@ -1,4 +1,4 @@
-import { Layout, Tokens } from '@universityofmaryland/variables';
+import { Layout, Tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, { TypePathwayImageContainer } from './elements/image';

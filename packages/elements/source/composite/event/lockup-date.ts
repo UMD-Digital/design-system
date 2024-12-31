@@ -2,7 +2,7 @@ import {
   Animations,
   Tokens,
   Typography,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import EventElements from './elements';
 import { Markup, Styles } from 'utilities';
 

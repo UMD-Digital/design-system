@@ -1,4 +1,4 @@
-import { Typography, Tokens } from '@universityofmaryland/variables';
+import { Typography, Tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
 type TypeSectionIntroWideProps = {

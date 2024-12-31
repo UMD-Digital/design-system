@@ -1,4 +1,8 @@
-import { Tokens, Layout, Typography } from '@universityofmaryland/variables';
+import {
+  Tokens,
+  Layout,
+  Typography,
+} from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import PersonContact, { TypeContactProps } from './elements/contact';
 import PersonImage from './elements/image';

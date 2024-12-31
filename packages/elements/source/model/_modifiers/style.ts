@@ -1,4 +1,4 @@
-import { Animations } from '@universityofmaryland/variables';
+import { Animations } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import { StyleModifierProps } from '../_types';
 

@@ -2,7 +2,7 @@ import {
   Animations,
   Tokens,
   Typography,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { Styles, Markup } from 'utilities';
 import {
   BREAKPOINTS,

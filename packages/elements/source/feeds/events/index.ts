@@ -1,4 +1,7 @@
-import { ElementStyles, Tokens } from '@universityofmaryland/variables';
+import {
+  ElementStyles,
+  Tokens,
+} from '@universityofmaryland/web-elements-styles';
 import { ButtonLazyLoad } from 'atomic';
 import { GridGap as LayoutGridGap } from 'layout';
 import { AriaLive, AnimationLoader } from 'macros';

@@ -1,4 +1,4 @@
-import { Tokens, root } from '@universityofmaryland/variables';
+import { Tokens, root } from '@universityofmaryland/web-elements-styles';
 
 import transforms from './transforms';
 

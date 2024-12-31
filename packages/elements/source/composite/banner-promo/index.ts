@@ -3,7 +3,7 @@ import {
   ElementStyles,
   Tokens,
   Typography,
-} from '@universityofmaryland/variables';
+} from '@universityofmaryland/web-elements-styles';
 import { Styles, Asset } from 'utilities';
 
 type TypeBannerPromoProps = {

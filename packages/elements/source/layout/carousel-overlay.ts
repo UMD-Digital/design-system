@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/variables';
+import { Tokens } from '@universityofmaryland/web-elements-styles';
 import AnimationCarouselImage from '../macros/animations/carousel-image';
 import LayoutImage from './image';
 import FixedFullScreen from './carousel-full-screen';

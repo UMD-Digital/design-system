@@ -28,3 +28,29 @@ export const tabletRows = create.jssObject({
     'umd-grid-row-mobile-tablet',
   ],
 });
+
+// umd-layout-grid-inline-stretch
+export const stretch = create.jssObject({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: Spacing.sm,
+  justifyContent: 'space-between',
+  position: 'relative',
+
+  '& > *:first-child': {
+    maxWidth: '100%',
+    flex: '1 0 auto',
+  },
+
+  '& > *:first-child + *:last-child:not(:first-child)': {
+    margin: 0,
+    position: 'relative',
+    zIndex: 999,
+  },
+
+  className: [
+    `${classNamePrefix}-stretch`,
+    /** @deprecated Use 'umd-layout-grid-inline-stretch' instead */
+    'umd-forms-layout-headline-with-action',
+  ],
+});

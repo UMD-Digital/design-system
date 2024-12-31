@@ -10,11 +10,11 @@ export const inline = create.jssObject({
   width: '100%',
   backgroundColor: Colors.black,
 
+  className: `${classNamePrefix}-video`,
+
   '& iframe': {
     aspectRatio: '16/9',
     width: '100% !important',
     height: 'inherit !important',
   },
-
-  className: `${classNamePrefix}-video`,
 });

@@ -1,5 +1,9 @@
 import { Colors, Font, Spacing } from './tokens';
 import { sans } from './typography';
+import { input } from './elements-styles/field/input';
+import { textarea } from './elements-styles/field/textarea';
+import { select } from './elements-styles/field/select';
+import { text } from 'elements-styles';
 
 export const reset = {
   body: {
@@ -43,35 +47,16 @@ export const reset = {
     fontStyle: 'normal',
   },
 
-  [`input,
-    select,
-    textarea`]: {
-    ...sans.small,
-    backgroundColor: Colors.white,
-    border: `1px solid ${Colors.gray.light}`,
-    color: Colors.black,
-    cursor: 'text',
-    display: 'block',
-    outlineOffset: '1px',
-    padding: `${Spacing.xs} ${Spacing.sm}`,
-    position: 'relative',
-    textOverflow: 'ellipsis',
-    transition: 'border 0.5s ease-in-out, color 0.5s ease-in-out',
-    width: '100%',
+  input: {
+    ...input,
+  },
 
-    '&::placeholder': {
-      color: Colors.gray.mediumAA,
-    },
+  textarea: {
+    ...textarea,
+  },
 
-    '&[readonly]': {
-      color: Colors.gray.mediumAA,
-      fontStyle: 'italic',
-      cursor: 'default',
-    },
-
-    [`&:focus, &:focus-within`]: {
-      borderBottom: `1px solid ${Colors.black}`,
-    },
+  select: {
+    ...select,
   },
 };
 

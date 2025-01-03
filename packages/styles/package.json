@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-elements-styles",
-  "version": "0.4.0",
+  "version": "1.0.0-beta.0",
   "description": "Styles used for use in the University of Maryland Design System",
   "main": "dist/index.js",
   "author": "UMD Web Services <digital@umd.edu>",
@@ -8,13 +8,14 @@
   "types": "dist/index.d.ts",
   "license": "MIT",
   "repository": "",
-  "private": true,
+  "private": false,
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsc --preserveWatchOutput",
     "clean": "rm -rf dist",
+    "release": "npm run clean && npm run build && npm publish --access public",
     "start": "tsc -w --preserveWatchOutput"
   }
 }

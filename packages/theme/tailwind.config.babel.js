@@ -1,28 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
+import { framework } from '@universityofmaryland/web-elements-styles';
 import plugin from 'tailwindcss/plugin';
-import { base, theme as umdTheme } from './source/index';
 
-const content = [{ raw: `<div class="uppercase"></div>` }];
-
-const { root: utilities, ...styles } = umdTheme;
-
-const tailwindBase = Object.fromEntries(
-  Object.entries(base).map(([key, value]) => [
-    key.charAt(0).toLocaleLowerCase() + key.slice(1),
-    value,
-  ]),
-);
-
-const theme = {
-  screens: tailwindBase.breakpoints,
-  ...tailwindBase,
-};
-
-const components = Object.values(styles).reduce(
-  (arr, current) => ({ ...arr, ...current }),
-  {},
-);
+const content = ['./source/**/*.{css,twig}'];
+const { utilities, components, theme } = framework.tailwing;
 
 const plugins = [
   plugin(function ({ addUtilities, addComponents }) {
@@ -31,6 +13,4 @@ const plugins = [
   }),
 ];
 
-const safelist = [{ pattern: /./ }];
-
-export default { content, safelist, theme, plugins };
+export { content, theme, plugins };

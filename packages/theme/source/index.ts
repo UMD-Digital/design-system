@@ -1,7 +1,11 @@
-import { tokens, root } from '@universityofmaryland/web-elements-styles';
-import transforms from './transforms';
+import {
+  tokens,
+  root,
+  utilities,
+} from '@universityofmaryland/web-elements-styles';
 
 const { font, media } = tokens;
+const styles = utilities.transform.outputStyles;
 
 export const base = {
   ...tokens,
@@ -13,5 +17,5 @@ export const base = {
 
 export const theme = {
   root,
-  transforms,
+  styles,
 };

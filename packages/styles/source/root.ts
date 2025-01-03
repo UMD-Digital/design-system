@@ -3,7 +3,7 @@ import { sans } from './typography';
 import { input } from './elements-styles/field/input';
 import { textarea } from './elements-styles/field/textarea';
 import { select } from './elements-styles/field/select';
-import { text } from 'elements-styles';
+import { label } from './elements-styles/text/label';
 
 export const reset = {
   body: {
@@ -45,6 +45,10 @@ export const reset = {
 
   address: {
     fontStyle: 'normal',
+  },
+
+  label: {
+    ...label,
   },
 
   input: {

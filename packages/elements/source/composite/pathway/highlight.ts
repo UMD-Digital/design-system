@@ -1,8 +1,8 @@
 import {
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 
@@ -14,7 +14,6 @@ type TypePathwayHighlightContainer = {
 type TypePathwayHighlightProps = TypePathwayTextContainer &
   TypePathwayHighlightContainer;
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 1000;
@@ -40,11 +39,11 @@ const OVERWRITE_THEME_DARK_HIGHLIGHT = `.${PATHWAY_HIGHLIGHT_CONTAINER}${IS_THEM
 // prettier-ignore
 const OverwriteThemeDarkStyles = `
   ${OVERWRITE_THEME_DARK_HIGHLIGHT} {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_HIGHLIGHT} * {
-   color: ${colors.white};
+   color: ${token.color.white};
   }
 `
 
@@ -52,19 +51,19 @@ const OverwriteThemeDarkStyles = `
 const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-bottom: ${spacing.md};
+      padding-bottom: ${token.spacing.md};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-right: ${spacing['4xl']};
+      padding-right: ${token.spacing['4xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-right: ${spacing['6xl']};
+      padding-right: ${token.spacing['6xl']};
     }
   }
 `;
@@ -72,26 +71,26 @@ const OverwriteTextContainerStyles = `
 // prettier-ignore
 const HighlightContainer = `
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-    padding: ${spacing['5xl']} ${spacing.md} ${spacing.md} ${spacing.md};
-    background-color: ${colors.gray.lightest};
+    padding: ${token.spacing['5xl']} ${token.spacing.md} ${token.spacing.md} ${token.spacing.md};
+    background-color: ${token.color.gray.lightest};
     position: relative;
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-      padding: ${spacing['4xl']} ${spacing['2xl']};
+      padding: ${token.spacing['4xl']} ${token.spacing['2xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-      padding: ${spacing['8xl']} ${spacing['xl']};
+      padding: ${token.spacing['8xl']} ${token.spacing['xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER} {
-      padding-left: ${spacing['xl']};
+      padding-left: ${token.spacing['xl']};
       position: relative;
     }
   }
@@ -99,13 +98,13 @@ const HighlightContainer = `
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER}:before {
     content: '';
     position: absolute;
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
   }
   
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER}:before {
-      top: ${spacing['2xl']};
-      width: ${spacing['5xl']};
+      top: ${token.spacing['2xl']};
+      width: ${token.spacing['5xl']};
       height: 2px;
     }
   }
@@ -115,7 +114,7 @@ const HighlightContainer = `
       left: 0;
       width: 2px;
       height: 100%;
-      background-color: ${colors.red};
+      background-color: ${token.color.red};
     }
   }
   
@@ -128,7 +127,7 @@ const HighlightContainer = `
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT},
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT} * {
     font-weight: 700;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
   
   ${convertJSSObjectToStyles({
@@ -145,8 +144,8 @@ const HighlightContainer = `
   
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION},
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} * {
-    margin-top: ${spacing.sm};
-    color: ${colors.black};
+    margin-top: ${token.spacing.sm};
+    color: ${token.color.black};
   }
 `
 

@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import Slides, { TypeSlideProps } from './slides';
 import SlideFirst from './slide-first';
@@ -16,8 +16,6 @@ export type TypeNavSliderRequirements = {
 };
 
 export type TypeNavSliderProps = TypeSubElements & TypeNavSliderRequirements;
-
-const { colors, spacing } = tokens;
 
 const ANIMATION_TIME = 300;
 const ATTRIBUTE_CHILD_REF = 'data-child-ref';
@@ -49,15 +47,15 @@ const OVERWRITE_DISPLAY_INTERIOR_HEADLINE = `.${ELEMENT_NAVIGATION_SLIDER_CONTAI
 // prettier-ignore
 const OverwriteDisplayDrawer = `
   ${OVERWRITE_DISPLAY_DRAWER_CONTAINER} {
-    background-color: ${colors.white};
-    padding: ${spacing['2xl']} 0;
-    width: calc(100vw - ${spacing['8xl']});
+    background-color: ${token.color.white};
+    padding: ${token.spacing['2xl']} 0;
+    width: calc(100vw - ${token.spacing['8xl']});
     max-width: 400px;
     min-width: 227px;
   }
 
   ${OVERWRITE_DISPLAY_DRAWER_SLIDE_WRAPPER} {
-    padding: 0 ${spacing.md};
+    padding: 0 ${token.spacing.md};
   }
 
   ${OVERWRITE_DISPLAY_DRAWER_DECORATION} {
@@ -65,16 +63,16 @@ const OverwriteDisplayDrawer = `
   }
 
   ${OVERWRITE_DISPLAY_DRAWER_ACTION_CONTAINER} {
-    padding-left: ${spacing.sm};
+    padding-left: ${token.spacing.sm};
   }
 `;
 
 // prettier-ignore
 const OverwriteDisplayInterior = `
   ${OVERWRITE_DISPLAY_INTERIOR_ACTION_CONTAINER} {
-    border-bottom: 1px solid ${colors.gray.light};
-    padding-bottom: ${spacing.md};
-    margin-bottom: ${spacing.md};
+    border-bottom: 1px solid ${token.color.gray.light};
+    padding-bottom: ${token.spacing.md};
+    margin-bottom: ${token.spacing.md};
   }
 
   ${OVERWRITE_DISPLAY_INTERIOR_SECONDARY_CONTAINER}:last-child {
@@ -82,9 +80,9 @@ const OverwriteDisplayInterior = `
   }
 
   ${OVERWRITE_DISPLAY_INTERIOR_HEADLINE} {
-    border-bottom: 1px solid ${colors.gray.light};
-    padding-bottom: ${spacing.md};
-    margin-bottom: ${spacing.md};
+    border-bottom: 1px solid ${token.color.gray.light};
+    padding-bottom: ${token.spacing.md};
+    margin-bottom: ${token.spacing.md};
   }
 `;
 
@@ -96,7 +94,7 @@ const DecorativeLineStyles = `
     bottom: 0;
     width: 100%;
     height: 8px;
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
     display: none;
   }
 `;
@@ -114,7 +112,7 @@ const SliderStyles = `
     top: 0;
     left: 0;
     width: 100%;
-    background-color: ${colors.white};
+    background-color: ${token.color.white};
     display: none;
   }
 

@@ -1,9 +1,7 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { ButtonVideoState } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import * as Utility from 'utilities';
-
-const { media, colors, spacing } = tokens;
 
 type TypeScaleProps = {
   isImageScaled: boolean;
@@ -32,15 +30,15 @@ const EventSignStyles = `
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN} {
     position: absolute;
     z-index: 9;
-    bottom: ${spacing.min};
-    left: ${spacing.min};
-    background-color: ${colors.white};
-    padding: ${spacing.min};
+    bottom: ${token.spacing.min};
+    left: ${token.spacing.min};
+    background-color: ${token.color.white};
+    padding: ${token.spacing.min};
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     .${ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN} {
-      padding: ${spacing.sm} ${spacing.sm} ${spacing.min} ${spacing.sm};
+      padding: ${token.spacing.sm} ${token.spacing.sm} ${token.spacing.min} ${token.spacing.sm};
     }
   }
 `;
@@ -49,7 +47,7 @@ const EventSignStyles = `
 const ImageSizeStyles = `
   ${OVERWRITE_SCALED_IMAGE_CONTAINER} .${LayoutImage.Elements.container} {
     justify-content: center;
-    padding: 0 ${spacing.md};
+    padding: 0 ${token.spacing.md};
   }
 
   ${OVERWRITE_SCALED_IMAGE_CONTAINER} img {

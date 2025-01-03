@@ -1,8 +1,8 @@
 import {
-  elementStyles,
-  tokens,
+  element,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
@@ -13,7 +13,6 @@ type TypePersonBioProps = TypePersonProps & {
 };
 
 const { convertJSSObjectToStyles } = Utility.styles;
-const { spacing, colors } = tokens;
 
 const SMALL = 650;
 
@@ -35,22 +34,22 @@ const OverwriteThemeDarkName = `.${ELEMENT_PERSON_BIO_CONTAINER}${IS_THEME_DARK}
 
 const OverwriteThemeDark = `
   ${OverwriteThemeDarkDescription} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OverwriteThemeDarkDescription} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OverwriteThemeDarkName} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
 const OverwriteText = `
   ${OverwriteTextMainWrapper} {
-    padding-left: ${spacing.sm};
-    border-left: 2px solid ${colors.red};
+    padding-left: ${token.spacing.sm};
+    border-left: 2px solid ${token.color.red};
   }
 
   ${convertJSSObjectToStyles({
@@ -60,7 +59,7 @@ const OverwriteText = `
   })}
 
   ${OverwriteTextName} {
-    color: ${colors.black};
+    color: ${token.color.black};
     text-transform: uppercase;
     font-weight: 800;
   }
@@ -69,25 +68,25 @@ const OverwriteText = `
 const DescriptionStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_BIO_DESCRIPTION}`]: elementStyles.text.rich.advanced,
+      [`.${ELEMENT_PERSON_BIO_DESCRIPTION}`]: element.text.rich.advanced,
     },
   })}
 
   .${ELEMENT_PERSON_BIO_DESCRIPTION} {
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
   }
 `;
 
 const WrapperStyles = `
   .${ELEMENT_PERSON_BIO_WRAPPER} {
     display: grid;
-    grid-gap: ${spacing.md};
+    grid-gap: ${token.spacing.md};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_PERSON_BIO_WRAPPER} {
       grid-template-columns: repeat(8, 1fr);
-      grid-gap: ${spacing.lg};
+      grid-gap: ${token.spacing.lg};
       align-items: center;
     }
   }

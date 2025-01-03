@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item/';
@@ -25,7 +25,6 @@ type TypeNavRow = TypeSearchLink &
 
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
-const { colors, font, media, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 const ANIMATION_TIME = 500;
 
@@ -50,7 +49,7 @@ const OVERWRITE_STICKY_LOGO = `${OVERWRITE_STICKY_CONTAINER} .${ELEMENT_HEADER_L
 
 const OverwriteStickyStyles = `
   ${OVERWRITE_STICKY_CONTAINER} {
-    padding: ${spacing.xs} 0;
+    padding: ${token.spacing.xs} 0;
   }
 
   .${ELEMENT_HEADER_WRAPPER} {
@@ -64,22 +63,22 @@ const OverwriteStickyStyles = `
 
 const CtaStyles = `
   .${ELEMENT_HEADER_MENU_CTA} {
-    color: ${colors.white};
-    font-weight: ${font.weight.bold};
-    font-size: ${font.size.sm};
-    padding: ${spacing.xs};
-    background-color: ${colors.red};
+    color: ${token.color.white};
+    font-weight: ${token.font.weight.bold};
+    font-size: ${token.font.size.sm};
+    padding: ${token.spacing.xs};
+    background-color: ${token.color.red};
     transition: background .5s;
   }
 
   .${ELEMENT_HEADER_MENU_CTA}:hover,
   .${ELEMENT_HEADER_MENU_CTA}:focus {
-    background-color: ${colors.redDark};
+    background-color: ${token.color.redDark};
   }
 `;
 
 const NavigationColumnStyles = `
-  @media (max-width: ${media.breakpoints.tablet.max}) {
+  @media (max-width: ${token.media.breakpoints.tablet.max}) {
     .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
       display: none;
     }
@@ -89,29 +88,29 @@ const NavigationColumnStyles = `
     display: flex;
     justify-content flex-end;
     align-items: center;
-    gap: ${spacing.md};
+    gap: ${token.spacing.md};
   }
 
   .${ELEMENT_HEADER_NAVIGATION_ROW} svg {
     width: 24px;
     height: 24px;
-    fill: ${colors.black};
+    fill: ${token.color.black};
   }
 
   .${ELEMENT_HEADER_UTILITY_ROW} {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${token.spacing.sm};
   }
 
   .${ELEMENT_HEADER_UTILITY_ROW} ::slotted(*) {
     display: flex;
     justify-content: flex-end;
-    gap: ${spacing.md};
+    gap: ${token.spacing.md};
   }
 
   .${ELEMENT_HEADER_MENU_SEARCH} {
-    margin-left: ${spacing.md};
+    margin-left: ${token.spacing.md};
   }
 `;
 
@@ -126,9 +125,9 @@ const LogoColumnStyles = `
   }
 
   .${ELEMENT_HEADER_MENU_BUTTON} {
-    border-right: 1px solid ${colors.gray.light};
-    padding-right: ${spacing.min};
-    margin-right: ${spacing.sm};
+    border-right: 1px solid ${token.color.gray.light};
+    padding-right: ${token.spacing.min};
+    margin-right: ${token.spacing.sm};
   }
 
   .${ELEMENT_HEADER_LOGO} {
@@ -177,7 +176,7 @@ const LogoColumnStyles = `
     max-width: 190px;
   }
 
-  @media (min-width: ${media.breakpoints.tablet.min}) {
+  @media (min-width: ${token.media.breakpoints.tablet.min}) {
     .${ELEMENT_HEADER_LOGO} img {
       max-width: 240px;
     }
@@ -189,16 +188,16 @@ const WrapperStyles = `
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: ${spacing.lg};
+    gap: ${token.spacing.lg};
     z-index: 999;
   }
 `;
 
 const STYLES_NAVIGATION_HEADER = `
   .${ELEMENT_HEADER_CONTAINTER} {
-    background-color: ${colors.white};
+    background-color: ${token.color.white};
     display: block;
-    padding: ${spacing.md} 0;
+    padding: ${token.spacing.md} 0;
     position: relative;
     transition: padding ${ANIMATION_TIME}ms;
   }

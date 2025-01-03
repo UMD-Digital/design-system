@@ -1,7 +1,5 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-
-const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Utility.styles;
 
@@ -13,10 +11,10 @@ const STYLES_FULL_SCREEN_BUTTON = `
     position: absolute;
     bottom: 0;
     left: 0;
-    color: ${colors.white};
+    color: ${token.color.white};
     text-transform: uppercase;
     font-weight: 700;
-    padding: ${spacing.min};
+    padding: ${token.spacing.min};
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
@@ -32,7 +30,7 @@ const STYLES_FULL_SCREEN_BUTTON = `
     display: block;
     height: 12px;
     width: 1px;
-    background-color: ${colors.gray.mediumAA};
+    background-color: ${token.color.gray.mediumAA};
     margin: 0 4px;
   }
 `;

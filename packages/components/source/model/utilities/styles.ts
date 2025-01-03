@@ -1,15 +1,13 @@
 import postcss from 'postcss';
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-elements-styles';
 
 const postcssDuplicates = require('postcss-discard-duplicates');
 const CreateStyleString = (styles: string) =>
   postcss([postcssDuplicates]).process(styles, {}).css;
 
-const { colors } = tokens;
-
 const reset = `
   :host {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
   
   :host * {
@@ -26,11 +24,11 @@ const reset = `
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   p {
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
   }
 
   a {
@@ -43,7 +41,7 @@ const reset = `
   }
 
   date {
-    color: ${colors.gray.medium};
+    color: ${token.color.gray.medium};
   }
 
   strong, b {

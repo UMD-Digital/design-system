@@ -4,11 +4,10 @@ declare global {
   }
 }
 
-import { animation, tokens } from '@universityofmaryland/web-elements-styles';
+import { animation, token } from '@universityofmaryland/web-elements-styles';
 import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
-const { colors } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = Markup.create;
 
@@ -24,11 +23,11 @@ const OVERWRITE_THEME_DARK_PATH = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_
 
 const OverwriteThemeStyles = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_PATH} + *::before {
-    background-color: ${colors.gray.dark};
+    background-color: ${token.color.gray.dark};
   }
   
   ${convertJSSObjectToStyles({
@@ -45,7 +44,7 @@ const PathStyles = `
   }
 
   .${ELEMENT_PATH}:last-child {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   .${ELEMENT_PATH}:not(:last-child) {
@@ -56,7 +55,7 @@ const PathStyles = `
     content: '';
     display: inline-block;
     height: 14px;
-    background-color: ${colors.gray.dark};
+    background-color: ${token.color.gray.dark};
     left: -8px;
     position: absolute;
     top: 50%;
@@ -75,12 +74,12 @@ const ContainerStyles = `
     scrollbar-width: none;
     white-space: nowrap;
     mask-image: linear-gradient(90deg, ${
-      colors.white
+      token.color.white
     } calc(100% - 24px), transparent);
   }
 
   .${ELEMENT_CONTAINER} * {
-    color: ${colors.gray.mediumAA};
+    color: ${token.color.gray.mediumAA};
     position: relative;
   }
 

@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { AnimationCarouselBlocks } from 'macros';
 
 type TypeCarouselRequirements = {
@@ -19,8 +19,6 @@ type TypeCarouselRequirements = {
   desktopCount?: number | null;
   maxCount?: number | null;
 };
-
-const { colors } = tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
@@ -47,11 +45,11 @@ const OVERWRITE_SINGLE_COLUMN_NEXT = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCar
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_BUTTON} {
-    background-color: ${colors.red} !important;
+    background-color: ${token.color.red} !important;
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} > svg {
-    fill: ${colors.white} !important;
+    fill: ${token.color.white} !important;
   }
 `;
 
@@ -64,11 +62,11 @@ const OverwriteCarouselStyles = `
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
     top: 50%;
     transform: translateY(-50%);
-    background-color: ${colors.white};
+    background-color: ${token.color.white};
   }
 
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} > svg {
-    fill: ${colors.black};
+    fill: ${token.color.black};
   }
 
   ${OVERWRITE_ANIMATION_BUTTON_PREVIOUS} {
@@ -86,7 +84,7 @@ const OverwriteCarouselStyles = `
   ${OVERWRITE_SINGLE_COLUMN_BUTTONS} {
     bottom: -19px;
     top: inherit;
-    background-color: ${colors.gray.lighter};
+    background-color: ${token.color.gray.lighter};
   }
 
   ${OVERWRITE_SINGLE_COLUMN_PREVIOUS} {
@@ -114,7 +112,7 @@ const STYLES_CAROUSEL_ELEMENT = `
   }
 
   .${ELEMENT_DECLARATION} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
   
   ${AnimationCarouselBlocks.Styles}

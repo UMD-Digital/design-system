@@ -1,12 +1,10 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { AnimationCarouselBlocks } from 'macros';
 
 type TypeCarouselThumbnailProps = {
   blocks: HTMLElement[];
   isThemeDark?: boolean;
 };
-
-const { colors, spacing } = tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
@@ -28,24 +26,24 @@ const OVERWRITE_THEME_DARK_SLIDE = `.${ELEMENT_THUMBNAIL_CONTAINER}${IS_THEME_DA
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} > svg {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_SLIDE} {
-    border: 1px solid ${colors.gray.dark};
+    border: 1px solid ${token.color.gray.dark};
     border-left: none;
   }
 
   ${OVERWRITE_THEME_DARK_SLIDE}:first-child {
-    border-left: 1px solid ${colors.gray.dark};
+    border-left: 1px solid ${token.color.gray.dark};
   }
 `;
 
@@ -57,24 +55,24 @@ const OverwriteCarouselStyles = `
   }
 
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {
-    left: -${spacing.md};
+    left: -${token.spacing.md};
   }
 
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:first-of-type {
-    right: -${spacing.md};
+    right: -${token.spacing.md};
   }
 `;
 
 // prettier-ignore
 const PersonSlideStyles = `
   .${ELEMENT_PERSON_SLIDE} {
-    border: 1px solid ${colors.gray.light};
+    border: 1px solid ${token.color.gray.light};
     border-left: none;
-    padding: ${spacing.lg};
+    padding: ${token.spacing.lg};
   }
 
   .${ELEMENT_THUMBNAIL_CONTAINER} .${ELEMENT_PERSON_SLIDE}:first-child {
-    border-left: 1px solid ${colors.gray.light};
+    border-left: 1px solid ${token.color.gray.light};
   }
 `;
 
@@ -86,7 +84,7 @@ const STYLES_CAROUSEL_THUMBNAIL_ELEMENT = `
 
   .${ELEMENT_THUMBNAIL_CONTAINER} {
     overflow: hidden;
-    padding: 0 ${spacing.md};
+    padding: 0 ${token.spacing.md};
   }
 
   ${AnimationCarouselBlocks.Styles}

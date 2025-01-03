@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeSliderEventButtonProps = {
@@ -30,7 +30,6 @@ type TypeSliderEventProps = TypeSliderEventSlideContentProps &
   };
 
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Utility.styles;
-const { colors, spacing } = tokens;
 
 const TABLET = 750;
 const DESKTOP = 1000;
@@ -70,7 +69,7 @@ const OVERWRITE_THEME_DARK_ARROW = `.${ELEMENT_SLIDER_EVENT_CONTAINER}${IS_THEME
 // prettier-ignore
 const VariationThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER_WRAPPER} {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
@@ -78,27 +77,27 @@ const VariationThemeDark = `
   }
 
   ${OVERWRITE_THEME_DARK_INTRO_COVER} {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_INTRO_HEADLINE} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_ARROW} {
-    background-color: ${colors.gray.dark};
+    background-color: ${token.color.gray.dark};
   }
 
   ${OVERWRITE_THEME_DARK_ARROW} svg {
-    fill: ${colors.white}
+    fill: ${token.color.white}
   }
 
   ${OVERWRITE_THEME_DARK_ARROW}:hover {
-    background-color: ${colors.white}
+    background-color: ${token.color.white}
   }
 
   ${OVERWRITE_THEME_DARK_ARROW}:hover svg {
-    fill: ${colors.black}
+    fill: ${token.color.black}
   }
 `
 
@@ -110,7 +109,7 @@ const ButtonStyles = `
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${colors.gray.light};
+    background-color: ${token.color.gray.light};
     transition: background-color ${ANIMATION_DURATION}ms;
     position: absolute;
     top: 50%;
@@ -126,16 +125,16 @@ const ButtonStyles = `
   }
 
   .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON}:hover {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON}:hover svg {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 
   .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON} svg {
     transition: fill .5s;
-    fill: ${colors.black};
+    fill: ${token.color.black};
     width: 16px;
     height: 6px;
   }
@@ -154,7 +153,7 @@ const ButtonStyles = `
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK} {
       left: -24px;
-      top: ${spacing.xs};
+      top: ${token.spacing.xs};
     }
   }
 
@@ -165,7 +164,7 @@ const ButtonStyles = `
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD} {
       right: -24px;
-      top: ${spacing.xs};
+      top: ${token.spacing.xs};
     }
   }
 `;
@@ -198,7 +197,7 @@ const DatesStyles = `
 
 const IntroStyles = `
   .${ELEMENT_SLIDER_EVENT_INTRO} {
-    padding: 0 ${spacing.lg};
+    padding: 0 ${token.spacing.lg};
     position: relative;
   }
 
@@ -224,12 +223,12 @@ const IntroStyles = `
   }
 
   .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE} {
-    color: ${colors.black};
+    color: ${token.color.black};
     font-weight: 700;
   }
 
   .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE} + * {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   ${convertJSSObjectToStyles({
@@ -243,7 +242,7 @@ const IntroStyles = `
   }
   
   .${ELEMENT_SLIDER_EVENT_INTRO_ACTIONS} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
   
 
@@ -271,7 +270,7 @@ const CoverStyles = `
     height: 100%;
     top: 0;
     left: -100vw;
-    background-color: ${colors.gray.lighter};
+    background-color: ${token.color.gray.lighter};
   }
   
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
@@ -290,7 +289,7 @@ const STYLES_SLIDER_EVENTS_ELEMENT = `
   
   .${ELEMENT_SLIDER_EVENT_CONTAINER_WRAPPER} {
     padding: 24px 0;
-    background-color: ${colors.gray.lighter};
+    background-color: ${token.color.gray.lighter};
     position: relative;
     z-index: 99;
   }
@@ -545,19 +544,19 @@ const SizeDatesElements = ({
 
         if (isMobile) {
           const lineColor = isThemeDark
-            ? colors.gray.mediumAA
-            : colors.gray.light;
+            ? token.color.gray.mediumAA
+            : token.color.gray.light;
 
           dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `center`;
           dateElement.style.paddingRight = `0`;
-          dateElement.style.marginTop = `${spacing.xs}`;
-          dateElement.style.paddingTop = `${spacing.xs}`;
+          dateElement.style.marginTop = `${token.spacing.xs}`;
+          dateElement.style.paddingTop = `${token.spacing.xs}`;
           dateElement.style.borderTop = `1px solid ${lineColor}`;
         } else {
           dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `inherit`;
-          dateElement.style.paddingRight = `${spacing.lg}`;
+          dateElement.style.paddingRight = `${token.spacing.lg}`;
 
           dateElement.style.marginTop = `0`;
           dateElement.style.paddingTop = `0`;

@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeHeadlineText = { headline?: HTMLElement | null };
@@ -28,7 +28,7 @@ type ActionAnimationProps = StateProps & {
   isOpening: boolean;
 };
 
-const { colors, spacing } = tokens;
+const { token } = Styles;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 480;
@@ -53,38 +53,38 @@ const OVERWRITE_THEME_DARK_BODY = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEM
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_HEADLINE} {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE} > * {
-    color: ${colors.white}
+    color: ${token.color.white}
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE}:before,
   ${OVERWRITE_THEME_DARK_HEADLINE}:after {
-    background-color: ${colors.gold};
+    background-color: ${token.color.gold};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE}[aria-expanded='true'],
   ${OVERWRITE_THEME_DARK_HEADLINE}:hover,
   ${OVERWRITE_THEME_DARK_HEADLINE}:focus {
-    background-color: ${colors.gray.darker};
-    border-top: 2px solid ${colors.gold};
+    background-color: ${token.color.gray.darker};
+    border-top: 2px solid ${token.color.gold};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE}[aria-expanded='true'] > *,
   ${OVERWRITE_THEME_DARK_HEADLINE}:hover > *,
   ${OVERWRITE_THEME_DARK_HEADLINE}:focus > * {
-    color: ${colors.gold};
+    color: ${token.color.gold};
   }
 
   ${OVERWRITE_THEME_DARK_BODY_WRAPPER} {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_BODY},
   ${OVERWRITE_THEME_DARK_BODY} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
@@ -92,29 +92,29 @@ const OverwriteThemeDark = `
 const bodyStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BODY_WRAPPER}`]: typography.sans.medium
+      [`.${ELEMENT_BODY_WRAPPER}`]: Styles.typography.sans.medium
     },
   })}
 
   .${ELEMENT_BODY_WRAPPER} {
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
     height: 0;
     overflow: hidden;
     display: none;
   }
 
   .${ELEMENT_BODY} {
-    padding: ${spacing.md};
+    padding: ${token.spacing.md};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_BODY} {
-      padding: ${spacing.lg};
+      padding: ${token.spacing.lg};
     }
   }
 
   .${ELEMENT_BODY} > * {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   .${ELEMENT_BODY} > *:first-child {
@@ -123,7 +123,7 @@ const bodyStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_BODY} > * {
-      margin-top: ${spacing.lg};
+      margin-top: ${token.spacing.lg};
     }
   }
 `;
@@ -132,40 +132,40 @@ const bodyStyles = `
 const headlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: typography.sans.large,
+      [`.${ELEMENT_HEADLINE}`]: Styles.typography.sans.large,
     },
   })}
 
   .${ELEMENT_HEADLINE} {
     display: flex;
     border-top: 2px solid transparent;
-    padding: ${spacing.md};
-    padding-right: ${spacing['4xl']};
-    background-color: ${colors.gray.lightest};
+    padding: ${token.spacing.md};
+    padding-right: ${token.spacing['4xl']};
+    background-color: ${token.color.gray.lightest};
     position: relative;
     transition: background 0.5s, border 0.5s, color 0.5s, padding 0.5s;
     width: 100%;
     text-align: left;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   .${ELEMENT_HEADLINE} > * {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_HEADLINE} {
-      padding: ${spacing.lg};
-      padding-right: ${spacing['6xl']}
+      padding: ${token.spacing.lg};
+      padding-right: ${token.spacing['6xl']}
     }
   }
 
   .${ELEMENT_HEADLINE}:before,
   .${ELEMENT_HEADLINE}:after {
     content: '';
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
     position: absolute;
-    right: ${spacing.md};
+    right: ${token.spacing.md};
     transition: background 0.5s, height 0.5s, right 0.5s, top 0.5s,
     transform 0.5s, width 0.5s;
   }
@@ -186,7 +186,7 @@ const headlineStyles = `
   .${ELEMENT_HEADLINE}:after {
     height: 16px;
     top: calc(50% - 8px);
-    right: calc(${spacing.md} + 6px);
+    right: calc(${token.spacing.md} + 6px);
     width: 4px;
   }
 
@@ -194,21 +194,21 @@ const headlineStyles = `
     .${ELEMENT_HEADLINE}:after {
       height: 20px;
       top: calc(50% - 10px);
-      right: calc(${spacing.lg} + 8px);
+      right: calc(${token.spacing.lg} + 8px);
     }
   }
 
   .${ELEMENT_HEADLINE}[aria-expanded='true'],
   .${ELEMENT_HEADLINE}:hover,
   .${ELEMENT_HEADLINE}:focus {
-    background-color: ${colors.gray.lightest};
-    border-top: 2px solid ${colors.red};
+    background-color: ${token.color.gray.lightest};
+    border-top: 2px solid ${token.color.red};
   }
 
   .${ELEMENT_HEADLINE}[aria-expanded='true'] > *,
   .${ELEMENT_HEADLINE}:hover > *,
   .${ELEMENT_HEADLINE}:focus > * {
-    color: ${colors.red};
+    color: ${token.color.red};
   }
 
   .${ELEMENT_HEADLINE}[aria-expanded='true']:after {

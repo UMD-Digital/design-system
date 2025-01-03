@@ -1,4 +1,4 @@
-import { font, media } from '../tokens';
+import { font, media } from '../token';
 import { create } from '../utilities';
 
 const breakpointLarge = media.queries.large.min;

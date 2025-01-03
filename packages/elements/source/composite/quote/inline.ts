@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import Text, { TypeQuoteTextContainer } from './elements/text';
 import Image from './elements/image';
@@ -9,8 +9,6 @@ export type TypeInlineInline = TypeQuoteTextContainer & {
   isSizeLarge: boolean;
   image: HTMLElement | null;
 };
-
-const { spacing, colors } = tokens;
 
 const SMALL = 500;
 
@@ -47,17 +45,17 @@ const IS_WITH_IMAGE_SIZE_LARGE_TEXT_QUOTE = `${IS_SIZE_LARGE_WITH_IMAGE_CONTAINE
 // prettier-ignore
 const OverwriteThemeMaryland = `
   ${IS_MARYLAND_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
-    background-color: ${colors.gold};
+    background-color: ${token.color.gold};
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_MARYLAND_CONTAINER} .${Image.Elements.container} img  {
-      border-right: 2px solid ${colors.gold};
+      border-right: 2px solid ${token.color.gold};
     }
   }
   
   ${IS_MARYLAND_CONTAINER} span svg {
-    fill: ${colors.gold} !important;
+    fill: ${token.color.gold} !important;
   }
 `;
 
@@ -65,7 +63,7 @@ const OverwriteThemeMaryland = `
 const OverwriteSizeLarge = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_CONTAINER} .${QUOTE_INLINE_CONTAINER_WRAPPER} {
-      gap: ${spacing.xl};
+      gap: ${token.spacing.xl};
     }
   }
 
@@ -92,25 +90,25 @@ const OverwriteSizeLarge = `
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${IS_SIZE_LARGE_TEXT_CONTAINER} {
-      padding-top:  ${spacing['2xl']};
+      padding-top:  ${token.spacing['2xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_TEXT_CONTAINER} {
-      padding-left: ${spacing.md};
+      padding-left: ${token.spacing.md};
     }
   }
 
   ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
     height: 26px;
     width: 36px;
-    top: -${spacing['2xl']};
+    top: -${token.spacing['2xl']};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
-      left: -${spacing['6xl']};
+      left: -${token.spacing['6xl']};
       top: 0;
     }
   }
@@ -153,14 +151,14 @@ const OverwriteWithImage = `
 const TextContainer = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} {
-      padding-top: ${spacing.lg};
-      padding-left: ${spacing.md};
+      padding-top: ${token.spacing.lg};
+      padding-left: ${token.spacing.md};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} {
-      padding-left: ${spacing['4xl']};
+      padding-left: ${token.spacing['4xl']};
     }
   }
 
@@ -171,24 +169,24 @@ const TextContainer = `
   ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
     content: '';
     position: absolute;
-    left: -${spacing.md};
+    left: -${token.spacing.md};
     top: 7px;
     height: calc(100% - 14px);
     width: 2px;
     display: block;
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
-      left: -${spacing.md};
+      left: -${token.spacing.md};
     }
   }
 
   ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
     position: absolute;
-    left: -${spacing.md};
-    top: -${spacing.lg};
+    left: -${token.spacing.md};
+    top: -${token.spacing.lg};
     height: 15px;
     width: 22px;
     display: block;
@@ -197,20 +195,20 @@ const TextContainer = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
       position: absolute;
-      left: -${spacing['4xl']};
+      left: -${token.spacing['4xl']};
       top: 0;
     }
   }
 
   ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} svg {
-    fill: ${colors.red};
+    fill: ${token.color.red};
   }
 `
 
 // prettier-ignore
 const ImageContainer = `
   ${IS_IMAGE_CONTAINER_OVERWRITE} {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${token.spacing.sm};
     position: relative;
   }
 
@@ -220,7 +218,7 @@ const ImageContainer = `
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_IMAGE_CONTAINER_OVERWRITE} img  {
-      border-right: 2px solid ${colors.red};
+      border-right: 2px solid ${token.color.red};
     }
   }
 
@@ -243,7 +241,7 @@ const ImageContainer = `
   }
 
   ${IS_IMAGE_CONTAINER_OVERWRITE} span svg {
-    fill: ${colors.red};
+    fill: ${token.color.red};
   }
 `;
 
@@ -257,7 +255,7 @@ const STYLES_QUOTE_INLINE_ELEMENT = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${QUOTE_INLINE_CONTAINER_WRAPPER} {
       display: flex;
-      gap: ${spacing.lg};
+      gap: ${token.spacing.lg};
     }
   }
 

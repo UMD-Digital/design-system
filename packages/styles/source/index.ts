@@ -1,10 +1,10 @@
 export * as accessibility from './accessibility';
 export * as animation from './animation';
-export * as elementStyles from './elements-styles';
+export * as element from './element';
 export * as framework from './framework';
 export * as layout from './layout';
 export { root } from './root';
-export * as tokens from './tokens';
+export * as token from './token';
 export * as typography from './typography';
 export { default as webComponents } from './web-components';
 export * as utilities from './utilities';

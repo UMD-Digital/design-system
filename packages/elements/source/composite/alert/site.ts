@@ -1,4 +1,4 @@
-import { tokens, layout } from '@universityofmaryland/web-elements-styles';
+import { token, layout } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import AlertText, {
   CONSTANTS as TEXT_CONSTANTS,
@@ -18,7 +18,6 @@ type TypeAlertButtonProps = {
   container: HTMLElement;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDUM = 500;
@@ -36,27 +35,27 @@ const OVERWRITE_TEXT_BODY = `.${ELEMENT_ALERT_SITE_CONTAINER} .${TEXT_CONSTANTS.
 
 const OverwriteText = `
   ${OVERWRITE_TEXT_WRAPPER} {
-    max-width: ${spacing.maxWidth.large};
+    max-width: ${token.spacing.maxWidth.large};
   }
 
   ${OVERWRITE_TEXT_BODY},
   ${OVERWRITE_TEXT_BODY} * {
-    color: ${colors.black};
-    max-width: ${spacing.maxWidth.large};
+    color: ${token.color.black};
+    max-width: ${token.spacing.maxWidth.large};
   }
 `;
 
 const ButtonStyles = `
   .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} {
     position: absolute;
-    top: ${spacing.lg};
-    right: ${spacing.lg};
+    top: ${token.spacing.lg};
+    right: ${token.spacing.lg};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} {
-      top: ${spacing.sm};
-      right: ${spacing.sm};
+      top: ${token.spacing.sm};
+      right: ${token.spacing.sm};
     }
   }
 `;
@@ -81,16 +80,16 @@ const STYLES_ALERT_SITE_ELEMENT = `
   .${ELEMENT_ALERT_SITE_CONTAINER} {
     display: flex;
     position: relative;
-    padding: ${spacing.lg} 0;
-    gap: ${spacing.lg};
-    background-color: ${colors.gold};
-    border-left: 4px solid ${colors.red};
+    padding: ${token.spacing.lg} 0;
+    gap: ${token.spacing.lg};
+    background-color: ${token.color.gold};
+    border-left: 4px solid ${token.color.red};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_SITE_CONTAINER} {
-      border-left: 8px solid ${colors.red};
-      padding-right: ${spacing['2xl']};
+      border-left: 8px solid ${token.color.red};
+      padding-right: ${token.spacing['2xl']};
     }
   }
 

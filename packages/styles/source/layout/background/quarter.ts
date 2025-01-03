@@ -1,4 +1,4 @@
-import { colors, media, spacing } from '../../tokens';
+import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
 import { padding } from './full';
 
@@ -29,7 +29,7 @@ const quarter = {
 
   '&:before': {
     ...psuedo,
-    backgroundColor: `${colors.gray.lightest}`,
+    backgroundColor: `${color.gray.lightest}`,
   },
 };
 
@@ -50,7 +50,7 @@ export const dark = create.jssObject({
 
   '&:before': {
     ...psuedo,
-    backgroundColor: `${colors.gray.darker}`,
+    backgroundColor: `${color.gray.darker}`,
   },
 
   className: [

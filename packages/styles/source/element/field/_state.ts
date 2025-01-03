@@ -1,13 +1,13 @@
-import { colors, spacing } from '../../tokens';
+import { color, spacing } from '../../token';
 import { elements } from '../../typography';
 
 export const invalid = {
-  border: `1px solid ${colors.redDark}`,
+  border: `1px solid ${color.redDark}`,
 
   '&[aria-errormessage] + [id]': {
     ...elements.eyebrow,
 
-    color: colors.redDark,
+    color: color.redDark,
     display: 'block',
     margin: 0,
     marginTop: spacing.xs,
@@ -15,7 +15,7 @@ export const invalid = {
 };
 
 export const valid = {
-  border: `1px solid ${colors.green}`,
+  border: `1px solid ${color.green}`,
 
   '& + [id]': {
     display: 'none',

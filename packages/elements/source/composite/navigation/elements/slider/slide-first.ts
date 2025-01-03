@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import Slides from './slides';
 import SlideAction, { TypeActionProps } from './action';
@@ -21,7 +21,6 @@ export type TypeFirstSlide = TypeFirstSlideProps & {
   isContextMenu: boolean;
 };
 
-const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_SLIDER_FIRST_SLIDE_CONTAINER = 'nav-slider-first-slide-container';
@@ -51,24 +50,24 @@ const OverwriteSlidePrimaryLink = `
 //prettier-ignore;
 const OverwriteSlidePrimaryContainer = `
   ${OVERWRITE_ACTION_PRIMARY_CONTAINER} {
-    border-bottom: 1px solid ${colors.gray.light};
-    padding-bottom: ${spacing.md};
-    margin-bottom: ${spacing.md};
+    border-bottom: 1px solid ${token.color.gray.light};
+    padding-bottom: ${token.spacing.md};
+    margin-bottom: ${token.spacing.md};
   }
 `;
 
 //prettier-ignore;
 const SecondaryLinksContainer = `
   .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} .${SlideAction.Elements.container}:last-child {
-    border-bottom: 1px solid ${colors.gray.light};
-    padding-bottom: ${spacing.md};
+    border-bottom: 1px solid ${token.color.gray.light};
+    padding-bottom: ${token.spacing.md};
   }
 `;
 
 //prettier-ignore;
 const AdditonalContent = `
   .${ELEMENT_SLIDER_ADDITIONAL_CONTENT} {
-    padding-top: ${spacing.md};
+    padding-top: ${token.spacing.md};
   }
 `;
 

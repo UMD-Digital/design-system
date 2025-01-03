@@ -1,12 +1,11 @@
 import {
   animation,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 const { convertJSSObjectToStyles } = Utility.styles;
-const { colors, font, spacing, media } = tokens;
 
 const MAX_WIDTH = 380;
 const ATTR_SIZE = 'size';
@@ -60,26 +59,26 @@ const OverwriteThemeGoldStyles = `
 
   ${OVERWRITE_THEME_GOLD_SECONDARY} svg,
   ${OVERWRITE_THEME_GOLD_SECONDARY} path {
-    fill: ${colors.gold};
+    fill: ${token.color.gold};
   }
 
   ${OVERWRITE_THEME_GOLD_SECONDARY} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_GOLD_PRIMARY} {
-    background-color: ${colors.white};
-    color: ${colors.black};
+    background-color: ${token.color.white};
+    color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_GOLD_PRIMARY}:hover,
   ${OVERWRITE_THEME_GOLD_PRIMARY}:focus {
-    background-color: ${colors.gray.lighter};
+    background-color: ${token.color.gray.lighter};
   }
 
   ${OVERWRITE_THEME_GOLD_PRIMARY} svg,
   ${OVERWRITE_THEME_GOLD_PRIMARY} path {
-    fill: ${colors.red};
+    fill: ${token.color.red};
     margin-right: 5px;
   }
 `;
@@ -88,32 +87,32 @@ const OverwriteThemeGoldStyles = `
 const OverwriteThemeDarkStyles = `
   ${OVERWRITE_THEME_DARK_OUTLINE} {
     background-color: transparent;
-    border: 1px solid ${colors.white};
-    color: ${colors.white};
+    border: 1px solid ${token.color.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_OUTLINE}:hover,
   ${OVERWRITE_THEME_DARK_OUTLINE}:focus {
-    background-color: ${colors.white};
-    border: 1px solid ${colors.white};
-    color: ${colors.black};
+    background-color: ${token.color.white};
+    border: 1px solid ${token.color.white};
+    color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_SECONDARY} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `
 
 // prettier-ignore
 const OverwriteSizeStyles = `
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     ${IS_LARGE_SIZE} {
-      font-size: ${font.size.lg};
-      padding: ${spacing.sm} ${spacing.lg};
+      font-size: ${token.font.size.lg};
+      padding: ${token.spacing.sm} ${token.spacing.lg};
     }
   }
   
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     ${IS_LARGE_SIZE} svg {
       height: 17px;
       width: 17px;
@@ -126,29 +125,29 @@ const OverwriteSizeStyles = `
 // prettier-ignore
 const OutlineStyles = `
   .${ELEMENT_CTA_OUTLINE} {
-    background-color: ${colors.white};
-    border: 1px solid ${colors.gray.darker};
-    color: ${colors.black};
+    background-color: ${token.color.white};
+    border: 1px solid ${token.color.gray.darker};
+    color: ${token.color.black};
     transition: background .5s, border .5s, color .5s;
   }
 
   .${ELEMENT_CTA_OUTLINE} svg,
   .${ELEMENT_CTA_OUTLINE} path {
-    fill: ${colors.red};
+    fill: ${token.color.red};
     transition: fill .5s;
   }
 
   .${ELEMENT_CTA_OUTLINE}:hover,
   .${ELEMENT_CTA_OUTLINE}:focus {
-    background-color: ${colors.gray.darker};
-    color: ${colors.white};
+    background-color: ${token.color.gray.darker};
+    color: ${token.color.white};
   }
 
   .${ELEMENT_CTA_OUTLINE}:hover svg,
   .${ELEMENT_CTA_OUTLINE}:hover path,
   .${ELEMENT_CTA_OUTLINE}:focus svg,
   .${ELEMENT_CTA_OUTLINE}:focus path {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 `;
 
@@ -161,28 +160,28 @@ const PrimaryStyles = `
   })}
 
   .${ELEMENT_CTA_PRIMARY} {
-    background-color: ${colors.red};
-    border: 1px solid ${colors.red};
-    color: ${colors.white};
+    background-color: ${token.color.red};
+    border: 1px solid ${token.color.red};
+    color: ${token.color.white};
     transition: background .5s, border .5s, color .5s;
   }
 
   .${ELEMENT_CTA_PRIMARY}:hover,
   .${ELEMENT_CTA_PRIMARY}:focus {
-    border: 1px solid ${colors.redDark};
-    background-color: ${colors.redDark};
+    border: 1px solid ${token.color.redDark};
+    background-color: ${token.color.redDark};
   }
 
   .${ELEMENT_CTA_PRIMARY} svg,
   .${ELEMENT_CTA_PRIMARY} path {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 `;
 
 // prettier-ignore
 const SecondaryStyles = `
   .${ELEMENT_CTA_SECONDARY} {
-    color: ${colors.black};
+    color: ${token.color.black};
     padding: 0 !important;
   }
 
@@ -202,8 +201,8 @@ const SecondaryStyles = `
 export const STYLES_CALL_TO_ACTION_ELEMENT = `
   .${ELEMENT_BASE_CTA} {
     display: inline-block;
-    padding: ${spacing.xs} ${spacing.lg};
-    font-size: ${font.size.base};
+    padding: ${token.spacing.xs} ${token.spacing.lg};
+    font-size: ${token.font.size.base};
     display: inline-block;
     font-weight: 700;
     text-align: left;
@@ -214,7 +213,7 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
   }
 
   .${ELEMENT_BASE_CTA} svg {
-    fill: ${colors.red};
+    fill: ${token.color.red};
     height: 14px;
     width: 14px;
     transition: fill 0.5s;
@@ -237,7 +236,7 @@ export const STYLES_CALL_TO_ACTION_ELEMENT = `
   }
 
   .${ELEMENT_CTA_WRAPPER}[data-email] svg path {
-    fill: ${colors.red};
+    fill: ${token.color.red};
   }
 
   ${PrimaryStyles}

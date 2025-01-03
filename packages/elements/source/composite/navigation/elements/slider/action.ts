@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypeActionProps = {
@@ -13,7 +13,6 @@ export type TypeAction = TypeActionProps & {
   link: HTMLAnchorElement;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_SLIDE_ACTION_CONTAINER = 'nav-slide-action-container';
@@ -34,7 +33,7 @@ const LinkStyles = `
 
   a.${ELEMENT_SLIDE_ACTION_LINK}:hover,
   a.${ELEMENT_SLIDE_ACTION_LINK}:focus {
-    color: ${colors.red};
+    color: ${token.color.red};
   }
 `;
 
@@ -42,10 +41,10 @@ const LinkStyles = `
 const ButtonStyles = `
   .${ELEMENT_SLIDE_ACTION_BUTTON} {
     position: absolute;
-    right: ${spacing.min};
+    right: ${token.spacing.min};
     top: 5px;
-    width: ${spacing.lg};
-    height: ${spacing.lg};
+    width: ${token.spacing.lg};
+    height: ${token.spacing.lg};
     display: flex;
     justify-content: center;
   }
@@ -56,7 +55,7 @@ const ButtonStyles = `
   }
 
   .${ELEMENT_SLIDE_ACTION_BUTTON} svg {
-    fill: ${colors.red};
+    fill: ${token.color.red};
     height: 16px;
     width: 16px;
     transform: rotate(-90deg) translateY(0);
@@ -70,8 +69,8 @@ const STYLES_SLIDER_ACTION_ELEMENT = `
     display: flex;
     justify-content: space-between;
     position: relative;
-    padding-right: ${spacing['3xl']};
-    margin-bottom: ${spacing.xs};
+    padding-right: ${token.spacing['3xl']};
+    margin-bottom: ${token.spacing.xs};
   }
 
   ${LinkStyles}

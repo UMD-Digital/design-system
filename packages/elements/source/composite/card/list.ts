@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { List as LayoutList, Image as LayoutImage } from 'layout';
 import { TextLockupSmall } from 'macros';
 
@@ -13,7 +13,7 @@ type TypeListCardProps = {
   isAligned?: boolean;
 };
 
-const { spacing } = tokens;
+const { spacing } = token;
 
 const ELEMENT_NAME = 'umd-card-list';
 const ELEMENT_LIST_CARD_CONTAINER = 'card-list-container';
@@ -25,7 +25,7 @@ export const STYLES_LIST_CARD_ELEMENT = `
   }
   
   .${ELEMENT_LIST_CARD_CONTAINER} + * {
-    margin-top: ${spacing.md}; 
+    margin-top: ${token.spacing.md}; 
   }
 
   ${TextLockupSmall.Styles}

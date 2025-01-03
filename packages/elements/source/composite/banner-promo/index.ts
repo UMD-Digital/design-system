@@ -1,9 +1,9 @@
 import {
   animation,
-  elementStyles,
-  tokens,
+  element,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeBannerPromoProps = {
@@ -14,7 +14,6 @@ type TypeBannerPromoProps = {
   includeSeal?: boolean;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 650;
@@ -40,25 +39,25 @@ const OVERWRITE_THEME_DARK_RICH_TEXT = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .$
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} > svg {
-    fill: ${colors.gray.darker};
+    fill: ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: elementStyles.text.rich.advancedDark,
+      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: element.text.rich.advancedDark,
     },
   })}
 
   ${OVERWRITE_THEME_DARK_RICH_TEXT} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
@@ -66,14 +65,14 @@ const OverwriteThemeDark = `
 const ActionsStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     .${ELEMENT_ACTIONS} {
-      margin-top: ${spacing.sm};
+      margin-top: ${token.spacing.sm};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_ACTIONS} {
       max-width: 30%;
-      margin-left: ${spacing.md};
+      margin-left: ${token.spacing.md};
     }
   }
 `;
@@ -82,7 +81,7 @@ const ActionsStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT}`]: elementStyles.text.rich.advanced,
+      [`.${ELEMENT_RICH_TEXT}`]: element.text.rich.advanced,
     },
   })}
 
@@ -93,11 +92,11 @@ const TextStyles = `
   })}
 
   .${ELEMENT_RICH_TEXT} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   .${ELEMENT_RICH_TEXT} * {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 `;
 
@@ -111,7 +110,7 @@ const HeadlineStyles = `
 
   .${ELEMENT_HEADLINE} {
     text-transform: uppercase;
-    color: ${colors.black};
+    color: ${token.color.black};
     font-weight: 800;
   }
 `;
@@ -149,13 +148,13 @@ const STYLES_BANNER_PROMO_ELEMENT = `
   }
 
   .${ELEMENT_CONTAINER} {
-    padding: ${spacing.lg} ${spacing.lg};
-    background-color: ${colors.gold};
+    padding: ${token.spacing.lg} ${token.spacing.lg};
+    background-color: ${token.color.gold};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_CONTAINER} {
-      padding: ${spacing.xl};
+      padding: ${token.spacing.xl};
     }
   }
 

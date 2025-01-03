@@ -1,11 +1,9 @@
-import { layout, tokens } from '@universityofmaryland/web-elements-styles';
+import { layout, token } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
-
-const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -35,18 +33,18 @@ const socialOverwriteStyles = `
 // prettier-ignore
 export const RowLinkStyles = `
   .${ROW_LINKS_CONTAINER} {
-    padding-bottom: ${spacing.lg};
-    background-color: ${colors.black};
+    padding-bottom: ${token.spacing.lg};
+    background-color: ${token.color.black};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_CONTAINER} {
-      padding-bottom: ${spacing['2xl']};
+      padding-bottom: ${token.spacing['2xl']};
     }
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_CONTAINER} {
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
   }
 
   .${ROW_LINKS_CONTAINER_WRAPPER}  {

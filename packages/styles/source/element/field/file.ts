@@ -1,4 +1,4 @@
-import { colors, spacing } from '../../tokens';
+import { color, spacing } from '../../token';
 import { create } from '../../utilities';
 import { valid, invalid } from './_state';
 
@@ -27,7 +27,7 @@ const file = {
 };
 
 export const fileWrapper = create.jssObject({
-  backgroundColor: colors.white,
+  backgroundColor: color.white,
   overflow: 'hidden',
   position: 'relative',
 

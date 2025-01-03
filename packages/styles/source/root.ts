@@ -1,9 +1,9 @@
-import { colors, font, spacing } from './tokens';
+import { color, font, spacing } from './token';
 import { sans } from './typography';
-import { input } from './elements-styles/field/input';
-import { textarea } from './elements-styles/field/textarea';
-import { select } from './elements-styles/field/select';
-import { label } from './elements-styles/text/label';
+import { input } from './element/field/input';
+import { textarea } from './element/field/textarea';
+import { select } from './element/field/select';
+import { label } from './element/text/label';
 
 export const reset = {
   body: {
@@ -19,23 +19,23 @@ export const reset = {
 
   hr: {
     margin: `${spacing.lg} 0`,
-    backgroundColor: colors.gray.light,
+    backgroundColor: color.gray.light,
     border: 'none',
     height: '1px',
   },
 
   li: {
     ...sans.medium,
-    color: colors.gray.dark,
+    color: color.gray.dark,
   },
 
   date: {
-    color: colors.black,
+    color: color.black,
   },
 
   p: {
     ...sans.medium,
-    color: colors.gray.dark,
+    color: color.gray.dark,
     marginBottom: spacing.md,
 
     '&:last-child': {
@@ -69,20 +69,20 @@ export const reset = {
 
 export const root = {
   ':root': {
-    '--red': colors.red,
-    '--gold': colors.gold,
-    '--blue': colors.blue,
-    '--green': colors.green,
-    '--white': colors.white,
-    '--black': colors.black,
-    '--redDark': colors.redDark,
-    '--grayDarker': colors.gray.darker,
-    '--grayDark': colors.gray.dark,
-    '--grayAA': colors.gray.mediumAA,
-    '--gray': colors.gray.medium,
-    '--grayLight': colors.gray.light,
-    '--grayLighter': colors.gray.lighter,
-    '--grayLightest': colors.gray.lightest,
+    '--red': color.red,
+    '--gold': color.gold,
+    '--blue': color.blue,
+    '--green': color.green,
+    '--white': color.white,
+    '--black': color.black,
+    '--redDark': color.redDark,
+    '--grayDarker': color.gray.darker,
+    '--grayDark': color.gray.dark,
+    '--grayAA': color.gray.mediumAA,
+    '--gray': color.gray.medium,
+    '--grayLight': color.gray.light,
+    '--grayLighter': color.gray.lighter,
+    '--grayLightest': color.gray.lightest,
     '--serif': font.family.serif,
     '--sanSerif': font.family.sans,
     FontFamily: font.family.sans,

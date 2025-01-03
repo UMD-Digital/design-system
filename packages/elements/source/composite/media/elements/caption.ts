@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypeMediaCaptionRequirements = {
@@ -6,7 +6,6 @@ export type TypeMediaCaptionRequirements = {
   isThemeDark?: boolean;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'data-theme';
@@ -33,7 +32,7 @@ const STYLES_MEDIA_CAPTIONS_ELEMENT = `
   })}
 
   .${ELEMENT_MEDIA_CAPTIONS_CONTAINER} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
     display: inline-block;
     text-align: left;
     opacity: 0;
@@ -42,12 +41,12 @@ const STYLES_MEDIA_CAPTIONS_ELEMENT = `
 
   .${ELEMENT_MEDIA_CAPTIONS_CONTAINER},
   .${ELEMENT_MEDIA_CAPTIONS_CONTAINER} > * {
-    color: ${colors.gray.mediumAA};
+    color: ${token.color.gray.mediumAA};
   }
 
   ${OVERWRITE_CONTAINER_DARK},
   ${OVERWRITE_CONTAINER_DARK} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 

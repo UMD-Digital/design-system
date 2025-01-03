@@ -1,4 +1,4 @@
-import { tokens, layout } from '@universityofmaryland/web-elements-styles';
+import { token, layout } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 
@@ -9,7 +9,6 @@ export type TypeAlertTextProps = {
   isThemeDark?: boolean;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 export const CONSTANTS = {
@@ -25,7 +24,7 @@ const { className } = CONSTANTS;
 // prettier-ignore
 const ctaStyles = `
   * + .${className.actions} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
@@ -37,7 +36,7 @@ const ctaStyles = `
 
 const STYLES_ALERT_TEXT = `
   .${className.wrapper} {
-     max-width: ${spacing.maxWidth.small};
+     max-width: ${token.spacing.maxWidth.small};
   }
 
   ${ctaStyles}
@@ -45,11 +44,11 @@ const STYLES_ALERT_TEXT = `
 
 const headlineStyles = {
   element: {
-    color: colors.black,
-    paddingRigh: spacing.md,
+    color: token.color.black,
+    paddingRigh: token.spacing.md,
   },
   siblingAfter: {
-    marginTop: spacing.sm,
+    marginTop: token.spacing.sm,
   },
   subElement: {
     color: 'currentColor',
@@ -58,11 +57,11 @@ const headlineStyles = {
 
 const richTextStyles = {
   element: {
-    color: colors.gray.dark,
+    color: token.color.gray.dark,
     fontWeight: 500,
   },
   siblingAfter: {
-    marginTop: spacing.sm,
+    marginTop: token.spacing.sm,
   },
 };
 

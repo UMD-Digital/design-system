@@ -1,8 +1,8 @@
 import {
-  tokens,
+  token,
   layout,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import PersonContact, { TypeContactProps } from './elements/contact';
 import PersonImage from './elements/image';
@@ -27,7 +27,6 @@ type TypePersonHeroProps = TypeTextContainer &
   };
 
 const { convertJSSObjectToStyles } = Utility.styles;
-const { spacing, colors } = tokens;
 
 const MEDIUM = 768;
 const ATTRIBUTE_THEME = 'theme';
@@ -67,37 +66,37 @@ const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${OVERWRITE_DARK_THEME_CONTAINER} 
 
 const OverwriteThemeDarkStyles = `
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER}:before {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_DARK_THEME_TEXT_WRAPPER} {
-    border-left: 2px solid ${colors.gold};
+    border-left: 2px solid ${token.color.gold};
   }
 
   ${OVERWRITE_DARK_THEME_IMAGE_BLOCK} {
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
   }
 
   ${OVERWRITE_DARK_THEME_IMAGE_BLOCK} * {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
-    background-color: ${colors.gray.lighter};
+    background-color: ${token.color.gray.lighter};
   }
 `;
 
 const OverwriteImageContainer = `
   ${OVERWRITE_IMAGE_CONTAINER} {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
     display: flex;
     justify-content: center;
   }
@@ -111,9 +110,9 @@ const OverwriteImageContainer = `
 
 const ImageBlockStyles = `
   .${ELEMENT_PERSON_HERO_IMAGE_BLOCK} {
-    padding-top: ${spacing.lg};
-    padding-bottom: ${spacing.lg};
-    background-color: ${colors.black};
+    padding-top: ${token.spacing.lg};
+    padding-bottom: ${token.spacing.lg};
+    background-color: ${token.color.black};
     position: relative;
   }
 
@@ -127,18 +126,18 @@ const ImageBlockStyles = `
 
   @container (min-width: ${MEDIUM}px) {
     .${ELEMENT_PERSON_HERO_IMAGE_BLOCK} {
-      padding: ${spacing.md};
+      padding: ${token.spacing.md};
       width: 30%;
       max-width: 320px;
     }
   }
 
   .${ELEMENT_PERSON_HERO_IMAGE_BLOCK} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   * + .${ELEMENT_PERSON_HERO_IMAGE_ASSOCIATION} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
@@ -152,7 +151,7 @@ const ImageBlockStyles = `
   }
 
   * + .${ELEMENT_PERSON_HERO_IMAGE_PRONOUNS} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   .${ELEMENT_PERSON_HERO_IMAGE_PRONOUNS} {
@@ -168,9 +167,9 @@ const TextContainerStyles = `
   }
 
   .${ELEMENT_PERSON_HERO_TEXT_CONTAINER} {
-    background-color: ${colors.gray.lightest};
-    padding-top: ${spacing['3xl']};
-    padding-bottom: ${spacing['3xl']};
+    background-color: ${token.color.gray.lightest};
+    padding-top: ${token.spacing['3xl']};
+    padding-bottom: ${token.spacing['3xl']};
     position: relative;
   }
 
@@ -185,7 +184,7 @@ const TextContainerStyles = `
   @container (min-width: ${MEDIUM}px) {
     .${ELEMENT_PERSON_HERO_TEXT_CONTAINER} {
       padding-top: 0;
-      padding-bottom: ${spacing['7xl']};
+      padding-bottom: ${token.spacing['7xl']};
       align-self: flex-start;
     }
   }
@@ -198,12 +197,12 @@ const TextContainerStyles = `
     bottom: 0;
     width: 200vw;
     transform: translateX(-20%);
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
   }
 
   .${ELEMENT_PERSON_HERO_TEXT_CONTAINER_WRAPPER} {
-    padding: 0 ${spacing.md};
-    border-left: 2px solid ${colors.red};
+    padding: 0 ${token.spacing.md};
+    border-left: 2px solid ${token.color.red};
     position: relative;
   }
 
@@ -221,12 +220,12 @@ const TextContainerStyles = `
   }
 
   * + .${ELEMENT_PERSON_HERO_TEXT_NAME} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   @container (min-width: ${MEDIUM}px) {
     * + .${ELEMENT_PERSON_HERO_TEXT_NAME} {
-      margin-top: ${spacing.sm};
+      margin-top: ${token.spacing.sm};
     }
   }
 
@@ -239,17 +238,17 @@ const TextContainerStyles = `
   .${ELEMENT_PERSON_HERO_TEXT_NAME} {
     text-transform: uppercase;
     font-weight: 700;
-    color: ${colors.black};
+    color: ${token.color.black};
     display: block;
   }
 
   * + .${ELEMENT_PERSON_HERO_TEXT_JOB} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   @container (min-width: ${MEDIUM}px) {
     * + .${ELEMENT_PERSON_HERO_TEXT_JOB} {
-      margin-top: ${spacing.md};
+      margin-top: ${token.spacing.md};
     }
   }
 
@@ -275,7 +274,7 @@ const WrapperStyles = `
     .${ELEMENT_PERSON_HERO_WRAPPER} {
       display: flex;
       justify-content: space-between;
-      padding-top: ${spacing['7xl']};
+      padding-top: ${token.spacing['7xl']};
     }
   }
 `;

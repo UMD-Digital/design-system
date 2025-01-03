@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeFixedFullScreenProps = {
@@ -8,7 +8,7 @@ type TypeFixedFullScreenProps = {
   context?: HTMLElement | null;
 };
 
-const { media, spacing } = tokens;
+const { media, spacing } = token;
 
 const ELEMENT_CONTAINER = 'modal-screen-container';
 const ELEMENT_CONTAINER_BACKGROUND = 'modal-screen-container-background';
@@ -26,12 +26,12 @@ export const STYLES_MODAL = `
 
   .${ELEMENT_CONTAINER_BACKGROUND} {
     background-color: rgba(0, 0, 0, 0.9);
-    padding: ${spacing.xl} ${spacing.md};
+    padding: ${token.spacing.xl} ${token.spacing.md};
     width: 100%;
     height: 100%;
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     .${ELEMENT_CONTAINER_BACKGROUND} {
       padding: 10vh 10vw;
     }

@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeTextProps = {
@@ -11,8 +11,6 @@ type TypeTextProps = {
 };
 
 export type TypeTextContainerProps = TypeTextProps;
-
-const { colors, media, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Utility.styles;
 
@@ -44,15 +42,15 @@ const OVERWRITE_TEXT_CENTER_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_TEXT_CEN
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
@@ -66,7 +64,7 @@ const OverwriteTextCenter = `
 // prettier-ignore
 const EyebrowStyles = `  
   .${ELEMENT_HERO_EYEBROW} + * {
-    margin-top: ${spacing.sm} !important;
+    margin-top: ${token.spacing.sm} !important;
   }
 `
 
@@ -74,12 +72,12 @@ const EyebrowStyles = `
 const HeadlineStyles = `
   .${ELEMENTS_HERO_HEADLINE} {
     text-transform: uppercase;
-    color: ${colors.black};
+    color: ${token.color.black};
     text-wrap: balance;
   }
 
   .${ELEMENTS_HERO_HEADLINE} + * {
-    margin-top: ${spacing.md};
+    margin-top: ${token.spacing.md};
   }
 
   .${ELEMENTS_HERO_HEADLINE} > a:hover,
@@ -107,19 +105,19 @@ const TextStyles = `
   })}
 
   .${ELEMENTS_HERO_RICH_TEXT} + * {
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
   }
 `
 
 // prettier-ignore
 const ActionStyles = `
   * + .${ELEMENTS_HERO_ACTION} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     * + .${ELEMENTS_HERO_ACTION} {
-      margin-top: ${spacing.lg};
+      margin-top: ${token.spacing.lg};
     }
   }
 `;

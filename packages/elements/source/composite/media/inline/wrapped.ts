@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { Image as LayoutImage } from 'layout';
 import CaptionContainer from '../elements/caption';
@@ -11,7 +11,7 @@ export type TypeMediaInlineWrappedRequirements = {
   isThemeDark?: boolean;
 };
 
-const { spacing } = tokens;
+const { spacing } = token;
 
 const BREAKPOINT = 400;
 
@@ -24,7 +24,7 @@ const ELEMENT_OBJECT_WRAPPED_CONTAINER = 'element-object-wrapped-container';
 const ObjectContainer = `
   .${ELEMENT_OBJECT_WRAPPED_CONTAINER} {
     display: inline-block;
-    padding-bottom: ${spacing.sm};
+    padding-bottom: ${token.spacing.sm};
     max-width: 100%;
   }
 `;
@@ -99,10 +99,10 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
 
         if (isAlignmentRight) {
           objectContainer.style.float = `right`;
-          objectContainer.style.paddingLeft = `${spacing.md}`;
+          objectContainer.style.paddingLeft = `${token.spacing.md}`;
         } else {
           objectContainer.style.float = 'left';
-          objectContainer.style.paddingRight = `${spacing.md}`;
+          objectContainer.style.paddingRight = `${token.spacing.md}`;
         }
       } else {
         objectContainer.style.width = '100%';

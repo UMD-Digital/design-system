@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 import { BlockOverlay as LayoutBlockOverlay } from 'layout';
 import { TextLockupSmall } from 'macros';
@@ -12,8 +12,6 @@ type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
   actions?: HTMLElement | null;
   isQuote?: boolean;
 };
-
-const { spacing, colors } = tokens;
 
 const ELEMENT_NAME = 'umd-card-overlay-image';
 const ATTRIBUTE_CTA_ICON = 'cta-icon';
@@ -29,15 +27,15 @@ const OVERWRITE_CTA_ICON_BLOCK_DATE = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION
 
 const OverwriteCtaIcon = `
   ${OVERWRITE_CTA_ICON_BLOCK_CONTAINER} {
-    padding-right: ${spacing.xl};
+    padding-right: ${token.spacing.xl};
   }
 
   ${OVERWRITE_CTA_ICON_BLOCK_RICH_TEXT} {
-    padding-right: ${spacing.xs};
+    padding-right: ${token.spacing.xs};
   }
 
   ${OVERWRITE_CTA_ICON_BLOCK_DATE} {
-    padding-right: ${spacing.xs};
+    padding-right: ${token.spacing.xs};
   }
 `;
 
@@ -45,11 +43,11 @@ const QuoteStyles = `
   .${ELEMENT_CARD_OVERLAY_QUOTE} {
     width: 41px;
     height: 30px;
-    margin-bottom: ${spacing.xs};
+    margin-bottom: ${token.spacing.xs};
   }
 
   .${ELEMENT_CARD_OVERLAY_QUOTE} svg {
-    fill: ${colors.red};
+    fill: ${token.color.red};
   }
 `;
 
@@ -62,7 +60,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   }
 
   .${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} * {
-    color: ${colors.white} !important;
+    color: ${token.color.white} !important;
   }
 
   ${LayoutBlockOverlay.Styles}

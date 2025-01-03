@@ -1,4 +1,4 @@
-import { colors, spacing } from '../../tokens';
+import { color, spacing } from '../../token';
 import { create } from '../../utilities';
 import { baseInput } from './_base';
 import { valid, invalid } from './_state';
@@ -58,7 +58,7 @@ const dateTimeBase = {
 };
 
 const dateTimeWrapperBase = {
-  backgroundColor: colors.white,
+  backgroundColor: color.white,
   position: 'relative',
 
   [`&:before, &:after`]: {

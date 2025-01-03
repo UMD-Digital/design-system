@@ -1,14 +1,14 @@
 import {
-  tokens,
+  token,
   root,
   utilities,
 } from '@universityofmaryland/web-elements-styles';
 
-const { font, media } = tokens;
+const { font, media } = token;
 const styles = utilities.transform.outputStyles;
 
 export const base = {
-  ...tokens,
+  ...token,
   fontFamily: font.family,
   fontSize: font.size,
   fontWeight: font.weight,

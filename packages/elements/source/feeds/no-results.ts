@@ -1,8 +1,6 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import { CallToAction } from 'composite';
 import * as Utility from 'utilities';
-
-const { spacing, colors } = tokens;
 
 const { convertJSSObjectToStyles } = Utility.styles;
 
@@ -34,10 +32,10 @@ const STYLES_NO_RESULTS = `
   })}
 
   .${CONTAINER_NO_RESULTS} p {
-    margin-bottom: ${spacing.md};
+    margin-bottom: ${token.spacing.md};
     text-transform: uppercase;
     font-weight: 800;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 `;
 

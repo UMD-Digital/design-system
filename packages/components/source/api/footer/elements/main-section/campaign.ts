@@ -1,9 +1,9 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-elements-styles';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 import { VARIABLES } from '../../globals';
 import { UMDFooterElement } from '../../index';
 
-const { spacing } = tokens;
+const { spacing } = token;
 
 const { THEME_OPTION_LIGHT } = VARIABLES;
 
@@ -12,7 +12,7 @@ export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
 export const CampaignStyles = `
   .${CAMPAIGN_COLUMN_WRAPPER} > a {
     display: block;
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
     max-width: 250px;
   }
 `;

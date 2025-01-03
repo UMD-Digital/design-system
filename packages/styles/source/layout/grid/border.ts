@@ -1,4 +1,4 @@
-import { colors } from '../../tokens';
+import { color } from '../../token';
 import { create } from '../../utilities';
 import { base } from './base';
 
@@ -6,7 +6,7 @@ import { base } from './base';
 const classNamePrefix = 'umd-layout-grid-border';
 
 const boarderBase = {
-  border: `1px solid ${colors.gray.light}`,
+  border: `1px solid ${color.gray.light}`,
   borderBottom: `none`,
 };
 
@@ -22,8 +22,8 @@ export const columnsTwo = create.jssObject({
   ],
 
   '& > *': {
-    borderBottom: `1px solid ${colors.gray.light}`,
-    borderRight: `1px solid ${colors.gray.light}`,
+    borderBottom: `1px solid ${color.gray.light}`,
+    borderRight: `1px solid ${color.gray.light}`,
   },
 
   '&:not(:has(> :last-child:nth-child(2)))': {
@@ -31,11 +31,11 @@ export const columnsTwo = create.jssObject({
     borderRight: `none`,
 
     '& > *:first-child': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
 
     '& > *:nth-child(2)': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
   },
 });
@@ -52,8 +52,8 @@ export const columnsThree = create.jssObject({
   ],
 
   '& > *': {
-    borderBottom: `1px solid ${colors.gray.light}`,
-    borderRight: `1px solid ${colors.gray.light}`,
+    borderBottom: `1px solid ${color.gray.light}`,
+    borderRight: `1px solid ${color.gray.light}`,
   },
 
   '&:not(:has(> :last-child:nth-child(3)))': {
@@ -61,15 +61,15 @@ export const columnsThree = create.jssObject({
     borderRight: `none`,
 
     '& > *:first-child': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
 
     '& > *:nth-child(2)': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
 
     '& > *:nth-child(3)': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
   },
 });
@@ -86,8 +86,8 @@ export const columnsFour = create.jssObject({
   ],
 
   '& > *': {
-    borderBottom: `1px solid ${colors.gray.light}`,
-    borderRight: `1px solid ${colors.gray.light}`,
+    borderBottom: `1px solid ${color.gray.light}`,
+    borderRight: `1px solid ${color.gray.light}`,
   },
 
   '&:not(:has(> :last-child:nth-child(4)))': {
@@ -95,19 +95,19 @@ export const columnsFour = create.jssObject({
     borderRight: `none`,
 
     '& > *:first-child': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
 
     '& > *:nth-child(2)': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
 
     '& > *:nth-child(3)': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
 
     '& > *:nth-child(4)': {
-      borderTop: `1px solid ${colors.gray.light}`,
+      borderTop: `1px solid ${color.gray.light}`,
     },
   },
 });

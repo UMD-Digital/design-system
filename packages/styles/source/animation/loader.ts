@@ -1,4 +1,4 @@
-import { colors, spacing } from '../tokens';
+import { color, spacing } from '../token';
 import { create } from '../utilities';
 
 // Consistent naming
@@ -8,10 +8,10 @@ export const keyFrameBoxShadow = create.jssObject({
   className: `${classNamePrefix}-keyframes`,
   '@keyframes loader-animation': {
     '0%, 100%': {
-      boxShadow: `0 ${spacing.min} 0 -3px ${colors.gray.dark}`,
+      boxShadow: `0 ${spacing.min} 0 -3px ${color.gray.dark}`,
     },
     '50%': {
-      boxShadow: `0 ${spacing.min} 0 0 ${colors.gray.dark}`,
+      boxShadow: `0 ${spacing.min} 0 0 ${color.gray.dark}`,
     },
   },
 });
@@ -32,7 +32,7 @@ export const dots = create.jssObject({
     'umd-loader',
   ],
 
-  color: colors.black,
+  color: color.black,
   position: 'relative',
   transform: `translate(${spacing.sm}, -4px)`,
   ...dotsAniamtion,

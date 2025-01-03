@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypeLogoRequirements = {
@@ -8,7 +8,6 @@ export type TypeLogoRequirements = {
   text?: HTMLElement | null;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -31,22 +30,22 @@ const OVERWRITE_BORDER_ASSET = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_BORDER} .${
 // prettier-ignore
 const VariantThemeStyles = `
   ${OVERWRITE_THEME_DARK_ASSET} {
-    background-color: ${colors.gray.darker};
-    border: 1px solid ${colors.gray.dark};
-    padding: ${spacing.xl};
+    background-color: ${token.color.gray.darker};
+    border: 1px solid ${token.color.gray.dark};
+    padding: ${token.spacing.xl};
   }
 
   ${OVERWRITE_THEME_DARK_TEXT},
   ${OVERWRITE_THEME_DARK_TEXT} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   };
 `;
 
 // prettier-ignore
 const VariantBorderStyles = `
   ${OVERWRITE_BORDER_ASSET} {
-    border: 1px solid ${colors.gray.light};
-    padding: ${spacing.xl};
+    border: 1px solid ${token.color.gray.light};
+    padding: ${token.spacing.xl};
     height: 100%;
   }
 `;
@@ -55,7 +54,7 @@ const VariantBorderStyles = `
 const TextStyles = `
   .${ELEMENT_LOGO_BLOCK_TEXT},
   .${ELEMENT_LOGO_BLOCK_TEXT} * {
-    color: ${colors.gray.darker};
+    color: ${token.color.gray.darker};
   }
 
   ${convertJSSObjectToStyles({
@@ -100,7 +99,7 @@ const STYLES_LOGO_BLOCK_ELEMENT = `
   }
 
   .${ELEMENT_LOGO_BLOCK_ASSET} + * {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   ${TextStyles}

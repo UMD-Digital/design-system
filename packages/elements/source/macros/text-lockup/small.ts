@@ -2,8 +2,8 @@ import {
   animation,
   layout,
   typography,
-  tokens,
-} from '@universityofmaryland/web-elements-styles';
+  token,
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypeTextLockupSmall = {
@@ -15,7 +15,6 @@ export type TypeTextLockupSmall = {
   isThemeDark?: boolean;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -43,7 +42,7 @@ const DarkThemeStyles = `
   ${IS_THEME_DARK_RICH_TEXT},
   ${IS_THEME_DARK_DATE},
   ${IS_THEME_DARK_DATE} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${convertJSSObjectToStyles({
@@ -63,7 +62,7 @@ const DarkThemeStyles = `
 // prettier-ignore
 const EyebrowStyles = `
   .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} * {
@@ -91,13 +90,13 @@ const EyebrowStyles = `
 // prettier-ignore
 const HeadlineStyles = `
   * + .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} {
-    margin-top: ${spacing.min}
+    margin-top: ${token.spacing.min}
   }
 
   .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE},
   .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} * {
     font-weight: 700;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   ${convertJSSObjectToStyles({
@@ -123,11 +122,11 @@ const HeadlineStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} {
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
   }
 
   ${convertJSSObjectToStyles({
@@ -150,7 +149,7 @@ const TextStyles = `
   .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a:hover,
   .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a:focus {
     text-decoration: underline;
-    color: ${colors.red};
+    color: ${token.color.red};
   }
 `;
 
@@ -161,13 +160,13 @@ const DateStyles = `
   }
 
   * + .${ELEMENT_TEXT_LOCKUP_SMALL_DATE} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
     display: block;
   }
 
   .${ELEMENT_TEXT_LOCKUP_SMALL_DATE},
   .${ELEMENT_TEXT_LOCKUP_SMALL_DATE} * {
-    color: ${colors.gray.mediumAA};
+    color: ${token.color.gray.mediumAA};
   }
 
   ${convertJSSObjectToStyles({
@@ -186,7 +185,7 @@ const DateStyles = `
 // prettier-ignore
 const ActionStyles = `
   .${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   ${convertJSSObjectToStyles({

@@ -1,8 +1,8 @@
 import {
   typography,
-  tokens,
+  token,
   layout,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeSectionIntroDefaultProps = {
@@ -14,7 +14,6 @@ type TypeSectionIntroDefaultProps = {
   includesAnimation?: boolean;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
@@ -49,10 +48,10 @@ const OverwriteAnimationLine = `
   @keyframes intro-line {
     from {
       height: 0;
-      transform: translateY(${spacing['lg']});
+      transform: translateY(${token.spacing['lg']});
    }
     to {
-      height: ${spacing['4xl']};
+      height: ${token.spacing['4xl']};
       transform: translateY(0);
     }
   }
@@ -60,7 +59,7 @@ const OverwriteAnimationLine = `
   @media (prefers-reduced-motion: no-preference) {
     ${OVERWRITE_ANIMATION_WRAPPER}:before {
       height: 0;
-      transform: translateY(${spacing['lg']});
+      transform: translateY(${token.spacing['lg']});
     }
   }
 
@@ -102,22 +101,22 @@ const OverwriteAnimationText = `
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINTER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
 // prettier-ignore
 const OverwriteSeparator = `
   ${OVERWRITE_SEPARATOR_WRAPPER} {
-    padding-top: ${spacing['6xl']};
+    padding-top: ${token.spacing['6xl']};
     position: relative;
   }
 
   ${OVERWRITE_SEPARATOR_WRAPPER}:before {
     content: '';
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
     position: absolute;
-    height: ${spacing['4xl']};
+    height: ${token.spacing['4xl']};
     width: 2px;
     left: calc(50% - 1px);
     top: 0;
@@ -133,7 +132,7 @@ const HeadlineStyles = `
   })}
 
   .${ELEMENT_HEADLINE} {
-    color: ${colors.black};
+    color: ${token.color.black};
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -143,7 +142,7 @@ const HeadlineStyles = `
 const TextStyles = `
   * + .${ELEMENT_RICH_TEXT},
   * + .${ELEMENT_RICH_TEXT_SMALL} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
@@ -161,7 +160,7 @@ const TextStyles = `
   .${ELEMENT_RICH_TEXT},
   .${ELEMENT_RICH_TEXT} * {
     font-weight: 700;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   ${convertJSSObjectToStyles({
@@ -180,7 +179,7 @@ const TextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${ELEMENT_ACTIONS} {
-    margin-top: ${spacing.md};
+    margin-top: ${token.spacing.md};
   }
 
   ${convertJSSObjectToStyles({
@@ -199,7 +198,7 @@ const ActionStyles = `
 const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
   .${ELEMENT_INTRO_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: ${spacing.maxWidth.small};
+    max-width: ${token.spacing.maxWidth.small};
     margin: 0 auto;
   }
 

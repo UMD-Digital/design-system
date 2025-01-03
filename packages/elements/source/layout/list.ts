@@ -1,8 +1,6 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { TextLockupSmall } from 'macros';
 import ImageContainer from './image';
-
-const { colors, spacing } = tokens;
 
 const ATTRIBUTE_ALIGNED = 'aligned';
 const ATTRIBUTE_THEME = 'theme';
@@ -27,7 +25,7 @@ const OVERWRITE_ALIGNED_IMAGE_CONTAINER = `${IS_ALIGNED} .${ImageContainer.Eleme
 // prettier-ignore
 const VariationThemeStyles = `
   ${IS_THEME_DARK} .${ELEMENT_LIST_CONTAINER_WRAPPER} {
-    border-bottom: 1px solid ${colors.gray.dark};
+    border-bottom: 1px solid ${token.color.gray.dark};
   }
 `;
 
@@ -50,13 +48,13 @@ const VariantAlignedStyles = `
 // prettier-ignore
 const TextContainerStyles = `
   ${OVERWRITE_TEXT_CONTAINER} {
-    padding-right: ${spacing.min};
+    padding-right: ${token.spacing.min};
     flex: 1 0;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-right: ${spacing.md};
+      padding-right: ${token.spacing.md};
       order: 2;
     }
   }
@@ -95,8 +93,8 @@ const ImageContainerStyles = `
 // prettier-ignore
 const WrapperStyles = `
   .${ELEMENT_LIST_CONTAINER_WRAPPER} {
-    padding-bottom: ${spacing.md};
-    border-bottom: 1px solid ${colors.gray.light};
+    padding-bottom: ${token.spacing.md};
+    border-bottom: 1px solid ${token.color.gray.light};
     overflow: hidden;
   }
 
@@ -112,7 +110,7 @@ const WrapperStyles = `
 const STYLES_LIST_CONTAINER = `
   .${ELEMENT_LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: ${spacing.maxWidth.small};
+    max-width: ${token.spacing.maxWidth.small};
   }
 
   ${WrapperStyles}

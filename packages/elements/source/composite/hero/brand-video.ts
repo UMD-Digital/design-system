@@ -1,8 +1,8 @@
 import {
-  elementStyles,
-  tokens,
+  element,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import { ButtonVideoState } from 'atomic';
 import { AnimationOverlayBrand } from 'macros';
 import * as Utility from 'utilities';
@@ -14,7 +14,6 @@ type TypeHeroBrandVideoProps = {
   isAnimationOnLoad?: boolean;
 };
 
-const { colors, media, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
@@ -46,7 +45,7 @@ const HeadlineStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: elementStyles.text.rich.simpleLarge,
+      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: element.text.rich.simpleLarge,
     },
   })}
 
@@ -73,7 +72,7 @@ const TextStyles = `
   }
 
   * + .${ELEMENT_HERO_ELEMENT_TEXT} {
-    margin-top: ${spacing.md};
+    margin-top: ${token.spacing.md};
   }
 `;
 
@@ -83,11 +82,11 @@ const TextContainerStyles = `
     text-align: center;
     width: calc(100% - 24px);
     max-width: 950px;
-    padding: ${spacing.xl} ${spacing.md};
+    padding: ${token.spacing.xl} ${token.spacing.md};
   }
 
   .${ELEMENT_HERO_ELEMENT_TEXT_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
@@ -114,7 +113,7 @@ const VideoStyles = `
     left: 0;
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     .${ELEMENT_HERO_ELEMENT_VIDEO} {
       top: 50%;
       left: 50%;

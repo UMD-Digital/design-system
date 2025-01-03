@@ -1,4 +1,4 @@
-import { tokens, layout } from '@universityofmaryland/web-elements-styles';
+import { token, layout } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeLayoutImageExpandProps = {
@@ -7,7 +7,7 @@ type TypeLayoutImageExpandProps = {
 };
 
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Utility.styles;
-const { media, spacing } = tokens;
+const { media, spacing } = token;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'layout-image-expand-declaration';
@@ -40,8 +40,8 @@ const TextLock = `
 const TextContainer = `
   .${ELEMENT_EXPAND_TEXT_CONTAINER} {
     position: relative;
-    padding-top: ${spacing.max};
-    padding-bottom: ${spacing.max};
+    padding-top: ${token.spacing.max};
+    padding-bottom: ${token.spacing.max};
     height: 100%;
     z-index: 9999;
   }
@@ -64,7 +64,7 @@ const TextAnimation = `
     }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_TEXT_ANIMATION} {
@@ -119,7 +119,7 @@ const ImageSizeContainer = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_SIZE} {
-        width: ${spacing.maxWidth.smallest};
+        width: ${token.spacing.maxWidth.smallest};
         height: 70vh;
         animation: img-size ease-in-out forwards;
         animation-timeline: view();
@@ -220,7 +220,7 @@ const STYLES_LAYOUT_IMAGE_EXPAND = `
     }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPLAND_DECLARATION} {

@@ -1,4 +1,4 @@
-import { spacing } from '../../tokens';
+import { spacing } from '../../token';
 import { create } from '../../utilities';
 
 // Consistent naming

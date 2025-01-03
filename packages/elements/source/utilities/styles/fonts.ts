@@ -1,4 +1,4 @@
-import { typography } from '@universityofmaryland/web-elements-styles';
+import { typography } from '@universityofmaryland/web-styles-library';
 
 export enum CampaignFontSize {
   Maximum = 'maximum',

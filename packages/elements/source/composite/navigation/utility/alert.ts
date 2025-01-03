@@ -1,9 +1,9 @@
 import {
-  elementStyles,
+  element,
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import Actions from 'composite/call-to-action';
 import * as Utility from 'utilities';
 
@@ -41,7 +41,6 @@ type CacheCheckResult = {
 
 const { FetchGraphQL } = Utility.network;
 const { convertJSSObjectToStyles } = Utility.styles;
-const { colors, spacing } = tokens;
 
 const QUERY = `
   query CampusAlertsQuery {
@@ -120,34 +119,34 @@ const OVERWRITE_CONTAINER_TYPE_CLOSED = `${CONTAINER}${IS_TYPE_CLOSED}`;
 // prettier-ignore
 const OverwriteTypeGeneral = `
   ${OVERWRITE_CONTAINER_TYPE_GENERAL} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_CONTAINER_TYPE_GENERAL} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${ALERT_TITLE} {
-    color: ${colors.gold};
+    color: ${token.color.gold};
   }
 
    ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${CLOSE_BUTTON} > svg {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 `
 
 // prettier-ignore
 const OverwriteTypeClosed = `
   ${OVERWRITE_CONTAINER_TYPE_CLOSED} {
-    background-color: ${colors.gold};
+    background-color: ${token.color.gold};
   }
 
   ${OVERWRITE_CONTAINER_TYPE_CLOSED} * {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
    ${OVERWRITE_CONTAINER_TYPE_CLOSED} .${CLOSE_BUTTON} > svg {
-    fill: ${colors.black};
+    fill: ${token.color.black};
   }
 `
 
@@ -167,7 +166,7 @@ const CloseButtonStyles = `
   }
 
   ${CLOSE_BUTTON} > svg {
-    fill: ${colors.black};
+    fill: ${token.color.black};
     width: 24px;
     height: 24px;
   }
@@ -186,12 +185,12 @@ const TextStyles = `
   }
 
   ${ALERT_TITLE} + * {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${ALERT_TEXT}`]: elementStyles.text.rich.advanced,
+      [`${ALERT_TEXT}`]: element.text.rich.advanced,
     },
   })}
 
@@ -201,7 +200,7 @@ const TextStyles = `
   }
 
   ${ALERT_TEXT} + * {
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
   }
 
   ${CTA} {
@@ -213,15 +212,15 @@ const TextStyles = `
 const WrapperStyles = `
   ${WRAPPER} {
     position: relative;
-    padding-top: ${spacing.md};
-    padding-bottom: ${spacing.md};
-    padding-right: ${spacing.lg};
+    padding-top: ${token.spacing.md};
+    padding-bottom: ${token.spacing.md};
+    padding-right: ${token.spacing.lg};
   }
 
   @container (min-width: ${BREAKPOINTS.MEDIUM}px) {
     ${WRAPPER} {
-      padding-top: ${spacing.lg};
-      padding-bottom: ${spacing.lg};
+      padding-top: ${token.spacing.lg};
+      padding-bottom: ${token.spacing.lg};
     }
   }
 `
@@ -239,8 +238,8 @@ const LockStyles = `
 const ContainerStyles = `
   ${CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    background-color: ${colors.gray.lighter};
-    border-left: 4px solid ${colors.red};
+    background-color: ${token.color.gray.lighter};
+    border-left: 4px solid ${token.color.red};
     transition: height ${ANIMATION.SPEED}ms;
     overflow: hidden;
     position: relative;
@@ -248,7 +247,7 @@ const ContainerStyles = `
 
   @container (min-width: ${BREAKPOINTS.LARGE}px) {
     ${CONTAINER} {
-      border-left: 8px solid ${colors.red};
+      border-left: 8px solid ${token.color.red};
     }
   }
 `

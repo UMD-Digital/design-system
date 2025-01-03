@@ -1,4 +1,4 @@
-import { colors, spacing, media } from './tokens';
+import { color, media, spacing } from './token';
 
 type ElementStyles = Record<string, any>;
 
@@ -90,7 +90,7 @@ const elements = {
 // Footer with specific styling
 const footer = createElementStyles('umd-element-footer', {
   notDefined: {
-    backgroundColor: colors.black,
+    backgroundColor: color.black,
     height: `calc(${spacing.md} * 20)`,
     '& > *': { display: 'none' },
   },
@@ -107,7 +107,7 @@ const navigation = {
   ),
   ...createElementStyles('umd-element-nav-drawer', {
     notDefined: {
-      backgroundColor: colors.white,
+      backgroundColor: color.white,
       height: '44px',
       width: '44px',
       '& > *': { display: 'none' },

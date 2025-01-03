@@ -1,4 +1,4 @@
-import { layout, tokens } from '@universityofmaryland/web-elements-styles';
+import { layout, token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeGridDisplay = {
@@ -7,7 +7,7 @@ type TypeGridDisplay = {
   isTypeGap?: boolean;
 };
 
-const { media } = tokens;
+const { media } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
@@ -52,20 +52,20 @@ const STYLES_GRID_LAYOUT = `
     },
   })}
 
-  @media (${media.queries.large.min}) {
+  @media (${token.media.queries.large.min}) {
     .${ID_GRID_LAYOUT_CONTAINER}[grid-count] > * {
       min-height: 560px;
     }
   }
 
-  @media (${media.queries.large.min}) {
+  @media (${token.media.queries.large.min}) {
     .umd-grid-column-double {
       grid-column: span 2;
       min-height: 560px;
     }
   }
 
-  @media (${media.queries.highDef.min}) {
+  @media (${token.media.queries.highDef.min}) {
     .${ID_GRID_LAYOUT_CONTAINER}[data-reversed] > *:first-child {
       order: 2;
     }

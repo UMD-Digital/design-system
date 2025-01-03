@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { Image as LayoutImage } from 'layout';
 import CaptionContainer from '../elements/caption';
@@ -9,7 +9,7 @@ export type TypeMediaInlineRequirements = {
   isThemeDark?: boolean;
 };
 
-const { spacing } = tokens;
+const { spacing } = token;
 
 const ELEMENT_MEDIA_INLINE_CONTAINER = 'element-media-with-caption-container';
 const ELEMENT_OBJECT_CAPTION_CONTAINER = 'element-media-caption-container';
@@ -19,7 +19,7 @@ const ObjectContainer = `
   .${ELEMENT_OBJECT_CAPTION_CONTAINER} {
     display: flex;
     flex-direction: column;
-    padding-bottom: ${spacing.sm};
+    padding-bottom: ${token.spacing.sm};
     max-width: 100%;
   }
 `;

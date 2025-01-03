@@ -1,9 +1,9 @@
 import {
-  elementStyles,
+  element,
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
@@ -14,7 +14,6 @@ type TypeHeroDefaultProps = TypeTextContainerProps &
     includesAnimation?: boolean;
   };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const TABLET = 768;
@@ -59,7 +58,7 @@ const OVERWRITE_IMAGE_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .$
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
+      [`${OVERWRITE_EYEBROW}`]: element.text.decoration.ribbon,
     },
   })}
 `;
@@ -122,7 +121,7 @@ const OverwriteTextContainer = `
 
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-top: ${spacing.sm};
+      padding-top: ${token.spacing.sm};
     }
   }
 
@@ -251,7 +250,7 @@ const DefaultStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER} * {
-      color: ${colors.white};
+      color: ${token.color.white};
     }
   }
 
@@ -263,8 +262,8 @@ const DefaultStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER} .${HERO_LOCK} {
-      padding-top: ${spacing['2xl']};
-      padding-bottom: ${spacing['2xl']};
+      padding-top: ${token.spacing['2xl']};
+      padding-bottom: ${token.spacing['2xl']};
     }
   }
 

@@ -1,4 +1,4 @@
-import { colors, media, spacing } from '../../tokens';
+import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 import { valid, invalid } from './_state';
@@ -36,7 +36,7 @@ export const wrapper = create.jssObject({
 
   '&[required] > legend': {
     content: "' *'",
-    color: colors.redDark,
+    color: color.redDark,
   },
 
   "&[aria-invalid='true']": {

@@ -1,4 +1,4 @@
-import { spacing, media } from '../../tokens';
+import { spacing, media } from '../../token';
 import { create } from '../../utilities';
 
 // umd-layout-grid-masonry

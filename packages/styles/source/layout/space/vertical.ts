@@ -1,4 +1,4 @@
-import { colors, media, spacing } from '../../tokens';
+import { media, spacing } from '../../token';
 import { create } from '../../utilities';
 
 // Consistent naming

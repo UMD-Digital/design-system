@@ -1,4 +1,4 @@
-import { colors, spacing } from '../tokens';
+import { color, spacing } from '../token';
 import { sans } from '../typography';
 import { create } from '../utilities';
 
@@ -88,7 +88,7 @@ orderedBase = {
 
     '&:before': {
       content: 'counter(item)',
-      borderRight: `1px solid ${colors.red}`,
+      borderRight: `1px solid ${color.red}`,
       paddingRight: spacing.min,
       right: `calc(100% - ${spacing.lg})`,
     },

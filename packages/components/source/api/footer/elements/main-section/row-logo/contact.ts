@@ -1,6 +1,6 @@
 import {
   animation,
-  tokens,
+  token,
   typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
@@ -13,8 +13,6 @@ import {
   REFERENCES,
 } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
-
-const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = Markup.create;
@@ -58,7 +56,7 @@ const socialOverwriteStyles = `
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
-      margin-top: ${spacing.md};
+      margin-top: ${token.spacing.md};
     }
   }
 `;
@@ -66,13 +64,13 @@ const socialOverwriteStyles = `
 // prettier-ignore
 const HeadlineStyles = `
   .${CONTACT_LIST_HEADLINE} {
-    margin-bottom: ${spacing.min};
-    color: ${colors.white};
+    margin-bottom: ${token.spacing.min};
+    color: ${token.color.white};
   }
 
   .${CONTACT_LIST_HEADLINE} * {
     font-weight: 700;
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${convertJSSObjectToStyles({
@@ -90,7 +88,7 @@ const HeadlineStyles = `
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE},
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} * {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   ${convertJSSObjectToStyles({
@@ -150,8 +148,8 @@ const LinkListStyles = `
 
   .${CONTACT_LINKS_LIST} a:not(:first-child) {
     position: relative;
-    margin-left: ${spacing.min};
-    padding-left: ${spacing.min};
+    margin-left: ${token.spacing.min};
+    padding-left: ${token.spacing.min};
     position: relative;
     background-position: 10px 100%;
   }
@@ -161,7 +159,7 @@ const LinkListStyles = `
     display: inline-block;
     height: 3px;
     width: 3px;
-    background-color: ${colors.white};
+    background-color: ${token.color.white};
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -169,7 +167,7 @@ const LinkListStyles = `
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} a:not(:first-child):before {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 `;
 
@@ -181,13 +179,13 @@ export const ContactContainerStyles = `
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${CONTACT_CONTAINER} {
-      padding-top: ${spacing['md']};
+      padding-top: ${token.spacing['md']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CONTACT_CONTAINER} {
-      padding-left: ${spacing['2xl']};
+      padding-left: ${token.spacing['2xl']};
     }
   }
 

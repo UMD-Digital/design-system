@@ -1,4 +1,4 @@
-import { colors, spacing, media } from '../../tokens';
+import { color, spacing, media } from '../../token';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
 
@@ -26,7 +26,7 @@ export const tailwing = create.jssObject({
     left: `0`,
     width: `100vw`,
     height: '1px',
-    background: `${colors.black}`,
+    background: `${color.black}`,
     zIndex: -1,
   },
 
@@ -42,7 +42,7 @@ export const tailwing = create.jssObject({
       left: `-2px`,
       right: `-2px`,
       height: '100%',
-      backgroundColor: `${colors.white}`,
+      backgroundColor: `${color.white}`,
       zIndex: -1,
 
       [`@media (${media.queries.medium.min})`]: {
@@ -69,7 +69,7 @@ const lineTrailingBefore = {
   right: `0`,
   width: `100vw`,
   height: '1px',
-  background: `${colors.black}`,
+  background: `${color.black}`,
   zIndex: 1,
 };
 
@@ -85,7 +85,7 @@ export const lineTrailing = create.jssObject({
   textTransform: 'uppercase',
   position: 'relative',
   overflow: 'hidden',
-  backgroundColor: `${colors.white}`,
+  backgroundColor: `${color.white}`,
 
   '&::before': {
     ...lineTrailingBefore,
@@ -106,7 +106,7 @@ export const lineTrailing = create.jssObject({
 // umd-text-line-trailing-light
 export const lineTrailingLight = create.jssObject({
   ...lineTrailing,
-  backgroundColor: `${colors.gray.lighter}`,
+  backgroundColor: `${color.gray.lighter}`,
 
   className: [
     `${classNamePrefix}-trailing-light`,
@@ -118,8 +118,8 @@ export const lineTrailingLight = create.jssObject({
 // umd-text-line-trailing-dark
 export const lineTrailingDark = create.jssObject({
   ...lineTrailing,
-  backgroundColor: `${colors.gray.darker}`,
-  color: `${colors.white}`,
+  backgroundColor: `${color.gray.darker}`,
+  color: `${color.white}`,
 
   className: [
     `${classNamePrefix}-trailing-dark`,
@@ -129,7 +129,7 @@ export const lineTrailingDark = create.jssObject({
 
   '&::before': {
     ...lineTrailingBefore,
-    background: `${colors.white}`,
+    background: `${color.white}`,
   },
 });
 
@@ -151,6 +151,6 @@ export const lineAdjustent = create.jssObject({
     left: '-24px',
     width: '2px',
     height: '100%',
-    backgroundColor: colors.red,
+    backgroundColor: color.red,
   },
 });

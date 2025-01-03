@@ -1,4 +1,4 @@
-import { colors, media, spacing } from '../../tokens';
+import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -19,7 +19,7 @@ export const padding = {
 // umd-layout-background-full-light
 export const light = create.jssObject({
   ...padding,
-  backgroundColor: `${colors.gray.lightest}`,
+  backgroundColor: `${color.gray.lightest}`,
 
   className: [
     `${classNamePrefix}-light`,
@@ -31,7 +31,7 @@ export const light = create.jssObject({
 // umd-layout-background-full-dark
 export const dark = create.jssObject({
   ...padding,
-  backgroundColor: `${colors.black}`,
+  backgroundColor: `${color.black}`,
 
   className: [
     `${classNamePrefix}-dark`,

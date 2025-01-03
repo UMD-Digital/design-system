@@ -1,9 +1,9 @@
 import {
-  elementStyles,
+  element,
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import { AnimationCarouselBlocks } from 'macros';
 import * as Utility from 'utilities';
 
@@ -17,7 +17,6 @@ type TypeCarouselCardsRequirements = {
 };
 
 const { convertJSSObjectToStyles } = Utility.styles;
-const { colors, spacing } = tokens;
 
 const MEDIUM = 768;
 const LARGE = 1024;
@@ -109,7 +108,7 @@ const HeadlineStyles = `
 
   .${INTRO_CONTAINER_HEADLINE},
   .${INTRO_CONTAINER_HEADLINE} * {
-    color: ${colors.white};
+    color: ${token.color.white};
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -118,12 +117,12 @@ const HeadlineStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${INTRO_CONTAINER_TEXT} {
-    margin-top: ${spacing.md};
+    margin-top: ${token.spacing.md};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: elementStyles.text.rich.advancedDark,
+      [`.${INTRO_CONTAINER_TEXT}`]: element.text.rich.advancedDark,
     },
   })}
 
@@ -137,11 +136,11 @@ const TextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${INTRO_CONTAINER_CTA} {
-    margin-top: ${spacing.md};
+    margin-top: ${token.spacing.md};
   }
 
   .${INTRO_CONTAINER_CTA} a {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
@@ -149,14 +148,14 @@ const ActionStyles = `
 const IntroContainer = `
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${INTRO_CONTAINER} {
-      margin-bottom: ${spacing.md};
+      margin-bottom: ${token.spacing.md};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${INTRO_CONTAINER} {
-      width: calc(40% - ${spacing['2xl']});
-      padding-right: ${spacing['2xl']};
+      width: calc(40% - ${token.spacing['2xl']});
+      padding-right: ${token.spacing['2xl']};
     }
   }
 
@@ -207,8 +206,8 @@ const ContainerStyles = `
   }
 
   .${CAROUSEL_CONTAINER} {
-    background-color: ${colors.black};
-    padding: ${spacing['3xl']} 0;
+    background-color: ${token.color.black};
+    padding: ${token.spacing['3xl']} 0;
     position: relative;
     overflow: clip;
   }
@@ -221,13 +220,13 @@ const ContainerStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${CAROUSEL_CONTAINER} {
-      padding: ${spacing['4xl']} 0;
+      padding: ${token.spacing['4xl']} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CAROUSEL_CONTAINER} {
-      padding: ${spacing['max']} 0;
+      padding: ${token.spacing['max']} 0;
     }
   }
 
@@ -259,7 +258,7 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
   }
 
   .${ELEMENT_DECLARATION} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
   
   ${AnimationCarouselBlocks.Styles}

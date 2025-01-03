@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-elements-styles';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
 import {
@@ -8,7 +8,7 @@ import {
 import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
-const { spacing } = tokens;
+const { spacing } = token;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
@@ -22,7 +22,7 @@ const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
 const ctaOverwriteStyles = `
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
-      margin-top: ${spacing.md};
+      margin-top: ${token.spacing.md};
     }
   }
 

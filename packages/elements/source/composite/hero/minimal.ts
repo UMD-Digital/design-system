@@ -1,8 +1,8 @@
 import {
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
@@ -13,7 +13,6 @@ type TypeHeroMinimalProps = TypeTextContainerProps &
     isThemeMaryland?: boolean;
   };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const TABLET = 768;
@@ -54,28 +53,28 @@ const OVERWRITE_THEME_MARYLAND_TEXT_WRAPPER = `.${ELEMENT_HERO_CONTAINER}${IS_TH
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} .${TextContainer.Elements.eyebrow} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} {
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} .${TextContainer.Elements.eyebrow} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_TEXT_WRAPPER},
   ${OVERWRITE_THEME_MARYLAND_TEXT_WRAPPER} {
-    border-left: 2px solid ${colors.gold};
+    border-left: 2px solid ${token.color.gold};
   }
 `;
 
@@ -90,11 +89,11 @@ const OverwriteEyebrow = `
   ${OVERWRITE_EYEBROW} {
     text-transform: uppercase;
     font-weight: 600;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
   
   ${OVERWRITE_EYEBROW} + * {
-    margin-top: ${spacing.sm} !important;
+    margin-top: ${token.spacing.sm} !important;
   }
 `;
 
@@ -114,24 +113,24 @@ const OverwriteHeadline = `
 // prettier-ignore
 const OverwriteTextContainer = `
   ${OVERWRITE_TEXT_CONTAINER} {
-    padding: ${spacing.xl} 0;
+    padding: ${token.spacing.xl} 0;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_WITH_IMAGE_TEXT_CONTAINER} {
-      padding: ${spacing['4xl']} 0;
-      width: calc(50% - ${spacing['4xl']});
+      padding: ${token.spacing['4xl']} 0;
+      width: calc(50% - ${token.spacing['4xl']});
     }
   }
 
   ${OVERWRITE_TEXT_CONTAINER_WRAPPER} {
-    padding-left: ${spacing.md};
-    border-left: 2px solid ${colors.red};
+    padding-left: ${token.spacing.md};
+    border-left: 2px solid ${token.color.red};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
     ${OVERWRITE_TEXT_CONTAINER_WRAPPER} {
-      padding-left: ${spacing.lg};
+      padding-left: ${token.spacing.lg};
     }
   }
 `;

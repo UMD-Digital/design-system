@@ -1,9 +1,9 @@
 import {
   animation,
-  elementStyles,
+  element,
   typography,
-  tokens,
-} from '@universityofmaryland/web-elements-styles';
+  token,
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeStatElement = {
@@ -20,7 +20,6 @@ type TypeStatRequirements = TypeStatElement & {
 };
 
 const { convertJSSObjectToStyles } = Utility.styles;
-const { colors, media, spacing } = tokens;
 
 const BLOCK_TEXTURE = `<svg id="stat_block-texture" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" ><defs><style>.cls-1{opacity:.02;}.cls-1,.cls-2{fill:#454545;fill-rule:evenodd;isolation:isolate;stroke-width:0px;}.cls-2{opacity:.04;}</style></defs><path class="cls-1" d="M109.49,0H0v63.18l181.67,182.32L0,427.82v63.18h109.49l244.61-245.5L109.49,0Z"/><path class="cls-2" d="M108.94,0h172.44l244.61,245.5-244.61,245.5H108.94l244.61-245.5L108.94,0ZM0,179.11l58.16-58.29L0,62.54v116.57Z"/></svg>`;
 
@@ -56,15 +55,15 @@ const OVERWRITE_SIZE_LARGE_SUB_TEXT = `.${ELEMENT_STAT_WRAPPER}${IS_SIZE_LARGE} 
 // prettier-ignore
 const VarationThemeDarkStyles = `
   .${ELEMENT_STAT_WRAPPER}${IS_THEME_DARK} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_STAT_DISPLAY} {
-    color: ${colors.gold};
+    color: ${token.color.gold};
   }
 
   ${OVERWRITE_THEME_DARK_SUB_TEXT} {
-    color: ${colors.gray.light};
+    color: ${token.color.gray.light};
   }
 
   ${convertJSSObjectToStyles({
@@ -78,9 +77,9 @@ const VarationThemeDarkStyles = `
 // prettier-ignore
 const VarationDisplayBlockStyles = `
   .${ELEMENT_DISPLAY_BLOCK} {
-    padding: ${spacing.lg} ${spacing.sm};
-    border-top: 2px solid ${colors.red};
-    background-color: ${colors.gray.lightest};
+    padding: ${token.spacing.lg} ${token.spacing.sm};
+    border-top: 2px solid ${token.color.red};
+    background-color: ${token.color.gray.lightest};
     position: relative;
     overflow: hidden;
     height: 100%;
@@ -88,15 +87,15 @@ const VarationDisplayBlockStyles = `
     align-items: center;
   }
 
-  @media (min-width: ${media.breakpoints.large.min}) {
+  @media (min-width: ${token.media.breakpoints.large.min}) {
     .${ELEMENT_DISPLAY_BLOCK} {
-      padding: ${spacing.lg};
+      padding: ${token.spacing.lg};
     }
   }
 
-  @media (min-width: ${media.breakpoints.highDef.min}) {
+  @media (min-width: ${token.media.breakpoints.highDef.min}) {
     .${ELEMENT_DISPLAY_BLOCK} {
-      padding: ${spacing['2xl']} ${spacing['3xl']};
+      padding: ${token.spacing['2xl']} ${token.spacing['3xl']};
     }
   }
 
@@ -151,13 +150,13 @@ const VarationSizeLargeStyles = `
 // prettier-ignore
 const VarationWithLineStyles = `
   ${OVERWRITE_WITH_LINE_WRAPPER} {
-    padding-left: ${spacing.md};
-    border-left: 2px solid ${colors.gold};
+    padding-left: ${token.spacing.md};
+    border-left: 2px solid ${token.color.gold};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${OVERWRITE_WITH_LINE_WRAPPER} {
-      padding-left: ${spacing.xl};
+      padding-left: ${token.spacing.xl};
     }
   }
 `
@@ -177,7 +176,7 @@ const StatDisplayStyles = `
   })}
   
   .${ELEMENT_STAT_DISPLAY} {
-    color: ${colors.red};
+    color: ${token.color.red};
     -webkit-font-smoothing: antialiased;
   }
 
@@ -187,7 +186,7 @@ const StatDisplayStyles = `
   }
 
   .${ELEMENT_STAT_DISPLAY} + * {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
    }
 `;
 
@@ -195,7 +194,7 @@ const StatDisplayStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_TEXT}`]: elementStyles.text.rich.advanced,
+      [`.${ELEMENT_STAT_TEXT}`]: element.text.rich.advanced,
     },
   })}
 
@@ -212,7 +211,7 @@ const TextStyles = `
   })}
 
   .${ELEMENT_STAT_TEXT} {
-    color: ${colors.black};
+    color: ${token.color.black};
     line-height: 1.444;
   }
 
@@ -221,7 +220,7 @@ const TextStyles = `
   }
 
   .${ELEMENT_STAT_TEXT} + * {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
    }
 `;
 
@@ -240,8 +239,8 @@ const SubTextStyles = `
   })}
 
   .${ELEMENT_STAT_SUB_TEXT} {
-    margin-top: ${spacing.min};
-    color: ${colors.gray.mediumAA};
+    margin-top: ${token.spacing.min};
+    color: ${token.color.gray.mediumAA};
   }
 
   .${ELEMENT_STAT_SUB_TEXT} * {

@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';
@@ -28,7 +28,6 @@ type TypeSliderSlideActions = TypeSlideProps & {
   slide: HTMLDivElement;
 };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
@@ -40,7 +39,7 @@ const ELEMENT_NAV_SLIDE_CONTENT = 'nav-slide-action-content';
 // prettier-ignore
 const ContentStyles = `
   * + .${ELEMENT_NAV_SLIDE_CONTENT} {
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
   }
 `;
 
@@ -48,15 +47,15 @@ const ContentStyles = `
 const BackButtonStyles = `
   .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
     display: block;
-    border-bottom: 1px solid ${colors.black};
-    margin-bottom: ${spacing.sm};
-    padding-bottom: ${spacing.sm};
+    border-bottom: 1px solid ${token.color.black};
+    margin-bottom: ${token.spacing.sm};
+    padding-bottom: ${token.spacing.sm};
   }
 
   @media (min-width: 480px) {
     .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
-      margin-bottom: ${spacing.md};
-      padding-bottom: ${spacing.md};
+      margin-bottom: ${token.spacing.md};
+      padding-bottom: ${token.spacing.md};
     }
   }
 
@@ -66,7 +65,7 @@ const BackButtonStyles = `
     letter-Spacing: 1px;
     display: flex;
     align-items: center;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button:hover,
@@ -75,10 +74,10 @@ const BackButtonStyles = `
   }
 
   .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button svg {
-    fill: ${colors.red};
+    fill: ${token.color.red};
     width: 12px;
     height: 12px;
-    margin-right: ${spacing.min};
+    margin-right: ${token.spacing.min};
     transform: rotate(90deg);
   }
 `;
@@ -92,9 +91,9 @@ const HeadlineStyles = `
   })}
 
   .${ELEMENT_NAV_SLIDE_HEADLINE} {
-    margin-bottom: ${spacing.md};
+    margin-bottom: ${token.spacing.md};
     font-weight: 700;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 `;
 

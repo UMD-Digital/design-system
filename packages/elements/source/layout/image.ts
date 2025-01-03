@@ -1,7 +1,6 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
-const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_CAPTION = 'data-caption';
@@ -27,9 +26,9 @@ const STYLES_IMAGE_CONTAINER = `
     right: 0;
     height: auto !important;
     width: auto !important;
-    padding: ${spacing.min};
+    padding: ${token.spacing.min};
     background-color: rgba(0, 0, 0, 0.5);
-    color: ${colors.white};
+    color: ${token.color.white};
     z-index: 99;
   }
 

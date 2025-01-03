@@ -1,4 +1,4 @@
-import { colors, media, spacing } from '../../tokens';
+import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -26,7 +26,7 @@ export const white = create.jssObject({
 // umd-layout-background-wrap-light
 export const light = create.jssObject({
   ...box,
-  backgroundColor: `${colors.gray.lighter}`,
+  backgroundColor: `${color.gray.lighter}`,
 
   className: [
     `${classNamePrefix}-light`,
@@ -38,7 +38,7 @@ export const light = create.jssObject({
 // umd-layout-background-wrap-dark
 export const dark = create.jssObject({
   ...box,
-  backgroundColor: `${colors.gray.darker}`,
+  backgroundColor: `${color.gray.darker}`,
 
   className: `${classNamePrefix}-dark`,
 });

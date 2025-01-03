@@ -1,4 +1,4 @@
-import { colors, spacing } from '../../tokens';
+import { color, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 
@@ -13,7 +13,7 @@ export const label = {
 
   '&:has(+ input[required]):after': {
     content: "' *'",
-    color: colors.redDark,
+    color: color.redDark,
   },
 
   '&[for]': {

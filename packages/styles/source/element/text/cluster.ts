@@ -1,4 +1,4 @@
-import { colors, spacing } from '../../tokens';
+import { color, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 
@@ -37,7 +37,7 @@ export const pillList = create.jssObject({
 
   '& > *': {
     ...pill,
-    backgroundColor: colors.gray.lightest,
+    backgroundColor: color.gray.lightest,
   },
 
   '& svg': {
@@ -45,7 +45,7 @@ export const pillList = create.jssObject({
   },
 
   '& a:hover, & a:focus': {
-    backgroundColor: colors.gold,
+    backgroundColor: color.gold,
   },
 });
 
@@ -61,21 +61,21 @@ export const pillListDark = create.jssObject({
 
   '& > *': {
     ...pill,
-    backgroundColor: colors.gray.dark,
-    color: colors.white,
+    backgroundColor: color.gray.dark,
+    color: color.white,
   },
 
   '& svg': {
     ...pillSvg,
-    fill: colors.white,
+    fill: color.white,
   },
 
   '& a:hover, & a:focus': {
-    backgroundColor: colors.gray.lighter,
-    color: colors.black,
+    backgroundColor: color.gray.lighter,
+    color: color.black,
 
     '& svg': {
-      fill: colors.black,
+      fill: color.black,
     },
   },
 });
@@ -90,7 +90,7 @@ export const pillDoNotUse = create.jssObject({
   marginTop: `-${spacing.min}`,
 
   '& > *': {
-    backgroundColor: colors.gray.lightest,
+    backgroundColor: color.gray.lightest,
     display: 'inline-block',
     padding: `${spacing.min} ${spacing.xs}`,
     marginBottom: '0',

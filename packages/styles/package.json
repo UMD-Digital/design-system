@@ -1,5 +1,5 @@
 {
-  "name": "@universityofmaryland/web-elements-styles",
+  "name": "@universityofmaryland/web-styles-library",
   "version": "1.0.0-beta.0",
   "description": "Styles used for use in the University of Maryland Design System",
   "main": "dist/index.js",

@@ -1,4 +1,4 @@
-import { colors, font, spacing } from '../../tokens';
+import { color, font, spacing } from '../../token';
 import { sans } from '../../typography';
 import * as animation from '../../animation';
 import { create } from '../../utilities';
@@ -39,7 +39,7 @@ const simpleBase = {
     transition: 'color 0.5s',
 
     '&:hover, &:focus': {
-      color: colors.red,
+      color: color.red,
     },
   },
 };
@@ -143,10 +143,10 @@ export const advancedDark = create.jssObject({
   ...advanced,
   ...animation.nestedElements.linksDark,
 
-  color: colors.white,
+  color: color.white,
 
   '& *': {
-    color: colors.white,
+    color: color.white,
   },
 
   className: [

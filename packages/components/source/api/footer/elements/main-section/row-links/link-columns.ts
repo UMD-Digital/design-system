@@ -1,6 +1,6 @@
 import {
   animation,
-  tokens,
+  token,
   typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles, Markup } from 'utilities';
@@ -11,8 +11,6 @@ import {
   VARIABLES,
   REFERENCES,
 } from '../../../globals';
-
-const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 const { SlotWithDefaultStyling } = Markup.create;
@@ -136,7 +134,7 @@ const HeadlineStyles = `
   })}
 
   .${ROW_LINKS_COLUMN_HEADLINE} {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${token.spacing.sm};
     font-weight: 700;
   }
 
@@ -150,11 +148,11 @@ const HeadlineStyles = `
 // prettier-ignore
 const LinkStyles = `
   .${ROW_LINKS_COLUMN_LINKS}:not(:last-child) {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${token.spacing.sm};
   }
 
   .${ROW_LINKS_COLUMN_LINKS} > * {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${token.spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
@@ -172,7 +170,7 @@ const LinkStyles = `
 
   .${ROW_LINKS_COLUMN_LINKS} a,
   .${ROW_LINKS_COLUMN_LINKS} span {
-    color: ${colors.gray.light};
+    color: ${token.color.gray.light};
   }
 
   ${convertJSSObjectToStyles({
@@ -189,27 +187,27 @@ const ColumnWrapper = `
     .${ROW_LINKS_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0 ${spacing.md};
+      gap: 0 ${token.spacing.md};
     }
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
-      margin-bottom: ${spacing.lg};
+      margin-bottom: ${token.spacing.lg};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
-      padding-right: ${spacing.xs};
+      padding-right: ${token.spacing.xs};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
-      margin-left: ${spacing.lg};
-      padding-left: ${spacing.lg};
-      border-left: 1px solid ${colors.gray.dark};
+      margin-left: ${token.spacing.lg};
+      padding-left: ${token.spacing.lg};
+      border-left: 1px solid ${token.color.gray.dark};
     }
   }
 
@@ -224,7 +222,7 @@ const ColumnWrapper = `
 export const LinkColumnStyles = `
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
-      padding-top: ${spacing.md};
+      padding-top: ${token.spacing.md};
     }
   }
 

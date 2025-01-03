@@ -1,7 +1,6 @@
-import { typography, tokens } from '@universityofmaryland/web-elements-styles';
+import { typography, token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
-const { colors } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_EVENT_DATE_WRAPPER = 'event-sign-wrapper';
@@ -116,11 +115,11 @@ const WrapperStyles = `
     text-align: center;
     max-width: 200px;
     font-weight: 700;
-    color: ${colors.black} !important;
+    color: ${token.color.black} !important;
   }
 
   .${ELEMENT_EVENT_DATE_WRAPPER}${IS_DARK} * {
-    color: ${colors.white} !important;
+    color: ${token.color.white} !important;
   }
 `;
 

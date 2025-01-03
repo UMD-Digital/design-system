@@ -1,9 +1,9 @@
 import {
-  elementStyles,
+  element,
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypePathwayTextContainer = {
@@ -17,7 +17,6 @@ export type TypePathwayTextContainer = {
   isThemeMaryland?: boolean;
 };
 
-const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 400;
@@ -50,34 +49,34 @@ const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_THEME
 // prettier-ignore
 const VarationThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `
 
 // prettier-ignore
 const VarationThemeLight = `
   ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 `
 
 // prettier-ignore
 const VarationThemeMaryland = `
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `
 
 // prettier-ignore
 const EyebrowStyles = `
   .${ELEMENT_TEXT_CONTAINER_EYEBROW} {
-    margin-bottom: ${spacing.sm};
-    color: ${colors.black} !important;
+    margin-bottom: ${token.spacing.sm};
+    color: ${token.color.black} !important;
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: elementStyles.text.decoration.ribbon,
+      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: element.text.decoration.ribbon,
     },
   })}
 `;
@@ -98,7 +97,7 @@ const HeadlineStyles = `
 
   .${ELEMENT_TEXT_CONTAINER_HEADLINE},
   .${ELEMENT_TEXT_CONTAINER_HEADLINE} * {
-    color: ${colors.black};
+    color: ${token.color.black};
     font-weight: 800;
     text-transform: uppercase;
     text-wrap: balance;
@@ -114,7 +113,7 @@ const HeadlineStyles = `
 // prettier-ignore
 const DetailsRowStyles = `
   * + .${ELEMENT_TEXT_CONTAINER_EVENT_DETAILS} {
-    margin-top: ${spacing.md};
+    margin-top: ${token.spacing.md};
     display: block;
   }
 `;
@@ -122,43 +121,43 @@ const DetailsRowStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     * + .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} {
-      margin-top: ${spacing.md};
+      margin-top: ${token.spacing.md};
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: elementStyles.text.rich.advanced,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.advanced,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: elementStyles.text.rich.advanced,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: element.text.rich.advanced,
     },
   })}
 
   .${ELEMENT_TEXT_CONTAINER_RICH_TEXT},
   .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} * {
     line-height: 1.5em;
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
   }
 `;
 
 // prettier-ignore
 const ActionStyles = `
   * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
-      margin-top: ${spacing.lg};
+      margin-top: ${token.spacing.lg};
     }
   }
 
@@ -177,26 +176,26 @@ const ActionStyles = `
 const StatsStyles = `
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${ELEMENTS_TEXT_CONTAINER_STATS} {
-      margin-top: ${spacing.lg};
-      padding-top: ${spacing.md};
-      border-top: 1px solid ${colors.gray.light};
+      margin-top: ${token.spacing.lg};
+      padding-top: ${token.spacing.md};
+      border-top: 1px solid ${token.color.gray.light};
     }
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM }px) {
     .${ELEMENTS_TEXT_CONTAINER_STATS} {
-      margin-top: ${spacing['2xl']};
+      margin-top: ${token.spacing['2xl']};
     }
   }
 
   .${ELEMENTS_TEXT_CONTAINER_STATS}:has(> :nth-child(2)) {
     display: grid;
-    grid-gap: ${spacing.md};
+    grid-gap: ${token.spacing.md};
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${ELEMENTS_TEXT_CONTAINER_STATS}:has(> :nth-child(2)) {
-      grid-gap: ${spacing.lg};
+      grid-gap: ${token.spacing.lg};
       grid-template-columns: repeat(2, 1fr);
     }
   }

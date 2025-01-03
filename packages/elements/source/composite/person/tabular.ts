@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { List as LayoutList, Image as LayoutImage } from 'layout';
 import PersonTextContainer, {
@@ -10,7 +10,6 @@ type TypeTabularPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
 };
 
-const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 400;
@@ -47,7 +46,7 @@ const OVERWRITE_TEXT_CONTAINER_CONTACT = `${OVERWRITE_TEXT_CONTAINER_WITH_CONTAC
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
-      background-color: ${colors.gray.darker};
+      background-color: ${token.color.gray.darker};
     }
   }
 `;
@@ -69,8 +68,8 @@ const OverwriteImagesStyles = `
     ${OVERWRITE_IMAGE_CONTAINER} {
       float: none;
       width: 100%;
-      margin-bottom: ${spacing.md};
-      background-color: ${colors.gray.lighter};
+      margin-bottom: ${token.spacing.md};
+      background-color: ${token.color.gray.lighter};
       display: flex;
       justify-content: center;
     }
@@ -79,7 +78,7 @@ const OverwriteImagesStyles = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       width: 96px;
-      margin-right: ${spacing.md};
+      margin-right: ${token.spacing.md};
     }
   }
 
@@ -121,7 +120,7 @@ const OverwriteTextStyles = `
     ${OVERWRITE_TEXT_CONTAINER_WITH_CONTACT} {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-gap: ${spacing.md};
+      grid-gap: ${token.spacing.md};
     }
   }
 
@@ -139,7 +138,7 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
   }
   
   .${ELEMENT_PERSON_TABULAR_CONTAINER} + * {
-    margin-top: ${spacing.md}; 
+    margin-top: ${token.spacing.md}; 
   }
 
   ${PersonTextContainer.Styles}

@@ -1,11 +1,11 @@
-import * as tokens from '../tokens';
+import * as token from '../token';
 import { root as utilities } from '../root';
 import { transform } from '../utilities';
 
 const { outputStyles: components } = transform;
-const { font, media } = tokens;
+const { color, font, media } = token;
 const base = {
-  ...tokens,
+  ...token,
   fontFamily: font.family,
   fontSize: font.size,
   fontWeight: font.weight,
@@ -21,6 +21,7 @@ const tailwindBase = Object.fromEntries(
 
 const theme = {
   screens: media.breakpoints,
+  colors: color,
   ...tailwindBase,
 };
 

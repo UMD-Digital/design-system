@@ -1,8 +1,8 @@
 import {
   animation,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import EventElements from './elements';
 import * as Utility from 'utilities';
 
@@ -12,7 +12,7 @@ type TypeEventLockupDate = {
   isThemeDark?: boolean;
 };
 
-const { font, spacing } = tokens;
+const { font, spacing } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -25,7 +25,7 @@ const EVENT_HEADLINE = 'event-lockup-headline';
 // prettier-ignore
 const HeadlineStyles = `
   .${EVENT_HEADLINE} {
-    margin-left: ${spacing.sm};
+    margin-left: ${token.spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
@@ -43,7 +43,7 @@ const HeadlineStyles = `
   @media (max-width: 767px) {
     .${EVENT_HEADLINE},
     .${EVENT_HEADLINE} * {
-      font-size: ${font.size.sm};
+      font-size: ${token.font.size.sm};
       font-weight: 600;
     }
   }

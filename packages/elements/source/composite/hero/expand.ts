@@ -1,8 +1,8 @@
 import {
-  elementStyles,
-  tokens,
+  element,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeContent = {
@@ -20,7 +20,6 @@ type TypeAssets = {
 type TypeLayoutImageExpandProps = TypeContent & TypeAssets;
 
 const { convertJSSObjectToStyles } = Utility.styles;
-const { colors, spacing, media } = tokens;
 
 const ELEMENT_NAME = 'umd-hero-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'hero-expand-declaration';
@@ -95,7 +94,7 @@ const ImageSizeContainer = `
     }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_IMAGE_SIZE} {
@@ -155,7 +154,7 @@ const ImageContainer = `
     }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
@@ -177,35 +176,35 @@ const TextContainer = `
     height: 100%;
     z-index: 9999;
     text-align: center;
-    padding: ${spacing.md} 0;
+    padding: ${token.spacing.md} 0;
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-      padding: ${spacing['3xl']} 0;
+      padding: ${token.spacing['3xl']} 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
   }
 
-  @media (${media.queries.highDef.min}) {
+  @media (${token.media.queries.highDef.min}) {
     .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-      padding: ${spacing['6xl']} 0;
+      padding: ${token.spacing['6xl']} 0;
     }
   }
 
   .${ELEMENT_EXPAND_TEXT_TOP_CONTAINER} + * {
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
   }
 
   .${ELEMENT_EXPAND_TEXT_EYEBROW} + * {
-    margin-top: ${spacing.md};
+    margin-top: ${token.spacing.md};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: elementStyles.text.decoration.ribbon,
+      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: element.text.decoration.ribbon,
     },
   })}
 
@@ -216,14 +215,14 @@ const TextContainer = `
   })}
 
   .${ELEMENT_EXPAND_TEXT_HEADLINE} {
-    color: ${colors.white};
+    color: ${token.color.white};
     font-weight: 800;
     text-transform: uppercase;
     text-wrap: balance;
   }
 
   .${ELEMENT_EXPAND_TEXT_ACTIONS} + * {
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
   }
 `;
 
@@ -233,7 +232,7 @@ const elementPosition = `
     position: relative;
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_STICKY} {
@@ -266,7 +265,7 @@ const STYLES_HERO_EXPAND = `
     }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPLAND_DECLARATION} {

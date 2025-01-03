@@ -1,11 +1,11 @@
-import { colors, spacing } from '../../tokens';
+import { color, spacing } from '../../token';
 import { sans } from '../../typography';
 
 export const baseInput = {
   ...sans.small,
-  backgroundColor: colors.white,
-  border: `1px solid ${colors.gray.light}`,
-  color: colors.black,
+  backgroundColor: color.white,
+  border: `1px solid ${color.gray.light}`,
+  color: color.black,
   cursor: 'text',
   display: 'block',
   outlineOffset: '1px',
@@ -16,24 +16,24 @@ export const baseInput = {
   width: '100%',
 
   '&::placeholder': {
-    color: colors.gray.mediumAA,
+    color: color.gray.mediumAA,
   },
 
   '&[readonly]': {
-    color: colors.gray.mediumAA,
+    color: color.gray.mediumAA,
     fontStyle: 'italic',
     cursor: 'default',
   },
 
   [`&:focus, &:focus-within`]: {
-    borderBottom: `1px solid ${colors.black}`,
+    borderBottom: `1px solid ${color.black}`,
   },
 };
 
 export const baseInputChoice = {
   appearance: 'none',
-  backgroundColor: colors.white,
-  border: `1px solid ${colors.gray.light}`,
+  backgroundColor: color.white,
+  border: `1px solid ${color.gray.light}`,
   cursor: 'pointer',
   flex: 'none',
   height: spacing.md,
@@ -50,13 +50,13 @@ export const baseInputChoice = {
 export const baseInputChoiceWrapper = {
   alignItems: 'center',
   cursor: 'pointer',
-  color: colors.black,
+  color: color.black,
   display: 'inline-flex',
   gap: '16px',
   justifyContent: 'flex-start',
   transition: 'color 0.5s ease-in-out',
 
   [`&:hover, &:focus, &:focus-within`]: {
-    color: colors.redDark,
+    color: color.redDark,
   },
 };

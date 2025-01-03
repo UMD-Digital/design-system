@@ -1,4 +1,4 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { TextLockupSmallScaling, TextLockupSmall } from 'macros';
 
@@ -13,7 +13,6 @@ type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
   isThemeLight?: boolean;
 };
 
-const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 500;
@@ -41,18 +40,18 @@ const OVERWRITE_TEXT_LOCK_ACTIONS = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} 
 // prettier-ignore
 const OverwriteCtaIcon  = `
   ${OVERWRITE_CTA_ICON_BLOCK_CONTAINER} {
-    padding-right: ${spacing['2xl']};
+    padding-right: ${token.spacing['2xl']};
   }
 `;
 
 // prettier-ignore
 const OverwriteThemeDark  = `
   ${OVERWRITE_THEME_DARK_WRAPPER} {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_WRAPPER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
@@ -95,17 +94,17 @@ const OverwriteTextContainer = `
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: ${spacing.md};
-    padding-top: ${spacing.lg};
-    padding-bottom: ${spacing.lg};
+    padding: ${token.spacing.md};
+    padding-top: ${token.spacing.lg};
+    padding-bottom: ${token.spacing.lg};
   }
 
   ${OVERWRITE_TEXT_LOCK_ACTIONS} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   ${OVERWRITE_SCALING_TEXT_LOCK_CONTAINER} > div > *:not(.${TextLockupSmall.Elements.actions}) {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${token.spacing.sm};
   }
 
   @media (min-width: 768px) {
@@ -124,7 +123,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   }
 
   .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER} {
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
     height: 100%;
     overflow: hidden;
   }

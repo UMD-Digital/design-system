@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 
@@ -11,7 +11,7 @@ type TypeEventBlockProps = {
   isThemeDark?: boolean;
 };
 
-const { spacing } = tokens;
+const { spacing } = token;
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-event-block';
@@ -38,7 +38,7 @@ const OverwriteImageContainer = `
 // prettier-ignore
 const DetailsRowStyles = `
   * + .${ELEMENT_EVENT_BLOCK_DETAILS} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
     display: block;
   }
 `;

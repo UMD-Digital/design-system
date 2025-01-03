@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypeCardOverlayCtaIcon = {
@@ -6,8 +6,6 @@ export type TypeCardOverlayCtaIcon = {
   isThemeDark?: boolean;
   isThemeLight?: boolean;
 };
-
-const { colors, spacing } = tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
@@ -24,25 +22,25 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CTA_ICON_CONTAINER}${IS_THEME
 // prettier-ignore
 const OverwriteThemeLight = `
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} svg,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} path {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:focus {
-    background-color: ${colors.white};
-    border: 1px solid ${colors.gray.darker};
+    background-color: ${token.color.white};
+    border: 1px solid ${token.color.gray.darker};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover svg,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover path,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:focus svg,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:focus path {
-    fill: ${colors.gray.darker};
+    fill: ${token.color.gray.darker};
   }
 `;
 
@@ -50,13 +48,13 @@ const OverwriteThemeLight = `
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} a:hover,
   ${OVERWRITE_THEME_DARK_CONTAINER} a:focus {
-    background-color: ${colors.gray.darker};
-    border: 1px solid ${colors.white};
+    background-color: ${token.color.gray.darker};
+    border: 1px solid ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} a:hover svg path,
   ${OVERWRITE_THEME_DARK_CONTAINER} a:focus svg path {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 `;
 
@@ -64,8 +62,8 @@ const OverwriteThemeDark = `
 const STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT = `
   .${ELEMENT_CTA_ICON_CONTAINER} {
     position: absolute;
-    bottom: ${spacing.sm};
-    right: ${spacing.sm};
+    bottom: ${token.spacing.sm};
+    right: ${token.spacing.sm};
     z-index: 9999;
   }
 
@@ -77,14 +75,14 @@ const STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT = `
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${colors.white};
+    background-color: ${token.color.white};
     transition: background-color 0.3s ease-in-out;
   }
   
   .${ELEMENT_CTA_ICON_CONTAINER} svg {
     height: 15px;
     width: 15px;
-    fill: ${colors.gray.darker};
+    fill: ${token.color.gray.darker};
     transition: background-color 0.3s ease-in-out;
   }
 

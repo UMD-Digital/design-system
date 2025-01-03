@@ -1,7 +1,4 @@
-import {
-  elementStyles,
-  tokens,
-} from '@universityofmaryland/web-elements-styles';
+import { element, token } from '@universityofmaryland/web-styles-library';
 import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 import * as Utility from 'utilities';
@@ -16,7 +13,6 @@ type TypeEventFeatureProps = {
   isThemeDark?: boolean;
 };
 
-const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 650;
@@ -36,7 +32,7 @@ const OVERWRITE_THEME_DARK_EYEBROW = `.${ELEMENT_EVENT_FEATURE_CONTAINER}${IS_TH
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_EYEBROW} {
-    color: ${colors.black} !important;
+    color: ${token.color.black} !important;
   }
 `;
 
@@ -45,10 +41,10 @@ const OverwriteImageContainer = `
   .${ELEMENT_EVENT_SIGN_WRAPPER} {
     position: absolute;
     z-index: 9;
-    bottom: ${spacing.min};
-    left: ${spacing.min};
-    background-color: ${colors.white};
-    padding: ${spacing.sm} ${spacing.sm} ${spacing.min} ${spacing.sm};
+    bottom: ${token.spacing.min};
+    left: ${token.spacing.min};
+    background-color: ${token.color.white};
+    padding: ${token.spacing.sm} ${token.spacing.sm} ${token.spacing.min} ${token.spacing.sm};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
@@ -61,11 +57,11 @@ const OverwriteImageContainer = `
 // prettier-ignore
 const DetailsMeta = `
   * + .${ELEMENT_EVENT_FEATURE_META_WRAPPER} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   .${ELEMENT_EVENT_FEATURE_META_WRAPPER} + * {
-    margin-top: ${spacing.sm} !important;
+    margin-top: ${token.spacing.sm} !important;
   }
 `;
 
@@ -73,12 +69,12 @@ const DetailsMeta = `
 const EyebrowStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
+      [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: element.text.decoration.ribbon,
     },
   })}
 
   .${ELEMENT_EVENT_FEATURE_EYEBROW} {
-    margin-bottom: ${spacing.sm};
+    margin-bottom: ${token.spacing.sm};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {

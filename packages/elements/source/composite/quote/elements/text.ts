@@ -1,8 +1,8 @@
 import {
   typography,
   layout,
-  tokens,
-} from '@universityofmaryland/web-elements-styles';
+  token,
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypeQuoteTextContainer = {
@@ -18,7 +18,6 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
   isSizeLarge?: boolean;
 };
 
-const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
@@ -58,14 +57,14 @@ const VarationSizeLarge = `
 // prettier-ignore
 const VarationThemeDark = `
   ${IS_THEME_DARK} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `
 
 // prettier-ignore
 const VarationThemeMaryland = `
   ${IS_THEME_MARYLAND} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `
 
@@ -77,7 +76,7 @@ const QuoteStyles = `
 
   .${TEXT_CONTAINER_QUOTE_WRAPPER} {
     font-weight: 700;
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   .${TEXT_CONTAINER_QUOTE_WRAPPER} * {
@@ -104,11 +103,11 @@ const QuoteStyles = `
 // prettier-ignore
 const AttributionStyles = `
   * + .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} {
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} * {
@@ -135,7 +134,7 @@ const AttributionSubTextStyles = `
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} {
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
     font-style: italic;
   }
 
@@ -159,7 +158,7 @@ const AttributionSubTextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   ${convertJSSObjectToStyles({

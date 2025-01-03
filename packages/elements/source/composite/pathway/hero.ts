@@ -1,8 +1,8 @@
 import {
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, {
@@ -15,7 +15,7 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
     includesAnimation?: boolean;
   };
 
-const { spacing } = tokens;
+const { spacing } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 1000;
@@ -83,13 +83,13 @@ const OverwriteImageRightStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-right: ${spacing['2xl']};
+      padding-right: ${token.spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-right: ${spacing['4xl']};
+      padding-right: ${token.spacing['4xl']};
     }
   }
 `;
@@ -110,13 +110,13 @@ const OverwriteImageLeftStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-left: ${spacing['2xl']};
+      padding-left: ${token.spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-left: ${spacing['4xl']};
+      padding-left: ${token.spacing['4xl']};
     }
   }
 `;
@@ -162,19 +162,19 @@ const OverwriteImageContainerStyles = `
 const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${spacing.md} 0;
+      padding: ${token.spacing.md} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${spacing['4xl']} 0;
+      padding: ${token.spacing['4xl']} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${spacing['8xl']} 0;
+      padding: ${token.spacing['8xl']} 0;
     }
   }
 

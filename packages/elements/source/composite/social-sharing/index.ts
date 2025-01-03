@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeSocialSharingProps = {
@@ -10,8 +10,6 @@ type TypeSocialSharingProps = {
   title?: string | null;
   url?: string | null;
 };
-
-const { colors, media, spacing } = tokens;
 
 const ATTRIBUTE_FIXED = 'fixed';
 
@@ -25,15 +23,15 @@ const OVERWRITE_FIXED_CONTAINER = `.${ELEMENT_SOCIAL_SHARING_CONTAINER}${IS_FIXE
 
 // prettier-ignore
 const OverwriteFixed = `
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     ${OVERWRITE_FIXED_CONTAINER} {
       flex-direction: column;
     }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     ${OVERWRITE_FIXED_CONTAINER} > *:not(:last-child) {
-      border-right: 1px solid ${colors.gray.light};
+      border-right: 1px solid ${token.color.gray.light};
       border-bottom: none;
     }
   }
@@ -47,13 +45,13 @@ const ContainerStyles = `
   }
   
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} > * {
-    height: ${spacing['2xl']};
-    width: ${spacing['2xl']};
+    height: ${token.spacing['2xl']};
+    width: ${token.spacing['2xl']};
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid ${colors.gray.light};
-    background-color: ${colors.white};
+    border: 1px solid ${token.color.gray.light};
+    background-color: ${token.color.white};
     transition: background-color 250ms ease-in-out;
   }
 
@@ -61,10 +59,10 @@ const ContainerStyles = `
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} > button:focus,
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} > a:hover,
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} > a:focus {
-    background-color: ${colors.gray.dark};
+    background-color: ${token.color.gray.dark};
 
     & svg path {
-      fill: ${colors.white};
+      fill: ${token.color.white};
     }
   }
 
@@ -78,7 +76,7 @@ const ContainerStyles = `
   }
   
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} svg path {
-    fill: ${colors.black};
+    fill: ${token.color.black};
   }
 
   .${ELEMENT_SOCIAL_SHARING_CONTAINER} svg#icon_facebook {

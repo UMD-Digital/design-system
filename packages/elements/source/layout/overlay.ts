@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { TextLockupSmallScaling, type TypeTextLockupSmall } from 'macros';
 
@@ -6,7 +6,7 @@ export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
   image?: HTMLImageElement | HTMLAnchorElement | null;
 };
 
-const { spacing } = tokens;
+const { spacing } = token;
 
 const SMALL = 350;
 
@@ -114,9 +114,9 @@ const STYLES_BLOCK_OVERLAY_ELEMENT = `
 
   .${ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER} {
     height: 100%;
-    padding: ${spacing.md};
-    padding-bottom: ${spacing.lg};
-    padding-top: ${spacing['4xl']};
+    padding: ${token.spacing.md};
+    padding-bottom: ${token.spacing.lg};
+    padding-top: ${token.spacing['4xl']};
     overflow: hidden;
     position: relative;
     display: flex;
@@ -132,7 +132,7 @@ const STYLES_BLOCK_OVERLAY_ELEMENT = `
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER} {
-      padding-top: ${spacing['8xl']};
+      padding-top: ${token.spacing['8xl']};
       min-height: 450px;
     }
   }

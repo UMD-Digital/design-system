@@ -1,8 +1,8 @@
 import {
   animation,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import PersonContact, { TypeContactProps } from './contact';
 
@@ -16,8 +16,6 @@ export type TypePersonProps = TypeContactProps & {
   displayType?: string;
   isThemeDark?: boolean;
 };
-
-const { spacing, colors } = tokens;
 
 const { convertJSSObjectToStyles } = Utility.styles;
 
@@ -46,7 +44,7 @@ const OVERWRITE_HAS_CONTACT_CONTAINER = `.${ELEMENT_PERSON_TEXT_CONTAINER}${IS_H
 // prettier-ignore
 const ThemeDarkStyles = `
   ${IS_DARK_THEME_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${convertJSSObjectToStyles({
@@ -60,8 +58,8 @@ const ThemeDarkStyles = `
 const NameStyles = `
   .${ELEMENT_PERSON_NAME_CONTAINER} {
     font-weight: 700;
-    margin-bottom: ${spacing.min};
-    color: ${colors.black};
+    margin-bottom: ${token.spacing.min};
+    color: ${token.color.black};
     display: block;
   }
 
@@ -112,7 +110,7 @@ const AssociationStyles = `
 // prettier-ignore
 const PronounsStyles = `
   * + .${ELEMENT_PERSON_PRONOUNS_CONTAINER} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   .${ELEMENT_PERSON_PRONOUNS_CONTAINER} {
@@ -136,7 +134,7 @@ const AdditonalContactStyles = `
 // prettier-ignore
 const SubTextStyles = `
   * + .${ELEMENT_PERSON_SUB_TEXT_CONTAINER} {
-    margin-top: ${spacing.min};
+    margin-top: ${token.spacing.min};
   }
 
   .${ELEMENT_PERSON_SUB_TEXT_CONTAINER} {
@@ -153,7 +151,7 @@ const SubTextStyles = `
 // prettier-ignore
 const ActionsStyles = `
   * + .${ELEMENT_PERSON_ACTIONS_CONTAINER} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 `;
 

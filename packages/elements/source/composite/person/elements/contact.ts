@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypeContactProps = {
@@ -9,8 +9,6 @@ export type TypeContactProps = {
   additionalContact?: HTMLElement | null;
   isThemeDark?: boolean;
 };
-
-const { spacing, colors } = tokens;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -27,36 +25,36 @@ const IS_DARK_THEME_CONTACT_ITEM = `.${ELEMENT_PERSON_CONTACT_CONTAINER}${IS_DAR
 // prettier-ignore
 const ThemeDarkStyles = `
   ${IS_DARK_THEME_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${IS_DARK_THEME_CONTACT_ITEM} > span:first-child {
-    background-color: ${colors.gray.darker};
+    background-color: ${token.color.gray.darker};
   }
 
   ${IS_DARK_THEME_CONTACT_ITEM} svg path {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 
   ${IS_DARK_THEME_CONTACT_ITEM}:hover > span:first-child,
   ${IS_DARK_THEME_CONTACT_ITEM}:focus > span:first-child {
-    background-color: ${colors.gray.light};
+    background-color: ${token.color.gray.light};
   }
 
   ${IS_DARK_THEME_CONTACT_ITEM}:hover path,
   ${IS_DARK_THEME_CONTACT_ITEM}:focus path {
-    fill: ${colors.gray.dark};
+    fill: ${token.color.gray.dark};
   }
 
   ${IS_DARK_THEME_CONTACT_ITEM} > span:last-child {
-    color: ${colors.gray.light};
+    color: ${token.color.gray.light};
   }
 `;
 
 // prettier-ignore
 const ContactContainerStyles = `
   * + .${ELEMENT_PERSON_CONTACT_CONTAINER} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 `;
 
@@ -72,7 +70,7 @@ const ContactItemStyles = `
   }
 
   .${ELEMENT_PERSON_CONTACT_ITEM} path {
-    fill: ${colors.black};
+    fill: ${token.color.black};
     transition: fill 0.3s;
   }
 
@@ -82,24 +80,24 @@ const ContactItemStyles = `
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: ${spacing.sm};
-    background-color: ${colors.gray.lightest};
+    margin-right: ${token.spacing.sm};
+    background-color: ${token.color.gray.lightest};
     transition: background-color 0.3s;
   }
 
   .${ELEMENT_PERSON_CONTACT_ITEM} > span:last-child {
     line-height: 1.25em;
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
   }
 
   .${ELEMENT_PERSON_CONTACT_ITEM}:hover > span:first-child,
   .${ELEMENT_PERSON_CONTACT_ITEM}:focus > span:first-child {
-    background-color: ${colors.gray.dark};
+    background-color: ${token.color.gray.dark};
   }
 
   .${ELEMENT_PERSON_CONTACT_ITEM}:hover path,
   .${ELEMENT_PERSON_CONTACT_ITEM}:focus path {
-    fill: ${colors.gray.light};
+    fill: ${token.color.gray.light};
   }
 
   a.${ELEMENT_PERSON_CONTACT_ITEM}:hover > span:last-child,

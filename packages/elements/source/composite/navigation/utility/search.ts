@@ -1,10 +1,8 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 
 type TypeUtilitySearchProps = {
   isSearchDomain?: boolean;
 };
-
-const { colors, spacing } = tokens;
 
 const SEARCH_URL = 'https://search.umd.edu';
 const ANIMATION_IN_SPEED = 800;
@@ -35,7 +33,7 @@ const OverwriteLayoutDesktop = `
     position: absolute;
     top: 48px;
     right: 0;
-    background-color: ${colors.white};
+    background-color: ${token.color.white};
     transition: height ${ANIMATION_OUT_SPEED}ms;
   }
 
@@ -50,7 +48,7 @@ const OverwriteLayoutDesktop = `
 
 const OverwriteLayoutMobile = `
   ${OVERWRITE_UTILITY_FORM_LAYOUT_MOBILE} {
-    padding: ${spacing.md} ${spacing.lg};
+    padding: ${token.spacing.md} ${token.spacing.lg};
     order: 1;
     display: block;
     height: auto;
@@ -72,8 +70,8 @@ const FormElementsStyles = `
 
   .${ELEMENT_UTILITY_FORM} input[type="submit"] {
     border: none;
-    background-color: ${colors.red};
-    color: ${colors.white};
+    background-color: ${token.color.red};
+    color: ${token.color.white};
     font-weight: 700;
     font-size: 12px;
     transition: background ${ANIMATION_OUT_SPEED}ms;
@@ -83,7 +81,7 @@ const FormElementsStyles = `
 
   .${ELEMENT_UTILITY_FORM} input[type="submit"]:hover,
   .${ELEMENT_UTILITY_FORM} input[type="submit"]:focus {
-    background-color: ${colors.redDark};
+    background-color: ${token.color.redDark};
     transition: background ${ANIMATION_IN_SPEED}ms;
   }
 `;

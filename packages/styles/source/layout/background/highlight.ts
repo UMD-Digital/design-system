@@ -1,4 +1,4 @@
-import { colors, media, spacing } from '../../tokens';
+import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -6,7 +6,7 @@ const classNamePrefix = 'umd-layout-background-highlight';
 
 const box = {
   padding: `${spacing.md}`,
-  borderLeft: `2px solid ${colors.red}`,
+  borderLeft: `2px solid ${color.red}`,
 
   [`@media (${media.queries.tablet.min})`]: {
     padding: `${spacing.lg}`,
@@ -31,7 +31,7 @@ export const white = create.jssObject({
 // umd-layout-background-highlight-light
 export const light = create.jssObject({
   ...box,
-  backgroundColor: `${colors.gray.lighter}`,
+  backgroundColor: `${color.gray.lighter}`,
 
   className: [
     `${classNamePrefix}-light`,
@@ -43,7 +43,7 @@ export const light = create.jssObject({
 // umd-layout-background-highlight-dark
 export const dark = create.jssObject({
   ...box,
-  backgroundColor: `${colors.gray.darker}`,
+  backgroundColor: `${color.gray.darker}`,
 
   className: [
     `${classNamePrefix}-dark`,

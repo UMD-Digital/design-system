@@ -1,7 +1,5 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-
-const { colors, spacing } = tokens;
 
 const ELEMENT_SLIDE_INDICATOR_CONTAINER = 'slide-indicator-container';
 const ELEMENT_SLIDE_INDICATOR_LINE = 'slide-indicator-line';
@@ -16,7 +14,7 @@ const LineStyles = `
     height: 24px;
     width: 80px;
     transition: left 500ms;
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
     z-index: 99;
   }
 `
@@ -26,7 +24,7 @@ const ButtonStyles = `
   .${ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER} {
     width: 80px;
     height: 100%;
-    background-color: ${colors.gray.light};
+    background-color: ${token.color.gray.light};
     position: relative;
   }
 
@@ -37,7 +35,7 @@ const ButtonStyles = `
     width: 100%;
     height: 22px;
     display: block;
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
     z-index: 99;
   }
 `
@@ -54,7 +52,7 @@ const STYLES_INDICATOR = `
 
   .${ELEMENT_SLIDE_INDICATOR_CONTAINER} > span {
     display: block;
-    width: ${spacing.sm};
+    width: ${token.spacing.sm};
     height:  22px;
     z-index: 999;
     position: relative;
@@ -149,14 +147,14 @@ const CreateSlideIndicator = ({
     buttons.forEach((button) => {
       const spacer = document.createElement('span');
       const overlay = document.createElement('span');
-      let spacerColor: string = colors.white;
+      let spacerColor: string = token.color.white;
 
       if (isThemeDark && !overlayColor) {
-        spacerColor = colors.black;
+        spacerColor = token.color.black;
       }
 
       if (isThemeLight && !overlayColor) {
-        spacerColor = colors.gray.lightest;
+        spacerColor = token.color.gray.lightest;
       }
 
       spacer.style.backgroundColor = spacerColor;

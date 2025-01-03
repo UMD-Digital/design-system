@@ -1,4 +1,4 @@
-import { typography, tokens } from '@universityofmaryland/web-elements-styles';
+import { typography, token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type LocationType = {
@@ -29,8 +29,6 @@ export type TypeMetaDisplay = EventType & {
   showTime?: boolean;
 };
 
-const { colors, spacing } = tokens;
-
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MOBILE = 400;
@@ -50,11 +48,11 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_EVENTS_DATE_ROW}[${ATTRIBUTE_
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} svg path {
-     fill: ${colors.white};
+     fill: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
  }
 `;
 
@@ -73,7 +71,7 @@ const DateRow = `
 
   @container ${ELEMENT_NAME} (min-width: ${MOBILE}px) {
     .${ELEMENT_EVENTS_DATE_ROW_DATE} > *:not(:first-child) {
-      margin-left: ${spacing.xs};
+      margin-left: ${token.spacing.xs};
     }
   }
 
@@ -99,7 +97,7 @@ const STYLES_EVENT_META = `
   }
 
   .${ELEMENT_EVENTS_DATE_ROW} + * {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   .${ELEMENT_EVENTS_DATE_ROW_WRAPPER} {
@@ -119,7 +117,7 @@ const STYLES_EVENT_META = `
   })}
 
   .${ELEMENT_EVENTS_DATE_ROW_TEXT} {
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
     font-weight: 400;
   }
 

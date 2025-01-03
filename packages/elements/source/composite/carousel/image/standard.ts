@@ -1,8 +1,8 @@
 import {
-  elementStyles,
-  tokens,
+  element,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import { ButtonFullScreen } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import {
@@ -45,7 +45,6 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
     isThemeDark?: boolean;
   };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 500;
@@ -84,38 +83,38 @@ const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER},
   ${OVERWRITE_THEME_DARK_TEXT_CONTAINER},
   ${OVERWRITE_THEME_DARK_INDICATOR} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
-    background-color: ${colors.gray.dark};
+    background-color: ${token.color.gray.dark};
   }
 
   ${OVERWRITE_THEME_DARK_TEXT_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} > svg {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 `;
 
 // prettier-ignore
 const IndicatorContainerStyles = `
   .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
-    padding: ${spacing.md};
-    background-color: ${colors.gray.lightest};
+    padding: ${token.spacing.md};
+    background-color: ${token.color.gray.lightest};
     display: flex;
     justify-content: center;
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
-      padding: ${spacing.lg};
+      padding: ${token.spacing.lg};
     }
   }
 `;
@@ -126,7 +125,7 @@ const OverlayImageContainerStyles = `
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${colors.gray.dark};
+    background-color: ${token.color.gray.dark};
   }
 
   .${ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER} img {
@@ -138,14 +137,14 @@ const OverlayImageContainerStyles = `
 // prettier-ignore
 const TextContainerStyles = `
   .${ELEMENT_SLIDE_TEXT_CONTAINER} {
-    padding: ${spacing.md};
+    padding: ${token.spacing.md};
     padding-bottom: 0;
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${ELEMENT_SLIDE_TEXT_CONTAINER} {
-      padding: ${spacing.lg};
+      padding: ${token.spacing.lg};
       padding-bottom: 0;
     }
   }
@@ -157,13 +156,13 @@ const TextContainerStyles = `
   })}
 
   .${ELEMENT_SLIDE_RICH_TEXT} {
-    margin-top: ${spacing.min};
-    color: ${colors.gray.dark}
+    margin-top: ${token.spacing.min};
+    color: ${token.color.gray.dark}
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDE_RICH_TEXT}`]: elementStyles.text.rich.advanced,
+      [`.${ELEMENT_SLIDE_RICH_TEXT}`]: element.text.rich.advanced,
     },
   })}
 `
@@ -172,7 +171,7 @@ const TextContainerStyles = `
 const ImageContainerStyles = `
   .${ELEMENT_SLIDE_IMAGE_CONTAINER} {
     position: relative;
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   .${ELEMENT_SLIDE_IMAGE_WRAPPER} {
@@ -205,7 +204,7 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
 
   .${ELEMENT_CAROUSEL_IMAGE_CONTAINER} {
     overflow: hidden;
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
   }
 
   ${AnimationIndicator.Styles}

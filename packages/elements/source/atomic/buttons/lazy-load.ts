@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { CallToAction } from 'composite';
 
 type LazyLoadCreate = {
@@ -13,7 +13,7 @@ export type TypeLazyLoad = LazyLoadCreate & {
   offset: number;
 };
 
-const { spacing } = tokens;
+const { spacing } = token;
 
 const ID_LAZY_LOAD_BUTTON = 'button-lazy-load';
 
@@ -23,7 +23,7 @@ const STYLES_LAZY_LOAD_BUTTON = `
   .${ID_LAZY_LOAD_BUTTON} {
     display: flex;
     justify-content: center;
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
   }
 `;
 

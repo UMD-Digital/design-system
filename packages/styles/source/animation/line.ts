@@ -1,4 +1,4 @@
-import { colors } from '../tokens';
+import { color } from '../token';
 import { create } from '../utilities';
 
 const baseStyles = {
@@ -57,7 +57,7 @@ const slideUnder = {
       backgroundSize: '100% 2px',
     },
 
-    '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(colors.black),
+    '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(color.black),
   },
   grayDarkRed: {
     ...baseStyles.link,
@@ -69,8 +69,8 @@ const slideUnder = {
     },
 
     '& > *:not(svg):not(.sr-only)': getSlideUnderTwoColorStyle(
-      colors.gray.dark,
-      colors.red,
+      color.gray.dark,
+      color.red,
     ),
   },
   grayRed: {
@@ -83,8 +83,8 @@ const slideUnder = {
     },
 
     '& > *:not(svg):not(.sr-only)': getSlideUnderTwoColorStyle(
-      colors.gray.light,
-      colors.red,
+      color.gray.light,
+      color.red,
     ),
   },
   gold: {
@@ -95,7 +95,7 @@ const slideUnder = {
       backgroundSize: '100% 2px',
     },
 
-    '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(colors.gold),
+    '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(color.gold),
   },
   red: {
     ...baseStyles.link,
@@ -105,7 +105,7 @@ const slideUnder = {
       backgroundSize: '100% 2px',
     },
 
-    '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(colors.red),
+    '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(color.red),
   },
   white: {
     ...baseStyles.link,
@@ -115,7 +115,7 @@ const slideUnder = {
       backgroundSize: '100% 2px',
     },
 
-    '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(colors.white),
+    '& > *:not(svg):not(.sr-only)': getSlideUnderStyle(color.white),
   },
 };
 
@@ -130,17 +130,17 @@ export const fadeUnder = {
   },
   dark: {
     ...baseStyles.link,
-    backgroundImage: createSolidGradient(colors.white),
+    backgroundImage: createSolidGradient(color.white),
     backgroundPosition: 'left calc(100% - 1px)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 1px',
-    color: colors.white,
+    color: color.white,
     transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
 
     [`&:hover, &:focus`]: {
-      backgroundImage: createSolidGradient(colors.gold),
+      backgroundImage: createSolidGradient(color.gold),
       backgroundPosition: 'left calc(100%)',
-      color: colors.white,
+      color: color.white,
       textDecoration: 'none',
     },
   },
@@ -154,9 +154,9 @@ export const fadeUnder = {
     transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
 
     [`&:hover, &:focus`]: {
-      backgroundImage: createSolidGradient(colors.red),
+      backgroundImage: createSolidGradient(color.red),
       backgroundPosition: 'left calc(100%)',
-      color: colors.red,
+      color: color.red,
       textDecoration: 'none',
     },
   },
@@ -170,9 +170,9 @@ export const fadeUnder = {
     transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
 
     [`&:hover, &:focus`]: {
-      backgroundImage: createSolidGradient(colors.red),
+      backgroundImage: createSolidGradient(color.red),
       backgroundPosition: 'left calc(100%)',
-      color: colors.black,
+      color: color.black,
       textDecoration: 'none',
     },
   },
@@ -243,7 +243,7 @@ export const fadeUnderRed = create.jssObject({
   ],
   ...{
     ...fadeUnder.base,
-    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(colors.red),
+    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(color.red),
   },
 });
 
@@ -255,7 +255,7 @@ export const fadeUnderGray = create.jssObject({
   ],
   ...{
     ...fadeUnder.base,
-    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(colors.gray.mediumAA),
+    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(color.gray.mediumAA),
   },
 });
 
@@ -267,7 +267,7 @@ export const fadeUnderGold = create.jssObject({
   ],
   ...{
     ...fadeUnder.base,
-    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(colors.gold),
+    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(color.gold),
   },
 });
 
@@ -279,7 +279,7 @@ export const fadeUnderBlack = create.jssObject({
   ],
   ...{
     ...fadeUnder.base,
-    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(colors.black),
+    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(color.black),
   },
 });
 
@@ -291,7 +291,7 @@ export const fadeUnderWhite = create.jssObject({
   ],
   ...{
     ...fadeUnder.base,
-    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(colors.white),
+    '& > *:not(svg):not(.sr-only)': getFadeUnderStyle(color.white),
   },
 });
 

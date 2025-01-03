@@ -1,7 +1,4 @@
-import {
-  elementStyles,
-  tokens,
-} from '@universityofmaryland/web-elements-styles';
+import { element, token } from '@universityofmaryland/web-styles-library';
 import { ButtonLazyLoad } from 'atomic';
 import { GridGap as LayoutGridGap } from 'layout';
 import { AriaLive, AnimationLoader } from 'macros';
@@ -41,48 +38,47 @@ const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
 const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
 
 const { convertJSSObjectToStyles } = Utility.styles;
-const { colors, media, spacing } = tokens;
 
 const EventsGrouped = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE}`]:
-        elementStyles.text.decoration.ribbon,
+        element.text.decoration.ribbon,
     },
   })}
 
   .${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE} {
-    margin-bottom: ${spacing.lg};
+    margin-bottom: ${token.spacing.lg};
   }
 
   .${ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER} {
-    margin-bottom: ${spacing.lg};
+    margin-bottom: ${token.spacing.lg};
   }
 `;
 
 const EventsNoResults = `
   .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
     border: none;
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
     height: 1px;
-    margin-bottom: ${spacing.md};
+    margin-bottom: ${token.spacing.md};
   }
 
-  @media (min-width: ${media.breakpoints.tablet.min}) {
+  @media (min-width: ${token.media.breakpoints.tablet.min}) {
     .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
-      margin-top: ${spacing.md};
+      margin-top: ${token.spacing.md};
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p`]:
-        elementStyles.text.decoration.ribbon,
+        element.text.decoration.ribbon,
     },
   })}
 
   .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p {
-    margin-bottom: ${spacing.md};
+    margin-bottom: ${token.spacing.md};
   }
 `;
 

@@ -1,10 +1,10 @@
-import { tokens, typography } from '@universityofmaryland/web-elements-styles';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import TextLockupSmall, { TypeTextLockupSmall } from './small';
 
 type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
-const { font } = tokens;
+const { font } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 300;
@@ -38,7 +38,7 @@ const HeadlineStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OverwriteHeadline},
     ${OverwriteHeadline} * {
-      font-size: ${font.size.lg};
+      font-size: ${token.font.size.lg};
     }
   }
 `;

@@ -1,4 +1,4 @@
-import { layout, tokens } from '@universityofmaryland/web-elements-styles';
+import { layout, token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, { TypePathwayImageContainer } from './elements/image';
@@ -11,7 +11,6 @@ type TypePathwayOverlayProps = TypePathwayTextContainer &
     isThemeMaryland?: boolean;
   };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 800;
@@ -167,22 +166,22 @@ const BackgroundAnimationStyles = `
 // prettier-ignore
 const OverwriteVarationTheme = `
   ${OVERWRITE_THEME_DARK_BACKGROUND} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_LIGHT_BACKGROUND} {
-    background-color: ${colors.gray.lighter};
+    background-color: ${token.color.gray.lighter};
   }
 
   ${OVERWRITE_THEME_MARYLAND_BACKGROUND} {
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_THEME_LIGHT_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_LOCK_WRAPPER},
     ${OVERWRITE_THEME_DARK_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_LOCK_WRAPPER},
     ${OVERWRITE_THEME_MARYLAND_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_LOCK_WRAPPER} {
-      padding: ${spacing['6xl']} 0;
+      padding: ${token.spacing['6xl']} 0;
     }
   }
 `
@@ -227,7 +226,7 @@ const OverwriteImageContainerStyles = `
 const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${spacing.md} 0;
+      padding: ${token.spacing.md} 0;
     }
   }
 
@@ -241,13 +240,13 @@ const OverwriteTextContainerStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${spacing['4xl']} ${spacing['2xl']};
+      padding: ${token.spacing['4xl']} ${token.spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${spacing['8xl']} ${spacing['6xl']};
+      padding: ${token.spacing['8xl']} ${token.spacing['6xl']};
     }
   }
 `;
@@ -298,7 +297,7 @@ const BackgroundStyles = `
     bottom: 0;
     right: 0;
     width: 100%;
-    background-color: ${colors.white};
+    background-color: ${token.color.white};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
@@ -324,7 +323,7 @@ const STYLES_PATHWAY_OVERLAY_ELEMENT = `
   }
 
   .${PATHWAY_OVERLAY_CONTAINER} * {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   ${LockStyles}

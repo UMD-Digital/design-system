@@ -1,8 +1,8 @@
 import {
-  tokens,
-  elementStyles,
+  token,
+  element,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
@@ -13,7 +13,6 @@ type TypePersonBioFullProps = TypePersonProps & {
 };
 
 const { convertJSSObjectToStyles } = Utility.styles;
-const { spacing, colors } = tokens;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -33,15 +32,15 @@ const OverwriteThemeDarkName = `.${ELEMENT_PERSON_BIO_FULL_CONTAINER}${IS_THEME_
 
 const OverwriteThemeDark = `
   ${OverwriteThemeDarkDescription} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OverwriteThemeDarkDescription} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OverwriteThemeDarkName} {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
@@ -53,7 +52,7 @@ const OverwriteText = `
   })}
   
   ${OverwriteTextName} {
-    color: ${colors.black};
+    color: ${token.color.black};
     text-transform: uppercase;
     font-weight: 800;
   }
@@ -61,26 +60,25 @@ const OverwriteText = `
 
 const ActionStyles = `
   .${ELEMENT_PERSON_BIO_FULL_ACTIONS} {
-    margin-top: ${spacing.md};
+    margin-top: ${token.spacing.md};
   }
 `;
 
 const DescriptionStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_BIO_FULL_DESCRIPTION}`]:
-        elementStyles.text.rich.advanced,
+      [`.${ELEMENT_PERSON_BIO_FULL_DESCRIPTION}`]: element.text.rich.advanced,
     },
   })}
 
   .${ELEMENT_PERSON_BIO_FULL_DESCRIPTION} {
-    margin-top: ${spacing.lg};
+    margin-top: ${token.spacing.lg};
   }
 `;
 
 const ImageStyles = `
   .${ELEMENT_PERSON_BIO_FULL_IMAGE} {
-    margin-bottom: ${spacing.lg};
+    margin-bottom: ${token.spacing.lg};
   }
 `;
 

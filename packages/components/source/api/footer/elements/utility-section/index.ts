@@ -1,6 +1,6 @@
 import {
   animation,
-  tokens,
+  token,
   layout,
   typography,
 } from '@universityofmaryland/web-elements-styles';
@@ -12,8 +12,6 @@ import {
   SLOTS,
   REFERENCES,
 } from '../../globals';
-
-const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -34,7 +32,7 @@ const LinkStyles = `
   }
 
   .${UTILITY_CONTAINER} a span {
-    color: ${colors.gray.light};
+    color: ${token.color.gray.light};
   }
 
   ${convertJSSObjectToStyles({
@@ -45,7 +43,7 @@ const LinkStyles = `
   })}
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   ${convertJSSObjectToStyles({
@@ -59,25 +57,25 @@ const LinkStyles = `
 // prettier-ignore
 const TextStyles = `
   .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} p {
-    color: ${colors.gray.light};
+    color: ${token.color.gray.light};
     display: flex;
     align-items: center;
   }
 
   .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} a {
-    color: ${colors.gray.light};
+    color: ${token.color.gray.light};
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} p {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 `;
 
 // prettier-ignore
 export const UtilityContainerStyles = `
   .${UTILITY_CONTAINER} {
-    padding: ${spacing.sm} 0;
-    background-color: ${colors.gray.darker};
+    padding: ${token.spacing.sm} 0;
+    background-color: ${token.color.gray.darker};
   }
 
   ${convertJSSObjectToStyles({
@@ -101,21 +99,21 @@ export const UtilityContainerStyles = `
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
-      margin-top: ${spacing.sm};
+      margin-top: ${token.spacing.sm};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
-      margin-left: ${spacing.sm};
-      padding-left: ${spacing.sm};
-      background-position: ${spacing.sm} 100%;
-      border-left: 1px solid ${colors.gray.dark};
+      margin-left: ${token.spacing.sm};
+      padding-left: ${token.spacing.sm};
+      background-position: ${token.spacing.sm} 100%;
+      border-left: 1px solid ${token.color.gray.dark};
     }
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} {
-    background-color: ${colors.gray.light};
+    background-color: ${token.color.gray.light};
   }
 
   ${LinkStyles}

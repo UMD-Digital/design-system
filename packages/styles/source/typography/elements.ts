@@ -1,4 +1,4 @@
-import { colors, font, media } from '../tokens';
+import { color, font, media } from '../token';
 import { create } from '../utilities';
 
 const breakpointLarge = media.queries.large.min;
@@ -6,7 +6,7 @@ const breakpointDesktop = media.queries.desktop.min;
 
 export const eyebrow = {
   fontWeight: 700,
-  color: colors.black,
+  color: color.black,
   fontSize: font.size.min,
   lineHeight: 1,
   textTransform: `uppercase`,

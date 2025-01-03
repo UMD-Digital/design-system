@@ -1,9 +1,9 @@
 import {
-  elementStyles,
+  element,
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
@@ -13,7 +13,6 @@ type TypeHeroOverlayProps = TypeTextContainerProps &
     includesAnimation?: boolean;
   };
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_ANIMATION = 'data-animation';
@@ -42,12 +41,12 @@ const OVERWRITE_IMAGE_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .$
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
+      [`${OVERWRITE_EYEBROW}`]: element.text.decoration.ribbon,
     },
   })}
 
   ${OVERWRITE_EYEBROW} {
-    color: ${colors.black} !important;
+    color: ${token.color.black} !important;
   }
 `;
 
@@ -82,7 +81,7 @@ const OverwriteRichText = `
 // prettier-ignore
 const OverwriteTextContainer = `
   ${OVERWRITE_TEXT_CONTAINER} {
-    padding: ${spacing.lg} 0;
+    padding: ${token.spacing.lg} 0;
     display: flex;
     position: relative;
     z-index: 99;
@@ -91,7 +90,7 @@ const OverwriteTextContainer = `
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
       width: 55%;
-      padding: ${spacing['5xl']} 0;
+      padding: ${token.spacing['5xl']} 0;
     }
   }
 `;
@@ -102,7 +101,7 @@ const OverwriteImageContainer = `
     ${OVERWRITE_IMAGE_CONTAINER} {
       position: absolute;
       width: 60%;
-      height: calc(100% - ${spacing['5xl']});
+      height: calc(100% - ${token.spacing['5xl']});
       right: 0;
       top: 0;
       overflow: visible;
@@ -150,7 +149,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
 
   .${ELEMENT_HERO_CONTAINER} {
     position: relative;
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {

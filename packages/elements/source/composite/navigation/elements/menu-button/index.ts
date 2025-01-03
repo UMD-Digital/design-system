@@ -1,6 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
-
-const { colors } = tokens;
+import { token } from '@universityofmaryland/web-styles-library';
 
 export type TypeMenuDisplayButtonRequirements = {
   eventOpen: () => void;
@@ -20,7 +18,7 @@ const STYLES_MENU_DISPLAY_BUTTON = `
 
   .${NAV_DRAWER_BUTTON}:hover .${NAV_DRAWER_BUTTON_WRAPPER} span,
   .${NAV_DRAWER_BUTTON}:focus .${NAV_DRAWER_BUTTON_WRAPPER} span {
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
   }
 
   .${NAV_DRAWER_BUTTON_WRAPPER} {
@@ -35,7 +33,7 @@ const STYLES_MENU_DISPLAY_BUTTON = `
   .${NAV_DRAWER_BUTTON_WRAPPER} span {
     width: 20px;
     height: 2px;
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
     transition: background-color 0.3s ease-in-out;
   }
 

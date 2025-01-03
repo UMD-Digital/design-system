@@ -1,4 +1,4 @@
-import { colors, spacing } from '../tokens';
+import { color, spacing } from '../token';
 import { sans } from '../typography';
 import { create } from '../utilities';
 
@@ -30,17 +30,17 @@ export const inline = create.jssObject({
   },
 
   '& thead th': {
-    background: colors.gray.lighter,
-    color: colors.black,
+    background: color.gray.lighter,
+    color: color.black,
     textAlign: 'left',
   },
 
   '& tbody tr': {
-    borderTop: `1px solid ${colors.gray.light}`,
+    borderTop: `1px solid ${color.gray.light}`,
   },
 
   '& tr:nth-child(even)': {
-    background: colors.gray.lightest,
+    background: color.gray.lightest,
   },
 
   className: [

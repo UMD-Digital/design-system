@@ -1,6 +1,6 @@
 import * as accessibility from '../accessibility';
 import * as animations from '../animation';
-import * as elementStyles from '../elements-styles';
+import * as elementStyles from '../element';
 import * as layout from '../layout';
 import * as typography from '../typography';
 import { default as webComponents } from '../web-components';

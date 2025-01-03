@@ -1,16 +1,15 @@
 import {
-  elementStyles,
+  element,
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
 
 type TypeHeroLogoProps = TypeTextContainerProps & TypeImageContainerProps;
 
-const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const THEME_LIGHT = 'light';
@@ -40,23 +39,23 @@ const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} .${TextContainer.Elements.eyebrow} {
-    color: ${colors.black};
+    color: ${token.color.black};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} {
-    background-color: ${colors.gray.lightest};
+    background-color: ${token.color.gray.lightest};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
-    background-color: ${colors.red};
+    background-color: ${token.color.red};
   }
 `;
 
@@ -64,12 +63,12 @@ const OverwriteTheme = `
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
+      [`${OVERWRITE_EYEBROW}`]: element.text.decoration.ribbon,
     },
   })}
   
   ${OVERWRITE_EYEBROW} {
-    color: ${colors.black}
+    color: ${token.color.black}
   }
 `;
 
@@ -97,7 +96,7 @@ const OverwriteRichText = `
   })}
   
   ${OVERWRITE_RICH_TEXT} {
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
     font-weight: 400;
   }
 `;
@@ -119,7 +118,7 @@ const OverwriteImageContainer = `
     justify-content: center;
     max-width: 800px;
     margin: 0 auto;
-    margin-bottom: ${spacing.xl};
+    margin-bottom: ${token.spacing.xl};
   }
 
   ${OVERWRITE_IMAGE_CONTAINER} img {
@@ -136,7 +135,7 @@ const STYLES_HERO_LOGO_ELEMENT = `
   }
   
   .${ELEMENT_HERO_CONTAINER} {
-    padding: ${spacing['5xl']} 0 ${spacing.lg};
+    padding: ${token.spacing['5xl']} 0 ${token.spacing.lg};
   }
   
   ${convertJSSObjectToStyles({

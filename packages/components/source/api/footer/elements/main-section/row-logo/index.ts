@@ -1,4 +1,4 @@
-import { tokens, layout } from '@universityofmaryland/web-elements-styles';
+import { token, layout } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import {
   SocialContainerStyles,
@@ -14,8 +14,6 @@ import { ContactContainerStyles, CreateContactContainer } from './contact';
 import { LogoContainerStyles, CreateLogoContainer } from './logo';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
-
-const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -39,7 +37,7 @@ const ctaOverwriteStyles = `
 // prettier-ignore
 const themeOverwriteStyles = `
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LOGO_CONTAINER} {
-    background-color: ${colors.gray.lightest} !important;
+    background-color: ${token.color.gray.lightest} !important;
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
@@ -52,12 +50,12 @@ const themeOverwriteStyles = `
 // prettier-ignore
 export const RowLogoStyles = `
   .${ROW_LOGO_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LOGO_CONTAINER} {
-      padding-top: ${spacing['2xl']};
+      padding-top: ${token.spacing['2xl']};
     }
   }
 
@@ -65,20 +63,20 @@ export const RowLogoStyles = `
     .${ROW_LOGO_CONTAINER_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: ${spacing.md};
+      gap: ${token.spacing.md};
     }
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LOGO_CONTAINER} {
-      padding-bottom: ${spacing['md']} ;
+      padding-bottom: ${token.spacing['md']} ;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER} {
       display: flex;
-      padding: ${spacing['5xl']} 0 ${spacing['2xl']};
+      padding: ${token.spacing['5xl']} 0 ${token.spacing['2xl']};
     }
   }
 

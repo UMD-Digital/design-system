@@ -1,9 +1,9 @@
 import {
-  elementStyles,
+  element,
   layout,
-  tokens,
+  token,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
@@ -16,7 +16,6 @@ type TypeHeroStackedProps = TypeTextContainerProps &
     includesAnimation?: boolean;
   };
 
-const { colors, media, spacing } = tokens;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const TABLET = 768;
@@ -52,12 +51,12 @@ const OVERWRITE_IMAGE_OVERLAY_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${E
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
+      [`${OVERWRITE_EYEBROW}`]: element.text.decoration.ribbon,
     },
   })}
 
   .${OVERWRITE_EYEBROW} {
-    color: ${colors.black}
+    color: ${token.color.black}
   }
 `;
 
@@ -76,7 +75,7 @@ const OverwriteHeadline = `
   })}
   
   ${OVERWRITE_HEADLINE} {
-    color: ${colors.black};
+    color: ${token.color.black};
     max-width: 700px;
     margin: 0 auto;
   }
@@ -97,7 +96,7 @@ const OverwriteRichText = `
   })}
 
   ${OVERWRITE_RICH_TEXT} {
-    color: ${colors.gray.dark};
+    color: ${token.color.gray.dark};
     font-weight: 400;
     margin-left: auto;
     margin-right: auto;
@@ -107,7 +106,7 @@ const OverwriteRichText = `
 // prettier-ignore
 const OverwriteTextContainer = `
   ${OVERWRITE_TEXT_CONTAINER} {
-    padding: ${spacing.lg} 0;
+    padding: ${token.spacing.lg} 0;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -115,7 +114,7 @@ const OverwriteTextContainer = `
   
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding: ${spacing['6xl']} 0 ${spacing['3xl']};
+      padding: ${token.spacing['6xl']} 0 ${token.spacing['3xl']};
     }
   }
 `;
@@ -157,11 +156,11 @@ const AnimationStyles = `
   }
 
   @keyframes hero-stacked-font-color {
-    from { color: ${colors.black}; }
-    to { color: ${colors.white}; }
+    from { color: ${token.color.black}; }
+    to { color: ${token.color.white}; }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_TEXT_CONTAINER_ANIMATION} {
@@ -174,7 +173,7 @@ const AnimationStyles = `
     }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_IMAGE_OVERLAY_ANIMATION} {
@@ -187,7 +186,7 @@ const AnimationStyles = `
     }
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_RICH_TEXT_ANIMATION},

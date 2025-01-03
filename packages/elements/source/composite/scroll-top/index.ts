@@ -1,11 +1,9 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeScrollTopProps = {
   isFixed?: boolean;
 };
-
-const { colors } = tokens;
 
 const ELEMENT_NAME = 'umd-element-scroll-top';
 const ELEMENT_SCROLL_TOP_DECLARATION = 'scroll-top-declarion';
@@ -18,14 +16,14 @@ const STYLES_SCROLL_TOP_ELEMENT = `
   }
 
   .${ELEMENT_SCROLL_TOP_CONTAINER} {
-    background-color: ${colors.black};
+    background-color: ${token.color.black};
     width: 100%;
     height: 100%;
     min-height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid ${colors.gold};
+    border: 1px solid ${token.color.gold};
     cursor: pointer;
     transition: transform 250ms ease-in-out;
   }
@@ -37,7 +35,7 @@ const STYLES_SCROLL_TOP_ELEMENT = `
   }
 `;
 
-// @media (${media.queries.medium.max}) {
+// @media (${token.media.queries.medium.max}) {
 //   .${ELEMENT_SCROLL_TOP_CONTAINER} {
 //     display: none;
 //   }

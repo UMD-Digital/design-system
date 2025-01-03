@@ -1,4 +1,4 @@
-import { colors } from '../tokens';
+import { color } from '../token';
 import { create } from '../utilities';
 
 // Consistent naming
@@ -8,7 +8,7 @@ const classNamePrefix = 'umd-embed';
 export const inline = create.jssObject({
   display: 'block',
   width: '100%',
-  backgroundColor: colors.black,
+  backgroundColor: color.black,
 
   className: `${classNamePrefix}-video`,
 

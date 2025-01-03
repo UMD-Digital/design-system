@@ -1,4 +1,4 @@
-import { media } from '../../tokens';
+import { media } from '../../token';
 import { create } from '../../utilities';
 
 // Consistent naming

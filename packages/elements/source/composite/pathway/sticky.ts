@@ -1,4 +1,4 @@
-import { layout, tokens } from '@universityofmaryland/web-elements-styles';
+import { layout, token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, { TypePathwayImageContainer } from './elements/image';
@@ -8,7 +8,7 @@ type TypePathwayStickyProps = TypePathwayTextContainer &
     isImageRight: boolean;
   };
 
-const { spacing } = tokens;
+const { spacing } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 800;
@@ -85,7 +85,7 @@ const OverwriteImageContainerStyles = `
 const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${spacing.md} 0;
+      padding: ${token.spacing.md} 0;
     }
   }
 
@@ -99,13 +99,13 @@ const OverwriteTextContainerStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: 0 ${spacing['2xl']};
+      padding: 0 ${token.spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: 0 ${spacing['6xl']};
+      padding: 0 ${token.spacing['6xl']};
     }
   }
 `;

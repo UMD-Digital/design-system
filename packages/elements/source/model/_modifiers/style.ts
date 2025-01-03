@@ -1,4 +1,4 @@
-import { animation } from '@universityofmaryland/web-elements-styles';
+import { animation } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { StyleModifierProps } from '../_types';
 

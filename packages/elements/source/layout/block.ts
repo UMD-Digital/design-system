@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import ImageContainer from './image';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 
@@ -14,8 +14,6 @@ type TypeBlockContainerProps = TypeBlockContainer & {
   imageContainer?: HTMLDivElement | null;
   personContainer?: HTMLDivElement | null;
 };
-
-const { colors, spacing } = tokens;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_TRANSPARENT = 'transparent';
@@ -66,23 +64,23 @@ const OverwriteTransparent = `
 // prettier-ignore
 const VariantThemeStyles = `
   ${IS_THEME_DARK} {
-    background-color: ${colors.gray.darker};
-    color: ${colors.white};
+    background-color: ${token.color.gray.darker};
+    color: ${token.color.white};
     height: 100%;
   }
 
   ${IS_THEME_DARK} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER} {
-    padding: ${spacing.md};
+    padding: ${token.spacing.md};
   }
 
   @media (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
-     margin-top: ${spacing.md};
-     margin-right: ${spacing.md};
+     margin-top: ${token.spacing.md};
+     margin-right: ${token.spacing.md};
     }
   }
 `;
@@ -112,24 +110,24 @@ const VariantAlignedStyles = `
 // prettier-ignore
 const VariantBorderStyles = `
   ${IS_WITH_BORDER} {
-    border: 1px solid ${colors.gray.light};
+    border: 1px solid ${token.color.gray.light};
     height: 100%;
   }
 
   ${OVERWRITE_TYPE_BORDER_TEXT_CONTAINER} {
-    padding: ${spacing.md};
+    padding: ${token.spacing.md};
   }
 
   @media (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER} {
-      margin: ${spacing.md};
+      margin: ${token.spacing.md};
       margin-bottom: 0;
     }
   }
 
   @media (min-width: 380px) and (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER} {
-      margin-left: ${spacing.sm};
+      margin-left: ${token.spacing.sm};
     }
   }
 `;
@@ -145,7 +143,7 @@ const VariantWithImageStyles = `
 
   @media (min-width: ${MEDIUM}px) {
     ${OVERWRITE_WITH_IMAGE_TEXT_CONTAINER} {
-      padding-top: ${spacing.md};
+      padding-top: ${token.spacing.md};
     }
   }
 `;
@@ -165,7 +163,7 @@ const ImageContainerStyles = `
     .${ImageContainer.Elements.container} {
       max-width: 100%;
       margin-bottom: 4px;
-      margin-bottom: ${spacing.md};
+      margin-bottom: ${token.spacing.md};
     }
   }
 
@@ -181,7 +179,7 @@ const ImageContainerStyles = `
 const STYLES_BLOCK_CONTAINER = `
   .${ELEMENT_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: ${spacing.maxWidth.smallest};
+    max-width: ${token.spacing.maxWidth.smallest};
   }
 
   .${ELEMENT_BLOCK_CONTAINER_WRAPPER} {

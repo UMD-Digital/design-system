@@ -1,4 +1,4 @@
-import { colors, spacing } from '../../tokens';
+import { color, spacing } from '../../token';
 import { create } from '../../utilities';
 import { baseInputChoice, baseInputChoiceWrapper } from './_base';
 
@@ -8,14 +8,14 @@ const classNamePrefix = 'umd-field-radio';
 export const radio = {
   ...baseInputChoice,
   borderRadius: '50%',
-  border: `1px solid ${colors.gray.light}`,
+  border: `1px solid ${color.gray.light}`,
 
   '&::after': {
     content: "''",
     backgroundSize: 'contain',
-    backgroundColor: colors.red,
+    backgroundColor: color.red,
     backgroundPosition: 'center',
-    border: `1px solid ${colors.gray.light}`,
+    border: `1px solid ${color.gray.light}`,
     borderRadius: '50%',
     display: 'block',
     height: spacing.xs,

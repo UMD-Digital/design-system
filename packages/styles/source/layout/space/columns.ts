@@ -1,4 +1,4 @@
-import { colors, media, spacing } from '../../tokens';
+import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -50,7 +50,7 @@ export const right = create.jssObject({
 
   '& > *:last-child': {
     paddingTop: spacing.md,
-    borderTop: `1px solid ${colors.black}`,
+    borderTop: `1px solid ${color.black}`,
 
     [`@media (${media.queries.large.max})`]: {
       marginTop: spacing['3xl'],

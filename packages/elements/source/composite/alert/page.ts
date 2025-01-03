@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import AlertText, { TypeAlertTextProps } from './elements/text';
 
@@ -17,8 +17,6 @@ type TypeAlertButtonProps = {
   container: HTMLElement;
 };
 
-const { colors, spacing } = tokens;
-
 const MEDUM = 500;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -36,25 +34,25 @@ const OVERWRITE_THEME_DARK_CLOSE_BUTTON = `${OVERWRITE_THEME_DARK_CONTAINER} .${
 
 const OverwriteThemeStyles = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 
   ${OVERWRITE_THEME_DARK_CLOSE_BUTTON} rect {
-    fill: ${colors.white};
+    fill: ${token.color.white};
   }
 `;
 
 const ButtonStyles = `
   .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} {
     position: absolute;
-    top: ${spacing.lg};
-    right: ${spacing.lg};
+    top: ${token.spacing.lg};
+    right: ${token.spacing.lg};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} {
-      top: ${spacing.sm};
-      right: ${spacing.sm};
+      top: ${token.spacing.sm};
+      right: ${token.spacing.sm};
     }
   }
 `;
@@ -62,7 +60,7 @@ const ButtonStyles = `
 const IconStyles = `
   .${ELEMENT_ALERT_PAGE_ICON} {
     display: block;
-    fill: ${colors.gold};
+    fill: ${token.color.gold};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
@@ -81,15 +79,15 @@ const STYLES_ALERT_PAGE_ELEMENT = `
   .${ELEMENT_ALERT_PAGE_CONTAINER} {
     display: flex;
     position: relative;
-    padding: ${spacing.lg};
-    padding-right: ${spacing['2xl']};
-    gap: ${spacing.lg};
-    border: solid 4px ${colors.gold};
+    padding: ${token.spacing.lg};
+    padding-right: ${token.spacing['2xl']};
+    gap: ${token.spacing.lg};
+    border: solid 4px ${token.color.gold};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_PAGE_CONTAINER} {
-      padding-right: ${spacing.lg};
+      padding-right: ${token.spacing.lg};
     }
   }
 

@@ -1,4 +1,4 @@
-import { typography, tokens } from '@universityofmaryland/web-elements-styles';
+import { typography, token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeSectionIntroWideProps = {
@@ -6,8 +6,6 @@ type TypeSectionIntroWideProps = {
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
 };
-
-const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Utility.styles;
 
@@ -26,7 +24,7 @@ const OVERWRITE_THEME_DARK_CONTAINTER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINTER} * {
-    color: ${colors.white};
+    color: ${token.color.white};
   }
 `;
 
@@ -39,7 +37,7 @@ const HeadlineStyles = `
   })}
 
   .${ELEMENT_HEADLINE} {
-    color: ${colors.black};
+    color: ${token.color.black};
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -49,7 +47,7 @@ const HeadlineStyles = `
 const ActionStyles = `
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     * + .${ELEMENT_ACTIONS} {
-      margin-top: ${spacing.md};
+      margin-top: ${token.spacing.md};
     }
   }
 `;

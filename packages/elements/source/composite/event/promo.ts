@@ -1,4 +1,4 @@
-import { tokens } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { BlockOverlay as LayoutBlockOverlay } from 'layout';
 import { TextLockupSmall } from 'macros';
 
@@ -11,8 +11,6 @@ type TypeEventPromoProps = {
   actions?: HTMLElement | null;
 };
 
-const { colors, media, spacing } = tokens;
-
 const ELEMENT_NAME = 'umd-event-promo';
 const ELEMENT_EVENT_PROMO_CONTAINER = 'event-promo-container';
 const ELEMENT_EVENT_PROMO_META_WRAPPER = 'event-promo-meta-wrapper';
@@ -22,15 +20,15 @@ const ELEMENT_EVENT_PROMO_SIGN_WRAPPER = 'event-promo-sign-wrapper';
 const DateSign = `
   .${ELEMENT_EVENT_PROMO_SIGN_WRAPPER} {
     display: inline-block;
-    bottom: ${spacing.min};
-    left: ${spacing.min};
-    background-color: ${colors.white};
-    padding: ${spacing.min};
+    bottom: ${token.spacing.min};
+    left: ${token.spacing.min};
+    background-color: ${token.color.white};
+    padding: ${token.spacing.min};
   }
 
-  @media (${media.queries.tablet.min}) {
+  @media (${token.media.queries.tablet.min}) {
     .${ELEMENT_EVENT_PROMO_SIGN_WRAPPER} {
-      padding: ${spacing.sm} ${spacing.sm} ${spacing.min} ${spacing.sm};
+      padding: ${token.spacing.sm} ${token.spacing.sm} ${token.spacing.min} ${token.spacing.sm};
     }
   }
 `;
@@ -38,11 +36,11 @@ const DateSign = `
 // prettier-ignore
 const DetailsMeta = `
   * + .${ELEMENT_EVENT_PROMO_META_WRAPPER} {
-    margin-top: ${spacing.sm};
+    margin-top: ${token.spacing.sm};
   }
 
   .${ELEMENT_EVENT_PROMO_META_WRAPPER} + * {
-    margin-top: ${spacing.sm} !important;
+    margin-top: ${token.spacing.sm} !important;
   }
 `;
 
@@ -51,7 +49,7 @@ const STYLES_EVENT_PROMO_ELEMENT = `
   .${ELEMENT_EVENT_PROMO_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     height: 100%;
-    max-width: ${spacing.maxWidth.smallest};
+    max-width: ${token.spacing.maxWidth.smallest};
   }
 
   ${LayoutBlockOverlay.Styles}

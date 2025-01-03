@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { List as LayoutList, Image as LayoutImage } from 'layout';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
 
@@ -6,7 +6,7 @@ type TypeListPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 
 const SMALL = 400;
 const ATTRIBUTE_THEME = 'theme';
@@ -30,7 +30,7 @@ const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} 
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
-      background-color: ${Colors.gray.darker};
+      background-color: ${colors.gray.darker};
     }
   }
 `;
@@ -38,14 +38,14 @@ const OverwriteThemeDarkStyles = `
 const OverwriteImagesStyles = `
   ${OVERWRITE_IMAGE_CONTAINER} {
     order: 1;
-    padding-right: ${Spacing.md};
+    padding-right: ${spacing.md};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OVERWRITE_IMAGE_CONTAINER} {
       width: 100%;
-      margin-bottom: ${Spacing.md};
-      background-color: ${Colors.gray.lighter};
+      margin-bottom: ${spacing.md};
+      background-color: ${colors.gray.lighter};
       display: flex;
       justify-content: center;
     }
@@ -73,7 +73,7 @@ const STYLES_PERSON_LIST_ELEMENT = `
   }
   
   .${ELEMENT_PERSON_LIST_CONTAINER} + * {
-    margin-top: ${Spacing.md}; 
+    margin-top: ${spacing.md}; 
   }
 
   ${PersonTextContainer.Styles}

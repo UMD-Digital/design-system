@@ -1,10 +1,10 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import TextLockupSmall, { TypeTextLockupSmall } from './small';
 
 type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
-const { Font } = Tokens;
+const { font } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const SMALL = 300;
@@ -22,7 +22,7 @@ const HeadlineStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteHeadline}`]: Typography.sans.extraLarge,
+        [`${OverwriteHeadline}`]: typography.sans.extraLarge,
       },
     })}
   }
@@ -30,7 +30,7 @@ const HeadlineStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteHeadline} *`]: Typography.sans.extraLarge,
+        [`${OverwriteHeadline} *`]: typography.sans.extraLarge,
       },
     })}
   }
@@ -38,7 +38,7 @@ const HeadlineStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${OverwriteHeadline},
     ${OverwriteHeadline} * {
-      font-size: ${Font.size.lg};
+      font-size: ${font.size.lg};
     }
   }
 `;
@@ -48,7 +48,7 @@ const DateStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteDate}`]: Typography.sans.small,
+        [`${OverwriteDate}`]: typography.sans.small,
       },
     })}
   }
@@ -56,7 +56,7 @@ const DateStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteDate} *`]: Typography.sans.small,
+        [`${OverwriteDate} *`]: typography.sans.small,
       },
     })}
   }
@@ -67,13 +67,13 @@ const TextStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteText}`]: Typography.sans.medium,
+        [`${OverwriteText}`]: typography.sans.medium,
       },
     })}
 
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OverwriteText} *`]: Typography.sans.medium,
+        [`${OverwriteText} *`]: typography.sans.medium,
       },
     })}
   }

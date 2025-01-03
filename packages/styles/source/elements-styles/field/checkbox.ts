@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { create } from '../../utilities';
 import { baseInputChoice, baseInputChoiceWrapper } from './_base';
 
@@ -9,7 +9,7 @@ const classNamePrefix = 'umd-field-checkbox';
 
 export const checkbox = {
   ...baseInputChoice,
-  border: `1px solid ${Colors.gray.light}`,
+  border: `1px solid ${colors.gray.light}`,
 
   '&::after': {
     content: "''",
@@ -17,14 +17,14 @@ export const checkbox = {
     backgroundSize: 'contain',
     backgroundPosition: 'center',
     display: 'block',
-    height: `calc(${Spacing.md} - 4px)`,
+    height: `calc(${spacing.md} - 4px)`,
     opacity: 0,
     position: 'absolute',
     left: '2px',
     top: '2px',
     transition: 'opacity 0.5s ease-in-out',
     visibility: 'hidden',
-    width: `calc(${Spacing.md} - 4px)`,
+    width: `calc(${spacing.md} - 4px)`,
   },
 };
 

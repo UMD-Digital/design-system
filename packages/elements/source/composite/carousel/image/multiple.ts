@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { ButtonFullScreen } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import {
@@ -13,7 +13,7 @@ type TypeCarouselMultipleProps = {
   isFullScreenOption?: boolean;
 };
 
-const { Colors } = Tokens;
+const { colors } = tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
@@ -37,15 +37,15 @@ const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} > svg {
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 `;
 
@@ -83,11 +83,11 @@ const OverwriteCarouselStyles = `
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
     top: 50%;
     transform: translateY(-50%);
-    background-color: ${Colors.white};
+    background-color: ${colors.white};
   }
 
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} svg {
-    fill: ${Colors.black};
+    fill: ${colors.black};
   };
 
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {

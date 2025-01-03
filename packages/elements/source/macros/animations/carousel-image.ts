@@ -1,7 +1,7 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 type TypeCarouselImageProps = {
   slides: HTMLElement[];
@@ -22,7 +22,7 @@ const OVERWRITE_ACTIVE_SLIDE = `.${ELEMENT_CAROUSEL_SLIDE}[${ATTRIBUTE_ACTIVE_SL
 // prettier-ignore
 const SliderButtons = `
   .${ELEMENT_CAROUSEL_SLIDER_BUTTON} {
-    background-color: ${Colors.white};
+    background-color: ${colors.white};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +34,7 @@ const SliderButtons = `
   }
 
   .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:first-of-type {
-    left: ${Spacing.sm};
+    left: ${spacing.sm};
   }
 
   .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:first-of-type svg {
@@ -42,11 +42,11 @@ const SliderButtons = `
   }
 
   .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:last-of-type {
-    right: ${Spacing.sm};
+    right: ${spacing.sm};
   }
 
   .${ELEMENT_CAROUSEL_SLIDER_BUTTON} svg {
-    fill: ${Colors.black};
+    fill: ${colors.black};
     width: 16px;
   }
 `

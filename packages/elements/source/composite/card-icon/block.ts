@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { TextLockupSmallScaling } from 'macros';
 
 type TypeBlockCardIconProps = {
@@ -8,7 +8,7 @@ type TypeBlockCardIconProps = {
   isThemeDark?: boolean;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const LARGE = 500;
 
@@ -28,7 +28,7 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CARD_BLOCK_CONTAINER}${IS_THE
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 `;
 
@@ -41,7 +41,7 @@ const ImageStyles = `
 
   @media (min-width: ${LARGE}px) {
     .${ELEMENT_CARD_BLOCK_IMAGE} {
-      margin-bottom: ${Spacing.lg};
+      margin-bottom: ${spacing.lg};
     }
   }
 
@@ -72,7 +72,7 @@ const WrapperStyles = `
   @media (max-width: ${LARGE - 1}px) {
     .${ELEMENT_CARD_BLOCK_WRAPPER} > *:not(:first-child) {
       width: calc(100% - 100px);
-      padding-right: ${Spacing.md}; 
+      padding-right: ${spacing.md}; 
     }
   }
 `;
@@ -85,16 +85,16 @@ const STYLES_BLOCK_CARD_ICON_ELEMENT = `
   }
 
   .${ELEMENT_CARD_BLOCK_CONTAINER} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
     height: 100%;
-    padding: ${Spacing.sm};
-    padding-bottom: ${Spacing.md};
+    padding: ${spacing.sm};
+    padding-bottom: ${spacing.md};
     overflow: hidden;
   }
 
   @media (min-width: ${LARGE}px) {
     .${ELEMENT_CARD_BLOCK_CONTAINER} {
-      padding: ${Spacing.md};
+      padding: ${spacing.md};
     }
   }
 

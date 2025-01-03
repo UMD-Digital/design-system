@@ -1,7 +1,7 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_CAPTION = 'data-caption';
@@ -17,7 +17,7 @@ const STYLES_IMAGE_CONTAINER = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_IMAGE_CONTAINER} > span`]: Typography.sans.min,
+      [`.${ELEMENT_IMAGE_CONTAINER} > span`]: typography.sans.min,
     },
   })}
 
@@ -27,9 +27,9 @@ const STYLES_IMAGE_CONTAINER = `
     right: 0;
     height: auto !important;
     width: auto !important;
-    padding: ${Spacing.min};
+    padding: ${spacing.min};
     background-color: rgba(0, 0, 0, 0.5);
-    color: ${Colors.white};
+    color: ${colors.white};
     z-index: 99;
   }
 

@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { create } from '../../utilities';
 import { baseInput } from './_base';
 import { valid, invalid } from './_state';
@@ -26,22 +26,22 @@ export const select = {
 
     '& option': {
       padding: '5px',
-      color: Colors.black,
+      color: colors.black,
       transition: 'color 0.3s',
 
       '&:hover': {
-        color: Colors.red,
+        color: colors.red,
       },
 
       '&:checked': {
-        backgroundColor: Colors.gray.light,
+        backgroundColor: colors.gray.light,
       },
     },
   },
 };
 
 export const selectWrapper = create.jssObject({
-  backgroundColor: Colors.white,
+  backgroundColor: colors.white,
   overflow: 'hidden',
   position: 'relative',
 
@@ -55,7 +55,7 @@ export const selectWrapper = create.jssObject({
     appearance: 'none',
     backgroundColor: 'transparent',
     cursor: 'pointer',
-    paddingRight: Spacing.lg,
+    paddingRight: spacing.lg,
     position: 'relative',
     zIndex: 9,
   },
@@ -67,12 +67,12 @@ export const selectWrapper = create.jssObject({
     backgroundRepeat: 'no-repeat',
     display: 'block',
     position: 'absolute',
-    right: Spacing.sm,
-    top: `calc(50% - ${Spacing.min})`,
+    right: spacing.sm,
+    top: `calc(50% - ${spacing.min})`,
     zIndex: 0,
     transition: 'opacity 0.5s ease-in-out',
-    height: Spacing.sm,
-    width: Spacing.sm,
+    height: spacing.sm,
+    width: spacing.sm,
   },
 
   '&:before': {

@@ -40,4 +40,7 @@ export default {
   '7xl': '96px',
   '8xl': '104px',
   max: '120px',
+  maxWidth: {
+    ...maxWidth,
+  },
 };

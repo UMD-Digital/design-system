@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../tokens';
+import { colors, spacing } from '../tokens';
 import { elements } from '../typography';
 import { create } from '../utilities';
 
@@ -7,7 +7,7 @@ const classNamePrefix = 'umd-action';
 
 const base = {
   ...elements.interativeSmall,
-  padding: `${Spacing.xs} ${Spacing.lg}`,
+  padding: `${spacing.xs} ${spacing.lg}`,
   transition:
     'background 0.5s ease-in-out, border 0.5s ease-in-out, color 0.5s ease-in-out',
   textAlign: 'center',
@@ -28,9 +28,9 @@ const iconBase = {
 export const primary = create.jssObject({
   ...base,
 
-  backgroundColor: Colors.red,
-  border: `1px solid ${Colors.red}`,
-  color: Colors.white,
+  backgroundColor: colors.red,
+  border: `1px solid ${colors.red}`,
+  color: colors.white,
 
   className: [
     `${classNamePrefix}-primary`,
@@ -40,22 +40,22 @@ export const primary = create.jssObject({
 
   '& svg': {
     ...iconBase,
-    fill: Colors.red,
+    fill: colors.red,
   },
 
   [`&:hover,
     &:focus`]: {
-    border: `1px solid ${Colors.redDark}`,
-    backgroundColor: Colors.redDark,
+    border: `1px solid ${colors.redDark}`,
+    backgroundColor: colors.redDark,
   },
 });
 
 // umd-action-outline
 export const outline = create.jssObject({
   ...base,
-  backgroundColor: Colors.white,
-  border: `1px solid ${Colors.gray.darker}`,
-  color: Colors.black,
+  backgroundColor: colors.white,
+  border: `1px solid ${colors.gray.darker}`,
+  color: colors.black,
 
   className: [
     `${classNamePrefix}-outline`,
@@ -65,16 +65,16 @@ export const outline = create.jssObject({
 
   '& svg': {
     ...iconBase,
-    fill: Colors.black,
+    fill: colors.black,
   },
 
   [`&:hover,
     &:focus`]: {
-    backgroundColor: Colors.gray.darker,
-    color: Colors.white,
+    backgroundColor: colors.gray.darker,
+    color: colors.white,
 
     '& svg': {
-      fill: Colors.white,
+      fill: colors.white,
     },
   },
 });

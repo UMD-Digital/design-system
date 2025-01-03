@@ -1,4 +1,4 @@
-import { Colors, Media, Spacing } from '../../tokens';
+import { colors, media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -6,13 +6,13 @@ const classNamePrefix = 'umd-layout-space-vertical';
 
 // umd-layout-space-vertical-landing
 export const landing = create.jssObject({
-  marginBottom: Spacing['3xl'],
+  marginBottom: spacing['3xl'],
 
-  [`@media (${Media.queries.tablet.min})`]: {
-    marginBottom: Spacing['6xl'],
+  [`@media (${media.queries.tablet.min})`]: {
+    marginBottom: spacing['6xl'],
   },
 
-  [`@media (${Media.queries.desktop.min})`]: {
+  [`@media (${media.queries.desktop.min})`]: {
     marginBottom: '120px',
   },
 
@@ -25,14 +25,14 @@ export const landing = create.jssObject({
 
 // umd-layout-space-vertical-landing-child
 export const landingChild = create.jssObject({
-  marginBottom: Spacing.lg,
+  marginBottom: spacing.lg,
 
-  [`@media (${Media.queries.tablet.min})`]: {
-    marginBottom: Spacing['xl'],
+  [`@media (${media.queries.tablet.min})`]: {
+    marginBottom: spacing['xl'],
   },
 
-  [`@media (${Media.queries.desktop.min})`]: {
-    marginBottom: Spacing['2xl'],
+  [`@media (${media.queries.desktop.min})`]: {
+    marginBottom: spacing['2xl'],
   },
 
   className: [
@@ -44,10 +44,10 @@ export const landingChild = create.jssObject({
 
 // umd-layout-space-vertical-interior
 export const interior = create.jssObject({
-  marginBottom: Spacing['3xl'],
+  marginBottom: spacing['3xl'],
 
-  [`@media (${Media.queries.desktop.min})`]: {
-    marginBottom: Spacing['6xl'],
+  [`@media (${media.queries.desktop.min})`]: {
+    marginBottom: spacing['6xl'],
   },
 
   className: [
@@ -59,7 +59,7 @@ export const interior = create.jssObject({
 
 // umd-layout-space-vertical-interior-child
 export const interiorChild = create.jssObject({
-  marginBottom: Spacing.lg,
+  marginBottom: spacing.lg,
 
   className: [
     `${classNamePrefix}-interior-child`,
@@ -70,10 +70,10 @@ export const interiorChild = create.jssObject({
 
 // umd-layout-space-vertical-headline-large
 export const headlineLarge = create.jssObject({
-  marginBottom: Spacing.sm,
+  marginBottom: spacing.sm,
 
-  [`@media (${Media.queries.desktop.min})`]: {
-    marginBottom: Spacing.md,
+  [`@media (${media.queries.desktop.min})`]: {
+    marginBottom: spacing.md,
   },
 
   className: [
@@ -85,7 +85,7 @@ export const headlineLarge = create.jssObject({
 
 // umd-layout-space-vertical-headline-medium
 export const headlineMedium = create.jssObject({
-  marginBottom: Spacing.sm,
+  marginBottom: spacing.sm,
 
   className: [
     `${classNamePrefix}-headline-medium`,

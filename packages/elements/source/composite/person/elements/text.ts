@@ -1,7 +1,7 @@
 import {
-  Animations,
-  Tokens,
-  Typography,
+  animations,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
 import PersonContact, { TypeContactProps } from './contact';
@@ -17,7 +17,7 @@ export type TypePersonProps = TypeContactProps & {
   isThemeDark?: boolean;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -46,12 +46,12 @@ const OVERWRITE_HAS_CONTACT_CONTAINER = `.${ELEMENT_PERSON_TEXT_CONTAINER}${IS_H
 // prettier-ignore
 const ThemeDarkStyles = `
   ${IS_DARK_THEME_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Animations.line.slideUnderWhite,
+      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: animations.line.slideUnderWhite,
     },
   })}
 `;
@@ -60,20 +60,20 @@ const ThemeDarkStyles = `
 const NameStyles = `
   .${ELEMENT_PERSON_NAME_CONTAINER} {
     font-weight: 700;
-    margin-bottom: ${Spacing.min};
-    color: ${Colors.black};
+    margin-bottom: ${spacing.min};
+    color: ${colors.black};
     display: block;
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_NAME_CONTAINER}`]: Typography.sans.larger,
+      [`.${ELEMENT_PERSON_NAME_CONTAINER}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: Animations.line.slideUnderBlack,
+      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: animations.line.slideUnderBlack,
     },
   })}
 `;
@@ -82,7 +82,7 @@ const NameStyles = `
 const JobStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_JOB_CONTAINER}`]: Typography.sans.small,
+      [`.${ELEMENT_PERSON_JOB_CONTAINER}`]: typography.sans.small,
     },
   })}
 
@@ -99,7 +99,7 @@ const AssociationStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_ASSOCIATION_CONTAINER}`]: Typography.sans.small,
+      [`.${ELEMENT_PERSON_ASSOCIATION_CONTAINER}`]: typography.sans.small,
     },
   })}
 
@@ -112,7 +112,7 @@ const AssociationStyles = `
 // prettier-ignore
 const PronounsStyles = `
   * + .${ELEMENT_PERSON_PRONOUNS_CONTAINER} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   .${ELEMENT_PERSON_PRONOUNS_CONTAINER} {
@@ -121,7 +121,7 @@ const PronounsStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_PRONOUNS_CONTAINER}`]: Typography.sans.small,
+      [`.${ELEMENT_PERSON_PRONOUNS_CONTAINER}`]: typography.sans.small,
     },
   })}
 `;
@@ -136,7 +136,7 @@ const AdditonalContactStyles = `
 // prettier-ignore
 const SubTextStyles = `
   * + .${ELEMENT_PERSON_SUB_TEXT_CONTAINER} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   .${ELEMENT_PERSON_SUB_TEXT_CONTAINER} {
@@ -145,7 +145,7 @@ const SubTextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_SUB_TEXT_CONTAINER}`]: Typography.sans.small,
+      [`.${ELEMENT_PERSON_SUB_TEXT_CONTAINER}`]: typography.sans.small,
     },
   })}
 `;
@@ -153,7 +153,7 @@ const SubTextStyles = `
 // prettier-ignore
 const ActionsStyles = `
   * + .${ELEMENT_PERSON_ACTIONS_CONTAINER} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 `;
 

@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Asset, Styles } from 'utilities';
 
 export type TypeActionProps = {
@@ -13,7 +13,7 @@ export type TypeAction = TypeActionProps & {
   link: HTMLAnchorElement;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_SLIDE_ACTION_CONTAINER = 'nav-slide-action-container';
@@ -24,7 +24,7 @@ const ELEMENT_SLIDE_ACTION_BUTTON = 'nav-slide-action-button';
 const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDE_ACTION_LINK}`]: Typography.sans.small,
+      [`.${ELEMENT_SLIDE_ACTION_LINK}`]: typography.sans.small,
     },
   })}
 
@@ -34,7 +34,7 @@ const LinkStyles = `
 
   a.${ELEMENT_SLIDE_ACTION_LINK}:hover,
   a.${ELEMENT_SLIDE_ACTION_LINK}:focus {
-    color: ${Colors.red};
+    color: ${colors.red};
   }
 `;
 
@@ -42,10 +42,10 @@ const LinkStyles = `
 const ButtonStyles = `
   .${ELEMENT_SLIDE_ACTION_BUTTON} {
     position: absolute;
-    right: ${Spacing.min};
+    right: ${spacing.min};
     top: 5px;
-    width: ${Spacing.lg};
-    height: ${Spacing.lg};
+    width: ${spacing.lg};
+    height: ${spacing.lg};
     display: flex;
     justify-content: center;
   }
@@ -56,7 +56,7 @@ const ButtonStyles = `
   }
 
   .${ELEMENT_SLIDE_ACTION_BUTTON} svg {
-    fill: ${Colors.red};
+    fill: ${colors.red};
     height: 16px;
     width: 16px;
     transform: rotate(-90deg) translateY(0);
@@ -70,8 +70,8 @@ const STYLES_SLIDER_ACTION_ELEMENT = `
     display: flex;
     justify-content: space-between;
     position: relative;
-    padding-right: ${Spacing['3xl']};
-    margin-bottom: ${Spacing.xs};
+    padding-right: ${spacing['3xl']};
+    margin-bottom: ${spacing.xs};
   }
 
   ${LinkStyles}

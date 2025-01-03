@@ -1,4 +1,4 @@
-import { Colors, Font, Spacing } from '../../tokens';
+import { colors, font, spacing } from '../../tokens';
 import { sans } from '../../typography';
 import * as animations from '../../animations';
 import { create } from '../../utilities';
@@ -13,7 +13,7 @@ const classNamePrefix = 'umd-text-rich';
 const simpleBase = {
   '& > *': {
     ...sans.small,
-    marginTop: Spacing.md,
+    marginTop: spacing.md,
     lineHeight: '1.5em',
 
     '&:first-child': {
@@ -26,7 +26,7 @@ const simpleBase = {
   },
 
   '& strong, & b': {
-    FontWeight: Font.weight.bold,
+    FontWeight: font.weight.bold,
   },
 
   '& u': {
@@ -39,7 +39,7 @@ const simpleBase = {
     transition: 'color 0.5s',
 
     '&:hover, &:focus': {
-      color: Colors.red,
+      color: colors.red,
     },
   },
 };
@@ -67,11 +67,11 @@ const advancedBase = {
   },
 
   '& sup': {
-    fontSize: Font.size.min,
+    fontSize: font.size.min,
   },
 
   '& sub': {
-    fontSize: Font.size.min,
+    fontSize: font.size.min,
   },
 
   '& small': {
@@ -107,7 +107,7 @@ export const simpleLarge = create.jssObject({
 
 // umd-text-rich-advanced
 export const advanced = create.jssObject({
-  FontWeight: Font.weight.normal,
+  FontWeight: font.weight.normal,
 
   ...advancedBase,
   ...code,
@@ -124,7 +124,7 @@ export const advanced = create.jssObject({
   },
 
   '& + ol, &ol + ul': {
-    marginTop: Spacing.sm,
+    marginTop: spacing.sm,
   },
 
   '& table': {
@@ -143,10 +143,10 @@ export const advancedDark = create.jssObject({
   ...advanced,
   ...animations.nestedElements.linksDark,
 
-  color: Colors.white,
+  color: colors.white,
 
   '& *': {
-    color: Colors.white,
+    color: colors.white,
   },
 
   className: [

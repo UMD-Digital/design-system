@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { ButtonFullScreen } from 'atomic';
 import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
 
@@ -55,7 +55,7 @@ type TypeEventScroll = TypeHelpers & {
   isDirectionRight?: boolean;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertPixelStringToNumber } = Styles;
 
 const ATTRIBUTE_SINGLE_BLOCK = 'single';
@@ -80,8 +80,8 @@ const OVERWRITE_SINGLE_BLOCK_CONTAINER = `.${ELEMENT_ANIMATION_CAROUSEL_CONTAINE
 // prettier-ignore
 const ButtonStyles = `
   .${ELEMENT_ANIMATION_CAROUSEL_BUTTON} {
-    background-color: ${Colors.red};
-    padding: 10px ${Spacing.xs};
+    background-color: ${colors.red};
+    padding: 10px ${spacing.xs};
     position: absolute;
     z-index: 9999;
     display: flex;
@@ -98,7 +98,7 @@ const ButtonStyles = `
   .${ELEMENT_ANIMATION_CAROUSEL_BUTTON} svg {
     width: 20px;
     height: 20px;
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 
   .${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS} svg {
@@ -359,7 +359,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       tabletCount: 2,
       desktopCount: 3,
       maxCount: 4,
-      blockGap: convertPixelStringToNumber(Spacing.lg),
+      blockGap: convertPixelStringToNumber(spacing.lg),
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: true,

@@ -1,9 +1,9 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import AnimationCarouselImage from '../macros/animations/carousel-image';
 import LayoutImage from './image';
 import FixedFullScreen from './carousel-full-screen';
 
-const { Colors } = Tokens;
+const { colors } = tokens;
 
 const ELEMENT_CAROUSEL_OVERLAY_COINTAINER = 'carousel-overlay-container';
 
@@ -13,7 +13,7 @@ const OverlayImageContainerStyles = `
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${Colors.gray.dark};
+    background-color: ${colors.gray.dark};
   }
 
   .${ELEMENT_CAROUSEL_OVERLAY_COINTAINER} img {

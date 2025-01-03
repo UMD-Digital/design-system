@@ -1,8 +1,8 @@
 import {
-  Animations,
-  ElementStyles,
-  Typography,
-  Tokens,
+  animations,
+  elementStyles,
+  typography,
+  tokens,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
@@ -20,7 +20,7 @@ type TypeStatRequirements = TypeStatElement & {
 };
 
 const { convertJSSObjectToStyles } = Styles;
-const { Colors, Media, Spacing } = Tokens;
+const { colors, media, spacing } = tokens;
 
 const BLOCK_TEXTURE = `<svg id="stat_block-texture" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" ><defs><style>.cls-1{opacity:.02;}.cls-1,.cls-2{fill:#454545;fill-rule:evenodd;isolation:isolate;stroke-width:0px;}.cls-2{opacity:.04;}</style></defs><path class="cls-1" d="M109.49,0H0v63.18l181.67,182.32L0,427.82v63.18h109.49l244.61-245.5L109.49,0Z"/><path class="cls-2" d="M108.94,0h172.44l244.61,245.5-244.61,245.5H108.94l244.61-245.5L108.94,0ZM0,179.11l58.16-58.29L0,62.54v116.57Z"/></svg>`;
 
@@ -56,20 +56,20 @@ const OVERWRITE_SIZE_LARGE_SUB_TEXT = `.${ELEMENT_STAT_WRAPPER}${IS_SIZE_LARGE} 
 // prettier-ignore
 const VarationThemeDarkStyles = `
   .${ELEMENT_STAT_WRAPPER}${IS_THEME_DARK} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_STAT_DISPLAY} {
-    color: ${Colors.gold};
+    color: ${colors.gold};
   }
 
   ${OVERWRITE_THEME_DARK_SUB_TEXT} {
-    color: ${Colors.gray.light};
+    color: ${colors.gray.light};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_TEXT}`]: Animations.nestedElements.linksDark,
+      [`${OVERWRITE_THEME_DARK_TEXT}`]: animations.nestedElements.linksDark,
     },
   })}
 
@@ -78,9 +78,9 @@ const VarationThemeDarkStyles = `
 // prettier-ignore
 const VarationDisplayBlockStyles = `
   .${ELEMENT_DISPLAY_BLOCK} {
-    padding: ${Spacing.lg} ${Spacing.sm};
-    border-top: 2px solid ${Colors.red};
-    background-color: ${Colors.gray.lightest};
+    padding: ${spacing.lg} ${spacing.sm};
+    border-top: 2px solid ${colors.red};
+    background-color: ${colors.gray.lightest};
     position: relative;
     overflow: hidden;
     height: 100%;
@@ -88,15 +88,15 @@ const VarationDisplayBlockStyles = `
     align-items: center;
   }
 
-  @media (min-width: ${Media.breakpoints.large.min}) {
+  @media (min-width: ${media.breakpoints.large.min}) {
     .${ELEMENT_DISPLAY_BLOCK} {
-      padding: ${Spacing.lg};
+      padding: ${spacing.lg};
     }
   }
 
-  @media (min-width: ${Media.breakpoints.highDef.min}) {
+  @media (min-width: ${media.breakpoints.highDef.min}) {
     .${ELEMENT_DISPLAY_BLOCK} {
-      padding: ${Spacing['2xl']} ${Spacing['3xl']};
+      padding: ${spacing['2xl']} ${spacing['3xl']};
     }
   }
 
@@ -113,37 +113,37 @@ const VarationDisplayBlockStyles = `
 const VarationSizeLargeStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_STAT_DISPLAY}`]: Typography.stats.large,
+      [`${OVERWRITE_SIZE_LARGE_STAT_DISPLAY}`]: typography.stats.large,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_STAT_DISPLAY} *`]: Typography.stats.large,
+      [`${OVERWRITE_SIZE_LARGE_STAT_DISPLAY} *`]: typography.stats.large,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_STAT_TEXT}`]: Typography.sans.larger,
+      [`${OVERWRITE_SIZE_LARGE_STAT_TEXT}`]: typography.sans.larger,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_STAT_TEXT} *`]: Typography.sans.larger,
+      [`${OVERWRITE_SIZE_LARGE_STAT_TEXT} *`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_SUB_TEXT}`]: Typography.sans.small,
+      [`${OVERWRITE_SIZE_LARGE_SUB_TEXT}`]: typography.sans.small,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_SUB_TEXT} *`]: Typography.sans.small,
+      [`${OVERWRITE_SIZE_LARGE_SUB_TEXT} *`]: typography.sans.small,
     },
   })}
 `;
@@ -151,13 +151,13 @@ const VarationSizeLargeStyles = `
 // prettier-ignore
 const VarationWithLineStyles = `
   ${OVERWRITE_WITH_LINE_WRAPPER} {
-    padding-left: ${Spacing.md};
-    border-left: 2px solid ${Colors.gold};
+    padding-left: ${spacing.md};
+    border-left: 2px solid ${colors.gold};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${OVERWRITE_WITH_LINE_WRAPPER} {
-      padding-left: ${Spacing.xl};
+      padding-left: ${spacing.xl};
     }
   }
 `
@@ -166,18 +166,18 @@ const VarationWithLineStyles = `
 const StatDisplayStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_DISPLAY}`]: Typography.stats.medium,
+      [`.${ELEMENT_STAT_DISPLAY}`]: typography.stats.medium,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_DISPLAY} *`]: Typography.stats.medium,
+      [`.${ELEMENT_STAT_DISPLAY} *`]: typography.stats.medium,
     },
   })}
   
   .${ELEMENT_STAT_DISPLAY} {
-    color: ${Colors.red};
+    color: ${colors.red};
     -webkit-font-smoothing: antialiased;
   }
 
@@ -187,7 +187,7 @@ const StatDisplayStyles = `
   }
 
   .${ELEMENT_STAT_DISPLAY} + * {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
    }
 `;
 
@@ -195,24 +195,24 @@ const StatDisplayStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_TEXT}`]: ElementStyles.text.rich.advanced,
+      [`.${ELEMENT_STAT_TEXT}`]: elementStyles.text.rich.advanced,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_TEXT}`]: Typography.sans.medium,
+      [`.${ELEMENT_STAT_TEXT}`]: typography.sans.medium,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_TEXT} *`]: Typography.sans.medium,
+      [`.${ELEMENT_STAT_TEXT} *`]: typography.sans.medium,
     },
   })}
 
   .${ELEMENT_STAT_TEXT} {
-    color: ${Colors.black};
+    color: ${colors.black};
     line-height: 1.444;
   }
 
@@ -221,7 +221,7 @@ const TextStyles = `
   }
 
   .${ELEMENT_STAT_TEXT} + * {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
    }
 `;
 
@@ -229,19 +229,19 @@ const TextStyles = `
 const SubTextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_SUB_TEXT}`]: Typography.sans.min,
+      [`.${ELEMENT_STAT_SUB_TEXT}`]: typography.sans.min,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STAT_SUB_TEXT} *`]: Typography.sans.min,
+      [`.${ELEMENT_STAT_SUB_TEXT} *`]: typography.sans.min,
     },
   })}
 
   .${ELEMENT_STAT_SUB_TEXT} {
-    margin-top: ${Spacing.min};
-    color: ${Colors.gray.mediumAA};
+    margin-top: ${spacing.min};
+    color: ${colors.gray.mediumAA};
   }
 
   .${ELEMENT_STAT_SUB_TEXT} * {

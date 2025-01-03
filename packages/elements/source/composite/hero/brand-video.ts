@@ -1,7 +1,7 @@
 import {
-  ElementStyles,
-  Tokens,
-  Typography,
+  elementStyles,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { ButtonVideoState } from 'atomic';
 import { AnimationOverlayBrand } from 'macros';
@@ -14,7 +14,7 @@ type TypeHeroBrandVideoProps = {
   isAnimationOnLoad?: boolean;
 };
 
-const { Colors, Media, Spacing } = Tokens;
+const { colors, media, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
@@ -30,7 +30,7 @@ const ELEMENT_HERO_ELEMENT_TEXT = 'hero-logo-brand-text';
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_ELEMENT_HEADLINE}`]: Typography.campaign.maxium,
+      [`.${ELEMENT_HERO_ELEMENT_HEADLINE}`]: typography.campaign.maxium,
     },
   })}
 
@@ -46,14 +46,14 @@ const HeadlineStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: ElementStyles.text.rich.simpleLarge,
+      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: elementStyles.text.rich.simpleLarge,
     },
   })}
 
   @media (min-width: 1024px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: Typography.sans.larger,
+        [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: typography.sans.larger,
       },
     })}
   }
@@ -73,7 +73,7 @@ const TextStyles = `
   }
 
   * + .${ELEMENT_HERO_ELEMENT_TEXT} {
-    margin-top: ${Spacing.md};
+    margin-top: ${spacing.md};
   }
 `;
 
@@ -83,11 +83,11 @@ const TextContainerStyles = `
     text-align: center;
     width: calc(100% - 24px);
     max-width: 950px;
-    padding: ${Spacing.xl} ${Spacing.md};
+    padding: ${spacing.xl} ${spacing.md};
   }
 
   .${ELEMENT_HERO_ELEMENT_TEXT_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `;
 
@@ -114,7 +114,7 @@ const VideoStyles = `
     left: 0;
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     .${ELEMENT_HERO_ELEMENT_VIDEO} {
       top: 50%;
       left: 50%;

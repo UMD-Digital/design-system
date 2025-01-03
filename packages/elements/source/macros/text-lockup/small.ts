@@ -1,9 +1,8 @@
 import {
-  Animations,
-  ElementStyles,
-  Layout,
-  Typography,
-  Tokens,
+  animations,
+  layout,
+  typography,
+  tokens,
 } from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
 
@@ -16,7 +15,7 @@ export type TypeTextLockupSmall = {
   isThemeDark?: boolean;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -44,19 +43,19 @@ const DarkThemeStyles = `
   ${IS_THEME_DARK_RICH_TEXT},
   ${IS_THEME_DARK_DATE},
   ${IS_THEME_DARK_DATE} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK_HEADLINE} a`]:
-      Animations.line.slideUnderWhite,
+      animations.line.slideUnderWhite,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK_RICH_TEXT}`]: Animations.nestedElements.linksDark,
+      [`${IS_THEME_DARK_RICH_TEXT}`]: animations.nestedElements.linksDark,
     },
   })}
 `
@@ -64,7 +63,7 @@ const DarkThemeStyles = `
 // prettier-ignore
 const EyebrowStyles = `
   .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   .${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} * {
@@ -73,13 +72,13 @@ const EyebrowStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW}`]: Typography.elements.eyebrow,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW}`]: typography.elements.eyebrow,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} *`]: Typography.elements.eyebrow,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_EYEBROW} *`]: typography.elements.eyebrow,
     },
   })}
 
@@ -92,31 +91,31 @@ const EyebrowStyles = `
 // prettier-ignore
 const HeadlineStyles = `
   * + .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} {
-    margin-top: ${Spacing.min}
+    margin-top: ${spacing.min}
   }
 
   .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE},
   .${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} * {
     font-weight: 700;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: Typography.sans.larger,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: Typography.sans.larger,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} *`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} a`]:
-      Animations.line.slideUnderBlack,
+      animations.line.slideUnderBlack,
     },
   })}
 `;
@@ -124,22 +123,22 @@ const HeadlineStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} {
-    color: ${Colors.gray.dark};
+    color: ${colors.gray.dark};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: Typography.sans.small,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: typography.sans.small,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: Typography.sans.small,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: typography.sans.small,
     },
   })}
 
@@ -151,7 +150,7 @@ const TextStyles = `
   .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a:hover,
   .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a:focus {
     text-decoration: underline;
-    color: ${Colors.red};
+    color: ${colors.red};
   }
 `;
 
@@ -162,24 +161,24 @@ const DateStyles = `
   }
 
   * + .${ELEMENT_TEXT_LOCKUP_SMALL_DATE} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
     display: block;
   }
 
   .${ELEMENT_TEXT_LOCKUP_SMALL_DATE},
   .${ELEMENT_TEXT_LOCKUP_SMALL_DATE} * {
-    color: ${Colors.gray.mediumAA};
+    color: ${colors.gray.mediumAA};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`]: Typography.sans.min,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE}`]: typography.sans.min,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE} *`]: Typography.sans.min,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_DATE} *`]: typography.sans.min,
     },
   })}
 `;
@@ -187,12 +186,12 @@ const DateStyles = `
 // prettier-ignore
 const ActionStyles = `
   .${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: Layout.grid.inline.tabletRows,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_ACTIONS}`]: layout.grid.inline.tabletRows,
     },
   })}
 `;

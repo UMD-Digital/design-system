@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 
@@ -9,11 +9,11 @@ export const label = {
   ...sans.large,
   display: 'inline-block',
   position: 'relative',
-  marginTop: Spacing.sm,
+  marginTop: spacing.sm,
 
   '&:has(+ input[required]):after': {
     content: "' *'",
-    color: Colors.redDark,
+    color: colors.redDark,
   },
 
   '&[for]': {

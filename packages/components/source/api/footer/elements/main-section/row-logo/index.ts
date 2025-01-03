@@ -1,4 +1,4 @@
-import { Tokens, Layout } from '@universityofmaryland/web-elements-styles';
+import { tokens, layout } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import {
   SocialContainerStyles,
@@ -15,7 +15,7 @@ import { LogoContainerStyles, CreateLogoContainer } from './logo';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -39,7 +39,7 @@ const ctaOverwriteStyles = `
 // prettier-ignore
 const themeOverwriteStyles = `
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LOGO_CONTAINER} {
-    background-color: ${Colors.gray.lightest} !important;
+    background-color: ${colors.gray.lightest} !important;
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
@@ -52,12 +52,12 @@ const themeOverwriteStyles = `
 // prettier-ignore
 export const RowLogoStyles = `
   .${ROW_LOGO_CONTAINER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LOGO_CONTAINER} {
-      padding-top: ${Spacing['2xl']};
+      padding-top: ${spacing['2xl']};
     }
   }
 
@@ -65,26 +65,26 @@ export const RowLogoStyles = `
     .${ROW_LOGO_CONTAINER_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: ${Spacing.md};
+      gap: ${spacing.md};
     }
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LOGO_CONTAINER} {
-      padding-bottom: ${Spacing['md']} ;
+      padding-bottom: ${spacing['md']} ;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LOGO_CONTAINER_WRAPPER} {
       display: flex;
-      padding: ${Spacing['5xl']} 0 ${Spacing['2xl']};
+      padding: ${spacing['5xl']} 0 ${spacing['2xl']};
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LOGO_CONTAINER_LOCK}`]: Layout.space.horizontal.max 
+      [`.${ROW_LOGO_CONTAINER_LOCK}`]: layout.space.horizontal.max 
     },
   })}
 

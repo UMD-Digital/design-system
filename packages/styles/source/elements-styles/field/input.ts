@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { create } from '../../utilities';
 import { baseInput } from './_base';
 import { valid, invalid } from './_state';
@@ -51,14 +51,14 @@ const dateTimeBase = {
     display: 'none',
   },
 
-  // [`@container ${CONTAINER_QUERY_NAME} (${Media.queries.medium.min})`]: {
-  //   backgroundPosition: `calc(100% - ${Spacing.sm}) center`,
-  //   padding: Spacing.sm,
+  // [`@container ${CONTAINER_QUERY_NAME} (${media.queries.medium.min})`]: {
+  //   backgroundPosition: `calc(100% - ${spacing.sm}) center`,
+  //   padding: spacing.sm,
   // },
 };
 
 const dateTimeWrapperBase = {
-  backgroundColor: Colors.white,
+  backgroundColor: colors.white,
   position: 'relative',
 
   [`&:before, &:after`]: {
@@ -66,11 +66,11 @@ const dateTimeWrapperBase = {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundSize: 'contain',
-    height: Spacing.sm,
-    width: Spacing.sm,
+    height: spacing.sm,
+    width: spacing.sm,
     position: 'absolute',
-    right: Spacing.sm,
-    top: `calc(50% - ${Spacing.min})`,
+    right: spacing.sm,
+    top: `calc(50% - ${spacing.min})`,
     zIndex: 0,
     transition: `opacity 0.5s ease-in-out`,
   },

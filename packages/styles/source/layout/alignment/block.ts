@@ -1,4 +1,4 @@
-import { Spacing } from '../../tokens';
+import { spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -22,7 +22,7 @@ export const stacked = create.jssObject({
   flexDirection: 'column',
 
   '& > *': {
-    marginTop: Spacing.sm,
+    marginTop: spacing.sm,
 
     '&:first-child': {
       marginTop: '0',

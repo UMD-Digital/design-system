@@ -1,4 +1,4 @@
-import { ElementStyles } from '@universityofmaryland/web-elements-styles';
+import { elementStyles } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import { createElement } from './_base';
 import { modifiers } from '../_modifiers/style';
@@ -9,7 +9,7 @@ const RichTextConfig: BuilderConfig = {
     Styles.combineStyles(
       modifiers.fontStyles({
         ...props,
-        fontStyles: ElementStyles.text.rich.simpleLarge,
+        fontStyles: elementStyles.text.rich.simpleLarge,
       }),
     ),
 };

@@ -1,8 +1,8 @@
 import {
-  ElementStyles,
-  Layout,
-  Tokens,
-  Typography,
+  elementStyles,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
@@ -14,7 +14,7 @@ type TypeHeroDefaultProps = TypeTextContainerProps &
     includesAnimation?: boolean;
   };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
@@ -59,7 +59,7 @@ const OVERWRITE_IMAGE_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .$
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
+      [`${OVERWRITE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
     },
   })}
 `;
@@ -81,14 +81,14 @@ const OverwriteHeadline = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.extralarge,
+      [`${OVERWRITE_HEADLINE}`]: typography.campaign.extralarge,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_SIZE_LARGE_HEADLINE}`]: Typography.campaign.maxium,
+        [`${OVERWRITE_SIZE_LARGE_HEADLINE}`]: typography.campaign.maxium,
       },
     })}
   }
@@ -98,13 +98,13 @@ const OverwriteHeadline = `
 const OverwriteRichText = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: Typography.sans.larger,
+      [`${OVERWRITE_RICH_TEXT}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT} *`]: Typography.sans.larger,
+      [`${OVERWRITE_RICH_TEXT} *`]: typography.sans.larger,
     },
   })}
   
@@ -122,7 +122,7 @@ const OverwriteTextContainer = `
 
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-top: ${Spacing.sm};
+      padding-top: ${spacing.sm};
     }
   }
 
@@ -251,7 +251,7 @@ const DefaultStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER} * {
-      color: ${Colors.white};
+      color: ${colors.white};
     }
   }
 
@@ -263,8 +263,8 @@ const DefaultStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     .${HERO_CONTAINER} .${HERO_LOCK} {
-      padding-top: ${Spacing['2xl']};
-      padding-bottom: ${Spacing['2xl']};
+      padding-top: ${spacing['2xl']};
+      padding-bottom: ${spacing['2xl']};
     }
   }
 
@@ -286,7 +286,7 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${HERO_LOCK}`]: Layout.space.horizontal.max,
+      [`.${HERO_LOCK}`]: layout.space.horizontal.max,
     },
   })}
   

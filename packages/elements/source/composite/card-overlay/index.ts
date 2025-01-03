@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import { TextLockupSmallScaling, TextLockupSmall } from 'macros';
 
@@ -13,7 +13,7 @@ type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
   isThemeLight?: boolean;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 500;
@@ -41,38 +41,38 @@ const OVERWRITE_TEXT_LOCK_ACTIONS = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} 
 // prettier-ignore
 const OverwriteCtaIcon  = `
   ${OVERWRITE_CTA_ICON_BLOCK_CONTAINER} {
-    padding-right: ${Spacing['2xl']};
+    padding-right: ${spacing['2xl']};
   }
 `;
 
 // prettier-ignore
 const OverwriteThemeDark  = `
   ${OVERWRITE_THEME_DARK_WRAPPER} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_WRAPPER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `;
 
 const OverwriteHeadline = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: Typography.sans.larger,
+      [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: Typography.sans.larger,
+      [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: typography.sans.larger,
     },
   })}
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: Typography.sans.extraLarge,
+        [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: typography.sans.extraLarge,
       },
     })}
   }
@@ -80,7 +80,7 @@ const OverwriteHeadline = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: Typography.sans.extraLarge,
+        [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: typography.sans.extraLarge,
       },
     })}
   }
@@ -95,17 +95,17 @@ const OverwriteTextContainer = `
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: ${Spacing.md};
-    padding-top: ${Spacing.lg};
-    padding-bottom: ${Spacing.lg};
+    padding: ${spacing.md};
+    padding-top: ${spacing.lg};
+    padding-bottom: ${spacing.lg};
   }
 
   ${OVERWRITE_TEXT_LOCK_ACTIONS} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   ${OVERWRITE_SCALING_TEXT_LOCK_CONTAINER} > div > *:not(.${TextLockupSmall.Elements.actions}) {
-    margin-bottom: ${Spacing.sm};
+    margin-bottom: ${spacing.sm};
   }
 
   @media (min-width: 768px) {
@@ -124,7 +124,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   }
 
   .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
     height: 100%;
     overflow: hidden;
   }

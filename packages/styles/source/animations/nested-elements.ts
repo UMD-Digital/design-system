@@ -1,4 +1,4 @@
-import { Colors } from '../tokens';
+import { colors } from '../tokens';
 import { create } from '../utilities';
 
 export const linksDark = {
@@ -9,13 +9,13 @@ export const linksDark = {
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 1px',
     transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
-    color: Colors.white,
+    color: colors.white,
 
     '&:hover, &:focus': {
-      backgroundImage: `linear-gradient(${Colors.gold}, ${Colors.gold})`,
+      backgroundImage: `linear-gradient(${colors.gold}, ${colors.gold})`,
       backgroundPosition: 'left calc(100%)',
       textDecoration: 'none !important',
-      color: `${Colors.white} !important`,
+      color: `${colors.white} !important`,
     },
   },
 };

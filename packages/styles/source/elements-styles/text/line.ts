@@ -1,4 +1,4 @@
-import { Colors, Spacing, Media } from '../../tokens';
+import { colors, spacing, media } from '../../tokens';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
 
@@ -26,7 +26,7 @@ export const tailwing = create.jssObject({
     left: `0`,
     width: `100vw`,
     height: '1px',
-    background: `${Colors.black}`,
+    background: `${colors.black}`,
     zIndex: -1,
   },
 
@@ -42,23 +42,23 @@ export const tailwing = create.jssObject({
       left: `-2px`,
       right: `-2px`,
       height: '100%',
-      backgroundColor: `${Colors.white}`,
+      backgroundColor: `${colors.white}`,
       zIndex: -1,
 
-      [`@media (${Media.queries.medium.min})`]: {
-        left: `-${Spacing.min}`,
-        right: `-${Spacing.min}`,
+      [`@media (${media.queries.medium.min})`]: {
+        left: `-${spacing.min}`,
+        right: `-${spacing.min}`,
       },
 
-      [`@media (${Media.queries.large.min})`]: {
-        left: `-${Spacing.sm}`,
-        right: `-${Spacing.sm}`,
+      [`@media (${media.queries.large.min})`]: {
+        left: `-${spacing.sm}`,
+        right: `-${spacing.sm}`,
       },
     },
   },
 
   '& + *': {
-    marginTop: Spacing.md,
+    marginTop: spacing.md,
   },
 });
 
@@ -69,7 +69,7 @@ const lineTrailingBefore = {
   right: `0`,
   width: `100vw`,
   height: '1px',
-  background: `${Colors.black}`,
+  background: `${colors.black}`,
   zIndex: 1,
 };
 
@@ -85,7 +85,7 @@ export const lineTrailing = create.jssObject({
   textTransform: 'uppercase',
   position: 'relative',
   overflow: 'hidden',
-  backgroundColor: `${Colors.white}`,
+  backgroundColor: `${colors.white}`,
 
   '&::before': {
     ...lineTrailingBefore,
@@ -94,19 +94,19 @@ export const lineTrailing = create.jssObject({
   '& > span': {
     position: 'relative',
     backgroundColor: `inherit`,
-    paddingRight: Spacing.min,
+    paddingRight: spacing.min,
     zIndex: 2,
   },
 
   '& + *': {
-    marginTop: Spacing.xl,
+    marginTop: spacing.xl,
   },
 });
 
 // umd-text-line-trailing-light
 export const lineTrailingLight = create.jssObject({
   ...lineTrailing,
-  backgroundColor: `${Colors.gray.lighter}`,
+  backgroundColor: `${colors.gray.lighter}`,
 
   className: [
     `${classNamePrefix}-trailing-light`,
@@ -118,8 +118,8 @@ export const lineTrailingLight = create.jssObject({
 // umd-text-line-trailing-dark
 export const lineTrailingDark = create.jssObject({
   ...lineTrailing,
-  backgroundColor: `${Colors.gray.darker}`,
-  color: `${Colors.white}`,
+  backgroundColor: `${colors.gray.darker}`,
+  color: `${colors.white}`,
 
   className: [
     `${classNamePrefix}-trailing-dark`,
@@ -129,7 +129,7 @@ export const lineTrailingDark = create.jssObject({
 
   '&::before': {
     ...lineTrailingBefore,
-    background: `${Colors.white}`,
+    background: `${colors.white}`,
   },
 });
 
@@ -151,6 +151,6 @@ export const lineAdjustent = create.jssObject({
     left: '-24px',
     width: '2px',
     height: '100%',
-    backgroundColor: Colors.red,
+    backgroundColor: colors.red,
   },
 });

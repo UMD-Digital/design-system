@@ -1,4 +1,4 @@
-import { Colors, Font, Spacing } from './tokens';
+import { colors, font, spacing } from './tokens';
 import { sans } from './typography';
 import { input } from './elements-styles/field/input';
 import { textarea } from './elements-styles/field/textarea';
@@ -18,25 +18,25 @@ export const reset = {
   },
 
   hr: {
-    margin: `${Spacing.lg} 0`,
-    backgroundColor: Colors.gray.light,
+    margin: `${spacing.lg} 0`,
+    backgroundColor: colors.gray.light,
     border: 'none',
     height: '1px',
   },
 
   li: {
     ...sans.medium,
-    color: Colors.gray.dark,
+    color: colors.gray.dark,
   },
 
   date: {
-    color: Colors.black,
+    color: colors.black,
   },
 
   p: {
     ...sans.medium,
-    color: Colors.gray.dark,
-    marginBottom: Spacing.md,
+    color: colors.gray.dark,
+    marginBottom: spacing.md,
 
     '&:last-child': {
       marginBottom: '0',
@@ -69,24 +69,24 @@ export const reset = {
 
 export const root = {
   ':root': {
-    '--red': Colors.red,
-    '--gold': Colors.gold,
-    '--blue': Colors.blue,
-    '--green': Colors.green,
-    '--white': Colors.white,
-    '--black': Colors.black,
-    '--redDark': Colors.redDark,
-    '--grayDarker': Colors.gray.darker,
-    '--grayDark': Colors.gray.dark,
-    '--grayAA': Colors.gray.mediumAA,
-    '--gray': Colors.gray.medium,
-    '--grayLight': Colors.gray.light,
-    '--grayLighter': Colors.gray.lighter,
-    '--grayLightest': Colors.gray.lightest,
-    '--serif': Font.family.serif,
-    '--sanSerif': Font.family.sans,
-    FontFamily: Font.family.sans,
-    FontSize: Font.size.base,
+    '--red': colors.red,
+    '--gold': colors.gold,
+    '--blue': colors.blue,
+    '--green': colors.green,
+    '--white': colors.white,
+    '--black': colors.black,
+    '--redDark': colors.redDark,
+    '--grayDarker': colors.gray.darker,
+    '--grayDark': colors.gray.dark,
+    '--grayAA': colors.gray.mediumAA,
+    '--gray': colors.gray.medium,
+    '--grayLight': colors.gray.light,
+    '--grayLighter': colors.gray.lighter,
+    '--grayLightest': colors.gray.lightest,
+    '--serif': font.family.serif,
+    '--sanSerif': font.family.sans,
+    FontFamily: font.family.sans,
+    FontSize: font.size.base,
     lineHeight: '1.5em',
   },
 

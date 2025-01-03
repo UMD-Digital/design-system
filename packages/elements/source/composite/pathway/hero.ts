@@ -1,7 +1,7 @@
 import {
-  Layout,
-  Tokens,
-  Typography,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
@@ -15,7 +15,7 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
     includesAnimation?: boolean;
   };
 
-const { Spacing } = Tokens;
+const { spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 1000;
@@ -83,13 +83,13 @@ const OverwriteImageRightStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-right: ${Spacing['2xl']};
+      padding-right: ${spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-right: ${Spacing['4xl']};
+      padding-right: ${spacing['4xl']};
     }
   }
 `;
@@ -110,13 +110,13 @@ const OverwriteImageLeftStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-left: ${Spacing['2xl']};
+      padding-left: ${spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-left: ${Spacing['4xl']};
+      padding-left: ${spacing['4xl']};
     }
   }
 `;
@@ -162,43 +162,43 @@ const OverwriteImageContainerStyles = `
 const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${Spacing.md} 0;
+      padding: ${spacing.md} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${Spacing['4xl']} 0;
+      padding: ${spacing['4xl']} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${Spacing['8xl']} 0;
+      padding: ${spacing['8xl']} 0;
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_HEADLINE}`]: Typography.campaign.extralarge,
+      [`${OVERWRITE_TEXT_HEADLINE}`]: typography.campaign.extralarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_HEADLINE} *`]: Typography.campaign.extralarge,
+      [`${OVERWRITE_TEXT_HEADLINE} *`]: typography.campaign.extralarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_TEXT_RICHTEXT} *`]: Typography.sans.larger,
+      [`${OVERWRITE_TEXT_RICHTEXT} *`]: typography.sans.larger,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${OVERWRITE_TEXT_RICHTEXT}`]: Typography.sans.larger,
+      [`.${OVERWRITE_TEXT_RICHTEXT}`]: typography.sans.larger,
     },
   })}
 `;
@@ -236,7 +236,7 @@ const AnimationStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: Layout.space.horizontal.max,
+      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 

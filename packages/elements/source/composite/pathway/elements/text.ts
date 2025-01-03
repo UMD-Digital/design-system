@@ -1,8 +1,8 @@
 import {
-  ElementStyles,
-  Layout,
-  Tokens,
-  Typography,
+  elementStyles,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
@@ -17,7 +17,7 @@ export type TypePathwayTextContainer = {
   isThemeMaryland?: boolean;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 400;
@@ -50,34 +50,34 @@ const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_THEME
 // prettier-ignore
 const VarationThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `
 
 // prettier-ignore
 const VarationThemeLight = `
   ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 `
 
 // prettier-ignore
 const VarationThemeMaryland = `
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `
 
 // prettier-ignore
 const EyebrowStyles = `
   .${ELEMENT_TEXT_CONTAINER_EYEBROW} {
-    margin-bottom: ${Spacing.sm};
-    color: ${Colors.black} !important;
+    margin-bottom: ${spacing.sm};
+    color: ${colors.black} !important;
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
+      [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: elementStyles.text.decoration.ribbon,
     },
   })}
 `;
@@ -86,19 +86,19 @@ const EyebrowStyles = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE}`]: Typography.sans.largest,
+      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE}`]: typography.sans.largest,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE} *`]: Typography.sans.largest,
+      [`.${ELEMENT_TEXT_CONTAINER_HEADLINE} *`]: typography.sans.largest,
     },
   })}
 
   .${ELEMENT_TEXT_CONTAINER_HEADLINE},
   .${ELEMENT_TEXT_CONTAINER_HEADLINE} * {
-    color: ${Colors.black};
+    color: ${colors.black};
     font-weight: 800;
     text-transform: uppercase;
     text-wrap: balance;
@@ -114,7 +114,7 @@ const HeadlineStyles = `
 // prettier-ignore
 const DetailsRowStyles = `
   * + .${ELEMENT_TEXT_CONTAINER_EVENT_DETAILS} {
-    margin-top: ${Spacing.md};
+    margin-top: ${spacing.md};
     display: block;
   }
 `;
@@ -122,49 +122,49 @@ const DetailsRowStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     * + .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} {
-      margin-top: ${Spacing.md};
+      margin-top: ${spacing.md};
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: ElementStyles.text.rich.advanced,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: elementStyles.text.rich.advanced,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: ElementStyles.text.rich.advanced,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: elementStyles.text.rich.advanced,
     },
   })}
 
   .${ELEMENT_TEXT_CONTAINER_RICH_TEXT},
   .${ELEMENT_TEXT_CONTAINER_RICH_TEXT} * {
     line-height: 1.5em;
-    color: ${Colors.gray.dark};
+    color: ${colors.gray.dark};
   }
 `;
 
 // prettier-ignore
 const ActionStyles = `
   * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
-      margin-top: ${Spacing.lg};
+      margin-top: ${spacing.lg};
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: Layout.grid.inline.tabletRows,
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: layout.grid.inline.tabletRows,
     },
   })}
 
@@ -177,26 +177,26 @@ const ActionStyles = `
 const StatsStyles = `
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${ELEMENTS_TEXT_CONTAINER_STATS} {
-      margin-top: ${Spacing.lg};
-      padding-top: ${Spacing.md};
-      border-top: 1px solid ${Colors.gray.light};
+      margin-top: ${spacing.lg};
+      padding-top: ${spacing.md};
+      border-top: 1px solid ${colors.gray.light};
     }
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM }px) {
     .${ELEMENTS_TEXT_CONTAINER_STATS} {
-      margin-top: ${Spacing['2xl']};
+      margin-top: ${spacing['2xl']};
     }
   }
 
   .${ELEMENTS_TEXT_CONTAINER_STATS}:has(> :nth-child(2)) {
     display: grid;
-    grid-gap: ${Spacing.md};
+    grid-gap: ${spacing.md};
   }
 
   @container ${TEXT_CONTAINER_ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${ELEMENTS_TEXT_CONTAINER_STATS}:has(> :nth-child(2)) {
-      grid-gap: ${Spacing.lg};
+      grid-gap: ${spacing.lg};
       grid-template-columns: repeat(2, 1fr);
     }
   }

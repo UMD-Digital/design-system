@@ -1,8 +1,8 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Markup } from 'utilities';
 import { SLOTS } from '../../globals';
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const { SlotWithDefaultStyling } = Markup.create;
 
@@ -17,20 +17,20 @@ export const CallToActionStyles = `
 
   .${CALL_TO_ACTION_CONTAINER} a {
     display: inline-block;
-    padding: ${Spacing.xs} ${Spacing['lg']};
-    background-color: ${Colors.red};
-    color: ${Colors.white} !important;
+    padding: ${spacing.xs} ${spacing['lg']};
+    background-color: ${colors.red};
+    color: ${colors.white} !important;
     transition: background-color 0.3s ease-in-out;
     font-weight: 700;
   }
 
   .${CALL_TO_ACTION_CONTAINER} a:hover,
   .${CALL_TO_ACTION_CONTAINER} a:focus {
-    background-color: ${Colors.redDark};
+    background-color: ${colors.redDark};
   }
 
   .${CALL_TO_ACTION_CONTAINER} a * {
-    color: ${Colors.white} !important;
+    color: ${colors.white} !important;
   }
 `;
 

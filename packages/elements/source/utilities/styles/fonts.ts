@@ -1,4 +1,4 @@
-import { Typography } from '@universityofmaryland/web-elements-styles';
+import { typography } from '@universityofmaryland/web-elements-styles';
 
 export enum CampaignFontSize {
   Maximum = 'maximum',
@@ -22,12 +22,12 @@ export enum SansFontSize {
 }
 
 export const CampaignFontOptions = (size: CampaignFontSize) => {
-  const { className, ...fontStyles } = Typography.campaign.fonts[size];
+  const { className, ...fontStyles } = typography.campaign.fonts[size];
   return { className, fontStyles };
 };
 
 export const SansFontOptions = (size: SansFontSize) => {
-  const { className, ...fontStyles } = Typography.sans.fonts[size];
+  const { className, ...fontStyles } = typography.sans.fonts[size];
   return { className, fontStyles };
 };
 

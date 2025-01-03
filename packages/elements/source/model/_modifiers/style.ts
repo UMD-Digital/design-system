@@ -1,4 +1,4 @@
-import { Animations } from '@universityofmaryland/web-elements-styles';
+import { animations } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import { StyleModifierProps } from '../_types';
 
@@ -8,14 +8,14 @@ export enum StyleType {
   SiblingAfter = 'sibling-after',
 }
 
-const Colors = {
+const colors = {
   white: { color: 'white' },
   black: { color: 'black' },
 } as const;
 
 const LinkAnimations = {
-  white: Animations.line.slideUnderWhite,
-  black: Animations.line.slideUnderBlack,
+  white: animations.line.slideUnderWhite,
+  black: animations.line.slideUnderBlack,
 } as const;
 
 const getColor = (isColorWhite?: boolean) => (isColorWhite ? 'black' : 'white');
@@ -53,7 +53,7 @@ const styleGetters = {
   }),
   font: ({ fontStyles }: StyleModifierProps) => fontStyles || {},
   color: ({ isColorWhite }: StyleModifierProps) =>
-    Colors[getColor(isColorWhite)],
+    colors[getColor(isColorWhite)],
   element: ({ element }: StyleModifierProps) => element || {},
   sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
   child: ({ subElement }: StyleModifierProps) => subElement || {},

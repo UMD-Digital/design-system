@@ -1,4 +1,4 @@
-import { Colors, Font, Spacing } from '../../tokens';
+import { colors, font, spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -13,19 +13,19 @@ export const code = create.jssObject({
   ],
 
   '& code, & pre': {
-    border: `1px solid ${Colors.gray.lightest}`,
-    backgroundColor: Colors.gray.lightest,
+    border: `1px solid ${colors.gray.lightest}`,
+    backgroundColor: colors.gray.lightest,
     borderRadius: '3px',
     color: 'currentColor',
-    FontFamily: Font.family.mono,
+    FontFamily: font.family.mono,
   },
 
   '& code': {
     display: 'inline-block',
-    padding: `0 ${Spacing.min}`,
+    padding: `0 ${spacing.min}`,
   },
 
   '& pre': {
-    padding: Spacing.min,
+    padding: spacing.min,
   },
 });

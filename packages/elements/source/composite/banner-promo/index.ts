@@ -1,8 +1,8 @@
 import {
-  Animations,
-  ElementStyles,
-  Tokens,
-  Typography,
+  animations,
+  elementStyles,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles, Asset } from 'utilities';
 
@@ -14,7 +14,7 @@ type TypeBannerPromoProps = {
   includeSeal?: boolean;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const SMALL = 650;
@@ -40,25 +40,25 @@ const OVERWRITE_THEME_DARK_RICH_TEXT = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .$
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} > svg {
-    fill: ${Colors.gray.darker};
+    fill: ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE} {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: ElementStyles.text.rich.advancedDark,
+      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: elementStyles.text.rich.advancedDark,
     },
   })}
 
   ${OVERWRITE_THEME_DARK_RICH_TEXT} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `;
 
@@ -66,14 +66,14 @@ const OverwriteThemeDark = `
 const ActionsStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     .${ELEMENT_ACTIONS} {
-      margin-top: ${Spacing.sm};
+      margin-top: ${spacing.sm};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_ACTIONS} {
       max-width: 30%;
-      margin-left: ${Spacing.md};
+      margin-left: ${spacing.md};
     }
   }
 `;
@@ -82,22 +82,22 @@ const ActionsStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT}`]: ElementStyles.text.rich.advanced,
+      [`.${ELEMENT_RICH_TEXT}`]: elementStyles.text.rich.advanced,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT} a`]: Animations.line.fadeUnderRed,
+      [`.${ELEMENT_RICH_TEXT} a`]: animations.line.fadeUnderRed,
     },
   })}
 
   .${ELEMENT_RICH_TEXT} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   .${ELEMENT_RICH_TEXT} * {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 `;
 
@@ -105,13 +105,13 @@ const TextStyles = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: Typography.sans.extraLarge,
+      [`.${ELEMENT_HEADLINE}`]: typography.sans.extraLarge,
     },
   })}
 
   .${ELEMENT_HEADLINE} {
     text-transform: uppercase;
-    color: ${Colors.black};
+    color: ${colors.black};
     font-weight: 800;
   }
 `;
@@ -149,13 +149,13 @@ const STYLES_BANNER_PROMO_ELEMENT = `
   }
 
   .${ELEMENT_CONTAINER} {
-    padding: ${Spacing.lg} ${Spacing.lg};
-    background-color: ${Colors.gold};
+    padding: ${spacing.lg} ${spacing.lg};
+    background-color: ${colors.gold};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_CONTAINER} {
-      padding: ${Spacing.xl};
+      padding: ${spacing.xl};
     }
   }
 

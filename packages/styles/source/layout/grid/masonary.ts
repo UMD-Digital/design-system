@@ -1,11 +1,11 @@
-import { Spacing, Media } from '../../tokens';
+import { spacing, media } from '../../tokens';
 import { create } from '../../utilities';
 
 // umd-layout-grid-masonry
 export const twoColumn = create.jssObject({
   display: 'grid',
   gridTemplateColumns: '1fr',
-  gridGap: Spacing.md,
+  gridGap: spacing.md,
 
   className: [
     `umd-layout-grid-masonry`,
@@ -13,13 +13,13 @@ export const twoColumn = create.jssObject({
     'umd-grid-gap-masonry',
   ],
 
-  [`@media (${Media.queries.tablet.min})`]: {
+  [`@media (${media.queries.tablet.min})`]: {
     gridTemplateColumns: '1fr 1fr',
-    gridGap: Spacing.lg,
+    gridGap: spacing.lg,
   },
 
-  [`@media (${Media.queries.desktop.min})`]: {
-    gridGap: Spacing.xl,
+  [`@media (${media.queries.desktop.min})`]: {
+    gridGap: spacing.xl,
   },
 
   '& > *': {
@@ -30,36 +30,36 @@ export const twoColumn = create.jssObject({
   },
 
   '& > *:nth-of-type(odd)': {
-    [`@media (${Media.queries.tablet.min})`]: {
-      marginTop: `-${Spacing.lg}`,
-      marginBottom: `${Spacing.lg}`,
+    [`@media (${media.queries.tablet.min})`]: {
+      marginTop: `-${spacing.lg}`,
+      marginBottom: `${spacing.lg}`,
     },
 
-    [`@media (${Media.queries.desktop.min})`]: {
-      marginTop: `-${Spacing.xl}`,
-      marginBottom: `${Spacing.xl}`,
+    [`@media (${media.queries.desktop.min})`]: {
+      marginTop: `-${spacing.xl}`,
+      marginBottom: `${spacing.xl}`,
     },
   },
 
   '& > *:nth-of-type(even)': {
-    [`@media (${Media.queries.tablet.min})`]: {
+    [`@media (${media.queries.tablet.min})`]: {
       marginTop: '0',
     },
   },
 
   '& > *:first-child': {
-    [`@media (${Media.queries.tablet.min})`]: {
+    [`@media (${media.queries.tablet.min})`]: {
       marginTop: '0',
     },
   },
 
   '& > *:nth-of-type(2)': {
-    [`@media (${Media.queries.tablet.min})`]: {
-      marginTop: `${Spacing.lg}`,
+    [`@media (${media.queries.tablet.min})`]: {
+      marginTop: `${spacing.lg}`,
     },
 
-    [`@media (${Media.queries.desktop.min})`]: {
-      marginTop: `${Spacing.xl}`,
+    [`@media (${media.queries.desktop.min})`]: {
+      marginTop: `${spacing.xl}`,
     },
   },
 });

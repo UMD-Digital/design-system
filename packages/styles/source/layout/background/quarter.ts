@@ -1,4 +1,4 @@
-import { Colors, Media, Spacing } from '../../tokens';
+import { colors, media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 import { padding } from './full';
 
@@ -14,11 +14,11 @@ const psuedo = {
   width: '100%',
   zIndex: -1,
 
-  [`@media (${Media.queries.tablet.max})`]: {
+  [`@media (${media.queries.tablet.max})`]: {
     display: 'none',
   },
 
-  [`@media (${Media.queries.desktop.min})`]: {
+  [`@media (${media.queries.desktop.min})`]: {
     width: `calc(75% + 80px)`,
   },
 };
@@ -29,7 +29,7 @@ const quarter = {
 
   '&:before': {
     ...psuedo,
-    backgroundColor: `${Colors.gray.lightest}`,
+    backgroundColor: `${colors.gray.lightest}`,
   },
 };
 
@@ -50,7 +50,7 @@ export const dark = create.jssObject({
 
   '&:before': {
     ...psuedo,
-    backgroundColor: `${Colors.gray.darker}`,
+    backgroundColor: `${colors.gray.darker}`,
   },
 
   className: [

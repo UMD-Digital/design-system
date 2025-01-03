@@ -1,4 +1,4 @@
-import { Typography, Tokens } from '@universityofmaryland/web-elements-styles';
+import { typography, tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
 type TypeSectionIntroWideProps = {
@@ -7,7 +7,7 @@ type TypeSectionIntroWideProps = {
   isThemeDark?: boolean;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -26,7 +26,7 @@ const OVERWRITE_THEME_DARK_CONTAINTER = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINTER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `;
 
@@ -34,12 +34,12 @@ const OverwriteTheme = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: Typography.sans.largest,
+      [`.${ELEMENT_HEADLINE}`]: typography.sans.largest,
     },
   })}
 
   .${ELEMENT_HEADLINE} {
-    color: ${Colors.black};
+    color: ${colors.black};
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -49,7 +49,7 @@ const HeadlineStyles = `
 const ActionStyles = `
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     * + .${ELEMENT_ACTIONS} {
-      margin-top: ${Spacing.md};
+      margin-top: ${spacing.md};
     }
   }
 `;

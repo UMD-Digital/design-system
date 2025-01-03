@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 
@@ -17,9 +17,9 @@ export const quote = create.jssObject({
     ...sans.larger,
     ...{
       display: 'inline-block',
-      borderLeft: `2px solid ${Colors.red}`,
+      borderLeft: `2px solid ${colors.red}`,
       position: 'relative',
-      paddingLeft: Spacing.md,
+      paddingLeft: spacing.md,
     },
   },
 });

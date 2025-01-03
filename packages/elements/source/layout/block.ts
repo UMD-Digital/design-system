@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import ImageContainer from './image';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 
@@ -15,7 +15,7 @@ type TypeBlockContainerProps = TypeBlockContainer & {
   personContainer?: HTMLDivElement | null;
 };
 
-const { Colors, Spacing, SpaceLayout } = Tokens;
+const { colors, spacing } = tokens;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_TRANSPARENT = 'transparent';
@@ -66,23 +66,23 @@ const OverwriteTransparent = `
 // prettier-ignore
 const VariantThemeStyles = `
   ${IS_THEME_DARK} {
-    background-color: ${Colors.gray.darker};
-    color: ${Colors.white};
+    background-color: ${colors.gray.darker};
+    color: ${colors.white};
     height: 100%;
   }
 
   ${IS_THEME_DARK} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER} {
-    padding: ${Spacing.md};
+    padding: ${spacing.md};
   }
 
   @media (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
-     margin-top: ${Spacing.md};
-     margin-right: ${Spacing.md};
+     margin-top: ${spacing.md};
+     margin-right: ${spacing.md};
     }
   }
 `;
@@ -112,24 +112,24 @@ const VariantAlignedStyles = `
 // prettier-ignore
 const VariantBorderStyles = `
   ${IS_WITH_BORDER} {
-    border: 1px solid ${Colors.gray.light};
+    border: 1px solid ${colors.gray.light};
     height: 100%;
   }
 
   ${OVERWRITE_TYPE_BORDER_TEXT_CONTAINER} {
-    padding: ${Spacing.md};
+    padding: ${spacing.md};
   }
 
   @media (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER} {
-      margin: ${Spacing.md};
+      margin: ${spacing.md};
       margin-bottom: 0;
     }
   }
 
   @media (min-width: 380px) and (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER} {
-      margin-left: ${Spacing.sm};
+      margin-left: ${spacing.sm};
     }
   }
 `;
@@ -145,7 +145,7 @@ const VariantWithImageStyles = `
 
   @media (min-width: ${MEDIUM}px) {
     ${OVERWRITE_WITH_IMAGE_TEXT_CONTAINER} {
-      padding-top: ${Spacing.md};
+      padding-top: ${spacing.md};
     }
   }
 `;
@@ -165,7 +165,7 @@ const ImageContainerStyles = `
     .${ImageContainer.Elements.container} {
       max-width: 100%;
       margin-bottom: 4px;
-      margin-bottom: ${Spacing.md};
+      margin-bottom: ${spacing.md};
     }
   }
 
@@ -181,7 +181,7 @@ const ImageContainerStyles = `
 const STYLES_BLOCK_CONTAINER = `
   .${ELEMENT_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: ${SpaceLayout.maxWidth.smallest};
+    max-width: ${spacing.maxWidth.smallest};
   }
 
   .${ELEMENT_BLOCK_CONTAINER_WRAPPER} {

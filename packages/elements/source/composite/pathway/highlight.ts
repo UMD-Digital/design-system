@@ -1,7 +1,7 @@
 import {
-  Layout,
-  Tokens,
-  Typography,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
@@ -14,7 +14,7 @@ type TypePathwayHighlightContainer = {
 type TypePathwayHighlightProps = TypePathwayTextContainer &
   TypePathwayHighlightContainer;
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 1000;
@@ -40,11 +40,11 @@ const OVERWRITE_THEME_DARK_HIGHLIGHT = `.${PATHWAY_HIGHLIGHT_CONTAINER}${IS_THEM
 // prettier-ignore
 const OverwriteThemeDarkStyles = `
   ${OVERWRITE_THEME_DARK_HIGHLIGHT} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_HIGHLIGHT} * {
-   color: ${Colors.white};
+   color: ${colors.white};
   }
 `
 
@@ -52,19 +52,19 @@ const OverwriteThemeDarkStyles = `
 const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-bottom: ${Spacing.md};
+      padding-bottom: ${spacing.md};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-right: ${Spacing['4xl']};
+      padding-right: ${spacing['4xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding-right: ${Spacing['6xl']};
+      padding-right: ${spacing['6xl']};
     }
   }
 `;
@@ -72,26 +72,26 @@ const OverwriteTextContainerStyles = `
 // prettier-ignore
 const HighlightContainer = `
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-    padding: ${Spacing['5xl']} ${Spacing.md} ${Spacing.md} ${Spacing.md};
-    background-color: ${Colors.gray.lightest};
+    padding: ${spacing['5xl']} ${spacing.md} ${spacing.md} ${spacing.md};
+    background-color: ${colors.gray.lightest};
     position: relative;
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-      padding: ${Spacing['4xl']} ${Spacing['2xl']};
+      padding: ${spacing['4xl']} ${spacing['2xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-      padding: ${Spacing['8xl']} ${Spacing['xl']};
+      padding: ${spacing['8xl']} ${spacing['xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER} {
-      padding-left: ${Spacing['xl']};
+      padding-left: ${spacing['xl']};
       position: relative;
     }
   }
@@ -99,13 +99,13 @@ const HighlightContainer = `
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER}:before {
     content: '';
     position: absolute;
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
   }
   
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER}:before {
-      top: ${Spacing['2xl']};
-      width: ${Spacing['5xl']};
+      top: ${spacing['2xl']};
+      width: ${spacing['5xl']};
       height: 2px;
     }
   }
@@ -115,45 +115,45 @@ const HighlightContainer = `
       left: 0;
       width: 2px;
       height: 100%;
-      background-color: ${Colors.red};
+      background-color: ${colors.red};
     }
   }
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT}`]: Typography.sans.larger,
+      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT}`]: typography.sans.larger,
     },
   })}
   
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT},
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT} * {
     font-weight: 700;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION}`]: Typography.sans.medium,
+      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION}`]: typography.sans.medium,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} *`]: Typography.sans.medium,
+      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} *`]: typography.sans.medium,
     },
   })}
   
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION},
   .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} * {
-    margin-top: ${Spacing.sm};
-    color: ${Colors.black};
+    margin-top: ${spacing.sm};
+    color: ${colors.black};
   }
 `
 
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: Layout.space.horizontal.max,
+      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 

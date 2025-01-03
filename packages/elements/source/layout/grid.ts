@@ -1,4 +1,4 @@
-import { Layout, Tokens } from '@universityofmaryland/web-elements-styles';
+import { layout, tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
 type TypeGridDisplay = {
@@ -7,7 +7,7 @@ type TypeGridDisplay = {
   isTypeGap?: boolean;
 };
 
-const { Media } = Tokens;
+const { media } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
@@ -15,57 +15,57 @@ const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 const STYLES_GRID_LAYOUT = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="2"]`]: Layout.grid.gap.two,
+      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="2"]`]: layout.grid.gap.two,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="3"]`]:
-        Layout.grid.gap.three,
+        layout.grid.gap.three,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-gap-count="4"]`]:
-        Layout.grid.gap.four,
+        layout.grid.gap.four,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="2"]`]: Layout.grid.columnsTwo,
+      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="2"]`]: layout.grid.columnsTwo,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="3"]`]:
-        Layout.grid.columnsThree,
+        layout.grid.columnsThree,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="4"]`]: Layout.grid.columnsFour,
+      [`.${ID_GRID_LAYOUT_CONTAINER}[grid-count="4"]`]: layout.grid.columnsFour,
     },
   })}
 
-  @media (${Media.queries.large.min}) {
+  @media (${media.queries.large.min}) {
     .${ID_GRID_LAYOUT_CONTAINER}[grid-count] > * {
       min-height: 560px;
     }
   }
 
-  @media (${Media.queries.large.min}) {
+  @media (${media.queries.large.min}) {
     .umd-grid-column-double {
       grid-column: span 2;
       min-height: 560px;
     }
   }
 
-  @media (${Media.queries.highDef.min}) {
+  @media (${media.queries.highDef.min}) {
     .${ID_GRID_LAYOUT_CONTAINER}[data-reversed] > *:first-child {
       order: 2;
     }

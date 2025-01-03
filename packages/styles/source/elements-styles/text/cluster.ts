@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 
@@ -8,9 +8,9 @@ const classNamePrefix = 'umd-text-cluster';
 const pill = {
   ...sans.min,
   display: 'inline-block',
-  padding: `${Spacing.min} ${Spacing.xs}`,
+  padding: `${spacing.min} ${spacing.xs}`,
   marginBottom: '0',
-  marginTop: Spacing.min,
+  marginTop: spacing.min,
   transition: 'background-color 0.3s',
 
   '& > span': {
@@ -33,11 +33,11 @@ export const pillList = create.jssObject({
     'umd-pill-list',
   ],
 
-  marginTop: `-${Spacing.min}`,
+  marginTop: `-${spacing.min}`,
 
   '& > *': {
     ...pill,
-    backgroundColor: Colors.gray.lightest,
+    backgroundColor: colors.gray.lightest,
   },
 
   '& svg': {
@@ -45,7 +45,7 @@ export const pillList = create.jssObject({
   },
 
   '& a:hover, & a:focus': {
-    backgroundColor: Colors.gold,
+    backgroundColor: colors.gold,
   },
 });
 
@@ -61,21 +61,21 @@ export const pillListDark = create.jssObject({
 
   '& > *': {
     ...pill,
-    backgroundColor: Colors.gray.dark,
-    color: Colors.white,
+    backgroundColor: colors.gray.dark,
+    color: colors.white,
   },
 
   '& svg': {
     ...pillSvg,
-    fill: Colors.white,
+    fill: colors.white,
   },
 
   '& a:hover, & a:focus': {
-    backgroundColor: Colors.gray.lighter,
-    color: Colors.black,
+    backgroundColor: colors.gray.lighter,
+    color: colors.black,
 
     '& svg': {
-      fill: Colors.black,
+      fill: colors.black,
     },
   },
 });
@@ -87,14 +87,14 @@ export const pillDoNotUse = create.jssObject({
     'umd-pills',
   ],
 
-  marginTop: `-${Spacing.min}`,
+  marginTop: `-${spacing.min}`,
 
   '& > *': {
-    backgroundColor: Colors.gray.lightest,
+    backgroundColor: colors.gray.lightest,
     display: 'inline-block',
-    padding: `${Spacing.min} ${Spacing.xs}`,
+    padding: `${spacing.min} ${spacing.xs}`,
     marginBottom: '0',
-    marginTop: Spacing.min,
+    marginTop: spacing.min,
   },
 
   '& a:hover, &:focus': {

@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { AnimationCarouselBlocks } from 'macros';
 
 type TypeCarouselThumbnailProps = {
@@ -6,7 +6,7 @@ type TypeCarouselThumbnailProps = {
   isThemeDark?: boolean;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
@@ -28,24 +28,24 @@ const OVERWRITE_THEME_DARK_SLIDE = `.${ELEMENT_THUMBNAIL_CONTAINER}${IS_THEME_DA
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_DARK_BUTTON} > svg {
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_SLIDE} {
-    border: 1px solid ${Colors.gray.dark};
+    border: 1px solid ${colors.gray.dark};
     border-left: none;
   }
 
   ${OVERWRITE_THEME_DARK_SLIDE}:first-child {
-    border-left: 1px solid ${Colors.gray.dark};
+    border-left: 1px solid ${colors.gray.dark};
   }
 `;
 
@@ -57,24 +57,24 @@ const OverwriteCarouselStyles = `
   }
 
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {
-    left: -${Spacing.md};
+    left: -${spacing.md};
   }
 
   ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:first-of-type {
-    right: -${Spacing.md};
+    right: -${spacing.md};
   }
 `;
 
 // prettier-ignore
 const PersonSlideStyles = `
   .${ELEMENT_PERSON_SLIDE} {
-    border: 1px solid ${Colors.gray.light};
+    border: 1px solid ${colors.gray.light};
     border-left: none;
-    padding: ${Spacing.lg};
+    padding: ${spacing.lg};
   }
 
   .${ELEMENT_THUMBNAIL_CONTAINER} .${ELEMENT_PERSON_SLIDE}:first-child {
-    border-left: 1px solid ${Colors.gray.light};
+    border-left: 1px solid ${colors.gray.light};
   }
 `;
 
@@ -86,7 +86,7 @@ const STYLES_CAROUSEL_THUMBNAIL_ELEMENT = `
 
   .${ELEMENT_THUMBNAIL_CONTAINER} {
     overflow: hidden;
-    padding: 0 ${Spacing.md};
+    padding: 0 ${spacing.md};
   }
 
   ${AnimationCarouselBlocks.Styles}

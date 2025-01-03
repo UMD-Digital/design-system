@@ -1,8 +1,8 @@
 import {
-  ElementStyles,
-  Layout,
-  Tokens,
-  Typography,
+  elementStyles,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { AnimationCarouselBlocks } from 'macros';
 import { Styles } from 'utilities';
@@ -17,7 +17,7 @@ type TypeCarouselCardsRequirements = {
 };
 
 const { convertJSSObjectToStyles } = Styles;
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const MEDIUM = 768;
 const LARGE = 1024;
@@ -97,19 +97,19 @@ const OverwriteCarouselStyles = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE}`]: Typography.sans.largest,
+      [`.${INTRO_CONTAINER_HEADLINE}`]: typography.sans.largest,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE} *`]: Typography.sans.largest,
+      [`.${INTRO_CONTAINER_HEADLINE} *`]: typography.sans.largest,
     },
   })}
 
   .${INTRO_CONTAINER_HEADLINE},
   .${INTRO_CONTAINER_HEADLINE} * {
-    color: ${Colors.white};
+    color: ${colors.white};
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -118,18 +118,18 @@ const HeadlineStyles = `
 // prettier-ignore
 const TextStyles = `
   * + .${INTRO_CONTAINER_TEXT} {
-    margin-top: ${Spacing.md};
+    margin-top: ${spacing.md};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: ElementStyles.text.rich.advancedDark,
+      [`.${INTRO_CONTAINER_TEXT}`]: elementStyles.text.rich.advancedDark,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: Typography.sans.medium,
+      [`.${INTRO_CONTAINER_TEXT}`]: typography.sans.medium,
     },
   })}
 `;
@@ -137,11 +137,11 @@ const TextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${INTRO_CONTAINER_CTA} {
-    margin-top: ${Spacing.md};
+    margin-top: ${spacing.md};
   }
 
   .${INTRO_CONTAINER_CTA} a {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `;
 
@@ -149,14 +149,14 @@ const ActionStyles = `
 const IntroContainer = `
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${INTRO_CONTAINER} {
-      margin-bottom: ${Spacing.md};
+      margin-bottom: ${spacing.md};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${INTRO_CONTAINER} {
-      width: calc(40% - ${Spacing['2xl']});
-      padding-right: ${Spacing['2xl']};
+      width: calc(40% - ${spacing['2xl']});
+      padding-right: ${spacing['2xl']};
     }
   }
 
@@ -173,7 +173,7 @@ const ContainerLock = `
   .${CAROUSEL_LOCK} {
     position: relative;
     ${convertJSSObjectToStyles({
-      styleObj: Layout.space.horizontal.max,
+      styleObj: layout.space.horizontal.max,
     })}
   }
 
@@ -207,8 +207,8 @@ const ContainerStyles = `
   }
 
   .${CAROUSEL_CONTAINER} {
-    background-color: ${Colors.black};
-    padding: ${Spacing['3xl']} 0;
+    background-color: ${colors.black};
+    padding: ${spacing['3xl']} 0;
     position: relative;
     overflow: clip;
   }
@@ -221,13 +221,13 @@ const ContainerStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${CAROUSEL_CONTAINER} {
-      padding: ${Spacing['4xl']} 0;
+      padding: ${spacing['4xl']} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CAROUSEL_CONTAINER} {
-      padding: ${Spacing['max']} 0;
+      padding: ${spacing['max']} 0;
     }
   }
 
@@ -259,7 +259,7 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
   }
 
   .${ELEMENT_DECLARATION} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
   
   ${AnimationCarouselBlocks.Styles}

@@ -1,11 +1,11 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';
 import { ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
 import { UMDFooterElement } from '../../index';
 
-const { Colors } = Tokens;
+const { colors } = tokens;
 
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { VERSION_TYPE_MEGA, VERSION_TYPE_VISUAL, VERSION_TYPE_SIMPLE } =
@@ -49,13 +49,13 @@ export const MainContainerStyles = `
   .${ELEMENT_WRAPPER} p,
   .${ELEMENT_WRAPPER} a,
   .${ELEMENT_WRAPPER} span {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} p,
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} span,
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} a {
-    color: ${Colors.gray.dark}
+    color: ${colors.gray.dark}
   }
 
   ${RowLogoStyles}

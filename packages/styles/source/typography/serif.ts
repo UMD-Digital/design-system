@@ -1,25 +1,25 @@
-import { Font, Media } from '../tokens';
+import { font, media } from '../tokens';
 import { create } from '../utilities';
 
-const breakpointLarge = Media.queries.large.min;
-const breakpointDesktop = Media.queries.desktop.min;
+const breakpointLarge = media.queries.large.min;
+const breakpointDesktop = media.queries.desktop.min;
 
 const base = {
-  fontFamily: Font.family['serif'],
+  fontFamily: font.family['serif'],
 };
 
 const sizeLarger = {
-  fontSize: Font.size['4xl'],
+  fontSize: font.size['4xl'],
   lineHeight: `1.18em`,
 };
 
 const sizeLarge = {
-  fontSize: Font.size['3xl'],
+  fontSize: font.size['3xl'],
   lineHeight: `1em`,
 };
 
 const sizeMedium = {
-  fontSize: Font.size['xl'],
+  fontSize: font.size['xl'],
   lineHeight: `1.5em`,
 };
 
@@ -28,12 +28,12 @@ export const maxium = {
   ...sizeLarger,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['4xl']} + 4vw)`,
+    fontSize: `calc(${font.size['4xl']} + 4vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['9xl'],
-    fontWeight: Font.weight['light'],
+    fontSize: font.size['9xl'],
+    fontWeight: font.weight['light'],
     lineHeight: `1.025em`,
   },
 };
@@ -43,11 +43,11 @@ export const extralarge = {
   ...sizeLarger,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['4xl']} + 2vw)`,
+    fontSize: `calc(${font.size['4xl']} + 2vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['6xl'],
+    fontSize: font.size['6xl'],
     lineHeight: `1.07em`,
   },
 };
@@ -57,7 +57,7 @@ export const larger = {
   ...sizeLarge,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['3xl']} + 0.66vw)`,
+    fontSize: `calc(${font.size['3xl']} + 0.66vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -70,7 +70,7 @@ export const large = {
   ...sizeMedium,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['xl']} + 0.33vw)`,
+    fontSize: `calc(${font.size['xl']} + 0.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {

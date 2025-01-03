@@ -1,8 +1,8 @@
 import {
-  ElementStyles,
-  Layout,
-  Tokens,
-  Typography,
+  elementStyles,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
@@ -10,7 +10,7 @@ import TextContainer, { TypeTextContainerProps } from './elements/text';
 
 type TypeHeroLogoProps = TypeTextContainerProps & TypeImageContainerProps;
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const THEME_LIGHT = 'light';
@@ -40,23 +40,23 @@ const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} .${TextContainer.Elements.eyebrow} {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
   }
 `;
 
@@ -64,12 +64,12 @@ const OverwriteTheme = `
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
+      [`${OVERWRITE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
     },
   })}
   
   ${OVERWRITE_EYEBROW} {
-    color: ${Colors.black}
+    color: ${colors.black}
   }
 `;
 
@@ -77,13 +77,13 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.large,
+      [`${OVERWRITE_HEADLINE}`]: typography.campaign.large,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE} *`]: Typography.campaign.large,
+      [`${OVERWRITE_HEADLINE} *`]: typography.campaign.large,
     },
   })}
 `;
@@ -92,12 +92,12 @@ const OverwriteHeadline = `
 const OverwriteRichText = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: Typography.sans.larger,
+      [`${OVERWRITE_RICH_TEXT}`]: typography.sans.larger,
     },
   })}
   
   ${OVERWRITE_RICH_TEXT} {
-    color: ${Colors.gray.dark};
+    color: ${colors.gray.dark};
     font-weight: 400;
   }
 `;
@@ -119,7 +119,7 @@ const OverwriteImageContainer = `
     justify-content: center;
     max-width: 800px;
     margin: 0 auto;
-    margin-bottom: ${Spacing.xl};
+    margin-bottom: ${spacing.xl};
   }
 
   ${OVERWRITE_IMAGE_CONTAINER} img {
@@ -136,12 +136,12 @@ const STYLES_HERO_LOGO_ELEMENT = `
   }
   
   .${ELEMENT_HERO_CONTAINER} {
-    padding: ${Spacing['5xl']} 0 ${Spacing.lg};
+    padding: ${spacing['5xl']} 0 ${spacing.lg};
   }
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: Layout.space.horizontal.small,
+      [`.${ELEMENT_HERO_LOCK}`]: layout.space.horizontal.small,
     },
   })}
   

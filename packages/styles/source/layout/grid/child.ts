@@ -1,4 +1,4 @@
-import { Media } from '../../tokens';
+import { media } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -6,7 +6,7 @@ const classNamePrefix = 'umd-layout-grid-child';
 
 // umd-layout-grid-child-size-double
 export const sizeDouble = create.jssObject({
-  [`@media (${Media.queries.large.min})`]: {
+  [`@media (${media.queries.large.min})`]: {
     gridColumn: 'span 2',
   },
 
@@ -19,7 +19,7 @@ export const sizeDouble = create.jssObject({
 
 // umd-layout-grid-child-start-second
 export const startSecond = create.jssObject({
-  [`@media (${Media.queries.highDef.min})`]: {
+  [`@media (${media.queries.highDef.min})`]: {
     gridColumnStart: '2',
   },
 

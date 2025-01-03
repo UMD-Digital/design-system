@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Asset } from 'utilities';
 import { CreateModal, STYLES_MODAL } from './modal';
 
@@ -7,7 +7,7 @@ type TypeFixedFullScreenProps = {
   callback: () => void;
 };
 
-const { Colors, Media } = Tokens;
+const { colors, media } = tokens;
 
 const ELEMENT_CLOSE_BUTTON = 'carousel-fixed-screen-button';
 
@@ -20,7 +20,7 @@ const STYLES_FIXED_FULL_SCREEN = `
     right: 10px;
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     .${ELEMENT_CLOSE_BUTTON} {
       top: calc(10vh - 22px);
       right: calc(10vw - 22px);
@@ -28,7 +28,7 @@ const STYLES_FIXED_FULL_SCREEN = `
   }
 
   .${ELEMENT_CLOSE_BUTTON} > svg {
-    fill: ${Colors.white};
+    fill: ${colors.white};
     width: 20px;
     height: 20px;
   }

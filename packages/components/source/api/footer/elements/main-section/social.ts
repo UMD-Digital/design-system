@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import {
@@ -10,7 +10,7 @@ import {
 } from '../../globals';
 import { UMDFooterElement } from '../../index';
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 const { Asset, Styles } = Utilities;
 
 const { convertJSSObjectToStyles } = Styles;
@@ -57,7 +57,7 @@ const OverwriteGridStyle = `
   ${OVERWRITE_GRID_WRAPPER} {
     grid-template-columns: repeat(3, 1fr);
     margin-left: 0;
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 `;
 
@@ -79,20 +79,20 @@ const campaignOverwriteStyles = `
 
 const themeOverwriteStyles = `
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT}  .${SOCIAL_CONTAINER_WRAPPER} a {
-    background-color: ${Colors.gray.light};
+    background-color: ${colors.gray.light};
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a > *,
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a path {
-    fill: ${Colors.black} !important;
+    fill: ${colors.black} !important;
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT}  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
-    background-color: ${Colors.gray.dark};
+    background-color: ${colors.gray.dark};
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
-    fill: ${Colors.gray.light} !important;
+    fill: ${colors.gray.light} !important;
   }
 `;
 
@@ -108,7 +108,7 @@ export const SocialContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${SOCIAL_CONTAINER} {
       justify-content: flex-end;
-      padding-left: ${Spacing['2xl']};
+      padding-left: ${spacing['2xl']};
     }
   }
 
@@ -123,7 +123,7 @@ export const SocialContainerStyles = `
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-column: 1 / span 2;
-      gap: ${Spacing.md};
+      gap: ${spacing.md};
     }
   }
 
@@ -136,8 +136,8 @@ export const SocialContainerStyles = `
   .${SOCIAL_CONTAINER_WRAPPER} {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: ${Spacing.xs};
-    margin-left: ${Spacing.xs};
+    grid-gap: ${spacing.xs};
+    margin-left: ${spacing.xs};
   }
 
   .${SOCIAL_CONTAINER_WRAPPER}[count="4"] {
@@ -145,7 +145,7 @@ export const SocialContainerStyles = `
   }
 
   .${SOCIAL_CONTAINER_WRAPPER} a {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
     height: 32px;
     width: 32px;
     display: flex;
@@ -157,21 +157,21 @@ export const SocialContainerStyles = `
   .${SOCIAL_CONTAINER_WRAPPER} a > *,
   .${SOCIAL_CONTAINER_WRAPPER} a path {
     max-height: 20px !important;
-    fill: ${Colors.white} !important;
+    fill: ${colors.white} !important;
     transition: fill .5s;
   }
 
   .${SOCIAL_CONTAINER_WRAPPER} a:hover {
-    background-color: ${Colors.gray.light};
+    background-color: ${colors.gray.light};
   }
 
   .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
-    fill: ${Colors.gray.dark} !important;
+    fill: ${colors.gray.dark} !important;
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${SOCIAL_CONTAINER_HEADLINE}`]: Typography.elements.interativeMedium,
+      [`.${SOCIAL_CONTAINER_HEADLINE}`]: typography.elements.interativeMedium,
     },
   })}
 

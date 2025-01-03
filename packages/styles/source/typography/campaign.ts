@@ -1,23 +1,23 @@
-import { Font, Media } from '../tokens';
+import { font, media } from '../tokens';
 import { create } from '../utilities';
 
-const breakpointLarge = Media.queries.large.min;
-const breakpointDesktop = Media.queries.desktop.min;
+const breakpointLarge = media.queries.large.min;
+const breakpointDesktop = media.queries.desktop.min;
 
 const base = {
-  fontFamily: Font.family['campaign'],
+  fontFamily: font.family['campaign'],
   fontStyle: 'italic',
-  fontWeight: Font.weight['bold'],
+  fontWeight: font.weight['bold'],
 };
 
 const sizeExtraSmall = {
-  fontSize: Font.size['4xl'],
+  fontSize: font.size['4xl'],
   letterSpacing: '0.02em',
   lineHeight: `0.94em`,
 };
 
 const sizeSmall = {
-  fontSize: Font.size['5xl'],
+  fontSize: font.size['5xl'],
   letterSpacing: '0.02em',
   lineHeight: `0.91em`,
 };
@@ -27,7 +27,7 @@ export const maxium = {
   ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['9xl']} + 2vw)`,
+    fontSize: `calc(${font.size['9xl']} + 2vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -41,11 +41,11 @@ export const extralarge = {
   ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['5xl']} + 4vw)`,
+    fontSize: `calc(${font.size['5xl']} + 4vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['10xl'],
+    fontSize: font.size['10xl'],
     lineHeight: `0.91em`,
   },
 };
@@ -55,11 +55,11 @@ export const large = {
   ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['5xl']} + 2.66vw)`,
+    fontSize: `calc(${font.size['5xl']} + 2.66vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['9xl'],
+    fontSize: font.size['9xl'],
     lineHeight: `0.91em`,
   },
 };
@@ -69,11 +69,11 @@ export const medium = {
   ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['5xl']} + 1.33vw)`,
+    fontSize: `calc(${font.size['5xl']} + 1.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['7xl'],
+    fontSize: font.size['7xl'],
     letterSpacing: '0.02em',
     lineHeight: `0.94em`,
   },
@@ -84,7 +84,7 @@ export const CampaignSmall = {
   ...sizeExtraSmall,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['4xl']} + 1.33vw)`,
+    fontSize: `calc(${font.size['4xl']} + 1.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {

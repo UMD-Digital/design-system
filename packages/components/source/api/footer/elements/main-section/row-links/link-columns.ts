@@ -1,7 +1,7 @@
 import {
-  Animations,
-  Tokens,
-  Typography,
+  animations,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles, Markup } from 'utilities';
 import {
@@ -12,7 +12,7 @@ import {
   REFERENCES,
 } from '../../../globals';
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 const { SlotWithDefaultStyling } = Markup.create;
@@ -131,12 +131,12 @@ const COLUMN_THREE_DEFAULT_LINKS = [
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_COLUMN_HEADLINE}`]: Typography.elements.interativeMedium,
+      [`.${ROW_LINKS_COLUMN_HEADLINE}`]: typography.elements.interativeMedium,
     },
   })}
 
   .${ROW_LINKS_COLUMN_HEADLINE} {
-    margin-bottom: ${Spacing.sm};
+    margin-bottom: ${spacing.sm};
     font-weight: 700;
   }
 
@@ -150,35 +150,35 @@ const HeadlineStyles = `
 // prettier-ignore
 const LinkStyles = `
   .${ROW_LINKS_COLUMN_LINKS}:not(:last-child) {
-    margin-bottom: ${Spacing.sm};
+    margin-bottom: ${spacing.sm};
   }
 
   .${ROW_LINKS_COLUMN_LINKS} > * {
-    margin-bottom: ${Spacing.sm};
+    margin-bottom: ${spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_COLUMN_LINKS} a`]: Typography.sans.smaller,
+      [`.${ROW_LINKS_COLUMN_LINKS} a`]: typography.sans.smaller,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
-      Animations.line.slideUnderWhite
+      animations.line.slideUnderWhite
     },
   })}
 
   .${ROW_LINKS_COLUMN_LINKS} a,
   .${ROW_LINKS_COLUMN_LINKS} span {
-    color: ${Colors.gray.light};
+    color: ${colors.gray.light};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
-      Animations.line.slideUnderBlack
+      animations.line.slideUnderBlack
     },
   })}
 `;
@@ -189,27 +189,27 @@ const ColumnWrapper = `
     .${ROW_LINKS_COLUMN_WRAPPER} {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0 ${Spacing.md};
+      gap: 0 ${spacing.md};
     }
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
-      margin-bottom: ${Spacing.lg};
+      margin-bottom: ${spacing.lg};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMN_WRAPPER} {
-      padding-right: ${Spacing.xs};
+      padding-right: ${spacing.xs};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
-      margin-left: ${Spacing.lg};
-      padding-left: ${Spacing.lg};
-      border-left: 1px solid ${Colors.gray.dark};
+      margin-left: ${spacing.lg};
+      padding-left: ${spacing.lg};
+      border-left: 1px solid ${colors.gray.dark};
     }
   }
 
@@ -224,7 +224,7 @@ const ColumnWrapper = `
 export const LinkColumnStyles = `
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${ROW_LINKS_COLUMNS_CONTAINER} {
-      padding-top: ${Spacing.md};
+      padding-top: ${spacing.md};
     }
   }
 

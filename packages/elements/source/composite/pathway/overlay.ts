@@ -1,4 +1,4 @@
-import { Layout, Tokens } from '@universityofmaryland/web-elements-styles';
+import { layout, tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, { TypePathwayImageContainer } from './elements/image';
@@ -11,7 +11,7 @@ type TypePathwayOverlayProps = TypePathwayTextContainer &
     isThemeMaryland?: boolean;
   };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 800;
@@ -167,22 +167,22 @@ const BackgroundAnimationStyles = `
 // prettier-ignore
 const OverwriteVarationTheme = `
   ${OVERWRITE_THEME_DARK_BACKGROUND} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_LIGHT_BACKGROUND} {
-    background-color: ${Colors.gray.lighter};
+    background-color: ${colors.gray.lighter};
   }
 
   ${OVERWRITE_THEME_MARYLAND_BACKGROUND} {
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_THEME_LIGHT_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_LOCK_WRAPPER},
     ${OVERWRITE_THEME_DARK_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_LOCK_WRAPPER},
     ${OVERWRITE_THEME_MARYLAND_CONTAINER} .${PATHWAY_OVERLAY_CONTAINER_LOCK_WRAPPER} {
-      padding: ${Spacing['6xl']} 0;
+      padding: ${spacing['6xl']} 0;
     }
   }
 `
@@ -227,27 +227,27 @@ const OverwriteImageContainerStyles = `
 const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${Spacing.md} 0;
+      padding: ${spacing.md} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_TEXT_WRAPPER}`]: Layout.space.horizontal.max,
+        [`${OVERWRITE_TEXT_WRAPPER}`]: layout.space.horizontal.max,
       },
     })}
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${Spacing['4xl']} ${Spacing['2xl']};
+      padding: ${spacing['4xl']} ${spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${Spacing['8xl']} ${Spacing['6xl']};
+      padding: ${spacing['8xl']} ${spacing['6xl']};
     }
   }
 `;
@@ -255,7 +255,7 @@ const OverwriteTextContainerStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_OVERLAY_CONTAINER_LOCK}`]: Layout.space.horizontal.max,
+      [`.${PATHWAY_OVERLAY_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 
@@ -298,7 +298,7 @@ const BackgroundStyles = `
     bottom: 0;
     right: 0;
     width: 100%;
-    background-color: ${Colors.white};
+    background-color: ${colors.white};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
@@ -324,7 +324,7 @@ const STYLES_PATHWAY_OVERLAY_ELEMENT = `
   }
 
   .${PATHWAY_OVERLAY_CONTAINER} * {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   ${LockStyles}

@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 
@@ -8,8 +8,8 @@ const classNamePrefix = 'umd-text-caption';
 // umd-text-caption-smaller
 export const smaller = create.jssObject({
   ...sans.smaller,
-  color: Colors.gray.mediumAA,
-  paddingTop: Spacing.xs,
+  color: colors.gray.mediumAA,
+  paddingTop: spacing.xs,
 
   className: [
     `${classNamePrefix}-smaller`,
@@ -21,7 +21,7 @@ export const smaller = create.jssObject({
 // umd-text-caption-smaller-italic
 export const smallerItalic = create.jssObject({
   ...smaller,
-  color: Colors.gray.darker,
+  color: colors.gray.darker,
   fontStyle: 'italic',
 
   className: [

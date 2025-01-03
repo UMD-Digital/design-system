@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { List as LayoutList, Image as LayoutImage } from 'layout';
 import { TextLockupSmall } from 'macros';
 
@@ -12,7 +12,7 @@ type TypeEventListProps = {
   isThemeDark?: boolean;
 };
 
-const { Spacing } = Tokens;
+const { spacing } = tokens;
 
 const MEDIUM = 500;
 
@@ -24,7 +24,7 @@ const ELEMENT_EVENT_LIST_DETAILS = 'event-list-details';
 // prettier-ignore
 const DateBlockContainerStyles = `
   .${ELEMENT_EVENT_LIST_DATE_BLOCK} {
-    width: ${Spacing.xl};
+    width: ${spacing.xl};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
@@ -35,7 +35,7 @@ const DateBlockContainerStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${ELEMENT_EVENT_LIST_DATE_BLOCK} {
-      width: ${Spacing['8xl']};
+      width: ${spacing['8xl']};
     }
   }
 `;
@@ -47,7 +47,7 @@ const DetailsRowStyles = `
   }
 
   * + .${ELEMENT_EVENT_LIST_DETAILS} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
     display: block;
   }
 `;
@@ -59,7 +59,7 @@ const STYLES_EVENT_LIST_ELEMENT = `
   }
 
   .${ELEMENT_EVENT_LIST_CONTAINER} + * {
-    margin-top: ${Spacing.md}; 
+    margin-top: ${spacing.md}; 
   }
 
   ${TextLockupSmall.Styles}

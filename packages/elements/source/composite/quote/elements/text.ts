@@ -1,7 +1,7 @@
 import {
-  Typography,
-  Layout,
-  Tokens,
+  typography,
+  layout,
+  tokens,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles, Asset } from 'utilities';
 
@@ -18,7 +18,7 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
   isSizeLarge?: boolean;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
@@ -44,13 +44,13 @@ const IS_SIZE_LARGE = `.${TEXT_CONTAINER}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
 const VarationSizeLarge = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: Typography.sans.extraLarge,
+      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.extraLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: Typography.sans.extraLarge,
+      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.extraLarge,
     },
   })}
 `
@@ -58,14 +58,14 @@ const VarationSizeLarge = `
 // prettier-ignore
 const VarationThemeDark = `
   ${IS_THEME_DARK} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `
 
 // prettier-ignore
 const VarationThemeMaryland = `
   ${IS_THEME_MARYLAND} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `
 
@@ -77,7 +77,7 @@ const QuoteStyles = `
 
   .${TEXT_CONTAINER_QUOTE_WRAPPER} {
     font-weight: 700;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   .${TEXT_CONTAINER_QUOTE_WRAPPER} * {
@@ -86,13 +86,13 @@ const QuoteStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: Typography.sans.larger,
+      [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: Typography.sans.larger,
+      [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.larger,
     },
   })}
 
@@ -104,11 +104,11 @@ const QuoteStyles = `
 // prettier-ignore
 const AttributionStyles = `
   * + .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} {
-    color: ${Colors.gray.dark};
+    color: ${colors.gray.dark};
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} * {
@@ -117,13 +117,13 @@ const AttributionStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: Typography.sans.medium,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: typography.sans.medium,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: Typography.sans.medium,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: typography.sans.medium,
     },
   })}
 `;
@@ -135,7 +135,7 @@ const AttributionSubTextStyles = `
   }
 
   .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} {
-    color: ${Colors.gray.dark};
+    color: ${colors.gray.dark};
     font-style: italic;
   }
 
@@ -145,13 +145,13 @@ const AttributionSubTextStyles = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: Typography.sans.small,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: typography.sans.small,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: Typography.sans.small,
+      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: typography.sans.small,
     },
   })}
 `;
@@ -159,12 +159,12 @@ const AttributionSubTextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: Layout.grid.inline.tabletRows,
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: layout.grid.inline.tabletRows,
     },
   })}
 `;

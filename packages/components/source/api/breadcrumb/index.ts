@@ -4,11 +4,11 @@ declare global {
   }
 }
 
-import { Tokens, Animations } from '@universityofmaryland/web-elements-styles';
+import { animations, tokens } from '@universityofmaryland/web-elements-styles';
 import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
-const { Colors } = Tokens;
+const { colors } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = Markup.create;
 
@@ -24,17 +24,17 @@ const OVERWRITE_THEME_DARK_PATH = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_
 
 const OverwriteThemeStyles = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_PATH} + *::before {
-    background-color: ${Colors.gray.dark};
+    background-color: ${colors.gray.dark};
   }
   
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_PATH}:not(:last-child)`]:
-        Animations.line.slideUnderGrayDarkRed,
+        animations.line.slideUnderGrayDarkRed,
     },
   })}
 `;
@@ -45,7 +45,7 @@ const PathStyles = `
   }
 
   .${ELEMENT_PATH}:last-child {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   .${ELEMENT_PATH}:not(:last-child) {
@@ -56,7 +56,7 @@ const PathStyles = `
     content: '';
     display: inline-block;
     height: 14px;
-    background-color: ${Colors.gray.dark};
+    background-color: ${colors.gray.dark};
     left: -8px;
     position: absolute;
     top: 50%;
@@ -75,19 +75,19 @@ const ContainerStyles = `
     scrollbar-width: none;
     white-space: nowrap;
     mask-image: linear-gradient(90deg, ${
-      Colors.white
+      colors.white
     } calc(100% - 24px), transparent);
   }
 
   .${ELEMENT_CONTAINER} * {
-    color: ${Colors.gray.mediumAA};
+    color: ${colors.gray.mediumAA};
     position: relative;
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CONTAINER} a:not(:last-child)`]:
-        Animations.line.slideUnderGrayRed,
+        animations.line.slideUnderGrayRed,
     },
   })}
 `;

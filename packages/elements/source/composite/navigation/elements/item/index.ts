@@ -1,4 +1,4 @@
-import { Tokens, Animations } from '@universityofmaryland/web-elements-styles';
+import { tokens, animations } from '@universityofmaryland/web-elements-styles';
 import { Asset, Accessibility, Performance, Markup, Styles } from 'utilities';
 
 type TypePrimaryLinkRequirements = {
@@ -27,7 +27,7 @@ export type TypeNavItemRequirements = TypeDropdownProps &
 
 type TypeNavItem = TypeNavItemRequirements;
 
-const { Colors, Font, Spacing } = Tokens;
+const { colors, font, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-element-nav-item';
@@ -84,8 +84,8 @@ const PrimaryStyles = `
   }
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a {
-    color: ${Colors.black};
-    font-size: ${Font.size.base};
+    color: ${colors.black};
+    font-size: ${font.size.base};
     white-space: nowrap;
     transition: color 0.2s ease-in-out;
     line-height: 1.45em;
@@ -94,7 +94,7 @@ const PrimaryStyles = `
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:hover,
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:focus {
-    color: ${Colors.red};
+    color: ${colors.red};
    }
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a[${ATTRIBUTE_SELECTED}] span {
@@ -103,7 +103,7 @@ const PrimaryStyles = `
     background-position: left calc(100% - 0px);
     background-repeat: no-repeat;
     background-size: 100% 2.5px;
-    background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
+    background-image: linear-gradient(${colors.gold}, ${colors.gold});
   }
 
   .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON} {
@@ -114,7 +114,7 @@ const PrimaryStyles = `
   }
 
   .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON} svg {
-    fill: ${Colors.red};
+    fill: ${colors.red};
     height: 14px;
     width: 14px;
     transform: rotate(0deg) translateY(0);
@@ -148,9 +148,9 @@ const DropdownMultipleColumnStyles = `
 // prettier-ignore
 const DropdownListStyles = `
   .${ELEMENT_DROPDOWN_LIST_CONTAINER} {
-    background-color: ${Colors.white};
-    border-top: 2px solid ${Colors.red};
-    padding: ${Spacing.lg};
+    background-color: ${colors.white};
+    border-top: 2px solid ${colors.red};
+    padding: ${spacing.lg};
     box-shadow: -1px 9px 32px -10px rgba(0,0,0,0.19);
   }
 
@@ -166,17 +166,17 @@ const DropdownListStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
-      Animations.line.slideUnderRed,
+      animations.line.slideUnderRed,
     },
   })}
 
   .${ELEMENT_DROPDOWN_LIST_CONTAINER} a:hover,
   .${ELEMENT_DROPDOWN_LIST_CONTAINER} a:focus {
-    color: ${Colors.red};
+    color: ${colors.red};
   }
 
   .${ELEMENT_DROPDOWN_LIST_CONTAINER} a + a {
-    margin-top: ${Spacing.md};
+    margin-top: ${spacing.md};
     display: block;
   }
 
@@ -186,7 +186,7 @@ const DropdownListStyles = `
     background-position: left calc(100% - 0px);
     background-repeat: no-repeat;
     background-size: 100% 2.5px;
-    background-image: linear-gradient(${Colors.gold}, ${Colors.gold});
+    background-image: linear-gradient(${colors.gold}, ${colors.gold});
   }
 
   .${ELEMENT_DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:hover span,
@@ -204,7 +204,7 @@ const DropdownStyles = `
     transform: translateX(-50%);
     min-width: 250px;
     width: auto;
-    padding-top: ${Spacing.sm};
+    padding-top: ${spacing.sm};
     display: none;
   }
 `;
@@ -217,10 +217,10 @@ const STYLES_NAV_ITEM_ELEMENT = `
   }
 
   .${ELEMENT_NAV_ITEM_CONTAINER} a {
-    font-family: ${Font.family.sans};
-    font-size: ${Font.size.sm};
+    font-family: ${font.family.sans};
+    font-size: ${font.size.sm};
     font-weight: 700;
-    color: ${Colors.black};
+    color: ${colors.black};
     text-decoration: none;
   }
   

@@ -1,14 +1,14 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import postcss from 'postcss';
 
-const { Colors } = Tokens;
+const { colors } = tokens;
 
 const postcssNesting = require('postcss-nesting');
 const postcssJs = require('postcss-js');
 
 export const reset = `
   :host {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
   
   :host * {
@@ -25,11 +25,11 @@ export const reset = `
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   p {
-    color: ${Colors.gray.dark};
+    color: ${colors.gray.dark};
   }
 
   a {
@@ -42,7 +42,7 @@ export const reset = `
   }
 
   date {
-    color: ${Colors.gray.medium};
+    color: ${colors.gray.medium};
   }
 
   strong, b {

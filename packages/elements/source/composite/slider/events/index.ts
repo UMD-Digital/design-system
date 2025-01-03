@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
 
 type TypeSliderEventButtonProps = {
@@ -30,7 +30,7 @@ type TypeSliderEventProps = TypeSliderEventSlideContentProps &
   };
 
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const TABLET = 750;
 const DESKTOP = 1000;
@@ -70,7 +70,7 @@ const OVERWRITE_THEME_DARK_ARROW = `.${ELEMENT_SLIDER_EVENT_CONTAINER}${IS_THEME
 // prettier-ignore
 const VariationThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER_WRAPPER} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
@@ -78,27 +78,27 @@ const VariationThemeDark = `
   }
 
   ${OVERWRITE_THEME_DARK_INTRO_COVER} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_INTRO_HEADLINE} {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_ARROW} {
-    background-color: ${Colors.gray.dark};
+    background-color: ${colors.gray.dark};
   }
 
   ${OVERWRITE_THEME_DARK_ARROW} svg {
-    fill: ${Colors.white}
+    fill: ${colors.white}
   }
 
   ${OVERWRITE_THEME_DARK_ARROW}:hover {
-    background-color: ${Colors.white}
+    background-color: ${colors.white}
   }
 
   ${OVERWRITE_THEME_DARK_ARROW}:hover svg {
-    fill: ${Colors.black}
+    fill: ${colors.black}
   }
 `
 
@@ -110,7 +110,7 @@ const ButtonStyles = `
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${Colors.gray.light};
+    background-color: ${colors.gray.light};
     transition: background-color ${ANIMATION_DURATION}ms;
     position: absolute;
     top: 50%;
@@ -126,16 +126,16 @@ const ButtonStyles = `
   }
 
   .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON}:hover {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON}:hover svg {
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 
   .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON} svg {
     transition: fill .5s;
-    fill: ${Colors.black};
+    fill: ${colors.black};
     width: 16px;
     height: 6px;
   }
@@ -154,7 +154,7 @@ const ButtonStyles = `
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK} {
       left: -24px;
-      top: ${Spacing.xs};
+      top: ${spacing.xs};
     }
   }
 
@@ -165,7 +165,7 @@ const ButtonStyles = `
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD} {
       right: -24px;
-      top: ${Spacing.xs};
+      top: ${spacing.xs};
     }
   }
 `;
@@ -198,7 +198,7 @@ const DatesStyles = `
 
 const IntroStyles = `
   .${ELEMENT_SLIDER_EVENT_INTRO} {
-    padding: 0 ${Spacing.lg};
+    padding: 0 ${spacing.lg};
     position: relative;
   }
 
@@ -224,17 +224,17 @@ const IntroStyles = `
   }
 
   .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE} {
-    color: ${Colors.black};
+    color: ${colors.black};
     font-weight: 700;
   }
 
   .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE} + * {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: Typography.sans.larger,
+      [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: typography.sans.larger,
     },
   })}
 
@@ -243,7 +243,7 @@ const IntroStyles = `
   }
   
   .${ELEMENT_SLIDER_EVENT_INTRO_ACTIONS} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
   
 
@@ -271,7 +271,7 @@ const CoverStyles = `
     height: 100%;
     top: 0;
     left: -100vw;
-    background-color: ${Colors.gray.lighter};
+    background-color: ${colors.gray.lighter};
   }
   
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
@@ -290,7 +290,7 @@ const STYLES_SLIDER_EVENTS_ELEMENT = `
   
   .${ELEMENT_SLIDER_EVENT_CONTAINER_WRAPPER} {
     padding: 24px 0;
-    background-color: ${Colors.gray.lighter};
+    background-color: ${colors.gray.lighter};
     position: relative;
     z-index: 99;
   }
@@ -545,19 +545,19 @@ const SizeDatesElements = ({
 
         if (isMobile) {
           const lineColor = isThemeDark
-            ? Colors.gray.mediumAA
-            : Colors.gray.light;
+            ? colors.gray.mediumAA
+            : colors.gray.light;
 
           dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `center`;
           dateElement.style.paddingRight = `0`;
-          dateElement.style.marginTop = `${Spacing.xs}`;
-          dateElement.style.paddingTop = `${Spacing.xs}`;
+          dateElement.style.marginTop = `${spacing.xs}`;
+          dateElement.style.paddingTop = `${spacing.xs}`;
           dateElement.style.borderTop = `1px solid ${lineColor}`;
         } else {
           dateElement.style.display = `flex`;
           dateElement.style.justifyContent = `inherit`;
-          dateElement.style.paddingRight = `${Spacing.lg}`;
+          dateElement.style.paddingRight = `${spacing.lg}`;
 
           dateElement.style.marginTop = `0`;
           dateElement.style.paddingTop = `0`;

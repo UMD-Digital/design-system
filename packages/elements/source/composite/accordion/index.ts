@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Performance, Styles } from 'utilities';
 
 type TypeHeadlineText = { headline?: HTMLElement | null };
@@ -28,7 +28,7 @@ type ActionAnimationProps = StateProps & {
   isOpening: boolean;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const SMALL = 480;
@@ -53,38 +53,38 @@ const OVERWRITE_THEME_DARK_BODY = `.${ELEMENT_CONTAINER}${IS_THEME_DARK} .${ELEM
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_HEADLINE} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE} > * {
-    color: ${Colors.white}
+    color: ${colors.white}
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE}:before,
   ${OVERWRITE_THEME_DARK_HEADLINE}:after {
-    background-color: ${Colors.gold};
+    background-color: ${colors.gold};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE}[aria-expanded='true'],
   ${OVERWRITE_THEME_DARK_HEADLINE}:hover,
   ${OVERWRITE_THEME_DARK_HEADLINE}:focus {
-    background-color: ${Colors.gray.darker};
-    border-top: 2px solid ${Colors.gold};
+    background-color: ${colors.gray.darker};
+    border-top: 2px solid ${colors.gold};
   }
 
   ${OVERWRITE_THEME_DARK_HEADLINE}[aria-expanded='true'] > *,
   ${OVERWRITE_THEME_DARK_HEADLINE}:hover > *,
   ${OVERWRITE_THEME_DARK_HEADLINE}:focus > * {
-    color: ${Colors.gold};
+    color: ${colors.gold};
   }
 
   ${OVERWRITE_THEME_DARK_BODY_WRAPPER} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_DARK_BODY},
   ${OVERWRITE_THEME_DARK_BODY} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `;
 
@@ -92,29 +92,29 @@ const OverwriteThemeDark = `
 const bodyStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_BODY_WRAPPER}`]: Typography.sans.medium
+      [`.${ELEMENT_BODY_WRAPPER}`]: typography.sans.medium
     },
   })}
 
   .${ELEMENT_BODY_WRAPPER} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
     height: 0;
     overflow: hidden;
     display: none;
   }
 
   .${ELEMENT_BODY} {
-    padding: ${Spacing.md};
+    padding: ${spacing.md};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_BODY} {
-      padding: ${Spacing.lg};
+      padding: ${spacing.lg};
     }
   }
 
   .${ELEMENT_BODY} > * {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   .${ELEMENT_BODY} > *:first-child {
@@ -123,7 +123,7 @@ const bodyStyles = `
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_BODY} > * {
-      margin-top: ${Spacing.lg};
+      margin-top: ${spacing.lg};
     }
   }
 `;
@@ -132,40 +132,40 @@ const bodyStyles = `
 const headlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: Typography.sans.large,
+      [`.${ELEMENT_HEADLINE}`]: typography.sans.large,
     },
   })}
 
   .${ELEMENT_HEADLINE} {
     display: flex;
     border-top: 2px solid transparent;
-    padding: ${Spacing.md};
-    padding-right: ${Spacing['4xl']};
-    background-color: ${Colors.gray.lightest};
+    padding: ${spacing.md};
+    padding-right: ${spacing['4xl']};
+    background-color: ${colors.gray.lightest};
     position: relative;
     transition: background 0.5s, border 0.5s, color 0.5s, padding 0.5s;
     width: 100%;
     text-align: left;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   .${ELEMENT_HEADLINE} > * {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${ELEMENT_HEADLINE} {
-      padding: ${Spacing.lg};
-      padding-right: ${Spacing['6xl']}
+      padding: ${spacing.lg};
+      padding-right: ${spacing['6xl']}
     }
   }
 
   .${ELEMENT_HEADLINE}:before,
   .${ELEMENT_HEADLINE}:after {
     content: '';
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
     position: absolute;
-    right: ${Spacing.md};
+    right: ${spacing.md};
     transition: background 0.5s, height 0.5s, right 0.5s, top 0.5s,
     transform 0.5s, width 0.5s;
   }
@@ -186,7 +186,7 @@ const headlineStyles = `
   .${ELEMENT_HEADLINE}:after {
     height: 16px;
     top: calc(50% - 8px);
-    right: calc(${Spacing.md} + 6px);
+    right: calc(${spacing.md} + 6px);
     width: 4px;
   }
 
@@ -194,21 +194,21 @@ const headlineStyles = `
     .${ELEMENT_HEADLINE}:after {
       height: 20px;
       top: calc(50% - 10px);
-      right: calc(${Spacing.lg} + 8px);
+      right: calc(${spacing.lg} + 8px);
     }
   }
 
   .${ELEMENT_HEADLINE}[aria-expanded='true'],
   .${ELEMENT_HEADLINE}:hover,
   .${ELEMENT_HEADLINE}:focus {
-    background-color: ${Colors.gray.lightest};
-    border-top: 2px solid ${Colors.red};
+    background-color: ${colors.gray.lightest};
+    border-top: 2px solid ${colors.red};
   }
 
   .${ELEMENT_HEADLINE}[aria-expanded='true'] > *,
   .${ELEMENT_HEADLINE}:hover > *,
   .${ELEMENT_HEADLINE}:focus > * {
-    color: ${Colors.red};
+    color: ${colors.red};
   }
 
   .${ELEMENT_HEADLINE}[aria-expanded='true']:after {

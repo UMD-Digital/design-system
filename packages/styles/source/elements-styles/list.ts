@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../tokens';
+import { colors, spacing } from '../tokens';
 import { sans } from '../typography';
 import { create } from '../utilities';
 
@@ -9,7 +9,7 @@ let orderedBase: Record<string, any> = {
   lineHeight: '1.4em',
 
   '& li ': {
-    paddingLeft: Spacing.xl,
+    paddingLeft: spacing.xl,
     position: 'relative',
   },
 
@@ -22,7 +22,7 @@ let orderedBase: Record<string, any> = {
       fontVariantNumeric: 'tabular-nums',
       position: 'absolute',
       top: '1px',
-      right: `calc(100% - ${Spacing.md})`,
+      right: `calc(100% - ${spacing.md})`,
       unicodeBidi: 'isolate',
       whiteSpace: 'pre',
     },
@@ -39,7 +39,7 @@ let orderedBase: Record<string, any> = {
   },
 
   '& li + li, & li > ul, & li > ol': {
-    marginTop: Spacing.sm,
+    marginTop: spacing.sm,
   },
 };
 
@@ -49,7 +49,7 @@ const unorderedBase = {
   listStyleType: 'none !important',
 
   '& li': {
-    paddingLeft: Spacing.md,
+    paddingLeft: spacing.md,
     position: 'relative',
     lineHeight: '1.4em',
 
@@ -59,19 +59,19 @@ const unorderedBase = {
       counterIncrement: 'item',
       position: 'absolute',
       top: '1px',
-      right: `calc(100% - ${Spacing.xs})`,
+      right: `calc(100% - ${spacing.xs})`,
     },
   },
 
   '& li + li, & li > ul, & li > ol': {
-    marginTop: Spacing.sm,
+    marginTop: spacing.sm,
   },
 
   '& li li': {
-    paddingLeft: Spacing.xl,
+    paddingLeft: spacing.xl,
 
     '&:before': {
-      right: `calc(100% - ${Spacing.md})`,
+      right: `calc(100% - ${spacing.md})`,
     },
   },
 
@@ -84,13 +84,13 @@ orderedBase = {
   ...orderedBase,
 
   '& > li': {
-    paddingLeft: Spacing.xl,
+    paddingLeft: spacing.xl,
 
     '&:before': {
       content: 'counter(item)',
-      borderRight: `1px solid ${Colors.red}`,
-      paddingRight: Spacing.min,
-      right: `calc(100% - ${Spacing.lg})`,
+      borderRight: `1px solid ${colors.red}`,
+      paddingRight: spacing.min,
+      right: `calc(100% - ${spacing.lg})`,
     },
   },
 

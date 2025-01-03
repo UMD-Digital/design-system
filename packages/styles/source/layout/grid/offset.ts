@@ -1,4 +1,4 @@
-import { Media, Spacing } from '../../tokens';
+import { media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 import { threeLarge } from './gap';
 
@@ -19,25 +19,25 @@ export const threeColumn = create.jssObject({
     alignSelf: 'start',
     display: 'grid',
 
-    [`@media (${Media.queries.desktop.min})`]: {
+    [`@media (${media.queries.desktop.min})`]: {
       minHeight: '400px',
     },
   },
 
   '& > *:first-child': {
-    [`@media (${Media.queries.desktop.min})`]: {
-      marginTop: `${Spacing['2xl']}`,
+    [`@media (${media.queries.desktop.min})`]: {
+      marginTop: `${spacing['2xl']}`,
     },
   },
 
   '& > *:nth-child(2)': {
-    [`@media (${Media.queries.desktop.min})`]: {
-      marginTop: `${Spacing['8xl']}`,
+    [`@media (${media.queries.desktop.min})`]: {
+      marginTop: `${spacing['8xl']}`,
     },
   },
 
   '& umd-element-stat': {
-    [`@media (${Media.queries.desktop.min})`]: {
+    [`@media (${media.queries.desktop.min})`]: {
       height: `100%`,
     },
   },

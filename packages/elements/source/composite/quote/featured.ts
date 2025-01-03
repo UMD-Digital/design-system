@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import InlineQuote, { TypeInlineInline } from './inline';
 import QuoteText from './elements/text';
 import { Markup } from 'utilities';
@@ -13,7 +13,7 @@ type TypeQuoteFeaturedText = TypeQuoteFeatured & {
   hasImage: boolean;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 
 const SMALL = 500;
 const MEDIUM = 900;
@@ -68,11 +68,11 @@ const OverwriteTransparent = `
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_WRAPPER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_MARYLAND_WRAPPER} {
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
   }
 `;
 
@@ -106,19 +106,19 @@ const ImageContainer = `
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -${Spacing.lg};
+    margin-top: -${spacing.lg};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     .${QUOTE_FEATURED_IMAGE} {
-      padding: 0 ${Spacing.lg};
+      padding: 0 ${spacing.lg};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) and (max-width: ${MEDIUM - 1}px) {
     .${QUOTE_FEATURED_IMAGE} {
       margin: 0 auto;
-      margin-top: -${Spacing['8xl']};
+      margin-top: -${spacing['8xl']};
       max-width: 300px;
     }
   }
@@ -132,37 +132,37 @@ const ImageContainer = `
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${QUOTE_FEATURED_IMAGE} {
-      padding-left: ${Spacing['6xl']};
-      width: calc(300px + ${Spacing['6xl']});
+      padding-left: ${spacing['6xl']};
+      width: calc(300px + ${spacing['6xl']});
     }
   }
 
   .${QUOTE_FEATURED_IMAGE_ACTIONS} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   .${QUOTE_FEATURED_IMAGE_ACTIONS} * + * {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 `;
 
 // prettier-ignore
 const TextContainer = `
   .${QUOTE_FEATURED_TEXT} {
-    padding: ${Spacing.lg};
+    padding: ${spacing.lg};
     position: relative;
     width: 100%;
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${QUOTE_FEATURED_TEXT} {
-      padding: ${Spacing['2xl']} ${Spacing['2xl']} ${Spacing['2xl']} ${Spacing['2xl']};
+      padding: ${spacing['2xl']} ${spacing['2xl']} ${spacing['2xl']} ${spacing['2xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${QUOTE_FEATURED_TEXT} {
-      padding: ${Spacing['4xl']} ${Spacing['4xl']} ${Spacing['4xl']} ${Spacing['4xl']};
+      padding: ${spacing['4xl']} ${spacing['4xl']} ${spacing['4xl']} ${spacing['4xl']};
     }
   }
 `;
@@ -197,7 +197,7 @@ const TextureStyles = `
 // prettier-ignore
 const Wrapper = `
   .${QUOTE_FEATURED_CONTAINER_WRAPPER} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
     position: relative;
   }
 `;
@@ -209,12 +209,12 @@ const STYLES_QUOTE_FEATURED_ELEMENT = `
   }
 
   .${QUOTE_FEATURED_CONTAINER_SPACER} {
-    padding-top: ${Spacing.lg};
+    padding-top: ${spacing.lg};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) and (max-width: ${MEDIUM - 1}px) {
     .${QUOTE_FEATURED_CONTAINER_SPACER} {
-      padding-top: ${Spacing['8xl']};
+      padding-top: ${spacing['8xl']};
     }
   }
 

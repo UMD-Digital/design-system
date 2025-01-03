@@ -1,4 +1,4 @@
-import { Tokens, Layout } from '@universityofmaryland/web-elements-styles';
+import { tokens, layout } from '@universityofmaryland/web-elements-styles';
 import { Accessibility, Styles } from 'utilities';
 
 type TypeLayoutImageExpandProps = {
@@ -7,7 +7,7 @@ type TypeLayoutImageExpandProps = {
 };
 
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
-const { Media, Spacing, SpaceLayout } = Tokens;
+const { media, spacing } = tokens;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'layout-image-expand-declaration';
@@ -26,7 +26,7 @@ const ELEMENT_EXPAND_TEXT_ANIMATION = 'layout-image-expand-text-animation';
 const TextLock = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: Layout.space.horizontal.max,
+      [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 
@@ -40,8 +40,8 @@ const TextLock = `
 const TextContainer = `
   .${ELEMENT_EXPAND_TEXT_CONTAINER} {
     position: relative;
-    padding-top: ${Spacing.max};
-    padding-bottom: ${Spacing.max};
+    padding-top: ${spacing.max};
+    padding-bottom: ${spacing.max};
     height: 100%;
     z-index: 9999;
   }
@@ -64,7 +64,7 @@ const TextAnimation = `
     }
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_TEXT_ANIMATION} {
@@ -119,7 +119,7 @@ const ImageSizeContainer = `
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_SIZE} {
-        width: ${SpaceLayout.maxWidth.smallest};
+        width: ${spacing.maxWidth.smallest};
         height: 70vh;
         animation: img-size ease-in-out forwards;
         animation-timeline: view();
@@ -220,7 +220,7 @@ const STYLES_LAYOUT_IMAGE_EXPAND = `
     }
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPLAND_DECLARATION} {
@@ -293,7 +293,7 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
   const sizeImageForText = () => {
     const textContainerHeight =
       textContainer.clientHeight +
-      convertPixelStringToNumber(Spacing['2xl']) * 2;
+      convertPixelStringToNumber(spacing['2xl']) * 2;
     const imageContainerHeight = container.clientHeight;
 
     if (textContainerHeight > imageContainerHeight) {

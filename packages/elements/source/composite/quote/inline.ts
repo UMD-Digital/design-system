@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Asset } from 'utilities';
 import Text, { TypeQuoteTextContainer } from './elements/text';
 import Image from './elements/image';
@@ -10,7 +10,7 @@ export type TypeInlineInline = TypeQuoteTextContainer & {
   image: HTMLElement | null;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 
 const SMALL = 500;
 
@@ -47,17 +47,17 @@ const IS_WITH_IMAGE_SIZE_LARGE_TEXT_QUOTE = `${IS_SIZE_LARGE_WITH_IMAGE_CONTAINE
 // prettier-ignore
 const OverwriteThemeMaryland = `
   ${IS_MARYLAND_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
-    background-color: ${Colors.gold};
+    background-color: ${colors.gold};
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_MARYLAND_CONTAINER} .${Image.Elements.container} img  {
-      border-right: 2px solid ${Colors.gold};
+      border-right: 2px solid ${colors.gold};
     }
   }
   
   ${IS_MARYLAND_CONTAINER} span svg {
-    fill: ${Colors.gold} !important;
+    fill: ${colors.gold} !important;
   }
 `;
 
@@ -65,7 +65,7 @@ const OverwriteThemeMaryland = `
 const OverwriteSizeLarge = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_CONTAINER} .${QUOTE_INLINE_CONTAINER_WRAPPER} {
-      gap: ${Spacing.xl};
+      gap: ${spacing.xl};
     }
   }
 
@@ -92,25 +92,25 @@ const OverwriteSizeLarge = `
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${IS_SIZE_LARGE_TEXT_CONTAINER} {
-      padding-top:  ${Spacing['2xl']};
+      padding-top:  ${spacing['2xl']};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_TEXT_CONTAINER} {
-      padding-left: ${Spacing.md};
+      padding-left: ${spacing.md};
     }
   }
 
   ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
     height: 26px;
     width: 36px;
-    top: -${Spacing['2xl']};
+    top: -${spacing['2xl']};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
-      left: -${Spacing['6xl']};
+      left: -${spacing['6xl']};
       top: 0;
     }
   }
@@ -153,14 +153,14 @@ const OverwriteWithImage = `
 const TextContainer = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} {
-      padding-top: ${Spacing.lg};
-      padding-left: ${Spacing.md};
+      padding-top: ${spacing.lg};
+      padding-left: ${spacing.md};
     }
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} {
-      padding-left: ${Spacing['4xl']};
+      padding-left: ${spacing['4xl']};
     }
   }
 
@@ -171,24 +171,24 @@ const TextContainer = `
   ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
     content: '';
     position: absolute;
-    left: -${Spacing.md};
+    left: -${spacing.md};
     top: 7px;
     height: calc(100% - 14px);
     width: 2px;
     display: block;
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER}:before {
-      left: -${Spacing.md};
+      left: -${spacing.md};
     }
   }
 
   ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
     position: absolute;
-    left: -${Spacing.md};
-    top: -${Spacing.lg};
+    left: -${spacing.md};
+    top: -${spacing.lg};
     height: 15px;
     width: 22px;
     display: block;
@@ -197,20 +197,20 @@ const TextContainer = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
       position: absolute;
-      left: -${Spacing['4xl']};
+      left: -${spacing['4xl']};
       top: 0;
     }
   }
 
   ${IS_TEXT_CONTAINER_OVERWRITE} .${TEXT_CONTAINER_QUOTE_WRAPPER} svg {
-    fill: ${Colors.red};
+    fill: ${colors.red};
   }
 `
 
 // prettier-ignore
 const ImageContainer = `
   ${IS_IMAGE_CONTAINER_OVERWRITE} {
-    margin-bottom: ${Spacing.sm};
+    margin-bottom: ${spacing.sm};
     position: relative;
   }
 
@@ -220,7 +220,7 @@ const ImageContainer = `
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     ${IS_IMAGE_CONTAINER_OVERWRITE} img  {
-      border-right: 2px solid ${Colors.red};
+      border-right: 2px solid ${colors.red};
     }
   }
 
@@ -243,7 +243,7 @@ const ImageContainer = `
   }
 
   ${IS_IMAGE_CONTAINER_OVERWRITE} span svg {
-    fill: ${Colors.red};
+    fill: ${colors.red};
   }
 `;
 
@@ -257,7 +257,7 @@ const STYLES_QUOTE_INLINE_ELEMENT = `
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
     .${QUOTE_INLINE_CONTAINER_WRAPPER} {
       display: flex;
-      gap: ${Spacing.lg};
+      gap: ${spacing.lg};
     }
   }
 

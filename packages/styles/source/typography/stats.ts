@@ -1,46 +1,46 @@
-import { Font, Media } from '../tokens';
+import { font, media } from '../tokens';
 import { create } from '../utilities';
 
-const breakpointLarge = Media.queries.large.min;
-const breakpointDesktop = Media.queries.desktop.min;
+const breakpointLarge = media.queries.large.min;
+const breakpointDesktop = media.queries.desktop.min;
 
 export const large = {
-  fontFamily: Font.family['campaign'],
-  fontSize: Font.size['9xl'],
-  fontWeight: Font.weight['extraBold'],
+  fontFamily: font.family['campaign'],
+  fontSize: font.size['9xl'],
+  fontWeight: font.weight['extraBold'],
   fontStyle: 'italic',
   lineHeight: '1',
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['9xl']} + 3.33vw)`,
+    fontSize: `calc(${font.size['9xl']} + 3.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['max'],
+    fontSize: font.size['max'],
   },
 };
 
 export const medium = {
-  fontFamily: Font.family['campaign'],
-  fontSize: Font.size['7xl'],
+  fontFamily: font.family['campaign'],
+  fontSize: font.size['7xl'],
   fontStyle: 'italic',
-  fontWeight: Font.weight['extraBold'],
+  fontWeight: font.weight['extraBold'],
   lineHeight: '1',
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['7xl']} + 1.33vw)`,
+    fontSize: `calc(${font.size['7xl']} + 1.33vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['10xl'],
+    fontSize: font.size['10xl'],
   },
 };
 
 export const small = {
-  fontFamily: Font.family['campaign'],
-  fontSize: Font.size['7xl'],
+  fontFamily: font.family['campaign'],
+  fontSize: font.size['7xl'],
   fontStyle: 'italic',
-  fontWeight: Font.weight['extraBold'],
+  fontWeight: font.weight['extraBold'],
   lineHeight: '0.87em',
 };
 

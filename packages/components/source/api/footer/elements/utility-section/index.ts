@@ -1,8 +1,8 @@
 import {
-  Animations,
-  Tokens,
-  Layout,
-  Typography,
+  animations,
+  tokens,
+  layout,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
 import {
@@ -13,7 +13,7 @@ import {
   REFERENCES,
 } from '../../globals';
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -34,24 +34,24 @@ const LinkStyles = `
   }
 
   .${UTILITY_CONTAINER} a span {
-    color: ${Colors.gray.light};
+    color: ${colors.gray.light};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:
-      Animations.line.slideUnderWhite,
+      animations.line.slideUnderWhite,
     },
   })}
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
-      Animations.line.slideUnderBlack,
+      animations.line.slideUnderBlack,
     },
   })}
 `;
@@ -59,30 +59,30 @@ const LinkStyles = `
 // prettier-ignore
 const TextStyles = `
   .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} p {
-    color: ${Colors.gray.light};
+    color: ${colors.gray.light};
     display: flex;
     align-items: center;
   }
 
   .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} a {
-    color: ${Colors.gray.light};
+    color: ${colors.gray.light};
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} p {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 `;
 
 // prettier-ignore
 export const UtilityContainerStyles = `
   .${UTILITY_CONTAINER} {
-    padding: ${Spacing.sm} 0;
-    background-color: ${Colors.gray.darker};
+    padding: ${spacing.sm} 0;
+    background-color: ${colors.gray.darker};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER_LOCK}`]: Layout.space.horizontal.max,
+      [`.${UTILITY_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 
@@ -95,27 +95,27 @@ export const UtilityContainerStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER} *`]: Typography.sans.smaller
+      [`.${UTILITY_CONTAINER} *`]: typography.sans.smaller
     },
   })}
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
-      margin-top: ${Spacing.sm};
+      margin-top: ${spacing.sm};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${UTILITY_CONTAINER} .${UTILITY_CONTAINER_LOCK} > *:not(:first-child) {
-      margin-left: ${Spacing.sm};
-      padding-left: ${Spacing.sm};
-      background-position: ${Spacing.sm} 100%;
-      border-left: 1px solid ${Colors.gray.dark};
+      margin-left: ${spacing.sm};
+      padding-left: ${spacing.sm};
+      background-position: ${spacing.sm} 100%;
+      border-left: 1px solid ${colors.gray.dark};
     }
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} {
-    background-color: ${Colors.gray.light};
+    background-color: ${colors.gray.light};
   }
 
   ${LinkStyles}

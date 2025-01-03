@@ -1,10 +1,10 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles, Markup } from 'utilities';
 import { ELEMENTS, SLOTS, VARIABLES, REFERENCES } from '../globals';
 import { UMDCallToActionElement } from '../index';
 
-const { Colors, Font, Spacing } = Tokens;
+const { colors, font, spacing } = tokens;
 const { CallToAction } = Composite;
 const { Node } = Markup.create;
 
@@ -24,7 +24,7 @@ const OverwritePrimaryLayoutStyles = `
   }
 
   ${IS_PRIMARY} .${CTA_PLAIN_TEXT_SLOT} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 `
 
@@ -37,7 +37,7 @@ const OverwriteSecondaryLayoutStyles = `
 
   ${IS_SECONDARY} .${CTA_PLAIN_TEXT_SLOT} {
     padding-left: 20px;
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 `
 
@@ -46,14 +46,14 @@ const PlainTextSlotStyles = `
   .${CTA_PLAIN_TEXT_SLOT} {
     text-decoration: underline;
     display: inline-block;
-    font-size: ${Font.size.min};
+    font-size: ${font.size.min};
     transition: color .5s;
     position: relative;
   }
 
   .${CTA_PLAIN_TEXT_SLOT}:hover,
   .${CTA_PLAIN_TEXT_SLOT}:focus {
-    color: ${Colors.redDark};
+    color: ${colors.redDark};
   }
 `;
 

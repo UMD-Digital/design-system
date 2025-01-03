@@ -1,11 +1,11 @@
-import { Layout, Tokens } from '@universityofmaryland/web-elements-styles';
+import { layout, tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -35,18 +35,18 @@ const socialOverwriteStyles = `
 // prettier-ignore
 export const RowLinkStyles = `
   .${ROW_LINKS_CONTAINER} {
-    padding-bottom: ${Spacing.lg};
-    background-color: ${Colors.black};
+    padding-bottom: ${spacing.lg};
+    background-color: ${colors.black};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${ROW_LINKS_CONTAINER} {
-      padding-bottom: ${Spacing['2xl']};
+      padding-bottom: ${spacing['2xl']};
     }
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_CONTAINER} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
   }
 
   .${ROW_LINKS_CONTAINER_WRAPPER}  {
@@ -62,7 +62,7 @@ export const RowLinkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LINKS_CONTAINER_LOCK}`]: Layout.space.horizontal.max, 
+      [`.${ROW_LINKS_CONTAINER_LOCK}`]: layout.space.horizontal.max, 
     },
   })}
 

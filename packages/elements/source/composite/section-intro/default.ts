@@ -1,7 +1,7 @@
 import {
-  Typography,
-  Tokens,
-  Layout,
+  typography,
+  tokens,
+  layout,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
@@ -14,7 +14,7 @@ type TypeSectionIntroDefaultProps = {
   includesAnimation?: boolean;
 };
 
-const { Colors, Spacing, SpaceLayout } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
@@ -49,10 +49,10 @@ const OverwriteAnimationLine = `
   @keyframes intro-line {
     from {
       height: 0;
-      transform: translateY(${Spacing['lg']});
+      transform: translateY(${spacing['lg']});
    }
     to {
-      height: ${Spacing['4xl']};
+      height: ${spacing['4xl']};
       transform: translateY(0);
     }
   }
@@ -60,7 +60,7 @@ const OverwriteAnimationLine = `
   @media (prefers-reduced-motion: no-preference) {
     ${OVERWRITE_ANIMATION_WRAPPER}:before {
       height: 0;
-      transform: translateY(${Spacing['lg']});
+      transform: translateY(${spacing['lg']});
     }
   }
 
@@ -102,22 +102,22 @@ const OverwriteAnimationText = `
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINTER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `;
 
 // prettier-ignore
 const OverwriteSeparator = `
   ${OVERWRITE_SEPARATOR_WRAPPER} {
-    padding-top: ${Spacing['6xl']};
+    padding-top: ${spacing['6xl']};
     position: relative;
   }
 
   ${OVERWRITE_SEPARATOR_WRAPPER}:before {
     content: '';
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
     position: absolute;
-    height: ${Spacing['4xl']};
+    height: ${spacing['4xl']};
     width: 2px;
     left: calc(50% - 1px);
     top: 0;
@@ -128,12 +128,12 @@ const OverwriteSeparator = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: Typography.sans.largest,
+      [`.${ELEMENT_HEADLINE}`]: typography.sans.largest,
     },
   })}
 
   .${ELEMENT_HEADLINE} {
-    color: ${Colors.black};
+    color: ${colors.black};
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -143,36 +143,36 @@ const HeadlineStyles = `
 const TextStyles = `
   * + .${ELEMENT_RICH_TEXT},
   * + .${ELEMENT_RICH_TEXT_SMALL} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT}`]: Typography.sans.larger,
+      [`.${ELEMENT_RICH_TEXT}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT} *`]: Typography.sans.larger,
+      [`.${ELEMENT_RICH_TEXT} *`]: typography.sans.larger,
     },
   })}
 
   .${ELEMENT_RICH_TEXT},
   .${ELEMENT_RICH_TEXT} * {
     font-weight: 700;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT_SMALL}`]: Typography.sans.medium,
+      [`.${ELEMENT_RICH_TEXT_SMALL}`]: typography.sans.medium,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT_SMALL} *`]: Typography.sans.medium,
+      [`.${ELEMENT_RICH_TEXT_SMALL} *`]: typography.sans.medium,
     },
   })}
 `;
@@ -180,12 +180,12 @@ const TextStyles = `
 // prettier-ignore
 const ActionStyles = `
   * + .${ELEMENT_ACTIONS} {
-    margin-top: ${Spacing.md};
+    margin-top: ${spacing.md};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ACTIONS}`]: Layout.grid.inline.tabletRows,
+      [`.${ELEMENT_ACTIONS}`]: layout.grid.inline.tabletRows,
     },
   })}
 
@@ -199,7 +199,7 @@ const ActionStyles = `
 const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
   .${ELEMENT_INTRO_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    max-width: ${SpaceLayout.maxWidth.small};
+    max-width: ${spacing.maxWidth.small};
     margin: 0 auto;
   }
 

@@ -1,4 +1,4 @@
-import { Tokens, Layout } from '@universityofmaryland/web-elements-styles';
+import { tokens, layout } from '@universityofmaryland/web-elements-styles';
 import { Asset, Storage, Styles } from 'utilities';
 import AlertText, {
   CONSTANTS as TEXT_CONSTANTS,
@@ -18,7 +18,7 @@ type TypeAlertButtonProps = {
   container: HTMLElement;
 };
 
-const { Colors, Spacing, SpaceLayout } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDUM = 500;
@@ -36,27 +36,27 @@ const OVERWRITE_TEXT_BODY = `.${ELEMENT_ALERT_SITE_CONTAINER} .${TEXT_CONSTANTS.
 
 const OverwriteText = `
   ${OVERWRITE_TEXT_WRAPPER} {
-    max-width: ${SpaceLayout.maxWidth.large};
+    max-width: ${spacing.maxWidth.large};
   }
 
   ${OVERWRITE_TEXT_BODY},
   ${OVERWRITE_TEXT_BODY} * {
-    color: ${Colors.black};
-    max-width: ${SpaceLayout.maxWidth.large};
+    color: ${colors.black};
+    max-width: ${spacing.maxWidth.large};
   }
 `;
 
 const ButtonStyles = `
   .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} {
     position: absolute;
-    top: ${Spacing.lg};
-    right: ${Spacing.lg};
+    top: ${spacing.lg};
+    right: ${spacing.lg};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} {
-      top: ${Spacing.sm};
-      right: ${Spacing.sm};
+      top: ${spacing.sm};
+      right: ${spacing.sm};
     }
   }
 `;
@@ -64,7 +64,7 @@ const ButtonStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_ALERT_SITE_LOCK}`]: Layout.space.horizontal.max,
+      [`.${ELEMENT_ALERT_SITE_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 
@@ -81,16 +81,16 @@ const STYLES_ALERT_SITE_ELEMENT = `
   .${ELEMENT_ALERT_SITE_CONTAINER} {
     display: flex;
     position: relative;
-    padding: ${Spacing.lg} 0;
-    gap: ${Spacing.lg};
-    background-color: ${Colors.gold};
-    border-left: 4px solid ${Colors.red};
+    padding: ${spacing.lg} 0;
+    gap: ${spacing.lg};
+    background-color: ${colors.gold};
+    border-left: 4px solid ${colors.red};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_SITE_CONTAINER} {
-      border-left: 8px solid ${Colors.red};
-      padding-right: ${Spacing['2xl']};
+      border-left: 8px solid ${colors.red};
+      padding-right: ${spacing['2xl']};
     }
   }
 

@@ -1,7 +1,7 @@
-import { Typography, Tokens } from '@universityofmaryland/web-elements-styles';
+import { typography, tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
-const { Colors } = Tokens;
+const { colors } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_EVENT_DATE_WRAPPER = 'event-sign-wrapper';
@@ -27,49 +27,49 @@ const OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_M
 const OverwriteLargeSize = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MONTH}`]: Typography.sans.small,
+      [`${OVERWRITE_SIZE_LARGE_MONTH}`]: typography.sans.small,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MONTH} *`]: Typography.sans.small,
+      [`${OVERWRITE_SIZE_LARGE_MONTH} *`]: typography.sans.small,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH}`]: Typography.sans.min,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH}`]: typography.sans.min,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH} *`]: Typography.sans.min,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH} *`]: typography.sans.min,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_DAY}`]: Typography.sans.extraLarge,
+      [`${OVERWRITE_SIZE_LARGE_DAY}`]: typography.sans.extraLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_DAY} *`]: Typography.sans.extraLarge,
+      [`${OVERWRITE_SIZE_LARGE_DAY} *`]: typography.sans.extraLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY}`]: Typography.sans.larger,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY} *`]: Typography.sans.larger,
+      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY} *`]: typography.sans.larger,
     },
   })}
 `;
@@ -78,13 +78,13 @@ const OverwriteLargeSize = `
 const MonthStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_MONTH}`]: Typography.sans.min,
+      [`.${ELEMENT_EVENT_MONTH}`]: typography.sans.min,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_MONTH} *`]: Typography.sans.min,
+      [`.${ELEMENT_EVENT_MONTH} *`]: typography.sans.min,
     },
   })}
 `;
@@ -92,13 +92,13 @@ const MonthStyles = `
 const DayStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_DAY}`]: Typography.sans.larger,
+      [`.${ELEMENT_EVENT_DAY}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_DAY} *`]: Typography.sans.larger,
+      [`.${ELEMENT_EVENT_DAY} *`]: typography.sans.larger,
     },
   })}
 `;
@@ -116,11 +116,11 @@ const WrapperStyles = `
     text-align: center;
     max-width: 200px;
     font-weight: 700;
-    color: ${Colors.black} !important;
+    color: ${colors.black} !important;
   }
 
   .${ELEMENT_EVENT_DATE_WRAPPER}${IS_DARK} * {
-    color: ${Colors.white} !important;
+    color: ${colors.white} !important;
   }
 `;
 

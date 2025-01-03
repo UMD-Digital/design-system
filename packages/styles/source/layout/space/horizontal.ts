@@ -1,4 +1,4 @@
-import { Media, Spacing, SpaceLayout } from '../../tokens';
+import { media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -8,23 +8,23 @@ const lockBase = {
   display: 'block',
   marginLeft: 'auto',
   marginRight: 'auto',
-  paddingLeft: Spacing['md'],
-  paddingRight: Spacing['md'],
-  maxWidth: `${SpaceLayout.maxWidth.max}`,
+  paddingLeft: spacing['md'],
+  paddingRight: spacing['md'],
+  maxWidth: `${spacing.maxWidth.normal}`,
 
-  [`@media (${Media.queries.tablet.min})`]: {
-    paddingLeft: Spacing['2xl'],
-    paddingRight: Spacing['2xl'],
+  [`@media (${media.queries.tablet.min})`]: {
+    paddingLeft: spacing['2xl'],
+    paddingRight: spacing['2xl'],
   },
 
-  [`@media (${Media.queries.desktop.min})`]: {
-    paddingLeft: Spacing['4xl'],
-    paddingRight: Spacing['4xl'],
+  [`@media (${media.queries.desktop.min})`]: {
+    paddingLeft: spacing['4xl'],
+    paddingRight: spacing['4xl'],
   },
 
-  [`@media (${Media.queries.highDef.min})`]: {
-    paddingLeft: Spacing.max,
-    paddingRight: Spacing.max,
+  [`@media (${media.queries.highDef.min})`]: {
+    paddingLeft: spacing.max,
+    paddingRight: spacing.max,
   },
 };
 
@@ -54,7 +54,7 @@ export const max = create.jssObject({
 // umd-layout-space-horizontal-large
 export const large = create.jssObject({
   ...lockBase,
-  maxWidth: `${SpaceLayout.maxWidth.large}`,
+  maxWidth: `${spacing.maxWidth.large}`,
 
   className: [
     `${classNamePrefix}-large`,
@@ -66,7 +66,7 @@ export const large = create.jssObject({
 // umd-layout-space-horizontal-normal
 export const normal = create.jssObject({
   ...lockBase,
-  maxWidth: `${SpaceLayout.maxWidth.normal}`,
+  maxWidth: `${spacing.maxWidth.normal}`,
 
   className: [
     `${classNamePrefix}-normal`,
@@ -78,7 +78,7 @@ export const normal = create.jssObject({
 // umd-layout-space-horizontal-small
 export const small = create.jssObject({
   ...lockBase,
-  maxWidth: `${SpaceLayout.maxWidth.small}`,
+  maxWidth: `${spacing.maxWidth.small}`,
 
   className: [
     `${classNamePrefix}-small`,
@@ -90,7 +90,7 @@ export const small = create.jssObject({
 // umd-layout-space-horizontal-smallest
 export const smallest = create.jssObject({
   ...lockBase,
-  maxWidth: `${SpaceLayout.maxWidth.smallest}`,
+  maxWidth: `${spacing.maxWidth.smallest}`,
 
   className: [
     `${classNamePrefix}-smallest`,

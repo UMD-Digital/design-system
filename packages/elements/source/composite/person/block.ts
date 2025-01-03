@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Asset } from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
@@ -7,7 +7,7 @@ type TypeBlockPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 
 const IMAGE_BREAKPOINT = 349;
 const SMALL = 650;
@@ -30,11 +30,11 @@ const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${OVERWRITE_DARK_THEME_PERSON_CONT
 
 const OverwriteThemeDarkStyles = `
   ${OVERWRITE_DARK_THEME_WRAPPER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 `;
 
@@ -42,8 +42,8 @@ const OverwriteImagesStyles = `
   ${OVERWRITE_IMAGE_CONTAINER} {
     display: flex;
     justify-content: center;
-    margin-bottom: ${Spacing.md};
-    background-color: ${Colors.gray.lightest};
+    margin-bottom: ${spacing.md};
+    background-color: ${colors.gray.lightest};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {

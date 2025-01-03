@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Accessibility, Asset } from 'utilities';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
 import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
@@ -17,7 +17,7 @@ type CombinedNavDrawerProps = TypeNavDrawerRequirements &
 
 export type TypeDrawerProps = CombinedNavDrawerProps;
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const ANIMATION_TIME = 300;
 
@@ -29,12 +29,12 @@ const ELEMENT_NAV_DRAWER_CLOSE_BUTTON = 'nav-drawer-close-button';
 // prettier-ignore
 const DrawerButtonClose = `
   .${ELEMENT_NAV_DRAWER_CLOSE_BUTTON} {
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
     display: flex;
     align-items: center;
     justify-content: center;
-    height: ${Spacing['2xl']};
-    width: ${Spacing['2xl']};
+    height: ${spacing['2xl']};
+    width: ${spacing['2xl']};
     padding: 12px;
     transition: background .5s ease-in-out;
     order: 2;
@@ -42,11 +42,11 @@ const DrawerButtonClose = `
 
   .${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}:hover,
   .${ELEMENT_NAV_DRAWER_CLOSE_BUTTON}:focus {
-    background-color: ${Colors.redDark};
+    background-color: ${colors.redDark};
   }
 
   .${ELEMENT_NAV_DRAWER_CLOSE_BUTTON} svg {
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 `;
 

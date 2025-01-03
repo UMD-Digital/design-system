@@ -1,19 +1,7 @@
-import {
-  Accessibility,
-  Animations,
-  ElementStyles,
-  Layout,
-  Typography,
-  WebComponents,
-  Utilities,
-} from '@universityofmaryland/web-elements-styles';
+import { utilities } from '@universityofmaryland/web-elements-styles';
+
+const styles = utilities.transform.outputStyles;
 
 export default {
-  ...Typography.fontFace.browserString,
-  ...Utilities.transform.processNestedObjects(Accessibility),
-  ...Utilities.transform.processNestedObjects(Animations),
-  ...Utilities.transform.processNestedObjects(ElementStyles),
-  ...Utilities.transform.processNestedObjects(Layout),
-  ...Utilities.transform.processNestedObjects(Typography),
-  ...WebComponents,
+  styles,
 };

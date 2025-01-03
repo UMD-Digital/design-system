@@ -1,15 +1,14 @@
-import { Tokens, root } from '@universityofmaryland/web-elements-styles';
-
+import { tokens, root } from '@universityofmaryland/web-elements-styles';
 import transforms from './transforms';
 
-const { Font } = Tokens;
+const { font, media } = tokens;
 
 export const base = {
-  ...Tokens,
-  fontFamily: Font.family,
-  fontSize: Font.size,
-  fontWeight: Font.weight,
-  breakpoints: Tokens.Media.breakpoints,
+  ...tokens,
+  fontFamily: font.family,
+  fontSize: font.size,
+  fontWeight: font.weight,
+  breakpoints: media.breakpoints,
 };
 
 export const theme = {

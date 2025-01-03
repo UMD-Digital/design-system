@@ -1,7 +1,7 @@
 import {
-  Layout,
-  Tokens,
-  Typography,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
@@ -13,7 +13,7 @@ type TypeHeroMinimalProps = TypeTextContainerProps &
     isThemeMaryland?: boolean;
   };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
@@ -54,28 +54,28 @@ const OVERWRITE_THEME_MARYLAND_TEXT_WRAPPER = `.${ELEMENT_HERO_CONTAINER}${IS_TH
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} .${TextContainer.Elements.eyebrow} {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} .${TextContainer.Elements.eyebrow} {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_TEXT_WRAPPER},
   ${OVERWRITE_THEME_MARYLAND_TEXT_WRAPPER} {
-    border-left: 2px solid ${Colors.gold};
+    border-left: 2px solid ${colors.gold};
   }
 `;
 
@@ -83,18 +83,18 @@ const OverwriteTheme = `
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: Typography.sans.small,
+      [`${OVERWRITE_EYEBROW}`]: typography.sans.small,
     },
   })}
   
   ${OVERWRITE_EYEBROW} {
     text-transform: uppercase;
     font-weight: 600;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
   
   ${OVERWRITE_EYEBROW} + * {
-    margin-top: ${Spacing.sm} !important;
+    margin-top: ${spacing.sm} !important;
   }
 `;
 
@@ -102,7 +102,7 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.large,
+      [`${OVERWRITE_HEADLINE}`]: typography.campaign.large,
     },
   })}
   
@@ -114,24 +114,24 @@ const OverwriteHeadline = `
 // prettier-ignore
 const OverwriteTextContainer = `
   ${OVERWRITE_TEXT_CONTAINER} {
-    padding: ${Spacing.xl} 0;
+    padding: ${spacing.xl} 0;
   }
 
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_WITH_IMAGE_TEXT_CONTAINER} {
-      padding: ${Spacing['4xl']} 0;
-      width: calc(50% - ${Spacing['4xl']});
+      padding: ${spacing['4xl']} 0;
+      width: calc(50% - ${spacing['4xl']});
     }
   }
 
   ${OVERWRITE_TEXT_CONTAINER_WRAPPER} {
-    padding-left: ${Spacing.md};
-    border-left: 2px solid ${Colors.red};
+    padding-left: ${spacing.md};
+    border-left: 2px solid ${colors.red};
   }
 
   @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
     ${OVERWRITE_TEXT_CONTAINER_WRAPPER} {
-      padding-left: ${Spacing.lg};
+      padding-left: ${spacing.lg};
     }
   }
 `;
@@ -173,7 +173,7 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: Layout.space.horizontal.max,
+      [`.${ELEMENT_HERO_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 

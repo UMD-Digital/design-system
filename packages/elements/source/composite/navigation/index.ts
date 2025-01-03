@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Asset, Styles } from 'utilities';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item/';
@@ -25,7 +25,7 @@ type TypeNavRow = TypeSearchLink &
 
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
-const { Colors, Font, Media, Spacing } = Tokens;
+const { colors, font, media, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 const ANIMATION_TIME = 500;
 
@@ -50,7 +50,7 @@ const OVERWRITE_STICKY_LOGO = `${OVERWRITE_STICKY_CONTAINER} .${ELEMENT_HEADER_L
 
 const OverwriteStickyStyles = `
   ${OVERWRITE_STICKY_CONTAINER} {
-    padding: ${Spacing.xs} 0;
+    padding: ${spacing.xs} 0;
   }
 
   .${ELEMENT_HEADER_WRAPPER} {
@@ -64,22 +64,22 @@ const OverwriteStickyStyles = `
 
 const CtaStyles = `
   .${ELEMENT_HEADER_MENU_CTA} {
-    color: ${Colors.white};
-    font-weight: ${Font.weight.bold};
-    font-size: ${Font.size.sm};
-    padding: ${Spacing.xs};
-    background-color: ${Colors.red};
+    color: ${colors.white};
+    font-weight: ${font.weight.bold};
+    font-size: ${font.size.sm};
+    padding: ${spacing.xs};
+    background-color: ${colors.red};
     transition: background .5s;
   }
 
   .${ELEMENT_HEADER_MENU_CTA}:hover,
   .${ELEMENT_HEADER_MENU_CTA}:focus {
-    background-color: ${Colors.redDark};
+    background-color: ${colors.redDark};
   }
 `;
 
 const NavigationColumnStyles = `
-  @media (max-width: ${Media.breakpoints.tablet.max}) {
+  @media (max-width: ${media.breakpoints.tablet.max}) {
     .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
       display: none;
     }
@@ -89,29 +89,29 @@ const NavigationColumnStyles = `
     display: flex;
     justify-content flex-end;
     align-items: center;
-    gap: ${Spacing.md};
+    gap: ${spacing.md};
   }
 
   .${ELEMENT_HEADER_NAVIGATION_ROW} svg {
     width: 24px;
     height: 24px;
-    fill: ${Colors.black};
+    fill: ${colors.black};
   }
 
   .${ELEMENT_HEADER_UTILITY_ROW} {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: ${Spacing.sm};
+    margin-bottom: ${spacing.sm};
   }
 
   .${ELEMENT_HEADER_UTILITY_ROW} ::slotted(*) {
     display: flex;
     justify-content: flex-end;
-    gap: ${Spacing.md};
+    gap: ${spacing.md};
   }
 
   .${ELEMENT_HEADER_MENU_SEARCH} {
-    margin-left: ${Spacing.md};
+    margin-left: ${spacing.md};
   }
 `;
 
@@ -126,9 +126,9 @@ const LogoColumnStyles = `
   }
 
   .${ELEMENT_HEADER_MENU_BUTTON} {
-    border-right: 1px solid ${Colors.gray.light};
-    padding-right: ${Spacing.min};
-    margin-right: ${Spacing.sm};
+    border-right: 1px solid ${colors.gray.light};
+    padding-right: ${spacing.min};
+    margin-right: ${spacing.sm};
   }
 
   .${ELEMENT_HEADER_LOGO} {
@@ -138,13 +138,13 @@ const LogoColumnStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}`]: Typography.sans.larger,
+      [`.${ELEMENT_HEADER_LOGO}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO} *`]: Typography.sans.larger,
+      [`.${ELEMENT_HEADER_LOGO} *`]: typography.sans.larger,
     },
   })}
 
@@ -156,13 +156,13 @@ const LogoColumnStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: Typography.sans.extraLarge,
+      [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: typography.sans.extraLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: Typography.sans.extraLarge,
+      [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: typography.sans.extraLarge,
     },
   })}
 
@@ -177,7 +177,7 @@ const LogoColumnStyles = `
     max-width: 190px;
   }
 
-  @media (min-width: ${Media.breakpoints.tablet.min}) {
+  @media (min-width: ${media.breakpoints.tablet.min}) {
     .${ELEMENT_HEADER_LOGO} img {
       max-width: 240px;
     }
@@ -189,16 +189,16 @@ const WrapperStyles = `
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: ${Spacing.lg};
+    gap: ${spacing.lg};
     z-index: 999;
   }
 `;
 
 const STYLES_NAVIGATION_HEADER = `
   .${ELEMENT_HEADER_CONTAINTER} {
-    background-color: ${Colors.white};
+    background-color: ${colors.white};
     display: block;
-    padding: ${Spacing.md} 0;
+    padding: ${spacing.md} 0;
     position: relative;
     transition: padding ${ANIMATION_TIME}ms;
   }

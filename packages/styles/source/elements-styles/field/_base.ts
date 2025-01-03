@@ -1,45 +1,45 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { sans } from '../../typography';
 
 export const baseInput = {
   ...sans.small,
-  backgroundColor: Colors.white,
-  border: `1px solid ${Colors.gray.light}`,
-  color: Colors.black,
+  backgroundColor: colors.white,
+  border: `1px solid ${colors.gray.light}`,
+  color: colors.black,
   cursor: 'text',
   display: 'block',
   outlineOffset: '1px',
-  padding: `${Spacing.xs} ${Spacing.sm}`,
+  padding: `${spacing.xs} ${spacing.sm}`,
   position: 'relative',
   textOverflow: 'ellipsis',
   transition: 'border 0.5s ease-in-out, color 0.5s ease-in-out',
   width: '100%',
 
   '&::placeholder': {
-    color: Colors.gray.mediumAA,
+    color: colors.gray.mediumAA,
   },
 
   '&[readonly]': {
-    color: Colors.gray.mediumAA,
+    color: colors.gray.mediumAA,
     fontStyle: 'italic',
     cursor: 'default',
   },
 
   [`&:focus, &:focus-within`]: {
-    borderBottom: `1px solid ${Colors.black}`,
+    borderBottom: `1px solid ${colors.black}`,
   },
 };
 
 export const baseInputChoice = {
   appearance: 'none',
-  backgroundColor: Colors.white,
-  border: `1px solid ${Colors.gray.light}`,
+  backgroundColor: colors.white,
+  border: `1px solid ${colors.gray.light}`,
   cursor: 'pointer',
   flex: 'none',
-  height: Spacing.md,
+  height: spacing.md,
   padding: 0,
   position: 'relative',
-  width: Spacing.md,
+  width: spacing.md,
 
   '&:checked::after': {
     opacity: 1,
@@ -50,13 +50,13 @@ export const baseInputChoice = {
 export const baseInputChoiceWrapper = {
   alignItems: 'center',
   cursor: 'pointer',
-  color: Colors.black,
+  color: colors.black,
   display: 'inline-flex',
   gap: '16px',
   justifyContent: 'flex-start',
   transition: 'color 0.5s ease-in-out',
 
   [`&:hover, &:focus, &:focus-within`]: {
-    color: Colors.redDark,
+    color: colors.redDark,
   },
 };

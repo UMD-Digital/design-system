@@ -1,4 +1,4 @@
-import { Media, Spacing } from '../../tokens';
+import { media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -8,7 +8,7 @@ const columns = {
   alignItems: 'flex-start',
   display: 'flex',
   flexDirection: 'column',
-  gap: Spacing.sm,
+  gap: spacing.sm,
   justifyContent: 'flex-start',
 };
 
@@ -16,7 +16,7 @@ const columns = {
 export const tabletRows = create.jssObject({
   ...columns,
 
-  [`@media (${Media.queries.large.min})`]: {
+  [`@media (${media.queries.large.min})`]: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
@@ -33,7 +33,7 @@ export const tabletRows = create.jssObject({
 export const stretch = create.jssObject({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: Spacing.sm,
+  gap: spacing.sm,
   justifyContent: 'space-between',
   position: 'relative',
 

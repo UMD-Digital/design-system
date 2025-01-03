@@ -1,4 +1,4 @@
-import { Tokens, Layout } from '@universityofmaryland/web-elements-styles';
+import { tokens, layout } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
 type TypeStickyProps = {
@@ -8,7 +8,7 @@ type TypeStickyProps = {
   topPosition?: string | null;
 };
 
-const { Media } = Tokens;
+const { media } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAME = 'umd-sticky-columns';
@@ -24,7 +24,7 @@ const OVERWRITE_STICKY_LAST_STICKY = `.${ELEMENT_STICKY_CONTAINER}[${ATTRIBUTE_S
 
 // prettier-ignore
 const OverwriteStickyLast = `
-  @media (min-width: ${Media.breakpoints.highDef.min}) {
+  @media (min-width: ${media.breakpoints.highDef.min}) {
     ${OVERWRITE_STICKY_LAST_STICKY} {
        order: 2;
      }
@@ -33,7 +33,7 @@ const OverwriteStickyLast = `
 
 // prettier-ignore
 const ColumnSticky = `
-  @media (min-width: ${Media.breakpoints.highDef.min}) {
+  @media (min-width: ${media.breakpoints.highDef.min}) {
     .${ELEMENT_STICKY_COLUMN} {
       position: sticky;
       top: 32px;
@@ -49,7 +49,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: Layout.grid.gap.two,
+      [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: layout.grid.gap.two,
     },
   })}
 
@@ -58,7 +58,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
     grid-template-columns: 1fr;
   }
 
-  @media (min-width: ${Media.breakpoints.highDef.min}) {
+  @media (min-width: ${media.breakpoints.highDef.min}) {
     .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
       grid-template-columns: 1fr 1fr;
     }

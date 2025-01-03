@@ -1,25 +1,25 @@
-import { Colors, Media, Spacing } from '../../tokens';
+import { colors, media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-background-full';
 
 export const padding = {
-  padding: `${Spacing['2xl']} 0`,
+  padding: `${spacing['2xl']} 0`,
 
-  [`@media (${Media.queries.tablet.min})`]: {
-    padding: `${Spacing['6xl']} 0`,
+  [`@media (${media.queries.tablet.min})`]: {
+    padding: `${spacing['6xl']} 0`,
   },
 
-  [`@media (${Media.queries.highDef})`]: {
-    padding: `${Spacing['8xl']} 0`,
+  [`@media (${media.queries.highDef})`]: {
+    padding: `${spacing['8xl']} 0`,
   },
 };
 
 // umd-layout-background-full-light
 export const light = create.jssObject({
   ...padding,
-  backgroundColor: `${Colors.gray.lightest}`,
+  backgroundColor: `${colors.gray.lightest}`,
 
   className: [
     `${classNamePrefix}-light`,
@@ -31,7 +31,7 @@ export const light = create.jssObject({
 // umd-layout-background-full-dark
 export const dark = create.jssObject({
   ...padding,
-  backgroundColor: `${Colors.black}`,
+  backgroundColor: `${colors.black}`,
 
   className: [
     `${classNamePrefix}-dark`,

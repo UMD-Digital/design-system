@@ -1,6 +1,6 @@
 import {
-  ElementStyles,
-  Tokens,
+  elementStyles,
+  tokens,
 } from '@universityofmaryland/web-elements-styles';
 import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
@@ -16,7 +16,7 @@ type TypeEventFeatureProps = {
   isThemeDark?: boolean;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 650;
@@ -36,7 +36,7 @@ const OVERWRITE_THEME_DARK_EYEBROW = `.${ELEMENT_EVENT_FEATURE_CONTAINER}${IS_TH
 // prettier-ignore
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_EYEBROW} {
-    color: ${Colors.black} !important;
+    color: ${colors.black} !important;
   }
 `;
 
@@ -45,10 +45,10 @@ const OverwriteImageContainer = `
   .${ELEMENT_EVENT_SIGN_WRAPPER} {
     position: absolute;
     z-index: 9;
-    bottom: ${Spacing.min};
-    left: ${Spacing.min};
-    background-color: ${Colors.white};
-    padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
+    bottom: ${spacing.min};
+    left: ${spacing.min};
+    background-color: ${colors.white};
+    padding: ${spacing.sm} ${spacing.sm} ${spacing.min} ${spacing.sm};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
@@ -61,11 +61,11 @@ const OverwriteImageContainer = `
 // prettier-ignore
 const DetailsMeta = `
   * + .${ELEMENT_EVENT_FEATURE_META_WRAPPER} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   .${ELEMENT_EVENT_FEATURE_META_WRAPPER} + * {
-    margin-top: ${Spacing.sm} !important;
+    margin-top: ${spacing.sm} !important;
   }
 `;
 
@@ -73,12 +73,12 @@ const DetailsMeta = `
 const EyebrowStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
+      [`.${ELEMENT_EVENT_FEATURE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
     },
   })}
 
   .${ELEMENT_EVENT_FEATURE_EYEBROW} {
-    margin-bottom: ${Spacing.sm};
+    margin-bottom: ${spacing.sm};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {

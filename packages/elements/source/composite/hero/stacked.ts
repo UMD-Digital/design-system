@@ -1,8 +1,8 @@
 import {
-  ElementStyles,
-  Layout,
-  Tokens,
-  Typography,
+  elementStyles,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
@@ -16,7 +16,7 @@ type TypeHeroStackedProps = TypeTextContainerProps &
     includesAnimation?: boolean;
   };
 
-const { Colors, Media, Spacing } = Tokens;
+const { colors, media, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const TABLET = 768;
@@ -52,12 +52,12 @@ const OVERWRITE_IMAGE_OVERLAY_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${E
 const OverwriteEyebrow = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
+      [`${OVERWRITE_EYEBROW}`]: elementStyles.text.decoration.ribbon,
     },
   })}
 
   .${OVERWRITE_EYEBROW} {
-    color: ${Colors.black}
+    color: ${colors.black}
   }
 `;
 
@@ -65,18 +65,18 @@ const OverwriteEyebrow = `
 const OverwriteHeadline = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: Typography.campaign.extralarge,
+      [`${OVERWRITE_HEADLINE}`]: typography.campaign.extralarge,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_WITH_LOCK_HEADLINE}`]: Typography.campaign.large,
+      [`${OVERWRITE_WITH_LOCK_HEADLINE}`]: typography.campaign.large,
     },
   })}
   
   ${OVERWRITE_HEADLINE} {
-    color: ${Colors.black};
+    color: ${colors.black};
     max-width: 700px;
     margin: 0 auto;
   }
@@ -86,18 +86,18 @@ const OverwriteHeadline = `
 const OverwriteRichText = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: Typography.sans.larger,
+      [`${OVERWRITE_RICH_TEXT}`]: typography.sans.larger,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_RICH_TEXT} *`]: Typography.sans.larger,
+      [`${OVERWRITE_RICH_TEXT} *`]: typography.sans.larger,
     },
   })}
 
   ${OVERWRITE_RICH_TEXT} {
-    color: ${Colors.gray.dark};
+    color: ${colors.gray.dark};
     font-weight: 400;
     margin-left: auto;
     margin-right: auto;
@@ -107,7 +107,7 @@ const OverwriteRichText = `
 // prettier-ignore
 const OverwriteTextContainer = `
   ${OVERWRITE_TEXT_CONTAINER} {
-    padding: ${Spacing.lg} 0;
+    padding: ${spacing.lg} 0;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -115,7 +115,7 @@ const OverwriteTextContainer = `
   
   @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
     ${OVERWRITE_TEXT_CONTAINER} {
-      padding: ${Spacing['6xl']} 0 ${Spacing['3xl']};
+      padding: ${spacing['6xl']} 0 ${spacing['3xl']};
     }
   }
 `;
@@ -157,11 +157,11 @@ const AnimationStyles = `
   }
 
   @keyframes hero-stacked-font-color {
-    from { color: ${Colors.black}; }
-    to { color: ${Colors.white}; }
+    from { color: ${colors.black}; }
+    to { color: ${colors.white}; }
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_TEXT_CONTAINER_ANIMATION} {
@@ -174,7 +174,7 @@ const AnimationStyles = `
     }
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_IMAGE_OVERLAY_ANIMATION} {
@@ -187,7 +187,7 @@ const AnimationStyles = `
     }
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         ${OVERWRITE_RICH_TEXT_ANIMATION},
@@ -225,7 +225,7 @@ export const STYLES_HERO_STACKED_ELEMENT = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: Layout.space.horizontal.max,
+      [`.${ELEMENT_HERO_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 

@@ -1,7 +1,7 @@
 import {
-  Animations,
-  Tokens,
-  Typography,
+  animations,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
@@ -14,7 +14,7 @@ import {
 } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 const { Node, SlotWithDefaultStyling } = Markup.create;
@@ -58,7 +58,7 @@ const socialOverwriteStyles = `
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
     .${CONTACT_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
-      margin-top: ${Spacing.md};
+      margin-top: ${spacing.md};
     }
   }
 `;
@@ -66,37 +66,37 @@ const socialOverwriteStyles = `
 // prettier-ignore
 const HeadlineStyles = `
   .${CONTACT_LIST_HEADLINE} {
-    margin-bottom: ${Spacing.min};
-    color: ${Colors.white};
+    margin-bottom: ${spacing.min};
+    color: ${colors.white};
   }
 
   .${CONTACT_LIST_HEADLINE} * {
     font-weight: 700;
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE} a`]:
-      Animations.line.slideUnderWhite,
+      animations.line.slideUnderWhite,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_HEADLINE}`]: Typography.elements.interativeMedium,
+      [`.${CONTACT_LIST_HEADLINE}`]: typography.elements.interativeMedium,
     },
   })}
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE},
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} * {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
-      Animations.line.slideUnderBlack,
+      animations.line.slideUnderBlack,
     },
   })}
 `;
@@ -113,7 +113,7 @@ const AddressStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LIST_ADDRESS} *`]: Typography.sans.small,
+      [`.${CONTACT_LIST_ADDRESS} *`]: typography.sans.small,
     },
   })}
 `;
@@ -126,7 +126,7 @@ const LinkListStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${CONTACT_LINKS_LIST} *`]: Typography.sans.small,
+      [`.${CONTACT_LINKS_LIST} *`]: typography.sans.small,
     },
   })}
 
@@ -137,21 +137,21 @@ const LinkListStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} a`]:
-      Animations.line.slideUnderWhite,
+      animations.line.slideUnderWhite,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
-      Animations.line.slideUnderBlack,
+      animations.line.slideUnderBlack,
     },
   })}
 
   .${CONTACT_LINKS_LIST} a:not(:first-child) {
     position: relative;
-    margin-left: ${Spacing.min};
-    padding-left: ${Spacing.min};
+    margin-left: ${spacing.min};
+    padding-left: ${spacing.min};
     position: relative;
     background-position: 10px 100%;
   }
@@ -161,7 +161,7 @@ const LinkListStyles = `
     display: inline-block;
     height: 3px;
     width: 3px;
-    background-color: ${Colors.white};
+    background-color: ${colors.white};
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -169,7 +169,7 @@ const LinkListStyles = `
   }
 
   .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} a:not(:first-child):before {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 `;
 
@@ -181,13 +181,13 @@ export const ContactContainerStyles = `
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     .${CONTACT_CONTAINER} {
-      padding-top: ${Spacing['md']};
+      padding-top: ${spacing['md']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     .${CONTACT_CONTAINER} {
-      padding-left: ${Spacing['2xl']};
+      padding-left: ${spacing['2xl']};
     }
   }
 

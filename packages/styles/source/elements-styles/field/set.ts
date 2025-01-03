@@ -1,4 +1,4 @@
-import { Colors, Media, Spacing } from '../../tokens';
+import { colors, media, spacing } from '../../tokens';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 import { valid, invalid } from './_state';
@@ -16,7 +16,7 @@ export const wrapper = create.jssObject({
 
   '& > *': {
     alignItems: 'flex-start',
-    marginTop: Spacing.md,
+    marginTop: spacing.md,
 
     '&:first-of-type': {
       marginTop: 0,
@@ -26,17 +26,17 @@ export const wrapper = create.jssObject({
   '& > legend': {
     ...sans.large,
 
-    marginBottom: Spacing.sm,
+    marginBottom: spacing.sm,
     position: 'relative',
 
-    [`@media (${Media.queries.large.min})`]: {
+    [`@media (${media.queries.large.min})`]: {
       gridColumn: 'span 2',
     },
   },
 
   '&[required] > legend': {
     content: "' *'",
-    color: Colors.redDark,
+    color: colors.redDark,
   },
 
   "&[aria-invalid='true']": {

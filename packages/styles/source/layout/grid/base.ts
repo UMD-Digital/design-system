@@ -1,4 +1,4 @@
-import { Media, Spacing } from '../../tokens';
+import { media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -7,8 +7,8 @@ const classNamePrefix = 'umd-layout-grid-columns';
 const baseSmallScreen = {
   display: 'grid',
 
-  [`@media (${Media.queries.medium.max})`]: {
-    gridGap: Spacing.lg,
+  [`@media (${media.queries.medium.max})`]: {
+    gridGap: spacing.lg,
   },
 };
 
@@ -16,25 +16,25 @@ export const base = {
   two: {
     ...baseSmallScreen,
 
-    [`@media (${Media.queries.large.min})`]: {
+    [`@media (${media.queries.large.min})`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
   },
   three: {
     ...baseSmallScreen,
 
-    [`@media (${Media.queries.desktop.min})`]: {
+    [`@media (${media.queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },
   four: {
     ...baseSmallScreen,
 
-    [`@media (${Media.queries.large.min})`]: {
+    [`@media (${media.queries.large.min})`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
 
-    [`@media (${Media.queries.desktop.min})`]: {
+    [`@media (${media.queries.desktop.min})`]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
   },

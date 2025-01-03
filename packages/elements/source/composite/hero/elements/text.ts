@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Markup, Styles } from 'utilities';
 
 type TypeTextProps = {
@@ -12,7 +12,7 @@ type TypeTextProps = {
 
 export type TypeTextContainerProps = TypeTextProps;
 
-const { Colors, Media, Spacing } = Tokens;
+const { colors, media, spacing } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -44,15 +44,15 @@ const OVERWRITE_TEXT_CENTER_CONTAINER = `.${ELEMENT_TEXT_CONTAINER}${IS_TEXT_CEN
 // prettier-ignore
 const OverwriteTheme = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} * {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 `;
 
@@ -66,7 +66,7 @@ const OverwriteTextCenter = `
 // prettier-ignore
 const EyebrowStyles = `  
   .${ELEMENT_HERO_EYEBROW} + * {
-    margin-top: ${Spacing.sm} !important;
+    margin-top: ${spacing.sm} !important;
   }
 `
 
@@ -74,12 +74,12 @@ const EyebrowStyles = `
 const HeadlineStyles = `
   .${ELEMENTS_HERO_HEADLINE} {
     text-transform: uppercase;
-    color: ${Colors.black};
+    color: ${colors.black};
     text-wrap: balance;
   }
 
   .${ELEMENTS_HERO_HEADLINE} + * {
-    margin-top: ${Spacing.md};
+    margin-top: ${spacing.md};
   }
 
   .${ELEMENTS_HERO_HEADLINE} > a:hover,
@@ -96,30 +96,30 @@ const TextStyles = `
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_HERO_RICH_TEXT}`]: Typography.sans.medium,
+      [`.${ELEMENTS_HERO_RICH_TEXT}`]: typography.sans.medium,
     },
   })}
   
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENTS_HERO_RICH_TEXT} *`]: Typography.sans.medium,
+      [`.${ELEMENTS_HERO_RICH_TEXT} *`]: typography.sans.medium,
     },
   })}
 
   .${ELEMENTS_HERO_RICH_TEXT} + * {
-    margin-top: ${Spacing.lg};
+    margin-top: ${spacing.lg};
   }
 `
 
 // prettier-ignore
 const ActionStyles = `
   * + .${ELEMENTS_HERO_ACTION} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     * + .${ELEMENTS_HERO_ACTION} {
-      margin-top: ${Spacing.lg};
+      margin-top: ${spacing.lg};
     }
   }
 `;

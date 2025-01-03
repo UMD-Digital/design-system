@@ -1,7 +1,7 @@
 import {
-  Animations,
-  Tokens,
-  Typography,
+  animations,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import EventElements from './elements';
 import { Markup, Styles } from 'utilities';
@@ -12,7 +12,7 @@ type TypeEventLockupDate = {
   isThemeDark?: boolean;
 };
 
-const { Font, Spacing } = Tokens;
+const { font, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -25,38 +25,38 @@ const EVENT_HEADLINE = 'event-lockup-headline';
 // prettier-ignore
 const HeadlineStyles = `
   .${EVENT_HEADLINE} {
-    margin-left: ${Spacing.sm};
+    margin-left: ${spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE}`]: Typography.sans.large,
+      [`.${EVENT_HEADLINE}`]: typography.sans.large,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} *`]: Typography.sans.large,
+      [`.${EVENT_HEADLINE} *`]: typography.sans.large,
     },
   })}
 
   @media (max-width: 767px) {
     .${EVENT_HEADLINE},
     .${EVENT_HEADLINE} * {
-      font-size: ${Font.size.sm};
+      font-size: ${font.size.sm};
       font-weight: 600;
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} a`]: Animations.line.slideUnderBlack,
+      [`.${EVENT_HEADLINE} a`]: animations.line.slideUnderBlack,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: Animations.line.slideUnderWhite, 
+      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: animations.line.slideUnderWhite, 
     },
   })}
 `;

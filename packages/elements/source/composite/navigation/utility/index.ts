@@ -1,4 +1,4 @@
-import { Tokens, Layout } from '@universityofmaryland/web-elements-styles';
+import { tokens, layout } from '@universityofmaryland/web-elements-styles';
 import { Accessibility, Asset, Styles } from 'utilities';
 import {
   createNavAlert,
@@ -25,7 +25,7 @@ type TypeMenuItemsRequirements = {
 type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps & {};
 
 const { convertJSSObjectToStyles } = Styles;
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const flagIcon = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28"><title>Flag</title><path d="M5 4c0 .72-.39 1.36-1 1.72V25.5c0 .266-.234.5-.5.5h-1c-.266 0-.5-.234-.5-.5V5.72c-.61-.36-1-1-1-1.72 0-1.11.89-2 2-2s2 .89 2 2zm23 1v11.922c0 .578-.36.797-.812 1.03-1.766.954-3.72 1.814-5.766 1.814-2.875 0-4.25-2.188-7.656-2.188-2.484 0-5.094 1.125-7.25 2.28-.172.095-.328.142-.516.142-.547 0-1-.453-1-1V7.406c0-.375.187-.64.484-.86.375-.25.828-.468 1.234-.67 1.97-1 4.36-1.876 6.578-1.876 2.453 0 4.375.812 6.547 1.828.438.22.89.297 1.375.297C23.67 6.125 26.312 4 26.998 4c.548 0 1 .453 1 1z"></path></svg>`;
 const homeIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28"><title>School</title><path d="M22 15.5V23c0 .547-.453 1-1 1h-6v-6h-4v6H5c-.547 0-1-.453-1-1v-7.5c0-.03.016-.063.016-.094L13 8l8.984 7.406c.016.03.016.063.016.094zm3.484-1.078l-.97 1.156c-.077.094-.202.156-.327.172h-.047c-.125 0-.234-.03-.328-.11L13 6.626 2.185 15.64c-.11.08-.234.126-.375.11-.124-.016-.25-.078-.327-.172l-.97-1.156c-.17-.203-.14-.53.064-.703L11.81 4.36c.657-.547 1.72-.547 2.376 0L18 7.547V4.5c0-.28.218-.5.5-.5h3c.28 0 .5.22.5.5v6.375l3.42 2.844c.204.17.235.5.064.702z"></path></svg>`;
@@ -63,13 +63,13 @@ const isDesktop = () => window.innerWidth >= DESKTOP;
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_UTILITY_LOCK}`]: Layout.space.horizontal.max,
+      [`.${ELEMENT_UTILITY_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_LOCK_FULL}`]: Layout.space.horizontal.full,
+      [`${OVERWRITE_LOCK_FULL}`]: layout.space.horizontal.full,
     },
   })}
 `;
@@ -85,7 +85,7 @@ const WrapperStyles = `
   }
 
   .${ELEMENT_UTILITY_WRAPPER} > a {
-    color: ${Colors.white};
+    color: ${colors.white};
     text-transform: uppercase;
   }
 
@@ -116,7 +116,7 @@ const MenuStyles = `
   }
 
   .${ELEMENT_UTILITY_MENU} a {
-    color: ${Colors.white};
+    color: ${colors.white};
     text-decoration: none;
     text-transform: uppercase;
   }
@@ -126,7 +126,7 @@ const MenuStyles = `
     align-items: center;
     gap: 4px;
     height: 100%;
-    padding: ${Spacing.min} ${Spacing.sm};
+    padding: ${spacing.min} ${spacing.sm};
     font-weight: 700;
     font-size: 13px;
     transition: background ${ANIMATION_IN_SPEED}ms;
@@ -139,13 +139,13 @@ const MenuStyles = `
   }
 
   .${ELEMENT_UTILITY_MENU} > *[aria-expanded="true"] {
-    background-color: ${Colors.redDark};
+    background-color: ${colors.redDark};
   }
 
   @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_CONTAINTER} .${ELEMENT_UTILITY_MENU} > * {
-      border-top: 1px solid ${Colors.gray.lighter};
-      color: ${Colors.red};
+      border-top: 1px solid ${colors.gray.lighter};
+      color: ${colors.red};
       order: 2;
       transition: background ${ANIMATION_OUT_SPEED}ms, color ${ANIMATION_OUT_SPEED}ms;
     }
@@ -160,8 +160,8 @@ const MenuStyles = `
   @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MENU} > a:hover,
     .${ELEMENT_UTILITY_MENU} > a:focus {
-      background-color: ${Colors.red};
-      color: ${Colors.white};
+      background-color: ${colors.red};
+      color: ${colors.white};
       transition: background ${ANIMATION_IN_SPEED}ms, color ${ANIMATION_IN_SPEED}ms;
     }
   }
@@ -169,14 +169,14 @@ const MenuStyles = `
   @container (min-width: ${DESKTOP}px) {
     .${ELEMENT_UTILITY_MENU} > *:hover,
     .${ELEMENT_UTILITY_MENU} > *:focus {
-      background-color: ${Colors.redDark};
+      background-color: ${colors.redDark};
     }
   }
 
   @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MENU} > a:hover svg,
     .${ELEMENT_UTILITY_MENU} > a:focus svg {
-      fill: ${Colors.white};
+      fill: ${colors.white};
     }
   }
 
@@ -198,14 +198,14 @@ const MenuStyles = `
 
   @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MENU} svg {
-      fill: ${Colors.red};
+      fill: ${colors.red};
       transition: fill ${ANIMATION_IN_SPEED}ms;
     }
   }
 
   @container (min-width: ${DESKTOP}px) {
     .${ELEMENT_UTILITY_MENU} svg {
-      fill: ${Colors.white};
+      fill: ${colors.white};
     }
   }
 `;
@@ -215,8 +215,8 @@ const MobileMenuStyles = `
   @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU} {
       position: absolute;
-      left: -${Spacing['2xl']};
-      right: -${Spacing['2xl']};
+      left: -${spacing['2xl']};
+      right: -${spacing['2xl']};
       top: 44px;
       box-shadow: 0 5px 5px 1px rgba(0, 0, 0, .2);
       height: 0;
@@ -224,14 +224,14 @@ const MobileMenuStyles = `
       transition: height ${ANIMATION_OUT_SPEED}ms;
       display: flex;
       flex-direction: column;
-      background-color: ${Colors.white};
+      background-color: ${colors.white};
     }
   }
 
   @container (max-width: ${TABLET - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_MENU} {
-      left: -${Spacing.md};
-      right: -${Spacing.md};
+      left: -${spacing.md};
+      right: -${spacing.md};
     }
   }
 
@@ -241,7 +241,7 @@ const MobileMenuStyles = `
       height: inherit !important;
       margin-left: auto;
       position: relative;
-      margin-right: -${Spacing.md};
+      margin-right: -${spacing.md};
     }
   }
 
@@ -276,8 +276,8 @@ const MobileButtonStyles = `
   .${ELEMENT_UTILITY_MOBILE_BUTTON} {
     margin-left: auto;
     height: 100%;
-    padding: ${Spacing.xs} ${Spacing.md};
-    margin-right: -${Spacing.md};
+    padding: ${spacing.xs} ${spacing.md};
+    margin-right: -${spacing.md};
     height: 100%;
     display: flex;
     align-items: center;
@@ -285,7 +285,7 @@ const MobileButtonStyles = `
   }
 
   @media (min-width: ${TABLET}px) {
-    margin-right: -${Spacing['2xl']};
+    margin-right: -${spacing['2xl']};
   }
 
   @container (min-width: ${DESKTOP}px) {
@@ -296,12 +296,12 @@ const MobileButtonStyles = `
 
   .${ELEMENT_UTILITY_MOBILE_BUTTON}:hover,
   .${ELEMENT_UTILITY_MOBILE_BUTTON}:focus {
-    background-color: ${Colors.redDark};
+    background-color: ${colors.redDark};
   }
 
   @container (max-width: ${DESKTOP - 1}px) {
     .${ELEMENT_UTILITY_MOBILE_BUTTON} svg {
-      fill: ${Colors.white};
+      fill: ${colors.white};
       width: 18px;
       height: 18px;
     }
@@ -325,7 +325,7 @@ let STYLES_NAVIGATION_UTILITY = `
 
   .${ELEMENT_UTILITY_CONTAINTER} {
     display: block;
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
     position: relative;
     z-index: 999;
   }

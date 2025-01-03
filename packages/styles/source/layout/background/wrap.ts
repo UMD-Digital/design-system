@@ -1,18 +1,18 @@
-import { Colors, Media, Spacing } from '../../tokens';
+import { colors, media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-background-wrap';
 
 const box = {
-  padding: `${Spacing.md}`,
+  padding: `${spacing.md}`,
 
-  [`@media (${Media.queries.tablet.min})`]: {
-    padding: `${Spacing.lg}`,
+  [`@media (${media.queries.tablet.min})`]: {
+    padding: `${spacing.lg}`,
   },
 
-  [`@media (${Media.queries.desktop.min})`]: {
-    padding: `${Spacing['3xl']}`,
+  [`@media (${media.queries.desktop.min})`]: {
+    padding: `${spacing['3xl']}`,
   },
 };
 
@@ -26,7 +26,7 @@ export const white = create.jssObject({
 // umd-layout-background-wrap-light
 export const light = create.jssObject({
   ...box,
-  backgroundColor: `${Colors.gray.lighter}`,
+  backgroundColor: `${colors.gray.lighter}`,
 
   className: [
     `${classNamePrefix}-light`,
@@ -38,7 +38,7 @@ export const light = create.jssObject({
 // umd-layout-background-wrap-dark
 export const dark = create.jssObject({
   ...box,
-  backgroundColor: `${Colors.gray.darker}`,
+  backgroundColor: `${colors.gray.darker}`,
 
   className: `${classNamePrefix}-dark`,
 });

@@ -1,7 +1,7 @@
 import {
-  ElementStyles,
-  Tokens,
-  Typography,
+  elementStyles,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
@@ -20,7 +20,7 @@ type TypeAssets = {
 type TypeLayoutImageExpandProps = TypeContent & TypeAssets;
 
 const { convertJSSObjectToStyles } = Styles;
-const { Colors, Spacing, Media } = Tokens;
+const { colors, spacing, media } = tokens;
 
 const ELEMENT_NAME = 'umd-hero-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'hero-expand-declaration';
@@ -95,7 +95,7 @@ const ImageSizeContainer = `
     }
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_IMAGE_SIZE} {
@@ -155,7 +155,7 @@ const ImageContainer = `
     }
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
@@ -177,53 +177,53 @@ const TextContainer = `
     height: 100%;
     z-index: 9999;
     text-align: center;
-    padding: ${Spacing.md} 0;
+    padding: ${spacing.md} 0;
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-      padding: ${Spacing['3xl']} 0;
+      padding: ${spacing['3xl']} 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
   }
 
-  @media (${Media.queries.highDef.min}) {
+  @media (${media.queries.highDef.min}) {
     .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-      padding: ${Spacing['6xl']} 0;
+      padding: ${spacing['6xl']} 0;
     }
   }
 
   .${ELEMENT_EXPAND_TEXT_TOP_CONTAINER} + * {
-    margin-top: ${Spacing.lg};
+    margin-top: ${spacing.lg};
   }
 
   .${ELEMENT_EXPAND_TEXT_EYEBROW} + * {
-    margin-top: ${Spacing.md};
+    margin-top: ${spacing.md};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: ElementStyles.text.decoration.ribbon,
+      [`.${ELEMENT_EXPAND_TEXT_EYEBROW}`]: elementStyles.text.decoration.ribbon,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_HEADLINE}`]: Typography.campaign.maxium,
+      [`.${ELEMENT_EXPAND_TEXT_HEADLINE}`]: typography.campaign.maxium,
     },
   })}
 
   .${ELEMENT_EXPAND_TEXT_HEADLINE} {
-    color: ${Colors.white};
+    color: ${colors.white};
     font-weight: 800;
     text-transform: uppercase;
     text-wrap: balance;
   }
 
   .${ELEMENT_EXPAND_TEXT_ACTIONS} + * {
-    margin-top: ${Spacing.lg};
+    margin-top: ${spacing.lg};
   }
 `;
 
@@ -233,7 +233,7 @@ const elementPosition = `
     position: relative;
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_STICKY} {
@@ -266,7 +266,7 @@ const STYLES_HERO_EXPAND = `
     }
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPLAND_DECLARATION} {

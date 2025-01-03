@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Performance, Styles } from 'utilities';
 
 type TypeTabsProps = {
@@ -26,7 +26,7 @@ type TypeGetState = {
   getIsThemeDark: boolean;
 };
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 const { convertPixelStringToNumber } = Styles;
 
 const ATTRIBUTE_LAYOUT_HORIZONTAL = 'data-layout-horizontal';
@@ -53,7 +53,7 @@ const OVERWRITE_THEME_DARK_LINE = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_
 // prettier-ignore
 const OverwriteThemeStyles = `
   ${OVERWRITE_THEME_DARK_LINE} {
-    background-color: ${Colors.gray.dark};
+    background-color: ${colors.gray.dark};
   }
 `;
 
@@ -65,7 +65,7 @@ const DisplayLineStyles = `
     top: 0;
     left: -2px;
     width: 2px;
-    background-color: ${Colors.gray.light};
+    background-color: ${colors.gray.light};
     z-index: -1;
   }
 
@@ -80,7 +80,7 @@ const DisplayLineStyles = `
     width: 0;
     height: 0;
     display: block;
-    background-color: ${Colors.red};
+    background-color: ${colors.red};
     transform: translate(0);
   }
 `;
@@ -151,18 +151,18 @@ const SetDisplay = ({
     buttons.map((button, index) => {
       if (index === activeTab) {
         button.setAttribute(ATTRIBUTE_ARIA_EXPANDED, 'true');
-        if (getIsThemeDark) button.style.color = `${Colors.white}`;
+        if (getIsThemeDark) button.style.color = `${colors.white}`;
       } else {
         button.setAttribute(ATTRIBUTE_ARIA_EXPANDED, 'false');
-        if (getIsThemeDark) button.style.color = `${Colors.gray.light}`;
+        if (getIsThemeDark) button.style.color = `${colors.gray.light}`;
       }
     });
 
   const SetContentPosition = () => {
     const activeContent = contents[activeTab];
     const space = isFlexLayout
-      ? convertPixelStringToNumber(Spacing.xl)
-      : convertPixelStringToNumber(Spacing.md);
+      ? convertPixelStringToNumber(spacing.xl)
+      : convertPixelStringToNumber(spacing.md);
 
     if (activeContent) {
       if (transition) {
@@ -176,7 +176,7 @@ const SetDisplay = ({
       activeContent.style.width = '100%';
 
       if (!isFlexLayout && transition) {
-        const convertedSpace = convertPixelStringToNumber(Spacing.md);
+        const convertedSpace = convertPixelStringToNumber(spacing.md);
         const spread = additionalSpread
           ? convertedSpace + additionalSpread
           : convertedSpace;
@@ -315,15 +315,15 @@ const CreateTabsElement = (props: TypeTabsProps) =>
         button.style.position = 'relative';
         button.style.textAlign = 'left';
         button.style.display = 'inline-block';
-        button.style.padding = `${Spacing.sm} ${Spacing.md}`;
+        button.style.padding = `${spacing.sm} ${spacing.md}`;
 
-        Object.keys(Typography.sans.large).forEach((key) => {
-          const keyRef = key as keyof typeof Typography.sans.large;
-          button.style[keyRef] = Typography.sans.large[keyRef];
+        Object.keys(typography.sans.large).forEach((key) => {
+          const keyRef = key as keyof typeof typography.sans.large;
+          button.style[keyRef] = typography.sans.large[keyRef];
         });
 
         if (isThemeDark) {
-          button.style.color = Colors.white;
+          button.style.color = colors.white;
         }
       });
 

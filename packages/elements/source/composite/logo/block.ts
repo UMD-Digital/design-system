@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 
 export type TypeLogoRequirements = {
@@ -8,7 +8,7 @@ export type TypeLogoRequirements = {
   text?: HTMLElement | null;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -31,22 +31,22 @@ const OVERWRITE_BORDER_ASSET = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_BORDER} .${
 // prettier-ignore
 const VariantThemeStyles = `
   ${OVERWRITE_THEME_DARK_ASSET} {
-    background-color: ${Colors.gray.darker};
-    border: 1px solid ${Colors.gray.dark};
-    padding: ${Spacing.xl};
+    background-color: ${colors.gray.darker};
+    border: 1px solid ${colors.gray.dark};
+    padding: ${spacing.xl};
   }
 
   ${OVERWRITE_THEME_DARK_TEXT},
   ${OVERWRITE_THEME_DARK_TEXT} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   };
 `;
 
 // prettier-ignore
 const VariantBorderStyles = `
   ${OVERWRITE_BORDER_ASSET} {
-    border: 1px solid ${Colors.gray.light};
-    padding: ${Spacing.xl};
+    border: 1px solid ${colors.gray.light};
+    padding: ${spacing.xl};
     height: 100%;
   }
 `;
@@ -55,18 +55,18 @@ const VariantBorderStyles = `
 const TextStyles = `
   .${ELEMENT_LOGO_BLOCK_TEXT},
   .${ELEMENT_LOGO_BLOCK_TEXT} * {
-    color: ${Colors.gray.darker};
+    color: ${colors.gray.darker};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_LOGO_BLOCK_TEXT}`]: Typography.sans.min,
+      [`.${ELEMENT_LOGO_BLOCK_TEXT}`]: typography.sans.min,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_LOGO_BLOCK_TEXT} *`]: Typography.sans.min,
+      [`.${ELEMENT_LOGO_BLOCK_TEXT} *`]: typography.sans.min,
     },
   })}
 
@@ -100,7 +100,7 @@ const STYLES_LOGO_BLOCK_ELEMENT = `
   }
 
   .${ELEMENT_LOGO_BLOCK_ASSET} + * {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   ${TextStyles}

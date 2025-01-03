@@ -1,62 +1,62 @@
-import { Colors, Font, Media } from '../tokens';
+import { colors, font, media } from '../tokens';
 import { create } from '../utilities';
 
-const breakpointLarge = Media.queries.large.min;
-const breakpointDesktop = Media.queries.desktop.min;
+const breakpointLarge = media.queries.large.min;
+const breakpointDesktop = media.queries.desktop.min;
 
 export const eyebrow = {
   fontWeight: 700,
-  color: Colors.black,
-  fontSize: Font.size.min,
+  color: colors.black,
+  fontSize: font.size.min,
   lineHeight: 1,
   textTransform: `uppercase`,
   letterSpacing: `.05em`,
 };
 
 export const labelMedium = {
-  fontFamily: Font.family['sans'],
-  fontSize: Font.size['sm'],
+  fontFamily: font.family['sans'],
+  fontSize: font.size['sm'],
   lineHeight: `1.42em`,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['sm']} + 0.16vw)`,
+    fontSize: `calc(${font.size['sm']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['base'],
+    fontSize: font.size['base'],
     letterSpacing: '0.16em',
     lineHeight: `1.5em`,
   },
 };
 
 export const labelSmall = {
-  fontFamily: Font.family['sans'],
-  fontSize: Font.size['sm'],
+  fontFamily: font.family['sans'],
+  fontSize: font.size['sm'],
   letterSpacing: '0.16em',
   lineHeight: `1.42em`,
 };
 
 export const interativeMedium = {
-  fontFamily: Font.family['sans'],
-  fontSize: Font.size['base'],
+  fontFamily: font.family['sans'],
+  fontSize: font.size['base'],
   lineHeight: `1.125em`,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['base']} + 0.16vw)`,
+    fontSize: `calc(${font.size['base']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['lg'],
-    fontWeight: Font.weight['bold'],
+    fontSize: font.size['lg'],
+    fontWeight: font.weight['bold'],
     letterSpacing: '-0.01em',
     lineHeight: `1.11em`,
   },
 };
 
 export const interativeSmall = {
-  fontFamily: Font.family['sans'],
-  fontSize: Font.size['base'],
-  fontWeight: Font.weight['bold'],
+  fontFamily: font.family['sans'],
+  fontSize: font.size['base'],
+  fontWeight: font.weight['bold'],
   letterSpacing: '-0.01em',
   lineHeight: `1.125.em`,
 };

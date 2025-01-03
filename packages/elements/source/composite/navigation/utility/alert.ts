@@ -1,8 +1,8 @@
 import {
-  ElementStyles,
-  Layout,
-  Tokens,
-  Typography,
+  elementStyles,
+  layout,
+  tokens,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import Actions from 'composite/call-to-action';
 import { Asset, Network, Styles } from 'utilities';
@@ -41,7 +41,7 @@ type CacheCheckResult = {
 
 const { FetchGraphQL } = Network;
 const { convertJSSObjectToStyles } = Styles;
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const QUERY = `
   query CampusAlertsQuery {
@@ -120,34 +120,34 @@ const OVERWRITE_CONTAINER_TYPE_CLOSED = `${CONTAINER}${IS_TYPE_CLOSED}`;
 // prettier-ignore
 const OverwriteTypeGeneral = `
   ${OVERWRITE_CONTAINER_TYPE_GENERAL} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_CONTAINER_TYPE_GENERAL} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${ALERT_TITLE} {
-    color: ${Colors.gold};
+    color: ${colors.gold};
   }
 
    ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${CLOSE_BUTTON} > svg {
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 `
 
 // prettier-ignore
 const OverwriteTypeClosed = `
   ${OVERWRITE_CONTAINER_TYPE_CLOSED} {
-    background-color: ${Colors.gold};
+    background-color: ${colors.gold};
   }
 
   ${OVERWRITE_CONTAINER_TYPE_CLOSED} * {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
    ${OVERWRITE_CONTAINER_TYPE_CLOSED} .${CLOSE_BUTTON} > svg {
-    fill: ${Colors.black};
+    fill: ${colors.black};
   }
 `
 
@@ -167,7 +167,7 @@ const CloseButtonStyles = `
   }
 
   ${CLOSE_BUTTON} > svg {
-    fill: ${Colors.black};
+    fill: ${colors.black};
     width: 24px;
     height: 24px;
   }
@@ -177,7 +177,7 @@ const CloseButtonStyles = `
 const TextStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${ALERT_TITLE}`]: Typography.sans.large,
+      [`${ALERT_TITLE}`]: typography.sans.large,
     },
   })}
 
@@ -186,12 +186,12 @@ const TextStyles = `
   }
 
   ${ALERT_TITLE} + * {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${ALERT_TEXT}`]: ElementStyles.text.rich.advanced,
+      [`${ALERT_TEXT}`]: elementStyles.text.rich.advanced,
     },
   })}
 
@@ -201,7 +201,7 @@ const TextStyles = `
   }
 
   ${ALERT_TEXT} + * {
-    margin-top: ${Spacing.lg};
+    margin-top: ${spacing.lg};
   }
 
   ${CTA} {
@@ -213,15 +213,15 @@ const TextStyles = `
 const WrapperStyles = `
   ${WRAPPER} {
     position: relative;
-    padding-top: ${Spacing.md};
-    padding-bottom: ${Spacing.md};
-    padding-right: ${Spacing.lg};
+    padding-top: ${spacing.md};
+    padding-bottom: ${spacing.md};
+    padding-right: ${spacing.lg};
   }
 
   @container (min-width: ${BREAKPOINTS.MEDIUM}px) {
     ${WRAPPER} {
-      padding-top: ${Spacing.lg};
-      padding-bottom: ${Spacing.lg};
+      padding-top: ${spacing.lg};
+      padding-bottom: ${spacing.lg};
     }
   }
 `
@@ -230,7 +230,7 @@ const WrapperStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${LOCK}`]: Layout.space.horizontal.full,
+      [`${LOCK}`]: layout.space.horizontal.full,
     },
   })}
 `
@@ -239,8 +239,8 @@ const LockStyles = `
 const ContainerStyles = `
   ${CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
-    background-color: ${Colors.gray.lighter};
-    border-left: 4px solid ${Colors.red};
+    background-color: ${colors.gray.lighter};
+    border-left: 4px solid ${colors.red};
     transition: height ${ANIMATION.SPEED}ms;
     overflow: hidden;
     position: relative;
@@ -248,7 +248,7 @@ const ContainerStyles = `
 
   @container (min-width: ${BREAKPOINTS.LARGE}px) {
     ${CONTAINER} {
-      border-left: 8px solid ${Colors.red};
+      border-left: 8px solid ${colors.red};
     }
   }
 `

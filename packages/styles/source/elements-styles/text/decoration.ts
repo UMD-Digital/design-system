@@ -1,4 +1,4 @@
-import { Colors, Spacing, Media, Font } from '../../tokens';
+import { colors, font, spacing, media } from '../../tokens';
 import { transition } from '../../animations';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
@@ -10,17 +10,17 @@ const watermarkChild = {
   position: 'absolute',
   top: '20px',
   left: '-2%',
-  color: Colors.gray.lighter,
+  color: colors.gray.lighter,
   fontWeight: 'bold',
   textTransform: 'uppercase',
-  fontSize: `min(calc(${Font.size['5xl']} + 13vw), 240px)`,
+  fontSize: `min(calc(${font.size['5xl']} + 13vw), 240px)`,
   lineHeight: '0',
   opacity: ' 0.6',
   pointerEvents: 'none',
   userSelect: 'none',
   zIndex: '-1',
 
-  [`@media (${Media.queries.large.max})`]: {
+  [`@media (${media.queries.large.max})`]: {
     display: 'none',
   },
 };
@@ -68,8 +68,8 @@ export const ribbon = create.jssObject({
   ],
 
   ...elements.eyebrow,
-  backgroundColor: Colors.gold,
-  padding: `${Spacing.min} ${Spacing.md}`,
+  backgroundColor: colors.gold,
+  padding: `${spacing.min} ${spacing.md}`,
   display: `inline-block`,
   clipPath: `polygon(8% 0, 100% 0, 92% 100%, 0 100%)`,
 });

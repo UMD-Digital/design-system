@@ -1,4 +1,4 @@
-import { Layout, Tokens } from '@universityofmaryland/web-elements-styles';
+import { layout, tokens } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, { TypePathwayImageContainer } from './elements/image';
@@ -9,7 +9,7 @@ type TypePathwayDefaultProps = TypePathwayTextContainer &
     includesAnimation?: boolean;
   };
 
-const { Spacing } = Tokens;
+const { spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const MEDIUM = 800;
@@ -143,27 +143,27 @@ const OverwriteImageContainerStyles = `
 const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${Spacing.md} 0;
+      padding: ${spacing.md} 0;
     }
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_TEXT_WRAPPER}`]: Layout.space.horizontal.max,
+        [`${OVERWRITE_TEXT_WRAPPER}`]: layout.space.horizontal.max,
       },
     })}
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: 0 ${Spacing['2xl']};
+      padding: 0 ${spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
     ${OVERWRITE_TEXT_WRAPPER} {
-      padding: 0 ${Spacing['6xl']};
+      padding: 0 ${spacing['6xl']};
     }
   }
 `;
@@ -171,7 +171,7 @@ const OverwriteTextContainerStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_DEFAULT_CONTAINER_LOCK}`]: Layout.space.horizontal.max,
+      [`.${PATHWAY_DEFAULT_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 

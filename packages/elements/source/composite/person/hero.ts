@@ -1,7 +1,7 @@
 import {
-  Tokens,
-  Layout,
-  Typography,
+  tokens,
+  layout,
+  typography,
 } from '@universityofmaryland/web-elements-styles';
 import { Styles } from 'utilities';
 import PersonContact, { TypeContactProps } from './elements/contact';
@@ -27,7 +27,7 @@ type TypePersonHeroProps = TypeTextContainer &
   };
 
 const { convertJSSObjectToStyles } = Styles;
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 
 const MEDIUM = 768;
 const ATTRIBUTE_THEME = 'theme';
@@ -67,37 +67,37 @@ const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${OVERWRITE_DARK_THEME_CONTAINER} 
 
 const OverwriteThemeDarkStyles = `
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER} {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER}:before {
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
   }
 
   ${OVERWRITE_DARK_THEME_TEXT_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_DARK_THEME_TEXT_WRAPPER} {
-    border-left: 2px solid ${Colors.gold};
+    border-left: 2px solid ${colors.gold};
   }
 
   ${OVERWRITE_DARK_THEME_IMAGE_BLOCK} {
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
   }
 
   ${OVERWRITE_DARK_THEME_IMAGE_BLOCK} * {
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   ${OVERWRITE_DARK_THEME_IMAGE_CONTAINER} {
-    background-color: ${Colors.gray.lighter};
+    background-color: ${colors.gray.lighter};
   }
 `;
 
 const OverwriteImageContainer = `
   ${OVERWRITE_IMAGE_CONTAINER} {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
     display: flex;
     justify-content: center;
   }
@@ -111,39 +111,39 @@ const OverwriteImageContainer = `
 
 const ImageBlockStyles = `
   .${ELEMENT_PERSON_HERO_IMAGE_BLOCK} {
-    padding-top: ${Spacing.lg};
-    padding-bottom: ${Spacing.lg};
-    background-color: ${Colors.black};
+    padding-top: ${spacing.lg};
+    padding-bottom: ${spacing.lg};
+    background-color: ${colors.black};
     position: relative;
   }
 
   @container (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_PERSON_HERO_IMAGE_BLOCK}`]: Layout.space.horizontal.max,
+        [`.${ELEMENT_PERSON_HERO_IMAGE_BLOCK}`]: layout.space.horizontal.max,
       },
     })}
   }
 
   @container (min-width: ${MEDIUM}px) {
     .${ELEMENT_PERSON_HERO_IMAGE_BLOCK} {
-      padding: ${Spacing.md};
+      padding: ${spacing.md};
       width: 30%;
       max-width: 320px;
     }
   }
 
   .${ELEMENT_PERSON_HERO_IMAGE_BLOCK} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   * + .${ELEMENT_PERSON_HERO_IMAGE_ASSOCIATION} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_IMAGE_ASSOCIATION}`]: Typography.sans.large,
+      [`.${ELEMENT_PERSON_HERO_IMAGE_ASSOCIATION}`]: typography.sans.large,
     },
   })}
 
@@ -152,7 +152,7 @@ const ImageBlockStyles = `
   }
 
   * + .${ELEMENT_PERSON_HERO_IMAGE_PRONOUNS} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   .${ELEMENT_PERSON_HERO_IMAGE_PRONOUNS} {
@@ -168,16 +168,16 @@ const TextContainerStyles = `
   }
 
   .${ELEMENT_PERSON_HERO_TEXT_CONTAINER} {
-    background-color: ${Colors.gray.lightest};
-    padding-top: ${Spacing['3xl']};
-    padding-bottom: ${Spacing['3xl']};
+    background-color: ${colors.gray.lightest};
+    padding-top: ${spacing['3xl']};
+    padding-bottom: ${spacing['3xl']};
     position: relative;
   }
 
   @container (max-width: ${MEDIUM - 1}px) {
     ${convertJSSObjectToStyles({
       styleObj: {
-        [`.${ELEMENT_PERSON_HERO_TEXT_CONTAINER}`]: Layout.space.horizontal.max,
+        [`.${ELEMENT_PERSON_HERO_TEXT_CONTAINER}`]: layout.space.horizontal.max,
       },
     })}
   }
@@ -185,7 +185,7 @@ const TextContainerStyles = `
   @container (min-width: ${MEDIUM}px) {
     .${ELEMENT_PERSON_HERO_TEXT_CONTAINER} {
       padding-top: 0;
-      padding-bottom: ${Spacing['7xl']};
+      padding-bottom: ${spacing['7xl']};
       align-self: flex-start;
     }
   }
@@ -198,18 +198,18 @@ const TextContainerStyles = `
     bottom: 0;
     width: 200vw;
     transform: translateX(-20%);
-    background-color: ${Colors.gray.lightest};
+    background-color: ${colors.gray.lightest};
   }
 
   .${ELEMENT_PERSON_HERO_TEXT_CONTAINER_WRAPPER} {
-    padding: 0 ${Spacing.md};
-    border-left: 2px solid ${Colors.red};
+    padding: 0 ${spacing.md};
+    border-left: 2px solid ${colors.red};
     position: relative;
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_TEXT_SUBTEXT}`]: Typography.sans.small,
+      [`.${ELEMENT_PERSON_HERO_TEXT_SUBTEXT}`]: typography.sans.small,
     },
   })}
 
@@ -221,41 +221,41 @@ const TextContainerStyles = `
   }
 
   * + .${ELEMENT_PERSON_HERO_TEXT_NAME} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   @container (min-width: ${MEDIUM}px) {
     * + .${ELEMENT_PERSON_HERO_TEXT_NAME} {
-      margin-top: ${Spacing.sm};
+      margin-top: ${spacing.sm};
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_TEXT_NAME}`]: Typography.campaign.large,
+      [`.${ELEMENT_PERSON_HERO_TEXT_NAME}`]: typography.campaign.large,
     },
   })}
 
   .${ELEMENT_PERSON_HERO_TEXT_NAME} {
     text-transform: uppercase;
     font-weight: 700;
-    color: ${Colors.black};
+    color: ${colors.black};
     display: block;
   }
 
   * + .${ELEMENT_PERSON_HERO_TEXT_JOB} {
-    margin-top: ${Spacing.min};
+    margin-top: ${spacing.min};
   }
 
   @container (min-width: ${MEDIUM}px) {
     * + .${ELEMENT_PERSON_HERO_TEXT_JOB} {
-      margin-top: ${Spacing.md};
+      margin-top: ${spacing.md};
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_TEXT_JOB}`]: Typography.sans.medium,
+      [`.${ELEMENT_PERSON_HERO_TEXT_JOB}`]: typography.sans.medium,
     },
   })}
 
@@ -275,7 +275,7 @@ const WrapperStyles = `
     .${ELEMENT_PERSON_HERO_WRAPPER} {
       display: flex;
       justify-content: space-between;
-      padding-top: ${Spacing['7xl']};
+      padding-top: ${spacing['7xl']};
     }
   }
 `;
@@ -283,7 +283,7 @@ const WrapperStyles = `
 const LockStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_LOCK}`]: Layout.space.horizontal.max,
+      [`.${ELEMENT_PERSON_HERO_LOCK}`]: layout.space.horizontal.max,
     },
   })}
 
@@ -303,7 +303,7 @@ const STYLES_PERSON_HERO_ELEMENT = `
     
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_PERSON_HERO_BREADCRUMB}`]: Layout.space.horizontal.max,
+      [`.${ELEMENT_PERSON_HERO_BREADCRUMB}`]: layout.space.horizontal.max,
     },
   })}
 

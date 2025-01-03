@@ -1,4 +1,4 @@
-import { Media, Spacing } from '../../tokens';
+import { media, spacing } from '../../tokens';
 import { create } from '../../utilities';
 import { base } from './base';
 import { startSecond } from './child';
@@ -16,8 +16,8 @@ const fourColumnCenteredChild = {
 export const two = create.jssObject({
   ...base.two,
 
-  [`@media (${Media.queries.desktop.min})`]: {
-    gridGap: Spacing.xl,
+  [`@media (${media.queries.desktop.min})`]: {
+    gridGap: spacing.xl,
   },
 
   className: [
@@ -31,8 +31,8 @@ export const two = create.jssObject({
 export const three = create.jssObject({
   ...base.three,
 
-  [`@media (${Media.queries.large.min})`]: {
-    gridGap: Spacing.lg,
+  [`@media (${media.queries.large.min})`]: {
+    gridGap: spacing.lg,
   },
 
   className: [
@@ -46,9 +46,9 @@ export const three = create.jssObject({
 export const threeLarge = create.jssObject({
   ...base.three,
 
-  [`@media (${Media.queries.desktop.min})`]: {
+  [`@media (${media.queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
-    gridGap: Spacing.xl,
+    gridGap: spacing.xl,
   },
 
   className: [
@@ -62,8 +62,8 @@ export const threeLarge = create.jssObject({
 export const four = create.jssObject({
   ...base.four,
 
-  [`@media (${Media.queries.large.min})`]: {
-    gridGap: Spacing.lg,
+  [`@media (${media.queries.large.min})`]: {
+    gridGap: spacing.lg,
   },
 
   className: [
@@ -77,8 +77,8 @@ export const four = create.jssObject({
 export const fourCentered = create.jssObject({
   ...base.four,
 
-  [`@media (${Media.queries.large.min})`]: {
-    gridGap: Spacing.lg,
+  [`@media (${media.queries.large.min})`]: {
+    gridGap: spacing.lg,
   },
 
   ...fourColumnCenteredChild,
@@ -94,8 +94,8 @@ export const fourCentered = create.jssObject({
 export const fourLarge = create.jssObject({
   ...base.four,
 
-  [`@media (${Media.queries.highDef.min})`]: {
-    gridGap: Spacing.xl,
+  [`@media (${media.queries.highDef.min})`]: {
+    gridGap: spacing.xl,
   },
 
   className: [
@@ -109,8 +109,8 @@ export const fourLarge = create.jssObject({
 export const fourLargeCentered = create.jssObject({
   ...base.four,
 
-  [`@media (${Media.queries.highDef.min})`]: {
-    gridGap: Spacing.xl,
+  [`@media (${media.queries.highDef.min})`]: {
+    gridGap: spacing.xl,
   },
 
   ...fourColumnCenteredChild,
@@ -126,10 +126,10 @@ export const fourLargeCentered = create.jssObject({
 export const stacked = create.jssObject({
   display: 'grid',
   gridTemplateColumns: '1fr',
-  gridGap: `${Spacing.md}`,
+  gridGap: `${spacing.md}`,
 
-  [`@media (${Media.queries.desktop.min})`]: {
-    gridGap: `${Spacing.xl}`,
+  [`@media (${media.queries.desktop.min})`]: {
+    gridGap: `${spacing.xl}`,
   },
 
   className: [
@@ -140,5 +140,5 @@ export const stacked = create.jssObject({
 });
 
 // '.umd-grid-row-mobile-tablet': {
-//   ...Layout.grid.columnAndRowsMobileTablet,
+//   ...layout.grid.columnAndRowsMobileTablet,
 // },

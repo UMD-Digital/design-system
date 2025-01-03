@@ -1,8 +1,8 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { CallToAction } from 'composite';
 import { Styles } from 'utilities';
 
-const { Spacing, Colors } = Tokens;
+const { spacing, colors } = tokens;
 
 const { convertJSSObjectToStyles } = Styles;
 
@@ -29,15 +29,15 @@ const STYLES_NO_RESULTS = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [` .${CONTAINER_NO_RESULTS} p`]: Typography.sans.extraLarge,
+      [` .${CONTAINER_NO_RESULTS} p`]: typography.sans.extraLarge,
     },
   })}
 
   .${CONTAINER_NO_RESULTS} p {
-    margin-bottom: ${Spacing.md};
+    margin-bottom: ${spacing.md};
     text-transform: uppercase;
     font-weight: 800;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 `;
 

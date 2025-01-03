@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Asset } from 'utilities';
 
 export type TypeCardOverlayCtaIcon = {
@@ -7,7 +7,7 @@ export type TypeCardOverlayCtaIcon = {
   isThemeLight?: boolean;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
@@ -24,25 +24,25 @@ const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CTA_ICON_CONTAINER}${IS_THEME
 // prettier-ignore
 const OverwriteThemeLight = `
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a {
-    background-color: ${Colors.gray.darker};
+    background-color: ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} svg,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} path {
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:focus {
-    background-color: ${Colors.white};
-    border: 1px solid ${Colors.gray.darker};
+    background-color: ${colors.white};
+    border: 1px solid ${colors.gray.darker};
   }
 
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover svg,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:hover path,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:focus svg,
   ${OVERWRITE_THEME_LIGHT_CONTAINER} a:focus path {
-    fill: ${Colors.gray.darker};
+    fill: ${colors.gray.darker};
   }
 `;
 
@@ -50,13 +50,13 @@ const OverwriteThemeLight = `
 const OverwriteThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} a:hover,
   ${OVERWRITE_THEME_DARK_CONTAINER} a:focus {
-    background-color: ${Colors.gray.darker};
-    border: 1px solid ${Colors.white};
+    background-color: ${colors.gray.darker};
+    border: 1px solid ${colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_CONTAINER} a:hover svg path,
   ${OVERWRITE_THEME_DARK_CONTAINER} a:focus svg path {
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 `;
 
@@ -64,8 +64,8 @@ const OverwriteThemeDark = `
 const STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT = `
   .${ELEMENT_CTA_ICON_CONTAINER} {
     position: absolute;
-    bottom: ${Spacing.sm};
-    right: ${Spacing.sm};
+    bottom: ${spacing.sm};
+    right: ${spacing.sm};
     z-index: 9999;
   }
 
@@ -77,14 +77,14 @@ const STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT = `
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${Colors.white};
+    background-color: ${colors.white};
     transition: background-color 0.3s ease-in-out;
   }
   
   .${ELEMENT_CTA_ICON_CONTAINER} svg {
     height: 15px;
     width: 15px;
-    fill: ${Colors.gray.darker};
+    fill: ${colors.gray.darker};
     transition: background-color 0.3s ease-in-out;
   }
 

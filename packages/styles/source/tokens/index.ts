@@ -1,8 +1,7 @@
-import Colors from './colors';
-import Spacing from './spacing';
+import colors from './colors';
+import spacing from './spacing';
 
-export * as Media from './media';
-export * as Font from './fonts';
-export * as SpaceLayout from './spacing';
+export * as media from './media';
+export * as font from './fonts';
 
-export { Colors, Spacing };
+export { colors, spacing };

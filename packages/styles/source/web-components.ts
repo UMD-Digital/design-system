@@ -1,4 +1,4 @@
-import { Colors, Spacing, Media } from './tokens';
+import { colors, spacing, media } from './tokens';
 
 type ElementStyles = Record<string, any>;
 
@@ -53,7 +53,7 @@ const elements = {
   ...createElementStyles('umd-element-accordion-item', {
     custom: {
       'umd-element-accordion-item + umd-element-accordion-item': {
-        marginTop: Spacing.min,
+        marginTop: spacing.min,
       },
     },
   }),
@@ -65,7 +65,7 @@ const elements = {
       height: '25vw',
       zIndex: '9',
       overflow: 'clip',
-      [`@media (${Media.queries.highDef.min})`]: {
+      [`@media (${media.queries.highDef.min})`]: {
         top: '-11vw',
         height: '50vw',
       },
@@ -78,7 +78,7 @@ const elements = {
         custom: {
           [`umd-element-${type}[display="list"] + umd-element-${type}[display="list"]`]:
             {
-              marginTop: Spacing.md,
+              marginTop: spacing.md,
             },
         },
       }),
@@ -90,8 +90,8 @@ const elements = {
 // Footer with specific styling
 const footer = createElementStyles('umd-element-footer', {
   notDefined: {
-    backgroundColor: Colors.black,
-    height: `calc(${Spacing.md} * 20)`,
+    backgroundColor: colors.black,
+    height: `calc(${spacing.md} * 20)`,
     '& > *': { display: 'none' },
   },
 });
@@ -107,7 +107,7 @@ const navigation = {
   ),
   ...createElementStyles('umd-element-nav-drawer', {
     notDefined: {
-      backgroundColor: Colors.white,
+      backgroundColor: colors.white,
       height: '44px',
       width: '44px',
       '& > *': { display: 'none' },
@@ -127,7 +127,7 @@ const scrollTop = createElementStyles('umd-element-scroll-top', {
       right: '8px',
       bottom: '10vh',
       zIndex: '9999',
-      [`@media (${Media.queries.tablet.min})`]: {
+      [`@media (${media.queries.tablet.min})`]: {
         height: '52px',
         width: '52px',
         right: '40px',
@@ -143,10 +143,10 @@ const sectionIntro = {
       ...acc,
       ...createElementStyles(`umd-element-${name}`, {
         defined: {
-          marginBottom: `${Spacing.lg}`,
+          marginBottom: `${spacing.lg}`,
 
-          [`@media (${Media.queries.tablet.min})`]: {
-            marginBottom: `${Spacing['2xl']}`,
+          [`@media (${media.queries.tablet.min})`]: {
+            marginBottom: `${spacing['2xl']}`,
           },
         },
       }),
@@ -158,15 +158,15 @@ const sectionIntro = {
 // Social sharing with responsive layout
 const socialSharing = createElementStyles('umd-element-social-sharing', {
   custom: {
-    '* + &': { marginTop: Spacing.md },
+    '* + &': { marginTop: spacing.md },
     '[fixed], [data-layout-fixed="true"]': {
-      [`@media (${Media.queries.tablet.min})`]: {
+      [`@media (${media.queries.tablet.min})`]: {
         position: 'fixed',
         left: '0',
         top: '30vh',
         zIndex: '9999',
       },
-      [`@media (${Media.queries.desktop.min})`]: {
+      [`@media (${media.queries.desktop.min})`]: {
         left: '40px',
       },
     },

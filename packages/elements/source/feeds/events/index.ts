@@ -1,6 +1,6 @@
 import {
-  ElementStyles,
-  Tokens,
+  elementStyles,
+  tokens,
 } from '@universityofmaryland/web-elements-styles';
 import { ButtonLazyLoad } from 'atomic';
 import { GridGap as LayoutGridGap } from 'layout';
@@ -41,48 +41,48 @@ const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
 const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
 
 const { convertJSSObjectToStyles } = Styles;
-const { Colors, Media, Spacing } = Tokens;
+const { colors, media, spacing } = tokens;
 
 const EventsGrouped = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE}`]:
-        ElementStyles.text.decoration.ribbon,
+        elementStyles.text.decoration.ribbon,
     },
   })}
 
   .${ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE} {
-    margin-bottom: ${Spacing.lg};
+    margin-bottom: ${spacing.lg};
   }
 
   .${ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER} {
-    margin-bottom: ${Spacing.lg};
+    margin-bottom: ${spacing.lg};
   }
 `;
 
 const EventsNoResults = `
   .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
     border: none;
-    background-color: ${Colors.black};
+    background-color: ${colors.black};
     height: 1px;
-    margin-bottom: ${Spacing.md};
+    margin-bottom: ${spacing.md};
   }
 
-  @media (min-width: ${Media.breakpoints.tablet.min}) {
+  @media (min-width: ${media.breakpoints.tablet.min}) {
     .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} hr {
-      margin-top: ${Spacing.md};
+      margin-top: ${spacing.md};
     }
   }
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p`]:
-        ElementStyles.text.decoration.ribbon,
+        elementStyles.text.decoration.ribbon,
     },
   })}
 
   .${ELEMENT_FEEDS_EVENTS_NO_RESULTS} > p {
-    margin-bottom: ${Spacing.md};
+    margin-bottom: ${spacing.md};
   }
 `;
 

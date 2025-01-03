@@ -1,4 +1,4 @@
-import { Animations } from '@universityofmaryland/web-elements-styles';
+import { animations } from '@universityofmaryland/web-elements-styles';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 
 export const loadIntersectionObserver = () => {
@@ -30,7 +30,7 @@ export const loadIntersectionObserver = () => {
 
       ${convertJSSObjectToStyles({
         styleObj: {
-          [`.${idGridFadeIn}`]: Animations.transition.fadeInFromBottom,
+          [`.${idGridFadeIn}`]: animations.transition.fadeInFromBottom,
         },
       })}
     `;

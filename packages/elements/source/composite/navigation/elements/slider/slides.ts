@@ -1,4 +1,4 @@
-import { Tokens, Typography } from '@universityofmaryland/web-elements-styles';
+import { tokens, typography } from '@universityofmaryland/web-elements-styles';
 import { Asset, Markup, Styles } from 'utilities';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';
@@ -28,7 +28,7 @@ type TypeSliderSlideActions = TypeSlideProps & {
   slide: HTMLDivElement;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 const { convertJSSObjectToStyles } = Styles;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
@@ -40,7 +40,7 @@ const ELEMENT_NAV_SLIDE_CONTENT = 'nav-slide-action-content';
 // prettier-ignore
 const ContentStyles = `
   * + .${ELEMENT_NAV_SLIDE_CONTENT} {
-    margin-top: ${Spacing.lg};
+    margin-top: ${spacing.lg};
   }
 `;
 
@@ -48,15 +48,15 @@ const ContentStyles = `
 const BackButtonStyles = `
   .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
     display: block;
-    border-bottom: 1px solid ${Colors.black};
-    margin-bottom: ${Spacing.sm};
-    padding-bottom: ${Spacing.sm};
+    border-bottom: 1px solid ${colors.black};
+    margin-bottom: ${spacing.sm};
+    padding-bottom: ${spacing.sm};
   }
 
   @media (min-width: 480px) {
     .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
-      margin-bottom: ${Spacing.md};
-      padding-bottom: ${Spacing.md};
+      margin-bottom: ${spacing.md};
+      padding-bottom: ${spacing.md};
     }
   }
 
@@ -66,7 +66,7 @@ const BackButtonStyles = `
     letter-Spacing: 1px;
     display: flex;
     align-items: center;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 
   .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button:hover,
@@ -75,10 +75,10 @@ const BackButtonStyles = `
   }
 
   .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button svg {
-    fill: ${Colors.red};
+    fill: ${colors.red};
     width: 12px;
     height: 12px;
-    margin-right: ${Spacing.min};
+    margin-right: ${spacing.min};
     transform: rotate(90deg);
   }
 `;
@@ -87,14 +87,14 @@ const BackButtonStyles = `
 const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: Typography.sans.large,
+      [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: typography.sans.large,
     },
   })}
 
   .${ELEMENT_NAV_SLIDE_HEADLINE} {
-    margin-bottom: ${Spacing.md};
+    margin-bottom: ${spacing.md};
     font-weight: 700;
-    color: ${Colors.black};
+    color: ${colors.black};
   }
 `;
 

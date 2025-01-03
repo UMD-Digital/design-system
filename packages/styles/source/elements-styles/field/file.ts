@@ -1,4 +1,4 @@
-import { Colors, Spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 import { create } from '../../utilities';
 import { valid, invalid } from './_state';
 
@@ -22,12 +22,12 @@ const file = {
 
   [`&::file-selector-button, &::-webkit-file-upload-button`]: {
     cursor: 'pointer',
-    marginRight: Spacing.sm,
+    marginRight: spacing.sm,
   },
 };
 
 export const fileWrapper = create.jssObject({
-  backgroundColor: Colors.white,
+  backgroundColor: colors.white,
   overflow: 'hidden',
   position: 'relative',
 

@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { Asset, Styles } from 'utilities';
 import AlertText, { TypeAlertTextProps } from './elements/text';
 
@@ -17,7 +17,7 @@ type TypeAlertButtonProps = {
   container: HTMLElement;
 };
 
-const { Colors, Spacing } = Tokens;
+const { colors, spacing } = tokens;
 
 const MEDUM = 500;
 const ATTRIBUTE_THEME = 'theme';
@@ -36,25 +36,25 @@ const OVERWRITE_THEME_DARK_CLOSE_BUTTON = `${OVERWRITE_THEME_DARK_CONTAINER} .${
 
 const OverwriteThemeStyles = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${Colors.white};
+    color: ${colors.white};
   }
 
   ${OVERWRITE_THEME_DARK_CLOSE_BUTTON} rect {
-    fill: ${Colors.white};
+    fill: ${colors.white};
   }
 `;
 
 const ButtonStyles = `
   .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} {
     position: absolute;
-    top: ${Spacing.lg};
-    right: ${Spacing.lg};
+    top: ${spacing.lg};
+    right: ${spacing.lg};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} {
-      top: ${Spacing.sm};
-      right: ${Spacing.sm};
+      top: ${spacing.sm};
+      right: ${spacing.sm};
     }
   }
 `;
@@ -62,7 +62,7 @@ const ButtonStyles = `
 const IconStyles = `
   .${ELEMENT_ALERT_PAGE_ICON} {
     display: block;
-    fill: ${Colors.gold};
+    fill: ${colors.gold};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
@@ -81,15 +81,15 @@ const STYLES_ALERT_PAGE_ELEMENT = `
   .${ELEMENT_ALERT_PAGE_CONTAINER} {
     display: flex;
     position: relative;
-    padding: ${Spacing.lg};
-    padding-right: ${Spacing['2xl']};
-    gap: ${Spacing.lg};
-    border: solid 4px ${Colors.gold};
+    padding: ${spacing.lg};
+    padding-right: ${spacing['2xl']};
+    gap: ${spacing.lg};
+    border: solid 4px ${colors.gold};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_PAGE_CONTAINER} {
-      padding-right: ${Spacing.lg};
+      padding-right: ${spacing.lg};
     }
   }
 

@@ -1,4 +1,4 @@
-import { Tokens } from '@universityofmaryland/web-elements-styles';
+import { tokens } from '@universityofmaryland/web-elements-styles';
 import { BlockOverlay as LayoutBlockOverlay } from 'layout';
 import { TextLockupSmall } from 'macros';
 
@@ -11,7 +11,7 @@ type TypeEventPromoProps = {
   actions?: HTMLElement | null;
 };
 
-const { Colors, Media, Spacing, SpaceLayout } = Tokens;
+const { colors, media, spacing } = tokens;
 
 const ELEMENT_NAME = 'umd-event-promo';
 const ELEMENT_EVENT_PROMO_CONTAINER = 'event-promo-container';
@@ -22,15 +22,15 @@ const ELEMENT_EVENT_PROMO_SIGN_WRAPPER = 'event-promo-sign-wrapper';
 const DateSign = `
   .${ELEMENT_EVENT_PROMO_SIGN_WRAPPER} {
     display: inline-block;
-    bottom: ${Spacing.min};
-    left: ${Spacing.min};
-    background-color: ${Colors.white};
-    padding: ${Spacing.min};
+    bottom: ${spacing.min};
+    left: ${spacing.min};
+    background-color: ${colors.white};
+    padding: ${spacing.min};
   }
 
-  @media (${Media.queries.tablet.min}) {
+  @media (${media.queries.tablet.min}) {
     .${ELEMENT_EVENT_PROMO_SIGN_WRAPPER} {
-      padding: ${Spacing.sm} ${Spacing.sm} ${Spacing.min} ${Spacing.sm};
+      padding: ${spacing.sm} ${spacing.sm} ${spacing.min} ${spacing.sm};
     }
   }
 `;
@@ -38,11 +38,11 @@ const DateSign = `
 // prettier-ignore
 const DetailsMeta = `
   * + .${ELEMENT_EVENT_PROMO_META_WRAPPER} {
-    margin-top: ${Spacing.sm};
+    margin-top: ${spacing.sm};
   }
 
   .${ELEMENT_EVENT_PROMO_META_WRAPPER} + * {
-    margin-top: ${Spacing.sm} !important;
+    margin-top: ${spacing.sm} !important;
   }
 `;
 
@@ -51,7 +51,7 @@ const STYLES_EVENT_PROMO_ELEMENT = `
   .${ELEMENT_EVENT_PROMO_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     height: 100%;
-    max-width: ${SpaceLayout.maxWidth.smallest};
+    max-width: ${spacing.maxWidth.smallest};
   }
 
   ${LayoutBlockOverlay.Styles}

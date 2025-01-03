@@ -1,66 +1,66 @@
-import { Font, Media } from '../tokens';
+import { font, media } from '../tokens';
 import { create } from '../utilities';
 
-const breakpointLarge = Media.queries.large.min;
-const breakpointDesktop = Media.queries.desktop.min;
+const breakpointLarge = media.queries.large.min;
+const breakpointDesktop = media.queries.desktop.min;
 
 const sizeExtraLarge = {
-  fontSize: Font.size['4xl'],
+  fontSize: font.size['4xl'],
   lineHeight: `1.125em`,
 };
 
 const sizeLarger = {
-  fontSize: Font.size['3xl'],
+  fontSize: font.size['3xl'],
   lineHeight: `1.25em`,
 };
 
 const sizeLarge = {
-  fontSize: Font.size['lg'],
+  fontSize: font.size['lg'],
   lineHeight: `1.25em`,
 };
 
 const sizeSmall = {
-  fontSize: Font.size['base'],
+  fontSize: font.size['base'],
   lineHeight: `1.375em`,
 };
 
 const sizeSmaller = {
-  fontSize: Font.size['sm'],
+  fontSize: font.size['sm'],
   lineHeight: `1.28em`,
 };
 
 const sizeMin = {
-  fontSize: Font.size['min'],
+  fontSize: font.size['min'],
   lineHeight: `1.16em`,
 };
 
 export const maxium = {
-  fontFamily: Font.family['sans'],
-  fontWeight: Font.weight['bold'],
+  fontFamily: font.family['sans'],
+  fontWeight: font.weight['bold'],
   ...sizeExtraLarge,
 };
 
 export const largest = {
-  fontFamily: Font.family['sans'],
-  fontWeight: Font.weight['bold'],
+  fontFamily: font.family['sans'],
+  fontWeight: font.weight['bold'],
   ...sizeLarger,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['3xl']} + 2vw)`,
+    fontSize: `calc(${font.size['3xl']} + 2vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['5xl'],
+    fontSize: font.size['5xl'],
     lineHeight: `1.04em`,
   },
 };
 
 export const extraLarge = {
-  fontFamily: Font.family['sans'],
+  fontFamily: font.family['sans'],
   ...sizeLarge,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['lg']} + 1.16vw)`,
+    fontSize: `calc(${font.size['lg']} + 1.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -69,12 +69,12 @@ export const extraLarge = {
 };
 
 export const larger = {
-  fontFamily: Font.family['sans'],
+  fontFamily: font.family['sans'],
   ...sizeLarge,
   lineHeight: `1.40em`,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['lg']} + 0.5vw)`,
+    fontSize: `calc(${font.size['lg']} + 0.5vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -83,31 +83,31 @@ export const larger = {
 };
 
 export const large = {
-  fontFamily: Font.family['sans'],
-  fontWeight: Font.weight['bold'],
+  fontFamily: font.family['sans'],
+  fontWeight: font.weight['bold'],
   ...sizeLarge,
 };
 
 export const medium = {
-  fontFamily: Font.family['sans'],
+  fontFamily: font.family['sans'],
   ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['base']} + 0.16vw)`,
+    fontSize: `calc(${font.size['base']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
-    fontSize: Font.size['lg'],
+    fontSize: font.size['lg'],
     lineHeight: `1.55em`,
   },
 };
 
 export const small = {
-  fontFamily: Font.family['sans'],
+  fontFamily: font.family['sans'],
   ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['sm']} + 0.16vw)`,
+    fontSize: `calc(${font.size['sm']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -116,11 +116,11 @@ export const small = {
 };
 
 export const smaller = {
-  fontFamily: Font.family['sans'],
+  fontFamily: font.family['sans'],
   ...sizeSmaller,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${Font.size['min']} + 0.16vw)`,
+    fontSize: `calc(${font.size['min']} + 0.16vw)`,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -129,7 +129,7 @@ export const smaller = {
 };
 
 export const min = {
-  fontFamily: Font.family['sans'],
+  fontFamily: font.family['sans'],
   ...sizeMin,
 };
 
@@ -185,7 +185,7 @@ export const transformations = {
     className: 'umd-sans-largest-uppercase',
     ...largest,
 
-    fontWeight: Font.weight['extraBold'],
+    fontWeight: font.weight['extraBold'],
     textTransform: 'uppercase',
   }),
 
@@ -193,7 +193,7 @@ export const transformations = {
     className: 'umd-sans-extralarge-uppercase',
     ...extraLarge,
 
-    fontWeight: Font.weight['extraBold'],
+    fontWeight: font.weight['extraBold'],
     textTransform: 'uppercase',
   }),
 
@@ -201,13 +201,13 @@ export const transformations = {
     className: 'umd-sans-extralarge-bold',
     ...extraLarge,
 
-    fontWeight: Font.weight['bold'],
+    fontWeight: font.weight['bold'],
   }),
 
   largerBold: create.jssObject({
     className: 'umd-sans-larger-bold',
     ...larger,
 
-    fontWeight: Font.weight['bold'],
+    fontWeight: font.weight['bold'],
   }),
 };

@@ -1,12 +1,12 @@
 import { tokens, layout } from '@universityofmaryland/web-elements-styles';
-import { Accessibility, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeLayoutImageExpandProps = {
   content: HTMLElement;
   image: HTMLImageElement;
 };
 
-const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
+const { convertJSSObjectToStyles, convertPixelStringToNumber } = Utility.styles;
 const { media, spacing } = tokens;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
@@ -302,8 +302,8 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
   };
 
   if (
-    Accessibility.isScreenZoomed() &&
-    !Accessibility.isPrefferdReducedMotion()
+    Utility.accessibility.isScreenZoomed() &&
+    !Utility.accessibility.isPrefferdReducedMotion()
   ) {
     textContainer.style.height = '90vh';
     textContainer.style.transform = 'translateY(0)';

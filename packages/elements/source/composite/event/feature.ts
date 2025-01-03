@@ -4,7 +4,7 @@ import {
 } from '@universityofmaryland/web-elements-styles';
 import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeEventFeatureProps = {
   headline: HTMLElement | null;
@@ -17,7 +17,7 @@ type TypeEventFeatureProps = {
 };
 
 const { spacing, colors } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 650;
 const ATTRIBUTE_THEME = 'theme';

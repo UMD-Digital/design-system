@@ -1,5 +1,5 @@
 import { colors, font, spacing, media } from '../../tokens';
-import { transition } from '../../animations';
+import { transition } from '../../animation';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
 

@@ -1,8 +1,8 @@
 import { typography, tokens } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 const { colors } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_EVENT_DATE_WRAPPER = 'event-sign-wrapper';
 const ELEMENT_EVENT_MONTH = 'event-sign-date-month';

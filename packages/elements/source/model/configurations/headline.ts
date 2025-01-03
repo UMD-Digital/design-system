@@ -1,11 +1,11 @@
-import { Markup, Styles } from 'utilities';
+import * as Utility from 'utilities';
 import { modifiers } from '../_modifiers/style';
 import { createElement } from './_base';
 import { type BuilderConfig, type ElementProps } from '../_types';
 
 const HeadlineConfig: BuilderConfig = {
   styleModifiers: (props) =>
-    Styles.combineStyles(
+    Utility.styles.combineStyles(
       modifiers.animationLink(props),
       modifiers.fontStyles(props),
       modifiers.textColor(props),
@@ -13,7 +13,9 @@ const HeadlineConfig: BuilderConfig = {
       modifiers.elementChild(props),
       modifiers.elementSiblingAfter(props),
     ),
-  elementModifiers: [(element) => Markup.modify.animationLinkSpan({ element })],
+  elementModifiers: [
+    (element) => Utility.markup.modify.animationLinkSpan({ element }),
+  ],
 };
 
 export const createHeadline = (
@@ -25,10 +27,10 @@ export const createHeadline = (
 };
 
 export const sansLarge = (props: ElementProps) =>
-  createHeadline(props, Styles.fonts.getSansLargeFont);
+  createHeadline(props, Utility.styles.fonts.getSansLargeFont);
 
 export const sansMedium = (props: ElementProps) =>
-  createHeadline(props, Styles.fonts.getSansMediumFont);
+  createHeadline(props, Utility.styles.fonts.getSansMediumFont);
 
 export const campaignLarge = (props: ElementProps) =>
-  createHeadline(props, Styles.fonts.getCampaignLargeFont);
+  createHeadline(props, Utility.styles.fonts.getCampaignLargeFont);

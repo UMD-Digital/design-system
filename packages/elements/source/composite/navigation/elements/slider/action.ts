@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Asset, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 export type TypeActionProps = {
   GetContainer: () => Element | null;
@@ -14,7 +14,7 @@ export type TypeAction = TypeActionProps & {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_SLIDE_ACTION_CONTAINER = 'nav-slide-action-container';
 const ELEMENT_SLIDE_ACTION_LINK = 'nav-slide-action-link';
@@ -97,7 +97,7 @@ const CreateSlideButton = ({
   button.classList.add(ELEMENT_SLIDE_ACTION_BUTTON);
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next level of navigation');
-  button.innerHTML = Asset.icon.CHEVRON_SMALL;
+  button.innerHTML = Utility.asset.icon.CHEVRON_SMALL;
   button.addEventListener('click', () => {
     setUpcomingSlide(childReference);
     eventSlideLeft();

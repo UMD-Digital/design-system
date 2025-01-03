@@ -3,7 +3,7 @@ import {
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import PersonImage from './elements/image';
 import PersonTextContainer, { TypePersonProps } from './elements/text';
 
@@ -12,7 +12,7 @@ type TypePersonBioProps = TypePersonProps & {
   description?: HTMLElement | null;
 };
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { spacing, colors } = tokens;
 
 const SMALL = 650;

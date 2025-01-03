@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { animations, tokens } from '@universityofmaryland/web-elements-styles';
+import { animation, tokens } from '@universityofmaryland/web-elements-styles';
 import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
@@ -34,7 +34,7 @@ const OverwriteThemeStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_PATH}:not(:last-child)`]:
-        animations.line.slideUnderGrayDarkRed,
+        animation.line.slideUnderGrayDarkRed,
     },
   })}
 `;
@@ -87,7 +87,7 @@ const ContainerStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CONTAINER} a:not(:last-child)`]:
-        animations.line.slideUnderGrayRed,
+        animation.line.slideUnderGrayRed,
     },
   })}
 `;

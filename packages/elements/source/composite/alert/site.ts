@@ -1,5 +1,5 @@
 import { tokens, layout } from '@universityofmaryland/web-elements-styles';
-import { Asset, Storage, Styles } from 'utilities';
+import * as Utility from 'utilities';
 import AlertText, {
   CONSTANTS as TEXT_CONSTANTS,
   TypeAlertTextProps,
@@ -19,7 +19,7 @@ type TypeAlertButtonProps = {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDUM = 500;
 const DEFAULT_HIDE_TIME = 30;
@@ -104,11 +104,11 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(ELEMENT_ALERT_SITE_CLOSE_BUTTON);
-  closeButton.innerHTML = Asset.icon.CLOSE_BUTTON;
+  closeButton.innerHTML = Utility.asset.icon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
-    Styles.animations.shrinkThenRemove({ container });
-    Storage.local.set({ key: ALERT_LOCAL_STORAGE_KEY });
+    Utility.styles.animations.shrinkThenRemove({ container });
+    Utility.storage.local.set({ key: ALERT_LOCAL_STORAGE_KEY });
   });
 
   return closeButton;
@@ -117,7 +117,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
 const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
   const now = new Date().getTime();
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
-  const lastClosedTime = Storage.local.get({
+  const lastClosedTime = Utility.storage.local.get({
     key: ALERT_LOCAL_STORAGE_KEY,
   });
 

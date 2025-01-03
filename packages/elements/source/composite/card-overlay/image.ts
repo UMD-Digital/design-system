@@ -2,7 +2,7 @@ import { tokens } from '@universityofmaryland/web-elements-styles';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 import { BlockOverlay as LayoutBlockOverlay } from 'layout';
 import { TextLockupSmall } from 'macros';
-import { Asset } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
   image: HTMLImageElement | HTMLAnchorElement | null;
@@ -88,7 +88,7 @@ const CreateCardOverlayElement = (props: TypeCardOverlayImageElement) => {
       if (lockup) {
         const quoteWrapper = document.createElement('div');
         quoteWrapper.classList.add(ELEMENT_CARD_OVERLAY_QUOTE);
-        quoteWrapper.innerHTML = Asset.icon.QUOTE;
+        quoteWrapper.innerHTML = Utility.asset.icon.QUOTE;
 
         lockup.insertBefore(quoteWrapper, lockup.firstChild);
       }

@@ -4,7 +4,7 @@ import {
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
 
@@ -17,7 +17,7 @@ type TypeHeroStackedProps = TypeTextContainerProps &
   };
 
 const { colors, media, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const TABLET = 768;
 

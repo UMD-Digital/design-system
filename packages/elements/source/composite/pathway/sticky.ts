@@ -1,5 +1,5 @@
 import { layout, tokens } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, { TypePathwayImageContainer } from './elements/image';
 
@@ -9,7 +9,7 @@ type TypePathwayStickyProps = TypePathwayTextContainer &
   };
 
 const { spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 800;
 const LARGE = 1200;

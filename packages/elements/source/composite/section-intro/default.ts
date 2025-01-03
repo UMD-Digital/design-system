@@ -3,7 +3,7 @@ import {
   tokens,
   layout,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeSectionIntroDefaultProps = {
   headline?: HTMLElement | null;
@@ -15,7 +15,7 @@ type TypeSectionIntroDefaultProps = {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
 const ATTRIBUTE_ANIMATION = 'data-animation';

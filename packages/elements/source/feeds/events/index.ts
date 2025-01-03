@@ -5,7 +5,7 @@ import {
 import { ButtonLazyLoad } from 'atomic';
 import { GridGap as LayoutGridGap } from 'layout';
 import { AriaLive, AnimationLoader } from 'macros';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import FeedDisplay, { EventType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
 import NoResults from '../no-results';
@@ -40,7 +40,7 @@ const ELEMENT_FEEDS_EVENTS_NO_RESULTS = 'feeds-events-no-results';
 const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
 const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { colors, media, spacing } = tokens;
 
 const EventsGrouped = `

@@ -1,6 +1,6 @@
 import { colors, font, spacing } from '../../tokens';
 import { sans } from '../../typography';
-import * as animations from '../../animations';
+import * as animation from '../../animation';
 import { create } from '../../utilities';
 import * as list from '../list';
 import * as table from '../table';
@@ -141,7 +141,7 @@ export const advanced = create.jssObject({
 // umd-text-rich-advanced-dark
 export const advancedDark = create.jssObject({
   ...advanced,
-  ...animations.nestedElements.linksDark,
+  ...animation.nestedElements.linksDark,
 
   color: colors.white,
 

@@ -1,5 +1,5 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
-import { Performance } from 'utilities';
+import * as Utility from 'utilities';
 import { Image as LayoutImage } from 'layout';
 import CaptionContainer from '../elements/caption';
 
@@ -106,7 +106,7 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
 
     window.addEventListener(
       'resize',
-      Performance.debounce(() => {
+      Utility.performance.debounce(() => {
         eventResize();
       }, 20),
     );

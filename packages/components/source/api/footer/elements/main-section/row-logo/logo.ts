@@ -9,7 +9,6 @@ import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
 import { UMDFooterElement } from '../../../index';
 
 const { spacing } = tokens;
-const { Asset } = Utilities;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
@@ -86,8 +85,8 @@ export const CreateLogoContainer = ({
 
   logoLink.innerHTML =
     theme === THEME_OPTION_LIGHT
-      ? `${Asset.logo.LIGHT_LOGO}`
-      : `${Asset.logo.DARK_LOGO}`;
+      ? `${Utilities.asset.logo.LIGHT_LOGO}`
+      : `${Utilities.asset.logo.DARK_LOGO}`;
 
   container.classList.add(LOGO_CONTAINER);
   container.appendChild(logoLink);

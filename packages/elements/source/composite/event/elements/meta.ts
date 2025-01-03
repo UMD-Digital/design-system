@@ -1,5 +1,5 @@
 import { typography, tokens } from '@universityofmaryland/web-elements-styles';
-import { Asset, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type LocationType = {
   title: string;
@@ -31,7 +31,7 @@ export type TypeMetaDisplay = EventType & {
 
 const { colors, spacing } = tokens;
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const MOBILE = 400;
 const ATTRIBUTE_THEME = 'theme';
@@ -192,7 +192,7 @@ const DateText = ({
   }
 
   return MakeDetailItem({
-    icon: Asset.icon.CALENDAR,
+    icon: Utility.asset.icon.CALENDAR,
     text,
   });
 };
@@ -205,7 +205,7 @@ const TimeText = ({ startTime, endTime }: DateDisplayType) => {
   }
 
   return MakeDetailItem({
-    icon: Asset.icon.CLOCK,
+    icon: Utility.asset.icon.CLOCK,
     text,
   });
 };
@@ -240,7 +240,7 @@ const CreateEventMetaElement = (info: TypeMetaDisplay) => {
   if (location && location.length > 0) {
     wrapper.appendChild(
       MakeDetailItem({
-        icon: Asset.icon.PIN,
+        icon: Utility.asset.icon.PIN,
         text: location[0].title,
         style: ELEMENT_EVENTS_DATE_ROW_LOCATION,
       }),

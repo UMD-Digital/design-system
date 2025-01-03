@@ -10,7 +10,7 @@ import {
   AnimationCarouselImage,
   AnimationIndicator,
 } from 'macros';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeImage = {
   image: HTMLImageElement;
@@ -46,7 +46,7 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
   };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 500;
 

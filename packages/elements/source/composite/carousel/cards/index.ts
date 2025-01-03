@@ -5,7 +5,7 @@ import {
   typography,
 } from '@universityofmaryland/web-elements-styles';
 import { AnimationCarouselBlocks } from 'macros';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeCarouselCardsRequirements = {
   headline?: HTMLElement | null;
@@ -16,7 +16,7 @@ type TypeCarouselCardsRequirements = {
   cards: HTMLElement[];
 };
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { colors, spacing } = tokens;
 
 const MEDIUM = 768;

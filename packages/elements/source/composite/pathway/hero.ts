@@ -3,7 +3,7 @@ import {
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import TextContainer, { TypePathwayTextContainer } from './elements/text';
 import ImageContainer, {
   TypePathwayHeroImageContainer,
@@ -16,7 +16,7 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
   };
 
 const { spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 1000;
 const LARGE = 1300;

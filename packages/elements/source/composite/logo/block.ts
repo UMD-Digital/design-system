@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 export type TypeLogoRequirements = {
   isBordered?: boolean;
@@ -9,7 +9,7 @@ export type TypeLogoRequirements = {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_BORDER = 'border';

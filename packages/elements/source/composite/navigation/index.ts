@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Asset, Styles } from 'utilities';
+import * as Utility from 'utilities';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item/';
 
@@ -26,7 +26,7 @@ type TypeNavRow = TypeSearchLink &
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
 const { colors, font, media, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const ANIMATION_TIME = 500;
 
 const ATTRIBUTE_STICKY = 'sticky';
@@ -219,7 +219,7 @@ const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
 
   searchLink.href = searchUrl;
   searchLink.ariaLabel = 'Visit the search page';
-  searchLink.innerHTML = Asset.icon.MAGNIFY_GLASS;
+  searchLink.innerHTML = Utility.asset.icon.MAGNIFY_GLASS;
   searchLink.classList.add(ELEMENT_HEADER_MENU_SEARCH);
 
   return searchLink;

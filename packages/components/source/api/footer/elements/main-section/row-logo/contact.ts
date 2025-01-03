@@ -1,5 +1,5 @@
 import {
-  animations,
+  animation,
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
@@ -78,7 +78,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE} a`]:
-      animations.line.slideUnderWhite,
+      animation.line.slideUnderWhite,
     },
   })}
 
@@ -96,7 +96,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
-      animations.line.slideUnderBlack,
+      animation.line.slideUnderBlack,
     },
   })}
 `;
@@ -137,14 +137,14 @@ const LinkListStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} a`]:
-      animations.line.slideUnderWhite,
+      animation.line.slideUnderWhite,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
-      animations.line.slideUnderBlack,
+      animation.line.slideUnderBlack,
     },
   })}
 
@@ -224,7 +224,9 @@ const CreateSlotHeadline = ({
   });
 
   if (contactHeadlineElement) {
-    Markup.modify.AnimationLinkSpan({ element: contactHeadlineElement });
+    Markup.modify.AnimationLinkSpan({
+      element: contactHeadlineElement,
+    });
     contactHeadlineElement.classList.add(CONTACT_LIST_HEADLINE);
 
     return contactHeadlineElement;

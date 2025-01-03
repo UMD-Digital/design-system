@@ -1,9 +1,9 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Asset, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 const { colors, spacing } = tokens;
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_BUTTON = 'button-full-screen';
 
@@ -51,7 +51,7 @@ const CreateFullScreenButton = ({
     button.addEventListener('click', () => {
       callback(index);
     });
-    button.innerHTML = `Full Screen <span></span>${Asset.icon.FULL_SCREEN}`;
+    button.innerHTML = `Full Screen <span></span>${Utility.asset.icon.FULL_SCREEN}`;
 
     return button;
   })();

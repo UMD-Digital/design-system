@@ -1,5 +1,5 @@
 import { tokens, layout } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeStickyProps = {
   stickyColumn?: HTMLElement | null;
@@ -9,7 +9,7 @@ type TypeStickyProps = {
 };
 
 const { media } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_NAME = 'umd-sticky-columns';
 const ATTRIBUTE_STICKY_LAST = 'sticky-last';

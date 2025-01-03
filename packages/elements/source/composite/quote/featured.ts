@@ -1,7 +1,7 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
 import InlineQuote, { TypeInlineInline } from './inline';
 import QuoteText from './elements/text';
-import { Markup } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeQuoteFeatured = TypeInlineInline & {
   isTransparent: boolean;
@@ -281,7 +281,7 @@ const CreateTextureContainer = ({
 }: TypeQuoteFeatured) => {
   const container = document.createElement('div');
   const isDarkText = isThemeDark || isThemeMaryland;
-  const backgroundTexture = Markup.create.imageFromSvg({
+  const backgroundTexture = Utility.markup.create.imageFromSvg({
     SVG: isDarkText ? BACKGROUND_TEXTURE_DARK : BACKGROUND_TEXTURE_LIGHT,
   });
 

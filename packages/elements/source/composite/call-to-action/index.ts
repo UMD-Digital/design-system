@@ -1,11 +1,11 @@
 import {
-  animations,
+  animation,
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Asset, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { colors, font, spacing, media } = tokens;
 
 const MAX_WIDTH = 380;
@@ -54,7 +54,7 @@ const OverwriteThemeGoldStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_GOLD_SECONDARY} > span > span`]:
-      animations.line.slideUnderGold,
+      animation.line.slideUnderGold,
     },
   })}
 
@@ -193,7 +193,7 @@ const SecondaryStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CTA_SECONDARY} > span > span`]:
-      animations.line.slideUnderRed,
+      animation.line.slideUnderRed,
     },
   })}
 `;
@@ -296,27 +296,27 @@ const CreateLinkIcon = ({
   }
 
   if (type === TYPE_SECONDARY) {
-    wrapper.innerHTML = Asset.icon.FEARLESS;
+    wrapper.innerHTML = Utility.asset.icon.FEARLESS;
     wrapper.appendChild(textSpan);
   }
 
   if (!isLink) return;
 
   if (isMail) {
-    wrapper.innerHTML = Asset.icon.EMAIL;
+    wrapper.innerHTML = Utility.asset.icon.EMAIL;
     wrapper.appendChild(textSpan);
     wrapper.setAttribute('data-email', '');
     return;
   }
 
   if (isExternalTab) {
-    wrapper.innerHTML = Asset.icon.NEW_WINDOW;
+    wrapper.innerHTML = Utility.asset.icon.NEW_WINDOW;
     wrapper.appendChild(textSpan);
     return;
   }
 
   if (isDownload) {
-    wrapper.innerHTML = Asset.icon.DOCUMENT;
+    wrapper.innerHTML = Utility.asset.icon.DOCUMENT;
     wrapper.appendChild(textSpan);
     return;
   }

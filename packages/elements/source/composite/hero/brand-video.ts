@@ -5,7 +5,7 @@ import {
 } from '@universityofmaryland/web-elements-styles';
 import { ButtonVideoState } from 'atomic';
 import { AnimationOverlayBrand } from 'macros';
-import { Accessibility, Performance, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeHeroBrandVideoProps = {
   video: HTMLVideoElement;
@@ -15,7 +15,7 @@ type TypeHeroBrandVideoProps = {
 };
 
 const { colors, media, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
 const ELEMENT_HERO_ELEMENT_DECLARATION = 'hero-logo-brand-video-declaration';
@@ -221,7 +221,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
     buttonMacro.events.setButtonPlay();
     eventRize();
 
-    if (Accessibility.isPrefferdReducedMotion()) {
+    if (Utility.accessibility.isPrefferdReducedMotion()) {
       video.pause();
       buttonMacro.events.setButtonPause();
     }
@@ -243,7 +243,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
 
   window.addEventListener(
     'resize',
-    Performance.debounce(() => {
+    Utility.performance.debounce(() => {
       eventRize();
     }, 20),
   );

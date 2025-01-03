@@ -5,7 +5,7 @@ import {
   typography,
 } from '@universityofmaryland/web-elements-styles';
 import Actions from 'composite/call-to-action';
-import { Asset, Network, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type AlertData = {
   id: string;
@@ -39,8 +39,8 @@ type CacheCheckResult = {
   cachedData: AlertData | null;
 };
 
-const { FetchGraphQL } = Network;
-const { convertJSSObjectToStyles } = Styles;
+const { FetchGraphQL } = Utility.network;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { colors, spacing } = tokens;
 
 const QUERY = `
@@ -351,7 +351,7 @@ const createCloseButton = (container: HTMLElement): HTMLButtonElement => {
     'aria-label': 'remove alert',
   }) as HTMLButtonElement;
 
-  button.innerHTML = Asset.icon.X;
+  button.innerHTML = Utility.asset.icon.X;
   button.addEventListener('click', () => {
     const cachedAlert = getStoredValue<AlertData>(
       ALERT_CONSTANTS.STORAGE_KEYS.ALERT,

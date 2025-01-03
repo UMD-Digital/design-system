@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Asset, Markup, Styles } from 'utilities';
+import * as Utility from 'utilities';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';
 
@@ -29,7 +29,7 @@ type TypeSliderSlideActions = TypeSlideProps & {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
 const ELEMENT_NAV_SLIDE_WRAPPER = 'nav-slide-wrapper';
@@ -114,7 +114,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
   const backButtonContainer = document.createElement('div');
   const slideBackButton = document.createElement('button');
 
-  slideBackButton.innerHTML = `${Asset.icon.CHEVRON_SMALL} Back`;
+  slideBackButton.innerHTML = `${Utility.asset.icon.CHEVRON_SMALL} Back`;
   slideBackButton.setAttribute('type', 'button');
   slideBackButton.setAttribute('aria-label', 'Previous level of navigation');
   slideBackButton.addEventListener('click', () => {
@@ -131,7 +131,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
 const createSlideHeadline = ({ link }: { link: HTMLAnchorElement }) => {
   const slideHeadline = document.createElement('p');
 
-  slideHeadline.appendChild(Markup.modify.cleanCopy({ element: link }));
+  slideHeadline.appendChild(Utility.markup.modify.cleanCopy({ element: link }));
   slideHeadline.classList.add(ELEMENT_NAV_SLIDE_HEADLINE);
 
   return slideHeadline;

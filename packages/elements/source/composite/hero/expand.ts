@@ -3,7 +3,7 @@ import {
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeContent = {
   eyebrow?: HTMLElement | null;
@@ -19,7 +19,7 @@ type TypeAssets = {
 
 type TypeLayoutImageExpandProps = TypeContent & TypeAssets;
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { colors, spacing, media } = tokens;
 
 const ELEMENT_NAME = 'umd-hero-expand';

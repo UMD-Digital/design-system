@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Markup, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeTextProps = {
   isTextCenter?: boolean;
@@ -14,7 +14,7 @@ export type TypeTextContainerProps = TypeTextProps;
 
 const { colors, media, spacing } = tokens;
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_TEXT_ALIGN = 'text-align';
@@ -160,7 +160,7 @@ const CreateBody = ({
   }
 
   if (headline) {
-    Markup.modify.animationLinkSpan({ element: headline });
+    Utility.markup.modify.animationLinkSpan({ element: headline });
     headline.classList.add(ELEMENTS_HERO_HEADLINE);
     container.appendChild(headline);
   }

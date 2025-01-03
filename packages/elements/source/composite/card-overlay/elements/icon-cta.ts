@@ -1,5 +1,5 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
-import { Asset } from 'utilities';
+import * as Utility from 'utilities';
 
 export type TypeCardOverlayCtaIcon = {
   ctaIcon?: HTMLElement | null;
@@ -113,15 +113,15 @@ const MakeCtaIconContainer = ({
     const isDownloadLink = ctaIcon.getAttribute('download') === '';
 
     if (isExternalLink) {
-      ctaIcon.innerHTML = Asset.icon.NEW_WINDOW;
+      ctaIcon.innerHTML = Utility.asset.icon.NEW_WINDOW;
     }
 
     if (isDownloadLink) {
-      ctaIcon.innerHTML = Asset.icon.DOCUMENT;
+      ctaIcon.innerHTML = Utility.asset.icon.DOCUMENT;
     }
 
     if (!isExternalLink && !isDownloadLink) {
-      ctaIcon.innerHTML = Asset.icon.SHORT_ARROW;
+      ctaIcon.innerHTML = Utility.asset.icon.SHORT_ARROW;
     }
   }
 

@@ -4,7 +4,7 @@ import {
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 export type TypePathwayTextContainer = {
   eyebrow: HTMLElement | null;
@@ -18,7 +18,7 @@ export type TypePathwayTextContainer = {
 };
 
 const { spacing, colors } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 400;
 const LARGE = 600;

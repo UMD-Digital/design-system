@@ -1,10 +1,10 @@
 import {
-  animations,
+  animation,
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
 import EventElements from './elements';
-import { Markup, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeEventLockupDate = {
   headline: HTMLElement | null;
@@ -13,7 +13,7 @@ type TypeEventLockupDate = {
 };
 
 const { font, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -50,13 +50,13 @@ const HeadlineStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_HEADLINE} a`]: animations.line.slideUnderBlack,
+      [`.${EVENT_HEADLINE} a`]: animation.line.slideUnderBlack,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: animations.line.slideUnderWhite, 
+      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: animation.line.slideUnderWhite, 
     },
   })}
 `;
@@ -90,14 +90,14 @@ const CreateEventLockupDate = (props: TypeEventLockupDate) => {
   }
 
   if (headline) {
-    const modifiedText = Markup.modify.truncateText({
+    const modifiedText = Utility.markup.modify.truncateText({
       text: headline.innerHTML,
       maxTextSize: 50,
     });
 
     headline.innerHTML = modifiedText;
     headline.classList.add(EVENT_HEADLINE);
-    Markup.modify.animationLinkSpan({ element: headline });
+    Utility.markup.modify.animationLinkSpan({ element: headline });
     container.appendChild(headline);
   }
 

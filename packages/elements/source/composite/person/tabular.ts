@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import { List as LayoutList, Image as LayoutImage } from 'layout';
 import PersonTextContainer, {
   TypePersonProps,
@@ -11,7 +11,7 @@ type TypeTabularPersonProps = TypePersonProps & {
 };
 
 const { spacing, colors } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 400;
 const ATTRIBUTE_THEME = 'theme';

@@ -1,9 +1,9 @@
 import {
-  animations,
+  animation,
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Markup, Styles } from 'utilities';
+import * as Utility from 'utilities';
 import PersonContact, { TypeContactProps } from './contact';
 
 export type TypePersonProps = TypeContactProps & {
@@ -19,7 +19,7 @@ export type TypePersonProps = TypeContactProps & {
 
 const { spacing, colors } = tokens;
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_HAS_CONTACT = 'has-contact';
@@ -51,7 +51,7 @@ const ThemeDarkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: animations.line.slideUnderWhite,
+      [`${IS_DARK_THEME_CONTAINER} a.${ELEMENT_PERSON_NAME_CONTAINER}`]: animation.line.slideUnderWhite,
     },
   })}
 `;
@@ -73,7 +73,7 @@ const NameStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: animations.line.slideUnderBlack,
+      [`a.${ELEMENT_PERSON_NAME_CONTAINER}`]: animation.line.slideUnderBlack,
     },
   })}
 `;
@@ -185,7 +185,7 @@ const CreatePersonTextContainer = (person: TypePersonProps) => {
 
   if (name) {
     name.classList.add(ELEMENT_PERSON_NAME_CONTAINER);
-    Markup.modify.animationLinkSpan({ element: name });
+    Utility.markup.modify.animationLinkSpan({ element: name });
     wrapper.appendChild(name);
   }
 

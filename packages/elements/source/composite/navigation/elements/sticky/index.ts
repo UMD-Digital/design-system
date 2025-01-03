@@ -1,4 +1,4 @@
-import { Performance } from 'utilities';
+import * as Utility from 'utilities';
 
 const ELEMENT_NAV_STICKY_CONTAINER = 'nav-sticky-container';
 const ELEMENT_NAV_STICKY_WRAPPER = 'nav-sticky-wrapper';
@@ -80,7 +80,7 @@ const CreateNavStickyElement = ({
     window.addEventListener('scroll', eventScroll);
     window.addEventListener(
       'resize',
-      Performance.debounce(() => {
+      Utility.performance.debounce(() => {
         eventResize();
       }, 20),
     );

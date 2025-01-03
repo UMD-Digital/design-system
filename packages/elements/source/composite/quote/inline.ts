@@ -1,5 +1,5 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
-import { Asset } from 'utilities';
+import * as Utility from 'utilities';
 import Text, { TypeQuoteTextContainer } from './elements/text';
 import Image from './elements/image';
 
@@ -285,7 +285,7 @@ const CreateQuoteInlineElement = (props: TypeInlineInline) => {
 
     if (imageContainer) {
       const iconSpan = document.createElement('span');
-      iconSpan.innerHTML = Asset.icon.QUOTE;
+      iconSpan.innerHTML = Utility.asset.icon.QUOTE;
       imageContainer.appendChild(iconSpan);
 
       wrapper.appendChild(imageContainer);

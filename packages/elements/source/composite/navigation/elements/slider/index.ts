@@ -1,5 +1,5 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
-import { Markup, Performance } from 'utilities';
+import * as Utility from 'utilities';
 import Slides, { TypeSlideProps } from './slides';
 import SlideFirst from './slide-first';
 import SlideAction from './action';
@@ -196,7 +196,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
       const upcomingSlide = elementContainer.querySelector(
         `[${ATTRIBUTE_CHILD_REF}=${upcomingSlideRef}]`,
       ) as HTMLDivElement;
-      const parent = Markup.locate.findParent({
+      const parent = Utility.markup.locate.findParent({
         element: upcomingSlide,
         attr: ATTRIBUTE_DATA_SLIDE,
       });
@@ -323,7 +323,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
 
     window.addEventListener(
       'resize',
-      Performance.debounce(() => {
+      Utility.performance.debounce(() => {
         eventReize();
       }, 20),
     );

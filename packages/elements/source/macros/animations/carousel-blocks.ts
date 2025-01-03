@@ -1,6 +1,6 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
 import { ButtonFullScreen } from 'atomic';
-import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -56,7 +56,7 @@ type TypeEventScroll = TypeHelpers & {
 };
 
 const { colors, spacing } = tokens;
-const { convertPixelStringToNumber } = Styles;
+const { convertPixelStringToNumber } = Utility.styles;
 
 const ATTRIBUTE_SINGLE_BLOCK = 'single';
 const ANIMATION_DURATION = 750;
@@ -255,7 +255,7 @@ const EventSwipe = (props: TypeHelpers) => {
     }
   };
 
-  JavascriptEvents.CreateEventSwipe({ container, callback: swipes });
+  Utility.javascriptEvents.CreateEventSwipe({ container, callback: swipes });
 };
 
 const ButtonVisibility = (props: TypeHelpers) => {
@@ -321,7 +321,7 @@ const CreateButton = ({
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
   button.classList.add(ELEMENT_ANIMATION_CAROUSEL_BUTTON);
-  button.innerHTML = Asset.icon.FORWARD_ARROW;
+  button.innerHTML = Utility.asset.icon.FORWARD_ARROW;
 
   if (isRight) {
     button.classList.add(ELEMENT_ANIMATION_CAROUSEL_NEXT);
@@ -591,7 +591,10 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Performance.debounce(Event.resize, 30));
+    window.addEventListener(
+      'resize',
+      Utility.performance.debounce(Event.resize, 30),
+    );
 
     return {
       element: declaration,

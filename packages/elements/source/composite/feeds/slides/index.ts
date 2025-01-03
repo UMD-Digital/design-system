@@ -1,4 +1,4 @@
-import { Network } from 'utilities';
+import * as Utility from 'utilities';
 import EventElements from '../../event/elements';
 import EventLockup from '../../event/lockup-date';
 
@@ -10,7 +10,7 @@ type TypeSlideFeedResponse = {
   endDay?: string;
 };
 
-const { FetchGraphQL } = Network;
+const { FetchGraphQL } = Utility.network;
 const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
 const ACADEMICS_PRODUCTION_URL = 'https://provost.umd.edu/graphql';
 

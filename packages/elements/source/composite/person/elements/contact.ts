@@ -1,5 +1,5 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
-import { Asset } from 'utilities';
+import * as Utility from 'utilities';
 
 export type TypeContactProps = {
   phone?: HTMLElement | null;
@@ -143,7 +143,7 @@ const MakeContactLink = ({
   icon: string;
 }) => {
   if (!element) return null;
-  if (!element.getAttribute('href') && icon === Asset.icon.PIN) {
+  if (!element.getAttribute('href') && icon === Utility.asset.icon.PIN) {
     return MakeContactText({ element, icon });
   }
   if (!element.hasAttribute('href')) return null;
@@ -184,7 +184,7 @@ const CreatePersonContactContainer = ({
   if (phone) {
     const phoneLink = MakeContactLink({
       element: phone,
-      icon: Asset.icon.PHONE,
+      icon: Utility.asset.icon.PHONE,
     });
     if (phoneLink) container.appendChild(phoneLink);
   }
@@ -192,7 +192,7 @@ const CreatePersonContactContainer = ({
   if (email) {
     const emailLink = MakeContactLink({
       element: email,
-      icon: Asset.icon.EMAIL,
+      icon: Utility.asset.icon.EMAIL,
     });
     if (emailLink) container.appendChild(emailLink);
   }
@@ -200,13 +200,16 @@ const CreatePersonContactContainer = ({
   if (linkendIn) {
     const link = MakeContactLink({
       element: linkendIn,
-      icon: Asset.social.LINKEDIN,
+      icon: Utility.asset.social.LINKEDIN,
     });
     if (link) container.appendChild(link);
   }
 
   if (address) {
-    const link = MakeContactLink({ element: address, icon: Asset.icon.PIN });
+    const link = MakeContactLink({
+      element: address,
+      icon: Utility.asset.icon.PIN,
+    });
     if (link) container.appendChild(link);
   }
 

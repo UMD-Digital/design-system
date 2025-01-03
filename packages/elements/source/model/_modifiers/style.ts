@@ -1,5 +1,5 @@
-import { animations } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import { animation } from '@universityofmaryland/web-elements-styles';
+import * as Utility from 'utilities';
 import { StyleModifierProps } from '../_types';
 
 export enum StyleType {
@@ -14,8 +14,8 @@ const colors = {
 } as const;
 
 const LinkAnimations = {
-  white: animations.line.slideUnderWhite,
-  black: animations.line.slideUnderBlack,
+  white: animation.line.slideUnderWhite,
+  black: animation.line.slideUnderBlack,
 } as const;
 
 const getColor = (isColorWhite?: boolean) => (isColorWhite ? 'black' : 'white');
@@ -30,7 +30,7 @@ const createSelector = (className: string, type: StyleType) => {
 };
 
 const createStyles = (selector: string, styles: Record<string, any>) =>
-  Styles.convertJSSObjectToStyles({
+  Utility.styles.convertJSSObjectToStyles({
     styleObj: { [selector]: styles },
   });
 

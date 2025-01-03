@@ -1,5 +1,5 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
-import { Performance } from 'utilities';
+import * as Utility from 'utilities';
 
 const { colors, spacing } = tokens;
 
@@ -169,7 +169,10 @@ const CreateSlideIndicator = ({
 
     load();
 
-    window.addEventListener('resize', Performance.debounce(eventResize, 20));
+    window.addEventListener(
+      'resize',
+      Utility.performance.debounce(eventResize, 20),
+    );
 
     return {
       element: container,

@@ -1,5 +1,5 @@
 export * as accessibility from './accessibility';
-export * as animations from './animations';
+export * as animation from './animation';
 export * as elementStyles from './elements-styles';
 export * as framework from './framework';
 export * as layout from './layout';

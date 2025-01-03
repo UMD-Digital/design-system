@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Asset, JavascriptEvents, Performance, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;
@@ -29,7 +29,7 @@ type TypeSliderEventProps = TypeSliderEventSlideContentProps &
     isThemeDark?: boolean;
   };
 
-const { convertJSSObjectToStyles, convertPixelStringToNumber } = Styles;
+const { convertJSSObjectToStyles, convertPixelStringToNumber } = Utility.styles;
 const { colors, spacing } = tokens;
 
 const TABLET = 750;
@@ -322,7 +322,7 @@ const CreateBackButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = Asset.icon.BACK_ARROW;
+  button.innerHTML = Utility.asset.icon.BACK_ARROW;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK);
   button.style.display = 'none';
@@ -349,7 +349,7 @@ const CreateForwardButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = Asset.icon.FORWARD_ARROW;
+  button.innerHTML = Utility.asset.icon.FORWARD_ARROW;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD);
   button.setAttribute('type', 'button');
@@ -655,7 +655,7 @@ const EventSwipe = ({
     SetButtonVisibility();
   };
 
-  JavascriptEvents.CreateEventSwipe({ container, callback: swipes });
+  Utility.javascriptEvents.CreateEventSwipe({ container, callback: swipes });
 };
 
 const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {
@@ -741,7 +741,10 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
     declaration.appendChild(container);
 
     Load();
-    window.addEventListener('resize', Performance.debounce(EventResize, 20));
+    window.addEventListener(
+      'resize',
+      Utility.performance.debounce(EventResize, 20),
+    );
 
     return {
       element: declaration,

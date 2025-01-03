@@ -1,5 +1,5 @@
 import { layout, tokens } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeGridDisplay = {
   count?: number;
@@ -8,7 +8,7 @@ type TypeGridDisplay = {
 };
 
 const { media } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 

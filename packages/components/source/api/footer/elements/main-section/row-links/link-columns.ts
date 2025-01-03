@@ -1,5 +1,5 @@
 import {
-  animations,
+  animation,
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
@@ -166,7 +166,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
-      animations.line.slideUnderWhite
+      animation.line.slideUnderWhite
     },
   })}
 
@@ -178,7 +178,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
-      animations.line.slideUnderBlack
+      animation.line.slideUnderBlack
     },
   })}
 `;

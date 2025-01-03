@@ -3,7 +3,7 @@ import {
   layout,
   tokens,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles, Asset } from 'utilities';
+import * as Utility from 'utilities';
 
 export type TypeQuoteTextContainer = {
   quote: HTMLElement | null;
@@ -19,7 +19,7 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
 };
 
 const { spacing, colors } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
 const ATTRIBUTE_THEME = 'theme';
@@ -201,7 +201,7 @@ const CreateQuoteTextContainer = ({
 
   if (quote) {
     const iconSpan = document.createElement('span');
-    iconSpan.innerHTML = Asset.icon.QUOTE;
+    iconSpan.innerHTML = Utility.asset.icon.QUOTE;
 
     quote.appendChild(iconSpan);
     quote.classList.add(TEXT_CONTAINER_QUOTE_WRAPPER);

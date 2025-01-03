@@ -3,7 +3,7 @@ import {
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import ImageContainer, { TypeImageContainerProps } from './elements/image';
 import TextContainer, { TypeTextContainerProps } from './elements/text';
 
@@ -14,7 +14,7 @@ type TypeHeroMinimalProps = TypeTextContainerProps &
   };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const TABLET = 768;
 const DESKTOP = 1024;

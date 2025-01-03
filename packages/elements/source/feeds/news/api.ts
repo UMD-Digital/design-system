@@ -1,4 +1,4 @@
-import { Network } from 'utilities';
+import * as Utility from 'utilities';
 import { ARTICLES_QUERY } from './queries';
 import NoResults from '../no-results';
 
@@ -19,7 +19,7 @@ type TypeFetchObject = TypeAPIFeedVariables & {
   query: string;
 };
 
-const { FetchGraphQL } = Network;
+const { FetchGraphQL } = Utility.network;
 
 const TODAY_PRODUCTION_URL = 'https://today.umd.edu/graphql';
 const NoResultsContent = {

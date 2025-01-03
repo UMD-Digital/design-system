@@ -11,9 +11,8 @@ import {
 import { UMDFooterElement } from '../../index';
 
 const { spacing, colors } = tokens;
-const { Asset, Styles } = Utilities;
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utilities.styles;
 
 const { SOCIAL } = SLOTS;
 const { LARGE, MEDIUM } = BREAKPOINTS;
@@ -187,31 +186,31 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   if (!url) return link;
 
   if (url.match(/facebook.com/)) {
-    link.innerHTML = Asset.social.FACEBOOK;
+    link.innerHTML = Utilities.asset.social.FACEBOOK;
   }
 
   if (url.match(/x.com/)) {
-    link.innerHTML = Asset.social.X;
+    link.innerHTML = Utilities.asset.social.X;
   }
 
   if (url.match(/instagram.com/)) {
-    link.innerHTML = Asset.social.INSTAGRAM;
+    link.innerHTML = Utilities.asset.social.INSTAGRAM;
   }
 
   if (url.match(/youtube.com/)) {
-    link.innerHTML = Asset.social.YOUTUBE;
+    link.innerHTML = Utilities.asset.social.YOUTUBE;
   }
 
   if (url.match(/twitter.com/)) {
-    link.innerHTML = Asset.social.TWITTER;
+    link.innerHTML = Utilities.asset.social.TWITTER;
   }
 
   if (url.match(/linkedin.com/)) {
-    link.innerHTML = Asset.social.LINKEDIN;
+    link.innerHTML = Utilities.asset.social.LINKEDIN;
   }
 
   if (url.match(/threads.net/)) {
-    link.innerHTML = Asset.social.THREADS;
+    link.innerHTML = Utilities.asset.social.THREADS;
   }
 
   return link;

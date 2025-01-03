@@ -1,5 +1,5 @@
 import { tokens, layout } from '@universityofmaryland/web-elements-styles';
-import { Accessibility, Asset, Styles } from 'utilities';
+import * as Utility from 'utilities';
 import {
   createNavAlert,
   STYLES_NAV_ALERT,
@@ -24,7 +24,7 @@ type TypeMenuItemsRequirements = {
 
 type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps & {};
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { colors, spacing } = tokens;
 
 const flagIcon = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28"><title>Flag</title><path d="M5 4c0 .72-.39 1.36-1 1.72V25.5c0 .266-.234.5-.5.5h-1c-.266 0-.5-.234-.5-.5V5.72c-.61-.36-1-1-1-1.72 0-1.11.89-2 2-2s2 .89 2 2zm23 1v11.922c0 .578-.36.797-.812 1.03-1.766.954-3.72 1.814-5.766 1.814-2.875 0-4.25-2.188-7.656-2.188-2.484 0-5.094 1.125-7.25 2.28-.172.095-.328.142-.516.142-.547 0-1-.453-1-1V7.406c0-.375.187-.64.484-.86.375-.25.828-.468 1.234-.67 1.97-1 4.36-1.876 6.578-1.876 2.453 0 4.375.812 6.547 1.828.438.22.89.297 1.375.297C23.67 6.125 26.312 4 26.998 4c.548 0 1 .453 1 1z"></path></svg>`;
@@ -383,7 +383,7 @@ const CreateSearchFormButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = Accessibility.eventAccessibilityFocus({
+    focusCallback = Utility.accessibility.eventAccessibilityFocus({
       element: expandElement,
       action: () => eventClose(),
     });
@@ -391,7 +391,7 @@ const CreateSearchFormButton = ({
 
   button.setAttribute('aria-label', 'enable the search form');
   button.setAttribute('type', 'button');
-  button.innerHTML = `${Asset.icon.MAGNIFY_GLASS}`;
+  button.innerHTML = `${Utility.asset.icon.MAGNIFY_GLASS}`;
   button.setAttribute('aria-controls', UtilitySearch.Elements.form);
   button.classList.add(ELEMENT_UTILITY_SEARCH_BUTTON);
   button.setAttribute('aria-expanded', 'false');
@@ -448,13 +448,13 @@ const CreateMobileMenuButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = Accessibility.eventAccessibilityFocus({
+    focusCallback = Utility.accessibility.eventAccessibilityFocus({
       element: expandElement,
       action: () => eventClose(),
     });
   };
 
-  button.innerHTML = `${Asset.icon.CHEVRON_SMALL}`;
+  button.innerHTML = `${Utility.asset.icon.CHEVRON_SMALL}`;
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'toggle mobile menu');
   button.setAttribute('aria-controls', `${ELEMENT_UTILITY_MOBILE_MENU}`);

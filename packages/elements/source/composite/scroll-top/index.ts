@@ -1,5 +1,5 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
-import { Asset, Performance } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeScrollTopProps = {
   isFixed?: boolean;
@@ -118,7 +118,7 @@ const CreateScrollTopElement = (props: TypeScrollTopProps) =>
         behavior: 'smooth',
       });
     });
-    container.innerHTML = Asset.icon.ARROW;
+    container.innerHTML = Utility.asset.icon.ARROW;
     container.appendChild(text);
 
     declaration.appendChild(container);
@@ -129,12 +129,12 @@ const CreateScrollTopElement = (props: TypeScrollTopProps) =>
 
       window.addEventListener(
         'scroll',
-        Performance.debounce(() => eventScroll(), 10),
+        Utility.performance.debounce(() => eventScroll(), 10),
       );
 
       window.addEventListener(
         'resize',
-        Performance.debounce(() => eventResize(), 20),
+        Utility.performance.debounce(() => eventResize(), 20),
       );
     }
 

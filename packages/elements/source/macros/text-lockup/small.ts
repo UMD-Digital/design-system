@@ -1,10 +1,10 @@
 import {
-  animations,
+  animation,
   layout,
   typography,
   tokens,
 } from '@universityofmaryland/web-elements-styles';
-import { Markup, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 export type TypeTextLockupSmall = {
   headline?: HTMLElement | null;
@@ -16,7 +16,7 @@ export type TypeTextLockupSmall = {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -49,13 +49,13 @@ const DarkThemeStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_THEME_DARK_HEADLINE} a`]:
-      animations.line.slideUnderWhite,
+      animation.line.slideUnderWhite,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK_RICH_TEXT}`]: animations.nestedElements.linksDark,
+      [`${IS_THEME_DARK_RICH_TEXT}`]: animation.nestedElements.linksDark,
     },
   })}
 `
@@ -115,7 +115,7 @@ const HeadlineStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE} a`]:
-      animations.line.slideUnderBlack,
+      animation.line.slideUnderBlack,
     },
   })}
 `;
@@ -230,7 +230,7 @@ const CreateTextLockupSmallContainer = ({
   }
 
   if (headline) {
-    Markup.modify.animationLinkSpan({ element: headline });
+    Utility.markup.modify.animationLinkSpan({ element: headline });
     headline.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_HEADLINE);
     container.appendChild(headline);
   }

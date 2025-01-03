@@ -1,10 +1,10 @@
 import {
-  animations,
+  animation,
   elementStyles,
   typography,
   tokens,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeStatElement = {
   stat?: HTMLElement | null;
@@ -19,7 +19,7 @@ type TypeStatRequirements = TypeStatElement & {
   subText?: HTMLElement | null;
 };
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { colors, media, spacing } = tokens;
 
 const BLOCK_TEXTURE = `<svg id="stat_block-texture" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" ><defs><style>.cls-1{opacity:.02;}.cls-1,.cls-2{fill:#454545;fill-rule:evenodd;isolation:isolate;stroke-width:0px;}.cls-2{opacity:.04;}</style></defs><path class="cls-1" d="M109.49,0H0v63.18l181.67,182.32L0,427.82v63.18h109.49l244.61-245.5L109.49,0Z"/><path class="cls-2" d="M108.94,0h172.44l244.61,245.5-244.61,245.5H108.94l244.61-245.5L108.94,0ZM0,179.11l58.16-58.29L0,62.54v116.57Z"/></svg>`;
@@ -69,7 +69,7 @@ const VarationThemeDarkStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_TEXT}`]: animations.nestedElements.linksDark,
+      [`${OVERWRITE_THEME_DARK_TEXT}`]: animation.nestedElements.linksDark,
     },
   })}
 

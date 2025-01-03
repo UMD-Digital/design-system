@@ -1,5 +1,5 @@
 import { tokens, layout } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 
 export type TypeAlertTextProps = {
@@ -10,7 +10,7 @@ export type TypeAlertTextProps = {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 export const CONSTANTS = {
   className: {

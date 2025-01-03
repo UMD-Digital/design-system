@@ -1,11 +1,11 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import TextLockupSmall, { TypeTextLockupSmall } from './small';
 
 type TypeTextLockupSmallScaling = TypeTextLockupSmall;
 
 const { font } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 300;
 const MEDIUM = 650;

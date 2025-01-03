@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Performance, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeTabsProps = {
   tabsContainer: HTMLElement;
@@ -27,7 +27,7 @@ type TypeGetState = {
 };
 
 const { spacing, colors } = tokens;
-const { convertPixelStringToNumber } = Styles;
+const { convertPixelStringToNumber } = Utility.styles;
 
 const ATTRIBUTE_LAYOUT_HORIZONTAL = 'data-layout-horizontal';
 const ATTRIBUTE_ARIA_EXPANDED = 'aria-expanded';
@@ -181,7 +181,7 @@ const SetDisplay = ({
           ? convertedSpace + additionalSpread
           : convertedSpace;
 
-        Styles.animations.scrollTo({
+        Utility.styles.animations.scrollTo({
           element: activeContent,
           spread,
         });
@@ -371,7 +371,10 @@ const CreateTabsElement = (props: TypeTabsProps) =>
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener('resize', Performance.debounce(EventResize, 10));
+    window.addEventListener(
+      'resize',
+      Utility.performance.debounce(EventResize, 10),
+    );
 
     return {
       element: declaration,

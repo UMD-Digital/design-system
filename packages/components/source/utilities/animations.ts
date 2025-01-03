@@ -1,11 +1,10 @@
-import { animations } from '@universityofmaryland/web-elements-styles';
+import { animation } from '@universityofmaryland/web-elements-styles';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 
 export const loadIntersectionObserver = () => {
-  const { Accessibility, Styles } = Utilities;
-  const { convertJSSObjectToStyles } = Styles;
+  const { convertJSSObjectToStyles } = Utilities.styles;
 
-  if (Accessibility.isPrefferdReducedMotion()) return;
+  if (Utilities.accessibility.isPrefferdReducedMotion()) return;
 
   const idGridFadeIn = `umd-grid-fade-in`;
   const idOffsetAttr = `data-animation`;
@@ -30,7 +29,7 @@ export const loadIntersectionObserver = () => {
 
       ${convertJSSObjectToStyles({
         styleObj: {
-          [`.${idGridFadeIn}`]: animations.transition.fadeInFromBottom,
+          [`.${idGridFadeIn}`]: animation.transition.fadeInFromBottom,
         },
       })}
     `;

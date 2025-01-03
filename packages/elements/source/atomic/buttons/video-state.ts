@@ -1,4 +1,4 @@
-import { Asset } from 'utilities';
+import * as Utility from 'utilities';
 
 const ELEMENT_BUTTON = 'button-video-state';
 
@@ -28,12 +28,12 @@ const CreateButtonVideoState = ({ video }: { video: HTMLVideoElement }) =>
     const button = document.createElement('button');
     const setButtonPlay = () => {
       button.setAttribute('aria-label', 'Pause');
-      button.innerHTML = Asset.icon.PAUSE;
+      button.innerHTML = Utility.asset.icon.PAUSE;
       video.play();
     };
     const setButtonPause = () => {
       button.setAttribute('aria-label', 'Play');
-      button.innerHTML = Asset.icon.PLAY;
+      button.innerHTML = Utility.asset.icon.PLAY;
       video.pause();
     };
 

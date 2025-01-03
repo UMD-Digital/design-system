@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Performance, Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeHeadlineText = { headline?: HTMLElement | null };
 type TypeBodyText = { text?: HTMLElement | null };
@@ -29,7 +29,7 @@ type ActionAnimationProps = StateProps & {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 480;
 
@@ -369,7 +369,7 @@ const CreateAccordionElement = (props: TypeAccordionProps) =>
       SetOpen({ hasAnimation: false });
     }
 
-    window.addEventListener('resize', Performance.debounce(resize, 20));
+    window.addEventListener('resize', Utility.performance.debounce(resize, 20));
 
     return {
       element: declaration,

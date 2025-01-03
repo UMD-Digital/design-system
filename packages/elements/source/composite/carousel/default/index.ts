@@ -20,7 +20,7 @@ type TypeCarouselRequirements = {
   maxCount?: number | null;
 };
 
-const { colors, spacing } = tokens;
+const { colors } = tokens;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';

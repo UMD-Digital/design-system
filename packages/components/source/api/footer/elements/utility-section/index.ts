@@ -1,5 +1,5 @@
 import {
-  animations,
+  animation,
   tokens,
   layout,
   typography,
@@ -40,7 +40,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:
-      animations.line.slideUnderWhite,
+      animation.line.slideUnderWhite,
     },
   })}
 
@@ -51,7 +51,7 @@ const LinkStyles = `
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
-      animations.line.slideUnderBlack,
+      animation.line.slideUnderBlack,
     },
   })}
 `;

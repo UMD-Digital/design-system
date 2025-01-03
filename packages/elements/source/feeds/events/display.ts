@@ -1,5 +1,5 @@
 import { EventBlock, EventList, EventElements } from 'composite';
-import { DateUtility } from 'utilities';
+import * as Utility from 'utilities';
 
 type ImageType = {
   url: string;
@@ -137,15 +137,15 @@ const CreateEventsGrouped = ({
     new Date().setDate(new Date().getDate() + 7),
   );
   const currentDate =
-    DateUtility.createDateCompareString(currentDateStamp).palindromeTruncated;
+    Utility.date.createDateCompareString(currentDateStamp).palindromeTruncated;
   const weekDate =
-    DateUtility.createDateCompareString(weekFromDateStamp).palindromeTruncated;
+    Utility.date.createDateCompareString(weekFromDateStamp).palindromeTruncated;
 
   const getDateBanner = (entry: EventType) => {
     const entryDate = new Date(entry.startStamp);
     const entryDatePalindrom =
-      DateUtility.createDateCompareString(entryDate).palindromeTruncated;
-    const formattedDate = DateUtility.createVisualFormattedDate(
+      Utility.date.createDateCompareString(entryDate).palindromeTruncated;
+    const formattedDate = Utility.date.createVisualFormattedDate(
       new Date(entry.startStamp),
     );
 

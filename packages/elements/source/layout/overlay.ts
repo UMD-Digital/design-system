@@ -1,5 +1,5 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
-import { Markup, Performance } from 'utilities';
+import * as Utility from 'utilities';
 import { TextLockupSmallScaling, type TypeTextLockupSmall } from 'macros';
 
 export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
@@ -161,7 +161,7 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
 
   const sizeElements = () => {
     if (text && textCopy) {
-      const modifiedText = Markup.modify.truncateTextBasedOnSize({
+      const modifiedText = Utility.markup.modify.truncateTextBasedOnSize({
         text: textCopy,
         size: elementContainer.offsetWidth,
       });
@@ -190,8 +190,11 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
   elementDeclaration.appendChild(elementContainer);
 
   sizeElements();
-  Markup.create.gif({ container: imageWrapper });
-  window.addEventListener('resize', Performance.debounce(sizeElements, 50));
+  Utility.markup.create.gif({ container: imageWrapper });
+  window.addEventListener(
+    'resize',
+    Utility.performance.debounce(sizeElements, 50),
+  );
 
   return elementDeclaration;
 };

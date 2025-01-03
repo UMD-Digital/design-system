@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 
 export type TypeMediaCaptionRequirements = {
   caption: HTMLElement;
@@ -7,7 +7,7 @@ export type TypeMediaCaptionRequirements = {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const ATTRIBUTE_THEME_DARK = 'dark';

@@ -1,10 +1,10 @@
 import {
-  animations,
+  animation,
   elementStyles,
   tokens,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles, Asset } from 'utilities';
+import * as Utility from 'utilities';
 
 type TypeBannerPromoProps = {
   headline?: HTMLElement | null;
@@ -15,7 +15,7 @@ type TypeBannerPromoProps = {
 };
 
 const { colors, spacing } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 650;
 
@@ -88,7 +88,7 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_RICH_TEXT} a`]: animations.line.fadeUnderRed,
+      [`.${ELEMENT_RICH_TEXT} a`]: animation.line.fadeUnderRed,
     },
   })}
 
@@ -217,7 +217,7 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
     }
 
     if (includeSeal) {
-      let seal = Asset.logo.SEAL_WHITE;
+      let seal = Utility.asset.logo.SEAL_WHITE;
 
       container.innerHTML = `${seal}`;
     }

@@ -1,7 +1,7 @@
 import { tokens } from '@universityofmaryland/web-elements-styles';
 import { ButtonVideoState } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import { Accessibility } from 'utilities';
+import * as Utility from 'utilities';
 
 const { media, colors, spacing } = tokens;
 
@@ -121,7 +121,7 @@ const CreatePathwayImageContainer = (
 
       wrapper.appendChild(videoRef);
       wrapper.appendChild(buttonMacro.elements.button);
-      if (!Accessibility.isPrefferdReducedMotion()) {
+      if (!Utility.accessibility.isPrefferdReducedMotion()) {
         buttonMacro.events.setButtonPlay();
       } else {
         buttonMacro.events.setButtonPause();

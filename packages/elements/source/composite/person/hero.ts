@@ -3,7 +3,7 @@ import {
   layout,
   typography,
 } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import PersonContact, { TypeContactProps } from './elements/contact';
 import PersonImage from './elements/image';
 
@@ -26,7 +26,7 @@ type TypePersonHeroProps = TypeTextContainer &
     breadcrumbDesktop?: HTMLElement | null;
   };
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 const { spacing, colors } = tokens;
 
 const MEDIUM = 768;

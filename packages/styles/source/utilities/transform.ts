@@ -1,5 +1,5 @@
 import * as accessibility from '../accessibility';
-import * as animations from '../animations';
+import * as animations from '../animation';
 import * as elementStyles from '../elements-styles';
 import * as layout from '../layout';
 import * as typography from '../typography';

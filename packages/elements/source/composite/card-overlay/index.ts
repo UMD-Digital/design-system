@@ -1,5 +1,5 @@
 import { tokens, typography } from '@universityofmaryland/web-elements-styles';
-import { Styles } from 'utilities';
+import * as Utility from 'utilities';
 import { TextLockupSmallScaling, TextLockupSmall } from 'macros';
 
 import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
@@ -14,7 +14,7 @@ type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
 };
 
 const { spacing, colors } = tokens;
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 500;
 

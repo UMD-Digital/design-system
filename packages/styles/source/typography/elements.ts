@@ -58,7 +58,7 @@ export const interativeSmall = {
   fontSize: font.size['base'],
   fontWeight: font.weight['bold'],
   letterSpacing: '-0.01em',
-  lineHeight: `1.125.em`,
+  lineHeight: `1.125em`,
 };
 
 export const fonts = {

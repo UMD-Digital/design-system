@@ -16,6 +16,11 @@ const fourColumnCenteredChild = {
 export const two = create.jssObject({
   ...base.two,
 
+  [`@media (${media.queries.large.min})`]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridGap: spacing.lg,
+  },
+
   [`@media (${media.queries.desktop.min})`]: {
     gridGap: spacing.xl,
   },

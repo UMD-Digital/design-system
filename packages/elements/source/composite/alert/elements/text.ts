@@ -44,8 +44,7 @@ const STYLES_ALERT_TEXT = `
 
 const headlineStyles = {
   element: {
-    color: token.color.black,
-    paddingRigh: token.spacing.md,
+    paddingRight: token.spacing.md,
   },
   siblingAfter: {
     marginTop: token.spacing.sm,

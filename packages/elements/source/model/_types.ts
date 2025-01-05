@@ -6,9 +6,9 @@ export interface ElementStyles {
   subElement?: Record<string, any>;
 }
 
-export interface FontOptions {
+export interface StyleOptions {
   className: string;
-  fontStyles?: Record<string, any>;
+  baseStyles?: Record<string, any>;
 }
 
 export interface ElementProps {
@@ -17,12 +17,16 @@ export interface ElementProps {
   isThemeDark?: boolean;
 }
 
+// Configuration Types
+
+export type ConfigurationProps = ElementProps & StyleOptions;
+
+type ConfigurationStyles = ElementStyles & StyleOptions;
+
 // Modifer Types
 
-export interface StyleModifierProps extends ElementStyles {
-  fontStyles?: Record<string, any>;
+export interface StyleModifierProps extends ConfigurationStyles {
   isColorWhite?: boolean;
-  className: string;
 }
 
 // Builder Types
@@ -36,7 +40,3 @@ export interface BuilderProps {
   config: BuilderConfig;
   options?: Omit<StyleModifierProps, 'className'>;
 }
-
-// Configuration Types
-
-export type ConfigurationProps = ElementProps & FontOptions;

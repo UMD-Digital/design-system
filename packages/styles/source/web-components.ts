@@ -14,6 +14,7 @@ const createElementStyles = (
     display: 'block',
     ...additionalStyles.defined,
   },
+
   ...additionalStyles.custom,
 });
 
@@ -116,17 +117,20 @@ const navigation = {
 };
 
 // Scroll top component with responsive styling
-const scrollTop = createElementStyles('umd-element-scroll-top', {
+const scrollTopTag = 'umd-element-scroll-top';
+const scrollTop = createElementStyles(scrollTopTag, {
   defined: {
     height: '40px',
     width: '40px',
   },
   custom: {
-    '[fixed]': {
+    [`* + ${scrollTopTag}`]: { marginTop: spacing.md },
+    [`${scrollTopTag}[fixed], ${scrollTopTag}[data-layout-fixed="true"]`]: {
       position: 'fixed',
       right: '8px',
       bottom: '10vh',
       zIndex: '9999',
+
       [`@media (${media.queries.tablet.min})`]: {
         height: '52px',
         width: '52px',
@@ -156,20 +160,22 @@ const sectionIntro = {
 };
 
 // Social sharing with responsive layout
-const socialSharing = createElementStyles('umd-element-social-sharing', {
+const socialSharingTag = 'umd-element-social-sharing';
+const socialSharing = createElementStyles(socialSharingTag, {
   custom: {
-    '* + &': { marginTop: spacing.md },
-    '[fixed], [data-layout-fixed="true"]': {
-      [`@media (${media.queries.tablet.min})`]: {
-        position: 'fixed',
-        left: '0',
-        top: '30vh',
-        zIndex: '9999',
+    [`* + ${socialSharingTag}`]: { marginTop: spacing.md },
+    [`${socialSharingTag}[fixed], ${socialSharingTag}[data-layout-fixed="true"]`]:
+      {
+        [`@media (${media.queries.tablet.min})`]: {
+          position: 'fixed',
+          left: '0',
+          top: '30vh',
+          zIndex: '9999',
+        },
+        [`@media (${media.queries.desktop.min})`]: {
+          left: '40px',
+        },
       },
-      [`@media (${media.queries.desktop.min})`]: {
-        left: '40px',
-      },
-    },
   },
 });
 

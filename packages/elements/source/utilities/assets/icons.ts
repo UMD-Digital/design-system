@@ -8,7 +8,7 @@ export const CLOCK = `<svg title="clock icon" aria-hidden="true" id="icon_clock"
 
 export const CHEVRON_SMALL = `<svg title="chevron icon" aria-hidden="true" id="icon_chevron" width="96" height="96" viewBox="0 0 96 96"fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M47.2598 49.1794L72.3325 21L94 21.0001L58.9085 62.2714L58.9247 62.2897L47.284 76L47.2598 75.9715L47.2356 76L35.5949 62.2897L35.6111 62.2714L0.519623 21L22.1871 21.0001L47.2598 49.1794Z"></path></svg>`;
 
-export const CLOSE_BUTTON = `<svg title="close button icon" aria-hidden="true" id="icon_close" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.2561" y="0.321533" width="20.75" height="4.15" transform="rotate(45 3.2561 0.321533)" fill="black"/><rect x="17.9285" y="3.25598" width="20.75" height="4.15" transform="rotate(135 17.9285 3.25598)" fill="black"/></svg>`;
+export const CLOSE_BUTTON = `<svg title="close button icon" aria-hidden="true" id="icon_close" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.2561" y="0.321533" width="20.75" height="4.15" transform="rotate(45 3.2561 0.321533)" fill="none"/><rect x="17.9285" y="3.25598" width="20.75" height="4.15" transform="rotate(135 17.9285 3.25598)" fill="none"/></svg>`;
 
 export const DOCUMENT = `<svg title="document icon" aria-hidden="true" id="icon-document" data-name="icon-document" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><defs><style>.cls-1 { fill-rule: evenodd; }</style></defs><path class="cls-1" d="m83.12,23.3v.63h-17.26s0-16.99,0-16.99l17.26,16.36ZM60.19,6v23.6h22.93s0,60.4,0,60.4H13V6h47.19Zm7.55,34.09H29.04v8h38.7v-8Zm-38.7,18.1h38.7v8H29.05v-8Z"/></svg>`;
 

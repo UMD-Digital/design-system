@@ -51,6 +51,12 @@ const theme = {
   MARYLAND: 'maryland',
 };
 
+const type = {
+  OUTLINE: 'outline',
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+};
+
 const AttributeValues = {
   display,
   layout,
@@ -58,6 +64,7 @@ const AttributeValues = {
   size,
   state,
   theme,
+  type,
 };
 
 export default AttributeValues;

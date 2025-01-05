@@ -107,6 +107,7 @@ const depractedVisual = {
   VISUAL_TRANSPARENT: 'transparent',
   VISUAL_QUOTE: 'quote',
   VISUAL_TEXT_CENTER: 'text-center',
+  VISUAL_STYLE_PROPS: 'styleProps',
 };
 
 const AttributeNames = {

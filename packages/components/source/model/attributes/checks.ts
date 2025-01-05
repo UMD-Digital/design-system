@@ -1,3 +1,4 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
 import AttributeNames from './names';
 import AttributesValues from './values';
 
@@ -362,6 +363,22 @@ const isTheme = {
     }),
 } as const;
 
+// Type checks
+const isType = {
+  outline: createAttributeCheck(
+    AttributeNames.TYPE,
+    AttributesValues.type.OUTLINE,
+  ),
+  primary: createAttributeCheck(
+    AttributeNames.TYPE,
+    AttributesValues.type.PRIMARY,
+  ),
+  secondary: createAttributeCheck(
+    AttributeNames.TYPE,
+    AttributesValues.type.SECONDARY,
+  ),
+} as const;
+
 // Visual checks
 const isVisual = {
   aligned: createAttributeCheck(
@@ -460,6 +477,18 @@ const getValue = {
   topPosition: createValueGetter({
     currentName: AttributeNames.LAYOUT_STICKY_TOP,
   }),
+  styleProps: (props: AttributeElementProps) => {
+    const cssString = createValueGetter({
+      ...props,
+      currentName: AttributeNames.VISUAL_STYLE_PROPS,
+    });
+
+    if (cssString && typeof cssString === 'string') {
+      return Styles.utilities.create.jssObjectFromString(cssString);
+    }
+
+    return null;
+  },
   url: createValueGetter({
     currentName: AttributeNames.information.URL,
   }),
@@ -476,6 +505,7 @@ export {
   isSharing,
   includesSharing,
   isTheme,
+  isType,
   isVisual,
   getValue,
 };

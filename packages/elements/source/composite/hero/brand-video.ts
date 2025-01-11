@@ -3,7 +3,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { ButtonVideoState } from 'atomic';
+import ButtonVideoState from '../../atomic/buttons/video-state';
 import { AnimationOverlayBrand } from 'macros';
 import * as Utility from 'utilities';
 

@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { ButtonFullScreen } from 'atomic';
+import ButtonFullScreen from '../../../atomic/buttons/full-screen';
 import { Image as LayoutImage } from 'layout';
 import {
   AnimationCarouselOverlay,

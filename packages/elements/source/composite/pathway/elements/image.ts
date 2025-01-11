@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { ButtonVideoState } from 'atomic';
+import ButtonVideoState from '../../../atomic/buttons/video-state';
 import { Image as LayoutImage } from 'layout';
 import * as Utility from 'utilities';
 

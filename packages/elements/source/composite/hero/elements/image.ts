@@ -1,4 +1,4 @@
-import { ButtonVideoState } from 'atomic';
+import ButtonVideoState from '../../../atomic/buttons/video-state';
 import { Image as LayoutImage } from 'layout';
 
 export type TypeImageContainerProps = {

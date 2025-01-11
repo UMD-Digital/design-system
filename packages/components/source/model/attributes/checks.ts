@@ -486,8 +486,6 @@ const getValue = {
     if (cssString && typeof cssString === 'string') {
       return Styles.utilities.create.jssObjectFromString(cssString);
     }
-
-    return null;
   },
   url: createValueGetter({
     currentName: AttributeNames.information.URL,

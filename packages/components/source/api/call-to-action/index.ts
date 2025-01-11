@@ -1,80 +1,43 @@
-declare global {
-  interface Window {
-    UMDCallToActionElement: typeof UMDCallToActionElement;
-  }
-}
+import { atomic } from '@universityofmaryland/web-elements-library';
+import { Attributes, Model, Register, Slots } from 'model';
 
-import { Markup } from 'utilities';
-import { Attributes } from 'model';
-import { ComponentStyles, CreateShadowDom } from './elements';
-import { VARIABLES } from './globals';
+const { callToAction } = atomic;
 
-const {
-  ELEMENT_NAME,
-  TYPE_PRIMARY,
-  SIZE_STANDARD,
-  THEME_LIGHT,
-  ATTRIBUTE_TYPE,
-  ATTRIBUTE_SIZE,
-  ATTRIBUTE_STYLE_PROPS,
-} = VARIABLES;
+const tagName = 'umd-element-call-to-action';
 
-export class UMDCallToActionElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _styleProps: null | string;
-  _type = TYPE_PRIMARY;
-  _size = SIZE_STANDARD;
-  _isThemeLight = true;
-  _isThemeDark = false;
-  _isThemeGold = false;
+const createComponent = (element: HTMLElement) => {
+  const button = element.querySelector('button') as HTMLButtonElement;
+  const link = element.querySelector('a:not([slot])') as HTMLAnchorElement;
+  const plainText = element.querySelector(`[slot="plain-text"]`) as HTMLElement;
 
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._styleProps = null;
-
-    const styles = `${ComponentStyles}`;
-    const template = Markup.create.Node.stylesTemplate({ styles });
-
-    this._shadow.appendChild(template.content.cloneNode(true));
+  if (!button && !link) {
+    console.error('Call to action element requires a button or link');
   }
 
-  static get observedAttributes() {
-    return [ATTRIBUTE_STYLE_PROPS];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name == ATTRIBUTE_STYLE_PROPS) {
-      this._styleProps = newValue;
-    }
-  }
-
-  connectedCallback() {
-    const element = this;
-    const styleAttrubutes = element.getAttribute(ATTRIBUTE_STYLE_PROPS);
-    const isThemeDark = Attributes.isTheme.dark({ element });
-    const isThemeGold = Attributes.isTheme.gold({ element });
-
-    element._size = element.getAttribute(ATTRIBUTE_SIZE) || element._size;
-    element._type = element.getAttribute(ATTRIBUTE_TYPE) || element._type;
-    element._isThemeDark = isThemeDark;
-    element._isThemeGold = isThemeGold;
-
-    if (styleAttrubutes) {
-      element._styleProps = styleAttrubutes;
-    }
-
-    this._shadow.appendChild(CreateShadowDom({ element }));
-  }
-}
+  return callToAction.options({
+    element: link || button,
+    isTypeOutline: Attributes.isType.outline({ element }),
+    isTypePrimary: Attributes.isType.primary({ element }),
+    isTypeSecondary: Attributes.isType.secondary({ element }),
+    isSizeLarge: Attributes.isVisual.sizeLarge({ element }),
+    isThemeDark: Attributes.isTheme.dark({ element }),
+    isThemeGold: Attributes.isTheme.gold({ element }),
+    elementStyles: Attributes.getValue.styleProps({ element }),
+    plainText,
+  });
+};
 
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
+  const element = Model.createCustomElement({
+    tagName,
+    createComponent,
+  });
 
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDCallToActionElement = UMDCallToActionElement;
-    window.customElements.define(ELEMENT_NAME, UMDCallToActionElement);
+  if (element) {
+    Register.registerWebComponent({
+      name: tagName,
+      element,
+    });
   }
 };
 

@@ -71,3 +71,9 @@ export const imageFromSvg = ({ SVG }: { SVG: string }) => {
   image.src = `data:image/svg+xml;base64,${btoa(SVG)}`;
   return image;
 };
+
+export function svgFromString(svgString: string) {
+  const div = document.createElement('div');
+  div.innerHTML = svgString.trim();
+  return div.firstChild;
+}

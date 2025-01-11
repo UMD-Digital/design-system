@@ -13,7 +13,7 @@ export interface StyleOptions {
 
 export interface ElementProps {
   element: HTMLElement;
-  elementStyles: ElementStyles;
+  elementStyles?: ElementStyles;
   isThemeDark?: boolean;
 }
 

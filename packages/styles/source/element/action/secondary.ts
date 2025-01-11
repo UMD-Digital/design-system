@@ -49,3 +49,16 @@ export const white = create.jssObject({
     ...iconBase,
   },
 });
+
+// umd-action-secondary-gold
+export const gold = create.jssObject({
+  ...base,
+  ...secondaryBase,
+  color: color.white,
+  className: `${classNamePrefix}-gold`,
+
+  '& svg': {
+    ...iconBase,
+    fill: color.gold,
+  },
+});

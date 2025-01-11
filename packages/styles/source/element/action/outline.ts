@@ -77,9 +77,3 @@ export const white = create.jssObject({
     fill: color.white,
   },
 });
-
-//   .${ELEMENT_CTA_OUTLINE} svg,
-//   .${ELEMENT_CTA_OUTLINE} path {
-//     fill: ${token.color.red};
-//     transition: fill .5s;
-//   }

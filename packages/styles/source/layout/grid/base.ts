@@ -72,3 +72,11 @@ export const columnsFour = create.jssObject({
     'umd-grid-four',
   ],
 });
+
+// umd-layout-grid-stacked
+export const stacked = create.jssObject({
+  display: 'flex',
+  flexDirection: 'column',
+
+  className: `${classNamePrefix}-stacked`,
+});

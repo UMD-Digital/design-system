@@ -143,7 +143,3 @@ export const stacked = create.jssObject({
     'umd-grid-gap-stacked',
   ],
 });
-
-// '.umd-grid-row-mobile-tablet': {
-//   ...layout.grid.columnAndRowsMobileTablet,
-// },

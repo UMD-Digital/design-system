@@ -8,17 +8,25 @@ export enum StyleType {
   SiblingAfter = 'sibling-after',
 }
 
-const colors = {
+const TextColors = {
   white: { color: 'white' },
   black: { color: 'black' },
 } as const;
 
-const LinkAnimations = {
-  white: animation.line.slideUnderWhite,
-  black: animation.line.slideUnderBlack,
-} as const;
+const getTextColor = (isTextColorWhite?: boolean) =>
+  isTextColorWhite ? 'black' : 'white';
 
-const getColor = (isColorWhite?: boolean) => (isColorWhite ? 'black' : 'white');
+const getLinkAnimationColor = ({
+  isColorWhite,
+  isColorBlack,
+}: {
+  isColorWhite?: boolean;
+  isColorBlack?: boolean;
+}) => {
+  if (isColorWhite) return animation.line.slideUnderWhite;
+  if (isColorBlack) return animation.line.slideUnderBlack;
+  return animation.line.slideUnderRed;
+};
 
 const createSelector = (className: string, type: StyleType) => {
   const selectors = {
@@ -48,12 +56,11 @@ const createModifier = (
 };
 
 const styleGetters = {
-  animation: ({ isColorWhite }: StyleModifierProps) => ({
-    a: LinkAnimations[getColor(isColorWhite)],
-  }),
+  animation: ({ isColorBlack, isColorWhite }: StyleModifierProps) =>
+    getLinkAnimationColor({ isColorBlack, isColorWhite }),
   baseStyles: ({ baseStyles }: StyleModifierProps) => baseStyles || {},
-  color: ({ isColorWhite }: StyleModifierProps) =>
-    colors[getColor(isColorWhite)],
+  color: ({ isTextColorWhite }: StyleModifierProps) =>
+    TextColors[getTextColor(isTextColorWhite)],
   element: ({ element }: StyleModifierProps) => element || {},
   sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
   child: ({ subElement }: StyleModifierProps) => subElement || {},

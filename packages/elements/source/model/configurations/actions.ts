@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { createElement } from './_base';
+import { createElement, createLinkAnimationElement } from './_base';
 import { type ElementProps } from '../_types';
 
 export const outline = (props: ElementProps) =>
@@ -21,13 +21,25 @@ export const primaryWhite = (props: ElementProps) =>
   createElement(props, Styles.element.action.primary.white);
 
 export const secondary = (props: ElementProps) =>
-  createElement(props, Styles.element.action.secondary.normal);
+  createLinkAnimationElement(
+    { ...props, isColorRed: true },
+    Styles.element.action.secondary.normal,
+  );
 
 export const secondaryLarge = (props: ElementProps) =>
-  createElement(props, Styles.element.action.secondary.large);
+  createLinkAnimationElement(
+    { ...props, isColorRed: true },
+    Styles.element.action.secondary.large,
+  );
 
 export const secondaryWhite = (props: ElementProps) =>
-  createElement(props, Styles.element.action.secondary.white);
+  createLinkAnimationElement(
+    { ...props, isColorRed: true },
+    Styles.element.action.secondary.white,
+  );
 
 export const secondaryGold = (props: ElementProps) =>
-  createElement(props, Styles.element.action.secondary.gold);
+  createLinkAnimationElement(
+    { ...props, isColorRed: true },
+    Styles.element.action.secondary.gold,
+  );

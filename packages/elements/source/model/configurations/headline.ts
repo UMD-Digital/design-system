@@ -1,39 +1,30 @@
 import * as Utility from 'utilities';
-import { modifiers } from '../_modifiers/style';
-import { createElementBuild } from './_base';
-import { type BuilderConfig, type ElementProps } from '../_types';
+import { createFontStyleElement } from './_base';
+import { type ElementProps } from '../_types';
 
-const headlineConfig: BuilderConfig = {
-  styleModifiers: (props) =>
-    Utility.styles.combineStyles(
-      modifiers.animationLink(props),
-      modifiers.baseStyles(props),
-      modifiers.textColor(props),
-      modifiers.element(props),
-      modifiers.elementChild(props),
-      modifiers.elementSiblingAfter(props),
-    ),
-  elementModifiers: [
-    (element) => Utility.markup.modify.animationLinkSpan({ element }),
-  ],
-};
-
-export const createHeadline = (
+type FontStyleFunction = (
   props: ElementProps,
-  getFontFn: () => { className: string; fontStyles: Record<string, any> },
-) => {
-  const { className, fontStyles } = getFontFn();
-  return createElementBuild(
-    { ...props, className, baseStyles: fontStyles },
-    headlineConfig,
-  );
+) => ReturnType<typeof createFontStyleElement>;
+type FontGetter = typeof Utility.styles.fonts.getSansLargeFont;
+
+const createFontStyle = (getFontStyle: FontGetter): FontStyleFunction => {
+  return (props: ElementProps) =>
+    createFontStyleElement(
+      {
+        ...props,
+        isColorBlack: !props.isThemeDark,
+        isColorWhite: props.isThemeDark,
+      },
+      getFontStyle,
+    );
 };
 
-export const sansLarge = (props: ElementProps) =>
-  createHeadline(props, Utility.styles.fonts.getSansLargeFont);
+export const sansLarge = createFontStyle(Utility.styles.fonts.getSansLargeFont);
 
-export const sansMedium = (props: ElementProps) =>
-  createHeadline(props, Utility.styles.fonts.getSansMediumFont);
+export const sansMedium = createFontStyle(
+  Utility.styles.fonts.getSansMediumFont,
+);
 
-export const campaignLarge = (props: ElementProps) =>
-  createHeadline(props, Utility.styles.fonts.getCampaignLargeFont);
+export const campaignLarge = createFontStyle(
+  Utility.styles.fonts.getCampaignLargeFont,
+);

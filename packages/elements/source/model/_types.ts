@@ -1,5 +1,13 @@
 // Base Types
 
+interface ElementColors {
+  isTextColorWhite?: boolean;
+  isTextColorBlack?: boolean;
+  isColorWhite?: boolean;
+  isColorBlack?: boolean;
+  isColorRed?: boolean;
+}
+
 export interface ElementStyles {
   element?: Record<string, any>;
   siblingAfter?: Record<string, any>;
@@ -11,7 +19,7 @@ export interface StyleOptions {
   baseStyles?: Record<string, any>;
 }
 
-export interface ElementProps {
+export interface ElementProps extends ElementColors {
   element: HTMLElement;
   elementStyles?: ElementStyles;
   isThemeDark?: boolean;
@@ -21,13 +29,11 @@ export interface ElementProps {
 
 export type ConfigurationProps = ElementProps & StyleOptions;
 
-type ConfigurationStyles = ElementStyles & StyleOptions;
+type ConfigurationStyles = ElementStyles & StyleOptions & ElementColors;
 
 // Modifer Types
 
-export interface StyleModifierProps extends ConfigurationStyles {
-  isColorWhite?: boolean;
-}
+export interface StyleModifierProps extends ConfigurationStyles {}
 
 // Builder Types
 

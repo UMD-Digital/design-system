@@ -21,6 +21,25 @@ export const animationLinkSpan = ({
   }
 };
 
+export const wrapTextNodeInSpan = (
+  element: HTMLElement | HTMLAnchorElement,
+) => {
+  const link =
+    element instanceof HTMLAnchorElement ? element : element.querySelector('a');
+  if (!link) return;
+
+  const textNodes = Array.from(link.childNodes).filter(
+    (node) => node.nodeType === Node.TEXT_NODE,
+  );
+  textNodes.forEach((node) => {
+    const span = document.createElement('span');
+    span.textContent = node.textContent?.trim() || '';
+    node.replaceWith(span);
+  });
+
+  return link;
+};
+
 export const truncateText = ({
   text,
   maxTextSize,

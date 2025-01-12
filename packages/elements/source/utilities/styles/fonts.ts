@@ -31,8 +31,16 @@ export const SansFontOptions = (size: SansFontSize) => {
   return { className, fontStyles };
 };
 
+export const getSansMaximumFont = () => SansFontOptions(SansFontSize.Maximum);
+export const getSansLargestFont = () => SansFontOptions(SansFontSize.Largest);
+export const getSansExtraLargeFont = () =>
+  SansFontOptions(SansFontSize.ExtraLarge);
+export const getSansLargerFont = () => SansFontOptions(SansFontSize.Larger);
 export const getSansLargeFont = () => SansFontOptions(SansFontSize.Large);
 export const getSansMediumFont = () => SansFontOptions(SansFontSize.Medium);
+export const getSansSmallFont = () => SansFontOptions(SansFontSize.Small);
+export const getSansSmallerFont = () => SansFontOptions(SansFontSize.Smaller);
+export const getSansMinFont = () => SansFontOptions(SansFontSize.Min);
 
 export const getCampaignLargeFont = () =>
   CampaignFontOptions(CampaignFontSize.Large);

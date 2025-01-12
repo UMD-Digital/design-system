@@ -1,3 +1,4 @@
+import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 
@@ -113,30 +114,80 @@ export const secondary = (props: ElementProps) =>
   createElement('secondary', props);
 export const outline = (props: ElementProps) => createElement('outline', props);
 
-export function options(
+const plainTextStyles = {
+  element: {
+    marginTop: `${token.spacing.min}`,
+  },
+};
+
+const plainTextSecondaryStyles = {
+  element: {
+    marginTop: `${token.spacing.min}`,
+    paddingLeft: `${token.spacing.lg}`,
+  },
+};
+
+export const options = (
   props: ElementProps & {
     isTypePrimary?: boolean;
     isTypeSecondary?: boolean;
     isTypeOutline?: boolean;
     plainText?: HTMLElement | null;
   },
-) {
+) => {
+  const {
+    plainText,
+    isThemeDark,
+    isTypePrimary,
+    isTypeSecondary,
+    isTypeOutline,
+  } = props;
   const container = document.createElement('div');
   let styles = '';
 
-  if (props.isTypePrimary) {
+  if (isTypePrimary) {
     const result = primary(props);
     container.appendChild(result.element);
     styles = result.styles;
-  } else if (props.isTypeSecondary) {
+  }
+
+  if (isTypeSecondary) {
     const result = secondary(props);
     container.appendChild(result.element);
     styles = result.styles;
-  } else if (props.isTypeOutline) {
+  }
+
+  if (isTypeOutline) {
     const result = outline(props);
     container.appendChild(result.element);
     styles = result.styles;
   }
 
+  if (plainText) {
+    const test = ElementModel.layout.gridStacked({
+      element: document.createElement('div'),
+      elementStyles: isTypeSecondary
+        ? {}
+        : { element: { alignItems: 'center' } },
+    });
+
+    const plainTextElement = ElementModel.headline.sansMin({
+      element: plainText,
+      isThemeDark,
+      elementStyles: isTypeSecondary
+        ? plainTextSecondaryStyles
+        : plainTextStyles,
+    });
+
+    test.element.innerHTML = container.innerHTML;
+    test.element.appendChild(plainTextElement.element);
+    container.innerHTML = '';
+
+    container.appendChild(test.element);
+
+    styles += test.styles;
+    styles += plainTextElement.styles;
+  }
+
   return { element: container, styles };
-}
+};

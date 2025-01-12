@@ -64,6 +64,7 @@ const text = {
 const deprecated = {
   body: createSlotFactory(SlotNames.deprecated.body),
   wrappingText: createSlotFactory(SlotNames.deprecated.wrappingText),
+  plainText: createSlotFactory(SlotNames.deprecated.plainText),
 } as const;
 
 export default {

@@ -29,6 +29,7 @@ const content = {
 const deprecated = {
   body: 'body',
   wrappingText: 'wrapping-text',
+  plainText: 'plain-text',
 };
 
 const eyebrows = {
@@ -76,6 +77,7 @@ const NEEDS_CLEANUP = {
   HIGHLIGHT: 'highlight',
   IMAGES: 'images',
   PATHS: 'paths',
+
   PRIMARY_SLIDE_CONTENT: 'primary-slide-content',
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',
   PRIMARY_SLIDE_SECONDARY_LINKS: 'primary-slide-secondary-links',

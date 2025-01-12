@@ -70,7 +70,7 @@ export const white = create.jssObject({
   className: `${classNamePrefix}-white`,
 
   '& svg': {
-    ...iconBaseLarge,
+    ...iconBase,
     fill: color.redDark,
   },
 });

@@ -8,6 +8,10 @@ export const base = {
   position: 'relative',
   textAlign: 'left',
   maxWidth: '380px',
+
+  '&:has(svg), &:has(img)': {
+    paddingLeft: `${spacing.lg}`,
+  },
 };
 
 export const baseLarge = {
@@ -17,6 +21,12 @@ export const baseLarge = {
     ...elements.interativeMedium,
     padding: `${spacing.sm} ${spacing.lg}`,
   },
+
+  '&:has(svg), &:has(img)': {
+    [`@media (${media.queries.tablet.min})`]: {
+      paddingLeft: `calc(${spacing.xl})`,
+    },
+  },
 };
 
 export const iconBase = {
@@ -25,9 +35,10 @@ export const iconBase = {
   fill: color.red,
   transition: 'fill 0.5s ease-in-out',
   zIndex: '99',
-  marginRight: ' 4px',
-  marginTop: '-3px',
-  display: 'inline-block',
+  position: 'absolute',
+  left: `${spacing.xs}`,
+  top: '50%',
+  transform: 'translateY(-50%)',
 };
 
 export const iconBaseLarge = {
@@ -36,6 +47,6 @@ export const iconBaseLarge = {
   [`@media (${media.queries.tablet.min})`]: {
     height: '17px',
     width: '17px',
-    marginRight: '5px',
+    left: `${spacing.sm}`,
   },
 };

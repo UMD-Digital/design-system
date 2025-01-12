@@ -1,5 +1,5 @@
 import * as Utility from 'utilities';
-import { createFontStyleElement } from './_base';
+import { createFontStyleElement } from './constructor';
 import { type ElementProps } from '../_types';
 
 type FontStyleFunction = (
@@ -24,6 +24,8 @@ export const sansLarge = createFontStyle(Utility.styles.fonts.getSansLargeFont);
 export const sansMedium = createFontStyle(
   Utility.styles.fonts.getSansMediumFont,
 );
+
+export const sansMin = createFontStyle(Utility.styles.fonts.getSansMinFont);
 
 export const campaignLarge = createFontStyle(
   Utility.styles.fonts.getCampaignLargeFont,

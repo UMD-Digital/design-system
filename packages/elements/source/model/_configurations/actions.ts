@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { createElement, createLinkAnimationElement } from './_base';
+import { createElement, createLinkAnimationElement } from './constructor';
 import { type ElementProps } from '../_types';
 
 export const outline = (props: ElementProps) =>

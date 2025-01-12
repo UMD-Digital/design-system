@@ -1,1 +1,1 @@
-export * as ElementModel from './configurations';
+export * as ElementModel from './_configurations';

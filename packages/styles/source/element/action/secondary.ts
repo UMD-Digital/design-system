@@ -20,6 +20,10 @@ export const normal = create.jssObject({
 
   '& svg': {
     ...iconBase,
+
+    '& path': {
+      fill: color.red,
+    },
   },
 });
 
@@ -35,6 +39,10 @@ export const large = create.jssObject({
 
   '& svg': {
     ...iconBaseLarge,
+
+    '& path': {
+      fill: color.red,
+    },
   },
 });
 

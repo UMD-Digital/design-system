@@ -87,7 +87,7 @@ function createElement(type: ElementType, props: ElementProps) {
     primary: {
       default: ElementModel.actions.primary,
       large: ElementModel.actions.primaryLarge,
-      gold: ElementModel.actions.primaryWhite,
+      dark: ElementModel.actions.primaryWhite,
     },
     secondary: {
       default: ElementModel.actions.secondary,

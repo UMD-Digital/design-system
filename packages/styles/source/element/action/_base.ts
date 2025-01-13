@@ -16,6 +16,7 @@ export const base = {
 
 export const baseLarge = {
   ...base,
+  ...elements.interativeMedium,
 
   [`@media (${media.queries.tablet.min})`]: {
     ...elements.interativeMedium,

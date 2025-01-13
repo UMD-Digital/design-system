@@ -1,22 +1,15 @@
-import { color } from '../token';
+import { white, red } from '../element/text/link';
 import { create } from '../utilities';
 
 export const linksDark = {
   '& a': {
-    position: 'relative',
-    backgroundImage: 'linear-gradient(#ffffff, #ffffff)',
-    backgroundPosition: 'left calc(100% - 1px)',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 1px',
-    transition: 'color 0.5s, background-image 0.5s, background-position 0.5s',
-    color: color.white,
+    ...white,
+  },
+};
 
-    '&:hover, &:focus': {
-      backgroundImage: `linear-gradient(${color.gold}, ${color.gold})`,
-      backgroundPosition: 'left calc(100%)',
-      textDecoration: 'none !important',
-      color: `${color.white} !important`,
-    },
+export const linksWhite = {
+  '& a': {
+    ...red,
   },
 };
 

@@ -11,6 +11,8 @@ import { quote } from './quote';
 const classNamePrefix = 'umd-text-rich';
 
 const simpleBase = {
+  ...animation.nestedElements.linksWhite,
+
   '& > *': {
     ...sans.small,
     marginTop: spacing.md,
@@ -31,16 +33,6 @@ const simpleBase = {
 
   '& u': {
     textDecoration: 'underline',
-  },
-
-  '& a': {
-    color: 'currentColor',
-    textDecoration: 'underline',
-    transition: 'color 0.5s',
-
-    '&:hover, &:focus': {
-      color: color.red,
-    },
   },
 };
 

@@ -1,4 +1,4 @@
-import { animation } from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { StyleModifierProps } from '../_types';
 
@@ -23,9 +23,14 @@ const getLinkAnimationColor = ({
   isColorWhite?: boolean;
   isColorBlack?: boolean;
 }) => {
-  if (isColorWhite) return animation.line.slideUnderWhite;
-  if (isColorBlack) return animation.line.slideUnderBlack;
-  return animation.line.slideUnderRed;
+  if (isColorWhite) return Styles.animation.line.slideUnderWhite;
+  if (isColorBlack) return Styles.animation.line.slideUnderBlack;
+  return Styles.animation.line.slideUnderRed;
+};
+
+const getLinkColor = ({ isColorWhite }: { isColorWhite?: boolean }) => {
+  if (isColorWhite) return Styles.element.text.link.white;
+  return Styles.element.text.link.red;
 };
 
 const createSelector = (className: string, type: StyleType) => {
@@ -64,6 +69,8 @@ const styleGetters = {
   element: ({ element }: StyleModifierProps) => element || {},
   sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
   child: ({ subElement }: StyleModifierProps) => subElement || {},
+  childLink: ({ isColorWhite }: StyleModifierProps) =>
+    getLinkColor({ isColorWhite }),
 };
 
 export const modifiers = {
@@ -76,4 +83,5 @@ export const modifiers = {
     styleGetters.sibling,
   ),
   elementChild: createModifier(StyleType.Child, styleGetters.child),
+  childLink: createModifier(StyleType.Element, styleGetters.childLink),
 };

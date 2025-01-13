@@ -1,5 +1,5 @@
 import { createElementBuild } from './build';
-import { defaultConfig, animationLineConfig } from './options';
+import { defaultConfig, animationLineConfig, textConfig } from './options';
 import { type ElementProps, type BuilderConfig } from '../../_types';
 
 interface styleObject {
@@ -34,7 +34,7 @@ export const createLinkAnimationElement = (
   stylesObj: styleObject,
 ) => elementWithConfig(props, stylesObj, animationLineConfig);
 
-export const createFontStyleElement = (
+export const createHeadlineElement = (
   props: ElementProps,
   getFontFn: () => { className: string; fontStyles: Record<string, any> },
 ) => {
@@ -43,5 +43,17 @@ export const createFontStyleElement = (
   return createElementBuild(
     { ...props, className, baseStyles: fontStyles },
     animationLineConfig,
+  );
+};
+
+export const createTextElement = (
+  props: ElementProps,
+  getFontFn: () => { className: string; fontStyles: Record<string, any> },
+) => {
+  const { className, fontStyles } = getFontFn();
+
+  return createElementBuild(
+    { ...props, className, baseStyles: fontStyles },
+    textConfig,
   );
 };

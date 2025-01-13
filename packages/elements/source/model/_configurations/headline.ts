@@ -1,32 +1,47 @@
 import * as Utility from 'utilities';
-import { createFontStyleElement } from './constructor';
+import { createHeadlineElement, createTextElement } from './constructor';
 import { type ElementProps } from '../_types';
 
 type FontStyleFunction = (
   props: ElementProps,
-) => ReturnType<typeof createFontStyleElement>;
+) => ReturnType<typeof createHeadlineElement>;
 type FontGetter = typeof Utility.styles.fonts.getSansLargeFont;
 
-const createFontStyle = (getFontStyle: FontGetter): FontStyleFunction => {
-  return (props: ElementProps) =>
-    createFontStyleElement(
+const createElement = (
+  getFontStyle: FontGetter,
+  isTypeHeadline = true,
+): FontStyleFunction => {
+  return (props: ElementProps) => {
+    const fontProps = {
+      ...props,
+      isColorBlack: !props.isThemeDark,
+      isColorWhite: props.isThemeDark,
+    };
+
+    if (isTypeHeadline) {
+      return createTextElement(
+        {
+          ...fontProps,
+        },
+        getFontStyle,
+      );
+    }
+
+    return createHeadlineElement(
       {
-        ...props,
-        isColorBlack: !props.isThemeDark,
-        isColorWhite: props.isThemeDark,
+        ...fontProps,
       },
       getFontStyle,
     );
+  };
 };
 
-export const sansLarge = createFontStyle(Utility.styles.fonts.getSansLargeFont);
+export const sansLarge = createElement(Utility.styles.fonts.getSansLargeFont);
 
-export const sansMedium = createFontStyle(
-  Utility.styles.fonts.getSansMediumFont,
-);
+export const sansMedium = createElement(Utility.styles.fonts.getSansMediumFont);
 
-export const sansMin = createFontStyle(Utility.styles.fonts.getSansMinFont);
+export const sansMin = createElement(Utility.styles.fonts.getSansMinFont, true);
 
-export const campaignLarge = createFontStyle(
+export const campaignLarge = createElement(
   Utility.styles.fonts.getCampaignLargeFont,
 );

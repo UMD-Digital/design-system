@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 
@@ -8,6 +8,13 @@ interface ElementProps {
   isThemeGold?: boolean;
   isSizeLarge?: boolean;
   elementStyles?: Record<string, any>;
+}
+
+interface OptionProps extends ElementProps {
+  isTypePrimary?: boolean;
+  isTypeSecondary?: boolean;
+  isTypeOutline?: boolean;
+  plainText?: HTMLElement | null;
 }
 
 type ElementType = 'primary' | 'secondary' | 'outline';
@@ -109,39 +116,55 @@ function createElement(type: ElementType, props: ElementProps) {
   return createElementWithStyle(typeActions.default, props);
 }
 
+const createPlainTextContainer = (props: OptionProps) => {
+  const { isTypeSecondary } = props;
+
+  return ElementModel.layout.gridStacked({
+    element: document.createElement('div'),
+    elementStyles: isTypeSecondary ? {} : { element: { alignItems: 'center' } },
+  });
+};
+
+const createPlainText = (props: OptionProps) => {
+  const { isThemeDark, isTypeSecondary, plainText } = props;
+  const plainTextStyles = {
+    element: {
+      ...(isThemeDark
+        ? Styles.element.text.link.white
+        : Styles.element.text.link.red),
+      marginTop: `${Styles.token.spacing.min}`,
+    },
+  };
+
+  const plainTextSecondaryStyles = {
+    element: {
+      ...(isThemeDark
+        ? Styles.element.text.link.white
+        : Styles.element.text.link.red),
+      marginTop: `${Styles.token.spacing.min}`,
+      marginLeft: `${Styles.token.spacing.lg}`,
+      alignSelf: 'baseline',
+    },
+  };
+
+  if (plainText) {
+    return ElementModel.headline.sansMin({
+      element: plainText,
+      isThemeDark,
+      elementStyles: isTypeSecondary
+        ? plainTextSecondaryStyles
+        : plainTextStyles,
+    });
+  }
+};
+
 export const primary = (props: ElementProps) => createElement('primary', props);
 export const secondary = (props: ElementProps) =>
   createElement('secondary', props);
 export const outline = (props: ElementProps) => createElement('outline', props);
 
-const plainTextStyles = {
-  element: {
-    marginTop: `${token.spacing.min}`,
-  },
-};
-
-const plainTextSecondaryStyles = {
-  element: {
-    marginTop: `${token.spacing.min}`,
-    paddingLeft: `${token.spacing.lg}`,
-  },
-};
-
-export const options = (
-  props: ElementProps & {
-    isTypePrimary?: boolean;
-    isTypeSecondary?: boolean;
-    isTypeOutline?: boolean;
-    plainText?: HTMLElement | null;
-  },
-) => {
-  const {
-    plainText,
-    isThemeDark,
-    isTypePrimary,
-    isTypeSecondary,
-    isTypeOutline,
-  } = props;
+export const options = (props: OptionProps) => {
+  const { plainText, isTypePrimary, isTypeSecondary, isTypeOutline } = props;
   const container = document.createElement('div');
   let styles = '';
 
@@ -164,28 +187,17 @@ export const options = (
   }
 
   if (plainText) {
-    const test = ElementModel.layout.gridStacked({
-      element: document.createElement('div'),
-      elementStyles: isTypeSecondary
-        ? {}
-        : { element: { alignItems: 'center' } },
-    });
+    const plainTextContainer = createPlainTextContainer(props);
+    const plainTextElement = createPlainText(props);
+    if (!plainTextElement) return { element: container, styles };
 
-    const plainTextElement = ElementModel.headline.sansMin({
-      element: plainText,
-      isThemeDark,
-      elementStyles: isTypeSecondary
-        ? plainTextSecondaryStyles
-        : plainTextStyles,
-    });
-
-    test.element.innerHTML = container.innerHTML;
-    test.element.appendChild(plainTextElement.element);
+    plainTextContainer.element.innerHTML = container.innerHTML;
+    plainTextContainer.element.appendChild(plainTextElement.element);
     container.innerHTML = '';
 
-    container.appendChild(test.element);
+    container.appendChild(plainTextContainer.element);
 
-    styles += test.styles;
+    styles += plainTextContainer.styles;
     styles += plainTextElement.styles;
   }
 

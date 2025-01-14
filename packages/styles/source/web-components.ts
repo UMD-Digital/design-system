@@ -72,12 +72,26 @@ const elements = {
       },
     },
   }),
-  ...['article', 'card', 'card-overlay', 'event'].reduce(
+  ...['article', 'card', 'card-overlay', 'event', 'person'].reduce(
     (acc, type) => ({
       ...acc,
       ...createElementStyles(`umd-element-${type}`, {
         custom: {
           [`umd-element-${type}[display="list"] + umd-element-${type}[display="list"]`]:
+            {
+              marginTop: spacing.md,
+            },
+        },
+      }),
+    }),
+    {},
+  ),
+  ...['person'].reduce(
+    (acc, type) => ({
+      ...acc,
+      ...createElementStyles(`umd-element-${type}`, {
+        custom: {
+          [`umd-element-${type}[display="tabular"] + umd-element-${type}[display="tabular"]`]:
             {
               marginTop: spacing.md,
             },

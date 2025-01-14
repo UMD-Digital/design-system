@@ -1,4 +1,8 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
+import {
+  token,
+  typography,
+  element,
+} from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import TextLockupSmall, { TypeTextLockupSmall } from './small';
 
@@ -64,6 +68,12 @@ const DateStyles = `
 
 // prettier-ignore
 const TextStyles = `
+  ${convertJSSObjectToStyles({
+    styleObj: {
+      [`${OverwriteText} *`]: element.text.rich.advancedDark,
+    },
+  })}
+
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     ${convertJSSObjectToStyles({
       styleObj: {

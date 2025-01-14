@@ -43,6 +43,7 @@ export const full = create.jssObject({
 // umd-layout-space-horizontal-larger
 export const max = create.jssObject({
   ...lockBase,
+  maxWidth: `${spacing.maxWidth.max}`,
 
   className: [
     `${classNamePrefix}-larger`,

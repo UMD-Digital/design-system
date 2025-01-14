@@ -71,6 +71,6 @@ export const white = create.jssObject({
 
   '& svg': {
     ...iconBase,
-    fill: color.redDark,
+    fill: color.red,
   },
 });

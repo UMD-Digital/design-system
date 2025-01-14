@@ -1,4 +1,4 @@
-import { color, media } from '../../token';
+import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
 import { base, baseLarge, iconBase, iconBaseLarge } from './_base';
 
@@ -10,6 +10,31 @@ const secondaryBase = {
   padding: 0,
   transition:
     'background 0.5s ease-in-out, border 0.5s ease-in-out, color 0.5s ease-in-out',
+
+  '&:has(svg), &:has(img)': {
+    paddingLeft: `${spacing.lg}`,
+  },
+};
+
+const secondaryLargeBase = {
+  ...baseLarge,
+
+  '&:has(svg), &:has(img)': {
+    paddingLeft: `${spacing.lg}`,
+  },
+};
+
+const secondaryBaseIcon = {
+  ...iconBase,
+  left: `${spacing.xs}`,
+};
+
+const secondaryBaseLargeIcon = {
+  ...iconBaseLarge,
+
+  [`@media (${media.queries.tablet.min})`]: {
+    left: `${spacing.xs}`,
+  },
 };
 
 // umd-action-secondary
@@ -19,7 +44,7 @@ export const normal = create.jssObject({
   className: `${classNamePrefix}`,
 
   '& svg': {
-    ...iconBase,
+    ...secondaryBaseIcon,
 
     '& path': {
       fill: color.red,
@@ -30,7 +55,7 @@ export const normal = create.jssObject({
 // umd-action-secondary-large
 export const large = create.jssObject({
   ...baseLarge,
-  ...secondaryBase,
+  ...secondaryLargeBase,
   className: `${classNamePrefix}-large`,
 
   [`@media (${media.queries.tablet.min})`]: {
@@ -38,7 +63,7 @@ export const large = create.jssObject({
   },
 
   '& svg': {
-    ...iconBaseLarge,
+    ...secondaryBaseLargeIcon,
 
     '& path': {
       fill: color.red,
@@ -54,7 +79,7 @@ export const white = create.jssObject({
   className: `${classNamePrefix}-white`,
 
   '& svg': {
-    ...iconBase,
+    ...secondaryBaseIcon,
   },
 });
 
@@ -66,7 +91,7 @@ export const gold = create.jssObject({
   className: `${classNamePrefix}-gold`,
 
   '& svg': {
-    ...iconBase,
+    ...secondaryBaseIcon,
     fill: color.gold,
   },
 });

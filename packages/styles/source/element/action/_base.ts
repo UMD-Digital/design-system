@@ -10,7 +10,7 @@ export const base = {
   maxWidth: '380px',
 
   '&:has(svg), &:has(img)': {
-    paddingLeft: `${spacing['3xl']}`,
+    paddingLeft: `${spacing['2xl']}`,
   },
 };
 
@@ -25,7 +25,7 @@ export const baseLarge = {
 
   '&:has(svg), &:has(img)': {
     [`@media (${media.queries.tablet.min})`]: {
-      paddingLeft: `calc(${spacing['4xl']})`,
+      paddingLeft: `57px`,
     },
   },
 };
@@ -37,7 +37,7 @@ export const iconBase = {
   transition: 'fill 0.5s ease-in-out',
   zIndex: '99',
   position: 'absolute',
-  left: `${spacing['lg']}`,
+  left: `calc(${spacing['md']} + 4px)`,
   top: '50%',
   transform: 'translateY(-50%)',
 };
@@ -48,6 +48,6 @@ export const iconBaseLarge = {
   [`@media (${media.queries.tablet.min})`]: {
     height: '17px',
     width: '17px',
-    left: `${spacing['xl']}`,
+    left: `34px`,
   },
 };

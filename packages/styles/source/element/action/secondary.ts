@@ -12,7 +12,7 @@ const secondaryBase = {
     'background 0.5s ease-in-out, border 0.5s ease-in-out, color 0.5s ease-in-out',
 
   '&:has(svg), &:has(img)': {
-    paddingLeft: `${spacing.lg}`,
+    paddingLeft: `calc(${spacing.md} - 4px)`,
   },
 };
 
@@ -20,20 +20,20 @@ const secondaryLargeBase = {
   ...baseLarge,
 
   '&:has(svg), &:has(img)': {
-    paddingLeft: `${spacing.lg}`,
+    paddingLeft: `calc(${spacing.md} - 4px)`,
   },
 };
 
 const secondaryBaseIcon = {
   ...iconBase,
-  left: `${spacing.xs}`,
+  left: `0`,
 };
 
 const secondaryBaseLargeIcon = {
   ...iconBaseLarge,
 
   [`@media (${media.queries.tablet.min})`]: {
-    left: `${spacing.xs}`,
+    left: `0`,
   },
 };
 

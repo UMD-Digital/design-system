@@ -49,6 +49,10 @@ const ButtonStyles = `
     right: ${token.spacing.lg};
   }
 
+  .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} rect {
+    fill: ${token.color.black};
+  }
+
   @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
     .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} {
       top: ${token.spacing.sm};
@@ -90,7 +94,6 @@ const STYLES_ALERT_PAGE_ELEMENT = `
       padding-right: ${token.spacing.lg};
     }
   }
-
 
   ${IconStyles}
   ${ButtonStyles}

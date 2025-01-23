@@ -54,9 +54,8 @@ const headlineStyles = {
   },
 };
 
-const richTextStyles = {
+const richTextStyles: Record<string, any> = {
   element: {
-    color: token.color.gray.dark,
     fontWeight: 500,
   },
   siblingAfter: {
@@ -65,7 +64,7 @@ const richTextStyles = {
 };
 
 export const CreateAlertText = (props: TypeAlertTextProps) => {
-  const { headline, text, actions } = props;
+  const { headline, text, actions, isThemeDark } = props;
 
   const wrapper = document.createElement('div');
   let styles = STYLES_ALERT_TEXT;
@@ -82,6 +81,10 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   }
 
   if (text) {
+    if (!isThemeDark) {
+      richTextStyles.element.color = token.color.gray.dark;
+    }
+
     const textModel = ElementModel.richText.simple({
       ...props,
       elementStyles: richTextStyles,

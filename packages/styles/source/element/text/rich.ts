@@ -10,6 +10,15 @@ import { quote } from './quote';
 // Consistent naming
 const classNamePrefix = 'umd-text-rich';
 
+const themeDarkColors = {
+  ...animation.nestedElements.linksDark,
+  color: color.white,
+
+  '& *': {
+    color: color.white,
+  },
+};
+
 const simpleBase = {
   ...animation.nestedElements.linksWhite,
 
@@ -82,6 +91,13 @@ export const simple = create.jssObject({
   ...simpleBase,
 });
 
+// umd-text-rich-simple-dark
+export const simpleDark = create.jssObject({
+  ...simpleBase,
+  ...themeDarkColors,
+  className: `${classNamePrefix}-simple-dark`,
+});
+
 // umd-text-rich-simple-large
 export const simpleLarge = create.jssObject({
   ...simpleBase,
@@ -95,6 +111,18 @@ export const simpleLarge = create.jssObject({
     /** @deprecated Use 'umd-text-rich-simple-large' instead */
     `umd-text-simple-large`,
   ],
+});
+
+// umd-text-rich-simple-large-dark
+export const simpleLargeDark = create.jssObject({
+  ...simpleBase,
+  ...themeDarkColors,
+
+  '& > *': {
+    ...sans.medium,
+  },
+
+  className: `${classNamePrefix}-simple-large-dark`,
 });
 
 // umd-text-rich-advanced
@@ -133,13 +161,7 @@ export const advanced = create.jssObject({
 // umd-text-rich-advanced-dark
 export const advancedDark = create.jssObject({
   ...advanced,
-  ...animation.nestedElements.linksDark,
-
-  color: color.white,
-
-  '& *': {
-    color: color.white,
-  },
+  ...themeDarkColors,
 
   className: [
     `${classNamePrefix}-advanced-dark`,

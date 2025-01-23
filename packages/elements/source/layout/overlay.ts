@@ -6,8 +6,6 @@ export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
   image?: HTMLImageElement | HTMLAnchorElement | null;
 };
 
-const { spacing } = token;
-
 const SMALL = 350;
 
 const ELEMENT_NAME = 'umd-block-overlay-image';

@@ -1,6 +1,7 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { BlockOverlay as LayoutBlockOverlay } from 'layout';
 import { TextLockupSmall } from 'macros';
+import * as Utility from 'utilities';
 
 type TypeEventPromoProps = {
   image: HTMLImageElement | null;
@@ -11,10 +12,15 @@ type TypeEventPromoProps = {
   actions?: HTMLElement | null;
 };
 
+const { convertJSSObjectToStyles } = Utility.styles;
+const { token, element } = Styles;
+
 const ELEMENT_NAME = 'umd-event-promo';
 const ELEMENT_EVENT_PROMO_CONTAINER = 'event-promo-container';
 const ELEMENT_EVENT_PROMO_META_WRAPPER = 'event-promo-meta-wrapper';
 const ELEMENT_EVENT_PROMO_SIGN_WRAPPER = 'event-promo-sign-wrapper';
+
+const OVERRIDE_RICH_TEXT = `.${ELEMENT_EVENT_PROMO_CONTAINER} .${TextLockupSmall.Elements.richText}`;
 
 // prettier-ignore
 const DateSign = `
@@ -51,6 +57,12 @@ const STYLES_EVENT_PROMO_ELEMENT = `
     height: 100%;
     max-width: ${token.spacing.maxWidth.smallest};
   }
+
+  ${convertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERRIDE_RICH_TEXT}`]: element.text.rich.advancedDark,
+    },
+  })}
 
   ${LayoutBlockOverlay.Styles}
   ${DetailsMeta}

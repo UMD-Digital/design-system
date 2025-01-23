@@ -19,7 +19,7 @@ const createElement = (
     };
 
     if (isTypeHeadline) {
-      return createTextElement(
+      return createHeadlineElement(
         {
           ...fontProps,
         },
@@ -27,7 +27,7 @@ const createElement = (
       );
     }
 
-    return createHeadlineElement(
+    return createTextElement(
       {
         ...fontProps,
       },

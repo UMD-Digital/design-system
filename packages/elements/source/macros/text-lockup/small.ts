@@ -1,5 +1,6 @@
 import {
   animation,
+  element,
   layout,
   typography,
   token,
@@ -54,7 +55,7 @@ const DarkThemeStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${IS_THEME_DARK_RICH_TEXT}`]: animation.nestedElements.linksDark,
+      [`${IS_THEME_DARK_RICH_TEXT}`]: element.text.rich.simpleDark,
     },
   })}
 `
@@ -131,26 +132,9 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: typography.sans.small,
+      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT}`]: element.text.rich.simple,
     },
   })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} *`]: typography.sans.small,
-    },
-  })}
-
-  .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a {
-    text-decoration: underline;
-    transition: color 0.3s ease-in-out;
-  }
-
-  .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a:hover,
-  .${ELEMENT_TEXT_LOCKUP_SMALL_RICH_TEXT} a:focus {
-    text-decoration: underline;
-    color: ${token.color.red};
-  }
 `;
 
 // prettier-ignore

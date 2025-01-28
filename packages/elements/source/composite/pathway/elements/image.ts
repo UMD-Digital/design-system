@@ -64,6 +64,7 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE} {
     z-index: 99;
     position: relative;
+    overflow: hidden;
   }
 
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE} .${LayoutImage.Elements.container} {

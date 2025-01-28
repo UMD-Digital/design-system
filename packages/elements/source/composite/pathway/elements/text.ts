@@ -51,6 +51,12 @@ const VarationThemeDark = `
   ${OVERWRITE_THEME_DARK_CONTAINER} * {
     color: ${token.color.white};
   }
+
+  ${convertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleDark,
+    },
+  })}
 `
 
 // prettier-ignore
@@ -65,6 +71,12 @@ const VarationThemeMaryland = `
   ${OVERWRITE_THEME_MARYLAND_CONTAINER} * {
     color: ${token.color.white};
   }
+
+  ${convertJSSObjectToStyles({
+    styleObj: {
+      [`${OVERWRITE_THEME_MARYLAND_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleDark,
+    },
+  })}
 `
 
 // prettier-ignore
@@ -132,13 +144,13 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.advanced,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simple,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: element.text.rich.advanced,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: element.text.rich.simple,
     },
   })}
 

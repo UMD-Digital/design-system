@@ -36,6 +36,8 @@ const baseElements = [
   'hero-minimal',
   'logo',
   'media-inline',
+  'pathway',
+  'pathway-highlight',
   'quote',
   'slider-events',
   'slider-events-feed',
@@ -101,6 +103,14 @@ const elements = {
     {},
   ),
 };
+
+// Footer with specific styling
+const breadcrumb = createElementStyles('umd-element-breadcrumb', {
+  defined: {
+    display: 'block',
+    marginTop: `${spacing.sm}`,
+  },
+});
 
 // Footer with specific styling
 const footer = createElementStyles('umd-element-footer', {
@@ -195,6 +205,7 @@ const socialSharing = createElementStyles(socialSharingTag, {
 
 export default {
   ...elements,
+  ...breadcrumb,
   ...footer,
   ...navigation,
   ...scrollTop,

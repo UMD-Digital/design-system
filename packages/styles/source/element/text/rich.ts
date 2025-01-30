@@ -21,6 +21,7 @@ const themeDarkColors = {
 
 const simpleBase = {
   ...animation.nestedElements.linksWhite,
+  ...sans.small,
 
   '& > *': {
     ...sans.small,
@@ -48,6 +49,10 @@ const simpleBase = {
 const advancedBase = {
   ...simpleBase,
   ...sans.medium,
+
+  '& > *': {
+    ...sans.medium,
+  },
 
   [`& p,
     & ul,
@@ -101,6 +106,7 @@ export const simpleDark = create.jssObject({
 // umd-text-rich-simple-large
 export const simpleLarge = create.jssObject({
   ...simpleBase,
+  ...sans.medium,
 
   '& > *': {
     ...sans.medium,

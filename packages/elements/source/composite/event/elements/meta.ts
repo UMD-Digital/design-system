@@ -112,7 +112,7 @@ const STYLES_EVENT_META = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_EVENTS_DATE_ROW_TEXT}`]: typography.sans.small,
+      [`.${ELEMENT_EVENTS_DATE_ROW_TEXT}`]: typography.sans.smaller,
     },
   })}
 

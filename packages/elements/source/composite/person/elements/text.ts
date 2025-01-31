@@ -104,6 +104,12 @@ const AssociationStyles = `
   .${ELEMENT_PERSON_ASSOCIATION_CONTAINER} {
     line-height: 1.2em;
     display: block;
+    color: ${token.color.gray.dark};
+  }
+
+  a.${ELEMENT_PERSON_ASSOCIATION_CONTAINER}:hover,
+  a.${ELEMENT_PERSON_ASSOCIATION_CONTAINER}:focus {
+    text-decoration: underline;
   }
 `;
 

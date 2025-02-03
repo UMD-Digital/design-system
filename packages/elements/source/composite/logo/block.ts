@@ -26,13 +26,17 @@ const OVERWRITE_THEME_DARK_ASSET = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_THEME_D
 const OVERWRITE_THEME_DARK_TEXT = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_THEME_DARK} .${ELEMENT_LOGO_BLOCK_TEXT}`;
 
 const OVERWRITE_BORDER_ASSET = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_BORDER} .${ELEMENT_LOGO_BLOCK_ASSET}`;
+const OVERWRITE_THEME_DARK_BORDER_ASSET = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_THEME_DARK}${IS_BORDER} .${ELEMENT_LOGO_BLOCK_ASSET}`;
 
 // prettier-ignore
 const VariantThemeStyles = `
   ${OVERWRITE_THEME_DARK_ASSET} {
     background-color: ${token.color.gray.darker};
-    border: 1px solid ${token.color.gray.dark};
     padding: ${token.spacing.xl};
+  }
+
+  ${OVERWRITE_THEME_DARK_BORDER_ASSET} {
+    border: 1px solid ${token.color.gray.dark};
   }
 
   ${OVERWRITE_THEME_DARK_TEXT},

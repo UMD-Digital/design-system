@@ -123,6 +123,7 @@ export const simpleLarge = create.jssObject({
 export const simpleLargeDark = create.jssObject({
   ...simpleBase,
   ...themeDarkColors,
+  ...sans.medium,
 
   '& > *': {
     ...sans.medium,

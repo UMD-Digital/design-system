@@ -126,6 +126,11 @@ const OverwriteTypeGeneral = `
     color: ${token.color.white};
   }
 
+  ${OVERWRITE_CONTAINER_TYPE_GENERAL} a:hover,
+  ${OVERWRITE_CONTAINER_TYPE_GENERAL} a:focus {
+    color: ${token.color.white} !important;
+  }
+
   ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${ALERT_TITLE} {
     color: ${token.color.gold};
   }

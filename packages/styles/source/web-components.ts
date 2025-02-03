@@ -170,12 +170,15 @@ const sectionIntro = {
     (acc, name) => ({
       ...acc,
       ...createElementStyles(`umd-element-${name}`, {
-        defined: {
-          marginBottom: `${spacing.lg}`,
+        custom: {
+          [`umd-element-section-intro-wide + *, umd-element-section-intro + *`]:
+            {
+              marginTop: spacing.lg,
 
-          [`@media (${media.queries.tablet.min})`]: {
-            marginBottom: `${spacing['2xl']}`,
-          },
+              [`@media (${media.queries.tablet.min})`]: {
+                marginTop: `${spacing['2xl']}`,
+              },
+            },
         },
       }),
     }),

@@ -131,7 +131,8 @@ const LogoColumnStyles = `
   }
 
   .${ELEMENT_HEADER_LOGO} {
-    display: block;
+    display: grid;
+    justify-content: flex-start;
     max-width: 350px;
   }
 

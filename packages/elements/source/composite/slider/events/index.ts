@@ -229,6 +229,7 @@ const IntroStyles = `
 
   .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE} + * {
     margin-top: ${token.spacing.min};
+    display: block;
   }
 
   ${convertJSSObjectToStyles({

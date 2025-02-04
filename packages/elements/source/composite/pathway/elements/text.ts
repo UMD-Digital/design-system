@@ -54,7 +54,7 @@ const VarationThemeDark = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleDark,
+      [`${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleLargeDark,
     },
   })}
 `
@@ -74,7 +74,7 @@ const VarationThemeMaryland = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERWRITE_THEME_MARYLAND_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleDark,
+      [`${OVERWRITE_THEME_MARYLAND_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleLargeDark,
     },
   })}
 `
@@ -144,13 +144,13 @@ const TextStyles = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simple,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleLarge,
     },
   })}
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: element.text.rich.simple,
+      [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: element.text.rich.simpleLarge,
     },
   })}
 

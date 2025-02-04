@@ -1,3 +1,4 @@
+import { debounce } from '../performance';
 import * as AssetIcon from '../assets/icons';
 
 export const gif = ({ container }: { container: HTMLDivElement | null }) => {
@@ -63,6 +64,13 @@ export const gif = ({ container }: { container: HTMLDivElement | null }) => {
     setButtonPlay();
     SizeCanvas({ container });
   });
+
+  window.addEventListener(
+    'resize',
+    debounce(() => {
+      SizeCanvas({ container });
+    }, 50),
+  );
 };
 
 export const imageFromSvg = ({ SVG }: { SVG: string }) => {

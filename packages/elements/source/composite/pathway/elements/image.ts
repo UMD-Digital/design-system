@@ -58,6 +58,44 @@ const ImageSizeStyles = `
 `;
 
 // prettier-ignore
+const GifStyles = `
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1);
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} canvas {
+    display: block;
+    opacity: 0;
+  }
+  
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} button svg {
+    fill: white;
+    width: 24px;
+  }
+`;
+
+// prettier-ignore
 const STYLES_PATHWAY_IMAGE_CONTAINER = `
   ${LayoutImage.Styles}
 
@@ -82,6 +120,7 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
   }
 
   ${ImageSizeStyles}
+  ${GifStyles}
   ${EventSignStyles}
   ${ButtonVideoState.Styles}
 `
@@ -109,6 +148,7 @@ const CreatePathwayImageContainer = (
         showCaption: true,
       });
       wrapper.appendChild(imageContainer);
+      Utility.markup.create.gif({ container: imageContainer });
 
       container.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE);
       container.appendChild(wrapper);

@@ -1,1 +1,1 @@
-export * as tailwing from './tailwing';
+export * as tailwind from './tailwind';

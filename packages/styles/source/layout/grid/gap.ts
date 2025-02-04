@@ -12,6 +12,12 @@ const fourColumnCenteredChild = {
   },
 };
 
+const paragraphOverwrite = {
+  '& > p:not(:last-child)': {
+    marginBottom: 0,
+  },
+};
+
 // umd-layout-grid-gap-two
 export const two = create.jssObject({
   ...base.two,
@@ -19,6 +25,7 @@ export const two = create.jssObject({
   [`@media (${media.queries.large.min})`]: {
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridGap: spacing.lg,
+    ...paragraphOverwrite,
   },
 
   [`@media (${media.queries.desktop.min})`]: {
@@ -38,6 +45,7 @@ export const three = create.jssObject({
 
   [`@media (${media.queries.large.min})`]: {
     gridGap: spacing.lg,
+    ...paragraphOverwrite,
   },
 
   className: [
@@ -54,6 +62,7 @@ export const threeLarge = create.jssObject({
   [`@media (${media.queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
     gridGap: spacing.xl,
+    ...paragraphOverwrite,
   },
 
   className: [
@@ -69,6 +78,7 @@ export const four = create.jssObject({
 
   [`@media (${media.queries.large.min})`]: {
     gridGap: spacing.lg,
+    ...paragraphOverwrite,
   },
 
   className: [
@@ -84,6 +94,7 @@ export const fourCentered = create.jssObject({
 
   [`@media (${media.queries.large.min})`]: {
     gridGap: spacing.lg,
+    ...paragraphOverwrite,
   },
 
   ...fourColumnCenteredChild,
@@ -101,6 +112,7 @@ export const fourLarge = create.jssObject({
 
   [`@media (${media.queries.highDef.min})`]: {
     gridGap: spacing.xl,
+    ...paragraphOverwrite,
   },
 
   className: [

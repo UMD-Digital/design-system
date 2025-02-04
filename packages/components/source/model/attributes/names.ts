@@ -45,6 +45,7 @@ const visual = {
   icon_seal: 'data-visual-icon-seal',
   hidden_days: 'data-days-to-hide',
   open: 'data-visual-open',
+  size: 'data-visual-size',
 };
 
 // Depracted

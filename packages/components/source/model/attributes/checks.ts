@@ -453,14 +453,30 @@ const isVisual = {
       attributeName: AttributeNames.visual.icon,
       attributeValue: AttributesValues.state.TRUE,
     }),
-  sizeNormal: createAttributeCheck(
-    AttributeNames.DISPLAY_SIZE,
-    AttributesValues.size.NORMAL,
-  ),
-  sizeLarge: createAttributeCheck(
-    AttributeNames.DISPLAY_SIZE,
-    AttributesValues.size.LARGE,
-  ),
+  sizeNormal: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.DISPLAY_SIZE,
+      attributeNameNew: AttributeNames.visual.size,
+      attributeValue: AttributesValues.size.NORMAL,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.visual.size,
+      attributeValue: AttributesValues.size.NORMAL,
+    }),
+  sizeLarge: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.DISPLAY_SIZE,
+      attributeNameNew: AttributeNames.visual.size,
+      attributeValue: AttributesValues.size.LARGE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.visual.size,
+      attributeValue: AttributesValues.size.LARGE,
+    }),
   stickyFirst: createAttributeCheck(
     AttributeNames.OPTIONAL_STICKY_FIRST,
     AttributesValues.state.TRUE,

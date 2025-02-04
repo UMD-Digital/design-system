@@ -10,6 +10,7 @@ const createComponent = (element: HTMLElement) => {
   const plainTextSlot = element.querySelector(
     `[slot="plain-text"]`,
   ) as HTMLElement;
+  const textSlot = element.querySelector(`[slot="text"]`) as HTMLElement;
 
   if (!interactiveElement) {
     throw new Error('Component requires a button or link');
@@ -26,9 +27,10 @@ const createComponent = (element: HTMLElement) => {
     elementStyles: Attributes.getValue.styleProps({ element }),
   };
 
-  if (plainTextSlot) {
-    // To Do - Implement Plain Text Slot with Text slot
-    const plainText = Slots.deprecated.plainText({ element });
+  if (plainTextSlot || textSlot) {
+    const plainText =
+      Slots.deprecated.plainText({ element }) ||
+      Slots.text.default({ element });
 
     return callToAction.options({
       ...optionProps,
@@ -41,9 +43,21 @@ const createComponent = (element: HTMLElement) => {
   });
 };
 
+const slots = {
+  text: {
+    allowedElements: ['a'],
+  },
+  plainText: {
+    deprecated:
+      'Use "text" instead. This attribute will be removed in version 2.0.',
+    allowedElements: ['a'],
+  },
+};
+
 const Load = () => {
   const element = Model.createCustomElement({
     tagName,
+    slots,
     createComponent,
   });
 

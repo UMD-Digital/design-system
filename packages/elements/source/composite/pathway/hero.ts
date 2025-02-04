@@ -15,7 +15,6 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
     includesAnimation?: boolean;
   };
 
-const { spacing } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 1000;

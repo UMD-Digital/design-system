@@ -115,6 +115,13 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
     width: 100%;
   }
 
+  .${ELEMENT_PATHWAY_CONTAINER_IMAGE} video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
   .${ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER} > * {
     display: flex;
   }

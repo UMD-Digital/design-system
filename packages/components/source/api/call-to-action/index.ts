@@ -17,9 +17,9 @@ const createComponent = (element: HTMLElement) => {
 
   const optionProps = {
     element: interactiveElement.cloneNode(true) as HTMLElement,
-    isTypeOutline: Attributes.isType.outline({ element }),
-    isTypePrimary: Attributes.isType.primary({ element }),
-    isTypeSecondary: Attributes.isType.secondary({ element }),
+    isTypeOutline: Attributes.isDisplay.outline({ element }),
+    isTypePrimary: Attributes.isDisplay.primary({ element }),
+    isTypeSecondary: Attributes.isDisplay.secondary({ element }),
     isSizeLarge: Attributes.isVisual.sizeLarge({ element }),
     isThemeDark: Attributes.isTheme.dark({ element }),
     isThemeGold: Attributes.isTheme.gold({ element }),

@@ -178,10 +178,46 @@ const isDisplay = {
     AttributeNames.DISPLAY,
     AttributesValues.display.LIST,
   ),
+  outline: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.TYPE,
+      attributeNameNew: AttributeNames.display,
+      attributeValue: AttributesValues.type.OUTLINE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display,
+      attributeValue: AttributesValues.type.OUTLINE,
+    }),
   promo: createAttributeCheck(
     AttributeNames.DISPLAY,
     AttributesValues.display.PROMO,
   ),
+  primary: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.TYPE,
+      attributeNameNew: AttributeNames.display,
+      attributeValue: AttributesValues.type.PRIMARY,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display,
+      attributeValue: AttributesValues.type.PRIMARY,
+    }),
+  secondary: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.TYPE,
+      attributeNameNew: AttributeNames.display,
+      attributeValue: AttributesValues.type.SECONDARY,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display,
+      attributeValue: AttributesValues.type.SECONDARY,
+    }),
   statement: createAttributeCheck(
     AttributeNames.DISPLAY,
     AttributesValues.display.STATEMENT,
@@ -363,22 +399,6 @@ const isTheme = {
     }),
 } as const;
 
-// Type checks
-const isType = {
-  outline: createAttributeCheck(
-    AttributeNames.TYPE,
-    AttributesValues.type.OUTLINE,
-  ),
-  primary: createAttributeCheck(
-    AttributeNames.TYPE,
-    AttributesValues.type.PRIMARY,
-  ),
-  secondary: createAttributeCheck(
-    AttributeNames.TYPE,
-    AttributesValues.type.SECONDARY,
-  ),
-} as const;
-
 // Visual checks
 const isVisual = {
   aligned: createAttributeCheck(
@@ -503,7 +523,6 @@ export {
   isSharing,
   includesSharing,
   isTheme,
-  isType,
   isVisual,
   getValue,
 };

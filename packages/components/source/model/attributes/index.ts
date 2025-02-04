@@ -12,7 +12,6 @@ export {
   isSharing,
   includesSharing,
   isTheme,
-  isType,
   isVisual,
   getValue,
 } from './checks';

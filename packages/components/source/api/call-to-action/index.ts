@@ -1,7 +1,7 @@
-import { atomic } from '@universityofmaryland/web-elements-library';
+import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 
-const { callToAction } = atomic;
+const { callToAction } = Atomic;
 
 const tagName = 'umd-element-call-to-action';
 

@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import postcss from 'postcss';
 
 const postcssNesting = require('postcss-nesting');

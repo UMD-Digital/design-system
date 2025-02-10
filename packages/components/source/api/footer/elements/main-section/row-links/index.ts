@@ -1,4 +1,4 @@
-import { layout, token } from '@universityofmaryland/web-elements-styles';
+import { layout, token } from '@universityofmaryland/web-styles-library';
 import { Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';

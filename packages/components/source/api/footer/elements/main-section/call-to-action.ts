@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-elements-styles';
+import { token } from '@universityofmaryland/web-styles-library';
 import { Markup } from 'utilities';
 import { SLOTS } from '../../globals';
 

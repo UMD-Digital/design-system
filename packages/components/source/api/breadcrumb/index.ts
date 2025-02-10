@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { animation, token } from '@universityofmaryland/web-elements-styles';
+import { animation, token } from '@universityofmaryland/web-styles-library';
 import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 

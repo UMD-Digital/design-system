@@ -2,7 +2,7 @@ import {
   token,
   root,
   utilities,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 
 const { font, media } = token;
 const styles = utilities.transform.outputStyles;

@@ -1,4 +1,4 @@
-import { token, layout } from '@universityofmaryland/web-elements-styles';
+import { token, layout } from '@universityofmaryland/web-styles-library';
 import { Styles } from 'utilities';
 import {
   SocialContainerStyles,

@@ -3,7 +3,7 @@ import {
   token,
   layout,
   typography,
-} from '@universityofmaryland/web-elements-styles';
+} from '@universityofmaryland/web-styles-library';
 import { Markup, Styles } from 'utilities';
 import {
   BREAKPOINTS,

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import { framework } from '@universityofmaryland/web-elements-styles';
+import { framework } from '@universityofmaryland/web-styles-library';
 import plugin from 'tailwindcss/plugin';
 
 const content = ['./source/**/*.{css,twig}'];

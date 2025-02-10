@@ -9,7 +9,7 @@
     "clean": "npx lerna run clean",
     "components": "npx lerna run start --scope=@universityofmaryland/web-components-library",
     "elemenbts": "npx lerna run start --scope=@universityofmaryland/web-elements-library",
-    "styles": "npx lerna run start --scope=@universityofmaryland/web-elements-styles",
+    "styles": "npx lerna run start --scope=@universityofmaryland/web-styles-library",
     "theme": "npx lerna run start --scope=@universityofmaryland/theme",
     "start": "yarn run variables & yarn run theme & yarn run elements & yarn run components"
   },

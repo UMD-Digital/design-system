@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
-import { framework } from '@universityofmaryland/web-styles-library';
+import { framework } from './dist/index.js';
 import plugin from 'tailwindcss/plugin';
 
 const content = ['./source/**/*.{css,twig}'];
-const { utilities, components, theme } = framework.tailwing;
+const { utilities, components, theme } = framework.tailwind;
 
 const plugins = [
   plugin(function ({ addUtilities, addComponents }) {

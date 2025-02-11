@@ -1,10 +1,28 @@
-export * as accessibility from './accessibility';
-export * as animation from './animation';
-export * as element from './element';
-export * as framework from './framework';
-export * as layout from './layout';
+import * as accessibilityNamespace from './accessibility';
+import * as animationsNamespace from './animation';
+import * as elementNamespace from './element';
+import * as layoutNamespace from './layout';
+import * as tokenNamespace from './token';
+import * as typographyNamespace from './typography';
+import { default as webComponentsNamespace } from './web-components';
+import * as utilitiesNamespace from './utilities';
+
 export { root } from './root';
-export * as token from './token';
-export * as typography from './typography';
-export { default as webComponents } from './web-components';
-export * as utilities from './utilities';
+export const accessibility = accessibilityNamespace;
+export const animation = animationsNamespace;
+export const element = elementNamespace;
+export const layout = layoutNamespace;
+export const typography = typographyNamespace;
+export const token = tokenNamespace;
+export const webComponents = webComponentsNamespace;
+export const utilities = utilitiesNamespace;
+
+export const outputStyles: string = {
+  ...typographyNamespace.fontFace.browserString,
+  ...utilitiesNamespace.transform.processNestedObjects(accessibilityNamespace),
+  ...utilitiesNamespace.transform.processNestedObjects(animationsNamespace),
+  ...utilitiesNamespace.transform.processNestedObjects(elementNamespace),
+  ...utilitiesNamespace.transform.processNestedObjects(layoutNamespace),
+  ...utilitiesNamespace.transform.processNestedObjects(typographyNamespace),
+  ...webComponentsNamespace,
+};

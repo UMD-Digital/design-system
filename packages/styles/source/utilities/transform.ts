@@ -1,10 +1,3 @@
-import * as accessibility from '../accessibility';
-import * as animations from '../animation';
-import * as elementStyles from '../element';
-import * as layout from '../layout';
-import * as typography from '../typography';
-import { default as webComponents } from '../web-components';
-
 export interface JssEntry {
   className: string | string[];
   [key: string]: any;
@@ -62,14 +55,4 @@ export const processNestedObjects = <T extends object>(
 
   process(obj);
   return result;
-};
-
-export const outputStyles: string = {
-  ...typography.fontFace.browserString,
-  ...processNestedObjects(accessibility),
-  ...processNestedObjects(animations),
-  ...processNestedObjects(elementStyles),
-  ...processNestedObjects(layout),
-  ...processNestedObjects(typography),
-  ...webComponents,
 };

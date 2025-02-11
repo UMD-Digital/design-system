@@ -1,11 +1,11 @@
 import {
   token,
   root,
-  utilities,
+  outputStyles,
 } from '@universityofmaryland/web-styles-library';
+import * as frameworkNamespace from './framework';
 
 const { font, media } = token;
-const styles = utilities.transform.outputStyles;
 
 export const base = {
   ...token,
@@ -17,5 +17,7 @@ export const base = {
 
 export const theme = {
   root,
-  styles,
+  styles: outputStyles,
 };
+
+export const framework = frameworkNamespace;

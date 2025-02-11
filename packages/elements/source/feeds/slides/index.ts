@@ -47,8 +47,9 @@ const ACADEMICS_QUERY = `
         loadOccurrences: true
         startsAfterOrAt: $startDate
         limit: 12
+        calendarId: 5
       ) {
-          ${QUERY_DATA}
+        ${QUERY_DATA}
       }
     }
   }

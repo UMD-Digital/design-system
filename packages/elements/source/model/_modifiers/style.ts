@@ -61,8 +61,9 @@ const createModifier = (
 };
 
 const styleGetters = {
-  animation: ({ isColorBlack, isColorWhite }: StyleModifierProps) =>
-    getLinkAnimationColor({ isColorBlack, isColorWhite }),
+  animationLink: ({ isColorBlack, isColorWhite }: StyleModifierProps) => ({
+    a: getLinkAnimationColor({ isColorBlack, isColorWhite }),
+  }),
   baseStyles: ({ baseStyles }: StyleModifierProps) => baseStyles || {},
   color: ({ isTextColorWhite }: StyleModifierProps) =>
     TextColors[getTextColor(isTextColorWhite)],
@@ -74,7 +75,7 @@ const styleGetters = {
 };
 
 export const modifiers = {
-  animationLink: createModifier(StyleType.Element, styleGetters.animation),
+  animationLink: createModifier(StyleType.Element, styleGetters.animationLink),
   baseStyles: createModifier(StyleType.Element, styleGetters.baseStyles),
   textColor: createModifier(StyleType.Element, styleGetters.color),
   element: createModifier(StyleType.Element, styleGetters.element),

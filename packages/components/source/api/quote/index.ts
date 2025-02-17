@@ -9,7 +9,6 @@ import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { SlotWithDefaultStyling } = Markup.create;
-const { QuoteElements, QuoteFeatured, QuoteInline, QuoteStatement } = Composite;
 
 const ELEMENT_NAME = 'umd-element-quote';
 
@@ -19,10 +18,9 @@ const styles = `
   }
   
   ${Styles.reset}
-  ${QuoteElements.Text.Styles}
-  ${QuoteFeatured.Styles}
-  ${QuoteInline.Styles}
-  ${QuoteStatement.Styles}
+  ${Composite.quote.elements.text.Styles}
+  ${Composite.quote.featured.Styles}
+  ${Composite.quote.inline.Styles}
 `;
 
 const MakeData = ({ element }: { element: UMDElementQuote }) => {
@@ -57,17 +55,20 @@ const CreateShadowDom = ({ element }: { element: UMDElementQuote }) => {
   const isTypeFeatured = Attributes.isDisplay.featured({ element });
 
   if (isTypeStatement) {
-    return QuoteStatement.CreateElement({ ...MakeData({ element }) });
+    // return QuoteStatement.CreateElement({ ...MakeData({ element }) });
   }
 
   if (isTypeFeatured) {
-    return QuoteFeatured.CreateElement({
+    return Composite.quote.featured.CreateElement({
       ...MakeData({ element }),
       isSizeLarge,
     });
   }
 
-  return QuoteInline.CreateElement({ ...MakeData({ element }), isSizeLarge });
+  return Composite.quote.inline.CreateElement({
+    ...MakeData({ element }),
+    isSizeLarge,
+  });
 };
 
 export class UMDElementQuote extends HTMLElement {

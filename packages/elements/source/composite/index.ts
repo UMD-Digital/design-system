@@ -63,17 +63,7 @@ export { default as PersonList } from './person/list';
 export { default as PersonTabular } from './person/tabular';
 
 // Quote components
-export { default as QuoteElements } from './quote/elements';
-export { default as QuoteFeatured } from './quote/featured';
-export { default as QuoteInline } from './quote/inline';
-export { default as QuoteStatement } from './quote/statement';
-
-// Section components
+export { default as quote } from './quote';
 export { default as sectionIntro } from './section-intro';
-
-// Slider components
-export { default as SliderEvents } from './slider/events';
-
-// Tab components
-export { default as Tabs } from './tabs';
-export { default as TabsElements } from './tabs/elements';
+export { default as slider } from './slider';
+export { default as tabs } from './tabs';

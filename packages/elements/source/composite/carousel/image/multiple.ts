@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import {
@@ -12,6 +12,9 @@ type TypeCarouselMultipleProps = {
   isThemeDark?: boolean;
   isFullScreenOption?: boolean;
 };
+
+const { token } = Styles;
+const fullScreenClassName = Styles.element.action.button.fullScreen.className;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';
@@ -27,7 +30,7 @@ const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-multiple-button';
 const OVERWRITE_LAYOUT_IMAGE = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${LayoutImage.Elements.container}`;
 
 const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
-const OVERWRITE_FULL_SCREEN_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .button-full-screen`;
+const OVERWRITE_FULL_SCREEN_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${fullScreenClassName}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_SLIDER_BUTTON}`;
@@ -60,8 +63,8 @@ const OverwriteFullScreenOption = `
     opacity: 1;
   }
 
-  ${OVERWRITE_LAYOUT_IMAGE}:focus-within .button-full-screen,
-  ${OVERWRITE_LAYOUT_IMAGE}:hover .button-full-screen {
+  ${OVERWRITE_LAYOUT_IMAGE}:focus-within .${fullScreenClassName},
+  ${OVERWRITE_LAYOUT_IMAGE}:hover .${fullScreenClassName} {
     visibility: visible;
     opacity: 1;
   }
@@ -142,6 +145,8 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
           callback: overlayCarousel.events.setFullScreen,
           index,
         });
+
+        console.log(button);
         block.appendChild(button.element);
         styles += button.styles;
       }

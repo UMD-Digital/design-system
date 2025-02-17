@@ -1,8 +1,4 @@
-import {
-  element,
-  token,
-  typography,
-} from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import {
@@ -46,6 +42,7 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
   };
 
 const { convertJSSObjectToStyles } = Utility.styles;
+const { element, token, typography } = Styles;
 
 const MEDIUM = 500;
 

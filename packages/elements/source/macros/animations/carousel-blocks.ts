@@ -1,5 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import { buttons } from 'atomic';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 type TypeDisplayLogic = {
@@ -56,6 +55,8 @@ type TypeEventScroll = TypeHelpers & {
 };
 
 const { convertPixelStringToNumber } = Utility.styles;
+const { token } = Styles;
+const fullScreenClassName = Styles.element.action.button.fullScreen.className;
 
 const ATTRIBUTE_SINGLE_BLOCK = 'single';
 const ANIMATION_DURATION = 750;
@@ -162,12 +163,8 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     orginal: HTMLElement;
     clone: HTMLElement;
   }) => {
-    const orginalFullScreen = orginal.querySelector(
-      `.${buttons.fullscreen.reference.className}`,
-    );
-    const cloneFullScreen = clone.querySelector(
-      `.${buttons.fullscreen.reference.className}`,
-    );
+    const orginalFullScreen = orginal.querySelector(`.${fullScreenClassName}`);
+    const cloneFullScreen = clone.querySelector(`.${fullScreenClassName}`);
 
     if (orginalFullScreen && cloneFullScreen) {
       const indexAttr = orginalFullScreen.getAttribute('data-index');

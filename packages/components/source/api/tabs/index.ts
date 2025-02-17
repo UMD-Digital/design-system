@@ -9,7 +9,6 @@ import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { Tabs, TabsElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-tabs';
 
@@ -19,7 +18,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${Tabs.Styles}
+  ${Composite.tabs.standard.Styles}
 `;
 
 const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
@@ -34,7 +33,7 @@ const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
   const modifyDom = () => {
     if (!markup) return;
 
-    const updateDom = TabsElements.DomStrcuture.ModifyElement({
+    const updateDom = Composite.tabs.elements.DomStrcuture.ModifyElement({
       markup,
     });
 
@@ -42,7 +41,7 @@ const CreateShadowDom = ({ element }: { element: UMDTabsElement }) => {
     markup.appendChild(updateDom);
   };
   const createTabs = () => {
-    const tabsElement = Tabs.CreateElement({
+    const tabsElement = Composite.tabs.standard.CreateElement({
       isThemeDark,
       tabsContainer: markup?.children[0] as HTMLElement,
       shadowContent: slot,

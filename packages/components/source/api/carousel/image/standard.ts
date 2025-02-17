@@ -1,39 +1,34 @@
-declare global {
-  interface Window {
-    UMDCarouselImageStandardElement: typeof UMDCarouselImageStandardElement;
-  }
-}
-
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
+import { Markup } from 'utilities';
 
 const { CarouselImageStandard } = Composite;
-const { Node } = Markup.create;
 const { ImageHasAlt } = Markup.validate;
 
-const ELEMENT_NAME = 'umd-element-carousel-image';
+const tagName = 'umd-element-carousel-image';
 
-const styles = `
-  :host {
-    display: block;
-  }
+const slots = {
+  images: {
+    required: true,
+    allowedElements: ['img'],
+  },
+  headlines: {
+    required: false,
+    allowedElements: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  },
+  texts: {
+    required: false,
+    allowedElements: ['p', 'div'],
+  },
+};
 
-  ${Styles.reset}
-  ${CarouselImageStandard.Styles}
-`;
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.resize({
+    callback: (element) => element.events?.SetEventReize(),
+  }),
+);
 
-const styleTemplate = Node.stylesTemplate({ styles });
-const CreateShadowDom = ({
-  element,
-}: {
-  element: UMDCarouselImageStandardElement;
-}) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  const isThemeDark = Attributes.isTheme.dark({ element });
-  const isFullScreenOption = Attributes.includesFeature.fullScreenOption({
-    element,
-  });
+const createComponent = (element: HTMLElement) => {
   const slottedImages = Array.from(
     element.querySelectorAll(`[slot="${Slots.name.IMAGES}"] > *`),
   ) as HTMLImageElement[];
@@ -43,9 +38,11 @@ const CreateShadowDom = ({
   const slottedTexts = Array.from(
     element.querySelectorAll(`[slot="${Slots.name.TEXTS}"] > *`),
   );
+
   const headlines = slottedHeadlines.map((headline) =>
     headline.cloneNode(true),
   ) as HTMLElement[];
+
   const texts = slottedTexts.map((text) =>
     text.cloneNode(true),
   ) as HTMLElement[];
@@ -59,69 +56,27 @@ const CreateShadowDom = ({
     })
     .filter((image) => image !== null) as HTMLImageElement[];
 
-  if (!images) return;
-
-  const carousel = CarouselImageStandard.CreateElement({
+  return CarouselImageStandard.CreateElement({
     images,
     headlines,
     texts,
-    isThemeDark,
-    isFullScreenOption,
+    isThemeDark: Attributes.isTheme.dark({ element }),
+    isFullScreenOption: Attributes.includesFeature.fullScreenOption({
+      element,
+    }),
   });
-
-  element._elementRef = carousel;
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  if (carousel.overlay) shadow.appendChild(carousel.overlay);
-  shadow.appendChild(carousel.element);
 };
 
-class UMDCarouselImageStandardElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _elementRef: {
-    element: HTMLDivElement;
-    events: {
-      SetEventReize: () => void;
-    };
-  } | null;
-
-  constructor() {
-    super();
-
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._elementRef = null;
-  }
-
-  static get observedAttributes() {
-    return [Attributes.names.RESIZE];
-  }
-
-  attributeChangedCallback(
-    name: string,
-    oldValue: string | null,
-    newValue: string | null,
-  ) {
-    if (
-      name == Attributes.names.RESIZE &&
-      newValue === 'true' &&
-      this._elementRef
-    ) {
-      this._elementRef.events.SetEventReize();
-    }
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDCarouselImageStandardElement = UMDCarouselImageStandardElement;
-    window.customElements.define(ELEMENT_NAME, UMDCarouselImageStandardElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      slots,
+      createComponent,
+      attributes,
+    }),
+  });
 };
 
 export default {

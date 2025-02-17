@@ -22,6 +22,7 @@ type TypeFullScreen = {
 
 type TypesetFullScreen = {
   setFullScreen: (arg: number) => void;
+  styles: string;
 };
 
 type TypeSlideContent = {
@@ -210,7 +211,6 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   ${AnimationIndicator.Styles}
   ${AnimationCarouselImage.Styles}
   ${AnimationCarouselOverlay.Styles}
-  ${ButtonFullScreen.Styles}
   ${LayoutImage.Styles}
   ${ImageContainerStyles}
   ${TextContainerStyles}
@@ -259,6 +259,7 @@ const CreateTextContainer = ({
 const CreateImageContainer = ({
   image,
   isFullScreenOption,
+  styles,
   setFullScreen,
   index,
 }: TypeImageContainerProps) => {
@@ -275,12 +276,12 @@ const CreateImageContainer = ({
   imageWrapper.appendChild(imageBlock);
 
   if (isFullScreenOption) {
-    imageBlock.appendChild(
-      ButtonFullScreen.CreateElement({
-        callback: setFullScreen,
-        index,
-      }),
-    );
+    const button = ButtonFullScreen.create({
+      callback: setFullScreen,
+      index,
+    });
+    imageBlock.appendChild(button.element);
+    styles += button.styles;
   }
 
   imageContainer.appendChild(imageWrapper);
@@ -324,9 +325,12 @@ const CreateCarouselImageStandardElement = (
     const overlayCarousel = AnimationCarouselOverlay.CreateElement({
       images,
     });
+    let styles = STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT;
+
     const slides = CreateSlide({
       ...props,
       setFullScreen: overlayCarousel.events.setFullScreen,
+      styles,
     });
     const carousel = AnimationCarouselImage.CreateElement({
       slides,
@@ -359,6 +363,7 @@ const CreateCarouselImageStandardElement = (
     return {
       element: elementDeclaration,
       overlay: isFullScreenOption ? overlayCarousel.element : null,
+      styles,
       events: {
         SetEventReize: carousel.events.EventResize,
       },
@@ -367,5 +372,4 @@ const CreateCarouselImageStandardElement = (
 
 export default {
   CreateElement: CreateCarouselImageStandardElement,
-  Styles: STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT,
 };

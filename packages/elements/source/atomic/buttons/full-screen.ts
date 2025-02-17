@@ -35,7 +35,7 @@ const STYLES_FULL_SCREEN_BUTTON = `
   }
 `;
 
-const CreateFullScreenButton = ({
+const create = ({
   callback,
   index,
 }: {
@@ -50,14 +50,17 @@ const CreateFullScreenButton = ({
       callback(index);
     });
     button.innerHTML = `Full Screen <span></span>${Utility.asset.icon.FULL_SCREEN}`;
+    let styles = STYLES_FULL_SCREEN_BUTTON;
 
-    return button;
+    return {
+      element: button,
+      styles,
+    };
   })();
 
 export default {
-  CreateElement: CreateFullScreenButton,
-  Styles: STYLES_FULL_SCREEN_BUTTON,
-  Elements: {
-    button: ELEMENT_BUTTON,
+  create,
+  reference: {
+    className: ELEMENT_BUTTON,
   },
 };

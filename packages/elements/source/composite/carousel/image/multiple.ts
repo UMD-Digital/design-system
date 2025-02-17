@@ -27,7 +27,7 @@ const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-multiple-button';
 const OVERWRITE_LAYOUT_IMAGE = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${LayoutImage.Elements.container}`;
 
 const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
-const OVERWRITE_FULL_SCREEN_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${ButtonFullScreen.Elements.button}`;
+const OVERWRITE_FULL_SCREEN_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${ButtonFullScreen.reference.className}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_SLIDER_BUTTON}`;
@@ -60,8 +60,8 @@ const OverwriteFullScreenOption = `
     opacity: 1;
   }
 
-  ${OVERWRITE_LAYOUT_IMAGE}:focus-within .${ButtonFullScreen.Elements.button},
-  ${OVERWRITE_LAYOUT_IMAGE}:hover .${ButtonFullScreen.Elements.button} {
+  ${OVERWRITE_LAYOUT_IMAGE}:focus-within .${ButtonFullScreen.reference.className},
+  ${OVERWRITE_LAYOUT_IMAGE}:hover .${ButtonFullScreen.reference.className} {
     visibility: visible;
     opacity: 1;
   }
@@ -110,7 +110,6 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
   ${AnimationIndicator.Styles}
   ${AnimationCarouselBlocks.Styles}
   ${AnimationCarouselOverlay.Styles}
-  ${ButtonFullScreen.Styles}
   ${LayoutImage.Styles}
   ${OverwriteImageStyles}
   ${OverwriteCarouselStyles}
@@ -126,6 +125,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
     const clonedImages = images.map((image) =>
       image.cloneNode(true),
     ) as HTMLImageElement[];
+    let styles = STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT;
 
     const overlayCarousel = AnimationCarouselOverlay.CreateElement({
       images,
@@ -138,12 +138,12 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
       });
 
       if (isFullScreenOption) {
-        block.appendChild(
-          ButtonFullScreen.CreateElement({
-            callback: overlayCarousel.events.setFullScreen,
-            index,
-          }),
-        );
+        const button = ButtonFullScreen.create({
+          callback: overlayCarousel.events.setFullScreen,
+          index,
+        });
+        block.appendChild(button.element);
+        styles += button.styles;
       }
 
       return block;
@@ -185,6 +185,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
 
     return {
       element: elementDeclaration,
+      styles,
       overlay: isFullScreenOption ? overlayCarousel.element : null,
       events: {
         SetEventReize: carousel.events.resize,
@@ -194,5 +195,4 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
 
 export default {
   CreateElement: CreateCarouselImageMultipleElement,
-  Styles: STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT,
 };

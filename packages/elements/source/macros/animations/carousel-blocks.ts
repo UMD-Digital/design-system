@@ -163,10 +163,10 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     clone: HTMLElement;
   }) => {
     const orginalFullScreen = orginal.querySelector(
-      `.${ButtonFullScreen.Elements.button}`,
+      `.${ButtonFullScreen.reference.className}`,
     );
     const cloneFullScreen = clone.querySelector(
-      `.${ButtonFullScreen.Elements.button}`,
+      `.${ButtonFullScreen.reference.className}`,
     );
 
     if (orginalFullScreen && cloneFullScreen) {

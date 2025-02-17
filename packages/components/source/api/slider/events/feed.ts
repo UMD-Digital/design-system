@@ -8,7 +8,6 @@ import { Composite, Feeds } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
-const { SliderEvents } = Composite;
 const { FeedsSlides } = Feeds;
 
 const ELEMENT_NAME = 'umd-element-slider-events-feed';
@@ -19,7 +18,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${SliderEvents.Styles}
+  ${Composite.slider.events.Styles}
   ${FeedsSlides.Styles}
 `;
 
@@ -50,7 +49,7 @@ const CreateShadowDom = async ({
 
   slides.forEach((slide) => dataSlider.appendChild(slide));
 
-  const slider = SliderEvents.CreateElement({
+  const slider = Composite.slider.events.CreateElement({
     isThemeDark,
     dataSlider,
     headline: Slots.headline.default({ element }),

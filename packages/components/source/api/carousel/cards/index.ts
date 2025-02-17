@@ -9,7 +9,6 @@ import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { CarouselCards } = Composite;
 
 const ELEMENT_NAME = 'umd-element-carousel-cards';
 
@@ -19,7 +18,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${CarouselCards.Styles}
+  ${Composite.carousel.cards.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({ styles });
@@ -42,7 +41,7 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselCardsElement }) => {
   const shadowRef = shadow.querySelector(
     `[name="${Slots.name.CARDS}"]`,
   ) as HTMLElement;
-  const carousel = CarouselCards.CreateElement({
+  const carousel = Composite.carousel.cards.CreateElement({
     slide,
     shadowRef,
     cards,

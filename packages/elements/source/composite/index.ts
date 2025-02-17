@@ -17,17 +17,8 @@ export { default as CardIconBlock } from './card-icon/block';
 export { default as CardOverlay } from './card-overlay';
 export { default as CardOverlayImage } from './card-overlay/image';
 
-// Carousel components
 export { default as carousel } from './carousel';
-
-export { default as Carousel } from './carousel/default';
-export { default as CarouselCards } from './carousel/cards';
-export { default as CarouselThumbnail } from './carousel/thumbnail';
-
-// Event components
 export { default as event } from './event';
-
-// Hero components
 export { default as hero } from './hero';
 
 // Layout components
@@ -47,13 +38,7 @@ export { default as NavigationHeader } from './navigation';
 export { default as NavigationUtility } from './navigation/utility';
 
 // Pathway components
-export { default as PathwayDefault } from './pathway/default';
-export { default as PathwayElements } from './pathway/elements';
-export { default as PathwayHero } from './pathway/hero';
-export { default as PathwayHighlight } from './pathway/highlight';
-export { default as PathwayOverlay } from './pathway/overlay';
-export { default as PathwaySticky } from './pathway/sticky';
-
+export { default as pathway } from './pathway';
 export { default as person } from './person';
 export { default as quote } from './quote';
 export { default as sectionIntro } from './section-intro';

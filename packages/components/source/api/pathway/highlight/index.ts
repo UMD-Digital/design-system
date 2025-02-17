@@ -10,7 +10,6 @@ import { Markup, Styles } from 'utilities';
 import { CommonPathwayData } from '../common';
 
 const { SlotWithDefaultStyling } = Markup.create;
-const { PathwayHighlight, PathwayElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-pathway-highlight';
 
@@ -20,9 +19,9 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${PathwayHighlight.Styles}
-  ${PathwayElements.Image.Styles}
-  ${PathwayElements.Text.Styles}
+  ${Composite.pathway.highlight.Styles}
+  ${Composite.pathway.elements.image.Styles}
+  ${Composite.pathway.elements.text.Styles}
 `;
 
 const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
@@ -38,7 +37,7 @@ const CreateShadowDom = ({
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
   shadow.appendChild(
-    PathwayHighlight.CreateElement({
+    Composite.pathway.highlight.CreateElement({
       ...CommonPathwayData({
         element,
       }),

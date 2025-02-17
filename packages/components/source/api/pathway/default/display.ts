@@ -5,14 +5,6 @@ import { CommonPathwayData } from '../common';
 import { UMDPathwayElement } from './index';
 
 const { SlotWithDefaultStyling } = Markup.create;
-const {
-  PathwayDefault,
-  PathwayElements,
-  PathwayHero,
-  PathwayOverlay,
-  PathwaySticky,
-  event,
-} = Composite;
 
 export const ComponentStyles = `
   :host {
@@ -20,14 +12,14 @@ export const ComponentStyles = `
   }
 
   ${Styles.reset}
-  ${event.elements.meta.Styles}
-  ${event.elements.sign.Styles}
-  ${PathwayElements.Image.Styles}
-  ${PathwayElements.Text.Styles}
-  ${PathwayDefault.Styles}
-  ${PathwayHero.Styles}
-  ${PathwayOverlay.Styles}
-  ${PathwaySticky.Styles}
+  ${Composite.event.elements.meta.Styles}
+  ${Composite.event.elements.sign.Styles}
+  ${Composite.pathway.elements.image.Styles}
+  ${Composite.pathway.elements.text.Styles}
+  ${Composite.pathway.standard.Styles}
+  ${Composite.pathway.hero.Styles}
+  ${Composite.pathway.overlay.Styles}
+  ${Composite.pathway.sticky.Styles}
 `;
 
 const MakeCommonDefaultData = ({
@@ -81,13 +73,13 @@ const MakeCommonDefaultData = ({
       endDate,
     });
 
-    obj.eventDetails = event.elements.meta.CreateElement({
+    obj.eventDetails = Composite.event.elements.meta.CreateElement({
       ...eventData,
       isThemeDark: themeToggle,
       showTime,
     });
 
-    obj.eventSign = event.elements.sign.CreateElement({
+    obj.eventSign = Composite.event.elements.sign.CreateElement({
       ...eventData,
     });
   }
@@ -122,7 +114,7 @@ export const CreateShadowDom = ({
 
   const makeHeroType = () => {
     shadow.appendChild(
-      PathwayHero.CreateElement({
+      Composite.pathway.hero.CreateElement({
         ...MakeCommonDefaultData({ element, ...themes }),
         includesAnimation,
       }),
@@ -130,7 +122,7 @@ export const CreateShadowDom = ({
   };
 
   const makeOverlayType = () => {
-    const overlay = PathwayOverlay.CreateElement({
+    const overlay = Composite.pathway.overlay.CreateElement({
       isImageScaled,
       ...themes,
       includesAnimation,
@@ -148,7 +140,7 @@ export const CreateShadowDom = ({
 
   const makeStickyType = () => {
     shadow.appendChild(
-      PathwaySticky.CreateElement({
+      Composite.pathway.sticky.CreateElement({
         isThemeDark: Attributes.isTheme.dark({ element }),
         isImageScaled,
         ...MakeCommonDefaultData({ element, ...themes }),
@@ -157,7 +149,7 @@ export const CreateShadowDom = ({
   };
 
   const makeDefaultType = () => {
-    const defaultElement = PathwayDefault.CreateElement({
+    const defaultElement = Composite.pathway.standard.CreateElement({
       ...themes,
       isImageScaled,
       includesAnimation,

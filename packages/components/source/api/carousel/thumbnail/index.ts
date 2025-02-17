@@ -9,7 +9,6 @@ import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { CarouselThumbnail } = Composite;
 
 const ELEMENT_NAME = 'umd-element-carousel-thumbnail';
 
@@ -19,7 +18,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${CarouselThumbnail.Styles}
+  ${Composite.carousel.thumbnail.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({ styles });
@@ -38,7 +37,7 @@ const CreateShadowDom = ({
     block.cloneNode(true),
   ) as HTMLElement[];
 
-  const carousel = CarouselThumbnail.CreateElement({
+  const carousel = Composite.carousel.thumbnail.CreateElement({
     blocks,
     isThemeDark,
   });

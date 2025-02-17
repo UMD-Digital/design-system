@@ -25,11 +25,7 @@ export { default as layout } from './layout';
 // Logo components
 export { default as LogoBlock } from './logo/block';
 
-// Media components
-export { default as MediaInline } from './media/inline';
-export { default as MediaWithCaption } from './media/inline/with-caption';
-export { default as MediaWrapped } from './media/inline/wrapped';
-
+export { default as media } from './media';
 export { default as navigation } from './navigation';
 export { default as pathway } from './pathway';
 export { default as person } from './person';

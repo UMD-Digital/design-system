@@ -2,8 +2,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Slots, Register } from 'model';
 import { Markup } from 'utilities';
 
-const { MediaInline, MediaWithCaption, MediaWrapped } = Composite;
-
 const tagName = 'umd-element-media-inline';
 
 const slots = {
@@ -43,14 +41,14 @@ const Load = () => {
     };
 
     if (hasWrappingText) {
-      return MediaWrapped(content);
+      return Composite.media.inline.wrapped(content);
     }
 
     if (hasCaption) {
-      return MediaWithCaption(content);
+      return Composite.media.inline.caption(content);
     }
 
-    return MediaInline(content);
+    return Composite.media.inline.standard(content);
   };
 
   Register.registerWebComponent({

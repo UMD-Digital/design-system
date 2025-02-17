@@ -9,7 +9,6 @@ import { Attributes } from 'model';
 import { Styles, Markup } from 'utilities';
 import { CommonIntroData } from '../common';
 
-const { SectionIntroWide } = Composite;
 const { Node } = Markup.create;
 
 const ELEMENT_NAME = 'umd-element-section-intro-wide';
@@ -20,7 +19,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${SectionIntroWide.Styles}
+  ${Composite.sectionIntro.wide.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({ styles });
@@ -31,7 +30,7 @@ export const CreateShadowDom = ({
   element: UMDSectionIntroWideElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const intro = SectionIntroWide.CreateElement(
+  const intro = Composite.sectionIntro.wide.CreateElement(
     CommonIntroData({
       element,
       isThemeDark: Attributes.isTheme.dark({ element }),

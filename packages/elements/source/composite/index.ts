@@ -69,8 +69,7 @@ export { default as QuoteInline } from './quote/inline';
 export { default as QuoteStatement } from './quote/statement';
 
 // Section components
-export { default as SectionIntro } from './section-intro/default';
-export { default as SectionIntroWide } from './section-intro/wide';
+export { default as sectionIntro } from './section-intro';
 
 // Slider components
 export { default as SliderEvents } from './slider/events';

@@ -9,7 +9,6 @@ import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { HeroExpand } = Composite;
 
 const ELEMENT_NAME = 'umd-element-hero-expand';
 
@@ -19,7 +18,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${HeroExpand.Styles}
+  ${Composite.hero.expand.Styles}
 `;
 
 const template = Markup.create.Node.stylesTemplate({ styles });
@@ -66,7 +65,7 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
     if (video) elementData.video = video;
   }
 
-  element._elementRef = HeroExpand.CreateElement(elementData);
+  element._elementRef = Composite.hero.expand.CreateElement(elementData);
 
   shadow.appendChild(template.content.cloneNode(true));
   shadow.appendChild(element._elementRef.element);

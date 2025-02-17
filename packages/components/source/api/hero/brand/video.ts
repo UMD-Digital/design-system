@@ -9,7 +9,6 @@ import { Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { HeroBrandVideo } = Composite;
 
 const ELEMENT_NAME = 'umd-element-hero-brand-video';
 
@@ -19,7 +18,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${HeroBrandVideo.Styles}
+  ${Composite.hero.brand.video.Styles}
 `;
 
 const template = Markup.create.Node.stylesTemplate({ styles });
@@ -38,7 +37,7 @@ const CreateShadowDom = ({
 
   if (!video) return;
 
-  const videoElement = HeroBrandVideo.CreateElement({
+  const videoElement = Composite.hero.brand.video.CreateElement({
     video,
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),

@@ -5,8 +5,6 @@ import { UMDHeroElement } from './index';
 import { CommonHeroData } from '../common';
 
 const { SlotWithDefaultStyling } = Markup.create;
-const { HeroDefault, HeroElements, HeroMinimal, HeroOverlay, HeroStacked } =
-  Composite;
 
 export const ComponentStyles = `
   :host {
@@ -14,13 +12,15 @@ export const ComponentStyles = `
   }
 
   ${Styles.reset}
-  ${HeroElements.Image.Styles}
-  ${HeroElements.Text.Styles}
-  ${HeroOverlay.Styles}
-  ${HeroMinimal.Styles}
-  ${HeroStacked.Styles}
-  ${HeroDefault.Styles}
+  ${Composite.hero.elements.image.Styles}
+  ${Composite.hero.elements.text.Styles}
+  ${Composite.hero.overlay.Styles}
+  ${Composite.hero.minimal.Styles}
+  ${Composite.hero.stacked.Styles}
+  ${Composite.hero.standard.Styles}
 `;
+
+console.log(Composite.hero.elements.image.Styles);
 
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
   const type = element.getAttribute(Attributes.names.TYPE);
@@ -78,7 +78,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
     type === Attributes.values.layout.STACKED_INTERIOR
   ) {
     shadow.appendChild(
-      HeroStacked.CreateElement({
+      Composite.hero.stacked.CreateElement({
         ...MakeHeroData({ element }),
         videoRef,
       }),
@@ -88,7 +88,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
 
   if (type === Attributes.values.display.MINIMAL) {
     shadow.appendChild(
-      HeroMinimal.CreateElement({
+      Composite.hero.minimal.CreateElement({
         ...MakeHeroData({ element }),
       }),
     );
@@ -98,7 +98,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
 
   if (type === Attributes.values.display.OVERLAY) {
     shadow.appendChild(
-      HeroOverlay.CreateElement({
+      Composite.hero.overlay.CreateElement({
         ...MakeHeroData({ element }),
         videoRef,
       }),
@@ -108,7 +108,7 @@ export const CreateShadowDom = ({ element }: { element: UMDHeroElement }) => {
   }
 
   shadow.appendChild(
-    HeroDefault.CreateElement({
+    Composite.hero.standard.CreateElement({
       ...MakeHeroData({ element }),
       videoRef,
     }),

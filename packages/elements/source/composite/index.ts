@@ -33,14 +33,7 @@ export { default as EventLockupDate } from './event/lockup-date';
 export { default as EventPromo } from './event/promo';
 
 // Hero components
-export { default as HeroBrandVideo } from './hero/brand-video';
-export { default as HeroDefault } from './hero/default';
-export { default as HeroElements } from './hero/elements';
-export { default as HeroExpand } from './hero/expand';
-export { default as HeroMinimal } from './hero/minimal';
-export { default as HeroOverlay } from './hero/overlay';
-export { default as HeroLogo } from './hero/logo';
-export { default as HeroStacked } from './hero/stacked';
+export { default as hero } from './hero';
 
 // Layout components
 export { default as LayoutImageExpand } from './layout/image-expand';

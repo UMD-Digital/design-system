@@ -1,7 +1,7 @@
-import Image from './image';
-import Text from './text';
+import image from './image';
+import text from './text';
 
 export default {
-  Image,
-  Text,
+  image,
+  text,
 };

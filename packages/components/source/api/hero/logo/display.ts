@@ -4,17 +4,15 @@ import { Attributes } from 'model';
 import { UMDHeroLogoElement } from './index';
 import { CommonHeroData } from '../common';
 
-const { HeroLogo, HeroElements } = Composite;
-
 export const ComponentStyles = `
   :host {
     display: block;
   }
 
   ${Styles.reset}
-  ${HeroElements.Image.Styles}
-  ${HeroElements.Text.Styles}
-  ${HeroLogo.Styles}
+  ${Composite.hero.elements.image.Styles}
+  ${Composite.hero.elements.text.Styles}
+  ${Composite.hero.logo.Styles}
 `;
 
 export const CreateShadowDom = ({
@@ -26,7 +24,7 @@ export const CreateShadowDom = ({
   shadow.appendChild(element._styles.content.cloneNode(true));
 
   shadow.appendChild(
-    HeroLogo.CreateElement({
+    Composite.hero.logo.CreateElement({
       isThemeDark: Attributes.isTheme.dark({
         element,
       }),

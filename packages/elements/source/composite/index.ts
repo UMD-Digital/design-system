@@ -19,10 +19,10 @@ export { default as CardOverlay } from './card-overlay';
 export { default as CardOverlayImage } from './card-overlay/image';
 
 // Carousel components
+export { default as carousel } from './carousel';
+
 export { default as Carousel } from './carousel/default';
 export { default as CarouselCards } from './carousel/cards';
-export { default as CarouselImageStandard } from './carousel/image/standard';
-export { default as CarouselImageMultiple } from './carousel/image/multiple';
 export { default as CarouselThumbnail } from './carousel/thumbnail';
 
 // Event components

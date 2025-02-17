@@ -2,7 +2,7 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 
-const { CarouselImageMultiple } = Composite;
+const { carousel } = Composite;
 const { ImageHasAlt } = Markup.validate;
 
 const tagName = 'umd-element-carousel-multiple-image';
@@ -10,7 +10,6 @@ const tagName = 'umd-element-carousel-multiple-image';
 const slots = {
   images: {
     required: true,
-    allowedElements: ['img'],
   },
 };
 
@@ -34,7 +33,7 @@ const createComponent = (element: HTMLElement) => {
     })
     .filter((image) => image !== null) as HTMLImageElement[];
 
-  return CarouselImageMultiple.CreateElement({
+  return carousel.images.CreateElement({
     images,
     isThemeDark: Attributes.isTheme.dark({ element }),
     isFullScreenOption: Attributes.includesFeature.fullScreenOption({

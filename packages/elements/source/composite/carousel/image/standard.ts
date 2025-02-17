@@ -3,7 +3,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import ButtonFullScreen from '../../../atomic/buttons/full-screen';
+import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import {
   AnimationCarouselOverlay,
@@ -22,7 +22,6 @@ type TypeFullScreen = {
 
 type TypesetFullScreen = {
   setFullScreen: (arg: number) => void;
-  styles: string;
 };
 
 type TypeSlideContent = {
@@ -219,101 +218,6 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreateTextContainer = ({
-  headlines,
-  texts,
-  reference,
-}: {
-  headlines?: HTMLElement[] | null;
-  texts?: HTMLElement[] | null;
-  reference: string | null;
-}) => {
-  const textContainer = document.createElement('div');
-
-  const headline = headlines?.find(
-    (headline) => headline.getAttribute(ATTRIBUTE_REFERENCE) === reference,
-  );
-  const richText = texts?.find(
-    (text) => text.getAttribute(ATTRIBUTE_REFERENCE) === reference,
-  );
-
-  textContainer.classList.add(ELEMENT_SLIDE_TEXT_CONTAINER);
-
-  if (headline || richText) {
-    if (headline) {
-      headline.classList.add(ELEMENT_SLIDE_HEADLINE);
-      textContainer.appendChild(headline);
-    }
-
-    if (richText) {
-      richText.classList.add(ELEMENT_SLIDE_RICH_TEXT);
-      textContainer.appendChild(richText);
-    }
-
-    return textContainer;
-  }
-
-  return null;
-};
-
-const CreateImageContainer = ({
-  image,
-  isFullScreenOption,
-  styles,
-  setFullScreen,
-  index,
-}: TypeImageContainerProps) => {
-  const imageContainer = document.createElement('div');
-  const imageWrapper = document.createElement('div');
-  const imageBlock = LayoutImage.CreateElement({
-    image,
-    showCaption: true,
-  });
-
-  imageContainer.classList.add(ELEMENT_SLIDE_IMAGE_CONTAINER);
-
-  imageWrapper.classList.add(ELEMENT_SLIDE_IMAGE_WRAPPER);
-  imageWrapper.appendChild(imageBlock);
-
-  if (isFullScreenOption) {
-    const button = ButtonFullScreen.create({
-      callback: setFullScreen,
-      index,
-    });
-    imageBlock.appendChild(button.element);
-    styles += button.styles;
-  }
-
-  imageContainer.appendChild(imageWrapper);
-
-  return imageContainer;
-};
-
-const CreateSlide = (props: TypeCarouselSlideProps) => {
-  const { images, setFullScreen } = props;
-  const clonedImages = images.map((image) =>
-    image.cloneNode(true),
-  ) as HTMLImageElement[];
-
-  return clonedImages.map((image, index) => {
-    const reference = image.getAttribute(ATTRIBUTE_REFERENCE);
-    const slide = document.createElement('div');
-    const imageContainer = CreateImageContainer({
-      ...props,
-      image,
-      setFullScreen,
-      index,
-    });
-    const textContainer = CreateTextContainer({ ...props, reference });
-
-    slide.classList.add(ELEMENT_SLIDE);
-    slide.appendChild(imageContainer);
-    if (textContainer) slide.appendChild(textContainer);
-
-    return slide;
-  });
-};
-
 const CreateCarouselImageStandardElement = (
   props: TypeCarouselImageStandardProps,
 ) =>
@@ -327,10 +231,104 @@ const CreateCarouselImageStandardElement = (
     });
     let styles = STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT;
 
+    const CreateTextContainer = ({
+      headlines,
+      texts,
+      reference,
+    }: {
+      headlines?: HTMLElement[] | null;
+      texts?: HTMLElement[] | null;
+      reference: string | null;
+    }) => {
+      const textContainer = document.createElement('div');
+
+      const headline = headlines?.find(
+        (headline) => headline.getAttribute(ATTRIBUTE_REFERENCE) === reference,
+      );
+      const richText = texts?.find(
+        (text) => text.getAttribute(ATTRIBUTE_REFERENCE) === reference,
+      );
+
+      textContainer.classList.add(ELEMENT_SLIDE_TEXT_CONTAINER);
+
+      if (headline || richText) {
+        if (headline) {
+          headline.classList.add(ELEMENT_SLIDE_HEADLINE);
+          textContainer.appendChild(headline);
+        }
+
+        if (richText) {
+          richText.classList.add(ELEMENT_SLIDE_RICH_TEXT);
+          textContainer.appendChild(richText);
+        }
+
+        return textContainer;
+      }
+
+      return null;
+    };
+
+    const CreateImageContainer = ({
+      image,
+      isFullScreenOption,
+      setFullScreen,
+      index,
+    }: TypeImageContainerProps) => {
+      const imageContainer = document.createElement('div');
+      const imageWrapper = document.createElement('div');
+      const imageBlock = LayoutImage.CreateElement({
+        image,
+        showCaption: true,
+      });
+
+      imageContainer.classList.add(ELEMENT_SLIDE_IMAGE_CONTAINER);
+
+      imageWrapper.classList.add(ELEMENT_SLIDE_IMAGE_WRAPPER);
+      imageWrapper.appendChild(imageBlock);
+
+      if (isFullScreenOption) {
+        const button = buttons.fullscreen.create({
+          callback: setFullScreen,
+          index,
+        });
+        imageBlock.appendChild(button.element);
+
+        styles += button.styles;
+      }
+
+      imageContainer.appendChild(imageWrapper);
+
+      return imageContainer;
+    };
+
+    const CreateSlide = (props: TypeCarouselSlideProps) => {
+      const { images, setFullScreen } = props;
+      const clonedImages = images.map((image) =>
+        image.cloneNode(true),
+      ) as HTMLImageElement[];
+
+      return clonedImages.map((image, index) => {
+        const reference = image.getAttribute(ATTRIBUTE_REFERENCE);
+        const slide = document.createElement('div');
+        const imageContainer = CreateImageContainer({
+          ...props,
+          image,
+          setFullScreen,
+          index,
+        });
+        const textContainer = CreateTextContainer({ ...props, reference });
+
+        slide.classList.add(ELEMENT_SLIDE);
+        slide.appendChild(imageContainer);
+        if (textContainer) slide.appendChild(textContainer);
+
+        return slide;
+      });
+    };
+
     const slides = CreateSlide({
       ...props,
       setFullScreen: overlayCarousel.events.setFullScreen,
-      styles,
     });
     const carousel = AnimationCarouselImage.CreateElement({
       slides,
@@ -360,13 +358,30 @@ const CreateCarouselImageStandardElement = (
 
     images[images.length - 1].addEventListener('load', carousel.events.Load);
 
-    return {
-      element: elementDeclaration,
-      overlay: isFullScreenOption ? overlayCarousel.element : null,
+    console.log(styles);
+
+    const responseOptions = {
       styles,
       events: {
         SetEventReize: carousel.events.EventResize,
       },
+    };
+
+    if (isFullScreenOption) {
+      const element = document.createElement('div');
+
+      element.appendChild(overlayCarousel.element);
+      element.appendChild(elementDeclaration);
+
+      return {
+        element,
+        ...responseOptions,
+      };
+    }
+
+    return {
+      element: elementDeclaration,
+      ...responseOptions,
     };
   })();
 

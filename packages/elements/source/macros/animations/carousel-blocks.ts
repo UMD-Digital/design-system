@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import ButtonFullScreen from '../../atomic/buttons/full-screen';
+import { buttons } from 'atomic';
 import * as Utility from 'utilities';
 
 type TypeDisplayLogic = {
@@ -163,10 +163,10 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     clone: HTMLElement;
   }) => {
     const orginalFullScreen = orginal.querySelector(
-      `.${ButtonFullScreen.reference.className}`,
+      `.${buttons.fullscreen.reference.className}`,
     );
     const cloneFullScreen = clone.querySelector(
-      `.${ButtonFullScreen.reference.className}`,
+      `.${buttons.fullscreen.reference.className}`,
     );
 
     if (orginalFullScreen && cloneFullScreen) {

@@ -1,7 +1,7 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 
-const { callToAction } = Atomic;
+const { actions } = Atomic;
 
 const tagName = 'umd-element-call-to-action';
 
@@ -32,13 +32,13 @@ const createComponent = (element: HTMLElement) => {
       Slots.deprecated.plainText({ element }) ||
       Slots.text.default({ element });
 
-    return callToAction.options({
+    return actions.options({
       ...optionProps,
       plainText,
     });
   }
 
-  return callToAction.options({
+  return actions.options({
     ...optionProps,
   });
 };

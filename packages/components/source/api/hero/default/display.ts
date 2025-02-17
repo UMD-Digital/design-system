@@ -20,8 +20,6 @@ export const ComponentStyles = `
   ${Composite.hero.standard.Styles}
 `;
 
-console.log(Composite.hero.elements.image.Styles);
-
 const MakeHeroData = ({ element }: { element: UMDHeroElement }) => {
   const type = element.getAttribute(Attributes.names.TYPE);
   const includesAnimation = Attributes.includesFeature.animation({ element });

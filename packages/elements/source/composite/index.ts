@@ -54,15 +54,7 @@ export { default as PathwayHighlight } from './pathway/highlight';
 export { default as PathwayOverlay } from './pathway/overlay';
 export { default as PathwaySticky } from './pathway/sticky';
 
-// Person components
-export { default as PersonBlock } from './person/block';
-export { default as PersonBio } from './person/bio';
-export { default as PersonBioFull } from './person/bio-full';
-export { default as PersonHero } from './person/hero';
-export { default as PersonList } from './person/list';
-export { default as PersonTabular } from './person/tabular';
-
-// Quote components
+export { default as person } from './person';
 export { default as quote } from './quote';
 export { default as sectionIntro } from './section-intro';
 export { default as slider } from './slider';

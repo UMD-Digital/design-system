@@ -355,8 +355,6 @@ const CreateCarouselImageStandardElement = (
 
     images[images.length - 1].addEventListener('load', carousel.events.Load);
 
-    console.log(styles);
-
     const responseOptions = {
       styles,
       events: {

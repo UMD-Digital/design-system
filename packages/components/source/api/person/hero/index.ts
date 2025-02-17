@@ -10,7 +10,6 @@ import { Markup, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
 const { Node } = Markup.create;
-const { PersonHero } = Composite;
 
 const ELEMENT_NAME = 'umd-element-person-hero';
 
@@ -20,7 +19,7 @@ export const styles = `
   }
 
   ${Styles.reset}
-  ${PersonHero.Styles}
+  ${Composite.person.hero.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({
@@ -53,7 +52,7 @@ export const CreateShadowDom = ({
   shadow.appendChild(styleTemplate.content.cloneNode(true));
 
   shadow.appendChild(
-    PersonHero.CreateElement({
+    Composite.person.hero.CreateElement({
       ...CommonPersonData({ element, isThemeDark }),
       breadcrumbDesktop: Node.slot({ type: Slots.name.BREADCRUMB }),
       breadcrumbMobile: Node.slot({ type: Slots.name.BREADCRUMB_COPY }),

@@ -10,7 +10,6 @@ import { Markup, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
 const { Node } = Markup.create;
-const { PersonBlock, PersonList, PersonTabular } = Composite;
 
 const ELEMENT_NAME = 'umd-element-person';
 
@@ -20,9 +19,9 @@ export const styles = `
   }
 
   ${Styles.reset}
-  ${PersonBlock.Styles}
-  ${PersonList.Styles}
-  ${PersonTabular.Styles}
+  ${Composite.person.block.Styles}
+  ${Composite.person.list.Styles}
+  ${Composite.person.tabular.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({
@@ -39,20 +38,26 @@ export const CreateShadowDom = ({ element }: { element: UMDPersonElement }) => {
 
   if (isDisplayList) {
     shadow.appendChild(
-      PersonList.CreateElement(CommonPersonData({ element, isThemeDark })),
+      Composite.person.list.CreateElement(
+        CommonPersonData({ element, isThemeDark }),
+      ),
     );
     return;
   }
 
   if (isDisplayTabular) {
     shadow.appendChild(
-      PersonTabular.CreateElement(CommonPersonData({ element, isThemeDark })),
+      Composite.person.tabular.CreateElement(
+        CommonPersonData({ element, isThemeDark }),
+      ),
     );
     return;
   }
 
   shadow.appendChild(
-    PersonBlock.CreateElement(CommonPersonData({ element, isThemeDark })),
+    Composite.person.block.CreateElement(
+      CommonPersonData({ element, isThemeDark }),
+    ),
   );
 };
 

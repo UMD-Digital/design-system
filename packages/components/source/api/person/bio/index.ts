@@ -10,7 +10,6 @@ import { Markup, Styles } from 'utilities';
 import { CommonPersonData } from '../common';
 
 const { Node, SlotWithDefaultStyling } = Markup.create;
-const { PersonBio, PersonBioFull } = Composite;
 
 const ELEMENT_NAME = 'umd-element-person-bio';
 
@@ -20,8 +19,8 @@ export const styles = `
   }
 
   ${Styles.reset}
-  ${PersonBio.Styles}
-  ${PersonBioFull.Styles}
+  ${Composite.person.bio.small.Styles}
+  ${Composite.person.bio.full.Styles}
 `;
 
 export const CreateShadowDom = ({
@@ -33,7 +32,7 @@ export const CreateShadowDom = ({
   const isFullImage = Attributes.isLayout.fullImage({ element });
 
   if (isFullImage) {
-    return PersonBioFull.CreateElement({
+    return Composite.person.bio.full.CreateElement({
       ...CommonPersonData({ element, isThemeDark }),
       description: SlotWithDefaultStyling({
         element,
@@ -42,7 +41,7 @@ export const CreateShadowDom = ({
     });
   }
 
-  return PersonBio.CreateElement({
+  return Composite.person.bio.small.CreateElement({
     ...CommonPersonData({ element, isThemeDark }),
     description: SlotWithDefaultStyling({
       element,

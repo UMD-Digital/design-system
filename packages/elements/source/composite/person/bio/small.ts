@@ -4,8 +4,8 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import PersonImage from './elements/image';
-import PersonTextContainer, { TypePersonProps } from './elements/text';
+import PersonImage from '../elements/image';
+import PersonTextContainer, { TypePersonProps } from '../elements/text';
 
 type TypePersonBioProps = TypePersonProps & {
   image?: HTMLImageElement | null;

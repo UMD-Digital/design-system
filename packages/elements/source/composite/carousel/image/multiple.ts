@@ -146,7 +146,6 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
           index,
         });
 
-        console.log(button);
         block.appendChild(button.element);
         styles += button.styles;
       }

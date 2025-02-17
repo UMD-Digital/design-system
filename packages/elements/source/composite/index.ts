@@ -8,8 +8,7 @@ export { default as Stat } from './stat';
 export { default as StickyColumns } from './sticky-columns';
 
 // Alert components
-export { default as AlertPage } from './alert/page';
-export { default as AlertSite } from './alert/site';
+export { default as alert } from './alert';
 
 // Card components
 export { default as CardBlock, STYLES_BLOCK_CARD_ELEMENT } from './card/block';

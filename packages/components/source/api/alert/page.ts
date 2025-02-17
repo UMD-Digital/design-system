@@ -4,7 +4,7 @@ import { createAlertComponent, type AlertPageProps } from '../_models/alert';
 
 export default createAlertComponent<AlertPageProps>({
   tagName: 'umd-element-alert-page',
-  renderer: Composite.AlertPage,
+  renderer: Composite.alert.page,
   getAdditionalProps: (element: HTMLElement) => ({
     isThemeLight: Attributes.isTheme.light({ element }),
     isThemeDark: Attributes.isTheme.dark({ element }),

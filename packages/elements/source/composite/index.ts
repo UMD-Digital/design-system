@@ -25,12 +25,7 @@ export { default as CarouselCards } from './carousel/cards';
 export { default as CarouselThumbnail } from './carousel/thumbnail';
 
 // Event components
-export { default as EventBlock } from './event/block';
-export { default as EventElements } from './event/elements';
-export { default as EventFeature } from './event/feature';
-export { default as EventList } from './event/list';
-export { default as EventLockupDate } from './event/lockup-date';
-export { default as EventPromo } from './event/promo';
+export { default as event } from './event';
 
 // Hero components
 export { default as hero } from './hero';

@@ -8,8 +8,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
-const { EventBlock, EventElements, EventFeature, EventList, EventPromo } =
-  Composite;
 const { Node } = Markup.create;
 
 const ELEMENT_NAME = 'umd-element-event';
@@ -20,12 +18,12 @@ const styles = `
   }
   
   ${Styles.reset}
-  ${EventElements.Meta.Styles}
-  ${EventElements.Sign.Styles}
-  ${EventBlock.Styles}
-  ${EventFeature.Styles}
-  ${EventList.Styles}
-  ${EventPromo.Styles}
+  ${Composite.event.elements.meta.Styles}
+  ${Composite.event.elements.sign.Styles}
+  ${Composite.event.block.Styles}
+  ${Composite.event.feature.Styles}
+  ${Composite.event.list.Styles}
+  ${Composite.event.promo.Styles}
 `;
 
 const MakeCommonData = ({ element }: { element: UMDEventElement }) => ({
@@ -72,29 +70,30 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
     startDate,
     endDate,
   });
-  const eventDetails = EventElements.Meta.CreateElement(EventDetailMeta);
-  const eventDetailsDark = EventElements.Meta.CreateElement({
+  const eventDetails =
+    Composite.event.elements.meta.CreateElement(EventDetailMeta);
+  const eventDetailsDark = Composite.event.elements.meta.CreateElement({
     ...EventDetailMeta,
     isThemeDark: true,
   });
-  const dateSign = EventElements.Sign.CreateElement(EventSignData);
-  const dateSignLarge = EventElements.Sign.CreateElement({
+  const dateSign = Composite.event.elements.sign.CreateElement(EventSignData);
+  const dateSignLarge = Composite.event.elements.sign.CreateElement({
     ...EventSignData,
     isLargeSize: true,
   });
-  const dateSignLargeLight = EventElements.Sign.CreateElement({
+  const dateSignLargeLight = Composite.event.elements.sign.CreateElement({
     ...EventSignData,
     isLargeSize: true,
     isThemeDark: false,
   });
-  const dateSignLargeDark = EventElements.Sign.CreateElement({
+  const dateSignLargeDark = Composite.event.elements.sign.CreateElement({
     ...EventSignData,
     isLargeSize: true,
     isThemeDark: true,
   });
 
   if (Attributes.isDisplay.feature({ element })) {
-    return EventFeature.CreateElement({
+    return Composite.event.feature.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
       dateSign: isThemeDark ? dateSignLargeLight : dateSignLarge,
@@ -102,7 +101,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   }
 
   if (Attributes.isDisplay.promo({ element })) {
-    return EventPromo.CreateElement({
+    return Composite.event.promo.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: eventDetails,
       dateSign,
@@ -110,14 +109,14 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   }
 
   if (Attributes.isDisplay.list({ element })) {
-    return EventList.CreateElement({
+    return Composite.event.list.CreateElement({
       ...MakeCommonData({ element }),
       eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
       dateSign: isThemeDark ? dateSignLargeDark : dateSignLarge,
     });
   }
 
-  return EventBlock.CreateElement({
+  return Composite.event.block.CreateElement({
     ...MakeCommonData({ element }),
     eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
   });

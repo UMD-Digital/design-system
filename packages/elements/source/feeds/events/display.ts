@@ -1,4 +1,4 @@
-import { EventBlock, EventList, EventElements } from 'composite';
+import * as Composite from 'composite';
 import * as Utility from 'utilities';
 
 type ImageType = {
@@ -33,10 +33,10 @@ export type EventType = DateInformaitonType & {
 };
 
 const STYLES_EVENT_FEED = `
-  ${EventBlock.Styles}
-  ${EventList.Styles}
-  ${EventElements.Sign.Styles}
-  ${EventElements.Meta.Styles}
+  ${Composite.event.block.Styles}
+  ${Composite.event.list.Styles}
+  ${Composite.event.elements.sign.Styles}
+  ${Composite.event.elements.meta.Styles}
 `;
 
 const CreateImage = ({
@@ -117,7 +117,7 @@ const CommonDisplay = ({
   }),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),
-  eventDetails: EventElements.Meta.CreateElement({
+  eventDetails: Composite.event.elements.meta.CreateElement({
     ...entry,
     isThemeDark: !isThemeDark,
     showTime,
@@ -162,13 +162,16 @@ const CreateEventsGrouped = ({
   const entriesMapping = entries.map((entry) => ({
     dateBanner: getDateBanner(entry),
     timeStamp: entry.startStamp,
-    html: EventList.CreateElement({
+    html: Composite.event.list.CreateElement({
       ...CommonDisplay({
         entry,
         isThemeDark,
         showTime: entry.allDay ? false : true,
       }),
-      dateSign: EventElements.Sign.CreateElement({ ...entry, isThemeDark }),
+      dateSign: Composite.event.elements.sign.CreateElement({
+        ...entry,
+        isThemeDark,
+      }),
       isThemeDark,
     }),
   }));
@@ -210,7 +213,7 @@ const CreateEventFeedDisplay = ({
 }) => {
   if (isTypeGrid) {
     return entries.map((entry) =>
-      EventBlock.CreateElement({
+      Composite.event.block.CreateElement({
         ...CommonDisplay({
           entry,
           isThemeDark,
@@ -221,13 +224,13 @@ const CreateEventFeedDisplay = ({
   }
 
   return entries.map((entry) =>
-    EventList.CreateElement({
+    Composite.event.list.CreateElement({
       ...CommonDisplay({
         entry,
         isThemeDark,
         showTime: entry.allDay ? false : true,
       }),
-      dateSign: EventElements.Sign.CreateElement({
+      dateSign: Composite.event.elements.sign.CreateElement({
         ...entry,
         isThemeDark,
         isLargeSize: true,

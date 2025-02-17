@@ -11,7 +11,7 @@ const {
   PathwayHero,
   PathwayOverlay,
   PathwaySticky,
-  EventElements,
+  event,
 } = Composite;
 
 export const ComponentStyles = `
@@ -20,8 +20,8 @@ export const ComponentStyles = `
   }
 
   ${Styles.reset}
-  ${EventElements.Meta.Styles}
-  ${EventElements.Sign.Styles}
+  ${event.elements.meta.Styles}
+  ${event.elements.sign.Styles}
   ${PathwayElements.Image.Styles}
   ${PathwayElements.Text.Styles}
   ${PathwayDefault.Styles}
@@ -81,13 +81,13 @@ const MakeCommonDefaultData = ({
       endDate,
     });
 
-    obj.eventDetails = EventElements.Meta.CreateElement({
+    obj.eventDetails = event.elements.meta.CreateElement({
       ...eventData,
       isThemeDark: themeToggle,
       showTime,
     });
 
-    obj.eventSign = EventElements.Sign.CreateElement({
+    obj.eventSign = event.elements.sign.CreateElement({
       ...eventData,
     });
   }

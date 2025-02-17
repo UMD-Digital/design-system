@@ -8,7 +8,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
-const { EventLockupDate, EventElements } = Composite;
 const { Node } = Markup.create;
 
 // prettier-ignore
@@ -18,7 +17,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${EventLockupDate.Styles}
+  ${Composite.event.lockup.date.Styles}
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
@@ -35,7 +34,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   const endDate = Markup.event.createDate({ element: endDateSlot });
 
   if (!startDate) {
-    return EventLockupDate.CreateElement({
+    return Composite.event.lockup.date.CreateElement({
       headline,
       isThemeDark,
     });
@@ -45,12 +44,12 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
     startDate,
     endDate,
   });
-  const dateSign = EventElements.Sign.CreateElement({
+  const dateSign = Composite.event.elements.sign.CreateElement({
     ...EventSignData,
     isThemeDark,
   });
 
-  return EventLockupDate.CreateElement({
+  return Composite.event.lockup.date.CreateElement({
     headline,
     dateSign,
     isThemeDark,

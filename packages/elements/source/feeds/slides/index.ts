@@ -1,5 +1,5 @@
 import * as Utility from 'utilities';
-import { EventLockupDate, EventElements } from 'composite';
+import * as Composite from 'composite';
 
 type TypeSlideFeedResponse = {
   title: string;
@@ -57,8 +57,8 @@ const ACADEMICS_QUERY = `
 
 // prettier-ignore
 const STYLES_FEEDS_SLIDE_ELEMENT = `
-  ${EventLockupDate.Styles}
-  ${EventElements.Sign.Styles}
+  ${Composite.event.lockup.date.Styles}
+  ${Composite.event.elements.sign.Styles}
 `;
 
 const CreateFeedSlideEvent = async ({
@@ -118,7 +118,7 @@ const CreateFeedSlideEvent = async ({
 
   return feedData.data.entries.events.map((data: TypeSlideFeedResponse) => {
     const headline = document.createElement('p');
-    const dateSign = EventElements.Sign.CreateElement({
+    const dateSign = Composite.event.elements.sign.CreateElement({
       startMonth: data.startMonth,
       startDay: data.startDay,
       endDay: data.endDay,
@@ -128,7 +128,7 @@ const CreateFeedSlideEvent = async ({
 
     headline.textContent = data.title;
 
-    return EventLockupDate.CreateElement({
+    return Composite.event.lockup.date.CreateElement({
       headline,
       isThemeDark,
       dateSign,

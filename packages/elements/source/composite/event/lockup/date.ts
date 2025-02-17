@@ -3,7 +3,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import EventElements from './elements';
+import EventElements from '../elements';
 import * as Utility from 'utilities';
 
 type TypeEventLockupDate = {
@@ -12,7 +12,6 @@ type TypeEventLockupDate = {
   isThemeDark?: boolean;
 };
 
-const { font, spacing } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -75,7 +74,7 @@ const ComponentStyles = `
 
 
   ${HeadlineStyles}
-  ${EventElements.Sign.Styles}
+  ${EventElements.sign.Styles}
 `;
 
 const CreateEventLockupDate = (props: TypeEventLockupDate) => {

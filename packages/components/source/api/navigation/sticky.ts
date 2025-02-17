@@ -8,7 +8,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { NavigationElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-navigation-sticky';
 
@@ -18,7 +17,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${NavigationElements.Sticky.Styles}
+  ${Composite.navigation.elements.sticky.Styles}
 `;
 
 class UMDHeaderStickyElement extends HTMLElement {
@@ -38,7 +37,7 @@ class UMDHeaderStickyElement extends HTMLElement {
     const content = Node.slot({ type: 'content' });
 
     _shadow.appendChild(
-      NavigationElements.Sticky.CreateElement({
+      Composite.navigation.elements.sticky.CreateElement({
         content,
         component: element,
       }),

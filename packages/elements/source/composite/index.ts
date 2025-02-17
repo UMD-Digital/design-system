@@ -20,9 +20,7 @@ export { default as CardOverlayImage } from './card-overlay/image';
 export { default as carousel } from './carousel';
 export { default as event } from './event';
 export { default as hero } from './hero';
-
-// Layout components
-export { default as LayoutImageExpand } from './layout/image-expand';
+export { default as layout } from './layout';
 
 // Logo components
 export { default as LogoBlock } from './logo/block';
@@ -32,12 +30,7 @@ export { default as MediaInline } from './media/inline';
 export { default as MediaWithCaption } from './media/inline/with-caption';
 export { default as MediaWrapped } from './media/inline/wrapped';
 
-// Navigation components
-export { default as NavigationElements } from './navigation/elements';
-export { default as NavigationHeader } from './navigation';
-export { default as NavigationUtility } from './navigation/utility';
-
-// Pathway components
+export { default as navigation } from './navigation';
 export { default as pathway } from './pathway';
 export { default as person } from './person';
 export { default as quote } from './quote';

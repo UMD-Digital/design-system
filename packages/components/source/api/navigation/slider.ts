@@ -8,8 +8,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Markup, Styles } from 'utilities';
 import { MakeNavSlider, SLOTS } from './common';
 
-const { NavigationElements } = Composite;
-
 const ELEMENT_NAME = 'umd-element-nav-slider';
 const ATTRIBUTE_RESIZE = 'resize';
 
@@ -19,7 +17,7 @@ export const styles = `
   }
 
   ${Styles.reset}
-  ${NavigationElements.Slider.Styles}
+  ${Composite.navigation.elements.slider.Styles}
 `;
 
 const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
@@ -57,6 +55,7 @@ class UMDNavSlider extends HTMLElement {
   connectedCallback() {
     this._elementRef = CreateShadowDom({ element: this });
 
+    if (!this._elementRef) return;
     this._shadow.appendChild(this._elementRef.container);
   }
 }

@@ -1,12 +1,10 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register } from 'model';
 
-const { NavigationUtility } = Composite;
-
 const tagName = 'umd-element-navigation-utility';
 
 const createComponent = (element: HTMLElement) =>
-  NavigationUtility({
+  Composite.navigation.utility({
     alertUrl: Attributes.getValue.alertUrl({ element }),
     giftUrl:
       Attributes.getValue.giftUrl({

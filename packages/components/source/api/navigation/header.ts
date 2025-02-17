@@ -10,7 +10,6 @@ import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 
 const { Node } = Markup.create;
 const { SlotWithDefaultStyling } = Markup.create;
-const { NavigationHeader, NavigationElements } = Composite;
 
 const ELEMENT_NAME = 'umd-element-navigation-header';
 const ATTRIBUTE_SEARCH_URL = 'search-url';
@@ -30,8 +29,8 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${NavigationElements.Drawer.Styles}
-  ${NavigationHeader.Styles}
+  ${Composite.navigation.elements.drawer.Styles}
+  ${Composite.navigation.header.Styles}
 `;
 
 const CreateNavItemSlots = ({ element }: { element: HTMLElement }) => {
@@ -84,7 +83,7 @@ const CreateHeader = ({
     console.error('UMDHeaderElement: Logo slot is required');
   }
 
-  const value = NavigationHeader.CreateElement({
+  const value = Composite.navigation.header.CreateElement({
     logo: logoSlot,
     utilityRow: utilitySlot,
     navItems: CreateNavItemSlots({ element }),

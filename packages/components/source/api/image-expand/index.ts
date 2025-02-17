@@ -9,7 +9,6 @@ import { Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { LayoutImageExpand } = Composite;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 
@@ -19,7 +18,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${LayoutImageExpand.Styles}
+  ${Composite.layout.image.expand.Styles}
 `;
 
 const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
@@ -37,7 +36,7 @@ export const CreateShadowDom = ({
   });
 
   if (content && image) {
-    const component = LayoutImageExpand.CreateElement({
+    const component = Composite.layout.image.expand.CreateElement({
       content,
       image,
     });

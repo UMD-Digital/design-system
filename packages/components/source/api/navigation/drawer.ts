@@ -8,8 +8,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Markup, Styles } from 'utilities';
 import { SLOTS, MakeNavDrawer } from './common';
 
-const { NavigationElements } = Composite;
-
 const ELEMENT_NAME = 'umd-element-nav-drawer';
 
 export const styles = `
@@ -18,8 +16,8 @@ export const styles = `
   }
 
   ${Styles.reset}
-  ${NavigationElements.Drawer.Styles}
-  ${NavigationElements.MenuButton.Styles}
+  ${Composite.navigation.elements.drawer.Styles}
+  ${Composite.navigation.elements.menuButton.Styles}
 `;
 
 const CreateNavigationDrawerElement = ({
@@ -30,7 +28,7 @@ const CreateNavigationDrawerElement = ({
   const container = document.createElement('div');
   const drawer = MakeNavDrawer({ element, ...SLOTS });
   if (!drawer) return null;
-  const button = NavigationElements.MenuButton.CreateElement({
+  const button = Composite.navigation.elements.menuButton.CreateElement({
     eventOpen: drawer.events.eventOpen,
   });
 

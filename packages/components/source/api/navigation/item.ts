@@ -8,7 +8,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { NavigationElements } = Composite;
 
 const SLOTS = {
   PRIMARY_LINK: 'primary-link',
@@ -25,7 +24,7 @@ export const styles = `
   }
 
   ${Styles.reset}
-  ${NavigationElements.Item.Styles}
+  ${Composite.navigation.elements.item.Styles}
 `;
 
 class UMDNavItemElement extends HTMLElement {
@@ -84,7 +83,7 @@ class UMDNavItemElement extends HTMLElement {
       throw new Error('Primary link is required for a nav item');
     }
 
-    const navItem = NavigationElements.Item.CreateElement({
+    const navItem = Composite.navigation.elements.item.CreateElement({
       ...elementData,
     });
 

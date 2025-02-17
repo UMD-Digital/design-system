@@ -1,13 +1,13 @@
-import Drawer from './drawer';
-import MenuButton from './menu-button';
-import Item from './item';
-import Slider from './slider';
-import Sticky from './sticky';
+import drawer from './drawer';
+import menuButton from './menu-button';
+import item from './item';
+import slider from './slider';
+import sticky from './sticky';
 
 export default {
-  Drawer,
-  MenuButton,
-  Item,
-  Slider,
-  Sticky,
+  drawer,
+  menuButton,
+  item,
+  slider,
+  sticky,
 };

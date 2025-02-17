@@ -2,7 +2,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Markup } from 'utilities';
 
 const { Node } = Markup.create;
-const { NavigationElements } = Composite;
 
 const DRAWER_SLOTS = {
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',
@@ -106,7 +105,7 @@ export const MakeSliderData = ({
 
 export const MakeNavDrawer = (props: TypeNavDrawerRequirements) => {
   const { element, displayType } = props;
-  return NavigationElements.Drawer.CreateElement({
+  return Composite.navigation.elements.drawer.CreateElement({
     ...MakeSliderData(props),
     context: element,
     displayType,
@@ -114,7 +113,7 @@ export const MakeNavDrawer = (props: TypeNavDrawerRequirements) => {
 };
 
 export const MakeNavSlider = (props: TypeSliderRequirements) =>
-  NavigationElements.Slider.CreateElement({
+  Composite.navigation.elements.slider.CreateElement({
     ...MakeSliderData(props),
     displayType: 'interior-nav',
   });

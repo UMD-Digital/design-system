@@ -204,6 +204,7 @@ export const CreateHeroMinimalElement = (element: TypeHeroMinimalProps) => {
     ...element,
     isTypeMinimal: true,
   });
+  let styles = STYLES_HERO_MINIMAL_ELEMENT;
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
@@ -212,11 +213,13 @@ export const CreateHeroMinimalElement = (element: TypeHeroMinimalProps) => {
 
   lock.classList.add(ELEMENT_HERO_LOCK);
 
-  lock.appendChild(text);
+  lock.appendChild(text.element);
+  styles += text.styles;
 
   if (asset) {
     container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
-    container.appendChild(asset);
+    container.appendChild(asset.element);
+    styles += asset.styles;
   }
 
   container.appendChild(lock);
@@ -224,10 +227,9 @@ export const CreateHeroMinimalElement = (element: TypeHeroMinimalProps) => {
   declaration.classList.add(ELEMENT_HERO_DECLARATION);
   declaration.appendChild(container);
 
-  return declaration;
+  return { element: declaration, styles };
 };
 
 export default {
   CreateElement: CreateHeroMinimalElement,
-  Styles: STYLES_HERO_MINIMAL_ELEMENT,
 };

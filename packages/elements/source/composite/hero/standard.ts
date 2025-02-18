@@ -289,8 +289,7 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
     },
   })}
   
-  ${TextContainer.Styles}
-  ${ImageContainer.Styles}
+
   ${OverwriteEyebrow}
   ${OverwriteHeadline}
   ${OverwriteRichText}
@@ -308,10 +307,17 @@ export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
   const lock = document.createElement('div');
   const text = TextContainer.CreateElement(element);
   const asset = ImageContainer.CreateElement(element);
+  let styles = STYLES_HERO_DEFAULT_ELEMENT;
 
   lock.classList.add(HERO_LOCK);
-  lock.appendChild(text);
-  if (asset) container.appendChild(asset);
+  lock.appendChild(text.element);
+  styles += text.styles;
+
+  if (asset) {
+    container.appendChild(asset.element);
+    styles += asset.styles;
+  }
+
   if (videoRef) container.setAttribute(ATTRIBUTE_IS_VIDEO, '');
 
   if (!isInterior && headline) {
@@ -331,10 +337,12 @@ export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
   declaration.classList.add(HERO_ELEMENT_DECLARATION);
   declaration.appendChild(container);
 
-  return declaration;
+  return {
+    element: declaration,
+    styles,
+  };
 };
 
 export default {
   CreateElement: CreateHeroDefaultElement,
-  Styles: STYLES_HERO_DEFAULT_ELEMENT,
 };

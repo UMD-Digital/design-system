@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import ButtonVideoState from '../../../atomic/buttons/video-state';
+import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import * as Utility from 'utilities';
 
@@ -129,7 +129,6 @@ const STYLES_PATHWAY_IMAGE_CONTAINER = `
   ${ImageSizeStyles}
   ${GifStyles}
   ${EventSignStyles}
-  ${ButtonVideoState.Styles}
 `
 
 const CreatePathwayImageContainer = (
@@ -139,6 +138,7 @@ const CreatePathwayImageContainer = (
   const wrapper = document.createElement('div');
   const { image, video, eventSign } = element;
   const isVideo = video instanceof HTMLVideoElement;
+  let styles = STYLES_PATHWAY_IMAGE_CONTAINER;
 
   wrapper.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE_WRAPPER);
 
@@ -163,14 +163,16 @@ const CreatePathwayImageContainer = (
 
     if (video && isVideo) {
       const videoRef = video as HTMLVideoElement;
-      const buttonMacro = ButtonVideoState.CreateElement({ video: videoRef });
+      const buttonState = buttons.videoState({ video: videoRef });
 
       wrapper.appendChild(videoRef);
-      wrapper.appendChild(buttonMacro.elements.button);
+      wrapper.appendChild(buttonState.element);
+      styles += buttonState.styles;
+
       if (!Utility.accessibility.isPrefferdReducedMotion()) {
-        buttonMacro.events.setButtonPlay();
+        buttonState.events.setButtonPlay();
       } else {
-        buttonMacro.events.setButtonPause();
+        buttonState.events.setButtonPause();
         video.pause();
       }
 
@@ -184,7 +186,10 @@ const CreatePathwayImageContainer = (
       container.appendChild(eventSign);
     }
 
-    return container;
+    return {
+      element: container,
+      styles,
+    };
   }
 
   return null;
@@ -192,7 +197,6 @@ const CreatePathwayImageContainer = (
 
 export default {
   CreateElement: CreatePathwayImageContainer,
-  Styles: STYLES_PATHWAY_IMAGE_CONTAINER,
   Elements: {
     container: ELEMENT_PATHWAY_CONTAINER_IMAGE,
   },

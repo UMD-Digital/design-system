@@ -250,6 +250,7 @@ const CreatePathwayTextContainer = ({
 }: TypePathwayTextContainer) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
+  let styles = STYLES_PATHWAY_TEXT_CONTAINER;
 
   wrapper.classList.add(ELEMENT_TEXT_CONTAINER_WRAPPER);
 
@@ -291,12 +292,11 @@ const CreatePathwayTextContainer = ({
   container.classList.add(ELEMENT_TEXT_CONTAINER);
   container.appendChild(wrapper);
 
-  return container;
+  return { element: container, styles };
 };
 
 export default {
   CreateElement: CreatePathwayTextContainer,
-  Styles: STYLES_PATHWAY_TEXT_CONTAINER,
   Elements: {
     container: ELEMENT_TEXT_CONTAINER,
     wrapper: ELEMENT_TEXT_CONTAINER_WRAPPER,

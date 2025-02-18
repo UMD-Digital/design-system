@@ -3,7 +3,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import ButtonVideoState from '../../../atomic/buttons/video-state';
+import { buttons } from 'atomic';
 import { AnimationOverlayBrand } from 'macros';
 import * as Utility from 'utilities';
 
@@ -151,7 +151,6 @@ const STYLES_HERO_BRAND_VIDEO_ELEMENT = `
   ${TextOverlayStyles}
   ${HeadlineStyles}
   ${TextStyles}
-  ${ButtonVideoState.Styles}
   ${AnimationOverlayBrand.Styles}
 `;
 
@@ -209,7 +208,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
     completedCallback,
     isAnimationOnLoad,
   });
-  const buttonMacro = ButtonVideoState.CreateElement({ video });
+  const buttonState = buttons.videoState({ video });
   const eventRize = () => {
     if (container.offsetHeight > window.innerHeight) {
       container.style.height = `${(window.innerHeight / 10) * 9}px`;
@@ -217,14 +216,15 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
   };
   const eventLoad = () => {
     overlay.events.load();
-    buttonMacro.events.setButtonPlay();
+    buttonState.events.setButtonPlay();
     eventRize();
 
     if (Utility.accessibility.isPrefferdReducedMotion()) {
       video.pause();
-      buttonMacro.events.setButtonPause();
+      buttonState.events.setButtonPause();
     }
   };
+  let styles = STYLES_HERO_BRAND_VIDEO_ELEMENT;
 
   video.classList.add(ELEMENT_HERO_ELEMENT_VIDEO);
 
@@ -232,7 +232,8 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
   wrapper.appendChild(video);
   if (textContainer) wrapper.appendChild(textContainer);
   wrapper.appendChild(overlay.element);
-  wrapper.appendChild(buttonMacro.elements.button);
+  wrapper.appendChild(buttonState.element);
+  styles += buttonState.styles;
 
   container.classList.add(ELEMENT_HERO_ELEMENT_CONTAINER);
   container.appendChild(wrapper);
@@ -249,6 +250,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
 
   return {
     element: declaration,
+    styles,
     events: {
       load: eventLoad,
     },
@@ -257,5 +259,4 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
 
 export default {
   CreateElement: CreateHeroBrandVideoElement,
-  Styles: STYLES_HERO_BRAND_VIDEO_ELEMENT,
 };

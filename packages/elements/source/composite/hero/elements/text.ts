@@ -180,6 +180,7 @@ const CreateTextContainerElement = (element: TypeTextContainerProps) => {
   const { isThemeDark, isTextCenter = false } = element;
   const container = document.createElement('div');
   const body = CreateBody(element);
+  let styles = STYLES_HERO_ELEMENT_TEXT_CONTAINER;
 
   container.classList.add(ELEMENT_TEXT_CONTAINER);
 
@@ -190,12 +191,11 @@ const CreateTextContainerElement = (element: TypeTextContainerProps) => {
 
   container.appendChild(body);
 
-  return container;
+  return { element: container, styles };
 };
 
 export default {
   CreateElement: CreateTextContainerElement,
-  Styles: STYLES_HERO_ELEMENT_TEXT_CONTAINER,
   Elements: {
     container: ELEMENT_TEXT_CONTAINER,
     wrapper: ELEMENT_TEXT_CONTAINER_WRAPPER,

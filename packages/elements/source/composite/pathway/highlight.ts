@@ -218,19 +218,21 @@ const CreatePathwayHighlightElement = (element: TypePathwayHighlightProps) => {
 
   const textContainer = TextContainer.CreateElement(element);
   const highlightContainer = CreateHighlightColumn(element);
+  let styles = STYLES_PATHWAY_HIGHLIGHT;
 
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   container.classList.add(PATHWAY_HIGHLIGHT_CONTAINER);
   lock.classList.add(PATHWAY_HIGHLIGHT_CONTAINER_LOCK);
 
-  lock.appendChild(textContainer);
+  lock.appendChild(textContainer.element);
+  styles += textContainer.styles;
+
   lock.appendChild(highlightContainer);
 
   container.appendChild(lock);
-  return container;
+  return { element: container, styles };
 };
 
 export default {
   CreateElement: CreatePathwayHighlightElement,
-  Styles: STYLES_PATHWAY_HIGHLIGHT,
 };

@@ -1,41 +1,152 @@
-declare global {
-  interface Window {
-    UMDPathwayElement: typeof UMDPathwayElement;
-  }
-}
-
+import { Composite } from '@universityofmaryland/web-elements-library';
+import { Attributes, Model, Register, Slots } from 'model';
+import { CommonPathwayData } from '../common';
 import { Markup } from 'utilities';
-import { ComponentStyles, CreateShadowDom } from './display';
 
-const ELEMENT_NAME = 'umd-element-pathway';
+const tagName = 'umd-element-pathway';
 
-export class UMDPathwayElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _styles: HTMLTemplateElement;
+const { SlotWithDefaultStyling } = Markup.create;
 
-  constructor() {
-    const styleTemplate = Markup.create.Node.stylesTemplate({
-      styles: `${ComponentStyles}`,
+const MakeCommonDefaultData = ({
+  element,
+  isThemeDark,
+  isThemeMaryland,
+}: {
+  element: HTMLElement;
+  isThemeDark?: boolean;
+  isThemeLight?: boolean;
+  isThemeMaryland?: boolean;
+}) => {
+  const startDateSlot = element.querySelector(
+    `[slot="${Slots.name.DATE_START_ISO}"]`,
+  );
+  const endDateSlot = element.querySelector(
+    `[slot="${Slots.name.DATE_END_ISO}"]`,
+  );
+  const locationSlot = element.querySelector(
+    `[slot="${Slots.name.contact.location}"]`,
+  );
+  const isImageRight =
+    element.getAttribute(Attributes.names.LAYOUT_IMAGE_POSITION) !== 'left';
+  const showTime = element.getAttribute(Attributes.names.SHOW_TIME) !== 'false';
+
+  const startDate = Markup.event.createDate({ element: startDateSlot });
+  const endDate = Markup.event.createDate({ element: endDateSlot });
+  const obj = {
+    ...CommonPathwayData({
+      element,
+    }),
+    isImageRight,
+    stats: SlotWithDefaultStyling({ element, slotRef: Slots.name.STATS }),
+    image: Markup.validate.ImageSlot({
+      element,
+      ImageSlot: Slots.name.assets.image,
+    }),
+    video: SlotWithDefaultStyling({ element, slotRef: Slots.name.VIDEO }),
+    eventDetails: null as null | HTMLElement,
+    eventSign: null as null | HTMLElement,
+    includedStyles: '',
+  };
+  let themeToggle = true;
+
+  if (isThemeMaryland) themeToggle = false;
+  if (isThemeDark) themeToggle = false;
+
+  if (startDate) {
+    const eventData = Markup.event.createDetailsData({
+      locationElement: locationSlot,
+      startDate,
+      endDate,
+    });
+    let styles = '';
+
+    obj.eventDetails = Composite.event.elements.meta.CreateElement({
+      ...eventData,
+      isThemeDark: themeToggle,
+      showTime,
     });
 
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._styles = styleTemplate;
+    obj.eventSign = Composite.event.elements.sign.CreateElement({
+      ...eventData,
+    });
+
+    styles += Composite.event.elements.sign.Styles;
+    styles += Composite.event.elements.meta.Styles;
+
+    obj.includedStyles = styles;
   }
 
-  connectedCallback() {
-    CreateShadowDom({ element: this });
+  return obj;
+};
+
+const createComponent = (element: HTMLElement) => {
+  const isImageScaled =
+    element.getAttribute(Attributes.names.LAYOUT_IMAGE_SCALED) !== 'false';
+
+  const isThemeDark = Attributes.isTheme.dark({ element });
+  const isThemeLight = Attributes.isTheme.light({ element });
+  const isThemeMaryland = Attributes.isTheme.maryland({ element });
+  const includesAnimation = Attributes.includesFeature.animation({ element });
+
+  // Type Attribute should be deprecated for display
+  const type = element.getAttribute(Attributes.names.TYPE);
+
+  const themes = {
+    isThemeDark,
+    isThemeLight,
+    isThemeMaryland,
+  };
+
+  if (type === Attributes.values.display.HERO) {
+    return Composite.pathway.hero.CreateElement({
+      ...MakeCommonDefaultData({ element, ...themes }),
+      includesAnimation,
+    });
   }
-}
+
+  if (type === Attributes.values.display.OVERLAY) {
+    return Composite.pathway.overlay.CreateElement({
+      isImageScaled,
+      ...themes,
+      includesAnimation,
+      ...MakeCommonDefaultData({ element, ...themes }),
+    });
+  }
+
+  if (type === Attributes.values.display.STICKY) {
+    return Composite.pathway.sticky.CreateElement({
+      isThemeDark: Attributes.isTheme.dark({ element }),
+      isImageScaled,
+      ...MakeCommonDefaultData({ element, ...themes }),
+    });
+  }
+
+  return Composite.pathway.standard.CreateElement({
+    ...themes,
+    isImageScaled,
+    includesAnimation,
+    ...MakeCommonDefaultData({
+      element,
+      ...themes,
+    }),
+  });
+};
 
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDPathwayElement = UMDPathwayElement;
-    window.customElements.define(ELEMENT_NAME, UMDPathwayElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+      afterConnect: (element) => {
+        // setTimeout(() => {
+        //   if (element?.getBoundingClientRect().top > 0) {
+        //     element?.events?.loadAnimation();
+        //   }
+        // }, 10);
+      },
+    }),
+  });
 };
 
 export default {

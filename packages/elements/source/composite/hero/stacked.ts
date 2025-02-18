@@ -246,6 +246,7 @@ export const CreateHeroStackedElement = (element: TypeHeroStackedProps) => {
     ...element,
     isTypeStacked: true,
   });
+  let styles = STYLES_HERO_STACKED_ELEMENT;
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
   if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
@@ -256,33 +257,34 @@ export const CreateHeroStackedElement = (element: TypeHeroStackedProps) => {
     const overlay = document.createElement('div');
     overlay.classList.add(ELEMENT_HERO_IMAGE_OVERLAY);
 
-    asset.appendChild(overlay);
+    asset.element.appendChild(overlay);
+    styles += asset.styles;
+    styles += text.styles;
 
     if (isWithLock) {
-      lock.appendChild(text);
-      lock.appendChild(asset);
+      lock.appendChild(text.element);
+      lock.appendChild(asset.element);
       container.setAttribute(ATTRIBUTE_WITHIN_LOCK, '');
       container.appendChild(lock);
     } else {
-      lock.innerHTML = text.innerHTML;
-      text.innerHTML = '';
-      text.appendChild(lock);
+      lock.innerHTML = text.element.innerHTML;
+      text.element.innerHTML = '';
+      text.element.appendChild(lock);
 
-      container.appendChild(asset);
-      container.appendChild(text);
+      container.appendChild(asset.element);
+      container.appendChild(text.element);
     }
   } else {
-    lock.appendChild(text);
+    lock.appendChild(text.element);
     container.appendChild(lock);
   }
 
   declaration.classList.add(ELEMENT_HERO_DECLARATION);
   declaration.appendChild(container);
 
-  return declaration;
+  return { element: declaration, styles };
 };
 
 export default {
   CreateElement: CreateHeroStackedElement,
-  Styles: STYLES_HERO_STACKED_ELEMENT,
 };

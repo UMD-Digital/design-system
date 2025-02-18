@@ -1,38 +1,36 @@
-declare global {
-  interface Window {
-    UMDHeroMinimalElement: typeof UMDHeroMinimalElement;
-  }
-}
+import { Composite } from '@universityofmaryland/web-elements-library';
+import { Attributes, Model, Register } from 'model';
+import { CommonHeroData } from '../common';
 
-import { Markup } from 'utilities';
-import { ComponentStyles as styles, CreateShadowDom } from './display';
+const tagName = 'umd-element-hero-minimal';
 
-const ELEMENT_NAME = 'umd-element-hero-minimal';
-const template = Markup.create.Node.stylesTemplate({ styles });
-
-export class UMDHeroMinimalElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _styles: HTMLTemplateElement;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._styles = template;
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
+const createComponent = (element: HTMLElement) =>
+  Composite.hero.minimal.CreateElement({
+    isThemeDark: Attributes.isTheme.dark({
+      element,
+    }),
+    isThemeLight: Attributes.isTheme.light({
+      element,
+    }),
+    isThemeMaryland: Attributes.isTheme.maryland({
+      element,
+    }),
+    ...CommonHeroData({
+      element,
+    }),
+  });
 
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDHeroMinimalElement = UMDHeroMinimalElement;
-    window.customElements.define(ELEMENT_NAME, UMDHeroMinimalElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+      afterConnect: (element) => {
+        element?.events?.load();
+      },
+    }),
+  });
 };
 
 export default {

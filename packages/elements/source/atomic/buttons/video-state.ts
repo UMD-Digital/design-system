@@ -23,7 +23,7 @@ const STYLES_BUTTON_VIDEO_STATE = `
   }
 `;
 
-const CreateButtonVideoState = ({ video }: { video: HTMLVideoElement }) =>
+export default ({ video }: { video: HTMLVideoElement }) =>
   (() => {
     const button = document.createElement('button');
     const setButtonPlay = () => {
@@ -36,6 +36,7 @@ const CreateButtonVideoState = ({ video }: { video: HTMLVideoElement }) =>
       button.innerHTML = Utility.asset.icon.PLAY;
       video.pause();
     };
+    let styles = STYLES_BUTTON_VIDEO_STATE;
 
     button.setAttribute('type', 'button');
     button.classList.add(ELEMENT_BUTTON);
@@ -44,17 +45,11 @@ const CreateButtonVideoState = ({ video }: { video: HTMLVideoElement }) =>
     });
 
     return {
-      elements: {
-        button,
-      },
+      element: button,
+      styles,
       events: {
         setButtonPlay,
         setButtonPause,
       },
     };
   })();
-
-export default {
-  CreateElement: CreateButtonVideoState,
-  Styles: STYLES_BUTTON_VIDEO_STATE,
-};

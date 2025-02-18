@@ -207,12 +207,15 @@ export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
   const lock = document.createElement('div');
   const text = TextContainer.CreateElement(element);
   const asset = ImageContainer.CreateElement(element);
+  let styles = STYLES_HERO_OVERLAY_ELEMENT;
 
   lock.classList.add(ELEMENT_HERO_LOCK);
-  lock.appendChild(text);
+  lock.appendChild(text.element);
+  styles += text.styles;
 
   if (asset) {
-    container.appendChild(asset);
+    container.appendChild(asset.element);
+    styles += asset.styles;
   }
 
   if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
@@ -222,10 +225,9 @@ export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
   declaration.classList.add(ELEMENT_HERO_DECLARATION);
   declaration.appendChild(container);
 
-  return declaration;
+  return { element: declaration, styles };
 };
 
 export default {
   CreateElement: CreateHeroOverlayElement,
-  Styles: STYLES_HERO_OVERLAY_ELEMENT,
 };

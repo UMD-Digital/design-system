@@ -1,39 +1,30 @@
-declare global {
-  interface Window {
-    UMDHeroLogoElement: typeof UMDHeroLogoElement;
-  }
-}
+import { Composite } from '@universityofmaryland/web-elements-library';
+import { Attributes, Model, Register } from 'model';
+import { CommonHeroData } from '../common';
 
-import { Markup } from 'utilities';
-import { ComponentStyles as styles, CreateShadowDom } from './display';
+const tagName = 'umd-element-hero-logo';
 
-const ELEMENT_NAME = 'umd-element-hero-logo';
-const template = Markup.create.Node.stylesTemplate({ styles });
-
-export class UMDHeroLogoElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  _styles: HTMLTemplateElement;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._styles = template;
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
+const createComponent = (element: HTMLElement) =>
+  Composite.hero.logo.CreateElement({
+    isThemeDark: Attributes.isTheme.dark({
+      element,
+    }),
+    ...CommonHeroData({
+      element,
+    }),
+  });
 
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDHeroLogoElement = UMDHeroLogoElement;
-    window.customElements.define(ELEMENT_NAME, UMDHeroLogoElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+      afterConnect: (element) => {
+        element?.events?.load();
+      },
+    }),
+  });
 };
 
 export default {

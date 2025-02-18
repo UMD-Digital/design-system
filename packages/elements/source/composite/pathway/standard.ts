@@ -7,9 +7,9 @@ type TypePathwayDefaultProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
     isImageRight: boolean;
     includesAnimation?: boolean;
+    includedStyles?: string;
   };
 
-const { spacing } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 800;
@@ -31,9 +31,7 @@ const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
 const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
 const IS_ANIMATION_START = `[${ATTRIBUTE_ANIMATION}="true"]`;
 
-const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER} .${TextContainer.Elements.container}`;
 const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_DEFAULT_CONTAINER} .${TextContainer.Elements.wrapper}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER} .${ImageContainer.Elements.container}`;
 
 const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
 const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
@@ -253,11 +251,19 @@ const Animation = ({
 };
 
 const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
-  const { isImageRight = true, includesAnimation, isThemeDark } = props;
+  const {
+    isImageRight = true,
+    includesAnimation,
+    isThemeDark,
+    includedStyles,
+  } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
   const lockWrapper = document.createElement('div');
+  let styles = STYLES_PATHWAY_DEFAULT_ELEMENT;
+
+  if (includedStyles) styles += includedStyles;
 
   const textContainer = TextContainer.CreateElement(props);
   const imageContainer = ImageContainer.CreateElement(props);
@@ -277,9 +283,13 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
 
   lockWrapper.classList.add(PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER);
 
-  if (imageContainer) lockWrapper.appendChild(imageContainer);
+  if (imageContainer) {
+    lockWrapper.appendChild(imageContainer.element);
+    styles += imageContainer.styles;
+  }
 
-  lockWrapper.appendChild(textContainer);
+  lockWrapper.appendChild(textContainer.element);
+  styles += textContainer.styles;
 
   lock.appendChild(lockWrapper);
   wrapper.appendChild(lock);
@@ -287,6 +297,7 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
 
   return {
     element: container,
+    styles,
     events: {
       loadAnimation,
     },
@@ -295,5 +306,4 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
 
 export default {
   CreateElement: CreatePathwayDefaultElement,
-  Styles: STYLES_PATHWAY_DEFAULT_ELEMENT,
 };

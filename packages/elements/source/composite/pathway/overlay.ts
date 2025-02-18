@@ -9,6 +9,7 @@ type TypePathwayOverlayProps = TypePathwayTextContainer &
     includesAnimation?: boolean;
     isThemeLight?: boolean;
     isThemeMaryland?: boolean;
+    includedStyles?: string;
   };
 
 const { convertJSSObjectToStyles } = Utility.styles;
@@ -379,6 +380,7 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
     isThemeDark,
     isThemeLight,
     isThemeMaryland,
+    includedStyles,
   } = element;
 
   const textContainer = TextContainer.CreateElement(element);
@@ -386,6 +388,9 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
   const loadAnimation = () => {
     Animation({ includesAnimation, container });
   };
+  let styles = STYLES_PATHWAY_OVERLAY_ELEMENT;
+
+  if (includedStyles) styles += includedStyles;
 
   container.classList.add(PATHWAY_OVERLAY_CONTAINER);
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
@@ -405,8 +410,12 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
 
   lockWrapper.appendChild(background);
 
-  if (imageContainer) lockWrapper.appendChild(imageContainer);
-  lockWrapper.appendChild(textContainer);
+  if (imageContainer) {
+    lockWrapper.appendChild(imageContainer.element);
+    styles += imageContainer.styles;
+  }
+  lockWrapper.appendChild(textContainer.element);
+  styles += textContainer.styles;
 
   lock.appendChild(lockWrapper);
   wrapper.appendChild(lock);
@@ -414,6 +423,7 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
 
   return {
     element: container,
+    styles,
     events: {
       loadAnimation,
     },
@@ -422,5 +432,4 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
 
 export default {
   CreateElement: CreatePathwayOverlayElement,
-  Styles: STYLES_PATHWAY_OVERLAY_ELEMENT,
 };

@@ -1,4 +1,4 @@
-import ButtonVideoState from '../../../atomic/buttons/video-state';
+import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 
 export type TypeImageContainerProps = {
@@ -30,7 +30,6 @@ const STYLES_HERO_ELEMENT_IMAGE_CONTAINER = `
     display: block;
   }
 
-  ${ButtonVideoState.Styles}
 `;
 
 const makeDefaultImage = () => {
@@ -52,6 +51,7 @@ const CreateImageContainerElement = (element: TypeImageContainerProps) => {
     isTypeStacked = false,
   } = element;
   const container = document.createElement('div');
+  let styles = STYLES_HERO_ELEMENT_IMAGE_CONTAINER;
 
   container.classList.add(ELEMENT_IMAGE_CONTINATER);
 
@@ -65,11 +65,12 @@ const CreateImageContainerElement = (element: TypeImageContainerProps) => {
 
   if (videoRef) {
     const video = videoRef.cloneNode(true) as HTMLVideoElement;
-    const buttonMacro = ButtonVideoState.CreateElement({ video });
+    const buttonState = buttons.videoState({ video });
 
     container.appendChild(video);
-    container.appendChild(buttonMacro.elements.button);
-    buttonMacro.events.setButtonPlay();
+    container.appendChild(buttonState.element);
+    buttonState.events.setButtonPlay();
+    styles += buttonState.styles;
   }
 
   if (!videoRef && imageRef) {
@@ -85,12 +86,14 @@ const CreateImageContainerElement = (element: TypeImageContainerProps) => {
     container.appendChild(makeDefaultImage());
   }
 
-  return container;
+  return {
+    element: container,
+    styles,
+  };
 };
 
 export default {
   CreateElement: CreateImageContainerElement,
-  Styles: STYLES_HERO_ELEMENT_IMAGE_CONTAINER,
   Elements: {
     container: ELEMENT_IMAGE_CONTINATER,
   },

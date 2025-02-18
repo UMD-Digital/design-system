@@ -160,25 +160,28 @@ export const CreateHeroLogoElement = (element: TypeHeroLogoProps) => {
   const lock = document.createElement('div');
   const text = TextContainer.CreateElement({ ...element, isTextCenter: true });
   const asset = ImageContainer.CreateElement(element);
+  let styles = STYLES_HERO_LOGO_ELEMENT;
 
   container.classList.add(ELEMENT_HERO_CONTAINER);
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   if (asset) {
-    lock.appendChild(asset);
+    lock.appendChild(asset.element);
+    styles += asset.styles;
   }
 
   lock.classList.add(ELEMENT_HERO_LOCK);
-  lock.appendChild(text);
+  lock.appendChild(text.element);
+  styles += text.styles;
+
   container.appendChild(lock);
 
   declaration.classList.add(ELEMENT_HERO_ELEMENT_DECLARATION);
   declaration.appendChild(container);
 
-  return declaration;
+  return { element: declaration, styles };
 };
 
 export default {
   CreateElement: CreateHeroLogoElement,
-  Styles: STYLES_HERO_LOGO_ELEMENT,
 };

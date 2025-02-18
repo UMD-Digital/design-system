@@ -6,9 +6,9 @@ import ImageContainer, { TypePathwayImageContainer } from './elements/image';
 type TypePathwayStickyProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
     isImageRight: boolean;
+    includedStyles?: string;
   };
 
-const { spacing } = token;
 const { convertJSSObjectToStyles } = Utility.styles;
 
 const MEDIUM = 800;
@@ -163,7 +163,7 @@ const STYLES_PATHWAY_STICKY_ELEMENT = `
 `;
 
 const CreatePathwayStickyElement = (props: TypePathwayStickyProps) => {
-  const { isImageRight = true, isThemeDark } = props;
+  const { isImageRight = true, isThemeDark, includedStyles } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
@@ -171,6 +171,9 @@ const CreatePathwayStickyElement = (props: TypePathwayStickyProps) => {
 
   const textContainer = TextContainer.CreateElement(props);
   const imageContainer = ImageContainer.CreateElement(props);
+  let styles = STYLES_PATHWAY_STICKY_ELEMENT;
+
+  if (includedStyles) styles += includedStyles;
 
   container.classList.add(PATHWAY_STICKY_CONTAINER);
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
@@ -184,17 +187,24 @@ const CreatePathwayStickyElement = (props: TypePathwayStickyProps) => {
 
   lockWrapper.classList.add(PATHWAY_STICKY_CONTAINER_LOCK_WRAPPER);
 
-  if (imageContainer) lockWrapper.appendChild(imageContainer);
+  if (imageContainer) {
+    lockWrapper.appendChild(imageContainer.element);
+    styles += imageContainer.styles;
+  }
 
-  lockWrapper.appendChild(textContainer);
+  lockWrapper.appendChild(textContainer.element);
+  styles += textContainer.styles;
 
   lock.appendChild(lockWrapper);
   wrapper.appendChild(lock);
   container.appendChild(wrapper);
-  return container;
+
+  return {
+    element: container,
+    styles,
+  };
 };
 
 export default {
   CreateElement: CreatePathwayStickyElement,
-  Styles: STYLES_PATHWAY_STICKY_ELEMENT,
 };

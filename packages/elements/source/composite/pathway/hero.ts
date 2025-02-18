@@ -13,6 +13,7 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
   TypePathwayHeroImageContainer & {
     isImageRight: boolean;
     includesAnimation?: boolean;
+    includedStyles?: string;
   };
 
 const { convertJSSObjectToStyles } = Utility.styles;
@@ -278,10 +279,17 @@ const CreatePathwayHeroElement = (element: TypePathwayHeroProps) => {
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
   const lockWrapper = document.createElement('div');
-  const { isImageRight = true, includesAnimation = true } = element;
+  const {
+    isImageRight = true,
+    includesAnimation = true,
+    includedStyles,
+  } = element;
 
   const textContainer = TextContainer.CreateElement(element);
   const imageContainer = ImageContainer.CreateElement(element);
+  let styles = STYLES_PATHWAY_HERO_ELEMENT;
+
+  if (includedStyles) styles += includedStyles;
 
   container.classList.add(PATHWAY_HERO_CONTAINER);
   container.setAttribute(
@@ -292,19 +300,25 @@ const CreatePathwayHeroElement = (element: TypePathwayHeroProps) => {
   wrapper.classList.add(PATHWAY_HERO_CONTAINER_WRAPPER);
   lock.classList.add(PATHWAY_HERO_CONTAINER_LOCK);
 
-  lockWrapper.appendChild(textContainer);
+  lockWrapper.appendChild(textContainer.element);
+  styles += textContainer.styles;
   lock.appendChild(lockWrapper);
 
-  if (imageContainer) wrapper.appendChild(imageContainer);
+  if (imageContainer) {
+    wrapper.appendChild(imageContainer.element);
+    styles += imageContainer.styles;
+  }
   wrapper.appendChild(lock);
 
   if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
   container.setAttribute(ATTRIBUTE_HERO, '');
   container.appendChild(wrapper);
-  return container;
+  return {
+    element: container,
+    styles,
+  };
 };
 
 export default {
   CreateElement: CreatePathwayHeroElement,
-  Styles: STYLES_PATHWAY_HERO_ELEMENT,
 };

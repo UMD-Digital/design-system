@@ -4,3 +4,6 @@ import { type ElementProps } from '../_types';
 
 export const fullScreen = (props: ElementProps) =>
   createElement(props, Styles.element.action.button.fullScreen);
+
+export const videoState = (props: ElementProps) =>
+  createElement(props, Styles.element.action.button.videoState);

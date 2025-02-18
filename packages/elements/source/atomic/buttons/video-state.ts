@@ -1,31 +1,10 @@
 import * as Utility from 'utilities';
-
-const ELEMENT_BUTTON = 'button-video-state';
-
-// prettier-ignore
-const STYLES_BUTTON_VIDEO_STATE = `
-  .${ELEMENT_BUTTON} {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 44px;
-    height: 44px;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 99;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .${ELEMENT_BUTTON} svg {
-    fill: white;
-    width: 20px;
-  }
-`;
+import { ElementModel } from 'model';
 
 export default ({ video }: { video: HTMLVideoElement }) =>
   (() => {
     const button = document.createElement('button');
+
     const setButtonPlay = () => {
       button.setAttribute('aria-label', 'Pause');
       button.innerHTML = Utility.asset.icon.PAUSE;
@@ -36,17 +15,19 @@ export default ({ video }: { video: HTMLVideoElement }) =>
       button.innerHTML = Utility.asset.icon.PLAY;
       video.pause();
     };
-    let styles = STYLES_BUTTON_VIDEO_STATE;
 
     button.setAttribute('type', 'button');
-    button.classList.add(ELEMENT_BUTTON);
     button.addEventListener('click', () => {
       video.paused ? setButtonPlay() : setButtonPause();
     });
 
-    return {
+    const element = ElementModel.buttons.videoState({
       element: button,
-      styles,
+    });
+
+    return {
+      element: element.element,
+      styles: element.styles,
       events: {
         setButtonPlay,
         setButtonPause,

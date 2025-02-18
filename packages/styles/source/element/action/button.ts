@@ -21,7 +21,7 @@ export const fullScreen = create.jssObject({
   transition: `background-color 0.3s`,
 
   [`&:hover, &:focus`]: {
-    backgroundColor: `rgba(0, 0, 0, 0.8)`,
+    backgroundColor: `rgba(0, 0, 0, 1)`,
   },
 
   '& > span': {
@@ -29,6 +29,29 @@ export const fullScreen = create.jssObject({
     height: `12px`,
     width: `1px`,
     backgroundColor: `${color.gray.mediumAA}`,
-    margin: `0 4px`,
+  },
+});
+
+export const videoState = create.jssObject({
+  className: `${classNamePrefix}-video-state`,
+  position: 'absolute',
+  bottom: '0',
+  right: '0',
+  width: '44px',
+  height: '44px',
+  zIndex: '9999',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  transition: `background-color 0.3s`,
+
+  [`&:hover, &:focus`]: {
+    backgroundColor: `rgba(0, 0, 0, 1)`,
+  },
+
+  '& > svg': {
+    fill: `${color.white}`,
+    width: '20px',
   },
 });

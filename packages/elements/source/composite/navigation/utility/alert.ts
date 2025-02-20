@@ -484,7 +484,10 @@ export const createNavAlert = async ({ alertUrl }: AlertProps) => {
 
   // Fetch new alerts
   const response = await fetchAlerts({ alertUrl });
-  if (!response?.data?.entries[0]) return null;
+  if (!response?.data?.entries[0]) {
+    clearAlertStorage();
+    return null;
+  }
 
   const alert = response.data?.entries[0];
   const cachedAlert = getStoredValue<AlertData>(

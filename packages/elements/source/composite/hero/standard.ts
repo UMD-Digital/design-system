@@ -61,6 +61,10 @@ const OverwriteEyebrow = `
       [`${OVERWRITE_EYEBROW}`]: element.text.decoration.ribbon,
     },
   })}
+
+  ${OVERWRITE_EYEBROW} {
+    color: ${token.color.black} !important;
+  }
 `;
 
 // prettier-ignore

@@ -19,18 +19,22 @@ const themeDarkColors = {
   },
 };
 
+const childSpacing = {
+  marginTop: spacing.md,
+
+  '&:first-child': {
+    marginTop: '0',
+  },
+};
+
 const simpleBase = {
   ...animation.nestedElements.linksWhite,
   ...sans.small,
 
   '& > *': {
     ...sans.small,
-    marginTop: spacing.md,
+    ...childSpacing,
     lineHeight: '1.5em',
-
-    '&:first-child': {
-      marginTop: '0',
-    },
   },
 
   '& em, & i': {
@@ -48,10 +52,12 @@ const simpleBase = {
 
 const advancedBase = {
   ...simpleBase,
+
   ...sans.medium,
 
   '& > *': {
     ...sans.medium,
+    ...childSpacing,
   },
 
   [`& p,
@@ -110,6 +116,7 @@ export const simpleLarge = create.jssObject({
 
   '& > *': {
     ...sans.medium,
+    ...childSpacing,
   },
 
   className: [
@@ -127,6 +134,7 @@ export const simpleLargeDark = create.jssObject({
 
   '& > *': {
     ...sans.medium,
+    ...childSpacing,
   },
 
   className: `${classNamePrefix}-simple-large-dark`,

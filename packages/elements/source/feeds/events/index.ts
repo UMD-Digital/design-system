@@ -1,5 +1,5 @@
 import { element, token } from '@universityofmaryland/web-styles-library';
-import { ButtonLazyLoad } from 'atomic';
+import buttonLazyLoad from '../elements/lazy-load';
 import { GridGap as LayoutGridGap } from 'layout';
 import { AriaLive, AnimationLoader } from 'macros';
 import * as Utility from 'utilities';
@@ -85,7 +85,7 @@ const EventsNoResults = `
 const STYLES_FEED_EVENT_ELEMENT = `
   ${NoResults.Styles}
   ${LayoutGridGap.Styles}
-  ${ButtonLazyLoad.Styles}
+  ${buttonLazyLoad.styles}
   ${AnimationLoader.Styles}
   ${FeedDisplay.Styles}
   ${EventsNoResults}
@@ -217,13 +217,14 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
     : `Showing ${showAmount} events`;
 
   AnimationLoader.Remove({ container });
-  ButtonLazyLoad.Remove({ container });
+  buttonLazyLoad.remove({ container });
+
   if (isTypeGrouped) {
     DisplayGrouped(props);
   } else {
     DisplayDefault(props);
   }
-  ButtonLazyLoad.Display(MakeLazyLoadVariables(props));
+  buttonLazyLoad.display(MakeLazyLoadVariables(props));
 
   container.appendChild(
     AriaLive.Create({
@@ -240,7 +241,7 @@ const FetchCount = async (props: TypeFeedProps) => {
 
   if (count) {
     setTotalEntries(count);
-    ButtonLazyLoad.Display(MakeLazyLoadVariables(props));
+    buttonLazyLoad.display(MakeLazyLoadVariables(props));
   }
 };
 
@@ -249,7 +250,7 @@ const LoadMoreEntries = async (props: TypeFeedProps) => {
   const container = getContainer();
   const currentCount = getOffset();
 
-  ButtonLazyLoad.Remove({ container });
+  buttonLazyLoad.remove({ container });
   AnimationLoader.Display({ container });
   Fetch.Entries({
     variables: MakeApiVariables(props),

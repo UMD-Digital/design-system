@@ -1,4 +1,4 @@
-import { ButtonLazyLoad } from 'atomic';
+import buttonLazyLoad from '../elements/lazy-load';
 import { GridGap as LayoutGridGap } from 'layout';
 import { AriaLive, AnimationLoader } from 'macros';
 import FeedDisplay, { ArticleType } from './display';
@@ -39,7 +39,7 @@ type TypeDisplayEntries = TypeFeedProps & {
 const STYLES_FEED_NEWS_ELEMENT = `
   ${NoResults.Styles}
   ${LayoutGridGap.Styles}
-  ${ButtonLazyLoad.Styles}
+  ${buttonLazyLoad.styles}
   ${AnimationLoader.Styles}
   ${FeedDisplay.Styles}
 `;
@@ -125,11 +125,11 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   if (isLayoutReversed) grid.setAttribute('data-reversed', '');
 
   AnimationLoader.Remove({ container });
-  ButtonLazyLoad.Remove({ container });
+  buttonLazyLoad.remove({ container });
   displayEntries.forEach((entry) => {
     if (entry) grid.appendChild(entry);
   });
-  ButtonLazyLoad.Display(MakeLazyLoadVariables(props));
+  buttonLazyLoad.display(MakeLazyLoadVariables(props));
 };
 
 const LoadMoreEntries = async (props: TypeFeedProps) => {
@@ -137,7 +137,7 @@ const LoadMoreEntries = async (props: TypeFeedProps) => {
   const container = getContainer();
   const currentCount = getOffset();
 
-  ButtonLazyLoad.Remove({ container });
+  buttonLazyLoad.remove({ container });
   AnimationLoader.Display({ container });
   Fetch.Entries({
     variables: MakeApiVariables(props),

@@ -13,8 +13,6 @@ export type TypeLazyLoad = LazyLoadCreate & {
   offset: number;
 };
 
-const { spacing } = token;
-
 const ID_LAZY_LOAD_BUTTON = 'button-lazy-load';
 
 const STYLES_LAZY_LOAD_BUTTON = `
@@ -27,7 +25,7 @@ const STYLES_LAZY_LOAD_BUTTON = `
   }
 `;
 
-const CreateLazyLoadButton = ({ callback, isThemeDark }: LazyLoadCreate) => {
+const create = ({ callback, isThemeDark }: LazyLoadCreate) => {
   const container = document.createElement('div');
   const button = document.createElement('button');
   const ctaButton = CallToAction.CreateElement({
@@ -45,7 +43,7 @@ const CreateLazyLoadButton = ({ callback, isThemeDark }: LazyLoadCreate) => {
   return container;
 };
 
-const RemoveLazyLoad = ({ container }: { container: HTMLElement }) => {
+const remove = ({ container }: { container: HTMLElement }) => {
   const button = container.querySelector(
     `.${ID_LAZY_LOAD_BUTTON}`,
   ) as HTMLDivElement;
@@ -53,7 +51,7 @@ const RemoveLazyLoad = ({ container }: { container: HTMLElement }) => {
   if (button) button.remove();
 };
 
-const DisplayLazyLoad = ({
+const display = ({
   container,
   isLazyLoad,
   totalEntries,
@@ -67,7 +65,7 @@ const DisplayLazyLoad = ({
   if (!callback) return;
   if (offset >= totalEntries) return;
 
-  const lazyLoadButton = CreateLazyLoadButton({
+  const lazyLoadButton = create({
     callback,
     isThemeDark,
   });
@@ -75,7 +73,7 @@ const DisplayLazyLoad = ({
 };
 
 export default {
-  Display: DisplayLazyLoad,
-  Remove: RemoveLazyLoad,
-  Styles: STYLES_LAZY_LOAD_BUTTON,
+  display,
+  remove,
+  styles: STYLES_LAZY_LOAD_BUTTON,
 };

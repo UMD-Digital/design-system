@@ -47,7 +47,6 @@ const EventSignStyles = `
 const ImageSizeStyles = `
   ${OVERWRITE_SCALED_IMAGE_CONTAINER} .${LayoutImage.Elements.container} {
     justify-content: center;
-    padding: 0 ${token.spacing.md};
   }
 
   ${OVERWRITE_SCALED_IMAGE_CONTAINER} img {

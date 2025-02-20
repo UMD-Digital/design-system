@@ -28,6 +28,7 @@ const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
 const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
 
 const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_STICKY_CONTAINER} .${TextContainer.Elements.wrapper}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_STICKY_CONTAINER} .${ImageContainer.Elements.container}`;
 
 const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_STICKY_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
 const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_STICKY_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
@@ -67,7 +68,7 @@ const OverwriteImagePositionStyles = `
 // prettier-ignore
 const OverwriteImageContainerStyles = `
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${ImageContainer.Elements.container} {
+    ${OVERWRITE_IMAGE_CONTAINER} {
       position: sticky;
       top: 0;
       align-self: flex-start;
@@ -75,7 +76,7 @@ const OverwriteImageContainerStyles = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ImageContainer.Elements.container} img {
+    ${OVERWRITE_IMAGE_CONTAINER} img {
       min-height: 656px;
      }
   }

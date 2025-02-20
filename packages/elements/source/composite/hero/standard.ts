@@ -73,6 +73,7 @@ const OverwriteHeadline = `
     ${OVERWRITE_HEADLINE} {
       max-width: 700px;
       margin: 0 auto;
+      color: ${token.color.white};
     }
   }
   

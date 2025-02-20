@@ -138,12 +138,12 @@ const Load = () => {
     element: Model.createCustomElement({
       tagName,
       createComponent,
-      afterConnect: (element) => {
-        // setTimeout(() => {
-        //   if (element?.getBoundingClientRect().top > 0) {
-        //     element?.events?.loadAnimation();
-        //   }
-        // }, 10);
+      afterConnect: (ref) => {
+        setTimeout(() => {
+          if (ref?.element?.getBoundingClientRect().top > 0) {
+            ref?.events?.loadAnimation();
+          }
+        }, 10);
       },
     }),
   });

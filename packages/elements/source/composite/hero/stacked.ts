@@ -252,6 +252,7 @@ export const CreateHeroStackedElement = (element: TypeHeroStackedProps) => {
   if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
 
   lock.classList.add(ELEMENT_HERO_LOCK);
+  styles += text.styles;
 
   if (asset) {
     const overlay = document.createElement('div');
@@ -259,7 +260,6 @@ export const CreateHeroStackedElement = (element: TypeHeroStackedProps) => {
 
     asset.element.appendChild(overlay);
     styles += asset.styles;
-    styles += text.styles;
 
     if (isWithLock) {
       lock.appendChild(text.element);

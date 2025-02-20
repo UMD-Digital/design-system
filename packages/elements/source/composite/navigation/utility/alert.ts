@@ -4,7 +4,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import Actions from 'composite/call-to-action';
+import { actions } from 'atomic';
 import * as Utility from 'utilities';
 
 type AlertData = {
@@ -263,7 +263,6 @@ export const STYLES_NAV_ALERT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${Actions.Styles}
   ${ContainerStyles}
   ${LockStyles}
   ${WrapperStyles}
@@ -386,7 +385,7 @@ const createCTAElement = ({
 }: {
   ctaText: string;
   ctaUrl: string;
-}): HTMLElement => {
+}) => {
   const link = createElement('a', ALERT_CONSTANTS.ELEMENTS.CTA, {
     href: ctaUrl,
     rel: 'noopener noreferrer',
@@ -394,9 +393,9 @@ const createCTAElement = ({
   });
   link.innerHTML = ctaText;
 
-  return Actions.CreateElement({
-    cta: link,
-    type: 'secondary',
+  return actions.options({
+    element: link,
+    isTypeSecondary: true,
   });
 };
 
@@ -425,12 +424,12 @@ const createAlertContent = (
 
   // Add CTA if exists
   if (alert.ctaUrl) {
-    wrapper.appendChild(
-      createCTAElement({
-        ctaText: alert.ctaText || headlineText,
-        ctaUrl: alert.ctaUrl,
-      }),
-    );
+    const cta = createCTAElement({
+      ctaText: alert.ctaText || headlineText,
+      ctaUrl: alert.ctaUrl,
+    });
+
+    wrapper.appendChild(cta.element);
   }
 
   lock.appendChild(wrapper);

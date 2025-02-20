@@ -1,3 +1,4 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
 import postcss from 'postcss';
 
 const postcssNesting = require('postcss-nesting');
@@ -16,3 +17,10 @@ export const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
 
 export const convertPixelStringToNumber = (styleStr: string) =>
   parseInt(styleStr.replace('px', ''));
+
+export const getStyleStringFromJssObject = (styleObj: Styles.JssEntry) =>
+  convertJSSObjectToStyles({
+    styleObj: {
+      [`.${styleObj.className}`]: styleObj,
+    },
+  });

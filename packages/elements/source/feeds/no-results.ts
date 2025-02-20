@@ -1,5 +1,5 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import { CallToAction } from 'composite';
+import { actions } from 'atomic';
 import * as Utility from 'utilities';
 
 const { convertJSSObjectToStyles } = Utility.styles;
@@ -44,7 +44,6 @@ const CreateNoResultsInterface = ({
   message,
   linkUrl,
   linkText,
-  ctaType,
   isAlignedCenter = true,
 }: NoResultsType) => {
   container.innerHTML = '';
@@ -66,12 +65,12 @@ const CreateNoResultsInterface = ({
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
 
-    const ctaButton = CallToAction.CreateElement({
-      cta: link,
-      type: ctaType || 'outline',
+    const ctaButton = actions.options({
+      element: link,
+      isTypeOutline: true,
     });
 
-    wrapper.appendChild(ctaButton);
+    wrapper.appendChild(ctaButton.element);
   }
 
   container.appendChild(wrapper);

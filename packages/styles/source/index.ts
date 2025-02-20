@@ -6,6 +6,7 @@ import * as tokenNamespace from './token';
 import * as typographyNamespace from './typography';
 import { default as webComponentsNamespace } from './web-components';
 import * as utilitiesNamespace from './utilities';
+import * as transformNamespace from './utilities/transform';
 
 export { root } from './root';
 export const accessibility = accessibilityNamespace;
@@ -16,6 +17,8 @@ export const typography = typographyNamespace;
 export const token = tokenNamespace;
 export const webComponents = webComponentsNamespace;
 export const utilities = utilitiesNamespace;
+
+export type JssEntry = transformNamespace.JssEntry;
 
 export const outputStyles: string = {
   ...typographyNamespace.fontFace.browserString,

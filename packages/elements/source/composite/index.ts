@@ -1,7 +1,6 @@
 // Base components
 export { default as Accordion } from './accordion';
 export { default as BannerPromo } from './banner-promo';
-export { default as CallToAction } from './call-to-action';
 export { default as ScrollTop } from './scroll-top';
 export { default as SocialSharing } from './social-sharing';
 export { default as Stat } from './stat';

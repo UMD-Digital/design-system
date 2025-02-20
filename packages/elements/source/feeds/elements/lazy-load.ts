@@ -1,5 +1,6 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import { CallToAction } from 'composite';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import * as Utility from 'utilities';
+import { actions } from 'atomic';
 
 type LazyLoadCreate = {
   callback: (args: any) => void;
@@ -13,24 +14,26 @@ export type TypeLazyLoad = LazyLoadCreate & {
   offset: number;
 };
 
+const { token } = Styles;
+const outlineActionStyles = Styles.element.action.outline.normal;
+
 const ID_LAZY_LOAD_BUTTON = 'button-lazy-load';
 
 const STYLES_LAZY_LOAD_BUTTON = `
-  ${CallToAction.Styles}
-
   .${ID_LAZY_LOAD_BUTTON} {
     display: flex;
     justify-content: center;
     margin-top: ${token.spacing.lg};
   }
+
+  ${Utility.styles.getStyleStringFromJssObject(outlineActionStyles)}
 `;
 
 const create = ({ callback, isThemeDark }: LazyLoadCreate) => {
   const container = document.createElement('div');
   const button = document.createElement('button');
-  const ctaButton = CallToAction.CreateElement({
-    cta: button,
-    type: 'outline',
+  const ctaButton = actions.outline({
+    element: button,
     isThemeDark,
   });
 
@@ -38,7 +41,7 @@ const create = ({ callback, isThemeDark }: LazyLoadCreate) => {
   button.addEventListener('click', callback);
 
   container.classList.add(ID_LAZY_LOAD_BUTTON);
-  container.appendChild(ctaButton);
+  container.appendChild(ctaButton.element);
 
   return container;
 };

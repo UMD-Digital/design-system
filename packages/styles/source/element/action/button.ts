@@ -1,4 +1,4 @@
-import { color, spacing } from '../../token';
+import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 
@@ -37,14 +37,19 @@ export const videoState = create.jssObject({
   position: 'absolute',
   bottom: '0',
   right: '0',
-  width: '44px',
-  height: '44px',
+  width: '40px',
+  height: '40px',
   zIndex: '9999',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0, 0, 0, 0.7)',
   transition: `background-color 0.3s`,
+
+  [`@media (${media.queries.tablet.min})`]: {
+    width: '44px',
+    height: '44px',
+  },
 
   [`&:hover, &:focus`]: {
     backgroundColor: `rgba(0, 0, 0, 1)`,

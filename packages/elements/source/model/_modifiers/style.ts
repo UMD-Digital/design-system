@@ -63,6 +63,7 @@ const createModifier = (
 const styleGetters = {
   animationLink: ({ isColorBlack, isColorWhite }: StyleModifierProps) => ({
     a: getLinkAnimationColor({ isColorBlack, isColorWhite }),
+    [`&a`]: getLinkAnimationColor({ isColorBlack, isColorWhite }),
   }),
   baseStyles: ({ baseStyles }: StyleModifierProps) => baseStyles || {},
   color: ({ isTextColorWhite }: StyleModifierProps) =>

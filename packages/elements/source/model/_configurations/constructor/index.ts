@@ -36,24 +36,10 @@ export const createLinkAnimationElement = (
 
 export const createHeadlineElement = (
   props: ElementProps,
-  getFontFn: () => { className: string; fontStyles: Record<string, any> },
-) => {
-  const { className, fontStyles } = getFontFn();
-
-  return createElementBuild(
-    { ...props, className, baseStyles: fontStyles },
-    animationLineConfig,
-  );
-};
+  stylesObj: styleObject,
+) => elementWithConfig(props, stylesObj, animationLineConfig);
 
 export const createTextElement = (
   props: ElementProps,
-  getFontFn: () => { className: string; fontStyles: Record<string, any> },
-) => {
-  const { className, fontStyles } = getFontFn();
-
-  return createElementBuild(
-    { ...props, className, baseStyles: fontStyles },
-    textConfig,
-  );
-};
+  stylesObj: styleObject,
+) => elementWithConfig(props, stylesObj, textConfig);

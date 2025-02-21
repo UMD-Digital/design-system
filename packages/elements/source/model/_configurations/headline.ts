@@ -1,16 +1,14 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { createHeadlineElement, createTextElement } from './constructor';
 import { type ElementProps } from '../_types';
 
-type FontStyleFunction = (
-  props: ElementProps,
-) => ReturnType<typeof createHeadlineElement>;
-type FontGetter = typeof Utility.styles.fonts.getSansLargeFont;
+interface styleObject {
+  className: string | string[];
+  [key: string]: any;
+}
 
-const createElement = (
-  getFontStyle: FontGetter,
-  isTypeHeadline = true,
-): FontStyleFunction => {
+const createElement = (stylesObj: styleObject, isTypeHeadline = true) => {
   return (props: ElementProps) => {
     const fontProps = {
       ...props,
@@ -19,29 +17,25 @@ const createElement = (
     };
 
     if (isTypeHeadline) {
-      return createHeadlineElement(
-        {
-          ...fontProps,
-        },
-        getFontStyle,
-      );
+      return createHeadlineElement(fontProps, stylesObj);
     }
 
-    return createTextElement(
-      {
-        ...fontProps,
-      },
-      getFontStyle,
-    );
+    return createTextElement(fontProps, stylesObj);
   };
 };
 
-export const sansLarge = createElement(Utility.styles.fonts.getSansLargeFont);
+// export const sansScalingLarge = createElement(
+//   Styles.typography.sans.scalingFonts.larger,
+// );
 
-export const sansMedium = createElement(Utility.styles.fonts.getSansMediumFont);
+export const sansLarger = createElement(Styles.typography.sans.fonts.larger);
 
-export const sansMin = createElement(Utility.styles.fonts.getSansMinFont, true);
+export const sansLarge = createElement(Styles.typography.sans.fonts.large);
+
+export const sansMedium = createElement(Styles.typography.sans.fonts.medium);
+
+export const sansMin = createElement(Styles.typography.sans.fonts.medium, true);
 
 export const campaignLarge = createElement(
-  Utility.styles.fonts.getCampaignLargeFont,
+  Styles.typography.campaign.fonts.large,
 );

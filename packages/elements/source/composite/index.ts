@@ -13,7 +13,10 @@ export { default as alert } from './alert';
 export { default as CardBlock, STYLES_BLOCK_CARD_ELEMENT } from './card/block';
 export { default as CardList, STYLES_LIST_CARD_ELEMENT } from './card/list';
 export { default as CardIconBlock } from './card-icon/block';
-export { default as CardOverlay } from './card-overlay';
+export {
+  default as CardOverlay,
+  styles as CardOverlayStyles,
+} from './card-overlay';
 export {
   default as CardOverlayImage,
   STYLES_OVERLAY_CARD_IMAGE,

@@ -53,7 +53,7 @@ const DetailsRowStyles = `
 `;
 
 // prettier-ignore
-const STYLES_EVENT_LIST_ELEMENT = `
+export const STYLES_EVENT_LIST_ELEMENT = `
   .${ELEMENT_EVENT_LIST_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -69,7 +69,7 @@ const STYLES_EVENT_LIST_ELEMENT = `
   ${DetailsRowStyles}
 `;
 
-const CreateEventListElement = (props: TypeEventListProps) => {
+export default (props: TypeEventListProps) => {
   const { isThemeDark, image, dateSign, eventDetails } = props;
   const elementContainer = document.createElement('div');
   const textContainer = TextLockupSmall.CreateElement(props);
@@ -79,6 +79,7 @@ const CreateEventListElement = (props: TypeEventListProps) => {
     imageContainer,
     isThemeDark,
   });
+  let styles = STYLES_EVENT_LIST_ELEMENT;
 
   if (dateSign) {
     const containerWrapper = container.querySelector(
@@ -105,10 +106,5 @@ const CreateEventListElement = (props: TypeEventListProps) => {
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_EVENT_LIST_CONTAINER);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreateEventListElement,
-  Styles: STYLES_EVENT_LIST_ELEMENT,
+  return { element: elementContainer, styles };
 };

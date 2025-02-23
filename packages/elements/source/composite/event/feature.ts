@@ -2,6 +2,7 @@ import { element, token } from '@universityofmaryland/web-styles-library';
 import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
 import * as Utility from 'utilities';
+import { default as eventElements } from './elements';
 
 type TypeEventFeatureProps = {
   headline: HTMLElement | null;
@@ -90,9 +91,10 @@ const STYLES_EVENT_FEATURE_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
+  ${eventElements.meta.Styles}
+  ${eventElements.sign.Styles}
   ${TextLockupSmallScaling.Styles}
   ${LayoutImage.Styles}
-  ${LayoutBlock.Styles}
   ${DetailsMeta}
   ${EyebrowStyles}
   ${OverwriteImageContainer}
@@ -106,7 +108,7 @@ const MakeEyebrow = () => {
   return eyebrow;
 };
 
-const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
+export default (element: TypeEventFeatureProps) => {
   const { isThemeDark, image, eventDetails, dateSign } = element;
 
   const textContainer = TextLockupSmallScaling.CreateElement({
@@ -115,11 +117,12 @@ const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
   });
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = LayoutBlock.CreateElement({
+  const container = LayoutBlock({
     textContainer,
     imageContainer,
     isThemeDark,
   });
+  let styles = STYLES_EVENT_FEATURE_ELEMENT;
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
@@ -136,14 +139,11 @@ const CreateEventFeatureElement = (element: TypeEventFeatureProps) => {
     imageContainer.appendChild(signWrapper);
   }
 
-  elementContainer.appendChild(container);
+  elementContainer.appendChild(container.element);
+  styles += container.styles;
+
   elementContainer.classList.add(ELEMENT_EVENT_FEATURE_CONTAINER);
   if (isThemeDark) elementContainer.setAttribute('theme', THEME_DARK);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreateEventFeatureElement,
-  Styles: STYLES_EVENT_FEATURE_ELEMENT,
+  return { element: elementContainer, styles };
 };

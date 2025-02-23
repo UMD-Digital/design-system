@@ -1,6 +1,11 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
+import {
+  Block as LayoutBlock,
+  Image as LayoutImage,
+  STYLES_BLOCK_CONTAINER,
+} from 'layout';
 import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
+import { default as eventElements } from './elements';
 
 type TypeEventBlockProps = {
   headline: HTMLElement | null;
@@ -11,7 +16,6 @@ type TypeEventBlockProps = {
   isThemeDark?: boolean;
 };
 
-const { spacing } = token;
 const MEDIUM = 650;
 
 const ELEMENT_NAME = 'umd-event-block';
@@ -44,30 +48,33 @@ const DetailsRowStyles = `
 `;
 
 // prettier-ignore
-const STYLES_EVENT_BLOCK_ELEMENT = `
+export const STYLES_EVENT_BLOCK_ELEMENT = `
   .${ELEMENT_EVENT_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
 
+  ${STYLES_BLOCK_CONTAINER}
+  ${eventElements.meta.Styles}
+  ${eventElements.sign.Styles}
   ${TextLockupSmallScaling.Styles}
   ${LayoutImage.Styles}
-  ${LayoutBlock.Styles}
   ${DetailsRowStyles}
   ${OverwriteImageContainer}
 `;
 
-const CreateEventBlockElement = (props: TypeEventBlockProps) => {
+export default (props: TypeEventBlockProps) => {
   const { isThemeDark, image, eventDetails } = props;
   const textContainer = TextLockupSmallScaling.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = LayoutBlock.CreateElement({
+  const container = LayoutBlock({
     textContainer,
     imageContainer,
     isThemeDark,
     isAligned: false,
     isBordered: false,
   });
+  let styles = STYLES_EVENT_BLOCK_ELEMENT;
 
   if (eventDetails) {
     const headline = textContainer.querySelector(
@@ -77,13 +84,9 @@ const CreateEventBlockElement = (props: TypeEventBlockProps) => {
     headline.insertAdjacentElement('afterend', eventDetails);
   }
 
-  elementContainer.appendChild(container);
+  elementContainer.appendChild(container.element);
+  styles += container.styles;
   elementContainer.classList.add(ELEMENT_EVENT_BLOCK_CONTAINER);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreateEventBlockElement,
-  Styles: STYLES_EVENT_BLOCK_ELEMENT,
+  return { element: elementContainer, styles };
 };

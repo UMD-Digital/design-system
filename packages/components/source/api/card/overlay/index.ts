@@ -1,36 +1,19 @@
-declare global {
-  interface Window {
-    UMDCardOverlayElement: typeof UMDCardOverlayElement;
-  }
-}
-
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
+import { Markup } from 'utilities';
 
-const { Node } = Markup.create;
-const { SlotWithDefaultStyling } = Markup.create;
 const { CardOverlay, CardOverlayImage } = Composite;
+const { SlotWithDefaultStyling } = Markup.create;
 
-const ELEMENT_NAME = 'umd-element-card-overlay';
+const tagName = 'umd-element-card-overlay';
 
-const styles = `
-  :host {
-    display: block;
-  }
-  
-  ${Styles.reset}
-  ${CardOverlay.Styles}
-  ${CardOverlayImage.Styles}
-`;
+const slots = {
+  headline: {
+    required: true,
+  },
+};
 
-const styleTemplate = Node.stylesTemplate({ styles });
-
-const MakeOverlayContent = ({
-  element,
-}: {
-  element: UMDCardOverlayElement;
-}) => ({
+const MakeOverlayContent = ({ element }: { element: HTMLElement }) => ({
   eyebrow: Slots.eyebrow.default({ element }),
   headline: Slots.headline.default({ element }),
   text: Slots.text.default({ element }),
@@ -42,51 +25,30 @@ const MakeOverlayContent = ({
   isThemeLight: Attributes.isTheme.light({ element }),
 });
 
-const CreateShadowDom = ({ element }: { element: UMDCardOverlayElement }) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-
+const createComponent = (element: HTMLElement) => {
   if (Attributes.isLayout.image({ element })) {
-    const ImageOverlay = CardOverlayImage.CreateElement({
+    const ImageOverlay = CardOverlayImage({
       ...MakeOverlayContent({ element }),
-      image: Markup.validate.ImageSlot({
-        element,
-        ImageSlot: Slots.name.assets.image,
-      }),
+      image: Slots.assets.image({ element }) as HTMLImageElement,
     });
 
     if (ImageOverlay) {
-      shadow.appendChild(ImageOverlay);
-      return;
+      return ImageOverlay;
     }
   }
 
-  shadow.appendChild(
-    CardOverlay.CreateElement({ ...MakeOverlayContent({ element }) }),
-  );
+  return CardOverlay({ ...MakeOverlayContent({ element }) });
 };
 
-class UMDCardOverlayElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDCardOverlayElement = UMDCardOverlayElement;
-    window.customElements.define(ELEMENT_NAME, UMDCardOverlayElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      slots,
+      createComponent,
+    }),
+  });
 };
 
 export default {

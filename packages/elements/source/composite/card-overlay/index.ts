@@ -1,7 +1,6 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import { TextLockupSmallScaling, TextLockupSmall } from 'macros';
-
+import { textLockup } from 'atomic';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 
 type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
@@ -14,6 +13,7 @@ type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
 };
 
 const { convertJSSObjectToStyles } = Utility.styles;
+const { token, typography } = Styles;
 
 const MEDIUM = 500;
 
@@ -30,12 +30,12 @@ const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
 
 const OVERWRITE_THEME_DARK_WRAPPER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER}`;
 
-const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_WITH_CTA_ICON} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_WITH_CTA_ICON} .${textLockup.smallScaleElements.container}`;
 
-const OVERWRITE_SCALING_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmallScaling.Elements.container}`;
-const OVERWRITE_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.container}`;
-const OVERWRITE_TEXT_LOCK_HEADLINE = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.headline}`;
-const OVERWRITE_TEXT_LOCK_ACTIONS = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${TextLockupSmall.Elements.actions}`;
+const OVERWRITE_SCALING_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${textLockup.smallScaleElements.container}`;
+const OVERWRITE_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${textLockup.smallScaleElements.container}`;
+const OVERWRITE_TEXT_LOCK_HEADLINE = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${textLockup.smallScaleElements.headline}`;
+const OVERWRITE_TEXT_LOCK_ACTIONS = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${textLockup.smallScaleElements.actions}`;
 
 // prettier-ignore
 const OverwriteCtaIcon  = `
@@ -103,7 +103,7 @@ const OverwriteTextContainer = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${OVERWRITE_SCALING_TEXT_LOCK_CONTAINER} > div > *:not(.${TextLockupSmall.Elements.actions}) {
+  ${OVERWRITE_SCALING_TEXT_LOCK_CONTAINER} > div > *:not(.${textLockup.smallElements.actions}) {
     margin-bottom: ${token.spacing.sm};
   }
 
@@ -134,7 +134,6 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
     }
   }
 
-  ${TextLockupSmallScaling.Styles}
   ${CtaIcon.Styles}
   ${OverwriteHeadline}
   ${OverwriteThemeDark}
@@ -142,18 +141,26 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
   ${OverwriteTextContainer}
 `;
 
-const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
+export const styles = ` 
+  ${STYLES_OVERLAY_CARD_ELEMENT}
+  ${textLockup.smallScaleStyles}
+`;
+
+export default (props: TypeCardOverlayElement) => {
   const { isThemeDark } = props;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
-  const scalingFontContainer = TextLockupSmallScaling.CreateElement(props);
+  const scalingFontContainer = textLockup.smallScaling(props);
   const ctaIcon = CtaIcon.CreateElement({
     ...props,
     isThemeLight: !isThemeDark,
   });
+  let styles = STYLES_OVERLAY_CARD_ELEMENT;
 
   elementWrapper.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER);
-  elementWrapper.appendChild(scalingFontContainer);
+  elementWrapper.appendChild(scalingFontContainer.element);
+  styles += scalingFontContainer.styles;
+
   if (ctaIcon) {
     elementWrapper.appendChild(ctaIcon);
     elementContainer.setAttribute(ATTRIBUTE_CTA_ICON, '');
@@ -163,10 +170,5 @@ const CreateCardOverlayElement = (props: TypeCardOverlayElement) => {
   elementContainer.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER);
   elementContainer.appendChild(elementWrapper);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreateCardOverlayElement,
-  Styles: STYLES_OVERLAY_CARD_ELEMENT,
+  return { element: elementContainer, styles };
 };

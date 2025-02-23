@@ -4,3 +4,6 @@ import { type ElementProps } from '../_types';
 
 export const gridStacked = (props: ElementProps) =>
   createElement(props, Styles.layout.grid.stacked);
+
+export const gridInlineTabletRows = (props: ElementProps) =>
+  createElement(props, Styles.layout.grid.inline.tabletRows);

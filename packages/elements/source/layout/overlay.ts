@@ -1,13 +1,15 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import { TextLockupSmallScaling, type TypeTextLockupSmall } from 'macros';
+import { textLockup } from 'atomic';
 
-export type TypeBlockOverlayImageElement = TypeTextLockupSmall & {
-  image?: HTMLImageElement | HTMLAnchorElement | null;
-};
+export type TypeBlockOverlayImageElement =
+  textLockup.TypeTextLockupSmallScaling & {
+    image: HTMLImageElement | HTMLAnchorElement;
+  };
+
+const { token } = Styles;
 
 const SMALL = 350;
-
 const ELEMENT_NAME = 'umd-block-overlay-image';
 
 const ELEMENT_BLOCK_OVERLAY_IMAGE_DECLARATION =
@@ -104,7 +106,7 @@ const WrapperStyles = `
 `;
 
 // prettier-ignore
-const STYLES_BLOCK_OVERLAY_ELEMENT = `
+export const STYLES_BLOCK_OVERLAY_ELEMENT = `
   .${ELEMENT_BLOCK_OVERLAY_IMAGE_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
     height: 100%;
@@ -138,10 +140,13 @@ const STYLES_BLOCK_OVERLAY_ELEMENT = `
   ${WrapperStyles}
   ${ImageStyles}
   ${ImageTint}
-  ${TextLockupSmallScaling.Styles}
 `;
 
-const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
+export const elements = {
+  container: ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER,
+};
+
+export default (props: TypeBlockOverlayImageElement) => {
   const { image, text } = props;
   const elementDeclaration = document.createElement('div');
   const elementContainer = document.createElement('div');
@@ -149,13 +154,12 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
   const imageWrapper = document.createElement('div');
   const tintOverlay = document.createElement('div');
   const textCopy = text?.innerHTML;
+  let styles = STYLES_BLOCK_OVERLAY_ELEMENT;
 
-  const scalingFontContainer = TextLockupSmallScaling.CreateElement({
+  const scalingFontContainer = textLockup.smallScaling({
     ...props,
     isThemeDark: true,
   });
-
-  if (!image) return;
 
   const sizeElements = () => {
     if (text && textCopy) {
@@ -179,7 +183,8 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
   imageWrapper.appendChild(image);
   elementWrapper.appendChild(imageWrapper);
   elementWrapper.appendChild(tintOverlay);
-  elementWrapper.appendChild(scalingFontContainer);
+  elementWrapper.appendChild(scalingFontContainer.element);
+  styles += scalingFontContainer.styles;
 
   elementContainer.appendChild(elementWrapper);
   elementContainer.classList.add(ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER);
@@ -194,13 +199,5 @@ const CreateBlockOverlayElement = (props: TypeBlockOverlayImageElement) => {
     Utility.performance.debounce(sizeElements, 50),
   );
 
-  return elementDeclaration;
-};
-
-export default {
-  CreateElement: CreateBlockOverlayElement,
-  Styles: STYLES_BLOCK_OVERLAY_ELEMENT,
-  Elements: {
-    container: ELEMENT_BLOCK_OVERLAY_IMAGE_CONTAINER,
-  },
+  return { element: elementDeclaration, styles };
 };

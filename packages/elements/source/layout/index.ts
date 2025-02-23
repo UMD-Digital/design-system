@@ -1,4 +1,4 @@
-export { default as Block } from './block';
+export { default as Block, STYLES_BLOCK_CONTAINER } from './block';
 
 export { default as BlockOverlay } from './overlay';
 

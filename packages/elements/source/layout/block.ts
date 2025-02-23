@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import ImageContainer from './image';
-import { TextLockupSmall, TextLockupSmallScaling } from 'macros';
+import { textLockup } from 'atomic';
 
 export type TypeBlockContainer = {
   isAligned?: boolean;
@@ -34,20 +34,20 @@ const IS_WITH_BORDER = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_BORDER}]`;
 const IS_WITH_IMAGE = `.${ELEMENT_BLOCK_CONTAINER}[${ATTRIBUTE_WITH_IMAGE}]`;
 const IS_TRANSPARENT = `[${ATTRIBUTE_TRANSPARENT}="true"]`;
 
-const OVERWRITE_SCALABLE_FONT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER} .${TextLockupSmallScaling.Elements.container}`;
+const OVERWRITE_SCALABLE_FONT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER} .${textLockup.smallScaleElements.container}`;
 
-const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_DARK_THEME_TEXT_CONTAINER = `${IS_THEME_DARK} .${textLockup.smallScaleElements.container}`;
 const OVERWRITE_DARK_THEME_IMAGE_CONTAINER = `${IS_THEME_DARK} .${ImageContainer.Elements.container}`;
 
-const OVERWRITE_TYPE_BORDER_TEXT_CONTAINER = `${IS_WITH_BORDER} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_TYPE_BORDER_TEXT_CONTAINER = `${IS_WITH_BORDER} .${textLockup.smallScaleElements.container}`;
 const OVERWRITE_TYPE_BORDER_IMAGE_CONTAINER = `${IS_WITH_BORDER} .${ImageContainer.Elements.container}`;
 
-const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `${IS_WITH_IMAGE} .${textLockup.smallScaleElements.container}`;
 
 const OVERWRITE_ALIGNED_IMAGE_CONTAINER = `${IS_ALIGNED} .${ImageContainer.Elements.container}`;
 
 const OVERWRITE_TRANSPARENT_CONTAINER = `.${ELEMENT_BLOCK_CONTAINER}${IS_TRANSPARENT}`;
-const OVERWRITE_TRANSPARENT_TEXT_CONTAINER = `${OVERWRITE_TRANSPARENT_CONTAINER} .${TextLockupSmall.Elements.container}`;
+const OVERWRITE_TRANSPARENT_TEXT_CONTAINER = `${OVERWRITE_TRANSPARENT_CONTAINER} .${textLockup.smallScaleElements.container}`;
 
 // prettier-ignore
 const OverwriteTransparent = `
@@ -176,7 +176,7 @@ const ImageContainerStyles = `
 `;
 
 // prettier-ignore
-const STYLES_BLOCK_CONTAINER = `
+export const STYLES_BLOCK_CONTAINER = `
   .${ELEMENT_BLOCK_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
     max-width: ${token.spacing.maxWidth.smallest};
@@ -195,7 +195,7 @@ const STYLES_BLOCK_CONTAINER = `
   ${OverwriteTransparent}
 `;
 
-const CreateBlockContainer = ({
+export default ({
   imageContainer,
   textContainer,
   isThemeDark,
@@ -205,6 +205,7 @@ const CreateBlockContainer = ({
 }: TypeBlockContainerProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
+  let styles = STYLES_BLOCK_CONTAINER;
 
   container.classList.add(ELEMENT_BLOCK_CONTAINER);
   if (isTransparent) container.setAttribute(ATTRIBUTE_TRANSPARENT, 'true');
@@ -224,10 +225,5 @@ const CreateBlockContainer = ({
 
   container.appendChild(wrapper);
 
-  return container;
-};
-
-export default {
-  CreateElement: CreateBlockContainer,
-  Styles: STYLES_BLOCK_CONTAINER,
+  return { element: container, styles };
 };

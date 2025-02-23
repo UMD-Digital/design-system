@@ -1,5 +1,9 @@
-import { Block as LayoutBlock, Image as LayoutImage } from 'layout';
-import { TextLockupSmallScaling } from 'macros';
+import {
+  Block as LayoutBlock,
+  Image as LayoutImage,
+  STYLES_BLOCK_CONTAINER,
+} from 'layout';
+import { textLockup } from 'atomic';
 
 type TypeBlockCardProps = {
   id?: string;
@@ -25,28 +29,31 @@ export const STYLES_BLOCK_CARD_ELEMENT = `
     height: 100%;
   }
 
-  ${TextLockupSmallScaling.Styles}
+  ${STYLES_BLOCK_CONTAINER}
   ${LayoutImage.Styles}
-  ${LayoutBlock.Styles}
 `;
 
 const CreateCardBlockElement = (props: TypeBlockCardProps) => {
   const { id, image } = props;
 
-  const textContainer = TextLockupSmallScaling.CreateElement(props);
+  const textContainer = textLockup.smallScaling(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = LayoutBlock.CreateElement({
+  const container = LayoutBlock({
     ...props,
     imageContainer,
-    textContainer,
+    textContainer: textContainer.element,
   });
+  let styles = STYLES_BLOCK_CARD_ELEMENT;
+
+  styles += textContainer.styles;
 
   if (id) elementContainer.setAttribute('news-id', id);
-  elementContainer.appendChild(container);
+  elementContainer.appendChild(container.element);
+  styles += textContainer.styles;
   elementContainer.classList.add(ELEMENT_CARD_BLOCK_CONTAINER);
 
-  return { element: elementContainer, styles: STYLES_BLOCK_CARD_ELEMENT };
+  return { element: elementContainer, styles };
 };
 
 export default CreateCardBlockElement;

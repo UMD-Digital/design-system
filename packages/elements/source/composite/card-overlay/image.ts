@@ -1,11 +1,15 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
-import { BlockOverlay as LayoutBlockOverlay } from 'layout';
-import { TextLockupSmall } from 'macros';
+import {
+  blockOverlay,
+  blockOverlayElements,
+  STYLES_BLOCK_OVERLAY_ELEMENT,
+} from 'layout';
+import { textLockup } from 'atomic';
 import * as Utility from 'utilities';
 
 type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
-  image: HTMLImageElement | HTMLAnchorElement | null;
+  image: HTMLImageElement | HTMLAnchorElement;
   headline: HTMLElement | null;
   text: HTMLElement | null;
   eyebrow?: HTMLElement | null;
@@ -21,9 +25,9 @@ const ELEMENT_CARD_OVERLAY_QUOTE = 'card-overlay-image-quote';
 
 const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
 
-const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${LayoutBlockOverlay.Elements.container}`;
-const OVERWRITE_CTA_ICON_BLOCK_RICH_TEXT = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${TextLockupSmall.Elements.richText}`;
-const OVERWRITE_CTA_ICON_BLOCK_DATE = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${TextLockupSmall.Elements.date}`;
+const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${blockOverlayElements.container}`;
+const OVERWRITE_CTA_ICON_BLOCK_RICH_TEXT = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${textLockup.smallElements.text}`;
+const OVERWRITE_CTA_ICON_BLOCK_DATE = `.${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION}${IS_WITH_CTA_ICON} .${textLockup.smallElements.date}`;
 
 const OverwriteCtaIcon = `
   ${OVERWRITE_CTA_ICON_BLOCK_CONTAINER} {
@@ -52,7 +56,7 @@ const QuoteStyles = `
 `;
 
 // prettier-ignore
-const STYLES_OVERLAY_CARD_ELEMENT = `
+export const STYLES_OVERLAY_CARD_IMAGE = `
   .${ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION} {
     container: ${ELEMENT_NAME} / inline-size;
     height: 100%;
@@ -63,24 +67,25 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
     color: ${token.color.white} !important;
   }
 
-  ${LayoutBlockOverlay.Styles}
   ${OverwriteCtaIcon}
   ${QuoteStyles}
+  ${STYLES_BLOCK_OVERLAY_ELEMENT}
 `;
 
-const CreateCardOverlayElement = (props: TypeCardOverlayImageElement) => {
+export default (props: TypeCardOverlayImageElement) => {
   const { isQuote } = props;
   const elementDeclaration = document.createElement('div');
-  const blockOverlayContainer = LayoutBlockOverlay.CreateElement({
+  const blockOverlayContainer = blockOverlay({
     ...props,
     isThemeDark: true,
   });
   const ctaIcon = CtaIcon.CreateElement({ ...props, isThemeDark: true });
+  let styles = STYLES_OVERLAY_CARD_IMAGE;
 
   if (blockOverlayContainer) {
     if (isQuote) {
-      const lockup = blockOverlayContainer.querySelector(
-        `.${TextLockupSmall.Elements.container}`,
+      const lockup = blockOverlayContainer.element.querySelector(
+        `.${textLockup.smallElements.container}`,
       );
 
       if (lockup) {
@@ -94,19 +99,16 @@ const CreateCardOverlayElement = (props: TypeCardOverlayImageElement) => {
 
     if (ctaIcon) {
       elementDeclaration.setAttribute(ATTRIBUTE_CTA_ICON, '');
-      blockOverlayContainer.appendChild(ctaIcon);
+      blockOverlayContainer.element.appendChild(ctaIcon);
     }
 
-    elementDeclaration.appendChild(blockOverlayContainer);
+    elementDeclaration.appendChild(blockOverlayContainer.element);
+    styles += blockOverlayContainer.styles;
+
     elementDeclaration.classList.add(ELEMENT_CARD_OVERLAY_IMAGE_DECLARATION);
 
-    return elementDeclaration;
+    return { element: elementDeclaration, styles };
   }
 
   return null;
-};
-
-export default {
-  CreateElement: CreateCardOverlayElement,
-  Styles: STYLES_OVERLAY_CARD_ELEMENT,
 };

@@ -17,7 +17,7 @@ export { default as CardOverlay } from './card-overlay';
 export { default as CardOverlayImage } from './card-overlay/image';
 
 export { default as carousel } from './carousel';
-export { default as event } from './event';
+export * as event from './event';
 export { default as hero } from './hero';
 export { default as layout } from './layout';
 

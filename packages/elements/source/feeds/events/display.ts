@@ -33,10 +33,8 @@ export type EventType = DateInformaitonType & {
 };
 
 const STYLES_EVENT_FEED = `
-  ${Composite.event.block.Styles}
-  ${Composite.event.list.Styles}
-  ${Composite.event.elements.sign.Styles}
-  ${Composite.event.elements.meta.Styles}
+  ${Composite.event.STYLES_EVENT_BLOCK_ELEMENT}
+  ${Composite.event.STYLES_EVENT_LIST_ELEMENT}
 `;
 
 const CreateImage = ({
@@ -162,7 +160,7 @@ const CreateEventsGrouped = ({
   const entriesMapping = entries.map((entry) => ({
     dateBanner: getDateBanner(entry),
     timeStamp: entry.startStamp,
-    html: Composite.event.list.CreateElement({
+    html: Composite.event.list({
       ...CommonDisplay({
         entry,
         isThemeDark,
@@ -213,7 +211,7 @@ const CreateEventFeedDisplay = ({
 }) => {
   if (isTypeGrid) {
     return entries.map((entry) =>
-      Composite.event.block.CreateElement({
+      Composite.event.block({
         ...CommonDisplay({
           entry,
           isThemeDark,
@@ -224,7 +222,7 @@ const CreateEventFeedDisplay = ({
   }
 
   return entries.map((entry) =>
-    Composite.event.list.CreateElement({
+    Composite.event.list({
       ...CommonDisplay({
         entry,
         isThemeDark,

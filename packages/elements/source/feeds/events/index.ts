@@ -148,7 +148,7 @@ const DisplayDefault = (props: TypeDisplayEntries) => {
 
   setOffset(entries.length);
   entries.forEach((entry) => {
-    grid.appendChild(entry);
+    grid.appendChild(entry.element);
   });
 };
 
@@ -171,7 +171,7 @@ const DisplayGrouped = (props: TypeDisplayEntries) => {
 
     if (existingGroup) {
       group.entries.forEach((entry) => {
-        existingGroup.appendChild(entry);
+        existingGroup.appendChild(entry.element);
       });
     } else {
       const groupContainer = document.createElement('div');
@@ -185,7 +185,7 @@ const DisplayGrouped = (props: TypeDisplayEntries) => {
       groupContainer.appendChild(groupHeader);
 
       group.entries.forEach((entry) => {
-        groupContainer.appendChild(entry);
+        groupContainer.appendChild(entry.element);
       });
 
       container.appendChild(groupContainer);

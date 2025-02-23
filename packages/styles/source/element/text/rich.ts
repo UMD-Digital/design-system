@@ -9,6 +9,7 @@ import { quote } from './quote';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-rich';
+const scalingContainerMedium = 650;
 
 const themeDarkColors = {
   ...animation.nestedElements.linksDark,
@@ -138,6 +139,51 @@ export const simpleLargeDark = create.jssObject({
   },
 
   className: `${classNamePrefix}-simple-large-dark`,
+});
+
+// umd-text-rich-simple-scaling
+export const simpleScaling = create.jssObject({
+  ...simpleBase,
+  ...sans.small,
+
+  '& > *': {
+    ...sans.small,
+    ...childSpacing,
+  },
+
+  [`@container (min-width: ${scalingContainerMedium}px)`]: {
+    ...sans.medium,
+
+    '& > *': {
+      ...sans.medium,
+      ...childSpacing,
+    },
+  },
+
+  className: `${classNamePrefix}-simple-scaling`,
+});
+
+// umd-text-rich-simple-scaling-dark
+export const simpleScalingDark = create.jssObject({
+  ...simpleBase,
+  ...themeDarkColors,
+  ...sans.small,
+
+  '& > *': {
+    ...sans.small,
+    ...childSpacing,
+  },
+
+  [`@container (min-width: ${scalingContainerMedium}px)`]: {
+    ...sans.medium,
+
+    '& > *': {
+      ...sans.medium,
+      ...childSpacing,
+    },
+  },
+
+  className: `${classNamePrefix}-simple-scaling-dark`,
 });
 
 // umd-text-rich-advanced

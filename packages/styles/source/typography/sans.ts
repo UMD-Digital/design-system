@@ -4,6 +4,8 @@ import { create } from '../utilities';
 const breakpointLarge = media.queries.large.min;
 const breakpointDesktop = media.queries.desktop.min;
 
+const scalingContainerMedium = 650;
+
 const sizeExtraLarge = {
   fontSize: font.size['4xl'],
   lineHeight: `1.125em`,
@@ -82,6 +84,13 @@ export const larger = {
   },
 };
 
+export const scalingLarger = {
+  ...larger,
+  [`@container (min-width: ${scalingContainerMedium}px)`]: {
+    ...extraLarge,
+  },
+};
+
 export const large = {
   fontFamily: font.family['sans'],
   fontWeight: font.weight['bold'],
@@ -133,6 +142,13 @@ export const min = {
   ...sizeMin,
 };
 
+export const scalingMin = {
+  ...min,
+  [`@container (min-width: ${scalingContainerMedium}px)`]: {
+    ...small,
+  },
+};
+
 export const fonts = {
   maximum: create.jssObject({
     className: 'umd-sans-maximum',
@@ -177,6 +193,17 @@ export const fonts = {
   min: create.jssObject({
     className: 'umd-sans-min',
     ...min,
+  }),
+};
+
+export const scalingFonts = {
+  larger: create.jssObject({
+    ...scalingLarger,
+    className: 'umd-sans-scaling-larger',
+  }),
+  min: create.jssObject({
+    ...scalingMin,
+    className: 'umd-sans-scaling-min',
   }),
 };
 

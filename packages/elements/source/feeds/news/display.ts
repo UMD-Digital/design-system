@@ -1,10 +1,4 @@
-import {
-  CardBlock,
-  STYLES_BLOCK_CARD_ELEMENT,
-  CardList,
-  STYLES_LIST_CARD_ELEMENT,
-  CardOverlayImage,
-} from 'composite';
+import * as composite from 'composite';
 
 type ImageType = {
   url: string;
@@ -25,15 +19,16 @@ export type ArticleType = {
   }[];
 };
 
+const { CardBlock, CardList, CardOverlayImage } = composite;
+
 const STYLES_NEWS_FEED = `
-  ${STYLES_LIST_CARD_ELEMENT}
-  ${STYLES_BLOCK_CARD_ELEMENT}
-  ${CardOverlayImage.Styles}
+  ${composite.CardOverlayStyles}
+  ${composite.STYLES_BLOCK_CARD_ELEMENT}
+  ${composite.STYLES_LIST_CARD_ELEMENT}
+  ${composite.STYLES_OVERLAY_CARD_IMAGE}
 `;
 
 const CreateImage = ({ images, url }: { images: ImageType; url?: string }) => {
-  if (!images || !Array.isArray(images) || images.length === 0) return null;
-
   const image = images[0];
   const imageElement = document.createElement('img');
   imageElement.src = image.url;
@@ -145,10 +140,10 @@ const CreateNewsFeedDisplay = ({
   };
 
   const overlayCardType = ({ entry }: { entry: ArticleType }) =>
-    CardOverlayImage.CreateElement({
+    CardOverlayImage({
       ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image }),
-    });
+    })?.element;
 
   const listCardType = ({ entry }: { entry: ArticleType }) => {
     return CardList({
@@ -161,10 +156,10 @@ const CreateNewsFeedDisplay = ({
     if (entries.length >= 3) {
       const entriesCopy = entries.slice(0, 3);
 
-      const overlayCard = CardOverlayImage.CreateElement({
+      const overlayCard = CardOverlayImage({
         ...CommonDisplay({ entry: entriesCopy[0], isThemeDark }),
         image: CreateImage({ images: entriesCopy[0].image }),
-      });
+      })?.element;
 
       if (overlayCard) {
         overlayCard.classList.add('umd-grid-column-double');

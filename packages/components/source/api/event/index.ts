@@ -1,43 +1,24 @@
-declare global {
-  interface Window {
-    UMDEventElement: typeof UMDEventElement;
-  }
-}
-
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
+import { Markup } from 'utilities';
 
-const { Node } = Markup.create;
+const tagName = 'umd-element-event';
 
-const ELEMENT_NAME = 'umd-element-event';
+// ${Composite.event.elements.meta.Styles}
+// ${Composite.event.elements.sign.Styles}
+// ${Composite.event.block.Styles}
+// ${Composite.event.feature.Styles}
+// ${Composite.event.list.Styles}
 
-const styles = `
-  :host {
-    display: block;
-  }
-  
-  ${Styles.reset}
-  ${Composite.event.elements.meta.Styles}
-  ${Composite.event.elements.sign.Styles}
-  ${Composite.event.block.Styles}
-  ${Composite.event.feature.Styles}
-  ${Composite.event.list.Styles}
-  ${Composite.event.promo.Styles}
-`;
-
-const MakeCommonData = ({ element }: { element: UMDEventElement }) => ({
-  image: Markup.validate.ImageSlot({
-    element,
-    ImageSlot: Slots.name.assets.image,
-  }),
+const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
+  image: Slots.assets.image({ element }) as HTMLImageElement,
   headline: Slots.headline.default({ element }),
   text: Slots.text.default({ element }),
   actions: Slots.actions.default({ element }),
   isThemeDark: Attributes.isTheme.dark({ element }),
 });
 
-const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
+const createComponent = (element: HTMLElement) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const showTime = Attributes.includesFeature.visualTime({ element });
 
@@ -55,7 +36,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
 
   if (!startDate) {
     console.error('Missing start date for event web component');
-    return null;
+    return { element: document.createElement('div'), styles: '' };
   }
 
   const EventDetailsData = Markup.event.createDetailsData({
@@ -93,7 +74,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   });
 
   if (Attributes.isDisplay.feature({ element })) {
-    return Composite.event.feature.CreateElement({
+    return Composite.event.feature({
       ...MakeCommonData({ element }),
       eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
       dateSign: isThemeDark ? dateSignLargeLight : dateSignLarge,
@@ -101,7 +82,7 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   }
 
   if (Attributes.isDisplay.promo({ element })) {
-    return Composite.event.promo.CreateElement({
+    return Composite.event.promo({
       ...MakeCommonData({ element }),
       eventDetails: eventDetails,
       dateSign,
@@ -109,49 +90,27 @@ const CreateShadowDom = ({ element }: { element: UMDEventElement }) => {
   }
 
   if (Attributes.isDisplay.list({ element })) {
-    return Composite.event.list.CreateElement({
+    return Composite.event.list({
       ...MakeCommonData({ element }),
       eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
       dateSign: isThemeDark ? dateSignLargeDark : dateSignLarge,
     });
   }
 
-  return Composite.event.block.CreateElement({
+  return Composite.event.block({
     ...MakeCommonData({ element }),
     eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
   });
 };
 
-class UMDEventElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    const template = Node.stylesTemplate({ styles });
-
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
-  }
-
-  connectedCallback() {
-    const element = this;
-    const shadowDom = this._shadow;
-    const content = CreateShadowDom({ element });
-
-    if (content) {
-      shadowDom.appendChild(content);
-    }
-  }
-}
-
 const Load = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDEventElement = UMDEventElement;
-    window.customElements.define(ELEMENT_NAME, UMDEventElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+    }),
+  });
 };
 
 export default {

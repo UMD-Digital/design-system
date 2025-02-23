@@ -1,10 +1,11 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { BlockOverlay as LayoutBlockOverlay } from 'layout';
-import { TextLockupSmall } from 'macros';
+import { blockOverlay } from 'layout';
+import { textLockup } from 'atomic';
+import { default as eventElements } from './elements';
 import * as Utility from 'utilities';
 
 type TypeEventPromoProps = {
-  image: HTMLImageElement | null;
+  image: HTMLImageElement;
   headline: HTMLElement | null;
   eventDetails: HTMLElement;
   dateSign: HTMLElement;
@@ -20,7 +21,8 @@ const ELEMENT_EVENT_PROMO_CONTAINER = 'event-promo-container';
 const ELEMENT_EVENT_PROMO_META_WRAPPER = 'event-promo-meta-wrapper';
 const ELEMENT_EVENT_PROMO_SIGN_WRAPPER = 'event-promo-sign-wrapper';
 
-const OVERRIDE_RICH_TEXT = `.${ELEMENT_EVENT_PROMO_CONTAINER} .${TextLockupSmall.Elements.richText}`;
+const OVERRIDE_RICH_TEXT = `.${ELEMENT_EVENT_PROMO_CONTAINER} .${textLockup.smallScaleElements.text}`;
+const OVERRIDE_HEADLINE = `.${ELEMENT_EVENT_PROMO_CONTAINER} .${textLockup.smallScaleElements.headline}`;
 
 // prettier-ignore
 const DateSign = `
@@ -60,24 +62,30 @@ const STYLES_EVENT_PROMO_ELEMENT = `
 
   ${convertJSSObjectToStyles({
     styleObj: {
-      [`${OVERRIDE_RICH_TEXT}`]: element.text.rich.advancedDark,
+      [`${OVERRIDE_RICH_TEXT}`]: element.text.rich.simpleScalingDark,
     },
   })}
 
-  ${LayoutBlockOverlay.Styles}
+  ${OVERRIDE_HEADLINE} {
+    margin-top: ${token.spacing.min};
+    color: ${token.color.white} !important;
+  }
+
   ${DetailsMeta}
   ${DateSign}
+  ${eventElements.meta.Styles}
+  ${eventElements.sign.Styles}
 `;
 
-const CreateEventPromoElement = (props: TypeEventPromoProps) => {
+export default (props: TypeEventPromoProps) => {
   const { eventDetails, dateSign } = props;
-  const blockOverlayContainer = LayoutBlockOverlay.CreateElement(props);
+  const blockOverlayContainer = blockOverlay({ ...props });
   const elementContainer = document.createElement('div');
   const signWrapper = document.createElement('div');
+  let styles = STYLES_EVENT_PROMO_ELEMENT;
 
-  if (!blockOverlayContainer) return null;
-  const headline = blockOverlayContainer.querySelector(
-    `.${TextLockupSmall.Elements.headline}`,
+  const headline = blockOverlayContainer.element.querySelector(
+    `.${textLockup.smallScaleElements.headline}`,
   ) as HTMLElement;
 
   if (eventDetails && headline) {
@@ -92,13 +100,10 @@ const CreateEventPromoElement = (props: TypeEventPromoProps) => {
     headline.insertAdjacentElement('beforebegin', signWrapper);
   }
 
-  elementContainer.appendChild(blockOverlayContainer);
+  elementContainer.appendChild(blockOverlayContainer.element);
+  styles += blockOverlayContainer.styles;
+
   elementContainer.classList.add(ELEMENT_EVENT_PROMO_CONTAINER);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreateEventPromoElement,
-  Styles: STYLES_EVENT_PROMO_ELEMENT,
+  return { element: elementContainer, styles };
 };

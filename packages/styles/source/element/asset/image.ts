@@ -1,5 +1,6 @@
 import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
+import { box } from '../../layout/background';
 import { create } from '../../utilities';
 
 // Consistent naming
@@ -35,6 +36,14 @@ const imageAnimationEnd = {
 const linkBase = {
   lineHeight: `0`,
   overflow: `hidden`,
+};
+
+const signBase = {
+  [`& .${box.white.className}`]: {
+    position: `absolute`,
+    bottom: `${spacing.min}`,
+    left: `${spacing.min}`,
+  },
 };
 
 const linkImage = {
@@ -101,6 +110,7 @@ export const wrapper = create.jssObject({
   className: `${classNamePrefix}-wrapper`,
   ...base,
   ...linkImage,
+  ...signBase,
 });
 
 // umd-asset-image-wrapper-scaled
@@ -109,4 +119,5 @@ export const wrapperScaled = create.jssObject({
   ...base,
   width: '100%',
   ...linkImageScaled,
+  ...signBase,
 });

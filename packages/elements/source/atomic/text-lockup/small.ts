@@ -40,7 +40,7 @@ export const headlineStyles = {
     color: `${token.color.black}`,
   },
   siblingAfter: {
-    marginTop: token.spacing.min,
+    marginTop: token.spacing.sm,
   },
   subElement: {
     color: 'currentColor',
@@ -66,6 +66,12 @@ export const dateStyles = {
   },
 };
 
+export const actionStyles = {
+  element: {
+    marginTop: token.spacing.sm,
+  },
+};
+
 const containerStyles = {
   className: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
   zIndex: '9',
@@ -82,6 +88,7 @@ export const createEyebrow = ({ eyebrow, isThemeDark }: TypeEyebrow) =>
 export const createActions = ({ actions }: TypeActions) =>
   ElementModel.layout.gridInlineTabletRows({
     element: actions,
+    elementStyles: actionStyles,
   });
 
 export const elements = {
@@ -147,7 +154,9 @@ export default ({
   }
 
   if (actions) {
-    const styledActions = createActions({ actions });
+    const styledActions = createActions({
+      actions,
+    });
     container.appendChild(styledActions.element);
     styles += styledActions.styles;
   }

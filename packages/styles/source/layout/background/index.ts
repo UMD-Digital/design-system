@@ -1,3 +1,4 @@
+export * as box from './box';
 export * as highlight from './highlight';
 export * as full from './full';
 export * as quarter from './quarter';

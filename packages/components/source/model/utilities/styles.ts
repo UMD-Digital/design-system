@@ -40,10 +40,6 @@ const reset = `
     font-style: normal;
   }
 
-  date {
-    color: ${token.color.gray.medium};
-  }
-
   strong, b {
     font-weight: 700;
   }

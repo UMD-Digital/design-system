@@ -1,9 +1,5 @@
-import {
-  Block as LayoutBlock,
-  Image as LayoutImage,
-  STYLES_BLOCK_CONTAINER,
-} from 'layout';
-import { textLockup } from 'atomic';
+import { textLockup, assets } from 'atomic';
+import { ElementModel } from 'model';
 
 type TypeBlockCardProps = {
   id?: string;
@@ -19,41 +15,44 @@ type TypeBlockCardProps = {
   isTransparent?: boolean;
 };
 
-const ELEMENT_NAME = 'umd-card-block';
-const ELEMENT_CARD_BLOCK_CONTAINER = 'card-block-container';
+export const ELEMENT_CARD_BLOCK_CONTAINER = 'card-container';
 
-// prettier-ignore
-export const STYLES_BLOCK_CARD_ELEMENT = `
-  .${ELEMENT_CARD_BLOCK_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    height: 100%;
+export const STYLES_BLOCK_CARD_ELEMENT = '';
+
+const containerStyles = {
+  className: ELEMENT_CARD_BLOCK_CONTAINER,
+  height: '100%',
+};
+
+export default (props: TypeBlockCardProps) => {
+  const { id, image, isAligned, isThemeDark } = props;
+  const elementContainer = document.createElement('div');
+  const container = ElementModel.composite.card({
+    ...props,
+    element: elementContainer,
+  });
+  const textLockupElement = textLockup.smallScaling(props);
+
+  let styles = `
+    ${container.styles}
+  `;
+
+  if (id) {
+    container?.element.setAttribute('news-id', id);
   }
 
-  ${STYLES_BLOCK_CONTAINER}
-  ${LayoutImage.Styles}
-`;
+  if (image) {
+    const imageContainer = assets.image({
+      image,
+      isScaled: true,
+      isAspectStandard: isAligned,
+    });
+    container.element.appendChild(imageContainer.element);
+    styles += imageContainer.styles;
+  }
 
-const CreateCardBlockElement = (props: TypeBlockCardProps) => {
-  const { id, image } = props;
-
-  const textContainer = textLockup.smallScaling(props);
-  const elementContainer = document.createElement('div');
-  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = LayoutBlock({
-    ...props,
-    imageContainer,
-    textContainer: textContainer.element,
-  });
-  let styles = STYLES_BLOCK_CARD_ELEMENT;
-
-  styles += textContainer.styles;
-
-  if (id) elementContainer.setAttribute('news-id', id);
-  elementContainer.appendChild(container.element);
-  styles += textContainer.styles;
-  elementContainer.classList.add(ELEMENT_CARD_BLOCK_CONTAINER);
+  container.element.appendChild(textLockupElement.element);
+  styles += textLockupElement.styles;
 
   return { element: elementContainer, styles };
 };
-
-export default CreateCardBlockElement;

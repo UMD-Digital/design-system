@@ -42,6 +42,7 @@ export const normal = create.jssObject({
   ...base,
   ...secondaryBase,
   className: `${classNamePrefix}`,
+  color: `${color.black}`,
 
   '& svg': {
     ...secondaryBaseIcon,

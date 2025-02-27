@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { createElement } from './constructor';
-import { type ElementProps } from '../_types';
+import { createStyledElement } from '../modifiers';
+import { type ElementProps } from '../modifiers/_types';
 
 interface CardProps extends ElementProps {
   isTransparent?: boolean;
@@ -12,19 +12,25 @@ export const card = (props: CardProps) => {
   const { isThemeDark } = elementProps;
 
   if (isTransparent) {
-    return createElement(
+    return createStyledElement(
       elementProps,
       Styles.element.composite.card.transparent,
     );
   }
 
   if (isThemeDark) {
-    return createElement(elementProps, Styles.element.composite.card.dark);
+    return createStyledElement(
+      elementProps,
+      Styles.element.composite.card.dark,
+    );
   }
 
   if (isBordered) {
-    return createElement(elementProps, Styles.element.composite.card.border);
+    return createStyledElement(
+      elementProps,
+      Styles.element.composite.card.border,
+    );
   }
 
-  return createElement(elementProps, Styles.element.composite.card.light);
+  return createStyledElement(elementProps, Styles.element.composite.card.light);
 };

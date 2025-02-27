@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { createHeadlineElement, createTextElement } from './constructor';
-import { type ElementProps } from '../_types';
+import { createStyledElement } from '../modifiers';
+import { type ElementProps } from '../modifiers/_types';
 
 interface styleObject {
   className: string | string[];
@@ -16,10 +16,10 @@ const createElement = (stylesObj: styleObject, isTypeHeadline = true) => {
     };
 
     if (isTypeHeadline) {
-      return createHeadlineElement(fontProps, stylesObj);
+      return createStyledElement.animationLine(fontProps, stylesObj);
     }
 
-    return createTextElement(fontProps, stylesObj);
+    return createStyledElement.childLink(fontProps, stylesObj);
   };
 };
 

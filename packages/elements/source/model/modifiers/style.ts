@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import { StyleModifierProps } from '../_types';
+import { StyleModifierProps } from './_types';
 
 export enum StyleType {
   Element = 'element',
@@ -8,28 +8,39 @@ export enum StyleType {
   SiblingAfter = 'sibling-after',
 }
 
-const TextColors = {
-  white: { color: 'white' },
-  black: { color: 'black' },
-} as const;
+const getTextColor = (isTextColorWhite?: boolean, isThemeDark?: boolean) => {
+  const colors = {
+    white: { color: 'white' },
+    black: { color: 'black' },
+  } as const;
 
-const getTextColor = (isTextColorWhite?: boolean) =>
-  isTextColorWhite ? 'black' : 'white';
+  if (isTextColorWhite) {
+    return colors.white;
+  }
 
-const getLinkAnimationColor = ({
-  isColorWhite,
-  isColorBlack,
-}: {
-  isColorWhite?: boolean;
-  isColorBlack?: boolean;
-}) => {
-  if (isColorWhite) return Styles.animation.line.slideUnderWhite;
-  if (isColorBlack) return Styles.animation.line.slideUnderBlack;
-  return Styles.animation.line.slideUnderRed;
+  if (isThemeDark) {
+    return colors.white;
+  }
+
+  return colors.black;
 };
 
-const getLinkColor = ({ isColorWhite }: { isColorWhite?: boolean }) => {
-  if (isColorWhite) return Styles.element.text.link.white;
+const getLinkAnimationColor = ({
+  isThemeDark,
+  isAnimationLineRed,
+}: {
+  isThemeDark?: boolean;
+  isAnimationLineRed?: boolean;
+}) => {
+  if (isAnimationLineRed) return Styles.animation.line.slideUnderRed;
+  if (isThemeDark) return Styles.animation.line.slideUnderWhite;
+
+  return Styles.animation.line.slideUnderBlack;
+};
+
+const getLinkColor = ({ isThemeDark }: { isThemeDark?: boolean }) => {
+  if (isThemeDark) return Styles.element.text.link.white;
+
   return Styles.element.text.link.red;
 };
 
@@ -56,34 +67,35 @@ const createModifier = (
   styleGetter: (props: StyleModifierProps) => Record<string, any>,
 ) => {
   const generateStyles = createStyleGenerator(type);
+
   return (props: StyleModifierProps) =>
     generateStyles(props.className, styleGetter(props));
 };
 
 const styleGetters = {
-  animationLink: ({ isColorBlack, isColorWhite }: StyleModifierProps) => ({
-    a: getLinkAnimationColor({ isColorBlack, isColorWhite }),
-    [`&a`]: getLinkAnimationColor({ isColorBlack, isColorWhite }),
+  animationLink: ({ isThemeDark, isAnimationLineRed }: StyleModifierProps) => ({
+    a: getLinkAnimationColor({ isThemeDark, isAnimationLineRed }),
+    [`&a`]: getLinkAnimationColor({ isThemeDark, isAnimationLineRed }),
   }),
   baseStyles: ({ baseStyles }: StyleModifierProps) => baseStyles || {},
-  color: ({ isTextColorWhite }: StyleModifierProps) =>
-    TextColors[getTextColor(isTextColorWhite)],
+  color: ({ isTextColorWhite, isThemeDark }: StyleModifierProps) =>
+    getTextColor(isTextColorWhite, isThemeDark),
+  child: ({ subElement }: StyleModifierProps) => subElement || {},
+  childLink: ({ isThemeDark }: StyleModifierProps) =>
+    getLinkColor({ isThemeDark }),
   element: ({ element }: StyleModifierProps) => element || {},
   sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
-  child: ({ subElement }: StyleModifierProps) => subElement || {},
-  childLink: ({ isColorWhite }: StyleModifierProps) =>
-    getLinkColor({ isColorWhite }),
 };
 
 export const modifiers = {
   animationLink: createModifier(StyleType.Element, styleGetters.animationLink),
   baseStyles: createModifier(StyleType.Element, styleGetters.baseStyles),
-  textColor: createModifier(StyleType.Element, styleGetters.color),
+  childLink: createModifier(StyleType.Element, styleGetters.childLink),
   element: createModifier(StyleType.Element, styleGetters.element),
   elementSiblingAfter: createModifier(
     StyleType.SiblingAfter,
     styleGetters.sibling,
   ),
   elementChild: createModifier(StyleType.Child, styleGetters.child),
-  childLink: createModifier(StyleType.Element, styleGetters.childLink),
+  textColor: createModifier(StyleType.Element, styleGetters.color),
 };

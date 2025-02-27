@@ -3,9 +3,8 @@
 interface ElementColors {
   isTextColorWhite?: boolean;
   isTextColorBlack?: boolean;
-  isColorWhite?: boolean;
-  isColorBlack?: boolean;
-  isColorRed?: boolean;
+  isAnimationLineRed?: boolean;
+  isThemeDark?: boolean;
 }
 
 export interface ElementStyles {
@@ -22,7 +21,6 @@ export interface StyleOptions {
 export interface ElementProps extends ElementColors {
   element: HTMLElement;
   elementStyles?: ElementStyles;
-  isThemeDark?: boolean;
 }
 
 // Configuration Types

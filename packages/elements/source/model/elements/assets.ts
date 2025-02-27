@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { createElement } from './constructor';
-import { type ElementProps } from '../_types';
+import { createStyledElement } from '../modifiers';
+import { type ElementProps } from '../modifiers/_types';
 
 interface ImageWrapperProps extends ElementProps {
   isScaled?: boolean;
@@ -12,24 +12,24 @@ interface ImageProps extends ElementProps {
 }
 
 export const imageCaption = (props: ElementProps) =>
-  createElement(props, Styles.element.asset.image.caption);
+  createStyledElement(props, Styles.element.asset.image.caption);
 
 export const imageAspect = (props: ImageProps) => {
   const { isAspectSquare } = props;
 
   if (isAspectSquare) {
-    return createElement(props, Styles.element.asset.image.aspectSquare);
+    return createStyledElement(props, Styles.element.asset.image.aspectSquare);
   }
 
-  return createElement(props, Styles.element.asset.image.aspectStandard);
+  return createStyledElement(props, Styles.element.asset.image.aspectStandard);
 };
 
 export const imageWrapper = (props: ImageWrapperProps) => {
   const { isScaled } = props;
 
   if (isScaled) {
-    return createElement(props, Styles.element.asset.image.wrapperScaled);
+    return createStyledElement(props, Styles.element.asset.image.wrapperScaled);
   }
 
-  return createElement(props, Styles.element.asset.image.wrapper);
+  return createStyledElement(props, Styles.element.asset.image.wrapper);
 };

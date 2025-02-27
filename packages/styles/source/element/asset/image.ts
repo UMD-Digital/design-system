@@ -10,6 +10,7 @@ const base = {
   position: `relative`,
   display: `inline-block`,
   height: `100%`,
+  overflow: `hidden`,
 };
 
 const imageBase = {
@@ -120,4 +121,28 @@ export const wrapperScaled = create.jssObject({
   width: '100%',
   ...linkImageScaled,
   ...signBase,
+});
+
+// umd-asset-image-aspect-standard
+export const aspectStandard = create.jssObject({
+  className: `${classNamePrefix}-aspect-standard`,
+  aspectRatio: `4/3`,
+  width: 'auto',
+
+  '& img': {
+    aspectRatio: `4/3`,
+    width: 'auto',
+  },
+});
+
+// umd-asset-image-aspect-square
+export const aspectSquare = create.jssObject({
+  className: `${classNamePrefix}-aspect-square`,
+  aspectRatio: `1/1`,
+  width: 'auto',
+
+  '& img': {
+    aspectRatio: `1/1`,
+    width: 'auto',
+  },
 });

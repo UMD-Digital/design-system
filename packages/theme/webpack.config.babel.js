@@ -22,7 +22,7 @@ module.exports = (env) => {
     errorDetails: true,
     source: true,
     timings: true,
-    warnings: true,
+    warnings: false,
   };
 
   const entry = {

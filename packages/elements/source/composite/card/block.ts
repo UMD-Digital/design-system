@@ -19,17 +19,17 @@ export const ELEMENT_CARD_BLOCK_CONTAINER = 'card-container';
 
 export const STYLES_BLOCK_CARD_ELEMENT = '';
 
-const containerStyles = {
-  className: ELEMENT_CARD_BLOCK_CONTAINER,
-  height: '100%',
-};
-
 export default (props: TypeBlockCardProps) => {
   const { id, image, isAligned, isThemeDark } = props;
   const elementContainer = document.createElement('div');
   const container = ElementModel.composite.card({
     ...props,
     element: elementContainer,
+    elementStyles: {
+      element: {
+        height: '100%',
+      },
+    },
   });
   const textLockupElement = textLockup.smallScaling(props);
 

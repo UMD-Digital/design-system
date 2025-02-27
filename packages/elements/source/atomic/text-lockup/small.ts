@@ -61,6 +61,9 @@ export const dateStyles = {
     display: 'block',
     color: `${token.color.gray.mediumAA}`,
   },
+  child: {
+    color: 'currentColor',
+  },
   siblingAfter: {
     marginTop: token.spacing.min,
   },

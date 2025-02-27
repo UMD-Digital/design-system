@@ -23,7 +23,7 @@ const ELEMENT_SCALABLE_FONT_CONTAINER = 'scaling-font-block-container';
 
 const containerStyles = {
   className: ELEMENT_SCALABLE_FONT_CONTAINER,
-  container: 'inline-size',
+  containerType: 'inline-size',
   zIndex: '9',
   position: 'relative',
 };

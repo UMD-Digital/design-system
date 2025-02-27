@@ -2,17 +2,13 @@ import { ElementModel } from 'model';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 
-export default ({
-  image,
-  isShowCaption = false,
-  isScaled = false,
-  isAspectStandard = false,
-}: {
+export default (props: {
   image: HTMLImageElement | HTMLAnchorElement;
   isShowCaption?: boolean;
   isScaled?: boolean;
   isAspectStandard?: boolean;
 }) => {
+  const { image, isShowCaption = false, isAspectStandard = false } = props;
   const container = document.createElement('div');
   const hasCaption = image.hasAttribute(ATTRIBUTE_CAPTION);
   let additionalStyles = '';
@@ -29,7 +25,8 @@ export default ({
   }
 
   if (isAspectStandard) {
-    const imageElement = ElementModel.assets.imageAspectStandard({
+    const imageElement = ElementModel.assets.imageAspect({
+      ...props,
       element: image,
     });
     container.appendChild(imageElement.element);
@@ -38,18 +35,8 @@ export default ({
     container.appendChild(image);
   }
 
-  if (isScaled) {
-    const element = ElementModel.assets.imageWrapperScaled({
-      element: container,
-    });
-
-    return {
-      element: element.element,
-      styles: element.styles + additionalStyles,
-    };
-  }
-
   const element = ElementModel.assets.imageWrapper({
+    ...props,
     element: container,
   });
 

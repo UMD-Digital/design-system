@@ -3,19 +3,19 @@ import { modifiers } from '../../_modifiers/style';
 import { type BuilderConfig, type StyleModifierProps } from '../../_types';
 
 const defaultModifier = (props: StyleModifierProps) => [
-  modifiers.textColor(props),
   modifiers.baseStyles(props),
   modifiers.element(props),
   modifiers.elementChild(props),
   modifiers.elementSiblingAfter(props),
+  modifiers.textColor(props),
 ];
 
-export const defaultConfig: BuilderConfig = {
+export const base: BuilderConfig = {
   styleModifiers: (props) =>
     Utility.styles.combineStyles(...defaultModifier(props)),
 };
 
-export const textConfig: BuilderConfig = {
+export const text: BuilderConfig = {
   styleModifiers: (props) =>
     Utility.styles.combineStyles(
       modifiers.childLink(props),
@@ -23,7 +23,18 @@ export const textConfig: BuilderConfig = {
     ),
 };
 
-export const animationLineConfig: BuilderConfig = {
+export const action: BuilderConfig = {
+  styleModifiers: (props) =>
+    Utility.styles.combineStyles(
+      modifiers.baseStyles(props),
+      modifiers.textColor(props),
+      modifiers.element(props),
+      modifiers.elementChild(props),
+      modifiers.elementSiblingAfter(props),
+    ),
+};
+
+export const animationLine: BuilderConfig = {
   styleModifiers: (props) =>
     Utility.styles.combineStyles(
       modifiers.animationLink(props),

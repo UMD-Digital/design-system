@@ -1,5 +1,5 @@
 import { createElementBuild } from './build';
-import { defaultConfig, animationLineConfig, textConfig } from './options';
+import * as optionConfigs from './style-combinations';
 import { type ElementProps, type BuilderConfig } from '../../_types';
 
 interface styleObject {
@@ -26,20 +26,25 @@ const elementWithConfig = (
 
 // Export functions
 
-export const createElement = (props: ElementProps, stylesObj: styleObject) =>
-  elementWithConfig(props, stylesObj, defaultConfig);
+export const createActionElement = (
+  props: ElementProps,
+  stylesObj: styleObject,
+) => elementWithConfig(props, stylesObj, optionConfigs.action);
 
 export const createLinkAnimationElement = (
   props: ElementProps,
   stylesObj: styleObject,
-) => elementWithConfig(props, stylesObj, animationLineConfig);
+) => elementWithConfig(props, stylesObj, optionConfigs.animationLine);
 
 export const createHeadlineElement = (
   props: ElementProps,
   stylesObj: styleObject,
-) => elementWithConfig(props, stylesObj, animationLineConfig);
+) => elementWithConfig(props, stylesObj, optionConfigs.animationLine);
+
+export const createElement = (props: ElementProps, stylesObj: styleObject) =>
+  elementWithConfig(props, stylesObj, optionConfigs.base);
 
 export const createTextElement = (
   props: ElementProps,
   stylesObj: styleObject,
-) => elementWithConfig(props, stylesObj, textConfig);
+) => elementWithConfig(props, stylesObj, optionConfigs.text);

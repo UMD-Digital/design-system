@@ -11,7 +11,6 @@ export enum StyleType {
 const getTextColor = (isTextColorWhite?: boolean, isThemeDark?: boolean) => {
   const colors = {
     white: { color: 'white' },
-    black: { color: 'black' },
   } as const;
 
   if (isTextColorWhite) {
@@ -22,7 +21,7 @@ const getTextColor = (isTextColorWhite?: boolean, isThemeDark?: boolean) => {
     return colors.white;
   }
 
-  return colors.black;
+  return null;
 };
 
 const getLinkAnimationColor = ({
@@ -53,18 +52,22 @@ const createSelector = (className: string, type: StyleType) => {
   return selectors[type];
 };
 
-const createStyles = (selector: string, styles: Record<string, any>) =>
-  Utility.styles.convertJSSObjectToStyles({
+const createStyles = (selector: string, styles: Record<string, any> | null) => {
+  if (styles === null) return '';
+
+  return Utility.styles.convertJSSObjectToStyles({
     styleObj: { [selector]: styles },
   });
+};
 
 const createStyleGenerator =
-  (type: StyleType) => (className: string, styles: Record<string, any>) =>
+  (type: StyleType) =>
+  (className: string, styles: Record<string, any> | null) =>
     createStyles(createSelector(className, type), styles);
 
 const createModifier = (
   type: StyleType,
-  styleGetter: (props: StyleModifierProps) => Record<string, any>,
+  styleGetter: (props: StyleModifierProps) => Record<string, any> | null,
 ) => {
   const generateStyles = createStyleGenerator(type);
 
@@ -78,13 +81,13 @@ const styleGetters = {
     [`&a`]: getLinkAnimationColor({ isThemeDark, isAnimationLineRed }),
   }),
   baseStyles: ({ baseStyles }: StyleModifierProps) => baseStyles || {},
-  color: ({ isTextColorWhite, isThemeDark }: StyleModifierProps) =>
-    getTextColor(isTextColorWhite, isThemeDark),
   child: ({ subElement }: StyleModifierProps) => subElement || {},
   childLink: ({ isThemeDark }: StyleModifierProps) =>
     getLinkColor({ isThemeDark }),
   element: ({ element }: StyleModifierProps) => element || {},
   sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
+  textColor: ({ isTextColorWhite, isThemeDark }: StyleModifierProps) =>
+    getTextColor(isTextColorWhite, isThemeDark),
 };
 
 export const modifiers = {
@@ -97,5 +100,5 @@ export const modifiers = {
     styleGetters.sibling,
   ),
   elementChild: createModifier(StyleType.Child, styleGetters.child),
-  textColor: createModifier(StyleType.Element, styleGetters.color),
+  textColor: createModifier(StyleType.Element, styleGetters.textColor),
 };

@@ -7,7 +7,8 @@ const postcssJs = require('postcss-js');
 export * as animations from './animations';
 export * as assets from './assets';
 
-export const combineStyles = (...styles: string[]) => styles.join('');
+export const combineStyles = (...styles: (string | null | undefined)[]) =>
+  styles.filter(Boolean).join('');
 
 export const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
   postcss([postcssNesting]).process(styleObj, {

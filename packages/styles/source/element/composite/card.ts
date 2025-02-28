@@ -1,12 +1,12 @@
-import { color, font, spacing } from '../../token';
+import { color, media, spacing } from '../../token';
 import { image } from '../asset';
 import { create } from '../../utilities';
-import { min } from 'typography/sans';
 
 // Consistent naming
-const classNamePrefix = 'umd-layout-element-card';
+const classNamePrefix = 'umd-element-composite-card';
 
-const smallBreakpoint = 380;
+const smallBreakpoint = 479;
+const mediumBreakpointStart = smallBreakpoint + 1;
 const mediumBreakpoint = 650;
 
 const createContainerQuery = (
@@ -15,13 +15,13 @@ const createContainerQuery = (
   styles = {},
 ) => {
   return {
-    [`@container (${comparison}: ${breakpoint}px)`]: styles,
+    [`@media (${comparison}: ${breakpoint}px)`]: styles,
   };
 };
 
 const createRangeContainerQuery = (min: number, max: number, styles = {}) => {
   return {
-    [`@container (min-width: ${min}px) and (max-width: ${max})`]: styles,
+    [`@media (min-width: ${min}px) and (max-width: ${max})`]: styles,
   };
 };
 
@@ -34,15 +34,19 @@ const createImageStyles = (customStyles = {}) => {
   return {
     [`.${image.wrapperScaled.className}`]: {
       ...baseStyles,
-      ...createContainerQuery(mediumBreakpoint, 'max-width', {
+      ...createContainerQuery(smallBreakpoint, 'max-width', {
         marginLeft: spacing.min,
         marginBottom: spacing.md,
-        width: '140px',
+        width: '120px',
         float: 'right',
       }),
 
+      ...createContainerQuery(mediumBreakpointStart, 'min-width', {
+        display: 'block',
+      }),
+
       '& img': {
-        ...createContainerQuery(mediumBreakpoint, 'max-width', {
+        ...createContainerQuery(smallBreakpoint, 'max-width', {
           height: 'auto !important',
         }),
       },
@@ -52,8 +56,8 @@ const createImageStyles = (customStyles = {}) => {
 
 const createTextStyles = (customStyles = {}) => {
   return {
-    [`& > div:not(.${image.wrapperScaled.className})`]: {
-      ...createContainerQuery(mediumBreakpoint, 'min-width', {
+    [`& > div > div:not(.${image.wrapperScaled.className})`]: {
+      ...createContainerQuery(mediumBreakpointStart, 'min-width', {
         paddingTop: spacing.md,
       }),
       ...customStyles,
@@ -66,7 +70,7 @@ const createContainerStyles = (customStyles = {}) => {
     maxWidth: `${spacing.maxWidth.smallest}`,
 
     [`&:has(img)`]: {
-      ...createContainerQuery(mediumBreakpoint, 'max-width', {}),
+      ...createContainerQuery(smallBreakpoint, 'max-width', {}),
     },
     ...customStyles,
   };
@@ -86,17 +90,17 @@ export const border = create.jssObject({
   ...createContainerStyles({
     border: `1px solid ${color.gray.light}`,
     height: '100%',
-    ...createContainerQuery(mediumBreakpoint, 'max-width', {
+    ...createContainerQuery(smallBreakpoint, 'max-width', {
       padding: spacing.md,
     }),
   }),
   ...createTextStyles({
-    ...createContainerQuery(mediumBreakpoint, 'min-width', {
+    ...createContainerQuery(mediumBreakpointStart, 'min-width', {
       padding: spacing.md,
     }),
   }),
   ...createImageStyles({
-    ...createRangeContainerQuery(smallBreakpoint, mediumBreakpoint, {
+    ...createRangeContainerQuery(mediumBreakpointStart, mediumBreakpoint, {
       marginLeft: spacing.sm,
     }),
   }),
@@ -110,17 +114,17 @@ export const dark = create.jssObject({
     backgroundColor: color.gray.darker,
     color: color.white,
     height: '100%',
-    ...createContainerQuery(mediumBreakpoint, 'max-width', {
+    ...createContainerQuery(smallBreakpoint, 'max-width', {
       padding: spacing.md,
     }),
   }),
   ...createTextStyles({
-    ...createContainerQuery(mediumBreakpoint, 'min-width', {
+    ...createContainerQuery(mediumBreakpointStart, 'min-width', {
       padding: spacing.md,
     }),
   }),
   ...createImageStyles({
-    ...createContainerQuery(mediumBreakpoint, 'max-width', {
+    ...createContainerQuery(smallBreakpoint, 'max-width', {
       marginRight: spacing.sm,
       marginTop: spacing.sm,
     }),
@@ -137,7 +141,7 @@ export const transparent = create.jssObject({
     height: '100%',
   }),
   ...createTextStyles({
-    ...createContainerQuery(mediumBreakpoint, 'min-width', {
+    ...createContainerQuery(mediumBreakpointStart, 'min-width', {
       paddingTop: spacing.md,
     }),
   }),

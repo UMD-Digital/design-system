@@ -16,6 +16,7 @@ export type TypeTextLockupSmallScaling = {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
+  eventMeta?: { element: HTMLElement; styles: string };
   isThemeDark?: boolean;
 };
 
@@ -63,14 +64,9 @@ export const elements = {
   actions: actionStyleObject.className,
 };
 
-export default ({
-  eyebrow,
-  headline,
-  text,
-  actions,
-  date,
-  isThemeDark,
-}: TypeTextLockupSmallScaling) => {
+export default (props: TypeTextLockupSmallScaling) => {
+  const { headline, eyebrow, text, date, actions, eventMeta, isThemeDark } =
+    props;
   const container = document.createElement('div');
   let styles = `
     ${Utility.styles.getStyleStringFromJssObject(containerStyles)}
@@ -92,6 +88,11 @@ export default ({
     });
     container.appendChild(styledHeadline.element);
     styles += styledHeadline.styles;
+  }
+
+  if (eventMeta) {
+    container.appendChild(eventMeta.element);
+    styles += eventMeta.styles;
   }
 
   if (text) {

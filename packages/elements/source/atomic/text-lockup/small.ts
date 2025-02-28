@@ -15,11 +15,12 @@ type TypeActions = {
 };
 
 export type TypeTextLockupSmall = TypeTheme & {
-  headline?: HTMLElement | null;
+  headline: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
+  eventMeta?: { element: HTMLElement; styles: string };
 };
 
 const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';
@@ -109,6 +110,7 @@ export default ({
   text,
   actions,
   date,
+  eventMeta,
   isThemeDark,
 }: TypeTextLockupSmall) => {
   const container = document.createElement('div');
@@ -132,6 +134,11 @@ export default ({
     });
     container.appendChild(styledHeadline.element);
     styles += styledHeadline.styles;
+  }
+
+  if (eventMeta) {
+    container.appendChild(eventMeta.element);
+    styles += eventMeta.styles;
   }
 
   if (text) {

@@ -4,7 +4,7 @@ import { create } from '../utilities';
 const breakpointLarge = media.queries.large.min;
 const breakpointDesktop = media.queries.desktop.min;
 
-const scalingContainerMedium = 650;
+const scalingContainerMedium = 500;
 
 const sizeExtraLarge = {
   fontSize: font.size['4xl'],
@@ -85,9 +85,18 @@ export const larger = {
 };
 
 export const scalingLarger = {
-  ...larger,
+  fontFamily: font.family['sans'],
+  fontSize: font.size['lg'],
+  lineHeight: `1.25em`,
+
+  [`@container (min-width: 200px)`]: {
+    fontSize: `calc(${font.size['lg']} + 0.5vw)`,
+    lineHeight: `1.40em`,
+  },
+
   [`@container (min-width: ${scalingContainerMedium}px)`]: {
-    ...extraLarge,
+    fontSize: `calc(${font.size['lg']} + 1.16vw)`,
+    lineHeight: `1.40em`,
   },
 };
 

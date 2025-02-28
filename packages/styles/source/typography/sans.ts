@@ -4,6 +4,7 @@ import { create } from '../utilities';
 const breakpointLarge = media.queries.large.min;
 const breakpointDesktop = media.queries.desktop.min;
 
+const scalingContainerSmall = 350;
 const scalingContainerMedium = 500;
 
 const sizeExtraLarge = {
@@ -11,9 +12,17 @@ const sizeExtraLarge = {
   lineHeight: `1.125em`,
 };
 
+const sizeExtraLargeResponsive = {
+  fontSize: `calc(${font.size['lg']} + 1.16vw)`,
+};
+
 const sizeLarger = {
   fontSize: font.size['3xl'],
   lineHeight: `1.25em`,
+};
+
+const sizeLargerResponsive = {
+  fontSize: `calc(${font.size['lg']} + 0.5vw)`,
 };
 
 const sizeLarge = {
@@ -62,7 +71,7 @@ export const extraLarge = {
   ...sizeLarge,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${font.size['lg']} + 1.16vw)`,
+    ...sizeExtraLargeResponsive,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -76,7 +85,7 @@ export const larger = {
   lineHeight: `1.40em`,
 
   [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${font.size['lg']} + 0.5vw)`,
+    ...sizeLargerResponsive,
   },
 
   [`@media (${breakpointDesktop})`]: {
@@ -89,14 +98,13 @@ export const scalingLarger = {
   fontSize: font.size['lg'],
   lineHeight: `1.25em`,
 
-  [`@container (min-width: 200px)`]: {
-    fontSize: `calc(${font.size['lg']} + 0.5vw)`,
+  [`@container (min-width: ${scalingContainerSmall}px)`]: {
+    ...sizeLargerResponsive,
     lineHeight: `1.40em`,
   },
 
   [`@container (min-width: ${scalingContainerMedium}px)`]: {
-    fontSize: `calc(${font.size['lg']} + 1.16vw)`,
-    lineHeight: `1.40em`,
+    ...sizeExtraLargeResponsive,
   },
 };
 
@@ -153,6 +161,7 @@ export const min = {
 
 export const scalingMin = {
   ...min,
+
   [`@container (min-width: ${scalingContainerMedium}px)`]: {
     ...small,
   },

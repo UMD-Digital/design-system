@@ -9,6 +9,7 @@ const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
   headline: Slots.headline.default({ element }),
   text: Slots.text.default({ element }),
   actions: Slots.actions.default({ element }),
+  isTransparent: Attributes.isVisual.transparent({ element }),
   isThemeDark: Attributes.isTheme.dark({ element }),
 });
 

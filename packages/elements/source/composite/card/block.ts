@@ -10,6 +10,8 @@ type TypeBlockCardProps = {
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
   image?: HTMLImageElement | HTMLAnchorElement | null;
+  eventMeta?: { element: HTMLElement; styles: string };
+  dateSign?: HTMLElement;
   isAligned?: boolean;
   isBordered?: boolean;
   isThemeDark?: boolean;
@@ -26,11 +28,10 @@ const containerQueryStyles = {
 
 export default (props: TypeBlockCardProps) => {
   const { newsId, image, isAligned } = props;
-  const elementDiv = document.createElement('div');
   const containerQuery = document.createElement('div');
   const composite = ElementModel.composite.card({
     ...props,
-    element: elementDiv,
+    element: document.createElement('div'),
     elementStyles: {
       element: {
         height: '100%',
@@ -40,7 +41,7 @@ export default (props: TypeBlockCardProps) => {
   const textLockupElement = textLockup.smallScaling(props);
 
   let styles = `
-      ${Utility.styles.getStyleStringFromJssObject(containerQueryStyles)}
+    ${Utility.styles.getStyleStringFromJssObject(containerQueryStyles)}
     ${composite.styles}
   `;
 
@@ -56,12 +57,14 @@ export default (props: TypeBlockCardProps) => {
       isScaled: true,
       isAspectStandard: isAligned,
     });
-    composite.element.appendChild(imageContainer.element);
+    containerQuery.appendChild(imageContainer.element);
     styles += imageContainer.styles;
   }
 
-  composite.element.appendChild(textLockupElement.element);
+  containerQuery.appendChild(textLockupElement.element);
   styles += textLockupElement.styles;
+
+  composite.element.appendChild(containerQuery);
 
   return { element: composite.element, styles };
 };

@@ -29,25 +29,25 @@ export type TypeMetaDisplay = EventType & {
   showTime?: boolean;
 };
 
-const MakeDetailItem = ({
-  icon,
-  text,
-  style,
-}: {
+const MakeDetailItem = (props: {
   icon: string;
   text: string;
-  style?: string;
+  isThemeDark?: boolean;
 }) => {
-  const container = document.createElement('p');
+  const { icon, text } = props;
+  const container = ElementModel.event.metaItem({
+    element: document.createElement('p'),
+    ...props,
+  });
+
   const iconElement = document.createElement('span');
   const textElement = document.createElement('span');
 
   iconElement.innerHTML = icon;
   textElement.innerHTML = text;
 
-  if (style) container.classList.add(style);
-  container.appendChild(iconElement);
-  container.appendChild(textElement);
+  container.element.appendChild(iconElement);
+  container.element.appendChild(textElement);
 
   return container;
 };
@@ -92,22 +92,23 @@ const createDateRow = (props: TypeMetaDisplay) => {
   const { startMonth, startDay, endDay, endMonth } = props;
   const isMultiDay = startDay != endDay || startMonth != endMonth;
   const dateElement = createDayText({ ...props, isMultiDay });
-  container.appendChild(dateElement);
+
+  let styles = '';
+
+  container.appendChild(dateElement.element);
+  styles += dateElement.styles;
 
   if (showTime) {
     const timeElement = createTimeText({ ...props, isMultiDay });
-    container.appendChild(timeElement);
+    container.appendChild(timeElement.element);
+    styles += timeElement.styles;
   }
 
-  return ElementModel.event.metaItem({
-    element: container,
-    ...props,
-  });
+  return { element: container, styles };
 };
 
 export default (props: TypeMetaDisplay) => {
   const { location } = props;
-
   const composite = ElementModel.event.metaContainer({
     element: document.createElement('div'),
     ...props,
@@ -123,12 +124,10 @@ export default (props: TypeMetaDisplay) => {
   styles += dateRow.styles;
 
   if (location && location.length > 0) {
-    const locationElm = ElementModel.event.metaItem({
-      element: MakeDetailItem({
-        icon: Utility.asset.icon.PIN,
-        text: location[0].title,
-      }),
+    const locationElm = MakeDetailItem({
       ...props,
+      icon: Utility.asset.icon.PIN,
+      text: location[0].title,
     });
 
     wrapper.element.appendChild(locationElm.element);

@@ -1,14 +1,8 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 
 const tagName = 'umd-element-event';
-
-// ${Composite.event.elements.meta.Styles}
-// ${Composite.event.elements.sign.Styles}
-// ${Composite.event.block.Styles}
-// ${Composite.event.feature.Styles}
-// ${Composite.event.list.Styles}
 
 const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
   image: Slots.assets.image({ element }) as HTMLImageElement,
@@ -44,6 +38,7 @@ const createComponent = (element: HTMLElement) => {
     startDate,
     endDate,
   });
+
   const EventDetailMeta = { ...EventDetailsData, showTime };
 
   const EventSignData = Markup.event.createDetailsData({
@@ -51,12 +46,20 @@ const createComponent = (element: HTMLElement) => {
     startDate,
     endDate,
   });
+
   const eventDetails =
     Composite.event.elements.meta.CreateElement(EventDetailMeta);
+
   const eventDetailsDark = Composite.event.elements.meta.CreateElement({
     ...EventDetailMeta,
     isThemeDark: true,
   });
+
+  const eventMetaAtomic = Atomic.events.meta({
+    ...EventDetailMeta,
+    isThemeDark,
+  });
+
   const dateSign = Composite.event.elements.sign.CreateElement(EventSignData);
   const dateSignLarge = Composite.event.elements.sign.CreateElement({
     ...EventSignData,
@@ -73,13 +76,13 @@ const createComponent = (element: HTMLElement) => {
     isThemeDark: true,
   });
 
-  if (Attributes.isDisplay.feature({ element })) {
-    return Composite.event.feature({
-      ...MakeCommonData({ element }),
-      eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
-      dateSign: isThemeDark ? dateSignLargeLight : dateSignLarge,
-    });
-  }
+  // if (Attributes.isDisplay.feature({ element })) {
+  //   return Composite.event.promo({
+  //     ...MakeCommonData({ element }),
+  //     eventMeta: isThemeDark ? eventDetails : eventDetailsDark,
+  //     dateSign: isThemeDark ? dateSignLargeLight : dateSignLarge,
+  //   });
+  // }
 
   if (Attributes.isDisplay.promo({ element })) {
     return Composite.event.promo({
@@ -97,9 +100,9 @@ const createComponent = (element: HTMLElement) => {
     });
   }
 
-  return Composite.event.block({
+  return Composite.CardBlock({
     ...MakeCommonData({ element }),
-    eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
+    eventMeta: eventMetaAtomic,
   });
 };
 

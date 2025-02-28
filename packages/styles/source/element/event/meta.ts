@@ -1,4 +1,4 @@
-import { color, media, spacing } from '../../token';
+import { color, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 

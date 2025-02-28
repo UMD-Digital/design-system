@@ -1,4 +1,3 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 
@@ -53,7 +52,7 @@ const MakeDetailItem = ({
   return container;
 };
 
-const DateText = ({
+const createDayText = ({
   startDayOfWeek,
   startMonth,
   startDay,
@@ -74,7 +73,7 @@ const DateText = ({
   });
 };
 
-const TimeText = ({ startTime, endTime }: DateDisplayType) => {
+const createTimeText = ({ startTime, endTime }: DateDisplayType) => {
   let text = startTime;
 
   if (startTime != endTime) {
@@ -87,45 +86,58 @@ const TimeText = ({ startTime, endTime }: DateDisplayType) => {
   });
 };
 
-const RowDateInfo = (info: TypeMetaDisplay) => {
-  const { showTime = true } = info;
+const createDateRow = (props: TypeMetaDisplay) => {
+  const { showTime = true } = props;
   const container = document.createElement('div');
-  const { startMonth, startDay, endDay, endMonth } = info;
+  const { startMonth, startDay, endDay, endMonth } = props;
   const isMultiDay = startDay != endDay || startMonth != endMonth;
-  const dateElement = DateText({ ...info, isMultiDay });
+  const dateElement = createDayText({ ...props, isMultiDay });
   container.appendChild(dateElement);
 
   if (showTime) {
-    const timeElement = TimeText({ ...info, isMultiDay });
+    const timeElement = createTimeText({ ...props, isMultiDay });
     container.appendChild(timeElement);
   }
 
-  return container;
+  return ElementModel.event.metaItem({
+    element: container,
+    ...props,
+  });
 };
 
 export default (props: TypeMetaDisplay) => {
   const { location } = props;
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
+
   const composite = ElementModel.event.metaContainer({
-    element: container,
-    isThemeDark: props.isThemeDark,
+    element: document.createElement('div'),
+    ...props,
   });
-  const dateRow = RowDateInfo(props);
+  const wrapper = ElementModel.event.metaWrapper({
+    element: document.createElement('div'),
+    ...props,
+  });
+  const dateRow = createDateRow(props);
   let styles = '';
 
-  wrapper.appendChild(dateRow);
+  wrapper.element.appendChild(dateRow.element);
+  styles += dateRow.styles;
 
   if (location && location.length > 0) {
-    wrapper.appendChild(
-      MakeDetailItem({
+    const locationElm = ElementModel.event.metaItem({
+      element: MakeDetailItem({
         icon: Utility.asset.icon.PIN,
         text: location[0].title,
       }),
-    );
+      ...props,
+    });
+
+    wrapper.element.appendChild(locationElm.element);
+    styles += locationElm.styles;
   }
 
-  container.appendChild(wrapper);
+  styles += wrapper.styles;
+  styles += composite.styles;
+  composite.element.appendChild(wrapper.element);
 
-  return { element: container, styles };
+  return { element: composite.element, styles };
 };

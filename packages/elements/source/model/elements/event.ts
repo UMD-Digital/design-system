@@ -8,8 +8,5 @@ export const metaContainer = (elementProps: ElementProps) =>
 export const metaWrapper = (elementProps: ElementProps) =>
   createStyledElement(elementProps, Styles.element.event.meta.wrapper);
 
-export const metaDate = (elementProps: ElementProps) =>
-  createStyledElement(elementProps, Styles.element.event.meta.date);
-
-export const metaLocation = (elementProps: ElementProps) =>
-  createStyledElement(elementProps, Styles.element.event.meta.location);
+export const metaItem = (elementProps: ElementProps) =>
+  createStyledElement(elementProps, Styles.element.event.meta.item);

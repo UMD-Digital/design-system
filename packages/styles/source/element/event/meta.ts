@@ -34,9 +34,6 @@ export const wrapper = create.jssObject({
   },
 
   '> *:first-child': {
-    display: 'flex',
-    width: '100%',
-
     [`@container (min-width: ${mobileBreakpoint}px)`]: {
       display: 'flex',
     },
@@ -58,14 +55,15 @@ export const wrapper = create.jssObject({
   },
 });
 
-// umd-element-event-meta-date
-export const date = create.jssObject({
+// umd-element-event-meta-item
+export const item = create.jssObject({
   ...sans.smaller,
-  className: `${classNamePrefix}-date`,
+  className: `${classNamePrefix}-item`,
   color: `${color.gray.dark}`,
   fontWeight: `400`,
+  marginBottom: '0',
 
-  '& > span': {
+  '& > *:first-child': {
     width: '18px',
     display: 'flex',
 
@@ -83,9 +81,4 @@ export const date = create.jssObject({
       height: '14px',
     },
   },
-});
-
-// umd-element-event-meta-location
-export const location = create.jssObject({
-  className: `${classNamePrefix}-location`,
 });

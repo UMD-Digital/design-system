@@ -3,6 +3,7 @@ import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 import {
   createEyebrow,
+  createRibbonEyebrow,
   createActions,
   eyebrowStyles,
   headlineStyles,
@@ -18,6 +19,7 @@ export type TypeTextLockupSmallScaling = {
   actions?: HTMLElement | null;
   eventMeta?: { element: HTMLElement; styles: string };
   isThemeDark?: boolean;
+  isEyebrowRibbon?: boolean;
 };
 
 const ELEMENT_SCALABLE_FONT_CONTAINER = 'scaling-font-block-container';
@@ -65,8 +67,16 @@ export const elements = {
 };
 
 export default (props: TypeTextLockupSmallScaling) => {
-  const { headline, eyebrow, text, date, actions, eventMeta, isThemeDark } =
-    props;
+  const {
+    headline,
+    eyebrow,
+    text,
+    date,
+    actions,
+    eventMeta,
+    isThemeDark,
+    isEyebrowRibbon = false,
+  } = props;
   const container = document.createElement('div');
   let styles = `
     ${Utility.styles.getStyleStringFromJssObject(containerStyles)}
@@ -74,8 +84,14 @@ export default (props: TypeTextLockupSmallScaling) => {
 
   container.classList.add(ELEMENT_SCALABLE_FONT_CONTAINER);
 
-  if (eyebrow) {
+  if (eyebrow && !isEyebrowRibbon) {
     const styledEyebrow = createEyebrow({ eyebrow, isThemeDark });
+    container.appendChild(styledEyebrow.element);
+    styles += styledEyebrow.styles;
+  }
+
+  if (eyebrow && isEyebrowRibbon) {
+    const styledEyebrow = createRibbonEyebrow({ eyebrow });
     container.appendChild(styledEyebrow.element);
     styles += styledEyebrow.styles;
   }

@@ -21,6 +21,7 @@ export type TypeTextLockupSmall = TypeTheme & {
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
   eventMeta?: { element: HTMLElement; styles: string };
+  isEyebrowRibbon?: boolean;
 };
 
 const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';
@@ -32,6 +33,12 @@ export const eyebrowStyles = {
   },
   siblingAfter: {
     marginTop: token.spacing.min,
+  },
+};
+
+export const ribbonStyles = {
+  siblingAfter: {
+    marginTop: token.spacing.sm,
   },
 };
 
@@ -87,6 +94,12 @@ export const createEyebrow = ({ eyebrow, isThemeDark }: TypeEyebrow) =>
     element: eyebrow,
     elementStyles: eyebrowStyles,
     isThemeDark,
+  });
+
+export const createRibbonEyebrow = ({ eyebrow }: TypeEyebrow) =>
+  ElementModel.text.ribbon({
+    element: eyebrow,
+    elementStyles: ribbonStyles,
   });
 
 export const createActions = ({ actions }: TypeActions) =>

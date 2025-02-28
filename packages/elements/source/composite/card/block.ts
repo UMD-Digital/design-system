@@ -16,6 +16,7 @@ type TypeBlockCardProps = {
   isBordered?: boolean;
   isThemeDark?: boolean;
   isTransparent?: boolean;
+  isEyebrowRibbon?: boolean;
 };
 
 const CONTAINER_CLASS = 'card-block-container';

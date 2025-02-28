@@ -62,28 +62,36 @@ const createComponent = (element: HTMLElement) => {
   });
 
   const dateSign = Composite.event.elements.sign.CreateElement(EventSignData);
+
+  const dateSignAtomic = Atomic.events.sign({
+    ...EventSignData,
+    isThemeDark,
+  });
+
+  const dateSignAtomicLarge = Atomic.events.sign({
+    ...EventSignData,
+    isThemeDark,
+    isLargeSize: true,
+  });
+
   const dateSignLarge = Composite.event.elements.sign.CreateElement({
     ...EventSignData,
     isLargeSize: true,
   });
-  const dateSignLargeLight = Composite.event.elements.sign.CreateElement({
-    ...EventSignData,
-    isLargeSize: true,
-    isThemeDark: false,
-  });
+
   const dateSignLargeDark = Composite.event.elements.sign.CreateElement({
     ...EventSignData,
     isLargeSize: true,
     isThemeDark: true,
   });
 
-  // if (Attributes.isDisplay.feature({ element })) {
-  //   return Composite.event.promo({
-  //     ...MakeCommonData({ element }),
-  //     eventMeta: isThemeDark ? eventDetails : eventDetailsDark,
-  //     dateSign: isThemeDark ? dateSignLargeLight : dateSignLarge,
-  //   });
-  // }
+  if (Attributes.isDisplay.feature({ element })) {
+    return Composite.CardBlock({
+      ...MakeCommonData({ element }),
+      eventMeta: eventMetaAtomic,
+      dateSign: dateSignAtomicLarge,
+    });
+  }
 
   if (Attributes.isDisplay.promo({ element })) {
     return Composite.event.promo({

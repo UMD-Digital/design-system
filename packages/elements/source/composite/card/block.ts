@@ -11,7 +11,7 @@ type TypeBlockCardProps = {
   actions?: HTMLElement | null;
   image?: HTMLImageElement | HTMLAnchorElement | null;
   eventMeta?: { element: HTMLElement; styles: string };
-  dateSign?: HTMLElement;
+  dateSign?: { element: HTMLElement; styles: string };
   isAligned?: boolean;
   isBordered?: boolean;
   isThemeDark?: boolean;
@@ -27,7 +27,7 @@ const containerQueryStyles = {
 };
 
 export default (props: TypeBlockCardProps) => {
-  const { newsId, image, isAligned } = props;
+  const { newsId, image, isAligned, dateSign } = props;
   const containerQuery = document.createElement('div');
   const composite = ElementModel.composite.card({
     ...props,
@@ -56,6 +56,7 @@ export default (props: TypeBlockCardProps) => {
       image,
       isScaled: true,
       isAspectStandard: isAligned,
+      dateSign,
     });
     containerQuery.appendChild(imageContainer.element);
     styles += imageContainer.styles;

@@ -1,142 +1,17 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-
-const { convertJSSObjectToStyles } = Utility.styles;
-const { typography, token } = Styles;
-
-const ELEMENT_EVENT_DATE_WRAPPER = 'event-sign-wrapper';
-const ELEMENT_EVENT_MONTH = 'event-sign-date-month';
-const ELEMENT_EVENT_DAY = 'event-sign-date-day';
-
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_MULTI_DAY = 'multi-day';
-const ATTRIBUTE_SIZE_LARGE = 'large';
-const THEME_DARK = 'dark';
-const IS_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-const IS_MULTI_DAY = `[${ATTRIBUTE_MULTI_DAY}]`;
-const IS_SIZE_LARGE = `[${ATTRIBUTE_SIZE_LARGE}]`;
-
-const OVERWRITE_SIZE_LARGE_MONTH = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_SIZE_LARGE} .${ELEMENT_EVENT_MONTH}`;
-const OVERWRITE_SIZE_LARGE_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_SIZE_LARGE} .${ELEMENT_EVENT_DAY}`;
-
-const OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_MULTI_DAY}${IS_SIZE_LARGE} .${ELEMENT_EVENT_MONTH}`;
-const OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY = `.${ELEMENT_EVENT_DATE_WRAPPER}${IS_MULTI_DAY}${IS_SIZE_LARGE} .${ELEMENT_EVENT_DAY}`;
-
-// prettier-ignore
-const OverwriteLargeSize = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MONTH}`]: typography.sans.small,
-    },
-  })}
-  
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MONTH} *`]: typography.sans.small,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH}`]: typography.sans.min,
-    },
-  })}
-  
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_MONTH} *`]: typography.sans.min,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_DAY}`]: typography.sans.extraLarge,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_DAY} *`]: typography.sans.extraLarge,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY}`]: typography.sans.larger,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_SIZE_LARGE_MULTI_DAY_DAY} *`]: typography.sans.larger,
-    },
-  })}
-`;
-
-// prettier-ignore
-const MonthStyles = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_EVENT_MONTH}`]: typography.sans.min,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_EVENT_MONTH} *`]: typography.sans.min,
-    },
-  })}
-`;
-
-const DayStyles = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_EVENT_DAY}`]: typography.sans.larger,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_EVENT_DAY} *`]: typography.sans.larger,
-    },
-  })}
-`;
-
-// prettier-ignore
-const WrapperStyles = `
-  .${ELEMENT_EVENT_DATE_WRAPPER} {
-    display: flex;
-    align-items: center;
-  }
-
-  .${ELEMENT_EVENT_DATE_WRAPPER} * {
-    display: block;
-    text-transform: uppercase;
-    text-align: center;
-    max-width: 200px;
-    font-weight: 700;
-    color: ${token.color.black} !important;
-  }
-
-  .${ELEMENT_EVENT_DATE_WRAPPER}${IS_DARK} * {
-    color: ${token.color.white} !important;
-  }
-`;
-
-// prettier-ignore
-const STYLES_EVENT_SIGN = `
-  ${WrapperStyles}
-  ${MonthStyles}
-  ${DayStyles}
-  ${OverwriteLargeSize}
-`;
+import { ElementModel } from 'model';
 
 const makeDateElement = ({
   element,
-  style,
+  isMonth,
+  isDay,
+  isLargeSize,
+  isMultiDay,
 }: {
   element: string | HTMLElement;
-  style: string;
+  isMonth?: boolean;
+  isDay?: boolean;
+  isLargeSize?: boolean;
+  isMultiDay?: boolean;
 }) => {
   const dateElement = document.createElement('span');
   if (typeof element === 'string') {
@@ -145,82 +20,82 @@ const makeDateElement = ({
     dateElement.appendChild(element);
   }
 
-  dateElement.classList.add(style);
-  return dateElement;
+  if (isDay && isLargeSize && !isMultiDay) {
+    return ElementModel.headline.sansExtraLarge({ element: dateElement });
+  }
+
+  if (isDay) {
+    return ElementModel.headline.sansLarger({ element: dateElement });
+  }
+
+  if (isMonth && isLargeSize && !isMultiDay) {
+    return ElementModel.headline.sansSmall({ element: dateElement });
+  }
+
+  return ElementModel.headline.sansMin({ element: dateElement });
 };
 
 const makeStartDateBlock = ({
-  container,
   startMonth,
   startDay,
+  isLargeSize,
+  isMultiDay,
 }: {
-  container: HTMLElement;
   startMonth: string | HTMLElement;
   startDay: string | HTMLElement;
+  isLargeSize?: boolean;
+  isMultiDay?: boolean;
 }) => {
   const startWrapper = document.createElement('p');
   const startMonthWrapper = makeDateElement({
     element: startMonth,
-    style: ELEMENT_EVENT_MONTH,
+    isMonth: true,
+    isLargeSize,
+    isMultiDay,
   });
   const startDayWrapper = makeDateElement({
     element: startDay,
-    style: ELEMENT_EVENT_DAY,
+    isDay: true,
+    isLargeSize,
+    isMultiDay,
   });
+  let styles = '';
 
-  startWrapper.appendChild(startMonthWrapper);
-  startWrapper.appendChild(startDayWrapper);
-  container.appendChild(startWrapper);
+  startWrapper.appendChild(startMonthWrapper.element);
+  styles += startMonthWrapper.styles;
+  startWrapper.appendChild(startDayWrapper.element);
+  styles += startDayWrapper.styles;
+
+  return { element: startWrapper, styles };
 };
 
 const makeEndDateBlock = ({
-  container,
-  startMonth,
-  startDay,
   endMonth,
   endDay,
-  isThemeDark,
 }: {
-  container: HTMLElement;
-  startMonth: string | HTMLElement;
-  startDay: string | HTMLElement;
   endDay: string | HTMLElement;
   endMonth: string | HTMLElement;
-  isThemeDark?: boolean;
 }) => {
   const endWrapper = document.createElement('p');
-  const isTheSameMonth = endMonth === startMonth;
-  const isTheSameDay = endDay === startDay;
 
-  if (!isTheSameMonth || !isTheSameDay) {
-    const srOnly = document.createElement('span');
-    const dash = document.createElement('span');
-    const endMonthWrapper = makeDateElement({
-      element: endMonth,
-      style: ELEMENT_EVENT_MONTH,
-    });
-    const endDayWrapper = makeDateElement({
-      element: endDay,
-      style: ELEMENT_EVENT_DAY,
-    });
+  const endMonthWrapper = makeDateElement({
+    element: endMonth,
+    isMonth: true,
+    isMultiDay: true,
+  });
+  const endDayWrapper = makeDateElement({
+    element: endDay,
+    isDay: true,
+    isMultiDay: true,
+  });
+  let styles = '';
 
-    endWrapper.appendChild(endMonthWrapper);
-    endWrapper.appendChild(endDayWrapper);
+  endWrapper.appendChild(endMonthWrapper.element);
+  styles += endMonthWrapper.styles;
+  endWrapper.appendChild(endDayWrapper.element);
+  styles += endDayWrapper.styles;
 
-    srOnly.classList.add('sr-only');
-    srOnly.innerHTML = 'to';
-
-    dash.style.width = '10px';
-    dash.style.height = '3px';
-    dash.style.margin = '0 5px';
-    dash.style.display = 'block';
-    dash.style.backgroundColor = isThemeDark ? 'white' : 'black';
-
-    container.appendChild(srOnly);
-    container.appendChild(dash);
-    container.appendChild(endWrapper);
-    container.setAttribute(ATTRIBUTE_MULTI_DAY, '');
-  }
+  return { element: endWrapper, styles };
 };
 
 export default (props: {
@@ -239,26 +114,45 @@ export default (props: {
     isThemeDark,
     isLargeSize = false,
   } = props;
-  const container = document.createElement('div');
-  const hasEnd = endDay && endMonth;
-  let styles = STYLES_EVENT_SIGN;
+  const container = ElementModel.event.signContainer({
+    element: document.createElement('div'),
+  });
+  const isTheSameMonth = endMonth === startMonth;
+  const isTheSameDay = endDay === startDay;
+  const isMultiDay = !isTheSameMonth || !isTheSameDay;
+  let styles = container.styles;
 
-  container.classList.add(ELEMENT_EVENT_DATE_WRAPPER);
-  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-  if (isLargeSize) container.setAttribute(ATTRIBUTE_SIZE_LARGE, '');
+  const startBlock = makeStartDateBlock({
+    startMonth,
+    startDay,
+    isLargeSize,
+    isMultiDay,
+  });
+  container.element.appendChild(startBlock.element);
+  styles += startBlock.styles;
 
-  makeStartDateBlock({ container, startMonth, startDay });
-
-  if (hasEnd) {
-    makeEndDateBlock({
-      container,
-      startMonth,
-      startDay,
+  if (isMultiDay && endDay && endMonth) {
+    const srOnly = document.createElement('span');
+    const dash = document.createElement('span');
+    const endBlock = makeEndDateBlock({
       endDay,
       endMonth,
-      isThemeDark,
     });
+
+    srOnly.classList.add('sr-only');
+    srOnly.innerHTML = 'to';
+
+    dash.style.width = '10px';
+    dash.style.height = '3px';
+    dash.style.margin = '0 5px';
+    dash.style.display = 'block';
+    dash.style.backgroundColor = isThemeDark ? 'white' : 'black';
+
+    container.element.appendChild(srOnly);
+    container.element.appendChild(dash);
+    container.element.appendChild(endBlock.element);
+    styles += endBlock.styles;
   }
 
-  return { element: container, styles };
+  return { element: container.element, styles };
 };

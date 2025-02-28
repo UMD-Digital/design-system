@@ -25,11 +25,20 @@ const createElement = (stylesObj: styleObject, isTypeHeadline = true) => {
 
 // Sans Fonts
 
+export const sansExtraLarge = createElement(
+  Styles.typography.sans.fonts.extraLarge,
+);
+
 export const sansLarger = createElement(Styles.typography.sans.fonts.larger);
 
 export const sansLarge = createElement(Styles.typography.sans.fonts.large);
 
 export const sansMedium = createElement(Styles.typography.sans.fonts.medium);
+
+export const sansSmall = createElement(
+  Styles.typography.sans.fonts.small,
+  true,
+);
 
 export const sansMin = createElement(Styles.typography.sans.fonts.min, true);
 

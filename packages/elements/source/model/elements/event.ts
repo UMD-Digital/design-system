@@ -10,3 +10,6 @@ export const metaWrapper = (elementProps: ElementProps) =>
 
 export const metaItem = (elementProps: ElementProps) =>
   createStyledElement(elementProps, Styles.element.event.meta.item);
+
+export const signContainer = (elementProps: ElementProps) =>
+  createStyledElement(elementProps, Styles.element.event.sign.container);

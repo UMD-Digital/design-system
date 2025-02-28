@@ -25,6 +25,7 @@ const CONFIG = {
     default: (props: StyleModifierProps) => [
       ...CONFIG.modifiers.base(props),
       modifiers.textColor(props),
+      modifiers.iconColor(props),
     ],
     withChildLink: (props: StyleModifierProps) => [
       ...CONFIG.modifiers.default(props),

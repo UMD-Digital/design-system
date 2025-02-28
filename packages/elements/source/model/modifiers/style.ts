@@ -8,19 +8,23 @@ export enum StyleType {
   SiblingAfter = 'sibling-after',
 }
 
+const textColors = {
+  white: { color: 'white' },
+} as const;
+
+const iconColors = {
+  white: { fill: 'white' },
+} as const;
+
 const getTextColor = (isTextColorWhite?: boolean, isThemeDark?: boolean) => {
-  const colors = {
-    white: { color: 'white' },
-  } as const;
+  if (isTextColorWhite) return textColors.white;
+  if (isThemeDark) return textColors.white;
+  return null;
+};
 
-  if (isTextColorWhite) {
-    return colors.white;
-  }
-
-  if (isThemeDark) {
-    return colors.white;
-  }
-
+const getIconColor = (isTextColorWhite?: boolean, isThemeDark?: boolean) => {
+  if (isTextColorWhite) return iconColors.white;
+  if (isThemeDark) return iconColors.white;
   return null;
 };
 
@@ -85,6 +89,10 @@ const styleGetters = {
   childLink: ({ isThemeDark }: StyleModifierProps) =>
     getLinkColor({ isThemeDark }),
   element: ({ element }: StyleModifierProps) => element || {},
+  iconColor: ({ isTextColorWhite, isThemeDark }: StyleModifierProps) => ({
+    svg: getIconColor(isTextColorWhite, isThemeDark),
+    path: getIconColor(isTextColorWhite, isThemeDark),
+  }),
   sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
   textColor: ({ isTextColorWhite, isThemeDark }: StyleModifierProps) =>
     getTextColor(isTextColorWhite, isThemeDark),
@@ -100,5 +108,6 @@ export const modifiers = {
     styleGetters.sibling,
   ),
   elementChild: createModifier(StyleType.Child, styleGetters.child),
+  iconColor: createModifier(StyleType.Child, styleGetters.iconColor),
   textColor: createModifier(StyleType.Element, styleGetters.textColor),
 };

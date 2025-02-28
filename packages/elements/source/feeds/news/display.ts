@@ -104,8 +104,7 @@ const CommonDisplay = ({
   entry: ArticleType;
   isThemeDark?: boolean;
 }) => ({
-  id: entry.id.toString(),
-
+  newsId: entry.id.toString(),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),
   date: CreateDate({

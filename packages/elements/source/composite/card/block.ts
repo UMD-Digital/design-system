@@ -1,8 +1,9 @@
 import { textLockup, assets } from 'atomic';
 import { ElementModel } from 'model';
+import * as Utility from 'utilities';
 
 type TypeBlockCardProps = {
-  id?: string;
+  newsId?: string;
   headline: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
@@ -15,16 +16,21 @@ type TypeBlockCardProps = {
   isTransparent?: boolean;
 };
 
-export const ELEMENT_CARD_BLOCK_CONTAINER = 'card-container';
-
+const CONTAINER_CLASS = 'card-block-container';
 export const STYLES_BLOCK_CARD_ELEMENT = '';
 
+const containerQueryStyles = {
+  className: CONTAINER_CLASS,
+  containerType: 'inline-size',
+};
+
 export default (props: TypeBlockCardProps) => {
-  const { id, image, isAligned, isThemeDark } = props;
-  const elementContainer = document.createElement('div');
-  const container = ElementModel.composite.card({
+  const { newsId, image, isAligned } = props;
+  const elementDiv = document.createElement('div');
+  const containerQuery = document.createElement('div');
+  const composite = ElementModel.composite.card({
     ...props,
-    element: elementContainer,
+    element: elementDiv,
     elementStyles: {
       element: {
         height: '100%',
@@ -34,11 +40,14 @@ export default (props: TypeBlockCardProps) => {
   const textLockupElement = textLockup.smallScaling(props);
 
   let styles = `
-    ${container.styles}
+      ${Utility.styles.getStyleStringFromJssObject(containerQueryStyles)}
+    ${composite.styles}
   `;
 
-  if (id) {
-    container?.element.setAttribute('news-id', id);
+  containerQuery.classList.add(CONTAINER_CLASS);
+
+  if (newsId) {
+    composite?.element.setAttribute('news-id', newsId);
   }
 
   if (image) {
@@ -47,12 +56,12 @@ export default (props: TypeBlockCardProps) => {
       isScaled: true,
       isAspectStandard: isAligned,
     });
-    container.element.appendChild(imageContainer.element);
+    composite.element.appendChild(imageContainer.element);
     styles += imageContainer.styles;
   }
 
-  container.element.appendChild(textLockupElement.element);
+  composite.element.appendChild(textLockupElement.element);
   styles += textLockupElement.styles;
 
-  return { element: elementContainer, styles };
+  return { element: composite.element, styles };
 };

@@ -1,3 +1,5 @@
+export { default as date } from './date';
+
 export { default as small, elements as smallElements } from './small';
 
 export {

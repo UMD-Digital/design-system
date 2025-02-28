@@ -1,6 +1,7 @@
 import { color, font, spacing } from '../../token';
 import { image } from '../asset';
 import { create } from '../../utilities';
+import { min } from 'typography/sans';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-element-card';
@@ -36,10 +37,7 @@ const createImageStyles = (customStyles = {}) => {
       ...createContainerQuery(mediumBreakpoint, 'max-width', {
         marginLeft: spacing.min,
         marginBottom: spacing.md,
-        order: '2',
-      }),
-      ...createRangeContainerQuery(smallBreakpoint, mediumBreakpoint, {
-        width: '120px',
+        width: '140px',
         float: 'right',
       }),
 
@@ -68,10 +66,7 @@ const createContainerStyles = (customStyles = {}) => {
     maxWidth: `${spacing.maxWidth.smallest}`,
 
     [`&:has(img)`]: {
-      ...createContainerQuery(mediumBreakpoint, 'max-width', {
-        display: 'flex',
-        width: '100%',
-      }),
+      ...createContainerQuery(mediumBreakpoint, 'max-width', {}),
     },
     ...customStyles,
   };

@@ -9,17 +9,11 @@ interface styleObject {
 
 const createElement = (stylesObj: styleObject, isTypeHeadline = true) => {
   return (props: ElementProps) => {
-    const fontProps = {
-      ...props,
-      isColorBlack: !props.isThemeDark,
-      isColorWhite: props.isThemeDark,
-    };
-
     if (isTypeHeadline) {
-      return createStyledElement.animationLine(fontProps, stylesObj);
+      return createStyledElement.animationLine(props, stylesObj);
     }
 
-    return createStyledElement.childLink(fontProps, stylesObj);
+    return createStyledElement.childLink(props, stylesObj);
   };
 };
 

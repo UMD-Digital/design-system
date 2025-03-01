@@ -1,36 +1,19 @@
 import { textLockup, assets } from 'atomic';
 import { ElementModel } from 'model';
 import * as Utility from 'utilities';
+import { CardBlockProps } from './_types';
 
-type TypeBlockCardProps = {
-  newsId?: string;
-  headline: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  date?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  image?: HTMLImageElement | HTMLAnchorElement | null;
-  eventMeta?: { element: HTMLElement; styles: string };
-  dateSign?: { element: HTMLElement; styles: string };
-  isAligned?: boolean;
-  isBordered?: boolean;
-  isThemeDark?: boolean;
-  isTransparent?: boolean;
-  isEyebrowRibbon?: boolean;
-};
-
-const CONTAINER_CLASS = 'card-block-container';
 export const STYLES_BLOCK_CARD_ELEMENT = '';
 
 const containerQueryStyles = {
-  className: CONTAINER_CLASS,
+  className: 'card-block-container',
   containerType: 'inline-size',
 };
 
-export default (props: TypeBlockCardProps) => {
+export default (props: CardBlockProps) => {
   const { newsId, image, isAligned, dateSign } = props;
   const containerQuery = document.createElement('div');
-  const composite = ElementModel.composite.card({
+  const composite = ElementModel.composite.cardBlock({
     ...props,
     element: document.createElement('div'),
     elementStyles: {
@@ -45,8 +28,6 @@ export default (props: TypeBlockCardProps) => {
     ${Utility.styles.getStyleStringFromJssObject(containerQueryStyles)}
     ${composite.styles}
   `;
-
-  containerQuery.classList.add(CONTAINER_CLASS);
 
   if (newsId) {
     composite?.element.setAttribute('news-id', newsId);

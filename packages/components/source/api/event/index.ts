@@ -91,7 +91,11 @@ const createComponent = (element: HTMLElement) => {
       eyebrow: Slots.eyebrow.default({ element }),
       isEyebrowRibbon: true,
       eventMeta: eventMetaAtomic,
-      dateSign: dateSignAtomicLarge,
+      dateSign: Atomic.events.sign({
+        ...EventSignData,
+        isThemeDark: false,
+        isLargeSize: true,
+      }),
     });
   }
 

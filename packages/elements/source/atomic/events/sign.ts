@@ -6,12 +6,14 @@ const makeDateElement = ({
   isDay,
   isLargeSize,
   isMultiDay,
+  isThemeDark,
 }: {
   element: string | HTMLElement;
   isMonth?: boolean;
   isDay?: boolean;
   isLargeSize?: boolean;
   isMultiDay?: boolean;
+  isThemeDark?: boolean;
 }) => {
   const dateElement = document.createElement('span');
   if (typeof element === 'string') {
@@ -21,18 +23,27 @@ const makeDateElement = ({
   }
 
   if (isDay && isLargeSize && !isMultiDay) {
-    return ElementModel.headline.sansExtraLarge({ element: dateElement });
+    return ElementModel.headline.sansExtraLarge({
+      element: dateElement,
+      isThemeDark,
+    });
   }
 
   if (isDay) {
-    return ElementModel.headline.sansLarger({ element: dateElement });
+    return ElementModel.headline.sansLarger({
+      element: dateElement,
+      isThemeDark,
+    });
   }
 
   if (isMonth && isLargeSize && !isMultiDay) {
-    return ElementModel.headline.sansSmall({ element: dateElement });
+    return ElementModel.headline.sansSmall({
+      element: dateElement,
+      isThemeDark,
+    });
   }
 
-  return ElementModel.headline.sansMin({ element: dateElement });
+  return ElementModel.headline.sansMin({ element: dateElement, isThemeDark });
 };
 
 const makeStartDateBlock = ({
@@ -40,11 +51,13 @@ const makeStartDateBlock = ({
   startDay,
   isLargeSize,
   isMultiDay,
+  isThemeDark,
 }: {
   startMonth: string | HTMLElement;
   startDay: string | HTMLElement;
   isLargeSize?: boolean;
   isMultiDay?: boolean;
+  isThemeDark?: boolean;
 }) => {
   const startWrapper = document.createElement('p');
   const startMonthWrapper = makeDateElement({
@@ -52,12 +65,14 @@ const makeStartDateBlock = ({
     isMonth: true,
     isLargeSize,
     isMultiDay,
+    isThemeDark,
   });
   const startDayWrapper = makeDateElement({
     element: startDay,
     isDay: true,
     isLargeSize,
     isMultiDay,
+    isThemeDark,
   });
   let styles = '';
 
@@ -72,9 +87,11 @@ const makeStartDateBlock = ({
 const makeEndDateBlock = ({
   endMonth,
   endDay,
+  isThemeDark,
 }: {
   endDay: string | HTMLElement;
   endMonth: string | HTMLElement;
+  isThemeDark?: boolean;
 }) => {
   const endWrapper = document.createElement('p');
 
@@ -82,11 +99,13 @@ const makeEndDateBlock = ({
     element: endMonth,
     isMonth: true,
     isMultiDay: true,
+    isThemeDark,
   });
   const endDayWrapper = makeDateElement({
     element: endDay,
     isDay: true,
     isMultiDay: true,
+    isThemeDark,
   });
   let styles = '';
 
@@ -127,6 +146,7 @@ export default (props: {
     startDay,
     isLargeSize,
     isMultiDay,
+    isThemeDark,
   });
   container.element.appendChild(startBlock.element);
   styles += startBlock.styles;
@@ -137,6 +157,7 @@ export default (props: {
     const endBlock = makeEndDateBlock({
       endDay,
       endMonth,
+      isThemeDark,
     });
 
     srOnly.classList.add('sr-only');

@@ -33,7 +33,6 @@ export type EventType = DateInformaitonType & {
 };
 
 const STYLES_EVENT_FEED = `
-  ${Composite.event.STYLES_EVENT_BLOCK_ELEMENT}
   ${Composite.event.STYLES_EVENT_LIST_ELEMENT}
 `;
 
@@ -211,7 +210,7 @@ const CreateEventFeedDisplay = ({
 }) => {
   if (isTypeGrid) {
     return entries.map((entry) =>
-      Composite.event.block({
+      Composite.card.block({
         ...CommonDisplay({
           entry,
           isThemeDark,

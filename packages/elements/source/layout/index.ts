@@ -1,5 +1,3 @@
-export { default as Block, STYLES_BLOCK_CONTAINER } from './block';
-
 export {
   default as blockOverlay,
   elements as blockOverlayElements,

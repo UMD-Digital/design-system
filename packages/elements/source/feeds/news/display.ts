@@ -1,4 +1,4 @@
-import * as composite from 'composite';
+import * as Composite from 'composite';
 
 type ImageType = {
   url: string;
@@ -19,13 +19,11 @@ export type ArticleType = {
   }[];
 };
 
-const { CardBlock, CardList, CardOverlayImage } = composite;
+const { CardOverlayImage } = Composite;
 
 const STYLES_NEWS_FEED = `
-  ${composite.CardOverlayStyles}
-  ${composite.STYLES_BLOCK_CARD_ELEMENT}
-  ${composite.STYLES_LIST_CARD_ELEMENT}
-  ${composite.STYLES_OVERLAY_CARD_IMAGE}
+  ${Composite.CardOverlayStyles}
+  ${Composite.STYLES_OVERLAY_CARD_IMAGE}
 `;
 
 const CreateImage = ({ images, url }: { images: ImageType; url?: string }) => {
@@ -130,7 +128,7 @@ const CreateNewsFeedDisplay = ({
   isTransparent?: boolean;
 }) => {
   const standardCardType = ({ entry }: { entry: ArticleType }) => {
-    return CardBlock({
+    return Composite.card.block({
       ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image, url: entry.url }),
       isAligned: false,
@@ -145,7 +143,7 @@ const CreateNewsFeedDisplay = ({
     })?.element;
 
   const listCardType = ({ entry }: { entry: ArticleType }) => {
-    return CardList({
+    return Composite.card.list({
       ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image, url: entry.url }),
     }).element;

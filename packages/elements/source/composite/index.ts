@@ -10,8 +10,7 @@ export { default as StickyColumns } from './sticky-columns';
 export { default as alert } from './alert';
 
 // Card components
-export { default as CardBlock, STYLES_BLOCK_CARD_ELEMENT } from './card/block';
-export { default as CardList, STYLES_LIST_CARD_ELEMENT } from './card/list';
+export * as card from './card';
 export { default as CardIconBlock } from './card-icon/block';
 export {
   default as CardOverlay,

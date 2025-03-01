@@ -86,7 +86,7 @@ const createComponent = (element: HTMLElement) => {
   });
 
   if (Attributes.isDisplay.feature({ element })) {
-    return Composite.CardBlock({
+    return Composite.card.block({
       ...MakeCommonData({ element }),
       eyebrow: Slots.eyebrow.default({ element }),
       isEyebrowRibbon: true,
@@ -111,7 +111,7 @@ const createComponent = (element: HTMLElement) => {
     });
   }
 
-  return Composite.CardBlock({
+  return Composite.card.block({
     ...MakeCommonData({ element }),
     eventMeta: eventMetaAtomic,
   });

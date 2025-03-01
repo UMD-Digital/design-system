@@ -2,7 +2,7 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 
-const { CardBlock, CardList } = Composite;
+const { card } = Composite;
 
 interface CardData {
   image: HTMLImageElement | null;
@@ -54,13 +54,13 @@ const createCardComponent = ({ tagName }: CardConfig) => {
     const cardData = createComponentData(element);
 
     if (isDisplayList) {
-      return CardList({
+      return card.list({
         ...cardData,
         isAligned,
       });
     }
 
-    return CardBlock({
+    return card.block({
       ...cardData,
       isAligned,
       isBordered,

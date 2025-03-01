@@ -100,7 +100,6 @@ export const scalingLarger = {
 
   [`@container (min-width: ${scalingContainerSmall}px)`]: {
     ...sizeLargerResponsive,
-    lineHeight: `1.40em`,
   },
 
   [`@container (min-width: ${scalingContainerMedium}px)`]: {

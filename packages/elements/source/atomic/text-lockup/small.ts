@@ -46,9 +46,16 @@ export const headlineStyles = {
   element: {
     fontWeight: '700',
     color: `${token.color.black}`,
-  },
-  siblingAfter: {
-    marginTop: token.spacing.sm,
+
+    [`& + *`]: {
+      marginTop: token.spacing.sm,
+    },
+
+    [`& + .${Styles.element.event.meta.container.className}`]: {
+      [`@media (max-width: ${token.media.breakpoints.small.max})`]: {
+        marginTop: token.spacing.min,
+      },
+    },
   },
   subElement: {
     color: 'currentColor',

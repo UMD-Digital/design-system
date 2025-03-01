@@ -1,4 +1,4 @@
-import { color, spacing } from '../../token';
+import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 
@@ -14,6 +14,10 @@ export const container = create.jssObject({
 
   '+ *': {
     marginTop: `${spacing.sm}`,
+
+    [`@media (max-width: ${media.breakpoints.small.max})`]: {
+      marginTop: spacing.min,
+    },
   },
 });
 

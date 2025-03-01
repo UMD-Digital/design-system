@@ -8,36 +8,12 @@ const containerQueryStyles = {
   containerType: 'inline-size',
 };
 
-// .${ELEMENT_LIST_CARD_CONTAINER} + * {
-//   margin-top: ${token.spacing.md};
-// }
-
-// const { image } = props;
-// const textContainer = textLockup.small(props);
-// const elementContainer = document.createElement('div');
-// const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-// const container = LayoutList.CreateElement({
-//   textContainer: textContainer.element,
-//   imageContainer,
-//   ...props,
-// });
-// let styles = STYLES_LIST_CARD_ELEMENT;
-
-// styles += textContainer.styles;
-
-// elementContainer.appendChild(container);
-// elementContainer.classList.add(ELEMENT_LIST_CARD_CONTAINER);
-
-// return {
-//   element: elementContainer,
-//   styles,
-// };
-
 export default (props: CardListProps) => {
   const { image, isAligned, dateSign } = props;
   const containerQuery = document.createElement('div');
   const composite = ElementModel.composite.cardList({
     ...props,
+    isDisplayEvent: dateSign ? true : false,
     element: document.createElement('div'),
     elementStyles: {
       element: {
@@ -64,6 +40,11 @@ export default (props: CardListProps) => {
 
   containerQuery.appendChild(textLockupElement.element);
   styles += textLockupElement.styles;
+
+  if (dateSign) {
+    containerQuery.appendChild(dateSign.element);
+    styles += dateSign.styles;
+  }
 
   composite.element.appendChild(containerQuery);
 

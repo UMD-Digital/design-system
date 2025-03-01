@@ -104,10 +104,10 @@ const createComponent = (element: HTMLElement) => {
   }
 
   if (Attributes.isDisplay.list({ element })) {
-    return Composite.event.list({
+    return Composite.card.list({
       ...MakeCommonData({ element }),
-      eventDetails: isThemeDark ? eventDetails : eventDetailsDark,
-      dateSign: isThemeDark ? dateSignLargeDark : dateSignLarge,
+      eventMeta: eventMetaAtomic,
+      dateSign: dateSignAtomic,
     });
   }
 

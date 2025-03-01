@@ -1,4 +1,6 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
 import {
+  Atomic,
   Composite,
   Utilities,
 } from '@universityofmaryland/web-elements-library';
@@ -35,7 +37,7 @@ export type EventType = DateInformaitonType & {
 };
 
 const STYLES_EVENT_FEED = `
-  ${Composite.event.STYLES_EVENT_LIST_ELEMENT}
+
 `;
 
 const CreateImage = ({
@@ -165,13 +167,13 @@ const CreateEventsGrouped = ({
   const entriesMapping = entries.map((entry) => ({
     dateBanner: getDateBanner(entry),
     timeStamp: entry.startStamp,
-    html: Composite.event.list({
+    html: Composite.card.list({
       ...CommonDisplay({
         entry,
         isThemeDark,
         showTime: entry.allDay ? false : true,
       }),
-      dateSign: Composite.event.elements.sign.CreateElement({
+      dateSign: Atomic.events.sign({
         ...entry,
         isThemeDark,
       }),
@@ -227,13 +229,13 @@ const CreateEventFeedDisplay = ({
   }
 
   return entries.map((entry) =>
-    Composite.event.list({
+    Composite.card.list({
       ...CommonDisplay({
         entry,
         isThemeDark,
         showTime: entry.allDay ? false : true,
       }),
-      dateSign: Composite.event.elements.sign.CreateElement({
+      dateSign: Atomic.events.sign({
         ...entry,
         isThemeDark,
         isLargeSize: true,

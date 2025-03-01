@@ -27,13 +27,22 @@ const secondaryLargeBase = {
 const secondaryBaseIcon = {
   ...iconBase,
   left: `0`,
+
+  '& path': {
+    fill: `${color.red} !important`,
+  },
 };
 
 const secondaryBaseLargeIcon = {
   ...iconBaseLarge,
+  left: `0`,
 
   [`@media (${media.queries.tablet.min})`]: {
     left: `0`,
+  },
+
+  '& path': {
+    fill: `${color.red} !important`,
   },
 };
 
@@ -46,10 +55,6 @@ export const normal = create.jssObject({
 
   '& svg': {
     ...secondaryBaseIcon,
-
-    '& path': {
-      fill: color.red,
-    },
   },
 });
 
@@ -65,10 +70,6 @@ export const large = create.jssObject({
 
   '& svg': {
     ...secondaryBaseLargeIcon,
-
-    '& path': {
-      fill: color.red,
-    },
   },
 });
 

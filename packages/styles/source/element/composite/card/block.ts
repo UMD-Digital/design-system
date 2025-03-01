@@ -1,9 +1,9 @@
-import { color, media, spacing } from '../../token';
-import { image } from '../asset';
-import { create } from '../../utilities';
+import { color, spacing } from '../../../token';
+import { image } from '../../asset';
+import { create } from '../../../utilities';
 
 // Consistent naming
-const classNamePrefix = 'umd-element-composite-card';
+const classNamePrefix = 'umd-element-composite-card-block';
 
 const smallBreakpoint = 479;
 const mediumBreakpointStart = smallBreakpoint + 1;
@@ -76,7 +76,7 @@ const createContainerStyles = (customStyles = {}) => {
   };
 };
 
-// umd-layout-element-card-light
+// umd-element-composite-card-block-light
 export const light = create.jssObject({
   className: `${classNamePrefix}-light`,
   ...createContainerStyles(),
@@ -84,7 +84,7 @@ export const light = create.jssObject({
   ...createImageStyles(),
 });
 
-// umd-layout-element-card-border
+// umd-element-composite-card-block-border
 export const border = create.jssObject({
   className: `${classNamePrefix}-border`,
   ...createContainerStyles({
@@ -106,7 +106,7 @@ export const border = create.jssObject({
   }),
 });
 
-// umd-layout-element-card-dark
+// umd-element-composite-card-block-dark
 export const dark = create.jssObject({
   className: `${classNamePrefix}-dark`,
 
@@ -131,7 +131,7 @@ export const dark = create.jssObject({
   }),
 });
 
-// umd-layout-element-card-transparent
+// umd-element-composite-card-block-transparent
 export const transparent = create.jssObject({
   className: `${classNamePrefix}-transparent`,
 

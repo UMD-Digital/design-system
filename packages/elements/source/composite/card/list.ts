@@ -1,58 +1,71 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import { textLockup } from 'atomic';
-import { List as LayoutList, Image as LayoutImage } from 'layout';
+import { textLockup, assets } from 'atomic';
+import { ElementModel } from 'model';
+import * as Utility from 'utilities';
+import { CardListProps } from './_types';
 
-type TypeListCardProps = {
-  headline: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  date?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  image?: HTMLImageElement | HTMLAnchorElement | null;
-  isThemeDark?: boolean;
-  isAligned?: boolean;
+const containerQueryStyles = {
+  className: 'card-list-container',
+  containerType: 'inline-size',
 };
 
-const { spacing } = token;
+// .${ELEMENT_LIST_CARD_CONTAINER} + * {
+//   margin-top: ${token.spacing.md};
+// }
 
-const ELEMENT_NAME = 'umd-card-list';
-const ELEMENT_LIST_CARD_CONTAINER = 'card-list-container';
+// const { image } = props;
+// const textContainer = textLockup.small(props);
+// const elementContainer = document.createElement('div');
+// const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
+// const container = LayoutList.CreateElement({
+//   textContainer: textContainer.element,
+//   imageContainer,
+//   ...props,
+// });
+// let styles = STYLES_LIST_CARD_ELEMENT;
 
-// prettier-ignore
-export const STYLES_LIST_CARD_ELEMENT = `
-  .${ELEMENT_LIST_CARD_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-  
-  .${ELEMENT_LIST_CARD_CONTAINER} + * {
-    margin-top: ${token.spacing.md}; 
-  }
+// styles += textContainer.styles;
 
-  ${LayoutImage.Styles}
-  ${LayoutList.Styles}
-`;
+// elementContainer.appendChild(container);
+// elementContainer.classList.add(ELEMENT_LIST_CARD_CONTAINER);
 
-const CreateCardListElement = (props: TypeListCardProps) => {
-  const { image } = props;
-  const textContainer = textLockup.small(props);
-  const elementContainer = document.createElement('div');
-  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = LayoutList.CreateElement({
-    textContainer: textContainer.element,
-    imageContainer,
+// return {
+//   element: elementContainer,
+//   styles,
+// };
+
+export default (props: CardListProps) => {
+  const { image, isAligned, dateSign } = props;
+  const containerQuery = document.createElement('div');
+  const composite = ElementModel.composite.cardList({
     ...props,
+    element: document.createElement('div'),
+    elementStyles: {
+      element: {
+        height: '100%',
+      },
+    },
   });
-  let styles = STYLES_LIST_CARD_ELEMENT;
+  const textLockupElement = textLockup.small(props);
 
-  styles += textContainer.styles;
+  let styles = `
+    ${Utility.styles.getStyleStringFromJssObject(containerQueryStyles)}
+    ${composite.styles}
+  `;
 
-  elementContainer.appendChild(container);
-  elementContainer.classList.add(ELEMENT_LIST_CARD_CONTAINER);
+  if (image) {
+    const imageContainer = assets.image({
+      image,
+      isScaled: true,
+      isAspectStandard: isAligned,
+    });
+    containerQuery.appendChild(imageContainer.element);
+    styles += imageContainer.styles;
+  }
 
-  return {
-    element: elementContainer,
-    styles,
-  };
+  containerQuery.appendChild(textLockupElement.element);
+  styles += textLockupElement.styles;
+
+  composite.element.appendChild(containerQuery);
+
+  return { element: composite.element, styles };
 };
-
-export default CreateCardListElement;

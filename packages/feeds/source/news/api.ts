@@ -1,4 +1,5 @@
-import * as Utility from 'utilities';
+import { Utilities } from '@universityofmaryland/web-elements-library';
+
 import { ARTICLES_QUERY } from './queries';
 import NoResults from '../no-results';
 
@@ -19,7 +20,7 @@ type TypeFetchObject = TypeAPIFeedVariables & {
   query: string;
 };
 
-const { FetchGraphQL } = Utility.network;
+const { FetchGraphQL } = Utilities.network;
 
 const TODAY_PRODUCTION_URL = 'https://today.umd.edu/graphql';
 const NoResultsContent = {

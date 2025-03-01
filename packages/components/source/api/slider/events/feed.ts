@@ -4,7 +4,8 @@ declare global {
   }
 }
 
-import { Composite, Feeds } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
+import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 

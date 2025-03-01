@@ -1,4 +1,4 @@
-import * as Composite from 'composite';
+import { Composite } from '@universityofmaryland/web-elements-library';
 
 type ImageType = {
   url: string;

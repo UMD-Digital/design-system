@@ -1,5 +1,7 @@
-import * as Utility from 'utilities';
-import * as Composite from 'composite';
+import {
+  Composite,
+  Utilities,
+} from '@universityofmaryland/web-elements-library';
 
 type TypeSlideFeedResponse = {
   title: string;
@@ -9,7 +11,7 @@ type TypeSlideFeedResponse = {
   endDay?: string;
 };
 
-const { FetchGraphQL } = Utility.network;
+const { FetchGraphQL } = Utilities.network;
 const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
 const ACADEMICS_PRODUCTION_URL = 'https://provost.umd.edu/graphql';
 

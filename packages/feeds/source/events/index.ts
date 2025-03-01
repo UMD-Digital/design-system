@@ -1,11 +1,17 @@
 import { element, token } from '@universityofmaryland/web-styles-library';
+import {
+  Layout,
+  Macros,
+  Utilities,
+} from '@universityofmaryland/web-elements-library';
 import buttonLazyLoad from '../elements/lazy-load';
-import { GridGap as LayoutGridGap } from 'layout';
-import { AriaLive, AnimationLoader } from 'macros';
-import * as Utility from 'utilities';
+
 import FeedDisplay, { EventType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
 import NoResults from '../no-results';
+
+const { GridGap: LayoutGridGap } = Layout;
+const { AriaLive, AnimationLoader } = Macros;
 
 export type TypeEventFeedRequirements = {
   token: string;
@@ -37,7 +43,7 @@ const ELEMENT_FEEDS_EVENTS_NO_RESULTS = 'feeds-events-no-results';
 const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
 const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
 
-const { convertJSSObjectToStyles } = Utility.styles;
+const { convertJSSObjectToStyles } = Utilities.styles;
 
 const EventsGrouped = `
   ${convertJSSObjectToStyles({

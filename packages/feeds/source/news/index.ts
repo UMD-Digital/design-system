@@ -1,9 +1,11 @@
 import buttonLazyLoad from '../elements/lazy-load';
-import { GridGap as LayoutGridGap } from 'layout';
-import { AriaLive, AnimationLoader } from 'macros';
+import { Layout, Macros } from '@universityofmaryland/web-elements-library';
 import FeedDisplay, { ArticleType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
 import NoResults from '../no-results';
+
+const { GridGap: LayoutGridGap } = Layout;
+const { AriaLive, AnimationLoader } = Macros;
 
 const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 

@@ -1,5 +1,7 @@
-import * as Composite from 'composite';
-import * as Utility from 'utilities';
+import {
+  Composite,
+  Utilities,
+} from '@universityofmaryland/web-elements-library';
 
 type ImageType = {
   url: string;
@@ -134,15 +136,19 @@ const CreateEventsGrouped = ({
     new Date().setDate(new Date().getDate() + 7),
   );
   const currentDate =
-    Utility.date.createDateCompareString(currentDateStamp).palindromeTruncated;
+    Utilities.date.createDateCompareString(
+      currentDateStamp,
+    ).palindromeTruncated;
   const weekDate =
-    Utility.date.createDateCompareString(weekFromDateStamp).palindromeTruncated;
+    Utilities.date.createDateCompareString(
+      weekFromDateStamp,
+    ).palindromeTruncated;
 
   const getDateBanner = (entry: EventType) => {
     const entryDate = new Date(entry.startStamp);
     const entryDatePalindrom =
-      Utility.date.createDateCompareString(entryDate).palindromeTruncated;
-    const formattedDate = Utility.date.createVisualFormattedDate(
+      Utilities.date.createDateCompareString(entryDate).palindromeTruncated;
+    const formattedDate = Utilities.date.createVisualFormattedDate(
       new Date(entry.startStamp),
     );
 

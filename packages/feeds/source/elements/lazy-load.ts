@@ -1,6 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-import { actions } from 'atomic';
+import { Atomic, Utilities } from '@universityofmaryland/web-elements-library';
+
+const { actions } = Atomic;
 
 type LazyLoadCreate = {
   callback: (args: any) => void;
@@ -26,7 +27,7 @@ const STYLES_LAZY_LOAD_BUTTON = `
     margin-top: ${token.spacing.lg};
   }
 
-  ${Utility.styles.getStyleStringFromJssObject(outlineActionStyles)}
+  ${Utilities.styles.getStyleStringFromJssObject(outlineActionStyles)}
 `;
 
 const create = ({ callback, isThemeDark }: LazyLoadCreate) => {

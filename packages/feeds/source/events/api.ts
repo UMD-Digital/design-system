@@ -1,4 +1,4 @@
-import * as Utility from 'utilities';
+import { Utilities } from '@universityofmaryland/web-elements-library';
 import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from './queries';
 import NoResults from '../no-results';
 
@@ -18,7 +18,7 @@ type TypeFetchObject = TypeAPIFeedVariables & {
   query: string;
 };
 
-const { FetchGraphQL } = Utility.network;
+const { FetchGraphQL } = Utilities.network;
 
 // const CALENDAR_PRODUCTION_URL = 'https://events.umd-staging.com/graphql';
 const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';

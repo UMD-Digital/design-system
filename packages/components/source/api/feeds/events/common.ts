@@ -1,5 +1,5 @@
-import { TypeEventFeedRequirements } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
+import { eventProps } from '../_types';
 
 export const CommonFeedEventsData = ({
   element,
@@ -45,7 +45,7 @@ export const CommonFeedEventsData = ({
     numberOfColumnsToShow = Number(numberOfColumnsAttribute);
   }
 
-  const data: TypeEventFeedRequirements = {
+  const data: eventProps = {
     token,
     isThemeDark,
     numberOfRowsToStart,

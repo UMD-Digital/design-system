@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { Feeds } from '@universityofmaryland/web-elements-library';
+import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { Markup, Styles } from 'utilities';
 import { CommonFeedNewsData } from './common';
 

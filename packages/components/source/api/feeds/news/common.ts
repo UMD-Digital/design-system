@@ -1,5 +1,5 @@
-import { TypeNewsFeedRequirements } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
+import { newsProps } from '../_types';
 
 export const CommonFeedNewsData = ({
   element,
@@ -31,7 +31,7 @@ export const CommonFeedNewsData = ({
     Number(element.getAttribute(Attributes.names.FEED_COLUMN_COUNT)) ||
     numberOfColumnsToShowDefault;
 
-  const data: TypeNewsFeedRequirements = {
+  const data: newsProps = {
     token,
     isThemeDark,
     numberOfRowsToStart,

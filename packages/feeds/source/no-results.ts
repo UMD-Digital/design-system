@@ -1,8 +1,8 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import { actions } from 'atomic';
-import * as Utility from 'utilities';
+import { Atomic, Utilities } from '@universityofmaryland/web-elements-library';
 
-const { convertJSSObjectToStyles } = Utility.styles;
+const { convertJSSObjectToStyles } = Utilities.styles;
+const { actions } = Atomic;
 
 type NoResultsContentType = {
   message?: string;

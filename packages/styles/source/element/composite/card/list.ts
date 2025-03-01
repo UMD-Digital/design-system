@@ -1,13 +1,13 @@
-import { color, spacing } from '../../../token';
+import { color, media, spacing } from '../../../token';
 import { image } from '../../asset';
 import { create } from '../../../utilities';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-card-list';
 
-const smallBreakpoint = 479;
-const mediumBreakpointStart = smallBreakpoint + 1;
-const mediumBreakpoint = 650;
+const smallBreakpoint = media.breakpointValues.small.max;
+const mediumBreakpointStart = media.breakpointValues.medium.min;
+const mediumBreakpoint = media.breakpointValues.large.min;
 
 const createContainerQuery = (
   breakpoint: number,

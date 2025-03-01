@@ -1,4 +1,4 @@
-import { color, spacing } from '../../token';
+import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { box } from '../../layout/background';
 import { create } from '../../utilities';
@@ -44,6 +44,10 @@ const signBase = {
     position: `absolute`,
     bottom: `${spacing.min}`,
     left: `${spacing.min}`,
+
+    [`@media (max-width: ${media.breakpointValues.large.min}px)`]: {
+      display: `none`,
+    },
   },
 };
 

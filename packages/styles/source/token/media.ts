@@ -1,11 +1,39 @@
+export const breakpointValues = {
+  small: { min: 320, max: 479 },
+  medium: { min: 480, max: 649 },
+  large: { min: 650, max: 767 },
+  tablet: { min: 768, max: 1023 },
+  desktop: { min: 1024, max: 1199 },
+  highDef: { min: 1200, max: 1499 },
+  maximum: { min: 1500 },
+};
+
 export const breakpoints = {
-  small: { min: '320px', max: '479px' },
-  medium: { min: '480px', max: '649px' },
-  large: { min: '650px', max: '767px' },
-  tablet: { min: '768px', max: '1023px' },
-  desktop: { min: '1024px', max: '1199px' },
-  highDef: { min: '1200px', max: '1499px' },
-  maximum: { min: '1500px' },
+  small: {
+    min: `${breakpointValues.small.min}px`,
+    max: `${breakpointValues.small.max}px`,
+  },
+  medium: {
+    min: `${breakpointValues.medium.min}px`,
+    max: `${breakpointValues.medium.max}px`,
+  },
+  large: {
+    min: `${breakpointValues.large.min}px`,
+    max: `${breakpointValues.large.max}px`,
+  },
+  tablet: {
+    min: `${breakpointValues.tablet.min}px`,
+    max: `${breakpointValues.tablet.max}px`,
+  },
+  desktop: {
+    min: `${breakpointValues.desktop.min}px`,
+    max: `${breakpointValues.desktop.max}px`,
+  },
+  highDef: {
+    min: `${breakpointValues.highDef.min}px`,
+    max: `${breakpointValues.highDef.max}px`,
+  },
+  maximum: { min: `${breakpointValues.maximum.min}px` },
 };
 
 export const queries = {

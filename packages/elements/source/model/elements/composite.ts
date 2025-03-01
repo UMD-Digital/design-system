@@ -46,6 +46,20 @@ export const cardList = (props: CardListProps) => {
   const { isDisplayEvent, ...elementProps } = props;
   const { isThemeDark } = elementProps;
 
+  if (isDisplayEvent && isThemeDark) {
+    return createStyledElement(
+      elementProps,
+      Styles.element.composite.card.list.eventDark,
+    );
+  }
+
+  if (isDisplayEvent) {
+    return createStyledElement(
+      elementProps,
+      Styles.element.composite.card.list.eventLight,
+    );
+  }
+
   if (isThemeDark) {
     return createStyledElement(
       elementProps,

@@ -19,12 +19,6 @@ const createContainerQuery = (
   };
 };
 
-const createRangeContainerQuery = (min: number, max: number, styles = {}) => {
-  return {
-    [`@media (min-width: ${min}px) and (max-width: ${max})`]: styles,
-  };
-};
-
 const createImageStyles = (customStyles = {}) => {
   const baseStyles = {
     height: 'auto',
@@ -62,7 +56,7 @@ const createImageStyles = (customStyles = {}) => {
 
 const createTextStyles = (customStyles = {}) => {
   return {
-    [`& > div > div:not(.${image.wrapperScaled.className})`]: {
+    [`& > div > *:nth-child(2)`]: {
       flex: '1 0',
 
       ...createContainerQuery(mediumBreakpointStart, 'min-width', {
@@ -75,6 +69,24 @@ const createTextStyles = (customStyles = {}) => {
       }),
       ...customStyles,
     },
+  };
+};
+
+const createEventStyles = (customStyles = {}) => {
+  return {
+    [`& > div > *:last-child:not(.${image.wrapperScaled.className})`]: {
+      width: `${spacing.xl}`,
+      order: 1,
+      alignSelf: 'flex-start',
+
+      ...createContainerQuery(mediumBreakpoint, 'max-width', {
+        display: 'none',
+      }),
+      ...createContainerQuery(mediumBreakpoint, 'min-width', {
+        width: `${spacing['8xl']}`,
+      }),
+    },
+    ...customStyles,
   };
 };
 
@@ -104,6 +116,12 @@ const createContainerStyles = (customStyles = {}) => {
   };
 };
 
+const darkContainerStyles = {
+  backgroundColor: color.black,
+  color: color.white,
+  borderBottom: `1px solid ${color.gray.dark}`,
+};
+
 // umd-element-composite-card-list-light
 export const light = create.jssObject({
   className: `${classNamePrefix}-light`,
@@ -118,11 +136,33 @@ export const dark = create.jssObject({
   className: `${classNamePrefix}-dark`,
 
   ...createContainerStyles({
-    backgroundColor: color.black,
-    color: color.white,
-    borderBottom: `1px solid ${color.gray.dark}`,
+    ...darkContainerStyles,
   }),
   ...createWrapperStyles(),
+  ...createTextStyles(),
+  ...createImageStyles(),
+});
+
+// umd-element-composite-card-list-event-light
+export const eventLight = create.jssObject({
+  className: `${classNamePrefix}-event-light`,
+
+  ...createContainerStyles(),
+  ...createEventStyles(),
+  ...createWrapperStyles(),
+  ...createTextStyles(),
+  ...createImageStyles(),
+});
+
+// umd-element-composite-card-list-event-dark
+export const eventDark = create.jssObject({
+  className: `${classNamePrefix}-event-dark`,
+
+  ...createContainerStyles({
+    ...darkContainerStyles,
+  }),
+  ...createWrapperStyles(),
+  ...createEventStyles(),
   ...createTextStyles(),
   ...createImageStyles(),
 });

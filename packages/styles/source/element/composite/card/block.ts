@@ -60,6 +60,9 @@ const createTextStyles = (customStyles = {}) => {
       ...createContainerQuery(mediumBreakpointStart, 'min-width', {
         paddingTop: spacing.md,
       }),
+      ...createContainerQuery(mediumBreakpoint, 'min-width', {
+        paddingTop: spacing.lg,
+      }),
       ...customStyles,
     },
   };

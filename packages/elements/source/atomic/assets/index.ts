@@ -1,1 +1,1 @@
-export { default as image } from './image';
+export * as image from './image';

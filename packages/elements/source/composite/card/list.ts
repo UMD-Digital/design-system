@@ -29,7 +29,7 @@ export default (props: CardListProps) => {
   `;
 
   if (image) {
-    const imageContainer = assets.image({
+    const imageContainer = assets.image.background({
       image,
       isScaled: true,
       isAspectStandard: isAligned,

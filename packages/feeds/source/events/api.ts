@@ -1,6 +1,6 @@
 import { Utilities } from '@universityofmaryland/web-elements-library';
 import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from './queries';
-import NoResults from '../no-results';
+import NoResults from '../elements/no-results';
 
 type TypeFetchVariables = {
   startDate?: string;
@@ -87,7 +87,7 @@ const FetchFeedEntries = async ({
   const { container } = variables;
   const feedData = await FetchFeed({ ...variables, query: EVENTS_QUERY });
   const graceFail = ({ message }: { message: string }) => {
-    NoResults.DisplayElement({ container, ...NoResultsContent });
+    NoResults.display({ container, ...NoResultsContent });
     throw new Error(message);
   };
 

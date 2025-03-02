@@ -1,17 +1,8 @@
 import { element, token } from '@universityofmaryland/web-styles-library';
-import {
-  Layout,
-  Macros,
-  Utilities,
-} from '@universityofmaryland/web-elements-library';
-import buttonLazyLoad from '../elements/lazy-load';
-
+import { Utilities } from '@universityofmaryland/web-elements-library';
+import * as feedElements from 'elements';
 import FeedDisplay, { EventType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
-import NoResults from '../no-results';
-
-const { GridGap: LayoutGridGap } = Layout;
-const { AriaLive, AnimationLoader } = Macros;
 
 export type TypeEventFeedRequirements = {
   token: string;
@@ -42,6 +33,8 @@ const FEEDS_EVENTS_CONTAINER = 'umd-feeds-events-container';
 const ELEMENT_FEEDS_EVENTS_NO_RESULTS = 'feeds-events-no-results';
 const ELEMENT_FEEDS_EVENTS_GROUPED_HEADLINE = 'feeds-events-grouped-headline';
 const ELEMENT_FEEDS_EVENTS_GROUPED_CONTAINER = 'feeds-events-grouped-container';
+
+const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 
 const { convertJSSObjectToStyles } = Utilities.styles;
 
@@ -89,10 +82,9 @@ const EventsNoResults = `
 `;
 
 const STYLES_FEED_EVENT_ELEMENT = `
-  ${NoResults.Styles}
-  ${LayoutGridGap.Styles}
-  ${buttonLazyLoad.styles}
-  ${AnimationLoader.Styles}
+  ${feedElements.noResults.styles}
+  ${feedElements.buttonLazyLoad.styles}
+  ${feedElements.loader.styles}
   ${FeedDisplay.Styles}
   ${EventsNoResults}
   ${EventsGrouped}
@@ -144,7 +136,7 @@ const DisplayDefault = (props: TypeDisplayEntries) => {
   const { isTypeGrid, getContainer, setOffset, feedData, isThemeDark } = props;
   const container = getContainer();
   const grid = container.querySelector(
-    `.${LayoutGridGap.ID}`,
+    `#${ID_GRID_LAYOUT_CONTAINER}`,
   ) as HTMLDivElement;
   const entries = FeedDisplay.CreateElement({
     entries: feedData,
@@ -222,18 +214,18 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
     ? `Showing ${showAmount} of ${allEntriesCount} events`
     : `Showing ${showAmount} events`;
 
-  AnimationLoader.Remove({ container });
-  buttonLazyLoad.remove({ container });
+  feedElements.loader.remove({ container });
+  feedElements.buttonLazyLoad.remove({ container });
 
   if (isTypeGrouped) {
     DisplayGrouped(props);
   } else {
     DisplayDefault(props);
   }
-  buttonLazyLoad.display(MakeLazyLoadVariables(props));
+  feedElements.buttonLazyLoad.display(MakeLazyLoadVariables(props));
 
   container.appendChild(
-    AriaLive.Create({
+    feedElements.ariaLive.create({
       message,
     }),
   );
@@ -247,7 +239,7 @@ const FetchCount = async (props: TypeFeedProps) => {
 
   if (count) {
     setTotalEntries(count);
-    buttonLazyLoad.display(MakeLazyLoadVariables(props));
+    feedElements.buttonLazyLoad.display(MakeLazyLoadVariables(props));
   }
 };
 
@@ -256,14 +248,14 @@ const LoadMoreEntries = async (props: TypeFeedProps) => {
   const container = getContainer();
   const currentCount = getOffset();
 
-  buttonLazyLoad.remove({ container });
-  AnimationLoader.Display({ container });
+  feedElements.buttonLazyLoad.remove({ container });
+  feedElements.loader.display({ container });
   Fetch.Entries({
     variables: MakeApiVariables(props),
   }).then((feedData) => {
     DisplayEntries({ ...props, feedData });
 
-    AriaLive.Update({
+    feedElements.ariaLive.update({
       container,
       message: `Showing ${
         currentCount + feedData.length
@@ -293,7 +285,7 @@ const CreateNoResult = (props: TypeFeedProps) => {
 
   noResultsText.innerHTML = 'Other Events';
 
-  NoResults.DisplayElement({
+  feedElements.noResults.display({
     container: noResultsContainer,
     ...NoResultsContent,
   });
@@ -305,7 +297,10 @@ const CreateNoResult = (props: TypeFeedProps) => {
     variables: MakeApiVariables(noResultsProps),
   }).then((feedData) => {
     if (feedData.length > 0) {
-      LayoutGridGap.CreateElement({ container: noResultsContainer, count: 1 });
+      const grid = feedElements.grid({ count: 1 });
+      grid.element.setAttribute('id', ID_GRID_LAYOUT_CONTAINER);
+      noResultsContainer.appendChild(grid.element);
+      // styles += grid.styles;
       DisplayEntries({ ...noResultsProps, feedData });
       setTotalEntries(3);
     }
@@ -331,7 +326,10 @@ const CreateFeed = (props: TypeFeedProps) => {
     }
 
     if (totalEntries > 0) {
-      LayoutGridGap.CreateElement({ container, count });
+      const grid = feedElements.grid({ count });
+      grid.element.setAttribute('id', ID_GRID_LAYOUT_CONTAINER);
+      container.appendChild(grid.element);
+      // styles += grid.styles;
       DisplayEntries({ ...props, feedData });
     }
   });
@@ -339,7 +337,7 @@ const CreateFeed = (props: TypeFeedProps) => {
 
 const CreateFeedsEventElement = (props: TypeEventFeedRequirements) =>
   (() => {
-    const loader = AnimationLoader.Create();
+    const loader = feedElements.loader.create();
     const elementContainer = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);

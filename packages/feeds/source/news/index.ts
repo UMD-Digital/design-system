@@ -1,11 +1,6 @@
-import buttonLazyLoad from '../elements/lazy-load';
-import { Layout, Macros } from '@universityofmaryland/web-elements-library';
+import * as feedElements from 'elements';
 import FeedDisplay, { ArticleType } from './display';
 import Fetch, { TypeAPIFeedVariables } from './api';
-import NoResults from '../no-results';
-
-const { GridGap: LayoutGridGap } = Layout;
-const { AriaLive, AnimationLoader } = Macros;
 
 const FEEDS_NEWS_CONTAINER = 'umd-feeds-news-container';
 
@@ -38,11 +33,12 @@ type TypeDisplayEntries = TypeFeedProps & {
   feedData: ArticleType[];
 };
 
+const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
+
 const STYLES_FEED_NEWS_ELEMENT = `
-  ${NoResults.Styles}
-  ${LayoutGridGap.Styles}
-  ${buttonLazyLoad.styles}
-  ${AnimationLoader.Styles}
+  ${feedElements.noResults.styles}
+  ${feedElements.buttonLazyLoad.styles}
+  ${feedElements.loader.styles}
   ${FeedDisplay.Styles}
 `;
 
@@ -110,7 +106,7 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
   } = props;
   const container = getContainer();
   const grid = container.querySelector(
-    `.${LayoutGridGap.ID}`,
+    `#${ID_GRID_LAYOUT_CONTAINER}`,
   ) as HTMLDivElement;
 
   const displayEntries = FeedDisplay.CreateElement({
@@ -126,12 +122,12 @@ const DisplayEntries = (props: TypeDisplayEntries) => {
 
   if (isLayoutReversed) grid.setAttribute('data-reversed', '');
 
-  AnimationLoader.Remove({ container });
-  buttonLazyLoad.remove({ container });
+  feedElements.loader.remove({ container });
+  feedElements.buttonLazyLoad.remove({ container });
   displayEntries.forEach((entry) => {
     if (entry) grid.appendChild(entry);
   });
-  buttonLazyLoad.display(MakeLazyLoadVariables(props));
+  feedElements.buttonLazyLoad.display(MakeLazyLoadVariables(props));
 };
 
 const LoadMoreEntries = async (props: TypeFeedProps) => {
@@ -139,14 +135,14 @@ const LoadMoreEntries = async (props: TypeFeedProps) => {
   const container = getContainer();
   const currentCount = getOffset();
 
-  buttonLazyLoad.remove({ container });
-  AnimationLoader.Display({ container });
+  feedElements.buttonLazyLoad.remove({ container });
+  feedElements.loader.display({ container });
   Fetch.Entries({
     variables: MakeApiVariables(props),
   }).then((feedData) => {
     DisplayEntries({ ...props, feedData: feedData.entries });
 
-    AriaLive.Update({
+    feedElements.ariaLive.update({
       container,
       message: `Showing ${
         currentCount + feedData.entries.length
@@ -177,9 +173,9 @@ const CreateFeed = async (props: TypeFeedProps) => {
     const totalEntries = feedData.count;
 
     if (totalEntries === 0) {
-      NoResults.DisplayElement({ container, ...NoResultsContent });
+      feedElements.noResults.display({ container, ...NoResultsContent });
       container.appendChild(
-        AriaLive.Create({
+        feedElements.ariaLive.create({
           message: NoResultsContent.message,
         }),
       );
@@ -196,11 +192,14 @@ const CreateFeed = async (props: TypeFeedProps) => {
 
     setTotalEntries(totalEntries);
 
-    LayoutGridGap.CreateElement({ container, count, isTypeGap });
+    const grid = feedElements.grid({ count, isTypeGap });
+    grid.element.setAttribute('id', ID_GRID_LAYOUT_CONTAINER);
+    container.appendChild(grid.element);
+    // styles += grid.styles;
     DisplayEntries({ ...props, feedData: feedData.entries });
 
     container.appendChild(
-      AriaLive.Create({
+      feedElements.ariaLive.create({
         message,
       }),
     );
@@ -209,7 +208,7 @@ const CreateFeed = async (props: TypeFeedProps) => {
 
 const CreateFeedsEventElement = (props: TypeNewsFeedRequirements) =>
   (() => {
-    const loader = AnimationLoader.Create();
+    const loader = feedElements.loader.create();
     const elementContainer = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);

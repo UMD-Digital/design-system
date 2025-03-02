@@ -1,8 +1,4 @@
-// Accessibility
-export { default as AriaLive } from './accessibility/aria-live';
-
 export { default as AnimationOverlayBrand } from './animations/overlay-brand';
-export { default as AnimationLoader } from './animations/loader';
 export { default as AnimationIndicator } from './animations/indicator';
 
 // Brand

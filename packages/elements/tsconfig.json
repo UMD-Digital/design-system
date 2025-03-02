@@ -5,7 +5,5 @@
     "rootDir": "source",
     "baseUrl": "source",
   },
-  "include": [
-    "./source"
-  ]
+  "include": ["./source"]
  }

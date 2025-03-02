@@ -18,7 +18,7 @@ type NoResultsType = NoResultsContentType & {
 
 const CONTAINER_NO_RESULTS = 'container-no-results';
 
-const STYLES_NO_RESULTS = `
+const styles = `
   .${CONTAINER_NO_RESULTS} {
     display: flex;
     justify-content: center;
@@ -76,13 +76,13 @@ const CreateNoResultsInterface = ({
   container.appendChild(wrapper);
 };
 
-const DisplayNoResults = (props: NoResultsType) => {
+const display = (props: NoResultsType) => {
   const { container, ...NoResultsContent } = props;
   container.innerHTML = '';
   CreateNoResultsInterface({ container, ...NoResultsContent });
 };
 
 export default {
-  DisplayElement: DisplayNoResults,
-  Styles: STYLES_NO_RESULTS,
+  display,
+  styles,
 };

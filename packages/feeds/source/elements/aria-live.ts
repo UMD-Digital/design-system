@@ -1,4 +1,4 @@
-const Create = ({ message }: { message: string }) => {
+const create = ({ message }: { message: string }) => {
   const container = document.createElement('div');
   const textElement = document.createElement('p');
   container.setAttribute('aria-live', 'polite');
@@ -12,7 +12,7 @@ const Create = ({ message }: { message: string }) => {
   return container;
 };
 
-const Update = ({
+const update = ({
   container,
   message,
 }: {
@@ -26,6 +26,6 @@ const Update = ({
 };
 
 export default {
-  Create,
-  Update,
+  create,
+  update,
 };

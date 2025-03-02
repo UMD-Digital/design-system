@@ -1,4 +1,4 @@
-import { Utilities } from '@universityofmaryland/web-elements-library';
+import { network } from 'utilities';
 import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from './queries';
 import NoResults from '../elements/no-results';
 
@@ -17,8 +17,6 @@ export type TypeAPIFeedVariables = TypeFetchVariables & {
 type TypeFetchObject = TypeAPIFeedVariables & {
   query: string;
 };
-
-const { FetchGraphQL } = Utilities.network;
 
 // const CALENDAR_PRODUCTION_URL = 'https://events.umd-staging.com/graphql';
 const CALENDAR_PRODUCTION_URL = 'https://calendar.umd.edu/graphql';
@@ -44,7 +42,7 @@ const FetchFeed = async ({
     offset,
   };
 
-  const feedData = await FetchGraphQL({
+  const feedData = await network.graphql({
     query,
     url: CALENDAR_PRODUCTION_URL,
     token: token,

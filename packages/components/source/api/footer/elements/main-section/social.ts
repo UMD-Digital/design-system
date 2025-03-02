@@ -8,7 +8,7 @@ import {
   SLOTS,
   REFERENCES,
 } from '../../globals';
-import { UMDFooterElement } from '../../index';
+import { UMDFooterElement } from '../../base';
 
 const { convertJSSObjectToStyles } = Utilities.styles;
 

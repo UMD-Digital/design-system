@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes } from 'model';
-import { createAlertComponent, type AlertPageProps } from '../_models/alert';
+import { createAlertComponent, type AlertPageProps } from './_model';
 
 export default createAlertComponent<AlertPageProps>({
   tagName: 'umd-element-alert-page',

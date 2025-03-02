@@ -3,7 +3,7 @@ import { CreateRowLogo, RowLogoStyles } from './row-logo';
 import { CreateRowLinks, RowLinkStyles } from './row-links';
 import { CampaignStyles } from './campaign';
 import { ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
-import { UMDFooterElement } from '../../index';
+import { UMDFooterElement } from '../../base';
 
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { VERSION_TYPE_MEGA, VERSION_TYPE_VISUAL, VERSION_TYPE_SIMPLE } =

@@ -18,7 +18,7 @@ const slots = {
   },
 };
 
-const Load = () => {
+export default () => {
   const createComponent = (element: HTMLElement) => {
     const caption = Slots.text.caption({ element });
     const wrappingText =
@@ -60,8 +60,4 @@ const Load = () => {
       onReady: (element: Model.ElementRef) => element?.events?.load(),
     }),
   });
-};
-
-export default {
-  Load,
 };

@@ -1,7 +1,7 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 import { VARIABLES } from '../../globals';
-import { UMDFooterElement } from '../../index';
+import { UMDFooterElement } from '../../base';
 
 const { spacing } = token;
 

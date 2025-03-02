@@ -3,7 +3,7 @@ import { Styles } from 'utilities';
 import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
 import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
-import { UMDFooterElement } from '../../../index';
+import { UMDFooterElement } from '../../../base';
 
 const { convertJSSObjectToStyles } = Styles;
 

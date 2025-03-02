@@ -15,7 +15,7 @@ const createComponent = (element: HTMLElement) => {
   });
 };
 
-const Load = () => {
+export default () => {
   Register.registerWebComponent({
     name: tagName,
     element: Model.createCustomElement({
@@ -26,8 +26,4 @@ const Load = () => {
       },
     }),
   });
-};
-
-export default {
-  Load,
 };

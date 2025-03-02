@@ -32,7 +32,7 @@ const attributes = Attributes.handler.combine(
   }),
 );
 
-const Load = () => {
+export default () => {
   Register.registerWebComponent({
     name: tagName,
     element: Model.createCustomElement({
@@ -41,8 +41,4 @@ const Load = () => {
       createComponent,
     }),
   });
-};
-
-export default {
-  Load,
 };

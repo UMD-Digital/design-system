@@ -45,7 +45,7 @@ class UMDHeaderStickyElement extends HTMLElement {
   }
 }
 
-const Load = () => {
+export default () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -53,8 +53,4 @@ const Load = () => {
     window.UMDHeaderStickyElement = UMDHeaderStickyElement;
     window.customElements.define(ELEMENT_NAME, UMDHeaderStickyElement);
   }
-};
-
-export default {
-  Load,
 };

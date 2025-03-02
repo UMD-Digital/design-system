@@ -56,7 +56,7 @@ class UMDNavDrawerFeature extends HTMLElement {
   }
 }
 
-const Load = () => {
+export default () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -64,8 +64,4 @@ const Load = () => {
     window.UMDNavDrawerFeature = UMDNavDrawerFeature;
     window.customElements.define(ELEMENT_NAME, UMDNavDrawerFeature);
   }
-};
-
-export default {
-  Load,
 };

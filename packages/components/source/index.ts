@@ -1,26 +1,42 @@
-import * as UmdComponents from './api';
-import * as UmdElements from '@universityofmaryland/web-elements-library';
-import * as UmdUtilities from './utilities';
+import * as umdComponents from './api';
+import * as umdElements from '@universityofmaryland/web-elements-library';
+import * as umdUtilities from './utilities';
+
+interface ComponentMap {
+  [key: string]: {
+    [subKey: string]: () => void;
+  };
+}
 
 const LoadUmdComponents = () => {
-  for (const key in UmdComponents) {
-    // @ts-ignore
-    UmdComponents[key].Load();
+  const list = umdComponents as ComponentMap;
+
+  for (const key in list) {
+    if (Object.prototype.hasOwnProperty.call(list, key)) {
+      const component = list[key];
+
+      for (const subKey in component) {
+        if (Object.prototype.hasOwnProperty.call(component, subKey)) {
+          component[subKey]();
+        }
+      }
+    }
   }
-  UmdUtilities.Animations.loadIntersectionObserver();
+
+  umdUtilities.Animations.loadIntersectionObserver();
 };
 
 export const Components = {
-  ...UmdComponents,
+  ...umdComponents,
 };
 
 export const Elements = {
-  ...UmdElements,
+  ...umdElements,
 };
 
 export const Utilties = {
-  ...UmdUtilities,
-  ...UmdElements.Utilities,
+  ...umdUtilities,
+  ...umdElements.Utilities,
 };
 
 export default LoadUmdComponents;

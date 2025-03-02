@@ -2,7 +2,7 @@ import { Styles } from 'utilities';
 import { CreateMain, MainContainerStyles } from './main-section';
 import { CreateUtility, UtilityContainerStyles } from './utility-section';
 import { ELEMENTS, VARIABLES } from '../globals';
-import { UMDFooterElement } from '../index';
+import { UMDFooterElement } from '../base';
 
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME, ATTRIBUTE_THEME, ATTRIBUTE_TYPE } = VARIABLES;

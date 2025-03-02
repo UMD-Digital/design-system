@@ -6,9 +6,7 @@ import {
   CALL_TO_ACTION_CONTAINER,
 } from '../call-to-action';
 import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
-import { UMDFooterElement } from '../../../index';
-
-const { spacing } = token;
+import { UMDFooterElement } from '../../../base';
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;

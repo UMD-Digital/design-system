@@ -93,7 +93,7 @@ class UMDNavItemElement extends HTMLElement {
   }
 }
 
-const Load = () => {
+export default () => {
   const hasElement =
     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
 
@@ -101,8 +101,4 @@ const Load = () => {
     window.UMDNavItemElement = UMDNavItemElement;
     window.customElements.define(ELEMENT_NAME, UMDNavItemElement);
   }
-};
-
-export default {
-  Load,
 };

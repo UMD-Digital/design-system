@@ -4,9 +4,10 @@ import * as Utility from 'utilities';
 import { CardBlockProps } from './_types';
 
 export const STYLES_BLOCK_CARD_ELEMENT = '';
+const containerClassName = 'card-block-container';
 
 const containerQueryStyles = {
-  className: 'card-block-container',
+  className: containerClassName,
   containerType: 'inline-size',
 };
 
@@ -48,6 +49,7 @@ export default (props: CardBlockProps) => {
   styles += textLockupElement.styles;
 
   composite.element.appendChild(containerQuery);
+  composite.element.classList.add(containerClassName);
 
   return { element: composite.element, styles };
 };

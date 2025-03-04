@@ -5,7 +5,7 @@ import { create } from '../../../utilities';
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-card-overlay';
 
-const createContainerQuery = (
+const createMediaQuery = (
   breakpoint: number,
   comparison = 'max-width',
   styles = {},
@@ -15,9 +15,13 @@ const createContainerQuery = (
   };
 };
 
-const createRangeContainerQuery = (min: number, max: number, styles = {}) => {
+const createContainerQuery = (
+  breakpoint: number,
+  comparison = 'max-width',
+  styles = {},
+) => {
   return {
-    [`@media (min-width: ${min}px) and (max-width: ${max})`]: styles,
+    [`@container (${comparison}: ${breakpoint}px)`]: styles,
   };
 };
 
@@ -42,7 +46,7 @@ const createImageStyles = (customStyles = {}) => {
 
 const createTextStyles = (customStyles = {}) => {
   return {
-    [`& > div:first-child`]: {
+    [`& > div:last-child`]: {
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -56,16 +60,19 @@ const createTextStyles = (customStyles = {}) => {
 const createContainerStyles = (customStyles = {}) => {
   return {
     maxWidth: `${spacing.maxWidth.smallest}`,
-    padding: `${spacing.lg} ${spacing.md}`,
+    padding: `${spacing.md}`,
     height: '100%',
     overflow: 'hidden',
     position: 'relative',
-
-    ...createContainerQuery(media.breakpointValues.tablet.min, 'min-width', {
-      minHeight: '456px',
-    }),
     ...customStyles,
   };
+};
+
+const colorContainerBase = {
+  padding: `${spacing.lg} ${spacing.md}`,
+  ...createMediaQuery(media.breakpointValues.tablet.min, 'min-width', {
+    minHeight: '456px',
+  }),
 };
 
 // umd-element-composite-card-overlay-color-light
@@ -73,6 +80,7 @@ export const colorLight = create.jssObject({
   className: `${classNamePrefix}-color-light`,
   ...createContainerStyles({
     backgroundColor: color.gray.lightest,
+    ...colorContainerBase,
   }),
   ...createTextStyles(),
   ...createImageStyles(),
@@ -83,9 +91,73 @@ export const colorDark = create.jssObject({
   className: `${classNamePrefix}-color-dark`,
   ...createContainerStyles({
     backgroundColor: color.gray.darker,
+    ...colorContainerBase,
   }),
   ...createTextStyles(),
   ...createImageStyles(),
+});
+
+// umd-element-composite-card-overlay-icon-container
+export const iconContainer = create.jssObject({
+  className: `${classNamePrefix}-icon-container`,
+  display: 'flex',
+  justifyContent: 'flex-end',
+  ...createContainerQuery(media.breakpointValues.medium.min, 'min-width', {
+    marginBottom: `${spacing.lg}`,
+  }),
+
+  '& *': {
+    maxHeight: '120px',
+
+    ...createContainerQuery(media.breakpointValues.small.max, 'max-width', {
+      width: '100px',
+    }),
+  },
+});
+
+const iconContainerBase = {
+  padding: `${spacing.sm}`,
+  paddingBottom: `${spacing.md}`,
+
+  ...createContainerQuery(media.breakpointValues.small.max, 'max-width', {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+  }),
+};
+
+const iconContainerTextBase = {
+  height: 'auto',
+
+  ...createContainerQuery(media.breakpointValues.small.max, 'max-width', {
+    width: `calc(100% - 100px)`,
+    paddingRight: `${spacing.md}`,
+  }),
+};
+
+// umd-element-composite-card-overlay-icon-light
+export const iconLight = create.jssObject({
+  className: `${classNamePrefix}-icon-light`,
+  ...createContainerStyles({
+    backgroundColor: color.gray.lightest,
+    ...iconContainerBase,
+  }),
+  ...createTextStyles({
+    ...iconContainerTextBase,
+  }),
+  ...createImageStyles({}),
+});
+
+// umd-element-composite-card-overlay-icon-dark
+export const iconDark = create.jssObject({
+  className: `${classNamePrefix}-icon-dark`,
+  ...createContainerStyles({
+    backgroundColor: color.gray.darker,
+    ...iconContainerBase,
+  }),
+  ...createTextStyles({
+    ...iconContainerTextBase,
+  }),
+  ...createImageStyles({}),
 });
 
 // umd-element-composite-card-overlay-image
@@ -108,7 +180,8 @@ export const image = create.jssObject({
       width: '100%',
       height: '100%',
       zIndex: 1,
-      background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0))',
+      background:
+        'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .55) 60%, rgba(0, 0, 0, 0.9) 100%)',
     },
   }),
 });

@@ -11,6 +11,8 @@ interface CardListProps extends ElementProps {
   isDisplayEvent?: boolean;
 }
 
+interface CardOverlayProps extends ElementProps {}
+
 export const cardBlock = (props: CardBlockProps) => {
   const { isTransparent, isBordered, ...elementProps } = props;
   const { isThemeDark } = elementProps;
@@ -70,5 +72,21 @@ export const cardList = (props: CardListProps) => {
   return createStyledElement(
     elementProps,
     Styles.element.composite.card.list.light,
+  );
+};
+
+export const cardOverlay = (props: CardOverlayProps) => {
+  const { isThemeDark, ...elementProps } = props;
+
+  if (isThemeDark) {
+    return createStyledElement(
+      elementProps,
+      Styles.element.composite.card.overlay.colorDark,
+    );
+  }
+
+  return createStyledElement(
+    elementProps,
+    Styles.element.composite.card.overlay.colorLight,
   );
 };

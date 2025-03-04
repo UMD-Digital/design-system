@@ -1,175 +1,47 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
 import { actions, textLockup } from 'atomic';
+import { ElementModel } from 'model';
+import { CardOverlayProps } from '../_types';
 
-type TypeCardOverlayElement = {
-  headline: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  isThemeDark?: boolean;
-  isThemeLight?: boolean;
-  ctaIcon?: HTMLElement | null;
+const containerClassName = 'card-overlay-default-container';
+const elementStyles = {
+  element: {
+    className: containerClassName,
+    containerType: 'inline-size',
+
+    [`& .${Styles.layout.grid.inline.tabletRows.className}`]: {
+      [`@media (${Styles.token.media.queries.tablet.min})`]: {
+        marginTop: 'auto !important',
+      },
+    },
+  },
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-const { token, typography } = Styles;
+export default (props: CardOverlayProps) => {
+  const { isThemeDark, ctaIcon } = props;
 
-const MEDIUM = 500;
-
-const ELEMENT_NAME = 'umd-card-overla-default';
-const ATTRIBUTE_THEME = 'data-theme';
-const ATTRIBUTE_CTA_ICON = 'cta-icon';
-const THEME_DARK = 'dark';
-
-const ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER = 'card-overlay-default-container';
-const ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER = 'card-overlay-default-wrapper';
-
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-const IS_WITH_CTA_ICON = `[${ATTRIBUTE_CTA_ICON}]`;
-
-const OVERWRITE_THEME_DARK_WRAPPER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER}`;
-
-const OVERWRITE_CTA_ICON_BLOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER}${IS_WITH_CTA_ICON} .${textLockup.smallScaleElements.container}`;
-
-const OVERWRITE_SCALING_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${textLockup.smallScaleElements.container}`;
-const OVERWRITE_TEXT_LOCK_CONTAINER = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${textLockup.smallScaleElements.container}`;
-const OVERWRITE_TEXT_LOCK_HEADLINE = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${textLockup.smallScaleElements.headline}`;
-const OVERWRITE_TEXT_LOCK_ACTIONS = `.${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} .${textLockup.smallScaleElements.actions}`;
-
-// prettier-ignore
-const OverwriteCtaIcon  = `
-  ${OVERWRITE_CTA_ICON_BLOCK_CONTAINER} {
-    padding-right: ${token.spacing['2xl']};
-  }
-`;
-
-// prettier-ignore
-const OverwriteThemeDark  = `
-  ${OVERWRITE_THEME_DARK_WRAPPER} {
-    background-color: ${token.color.gray.darker};
+  if (ctaIcon) {
+    elementStyles.element.paddingRight = `${Styles.token.spacing['2xl']}`;
   }
 
-  ${OVERWRITE_THEME_DARK_WRAPPER} * {
-    color: ${token.color.white};
-  }
-`;
-
-const OverwriteHeadline = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: typography.sans.larger,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: typography.sans.larger,
-    },
-  })}
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${convertJSSObjectToStyles({
-      styleObj: {
-        [`${OVERWRITE_TEXT_LOCK_HEADLINE}`]: typography.sans.extraLarge,
-      },
-    })}
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${convertJSSObjectToStyles({
-      styleObj: {
-        [`${OVERWRITE_TEXT_LOCK_HEADLINE} *`]: typography.sans.extraLarge,
-      },
-    })}
-  }
-`;
-
-const OverwriteTextContainer = `
-  ${OVERWRITE_SCALING_TEXT_LOCK_CONTAINER} {
-    height: 100%;
-  }
-
-  ${OVERWRITE_TEXT_LOCK_CONTAINER} {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: ${token.spacing.md};
-    padding-top: ${token.spacing.lg};
-    padding-bottom: ${token.spacing.lg};
-  }
-
-  ${OVERWRITE_TEXT_LOCK_ACTIONS} {
-    margin-top: ${token.spacing.sm};
-  }
-
-  ${OVERWRITE_SCALING_TEXT_LOCK_CONTAINER} > div > *:not(.${textLockup.smallElements.actions}) {
-    margin-bottom: ${token.spacing.sm};
-  }
-
-  @media (min-width: 768px) {
-    ${OVERWRITE_TEXT_LOCK_ACTIONS} {
-      margin-top: auto;
-    }
-  }
-`;
-
-// prettier-ignore
-const STYLES_OVERLAY_CARD_ELEMENT = `
-  .${ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    height: 100%;
-    position: relative;
-  }
-
-  .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER} {
-    background-color: ${token.color.gray.lightest};
-    height: 100%;
-    overflow: hidden;
-  }
-
-  @media (min-width: 768px) {
-    .${ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER} {
-      min-height: 456px;
-    }
-  }
-
-
-  ${OverwriteHeadline}
-  ${OverwriteThemeDark}
-  ${OverwriteCtaIcon}
-  ${OverwriteTextContainer}
-`;
-
-export const styles = ` 
-  ${STYLES_OVERLAY_CARD_ELEMENT}
-  ${textLockup.smallScaleStyles}
-`;
-
-export default (props: TypeCardOverlayElement) => {
-  const { isThemeDark } = props;
-  const elementContainer = document.createElement('div');
-  const elementWrapper = document.createElement('div');
+  const elementContainer = ElementModel.composite.cardOverlay({
+    ...props,
+    element: document.createElement('div'),
+    elementStyles,
+  });
   const scalingFontContainer = textLockup.smallScaling(props);
-  const ctaIcon = actions.icon({
+  const actionIcon = actions.icon({
     ...props,
     isThemeLight: !isThemeDark,
   });
-  let styles = STYLES_OVERLAY_CARD_ELEMENT;
 
-  elementWrapper.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_WRAPPER);
-  elementWrapper.appendChild(scalingFontContainer.element);
-  styles += scalingFontContainer.styles;
+  elementContainer.element.appendChild(scalingFontContainer.element);
+  elementContainer.styles += scalingFontContainer.styles;
 
-  if (ctaIcon) {
-    elementWrapper.appendChild(ctaIcon.element);
-    elementContainer.setAttribute(ATTRIBUTE_CTA_ICON, '');
-    styles += ctaIcon.styles;
+  if (actionIcon) {
+    elementContainer.element.appendChild(actionIcon.element);
+    elementContainer.styles += actionIcon.styles;
   }
 
-  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-  elementContainer.classList.add(ELEMENT_CARD_OVERLAY_DEFAULT_CONTAINER);
-  elementContainer.appendChild(elementWrapper);
-
-  return { element: elementContainer, styles };
+  return elementContainer;
 };

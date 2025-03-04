@@ -89,7 +89,7 @@ const createComponent = (element: HTMLElement) => {
     return Composite.card.block({
       ...MakeCommonData({ element }),
       eyebrow: Slots.eyebrow.default({ element }),
-      isEyebrowRibbon: true,
+      hasEyebrowRibbon: true,
       eventMeta: eventMetaAtomic,
       dateSign: Atomic.events.sign({
         ...EventSignData,

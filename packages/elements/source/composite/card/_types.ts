@@ -82,6 +82,9 @@ export interface CardBlockProps
 
   /** Display eyebrow as ribbon */
   hasEyebrowRibbon?: boolean;
+
+  /** Display transparent background */
+  isTransparent?: boolean;
 }
 
 /**

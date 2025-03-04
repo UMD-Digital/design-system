@@ -2,7 +2,7 @@ import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 export type TypeCardOverlayCtaIcon = {
-  ctaIcon?: HTMLElement | null;
+  ctaIcon: HTMLElement;
   isThemeDark?: boolean;
   isThemeLight?: boolean;
 };
@@ -97,7 +97,6 @@ export default ({
 }: TypeCardOverlayCtaIcon) => {
   const container = document.createElement('div');
 
-  if (!ctaIcon) return null;
   const href = ctaIcon.getAttribute('href');
   const message = `Open Link to ${href}`;
   const hasIcon = ctaIcon.querySelector('svg');

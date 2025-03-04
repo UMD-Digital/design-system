@@ -1,4 +1,3 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { textLockup } from 'atomic';
 import { ElementModel } from 'model';
 
@@ -9,11 +8,19 @@ type TypeBlockCardIconProps = {
   isThemeDark?: boolean;
 };
 
+const elementStyles = {
+  element: {
+    className: 'card-overlay-icon',
+    containerType: 'inline-size',
+  },
+};
+
 export default (props: TypeBlockCardIconProps) => {
   const { image } = props;
-  const elementContainer = ElementModel.composite.cardOverlay({
+  const composite = ElementModel.composite.cardOverlay({
     ...props,
     isCardIcon: true,
+    elementStyles,
     element: document.createElement('div'),
   });
   const textContainer = textLockup.small(props);
@@ -24,12 +31,12 @@ export default (props: TypeBlockCardIconProps) => {
       element: document.createElement('div'),
     });
     imageContainer.element.appendChild(image);
-    elementContainer.element.appendChild(imageContainer.element);
-    elementContainer.styles += imageContainer.styles;
+    composite.element.appendChild(imageContainer.element);
+    composite.styles += imageContainer.styles;
   }
 
-  elementContainer.element.appendChild(textContainer.element);
-  elementContainer.styles += textContainer.styles;
+  composite.element.appendChild(textContainer.element);
+  composite.styles += textContainer.styles;
 
-  return elementContainer;
+  return composite;
 };

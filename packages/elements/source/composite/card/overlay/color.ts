@@ -3,10 +3,9 @@ import { actions, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { CardOverlayProps } from '../_types';
 
-const containerClassName = 'card-overlay-default-container';
 const elementStyles = {
   element: {
-    className: containerClassName,
+    className: 'card-overlay-color',
     containerType: 'inline-size',
 
     [`& .${Styles.layout.grid.inline.tabletRows.className}`]: {
@@ -24,24 +23,26 @@ export default (props: CardOverlayProps) => {
     elementStyles.element.paddingRight = `${Styles.token.spacing['2xl']}`;
   }
 
-  const elementContainer = ElementModel.composite.cardOverlay({
+  const composite = ElementModel.composite.cardOverlay({
     ...props,
     element: document.createElement('div'),
     elementStyles,
   });
   const scalingFontContainer = textLockup.smallScaling(props);
-  const actionIcon = actions.icon({
-    ...props,
-    isThemeLight: !isThemeDark,
-  });
 
-  elementContainer.element.appendChild(scalingFontContainer.element);
-  elementContainer.styles += scalingFontContainer.styles;
+  if (ctaIcon && ctaIcon instanceof HTMLElement) {
+    const actionIcon = actions.icon({
+      ...props,
+      ctaIcon,
+      isThemeLight: !isThemeDark,
+    });
 
-  if (actionIcon) {
-    elementContainer.element.appendChild(actionIcon.element);
-    elementContainer.styles += actionIcon.styles;
+    composite.element.appendChild(actionIcon.element);
+    composite.styles += actionIcon.styles;
   }
 
-  return elementContainer;
+  composite.element.appendChild(scalingFontContainer.element);
+  composite.styles += scalingFontContainer.styles;
+
+  return composite;
 };

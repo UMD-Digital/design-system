@@ -75,13 +75,13 @@ export const STYLES_OVERLAY_CARD_IMAGE = `
 `;
 
 export default (props: TypeCardOverlayImageElement) => {
-  const { isQuote } = props;
+  const { isQuote, ctaIcon } = props;
   const elementDeclaration = document.createElement('div');
   const blockOverlayContainer = blockOverlay({
     ...props,
     isThemeDark: true,
   });
-  const ctaIcon = actions.icon({ ...props, isThemeDark: true });
+
   let styles = STYLES_OVERLAY_CARD_IMAGE;
 
   if (blockOverlayContainer) {
@@ -99,10 +99,12 @@ export default (props: TypeCardOverlayImageElement) => {
       }
     }
 
-    if (ctaIcon) {
+    if (ctaIcon && ctaIcon instanceof HTMLElement) {
+      const actionIcon = actions.icon({ ...props, ctaIcon, isThemeDark: true });
+
       elementDeclaration.setAttribute(ATTRIBUTE_CTA_ICON, '');
-      blockOverlayContainer.element.appendChild(ctaIcon.element);
-      styles += ctaIcon.styles;
+      blockOverlayContainer.element.appendChild(actionIcon.element);
+      styles += actionIcon.styles;
     }
 
     elementDeclaration.appendChild(blockOverlayContainer.element);

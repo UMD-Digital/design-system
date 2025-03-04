@@ -9,7 +9,6 @@ import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { StickyColumns } = Composite;
 
 const ELEMENT_NAME = 'umd-element-sticky-columns';
 
@@ -19,7 +18,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${StickyColumns.Styles}
+  ${Composite.layout.stickyColumns.Styles}
 `;
 
 export const CreateShadowDom = ({
@@ -33,7 +32,7 @@ export const CreateShadowDom = ({
   const stickyColumn = Node.slot({ type: Slots.name.STICKY_COLUMN });
   const staticColumn = Node.slot({ type: Slots.name.STATIC_COLUMN });
 
-  const component = StickyColumns.CreateElement({
+  const component = Composite.layout.stickyColumns.CreateElement({
     stickyColumn,
     staticColumn,
     isStickyLast,

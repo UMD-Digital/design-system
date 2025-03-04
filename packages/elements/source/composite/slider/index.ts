@@ -1,5 +1,1 @@
-import { default as events } from './events';
-
-export default {
-  events,
-};
+export { default as events } from './events';

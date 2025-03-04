@@ -9,7 +9,6 @@ import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { LogoBlock } = Composite;
 
 const ELEMENT_NAME = 'umd-element-logo';
 
@@ -19,7 +18,7 @@ const styles = `
   }
   
   ${Styles.reset}
-  ${LogoBlock.Styles}
+  ${Composite.layout.box.logo.Styles}
 `;
 
 const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
@@ -28,7 +27,7 @@ const CreateShadowDom = ({ element }: { element: UMDLogoElement }) => {
 
   const isBordered = borderAttr === 'true';
 
-  return LogoBlock.CreateElement({
+  return Composite.layout.box.logo.CreateElement({
     image: Markup.validate.ImageSlot({
       element,
       ImageSlot: Slots.name.assets.image,

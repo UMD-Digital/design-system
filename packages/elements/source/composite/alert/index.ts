@@ -1,7 +1,2 @@
-import { default as page } from './page';
-import { default as site } from './site';
-
-export default {
-  page,
-  site,
-};
+export { default as page } from './page';
+export { default as site } from './site';

@@ -1,12 +1,10 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 
-const { Accordion } = Composite;
-
 const tagName = 'umd-element-accordion-item';
 
 const createComponent = (element: HTMLElement) =>
-  Accordion({
+  Composite.accordion.item({
     text:
       Slots.deprecated.body({ element, isDefaultStyling: false }) ||
       Slots.text.default({ element, isDefaultStyling: false }),

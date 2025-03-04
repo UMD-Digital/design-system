@@ -19,11 +19,7 @@ export type ArticleType = {
   }[];
 };
 
-const { CardOverlayImage } = Composite;
-
 const STYLES_NEWS_FEED = `
-  ${Composite.CardOverlayStyles}
-  ${Composite.STYLES_OVERLAY_CARD_IMAGE}
 `;
 
 const CreateImage = ({ images, url }: { images: ImageType; url?: string }) => {
@@ -137,7 +133,7 @@ const CreateNewsFeedDisplay = ({
   };
 
   const overlayCardType = ({ entry }: { entry: ArticleType }) =>
-    CardOverlayImage({
+    Composite.card.overlay.image({
       ...CommonDisplay({ entry, isThemeDark }),
       image: CreateImage({ images: entry.image }),
     })?.element;
@@ -153,7 +149,7 @@ const CreateNewsFeedDisplay = ({
     if (entries.length >= 3) {
       const entriesCopy = entries.slice(0, 3);
 
-      const overlayCard = CardOverlayImage({
+      const overlayCard = Composite.card.overlay.image({
         ...CommonDisplay({ entry: entriesCopy[0], isThemeDark }),
         image: CreateImage({ images: entriesCopy[0].image }),
       })?.element;

@@ -9,7 +9,6 @@ import { Attributes } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { Node } = Markup.create;
-const { ScrollTop } = Composite;
 
 const ELEMENT_NAME = 'umd-element-scroll-top';
 
@@ -19,14 +18,14 @@ const styles = `
   }
   
   ${Styles.reset}
-  ${ScrollTop.Styles}
+  ${Composite.layout.scrollTop.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({ styles });
 
 const CreateShadowDom = ({ element }: { element: UMDScrollTopElement }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const scrollTop = ScrollTop.CreateElement({
+  const scrollTop = Composite.layout.scrollTop.CreateElement({
     isFixed: element.hasAttribute(Attributes.names.LAYOUT_FIXED),
   });
 

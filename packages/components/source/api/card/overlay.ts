@@ -2,7 +2,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 
-const { CardOverlay, CardOverlayImage } = Composite;
 const { SlotWithDefaultStyling } = Markup.create;
 
 const tagName = 'umd-element-card-overlay';
@@ -27,7 +26,7 @@ const MakeOverlayContent = ({ element }: { element: HTMLElement }) => ({
 
 const createComponent = (element: HTMLElement) => {
   if (Attributes.isLayout.image({ element })) {
-    const ImageOverlay = CardOverlayImage({
+    const ImageOverlay = Composite.card.overlay.image({
       ...MakeOverlayContent({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
     });
@@ -37,7 +36,7 @@ const createComponent = (element: HTMLElement) => {
     }
   }
 
-  return CardOverlay({ ...MakeOverlayContent({ element }) });
+  return Composite.card.overlay.color({ ...MakeOverlayContent({ element }) });
 };
 
 export default () => {

@@ -1,13 +1,11 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register } from 'model';
 
-const { SocialSharing } = Composite;
-
 const tagName = 'umd-element-social-sharing';
 
 export default () => {
   const element = (element: HTMLElement) =>
-    SocialSharing({
+    Composite.social.sharing({
       isFixed: Attributes.isLayout.fixed({ element }),
       title: Attributes.getValue.title({ element }),
       url: Attributes.getValue.url({ element }),

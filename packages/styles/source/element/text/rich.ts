@@ -30,10 +30,11 @@ const childSpacing = {
 
 const simpleBase = {
   ...animation.nestedElements.linksWhite,
-  ...sans.small,
+  fontSize: font.size.base,
+  lineHeight: `1.375em`,
 
   '& > *': {
-    ...sans.small,
+    fontSize: font.size.base,
     ...childSpacing,
     lineHeight: '1.5em',
   },
@@ -53,11 +54,11 @@ const simpleBase = {
 
 const advancedBase = {
   ...simpleBase,
-
-  ...sans.medium,
+  fontSize: font.size.lg,
+  lineHeight: `1.375em`,
 
   '& > *': {
-    ...sans.medium,
+    fontSize: font.size.lg,
     ...childSpacing,
   },
 
@@ -113,10 +114,10 @@ export const simpleDark = create.jssObject({
 // umd-text-rich-simple-large
 export const simpleLarge = create.jssObject({
   ...simpleBase,
-  ...sans.medium,
+  fontSize: font.size.lg,
 
   '& > *': {
-    ...sans.medium,
+    fontSize: font.size.lg,
     ...childSpacing,
   },
 
@@ -131,10 +132,10 @@ export const simpleLarge = create.jssObject({
 export const simpleLargeDark = create.jssObject({
   ...simpleBase,
   ...themeDarkColors,
-  ...sans.medium,
+  fontSize: font.size.lg,
 
   '& > *': {
-    ...sans.medium,
+    fontSize: font.size.lg,
     ...childSpacing,
   },
 
@@ -144,18 +145,18 @@ export const simpleLargeDark = create.jssObject({
 // umd-text-rich-simple-scaling
 export const simpleScaling = create.jssObject({
   ...simpleBase,
-  ...sans.small,
+  fontSize: font.size.base,
 
   '& > *': {
-    ...sans.small,
+    fontSize: font.size.lg,
     ...childSpacing,
   },
 
   [`@container (min-width: ${scalingContainerMedium}px)`]: {
-    ...sans.medium,
+    fontSize: font.size.lg,
 
     '& > *': {
-      ...sans.medium,
+      fontSize: font.size.lg,
       ...childSpacing,
     },
   },
@@ -167,18 +168,18 @@ export const simpleScaling = create.jssObject({
 export const simpleScalingDark = create.jssObject({
   ...simpleBase,
   ...themeDarkColors,
-  ...sans.small,
+  fontSize: font.size.base,
 
   '& > *': {
-    ...sans.small,
+    fontSize: font.size.base,
     ...childSpacing,
   },
 
   [`@container (min-width: ${scalingContainerMedium}px)`]: {
-    ...sans.medium,
+    fontSize: font.size.lg,
 
     '& > *': {
-      ...sans.medium,
+      fontSize: font.size.lg,
       ...childSpacing,
     },
   },

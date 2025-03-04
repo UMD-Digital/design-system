@@ -102,13 +102,14 @@ const STYLES_BLOCK_CARD_ICON_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreateCardIconBlockElement = (props: TypeBlockCardIconProps) => {
+export default (props: TypeBlockCardIconProps) => {
   const { isThemeDark, image } = props;
   const elementContainer = document.createElement('div');
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const imageContainer = document.createElement('div');
   const textContainer = TextLockupSmallScaling.CreateElement(props);
+  let styles = STYLES_BLOCK_CARD_ICON_ELEMENT;
 
   wrapper.classList.add(ELEMENT_CARD_BLOCK_WRAPPER);
 
@@ -129,10 +130,5 @@ const CreateCardIconBlockElement = (props: TypeBlockCardIconProps) => {
   elementContainer.classList.add(ELEMENT_CARD_BLOCK_DECLARATION);
   elementContainer.appendChild(container);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreateCardIconBlockElement,
-  Styles: STYLES_BLOCK_CARD_ICON_ELEMENT,
+  return { element: elementContainer, styles };
 };

@@ -17,7 +17,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${Composite.sectionIntro.small.Styles}
+  ${Composite.layout.sectionIntro.small.Styles}
 `;
 
 const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
@@ -29,7 +29,7 @@ export const CreateShadowDom = ({
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const includesAnimation = Attributes.includesFeature.animation({ element });
-  const intro = Composite.sectionIntro.small.CreateElement({
+  const intro = Composite.layout.sectionIntro.small.CreateElement({
     ...CommonIntroData({
       element,
       isThemeDark: Attributes.isTheme.dark({ element }),

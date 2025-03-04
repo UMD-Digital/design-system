@@ -1,19 +1,8 @@
-import { default as brand } from './brand';
-import { default as elements } from './elements';
-import { default as expand } from './expand';
-import { default as minimal } from './minimal';
-import { default as overlay } from './overlay';
-import { default as logo } from './logo';
-import { default as stacked } from './stacked';
-import { default as standard } from './standard';
-
-export default {
-  brand,
-  elements,
-  expand,
-  minimal,
-  overlay,
-  logo,
-  stacked,
-  standard,
-};
+export { default as brand } from './brand';
+export { default as elements } from './elements';
+export { default as expand } from './expand';
+export { default as minimal } from './minimal';
+export { default as overlay } from './overlay';
+export { default as logo } from './logo';
+export { default as stacked } from './stacked';
+export { default as standard } from './standard';

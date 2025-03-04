@@ -148,7 +148,7 @@ export const simpleScaling = create.jssObject({
   fontSize: font.size.base,
 
   '& > *': {
-    fontSize: font.size.lg,
+    fontSize: font.size.base,
     ...childSpacing,
   },
 

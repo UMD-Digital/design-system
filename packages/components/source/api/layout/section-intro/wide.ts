@@ -19,7 +19,7 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${Composite.sectionIntro.wide.Styles}
+  ${Composite.layout.sectionIntro.wide.Styles}
 `;
 
 const styleTemplate = Node.stylesTemplate({ styles });
@@ -30,7 +30,7 @@ export const CreateShadowDom = ({
   element: UMDSectionIntroWideElement;
 }) => {
   const shadow = element.shadowRoot as ShadowRoot;
-  const intro = Composite.sectionIntro.wide.CreateElement(
+  const intro = Composite.layout.sectionIntro.wide.CreateElement(
     CommonIntroData({
       element,
       isThemeDark: Attributes.isTheme.dark({ element }),

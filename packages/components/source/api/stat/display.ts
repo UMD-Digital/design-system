@@ -9,7 +9,6 @@ import { Attributes, Slots } from 'model';
 import { Markup, Styles } from 'utilities';
 
 const { SlotWithDefaultStyling } = Markup.create;
-const { Stat } = Composite;
 
 const ELEMENT_NAME = 'umd-element-stat';
 
@@ -19,13 +18,13 @@ const styles = `
   }
 
   ${Styles.reset}
-  ${Stat.Styles}
+  ${Composite.stat.display.Styles}
 `;
 
 const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   const lineAttr = element.hasAttribute(Attributes.names.OPTIONAL_HAS_LINE);
 
-  return Stat.CreateElement({
+  return Composite.stat.display.CreateElement({
     isThemeDark: Attributes.isTheme.dark({ element }),
     displayType: element.getAttribute(Attributes.names.DISPLAY_TYPE),
     size: element.getAttribute(Attributes.names.DISPLAY_SIZE),

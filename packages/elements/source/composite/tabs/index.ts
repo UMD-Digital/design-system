@@ -1,7 +1,2 @@
-import { default as elements } from './elements';
-import { default as standard } from './standard';
-
-export default {
-  elements,
-  standard,
-};
+export { default as elements } from './elements';
+export { default as standard } from './standard';

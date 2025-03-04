@@ -111,7 +111,7 @@ const createComponent = (element: HTMLElement) => {
     return Composite.card.list({
       ...MakeCommonData({ element }),
       eventMeta: eventMetaAtomic,
-      dateSign: dateSignAtomic,
+      dateSign: dateSignAtomicLarge,
     });
   }
 

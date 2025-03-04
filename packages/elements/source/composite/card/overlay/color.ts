@@ -1,15 +1,15 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import { textLockup } from 'atomic';
-import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
+import { actions, textLockup } from 'atomic';
 
-type TypeCardOverlayElement = TypeCardOverlayCtaIcon & {
+type TypeCardOverlayElement = {
   headline: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
   isThemeLight?: boolean;
+  ctaIcon?: HTMLElement | null;
 };
 
 const { convertJSSObjectToStyles } = Utility.styles;
@@ -134,7 +134,7 @@ const STYLES_OVERLAY_CARD_ELEMENT = `
     }
   }
 
-  ${CtaIcon.Styles}
+
   ${OverwriteHeadline}
   ${OverwriteThemeDark}
   ${OverwriteCtaIcon}
@@ -151,7 +151,7 @@ export default (props: TypeCardOverlayElement) => {
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
   const scalingFontContainer = textLockup.smallScaling(props);
-  const ctaIcon = CtaIcon.CreateElement({
+  const ctaIcon = actions.icon({
     ...props,
     isThemeLight: !isThemeDark,
   });
@@ -162,8 +162,9 @@ export default (props: TypeCardOverlayElement) => {
   styles += scalingFontContainer.styles;
 
   if (ctaIcon) {
-    elementWrapper.appendChild(ctaIcon);
+    elementWrapper.appendChild(ctaIcon.element);
     elementContainer.setAttribute(ATTRIBUTE_CTA_ICON, '');
+    styles += ctaIcon.styles;
   }
 
   if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);

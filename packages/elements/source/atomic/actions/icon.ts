@@ -90,7 +90,7 @@ const STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const MakeCtaIconContainer = ({
+export default ({
   ctaIcon,
   isThemeDark,
   isThemeLight,
@@ -102,6 +102,7 @@ const MakeCtaIconContainer = ({
   const message = `Open Link to ${href}`;
   const hasIcon = ctaIcon.querySelector('svg');
   const label = ctaIcon.getAttribute('aria-label') || message;
+  let styles = STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT;
 
   ctaIcon.setAttribute('aria-label', label);
   container.classList.add(ELEMENT_CTA_ICON_CONTAINER);
@@ -127,9 +128,5 @@ const MakeCtaIconContainer = ({
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
   if (isThemeLight) container.setAttribute(ATTRIBUTE_THEME, THEME_LIGHT);
 
-  return container;
-};
-export default {
-  CreateElement: MakeCtaIconContainer,
-  Styles: STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT,
+  return { element: container, styles };
 };

@@ -1,20 +1,22 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import CtaIcon, { TypeCardOverlayCtaIcon } from './elements/icon-cta';
 import {
   blockOverlay,
   blockOverlayElements,
   STYLES_BLOCK_OVERLAY_ELEMENT,
 } from 'layout';
-import { textLockup } from 'atomic';
+import { actions, textLockup } from 'atomic';
 import * as Utility from 'utilities';
 
-type TypeCardOverlayImageElement = TypeCardOverlayCtaIcon & {
+type TypeCardOverlayImageElement = {
   image: HTMLImageElement | HTMLAnchorElement;
   headline: HTMLElement | null;
   text: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   actions?: HTMLElement | null;
   isQuote?: boolean;
+  ctaIcon?: HTMLElement | null;
+  isThemeDark?: boolean;
+  isThemeLight?: boolean;
 };
 
 const ELEMENT_NAME = 'umd-card-overlay-image';
@@ -79,7 +81,7 @@ export default (props: TypeCardOverlayImageElement) => {
     ...props,
     isThemeDark: true,
   });
-  const ctaIcon = CtaIcon.CreateElement({ ...props, isThemeDark: true });
+  const ctaIcon = actions.icon({ ...props, isThemeDark: true });
   let styles = STYLES_OVERLAY_CARD_IMAGE;
 
   if (blockOverlayContainer) {
@@ -99,7 +101,8 @@ export default (props: TypeCardOverlayImageElement) => {
 
     if (ctaIcon) {
       elementDeclaration.setAttribute(ATTRIBUTE_CTA_ICON, '');
-      blockOverlayContainer.element.appendChild(ctaIcon);
+      blockOverlayContainer.element.appendChild(ctaIcon.element);
+      styles += ctaIcon.styles;
     }
 
     elementDeclaration.appendChild(blockOverlayContainer.element);

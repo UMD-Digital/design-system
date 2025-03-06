@@ -17,4 +17,3 @@ export {
   default as TextLockupSmall,
   TypeTextLockupSmall,
 } from './text-lockup/small';
-export { default as TextLockupSmallScaling } from './text-lockup/small-scaling';

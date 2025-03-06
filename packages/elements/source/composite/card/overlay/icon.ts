@@ -22,7 +22,7 @@ export default (props: TypeBlockCardIconProps) => {
     elementStyles,
     element: document.createElement('div'),
   });
-  const textContainer = textLockup.small(props);
+  const textContainer = textLockup.smallScaling(props);
 
   if (image) {
     const imageContainer = ElementModel.composite.card.overlay.elementIcon({

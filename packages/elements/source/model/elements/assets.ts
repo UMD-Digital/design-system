@@ -33,3 +33,6 @@ export const imageWrapper = (props: ImageWrapperProps) => {
 
   return createStyledElement(props, Styles.element.asset.image.wrapper);
 };
+
+export const gifToggle = (props: ElementProps) =>
+  createStyledElement(props, Styles.element.asset.gif.toggle);

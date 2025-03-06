@@ -1,33 +1,63 @@
 import { ElementModel } from 'model';
+import { gifToggle } from './gif';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 
-export default (props: {
+interface Asset {
   image: HTMLImageElement | HTMLAnchorElement;
+  isAspectStandard?: boolean;
+  isScaled?: boolean;
+}
+
+interface EmbedAsset extends Asset {
+  isTypeGif: boolean;
+}
+
+interface Props extends Asset {
   dateSign?: { element: HTMLElement; styles: string };
   isShowCaption?: boolean;
-  isScaled?: boolean;
-  isAspectStandard?: boolean;
-}) => {
-  const {
-    image,
-    dateSign,
-    isShowCaption = false,
-    isAspectStandard = false,
-  } = props;
-  const container = document.createElement('div');
-  const hasCaption = image.hasAttribute(ATTRIBUTE_CAPTION);
-  let additionalStyles = '';
+}
 
-  if (hasCaption && isShowCaption) {
+const embedAsset = ({
+  image,
+  isTypeGif = false,
+  isAspectStandard,
+}: EmbedAsset) => {
+  if (isTypeGif && image instanceof HTMLImageElement) {
+    return gifToggle({ image });
+  }
+
+  if (isAspectStandard) {
+    return ElementModel.assets.imageAspect({
+      element: image,
+    });
+  }
+
+  return { element: image, styles: '' };
+};
+
+export default (props: Props) => {
+  const { image, dateSign, isShowCaption = false } = props;
+  const composite = ElementModel.assets.imageWrapper({
+    ...props,
+    element: document.createElement('div'),
+  });
+  const isTypeGif =
+    image instanceof HTMLImageElement &&
+    image.src !== null &&
+    image.src.toLowerCase().includes('.gif');
+
+  const asset = embedAsset({ ...props, isTypeGif });
+
+  if (image.hasAttribute(ATTRIBUTE_CAPTION) && isShowCaption) {
     const caption = document.createElement('span');
     caption.textContent = image.getAttribute(ATTRIBUTE_CAPTION);
 
     const imageCaption = ElementModel.assets.imageCaption({
       element: caption,
     });
-    container.appendChild(imageCaption.element);
-    additionalStyles += imageCaption.styles;
+    composite.element.appendChild(imageCaption.element);
+    composite.styles += imageCaption.styles;
   }
 
   if (dateSign) {
@@ -35,30 +65,14 @@ export default (props: {
       element: document.createElement('div'),
     });
 
-    additionalStyles += dateSignContainer.styles;
-    additionalStyles += dateSign.styles;
+    composite.styles += dateSignContainer.styles;
+    composite.styles += dateSign.styles;
     dateSignContainer.element.appendChild(dateSign.element);
-    container.appendChild(dateSignContainer.element);
+    composite.element.appendChild(dateSignContainer.element);
   }
 
-  if (isAspectStandard) {
-    const imageElement = ElementModel.assets.imageAspect({
-      ...props,
-      element: image,
-    });
-    container.appendChild(imageElement.element);
-    additionalStyles += imageElement.styles;
-  } else {
-    container.appendChild(image);
-  }
+  composite.element.appendChild(asset.element);
+  composite.styles += asset.styles;
 
-  const element = ElementModel.assets.imageWrapper({
-    ...props,
-    element: container,
-  });
-
-  return {
-    element: element.element,
-    styles: element.styles + additionalStyles,
-  };
+  return composite;
 };

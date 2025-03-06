@@ -63,36 +63,20 @@ export const elementIconContainer = create.jssObject({
   className: `${classNamePrefix}-element-container`,
   display: 'flex',
   justifyContent: 'flex-end',
-  ...createContainerQuery(media.breakpointValues.medium.min, 'min-width', {
-    marginBottom: `${spacing.lg}`,
-  }),
+  marginBottom: `${spacing.lg}`,
 
   '& *': {
     maxHeight: '120px',
-
-    ...createContainerQuery(media.breakpointValues.small.max, 'max-width', {
-      width: '100px',
-    }),
   },
 });
 
 const iconContainerBase = {
   padding: `${spacing.sm}`,
   paddingBottom: `${spacing.md}`,
-
-  ...createContainerQuery(media.breakpointValues.small.max, 'max-width', {
-    display: 'flex',
-    flexDirection: 'row-reverse',
-  }),
 };
 
 const iconContainerTextBase = {
   height: 'auto',
-
-  ...createContainerQuery(media.breakpointValues.small.max, 'max-width', {
-    width: `calc(100% - 100px)`,
-    paddingRight: `${spacing.md}`,
-  }),
 };
 
 // umd-element-composite-card-overlay-icon-light

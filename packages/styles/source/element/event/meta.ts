@@ -5,8 +5,6 @@ import { create } from '../../utilities';
 // Consistent naming
 const classNamePrefix = 'umd-element-event-meta';
 
-const mobileBreakpoint = 400;
-
 // umd-element-event-meta-container
 export const container = create.jssObject({
   className: `${classNamePrefix}-container`,
@@ -38,7 +36,7 @@ export const wrapper = create.jssObject({
   },
 
   '> *:first-child': {
-    [`@container (min-width: ${mobileBreakpoint}px)`]: {
+    [`@container (min-width: ${media.breakpointValues.medium.max}px)`]: {
       display: 'flex',
     },
 
@@ -48,11 +46,11 @@ export const wrapper = create.jssObject({
     },
 
     '> *:not(:first-child)': {
-      [`@container (min-width: ${mobileBreakpoint}px)`]: {
+      [`@container (min-width: ${media.breakpointValues.medium.max}px)`]: {
         marginLeft: `${spacing.xs}`,
       },
 
-      [`@container (max-width: ${mobileBreakpoint - 1}px)`]: {
+      [`@container (max-width: ${media.breakpointValues.medium.max}px)`]: {
         marginTop: `3px`,
       },
     },
@@ -71,7 +69,7 @@ export const item = create.jssObject({
     width: '18px',
     display: 'flex',
 
-    [`@container (min-width: ${mobileBreakpoint}px)`]: {
+    [`@container (min-width: ${media.breakpointValues.large.min}px)`]: {
       width: '20px',
     },
   },
@@ -80,7 +78,7 @@ export const item = create.jssObject({
     width: '12px',
     height: '12px',
 
-    [`@container (min-width: ${mobileBreakpoint}px)`]: {
+    [`@container (min-width: ${media.breakpointValues.large.min}px)`]: {
       width: '14px',
       height: '14px',
     },

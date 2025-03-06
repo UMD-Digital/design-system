@@ -24,7 +24,6 @@ const baseElements = [
   'alert-page',
   'alert-site',
   'banner-promo',
-  'call-to-action',
   'carousel-cards',
   'carousel',
   'carousel-image',
@@ -112,6 +111,13 @@ const breadcrumb = createElementStyles('umd-element-breadcrumb', {
   defined: {
     display: 'block',
     marginTop: `${spacing.sm}`,
+  },
+});
+
+// Call To ACtion with specific styling
+const action = createElementStyles('umd-element-call-to-action', {
+  defined: {
+    containerType: 'normal',
   },
 });
 
@@ -233,6 +239,7 @@ const socialSharing = createElementStyles(socialSharingTag, {
 export default {
   ...elements,
   ...breadcrumb,
+  ...action,
   ...footer,
   ...navigation,
   ...navigationSticky,

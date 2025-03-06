@@ -50,10 +50,21 @@ const createTextStyles = (customStyles = {}) => {
 const createContainerStyles = (customStyles = {}) => {
   return {
     maxWidth: `${spacing.maxWidth.smallest}`,
-    padding: `${spacing.md}`,
+
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    padding: `${spacing.lg} ${spacing.md}`,
+    paddingTop: `${spacing['4xl']}`,
     height: '100%',
     overflow: 'hidden',
     position: 'relative',
+    minHeight: '360px',
+
+    ...createContainerQuery(media.breakpointValues.medium.min, 'min-width', {
+      paddingTop: `${spacing['8xl']}`,
+      minHeight: `450px`,
+    }),
     ...customStyles,
   };
 };
@@ -73,22 +84,7 @@ export const quoateContainer = create.jssObject({
 // umd-element-composite-card-overlay-image-tint
 export const tint = create.jssObject({
   className: `${classNamePrefix}`,
-  ...createContainerStyles({
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    paddingBottom: `${spacing.lg}`,
-    paddingTop: `${spacing['4xl']}`,
-
-    ...createContainerQuery(media.breakpointValues.small.max, 'max-width', {
-      minHeight: '360px',
-    }),
-
-    ...createContainerQuery(media.breakpointValues.medium.min, 'min-width', {
-      paddingTop: `${spacing['8xl']}`,
-      minHeight: `450px`,
-    }),
-  }),
+  ...createContainerStyles({}),
   ...createTextStyles({
     height: 'auto',
   }),

@@ -12,6 +12,7 @@ const createElementStyles = (
   },
   [`${elementName}:defined`]: {
     display: 'block',
+    containerType: 'inline-size',
     ...additionalStyles.defined,
   },
 
@@ -68,6 +69,8 @@ const elements = {
       height: '25vw',
       zIndex: '9',
       overflow: 'clip',
+      containerType: 'normal',
+
       [`@media (${media.queries.highDef.min})`]: {
         top: '-11vw',
         height: '50vw',
@@ -126,7 +129,11 @@ const navigation = {
   ...['nav-item', 'navigation-header'].reduce(
     (acc, name) => ({
       ...acc,
-      ...createElementStyles(`umd-element-${name}`),
+      ...createElementStyles(`umd-element-${name}`, {
+        defined: {
+          containerType: 'normal',
+        },
+      }),
     }),
     {},
   ),

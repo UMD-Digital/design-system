@@ -7,7 +7,6 @@ import { CardOverlayProps } from '../_types';
 const elementStyles: Record<string, any> = {
   element: {
     className: 'card-block-overall-container',
-    containerType: 'inline-size',
     height: '100%',
   },
 };

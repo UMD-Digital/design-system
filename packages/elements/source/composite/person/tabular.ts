@@ -150,7 +150,7 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
   ${OverwriteWithImageStyles}
 `;
 
-const CreatePersonTabularElement = (props: TypeTabularPersonProps) => {
+export default (props: TypeTabularPersonProps) => {
   const { isThemeDark, image } = props;
   const personContainer = PersonTextContainer.CreateElement({
     ...props,
@@ -163,6 +163,7 @@ const CreatePersonTabularElement = (props: TypeTabularPersonProps) => {
     imageContainer,
     isThemeDark,
   });
+  let styles = STYLES_PERSON_TABULAR_ELEMENT;
 
   if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
@@ -170,10 +171,5 @@ const CreatePersonTabularElement = (props: TypeTabularPersonProps) => {
   elementContainer.classList.add(ELEMENT_PERSON_TABULAR_CONTAINER);
   if (imageContainer) elementContainer.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreatePersonTabularElement,
-  Styles: STYLES_PERSON_TABULAR_ELEMENT,
+  return { element: elementContainer, styles };
 };

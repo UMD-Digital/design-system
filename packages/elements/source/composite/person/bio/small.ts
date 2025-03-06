@@ -118,11 +118,12 @@ const STYLES_PERSON_BIO_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreatePersonBioElement = (props: TypePersonBioProps) => {
+export default (props: TypePersonBioProps) => {
   const { isThemeDark, image, description } = props;
   const elementContainer = document.createElement('div');
   const wrapper = document.createElement('div');
   const textContainer = PersonTextContainer.CreateElement(props);
+  let styles = STYLES_PERSON_BIO_ELEMENT;
 
   wrapper.classList.add(ELEMENT_PERSON_BIO_WRAPPER);
   if (image) wrapper.appendChild(image);
@@ -138,10 +139,5 @@ const CreatePersonBioElement = (props: TypePersonBioProps) => {
   elementContainer.classList.add(ELEMENT_PERSON_BIO_CONTAINER);
   if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreatePersonBioElement,
-  Styles: STYLES_PERSON_BIO_ELEMENT,
+  return { element: elementContainer, styles };
 };

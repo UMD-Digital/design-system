@@ -83,7 +83,7 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
   ${OverwriteThemeDarkStyles}
 `;
 
-const CreatePersonBlockElement = (props: TypeBlockPersonProps) => {
+export default (props: TypeBlockPersonProps) => {
   const { isThemeDark, image: providedImage } = props;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');
@@ -91,6 +91,7 @@ const CreatePersonBlockElement = (props: TypeBlockPersonProps) => {
   const imageContainer = PersonImage.CreateElement({
     image: providedImage || Utility.asset.icon.PERSON,
   });
+  let styles = STYLES_PERSON_BLOCK_ELEMENT;
 
   if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
@@ -101,10 +102,5 @@ const CreatePersonBlockElement = (props: TypeBlockPersonProps) => {
   elementContainer.appendChild(elementWrapper);
   elementContainer.classList.add(ELEMENT_PERSON_BLOCK_CONTAINER);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreatePersonBlockElement,
-  Styles: STYLES_PERSON_BLOCK_ELEMENT,
+  return { element: elementContainer, styles };
 };

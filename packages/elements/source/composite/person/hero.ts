@@ -384,7 +384,7 @@ const CreateTextContainer = ({ name, job, subText }: TypeTextContainer) => {
   return container;
 };
 
-const CreatePersonHeroElement = (props: TypePersonHeroProps) => {
+export default (props: TypePersonHeroProps) => {
   const { isThemeDark, breadcrumbMobile, breadcrumbDesktop } = props;
   const elementContainer = document.createElement('div');
   const elementLock = document.createElement('div');
@@ -392,6 +392,7 @@ const CreatePersonHeroElement = (props: TypePersonHeroProps) => {
   const textColumns = document.createElement('div');
   const textContainer = CreateTextContainer(props);
   const imageBlock = CreateImageBlock(props);
+  let styles = STYLES_PERSON_HERO_ELEMENT;
 
   textColumns.appendChild(textContainer);
   textColumns.classList.add(ELEMENT_PERSON_HERO_TEXT_COLUMN);
@@ -424,10 +425,5 @@ const CreatePersonHeroElement = (props: TypePersonHeroProps) => {
     elementContainer.appendChild(mainBreadcrumb);
   }
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreatePersonHeroElement,
-  Styles: STYLES_PERSON_HERO_ELEMENT,
+  return { element: elementContainer, styles };
 };

@@ -82,7 +82,7 @@ const STYLES_PERSON_LIST_ELEMENT = `
   ${OverwriteThemeDarkStyles}
 `;
 
-const CreatePersonListElement = (props: TypeListPersonProps) => {
+export default (props: TypeListPersonProps) => {
   const { isThemeDark, image } = props;
   const personContainer = PersonTextContainer.CreateElement(props);
   const elementContainer = document.createElement('div');
@@ -92,16 +92,12 @@ const CreatePersonListElement = (props: TypeListPersonProps) => {
     imageContainer,
     isThemeDark,
   });
+  let styles = STYLES_PERSON_LIST_ELEMENT;
 
   if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   elementContainer.appendChild(container);
   elementContainer.classList.add(ELEMENT_PERSON_LIST_CONTAINER);
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreatePersonListElement,
-  Styles: STYLES_PERSON_LIST_ELEMENT,
+  return { element: elementContainer, styles };
 };

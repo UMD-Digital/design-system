@@ -1,37 +1,13 @@
-declare global {
-  interface Window {
-    UMDPersonHeroElement: typeof UMDPersonHeroElement;
-  }
-}
-
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
+import { Markup } from 'utilities';
 import { CommonPersonData } from './common';
+
+const tagName = 'umd-element-person-hero';
 
 const { Node } = Markup.create;
 
-const ELEMENT_NAME = 'umd-element-person-hero';
-
-export const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.reset}
-  ${Composite.person.hero.Styles}
-`;
-
-const styleTemplate = Node.stylesTemplate({
-  styles,
-});
-
-export const CreateShadowDom = ({
-  element,
-}: {
-  element: UMDPersonHeroElement;
-}) => {
-  const shadow = element.shadowRoot as ShadowRoot;
+const createComponent = (element: HTMLElement) => {
   const isThemeDark = Attributes.isTheme.dark({
     element,
   });
@@ -49,36 +25,19 @@ export const CreateShadowDom = ({
     }
   }
 
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-
-  shadow.appendChild(
-    Composite.person.hero.CreateElement({
-      ...CommonPersonData({ element, isThemeDark }),
-      breadcrumbDesktop: Node.slot({ type: Slots.name.BREADCRUMB }),
-      breadcrumbMobile: Node.slot({ type: Slots.name.BREADCRUMB_COPY }),
-    }),
-  );
+  return Composite.person.hero({
+    ...CommonPersonData({ element, isThemeDark }),
+    breadcrumbDesktop: Node.slot({ type: Slots.name.BREADCRUMB }),
+    breadcrumbMobile: Node.slot({ type: Slots.name.BREADCRUMB_COPY }),
+  });
 };
 
-export class UMDPersonHeroElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 export default () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDPersonHeroElement = UMDPersonHeroElement;
-    window.customElements.define(ELEMENT_NAME, UMDPersonHeroElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+    }),
+  });
 };

@@ -1,7 +1,2 @@
-import { default as full } from './full';
-import { default as small } from './small';
-
-export default {
-  full,
-  small,
-};
+export { default as full } from './full';
+export { default as small } from './small';

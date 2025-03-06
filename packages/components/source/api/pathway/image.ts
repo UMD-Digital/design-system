@@ -98,14 +98,14 @@ const createComponent = (element: HTMLElement) => {
   };
 
   if (type === Attributes.values.display.HERO) {
-    return Composite.pathway.hero.CreateElement({
+    return Composite.pathway.hero({
       ...MakeCommonDefaultData({ element, ...themes }),
       includesAnimation,
     });
   }
 
   if (type === Attributes.values.display.OVERLAY) {
-    return Composite.pathway.overlay.CreateElement({
+    return Composite.pathway.overlay({
       isImageScaled,
       ...themes,
       includesAnimation,
@@ -114,14 +114,14 @@ const createComponent = (element: HTMLElement) => {
   }
 
   if (type === Attributes.values.display.STICKY) {
-    return Composite.pathway.sticky.CreateElement({
+    return Composite.pathway.sticky({
       isThemeDark: Attributes.isTheme.dark({ element }),
       isImageScaled,
       ...MakeCommonDefaultData({ element, ...themes }),
     });
   }
 
-  return Composite.pathway.standard.CreateElement({
+  return Composite.pathway.standard({
     ...themes,
     isImageScaled,
     includesAnimation,

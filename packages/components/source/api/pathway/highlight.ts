@@ -8,7 +8,7 @@ const { SlotWithDefaultStyling } = Markup.create;
 const tagName = 'umd-element-pathway-highlight';
 
 const createComponent = (element: HTMLElement) =>
-  Composite.pathway.highlight.CreateElement({
+  Composite.pathway.highlight({
     ...CommonPathwayData({
       element,
     }),

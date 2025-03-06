@@ -250,7 +250,7 @@ const Animation = ({
   }
 };
 
-const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
+export default (props: TypePathwayDefaultProps) => {
   const {
     isImageRight = true,
     includesAnimation,
@@ -302,8 +302,4 @@ const CreatePathwayDefaultElement = (props: TypePathwayDefaultProps) => {
       loadAnimation,
     },
   };
-};
-
-export default {
-  CreateElement: CreatePathwayDefaultElement,
 };

@@ -274,7 +274,7 @@ const STYLES_PATHWAY_HERO_ELEMENT = `
   ${OverwriteImageLeftStyles}
 `;
 
-const CreatePathwayHeroElement = (element: TypePathwayHeroProps) => {
+export default (element: TypePathwayHeroProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
@@ -317,8 +317,4 @@ const CreatePathwayHeroElement = (element: TypePathwayHeroProps) => {
     element: container,
     styles,
   };
-};
-
-export default {
-  CreateElement: CreatePathwayHeroElement,
 };

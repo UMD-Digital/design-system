@@ -163,7 +163,7 @@ const STYLES_PATHWAY_STICKY_ELEMENT = `
   ${OverwriteImagePositionStyles}
 `;
 
-const CreatePathwayStickyElement = (props: TypePathwayStickyProps) => {
+export default (props: TypePathwayStickyProps) => {
   const { isImageRight = true, isThemeDark, includedStyles } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -204,8 +204,4 @@ const CreatePathwayStickyElement = (props: TypePathwayStickyProps) => {
     element: container,
     styles,
   };
-};
-
-export default {
-  CreateElement: CreatePathwayStickyElement,
 };

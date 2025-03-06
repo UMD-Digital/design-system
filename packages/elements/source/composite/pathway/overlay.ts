@@ -368,7 +368,7 @@ const Animation = ({
   }
 };
 
-const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
+export default (element: TypePathwayOverlayProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
@@ -428,8 +428,4 @@ const CreatePathwayOverlayElement = (element: TypePathwayOverlayProps) => {
       loadAnimation,
     },
   };
-};
-
-export default {
-  CreateElement: CreatePathwayOverlayElement,
 };

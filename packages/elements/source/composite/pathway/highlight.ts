@@ -211,7 +211,7 @@ const CreateHighlightColumn = ({
   return container;
 };
 
-const CreatePathwayHighlightElement = (element: TypePathwayHighlightProps) => {
+export default (element: TypePathwayHighlightProps) => {
   const { isThemeDark } = element;
   const container = document.createElement('div');
   const lock = document.createElement('div');
@@ -231,8 +231,4 @@ const CreatePathwayHighlightElement = (element: TypePathwayHighlightProps) => {
 
   container.appendChild(lock);
   return { element: container, styles };
-};
-
-export default {
-  CreateElement: CreatePathwayHighlightElement,
 };

@@ -98,7 +98,7 @@ export interface CardListProps
 /**
  * Properties specific to overlay cards with color background
  */
-export interface CardOverlayProps extends CardBaseProps {
+export interface CardOverlayProps extends CardBaseProps, CardEventProps {
   /** Icon to display with CTA */
   ctaIcon?: CardContentElement;
 

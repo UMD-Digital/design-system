@@ -5,7 +5,6 @@ import { Markup } from 'utilities';
 const tagName = 'umd-element-event';
 
 const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
-  image: Slots.assets.image({ element }) as HTMLImageElement,
   headline: Slots.headline.default({ element }),
   text: Slots.text.default({ element }),
   actions: Slots.actions.default({ element }),
@@ -34,6 +33,8 @@ const createComponent = (element: HTMLElement) => {
     return { element: document.createElement('div'), styles: '' };
   }
 
+  // construct events meta
+
   const EventDetailsData = Markup.event.createDetailsData({
     locationElement: locationSlot,
     startDate,
@@ -42,55 +43,26 @@ const createComponent = (element: HTMLElement) => {
 
   const EventDetailMeta = { ...EventDetailsData, showTime };
 
+  // construct event sign
+
   const EventSignData = Markup.event.createDetailsData({
     locationElement: locationSlot,
     startDate,
     endDate,
   });
 
-  const eventDetails =
-    Composite.event.elements.meta.CreateElement(EventDetailMeta);
-
-  const eventDetailsDark = Composite.event.elements.meta.CreateElement({
-    ...EventDetailMeta,
-    isThemeDark: true,
-  });
-
-  const eventMetaAtomic = Atomic.events.meta({
-    ...EventDetailMeta,
-    isThemeDark,
-  });
-
-  const dateSign = Composite.event.elements.sign.CreateElement(EventSignData);
-
-  const dateSignAtomic = Atomic.events.sign({
-    ...EventSignData,
-    isThemeDark,
-  });
-
-  const dateSignAtomicLarge = Atomic.events.sign({
-    ...EventSignData,
-    isThemeDark,
-    isLargeSize: true,
-  });
-
-  const dateSignLarge = Composite.event.elements.sign.CreateElement({
-    ...EventSignData,
-    isLargeSize: true,
-  });
-
-  const dateSignLargeDark = Composite.event.elements.sign.CreateElement({
-    ...EventSignData,
-    isLargeSize: true,
-    isThemeDark: true,
-  });
+  // Display options
 
   if (Attributes.isDisplay.feature({ element })) {
     return Composite.card.block({
       ...MakeCommonData({ element }),
+      image: Slots.assets.image({ element }) as HTMLImageElement,
       eyebrow: Slots.eyebrow.default({ element }),
       hasEyebrowRibbon: true,
-      eventMeta: eventMetaAtomic,
+      eventMeta: Atomic.events.meta({
+        ...EventDetailMeta,
+        isThemeDark,
+      }),
       dateSign: Atomic.events.sign({
         ...EventSignData,
         isThemeDark: false,
@@ -100,24 +72,43 @@ const createComponent = (element: HTMLElement) => {
   }
 
   if (Attributes.isDisplay.promo({ element })) {
-    return Composite.event.promo({
+    return Composite.card.overlay.image({
       ...MakeCommonData({ element }),
-      eventDetails: eventDetails,
-      dateSign,
+      backgroundImage: Slots.assets.image({ element }) as HTMLImageElement,
+      eventMeta: Atomic.events.meta({
+        ...EventDetailMeta,
+        isThemeDark: true,
+      }),
+      dateSign: Atomic.events.sign({
+        ...EventSignData,
+        isThemeDark,
+      }),
     });
   }
 
   if (Attributes.isDisplay.list({ element })) {
     return Composite.card.list({
       ...MakeCommonData({ element }),
-      eventMeta: eventMetaAtomic,
-      dateSign: dateSignAtomicLarge,
+      image: Slots.assets.image({ element }) as HTMLImageElement,
+      eventMeta: Atomic.events.meta({
+        ...EventDetailMeta,
+        isThemeDark,
+      }),
+      dateSign: Atomic.events.sign({
+        ...EventSignData,
+        isThemeDark,
+        isLargeSize: true,
+      }),
     });
   }
 
   return Composite.card.block({
     ...MakeCommonData({ element }),
-    eventMeta: eventMetaAtomic,
+    image: Slots.assets.image({ element }) as HTMLImageElement,
+    eventMeta: Atomic.events.meta({
+      ...EventDetailMeta,
+      isThemeDark,
+    }),
   });
 };
 

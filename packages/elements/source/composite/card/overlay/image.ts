@@ -13,7 +13,7 @@ const elementStyles: Record<string, any> = {
 };
 
 export default (props: CardOverlayProps) => {
-  const { isQuote, ctaIcon, backgroundImage, text } = props;
+  const { isQuote, ctaIcon, dateSign, backgroundImage, text } = props;
 
   if (ctaIcon) {
     elementStyles.element.paddingRight = `${Styles.token.spacing['2xl']}`;
@@ -49,6 +49,28 @@ export default (props: CardOverlayProps) => {
     ...props,
     isThemeDark: true,
   });
+
+  if (dateSign) {
+    const dataWrapper = ElementModel.layout.backgroundBoxWhite({
+      element: document.createElement('div'),
+      elementStyles: {
+        element: {
+          alignSelf: `flex-start`,
+        },
+        siblingAfter: {
+          marginTop: `${Styles.token.spacing.min}`,
+        },
+      },
+    });
+    dataWrapper.element.appendChild(dateSign.element);
+
+    textLockupElement.element.insertBefore(
+      dataWrapper.element,
+      textLockupElement.element.firstChild,
+    );
+    composite.styles += dataWrapper.styles;
+    composite.styles += dateSign.styles;
+  }
 
   if (isQuote) {
     const quoteWrapper = ElementModel.composite.card.overlay.elementQuote({

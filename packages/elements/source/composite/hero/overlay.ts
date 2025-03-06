@@ -199,8 +199,7 @@ export const STYLES_HERO_OVERLAY_ELEMENT = `
   ${OverwriteTextContainer}
   ${OverwriteImageContainer}
 `;
-
-export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
+export default (element: TypeHeroOverlayProps) => {
   const { includesAnimation } = element;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
@@ -226,8 +225,4 @@ export const CreateHeroOverlayElement = (element: TypeHeroOverlayProps) => {
   declaration.appendChild(container);
 
   return { element: declaration, styles };
-};
-
-export default {
-  CreateElement: CreateHeroOverlayElement,
 };

@@ -152,7 +152,7 @@ const STYLES_HERO_LOGO_ELEMENT = `
   ${OverwriteTheme}
 `;
 
-export const CreateHeroLogoElement = (element: TypeHeroLogoProps) => {
+export default (element: TypeHeroLogoProps) => {
   const { isThemeDark } = element;
 
   const declaration = document.createElement('div');
@@ -180,8 +180,4 @@ export const CreateHeroLogoElement = (element: TypeHeroLogoProps) => {
   declaration.appendChild(container);
 
   return { element: declaration, styles };
-};
-
-export default {
-  CreateElement: CreateHeroLogoElement,
 };

@@ -5,7 +5,7 @@ import { CommonHeroData } from './common';
 const tagName = 'umd-element-hero-minimal';
 
 const createComponent = (element: HTMLElement) =>
-  Composite.hero.minimal.CreateElement({
+  Composite.hero.minimal({
     isThemeDark: Attributes.isTheme.dark({
       element,
     }),

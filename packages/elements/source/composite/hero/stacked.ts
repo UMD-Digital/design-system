@@ -236,7 +236,7 @@ export const STYLES_HERO_STACKED_ELEMENT = `
   ${OverwriteImageContainer}
 `;
 
-export const CreateHeroStackedElement = (element: TypeHeroStackedProps) => {
+export default (element: TypeHeroStackedProps) => {
   const { isWithLock, includesAnimation } = element;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
@@ -283,8 +283,4 @@ export const CreateHeroStackedElement = (element: TypeHeroStackedProps) => {
   declaration.appendChild(container);
 
   return { element: declaration, styles };
-};
-
-export default {
-  CreateElement: CreateHeroStackedElement,
 };

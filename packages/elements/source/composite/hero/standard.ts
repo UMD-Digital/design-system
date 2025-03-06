@@ -304,7 +304,7 @@ export const STYLES_HERO_DEFAULT_ELEMENT = `
   ${OverwriteTextContainer}
 `;
 
-export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
+export default (element: TypeHeroDefaultProps) => {
   const { headline, isTextCenter, isInterior, videoRef, includesAnimation } =
     element;
   const declaration = document.createElement('div');
@@ -346,8 +346,4 @@ export const CreateHeroDefaultElement = (element: TypeHeroDefaultProps) => {
     element: declaration,
     styles,
   };
-};
-
-export default {
-  CreateElement: CreateHeroDefaultElement,
 };

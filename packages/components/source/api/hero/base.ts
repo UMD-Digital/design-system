@@ -58,26 +58,26 @@ const createComponent = (element: HTMLElement) => {
     type === Attributes.values.display.STACKED ||
     type === Attributes.values.layout.STACKED_INTERIOR
   ) {
-    return Composite.hero.stacked.CreateElement({
+    return Composite.hero.stacked({
       ...MakeHeroData({ element }),
       videoRef,
     });
   }
 
   if (type === Attributes.values.display.MINIMAL) {
-    return Composite.hero.minimal.CreateElement({
+    return Composite.hero.minimal({
       ...MakeHeroData({ element }),
     });
   }
 
   if (type === Attributes.values.display.OVERLAY) {
-    return Composite.hero.overlay.CreateElement({
+    return Composite.hero.overlay({
       ...MakeHeroData({ element }),
       videoRef,
     });
   }
 
-  return Composite.hero.standard.CreateElement({
+  return Composite.hero.standard({
     ...MakeHeroData({ element }),
     videoRef,
   });

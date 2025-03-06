@@ -191,7 +191,7 @@ export const STYLES_HERO_MINIMAL_ELEMENT = `
   ${OverwriteTheme}
 `;
 
-export const CreateHeroMinimalElement = (element: TypeHeroMinimalProps) => {
+export default (element: TypeHeroMinimalProps) => {
   const { isThemeDark, isThemeLight, isThemeMaryland } = element;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
@@ -228,8 +228,4 @@ export const CreateHeroMinimalElement = (element: TypeHeroMinimalProps) => {
   declaration.appendChild(container);
 
   return { element: declaration, styles };
-};
-
-export default {
-  CreateElement: CreateHeroMinimalElement,
 };

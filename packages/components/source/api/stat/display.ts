@@ -1,30 +1,15 @@
-declare global {
-  interface Window {
-    UMDStatElement: typeof UMDStatElement;
-  }
-}
-
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
+import { Markup } from 'utilities';
+
+const tagName = 'umd-element-stat';
 
 const { SlotWithDefaultStyling } = Markup.create;
 
-const ELEMENT_NAME = 'umd-element-stat';
-
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.reset}
-  ${Composite.stat.display.Styles}
-`;
-
-const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
+const createComponent = (element: HTMLElement) => {
   const lineAttr = element.hasAttribute(Attributes.names.OPTIONAL_HAS_LINE);
 
-  return Composite.stat.display.CreateElement({
+  return Composite.stat.display({
     isThemeDark: Attributes.isTheme.dark({ element }),
     displayType: element.getAttribute(Attributes.names.DISPLAY_TYPE),
     size: element.getAttribute(Attributes.names.DISPLAY_SIZE),
@@ -35,28 +20,12 @@ const CreateShadowDom = ({ element }: { element: HTMLElement }) => {
   });
 };
 
-export class UMDStatElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    const template = Markup.create.Node.stylesTemplate({ styles });
-
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
-  }
-
-  connectedCallback() {
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
-  }
-}
-
 export default () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDStatElement = UMDStatElement;
-    window.customElements.define(ELEMENT_NAME, UMDStatElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+    }),
+  });
 };

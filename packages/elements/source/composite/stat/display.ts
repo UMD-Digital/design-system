@@ -316,10 +316,11 @@ const MakeDefaultLayout = (props: TypeStatRequirements) => {
   return wrapper;
 };
 
-export const CreateStatElement = (props: TypeStatRequirements) => {
+export default (props: TypeStatRequirements) => {
   const { displayType, hasLine } = props;
   const container = document.createElement('div');
   const wrapper = MakeDefaultLayout(props);
+  let styles = STYLES_STAT_ELEMENT;
 
   container.classList.add(ELEMENT_STAT_CONTAINER);
 
@@ -330,16 +331,11 @@ export const CreateStatElement = (props: TypeStatRequirements) => {
     block.appendChild(wrapper);
 
     container.appendChild(block);
-    return container;
+    return { element: container, styles };
   }
 
   if (hasLine) wrapper.setAttribute(ATTRIBUTE_HAS_LINE, '');
   container.appendChild(wrapper);
 
-  return container;
-};
-
-export default {
-  CreateElement: CreateStatElement,
-  Styles: STYLES_STAT_ELEMENT,
+  return { element: container, styles };
 };

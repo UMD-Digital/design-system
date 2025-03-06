@@ -12,8 +12,7 @@ const elementStyles = {
 
 export default (props: CardListProps) => {
   const { image, isAligned, dateSign } = props;
-  const containerQuery = document.createElement('div');
-  const composite = ElementModel.composite.cardList({
+  const composite = ElementModel.composite.card.list({
     ...props,
     isDisplayEvent: dateSign ? true : false,
     elementStyles,
@@ -27,19 +26,17 @@ export default (props: CardListProps) => {
       isScaled: true,
       isAspectStandard: isAligned,
     });
-    containerQuery.appendChild(imageContainer.element);
+    composite.element.appendChild(imageContainer.element);
     composite.styles += imageContainer.styles;
   }
 
-  containerQuery.appendChild(textLockupElement.element);
+  composite.element.appendChild(textLockupElement.element);
   composite.styles += textLockupElement.styles;
 
   if (dateSign) {
-    containerQuery.appendChild(dateSign.element);
+    composite.element.appendChild(dateSign.element);
     composite.styles += dateSign.styles;
   }
-
-  composite.element.appendChild(containerQuery);
 
   return composite;
 };

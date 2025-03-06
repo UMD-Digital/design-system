@@ -23,7 +23,7 @@ export default (props: CardOverlayProps) => {
     elementStyles.element.paddingRight = `${Styles.token.spacing['2xl']}`;
   }
 
-  const composite = ElementModel.composite.cardOverlay({
+  const composite = ElementModel.composite.card.overlay.color({
     ...props,
     element: document.createElement('div'),
     elementStyles,

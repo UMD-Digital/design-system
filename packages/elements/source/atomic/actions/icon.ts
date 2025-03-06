@@ -86,6 +86,11 @@ const STYLES_OVERLAY_CARD_CTA_ICON_ELEMENT = `
     transition: background-color 0.3s ease-in-out;
   }
 
+  .${ELEMENT_CTA_ICON_CONTAINER} svg,
+  .${ELEMENT_CTA_ICON_CONTAINER} path {
+    fill: ${token.color.gray.darker};
+  }
+
   ${OverwriteThemeLight}
   ${OverwriteThemeDark}
 `;

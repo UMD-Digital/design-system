@@ -14,8 +14,7 @@ const elementStyles = {
 
 export default (props: CardBlockProps) => {
   const { newsId, image, isAligned, dateSign } = props;
-  const containerQuery = document.createElement('div');
-  const composite = ElementModel.composite.cardBlock({
+  const composite = ElementModel.composite.card.block({
     ...props,
     elementStyles,
     element: document.createElement('div'),
@@ -33,14 +32,12 @@ export default (props: CardBlockProps) => {
       isAspectStandard: isAligned,
       dateSign,
     });
-    containerQuery.appendChild(imageContainer.element);
+    composite.element.appendChild(imageContainer.element);
     composite.styles += imageContainer.styles;
   }
 
-  containerQuery.appendChild(textLockupElement.element);
+  composite.element.appendChild(textLockupElement.element);
   composite.styles += textLockupElement.styles;
-
-  composite.element.appendChild(containerQuery);
 
   return composite;
 };

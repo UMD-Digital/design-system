@@ -21,7 +21,7 @@ export type TypeTextLockupSmall = TypeTheme & {
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
   eventMeta?: { element: HTMLElement; styles: string };
-  isEyebrowRibbon?: boolean;
+  hasEyebrowRibbon?: boolean;
 };
 
 const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';

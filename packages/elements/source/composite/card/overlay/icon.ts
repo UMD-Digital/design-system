@@ -17,16 +17,15 @@ const elementStyles = {
 
 export default (props: TypeBlockCardIconProps) => {
   const { image } = props;
-  const composite = ElementModel.composite.cardOverlay({
+  const composite = ElementModel.composite.card.overlay.icon({
     ...props,
-    isCardIcon: true,
     elementStyles,
     element: document.createElement('div'),
   });
   const textContainer = textLockup.small(props);
 
   if (image) {
-    const imageContainer = ElementModel.composite.cardOverlayIcon({
+    const imageContainer = ElementModel.composite.card.overlay.elementIcon({
       ...props,
       element: document.createElement('div'),
     });

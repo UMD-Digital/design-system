@@ -28,7 +28,7 @@ const createComponent = (element: HTMLElement) => {
   if (Attributes.isLayout.image({ element })) {
     const ImageOverlay = Composite.card.overlay.image({
       ...MakeOverlayContent({ element }),
-      image: Slots.assets.image({ element }) as HTMLImageElement,
+      backgroundImage: Slots.assets.image({ element }) as HTMLImageElement,
     });
 
     if (ImageOverlay) {
@@ -46,6 +46,9 @@ export default () => {
       tagName,
       slots,
       createComponent,
+      afterConnect: (element) => {
+        element?.events?.load();
+      },
     }),
   });
 };

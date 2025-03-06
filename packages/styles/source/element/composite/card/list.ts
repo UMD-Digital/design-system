@@ -56,7 +56,7 @@ const createImageStyles = (customStyles = {}) => {
 
 const createTextStyles = (customStyles = {}) => {
   return {
-    [`& > div > *:nth-child(2)`]: {
+    [`& > *:nth-child(2)`]: {
       flex: '1 0',
 
       ...createContainerQuery(mediumBreakpointStart, 'min-width', {
@@ -74,7 +74,7 @@ const createTextStyles = (customStyles = {}) => {
 
 const createEventStyles = (customStyles = {}) => {
   return {
-    [`& > div > *:last-child:not(.${image.wrapperScaled.className})`]: {
+    [`& > *:last-child:not(.${image.wrapperScaled.className})`]: {
       width: `${spacing.xl}`,
       order: 1,
       alignSelf: 'flex-start',
@@ -92,7 +92,7 @@ const createEventStyles = (customStyles = {}) => {
 
 const createWrapperStyles = (customStyles = {}) => {
   return {
-    [`&:has(img) > div`]: {
+    [`&:has(img)`]: {
       ...createContainerQuery(mediumBreakpointStart, 'min-width', {
         display: 'flex',
         justifyContent: 'space-between',

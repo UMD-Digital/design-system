@@ -135,7 +135,7 @@ const CreateNewsFeedDisplay = ({
   const overlayCardType = ({ entry }: { entry: ArticleType }) =>
     Composite.card.overlay.image({
       ...CommonDisplay({ entry, isThemeDark }),
-      image: CreateImage({ images: entry.image }),
+      backgroundImage: CreateImage({ images: entry.image }),
     })?.element;
 
   const listCardType = ({ entry }: { entry: ArticleType }) => {
@@ -151,7 +151,7 @@ const CreateNewsFeedDisplay = ({
 
       const overlayCard = Composite.card.overlay.image({
         ...CommonDisplay({ entry: entriesCopy[0], isThemeDark }),
-        image: CreateImage({ images: entriesCopy[0].image }),
+        backgroundImage: CreateImage({ images: entriesCopy[0].image }),
       })?.element;
 
       if (overlayCard) {

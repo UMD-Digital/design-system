@@ -56,7 +56,7 @@ const createImageStyles = (customStyles = {}) => {
 
 const createTextStyles = (customStyles = {}) => {
   return {
-    [`& > div > div:not(.${image.wrapperScaled.className})`]: {
+    [`& > div:not(.${image.wrapperScaled.className})`]: {
       ...createContainerQuery(mediumBreakpointStart, 'min-width', {
         paddingTop: spacing.md,
       }),

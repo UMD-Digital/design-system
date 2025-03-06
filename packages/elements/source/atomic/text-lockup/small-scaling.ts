@@ -19,7 +19,7 @@ export type TypeTextLockupSmallScaling = {
   actions?: HTMLElement | null;
   eventMeta?: { element: HTMLElement; styles: string };
   isThemeDark?: boolean;
-  isEyebrowRibbon?: boolean;
+  hasEyebrowRibbon?: boolean;
 };
 
 const ELEMENT_SCALABLE_FONT_CONTAINER = 'scaling-font-block-container';
@@ -75,7 +75,7 @@ export default (props: TypeTextLockupSmallScaling) => {
     actions,
     eventMeta,
     isThemeDark,
-    isEyebrowRibbon = false,
+    hasEyebrowRibbon = false,
   } = props;
   const container = document.createElement('div');
   let styles = `
@@ -84,13 +84,13 @@ export default (props: TypeTextLockupSmallScaling) => {
 
   container.classList.add(ELEMENT_SCALABLE_FONT_CONTAINER);
 
-  if (eyebrow && !isEyebrowRibbon) {
+  if (eyebrow && !hasEyebrowRibbon) {
     const styledEyebrow = createEyebrow({ eyebrow, isThemeDark });
     container.appendChild(styledEyebrow.element);
     styles += styledEyebrow.styles;
   }
 
-  if (eyebrow && isEyebrowRibbon) {
+  if (eyebrow && hasEyebrowRibbon) {
     const styledEyebrow = createRibbonEyebrow({ eyebrow });
     container.appendChild(styledEyebrow.element);
     styles += styledEyebrow.styles;

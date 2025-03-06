@@ -103,7 +103,10 @@ export interface CardOverlayProps extends CardBaseProps {
   ctaIcon?: CardContentElement;
 
   /** Background image */
-  backgroundImage?: CardImageElement;
+  backgroundImage?: CardImageOrLinkElement;
+
+  /** Display with quote icon */
+  isQuote?: boolean;
 }
 
 /**

@@ -3,7 +3,6 @@ import { newsProps } from '../_types';
 
 export const CommonFeedNewsData = ({
   element,
-  numberOfColumnsToShowDefault = 1,
   numberOfRowsToStartDefault = 5,
 }: {
   element: HTMLElement;
@@ -27,15 +26,11 @@ export const CommonFeedNewsData = ({
   const numberOfRowsToStart =
     Number(element.getAttribute(Attributes.names.FEED_ROW_COUNT)) ||
     numberOfRowsToStartDefault;
-  const numberOfColumnsToShow =
-    Number(element.getAttribute(Attributes.names.FEED_COLUMN_COUNT)) ||
-    numberOfColumnsToShowDefault;
 
   const data: newsProps = {
     token,
     isThemeDark,
     numberOfRowsToStart,
-    numberOfColumnsToShow,
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
     isUnion: Attributes.isData.union({ element }),
   };

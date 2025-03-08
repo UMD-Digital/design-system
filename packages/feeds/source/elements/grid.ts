@@ -1,3 +1,4 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { Model } from '@universityofmaryland/web-elements-library';
 
 // @media (${token.media.queries.large.min}) {
@@ -13,13 +14,7 @@ import { Model } from '@universityofmaryland/web-elements-library';
 //   }
 // }
 
-const elementStyles = {
-  element: {
-    [` *`]: {
-      minHeight: '560px',
-    },
-  },
-};
+const elementStyles: Record<string, any> = {};
 
 export default ({
   count = 2,
@@ -27,8 +22,29 @@ export default ({
 }: {
   count?: number;
   isTypeGap?: boolean;
-}) =>
-  Model.ElementModel.layout.grid({
+}) => {
+  if (count === 1) {
+    elementStyles.element = {
+      gridGap: `${Styles.token.spacing.md}`,
+    };
+
+    return Model.ElementModel.layout.gridStacked({
+      element: document.createElement('div'),
+      elementStyles,
+    });
+  }
+
+  // if (!isTypeGap) {
+  //   elementStyles.element = {
+  //     [` > *`]: {
+  //       [`@media (${Styles.token.media.queries.large.min})`]: {
+  //         minHeight: '560px',
+  //       },
+  //     },
+  //   };
+  // }
+
+  return Model.ElementModel.layout.grid({
     element: document.createElement('div'),
     elementStyles,
     isGap: isTypeGap,
@@ -36,3 +52,4 @@ export default ({
     isColumnsThree: count === 3,
     isColumnsFour: count === 4,
   });
+};

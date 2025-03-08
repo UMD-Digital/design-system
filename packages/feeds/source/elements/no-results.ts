@@ -4,21 +4,17 @@ import { Atomic, Utilities } from '@universityofmaryland/web-elements-library';
 const { convertJSSObjectToStyles } = Utilities.styles;
 const { actions } = Atomic;
 
-type NoResultsContentType = {
+interface NoResultsContentType {
   message?: string;
   linkUrl?: string;
   linkText?: string;
   ctaType?: string;
   isAlignedCenter?: boolean;
-};
-
-type NoResultsType = NoResultsContentType & {
-  container: HTMLElement;
-};
+}
 
 const CONTAINER_NO_RESULTS = 'container-no-results';
 
-const styles = `
+export const styles = `
   .${CONTAINER_NO_RESULTS} {
     display: flex;
     justify-content: center;
@@ -39,15 +35,12 @@ const styles = `
   }
 `;
 
-const CreateNoResultsInterface = ({
-  container,
+export default ({
   message,
   linkUrl,
   linkText,
   isAlignedCenter = true,
-}: NoResultsType) => {
-  container.innerHTML = '';
-
+}: NoResultsContentType) => {
   const wrapper = document.createElement('div');
   const noResults = document.createElement('p');
   noResults.innerHTML = message || 'No results found';
@@ -73,16 +66,5 @@ const CreateNoResultsInterface = ({
     wrapper.appendChild(ctaButton.element);
   }
 
-  container.appendChild(wrapper);
-};
-
-const display = (props: NoResultsType) => {
-  const { container, ...NoResultsContent } = props;
-  container.innerHTML = '';
-  CreateNoResultsInterface({ container, ...NoResultsContent });
-};
-
-export default {
-  display,
-  styles,
+  return { element: wrapper, styles };
 };

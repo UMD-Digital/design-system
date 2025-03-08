@@ -85,7 +85,7 @@ const FetchFeedEntries = async ({
   const { container } = variables;
   const feedData = await FetchFeed({ ...variables, query: EVENTS_QUERY });
   const graceFail = ({ message }: { message: string }) => {
-    NoResults.display({ container, ...NoResultsContent });
+    // NoResults.display({ container, ...NoResultsContent });
     throw new Error(message);
   };
 

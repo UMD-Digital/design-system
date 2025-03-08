@@ -172,6 +172,7 @@ export const displayResultStart = (props: DisplayStartProps) => {
     numberOfColumnsToShow = 1,
     numberOfRowsToStart,
     isLazyLoad,
+    isTypeOverlay,
     displayResults,
     getContainer,
     getTotalEntries,
@@ -180,7 +181,10 @@ export const displayResultStart = (props: DisplayStartProps) => {
     setStyles,
   } = props;
 
-  const grid = feedElements.grid({ count: numberOfColumnsToShow });
+  const grid = feedElements.grid({
+    count: numberOfColumnsToShow,
+    isTypeGap: !isTypeOverlay,
+  });
   const container = getContainer();
   const totalEntries = getTotalEntries();
   const showAmount = numberOfColumnsToShow || 1 * numberOfRowsToStart;

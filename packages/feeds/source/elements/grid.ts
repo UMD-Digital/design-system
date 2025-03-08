@@ -34,15 +34,15 @@ export default ({
     });
   }
 
-  // if (!isTypeGap) {
-  //   elementStyles.element = {
-  //     [` > *`]: {
-  //       [`@media (${Styles.token.media.queries.large.min})`]: {
-  //         minHeight: '560px',
-  //       },
-  //     },
-  //   };
-  // }
+  if (!isTypeGap) {
+    elementStyles.element = {
+      [` > *`]: {
+        [`@media (${Styles.token.media.queries.large.min})`]: {
+          minHeight: '560px !important',
+        },
+      },
+    };
+  }
 
   return Model.ElementModel.layout.grid({
     element: document.createElement('div'),

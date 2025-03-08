@@ -55,6 +55,7 @@ export interface BaseProps {
 export interface BlockProps extends BaseProps {
   numberOfColumnsToShow?: number;
   isTransparent?: boolean;
+  isTypeOverlay?: boolean;
 }
 
 export interface ListProps extends BaseProps {}

@@ -1,14 +1,7 @@
 import { Attributes } from 'model';
 import { newsProps } from '../_types';
 
-export const CommonFeedNewsData = ({
-  element,
-  numberOfRowsToStartDefault = 5,
-}: {
-  element: HTMLElement;
-  numberOfColumnsToShowDefault?: number;
-  numberOfRowsToStartDefault?: number;
-}) => {
+export const CommonFeedNewsData = ({ element }: { element: HTMLElement }) => {
   const token = element.getAttribute(Attributes.names.FEED_TOKEN);
   const isThemeDark = Attributes.isTheme.dark({ element });
   const categoriesAttribute = element.getAttribute(
@@ -23,14 +16,9 @@ export const CommonFeedNewsData = ({
     return;
   }
 
-  const numberOfRowsToStart =
-    Number(element.getAttribute(Attributes.names.FEED_ROW_COUNT)) ||
-    numberOfRowsToStartDefault;
-
   const data: newsProps = {
     token,
     isThemeDark,
-    numberOfRowsToStart,
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
     isUnion: Attributes.isData.union({ element }),
   };

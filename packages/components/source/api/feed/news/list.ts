@@ -1,6 +1,6 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { CommonFeedNewsData } from './common';
-import { Model, Register } from 'model';
+import { Attributes, Model, Register } from 'model';
 
 const tagName = 'umd-feed-news-list';
 
@@ -16,6 +16,8 @@ const createComponent = (element: HTMLElement) => {
 
   return Feeds.news.list({
     ...data,
+    numberOfRowsToStart:
+      Number(element.getAttribute(Attributes.names.FEED_ROW_COUNT)) || 5,
   });
 };
 

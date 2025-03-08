@@ -5,7 +5,7 @@ import { BlockProps, FeedDisplay } from './_types';
 
 export default (props: BlockProps) =>
   (() => {
-    const { isThemeDark, isTransparent } = props;
+    const { isThemeDark, isTransparent, isTypeOverlay } = props;
     const loader = feedElements.loader.create();
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
@@ -35,21 +35,33 @@ export default (props: BlockProps) =>
     };
 
     const displayResults = async ({ feedData }: FeedDisplay) => {
+      const entries = feedData.map((entry) => {
+        if (isTypeOverlay) {
+          return Composite.card.overlay.image({
+            ...newsCommon.dataDisplay({ entry, isThemeDark }),
+            backgroundImage: feedElements.asset.standard({
+              images: entry.image,
+              url: entry.url,
+            }),
+          });
+        }
+
+        return Composite.card.block({
+          ...newsCommon.dataDisplay({ entry, isThemeDark }),
+          image: feedElements.asset.standard({
+            images: entry.image,
+            url: entry.url,
+          }),
+          isAligned: false,
+          isTransparent,
+        });
+      });
+
       await newsCommon.displayResultLoad({
         ...props,
         ...helperFunctions,
         displayResults,
-        entries: feedData.map((entry) =>
-          Composite.card.block({
-            ...newsCommon.dataDisplay({ entry, isThemeDark }),
-            image: feedElements.asset.standard({
-              images: entry.image,
-              url: entry.url,
-            }),
-            isAligned: false,
-            isTransparent,
-          }),
-        ),
+        entries,
       });
 
       if (shadowRoot) {

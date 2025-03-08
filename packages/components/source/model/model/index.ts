@@ -25,9 +25,9 @@ interface SlotValidationError {
 }
 
 interface ComponentLifecycle {
-  beforeConnect?: (ref: ElementRef) => void;
-  afterConnect?: (ref: ElementRef) => void;
-  onReady?: (ref: ElementRef) => void;
+  beforeConnect?: (ref: ElementRef, shadow: ShadowRoot) => void;
+  afterConnect?: (ref: ElementRef, shadow: ShadowRoot) => void;
+  onReady?: (ref: ElementRef, shadow: ShadowRoot) => void;
 }
 
 interface ComponentConfig extends ComponentLifecycle {
@@ -271,7 +271,7 @@ class BaseComponent extends HTMLElement {
     }
 
     try {
-      await Promise.resolve(callback(this.elementRef!));
+      await Promise.resolve(callback(this.elementRef!, this.shadow));
     } catch (error) {
       this.handleError(`Failed to execute ${name} callback`, error);
     }

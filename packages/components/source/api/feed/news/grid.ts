@@ -1,70 +1,47 @@
-declare global {
-  interface Window {
-    UMDFeedNewsGrid: typeof UMDFeedNewsGrid;
-  }
-}
-
 import * as Feeds from '@universityofmaryland/web-feeds-library';
-import { Markup, Styles } from 'utilities';
 import { CommonFeedNewsData } from './common';
+import { Attributes, Model, Register } from 'model';
 
-const { FeedsNews } = Feeds;
-
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.reset}
-  ${FeedsNews.Styles}
-`;
-
-const ELEMENT_NAME = 'umd-feed-news';
 const ATTRIBUTE_TYPE = 'type';
 const ATTRIBUTE_TRANSPARENT = 'transparent';
 
-class UMDFeedNewsGrid extends HTMLElement {
-  _shadow: ShadowRoot;
+const tagName = 'umd-feed-news';
 
-  constructor() {
-    const template = Markup.create.Node.stylesTemplate({ styles });
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
+const createComponent = (element: HTMLElement) => {
+  const attributeType = element.getAttribute(ATTRIBUTE_TYPE);
+  const isTransparent = element.getAttribute(ATTRIBUTE_TRANSPARENT) === 'true';
+  const numberOfColumnsToShow =
+    Number(element.getAttribute(Attributes.names.FEED_COLUMN_COUNT)) || 3;
+
+  const isTypeGrid = attributeType === 'grid' || !attributeType;
+  const isTypeOverlay = attributeType === 'overlay';
+
+  const data = CommonFeedNewsData({
+    element,
+    numberOfRowsToStartDefault: 1,
+  });
+
+  if (!data) {
+    console.error('Feed news requires a token to be set');
+    return { element: document.createElement('div'), styles: '' };
   }
 
-  connectedCallback() {
-    const attributeType = this.getAttribute(ATTRIBUTE_TYPE);
-    const isTransparent = this.getAttribute(ATTRIBUTE_TRANSPARENT) === 'true';
-    const isTypeGrid = attributeType === 'grid' || !attributeType;
-    const isTypeOverlay = attributeType === 'overlay';
-
-    const data = CommonFeedNewsData({
-      element: this,
-      numberOfColumnsToShowDefault: 3,
-      numberOfRowsToStartDefault: 1,
-    });
-    if (!data) return;
-
-    this._shadow.appendChild(
-      FeedsNews.CreateElement({
-        ...data,
-        isTypeGrid,
-        isTypeOverlay,
-        isTransparent,
-      }),
-    );
-  }
-}
+  return Feeds.news.block({
+    ...data,
+    numberOfColumnsToShow,
+    isTransparent,
+  });
+};
 
 export default () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDFeedNewsGrid = UMDFeedNewsGrid;
-    window.customElements.define(ELEMENT_NAME, UMDFeedNewsGrid);
-  }
-
-  return '';
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+      afterConnect: (element, shadow) => {
+        element?.events?.callback(shadow);
+      },
+    }),
+  });
 };

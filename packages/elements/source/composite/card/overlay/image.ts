@@ -24,7 +24,7 @@ export default (props: CardOverlayProps) => {
     elementStyles,
     isThemeDark: true,
   });
-  let imageContainerClass = null;
+  let imageContainerClass: string | null = null;
 
   if (ctaIcon && ctaIcon instanceof HTMLElement) {
     const actionIcon = actions.icon({ ...props, ctaIcon, isThemeDark: true });

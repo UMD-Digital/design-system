@@ -13,7 +13,7 @@ type TypeFetchVariables = {
 
 export type TypeAPIFeedVariables = TypeFetchVariables & {
   token: string | null;
-  container: HTMLDivElement;
+  container: HTMLElement;
 };
 
 type TypeFetchObject = TypeAPIFeedVariables & {
@@ -66,7 +66,7 @@ const FetchFeedEntries = async ({
   const { container } = variables;
   const feedData = await FetchFeed({ ...variables, query: ARTICLES_QUERY });
   const graceFail = ({ message }: { message: string }) => {
-    NoResults.display({ container, ...NoResultsContent });
+    // NoResults.display({ container, ...NoResultsContent });
     throw new Error(message);
   };
 

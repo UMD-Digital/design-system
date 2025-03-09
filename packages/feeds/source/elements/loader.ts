@@ -1,6 +1,6 @@
 const ID_UMD_LOADER = 'umd-loader-container';
 
-const styles = `
+export const styles = `
   @keyframes loader-first-animation {
     0% {
       transform: scale(0);
@@ -110,5 +110,4 @@ export default {
   create,
   display,
   remove,
-  styles,
 };

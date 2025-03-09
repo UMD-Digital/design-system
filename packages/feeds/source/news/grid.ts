@@ -1,23 +1,27 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import * as feedElements from 'elements';
-import * as newsCommon from './common';
+import * as feedFetch from './common/fetch';
+import * as feedDisplay from './common/display';
+import * as dataComposed from './common/data';
 import { BlockProps, FeedDisplay } from './_types';
 
 export default (props: BlockProps) =>
   (() => {
-    const { isThemeDark, isTransparent, isTypeOverlay } = props;
+    const { isThemeDark, isTransparent, numberOfColumnsToShow, isTypeOverlay } =
+      props;
     const loader = feedElements.loader.create();
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);
-    const setStyles = (styles: string) => (compliedStyles += styles);
+    const setStyles = (additonalStyles: string) => (styles += additonalStyles);
     const getContainer = () => container;
     const getTotalEntries = () => totalEntries;
     const getOffset = () => offset;
     let totalEntries = 0;
     let offset = 0;
-    let compliedStyles = `
+    let styles = `
       ${feedElements.noResultStyles}
+      ${feedElements.loaderStyles}
     `;
     let shadowRoot: ShadowRoot | null = null;
 
@@ -38,7 +42,7 @@ export default (props: BlockProps) =>
       const entries = feedData.map((entry) => {
         if (isTypeOverlay) {
           return Composite.card.overlay.image({
-            ...newsCommon.dataDisplay({ entry, isThemeDark }),
+            ...dataComposed.display({ entry, isThemeDark }),
             backgroundImage: feedElements.asset.standard({
               images: entry.image,
               url: entry.url,
@@ -47,7 +51,7 @@ export default (props: BlockProps) =>
         }
 
         return Composite.card.block({
-          ...newsCommon.dataDisplay({ entry, isThemeDark }),
+          ...dataComposed.display({ entry, isThemeDark }),
           image: feedElements.asset.standard({
             images: entry.image,
             url: entry.url,
@@ -57,7 +61,7 @@ export default (props: BlockProps) =>
         });
       });
 
-      await newsCommon.displayResultLoad({
+      await feedDisplay.resultLoad({
         ...props,
         ...helperFunctions,
         displayResults,
@@ -65,26 +69,31 @@ export default (props: BlockProps) =>
       });
 
       if (shadowRoot) {
-        newsCommon.setShadowStyles({
+        feedDisplay.setShadowStyles({
           shadowRoot,
-          styles: compliedStyles,
+          styles,
         });
       }
     };
 
+    const layoutElement = isTypeOverlay
+      ? feedElements.layout.grid({ count: numberOfColumnsToShow })
+      : feedElements.layout.gridGap({ count: numberOfColumnsToShow });
+
     container.appendChild(loader);
 
-    newsCommon.createFeed({
+    feedFetch.start({
       ...props,
       ...helperFunctions,
       displayResults,
-      displayResultStart: newsCommon.displayResultStart,
-      displayNoResults: newsCommon.displayNoResults,
+      displayResultStart: feedDisplay.resultStart,
+      displayNoResults: feedDisplay.noResults,
+      layoutElement,
     });
 
     return {
       element: container,
-      styles: '',
+      styles,
       events: {
         callback,
       },

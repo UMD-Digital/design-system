@@ -28,7 +28,7 @@ export interface NoResultsProps {
   linkText?: string;
 }
 
-export interface HelperFunctionProps {
+interface HelperFunctionProps {
   getContainer: () => HTMLElement;
   getOffset: () => number;
   getTotalEntries: () => number | null;
@@ -39,6 +39,23 @@ export interface HelperFunctionProps {
 
 export interface DisplayResultsProps {
   displayResults: (props: FeedDisplay) => void;
+}
+
+export interface CommonProps
+  extends HelperFunctionProps,
+    BlockProps,
+    ListProps {}
+
+export interface DisplayProps extends CommonProps, DisplayResultsProps {}
+
+export interface DisplayStartProps extends DisplayProps {
+  layoutElement: { element: HTMLElement; styles: string };
+}
+
+export interface DisplayStartResultsProps
+  extends DisplayStartProps,
+    FeedDisplay {
+  layoutElement: { element: HTMLElement; styles: string };
 }
 
 export interface BaseProps {

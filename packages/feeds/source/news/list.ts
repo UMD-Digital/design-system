@@ -1,6 +1,8 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import * as feedElements from 'elements';
-import * as newsCommon from './common';
+import * as feedFetch from './common/fetch';
+import * as feedDisplay from './common/display';
+import * as dataComposed from './common/data';
 import { ListProps, FeedDisplay } from './_types';
 
 export default (props: ListProps) =>
@@ -18,6 +20,7 @@ export default (props: ListProps) =>
     let offset = 0;
     let compliedStyles = `
       ${feedElements.noResultStyles}
+      ${feedElements.loaderStyles}
     `;
     let shadowRoot: ShadowRoot | null = null;
 
@@ -35,13 +38,13 @@ export default (props: ListProps) =>
     };
 
     const displayResults = async ({ feedData }: FeedDisplay) => {
-      await newsCommon.displayResultLoad({
+      await feedDisplay.resultLoad({
         ...props,
         ...helperFunctions,
         displayResults,
         entries: feedData.map((entry) =>
           Composite.card.list({
-            ...newsCommon.dataDisplay({ entry, isThemeDark }),
+            ...dataComposed.display({ entry, isThemeDark }),
             image: feedElements.asset.standard({
               images: entry.image,
               url: entry.url,
@@ -52,7 +55,7 @@ export default (props: ListProps) =>
       });
 
       if (shadowRoot) {
-        newsCommon.setShadowStyles({
+        feedDisplay.setShadowStyles({
           shadowRoot,
           styles: compliedStyles,
         });
@@ -61,12 +64,13 @@ export default (props: ListProps) =>
 
     container.appendChild(loader);
 
-    newsCommon.createFeed({
+    feedFetch.start({
       ...props,
       ...helperFunctions,
       displayResults,
-      displayResultStart: newsCommon.displayResultStart,
-      displayNoResults: newsCommon.displayNoResults,
+      displayResultStart: feedDisplay.resultStart,
+      displayNoResults: feedDisplay.noResults,
+      layoutElement: feedElements.layout.stacked,
     });
 
     return {

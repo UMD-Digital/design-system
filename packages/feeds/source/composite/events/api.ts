@@ -1,6 +1,6 @@
 import { network } from 'utilities';
 import { EVENTS_QUERY, EVENTS_COUNT_QUERY } from './queries';
-import NoResults from '../elements/no-results';
+import * as feedMacros from 'macros';
 
 type TypeFetchVariables = {
   startDate?: string;
@@ -85,7 +85,7 @@ const FetchFeedEntries = async ({
   const { container } = variables;
   const feedData = await FetchFeed({ ...variables, query: EVENTS_QUERY });
   const graceFail = ({ message }: { message: string }) => {
-    // NoResults.display({ container, ...NoResultsContent });
+    // feedMacros.noResults({ container, ...NoResultsContent });
     throw new Error(message);
   };
 

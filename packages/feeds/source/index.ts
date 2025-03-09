@@ -1,1 +1,1 @@
-export * as news from './news';
+export * as news from './composite/news';

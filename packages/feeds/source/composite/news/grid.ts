@@ -43,7 +43,7 @@ export default (props: BlockProps) =>
       const entries = feedData.map((entry) => {
         if (isTypeOverlay) {
           return Composite.card.overlay.image({
-            ...dataComposed.display({ entry, isThemeDark }),
+            ...dataComposed.display({ entry }),
             backgroundImage: feedElements.asset.standard({
               images: entry.image,
               url: entry.url,
@@ -57,7 +57,7 @@ export default (props: BlockProps) =>
             images: entry.image,
             url: entry.url,
           }),
-          isAligned: false,
+          isAligned: true,
           isTransparent,
         });
       });

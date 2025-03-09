@@ -14,14 +14,15 @@ import { Model } from '@universityofmaryland/web-elements-library';
 //   }
 // }
 
-export const stacked = Model.ElementModel.layout.gridStacked({
-  element: document.createElement('div'),
-  elementStyles: {
-    element: {
-      gridGap: `${Styles.token.spacing.md}`,
+export const stacked = () =>
+  Model.ElementModel.layout.gridStacked({
+    element: document.createElement('div'),
+    elementStyles: {
+      element: {
+        gridGap: `${Styles.token.spacing.md}`,
+      },
     },
-  },
-});
+  });
 
 export const grid = ({ count = 2 }: { count?: number; isTypeGap?: boolean }) =>
   Model.ElementModel.layout.grid({
@@ -41,9 +42,37 @@ export const grid = ({ count = 2 }: { count?: number; isTypeGap?: boolean }) =>
     isColumnsFour: count === 4,
   });
 
-export const gridGap = ({ count = 2 }: { count?: number }) =>
+export const gridGap = ({
+  count = 2,
+  isLayoutReversed,
+}: {
+  count?: number;
+  isLayoutReversed?: boolean;
+}) =>
   Model.ElementModel.layout.grid({
     element: document.createElement('div'),
+    elementStyles: {
+      element: {
+        [` > *`]: {
+          alignSelf: 'flex-start',
+        },
+
+        [` > *:first-child`]: {
+          order: isLayoutReversed ? 2 : -1,
+        },
+
+        [`& .${Styles.element.composite.card.overlay.image.tint.className}`]: {
+          [`@media (${Styles.token.media.queries.large.min})`]: {
+            minHeight: '560px !important',
+            height: 'inherit',
+          },
+
+          [`*`]: {
+            color: `${Styles.token.color.white}`,
+          },
+        },
+      },
+    },
     isGap: true,
     isColumnsTwo: count === 2,
     isColumnsThree: count === 3,

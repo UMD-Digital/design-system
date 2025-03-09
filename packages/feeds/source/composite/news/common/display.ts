@@ -86,7 +86,6 @@ export const resultStart = (props: DisplayStartResultsProps) => {
     numberOfColumnsToShow = 1,
     numberOfRowsToStart,
     isLazyLoad,
-    isTypeOverlay,
     displayResults,
     getContainer,
     getTotalEntries,

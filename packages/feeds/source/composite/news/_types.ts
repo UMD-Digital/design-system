@@ -75,4 +75,9 @@ export interface BlockProps extends BaseProps {
   isTypeOverlay?: boolean;
 }
 
+export interface FeaturedProps extends BaseProps {
+  isTransparent?: boolean;
+  isLayoutReversed?: boolean;
+}
+
 export interface ListProps extends BaseProps {}

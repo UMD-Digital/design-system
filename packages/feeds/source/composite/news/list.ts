@@ -13,7 +13,7 @@ export default (props: ListProps) =>
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);
-    const setStyles = (styles: string) => (styles += styles);
+    const setStyles = (additonalStyles: string) => (styles += additonalStyles);
     const getContainer = () => container;
     const getTotalEntries = () => totalEntries;
     const getOffset = () => offset;
@@ -71,7 +71,7 @@ export default (props: ListProps) =>
       displayResults,
       displayResultStart: feedDisplay.resultStart,
       displayNoResults: feedDisplay.noResults,
-      layoutElement: feedElements.layout.stacked,
+      layoutElement: feedElements.layout.stacked(),
     });
 
     return {

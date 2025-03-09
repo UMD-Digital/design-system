@@ -9,6 +9,9 @@ interface GridColumns extends ElementProps {
   isGap?: boolean;
 }
 
+export const alignedCenter = (props: ElementProps) =>
+  createStyledElement(props, Styles.layout.alignment.block.center);
+
 export const backgroundBoxWhite = (props: ElementProps) =>
   createStyledElement(props, Styles.layout.background.box.white);
 

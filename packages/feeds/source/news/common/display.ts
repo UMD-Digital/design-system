@@ -1,5 +1,5 @@
 import { Utilities } from '@universityofmaryland/web-elements-library';
-import * as feedElements from 'elements';
+import * as feedMacros from 'macros';
 import * as feedFetch from './fetch';
 import * as dataComposed from './data';
 import {
@@ -33,12 +33,12 @@ export const noResults = ({
   linkUrl = 'https://today.umd.edu',
   linkText = 'View all articles',
 }: NoResultsProps) => {
-  const noResultsContent = feedElements.noResults({
+  const noResultsContent = feedMacros.noResults({
     message,
     linkUrl,
     linkText,
   });
-  const ariaLiveContent = feedElements.ariaLive.create({
+  const ariaLiveContent = feedMacros.ariaLive.create({
     message,
   });
 
@@ -55,8 +55,8 @@ export const resultLoad = async (props: DisplayLoadProps): Promise<void> => {
     `#${ID_GRID_LAYOUT_CONTAINER}`,
   ) as HTMLDivElement;
 
-  feedElements.loader.remove({ container });
-  feedElements.buttonLazyLoad.remove({ container });
+  feedMacros.loader.remove({ container });
+  feedMacros.buttonLazyLoad.remove({ container });
 
   return new Promise<void>((resolve) => {
     entries.forEach((entry) => {
@@ -64,7 +64,7 @@ export const resultLoad = async (props: DisplayLoadProps): Promise<void> => {
       setStyles(entry.styles);
     });
 
-    const lazyLoadButton = feedElements.buttonLazyLoad.create(
+    const lazyLoadButton = feedMacros.buttonLazyLoad.create(
       dataComposed.lazyLoadVariables({
         ...props,
         callback: feedFetch.load,
@@ -113,7 +113,7 @@ export const resultStart = (props: DisplayStartResultsProps) => {
 
   displayResults({ feedData });
   container.appendChild(
-    feedElements.ariaLive.create({
+    feedMacros.ariaLive.create({
       message,
     }),
   );

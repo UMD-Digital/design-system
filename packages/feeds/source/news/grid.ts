@@ -1,5 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import * as feedElements from 'elements';
+import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
 import * as dataComposed from './common/data';
@@ -9,7 +10,7 @@ export default (props: BlockProps) =>
   (() => {
     const { isThemeDark, isTransparent, numberOfColumnsToShow, isTypeOverlay } =
       props;
-    const loader = feedElements.loader.create();
+    const loader = feedMacros.loader.create();
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);
@@ -20,8 +21,8 @@ export default (props: BlockProps) =>
     let totalEntries = 0;
     let offset = 0;
     let styles = `
-      ${feedElements.noResultStyles}
-      ${feedElements.loaderStyles}
+      ${feedMacros.noResultStyles}
+      ${feedMacros.loaderStyles}
     `;
     let shadowRoot: ShadowRoot | null = null;
 

@@ -1,4 +1,4 @@
-import * as feedElements from 'elements';
+import * as feedMacros from 'macros';
 import Fetch from './api';
 import * as dataComposed from './data';
 import {
@@ -23,15 +23,15 @@ export const load = async (props: LoadMoreProps) => {
   const currentCount = getOffset();
   const totalEntries = getTotalEntries();
 
-  feedElements.buttonLazyLoad.remove({ container });
-  feedElements.loader.display({ container });
+  feedMacros.buttonLazyLoad.remove({ container });
+  feedMacros.loader.display({ container });
 
   Fetch.Entries({
     variables: dataComposed.apiVariables(props),
   }).then((feedData) => {
     displayResults({ feedData: feedData.entries });
 
-    feedElements.ariaLive.update({
+    feedMacros.ariaLive.update({
       container,
       message: `Showing ${
         currentCount + feedData.entries.length

@@ -13,13 +13,13 @@ export default (props: ListProps) =>
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);
-    const setStyles = (styles: string) => (compliedStyles += styles);
+    const setStyles = (styles: string) => (styles += styles);
     const getContainer = () => container;
     const getTotalEntries = () => totalEntries;
     const getOffset = () => offset;
     let totalEntries = 0;
     let offset = 0;
-    let compliedStyles = `
+    let styles = `
       ${feedMacros.noResultStyles}
       ${feedMacros.loaderStyles}
     `;
@@ -58,7 +58,7 @@ export default (props: ListProps) =>
       if (shadowRoot) {
         feedDisplay.setShadowStyles({
           shadowRoot,
-          styles: compliedStyles,
+          styles,
         });
       }
     };
@@ -76,7 +76,7 @@ export default (props: ListProps) =>
 
     return {
       element: container,
-      styles: '',
+      styles,
       events: {
         callback,
       },

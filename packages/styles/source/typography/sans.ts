@@ -4,8 +4,8 @@ import { create } from '../utilities';
 const breakpointLarge = media.queries.large.min;
 const breakpointDesktop = media.queries.desktop.min;
 
-const scalingContainerSmall = 350;
-const scalingContainerMedium = 500;
+const scalingContainerSmall = media.breakpointValues.small.min;
+const scalingContainerMedium = media.breakpointValues.medium.min;
 
 const sizeExtraLarge = {
   fontSize: font.size['4xl'],
@@ -17,7 +17,7 @@ const sizeExtraLargeResponsive = {
 };
 
 const sizeLarger = {
-  fontSize: font.size['3xl'],
+  fontSize: font.size['2xl'],
   lineHeight: `1.25em`,
 };
 

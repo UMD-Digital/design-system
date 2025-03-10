@@ -1,3 +1,4 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { Composite } from '@universityofmaryland/web-elements-library';
 import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
@@ -8,7 +9,13 @@ import { DisplayStartResultsProps, FeaturedProps, FeedDisplay } from './_types';
 
 export default (props: FeaturedProps) =>
   (() => {
-    const { isThemeDark, isLazyLoad, isLayoutReversed, isTransparent } = props;
+    const {
+      isThemeDark,
+      isLazyLoad,
+      isLayoutReversed,
+      isTransparent,
+      overwriteStickyPosition,
+    } = props;
     const loader = feedMacros.loader.create();
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
@@ -38,6 +45,13 @@ export default (props: FeaturedProps) =>
     const callback = (shadow: ShadowRoot) => {
       shadowRoot = shadow;
     };
+    const setPosition = (position: number) => {
+      const overlayElement = container.querySelector(
+        `.${Styles.element.composite.card.overlay.image.tint.className}`,
+      ) as HTMLElement;
+
+      if (overlayElement) overlayElement.style.top = `${position}px`;
+    };
 
     const layoutElement = feedElements.layout.gridGap({ count: 2 });
 
@@ -45,9 +59,10 @@ export default (props: FeaturedProps) =>
       let entries = [];
 
       if (feedData.length >= 2) {
-        const offsetLayout = feedElements.layout.gridGap({
+        const offsetLayout = feedElements.layout.gridOffsetGap({
           count: 2,
           isLayoutReversed,
+          overwriteStickyPosition,
         });
         const firstEntry = feedData[0];
         const overlayCard = Composite.card.overlay.image({
@@ -179,6 +194,7 @@ export default (props: FeaturedProps) =>
       styles,
       events: {
         callback,
+        setPosition,
       },
     };
   })();

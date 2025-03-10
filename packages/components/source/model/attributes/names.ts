@@ -22,6 +22,7 @@ const layout = {
   FIXED: 'data-layout-fixed',
   HIDDEN: 'data-layout-hidden',
   LOCK: 'data-layout-lock',
+  POSITION: 'data-layout-position',
 };
 
 const sharing = {

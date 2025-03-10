@@ -2,7 +2,7 @@ import AttributeNames from './names';
 import AttributeValues from './values';
 
 export namespace AttributeHandlerTypes {
-  type Callback<T = ElementRef> = (arg: T) => void;
+  type Callback<T = ElementRef> = (arg: T, arg2?: any) => void;
 
   export interface ElementRef {
     element: HTMLElement;
@@ -96,41 +96,11 @@ const stateClosed = ({
   },
 });
 
-const visuallyOpen = ({
-  callback,
-  name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.visual.open,
-  handler: (ref, oldValue, newValue) => {
-    if (
-      newValue === AttributeValues.state.TRUE &&
-      oldValue === AttributeValues.state.FALSE
-    ) {
-      callback(ref);
-    }
-  },
-});
-
 const visuallyClosed = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
   name: name || AttributeNames.visual.open,
-  handler: (ref, oldValue, newValue) => {
-    if (
-      newValue === AttributeValues.state.FALSE &&
-      oldValue === AttributeValues.state.TRUE
-    ) {
-      callback(ref);
-    }
-  },
-});
-
-const visuallyShow = ({
-  callback,
-  name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.layout.HIDDEN,
   handler: (ref, oldValue, newValue) => {
     if (
       newValue === AttributeValues.state.FALSE &&
@@ -156,14 +126,62 @@ const visuallyHide = ({
   },
 });
 
+const visuallyOpen = ({
+  callback,
+  name,
+}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+  name: name || AttributeNames.visual.open,
+  handler: (ref, oldValue, newValue) => {
+    if (
+      newValue === AttributeValues.state.TRUE &&
+      oldValue === AttributeValues.state.FALSE
+    ) {
+      callback(ref);
+    }
+  },
+});
+
+const visuallyPosition = ({
+  callback,
+  name,
+}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+  name: name || AttributeNames.layout.POSITION,
+  handler: (ref, oldValue, newValue) => {
+    if (newValue !== oldValue) {
+      const top = newValue ? parseInt(newValue) : null;
+      if (top) {
+        callback(ref, top);
+      } else {
+        callback(ref);
+      }
+    }
+  },
+});
+
+const visuallyShow = ({
+  callback,
+  name,
+}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+  name: name || AttributeNames.layout.HIDDEN,
+  handler: (ref, oldValue, newValue) => {
+    if (
+      newValue === AttributeValues.state.FALSE &&
+      oldValue === AttributeValues.state.TRUE
+    ) {
+      callback(ref);
+    }
+  },
+});
+
 const observe = {
   resize,
   stateOpen,
   stateClosed,
+  visuallyHide,
   visuallyOpen,
   visuallyClosed,
+  visuallyPosition,
   visuallyShow,
-  visuallyHide,
 };
 
 export default { combine, observe };

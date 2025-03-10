@@ -511,7 +511,8 @@ const getValue = {
     currentName: AttributeNames.information.TITLE,
   }),
   topPosition: createValueGetter({
-    currentName: AttributeNames.LAYOUT_STICKY_TOP,
+    currentName: AttributeNames.layout.POSITION,
+    deprecatedName: AttributeNames.LAYOUT_STICKY_TOP,
   }),
   styleProps: (props: AttributeElementProps) => {
     const cssString = createValueGetter({

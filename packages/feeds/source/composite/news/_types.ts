@@ -78,6 +78,7 @@ export interface BlockProps extends BaseProps {
 export interface FeaturedProps extends BaseProps {
   isTransparent?: boolean;
   isLayoutReversed?: boolean;
+  overwriteStickyPosition?: number;
 }
 
 export interface ListProps extends BaseProps {}

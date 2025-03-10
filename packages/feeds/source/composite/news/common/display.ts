@@ -49,7 +49,7 @@ export const noResults = ({
 };
 
 export const resultLoad = async (props: DisplayLoadProps): Promise<void> => {
-  const { entries, getContainer, setStyles } = props;
+  const { entries, getContainer, setStyles, setOffset } = props;
   const container = getContainer();
   const grid = container.querySelector(
     `#${ID_GRID_LAYOUT_CONTAINER}`,
@@ -57,6 +57,7 @@ export const resultLoad = async (props: DisplayLoadProps): Promise<void> => {
 
   feedMacros.loader.remove({ container });
   feedMacros.buttonLazyLoad.remove({ container });
+  setOffset(entries.length);
 
   return new Promise<void>((resolve) => {
     entries.forEach((entry) => {

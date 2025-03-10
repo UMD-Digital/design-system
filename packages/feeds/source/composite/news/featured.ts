@@ -118,8 +118,6 @@ export default (props: FeaturedProps) =>
         }),
       );
 
-      setOffset(feedData.length);
-
       await feedDisplay.resultLoad({
         ...props,
         ...helperFunctions,

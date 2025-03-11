@@ -1,55 +1,50 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
-import { Atomic, Utilities } from '@universityofmaryland/web-elements-library';
-
-const { convertJSSObjectToStyles } = Utilities.styles;
-const { actions } = Atomic;
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { Atomic, Model } from '@universityofmaryland/web-elements-library';
 
 interface NoResultsContentType {
   message?: string;
   linkUrl?: string;
   linkText?: string;
   ctaType?: string;
+  isThemeDark?: boolean;
   isAlignedCenter?: boolean;
 }
-
-const CONTAINER_NO_RESULTS = 'container-no-results';
-
-export const styles = `
-  .${CONTAINER_NO_RESULTS} {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [` .${CONTAINER_NO_RESULTS} p`]: typography.sans.extraLarge,
-    },
-  })}
-
-  .${CONTAINER_NO_RESULTS} p {
-    margin-bottom: ${token.spacing.md};
-    text-transform: uppercase;
-    font-weight: 800;
-    color: ${token.color.black};
-  }
-`;
 
 export default ({
   message,
   linkUrl,
   linkText,
+  isThemeDark,
   isAlignedCenter = true,
 }: NoResultsContentType) => {
-  const wrapper = document.createElement('div');
-  const noResults = document.createElement('p');
-  noResults.innerHTML = message || 'No results found';
-  wrapper.classList.add(CONTAINER_NO_RESULTS);
-  wrapper.appendChild(noResults);
+  const composite = Model.ElementModel.layout.gridStacked({
+    element: document.createElement('div'),
+    isThemeDark,
+    elementStyles: {
+      element: {
+        [`& *`]: {
+          textAlign: isAlignedCenter ? 'center' : 'left',
+        },
+        [`& *:not(:first-child)`]: {
+          marginTop: `${Styles.token.spacing.md}`,
+        },
+      },
+    },
+  });
 
-  if (isAlignedCenter) {
-    wrapper.style.alignItems = 'center';
-  }
+  const headline = Model.ElementModel.headline.sansExtraLarge({
+    element: document.createElement('p'),
+    isThemeDark,
+    elementStyles: {
+      element: {
+        textTransform: 'uppercase',
+      },
+    },
+  });
+
+  headline.element.innerHTML = message || 'No results found';
+  composite.element.appendChild(headline.element);
+  composite.styles += headline.styles;
 
   if (linkUrl && linkText) {
     const link = document.createElement('a');
@@ -58,13 +53,15 @@ export default ({
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
 
-    const ctaButton = actions.options({
+    const ctaButton = Atomic.actions.options({
       element: link,
       isTypeOutline: true,
+      isThemeDark,
     });
 
-    wrapper.appendChild(ctaButton.element);
+    composite.element.appendChild(ctaButton.element);
+    composite.styles += ctaButton.styles;
   }
 
-  return { element: wrapper, styles };
+  return composite;
 };

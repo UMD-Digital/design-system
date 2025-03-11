@@ -6,6 +6,7 @@ const breakpointDesktop = media.queries.desktop.min;
 
 const scalingContainerSmall = media.breakpointValues.small.min;
 const scalingContainerMedium = media.breakpointValues.medium.min;
+const scalingContainerLarger = 600;
 
 const sizeExtraLarge = {
   fontSize: font.size['4xl'],
@@ -104,6 +105,10 @@ export const scalingLarger = {
 
   [`@container (min-width: ${scalingContainerMedium}px)`]: {
     ...sizeExtraLargeResponsive,
+  },
+
+  [`@container (min-width: ${scalingContainerLarger}px)`]: {
+    fontSize: font.size['4xl'],
   },
 };
 

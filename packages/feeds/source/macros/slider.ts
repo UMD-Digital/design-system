@@ -43,11 +43,6 @@ export default ({
   let variables: any = { startDate: new Date().toDateString() };
   let shadowRoot: ShadowRoot | null = null;
 
-  slider.styles += `
-    ${Composite.event.lockup.date.Styles}
-    ${Composite.event.elements.sign.Styles}
-  `;
-
   const setShadowStyles = async ({
     shadowRoot,
     styles,
@@ -130,9 +125,11 @@ export default ({
       );
 
     slides.forEach((slide) => dataSlider.appendChild(slide.element));
-    slider.events.load();
 
     if (shadowRoot) setShadowStyles({ shadowRoot, styles: slider.styles });
+    setTimeout(() => {
+      slider.events.load();
+    }, 100);
   };
 
   loadEvents();

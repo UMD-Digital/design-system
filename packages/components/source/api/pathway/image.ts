@@ -1,4 +1,4 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { CommonPathwayData } from './common';
 import { Markup } from 'utilities';
@@ -60,18 +60,20 @@ const MakeCommonDefaultData = ({
     });
     let styles = '';
 
-    obj.eventDetails = Composite.event.elements.meta.CreateElement({
+    const eventMeta = Atomic.events.meta({
       ...eventData,
       isThemeDark: themeToggle,
       showTime,
     });
-
-    obj.eventSign = Composite.event.elements.sign.CreateElement({
+    const eventSign = Atomic.events.sign({
       ...eventData,
     });
 
-    styles += Composite.event.elements.sign.Styles;
-    styles += Composite.event.elements.meta.Styles;
+    obj.eventDetails = eventMeta.element;
+    obj.eventSign = eventSign.element;
+
+    styles += eventMeta.styles;
+    styles += eventSign.styles;
 
     obj.includedStyles = styles;
   }

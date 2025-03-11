@@ -1,4 +1,3 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import {
   Atomic,
   Composite,
@@ -118,7 +117,7 @@ const CommonDisplay = ({
   }),
   headline: CreateHeadline({ text: entry.title, url: entry.url }),
   text: CreateText({ text: entry.summary }),
-  eventDetails: Composite.event.elements.meta.CreateElement({
+  eventDetails: Atomic.events.meta({
     ...entry,
     isThemeDark: !isThemeDark,
     showTime,

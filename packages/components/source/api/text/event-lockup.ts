@@ -1,26 +1,16 @@
-declare global {
-  interface Window {
-    UMDEventsDateElement: typeof UMDEventsDateElement;
-  }
-}
+import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
+import { Attributes, Model, Register, Slots } from 'model';
+import * as Utilities from 'utilities';
 
-import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+const tagName = 'umd-element-events-date';
 
-const { Node } = Markup.create;
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.resize({
+    callback: (element) => element.events?.SetDateElementsSizes(),
+  }),
+);
 
-// prettier-ignore
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.reset}
-  ${Composite.event.lockup.date.Styles}
-`;
-
-const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
+const createComponent = (element: HTMLElement) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
 
   const headline = Slots.headline.default({ element });
@@ -30,55 +20,42 @@ const CreateShadowDom = ({ element }: { element: UMDEventsDateElement }) => {
   const endDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_END_ISO}"]`,
   );
-  const startDate = Markup.event.createDate({ element: startDateSlot });
-  const endDate = Markup.event.createDate({ element: endDateSlot });
+  const startDate = Utilities.Markup.event.createDate({
+    element: startDateSlot,
+  });
+  const endDate = Utilities.Markup.event.createDate({ element: endDateSlot });
 
   if (!startDate) {
-    return Composite.event.lockup.date.CreateElement({
+    return Atomic.textLockup.date({
       headline,
       isThemeDark,
     });
   }
 
-  const EventSignData = Markup.event.createDetailsData({
+  const EventSignData = Utilities.Markup.event.createDetailsData({
     startDate,
     endDate,
   });
-  const dateSign = Composite.event.elements.sign.CreateElement({
+  const dateSign = Atomic.events.sign({
     ...EventSignData,
     isThemeDark,
   });
 
-  return Composite.event.lockup.date.CreateElement({
+  return Atomic.textLockup.date({
     headline,
     dateSign,
     isThemeDark,
   });
 };
 
-const ELEMENT_NAME = 'umd-element-events-date';
-class UMDEventsDateElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    const template = Node.stylesTemplate({ styles });
-    super();
-
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
-  }
-
-  connectedCallback() {
-    this._shadow.appendChild(CreateShadowDom({ element: this }));
-  }
-}
-
 export default () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDEventsDateElement = UMDEventsDateElement;
-    window.customElements.define(ELEMENT_NAME, UMDEventsDateElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+      attributes,
+      afterConnect: (ref) => ref?.events?.load(),
+    }),
+  });
 };

@@ -10,6 +10,10 @@ export const stacked = () =>
         [` > *`]: {
           containerType: 'inline-size',
         },
+
+        [`& .${Styles.element.asset.image.wrapperScaled.className}`]: {
+          alignSelf: 'flex-start',
+        },
       },
     },
   });

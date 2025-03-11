@@ -24,11 +24,12 @@ export default (props: FeaturedProps) =>
     const getContainer = () => container;
     const getTotalEntries = () => totalEntries;
     const getOffset = () => offset;
+    const getStyles = () => styles;
+    const getShadowRoot = () => shadowRoot;
     let numberOfColumnsToShow = 3;
     let totalEntries = 0;
     let offset = 0;
     let styles = `
-      ${feedMacros.noResultStyles}
       ${feedMacros.loaderStyles}
     `;
     let shadowRoot: ShadowRoot | null = null;
@@ -40,6 +41,8 @@ export default (props: FeaturedProps) =>
       getContainer,
       getOffset,
       getTotalEntries,
+      getStyles,
+      getShadowRoot,
     };
 
     const callback = (shadow: ShadowRoot) => {

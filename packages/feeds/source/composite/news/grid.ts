@@ -18,10 +18,11 @@ export default (props: BlockProps) =>
     const getContainer = () => container;
     const getTotalEntries = () => totalEntries;
     const getOffset = () => offset;
+    const getStyles = () => styles;
+    const getShadowRoot = () => shadowRoot;
     let totalEntries = 0;
     let offset = 0;
     let styles = `
-      ${feedMacros.noResultStyles}
       ${feedMacros.loaderStyles}
     `;
     let shadowRoot: ShadowRoot | null = null;
@@ -33,6 +34,8 @@ export default (props: BlockProps) =>
       getContainer,
       getOffset,
       getTotalEntries,
+      getStyles,
+      getShadowRoot,
     };
 
     const callback = (shadow: ShadowRoot) => {
@@ -90,6 +93,7 @@ export default (props: BlockProps) =>
       displayResultStart: feedDisplay.resultStart,
       displayNoResults: feedDisplay.noResults,
       layoutElement,
+      isThemeDark,
     });
 
     return {

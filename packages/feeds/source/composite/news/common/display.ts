@@ -28,15 +28,22 @@ export const setShadowStyles = async ({
 };
 
 export const noResults = ({
-  container,
+  getContainer,
+  getStyles,
+  getShadowRoot,
+  setStyles,
   message = 'No results found',
   linkUrl = 'https://today.umd.edu',
   linkText = 'View all articles',
+  isThemeDark,
 }: NoResultsProps) => {
+  const container = getContainer();
+  const shadowRoot = getShadowRoot();
   const noResultsContent = feedMacros.noResults({
     message,
     linkUrl,
     linkText,
+    isThemeDark,
   });
   const ariaLiveContent = feedMacros.ariaLive.create({
     message,
@@ -46,6 +53,18 @@ export const noResults = ({
 
   container.appendChild(noResultsContent.element);
   container.appendChild(ariaLiveContent);
+
+  setStyles(noResultsContent.styles);
+
+  setTimeout(() => {
+    const styles = getStyles();
+    if (shadowRoot) {
+      setShadowStyles({
+        shadowRoot,
+        styles,
+      });
+    }
+  }, 100);
 };
 
 export const resultLoad = async (props: DisplayLoadProps): Promise<void> => {

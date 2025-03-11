@@ -1,5 +1,6 @@
+import { Utilities } from '@universityofmaryland/web-elements-library';
 import * as feedMacros from 'macros';
-import Fetch from './api';
+import { ARTICLES_QUERY } from './queries';
 import * as dataComposed from './data';
 import {
   NoResultsProps,
@@ -15,7 +16,67 @@ interface CreateProps extends DisplayStartProps {
   displayNoResults: (props: NoResultsProps) => void;
 }
 
+interface TypeFetchVariables {
+  related?: string[];
+  relatedToAll?: string[];
+  limit?: number;
+  offset?: number;
+  not?: Array<string | number>;
+}
+
+interface TypeAPIFeedVariables extends TypeFetchVariables {
+  token: string | null;
+}
+
 export const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
+
+const getEntries = async ({
+  limit,
+  related,
+  relatedToAll,
+  offset,
+  not,
+  token,
+}: TypeAPIFeedVariables) => {
+  if (!token) throw new Error('Token not found');
+  const graceFail = ({ message }: { message: string }) => {
+    throw new Error(message);
+  };
+
+  const variables: TypeFetchVariables = {
+    limit,
+    related,
+    relatedToAll,
+    offset,
+    not,
+  };
+
+  const feedData = await Utilities.network.FetchGraphQL({
+    query: ARTICLES_QUERY,
+    url: 'https://today.umd.edu/graphql',
+    token: token,
+    variables,
+  });
+
+  if (
+    !feedData ||
+    !feedData.data ||
+    !feedData.data.entries ||
+    feedData.message
+  ) {
+    if (!feedData) graceFail({ message: 'Feed not found' });
+    if (!feedData.data) graceFail({ message: 'Feed data not found' });
+    if (!feedData.data.entries)
+      graceFail({ message: 'Feed entries not found' });
+    if (!feedData.message)
+      graceFail({ message: `Feed data errors: ${feedData.message}` });
+  }
+
+  return {
+    entries: feedData.data.entries,
+    count: feedData.data.entryCount,
+  };
+};
 
 export const load = async (props: LoadMoreProps) => {
   const { getContainer, getOffset, displayResults, getTotalEntries } = props;
@@ -26,9 +87,7 @@ export const load = async (props: LoadMoreProps) => {
   feedMacros.buttonLazyLoad.remove({ container });
   feedMacros.loader.display({ container });
 
-  Fetch.Entries({
-    variables: dataComposed.apiVariables(props),
-  }).then((feedData) => {
+  getEntries(dataComposed.apiVariables(props)).then((feedData) => {
     displayResults({ feedData: feedData.entries });
 
     feedMacros.ariaLive.update({
@@ -43,13 +102,11 @@ export const load = async (props: LoadMoreProps) => {
 export const start = async (props: CreateProps) => {
   const { displayNoResults, displayResultStart, setTotalEntries } = props;
 
-  Fetch.Entries({
-    variables: dataComposed.apiVariables(props),
-  }).then((feedData) => {
+  getEntries(dataComposed.apiVariables(props)).then((feedData) => {
     const totalEntries = feedData.count;
 
     if (totalEntries === 0) {
-      displayNoResults({ container: props.getContainer() });
+      displayNoResults({ ...props });
       return;
     }
 

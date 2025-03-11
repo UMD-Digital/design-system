@@ -94,8 +94,10 @@ const styleGetters = {
     path: getIconColor(isTextColorWhite, isThemeDark),
   }),
   sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
-  textColor: ({ isTextColorWhite, isThemeDark }: StyleModifierProps) =>
-    getTextColor(isTextColorWhite, isThemeDark),
+  textColor: ({ isTextColorWhite, isThemeDark }: StyleModifierProps) => ({
+    ['&']: getTextColor(isTextColorWhite, isThemeDark),
+    ['& *']: getTextColor(isTextColorWhite, isThemeDark),
+  }),
 };
 
 export const modifiers = {

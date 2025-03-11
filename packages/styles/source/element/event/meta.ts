@@ -28,7 +28,6 @@ export const wrapper = create.jssObject({
   '> *': {
     marginRight: `5px`,
     marginTop: `5px`,
-    color: 'currentColor',
   },
 
   '> *:not(:first-child)': {
@@ -44,7 +43,6 @@ export const wrapper = create.jssObject({
     '> *': {
       display: 'flex',
       alignItems: 'center',
-      color: 'currentColor',
     },
 
     '> *:not(:first-child)': {

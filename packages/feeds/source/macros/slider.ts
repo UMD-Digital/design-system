@@ -105,6 +105,8 @@ export default ({
       feedData.data.entries.events.map(
         (data: TypeSlideFeedResponse, i: number) => {
           const headline = document.createElement('p');
+          headline.textContent = data.title;
+
           const dateSign = Atomic.events.sign({
             startMonth: data.startMonth,
             startDay: data.startDay,
@@ -117,8 +119,6 @@ export default ({
             isThemeDark,
             dateSign,
           });
-
-          headline.textContent = data.title;
 
           if (i === 0) {
             slider.styles += textLockup.styles;

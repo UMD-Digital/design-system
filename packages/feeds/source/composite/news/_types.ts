@@ -21,16 +21,11 @@ export interface FeedDisplay {
   feedData: EntryType[];
 }
 
-export interface NoResultsProps {
-  container: HTMLElement;
-  message?: string;
-  linkUrl?: string;
-  linkText?: string;
-}
-
 interface HelperFunctionProps {
   getContainer: () => HTMLElement;
   getOffset: () => number;
+  getStyles: () => string;
+  getShadowRoot: () => ShadowRoot | null;
   getTotalEntries: () => number | null;
   setTotalEntries: (count: number) => void;
   setOffset: (count: number) => void;
@@ -39,6 +34,13 @@ interface HelperFunctionProps {
 
 export interface DisplayResultsProps {
   displayResults: (props: FeedDisplay) => void;
+}
+
+export interface NoResultsProps extends HelperFunctionProps {
+  message?: string;
+  linkUrl?: string;
+  linkText?: string;
+  isThemeDark?: boolean;
 }
 
 export interface CommonProps

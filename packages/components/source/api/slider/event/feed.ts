@@ -1,109 +1,47 @@
-declare global {
-  interface Window {
-    UMDSliderEventsFeedElement: typeof UMDSliderEventsFeedElement;
-  }
-}
-
-import { Composite } from '@universityofmaryland/web-elements-library';
 import * as Feeds from '@universityofmaryland/web-feeds-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
 
-const { FeedsSlides } = Feeds;
+const tagName = 'umd-element-slider-events-feed';
 
-const ELEMENT_NAME = 'umd-element-slider-events-feed';
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.resize({
+    callback: (element) => element.events?.SetDateElementsSizes(),
+  }),
+);
 
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.reset}
-  ${Composite.slider.events.Styles}
-  ${FeedsSlides.Styles}
-`;
-
-const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
-
-const CreateShadowDom = async ({
-  element,
-}: {
-  element: UMDSliderEventsFeedElement;
-}) => {
-  const shadow = element.shadowRoot as ShadowRoot;
+const createComponent = (element: HTMLElement) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const token = element.getAttribute(Attributes.names.FEED_TOKEN);
-  const type = element.getAttribute(Attributes.names.TYPE) || 'academic';
+  const isTypeAcademic =
+    element.getAttribute(Attributes.names.TYPE) === 'academic';
   const categories = element.getAttribute('categories');
 
-  if (!token) throw new Error('Token is required for this component');
+  if (!token) {
+    console.error('Token is required for this component');
+    return { element: document.createElement('div'), styles: '' };
+  }
 
-  const dataSlider = document.createElement('div');
-  const slides: HTMLElement[] = await FeedsSlides.CreateElement({
+  const sliderProps = {
     token,
-    type,
     categories,
     isThemeDark,
-  });
-
-  if (!slides) return;
-
-  slides.forEach((slide) => dataSlider.appendChild(slide));
-
-  const slider = Composite.slider.events.CreateElement({
-    isThemeDark,
-    dataSlider,
     headline: Slots.headline.default({ element }),
     actions: Slots.actions.default({ element }),
-  });
+  };
 
-  element._elementRef = slider;
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(slider.element);
-  slider.events.SetDateElementsSizes();
+  if (isTypeAcademic) return Feeds.academic.slider(sliderProps);
+
+  return Feeds.events.slider(sliderProps);
 };
 
-export class UMDSliderEventsFeedElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _elementRef: {
-    element: HTMLDivElement;
-    events: {
-      SetDateElementsSizes: () => void;
-    };
-  } | null;
-
-  constructor() {
-    super();
-
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._elementRef = null;
-  }
-
-  static get observedAttributes() {
-    return [Attributes.names.RESIZE];
-  }
-
-  attributeChangedCallback(
-    name: string,
-    oldValue: string | null,
-    newValue: string | null,
-  ) {
-    if (name == Attributes.names.RESIZE && newValue === 'true') {
-      if (this._elementRef) this._elementRef.events.SetDateElementsSizes();
-    }
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 export default () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDSliderEventsFeedElement = UMDSliderEventsFeedElement;
-    window.customElements.define(ELEMENT_NAME, UMDSliderEventsFeedElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+      attributes,
+      afterConnect: (ref, shadow) => ref?.events?.callback(shadow),
+    }),
+  });
 };

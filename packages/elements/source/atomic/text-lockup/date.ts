@@ -3,7 +3,7 @@ import * as Utility from 'utilities';
 
 type TypeEventLockupDate = {
   headline: HTMLElement | null;
-  dateSign?: HTMLElement | null;
+  dateSign?: { element: HTMLElement; styles: string };
   isThemeDark?: boolean;
 };
 
@@ -83,7 +83,8 @@ export default (props: TypeEventLockupDate) => {
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
 
   if (dateSign) {
-    container.appendChild(dateSign);
+    container.appendChild(dateSign.element);
+    styles += dateSign.styles;
   }
 
   if (headline) {

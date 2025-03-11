@@ -665,7 +665,7 @@ const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {
   dataSlider.style.left = '0';
 };
 
-const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
+export default (props: TypeSliderEventProps) =>
   (() => {
     const { isThemeDark, dataSlider } = props;
     const declaration = document.createElement('div');
@@ -716,13 +716,14 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
       SetSlideDatesBackwards,
       SetSlideDatesForward,
     });
-    const Load = () => {
+    const load = () => {
       OnLoadStyles({ dataSlider });
       EventResize();
       SetEventSwipe();
     };
 
     let currentPosition = 0;
+    let styles = STYLES_SLIDER_EVENTS_ELEMENT;
 
     dataSlider.style.visibility = 'hidden';
 
@@ -740,7 +741,6 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
     declaration.classList.add(ELEMENT_SLIDER_EVENT_DECLRATION);
     declaration.appendChild(container);
 
-    Load();
     window.addEventListener(
       'resize',
       Utility.performance.debounce(EventResize, 20),
@@ -748,13 +748,10 @@ const CreateSliderEventsElement = (props: TypeSliderEventProps) =>
 
     return {
       element: declaration,
+      styles,
       events: {
         SetDateElementsSizes,
+        load,
       },
     };
   })();
-
-export default {
-  CreateElement: CreateSliderEventsElement,
-  Styles: STYLES_SLIDER_EVENTS_ELEMENT,
-};

@@ -1,11 +1,9 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 import {
   createEyebrow,
   createRibbonEyebrow,
   createActions,
-  eyebrowStyles,
   headlineStyles,
   textStyles,
   dateStyles,
@@ -28,42 +26,6 @@ const containerStyles = {
   className: ELEMENT_SCALABLE_FONT_CONTAINER,
   zIndex: '9',
   position: 'relative',
-};
-
-const eyebrowStyleObject = Styles.typography.elements.fonts.eyebrow;
-const headlineStyleObject = Styles.typography.sans.scalingFonts.larger;
-const textStyleObject = Styles.element.text.rich.simpleScaling;
-const dateStyleObject = Styles.typography.sans.scalingFonts.min;
-const actionStyleObject = Styles.layout.grid.inline.tabletRows;
-
-export const styles = `
-  ${Utility.styles.getStyleStringFromJssObject(eyebrowStyleObject)}
-  ${Utility.styles.getStyleStringFromJssObject(headlineStyleObject)}
-  ${Utility.styles.getStyleStringFromJssObject(textStyleObject)}
-  ${Utility.styles.getStyleStringFromJssObject(dateStyleObject)}
-  ${Utility.styles.getStyleStringFromJssObject(actionStyleObject)}
-
-  ${Utility.styles.parseNestedJSStoCSS(
-    eyebrowStyles,
-    eyebrowStyleObject.className,
-  )}
-
-  ${Utility.styles.parseNestedJSStoCSS(
-    headlineStyles,
-    headlineStyleObject.className,
-  )}
-
-  ${Utility.styles.parseNestedJSStoCSS(textStyles, textStyleObject.className)}
-  ${Utility.styles.parseNestedJSStoCSS(dateStyles, dateStyleObject.className)}
-`;
-
-export const elements = {
-  container: ELEMENT_SCALABLE_FONT_CONTAINER,
-  eyebrow: eyebrowStyleObject.className,
-  headline: headlineStyleObject.className,
-  text: textStyleObject.className,
-  date: dateStyleObject.className,
-  actions: actionStyleObject.className,
 };
 
 export default (props: TypeTextLockupSmallScaling) => {

@@ -115,15 +115,6 @@ export const createActions = ({ actions }: TypeActions) =>
     elementStyles: actionStyles,
   });
 
-export const elements = {
-  container: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
-  eyebrow: Styles.typography.elements.fonts.eyebrow.className,
-  headline: Styles.typography.sans.fonts.larger.className,
-  text: Styles.element.text.rich.simple.className,
-  date: Styles.typography.sans.fonts.min.className,
-  actions: Styles.layout.grid.inline.tabletRows.className,
-};
-
 export default ({
   eyebrow,
   headline,

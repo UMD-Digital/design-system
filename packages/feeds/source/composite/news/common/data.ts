@@ -1,6 +1,5 @@
 import * as feedElements from 'elements';
 import * as feedFetch from './fetch';
-import { TypeAPIFeedVariables } from './api';
 import {
   CommonProps,
   DisplayStartProps,
@@ -23,9 +22,10 @@ export const lazyLoadVariables = (props: LazyLoadProps) => ({
   callback: () => feedFetch.load(props),
 });
 
-export const apiVariables = (props: DataApiProps): TypeAPIFeedVariables => {
+export const apiVariables = (
+  props: DataApiProps,
+): feedFetch.TypeAPIFeedVariables => {
   const {
-    getContainer,
     isUnion,
     categories,
     getOffset,
@@ -34,8 +34,7 @@ export const apiVariables = (props: DataApiProps): TypeAPIFeedVariables => {
     numberOfColumnsToShow = 1,
     entriesToRemove,
   } = props;
-  const obj: TypeAPIFeedVariables = {
-    container: getContainer(),
+  const obj: feedFetch.TypeAPIFeedVariables = {
     offset: getOffset(),
     token,
     limit: numberOfRowsToStart,

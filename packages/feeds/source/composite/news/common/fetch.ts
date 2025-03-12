@@ -16,7 +16,7 @@ interface CreateProps extends DisplayStartProps {
   displayNoResults: (props: NoResultsProps) => void;
 }
 
-interface TypeFetchVariables {
+export interface TypeFetchVariables {
   related?: string[];
   relatedToAll?: string[];
   limit?: number;
@@ -24,7 +24,7 @@ interface TypeFetchVariables {
   not?: Array<string | number>;
 }
 
-interface TypeAPIFeedVariables extends TypeFetchVariables {
+export interface TypeAPIFeedVariables extends TypeFetchVariables {
   token: string | null;
 }
 

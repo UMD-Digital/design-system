@@ -37,6 +37,7 @@ const imageAnimationEnd = {
 const linkBase = {
   lineHeight: `0`,
   overflow: `hidden`,
+  display: `block`,
 };
 
 const signBase = {

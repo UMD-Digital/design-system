@@ -47,10 +47,10 @@ const MakeCommonDefaultData = ({
     eventSign: null as null | HTMLElement,
     includedStyles: '',
   };
-  let themeToggle = true;
+  let themeToggle = false;
 
-  if (isThemeMaryland) themeToggle = false;
-  if (isThemeDark) themeToggle = false;
+  if (isThemeMaryland) themeToggle = true;
+  if (isThemeDark) themeToggle = true;
 
   if (startDate) {
     const eventData = Markup.event.createDetailsData({

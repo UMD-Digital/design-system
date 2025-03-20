@@ -2,7 +2,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 
-const { carousel } = Composite;
 const { ImageHasAlt } = Markup.validate;
 
 const tagName = 'umd-element-carousel-image';
@@ -53,7 +52,7 @@ const createComponent = (element: HTMLElement) => {
     })
     .filter((image) => image !== null) as HTMLImageElement[];
 
-  return carousel.image.CreateElement({
+  return Composite.carousel.image({
     images,
     headlines,
     texts,

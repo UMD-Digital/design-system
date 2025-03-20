@@ -206,7 +206,6 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
 
   ${AnimationIndicator.Styles}
   ${AnimationCarouselImage.Styles}
-  ${AnimationCarouselOverlay.Styles}
   ${LayoutImage.Styles}
   ${ImageContainerStyles}
   ${TextContainerStyles}
@@ -215,18 +214,18 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreateCarouselImageStandardElement = (
-  props: TypeCarouselImageStandardProps,
-) =>
+export default (props: TypeCarouselImageStandardProps) =>
   (() => {
     const { images, isThemeDark, isFullScreenOption } = props;
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const elementIndicator = document.createElement('div');
-    const overlayCarousel = AnimationCarouselOverlay.CreateElement({
+    const overlayCarousel = AnimationCarouselOverlay({
       images,
     });
     let styles = STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT;
+
+    styles += overlayCarousel.styles;
 
     const CreateTextContainer = ({
       headlines,
@@ -379,7 +378,3 @@ const CreateCarouselImageStandardElement = (
       ...responseOptions,
     };
   })();
-
-export default {
-  CreateElement: CreateCarouselImageStandardElement,
-};

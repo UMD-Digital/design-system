@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
+import { layout } from 'atomic';
 import * as Utility from 'utilities';
-import { CreateModal, STYLES_MODAL } from './modal';
 
 type TypeFixedFullScreenProps = {
   content: HTMLElement;
@@ -10,7 +10,7 @@ type TypeFixedFullScreenProps = {
 const ELEMENT_CLOSE_BUTTON = 'carousel-fixed-screen-button';
 
 const STYLES_FIXED_FULL_SCREEN = `
-  ${STYLES_MODAL}
+
 
   .${ELEMENT_CLOSE_BUTTON} {
     position: absolute;
@@ -32,12 +32,12 @@ const STYLES_FIXED_FULL_SCREEN = `
   }
 `;
 
-const CreateFixedFullScreen = ({
-  content,
-  callback,
-}: TypeFixedFullScreenProps) => {
-  const modal = CreateModal({ content, callback });
+export default ({ content, callback }: TypeFixedFullScreenProps) => {
+  const modal = layout.overlay.modal({ content, callback });
   const closeButton = document.createElement('button');
+  let styles = STYLES_FIXED_FULL_SCREEN;
+
+  styles += modal.styles;
 
   closeButton.setAttribute('type', 'button');
   closeButton.setAttribute('aria-label', 'Close');
@@ -49,14 +49,10 @@ const CreateFixedFullScreen = ({
 
   return {
     element: modal.element,
+    styles,
     events: {
       show: modal.events.show,
       hide: modal.events.hide,
     },
   };
-};
-
-export default {
-  CreateElement: CreateFixedFullScreen,
-  Styles: STYLES_FIXED_FULL_SCREEN,
 };

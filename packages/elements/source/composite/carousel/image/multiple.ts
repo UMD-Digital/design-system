@@ -112,7 +112,6 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
 
   ${AnimationIndicator.Styles}
   ${AnimationCarouselBlocks.Styles}
-  ${AnimationCarouselOverlay.Styles}
   ${LayoutImage.Styles}
   ${OverwriteImageStyles}
   ${OverwriteCarouselStyles}
@@ -120,7 +119,7 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
+export default (props: TypeCarouselMultipleProps) =>
   (() => {
     const { images, isThemeDark, isFullScreenOption } = props;
     const elementDeclaration = document.createElement('div');
@@ -130,9 +129,12 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
     ) as HTMLImageElement[];
     let styles = STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT;
 
-    const overlayCarousel = AnimationCarouselOverlay.CreateElement({
+    const overlayCarousel = AnimationCarouselOverlay({
       images,
     });
+
+    styles += overlayCarousel.styles;
+
     const slide = document.createElement('div');
     const blocks = clonedImages.map((image, index) => {
       const block = LayoutImage.CreateElement({
@@ -198,6 +200,7 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
       const element = document.createElement('div');
 
       element.appendChild(overlayCarousel.element);
+
       element.appendChild(elementDeclaration);
 
       return {
@@ -211,7 +214,3 @@ const CreateCarouselImageMultipleElement = (props: TypeCarouselMultipleProps) =>
       ...responseOptions,
     };
   })();
-
-export default {
-  CreateElement: CreateCarouselImageMultipleElement,
-};

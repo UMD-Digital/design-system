@@ -8,8 +8,6 @@ type TypeFixedFullScreenProps = {
   context?: HTMLElement | null;
 };
 
-const { media, spacing } = token;
-
 const ELEMENT_CONTAINER = 'modal-screen-container';
 const ELEMENT_CONTAINER_BACKGROUND = 'modal-screen-container-background';
 
@@ -38,7 +36,7 @@ export const STYLES_MODAL = `
   }
 `;
 
-export const CreateModal = ({
+export default ({
   content,
   callback,
   isHidden,
@@ -109,5 +107,3 @@ export const CreateModal = ({
     },
   };
 };
-
-export default CreateModal;

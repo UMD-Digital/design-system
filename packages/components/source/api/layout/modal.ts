@@ -1,7 +1,5 @@
-import { Macros } from '@universityofmaryland/web-elements-library';
+import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Slots, Register } from 'model';
-
-const { Modal } = Macros;
 
 const tagName = 'umd-element-modal';
 
@@ -13,7 +11,7 @@ const createComponent = (element: HTMLElement) => {
     );
   };
 
-  return Modal({
+  return Atomic.layout.overlay.modal({
     content: Slots.content.default({ element, isDefaultStyling: false }),
     isHidden: Attributes.isLayout.hidden({ element }),
     context: element,

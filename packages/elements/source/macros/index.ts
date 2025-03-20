@@ -6,9 +6,6 @@ export { default as AnimationCarouselBlocks } from './animations/carousel-blocks
 export { default as AnimationCarouselImage } from './animations/carousel-image';
 export { default as AnimationCarouselOverlay } from '../layout/carousel-overlay';
 
-// Layout
-export { default as Modal } from '../layout/modal';
-
 // Text Components
 export {
   default as TextLockupSmall,

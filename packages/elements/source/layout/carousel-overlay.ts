@@ -23,7 +23,6 @@ const OverlayImageContainerStyles = `
 // prettier-ignore
 const STYLES_CAROUSEL_OVERLAY_ELEMENT = `
   ${LayoutImage.Styles}
-  ${FixedFullScreen.Styles}
   ${AnimationCarouselImage.Styles}
   ${OverlayImageContainerStyles}
 `;
@@ -45,12 +44,10 @@ const CreateOverlaySlide = ({ images }: { images: HTMLImageElement[] }) =>
     return slide;
   });
 
-const CreateCarouselOverlayElement = ({
-  images,
-}: {
-  images: HTMLImageElement[];
-}) =>
+export default ({ images }: { images: HTMLImageElement[] }) =>
   (() => {
+    let styles = STYLES_CAROUSEL_OVERLAY_ELEMENT;
+
     const setFullScreen = (index: number) => {
       let canMove = true;
 
@@ -82,7 +79,7 @@ const CreateCarouselOverlayElement = ({
       maxHeight: (window.innerHeight / 10) * 8,
     });
 
-    const fixedFullScreen = FixedFullScreen.CreateElement({
+    const fixedFullScreen = FixedFullScreen({
       content: overlayCarousel.element,
       callback: () => {
         if (isFullScreenEvents)
@@ -90,17 +87,15 @@ const CreateCarouselOverlayElement = ({
       },
     });
 
+    styles += fixedFullScreen.styles;
+
     let isFullScreenEvents: any = null;
 
     return {
       element: fixedFullScreen.element,
+      styles,
       events: {
         setFullScreen,
       },
     };
   })();
-
-export default {
-  CreateElement: CreateCarouselOverlayElement,
-  Styles: STYLES_CAROUSEL_OVERLAY_ELEMENT,
-};

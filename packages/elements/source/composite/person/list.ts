@@ -1,6 +1,7 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { List as LayoutList, Image as LayoutImage } from 'layout';
-import PersonTextContainer, { TypePersonProps } from './elements/text';
+import { Image as LayoutImage } from 'layout';
+import * as personElement from './elements';
+import { TypePersonProps } from './elements/text';
 
 type TypeListPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
@@ -10,9 +11,9 @@ const SMALL = 400;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
 
-const LayoutListContainer = LayoutList.Elements.container;
+const LayoutListContainer = personElement.list.Elements.container;
 const LayoutImageContainer = LayoutImage.Elements.container;
-const LayoutTextContainer = PersonTextContainer.Elements.container;
+const LayoutTextContainer = personElement.text.Elements.container;
 
 const ELEMENT_NAME = 'umd-person-list';
 const ELEMENT_PERSON_LIST_CONTAINER = 'person-list-container';
@@ -74,9 +75,9 @@ const STYLES_PERSON_LIST_ELEMENT = `
     margin-top: ${token.spacing.md}; 
   }
 
-  ${PersonTextContainer.Styles}
+  ${personElement.text.Styles}
   ${LayoutImage.Styles}
-  ${LayoutList.Styles}
+  ${personElement.list.Styles}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
   ${OverwriteThemeDarkStyles}
@@ -84,10 +85,10 @@ const STYLES_PERSON_LIST_ELEMENT = `
 
 export default (props: TypeListPersonProps) => {
   const { isThemeDark, image } = props;
-  const personContainer = PersonTextContainer.CreateElement(props);
+  const personContainer = personElement.text.CreateElement(props);
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = LayoutList.CreateElement({
+  const container = personElement.list.CreateElement({
     personContainer,
     imageContainer,
     isThemeDark,

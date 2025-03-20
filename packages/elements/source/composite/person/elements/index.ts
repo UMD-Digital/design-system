@@ -1,9 +1,4 @@
-import { default as contact } from './contact';
-import { default as image } from './image';
-import { default as text } from './text';
-
-export default {
-  contact,
-  image,
-  text,
-};
+export { default as contact } from './contact';
+export { default as image } from './image';
+export { default as list } from './list';
+export { default as text } from './text';

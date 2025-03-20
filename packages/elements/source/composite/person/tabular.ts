@@ -1,10 +1,8 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import { List as LayoutList, Image as LayoutImage } from 'layout';
-import PersonTextContainer, {
-  TypePersonProps,
-  DISPLAY_TABULAR,
-} from './elements/text';
+import { Image as LayoutImage } from 'layout';
+import * as personElement from './elements';
+import { TypePersonProps, DISPLAY_TABULAR } from './elements/text';
 
 type TypeTabularPersonProps = TypePersonProps & {
   image?: HTMLImageElement | null;
@@ -17,12 +15,12 @@ const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_HAS_IMAGE = 'has-image';
 const THEME_DARK = 'dark';
 
-const LayoutListContainer = LayoutList.Elements.container;
+const LayoutListContainer = personElement.list.Elements.container;
 const LayoutImageContainer = LayoutImage.Elements.container;
-const LayoutTextContainer = PersonTextContainer.Elements.container;
+const LayoutTextContainer = personElement.text.Elements.container;
 const LayoutTextContainerOverwrite =
-  PersonTextContainer.Elements.containerWithContact;
-const LayoutTextName = PersonTextContainer.Elements.name;
+  personElement.text.Elements.containerWithContact;
+const LayoutTextName = personElement.text.Elements.name;
 
 const ELEMENT_NAME = 'umd-person-tabluar';
 const ELEMENT_PERSON_TABULAR_CONTAINER = 'person-tabluar-container';
@@ -32,16 +30,16 @@ const IS_WITH_IMAGE = `[${ATTRIBUTE_HAS_IMAGE}]`;
 
 const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutImageContainer}`;
 const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer}`;
-const OVERWRITE_TEXT_CONTAINER_WRAPPER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer} .${PersonTextContainer.Elements.mainWrapper}`;
+const OVERWRITE_TEXT_CONTAINER_WRAPPER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer} .${personElement.text.Elements.mainWrapper}`;
 const OVERWRITE_PERSON_NAME = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextName}`;
-const OVERWRITE_PERSON_CONTACT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${PersonTextContainer.Elements.contactContainer}`;
+const OVERWRITE_PERSON_CONTACT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${personElement.text.Elements.contactContainer}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutImageContainer}`;
 
 const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_WITH_IMAGE} .${LayoutTextContainer}`;
 const OVERWRITE_TEXT_CONTAINER_WITH_CONTACT = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} ${LayoutTextContainerOverwrite}`;
-const OVERWRITE_TEXT_CONTAINER_CONTACT = `${OVERWRITE_TEXT_CONTAINER_WITH_CONTACT} .${PersonTextContainer.Elements.contactContainer}`;
+const OVERWRITE_TEXT_CONTAINER_CONTACT = `${OVERWRITE_TEXT_CONTAINER_WITH_CONTACT} .${personElement.text.Elements.contactContainer}`;
 
 const OverwriteThemeDarkStyles = `
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
@@ -141,9 +139,9 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
     margin-top: ${token.spacing.md}; 
   }
 
-  ${PersonTextContainer.Styles}
+  ${personElement.text.Styles}
   ${LayoutImage.Styles}
-  ${LayoutList.Styles}
+  ${personElement.list.Styles}
   ${OverwriteImagesStyles}
   ${OverwriteTextStyles}
   ${OverwriteThemeDarkStyles}
@@ -152,13 +150,13 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
 
 export default (props: TypeTabularPersonProps) => {
   const { isThemeDark, image } = props;
-  const personContainer = PersonTextContainer.CreateElement({
+  const personContainer = personElement.text.CreateElement({
     ...props,
     displayType: DISPLAY_TABULAR,
   });
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = LayoutList.CreateElement({
+  const container = personElement.list.CreateElement({
     personContainer,
     imageContainer,
     isThemeDark,

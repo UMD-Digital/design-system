@@ -14,6 +14,7 @@ const create = ({
     button.addEventListener('click', () => {
       callback(index);
     });
+    button.setAttribute('aria-label', 'View Full Screen');
     button.innerHTML = `Full Screen <span></span>${Utility.asset.icon.FULL_SCREEN}`;
 
     return ElementModel.buttons.fullScreen({

@@ -28,6 +28,7 @@ export const fullScreen = create.jssObject({
     display: `block`,
     height: `12px`,
     width: `1px`,
+    margin: `0 ${spacing.min}`,
     backgroundColor: `${color.gray.mediumAA}`,
   },
 });

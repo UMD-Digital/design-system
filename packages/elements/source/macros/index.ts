@@ -1,5 +1,3 @@
-export { default as AnimationOverlayBrand } from './animations/overlay-brand';
-
 // Carousel Animations
 export { default as AnimationCarouselBlocks } from './animations/carousel-blocks';
 export { default as AnimationCarouselImage } from './animations/carousel-image';

@@ -8,7 +8,7 @@ export default () => {
     name: tagName,
     element: Model.createCustomElement({
       tagName,
-      createComponent: () => Atomic.animations.brand.ChevronSlide(),
+      createComponent: () => Atomic.animations.brand.chevronScroll(),
     }),
   });
 };

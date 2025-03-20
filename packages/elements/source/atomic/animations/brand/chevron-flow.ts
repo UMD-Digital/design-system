@@ -251,7 +251,7 @@ const AnimationSequence = (props: TypeAnimationProps) => {
   AnimateFollowingArrows(props);
 };
 
-const CreateAnimationOverlayBrandElement = ({
+export default ({
   sizedContainer,
   completedCallback,
   isAnimationOnLoad = true,
@@ -264,6 +264,7 @@ const CreateAnimationOverlayBrandElement = ({
   (() => {
     const container = document.createElement('div');
     let windowWidth = window.innerWidth;
+    let styles = STYLES_ANIMATION_BRAND_OVERLAY_ELEMENT;
 
     const getContainerHeight = () => sizedContainer.offsetHeight;
     const getHeightDiff = () => {
@@ -331,13 +332,9 @@ const CreateAnimationOverlayBrandElement = ({
 
     return {
       element: container,
+      styles,
       events: {
         load: EventLoad,
       },
     };
   })();
-
-export default {
-  CreateElement: CreateAnimationOverlayBrandElement,
-  Styles: STYLES_ANIMATION_BRAND_OVERLAY_ELEMENT,
-};

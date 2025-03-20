@@ -3,8 +3,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { buttons } from 'atomic';
-import { AnimationOverlayBrand } from 'macros';
+import { animations, buttons } from 'atomic';
 import * as Utility from 'utilities';
 
 type TypeHeroBrandVideoProps = {
@@ -151,7 +150,6 @@ const STYLES_HERO_BRAND_VIDEO_ELEMENT = `
   ${TextOverlayStyles}
   ${HeadlineStyles}
   ${TextStyles}
-  ${AnimationOverlayBrand.Styles}
 `;
 
 const CreateTextContainer = (props: TypeHeroBrandVideoProps) => {
@@ -202,7 +200,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
   const wrapper = document.createElement('div');
   const textContainer = CreateTextContainer(props);
   const completedCallback = () => AnimationSequence({ container });
-  const overlay = AnimationOverlayBrand.CreateElement({
+  const overlay = animations.brand.chevronFlow({
     sizedContainer: container,
     sizedWrapper: wrapper,
     completedCallback,
@@ -232,6 +230,7 @@ const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
   wrapper.appendChild(video);
   if (textContainer) wrapper.appendChild(textContainer);
   wrapper.appendChild(overlay.element);
+  styles += overlay.styles;
   wrapper.appendChild(buttonState.element);
   styles += buttonState.styles;
 

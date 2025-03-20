@@ -1,11 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import {
-  AnimationCarouselOverlay,
-  AnimationCarouselBlocks,
-  AnimationIndicator,
-} from 'macros';
+import { AnimationCarouselOverlay, AnimationCarouselBlocks } from 'macros';
 
 type TypeCarouselMultipleProps = {
   images: HTMLImageElement[];
@@ -110,7 +106,7 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
     overflow: hidden;
   }
 
-  ${AnimationIndicator.Styles}
+
   ${AnimationCarouselBlocks.Styles}
   ${LayoutImage.Styles}
   ${OverwriteImageStyles}

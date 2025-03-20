@@ -63,7 +63,7 @@ const STYLES_INDICATOR = `
 
 `;
 
-const CreateSlideIndicator = ({
+export default ({
   count,
   overlayColor,
   isThemeDark,
@@ -79,6 +79,7 @@ const CreateSlideIndicator = ({
   (() => {
     const container = document.createElement('div');
     const line = document.createElement('div');
+    let styles = STYLES_INDICATOR;
 
     const buttons = Array.from({ length: count }).map((count, i) => {
       const button = document.createElement('button');
@@ -174,11 +175,7 @@ const CreateSlideIndicator = ({
 
     return {
       element: container,
+      styles,
       position: eventPosition,
     };
   })();
-
-export default {
-  CreateElement: CreateSlideIndicator,
-  Styles: STYLES_INDICATOR,
-};

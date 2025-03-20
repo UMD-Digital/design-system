@@ -1,11 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { buttons } from 'atomic';
+import { animations, buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import {
-  AnimationCarouselOverlay,
-  AnimationCarouselImage,
-  AnimationIndicator,
-} from 'macros';
+import { AnimationCarouselOverlay, AnimationCarouselImage } from 'macros';
 import * as Utility from 'utilities';
 
 type TypeImage = {
@@ -204,7 +200,6 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
     background-color: ${token.color.gray.lightest};
   }
 
-  ${AnimationIndicator.Styles}
   ${AnimationCarouselImage.Styles}
   ${LayoutImage.Styles}
   ${ImageContainerStyles}
@@ -334,12 +329,14 @@ export default (props: TypeCarouselImageStandardProps) =>
       maxHeight: 500,
     });
 
-    const indicator = AnimationIndicator.CreateElement({
+    const indicator = animations.actions.indicator({
       count: images.length || 0,
       callback: carousel.events.EventMoveTo,
       isThemeDark,
       isThemeLight: !isThemeDark,
     });
+
+    styles += indicator.styles;
 
     elementIndicator.classList.add(ELEMENT_CAROUSEL_INDICATOR_WRAPPER);
     elementIndicator.appendChild(indicator.element);

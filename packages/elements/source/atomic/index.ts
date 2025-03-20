@@ -1,4 +1,5 @@
 export * as actions from './actions';
+export * as animations from './animations';
 export * as assets from './assets';
 export * as buttons from './buttons';
 export * as events from './events';

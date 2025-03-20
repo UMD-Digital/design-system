@@ -1,7 +1,5 @@
-import { Macros } from '@universityofmaryland/web-elements-library';
+import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Model, Register } from 'model';
-
-const { FearlessScrollChevrons } = Macros;
 
 const tagName = 'umd-element-brand-logo-animation';
 
@@ -10,7 +8,7 @@ export default () => {
     name: tagName,
     element: Model.createCustomElement({
       tagName,
-      createComponent: () => FearlessScrollChevrons(),
+      createComponent: () => Atomic.animations.brand.ChevronSlide(),
     }),
   });
 };

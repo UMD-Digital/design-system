@@ -1,9 +1,6 @@
 export { default as AnimationOverlayBrand } from './animations/overlay-brand';
 export { default as AnimationIndicator } from './animations/indicator';
 
-// Brand
-export { default as FearlessScrollChevrons } from './brand/fearless-scroll-chevrons';
-
 // Carousel Animations
 export { default as AnimationCarouselBlocks } from './animations/carousel-blocks';
 export { default as AnimationCarouselImage } from './animations/carousel-image';

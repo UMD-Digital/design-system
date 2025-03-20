@@ -1,7 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import AnimationCarouselImage from '../macros/animations/carousel-image';
-import LayoutImage from './image';
-import FixedFullScreen from './carousel-full-screen';
+import { Image as LayoutImage } from 'layout';
+import * as carouselElements from '../elements';
 
 const ELEMENT_CAROUSEL_OVERLAY_COINTAINER = 'carousel-overlay-container';
 
@@ -23,7 +22,6 @@ const OverlayImageContainerStyles = `
 // prettier-ignore
 const STYLES_CAROUSEL_OVERLAY_ELEMENT = `
   ${LayoutImage.Styles}
-  ${AnimationCarouselImage.Styles}
   ${OverlayImageContainerStyles}
 `;
 
@@ -74,12 +72,14 @@ export default ({ images }: { images: HTMLImageElement[] }) =>
 
     const overlaySlides = CreateOverlaySlide({ images });
 
-    const overlayCarousel = AnimationCarouselImage.CreateElement({
+    const overlayCarousel = carouselElements.image({
       slides: overlaySlides,
       maxHeight: (window.innerHeight / 10) * 8,
     });
 
-    const fixedFullScreen = FixedFullScreen({
+    styles += overlayCarousel.styles;
+
+    const fixedFullScreen = carouselElements.fullScreen({
       content: overlayCarousel.element,
       callback: () => {
         if (isFullScreenEvents)

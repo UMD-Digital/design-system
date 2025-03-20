@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { AnimationCarouselBlocks } from 'macros';
+import * as carouselElements from '../elements';
 
 type TypeCarouselRequirements = {
   slide: HTMLElement;
@@ -29,18 +29,18 @@ const ELEMENT_NAME = 'umd-element-carousel';
 const ELEMENT_DECLARATION = 'carousel-default-declaration';
 const CAROUSEL_CONTAINER = 'element-carousel-default-container';
 
-const OVERWRITE_ANIMATION_CAROUSEL_CONTAINER = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.container}`;
-const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.button}`;
-const OVERWRITE_ANIMATION_BUTTON_PREVIOUS = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.previousButton}`;
-const OVERWRITE_ANIMATION_BUTTON_NEXT = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.nextButton}`;
+const OVERWRITE_ANIMATION_CAROUSEL_CONTAINER = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.container}`;
+const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.button}`;
+const OVERWRITE_ANIMATION_BUTTON_PREVIOUS = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.previousButton}`;
+const OVERWRITE_ANIMATION_BUTTON_NEXT = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.nextButton}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${CAROUSEL_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_BUTTON = `${OVERWRITE_THEME_DARK_CONTAINER} .${AnimationCarouselBlocks.Elements.button}`;
+const OVERWRITE_THEME_DARK_BUTTON = `${OVERWRITE_THEME_DARK_CONTAINER} .${carouselElements.blocks.Elements.button}`;
 
-const OVERWRITE_SINGLE_COLUMN = `.${CAROUSEL_CONTAINER} ${AnimationCarouselBlocks.Elements.containerSingleBlock}`;
-const OVERWRITE_SINGLE_COLUMN_BUTTONS = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCarouselBlocks.Elements.button}`;
-const OVERWRITE_SINGLE_COLUMN_PREVIOUS = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCarouselBlocks.Elements.previousButton}`;
-const OVERWRITE_SINGLE_COLUMN_NEXT = `${OVERWRITE_SINGLE_COLUMN} .${AnimationCarouselBlocks.Elements.nextButton}`;
+const OVERWRITE_SINGLE_COLUMN = `.${CAROUSEL_CONTAINER} ${carouselElements.blocks.Elements.containerSingleBlock}`;
+const OVERWRITE_SINGLE_COLUMN_BUTTONS = `${OVERWRITE_SINGLE_COLUMN} .${carouselElements.blocks.Elements.button}`;
+const OVERWRITE_SINGLE_COLUMN_PREVIOUS = `${OVERWRITE_SINGLE_COLUMN} .${carouselElements.blocks.Elements.previousButton}`;
+const OVERWRITE_SINGLE_COLUMN_NEXT = `${OVERWRITE_SINGLE_COLUMN} .${carouselElements.blocks.Elements.nextButton}`;
 
 // prettier-ignore
 const OverwriteThemeDark = `
@@ -115,7 +115,7 @@ const STYLES_CAROUSEL_ELEMENT = `
     color: ${token.color.white};
   }
   
-  ${AnimationCarouselBlocks.Styles}
+  ${carouselElements.blocks.Styles}
   ${ContainerStyles}
   ${OverwriteCarouselStyles}
   ${OverwriteThemeDark}
@@ -161,7 +161,7 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
     if (!mobileHint) overwriteDisplayLogic.showMobileHint = false;
     if (!hint) overwriteDisplayLogic.showHint = false;
 
-    const carouselContainer = AnimationCarouselBlocks.CreateElement({
+    const carouselContainer = carouselElements.blocks.CreateElement({
       ...props,
       blocks: props.blocks,
       overwriteDisplayLogic,

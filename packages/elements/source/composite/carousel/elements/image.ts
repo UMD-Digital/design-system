@@ -221,12 +221,13 @@ const SlideUpcomingSlide = ({
   }, ANIMATION_DURATION + 100);
 };
 
-const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
+export default (props: TypeCarouselImageProps) =>
   (() => {
     const { slides, callback, maxHeight } = props;
     const container = document.createElement('div');
     const slider = document.createElement('div');
     let activeIndex = 0;
+    let styles = STYLES_CAROUSEL_IMAGE_ELEMENT;
 
     const EventSlide = ({ forward = true }: { forward?: boolean }) => {
       SlideActiveSlide({ slide: slides[activeIndex], isRight: forward });
@@ -316,6 +317,7 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
 
     return {
       element: container,
+      styles,
       events: {
         Load,
         EventMoveTo,
@@ -325,8 +327,3 @@ const CreateCarouselImageElement = (props: TypeCarouselImageProps) =>
       },
     };
   })();
-
-export default {
-  CreateElement: CreateCarouselImageElement,
-  Styles: STYLES_CAROUSEL_IMAGE_ELEMENT,
-};

@@ -4,8 +4,8 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { AnimationCarouselBlocks } from 'macros';
 import * as Utility from 'utilities';
+import * as carouselElements from '../elements';
 
 type TypeCarouselCardsRequirements = {
   headline?: HTMLElement | null;
@@ -36,9 +36,9 @@ const INTRO_CONTAINER_HEADLINE = 'carousel-cards-intro-container-headline';
 const INTRO_CONTAINER_TEXT = 'carousel-cards-intro-container-text';
 const INTRO_CONTAINER_CTA = 'carousel-cards-intro-container-cta';
 
-const OVERWRITE_ANIMATION_CAROUSEL_DECLARATION = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.declaration}`;
-const OVERWRITE_ANIMATION_CAROUSEL_CONTAINER = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.container}`;
-const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${CAROUSEL_CONTAINER} .${AnimationCarouselBlocks.Elements.button}`;
+const OVERWRITE_ANIMATION_CAROUSEL_DECLARATION = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.declaration}`;
+const OVERWRITE_ANIMATION_CAROUSEL_CONTAINER = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.container}`;
+const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.button}`;
 
 // prettier-ignore
 const OverwriteCarouselStyles = `
@@ -261,7 +261,7 @@ const STYLES_CAROUSEL_CARDS_ELEMENT = `
     color: ${token.color.white};
   }
   
-  ${AnimationCarouselBlocks.Styles}
+  ${carouselElements.blocks.Styles}
   ${ContainerStyles}
   ${ContainerLock}
   ${HeadlineStyles}
@@ -309,7 +309,7 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
     if (slide) slide.style.minHeight = '450px';
     if (shadowRef) shadowRef.style.minHeight = '450px';
 
-    const carouselContainer = AnimationCarouselBlocks.CreateElement({
+    const carouselContainer = carouselElements.blocks.CreateElement({
       ...props,
       blocks: props.cards,
       overwriteDisplayLogic: {

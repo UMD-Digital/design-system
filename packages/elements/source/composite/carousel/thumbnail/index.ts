@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { AnimationCarouselBlocks } from 'macros';
+import * as carouselElements from '../elements';
 
 type TypeCarouselThumbnailProps = {
   blocks: HTMLElement[];
@@ -17,7 +17,7 @@ const ELEMENT_THUMBNAIL_CONTAINER = 'carousel-thumbnail-container';
 const ELEMENT_PERSON_SLIDE = 'carousel-person-slide';
 const ELEMENT_CAROUSEL_THUMBNAIL_BUTTON = 'carousel-thumbnail-button';
 
-const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_THUMBNAIL_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
+const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_THUMBNAIL_DECLARATION} .${carouselElements.blocks.Elements.button}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_THUMBNAIL_CONTAINER}${IS_THEME_DARK}`;
 const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_THUMBNAIL_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_THUMBNAIL_BUTTON}`;
@@ -87,7 +87,7 @@ const STYLES_CAROUSEL_THUMBNAIL_ELEMENT = `
     padding: 0 ${token.spacing.md};
   }
 
-  ${AnimationCarouselBlocks.Styles}
+  ${carouselElements.blocks.Styles}
   ${PersonSlideStyles}
   ${OverwriteCarouselStyles}
   ${OverwriteThemeDark}
@@ -114,7 +114,7 @@ const CreateCarouselThumbnailElement = (props: TypeCarouselThumbnailProps) =>
       }),
     );
 
-    const carousel = AnimationCarouselBlocks.CreateElement({
+    const carousel = carouselElements.blocks.CreateElement({
       blocks: blocksWrapper,
       slide,
       overwriteDisplayLogic: {

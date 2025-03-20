@@ -1,8 +1,8 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { animations, buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import { AnimationCarouselOverlay, AnimationCarouselImage } from 'macros';
 import * as Utility from 'utilities';
+import * as carouselElements from '../elements';
 
 type TypeImage = {
   image: HTMLImageElement;
@@ -200,7 +200,6 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
     background-color: ${token.color.gray.lightest};
   }
 
-  ${AnimationCarouselImage.Styles}
   ${LayoutImage.Styles}
   ${ImageContainerStyles}
   ${TextContainerStyles}
@@ -215,7 +214,7 @@ export default (props: TypeCarouselImageStandardProps) =>
     const elementDeclaration = document.createElement('div');
     const elementContainer = document.createElement('div');
     const elementIndicator = document.createElement('div');
-    const overlayCarousel = AnimationCarouselOverlay({
+    const overlayCarousel = carouselElements.overlay({
       images,
     });
     let styles = STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT;
@@ -321,13 +320,15 @@ export default (props: TypeCarouselImageStandardProps) =>
       ...props,
       setFullScreen: overlayCarousel.events.setFullScreen,
     });
-    const carousel = AnimationCarouselImage.CreateElement({
+    const carousel = carouselElements.image({
       slides,
       callback: (activeIndex) => {
         indicator.position(activeIndex);
       },
       maxHeight: 500,
     });
+
+    styles += carousel.styles;
 
     const indicator = animations.actions.indicator({
       count: images.length || 0,

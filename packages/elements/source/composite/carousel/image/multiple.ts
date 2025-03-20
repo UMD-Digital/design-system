@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import { AnimationCarouselOverlay, AnimationCarouselBlocks } from 'macros';
+import * as carouselElements from '../elements';
 
 type TypeCarouselMultipleProps = {
   images: HTMLImageElement[];
@@ -25,7 +25,7 @@ const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-multiple-button';
 
 const OVERWRITE_LAYOUT_IMAGE = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${LayoutImage.Elements.container}`;
 
-const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${AnimationCarouselBlocks.Elements.button}`;
+const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${carouselElements.blocks.Elements.button}`;
 const OVERWRITE_FULL_SCREEN_BUTTON = `.${ELEMENT_CAROUSEL_MULTIPLE_DECLARATION} .${fullScreenClassName}`;
 
 const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_MULTIPLE_CONTAINER}${IS_THEME_DARK}`;
@@ -107,7 +107,7 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
   }
 
 
-  ${AnimationCarouselBlocks.Styles}
+  ${carouselElements.blocks.Styles}
   ${LayoutImage.Styles}
   ${OverwriteImageStyles}
   ${OverwriteCarouselStyles}
@@ -125,7 +125,7 @@ export default (props: TypeCarouselMultipleProps) =>
     ) as HTMLImageElement[];
     let styles = STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT;
 
-    const overlayCarousel = AnimationCarouselOverlay({
+    const overlayCarousel = carouselElements.overlay({
       images,
     });
 
@@ -151,7 +151,7 @@ export default (props: TypeCarouselMultipleProps) =>
       return block;
     });
 
-    const carousel = AnimationCarouselBlocks.CreateElement({
+    const carousel = carouselElements.blocks.CreateElement({
       blocks,
       slide,
       overwriteDisplayLogic: {

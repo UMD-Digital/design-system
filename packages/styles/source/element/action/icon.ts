@@ -5,8 +5,8 @@ import { create } from '../../utilities';
 const classNamePrefix = 'umd-element-action-icon';
 
 const svgIcon = {
-  width: '16px',
-  height: '16px',
+  width: '14px',
+  height: '14px',
   fill: `${color.black}`,
 };
 

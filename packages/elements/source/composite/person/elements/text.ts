@@ -4,18 +4,8 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import PersonContact, { TypeContactProps } from './contact';
-
-export type TypePersonProps = TypeContactProps & {
-  name: HTMLElement | null;
-  job?: HTMLElement | null;
-  association?: HTMLElement | null;
-  pronouns?: HTMLElement | null;
-  subText?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  displayType?: string;
-  isThemeDark?: boolean;
-};
+import PersonContact from './contact';
+import { Person } from '../_types';
 
 const { convertJSSObjectToStyles } = Utility.styles;
 
@@ -174,7 +164,7 @@ const STYLES_PERSON_TEXT = `
   ${PersonContact.Styles}
 `;
 
-const CreatePersonTextContainer = (person: TypePersonProps) => {
+const CreatePersonTextContainer = (person: Person) => {
   const { name, job, association, pronouns, subText, actions, isThemeDark } =
     person;
   const container = document.createElement('div');

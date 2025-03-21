@@ -2,11 +2,7 @@ import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { Image as LayoutImage } from 'layout';
 import * as personElement from './elements';
-import { TypePersonProps, DISPLAY_TABULAR } from './elements/text';
-
-type TypeTabularPersonProps = TypePersonProps & {
-  image?: HTMLImageElement | null;
-};
+import { PersonCard } from './_types';
 
 const { convertJSSObjectToStyles } = Utility.styles;
 
@@ -148,11 +144,11 @@ const STYLES_PERSON_TABULAR_ELEMENT = `
   ${OverwriteWithImageStyles}
 `;
 
-export default (props: TypeTabularPersonProps) => {
+export default (props: PersonCard) => {
   const { isThemeDark, image } = props;
   const personContainer = personElement.text.CreateElement({
     ...props,
-    displayType: DISPLAY_TABULAR,
+    displayType: 'tabular',
   });
   const elementContainer = document.createElement('div');
   const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;

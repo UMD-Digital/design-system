@@ -1,14 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-
-export type TypeContactProps = {
-  phone?: HTMLElement | null;
-  email?: HTMLElement | null;
-  linkendIn?: HTMLElement | null;
-  address?: HTMLElement | null;
-  additionalContact?: HTMLElement | null;
-  isThemeDark?: boolean;
-};
+import { PersonContact } from '../_types';
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -171,7 +163,7 @@ const CreatePersonContactContainer = ({
   address,
   additionalContact,
   isThemeDark,
-}: TypeContactProps) => {
+}: PersonContact) => {
   if (!phone && !email && !linkendIn && !address && !additionalContact)
     return null;
 

@@ -12,6 +12,13 @@ const columns = {
   justifyContent: 'flex-start',
 };
 
+export const row = {
+  className: `${classNamePrefix}-rows`,
+  display: 'flex',
+  gap: spacing.min,
+  alignItems: 'center',
+};
+
 // umd-layout-grid-inline-tablet-rows
 export const tabletRows = create.jssObject({
   ...columns,

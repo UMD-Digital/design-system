@@ -2,6 +2,16 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { createStyledElement } from '../modifiers';
 import { type ElementProps } from '../modifiers/_types';
 
+export const iconSmall = (props: ElementProps) => {
+  if (props.isThemeDark) {
+    return createStyledElement.base(
+      props,
+      Styles.element.action.icon.smallDark,
+    );
+  }
+  return createStyledElement.base(props, Styles.element.action.icon.small);
+};
+
 export const outline = (props: ElementProps) =>
   createStyledElement.base(props, Styles.element.action.outline.normal);
 

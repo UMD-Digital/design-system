@@ -4,27 +4,27 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import PersonContact, { TypeContactProps } from './elements/contact';
+import contact from './elements/contact';
 import PersonImage from './elements/image';
+import { PersonContact } from './_types';
 
-type TypeTextContainer = {
+interface PersonText {
   name: HTMLElement | null;
   job?: HTMLElement | null;
   subText?: HTMLElement | null;
-};
+}
 
-type TypeImageBlockContainer = TypeContactProps & {
+type PersonInfo = PersonContact & {
   image?: HTMLImageElement | null;
   association?: HTMLElement | null;
   pronouns?: HTMLElement | null;
 };
 
-type TypePersonHeroProps = TypeTextContainer &
-  TypeImageBlockContainer & {
-    isThemeDark?: boolean;
-    breadcrumbMobile?: HTMLElement | null;
-    breadcrumbDesktop?: HTMLElement | null;
-  };
+interface PersonHero extends PersonText, PersonInfo {
+  isThemeDark?: boolean;
+  breadcrumbMobile?: HTMLElement | null;
+  breadcrumbDesktop?: HTMLElement | null;
+}
 
 const { convertJSSObjectToStyles } = Utility.styles;
 
@@ -313,7 +313,7 @@ const STYLES_PERSON_HERO_ELEMENT = `
   }
 
   ${PersonImage.Styles}
-  ${PersonContact.Styles}
+  ${contact.Styles}
   ${LockStyles}
   ${WrapperStyles}
   ${TextContainerStyles}
@@ -322,11 +322,11 @@ const STYLES_PERSON_HERO_ELEMENT = `
   ${OverwriteThemeDarkStyles}
 `;
 
-const CreateImageBlock = (props: TypeImageBlockContainer) => {
+const CreateImageBlock = (props: PersonInfo) => {
   const { image, association, pronouns, isThemeDark } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const contactContainer = PersonContact.CreateElement({
+  const contactContainer = contact.CreateElement({
     ...props,
     isThemeDark: !isThemeDark,
   });
@@ -357,7 +357,7 @@ const CreateImageBlock = (props: TypeImageBlockContainer) => {
   return container;
 };
 
-const CreateTextContainer = ({ name, job, subText }: TypeTextContainer) => {
+const CreateTextContainer = ({ name, job, subText }: PersonText) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
 
@@ -384,7 +384,7 @@ const CreateTextContainer = ({ name, job, subText }: TypeTextContainer) => {
   return container;
 };
 
-export default (props: TypePersonHeroProps) => {
+export default (props: PersonHero) => {
   const { isThemeDark, breadcrumbMobile, breadcrumbDesktop } = props;
   const elementContainer = document.createElement('div');
   const elementLock = document.createElement('div');

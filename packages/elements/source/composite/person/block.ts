@@ -1,11 +1,8 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import PersonImage from './elements/image';
-import PersonTextContainer, { TypePersonProps } from './elements/text';
-
-type TypeBlockPersonProps = TypePersonProps & {
-  image?: HTMLImageElement | null;
-};
+import PersonTextContainer from './elements/text';
+import { PersonCard } from './_types';
 
 const IMAGE_BREAKPOINT = 349;
 const SMALL = 650;
@@ -83,7 +80,7 @@ const STYLES_PERSON_BLOCK_ELEMENT = `
   ${OverwriteThemeDarkStyles}
 `;
 
-export default (props: TypeBlockPersonProps) => {
+export default (props: PersonCard) => {
   const { isThemeDark, image: providedImage } = props;
   const elementContainer = document.createElement('div');
   const elementWrapper = document.createElement('div');

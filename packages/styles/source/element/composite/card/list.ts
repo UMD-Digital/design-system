@@ -54,6 +54,45 @@ const createImageStyles = (customStyles = {}) => {
   };
 };
 
+const createPersonImageStyles = (customStyles = {}) => {
+  const baseStyles = {
+    height: 'auto',
+    ...customStyles,
+  };
+
+  return {
+    [`.${image.wrapper.className}`]: {
+      ...createContainerQuery(smallBreakpoint, 'max-width', {
+        width: '100%',
+        marginBottom: `${spacing.md}`,
+        backgroundColor: `${color.gray.lighter}`,
+        display: 'flex',
+        justifyContent: 'center',
+      }),
+
+      ...createContainerQuery(mediumBreakpointStart, 'min-width', {
+        display: 'block',
+        width: '160px',
+        order: '-1',
+        paddingRight: `${spacing.md}`,
+        alignSelf: 'flex-start',
+      }),
+
+      ...createContainerQuery(mediumBreakpoint, 'min-width', {
+        width: '208px',
+      }),
+
+      '& img, & svg': {
+        ...createContainerQuery(smallBreakpoint, 'max-width', {
+          height: 'auto !important',
+          width: '140px',
+        }),
+      },
+      ...baseStyles,
+    },
+  };
+};
+
 const createTextStyles = (customStyles = {}) => {
   return {
     [`& > *:nth-child(2)`]: {
@@ -165,4 +204,32 @@ export const eventDark = create.jssObject({
   ...createEventStyles(),
   ...createTextStyles(),
   ...createImageStyles(),
+});
+
+// umd-element-composite-card-list-person
+export const person = create.jssObject({
+  className: `${classNamePrefix}-person`,
+  ...createContainerStyles(),
+  ...createWrapperStyles(),
+  ...createTextStyles(),
+  ...createPersonImageStyles(),
+});
+
+// umd-element-composite-card-list-person-dark
+export const personDark = create.jssObject({
+  className: `${classNamePrefix}-person-dark`,
+  ...createContainerStyles({
+    ...darkContainerStyles,
+  }),
+  ...createWrapperStyles(),
+  ...createTextStyles(),
+  ...createPersonImageStyles({
+    ...createContainerQuery(smallBreakpoint, 'max-width', {
+      width: '100%',
+      marginBottom: `${spacing.md}`,
+      backgroundColor: `${color.gray.darker}`,
+      display: 'flex',
+      justifyContent: 'center',
+    }),
+  }),
 });

@@ -47,6 +47,9 @@ export const grid = (props: GridColumns) => {
   return createStyledElement(elementProps, Styles.layout.grid.columnsFour);
 };
 
+export const gridInlineRow = (props: ElementProps) =>
+  createStyledElement(props, Styles.layout.grid.inline.row);
+
 export const gridInlineTabletRows = (props: ElementProps) =>
   createStyledElement(props, Styles.layout.grid.inline.tabletRows);
 

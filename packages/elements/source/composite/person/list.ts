@@ -1,104 +1,49 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { Image as LayoutImage } from 'layout';
-import * as personElement from './elements';
-import { TypePersonProps } from './elements/text';
+import { assets, textLockup } from 'atomic';
+import { ElementModel } from 'model';
+import { PersonCard } from './_types';
 
-type TypeListPersonProps = TypePersonProps & {
-  image?: HTMLImageElement | null;
+const actionStyles = {
+  element: {
+    marginTop: token.spacing.sm,
+  },
 };
 
-const SMALL = 400;
-const ATTRIBUTE_THEME = 'theme';
-const THEME_DARK = 'dark';
-
-const LayoutListContainer = personElement.list.Elements.container;
-const LayoutImageContainer = LayoutImage.Elements.container;
-const LayoutTextContainer = personElement.text.Elements.container;
-
-const ELEMENT_NAME = 'umd-person-list';
-const ELEMENT_PERSON_LIST_CONTAINER = 'person-list-container';
-
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LayoutListContainer} .${LayoutImageContainer}`;
-const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer}`;
-
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_LIST_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutImageContainer}`;
-
-const OverwriteThemeDarkStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
-      background-color: ${token.color.gray.darker};
-    }
-  }
-`;
-
-const OverwriteImagesStyles = `
-  ${OVERWRITE_IMAGE_CONTAINER} {
-    order: 1;
-    padding-right: ${token.spacing.md};
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} {
-      width: 100%;
-      margin-bottom: ${token.spacing.md};
-      background-color: ${token.color.gray.lighter};
-      display: flex;
-      justify-content: center;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} img,
-    ${OVERWRITE_IMAGE_CONTAINER} svg {
-      width: 140px;
-    }
-  }
-`;
-
-const OverwriteTextStyles = `
-  ${OVERWRITE_TEXT_CONTAINER} {
-    order: 2;
-    width: 100%;
-  }
-`;
-
-// prettier-ignore
-const STYLES_PERSON_LIST_ELEMENT = `
-  .${ELEMENT_PERSON_LIST_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-  
-  .${ELEMENT_PERSON_LIST_CONTAINER} + * {
-    margin-top: ${token.spacing.md}; 
-  }
-
-  ${personElement.text.Styles}
-  ${LayoutImage.Styles}
-  ${personElement.list.Styles}
-  ${OverwriteImagesStyles}
-  ${OverwriteTextStyles}
-  ${OverwriteThemeDarkStyles}
-`;
-
-export default (props: TypeListPersonProps) => {
-  const { isThemeDark, image } = props;
-  const personContainer = personElement.text.CreateElement(props);
-  const elementContainer = document.createElement('div');
-  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = personElement.list.CreateElement({
-    personContainer,
-    imageContainer,
-    isThemeDark,
+export default (props: PersonCard) => {
+  const { image, actions } = props;
+  const composite = ElementModel.composite.card.list({
+    ...props,
+    element: document.createElement('div'),
+    isDisplayPerson: true,
   });
-  let styles = STYLES_PERSON_LIST_ELEMENT;
 
-  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  if (image) {
+    const imageContainer = assets.image.background({
+      image,
+      isScaled: false,
+    });
 
-  elementContainer.appendChild(container);
-  elementContainer.classList.add(ELEMENT_PERSON_LIST_CONTAINER);
+    composite.element.appendChild(imageContainer.element);
+    composite.styles += imageContainer.styles;
+  }
 
-  return { element: elementContainer, styles };
+  const textLockupElement = textLockup.person(props);
+  const contactLockupElement = textLockup.contact(props);
+
+  textLockupElement.element.appendChild(contactLockupElement.element);
+  textLockupElement.styles += contactLockupElement.styles;
+
+  if (actions) {
+    const styledActions = ElementModel.layout.gridInlineTabletRows({
+      element: actions,
+      elementStyles: actionStyles,
+    });
+    textLockupElement.element.appendChild(styledActions.element);
+    textLockupElement.styles += styledActions.styles;
+  }
+
+  composite.element.appendChild(textLockupElement.element);
+  composite.styles += textLockupElement.styles;
+
+  return composite;
 };

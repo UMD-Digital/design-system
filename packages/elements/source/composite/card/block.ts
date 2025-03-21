@@ -1,4 +1,4 @@
-import { textLockup, assets } from 'atomic';
+import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { CardBlockProps } from './_types';
 

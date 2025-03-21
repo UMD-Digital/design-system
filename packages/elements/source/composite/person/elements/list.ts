@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import { TextLockupSmall } from 'macros';
-import { Image } from 'layout';
+import ImageContainer from './image';
 
 const ATTRIBUTE_ALIGNED = 'aligned';
 const ATTRIBUTE_THEME = 'theme';
@@ -18,9 +18,9 @@ const IS_ALIGNED = `.${ELEMENT_LIST_CONTAINER}[${ATTRIBUTE_ALIGNED}]`;
 
 const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${TextLockupSmall.Elements.container}`;
 const OVERWRITE_TEXT_HEADLINE = `.${ELEMENT_LIST_CONTAINER} .${TextLockupSmall.Elements.headline}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${Image.Elements.container}`;
+const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_LIST_CONTAINER} .${ImageContainer.Elements.container}`;
 
-const OVERWRITE_ALIGNED_IMAGE_CONTAINER = `${IS_ALIGNED} .${Image.Elements.container}`;
+const OVERWRITE_ALIGNED_IMAGE_CONTAINER = `${IS_ALIGNED} .${ImageContainer.Elements.container}`;
 
 // prettier-ignore
 const VariationThemeStyles = `

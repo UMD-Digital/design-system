@@ -5,10 +5,10 @@ import {
 } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import PersonImage from '../elements/image';
-import PersonTextContainer, { TypePersonProps } from '../elements/text';
+import PersonTextContainer from '../elements/text';
+import { PersonCard } from '../_types';
 
-type TypePersonBioFullProps = TypePersonProps & {
-  image?: HTMLImageElement | null;
+type TypePersonBioFullProps = PersonCard & {
   description?: HTMLElement | null;
 };
 

@@ -20,7 +20,7 @@ const headlineStyles = {
     color: `${token.color.black}`,
 
     [`& + *`]: {
-      marginTop: token.spacing.min,
+      marginTop: '4px',
     },
   },
   subElement: {
@@ -44,7 +44,7 @@ const associationStyles = {
     color: `${token.color.gray.dark}`,
 
     [`& + *`]: {
-      marginTop: token.spacing.min,
+      marginTop: '4px',
     },
 
     [`& a:hover, a:focus`]: {
@@ -58,10 +58,8 @@ const associationStyles = {
 
 const pronounsStyles = {
   element: {
-    fontStyle: 'italic',
-
     [`& + *`]: {
-      marginTop: token.spacing.min,
+      marginTop: '4px',
     },
   },
   subElement: {
@@ -70,11 +68,8 @@ const pronounsStyles = {
 };
 
 const subTextStyles = {
-  element: {
-    fontStyle: 'italic',
-  },
   siblingAfter: {
-    marginTop: token.spacing.min,
+    marginTop: '4px',
   },
 };
 
@@ -130,6 +125,7 @@ export default ({
   }
 
   if (pronouns) {
+    pronouns.innerHTML = `<i>${pronouns.innerHTML}</i>`;
     const styledPronouns = ElementModel.headline.sansSmall({
       element: pronouns,
       elementStyles: pronounsStyles,

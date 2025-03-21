@@ -39,6 +39,28 @@ const makeIcon = ({
   return iconElement;
 };
 
+const makeText = ({
+  text,
+  isThemeDark,
+}: {
+  text: string;
+  isThemeDark?: boolean;
+}) => {
+  const textElement = ElementModel.headline.sansSmaller({
+    element: document.createElement('span'),
+    isThemeDark,
+    elementStyles: {
+      element: {
+        color: `${Styles.token.color.gray.dark}`,
+      },
+    },
+  });
+
+  textElement.element.innerHTML = text;
+
+  return textElement;
+};
+
 const makeContactLink = ({
   element,
   icon,
@@ -50,10 +72,8 @@ const makeContactLink = ({
 }) => {
   const isLink =
     element.getAttribute('href') && icon !== Utility.asset.icon.PIN;
-  const textSpan = document.createElement('span');
+  const textSpan = makeText({ text: element.innerHTML, isThemeDark });
   const iconSpan = makeIcon({ icon, isThemeDark });
-
-  textSpan.innerHTML = element.innerHTML;
 
   if (isLink) {
     const link = ElementModel.layout.gridInlineRow({
@@ -68,8 +88,10 @@ const makeContactLink = ({
     if (ariaLabel) link.element.setAttribute('aria-label', ariaLabel);
 
     link.element.appendChild(iconSpan.element);
-    link.element.appendChild(textSpan);
     link.styles += iconSpan.styles;
+
+    link.element.appendChild(textSpan.element);
+    link.styles += textSpan.styles;
 
     return link;
   }
@@ -81,8 +103,10 @@ const makeContactLink = ({
   });
 
   container.element.appendChild(iconSpan.element);
-  container.element.appendChild(textSpan);
   container.styles += iconSpan.styles;
+
+  container.element.appendChild(textSpan.element);
+  container.styles += textSpan.styles;
 
   return container;
 };

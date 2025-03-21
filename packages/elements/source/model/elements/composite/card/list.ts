@@ -5,6 +5,7 @@ import { type ElementProps } from '../../../modifiers/_types';
 interface ListProps extends ElementProps {
   isDisplayEvent?: boolean;
   isDisplayPerson?: boolean;
+  isDisplayTabular?: boolean;
 }
 
 export const card = (props: ElementProps) => {
@@ -46,14 +47,35 @@ export const person = (props: ElementProps) => {
   return createStyledElement(props, Styles.element.composite.card.list.person);
 };
 
+export const personTabular = (props: ElementProps) => {
+  const { isThemeDark } = props;
+
+  if (isThemeDark) {
+    return createStyledElement(
+      props,
+      Styles.element.composite.card.list.personTabularDark,
+    );
+  }
+
+  return createStyledElement(
+    props,
+    Styles.element.composite.card.list.personTabular,
+  );
+};
+
 export default (props: ListProps) => {
-  const { isDisplayEvent, isDisplayPerson, ...elementProps } = props;
+  const { isDisplayEvent, isDisplayPerson, isDisplayTabular, ...elementProps } =
+    props;
   if (isDisplayEvent) {
     return event(elementProps);
   }
 
   if (isDisplayPerson) {
     return person(elementProps);
+  }
+
+  if (isDisplayTabular) {
+    return personTabular(elementProps);
   }
 
   return card(elementProps);

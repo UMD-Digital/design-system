@@ -93,6 +93,40 @@ const createPersonImageStyles = (customStyles = {}) => {
   };
 };
 
+const createPersonTabularImageStyles = (customStyles = {}) => {
+  const baseStyles = {
+    height: 'auto',
+    ...customStyles,
+  };
+
+  return {
+    [`.${image.wrapper.className}`]: {
+      ...createContainerQuery(smallBreakpoint, 'max-width', {
+        marginBottom: `${spacing.md}`,
+        backgroundColor: `${color.gray.lighter}`,
+        display: 'flex',
+        justifyContent: 'center',
+      }),
+
+      ...createContainerQuery(mediumBreakpointStart, 'min-width', {
+        display: 'block',
+        width: '96px',
+        order: '-1',
+        paddingRight: `${spacing.md}`,
+        alignSelf: 'flex-start',
+      }),
+
+      '& img, & svg': {
+        ...createContainerQuery(smallBreakpoint, 'max-width', {
+          height: 'auto !important',
+          width: '140px',
+        }),
+      },
+      ...baseStyles,
+    },
+  };
+};
+
 const createTextStyles = (customStyles = {}) => {
   return {
     [`& > *:nth-child(2)`]: {
@@ -224,6 +258,54 @@ export const personDark = create.jssObject({
   ...createWrapperStyles(),
   ...createTextStyles(),
   ...createPersonImageStyles({
+    ...createContainerQuery(smallBreakpoint, 'max-width', {
+      width: '100%',
+      marginBottom: `${spacing.md}`,
+      backgroundColor: `${color.gray.darker}`,
+      display: 'flex',
+      justifyContent: 'center',
+    }),
+  }),
+});
+
+const tabularColumnStyles = {
+  order: 3,
+
+  ...createContainerQuery(mediumBreakpoint, 'min-width', {
+    width: '30%',
+  }),
+};
+
+// umd-element-composite-card-list-person-tabular
+export const personTabular = create.jssObject({
+  className: `${classNamePrefix}-person-tabular`,
+  ...createContainerStyles({
+    ...createContainerQuery(smallBreakpoint, 'max-width', {
+      flexDirection: 'column',
+    }),
+
+    [`& > *:last-child`]: {
+      ...tabularColumnStyles,
+    },
+  }),
+  ...createWrapperStyles(),
+  ...createTextStyles(),
+  ...createPersonTabularImageStyles(),
+});
+
+// umd-element-composite-card-list-person-tabular-dark
+export const personTabularDark = create.jssObject({
+  className: `${classNamePrefix}-person-tabular-dark`,
+  ...createContainerStyles({
+    ...darkContainerStyles,
+
+    [`& > *:last-child`]: {
+      ...tabularColumnStyles,
+    },
+  }),
+  ...createWrapperStyles(),
+  ...createTextStyles(),
+  ...createPersonTabularImageStyles({
     ...createContainerQuery(smallBreakpoint, 'max-width', {
       width: '100%',
       marginBottom: `${spacing.md}`,

@@ -3,7 +3,7 @@ import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 
 interface PersonTextLockup {
-  name: HTMLElement | null;
+  name?: HTMLElement | null;
   job?: HTMLElement | null;
   association?: HTMLElement | null;
   pronouns?: HTMLElement | null;
@@ -90,7 +90,6 @@ export default ({
   association,
   pronouns,
   subText,
-
   isThemeDark,
 }: PersonTextLockup) => {
   const container = document.createElement('div');

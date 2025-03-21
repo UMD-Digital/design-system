@@ -1,169 +1,82 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-import { Image as LayoutImage } from 'layout';
-import * as personElement from './elements';
+import { token } from '@universityofmaryland/web-styles-library';
+import { assets, textLockup } from 'atomic';
+import { ElementModel } from 'model';
 import { PersonCard } from './_types';
 
-const { convertJSSObjectToStyles } = Utility.styles;
+const actionStyles = {
+  element: {
+    marginTop: token.spacing.sm,
+  },
+};
 
-const SMALL = 400;
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_HAS_IMAGE = 'has-image';
-const THEME_DARK = 'dark';
+const headlineStyles = {
+  element: {
+    fontWeight: '700',
+    color: `${token.color.black}`,
 
-const LayoutListContainer = personElement.list.Elements.container;
-const LayoutImageContainer = LayoutImage.Elements.container;
-const LayoutTextContainer = personElement.text.Elements.container;
-const LayoutTextContainerOverwrite =
-  personElement.text.Elements.containerWithContact;
-const LayoutTextName = personElement.text.Elements.name;
-
-const ELEMENT_NAME = 'umd-person-tabluar';
-const ELEMENT_PERSON_TABULAR_CONTAINER = 'person-tabluar-container';
-
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-const IS_WITH_IMAGE = `[${ATTRIBUTE_HAS_IMAGE}]`;
-
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutImageContainer}`;
-const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer}`;
-const OVERWRITE_TEXT_CONTAINER_WRAPPER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextContainer} .${personElement.text.Elements.mainWrapper}`;
-const OVERWRITE_PERSON_NAME = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${LayoutTextName}`;
-const OVERWRITE_PERSON_CONTACT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} .${personElement.text.Elements.contactContainer}`;
-
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `${OVERWRITE_THEME_DARK_CONTAINER} .${LayoutImageContainer}`;
-
-const OVERWRITE_WITH_IMAGE_TEXT_CONTAINER = `.${ELEMENT_PERSON_TABULAR_CONTAINER}${IS_WITH_IMAGE} .${LayoutTextContainer}`;
-const OVERWRITE_TEXT_CONTAINER_WITH_CONTACT = `.${ELEMENT_PERSON_TABULAR_CONTAINER} .${LayoutListContainer} ${LayoutTextContainerOverwrite}`;
-const OVERWRITE_TEXT_CONTAINER_CONTACT = `${OVERWRITE_TEXT_CONTAINER_WITH_CONTACT} .${personElement.text.Elements.contactContainer}`;
-
-const OverwriteThemeDarkStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
-      background-color: ${token.color.gray.darker};
-    }
-  }
-`;
-
-const OverwriteWithImageStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_WITH_IMAGE_TEXT_CONTAINER} {
-      width: calc(100% - 120px);
-    }
-  }
-`;
-
-const OverwriteImagesStyles = `
-  ${OVERWRITE_IMAGE_CONTAINER} {
-    order: 1;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} {
-      float: none;
-      width: 100%;
-      margin-bottom: ${token.spacing.md};
-      background-color: ${token.color.gray.lighter};
-      display: flex;
-      justify-content: center;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} {
-      width: 96px;
-      margin-right: ${token.spacing.md};
-    }
-  }
-
-  ${OVERWRITE_IMAGE_CONTAINER} img,
-  ${OVERWRITE_IMAGE_CONTAINER} svg {
-    width: 140px;
-    max-width: 100%;
-  }
-`;
-
-const OverwriteTextStyles = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_TEXT_CONTAINER_WRAPPER} > *:not(.${LayoutTextName})`]:
-        typography.sans.small,
+    [`& + *`]: {
+      marginTop: token.spacing.min,
     },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_PERSON_CONTACT_CONTAINER} > *`]: typography.sans.small,
-    },
-  })}
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_PERSON_NAME}`]: typography.sans.large,
-    },
-  })}
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_TEXT_CONTAINER} {
-      order: 2;
-      width: 100%;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_TEXT_CONTAINER_WITH_CONTACT} {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: ${token.spacing.md};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${OVERWRITE_TEXT_CONTAINER_CONTACT} {
-      margin-top: 0;
-    }
-  }
-`;
-
-// prettier-ignore
-const STYLES_PERSON_TABULAR_ELEMENT = `
-  .${ELEMENT_PERSON_TABULAR_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-  
-  .${ELEMENT_PERSON_TABULAR_CONTAINER} + * {
-    margin-top: ${token.spacing.md}; 
-  }
-
-  ${personElement.text.Styles}
-  ${LayoutImage.Styles}
-  ${personElement.list.Styles}
-  ${OverwriteImagesStyles}
-  ${OverwriteTextStyles}
-  ${OverwriteThemeDarkStyles}
-  ${OverwriteWithImageStyles}
-`;
+  },
+  subElement: {
+    color: 'currentColor',
+  },
+};
 
 export default (props: PersonCard) => {
-  const { isThemeDark, image } = props;
-  const personContainer = personElement.text.CreateElement({
+  const { image, actions, isThemeDark } = props;
+  const composite = ElementModel.composite.card.list({
     ...props,
-    displayType: 'tabular',
+    element: document.createElement('div'),
+    isDisplayTabular: true,
   });
-  const elementContainer = document.createElement('div');
-  const imageContainer = image ? LayoutImage.CreateElement({ image }) : null;
-  const container = personElement.list.CreateElement({
-    personContainer,
-    imageContainer,
-    isThemeDark,
-  });
-  let styles = STYLES_PERSON_TABULAR_ELEMENT;
+  const { name, ...otherProps } = props;
+  const textLockupElement = textLockup.person(otherProps);
+  const contactLockupElement = textLockup.contact(props);
 
-  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  // First Column
 
-  elementContainer.appendChild(container);
-  elementContainer.classList.add(ELEMENT_PERSON_TABULAR_CONTAINER);
-  if (imageContainer) elementContainer.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
+  if (image) {
+    const imageContainer = assets.image.background({
+      image,
+      isScaled: false,
+    });
 
-  return { element: elementContainer, styles };
+    composite.element.appendChild(imageContainer.element);
+    composite.styles += imageContainer.styles;
+  }
+
+  // Second Column
+
+  if (name) {
+    const styledName = ElementModel.headline.sansLarge({
+      element: name,
+      elementStyles: headlineStyles,
+      isThemeDark,
+    });
+    textLockupElement.element.insertBefore(
+      styledName.element,
+      textLockupElement.element.firstChild,
+    );
+    textLockupElement.styles += styledName.styles;
+  }
+
+  if (actions) {
+    const styledActions = ElementModel.layout.gridInlineTabletRows({
+      element: actions,
+      elementStyles: actionStyles,
+    });
+    textLockupElement.element.appendChild(styledActions.element);
+    textLockupElement.styles += styledActions.styles;
+  }
+
+  composite.element.appendChild(textLockupElement.element);
+  composite.styles += textLockupElement.styles;
+
+  // Third Column
+
+  composite.element.appendChild(contactLockupElement.element);
+  composite.styles += contactLockupElement.styles;
+
+  return composite;
 };

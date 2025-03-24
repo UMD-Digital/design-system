@@ -150,3 +150,50 @@ export const transparent = create.jssObject({
   }),
   ...createImageStyles(),
 });
+
+const personContainer = {};
+
+const personImageContainer = {
+  display: 'flex',
+  justifyContent: 'center',
+  backgroundColor: `${color.gray.lighter}`,
+  marginBottom: `${spacing.md}`,
+};
+
+const personImage = {
+  display: 'block',
+  width: '100%',
+  objectFit: 'contain',
+  height: '140px',
+
+  ...createContainerQuery(mediumBreakpointStart, 'min-width', {
+    height: '200px',
+  }),
+};
+
+// umd-element-composite-card-block-person
+export const person = create.jssObject({
+  className: `${classNamePrefix}-person`,
+
+  [`.${image.wrapper.className}`]: {
+    ...personImageContainer,
+
+    ['img, svg']: {
+      ...personImage,
+    },
+  },
+});
+
+// umd-element-composite-card-block-person-dark
+export const personDark = create.jssObject({
+  className: `${classNamePrefix}-person-dark`,
+
+  [`.${image.wrapper.className}`]: {
+    ...personImageContainer,
+    backgroundColor: `${color.gray.darker}`,
+
+    ['img, svg']: {
+      ...personImage,
+    },
+  },
+});

@@ -39,6 +39,7 @@ export default (props: PersonBio) => {
           color: `${token.color.black}`,
           textTransform: 'uppercase',
           fontWeight: '800',
+          display: 'block',
         },
       },
     });

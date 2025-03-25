@@ -35,11 +35,13 @@ export default (props: PersonBio) => {
       isThemeDark,
       elementStyles: {
         element: {
-          marginTop: token.spacing.min,
           color: `${token.color.black}`,
           textTransform: 'uppercase',
           fontWeight: '800',
           display: 'block',
+        },
+        siblingAfter: {
+          marginTop: token.spacing.sm,
         },
       },
     });

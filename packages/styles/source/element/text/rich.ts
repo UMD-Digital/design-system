@@ -31,12 +31,11 @@ const childSpacing = {
 const simpleBase = {
   ...animation.nestedElements.linksWhite,
   fontSize: font.size.base,
-  lineHeight: `1.375em`,
+  lineHeight: '1.5em',
 
   '& > *': {
     fontSize: font.size.base,
     ...childSpacing,
-    lineHeight: '1.5em',
   },
 
   '& em, & i': {
@@ -55,7 +54,7 @@ const simpleBase = {
 const advancedBase = {
   ...simpleBase,
   fontSize: font.size.lg,
-  lineHeight: `1.375em`,
+  lineHeight: '1.5em',
 
   '& > *': {
     fontSize: font.size.lg,

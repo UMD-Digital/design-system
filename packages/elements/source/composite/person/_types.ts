@@ -26,3 +26,7 @@ export interface Person extends PersonContact, PersonDisplay {
 export interface PersonCard extends Person {
   image?: HTMLImageElement | null;
 }
+
+export interface PersonBio extends PersonCard {
+  description?: HTMLElement | null;
+}

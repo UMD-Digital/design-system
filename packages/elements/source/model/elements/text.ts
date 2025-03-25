@@ -7,3 +7,9 @@ export const eyebrow = (props: ElementProps) =>
 
 export const ribbon = (props: ElementProps) =>
   createStyledElement(props, Styles.element.text.decoration.ribbon);
+
+export const lineAdjustment = (props: ElementProps) =>
+  createStyledElement(props, Styles.element.text.line.adjustent);
+
+export const lineAdjustmentInset = (props: ElementProps) =>
+  createStyledElement(props, Styles.element.text.line.adjustentInset);

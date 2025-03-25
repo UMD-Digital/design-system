@@ -62,7 +62,7 @@ export const tailwing = create.jssObject({
   },
 });
 
-const lineTrailingBefore = {
+const trailingBefore = {
   content: '""',
   position: 'absolute',
   top: '9px',
@@ -74,7 +74,7 @@ const lineTrailingBefore = {
 };
 
 // umd-text-line-trailing
-export const lineTrailing = create.jssObject({
+export const trailing = create.jssObject({
   className: [
     `${classNamePrefix}-trailing`,
     /** @deprecated Use 'umd-text-line-trailing' instead */
@@ -88,7 +88,7 @@ export const lineTrailing = create.jssObject({
   backgroundColor: `${color.white}`,
 
   '&::before': {
-    ...lineTrailingBefore,
+    ...trailingBefore,
   },
 
   '& > span': {
@@ -104,8 +104,8 @@ export const lineTrailing = create.jssObject({
 });
 
 // umd-text-line-trailing-light
-export const lineTrailingLight = create.jssObject({
-  ...lineTrailing,
+export const trailingLight = create.jssObject({
+  ...trailing,
   backgroundColor: `${color.gray.lighter}`,
 
   className: [
@@ -116,8 +116,8 @@ export const lineTrailingLight = create.jssObject({
 });
 
 // umd-text-line-trailing-dark
-export const lineTrailingDark = create.jssObject({
-  ...lineTrailing,
+export const trailingDark = create.jssObject({
+  ...trailing,
   backgroundColor: `${color.gray.darker}`,
   color: `${color.white}`,
 
@@ -128,13 +128,13 @@ export const lineTrailingDark = create.jssObject({
   ],
 
   '&::before': {
-    ...lineTrailingBefore,
+    ...trailingBefore,
     background: `${color.white}`,
   },
 });
 
 // umd-text-line-adjustent
-export const lineAdjustent = create.jssObject({
+export const adjustent = create.jssObject({
   className: [
     `${classNamePrefix}-adjustent`,
     /** @deprecated Use 'umd-text-line-adjustent' instead */
@@ -148,7 +148,25 @@ export const lineAdjustent = create.jssObject({
     display: 'block',
     position: 'absolute',
     top: 0,
-    left: '-24px',
+    left: `-${spacing.md}`,
+    width: '2px',
+    height: '100%',
+    backgroundColor: color.red,
+  },
+});
+
+// umd-text-line-adjustent-inset
+export const adjustentInset = create.jssObject({
+  className: `${classNamePrefix}-adjustent-inset`,
+  position: 'relative',
+  paddingLeft: `${spacing.md}`,
+
+  '&::before': {
+    content: '""',
+    display: 'block',
+    position: 'absolute',
+    top: 0,
+    left: 0,
     width: '2px',
     height: '100%',
     backgroundColor: color.red,

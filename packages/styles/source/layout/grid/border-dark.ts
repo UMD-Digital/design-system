@@ -1,4 +1,4 @@
-import { color } from '../../token';
+import { color, media } from '../../token';
 import { create } from '../../utilities';
 import { base } from './base';
 
@@ -8,6 +8,10 @@ const classNamePrefix = 'umd-layout-grid-border-dark';
 const boarderBaseDark = {
   border: `1px solid ${color.gray.dark}`,
   borderBottom: `none`,
+
+  [`@media (${media.queries.medium.max})`]: {
+    gridGap: 0,
+  },
 };
 
 // umd-layout-grid-border-dark-two

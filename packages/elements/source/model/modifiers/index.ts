@@ -19,6 +19,7 @@ const CONFIG = {
     base: (props: StyleModifierProps) => [
       modifiers.baseStyles(props),
       modifiers.element(props),
+      modifiers.elementBefore(props),
       modifiers.elementChild(props),
       modifiers.elementSiblingAfter(props),
     ],

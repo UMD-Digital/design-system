@@ -6,6 +6,7 @@ export enum StyleType {
   Element = 'element',
   Child = 'child',
   SiblingAfter = 'sibling-after',
+  PseudoBefore = 'pseudo-before',
 }
 
 const textColors = {
@@ -51,6 +52,7 @@ const createSelector = (className: string, type: StyleType) => {
   const selectors = {
     [StyleType.Element]: `.${className}`,
     [StyleType.Child]: `.${className} *`,
+    [StyleType.PseudoBefore]: `.${className}:before`,
     [StyleType.SiblingAfter]: `.${className} + *`,
   };
   return selectors[type];
@@ -66,8 +68,9 @@ const createStyles = (selector: string, styles: Record<string, any> | null) => {
 
 const createStyleGenerator =
   (type: StyleType) =>
-  (className: string, styles: Record<string, any> | null) =>
-    createStyles(createSelector(className, type), styles);
+  (className: string, styles: Record<string, any> | null) => {
+    return createStyles(createSelector(className, type), styles);
+  };
 
 const createModifier = (
   type: StyleType,
@@ -93,6 +96,7 @@ const styleGetters = {
     svg: getIconColor(isTextColorWhite, isThemeDark),
     path: getIconColor(isTextColorWhite, isThemeDark),
   }),
+  pseudoBefore: ({ pseudoBefore }: StyleModifierProps) => pseudoBefore || {},
   sibling: ({ siblingAfter }: StyleModifierProps) => siblingAfter || {},
   textColor: ({ isTextColorWhite, isThemeDark }: StyleModifierProps) => ({
     ['&']: getTextColor(isTextColorWhite, isThemeDark),
@@ -105,6 +109,10 @@ export const modifiers = {
   baseStyles: createModifier(StyleType.Element, styleGetters.baseStyles),
   childLink: createModifier(StyleType.Element, styleGetters.childLink),
   element: createModifier(StyleType.Element, styleGetters.element),
+  elementBefore: createModifier(
+    StyleType.PseudoBefore,
+    styleGetters.pseudoBefore,
+  ),
   elementSiblingAfter: createModifier(
     StyleType.SiblingAfter,
     styleGetters.sibling,

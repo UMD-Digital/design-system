@@ -9,6 +9,7 @@ interface ElementColors {
 
 export interface ElementStyles {
   element?: Record<string, any>;
+  pseudoBefore?: Record<string, any>;
   siblingAfter?: Record<string, any>;
   subElement?: Record<string, any>;
 }

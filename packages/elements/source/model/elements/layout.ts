@@ -55,3 +55,6 @@ export const gridInlineTabletRows = (props: ElementProps) =>
 
 export const gridStacked = (props: ElementProps) =>
   createStyledElement(props, Styles.layout.grid.stacked);
+
+export const spaceHorizontalMax = (props: ElementProps) =>
+  createStyledElement(props, Styles.layout.space.horizontal.max);

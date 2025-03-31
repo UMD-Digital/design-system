@@ -9,6 +9,7 @@ import { quote } from './quote';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-rich';
+const scalingContainerMedium = 650;
 
 const themeDarkColors = {
   ...animation.nestedElements.linksDark,
@@ -19,18 +20,23 @@ const themeDarkColors = {
   },
 };
 
+const childSpacing = {
+  marginTop: spacing.md,
+
+  '&:first-child': {
+    marginTop: '0',
+  },
+};
+
 const simpleBase = {
   ...animation.nestedElements.linksWhite,
-  ...sans.small,
+  fontSize: font.size.base,
+  lineHeight: `1.375em`,
 
   '& > *': {
-    ...sans.small,
-    marginTop: spacing.md,
+    fontSize: font.size.base,
+    ...childSpacing,
     lineHeight: '1.5em',
-
-    '&:first-child': {
-      marginTop: '0',
-    },
   },
 
   '& em, & i': {
@@ -48,10 +54,12 @@ const simpleBase = {
 
 const advancedBase = {
   ...simpleBase,
-  ...sans.medium,
+  fontSize: font.size.lg,
+  lineHeight: `1.375em`,
 
   '& > *': {
-    ...sans.medium,
+    fontSize: font.size.lg,
+    ...childSpacing,
   },
 
   [`& p,
@@ -106,10 +114,11 @@ export const simpleDark = create.jssObject({
 // umd-text-rich-simple-large
 export const simpleLarge = create.jssObject({
   ...simpleBase,
-  ...sans.medium,
+  fontSize: font.size.lg,
 
   '& > *': {
-    ...sans.medium,
+    fontSize: font.size.lg,
+    ...childSpacing,
   },
 
   className: [
@@ -123,13 +132,59 @@ export const simpleLarge = create.jssObject({
 export const simpleLargeDark = create.jssObject({
   ...simpleBase,
   ...themeDarkColors,
-  ...sans.medium,
+  fontSize: font.size.lg,
 
   '& > *': {
-    ...sans.medium,
+    fontSize: font.size.lg,
+    ...childSpacing,
   },
 
   className: `${classNamePrefix}-simple-large-dark`,
+});
+
+// umd-text-rich-simple-scaling
+export const simpleScaling = create.jssObject({
+  ...simpleBase,
+  fontSize: font.size.base,
+
+  '& > *': {
+    fontSize: font.size.base,
+    ...childSpacing,
+  },
+
+  [`@container (min-width: ${scalingContainerMedium}px)`]: {
+    fontSize: font.size.lg,
+
+    '& > *': {
+      fontSize: font.size.lg,
+      ...childSpacing,
+    },
+  },
+
+  className: `${classNamePrefix}-simple-scaling`,
+});
+
+// umd-text-rich-simple-scaling-dark
+export const simpleScalingDark = create.jssObject({
+  ...simpleBase,
+  ...themeDarkColors,
+  fontSize: font.size.base,
+
+  '& > *': {
+    fontSize: font.size.base,
+    ...childSpacing,
+  },
+
+  [`@container (min-width: ${scalingContainerMedium}px)`]: {
+    fontSize: font.size.lg,
+
+    '& > *': {
+      fontSize: font.size.lg,
+      ...childSpacing,
+    },
+  },
+
+  className: `${classNamePrefix}-simple-scaling-dark`,
 });
 
 // umd-text-rich-advanced

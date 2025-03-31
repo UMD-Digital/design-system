@@ -88,8 +88,8 @@ const ImageSizeContainer = `
         height: 50vh;
         animation: img-size ease-in-out forwards;
         animation-timeline: view();
-        animation-range-start: 60vh;
-        animation-range-end: 140vh;
+        animation-range-start: 40vh;
+        animation-range-end: 100vh;
       }
     }
   }
@@ -148,8 +148,8 @@ const ImageContainer = `
         transform: translateX(-50%);
         animation: component-size ease-in-out forwards;
         animation-timeline: view();
-        animation-range-start: 60vh;
-        animation-range-end: 120vh;
+        animation-range-start: 40vh;
+        animation-range-end: 100vh;
       }
     }
   }

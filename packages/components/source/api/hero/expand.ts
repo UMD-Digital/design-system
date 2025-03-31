@@ -34,6 +34,8 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   const videoSlot = element.querySelector(
     `[slot="${Slots.name.VIDEO}"]`,
   ) as HTMLElement;
+  const actions = Slots.actions.default({ element });
+  const additional = Node.slot({ type: Slots.name.ADDITIONAL });
 
   const elementData: {
     image?: HTMLImageElement;
@@ -46,8 +48,6 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   } = {
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),
-    actions: Slots.actions.default({ element }),
-    additional: Node.slot({ type: Slots.name.ADDITIONAL }),
     topPosition,
   };
   const isVideo = videoSlot instanceof HTMLVideoElement;
@@ -63,6 +63,14 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   if (!isVideo && videoSlot && videoSlot.children.length > 0) {
     const video = videoSlot.querySelector('video') as HTMLVideoElement;
     if (video) elementData.video = video;
+  }
+
+  if (actions) {
+    elementData.actions = actions;
+  }
+
+  if (additional && additional.assignedElements().length > 0) {
+    elementData.additional = additional;
   }
 
   element._elementRef = Composite.hero.expand.CreateElement(elementData);

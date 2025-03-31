@@ -77,7 +77,7 @@ const CreateImageBlock = (props: PersonInfo) => {
           }`,
           display: 'flex',
           justifyContent: 'center',
-          marginBottom: token.spacing.sm,
+          marginBottom: token.spacing.md,
 
           ['& img']: {
             [`@container (max-width: ${token.media.breakpoints.large.max})`]: {
@@ -207,6 +207,7 @@ const CreateTextContainer = ({
           display: 'block',
           textTransform: 'uppercase',
           fontWeight: '700',
+          color: `${token.color.black}`,
           maxWidth: '650px',
         },
         siblingAfter: {

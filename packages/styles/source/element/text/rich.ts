@@ -26,6 +26,10 @@ const childSpacing = {
   '&:first-child': {
     marginTop: '0',
   },
+
+  '&:empty': {
+    marginTop: 0,
+  },
 };
 
 const simpleBase = {

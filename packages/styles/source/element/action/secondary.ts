@@ -8,6 +8,7 @@ const classNamePrefix = 'umd-action-secondary';
 const secondaryBase = {
   color: color.black,
   padding: 0,
+  maxWidth: 'initial',
   transition:
     'background 0.5s ease-in-out, border 0.5s ease-in-out, color 0.5s ease-in-out',
 

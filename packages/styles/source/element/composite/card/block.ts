@@ -39,6 +39,7 @@ const createImageStyles = (customStyles = {}) => {
         marginBottom: spacing.md,
         width: '120px',
         float: 'right',
+        alignSelf: 'flex-start',
       }),
 
       ...createContainerQuery(mediumBreakpointStart, 'min-width', {

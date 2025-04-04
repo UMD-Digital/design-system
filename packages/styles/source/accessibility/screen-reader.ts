@@ -1,4 +1,5 @@
 import { create } from '../utilities';
+import { JssObject } from '../utilities/transform';
 
 /**
  * Screen reader only class.
@@ -8,10 +9,9 @@ import { create } from '../utilities';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.accessibility.screenReader.only
  * ```
- *
  * @since 1.8.0
  */
-export const only = create.jssObject({
+export const only: JssObject = create.jssObject({
   className: 'sr-only',
   clip: 'rect(0,0,0,0)',
   borderWidth: '0px',

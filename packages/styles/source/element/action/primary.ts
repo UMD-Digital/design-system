@@ -1,5 +1,6 @@
 import { color } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { base, baseLarge, iconBase, iconBaseLarge } from './_base';
 
 // Consistent naming
@@ -18,8 +19,18 @@ const primaryBase = {
   },
 };
 
-// umd-action-primary
-export const normal = create.jssObject({
+/**
+ * Primary button style.
+ * @returns {JssObject} The JSS object for the primary button style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.primary.normal
+ * ```
+ *
+ * @since 1.8.0
+ */
+export const normal: JssObject = create.jssObject({
   ...base,
   ...primaryBase,
 
@@ -35,8 +46,18 @@ export const normal = create.jssObject({
   },
 });
 
-// umd-action-primary-large
-export const large = create.jssObject({
+/**
+ * Large primary button style.
+ * @returns {JssObject} The JSS object for the large primary button style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.primary.large
+ * ```
+ *
+ * @since 1.8.0
+ */
+export const large: JssObject = create.jssObject({
   ...baseLarge,
   ...primaryBase,
 
@@ -48,8 +69,18 @@ export const large = create.jssObject({
   },
 });
 
-// umd-action-primary-white
-export const white = create.jssObject({
+/**
+ * White primary button style.
+ * @returns {JssObject} The JSS object for the white primary button style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.primary.white
+ * ```
+ *
+ * @since 1.8.0
+ */
+export const white: JssObject = create.jssObject({
   ...base,
   backgroundColor: color.gray.lighter,
   color: color.black,

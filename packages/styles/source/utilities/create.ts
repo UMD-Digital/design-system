@@ -1,5 +1,11 @@
-import { JssEntry } from './transform';
+import { JssEntry, JssObject } from './transform';
 
+/**
+ * Creates a JSS object with type checking.
+ * @template T Type extending JssEntry
+ * @param {T} style The style object
+ * @returns {T} The JSS object with the same type
+ */
 export const jssObject = <T extends JssEntry>(style: T): T => style;
 
 export const jssObjectFromString = (cssString: string): Record<string, any> => {

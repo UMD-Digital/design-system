@@ -1,11 +1,15 @@
-[**@universityofmaryland/web-styles-library**](../../../README.md)
+[**umd-styles-library**](../../../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../../../README.md) / [accessibility](../../README.md) / screenReader
+[umd-styles-library](../../../modules.md) / [accessibility](../../README.md) / screenReader
 
 # screenReader
 
+Screen reader accessibility styles.
+
 ## Variables
 
-- [only](variables/only.md)
+| Variable | Description |
+| ------ | ------ |
+| [only](variables/only.md) | Screen reader only class. |

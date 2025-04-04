@@ -1,13 +1,15 @@
-[**@universityofmaryland/web-styles-library**](../../../README.md)
+[**umd-styles-library**](../../../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../../../README.md) / [animation](../../README.md) / nestedElements
+[umd-styles-library](../../../modules.md) / [animation](../../README.md) / nestedElements
 
 # nestedElements
 
 ## Variables
 
-- [gridSetup](variables/gridSetup.md)
-- [linksDark](variables/linksDark.md)
-- [linksWhite](variables/linksWhite.md)
+| Variable | Description |
+| ------ | ------ |
+| [gridSetup](variables/gridSetup.md) | - |
+| [linksDark](variables/linksDark.md) | - |
+| [linksWhite](variables/linksWhite.md) | - |

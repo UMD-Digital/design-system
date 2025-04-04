@@ -1,3 +1,8 @@
+/**
+ * @module animation/line
+ * Provides styles for animation with visual lines.
+ */
+
 import { color } from '../token';
 import { create } from '../utilities';
 

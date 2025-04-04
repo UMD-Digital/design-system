@@ -1,12 +1,14 @@
-[**@universityofmaryland/web-styles-library**](../README.md)
+[**umd-styles-library**](../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../README.md) / accessibility
+[umd-styles-library](../modules.md) / accessibility
 
 # accessibility
 
 ## Namespaces
 
-- [screenReader](namespaces/screenReader/README.md)
-- [skip](namespaces/skip/README.md)
+| Namespace | Description |
+| ------ | ------ |
+| [screenReader](namespaces/screenReader/README.md) | Screen reader accessibility styles. |
+| [skip](namespaces/skip/README.md) | Skip link options for accessibility styles. |

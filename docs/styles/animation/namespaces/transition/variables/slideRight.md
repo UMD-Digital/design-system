@@ -1,65 +1,28 @@
-[**@universityofmaryland/web-styles-library**](../../../../README.md)
+[**umd-styles-library**](../../../../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../../../../README.md) / [animation](../../../README.md) / [transition](../README.md) / slideRight
+[umd-styles-library](../../../../modules.md) / [animation](../../../README.md) / [transition](../README.md) / slideRight
 
 # Variable: slideRight
 
-> `const` **slideRight**: `object`
+> `const` **slideRight**: `JssObject`
 
-Defined in: [animation/transition.ts:58](https://github.com/UMD-Digital/design-system/blob/7fa144f196ef5f0ef2b372670136735f5a5c9236/packages/styles/source/animation/transition.ts#L58)
+Defined in: [animation/transition.ts:69](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/transition.ts#L69)
 
-## Type declaration
+Slide right animation effect.
 
-### @keyframes slide-in-from-left
+## Returns
 
-> **@keyframes slide-in-from-left**: `object`
+The JSS object for the slide right animation effect.
 
-#### @keyframes slide-in-from-left.from
+## Example
 
-> **from**: `object`
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.animation.transition.slideRight
+```
 
-#### @keyframes slide-in-from-left.from.transform
+## Since
 
-> **transform**: `string` = `'translateX(-15vw)'`
-
-#### @keyframes slide-in-from-left.to
-
-> **to**: `object`
-
-#### @keyframes slide-in-from-left.to.transform
-
-> **transform**: `string` = `'translateX(0)'`
-
-### @media (prefers-reduced-motion: no-preference)
-
-> **@media (prefers-reduced-motion: no-preference)**: `object`
-
-#### @media (prefers-reduced-motion: no-preference).@supports (animation-timeline: view())
-
-> **@supports (animation-timeline: view())**: `object`
-
-#### @media (prefers-reduced-motion: no-preference).@supports (animation-timeline: view()).animation
-
-> **animation**: `string` = `'slide-in-from-left forwards'`
-
-#### @media (prefers-reduced-motion: no-preference).@supports (animation-timeline: view()).animationRangeEnd
-
-> **animationRangeEnd**: `string` = `'100vh'`
-
-#### @media (prefers-reduced-motion: no-preference).@supports (animation-timeline: view()).animationRangeStart
-
-> **animationRangeStart**: `string` = `'0'`
-
-#### @media (prefers-reduced-motion: no-preference).@supports (animation-timeline: view()).animationTimeline
-
-> **animationTimeline**: `string` = `'view()'`
-
-#### @media (prefers-reduced-motion: no-preference).@supports (animation-timeline: view()).transform
-
-> **transform**: `string` = `'translateX(-15vw)'`
-
-### className
-
-> **className**: `string`
+1.8.0

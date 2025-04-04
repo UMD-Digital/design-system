@@ -1,4 +1,5 @@
 import { create } from '../utilities';
+import { JssObject } from '../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-animation-transition';
@@ -54,8 +55,18 @@ const keyFrameSlideInFromLeft = create.jssObject({
   },
 });
 
-// umd-animation-transition-slide-right
-export const slideRight = create.jssObject({
+/**
+ * Slide right animation effect.
+ * @returns {JssObject} The JSS object for the slide right animation effect.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.transition.slideRight
+ * ```
+ *
+ * @since 1.8.0
+ */
+export const slideRight: JssObject = create.jssObject({
   ...keyFrameSlideInFromLeft,
   className: `${classNamePrefix}-slide-right`,
 
@@ -70,8 +81,18 @@ export const slideRight = create.jssObject({
   },
 });
 
-// umd-animation-transition-fade-bottom
-export const fadeInFromBottom = create.jssObject({
+/**
+ * Fade in from bottom animation effect.
+ * @returns {JssObject} The JSS object for the fade in from bottom animation effect.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.transition.fadeInFromBottom
+ * ```
+ *
+ * @since 1.8.0
+ */
+export const fadeInFromBottom: JssObject = create.jssObject({
   ...keyFrameFadeInFromBottom,
 
   className: [

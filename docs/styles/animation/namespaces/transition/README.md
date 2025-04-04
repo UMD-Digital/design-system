@@ -1,12 +1,14 @@
-[**@universityofmaryland/web-styles-library**](../../../README.md)
+[**umd-styles-library**](../../../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../../../README.md) / [animation](../../README.md) / transition
+[umd-styles-library](../../../modules.md) / [animation](../../README.md) / transition
 
 # transition
 
 ## Variables
 
-- [fadeInFromBottom](variables/fadeInFromBottom.md)
-- [slideRight](variables/slideRight.md)
+| Variable | Description |
+| ------ | ------ |
+| [fadeInFromBottom](variables/fadeInFromBottom.md) | Fade in from bottom animation effect. |
+| [slideRight](variables/slideRight.md) | Slide right animation effect. |

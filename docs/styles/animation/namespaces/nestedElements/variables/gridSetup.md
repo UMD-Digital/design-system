@@ -1,14 +1,14 @@
-[**@universityofmaryland/web-styles-library**](../../../../README.md)
+[**umd-styles-library**](../../../../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../../../../README.md) / [animation](../../../README.md) / [nestedElements](../README.md) / gridSetup
+[umd-styles-library](../../../../modules.md) / [animation](../../../README.md) / [nestedElements](../README.md) / gridSetup
 
 # Variable: gridSetup
 
 > `const` **gridSetup**: `object`
 
-Defined in: [animation/nested-elements.ts:17](https://github.com/UMD-Digital/design-system/blob/7fa144f196ef5f0ef2b372670136735f5a5c9236/packages/styles/source/animation/nested-elements.ts#L17)
+Defined in: [animation/nested-elements.ts:17](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/nested-elements.ts#L17)
 
 ## Type declaration
 

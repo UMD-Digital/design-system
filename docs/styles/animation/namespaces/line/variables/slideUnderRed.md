@@ -1,14 +1,14 @@
-[**@universityofmaryland/web-styles-library**](../../../../README.md)
+[**umd-styles-library**](../../../../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../../../../README.md) / [animation](../../../README.md) / [line](../README.md) / slideUnderRed
+[umd-styles-library](../../../../modules.md) / [animation](../../../README.md) / [line](../README.md) / slideUnderRed
 
 # Variable: slideUnderRed
 
 > `const` **slideUnderRed**: `object`
 
-Defined in: [animation/line.ts:184](https://github.com/UMD-Digital/design-system/blob/7fa144f196ef5f0ef2b372670136735f5a5c9236/packages/styles/source/animation/line.ts#L184)
+Defined in: [animation/line.ts:189](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/line.ts#L189)
 
 ## Type declaration
 

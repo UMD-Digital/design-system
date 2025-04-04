@@ -1,11 +1,15 @@
-[**@universityofmaryland/web-styles-library**](../../../README.md)
+[**umd-styles-library**](../../../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../../../README.md) / [accessibility](../../README.md) / skip
+[umd-styles-library](../../../modules.md) / [accessibility](../../README.md) / skip
 
 # skip
 
+Skip link options for accessibility styles.
+
 ## Variables
 
-- [content](variables/content.md)
+| Variable | Description |
+| ------ | ------ |
+| [content](variables/content.md) | Skip to content link class. |

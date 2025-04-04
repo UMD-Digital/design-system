@@ -1,6 +1,7 @@
 import { color, spacing } from '../token';
 import { sans } from '../typography';
 import { create } from '../utilities';
+import { JssObject } from '../utilities/transform';
 
 let orderedBase: Record<string, any> = {
   padding: '0',
@@ -244,15 +245,35 @@ const orderedListBase = {
   },
 };
 
-// umd-list-ordered
-export const ordered = create.jssObject({
+/**
+ * Ordered list style.
+ * @returns {JssObject} The JSS object for the ordered list style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.list.ordered
+ * ```
+ *
+ * @since 1.8.0
+ */
+export const ordered: JssObject = create.jssObject({
   className: `umd-list-ordered`,
   ...orderedBase,
   ...orderedListBase,
 });
 
-// umd-list-ordered
-export const unordered = create.jssObject({
+/**
+ * Unordered list style.
+ * @returns {JssObject} The JSS object for the unordered list style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.list.unordered
+ * ```
+ *
+ * @since 1.8.0
+ */
+export const unordered: JssObject = create.jssObject({
   className: `umd-list-unordered`,
 
   ...unorderedBase,

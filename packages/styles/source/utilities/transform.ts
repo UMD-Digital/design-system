@@ -3,6 +3,12 @@ export interface JssEntry {
   [key: string]: any;
 }
 
+/**
+ * A JSS object that represents a styled component.
+ * This is the standard object format used throughout the design system.
+ */
+export type JssObject = JssEntry;
+
 export interface JssInputFormat {
   [key: string]: JssEntry;
 }

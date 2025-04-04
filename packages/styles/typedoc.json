@@ -1,15 +1,16 @@
 {
   "$schema": "https://typedoc.org/schema.json",
+  "name": "umd-styles-library",
   "entryPoints": [
     "./source/accessibility", 
     "./source/animation", 
-    "./source/element", 
-    "./source/layout",
-    "./source/token", 
-    "./source/typography", 
-    "./source/utilities", 
   ],
+  "entryPointStrategy": "resolve",
   "plugin": ["typedoc-plugin-markdown"],
-  "readme": "none",
+  "indexFormat": "table",
+  "parametersFormat": "table",
+  "hideGenerator": true,
+  "searchInDocuments": true,
+  "interfacePropertiesFormat": "table",
   "out": "../../docs/styles"
 }

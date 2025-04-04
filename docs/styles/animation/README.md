@@ -1,14 +1,16 @@
-[**@universityofmaryland/web-styles-library**](../README.md)
+[**umd-styles-library**](../README.md)
 
 ***
 
-[@universityofmaryland/web-styles-library](../README.md) / animation
+[umd-styles-library](../modules.md) / animation
 
 # animation
 
 ## Namespaces
 
-- [line](namespaces/line/README.md)
-- [loader](namespaces/loader/README.md)
-- [nestedElements](namespaces/nestedElements/README.md)
-- [transition](namespaces/transition/README.md)
+| Namespace | Description |
+| ------ | ------ |
+| [line](namespaces/line/README.md) | - |
+| [loader](namespaces/loader/README.md) | - |
+| [nestedElements](namespaces/nestedElements/README.md) | - |
+| [transition](namespaces/transition/README.md) | - |

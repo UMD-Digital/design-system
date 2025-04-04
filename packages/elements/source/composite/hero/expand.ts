@@ -116,7 +116,7 @@ const ImageContainer = `
   }
 
   @keyframes component-size-tablet {
-    from { width: 100%; }
+    from { width: 60%; }
     to { width: 100vw; }
   }
 
@@ -152,7 +152,7 @@ const ImageContainer = `
     @media (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: view()) {
         .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
-          width: 100%;
+          width: 60%;
           animation: component-size-tablet ease-in-out forwards;
           animation-timeline: view();
           animation-range-start: 60vh;

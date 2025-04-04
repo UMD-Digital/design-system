@@ -62,6 +62,7 @@ const text = {
 // Deprecated slots (marked for removal)
 /** @deprecated Use CommonSlots instead */
 const deprecated = {
+  ADDITIONAL: createSlotFactory(SlotNames.ADDITIONAL),
   body: createSlotFactory(SlotNames.deprecated.body),
   wrappingText: createSlotFactory(SlotNames.deprecated.wrappingText),
   plainText: createSlotFactory(SlotNames.deprecated.plainText),

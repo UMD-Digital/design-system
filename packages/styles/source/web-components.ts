@@ -32,6 +32,7 @@ const baseElements = [
   'feed-news',
   'hero-brand-video',
   'hero',
+  'hero-expand',
   'hero-logo',
   'hero-minimal',
   'logo',

@@ -34,7 +34,7 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   const videoSlot = element.querySelector(
     `[slot="${Slots.name.VIDEO}"]`,
   ) as HTMLElement;
-  const actions = Slots.actions.default({ element });
+  const actions = Node.slot({ type: Slots.name.actions.default });
   const additional = Node.slot({ type: Slots.name.ADDITIONAL });
 
   const elementData: {
@@ -69,7 +69,7 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
     elementData.actions = actions;
   }
 
-  if (additional && additional.assignedElements().length > 0) {
+  if (additional) {
     elementData.additional = additional;
   }
 

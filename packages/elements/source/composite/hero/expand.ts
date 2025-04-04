@@ -132,12 +132,6 @@ const ImageContainer = `
     align-items: center;
   }
 
- @supports (not (animation-timeline: view())) {
-    .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
-      height: 56vw;
-    }
-  }
-
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       .${ELEMENT_EXPAND_IMAGE_CONTAINER} {

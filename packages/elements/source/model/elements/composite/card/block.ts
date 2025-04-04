@@ -4,9 +4,12 @@ import { type ElementProps } from '../../../modifiers/_types';
 
 interface CardBlockProps extends ElementProps {
   isTransparent?: boolean;
-  isBordered?: boolean;
+  hasBorder?: boolean;
   isPerson?: boolean;
 }
+
+export const borderedDark = (props: ElementProps) =>
+  createStyledElement(props, Styles.element.composite.card.block.borderDark);
 
 export const bordered = (props: ElementProps) =>
   createStyledElement(props, Styles.element.composite.card.block.border);
@@ -27,7 +30,7 @@ export const transparent = (props: ElementProps) =>
   createStyledElement(props, Styles.element.composite.card.block.transparent);
 
 export default (props: CardBlockProps) => {
-  const { isTransparent, isBordered, isPerson, ...elementProps } = props;
+  const { isTransparent, hasBorder, isPerson, ...elementProps } = props;
   const { isThemeDark } = elementProps;
 
   if (isPerson && isThemeDark) {
@@ -38,16 +41,20 @@ export default (props: CardBlockProps) => {
     return person(elementProps);
   }
 
+  if (hasBorder && isThemeDark) {
+    return borderedDark(elementProps);
+  }
+
+  if (hasBorder) {
+    return bordered(elementProps);
+  }
+
   if (isTransparent) {
     return transparent(elementProps);
   }
 
   if (isThemeDark) {
     return themeDark(elementProps);
-  }
-
-  if (isBordered) {
-    return bordered(elementProps);
   }
 
   return themeLight(elementProps);

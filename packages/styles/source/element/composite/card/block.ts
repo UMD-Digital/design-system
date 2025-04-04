@@ -109,6 +109,28 @@ export const border = create.jssObject({
   }),
 });
 
+// umd-element-composite-card-block-border-dark
+export const borderDark = create.jssObject({
+  className: `${classNamePrefix}-border`,
+  ...createContainerStyles({
+    border: `1px solid ${color.gray.darker}`,
+    height: '100%',
+    ...createContainerQuery(smallBreakpoint, 'max-width', {
+      padding: spacing.md,
+    }),
+  }),
+  ...createTextStyles({
+    ...createContainerQuery(mediumBreakpointStart, 'min-width', {
+      padding: spacing.md,
+    }),
+  }),
+  ...createImageStyles({
+    ...createRangeContainerQuery(mediumBreakpointStart, mediumBreakpoint, {
+      marginLeft: spacing.sm,
+    }),
+  }),
+});
+
 // umd-element-composite-card-block-dark
 export const dark = create.jssObject({
   className: `${classNamePrefix}-dark`,

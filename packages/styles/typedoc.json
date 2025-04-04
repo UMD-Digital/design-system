@@ -1,0 +1,15 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "./source/accessibility", 
+    "./source/animation", 
+    "./source/element", 
+    "./source/layout",
+    "./source/token", 
+    "./source/typography", 
+    "./source/utilities", 
+  ],
+  "plugin": ["typedoc-plugin-markdown"],
+  "readme": "none",
+  "out": "../../docs/styles"
+}

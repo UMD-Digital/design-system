@@ -13,6 +13,7 @@
     "dist"
   ],
   "scripts": {
+    "docs": "npx typedoc --options ./typedoc.json",
     "build": "tsc --preserveWatchOutput",
     "clean": "rm -rf dist",
     "release": "npm run clean && npm run build && npm publish --access public",

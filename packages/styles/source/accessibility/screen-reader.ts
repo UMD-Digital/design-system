@@ -1,6 +1,16 @@
 import { create } from '../utilities';
 
-// sr-only
+/**
+ * Screen reader only class.
+ * @returns {JssObject} The JSS object for the screen reader only class.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.accessibility.screenReader.only
+ * ```
+ *
+ * @since 1.8.0
+ */
 export const only = create.jssObject({
   className: 'sr-only',
   clip: 'rect(0,0,0,0)',

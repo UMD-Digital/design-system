@@ -1,5 +1,11 @@
+/**
+ * @module layout/background/highlight
+ * Provides highlight background styles with accent borders.
+ */
+
 import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-background-highlight';
@@ -17,8 +23,17 @@ const box = {
   },
 };
 
-// umd-layout-background-highlight
-export const white = create.jssObject({
+/**
+ * White highlight background with red accent border.
+ * @returns {JssObject} White background box with red accent border and responsive padding.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.background.highlight.white
+ * ```
+ * @since 1.8.0
+ */
+export const white: JssObject = create.jssObject({
   ...box,
 
   className: [
@@ -28,8 +43,17 @@ export const white = create.jssObject({
   ],
 });
 
-// umd-layout-background-highlight-light
-export const light = create.jssObject({
+/**
+ * Light gray highlight background with red accent border.
+ * @returns {JssObject} Light gray background box with red accent border and responsive padding.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.background.highlight.light
+ * ```
+ * @since 1.8.0
+ */
+export const light: JssObject = create.jssObject({
   ...box,
   backgroundColor: `${color.gray.lighter}`,
 
@@ -40,8 +64,17 @@ export const light = create.jssObject({
   ],
 });
 
-// umd-layout-background-highlight-dark
-export const dark = create.jssObject({
+/**
+ * Dark gray highlight background with red accent border.
+ * @returns {JssObject} Dark gray background box with red accent border and responsive padding.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.background.highlight.dark
+ * ```
+ * @since 1.8.0
+ */
+export const dark: JssObject = create.jssObject({
   ...box,
   backgroundColor: `${color.gray.darker}`,
 

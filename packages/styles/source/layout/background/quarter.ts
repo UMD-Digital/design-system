@@ -1,5 +1,11 @@
+/**
+ * @module layout/background/quarter
+ * Provides background styles that cover a quarter of the container.
+ */
+
 import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { padding } from './full';
 
 // Consistent naming
@@ -33,8 +39,17 @@ const quarter = {
   },
 };
 
-// umd-layout-background-quarter-light
-export const light = create.jssObject({
+/**
+ * Light quarter background.
+ * @returns {JssObject} Light gray responsive quarter background.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.background.quarter.light
+ * ```
+ * @since 1.8.0
+ */
+export const light: JssObject = create.jssObject({
   ...quarter,
 
   className: [
@@ -44,8 +59,17 @@ export const light = create.jssObject({
   ],
 });
 
-// umd-layout-background-quarter-dark
-export const dark = create.jssObject({
+/**
+ * Dark quarter background.
+ * @returns {JssObject} Dark gray responsive quarter background.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.background.quarter.dark
+ * ```
+ * @since 1.8.0
+ */
+export const dark: JssObject = create.jssObject({
   ...quarter,
 
   '&:before': {

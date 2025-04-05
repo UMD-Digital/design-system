@@ -1,11 +1,27 @@
+/**
+ * @module element/action/button
+ * Provides specialized button styles for multimedia and UI controls.
+ */
+
 import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-action-button';
 
-export const fullScreen = create.jssObject({
+/**
+ * Fullscreen button style.
+ * @returns {JssObject} Button style for fullscreen controls.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.button.fullScreen
+ * ```
+ * @since 1.8.0
+ */
+export const fullScreen: JssObject = create.jssObject({
   className: `${classNamePrefix}-full-screen`,
   ...sans.min,
   position: 'absolute',
@@ -33,7 +49,17 @@ export const fullScreen = create.jssObject({
   },
 });
 
-export const videoState = create.jssObject({
+/**
+ * Video playback control button style.
+ * @returns {JssObject} Button style for video playback controls.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.button.videoState
+ * ```
+ * @since 1.8.0
+ */
+export const videoState: JssObject = create.jssObject({
   className: `${classNamePrefix}-video-state`,
   position: 'absolute',
   bottom: '0',

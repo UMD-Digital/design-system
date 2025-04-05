@@ -1,10 +1,20 @@
+/**
+ * @module element/action/outline
+ * Provides outline button styles with various sizes and color schemes.
+ */
+
 import { color } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { base, iconBase, baseLarge, iconBaseLarge } from './_base';
 
 // Consistent naming
 const classNamePrefix = 'umd-action-outline';
 
+/**
+ * Base styles for outline buttons.
+ * @private
+ */
 const outlineBase = {
   backgroundColor: color.white,
   border: `1px solid ${color.gray.darker}`,
@@ -22,8 +32,17 @@ const outlineBase = {
   },
 };
 
-// umd-action-outline
-export const normal = create.jssObject({
+/**
+ * Normal outline button style.
+ * @returns {JssObject} Standard outline button styles.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.outline.normal
+ * ```
+ * @since 1.8.0
+ */
+export const normal: JssObject = create.jssObject({
   ...base,
   ...outlineBase,
 
@@ -43,8 +62,17 @@ export const normal = create.jssObject({
   },
 });
 
-// umd-action-outline-large
-export const large = create.jssObject({
+/**
+ * Large outline button style.
+ * @returns {JssObject} Large outline button styles.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.outline.large
+ * ```
+ * @since 1.8.0
+ */
+export const large: JssObject = create.jssObject({
   ...baseLarge,
   ...outlineBase,
 
@@ -60,8 +88,17 @@ export const large = create.jssObject({
   },
 });
 
-// umd-action-outline-white
-export const white = create.jssObject({
+/**
+ * White outline button style.
+ * @returns {JssObject} White outline button styles optimized for dark backgrounds.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.outline.white
+ * ```
+ * @since 1.8.0
+ */
+export const white: JssObject = create.jssObject({
   ...base,
   color: color.white,
   border: `1px solid ${color.white}`,

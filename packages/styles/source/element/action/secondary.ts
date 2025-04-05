@@ -1,5 +1,11 @@
+/**
+ * @module element/action/secondary
+ * Provides secondary action button styles.
+ */
+
 import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { base, baseLarge, iconBase, iconBaseLarge } from './_base';
 
 // Consistent naming
@@ -47,8 +53,17 @@ const secondaryBaseLargeIcon = {
   },
 };
 
-// umd-action-secondary
-export const normal = create.jssObject({
+/**
+ * Normal secondary button style.
+ * @returns {JssObject} The JSS object for the normal secondary button style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.secondary.normal
+ * ```
+ * @since 1.8.0
+ */
+export const normal: JssObject = create.jssObject({
   ...base,
   ...secondaryBase,
   className: `${classNamePrefix}`,
@@ -59,8 +74,17 @@ export const normal = create.jssObject({
   },
 });
 
-// umd-action-secondary-large
-export const large = create.jssObject({
+/**
+ * Large secondary button style.
+ * @returns {JssObject} The JSS object for the large secondary button style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.secondary.large
+ * ```
+ * @since 1.8.0
+ */
+export const large: JssObject = create.jssObject({
   ...baseLarge,
   ...secondaryLargeBase,
   className: `${classNamePrefix}-large`,
@@ -74,8 +98,17 @@ export const large = create.jssObject({
   },
 });
 
-// umd-action-secondary-white
-export const white = create.jssObject({
+/**
+ * White secondary button style.
+ * @returns {JssObject} The JSS object for the white secondary button style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.secondary.white
+ * ```
+ * @since 1.8.0
+ */
+export const white: JssObject = create.jssObject({
   ...base,
   ...secondaryBase,
   color: color.white,
@@ -86,8 +119,17 @@ export const white = create.jssObject({
   },
 });
 
-// umd-action-secondary-gold
-export const gold = create.jssObject({
+/**
+ * Gold secondary button style.
+ * @returns {JssObject} The JSS object for the gold secondary button style.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.secondary.gold
+ * ```
+ * @since 1.8.0
+ */
+export const gold: JssObject = create.jssObject({
   ...base,
   ...secondaryBase,
   color: color.white,

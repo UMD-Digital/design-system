@@ -1,6 +1,12 @@
+/**
+ * @module element/composite/card/list
+ * Provides styles for list-style card components with various themes and layouts.
+ */
+
 import { color, media, spacing } from '../../../token';
 import { image } from '../../asset';
 import { create } from '../../../utilities';
+import { JssObject } from '../../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-card-list';
@@ -9,6 +15,14 @@ const smallBreakpoint = media.breakpointValues.small.max;
 const mediumBreakpointStart = media.breakpointValues.medium.min;
 const mediumBreakpoint = media.breakpointValues.large.min;
 
+/**
+ * Creates container query-style media query for responsive layouts.
+ * @param {number} breakpoint - The breakpoint value in pixels
+ * @param {string} comparison - The comparison operator ('min-width' or 'max-width')
+ * @param {object} styles - The styles to apply at this breakpoint
+ * @returns {object} Media query object with styles
+ * @private
+ */
 const createContainerQuery = (
   breakpoint: number,
   comparison = 'max-width',
@@ -195,8 +209,17 @@ const darkContainerStyles = {
   borderBottom: `1px solid ${color.gray.dark}`,
 };
 
-// umd-element-composite-card-list-light
-export const light = create.jssObject({
+/**
+ * Light theme list card style.
+ * @returns {JssObject} Light themed list card with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.list.light
+ * ```
+ * @since 1.8.0
+ */
+export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
   ...createContainerStyles(),
   ...createWrapperStyles(),
@@ -204,8 +227,17 @@ export const light = create.jssObject({
   ...createImageStyles(),
 });
 
-// umd-element-composite-card-list-dark
-export const dark = create.jssObject({
+/**
+ * Dark theme list card style.
+ * @returns {JssObject} Dark themed list card with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.list.dark
+ * ```
+ * @since 1.8.0
+ */
+export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,
 
   ...createContainerStyles({
@@ -216,8 +248,17 @@ export const dark = create.jssObject({
   ...createImageStyles(),
 });
 
-// umd-element-composite-card-list-event-light
-export const eventLight = create.jssObject({
+/**
+ * Light theme event list card style.
+ * @returns {JssObject} Light themed event list card with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.list.eventLight
+ * ```
+ * @since 1.8.0
+ */
+export const eventLight: JssObject = create.jssObject({
   className: `${classNamePrefix}-event-light`,
 
   ...createContainerStyles(),

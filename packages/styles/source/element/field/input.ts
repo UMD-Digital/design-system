@@ -1,5 +1,11 @@
+/**
+ * @module element/field/input
+ * Provides form input field styles and wrappers.
+ */
+
 import { color, spacing } from '../../token';
 import { create, transform } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { baseInput } from './_base';
 import { valid, invalid } from './_state';
 
@@ -11,7 +17,18 @@ const CLOCK_RED = `data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgd2l
 // Consistent naming
 const classNamePrefix = 'umd-field-input';
 
-export const input = {
+/**
+ * Base input field styles with validation states.
+ * @returns {JssObject} Base styles for input fields with validation state support.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.input.input
+ * ```
+ * @since 1.8.0
+ */
+export const input: JssObject = {
+  className: 'umd-field-input',
   ...baseInput,
 
   "&[aria-invalid='true']": {
@@ -29,6 +46,9 @@ export const input = {
   },
 };
 
+/**
+ * Base styles for date and time input fields.
+ */
 const dateTimeBase = {
   appearance: 'none',
   backgroundColor: 'transparent',
@@ -52,6 +72,9 @@ const dateTimeBase = {
   },
 };
 
+/**
+ * Base styles for date and time input wrappers.
+ */
 const dateTimeWrapperBase = {
   backgroundColor: color.white,
   position: 'relative',
@@ -87,13 +110,31 @@ const dateTimeWrapperBase = {
   },
 };
 
-// umd-field-input-text
-export const text = create.jssObject({
+/**
+ * Text input field styles.
+ * @returns {JssObject} Styles for text input fields.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.input.text
+ * ```
+ * @since 1.8.0
+ */
+export const text: JssObject = create.jssObject({
   className: [`${classNamePrefix}-text`],
 });
 
-// umd-field-input-date-time-wrapper
-export const dateTimeWrapper = create.jssObject({
+/**
+ * Date and datetime input wrapper with calendar icon.
+ * @returns {JssObject} Wrapper styles for date and datetime inputs with calendar icon.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.input.dateTimeWrapper
+ * ```
+ * @since 1.8.0
+ */
+export const dateTimeWrapper: JssObject = create.jssObject({
   ...dateTimeWrapperBase,
 
   className: [
@@ -117,8 +158,17 @@ export const dateTimeWrapper = create.jssObject({
   },
 });
 
-// umd-field-input-time-wrapper
-export const timeWrapper = create.jssObject({
+/**
+ * Time input wrapper with clock icon.
+ * @returns {JssObject} Wrapper styles for time input with clock icon.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.input.timeWrapper
+ * ```
+ * @since 1.8.0
+ */
+export const timeWrapper: JssObject = create.jssObject({
   ...dateTimeWrapperBase,
 
   className: [
@@ -142,8 +192,17 @@ export const timeWrapper = create.jssObject({
   },
 });
 
-// umd-field-input-search-wrapper
-export const searchWrapper = create.jssObject({
+/**
+ * Search input wrapper with search icon.
+ * @returns {JssObject} Wrapper styles for search input with search icon.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.input.searchWrapper
+ * ```
+ * @since 1.8.0
+ */
+export const searchWrapper: JssObject = create.jssObject({
   position: 'relative',
 
   className: [

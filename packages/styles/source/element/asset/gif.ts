@@ -1,11 +1,26 @@
+/**
+ * @module element/asset/gif
+ * Provides styles for animated GIF assets with playback controls.
+ */
+
 import { color, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-asset-gif';
 
-// umd-asset-gif-toggle
-export const toggle = create.jssObject({
+/**
+ * Toggle control for GIF animation playback.
+ * @returns {JssObject} Styles for GIF container with play/pause button.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.asset.gif.toggle
+ * ```
+ * @since 1.8.0
+ */
+export const toggle: JssObject = create.jssObject({
   className: `${classNamePrefix}-toggle`,
   display: 'block',
   height: '100%',

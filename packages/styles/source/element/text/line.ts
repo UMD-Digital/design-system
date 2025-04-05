@@ -1,12 +1,27 @@
+/**
+ * @module element/text/line
+ * Provides styles for text with line decorations like underlines, dividers, and borders.
+ */
+
 import { color, spacing, media } from '../../token';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-line';
 
-// umd-text-line-tailwing
-export const tailwing = create.jssObject({
+/**
+ * Tailwing text with centered line decoration.
+ * @returns {JssObject} Styles for text with horizontal centered line.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.line.tailwing
+ * ```
+ * @since 1.8.0
+ */
+export const tailwing: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-tailwing`,
     /** @deprecated Use 'umd-text-line-tailwing' instead */
@@ -62,6 +77,11 @@ export const tailwing = create.jssObject({
   },
 });
 
+/**
+ * Common styles for trailing line before element.
+ * @type {object}
+ * @private
+ */
 const trailingBefore = {
   content: '""',
   position: 'absolute',
@@ -73,7 +93,16 @@ const trailingBefore = {
   zIndex: 1,
 };
 
-// umd-text-line-trailing
+/**
+ * Trailing line text style.
+ * @returns {JssObject} Styles for text with trailing horizontal line.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.line.trailing
+ * ```
+ * @since 1.8.0
+ */
 export const trailing = create.jssObject({
   className: [
     `${classNamePrefix}-trailing`,
@@ -103,8 +132,17 @@ export const trailing = create.jssObject({
   },
 });
 
-// umd-text-line-trailing-light
-export const trailingLight = create.jssObject({
+/**
+ * Light-themed trailing line text style.
+ * @returns {JssObject} Styles for text with trailing horizontal line on light background.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.line.trailingLight
+ * ```
+ * @since 1.8.0
+ */
+export const trailingLight: JssObject = create.jssObject({
   ...trailing,
   backgroundColor: `${color.gray.lighter}`,
 
@@ -115,8 +153,17 @@ export const trailingLight = create.jssObject({
   ],
 });
 
-// umd-text-line-trailing-dark
-export const trailingDark = create.jssObject({
+/**
+ * Dark-themed trailing line text style.
+ * @returns {JssObject} Styles for text with trailing horizontal line on dark background.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.line.trailingDark
+ * ```
+ * @since 1.8.0
+ */
+export const trailingDark: JssObject = create.jssObject({
   ...trailing,
   backgroundColor: `${color.gray.darker}`,
   color: `${color.white}`,
@@ -133,8 +180,17 @@ export const trailingDark = create.jssObject({
   },
 });
 
-// umd-text-line-adjustent
-export const adjustent = create.jssObject({
+/**
+ * Adjacent vertical line decoration style.
+ * @returns {JssObject} Styles for text with vertical red line decoration on the left.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.line.adjustent
+ * ```
+ * @since 1.8.0
+ */
+export const adjustent: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-adjustent`,
     /** @deprecated Use 'umd-text-line-adjustent' instead */
@@ -155,8 +211,17 @@ export const adjustent = create.jssObject({
   },
 });
 
-// umd-text-line-adjustent-inset
-export const adjustentInset = create.jssObject({
+/**
+ * Inset vertical line decoration style.
+ * @returns {JssObject} Styles for text with inset vertical red line and left padding.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.line.adjustentInset
+ * ```
+ * @since 1.8.0
+ */
+export const adjustentInset: JssObject = create.jssObject({
   className: `${classNamePrefix}-adjustent-inset`,
   position: 'relative',
   paddingLeft: `${spacing.md}`,

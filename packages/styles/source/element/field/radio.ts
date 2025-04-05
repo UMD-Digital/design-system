@@ -1,10 +1,21 @@
+/**
+ * @module element/field/radio
+ * Provides styles for radio button input elements.
+ */
+
 import { color, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { baseInputChoice, baseInputChoiceWrapper } from './_base';
 
 // Consistent naming
 const classNamePrefix = 'umd-field-radio';
 
+/**
+ * Base radio button input styles.
+ * @type {object}
+ * @private
+ */
 export const radio = {
   ...baseInputChoice,
   borderRadius: '50%',
@@ -29,13 +40,22 @@ export const radio = {
   },
 };
 
-// umd-field-radio-wrapper
-export const radioWrapper = create.jssObject({
+/**
+ * Radio button input wrapper.
+ * @returns {JssObject} Styles for radio button input with its label.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.radio.radioWrapper
+ * ```
+ * @since 1.8.0
+ */
+export const radioWrapper: JssObject = create.jssObject({
   ...baseInputChoiceWrapper,
 
   className: [
     `${classNamePrefix}-wrapper`,
-    /** @deprecated Use 'umd-text-decoration-eyebrow' instead */
+    /** @deprecated Use 'umd-field-radio-wrapper' instead */
     'umd-forms-choices-wrapper',
   ],
 

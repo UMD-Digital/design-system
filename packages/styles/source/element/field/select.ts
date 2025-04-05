@@ -1,14 +1,34 @@
+/**
+ * @module element/field/select
+ * Provides styles for select dropdown input elements.
+ */
+
 import { color, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { baseInput } from './_base';
 import { valid, invalid } from './_state';
 
+/**
+ * Base64 encoded SVG for dark chevron down icon.
+ * @private
+ */
 const CHEVRON_DOWN_DARK = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00OC43NDAyIDUyLjE3OTRMMjMuNjY3NSAyNEwyIDI0LjAwMDFMMzcuMDkxNSA2NS4yNzE0TDM3LjA3NTMgNjUuMjg5N0w0OC43MTYgNzlMNDguNzQwMiA3OC45NzE1TDQ4Ljc2NDQgNzlMNjAuNDA1MSA2NS4yODk3TDYwLjM4ODkgNjUuMjcxNEw5NS40ODA0IDI0TDczLjgxMjkgMjQuMDAwMUw0OC43NDAyIDUyLjE3OTRaIiBmaWxsPSJibGFjayIvPgo8L3N2Zz4K`;
+
+/**
+ * Base64 encoded SVG for red chevron down icon.
+ * @private
+ */
 const CHEVRON_DOWN_RED = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00OC43NDAyIDUyLjE3OTRMMjMuNjY3NSAyNEwyIDI0LjAwMDFMMzcuMDkxNSA2NS4yNzE0TDM3LjA3NTMgNjUuMjg5N0w0OC43MTYgNzlMNDguNzQwMiA3OC45NzE1TDQ4Ljc2NDQgNzlMNjAuNDA1MSA2NS4yODk3TDYwLjM4ODkgNjUuMjcxNEw5NS40ODA0IDI0TDczLjgxMjkgMjQuMDAwMUw0OC43NDAyIDUyLjE3OTRaIiBmaWxsPSIjRTIxODMzIi8+Cjwvc3ZnPgo=`;
 
 // Consistent naming
 const classNamePrefix = 'umd-field-select';
 
+/**
+ * Base select dropdown styles.
+ * @type {object}
+ * @private
+ */
 export const select = {
   ...baseInput,
 
@@ -40,14 +60,24 @@ export const select = {
   },
 };
 
-export const selectWrapper = create.jssObject({
+/**
+ * Select dropdown wrapper with custom dropdown indicator.
+ * @returns {JssObject} Styles for select dropdown with chevron indicator.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.select.selectWrapper
+ * ```
+ * @since 1.8.0
+ */
+export const selectWrapper: JssObject = create.jssObject({
   backgroundColor: color.white,
   overflow: 'hidden',
   position: 'relative',
 
   className: [
     `${classNamePrefix}-wrapper`,
-    /** @deprecated Use 'umd-text-decoration-eyebrow' instead */
+    /** @deprecated Use 'umd-field-select-wrapper' instead */
     'umd-forms-select-wrapper',
   ],
 

@@ -1,10 +1,21 @@
+/**
+ * @module element/text/label
+ * Provides styles for label elements used with form fields.
+ */
+
 import { color, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-label';
 
+/**
+ * Base label styles.
+ * @type {object}
+ * @private
+ */
 export const label = {
   ...sans.large,
   display: 'inline-block',
@@ -21,8 +32,17 @@ export const label = {
   },
 };
 
-// umd-text-code
-export const large = create.jssObject({
+/**
+ * Large form label style.
+ * @returns {JssObject} Styles for large form field labels.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.label.large
+ * ```
+ * @since 1.8.0
+ */
+export const large: JssObject = create.jssObject({
   className: `${classNamePrefix}-large`,
   ...label,
 });

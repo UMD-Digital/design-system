@@ -1,6 +1,17 @@
+/**
+ * @module element/field/_base
+ * Provides base styles for form field elements.
+ * @private
+ */
+
 import { color, spacing } from '../../token';
 import { sans } from '../../typography';
 
+/**
+ * Base styles for text input elements.
+ * @type {object}
+ * @private
+ */
 export const baseInput = {
   ...sans.small,
   backgroundColor: color.white,
@@ -30,6 +41,11 @@ export const baseInput = {
   },
 };
 
+/**
+ * Base styles for checkbox and radio input elements.
+ * @type {object}
+ * @private
+ */
 export const baseInputChoice = {
   appearance: 'none',
   backgroundColor: color.white,
@@ -47,6 +63,11 @@ export const baseInputChoice = {
   },
 };
 
+/**
+ * Base styles for checkbox and radio input wrapper elements.
+ * @type {object}
+ * @private
+ */
 export const baseInputChoiceWrapper = {
   alignItems: 'center',
   cursor: 'pointer',

@@ -1,8 +1,24 @@
+/**
+ * @module element/form
+ * Provides form styling and variants.
+ */
+
 import { create } from '../utilities';
+import { JssObject } from '../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-form';
 
-export const gray = create.jssObject({
+/**
+ * Gray form styling.
+ * @returns {JssObject} Gray-themed form styling.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.form.gray
+ * ```
+ * @since 1.8.0
+ */
+export const gray: JssObject = create.jssObject({
   className: `${classNamePrefix}-gray`,
 });

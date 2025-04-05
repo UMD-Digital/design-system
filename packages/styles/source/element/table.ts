@@ -1,12 +1,27 @@
+/**
+ * @module element/table
+ * Provides table styling components.
+ */
+
 import { color, spacing } from '../token';
 import { sans } from '../typography';
 import { create } from '../utilities';
+import { JssObject } from '../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-table';
 
-// umd-table-inline
-export const inline = create.jssObject({
+/**
+ * Inline table styling with responsive overflow.
+ * @returns {JssObject} Inline table with responsive overflow and consistent styling.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.table.inline
+ * ```
+ * @since 1.8.0
+ */
+export const inline: JssObject = create.jssObject({
   borderCollapse: 'collapse',
   display: 'block',
   overflowX: 'auto',

@@ -1,10 +1,20 @@
+/**
+ * @module element/field/file
+ * Provides styles for file upload input fields.
+ */
+
 import { color, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { valid, invalid } from './_state';
 
 // Consistent naming
 const classNamePrefix = 'umd-field-file';
 
+/**
+ * Base styles for file input elements.
+ * @private
+ */
 const file = {
   appearance: 'none',
   backgroundColor: 'transparent',
@@ -26,14 +36,24 @@ const file = {
   },
 };
 
-export const fileWrapper = create.jssObject({
+/**
+ * File input wrapper style.
+ * @returns {JssObject} Wrapper styles for file input elements with validation states.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.file.fileWrapper
+ * ```
+ * @since 1.8.0
+ */
+export const fileWrapper: JssObject = create.jssObject({
   backgroundColor: color.white,
   overflow: 'hidden',
   position: 'relative',
 
   className: [
     `${classNamePrefix}-wrapper`,
-    /** @deprecated Use 'umd-text-decoration-eyebrow' instead */
+    /** @deprecated Use 'umd-field-file-wrapper' instead */
     'umd-forms-file-wrapper',
   ],
 

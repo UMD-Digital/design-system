@@ -1,3 +1,8 @@
+/**
+ * @module element/action/primary
+ * Provides primary action button styles with different sizes and color themes.
+ */
+
 import { color } from '../../token';
 import { create } from '../../utilities';
 import { JssObject } from '../../utilities/transform';

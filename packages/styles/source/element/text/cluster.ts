@@ -1,10 +1,21 @@
+/**
+ * @module element/text/cluster
+ * Provides styles for grouped text elements like tags and pills.
+ */
+
 import { color, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-cluster';
 
+/**
+ * Base pill element styles.
+ * @type {object}
+ * @private
+ */
 const pill = {
   ...sans.min,
   display: 'inline-block',
@@ -20,13 +31,27 @@ const pill = {
   },
 };
 
+/**
+ * SVG icon styles for pills.
+ * @type {object}
+ * @private
+ */
 const pillSvg = {
   height: '12px',
   width: '12px',
 };
 
-// umd-text-cluster-pill
-export const pillList = create.jssObject({
+/**
+ * Light pill/tag list.
+ * @returns {JssObject} Light-themed pill list with hover effects.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.cluster.pillList
+ * ```
+ * @since 1.8.0
+ */
+export const pillList: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-pill`,
     /** @deprecated Use 'umd-text-cluster-pill' instead */
@@ -49,8 +74,17 @@ export const pillList = create.jssObject({
   },
 });
 
-// umd-text-cluster-pill-dark
-export const pillListDark = create.jssObject({
+/**
+ * Dark pill/tag list.
+ * @returns {JssObject} Dark-themed pill list with hover effects.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.cluster.pillListDark
+ * ```
+ * @since 1.8.0
+ */
+export const pillListDark: JssObject = create.jssObject({
   ...pillList,
 
   className: [
@@ -80,8 +114,13 @@ export const pillListDark = create.jssObject({
   },
 });
 
-// @Deprecated
-export const pillDoNotUse = create.jssObject({
+/**
+ * Legacy pill list style.
+ * @returns {JssObject} Deprecated pill list style.
+ * @deprecated Use pillList instead.
+ * @since 1.8.0
+ */
+export const pillDoNotUse: JssObject = create.jssObject({
   className: [
     /** @deprecated Use 'umd-pill-list' instead */
     'umd-pills',

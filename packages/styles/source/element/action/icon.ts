@@ -1,15 +1,29 @@
+/**
+ * @module element/action/icon
+ * Provides icon-based action button styles.
+ */
+
 import { color, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-action-icon';
 
+/**
+ * Base SVG icon styles.
+ * @private
+ */
 const svgIcon = {
   width: '14px',
   height: '14px',
   fill: `${color.black}`,
 };
 
+/**
+ * Base small icon button styles.
+ * @private
+ */
 const baseIconSmall = {
   width: '28px',
   height: '28px',
@@ -28,8 +42,17 @@ const baseIconSmall = {
   },
 };
 
-// umd-element-action-icon-small
-export const small = create.jssObject({
+/**
+ * Small icon button style with light background.
+ * @returns {JssObject} Small icon button styles with light theme.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.icon.small
+ * ```
+ * @since 1.8.0
+ */
+export const small: JssObject = create.jssObject({
   className: `${classNamePrefix}-button`,
   ...baseIconSmall,
   backgroundColor: `${color.gray.lightest}`,
@@ -39,8 +62,17 @@ export const small = create.jssObject({
   },
 });
 
-// umd-element-action-icon-small-dark
-export const smallDark = create.jssObject({
+/**
+ * Small icon button style with dark background.
+ * @returns {JssObject} Small icon button styles with dark theme.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.action.icon.smallDark
+ * ```
+ * @since 1.8.0
+ */
+export const smallDark: JssObject = create.jssObject({
   className: `${classNamePrefix}-button`,
   ...baseIconSmall,
   backgroundColor: `${color.gray.darker}`,

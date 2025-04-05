@@ -1,6 +1,17 @@
+/**
+ * @module element/action/_base
+ * Provides base styles for action elements like buttons.
+ * @private
+ */
+
 import { color, media, spacing } from '../../token';
 import { elements } from '../../typography';
 
+/**
+ * Base styles for action elements.
+ * @type {object}
+ * @private
+ */
 export const base = {
   ...elements.interativeSmall,
   display: 'inline-block',
@@ -14,6 +25,11 @@ export const base = {
   },
 };
 
+/**
+ * Base styles for large action elements.
+ * @type {object}
+ * @private
+ */
 export const baseLarge = {
   ...base,
   ...elements.interativeMedium,
@@ -30,6 +46,11 @@ export const baseLarge = {
   },
 };
 
+/**
+ * Base styles for icons within action elements.
+ * @type {object}
+ * @private
+ */
 export const iconBase = {
   height: '14px',
   width: '14px',
@@ -42,6 +63,11 @@ export const iconBase = {
   transform: 'translateY(-50%)',
 };
 
+/**
+ * Base styles for icons within large action elements.
+ * @type {object}
+ * @private
+ */
 export const iconBaseLarge = {
   ...iconBase,
 

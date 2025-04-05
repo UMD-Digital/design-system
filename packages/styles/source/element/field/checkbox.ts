@@ -1,12 +1,27 @@
+/**
+ * @module element/field/checkbox
+ * Provides styles for checkbox input elements.
+ */
+
 import { color, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { baseInputChoice, baseInputChoiceWrapper } from './_base';
 
+/**
+ * Base64 encoded SVG for the red checkmark icon.
+ * @private
+ */
 const CHECK_RED = `data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiB2aWV3Qm94PSIwIDAgOTYgOTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNlMjE4MzMiIGQ9Ik00MC41NTEyIDYxLjM0MTJMODQgMTEuMDAwMUw4NS42NDQ0IDMxLjg1N0w0Mi44NzkxIDgxLjk1MjJMNDEuOTIgODEuMTMzM0w0MS40MzE4IDgxLjcwNUw5Ljk3MDMxIDU1Ljk5MThMMjkuMTUyNSA1Mi4wNDY0TDQwLjU1MTIgNjEuMzQxMloiIC8+PC9zdmc+`;
 
 // Consistent naming
 const classNamePrefix = 'umd-field-checkbox';
 
+/**
+ * Base checkbox input styles.
+ * @type {object}
+ * @private
+ */
 export const checkbox = {
   ...baseInputChoice,
   border: `1px solid ${color.gray.light}`,
@@ -28,13 +43,22 @@ export const checkbox = {
   },
 };
 
-// umd-field-checkbox-wrapper
-export const checkboxWrapper = create.jssObject({
+/**
+ * Checkbox input wrapper.
+ * @returns {JssObject} Styles for checkbox input with its label.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.checkbox.checkboxWrapper
+ * ```
+ * @since 1.8.0
+ */
+export const checkboxWrapper: JssObject = create.jssObject({
   ...baseInputChoiceWrapper,
 
   className: [
     `${classNamePrefix}-wrapper`,
-    /** @deprecated Use 'umd-text-decoration-eyebrow' instead */
+    /** @deprecated Use 'umd-field-checkbox-wrapper' instead */
     'umd-forms-choices-wrapper',
   ],
 

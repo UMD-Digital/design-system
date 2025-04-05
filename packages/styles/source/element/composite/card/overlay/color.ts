@@ -1,10 +1,24 @@
+/**
+ * @module element/composite/card/overlay/color
+ * Provides styles for color overlay card components with different themes.
+ */
+
 import { color, media, spacing } from '../../../../token';
 import { image as imageElement } from '../../../asset';
 import { create } from '../../../../utilities';
+import { JssObject } from '../../../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-card-overlay-color';
 
+/**
+ * Creates media query for responsive layouts.
+ * @param {number} breakpoint - The breakpoint value in pixels
+ * @param {string} comparison - The comparison operator ('min-width' or 'max-width')
+ * @param {object} styles - The styles to apply at this breakpoint
+ * @returns {object} Media query object with styles
+ * @private
+ */
 const createMediaQuery = (
   breakpoint: number,
   comparison = 'max-width',
@@ -15,6 +29,12 @@ const createMediaQuery = (
   };
 };
 
+/**
+ * Creates image styles for overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Image styles for overlay card
+ * @private
+ */
 const createImageStyles = (customStyles = {}) => {
   const baseStyles = {
     position: 'absolute',
@@ -34,6 +54,12 @@ const createImageStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Creates text styles for overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Text styles for overlay card content
+ * @private
+ */
 const createTextStyles = (customStyles = {}) => {
   return {
     [`& > div:last-child`]: {
@@ -47,6 +73,12 @@ const createTextStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Creates container styles for overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Container styles for overlay card
+ * @private
+ */
 const createContainerStyles = (customStyles = {}) => {
   return {
     maxWidth: `${spacing.maxWidth.smallest}`,
@@ -58,6 +90,10 @@ const createContainerStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Base styles for color overlay containers.
+ * @private
+ */
 const colorContainerBase = {
   padding: `${spacing.lg} ${spacing.md}`,
   ...createMediaQuery(media.breakpointValues.tablet.min, 'min-width', {
@@ -65,8 +101,17 @@ const colorContainerBase = {
   }),
 };
 
-// umd-element-composite-card-overlay-color-light
-export const light = create.jssObject({
+/**
+ * Light theme color overlay card.
+ * @returns {JssObject} Styles for light themed color overlay card.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.overlay.color.light
+ * ```
+ * @since 1.8.0
+ */
+export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
   ...createContainerStyles({
     backgroundColor: color.gray.lightest,
@@ -76,8 +121,17 @@ export const light = create.jssObject({
   ...createImageStyles(),
 });
 
-// umd-element-composite-card-overlay-color-dark
-export const dark = create.jssObject({
+/**
+ * Dark theme color overlay card.
+ * @returns {JssObject} Styles for dark themed color overlay card.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.overlay.color.dark
+ * ```
+ * @since 1.8.0
+ */
+export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,
   ...createContainerStyles({
     backgroundColor: color.gray.darker,

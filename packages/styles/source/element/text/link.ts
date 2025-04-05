@@ -1,5 +1,11 @@
+/**
+ * @module element/text/link
+ * Provides styles for text links.
+ */
+
 import { color } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-link';
@@ -19,8 +25,17 @@ const focusBase = {
   backgroundSize: '100% 1px',
 };
 
-// umd-text-link-red
-export const red = create.jssObject({
+/**
+ * Red link style.
+ * @returns {JssObject} Link style with red hover/focus state.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.link.red
+ * ```
+ * @since 1.8.0
+ */
+export const red: JssObject = create.jssObject({
   ...base,
   color: color.black,
   backgroundImage: 'linear-gradient(#000000, #000000)',
@@ -34,8 +49,17 @@ export const red = create.jssObject({
   className: `${classNamePrefix}-red`,
 });
 
-// umd-text-link-white
-export const white = create.jssObject({
+/**
+ * White link style.
+ * @returns {JssObject} Link style with white color and gold hover/focus state.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.link.white
+ * ```
+ * @since 1.8.0
+ */
+export const white: JssObject = create.jssObject({
   ...base,
   color: color.white,
   backgroundImage: 'linear-gradient(#ffffff, #ffffff)',

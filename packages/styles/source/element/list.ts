@@ -1,8 +1,18 @@
+/**
+ * @module element/list
+ * Provides styles for ordered and unordered lists with customizable counters and markers.
+ */
+
 import { color, spacing } from '../token';
 import { sans } from '../typography';
 import { create } from '../utilities';
 import { JssObject } from '../utilities/transform';
 
+/**
+ * Base styles for ordered lists.
+ * @type {Record<string, any>}
+ * @private
+ */
 let orderedBase: Record<string, any> = {
   padding: '0',
   counterReset: 'item',
@@ -44,6 +54,11 @@ let orderedBase: Record<string, any> = {
   },
 };
 
+/**
+ * Base styles for unordered lists.
+ * @type {object}
+ * @private
+ */
 const unorderedBase = {
   padding: '0',
   counterReset: 'item',
@@ -100,6 +115,11 @@ orderedBase = {
   },
 };
 
+/**
+ * Extended styles for unordered lists with different marker types.
+ * @type {object}
+ * @private
+ */
 const unorderedListBase = {
   // disc
 
@@ -123,6 +143,11 @@ const unorderedListBase = {
   },
 };
 
+/**
+ * Extended styles for ordered lists with different counter types.
+ * @type {object}
+ * @private
+ */
 const orderedListBase = {
   // decimal
 

@@ -1,11 +1,22 @@
+/**
+ * @module element/text/decoration
+ * Provides decorative text elements like watermarks and ribbons.
+ */
+
 import { color, font, spacing, media } from '../../token';
 import { transition } from '../../animation';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-decoration';
 
+/**
+ * Base styles for watermark text.
+ * @type {object}
+ * @private
+ */
 const watermarkChild = {
   position: 'absolute',
   top: '20px',
@@ -25,8 +36,17 @@ const watermarkChild = {
   },
 };
 
-// umd-text-decoration-watermark
-export const watermark = create.jssObject({
+/**
+ * Light watermark decoration style.
+ * @returns {JssObject} Styles for large, subtle watermark text with animation.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.decoration.watermark
+ * ```
+ * @since 1.8.0
+ */
+export const watermark: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-watermark`,
     /** @deprecated Use 'umd-text-decoration-watermark' instead */
@@ -41,8 +61,17 @@ export const watermark = create.jssObject({
   },
 });
 
-// umd-text-decoration-watermark-dark
-export const watermarkDark = create.jssObject({
+/**
+ * Dark watermark decoration style.
+ * @returns {JssObject} Styles for dark, subtle watermark text with animation.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.decoration.watermarkDark
+ * ```
+ * @since 1.8.0
+ */
+export const watermarkDark: JssObject = create.jssObject({
   ...watermark,
 
   className: [
@@ -59,8 +88,17 @@ export const watermarkDark = create.jssObject({
   },
 });
 
-// umd-text-decoration-eyebrow
-export const ribbon = create.jssObject({
+/**
+ * Ribbon/eyebrow decoration.
+ * @returns {JssObject} Styles for gold ribbon with angled edges.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.decoration.ribbon
+ * ```
+ * @since 1.8.0
+ */
+export const ribbon: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-eyebrow`,
     /** @deprecated Use 'umd-text-decoration-eyebrow' instead */

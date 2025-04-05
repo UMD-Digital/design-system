@@ -1,10 +1,24 @@
+/**
+ * @module element/composite/card/overlay/image
+ * Provides styles for image overlay card components with tinted effects.
+ */
+
 import { color, media, spacing } from '../../../../token';
 import { image as imageElement } from '../../../asset';
 import { create } from '../../../../utilities';
+import { JssObject } from '../../../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-card-overlay-image';
 
+/**
+ * Creates container query for responsive layouts.
+ * @param {number} breakpoint - The breakpoint value in pixels
+ * @param {string} comparison - The comparison operator ('min-width' or 'max-width')
+ * @param {object} styles - The styles to apply at this breakpoint
+ * @returns {object} Container query object with styles
+ * @private
+ */
 const createContainerQuery = (
   breakpoint: number,
   comparison = 'max-width',
@@ -15,6 +29,12 @@ const createContainerQuery = (
   };
 };
 
+/**
+ * Creates image styles for image overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Image styles for overlay card
+ * @private
+ */
 const createImageStyles = (customStyles = {}) => {
   const baseStyles = {
     position: 'absolute',
@@ -34,6 +54,12 @@ const createImageStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Creates text styles for image overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Text styles for overlay card content
+ * @private
+ */
 const createTextStyles = (customStyles = {}) => {
   return {
     [`& > div:last-child`]: {
@@ -47,6 +73,12 @@ const createTextStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Creates container styles for image overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Container styles for overlay card
+ * @private
+ */
 const createContainerStyles = (customStyles = {}) => {
   return {
     maxWidth: `${spacing.maxWidth.smallest}`,
@@ -69,8 +101,17 @@ const createContainerStyles = (customStyles = {}) => {
   };
 };
 
-// umd-element-composite-card-overlay-element-quote
-export const quoateContainer = create.jssObject({
+/**
+ * Quote container for image overlay cards.
+ * @returns {JssObject} Styles for quote icon container in overlay cards.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.overlay.image.quoateContainer
+ * ```
+ * @since 1.8.0
+ */
+export const quoateContainer: JssObject = create.jssObject({
   className: `${classNamePrefix}-element-quote`,
   width: '41px',
   height: '30px',
@@ -81,8 +122,17 @@ export const quoateContainer = create.jssObject({
   },
 });
 
-// umd-element-composite-card-overlay-image-tint
-export const tint = create.jssObject({
+/**
+ * Tinted image overlay card.
+ * @returns {JssObject} Styles for tinted image overlay card with gradient effect.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.overlay.image.tint
+ * ```
+ * @since 1.8.0
+ */
+export const tint: JssObject = create.jssObject({
   className: `${classNamePrefix}`,
   ...createContainerStyles({}),
   ...createTextStyles({

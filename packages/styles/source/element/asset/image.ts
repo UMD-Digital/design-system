@@ -1,11 +1,21 @@
+/**
+ * @module element/asset/image
+ * Provides styles for image assets with various display options and animations.
+ */
+
 import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { box } from '../../layout/background';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-asset-image';
 
+/**
+ * Base image container styles.
+ * @private
+ */
 const base = {
   position: `relative`,
   display: `inline-block`,
@@ -13,11 +23,19 @@ const base = {
   overflow: `hidden`,
 };
 
+/**
+ * Base image element styles.
+ * @private
+ */
 const imageBase = {
   display: `block`,
   height: '100%',
 };
 
+/**
+ * Styles for scaled image display with cover behavior.
+ * @private
+ */
 const imageScaled = {
   ...imageBase,
   objectFit: 'cover',
@@ -25,21 +43,37 @@ const imageScaled = {
   width: '100%',
 };
 
+/**
+ * Initial animation state for hover effects.
+ * @private
+ */
 const imageAnimationStart = {
   transform: 'scale(1)',
   transition: 'transform 0.5s',
 };
 
+/**
+ * Final animation state for hover effects.
+ * @private
+ */
 const imageAnimationEnd = {
   transform: 'scale(1.025)',
 };
 
+/**
+ * Base link styles for image links.
+ * @private
+ */
 const linkBase = {
   lineHeight: `0`,
   overflow: `hidden`,
   display: `block`,
 };
 
+/**
+ * Styles for sign/badge overlays.
+ * @private
+ */
 const signBase = {
   [`& .${box.white.className}`]: {
     position: `absolute`,
@@ -52,6 +86,10 @@ const signBase = {
   },
 };
 
+/**
+ * Styles for linked images with hover effects.
+ * @private
+ */
 const linkImage = {
   '& img': {
     ...imageBase,
@@ -72,6 +110,10 @@ const linkImage = {
   },
 };
 
+/**
+ * Styles for linked scaled images with hover effects.
+ * @private
+ */
 const linkImageScaled = {
   '& img': {
     ...imageBase,
@@ -96,8 +138,17 @@ const linkImageScaled = {
   },
 };
 
-// umd-asset-image-caption
-export const caption = create.jssObject({
+/**
+ * Image caption overlay style.
+ * @returns {JssObject} Styles for image captions that appear as overlays.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.asset.image.caption
+ * ```
+ * @since 1.8.0
+ */
+export const caption: JssObject = create.jssObject({
   ...sans.min,
   className: `${classNamePrefix}-caption`,
   position: 'absolute',
@@ -111,16 +162,34 @@ export const caption = create.jssObject({
   zIndex: '99',
 });
 
-// umd-asset-image-wrapper
-export const wrapper = create.jssObject({
+/**
+ * Basic image wrapper style.
+ * @returns {JssObject} Container styles for images with animation effects.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.asset.image.wrapper
+ * ```
+ * @since 1.8.0
+ */
+export const wrapper: JssObject = create.jssObject({
   className: `${classNamePrefix}-wrapper`,
   ...base,
   ...linkImage,
   ...signBase,
 });
 
-// umd-asset-image-wrapper-scaled
-export const wrapperScaled = create.jssObject({
+/**
+ * Scaled image wrapper style.
+ * @returns {JssObject} Container styles for scaled images with animation effects.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.asset.image.wrapperScaled
+ * ```
+ * @since 1.8.0
+ */
+export const wrapperScaled: JssObject = create.jssObject({
   className: `${classNamePrefix}-wrapper-scaled`,
   ...base,
   width: '100%',
@@ -128,8 +197,17 @@ export const wrapperScaled = create.jssObject({
   ...signBase,
 });
 
-// umd-asset-image-aspect-standard
-export const aspectStandard = create.jssObject({
+/**
+ * Standard aspect ratio (4:3) for images.
+ * @returns {JssObject} Styles to enforce 4:3 aspect ratio on images.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.asset.image.aspectStandard
+ * ```
+ * @since 1.8.0
+ */
+export const aspectStandard: JssObject = create.jssObject({
   className: `${classNamePrefix}-aspect-standard`,
   aspectRatio: `4/3`,
   width: 'auto',
@@ -140,8 +218,17 @@ export const aspectStandard = create.jssObject({
   },
 });
 
-// umd-asset-image-aspect-square
-export const aspectSquare = create.jssObject({
+/**
+ * Square aspect ratio (1:1) for images.
+ * @returns {JssObject} Styles to enforce 1:1 square aspect ratio on images.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.asset.image.aspectSquare
+ * ```
+ * @since 1.8.0
+ */
+export const aspectSquare: JssObject = create.jssObject({
   className: `${classNamePrefix}-aspect-square`,
   aspectRatio: `1/1`,
   width: 'auto',

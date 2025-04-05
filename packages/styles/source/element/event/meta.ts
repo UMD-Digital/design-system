@@ -1,12 +1,27 @@
+/**
+ * @module element/event/meta
+ * Provides styles for event metadata displays including date, time, and location.
+ */
+
 import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-event-meta';
 
-// umd-element-event-meta-container
-export const container = create.jssObject({
+/**
+ * Container for event metadata.
+ * @returns {JssObject} Container styles for event metadata with container query support.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.event.meta.container
+ * ```
+ * @since 1.8.0
+ */
+export const container: JssObject = create.jssObject({
   className: `${classNamePrefix}-container`,
   container: 'inline-size',
 
@@ -19,8 +34,17 @@ export const container = create.jssObject({
   },
 });
 
-// umd-element-event-meta-wrapper
-export const wrapper = create.jssObject({
+/**
+ * Wrapper for event metadata items.
+ * @returns {JssObject} Flexbox wrapper styles for event metadata items with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.event.meta.wrapper
+ * ```
+ * @since 1.8.0
+ */
+export const wrapper: JssObject = create.jssObject({
   className: `${classNamePrefix}-wrapper`,
   display: 'flex',
   flexWrap: 'wrap',
@@ -57,8 +81,17 @@ export const wrapper = create.jssObject({
   },
 });
 
-// umd-element-event-meta-item
-export const item = create.jssObject({
+/**
+ * Individual event metadata item.
+ * @returns {JssObject} Styles for individual event metadata items with icon support.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.event.meta.item
+ * ```
+ * @since 1.8.0
+ */
+export const item: JssObject = create.jssObject({
   ...sans.smaller,
   className: `${classNamePrefix}-item`,
   color: `${color.gray.dark}`,

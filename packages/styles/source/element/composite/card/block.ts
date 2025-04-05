@@ -1,6 +1,12 @@
+/**
+ * @module element/composite/card/block
+ * Provides block card components with various styles and configurations.
+ */
+
 import { color, media, spacing } from '../../../token';
 import { image } from '../../asset';
 import { create } from '../../../utilities';
+import { JssObject } from '../../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-card-block';
@@ -9,6 +15,13 @@ const smallBreakpoint = media.breakpointValues.small.max;
 const mediumBreakpointStart = media.breakpointValues.medium.min;
 const mediumBreakpoint = media.breakpointValues.large.min;
 
+/**
+ * Creates a container query media rule for specific breakpoint.
+ * @param {number} breakpoint - The breakpoint in pixels
+ * @param {string} comparison - The comparison operator, defaults to 'max-width'
+ * @param {object} styles - The styles to apply at this breakpoint
+ * @returns {object} Media query object
+ */
 const createContainerQuery = (
   breakpoint: number,
   comparison = 'max-width',
@@ -19,12 +32,24 @@ const createContainerQuery = (
   };
 };
 
+/**
+ * Creates a container query for a range of viewport sizes.
+ * @param {number} min - The minimum breakpoint in pixels
+ * @param {number} max - The maximum breakpoint in pixels
+ * @param {object} styles - The styles to apply within this range
+ * @returns {object} Media query object
+ */
 const createRangeContainerQuery = (min: number, max: number, styles = {}) => {
   return {
     [`@media (min-width: ${min}px) and (max-width: ${max})`]: styles,
   };
 };
 
+/**
+ * Creates styles for card images with responsive behavior.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Complete image styles object
+ */
 const createImageStyles = (customStyles = {}) => {
   const baseStyles = {
     height: 'auto',
@@ -55,6 +80,11 @@ const createImageStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Creates styles for card text content with responsive behavior.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Complete text styles object
+ */
 const createTextStyles = (customStyles = {}) => {
   return {
     [`& > div:not(.${image.wrapperScaled.className})`]: {
@@ -69,6 +99,11 @@ const createTextStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Creates styles for the card container with responsive behavior.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Complete container styles object
+ */
 const createContainerStyles = (customStyles = {}) => {
   return {
     maxWidth: `${spacing.maxWidth.smallest}`,
@@ -80,16 +115,34 @@ const createContainerStyles = (customStyles = {}) => {
   };
 };
 
-// umd-element-composite-card-block-light
-export const light = create.jssObject({
+/**
+ * Light theme block card.
+ * @returns {JssObject} Light themed block card with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.block.light
+ * ```
+ * @since 1.8.0
+ */
+export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
   ...createContainerStyles(),
   ...createTextStyles(),
   ...createImageStyles(),
 });
 
-// umd-element-composite-card-block-border
-export const border = create.jssObject({
+/**
+ * Bordered block card.
+ * @returns {JssObject} Block card with light border and responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.block.border
+ * ```
+ * @since 1.8.0
+ */
+export const border: JssObject = create.jssObject({
   className: `${classNamePrefix}-border`,
   ...createContainerStyles({
     border: `1px solid ${color.gray.light}`,
@@ -110,8 +163,17 @@ export const border = create.jssObject({
   }),
 });
 
-// umd-element-composite-card-block-border-dark
-export const borderDark = create.jssObject({
+/**
+ * Dark bordered block card.
+ * @returns {JssObject} Block card with dark border and responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.block.borderDark
+ * ```
+ * @since 1.8.0
+ */
+export const borderDark: JssObject = create.jssObject({
   className: `${classNamePrefix}-border`,
   ...createContainerStyles({
     border: `1px solid ${color.gray.darker}`,
@@ -132,8 +194,17 @@ export const borderDark = create.jssObject({
   }),
 });
 
-// umd-element-composite-card-block-dark
-export const dark = create.jssObject({
+/**
+ * Dark theme block card.
+ * @returns {JssObject} Dark themed block card with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.block.dark
+ * ```
+ * @since 1.8.0
+ */
+export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,
 
   ...createContainerStyles({
@@ -157,8 +228,17 @@ export const dark = create.jssObject({
   }),
 });
 
-// umd-element-composite-card-block-transparent
-export const transparent = create.jssObject({
+/**
+ * Transparent block card.
+ * @returns {JssObject} Transparent block card with white text.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.block.transparent
+ * ```
+ * @since 1.8.0
+ */
+export const transparent: JssObject = create.jssObject({
   className: `${classNamePrefix}-transparent`,
 
   ...createContainerStyles({
@@ -194,8 +274,17 @@ const personImage = {
   }),
 };
 
-// umd-element-composite-card-block-person
-export const person = create.jssObject({
+/**
+ * Person block card.
+ * @returns {JssObject} Block card optimized for person/profile display.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.block.person
+ * ```
+ * @since 1.8.0
+ */
+export const person: JssObject = create.jssObject({
   className: `${classNamePrefix}-person`,
 
   [`.${image.wrapper.className}`]: {
@@ -207,8 +296,17 @@ export const person = create.jssObject({
   },
 });
 
-// umd-element-composite-card-block-person-dark
-export const personDark = create.jssObject({
+/**
+ * Person block card with dark background.
+ * @returns {JssObject} Block card for person/profile with dark background.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.block.personDark
+ * ```
+ * @since 1.8.0
+ */
+export const personDark: JssObject = create.jssObject({
   className: `${classNamePrefix}-person-dark`,
 
   [`.${image.wrapper.className}`]: {

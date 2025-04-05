@@ -1,16 +1,31 @@
+/**
+ * @module element/field/set
+ * Provides styles for fieldset containers in forms.
+ */
+
 import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { valid, invalid } from './_state';
 
 // Consistent naming
 const classNamePrefix = 'umd-field-set';
 
-// umd-field-set-wrapper
-export const wrapper = create.jssObject({
+/**
+ * Fieldset wrapper for organizing form fields.
+ * @returns {JssObject} Styles for fieldset container with legend support.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.set.wrapper
+ * ```
+ * @since 1.8.0
+ */
+export const wrapper: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-wrapper`,
-    /** @deprecated Use 'umd-text-decoration-eyebrow' instead */
+    /** @deprecated Use 'umd-field-set-wrapper' instead */
     'umd-forms-layout-fieldset-list',
   ],
 

@@ -1,10 +1,24 @@
+/**
+ * @module element/composite/card/overlay/icon
+ * Provides styles for icon overlay card components with different themes.
+ */
+
 import { color, media, spacing } from '../../../../token';
 import { image as imageElement } from '../../../asset';
 import { create } from '../../../../utilities';
+import { JssObject } from '../../../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-card-overlay-icon';
 
+/**
+ * Creates container query for responsive layouts.
+ * @param {number} breakpoint - The breakpoint value in pixels
+ * @param {string} comparison - The comparison operator ('min-width' or 'max-width')
+ * @param {object} styles - The styles to apply at this breakpoint
+ * @returns {object} Container query object with styles
+ * @private
+ */
 const createContainerQuery = (
   breakpoint: number,
   comparison = 'max-width',
@@ -15,6 +29,12 @@ const createContainerQuery = (
   };
 };
 
+/**
+ * Creates image styles for icon overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Image styles for overlay card
+ * @private
+ */
 const createImageStyles = (customStyles = {}) => {
   const baseStyles = {
     position: 'absolute',
@@ -34,6 +54,12 @@ const createImageStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Creates text styles for icon overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Text styles for overlay card content
+ * @private
+ */
 const createTextStyles = (customStyles = {}) => {
   return {
     [`& > div:last-child`]: {
@@ -47,6 +73,12 @@ const createTextStyles = (customStyles = {}) => {
   };
 };
 
+/**
+ * Creates container styles for icon overlay cards.
+ * @param {object} customStyles - Additional custom styles to apply
+ * @returns {object} Container styles for overlay card
+ * @private
+ */
 const createContainerStyles = (customStyles = {}) => {
   return {
     maxWidth: `${spacing.maxWidth.smallest}`,
@@ -58,8 +90,17 @@ const createContainerStyles = (customStyles = {}) => {
   };
 };
 
-// umd-element-composite-card-overlay-icon-element-icon
-export const elementIconContainer = create.jssObject({
+/**
+ * Icon container for icon overlay cards.
+ * @returns {JssObject} Styles for the icon container within overlay cards.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.overlay.icon.elementIconContainer
+ * ```
+ * @since 1.8.0
+ */
+export const elementIconContainer: JssObject = create.jssObject({
   className: `${classNamePrefix}-element-container`,
   display: 'flex',
   justifyContent: 'flex-end',
@@ -70,17 +111,34 @@ export const elementIconContainer = create.jssObject({
   },
 });
 
+/**
+ * Base styles for icon containers.
+ * @private
+ */
 const iconContainerBase = {
   padding: `${spacing.sm}`,
   paddingBottom: `${spacing.md}`,
 };
 
+/**
+ * Base text styles for icon containers.
+ * @private
+ */
 const iconContainerTextBase = {
   height: 'auto',
 };
 
-// umd-element-composite-card-overlay-icon-light
-export const light = create.jssObject({
+/**
+ * Light theme icon overlay card.
+ * @returns {JssObject} Styles for light themed icon overlay card.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.overlay.icon.light
+ * ```
+ * @since 1.8.0
+ */
+export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
   ...createContainerStyles({
     backgroundColor: color.gray.lightest,
@@ -92,8 +150,17 @@ export const light = create.jssObject({
   ...createImageStyles({}),
 });
 
-// umd-element-composite-card-overlay-icon-dark
-export const dark = create.jssObject({
+/**
+ * Dark theme icon overlay card.
+ * @returns {JssObject} Styles for dark themed icon overlay card.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.overlay.icon.dark
+ * ```
+ * @since 1.8.0
+ */
+export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,
   ...createContainerStyles({
     backgroundColor: color.gray.darker,

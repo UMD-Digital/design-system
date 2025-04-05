@@ -1,11 +1,26 @@
+/**
+ * @module element/text/code
+ * Provides styles for code and preformatted text elements.
+ */
+
 import { color, font, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-code';
 
-// umd-text-code
-export const code = create.jssObject({
+/**
+ * Code block styles.
+ * @returns {JssObject} Styles for code and pre elements.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.code.code
+ * ```
+ * @since 1.8.0
+ */
+export const code: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}`,
     /** @deprecated Use 'umd-text-code' instead */

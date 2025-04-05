@@ -1,3 +1,18 @@
+/**
+ * @module token/spacing
+ * Provides spacing tokens for the design system.
+ */
+
+/**
+ * Spacing scale with values in pixels and their corresponding rem equivalents.
+ * @returns {object} Spacing scale with numeric keys and pixel values.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.token.spacingScale[4] // '16px'
+ * ```
+ * @since 1.8.0
+ */
 export const spacingScale = {
   0: '0',
   1: '4px', // 0.25rem
@@ -17,6 +32,16 @@ export const spacingScale = {
   30: '120px', // 7.5rem  (max)
 } as const;
 
+/**
+ * Maximum width constraints for layout containers.
+ * @returns {object} Maximum width values with semantic naming.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.token.maxWidth.normal // '1384px'
+ * ```
+ * @since 1.8.0
+ */
 export const maxWidth = {
   max: '1728px',
   large: '1552px',
@@ -25,6 +50,16 @@ export const maxWidth = {
   smallest: '992px',
 };
 
+/**
+ * Default spacing tokens with semantic naming.
+ * @returns {object} Spacing tokens with semantic names and corresponding pixel values.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.token.spacing.md // '24px'
+ * ```
+ * @since 1.8.0
+ */
 export default {
   min: '8px',
   xs: '12px',

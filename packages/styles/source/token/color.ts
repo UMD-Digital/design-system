@@ -1,6 +1,21 @@
+/**
+ * @module token/color
+ * Provides color tokens for the design system.
+ */
+
 export type ColorScale = typeof colorScale;
 export type BaseColors = typeof baseColors;
 
+/**
+ * Color scale with various shades for different colors.
+ * @returns {ColorScale} Color scale object with various color categories and shades.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.token.colorScale.gray[500]
+ * ```
+ * @since 1.8.0
+ */
 export const colorScale = {
   gray: {
     50: '#FAFAFA',
@@ -26,11 +41,31 @@ export const colorScale = {
   },
 } as const;
 
+/**
+ * Base colors for black and white.
+ * @returns {BaseColors} Base colors object with white and black.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.token.baseColors.white
+ * ```
+ * @since 1.8.0
+ */
 export const baseColors = {
   white: '#FFFFFF',
   black: '#000000',
 } as const;
 
+/**
+ * Default color tokens for the design system.
+ * @returns {object} Color tokens with semantic naming.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.token.color.red
+ * ```
+ * @since 1.8.0
+ */
 export default {
   red: colorScale.red[500],
   blue: colorScale.blue[500],

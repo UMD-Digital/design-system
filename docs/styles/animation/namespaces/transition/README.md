@@ -6,6 +6,19 @@
 
 # transition
 
+CSS-based transitions with keyframes.
+
+## Example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.animation.transition
+```
+
+## Since
+
+1.8.0
+
 ## Variables
 
 | Variable | Description |

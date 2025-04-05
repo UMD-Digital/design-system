@@ -6,62 +6,23 @@
 
 # Variable: slideUnderRed
 
-> `const` **slideUnderRed**: `object`
+> `const` **slideUnderRed**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [animation/line.ts:189](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/line.ts#L189)
+Defined in: [animation/line.ts:201](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/animation/line.ts#L201)
 
-## Type declaration
+Color Red.
 
-#### & \> \*:not(svg):not(.sr-only)
+## Returns
 
-> **sr-only)**: `object`
+Slide under animation line with red color.
 
-#### & \> \*:not(svg):not(.sr-only).backgroundImage
+## Example
 
-> **backgroundImage**: `string`
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.animation.slideUnderRed
+```
 
-#### & \> \*:not(svg):not(.sr-only).backgroundPosition
+## Since
 
-> **backgroundPosition**: `string` = `'left bottom'`
-
-#### & \> \*:not(svg):not(.sr-only).backgroundRepeat
-
-> **backgroundRepeat**: `string` = `'no-repeat'`
-
-#### & \> \*:not(svg):not(.sr-only).backgroundSize
-
-> **backgroundSize**: `string` = `'0 2px'`
-
-#### & \> \*:not(svg):not(.sr-only).display
-
-> **display**: `string` = `'inline'`
-
-#### & \> \*:not(svg):not(.sr-only).position
-
-> **position**: `string` = `'relative'`
-
-#### & \> \*:not(svg):not(.sr-only).transition
-
-> **transition**: `string` = `'background 0.5s'`
-
-#### &:hover \> \*:not(svg):not(.sr-only),
-      &:focus \> \*:not(svg):not(.sr-only)
-
-> **sr-only)**: `object`
-
-#### &:hover \> \*:not(svg):not(.sr-only),
-      &:focus \> \*:not(svg):not(.sr-only).backgroundSize
-
-> **backgroundSize**: `string` = `'100% 2px'`
-
-### className
-
-> **className**: `string`[]
-
-### position
-
-> **position**: `string` = `'relative'`
-
-### textDecoration
-
-> **textDecoration**: `string` = `'none'`
+1.8.0

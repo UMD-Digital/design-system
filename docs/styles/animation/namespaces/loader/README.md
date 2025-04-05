@@ -6,9 +6,22 @@
 
 # loader
 
+Loading indicator animation styles.
+
+## Example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.animation.loader
+```
+
+## Since
+
+1.8.0
+
 ## Variables
 
 | Variable | Description |
 | ------ | ------ |
-| [dots](variables/dots.md) | - |
-| [keyFrameBoxShadow](variables/keyFrameBoxShadow.md) | - |
+| [dots](variables/dots.md) | Animated loading dots. |
+| [keyFrameBoxShadow](variables/keyFrameBoxShadow.md) | Keyframe animation for box shadow. |

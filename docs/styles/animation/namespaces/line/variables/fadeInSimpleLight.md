@@ -6,64 +6,23 @@
 
 # Variable: fadeInSimpleLight
 
-> `const` **fadeInSimpleLight**: `object`
+> `const` **fadeInSimpleLight**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [animation/line.ts:308](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/line.ts#L308)
+Defined in: [animation/line.ts:452](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/animation/line.ts#L452)
 
-## Type declaration
+Fade in light
 
-### &:hover, &:focus
+## Returns
 
-> **&:hover, &:focus**: `object`
+Fade in animation line with light color
 
-#### &:hover, &:focus.backgroundImage
+## Example
 
-> **backgroundImage**: `string`
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.animation.fadeInSimpleLight
+```
 
-#### &:hover, &:focus.backgroundPosition
+## Since
 
-> **backgroundPosition**: `string` = `'left calc(100%)'`
-
-#### &:hover, &:focus.color
-
-> **color**: `"#E21833"` = `color.red`
-
-#### &:hover, &:focus.textDecoration
-
-> **textDecoration**: `string` = `'none'`
-
-### backgroundImage
-
-> **backgroundImage**: `string`
-
-### backgroundPosition
-
-> **backgroundPosition**: `string` = `'left calc(100% - 1px)'`
-
-### backgroundRepeat
-
-> **backgroundRepeat**: `string` = `'no-repeat'`
-
-### backgroundSize
-
-> **backgroundSize**: `string` = `'100% 1px'`
-
-### className
-
-> **className**: `string` = `'umd-fadein-simple-light'`
-
-### color
-
-> **color**: `string` = `'currentColor'`
-
-### position
-
-> **position**: `string` = `'relative'`
-
-### textDecoration
-
-> **textDecoration**: `string` = `'none'`
-
-### transition
-
-> **transition**: `string` = `'color 0.5s, background-image 0.5s, background-position 0.5s'`
+1.8.0

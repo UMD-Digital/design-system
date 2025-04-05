@@ -6,68 +6,23 @@
 
 # Variable: linksWhite
 
-> `const` **linksWhite**: `object`
+> `const` **linksWhite**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [animation/nested-elements.ts:10](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/nested-elements.ts#L10)
+Defined in: [animation/nested-elements.ts:37](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/animation/nested-elements.ts#L37)
 
-## Type declaration
+White style links for nested elements.
 
-### & a
+## Returns
 
-> **& a**: `object`
+White style links to be applied to nested elements.
 
-#### & a.&:hover, &:focus
+## Example
 
-> **&:hover, &:focus**: `object`
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.animation.nestedElements.linksWhite
+```
 
-#### & a.&:hover, &:focus.backgroundImage
+## Since
 
-> **backgroundImage**: `string`
-
-#### & a.&:hover, &:focus.backgroundPosition
-
-> **backgroundPosition**: `string` = `'left calc(100%)'`
-
-#### & a.&:hover, &:focus.backgroundSize
-
-> **backgroundSize**: `string` = `'100% 1px'`
-
-#### & a.&:hover, &:focus.color
-
-> **color**: `string`
-
-#### & a.&:hover, &:focus.textDecoration
-
-> **textDecoration**: `string` = `'none !important'`
-
-#### & a.backgroundImage
-
-> **backgroundImage**: `string` = `'linear-gradient(#000000, #000000)'`
-
-#### & a.backgroundPosition
-
-> **backgroundPosition**: `string` = `'left calc(100% - 1px)'`
-
-#### & a.backgroundRepeat
-
-> **backgroundRepeat**: `string` = `'no-repeat'`
-
-#### & a.backgroundSize
-
-> **backgroundSize**: `string` = `'100% 1px'`
-
-#### & a.className
-
-> **className**: `string`
-
-#### & a.color
-
-> **color**: `"#000000"` = `color.black`
-
-#### & a.position
-
-> **position**: `string` = `'relative'`
-
-#### & a.transition
-
-> **transition**: `string` = `'color 0.5s, background-size 0.5s, background-image 0.5s, background-position 0.5s'`
+1.8.0

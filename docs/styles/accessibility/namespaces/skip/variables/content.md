@@ -6,9 +6,9 @@
 
 # Variable: content
 
-> `const` **content**: `JssObject`
+> `const` **content**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [accessibility/skip.ts:15](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/accessibility/skip.ts#L15)
+Defined in: [accessibility/skip.ts:15](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/accessibility/skip.ts#L15)
 
 Skip to content link class.
 

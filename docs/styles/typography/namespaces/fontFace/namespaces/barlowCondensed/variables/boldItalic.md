@@ -1,0 +1,29 @@
+[**umd-styles-library**](../../../../../../README.md)
+
+***
+
+[umd-styles-library](../../../../../../modules.md) / [typography](../../../../../README.md) / [fontFace](../../../README.md) / [barlowCondensed](../README.md) / boldItalic
+
+# Variable: boldItalic
+
+> `const` **boldItalic**: `object`
+
+Defined in: [typography/font-face/barlow-condensed.ts:1](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/typography/font-face/barlow-condensed.ts#L1)
+
+## Type declaration
+
+### fontFamily
+
+> **fontFamily**: `string` = `'"Barlow Condensed"'`
+
+### fontStyle
+
+> **fontStyle**: `string` = `'italic'`
+
+### fontWeight
+
+> **fontWeight**: `number` = `700`
+
+### src
+
+> **src**: `string`

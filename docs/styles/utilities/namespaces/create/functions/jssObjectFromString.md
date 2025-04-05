@@ -1,0 +1,36 @@
+[**umd-styles-library**](../../../../README.md)
+
+***
+
+[umd-styles-library](../../../../modules.md) / [utilities](../../../README.md) / [create](../README.md) / jssObjectFromString
+
+# Function: jssObjectFromString()
+
+> **jssObjectFromString**(`cssString`): `Record`\<`string`, `any`\>
+
+Defined in: [utilities/create.ts:33](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/utilities/create.ts#L33)
+
+Creates a JSS object from a CSS string.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `cssString` | `string` | The CSS string to convert |
+
+## Returns
+
+`Record`\<`string`, `any`\>
+
+The JSS object with converted properties
+
+## Example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.create.jssObjectFromString('color: red; font-size: 16px;')
+```
+
+## Since
+
+1.8.0

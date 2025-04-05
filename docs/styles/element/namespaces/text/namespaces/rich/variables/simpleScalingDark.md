@@ -1,0 +1,28 @@
+[**umd-styles-library**](../../../../../../README.md)
+
+***
+
+[umd-styles-library](../../../../../../modules.md) / [element](../../../../../README.md) / [text](../../../README.md) / [rich](../README.md) / simpleScalingDark
+
+# Variable: simpleScalingDark
+
+> `const` **simpleScalingDark**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
+
+Defined in: [element/text/rich.ts:252](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/element/text/rich.ts#L252)
+
+Container-responsive simple rich text with dark theme.
+
+## Returns
+
+Simple rich text with dark theme that scales font size based on container width.
+
+## Example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.element.text.rich.simpleScalingDark
+```
+
+## Since
+
+1.8.0

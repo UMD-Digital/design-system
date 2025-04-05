@@ -6,104 +6,23 @@
 
 # Variable: dots
 
-> `const` **dots**: `object`
+> `const` **dots**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [animation/loader.ts:28](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/loader.ts#L28)
+Defined in: [animation/loader.ts:53](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/animation/loader.ts#L53)
 
-## Type declaration
+Animated loading dots.
 
-### &:after
+## Returns
 
-> **&:after**: `object`
+Dots loader animation.
 
-#### &:after.animationDelay
+## Example
 
-> **animationDelay**: `string` = `'0.25s'`
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.animation.loader.dots
+```
 
-#### &:after.left
+## Since
 
-> **left**: `string` = `spacing.sm`
-
-### &:before
-
-> **&:before**: `object`
-
-#### &:before.animationDelay
-
-> **animationDelay**: `string` = `'-0.25s'`
-
-#### &:before.left
-
-> **left**: `string`
-
-### &:before, &:after
-
-> **&:before, &:after**: `object`
-
-#### &:before, &:after.animation
-
-> **animation**: `string` = `'loader-animation 1.5s infinite ease-in-out'`
-
-#### &:before, &:after.borderRadius
-
-> **borderRadius**: `string` = `'50%'`
-
-#### &:before, &:after.content
-
-> **content**: `string` = `'""'`
-
-#### &:before, &:after.display
-
-> **display**: `string` = `'block'`
-
-#### &:before, &:after.height
-
-> **height**: `string` = `spacing.min`
-
-#### &:before, &:after.position
-
-> **position**: `string` = `'absolute'`
-
-#### &:before, &:after.top
-
-> **top**: `string` = `'0'`
-
-#### &:before, &:after.width
-
-> **width**: `string` = `spacing.min`
-
-### animation
-
-> **animation**: `string` = `'loader-animation 1.5s infinite ease-in-out'`
-
-### borderRadius
-
-> **borderRadius**: `string` = `'50%'`
-
-### className
-
-> **className**: `string`[]
-
-### color
-
-> **color**: `"#000000"` = `color.black`
-
-### display
-
-> **display**: `string` = `'block'`
-
-### height
-
-> **height**: `string` = `spacing.min`
-
-### position
-
-> **position**: `string` = `'relative'`
-
-### transform
-
-> **transform**: `string`
-
-### width
-
-> **width**: `string` = `spacing.min`
+1.8.0

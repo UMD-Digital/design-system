@@ -1,0 +1,28 @@
+[**umd-styles-library**](../../../../../../README.md)
+
+***
+
+[umd-styles-library](../../../../../../modules.md) / [layout](../../../../../README.md) / [grid](../../../README.md) / [inline](../README.md) / stretch
+
+# Variable: stretch
+
+> `const` **stretch**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
+
+Defined in: [layout/grid/inline.ts:74](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/layout/grid/inline.ts#L74)
+
+Stretch layout with space between elements.
+
+## Returns
+
+Flex layout that stretches first child and positions others.
+
+## Example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.layout.grid.inline.stretch
+```
+
+## Since
+
+1.8.0

@@ -10,7 +10,7 @@
 
 | Namespace | Description |
 | ------ | ------ |
-| [line](namespaces/line/README.md) | - |
-| [loader](namespaces/loader/README.md) | - |
-| [nestedElements](namespaces/nestedElements/README.md) | - |
-| [transition](namespaces/transition/README.md) | - |
+| [line](namespaces/line/README.md) | Slide and fade line animation styles. |
+| [loader](namespaces/loader/README.md) | Loading indicator animation styles. |
+| [nestedElements](namespaces/nestedElements/README.md) | Nested element animation styles - commonly used for rich text. |
+| [transition](namespaces/transition/README.md) | CSS-based transitions with keyframes. |

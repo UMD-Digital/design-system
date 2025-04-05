@@ -13,9 +13,9 @@ The UMD Styles Library provides consistent styling across University of Maryland
 ## Installation
 
 ```bash
-npm install @umd/styles-library
+npm install @universityofmaryland/web-styles-library
 # or
-yarn add @umd/styles-library
+yarn add @universityofmaryland/web-styles-library
 ```
 
 ## Usage
@@ -24,11 +24,14 @@ yarn add @umd/styles-library
 
 ```typescript
 // Import specific style modules
-import { animation, accessibility } from '@umd/styles-library';
+import {
+  animation,
+  accessibility,
+} from '@universityofmaryland/web-styles-library';
 
 // Or import specific namespaces
-import { line } from '@umd/styles-library/animation';
-import { screenReader } from '@umd/styles-library/accessibility';
+import { line } from '@universityofmaryland/web-styles-library/animation';
+import { screenReader } from '@universityofmaryland/web-styles-library/accessibility';
 ```
 
 ### Using with JavaScript
@@ -46,7 +49,7 @@ const buttonStyle = {
 ### Converting to CSS String
 
 ```typescript
-import { convertToCSS } from '@umd/styles-library/utils';
+import { convertToCSS } from '@universityofmaryland/web-styles-library/utils';
 
 const css = convertToCSS(animation.loader.dots);
 // Use in stylesheet or style tag

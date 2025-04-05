@@ -6,32 +6,23 @@
 
 # Variable: keyFrameBoxShadow
 
-> `const` **keyFrameBoxShadow**: `object`
+> `const` **keyFrameBoxShadow**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [animation/loader.ts:7](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/loader.ts#L7)
+Defined in: [animation/loader.ts:23](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/animation/loader.ts#L23)
 
-## Type declaration
+Keyframe animation for box shadow.
 
-### @keyframes loader-animation
+## Returns
 
-> **@keyframes loader-animation**: `object`
+Box shadow keyframe animation.
 
-#### @keyframes loader-animation.0%, 100%
+## Example
 
-> **0%, 100%**: `object`
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.animation.loader.keyFrameBoxShadow
+```
 
-#### @keyframes loader-animation.0%, 100%.boxShadow
+## Since
 
-> **boxShadow**: `string`
-
-#### @keyframes loader-animation.50%
-
-> **50%**: `object`
-
-#### @keyframes loader-animation.50%.boxShadow
-
-> **boxShadow**: `string`
-
-### className
-
-> **className**: `string`
+1.8.0

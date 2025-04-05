@@ -6,9 +6,9 @@
 
 # Variable: only
 
-> `const` **only**: `JssObject`
+> `const` **only**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [accessibility/screen-reader.ts:14](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/accessibility/screen-reader.ts#L14)
+Defined in: [accessibility/screen-reader.ts:14](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/accessibility/screen-reader.ts#L14)
 
 Screen reader only class.
 

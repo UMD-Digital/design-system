@@ -6,9 +6,9 @@
 
 # Variable: fadeInFromBottom
 
-> `const` **fadeInFromBottom**: `JssObject`
+> `const` **fadeInFromBottom**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [animation/transition.ts:95](https://github.com/UMD-Digital/design-system/blob/d4b532fefdb58d8d5a6b9764db295308e13706a9/packages/styles/source/animation/transition.ts#L95)
+Defined in: [animation/transition.ts:95](https://github.com/UMD-Digital/design-system/blob/8021d9898368f604bce452fe4dde6fae3a0578fd/packages/styles/source/animation/transition.ts#L95)
 
 Fade in from bottom animation effect.
 

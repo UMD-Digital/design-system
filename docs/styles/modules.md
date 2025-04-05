@@ -10,3 +10,7 @@
 | ------ | ------ |
 | [accessibility](accessibility/README.md) | - |
 | [animation](animation/README.md) | - |
+| [element](element/README.md) | - |
+| [layout](layout/README.md) | - |
+| [typography](typography/README.md) | - |
+| [utilities](utilities/README.md) | - |

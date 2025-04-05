@@ -1,10 +1,26 @@
+/**
+ * @module animation/loader
+ * Provides styles for animation loaders.
+ */
+
 import { color, spacing } from '../token';
 import { create } from '../utilities';
+import { JssObject } from '../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-animation-loader';
 
-export const keyFrameBoxShadow = create.jssObject({
+/**
+ * Keyframe animation for box shadow.
+ * @returns {JssObject} Box shadow keyframe animation.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.loader.keyFrameBoxShadow
+ * ```
+ * @since 1.8.0
+ */
+export const keyFrameBoxShadow: JssObject = create.jssObject({
   className: `${classNamePrefix}-keyframes`,
   '@keyframes loader-animation': {
     '0%, 100%': {
@@ -24,8 +40,17 @@ const dotsAniamtion = {
   height: spacing.min,
 };
 
-// umd-animation-loader-dots
-export const dots = create.jssObject({
+/**
+ * Animated loading dots.
+ * @returns {JssObject} Dots loader animation.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.loader.dots
+ * ```
+ * @since 1.8.0
+ */
+export const dots: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-dots`,
     /** @deprecated Use 'umd-animation-loader-dots' instead */

@@ -5,6 +5,7 @@
 
 import { color } from '../token';
 import { create } from '../utilities';
+import { JssObject } from '../utilities/transform';
 
 const baseStyles = {
   span: {
@@ -124,7 +125,7 @@ const slideUnder = {
   },
 };
 
-export const fadeUnder = {
+const fadeUnder = {
   base: {
     ...baseStyles.link,
 
@@ -186,7 +187,18 @@ export const fadeUnder = {
 // Consistent naming
 const classNamePrefix = 'umd-animation-line';
 
-export const slideUnderRed = create.jssObject({
+/**
+ * Color Red.
+ * @returns {JssObject} Slide under animation line with red color.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.slideUnderRed
+ * ```
+ * @since 1.8.0
+ */
+
+export const slideUnderRed: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-slide-red`,
     /** @deprecated Use 'umd-animation-line-slide-red' instead */
@@ -195,7 +207,18 @@ export const slideUnderRed = create.jssObject({
   ...slideUnder.red,
 });
 
-export const slideUnderBlack = create.jssObject({
+/**
+ * Color Black.
+ * @returns {JssObject} Slide under animation line with black color.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.slideUnderBlack
+ * ```
+ * @since 1.8.0
+ */
+
+export const slideUnderBlack: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-slide-black`,
     /** @deprecated Use 'umd-animation-line-slide-black' instead */
@@ -204,7 +227,18 @@ export const slideUnderBlack = create.jssObject({
   ...slideUnder.black,
 });
 
-export const slideUnderWhite = create.jssObject({
+/**
+ * Color White.
+ * @returns {JssObject} Slide under animation line with white color.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.slideUnderWhite
+ * ```
+ * @since 1.8.0
+ */
+
+export const slideUnderWhite: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-slide-white`,
     /** @deprecated Use 'umd-animation-line-slide-white' instead */
@@ -213,7 +247,18 @@ export const slideUnderWhite = create.jssObject({
   ...slideUnder.white,
 });
 
-export const slideUnderGold = create.jssObject({
+/**
+ * Color Gold.
+ * @returns {JssObject} Slide under animation line with gold color.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.slideUnderGold
+ * ```
+ * @since 1.8.0
+ */
+
+export const slideUnderGold: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-slide-gold`,
     /** @deprecated Use 'umd-animation-line-slide-gold' instead */
@@ -222,7 +267,18 @@ export const slideUnderGold = create.jssObject({
   ...slideUnder.gold,
 });
 
-export const slideUnderGrayRed = create.jssObject({
+/**
+ * Color change from gray to red.
+ * @returns {JssObject} Slide under animation line with change from gray to red.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.slideUnderGrayRed
+ * ```
+ * @since 1.8.0
+ */
+
+export const slideUnderGrayRed: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-slide-gray-red`,
     /** @deprecated Use 'umd-animation-line-slide-gray-red' instead */
@@ -231,7 +287,18 @@ export const slideUnderGrayRed = create.jssObject({
   ...slideUnder.grayRed,
 });
 
-export const slideUnderGrayDarkRed = create.jssObject({
+/**
+ * Color change from gray dark to red.
+ * @returns {JssObject} Slide under animation line with change from gray dark to red.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.slideUnderGrayDarkRed
+ * ```
+ * @since 1.8.0
+ */
+
+export const slideUnderGrayDarkRed: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-slide-graydark-red`,
     /** @deprecated Use 'umd-animation-line-slide-graydark-red' instead */
@@ -240,7 +307,18 @@ export const slideUnderGrayDarkRed = create.jssObject({
   ...slideUnder.grayDarkRed,
 });
 
-export const fadeUnderRed = create.jssObject({
+/**
+ * Color Red.
+ * @returns {JssObject} Fade under animation line with change from red color
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.fadeUnderRed
+ * ```
+ * @since 1.8.0
+ */
+
+export const fadeUnderRed: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-fade-red`,
     /** @deprecated Use 'umd-animation-line-fade-red' instead */
@@ -252,7 +330,18 @@ export const fadeUnderRed = create.jssObject({
   },
 });
 
-export const fadeUnderGray = create.jssObject({
+/**
+ * Color Gray.
+ * @returns {JssObject} Fade under animation line with change from gray color
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.fadeUnderGray
+ * ```
+ * @since 1.8.0
+ */
+
+export const fadeUnderGray: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-fade-gray`,
     /** @deprecated Use 'umd-animation-line-fade-gray' instead */
@@ -264,7 +353,18 @@ export const fadeUnderGray = create.jssObject({
   },
 });
 
-export const fadeUnderGold = create.jssObject({
+/**
+ * Color Gold.
+ * @returns {JssObject} Fade under animation line with change from gold color
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.fadeUnderGold
+ * ```
+ * @since 1.8.0
+ */
+
+export const fadeUnderGold: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-fade-gold`,
     /** @deprecated Use 'umd-animation-line-fade-gold' instead */
@@ -276,7 +376,18 @@ export const fadeUnderGold = create.jssObject({
   },
 });
 
-export const fadeUnderBlack = create.jssObject({
+/**
+ * Color Black.
+ * @returns {JssObject} Fade under animation line with change from black color
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.fadeUnderBlack
+ * ```
+ * @since 1.8.0
+ */
+
+export const fadeUnderBlack: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-fade-black`,
     /** @deprecated Use 'umd-animation-line-fade-black' instead */
@@ -288,7 +399,18 @@ export const fadeUnderBlack = create.jssObject({
   },
 });
 
-export const fadeUnderWhite = create.jssObject({
+/**
+ * Color White.
+ * @returns {JssObject} Fade under animation line with change from white color
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.fadeUnderWhite
+ * ```
+ * @since 1.8.0
+ */
+
+export const fadeUnderWhite: JssObject = create.jssObject({
   className: [
     `${classNamePrefix}-fade-white`,
     /** @deprecated Use 'umd-animation-line-fade-white' instead */
@@ -300,12 +422,34 @@ export const fadeUnderWhite = create.jssObject({
   },
 });
 
-export const fadeInSimpleDark = create.jssObject({
+/**
+ * Fade in dark
+ * @returns {JssObject} Fade in animation line with dark color
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.fadeInSimpleDark
+ * ```
+ * @since 1.8.0
+ */
+
+export const fadeInSimpleDark: JssObject = create.jssObject({
   className: 'umd-fadein-simple-dark',
   ...fadeUnder.dark,
 });
 
-export const fadeInSimpleLight = create.jssObject({
+/**
+ * Fade in light
+ * @returns {JssObject} Fade in animation line with light color
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.fadeInSimpleLight
+ * ```
+ * @since 1.8.0
+ */
+
+export const fadeInSimpleLight: JssObject = create.jssObject({
   className: 'umd-fadein-simple-light',
   ...fadeUnder.light,
 });

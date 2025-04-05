@@ -1,20 +1,57 @@
+/**
+ * @module animation/nested-elements
+ * Provides styles for animating nested elements.
+ */
+
 import { white, red } from '../element/text/link';
 import { create } from '../utilities';
+import { JssObject } from '../utilities/transform';
 
-export const linksDark = {
+/**
+ * Dark style links for nested elements.
+ * @returns {JssObject} Dark style links to be applied to nested elements.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.nestedElements.linksDark
+ * ```
+ * @since 1.8.0
+ */
+export const linksDark: JssObject = {
+  className: `umd-animation-links-dark`,
   '& a': {
     ...white,
   },
 };
 
-export const linksWhite = {
+/**
+ * White style links for nested elements.
+ * @returns {JssObject} White style links to be applied to nested elements.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.nestedElements.linksWhite
+ * ```
+ * @since 1.8.0
+ */
+export const linksWhite: JssObject = {
+  className: `umd-animation-links-white`,
   '& a': {
     ...red,
   },
 };
 
-// umd-animation-grid
-export const gridSetup = create.jssObject({
+/**
+ * Grid setup with animation for child elements.
+ * @returns {JssObject} Grid setup with fade-in animation for child elements.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.animation.nestedElements.gridSetup
+ * ```
+ * @since 1.8.0
+ */
+export const gridSetup: JssObject = create.jssObject({
   '& > *': {
     [`@media (prefers-reduced-motion: no-preference)`]: {
       opacity: '0',

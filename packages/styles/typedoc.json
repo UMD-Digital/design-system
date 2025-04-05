@@ -4,6 +4,11 @@
   "entryPoints": [
     "./source/accessibility", 
     "./source/animation", 
+    "./source/element", 
+    "./source/layout", 
+    "./source/tokens",
+    "./source/typography", 
+    "./source/utilities", 
   ],
   "entryPointStrategy": "resolve",
   "plugin": ["typedoc-plugin-markdown"],

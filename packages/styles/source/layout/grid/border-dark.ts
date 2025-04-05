@@ -1,5 +1,11 @@
+/**
+ * @module layout/grid/border-dark
+ * Provides grid layouts with dark border styling.
+ */
+
 import { color, media } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { base } from './base';
 
 // Consistent naming
@@ -14,8 +20,17 @@ const boarderBaseDark = {
   },
 };
 
-// umd-layout-grid-border-dark-two
-export const columnsTwo = create.jssObject({
+/**
+ * Two-column grid with dark borders.
+ * @returns {JssObject} Two-column grid with dark borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.borderDark.columnsTwo
+ * ```
+ * @since 1.8.0
+ */
+export const columnsTwo: JssObject = create.jssObject({
   ...base.two,
   ...boarderBaseDark,
 
@@ -44,8 +59,17 @@ export const columnsTwo = create.jssObject({
   },
 });
 
-// umd-layout-grid-border-dark-three
-export const columnsThreeDark = create.jssObject({
+/**
+ * Three-column grid with dark borders.
+ * @returns {JssObject} Three-column grid with dark borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.borderDark.columnsThreeDark
+ * ```
+ * @since 1.8.0
+ */
+export const columnsThreeDark: JssObject = create.jssObject({
   ...base.three,
   ...boarderBaseDark,
 
@@ -78,8 +102,17 @@ export const columnsThreeDark = create.jssObject({
   },
 });
 
-// umd-layout-grid-border-dark-four
-export const columnsFourDark = create.jssObject({
+/**
+ * Four-column grid with dark borders.
+ * @returns {JssObject} Four-column grid with dark borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.borderDark.columnsFourDark
+ * ```
+ * @since 1.8.0
+ */
+export const columnsFourDark: JssObject = create.jssObject({
   ...base.four,
   ...boarderBaseDark,
 

@@ -1,5 +1,11 @@
+/**
+ * @module layout/grid/gap
+ * Provides grid layouts with different gap sizes and configurations.
+ */
+
 import { media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { base } from './base';
 import { startSecond } from './child';
 
@@ -18,8 +24,17 @@ const paragraphOverwrite = {
   },
 };
 
-// umd-layout-grid-gap-two
-export const two = create.jssObject({
+/**
+ * Two-column grid layout with responsive gaps.
+ * @returns {JssObject} Two-column grid with defined gaps.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.gap.two
+ * ```
+ * @since 1.8.0
+ */
+export const two: JssObject = create.jssObject({
   ...base.two,
 
   [`@media (${media.queries.large.min})`]: {
@@ -39,8 +54,17 @@ export const two = create.jssObject({
   ],
 });
 
-// umd-layout-grid-gap-three
-export const three = create.jssObject({
+/**
+ * Three-column grid layout with responsive gaps.
+ * @returns {JssObject} Three-column grid with defined gaps.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.gap.three
+ * ```
+ * @since 1.8.0
+ */
+export const three: JssObject = create.jssObject({
   ...base.three,
 
   [`@media (${media.queries.large.min})`]: {
@@ -55,8 +79,17 @@ export const three = create.jssObject({
   ],
 });
 
-// umd-layout-grid-gap-three-large
-export const threeLarge = create.jssObject({
+/**
+ * Three-column grid layout with larger gaps.
+ * @returns {JssObject} Three-column grid with larger gaps for desktop screens.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.gap.threeLarge
+ * ```
+ * @since 1.8.0
+ */
+export const threeLarge: JssObject = create.jssObject({
   ...base.three,
 
   [`@media (${media.queries.desktop.min})`]: {
@@ -72,8 +105,17 @@ export const threeLarge = create.jssObject({
   ],
 });
 
-// umd-layout-grid-gap-four
-export const four = create.jssObject({
+/**
+ * Four-column grid layout with responsive gaps.
+ * @returns {JssObject} Four-column grid with defined gaps.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.gap.four
+ * ```
+ * @since 1.8.0
+ */
+export const four: JssObject = create.jssObject({
   ...base.four,
 
   [`@media (${media.queries.large.min})`]: {
@@ -88,8 +130,17 @@ export const four = create.jssObject({
   ],
 });
 
-// umd-layout-grid-gap-four-centered
-export const fourCentered = create.jssObject({
+/**
+ * Four-column centered grid layout with responsive gaps.
+ * @returns {JssObject} Four-column centered grid with defined gaps.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.gap.fourCentered
+ * ```
+ * @since 1.8.0
+ */
+export const fourCentered: JssObject = create.jssObject({
   ...base.four,
 
   [`@media (${media.queries.large.min})`]: {
@@ -106,8 +157,17 @@ export const fourCentered = create.jssObject({
   ],
 });
 
-// umd-layout-grid-gap-four-large
-export const fourLarge = create.jssObject({
+/**
+ * Four-column grid layout with larger gaps.
+ * @returns {JssObject} Four-column grid with larger gaps for high-definition screens.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.gap.fourLarge
+ * ```
+ * @since 1.8.0
+ */
+export const fourLarge: JssObject = create.jssObject({
   ...base.four,
 
   [`@media (${media.queries.highDef.min})`]: {
@@ -122,8 +182,17 @@ export const fourLarge = create.jssObject({
   ],
 });
 
-// umd-layout-grid-gap-four-large-centered
-export const fourLargeCentered = create.jssObject({
+/**
+ * Four-column centered grid layout with larger gaps.
+ * @returns {JssObject} Four-column centered grid with larger gaps for high-definition screens.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.gap.fourLargeCentered
+ * ```
+ * @since 1.8.0
+ */
+export const fourLargeCentered: JssObject = create.jssObject({
   ...base.four,
 
   [`@media (${media.queries.highDef.min})`]: {
@@ -139,8 +208,17 @@ export const fourLargeCentered = create.jssObject({
   ],
 });
 
-// umd-layout-grid-gap-stacked
-export const stacked = create.jssObject({
+/**
+ * Stacked vertical grid layout with responsive gaps.
+ * @returns {JssObject} Stacked single-column grid with responsive gaps.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.gap.stacked
+ * ```
+ * @since 1.8.0
+ */
+export const stacked: JssObject = create.jssObject({
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: `${spacing.md}`,

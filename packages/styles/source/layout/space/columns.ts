@@ -1,11 +1,26 @@
+/**
+ * @module layout/space/columns
+ * Provides column layouts with fixed-width sidebars.
+ */
+
 import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-space-columns';
 
-// umd-layout-space-columns-left
-export const left = create.jssObject({
+/**
+ * Left sidebar column layout.
+ * @returns {JssObject} Layout with fixed-width left sidebar that hides on mobile.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.space.columns.left
+ * ```
+ * @since 1.8.0
+ */
+export const left: JssObject = create.jssObject({
   [`@media (${media.queries.tablet.min})`]: {
     display: 'flex',
   },
@@ -34,8 +49,17 @@ export const left = create.jssObject({
   ],
 });
 
-// umd-layout-space-columns-right
-export const right = create.jssObject({
+/**
+ * Right sidebar column layout.
+ * @returns {JssObject} Layout with fixed-width right sidebar that stacks on mobile.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.space.columns.right
+ * ```
+ * @since 1.8.0
+ */
+export const right: JssObject = create.jssObject({
   ...left,
 
   [`@media (${media.queries.tablet.min})`]: {

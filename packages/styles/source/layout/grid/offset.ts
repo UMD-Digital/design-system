@@ -1,12 +1,27 @@
+/**
+ * @module layout/grid/offset
+ * Provides grid layouts with vertical offset between columns.
+ */
+
 import { media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { threeLarge } from './gap';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-grid-offset';
 
-// umd-layout-grid-offset-three
-export const threeColumn = create.jssObject({
+/**
+ * Three-column grid with vertical offsets.
+ * @returns {JssObject} Three-column grid with staggered vertical placement.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.offset.threeColumn
+ * ```
+ * @since 1.8.0
+ */
+export const threeColumn: JssObject = create.jssObject({
   ...threeLarge,
 
   className: [

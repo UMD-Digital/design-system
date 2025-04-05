@@ -1,11 +1,26 @@
+/**
+ * @module layout/grid/child
+ * Provides styles for grid child elements.
+ */
+
 import { media } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-grid-child';
 
-// umd-layout-grid-child-size-double
-export const sizeDouble = create.jssObject({
+/**
+ * Double-sized grid child element.
+ * @returns {JssObject} Grid child that spans two columns on large screens.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.child.sizeDouble
+ * ```
+ * @since 1.8.0
+ */
+export const sizeDouble: JssObject = create.jssObject({
   [`@media (${media.queries.large.min})`]: {
     gridColumn: 'span 2',
   },
@@ -17,8 +32,17 @@ export const sizeDouble = create.jssObject({
   ],
 });
 
-// umd-layout-grid-child-start-second
-export const startSecond = create.jssObject({
+/**
+ * Grid child that starts at the second column.
+ * @returns {JssObject} Grid child that starts at the second column on high-definition screens.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.child.startSecond
+ * ```
+ * @since 1.8.0
+ */
+export const startSecond: JssObject = create.jssObject({
   [`@media (${media.queries.highDef.min})`]: {
     gridColumnStart: '2',
   },

@@ -1,11 +1,26 @@
+/**
+ * @module layout/space/vertical
+ * Provides vertical spacing utilities for page layouts.
+ */
+
 import { media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-space-vertical';
 
-// umd-layout-space-vertical-landing
-export const landing = create.jssObject({
+/**
+ * Vertical spacing for landing sections.
+ * @returns {JssObject} Responsive bottom margin for landing sections.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.space.vertical.landing
+ * ```
+ * @since 1.8.0
+ */
+export const landing: JssObject = create.jssObject({
   marginBottom: spacing['3xl'],
 
   [`@media (${media.queries.tablet.min})`]: {
@@ -23,8 +38,17 @@ export const landing = create.jssObject({
   ],
 });
 
-// umd-layout-space-vertical-landing-child
-export const landingChild = create.jssObject({
+/**
+ * Vertical spacing for landing section child elements.
+ * @returns {JssObject} Responsive bottom margin for landing section child elements.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.space.vertical.landingChild
+ * ```
+ * @since 1.8.0
+ */
+export const landingChild: JssObject = create.jssObject({
   marginBottom: spacing.lg,
 
   [`@media (${media.queries.tablet.min})`]: {
@@ -42,8 +66,17 @@ export const landingChild = create.jssObject({
   ],
 });
 
-// umd-layout-space-vertical-interior
-export const interior = create.jssObject({
+/**
+ * Vertical spacing for interior sections.
+ * @returns {JssObject} Responsive bottom margin for interior sections.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.space.vertical.interior
+ * ```
+ * @since 1.8.0
+ */
+export const interior: JssObject = create.jssObject({
   marginBottom: spacing['3xl'],
 
   [`@media (${media.queries.desktop.min})`]: {
@@ -57,8 +90,17 @@ export const interior = create.jssObject({
   ],
 });
 
-// umd-layout-space-vertical-interior-child
-export const interiorChild = create.jssObject({
+/**
+ * Vertical spacing for interior section child elements.
+ * @returns {JssObject} Bottom margin for interior section child elements.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.space.vertical.interiorChild
+ * ```
+ * @since 1.8.0
+ */
+export const interiorChild: JssObject = create.jssObject({
   marginBottom: spacing.lg,
 
   className: [
@@ -68,8 +110,17 @@ export const interiorChild = create.jssObject({
   ],
 });
 
-// umd-layout-space-vertical-headline-large
-export const headlineLarge = create.jssObject({
+/**
+ * Vertical spacing for large headlines.
+ * @returns {JssObject} Responsive bottom margin for large headlines.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.space.vertical.headlineLarge
+ * ```
+ * @since 1.8.0
+ */
+export const headlineLarge: JssObject = create.jssObject({
   marginBottom: spacing.sm,
 
   [`@media (${media.queries.desktop.min})`]: {
@@ -83,8 +134,17 @@ export const headlineLarge = create.jssObject({
   ],
 });
 
-// umd-layout-space-vertical-headline-medium
-export const headlineMedium = create.jssObject({
+/**
+ * Vertical spacing for medium headlines.
+ * @returns {JssObject} Bottom margin for medium headlines.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.space.vertical.headlineMedium
+ * ```
+ * @since 1.8.0
+ */
+export const headlineMedium: JssObject = create.jssObject({
   marginBottom: spacing.sm,
 
   className: [

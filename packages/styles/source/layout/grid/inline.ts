@@ -1,5 +1,11 @@
+/**
+ * @module layout/grid/inline
+ * Provides inline grid and flex layouts.
+ */
+
 import { media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-grid-inline';
@@ -12,15 +18,34 @@ const columns = {
   justifyContent: 'flex-start',
 };
 
-export const row = {
+/**
+ * Row flex layout for inline elements.
+ * @returns {JssObject} Horizontal row with minimal gap between items.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.inline.row
+ * ```
+ * @since 1.8.0
+ */
+export const row: JssObject = {
   className: `${classNamePrefix}-rows`,
   display: 'flex',
   gap: spacing.min,
   alignItems: 'center',
 };
 
-// umd-layout-grid-inline-tablet-rows
-export const tabletRows = create.jssObject({
+/**
+ * Responsive tablet rows that stack on mobile.
+ * @returns {JssObject} Column layout that changes to row on tablet and larger screens.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.inline.tabletRows
+ * ```
+ * @since 1.8.0
+ */
+export const tabletRows: JssObject = create.jssObject({
   ...columns,
 
   [`@media (${media.queries.large.min})`]: {
@@ -36,8 +61,17 @@ export const tabletRows = create.jssObject({
   ],
 });
 
-// umd-layout-grid-inline-stretch
-export const stretch = create.jssObject({
+/**
+ * Stretch layout with space between elements.
+ * @returns {JssObject} Flex layout that stretches first child and positions others.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.inline.stretch
+ * ```
+ * @since 1.8.0
+ */
+export const stretch: JssObject = create.jssObject({
   display: 'flex',
   flexWrap: 'wrap',
   gap: spacing.sm,

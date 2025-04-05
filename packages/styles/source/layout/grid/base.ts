@@ -1,5 +1,11 @@
+/**
+ * @module layout/grid/base
+ * Provides base grid layout styles and column configurations.
+ */
+
 import { media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-grid-columns';
@@ -12,6 +18,16 @@ const baseSmallScreen = {
   },
 };
 
+/**
+ * Base grid configurations for different column layouts.
+ * @returns {object} Base grid configurations for two, three, and four column layouts.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const customGrid = { ...Styles.layout.grid.base.two, customProp: 'value' }
+ * ```
+ * @since 1.8.0
+ */
 export const base = {
   two: {
     ...baseSmallScreen,
@@ -40,8 +56,17 @@ export const base = {
   },
 };
 
-// umd-layout-grid-columns-two
-export const columnsTwo = create.jssObject({
+/**
+ * Two-column grid layout.
+ * @returns {JssObject} Two-column responsive grid layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.columnsTwo
+ * ```
+ * @since 1.8.0
+ */
+export const columnsTwo: JssObject = create.jssObject({
   ...base.two,
 
   className: [
@@ -51,8 +76,17 @@ export const columnsTwo = create.jssObject({
   ],
 });
 
-// umd-layout-grid-columns-three
-export const columnsThree = create.jssObject({
+/**
+ * Three-column grid layout.
+ * @returns {JssObject} Three-column responsive grid layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.columnsThree
+ * ```
+ * @since 1.8.0
+ */
+export const columnsThree: JssObject = create.jssObject({
   ...base.three,
 
   className: [
@@ -62,8 +96,17 @@ export const columnsThree = create.jssObject({
   ],
 });
 
-// umd-layout-grid-columns-four
-export const columnsFour = create.jssObject({
+/**
+ * Four-column grid layout.
+ * @returns {JssObject} Four-column responsive grid layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.columnsFour
+ * ```
+ * @since 1.8.0
+ */
+export const columnsFour: JssObject = create.jssObject({
   ...base.four,
 
   className: [
@@ -73,8 +116,17 @@ export const columnsFour = create.jssObject({
   ],
 });
 
-// umd-layout-grid-stacked
-export const stacked = create.jssObject({
+/**
+ * Stacked vertical layout.
+ * @returns {JssObject} Stacked vertical flex column layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.stacked
+ * ```
+ * @since 1.8.0
+ */
+export const stacked: JssObject = create.jssObject({
   display: 'flex',
   flexDirection: 'column',
 

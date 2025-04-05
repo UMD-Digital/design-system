@@ -1,8 +1,23 @@
+/**
+ * @module layout/grid/masonary
+ * Provides masonry grid layouts with staggered elements.
+ */
+
 import { spacing, media } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
-// umd-layout-grid-masonry
-export const twoColumn = create.jssObject({
+/**
+ * Two-column masonry grid layout.
+ * @returns {JssObject} Two-column masonry grid with staggered elements.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.masonary.twoColumn
+ * ```
+ * @since 1.8.0
+ */
+export const twoColumn: JssObject = create.jssObject({
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: spacing.md,

@@ -1,5 +1,11 @@
+/**
+ * @module layout/background/wrap
+ * Provides background wrap styles with responsive padding.
+ */
+
 import { color, media, spacing } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 
 // Consistent naming
 const classNamePrefix = 'umd-layout-background-wrap';
@@ -16,15 +22,33 @@ const box = {
   },
 };
 
-// umd-layout-background-wrap
-export const white = create.jssObject({
+/**
+ * White background wrap with responsive padding.
+ * @returns {JssObject} White background with responsive padding.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.background.wrap.white
+ * ```
+ * @since 1.8.0
+ */
+export const white: JssObject = create.jssObject({
   ...box,
 
   className: `${classNamePrefix}`,
 });
 
-// umd-layout-background-wrap-light
-export const light = create.jssObject({
+/**
+ * Light gray background wrap with responsive padding.
+ * @returns {JssObject} Light gray background with responsive padding.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.background.wrap.light
+ * ```
+ * @since 1.8.0
+ */
+export const light: JssObject = create.jssObject({
   ...box,
   backgroundColor: `${color.gray.lighter}`,
 
@@ -35,8 +59,17 @@ export const light = create.jssObject({
   ],
 });
 
-// umd-layout-background-wrap-dark
-export const dark = create.jssObject({
+/**
+ * Dark gray background wrap with responsive padding.
+ * @returns {JssObject} Dark gray background with responsive padding.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.background.wrap.dark
+ * ```
+ * @since 1.8.0
+ */
+export const dark: JssObject = create.jssObject({
   ...box,
   backgroundColor: `${color.gray.darker}`,
 

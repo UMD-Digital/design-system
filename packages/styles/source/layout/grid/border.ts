@@ -1,5 +1,11 @@
+/**
+ * @module layout/grid/border
+ * Provides grid layouts with border styling.
+ */
+
 import { color, media } from '../../token';
 import { create } from '../../utilities';
+import { JssObject } from '../../utilities/transform';
 import { base } from './base';
 
 // Consistent naming
@@ -14,8 +20,17 @@ const boarderBase = {
   },
 };
 
-// umd-layout-grid-border-two
-export const columnsTwo = create.jssObject({
+/**
+ * Two-column grid with light borders.
+ * @returns {JssObject} Two-column grid with light borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.border.columnsTwo
+ * ```
+ * @since 1.8.0
+ */
+export const columnsTwo: JssObject = create.jssObject({
   ...base.two,
   ...boarderBase,
 
@@ -44,8 +59,17 @@ export const columnsTwo = create.jssObject({
   },
 });
 
-// umd-layout-grid-border-three
-export const columnsThree = create.jssObject({
+/**
+ * Three-column grid with light borders.
+ * @returns {JssObject} Three-column grid with light borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.border.columnsThree
+ * ```
+ * @since 1.8.0
+ */
+export const columnsThree: JssObject = create.jssObject({
   ...base.three,
   ...boarderBase,
 
@@ -78,8 +102,17 @@ export const columnsThree = create.jssObject({
   },
 });
 
-// umd-layout-grid-border-four
-export const columnsFour = create.jssObject({
+/**
+ * Four-column grid with light borders.
+ * @returns {JssObject} Four-column grid with light borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.border.columnsFour
+ * ```
+ * @since 1.8.0
+ */
+export const columnsFour: JssObject = create.jssObject({
   ...base.four,
   ...boarderBase,
 

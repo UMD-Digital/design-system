@@ -11,11 +11,9 @@
     "./source/utilities"
   ],
   "entryPointStrategy": "resolve",
-  "plugin": ["typedoc-plugin-markdown"],
-  "indexFormat": "table",
-  "parametersFormat": "table",
   "hideGenerator": true,
   "searchInDocuments": true,
-  "interfacePropertiesFormat": "table",
-  "out": "../../docs/styles"
+  "out": "../../docs/styles",
+  "readme": "README.md",
+  "githubPages": true,
 }

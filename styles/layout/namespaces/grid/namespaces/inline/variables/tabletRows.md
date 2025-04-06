@@ -1,0 +1,28 @@
+[**umd-styles-library**](../../../../../../README.md)
+
+***
+
+[umd-styles-library](../../../../../../modules.md) / [layout](../../../../../README.md) / [grid](../../../README.md) / [inline](../README.md) / tabletRows
+
+# Variable: tabletRows
+
+> `const` **tabletRows**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
+
+Defined in: [layout/grid/inline.ts:48](https://github.com/UMD-Digital/design-system/blob/ada30a44686a89a90941bbd44a6f156101fc9b44/packages/styles/source/layout/grid/inline.ts#L48)
+
+Responsive tablet rows that stack on mobile.
+
+## Returns
+
+Column layout that changes to row on tablet and larger screens.
+
+## Example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.layout.grid.inline.tabletRows
+```
+
+## Since
+
+1.8.0

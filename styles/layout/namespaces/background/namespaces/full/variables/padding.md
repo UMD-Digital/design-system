@@ -1,0 +1,38 @@
+[**umd-styles-library**](../../../../../../README.md)
+
+***
+
+[umd-styles-library](../../../../../../modules.md) / [layout](../../../../../README.md) / [background](../../../README.md) / [full](../README.md) / padding
+
+# Variable: padding
+
+> `const` **padding**: `object`
+
+Defined in: [layout/background/full.ts:23](https://github.com/UMD-Digital/design-system/blob/ada30a44686a89a90941bbd44a6f156101fc9b44/packages/styles/source/layout/background/full.ts#L23)
+
+Responsive padding for full-width backgrounds.
+
+## Type declaration
+
+## Index Signature
+
+\[`key`: `string`\]: `string` \| \{ `padding`: `string`; \}
+
+### padding
+
+> **padding**: `string`
+
+## Returns
+
+Responsive padding for different screen sizes.
+
+## Example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.layout.background.full.padding
+```
+
+## Since
+
+1.8.0

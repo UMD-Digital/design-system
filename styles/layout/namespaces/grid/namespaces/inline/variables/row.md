@@ -1,0 +1,28 @@
+[**umd-styles-library**](../../../../../../README.md)
+
+***
+
+[umd-styles-library](../../../../../../modules.md) / [layout](../../../../../README.md) / [grid](../../../README.md) / [inline](../README.md) / row
+
+# Variable: row
+
+> `const` **row**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
+
+Defined in: [layout/grid/inline.ts:31](https://github.com/UMD-Digital/design-system/blob/ada30a44686a89a90941bbd44a6f156101fc9b44/packages/styles/source/layout/grid/inline.ts#L31)
+
+Row flex layout for inline elements.
+
+## Returns
+
+Horizontal row with minimal gap between items.
+
+## Example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+Styles.layout.grid.inline.row
+```
+
+## Since
+
+1.8.0

@@ -1,17 +1,20 @@
 # .github/workflows/style-docs.yml
-name: Run Style Package Docs
+name: Generate and Deploy Documentation
 
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
-  run-script:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -22,12 +25,21 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      # Generate styles documentation using TypeDoc
       - name: Generate documentation
         run: yarn run styles:docs
 
       - name: Upload generated docs as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: typedoc-markdown
+          name: documentation
           path: docs
           retention-days: 90
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs
+          branch: gh-pages
+          clean: true
+          commit-message: 'docs: update documentation [skip ci]'

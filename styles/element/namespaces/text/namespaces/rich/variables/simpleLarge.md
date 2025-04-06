@@ -8,7 +8,7 @@
 
 > `const` **simpleLarge**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [element/text/rich.ts:172](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/element/text/rich.ts#L172)
+Defined in: [element/text/rich.ts:172](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/element/text/rich.ts#L172)
 
 Large simple rich text styles.
 

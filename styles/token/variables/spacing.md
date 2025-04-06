@@ -8,7 +8,7 @@
 
 > **spacing**: `object`
 
-Defined in: [token/spacing.ts:63](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/token/spacing.ts#L63)
+Defined in: [token/spacing.ts:63](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/token/spacing.ts#L63)
 
 Default spacing tokens with semantic naming.
 

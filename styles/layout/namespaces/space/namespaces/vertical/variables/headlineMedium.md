@@ -8,7 +8,7 @@
 
 > `const` **headlineMedium**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [layout/space/vertical.ts:147](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/layout/space/vertical.ts#L147)
+Defined in: [layout/space/vertical.ts:147](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/layout/space/vertical.ts#L147)
 
 Vertical spacing for medium headlines.
 

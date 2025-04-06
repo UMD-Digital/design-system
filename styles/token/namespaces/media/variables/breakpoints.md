@@ -8,7 +8,7 @@
 
 > `const` **breakpoints**: `object`
 
-Defined in: [token/media.ts:50](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/token/media.ts#L50)
+Defined in: [token/media.ts:50](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/token/media.ts#L50)
 
 Breakpoint values with 'px' units for CSS usage.
 

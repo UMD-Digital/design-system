@@ -8,7 +8,7 @@
 
 > `const` **input**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [element/field/input.ts:30](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/element/field/input.ts#L30)
+Defined in: [element/field/input.ts:30](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/element/field/input.ts#L30)
 
 Base input field styles with validation states.
 

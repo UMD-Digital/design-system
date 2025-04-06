@@ -16,6 +16,17 @@ The University of Maryland's Design System is intended for use by university cam
 
 [Components loading in Javascript](examples/components-javascript.md)
 
-## Styles
+## Style Documentation
 
-[documentation](styles/README.md)
+[Style Documentation Home](styles/README.md)
+
+### Style Components
+
+- [Accessibility](styles/accessibility/README.md)
+- [Animation](styles/animation/README.md)
+- [Element](styles/element/README.md)
+- [Layout](styles/layout/README.md)
+- [Token](styles/token/README.md)
+- [Typography](styles/typography/README.md)
+- [Utilities](styles/utilities/README.md)
+- [All Modules](styles/modules.md)

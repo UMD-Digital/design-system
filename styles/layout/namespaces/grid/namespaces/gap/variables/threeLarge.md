@@ -8,7 +8,7 @@
 
 > `const` **threeLarge**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [layout/grid/gap.ts:92](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/layout/grid/gap.ts#L92)
+Defined in: [layout/grid/gap.ts:92](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/layout/grid/gap.ts#L92)
 
 Three-column grid layout with larger gaps.
 

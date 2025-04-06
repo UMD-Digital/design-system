@@ -8,7 +8,7 @@
 
 > `const` **tabletRows**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [layout/grid/inline.ts:48](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/layout/grid/inline.ts#L48)
+Defined in: [layout/grid/inline.ts:48](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/layout/grid/inline.ts#L48)
 
 Responsive tablet rows that stack on mobile.
 

@@ -8,7 +8,7 @@
 
 > `const` **selectWrapper**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [element/field/select.ts:73](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/element/field/select.ts#L73)
+Defined in: [element/field/select.ts:73](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/element/field/select.ts#L73)
 
 Select dropdown wrapper with custom dropdown indicator.
 

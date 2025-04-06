@@ -8,7 +8,7 @@
 
 > `const` **personDark**: `object`
 
-Defined in: [element/composite/card/list.ts:294](https://github.com/UMD-Digital/design-system/blob/ada30a44686a89a90941bbd44a6f156101fc9b44/packages/styles/source/element/composite/card/list.ts#L294)
+Defined in: [element/composite/card/list.ts:294](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/element/composite/card/list.ts#L294)
 
 ## Type declaration
 

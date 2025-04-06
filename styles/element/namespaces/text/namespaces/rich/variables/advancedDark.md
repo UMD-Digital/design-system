@@ -8,7 +8,7 @@
 
 > `const` **advancedDark**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [element/text/rich.ts:326](https://github.com/UMD-Digital/design-system/blob/ada30a44686a89a90941bbd44a6f156101fc9b44/packages/styles/source/element/text/rich.ts#L326)
+Defined in: [element/text/rich.ts:326](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/element/text/rich.ts#L326)
 
 Advanced rich text styles with dark theme.
 

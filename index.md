@@ -15,3 +15,7 @@ The University of Maryland's Design System is intended for use by university cam
 ## Advanced Use Cases
 
 [Components loading in Javascript](examples/components-javascript.md)
+
+## Styles
+
+[documentation](styles/README.md)

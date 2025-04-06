@@ -8,7 +8,7 @@
 
 > `const` **only**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [accessibility/screen-reader.ts:14](https://github.com/UMD-Digital/design-system/blob/ada30a44686a89a90941bbd44a6f156101fc9b44/packages/styles/source/accessibility/screen-reader.ts#L14)
+Defined in: [accessibility/screen-reader.ts:14](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/accessibility/screen-reader.ts#L14)
 
 Screen reader only class.
 

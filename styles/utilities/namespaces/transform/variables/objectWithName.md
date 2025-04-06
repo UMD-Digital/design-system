@@ -8,7 +8,7 @@
 
 > `const` **objectWithName**: `JssNameConverter`
 
-Defined in: [utilities/transform.ts:56](https://github.com/UMD-Digital/design-system/blob/ada30a44686a89a90941bbd44a6f156101fc9b44/packages/styles/source/utilities/transform.ts#L56)
+Defined in: [utilities/transform.ts:56](https://github.com/UMD-Digital/design-system/blob/ed6189804bf5f4c4fcbe5325b54aac33ac48d614/packages/styles/source/utilities/transform.ts#L56)
 
 Converts JSS objects to a format with class names as keys.
 

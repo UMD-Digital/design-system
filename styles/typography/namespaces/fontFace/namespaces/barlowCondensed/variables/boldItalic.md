@@ -8,7 +8,7 @@
 
 > `const` **boldItalic**: `object`
 
-Defined in: [typography/font-face/barlow-condensed.ts:1](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/typography/font-face/barlow-condensed.ts#L1)
+Defined in: [typography/font-face/barlow-condensed.ts:1](https://github.com/UMD-Digital/design-system/blob/2d95010ba8e3e1595ebab66599330577b600c5fb/packages/styles/source/typography/font-face/barlow-condensed.ts#L1)
 
 ## Type declaration
 

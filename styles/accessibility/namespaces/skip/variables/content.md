@@ -8,7 +8,7 @@
 
 > `const` **content**: [`JssObject`](../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [accessibility/skip.ts:15](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/accessibility/skip.ts#L15)
+Defined in: [accessibility/skip.ts:15](https://github.com/UMD-Digital/design-system/blob/2d95010ba8e3e1595ebab66599330577b600c5fb/packages/styles/source/accessibility/skip.ts#L15)
 
 Skip to content link class.
 

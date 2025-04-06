@@ -8,7 +8,7 @@
 
 > `const` **columnsThree**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [layout/grid/border.ts:72](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/layout/grid/border.ts#L72)
+Defined in: [layout/grid/border.ts:72](https://github.com/UMD-Digital/design-system/blob/2d95010ba8e3e1595ebab66599330577b600c5fb/packages/styles/source/layout/grid/border.ts#L72)
 
 Three-column grid with light borders.
 

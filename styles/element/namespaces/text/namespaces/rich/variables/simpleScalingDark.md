@@ -8,7 +8,7 @@
 
 > `const` **simpleScalingDark**: [`JssObject`](../../../../../../utilities/namespaces/transform/type-aliases/JssObject.md)
 
-Defined in: [element/text/rich.ts:252](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/element/text/rich.ts#L252)
+Defined in: [element/text/rich.ts:252](https://github.com/UMD-Digital/design-system/blob/2d95010ba8e3e1595ebab66599330577b600c5fb/packages/styles/source/element/text/rich.ts#L252)
 
 Container-responsive simple rich text with dark theme.
 

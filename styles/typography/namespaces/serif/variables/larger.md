@@ -8,7 +8,7 @@
 
 > `const` **larger**: `object`
 
-Defined in: [typography/serif.ts:128](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/typography/serif.ts#L128)
+Defined in: [typography/serif.ts:128](https://github.com/UMD-Digital/design-system/blob/2d95010ba8e3e1595ebab66599330577b600c5fb/packages/styles/source/typography/serif.ts#L128)
 
 Larger serif typography style with responsive scaling.
 

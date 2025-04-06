@@ -8,7 +8,7 @@
 
 > `const` **fonts**: `object`
 
-Defined in: [typography/elements.ts:167](https://github.com/UMD-Digital/design-system/blob/8c958a0419ab79ba8bcba0aabd12f79a69ac5834/packages/styles/source/typography/elements.ts#L167)
+Defined in: [typography/elements.ts:167](https://github.com/UMD-Digital/design-system/blob/2d95010ba8e3e1595ebab66599330577b600c5fb/packages/styles/source/typography/elements.ts#L167)
 
 Ready-to-use typography styles as JSS objects with class names.
 

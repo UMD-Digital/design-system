@@ -1,0 +1,8 @@
+# GitHub Pages Configuration for UMD Design System Documentation
+title: UMD Design System
+description: Documentation for the University of Maryland Design System
+theme: jekyll-theme-cayman
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

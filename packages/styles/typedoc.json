@@ -8,7 +8,7 @@
     "./source/layout", 
     "./source/token",
     "./source/typography", 
-    "./source/utilities", 
+    "./source/utilities"
   ],
   "entryPointStrategy": "resolve",
   "plugin": ["typedoc-plugin-markdown"],

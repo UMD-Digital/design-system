@@ -1,7 +1,9 @@
 # GitHub Pages Configuration for UMD Design System Documentation
 title: UMD Design System
 description: Documentation for the University of Maryland Design System
-theme: jekyll-theme-cayman
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+  - jekyll-remote-theme
 markdown: kramdown
 kramdown:
   input: GFM

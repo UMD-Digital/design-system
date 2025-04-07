@@ -217,7 +217,7 @@ const darkContainerStyles = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.light
  * ```
- * @since 1.8.0
+ * @since 1.9.0
  */
 export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
@@ -235,7 +235,7 @@ export const light: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.dark
  * ```
- * @since 1.8.0
+ * @since 1.9.0
  */
 export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,
@@ -256,7 +256,7 @@ export const dark: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.eventLight
  * ```
- * @since 1.8.0
+ * @since 1.9.0
  */
 export const eventLight: JssObject = create.jssObject({
   className: `${classNamePrefix}-event-light`,
@@ -268,7 +268,17 @@ export const eventLight: JssObject = create.jssObject({
   ...createImageStyles(),
 });
 
-// umd-element-composite-card-list-event-dark
+/**
+ * Light theme event dark card style.
+ * @returns {JssObject} Light themed event list card with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.list.eventDark
+ * ```
+ * @since 1.9.0
+ */
+
 export const eventDark = create.jssObject({
   className: `${classNamePrefix}-event-dark`,
 
@@ -281,7 +291,17 @@ export const eventDark = create.jssObject({
   ...createImageStyles(),
 });
 
-// umd-element-composite-card-list-person
+/**
+ * Person style.
+ * @returns {JssObject} Light themed person list card with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.list.person
+ * ```
+ * @since 1.9.0
+ */
+
 export const person = create.jssObject({
   className: `${classNamePrefix}-person`,
   ...createContainerStyles(),
@@ -290,7 +310,17 @@ export const person = create.jssObject({
   ...createPersonImageStyles(),
 });
 
-// umd-element-composite-card-list-person-dark
+/**
+ * Person Dark style.
+ * @returns {JssObject} Dark themed event person card with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.list.personDark
+ * ```
+ * @since 1.9.0
+ */
+
 export const personDark = create.jssObject({
   className: `${classNamePrefix}-person-dark`,
   ...createContainerStyles({
@@ -317,7 +347,17 @@ const tabularColumnStyles = {
   }),
 };
 
-// umd-element-composite-card-list-person-tabular
+/**
+ * Person three column style.
+ * @returns {JssObject} Three column list person with responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.list.personTabular
+ * ```
+ * @since 1.9.1
+ */
+
 export const personTabular = create.jssObject({
   className: `${classNamePrefix}-person-tabular`,
   ...createContainerStyles({
@@ -334,7 +374,17 @@ export const personTabular = create.jssObject({
   ...createPersonTabularImageStyles(),
 });
 
-// umd-element-composite-card-list-person-tabular-dark
+/**
+ * Person three column style with dark theme.
+ * @returns {JssObject} Three column person list with dark theme and responsive layout.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.composite.card.list.personTabularDark
+ * ```
+ * @since 1.9.1
+ */
+
 export const personTabularDark = create.jssObject({
   className: `${classNamePrefix}-person-tabular-dark`,
   ...createContainerStyles({

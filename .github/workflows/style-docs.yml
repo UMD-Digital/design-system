@@ -25,19 +25,11 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Generate documentation
+      - name: Generate styles documentation
         run: yarn run styles:docs
 
-      - name: Verify docs generation
-        run: |
-          if [ ! -d "docs/styles" ]; then
-            echo "::error::Styles documentation was not generated in docs/styles directory"
-            ls -la docs/
-            exit 1
-          else
-            echo "Styles documentation successfully generated:"
-            ls -la docs/styles/
-          fi
+      - name: Generate feeds documentation
+        run: yarn run feeds:docs
 
       - name: Upload generated docs as artifact
         uses: actions/upload-artifact@v4

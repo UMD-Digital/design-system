@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "umd-feeds-library",
+  "entryPoints": [
+    "./source/composite", 
+  ],
+  "entryPointStrategy": "resolve",
+  "hideGenerator": true,
+  "searchInDocuments": true,
+  "out": "../../docs/feeds",
+  "readme": "README.md",
+  "githubPages": true,
+}

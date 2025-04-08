@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "clean": "rm -rf build",
+    "docs": "npx typedoc --options ./typedoc.json",
     "release": "npm run build && npm publish --access public",
     "build": "webpack --env NODE_ENV=production",
     "webpack": "webpack -w --env NODE_ENV=development",

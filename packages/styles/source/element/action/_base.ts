@@ -70,6 +70,7 @@ export const iconBase = {
  */
 export const iconBaseLarge = {
   ...iconBase,
+  left: `14px`,
 
   [`@media (${media.queries.tablet.min})`]: {
     height: '17px',

@@ -5,7 +5,7 @@
 
 import { color } from '../../token';
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 import { base, baseLarge, iconBase, iconBaseLarge } from './_base';
 
 // Consistent naming

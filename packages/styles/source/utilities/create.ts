@@ -3,7 +3,7 @@
  * Provides utilities for creating JSS objects.
  */
 
-import { JssEntry, JssObject } from './transform';
+import { JssEntry } from '../_types';
 
 /**
  * Creates a JSS object with type checking.

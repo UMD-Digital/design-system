@@ -7,7 +7,7 @@ import { color, font, spacing, media } from '../../token';
 import { transition } from '../../animation';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-decoration';

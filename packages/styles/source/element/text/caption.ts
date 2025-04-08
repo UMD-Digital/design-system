@@ -6,7 +6,7 @@
 import { color, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-caption';

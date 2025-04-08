@@ -5,7 +5,6 @@
 
 import { color, font, media } from '../token';
 import { create } from '../utilities';
-import { JssObject } from '../utilities/transform';
 
 /**
  * Common breakpoint variables for responsive typography.

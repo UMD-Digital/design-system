@@ -6,7 +6,7 @@
 import { color, spacing, media } from '../../token';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 
 // Consistent naming
 const classNamePrefix = 'umd-text-line';

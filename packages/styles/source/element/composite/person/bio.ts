@@ -6,7 +6,7 @@
 import { color, media, spacing } from '../../../token';
 import { image } from '../../asset';
 import { create } from '../../../utilities';
-import { JssObject } from '../../../utilities/transform';
+import type { JssObject } from '../../../_types';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-person-bio';

@@ -7,7 +7,7 @@ import { color, font, spacing } from '../../token';
 import { sans } from '../../typography';
 import * as animation from '../../animation';
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 import * as list from '../list';
 import * as table from '../table';
 import { code } from './code';

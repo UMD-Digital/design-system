@@ -4,7 +4,7 @@
  */
 
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 
 /**
  * Center alignment for text.

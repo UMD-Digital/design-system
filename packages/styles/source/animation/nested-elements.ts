@@ -5,7 +5,7 @@
 
 import { white, red } from '../element/text/link';
 import { create } from '../utilities';
-import { JssObject } from '../utilities/transform';
+import type { JssObject } from '../_types';
 
 /**
  * Dark style links for nested elements.

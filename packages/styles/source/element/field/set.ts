@@ -6,7 +6,7 @@
 import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 import { valid, invalid } from './_state';
 
 // Consistent naming

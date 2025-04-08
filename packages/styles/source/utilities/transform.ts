@@ -3,35 +3,7 @@
  * Provides utilities for transforming JSS objects.
  */
 
-/**
- * Interface for a JSS entry with className and other properties.
- */
-export interface JssEntry {
-  className: string | string[];
-  [key: string]: any;
-}
-
-/**
- * A JSS object that represents a styled component.
- * This is the standard object format used throughout the design system.
- */
-export type JssObject = JssEntry;
-
-/**
- * Input format for JSS objects.
- */
-export interface JssInputFormat {
-  [key: string]: JssEntry;
-}
-
-/**
- * Output format for JSS objects with class names as keys.
- */
-export interface JssNamedOutputFormat {
-  [className: string]: {
-    [key: string]: any;
-  };
-}
+import type { JssInputFormat, JssNamedOutputFormat } from '../_types';
 
 /**
  * Interface for a JSS name converter function.
@@ -47,8 +19,8 @@ interface JssNameConverter {
  * @example
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform.objectWithName({ 
- *   key: { className: 'my-class', color: 'red' } 
+ * Styles.utilities.transform.objectWithName({
+ *   key: { className: 'my-class', color: 'red' }
  * })
  * ```
  * @since 1.8.0

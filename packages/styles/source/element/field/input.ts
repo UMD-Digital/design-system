@@ -5,7 +5,7 @@
 
 import { color, spacing } from '../../token';
 import { create, transform } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 import { baseInput } from './_base';
 import { valid, invalid } from './_state';
 

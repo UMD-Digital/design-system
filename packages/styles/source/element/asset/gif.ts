@@ -5,7 +5,7 @@
 
 import { color, spacing } from '../../token';
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 
 // Consistent naming
 const classNamePrefix = 'umd-asset-gif';

@@ -6,7 +6,7 @@
 import { color, media, spacing } from '../../../../token';
 import { image as imageElement } from '../../../asset';
 import { create } from '../../../../utilities';
-import { JssObject } from '../../../../utilities/transform';
+import { JssObject } from '../../../../_types';
 
 // Consistent naming
 const classNamePrefix = 'umd-element-composite-card-overlay-icon';

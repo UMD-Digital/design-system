@@ -7,7 +7,7 @@ import { color, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import { box } from '../../layout/background';
 import { create } from '../../utilities';
-import { JssObject } from '../../utilities/transform';
+import type { JssObject } from '../../_types';
 
 // Consistent naming
 const classNamePrefix = 'umd-asset-image';

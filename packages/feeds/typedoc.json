@@ -2,7 +2,9 @@
   "$schema": "https://typedoc.org/schema.json",
   "name": "umd-feeds-library",
   "entryPoints": [
-    "./source/composite", 
+    "./source/composite/academic", 
+    "./source/composite/events", 
+    "./source/composite/news", 
   ],
   "entryPointStrategy": "resolve",
   "hideGenerator": true,

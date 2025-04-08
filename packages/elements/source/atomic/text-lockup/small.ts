@@ -25,6 +25,11 @@ export type TypeTextLockupSmall = TypeTheme & {
 };
 
 const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';
+const metaContainer = Styles.element.event.meta.container;
+const metaClass: string = Array.isArray(metaContainer.className)
+  ? metaContainer.className[0]
+  : metaContainer.className;
+
 const { token } = Styles;
 
 export const eyebrowStyles = {
@@ -51,8 +56,8 @@ export const headlineStyles = {
       marginTop: token.spacing.sm,
     },
 
-    [`& + .${Styles.element.event.meta.container.className}`]: {
-      [`@media (max-width: ${token.media.breakpoints.small.max})`]: {
+    [`& + .${metaClass}`]: {
+      [`@media (max-width: 479px)`]: {
         marginTop: token.spacing.min,
       },
     },

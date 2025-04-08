@@ -10,7 +10,7 @@
     "components": "npx lerna run start --scope=@universityofmaryland/web-components-library",
     "elements": "npx lerna run start --scope=@universityofmaryland/web-elements-library",
     "feeds": "npx lerna run start --scope=@universityofmaryland/web-feeds-library",
-    "feeds:docs": "npx lerna run docs --scope=@universityofmaryland/web-feeds-library",
+    "feed:docs": "npx lerna run docs --scope=@universityofmaryland/web-feeds-library",
     "styles": "npx lerna run start --scope=@universityofmaryland/web-styles-library",
     "styles:docs": "npx lerna run docs --scope=@universityofmaryland/web-styles-library",
     "theme": "npx lerna run start --scope=@universityofmaryland/theme",

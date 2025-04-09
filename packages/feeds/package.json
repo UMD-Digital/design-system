@@ -22,5 +22,9 @@
     "@types/postcss-js": "^4.0.4",
     "postcss-js": "^4.0.1",
     "tw-to-css": "^0.0.12"
+  },
+  "peerDependencies": {
+    "@universityofmaryland/web-styles-library": "^1.1.0",
+    "@universityofmaryland/web-elements-library": "*"
   }
 }

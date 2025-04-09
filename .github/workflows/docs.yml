@@ -3,7 +3,9 @@ name: Generate and Deploy Documentation
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - feature/actions
   workflow_dispatch:
 
 jobs:
@@ -23,10 +25,15 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install
+        run: |
+          yarn install --frozen-lockfile
+          yarn lerna run build --scope=@universityofmaryland/web-styles-library
+          yarn lerna run build --scope=@universityofmaryland/web-elements-library
 
       - name: Generate style package documentation
-        run: yarn run styles:docs
+        run: |
+          yarn run styles:docs
+          yarn run feed:docs
 
       - name: Upload generated docs as artifact
         uses: actions/upload-artifact@v4

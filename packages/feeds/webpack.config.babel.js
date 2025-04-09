@@ -45,9 +45,21 @@ module.exports = (env) => {
     devtool: 'eval',
     module: modules,
     plugins: plugins,
+    externals: {
+      '@universityofmaryland/web-styles-library': '@universityofmaryland/web-styles-library',
+      '@universityofmaryland/web-elements-library': '@universityofmaryland/web-elements-library'
+    },
     resolve: {
       extensions: ['.ts', '.js', '.css'],
-      modules: [path.resolve('source'), path.resolve('../../node_modules')],
+      modules: [
+        path.resolve('source'), 
+        path.resolve('../../node_modules'),
+        path.resolve('../')  // Add this to resolve packages from within the monorepo
+      ],
+      alias: {
+        '@universityofmaryland/web-styles-library': path.resolve('../styles'),
+        '@universityofmaryland/web-elements-library': path.resolve('../elements')
+      }
     },
     output: {
       path: path.resolve('dist'),

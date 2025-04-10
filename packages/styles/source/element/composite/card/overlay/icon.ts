@@ -116,8 +116,8 @@ export const elementIconContainer: JssObject = create.jssObject({
  * @private
  */
 const iconContainerBase = {
-  padding: `${spacing.sm}`,
-  paddingBottom: `${spacing.md}`,
+  padding: `${spacing.md}`,
+  paddingTop: `${spacing.sm}`,
 };
 
 /**

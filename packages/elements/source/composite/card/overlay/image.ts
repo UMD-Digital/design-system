@@ -7,6 +7,7 @@ import { CardOverlayProps } from '../_types';
 const elementStyles: Record<string, any> = {
   element: {
     className: 'card-block-overall-container',
+    containerType: 'inline-size',
     height: '100%',
   },
 };
@@ -14,15 +15,20 @@ const elementStyles: Record<string, any> = {
 export default (props: CardOverlayProps) => {
   const { isQuote, ctaIcon, dateSign, backgroundImage, text } = props;
 
-  if (ctaIcon) {
-    elementStyles.element.paddingRight = `${Styles.token.spacing['2xl']}`;
-  }
-
   const composite = ElementModel.composite.card.overlay.image({
     ...props,
     element: document.createElement('div'),
     elementStyles,
     isThemeDark: true,
+  });
+  const wrapper = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'card-overlay-image-wrapper',
+    elementStyles: {
+      element: {
+        paddingRight: `${ctaIcon ? Styles.token.spacing['2xl'] : 0}`,
+      },
+    },
   });
   let imageContainerClass: string | null = null;
 
@@ -84,8 +90,11 @@ export default (props: CardOverlayProps) => {
     composite.styles += quoteWrapper.styles;
   }
 
-  composite.element.appendChild(textLockupElement.element);
-  composite.styles += textLockupElement.styles;
+  wrapper.element.appendChild(textLockupElement.element);
+  wrapper.styles += textLockupElement.styles;
+
+  composite.element.appendChild(wrapper.element);
+  composite.styles += wrapper.styles;
 
   const load = () => {
     const sizeElements = () => {

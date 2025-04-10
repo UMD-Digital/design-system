@@ -81,7 +81,7 @@ const createComponent = (element: HTMLElement) => {
       }),
       dateSign: Atomic.events.sign({
         ...EventSignData,
-        isThemeDark,
+        isThemeDark: false,
       }),
     });
   }

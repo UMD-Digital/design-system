@@ -60,7 +60,7 @@ const createImageStyles = (customStyles = {}) => {
     [`.${image.wrapperScaled.className}`]: {
       ...baseStyles,
       ...createContainerQuery(smallBreakpoint, 'max-width', {
-        marginLeft: spacing.min,
+        marginLeft: spacing.sm,
         marginBottom: spacing.md,
         width: '120px',
         float: 'right',

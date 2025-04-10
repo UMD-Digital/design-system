@@ -62,14 +62,7 @@ const createImageStyles = (customStyles = {}) => {
  */
 const createTextStyles = (customStyles = {}) => {
   return {
-    [`& > div:last-child`]: {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      zIndex: 9,
-      position: 'relative',
-      ...customStyles,
-    },
+    ...customStyles,
   };
 };
 

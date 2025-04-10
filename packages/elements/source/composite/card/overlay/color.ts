@@ -30,6 +30,15 @@ export default (props: CardOverlayProps) => {
     elementStyles: {
       element: {
         paddingRight: `${ctaIcon ? Styles.token.spacing['2xl'] : 0}`,
+        height: '100%',
+
+        [`& > *`]: {
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          zIndex: 9,
+          position: 'relative',
+        },
       },
     },
   });

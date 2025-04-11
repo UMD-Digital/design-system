@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typography/elements element typography objects should match snapshots for element typography: eyebrow 1`] = `
+{
+  "color": "#000000",
+  "fontSize": "12px",
+  "fontWeight": 700,
+  "letterSpacing": ".05em",
+  "lineHeight": 1,
+  "textTransform": "uppercase",
+}
+`;
+
+exports[`typography/elements element typography objects should match snapshots for element typography: interactiveMedium 1`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "18px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.01em",
+    "lineHeight": "1.11em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(16px + 0.16vw)",
+  },
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "16px",
+  "lineHeight": "1.125em",
+}
+`;
+
+exports[`typography/elements element typography objects should match snapshots for element typography: interactiveSmall 1`] = `
+{
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "16px",
+  "fontWeight": "700",
+  "letterSpacing": "-0.01em",
+  "lineHeight": "1.125em",
+}
+`;
+
+exports[`typography/elements element typography objects should match snapshots for element typography: labelMedium 1`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "16px",
+    "letterSpacing": "0.16em",
+    "lineHeight": "1.5em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(14px + 0.16vw)",
+  },
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "14px",
+  "lineHeight": "1.42em",
+}
+`;
+
+exports[`typography/elements element typography objects should match snapshots for element typography: labelSmall 1`] = `
+{
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "14px",
+  "letterSpacing": "0.16em",
+  "lineHeight": "1.42em",
+}
+`;
+
+exports[`typography/elements fonts objects should match snapshot for all fonts objects 1`] = `
+{
+  "eyebrow": {
+    "className": "umd-eyebrow",
+    "color": "#000000",
+    "fontSize": "12px",
+    "fontWeight": 700,
+    "letterSpacing": ".05em",
+    "lineHeight": 1,
+    "textTransform": "uppercase",
+  },
+  "labelMedium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "16px",
+      "letterSpacing": "0.16em",
+      "lineHeight": "1.5em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(14px + 0.16vw)",
+    },
+    "className": "umd-label-sans-medium",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "1.42em",
+  },
+  "labelSmall": {
+    "className": "umd-label-sans-small",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "14px",
+    "letterSpacing": "0.16em",
+    "lineHeight": "1.42em",
+  },
+  "medium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "letterSpacing": "-0.01em",
+      "lineHeight": "1.11em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(16px + 0.16vw)",
+    },
+    "className": "umd-interactive-sans-medium",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "1.125em",
+  },
+  "small": {
+    "className": "umd-interactive-sans-small",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.01em",
+    "lineHeight": "1.125em",
+  },
+}
+`;
+
+exports[`typography/elements should match snapshot 1`] = `
+{
+  "eyebrow": {
+    "color": "#000000",
+    "fontSize": "12px",
+    "fontWeight": 700,
+    "letterSpacing": ".05em",
+    "lineHeight": 1,
+    "textTransform": "uppercase",
+  },
+  "fonts": {
+    "eyebrow": {
+      "className": "umd-eyebrow",
+      "color": "#000000",
+      "fontSize": "12px",
+      "fontWeight": 700,
+      "letterSpacing": ".05em",
+      "lineHeight": 1,
+      "textTransform": "uppercase",
+    },
+    "labelMedium": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "16px",
+        "letterSpacing": "0.16em",
+        "lineHeight": "1.5em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(14px + 0.16vw)",
+      },
+      "className": "umd-label-sans-medium",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "14px",
+      "lineHeight": "1.42em",
+    },
+    "labelSmall": {
+      "className": "umd-label-sans-small",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "14px",
+      "letterSpacing": "0.16em",
+      "lineHeight": "1.42em",
+    },
+    "medium": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "18px",
+        "fontWeight": "700",
+        "letterSpacing": "-0.01em",
+        "lineHeight": "1.11em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(16px + 0.16vw)",
+      },
+      "className": "umd-interactive-sans-medium",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "16px",
+      "lineHeight": "1.125em",
+    },
+    "small": {
+      "className": "umd-interactive-sans-small",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "700",
+      "letterSpacing": "-0.01em",
+      "lineHeight": "1.125em",
+    },
+  },
+  "interativeMedium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "letterSpacing": "-0.01em",
+      "lineHeight": "1.11em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(16px + 0.16vw)",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "1.125em",
+  },
+  "interativeSmall": {
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.01em",
+    "lineHeight": "1.125em",
+  },
+  "labelMedium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "16px",
+      "letterSpacing": "0.16em",
+      "lineHeight": "1.5em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(14px + 0.16vw)",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "1.42em",
+  },
+  "labelSmall": {
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "14px",
+    "letterSpacing": "0.16em",
+    "lineHeight": "1.42em",
+  },
+}
+`;

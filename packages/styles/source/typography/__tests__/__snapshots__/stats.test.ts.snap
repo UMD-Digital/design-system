@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typography/stats fonts objects should match snapshot for all fonts objects 1`] = `
+{
+  "statLarge": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "120px",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(80px + 3.33vw)",
+    },
+    "className": "umd-statistic-sans-large",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "80px",
+    "fontStyle": "italic",
+    "fontWeight": "800",
+    "lineHeight": "1",
+  },
+  "statMedium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "96px",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(64px + 1.33vw)",
+    },
+    "className": "umd-statistic-sans-medium",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "64px",
+    "fontStyle": "italic",
+    "fontWeight": "800",
+    "lineHeight": "1",
+  },
+  "statSmall": {
+    "className": "umd-statistic-sans-small",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "64px",
+    "fontStyle": "italic",
+    "fontWeight": "800",
+    "lineHeight": "0.87em",
+  },
+}
+`;
+
+exports[`typography/stats should match snapshot 1`] = `
+{
+  "fonts": {
+    "statLarge": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "120px",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(80px + 3.33vw)",
+      },
+      "className": "umd-statistic-sans-large",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "80px",
+      "fontStyle": "italic",
+      "fontWeight": "800",
+      "lineHeight": "1",
+    },
+    "statMedium": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "96px",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(64px + 1.33vw)",
+      },
+      "className": "umd-statistic-sans-medium",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "64px",
+      "fontStyle": "italic",
+      "fontWeight": "800",
+      "lineHeight": "1",
+    },
+    "statSmall": {
+      "className": "umd-statistic-sans-small",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "64px",
+      "fontStyle": "italic",
+      "fontWeight": "800",
+      "lineHeight": "0.87em",
+    },
+  },
+  "large": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "120px",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(80px + 3.33vw)",
+    },
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "80px",
+    "fontStyle": "italic",
+    "fontWeight": "800",
+    "lineHeight": "1",
+  },
+  "medium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "96px",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(64px + 1.33vw)",
+    },
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "64px",
+    "fontStyle": "italic",
+    "fontWeight": "800",
+    "lineHeight": "1",
+  },
+  "small": {
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "64px",
+    "fontStyle": "italic",
+    "fontWeight": "800",
+    "lineHeight": "0.87em",
+  },
+}
+`;
+
+exports[`typography/stats size objects should have correctly defined stat text sizes 1`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "120px",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(80px + 3.33vw)",
+  },
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "80px",
+  "fontStyle": "italic",
+  "fontWeight": "800",
+  "lineHeight": "1",
+}
+`;
+
+exports[`typography/stats size objects should have correctly defined stat text sizes 2`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "96px",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(64px + 1.33vw)",
+  },
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "64px",
+  "fontStyle": "italic",
+  "fontWeight": "800",
+  "lineHeight": "1",
+}
+`;
+
+exports[`typography/stats size objects should have correctly defined stat text sizes 3`] = `
+{
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "64px",
+  "fontStyle": "italic",
+  "fontWeight": "800",
+  "lineHeight": "0.87em",
+}
+`;

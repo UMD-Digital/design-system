@@ -20,7 +20,8 @@
     "start": "tsc -w --preserveWatchOutput",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:snapshot": "jest --updateSnapshot"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

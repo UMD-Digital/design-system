@@ -1,0 +1,627 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typography/sans fonts objects should match snapshot for all fonts objects 1`] = `
+{
+  "extraLarge": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "32px",
+      "lineHeight": "1.125em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(18px + 1.16vw)",
+    },
+    "className": "umd-sans-extralarge",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "1.25em",
+  },
+  "large": {
+    "className": "umd-sans-large",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "fontWeight": "700",
+    "lineHeight": "1.25em",
+  },
+  "larger": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "22px",
+      "lineHeight": "1.25em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(18px + 0.5vw)",
+    },
+    "className": "umd-sans-larger",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "1.40em",
+  },
+  "largest": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "48px",
+      "lineHeight": "1.04em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(24px + 2vw)",
+    },
+    "className": "umd-sans-largest",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "22px",
+    "fontWeight": "700",
+    "lineHeight": "1.25em",
+  },
+  "maximum": {
+    "className": "umd-sans-maximum",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "32px",
+    "fontWeight": "700",
+    "lineHeight": "1.125em",
+  },
+  "medium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "18px",
+      "lineHeight": "1.55em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(16px + 0.16vw)",
+    },
+    "className": "umd-sans-medium",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "1.375em",
+  },
+  "min": {
+    "className": "umd-sans-min",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "1.16em",
+  },
+  "small": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "16px",
+      "lineHeight": "1.375em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(14px + 0.16vw)",
+    },
+    "className": "umd-sans-small",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "1.375em",
+  },
+  "smaller": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "14px",
+      "lineHeight": "1.28em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(12px + 0.16vw)",
+    },
+    "className": "umd-sans-smaller",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "1.28em",
+  },
+}
+`;
+
+exports[`typography/sans scaling fonts should match snapshot for scaling fonts 1`] = `
+{
+  "larger": {
+    "@container (min-width: 480px)": {
+      "fontSize": "32px",
+    },
+    "className": "umd-sans-scaling-larger",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "1.25em",
+  },
+  "min": {
+    "@container (min-width: 480px)": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "16px",
+        "lineHeight": "1.375em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(14px + 0.16vw)",
+      },
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "16px",
+      "lineHeight": "1.375em",
+    },
+    "className": "umd-sans-scaling-min",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "1.16em",
+  },
+}
+`;
+
+exports[`typography/sans should match snapshot 1`] = `
+{
+  "extraLarge": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "32px",
+      "lineHeight": "1.125em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(18px + 1.16vw)",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "1.25em",
+  },
+  "fonts": {
+    "extraLarge": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "32px",
+        "lineHeight": "1.125em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(18px + 1.16vw)",
+      },
+      "className": "umd-sans-extralarge",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "1.25em",
+    },
+    "large": {
+      "className": "umd-sans-large",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "lineHeight": "1.25em",
+    },
+    "larger": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "22px",
+        "lineHeight": "1.25em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(18px + 0.5vw)",
+      },
+      "className": "umd-sans-larger",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "1.40em",
+    },
+    "largest": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "48px",
+        "lineHeight": "1.04em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(24px + 2vw)",
+      },
+      "className": "umd-sans-largest",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "22px",
+      "fontWeight": "700",
+      "lineHeight": "1.25em",
+    },
+    "maximum": {
+      "className": "umd-sans-maximum",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "32px",
+      "fontWeight": "700",
+      "lineHeight": "1.125em",
+    },
+    "medium": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "18px",
+        "lineHeight": "1.55em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(16px + 0.16vw)",
+      },
+      "className": "umd-sans-medium",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "16px",
+      "lineHeight": "1.375em",
+    },
+    "min": {
+      "className": "umd-sans-min",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "12px",
+      "lineHeight": "1.16em",
+    },
+    "small": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "16px",
+        "lineHeight": "1.375em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(14px + 0.16vw)",
+      },
+      "className": "umd-sans-small",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "16px",
+      "lineHeight": "1.375em",
+    },
+    "smaller": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "14px",
+        "lineHeight": "1.28em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(12px + 0.16vw)",
+      },
+      "className": "umd-sans-smaller",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "14px",
+      "lineHeight": "1.28em",
+    },
+  },
+  "large": {
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "fontWeight": "700",
+    "lineHeight": "1.25em",
+  },
+  "larger": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "22px",
+      "lineHeight": "1.25em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(18px + 0.5vw)",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "1.40em",
+  },
+  "largest": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "48px",
+      "lineHeight": "1.04em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(24px + 2vw)",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "22px",
+    "fontWeight": "700",
+    "lineHeight": "1.25em",
+  },
+  "maxium": {
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "32px",
+    "fontWeight": "700",
+    "lineHeight": "1.125em",
+  },
+  "medium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "18px",
+      "lineHeight": "1.55em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(16px + 0.16vw)",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "1.375em",
+  },
+  "min": {
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "1.16em",
+  },
+  "scalingFonts": {
+    "larger": {
+      "@container (min-width: 480px)": {
+        "fontSize": "32px",
+      },
+      "className": "umd-sans-scaling-larger",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "1.25em",
+    },
+    "min": {
+      "@container (min-width: 480px)": {
+        "@media (min-width: 1024px)": {
+          "fontSize": "16px",
+          "lineHeight": "1.375em",
+        },
+        "@media (min-width: 650px)": {
+          "fontSize": "calc(14px + 0.16vw)",
+        },
+        "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+        "fontSize": "16px",
+        "lineHeight": "1.375em",
+      },
+      "className": "umd-sans-scaling-min",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "12px",
+      "lineHeight": "1.16em",
+    },
+  },
+  "scalingLarger": {
+    "@container (min-width: 480px)": {
+      "fontSize": "32px",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "1.25em",
+  },
+  "scalingMin": {
+    "@container (min-width: 480px)": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "16px",
+        "lineHeight": "1.375em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(14px + 0.16vw)",
+      },
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "16px",
+      "lineHeight": "1.375em",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "1.16em",
+  },
+  "small": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "16px",
+      "lineHeight": "1.375em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(14px + 0.16vw)",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "1.375em",
+  },
+  "smaller": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "14px",
+      "lineHeight": "1.28em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(12px + 0.16vw)",
+    },
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "1.28em",
+  },
+  "transformations": {
+    "extraLargeBold": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "32px",
+        "lineHeight": "1.125em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(18px + 1.16vw)",
+      },
+      "className": "umd-sans-extralarge-bold",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "lineHeight": "1.25em",
+    },
+    "extraLargeUppercase": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "32px",
+        "lineHeight": "1.125em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(18px + 1.16vw)",
+      },
+      "className": "umd-sans-extralarge-uppercase",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "800",
+      "lineHeight": "1.25em",
+      "textTransform": "uppercase",
+    },
+    "largerBold": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "22px",
+        "lineHeight": "1.25em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(18px + 0.5vw)",
+      },
+      "className": "umd-sans-larger-bold",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "lineHeight": "1.40em",
+    },
+    "largestUppercase": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "48px",
+        "lineHeight": "1.04em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(24px + 2vw)",
+      },
+      "className": "umd-sans-largest-uppercase",
+      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+      "fontSize": "22px",
+      "fontWeight": "800",
+      "lineHeight": "1.25em",
+      "textTransform": "uppercase",
+    },
+  },
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 1`] = `
+{
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "32px",
+  "fontWeight": "700",
+  "lineHeight": "1.125em",
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 2`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "48px",
+    "lineHeight": "1.04em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(24px + 2vw)",
+  },
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "22px",
+  "fontWeight": "700",
+  "lineHeight": "1.25em",
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 3`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "32px",
+    "lineHeight": "1.125em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(18px + 1.16vw)",
+  },
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "18px",
+  "lineHeight": "1.25em",
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 4`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "22px",
+    "lineHeight": "1.25em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(18px + 0.5vw)",
+  },
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "18px",
+  "lineHeight": "1.40em",
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 5`] = `
+{
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "18px",
+  "fontWeight": "700",
+  "lineHeight": "1.25em",
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 6`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "18px",
+    "lineHeight": "1.55em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(16px + 0.16vw)",
+  },
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "16px",
+  "lineHeight": "1.375em",
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 7`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "16px",
+    "lineHeight": "1.375em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(14px + 0.16vw)",
+  },
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "16px",
+  "lineHeight": "1.375em",
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 8`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "14px",
+    "lineHeight": "1.28em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(12px + 0.16vw)",
+  },
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "14px",
+  "lineHeight": "1.28em",
+}
+`;
+
+exports[`typography/sans size objects should have correctly defined size values 9`] = `
+{
+  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+  "fontSize": "12px",
+  "lineHeight": "1.16em",
+}
+`;
+
+exports[`typography/sans transformations should match snapshot for all transformations 1`] = `
+{
+  "extraLargeBold": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "32px",
+      "lineHeight": "1.125em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(18px + 1.16vw)",
+    },
+    "className": "umd-sans-extralarge-bold",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "fontWeight": "700",
+    "lineHeight": "1.25em",
+  },
+  "extraLargeUppercase": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "32px",
+      "lineHeight": "1.125em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(18px + 1.16vw)",
+    },
+    "className": "umd-sans-extralarge-uppercase",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "fontWeight": "800",
+    "lineHeight": "1.25em",
+    "textTransform": "uppercase",
+  },
+  "largerBold": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "22px",
+      "lineHeight": "1.25em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(18px + 0.5vw)",
+    },
+    "className": "umd-sans-larger-bold",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "18px",
+    "fontWeight": "700",
+    "lineHeight": "1.40em",
+  },
+  "largestUppercase": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "48px",
+      "lineHeight": "1.04em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(24px + 2vw)",
+    },
+    "className": "umd-sans-largest-uppercase",
+    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
+    "fontSize": "22px",
+    "fontWeight": "800",
+    "lineHeight": "1.25em",
+    "textTransform": "uppercase",
+  },
+}
+`;

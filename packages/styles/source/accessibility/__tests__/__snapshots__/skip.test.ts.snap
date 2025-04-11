@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`accessibility/skip content should match snapshot 1`] = `
+{
+  "&:focus": {
+    "display": "block",
+    "height": "inherit",
+    "opacity": "1",
+    "transition": "opacity 0.5s",
+    "width": "auto",
+    "zIndex": "9999",
+  },
+  "backgroundColor": "#fff",
+  "className": "umd-skip-content",
+  "color": "#e21833",
+  "display": "block",
+  "height": "0",
+  "opacity": "0",
+  "overflow": "hidden",
+  "padding": "8px",
+  "position": "absolute",
+  "textDecoration": "underline",
+  "transition": "none",
+  "whiteSpace": "nowrap",
+  "width": "0",
+}
+`;

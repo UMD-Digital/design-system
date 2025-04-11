@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`accessibility module should match snapshot 1`] = `
+{
+  "screenReader": {
+    "only": {
+      "borderWidth": "0px",
+      "className": "sr-only",
+      "clip": "rect(0,0,0,0)",
+      "height": "1px",
+      "margin": "-1px",
+      "overflow": "hidden",
+      "padding": "0",
+      "position": "absolute",
+      "whiteSpace": "nowrap",
+      "width": "1px",
+    },
+  },
+  "skip": {
+    "content": {
+      "&:focus": {
+        "display": "block",
+        "height": "inherit",
+        "opacity": "1",
+        "transition": "opacity 0.5s",
+        "width": "auto",
+        "zIndex": "9999",
+      },
+      "backgroundColor": "#fff",
+      "className": "umd-skip-content",
+      "color": "#e21833",
+      "display": "block",
+      "height": "0",
+      "opacity": "0",
+      "overflow": "hidden",
+      "padding": "8px",
+      "position": "absolute",
+      "textDecoration": "underline",
+      "transition": "none",
+      "whiteSpace": "nowrap",
+      "width": "0",
+    },
+  },
+}
+`;

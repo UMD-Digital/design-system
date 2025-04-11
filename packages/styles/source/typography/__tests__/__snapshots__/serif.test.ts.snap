@@ -1,0 +1,254 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typography/serif fonts objects should match snapshot for all fonts objects 1`] = `
+{
+  "extraLarge": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "56px",
+      "lineHeight": "1.07em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(32px + 2vw)",
+    },
+    "className": "umd-serif-extralarge",
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "32px",
+    "lineHeight": "1.18em",
+  },
+  "large": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "24px",
+      "lineHeight": "1em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(20px + 0.33vw)",
+    },
+    "className": "umd-serif-large",
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "20px",
+    "lineHeight": "1.5em",
+  },
+  "larger": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "32px",
+      "lineHeight": "1.18em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(24px + 0.66vw)",
+    },
+    "className": "umd-serif-larger",
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "24px",
+    "lineHeight": "1em",
+  },
+  "maximum": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "80px",
+      "fontWeight": "300",
+      "lineHeight": "1.025em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(32px + 4vw)",
+    },
+    "className": "umd-serif-maximum",
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "32px",
+    "lineHeight": "1.18em",
+  },
+  "medium": {
+    "className": "umd-serif-medium",
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "20px",
+    "lineHeight": "1.5em",
+  },
+}
+`;
+
+exports[`typography/serif should match snapshot 1`] = `
+{
+  "extralarge": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "56px",
+      "lineHeight": "1.07em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(32px + 2vw)",
+    },
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "32px",
+    "lineHeight": "1.18em",
+  },
+  "fonts": {
+    "extraLarge": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "56px",
+        "lineHeight": "1.07em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(32px + 2vw)",
+      },
+      "className": "umd-serif-extralarge",
+      "fontFamily": "'Crimson Pro', Georgia, serif",
+      "fontSize": "32px",
+      "lineHeight": "1.18em",
+    },
+    "large": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "24px",
+        "lineHeight": "1em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(20px + 0.33vw)",
+      },
+      "className": "umd-serif-large",
+      "fontFamily": "'Crimson Pro', Georgia, serif",
+      "fontSize": "20px",
+      "lineHeight": "1.5em",
+    },
+    "larger": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "32px",
+        "lineHeight": "1.18em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(24px + 0.66vw)",
+      },
+      "className": "umd-serif-larger",
+      "fontFamily": "'Crimson Pro', Georgia, serif",
+      "fontSize": "24px",
+      "lineHeight": "1em",
+    },
+    "maximum": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "80px",
+        "fontWeight": "300",
+        "lineHeight": "1.025em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(32px + 4vw)",
+      },
+      "className": "umd-serif-maximum",
+      "fontFamily": "'Crimson Pro', Georgia, serif",
+      "fontSize": "32px",
+      "lineHeight": "1.18em",
+    },
+    "medium": {
+      "className": "umd-serif-medium",
+      "fontFamily": "'Crimson Pro', Georgia, serif",
+      "fontSize": "20px",
+      "lineHeight": "1.5em",
+    },
+  },
+  "large": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "24px",
+      "lineHeight": "1em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(20px + 0.33vw)",
+    },
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "20px",
+    "lineHeight": "1.5em",
+  },
+  "larger": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "32px",
+      "lineHeight": "1.18em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(24px + 0.66vw)",
+    },
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "24px",
+    "lineHeight": "1em",
+  },
+  "maxium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "80px",
+      "fontWeight": "300",
+      "lineHeight": "1.025em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(32px + 4vw)",
+    },
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "32px",
+    "lineHeight": "1.18em",
+  },
+  "medium": {
+    "fontFamily": "'Crimson Pro', Georgia, serif",
+    "fontSize": "20px",
+    "lineHeight": "1.5em",
+  },
+}
+`;
+
+exports[`typography/serif size objects should have correctly defined serif sizes 1`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "80px",
+    "fontWeight": "300",
+    "lineHeight": "1.025em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(32px + 4vw)",
+  },
+  "fontFamily": "'Crimson Pro', Georgia, serif",
+  "fontSize": "32px",
+  "lineHeight": "1.18em",
+}
+`;
+
+exports[`typography/serif size objects should have correctly defined serif sizes 2`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "56px",
+    "lineHeight": "1.07em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(32px + 2vw)",
+  },
+  "fontFamily": "'Crimson Pro', Georgia, serif",
+  "fontSize": "32px",
+  "lineHeight": "1.18em",
+}
+`;
+
+exports[`typography/serif size objects should have correctly defined serif sizes 3`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "32px",
+    "lineHeight": "1.18em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(24px + 0.66vw)",
+  },
+  "fontFamily": "'Crimson Pro', Georgia, serif",
+  "fontSize": "24px",
+  "lineHeight": "1em",
+}
+`;
+
+exports[`typography/serif size objects should have correctly defined serif sizes 4`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "24px",
+    "lineHeight": "1em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(20px + 0.33vw)",
+  },
+  "fontFamily": "'Crimson Pro', Georgia, serif",
+  "fontSize": "20px",
+  "lineHeight": "1.5em",
+}
+`;
+
+exports[`typography/serif size objects should have correctly defined serif sizes 5`] = `
+{
+  "fontFamily": "'Crimson Pro', Georgia, serif",
+  "fontSize": "20px",
+  "lineHeight": "1.5em",
+}
+`;

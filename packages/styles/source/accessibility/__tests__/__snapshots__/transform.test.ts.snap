@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`accessibility transform tests should transform multiple accessibility components correctly 1`] = `
+{
+  ".sr-only": {
+    "borderWidth": "0px",
+    "clip": "rect(0,0,0,0)",
+    "height": "1px",
+    "margin": "-1px",
+    "overflow": "hidden",
+    "padding": "0",
+    "position": "absolute",
+    "whiteSpace": "nowrap",
+    "width": "1px",
+  },
+  ".umd-skip-content": {
+    "&:focus": {
+      "display": "block",
+      "height": "inherit",
+      "opacity": "1",
+      "transition": "opacity 0.5s",
+      "width": "auto",
+      "zIndex": "9999",
+    },
+    "backgroundColor": "#fff",
+    "color": "#e21833",
+    "display": "block",
+    "height": "0",
+    "opacity": "0",
+    "overflow": "hidden",
+    "padding": "8px",
+    "position": "absolute",
+    "textDecoration": "underline",
+    "transition": "none",
+    "whiteSpace": "nowrap",
+    "width": "0",
+  },
+}
+`;
+
+exports[`accessibility transform tests should transform screenReader.only correctly 1`] = `
+{
+  ".sr-only": {
+    "borderWidth": "0px",
+    "clip": "rect(0,0,0,0)",
+    "height": "1px",
+    "margin": "-1px",
+    "overflow": "hidden",
+    "padding": "0",
+    "position": "absolute",
+    "whiteSpace": "nowrap",
+    "width": "1px",
+  },
+}
+`;
+
+exports[`accessibility transform tests should transform skip.content correctly 1`] = `
+{
+  ".umd-skip-content": {
+    "&:focus": {
+      "display": "block",
+      "height": "inherit",
+      "opacity": "1",
+      "transition": "opacity 0.5s",
+      "width": "auto",
+      "zIndex": "9999",
+    },
+    "backgroundColor": "#fff",
+    "color": "#e21833",
+    "display": "block",
+    "height": "0",
+    "opacity": "0",
+    "overflow": "hidden",
+    "padding": "8px",
+    "position": "absolute",
+    "textDecoration": "underline",
+    "transition": "none",
+    "whiteSpace": "nowrap",
+    "width": "0",
+  },
+}
+`;

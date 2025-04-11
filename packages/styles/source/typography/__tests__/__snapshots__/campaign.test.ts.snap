@@ -1,0 +1,383 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typography/campaign fonts objects should match snapshot for all fonts objects 1`] = `
+{
+  "extraLarge": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "96px",
+      "lineHeight": "0.91em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(48px + 4vw)",
+    },
+    "className": "umd-campaign-extralarge",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "48px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+  "extraSmall": {
+    "className": "umd-campaign-extrasmall",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "32px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.94em",
+  },
+  "large": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "80px",
+      "lineHeight": "0.91em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(48px + 2.66vw)",
+    },
+    "className": "umd-campaign-large",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "48px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+  "maximum": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "120px",
+      "lineHeight": "0.9em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(80px + 2vw)",
+    },
+    "className": "umd-campaign-maximum",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "48px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+  "medium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "64px",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.94em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(48px + 1.33vw)",
+    },
+    "className": "umd-campaign-medium",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "48px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+  "small": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "48px",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.91em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(32px + 1.33vw)",
+    },
+    "className": "umd-campaign-small",
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "32px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.94em",
+  },
+}
+`;
+
+exports[`typography/campaign should match snapshot 1`] = `
+{
+  "CampaignSmall": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "48px",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.91em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(32px + 1.33vw)",
+    },
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "32px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.94em",
+  },
+  "extraSmall": {
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "32px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.94em",
+  },
+  "extralarge": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "96px",
+      "lineHeight": "0.91em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(48px + 4vw)",
+    },
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "48px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+  "fonts": {
+    "extraLarge": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "96px",
+        "lineHeight": "0.91em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(48px + 4vw)",
+      },
+      "className": "umd-campaign-extralarge",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "48px",
+      "fontStyle": "italic",
+      "fontWeight": "700",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.91em",
+    },
+    "extraSmall": {
+      "className": "umd-campaign-extrasmall",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "32px",
+      "fontStyle": "italic",
+      "fontWeight": "700",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.94em",
+    },
+    "large": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "80px",
+        "lineHeight": "0.91em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(48px + 2.66vw)",
+      },
+      "className": "umd-campaign-large",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "48px",
+      "fontStyle": "italic",
+      "fontWeight": "700",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.91em",
+    },
+    "maximum": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "120px",
+        "lineHeight": "0.9em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(80px + 2vw)",
+      },
+      "className": "umd-campaign-maximum",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "48px",
+      "fontStyle": "italic",
+      "fontWeight": "700",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.91em",
+    },
+    "medium": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "64px",
+        "letterSpacing": "0.02em",
+        "lineHeight": "0.94em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(48px + 1.33vw)",
+      },
+      "className": "umd-campaign-medium",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "48px",
+      "fontStyle": "italic",
+      "fontWeight": "700",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.91em",
+    },
+    "small": {
+      "@media (min-width: 1024px)": {
+        "fontSize": "48px",
+        "letterSpacing": "0.02em",
+        "lineHeight": "0.91em",
+      },
+      "@media (min-width: 650px)": {
+        "fontSize": "calc(32px + 1.33vw)",
+      },
+      "className": "umd-campaign-small",
+      "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+      "fontSize": "32px",
+      "fontStyle": "italic",
+      "fontWeight": "700",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.94em",
+    },
+  },
+  "large": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "80px",
+      "lineHeight": "0.91em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(48px + 2.66vw)",
+    },
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "48px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+  "maxium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "120px",
+      "lineHeight": "0.9em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(80px + 2vw)",
+    },
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "48px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+  "medium": {
+    "@media (min-width: 1024px)": {
+      "fontSize": "64px",
+      "letterSpacing": "0.02em",
+      "lineHeight": "0.94em",
+    },
+    "@media (min-width: 650px)": {
+      "fontSize": "calc(48px + 1.33vw)",
+    },
+    "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+    "fontSize": "48px",
+    "fontStyle": "italic",
+    "fontWeight": "700",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+}
+`;
+
+exports[`typography/campaign size objects should have correctly defined campaign text sizes 1`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "120px",
+    "lineHeight": "0.9em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(80px + 2vw)",
+  },
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "48px",
+  "fontStyle": "italic",
+  "fontWeight": "700",
+  "letterSpacing": "0.02em",
+  "lineHeight": "0.91em",
+}
+`;
+
+exports[`typography/campaign size objects should have correctly defined campaign text sizes 2`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "96px",
+    "lineHeight": "0.91em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(48px + 4vw)",
+  },
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "48px",
+  "fontStyle": "italic",
+  "fontWeight": "700",
+  "letterSpacing": "0.02em",
+  "lineHeight": "0.91em",
+}
+`;
+
+exports[`typography/campaign size objects should have correctly defined campaign text sizes 3`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "80px",
+    "lineHeight": "0.91em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(48px + 2.66vw)",
+  },
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "48px",
+  "fontStyle": "italic",
+  "fontWeight": "700",
+  "letterSpacing": "0.02em",
+  "lineHeight": "0.91em",
+}
+`;
+
+exports[`typography/campaign size objects should have correctly defined campaign text sizes 4`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "64px",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.94em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(48px + 1.33vw)",
+  },
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "48px",
+  "fontStyle": "italic",
+  "fontWeight": "700",
+  "letterSpacing": "0.02em",
+  "lineHeight": "0.91em",
+}
+`;
+
+exports[`typography/campaign size objects should have correctly defined campaign text sizes 5`] = `
+{
+  "@media (min-width: 1024px)": {
+    "fontSize": "48px",
+    "letterSpacing": "0.02em",
+    "lineHeight": "0.91em",
+  },
+  "@media (min-width: 650px)": {
+    "fontSize": "calc(32px + 1.33vw)",
+  },
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "32px",
+  "fontStyle": "italic",
+  "fontWeight": "700",
+  "letterSpacing": "0.02em",
+  "lineHeight": "0.94em",
+}
+`;
+
+exports[`typography/campaign size objects should have correctly defined campaign text sizes 6`] = `
+{
+  "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
+  "fontSize": "32px",
+  "fontStyle": "italic",
+  "fontWeight": "700",
+  "letterSpacing": "0.02em",
+  "lineHeight": "0.94em",
+}
+`;

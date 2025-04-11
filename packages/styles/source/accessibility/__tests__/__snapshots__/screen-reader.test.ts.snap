@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`accessibility/screen-reader only should match snapshot 1`] = `
+{
+  "borderWidth": "0px",
+  "className": "sr-only",
+  "clip": "rect(0,0,0,0)",
+  "height": "1px",
+  "margin": "-1px",
+  "overflow": "hidden",
+  "padding": "0",
+  "position": "absolute",
+  "whiteSpace": "nowrap",
+  "width": "1px",
+}
+`;

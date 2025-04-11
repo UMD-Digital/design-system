@@ -88,6 +88,7 @@ const createImageStyles = (customStyles = {}) => {
 const createTextStyles = (customStyles = {}) => {
   return {
     [`& > div:not(.${image.wrapperScaled.className})`]: {
+      maxWidth: `${spacing.maxWidth.smallest}`,
       ...createContainerQuery(mediumBreakpointStart, 'min-width', {
         paddingTop: spacing.md,
       }),
@@ -106,8 +107,6 @@ const createTextStyles = (customStyles = {}) => {
  */
 const createContainerStyles = (customStyles = {}) => {
   return {
-    maxWidth: `${spacing.maxWidth.smallest}`,
-
     [`&:has(img)`]: {
       ...createContainerQuery(smallBreakpoint, 'max-width', {}),
     },

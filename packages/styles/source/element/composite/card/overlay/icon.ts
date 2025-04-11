@@ -63,6 +63,7 @@ const createImageStyles = (customStyles = {}) => {
 const createTextStyles = (customStyles = {}) => {
   return {
     [`& > div:last-child`]: {
+      maxWidth: `${spacing.maxWidth.smallest}`,
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -81,7 +82,6 @@ const createTextStyles = (customStyles = {}) => {
  */
 const createContainerStyles = (customStyles = {}) => {
   return {
-    maxWidth: `${spacing.maxWidth.smallest}`,
     padding: `${spacing.md}`,
     height: '100%',
     overflow: 'hidden',

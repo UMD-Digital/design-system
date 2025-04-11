@@ -62,6 +62,7 @@ const createImageStyles = (customStyles = {}) => {
  */
 const createTextStyles = (customStyles = {}) => {
   return {
+    maxWidth: `${spacing.maxWidth.smallest}`,
     ...customStyles,
   };
 };
@@ -74,7 +75,6 @@ const createTextStyles = (customStyles = {}) => {
  */
 const createContainerStyles = (customStyles = {}) => {
   return {
-    maxWidth: `${spacing.maxWidth.smallest}`,
     padding: `${spacing.md}`,
     height: '100%',
     overflow: 'hidden',

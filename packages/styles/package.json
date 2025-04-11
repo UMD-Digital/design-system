@@ -16,7 +16,15 @@
     "docs": "npx typedoc --options ./typedoc.json",
     "build": "tsc --preserveWatchOutput",
     "clean": "rm -rf dist",
-    "release": "npm run clean && npm run build && npm publish --access public",
-    "start": "tsc -w --preserveWatchOutput"
+    "release": "npm run test && npm run clean && npm run build && npm publish --access public",
+    "start": "tsc -w --preserveWatchOutput",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.1"
   }
 }

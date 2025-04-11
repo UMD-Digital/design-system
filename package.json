@@ -13,6 +13,8 @@
     "feed:docs": "npx lerna run docs --scope=@universityofmaryland/web-feeds-library",
     "styles": "npx lerna run start --scope=@universityofmaryland/web-styles-library",
     "styles:docs": "npx lerna run docs --scope=@universityofmaryland/web-styles-library",
+    "styles:test": "npx lerna run test --scope=@universityofmaryland/web-styles-library",
+    "test": "npx lerna run test",
     "theme": "npx lerna run start --scope=@universityofmaryland/theme",
     "start": "yarn run variables & yarn run theme & yarn run elements & yarn run components"
   },

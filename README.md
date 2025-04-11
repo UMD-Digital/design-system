@@ -19,3 +19,22 @@ The design system consists of the following packages:
 ### For information, visit [UMD Design Site Website](https://designsystem.umd.edu)
 
 ### For documentation, visit [UMD Design Site Github Pages](https://umd-digital.github.io/design-system/)
+
+## Development
+
+### Testing
+
+Run tests across all packages:
+```
+yarn test
+```
+
+Run tests for a specific package:
+```
+yarn styles:test  # Test the styles package
+```
+
+Run tests with coverage reports:
+```
+cd packages/styles && yarn test:coverage
+```

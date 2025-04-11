@@ -5,3 +5,4 @@ dist
 /tinker
 *.log
 /design-system-ui
+coverage

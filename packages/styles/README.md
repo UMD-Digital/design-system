@@ -116,6 +116,37 @@ All styles in this library are designed with accessibility in mind:
 
 For contribution guidelines, please refer to the main repository README.
 
+### Development
+
+#### Testing
+
+The library uses Jest for unit testing. To run tests:
+
+```bash
+# Run all tests
+npm run test
+
+# Run tests in watch mode during development
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+#### Release Process
+
+The release process requires all tests to pass before publishing:
+
+```bash
+npm run release
+```
+
+This will:
+1. Run all tests (and abort if any tests fail)
+2. Clean the distribution directory
+3. Build the project
+4. Publish the package
+
 ## License
 
 This project is licensed under the University of Maryland license.

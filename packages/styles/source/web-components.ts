@@ -39,6 +39,7 @@ const baseElements = [
   'media-inline',
   'pathway',
   'pathway-highlight',
+  'person-bio',
   'quote',
   'slider-events',
   'slider-events-feed',

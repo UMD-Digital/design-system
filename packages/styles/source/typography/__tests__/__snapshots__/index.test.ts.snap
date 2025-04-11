@@ -613,6 +613,9 @@ exports[`typography module should match snapshot 1`] = `
     },
     "scalingFonts": {
       "larger": {
+        "@container (min-width: 320px)": {
+          "fontSize": "calc(18px + 0.5vw)",
+        },
         "@container (min-width: 480px)": {
           "fontSize": "32px",
         },
@@ -641,6 +644,9 @@ exports[`typography module should match snapshot 1`] = `
       },
     },
     "scalingLarger": {
+      "@container (min-width: 320px)": {
+        "fontSize": "calc(18px + 0.5vw)",
+      },
       "@container (min-width: 480px)": {
         "fontSize": "32px",
       },

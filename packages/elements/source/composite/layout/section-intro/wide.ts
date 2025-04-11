@@ -45,6 +45,10 @@ const HeadlineStyles = `
 
 // prettier-ignore
 const ActionStyles = `
+  .${ELEMENT_ACTIONS} {
+    display: block;
+  }
+
   @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
     * + .${ELEMENT_ACTIONS} {
       margin-top: ${token.spacing.md};

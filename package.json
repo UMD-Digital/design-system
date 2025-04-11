@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/design-system",
-  "version": "0.0.1",
+  "version": "1.9.10",
   "description": "UMD Design System",
   "license": "MIT",
   "repository": "",
@@ -16,7 +16,9 @@
     "styles:test": "npx lerna run test --scope=@universityofmaryland/web-styles-library",
     "test": "npx lerna run test",
     "theme": "npx lerna run start --scope=@universityofmaryland/theme",
-    "start": "yarn run variables & yarn run theme & yarn run elements & yarn run components"
+    "start": "yarn run variables & yarn run theme & yarn run elements & yarn run components",
+    "update-badges": "node source/update-badges.js",
+    "preversion": "yarn run update-badges"
   },
   "workspaces": [
     "packages/*"

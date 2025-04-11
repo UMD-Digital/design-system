@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "docs": "npx typedoc --options ./typedoc.json",
+    "prebuild": "node ../../source/update-badges.js",
     "build": "tsc --preserveWatchOutput",
     "clean": "rm -rf dist",
     "release": "npm run test && npm run clean && npm run build && npm publish --access public",

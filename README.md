@@ -2,9 +2,8 @@
 
 [![Components Version](https://img.shields.io/badge/Components-v1.9.9-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
 [![Elements Version](https://img.shields.io/badge/Elements-v1.2.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
-[![Styles Version](https://img.shields.io/badge/Styles-v1.1.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 [![Feeds Version](https://img.shields.io/badge/Feeds-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
-[![Theme Version](https://img.shields.io/badge/Theme-v1.9.0-blue)](https://www.npmjs.com/package/@universityofmaryland/theme)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.1.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
 The University of Maryland's Design System is intended for use by university campus entities and partners. The packages prompt consistency in brand, design, and accessibility compliance across university web properties.
 
@@ -12,11 +11,10 @@ The University of Maryland's Design System is intended for use by university cam
 
 The design system consists of the following packages:
 
-- **[Components](https://www.npmjs.com/package/@universityofmaryland/web-components-library)**: High-level web components built from the elements library for interfaces, interactivity, layout, and data feeds
-- **[Elements](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)**: Foundational UI elements that make up the components
-- **[Styles](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)**: JSS objects and utilities for styling consistent with UMD brand guidelines
-- **[Feeds](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)**: Components for displaying dynamic content feeds (news, events, etc.)
-- **[Theme](https://www.npmjs.com/package/@universityofmaryland/theme)**: Consistent classes for typography, layout, and common UI elements
+- **[Components](packages/components/README.md)**: High-level web components built from the elements library for interfaces, interactivity, layout, and data feeds
+- **[Elements](packages/elements/README.md)**: Foundational UI elements that make up the components
+- **[Feeds](packages/feeds/README.md)**: Components for displaying dynamic content feeds (news, events, etc.)
+- **[Styles](packages/styles/README.md)**: JSS objects and utilities for styling consistent with UMD brand guidelines
 
 ### For information, visit [UMD Design Site Website](https://designsystem.umd.edu)
 

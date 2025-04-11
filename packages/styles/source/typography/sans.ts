@@ -183,10 +183,6 @@ export const scalingLarger = {
   fontSize: font.size['lg'],
   lineHeight: `1.25em`,
 
-  [`@container (min-width: ${scalingContainerSmall}px)`]: {
-    ...sizeLargerResponsive,
-  },
-
   [`@container (min-width: ${scalingContainerMedium}px)`]: {
     fontSize: font.size['4xl'],
   },

@@ -59,6 +59,7 @@ const bioLayout = {
   [`&:has(> :nth-child(2)) > *:first-child `]: {
     ...createContainerQuery(media.breakpointValues.large.min, 'min-width', {
       gridColumn: `span 3`,
+      alignSelf: `flex-start`,
     }),
   },
 };

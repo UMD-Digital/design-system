@@ -98,24 +98,6 @@ Featured layout options:
 - `isLayoutReversed`: Reverse the layout order
 - `overwriteStickyPosition`: Custom sticky position value
 
-## Integration with Other UMD Libraries
-
-This library works seamlessly with other UMD design system packages:
-
-```typescript
-import * as Feeds from '@universityofmaryland/web-feeds-library';
-import * as Styles from '@universityofmaryland/web-styles-library';
-
-// Apply additional styling to feed container
-const container = document.querySelector('.feed-container');
-Object.assign(container.style, Styles.element.container.wrapper);
-
-// Add feed component
-container.appendChild(Feeds.news.grid({ token: 'your-api-token' }).element);
-```
-
-## Advanced Usage
-
 ### Custom Filtering and Sorting
 
 You can customize how feed items are filtered and sorted:
@@ -130,53 +112,57 @@ const newsGrid = Feeds.news.grid({
     tags: ['featured'],
     dateRange: {
       start: '2023-01-01',
-      end: '2023-12-31'
-    }
+      end: '2023-12-31',
+    },
   },
   sortBy: 'date', // 'date', 'title', 'popularity'
-  sortDirection: 'desc' // 'asc' or 'desc'
+  sortDirection: 'desc', // 'asc' or 'desc'
 });
 ```
 
 ### Event Handling
 
-All feed components emit events that you can listen for:
+All feed components emit events that you can listen for. You can use the standard event listeners or our utility functions for better TypeScript support:
 
 ```typescript
+import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { events } from '@universityofmaryland/web-feeds-library/utilities';
+
 const eventsFeed = Feeds.events.list({ token: 'your-api-token' });
 const container = document.querySelector('.events-container');
 container.appendChild(eventsFeed.element);
 
-// Listen for events
-eventsFeed.element.addEventListener('feed:loaded', (event) => {
+// Method 1: Standard event listener approach
+eventsFeed.element.addEventListener(events.eventNames.FEED_LOADED, (event) => {
   console.log('Feed loaded with', event.detail.items.length, 'items');
 });
 
-eventsFeed.element.addEventListener('feed:error', (event) => {
+eventsFeed.element.addEventListener(events.eventNames.FEED_ERROR, (event) => {
   console.error('Feed error:', event.detail.error);
 });
 
-eventsFeed.element.addEventListener('feed:item:click', (event) => {
-  console.log('Item clicked:', event.detail.item);
+// Method 2: Using the utility helper (provides proper type information)
+events.listen(eventsFeed.element, events.eventNames.FEED_LOADED, (detail) => {
+  console.log('Feed loaded with', detail.items.length, 'items');
 });
-```
 
-### Manual Refresh
+// With cleanup function for easy removal
+const removeListener = events.listen(
+  eventsFeed.element,
+  events.eventNames.FEED_ERROR,
+  (detail) => {
+    console.error('Feed error:', detail.error);
+  },
+);
 
-You can programmatically refresh feed content:
-
-```typescript
-const feed = Feeds.news.grid({ token: 'your-api-token' });
-
-// Manually refresh the feed
-document.querySelector('#refresh-button').addEventListener('click', () => {
-  feed.refresh();
-});
+// Later you should remove the listener if needed
+// removeListener();
 ```
 
 ## Performance Considerations
 
 The Feeds library is optimized for performance:
+
 - Content is lazy-loaded when elements enter the viewport
 - Network requests are cached and debounced
 - Images are optimized and responsive
@@ -185,6 +171,7 @@ The Feeds library is optimized for performance:
 ## Accessibility
 
 All feed components are built with accessibility in mind:
+
 - WCAG 2.1 AA compliant
 - Proper semantic markup with ARIA attributes
 - Keyboard navigable
@@ -194,6 +181,36 @@ All feed components are built with accessibility in mind:
 ## Documentation
 
 For detailed API documentation and more advanced usage examples, see the [official UMD Design System documentation](https://umd-digital.github.io/design-system/feeds/).
+
+## Testing
+
+The library uses Jest for unit testing. To run tests:
+
+```bash
+# Run all tests
+npm run test
+
+# Run tests in watch mode during development
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+## Release Process
+
+The release process requires all tests to pass before publishing:
+
+```bash
+npm run release
+```
+
+This will:
+
+1. Run all tests (and abort if any tests fail)
+2. Clean the distribution directory
+3. Build the project
+4. Publish the package
 
 ## Contributing
 

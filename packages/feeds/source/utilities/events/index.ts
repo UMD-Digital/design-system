@@ -8,9 +8,6 @@ export const eventNames = {
 
   /** Triggered when an error occurs during feed loading or processing */
   FEED_ERROR: 'feed:error',
-
-  /** Triggered when a feed item is clicked */
-  FEED_ITEM_CLICK: 'feed:item:click',
 };
 
 /**

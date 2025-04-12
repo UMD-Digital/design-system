@@ -2,6 +2,7 @@ import { Utilities } from '@universityofmaryland/web-elements-library';
 import * as feedMacros from 'macros';
 import * as feedFetch from './fetch';
 import * as dataComposed from './data';
+import { events } from 'utilities';
 import {
   NoResultsProps,
   DisplayStartResultsProps,
@@ -55,6 +56,11 @@ export const noResults = ({
   container.appendChild(ariaLiveContent);
 
   setStyles(noResultsContent.styles);
+
+  events.dispatch(container, events.eventNames.FEED_ERROR, {
+    error: 'No results found',
+    message,
+  });
 
   setTimeout(() => {
     const styles = getStyles();
@@ -129,6 +135,12 @@ export const resultStart = (props: DisplayStartResultsProps) => {
   layoutElement.element.setAttribute('id', ID_GRID_LAYOUT_CONTAINER);
   container.appendChild(layoutElement.element);
   setStyles(layoutElement.styles);
+
+  events.dispatch(container, events.eventNames.FEED_LOADED, {
+    items: feedData,
+    count: feedData.length,
+    total: totalEntries || feedData.length,
+  });
 
   displayResults({ feedData });
   container.appendChild(

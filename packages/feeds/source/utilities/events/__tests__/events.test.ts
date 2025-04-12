@@ -18,7 +18,6 @@ describe('Events Utility', () => {
     test('exports predefined event names', () => {
       expect(events.eventNames.FEED_LOADED).toBe('feed:loaded');
       expect(events.eventNames.FEED_ERROR).toBe('feed:error');
-      expect(events.eventNames.FEED_ITEM_CLICK).toBe('feed:item:click');
     });
   });
 
@@ -48,23 +47,6 @@ describe('Events Utility', () => {
 
       expect(listener).toHaveBeenCalledTimes(1);
       expect(listener.mock.results[0].value).toEqual({ error });
-    });
-
-    test('returns dispatch result', () => {
-      element.addEventListener(
-        events.eventNames.FEED_ITEM_CLICK,
-        (event) => {},
-      );
-
-      const result = events.dispatch(
-        element,
-        events.eventNames.FEED_ITEM_CLICK,
-        {
-          item: { id: 1, title: 'Test Item' },
-        },
-      );
-
-      expect(result).toBe(true);
     });
   });
 

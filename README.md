@@ -11,30 +11,13 @@ The University of Maryland's Design System is intended for use by university cam
 
 The design system consists of the following packages:
 
-- **[Components](packages/components/README.md)**: High-level web components built from the elements library for interfaces, interactivity, layout, and data feeds
-- **[Elements](packages/elements/README.md)**: Foundational UI elements that make up the components
-- **[Feeds](packages/feeds/README.md)**: Components for displaying dynamic content feeds (news, events, etc.)
 - **[Styles](packages/styles/README.md)**: JSS objects and utilities for styling consistent with UMD brand guidelines
+- **[Feeds](packages/feeds/README.md)**: Components for displaying dynamic content feeds (news, events, etc.)
+- **[Elements](packages/elements/README.md)**: Foundational UI elements that make up the components
+- **[Components](packages/components/README.md)**: High-level web components built from the elements library for interfaces, interactivity, layout, and data feeds
 
-### For information, visit [UMD Design Site Website](https://designsystem.umd.edu)
+### For information, visit [UMD Design System Website](https://designsystem.umd.edu)
 
-### For documentation, visit [UMD Design Site Github Pages](https://umd-digital.github.io/design-system/)
+### For storybook, visit [UMD Design System Playground](http://playground.designsystem.umd.edu)
 
-## Development
-
-### Testing
-
-Run tests across all packages:
-```
-yarn test
-```
-
-Run tests for a specific package:
-```
-yarn styles:test  # Test the styles package
-```
-
-Run tests with coverage reports:
-```
-cd packages/styles && yarn test:coverage
-```
+### For documentation, visit [UMD Design System Github Pages](https://umd-digital.github.io/design-system/)

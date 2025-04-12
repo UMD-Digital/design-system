@@ -1,32 +1,36 @@
 import noResults from '../no-results';
 import { Atomic, Model } from '@universityofmaryland/web-elements-library';
 
-jest.mock('@universityofmaryland/web-elements-library', () => ({
-  Atomic: {
-    actions: {
-      options: jest.fn().mockReturnValue({
-        element: document.createElement('a'),
-        styles: '.mock-style-actions',
-      }),
-    },
-  },
-  Model: {
-    ElementModel: {
-      layout: {
-        gridStacked: jest.fn().mockReturnValue({
-          element: document.createElement('div'),
-          styles: '.mock-style-grid',
-        }),
-      },
-      headline: {
-        sansExtraLarge: jest.fn().mockReturnValue({
-          element: document.createElement('p'),
-          styles: '.mock-style-headline',
+jest.mock('@universityofmaryland/web-elements-library', () => {
+  return {
+    Atomic: {
+      actions: {
+        options: jest.fn().mockImplementation(({ element }) => {
+          return {
+            element,
+            styles: '.mock-style-actions',
+          };
         }),
       },
     },
-  },
-}));
+    Model: {
+      ElementModel: {
+        layout: {
+          gridStacked: jest.fn().mockReturnValue({
+            element: document.createElement('div'),
+            styles: '.mock-style-grid',
+          }),
+        },
+        headline: {
+          sansExtraLarge: jest.fn().mockReturnValue({
+            element: document.createElement('p'),
+            styles: '.mock-style-headline',
+          }),
+        },
+      },
+    },
+  };
+});
 
 describe('No Results Component', () => {
   beforeEach(() => {

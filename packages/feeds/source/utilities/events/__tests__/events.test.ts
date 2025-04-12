@@ -38,15 +38,22 @@ describe('Events Utility', () => {
     });
 
     test('includes correct event details', () => {
-      const listener = jest.fn((event: CustomEvent) => event.detail);
-      element.addEventListener(events.eventNames.FEED_ERROR, () => listener);
+      const listener = jest.fn((event: Event) => {
+        return (event as CustomEvent).detail;
+      });
+
+      element.addEventListener(
+        events.eventNames.FEED_ERROR,
+        listener as EventListener,
+      );
 
       const error = new Error('Test error');
 
       events.dispatch(element, events.eventNames.FEED_ERROR, { error });
 
       expect(listener).toHaveBeenCalledTimes(1);
-      expect(listener.mock.results[0].value).toEqual({ error });
+      const eventDetail = (listener.mock.calls[0][0] as CustomEvent).detail;
+      expect(eventDetail).toEqual({ error });
     });
   });
 

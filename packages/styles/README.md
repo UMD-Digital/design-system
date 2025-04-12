@@ -36,7 +36,9 @@ import { screenReader } from '@universityofmaryland/web-styles-library/accessibi
 
 ```typescript
 // Apply styles directly in JavaScript
-element.style = animation.line.fadeUnderRed;
+animation.line.fadeUnderRed.forEach((prop) => {
+  element.style = prop;
+});
 
 // Or with a framework like React
 const buttonStyle = {
@@ -47,7 +49,7 @@ const buttonStyle = {
 ### Converting to CSS String
 
 ```typescript
-import { convertToCSS } from '@universityofmaryland/web-styles-library/utils';
+import { convertToCSS } from '@universityofmaryland/web-styles-library/utilities/transform';
 
 const css = convertToCSS(animation.loader.dots);
 // Use in stylesheet or style tag
@@ -70,43 +72,26 @@ The library includes several style modules organized by functionality:
 
 Each module contains namespaces with specific style variables. For example:
 
+- `color.red`
+- `spacing.sm`
+- `typography.sans.larger`
 - `animation.line.fadeUnderRed`
 - `accessibility.screenReader.only`
-- `colors.brand.primary`
-- `typography.headers.h1`
-- `spacing.units.medium`
 
 ## Documentation
 
 For detailed documentation of all available modules, namespaces, and style variables, see:
 
 - [Complete Style Modules Documentation](https://umd-digital.github.io/design-system/styles/modules.html)
-- [Color Variables](https://umd-digital.github.io/design-system/styles/colors.html)
-- [Typography System](https://umd-digital.github.io/design-system/styles/typography.html)
-- [Animation Library](https://umd-digital.github.io/design-system/styles/animations.html)
-
-## Integration with Other UMD Libraries
-
-This library is designed to work seamlessly with other UMD design system packages:
-
-```typescript
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Elements from '@universityofmaryland/web-elements-library';
-
-// Create an element with official UMD styling
-const button = Elements.Atomic.buttons.primary({
-  text: 'Learn More',
-  styles: {
-    ...Styles.typography.buttons.primary,
-    ...Styles.colors.buttons.primary,
-    ...Styles.animation.hover.grow
-  }
-});
-```
+- [Color Variables](https://umd-digital.github.io/design-system/styles/variables/token.color.html)
+- [Typography System](https://umd-digital.github.io/design-system/styles/modules/typography.html)
+- [Layout System](https://umd-digital.github.io/design-system/styles/modules/layout.html)
+- [Element Animation](https://umd-digital.github.io/design-system/styles/modules/animation.html)
 
 ## Accessibility
 
 All styles in this library are designed with accessibility in mind:
+
 - Color combinations meet WCAG 2.1 AA contrast requirements
 - Typography sizes and spacing support readability
 - Focus states are clearly visible
@@ -115,8 +100,6 @@ All styles in this library are designed with accessibility in mind:
 ## Contributing
 
 For contribution guidelines, please refer to the main repository README.
-
-### Development
 
 #### Testing
 
@@ -142,6 +125,7 @@ npm run release
 ```
 
 This will:
+
 1. Run all tests (and abort if any tests fail)
 2. Clean the distribution directory
 3. Build the project

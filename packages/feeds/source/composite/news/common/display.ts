@@ -1,8 +1,8 @@
-import { Utilities } from '@universityofmaryland/web-elements-library';
+import { Utilities as StyleUtlities } from '@universityofmaryland/web-elements-library';
 import * as feedMacros from 'macros';
 import * as feedFetch from './fetch';
 import * as dataComposed from './data';
-import { events } from 'utilities';
+import { events } from '../../../utilities';
 import {
   NoResultsProps,
   DisplayStartResultsProps,
@@ -23,7 +23,7 @@ export const setShadowStyles = async ({
   styles: string;
 }) => {
   const styleElement = document.createElement('style');
-  const optimizedCss = await Utilities.styles.optimizedCss(styles);
+  const optimizedCss = await StyleUtlities.styles.optimizedCss(styles);
   styleElement.textContent = optimizedCss;
   shadowRoot.appendChild(styleElement);
 };

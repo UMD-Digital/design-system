@@ -4,6 +4,7 @@
     "outDir": "dist",
     "rootDir": "source",
     "baseUrl": "source",
+    "isolatedModules": true,
   },
   "include": [
     "./source"

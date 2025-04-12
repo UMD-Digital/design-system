@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { Model } from '@universityofmaryland/web-elements-library';
 
-export const stacked = () =>
+export const stacked = (): { element: HTMLElement; styles: string } =>
   Model.ElementModel.layout.gridStacked({
     element: document.createElement('div'),
     elementStyles: {
@@ -18,7 +18,12 @@ export const stacked = () =>
     },
   });
 
-export const grid = ({ count = 2 }: { count?: number; isTypeGap?: boolean }) =>
+export const grid = ({
+  count = 2,
+}: {
+  count?: number;
+  isTypeGap?: boolean;
+}): { element: HTMLElement; styles: string } =>
   Model.ElementModel.layout.grid({
     element: document.createElement('div'),
     elementStyles: {
@@ -37,7 +42,11 @@ export const grid = ({ count = 2 }: { count?: number; isTypeGap?: boolean }) =>
     isColumnsFour: count === 4,
   });
 
-export const gridGap = ({ count = 2 }: { count?: number }) =>
+export const gridGap = ({
+  count = 2,
+}: {
+  count?: number;
+}): { element: HTMLElement; styles: string } =>
   Model.ElementModel.layout.grid({
     element: document.createElement('div'),
     elementStyles: {
@@ -62,7 +71,7 @@ export const gridOffsetGap = ({
   count?: number;
   isLayoutReversed?: boolean;
   overwriteStickyPosition?: number;
-}) =>
+}): { element: HTMLElement; styles: string } =>
   Model.ElementModel.layout.grid({
     element: document.createElement('div'),
     elementStyles: {

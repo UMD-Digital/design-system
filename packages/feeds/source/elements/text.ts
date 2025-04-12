@@ -1,4 +1,4 @@
-export const summary = ({ text }: { text: string }) => {
+export const summary = ({ text }: { text: string }): HTMLDivElement | null => {
   if (text) {
     const textElement = document.createElement('div');
     const textNode = document.createElement('p');
@@ -10,7 +10,7 @@ export const summary = ({ text }: { text: string }) => {
   return null;
 };
 
-export const headline = ({ text, url }: { text: string; url: string }) => {
+export const headline = ({ text, url }: { text: string; url: string }): HTMLParagraphElement | null => {
   if (text && url) {
     const headline = document.createElement('p');
     const headlineLink = document.createElement('a');
@@ -33,7 +33,7 @@ export const date = ({
 }: {
   date: string;
   dateFormatted: string;
-}) => {
+}): HTMLTimeElement | null => {
   if (date && dateFormatted) {
     const dateElement = document.createElement('time');
     dateElement.innerHTML = dateFormatted;

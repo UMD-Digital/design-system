@@ -9,7 +9,7 @@ export const standard = ({
 }: {
   images: ImageType;
   url?: string;
-}) => {
+}): HTMLImageElement | HTMLAnchorElement => {
   const image = images[0];
   const imageElement = document.createElement('img');
   imageElement.src = image.url;

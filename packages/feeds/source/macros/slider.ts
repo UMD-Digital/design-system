@@ -72,30 +72,9 @@ export default ({
     };
 
     const feedData = await FetchGraphQL(fetchVariables);
-    const graceFail = ({ message }: { message: string }) => {
-      throw new Error(message);
-    };
-
-    if (
-      !feedData ||
-      !feedData.data ||
-      !feedData.data.entries ||
-      feedData.message
-    ) {
-      if (!feedData) graceFail({ message: 'Feed not found' });
-      if (!feedData.data) graceFail({ message: 'Feed data not found' });
-      if (!feedData.data.entries)
-        graceFail({ message: 'Feed entries not found' });
-      if (!feedData.data.entries.events)
-        graceFail({ message: 'Feed events not found' });
-      if (!feedData.message)
-        graceFail({ message: `Feed data errors: ${feedData.message}` });
-
-      return null;
-    }
 
     const slides: { element: HTMLElement; styles: string }[] =
-      feedData.data.entries.events.map(
+      feedData?.data?.entries?.events.map(
         (data: TypeSlideFeedResponse, i: number) => {
           const headline = document.createElement('p');
           headline.textContent = data.title;
@@ -122,7 +101,7 @@ export default ({
         },
       );
 
-    slides.forEach((slide) => dataSlider.appendChild(slide.element));
+    slides?.forEach((slide) => dataSlider.appendChild(slide.element));
 
     if (shadowRoot) setShadowStyles({ shadowRoot, styles: slider.styles });
     setTimeout(() => {

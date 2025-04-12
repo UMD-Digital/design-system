@@ -1,10 +1,8 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import {
   Atomic,
   Composite,
   Utilities,
 } from '@universityofmaryland/web-elements-library';
-import { set } from '@universityofmaryland/web-styles-library/dist/element/field';
 
 type TypeSlideFeedResponse = {
   title: string;

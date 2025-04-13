@@ -1,19 +1,8 @@
+const path = require('path');
+const rootConfig = require('../../jest.config');
+
 module.exports = {
-  preset: 'ts-jest',
+  ...rootConfig,
   testEnvironment: 'node',
-  testMatch: ['**/__tests__/**/*.test.ts'],
-  moduleFileExtensions: ['ts', 'js'],
-  collectCoverage: true,
-  coverageDirectory: 'coverage',
-  collectCoverageFrom: [
-    'source/**/*.ts',
-    '!**/node_modules/**',
-    '!**/dist/**',
-    '!**/__tests__/**',
-  ],
-  transform: {
-    '^.+\\.ts$': ['ts-jest', {
-      tsconfig: 'tsconfig.json',
-    }],
-  },
+  rootDir: path.resolve(__dirname),
 };

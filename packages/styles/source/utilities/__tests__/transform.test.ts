@@ -124,7 +124,11 @@ describe('transform utilities', () => {
         marginTop: 8,
       };
 
-      const expected = `.test-class { color: red; font-size: 16px; margin-top: 8px; }`;
+      const expected = `.test-class {
+  color: red;
+  font-size: 16px;
+  margin-top: 8px;
+}`;
 
       const result = convertToCSS(input);
       expect(result).toEqual(expected);
@@ -137,7 +141,10 @@ describe('transform utilities', () => {
         padding: '10px',
       };
 
-      const expected = `.class1, .class2 { display: flex; padding: 10px; }`;
+      const expected = `.class1, .class2 {
+  display: flex;
+  padding: 10px;
+}`;
 
       const result = convertToCSS(input);
       expect(result).toEqual(expected);
@@ -154,7 +161,14 @@ describe('transform utilities', () => {
         },
       };
 
-      const expected = `.button { display: inline-block; padding: 8px 16px; background-color: #0078d4; } .button:hover { background-color: #106ebe; }`;
+      const expected = `.button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #0078d4;
+}
+.button:hover {
+  background-color: #106ebe;
+}`;
 
       const result = convertToCSS(input);
       expect(result).toEqual(expected);
@@ -171,7 +185,14 @@ describe('transform utilities', () => {
         },
       };
 
-      const expected = `.responsive { width: 100%; } @media (min-width: 768px) { .responsive { width: 50%; } }`;
+      const expected = `.responsive {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .responsive {
+    width: 50%;
+  }
+}`;
 
       const result = convertToCSS(input);
       expect(result).toEqual(expected);
@@ -185,7 +206,9 @@ describe('transform utilities', () => {
         padding: undefined,
       };
 
-      const expected = `.test { color: blue; }`;
+      const expected = `.test {
+  color: blue;
+}`;
 
       const result = convertToCSS(input);
       expect(result).toEqual(expected);
@@ -205,7 +228,10 @@ describe('transform utilities', () => {
         padding: 0,
       };
 
-      const expected = `.zero-test { margin: 0; padding: 0; }`;
+      const expected = `.zero-test {
+  margin: 0;
+  padding: 0;
+}`;
 
       const result = convertToCSS(input);
       expect(result).toEqual(expected);

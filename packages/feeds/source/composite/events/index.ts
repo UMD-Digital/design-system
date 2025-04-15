@@ -1,15 +1,16 @@
+import {} from './slider';
+import { type ElementModel } from '../../_types';
+import { type ListProps, type BlockProps, type SliderProps } from './_types';
+
 /**
  * Creates a grid layout component for displaying events.
- * @param {Object} props - Configuration options
- * @param {string} props.token - API token for authentication
- * @param {number} [props.numberOfColumnsToShow=3] - Number of columns in the grid
- * @param {boolean} [props.isThemeDark] - Whether to use dark theme styling
- * @param {boolean} [props.isTransparent] - Whether cards should have transparent background
- * @returns {Object} Grid component with element, styles and event handlers
+ *
+ * @param {BlockProps} props - Configuration options for the grid, including token, categories, row count, lazy load options and theme preference.
+ * @returns {ElementModel} An object containing the grid element, associated events, and styles.
  * @example
  * ```typescript
  * import * as Feeds from '@universityofmaryland/web-feeds-library';
- * const grid = Feeds.events.grid({ 
+ * const grid = Feeds.events.grid({
  *   token: 'your-token',
  *   numberOfColumnsToShow: 2
  * });
@@ -21,15 +22,13 @@ export { default as grid } from './grid';
 
 /**
  * Creates a list layout component for displaying events.
- * @param {Object} props - Configuration options
- * @param {string} props.token - API token for authentication
- * @param {boolean} [props.isThemeDark] - Whether to use dark theme styling
- * @param {boolean} [props.isTransparent] - Whether cards should have transparent background
- * @returns {Object} List component with element, styles and event handlers
+ *
+ * @param {EventSliderProps} props - Configuration options for the slider, including token, categories, and theme preference.
+ * @returns {ElementModel} An object containing the list element, associated events, and styles.
  * @example
  * ```typescript
  * import * as Feeds from '@universityofmaryland/web-feeds-library';
- * const list = Feeds.events.list({ 
+ * const list = Feeds.events.list({
  *   token: 'your-token',
  *   isTransparent: true
  * });
@@ -40,15 +39,14 @@ export { default as grid } from './grid';
 export { default as list } from './list';
 
 /**
- * Creates a slider component for displaying events.
- * @param {Object} props - Configuration options
- * @param {string} props.token - API token for authentication
- * @param {boolean} [props.isThemeDark] - Whether to use dark theme styling
- * @returns {Object} Slider component with element, styles and event handlers
+ * Creates a slider component for displaying calendar events.
+ *
+ * @param {ListProps} props - Configuration options for the list, including token, categories, row count, lazy load options and theme preference.
+ * @returns {ElementModel} An object containing the slider element, associated events, and styles.
  * @example
  * ```typescript
  * import * as Feeds from '@universityofmaryland/web-feeds-library';
- * const slider = Feeds.events.slider({ 
+ * const slider = Feeds.events.slider({
  *   token: 'your-token'
  * });
  * document.querySelector('.container').appendChild(slider.element);

@@ -1,14 +1,15 @@
+import { type ElementModel } from '../../_types';
+import { type AcademicSliderProps } from './_types';
+
 /**
  * Creates a slider component for displaying academic events.
- * @param {Object} props - Configuration options
- * @param {string} props.token - API token for authentication
- * @param {string|null} [props.categories] - Optional categories to filter events
- * @param {boolean} [props.isThemeDark] - Whether to use dark theme styling
- * @returns {Object} Slider component with element and styles
+ *
+ * @param {AcademicSliderProps} props - Configuration options for the slider, including token, categories, and theme preference.
+ * @returns {ElementModel} An object containing the slider element, associated events, and styles.
  * @example
  * ```typescript
  * import * as Feeds from '@universityofmaryland/web-feeds-library';
- * const slider = Feeds.academic.slider({ 
+ * const slider = Feeds.academic.slider({
  *   token: 'your-token',
  *   isThemeDark: true
  * });

@@ -1,4 +1,6 @@
 import * as feedMacros from 'macros';
+import { type SliderProps } from './_types';
+import { type ElementModel } from '../../_types';
 
 const QUERY_DATA = `
   title
@@ -26,11 +28,7 @@ const query = `
   }
 `;
 
-export default (props: {
-  token: string;
-  categories?: string | null;
-  isThemeDark?: boolean;
-}) =>
+export default (props: SliderProps): ElementModel =>
   feedMacros.slider({
     ...props,
     query,

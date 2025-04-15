@@ -5,9 +5,14 @@ import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
 import * as dataComposed from './common/data';
-import { DisplayStartResultsProps, FeaturedProps, FeedDisplay } from './_types';
+import {
+  type DisplayStartResultsProps,
+  type FeaturedProps,
+  type FeedDisplay,
+} from './_types';
+import { type ElementModel } from '../../_types';
 
-export default (props: FeaturedProps) =>
+export default (props: FeaturedProps): ElementModel =>
   (() => {
     const {
       isThemeDark,

@@ -89,3 +89,9 @@ export interface BlockProps extends BaseProps {
 }
 
 export interface ListProps extends BaseProps {}
+
+export interface SliderProps {
+  token: string;
+  categories?: string | null;
+  isThemeDark?: boolean;
+}

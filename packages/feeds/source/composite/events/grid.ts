@@ -4,9 +4,10 @@ import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
 import * as dataComposed from './common/data';
-import { BlockProps, FeedDisplay } from './_types';
+import { type BlockProps, type FeedDisplay } from './_types';
+import { type ElementModel } from '../../_types';
 
-export default (props: BlockProps) =>
+export default (props: BlockProps): ElementModel =>
   (() => {
     const { isThemeDark, isTransparent, numberOfColumnsToShow } = props;
     const loader = feedMacros.loader.create();

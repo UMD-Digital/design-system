@@ -5,6 +5,7 @@
 
 import { font, media } from '../token';
 import { create } from '../utilities';
+import type { JssObject } from '../_types';
 
 /**
  * Breakpoint constants for responsive styles
@@ -162,6 +163,10 @@ export const fonts = {
    * import * as Styles from '@universityofmaryland/web-styles-library';
    * Styles.typography.campaign.fonts.maximum
    * ```
+   * @example
+   * ```css
+   * class="umd-campaign-maximum"
+   * ```
    * @since 1.8.0
    */
   maximum: create.jssObject({
@@ -176,6 +181,10 @@ export const fonts = {
    * ```typescript
    * import * as Styles from '@universityofmaryland/web-styles-library';
    * Styles.typography.campaign.fonts.extraLarge
+   * ```
+   * @example
+   * ```css
+   * class="umd-campaign-extralarge"
    * ```
    * @since 1.8.0
    */
@@ -192,6 +201,10 @@ export const fonts = {
    * import * as Styles from '@universityofmaryland/web-styles-library';
    * Styles.typography.campaign.fonts.large
    * ```
+   * @example
+   * ```css
+   * class="umd-campaign-large"
+   * ```
    * @since 1.8.0
    */
   large: create.jssObject({
@@ -206,6 +219,10 @@ export const fonts = {
    * ```typescript
    * import * as Styles from '@universityofmaryland/web-styles-library';
    * Styles.typography.campaign.fonts.medium
+   * ```
+   * @example
+   * ```css
+   * class="umd-campaign-medium"
    * ```
    * @since 1.8.0
    */
@@ -222,6 +239,10 @@ export const fonts = {
    * import * as Styles from '@universityofmaryland/web-styles-library';
    * Styles.typography.campaign.fonts.small
    * ```
+   * @example
+   * ```css
+   * class="umd-campaign-small"
+   * ```
    * @since 1.8.0
    */
   small: create.jssObject({
@@ -236,6 +257,10 @@ export const fonts = {
    * ```typescript
    * import * as Styles from '@universityofmaryland/web-styles-library';
    * Styles.typography.campaign.fonts.extraSmall
+   * ```
+   * @example
+   * ```css
+   * class="umd-campaign-extrasmall"
    * ```
    * @since 1.8.0
    */

@@ -26,6 +26,10 @@ const columns = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.inline.row
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-inline-rows"
+ * ```
  * @since 1.8.0
  */
 export const row: JssObject = {
@@ -43,6 +47,11 @@ export const row: JssObject = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.inline.tabletRows
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-inline-tablet-rows"
+ * ```
+ * @deprecated Use 'umd-layout-grid-inline-tablet-rows' instead of 'umd-grid-row-mobile-tablet'.
  * @since 1.8.0
  */
 export const tabletRows: JssObject = create.jssObject({
@@ -69,6 +78,11 @@ export const tabletRows: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.inline.stretch
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-inline-stretch"
+ * ```
+ * @deprecated Use 'umd-layout-grid-inline-stretch' instead of 'umd-forms-layout-headline-with-action'.
  * @since 1.8.0
  */
 export const stretch: JssObject = create.jssObject({

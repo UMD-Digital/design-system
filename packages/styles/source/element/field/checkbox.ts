@@ -51,6 +51,11 @@ export const checkbox = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.checkbox.checkboxWrapper
  * ```
+ * @example
+ * ```css
+ * class="umd-field-checkbox-wrapper"
+ * ```
+ * @deprecated Use 'umd-field-checkbox-wrapper' instead of 'umd-forms-choices-wrapper'.
  * @since 1.8.0
  */
 export const checkboxWrapper: JssObject = create.jssObject({

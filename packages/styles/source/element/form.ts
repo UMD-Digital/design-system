@@ -17,6 +17,10 @@ const classNamePrefix = 'umd-form';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.form.gray
  * ```
+ * @example
+ * ```css
+ * class="umd-form-gray"
+ * ```
  * @since 1.8.0
  */
 export const gray: JssObject = create.jssObject({

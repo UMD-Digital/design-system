@@ -278,6 +278,10 @@ const orderedListBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.list.ordered
  * ```
+ * @example
+ * ```css
+ * class="umd-list-ordered"
+ * ```
  *
  * @since 1.8.0
  */
@@ -294,6 +298,10 @@ export const ordered: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.list.unordered
+ * ```
+ * @example
+ * ```css
+ * class="umd-list-unordered"
  * ```
  *
  * @since 1.8.0

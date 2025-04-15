@@ -19,6 +19,11 @@ const classNamePrefix = 'umd-text-line';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.line.tailwing
  * ```
+ * @example
+ * ```css
+ * class="umd-text-line-tailwing"
+ * ```
+ * @deprecated Use 'umd-text-line-tailwing' instead of 'umd-tailwings-headline'.
  * @since 1.8.0
  */
 export const tailwing: JssObject = create.jssObject({
@@ -101,6 +106,11 @@ const trailingBefore = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.line.trailing
  * ```
+ * @example
+ * ```css
+ * class="umd-text-line-trailing"
+ * ```
+ * @deprecated Use 'umd-text-line-trailing' instead of 'umd-tailwing-right-headline'.
  * @since 1.8.0
  */
 export const trailing = create.jssObject({
@@ -140,6 +150,11 @@ export const trailing = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.line.trailingLight
  * ```
+ * @example
+ * ```css
+ * class="umd-text-line-trailing-light"
+ * ```
+ * @deprecated Use 'umd-text-line-trailing-light' instead of 'umd-tailwing-right-headline[theme="light"]'.
  * @since 1.8.0
  */
 export const trailingLight: JssObject = create.jssObject({
@@ -161,6 +176,11 @@ export const trailingLight: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.line.trailingDark
  * ```
+ * @example
+ * ```css
+ * class="umd-text-line-trailing-dark"
+ * ```
+ * @deprecated Use 'umd-text-line-trailing-dark' instead of 'umd-tailwing-right-headline[theme="dark"]'.
  * @since 1.8.0
  */
 export const trailingDark: JssObject = create.jssObject({
@@ -188,6 +208,11 @@ export const trailingDark: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.line.adjustent
  * ```
+ * @example
+ * ```css
+ * class="umd-text-line-adjustent"
+ * ```
+ * @deprecated Use 'umd-text-line-adjustent' instead of 'umd-adjacent-line-text'.
  * @since 1.8.0
  */
 export const adjustent: JssObject = create.jssObject({
@@ -218,6 +243,10 @@ export const adjustent: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.line.adjustentInset
+ * ```
+ * @example
+ * ```css
+ * class="umd-text-line-adjustent-inset"
  * ```
  * @since 1.8.0
  */

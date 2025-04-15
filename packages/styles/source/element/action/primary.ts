@@ -32,6 +32,11 @@ const primaryBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.primary.normal
  * ```
+ * @example
+ * ```css
+ * class="umd-action-primary"
+ * ```
+ * @deprecated Use 'umd-action-primary' instead of 'umd-forms-actions-primary'.
  *
  * @since 1.8.0
  */
@@ -59,6 +64,10 @@ export const normal: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.primary.large
  * ```
+ * @example
+ * ```css
+ * class="umd-action-primary-large"
+ * ```
  *
  * @since 1.8.0
  */
@@ -81,6 +90,10 @@ export const large: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.primary.white
+ * ```
+ * @example
+ * ```css
+ * class="umd-action-primary-white"
  * ```
  *
  * @since 1.8.0

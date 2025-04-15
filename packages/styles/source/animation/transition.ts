@@ -63,6 +63,10 @@ const keyFrameSlideInFromLeft = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.transition.slideRight
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-transition-slide-right"
+ * ```
  *
  * @since 1.8.0
  */
@@ -89,6 +93,11 @@ export const slideRight: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.transition.fadeInFromBottom
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-transition-fade-bottom"
+ * ```
+ * @deprecated Use 'umd-animation-transition-fade-bottom' instead of 'umd-grid-fade-in'.
  *
  * @since 1.8.0
  */

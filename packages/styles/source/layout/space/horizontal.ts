@@ -42,6 +42,11 @@ const lockBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.horizontal.full
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-horizontal-full"
+ * ```
+ * @deprecated Use 'umd-layout-space-horizontal-full' instead of 'umd-lock-full'.
  * @since 1.8.0
  */
 export const full: JssObject = create.jssObject({
@@ -63,6 +68,11 @@ export const full: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.horizontal.max
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-horizontal-larger"
+ * ```
+ * @deprecated Use 'umd-layout-space-horizontal-larger' instead of 'umd-lock'.
  * @since 1.8.0
  */
 export const max: JssObject = create.jssObject({
@@ -84,6 +94,11 @@ export const max: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.horizontal.large
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-horizontal-large"
+ * ```
+ * @deprecated Use 'umd-layout-space-horizontal-large' instead of 'umd-lock-small'.
  * @since 1.8.0
  */
 export const large: JssObject = create.jssObject({
@@ -105,6 +120,11 @@ export const large: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.horizontal.normal
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-horizontal-normal"
+ * ```
+ * @deprecated Use 'umd-layout-space-horizontal-normal' instead of 'umd-lock-smaller'.
  * @since 1.8.0
  */
 export const normal: JssObject = create.jssObject({
@@ -126,6 +146,11 @@ export const normal: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.horizontal.small
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-horizontal-small"
+ * ```
+ * @deprecated Use 'umd-layout-space-horizontal-small' instead of 'umd-lock-extra-small'.
  * @since 1.8.0
  */
 export const small: JssObject = create.jssObject({
@@ -147,6 +172,11 @@ export const small: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.horizontal.smallest
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-horizontal-smallest"
+ * ```
+ * @deprecated Use 'umd-layout-space-horizontal-smallest' instead of 'umd-lock-smallest'.
  * @since 1.8.0
  */
 export const smallest: JssObject = create.jssObject({

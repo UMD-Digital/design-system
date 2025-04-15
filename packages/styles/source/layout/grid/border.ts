@@ -28,6 +28,11 @@ const boarderBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.border.columnsTwo
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-border-two"
+ * ```
+ * @deprecated Use 'umd-layout-grid-border-two' instead of 'umd-grid-border'.
  * @since 1.8.0
  */
 export const columnsTwo: JssObject = create.jssObject({
@@ -67,6 +72,11 @@ export const columnsTwo: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.border.columnsThree
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-border-three"
+ * ```
+ * @deprecated Use 'umd-layout-grid-border-three' instead of 'umd-grid-three-border'.
  * @since 1.8.0
  */
 export const columnsThree: JssObject = create.jssObject({
@@ -110,6 +120,11 @@ export const columnsThree: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.border.columnsFour
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-border-four"
+ * ```
+ * @deprecated Use 'umd-layout-grid-border-four' instead of 'umd-grid-four-border'.
  * @since 1.8.0
  */
 export const columnsFour: JssObject = create.jssObject({

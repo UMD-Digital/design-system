@@ -18,6 +18,11 @@ const classNamePrefix = 'umd-layout-space-vertical';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.vertical.landing
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-vertical-landing"
+ * ```
+ * @deprecated Use 'umd-layout-space-vertical-landing' instead of 'umd-layout-vertical-landing'.
  * @since 1.8.0
  */
 export const landing: JssObject = create.jssObject({
@@ -46,6 +51,11 @@ export const landing: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.vertical.landingChild
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-vertical-landing-child"
+ * ```
+ * @deprecated Use 'umd-layout-space-vertical-landing-child' instead of 'umd-layout-vertical-landing-child'.
  * @since 1.8.0
  */
 export const landingChild: JssObject = create.jssObject({
@@ -74,6 +84,11 @@ export const landingChild: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.vertical.interior
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-vertical-interior"
+ * ```
+ * @deprecated Use 'umd-layout-space-vertical-interior' instead of 'umd-layout-vertical-interior'.
  * @since 1.8.0
  */
 export const interior: JssObject = create.jssObject({
@@ -98,6 +113,11 @@ export const interior: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.vertical.interiorChild
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-vertical-interior-child"
+ * ```
+ * @deprecated Use 'umd-layout-space-vertical-interior-child' instead of 'umd-layout-vertical-interior-child'.
  * @since 1.8.0
  */
 export const interiorChild: JssObject = create.jssObject({
@@ -118,6 +138,11 @@ export const interiorChild: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.vertical.headlineLarge
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-vertical-headline-large"
+ * ```
+ * @deprecated Use 'umd-layout-space-vertical-headline-large' instead of 'umd-layout-headline-large'.
  * @since 1.8.0
  */
 export const headlineLarge: JssObject = create.jssObject({
@@ -142,6 +167,11 @@ export const headlineLarge: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.vertical.headlineMedium
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-space-vertical-headline-medium"
+ * ```
+ * @deprecated Use 'umd-layout-space-vertical-headline-medium' instead of 'umd-layout-headline-medium'.
  * @since 1.8.0
  */
 export const headlineMedium: JssObject = create.jssObject({

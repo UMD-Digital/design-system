@@ -18,6 +18,11 @@ const classNamePrefix = 'umd-text-code';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.code.code
  * ```
+ * @example
+ * ```css
+ * class="umd-text-code"
+ * ```
+ * @deprecated Use 'umd-text-code' instead of 'umd-rich-text-coding'.
  * @since 1.8.0
  */
 export const code: JssObject = create.jssObject({

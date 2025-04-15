@@ -40,6 +40,11 @@ const outlineBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.outline.normal
  * ```
+ * @example
+ * ```css
+ * class="umd-action-outline"
+ * ```
+ * @deprecated Use 'umd-action-outline' instead of 'umd-forms-actions-outline'.
  * @since 1.8.0
  */
 export const normal: JssObject = create.jssObject({
@@ -70,6 +75,10 @@ export const normal: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.outline.large
  * ```
+ * @example
+ * ```css
+ * class="umd-action-outline-large"
+ * ```
  * @since 1.8.0
  */
 export const large: JssObject = create.jssObject({
@@ -95,6 +104,10 @@ export const large: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.outline.white
+ * ```
+ * @example
+ * ```css
+ * class="umd-action-outline-white"
  * ```
  * @since 1.8.0
  */

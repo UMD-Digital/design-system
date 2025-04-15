@@ -18,6 +18,10 @@ const classNamePrefix = 'umd-asset-gif';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.asset.gif.toggle
  * ```
+ * @example
+ * ```css
+ * class="umd-asset-gif-toggle"
+ * ```
  * @since 1.8.0
  */
 export const toggle: JssObject = create.jssObject({

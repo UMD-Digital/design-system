@@ -195,6 +195,11 @@ const classNamePrefix = 'umd-animation-line';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.slideUnderRed
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-slide-red"
+ * ```
+ * @deprecated Use 'umd-animation-line-slide-red' instead of 'umd-slidein-underline-red'.
  * @since 1.8.0
  */
 
@@ -215,6 +220,11 @@ export const slideUnderRed: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.slideUnderBlack
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-slide-black"
+ * ```
+ * @deprecated Use 'umd-animation-line-slide-black' instead of 'umd-slidein-underline-black'.
  * @since 1.8.0
  */
 
@@ -235,6 +245,11 @@ export const slideUnderBlack: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.slideUnderWhite
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-slide-white"
+ * ```
+ * @deprecated Use 'umd-animation-line-slide-white' instead of 'umd-slidein-underline-white'.
  * @since 1.8.0
  */
 
@@ -255,6 +270,11 @@ export const slideUnderWhite: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.slideUnderGold
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-slide-gold"
+ * ```
+ * @deprecated Use 'umd-animation-line-slide-gold' instead of 'umd-slidein-underline-gold'.
  * @since 1.8.0
  */
 
@@ -275,6 +295,11 @@ export const slideUnderGold: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.slideUnderGrayRed
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-slide-gray-red"
+ * ```
+ * @deprecated Use 'umd-animation-line-slide-gray-red' instead of 'umd-slidein-underline-gray-red'.
  * @since 1.8.0
  */
 
@@ -295,6 +320,11 @@ export const slideUnderGrayRed: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.slideUnderGrayDarkRed
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-slide-graydark-red"
+ * ```
+ * @deprecated Use 'umd-animation-line-slide-graydark-red' instead of 'umd-slidein-underline-graydark-red'.
  * @since 1.8.0
  */
 
@@ -315,6 +345,11 @@ export const slideUnderGrayDarkRed: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.fadeUnderRed
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-fade-red"
+ * ```
+ * @deprecated Use 'umd-animation-line-fade-red' instead of 'umd-fadein-underline-red'.
  * @since 1.8.0
  */
 
@@ -338,6 +373,11 @@ export const fadeUnderRed: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.fadeUnderGray
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-fade-gray"
+ * ```
+ * @deprecated Use 'umd-animation-line-fade-gray' instead of 'umd-fadein-underline-gray'.
  * @since 1.8.0
  */
 
@@ -361,6 +401,11 @@ export const fadeUnderGray: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.fadeUnderGold
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-fade-gold"
+ * ```
+ * @deprecated Use 'umd-animation-line-fade-gold' instead of 'umd-fadein-underline-gold'.
  * @since 1.8.0
  */
 
@@ -384,6 +429,11 @@ export const fadeUnderGold: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.fadeUnderBlack
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-fade-black"
+ * ```
+ * @deprecated Use 'umd-animation-line-fade-black' instead of 'umd-fadein-underline-black'.
  * @since 1.8.0
  */
 
@@ -407,6 +457,11 @@ export const fadeUnderBlack: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.fadeUnderWhite
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-line-fade-white"
+ * ```
+ * @deprecated Use 'umd-animation-line-fade-white' instead of 'umd-fadein-underline-white'.
  * @since 1.8.0
  */
 
@@ -430,6 +485,10 @@ export const fadeUnderWhite: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.fadeInSimpleDark
  * ```
+ * @example
+ * ```css
+ * class="umd-fadein-simple-dark"
+ * ```
  * @since 1.8.0
  */
 
@@ -445,6 +504,10 @@ export const fadeInSimpleDark: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.fadeInSimpleLight
+ * ```
+ * @example
+ * ```css
+ * class="umd-fadein-simple-light"
  * ```
  * @since 1.8.0
  */

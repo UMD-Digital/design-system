@@ -44,6 +44,11 @@ const file = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.file.fileWrapper
  * ```
+ * @example
+ * ```css
+ * class="umd-field-file-wrapper"
+ * ```
+ * @deprecated Use 'umd-field-file-wrapper' instead of 'umd-forms-file-wrapper'.
  * @since 1.8.0
  */
 export const fileWrapper: JssObject = create.jssObject({

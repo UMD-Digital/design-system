@@ -15,6 +15,10 @@ import type { JssObject } from '../_types';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.nestedElements.linksDark
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-links-dark"
+ * ```
  * @since 1.8.0
  */
 export const linksDark: JssObject = {
@@ -31,6 +35,10 @@ export const linksDark: JssObject = {
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.nestedElements.linksWhite
+ * ```
+ * @example
+ * ```css
+ * class="umd-animation-links-white"
  * ```
  * @since 1.8.0
  */
@@ -49,6 +57,11 @@ export const linksWhite: JssObject = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.nestedElements.gridSetup
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-grid"
+ * ```
+ * @deprecated Use 'umd-animation-grid' instead of 'umd-grid-animation'.
  * @since 1.8.0
  */
 export const gridSetup: JssObject = create.jssObject({

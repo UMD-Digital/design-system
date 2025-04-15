@@ -98,6 +98,10 @@ const createContainerStyles = (customStyles = {}) => {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.icon.elementIconContainer
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-overlay-icon-element-container"
+ * ```
  * @since 1.8.0
  */
 export const elementIconContainer: JssObject = create.jssObject({
@@ -136,6 +140,10 @@ const iconContainerTextBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.icon.light
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-overlay-icon-light"
+ * ```
  * @since 1.8.0
  */
 export const light: JssObject = create.jssObject({
@@ -157,6 +165,10 @@ export const light: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.icon.dark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-overlay-icon-dark"
  * ```
  * @since 1.8.0
  */

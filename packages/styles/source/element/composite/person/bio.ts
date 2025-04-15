@@ -72,6 +72,10 @@ const bioLayout = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.person.bio.small
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-person-bio-small"
+ * ```
  * @since 1.8.0
  */
 export const small: JssObject = create.jssObject({
@@ -86,6 +90,10 @@ export const small: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.person.bio.smallDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-person-bio-small-dark"
  * ```
  * @since 1.8.0
  */

@@ -9,6 +9,10 @@ import type { JssObject } from '../_types';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.accessibility.skip.content
  * ```
+ * @example
+ * ```css
+ * class="umd-skip-content"
+ * ```
  *
  * @since 1.8.0
  */

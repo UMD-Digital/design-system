@@ -19,6 +19,10 @@ const classNamePrefix = 'umd-element-event-meta';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.event.meta.container
  * ```
+ * @example
+ * ```css
+ * class="umd-element-event-meta-container"
+ * ```
  * @since 1.8.0
  */
 export const container: JssObject = create.jssObject({
@@ -41,6 +45,10 @@ export const container: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.event.meta.wrapper
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-event-meta-wrapper"
  * ```
  * @since 1.8.0
  */
@@ -88,6 +96,10 @@ export const wrapper: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.event.meta.item
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-event-meta-item"
  * ```
  * @since 1.8.0
  */

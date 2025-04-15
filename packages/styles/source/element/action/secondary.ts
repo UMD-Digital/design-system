@@ -61,6 +61,10 @@ const secondaryBaseLargeIcon = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.secondary.normal
  * ```
+ * @example
+ * ```css
+ * class="umd-action-secondary"
+ * ```
  * @since 1.8.0
  */
 export const normal: JssObject = create.jssObject({
@@ -81,6 +85,10 @@ export const normal: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.secondary.large
+ * ```
+ * @example
+ * ```css
+ * class="umd-action-secondary-large"
  * ```
  * @since 1.8.0
  */
@@ -106,6 +114,10 @@ export const large: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.secondary.white
  * ```
+ * @example
+ * ```css
+ * class="umd-action-secondary-white"
+ * ```
  * @since 1.8.0
  */
 export const white: JssObject = create.jssObject({
@@ -126,6 +138,10 @@ export const white: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.secondary.gold
+ * ```
+ * @example
+ * ```css
+ * class="umd-action-secondary-gold"
  * ```
  * @since 1.8.0
  */

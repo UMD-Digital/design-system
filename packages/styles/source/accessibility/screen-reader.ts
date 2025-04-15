@@ -9,6 +9,10 @@ import type { JssObject } from '../_types';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.accessibility.screenReader.only
  * ```
+ * @example
+ * ```css
+ * class="sr-only"
+ * ```
  * @since 1.8.0
  */
 export const only: JssObject = create.jssObject({

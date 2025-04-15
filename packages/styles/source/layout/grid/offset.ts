@@ -19,6 +19,11 @@ const classNamePrefix = 'umd-layout-grid-offset';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.offset.threeColumn
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-offset-three"
+ * ```
+ * @deprecated Use 'umd-layout-grid-offset-three' instead of 'umd-grid-gap-three-offset'.
  * @since 1.8.0
  */
 export const threeColumn: JssObject = create.jssObject({

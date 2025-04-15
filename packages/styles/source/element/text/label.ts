@@ -40,6 +40,10 @@ export const label = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.label.large
  * ```
+ * @example
+ * ```css
+ * class="umd-text-label-large"
+ * ```
  * @since 1.8.0
  */
 export const large: JssObject = create.jssObject({

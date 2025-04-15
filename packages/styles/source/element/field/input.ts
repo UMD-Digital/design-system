@@ -25,6 +25,10 @@ const classNamePrefix = 'umd-field-input';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.input.input
  * ```
+ * @example
+ * ```css
+ * class="umd-field-input"
+ * ```
  * @since 1.8.0
  */
 export const input: JssObject = {
@@ -118,6 +122,10 @@ const dateTimeWrapperBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.input.text
  * ```
+ * @example
+ * ```css
+ * class="umd-field-input-text"
+ * ```
  * @since 1.8.0
  */
 export const text: JssObject = create.jssObject({
@@ -132,6 +140,11 @@ export const text: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.input.dateTimeWrapper
  * ```
+ * @example
+ * ```css
+ * class="umd-field-input-date-time-wrapper"
+ * ```
+ * @deprecated Use 'umd-forms-datetime-wrapper' is deprecated, use 'umd-field-input-date-time-wrapper' instead.
  * @since 1.8.0
  */
 export const dateTimeWrapper: JssObject = create.jssObject({

@@ -19,6 +19,11 @@ const classNamePrefix = 'umd-text-caption';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.caption.smaller
  * ```
+ * @example
+ * ```css
+ * class="umd-text-caption-smaller"
+ * ```
+ * @deprecated Use 'umd-text-caption-smaller' instead of 'umd-caption'.
  * @since 1.8.0
  */
 export const smaller: JssObject = create.jssObject({
@@ -41,6 +46,11 @@ export const smaller: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.caption.smallerItalic
  * ```
+ * @example
+ * ```css
+ * class="umd-text-caption-smaller-italic"
+ * ```
+ * @deprecated Use 'umd-text-caption-smaller-italic' instead of 'umd-forms-instructions'.
  * @since 1.8.0
  */
 export const smallerItalic: JssObject = create.jssObject({

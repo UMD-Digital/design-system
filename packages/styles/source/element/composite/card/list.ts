@@ -217,6 +217,10 @@ const darkContainerStyles = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.light
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-list-light"
+ * ```
  * @since 1.9.0
  */
 export const light: JssObject = create.jssObject({
@@ -234,6 +238,10 @@ export const light: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.dark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-list-dark"
  * ```
  * @since 1.9.0
  */
@@ -256,6 +264,10 @@ export const dark: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.eventLight
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-list-event-light"
+ * ```
  * @since 1.9.0
  */
 export const eventLight: JssObject = create.jssObject({
@@ -275,6 +287,10 @@ export const eventLight: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.eventDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-list-event-dark"
  * ```
  * @since 1.9.0
  */
@@ -299,6 +315,10 @@ export const eventDark = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.person
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-list-person"
+ * ```
  * @since 1.9.0
  */
 
@@ -317,6 +337,10 @@ export const person = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.personDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-list-person-dark"
  * ```
  * @since 1.9.0
  */
@@ -355,6 +379,10 @@ const tabularColumnStyles = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.personTabular
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-list-person-tabular"
+ * ```
  * @since 1.9.1
  */
 
@@ -381,6 +409,10 @@ export const personTabular = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.personTabularDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-list-person-tabular-dark"
  * ```
  * @since 1.9.1
  */

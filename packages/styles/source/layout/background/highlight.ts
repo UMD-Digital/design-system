@@ -31,6 +31,11 @@ const box = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background.highlight.white
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-background-highlight"
+ * ```
+ * @deprecated Use 'umd-layout-background-highlight' instead of 'umd-layout-background-box'.
  * @since 1.8.0
  */
 export const white: JssObject = create.jssObject({
@@ -51,6 +56,11 @@ export const white: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background.highlight.light
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-background-highlight-light"
+ * ```
+ * @deprecated Use 'umd-layout-background-highlight-light' instead of 'umd-layout-background-box'.
  * @since 1.8.0
  */
 export const light: JssObject = create.jssObject({
@@ -72,6 +82,11 @@ export const light: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background.highlight.dark
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-background-highlight-dark"
+ * ```
+ * @deprecated Use 'umd-layout-background-highlight-dark' instead of 'umd-layout-background-box[theme="dark"]'.
  * @since 1.8.0
  */
 export const dark: JssObject = create.jssObject({

@@ -14,6 +14,7 @@ import { valid, invalid } from './_state';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.textarea.textarea
  * ```
+ * @note This is a style object that doesn't generate a CSS class directly, but provides styles that can be applied to textarea elements programmatically.
  * @since 1.8.0
  */
 export const textarea = {

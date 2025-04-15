@@ -18,6 +18,10 @@ const classNamePrefix = 'umd-embed';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.embed.inline
  * ```
+ * @example
+ * ```css
+ * class="umd-embed-video"
+ * ```
  * @since 1.8.0
  */
 export const inline: JssObject = create.jssObject({

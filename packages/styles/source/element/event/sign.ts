@@ -18,6 +18,10 @@ const classNamePrefix = 'umd-element-event-sign';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.event.sign.container
  * ```
+ * @example
+ * ```css
+ * class="umd-element-event-sign-container"
+ * ```
  * @since 1.8.0
  */
 export const container: JssObject = create.jssObject({

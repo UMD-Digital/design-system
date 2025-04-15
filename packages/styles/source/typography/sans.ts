@@ -151,6 +151,17 @@ export const largest = {
   },
 };
 
+/**
+ * Extra large size sans-serif typography style with responsive scaling.
+ * @returns {Object} Typography styles for extra large responsive text.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.extraLarge };
+ * ```
+ * @since 1.8.0
+ */
 export const extraLarge = {
   fontFamily: font.family['sans'],
   ...sizeLarge,
@@ -164,6 +175,17 @@ export const extraLarge = {
   },
 };
 
+/**
+ * Larger size sans-serif typography style with responsive scaling.
+ * @returns {Object} Typography styles for larger responsive text.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.larger };
+ * ```
+ * @since 1.8.0
+ */
 export const larger = {
   fontFamily: font.family['sans'],
   ...sizeLarge,
@@ -178,6 +200,17 @@ export const larger = {
   },
 };
 
+/**
+ * Container-responsive larger size sans-serif typography style.
+ * @returns {Object} Typography styles with container-based scaling for larger text.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.scalingLarger };
+ * ```
+ * @since 1.8.0
+ */
 export const scalingLarger = {
   fontFamily: font.family['sans'],
   fontSize: font.size['lg'],
@@ -192,12 +225,34 @@ export const scalingLarger = {
   },
 };
 
+/**
+ * Large size sans-serif typography style.
+ * @returns {Object} Typography styles for large, bold text.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.large };
+ * ```
+ * @since 1.8.0
+ */
 export const large = {
   fontFamily: font.family['sans'],
   fontWeight: font.weight['bold'],
   ...sizeLarge,
 };
 
+/**
+ * Medium size sans-serif typography style with responsive scaling.
+ * @returns {Object} Typography styles for medium text with responsive scaling.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.medium };
+ * ```
+ * @since 1.8.0
+ */
 export const medium = {
   fontFamily: font.family['sans'],
   ...sizeSmall,
@@ -212,6 +267,17 @@ export const medium = {
   },
 };
 
+/**
+ * Small size sans-serif typography style with responsive scaling.
+ * @returns {Object} Typography styles for small text with responsive scaling.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.small };
+ * ```
+ * @since 1.8.0
+ */
 export const small = {
   fontFamily: font.family['sans'],
   ...sizeSmall,
@@ -225,6 +291,17 @@ export const small = {
   },
 };
 
+/**
+ * Smaller size sans-serif typography style with responsive scaling.
+ * @returns {Object} Typography styles for smaller text with responsive scaling.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.smaller };
+ * ```
+ * @since 1.8.0
+ */
 export const smaller = {
   fontFamily: font.family['sans'],
   ...sizeSmaller,
@@ -238,11 +315,33 @@ export const smaller = {
   },
 };
 
+/**
+ * Minimum size sans-serif typography style.
+ * @returns {Object} Typography styles for minimum size text.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.min };
+ * ```
+ * @since 1.8.0
+ */
 export const min = {
   fontFamily: font.family['sans'],
   ...sizeMin,
 };
 
+/**
+ * Container-responsive minimum size sans-serif typography style.
+ * @returns {Object} Typography styles with container-based scaling for minimum size text.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * // Use in object spread syntax
+ * const myStyle = { ...Styles.typography.sans.scalingMin };
+ * ```
+ * @since 1.8.0
+ */
 export const scalingMin = {
   ...min,
 

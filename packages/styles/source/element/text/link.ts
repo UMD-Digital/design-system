@@ -33,6 +33,10 @@ const focusBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.link.red
  * ```
+ * @example
+ * ```css
+ * class="umd-text-link-red"
+ * ```
  * @since 1.8.0
  */
 export const red: JssObject = create.jssObject({
@@ -56,6 +60,10 @@ export const red: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.link.white
+ * ```
+ * @example
+ * ```css
+ * class="umd-text-link-white"
  * ```
  * @since 1.8.0
  */

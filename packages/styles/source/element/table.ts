@@ -19,6 +19,11 @@ const classNamePrefix = 'umd-table';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.table.inline
  * ```
+ * @example
+ * ```css
+ * class="umd-table-inline"
+ * ```
+ * @deprecated Use 'umd-table-inline' instead of 'umd-rich-text-inline-table'.
  * @since 1.8.0
  */
 export const inline: JssObject = create.jssObject({

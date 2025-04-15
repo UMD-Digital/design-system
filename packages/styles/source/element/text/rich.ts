@@ -131,6 +131,11 @@ const advancedBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.simple
  * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-simple"
+ * ```
+ * @deprecated Use 'umd-text-rich-simple' instead of 'umd-text-simple'.
  * @since 1.8.0
  */
 export const simple: JssObject = create.jssObject({
@@ -151,6 +156,10 @@ export const simple: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.simpleDark
  * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-simple-dark"
+ * ```
  * @since 1.8.0
  */
 export const simpleDark: JssObject = create.jssObject({
@@ -167,6 +176,11 @@ export const simpleDark: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.simpleLarge
  * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-simple-large"
+ * ```
+ * @deprecated Use 'umd-text-rich-simple-large' instead of 'umd-text-simple-large'.
  * @since 1.8.0
  */
 export const simpleLarge: JssObject = create.jssObject({
@@ -193,6 +207,10 @@ export const simpleLarge: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.simpleLargeDark
  * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-simple-large-dark"
+ * ```
  * @since 1.8.0
  */
 export const simpleLargeDark: JssObject = create.jssObject({
@@ -215,6 +233,10 @@ export const simpleLargeDark: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.simpleScaling
+ * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-simple-scaling"
  * ```
  * @since 1.8.0
  */
@@ -246,6 +268,10 @@ export const simpleScaling: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.simpleScalingDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-simple-scaling-dark"
  * ```
  * @since 1.8.0
  */
@@ -279,6 +305,11 @@ export const simpleScalingDark: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.advanced
  * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-advanced"
+ * ```
+ * @deprecated Use 'umd-text-rich-advanced' instead of 'umd-rich-text'.
  * @since 1.8.0
  */
 export const advanced: JssObject = create.jssObject({
@@ -321,6 +352,11 @@ export const advanced: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.advancedDark
  * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-advanced-dark"
+ * ```
+ * @deprecated Use 'umd-text-rich-advanced-dark' instead of 'umd-rich-text-dark'.
  * @since 1.8.0
  */
 export const advancedDark: JssObject = create.jssObject({

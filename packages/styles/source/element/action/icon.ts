@@ -50,6 +50,10 @@ const baseIconSmall = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.icon.small
  * ```
+ * @example
+ * ```css
+ * class="umd-element-action-icon-button"
+ * ```
  * @since 1.8.0
  */
 export const small: JssObject = create.jssObject({
@@ -69,6 +73,10 @@ export const small: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.icon.smallDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-action-icon-button"
  * ```
  * @since 1.8.0
  */

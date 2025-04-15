@@ -30,6 +30,10 @@ const box = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background.wrap.white
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-background-wrap"
+ * ```
  * @since 1.8.0
  */
 export const white: JssObject = create.jssObject({
@@ -46,6 +50,11 @@ export const white: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background.wrap.light
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-background-wrap-light"
+ * ```
+ * @deprecated Use 'umd-layout-background-wrap-light' instead of 'umd-forms-layout'.
  * @since 1.8.0
  */
 export const light: JssObject = create.jssObject({
@@ -66,6 +75,10 @@ export const light: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background.wrap.dark
+ * ```
+ * @example
+ * ```css
+ * class="umd-layout-background-wrap-dark"
  * ```
  * @since 1.8.0
  */

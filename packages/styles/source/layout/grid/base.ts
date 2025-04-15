@@ -26,6 +26,7 @@ const baseSmallScreen = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * const customGrid = { ...Styles.layout.grid.base.two, customProp: 'value' }
  * ```
+ * @note This is a style object that doesn't generate CSS classes directly, but provides base grid styles that can be applied programmatically.
  * @since 1.8.0
  */
 export const base = {
@@ -64,6 +65,11 @@ export const base = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.columnsTwo
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-columns-two"
+ * ```
+ * @deprecated Use 'umd-layout-grid-columns-two' instead of 'umd-grid'.
  * @since 1.8.0
  */
 export const columnsTwo: JssObject = create.jssObject({
@@ -84,6 +90,11 @@ export const columnsTwo: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.columnsThree
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-columns-three"
+ * ```
+ * @deprecated Use 'umd-layout-grid-columns-three' instead of 'umd-grid-three'.
  * @since 1.8.0
  */
 export const columnsThree: JssObject = create.jssObject({
@@ -104,6 +115,11 @@ export const columnsThree: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.columnsFour
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-columns-four"
+ * ```
+ * @deprecated Use 'umd-layout-grid-columns-four' instead of 'umd-grid-four'.
  * @since 1.8.0
  */
 export const columnsFour: JssObject = create.jssObject({
@@ -123,6 +139,10 @@ export const columnsFour: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.stacked
+ * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-columns-stacked"
  * ```
  * @since 1.8.0
  */

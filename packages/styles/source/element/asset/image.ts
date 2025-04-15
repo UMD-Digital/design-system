@@ -146,6 +146,10 @@ const linkImageScaled = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.asset.image.caption
  * ```
+ * @example
+ * ```css
+ * class="umd-asset-image-caption"
+ * ```
  * @since 1.8.0
  */
 export const caption: JssObject = create.jssObject({
@@ -170,6 +174,10 @@ export const caption: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.asset.image.wrapper
  * ```
+ * @example
+ * ```css
+ * class="umd-asset-image-wrapper"
+ * ```
  * @since 1.8.0
  */
 export const wrapper: JssObject = create.jssObject({
@@ -186,6 +194,10 @@ export const wrapper: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.asset.image.wrapperScaled
+ * ```
+ * @example
+ * ```css
+ * class="umd-asset-image-wrapper-scaled"
  * ```
  * @since 1.8.0
  */
@@ -204,6 +216,10 @@ export const wrapperScaled: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.asset.image.aspectStandard
+ * ```
+ * @example
+ * ```css
+ * class="umd-asset-image-aspect-standard"
  * ```
  * @since 1.8.0
  */
@@ -225,6 +241,10 @@ export const aspectStandard: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.asset.image.aspectSquare
+ * ```
+ * @example
+ * ```css
+ * class="umd-asset-image-aspect-square"
  * ```
  * @since 1.8.0
  */

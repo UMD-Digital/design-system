@@ -15,6 +15,11 @@ import type { JssObject } from '../../_types';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.masonary.twoColumn
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-masonry"
+ * ```
+ * @deprecated Use 'umd-layout-grid-masonry' instead of 'umd-grid-gap-masonry'.
  * @since 1.8.0
  */
 export const twoColumn: JssObject = create.jssObject({

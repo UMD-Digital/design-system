@@ -18,6 +18,10 @@ const classNamePrefix = 'umd-animation-loader';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.loader.keyFrameBoxShadow
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-loader-keyframes"
+ * ```
  * @since 1.8.0
  */
 export const keyFrameBoxShadow: JssObject = create.jssObject({
@@ -48,6 +52,11 @@ const dotsAniamtion = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.loader.dots
  * ```
+ * @example
+ * ```css
+ * class="umd-animation-loader-dots"
+ * ```
+ * @deprecated Use 'umd-animation-loader-dots' instead of 'umd-loader'.
  * @since 1.8.0
  */
 export const dots: JssObject = create.jssObject({

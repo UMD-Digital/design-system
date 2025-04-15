@@ -19,6 +19,11 @@ const classNamePrefix = 'umd-text-quote';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.quote.quote
  * ```
+ * @example
+ * ```css
+ * class="umd-text-quote"
+ * ```
+ * @deprecated Use 'umd-text-quote' instead of 'umd-rich-text-inline-quote'.
  * @since 1.8.0
  */
 export const quote: JssObject = create.jssObject({

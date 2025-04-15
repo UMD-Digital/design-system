@@ -19,6 +19,10 @@ const classNamePrefix = 'umd-action-button';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.button.fullScreen
  * ```
+ * @example
+ * ```css
+ * class="umd-action-button-full-screen"
+ * ```
  * @since 1.8.0
  */
 export const fullScreen: JssObject = create.jssObject({
@@ -56,6 +60,10 @@ export const fullScreen: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.button.videoState
+ * ```
+ * @example
+ * ```css
+ * class="umd-action-button-video-state"
  * ```
  * @since 1.8.0
  */

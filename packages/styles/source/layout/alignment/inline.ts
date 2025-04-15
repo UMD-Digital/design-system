@@ -14,6 +14,11 @@ import type { JssObject } from '../../_types';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.alignment.inline.center
  * ```
+ * @example
+ * ```css
+ * class="text-center"
+ * ```
+ * @deprecated Use 'text-center' instead of 'umd-layout-text-alignment-center'.
  * @since 1.8.0
  */
 export const center: JssObject = create.jssObject({

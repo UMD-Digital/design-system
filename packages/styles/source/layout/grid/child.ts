@@ -18,6 +18,11 @@ const classNamePrefix = 'umd-layout-grid-child';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.child.sizeDouble
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-child-size-double"
+ * ```
+ * @deprecated Use 'umd-layout-grid-child-size-double' instead of 'umd-grid-column-double'.
  * @since 1.8.0
  */
 export const sizeDouble: JssObject = create.jssObject({
@@ -39,6 +44,10 @@ export const sizeDouble: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.child.startSecond
+ * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-child-start-second"
  * ```
  * @since 1.8.0
  */

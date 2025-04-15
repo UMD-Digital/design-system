@@ -102,6 +102,10 @@ const colorContainerBase = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.color.light
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-overlay-color-light"
+ * ```
  * @since 1.8.0
  */
 export const light: JssObject = create.jssObject({
@@ -121,6 +125,10 @@ export const light: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.color.dark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-overlay-color-dark"
  * ```
  * @since 1.8.0
  */

@@ -18,6 +18,10 @@ const classNamePrefix = 'umd-layout-background-box';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background.box.white
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-background-box-white"
+ * ```
  * @since 1.8.0
  */
 export const white: JssObject = create.jssObject({

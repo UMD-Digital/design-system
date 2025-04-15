@@ -108,6 +108,10 @@ const createContainerStyles = (customStyles = {}) => {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.image.quoateContainer
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-overlay-image-element-quote"
+ * ```
  * @since 1.8.0
  */
 export const quoateContainer: JssObject = create.jssObject({
@@ -128,6 +132,10 @@ export const quoateContainer: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.image.tint
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-overlay-image"
  * ```
  * @since 1.8.0
  */

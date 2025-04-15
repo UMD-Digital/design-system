@@ -49,6 +49,11 @@ const pillSvg = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.cluster.pillList
  * ```
+ * @example
+ * ```css
+ * class="umd-text-cluster-pill"
+ * ```
+ * @deprecated Use 'umd-text-cluster-pill' instead of 'umd-pill-list'.
  * @since 1.8.0
  */
 export const pillList: JssObject = create.jssObject({
@@ -82,6 +87,11 @@ export const pillList: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.cluster.pillListDark
  * ```
+ * @example
+ * ```css
+ * class="umd-text-cluster-pill-dark"
+ * ```
+ * @deprecated Use 'umd-text-cluster-pill-dark' instead of 'umd-pill-list-dark'.
  * @since 1.8.0
  */
 export const pillListDark: JssObject = create.jssObject({
@@ -118,6 +128,16 @@ export const pillListDark: JssObject = create.jssObject({
  * Legacy pill list style.
  * @returns {JssObject} Deprecated pill list style.
  * @deprecated Use pillList instead.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.cluster.pillDoNotUse
+ * ```
+ * @example
+ * ```css
+ * class="umd-pills"
+ * ```
+ * @deprecated Use pillList instead. The 'umd-pills' class is deprecated.
  * @since 1.8.0
  */
 export const pillDoNotUse: JssObject = create.jssObject({

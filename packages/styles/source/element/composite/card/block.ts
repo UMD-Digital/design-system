@@ -122,6 +122,10 @@ const createContainerStyles = (customStyles = {}) => {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.light
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-block-light"
+ * ```
  * @since 1.8.0
  */
 export const light: JssObject = create.jssObject({
@@ -138,6 +142,10 @@ export const light: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.border
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-block-border"
  * ```
  * @since 1.8.0
  */
@@ -170,6 +178,10 @@ export const border: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.borderDark
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-block-border"
+ * ```
  * @since 1.8.0
  */
 export const borderDark: JssObject = create.jssObject({
@@ -200,6 +212,10 @@ export const borderDark: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.dark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-block-dark"
  * ```
  * @since 1.8.0
  */
@@ -234,6 +250,10 @@ export const dark: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.transparent
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-block-transparent"
  * ```
  * @since 1.8.0
  */
@@ -281,6 +301,10 @@ const personImage = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.person
  * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-block-person"
+ * ```
  * @since 1.8.0
  */
 export const person: JssObject = create.jssObject({
@@ -302,6 +326,10 @@ export const person: JssObject = create.jssObject({
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.personDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-element-composite-card-block-person-dark"
  * ```
  * @since 1.8.0
  */

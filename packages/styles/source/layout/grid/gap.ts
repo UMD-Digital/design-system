@@ -32,6 +32,11 @@ const paragraphOverwrite = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap.two
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-gap-two"
+ * ```
+ * @deprecated Use 'umd-layout-grid-gap-two' instead of 'umd-grid-gap'.
  * @since 1.8.0
  */
 export const two: JssObject = create.jssObject({
@@ -62,6 +67,11 @@ export const two: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap.three
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-gap-three"
+ * ```
+ * @deprecated Use 'umd-layout-grid-gap-three' instead of 'umd-grid-gap-three'.
  * @since 1.8.0
  */
 export const three: JssObject = create.jssObject({
@@ -87,6 +97,11 @@ export const three: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap.threeLarge
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-gap-three-large"
+ * ```
+ * @deprecated Use 'umd-layout-grid-gap-three-large' instead of 'umd-grid-gap-three-large'.
  * @since 1.8.0
  */
 export const threeLarge: JssObject = create.jssObject({
@@ -113,6 +128,11 @@ export const threeLarge: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap.four
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-gap-four"
+ * ```
+ * @deprecated Use 'umd-layout-grid-gap-four' instead of 'umd-grid-gap-four'.
  * @since 1.8.0
  */
 export const four: JssObject = create.jssObject({
@@ -138,6 +158,11 @@ export const four: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap.fourCentered
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-gap-four-centered"
+ * ```
+ * @deprecated Use 'umd-layout-grid-gap-four-centered' instead of 'umd-grid-gap-four-center'.
  * @since 1.8.0
  */
 export const fourCentered: JssObject = create.jssObject({
@@ -165,6 +190,11 @@ export const fourCentered: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap.fourLarge
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-gap-four-large"
+ * ```
+ * @deprecated Use 'umd-layout-grid-gap-four-large' instead of 'umd-grid-gap-four-large'.
  * @since 1.8.0
  */
 export const fourLarge: JssObject = create.jssObject({
@@ -190,6 +220,11 @@ export const fourLarge: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap.fourLargeCentered
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-gap-four-large-centered"
+ * ```
+ * @deprecated Use 'umd-layout-grid-gap-four-large-centered' instead of 'umd-grid-gap-four-center'.
  * @since 1.8.0
  */
 export const fourLargeCentered: JssObject = create.jssObject({
@@ -216,6 +251,11 @@ export const fourLargeCentered: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap.stacked
  * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-gap-stacked"
+ * ```
+ * @deprecated Use 'umd-layout-grid-gap-stacked' instead of 'umd-grid-gap-stacked'.
  * @since 1.8.0
  */
 export const stacked: JssObject = create.jssObject({

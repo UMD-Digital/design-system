@@ -29,6 +29,7 @@ const baseElements = [
   'carousel-image',
   'carousel-multiple-image',
   'carousel-people',
+  'carousel-thumbnail',
   'feed-news',
   'hero-brand-video',
   'hero',

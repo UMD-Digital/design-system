@@ -102,7 +102,7 @@ const CreatePerson = ({ block }: { block: HTMLElement }) => {
   return container;
 };
 
-const CreateCarouselThumbnailElement = (props: TypeCarouselThumbnailProps) =>
+export default (props: TypeCarouselThumbnailProps) =>
   (() => {
     const { blocks, isThemeDark } = props;
     const elementDeclaration = document.createElement('div');
@@ -138,14 +138,10 @@ const CreateCarouselThumbnailElement = (props: TypeCarouselThumbnailProps) =>
 
     return {
       element: elementDeclaration,
+      styles: STYLES_CAROUSEL_THUMBNAIL_ELEMENT,
       events: {
-        SetEventReize: carousel.events.resize,
-        Load: carousel.events.load,
+        reize: carousel.events.resize,
+        load: carousel.events.load,
       },
     };
   })();
-
-export default {
-  CreateElement: CreateCarouselThumbnailElement,
-  Styles: STYLES_CAROUSEL_THUMBNAIL_ELEMENT,
-};

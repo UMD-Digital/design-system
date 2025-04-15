@@ -535,10 +535,8 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         slide.style.display = 'flex';
         slide.style.gap = `${displayLogic.blockGap}px`;
 
-        setTimeout(() => {
-          Event.resize();
-          EventSwipe({ ...Event.helpers });
-        }, 100);
+        Event.resize();
+        EventSwipe({ ...Event.helpers });
       },
       forward: () => {
         hasInteractionOccured = true;

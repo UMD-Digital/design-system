@@ -193,8 +193,8 @@ describe('Featured News Component', () => {
     expect(component.element).toBeInstanceOf(HTMLDivElement);
     expect(component.styles).toContain('.mock-loader-styles');
     expect(component.events).toBeDefined();
-    expect(component.events.callback).toBeDefined();
-    expect(component.events.setPosition).toBeDefined();
+    expect(component?.events?.callback).toBeDefined();
+    expect(component?.events?.setPosition).toBeDefined();
 
     expect(feedElements.layout.gridGap).toHaveBeenCalledWith({ count: 2 });
     expect(feedFetch.start).toHaveBeenCalledWith(
@@ -275,12 +275,12 @@ describe('Featured News Component', () => {
 
   test('component provides callback method', () => {
     const component = featured(mockProps);
-    expect(component.events.callback).toBeDefined();
-    expect(typeof component.events.callback).toBe('function');
+    expect(component?.events?.callback).toBeDefined();
+    expect(typeof component?.events?.callback).toBe('function');
   });
 
   test('setPosition method exists', () => {
     const component = featured(mockProps);
-    expect(typeof component.events.setPosition).toBe('function');
+    expect(typeof component?.events?.setPosition).toBe('function');
   });
 });

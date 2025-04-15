@@ -120,7 +120,7 @@ describe('News Grid Component', () => {
     expect(component.element).toBeInstanceOf(HTMLDivElement);
     expect(component.styles).toContain('.loader');
     expect(component.events).toBeDefined();
-    expect(component.events.callback).toBeInstanceOf(Function);
+    expect(component?.events?.callback).toBeInstanceOf(Function);
 
     expect(feedFetch.start).toHaveBeenCalledTimes(1);
     expect(feedFetch.start).toHaveBeenCalledWith(

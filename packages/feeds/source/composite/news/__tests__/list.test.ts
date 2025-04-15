@@ -144,7 +144,7 @@ describe('List News Component', () => {
     expect(component.element).toBeInstanceOf(HTMLDivElement);
     expect(component.styles).toContain('.mock-loader-styles');
     expect(component.events).toBeDefined();
-    expect(component.events.callback).toBeDefined();
+    expect(component?.events?.callback).toBeDefined();
 
     expect(feedElements.layout.stacked).toHaveBeenCalled();
     expect(feedFetch.start).toHaveBeenCalledWith(
@@ -184,8 +184,8 @@ describe('List News Component', () => {
 
   test('component provides callback method', () => {
     const component = list(mockProps);
-    expect(component.events.callback).toBeDefined();
-    expect(typeof component.events.callback).toBe('function');
+    expect(component?.events?.callback).toBeDefined();
+    expect(typeof component?.events?.callback).toBe('function');
   });
 
   test('asset.standard is called with correct parameters', async () => {

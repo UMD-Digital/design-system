@@ -3,11 +3,9 @@ import * as dataComposed from '../common/data';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 import * as feedMacros from 'macros';
 
-// Mock console.error
 const originalConsoleError = console.error;
 console.error = jest.fn();
 
-// Create mockFetchImplementation to allow different responses
 const createMockFetchResponse = (overrides = {}) => {
   return {
     data: {
@@ -97,10 +95,8 @@ describe('Events Fetch Utilities', () => {
   };
 
   beforeEach(() => {
-    // Clear all mocks before each test
     jest.clearAllMocks();
 
-    // Setup mocks for data module
     jest.mock('../common/data', () => ({
       display: jest.fn().mockReturnValue({
         title: 'Mocked Event Title',
@@ -115,12 +111,10 @@ describe('Events Fetch Utilities', () => {
       }),
     }));
 
-    // Setup network mock with default response
     jest
       .spyOn(Utilities.network, 'FetchGraphQL')
       .mockImplementation(async () => createMockFetchResponse());
 
-    // Setup macros mocks
     jest
       .spyOn(feedMacros.buttonLazyLoad, 'remove')
       .mockImplementation(() => {});
@@ -129,40 +123,31 @@ describe('Events Fetch Utilities', () => {
   });
 
   afterAll(() => {
-    // Restore original console.error
     console.error = originalConsoleError;
   });
 
   test('start function fetches event count and updates total entries', async () => {
-    // Setup apiVariables mock
     jest.spyOn(dataComposed, 'apiVariables').mockReturnValue({
       token: 'test-token',
       limit: 10,
       offset: 0,
     });
 
-    // Call the function
     await feedFetch.start(mockProps);
 
-    // Verify count was fetched and total entries set
     expect(mockProps.setTotalEntries).toHaveBeenCalled();
   });
 
   test('load function calls necessary functions and updates display', async () => {
-    // Setup mock implementations
     jest.spyOn(dataComposed, 'apiVariables').mockReturnValue({
       token: 'test-token',
       limit: 10,
       offset: 0,
     });
 
-    // Call the function
     await feedFetch.load(mockProps);
 
-    // Verify the loader was displayed
     expect(feedMacros.loader.display).toHaveBeenCalled();
-
-    // Verify lazy load button was removed
     expect(feedMacros.buttonLazyLoad.remove).toHaveBeenCalled();
   });
 });

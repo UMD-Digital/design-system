@@ -64,36 +64,26 @@ const mockEventEntries = [
 
 describe('Events Grid Component', () => {
   beforeEach(() => {
-    // Clear all mocks before each test
     jest.clearAllMocks();
 
-    // Mock the fetch module
     jest.spyOn(feedFetch, 'start').mockImplementation(async (props) => {
-      // Simulate the fetch response
       props.setTotalEntries(mockEventEntries.length);
 
-      // Call displayResultStart directly
       props.displayResultStart({
         ...props,
         feedData: mockEventEntries,
       });
 
-      // Return mock data
       return Promise.resolve();
     });
 
-    // Mock the display module functions
     jest.spyOn(feedDisplay, 'resultStart').mockImplementation((props) => {
       const { layoutElement } = props;
       const container = props.getContainer();
 
-      // Simulate the display process
       container.appendChild(layoutElement.element);
-
-      // Cast Styles.utilities to any to avoid TypeScript errors with the mock implementation
       const styleUtils = Styles.utilities as any;
 
-      // Dispatch a custom event to simulate feed loaded
       styleUtils.events.dispatchEvent(container, 'feed:loaded', {
         items: mockEventEntries,
       });
@@ -111,7 +101,6 @@ describe('Events Grid Component', () => {
   });
 
   test('renders the grid component with default options', () => {
-    // Create the component
     const component = grid({
       token: 'test-token',
       numberOfRowsToStart: 3,
@@ -119,17 +108,14 @@ describe('Events Grid Component', () => {
       isUnion: false,
     });
 
-    // Check that the component has the expected structure
     expect(component).toBeDefined();
     expect(component.element).toBeInstanceOf(HTMLDivElement);
     expect(component.styles).toContain('.loader');
     expect(component.events).toBeDefined();
-    expect(component.events.callback).toBeInstanceOf(Function);
+    expect(component?.events?.callback).toBeInstanceOf(Function);
 
-    // Cast the spy to any to access mock properties without TypeScript errors
     const startSpy = feedFetch.start as any;
 
-    // Verify that fetch.start was called with correct params
     expect(startSpy).toHaveBeenCalledTimes(1);
     expect(startSpy).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -144,7 +130,6 @@ describe('Events Grid Component', () => {
   test('uses correct number of columns', () => {
     const numberOfColumnsToShow = 4;
 
-    // Create the component with specific column count
     grid({
       token: 'test-token',
       numberOfRowsToStart: 3,
@@ -153,14 +138,12 @@ describe('Events Grid Component', () => {
       numberOfColumnsToShow,
     });
 
-    // Verify the correct column count was used
     expect(feedElements.layout.gridGap).toHaveBeenCalledWith(
       expect.objectContaining({ count: numberOfColumnsToShow }),
     );
   });
 
   test('includes transparent flag in props when set', () => {
-    // Create the component with transparent option
     const component = grid({
       token: 'test-token',
       numberOfRowsToStart: 3,
@@ -169,10 +152,8 @@ describe('Events Grid Component', () => {
       isTransparent: true,
     });
 
-    // Cast the spy to any to access mock properties without TypeScript errors
     const startSpy = feedFetch.start as any;
 
-    // Check that the component passes isTransparent through
     expect(startSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         isTransparent: true,

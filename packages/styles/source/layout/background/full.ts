@@ -44,8 +44,8 @@ export const padding = {
  * @example
  * ```css
  * class="umd-layout-background-full-light"
+ * Use 'umd-layout-background-full-light' instead of 'umd-layout-background-color'.
  * ```
- * @deprecated Use 'umd-layout-background-full-light' instead of 'umd-layout-background-color'.
  * @since 1.8.0
  */
 export const light: JssObject = create.jssObject({
@@ -70,8 +70,8 @@ export const light: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-background-full-dark"
+ * Use 'umd-layout-background-full-dark' instead of 'umd-layout-background-color-dark'.
  * ```
- * @deprecated Use 'umd-layout-background-full-dark' instead of 'umd-layout-background-color-dark'.
  * @since 1.8.0
  */
 export const dark: JssObject = create.jssObject({

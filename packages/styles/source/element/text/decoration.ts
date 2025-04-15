@@ -47,8 +47,8 @@ const watermarkChild = {
  * @example
  * ```css
  * class="umd-text-decoration-watermark"
+ * Use 'umd-text-decoration-watermark' instead of 'umd-watermark'.
  * ```
- * @deprecated Use 'umd-text-decoration-watermark' instead of 'umd-watermark'.
  * @since 1.8.0
  */
 export const watermark: JssObject = create.jssObject({
@@ -77,8 +77,8 @@ export const watermark: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-decoration-watermark-dark"
+ * Use 'umd-text-decoration-watermark-dark' instead of 'umd-watermark-dark'.
  * ```
- * @deprecated Use 'umd-text-decoration-watermark-dark' instead of 'umd-watermark-dark'.
  * @since 1.8.0
  */
 export const watermarkDark: JssObject = create.jssObject({
@@ -109,8 +109,8 @@ export const watermarkDark: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-decoration-eyebrow"
+ * Use 'umd-text-decoration-eyebrow' instead of 'umd-eyebrow-ribbon'.
  * ```
- * @deprecated Use 'umd-text-decoration-eyebrow' instead of 'umd-eyebrow-ribbon'.
  * @since 1.8.0
  */
 export const ribbon: JssObject = create.jssObject({

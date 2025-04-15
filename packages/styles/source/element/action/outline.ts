@@ -43,8 +43,8 @@ const outlineBase = {
  * @example
  * ```css
  * class="umd-action-outline"
+ * Use 'umd-action-outline' instead of 'umd-forms-actions-outline'.
  * ```
- * @deprecated Use 'umd-action-outline' instead of 'umd-forms-actions-outline'.
  * @since 1.8.0
  */
 export const normal: JssObject = create.jssObject({

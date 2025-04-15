@@ -22,8 +22,8 @@ const classNamePrefix = 'umd-table';
  * @example
  * ```css
  * class="umd-table-inline"
+ * Use 'umd-table-inline' instead of 'umd-rich-text-inline-table'.
  * ```
- * @deprecated Use 'umd-table-inline' instead of 'umd-rich-text-inline-table'.
  * @since 1.8.0
  */
 export const inline: JssObject = create.jssObject({

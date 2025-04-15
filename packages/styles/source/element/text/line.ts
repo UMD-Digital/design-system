@@ -22,8 +22,8 @@ const classNamePrefix = 'umd-text-line';
  * @example
  * ```css
  * class="umd-text-line-tailwing"
+ * Use 'umd-text-line-tailwing' instead of 'umd-tailwings-headline'.
  * ```
- * @deprecated Use 'umd-text-line-tailwing' instead of 'umd-tailwings-headline'.
  * @since 1.8.0
  */
 export const tailwing: JssObject = create.jssObject({
@@ -109,8 +109,8 @@ const trailingBefore = {
  * @example
  * ```css
  * class="umd-text-line-trailing"
+ * Use 'umd-text-line-trailing' instead of 'umd-tailwing-right-headline'.
  * ```
- * @deprecated Use 'umd-text-line-trailing' instead of 'umd-tailwing-right-headline'.
  * @since 1.8.0
  */
 export const trailing = create.jssObject({
@@ -153,8 +153,8 @@ export const trailing = create.jssObject({
  * @example
  * ```css
  * class="umd-text-line-trailing-light"
+ * Use 'umd-text-line-trailing-light' instead of 'umd-tailwing-right-headline[theme="light"]'.
  * ```
- * @deprecated Use 'umd-text-line-trailing-light' instead of 'umd-tailwing-right-headline[theme="light"]'.
  * @since 1.8.0
  */
 export const trailingLight: JssObject = create.jssObject({
@@ -179,8 +179,8 @@ export const trailingLight: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-line-trailing-dark"
+ * Use 'umd-text-line-trailing-dark' instead of 'umd-tailwing-right-headline[theme="dark"]'.
  * ```
- * @deprecated Use 'umd-text-line-trailing-dark' instead of 'umd-tailwing-right-headline[theme="dark"]'.
  * @since 1.8.0
  */
 export const trailingDark: JssObject = create.jssObject({
@@ -211,8 +211,8 @@ export const trailingDark: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-line-adjustent"
+ * Use 'umd-text-line-adjustent' instead of 'umd-adjacent-line-text'.
  * ```
- * @deprecated Use 'umd-text-line-adjustent' instead of 'umd-adjacent-line-text'.
  * @since 1.8.0
  */
 export const adjustent: JssObject = create.jssObject({

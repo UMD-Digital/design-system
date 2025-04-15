@@ -21,8 +21,8 @@ const classNamePrefix = 'umd-layout-space-columns';
  * @example
  * ```css
  * class="umd-layout-space-columns-left"
+ * Use 'umd-layout-space-columns-left' instead of 'umd-layout-interior-navigation'.
  * ```
- * @deprecated Use 'umd-layout-space-columns-left' instead of 'umd-layout-interior-navigation'.
  * @since 1.8.0
  */
 export const left: JssObject = create.jssObject({
@@ -65,8 +65,8 @@ export const left: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-space-columns-right"
+ * Use 'umd-layout-space-columns-right' instead of 'umd-layout-interior-sidebar'.
  * ```
- * @deprecated Use 'umd-layout-space-columns-right' instead of 'umd-layout-interior-sidebar'.
  * @since 1.8.0
  */
 export const right: JssObject = create.jssObject({

@@ -35,9 +35,8 @@ const primaryBase = {
  * @example
  * ```css
  * class="umd-action-primary"
+ * Use 'umd-action-primary' instead of 'umd-forms-actions-primary'.
  * ```
- * @deprecated Use 'umd-action-primary' instead of 'umd-forms-actions-primary'.
- *
  * @since 1.8.0
  */
 export const normal: JssObject = create.jssObject({

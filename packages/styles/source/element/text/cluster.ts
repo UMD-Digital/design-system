@@ -52,8 +52,8 @@ const pillSvg = {
  * @example
  * ```css
  * class="umd-text-cluster-pill"
+ * Use 'umd-text-cluster-pill' instead of 'umd-pill-list'.
  * ```
- * @deprecated Use 'umd-text-cluster-pill' instead of 'umd-pill-list'.
  * @since 1.8.0
  */
 export const pillList: JssObject = create.jssObject({
@@ -90,8 +90,8 @@ export const pillList: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-cluster-pill-dark"
+ * Use 'umd-text-cluster-pill-dark' instead of 'umd-pill-list-dark'.
  * ```
- * @deprecated Use 'umd-text-cluster-pill-dark' instead of 'umd-pill-list-dark'.
  * @since 1.8.0
  */
 export const pillListDark: JssObject = create.jssObject({
@@ -137,7 +137,6 @@ export const pillListDark: JssObject = create.jssObject({
  * ```css
  * class="umd-pills"
  * ```
- * @deprecated Use pillList instead. The 'umd-pills' class is deprecated.
  * @since 1.8.0
  */
 export const pillDoNotUse: JssObject = create.jssObject({

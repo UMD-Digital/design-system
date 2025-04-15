@@ -143,8 +143,8 @@ export const text: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-field-input-date-time-wrapper"
+ * Use 'umd-forms-datetime-wrapper' is deprecated, use 'umd-field-input-date-time-wrapper' instead.
  * ```
- * @deprecated Use 'umd-forms-datetime-wrapper' is deprecated, use 'umd-field-input-date-time-wrapper' instead.
  * @since 1.8.0
  */
 export const dateTimeWrapper: JssObject = create.jssObject({

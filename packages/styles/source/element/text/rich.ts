@@ -134,8 +134,8 @@ const advancedBase = {
  * @example
  * ```css
  * class="umd-text-rich-simple"
+ * Use 'umd-text-rich-simple' instead of 'umd-text-simple'.
  * ```
- * @deprecated Use 'umd-text-rich-simple' instead of 'umd-text-simple'.
  * @since 1.8.0
  */
 export const simple: JssObject = create.jssObject({
@@ -179,8 +179,8 @@ export const simpleDark: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-rich-simple-large"
+ * Use 'umd-text-rich-simple-large' instead of 'umd-text-simple-large'.
  * ```
- * @deprecated Use 'umd-text-rich-simple-large' instead of 'umd-text-simple-large'.
  * @since 1.8.0
  */
 export const simpleLarge: JssObject = create.jssObject({
@@ -308,8 +308,8 @@ export const simpleScalingDark: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-rich-advanced"
+ * Use 'umd-text-rich-advanced' instead of 'umd-rich-text'.
  * ```
- * @deprecated Use 'umd-text-rich-advanced' instead of 'umd-rich-text'.
  * @since 1.8.0
  */
 export const advanced: JssObject = create.jssObject({
@@ -355,8 +355,8 @@ export const advanced: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-rich-advanced-dark"
+ * Use 'umd-text-rich-advanced-dark' instead of 'umd-rich-text-dark'.
  * ```
- * @deprecated Use 'umd-text-rich-advanced-dark' instead of 'umd-rich-text-dark'.
  * @since 1.8.0
  */
 export const advancedDark: JssObject = create.jssObject({

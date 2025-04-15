@@ -22,8 +22,8 @@ const classNamePrefix = 'umd-text-quote';
  * @example
  * ```css
  * class="umd-text-quote"
+ * Use 'umd-text-quote' instead of 'umd-rich-text-inline-quote'.
  * ```
- * @deprecated Use 'umd-text-quote' instead of 'umd-rich-text-inline-quote'.
  * @since 1.8.0
  */
 export const quote: JssObject = create.jssObject({

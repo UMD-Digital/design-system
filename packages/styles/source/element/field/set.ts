@@ -23,8 +23,8 @@ const classNamePrefix = 'umd-field-set';
  * @example
  * ```css
  * class="umd-field-set-wrapper"
+ * Use 'umd-field-set-wrapper' instead of 'umd-forms-layout-fieldset-list'.
  * ```
- * @deprecated Use 'umd-field-set-wrapper' instead of 'umd-forms-layout-fieldset-list'.
  * @since 1.8.0
  */
 export const wrapper: JssObject = create.jssObject({

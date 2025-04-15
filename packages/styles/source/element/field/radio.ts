@@ -51,8 +51,8 @@ export const radio = {
  * @example
  * ```css
  * class="umd-field-radio-wrapper"
+ * Use 'umd-field-radio-wrapper' instead of 'umd-forms-choices-wrapper'.
  * ```
- * @deprecated Use 'umd-field-radio-wrapper' instead of 'umd-forms-choices-wrapper'.
  * @since 1.8.0
  */
 export const radioWrapper: JssObject = create.jssObject({

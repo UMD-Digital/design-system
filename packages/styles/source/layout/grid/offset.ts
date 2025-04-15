@@ -22,8 +22,8 @@ const classNamePrefix = 'umd-layout-grid-offset';
  * @example
  * ```css
  * class="umd-layout-grid-offset-three"
+ * Use 'umd-layout-grid-offset-three' instead of 'umd-grid-gap-three-offset'.
  * ```
- * @deprecated Use 'umd-layout-grid-offset-three' instead of 'umd-grid-gap-three-offset'.
  * @since 1.8.0
  */
 export const threeColumn: JssObject = create.jssObject({

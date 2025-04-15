@@ -31,8 +31,8 @@ const boarderBaseDark = {
  * @example
  * ```css
  * class="umd-layout-grid-border-dark-two"
+ * Use 'umd-layout-grid-border-dark-two' instead of 'umd-grid-border-dark'.
  * ```
- * @deprecated Use 'umd-layout-grid-border-dark-two' instead of 'umd-grid-border-dark'.
  * @since 1.8.0
  */
 export const columnsTwo: JssObject = create.jssObject({
@@ -75,8 +75,8 @@ export const columnsTwo: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-border-dark-three"
+ * Use 'umd-layout-grid-border-dark-three' instead of 'umd-grid-three-border-dark'.
  * ```
- * @deprecated Use 'umd-layout-grid-border-dark-three' instead of 'umd-grid-three-border-dark'.
  * @since 1.8.0
  */
 export const columnsThreeDark: JssObject = create.jssObject({
@@ -123,8 +123,8 @@ export const columnsThreeDark: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-border-dark-four"
+ * Use 'umd-layout-grid-border-dark-four' instead of 'umd-grid-four-border-dark'.
  * ```
- * @deprecated Use 'umd-layout-grid-border-dark-four' instead of 'umd-grid-four-border-dark'.
  * @since 1.8.0
  */
 export const columnsFourDark: JssObject = create.jssObject({

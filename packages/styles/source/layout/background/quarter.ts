@@ -50,8 +50,8 @@ const quarter = {
  * @example
  * ```css
  * class="umd-layout-background-quarter-light"
+ * Use 'umd-layout-background-quarter-light' instead of 'umd-layout-background-quater-color'.
  * ```
- * @deprecated Use 'umd-layout-background-quarter-light' instead of 'umd-layout-background-quater-color'.
  * @since 1.8.0
  */
 export const light: JssObject = create.jssObject({
@@ -75,8 +75,8 @@ export const light: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-background-quarter-dark"
+ * Use 'umd-layout-background-quarter-dark' instead of 'umd-layout-background-quater-color'.
  * ```
- * @deprecated Use 'umd-layout-background-quarter-dark' instead of 'umd-layout-background-quater-color'.
  * @since 1.8.0
  */
 export const dark: JssObject = create.jssObject({

@@ -68,8 +68,8 @@ export const base = {
  * @example
  * ```css
  * class="umd-layout-grid-columns-two"
+ * Use 'umd-layout-grid-columns-two' instead of 'umd-grid'.
  * ```
- * @deprecated Use 'umd-layout-grid-columns-two' instead of 'umd-grid'.
  * @since 1.8.0
  */
 export const columnsTwo: JssObject = create.jssObject({
@@ -93,8 +93,8 @@ export const columnsTwo: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-columns-three"
+ * Use 'umd-layout-grid-columns-three' instead of 'umd-grid-three'.
  * ```
- * @deprecated Use 'umd-layout-grid-columns-three' instead of 'umd-grid-three'.
  * @since 1.8.0
  */
 export const columnsThree: JssObject = create.jssObject({
@@ -118,8 +118,8 @@ export const columnsThree: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-columns-four"
+ * Use 'umd-layout-grid-columns-four' instead of 'umd-grid-four'.
  * ```
- * @deprecated Use 'umd-layout-grid-columns-four' instead of 'umd-grid-four'.
  * @since 1.8.0
  */
 export const columnsFour: JssObject = create.jssObject({

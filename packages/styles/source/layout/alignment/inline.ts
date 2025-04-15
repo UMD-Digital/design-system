@@ -17,8 +17,8 @@ import type { JssObject } from '../../_types';
  * @example
  * ```css
  * class="text-center"
+ * Use 'text-center' instead of 'umd-layout-text-alignment-center'.
  * ```
- * @deprecated Use 'text-center' instead of 'umd-layout-text-alignment-center'.
  * @since 1.8.0
  */
 export const center: JssObject = create.jssObject({

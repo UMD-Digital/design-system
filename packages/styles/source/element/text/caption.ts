@@ -22,8 +22,8 @@ const classNamePrefix = 'umd-text-caption';
  * @example
  * ```css
  * class="umd-text-caption-smaller"
+ * Use 'umd-text-caption-smaller' instead of 'umd-caption'.
  * ```
- * @deprecated Use 'umd-text-caption-smaller' instead of 'umd-caption'.
  * @since 1.8.0
  */
 export const smaller: JssObject = create.jssObject({
@@ -49,8 +49,8 @@ export const smaller: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-caption-smaller-italic"
+ * Use 'umd-text-caption-smaller-italic' instead of 'umd-forms-instructions'.
  * ```
- * @deprecated Use 'umd-text-caption-smaller-italic' instead of 'umd-forms-instructions'.
  * @since 1.8.0
  */
 export const smallerItalic: JssObject = create.jssObject({

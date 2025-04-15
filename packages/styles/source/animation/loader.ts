@@ -55,8 +55,8 @@ const dotsAniamtion = {
  * @example
  * ```css
  * class="umd-animation-loader-dots"
+ * Use 'umd-animation-loader-dots' instead of 'umd-loader'.
  * ```
- * @deprecated Use 'umd-animation-loader-dots' instead of 'umd-loader'.
  * @since 1.8.0
  */
 export const dots: JssObject = create.jssObject({

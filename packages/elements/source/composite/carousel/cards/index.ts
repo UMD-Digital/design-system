@@ -299,7 +299,7 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
   return introContainer;
 };
 
-const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
+export default (props: TypeCarouselCardsRequirements) =>
   (() => {
     const { slide, shadowRef } = props;
     const declaration = document.createElement('div');
@@ -339,14 +339,10 @@ const CreateCarouselCardsElement = (props: TypeCarouselCardsRequirements) =>
 
     return {
       element: declaration,
+      styles: STYLES_CAROUSEL_CARDS_ELEMENT,
       events: {
-        SetEventReize: carouselContainer.events.resize,
-        Load: carouselContainer.events.load,
+        resize: carouselContainer.events.resize,
+        load: carouselContainer.events.load,
       },
     };
   })();
-
-export default {
-  CreateElement: CreateCarouselCardsElement,
-  Styles: STYLES_CAROUSEL_CARDS_ELEMENT,
-};

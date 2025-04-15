@@ -1,29 +1,22 @@
-declare global {
-  interface Window {
-    UMDCarouselElement: typeof UMDCarouselElement;
-  }
-}
-
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
+import { Markup } from 'utilities';
 
-const { Node } = Markup.create;
+const tagName = 'umd-element-carousel';
 
-const ELEMENT_NAME = 'umd-element-carousel';
+const slots = {
+  blocks: {
+    required: true,
+  },
+};
 
-const styles = `
-  :host {
-    display: block;
-  }
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.resize({
+    callback: (element) => element.events?.resize(),
+  }),
+);
 
-  ${Styles.reset}
-  ${Composite.carousel.macro.Styles}
-`;
-
-const styleTemplate = Node.stylesTemplate({ styles });
-
-const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
+const createComponent = (element: HTMLElement) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const isThemeDark = Attributes.isTheme.dark({
     element,
@@ -55,8 +48,8 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   if (attributeHint === 'false') hint = false;
 
   const createCardShadowRef = () => {
-    const slot = Node.slot({ type: Slots.name.BLOCKS });
-    element._shadow.appendChild(slot);
+    const slot = Markup.create.Node.slot({ type: Slots.name.BLOCKS });
+    shadow.appendChild(slot);
   };
 
   createCardShadowRef();
@@ -64,7 +57,8 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
   const shadowRef = shadow.querySelector(
     `[name="${Slots.name.BLOCKS}"]`,
   ) as HTMLElement;
-  const carousel = Composite.carousel.macro.CreateElement({
+
+  return Composite.carousel.macro({
     slide,
     shadowRef,
     blocks,
@@ -80,58 +74,17 @@ const CreateShadowDom = ({ element }: { element: UMDCarouselElement }) => {
     maxCount: maxCount ? parseInt(maxCount) : undefined,
     gridGap,
   });
-
-  element._elementRef = carousel;
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(carousel.element);
-  carousel.events.load();
 };
 
-class UMDCarouselElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _elementRef: {
-    element: HTMLDivElement;
-    events: {
-      resize: () => void;
-    };
-  } | null;
-
-  constructor() {
-    super();
-
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._elementRef = null;
-  }
-
-  static get observedAttributes() {
-    return [Attributes.names.RESIZE];
-  }
-
-  attributeChangedCallback(
-    name: string,
-    oldValue: string | null,
-    newValue: string | null,
-  ) {
-    if (
-      name == Attributes.names.RESIZE &&
-      newValue === 'true' &&
-      this._elementRef
-    ) {
-      this._elementRef.events.resize();
-    }
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 export default () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDCarouselElement = UMDCarouselElement;
-    window.customElements.define(ELEMENT_NAME, UMDCarouselElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      slots,
+      createComponent,
+      attributes,
+      afterConnect: (ref) => ref?.events?.load(),
+    }),
+  });
 };

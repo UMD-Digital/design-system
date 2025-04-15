@@ -121,7 +121,7 @@ const STYLES_CAROUSEL_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-const CreateCarouselElement = (props: TypeCarouselRequirements) =>
+export default (props: TypeCarouselRequirements) =>
   (() => {
     const {
       isThemeDark,
@@ -178,14 +178,10 @@ const CreateCarouselElement = (props: TypeCarouselRequirements) =>
 
     return {
       element: declaration,
+      styles: STYLES_CAROUSEL_ELEMENT,
       events: {
         resize: carouselContainer.events.resize,
         load: carouselContainer.events.load,
       },
     };
   })();
-
-export default {
-  CreateElement: CreateCarouselElement,
-  Styles: STYLES_CAROUSEL_ELEMENT,
-};

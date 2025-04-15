@@ -2,8 +2,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 
-const { SlotWithDefaultStyling } = Markup.create;
-
 const tagName = 'umd-element-card-icon';
 
 const slots = {

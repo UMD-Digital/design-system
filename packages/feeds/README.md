@@ -178,10 +178,6 @@ All feed components are built with accessibility in mind:
 - Screen reader announcements for dynamic content updates
 - Support for reduced motion preferences
 
-## Documentation
-
-For detailed API documentation and more advanced usage examples, see the [official UMD Design System documentation](https://umd-digital.github.io/design-system/feeds/).
-
 ## Testing
 
 The library uses Jest for unit testing. To run tests:

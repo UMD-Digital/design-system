@@ -359,10 +359,10 @@ const CreateTextContainer = ({
   return textContainer;
 };
 
-const CreateHeroExpand = (props: TypeLayoutImageExpandProps) => {
+export default (props: TypeLayoutImageExpandProps) => {
   const declaration = document.createElement('div');
   const sticky = document.createElement('div');
-  const SetPosition = ({ value }: { value: string | null }) => {
+  const setTopPosition = ({ value }: { value: string | null }) => {
     sticky.style.top = value || '0';
   };
 
@@ -375,13 +375,9 @@ const CreateHeroExpand = (props: TypeLayoutImageExpandProps) => {
 
   return {
     element: declaration,
+    styles: STYLES_HERO_EXPAND,
     events: {
-      SetPosition,
+      setTopPosition,
     },
   };
-};
-
-export default {
-  CreateElement: CreateHeroExpand,
-  Styles: STYLES_HERO_EXPAND,
 };

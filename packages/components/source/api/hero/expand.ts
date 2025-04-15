@@ -1,32 +1,23 @@
-declare global {
-  interface Window {
-    UMDHeroExpandElement: typeof UMDHeroExpandElement;
-  }
-}
-
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Markup, Styles } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
+import { Markup } from 'utilities';
 
-const { Node } = Markup.create;
+const tagName = 'umd-element-hero-expand';
 
-const ELEMENT_NAME = 'umd-element-hero-expand';
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.visuallyPosition({
+    callback: (element, topPosition) =>
+      element.events?.setTopPosition({ value: topPosition }),
+  }),
+  // Deprecated
+  Attributes.handler.observe.visuallyPosition({
+    name: Attributes.names.LAYOUT_STICKY_TOP,
+    callback: (element, topPosition) =>
+      element.events?.setTopPosition({ value: topPosition }),
+  }),
+);
 
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.reset}
-  ${Composite.hero.expand.Styles}
-`;
-
-const template = Markup.create.Node.stylesTemplate({ styles });
-
-const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  const topPosition = element.getAttribute(Attributes.names.LAYOUT_STICKY_TOP);
-
+const createComponent = (element: HTMLElement) => {
   const image = Markup.validate.ImageSlot({
     element,
     ImageSlot: Slots.name.assets.image,
@@ -34,8 +25,8 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   const videoSlot = element.querySelector(
     `[slot="${Slots.name.VIDEO}"]`,
   ) as HTMLElement;
-  const actions = Node.slot({ type: Slots.name.actions.default });
-  const additional = Node.slot({ type: Slots.name.ADDITIONAL });
+  const actions = Markup.create.Node.slot({ type: Slots.name.actions.default });
+  const additional = Markup.create.Node.slot({ type: Slots.name.ADDITIONAL });
 
   const elementData: {
     image?: HTMLImageElement;
@@ -48,7 +39,7 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
   } = {
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),
-    topPosition,
+    topPosition: Attributes.getValue.topPosition({ element }),
   };
   const isVideo = videoSlot instanceof HTMLVideoElement;
 
@@ -73,54 +64,24 @@ const CreateShadowDom = ({ element }: { element: UMDHeroExpandElement }) => {
     elementData.additional = additional;
   }
 
-  element._elementRef = Composite.hero.expand.CreateElement(elementData);
-
-  shadow.appendChild(template.content.cloneNode(true));
-  shadow.appendChild(element._elementRef.element);
-
-  if (topPosition) {
-    element._elementRef.events.SetPosition({ value: topPosition });
-  }
+  return Composite.hero.expand(elementData);
 };
 
-export class UMDHeroExpandElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _elementRef: {
-    element: HTMLDivElement;
-    events: {
-      SetPosition: ({ value }: { value: string | null }) => void;
-    };
-  } | null;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._elementRef = null;
-  }
-
-  static get observedAttributes() {
-    return [Attributes.names.LAYOUT_STICKY_TOP];
-  }
-
-  attributeChangedCallback(name: string) {
-    if (name == Attributes.names.LAYOUT_STICKY_TOP && this._elementRef) {
-      this._elementRef.events.SetPosition({
-        value: this.getAttribute(Attributes.names.LAYOUT_STICKY_TOP),
-      });
-    }
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 export default () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDHeroExpandElement = UMDHeroExpandElement;
-    window.customElements.define(ELEMENT_NAME, UMDHeroExpandElement);
-  }
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+      attributes,
+      afterConnect: (ref) => {
+        const topPosition = Attributes.getValue.topPosition({
+          element: ref.element,
+        });
+        if (topPosition) {
+          ref?.events?.setTopPosition({ value: topPosition });
+        }
+      },
+    }),
+  });
 };

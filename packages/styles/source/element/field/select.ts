@@ -71,6 +71,9 @@ export const select = {
  * @example
  * ```css
  * class="umd-field-select-wrapper"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-field-select-wrapper' instead of 'umd-forms-select-wrapper'.
  * ```
  * @since 1.8.0

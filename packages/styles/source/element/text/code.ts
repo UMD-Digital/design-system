@@ -21,6 +21,9 @@ const classNamePrefix = 'umd-text-code';
  * @example
  * ```css
  * class="umd-text-code"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-text-code' instead of 'umd-rich-text-coding'.
  * ```
  * @since 1.8.0

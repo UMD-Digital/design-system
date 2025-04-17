@@ -34,6 +34,9 @@ const box = {
  * @example
  * ```css
  * class="umd-layout-background-highlight"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-background-highlight' instead of 'umd-layout-background-box'.
  * ```
  * @since 1.8.0
@@ -59,6 +62,9 @@ export const white: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-background-highlight-light"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-background-highlight-light' instead of 'umd-layout-background-box'.
  * ```
  * @since 1.8.0
@@ -85,6 +91,9 @@ export const light: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-background-highlight-dark"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-background-highlight-dark' instead of 'umd-layout-background-box[theme="dark"]'.
  * ```
  * @since 1.8.0

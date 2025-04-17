@@ -35,6 +35,9 @@ const primaryBase = {
  * @example
  * ```css
  * class="umd-action-primary"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-action-primary' instead of 'umd-forms-actions-primary'.
  * ```
  * @since 1.8.0

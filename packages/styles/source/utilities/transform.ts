@@ -12,7 +12,7 @@ import type {
 /**
  * Interface for a JSS name converter function.
  */
-interface JssNameConverter {
+export interface JssNameConverter {
   (originalObject: JssInputFormat): JssNamedOutputFormat;
 }
 

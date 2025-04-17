@@ -18,7 +18,10 @@ const classNamePrefix = 'umd-layout-background-full';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background.full.padding
  * ```
- * @note This is a style object that doesn't generate a CSS class directly, but provides padding styles that can be applied to backgrounds programmatically.
+ * @example
+ * ```text
+ * This is a style object that doesn't generate a CSS class directly, but provides padding styles that can be applied to backgrounds programmatically.
+ * ```
  * @since 1.8.0
  */
 export const padding = {
@@ -44,6 +47,9 @@ export const padding = {
  * @example
  * ```css
  * class="umd-layout-background-full-light"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-background-full-light' instead of 'umd-layout-background-color'.
  * ```
  * @since 1.8.0
@@ -70,6 +76,9 @@ export const light: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-background-full-dark"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-background-full-dark' instead of 'umd-layout-background-color-dark'.
  * ```
  * @since 1.8.0

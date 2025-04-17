@@ -52,6 +52,9 @@ const pillSvg = {
  * @example
  * ```css
  * class="umd-text-cluster-pill"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-text-cluster-pill' instead of 'umd-pill-list'.
  * ```
  * @since 1.8.0
@@ -90,6 +93,9 @@ export const pillList: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-cluster-pill-dark"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-text-cluster-pill-dark' instead of 'umd-pill-list-dark'.
  * ```
  * @since 1.8.0

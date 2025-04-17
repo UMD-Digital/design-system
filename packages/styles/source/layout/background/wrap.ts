@@ -53,6 +53,9 @@ export const white: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-background-wrap-light"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-background-wrap-light' instead of 'umd-forms-layout'.
  * ```
  * @since 1.8.0

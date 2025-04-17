@@ -35,6 +35,13 @@ const lockBase = {
 };
 
 /**
+ * @deprecated Use {@link full} instead.
+ */
+export const lockFull: JssObject = create.jssObject({
+  className: ['umd-lock-full'],
+});
+
+/**
  * Full-width horizontal spacing with responsive padding.
  * @returns {JssObject} Full-width container with responsive padding.
  * @example
@@ -45,8 +52,12 @@ const lockBase = {
  * @example
  * ```css
  * class="umd-layout-space-horizontal-full"
+ * ```
+ *  @example
+ * ```text
  * Use 'umd-layout-space-horizontal-full' instead of 'umd-lock-full'.
  * ```
+ * {@link https://designsystem.umd.edu/foundation/horizontal-spacing }
  * @since 1.8.0
  */
 export const full: JssObject = create.jssObject({
@@ -61,6 +72,13 @@ export const full: JssObject = create.jssObject({
 });
 
 /**
+ * @deprecated Use {@link max} instead.
+ */
+export const lock: JssObject = create.jssObject({
+  className: ['umd-lock'],
+});
+
+/**
  * Maximum width horizontal spacing with responsive padding.
  * @returns {JssObject} Maximum width container with responsive padding.
  * @example
@@ -71,10 +89,15 @@ export const full: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-space-horizontal-larger"
- * Use 'umd-layout-space-horizontal-larger' instead of 'umd-lock'.
  * ```
+ * @example
+ * ```text
+ * Use `umd-layout-space-horizontal-larger` instead of `umd-lock`.
+ * ```
+ * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.8.0
  */
+
 export const max: JssObject = create.jssObject({
   ...lockBase,
   maxWidth: `${spacing.maxWidth.max}`,
@@ -84,6 +107,13 @@ export const max: JssObject = create.jssObject({
     /** @deprecated Use 'umd-layout-space-horizontal-larger' instead */
     'umd-lock',
   ],
+});
+
+/**
+ * @deprecated Use {@link large} instead.
+ */
+export const lockLarge: JssObject = create.jssObject({
+  className: ['umd-lock-small'],
 });
 
 /**
@@ -97,8 +127,12 @@ export const max: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-space-horizontal-large"
+ * ```
+ *  @example
+ * ```text
  * Use 'umd-layout-space-horizontal-large' instead of 'umd-lock-small'.
  * ```
+ * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.8.0
  */
 export const large: JssObject = create.jssObject({
@@ -113,6 +147,13 @@ export const large: JssObject = create.jssObject({
 });
 
 /**
+ * @deprecated Use {@link normal} instead.
+ */
+export const lockNormal: JssObject = create.jssObject({
+  className: ['umd-lock-normal'],
+});
+
+/**
  * Normal width horizontal spacing with responsive padding.
  * @returns {JssObject} Normal width container with responsive padding.
  * @example
@@ -123,8 +164,12 @@ export const large: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-space-horizontal-normal"
+ * ```
+ *  @example
+ * ```text
  * Use 'umd-layout-space-horizontal-normal' instead of 'umd-lock-smaller'.
  * ```
+ * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.8.0
  */
 export const normal: JssObject = create.jssObject({
@@ -139,6 +184,13 @@ export const normal: JssObject = create.jssObject({
 });
 
 /**
+ * @deprecated Use {@link small} instead.
+ */
+export const lockSmall: JssObject = create.jssObject({
+  className: ['umd-lock-extra-small'],
+});
+
+/**
  * Small width horizontal spacing with responsive padding.
  * @returns {JssObject} Small width container with responsive padding.
  * @example
@@ -149,8 +201,12 @@ export const normal: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-space-horizontal-small"
+ * ```
+ *  @example
+ * ```text
  * Use'umd-layout-space-horizontal-small' instead of 'umd-lock-extra-small'.
  * ```
+ * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.8.0
  */
 export const small: JssObject = create.jssObject({
@@ -165,6 +221,13 @@ export const small: JssObject = create.jssObject({
 });
 
 /**
+ * @deprecated Use {@link smallest} instead.
+ */
+export const lockSmallest: JssObject = create.jssObject({
+  className: ['umd-lock-smallest'],
+});
+
+/**
  * Smallest width horizontal spacing with responsive padding.
  * @returns {JssObject} Smallest width container with responsive padding.
  * @example
@@ -175,8 +238,12 @@ export const small: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-space-horizontal-smallest"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-space-horizontal-smallest' instead of 'umd-lock-smallest'.
  * ```
+ * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.8.0
  */
 export const smallest: JssObject = create.jssObject({

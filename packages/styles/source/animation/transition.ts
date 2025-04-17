@@ -96,9 +96,11 @@ export const slideRight: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-animation-transition-fade-bottom"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-animation-transition-fade-bottom' instead of 'umd-grid-fade-in'.
  * ```
- *
  * @since 1.8.0
  */
 export const fadeInFromBottom: JssObject = create.jssObject({

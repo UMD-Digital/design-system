@@ -50,6 +50,9 @@ export const row: JssObject = {
  * @example
  * ```css
  * class="umd-layout-grid-inline-tablet-rows"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-inline-tablet-rows' instead of 'umd-grid-row-mobile-tablet'.
  * ```
  * @since 1.8.0
@@ -81,6 +84,9 @@ export const tabletRows: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-inline-stretch"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-inline-stretch' instead of 'umd-forms-layout-headline-with-action'.
  * ```
  * @since 1.8.0

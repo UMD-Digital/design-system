@@ -21,6 +21,9 @@ const classNamePrefix = 'umd-layout-alignment-block';
  * @example
  * ```css
  * class="umd-layout-alignment-block-center"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-alignment-block-center' instead of 'umd-layout-element-alignment-center'.
  * ```
  * @since 1.8.0
@@ -47,6 +50,9 @@ export const center: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-alignment-block-stacked"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-alignment-block-stacked' instead of 'umd-media-with-caption'.
  * ```
  * @since 1.8.0

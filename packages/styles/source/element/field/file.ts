@@ -47,6 +47,9 @@ const file = {
  * @example
  * ```css
  * class="umd-field-file-wrapper"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-field-file-wrapper' instead of 'umd-forms-file-wrapper'.
  * ```
  * @since 1.8.0

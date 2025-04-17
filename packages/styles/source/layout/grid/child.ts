@@ -21,6 +21,9 @@ const classNamePrefix = 'umd-layout-grid-child';
  * @example
  * ```css
  * class="umd-layout-grid-child-size-double"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-child-size-double' instead of 'umd-grid-column-double'.
  * ```
  * @since 1.8.0

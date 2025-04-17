@@ -17,6 +17,9 @@ import type { JssObject } from '../../_types';
  * @example
  * ```css
  * class="text-center"
+ * ```
+ * @example
+ * ```text
  * Use 'text-center' instead of 'umd-layout-text-alignment-center'.
  * ```
  * @since 1.8.0

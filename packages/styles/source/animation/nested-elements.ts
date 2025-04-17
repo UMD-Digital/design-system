@@ -60,6 +60,9 @@ export const linksWhite: JssObject = {
  * @example
  * ```css
  * class="umd-animation-grid"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-animation-grid' instead of 'umd-grid-animation'.
  * ```
  * @since 1.8.0

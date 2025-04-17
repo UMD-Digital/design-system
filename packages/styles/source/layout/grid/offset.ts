@@ -22,6 +22,9 @@ const classNamePrefix = 'umd-layout-grid-offset';
  * @example
  * ```css
  * class="umd-layout-grid-offset-three"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-offset-three' instead of 'umd-grid-gap-three-offset'.
  * ```
  * @since 1.8.0

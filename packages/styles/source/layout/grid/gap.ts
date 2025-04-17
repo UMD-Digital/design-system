@@ -35,6 +35,9 @@ const paragraphOverwrite = {
  * @example
  * ```css
  * class="umd-layout-grid-gap-two"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-gap-two' instead of 'umd-grid-gap'.
  * ```
  * @since 1.8.0
@@ -70,6 +73,9 @@ export const two: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-gap-three"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-gap-three' instead of 'umd-grid-gap-three'.
  * ```
  * @since 1.8.0
@@ -100,6 +106,9 @@ export const three: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-gap-three-large"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-gap-three-large' instead of 'umd-grid-gap-three-large'.
  * ```
  * @since 1.8.0
@@ -131,6 +140,9 @@ export const threeLarge: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-gap-four"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-gap-four' instead of 'umd-grid-gap-four'.
  * ```
  * @since 1.8.0
@@ -161,6 +173,9 @@ export const four: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-gap-four-centered"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-gap-four-centered' instead of 'umd-grid-gap-four-center'.
  * ```
  * @since 1.8.0
@@ -193,6 +208,9 @@ export const fourCentered: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-gap-four-large"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-gap-four-large' instead of 'umd-grid-gap-four-large'.
  * ```
  * @since 1.8.0
@@ -223,6 +241,9 @@ export const fourLarge: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-gap-four-large-centered"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-gap-four-large-centered' instead of 'umd-grid-gap-four-center'.
  * ```
  * @since 1.8.0
@@ -254,6 +275,9 @@ export const fourLargeCentered: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-layout-grid-gap-stacked"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-gap-stacked' instead of 'umd-grid-gap-stacked'.
  * ```
  * @since 1.8.0

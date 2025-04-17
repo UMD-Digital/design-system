@@ -18,6 +18,9 @@ import type { JssObject } from '../../_types';
  * @example
  * ```css
  * class="umd-layout-grid-masonry"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-layout-grid-masonry' instead of 'umd-grid-gap-masonry'.
  * ```
  * @since 1.8.0

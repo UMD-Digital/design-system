@@ -22,6 +22,9 @@ const classNamePrefix = 'umd-table';
  * @example
  * ```css
  * class="umd-table-inline"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-table-inline' instead of 'umd-rich-text-inline-table'.
  * ```
  * @since 1.8.0

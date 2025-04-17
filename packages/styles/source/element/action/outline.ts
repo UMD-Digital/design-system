@@ -43,6 +43,9 @@ const outlineBase = {
  * @example
  * ```css
  * class="umd-action-outline"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-action-outline' instead of 'umd-forms-actions-outline'.
  * ```
  * @since 1.8.0

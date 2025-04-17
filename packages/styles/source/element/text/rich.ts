@@ -134,6 +134,9 @@ const advancedBase = {
  * @example
  * ```css
  * class="umd-text-rich-simple"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-text-rich-simple' instead of 'umd-text-simple'.
  * ```
  * @since 1.8.0
@@ -179,6 +182,9 @@ export const simpleDark: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-rich-simple-large"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-text-rich-simple-large' instead of 'umd-text-simple-large'.
  * ```
  * @since 1.8.0
@@ -308,6 +314,9 @@ export const simpleScalingDark: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-rich-advanced"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-text-rich-advanced' instead of 'umd-rich-text'.
  * ```
  * @since 1.8.0
@@ -355,6 +364,9 @@ export const advanced: JssObject = create.jssObject({
  * @example
  * ```css
  * class="umd-text-rich-advanced-dark"
+ * ```
+ * @example
+ * ```text
  * Use 'umd-text-rich-advanced-dark' instead of 'umd-rich-text-dark'.
  * ```
  * @since 1.8.0

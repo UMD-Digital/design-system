@@ -1,5 +1,1 @@
-import { default as expand } from './expand';
-
-export default {
-  expand,
-};
+export { default as expand } from './expand';

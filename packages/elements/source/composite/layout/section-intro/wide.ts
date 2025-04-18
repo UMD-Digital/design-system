@@ -75,7 +75,7 @@ const STYLES_SECTION_INTRO_WIDE_ELEMENT = `
   ${OverwriteTheme}
 `;
 
-const CreateSectionIntroWideElement = (element: TypeSectionIntroWideProps) => {
+export default (element: TypeSectionIntroWideProps) => {
   const { headline, actions, isThemeDark } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -96,10 +96,5 @@ const CreateSectionIntroWideElement = (element: TypeSectionIntroWideProps) => {
 
   container.appendChild(wrapper);
 
-  return container;
-};
-
-export default {
-  CreateElement: CreateSectionIntroWideElement,
-  Styles: STYLES_SECTION_INTRO_WIDE_ELEMENT,
+  return { element: container, styles: STYLES_SECTION_INTRO_WIDE_ELEMENT };
 };

@@ -11,6 +11,7 @@ type TypeQuoteFeatured = TypeInlineInline & {
 
 type TypeQuoteFeaturedText = TypeQuoteFeatured & {
   hasImage: boolean;
+  styles: string;
 };
 
 const SMALL = 500;
@@ -40,8 +41,8 @@ const QUOTE_FEATURED_IMAGE = 'quote-featured-image';
 const QUOTE_FEATURED_IMAGE_ACTIONS = 'quote-featured-image-actions';
 
 const OVERWRITE_WITH_IMAGE_WRAPPER = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
-const OVERWRITE_WITH_IMAGE_QUOTE_TEXT_CONTAINER = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QuoteText.Elements.container}`;
-const OVERWRITE_WITH_IMAGE_QUOTE_TEXT = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QuoteText.Elements.quoteWrapper}`;
+const OVERWRITE_WITH_IMAGE_QUOTE_TEXT_CONTAINER = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QuoteText.elements.container}`;
+const OVERWRITE_WITH_IMAGE_QUOTE_TEXT = `.${QUOTE_FEATURED_CONTAINER}${IS_WITH_IMAGE} .${QuoteText.elements.quoteWrapper}`;
 
 const OVERWRITE_THEME_DARK_WRAPPER = `.${QUOTE_FEATURED_CONTAINER}${IS_THEME_DARK} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
 const OVERWRITE_THEME_MARYLAND_WRAPPER = `.${QUOTE_FEATURED_CONTAINER}${IS_THEME_MARYLAND} .${QUOTE_FEATURED_CONTAINER_WRAPPER}`;
@@ -201,7 +202,7 @@ const Wrapper = `
 `;
 
 // prettier-ignore
-const STYLES_QUOTE_FEATURED_ELEMENT = `
+let STYLES_QUOTE_FEATURED_ELEMENT = `
   .${QUOTE_FEATURED_CONTAINER} {
     container: ${ELEMENT_NAME} / inline-size;
   }
@@ -260,19 +261,6 @@ const CreateImageContainer = ({
   return container;
 };
 
-const CreateTextContainer = (props: TypeQuoteFeaturedText) => {
-  const { hasImage, action } = props;
-  const container = document.createElement('div');
-  const inlineActions = hasImage ? null : action;
-  const inlineProps = { ...props, action: inlineActions, image: null };
-  const inlineQuote = InlineQuote.CreateElement(inlineProps);
-  container.classList.add(QUOTE_FEATURED_TEXT);
-
-  container.appendChild(inlineQuote);
-
-  return container;
-};
-
 const CreateTextureContainer = ({
   isThemeDark,
   isThemeMaryland,
@@ -294,15 +282,22 @@ export default (props: TypeQuoteFeatured) => {
   const container = document.createElement('div');
   const spacer = document.createElement('div');
   const wrapper = document.createElement('div');
-  const hasImage = !!image;
   const textureContainer = CreateTextureContainer(props);
-  const textContainer = CreateTextContainer({ ...props, hasImage });
+  const textContainer = document.createElement('div');
+  const hasImage = !!image;
+  const inlineActions = hasImage ? null : action;
+  const inlineProps = { ...props, action: inlineActions, image: null };
+  const inlineQuote = InlineQuote(inlineProps);
+  let styles = STYLES_QUOTE_FEATURED_ELEMENT;
 
   wrapper.classList.add(QUOTE_FEATURED_CONTAINER_WRAPPER);
 
+  textContainer.classList.add(QUOTE_FEATURED_TEXT);
+  textContainer.appendChild(inlineQuote.element);
   if (!isTransparent) wrapper.appendChild(textureContainer);
   if (hasImage) wrapper.appendChild(CreateImageContainer({ image, action }));
   wrapper.appendChild(textContainer);
+  styles += inlineQuote.styles;
 
   spacer.classList.add(QUOTE_FEATURED_CONTAINER_SPACER);
   spacer.appendChild(wrapper);
@@ -314,5 +309,5 @@ export default (props: TypeQuoteFeatured) => {
   if (hasImage) container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
   if (isTransparent) container.setAttribute(ATTRIBUTE_TRANSPARENT, 'true');
 
-  return { element: container, styles: STYLES_QUOTE_FEATURED_ELEMENT };
+  return { element: container, styles };
 };

@@ -231,13 +231,12 @@ const CreateQuoteTextContainer = ({
   container.classList.add(TEXT_CONTAINER);
   container.appendChild(wrapper);
 
-  return container;
+  return { element: container, styles: STYLES_QUOTE_TEXT_CONTAINER };
 };
 
 export default {
-  CreateElement: CreateQuoteTextContainer,
-  Styles: STYLES_QUOTE_TEXT_CONTAINER,
-  Elements: {
+  create: CreateQuoteTextContainer,
+  elements: {
     container: TEXT_CONTAINER,
     quoteWrapper: TEXT_CONTAINER_QUOTE_WRAPPER,
   },

@@ -19,8 +19,8 @@ const ATTRIBUTE_SIZE = 'size';
 const THEME_MARYLAND = 'maryland';
 const SIZE_LARGE = 'large';
 
-const TEXT_CONTAINER = Text.Elements.container;
-const TEXT_CONTAINER_QUOTE_WRAPPER = Text.Elements.quoteWrapper;
+const TEXT_CONTAINER = Text.elements.container;
+const TEXT_CONTAINER_QUOTE_WRAPPER = Text.elements.quoteWrapper;
 
 const QUOTE_INLINE_CONTAINER = 'quote-inline-container';
 const QUOTE_INLINE_CONTAINER_WRAPPER = 'quote-inline-container-wrapper';
@@ -33,7 +33,7 @@ const IS_SIZE_LARGE_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE}`;
 const IS_SIZE_LARGE_WITH_IMAGE_CONTAINER = `${IS_WITH_IMAGE_CONTAINER}${IS_WITH_IMAGE}`;
 
 const IS_TEXT_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${TEXT_CONTAINER}`;
-const IS_IMAGE_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${Image.Elements.container}`;
+const IS_IMAGE_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${Image.elements.container}`;
 
 const IS_MARYLAND_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_THEME_MARYLAND}`;
 const IS_SIZE_LARGE_TEXT_CONTAINER = `${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER}`;
@@ -49,7 +49,7 @@ const OverwriteThemeMaryland = `
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_MARYLAND_CONTAINER} .${Image.Elements.container} img  {
+    ${IS_MARYLAND_CONTAINER} .${Image.elements.container} img  {
       border-right: 2px solid ${token.color.gold};
     }
   }
@@ -67,11 +67,11 @@ const OverwriteSizeLarge = `
     }
   }
 
-  ${IS_SIZE_LARGE_CONTAINER} .${Image.Elements.container} img {
+  ${IS_SIZE_LARGE_CONTAINER} .${Image.elements.container} img {
     max-width: 200px;
   }
 
-  ${IS_SIZE_LARGE_CONTAINER} .${Image.Elements.container} span {
+  ${IS_SIZE_LARGE_CONTAINER} .${Image.elements.container} span {
     bottom: -7px;
     left: -2px;
     height: 26px;
@@ -79,7 +79,7 @@ const OverwriteSizeLarge = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_SIZE_LARGE_CONTAINER} .${Image.Elements.container} span {
+    ${IS_SIZE_LARGE_CONTAINER} .${Image.elements.container} span {
       height: 30px;
       width: 41px;
       top: -14px;
@@ -272,27 +272,31 @@ export default (props: TypeInlineInline) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const hasImage = image !== null;
-  const textContainer = Text.CreateElement({
+  const textContainer = Text.create({
     ...props,
   });
+  let styles = STYLES_QUOTE_INLINE_ELEMENT;
 
   if (hasImage) {
-    const imageContainer = Image.CreateElement({
+    const imageContainer = Image.create({
       image: image as HTMLImageElement,
     });
 
     if (imageContainer) {
       const iconSpan = document.createElement('span');
       iconSpan.innerHTML = Utility.asset.icon.QUOTE;
-      imageContainer.appendChild(iconSpan);
+      imageContainer.element.appendChild(iconSpan);
 
-      wrapper.appendChild(imageContainer);
+      wrapper.appendChild(imageContainer.element);
+      styles += imageContainer.styles;
+
       container.setAttribute(ATTRIBUTE_WITH_IMAGE, '');
     }
   }
 
   wrapper.classList.add(QUOTE_INLINE_CONTAINER_WRAPPER);
-  wrapper.appendChild(textContainer);
+  wrapper.appendChild(textContainer.element);
+  styles += textContainer.styles;
 
   container.classList.add(QUOTE_INLINE_CONTAINER);
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
@@ -300,5 +304,5 @@ export default (props: TypeInlineInline) => {
   if (isSizeLarge) container.setAttribute(ATTRIBUTE_SIZE, SIZE_LARGE);
   container.appendChild(wrapper);
 
-  return { element: container, styles: STYLES_QUOTE_INLINE_ELEMENT };
+  return { element: container, styles };
 };

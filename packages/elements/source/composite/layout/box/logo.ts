@@ -4,7 +4,7 @@ import * as Utility from 'utilities';
 export type TypeLogoRequirements = {
   isBordered?: boolean;
   isThemeDark?: boolean;
-  image?: HTMLElement | null;
+  image: HTMLElement;
   text?: HTMLElement | null;
 };
 
@@ -111,9 +111,8 @@ const STYLES_LOGO_BLOCK_ELEMENT = `
   ${VariantThemeStyles}
 `;
 
-const CreateLogoBlockElement = (element: TypeLogoRequirements) => {
+export default (element: TypeLogoRequirements) => {
   const { isThemeDark, image, text, isBordered = false } = element;
-  if (!image) return null;
 
   const elementContainer = document.createElement('div');
   const assetContainer = document.createElement('div');
@@ -131,10 +130,5 @@ const CreateLogoBlockElement = (element: TypeLogoRequirements) => {
     elementContainer.appendChild(text);
   }
 
-  return elementContainer;
-};
-
-export default {
-  CreateElement: CreateLogoBlockElement,
-  Styles: STYLES_LOGO_BLOCK_ELEMENT,
+  return { element: elementContainer, styles: STYLES_LOGO_BLOCK_ELEMENT };
 };

@@ -68,7 +68,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
   ${OverwriteStickyLast}
 `;
 
-const CreateStickyColumnsElement = (element: TypeStickyProps) => {
+export default (element: TypeStickyProps) => {
   const { stickyColumn, staticColumn, isStickyLast, topPosition } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -105,13 +105,9 @@ const CreateStickyColumnsElement = (element: TypeStickyProps) => {
 
   return {
     element: container,
+    styles: STYLES_STICKY_COLUMNS_ELEMENT,
     events: {
-      SetPosition: setPosition,
+      setPosition,
     },
   };
-};
-
-export default {
-  CreateElement: CreateStickyColumnsElement,
-  Styles: STYLES_STICKY_COLUMNS_ELEMENT,
 };

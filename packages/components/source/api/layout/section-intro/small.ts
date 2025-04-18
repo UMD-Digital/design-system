@@ -1,73 +1,35 @@
-declare global {
-  interface Window {
-    UMDSectionIntroElement: typeof UMDSectionIntroElement;
-  }
-}
-
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { Styles, Markup } from 'utilities';
+import { Attributes, Model, Register, Slots } from 'model';
 import { CommonIntroData } from './common';
 
-const ELEMENT_NAME = 'umd-element-section-intro';
+const tagName = 'umd-element-section-intro';
 
-const styles = `
-  :host {
-    display: block;
-  }
-
-  ${Styles.reset}
-  ${Composite.layout.sectionIntro.small.Styles}
-`;
-
-const styleTemplate = Markup.create.Node.stylesTemplate({ styles });
-
-export const CreateShadowDom = ({
-  element,
-}: {
-  element: UMDSectionIntroElement;
-}) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  const includesAnimation = Attributes.includesFeature.animation({ element });
-  const intro = Composite.layout.sectionIntro.small.CreateElement({
+const createComponent = (element: HTMLElement) =>
+  Composite.layout.sectionIntro.small({
     ...CommonIntroData({
       element,
       isThemeDark: Attributes.isTheme.dark({ element }),
     }),
     text: Slots.text.default({ element }),
     hasSeparator: element.hasAttribute(Attributes.names.OPTIONAL_HAS_SEPARATOR),
-    includesAnimation,
+    includesAnimation: Attributes.includesFeature.animation({ element }),
   });
 
-  shadow.appendChild(styleTemplate.content.cloneNode(true));
-  shadow.appendChild(intro.element);
-
-  setTimeout(() => {
-    if (intro.element.getBoundingClientRect().top > 0) {
-      intro.events.loadAnimation();
-    }
-  }, 10);
-};
-
-export class UMDSectionIntroElement extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-  }
-
-  connectedCallback() {
-    CreateShadowDom({ element: this });
-  }
-}
-
 export default () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
+  Register.registerWebComponent({
+    name: tagName,
+    element: Model.createCustomElement({
+      tagName,
+      createComponent,
+      afterConnect: (ref) => {
+        const element = ref.element;
 
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDSectionIntroElement = UMDSectionIntroElement;
-    window.customElements.define(ELEMENT_NAME, UMDSectionIntroElement);
-  }
+        setTimeout(() => {
+          if (element.getBoundingClientRect().top > 0) {
+            ref?.events?.loadAnimation();
+          }
+        }, 10);
+      },
+    }),
+  });
 };

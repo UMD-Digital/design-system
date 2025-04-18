@@ -7,7 +7,7 @@ type TypeLayoutImageExpandProps = {
 };
 
 const { convertJSSObjectToStyles, convertPixelStringToNumber } = Utility.styles;
-const { media, spacing } = token;
+const { spacing } = token;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
 const ELEMENT_EXPLAND_DECLARATION = 'layout-image-expand-declaration';
@@ -285,7 +285,7 @@ const CreateTextContainer = ({ content }: TypeLayoutImageExpandProps) => {
   return textAnimation;
 };
 
-const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
+export default (props: TypeLayoutImageExpandProps) => {
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const imageContainer = CreateImageContainer(props);
@@ -323,10 +323,5 @@ const CreateLayoutImageExpand = (props: TypeLayoutImageExpandProps) => {
   declaration.appendChild(container);
   declaration.classList.add(ELEMENT_EXPLAND_DECLARATION);
 
-  return declaration;
-};
-
-export default {
-  CreateElement: CreateLayoutImageExpand,
-  Styles: STYLES_LAYOUT_IMAGE_EXPAND,
+  return { element: declaration, styles: STYLES_LAYOUT_IMAGE_EXPAND };
 };

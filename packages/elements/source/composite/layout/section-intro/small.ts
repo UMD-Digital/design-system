@@ -245,9 +245,7 @@ const Animation = ({
   }
 };
 
-const CreateSectionIntroDefaultElement = (
-  element: TypeSectionIntroDefaultProps,
-) => {
+export default (element: TypeSectionIntroDefaultProps) => {
   const {
     headline,
     actions,
@@ -291,13 +289,9 @@ const CreateSectionIntroDefaultElement = (
 
   return {
     element: container,
+    styles: STYLES_SECTION_INTRO_DEFAULT_ELEMENT,
     events: {
       loadAnimation,
     },
   };
-};
-
-export default {
-  CreateElement: CreateSectionIntroDefaultElement,
-  Styles: STYLES_SECTION_INTRO_DEFAULT_ELEMENT,
 };

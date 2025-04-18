@@ -23,7 +23,7 @@ const STYLES_NAV_STICKY_ELEMENT = `
   }
 `;
 
-const CreateNavStickyElement = ({
+export default ({
   content,
   component,
 }: {
@@ -95,10 +95,5 @@ const CreateNavStickyElement = ({
       hasIncorrectHeight = true;
     }
 
-    return elementContainer;
+    return { element: elementContainer, styles: STYLES_NAV_STICKY_ELEMENT };
   })();
-
-export default {
-  CreateElement: CreateNavStickyElement,
-  Styles: STYLES_NAV_STICKY_ELEMENT,
-};

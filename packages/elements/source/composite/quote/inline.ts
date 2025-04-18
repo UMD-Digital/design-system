@@ -267,7 +267,7 @@ const STYLES_QUOTE_INLINE_ELEMENT = `
   ${OverwriteThemeMaryland}
 `;
 
-const CreateQuoteInlineElement = (props: TypeInlineInline) => {
+export default (props: TypeInlineInline) => {
   const { isSizeLarge, image, isThemeDark, isThemeMaryland } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -300,10 +300,5 @@ const CreateQuoteInlineElement = (props: TypeInlineInline) => {
   if (isSizeLarge) container.setAttribute(ATTRIBUTE_SIZE, SIZE_LARGE);
   container.appendChild(wrapper);
 
-  return container;
-};
-
-export default {
-  CreateElement: CreateQuoteInlineElement,
-  Styles: STYLES_QUOTE_INLINE_ELEMENT,
+  return { element: container, styles: STYLES_QUOTE_INLINE_ELEMENT };
 };

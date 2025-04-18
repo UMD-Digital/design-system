@@ -289,7 +289,7 @@ const CreateTextureContainer = ({
   return container;
 };
 
-const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
+export default (props: TypeQuoteFeatured) => {
   const { isThemeDark, isThemeMaryland, action, image, isTransparent } = props;
   const container = document.createElement('div');
   const spacer = document.createElement('div');
@@ -314,10 +314,5 @@ const CreateQuoteFeaturedElement = (props: TypeQuoteFeatured) => {
   if (hasImage) container.setAttribute(ATTRIBUTE_HAS_IMAGE, '');
   if (isTransparent) container.setAttribute(ATTRIBUTE_TRANSPARENT, 'true');
 
-  return container;
-};
-
-export default {
-  CreateElement: CreateQuoteFeaturedElement,
-  Styles: STYLES_QUOTE_FEATURED_ELEMENT,
+  return { element: container, styles: STYLES_QUOTE_FEATURED_ELEMENT };
 };

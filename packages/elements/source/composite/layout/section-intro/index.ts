@@ -1,7 +1,2 @@
-import { default as small } from './small';
-import { default as wide } from './wide';
-
-export default {
-  small,
-  wide,
-};
+export { default as small } from './small';
+export { default as wide } from './wide';

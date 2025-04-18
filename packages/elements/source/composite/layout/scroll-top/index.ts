@@ -41,7 +41,7 @@ const STYLES_SCROLL_TOP_ELEMENT = `
 //   }
 // }
 
-const CreateScrollTopElement = (props: TypeScrollTopProps) =>
+export default (props: TypeScrollTopProps) =>
   (() => {
     const { isFixed = false } = props;
     const declaration = document.createElement('div');
@@ -138,13 +138,9 @@ const CreateScrollTopElement = (props: TypeScrollTopProps) =>
 
     return {
       element: declaration,
+      styles: STYLES_SCROLL_TOP_ELEMENT,
       events: {
         load,
       },
     };
   })();
-
-export default {
-  CreateElement: CreateScrollTopElement,
-  Styles: STYLES_SCROLL_TOP_ELEMENT,
-};

@@ -19,7 +19,7 @@ export const token = tokenNamespace;
 export const webComponents = webComponentsNamespace;
 export const utilities = utilitiesNamespace;
 
-export const outputStyles: string = {
+export const outputStyles = {
   ...typographyNamespace.fontFace.browserString,
   ...utilitiesNamespace.transform.processNestedObjects(accessibilityNamespace),
   ...utilitiesNamespace.transform.processNestedObjects(animationsNamespace),

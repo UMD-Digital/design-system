@@ -1,3 +1,6 @@
+import postcss from 'postcss';
+import { convertToCSS } from './transform';
+
 /**
  * @module utilities/create
  * Provides utilities for creating JSS objects.
@@ -45,12 +48,10 @@ export const jssObjectFromString = (cssString: string): Record<string, any> => {
         return acc;
       }
 
-      // Convert kebab-case to camelCase
       const camelProperty = property.replace(/-([a-z])/g, (g) =>
         g[1].toUpperCase(),
       );
 
-      // Convert numeric strings to numbers where appropriate
       const processedValue = value.match(/^\d+$/)
         ? parseInt(value, 10)
         : value.match(/^\d*\.\d+$/)
@@ -62,4 +63,43 @@ export const jssObjectFromString = (cssString: string): Record<string, any> => {
         [camelProperty]: processedValue,
       };
     }, {});
+};
+
+/**
+ * Creates a stylesheet string from a JSS object.
+ * @param {Object} stylesObject Object of CSS properties
+ * @returns {string} The stylesheet string with converted properties
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * await Styles.utilities.create.styleSheetString({
+ *   ...Styles.utilities.transform.processNestedObjects(Styles.element),
+ *   ...Styles.utilities.transform.processNestedObjects(Styles.layout),
+ * })
+ * ```
+ * @since 1.2.0
+ */
+
+export const styleSheetString = async (stylesObject: Record<string, any>) => {
+  const cssString = Object.entries(stylesObject)
+    .map(([selector, properties]) => {
+      if (typeof properties !== 'object' || properties === null) {
+        return '';
+      }
+
+      const className = selector.startsWith('.')
+        ? selector.substring(1)
+        : selector;
+      const jssObject = {
+        className,
+        ...(properties as Record<string, unknown>),
+      };
+
+      return convertToCSS(jssObject);
+    })
+    .filter(Boolean)
+    .join('\n\n');
+
+  const result = await postcss().process(cssString, { from: undefined });
+  return result.css;
 };

@@ -31,10 +31,44 @@ const convertPropertyToKebabCase = (property: string): string => {
  * @returns {string} The formatted CSS value
  */
 const formatCssValue = (value: any): string => {
+  if (value === null || value === undefined) {
+    return '';
+  }
+
   if (typeof value === 'number' && value !== 0) {
     return `${value}px`;
   }
+
+  if (typeof value === 'object' && !Array.isArray(value)) {
+    return '';
+  }
+
   return String(value);
+};
+
+/**
+ * Helper function to parse media query expressions that might have embedded objects
+ * @param {string} property The property that might contain a media query
+ * @returns {string | null} Parsed media query or null if invalid
+ */
+const parseMediaQuery = (property: string): string | null => {
+  if (!property.startsWith('@media')) {
+    return null;
+  }
+
+  let mediaCondition = property.substring(7).trim();
+
+  if (mediaCondition.includes('[object Object]')) {
+    return null;
+  }
+
+  mediaCondition = mediaCondition.replace(/\$\{.*?\}/g, '');
+
+  if (!mediaCondition || mediaCondition === '()' || mediaCondition === '( )') {
+    return null;
+  }
+
+  return mediaCondition;
 };
 
 /**
@@ -113,14 +147,14 @@ export const processNestedObjects = <T extends object>(
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * const css = Styles.utilities.transform.convertToCSS(animation.loader.dots);
  * ```
- * @since 1.1.1
+ * @since 1.2.1
  */
 export const convertToCSS = (jssObject: JssObject): string => {
-  if (!jssObject || typeof jssObject !== 'object') {
-    return '';
-  }
-
-  if (!('className' in jssObject)) {
+  if (
+    !jssObject ||
+    typeof jssObject !== 'object' ||
+    !('className' in jssObject)
+  ) {
     return '';
   }
 
@@ -130,70 +164,236 @@ export const convertToCSS = (jssObject: JssObject): string => {
     ? className.map((name) => `.${name}`).join(', ')
     : `.${className}`;
 
-  const standardProps: string[] = [];
-  const nestedRules: string[] = [];
+  const standardProps: Record<string, any> = {};
+  const atRules: Array<[string, Record<string, any>]> = [];
+  const nestedSelectors: Array<[string, Record<string, any>]> = [];
 
   Object.entries(styles).forEach(([property, value]) => {
-    if (value === null || value === undefined) {
+    if (value == null) {
       return;
     }
 
-    // Handle nested rules (like media queries, pseudo-selectors)
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      // Handle @media, @keyframes, etc.
+    if (typeof value === 'object' && !Array.isArray(value)) {
       if (property.startsWith('@')) {
-        const nestedCss = Object.entries(value)
-          .map(([nestedSelector, nestedValue]) => {
-            if (typeof nestedValue === 'object' && nestedValue !== null) {
-              const nestedDeclarations = Object.entries(nestedValue)
-                .map(
-                  ([nestedProp, nestedVal]) =>
-                    `${convertPropertyToKebabCase(
-                      nestedProp,
-                    )}: ${formatCssValue(nestedVal)};`,
-                )
-                .join('\n    ');
-
-              return `  ${nestedSelector} {\n    ${nestedDeclarations}\n  }`;
+        if (property === '@media' || property === '@container') {
+          Object.entries(value).forEach(([condition, queryStyles]) => {
+            if (typeof condition === 'object' || !condition) {
+              return;
             }
-            return '';
-          })
-          .filter(Boolean)
-          .join('\n');
 
-        nestedRules.push(`${property} {\n${nestedCss}\n}`);
+            const parsedCondition = parseMediaQuery(`@media ${condition}`);
+            if (!parsedCondition) {
+              return;
+            }
+
+            const queryPrefix =
+              property === '@container' ? '@container' : '@media';
+            atRules.push([
+              `${queryPrefix} ${condition}`,
+              queryStyles as Record<string, any>,
+            ]);
+          });
+        } else {
+          atRules.push([property, value as Record<string, any>]);
+        }
       } else {
-        // Handle pseudo-classes and other nested selectors
-        const nestedDeclarations = Object.entries(value)
-          .map(
-            ([nestedProp, nestedVal]) =>
-              `  ${convertPropertyToKebabCase(nestedProp)}: ${formatCssValue(
-                nestedVal,
-              )};`,
-          )
-          .join('\n');
-
-        nestedRules.push(`${selector}${property} {\n${nestedDeclarations}\n}`);
+        nestedSelectors.push([property, value as Record<string, any>]);
       }
     } else {
-      standardProps.push(
-        `${convertPropertyToKebabCase(property)}: ${formatCssValue(value)};`,
-      );
+      standardProps[property] = value;
     }
   });
 
-  let result = '';
+  const blocks: string[] = [];
 
-  if (standardProps.length > 0) {
-    result += `${selector} {\n  ${standardProps.join('\n  ')}\n}`;
+  function createRules(properties: Record<string, any>): string {
+    return Object.entries(properties)
+      .filter(
+        ([_, value]) =>
+          value != null && (typeof value !== 'object' || Array.isArray(value)),
+      )
+      .map(
+        ([prop, value]) =>
+          `  ${convertPropertyToKebabCase(prop)}: ${formatCssValue(value)};`,
+      )
+      .join('\n');
   }
 
-  if (nestedRules.length > 0) {
-    if (result) {
-      result += '\n';
+  function createBlock(
+    selector: string,
+    properties: Record<string, any>,
+  ): string {
+    const rules = createRules(properties);
+    return rules ? `${selector} {\n${rules}\n}` : '';
+  }
+
+  function processNestedSelector(
+    baseSelector: string,
+    nestedSelector: string,
+    properties: Record<string, any>,
+  ): string {
+    const selectors = nestedSelector.split(',').map((s) => s.trim());
+    const fullSelector = selectors
+      .map((s) =>
+        s.includes('&')
+          ? s.replace(/&/g, baseSelector)
+          : `${baseSelector} ${s}`,
+      )
+      .join(', ');
+
+    const directProps: Record<string, any> = {};
+    const mediaQueries: Array<[string, string, Record<string, any>]> = [];
+    const childSelectors: Array<[string, Record<string, any>]> = [];
+
+    Object.entries(properties).forEach(([prop, val]) => {
+      const mediaCondition = parseMediaQuery(prop);
+      if (mediaCondition) {
+        if (typeof val === 'object' && val !== null) {
+          const mediaRules = Object.entries(val)
+            .filter(
+              ([_, propVal]) =>
+                typeof propVal !== 'object' || Array.isArray(propVal),
+            )
+            .reduce((acc, [mediaProp, mediaVal]) => {
+              acc[mediaProp] = mediaVal;
+              return acc;
+            }, {} as Record<string, any>);
+
+          if (Object.keys(mediaRules).length > 0) {
+            mediaQueries.push([mediaCondition, fullSelector, mediaRules]);
+          }
+        }
+      } else if (
+        typeof val === 'object' &&
+        val !== null &&
+        !Array.isArray(val)
+      ) {
+        childSelectors.push([prop, val as Record<string, any>]);
+      } else {
+        directProps[prop] = val;
+      }
+    });
+
+    const result: string[] = [];
+
+    const mainBlock = createBlock(fullSelector, directProps);
+    if (mainBlock) {
+      result.push(mainBlock);
     }
-    result += nestedRules.join('\n');
+
+    mediaQueries.forEach(([condition, selector, rules]) => {
+      const rulesText = createRules(rules);
+      if (rulesText) {
+        result.push(
+          `@media ${condition} {\n  ${selector} {\n${rulesText
+            .split('\n')
+            .map((line) => '  ' + line)
+            .join('\n')}\n  }\n}`,
+        );
+      }
+    });
+
+    childSelectors.forEach(([childSelector, childStyles]) => {
+      const mediaCondition = parseMediaQuery(childSelector);
+      if (mediaCondition) {
+        const rulesText = createRules(childStyles);
+        if (rulesText) {
+          result.push(
+            `@media ${mediaCondition} {\n  ${fullSelector} {\n${rulesText
+              .split('\n')
+              .map((line) => '  ' + line)
+              .join('\n')}\n  }\n}`,
+          );
+        }
+      } else if (childSelector.includes('&')) {
+        const processedSelector = processNestedSelector(
+          fullSelector,
+          childSelector,
+          childStyles,
+        );
+        if (processedSelector) {
+          result.push(processedSelector);
+        }
+      } else {
+        const expandedChildSelector = `${fullSelector} ${childSelector}`;
+        const childBlock = createBlock(expandedChildSelector, childStyles);
+        if (childBlock) {
+          result.push(childBlock);
+        }
+      }
+    });
+
+    return result.join('\n\n');
   }
 
-  return result;
+  const mainBlock = createBlock(selector, standardProps);
+  if (mainBlock) {
+    blocks.push(mainBlock);
+  }
+
+  nestedSelectors.forEach(([nestedSelector, nestedStyles]) => {
+    const nestedBlock = processNestedSelector(
+      selector,
+      nestedSelector,
+      nestedStyles,
+    );
+    if (nestedBlock) {
+      blocks.push(nestedBlock);
+    }
+  });
+
+  atRules.forEach(([rule, ruleStyles]) => {
+    if (rule.startsWith('@media') || rule.startsWith('@container')) {
+      if (typeof ruleStyles === 'object' && ruleStyles !== null) {
+        const queryBlocks: string[] = [];
+
+        Object.entries(ruleStyles).forEach(([querySelector, queryStyles]) => {
+          if (typeof queryStyles === 'object' && queryStyles !== null) {
+            const expandedSelector =
+              querySelector === 'self'
+                ? selector
+                : querySelector.startsWith('.')
+                ? querySelector
+                : `${selector} ${querySelector}`;
+
+            const rules = createRules(queryStyles as Record<string, any>);
+            if (rules) {
+              queryBlocks.push(
+                `  ${expandedSelector} {\n${rules
+                  .split('\n')
+                  .map((line) => '  ' + line)
+                  .join('\n')}\n  }`,
+              );
+            }
+          }
+        });
+
+        if (queryBlocks.length > 0) {
+          blocks.push(`${rule} {\n${queryBlocks.join('\n\n')}\n}`);
+        }
+      }
+    } else {
+      const nestedRules = Object.entries(ruleStyles)
+        .map(([nestedSelector, nestedValue]) => {
+          if (typeof nestedValue === 'object' && nestedValue !== null) {
+            const rules = createRules(nestedValue as Record<string, any>);
+            if (rules) {
+              return `  ${nestedSelector} {\n${rules
+                .split('\n')
+                .map((line) => '  ' + line)
+                .join('\n')}\n  }`;
+            }
+          }
+          return '';
+        })
+        .filter(Boolean)
+        .join('\n');
+
+      if (nestedRules) {
+        blocks.push(`${rule} {\n${nestedRules}\n}`);
+      }
+    }
+  });
+
+  return blocks.join('\n\n');
 };

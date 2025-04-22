@@ -14,16 +14,6 @@ const attributes = Attributes.handler.combine(
   Attributes.handler.observe.resize({
     callback: (element) => element.events?.resize(),
   }),
-  Attributes.handler.observe.visuallyPosition({
-    callback: (element, topPosition) =>
-      element.events?.setTopPosition({ value: topPosition }),
-  }),
-  // Deprecated
-  Attributes.handler.observe.visuallyPosition({
-    name: Attributes.names.LAYOUT_STICKY_TOP,
-    callback: (element, topPosition) =>
-      element.events?.setTopPosition({ value: topPosition }),
-  }),
 );
 
 const createComponent = (element: HTMLElement) => {

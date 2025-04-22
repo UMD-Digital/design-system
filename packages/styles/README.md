@@ -1,6 +1,6 @@
 # University of Maryland Styles Library
 
-[![Styles Version](https://img.shields.io/badge/Styles-v1.1.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.2.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
 A comprehensive collection of JSS objects that can be used inline with JavaScript or converted to CSS strings using utility functions. This library provides the official University of Maryland design tokens and styling patterns for consistent branding across all digital properties.
 

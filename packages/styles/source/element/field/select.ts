@@ -76,7 +76,7 @@ export const select = {
  * ```text
  * Use 'umd-field-select-wrapper' instead of 'umd-forms-select-wrapper'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const selectWrapper: JssObject = create.jssObject({
   backgroundColor: color.white,

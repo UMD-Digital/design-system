@@ -27,7 +27,7 @@ const baseSmallScreen = {
  * const customGrid = { ...Styles.layout.grid.base.two, customProp: 'value' }
  * ```
  * @note This is a style object that doesn't generate CSS classes directly, but provides base grid styles that can be applied programmatically.
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const base = {
   two: {
@@ -73,7 +73,7 @@ export const base = {
  * ```text
  * Use 'umd-layout-grid-columns-two' instead of 'umd-grid'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsTwo: JssObject = create.jssObject({
   ...base.two,
@@ -101,7 +101,7 @@ export const columnsTwo: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-columns-three' instead of 'umd-grid-three'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsThree: JssObject = create.jssObject({
   ...base.three,
@@ -129,7 +129,7 @@ export const columnsThree: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-columns-four' instead of 'umd-grid-four'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsFour: JssObject = create.jssObject({
   ...base.four,
@@ -153,7 +153,7 @@ export const columnsFour: JssObject = create.jssObject({
  * ```css
  * class="umd-layout-grid-columns-stacked"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const stacked: JssObject = create.jssObject({
   display: 'flex',

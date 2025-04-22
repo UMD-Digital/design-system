@@ -52,7 +52,7 @@ const watermarkChild = {
  * ```text
  * Use 'umd-text-decoration-watermark' instead of 'umd-watermark'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const watermark: JssObject = create.jssObject({
   className: [
@@ -85,7 +85,7 @@ export const watermark: JssObject = create.jssObject({
  * ```text
  * Use 'umd-text-decoration-watermark-dark' instead of 'umd-watermark-dark'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const watermarkDark: JssObject = create.jssObject({
   ...watermark,
@@ -120,7 +120,7 @@ export const watermarkDark: JssObject = create.jssObject({
  * ```text
  * Use 'umd-text-decoration-eyebrow' instead of 'umd-eyebrow-ribbon'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const ribbon: JssObject = create.jssObject({
   className: [

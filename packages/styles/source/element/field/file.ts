@@ -52,7 +52,7 @@ const file = {
  * ```text
  * Use 'umd-field-file-wrapper' instead of 'umd-forms-file-wrapper'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fileWrapper: JssObject = create.jssObject({
   backgroundColor: color.white,

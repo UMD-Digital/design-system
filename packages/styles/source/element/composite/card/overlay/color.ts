@@ -106,7 +106,7 @@ const colorContainerBase = {
  * ```css
  * class="umd-element-composite-card-overlay-color-light"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
@@ -130,7 +130,7 @@ export const light: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-overlay-color-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,

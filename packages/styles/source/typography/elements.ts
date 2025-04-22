@@ -29,7 +29,7 @@ const breakpointDesktop = media.queries.desktop.min;
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.elements.eyebrow };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const eyebrow = {
   fontWeight: 700,
@@ -52,7 +52,7 @@ export const eyebrow = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.elements.labelMedium };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const labelMedium = {
   fontFamily: font.family['sans'],
@@ -83,7 +83,7 @@ export const labelMedium = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.elements.labelSmall };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const labelSmall = {
   fontFamily: font.family['sans'],
@@ -104,7 +104,7 @@ export const labelSmall = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.elements.interativeMedium };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const interativeMedium = {
   fontFamily: font.family['sans'],
@@ -137,7 +137,7 @@ export const interativeMedium = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.elements.interativeSmall };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const interativeSmall = {
   fontFamily: font.family['sans'],
@@ -161,7 +161,7 @@ export const interativeSmall = {
  * // Use as a complete JSS object including className
  * Styles.typography.elements.fonts.eyebrow
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fonts = {
   eyebrow: create.jssObject({

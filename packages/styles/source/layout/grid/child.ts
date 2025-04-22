@@ -26,7 +26,7 @@ const classNamePrefix = 'umd-layout-grid-child';
  * ```text
  * Use 'umd-layout-grid-child-size-double' instead of 'umd-grid-column-double'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const sizeDouble: JssObject = create.jssObject({
   [`@media (${media.queries.large.min})`]: {
@@ -52,7 +52,7 @@ export const sizeDouble: JssObject = create.jssObject({
  * ```css
  * class="umd-layout-grid-child-start-second"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const startSecond: JssObject = create.jssObject({
   [`@media (${media.queries.highDef.min})`]: {

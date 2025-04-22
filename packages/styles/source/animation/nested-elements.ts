@@ -19,7 +19,7 @@ import type { JssObject } from '../_types';
  * ```css
  * class="umd-animation-links-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const linksDark: JssObject = {
   className: `umd-animation-links-dark`,
@@ -40,7 +40,7 @@ export const linksDark: JssObject = {
  * ```css
  * class="umd-animation-links-white"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const linksWhite: JssObject = {
   className: `umd-animation-links-white`,
@@ -65,7 +65,7 @@ export const linksWhite: JssObject = {
  * ```text
  * Use 'umd-animation-grid' instead of 'umd-grid-animation'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const gridSetup: JssObject = create.jssObject({
   '& > *': {

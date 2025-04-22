@@ -150,7 +150,7 @@ const linkImageScaled = {
  * ```css
  * class="umd-asset-image-caption"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const caption: JssObject = create.jssObject({
   ...sans.min,
@@ -178,7 +178,7 @@ export const caption: JssObject = create.jssObject({
  * ```css
  * class="umd-asset-image-wrapper"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const wrapper: JssObject = create.jssObject({
   className: `${classNamePrefix}-wrapper`,
@@ -199,7 +199,7 @@ export const wrapper: JssObject = create.jssObject({
  * ```css
  * class="umd-asset-image-wrapper-scaled"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const wrapperScaled: JssObject = create.jssObject({
   className: `${classNamePrefix}-wrapper-scaled`,
@@ -221,7 +221,7 @@ export const wrapperScaled: JssObject = create.jssObject({
  * ```css
  * class="umd-asset-image-aspect-standard"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const aspectStandard: JssObject = create.jssObject({
   className: `${classNamePrefix}-aspect-standard`,
@@ -246,7 +246,7 @@ export const aspectStandard: JssObject = create.jssObject({
  * ```css
  * class="umd-asset-image-aspect-square"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const aspectSquare: JssObject = create.jssObject({
   className: `${classNamePrefix}-aspect-square`,

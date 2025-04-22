@@ -39,7 +39,7 @@ const box = {
  * ```text
  * Use 'umd-layout-background-highlight' instead of 'umd-layout-background-box'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const white: JssObject = create.jssObject({
   ...box,
@@ -67,7 +67,7 @@ export const white: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-background-highlight-light' instead of 'umd-layout-background-box'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const light: JssObject = create.jssObject({
   ...box,
@@ -96,7 +96,7 @@ export const light: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-background-highlight-dark' instead of 'umd-layout-background-box[theme="dark"]'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const dark: JssObject = create.jssObject({
   ...box,

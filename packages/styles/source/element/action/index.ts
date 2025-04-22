@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.button.fullScreen
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as button from './button';
 
@@ -21,7 +21,7 @@ export * as button from './button';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.icon.small
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as icon from './icon';
 
@@ -32,7 +32,7 @@ export * as icon from './icon';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.outline.normal
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as outline from './outline';
 
@@ -43,7 +43,7 @@ export * as outline from './outline';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.primary.normal
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as primary from './primary';
 
@@ -54,6 +54,6 @@ export * as primary from './primary';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action.secondary.normal
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as secondary from './secondary';

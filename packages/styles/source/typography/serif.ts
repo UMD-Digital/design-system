@@ -65,7 +65,7 @@ const sizeMedium = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.serif.maxium };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const maxium = {
   ...base,
@@ -94,7 +94,7 @@ export const maxium = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.serif.extralarge };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const extralarge = {
   ...base,
@@ -122,7 +122,7 @@ export const extralarge = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.serif.larger };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const larger = {
   ...base,
@@ -149,7 +149,7 @@ export const larger = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.serif.large };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const large = {
   ...base,
@@ -176,7 +176,7 @@ export const large = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.serif.medium };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const medium = {
   ...base,
@@ -197,7 +197,7 @@ export const medium = {
  * // Use as a complete JSS object including className
  * Styles.typography.serif.fonts.large
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fonts = {
   maximum: create.jssObject({

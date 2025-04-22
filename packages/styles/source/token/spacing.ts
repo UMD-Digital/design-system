@@ -11,7 +11,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.spacingScale[4] // '16px'
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const spacingScale = {
   0: '0',
@@ -40,7 +40,7 @@ export const spacingScale = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.maxWidth.normal // '1384px'
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const maxWidth = {
   max: '1728px',
@@ -58,7 +58,7 @@ export const maxWidth = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.spacing.md // '24px'
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export default {
   min: '8px',

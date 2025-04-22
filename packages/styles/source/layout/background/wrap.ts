@@ -34,7 +34,7 @@ const box = {
  * ```css
  * class="umd-layout-background-wrap"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const white: JssObject = create.jssObject({
   ...box,
@@ -58,7 +58,7 @@ export const white: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-background-wrap-light' instead of 'umd-forms-layout'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const light: JssObject = create.jssObject({
   ...box,
@@ -83,7 +83,7 @@ export const light: JssObject = create.jssObject({
  * ```css
  * class="umd-layout-background-wrap-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const dark: JssObject = create.jssObject({
   ...box,

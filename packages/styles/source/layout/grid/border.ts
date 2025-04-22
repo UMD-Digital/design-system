@@ -36,7 +36,7 @@ const boarderBase = {
  * ```text
  * Use 'umd-layout-grid-border-two' instead of 'umd-grid-border'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsTwo: JssObject = create.jssObject({
   ...base.two,
@@ -83,7 +83,7 @@ export const columnsTwo: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-border-three' instead of 'umd-grid-three-border'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsThree: JssObject = create.jssObject({
   ...base.three,
@@ -134,7 +134,7 @@ export const columnsThree: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-border-four' instead of 'umd-grid-four-border'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsFour: JssObject = create.jssObject({
   ...base.four,

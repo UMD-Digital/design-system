@@ -26,7 +26,7 @@ const classNamePrefix = 'umd-layout-space-columns';
  * ```text
  * Use 'umd-layout-space-columns-left' instead of 'umd-layout-interior-navigation'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const left: JssObject = create.jssObject({
   [`@media (${media.queries.tablet.min})`]: {
@@ -73,7 +73,7 @@ export const left: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-space-columns-right' instead of 'umd-layout-interior-sidebar'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const right: JssObject = create.jssObject({
   ...left,

@@ -203,7 +203,7 @@ const classNamePrefix = 'umd-animation-line';
  * ```text
  * Use 'umd-animation-line-slide-red' instead of 'umd-slidein-underline-red'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const slideUnderRed: JssObject = create.jssObject({
@@ -231,7 +231,7 @@ export const slideUnderRed: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-slide-black' instead of 'umd-slidein-underline-black'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const slideUnderBlack: JssObject = create.jssObject({
@@ -259,7 +259,7 @@ export const slideUnderBlack: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-slide-white' instead of 'umd-slidein-underline-white'
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const slideUnderWhite: JssObject = create.jssObject({
@@ -287,7 +287,7 @@ export const slideUnderWhite: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-slide-gold' instead of 'umd-slidein-underline-gold'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const slideUnderGold: JssObject = create.jssObject({
@@ -315,7 +315,7 @@ export const slideUnderGold: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-slide-gray-red' instead of 'umd-slidein-underline-gray-red'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const slideUnderGrayRed: JssObject = create.jssObject({
@@ -343,7 +343,7 @@ export const slideUnderGrayRed: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-slide-graydark-red' instead of 'umd-slidein-underline-graydark-red'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const slideUnderGrayDarkRed: JssObject = create.jssObject({
@@ -371,7 +371,7 @@ export const slideUnderGrayDarkRed: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-fade-red' instead of 'umd-fadein-underline-red'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const fadeUnderRed: JssObject = create.jssObject({
@@ -402,7 +402,7 @@ export const fadeUnderRed: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-fade-gray' instead of 'umd-fadein-underline-gray'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const fadeUnderGray: JssObject = create.jssObject({
@@ -433,7 +433,7 @@ export const fadeUnderGray: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-fade-gold' instead of 'umd-fadein-underline-gold'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const fadeUnderGold: JssObject = create.jssObject({
@@ -464,7 +464,7 @@ export const fadeUnderGold: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-fade-black' instead of 'umd-fadein-underline-black'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const fadeUnderBlack: JssObject = create.jssObject({
@@ -495,7 +495,7 @@ export const fadeUnderBlack: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-line-fade-white' instead of 'umd-fadein-underline-white'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const fadeUnderWhite: JssObject = create.jssObject({
@@ -522,7 +522,7 @@ export const fadeUnderWhite: JssObject = create.jssObject({
  * ```css
  * class="umd-fadein-simple-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const fadeInSimpleDark: JssObject = create.jssObject({
@@ -542,7 +542,7 @@ export const fadeInSimpleDark: JssObject = create.jssObject({
  * ```css
  * class="umd-fadein-simple-light"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const fadeInSimpleLight: JssObject = create.jssObject({

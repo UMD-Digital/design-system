@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.asset.gif.toggle
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as gif from './gif';
 
@@ -22,6 +22,6 @@ export * as gif from './gif';
  * Styles.element.asset.image.wrapper
  * Styles.element.asset.image.aspectSquare
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as image from './image';

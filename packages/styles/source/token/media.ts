@@ -8,7 +8,7 @@
  * @type {Object<string, {min: number, max?: number}>}
  * @property {Object} small - Small screen breakpoint (320px-479px)
  * @property {Object} medium - Medium screen breakpoint (480px-649px)
- * @property {Object} large - Large screen breakpoint (650px-767px) 
+ * @property {Object} large - Large screen breakpoint (650px-767px)
  * @property {Object} tablet - Tablet breakpoint (768px-1023px)
  * @property {Object} desktop - Desktop breakpoint (1024px-1199px)
  * @property {Object} highDef - High-definition screen breakpoint (1200px-1499px)
@@ -18,7 +18,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.media.breakpointValues.desktop.min // 1024
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const breakpointValues = {
   small: { min: 320, max: 479 },
@@ -45,7 +45,7 @@ export const breakpointValues = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.media.breakpoints.desktop.min // "1024px"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const breakpoints = {
   small: {
@@ -95,7 +95,7 @@ export const breakpoints = {
  *   }
  * };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const queries = {
   small: {

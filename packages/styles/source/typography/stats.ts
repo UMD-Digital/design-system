@@ -28,7 +28,7 @@ const breakpointDesktop = media.queries.desktop.min;
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.stats.large };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const large = {
   fontFamily: font.family['campaign'],
@@ -60,7 +60,7 @@ export const large = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.stats.medium };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const medium = {
   fontFamily: font.family['campaign'],
@@ -92,7 +92,7 @@ export const medium = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.stats.small };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const small = {
   fontFamily: font.family['campaign'],
@@ -114,7 +114,7 @@ export const small = {
  * // Use as a complete JSS object including className
  * Styles.typography.stats.fonts.statLarge
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fonts = {
   statLarge: create.jssObject({

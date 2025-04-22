@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.alignment
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as alignment from './alignment';
 
@@ -21,7 +21,7 @@ export * as alignment from './alignment';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.background
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as background from './background';
 
@@ -32,7 +32,7 @@ export * as background from './background';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as grid from './grid';
 
@@ -43,6 +43,6 @@ export * as grid from './grid';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as space from './space';

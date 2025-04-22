@@ -221,7 +221,7 @@ const darkContainerStyles = {
  * ```css
  * class="umd-element-composite-card-list-light"
  * ```
- * @since 1.9.0
+ * @since 1.1.1
  */
 export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
@@ -243,7 +243,7 @@ export const light: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-list-dark"
  * ```
- * @since 1.9.0
+ * @since 1.1.1
  */
 export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,
@@ -268,7 +268,7 @@ export const dark: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-list-event-light"
  * ```
- * @since 1.9.0
+ * @since 1.1.1
  */
 export const eventLight: JssObject = create.jssObject({
   className: `${classNamePrefix}-event-light`,
@@ -292,7 +292,7 @@ export const eventLight: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-list-event-dark"
  * ```
- * @since 1.9.0
+ * @since 1.1.1
  */
 
 export const eventDark = create.jssObject({
@@ -319,7 +319,7 @@ export const eventDark = create.jssObject({
  * ```css
  * class="umd-element-composite-card-list-person"
  * ```
- * @since 1.9.0
+ * @since 1.1.1
  */
 
 export const person = create.jssObject({
@@ -342,7 +342,7 @@ export const person = create.jssObject({
  * ```css
  * class="umd-element-composite-card-list-person-dark"
  * ```
- * @since 1.9.0
+ * @since 1.1.1
  */
 
 export const personDark = create.jssObject({

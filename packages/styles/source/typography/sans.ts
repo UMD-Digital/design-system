@@ -113,7 +113,7 @@ const sizeMin = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.maxium };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const maxium = {
   fontFamily: font.family['sans'],
@@ -134,7 +134,7 @@ export const maxium = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.largest };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const largest = {
   fontFamily: font.family['sans'],
@@ -160,7 +160,7 @@ export const largest = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.extraLarge };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const extraLarge = {
   fontFamily: font.family['sans'],
@@ -184,7 +184,7 @@ export const extraLarge = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.larger };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const larger = {
   fontFamily: font.family['sans'],
@@ -209,7 +209,7 @@ export const larger = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.scalingLarger };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const scalingLarger = {
   fontFamily: font.family['sans'],
@@ -234,7 +234,7 @@ export const scalingLarger = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.large };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const large = {
   fontFamily: font.family['sans'],
@@ -251,7 +251,7 @@ export const large = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.medium };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const medium = {
   fontFamily: font.family['sans'],
@@ -276,7 +276,7 @@ export const medium = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.small };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const small = {
   fontFamily: font.family['sans'],
@@ -300,7 +300,7 @@ export const small = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.smaller };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const smaller = {
   fontFamily: font.family['sans'],
@@ -324,7 +324,7 @@ export const smaller = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.min };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const min = {
   fontFamily: font.family['sans'],
@@ -340,7 +340,7 @@ export const min = {
  * // Use in object spread syntax
  * const myStyle = { ...Styles.typography.sans.scalingMin };
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const scalingMin = {
   ...min,
@@ -368,7 +368,7 @@ export const scalingMin = {
  * // Use as a complete JSS object including className
  * Styles.typography.sans.fonts.large
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fonts = {
   maximum: create.jssObject({
@@ -428,7 +428,7 @@ export const fonts = {
  * // Use as a complete JSS object with container query scaling
  * Styles.typography.sans.scalingFonts.larger
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const scalingFonts = {
   larger: create.jssObject({
@@ -454,7 +454,7 @@ export const scalingFonts = {
  * // Use transformed variants
  * Styles.typography.sans.transformations.extraLargeBold
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const transformations = {
   largestUppercase: create.jssObject({

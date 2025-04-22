@@ -23,7 +23,7 @@ import type { JssObject } from '../../_types';
  * ```text
  * Use 'umd-layout-grid-masonry' instead of 'umd-grid-gap-masonry'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const twoColumn: JssObject = create.jssObject({
   display: 'grid',

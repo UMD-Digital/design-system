@@ -112,7 +112,7 @@ const createContainerStyles = (customStyles = {}) => {
  * ```css
  * class="umd-element-composite-card-overlay-image-element-quote"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const quoateContainer: JssObject = create.jssObject({
   className: `${classNamePrefix}-element-quote`,
@@ -137,7 +137,7 @@ export const quoateContainer: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-overlay-image"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const tint: JssObject = create.jssObject({
   className: `${classNamePrefix}`,

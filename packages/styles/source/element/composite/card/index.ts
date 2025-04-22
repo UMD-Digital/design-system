@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.light
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as block from './block';
 
@@ -21,7 +21,7 @@ export * as block from './block';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.list.light
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as list from './list';
 
@@ -32,6 +32,6 @@ export * as list from './list';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.color.light
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as overlay from './overlay';

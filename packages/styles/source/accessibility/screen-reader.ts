@@ -13,7 +13,7 @@ import type { JssObject } from '../_types';
  * ```css
  * class="sr-only"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const only: JssObject = create.jssObject({
   className: 'sr-only',

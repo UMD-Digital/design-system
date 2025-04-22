@@ -59,7 +59,7 @@ export const checkbox = {
  * ```text
  * Use 'umd-field-checkbox-wrapper' instead of 'umd-forms-choices-wrapper'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const checkboxWrapper: JssObject = create.jssObject({
   ...baseInputChoiceWrapper,

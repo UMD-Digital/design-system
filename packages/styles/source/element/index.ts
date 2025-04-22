@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.action
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as action from './action';
 
@@ -21,7 +21,7 @@ export * as action from './action';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.asset
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as asset from './asset';
 
@@ -32,7 +32,7 @@ export * as asset from './asset';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as composite from './composite';
 
@@ -43,7 +43,7 @@ export * as composite from './composite';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.embed
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as embed from './embed';
 
@@ -54,7 +54,7 @@ export * as embed from './embed';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.event
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as event from './event';
 
@@ -65,7 +65,7 @@ export * as event from './event';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as field from './field';
 
@@ -76,7 +76,7 @@ export * as field from './field';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.form
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as form from './form';
 
@@ -87,7 +87,7 @@ export * as form from './form';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.list
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as list from './list';
 
@@ -98,7 +98,7 @@ export * as list from './list';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.table
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as table from './table';
 
@@ -109,6 +109,6 @@ export * as table from './table';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as text from './text';

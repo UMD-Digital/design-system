@@ -14,7 +14,7 @@ import * as vertical from './vertical';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.columns
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { columns };
 
@@ -25,7 +25,7 @@ export { columns };
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.horizontal
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { horizontal };
 
@@ -36,6 +36,6 @@ export { horizontal };
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.space.vertical
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { vertical };

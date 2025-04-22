@@ -58,7 +58,7 @@ export const lockFull: JssObject = create.jssObject({
  * Use 'umd-layout-space-horizontal-full' instead of 'umd-lock-full'.
  * ```
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing }
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const full: JssObject = create.jssObject({
   ...lockBase,
@@ -95,7 +95,7 @@ export const lock: JssObject = create.jssObject({
  * Use `umd-layout-space-horizontal-larger` instead of `umd-lock`.
  * ```
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export const max: JssObject = create.jssObject({
@@ -133,7 +133,7 @@ export const lockLarge: JssObject = create.jssObject({
  * Use 'umd-layout-space-horizontal-large' instead of 'umd-lock-small'.
  * ```
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const large: JssObject = create.jssObject({
   ...lockBase,
@@ -170,7 +170,7 @@ export const lockNormal: JssObject = create.jssObject({
  * Use 'umd-layout-space-horizontal-normal' instead of 'umd-lock-smaller'.
  * ```
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const normal: JssObject = create.jssObject({
   ...lockBase,
@@ -207,7 +207,7 @@ export const lockSmall: JssObject = create.jssObject({
  * Use'umd-layout-space-horizontal-small' instead of 'umd-lock-extra-small'.
  * ```
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const small: JssObject = create.jssObject({
   ...lockBase,
@@ -244,7 +244,7 @@ export const lockSmallest: JssObject = create.jssObject({
  * Use 'umd-layout-space-horizontal-smallest' instead of 'umd-lock-smallest'.
  * ```
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const smallest: JssObject = create.jssObject({
   ...lockBase,

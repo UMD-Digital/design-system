@@ -126,7 +126,7 @@ const createContainerStyles = (customStyles = {}) => {
  * ```css
  * class="umd-element-composite-card-block-light"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
@@ -147,7 +147,7 @@ export const light: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-block-border"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const border: JssObject = create.jssObject({
   className: `${classNamePrefix}-border`,
@@ -182,7 +182,7 @@ export const border: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-block-border"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const borderDark: JssObject = create.jssObject({
   className: `${classNamePrefix}-border`,
@@ -217,7 +217,7 @@ export const borderDark: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-block-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,
@@ -255,7 +255,7 @@ export const dark: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-block-transparent"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const transparent: JssObject = create.jssObject({
   className: `${classNamePrefix}-transparent`,
@@ -305,7 +305,7 @@ const personImage = {
  * ```css
  * class="umd-element-composite-card-block-person"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const person: JssObject = create.jssObject({
   className: `${classNamePrefix}-person`,
@@ -331,7 +331,7 @@ export const person: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-block-person-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const personDark: JssObject = create.jssObject({
   className: `${classNamePrefix}-person-dark`,

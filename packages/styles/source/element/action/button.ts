@@ -23,7 +23,7 @@ const classNamePrefix = 'umd-action-button';
  * ```css
  * class="umd-action-button-full-screen"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fullScreen: JssObject = create.jssObject({
   className: `${classNamePrefix}-full-screen`,
@@ -65,7 +65,7 @@ export const fullScreen: JssObject = create.jssObject({
  * ```css
  * class="umd-action-button-video-state"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const videoState: JssObject = create.jssObject({
   className: `${classNamePrefix}-video-state`,

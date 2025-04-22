@@ -12,7 +12,7 @@ import { columnsTwo, columnsThree, columnsFour, stacked } from './base';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.border
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as border from './border';
 
@@ -23,7 +23,7 @@ export * as border from './border';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.borderDark
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as borderDark from './border-dark';
 
@@ -34,7 +34,7 @@ export * as borderDark from './border-dark';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.child
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as child from './child';
 
@@ -45,7 +45,7 @@ export * as child from './child';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.gap
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as gap from './gap';
 
@@ -56,7 +56,7 @@ export * as gap from './gap';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.inline
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as inline from './inline';
 
@@ -67,7 +67,7 @@ export * as inline from './inline';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.masonary
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as masonary from './masonary';
 
@@ -78,7 +78,7 @@ export * as masonary from './masonary';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.offset
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as offset from './offset';
 
@@ -89,7 +89,7 @@ export * as offset from './offset';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.columnsTwo
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { columnsTwo };
 
@@ -100,7 +100,7 @@ export { columnsTwo };
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.columnsThree
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { columnsThree };
 
@@ -111,7 +111,7 @@ export { columnsThree };
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.columnsFour
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { columnsFour };
 
@@ -122,6 +122,6 @@ export { columnsFour };
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.layout.grid.stacked
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { stacked };

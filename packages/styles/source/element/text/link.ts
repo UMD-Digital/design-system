@@ -37,7 +37,7 @@ const focusBase = {
  * ```css
  * class="umd-text-link-red"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const red: JssObject = create.jssObject({
   ...base,
@@ -65,7 +65,7 @@ export const red: JssObject = create.jssObject({
  * ```css
  * class="umd-text-link-white"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const white: JssObject = create.jssObject({
   ...base,

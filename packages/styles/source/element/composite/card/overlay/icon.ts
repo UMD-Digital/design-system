@@ -102,7 +102,7 @@ const createContainerStyles = (customStyles = {}) => {
  * ```css
  * class="umd-element-composite-card-overlay-icon-element-container"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const elementIconContainer: JssObject = create.jssObject({
   className: `${classNamePrefix}-element-container`,
@@ -144,7 +144,7 @@ const iconContainerTextBase = {
  * ```css
  * class="umd-element-composite-card-overlay-icon-light"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const light: JssObject = create.jssObject({
   className: `${classNamePrefix}-light`,
@@ -170,7 +170,7 @@ export const light: JssObject = create.jssObject({
  * ```css
  * class="umd-element-composite-card-overlay-icon-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const dark: JssObject = create.jssObject({
   className: `${classNamePrefix}-dark`,

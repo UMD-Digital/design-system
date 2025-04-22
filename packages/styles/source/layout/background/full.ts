@@ -22,7 +22,7 @@ const classNamePrefix = 'umd-layout-background-full';
  * ```text
  * This is a style object that doesn't generate a CSS class directly, but provides padding styles that can be applied to backgrounds programmatically.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const padding = {
   padding: `${spacing['2xl']} 0`,
@@ -52,7 +52,7 @@ export const padding = {
  * ```text
  * Use 'umd-layout-background-full-light' instead of 'umd-layout-background-color'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const light: JssObject = create.jssObject({
   ...padding,
@@ -81,7 +81,7 @@ export const light: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-background-full-dark' instead of 'umd-layout-background-color-dark'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const dark: JssObject = create.jssObject({
   ...padding,

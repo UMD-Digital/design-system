@@ -29,7 +29,7 @@ const classNamePrefix = 'umd-field-input';
  * ```css
  * class="umd-field-input"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const input: JssObject = {
   className: 'umd-field-input',
@@ -126,7 +126,7 @@ const dateTimeWrapperBase = {
  * ```css
  * class="umd-field-input-text"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const text: JssObject = create.jssObject({
   className: [`${classNamePrefix}-text`],
@@ -148,7 +148,7 @@ export const text: JssObject = create.jssObject({
  * ```text
  * Use 'umd-forms-datetime-wrapper' is deprecated, use 'umd-field-input-date-time-wrapper' instead.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const dateTimeWrapper: JssObject = create.jssObject({
   ...dateTimeWrapperBase,
@@ -182,7 +182,7 @@ export const dateTimeWrapper: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.input.timeWrapper
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const timeWrapper: JssObject = create.jssObject({
   ...dateTimeWrapperBase,
@@ -216,7 +216,7 @@ export const timeWrapper: JssObject = create.jssObject({
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.input.searchWrapper
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const searchWrapper: JssObject = create.jssObject({
   position: 'relative',

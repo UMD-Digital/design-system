@@ -22,7 +22,7 @@ const classNamePrefix = 'umd-animation-loader';
  * ```css
  * class="umd-animation-loader-keyframes"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const keyFrameBoxShadow: JssObject = create.jssObject({
   className: `${classNamePrefix}-keyframes`,
@@ -67,7 +67,7 @@ export const loadDots: JssObject = create.jssObject({
  * ```text
  * Use 'umd-animation-loader-dots' instead of 'umd-loader'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const dots: JssObject = create.jssObject({
   className: [

@@ -139,7 +139,7 @@ const advancedBase = {
  * ```text
  * Use 'umd-text-rich-simple' instead of 'umd-text-simple'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const simple: JssObject = create.jssObject({
   ...simpleBase,
@@ -163,7 +163,7 @@ export const simple: JssObject = create.jssObject({
  * ```css
  * class="umd-text-rich-simple-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const simpleDark: JssObject = create.jssObject({
   ...simpleBase,
@@ -187,7 +187,7 @@ export const simpleDark: JssObject = create.jssObject({
  * ```text
  * Use 'umd-text-rich-simple-large' instead of 'umd-text-simple-large'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const simpleLarge: JssObject = create.jssObject({
   ...simpleBase,
@@ -217,7 +217,7 @@ export const simpleLarge: JssObject = create.jssObject({
  * ```css
  * class="umd-text-rich-simple-large-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const simpleLargeDark: JssObject = create.jssObject({
   ...simpleBase,
@@ -244,7 +244,7 @@ export const simpleLargeDark: JssObject = create.jssObject({
  * ```css
  * class="umd-text-rich-simple-scaling"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const simpleScaling: JssObject = create.jssObject({
   ...simpleBase,
@@ -279,7 +279,7 @@ export const simpleScaling: JssObject = create.jssObject({
  * ```css
  * class="umd-text-rich-simple-scaling-dark"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const simpleScalingDark: JssObject = create.jssObject({
   ...simpleBase,
@@ -319,7 +319,7 @@ export const simpleScalingDark: JssObject = create.jssObject({
  * ```text
  * Use 'umd-text-rich-advanced' instead of 'umd-rich-text'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const advanced: JssObject = create.jssObject({
   FontWeight: font.weight.normal,
@@ -369,7 +369,7 @@ export const advanced: JssObject = create.jssObject({
  * ```text
  * Use 'umd-text-rich-advanced-dark' instead of 'umd-rich-text-dark'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const advancedDark: JssObject = create.jssObject({
   ...advanced,

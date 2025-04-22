@@ -283,7 +283,7 @@ const orderedListBase = {
  * class="umd-list-ordered"
  * ```
  *
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const ordered: JssObject = create.jssObject({
   className: `umd-list-ordered`,
@@ -304,7 +304,7 @@ export const ordered: JssObject = create.jssObject({
  * class="umd-list-unordered"
  * ```
  *
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const unordered: JssObject = create.jssObject({
   className: `umd-list-unordered`,

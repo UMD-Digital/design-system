@@ -16,7 +16,7 @@ export * as fontFace from './font-face';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.campaign.fonts
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export * as campaign from './campaign';
@@ -28,7 +28,7 @@ export * as campaign from './campaign';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.elements.fonts
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export * as elements from './elements';
@@ -40,7 +40,7 @@ export * as elements from './elements';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.sans.fonts
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export * as sans from './sans';
@@ -52,7 +52,7 @@ export * as sans from './sans';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.serif.fonts
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export * as serif from './serif';
@@ -64,7 +64,7 @@ export * as serif from './serif';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.stats.fonts
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 
 export * as stats from './stats';

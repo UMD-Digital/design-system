@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.utilities.create
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as create from './create';
 
@@ -21,6 +21,6 @@ export * as create from './create';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.utilities.transform
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as transform from './transform';

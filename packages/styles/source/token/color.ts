@@ -14,7 +14,7 @@ export type BaseColors = typeof baseColors;
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.colorScale.gray[500]
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const colorScale = {
   gray: {
@@ -49,7 +49,7 @@ export const colorScale = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.baseColors.white
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const baseColors = {
   white: '#FFFFFF',
@@ -64,7 +64,7 @@ export const baseColors = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.color.red
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export default {
   red: colorScale.red[500],

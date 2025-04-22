@@ -22,7 +22,7 @@ import type { JssObject } from '../../_types';
  * ```text
  * Use 'text-center' instead of 'umd-layout-text-alignment-center'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const center: JssObject = create.jssObject({
   className: [

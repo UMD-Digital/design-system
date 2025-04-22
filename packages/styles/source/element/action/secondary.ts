@@ -65,7 +65,7 @@ const secondaryBaseLargeIcon = {
  * ```css
  * class="umd-action-secondary"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const normal: JssObject = create.jssObject({
   ...base,
@@ -90,7 +90,7 @@ export const normal: JssObject = create.jssObject({
  * ```css
  * class="umd-action-secondary-large"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const large: JssObject = create.jssObject({
   ...baseLarge,
@@ -118,7 +118,7 @@ export const large: JssObject = create.jssObject({
  * ```css
  * class="umd-action-secondary-white"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const white: JssObject = create.jssObject({
   ...base,
@@ -143,7 +143,7 @@ export const white: JssObject = create.jssObject({
  * ```css
  * class="umd-action-secondary-gold"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const gold: JssObject = create.jssObject({
   ...base,

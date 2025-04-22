@@ -13,7 +13,7 @@ import spacing from './spacing';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.media
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as media from './media';
 
@@ -24,7 +24,7 @@ export * as media from './media';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.font
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as font from './font';
 
@@ -35,7 +35,7 @@ export * as font from './font';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.color
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { color };
 
@@ -46,6 +46,6 @@ export { color };
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.spacing
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export { spacing };

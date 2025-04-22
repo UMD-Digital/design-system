@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.event.meta.container
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as meta from './meta';
 
@@ -21,6 +21,6 @@ export * as meta from './meta';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.event.sign.container
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as sign from './sign';

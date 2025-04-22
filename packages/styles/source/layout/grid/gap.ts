@@ -40,7 +40,7 @@ const paragraphOverwrite = {
  * ```text
  * Use 'umd-layout-grid-gap-two' instead of 'umd-grid-gap'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const two: JssObject = create.jssObject({
   ...base.two,
@@ -78,7 +78,7 @@ export const two: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-gap-three' instead of 'umd-grid-gap-three'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const three: JssObject = create.jssObject({
   ...base.three,
@@ -111,7 +111,7 @@ export const three: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-gap-three-large' instead of 'umd-grid-gap-three-large'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const threeLarge: JssObject = create.jssObject({
   ...base.three,
@@ -145,7 +145,7 @@ export const threeLarge: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-gap-four' instead of 'umd-grid-gap-four'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const four: JssObject = create.jssObject({
   ...base.four,
@@ -178,7 +178,7 @@ export const four: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-gap-four-centered' instead of 'umd-grid-gap-four-center'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fourCentered: JssObject = create.jssObject({
   ...base.four,
@@ -213,7 +213,7 @@ export const fourCentered: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-gap-four-large' instead of 'umd-grid-gap-four-large'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fourLarge: JssObject = create.jssObject({
   ...base.four,
@@ -246,7 +246,7 @@ export const fourLarge: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-gap-four-large-centered' instead of 'umd-grid-gap-four-center'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fourLargeCentered: JssObject = create.jssObject({
   ...base.four,
@@ -280,7 +280,7 @@ export const fourLargeCentered: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-gap-stacked' instead of 'umd-grid-gap-stacked'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const stacked: JssObject = create.jssObject({
   display: 'grid',

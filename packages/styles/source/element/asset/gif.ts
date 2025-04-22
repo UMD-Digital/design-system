@@ -22,7 +22,7 @@ const classNamePrefix = 'umd-asset-gif';
  * ```css
  * class="umd-asset-gif-toggle"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const toggle: JssObject = create.jssObject({
   className: `${classNamePrefix}-toggle`,

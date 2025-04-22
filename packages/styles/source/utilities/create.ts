@@ -18,7 +18,7 @@ import { JssEntry } from '../_types';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.create.jssObject({ color: 'red', className: 'my-class' })
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const jssObject = <T extends JssEntry>(style: T): T => style;
 
@@ -31,7 +31,7 @@ export const jssObject = <T extends JssEntry>(style: T): T => style;
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.create.jssObjectFromString('color: red; font-size: 16px;')
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const jssObjectFromString = (cssString: string): Record<string, any> => {
   if (!cssString || typeof cssString !== 'string') {

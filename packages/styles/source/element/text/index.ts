@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.caption.smaller
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as caption from './caption';
 
@@ -21,7 +21,7 @@ import * as caption from './caption';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.code.block
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as code from './code';
 
@@ -32,7 +32,7 @@ import * as code from './code';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.cluster.default
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as cluster from './cluster';
 
@@ -43,7 +43,7 @@ import * as cluster from './cluster';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.decoration.eyebrow
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as decoration from './decoration';
 
@@ -54,7 +54,7 @@ import * as decoration from './decoration';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.label.field
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as label from './label';
 
@@ -65,7 +65,7 @@ import * as label from './label';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.link.red
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as link from './link';
 
@@ -76,7 +76,7 @@ import * as link from './link';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.line.horizontal
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as line from './line';
 
@@ -87,7 +87,7 @@ import * as line from './line';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.quote.blockquote
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as quote from './quote';
 
@@ -98,7 +98,7 @@ import * as quote from './quote';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.text.rich.content
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as rich from './rich';
 

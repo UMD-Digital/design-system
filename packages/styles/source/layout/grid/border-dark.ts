@@ -36,7 +36,7 @@ const boarderBaseDark = {
  * ```text
  * Use 'umd-layout-grid-border-dark-two' instead of 'umd-grid-border-dark'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsTwo: JssObject = create.jssObject({
   ...base.two,
@@ -83,7 +83,7 @@ export const columnsTwo: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-border-dark-three' instead of 'umd-grid-three-border-dark'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsThreeDark: JssObject = create.jssObject({
   ...base.three,
@@ -134,7 +134,7 @@ export const columnsThreeDark: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-grid-border-dark-four' instead of 'umd-grid-four-border-dark'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const columnsFourDark: JssObject = create.jssObject({
   ...base.four,

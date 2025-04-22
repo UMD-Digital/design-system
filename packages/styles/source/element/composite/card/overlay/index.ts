@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.color.light
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as color from './color';
 
@@ -21,7 +21,7 @@ export * as color from './color';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.icon.light
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as icon from './icon';
 
@@ -32,6 +32,6 @@ export * as icon from './icon';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.overlay.image.light
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as image from './image';

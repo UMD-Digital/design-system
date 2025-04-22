@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.checkbox.checkboxWrapper
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as checkbox from './checkbox';
 
@@ -21,7 +21,7 @@ import * as checkbox from './checkbox';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.file.fileWrapper
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as file from './file';
 
@@ -32,7 +32,7 @@ import * as file from './file';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.input.text
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as input from './input';
 
@@ -43,7 +43,7 @@ import * as input from './input';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.radio.radioWrapper
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as radio from './radio';
 
@@ -54,7 +54,7 @@ import * as radio from './radio';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.select.selectWrapper
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as select from './select';
 
@@ -65,7 +65,7 @@ import * as select from './select';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.field.set.fieldset
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 import * as set from './set';
 

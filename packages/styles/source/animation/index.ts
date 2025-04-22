@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.line
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as line from './line';
 
@@ -21,7 +21,7 @@ export * as line from './line';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.loader
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as loader from './loader';
 
@@ -32,7 +32,7 @@ export * as loader from './loader';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.nestedElements
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as nestedElements from './nested-elements';
 
@@ -43,6 +43,6 @@ export * as nestedElements from './nested-elements';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.animation.transition
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as transition from './transition';

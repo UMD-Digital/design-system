@@ -26,7 +26,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.font.size.base // '16px'
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const size = {
   min: '12px',
@@ -64,7 +64,7 @@ export const size = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.font.weight.bold // '700'
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const weight = {
   thin: '100',
@@ -91,7 +91,7 @@ export const weight = {
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.token.font.family.sans // "'Interstate', Helvetica, Arial, Verdana, sans-serif"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const family = {
   campaign: "'Barlow Condensed', Arial Narrow, sans-serif",

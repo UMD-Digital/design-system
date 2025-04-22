@@ -44,7 +44,7 @@ export const label = {
  * ```css
  * class="umd-text-label-large"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const large: JssObject = create.jssObject({
   className: `${classNamePrefix}-large`,

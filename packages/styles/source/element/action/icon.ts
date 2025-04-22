@@ -54,7 +54,7 @@ const baseIconSmall = {
  * ```css
  * class="umd-element-action-icon-button"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const small: JssObject = create.jssObject({
   className: `${classNamePrefix}-button`,
@@ -78,7 +78,7 @@ export const small: JssObject = create.jssObject({
  * ```css
  * class="umd-element-action-icon-button"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const smallDark: JssObject = create.jssObject({
   className: `${classNamePrefix}-button`,

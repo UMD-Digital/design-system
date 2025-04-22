@@ -27,7 +27,7 @@ const classNamePrefix = 'umd-table';
  * ```text
  * Use 'umd-table-inline' instead of 'umd-rich-text-inline-table'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const inline: JssObject = create.jssObject({
   borderCollapse: 'collapse',

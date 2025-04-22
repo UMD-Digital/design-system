@@ -40,7 +40,7 @@ const primaryBase = {
  * ```text
  * Use 'umd-action-primary' instead of 'umd-forms-actions-primary'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const normal: JssObject = create.jssObject({
   ...base,
@@ -71,7 +71,7 @@ export const normal: JssObject = create.jssObject({
  * class="umd-action-primary-large"
  * ```
  *
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const large: JssObject = create.jssObject({
   ...baseLarge,
@@ -98,7 +98,7 @@ export const large: JssObject = create.jssObject({
  * class="umd-action-primary-white"
  * ```
  *
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const white: JssObject = create.jssObject({
   ...base,

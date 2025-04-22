@@ -26,7 +26,7 @@ const classNamePrefix = 'umd-layout-space-vertical';
  * ```text
  * Use 'umd-layout-space-vertical-landing' instead of 'umd-layout-vertical-landing'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const landing: JssObject = create.jssObject({
   marginBottom: spacing['3xl'],
@@ -62,7 +62,7 @@ export const landing: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-space-vertical-landing-child' instead of 'umd-layout-vertical-landing-child'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const landingChild: JssObject = create.jssObject({
   marginBottom: spacing.lg,
@@ -98,7 +98,7 @@ export const landingChild: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-space-vertical-interior' instead of 'umd-layout-vertical-interior'
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const interior: JssObject = create.jssObject({
   marginBottom: spacing['3xl'],
@@ -130,7 +130,7 @@ export const interior: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-space-vertical-interior-child' instead of 'umd-layout-vertical-interior-child'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const interiorChild: JssObject = create.jssObject({
   marginBottom: spacing.lg,
@@ -158,7 +158,7 @@ export const interiorChild: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-space-vertical-headline-large' instead of 'umd-layout-headline-large'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const headlineLarge: JssObject = create.jssObject({
   marginBottom: spacing.sm,
@@ -190,7 +190,7 @@ export const headlineLarge: JssObject = create.jssObject({
  * ```text
  * Use 'umd-layout-space-vertical-headline-medium' instead of 'umd-layout-headline-medium'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const headlineMedium: JssObject = create.jssObject({
   marginBottom: spacing.sm,

@@ -152,7 +152,7 @@ export const extraSmall = {
  * Styles.typography.campaign.fonts.maximum
  * Styles.typography.campaign.fonts.large
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const fonts = {
   /**
@@ -167,7 +167,7 @@ export const fonts = {
    * ```css
    * class="umd-campaign-maximum"
    * ```
-   * @since 1.8.0
+   * @since 1.1.0
    */
   maximum: create.jssObject({
     className: 'umd-campaign-maximum',
@@ -186,7 +186,7 @@ export const fonts = {
    * ```css
    * class="umd-campaign-extralarge"
    * ```
-   * @since 1.8.0
+   * @since 1.1.0
    */
   extraLarge: create.jssObject({
     className: 'umd-campaign-extralarge',
@@ -205,7 +205,7 @@ export const fonts = {
    * ```css
    * class="umd-campaign-large"
    * ```
-   * @since 1.8.0
+   * @since 1.1.0
    */
   large: create.jssObject({
     className: 'umd-campaign-large',
@@ -224,7 +224,7 @@ export const fonts = {
    * ```css
    * class="umd-campaign-medium"
    * ```
-   * @since 1.8.0
+   * @since 1.1.0
    */
   medium: create.jssObject({
     className: 'umd-campaign-medium',
@@ -243,7 +243,7 @@ export const fonts = {
    * ```css
    * class="umd-campaign-small"
    * ```
-   * @since 1.8.0
+   * @since 1.1.0
    */
   small: create.jssObject({
     className: 'umd-campaign-small',
@@ -262,7 +262,7 @@ export const fonts = {
    * ```css
    * class="umd-campaign-extrasmall"
    * ```
-   * @since 1.8.0
+   * @since 1.1.0
    */
   extraSmall: create.jssObject({
     className: 'umd-campaign-extrasmall',

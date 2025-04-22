@@ -48,7 +48,7 @@ const formatCssValue = (value: any): string => {
  *   key: { className: 'my-class', color: 'red' }
  * })
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const objectWithName: JssNameConverter = (originalObject) => {
   const newFormat: JssNamedOutputFormat = {};
@@ -82,7 +82,7 @@ export const objectWithName: JssNameConverter = (originalObject) => {
  *   component: { className: 'my-component', color: 'blue' }
  * })
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const processNestedObjects = <T extends object>(
   obj: T,
@@ -113,7 +113,7 @@ export const processNestedObjects = <T extends object>(
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * const css = Styles.utilities.transform.convertToCSS(animation.loader.dots);
  * ```
- * @since 1.9.0
+ * @since 1.1.1
  */
 export const convertToCSS = (jssObject: JssObject): string => {
   if (!jssObject || typeof jssObject !== 'object') {

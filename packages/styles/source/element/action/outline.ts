@@ -48,7 +48,7 @@ const outlineBase = {
  * ```text
  * Use 'umd-action-outline' instead of 'umd-forms-actions-outline'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const normal: JssObject = create.jssObject({
   ...base,
@@ -82,7 +82,7 @@ export const normal: JssObject = create.jssObject({
  * ```css
  * class="umd-action-outline-large"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const large: JssObject = create.jssObject({
   ...baseLarge,
@@ -112,7 +112,7 @@ export const large: JssObject = create.jssObject({
  * ```css
  * class="umd-action-outline-white"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const white: JssObject = create.jssObject({
   ...base,

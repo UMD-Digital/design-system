@@ -27,7 +27,7 @@ const classNamePrefix = 'umd-text-line';
  * ```text
  * Use 'umd-text-line-tailwing' instead of 'umd-tailwings-headline'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const tailwing: JssObject = create.jssObject({
   className: [
@@ -117,7 +117,7 @@ const trailingBefore = {
  * ```text
  * Use 'umd-text-line-trailing' instead of 'umd-tailwing-right-headline'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const trailing = create.jssObject({
   className: [
@@ -164,7 +164,7 @@ export const trailing = create.jssObject({
  * ```text
  * Use 'umd-text-line-trailing-light' instead of 'umd-tailwing-right-headline[theme="light"]'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const trailingLight: JssObject = create.jssObject({
   ...trailing,
@@ -193,7 +193,7 @@ export const trailingLight: JssObject = create.jssObject({
  * ```text
  * Use 'umd-text-line-trailing-dark' instead of 'umd-tailwing-right-headline[theme="dark"]'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const trailingDark: JssObject = create.jssObject({
   ...trailing,
@@ -228,7 +228,7 @@ export const trailingDark: JssObject = create.jssObject({
  * ```text
  * Use 'umd-text-line-adjustent' instead of 'umd-adjacent-line-text'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const adjustent: JssObject = create.jssObject({
   className: [
@@ -263,7 +263,7 @@ export const adjustent: JssObject = create.jssObject({
  * ```css
  * class="umd-text-line-adjustent-inset"
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const adjustentInset: JssObject = create.jssObject({
   className: `${classNamePrefix}-adjustent-inset`,

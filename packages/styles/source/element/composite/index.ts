@@ -10,7 +10,7 @@
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.card.block.light
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as card from './card';
 
@@ -21,6 +21,6 @@ export * as card from './card';
  * import * as Styles from '@universityofmaryland/web-styles-library';
  * Styles.element.composite.person.bio.small
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export * as person from './person';

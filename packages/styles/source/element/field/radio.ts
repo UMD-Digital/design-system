@@ -56,7 +56,7 @@ export const radio = {
  * ```text
  * Use 'umd-field-radio-wrapper' instead of 'umd-forms-choices-wrapper'.
  * ```
- * @since 1.8.0
+ * @since 1.1.0
  */
 export const radioWrapper: JssObject = create.jssObject({
   ...baseInputChoiceWrapper,

@@ -46,13 +46,68 @@ const buttonStyle = {
 };
 ```
 
-### Converting to CSS String
+### Converting Style Objects in CSS strings (stylesheet usage) - All styles
 
 ```typescript
-import { convertToCSS } from '@universityofmaryland/web-styles-library/utilities/transform';
+import * as Styles from '@universityofmaryland/web-styles-library';
 
-const css = convertToCSS(animation.loader.dots);
-// Use in stylesheet or style tag
+// Output styles contain all style objects
+const allStyles = await Styles.utilities.create.styleSheetString({
+  ...Styles.outputStyles,
+});
+
+// Output
+
+const styleSheet = document.createElement('style');
+styleSheet.innerHTML = `${allStyles}`;
+document.head.appendChild(styleSheet);
+```
+
+### Converting Style Objects in CSS strings (stylesheet usage) - Selection example
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+// Select which style objects to include
+const exampleWithElementAndLayout =
+  await Styles.utilities.create.styleSheetString({
+    ...Styles.utilities.transform.processNestedObjects(Styles.element),
+    ...Styles.utilities.transform.processNestedObjects(Styles.layout),
+  });
+
+// Output
+
+const styleSheet = document.createElement('style');
+styleSheet.innerHTML = `${exampleWithElementAndLayout}`;
+document.head.appendChild(styleSheet);
+```
+
+### Converting to CSS String for use in CSS Modules (frameworks like Next.js)
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+const fadeInLine = Styles.utilities.transform.convertToCSS(
+  Styles.animation.line.fadeInSimpleDark,
+);
+
+// Output
+.umd-fadein-simple-dark {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(#FFFFFF, #FFFFFF);
+  background-position: left calc(100% - 1px);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  color: #FFFFFF;
+  transition: color 0.5s, background-image 0.5s, background-position 0.5s;
+}
+.umd-fadein-simple-dark&:hover, &:focus {
+  background-image: linear-gradient(#FFD200, #FFD200);
+  background-position: left calc(100%);
+  color: #FFFFFF;
+  text-decoration: none;
+}
 ```
 
 ## Available Style Modules

@@ -1,10 +1,4 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { Markup } from 'utilities';
-import { SLOTS } from '../../globals';
-
-const { SlotWithDefaultStyling } = Markup.create;
-
-const { CTA } = SLOTS;
 
 export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
 
@@ -42,19 +36,17 @@ const makeGivingLink = () => {
   return defaultLink;
 };
 
-export const CreateCallToActionContainer = ({
-  element,
-}: {
-  element: HTMLElement;
-}) => {
+export interface CallToActionProps {
+  slotCta?: HTMLAnchorElement;
+}
+
+export default ({ slotCta }: CallToActionProps) => {
   const container = document.createElement('div');
-  const ctaSlot = element.querySelector(`[slot="${CTA}"]`) as HTMLAnchorElement;
 
   container.classList.add(CALL_TO_ACTION_CONTAINER);
 
-  if (ctaSlot) {
-    const slot = SlotWithDefaultStyling({ element, slotRef: CTA });
-    if (slot) container.appendChild(slot);
+  if (slotCta) {
+    container.appendChild(slotCta);
   } else {
     container.appendChild(makeGivingLink());
   }

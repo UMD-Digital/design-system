@@ -85,3 +85,27 @@ export function svgFromString(svgString: string) {
   div.innerHTML = svgString.trim();
   return div.firstChild;
 }
+
+export function linkWithSpan({
+  url,
+  title,
+  label,
+}: {
+  url: string;
+  title: string;
+  label?: string;
+}) {
+  const link = document.createElement('a');
+  const span = document.createElement('span');
+
+  link.setAttribute('href', url);
+  link.setAttribute('target', '_blank');
+  link.setAttribute('rel', 'noopener noreferrer');
+
+  span.innerText = title;
+  link.appendChild(span);
+
+  if (label) link.setAttribute('aria-label', label);
+
+  return link;
+}

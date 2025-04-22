@@ -3,6 +3,7 @@ export * as banner from './banner';
 export * as alert from './alert';
 export * as card from './card';
 export * as carousel from './carousel';
+export * as footer from './footer';
 export * as hero from './hero';
 export * as layout from './layout';
 export * as media from './media';

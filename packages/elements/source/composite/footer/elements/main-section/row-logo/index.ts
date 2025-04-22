@@ -1,25 +1,27 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import { Styles } from 'utilities';
-import {
+import { styles } from 'utilities';
+import createSocialCampaignColumns, {
   SocialContainerStyles,
-  CreateSocialCampaignColumns,
   SOCIAL_COLUMN_WRAPPER,
+  type SocialCampaignColumnsProps,
 } from '../social';
-import {
+import createCallToActionContainer, {
   CallToActionStyles,
-  CreateCallToActionContainer,
   CALL_TO_ACTION_CONTAINER,
+  type CallToActionProps,
 } from '../call-to-action';
-import { ContactContainerStyles, CreateContactContainer } from './contact';
-import { LogoContainerStyles, CreateLogoContainer } from './logo';
+import createContactContainer, {
+  ContactContainerStyles,
+  type ContactProps,
+} from './contact';
+import createLogoContainer, { LogoContainerStyles } from './logo';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
-import { UMDFooterElement } from '../../../base';
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = styles;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { ELEMENT_NAME, VERSION_TYPE_SIMPLE } = VARIABLES;
+const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT, IS_VERSION_SIMPLE } = REFERENCES;
 
 const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
@@ -94,8 +96,13 @@ export const RowLogoStyles = `
   ${themeOverwriteStyles}
 `;
 
-export const CreateRowLogo = ({ element }: { element: UMDFooterElement }) => {
-  const type = element._type;
+export interface RowLogoProps
+  extends SocialCampaignColumnsProps,
+    CallToActionProps,
+    ContactProps {}
+
+export default (props: RowLogoProps) => {
+  const { isTypeSimple } = props;
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -105,21 +112,17 @@ export const CreateRowLogo = ({ element }: { element: UMDFooterElement }) => {
   lock.classList.add(ROW_LOGO_CONTAINER_LOCK);
 
   const makeThirdColumn = () => {
-    const includeSocial = type === VERSION_TYPE_SIMPLE;
-
-    if (includeSocial) {
-      const socialColumnWrapper = CreateSocialCampaignColumns({
-        element,
-      });
+    if (isTypeSimple) {
+      const socialColumnWrapper = createSocialCampaignColumns(props);
       wrapper.appendChild(socialColumnWrapper);
     } else {
-      const ctaWrapper = CreateCallToActionContainer({ element });
+      const ctaWrapper = createCallToActionContainer(props);
       wrapper.appendChild(ctaWrapper);
     }
   };
 
-  const logoElement = CreateLogoContainer({ element });
-  const contactElement = CreateContactContainer({ element });
+  const logoElement = createLogoContainer(props);
+  const contactElement = createContactContainer(props);
   wrapper.appendChild(logoElement);
   wrapper.appendChild(contactElement);
 

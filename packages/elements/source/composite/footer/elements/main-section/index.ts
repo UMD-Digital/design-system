@@ -1,16 +1,13 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { CreateRowLogo, RowLogoStyles } from './row-logo';
-import { CreateRowLinks, RowLinkStyles } from './row-links';
+import createRowLogo, { RowLogoStyles, type RowLogoProps } from './row-logo';
+import createRowLinks, { RowLinkStyles, type RowLinksProps } from './row-links';
 import { CampaignStyles } from './campaign';
-import { ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
-import { UMDFooterElement } from '../../base';
+import { ELEMENTS, REFERENCES } from '../../globals';
+import { BaseProps } from '../../_types';
 
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { VERSION_TYPE_MEGA, VERSION_TYPE_VISUAL, VERSION_TYPE_SIMPLE } =
-  VARIABLES;
 const { IS_THEME_LIGHT, IS_VERSION_SIMPLE, IS_VERSION_VISUAL } = REFERENCES;
 
-const SLOT_BACKGROUND_IMAGE_NAME = 'background-image';
 const MAIN_CONTAINER = 'umd-footer-main-container';
 const BACKGROUND_IMAGE_CONTAINER = 'umd-footer-background-image-container';
 const BACKGROUND_IMAGE_GRADIENT = 'umd-footer-background-image-graident';
@@ -62,26 +59,31 @@ export const MainContainerStyles = `
   ${VariationVisualStyles}
 `;
 
-export const CreateMain = ({ element }: { element: UMDFooterElement }) => {
-  const type = element._type;
+export interface MainSectionProps
+  extends BaseProps,
+    RowLinksProps,
+    RowLogoProps {
+  slotVisualImage: HTMLImageElement | null;
+}
+
+export default (props: MainSectionProps) => {
+  const { isTypeMega, isTypeSimple, isTypeVisual, slotVisualImage } = props;
+  const isShowVisualImage = isTypeVisual || isTypeSimple;
   const container = document.createElement('div');
-  const logoRow = CreateRowLogo({ element });
+  const logoRow = createRowLogo(props);
 
   container.classList.add(MAIN_CONTAINER);
 
-  if (type === VERSION_TYPE_VISUAL || type === VERSION_TYPE_SIMPLE) {
-    const slottedDate = element.querySelector(
-      `[slot="${SLOT_BACKGROUND_IMAGE_NAME}"]`,
-    ) as HTMLImageElement;
+  if (isShowVisualImage) {
     const visualContainer = document.createElement('div');
     const backgroundGraident = document.createElement('div');
     const backgroundImage = document.createElement('img');
     let altText = null;
     let imageSrc = null;
 
-    if (slottedDate) {
-      const source = slottedDate.getAttribute('src');
-      const alt = slottedDate.getAttribute('alt');
+    if (slotVisualImage) {
+      const source = slotVisualImage.getAttribute('src');
+      const alt = slotVisualImage.getAttribute('alt');
 
       if (typeof source === 'string' && source.length > 0) {
         imageSrc = source;
@@ -91,7 +93,7 @@ export const CreateMain = ({ element }: { element: UMDFooterElement }) => {
         altText = alt;
       }
     } else {
-      if (type === VERSION_TYPE_VISUAL) {
+      if (isTypeVisual) {
         altText = 'The University of Maryland Campus';
         imageSrc = require('../../assets/visual-default.jpg').default;
       }
@@ -113,8 +115,8 @@ export const CreateMain = ({ element }: { element: UMDFooterElement }) => {
 
   container.appendChild(logoRow);
 
-  if (type === VERSION_TYPE_MEGA || type === VERSION_TYPE_VISUAL) {
-    const linksRow = CreateRowLinks({ element });
+  if (isTypeMega || isTypeVisual) {
+    const linksRow = createRowLinks(props);
     container.appendChild(linksRow);
   }
 

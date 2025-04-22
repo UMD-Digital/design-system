@@ -1,11 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { Utilities } from '@universityofmaryland/web-elements-library';
-import { VARIABLES } from '../../globals';
-import { UMDFooterElement } from '../../base';
-
-const { spacing } = token;
-
-const { THEME_OPTION_LIGHT } = VARIABLES;
+import * as utilities from 'utilities';
+import { BaseProps } from '../../_types';
 
 export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
 
@@ -17,12 +12,9 @@ export const CampaignStyles = `
   }
 `;
 
-export const CreateCampaignRow = ({
-  element,
-}: {
-  element: UMDFooterElement;
-}) => {
-  const theme = element._theme;
+export interface CampaignProps extends BaseProps {}
+
+export default ({ isThemeLight }: CampaignProps) => {
   const container = document.createElement('div');
   const link = document.createElement('a');
   link.href = 'https://fearlesslyforward.umd.edu';
@@ -33,10 +25,9 @@ export const CreateCampaignRow = ({
     'Link to the Fearlessly Forward Brand website',
   );
 
-  link.innerHTML =
-    theme === THEME_OPTION_LIGHT
-      ? Utilities.asset.logo.CAMPAIGN_LOGO_DARK
-      : Utilities.asset.logo.CAMPAIGN_LOGO;
+  link.innerHTML = !isThemeLight
+    ? utilities.asset.logo.CAMPAIGN_LOGO
+    : utilities.asset.logo.CAMPAIGN_LOGO_DARK;
 
   container.classList.add(CAMPAIGN_COLUMN_WRAPPER);
   container.appendChild(link);

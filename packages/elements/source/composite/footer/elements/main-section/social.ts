@@ -1,18 +1,11 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import { Utilities } from '@universityofmaryland/web-elements-library';
-import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  VARIABLES,
-  SLOTS,
-  REFERENCES,
-} from '../../globals';
-import { UMDFooterElement } from '../../base';
+import * as utilities from 'utilities';
+import createCampaignRow, { CAMPAIGN_COLUMN_WRAPPER } from './campaign';
+import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
+import { BaseProps } from '../../_types';
 
-const { convertJSSObjectToStyles } = Utilities.styles;
+const { convertJSSObjectToStyles } = utilities.styles;
 
-const { SOCIAL } = SLOTS;
 const { LARGE, MEDIUM } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
@@ -184,47 +177,48 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   if (!url) return link;
 
   if (url.match(/facebook.com/)) {
-    link.innerHTML = Utilities.asset.social.FACEBOOK;
+    link.innerHTML = utilities.asset.social.FACEBOOK;
   }
 
   if (url.match(/x.com/)) {
-    link.innerHTML = Utilities.asset.social.X;
+    link.innerHTML = utilities.asset.social.X;
   }
 
   if (url.match(/instagram.com/)) {
-    link.innerHTML = Utilities.asset.social.INSTAGRAM;
+    link.innerHTML = utilities.asset.social.INSTAGRAM;
   }
 
   if (url.match(/youtube.com/)) {
-    link.innerHTML = Utilities.asset.social.YOUTUBE;
+    link.innerHTML = utilities.asset.social.YOUTUBE;
   }
 
   if (url.match(/twitter.com/)) {
-    link.innerHTML = Utilities.asset.social.TWITTER;
+    link.innerHTML = utilities.asset.social.TWITTER;
   }
 
   if (url.match(/linkedin.com/)) {
-    link.innerHTML = Utilities.asset.social.LINKEDIN;
+    link.innerHTML = utilities.asset.social.LINKEDIN;
   }
 
   if (url.match(/threads.net/)) {
-    link.innerHTML = Utilities.asset.social.THREADS;
+    link.innerHTML = utilities.asset.social.THREADS;
   }
 
   return link;
 };
 
-const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
-  const socialLinksSlot = element.querySelector(
-    `[slot="${SOCIAL}"]`,
-  ) as HTMLSlotElement;
+interface SocialProps {
+  slotSocialLinks?: HTMLSlotElement;
+}
+
+const CreateSocialRow = ({ slotSocialLinks }: SocialProps) => {
   const container = document.createElement('div');
   const linksWrapper = document.createElement('div');
   const headline = document.createElement('p');
   let socialLinks: HTMLAnchorElement[] = [];
 
-  if (socialLinksSlot) {
-    const socialLinksClone = socialLinksSlot.cloneNode(true) as HTMLSlotElement;
+  if (slotSocialLinks) {
+    const socialLinksClone = slotSocialLinks.cloneNode(true) as HTMLSlotElement;
     const slottedSocialLinks = Array.from(
       socialLinksClone.querySelectorAll(`a`),
     ) as HTMLAnchorElement[];
@@ -284,14 +278,12 @@ const CreateSocialRow = ({ element }: { element: HTMLElement }) => {
   return container;
 };
 
-export const CreateSocialCampaignColumns = ({
-  element,
-}: {
-  element: UMDFooterElement;
-}) => {
+export interface SocialCampaignColumnsProps extends BaseProps, SocialProps {}
+
+export default (props: SocialCampaignColumnsProps) => {
   const socialColumnWrapper = document.createElement('div');
-  const socialContainer = CreateSocialRow({ element });
-  const campaignContainer = CreateCampaignRow({ element });
+  const socialContainer = CreateSocialRow(props);
+  const campaignContainer = createCampaignRow(props);
 
   socialColumnWrapper.classList.add(SOCIAL_COLUMN_WRAPPER);
 

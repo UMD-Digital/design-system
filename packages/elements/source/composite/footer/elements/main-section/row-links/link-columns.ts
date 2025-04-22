@@ -3,22 +3,13 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { Styles, Markup } from 'utilities';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  SLOTS,
-  VARIABLES,
-  REFERENCES,
-} from '../../../globals';
+import { styles, markup } from 'utilities';
+import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
 
-const { convertJSSObjectToStyles } = Styles;
-const { SlotWithDefaultStyling } = Markup.create;
-const { AnimationLinkSpan } = Markup.modify;
+const { convertJSSObjectToStyles } = styles;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { LINK_COLUMN_ONE, LINK_COLUMN_TWO, LINK_COLUMN_THREE } = SLOTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT } = REFERENCES;
 
@@ -277,90 +268,68 @@ const CreateDefaultColumn = ({
 };
 
 const CreateSlotColumn = ({
-  element,
-  slotRef,
+  slot,
   hasHeadlines,
   isColumnOne,
 }: {
-  element: HTMLElement;
-  slotRef: string;
+  slot: HTMLElement;
   hasHeadlines: boolean;
   isColumnOne: boolean;
 }) => {
-  const slot = SlotWithDefaultStyling({
-    element,
-    slotRef,
-  });
-
-  if (slot) {
-    const isElementSlot = slot.hasAttribute('slot');
-    let elementToAppend = slot;
-
-    if (!isElementSlot) {
-      const wrapper = document.createElement('div');
-      const links = Array.from(elementToAppend.querySelectorAll('a')).map(
-        (link) => {
-          const linkWrapper = document.createElement('div');
-          linkWrapper.classList.add(ROW_LINKS_COLUMN_LINKS);
-          AnimationLinkSpan({ element: link });
-          linkWrapper.appendChild(link);
-          return linkWrapper;
-        },
-      );
-
-      if (hasHeadlines) {
-        const headline = slot.getAttribute(HEADLINE_ATTRIBUTE) as string;
-        const headlineElement = document.createElement('p');
-        headlineElement.classList.add(ROW_LINKS_COLUMN_HEADLINE);
-        headlineElement.innerHTML = headline;
-
-        if (!headline && !isColumnOne) {
-          headlineElement.setAttribute(HEADLINE_ATTRIBUTE_EMPTY, 'true');
-          wrapper.appendChild(headlineElement);
-        }
-
-        if (headline) {
-          wrapper.appendChild(headlineElement);
-        }
-      }
-
-      links.forEach((link) => {
-        wrapper.appendChild(link);
-      });
-
-      elementToAppend = wrapper;
-    }
-
-    elementToAppend.classList.add(ROW_LINKS_COLUMN_WRAPPER);
-
-    return elementToAppend;
-  }
-};
-
-export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
   const container = document.createElement('div');
 
-  const slotList = [
-    { slotRef: LINK_COLUMN_ONE },
-    { slotRef: LINK_COLUMN_TWO },
-    { slotRef: LINK_COLUMN_THREE },
-  ];
-  const hasSlot = slotList.some(
-    ({ slotRef }) =>
-      element.querySelector(`[slot="${slotRef}"]`) as HTMLSlotElement,
-  );
+  container.classList.add(ROW_LINKS_COLUMN_WRAPPER);
 
-  if (hasSlot) {
-    const hasHeadlines = slotList.some(({ slotRef }) => {
-      const slot = element.querySelector(`[slot="${slotRef}"]`);
-      if (slot) return slot.hasAttribute(HEADLINE_ATTRIBUTE);
-      return false;
-    });
+  const wrapper = document.createElement('div');
+  const links = Array.from(slot.querySelectorAll('a')).map((link) => {
+    const linkWrapper = document.createElement('div');
+    linkWrapper.classList.add(ROW_LINKS_COLUMN_LINKS);
+    markup.modify.animationLinkSpan({ element: link });
+    linkWrapper.appendChild(link);
+    return linkWrapper;
+  });
 
-    slotList.forEach(({ slotRef }, index) => {
+  if (hasHeadlines) {
+    const headline = slot.getAttribute(HEADLINE_ATTRIBUTE) as string;
+    const headlineElement = document.createElement('p');
+    headlineElement.classList.add(ROW_LINKS_COLUMN_HEADLINE);
+    headlineElement.innerHTML = headline;
+
+    if (!headline && !isColumnOne) {
+      headlineElement.setAttribute(HEADLINE_ATTRIBUTE_EMPTY, 'true');
+      wrapper.appendChild(headlineElement);
+    }
+
+    if (headline) {
+      wrapper.appendChild(headlineElement);
+    }
+  }
+
+  links.forEach((link) => {
+    wrapper.appendChild(link);
+  });
+
+  container.appendChild(wrapper);
+
+  return container;
+};
+
+export interface slotColumnsProps {
+  slotColumns?: HTMLSlotElement[];
+}
+
+export default (props: slotColumnsProps) => {
+  const { slotColumns } = props;
+  const container = document.createElement('div');
+
+  if (slotColumns) {
+    const hasHeadlines = slotColumns.some((slot) =>
+      slot.hasAttribute(HEADLINE_ATTRIBUTE),
+    );
+
+    slotColumns.forEach((slot, index) => {
       const slotToAppend = CreateSlotColumn({
-        element,
-        slotRef,
+        slot,
         hasHeadlines,
         isColumnOne: index === 0,
       });
@@ -369,9 +338,9 @@ export const CreateLinkColumns = ({ element }: { element: HTMLElement }) => {
 
     if (hasHeadlines) {
       setTimeout(() => {
-        const shadowRoot = element.shadowRoot as ShadowRoot;
+        // To Do - refactor to load event
         const headlines = Array.from(
-          shadowRoot.querySelectorAll(`.${ROW_LINKS_COLUMN_HEADLINE}`),
+          container.querySelectorAll(`.${ROW_LINKS_COLUMN_HEADLINE}`),
         ) as HTMLDivElement[];
 
         const renderedHeadlinesSize = headlines.reduce((acc, headline) => {

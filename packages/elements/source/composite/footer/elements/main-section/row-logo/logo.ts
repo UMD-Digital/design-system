@@ -1,15 +1,18 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import { Utilities } from '@universityofmaryland/web-elements-library';
-import { CreateCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from '../campaign';
-import {
-  CreateCallToActionContainer,
+import * as utilities from 'utilities';
+import createCampaignRow, {
+  CAMPAIGN_COLUMN_WRAPPER,
+  type CampaignProps,
+} from '../campaign';
+import createCallToActionContainer, {
   CALL_TO_ACTION_CONTAINER,
+  type CallToActionProps,
 } from '../call-to-action';
 import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
-import { UMDFooterElement } from '../../../base';
+import { BaseProps } from '../../../_types';
 
 const { LARGE } = BREAKPOINTS;
-const { ELEMENT_NAME, THEME_OPTION_LIGHT } = VARIABLES;
+const { ELEMENT_NAME } = VARIABLES;
 const { ELEMENT_WRAPPER } = ELEMENTS;
 const { IS_VERSION_SIMPLE } = REFERENCES;
 
@@ -61,16 +64,17 @@ export const LogoContainerStyles = `
   ${ctaOverwriteStyles}
 `;
 
-export const CreateLogoContainer = ({
-  element,
-}: {
-  element: UMDFooterElement;
-}) => {
-  const theme = element._theme;
+export interface LogoProps
+  extends BaseProps,
+    CampaignProps,
+    CallToActionProps {}
+
+export default (props: LogoProps) => {
+  const { isThemeLight } = props;
   const container = document.createElement('div');
   const logoLink = document.createElement('a');
-  const campaignContainer = CreateCampaignRow({ element });
-  const ctaWrapper = CreateCallToActionContainer({ element });
+  const campaignContainer = createCampaignRow(props);
+  const ctaWrapper = createCallToActionContainer(props);
 
   logoLink.classList.add(LOGO_CONTAINER_LINK);
   logoLink.setAttribute('href', 'https://umd.edu');
@@ -81,10 +85,9 @@ export const CreateLogoContainer = ({
     'Link to the Unvieristy of Maryland homepage',
   );
 
-  logoLink.innerHTML =
-    theme === THEME_OPTION_LIGHT
-      ? `${Utilities.asset.logo.LIGHT_LOGO}`
-      : `${Utilities.asset.logo.DARK_LOGO}`;
+  logoLink.innerHTML = !isThemeLight
+    ? `${utilities.asset.logo.DARK_LOGO}`
+    : `${utilities.asset.logo.LIGHT_LOGO}`;
 
   container.classList.add(LOGO_CONTAINER);
   container.appendChild(logoLink);

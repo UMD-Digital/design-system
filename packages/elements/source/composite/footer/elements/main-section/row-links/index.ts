@@ -1,11 +1,16 @@
 import { layout, token } from '@universityofmaryland/web-styles-library';
-import { Styles } from 'utilities';
-import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
-import { CreateLinkColumns, LinkColumnStyles } from './link-columns';
+import { styles } from 'utilities';
+import createSocialCampaignColumns, {
+  SOCIAL_COLUMN_WRAPPER,
+  type SocialCampaignColumnsProps,
+} from '../social';
+import createLinkColumns, {
+  LinkColumnStyles,
+  type slotColumnsProps,
+} from './link-columns';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
-import { UMDFooterElement } from '../../../base';
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = styles;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -68,12 +73,16 @@ export const RowLinkStyles = `
   ${socialOverwriteStyles}
 `;
 
-export const CreateRowLinks = ({ element }: { element: UMDFooterElement }) => {
+export interface RowLinksProps
+  extends SocialCampaignColumnsProps,
+    slotColumnsProps {}
+
+export default (props: RowLinksProps) => {
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const wrapper = document.createElement('div');
-  const socialColumnWrapper = CreateSocialCampaignColumns({ element });
-  const linkColumnWrapper = CreateLinkColumns({ element });
+  const socialColumnWrapper = createSocialCampaignColumns(props);
+  const linkColumnWrapper = createLinkColumns(props);
 
   lock.classList.add(ROW_LINKS_CONTAINER_LOCK);
   container.classList.add(ROW_LINKS_CONTAINER);

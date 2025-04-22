@@ -3,23 +3,17 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { Markup, Styles } from 'utilities';
-import { CreateSocialCampaignColumns, SOCIAL_COLUMN_WRAPPER } from '../social';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  SLOTS,
-  VARIABLES,
-  REFERENCES,
-} from '../../../globals';
-import { UMDFooterElement } from '../../../base';
+import { markup, styles } from 'utilities';
+import createSocialCampaignColumns, {
+  SOCIAL_COLUMN_WRAPPER,
+  type SocialCampaignColumnsProps,
+} from '../social';
+import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
 
-const { convertJSSObjectToStyles } = Styles;
-const { Node, SlotWithDefaultStyling } = Markup.create;
+const { convertJSSObjectToStyles } = styles;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { CONTACT_HEADLINE, CONTACT_ADDRESS, CONTACT_LINKS } = SLOTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT } = REFERENCES;
 
@@ -199,9 +193,9 @@ export const ContactContainerStyles = `
   ${socialOverwriteStyles}
 `;
 
-const CreateDefaultHeadline = () => {
+const createDefaultHeadline = () => {
   const headline = document.createElement('p');
-  const headlineLink = Node.linkWithSpan(DEFAULT_HEADLINE_LINK);
+  const headlineLink = markup.create.linkWithSpan(DEFAULT_HEADLINE_LINK);
 
   headline.classList.add(CONTACT_LIST_HEADLINE);
   headline.appendChild(headlineLink);
@@ -209,31 +203,20 @@ const CreateDefaultHeadline = () => {
   return headline;
 };
 
-const CreateSlotHeadline = ({
-  element,
-  slotRef,
-}: {
-  element: UMDFooterElement;
-  slotRef: string;
-}) => {
-  const contactHeadlineElement = SlotWithDefaultStyling({
-    element,
-    slotRef,
+interface HeadlineProps {
+  slotHeadline: HTMLSlotElement;
+}
+
+const createHeadline = ({ slotHeadline }: HeadlineProps) => {
+  markup.modify.animationLinkSpan({
+    element: slotHeadline,
   });
+  slotHeadline.classList.add(CONTACT_LIST_HEADLINE);
 
-  if (contactHeadlineElement) {
-    Markup.modify.AnimationLinkSpan({
-      element: contactHeadlineElement,
-    });
-    contactHeadlineElement.classList.add(CONTACT_LIST_HEADLINE);
-
-    return contactHeadlineElement;
-  }
-
-  return null;
+  return slotHeadline;
 };
 
-const CreateDefaultContactAddress = () => {
+const createDefaultAddress = () => {
   const address = document.createElement('address');
   const addressParagraphOne = document.createElement('p');
   const addressParagraphTwo = document.createElement('p');
@@ -249,86 +232,71 @@ const CreateDefaultContactAddress = () => {
   return address;
 };
 
-const CreateSlotContactAddress = ({
-  element,
-  slotRef,
-}: {
-  element: UMDFooterElement;
-  slotRef: string;
-}) => {
-  const contactAddressElement = SlotWithDefaultStyling({
-    element,
-    slotRef,
-  });
+interface AddressProps {
+  slotAddress: HTMLSlotElement;
+}
 
-  if (contactAddressElement) {
-    contactAddressElement.classList.add(CONTACT_LIST_ADDRESS);
-    return contactAddressElement;
+const createAddress = ({ slotAddress }: AddressProps) => {
+  if (slotAddress) {
+    slotAddress.classList.add(CONTACT_LIST_ADDRESS);
   }
-
-  return null;
+  return slotAddress;
 };
 
-const CreateDefaultContactLinks = () => {
+const createDefaultLinks = () => {
   const contactList = document.createElement('p');
 
   contactList.classList.add(CONTACT_LINKS_LIST);
-  contactList.appendChild(Node.linkWithSpan(DEFAULT_EMAIL));
-  contactList.appendChild(Node.linkWithSpan(DEFAULT_PHONE));
+  contactList.appendChild(markup.create.linkWithSpan(DEFAULT_EMAIL));
+  contactList.appendChild(markup.create.linkWithSpan(DEFAULT_PHONE));
 
   return contactList;
 };
 
-const CreateSlotContactLinks = ({
-  element,
-  slotRef,
-}: {
-  element: UMDFooterElement;
-  slotRef: string;
-}) => {
-  const contactLinksElement = SlotWithDefaultStyling({ element, slotRef });
+interface LinksProps {
+  slotContentLinks: HTMLSlotElement;
+}
 
-  if (contactLinksElement) {
-    contactLinksElement.classList.add(CONTACT_LINKS_LIST);
-    return contactLinksElement;
-  }
-
-  return null;
+const createLinks = ({ slotContentLinks }: LinksProps) => {
+  slotContentLinks.classList.add(CONTACT_LINKS_LIST);
+  return slotContentLinks;
 };
 
-export const CreateContactContainer = ({
-  element,
-}: {
-  element: UMDFooterElement;
-}) => {
+export interface ContactProps
+  extends SocialCampaignColumnsProps,
+    AddressProps,
+    HeadlineProps,
+    LinksProps {}
+
+export default (props: ContactProps) => {
+  const { slotAddress, slotHeadline, slotContentLinks } = props;
   const contactContainer = document.createElement('div');
-  const socialContainer = CreateSocialCampaignColumns({ element });
-  const slotList = [
-    {
-      slotRef: CONTACT_HEADLINE,
-      create: CreateSlotHeadline,
-    },
-    { slotRef: CONTACT_ADDRESS, create: CreateSlotContactAddress },
-    { slotRef: CONTACT_LINKS, create: CreateSlotContactLinks },
-  ];
-  const hasSlot = slotList.some(
-    ({ slotRef }) =>
-      element.querySelector(`[slot="${slotRef}"]`) as HTMLSlotElement,
-  );
+  const socialContainer = createSocialCampaignColumns(props);
+  const hasSlot = slotAddress || slotHeadline || slotContentLinks;
 
   const makeContactSlot = () => {
-    slotList.forEach(({ create, slotRef }) => {
-      const slotElement = create({ element, slotRef: slotRef });
+    const headline = createHeadline({ slotHeadline });
+    const address = createAddress({ slotAddress });
+    const links = createLinks({ slotContentLinks });
 
-      if (slotElement) contactContainer.appendChild(slotElement);
-    });
+    if (headline) {
+      contactContainer.appendChild(headline);
+    }
+
+    if (address) {
+      contactContainer.appendChild(address);
+    }
+
+    if (links) {
+      contactContainer.appendChild(links);
+    }
   };
 
   const makeDefaultSlot = () => {
     const defaultContactWrapper = document.createElement('div');
-    const headline = CreateDefaultHeadline();
-    const address = CreateDefaultContactAddress();
-    const contactList = CreateDefaultContactLinks();
+    const headline = createDefaultHeadline();
+    const address = createDefaultAddress();
+    const contactList = createDefaultLinks();
 
     contactContainer.appendChild(headline);
     contactContainer.appendChild(address);

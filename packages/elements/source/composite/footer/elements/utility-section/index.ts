@@ -4,20 +4,13 @@ import {
   layout,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { Markup, Styles } from 'utilities';
-import {
-  BREAKPOINTS,
-  ELEMENTS,
-  VARIABLES,
-  SLOTS,
-  REFERENCES,
-} from '../../globals';
+import { markup, styles } from 'utilities';
+import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
 
-const { convertJSSObjectToStyles } = Styles;
+const { convertJSSObjectToStyles } = styles;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
-const { UTILITY } = SLOTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT } = REFERENCES;
 
@@ -144,8 +137,11 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
   return wrapper;
 };
 
-export const CreateUtility = ({ element }: { element: HTMLElement }) => {
-  const slot = element.querySelector(`[slot="${UTILITY}"]`);
+export interface UtilityProps {
+  slotUtilityLinks?: HTMLElement | null;
+}
+
+export default ({ slotUtilityLinks }: UtilityProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const copyRight = document.createElement('p');
@@ -153,13 +149,13 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
   container.classList.add(UTILITY_CONTAINER);
   wrapper.classList.add(UTILITY_CONTAINER_LOCK);
 
-  if (slot) {
+  if (slotUtilityLinks) {
     const slottedLinks = Array.from(
-      slot.querySelectorAll(`a`),
+      slotUtilityLinks.querySelectorAll(`a`),
     ) as HTMLAnchorElement[];
 
     slottedLinks.forEach((link) => {
-      Markup.modify.AnimationLinkSpan({ element: link });
+      markup.modify.animationLinkSpan({ element: link });
       link.classList.add(UTILITY_CONTAINER_LINK);
 
       wrapper.appendChild(link);
@@ -167,7 +163,7 @@ export const CreateUtility = ({ element }: { element: HTMLElement }) => {
   }
 
   requiredSubLinks.forEach((link) =>
-    wrapper.appendChild(Markup.create.Node.linkWithSpan(link)),
+    wrapper.appendChild(markup.create.linkWithSpan(link)),
   );
   copyRight.classList.add(UTILITY_CONTAINER_LINK);
   copyRight.innerHTML = `©${new Date().getFullYear()} UNIVERSITY OF MARYLAND`;

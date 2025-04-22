@@ -18,32 +18,48 @@ yarn add @universityofmaryland/web-styles-library
 
 ## Usage
 
-### Importing Styles
+### In conjection with a framework - Tailwind 3
 
 ```typescript
-// Import specific style modules
-import {
-  animation,
-  accessibility,
-} from '@universityofmaryland/web-styles-library';
+/** @type {import('tailwindcss').Config} */
 
-// Or import specific namespaces
-import { line } from '@universityofmaryland/web-styles-library/animation';
-import { screenReader } from '@universityofmaryland/web-styles-library/accessibility';
-```
+import * as Styles from '@universityofmaryland/web-styles-library';
+import plugin from 'tailwindcss/plugin';
 
-### Using with JavaScript
+const content = ['./source/**/*.{css,twig}'];
 
-```typescript
-// Apply styles directly in JavaScript
-animation.line.fadeUnderRed.forEach((prop) => {
-  element.style = prop;
-});
-
-// Or with a framework like React
-const buttonStyle = {
-  ...animation.transition.fadeInFromBottom,
+const { token, root: utilities, outputStyles: components } = Styles;
+const { color, font, media } = token;
+const base = {
+  ...token,
+  fontFamily: font.family,
+  fontSize: font.size,
+  fontWeight: font.weight,
+  breakpoints: media.breakpoints,
 };
+
+const tailwindBase = Object.fromEntries(
+  Object.entries(base).map(([key, value]) => [
+    key.charAt(0).toLocaleLowerCase() + key.slice(1),
+    value,
+  ]),
+);
+
+const theme = {
+  screens: media.breakpoints,
+  queries: media.breakpoints,
+  colors: color,
+  ...tailwindBase,
+};
+
+const plugins = [
+  plugin(function ({ addUtilities, addComponents }) {
+    addUtilities(utilities);
+    addComponents(components);
+  }),
+];
+
+export { content, theme, plugins };
 ```
 
 ### Converting Style Objects in CSS strings (stylesheet usage) - All styles
@@ -51,7 +67,7 @@ const buttonStyle = {
 ```typescript
 import * as Styles from '@universityofmaryland/web-styles-library';
 
-// Output styles contain all style objects
+// String of all styles: Parameter is the styleout provided by the library
 const allStyles = await Styles.utilities.create.styleSheetString({
   ...Styles.outputStyles,
 });
@@ -68,7 +84,7 @@ document.head.appendChild(styleSheet);
 ```typescript
 import * as Styles from '@universityofmaryland/web-styles-library';
 
-// Select which style objects to include
+// String of selected styles: Parameter of selected style objects that you want to consume from the library
 const exampleWithElementAndLayout =
   await Styles.utilities.create.styleSheetString({
     ...Styles.utilities.transform.processNestedObjects(Styles.element),
@@ -80,6 +96,34 @@ const exampleWithElementAndLayout =
 const styleSheet = document.createElement('style');
 styleSheet.innerHTML = `${exampleWithElementAndLayout}`;
 document.head.appendChild(styleSheet);
+```
+
+### Importing Styles via JS for Advanced Purposes
+
+```typescript
+// Import specific style modules
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+const fadeInLine = Styles.animation.line.fadeInSimpleDark;
+
+// Ouput
+{
+    "className": "umd-fadein-simple-dark",
+    "position": "relative",
+    "textDecoration": "none",
+    "backgroundImage": "linear-gradient(#FFFFFF, #FFFFFF)",
+    "backgroundPosition": "left calc(100% - 1px)",
+    "backgroundRepeat": "no-repeat",
+    "backgroundSize": "100% 1px",
+    "color": "#FFFFFF",
+    "transition": "color 0.5s, background-image 0.5s, background-position 0.5s",
+    "&:hover, &:focus": {
+        "backgroundImage": "linear-gradient(#FFD200, #FFD200)",
+        "backgroundPosition": "left calc(100%)",
+        "color": "#FFFFFF",
+        "textDecoration": "none"
+    }
+}
 ```
 
 ### Converting to CSS String for use in CSS Modules (frameworks like Next.js)

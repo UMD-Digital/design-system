@@ -80,7 +80,17 @@ export const jssObjectFromString = (cssString: string): Record<string, any> => {
  * @since 1.2.0
  */
 
-export const styleSheetString = async (stylesObject: Record<string, any>) => {
+/**
+ * Creates a stylesheet string from a JSS object.
+ * @param {Object} stylesObject Object of CSS properties
+ * @param {Object} options Configuration options
+ * @param {boolean} options.prettify Whether to format the CSS with line breaks and indentation (default: false)
+ * @returns {string} The stylesheet string with converted properties
+ */
+export const styleSheetString = async (
+  stylesObject: Record<string, any>, 
+  options: { prettify?: boolean } = {}
+) => {
   const cssString = Object.entries(stylesObject)
     .map(([selector, properties]) => {
       if (typeof properties !== 'object' || properties === null) {
@@ -100,6 +110,25 @@ export const styleSheetString = async (stylesObject: Record<string, any>) => {
     .filter(Boolean)
     .join('\n\n');
 
-  const result = await postcss().process(cssString, { from: undefined });
-  return result.css;
+  if (options.prettify) {
+    // Return the prettified version with proper formatting
+    return cssString;
+  } else {
+    // Process with PostCSS and manually minify the output
+    const result = await postcss().process(cssString, { from: undefined });
+    
+    // Basic minification while preserving some essential spacing
+    return result.css
+      .replace(/\s*{\s*/g, '{')
+      .replace(/\s*}\s*/g, '}')
+      .replace(/\s*;\s*/g, ';')
+      .replace(/\s*:\s*/g, ':')
+      .replace(/,\s+/g, ',')
+      .replace(/\s+\(/g, '(')
+      .replace(/\(\s+/g, '(')
+      .replace(/\s+\)/g, ')')
+      .replace(/\)\s+/g, ')')
+      .replace(/[\r\n]+/g, '')
+      .trim();
+  }
 };

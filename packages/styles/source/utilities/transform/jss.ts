@@ -1,290 +1,52 @@
 /**
  * @module utilities/transform
  * Provides utilities for transforming JSS objects.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.utilities.transform
+ * ```
+ * @since 1.1.0
  */
 
+import {
+  combineQueryConditions,
+  combineSelectorWithParent,
+  createBlock,
+  createClassSelector,
+  createRules,
+  isPlainObject,
+  isValidQueryCondition,
+  processMediaQueryString,
+  processNestedSelector,
+} from './css';
 import type {
   JssInputFormat,
   JssNamedOutputFormat,
   JssObject,
-} from '../_types';
+} from '../../_types';
 
 /**
  * Interface for a JSS name converter function.
+ * @since 1.1.0
  */
 export interface JssNameConverter {
   (originalObject: JssInputFormat): JssNamedOutputFormat;
 }
 
 /**
- * Checks if a value is a plain object
- */
-function isPlainObject(value: any): boolean {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-
-/**
- * Creates a selector with classname prefix
- */
-function createClassSelector(className: string | string[]): string {
-  return Array.isArray(className)
-    ? className.map((name) => `.${name}`).join(', ')
-    : `.${className}`;
-}
-
-/**
- * Combines selectors with parent reference handling
- */
-function combineSelectorWithParent(
-  parentSelector: string,
-  childSelector: string,
-): string {
-  return childSelector.includes('&')
-    ? childSelector.replace(/&/g, parentSelector)
-    : childSelector.startsWith(':')
-    ? `${parentSelector}${childSelector}`
-    : `${parentSelector} ${childSelector}`;
-}
-
-/**
- * Extracts query type from a query string
- */
-function extractQueryType(query: string): string {
-  if (query.startsWith('@media')) return '@media';
-  if (query.startsWith('@container')) return '@container';
-  return '';
-}
-
-/**
- * Converts a camelCase property name to kebab-case for CSS
- */
-function toKebabCase(property: string): string {
-  return property
-    .replace(/([A-Z])/g, '-$1')
-    .replace(/^-/, '')
-    .toLowerCase();
-}
-
-/**
- * Formats a CSS value to a string
- */
-function formatValue(value: any): string {
-  if (Array.isArray(value)) {
-    return value.join(' ');
-  }
-
-  if (typeof value === 'number' && value !== 0) {
-    return `${value}px`;
-  }
-
-  return String(value);
-}
-
-/**
- * Checks if an object is a valid query condition (for media or container queries)
- */
-function isValidQueryCondition(obj: any): boolean {
-  return typeof obj !== 'object' || obj === null || Array.isArray(obj);
-}
-
-/**
- * Processes a media query string that might include template literals
- */
-function processMediaQueryString(queryString: string): string {
-  // Return the string as-is if it doesn't appear to contain template literals
-  if (!queryString.includes('${')) {
-    return queryString;
-  }
-
-  // For template literals in media queries, we should allow them to pass through.
-  // At runtime, these template literals will be resolved to their actual values.
-  // This helps ensure that things like @media (${media.queries.large.min}) work correctly.
-  return queryString;
-}
-
-/**
- * Combines two query conditions (media or container)
- */
-function combineQueryConditions(
-  outerQuery: string,
-  innerQuery: string,
-): string {
-  // Process any template literals
-  outerQuery = processMediaQueryString(outerQuery);
-  innerQuery = processMediaQueryString(innerQuery);
-
-  const outerType = extractQueryType(outerQuery);
-  const innerType = extractQueryType(innerQuery);
-
-  const outerCondition = outerQuery
-    .replace(new RegExp(`^${outerType}\\s*`), '')
-    .trim();
-  const innerCondition = innerQuery
-    .replace(new RegExp(`^${innerType}\\s*`), '')
-    .trim();
-
-  if (outerType !== innerType && innerType !== '') {
-    return innerQuery;
-  }
-
-  // If one of the conditions has template literals, handle carefully to avoid malformed queries
-  if (outerCondition.includes('${') || innerCondition.includes('${')) {
-    // If template literals exist, preserve them
-    const queryType = outerType || innerType || '@media';
-    return `${queryType} ${outerCondition} and ${innerCondition}`;
-  }
-
-  const queryType = outerType || innerType || '@media';
-  return `${queryType} ${outerCondition} and ${innerCondition}`;
-}
-
-/**
- * Creates CSS rules from style properties
- */
-function createRules(properties: Record<string, any>): string {
-  return Object.entries(properties)
-    .filter(
-      ([_, value]) =>
-        value != null && (typeof value !== 'object' || Array.isArray(value)),
-    )
-    .map(([prop, value]) => `  ${toKebabCase(prop)}: ${formatValue(value)};`)
-    .join('\n');
-}
-
-/**
- * Creates a CSS block with selector and rules
- */
-function createBlock(
-  selector: string,
-  properties: Record<string, any>,
-): string {
-  const rules = createRules(properties);
-  return rules ? `${selector} {\n${rules}\n}` : '';
-}
-
-/**
- * Processes a container or media query and returns a valid CSS string
- */
-function processQuery(
-  query: string,
-  selector: string,
-  properties: Record<string, any>,
-): string {
-  let cleanQuery = processMediaQueryString(query);
-
-  if (
-    !cleanQuery.startsWith('@media') &&
-    !cleanQuery.startsWith('@container')
-  ) {
-    cleanQuery = cleanQuery.includes('container')
-      ? `@container ${cleanQuery}`
-      : `@media ${cleanQuery}`;
-  }
-
-  const directProps: Record<string, any> = {};
-  const nestedQueries: Array<[string, Record<string, any>]> = [];
-  const nestedSelectors: Array<[string, Record<string, any>]> = [];
-
-  Object.entries(properties).forEach(([prop, value]) => {
-    if (isPlainObject(value)) {
-      if (prop.startsWith('@media') || prop.startsWith('@container')) {
-        nestedQueries.push([
-          processMediaQueryString(prop),
-          value as Record<string, any>,
-        ]);
-      } else {
-        nestedSelectors.push([prop, value as Record<string, any>]);
-      }
-    } else {
-      directProps[prop] = value;
-    }
-  });
-
-  const rules = createRules(directProps);
-  const mainBlock = rules
-    ? `${cleanQuery} {\n  ${selector} {\n${rules
-        .split('\n')
-        .map((line) => `  ${line}`)
-        .join('\n')}\n  }\n}`
-    : '';
-
-  const nestedSelectorBlocks = nestedSelectors.map(
-    ([nestedSelector, nestedStyles]) => {
-      const expandedSelector = combineSelectorWithParent(
-        selector,
-        nestedSelector,
-      );
-
-      const nestedRules = createRules(nestedStyles);
-      return nestedRules
-        ? `${cleanQuery} {\n  ${expandedSelector} {\n${nestedRules
-            .split('\n')
-            .map((line) => `  ${line}`)
-            .join('\n')}\n  }\n}`
-        : '';
-    },
-  );
-
-  const nestedQueryBlocks = nestedQueries.map(
-    ([nestedQuery, nestedQueryStyles]) => {
-      const combinedQuery = combineQueryConditions(cleanQuery, nestedQuery);
-      return processQuery(combinedQuery, selector, nestedQueryStyles);
-    },
-  );
-
-  return [mainBlock, ...nestedSelectorBlocks, ...nestedQueryBlocks]
-    .filter(Boolean)
-    .join('\n\n');
-}
-
-/**
- * Processes nested selectors and returns corresponding CSS
- */
-function processNestedSelector(
-  baseSelector: string,
-  nestedSelector: string,
-  properties: Record<string, any>,
-): string {
-  const selectors = nestedSelector.split(',').map((s) => s.trim());
-  const fullSelector = selectors
-    .map((selector) => combineSelectorWithParent(baseSelector, selector))
-    .join(', ');
-
-  const directProps: Record<string, any> = {};
-  const queries: Array<[string, Record<string, any>]> = [];
-  const nestedSelectors: Array<[string, Record<string, any>]> = [];
-
-  Object.entries(properties).forEach(([prop, value]) => {
-    if (
-      (prop.startsWith('@media') || prop.startsWith('@container')) &&
-      isPlainObject(value)
-    ) {
-      queries.push([
-        processMediaQueryString(prop),
-        value as Record<string, any>,
-      ]);
-    } else if (isPlainObject(value)) {
-      nestedSelectors.push([prop, value as Record<string, any>]);
-    } else {
-      directProps[prop] = value;
-    }
-  });
-
-  const mainBlock = createBlock(fullSelector, directProps);
-  const queryBlocks = queries.map(([query, styles]) =>
-    processQuery(query, fullSelector, styles),
-  );
-  const nestedBlocks = nestedSelectors.map(([selector, styles]) =>
-    processNestedSelector(fullSelector, selector, styles),
-  );
-
-  return [mainBlock, ...queryBlocks, ...nestedBlocks]
-    .filter(Boolean)
-    .join('\n\n');
-}
-
-/**
  * Converts JSS objects to a format with class names as keys.
+ * @param {JssInputFormat} originalObject The input object with className properties
+ * @returns {JssNamedOutputFormat} Object with class names as keys
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const transformed = Styles.utilities.transform.objectWithName({
+ *   button: { className: 'my-button', color: 'red' }
+ * });
+ * // Result: { '.my-button': { color: 'red' } }
+ * ```
+ * @since 1.1.0
  */
 export const objectWithName: JssNameConverter = (originalObject) => {
   const newFormat: JssNamedOutputFormat = {};
@@ -308,6 +70,19 @@ export const objectWithName: JssNameConverter = (originalObject) => {
 
 /**
  * Processes nested JSS objects and flattens them.
+ * @param {T} obj The object containing nested className objects
+ * @returns {JssNamedOutputFormat} Flattened object with class names as keys
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const flattened = Styles.utilities.transform.processNestedObjects({
+ *   container: {
+ *     nested: { className: 'box', padding: '10px' }
+ *   }
+ * });
+ * // Result: { '.box': { padding: '10px' } }
+ * ```
+ * @since 1.1.0
  */
 export const processNestedObjects = <T extends object>(
   obj: T,
@@ -330,7 +105,22 @@ export const processNestedObjects = <T extends object>(
 };
 
 /**
- * Converts a JSS object to a valid CSS string
+ * Converts a JSS object to a valid CSS string.
+ * @param {JssObject} jssObject The JSS object to convert
+ * @returns {string} The CSS string representation
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const css = Styles.utilities.transform.convertToCSS({
+ *   className: 'header',
+ *   color: 'blue',
+ *   fontSize: 16,
+ *   '@media (min-width: 768px)': {
+ *     self: { fontSize: 20 }
+ *   }
+ * });
+ * ```
+ * @since 1.1.0
  */
 export const convertToCSS = (jssObject: JssObject): string => {
   if (
@@ -544,21 +334,4 @@ export const convertToCSS = (jssObject: JssObject): string => {
   });
 
   return blocks.join('\n\n');
-};
-
-// Export helper functions for testing
-// This object will not be included in production builds
-export const __test__ = {
-  isPlainObject,
-  toKebabCase,
-  createClassSelector,
-  combineSelectorWithParent,
-  extractQueryType,
-  formatValue,
-  isValidQueryCondition,
-  combineQueryConditions,
-  createRules,
-  createBlock,
-  processQuery,
-  processNestedSelector,
 };

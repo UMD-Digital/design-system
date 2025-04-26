@@ -69,9 +69,7 @@ describe('create utilities', () => {
   });
 
   describe('createStylesheet', () => {
-    // Mock PostCSS for testing
     beforeEach(() => {
-      // Mock implementation to avoid actual PostCSS processing in tests
       jest.mock('postcss', () => {
         return jest.fn().mockImplementation(() => ({
           process: jest.fn().mockImplementation((css) => {
@@ -99,13 +97,9 @@ describe('create utilities', () => {
       };
 
       try {
-        // Get result
         const result = await styleSheetString(styles);
-
-        // Basic verification - we can't check exact content with mock
         expect(typeof result).toBe('string');
       } catch (error: unknown) {
-        // Allow test to pass if PostCSS is not available in test environment
         if (error instanceof Error) {
           console.log('PostCSS test skipped:', error.message);
         } else {
@@ -119,7 +113,6 @@ describe('create utilities', () => {
         const result = await styleSheetString({});
         expect(typeof result).toBe('string');
       } catch (error: unknown) {
-        // Allow test to pass
         if (error instanceof Error) {
           console.log('PostCSS test skipped:', error.message);
         } else {

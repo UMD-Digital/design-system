@@ -2,78 +2,57 @@ import {
   objectWithName,
   processNestedObjects,
   convertToCSS,
+  isPlainObject,
+  toKebabCase,
+  createClassSelector,
+  combineSelectorWithParent,
 } from '../transform';
 import type { JssInputFormat, JssObject } from '../../_types';
 
-// Access the non-exported functions for testing
-// We use any typing because these functions are not exported
-const helpers = {
-  isPlainObject: (function getIsPlainObject() {
-    const transform = require('../transform');
-    return transform.__test__?.isPlainObject || ((value: any) => 
-      typeof value === 'object' && value !== null && !Array.isArray(value));
-  })(),
-  
-  toKebabCase: (function getToKebabCase() {
-    const transform = require('../transform');
-    return transform.__test__?.toKebabCase || ((property: string) => 
-      property.replace(/([A-Z])/g, '-$1').replace(/^-/, '').toLowerCase());
-  })(),
-  
-  createClassSelector: (function getCreateClassSelector() {
-    const transform = require('../transform');
-    return transform.__test__?.createClassSelector || ((className: string | string[]) => 
-      Array.isArray(className) 
-        ? className.map((name) => `.${name}`).join(', ') 
-        : `.${className}`);
-  })(),
-  
-  combineSelectorWithParent: (function getCombineSelectorWithParent() {
-    const transform = require('../transform');
-    return transform.__test__?.combineSelectorWithParent || ((parentSelector: string, childSelector: string) => 
-      childSelector.includes('&') 
-        ? childSelector.replace(/&/g, parentSelector) 
-        : `${parentSelector} ${childSelector}`);
-  })(),
-};
-
 describe('transform utilities', () => {
-  // Test helper functions based on function behavior rather than implementation
   describe('helper functions', () => {
     describe('isPlainObject', () => {
       it('should identify plain objects correctly', () => {
-        expect(helpers.isPlainObject({})).toBe(true);
-        expect(helpers.isPlainObject({ a: 1 })).toBe(true);
-        expect(helpers.isPlainObject([])).toBe(false);
-        expect(helpers.isPlainObject(null)).toBe(false);
-        expect(helpers.isPlainObject(undefined)).toBe(false);
-        expect(helpers.isPlainObject(42)).toBe(false);
-        expect(helpers.isPlainObject('string')).toBe(false);
+        expect(isPlainObject({})).toBe(true);
+        expect(isPlainObject({ a: 1 })).toBe(true);
+        expect(isPlainObject([])).toBe(false);
+        expect(isPlainObject(null)).toBe(false);
+        expect(isPlainObject(undefined)).toBe(false);
+        expect(isPlainObject(42)).toBe(false);
+        expect(isPlainObject('string')).toBe(false);
       });
     });
 
     describe('toKebabCase', () => {
       it('should convert camelCase to kebab-case', () => {
-        expect(helpers.toKebabCase('backgroundColor')).toBe('background-color');
-        expect(helpers.toKebabCase('marginTop')).toBe('margin-top');
-        expect(helpers.toKebabCase('WebkitTransform')).toBe('webkit-transform');
-        expect(helpers.toKebabCase('color')).toBe('color');
+        expect(toKebabCase('backgroundColor')).toBe('background-color');
+        expect(toKebabCase('marginTop')).toBe('margin-top');
+        expect(toKebabCase('WebkitTransform')).toBe('webkit-transform');
+        expect(toKebabCase('color')).toBe('color');
       });
     });
 
     describe('createClassSelector', () => {
       it('should create CSS selectors from class names', () => {
-        expect(helpers.createClassSelector('my-class')).toBe('.my-class');
-        expect(helpers.createClassSelector(['class1', 'class2'])).toBe('.class1, .class2');
+        expect(createClassSelector('my-class')).toBe('.my-class');
+        expect(createClassSelector(['class1', 'class2'])).toBe(
+          '.class1, .class2',
+        );
       });
     });
 
     describe('combineSelectorWithParent', () => {
       it('should combine parent and child selectors correctly', () => {
-        expect(helpers.combineSelectorWithParent('.parent', '&:hover')).toBe('.parent:hover');
-        expect(helpers.combineSelectorWithParent('.parent', '& > div')).toBe('.parent > div');
-        expect(helpers.combineSelectorWithParent('.parent', 'div')).toBe('.parent div');
-        expect(helpers.combineSelectorWithParent('.parent', '&:hover, &:focus')).toBe('.parent:hover, .parent:focus');
+        expect(combineSelectorWithParent('.parent', '&:hover')).toBe(
+          '.parent:hover',
+        );
+        expect(combineSelectorWithParent('.parent', '& > div')).toBe(
+          '.parent > div',
+        );
+        expect(combineSelectorWithParent('.parent', 'div')).toBe('.parent div');
+        expect(combineSelectorWithParent('.parent', '&:hover, &:focus')).toBe(
+          '.parent:hover, .parent:focus',
+        );
       });
     });
   });
@@ -234,14 +213,12 @@ describe('transform utilities', () => {
       };
 
       const result = convertToCSS(input);
-      
-      // Check content without being strict about formatting
+
       expect(result).toContain('.button {');
       expect(result).toContain('display: inline-block;');
       expect(result).toContain('padding: 8px 16px;');
       expect(result).toContain('background-color: #0078d4;');
-      
-      // Check for hover rule
+
       expect(result).toMatch(/\.button:hover\s*{/);
       expect(result).toContain('background-color: #106ebe;');
     });
@@ -258,16 +235,14 @@ describe('transform utilities', () => {
       };
 
       const result = convertToCSS(input);
-      
-      // Check content without being strict about whitespace formatting
+
       expect(result).toContain('.responsive {');
       expect(result).toContain('width: 100%;');
       expect(result).toContain('@media (min-width: 768px)');
       expect(result).toMatch(/\.responsive\s*{(?:\s|.)*?width:\s*50%;/);
     });
-    
+
     it('should handle media queries with self', () => {
-      // Create a simple object to test the direct property access
       const input: JssObject = {
         className: 'grid-two',
         display: 'grid',
@@ -275,36 +250,38 @@ describe('transform utilities', () => {
           self: {
             gridTemplateColumns: 'repeat(2, 1fr)',
             gridGap: '24px',
-          }
+          },
         },
         '@media (min-width: 1280px)': {
           self: {
             gridGap: '32px',
-          }
+          },
         },
       };
 
       const result = convertToCSS(input);
-      
-      // Simplified test to check that the output contains key properties
+
       expect(result).toContain('.grid-two');
       expect(result).toContain('display: grid');
-      
-      // Verify that the media queries and properties are processed correctly
+
       const resultStr = result.replace(/\s+/g, ' ');
       expect(resultStr).toMatch(/media.*1024px/);
       expect(resultStr).toMatch(/grid-template-columns/);
       expect(resultStr).toMatch(/grid-gap.*24px/);
-      
+
       expect(resultStr).toMatch(/media.*1280px/);
       expect(resultStr).toMatch(/grid-gap.*32px/);
     });
-    
+
     it('should handle media queries with template literals', () => {
-      // This test uses a format similar to the user's example
-      const media = { queries: { large: { min: 'min-width: 1024px' }, desktop: { min: 'min-width: 1280px' } } };
+      const media = {
+        queries: {
+          large: { min: 'min-width: 1024px' },
+          desktop: { min: 'min-width: 1280px' },
+        },
+      };
       const spacing = { lg: '24px', xl: '32px' };
-      
+
       const input: JssObject = {
         className: ['grid-two', 'umd-grid-gap'],
         display: 'grid',
@@ -312,33 +289,26 @@ describe('transform utilities', () => {
           self: {
             gridTemplateColumns: 'repeat(2, 1fr)',
             gridGap: spacing.lg,
-          }
+          },
         },
         [`@media (${media.queries.desktop.min})`]: {
           self: {
             gridGap: spacing.xl,
-          }
+          },
         },
       };
 
       const result = convertToCSS(input);
-      
-      // Verify that the output contains all the expected elements
+
       expect(result).toContain('.grid-two, .umd-grid-gap');
       expect(result).toContain('display: grid');
-      
-      // Since we're using actual values in our test (min-width: 1024px),
-      // we should expect those in the output rather than the template literals
+
       expect(result).toContain('@media (min-width: 1024px)');
       expect(result).toContain('grid-template-columns: repeat(2, 1fr)');
       expect(result).toContain('grid-gap: 24px');
-      
+
       expect(result).toContain('@media (min-width: 1280px)');
       expect(result).toContain('grid-gap: 32px');
-      
-      // To test template literals in a real scenario, we need to mock 
-      // the environment where template literals don't get evaluated during testing
-      console.log("This test simulates template literals being resolved at runtime");
     });
 
     it('should handle null and undefined values', () => {
@@ -380,17 +350,17 @@ describe('transform utilities', () => {
       };
 
       const result = convertToCSS(input);
-      
-      // Check for key selectors and properties
+
       expect(result).toContain('.parent {');
       expect(result).toContain('color: black;');
       expect(result).toContain('.parent > div {');
       expect(result).toContain('margin: 10px;');
       expect(result).toMatch(/\.parent:hover,\s*\.parent:focus\s*{/);
       expect(result).toContain('color: blue;');
-      
-      // Check for the nested svg rule
-      expect(result).toMatch(/\.parent(?::hover|:focus)(?:\s*,\s*\.parent(?::hover|:focus))?\s+svg\s*{/);
+
+      expect(result).toMatch(
+        /\.parent(?::hover|:focus)(?:\s*,\s*\.parent(?::hover|:focus))?\s+svg\s*{/,
+      );
       expect(result).toContain('fill: blue;');
     });
 
@@ -414,8 +384,7 @@ describe('transform utilities', () => {
       };
 
       const result = convertToCSS(input);
-      
-      // Verify all selectors and properties are present
+
       expect(result).toContain('.nav {');
       expect(result).toContain('display: flex;');
       expect(result).toContain('.nav ul {');

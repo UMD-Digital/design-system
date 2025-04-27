@@ -13,7 +13,7 @@
  * ```
  * @since 1.1.0
  */
-export const spacingScale = {
+const spacingScale = {
   0: '0',
   1: '4px', // 0.25rem
   2: '8px', // 0.5rem  (min)

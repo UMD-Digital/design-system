@@ -30,14 +30,14 @@ export interface TokensToCssVarsOptions {
  */
 export function formatTokenKey(key: string, useKebabCase: boolean): string {
   if (/^\d/.test(key)) {
-    return key; // Keep numeric prefixes as-is
+    return key; // Don't modify keys that start with a number
   }
 
   if (useKebabCase) {
     return toKebabCase(key);
   }
 
-  return key.charAt(0).toUpperCase() + key.slice(1);
+  return key.charAt(0) + key.slice(1);
 }
 
 /**
@@ -123,8 +123,8 @@ export function tokensToCssVars(
  */
 export function cssVarsToString(cssVarsObj: Record<string, any>): string {
   const rules = Object.entries(cssVarsObj)
-    .map(([name, value]) => `  ${name}: ${value};`)
+    .map(([name, value]) => `  '${name}': '${value}',`)
     .join('\n');
 
-  return `:root {\n${rules}\n}`;
+  return `{\n${rules}\n};`;
 }

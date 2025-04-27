@@ -16,7 +16,7 @@ export type BaseColors = typeof baseColors;
  * ```
  * @since 1.1.0
  */
-export const colorScale = {
+const colorScale = {
   gray: {
     50: '#FAFAFA',
     100: '#F1F1F1',
@@ -51,7 +51,7 @@ export const colorScale = {
  * ```
  * @since 1.1.0
  */
-export const baseColors = {
+const baseColors = {
   white: '#FFFFFF',
   black: '#000000',
 } as const;

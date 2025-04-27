@@ -1,4 +1,8 @@
-import { tokensToCssVars, cssVarsToString, formatTokenKey } from '../transform';
+import {
+  tokensToCssVars,
+  cssVarsToString,
+  formatTokenKey,
+} from '../transform/variables';
 
 describe('variables transformation utilities', () => {
   describe('formatTokenKey', () => {
@@ -11,11 +15,6 @@ describe('variables transformation utilities', () => {
       expect(formatTokenKey('primaryColor', true)).toBe('primary-color');
       expect(formatTokenKey('fontFamily', true)).toBe('font-family');
     });
-
-    it('should capitalize first letter by default', () => {
-      expect(formatTokenKey('primary', false)).toBe('Primary');
-      expect(formatTokenKey('fontSize', false)).toBe('FontSize');
-    });
   });
 
   describe('tokensToCssVars', () => {
@@ -23,15 +22,15 @@ describe('variables transformation utilities', () => {
       const tokens = {
         primary: '#ff0000',
         secondary: '#00ff00',
-        tertiary: '#0000ff'
+        tertiary: '#0000ff',
       };
 
       const result = tokensToCssVars(tokens, 'color-');
-      
+
       expect(result).toEqual({
-        '--color-Primary': '#ff0000',
-        '--color-Secondary': '#00ff00',
-        '--color-Tertiary': '#0000ff'
+        '--color-primary': '#ff0000',
+        '--color-secondary': '#00ff00',
+        '--color-tertiary': '#0000ff',
       });
     });
 
@@ -40,16 +39,16 @@ describe('variables transformation utilities', () => {
         primary: '#ff0000',
         neutral: {
           100: '#ffffff',
-          900: '#000000'
-        }
+          900: '#000000',
+        },
       };
 
       const result = tokensToCssVars(tokens, 'color-');
 
       expect(result).toEqual({
-        '--color-Primary': '#ff0000',
-        '--color-Neutral-100': '#ffffff',
-        '--color-Neutral-900': '#000000'
+        '--color-primary': '#ff0000',
+        '--color-neutral-100': '#ffffff',
+        '--color-neutral-900': '#000000',
       });
     });
 
@@ -59,8 +58,8 @@ describe('variables transformation utilities', () => {
         secondaryColor: '#00ff00',
         textColor: {
           dark: '#333333',
-          light: '#eeeeee'
-        }
+          light: '#eeeeee',
+        },
       };
 
       const result = tokensToCssVars(tokens, 'color-', { kebabCase: true });
@@ -69,25 +68,25 @@ describe('variables transformation utilities', () => {
         '--color-primary-color': '#ff0000',
         '--color-secondary-color': '#00ff00',
         '--color-text-color-dark': '#333333',
-        '--color-text-color-light': '#eeeeee'
+        '--color-text-color-light': '#eeeeee',
       });
     });
 
     it('should accept custom key formatter', () => {
       const tokens = {
         primary: '#ff0000',
-        secondary: '#00ff00'
+        secondary: '#00ff00',
       };
 
       const customFormatter = (key: string) => key.toUpperCase();
-      
-      const result = tokensToCssVars(tokens, 'color-', { 
-        formatKey: customFormatter 
+
+      const result = tokensToCssVars(tokens, 'color-', {
+        formatKey: customFormatter,
       });
 
       expect(result).toEqual({
         '--color-PRIMARY': '#ff0000',
-        '--color-SECONDARY': '#00ff00'
+        '--color-SECONDARY': '#00ff00',
       });
     });
   });
@@ -97,16 +96,16 @@ describe('variables transformation utilities', () => {
       const cssVars = {
         '--color-primary': '#ff0000',
         '--color-secondary': '#00ff00',
-        '--spacing-sm': '8px'
+        '--spacing-sm': '8px',
       };
 
       const result = cssVarsToString(cssVars);
-      
-      expect(result).toBe(`:root {
-  --color-primary: #ff0000;
-  --color-secondary: #00ff00;
-  --spacing-sm: 8px;
-}`);
+
+      expect(result).toBe(`{
+  '--color-primary': '#ff0000',
+  '--color-secondary': '#00ff00',
+  '--spacing-sm': '8px',
+};`);
     });
   });
 });

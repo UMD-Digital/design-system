@@ -87,8 +87,8 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 // String of selected styles: Parameter of selected style objects that you want to consume from the library
 const exampleWithElementAndLayout =
   await Styles.utilities.create.styleSheetString({
-    ...Styles.utilities.transform.processNestedObjects(Styles.element),
-    ...Styles.utilities.transform.processNestedObjects(Styles.layout),
+    ...Styles.element,
+    ...Styles.layout.grid,
   });
 
 // Output

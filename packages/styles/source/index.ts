@@ -7,7 +7,7 @@ import * as typographyNamespace from './typography';
 import { default as webComponentsNamespace } from './web-components';
 import * as utilitiesNamespace from './utilities';
 
-export { root } from './root';
+export { root, reset, variables } from './root';
 export type { JssEntry, JssObject } from './_types';
 
 export const accessibility = accessibilityNamespace;

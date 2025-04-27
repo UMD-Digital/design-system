@@ -11,5 +11,5 @@
 
 export { convertToCSS, processNestedObjects, objectWithName } from './jss';
 export * from './css';
-export * from './variables';
+export * as variables from './variables';
 export * as JSS from './jss';

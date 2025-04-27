@@ -1,5 +1,6 @@
 import { color, font, spacing } from './token';
 import { sans } from './typography';
+import { transform } from './utilities';
 import { input } from './element/field/input';
 import { textarea } from './element/field/textarea';
 import { select } from './element/field/select';
@@ -64,27 +65,16 @@ export const reset = {
   },
 };
 
-// border: 0,
-// borderBottom: '1px solid transparent',
+export const variables = {
+  '--serif': font.family.serif,
+  '--sanSerif': font.family.sans,
+  ...transform.variables.tokensToCssVars(color, 'umd-color-'),
+  ...transform.variables.tokensToCssVars(spacing, 'umd-space-'),
+};
 
 export const root = {
   ':root': {
-    '--red': color.red,
-    '--gold': color.gold,
-    '--blue': color.blue,
-    '--green': color.green,
-    '--white': color.white,
-    '--black': color.black,
-    '--redDark': color.redDark,
-    '--grayDarker': color.gray.darker,
-    '--grayDark': color.gray.dark,
-    '--grayAA': color.gray.mediumAA,
-    '--gray': color.gray.medium,
-    '--grayLight': color.gray.light,
-    '--grayLighter': color.gray.lighter,
-    '--grayLightest': color.gray.lightest,
-    '--serif': font.family.serif,
-    '--sanSerif': font.family.sans,
+    ...variables,
     FontFamily: font.family.sans,
     FontSize: font.size.base,
     lineHeight: '1.5em',

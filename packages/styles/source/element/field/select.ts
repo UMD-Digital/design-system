@@ -78,7 +78,7 @@ export const select = {
  * ```
  * @since 1.1.0
  */
-export const selectWrapper: JssObject = create.jssObject({
+export const selectWrapper: JssObject = create.jss.objectWithClassName({
   backgroundColor: color.white,
   overflow: 'hidden',
   position: 'relative',

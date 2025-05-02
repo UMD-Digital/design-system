@@ -67,7 +67,7 @@ const secondaryBaseLargeIcon = {
  * ```
  * @since 1.1.0
  */
-export const normal: JssObject = create.jssObject({
+export const normal: JssObject = create.jss.objectWithClassName({
   ...base,
   ...secondaryBase,
   className: `${classNamePrefix}`,
@@ -92,7 +92,7 @@ export const normal: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const large: JssObject = create.jssObject({
+export const large: JssObject = create.jss.objectWithClassName({
   ...baseLarge,
   ...secondaryLargeBase,
   className: `${classNamePrefix}-large`,
@@ -120,7 +120,7 @@ export const large: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const white: JssObject = create.jssObject({
+export const white: JssObject = create.jss.objectWithClassName({
   ...base,
   ...secondaryBase,
   color: color.white,
@@ -145,7 +145,7 @@ export const white: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const gold: JssObject = create.jssObject({
+export const gold: JssObject = create.jss.objectWithClassName({
   ...base,
   ...secondaryBase,
   color: color.white,

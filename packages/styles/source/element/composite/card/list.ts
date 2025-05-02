@@ -224,7 +224,7 @@ const darkContainerStyles = {
  * ```
  * @since 1.1.1
  */
-export const light: JssObject = create.jssObject({
+export const light: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-light`,
   ...createContainerStyles(),
   ...createWrapperStyles(),
@@ -246,7 +246,7 @@ export const light: JssObject = create.jssObject({
  * ```
  * @since 1.1.1
  */
-export const dark: JssObject = create.jssObject({
+export const dark: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-dark`,
 
   ...createContainerStyles({
@@ -271,7 +271,7 @@ export const dark: JssObject = create.jssObject({
  * ```
  * @since 1.1.1
  */
-export const eventLight: JssObject = create.jssObject({
+export const eventLight: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-event-light`,
 
   ...createContainerStyles(),
@@ -296,7 +296,7 @@ export const eventLight: JssObject = create.jssObject({
  * @since 1.1.1
  */
 
-export const eventDark = create.jssObject({
+export const eventDark = create.jss.objectWithClassName({
   className: `${classNamePrefix}-event-dark`,
 
   ...createContainerStyles({
@@ -323,7 +323,7 @@ export const eventDark = create.jssObject({
  * @since 1.1.1
  */
 
-export const person = create.jssObject({
+export const person = create.jss.objectWithClassName({
   className: `${classNamePrefix}-person`,
   ...createContainerStyles(),
   ...createWrapperStyles(),
@@ -346,7 +346,7 @@ export const person = create.jssObject({
  * @since 1.1.1
  */
 
-export const personDark = create.jssObject({
+export const personDark = create.jss.objectWithClassName({
   className: `${classNamePrefix}-person-dark`,
   ...createContainerStyles({
     ...darkContainerStyles,
@@ -387,7 +387,7 @@ const tabularColumnStyles = {
  * @since 1.9.1
  */
 
-export const personTabular = create.jssObject({
+export const personTabular = create.jss.objectWithClassName({
   className: `${classNamePrefix}-person-tabular`,
   ...createContainerStyles({
     ...createContainerQuery(smallBreakpoint, 'max-width', {
@@ -418,7 +418,7 @@ export const personTabular = create.jssObject({
  * @since 1.9.1
  */
 
-export const personTabularDark = create.jssObject({
+export const personTabularDark = create.jss.objectWithClassName({
   className: `${classNamePrefix}-person-tabular-dark`,
   ...createContainerStyles({
     ...darkContainerStyles,

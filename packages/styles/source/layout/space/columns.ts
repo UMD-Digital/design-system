@@ -28,7 +28,7 @@ const classNamePrefix = 'umd-layout-space-columns';
  * ```
  * @since 1.1.0
  */
-export const left: JssObject = create.jssObject({
+export const left: JssObject = create.jss.objectWithClassName({
   [`@media (${media.queries.tablet.min})`]: {
     display: 'flex',
   },
@@ -75,7 +75,7 @@ export const left: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const right: JssObject = create.jssObject({
+export const right: JssObject = create.jss.objectWithClassName({
   ...left,
 
   [`@media (${media.queries.tablet.min})`]: {

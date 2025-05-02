@@ -75,7 +75,7 @@ export const base = {
  * ```
  * @since 1.1.0
  */
-export const columnsTwo: JssObject = create.jssObject({
+export const columnsTwo: JssObject = create.jss.objectWithClassName({
   ...base.two,
 
   className: [
@@ -103,7 +103,7 @@ export const columnsTwo: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const columnsThree: JssObject = create.jssObject({
+export const columnsThree: JssObject = create.jss.objectWithClassName({
   ...base.three,
 
   className: [
@@ -131,7 +131,7 @@ export const columnsThree: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const columnsFour: JssObject = create.jssObject({
+export const columnsFour: JssObject = create.jss.objectWithClassName({
   ...base.four,
 
   className: [
@@ -155,7 +155,7 @@ export const columnsFour: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const stacked: JssObject = create.jssObject({
+export const stacked: JssObject = create.jss.objectWithClassName({
   display: 'flex',
   flexDirection: 'column',
 

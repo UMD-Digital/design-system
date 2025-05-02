@@ -23,6 +23,6 @@ const classNamePrefix = 'umd-form';
  * ```
  * @since 1.1.0
  */
-export const gray: JssObject = create.jssObject({
+export const gray: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-gray`,
 });

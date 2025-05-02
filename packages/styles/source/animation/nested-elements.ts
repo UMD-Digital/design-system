@@ -67,7 +67,7 @@ export const linksWhite: JssObject = {
  * ```
  * @since 1.1.0
  */
-export const gridSetup: JssObject = create.jssObject({
+export const gridSetup: JssObject = create.jss.objectWithClassName({
   '& > *': {
     [`@media (prefers-reduced-motion: no-preference)`]: {
       opacity: '0',

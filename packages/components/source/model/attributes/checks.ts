@@ -521,7 +521,7 @@ const getValue = {
     });
 
     if (cssString && typeof cssString === 'string') {
-      return Styles.utilities.create.jssObjectFromString(cssString);
+      return Styles.utilities.create.jss.objectFromString(cssString);
     }
   },
   url: createValueGetter({

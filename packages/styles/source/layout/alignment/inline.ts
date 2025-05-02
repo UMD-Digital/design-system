@@ -24,7 +24,7 @@ import type { JssObject } from '../../_types';
  * ```
  * @since 1.1.0
  */
-export const center: JssObject = create.jssObject({
+export const center: JssObject = create.jss.objectWithClassName({
   className: [
     `text-center`,
     /** @deprecated Use 'text-center' instead */

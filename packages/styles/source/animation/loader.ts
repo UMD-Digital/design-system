@@ -24,7 +24,7 @@ const classNamePrefix = 'umd-animation-loader';
  * ```
  * @since 1.1.0
  */
-export const keyFrameBoxShadow: JssObject = create.jssObject({
+export const keyFrameBoxShadow: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-keyframes`,
   '@keyframes loader-animation': {
     '0%, 100%': {
@@ -47,7 +47,7 @@ const dotsAniamtion = {
 /**
  * @deprecated Use {@link dots} instead.
  */
-export const loadDots: JssObject = create.jssObject({
+export const loadDots: JssObject = create.jss.objectWithClassName({
   className: ['umd-loader'],
 });
 
@@ -69,7 +69,7 @@ export const loadDots: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const dots: JssObject = create.jssObject({
+export const dots: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-dots`,
     /** @deprecated Use 'umd-animation-loader-dots' instead */

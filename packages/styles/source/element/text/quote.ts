@@ -29,7 +29,7 @@ const classNamePrefix = 'umd-text-quote';
  * ```
  * @since 1.1.0
  */
-export const quote: JssObject = create.jssObject({
+export const quote: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}`,
     /** @deprecated Use 'umd-text-quote' instead */

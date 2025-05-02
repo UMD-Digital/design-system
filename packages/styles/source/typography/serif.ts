@@ -200,27 +200,27 @@ export const medium = {
  * @since 1.1.0
  */
 export const fonts = {
-  maximum: create.jssObject({
+  maximum: create.jss.objectWithClassName({
     className: 'umd-serif-maximum',
     ...maxium,
   }),
 
-  extraLarge: create.jssObject({
+  extraLarge: create.jss.objectWithClassName({
     className: 'umd-serif-extralarge',
     ...extralarge,
   }),
 
-  larger: create.jssObject({
+  larger: create.jss.objectWithClassName({
     className: 'umd-serif-larger',
     ...larger,
   }),
 
-  large: create.jssObject({
+  large: create.jss.objectWithClassName({
     className: 'umd-serif-large',
     ...large,
   }),
 
-  medium: create.jssObject({
+  medium: create.jss.objectWithClassName({
     className: 'umd-serif-medium',
     ...medium,
   }),

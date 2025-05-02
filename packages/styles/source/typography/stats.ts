@@ -117,17 +117,17 @@ export const small = {
  * @since 1.1.0
  */
 export const fonts = {
-  statLarge: create.jssObject({
+  statLarge: create.jss.objectWithClassName({
     className: 'umd-statistic-sans-large',
     ...large,
   }),
 
-  statMedium: create.jssObject({
+  statMedium: create.jss.objectWithClassName({
     className: 'umd-statistic-sans-medium',
     ...medium,
   }),
 
-  statSmall: create.jssObject({
+  statSmall: create.jss.objectWithClassName({
     className: 'umd-statistic-sans-small',
     ...small,
   }),

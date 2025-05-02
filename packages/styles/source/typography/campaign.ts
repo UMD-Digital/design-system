@@ -5,7 +5,6 @@
 
 import { font, media } from '../token';
 import { create } from '../utilities';
-import type { JssObject } from '../_types';
 
 /**
  * Breakpoint constants for responsive styles
@@ -169,7 +168,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  maximum: create.jssObject({
+  maximum: create.jss.objectWithClassName({
     className: 'umd-campaign-maximum',
     ...maxium,
   }),
@@ -188,7 +187,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  extraLarge: create.jssObject({
+  extraLarge: create.jss.objectWithClassName({
     className: 'umd-campaign-extralarge',
     ...extralarge,
   }),
@@ -207,7 +206,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  large: create.jssObject({
+  large: create.jss.objectWithClassName({
     className: 'umd-campaign-large',
     ...large,
   }),
@@ -226,7 +225,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  medium: create.jssObject({
+  medium: create.jss.objectWithClassName({
     className: 'umd-campaign-medium',
     ...medium,
   }),
@@ -245,7 +244,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  small: create.jssObject({
+  small: create.jss.objectWithClassName({
     className: 'umd-campaign-small',
     ...CampaignSmall,
   }),
@@ -264,7 +263,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  extraSmall: create.jssObject({
+  extraSmall: create.jss.objectWithClassName({
     className: 'umd-campaign-extrasmall',
     ...extraSmall,
   }),

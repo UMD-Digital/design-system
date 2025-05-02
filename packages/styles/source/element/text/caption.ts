@@ -29,7 +29,7 @@ const classNamePrefix = 'umd-text-caption';
  * ```
  * @since 1.1.0
  */
-export const smaller: JssObject = create.jssObject({
+export const smaller: JssObject = create.jss.objectWithClassName({
   ...sans.smaller,
   color: color.gray.mediumAA,
   paddingTop: spacing.xs,
@@ -59,7 +59,7 @@ export const smaller: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const smallerItalic: JssObject = create.jssObject({
+export const smallerItalic: JssObject = create.jss.objectWithClassName({
   ...smaller,
   color: color.gray.darker,
   fontStyle: 'italic',

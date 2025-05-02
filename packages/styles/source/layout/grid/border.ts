@@ -38,7 +38,7 @@ const boarderBase = {
  * ```
  * @since 1.1.0
  */
-export const columnsTwo: JssObject = create.jssObject({
+export const columnsTwo: JssObject = create.jss.objectWithClassName({
   ...base.two,
   ...boarderBase,
 
@@ -85,7 +85,7 @@ export const columnsTwo: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const columnsThree: JssObject = create.jssObject({
+export const columnsThree: JssObject = create.jss.objectWithClassName({
   ...base.three,
   ...boarderBase,
 
@@ -136,7 +136,7 @@ export const columnsThree: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const columnsFour: JssObject = create.jssObject({
+export const columnsFour: JssObject = create.jss.objectWithClassName({
   ...base.four,
   ...boarderBase,
 

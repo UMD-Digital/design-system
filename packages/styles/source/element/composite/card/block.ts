@@ -128,7 +128,7 @@ const createContainerStyles = (customStyles = {}) => {
  * ```
  * @since 1.1.0
  */
-export const light: JssObject = create.jssObject({
+export const light: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-light`,
   ...createContainerStyles(),
   ...createTextStyles(),
@@ -149,7 +149,7 @@ export const light: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const border: JssObject = create.jssObject({
+export const border: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-border`,
   ...createContainerStyles({
     border: `1px solid ${color.gray.light}`,
@@ -184,7 +184,7 @@ export const border: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const borderDark: JssObject = create.jssObject({
+export const borderDark: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-border`,
   ...createContainerStyles({
     border: `1px solid ${color.gray.darker}`,
@@ -219,7 +219,7 @@ export const borderDark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const dark: JssObject = create.jssObject({
+export const dark: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-dark`,
 
   ...createContainerStyles({
@@ -257,7 +257,7 @@ export const dark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const transparent: JssObject = create.jssObject({
+export const transparent: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-transparent`,
 
   ...createContainerStyles({
@@ -307,7 +307,7 @@ const personImage = {
  * ```
  * @since 1.1.0
  */
-export const person: JssObject = create.jssObject({
+export const person: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-person`,
 
   [`.${image.wrapper.className}`]: {
@@ -333,7 +333,7 @@ export const person: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const personDark: JssObject = create.jssObject({
+export const personDark: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-person-dark`,
 
   [`.${image.wrapper.className}`]: {

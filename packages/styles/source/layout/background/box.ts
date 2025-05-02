@@ -24,7 +24,7 @@ const classNamePrefix = 'umd-layout-background-box';
  * ```
  * @since 1.1.0
  */
-export const white: JssObject = create.jssObject({
+export const white: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-white`,
   display: 'inline-block',
   zIndex: '9',

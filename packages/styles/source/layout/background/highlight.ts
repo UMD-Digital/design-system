@@ -41,7 +41,7 @@ const box = {
  * ```
  * @since 1.1.0
  */
-export const white: JssObject = create.jssObject({
+export const white: JssObject = create.jss.objectWithClassName({
   ...box,
 
   className: [
@@ -69,7 +69,7 @@ export const white: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const light: JssObject = create.jssObject({
+export const light: JssObject = create.jss.objectWithClassName({
   ...box,
   backgroundColor: `${color.gray.lighter}`,
 
@@ -98,7 +98,7 @@ export const light: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const dark: JssObject = create.jssObject({
+export const dark: JssObject = create.jss.objectWithClassName({
   ...box,
   backgroundColor: `${color.gray.darker}`,
 

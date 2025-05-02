@@ -141,7 +141,7 @@ const advancedBase = {
  * ```
  * @since 1.1.0
  */
-export const simple: JssObject = create.jssObject({
+export const simple: JssObject = create.jss.objectWithClassName({
   ...simpleBase,
 
   className: [
@@ -165,7 +165,7 @@ export const simple: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const simpleDark: JssObject = create.jssObject({
+export const simpleDark: JssObject = create.jss.objectWithClassName({
   ...simpleBase,
   ...themeDarkColors,
   className: `${classNamePrefix}-simple-dark`,
@@ -189,7 +189,7 @@ export const simpleDark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const simpleLarge: JssObject = create.jssObject({
+export const simpleLarge: JssObject = create.jss.objectWithClassName({
   ...simpleBase,
   fontSize: font.size.lg,
 
@@ -219,7 +219,7 @@ export const simpleLarge: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const simpleLargeDark: JssObject = create.jssObject({
+export const simpleLargeDark: JssObject = create.jss.objectWithClassName({
   ...simpleBase,
   ...themeDarkColors,
   fontSize: font.size.lg,
@@ -246,7 +246,7 @@ export const simpleLargeDark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const simpleScaling: JssObject = create.jssObject({
+export const simpleScaling: JssObject = create.jss.objectWithClassName({
   ...simpleBase,
   fontSize: font.size.base,
 
@@ -281,7 +281,7 @@ export const simpleScaling: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const simpleScalingDark: JssObject = create.jssObject({
+export const simpleScalingDark: JssObject = create.jss.objectWithClassName({
   ...simpleBase,
   ...themeDarkColors,
   fontSize: font.size.base,
@@ -321,7 +321,7 @@ export const simpleScalingDark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const advanced: JssObject = create.jssObject({
+export const advanced: JssObject = create.jss.objectWithClassName({
   FontWeight: font.weight.normal,
 
   ...advancedBase,
@@ -371,7 +371,7 @@ export const advanced: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const advancedDark: JssObject = create.jssObject({
+export const advancedDark: JssObject = create.jss.objectWithClassName({
   ...advanced,
   ...themeDarkColors,
 

@@ -46,7 +46,7 @@ export const label = {
  * ```
  * @since 1.1.0
  */
-export const large: JssObject = create.jssObject({
+export const large: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-large`,
   ...label,
 });

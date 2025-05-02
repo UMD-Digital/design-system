@@ -29,7 +29,7 @@ const classNamePrefix = 'umd-layout-grid-offset';
  * ```
  * @since 1.1.0
  */
-export const threeColumn: JssObject = create.jssObject({
+export const threeColumn: JssObject = create.jss.objectWithClassName({
   ...threeLarge,
 
   className: [

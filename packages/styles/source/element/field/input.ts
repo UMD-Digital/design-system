@@ -128,7 +128,7 @@ const dateTimeWrapperBase = {
  * ```
  * @since 1.1.0
  */
-export const text: JssObject = create.jssObject({
+export const text: JssObject = create.jss.objectWithClassName({
   className: [`${classNamePrefix}-text`],
 });
 
@@ -150,7 +150,7 @@ export const text: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const dateTimeWrapper: JssObject = create.jssObject({
+export const dateTimeWrapper: JssObject = create.jss.objectWithClassName({
   ...dateTimeWrapperBase,
 
   className: [
@@ -184,7 +184,7 @@ export const dateTimeWrapper: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const timeWrapper: JssObject = create.jssObject({
+export const timeWrapper: JssObject = create.jss.objectWithClassName({
   ...dateTimeWrapperBase,
 
   className: [
@@ -218,7 +218,7 @@ export const timeWrapper: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const searchWrapper: JssObject = create.jssObject({
+export const searchWrapper: JssObject = create.jss.objectWithClassName({
   position: 'relative',
 
   className: [

@@ -25,7 +25,7 @@ const classNamePrefix = 'umd-element-event-meta';
  * ```
  * @since 1.1.0
  */
-export const container: JssObject = create.jssObject({
+export const container: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-container`,
   container: 'inline-size',
 
@@ -52,7 +52,7 @@ export const container: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const wrapper: JssObject = create.jssObject({
+export const wrapper: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-wrapper`,
   display: 'flex',
   flexWrap: 'wrap',
@@ -103,7 +103,7 @@ export const wrapper: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const item: JssObject = create.jssObject({
+export const item: JssObject = create.jss.objectWithClassName({
   ...sans.smaller,
   className: `${classNamePrefix}-item`,
   color: `${color.gray.dark}`,

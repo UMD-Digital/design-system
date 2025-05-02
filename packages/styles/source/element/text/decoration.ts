@@ -54,7 +54,7 @@ const watermarkChild = {
  * ```
  * @since 1.1.0
  */
-export const watermark: JssObject = create.jssObject({
+export const watermark: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-watermark`,
     /** @deprecated Use 'umd-text-decoration-watermark' instead */
@@ -87,7 +87,7 @@ export const watermark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const watermarkDark: JssObject = create.jssObject({
+export const watermarkDark: JssObject = create.jss.objectWithClassName({
   ...watermark,
 
   className: [
@@ -122,7 +122,7 @@ export const watermarkDark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const ribbon: JssObject = create.jssObject({
+export const ribbon: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-eyebrow`,
     /** @deprecated Use 'umd-text-decoration-eyebrow' instead */

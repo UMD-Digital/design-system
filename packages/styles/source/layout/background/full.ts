@@ -54,7 +54,7 @@ export const padding = {
  * ```
  * @since 1.1.0
  */
-export const light: JssObject = create.jssObject({
+export const light: JssObject = create.jss.objectWithClassName({
   ...padding,
   backgroundColor: `${color.gray.lightest}`,
 
@@ -83,7 +83,7 @@ export const light: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const dark: JssObject = create.jssObject({
+export const dark: JssObject = create.jss.objectWithClassName({
   ...padding,
   backgroundColor: `${color.black}`,
 

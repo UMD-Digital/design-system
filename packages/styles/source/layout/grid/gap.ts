@@ -42,7 +42,7 @@ const paragraphOverwrite = {
  * ```
  * @since 1.1.0
  */
-export const two: JssObject = create.jssObject({
+export const two: JssObject = create.jss.objectWithClassName({
   ...base.two,
 
   [`@media (${media.queries.large.min})`]: {
@@ -80,7 +80,7 @@ export const two: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const three: JssObject = create.jssObject({
+export const three: JssObject = create.jss.objectWithClassName({
   ...base.three,
 
   [`@media (${media.queries.large.min})`]: {
@@ -113,7 +113,7 @@ export const three: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const threeLarge: JssObject = create.jssObject({
+export const threeLarge: JssObject = create.jss.objectWithClassName({
   ...base.three,
 
   [`@media (${media.queries.desktop.min})`]: {
@@ -147,7 +147,7 @@ export const threeLarge: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const four: JssObject = create.jssObject({
+export const four: JssObject = create.jss.objectWithClassName({
   ...base.four,
 
   [`@media (${media.queries.large.min})`]: {
@@ -181,7 +181,7 @@ export const four: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const fourCentered: JssObject = create.jssObject({
+export const fourCentered: JssObject = create.jss.objectWithClassName({
   ...base.four,
 
   [`@media (${media.queries.large.min})`]: {
@@ -217,7 +217,7 @@ export const fourCentered: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const fourLarge: JssObject = create.jssObject({
+export const fourLarge: JssObject = create.jss.objectWithClassName({
   ...base.four,
 
   [`@media (${media.queries.large.min})`]: {
@@ -256,7 +256,7 @@ export const fourLarge: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const fourLargeCentered: JssObject = create.jssObject({
+export const fourLargeCentered: JssObject = create.jss.objectWithClassName({
   ...base.four,
 
   [`@media (${media.queries.highDef.min})`]: {
@@ -290,7 +290,7 @@ export const fourLargeCentered: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const stacked: JssObject = create.jssObject({
+export const stacked: JssObject = create.jss.objectWithClassName({
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: `${spacing.md}`,

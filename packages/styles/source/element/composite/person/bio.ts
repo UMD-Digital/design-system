@@ -78,7 +78,7 @@ const bioLayout = {
  * ```
  * @since 1.1.0
  */
-export const small: JssObject = create.jssObject({
+export const small: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-small`,
   ...bioLayout,
 });
@@ -97,7 +97,7 @@ export const small: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const smallDark: JssObject = create.jssObject({
+export const smallDark: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-small-dark`,
   ...bioLayout,
 });

@@ -61,7 +61,7 @@ export const checkbox = {
  * ```
  * @since 1.1.0
  */
-export const checkboxWrapper: JssObject = create.jssObject({
+export const checkboxWrapper: JssObject = create.jss.objectWithClassName({
   ...baseInputChoiceWrapper,
 
   className: [

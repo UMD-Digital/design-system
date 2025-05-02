@@ -56,7 +56,7 @@ const baseIconSmall = {
  * ```
  * @since 1.1.0
  */
-export const small: JssObject = create.jssObject({
+export const small: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-button`,
   ...baseIconSmall,
   backgroundColor: `${color.gray.lightest}`,
@@ -80,7 +80,7 @@ export const small: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const smallDark: JssObject = create.jssObject({
+export const smallDark: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-button`,
   ...baseIconSmall,
   backgroundColor: `${color.gray.darker}`,

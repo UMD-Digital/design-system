@@ -24,7 +24,7 @@ const classNamePrefix = 'umd-embed';
  * ```
  * @since 1.1.0
  */
-export const inline: JssObject = create.jssObject({
+export const inline: JssObject = create.jss.objectWithClassName({
   display: 'block',
   width: '100%',
   backgroundColor: color.black,

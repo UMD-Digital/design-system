@@ -371,47 +371,47 @@ export const scalingMin = {
  * @since 1.1.0
  */
 export const fonts = {
-  maximum: create.jssObject({
+  maximum: create.jss.objectWithClassName({
     className: 'umd-sans-maximum',
     ...maxium,
   }),
 
-  largest: create.jssObject({
+  largest: create.jss.objectWithClassName({
     className: 'umd-sans-largest',
     ...largest,
   }),
 
-  extraLarge: create.jssObject({
+  extraLarge: create.jss.objectWithClassName({
     className: 'umd-sans-extralarge',
     ...extraLarge,
   }),
 
-  larger: create.jssObject({
+  larger: create.jss.objectWithClassName({
     className: 'umd-sans-larger',
     ...larger,
   }),
 
-  large: create.jssObject({
+  large: create.jss.objectWithClassName({
     className: 'umd-sans-large',
     ...large,
   }),
 
-  medium: create.jssObject({
+  medium: create.jss.objectWithClassName({
     className: 'umd-sans-medium',
     ...medium,
   }),
 
-  small: create.jssObject({
+  small: create.jss.objectWithClassName({
     className: 'umd-sans-small',
     ...small,
   }),
 
-  smaller: create.jssObject({
+  smaller: create.jss.objectWithClassName({
     className: 'umd-sans-smaller',
     ...smaller,
   }),
 
-  min: create.jssObject({
+  min: create.jss.objectWithClassName({
     className: 'umd-sans-min',
     ...min,
   }),
@@ -431,11 +431,11 @@ export const fonts = {
  * @since 1.1.0
  */
 export const scalingFonts = {
-  larger: create.jssObject({
+  larger: create.jss.objectWithClassName({
     ...scalingLarger,
     className: 'umd-sans-scaling-larger',
   }),
-  min: create.jssObject({
+  min: create.jss.objectWithClassName({
     ...scalingMin,
     className: 'umd-sans-scaling-min',
   }),
@@ -457,7 +457,7 @@ export const scalingFonts = {
  * @since 1.1.0
  */
 export const transformations = {
-  largestUppercase: create.jssObject({
+  largestUppercase: create.jss.objectWithClassName({
     className: 'umd-sans-largest-uppercase',
     ...largest,
 
@@ -465,7 +465,7 @@ export const transformations = {
     textTransform: 'uppercase',
   }),
 
-  extraLargeUppercase: create.jssObject({
+  extraLargeUppercase: create.jss.objectWithClassName({
     className: 'umd-sans-extralarge-uppercase',
     ...extraLarge,
 
@@ -473,14 +473,14 @@ export const transformations = {
     textTransform: 'uppercase',
   }),
 
-  extraLargeBold: create.jssObject({
+  extraLargeBold: create.jss.objectWithClassName({
     className: 'umd-sans-extralarge-bold',
     ...extraLarge,
 
     fontWeight: font.weight['bold'],
   }),
 
-  largerBold: create.jssObject({
+  largerBold: create.jss.objectWithClassName({
     className: 'umd-sans-larger-bold',
     ...larger,
 

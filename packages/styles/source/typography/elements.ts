@@ -164,27 +164,27 @@ export const interativeSmall = {
  * @since 1.1.0
  */
 export const fonts = {
-  eyebrow: create.jssObject({
+  eyebrow: create.jss.objectWithClassName({
     className: 'umd-eyebrow',
     ...eyebrow,
   }),
 
-  labelMedium: create.jssObject({
+  labelMedium: create.jss.objectWithClassName({
     className: 'umd-label-sans-medium',
     ...labelMedium,
   }),
 
-  labelSmall: create.jssObject({
+  labelSmall: create.jss.objectWithClassName({
     className: 'umd-label-sans-small',
     ...labelSmall,
   }),
 
-  medium: create.jssObject({
+  medium: create.jss.objectWithClassName({
     className: 'umd-interactive-sans-medium',
     ...interativeMedium,
   }),
 
-  small: create.jssObject({
+  small: create.jss.objectWithClassName({
     className: 'umd-interactive-sans-small',
     ...interativeSmall,
   }),

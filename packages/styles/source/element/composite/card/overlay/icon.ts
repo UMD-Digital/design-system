@@ -104,7 +104,7 @@ const createContainerStyles = (customStyles = {}) => {
  * ```
  * @since 1.1.0
  */
-export const elementIconContainer: JssObject = create.jssObject({
+export const elementIconContainer: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-element-container`,
   display: 'flex',
   justifyContent: 'flex-end',
@@ -146,7 +146,7 @@ const iconContainerTextBase = {
  * ```
  * @since 1.1.0
  */
-export const light: JssObject = create.jssObject({
+export const light: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-light`,
   ...createContainerStyles({
     backgroundColor: color.gray.lightest,
@@ -172,7 +172,7 @@ export const light: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const dark: JssObject = create.jssObject({
+export const dark: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-dark`,
   ...createContainerStyles({
     backgroundColor: color.gray.darker,

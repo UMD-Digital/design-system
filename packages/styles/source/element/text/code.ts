@@ -28,7 +28,7 @@ const classNamePrefix = 'umd-text-code';
  * ```
  * @since 1.1.0
  */
-export const code: JssObject = create.jssObject({
+export const code: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}`,
     /** @deprecated Use 'umd-text-code' instead */

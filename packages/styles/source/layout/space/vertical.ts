@@ -28,7 +28,7 @@ const classNamePrefix = 'umd-layout-space-vertical';
  * ```
  * @since 1.1.0
  */
-export const landing: JssObject = create.jssObject({
+export const landing: JssObject = create.jss.objectWithClassName({
   marginBottom: spacing['3xl'],
 
   [`@media (${media.queries.tablet.min})`]: {
@@ -64,7 +64,7 @@ export const landing: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const landingChild: JssObject = create.jssObject({
+export const landingChild: JssObject = create.jss.objectWithClassName({
   marginBottom: spacing.lg,
 
   [`@media (${media.queries.tablet.min})`]: {
@@ -100,7 +100,7 @@ export const landingChild: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const interior: JssObject = create.jssObject({
+export const interior: JssObject = create.jss.objectWithClassName({
   marginBottom: spacing['3xl'],
 
   [`@media (${media.queries.desktop.min})`]: {
@@ -132,7 +132,7 @@ export const interior: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const interiorChild: JssObject = create.jssObject({
+export const interiorChild: JssObject = create.jss.objectWithClassName({
   marginBottom: spacing.lg,
 
   className: [
@@ -160,7 +160,7 @@ export const interiorChild: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const headlineLarge: JssObject = create.jssObject({
+export const headlineLarge: JssObject = create.jss.objectWithClassName({
   marginBottom: spacing.sm,
 
   [`@media (${media.queries.desktop.min})`]: {
@@ -192,7 +192,7 @@ export const headlineLarge: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const headlineMedium: JssObject = create.jssObject({
+export const headlineMedium: JssObject = create.jss.objectWithClassName({
   marginBottom: spacing.sm,
 
   className: [

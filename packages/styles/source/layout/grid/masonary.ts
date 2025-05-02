@@ -25,7 +25,7 @@ import type { JssObject } from '../../_types';
  * ```
  * @since 1.1.0
  */
-export const twoColumn: JssObject = create.jssObject({
+export const twoColumn: JssObject = create.jss.objectWithClassName({
   display: 'grid',
   gridTemplateColumns: '1fr',
   gridGap: spacing.md,

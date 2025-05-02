@@ -59,7 +59,7 @@ const pillSvg = {
  * ```
  * @since 1.1.0
  */
-export const pillList: JssObject = create.jssObject({
+export const pillList: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-pill`,
     /** @deprecated Use 'umd-text-cluster-pill' instead */
@@ -100,7 +100,7 @@ export const pillList: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const pillListDark: JssObject = create.jssObject({
+export const pillListDark: JssObject = create.jss.objectWithClassName({
   ...pillList,
 
   className: [
@@ -145,7 +145,7 @@ export const pillListDark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const pillDoNotUse: JssObject = create.jssObject({
+export const pillDoNotUse: JssObject = create.jss.objectWithClassName({
   className: [
     /** @deprecated Use 'umd-pill-list' instead */
     'umd-pills',

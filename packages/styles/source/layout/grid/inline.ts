@@ -57,7 +57,7 @@ export const row: JssObject = {
  * ```
  * @since 1.1.0
  */
-export const tabletRows: JssObject = create.jssObject({
+export const tabletRows: JssObject = create.jss.objectWithClassName({
   ...columns,
 
   [`@media (${media.queries.large.min})`]: {
@@ -91,7 +91,7 @@ export const tabletRows: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const stretch: JssObject = create.jssObject({
+export const stretch: JssObject = create.jss.objectWithClassName({
   display: 'flex',
   flexWrap: 'wrap',
   gap: spacing.sm,

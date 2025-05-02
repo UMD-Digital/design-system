@@ -285,7 +285,7 @@ const orderedListBase = {
  *
  * @since 1.1.0
  */
-export const ordered: JssObject = create.jssObject({
+export const ordered: JssObject = create.jss.objectWithClassName({
   className: `umd-list-ordered`,
   ...orderedBase,
   ...orderedListBase,
@@ -306,7 +306,7 @@ export const ordered: JssObject = create.jssObject({
  *
  * @since 1.1.0
  */
-export const unordered: JssObject = create.jssObject({
+export const unordered: JssObject = create.jss.objectWithClassName({
   className: `umd-list-unordered`,
 
   ...unorderedBase,

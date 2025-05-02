@@ -29,7 +29,7 @@ const classNamePrefix = 'umd-text-line';
  * ```
  * @since 1.1.0
  */
-export const tailwing: JssObject = create.jssObject({
+export const tailwing: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-tailwing`,
     /** @deprecated Use 'umd-text-line-tailwing' instead */
@@ -119,7 +119,7 @@ const trailingBefore = {
  * ```
  * @since 1.1.0
  */
-export const trailing = create.jssObject({
+export const trailing = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-trailing`,
     /** @deprecated Use 'umd-text-line-trailing' instead */
@@ -166,7 +166,7 @@ export const trailing = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const trailingLight: JssObject = create.jssObject({
+export const trailingLight: JssObject = create.jss.objectWithClassName({
   ...trailing,
   backgroundColor: `${color.gray.lighter}`,
 
@@ -195,7 +195,7 @@ export const trailingLight: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const trailingDark: JssObject = create.jssObject({
+export const trailingDark: JssObject = create.jss.objectWithClassName({
   ...trailing,
   backgroundColor: `${color.gray.darker}`,
   color: `${color.white}`,
@@ -230,7 +230,7 @@ export const trailingDark: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const adjustent: JssObject = create.jssObject({
+export const adjustent: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-adjustent`,
     /** @deprecated Use 'umd-text-line-adjustent' instead */
@@ -265,7 +265,7 @@ export const adjustent: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const adjustentInset: JssObject = create.jssObject({
+export const adjustentInset: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-adjustent-inset`,
   position: 'relative',
   paddingLeft: `${spacing.md}`,

@@ -39,7 +39,7 @@ const focusBase = {
  * ```
  * @since 1.1.0
  */
-export const red: JssObject = create.jssObject({
+export const red: JssObject = create.jss.objectWithClassName({
   ...base,
   color: color.black,
   backgroundImage: 'linear-gradient(#000000, #000000)',
@@ -67,7 +67,7 @@ export const red: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const white: JssObject = create.jssObject({
+export const white: JssObject = create.jss.objectWithClassName({
   ...base,
   color: color.white,
   backgroundImage: 'linear-gradient(#ffffff, #ffffff)',

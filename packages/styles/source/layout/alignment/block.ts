@@ -28,7 +28,7 @@ const classNamePrefix = 'umd-layout-alignment-block';
  * ```
  * @since 1.1.0
  */
-export const center: JssObject = create.jssObject({
+export const center: JssObject = create.jss.objectWithClassName({
   display: 'flex',
   justifyContent: 'center',
 
@@ -57,7 +57,7 @@ export const center: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const stacked: JssObject = create.jssObject({
+export const stacked: JssObject = create.jss.objectWithClassName({
   display: 'flex',
   flexDirection: 'column',
 

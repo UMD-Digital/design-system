@@ -50,7 +50,7 @@ const outlineBase = {
  * ```
  * @since 1.1.0
  */
-export const normal: JssObject = create.jssObject({
+export const normal: JssObject = create.jss.objectWithClassName({
   ...base,
   ...outlineBase,
 
@@ -84,7 +84,7 @@ export const normal: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const large: JssObject = create.jssObject({
+export const large: JssObject = create.jss.objectWithClassName({
   ...baseLarge,
   ...outlineBase,
 
@@ -114,7 +114,7 @@ export const large: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const white: JssObject = create.jssObject({
+export const white: JssObject = create.jss.objectWithClassName({
   ...base,
   color: color.white,
   border: `1px solid ${color.white}`,

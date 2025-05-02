@@ -25,7 +25,7 @@ const classNamePrefix = 'umd-action-button';
  * ```
  * @since 1.1.0
  */
-export const fullScreen: JssObject = create.jssObject({
+export const fullScreen: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-full-screen`,
   ...sans.min,
   position: 'absolute',
@@ -67,7 +67,7 @@ export const fullScreen: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const videoState: JssObject = create.jssObject({
+export const videoState: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-video-state`,
   position: 'absolute',
   bottom: '0',

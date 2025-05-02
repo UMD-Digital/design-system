@@ -1,3 +1,4 @@
+import { root, reset, variables } from './root';
 import * as accessibilityNamespace from './accessibility';
 import * as animationsNamespace from './animation';
 import * as elementNamespace from './element';
@@ -7,7 +8,6 @@ import * as typographyNamespace from './typography';
 import { default as webComponentsNamespace } from './web-components';
 import * as utilitiesNamespace from './utilities';
 
-export { root, reset, variables } from './root';
 export type { JssEntry, JssObject } from './_types';
 
 export const accessibility = accessibilityNamespace;
@@ -19,12 +19,23 @@ export const token = tokenNamespace;
 export const webComponents = webComponentsNamespace;
 export const utilities = utilitiesNamespace;
 
-export const outputStyles = {
+export { root, reset, variables };
+
+export const preRender = {
   ...typographyNamespace.fontFace.browserString,
+  ...root,
+  ...webComponentsNamespace,
+};
+
+export const postRender = {
   ...utilitiesNamespace.transform.processNestedObjects(accessibilityNamespace),
   ...utilitiesNamespace.transform.processNestedObjects(animationsNamespace),
   ...utilitiesNamespace.transform.processNestedObjects(elementNamespace),
   ...utilitiesNamespace.transform.processNestedObjects(layoutNamespace),
   ...utilitiesNamespace.transform.processNestedObjects(typographyNamespace),
-  ...webComponentsNamespace,
+};
+
+export const outputStyles = {
+  ...preRender,
+  ...postRender,
 };

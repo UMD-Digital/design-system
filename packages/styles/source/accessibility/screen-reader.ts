@@ -15,7 +15,7 @@ import type { JssObject } from '../_types';
  * ```
  * @since 1.1.0
  */
-export const only: JssObject = create.jssObject({
+export const only: JssObject = create.jss.objectWithClassName({
   className: 'sr-only',
   clip: 'rect(0,0,0,0)',
   borderWidth: '0px',

@@ -24,7 +24,7 @@ const classNamePrefix = 'umd-asset-gif';
  * ```
  * @since 1.1.0
  */
-export const toggle: JssObject = create.jssObject({
+export const toggle: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-toggle`,
   display: 'block',
   height: '100%',

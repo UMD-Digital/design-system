@@ -24,7 +24,7 @@ const classNamePrefix = 'umd-element-event-sign';
  * ```
  * @since 1.1.0
  */
-export const container: JssObject = create.jssObject({
+export const container: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-container`,
   display: 'flex',
   alignItems: 'center',

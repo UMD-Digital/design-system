@@ -58,7 +58,7 @@ export const radio = {
  * ```
  * @since 1.1.0
  */
-export const radioWrapper: JssObject = create.jssObject({
+export const radioWrapper: JssObject = create.jss.objectWithClassName({
   ...baseInputChoiceWrapper,
 
   className: [

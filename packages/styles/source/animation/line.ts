@@ -206,7 +206,7 @@ const classNamePrefix = 'umd-animation-line';
  * @since 1.1.0
  */
 
-export const slideUnderRed: JssObject = create.jssObject({
+export const slideUnderRed: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-slide-red`,
     /** @deprecated Use 'umd-animation-line-slide-red' instead */
@@ -234,7 +234,7 @@ export const slideUnderRed: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const slideUnderBlack: JssObject = create.jssObject({
+export const slideUnderBlack: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-slide-black`,
     /** @deprecated Use 'umd-animation-line-slide-black' instead */
@@ -262,7 +262,7 @@ export const slideUnderBlack: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const slideUnderWhite: JssObject = create.jssObject({
+export const slideUnderWhite: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-slide-white`,
     /** @deprecated Use 'umd-animation-line-slide-white' instead */
@@ -290,7 +290,7 @@ export const slideUnderWhite: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const slideUnderGold: JssObject = create.jssObject({
+export const slideUnderGold: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-slide-gold`,
     /** @deprecated Use 'umd-animation-line-slide-gold' instead */
@@ -318,7 +318,7 @@ export const slideUnderGold: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const slideUnderGrayRed: JssObject = create.jssObject({
+export const slideUnderGrayRed: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-slide-gray-red`,
     /** @deprecated Use 'umd-animation-line-slide-gray-red' instead */
@@ -346,7 +346,7 @@ export const slideUnderGrayRed: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const slideUnderGrayDarkRed: JssObject = create.jssObject({
+export const slideUnderGrayDarkRed: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-slide-graydark-red`,
     /** @deprecated Use 'umd-animation-line-slide-graydark-red' instead */
@@ -374,7 +374,7 @@ export const slideUnderGrayDarkRed: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const fadeUnderRed: JssObject = create.jssObject({
+export const fadeUnderRed: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-fade-red`,
     /** @deprecated Use 'umd-animation-line-fade-red' instead */
@@ -405,7 +405,7 @@ export const fadeUnderRed: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const fadeUnderGray: JssObject = create.jssObject({
+export const fadeUnderGray: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-fade-gray`,
     /** @deprecated Use 'umd-animation-line-fade-gray' instead */
@@ -436,7 +436,7 @@ export const fadeUnderGray: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const fadeUnderGold: JssObject = create.jssObject({
+export const fadeUnderGold: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-fade-gold`,
     /** @deprecated Use 'umd-animation-line-fade-gold' instead */
@@ -467,7 +467,7 @@ export const fadeUnderGold: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const fadeUnderBlack: JssObject = create.jssObject({
+export const fadeUnderBlack: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-fade-black`,
     /** @deprecated Use 'umd-animation-line-fade-black' instead */
@@ -498,7 +498,7 @@ export const fadeUnderBlack: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const fadeUnderWhite: JssObject = create.jssObject({
+export const fadeUnderWhite: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-fade-white`,
     /** @deprecated Use 'umd-animation-line-fade-white' instead */
@@ -525,7 +525,7 @@ export const fadeUnderWhite: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const fadeInSimpleDark: JssObject = create.jssObject({
+export const fadeInSimpleDark: JssObject = create.jss.objectWithClassName({
   className: 'umd-fadein-simple-dark',
   ...fadeUnder.dark,
 });
@@ -545,7 +545,7 @@ export const fadeInSimpleDark: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const fadeInSimpleLight: JssObject = create.jssObject({
+export const fadeInSimpleLight: JssObject = create.jss.objectWithClassName({
   className: 'umd-fadein-simple-light',
   ...fadeUnder.light,
 });

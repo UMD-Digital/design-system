@@ -30,7 +30,7 @@ const classNamePrefix = 'umd-field-set';
  * ```
  * @since 1.1.0
  */
-export const wrapper: JssObject = create.jssObject({
+export const wrapper: JssObject = create.jss.objectWithClassName({
   className: [
     `${classNamePrefix}-wrapper`,
     /** @deprecated Use 'umd-field-set-wrapper' instead */

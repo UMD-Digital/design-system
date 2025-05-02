@@ -152,7 +152,7 @@ const linkImageScaled = {
  * ```
  * @since 1.1.0
  */
-export const caption: JssObject = create.jssObject({
+export const caption: JssObject = create.jss.objectWithClassName({
   ...sans.min,
   className: `${classNamePrefix}-caption`,
   position: 'absolute',
@@ -180,7 +180,7 @@ export const caption: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const wrapper: JssObject = create.jssObject({
+export const wrapper: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-wrapper`,
   ...base,
   ...linkImage,
@@ -201,7 +201,7 @@ export const wrapper: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const wrapperScaled: JssObject = create.jssObject({
+export const wrapperScaled: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-wrapper-scaled`,
   ...base,
   width: '100%',
@@ -223,7 +223,7 @@ export const wrapperScaled: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const aspectStandard: JssObject = create.jssObject({
+export const aspectStandard: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-aspect-standard`,
   aspectRatio: `4/3`,
   width: 'auto',
@@ -248,7 +248,7 @@ export const aspectStandard: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const aspectSquare: JssObject = create.jssObject({
+export const aspectSquare: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-aspect-square`,
   aspectRatio: `1/1`,
   width: 'auto',

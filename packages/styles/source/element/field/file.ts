@@ -54,7 +54,7 @@ const file = {
  * ```
  * @since 1.1.0
  */
-export const fileWrapper: JssObject = create.jssObject({
+export const fileWrapper: JssObject = create.jss.objectWithClassName({
   backgroundColor: color.white,
   overflow: 'hidden',
   position: 'relative',

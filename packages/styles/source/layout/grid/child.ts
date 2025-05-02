@@ -28,7 +28,7 @@ const classNamePrefix = 'umd-layout-grid-child';
  * ```
  * @since 1.1.0
  */
-export const sizeDouble: JssObject = create.jssObject({
+export const sizeDouble: JssObject = create.jss.objectWithClassName({
   [`@media (${media.queries.large.min})`]: {
     gridColumn: 'span 2',
   },
@@ -54,7 +54,7 @@ export const sizeDouble: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const startSecond: JssObject = create.jssObject({
+export const startSecond: JssObject = create.jss.objectWithClassName({
   [`@media (${media.queries.highDef.min})`]: {
     gridColumnStart: '2',
   },

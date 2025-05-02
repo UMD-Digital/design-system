@@ -28,7 +28,7 @@ const keyFrameSlideRightEnd = {
   transform: 'translateX(0)',
 };
 
-const keyFrameFadeInFromBottom = create.jssObject({
+const keyFrameFadeInFromBottom = create.jss.objectWithClassName({
   className: `${classNamePrefix}-keyframe-slide-in-from-left`,
   '@keyframes fade-in-from-bottom': {
     from: {
@@ -42,7 +42,7 @@ const keyFrameFadeInFromBottom = create.jssObject({
   },
 });
 
-const keyFrameSlideInFromLeft = create.jssObject({
+const keyFrameSlideInFromLeft = create.jss.objectWithClassName({
   className: `${classNamePrefix}-keyframe-slide-in-from-left`,
 
   '@keyframes slide-in-from-left': {
@@ -70,7 +70,7 @@ const keyFrameSlideInFromLeft = create.jssObject({
  *
  * @since 1.1.0
  */
-export const slideRight: JssObject = create.jssObject({
+export const slideRight: JssObject = create.jss.objectWithClassName({
   ...keyFrameSlideInFromLeft,
   className: `${classNamePrefix}-slide-right`,
 
@@ -103,7 +103,7 @@ export const slideRight: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const fadeInFromBottom: JssObject = create.jssObject({
+export const fadeInFromBottom: JssObject = create.jss.objectWithClassName({
   ...keyFrameFadeInFromBottom,
 
   className: [

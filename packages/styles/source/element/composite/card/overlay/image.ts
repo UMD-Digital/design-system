@@ -114,7 +114,7 @@ const createContainerStyles = (customStyles = {}) => {
  * ```
  * @since 1.1.0
  */
-export const quoateContainer: JssObject = create.jssObject({
+export const quoateContainer: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-element-quote`,
   width: '41px',
   height: '30px',
@@ -139,7 +139,7 @@ export const quoateContainer: JssObject = create.jssObject({
  * ```
  * @since 1.1.0
  */
-export const tint: JssObject = create.jssObject({
+export const tint: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}`,
   ...createContainerStyles({}),
   ...createTextStyles({

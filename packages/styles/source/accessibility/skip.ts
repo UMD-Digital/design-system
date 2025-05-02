@@ -16,7 +16,7 @@ import type { JssObject } from '../_types';
  *
  * @since 1.1.0
  */
-export const content: JssObject = create.jssObject({
+export const content: JssObject = create.jss.objectWithClassName({
   className: 'umd-skip-content',
   backgroundColor: `#fff`,
   color: `#e21833`,

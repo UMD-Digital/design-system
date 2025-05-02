@@ -29,7 +29,7 @@ const classNamePrefix = 'umd-table';
  * ```
  * @since 1.1.0
  */
-export const inline: JssObject = create.jssObject({
+export const inline: JssObject = create.jss.objectWithClassName({
   borderCollapse: 'collapse',
   display: 'block',
   overflowX: 'auto',

@@ -37,7 +37,7 @@ const lockBase = {
 /**
  * @deprecated Use {@link full} instead.
  */
-export const lockFull: JssObject = create.jssObject({
+export const lockFull: JssObject = create.jss.objectWithClassName({
   className: ['umd-lock-full'],
 });
 
@@ -60,7 +60,7 @@ export const lockFull: JssObject = create.jssObject({
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing }
  * @since 1.1.0
  */
-export const full: JssObject = create.jssObject({
+export const full: JssObject = create.jss.objectWithClassName({
   ...lockBase,
   maxWidth: '100%',
 
@@ -74,7 +74,7 @@ export const full: JssObject = create.jssObject({
 /**
  * @deprecated Use {@link max} instead.
  */
-export const lock: JssObject = create.jssObject({
+export const lock: JssObject = create.jss.objectWithClassName({
   className: ['umd-lock'],
 });
 
@@ -98,7 +98,7 @@ export const lock: JssObject = create.jssObject({
  * @since 1.1.0
  */
 
-export const max: JssObject = create.jssObject({
+export const max: JssObject = create.jss.objectWithClassName({
   ...lockBase,
   maxWidth: `${spacing.maxWidth.max}`,
 
@@ -112,7 +112,7 @@ export const max: JssObject = create.jssObject({
 /**
  * @deprecated Use {@link large} instead.
  */
-export const lockLarge: JssObject = create.jssObject({
+export const lockLarge: JssObject = create.jss.objectWithClassName({
   className: ['umd-lock-small'],
 });
 
@@ -135,7 +135,7 @@ export const lockLarge: JssObject = create.jssObject({
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.1.0
  */
-export const large: JssObject = create.jssObject({
+export const large: JssObject = create.jss.objectWithClassName({
   ...lockBase,
   maxWidth: `${spacing.maxWidth.large}`,
 
@@ -149,7 +149,7 @@ export const large: JssObject = create.jssObject({
 /**
  * @deprecated Use {@link normal} instead.
  */
-export const lockNormal: JssObject = create.jssObject({
+export const lockNormal: JssObject = create.jss.objectWithClassName({
   className: ['umd-lock-normal'],
 });
 
@@ -172,7 +172,7 @@ export const lockNormal: JssObject = create.jssObject({
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.1.0
  */
-export const normal: JssObject = create.jssObject({
+export const normal: JssObject = create.jss.objectWithClassName({
   ...lockBase,
   maxWidth: `${spacing.maxWidth.normal}`,
 
@@ -186,7 +186,7 @@ export const normal: JssObject = create.jssObject({
 /**
  * @deprecated Use {@link small} instead.
  */
-export const lockSmall: JssObject = create.jssObject({
+export const lockSmall: JssObject = create.jss.objectWithClassName({
   className: ['umd-lock-extra-small'],
 });
 
@@ -209,7 +209,7 @@ export const lockSmall: JssObject = create.jssObject({
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.1.0
  */
-export const small: JssObject = create.jssObject({
+export const small: JssObject = create.jss.objectWithClassName({
   ...lockBase,
   maxWidth: `${spacing.maxWidth.small}`,
 
@@ -223,7 +223,7 @@ export const small: JssObject = create.jssObject({
 /**
  * @deprecated Use {@link smallest} instead.
  */
-export const lockSmallest: JssObject = create.jssObject({
+export const lockSmallest: JssObject = create.jss.objectWithClassName({
   className: ['umd-lock-smallest'],
 });
 
@@ -246,7 +246,7 @@ export const lockSmallest: JssObject = create.jssObject({
  * {@link https://designsystem.umd.edu/foundation/horizontal-spacing}
  * @since 1.1.0
  */
-export const smallest: JssObject = create.jssObject({
+export const smallest: JssObject = create.jss.objectWithClassName({
   ...lockBase,
   maxWidth: `${spacing.maxWidth.smallest}`,
 

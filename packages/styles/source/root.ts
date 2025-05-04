@@ -1,4 +1,4 @@
-import { color, font, spacing } from './token';
+import { color, font, media, spacing } from './token';
 import { sans } from './typography';
 import { transform } from './utilities';
 import { input } from './element/field/input';
@@ -6,7 +6,23 @@ import { textarea } from './element/field/textarea';
 import { select } from './element/field/select';
 import { label } from './element/text/label';
 
+/**
+ * Reset styles for the application.
+ * @returns {Object} DOM reset styles.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.token.baseColors.white
+ * ```
+ * @since 1.0.0
+ */
 export const reset = {
+  '*': {
+    margin: '0',
+    padding: '0',
+    boxSizing: 'border-box',
+  },
+
   body: {
     overscrollBehavior: 'none',
   },
@@ -68,13 +84,15 @@ export const reset = {
 export const variables = {
   '--serif': font.family.serif,
   '--sanSerif': font.family.sans,
-  ...transform.variables.tokensToCssVars(color, 'umd-color-'),
-  ...transform.variables.tokensToCssVars(spacing, 'umd-space-'),
+  ...transform.variables.fromTokens(color, 'umd-color-'),
+  ...transform.variables.fromTokens(spacing, 'umd-space-'),
+  ...transform.variables.fromTokens(font.size, 'umd-font-size-'),
 };
 
 export const root = {
   ':root': {
     ...variables,
+    ...media.conditionals,
     FontFamily: font.family.sans,
     FontSize: font.size.base,
     lineHeight: '1.5em',

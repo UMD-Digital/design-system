@@ -28,11 +28,13 @@ export const preRender = {
 };
 
 export const postRender = {
-  ...utilitiesNamespace.transform.processNestedObjects(accessibilityNamespace),
-  ...utilitiesNamespace.transform.processNestedObjects(animationsNamespace),
-  ...utilitiesNamespace.transform.processNestedObjects(elementNamespace),
-  ...utilitiesNamespace.transform.processNestedObjects(layoutNamespace),
-  ...utilitiesNamespace.transform.processNestedObjects(typographyNamespace),
+  ...utilitiesNamespace.transform.jss.formatNestedObjects({
+    accessibilityNamespace,
+    animationsNamespace,
+    elementNamespace,
+    layoutNamespace,
+    typographyNamespace,
+  }),
 };
 
 export const outputStyles = {

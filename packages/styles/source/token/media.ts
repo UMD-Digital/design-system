@@ -124,3 +124,94 @@ export const queries = {
   },
   maximum: { min: `min-width: ${breakpoints.maximum.min}` },
 };
+
+/**
+ * Conditional media query variables that set boolean flags for different breakpoints.
+ * These variables can be used in CSS to conditionally apply styles based on screen size.
+ * Each media query uses custom CSS properties (variables) that are set to `true` when the query matches.
+ * @type {Object<string, boolean | Object>}
+ * @property {boolean} --isMediaSmall - Flag for small breakpoint
+ * @property {boolean} --isMediaSmallMax - Flag for max small breakpoint
+ * @property {boolean} --isMediaMedium - Flag for medium breakpoint
+ * @property {boolean} --isMediaMediumMax - Flag for max medium breakpoint
+ * @property {boolean} --isMediaLarge - Flag for large breakpoint
+ * @property {boolean} --isMediaLargeMax - Flag for max large breakpoint
+ * @property {boolean} --isMediaTablet - Flag for tablet breakpoint
+ * @property {boolean} --isMediaTabletMax - Flag for max tablet breakpoint
+ * @property {boolean} --isMediaDesktop - Flag for desktop breakpoint
+ * @property {boolean} --isMediaDesktopMax - Flag for max desktop breakpoint
+ * @property {boolean} --isMediaHighDef - Flag for high-definition screens
+ *  * @example
+ * ```typescript
+ * // Load Reset styles or consume conditionals and append to your own styles
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.token.media.conditionals;
+ * ```
+ * @example
+ * ```css
+ *  .element {
+ *    display: none;
+ *    @container style(--isMediaDesktop: true) {
+ *      display: block;
+ *    }
+ *  };
+ * ```
+ * @since 1.3.0
+ */
+export const conditionals = {
+  '--isMediaSmall': false,
+  '--isMediaSmallMax': false,
+  '--isMediaMedium': false,
+  '--isMediaMediumMax': false,
+  '--isMediaLarge': false,
+  '--isMediaLargeMax': false,
+  '--isMediaTablet': false,
+  '--isMediaTabletMax': false,
+  '--isMediaDesktop': false,
+  '--isMediaDesktopMax': false,
+  '--isMediaHighDef': false,
+
+  [`@media (${queries.small.min})`]: {
+    '--isBreakpointSmall': true,
+  },
+
+  [`@media (${queries.small.max})`]: {
+    '--isBreakpointSmallMax': true,
+  },
+
+  [`@media (${queries.medium.min})`]: {
+    '--isBreakpointMedium': true,
+  },
+
+  [`@media (${queries.medium.max})`]: {
+    '--isBreakpointMediumMax': true,
+  },
+
+  [`@media (${queries.large.min})`]: {
+    '--isBreakpointLarge': true,
+  },
+
+  [`@media (${queries.large.max})`]: {
+    '--isBreakpointLargeMax': true,
+  },
+
+  [`@media (${queries.tablet.min})`]: {
+    '--isTablet': true,
+  },
+
+  [`@media (${queries.tablet.max})`]: {
+    '--isTabletMax': true,
+  },
+
+  [`@media (${queries.desktop.min})`]: {
+    '--isDesktop': true,
+  },
+
+  [`@media (${queries.desktop.max})`]: {
+    '--isDesktopMax': true,
+  },
+
+  [`@media (${queries.highDef.min})`]: {
+    '--isHighDef': true,
+  },
+};

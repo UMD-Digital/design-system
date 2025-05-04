@@ -1,23 +1,16 @@
 /**
  * @module utilities/transform
  * Utilities for transforming design tokens to CSS variables.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform.tokensToCssVars
- * ```
  * @since 1.1.0
  */
 
 import { isPlainObject, toKebabCase } from './css';
 
 /**
- * Options for the tokensToCssVars function
+ * Options for the fromTokens function
  */
-export interface TokensToCssVarsOptions {
-  /** Whether to convert camelCase keys to kebab-case */
+export interface TransformVariableOptions {
   kebabCase?: boolean;
-  /** Custom formatter for variable names */
   formatKey?: (key: string, kebabCase: boolean) => string;
 }
 
@@ -26,7 +19,7 @@ export interface TokensToCssVarsOptions {
  * @param {string} key The token key to format
  * @param {boolean} useKebabCase Whether to use kebab-case
  * @returns {string} The formatted key
- * @since 1.1.0
+ * @since 1.3.0
  */
 export function formatTokenKey(key: string, useKebabCase: boolean): string {
   if (/^\d/.test(key)) {
@@ -44,7 +37,7 @@ export function formatTokenKey(key: string, useKebabCase: boolean): string {
  * Converts a design token object to CSS variables with a configurable prefix.
  * @param {Record<string, any>} tokenObj The token object (colors, spacing, etc.)
  * @param {string} prefix The prefix to use for variable names (e.g., 'spacing-')
- * @param {TokensToCssVarsOptions} options Additional options
+ * @param {TransformVariableOptions} options Additional options
  * @returns {Record<string, any>} CSS variables object
  * @example
  * ```typescript
@@ -59,7 +52,7 @@ export function formatTokenKey(key: string, useKebabCase: boolean): string {
  *   }
  * };
  *
- * const cssVars = Styles.utilities.transform.tokensToCssVars(colors, 'color-', { kebabCase: true });
+ * const variables = Styles.utilities.transform.variables.fromTokens(colors, 'color-');
  * // Result: {
  * //   '--color-primary': '#ff0000',
  * //   '--color-secondary': '#00ff00',
@@ -67,12 +60,12 @@ export function formatTokenKey(key: string, useKebabCase: boolean): string {
  * //   '--color-neutral-900': '#000000'
  * // }
  * ```
- * @since 1.1.0
+ * @since 1.3.0
  */
-export function tokensToCssVars(
+export function fromTokens(
   tokenObj: Record<string, any>,
   prefix: string,
-  options: TokensToCssVarsOptions = {},
+  options: TransformVariableOptions = {},
 ): Record<string, any> {
   const { kebabCase = false, formatKey = formatTokenKey } = options;
   const cssVars: Record<string, any> = {};
@@ -91,12 +84,38 @@ export function tokensToCssVars(
     if (isPlainObject(value)) {
       const formattedKey = formatKey(key, kebabCase);
       const nestedPrefix = `${prefix}${formattedKey}-`;
-      const nestedVars = tokensToCssVars(value, nestedPrefix, options);
+      const nestedVars = fromTokens(value, nestedPrefix, options);
       Object.assign(cssVars, nestedVars);
     }
   });
 
   return cssVars;
+}
+
+/**
+ * Converts CSS variables object to CSS custom properties object.
+ * @param {Record<string, any>} cssVarsObj CSS variables object
+ * @returns {string} CSS custom properties as a string
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ *
+ * const cssVars = {
+ *   --color-primary: '#ff0000',
+ *   --color-secondary: '#00ff00'
+ * };
+ *
+ * const variables = Styles.utilities.transform.variables.toCssObject(cssVars);
+ * // Result: { '--color-primary': '#ff0000', '--color-secondary': '#00ff00'};
+ * ```
+ * @since 1.3.0
+ */
+export function toCssObject(cssVarsObj: Record<string, any>): string {
+  const rules = Object.entries(cssVarsObj)
+    .map(([name, value]) => `  '${name}': '${value}',`)
+    .join('\n');
+
+  return `{\n${rules}\n};`;
 }
 
 /**
@@ -108,23 +127,19 @@ export function tokensToCssVars(
  * import * as Styles from '@universityofmaryland/web-styles-library';
  *
  * const cssVars = {
- *   '--color-primary': '#ff0000',
- *   '--color-secondary': '#00ff00'
+ *   --color-primary: '#ff0000',
+ *   --color-secondary: '#00ff00'
  * };
  *
- * const css = Styles.utilities.transform.cssVarsToString(cssVars);
- * // Result:
- * // :root {
- * //   --color-primary: #ff0000;
- * //   --color-secondary: #00ff00;
- * // }
+ * const variables = Styles.utilities.transform.variables.toString(cssVars);
+ * // Result: --color-primary: #ff0000; --color-secondary: #00ff00;
  * ```
- * @since 1.1.0
+ * @since 1.3.0
  */
-export function cssVarsToString(cssVarsObj: Record<string, any>): string {
+export function toString(cssVarsObj: Record<string, any>): string {
   const rules = Object.entries(cssVarsObj)
-    .map(([name, value]) => `  '${name}': '${value}',`)
+    .map(([name, value]) => `  '${name}': '${value}';`)
     .join('\n');
 
-  return `{\n${rules}\n};`;
+  return `${rules}`;
 }

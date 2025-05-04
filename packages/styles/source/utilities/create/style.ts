@@ -4,7 +4,10 @@
  */
 
 import postcss from 'postcss';
-import { convertToCSS, convertToClassNameCss } from '../transform/jss';
+import {
+  convertToSelectorCSS,
+  convertToClassSelectorCss,
+} from '../transform/jss';
 /**
  * Creates a stylesheet string from a JSS object.
  * @param {Object} stylesObject Object of CSS properties
@@ -38,9 +41,12 @@ export const toString = async (
           className: selector.substring(1),
           ...(properties as Record<string, unknown>),
         };
-        return convertToClassNameCss(jssObject);
+        return convertToClassSelectorCss(jssObject);
       } else {
-        return convertToCSS(properties as Record<string, unknown>, selector);
+        return convertToSelectorCSS(
+          properties as Record<string, unknown>,
+          selector,
+        );
       }
     })
     .filter(Boolean)

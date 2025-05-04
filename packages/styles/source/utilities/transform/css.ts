@@ -1,28 +1,22 @@
 /**
  * @module utilities/transform
  * Utilities for transforming JSS objects to CSS.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform
- * ```
  * @since 1.1.0
  */
 
 /**
- * Checks if a value is a plain object.
- * @param {any} value The value to check
- * @returns {boolean} True if the value is a plain object
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform.isPlainObject({ foo: 'bar' }); // true
- * Styles.utilities.transform.isPlainObject([]); // false
- * ```
- * @since 1.1.0
+ * Creates a CSS block with selector and rules.
+ * @param {string} selector CSS selector
+ * @param {Record<string, any>} properties Object of CSS properties
+ * @returns {string} CSS block as a string
+ * @since 1.3.0
  */
-export function isPlainObject(value: any): boolean {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+export function createBlock(
+  selector: string,
+  properties: Record<string, any>,
+): string {
+  const rules = createRules(properties);
+  return rules ? `${selector} {\n${rules}\n}` : '';
 }
 
 /**
@@ -35,119 +29,12 @@ export function isPlainObject(value: any): boolean {
  * Styles.utilities.transform.createClassSelector('button'); // '.button'
  * Styles.utilities.transform.createClassSelector(['btn', 'btn-primary']); // '.btn, .btn-primary'
  * ```
- * @since 1.1.0
+ * @since 1.3.0
  */
 export function createClassSelector(className: string | string[]): string {
   return Array.isArray(className)
     ? className.map((name) => `.${name}`).join(', ')
     : `.${className}`;
-}
-
-/**
- * Combines selectors with parent reference handling.
- * @param {string} parentSelector The parent selector
- * @param {string} childSelector The child selector
- * @returns {string} Combined CSS selector
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform.combineSelectorWithParent('.btn', '&:hover'); // '.btn:hover'
- * Styles.utilities.transform.combineSelectorWithParent('.card', 'img'); // '.card img'
- * ```
- * @since 1.1.0
- */
-export function combineSelectorWithParent(
-  parentSelector: string,
-  childSelector: string,
-): string {
-  return childSelector.includes('&')
-    ? childSelector.replace(/&/g, parentSelector)
-    : childSelector.startsWith(':')
-    ? `${parentSelector}${childSelector}`
-    : `${parentSelector} ${childSelector}`;
-}
-
-/**
- * Extracts query type from a query string.
- * @param {string} query The query string
- * @returns {string} The query type ('@media', '@container', or empty string)
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform.extractQueryType('@media (min-width: 768px)'); // '@media'
- * ```
- * @since 1.1.0
- */
-export function extractQueryType(query: string): string {
-  if (query.startsWith('@media')) return '@media';
-  if (query.startsWith('@container')) return '@container';
-  return '';
-}
-
-/**
- * Converts a camelCase property name to kebab-case for CSS.
- * @param {string} property The property name in camelCase
- * @returns {string} The property name in kebab-case
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform.toKebabCase('fontSize'); // 'font-size'
- * Styles.utilities.transform.toKebabCase('borderTopWidth'); // 'border-top-width'
- * ```
- * @since 1.1.0
- */
-export function toKebabCase(property: string): string {
-  return property
-    .replace(/([A-Z])/g, '-$1')
-    .replace(/^-/, '')
-    .toLowerCase();
-}
-
-/**
- * Formats a CSS value to a string.
- * @param {any} value The value to format
- * @returns {string} The formatted value as a string
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform.formatValue(16); // '16px'
- * Styles.utilities.transform.formatValue(['1px', 'solid', 'black']); // '1px solid black'
- * ```
- * @since 1.1.0
- */
-export function formatValue(value: any): string {
-  if (Array.isArray(value)) {
-    return value.join(' ');
-  }
-
-  if (typeof value === 'number' && value !== 0) {
-    return `${value}px`;
-  }
-
-  return String(value);
-}
-
-/**
- * Checks if an object is a valid query condition (for media or container queries).
- * @param {any} obj The object to check
- * @returns {boolean} True if the object is a valid query condition
- * @since 1.1.0
- */
-export function isValidQueryCondition(obj: any): boolean {
-  return typeof obj !== 'object' || obj === null || Array.isArray(obj);
-}
-
-/**
- * Processes a media query string that might include template literals.
- * @param {string} queryString The query string to process
- * @returns {string} The processed query string
- * @since 1.1.0
- */
-export function processMediaQueryString(queryString: string): string {
-  if (!queryString.includes('${')) {
-    return queryString;
-  }
-  return queryString;
 }
 
 /**
@@ -163,7 +50,7 @@ export function processMediaQueryString(queryString: string): string {
  *   '@media (max-width: 1024px)'
  * ); // '@media (min-width: 768px) and (max-width: 1024px)'
  * ```
- * @since 1.1.0
+ * @since 1.3.0
  */
 export function combineQueryConditions(
   outerQuery: string,
@@ -199,7 +86,7 @@ export function combineQueryConditions(
  * Creates CSS rules from style properties.
  * @param {Record<string, any>} properties Object of CSS properties
  * @returns {string} CSS rules as a string
- * @since 1.1.0
+ * @since 1.3.0
  */
 export function createRules(properties: Record<string, any>): string {
   return Object.entries(properties)
@@ -212,18 +99,136 @@ export function createRules(properties: Record<string, any>): string {
 }
 
 /**
- * Creates a CSS block with selector and rules.
- * @param {string} selector CSS selector
- * @param {Record<string, any>} properties Object of CSS properties
- * @returns {string} CSS block as a string
+ * Combines selectors with parent reference handling.
+ * @param {string} parentSelector The parent selector
+ * @param {string} childSelector The child selector
+ * @returns {string} Combined CSS selector
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.utilities.transform.combineSelectorWithParent('.btn', '&:hover'); // '.btn:hover'
+ * Styles.utilities.transform.combineSelectorWithParent('.card', 'img'); // '.card img'
+ * ```
+ * @since 1.3.0
+ */
+export function combineSelectorWithParent(
+  parentSelector: string,
+  childSelector: string,
+): string {
+  return childSelector.includes('&')
+    ? childSelector.replace(/&/g, parentSelector)
+    : childSelector.startsWith(':')
+    ? `${parentSelector}${childSelector}`
+    : `${parentSelector} ${childSelector}`;
+}
+
+/**
+ * Extracts query type from a query string.
+ * @param {string} query The query string
+ * @returns {string} The query type ('@media', '@container', or empty string)
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.utilities.transform.extractQueryType('@media (min-width: 768px)'); // '@media'
+ * ```
+ * @since 1.3.0
+ */
+export function extractQueryType(query: string): string {
+  if (query.startsWith('@media')) return '@media';
+  if (query.startsWith('@container')) return '@container';
+  return '';
+}
+
+/**
+ * Formats a CSS value to a string.
+ * @param {any} value The value to format
+ * @returns {string} The formatted value as a string
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.utilities.transform.formatValue(16); // '16px'
+ * Styles.utilities.transform.formatValue(['1px', 'solid', 'black']); // '1px solid black'
+ * ```
+ * @since 1.3.0
+ */
+export function formatValue(value: any): string {
+  if (Array.isArray(value)) {
+    return value.join(' ');
+  }
+
+  if (typeof value === 'number' && value !== 0) {
+    return `${value}px`;
+  }
+
+  return String(value);
+}
+
+/**
+ * Converts a camelCase property name to kebab-case for CSS.
+ * @param {string} property The property name in camelCase
+ * @returns {string} The property name in kebab-case
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.utilities.transform.toKebabCase('fontSize'); // 'font-size'
+ * Styles.utilities.transform.toKebabCase('borderTopWidth'); // 'border-top-width'
+ * ```
+ * @since 1.3.0
+ */
+export function toKebabCase(property: string): string {
+  // Special case for CSS variables (properties starting with '--')
+  if (property.startsWith('--')) {
+    // Preserve the double dash prefix but still convert camelCase to kebab-case for the rest
+    const variableName = property.substring(2);
+    return '--' + variableName
+      .replace(/([A-Z])/g, '-$1')
+      .replace(/^-/, '')
+      .toLowerCase();
+  }
+  
+  return property
+    .replace(/([A-Z])/g, '-$1')
+    .replace(/^-/, '')
+    .toLowerCase();
+}
+
+/**
+ * Checks if a value is a plain object.
+ * @param {any} value The value to check
+ * @returns {boolean} True if the value is a plain object
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.utilities.transform.isPlainObject({ foo: 'bar' }); // true
+ * Styles.utilities.transform.isPlainObject([]); // false
+ * ```
+ * @since 1.3.0
+ */
+export function isPlainObject(value: any): boolean {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+/**
+ * Checks if an object is a valid query condition (for media or container queries).
+ * @param {any} obj The object to check
+ * @returns {boolean} True if the object is a valid query condition
  * @since 1.1.0
  */
-export function createBlock(
-  selector: string,
-  properties: Record<string, any>,
-): string {
-  const rules = createRules(properties);
-  return rules ? `${selector} {\n${rules}\n}` : '';
+export function isValidQueryCondition(obj: any): boolean {
+  return typeof obj !== 'object' || obj === null || Array.isArray(obj);
+}
+
+/**
+ * Processes a media query string that might include template literals.
+ * @param {string} queryString The query string to process
+ * @returns {string} The processed query string
+ * @since 1.3.0
+ */
+export function processMediaQueryString(queryString: string): string {
+  if (!queryString.includes('${')) {
+    return queryString;
+  }
+  return queryString;
 }
 
 /**
@@ -232,7 +237,7 @@ export function createBlock(
  * @param {string} selector CSS selector
  * @param {Record<string, any>} properties Object of CSS properties
  * @returns {string} CSS query block as a string
- * @since 1.1.0
+ * @since 1.3.0
  */
 export function processQuery(
   query: string,
@@ -321,7 +326,7 @@ export function processQuery(
  *   { backgroundColor: '#f5f5f5' }
  * );
  * ```
- * @since 1.1.0
+ * @since 1.3.0
  */
 export function processNestedSelector(
   baseSelector: string,

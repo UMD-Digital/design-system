@@ -1,5 +1,4 @@
 import { toString } from '../style';
-import { processNestedObjects } from '../../transform/jss';
 
 // Mock postcss module
 jest.mock('postcss', () => {
@@ -55,7 +54,7 @@ describe('create/stylesheet utilities', () => {
           '--secondary-color': 'blue',
           '--font-size-base': '16px',
         },
-        'h1': {
+        h1: {
           fontSize: '2rem',
           fontWeight: 'bold',
           color: 'var(--primary-color)',

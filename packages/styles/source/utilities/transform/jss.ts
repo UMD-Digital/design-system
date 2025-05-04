@@ -1,11 +1,6 @@
 /**
  * @module utilities/transform
  * Provides utilities for transforming JSS objects.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform
- * ```
  * @since 1.1.0
  */
 
@@ -35,20 +30,20 @@ export interface JssNameConverter {
 }
 
 /**
- * Converts JSS objects to a format with class names as keys.
+ * Transform JSS objects to a format with class names as keys.
  * @param {JssInputFormat} originalObject The input object with className properties
  * @returns {JssNamedOutputFormat} Object with class names as keys
  * @example
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
- * const transformed = Styles.utilities.transform.objectWithName({
+ * const transformed = Styles.utilities.transform.jss.formatWithClassSelector({
  *   button: { className: 'my-button', color: 'red' }
  * });
  * // Result: { '.my-button': { color: 'red' } }
  * ```
  * @since 1.1.0
  */
-export const objectWithName: JssNameConverter = (originalObject) => {
+export const formatWithClassSelector: JssNameConverter = (originalObject) => {
   const newFormat: JssNamedOutputFormat = {};
 
   for (const [key, value] of Object.entries(originalObject)) {
@@ -70,12 +65,12 @@ export const objectWithName: JssNameConverter = (originalObject) => {
 
 /**
  * Processes nested JSS objects and flattens them.
- * @param {T} obj The object containing nested className objects
- * @returns {JssNamedOutputFormat} Flattened object with class names as keys
+ * @param {T} obj The object containing nested className or selector objects
+ * @returns {JssNamedOutputFormat} Flattened object with class names or selectors as keys
  * @example
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
- * const flattened = Styles.utilities.transform.processNestedObjects({
+ * const flattened = Styles.utilities.transform.jss.formatNestedObjects({
  *   container: {
  *     nested: { className: 'box', padding: '10px' }
  *   }
@@ -84,17 +79,20 @@ export const objectWithName: JssNameConverter = (originalObject) => {
  * ```
  * @since 1.1.0
  */
-export const processNestedObjects = <T extends object>(
+export const formatNestedObjects = <T extends object>(
   obj: T,
 ): JssNamedOutputFormat => {
   const result: JssNamedOutputFormat = {};
-
   const process = (value: any) => {
     if (!value || typeof value !== 'object' || value === null) return;
 
     if ('className' in value) {
-      const transformed = objectWithName({ key: value });
+      const transformed = formatWithClassSelector({ key: value });
       Object.assign(result, transformed);
+    } else if ('selector' in value) {
+      // Handle objects with selector property
+      const { selector, ...properties } = value;
+      result[selector] = properties;
     } else {
       Object.values(value).forEach(process);
     }
@@ -105,35 +103,18 @@ export const processNestedObjects = <T extends object>(
 };
 
 /**
- * Converts a JSS object to a valid CSS string.
- * @param {JssObject} jssObject The JSS object to convert
+ * Process a JSS object and convert it to a CSS string with the given selector.
+ * This is an internal utility function used by the public CSS conversion functions.
+ *
+ * @param {Record<string, any>} styles The style properties to convert
+ * @param {string} selector The CSS selector to use
  * @returns {string} The CSS string representation
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * const css = Styles.utilities.transform.convertToCSS({
- *   className: 'header',
- *   color: 'blue',
- *   fontSize: 16,
- *   '@media (min-width: 768px)': {
- *     self: { fontSize: 20 }
- *   }
- * });
- * ```
- * @since 1.1.0
+ * @since 1.2.0
  */
-export const convertToCSS = (jssObject: JssObject): string => {
-  if (
-    !jssObject ||
-    typeof jssObject !== 'object' ||
-    !('className' in jssObject)
-  ) {
-    return '';
-  }
-
-  const { className, ...styles } = jssObject;
-  const selector = createClassSelector(className);
-
+export const convertToCss = (
+  styles: Record<string, any>,
+  selector: string,
+): string => {
   const standardProps: Record<string, any> = {};
   const atRules: Array<[string, Record<string, any>]> = [];
   const nestedSelectors: Array<[string, Record<string, any>]> = [];
@@ -334,4 +315,69 @@ export const convertToCSS = (jssObject: JssObject): string => {
   });
 
   return blocks.join('\n\n');
+};
+
+/**
+ * Converts a style object with an arbitrary selector to a valid CSS string.
+ * @param {Record<string, any>} styles The style properties to convert
+ * @param {string} selector The CSS selector to use
+ * @returns {string} The CSS string representation
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const css = Styles.utilities.transform.jss.convertToSelectorCSS(
+ *   {
+ *     color: 'blue',
+ *     fontSize: 16,
+ *     '@media (min-width: 768px)': {
+ *       self: { fontSize: 20 }
+ *     }
+ *   },
+ *   '#my-element'
+ * );
+ * ```
+ * @since 1.3.0
+ */
+export const convertToSelectorCSS = (
+  styles: Record<string, any>,
+  selector: string,
+): string => {
+  if (!styles || typeof styles !== 'object') {
+    return '';
+  }
+
+  return convertToCss(styles, selector);
+};
+
+/**
+ * Converts a JSS object with a className to a valid CSS string.
+ * @param {JssObject} jssObject The JSS object to convert (must include className)
+ * @returns {string} The CSS string representation
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const css = Styles.utilities.transform.jss.convertToClassSelectorCss({
+ *   className: 'header',
+ *   color: 'blue',
+ *   fontSize: 16,
+ *   '@media (min-width: 768px)': {
+ *     self: { fontSize: 20 }
+ *   }
+ * });
+ * ```
+ * @since 1.3.0
+ */
+export const convertToClassSelectorCss = (jssObject: JssObject): string => {
+  if (
+    !jssObject ||
+    typeof jssObject !== 'object' ||
+    !('className' in jssObject)
+  ) {
+    return '';
+  }
+
+  const { className, ...styles } = jssObject;
+  const selector = createClassSelector(className);
+
+  return convertToCss(styles, selector);
 };

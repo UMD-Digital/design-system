@@ -3,6 +3,7 @@
   "name": "umd-styles-library",
   "entryPoints": [
     "./source/_types.ts", 
+    "./source/root.ts", 
     "./source/accessibility", 
     "./source/animation", 
     "./source/element", 

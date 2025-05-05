@@ -207,15 +207,6 @@ interface HeadlineProps {
   slotHeadline: HTMLSlotElement;
 }
 
-const createHeadline = ({ slotHeadline }: HeadlineProps) => {
-  markup.modify.animationLinkSpan({
-    element: slotHeadline,
-  });
-  slotHeadline.classList.add(CONTACT_LIST_HEADLINE);
-
-  return slotHeadline;
-};
-
 const createDefaultAddress = () => {
   const address = document.createElement('address');
   const addressParagraphOne = document.createElement('p');
@@ -257,11 +248,6 @@ interface LinksProps {
   slotContentLinks: HTMLSlotElement;
 }
 
-const createLinks = ({ slotContentLinks }: LinksProps) => {
-  slotContentLinks.classList.add(CONTACT_LINKS_LIST);
-  return slotContentLinks;
-};
-
 export interface ContactProps
   extends SocialCampaignColumnsProps,
     AddressProps,
@@ -275,20 +261,23 @@ export default (props: ContactProps) => {
   const hasSlot = slotAddress || slotHeadline || slotContentLinks;
 
   const makeContactSlot = () => {
-    const headline = createHeadline({ slotHeadline });
     const address = createAddress({ slotAddress });
-    const links = createLinks({ slotContentLinks });
 
-    if (headline) {
-      contactContainer.appendChild(headline);
+    if (slotHeadline) {
+      markup.modify.animationLinkSpan({
+        element: slotHeadline,
+      });
+      slotHeadline.classList.add(CONTACT_LIST_HEADLINE);
+      contactContainer.appendChild(slotHeadline);
     }
 
     if (address) {
       contactContainer.appendChild(address);
     }
 
-    if (links) {
-      contactContainer.appendChild(links);
+    if (slotContentLinks) {
+      slotContentLinks.classList.add(CONTACT_LINKS_LIST);
+      contactContainer.appendChild(slotContentLinks);
     }
   };
 

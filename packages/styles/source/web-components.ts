@@ -79,11 +79,28 @@ const elements = {
       },
     },
   }),
-  ...['article', 'card', 'card-overlay', 'event', 'person'].reduce(
+  ...['article', 'card', 'event', 'person'].reduce(
     (acc, type) => ({
       ...acc,
       ...createElementStyles(`umd-element-${type}`, {
         custom: {
+          [`umd-element-${type}[display="list"] + umd-element-${type}[display="list"]`]:
+            {
+              marginTop: spacing.md,
+            },
+        },
+      }),
+    }),
+    {},
+  ),
+  ...['card-overlay'].reduce(
+    (acc, type) => ({
+      ...acc,
+      ...createElementStyles(`umd-element-${type}`, {
+        custom: {
+          [`umd-element-${type}.size-large`]: {
+            minHeight: '560px',
+          },
           [`umd-element-${type}[display="list"] + umd-element-${type}[display="list"]`]:
             {
               marginTop: spacing.md,

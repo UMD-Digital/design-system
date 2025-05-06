@@ -1,6 +1,6 @@
 # University of Maryland Styles Library
 
-[![Styles Version](https://img.shields.io/badge/Styles-v1.2.4-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.3.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
 A comprehensive collection of JSS objects that can be used inline with JavaScript or converted to CSS strings using utility functions. This library provides the official University of Maryland design tokens and styling patterns for consistent branding across all digital properties.
 
@@ -16,9 +16,11 @@ npm install @universityofmaryland/web-styles-library
 yarn add @universityofmaryland/web-styles-library
 ```
 
-## Usage
+## Usage With Framework
 
-### In conjection with a framework - Tailwind 3
+### Tailwind 3 - Primarly for web development
+
+##### Does code splitting by default and provides helper css functionality
 
 ```typescript
 /** @type {import('tailwindcss').Config} */
@@ -62,13 +64,17 @@ const plugins = [
 export { content, theme, plugins };
 ```
 
+## Usage Without a Framework
+
 ### Converting Style Objects in CSS strings (stylesheet usage) - All styles
+
+##### Pull in all styles from the package and apply them to your interface (DOM example provided)
 
 ```typescript
 import * as Styles from '@universityofmaryland/web-styles-library';
 
 // String of all styles: Parameter is the styleout provided by the library
-const allStyles = await Styles.utilities.create.styleSheetString({
+const allStyles = await Styles.utilities.create.style.toString({
   ...Styles.outputStyles,
 });
 
@@ -81,12 +87,14 @@ document.head.appendChild(styleSheet);
 
 ### Converting Style Objects in CSS strings (stylesheet usage) - Selection example
 
+##### You can pick any styles objects to import (manual code splitting) - use cases for importing before and after body render
+
 ```typescript
 import * as Styles from '@universityofmaryland/web-styles-library';
 
 // String of selected styles: Parameter of selected style objects that you want to consume from the library
 const exampleWithElementAndLayout =
-  await Styles.utilities.create.styleSheetString({
+  await Styles.utilities.create.style.toString({
     ...Styles.element,
     ...Styles.layout.grid,
   });
@@ -98,7 +106,56 @@ styleSheet.innerHTML = `${exampleWithElementAndLayout}`;
 document.head.appendChild(styleSheet);
 ```
 
-### Importing Styles via JS for Advanced Purposes
+### Converting Style Objects in CSS strings (stylesheet usage) - Render example
+
+##### Code splitting for load and usage
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+const headRenderStyles = await Styles.utilities.create.style.toString({
+  ...Styles.preRender,
+});
+
+const bodyRenderStyles = await Styles.utilities.create.style.toString({
+  ...Styles.postRender,
+});
+```
+
+### Converting Style Objects to CSS Variables
+
+##### Import CSS variables for usage (included by default when importing preRender styles)
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+Styles.utilities.dom.tokens(Styles.variables);
+
+// Output
+<html style="--serif: 'Crimson Pro', Georgia, serif;">
+
+.element {
+  font-family: var(--serif)
+}
+```
+
+### Converting Style Objects to Media Queries (included by default when importing preRender styles)
+
+##### Media query usage with style queries - boolean values provided on root
+
+```css
+.element {
+  display: none;
+
+  @container style(--isMediaTablet: true) {
+    display: block;
+  }
+}
+```
+
+## Usage with modern Javascript Frameworks with Server rendering
+
+### Importing Styles to Reference
 
 ```typescript
 // Import specific style modules
@@ -126,16 +183,17 @@ const fadeInLine = Styles.animation.line.fadeInSimpleDark;
 }
 ```
 
-### Converting to CSS String for use in CSS Modules (frameworks like Next.js)
+### Converting Reference to style
 
 ```typescript
+// Import specific style modules
 import * as Styles from '@universityofmaryland/web-styles-library';
 
-const fadeInLine = Styles.utilities.transform.convertToCSS(
+const fadeInLine = Styles.utilities.transform.jss.convertToClassSelectorCss({
   Styles.animation.line.fadeInSimpleDark,
 );
 
-// Output
+// Ouput
 .umd-fadein-simple-dark {
   position: relative;
   text-decoration: none;
@@ -146,7 +204,7 @@ const fadeInLine = Styles.utilities.transform.convertToCSS(
   color: #FFFFFF;
   transition: color 0.5s, background-image 0.5s, background-position 0.5s;
 }
-.umd-fadein-simple-dark&:hover, &:focus {
+.umd-fadein-simple-dark:hover, .umd-fadein-simple-dark:focus {
   background-image: linear-gradient(#FFD200, #FFD200);
   background-position: left calc(100%);
   color: #FFFFFF;
@@ -160,14 +218,12 @@ The library includes several style modules organized by functionality:
 
 - **Accessibility**: Screen reader utilities and skip navigation
 - **Animation**: Line effects, loaders, transitions, and nested element animations
-- **Colors**: Official UMD brand colors, accents, and accessibility-safe palettes
+- **Layout**: Flexible grid system with responsive behavior
+- **Root**: Default styles for reset and variables
+- **Tokens**: Official UMD brand colors, spacing, breakpoints, and fonts
 - **Typography**: Text styles, fonts, and typographic scales
-- **Spacing**: Consistent spacing units and layout helpers
-- **Breakpoints**: Responsive design breakpoints for all screen sizes
-- **Grid**: Flexible grid system with responsive behavior
-- **Effects**: Shadows, highlights, and other visual effects
-- **Forms**: Form element styling with validation states
-- **Media**: Image, video, and other media styling
+- **Web Components**: Default styles from all Web Components
+- **Utilities**: Helper functions to convert JSS and CSS
 
 Each module contains namespaces with specific style variables. For example:
 

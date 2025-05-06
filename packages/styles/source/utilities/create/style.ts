@@ -17,7 +17,7 @@ import {
  * @example
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
- * await Styles.utilities.create.stylesheet.toString({
+ * await Styles.utilities.create.style.toString({
  *   ...Styles.element,
  *   ...Styles.layout.grid,
  * })

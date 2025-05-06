@@ -40,7 +40,7 @@ const createImageStyles = (customStyles = {}) => {
   };
 
   return {
-    [`.${image.wrapperScaled.className}`]: {
+    [`.${image.wrapper.className}, .${image.wrapperScaled.className}`]: {
       ...baseStyles,
       ...createContainerQuery(smallBreakpoint, 'max-width', {
         marginLeft: spacing.min,
@@ -161,18 +161,19 @@ const createTextStyles = (customStyles = {}) => {
 
 const createEventStyles = (customStyles = {}) => {
   return {
-    [`& > *:last-child:not(.${image.wrapperScaled.className})`]: {
-      width: `${spacing.xl}`,
-      order: 1,
-      alignSelf: 'flex-start',
+    [`& > *:last-child:not(.${image.wrapper.className}), & > *:last-child:not(.${image.wrapperScaled.className})`]:
+      {
+        width: `${spacing.xl}`,
+        order: 1,
+        alignSelf: 'flex-start',
 
-      ...createContainerQuery(mediumBreakpoint, 'max-width', {
-        display: 'none',
-      }),
-      ...createContainerQuery(mediumBreakpoint, 'min-width', {
-        width: `${spacing['8xl']}`,
-      }),
-    },
+        ...createContainerQuery(mediumBreakpoint, 'max-width', {
+          display: 'none',
+        }),
+        ...createContainerQuery(mediumBreakpoint, 'min-width', {
+          width: `${spacing['8xl']}`,
+        }),
+      },
     ...customStyles,
   };
 };

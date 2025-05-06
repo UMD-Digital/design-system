@@ -23,7 +23,7 @@ export default (props: CardListProps) => {
   if (image) {
     const imageContainer = assets.image.background({
       image,
-      isScaled: true,
+      isScaled: isAligned,
       isAspectStandard: isAligned,
     });
     composite.element.appendChild(imageContainer.element);

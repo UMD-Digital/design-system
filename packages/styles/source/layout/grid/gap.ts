@@ -152,6 +152,7 @@ export const four: JssObject = create.jssObject({
 
   [`@media (${media.queries.large.min})`]: {
     gridGap: spacing.lg,
+    gridTemplateColumns: 'repeat(2, 1fr)',
     ...paragraphOverwrite,
   },
 
@@ -185,6 +186,7 @@ export const fourCentered: JssObject = create.jssObject({
 
   [`@media (${media.queries.large.min})`]: {
     gridGap: spacing.lg,
+    gridTemplateColumns: 'repeat(2, 1fr)',
     ...paragraphOverwrite,
   },
 
@@ -217,6 +219,12 @@ export const fourCentered: JssObject = create.jssObject({
  */
 export const fourLarge: JssObject = create.jssObject({
   ...base.four,
+
+  [`@media (${media.queries.large.min})`]: {
+    gridGap: spacing.lg,
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    ...paragraphOverwrite,
+  },
 
   [`@media (${media.queries.highDef.min})`]: {
     gridGap: spacing.xl,

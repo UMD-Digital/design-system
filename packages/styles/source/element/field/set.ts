@@ -49,7 +49,7 @@ export const wrapper: JssObject = create.jss.objectWithClassName({
   '& > legend': {
     ...sans.large,
 
-    marginBottom: spacing.sm,
+    marginTop: spacing.sm,
     position: 'relative',
 
     [`@media (${media.queries.large.min})`]: {
@@ -57,7 +57,7 @@ export const wrapper: JssObject = create.jss.objectWithClassName({
     },
   },
 
-  '&[required] > legend': {
+  '&[required] > legend::after': {
     content: "' *'",
     color: color.redDark,
   },

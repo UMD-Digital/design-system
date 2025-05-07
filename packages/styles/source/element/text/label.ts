@@ -20,9 +20,9 @@ export const label = {
   ...sans.large,
   display: 'inline-block',
   position: 'relative',
-  marginTop: spacing.sm,
+  marginBottom: spacing.sm,
 
-  '&:has(+ input[required]):after': {
+  '&:has(+ input[required]):after, &:has(+ textarea[required]):after': {
     content: "' *'",
     color: color.redDark,
   },

@@ -57,7 +57,7 @@ export const wrapper: JssObject = create.jss.objectWithClassName({
     },
   },
 
-  '&[required] > legend': {
+  '&[required] > legend::after': {
     content: "' *'",
     color: color.redDark,
   },

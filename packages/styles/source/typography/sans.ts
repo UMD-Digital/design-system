@@ -118,6 +118,7 @@ const sizeMin = {
 export const maxium = {
   fontFamily: font.family['sans'],
   fontWeight: font.weight['bold'],
+  textWrap: 'pretty',
   ...sizeExtraLarge,
 };
 
@@ -139,6 +140,7 @@ export const maxium = {
 export const largest = {
   fontFamily: font.family['sans'],
   fontWeight: font.weight['bold'],
+  textWrap: 'pretty',
   ...sizeLarger,
 
   [`@media (${breakpointLarge})`]: {
@@ -164,6 +166,7 @@ export const largest = {
  */
 export const extraLarge = {
   fontFamily: font.family['sans'],
+  textWrap: 'pretty',
   ...sizeLarge,
 
   [`@media (${breakpointLarge})`]: {
@@ -189,6 +192,7 @@ export const extraLarge = {
 export const larger = {
   fontFamily: font.family['sans'],
   ...sizeLarge,
+  textWrap: 'pretty',
   lineHeight: `1.40em`,
 
   [`@media (${breakpointLarge})`]: {
@@ -215,6 +219,7 @@ export const scalingLarger = {
   fontFamily: font.family['sans'],
   fontSize: font.size['lg'],
   lineHeight: `1.25em`,
+  textWrap: 'pretty',
 
   [`@container (min-width: ${scalingContainerSmall}px)`]: {
     ...sizeLargerResponsive,

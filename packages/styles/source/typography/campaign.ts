@@ -50,6 +50,7 @@ const sizeSmall = {
 export const maxium = {
   ...base,
   ...sizeSmall,
+  textWrap: 'pretty',
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${font.size['9xl']} + 2vw)`,
@@ -68,6 +69,7 @@ export const maxium = {
 export const extralarge = {
   ...base,
   ...sizeSmall,
+  textWrap: 'pretty',
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${font.size['5xl']} + 4vw)`,
@@ -86,6 +88,7 @@ export const extralarge = {
 export const large = {
   ...base,
   ...sizeSmall,
+  textWrap: 'pretty',
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${font.size['5xl']} + 2.66vw)`,
@@ -104,6 +107,7 @@ export const large = {
 export const medium = {
   ...base,
   ...sizeSmall,
+  textWrap: 'pretty',
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${font.size['5xl']} + 1.33vw)`,

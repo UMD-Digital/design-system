@@ -115,7 +115,6 @@ export const resultStart = (props: DisplayStartResultsProps) => {
     displayResults,
     getContainer,
     getTotalEntries,
-    setOffset,
     setTotalEntries,
     setStyles,
     layoutElement,
@@ -127,8 +126,6 @@ export const resultStart = (props: DisplayStartResultsProps) => {
   const message = isLazyLoad
     ? `Showing ${showAmount} of ${totalEntries} articles`
     : `Showing ${showAmount} articles`;
-
-  setOffset(feedData.length);
 
   if (totalEntries) setTotalEntries(totalEntries);
 

@@ -217,6 +217,7 @@ describe('Featured News Component', () => {
     await displayGridOffsetResults({
       feedData: mockFeedData,
       setOffset: jest.fn(),
+      getOffset: jest.fn().mockReturnValue(0),
     });
 
     expect(feedElements.layout.gridOffsetGap).toHaveBeenCalledWith(
@@ -244,6 +245,7 @@ describe('Featured News Component', () => {
     await displayGridOffsetResults({
       feedData: [mockFeedData[0]],
       setOffset: jest.fn(),
+      getOffset: jest.fn().mockReturnValue(0),
     });
 
     expect(feedElements.layout.gridOffsetGap).not.toHaveBeenCalled();

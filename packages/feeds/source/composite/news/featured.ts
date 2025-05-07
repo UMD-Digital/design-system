@@ -158,14 +158,14 @@ export default (props: FeaturedProps): ElementModel =>
     };
 
     const resultStart = (props: DisplayStartResultsProps) => {
-      const { feedData, setOffset } = props;
+      const { feedData, setOffset, getOffset } = props;
       const totalEntries = getTotalEntries();
       const showAmount = 3;
       const message = isLazyLoad
         ? `Showing ${showAmount} of ${totalEntries} articles`
         : `Showing ${showAmount} articles`;
 
-      setOffset(feedData.length);
+      setOffset(getOffset() + 1);
 
       if (totalEntries) setTotalEntries(totalEntries);
 

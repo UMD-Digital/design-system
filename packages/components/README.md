@@ -1,6 +1,6 @@
 # University of Maryland Web Components Library
 
-[![Components Version](https://img.shields.io/badge/Components-v1.10.2-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
+[![Components Version](https://img.shields.io/badge/Components-v1.10.4-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
 
 High-level web components built from the elements library for interfaces, interactivity, layout, and data feeds. This library provides ready-to-use web components that follow the University of Maryland's design guidelines and accessibility standards. These components are designed to work seamlessly together to create consistent, branded UMD web experiences while maintaining performance and usability across all devices.
 

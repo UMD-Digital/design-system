@@ -1,6 +1,6 @@
 # University of Maryland Feeds Library
 
-[![Feeds Version](https://img.shields.io/badge/Feeds-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
+[![Feeds Version](https://img.shields.io/badge/Feeds-v1.0.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
 
 A collection of dynamic feed components for displaying University of Maryland content feeds including news articles, events, and academic information. This library simplifies the integration of live, updating content from UMD sources while maintaining brand consistency and performance optimization.
 

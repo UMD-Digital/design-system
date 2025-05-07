@@ -32,7 +32,7 @@ const create = ({
     },
   });
 
-  const ctaButton = Model.ElementModel.actions.outline({
+  const ctaButton = Model.ElementModel.actions.outlineOptions({
     element: document.createElement('button'),
     isThemeDark,
   });

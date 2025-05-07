@@ -21,6 +21,14 @@ export const outlineLarge = (props: ElementProps) =>
 export const outlineWhite = (props: ElementProps) =>
   createStyledElement.base(props, Styles.element.action.outline.white);
 
+export const outlineOptions = (props: ElementProps) => {
+  if (props.isThemeDark) {
+    return outlineWhite(props);
+  }
+
+  return outline(props);
+};
+
 export const primary = (props: ElementProps) =>
   createStyledElement.base(props, Styles.element.action.primary.normal);
 

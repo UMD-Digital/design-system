@@ -97,6 +97,10 @@ module.exports = {
         outline: jest.fn().mockImplementation(({ element }) => ({
           element,
           styles: '.outline-button { color: blue; }'
+        })),
+        outlineOptions: jest.fn().mockImplementation(({ element }) => ({
+          element,
+          styles: '.outline-button { color: blue; }'
         }))
       },
       headline: {

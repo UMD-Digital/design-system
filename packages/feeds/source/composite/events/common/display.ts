@@ -35,7 +35,7 @@ export const noResults = ({
   setStyles,
   isThemeDark,
   message = 'No events found',
-  linkUrl = 'https://calendard.umd.edu',
+  linkUrl = 'https://calendar.umd.edu',
   linkText = 'View all events',
 }: NoResultsProps) => {
   const container = getContainer();

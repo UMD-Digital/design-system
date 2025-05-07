@@ -37,7 +37,7 @@ describe('Lazy Load Component', () => {
       }),
     );
 
-    expect(Model.ElementModel.actions.outline).toHaveBeenCalledWith(
+    expect(Model.ElementModel.actions.outlineOptions).toHaveBeenCalledWith(
       expect.objectContaining({
         isThemeDark: false,
       }),

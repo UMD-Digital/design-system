@@ -126,8 +126,6 @@ export const resultStart = (props: DisplayStartResultsProps) => {
     ? `Showing ${showAmount} of ${totalEntries} articles`
     : `Showing ${showAmount} articles`;
 
-  setOffset(feedData.length);
-
   layoutElement.element.setAttribute('id', ID_GRID_LAYOUT_CONTAINER);
   container.appendChild(layoutElement.element);
   setStyles(layoutElement.styles);

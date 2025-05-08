@@ -103,6 +103,36 @@ export const formatNestedObjects = <T extends object>(
 };
 
 /**
+ * Converts a font JSS object into a CSS @font-face rule string
+ * @param {Object} fontObject - The font JSON object containing font properties
+ * @returns {string} - CSS @font-face rule as a string
+ */
+export const convertFontToCss = (fontObject: Record<string, any>): string => {
+  if (!fontObject.fontFamily || !fontObject.src) {
+    console.error('Font object must contain fontFamily and src properties');
+    return '';
+  }
+
+  let css = '@font-face {\n';
+
+  css += `  font-family: ${fontObject.fontFamily};\n`;
+
+  css += `  src: ${fontObject.src};\n`;
+
+  if (fontObject.fontWeight) {
+    css += `  font-weight: ${fontObject.fontWeight};\n`;
+  }
+
+  if (fontObject.fontStyle) {
+    css += `  font-style: ${fontObject.fontStyle};\n`;
+  }
+
+  css += '}';
+
+  return css;
+};
+
+/**
  * Process a JSS object and convert it to a CSS string with the given selector.
  * This is an internal utility function used by the public CSS conversion functions.
  *

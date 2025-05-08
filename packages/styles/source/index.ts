@@ -22,7 +22,6 @@ export const utilities = utilitiesNamespace;
 export { root, reset, variables };
 
 export const preRender = {
-  ...typographyNamespace.fontFace.browserString,
   ...root,
   ...webComponentsNamespace,
 };
@@ -38,6 +37,7 @@ export const postRender = {
 };
 
 export const outputStyles = {
+  ...typographyNamespace.fontFace.typographyFontFaceObject,
   ...preRender,
   ...postRender,
 };

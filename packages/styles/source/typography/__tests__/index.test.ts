@@ -21,8 +21,8 @@ describe('typography module', () => {
     expect(typography.sans.fonts).toBeDefined();
     expect(typography.serif.fonts).toBeDefined();
     expect(typography.stats.fonts).toBeDefined();
-    
+
     // Font-face export should have browser string
-    expect(typography.fontFace.browserString).toBeDefined();
+    expect(typography.fontFace.typographyFontFaceObject).toBeDefined();
   });
 });

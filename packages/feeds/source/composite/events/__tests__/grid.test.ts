@@ -105,7 +105,6 @@ describe('Events Grid Component', () => {
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
-      isUnion: false,
     });
 
     expect(component).toBeDefined();
@@ -122,7 +121,6 @@ describe('Events Grid Component', () => {
         token: 'test-token',
         numberOfRowsToStart: 3,
         isLazyLoad: false,
-        isUnion: false,
       }),
     );
   });
@@ -134,7 +132,6 @@ describe('Events Grid Component', () => {
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
-      isUnion: false,
       numberOfColumnsToShow,
     });
 
@@ -148,7 +145,6 @@ describe('Events Grid Component', () => {
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
-      isUnion: false,
       isTransparent: true,
     });
 

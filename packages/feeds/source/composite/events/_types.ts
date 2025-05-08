@@ -78,7 +78,6 @@ export interface BaseProps {
   categories?: string[];
   isThemeDark?: boolean;
   isLazyLoad: boolean;
-  isUnion: boolean;
   styleCallback?: (cssString: string) => void;
 }
 

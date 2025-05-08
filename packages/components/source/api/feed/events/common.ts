@@ -17,7 +17,6 @@ export const CommonFeedEventsData = ({ element }: { element: HTMLElement }) => {
     token,
     isThemeDark,
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
-    isUnion: Attributes.isData.union({ element }),
   };
 
   if (categoriesAttribute) {

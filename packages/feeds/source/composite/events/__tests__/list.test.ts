@@ -106,7 +106,6 @@ describe('Events List Component', () => {
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
-      isUnion: false,
     });
 
     expect(component).toBeDefined();
@@ -121,7 +120,6 @@ describe('Events List Component', () => {
         token: 'test-token',
         numberOfRowsToStart: 3,
         isLazyLoad: false,
-        isUnion: false,
       }),
     );
   });
@@ -131,7 +129,6 @@ describe('Events List Component', () => {
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
-      isUnion: false,
     });
 
     expect(feedElements.layout.stacked).toHaveBeenCalled();
@@ -142,7 +139,6 @@ describe('Events List Component', () => {
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
-      isUnion: false,
       isThemeDark: true,
     });
 

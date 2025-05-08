@@ -76,7 +76,6 @@ describe('Events Fetch Utilities', () => {
     token: 'test-token',
     numberOfRowsToStart: 3,
     isLazyLoad: false,
-    isUnion: false,
     getContainer: jest.fn().mockReturnValue(document.createElement('div')),
     getOffset: jest.fn().mockReturnValue(0),
     getTotalEntries: jest.fn().mockReturnValue(3),

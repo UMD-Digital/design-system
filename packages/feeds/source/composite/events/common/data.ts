@@ -27,7 +27,6 @@ export const apiVariables = (
   props: DataApiProps,
 ): feedFetch.TypeAPIFeedVariables => {
   const {
-    isUnion,
     categories,
     getOffset,
     token,
@@ -44,7 +43,7 @@ export const apiVariables = (
     obj.limit = numberOfColumnsToShow * numberOfRowsToStart;
   }
 
-  if (isUnion && categories) {
+  if (categories) {
     obj.related = categories;
   }
 

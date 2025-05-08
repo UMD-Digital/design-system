@@ -3,7 +3,6 @@ interface baseFeedProps {
   categories?: string[];
   isThemeDark?: boolean;
   isLazyLoad: boolean;
-  isUnion: boolean;
 }
 
 export interface eventProps extends baseFeedProps {
@@ -12,6 +11,7 @@ export interface eventProps extends baseFeedProps {
 
 export interface newsProps extends baseFeedProps {
   isTransparent?: boolean;
+  isUnion: boolean;
   isLayoutReversed?: boolean;
   entriesToRemove?: string[];
 }

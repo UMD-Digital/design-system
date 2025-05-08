@@ -22,7 +22,7 @@ export const label = {
   position: 'relative',
   marginTop: spacing.sm,
 
-  '&:has(+ input[required]):after': {
+  '&:has(+ input[required]):after, &:has(+ textarea[required]):after': {
     content: "' *'",
     color: color.redDark,
   },

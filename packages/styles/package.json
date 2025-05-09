@@ -23,5 +23,9 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:snapshot": "jest --updateSnapshot"
+  },
+  "dependencies": {
+    "postcss": "~8.4.21",
+    "postcss-discard-duplicates": "~7.0.1"
   }
 }

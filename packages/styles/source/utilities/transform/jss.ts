@@ -154,6 +154,10 @@ export const convertToCss = (
       return;
     }
 
+    if (property === 'className') {
+      return;
+    }
+
     if (isPlainObject(value)) {
       if (property.startsWith('@')) {
         if (property.startsWith('@media') || property === '@media') {

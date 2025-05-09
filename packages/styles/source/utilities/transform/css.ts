@@ -290,10 +290,22 @@ export function processQuery(
 
   const nestedSelectorBlocks = nestedSelectors.map(
     ([nestedSelector, nestedStyles]) => {
-      const expandedSelector = combineSelectorWithParent(
-        selector,
-        nestedSelector,
-      );
+      const baseSelectors = selector.split(',').map((s) => s.trim());
+      const nestedSelectorParts = nestedSelector
+        .split(',')
+        .map((s) => s.trim());
+
+      const combinedSelectors: string[] = [];
+
+      nestedSelectorParts.forEach((nestedPart) => {
+        baseSelectors.forEach((baseSel) => {
+          combinedSelectors.push(
+            combineSelectorWithParent(baseSel, nestedPart),
+          );
+        });
+      });
+
+      const expandedSelector = combinedSelectors.join(', ');
 
       const nestedRules = createRules(nestedStyles);
       return nestedRules
@@ -339,11 +351,16 @@ export function processNestedSelector(
   nestedSelector: string,
   properties: Record<string, any>,
 ): string {
-  const selectors = nestedSelector.split(',').map((s) => s.trim());
-  const fullSelector = selectors
-    .map((selector) => combineSelectorWithParent(baseSelector, selector))
-    .join(', ');
+  const baseSelectors = baseSelector.split(',').map((s) => s.trim());
+  const nestedSelectorParts = nestedSelector.split(',').map((s) => s.trim());
+  const combinedSelectors: string[] = [];
+  nestedSelectorParts.forEach((nestedPart) => {
+    baseSelectors.forEach((baseSel) => {
+      combinedSelectors.push(combineSelectorWithParent(baseSel, nestedPart));
+    });
+  });
 
+  const fullSelector = combinedSelectors.join(', ');
   const directProps: Record<string, any> = {};
   const queries: Array<[string, Record<string, any>]> = [];
   const nestedSelectors: Array<[string, Record<string, any>]> = [];

@@ -255,14 +255,29 @@ export const convertToCss = (
         Object.entries(nestedProperties).forEach(
           ([querySelector, queryStyles]) => {
             if (isPlainObject(queryStyles)) {
-              const expandedSelector =
-                querySelector === 'self'
-                  ? selector
-                  : querySelector.startsWith('.')
-                  ? querySelector
-                  : querySelector.startsWith('&')
-                  ? combineSelectorWithParent(selector, querySelector)
-                  : `${selector} ${querySelector}`;
+              let expandedSelector;
+
+              if (querySelector === 'self') {
+                expandedSelector = selector;
+              } else if (querySelector.startsWith('.')) {
+                expandedSelector = querySelector;
+              } else if (querySelector.startsWith('&')) {
+                const baseSelectors = selector.split(',').map((s) => s.trim());
+                const nestedSelectorParts = [querySelector];
+
+                const combinedSelectors: string[] = [];
+                nestedSelectorParts.forEach((nestedPart) => {
+                  baseSelectors.forEach((baseSel) => {
+                    combinedSelectors.push(
+                      combineSelectorWithParent(baseSel, nestedPart),
+                    );
+                  });
+                });
+
+                expandedSelector = combinedSelectors.join(', ');
+              } else {
+                expandedSelector = `${selector} ${querySelector}`;
+              }
 
               Object.entries(queryStyles as Record<string, any>).forEach(
                 ([prop, value]) => {

@@ -334,6 +334,34 @@ describe('transform/jss utilities', () => {
       expect(result).toEqual(expected);
     });
 
+    it('should handle array classNames with nested selectors', () => {
+      const input: JssObject = {
+        className: ['class1', 'class2'],
+        display: 'flex',
+        padding: '10px',
+        '& a': {
+          color: 'blue',
+          textDecoration: 'none'
+        },
+        '&:hover': {
+          backgroundColor: '#f5f5f5'
+        }
+      };
+
+      const result = convertToClassSelectorCss(input);
+
+      expect(result).toContain('.class1, .class2 {');
+      expect(result).toContain('display: flex;');
+      expect(result).toContain('padding: 10px;');
+
+      expect(result).toContain('.class1 a, .class2 a {');
+      expect(result).toContain('color: blue;');
+      expect(result).toContain('text-decoration: none;');
+
+      expect(result).toContain('.class1:hover, .class2:hover {');
+      expect(result).toContain('background-color: #f5f5f5;');
+    });
+
     it('should handle media queries with self', () => {
       const input: JssObject = {
         className: 'grid-two',
@@ -363,6 +391,43 @@ describe('transform/jss utilities', () => {
 
       expect(resultStr).toMatch(/media.*1280px/);
       expect(resultStr).toMatch(/grid-gap.*32px/);
+    });
+
+    it('should handle array classNames with media queries', () => {
+      const input: JssObject = {
+        className: ['class1', 'class2'],
+        display: 'flex',
+        '@media (min-width: 768px)': {
+          self: {
+            flexDirection: 'row'
+          },
+          '& a': {
+            color: 'blue'
+          }
+        },
+        '@media (max-width: 767px)': {
+          self: {
+            flexDirection: 'column'
+          }
+        }
+      };
+
+      const result = convertToClassSelectorCss(input);
+
+      // Base styles
+      expect(result).toContain('.class1, .class2 {');
+      expect(result).toContain('display: flex;');
+
+      // Check media queries
+      expect(result).toContain('@media (min-width: 768px)');
+      expect(result).toContain('.class1, .class2 {');
+      expect(result).toContain('flex-direction: row;');
+
+      expect(result).toContain('.class1 a, .class2 a {');
+      expect(result).toContain('color: blue;');
+
+      expect(result).toContain('@media (max-width: 767px)');
+      expect(result).toContain('flex-direction: column;');
     });
 
     it('should handle empty or invalid inputs', () => {

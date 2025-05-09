@@ -1,3 +1,4 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
 import {
   Atomic,
   Composite,
@@ -49,7 +50,9 @@ export default ({
     styles: string;
   }) => {
     const styleElement = document.createElement('style');
-    const optimizedCss = await Utilities.styles.optimizedCss(styles);
+    const optimizedCss = await Styles.utilities.transform.css.removeDuplicates(
+      styles,
+    );
     styleElement.textContent = optimizedCss;
     shadowRoot.appendChild(styleElement);
   };

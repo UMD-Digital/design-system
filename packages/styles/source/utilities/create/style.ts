@@ -8,6 +8,8 @@ import {
   convertToSelectorCSS,
   convertToClassSelectorCss,
 } from '../transform/jss';
+import { removeDuplicates } from '../transform/css';
+
 /**
  * Creates a stylesheet string from a JSS object.
  * @param {Object} stylesObject Object of CSS properties
@@ -57,17 +59,19 @@ export const toString = async (
   } else {
     const result = await postcss().process(cssString, { from: undefined });
 
-    return result.css
-      .replace(/\s*{\s*/g, '{')
-      .replace(/\s*}\s*/g, '}')
-      .replace(/\s*;\s*/g, ';')
-      .replace(/\s*:\s*/g, ':')
-      .replace(/,\s+/g, ',')
-      .replace(/\s+\(/g, '(')
-      .replace(/\(\s+/g, '(')
-      .replace(/\s+\)/g, ')')
-      .replace(/\)\s+/g, ')')
-      .replace(/[\r\n]+/g, '')
-      .trim();
+    return removeDuplicates(
+      result.css
+        .replace(/\s*{\s*/g, '{')
+        .replace(/\s*}\s*/g, '}')
+        .replace(/\s*;\s*/g, ';')
+        .replace(/\s*:\s*/g, ':')
+        .replace(/,\s+/g, ',')
+        .replace(/\s+\(/g, '(')
+        .replace(/\(\s+/g, '(')
+        .replace(/\s+\)/g, ')')
+        .replace(/\)\s+/g, ')')
+        .replace(/[\r\n]+/g, '')
+        .trim(),
+    );
   }
 };

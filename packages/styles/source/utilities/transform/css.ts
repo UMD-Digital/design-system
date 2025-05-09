@@ -1,3 +1,6 @@
+import postcss from 'postcss';
+import discardDuplicates from 'postcss-discard-duplicates';
+
 /**
  * @module utilities/transform
  * Utilities for transforming JSS objects to CSS.
@@ -180,12 +183,15 @@ export function toKebabCase(property: string): string {
   if (property.startsWith('--')) {
     // Preserve the double dash prefix but still convert camelCase to kebab-case for the rest
     const variableName = property.substring(2);
-    return '--' + variableName
-      .replace(/([A-Z])/g, '-$1')
-      .replace(/^-/, '')
-      .toLowerCase();
+    return (
+      '--' +
+      variableName
+        .replace(/([A-Z])/g, '-$1')
+        .replace(/^-/, '')
+        .toLowerCase()
+    );
   }
-  
+
   return property
     .replace(/([A-Z])/g, '-$1')
     .replace(/^-/, '')
@@ -320,7 +326,7 @@ export function processQuery(
  * @example
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.utilities.transform.processNestedSelector(
+ * Styles.utilities.transform.css.processNestedSelector(
  *   '.card',
  *   '&:hover',
  *   { backgroundColor: '#f5f5f5' }
@@ -370,3 +376,22 @@ export function processNestedSelector(
     .filter(Boolean)
     .join('\n\n');
 }
+
+/**
+ * Processes a string to remove duplicate CSS rules.
+ * @param {string} css The base CSS selector
+ * @returns {string} CSS as a string
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.utilities.transform.css.removeDuplicates('.example { color: red; } .example { color: red; }');
+ * ```
+ * @since 1.3.0
+ */
+
+export const removeDuplicates = async (css: string) => {
+  const result = await postcss([discardDuplicates()]).process(css, {
+    from: undefined,
+  });
+  return result.css;
+};

@@ -1,4 +1,4 @@
-import { Utilities as StyleUtlities } from '@universityofmaryland/web-elements-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import * as feedMacros from 'macros';
 import * as feedFetch from './fetch';
 import * as dataComposed from './data';
@@ -23,7 +23,9 @@ export const setShadowStyles = async ({
   styles: string;
 }) => {
   const styleElement = document.createElement('style');
-  const optimizedCss = await StyleUtlities.styles.optimizedCss(styles);
+  const optimizedCss = await Styles.utilities.transform.css.removeDuplicates(
+    styles,
+  );
   styleElement.textContent = optimizedCss;
   shadowRoot.appendChild(styleElement);
 };

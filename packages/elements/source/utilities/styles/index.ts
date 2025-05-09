@@ -1,6 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import postcss from 'postcss';
-import discardDuplicates from 'postcss-discard-duplicates';
 
 const postcssNesting = require('postcss-nesting');
 const postcssJs = require('postcss-js');
@@ -25,10 +24,3 @@ export const getStyleStringFromJssObject = (styleObj: Styles.JssEntry) =>
       [`.${styleObj.className}`]: styleObj,
     },
   });
-
-export const optimizedCss = async (css: string) => {
-  const result = await postcss([discardDuplicates()]).process(css, {
-    from: undefined,
-  });
-  return result.css;
-};

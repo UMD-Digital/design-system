@@ -183,9 +183,11 @@ export const root = {
   ':root': {
     ...variables,
     ...media.conditionals,
-    FontFamily: font.family.sans,
-    FontSize: font.size.base,
-    lineHeight: '1.5em',
+    ...{
+      'font-family': font.family.sans,
+      'font-size': font.size.base,
+      'line-height': '1.5em',
+    },
   },
 
   ...reset,

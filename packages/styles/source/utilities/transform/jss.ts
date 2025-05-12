@@ -4,17 +4,10 @@
  * @since 1.1.0
  */
 
-import {
-  combineQueryConditions,
-  combineSelectorWithParent,
-  createBlock,
-  createClassSelector,
-  createRules,
-  isPlainObject,
-  isValidQueryCondition,
-  processMediaQueryString,
-  processNestedSelector,
-} from './css';
+import postcss from 'postcss';
+import postcssJs from 'postcss-js';
+import postcssNesting from 'postcss-nesting';
+import { createClassSelector } from './css';
 import type {
   JssInputFormat,
   JssNamedOutputFormat,
@@ -104,6 +97,7 @@ export const formatNestedObjects = <T extends object>(
 
 /**
  * Converts a font JSS object into a CSS @font-face rule string
+ * Uses PostCSS with postcss-js for reliable CSS processing.
  * @param {Object} fontObject - The font JSON object containing font properties
  * @returns {string} - CSS @font-face rule as a string
  */
@@ -113,28 +107,24 @@ export const convertFontToCss = (fontObject: Record<string, any>): string => {
     return '';
   }
 
-  let css = '@font-face {\n';
+  const wrapper = {
+    '@font-face': {
+      fontFamily: fontObject.fontFamily,
+      src: fontObject.src,
+      ...(fontObject.fontWeight ? { fontWeight: fontObject.fontWeight } : {}),
+      ...(fontObject.fontStyle ? { fontStyle: fontObject.fontStyle } : {}),
+    },
+  };
 
-  css += `  font-family: ${fontObject.fontFamily};\n`;
-
-  css += `  src: ${fontObject.src};\n`;
-
-  if (fontObject.fontWeight) {
-    css += `  font-weight: ${fontObject.fontWeight};\n`;
-  }
-
-  if (fontObject.fontStyle) {
-    css += `  font-style: ${fontObject.fontStyle};\n`;
-  }
-
-  css += '}';
-
-  return css;
+  return postcss([]).process(wrapper, {
+    parser: postcssJs as any,
+  } as any).css;
 };
 
 /**
  * Process a JSS object and convert it to a CSS string with the given selector.
  * This is an internal utility function used by the public CSS conversion functions.
+ * Uses PostCSS with postcss-nesting and postcss-js for reliable CSS processing.
  *
  * @param {Record<string, any>} styles The style properties to convert
  * @param {string} selector The CSS selector to use
@@ -145,225 +135,69 @@ export const convertToCss = (
   styles: Record<string, any>,
   selector: string,
 ): string => {
-  const standardProps: Record<string, any> = {};
-  const atRules: Array<[string, Record<string, any>]> = [];
-  const nestedSelectors: Array<[string, Record<string, any>]> = [];
-
-  Object.entries(styles).forEach(([property, value]) => {
-    if (value == null) {
-      return;
-    }
-
-    if (property === 'className') {
-      return;
-    }
-
-    if (isPlainObject(value)) {
-      if (property.startsWith('@')) {
-        if (property.startsWith('@media') || property === '@media') {
-          if (property.startsWith('@media') && property !== '@media') {
-            atRules.push([
-              processMediaQueryString(property),
-              value as Record<string, any>,
-            ]);
-          } else if (property === '@media') {
-            Object.entries(value).forEach(([condition, queryStyles]) => {
-              if (!isValidQueryCondition(condition)) {
-                return;
-              }
-
-              atRules.push([
-                `@media ${condition}`,
-                queryStyles as Record<string, any>,
-              ]);
-            });
-          }
-        } else if (
-          property.startsWith('@container') ||
-          property === '@container'
-        ) {
-          if (property.startsWith('@container') && property !== '@container') {
-            atRules.push([
-              processMediaQueryString(property),
-              value as Record<string, any>,
-            ]);
-          } else if (property === '@container') {
-            Object.entries(value).forEach(([condition, queryStyles]) => {
-              if (!isValidQueryCondition(condition)) {
-                return;
-              }
-
-              atRules.push([
-                `@container ${condition}`,
-                queryStyles as Record<string, any>,
-              ]);
-            });
-          }
-        } else {
-          atRules.push([property, value as Record<string, any>]);
-        }
-      } else {
-        nestedSelectors.push([property, value as Record<string, any>]);
-      }
-    } else {
-      standardProps[property] = value;
-    }
-  });
-
-  const blocks: string[] = [];
-
-  const mainBlock = createBlock(selector, standardProps);
-  if (mainBlock) {
-    blocks.push(mainBlock);
+  if (!styles || !selector) {
+    return '';
   }
 
-  nestedSelectors.forEach(([nestedSelector, nestedStyles]) => {
-    const nestedBlock = processNestedSelector(
-      selector,
-      nestedSelector,
-      nestedStyles,
-    );
-    if (nestedBlock) {
-      blocks.push(nestedBlock);
+  // Filter out null, undefined values and className property
+  const processedStyles = { ...styles };
+
+  Object.entries(processedStyles).forEach(([key, value]) => {
+    if (value == null || key === 'className') {
+      delete processedStyles[key];
     }
   });
 
-  atRules.forEach(([rule, ruleStyles]) => {
-    if (rule.startsWith('@media') || rule.startsWith('@container')) {
-      if (isPlainObject(ruleStyles)) {
-        const queryBlocks: string[] = [];
-        const nestedQueries: Array<[string, string, Record<string, any>]> = [];
-        const directProperties: Record<string, any> = {};
-        const nestedProperties: Record<string, Record<string, any>> = {};
-
-        Object.entries(ruleStyles).forEach(([key, value]) => {
-          if (isPlainObject(value)) {
-            nestedProperties[key] = value as Record<string, any>;
-          } else {
-            directProperties[key] = value;
-          }
-        });
-
-        if (Object.keys(directProperties).length > 0) {
-          const directBlock = createRules(directProperties);
-          if (directBlock) {
-            queryBlocks.push(
-              `  ${selector} {\n${directBlock
-                .split('\n')
-                .map((line) => `  ${line}`)
-                .join('\n')}\n  }`,
-            );
-          }
-        }
-
-        Object.entries(nestedProperties).forEach(
-          ([querySelector, queryStyles]) => {
-            if (isPlainObject(queryStyles)) {
-              let expandedSelector;
-
-              if (querySelector === 'self') {
-                expandedSelector = selector;
-              } else if (querySelector.startsWith('.')) {
-                expandedSelector = querySelector;
-              } else if (querySelector.startsWith('&')) {
-                const baseSelectors = selector.split(',').map((s) => s.trim());
-                const nestedSelectorParts = [querySelector];
-
-                const combinedSelectors: string[] = [];
-                nestedSelectorParts.forEach((nestedPart) => {
-                  baseSelectors.forEach((baseSel) => {
-                    combinedSelectors.push(
-                      combineSelectorWithParent(baseSel, nestedPart),
-                    );
-                  });
-                });
-
-                expandedSelector = combinedSelectors.join(', ');
-              } else {
-                expandedSelector = `${selector} ${querySelector}`;
-              }
-
-              Object.entries(queryStyles as Record<string, any>).forEach(
-                ([prop, value]) => {
-                  if (
-                    (prop.startsWith('@media') ||
-                      prop.startsWith('@container')) &&
-                    isPlainObject(value)
-                  ) {
-                    const combinedQuery = combineQueryConditions(rule, prop);
-                    nestedQueries.push([
-                      combinedQuery,
-                      expandedSelector,
-                      value as Record<string, any>,
-                    ]);
-
-                    delete (queryStyles as Record<string, any>)[prop];
-                  }
-                },
-              );
-
-              const queryBlock = createBlock(
-                expandedSelector,
-                queryStyles as Record<string, any>,
-              );
-              if (queryBlock) {
-                const indentedContent = queryBlock
-                  .replace(/^[^{]*{/, '')
-                  .replace(/}$/, '')
-                  .split('\n')
-                  .map((line) => `  ${line}`)
-                  .join('\n');
-
-                if (indentedContent.trim()) {
-                  queryBlocks.push(
-                    `  ${expandedSelector} {${indentedContent}  }`,
-                  );
-                }
-              }
-            }
-          },
-        );
-
-        if (queryBlocks.length > 0) {
-          blocks.push(`${rule} {\n${queryBlocks.join('\n\n')}\n}`);
-        }
-
-        nestedQueries.forEach(([nestedQuery, nestedSelector, nestedStyles]) => {
-          const nestedRules = createRules(nestedStyles);
-          if (nestedRules) {
-            blocks.push(
-              `${nestedQuery} {\n  ${nestedSelector} {\n${nestedRules
-                .split('\n')
-                .map((line) => `    ${line}`)
-                .join('\n')}\n  }\n}`,
-            );
-          }
-        });
-      }
-    } else {
-      const nestedRules = Object.entries(ruleStyles)
-        .map(([nestedSelector, nestedValue]) => {
-          if (isPlainObject(nestedValue)) {
-            return createBlock(
-              nestedSelector,
-              nestedValue as Record<string, any>,
-            )
-              .replace(/^[^{]*{/, `  ${nestedSelector} {`)
-              .replace(/^/gm, '  ')
-              .replace(/  }$/, '  }');
-          }
-          return '';
-        })
-        .filter(Boolean)
-        .join('\n');
-
-      if (nestedRules) {
-        blocks.push(`${rule} {\n${nestedRules}\n}`);
-      }
+  try {
+    if (processedStyles.self) {
+      const selfProps = processedStyles.self;
+      delete processedStyles.self;
+      Object.assign(processedStyles, selfProps);
     }
-  });
 
-  return blocks.join('\n\n');
+    const transformedStyles: Record<string, any> = {};
+
+    Object.entries(processedStyles).forEach(([key, value]) => {
+      if (key.startsWith('@')) {
+        transformedStyles[key] = value;
+      } else if (typeof value === 'object' && value !== null) {
+        if (key.startsWith(':')) {
+          transformedStyles[`&${key}`] = value;
+        } else if (!key.startsWith('&')) {
+          transformedStyles[`& ${key}`] = value;
+        } else {
+          transformedStyles[key] = value;
+        }
+      } else {
+        transformedStyles[key] = value;
+      }
+    });
+
+    const wrapper = {
+      [selector]: transformedStyles,
+    };
+
+    const result = postcss([postcssNesting as any]).process(wrapper, {
+      parser: postcssJs as any,
+    }).css;
+
+    return result;
+  } catch (error) {
+    // Fallback: return a simple CSS string
+    console.error('Error processing CSS with PostCSS:', error);
+
+    const properties = Object.entries(processedStyles)
+      .filter(([key, value]) => typeof value !== 'object' && value !== null)
+      .map(([key, value]) => {
+        const kebabKey = key
+          .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2')
+          .toLowerCase();
+        return `  ${kebabKey}: ${value};`;
+      })
+      .join('\n');
+
+    return `${selector} {\n${properties}\n}`;
+  }
 };
 
 /**

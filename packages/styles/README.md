@@ -1,6 +1,6 @@
 # University of Maryland Styles Library
 
-[![Styles Version](https://img.shields.io/badge/Styles-v1.3.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.3.2-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
 A comprehensive collection of JSS objects that can be used inline with JavaScript or converted to CSS strings using utility functions. This library provides the official University of Maryland design tokens and styling patterns for consistent branding across all digital properties.
 
@@ -121,6 +121,27 @@ const headRenderStyles = await Styles.utilities.create.style.toString({
 
 const bodyRenderStyles = await Styles.utilities.create.style.toString({
   ...Styles.postRender,
+});
+```
+
+##### Code splitting for load and usage with dom
+
+```typescript
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+// Styles to load before the page renders - includes fonts in base64, variables, reset, and web component styles
+Styles.preRenderCss.then((css) => {
+  const styleSheet = document.createElement('style');
+  const fonts = Styles.typography.fontFace.base64fonts;
+  styleSheet.innerHTML = `${fonts} ${css}`;
+  document.head.appendChild(styleSheet);
+});
+
+// Styles to load after the body - classes for layout and elements
+Styles.postRenderCss.then((css) => {
+  const styleSheet = document.createElement('style');
+  styleSheet.innerHTML = `${css}`;
+  document.head.appendChild(styleSheet);
 });
 ```
 

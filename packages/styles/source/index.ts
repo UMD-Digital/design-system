@@ -26,6 +26,8 @@ export const preRender = {
   ...webComponentsNamespace,
 };
 
+export const preRenderCss = utilities.create.style.toString(preRender);
+
 export const postRender = {
   ...utilitiesNamespace.transform.jss.formatNestedObjects({
     accessibilityNamespace,
@@ -35,6 +37,8 @@ export const postRender = {
     typographyNamespace,
   }),
 };
+
+export const postRenderCss = utilities.create.style.toString(postRender);
 
 export const outputStyles = {
   ...typographyNamespace.fontFace.typographyFontFaceObject,

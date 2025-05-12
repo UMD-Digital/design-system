@@ -315,6 +315,8 @@ export default (props: TypeTabsProps) =>
         button.style.textAlign = 'left';
         button.style.display = 'inline-block';
         button.style.padding = `${token.spacing.sm} ${token.spacing.md}`;
+        button.style.border = 'none';
+        button.style.background = 'transparent';
 
         Object.keys(typography.sans.large).forEach((key) => {
           const keyRef = key as keyof typeof typography.sans.large;

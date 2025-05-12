@@ -6,7 +6,7 @@ export const loadIntersectionObserver = () => {
 
   if (Utilities.accessibility.isPrefferdReducedMotion()) return;
 
-  const idGridFadeIn = `umd-grid-fade-in`;
+  const idGridFadeIn = `umd-animation-transition-fade-bottom`;
   const idOffsetAttr = `data-animation`;
   const animationOffset = `offset`;
 
@@ -40,7 +40,7 @@ export const loadIntersectionObserver = () => {
   const Interactions = () => {
     const gridElements = Array.from(
       document.querySelectorAll(
-        '.umd-grid-animation > *, .umd-animation-grid > *',
+        '.umd-animation-grid > *, .umd-grid-animation > *',
       ),
     );
 

@@ -94,6 +94,7 @@ const CreateDrawerButton = (element: TypeDrawerCloseButton) => {
 
   drawerCloseButton.innerHTML = Utility.asset.icon.X;
   drawerCloseButton.classList.add(ELEMENT_NAV_DRAWER_CLOSE_BUTTON);
+  drawerCloseButton.setAttribute('aria-label', 'Close navigation drawer');
   drawerCloseButton.addEventListener('click', element.eventClose.bind(element));
 
   return drawerCloseButton;

@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-styles-library",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "description": "Styles used for use in the University of Maryland Design System",
   "main": "dist/index.js",
   "author": "UMD Web Services <digital@umd.edu>",
@@ -14,23 +14,18 @@
   ],
   "scripts": {
     "docs": "npx typedoc --options ./typedoc.json",
-    "prebuild": "node ../../source/update-badges.js",
-    "build": "tsc --preserveWatchOutput",
     "clean": "rm -rf dist",
-    "release": "npm run test && npm run clean && npm run build && npm publish --access public",
-    "start": "tsc -w --preserveWatchOutput",
+    "prebuild": "node ../../source/update-badges.js",
+    "release": "npm run test && npm run build && npm publish --access public",
+    "build": "webpack --env NODE_ENV=production",
+    "webpack": "webpack -w --env NODE_ENV=development",
+    "start": "npm run webpack",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:snapshot": "jest --updateSnapshot"
   },
-  "peerDependencies": {
-    "postcss": "~8.4.21",
-    "postcss-js": "~4.0.1",
-    "postcss-nesting": "~13.0.1",
-    "postcss-discard-duplicates": "~7.0.1"
-  },
-  "devDependencies": {
+  "dependencies": {
     "postcss": "~8.4.21",
     "postcss-js": "~4.0.1",
     "postcss-nesting": "~13.0.1",

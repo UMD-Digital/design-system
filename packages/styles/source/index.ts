@@ -23,6 +23,7 @@ export { root, reset, variables };
 
 export const preRender = {
   ...root,
+  ...reset,
   ...webComponentsNamespace,
 };
 

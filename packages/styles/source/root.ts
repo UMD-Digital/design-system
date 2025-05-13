@@ -189,6 +189,4 @@ export const root = {
       'line-height': '1.5em',
     },
   },
-
-  ...reset,
 };

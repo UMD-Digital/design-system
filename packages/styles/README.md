@@ -1,6 +1,6 @@
 # University of Maryland Styles Library
 
-[![Styles Version](https://img.shields.io/badge/Styles-v1.3.3-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.3.5-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
 A comprehensive collection of JSS objects that can be used inline with JavaScript or converted to CSS strings using utility functions. This library provides the official University of Maryland design tokens and styling patterns for consistent branding across all digital properties.
 
@@ -11,9 +11,15 @@ The UMD Styles Library provides consistent styling across University of Maryland
 ## Installation
 
 ```bash
+# Install the library
 npm install @universityofmaryland/web-styles-library
-# or
+
+# Install peer dependencies
+npm install postcss postcss-js postcss-nesting postcss-discard-duplicates
+
+# Or using yarn
 yarn add @universityofmaryland/web-styles-library
+yarn add postcss postcss-js postcss-nesting postcss-discard-duplicates
 ```
 
 ## Usage With Framework

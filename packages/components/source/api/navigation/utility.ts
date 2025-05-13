@@ -3,8 +3,19 @@ import { Attributes, Model, Register } from 'model';
 
 const tagName = 'umd-element-navigation-utility';
 
-const createComponent = (element: HTMLElement) =>
-  Composite.navigation.utility({
+const createComponent = (element: HTMLElement) => {
+  const hasLandmark = element.hasAttribute('role');
+  const hasLabel = element.hasAttribute('aria-label');
+
+  if (!hasLandmark) {
+    element.setAttribute('role', 'navigation');
+  }
+
+  if (!hasLabel) {
+    element.setAttribute('aria-label', 'Utility navigation');
+  }
+
+  return Composite.navigation.utility({
     alertUrl: Attributes.getValue.alertUrl({ element }),
     giftUrl:
       Attributes.getValue.giftUrl({
@@ -20,6 +31,7 @@ const createComponent = (element: HTMLElement) =>
     isSearch: Attributes.hasInfo.search({ element }),
     isSearchDomain: Attributes.isInfo.searchDomain({ element }),
   });
+};
 
 const attributes = Attributes.handler.combine(
   Attributes.handler.observe.visuallyShow({

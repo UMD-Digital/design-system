@@ -35,6 +35,8 @@ const createComponent = (element: HTMLElement) => {
   const columnThree = element.querySelector(
     `[slot="${SLOTS.LINK_COLUMN_THREE}"]`,
   ) as HTMLSlotElement;
+  const hasLandmark = element.hasAttribute('role');
+  const hasLabel = element.hasAttribute('aria-label');
   const columns = [];
   let isTypeSimple = element.getAttribute('type') === 'simple';
 
@@ -50,6 +52,14 @@ const createComponent = (element: HTMLElement) => {
 
   if (!isTypeMega && !isTypeVisual) {
     isTypeSimple = true;
+  }
+
+  if (!hasLandmark) {
+    element.setAttribute('role', 'contentinfo');
+  }
+
+  if (!hasLabel) {
+    element.setAttribute('aria-label', 'site footer');
   }
 
   return Composite.footer.options({

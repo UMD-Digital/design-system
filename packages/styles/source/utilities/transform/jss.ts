@@ -177,7 +177,9 @@ export const convertToCss = (
       [selector]: transformedStyles,
     };
 
-    const result = postcss([postcssNesting as any]).process(wrapper, {
+    const result = postcss([
+      postcssNesting({ noIsPseudoSelector: true }) as any,
+    ]).process(wrapper, {
       parser: postcssJs as any,
     }).css;
 

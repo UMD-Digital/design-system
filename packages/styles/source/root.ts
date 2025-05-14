@@ -55,6 +55,11 @@ export const reset = {
     },
   },
 
+  button: {
+    border: 'none',
+    background: 'none',
+  },
+
   address: {
     fontStyle: 'normal',
   },

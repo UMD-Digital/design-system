@@ -35,10 +35,7 @@ module.exports = (env) => {
     ],
   };
 
-  return {
-    entry: {
-      index: path.resolve('source/index'),
-    },
+  const baseConfig = {
     mode: devMode,
     optimization: optimization,
     stats: stats,
@@ -53,11 +50,25 @@ module.exports = (env) => {
         path.resolve('../'),
       ],
     },
-    output: {
-      path: path.resolve('dist'),
-      filename: '[name].js',
-      umdNamedDefine: true,
-      libraryTarget: 'umd',
-    },
   };
+
+  return [
+    {
+      ...baseConfig,
+      entry: {
+        index: path.resolve('source/index'),
+      },
+      output: {
+        path: path.resolve('dist'),
+        filename: '[name].js',
+        library: {
+          type: 'module',
+        },
+        globalObject: 'this',
+      },
+      experiments: {
+        outputModule: true,
+      },
+    },
+  ];
 };

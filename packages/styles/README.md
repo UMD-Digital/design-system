@@ -34,36 +34,25 @@ yarn add postcss postcss-js postcss-nesting postcss-discard-duplicates
 import * as Styles from '@universityofmaryland/web-styles-library';
 import plugin from 'tailwindcss/plugin';
 
-const content = ['./source/**/*.{css,twig}'];
+// Paths to your HTML, JS or CSS files
+const content = [];
 
-const { token, root: utilities, outputStyles: components } = Styles;
-const { color, font, media } = token;
-const base = {
-  ...token,
-  fontFamily: font.family,
-  fontSize: font.size,
-  fontWeight: font.weight,
-  breakpoints: media.breakpoints,
-};
-
-const tailwindBase = Object.fromEntries(
-  Object.entries(base).map(([key, value]) => [
-    key.charAt(0).toLocaleLowerCase() + key.slice(1),
-    value,
-  ]),
-);
-
+// Tailwind theme variables - accessible via theme() in CSS
+// Style package tokens can be added here
 const theme = {
-  screens: media.breakpoints,
-  queries: media.breakpoints,
-  colors: color,
-  ...tailwindBase,
+  media: Styles.tokens.media,
 };
 
+// Tailwind plugin options - add custom utilities, components, and base styles
 const plugins = [
   plugin(function ({ addUtilities, addComponents }) {
-    addUtilities(utilities);
-    addComponents(components);
+    // Add base styles - variables and reset styles
+    addUtilities({
+      ...Styles.root,
+      ...Styles.reset,
+    });
+    // Add element styles - Bundled JSS objects from the styles library
+    addComponents(Styles.outputStyles);
   }),
 ];
 

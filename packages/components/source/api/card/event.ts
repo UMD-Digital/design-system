@@ -2,8 +2,16 @@ import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 
+/**
+ * Tag name for the event card component
+ * @internal
+ */
 const tagName = 'umd-element-event';
 
+/**
+ * Extracts common data from event element slots
+ * @internal
+ */
 const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
   headline: Slots.headline.default({ element }),
   text: Slots.text.default({ element }),
@@ -12,6 +20,12 @@ const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
   isThemeDark: Attributes.isTheme.dark({ element }),
 });
 
+/**
+ * Creates an event card component with date, time, and location information
+ * @param element - The host HTML element
+ * @returns Configured event card component
+ * @internal
+ */
 const createComponent = (element: HTMLElement) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const showTime = Attributes.includesFeature.visualTime({ element });
@@ -112,6 +126,80 @@ const createComponent = (element: HTMLElement) => {
   });
 };
 
+/**
+ * Event Card Component
+ * 
+ * A specialized card for displaying event information with date, time, and location.
+ * Supports multiple display formats including feature, promo, and list layouts.
+ * 
+ * @example
+ * ```html
+ * <!-- Basic event card -->
+ * <umd-element-event>
+ *   <h3 slot="headline">Annual Research Symposium</h3>
+ *   <p slot="text">Join us for presentations from leading researchers.</p>
+ *   <time slot="date-start-iso" datetime="2024-03-15T09:00:00">March 15, 2024 at 9:00 AM</time>
+ *   <time slot="date-end-iso" datetime="2024-03-15T17:00:00">March 15, 2024 at 5:00 PM</time>
+ *   <p slot="location">Stamp Student Union</p>
+ * </umd-element-event>
+ * ```
+ * 
+ * @example
+ * ```html
+ * <!-- Featured event with image -->
+ * <umd-element-event data-display="feature" data-feature="visual-time">
+ *   <img slot="image" src="symposium.jpg" alt="Research symposium">
+ *   <p slot="eyebrow">Featured Event</p>
+ *   <h2 slot="headline">Maryland Day 2024</h2>
+ *   <p slot="text">Experience the university through hands-on activities and demonstrations.</p>
+ *   <time slot="date-start-iso" datetime="2024-04-27T10:00:00">April 27, 2024</time>
+ *   <p slot="location">Campus-wide</p>
+ *   <div slot="actions">
+ *     <a href="/register">Register Now</a>
+ *   </div>
+ * </umd-element-event>
+ * ```
+ * 
+ * @example
+ * ```html
+ * <!-- Promo event with overlay -->
+ * <umd-element-event data-display="promo">
+ *   <img slot="image" src="concert.jpg" alt="Concert venue">
+ *   <h3 slot="headline">Spring Concert Series</h3>
+ *   <p slot="text">Featuring the UMD Symphony Orchestra</p>
+ *   <time slot="date-start-iso" datetime="2024-05-10T19:30:00">May 10, 2024 at 7:30 PM</time>
+ *   <p slot="location">Clarice Smith Performing Arts Center</p>
+ * </umd-element-event>
+ * ```
+ * 
+ * ## Custom Element
+ * `umd-element-event`
+ * 
+ * ## Slots
+ * - `headline` - Event title (required, accepts: h2-h6, p)
+ * - `text` - Event description (accepts: p)
+ * - `date-start-iso` - Event start date/time (required, time element)
+ * - `date-end-iso` - Event end date/time (optional, time element)
+ * - `location` - Event location
+ * - `image` - Event image
+ * - `eyebrow` - Category or type label
+ * - `actions` - Registration or info links
+ * 
+ * ## Attributes
+ * - `data-display` - Display layout options:
+ *   - `feature` - Featured event layout with prominent date
+ *   - `promo` - Promotional layout with image overlay
+ *   - `list` - Compact list layout
+ * - `data-feature` - Feature options:
+ *   - `visual-time` - Show time in event details
+ * - `data-theme` - Theme styling options:
+ *   - `dark` - Dark theme styling
+ * - `data-visual` - Visual display options:
+ *   - `transparent` - Transparent background
+ * 
+ * @category Components
+ * @since 1.0.0
+ */
 export default () => {
   Register.registerWebComponent({
     name: tagName,

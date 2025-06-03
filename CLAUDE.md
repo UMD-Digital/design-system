@@ -100,6 +100,56 @@ Centralized in `token/` module:
 - **Components**: Mock DOM and dependencies, focus on creation and events
 - **Coverage**: Run with `npm run test:coverage`
 
+### Mock Files Pattern
+
+The repository uses a centralized `__mocks__/` directory at the root level for mocking package dependencies in tests:
+
+```
+__mocks__/
+├── webComponentsLibrary.js  - Mock for @universityofmaryland/web-components-library
+├── webElementsLibrary.js    - Mock for @universityofmaryland/web-elements-library
+├── webFeedsLibrary.js       - Mock for @universityofmaryland/web-feeds-library
+├── webStylesLibrary.js      - Mock for @universityofmaryland/web-styles-library
+├── elements.js              - Legacy mock for basic element creation helpers
+└── macros.js                - Mock for common UI macro patterns (loaders, lazy loading, etc.)
+```
+
+#### Mock Structure Guidelines
+
+1. **Package Mocks** (web*Library.js):
+   - Each package has its own dedicated mock file
+   - Mocks should mirror the actual package's export structure
+   - Use `jest.fn()` for functions with appropriate return values
+   - Include mock implementations for complex behaviors
+
+2. **Mock Naming Convention**:
+   - Package mocks: `web[PackageName]Library.js`
+   - Helper mocks: descriptive names like `elements.js`, `macros.js`
+
+3. **Mock Implementation Patterns**:
+   ```javascript
+   // For element creation functions
+   jest.fn().mockReturnValue({
+     element: document.createElement('div'),
+     styles: '.mock-style-class'
+   })
+   
+   // For web components
+   const createMockWebComponent = (tagName) => {
+     class MockComponent extends HTMLElement { /* ... */ }
+     return () => {
+       if (!customElements.get(tagName)) {
+         customElements.define(tagName, MockComponent);
+       }
+     };
+   };
+   ```
+
+4. **Usage in Tests**:
+   - Jest automatically uses these mocks when packages are imported
+   - Mocks can be customized per test using `jest.mocked()`
+   - Clear mocks between tests with `jest.clearAllMocks()`
+
 ## TypeScript Configuration
 
 - Strict mode enabled across all packages

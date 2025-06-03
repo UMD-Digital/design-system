@@ -1,4 +1,4 @@
-import { SlotConfiguration } from '../../../_types';
+import { SlotConfiguration } from '../../_types';
 
 /**
  * Validates that an element matches allowed element types

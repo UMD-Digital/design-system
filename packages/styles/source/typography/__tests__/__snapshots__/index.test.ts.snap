@@ -41,6 +41,7 @@ exports[`typography module should match snapshot 1`] = `
       "fontWeight": "700",
       "letterSpacing": "0.02em",
       "lineHeight": "0.91em",
+      "textWrap": "pretty",
     },
     "fonts": {
       "extraLarge": {
@@ -58,6 +59,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontWeight": "700",
         "letterSpacing": "0.02em",
         "lineHeight": "0.91em",
+        "textWrap": "pretty",
       },
       "extraSmall": {
         "className": "umd-campaign-extrasmall",
@@ -83,6 +85,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontWeight": "700",
         "letterSpacing": "0.02em",
         "lineHeight": "0.91em",
+        "textWrap": "pretty",
       },
       "maximum": {
         "@media (min-width: 1024px)": {
@@ -99,6 +102,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontWeight": "700",
         "letterSpacing": "0.02em",
         "lineHeight": "0.91em",
+        "textWrap": "pretty",
       },
       "medium": {
         "@media (min-width: 1024px)": {
@@ -116,6 +120,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontWeight": "700",
         "letterSpacing": "0.02em",
         "lineHeight": "0.91em",
+        "textWrap": "pretty",
       },
       "small": {
         "@media (min-width: 1024px)": {
@@ -149,6 +154,7 @@ exports[`typography module should match snapshot 1`] = `
       "fontWeight": "700",
       "letterSpacing": "0.02em",
       "lineHeight": "0.91em",
+      "textWrap": "pretty",
     },
     "maxium": {
       "@media (min-width: 1024px)": {
@@ -164,6 +170,7 @@ exports[`typography module should match snapshot 1`] = `
       "fontWeight": "700",
       "letterSpacing": "0.02em",
       "lineHeight": "0.91em",
+      "textWrap": "pretty",
     },
     "medium": {
       "@media (min-width: 1024px)": {
@@ -180,6 +187,7 @@ exports[`typography module should match snapshot 1`] = `
       "fontWeight": "700",
       "letterSpacing": "0.02em",
       "lineHeight": "0.91em",
+      "textWrap": "pretty",
     },
   },
   "elements": {
@@ -590,6 +598,7 @@ exports[`typography module should match snapshot 1`] = `
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
       "fontSize": "18px",
       "lineHeight": "1.25em",
+      "textWrap": "pretty",
     },
     "fonts": {
       "extraLarge": {
@@ -604,6 +613,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
         "fontSize": "18px",
         "lineHeight": "1.25em",
+        "textWrap": "pretty",
       },
       "large": {
         "className": "umd-sans-large",
@@ -624,6 +634,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
         "fontSize": "18px",
         "lineHeight": "1.40em",
+        "textWrap": "pretty",
       },
       "largest": {
         "@media (min-width: 1024px)": {
@@ -638,6 +649,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontSize": "22px",
         "fontWeight": "700",
         "lineHeight": "1.25em",
+        "textWrap": "pretty",
       },
       "maximum": {
         "className": "umd-sans-maximum",
@@ -645,6 +657,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontSize": "32px",
         "fontWeight": "700",
         "lineHeight": "1.125em",
+        "textWrap": "pretty",
       },
       "medium": {
         "@media (min-width: 1024px)": {
@@ -709,6 +722,7 @@ exports[`typography module should match snapshot 1`] = `
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
       "fontSize": "18px",
       "lineHeight": "1.40em",
+      "textWrap": "pretty",
     },
     "largest": {
       "@media (min-width: 1024px)": {
@@ -722,12 +736,14 @@ exports[`typography module should match snapshot 1`] = `
       "fontSize": "22px",
       "fontWeight": "700",
       "lineHeight": "1.25em",
+      "textWrap": "pretty",
     },
     "maxium": {
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
       "fontSize": "32px",
       "fontWeight": "700",
       "lineHeight": "1.125em",
+      "textWrap": "pretty",
     },
     "medium": {
       "@media (min-width: 1024px)": {
@@ -758,6 +774,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
         "fontSize": "18px",
         "lineHeight": "1.25em",
+        "textWrap": "pretty",
       },
       "min": {
         "@container (min-width: 480px)": {
@@ -788,6 +805,7 @@ exports[`typography module should match snapshot 1`] = `
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
       "fontSize": "18px",
       "lineHeight": "1.25em",
+      "textWrap": "pretty",
     },
     "scalingMin": {
       "@container (min-width: 480px)": {
@@ -844,6 +862,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontSize": "18px",
         "fontWeight": "700",
         "lineHeight": "1.25em",
+        "textWrap": "pretty",
       },
       "extraLargeUppercase": {
         "@media (min-width: 1024px)": {
@@ -859,6 +878,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontWeight": "800",
         "lineHeight": "1.25em",
         "textTransform": "uppercase",
+        "textWrap": "pretty",
       },
       "largerBold": {
         "@media (min-width: 1024px)": {
@@ -873,6 +893,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontSize": "18px",
         "fontWeight": "700",
         "lineHeight": "1.40em",
+        "textWrap": "pretty",
       },
       "largestUppercase": {
         "@media (min-width: 1024px)": {
@@ -888,6 +909,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontWeight": "800",
         "lineHeight": "1.25em",
         "textTransform": "uppercase",
+        "textWrap": "pretty",
       },
     },
   },

@@ -14,6 +14,7 @@ exports[`typography/sans fonts objects should match snapshot for all fonts objec
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     "fontSize": "18px",
     "lineHeight": "1.25em",
+    "textWrap": "pretty",
   },
   "large": {
     "className": "umd-sans-large",
@@ -34,6 +35,7 @@ exports[`typography/sans fonts objects should match snapshot for all fonts objec
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     "fontSize": "18px",
     "lineHeight": "1.40em",
+    "textWrap": "pretty",
   },
   "largest": {
     "@media (min-width: 1024px)": {
@@ -48,6 +50,7 @@ exports[`typography/sans fonts objects should match snapshot for all fonts objec
     "fontSize": "22px",
     "fontWeight": "700",
     "lineHeight": "1.25em",
+    "textWrap": "pretty",
   },
   "maximum": {
     "className": "umd-sans-maximum",
@@ -55,6 +58,7 @@ exports[`typography/sans fonts objects should match snapshot for all fonts objec
     "fontSize": "32px",
     "fontWeight": "700",
     "lineHeight": "1.125em",
+    "textWrap": "pretty",
   },
   "medium": {
     "@media (min-width: 1024px)": {
@@ -117,6 +121,7 @@ exports[`typography/sans scaling fonts should match snapshot for scaling fonts 1
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     "fontSize": "18px",
     "lineHeight": "1.25em",
+    "textWrap": "pretty",
   },
   "min": {
     "@container (min-width: 480px)": {
@@ -152,6 +157,7 @@ exports[`typography/sans should match snapshot 1`] = `
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     "fontSize": "18px",
     "lineHeight": "1.25em",
+    "textWrap": "pretty",
   },
   "fonts": {
     "extraLarge": {
@@ -166,6 +172,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
       "fontSize": "18px",
       "lineHeight": "1.25em",
+      "textWrap": "pretty",
     },
     "large": {
       "className": "umd-sans-large",
@@ -186,6 +193,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
       "fontSize": "18px",
       "lineHeight": "1.40em",
+      "textWrap": "pretty",
     },
     "largest": {
       "@media (min-width: 1024px)": {
@@ -200,6 +208,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontSize": "22px",
       "fontWeight": "700",
       "lineHeight": "1.25em",
+      "textWrap": "pretty",
     },
     "maximum": {
       "className": "umd-sans-maximum",
@@ -207,6 +216,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontSize": "32px",
       "fontWeight": "700",
       "lineHeight": "1.125em",
+      "textWrap": "pretty",
     },
     "medium": {
       "@media (min-width: 1024px)": {
@@ -271,6 +281,7 @@ exports[`typography/sans should match snapshot 1`] = `
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     "fontSize": "18px",
     "lineHeight": "1.40em",
+    "textWrap": "pretty",
   },
   "largest": {
     "@media (min-width: 1024px)": {
@@ -284,12 +295,14 @@ exports[`typography/sans should match snapshot 1`] = `
     "fontSize": "22px",
     "fontWeight": "700",
     "lineHeight": "1.25em",
+    "textWrap": "pretty",
   },
   "maxium": {
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     "fontSize": "32px",
     "fontWeight": "700",
     "lineHeight": "1.125em",
+    "textWrap": "pretty",
   },
   "medium": {
     "@media (min-width: 1024px)": {
@@ -320,6 +333,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
       "fontSize": "18px",
       "lineHeight": "1.25em",
+      "textWrap": "pretty",
     },
     "min": {
       "@container (min-width: 480px)": {
@@ -350,6 +364,7 @@ exports[`typography/sans should match snapshot 1`] = `
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     "fontSize": "18px",
     "lineHeight": "1.25em",
+    "textWrap": "pretty",
   },
   "scalingMin": {
     "@container (min-width: 480px)": {
@@ -406,6 +421,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontSize": "18px",
       "fontWeight": "700",
       "lineHeight": "1.25em",
+      "textWrap": "pretty",
     },
     "extraLargeUppercase": {
       "@media (min-width: 1024px)": {
@@ -421,6 +437,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontWeight": "800",
       "lineHeight": "1.25em",
       "textTransform": "uppercase",
+      "textWrap": "pretty",
     },
     "largerBold": {
       "@media (min-width: 1024px)": {
@@ -435,6 +452,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontSize": "18px",
       "fontWeight": "700",
       "lineHeight": "1.40em",
+      "textWrap": "pretty",
     },
     "largestUppercase": {
       "@media (min-width: 1024px)": {
@@ -450,6 +468,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "fontWeight": "800",
       "lineHeight": "1.25em",
       "textTransform": "uppercase",
+      "textWrap": "pretty",
     },
   },
 }
@@ -461,6 +480,7 @@ exports[`typography/sans size objects should have correctly defined size values 
   "fontSize": "32px",
   "fontWeight": "700",
   "lineHeight": "1.125em",
+  "textWrap": "pretty",
 }
 `;
 
@@ -477,6 +497,7 @@ exports[`typography/sans size objects should have correctly defined size values 
   "fontSize": "22px",
   "fontWeight": "700",
   "lineHeight": "1.25em",
+  "textWrap": "pretty",
 }
 `;
 
@@ -492,6 +513,7 @@ exports[`typography/sans size objects should have correctly defined size values 
   "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
   "fontSize": "18px",
   "lineHeight": "1.25em",
+  "textWrap": "pretty",
 }
 `;
 
@@ -507,6 +529,7 @@ exports[`typography/sans size objects should have correctly defined size values 
   "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
   "fontSize": "18px",
   "lineHeight": "1.40em",
+  "textWrap": "pretty",
 }
 `;
 
@@ -587,6 +610,7 @@ exports[`typography/sans transformations should match snapshot for all transform
     "fontSize": "18px",
     "fontWeight": "700",
     "lineHeight": "1.25em",
+    "textWrap": "pretty",
   },
   "extraLargeUppercase": {
     "@media (min-width: 1024px)": {
@@ -602,6 +626,7 @@ exports[`typography/sans transformations should match snapshot for all transform
     "fontWeight": "800",
     "lineHeight": "1.25em",
     "textTransform": "uppercase",
+    "textWrap": "pretty",
   },
   "largerBold": {
     "@media (min-width: 1024px)": {
@@ -616,6 +641,7 @@ exports[`typography/sans transformations should match snapshot for all transform
     "fontSize": "18px",
     "fontWeight": "700",
     "lineHeight": "1.40em",
+    "textWrap": "pretty",
   },
   "largestUppercase": {
     "@media (min-width: 1024px)": {
@@ -631,6 +657,7 @@ exports[`typography/sans transformations should match snapshot for all transform
     "fontWeight": "800",
     "lineHeight": "1.25em",
     "textTransform": "uppercase",
+    "textWrap": "pretty",
   },
 }
 `;

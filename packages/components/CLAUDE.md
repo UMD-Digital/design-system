@@ -59,58 +59,106 @@ Implementations are organized by domain:
 - **Validation Utilities** (`source/utilities/markup/validate.ts`)
   - `isHTMLElement` - Type guard for HTML elements
 
-#### Import Convenience (`source/_types.ts`)
+#### Import Locations
 
-The `_types.ts` file provides a single import point that re-exports everything:
-```typescript
-// Import everything from one location
-import {
-  ComponentRef,
-  CreateComponentFunction,
-  CommonSlots,
-  CommonAttributeHandlers,
-  CommonLifecycleHooks,
-  createComponentRegistration,
-  isHTMLElement
-} from '_types';
-```
+Type definitions and helper functions are available from:
+- **Types**: Import from `../_types` (or `../../_types` for nested components)
+- **Common Slots**: Import from `../../model/slots/common`
+- **Attribute Handlers**: Import from `../../model/attributes/handler`
+- **Registration Helper**: Import from `../../model/utilities/register`
 
 ### Component Implementation Pattern
 
 When creating components, follow this structure:
 
 ```typescript
+import { Composite } from '@universityofmaryland/web-elements-library';
+import { Attributes, Model, Register, Slots } from 'model';
+import { Markup } from 'utilities';
 import {
   CreateComponentFunction,
+  ComponentRegistration,
   SlotConfiguration,
-  CommonSlots,
-  CommonAttributeHandlers,
-  createComponentRegistration,
-} from '_types';
+} from '../_types';
+import { CommonSlots } from '../../model/slots/common';
+import { CommonAttributeHandlers } from '../../model/attributes/handler';
+import { createComponentRegistration } from '../../model/utilities/register';
 
-// Define component tag name
+/**
+ * Tag name for the [component name] web component
+ */
 const tagName = 'umd-element-name';
 
-// Define slots using CommonSlots where possible
+/**
+ * Slot configuration for the [component name] component
+ */
 const slots: SlotConfiguration = {
   headline: CommonSlots.headline,
   text: CommonSlots.text,
   // Add custom slots as needed
+  customSlot: {
+    allowedElements: ['div', 'span'],
+    required: false,
+  },
 };
 
-// Implement create function with proper typing
-const createComponent: CreateComponentFunction = ({ element, slots }) => {
-  // Component implementation
-  return { element, styles };
+/**
+ * Creates a [component name] component with the provided configuration
+ */
+const createComponent: CreateComponentFunction = (element) => {
+  // Extract slot content
+  const headline = Slots.headline.default({ element });
+  const text = Slots.text.default({ element });
+  
+  // Extract attributes
+  const isThemeDark = Attributes.isTheme.dark({ element });
+  
+  // Create component using Composite
+  return Composite.componentName.variant({
+    headline,
+    text,
+    isThemeDark,
+    // Additional props as needed
+  });
 };
 
-// Export using the standard registration helper
-export default createComponentRegistration({
+/**
+ * Component Name
+ *
+ * Brief description of the component's purpose.
+ *
+ * ## Custom Element
+ * `<umd-element-name>`
+ *
+ * ## Slots
+ * - `headline` - Component title (required, accepts: h2-h6)
+ * - `text` - Component content (optional, accepts: p)
+ * - `customSlot` - Description (optional, accepts: div, span)
+ *
+ * ## Attributes
+ * - `data-theme` - Color theme:
+ *   - `dark` - Dark background with light text
+ *   - `light` - Light background with dark text
+ *
+ * @example
+ * ```html
+ * <umd-element-name data-theme="dark">
+ *   <h3 slot="headline">Title</h3>
+ *   <p slot="text">Content text</p>
+ * </umd-element-name>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+const registration: ComponentRegistration = createComponentRegistration({
   tagName,
   slots,
   createComponent,
-  attributes: CommonAttributeHandlers.resize, // Use common handlers
+  attributes: CommonAttributeHandlers.resize, // Optional: add common handlers
 });
+
+export default registration;
 ```
 
 ### Model System

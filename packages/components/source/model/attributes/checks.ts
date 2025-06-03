@@ -1,3 +1,28 @@
+/**
+ * Attribute Check Utilities
+ * 
+ * Provides a comprehensive set of functions to check attribute states on HTML elements.
+ * These utilities form the foundation of the component attribute system.
+ * 
+ * ## Function Categories:
+ * 
+ * 1. **isTheme**: Theme-related checks (dark, light, gold, maryland)
+ * 2. **isVisual**: Visual state checks (aligned, bordered, transparent, etc.)
+ * 3. **isDisplay**: Display mode checks (feature, list, promo, etc.)
+ * 4. **isLayout**: Layout configuration checks (fixed, hidden, position)
+ * 5. **isInfo**: Content type checks (admissions, events, news, etc.)
+ * 6. **includesFeature**: Feature flag checks (animation, lazyLoad, etc.)
+ * 7. **getValue**: Attribute value getters (url, title, styleProps)
+ * 
+ * ## Naming Convention:
+ * - `is*` functions return boolean values
+ * - `includes*` functions check for feature presence
+ * - `getValue*` functions return string values
+ * 
+ * ## Deprecation Handling:
+ * Many functions handle both current (data-*) and deprecated attribute names,
+ * logging warnings when deprecated attributes are used.
+ */
 import * as Styles from '@universityofmaryland/web-styles-library';
 import AttributeNames from './names';
 import AttributesValues from './values';
@@ -27,6 +52,14 @@ interface ValueGetterConfig {
 }
 
 // Core attribute check utilities
+
+/**
+ * Checks if an attribute equals a specific value.
+ * Returns defaultValue if attribute is not present.
+ * Special handling: 'false' string always returns false.
+ * 
+ * @internal
+ */
 const isAttributeTrue = ({
   element,
   attributeName,

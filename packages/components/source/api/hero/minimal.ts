@@ -1,6 +1,12 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register } from 'model';
+import { Attributes, Model } from 'model';
 import { CommonHeroData } from './common';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../_types';
+import { createComponentRegistration } from 'model/utilities/register';
+import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 
 /**
  * Tag name for the minimal hero component
@@ -8,7 +14,7 @@ import { CommonHeroData } from './common';
  */
 const tagName = 'umd-element-hero-minimal';
 
-const createComponent = (element: HTMLElement) =>
+const createComponent: CreateComponentFunction = (element) =>
   Composite.hero.minimal({
     isThemeDark: Attributes.isTheme.dark({
       element,
@@ -87,15 +93,10 @@ const createComponent = (element: HTMLElement) =>
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      afterConnect: (element) => {
-        element?.events?.load();
-      },
-    }),
-  });
-};
+const MinimalHero: ComponentRegistration = createComponentRegistration({
+  tagName,
+  createComponent,
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
+});
+
+export default MinimalHero;

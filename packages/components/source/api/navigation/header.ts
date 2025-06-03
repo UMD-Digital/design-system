@@ -33,6 +33,81 @@ const styles = `
   ${Composite.navigation.header.Styles}
 `;
 
+/**
+ * Navigation Header
+ *
+ * A comprehensive header navigation component that includes logo, main navigation,
+ * utility navigation, search, and optional call-to-action. Supports sticky positioning
+ * and responsive mobile drawer navigation.
+ *
+ * ## Custom Element
+ * `<umd-element-navigation-header>`
+ *
+ * ## Slots
+ * - `logo` - Site logo/branding (required)
+ * - `main-navigation` - Container for umd-element-nav-item components
+ * - `utility-navigation` - Utility/secondary navigation links
+ *
+ * ## Attributes
+ * - `search-url` - URL for search functionality
+ * - `cta-url` - URL for call-to-action button
+ * - `cta-text` - Text for call-to-action button
+ * - `sticky` - Enable sticky header behavior:
+ *   - `true` - Header sticks to top on scroll
+ *
+ * ## Observed Attributes
+ * - `sticky` - Dynamically toggle sticky behavior
+ *
+ * @example
+ * ```html
+ * <!-- Basic header -->
+ * <umd-element-navigation-header>
+ *   <a slot="logo" href="/">
+ *     <img src="logo.svg" alt="University of Maryland">
+ *   </a>
+ *   <div slot="main-navigation">
+ *     <umd-element-nav-item>
+ *       <a slot="primary-link" href="/about">About</a>
+ *     </umd-element-nav-item>
+ *     <umd-element-nav-item>
+ *       <a slot="primary-link" href="/academics">Academics</a>
+ *     </umd-element-nav-item>
+ *   </div>
+ * </umd-element-navigation-header>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Full header with search and CTA -->
+ * <umd-element-navigation-header
+ *   search-url="/search"
+ *   cta-url="/apply"
+ *   cta-text="Apply Now"
+ *   sticky="true">
+ *   <a slot="logo" href="/">Maryland</a>
+ *   <div slot="main-navigation">
+ *     <umd-element-nav-item>
+ *       <a slot="primary-link" href="/academics">Academics</a>
+ *       <nav slot="dropdown-links">
+ *         <ul>
+ *           <li><a href="/undergraduate">Undergraduate</a></li>
+ *           <li><a href="/graduate">Graduate</a></li>
+ *         </ul>
+ *       </nav>
+ *     </umd-element-nav-item>
+ *   </div>
+ *   <nav slot="utility-navigation">
+ *     <ul>
+ *       <li><a href="/news">News</a></li>
+ *       <li><a href="/events">Events</a></li>
+ *     </ul>
+ *   </nav>
+ * </umd-element-navigation-header>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
 const CreateNavItemSlots = ({ element }: { element: HTMLElement }) => {
   const { NAVIGATION } = SLOTS;
   const navigationSlot = element.querySelector(

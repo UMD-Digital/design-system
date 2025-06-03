@@ -1,5 +1,11 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Model, Register, Slots } from 'model';
+import { Model, Slots } from 'model';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../_types';
+import { createComponentRegistration } from 'model/utilities/register';
+import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 
 /**
  * Tag name for the brand video hero component
@@ -7,7 +13,7 @@ import { Model, Register, Slots } from 'model';
  */
 const tagName = 'umd-element-hero-brand-video';
 
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const animationTriggerAttribute = element.getAttribute('animation-trigger');
   const video = element.querySelector('video') as HTMLVideoElement;
 
@@ -69,15 +75,10 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      afterConnect: (element) => {
-        element?.events?.load();
-      },
-    }),
-  });
-};
+const BrandVideoHero: ComponentRegistration = createComponentRegistration({
+  tagName,
+  createComponent,
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
+});
+
+export default BrandVideoHero;

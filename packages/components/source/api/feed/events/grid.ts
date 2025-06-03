@@ -1,6 +1,11 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { CommonFeedEventsData } from './common';
 import { Attributes, Model, Register } from 'model';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from 'api/_types';
+import { createComponentRegistration } from 'model/utilities/register';
 
 /**
  * Tag name for the events grid feed component
@@ -14,7 +19,7 @@ const tagName = 'umd-feed-events';
  * @returns Configured feed component
  * @internal
  */
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const isTransparent = element.getAttribute('transparent') === 'true';
   let numberOfColumnsToShow =
     Number(element.getAttribute(Attributes.names.FEED_COLUMN_COUNT)) || 3;
@@ -34,7 +39,7 @@ const createComponent = (element: HTMLElement) => {
   });
 
   if (!data) {
-    console.error('Feed news requires a token to be set');
+    console.error('Feed events requires a token to be set');
     return { element: document.createElement('div'), styles: '' };
   }
 
@@ -101,15 +106,12 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      afterConnect: (element, shadow) => {
-        element?.events?.callback(shadow);
-      },
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  createComponent,
+  afterConnect: (element, shadow) => {
+    element?.events?.callback(shadow);
+  },
+});
+
+export default registration;

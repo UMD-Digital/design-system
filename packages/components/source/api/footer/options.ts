@@ -1,6 +1,12 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Model, Slots } from 'model';
 import { Markup } from 'utilities';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
+import { createComponentRegistration } from 'model/utilities/register';
 
 /**
  * Tag name for the footer component
@@ -29,7 +35,7 @@ export const SLOTS = {
  * Slot configuration for the footer component
  * @internal
  */
-const slots = {
+const slots: SlotConfiguration = {
   [`${SLOTS.BACKGROUND_IMAGE}`]: {
     allowedElements: ['img'],
   },
@@ -41,7 +47,7 @@ const slots = {
  * @returns Configured footer component
  * @internal
  */
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const isTypeMega = element.getAttribute('type') === 'mega';
   const isTypeVisual = element.getAttribute('type') === 'visual';
   const columnOne = element.querySelector(
@@ -198,13 +204,10 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-    }),
-  });
-};
+const FooterOptions: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+});
+
+export default FooterOptions;

@@ -1,10 +1,31 @@
 import CardModel from './_model';
 
 /**
- * Standard Card Component
+ * Standard Card
  * 
  * A versatile card component for displaying content with optional images, actions, and themes.
  * Supports multiple display modes including block, list, and transparent variations.
+ * 
+ * ## Custom Element
+ * `<umd-element-card>`
+ * 
+ * ## Slots
+ * - `headline` - Card title (required, accepts: h2-h6, p)
+ * - `text` - Card content (accepts: p)
+ * - `eyebrow` - Small text above headline
+ * - `image` - Card image
+ * - `actions` - Action buttons or links
+ * - `date` - Date information
+ * 
+ * ## Attributes
+ * - `data-theme` - Theme styling options:
+ *   - `dark` - Dark theme styling
+ *   - `light` - Light theme styling
+ * - `data-visual` - Visual display options:
+ *   - `transparent` - Transparent background
+ *   - `aligned` - Aligned content layout
+ *   - `bordered` - Add border styling
+ *   - `list` - List display format
  * 
  * @example
  * ```html
@@ -37,27 +58,6 @@ import CardModel from './_model';
  *   <p slot="text">Access important resources and tools.</p>
  * </umd-element-card>
  * ```
- * 
- * ## Custom Element
- * `umd-element-card`
- * 
- * ## Slots
- * - `headline` - Card title (required, accepts: h2-h6, p)
- * - `text` - Card content (accepts: p)
- * - `eyebrow` - Small text above headline
- * - `image` - Card image
- * - `actions` - Action buttons or links
- * - `date` - Date information
- * 
- * ## Attributes
- * - `data-theme` - Theme styling options:
- *   - `dark` - Dark theme styling
- *   - `light` - Light theme styling
- * - `data-visual` - Visual display options:
- *   - `transparent` - Transparent background
- *   - `aligned` - Aligned content layout
- *   - `bordered` - Add border styling
- *   - `list` - List display format
  * 
  * @category Components
  * @since 1.0.0

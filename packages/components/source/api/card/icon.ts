@@ -1,19 +1,22 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonSlots } from '../../model/slots/common';
+import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
-/**
- * Tag name for the icon card component
- * @internal
- */
+// Tag name for the icon card component
 const tagName = 'umd-element-card-icon';
 
-/**
- * Slot configuration for the icon card component
- * @internal
- */
-const slots = {
+// Slot configuration for the icon card component
+const slots: SlotConfiguration = {
   headline: {
+    ...CommonSlots.headline,
+    required: true,
+  },
+  text: CommonSlots.text,
+  image: {
+    ...CommonSlots.image,
     required: true,
   },
 };
@@ -24,7 +27,7 @@ const slots = {
  * @returns Configured icon card component
  * @internal
  */
-const createComponent = (element: HTMLElement) =>
+const createComponent: CreateComponentFunction = (element) =>
   Composite.card.overlay.icon({
     image: Markup.validate.ImageSlot({
       element,
@@ -36,10 +39,22 @@ const createComponent = (element: HTMLElement) =>
   });
 
 /**
- * Icon Card Component
+ * Icon Card
  * 
  * A card component with an icon overlay design, perfect for highlighting
  * services, features, or categories with visual emphasis.
+ * 
+ * ## Custom Element
+ * `<umd-element-card-icon>`
+ * 
+ * ## Slots
+ * - `headline` - Card title (required, accepts: h2-h6, p)
+ * - `text` - Card description (optional, accepts: p)
+ * - `image` - Icon or image (required)
+ * 
+ * ## Attributes
+ * - `data-theme` - Theme styling options:
+ *   - `dark` - Dark theme styling
  * 
  * @example
  * ```html
@@ -78,28 +93,13 @@ const createComponent = (element: HTMLElement) =>
  * </div>
  * ```
  * 
- * ## Custom Element
- * `umd-element-card-icon`
- * 
- * ## Slots
- * - `headline` - Card title (required, accepts: h2-h6, p)
- * - `text` - Card description (optional, accepts: p)
- * - `image` - Icon or image (required)
- * 
- * ## Attributes
- * - `data-theme` - Theme styling options:
- *   - `dark` - Dark theme styling
- * 
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+});
+
+export default registration;

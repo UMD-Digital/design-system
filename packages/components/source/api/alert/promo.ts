@@ -1,28 +1,62 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes } from 'model';
-import { createAlertComponent, type AlertBannerProps } from './_model';
+import { Attributes, Slots } from 'model';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonSlots } from '../../model/slots/common';
 
 /**
- * Promotional Banner Component
- * 
+ * Tag name for the promotional banner web component
+ */
+const tagName = 'umd-element-banner-promo';
+
+/**
+ * Slot configuration for the promotional banner component
+ */
+const slots: SlotConfiguration = {
+  headline: {
+    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+  },
+  body: CommonSlots.body,
+  text: CommonSlots.text,
+  actions: CommonSlots.actions,
+};
+
+/**
+ * Creates a promotional banner component
+ */
+const createComponent: CreateComponentFunction = (element) =>
+  Composite.banner.promo({
+    headline: Slots.headline.default({ element }),
+    text: Slots.deprecated.body({ element }) || Slots.text.default({ element }),
+    actions: Slots.actions.default({ element }),
+    isThemeDark: Attributes.isTheme.dark({ element }),
+    includeSeal: Attributes.isVisual.icon_seal({ element }),
+  });
+
+/**
+ * Promotional Banner
+ *
  * A banner component for highlighting promotional content or special announcements.
- * Can include the university seal for official communications.
- * 
+ *
  * ## Custom Element
  * `<umd-element-banner-promo>`
- * 
+ *
  * ## Slots
  * - `headline` - Banner title (required, accepts: h2-h6, p)
  * - `text` - Banner content (required, accepts: div, p)
  * - `actions` - Optional action buttons or links
  * - `body` - Deprecated: Use `text` slot instead
- * 
+ *
  * ## Attributes
  * - `data-theme` - Theme options:
  *   - `dark` - Dark background theme
  * - `data-visual-icon` - Icon options:
  *   - `seal` - Include university seal icon
- * 
+ *
  * @example
  * ```html
  * <!-- Basic promo banner -->
@@ -34,7 +68,7 @@ import { createAlertComponent, type AlertBannerProps } from './_model';
  *   </div>
  * </umd-element-banner-promo>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Dark theme with university seal -->
@@ -49,15 +83,14 @@ import { createAlertComponent, type AlertBannerProps } from './_model';
  *   </div>
  * </umd-element-banner-promo>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-export default createAlertComponent<AlertBannerProps>({
-  tagName: 'umd-element-banner-promo',
-  renderer: Composite.banner.promo,
-  getAdditionalProps: (element: HTMLElement) => ({
-    isThemeDark: Attributes.isTheme.dark({ element }),
-    includeSeal: Attributes.isVisual.icon_seal({ element }),
-  }),
+const PromoBannerRegistration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
 });
+
+export default PromoBannerRegistration;

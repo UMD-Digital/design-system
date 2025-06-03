@@ -1,22 +1,31 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonSlots } from '../../model/slots/common';
+import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
+import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
 const { SlotWithDefaultStyling } = Markup.create;
 
-/**
- * Tag name for the overlay card component
- * @internal
- */
+// Tag name for the overlay card component
 const tagName = 'umd-element-card-overlay';
 
-/**
- * Slot configuration for the overlay card component
- * @internal
- */
-const slots = {
+// Slot configuration for the overlay card component
+const slots: SlotConfiguration = {
   headline: {
+    ...CommonSlots.headline,
     required: true,
+  },
+  text: CommonSlots.text,
+  eyebrow: CommonSlots.eyebrow,
+  image: CommonSlots.image,
+  actions: CommonSlots.actions,
+  date: {
+    allowedElements: ['p', 'span', 'time'],
+  },
+  'cta-icon': {
+    allowedElements: ['span', 'svg'],
   },
 };
 
@@ -42,7 +51,7 @@ const MakeOverlayContent = ({ element }: { element: HTMLElement }) => ({
  * @returns Configured overlay card component
  * @internal
  */
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   if (Attributes.isLayout.image({ element })) {
     const ImageOverlay = Composite.card.overlay.image({
       ...MakeOverlayContent({ element }),
@@ -58,10 +67,31 @@ const createComponent = (element: HTMLElement) => {
 };
 
 /**
- * Overlay Card Component
+ * Overlay Card
  * 
  * A dramatic card component with overlay styling, supporting both image
  * and color backgrounds. Perfect for hero sections and featured content.
+ * 
+ * ## Custom Element
+ * `<umd-element-card-overlay>`
+ * 
+ * ## Slots
+ * - `headline` - Card title (required, accepts: h2-h6, p)
+ * - `text` - Card content (optional, accepts: p)
+ * - `eyebrow` - Small text above headline
+ * - `image` - Background image (required for layout-image)
+ * - `actions` - Action buttons or links
+ * - `date` - Date information
+ * - `cta-icon` - Call-to-action icon
+ * 
+ * ## Attributes
+ * - `data-layout` - Layout options:
+ *   - `image` - Use image as background
+ * - `data-visual` - Visual display options:
+ *   - `quote` - Quote styling
+ * - `data-theme` - Theme styling options:
+ *   - `dark` - Dark overlay theme
+ *   - `light` - Light overlay theme
  * 
  * @example
  * ```html
@@ -101,40 +131,14 @@ const createComponent = (element: HTMLElement) => {
  * </umd-element-card-overlay>
  * ```
  * 
- * ## Custom Element
- * `umd-element-card-overlay`
- * 
- * ## Slots
- * - `headline` - Card title (required, accepts: h2-h6, p)
- * - `text` - Card content (optional, accepts: p)
- * - `eyebrow` - Small text above headline
- * - `image` - Background image (required for layout-image)
- * - `actions` - Action buttons or links
- * - `date` - Date information
- * - `cta-icon` - Call-to-action icon
- * 
- * ## Attributes
- * - `data-layout` - Layout options:
- *   - `image` - Use image as background
- * - `data-visual` - Visual display options:
- *   - `quote` - Quote styling
- * - `data-theme` - Theme styling options:
- *   - `dark` - Dark overlay theme
- *   - `light` - Light overlay theme
- * 
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-      afterConnect: (element) => {
-        element?.events?.load();
-      },
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
+});
+
+export default registration;

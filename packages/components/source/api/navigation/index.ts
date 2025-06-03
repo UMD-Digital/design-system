@@ -1,3 +1,8 @@
+/**
+ * Navigation
+ *
+ * Navigation components for site menus, breadcrumbs, and wayfinding.
+ */
 export { default as breadcrumb } from './breadcrumb';
 export { default as drawer } from './drawer';
 export { default as header } from './header';

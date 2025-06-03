@@ -1,25 +1,58 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes } from 'model';
-import { createAlertComponent, type AlertSiteProps } from './_model';
+import { Attributes, Slots } from 'model';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonSlots } from '../../model/slots/common';
 
 /**
- * Site Alert Component
- * 
+ * Tag name for the site alert web component
+ */
+const tagName = 'umd-element-alert-site';
+
+/**
+ * Slot configuration for the site alert component
+ */
+const slots: SlotConfiguration = {
+  headline: {
+    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+  },
+  body: CommonSlots.body,
+  text: CommonSlots.text,
+  actions: CommonSlots.actions,
+};
+
+/**
+ * Creates a site alert component
+ */
+const createComponent: CreateComponentFunction = (element) =>
+  Composite.alert.site({
+    headline: Slots.headline.default({ element }),
+    text: Slots.deprecated.body({ element }) || Slots.text.default({ element }),
+    actions: Slots.actions.default({ element }),
+    daysToHide: Attributes.getValue.daysToHide({ element }) || '10',
+  });
+
+/**
+ * Site Alert
+ *
  * A site-wide alert component that remembers when users dismiss it.
- * Uses localStorage to track dismissal and respects user preferences.
- * 
+ *
  * ## Custom Element
  * `<umd-element-alert-site>`
- * 
+ *
  * ## Slots
  * - `headline` - Alert title (required, accepts: h2-h6, p)
  * - `text` - Alert content (required, accepts: div, p)
  * - `actions` - Optional action buttons or links
  * - `body` - Deprecated: Use `text` slot instead
- * 
+ *
  * ## Attributes
  * - `days-to-hide` - Number of days to remember dismissal (default: 10)
- * 
+ *
  * @example
  * ```html
  * <!-- Basic site alert -->
@@ -28,7 +61,7 @@ import { createAlertComponent, type AlertSiteProps } from './_model';
  *   <p slot="text">Our systems will undergo maintenance on Sunday from 2-4 AM EST.</p>
  * </umd-element-alert-site>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Alert hidden for 30 days after dismissal -->
@@ -42,7 +75,7 @@ import { createAlertComponent, type AlertSiteProps } from './_model';
  *   </div>
  * </umd-element-alert-site>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Persistent alert (1 day dismissal) -->
@@ -54,14 +87,14 @@ import { createAlertComponent, type AlertSiteProps } from './_model';
  *   </div>
  * </umd-element-alert-site>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-export default createAlertComponent<AlertSiteProps>({
-  tagName: 'umd-element-alert-site',
-  renderer: Composite.alert.site,
-  getAdditionalProps: (element: HTMLElement) => ({
-    daysToHide: Attributes.getValue.daysToHide({ element }) || '10',
-  }),
+const SiteAlertRegistration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
 });
+
+export default SiteAlertRegistration;

@@ -1,11 +1,11 @@
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonSlots } from '../../model/slots/common';
+import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
-/**
- * Tag name for the event card component
- * @internal
- */
+// Tag name for the event card component
 const tagName = 'umd-element-event';
 
 /**
@@ -20,13 +20,35 @@ const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
   isThemeDark: Attributes.isTheme.dark({ element }),
 });
 
+// Slot configuration for the event card component
+const slots: SlotConfiguration = {
+  headline: {
+    ...CommonSlots.headline,
+    required: true,
+  },
+  text: CommonSlots.text,
+  'date-start-iso': {
+    required: true,
+    allowedElements: ['time'],
+  },
+  'date-end-iso': {
+    allowedElements: ['time'],
+  },
+  location: {
+    allowedElements: ['p', 'span'],
+  },
+  image: CommonSlots.image,
+  eyebrow: CommonSlots.eyebrow,
+  actions: CommonSlots.actions,
+};
+
 /**
  * Creates an event card component with date, time, and location information
  * @param element - The host HTML element
  * @returns Configured event card component
  * @internal
  */
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const showTime = Attributes.includesFeature.visualTime({ element });
 
@@ -127,10 +149,35 @@ const createComponent = (element: HTMLElement) => {
 };
 
 /**
- * Event Card Component
+ * Event Card
  * 
  * A specialized card for displaying event information with date, time, and location.
  * Supports multiple display formats including feature, promo, and list layouts.
+ * 
+ * ## Custom Element
+ * `<umd-element-event>`
+ * 
+ * ## Slots
+ * - `headline` - Event title (required, accepts: h2-h6, p)
+ * - `text` - Event description (accepts: p)
+ * - `date-start-iso` - Event start date/time (required, time element)
+ * - `date-end-iso` - Event end date/time (optional, time element)
+ * - `location` - Event location
+ * - `image` - Event image
+ * - `eyebrow` - Category or type label
+ * - `actions` - Registration or info links
+ * 
+ * ## Attributes
+ * - `data-display` - Display layout options:
+ *   - `feature` - Featured event layout with prominent date
+ *   - `promo` - Promotional layout with image overlay
+ *   - `list` - Compact list layout
+ * - `data-feature` - Feature options:
+ *   - `visual-time` - Show time in event details
+ * - `data-theme` - Theme styling options:
+ *   - `dark` - Dark theme styling
+ * - `data-visual` - Visual display options:
+ *   - `transparent` - Transparent background
  * 
  * @example
  * ```html
@@ -172,40 +219,13 @@ const createComponent = (element: HTMLElement) => {
  * </umd-element-event>
  * ```
  * 
- * ## Custom Element
- * `umd-element-event`
- * 
- * ## Slots
- * - `headline` - Event title (required, accepts: h2-h6, p)
- * - `text` - Event description (accepts: p)
- * - `date-start-iso` - Event start date/time (required, time element)
- * - `date-end-iso` - Event end date/time (optional, time element)
- * - `location` - Event location
- * - `image` - Event image
- * - `eyebrow` - Category or type label
- * - `actions` - Registration or info links
- * 
- * ## Attributes
- * - `data-display` - Display layout options:
- *   - `feature` - Featured event layout with prominent date
- *   - `promo` - Promotional layout with image overlay
- *   - `list` - Compact list layout
- * - `data-feature` - Feature options:
- *   - `visual-time` - Show time in event details
- * - `data-theme` - Theme styling options:
- *   - `dark` - Dark theme styling
- * - `data-visual` - Visual display options:
- *   - `transparent` - Transparent background
- * 
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+});
+
+export default registration;

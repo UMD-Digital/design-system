@@ -1,27 +1,36 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../../_types';
+import { createComponentRegistration } from '../../../model/utilities/register';
+import { CommonSlots } from '../../../model/slots/common';
+import { CommonAttributeHandlers } from '../../../model/attributes/handler';
+import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 const { ImageHasAlt } = Markup.validate;
 
-/**
- * Tag name for the multiple image carousel component
- * @internal
- */
+// Tag name for the multiple image carousel component
 const tagName = 'umd-element-carousel-multiple-image';
 
-const slots = {
+// Slot configuration for the multiple image carousel component
+const slots: SlotConfiguration = {
   images: {
+    ...CommonSlots.image,
     required: true,
+    allowedElements: ['img'],
   },
 };
 
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.resize({
-    callback: (element) => element.events?.SetEventReize(),
-  }),
+// Attribute handlers for the multiple image carousel component
+const attributes = CommonAttributeHandlers.resize(
+  (element) => element.events?.SetEventReize()
 );
 
-const createComponent = (element: HTMLElement) => {
+/**
+ * Creates a multiple image carousel component
+ * @param element - The host HTML element
+ * @returns Configured multiple image carousel component
+ * @internal
+ */
+const createComponent: CreateComponentFunction = (element) => {
   const slottedImages = Array.from(
     element.querySelectorAll(`[slot="${Slots.name.IMAGES}"] > *`),
   ) as HTMLImageElement[];
@@ -45,29 +54,28 @@ const createComponent = (element: HTMLElement) => {
 };
 
 /**
- * Multiple Image Carousel Component
- * 
+ * Multiple Image Carousel
+ *
  * A carousel component for displaying multiple images in a gallery format.
- * Validates images have alt text for accessibility.
- * 
+ *
  * ## Custom Element
  * `<umd-element-carousel-multiple-image>`
- * 
+ *
  * ## Slots
- * - `images` - Container for images (required, img elements must have alt text)
- * 
+ * - `images` - Container for images (required, accepts: img elements with alt text)
+ *
  * ## Attributes
- * - `data-theme` - Theme options:
- *   - `dark` - Dark theme styling
- * - `data-feature` - Feature options:
+ * - `data-theme` - Visual theme:
+ *   - `light` - Light theme (default)
+ *   - `dark` - Dark theme
+ * - `data-feature` - Additional features:
  *   - `fullscreen` - Enable fullscreen viewing option
- * 
+ *
  * ## Observed Attributes
- * - `resize` - Triggers carousel recalculation
- * 
+ * - `resize` - Triggers carousel size recalculation
+ *
  * @example
  * ```html
- * <!-- Basic multiple image carousel -->
  * <umd-element-carousel-multiple-image>
  *   <div slot="images">
  *     <img src="gallery1.jpg" alt="Gallery image 1">
@@ -77,34 +85,15 @@ const createComponent = (element: HTMLElement) => {
  *   </div>
  * </umd-element-carousel-multiple-image>
  * ```
- * 
- * @example
- * ```html
- * <!-- Gallery with fullscreen option -->
- * <umd-element-carousel-multiple-image 
- *   data-theme="dark"
- *   data-feature="fullscreen">
- *   <div slot="images">
- *     <img src="artwork1.jpg" alt="Abstract painting">
- *     <img src="artwork2.jpg" alt="Sculpture installation">
- *     <img src="artwork3.jpg" alt="Photography exhibit">
- *     <img src="artwork4.jpg" alt="Digital art piece">
- *     <img src="artwork5.jpg" alt="Mixed media work">
- *   </div>
- * </umd-element-carousel-multiple-image>
- * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-      attributes,
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+  attributes: [attributes],
+});
+
+export default registration;

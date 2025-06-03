@@ -12,7 +12,7 @@ export const CommonFeedNewsData = ({ element }: { element: HTMLElement }) => {
   );
 
   if (!token) {
-    console.error(`Feed events requires a token to be set`);
+    console.error(`Feed news requires a token to be set`);
     return;
   }
 

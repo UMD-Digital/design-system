@@ -6,16 +6,22 @@ declare global {
 
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Markup, Styles } from 'utilities';
+import {
+  ComponentRegistration,
+} from '../_types';
 
 const { Node } = Markup.create;
+
+/**
+ * Tag name for the navigation item web component
+ */
+const tagName = 'umd-element-nav-item';
 
 const SLOTS = {
   PRIMARY_LINK: 'primary-link',
   DROPDOWN_LINKS: 'dropdown-links',
   DROPDOWN_CALLOUT: 'dropdown-callout',
 };
-
-const ELEMENT_NAME = 'umd-element-nav-item';
 
 // prettier-ignore
 export const styles = `
@@ -93,12 +99,75 @@ class UMDNavItemElement extends HTMLElement {
   }
 }
 
-export default () => {
+/**
+ * Navigation Item
+ *
+ * A navigation menu item component that supports dropdown menus and callout sections.
+ * Designed to be used within navigation header and drawer components for creating
+ * hierarchical navigation structures.
+ *
+ * ## Custom Element
+ * `<umd-element-nav-item>`
+ *
+ * ## Slots
+ * - `primary-link` - Main navigation link (required)
+ * - `dropdown-links` - Dropdown menu content
+ * - `dropdown-callout` - Featured callout section in dropdown
+ *
+ * @example
+ * ```html
+ * <!-- Simple navigation item -->
+ * <umd-element-nav-item>
+ *   <a slot="primary-link" href="/about">About</a>
+ * </umd-element-nav-item>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Navigation item with dropdown -->
+ * <umd-element-nav-item>
+ *   <a slot="primary-link" href="/academics">Academics</a>
+ *   <nav slot="dropdown-links">
+ *     <ul>
+ *       <li><a href="/undergraduate">Undergraduate Programs</a></li>
+ *       <li><a href="/graduate">Graduate Programs</a></li>
+ *       <li><a href="/online">Online Learning</a></li>
+ *     </ul>
+ *   </nav>
+ * </umd-element-nav-item>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Navigation item with dropdown and callout -->
+ * <umd-element-nav-item>
+ *   <a slot="primary-link" href="/research">Research</a>
+ *   <nav slot="dropdown-links">
+ *     <ul>
+ *       <li><a href="/research/centers">Research Centers</a></li>
+ *       <li><a href="/research/labs">Laboratories</a></li>
+ *       <li><a href="/research/funding">Funding Opportunities</a></li>
+ *     </ul>
+ *   </nav>
+ *   <div slot="dropdown-callout">
+ *     <h3>Featured Research</h3>
+ *     <p>Quantum computing breakthrough leads to new possibilities</p>
+ *     <a href="/research/quantum">Learn More</a>
+ *   </div>
+ * </umd-element-nav-item>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+const navItemRegistration: ComponentRegistration = () => {
   const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
+    document.getElementsByTagName(tagName).length > 0;
 
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
+  if (!window.customElements.get(tagName) && hasElement) {
     window.UMDNavItemElement = UMDNavItemElement;
-    window.customElements.define(ELEMENT_NAME, UMDNavItemElement);
+    window.customElements.define(tagName, UMDNavItemElement);
   }
 };
+
+export default navItemRegistration;

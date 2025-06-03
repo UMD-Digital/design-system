@@ -2,12 +2,18 @@
   "$schema": "https://typedoc.org/schema.json",
   "name": "UMD Web Components Library",
   "entryPoints": [
+    "./source/api/_types.ts",
     "./source/api",
+    "./source/model"
   ],
   "entryPointStrategy": "resolve",
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "skipErrorChecking": true,
   "hideGenerator": true,
   "searchInDocuments": true,
   "out": "../../docs/components",
   "readme": "README.md",
-  "githubPages": true,
+  "githubPages": true
 }

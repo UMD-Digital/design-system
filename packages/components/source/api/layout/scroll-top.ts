@@ -1,20 +1,70 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register } from 'model';
+import { Attributes } from 'model';
+import {
+  CreateComponentFunction,
+  LayoutProps,
+} from '../_types';
+import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
+import { createComponentRegistration } from '../../model/utilities/register';
 
 const tagName = 'umd-element-scroll-top';
 
-const createComponent = (element: HTMLElement) =>
-  Composite.layout.scrollTop({
-    isFixed: element.hasAttribute(Attributes.names.LAYOUT_FIXED),
-  });
+/**
+ * Props for scroll-to-top component
+ */
+interface ScrollTopProps extends Pick<LayoutProps, 'isFixed'> {}
 
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      afterConnect: (ref) => ref?.events?.load(),
-    }),
-  });
+const createComponent: CreateComponentFunction = (element) => {
+  const props: ScrollTopProps = {
+    isFixed: element.hasAttribute(Attributes.names.LAYOUT_FIXED),
+  };
+
+  return Composite.layout.scrollTop(props);
 };
+
+/**
+ * Scroll to Top
+ *
+ * A utility component that provides a smooth scroll-to-top functionality.
+ * Displays a button that appears after scrolling down and returns users to the top of the page.
+ * Can be positioned fixed or absolute within its container.
+ *
+ * ## Custom Element
+ * `<umd-element-scroll-top>`
+ *
+ * ## Attributes
+ * - `data-layout-fixed` - Positioning mode:
+ *   - When present - Fixed positioning relative to viewport
+ *   - When absent - Absolute positioning within parent container
+ *
+ * @example
+ * ```html
+ * <!-- Basic scroll to top button -->
+ * <umd-element-scroll-top></umd-element-scroll-top>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Fixed position scroll to top -->
+ * <umd-element-scroll-top data-layout-fixed></umd-element-scroll-top>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Within a specific container -->
+ * <div class="content-wrapper" style="position: relative;">
+ *   <article>
+ *     <!-- Long content here -->
+ *   </article>
+ *   <umd-element-scroll-top></umd-element-scroll-top>
+ * </div>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+export default createComponentRegistration({
+  tagName,
+  createComponent,
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
+});

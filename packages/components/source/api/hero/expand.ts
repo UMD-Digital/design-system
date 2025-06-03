@@ -1,6 +1,11 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Model, Slots } from 'model';
 import { Markup } from 'utilities';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../_types';
+import { createComponentRegistration } from 'model/utilities/register';
 
 /**
  * Tag name for the expandable hero component
@@ -21,7 +26,7 @@ const attributes = Attributes.handler.combine(
   }),
 );
 
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const image = Markup.validate.ImageSlot({
     element,
     ImageSlot: Slots.name.assets.image,
@@ -142,21 +147,18 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      attributes,
-      afterConnect: (ref) => {
-        const topPosition = Attributes.getValue.topPosition({
-          element: ref.element,
-        });
-        if (topPosition) {
-          ref?.events?.setTopPosition({ value: topPosition });
-        }
-      },
-    }),
-  });
-};
+const ExpandHero: ComponentRegistration = createComponentRegistration({
+  tagName,
+  createComponent,
+  attributes,
+  afterConnect: (ref) => {
+    const topPosition = Attributes.getValue.topPosition({
+      element: ref.element,
+    });
+    if (topPosition) {
+      ref?.events?.setTopPosition({ value: topPosition });
+    }
+  },
+});
+
+export default ExpandHero;

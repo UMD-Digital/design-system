@@ -1,9 +1,24 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Slots, Register } from 'model';
+import { Attributes, Slots } from 'model';
+import {
+  CreateComponentFunction,
+  LayoutProps,
+} from '../_types';
+import { CommonAttributeHandlers } from '../../model/attributes/handler';
+import { createComponentRegistration } from '../../model/utilities/register';
 
 const tagName = 'umd-element-modal';
 
-const createComponent = (element: HTMLElement) => {
+/**
+ * Props for modal component
+ */
+interface ModalProps extends LayoutProps {
+  content: HTMLElement | null;
+  context: HTMLElement;
+  callback: () => void;
+}
+
+const createComponent: CreateComponentFunction = (element) => {
   const callback = () => {
     element.setAttribute(
       Attributes.names.layout.HIDDEN,
@@ -11,30 +26,101 @@ const createComponent = (element: HTMLElement) => {
     );
   };
 
-  return Atomic.layout.overlay.modal({
+  const props: ModalProps = {
     content: Slots.content.default({ element, isDefaultStyling: false }),
     isHidden: Attributes.isLayout.hidden({ element }),
     context: element,
     callback,
-  });
+  };
+
+  return Atomic.layout.overlay.modal(props);
 };
 
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.visuallyShow({
-    callback: (element) => element.events?.show(),
-  }),
-  Attributes.handler.observe.visuallyHide({
-    callback: (element) => element.events?.hide(),
-  }),
-);
+const attributes = CommonAttributeHandlers.visualShowHide({
+  onShow: (element) => element.events?.show(),
+  onHide: (element) => element.events?.hide(),
+});
 
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      attributes,
-      createComponent,
-    }),
-  });
-};
+/**
+ * Modal
+ *
+ * A modal overlay component that displays content in a focused dialog window.
+ * Includes backdrop, close functionality, and proper focus management for accessibility.
+ * The modal can be controlled programmatically through observed attributes.
+ *
+ * ## Custom Element
+ * `<umd-element-modal>`
+ *
+ * ## Slots
+ * - Default slot - Content to display inside the modal
+ *
+ * ## Attributes
+ * - `data-layout-hidden` - Initial visibility state:
+ *   - `true` - Modal starts hidden
+ *   - Absence implies visible
+ *
+ * ## Observed Attributes
+ * - `data-visual-open` - Shows the modal when set to "true"
+ * - `data-visual-closed` - Hides the modal when set to "true"
+ *
+ * @example
+ * ```html
+ * <!-- Basic modal -->
+ * <umd-element-modal data-layout-hidden="true">
+ *   <h2>Welcome</h2>
+ *   <p>This is modal content.</p>
+ *   <button>Close</button>
+ * </umd-element-modal>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Programmatic control -->
+ * <button id="open-modal">Open Modal</button>
+ * <umd-element-modal id="my-modal" data-layout-hidden="true">
+ *   <div class="modal-content">
+ *     <h2>Important Information</h2>
+ *     <p>Please read this carefully...</p>
+ *     <button id="close-modal">I Understand</button>
+ *   </div>
+ * </umd-element-modal>
+ *
+ * <script>
+ *   const modal = document.getElementById('my-modal');
+ *   document.getElementById('open-modal').addEventListener('click', () => {
+ *     modal.setAttribute('data-visual-open', 'true');
+ *   });
+ *   document.getElementById('close-modal').addEventListener('click', () => {
+ *     modal.setAttribute('data-visual-closed', 'true');
+ *   });
+ * </script>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Form modal -->
+ * <umd-element-modal data-layout-hidden="true">
+ *   <form>
+ *     <h2>Contact Us</h2>
+ *     <label>
+ *       Name:
+ *       <input type="text" name="name" required>
+ *     </label>
+ *     <label>
+ *       Email:
+ *       <input type="email" name="email" required>
+ *     </label>
+ *     <textarea name="message" placeholder="Your message"></textarea>
+ *     <button type="submit">Send</button>
+ *   </form>
+ * </umd-element-modal>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+export default createComponentRegistration({
+  tagName,
+  attributes,
+  createComponent,
+});

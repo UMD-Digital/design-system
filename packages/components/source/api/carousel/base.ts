@@ -1,31 +1,24 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonAttributeHandlers } from '../../model/attributes/handler';
+import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
+import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
-/**
- * Tag name for the base carousel component
- * @internal
- */
+// Tag name for the base carousel component
 const tagName = 'umd-element-carousel';
 
-/**
- * Slot configuration for the base carousel component
- * @internal
- */
-const slots = {
+// Slot configuration for the base carousel component
+const slots: SlotConfiguration = {
   blocks: {
     required: true,
   },
 };
 
-/**
- * Attribute handlers for the base carousel component
- * @internal
- */
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.resize({
-    callback: (element) => element.events?.resize(),
-  }),
+// Attribute handlers for the base carousel component
+const attributes = CommonAttributeHandlers.resize(
+  (element) => element.events?.resize()
 );
 
 /**
@@ -34,7 +27,7 @@ const attributes = Attributes.handler.combine(
  * @returns Configured carousel component
  * @internal
  */
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const isThemeDark = Attributes.isTheme.dark({
     element,
@@ -95,47 +88,44 @@ const createComponent = (element: HTMLElement) => {
 };
 
 /**
- * Base Carousel Component
- * 
+ * Base Carousel
+ *
  * A versatile carousel component for displaying scrollable content blocks with navigation controls.
- * Supports responsive layouts and customizable navigation options.
- * 
+ *
  * ## Custom Element
  * `<umd-element-carousel>`
- * 
+ *
  * ## Slots
- * - `blocks` - Container for carousel items (required)
- * 
+ * - `blocks` - Container for carousel items (required, accepts: any element)
+ *
  * ## Attributes
- * - `data-navigation-left` - Left button visibility options:
+ * - `left-button` - Left navigation button visibility:
  *   - `true` - Show left navigation button (default)
  *   - `false` - Hide left navigation button
- * - `data-navigation-right` - Right button visibility options:
+ * - `right-button` - Right navigation button visibility:
  *   - `true` - Show right navigation button (default)
  *   - `false` - Hide right navigation button
- * - `data-hint-mobile` - Mobile swipe hint options:
+ * - `mobile-hint` - Mobile swipe hint visibility:
  *   - `true` - Show mobile swipe hint (default)
  *   - `false` - Hide mobile swipe hint
- * - `data-hint` - Navigation hint options:
+ * - `hint` - Navigation hint visibility:
  *   - `true` - Show navigation hint (default)
  *   - `false` - Hide navigation hint
- * - `data-theme` - Theme options:
- *   - `dark` - Dark theme styling
- * 
- * ## Layout Attributes
- * - `tablet-size` - Number of items visible on tablet
- * - `desktop-size` - Number of items visible on desktop
+ * - `data-theme` - Visual theme:
+ *   - `light` - Light theme (default)
+ *   - `dark` - Dark theme
+ * - `tablet-size` - Number of visible items on tablet
+ * - `desktop-size` - Number of visible items on desktop
  * - `tablet-count` - Total item count for tablet view
  * - `desktop-count` - Total item count for desktop view
  * - `max-count` - Maximum number of items to display
  * - `grid-gap-pixels` - Gap between items in pixels
- * 
+ *
  * ## Observed Attributes
- * - `resize` - Triggers carousel recalculation
- * 
+ * - `resize` - Triggers carousel size recalculation
+ *
  * @example
  * ```html
- * <!-- Basic carousel -->
  * <umd-element-carousel>
  *   <div slot="blocks">
  *     <div>Item 1</div>
@@ -144,50 +134,16 @@ const createComponent = (element: HTMLElement) => {
  *   </div>
  * </umd-element-carousel>
  * ```
- * 
- * @example
- * ```html
- * <!-- Carousel with custom navigation and dark theme -->
- * <umd-element-carousel 
- *   data-theme="dark"
- *   data-navigation-left="false"
- *   data-hint-mobile="false"
- *   desktop-size="3"
- *   tablet-size="2">
- *   <div slot="blocks">
- *     <article>Content 1</article>
- *     <article>Content 2</article>
- *     <article>Content 3</article>
- *     <article>Content 4</article>
- *   </div>
- * </umd-element-carousel>
- * ```
- * 
- * @example
- * ```html
- * <!-- Carousel with gap and max count -->
- * <umd-element-carousel 
- *   max-count="6"
- *   grid-gap-pixels="20"
- *   desktop-size="4">
- *   <div slot="blocks">
- *     <!-- Multiple items -->
- *   </div>
- * </umd-element-carousel>
- * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-      attributes,
-      afterConnect: (ref) => ref?.events?.load(),
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+  attributes: [attributes],
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
+});
+
+export default registration;

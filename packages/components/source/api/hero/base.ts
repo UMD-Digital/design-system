@@ -1,7 +1,13 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Model, Slots } from 'model';
 import { CommonHeroData } from './common';
 import { Markup } from 'utilities';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../_types';
+import { createComponentRegistration } from 'model/utilities/register';
+import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 
 /**
  * Tag name for the base hero component
@@ -59,7 +65,7 @@ const MakeHeroData = ({ element }: { element: HTMLElement }) => {
  * @returns Configured hero component
  * @internal
  */
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const videoRef = SlotWithDefaultStyling({
     element,
     slotRef: Slots.name.VIDEO,
@@ -169,15 +175,10 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      afterConnect: (element) => {
-        element?.events?.load();
-      },
-    }),
-  });
-};
+const BaseHero: ComponentRegistration = createComponentRegistration({
+  tagName,
+  createComponent,
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
+});
+
+export default BaseHero;

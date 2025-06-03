@@ -1,10 +1,16 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Slots } from 'model';
 import { CommonIntroData } from './common';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../_types';
+import { CommonLifecycleHooks } from '../../../model/utilities/lifecycle';
+import { createComponentRegistration } from '../../../model/utilities/register';
 
 const tagName = 'umd-element-section-intro';
 
-const createComponent = (element: HTMLElement) =>
+const createComponent: CreateComponentFunction = (element) =>
   Composite.layout.sectionIntro.small({
     ...CommonIntroData({
       element,
@@ -15,21 +21,67 @@ const createComponent = (element: HTMLElement) =>
     includesAnimation: Attributes.includesFeature.animation({ element }),
   });
 
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      afterConnect: (ref) => {
-        const element = ref.element;
+/**
+ * Section Introduction (Small)
+ *
+ * A compact section introduction component that provides a headline, descriptive text,
+ * and optional action buttons. Designed for introducing content sections with minimal
+ * space usage. Supports animation on scroll and optional visual separator.
+ *
+ * ## Custom Element
+ * `<umd-element-section-intro>`
+ *
+ * ## Slots
+ * - `headline` - Section headline/title
+ * - `actions` - Call-to-action buttons or links
+ * - Default slot - Descriptive text content
+ *
+ * ## Attributes
+ * - `data-theme` - Theme options:
+ *   - `dark` - Dark background with light text
+ * - `data-has-separator` - Adds visual separator line
+ * - `data-animation` - Enable scroll-triggered animations:
+ *   - `true` - Enables entrance animations
+ *
+ * @example
+ * ```html
+ * <!-- Basic section intro -->
+ * <umd-element-section-intro>
+ *   <h2 slot="headline">Our Mission</h2>
+ *   <p>We are committed to excellence in education and research.</p>
+ * </umd-element-section-intro>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- With actions and separator -->
+ * <umd-element-section-intro data-has-separator>
+ *   <h2 slot="headline">Get Started</h2>
+ *   <p>Join our community of innovators and leaders.</p>
+ *   <div slot="actions">
+ *     <a href="/apply">Apply Now</a>
+ *     <a href="/info">Learn More</a>
+ *   </div>
+ * </umd-element-section-intro>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Dark theme with animation -->
+ * <umd-element-section-intro data-theme="dark" data-animation="true">
+ *   <h2 slot="headline">Research Excellence</h2>
+ *   <p>Discover groundbreaking research across multiple disciplines.</p>
+ *   <a slot="actions" href="/research">Explore Research</a>
+ * </umd-element-section-intro>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  createComponent,
+  afterConnect: CommonLifecycleHooks.loadAnimation,
+});
 
-        setTimeout(() => {
-          if (element.getBoundingClientRect().top > 0) {
-            ref?.events?.loadAnimation();
-          }
-        }, 10);
-      },
-    }),
-  });
-};
+export default registration;

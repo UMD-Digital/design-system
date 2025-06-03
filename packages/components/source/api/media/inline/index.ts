@@ -1,16 +1,93 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Slots, Register } from 'model';
+import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
+import {
+  CreateComponentFunction,
+  SlotConfiguration,
+} from '../../_types';
+import { CommonSlots } from '../../../model/slots/common';
+import { CommonLifecycleHooks } from '../../../model/utilities/lifecycle';
+import { createComponentRegistration } from '../../../model/utilities/register';
 
+/**
+ * Tag name for the media inline web component
+ */
 const tagName = 'umd-element-media-inline';
 
-const slots = {
+/**
+ * Media Inline
+ *
+ * A versatile media component for displaying images inline with optional captions or wrapping text.
+ * Supports multiple display modes including standard image display, image with caption, and
+ * text-wrapped image layouts. Ideal for article content, blog posts, and rich text sections.
+ *
+ * ## Custom Element
+ * `<umd-element-media-inline>`
+ *
+ * ## Slots
+ * - `image` - The media image to display (required, accepts: img)
+ * - `caption` - Image caption text (accepts: div, p)
+ * - `text` - Text content that wraps around the image (accepts: div, p)
+ * - `wrapping-text` - Deprecated: Use "text" slot instead (accepts: div, p)
+ *
+ * ## Attributes
+ * - `data-theme` - Theme options:
+ *   - `dark` - Dark background with light text
+ * - `data-align` - Image alignment:
+ *   - `right` - Aligns image to the right (text wraps on left)
+ *
+ * @example
+ * ```html
+ * <!-- Basic inline image -->
+ * <umd-element-media-inline>
+ *   <img slot="image" src="campus.jpg" alt="Campus view" />
+ * </umd-element-media-inline>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Image with caption -->
+ * <umd-element-media-inline>
+ *   <img slot="image" src="research-lab.jpg" alt="Research laboratory" />
+ *   <p slot="caption">State-of-the-art research facility opened in 2023</p>
+ * </umd-element-media-inline>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Right-aligned image with wrapping text -->
+ * <umd-element-media-inline data-align="right">
+ *   <img slot="image" src="professor.jpg" alt="Professor teaching" />
+ *   <div slot="text">
+ *     <p>Our distinguished faculty members bring decades of experience and expertise
+ *     to the classroom. They are committed to student success and advancing knowledge
+ *     in their fields through groundbreaking research.</p>
+ *     <p>With a student-to-faculty ratio of 18:1, students benefit from personalized
+ *     attention and mentorship opportunities.</p>
+ *   </div>
+ * </umd-element-media-inline>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Dark theme with caption -->
+ * <umd-element-media-inline data-theme="dark">
+ *   <img slot="image" src="night-campus.jpg" alt="Campus at night" />
+ *   <p slot="caption">The campus comes alive with evening activities and events</p>
+ * </umd-element-media-inline>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+/**
+ * Slot configuration for the media inline component
+ */
+const slots: SlotConfiguration = {
   caption: {
     allowedElements: ['div', 'p'],
   },
-  text: {
-    allowedElements: ['div', 'p'],
-  },
+  text: CommonSlots.text,
   wrappingText: {
     allowedElements: ['div', 'p'],
     deprecated:
@@ -18,8 +95,10 @@ const slots = {
   },
 };
 
-export default () => {
-  const createComponent = (element: HTMLElement) => {
+/**
+ * Creates a media inline component with the provided configuration
+ */
+const createComponent: CreateComponentFunction = (element) => {
     const caption = Slots.text.caption({ element });
     const wrappingText =
       Slots.text.default({ element, isDefaultStyling: false }) ||
@@ -51,13 +130,75 @@ export default () => {
     return Composite.media.inline.standard(content);
   };
 
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-      onReady: (element: Model.ElementRef) => element?.events?.load(),
-    }),
-  });
-};
+/**
+ * Media Inline
+ *
+ * A versatile media component for displaying images inline with optional captions or wrapping text.
+ * Supports multiple display modes including standard image display, image with caption, and
+ * text-wrapped image layouts. Ideal for article content, blog posts, and rich text sections.
+ *
+ * ## Custom Element
+ * `<umd-element-media-inline>`
+ *
+ * ## Slots
+ * - `image` - The media image to display (required, accepts: img)
+ * - `caption` - Image caption text (accepts: div, p)
+ * - `text` - Text content that wraps around the image (accepts: div, p)
+ * - `wrapping-text` - Deprecated: Use "text" slot instead (accepts: div, p)
+ *
+ * ## Attributes
+ * - `data-theme` - Theme options:
+ *   - `dark` - Dark background with light text
+ * - `data-align` - Image alignment:
+ *   - `right` - Aligns image to the right (text wraps on left)
+ *
+ * @example
+ * ```html
+ * <!-- Basic inline image -->
+ * <umd-element-media-inline>
+ *   <img slot="image" src="campus.jpg" alt="Campus view" />
+ * </umd-element-media-inline>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Image with caption -->
+ * <umd-element-media-inline>
+ *   <img slot="image" src="research-lab.jpg" alt="Research laboratory" />
+ *   <p slot="caption">State-of-the-art research facility opened in 2023</p>
+ * </umd-element-media-inline>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Right-aligned image with wrapping text -->
+ * <umd-element-media-inline data-align="right">
+ *   <img slot="image" src="professor.jpg" alt="Professor teaching" />
+ *   <div slot="text">
+ *     <p>Our distinguished faculty members bring decades of experience and expertise
+ *     to the classroom. They are committed to student success and advancing knowledge
+ *     in their fields through groundbreaking research.</p>
+ *     <p>With a student-to-faculty ratio of 18:1, students benefit from personalized
+ *     attention and mentorship opportunities.</p>
+ *   </div>
+ * </umd-element-media-inline>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Dark theme with caption -->
+ * <umd-element-media-inline data-theme="dark">
+ *   <img slot="image" src="night-campus.jpg" alt="Campus at night" />
+ *   <p slot="caption">The campus comes alive with evening activities and events</p>
+ * </umd-element-media-inline>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+export default createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+  onReady: CommonLifecycleHooks.loadOnConnect,
+});

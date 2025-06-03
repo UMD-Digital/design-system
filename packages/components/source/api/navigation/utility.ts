@@ -1,9 +1,20 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register } from 'model';
+import { Attributes } from 'model';
+import {
+  CreateComponentFunction,
+} from '../_types';
+import { CommonAttributeHandlers } from '../../model/attributes/handler';
+import { createComponentRegistration } from '../../model/utilities/register';
 
+/**
+ * Tag name for the utility navigation web component
+ */
 const tagName = 'umd-element-navigation-utility';
 
-const createComponent = (element: HTMLElement) => {
+/**
+ * Creates a utility navigation component with the provided configuration
+ */
+const createComponent: CreateComponentFunction = (element) => {
   const hasLandmark = element.hasAttribute('role');
   const hasLabel = element.hasAttribute('aria-label');
 
@@ -33,24 +44,76 @@ const createComponent = (element: HTMLElement) => {
   });
 };
 
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.visuallyShow({
-    name: Attributes.names.layout.ALERT_OFF,
-    callback: (element) => element.events?.showAlert(),
-  }),
-  Attributes.handler.observe.visuallyHide({
-    name: Attributes.names.layout.ALERT_OFF,
-    callback: (element) => element.events?.hideAlert(),
-  }),
-);
+/**
+ * Attribute handlers for the utility navigation component
+ */
+const attributes = CommonAttributeHandlers.visualShowHide({
+  onShow: (element) => element.events?.showAlert(),
+  onHide: (element) => element.events?.hideAlert(),
+});
 
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      attributes,
-      createComponent,
-    }),
-  });
-};
+/**
+ * Utility Navigation
+ *
+ * A specialized navigation component for utility links and university-wide resources.
+ * Includes support for alerts, search, feeds, and giving options. Automatically adds
+ * accessibility attributes if not provided.
+ *
+ * ## Custom Element
+ * `<umd-element-navigation-utility>`
+ *
+ * ## Attributes
+ * - `data-gift-url` - Custom URL for giving link (default: https://giving.umd.edu/giving)
+ * - `data-alert-url` - URL for alert/emergency information
+ * - `data-info` - Enable specific information feeds:
+ *   - `search` - Enable search functionality
+ *   - `search-domain` - Enable domain-specific search
+ *   - `news` - Show news feed
+ *   - `events` - Show events feed
+ *   - `schools` - Show schools listing
+ *   - `admissions` - Show admissions information
+ *   - `gifts` - Show giving information
+ * - `data-layout` - Layout options:
+ *   - `lock-full` - Full-width lock layout
+ *   - `alert-off` - Hide alert section
+ *
+ * ## Observed Attributes
+ * - `data-layout-alert-off` - Dynamically show/hide alert section
+ *
+ * @example
+ * ```html
+ * <!-- Basic utility navigation -->
+ * <umd-element-navigation-utility
+ *   data-info="search">
+ * </umd-element-navigation-utility>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Full utility navigation with feeds -->
+ * <umd-element-navigation-utility
+ *   data-info="search,news,events"
+ *   data-gift-url="/support-umd"
+ *   data-alert-url="/emergency">
+ * </umd-element-navigation-utility>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Utility navigation with custom layout -->
+ * <umd-element-navigation-utility
+ *   data-info="search,schools,admissions"
+ *   data-layout="lock-full"
+ *   role="navigation"
+ *   aria-label="University resources">
+ * </umd-element-navigation-utility>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+export default createComponentRegistration({
+  tagName,
+  createComponent,
+  attributes,
+});

@@ -1,3 +1,40 @@
+/**
+ * Custom Element Model System
+ * 
+ * Provides a base class and utilities for creating web components with:
+ * - Shadow DOM encapsulation
+ * - Attribute observation and handling
+ * - Slot validation
+ * - Lifecycle management
+ * - Error handling
+ * 
+ * ## Key Features:
+ * 
+ * 1. **Attribute Handling**: Automatic observation and callback execution
+ * 2. **Slot Validation**: Required slots, deprecated warnings, element type checking
+ * 3. **Lifecycle Hooks**: beforeConnect, afterConnect, onReady
+ * 4. **Error Management**: Centralized error handling with custom events
+ * 
+ * ## Usage:
+ * ```typescript
+ * const element = createCustomElement({
+ *   tagName: 'my-component',
+ *   slots: {
+ *     headline: { required: true, allowedElements: ['h2', 'h3'] },
+ *     content: { allowedElements: ['div', 'p'] }
+ *   },
+ *   attributes: [{
+ *     name: 'theme',
+ *     handler: (ref, oldValue, newValue) => {
+ *       // Handle theme change
+ *     }
+ *   }],
+ *   createComponent: (host) => {
+ *     // Create and return component
+ *   }
+ * });
+ * ```
+ */
 import StylesTemplate from '../utilities/styles';
 
 interface AttributeConfig {
@@ -282,6 +319,27 @@ class BaseComponent extends HTMLElement {
   }
 }
 
+/**
+ * Factory function to create a custom element class.
+ * 
+ * @param config - Component configuration including tagName, slots, attributes, and lifecycle hooks
+ * @returns Custom element class that extends BaseComponent
+ * 
+ * @example
+ * ```typescript
+ * export default () => {
+ *   Register.registerWebComponent({
+ *     name: tagName,
+ *     element: createCustomElement({
+ *       tagName,
+ *       slots,
+ *       attributes,
+ *       createComponent
+ *     })
+ *   });
+ * };
+ * ```
+ */
 const createCustomElement = (config: ComponentConfig): typeof BaseComponent => {
   @ComponentConfig(config)
   class Component extends BaseComponent {

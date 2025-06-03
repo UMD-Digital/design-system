@@ -1,12 +1,47 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes } from 'model';
-import { createAlertComponent, type AlertPageProps } from './_model';
+import { Attributes, Slots } from 'model';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonSlots } from '../../model/slots/common';
 
 /**
- * Page Alert Component
+ * Tag name for the page alert web component
+ */
+const tagName = 'umd-element-alert-page';
+
+/**
+ * Slot configuration for the page alert component
+ */
+const slots: SlotConfiguration = {
+  headline: {
+    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+  },
+  body: CommonSlots.body,
+  text: CommonSlots.text,
+  actions: CommonSlots.actions,
+};
+
+/**
+ * Creates a page alert component
+ */
+const createComponent: CreateComponentFunction = (element) =>
+  Composite.alert.page({
+    headline: Slots.headline.default({ element }),
+    text: Slots.deprecated.body({ element }) || Slots.text.default({ element }),
+    actions: Slots.actions.default({ element }),
+    isThemeLight: Attributes.isTheme.light({ element }),
+    isThemeDark: Attributes.isTheme.dark({ element }),
+    isShowIcon: Attributes.isVisual.showIcon({ element }),
+  });
+
+/**
+ * Page Alert
  *
  * A page-level alert component for displaying important messages with optional icons.
- * Supports light and dark themes for different visual emphasis.
  *
  * ## Custom Element
  * `<umd-element-alert-page>`
@@ -50,12 +85,10 @@ import { createAlertComponent, type AlertPageProps } from './_model';
  * @category Components
  * @since 1.0.0
  */
-export default createAlertComponent<AlertPageProps>({
-  tagName: 'umd-element-alert-page',
-  renderer: Composite.alert.page,
-  getAdditionalProps: (element: HTMLElement) => ({
-    isThemeLight: Attributes.isTheme.light({ element }),
-    isThemeDark: Attributes.isTheme.dark({ element }),
-    isShowIcon: Attributes.isVisual.showIcon({ element }),
-  }),
+const AlertPageRegistration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
 });
+
+export default AlertPageRegistration;

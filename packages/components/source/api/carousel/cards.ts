@@ -1,26 +1,37 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonSlots } from '../../model/slots/common';
+import { CommonAttributeHandlers } from '../../model/attributes/handler';
+import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
+import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
-/**
- * Tag name for the cards carousel component
- * @internal
- */
+// Tag name for the cards carousel component
 const tagName = 'umd-element-carousel-cards';
 
-const slots = {
+// Slot configuration for the cards carousel component
+const slots: SlotConfiguration = {
   cards: {
     required: true,
   },
+  headline: CommonSlots.headline,
+  text: CommonSlots.text,
+  actions: CommonSlots.actions,
 };
 
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.resize({
-    callback: (element) => element.events?.resize(),
-  }),
+// Attribute handlers for the cards carousel component
+const attributes = CommonAttributeHandlers.resize(
+  (element) => element.events?.resize()
 );
 
-const createComponent = (element: HTMLElement) => {
+/**
+ * Creates a cards carousel component
+ * @param element - The host HTML element
+ * @returns Configured cards carousel component
+ * @internal
+ */
+const createComponent: CreateComponentFunction = (element) => {
   const shadow = element.shadowRoot as ShadowRoot;
   const slide = element.querySelector(
     `[slot="${Slots.name.CARDS}"]`,
@@ -51,26 +62,24 @@ const createComponent = (element: HTMLElement) => {
 };
 
 /**
- * Cards Carousel Component
- * 
+ * Cards Carousel
+ *
  * A carousel component specifically designed for displaying card components.
- * Automatically handles card layouts with optional header and actions.
- * 
+ *
  * ## Custom Element
  * `<umd-element-carousel-cards>`
- * 
+ *
  * ## Slots
- * - `cards` - Container for card components (required)
- * - `headline` - Optional carousel headline
- * - `text` - Optional carousel description
- * - `actions` - Optional carousel action buttons/links
- * 
+ * - `cards` - Container for card components (required, accepts: card elements)
+ * - `headline` - Carousel headline (optional, accepts: heading elements)
+ * - `text` - Carousel description (optional, accepts: text elements)
+ * - `actions` - Carousel action buttons/links (optional, accepts: links or buttons)
+ *
  * ## Observed Attributes
- * - `resize` - Triggers carousel recalculation
- * 
+ * - `resize` - Triggers carousel size recalculation
+ *
  * @example
  * ```html
- * <!-- Basic cards carousel -->
  * <umd-element-carousel-cards>
  *   <div slot="cards">
  *     <umd-element-card>
@@ -84,43 +93,16 @@ const createComponent = (element: HTMLElement) => {
  *   </div>
  * </umd-element-carousel-cards>
  * ```
- * 
- * @example
- * ```html
- * <!-- Cards carousel with header -->
- * <umd-element-carousel-cards>
- *   <h2 slot="headline">Featured Stories</h2>
- *   <p slot="text">Latest news from around campus</p>
- *   <div slot="cards">
- *     <umd-element-article data-theme="light">
- *       <img slot="image" src="story1.jpg" alt="Story 1">
- *       <h3 slot="headline">Research Breakthrough</h3>
- *       <p slot="text">Scientists discover new method...</p>
- *     </umd-element-article>
- *     <umd-element-article data-theme="light">
- *       <img slot="image" src="story2.jpg" alt="Story 2">
- *       <h3 slot="headline">Campus Update</h3>
- *       <p slot="text">New facilities opening this fall...</p>
- *     </umd-element-article>
- *   </div>
- *   <div slot="actions">
- *     <a href="/news">View All News</a>
- *   </div>
- * </umd-element-carousel-cards>
- * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-      attributes,
-      afterConnect: (ref) => ref?.events?.load(),
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+  attributes: [attributes],
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
+});
+
+export default registration;

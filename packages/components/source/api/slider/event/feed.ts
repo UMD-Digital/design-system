@@ -1,15 +1,96 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+  CommonAttributeHandlers,
+  TypedComponentRef,
+} from '../../../_types';
 import { Attributes, Model, Register, Slots } from 'model';
+import { createComponentRegistration } from 'model/utilities/register';
 
 const tagName = 'umd-element-slider-events-feed';
 
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.resize({
-    callback: (element) => element.events?.SetDateElementsSizes(),
-  }),
-);
+/**
+ * Event Slider Feed
+ *
+ * A dynamic slider component that automatically fetches and displays events from a feed.
+ * Supports both general events and academic calendar feeds with category filtering.
+ * Provides real-time event updates with automatic date formatting and responsive layout.
+ *
+ * ## Custom Element
+ * `<umd-element-slider-events-feed>`
+ *
+ * ## Slots
+ * - `headline` - Section headline (optional, accepts: heading elements)
+ * - `actions` - Call-to-action links (optional, accepts: a, button)
+ *
+ * ## Attributes
+ * - `data-theme` - Color theme of the component:
+ *   - `dark` - Dark background with light text
+ * - `data-token` - API token for fetching events (required)
+ * - `data-type` - Feed type:
+ *   - `academic` - Academic calendar events
+ *   - Default - General events feed
+ * - `categories` - Comma-separated list of event categories to filter
+ *
+ * ## Observed Attributes
+ * - `resize` - Triggers recalculation of date element sizes
+ *
+ * @example
+ * ```html
+ * <!-- Basic events feed slider -->
+ * <umd-element-slider-events-feed data-token="events-api-key">
+ *   <h2 slot="headline">Upcoming Events</h2>
+ *   <a slot="actions" href="/events">All Events</a>
+ * </umd-element-slider-events-feed>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Academic calendar feed -->
+ * <umd-element-slider-events-feed 
+ *   data-token="academic-api-key"
+ *   data-type="academic">
+ *   <h2 slot="headline">Academic Calendar</h2>
+ *   <div slot="actions">
+ *     <a href="/academic-calendar">Full Calendar</a>
+ *     <a href="/academic-calendar/deadlines">Important Deadlines</a>
+ *   </div>
+ * </umd-element-slider-events-feed>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Filtered events with dark theme -->
+ * <umd-element-slider-events-feed 
+ *   data-token="events-api-key"
+ *   data-theme="dark"
+ *   categories="athletics,recreation">
+ *   <h2 slot="headline">Sports & Recreation</h2>
+ *   <a slot="actions" href="/athletics">Athletics Home</a>
+ * </umd-element-slider-events-feed>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Multiple category filters -->
+ * <umd-element-slider-events-feed 
+ *   data-token="events-api-key"
+ *   categories="workshop,seminar,lecture">
+ *   <h2 slot="headline">Learning Opportunities</h2>
+ *   <div slot="actions">
+ *     <a href="/workshops">All Workshops</a>
+ *     <a href="/seminars">Seminar Series</a>
+ *   </div>
+ * </umd-element-slider-events-feed>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+const attributes = CommonAttributeHandlers.resize((element) => element.events?.SetDateElementsSizes());
 
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const token = element.getAttribute(Attributes.names.FEED_TOKEN);
   const isTypeAcademic =
@@ -34,14 +115,89 @@ const createComponent = (element: HTMLElement) => {
   return Feeds.events.slider(sliderProps);
 };
 
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      attributes,
-      afterConnect: (ref, shadow) => ref?.events?.callback(shadow),
-    }),
-  });
-};
+/**
+ * Event Slider Feed
+ *
+ * A dynamic slider component that automatically fetches and displays events from a feed.
+ * Supports both general events and academic calendar feeds with category filtering.
+ * Provides real-time event updates with automatic date formatting and responsive layout.
+ *
+ * ## Custom Element
+ * `<umd-element-slider-events-feed>`
+ *
+ * ## Slots
+ * - `headline` - Section headline (optional, accepts: heading elements)
+ * - `actions` - Call-to-action links (optional, accepts: a, button)
+ *
+ * ## Attributes
+ * - `data-theme` - Color theme of the component:
+ *   - `dark` - Dark background with light text
+ * - `data-token` - API token for fetching events (required)
+ * - `data-type` - Feed type:
+ *   - `academic` - Academic calendar events
+ *   - Default - General events feed
+ * - `categories` - Comma-separated list of event categories to filter
+ *
+ * ## Observed Attributes
+ * - `resize` - Triggers recalculation of date element sizes
+ *
+ * @example
+ * ```html
+ * <!-- Basic events feed slider -->
+ * <umd-element-slider-events-feed data-token="events-api-key">
+ *   <h2 slot="headline">Upcoming Events</h2>
+ *   <a slot="actions" href="/events">All Events</a>
+ * </umd-element-slider-events-feed>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Academic calendar feed -->
+ * <umd-element-slider-events-feed 
+ *   data-token="academic-api-key"
+ *   data-type="academic">
+ *   <h2 slot="headline">Academic Calendar</h2>
+ *   <div slot="actions">
+ *     <a href="/academic-calendar">Full Calendar</a>
+ *     <a href="/academic-calendar/deadlines">Important Deadlines</a>
+ *   </div>
+ * </umd-element-slider-events-feed>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Filtered events with dark theme -->
+ * <umd-element-slider-events-feed 
+ *   data-token="events-api-key"
+ *   data-theme="dark"
+ *   categories="athletics,recreation">
+ *   <h2 slot="headline">Sports & Recreation</h2>
+ *   <a slot="actions" href="/athletics">Athletics Home</a>
+ * </umd-element-slider-events-feed>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Multiple category filters -->
+ * <umd-element-slider-events-feed 
+ *   data-token="events-api-key"
+ *   categories="workshop,seminar,lecture">
+ *   <h2 slot="headline">Learning Opportunities</h2>
+ *   <div slot="actions">
+ *     <a href="/workshops">All Workshops</a>
+ *     <a href="/seminars">Seminar Series</a>
+ *   </div>
+ * </umd-element-slider-events-feed>
+ * ```
+ *
+ * @category Components
+ * @since 1.0.0
+ */
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  createComponent,
+  attributes: [attributes],
+  afterConnect: (ref: TypedComponentRef, shadow?: ShadowRoot) => ref?.events?.callback?.(shadow),
+});
+
+export default registration;

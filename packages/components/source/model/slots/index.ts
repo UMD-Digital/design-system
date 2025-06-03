@@ -84,3 +84,6 @@ export default {
 } as const;
 
 export type { SlotName };
+
+// Export CommonSlots from the new location
+export { CommonSlots } from './common';

@@ -1,22 +1,37 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
 
 const { actions } = Atomic;
 
 /**
  * Tag name for the call-to-action web component
- * @internal
  */
 const tagName = 'umd-element-call-to-action';
 
 /**
- * Creates a call-to-action component from the host element
- * @param element - The host HTML element
- * @returns Configured CTA component
- * @throws {Error} When no button or link element is found
- * @internal
+ * Slot configuration for the call-to-action component
  */
-const createComponent = (element: HTMLElement) => {
+const slots: SlotConfiguration = {
+  text: {
+    allowedElements: ['a'],
+  },
+  plainText: {
+    deprecated:
+      'Use "text" instead. This attribute will be removed in version 2.0.',
+    allowedElements: ['a'],
+  },
+};
+
+/**
+ * Creates a call-to-action component from the host element
+ */
+const createComponent: CreateComponentFunction = (element) => {
   const interactiveElement = element.querySelector('button, a:not([slot])');
   const plainTextSlot = element.querySelector(
     `[slot="plain-text"]`,
@@ -55,36 +70,17 @@ const createComponent = (element: HTMLElement) => {
 };
 
 /**
- * Slot configuration for the call-to-action component
- * @internal
- */
-const slots = {
-  text: {
-    allowedElements: ['a'],
-  },
-  plainText: {
-    deprecated:
-      'Use "text" instead. This attribute will be removed in version 2.0.',
-    allowedElements: ['a'],
-  },
-};
-
-/**
- * Call-to-Action Component
- * 
+ * Call-to-Action
+ *
  * A web component that enhances buttons and links with consistent UMD styling.
- * Supports multiple display types, sizes, and themes.
- * 
+ *
  * ## Custom Element
  * `<umd-element-call-to-action>`
- * 
- * ## Requirements
- * Must contain either a `<button>` or `<a>` element as a direct child.
- * 
+ *
  * ## Slots
- * - `text` - Additional text content for links (accepts: a)
+ * - `text` - Additional text content for links (optional, accepts: a)
  * - `plainText` - Deprecated: Use `text` slot instead
- * 
+ *
  * ## Attributes
  * - `data-display` - Display style options:
  *   - `primary` - Primary button style (red background)
@@ -95,7 +91,7 @@ const slots = {
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme variant
  *   - `gold` - Gold theme variant
- * 
+ *
  * @example
  * ```html
  * <!-- Primary button -->
@@ -103,7 +99,7 @@ const slots = {
  *   <button>Apply Now</button>
  * </umd-element-call-to-action>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Large secondary link -->
@@ -111,7 +107,7 @@ const slots = {
  *   <a href="/learn-more">Learn More</a>
  * </umd-element-call-to-action>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Outline button with dark theme -->
@@ -119,7 +115,7 @@ const slots = {
  *   <button>Contact Us</button>
  * </umd-element-call-to-action>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Link with additional text -->
@@ -127,21 +123,14 @@ const slots = {
  *   <a href="/admissions" slot="text">View admission requirements</a>
  * </umd-element-call-to-action>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  const element = Model.createCustomElement({
-    tagName,
-    slots,
-    createComponent,
-  });
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+});
 
-  if (element) {
-    Register.registerWebComponent({
-      name: tagName,
-      element,
-    });
-  }
-};
+export default registration;

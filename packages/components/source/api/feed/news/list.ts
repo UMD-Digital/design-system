@@ -1,6 +1,11 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { CommonFeedNewsData } from './common';
 import { Attributes, Model, Register } from 'model';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from 'api/_types';
+import { createComponentRegistration } from 'model/utilities/register';
 
 /**
  * Tag name for the news list feed component
@@ -8,7 +13,7 @@ import { Attributes, Model, Register } from 'model';
  */
 const tagName = 'umd-feed-news-list';
 
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const data = CommonFeedNewsData({
     element,
   });
@@ -84,15 +89,12 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      createComponent,
-      afterConnect: (element, shadow) => {
-        element?.events?.callback(shadow);
-      },
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  createComponent,
+  afterConnect: (element, shadow) => {
+    element?.events?.callback(shadow);
+  },
+});
+
+export default registration;

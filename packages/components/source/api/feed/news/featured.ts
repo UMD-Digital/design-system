@@ -1,6 +1,11 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { CommonFeedNewsData } from './common';
 import { Attributes, Model, Register } from 'model';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from 'api/_types';
+import { createComponentRegistration } from 'model/utilities/register';
 
 /**
  * Tag name for the featured news feed component
@@ -14,7 +19,7 @@ const attributes = Attributes.handler.combine(
   }),
 );
 
-const createComponent = (element: HTMLElement) => {
+const createComponent: CreateComponentFunction = (element) => {
   const overwriteTopPosition = Attributes.getValue.topPosition({ element });
   const data = CommonFeedNewsData({
     element,
@@ -95,16 +100,13 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      attributes,
-      createComponent,
-      afterConnect: (element, shadow) => {
-        element?.events?.callback(shadow);
-      },
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  attributes,
+  createComponent,
+  afterConnect: (element, shadow) => {
+    element?.events?.callback(shadow);
+  },
+});
+
+export default registration;

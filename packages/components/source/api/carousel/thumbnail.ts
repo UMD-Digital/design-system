@@ -1,25 +1,32 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
+import { createComponentRegistration } from '../../model/utilities/register';
+import { CommonAttributeHandlers } from '../../model/attributes/handler';
+import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
+import { Attributes, Slots } from 'model';
 
-/**
- * Tag name for the thumbnail carousel component
- * @internal
- */
+// Tag name for the thumbnail carousel component
 const tagName = 'umd-element-carousel-thumbnail';
 
-const slots = {
+// Slot configuration for the thumbnail carousel component
+const slots: SlotConfiguration = {
   blocks: {
     required: true,
   },
 };
 
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.resize({
-    callback: (element) => element.events?.resize(),
-  }),
+// Attribute handlers for the thumbnail carousel component
+const attributes = CommonAttributeHandlers.resize(
+  (element) => element.events?.resize()
 );
 
-const createComponent = (element: HTMLElement) => {
+/**
+ * Creates a thumbnail carousel component
+ * @param element - The host HTML element
+ * @returns Configured thumbnail carousel component
+ * @internal
+ */
+const createComponent: CreateComponentFunction = (element) => {
   const slottedBlocks = Array.from(
     element.querySelectorAll(`[slot="${Slots.name.BLOCKS}"] > *`),
   ) as HTMLElement[];
@@ -35,27 +42,26 @@ const createComponent = (element: HTMLElement) => {
 };
 
 /**
- * Thumbnail Carousel Component
- * 
+ * Thumbnail Carousel
+ *
  * A carousel component with thumbnail navigation for browsing through content.
- * Each item can have an associated thumbnail for visual navigation.
- * 
+ *
  * ## Custom Element
  * `<umd-element-carousel-thumbnail>`
- * 
+ *
  * ## Slots
- * - `blocks` - Container for carousel items with thumbnails (required)
- * 
+ * - `blocks` - Container for carousel items with thumbnails (required, accepts: elements with data-thumbnail attribute)
+ *
  * ## Attributes
- * - `data-theme` - Theme options:
- *   - `dark` - Dark theme styling
- * 
+ * - `data-theme` - Visual theme:
+ *   - `light` - Light theme (default)
+ *   - `dark` - Dark theme
+ *
  * ## Observed Attributes
- * - `resize` - Triggers carousel recalculation
- * 
+ * - `resize` - Triggers carousel size recalculation
+ *
  * @example
  * ```html
- * <!-- Basic thumbnail carousel -->
  * <umd-element-carousel-thumbnail>
  *   <div slot="blocks">
  *     <div data-thumbnail="thumb1.jpg">
@@ -69,36 +75,16 @@ const createComponent = (element: HTMLElement) => {
  *   </div>
  * </umd-element-carousel-thumbnail>
  * ```
- * 
- * @example
- * ```html
- * <!-- Dark theme thumbnail carousel -->
- * <umd-element-carousel-thumbnail data-theme="dark">
- *   <div slot="blocks">
- *     <article data-thumbnail="preview1.jpg">
- *       <h3>Article 1</h3>
- *       <p>Article content with thumbnail navigation</p>
- *     </article>
- *     <article data-thumbnail="preview2.jpg">
- *       <h3>Article 2</h3>
- *       <p>Article content with thumbnail navigation</p>
- *     </article>
- *   </div>
- * </umd-element-carousel-thumbnail>
- * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-      attributes,
-      afterConnect: (ref) => ref?.events?.load(),
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+  attributes: [attributes],
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
+});
+
+export default registration;

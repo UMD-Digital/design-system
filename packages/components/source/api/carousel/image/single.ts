@@ -1,34 +1,45 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../../_types';
+import { createComponentRegistration } from '../../../model/utilities/register';
+import { CommonSlots } from '../../../model/slots/common';
+import { CommonAttributeHandlers } from '../../../model/attributes/handler';
+import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
 const { ImageHasAlt } = Markup.validate;
 
-/**
- * Tag name for the single image carousel component
- * @internal
- */
+// Tag name for the single image carousel component
 const tagName = 'umd-element-carousel-image';
 
-const slots = {
+// Slot configuration for the single image carousel component
+const slots: SlotConfiguration = {
   images: {
+    ...CommonSlots.image,
     required: true,
+    allowedElements: ['img'],
   },
   headlines: {
+    ...CommonSlots.headline,
     required: false,
   },
   texts: {
+    ...CommonSlots.text,
     required: false,
   },
 };
 
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.resize({
-    callback: (element) => element.events?.SetEventReize(),
-  }),
+// Attribute handlers for the single image carousel component
+const attributes = CommonAttributeHandlers.resize(
+  (element) => element.events?.SetEventReize()
 );
 
-const createComponent = (element: HTMLElement) => {
+/**
+ * Creates a single image carousel component
+ * @param element - The host HTML element
+ * @returns Configured single image carousel component
+ * @internal
+ */
+const createComponent: CreateComponentFunction = (element) => {
   const slottedImages = Array.from(
     element.querySelectorAll(`[slot="${Slots.name.IMAGES}"] > *`),
   ) as HTMLImageElement[];
@@ -68,31 +79,30 @@ const createComponent = (element: HTMLElement) => {
 };
 
 /**
- * Single Image Carousel Component
- * 
+ * Single Image Carousel
+ *
  * A carousel component for displaying images with optional captions and headlines.
- * Validates images have alt text for accessibility.
- * 
+ *
  * ## Custom Element
  * `<umd-element-carousel-image>`
- * 
+ *
  * ## Slots
- * - `images` - Container for images (required, img elements must have alt text)
- * - `headlines` - Container for image headlines (optional)
- * - `texts` - Container for image descriptions (optional)
- * 
+ * - `images` - Container for images (required, accepts: img elements with alt text)
+ * - `headlines` - Container for image headlines (optional, accepts: heading elements)
+ * - `texts` - Container for image descriptions (optional, accepts: text elements)
+ *
  * ## Attributes
- * - `data-theme` - Theme options:
- *   - `dark` - Dark theme styling
- * - `data-feature` - Feature options:
+ * - `data-theme` - Visual theme:
+ *   - `light` - Light theme (default)
+ *   - `dark` - Dark theme
+ * - `data-feature` - Additional features:
  *   - `fullscreen` - Enable fullscreen viewing option
- * 
+ *
  * ## Observed Attributes
- * - `resize` - Triggers carousel recalculation
- * 
+ * - `resize` - Triggers carousel size recalculation
+ *
  * @example
  * ```html
- * <!-- Basic image carousel -->
  * <umd-element-carousel-image>
  *   <div slot="images">
  *     <img src="photo1.jpg" alt="Campus view">
@@ -101,39 +111,15 @@ const createComponent = (element: HTMLElement) => {
  *   </div>
  * </umd-element-carousel-image>
  * ```
- * 
- * @example
- * ```html
- * <!-- Image carousel with captions and fullscreen -->
- * <umd-element-carousel-image 
- *   data-theme="dark"
- *   data-feature="fullscreen">
- *   <div slot="images">
- *     <img src="event1.jpg" alt="Graduation ceremony">
- *     <img src="event2.jpg" alt="Research presentation">
- *   </div>
- *   <div slot="headlines">
- *     <h3>2024 Graduation Ceremony</h3>
- *     <h3>Annual Research Symposium</h3>
- *   </div>
- *   <div slot="texts">
- *     <p>Celebrating our graduating class</p>
- *     <p>Showcasing innovative research</p>
- *   </div>
- * </umd-element-carousel-image>
- * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-      attributes,
-    }),
-  });
-};
+const registration: ComponentRegistration = createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+  attributes: [attributes],
+});
+
+export default registration;

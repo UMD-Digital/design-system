@@ -1,19 +1,22 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Slots } from 'model';
+import {
+  CreateComponentFunction,
+  SlotConfiguration,
+} from '../_types';
+import { CommonSlots } from '../../model/slots/common';
+import { CommonAttributeHandlers } from '../../model/attributes/handler';
+import { createComponentRegistration } from '../../model/utilities/register';
 
 /**
  * Tag name for the accordion item web component
- * @internal
  */
 const tagName = 'umd-element-accordion-item';
 
 /**
  * Creates an accordion item component with the provided configuration
- * @param element - The host HTML element
- * @returns Configured accordion item component
- * @internal
  */
-const createComponent = (element: HTMLElement) =>
+const createComponent: CreateComponentFunction = (element) =>
   Composite.accordion.item({
     text:
       Slots.deprecated.body({ element, isDefaultStyling: false }) ||
@@ -32,54 +35,30 @@ const createComponent = (element: HTMLElement) =>
 
 /**
  * Slot configuration for the accordion item component
- * @internal
  */
-const slots = {
+const slots: SlotConfiguration = {
   headline: {
+    ...CommonSlots.headline,
     required: true,
     allowedElements: ['span', 'p'],
   },
-  body: {
-    deprecated:
-      'Use "text" instead. This attribute will be removed in version 2.0.',
-    allowedElements: ['div', 'p'],
-  },
+  body: CommonSlots.body,
   text: {
+    ...CommonSlots.text,
     required: true,
-    allowedElements: ['div', 'p'],
   },
 };
 
 /**
  * Attribute handlers for the accordion item component
  * Manages state changes and animations
- * @internal
  */
-const attributes = Attributes.handler.combine(
-  Attributes.handler.observe.resize({
-    callback: (element) => element.events?.SetOpen({ hasAnimation: false }),
-  }),
-  // Deprecated
-  Attributes.handler.observe.stateClosed({
-    callback: (element) => element.events?.SetClosed({ hasAnimation: true }),
-  }),
-  // Deprecated
-  Attributes.handler.observe.stateOpen({
-    callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
-  }),
-  Attributes.handler.observe.visuallyOpen({
-    callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
-  }),
-  Attributes.handler.observe.visuallyClosed({
-    callback: (element) => element.events?.SetClosed({ hasAnimation: true }),
-  }),
-);
+const attributes = CommonAttributeHandlers.accordion();
 
 /**
- * Accordion Item Component
+ * Accordion Item
  *
- * A web component that creates an expandable/collapsible content container.
- * Supports smooth animations, theme variations, and programmatic control.
+ * Creates an expandable/collapsible content container with smooth animations and theme variations.
  *
  * ## Custom Element
  * `<umd-element-accordion-item>`
@@ -90,16 +69,16 @@ const attributes = Attributes.handler.combine(
  * - `body` - Deprecated: Use `text` slot instead
  *
  * ## Attributes
- * - `data-theme` - Options for theming:
- *   - `light` - Applies light theme styling
- *   - `dark` - Applies dark theme styling
- * - `data-visual-open` - Options for visual state:
- *   - `true` - Opens accordion with animation
- *   - `false` - Closes accordion with animation
+ * - `data-theme` - Color theme options:
+ *   - `light` - Light theme styling
+ *   - `dark` - Dark theme styling
+ * - `data-visual-open` - Initial visual state:
+ *   - `true` - Opens accordion on load
+ *   - `false` - Closes accordion on load
  *
  * ## Observed Attributes
- * - `data-visual-open` - Triggers opening of the accordion
- * - `resize` - Triggers re-evaluation of the accordion height
+ * - `data-visual-open` - When changed to "true", opens accordion with animation; when changed to "false", closes with animation
+ * - `resize` - When set to "true", re-evaluates accordion height without animation
  *
  * @example
  * ```html
@@ -117,7 +96,7 @@ const attributes = Attributes.handler.combine(
  * <umd-element-accordion-item data-theme="dark" data-visual-open="true">
  *   <span slot="headline">Click to collapse</span>
  *   <div slot="text">
- *     <p>content revealed as expanded</p>
+ *     <p>Content revealed as expanded</p>
  *   </div>
  * </umd-element-accordion-item>
  * ```
@@ -133,14 +112,9 @@ const attributes = Attributes.handler.combine(
  * @category Components
  * @since 1.0.0
  */
-export default () => {
-  Register.registerWebComponent({
-    name: tagName,
-    element: Model.createCustomElement({
-      tagName,
-      slots,
-      createComponent,
-      attributes,
-    }),
-  });
-};
+export default createComponentRegistration({
+  tagName,
+  slots,
+  createComponent,
+  attributes,
+});

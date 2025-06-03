@@ -1,6 +1,35 @@
 import AttributeNames from './names';
 import AttributeValues from './values';
 
+/**
+ * Attribute Handler System
+ * 
+ * Provides reactive attribute observation for web components.
+ * Handlers watch for specific attribute changes and execute callbacks.
+ * 
+ * ## Handler Types:
+ * 
+ * 1. **State Transitions**: Watch for specific value changes
+ *    - e.g., state changing from "closed" to "open"
+ * 
+ * 2. **Boolean Triggers**: Watch for true/false changes
+ *    - e.g., resize="true" triggers recalculation
+ * 
+ * 3. **Value Changes**: Watch for any value change
+ *    - e.g., data-layout-position updates
+ * 
+ * ## Usage Example:
+ * ```typescript
+ * const attributes = Attributes.handler.combine(
+ *   Attributes.handler.observe.resize({
+ *     callback: (element) => element.events?.recalculate()
+ *   }),
+ *   Attributes.handler.observe.visuallyOpen({
+ *     callback: (element) => element.events?.SetOpen({ hasAnimation: true })
+ *   })
+ * );
+ * ```
+ */
 export namespace AttributeHandlerTypes {
   type Callback<T = ElementRef> = (arg: T, arg2?: any) => void;
 
@@ -24,6 +53,21 @@ export namespace AttributeHandlerTypes {
   }
 }
 
+/**
+ * Combines multiple attribute handlers for the same attribute name.
+ * When multiple handlers target the same attribute, they execute in sequence.
+ * 
+ * @param configs - Array of attribute handler configurations
+ * @returns Combined handler configurations
+ * 
+ * @example
+ * ```typescript
+ * const handlers = combine(
+ *   handler1, // First to execute
+ *   handler2  // Second to execute
+ * );
+ * ```
+ */
 const combine = (
   ...configs: AttributeHandlerTypes.Config[]
 ): AttributeHandlerTypes.Config[] => {
@@ -54,6 +98,11 @@ const combine = (
   }));
 };
 
+/**
+ * Observes the 'resize' attribute.
+ * Triggers callback when resize="true".
+ * Commonly used to recalculate component dimensions.
+ */
 const resize = ({
   callback,
   name,
@@ -66,6 +115,10 @@ const resize = ({
   },
 });
 
+/**
+ * @deprecated Use visuallyOpen instead
+ * Observes 'state' attribute transition from "closed" to "open".
+ */
 const stateOpen = ({
   callback,
   name,
@@ -81,6 +134,10 @@ const stateOpen = ({
   },
 });
 
+/**
+ * @deprecated Use visuallyClosed instead
+ * Observes 'state' attribute transition from "open" to "closed".
+ */
 const stateClosed = ({
   callback,
   name,
@@ -96,6 +153,11 @@ const stateClosed = ({
   },
 });
 
+/**
+ * Observes 'data-visual-open' attribute.
+ * Triggers callback when changing from "true" to "false".
+ * Used for closing animations and transitions.
+ */
 const visuallyClosed = ({
   callback,
   name,
@@ -182,6 +244,91 @@ const observe = {
   visuallyClosed,
   visuallyPosition,
   visuallyShow,
+};
+
+/**
+ * Common attribute handler combinations for standard component behaviors.
+ * These pre-configured handlers simplify component implementation.
+ */
+export const CommonAttributeHandlers = {
+  /**
+   * Resize observer for responsive components
+   */
+  resize: (callback: (element: AttributeHandlerTypes.ElementRef) => void) =>
+    resize({ callback }),
+
+  /**
+   * Visual show/hide handlers for modals and overlays
+   */
+  visualShowHide: (options: {
+    onShow?: (element: AttributeHandlerTypes.ElementRef) => void;
+    onHide?: (element: AttributeHandlerTypes.ElementRef) => void;
+  }) =>
+    combine(
+      ...(options.onShow
+        ? [
+            visuallyShow({
+              callback: options.onShow,
+            }),
+          ]
+        : []),
+      ...(options.onHide
+        ? [
+            visuallyHide({
+              callback: options.onHide,
+            }),
+          ]
+        : []),
+    ),
+
+  /**
+   * Visual open/close handlers for expandable components
+   */
+  visualToggle: (options: {
+    onOpen?: (element: AttributeHandlerTypes.ElementRef) => void;
+    onClose?: (element: AttributeHandlerTypes.ElementRef) => void;
+  }) =>
+    combine(
+      ...(options.onOpen
+        ? [
+            visuallyOpen({
+              callback: options.onOpen,
+            }),
+          ]
+        : []),
+      ...(options.onClose
+        ? [
+            visuallyClosed({
+              callback: options.onClose,
+            }),
+          ]
+        : []),
+    ),
+
+  /**
+   * Standard accordion handlers with open/close transitions
+   */
+  accordion: () =>
+    combine(
+      resize({
+        callback: (element) => element.events?.SetOpen({ hasAnimation: false }),
+      }),
+      visuallyOpen({
+        callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
+      }),
+      visuallyClosed({
+        callback: (element) =>
+          element.events?.SetClosed({ hasAnimation: true }),
+      }),
+      // Deprecated handlers for backwards compatibility
+      stateClosed({
+        callback: (element) =>
+          element.events?.SetClosed({ hasAnimation: true }),
+      }),
+      stateOpen({
+        callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
+      }),
+    ),
 };
 
 export default { combine, observe };

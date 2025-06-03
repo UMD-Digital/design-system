@@ -17,10 +17,14 @@
     "release": "npm run build && npm publish --access public",
     "build": "webpack --env NODE_ENV=production",
     "webpack": "webpack -w --env NODE_ENV=development",
-    "start": "npm run webpack"
+    "start": "npm run webpack",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
+    "jest-dom": "^4.0.0",
     "postcss-js": "^4.0.1",
     "tw-to-css": "^0.0.12"
   }

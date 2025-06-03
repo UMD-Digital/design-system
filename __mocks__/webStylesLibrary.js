@@ -12,7 +12,16 @@ module.exports = {
       }
     },
     color: {
-      white: '#ffffff'
+      white: '#ffffff',
+      gray: {
+        dark: '#333333',
+        light: '#f5f5f5',
+        lighter: '#fafafa',
+        medium: '#666666'
+      },
+      red: '#d3232a',
+      gold: '#ffc600',
+      black: '#000000'
     }
   },
   layout: {

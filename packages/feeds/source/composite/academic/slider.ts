@@ -19,7 +19,7 @@ const query = `
         loadOccurrences: true
         startsAfterOrAt: $startDate
         limit: 12
-        calendarId: 5
+        calendarId: [4, 2]
       ) {
         ${QUERY_DATA}
       }

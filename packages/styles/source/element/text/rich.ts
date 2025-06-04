@@ -375,6 +375,13 @@ export const advancedDark: JssObject = create.jss.objectWithClassName({
   ...advanced,
   ...themeDarkColors,
 
+  '& table': {
+    ...table.inline,
+    '& tr:nth-child(even)': {
+      background: 'none',
+    },
+  },
+
   className: [
     `${classNamePrefix}-advanced-dark`,
     /** @deprecated Use 'umd-text-rich-advanced-dark' instead */

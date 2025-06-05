@@ -1,5 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots, Register, Lifecycle } from 'model';
+import { Attributes, Lifecycle, Slots, Register } from 'model';
 import { Markup } from 'utilities';
 import { CommonHeroData } from './common';
 import type { CreateComponentFunction, ComponentRegistration } from '../_types';

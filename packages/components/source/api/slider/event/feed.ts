@@ -1,10 +1,10 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { Attributes, Register, Slots } from 'model';
 import {
   CreateComponentFunction,
   ComponentRegistration,
   TypedComponentRef,
 } from '../../../_types';
-import { Attributes, Model, Register, Slots } from 'model';
 
 const tagName = 'umd-element-slider-events-feed';
 

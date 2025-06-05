@@ -1,12 +1,13 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
-const { ImageHasAlt } = Markup.validate;
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../_types';
+
+const { ImageHasAlt } = Markup.validate;
 
 // Tag name for the multiple image carousel component
 const tagName = 'umd-element-carousel-multiple-image';

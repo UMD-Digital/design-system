@@ -1,10 +1,7 @@
-import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
-import {
-  CreateComponentFunction,
-  ComponentRegistration,
-} from '../../_types';
-import { Attributes, Model, Register, Slots, Lifecycle } from 'model';
+import { Atomic } from '@universityofmaryland/web-elements-library';
+import { Attributes, Register, Slots, Lifecycle } from 'model';
 import * as Utilities from 'utilities';
+import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-events-date';
 

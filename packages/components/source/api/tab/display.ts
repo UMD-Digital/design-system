@@ -1,11 +1,11 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
+import { Attributes, Register, Slots, Lifecycle } from 'model';
+import { Markup } from 'utilities';
 import {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../_types';
-import { Attributes, Model, Register, Slots, Lifecycle } from 'model';
-import { Markup } from 'utilities';
 
 const tagName = 'umd-element-tabs';
 

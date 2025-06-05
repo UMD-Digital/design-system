@@ -1,5 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 import {
   CreateComponentFunction,

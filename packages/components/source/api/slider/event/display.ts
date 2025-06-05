@@ -1,9 +1,9 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
+import { Attributes, Register, Slots, Lifecycle } from 'model';
 import {
   CreateComponentFunction,
   ComponentRegistration,
 } from '../../../_types';
-import { Attributes, Model, Register, Slots, Lifecycle } from 'model';
 
 const tagName = 'umd-element-slider-events';
 

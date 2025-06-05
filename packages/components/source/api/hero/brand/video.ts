@@ -1,5 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Model, Slots, Register, Lifecycle } from 'model';
+import { Lifecycle, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,

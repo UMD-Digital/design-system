@@ -1,6 +1,6 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { Attributes, Register } from 'model';
 import { CommonFeedNewsData } from './common';
-import { Attributes, Model, Register } from 'model';
 import { CreateComponentFunction, ComponentRegistration } from 'api/_types';
 
 /**

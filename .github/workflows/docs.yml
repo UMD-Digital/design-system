@@ -29,6 +29,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn lerna run build --scope=@universityofmaryland/web-styles-library
           yarn lerna run build --scope=@universityofmaryland/web-elements-library
+          yarn lerna run build --scope=@universityofmaryland/web-feeds-library
           yarn lerna run build --scope=@universityofmaryland/web-components-library
 
       - name: Generate style package documentation

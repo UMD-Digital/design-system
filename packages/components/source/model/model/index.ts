@@ -36,6 +36,7 @@
  * ```
  */
 import StylesTemplate from '../utilities/styles';
+import type { SlotConfig } from '../../api/_types';
 
 interface AttributeConfig {
   name: string;
@@ -48,11 +49,6 @@ interface ElementRef {
   events?: Record<string, Function>;
 }
 
-interface SlotConfig {
-  required?: boolean;
-  deprecated?: string;
-  allowedElements?: string[];
-}
 
 interface SlotValidationError {
   slot: string;
@@ -356,4 +352,5 @@ export {
   type ElementRef,
   type ComponentConfig,
   type AttributeConfig,
+  type SlotConfig,
 };

@@ -70,7 +70,7 @@ describe('Academic Slider Component', () => {
     expect(sliderCallArgs.query).toContain('title');
     expect(sliderCallArgs.query).toContain('url');
 
-    expect(sliderCallArgs.query).toContain('calendarId: 5');
+    expect(sliderCallArgs.query).toContain('calendarId: [4, 2]');
     expect(sliderCallArgs.query).toContain('loadOccurrences: true');
   });
 });

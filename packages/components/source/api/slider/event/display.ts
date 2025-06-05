@@ -2,7 +2,6 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
-  CommonAttributeHandlers,
   CommonLifecycleHooks,
 } from '../../../_types';
 import { Attributes, Model, Register, Slots } from 'model';
@@ -87,7 +86,7 @@ const tagName = 'umd-element-slider-events';
  * @category Components
  * @since 1.0.0
  */
-const attributes = CommonAttributeHandlers.resize((element) => element.events?.SetDateElementsSizes());
+const attributes = Attributes.handler.common.resize((element) => element.events?.SetDateElementsSizes());
 
 const createComponent: CreateComponentFunction = (element) => {
   const dataSlider = document.createElement('div');

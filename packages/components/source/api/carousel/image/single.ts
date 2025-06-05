@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../../_types';
 import { createComponentRegistration } from '../../../model/utilities/register';
-import { CommonAttributeHandlers } from '../../../model/attributes/handler';
 import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
@@ -28,7 +27,7 @@ const slots: SlotConfiguration = {
 };
 
 // Attribute handlers for the single image carousel component
-const attributes = CommonAttributeHandlers.resize(
+const attributes = Attributes.handler.common.resize(
   (element) => element.events?.SetEventReize()
 );
 

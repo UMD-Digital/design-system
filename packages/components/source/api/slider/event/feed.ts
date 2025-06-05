@@ -2,7 +2,6 @@ import * as Feeds from '@universityofmaryland/web-feeds-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
-  CommonAttributeHandlers,
   TypedComponentRef,
 } from '../../../_types';
 import { Attributes, Model, Register, Slots } from 'model';
@@ -88,7 +87,7 @@ const tagName = 'umd-element-slider-events-feed';
  * @category Components
  * @since 1.0.0
  */
-const attributes = CommonAttributeHandlers.resize((element) => element.events?.SetDateElementsSizes());
+const attributes = Attributes.handler.common.resize((element) => element.events?.SetDateElementsSizes());
 
 const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });

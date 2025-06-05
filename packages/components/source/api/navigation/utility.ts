@@ -3,7 +3,6 @@ import { Attributes } from 'model';
 import {
   CreateComponentFunction,
 } from '../_types';
-import { CommonAttributeHandlers } from '../../model/attributes/handler';
 import { createComponentRegistration } from '../../model/utilities/register';
 
 /**
@@ -47,7 +46,7 @@ const createComponent: CreateComponentFunction = (element) => {
 /**
  * Attribute handlers for the utility navigation component
  */
-const attributes = CommonAttributeHandlers.visualShowHide({
+const attributes = Attributes.handler.common.visualShowHide({
   onShow: (element) => element.events?.showAlert(),
   onHide: (element) => element.events?.hideAlert(),
 });

@@ -250,7 +250,7 @@ const observe = {
  * Common attribute handler combinations for standard component behaviors.
  * These pre-configured handlers simplify component implementation.
  */
-export const CommonAttributeHandlers = {
+const common = {
   /**
    * Resize observer for responsive components
    */
@@ -331,4 +331,9 @@ export const CommonAttributeHandlers = {
     ),
 };
 
-export default { combine, observe };
+/**
+ * @deprecated Use Attributes.handler.common instead
+ */
+export const CommonAttributeHandlers = common;
+
+export default { combine, observe, common };

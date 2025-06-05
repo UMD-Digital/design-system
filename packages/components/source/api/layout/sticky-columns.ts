@@ -6,7 +6,6 @@ import {
   ComponentRegistration,
   SlotConfiguration,
 } from '../_types';
-import { CommonAttributeHandlers } from '../../model/attributes/handler';
 import { createComponentRegistration } from '../../model/utilities/register';
 
 const tagName = 'umd-element-sticky-columns';

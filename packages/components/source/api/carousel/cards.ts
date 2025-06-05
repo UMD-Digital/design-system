@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
 import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonAttributeHandlers } from '../../model/attributes/handler';
 import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
 import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
@@ -20,7 +19,7 @@ const slots: SlotConfiguration = {
 };
 
 // Attribute handlers for the cards carousel component
-const attributes = CommonAttributeHandlers.resize(
+const attributes = Attributes.handler.common.resize(
   (element) => element.events?.resize()
 );
 

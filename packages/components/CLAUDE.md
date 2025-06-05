@@ -51,7 +51,11 @@ Pure type definitions and interfaces:
 
 Implementations are organized by domain:
 - **Attribute Handlers** (`source/model/attributes/handler.ts`)
-  - `CommonAttributeHandlers` - Pre-configured handlers (resize, visualToggle, accordion)
+  - Access via `Attributes.handler.common` - Pre-configured handlers:
+    - `Attributes.handler.common.resize()` - Responsive component resizing
+    - `Attributes.handler.common.visualToggle()` - Open/close handlers
+    - `Attributes.handler.common.visualShowHide()` - Show/hide handlers
+    - `Attributes.handler.common.accordion()` - Accordion-specific handlers
 - **Lifecycle Utilities** (`source/model/utilities/lifecycle.ts`)
   - `CommonLifecycleHooks` - Standard hooks (loadOnConnect, loadAnimation, resizeOnConnect)
 - **Registration Utilities** (`source/model/utilities/register.ts`)
@@ -81,7 +85,6 @@ import {
   SlotConfiguration,
 } from '../_types';
 import { CommonSlots } from '../../model/slots/common';
-import { CommonAttributeHandlers } from '../../model/attributes/handler';
 import { createComponentRegistration } from '../../model/utilities/register';
 
 /**
@@ -155,7 +158,7 @@ const registration: ComponentRegistration = createComponentRegistration({
   tagName,
   slots,
   createComponent,
-  attributes: CommonAttributeHandlers.resize, // Optional: add common handlers
+  attributes: Attributes.handler.common.resize((element) => element.events?.recalculate()), // Optional: add common handlers
 });
 
 export default registration;
@@ -211,7 +214,7 @@ When creating or modifying components:
 1. Import types from `source/_types.ts` for consistency
 2. Use `CommonSlots` for standard slot configurations
 3. Implement the `CreateComponentFunction` interface
-4. Use `CommonAttributeHandlers` for standard behaviors
+4. Use `Attributes.handler.common` for standard behaviors
 5. Export using `createComponentRegistration` helper
 6. Follow the existing naming conventions (umd-[component])
 

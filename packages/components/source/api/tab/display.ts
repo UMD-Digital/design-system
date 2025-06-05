@@ -3,7 +3,6 @@ import {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-  CommonAttributeHandlers,
   CommonLifecycleHooks,
 } from '../../_types';
 import { Attributes, Model, Register, Slots } from 'model';
@@ -151,7 +150,7 @@ const slots: SlotConfiguration = {
   },
 };
 
-const attributes = CommonAttributeHandlers.resize((element) => element.events?.resize());
+const attributes = Attributes.handler.common.resize((element) => element.events?.resize());
 
 const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });

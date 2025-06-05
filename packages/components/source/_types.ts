@@ -10,7 +10,6 @@ export * from './api/_types';
 
 // Re-export utility functions and constants
 export { createComponentRegistration } from './model/utilities/register';
-export { CommonAttributeHandlers } from './model/attributes/handler';
 export { CommonLifecycleHooks } from './model/utilities/lifecycle';
 export { isHTMLElement } from './utilities/markup/validate';
 

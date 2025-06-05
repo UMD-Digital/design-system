@@ -47,7 +47,7 @@ import { createCustomElement } from '../model/index';
  *   tagName: 'umd-element-name',
  *   slots,
  *   createComponent,
- *   attributes: CommonAttributeHandlers.resize,
+ *   attributes: Attributes.handler.common.resize((element) => element.events?.recalculate()),
  * });
  * ```
  */

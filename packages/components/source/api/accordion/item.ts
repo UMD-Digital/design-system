@@ -4,7 +4,6 @@ import {
   CreateComponentFunction,
   SlotConfiguration,
 } from '../_types';
-import { CommonAttributeHandlers } from '../../model/attributes/handler';
 import { createComponentRegistration } from '../../model/utilities/register';
 
 /**
@@ -52,7 +51,7 @@ const slots: SlotConfiguration = {
  * Attribute handlers for the accordion item component
  * Manages state changes and animations
  */
-const attributes = CommonAttributeHandlers.accordion();
+const attributes = Attributes.handler.common.accordion();
 
 /**
  * Accordion Item

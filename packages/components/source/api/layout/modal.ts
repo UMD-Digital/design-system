@@ -4,7 +4,6 @@ import {
   CreateComponentFunction,
   LayoutProps,
 } from '../_types';
-import { CommonAttributeHandlers } from '../../model/attributes/handler';
 import { createComponentRegistration } from '../../model/utilities/register';
 
 const tagName = 'umd-element-modal';
@@ -36,7 +35,7 @@ const createComponent: CreateComponentFunction = (element) => {
   return Atomic.layout.overlay.modal(props);
 };
 
-const attributes = CommonAttributeHandlers.visualShowHide({
+const attributes = Attributes.handler.common.visualShowHide({
   onShow: (element) => element.events?.show(),
   onHide: (element) => element.events?.hide(),
 });

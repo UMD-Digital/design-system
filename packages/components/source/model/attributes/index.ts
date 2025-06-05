@@ -27,7 +27,7 @@
  * 
  * @module Attributes
  */
-import handler from './handler';
+import handler, { AttributeHandlerTypes } from './handler';
 import names from './names';
 import values from './values';
 
@@ -44,4 +44,4 @@ export {
   isVisual,
   getValue,
 } from './checks';
-export { handler, names, values };
+export { handler, names, values, AttributeHandlerTypes };

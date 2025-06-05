@@ -30,16 +30,33 @@ import AttributeValues from './values';
  * );
  * ```
  */
+/**
+ * Type definitions for the attribute handler system
+ */
 export namespace AttributeHandlerTypes {
+  /**
+   * Callback function type for attribute handlers
+   * @typeParam T - The element reference type, defaults to ElementRef
+   */
   type Callback<T = ElementRef> = (arg: T, arg2?: any) => void;
 
+  /**
+   * Reference to an element with optional event handlers
+   */
   export interface ElementRef {
+    /** The HTML element being observed */
     element: HTMLElement;
+    /** Optional event handlers attached to the element */
     events?: Record<string, Function>;
   }
 
+  /**
+   * Configuration for an attribute handler
+   */
   export interface Config {
+    /** The attribute name to observe */
     name: string;
+    /** Handler function called when the attribute changes */
     handler: (
       ref: ElementRef,
       oldValue: string | null,
@@ -47,8 +64,13 @@ export namespace AttributeHandlerTypes {
     ) => void;
   }
 
+  /**
+   * Properties for creating attribute handlers
+   */
   export interface Props {
+    /** Callback function to execute when attribute changes */
     callback: Callback;
+    /** Optional attribute name override */
     name?: string;
   }
 }

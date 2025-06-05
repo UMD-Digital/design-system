@@ -117,7 +117,7 @@ export interface ComponentConfiguration {
   /** Component creation function */
   createComponent: CreateComponentFunction;
   /** Attribute handlers */
-  attributes?: ReturnType<typeof Attributes.handler.combine>;
+  attributes?: Attributes.AttributeHandlerTypes.Config | Attributes.AttributeHandlerTypes.Config[];
   /** Hook called before shadow DOM connection */
   beforeConnect?: (ref: ComponentRef, shadow: ShadowRoot) => void;
   /** Hook called after shadow DOM connection */

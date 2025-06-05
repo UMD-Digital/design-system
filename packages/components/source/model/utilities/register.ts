@@ -55,9 +55,19 @@ export function webComponent(
   config: ComponentConfiguration,
 ): ComponentRegistration {
   return () => {
+    // Normalize attributes to always be an array
+    const normalizedConfig = {
+      ...config,
+      attributes: config.attributes
+        ? Array.isArray(config.attributes)
+          ? config.attributes
+          : [config.attributes]
+        : undefined,
+    };
+    
     registerWebComponent({
       name: config.tagName,
-      element: createCustomElement(config),
+      element: createCustomElement(normalizedConfig),
     });
   };
 }

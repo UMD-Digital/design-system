@@ -1,19 +1,18 @@
-import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
 import CardModel from './_model';
+import type { ComponentRegistration } from '../_types';
 
 // Tag name for the article card component
 const tagName = 'umd-element-article';
 
 /**
  * Article Card
- * 
+ *
  * A specialized card component optimized for displaying article and news content.
  * Inherits all features from the standard card with article-specific semantics.
- * 
+ *
  * ## Custom Element
  * `<umd-element-article>`
- * 
+ *
  * ## Slots
  * - `headline` - Article title (required, accepts: h2-h6, p)
  * - `text` - Article excerpt or summary (accepts: p)
@@ -21,7 +20,7 @@ const tagName = 'umd-element-article';
  * - `image` - Article featured image
  * - `actions` - Read more links or sharing options
  * - `date` - Publication date
- * 
+ *
  * ## Attributes
  * - `data-theme` - Theme styling options:
  *   - `dark` - Dark theme styling
@@ -31,7 +30,7 @@ const tagName = 'umd-element-article';
  *   - `aligned` - Aligned content layout
  *   - `bordered` - Add border styling
  *   - `list` - List display format
- * 
+ *
  * @example
  * ```html
  * <!-- Basic article card -->
@@ -42,7 +41,7 @@ const tagName = 'umd-element-article';
  *   <p slot="date">December 10, 2023</p>
  * </umd-element-article>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Article with image and actions -->
@@ -51,7 +50,7 @@ const tagName = 'umd-element-article';
  *   <p slot="eyebrow">Science & Technology</p>
  *   <h2 slot="headline">New Climate Research Center Opens</h2>
  *   <p slot="text">
- *     The facility will advance understanding of climate change impacts 
+ *     The facility will advance understanding of climate change impacts
  *     and develop sustainable solutions.
  *   </p>
  *   <p slot="date">November 15, 2023</p>
@@ -61,7 +60,7 @@ const tagName = 'umd-element-article';
  *   </div>
  * </umd-element-article>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- List layout article -->
@@ -71,7 +70,7 @@ const tagName = 'umd-element-article';
  *   <p slot="date">October 5, 2023</p>
  * </umd-element-article>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */

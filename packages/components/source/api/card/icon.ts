@@ -1,8 +1,11 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
-import { Attributes, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
 
 // Tag name for the icon card component
 const tagName = 'umd-element-card-icon';
@@ -39,22 +42,22 @@ const createComponent: CreateComponentFunction = (element) =>
 
 /**
  * Icon Card
- * 
+ *
  * A card component with an icon overlay design, perfect for highlighting
  * services, features, or categories with visual emphasis.
- * 
+ *
  * ## Custom Element
  * `<umd-element-card-icon>`
- * 
+ *
  * ## Slots
  * - `headline` - Card title (required, accepts: h2-h6, p)
  * - `text` - Card description (optional, accepts: p)
  * - `image` - Icon or image (required)
- * 
+ *
  * ## Attributes
  * - `data-theme` - Theme styling options:
  *   - `dark` - Dark theme styling
- * 
+ *
  * @example
  * ```html
  * <!-- Basic icon card -->
@@ -64,7 +67,7 @@ const createComponent: CreateComponentFunction = (element) =>
  *   <p slot="text">Cutting-edge research across disciplines</p>
  * </umd-element-card-icon>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Dark theme icon card -->
@@ -74,7 +77,7 @@ const createComponent: CreateComponentFunction = (element) =>
  *   <p slot="text">Over 200 degree programs to choose from</p>
  * </umd-element-card-icon>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Service highlight cards -->
@@ -91,11 +94,11 @@ const createComponent: CreateComponentFunction = (element) =>
  *   </umd-element-card-icon>
  * </div>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

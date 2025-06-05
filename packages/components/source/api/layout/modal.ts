@@ -1,10 +1,6 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import {
-  CreateComponentFunction,
-  LayoutProps,
-} from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
+import { Attributes, Slots, Register } from 'model';
+import { CreateComponentFunction, LayoutProps } from '../_types';
 
 const tagName = 'umd-element-modal';
 
@@ -118,7 +114,7 @@ const attributes = Attributes.handler.common.visualShowHide({
  * @category Components
  * @since 1.0.0
  */
-export default createComponentRegistration({
+export default Register.webComponent({
   tagName,
   attributes,
   createComponent,

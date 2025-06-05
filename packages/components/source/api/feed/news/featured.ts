@@ -1,11 +1,7 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { CommonFeedNewsData } from './common';
 import { Attributes, Model, Register } from 'model';
-import {
-  CreateComponentFunction,
-  ComponentRegistration,
-} from 'api/_types';
-import { createComponentRegistration } from 'model/utilities/register';
+import { CreateComponentFunction, ComponentRegistration } from 'api/_types';
 
 /**
  * Tag name for the featured news feed component
@@ -100,7 +96,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   attributes,
   createComponent,

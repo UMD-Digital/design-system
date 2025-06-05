@@ -1,10 +1,9 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Model, Slots } from 'model';
+import { Model, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
 } from '../../_types';
-import { createComponentRegistration } from 'model/utilities/register';
 import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 
 /**
@@ -27,24 +26,24 @@ const createComponent: CreateComponentFunction = (element) => {
 
 /**
  * Brand Video Hero Component
- * 
+ *
  * A hero component featuring brand-focused video content with animation support.
  * Designed for impactful homepage and campaign experiences.
- * 
+ *
  * ## Custom Element
  * `<umd-element-hero-brand-video>`
- * 
+ *
  * ## Slots
  * - `headline` - Main hero heading
  * - `text` - Supporting text content
- * 
+ *
  * ## Direct Children
  * - `video` - Video element (not slotted, direct child)
- * 
+ *
  * ## Attributes
  * - `animation-trigger` - Animation trigger options:
  *   - `load` - Start animation on component load
- * 
+ *
  * @example
  * ```html
  * <!-- Basic brand video hero -->
@@ -56,7 +55,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   <p slot="text">The University of Maryland's strategic vision</p>
  * </umd-element-hero-brand-video>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Brand video with load animation -->
@@ -71,11 +70,11 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </p>
  * </umd-element-hero-brand-video>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const BrandVideoHero: ComponentRegistration = createComponentRegistration({
+const BrandVideoHero: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   afterConnect: CommonLifecycleHooks.loadOnConnect,

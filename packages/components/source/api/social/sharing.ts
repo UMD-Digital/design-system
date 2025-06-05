@@ -5,7 +5,6 @@ import {
   CommonLifecycleHooks,
 } from '../../_types';
 import { Attributes, Model, Register } from 'model';
-import { createComponentRegistration } from 'model/utilities/register';
 
 const tagName = 'umd-element-social-sharing';
 
@@ -28,7 +27,7 @@ const tagName = 'umd-element-social-sharing';
  * - `data-facebook` - Include Facebook share button:
  *   - `true` - Show Facebook button
  * - `data-twitter` - Include Twitter/X share button:
- *   - `true` - Show Twitter button  
+ *   - `true` - Show Twitter button
  * - `data-print` - Include print button:
  *   - `true` - Show print button
  * - `data-email` - Include email share button:
@@ -37,7 +36,7 @@ const tagName = 'umd-element-social-sharing';
  * @example
  * ```html
  * <!-- Basic sharing with all platforms -->
- * <umd-element-social-sharing 
+ * <umd-element-social-sharing
  *   data-facebook="true"
  *   data-twitter="true"
  *   data-email="true"
@@ -48,7 +47,7 @@ const tagName = 'umd-element-social-sharing';
  * @example
  * ```html
  * <!-- Fixed position sharing bar -->
- * <umd-element-social-sharing 
+ * <umd-element-social-sharing
  *   data-fixed="true"
  *   data-facebook="true"
  *   data-twitter="true">
@@ -58,7 +57,7 @@ const tagName = 'umd-element-social-sharing';
  * @example
  * ```html
  * <!-- Custom share content -->
- * <umd-element-social-sharing 
+ * <umd-element-social-sharing
  *   data-title="Check out this amazing research from UMD!"
  *   data-url="https://umd.edu/research/quantum-breakthrough"
  *   data-facebook="true"
@@ -70,7 +69,7 @@ const tagName = 'umd-element-social-sharing';
  * @example
  * ```html
  * <!-- Minimal sharing (email and print only) -->
- * <umd-element-social-sharing 
+ * <umd-element-social-sharing
  *   data-email="true"
  *   data-print="true">
  * </umd-element-social-sharing>
@@ -109,7 +108,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * - `data-facebook` - Include Facebook share button:
  *   - `true` - Show Facebook button
  * - `data-twitter` - Include Twitter/X share button:
- *   - `true` - Show Twitter button  
+ *   - `true` - Show Twitter button
  * - `data-print` - Include print button:
  *   - `true` - Show print button
  * - `data-email` - Include email share button:
@@ -118,7 +117,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * @example
  * ```html
  * <!-- Basic sharing with all platforms -->
- * <umd-element-social-sharing 
+ * <umd-element-social-sharing
  *   data-facebook="true"
  *   data-twitter="true"
  *   data-email="true"
@@ -129,7 +128,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * @example
  * ```html
  * <!-- Fixed position sharing bar -->
- * <umd-element-social-sharing 
+ * <umd-element-social-sharing
  *   data-fixed="true"
  *   data-facebook="true"
  *   data-twitter="true">
@@ -139,7 +138,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * @example
  * ```html
  * <!-- Custom share content -->
- * <umd-element-social-sharing 
+ * <umd-element-social-sharing
  *   data-title="Check out this amazing research from UMD!"
  *   data-url="https://umd.edu/research/quantum-breakthrough"
  *   data-facebook="true"
@@ -151,7 +150,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * @example
  * ```html
  * <!-- Minimal sharing (email and print only) -->
- * <umd-element-social-sharing 
+ * <umd-element-social-sharing
  *   data-email="true"
  *   data-print="true">
  * </umd-element-social-sharing>
@@ -160,7 +159,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   afterConnect: CommonLifecycleHooks.loadOnConnect,

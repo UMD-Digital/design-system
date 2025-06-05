@@ -5,7 +5,6 @@ import {
   TypedComponentRef,
 } from '../../../_types';
 import { Attributes, Model, Register, Slots } from 'model';
-import { createComponentRegistration } from 'model/utilities/register';
 
 const tagName = 'umd-element-slider-events-feed';
 
@@ -47,7 +46,7 @@ const tagName = 'umd-element-slider-events-feed';
  * @example
  * ```html
  * <!-- Academic calendar feed -->
- * <umd-element-slider-events-feed 
+ * <umd-element-slider-events-feed
  *   data-token="academic-api-key"
  *   data-type="academic">
  *   <h2 slot="headline">Academic Calendar</h2>
@@ -61,7 +60,7 @@ const tagName = 'umd-element-slider-events-feed';
  * @example
  * ```html
  * <!-- Filtered events with dark theme -->
- * <umd-element-slider-events-feed 
+ * <umd-element-slider-events-feed
  *   data-token="events-api-key"
  *   data-theme="dark"
  *   categories="athletics,recreation">
@@ -73,7 +72,7 @@ const tagName = 'umd-element-slider-events-feed';
  * @example
  * ```html
  * <!-- Multiple category filters -->
- * <umd-element-slider-events-feed 
+ * <umd-element-slider-events-feed
  *   data-token="events-api-key"
  *   categories="workshop,seminar,lecture">
  *   <h2 slot="headline">Learning Opportunities</h2>
@@ -87,7 +86,9 @@ const tagName = 'umd-element-slider-events-feed';
  * @category Components
  * @since 1.0.0
  */
-const attributes = Attributes.handler.common.resize((element) => element.events?.SetDateElementsSizes());
+const attributes = Attributes.handler.common.resize((element) =>
+  element.events?.SetDateElementsSizes(),
+);
 
 const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
@@ -152,7 +153,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @example
  * ```html
  * <!-- Academic calendar feed -->
- * <umd-element-slider-events-feed 
+ * <umd-element-slider-events-feed
  *   data-token="academic-api-key"
  *   data-type="academic">
  *   <h2 slot="headline">Academic Calendar</h2>
@@ -166,7 +167,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @example
  * ```html
  * <!-- Filtered events with dark theme -->
- * <umd-element-slider-events-feed 
+ * <umd-element-slider-events-feed
  *   data-token="events-api-key"
  *   data-theme="dark"
  *   categories="athletics,recreation">
@@ -178,7 +179,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @example
  * ```html
  * <!-- Multiple category filters -->
- * <umd-element-slider-events-feed 
+ * <umd-element-slider-events-feed
  *   data-token="events-api-key"
  *   categories="workshop,seminar,lecture">
  *   <h2 slot="headline">Learning Opportunities</h2>
@@ -192,11 +193,12 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   attributes: [attributes],
-  afterConnect: (ref: TypedComponentRef, shadow?: ShadowRoot) => ref?.events?.callback?.(shadow),
+  afterConnect: (ref: TypedComponentRef, shadow?: ShadowRoot) =>
+    ref?.events?.callback?.(shadow),
 });
 
 export default registration;

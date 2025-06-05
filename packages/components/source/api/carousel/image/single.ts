@@ -1,8 +1,11 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../../_types';
-import { createComponentRegistration } from '../../../model/utilities/register';
-import { Attributes, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../../_types';
 
 const { ImageHasAlt } = Markup.validate;
 
@@ -27,8 +30,8 @@ const slots: SlotConfiguration = {
 };
 
 // Attribute handlers for the single image carousel component
-const attributes = Attributes.handler.common.resize(
-  (element) => element.events?.SetEventReize()
+const attributes = Attributes.handler.common.resize((element) =>
+  element.events?.SetEventReize(),
 );
 
 /**
@@ -113,7 +116,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

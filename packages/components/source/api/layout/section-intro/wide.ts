@@ -1,11 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes } from 'model';
+import { Attributes, Register } from 'model';
 import { CommonIntroData } from './common';
-import {
-  CreateComponentFunction,
-  ComponentRegistration,
-} from '../../_types';
-import { createComponentRegistration } from '../../../model/utilities/register';
+import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-section-intro-wide';
 
@@ -67,7 +63,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
 });

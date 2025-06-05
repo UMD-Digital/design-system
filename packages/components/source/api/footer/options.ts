@@ -1,12 +1,10 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Slots } from 'model';
-import { Markup } from 'utilities';
+import { Attributes, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../_types';
-import { createComponentRegistration } from 'model/utilities/register';
 
 /**
  * Tag name for the footer component
@@ -118,13 +116,13 @@ const createComponent: CreateComponentFunction = (element) => {
 
 /**
  * Footer Component
- * 
+ *
  * A versatile footer component with three layout options for different site needs.
  * Automatically adds accessibility attributes if not provided.
- * 
+ *
  * ## Custom Element
  * `<umd-element-footer>`
- * 
+ *
  * ## Slots
  * - `contact-headline` - Contact section header
  * - `contact-links` - Contact links section
@@ -136,7 +134,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `link-column-two` - Second link column (mega footer only)
  * - `link-column-three` - Third link column (mega footer only)
  * - `background-image` - Background image (visual footer only, accepts: img)
- * 
+ *
  * ## Attributes
  * - `type` - Footer layout options:
  *   - `simple` - Basic footer layout (default)
@@ -144,7 +142,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   - `visual` - Footer with background image
  * - `data-theme` - Theme options:
  *   - `light` - Light theme styling
- * 
+ *
  * @example
  * ```html
  * <!-- Simple footer -->
@@ -164,7 +162,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-footer>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Mega footer with columns -->
@@ -190,7 +188,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-footer>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Visual footer with background -->
@@ -200,11 +198,11 @@ const createComponent: CreateComponentFunction = (element) => {
  *   <a slot="call-to-action" href="/visit">Schedule a Tour</a>
  * </umd-element-footer>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const FooterOptions: ComponentRegistration = createComponentRegistration({
+const FooterOptions: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

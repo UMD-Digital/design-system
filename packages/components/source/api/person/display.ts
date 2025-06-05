@@ -1,12 +1,11 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register } from 'model';
+import { Attributes, Register } from 'model';
+import { CommonPersonData } from './common';
 import {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonPersonData } from './common';
 
 const tagName = 'umd-element-person';
 
@@ -118,7 +117,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const PersonDisplay: ComponentRegistration = createComponentRegistration({
+const PersonDisplay: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

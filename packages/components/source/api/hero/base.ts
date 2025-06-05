@@ -1,13 +1,9 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Slots } from 'model';
-import { CommonHeroData } from './common';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
-import type {
-  CreateComponentFunction,
-  ComponentRegistration,
-} from '../_types';
-import { createComponentRegistration } from 'model/utilities/register';
+import { CommonHeroData } from './common';
 import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
+import type { CreateComponentFunction, ComponentRegistration } from '../_types';
 
 /**
  * Tag name for the base hero component
@@ -105,13 +101,13 @@ const createComponent: CreateComponentFunction = (element) => {
 
 /**
  * Base Hero Component
- * 
+ *
  * A versatile hero component with multiple layout options for page headers.
  * Supports various content arrangements and visual styles.
- * 
+ *
  * ## Custom Element
  * `<umd-element-hero>`
- * 
+ *
  * ## Slots
  * - `eyebrow` - Small text above headline
  * - `headline` - Main hero heading (required)
@@ -119,7 +115,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `image` - Hero image
  * - `video` - Hero video
  * - `actions` - Call-to-action buttons/links
- * 
+ *
  * ## Attributes
  * - `type` - Layout type options:
  *   - `default-centered` - Default layout with centered text
@@ -135,7 +131,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   - `animation` - Enable animations
  * - `data-visual-align` - Alignment options:
  *   - `center` - Center align text
- * 
+ *
  * @example
  * ```html
  * <!-- Basic hero -->
@@ -145,7 +141,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   <img slot="image" src="campus.jpg" alt="Campus view">
  * </umd-element-hero>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Overlay hero with video -->
@@ -162,7 +158,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-hero>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Minimal interior hero -->
@@ -171,11 +167,11 @@ const createComponent: CreateComponentFunction = (element) => {
  *   <p slot="text">Founded in 1856, the University of Maryland...</p>
  * </umd-element-hero>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const BaseHero: ComponentRegistration = createComponentRegistration({
+const BaseHero: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   afterConnect: CommonLifecycleHooks.loadOnConnect,

@@ -1,11 +1,10 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
 
 /**
  * Tag name for the promotional banner web component
@@ -86,7 +85,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-const PromoBannerRegistration: ComponentRegistration = createComponentRegistration({
+const PromoBannerRegistration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

@@ -1,10 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
+import { Register } from 'model';
 import { Markup } from 'utilities';
-import {
-  CreateComponentFunction,
-  SlotConfiguration,
-} from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
+import { CreateComponentFunction, SlotConfiguration } from '../_types';
 
 /**
  * Tag name for the sticky navigation web component
@@ -75,7 +72,7 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export default createComponentRegistration({
+export default Register.webComponent({
   tagName,
   slots,
   createComponent,

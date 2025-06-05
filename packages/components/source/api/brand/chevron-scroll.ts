@@ -1,9 +1,6 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
-import {
-  CreateComponentFunction,
-  ComponentRegistration,
-} from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
+import { Register } from 'model';
+import { CreateComponentFunction, ComponentRegistration } from '../_types';
 
 /**
  * Tag name for the brand chevron animation component
@@ -13,29 +10,29 @@ const tagName = 'umd-element-brand-logo-animation';
 /**
  * Creates the brand chevron animation component
  */
-const createComponent: CreateComponentFunction = () => 
+const createComponent: CreateComponentFunction = () =>
   Atomic.animations.brand.chevronScroll();
 
 /**
  * Brand Chevron Scroll Animation
- * 
+ *
  * Creates an animated University of Maryland brand chevron logo.
  * The animation provides a dynamic visual element for brand presence.
- * 
+ *
  * ## Custom Element
  * `<umd-element-brand-logo-animation>`
- * 
+ *
  * ## Notes
  * - Uses the University of Maryland's atomic animations library
  * - Animation runs continuously
  * - Purely decorative element
- * 
+ *
  * @example
  * ```html
  * <!-- Basic chevron animation -->
  * <umd-element-brand-logo-animation></umd-element-brand-logo-animation>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- In a hero section -->
@@ -44,7 +41,7 @@ const createComponent: CreateComponentFunction = () =>
  *   <umd-element-brand-logo-animation></umd-element-brand-logo-animation>
  * </div>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- As a loading indicator -->
@@ -53,11 +50,11 @@ const createComponent: CreateComponentFunction = () =>
  *   <p>Loading...</p>
  * </div>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
 });

@@ -6,7 +6,6 @@ import {
   CommonLifecycleHooks,
 } from '../../_types';
 import { Attributes, Model, Register, Slots } from 'model';
-import { createComponentRegistration } from 'model/utilities/register';
 import { Markup } from 'utilities';
 
 const tagName = 'umd-element-tabs';
@@ -51,7 +50,7 @@ const tagName = 'umd-element-tabs';
  *     <div class="tab" data-tab="overview">Overview</div>
  *     <div class="tab" data-tab="requirements">Requirements</div>
  *     <div class="tab" data-tab="curriculum">Curriculum</div>
- *     
+ *
  *     <div class="panel" data-panel="overview">
  *       <h3>Program Overview</h3>
  *       <p>Learn about our comprehensive program...</p>
@@ -80,7 +79,7 @@ const tagName = 'umd-element-tabs';
  *     <div class="tab" data-tab="research">Research</div>
  *     <div class="tab" data-tab="publications">Publications</div>
  *     <div class="tab" data-tab="contact">Contact</div>
- *     
+ *
  *     <div class="panel" data-panel="about">
  *       <h2>About the Lab</h2>
  *       <p>Our research lab focuses on...</p>
@@ -113,7 +112,7 @@ const tagName = 'umd-element-tabs';
  *     <div class="tab" data-tab="objectives">Learning Objectives</div>
  *     <div class="tab" data-tab="schedule">Schedule</div>
  *     <div class="tab" data-tab="assignments">Assignments</div>
- *     
+ *
  *     <div class="panel" data-panel="description">
  *       <h3>Course Description</h3>
  *       <p>This course introduces students to...</p>
@@ -150,7 +149,9 @@ const slots: SlotConfiguration = {
   },
 };
 
-const attributes = Attributes.handler.common.resize((element) => element.events?.resize());
+const attributes = Attributes.handler.common.resize((element) =>
+  element.events?.resize(),
+);
 
 const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
@@ -220,7 +221,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *     <div class="tab" data-tab="overview">Overview</div>
  *     <div class="tab" data-tab="requirements">Requirements</div>
  *     <div class="tab" data-tab="curriculum">Curriculum</div>
- *     
+ *
  *     <div class="panel" data-panel="overview">
  *       <h3>Program Overview</h3>
  *       <p>Learn about our comprehensive program...</p>
@@ -249,7 +250,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *     <div class="tab" data-tab="research">Research</div>
  *     <div class="tab" data-tab="publications">Publications</div>
  *     <div class="tab" data-tab="contact">Contact</div>
- *     
+ *
  *     <div class="panel" data-panel="about">
  *       <h2>About the Lab</h2>
  *       <p>Our research lab focuses on...</p>
@@ -282,7 +283,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *     <div class="tab" data-tab="objectives">Learning Objectives</div>
  *     <div class="tab" data-tab="schedule">Schedule</div>
  *     <div class="tab" data-tab="assignments">Assignments</div>
- *     
+ *
  *     <div class="panel" data-panel="description">
  *       <h3>Course Description</h3>
  *       <p>This course introduces students to...</p>
@@ -313,7 +314,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

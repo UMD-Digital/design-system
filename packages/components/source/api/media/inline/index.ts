@@ -1,12 +1,8 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
-import {
-  CreateComponentFunction,
-  SlotConfiguration,
-} from '../../_types';
 import { CommonLifecycleHooks } from '../../../model/utilities/lifecycle';
-import { createComponentRegistration } from '../../../model/utilities/register';
+import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 
 /**
  * Tag name for the media inline web component
@@ -98,36 +94,36 @@ const slots: SlotConfiguration = {
  * Creates a media inline component with the provided configuration
  */
 const createComponent: CreateComponentFunction = (element) => {
-    const caption = Slots.text.caption({ element });
-    const wrappingText =
-      Slots.text.default({ element, isDefaultStyling: false }) ||
-      Slots.deprecated.wrappingText({ element, isDefaultStyling: false });
-    const isAlignmentRight = Attributes.isLayout.alignmentRight({ element });
-    const isThemeDark = Attributes.isTheme.dark({ element });
-    const hasWrappingText = wrappingText !== null;
-    const hasCaption = caption !== null;
+  const caption = Slots.text.caption({ element });
+  const wrappingText =
+    Slots.text.default({ element, isDefaultStyling: false }) ||
+    Slots.deprecated.wrappingText({ element, isDefaultStyling: false });
+  const isAlignmentRight = Attributes.isLayout.alignmentRight({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
+  const hasWrappingText = wrappingText !== null;
+  const hasCaption = caption !== null;
 
-    const content = {
-      isAlignmentRight,
-      isThemeDark,
-      caption,
-      image: Markup.validate.ImageSlot({
-        element,
-        ImageSlot: Slots.name.assets.image,
-      }),
-      wrappingText,
-    };
-
-    if (hasWrappingText) {
-      return Composite.media.inline.wrapped(content);
-    }
-
-    if (hasCaption) {
-      return Composite.media.inline.caption(content);
-    }
-
-    return Composite.media.inline.standard(content);
+  const content = {
+    isAlignmentRight,
+    isThemeDark,
+    caption,
+    image: Markup.validate.ImageSlot({
+      element,
+      ImageSlot: Slots.name.assets.image,
+    }),
+    wrappingText,
   };
+
+  if (hasWrappingText) {
+    return Composite.media.inline.wrapped(content);
+  }
+
+  if (hasCaption) {
+    return Composite.media.inline.caption(content);
+  }
+
+  return Composite.media.inline.standard(content);
+};
 
 /**
  * Media Inline
@@ -195,7 +191,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export default createComponentRegistration({
+export default Register.webComponent({
   tagName,
   slots,
   createComponent,

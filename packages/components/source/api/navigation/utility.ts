@@ -1,9 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes } from 'model';
-import {
-  CreateComponentFunction,
-} from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
+import { Attributes, Register } from 'model';
+import { CreateComponentFunction } from '../_types';
 
 /**
  * Tag name for the utility navigation web component
@@ -111,7 +108,7 @@ const attributes = Attributes.handler.common.visualShowHide({
  * @category Components
  * @since 1.0.0
  */
-export default createComponentRegistration({
+export default Register.webComponent({
   tagName,
   createComponent,
   attributes,

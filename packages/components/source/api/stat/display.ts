@@ -6,7 +6,6 @@ import {
   ComponentRegistration,
   SlotConfiguration,
 } from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
 
 /**
  * Tag name for the statistic display web component
@@ -122,7 +121,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

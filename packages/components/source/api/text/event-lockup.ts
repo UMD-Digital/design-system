@@ -5,7 +5,6 @@ import {
   CommonLifecycleHooks,
 } from '../../_types';
 import { Attributes, Model, Register, Slots } from 'model';
-import { createComponentRegistration } from 'model/utilities/register';
 import * as Utilities from 'utilities';
 
 const tagName = 'umd-element-events-date';
@@ -72,7 +71,9 @@ const tagName = 'umd-element-events-date';
  * @category Components
  * @since 1.0.0
  */
-const attributes = Attributes.handler.common.resize((element) => element.events?.SetDateElementsSizes());
+const attributes = Attributes.handler.common.resize((element) =>
+  element.events?.SetDateElementsSizes(),
+);
 
 const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
@@ -174,7 +175,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   attributes: [attributes],

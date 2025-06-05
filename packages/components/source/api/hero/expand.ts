@@ -1,11 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
-import type {
-  CreateComponentFunction,
-  ComponentRegistration,
-} from '../_types';
-import { createComponentRegistration } from 'model/utilities/register';
+import type { CreateComponentFunction, ComponentRegistration } from '../_types';
 
 /**
  * Tag name for the expandable hero component
@@ -78,13 +74,13 @@ const createComponent: CreateComponentFunction = (element) => {
 
 /**
  * Expandable Hero Component
- * 
+ *
  * A hero component with expandable content area and sticky positioning support.
  * Ideal for immersive experiences with additional content reveal.
- * 
+ *
  * ## Custom Element
  * `<umd-element-hero-expand>`
- * 
+ *
  * ## Slots
  * - `eyebrow` - Small text above headline
  * - `headline` - Main hero heading
@@ -92,14 +88,14 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `video` - Hero video (as video element or container)
  * - `actions` - Call-to-action buttons/links
  * - `additional` - Additional expandable content area
- * 
+ *
  * ## Attributes
  * - `data-visual-position` - Top position for sticky behavior (in pixels)
  * - `data-top-position` - Override sticky position value
- * 
+ *
  * ## Observed Attributes
  * - `data-visual-position` - Updates sticky position dynamically
- * 
+ *
  * @example
  * ```html
  * <!-- Basic expandable hero -->
@@ -111,7 +107,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-hero-expand>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Expandable hero with video and sticky position -->
@@ -130,7 +126,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-hero-expand>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Hero with wrapped video element -->
@@ -143,11 +139,11 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-hero-expand>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const ExpandHero: ComponentRegistration = createComponentRegistration({
+const ExpandHero: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   attributes,

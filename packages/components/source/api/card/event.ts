@@ -1,8 +1,11 @@
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
-import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
-import { Attributes, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
 
 // Tag name for the event card component
 const tagName = 'umd-element-event';
@@ -149,13 +152,13 @@ const createComponent: CreateComponentFunction = (element) => {
 
 /**
  * Event Card
- * 
+ *
  * A specialized card for displaying event information with date, time, and location.
  * Supports multiple display formats including feature, promo, and list layouts.
- * 
+ *
  * ## Custom Element
  * `<umd-element-event>`
- * 
+ *
  * ## Slots
  * - `headline` - Event title (required, accepts: h2-h6, p)
  * - `text` - Event description (accepts: p)
@@ -165,7 +168,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `image` - Event image
  * - `eyebrow` - Category or type label
  * - `actions` - Registration or info links
- * 
+ *
  * ## Attributes
  * - `data-display` - Display layout options:
  *   - `feature` - Featured event layout with prominent date
@@ -177,7 +180,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   - `dark` - Dark theme styling
  * - `data-visual` - Visual display options:
  *   - `transparent` - Transparent background
- * 
+ *
  * @example
  * ```html
  * <!-- Basic event card -->
@@ -189,7 +192,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   <p slot="location">Stamp Student Union</p>
  * </umd-element-event>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Featured event with image -->
@@ -205,7 +208,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-event>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Promo event with overlay -->
@@ -217,11 +220,11 @@ const createComponent: CreateComponentFunction = (element) => {
  *   <p slot="location">Clarice Smith Performing Arts Center</p>
  * </umd-element-event>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

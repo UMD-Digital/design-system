@@ -1,9 +1,12 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
-import { Attributes, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
+import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
 
 const { SlotWithDefaultStyling } = Markup.create;
 
@@ -67,13 +70,13 @@ const createComponent: CreateComponentFunction = (element) => {
 
 /**
  * Overlay Card
- * 
+ *
  * A dramatic card component with overlay styling, supporting both image
  * and color backgrounds. Perfect for hero sections and featured content.
- * 
+ *
  * ## Custom Element
  * `<umd-element-card-overlay>`
- * 
+ *
  * ## Slots
  * - `headline` - Card title (required, accepts: h2-h6, p)
  * - `text` - Card content (optional, accepts: p)
@@ -82,7 +85,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `actions` - Action buttons or links
  * - `date` - Date information
  * - `cta-icon` - Call-to-action icon
- * 
+ *
  * ## Attributes
  * - `data-layout` - Layout options:
  *   - `image` - Use image as background
@@ -91,7 +94,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `data-theme` - Theme styling options:
  *   - `dark` - Dark overlay theme
  *   - `light` - Light overlay theme
- * 
+ *
  * @example
  * ```html
  * <!-- Image overlay card -->
@@ -105,7 +108,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-card-overlay>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Color overlay with quote -->
@@ -114,7 +117,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   <p slot="text">- President Darryll J. Pines</p>
  * </umd-element-card-overlay>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Feature card with CTA icon -->
@@ -129,11 +132,11 @@ const createComponent: CreateComponentFunction = (element) => {
  *   </div>
  * </umd-element-card-overlay>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

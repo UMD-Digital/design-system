@@ -1,11 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model } from 'model';
+import { Attributes, Model, Register } from 'model';
 import { CommonHeroData } from './common';
-import type {
-  CreateComponentFunction,
-  ComponentRegistration,
-} from '../_types';
-import { createComponentRegistration } from 'model/utilities/register';
+import type { CreateComponentFunction, ComponentRegistration } from '../_types';
 import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 
 /**
@@ -26,24 +22,24 @@ const createComponent: CreateComponentFunction = (element) =>
 
 /**
  * Logo Hero Component
- * 
+ *
  * A hero component that emphasizes the University of Maryland logo.
  * Perfect for brand-focused pages and official communications.
- * 
+ *
  * ## Custom Element
  * `<umd-element-hero-logo>`
- * 
+ *
  * ## Slots
  * - `eyebrow` - Small text above headline
  * - `headline` - Main hero heading (required)
  * - `text` - Supporting text content
  * - `image` - Hero image
  * - `actions` - Call-to-action buttons/links
- * 
+ *
  * ## Attributes
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
- * 
+ *
  * @example
  * ```html
  * <!-- Basic logo hero -->
@@ -53,7 +49,7 @@ const createComponent: CreateComponentFunction = (element) =>
  *   <img slot="image" src="campus-beauty.jpg" alt="Campus scene">
  * </umd-element-hero-logo>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Dark theme logo hero with actions -->
@@ -70,11 +66,11 @@ const createComponent: CreateComponentFunction = (element) =>
  *   </div>
  * </umd-element-hero-logo>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const LogoHero: ComponentRegistration = createComponentRegistration({
+const LogoHero: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   afterConnect: CommonLifecycleHooks.loadOnConnect,

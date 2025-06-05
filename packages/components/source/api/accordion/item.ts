@@ -1,10 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import {
-  CreateComponentFunction,
-  SlotConfiguration,
-} from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
+import { Attributes, Slots, Register } from 'model';
+import { CreateComponentFunction, SlotConfiguration } from '../_types';
 
 /**
  * Tag name for the accordion item web component
@@ -110,7 +106,7 @@ const attributes = Attributes.handler.common.accordion();
  * @category Components
  * @since 1.0.0
  */
-export default createComponentRegistration({
+export default Register.webComponent({
   tagName,
   slots,
   createComponent,

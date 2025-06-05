@@ -1,9 +1,12 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
-import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
-import { Attributes, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
+import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
 
 // Tag name for the cards carousel component
 const tagName = 'umd-element-carousel-cards';
@@ -19,8 +22,8 @@ const slots: SlotConfiguration = {
 };
 
 // Attribute handlers for the cards carousel component
-const attributes = Attributes.handler.common.resize(
-  (element) => element.events?.resize()
+const attributes = Attributes.handler.common.resize((element) =>
+  element.events?.resize(),
 );
 
 /**
@@ -95,7 +98,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,

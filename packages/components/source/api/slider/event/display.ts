@@ -5,7 +5,6 @@ import {
   CommonLifecycleHooks,
 } from '../../../_types';
 import { Attributes, Model, Register, Slots } from 'model';
-import { createComponentRegistration } from 'model/utilities/register';
 
 const tagName = 'umd-element-slider-events';
 
@@ -86,7 +85,9 @@ const tagName = 'umd-element-slider-events';
  * @category Components
  * @since 1.0.0
  */
-const attributes = Attributes.handler.common.resize((element) => element.events?.SetDateElementsSizes());
+const attributes = Attributes.handler.common.resize((element) =>
+  element.events?.SetDateElementsSizes(),
+);
 
 const createComponent: CreateComponentFunction = (element) => {
   const dataSlider = document.createElement('div');
@@ -186,7 +187,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   attributes: [attributes],

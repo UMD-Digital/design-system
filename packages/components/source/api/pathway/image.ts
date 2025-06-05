@@ -1,12 +1,9 @@
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots } from 'model';
-import { CommonPathwayData } from './common';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
-import {
-  CreateComponentFunction,
-} from '../_types';
+import { CommonPathwayData } from './common';
 import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
-import { createComponentRegistration } from '../../model/utilities/register';
+import { CreateComponentFunction } from '../_types';
 
 /**
  * Tag name for the pathway web component
@@ -243,7 +240,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export default createComponentRegistration({
+export default Register.webComponent({
   tagName,
   createComponent,
   afterConnect: CommonLifecycleHooks.loadAnimation,

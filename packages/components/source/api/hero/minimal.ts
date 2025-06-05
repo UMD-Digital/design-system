@@ -1,11 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model } from 'model';
+import { Attributes, Model, Register } from 'model';
 import { CommonHeroData } from './common';
-import type {
-  CreateComponentFunction,
-  ComponentRegistration,
-} from '../_types';
-import { createComponentRegistration } from 'model/utilities/register';
+import type { CreateComponentFunction, ComponentRegistration } from '../_types';
 import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 
 /**
@@ -32,26 +28,26 @@ const createComponent: CreateComponentFunction = (element) =>
 
 /**
  * Minimal Hero Component
- * 
+ *
  * A simplified hero component with clean design and multiple theme options.
  * Ideal for interior pages and content-focused layouts.
- * 
+ *
  * ## Custom Element
  * `<umd-element-hero-minimal>`
- * 
+ *
  * ## Slots
  * - `eyebrow` - Small text above headline
  * - `headline` - Main hero heading (required)
  * - `text` - Supporting text content
  * - `image` - Hero image
  * - `actions` - Call-to-action buttons/links
- * 
+ *
  * ## Attributes
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
  *   - `light` - Light theme styling
  *   - `maryland` - Maryland brand theme
- * 
+ *
  * @example
  * ```html
  * <!-- Basic minimal hero -->
@@ -60,7 +56,7 @@ const createComponent: CreateComponentFunction = (element) =>
  *   <p slot="text">Explore over 100 undergraduate majors</p>
  * </umd-element-hero-minimal>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Minimal hero with light theme and image -->
@@ -68,7 +64,7 @@ const createComponent: CreateComponentFunction = (element) =>
  *   <p slot="eyebrow">College of Engineering</p>
  *   <h1 slot="headline">Aerospace Engineering</h1>
  *   <p slot="text">
- *     Prepare for a career designing the next generation of 
+ *     Prepare for a career designing the next generation of
  *     aircraft and spacecraft.
  *   </p>
  *   <img slot="image" src="aerospace-lab.jpg" alt="Aerospace laboratory">
@@ -77,7 +73,7 @@ const createComponent: CreateComponentFunction = (element) =>
  *   </div>
  * </umd-element-hero-minimal>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Maryland theme minimal hero -->
@@ -89,11 +85,11 @@ const createComponent: CreateComponentFunction = (element) =>
  *   </div>
  * </umd-element-hero-minimal>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */
-const MinimalHero: ComponentRegistration = createComponentRegistration({
+const MinimalHero: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   afterConnect: CommonLifecycleHooks.loadOnConnect,

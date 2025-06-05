@@ -37,10 +37,10 @@ import { createCustomElement } from '../model/index';
 /**
  * Helper to create a standard component registration function.
  * This simplifies the component export pattern and ensures consistency.
- * 
+ *
  * @param config - Component configuration
  * @returns Registration function that can be called to register the component
- * 
+ *
  * @example
  * ```typescript
  * export default createComponentRegistration({
@@ -51,7 +51,7 @@ import { createCustomElement } from '../model/index';
  * });
  * ```
  */
-export function createComponentRegistration(
+export function webComponent(
   config: ComponentConfiguration,
 ): ComponentRegistration {
   return () => {

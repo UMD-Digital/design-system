@@ -78,6 +78,14 @@ const ComponentConfig = (config: ComponentConfig) => {
   };
 };
 
+/**
+ * Base class for all web components created by the Model system.
+ * Extends HTMLElement with shadow DOM support, attribute observation,
+ * slot validation, and lifecycle management.
+ * 
+ * @internal This class is not meant to be extended directly.
+ * Use `createCustomElement` to create components.
+ */
 class BaseComponent extends HTMLElement {
   static componentConfig: ComponentConfig;
 
@@ -349,6 +357,7 @@ const createCustomElement = (config: ComponentConfig): typeof BaseComponent => {
 
 export {
   createCustomElement,
+  BaseComponent,
   type ElementRef,
   type ComponentConfig,
   type AttributeConfig,

@@ -2,9 +2,8 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
-  CommonLifecycleHooks,
 } from '../../_types';
-import { Attributes, Model, Register } from 'model';
+import { Attributes, Register, Lifecycle } from 'model';
 
 const tagName = 'umd-element-social-sharing';
 
@@ -162,7 +161,7 @@ const createComponent: CreateComponentFunction = (element) =>
 const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });
 
 export default registration;

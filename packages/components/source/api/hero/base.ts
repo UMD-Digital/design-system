@@ -1,8 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots, Register } from 'model';
+import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { Markup } from 'utilities';
 import { CommonHeroData } from './common';
-import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 import type { CreateComponentFunction, ComponentRegistration } from '../_types';
 
 /**
@@ -174,7 +173,7 @@ const createComponent: CreateComponentFunction = (element) => {
 const BaseHero: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });
 
 export default BaseHero;

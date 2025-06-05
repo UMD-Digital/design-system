@@ -10,7 +10,7 @@ import type { ComponentRef } from '../types';
 /**
  * Common lifecycle hooks for component initialization and state management
  */
-export const CommonLifecycleHooks = {
+export const hooks = {
   /**
    * Standard afterConnect that calls the component's load event
    */
@@ -34,3 +34,8 @@ export const CommonLifecycleHooks = {
    */
   resizeOnConnect: (ref: ComponentRef) => ref?.events?.resize(),
 };
+
+/**
+ * @deprecated Use hooks instead
+ */
+export const CommonLifecycleHooks = hooks;

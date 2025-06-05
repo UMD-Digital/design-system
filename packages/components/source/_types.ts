@@ -10,5 +10,4 @@ export * from './api/_types';
 
 // Re-export utility functions and constants
 export { webComponent } from './model/utilities/register';
-export { CommonLifecycleHooks } from './model/utilities/lifecycle';
 export { isHTMLElement } from './utilities/markup/validate';

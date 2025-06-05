@@ -1,8 +1,7 @@
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots, Register } from 'model';
+import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { Markup } from 'utilities';
 import { CommonPathwayData } from './common';
-import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
 import { CreateComponentFunction } from '../_types';
 
 /**
@@ -243,5 +242,5 @@ const createComponent: CreateComponentFunction = (element) => {
 export default Register.webComponent({
   tagName,
   createComponent,
-  afterConnect: CommonLifecycleHooks.loadAnimation,
+  afterConnect: Lifecycle.hooks.loadAnimation,
 });

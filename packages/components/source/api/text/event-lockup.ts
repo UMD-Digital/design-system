@@ -2,9 +2,8 @@ import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
-  CommonLifecycleHooks,
 } from '../../_types';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Model, Register, Slots, Lifecycle } from 'model';
 import * as Utilities from 'utilities';
 
 const tagName = 'umd-element-events-date';
@@ -179,7 +178,7 @@ const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   attributes: [attributes],
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });
 
 export default registration;

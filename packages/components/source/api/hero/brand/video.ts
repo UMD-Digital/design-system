@@ -1,10 +1,9 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Model, Slots, Register } from 'model';
+import { Model, Slots, Register, Lifecycle } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
 } from '../../_types';
-import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 
 /**
  * Tag name for the brand video hero component
@@ -77,7 +76,7 @@ const createComponent: CreateComponentFunction = (element) => {
 const BrandVideoHero: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });
 
 export default BrandVideoHero;

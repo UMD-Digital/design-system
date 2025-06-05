@@ -2,9 +2,8 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
-  CommonLifecycleHooks,
 } from '../../../_types';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Model, Register, Slots, Lifecycle } from 'model';
 
 const tagName = 'umd-element-slider-events';
 
@@ -191,7 +190,7 @@ const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
   attributes: [attributes],
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });
 
 export default registration;

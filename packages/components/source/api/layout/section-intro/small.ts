@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots, Register } from 'model';
+import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { CommonIntroData } from './common';
-import { CommonLifecycleHooks } from '../../../model/utilities/lifecycle';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-section-intro';
@@ -77,7 +76,7 @@ const createComponent: CreateComponentFunction = (element) =>
 const registration: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
-  afterConnect: CommonLifecycleHooks.loadAnimation,
+  afterConnect: Lifecycle.hooks.loadAnimation,
 });
 
 export default registration;

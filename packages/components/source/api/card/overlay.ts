@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots, Register } from 'model';
+import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { Markup } from 'utilities';
-import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -140,7 +139,7 @@ const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });
 
 export default registration;

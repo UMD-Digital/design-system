@@ -1,8 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register } from 'model';
+import { Attributes, Model, Register, Lifecycle } from 'model';
 import { CommonHeroData } from './common';
 import type { CreateComponentFunction, ComponentRegistration } from '../_types';
-import { CommonLifecycleHooks } from 'model/utilities/lifecycle';
 
 /**
  * Tag name for the minimal hero component
@@ -92,7 +91,7 @@ const createComponent: CreateComponentFunction = (element) =>
 const MinimalHero: ComponentRegistration = Register.webComponent({
   tagName,
   createComponent,
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });
 
 export default MinimalHero;

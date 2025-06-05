@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Register } from 'model';
+import { Attributes, Register, Lifecycle } from 'model';
 import { CreateComponentFunction, LayoutProps } from '../_types';
-import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
 
 const tagName = 'umd-element-scroll-top';
 
@@ -62,5 +61,5 @@ const createComponent: CreateComponentFunction = (element) => {
 export default Register.webComponent({
   tagName,
   createComponent,
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });

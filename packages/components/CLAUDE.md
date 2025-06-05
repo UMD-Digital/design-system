@@ -57,7 +57,10 @@ Implementations are organized by domain:
     - `Attributes.handler.common.visualShowHide()` - Show/hide handlers
     - `Attributes.handler.common.accordion()` - Accordion-specific handlers
 - **Lifecycle Utilities** (`source/model/utilities/lifecycle.ts`)
-  - `CommonLifecycleHooks` - Standard hooks (loadOnConnect, loadAnimation, resizeOnConnect)
+  - Access via `Lifecycle.hooks` - Standard hooks:
+    - `Lifecycle.hooks.loadOnConnect` - Calls component's load event
+    - `Lifecycle.hooks.loadAnimation` - Sets up component animations with delay
+    - `Lifecycle.hooks.resizeOnConnect` - Calls component's resize event
 - **Registration Utilities** (`source/model/utilities/register.ts`)
   - `Register.webComponent` - Helper to create and register web components
 - **Validation Utilities** (`source/utilities/markup/validate.ts`)
@@ -81,7 +84,6 @@ import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
 
 // Relative imports
-import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
 import { CommonPersonData } from './common';
 
 // Type imports
@@ -91,6 +93,8 @@ import type {
   SlotConfiguration,
 } from '../_types';
 ```
+
+Note: `Lifecycle` is imported as part of the `model` import, so lifecycle hooks are accessed via `Lifecycle.hooks.loadOnConnect`, etc.
 
 ### Component Implementation Pattern
 
@@ -196,7 +200,7 @@ const registration: ComponentRegistration = Register.webComponent({
   slots,
   createComponent,
   attributes: [attributes], // Note: array format for multiple handlers
-  afterConnect: CommonLifecycleHooks.loadOnConnect,
+  afterConnect: Lifecycle.hooks.loadOnConnect,
 });
 
 export default registration;

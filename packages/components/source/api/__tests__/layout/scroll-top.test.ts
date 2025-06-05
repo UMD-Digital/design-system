@@ -110,7 +110,7 @@ describe('Component: umd-element-scroll-top', () => {
     });
 
     it('should use loadOnConnect lifecycle hook', () => {
-      // The component uses CommonLifecycleHooks.loadOnConnect
+      // The component uses Lifecycle.hooks.loadOnConnect
       const { element } = createTestComponent(tagName);
       // Component should be connected and loaded
       expect(element).toBeInstanceOf(HTMLElement);

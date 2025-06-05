@@ -43,5 +43,6 @@ export {
   isTheme,
   isVisual,
   getValue,
+  type AttributeElementProps,
 } from './checks';
 export { handler, names, values, AttributeHandlerTypes };

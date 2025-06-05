@@ -63,8 +63,10 @@
 import * as Attributes from './attributes';
 import * as Model from './model';
 import * as Register from './utilities/register';
-import Slots from './slots';
+import Slots, { type SlotProps } from './slots';
 import * as Types from './types';
 import * as Lifecycle from './utilities/lifecycle';
+import { type BaseProps, type OptionalProps, type SlotResult } from './slots/create';
 
 export { Attributes, Model, Register, Slots, Types, Lifecycle };
+export type { SlotProps, BaseProps, OptionalProps, SlotResult };

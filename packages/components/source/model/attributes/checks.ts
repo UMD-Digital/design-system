@@ -28,8 +28,13 @@ import AttributeNames from './names';
 import AttributesValues from './values';
 
 // Types
+/**
+ * Properties for attribute checking functions
+ */
 interface AttributeElementProps {
+  /** The HTML element to check attributes on */
   element: HTMLElement;
+  /** Default value to return if attribute is not found */
   defaultValue?: boolean;
 }
 

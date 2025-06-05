@@ -1,7 +1,11 @@
 import { SlotNames, type SlotName } from './mapping';
 import { createSlot, type BaseProps, type OptionalProps } from './create';
 
-type SlotProps = BaseProps & Partial<OptionalProps>;
+/**
+ * Properties for creating slot content
+ * Combines base properties with optional configuration
+ */
+export type SlotProps = BaseProps & Partial<OptionalProps>;
 
 const createSlotFactory =
   (type: SlotName, config: Partial<SlotProps> = {}) =>
@@ -75,7 +79,7 @@ const deprecated = {
   plainText: createSlotFactory(SlotNames.deprecated.plainText),
 } as const;
 
-export default {
+const Slots = {
   actions,
   assets,
   contact,
@@ -91,4 +95,5 @@ export default {
   text,
 } as const;
 
+export default Slots;
 export type { SlotName };

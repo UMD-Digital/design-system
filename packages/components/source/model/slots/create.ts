@@ -1,4 +1,8 @@
-interface BaseProps {
+/**
+ * Base properties required for slot creation
+ */
+export interface BaseProps {
+  /** The HTML element to extract slot content from */
   element: HTMLElement;
 }
 
@@ -6,8 +10,13 @@ interface BaseConfig extends BaseProps {
   type: string;
 }
 
-interface OptionalProps {
+/**
+ * Optional properties for slot configuration
+ */
+export interface OptionalProps {
+  /** Whether to apply default styling to the slot content */
   isDefaultStyling: boolean;
+  /** Whether this slot is required */
   isRequired: boolean;
 }
 
@@ -20,7 +29,12 @@ interface SlotValidation extends ValidatonErrors {
 }
 
 type SlotConfig = BaseConfig & Partial<OptionalProps>;
-type SlotResult = HTMLElement | null;
+
+/**
+ * Result type for slot creation operations
+ * Returns either the processed slot element or null if not found
+ */
+export type SlotResult = HTMLElement | null;
 
 const createEmptySlot = (type: string): HTMLSlotElement => {
   const slot = document.createElement('slot');
@@ -90,4 +104,4 @@ const createSlot = ({
     : createEmptySlot(type);
 };
 
-export { createSlot, type BaseProps, type OptionalProps };
+export { createSlot };

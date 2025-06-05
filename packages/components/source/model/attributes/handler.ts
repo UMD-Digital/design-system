@@ -38,7 +38,7 @@ export namespace AttributeHandlerTypes {
    * Callback function type for attribute handlers
    * @typeParam T - The element reference type, defaults to ElementRef
    */
-  type Callback<T = ElementRef> = (arg: T, arg2?: any) => void;
+  export type Callback<T = ElementRef> = (arg: T, arg2?: any) => void;
 
   /**
    * Reference to an element with optional event handlers

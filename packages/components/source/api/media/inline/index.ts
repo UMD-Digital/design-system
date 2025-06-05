@@ -5,7 +5,6 @@ import {
   CreateComponentFunction,
   SlotConfiguration,
 } from '../../_types';
-import { CommonSlots } from '../../../model/slots/common';
 import { CommonLifecycleHooks } from '../../../model/utilities/lifecycle';
 import { createComponentRegistration } from '../../../model/utilities/register';
 
@@ -87,7 +86,7 @@ const slots: SlotConfiguration = {
   caption: {
     allowedElements: ['div', 'p'],
   },
-  text: CommonSlots.text,
+  text: Slots.element.allowed.text,
   wrappingText: {
     allowedElements: ['div', 'p'],
     deprecated:

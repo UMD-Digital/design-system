@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../../_types';
 import { createComponentRegistration } from '../../../model/utilities/register';
-import { CommonSlots } from '../../../model/slots/common';
 import { CommonAttributeHandlers } from '../../../model/attributes/handler';
 import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
@@ -14,16 +13,16 @@ const tagName = 'umd-element-carousel-image';
 // Slot configuration for the single image carousel component
 const slots: SlotConfiguration = {
   images: {
-    ...CommonSlots.image,
+    ...Slots.element.allowed.image,
     required: true,
     allowedElements: ['img'],
   },
   headlines: {
-    ...CommonSlots.headline,
+    ...Slots.element.allowed.headline,
     required: false,
   },
   texts: {
-    ...CommonSlots.text,
+    ...Slots.element.allowed.text,
     required: false,
   },
 };

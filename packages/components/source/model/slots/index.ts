@@ -59,6 +59,13 @@ const text = {
   subText: createSlotFactory(SlotNames.text.sub),
 } as const;
 
+// Import allowed element configurations
+import { allowed } from './element';
+
+const element = {
+  allowed,
+} as const;
+
 // Deprecated slots (marked for removal)
 /** @deprecated Use CommonSlots instead */
 const deprecated = {
@@ -75,6 +82,7 @@ export default {
   content,
   date,
   deprecated,
+  element,
   eyebrow,
   person,
   name: SlotNames,
@@ -84,6 +92,3 @@ export default {
 } as const;
 
 export type { SlotName };
-
-// Export CommonSlots from the new location
-export { CommonSlots } from './common';

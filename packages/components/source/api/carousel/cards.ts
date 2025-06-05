@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
 import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonSlots } from '../../model/slots/common';
 import { CommonAttributeHandlers } from '../../model/attributes/handler';
 import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
 import { Attributes, Slots } from 'model';
@@ -15,9 +14,9 @@ const slots: SlotConfiguration = {
   cards: {
     required: true,
   },
-  headline: CommonSlots.headline,
-  text: CommonSlots.text,
-  actions: CommonSlots.actions,
+  headline: Slots.element.allowed.headline,
+  text: Slots.element.allowed.text,
+  actions: Slots.element.allowed.actions,
 };
 
 // Attribute handlers for the cards carousel component

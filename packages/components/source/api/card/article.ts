@@ -1,6 +1,5 @@
 import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
 import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonSlots } from '../../model/slots/common';
 import CardModel from './_model';
 
 // Tag name for the article card component

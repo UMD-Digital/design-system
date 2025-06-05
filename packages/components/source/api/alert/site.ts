@@ -6,7 +6,6 @@ import {
   SlotConfiguration,
 } from '../_types';
 import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonSlots } from '../../model/slots/common';
 
 /**
  * Tag name for the site alert web component
@@ -20,9 +19,9 @@ const slots: SlotConfiguration = {
   headline: {
     allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
   },
-  body: CommonSlots.body,
-  text: CommonSlots.text,
-  actions: CommonSlots.actions,
+  body: Slots.element.allowed.body,
+  text: Slots.element.allowed.text,
+  actions: Slots.element.allowed.actions,
 };
 
 /**

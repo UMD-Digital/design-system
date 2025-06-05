@@ -1,7 +1,6 @@
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
 import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonSlots } from '../../model/slots/common';
 import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
@@ -23,10 +22,10 @@ const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
 // Slot configuration for the event card component
 const slots: SlotConfiguration = {
   headline: {
-    ...CommonSlots.headline,
+    ...Slots.element.allowed.headline,
     required: true,
   },
-  text: CommonSlots.text,
+  text: Slots.element.allowed.text,
   'date-start-iso': {
     required: true,
     allowedElements: ['time'],
@@ -37,9 +36,9 @@ const slots: SlotConfiguration = {
   location: {
     allowedElements: ['p', 'span'],
   },
-  image: CommonSlots.image,
-  eyebrow: CommonSlots.eyebrow,
-  actions: CommonSlots.actions,
+  image: Slots.element.allowed.image,
+  eyebrow: Slots.element.allowed.eyebrow,
+  actions: Slots.element.allowed.actions,
 };
 
 /**

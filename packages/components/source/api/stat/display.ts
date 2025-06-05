@@ -6,7 +6,6 @@ import {
   ComponentRegistration,
   SlotConfiguration,
 } from '../_types';
-import { CommonSlots } from '../../model/slots/common';
 import { createComponentRegistration } from '../../model/utilities/register';
 
 /**
@@ -23,7 +22,7 @@ const slots: SlotConfiguration = {
   stat: {
     allowedElements: ['span', 'strong', 'em', 'b'],
   },
-  'sub-text': CommonSlots.text,
+  'sub-text': Slots.element.allowed.text,
 };
 
 /**

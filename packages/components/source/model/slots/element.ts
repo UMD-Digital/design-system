@@ -14,7 +14,7 @@ import type { SlotConfig } from '../../api/_types';
  * These pre-defined configurations promote consistency and reduce duplication
  * when defining component slots.
  */
-export const CommonSlots: Record<string, SlotConfig> = {
+export const allowed: Record<string, SlotConfig> = {
   /** Headline slot for headings */
   headline: {
     allowedElements: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'],

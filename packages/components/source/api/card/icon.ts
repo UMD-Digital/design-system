@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
 import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonSlots } from '../../model/slots/common';
 import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
 
@@ -11,12 +10,12 @@ const tagName = 'umd-element-card-icon';
 // Slot configuration for the icon card component
 const slots: SlotConfiguration = {
   headline: {
-    ...CommonSlots.headline,
+    ...Slots.element.allowed.headline,
     required: true,
   },
-  text: CommonSlots.text,
+  text: Slots.element.allowed.text,
   image: {
-    ...CommonSlots.image,
+    ...Slots.element.allowed.image,
     required: true,
   },
 };

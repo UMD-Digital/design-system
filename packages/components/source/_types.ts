@@ -14,21 +14,3 @@ export { CommonAttributeHandlers } from './model/attributes/handler';
 export { CommonLifecycleHooks } from './model/utilities/lifecycle';
 export { isHTMLElement } from './utilities/markup/validate';
 
-// Re-export commonly used slot configurations
-export const CommonSlots = {
-  headline: {
-    allowedElements: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span']
-  },
-  text: {
-    allowedElements: ['p', 'span', 'div']
-  },
-  actions: {
-    allowedElements: ['a', 'button']
-  },
-  image: {
-    allowedElements: ['img']
-  },
-  content: {
-    // Allows any element
-  }
-} as const;

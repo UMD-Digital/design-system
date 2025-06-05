@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import type { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../_types';
 import { createComponentRegistration } from '../../model/utilities/register';
-import { CommonSlots } from '../../model/slots/common';
 import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
 import { Attributes, Slots } from 'model';
 import { Markup } from 'utilities';
@@ -14,13 +13,13 @@ const tagName = 'umd-element-card-overlay';
 // Slot configuration for the overlay card component
 const slots: SlotConfiguration = {
   headline: {
-    ...CommonSlots.headline,
+    ...Slots.element.allowed.headline,
     required: true,
   },
-  text: CommonSlots.text,
-  eyebrow: CommonSlots.eyebrow,
-  image: CommonSlots.image,
-  actions: CommonSlots.actions,
+  text: Slots.element.allowed.text,
+  eyebrow: Slots.element.allowed.eyebrow,
+  image: Slots.element.allowed.image,
+  actions: Slots.element.allowed.actions,
   date: {
     allowedElements: ['p', 'span', 'time'],
   },

@@ -4,7 +4,6 @@ import {
   CreateComponentFunction,
   SlotConfiguration,
 } from '../_types';
-import { CommonSlots } from '../../model/slots/common';
 import { CommonAttributeHandlers } from '../../model/attributes/handler';
 import { createComponentRegistration } from '../../model/utilities/register';
 
@@ -38,13 +37,13 @@ const createComponent: CreateComponentFunction = (element) =>
  */
 const slots: SlotConfiguration = {
   headline: {
-    ...CommonSlots.headline,
+    ...Slots.element.allowed.headline,
     required: true,
     allowedElements: ['span', 'p'],
   },
-  body: CommonSlots.body,
+  body: Slots.element.allowed.body,
   text: {
-    ...CommonSlots.text,
+    ...Slots.element.allowed.text,
     required: true,
   },
 };

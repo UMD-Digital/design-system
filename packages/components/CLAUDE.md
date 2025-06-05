@@ -59,17 +59,38 @@ Implementations are organized by domain:
 - **Lifecycle Utilities** (`source/model/utilities/lifecycle.ts`)
   - `CommonLifecycleHooks` - Standard hooks (loadOnConnect, loadAnimation, resizeOnConnect)
 - **Registration Utilities** (`source/model/utilities/register.ts`)
-  - `createComponentRegistration` - Helper to create registration functions
+  - `Register.webComponent` - Helper to create and register web components
 - **Validation Utilities** (`source/utilities/markup/validate.ts`)
   - `isHTMLElement` - Type guard for HTML elements
 
-#### Import Locations
+#### Import Strategy
 
-Type definitions and helper functions are available from:
-- **Types**: Import from `../_types` (or `../../_types` for nested components)
-- **Common Slots**: Import from `../../model/slots/common`
-- **Attribute Handlers**: Import from `../../model/attributes/handler`
-- **Registration Helper**: Import from `../../model/utilities/register`
+Components should follow this import order pattern:
+1. **External packages** - Third-party libraries (e.g., `@universityofmaryland/web-elements-library`)
+2. **Top-level modules** - From 'model' and 'utilities'
+3. **Relative imports** - Local files and common utilities
+4. **Type imports** - Using `type` or `import type` syntax
+
+Example:
+```typescript
+// External packages
+import { Composite } from '@universityofmaryland/web-elements-library';
+
+// Top-level modules
+import { Attributes, Slots, Register } from 'model';
+import { Markup } from 'utilities';
+
+// Relative imports
+import { CommonLifecycleHooks } from '../../model/utilities/lifecycle';
+import { CommonPersonData } from './common';
+
+// Type imports
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+  SlotConfiguration,
+} from '../_types';
+```
 
 ### Component Implementation Pattern
 
@@ -77,15 +98,14 @@ When creating components, follow this structure:
 
 ```typescript
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
-import {
+import { CommonSlots } from '../../model/slots/common';
+import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../_types';
-import { CommonSlots } from '../../model/slots/common';
-import { createComponentRegistration } from '../../model/utilities/register';
 
 /**
  * Tag name for the [component name] web component
@@ -104,6 +124,13 @@ const slots: SlotConfiguration = {
     required: false,
   },
 };
+
+/**
+ * Attribute handlers for the component (optional)
+ */
+const attributes = Attributes.handler.common.resize((element) => 
+  element.events?.recalculate()
+);
 
 /**
  * Creates a [component name] component with the provided configuration
@@ -154,11 +181,22 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-const registration: ComponentRegistration = createComponentRegistration({
+export default Register.webComponent({
   tagName,
   slots,
   createComponent,
-  attributes: Attributes.handler.common.resize((element) => element.events?.recalculate()), // Optional: add common handlers
+  attributes, // Optional: add common handlers
+});
+
+/**
+ * Alternative with lifecycle hooks:
+ */
+const registration: ComponentRegistration = Register.webComponent({
+  tagName,
+  slots,
+  createComponent,
+  attributes: [attributes], // Note: array format for multiple handlers
+  afterConnect: CommonLifecycleHooks.loadOnConnect,
 });
 
 export default registration;
@@ -215,7 +253,7 @@ When creating or modifying components:
 2. Use `CommonSlots` for standard slot configurations
 3. Implement the `CreateComponentFunction` interface
 4. Use `Attributes.handler.common` for standard behaviors
-5. Export using `createComponentRegistration` helper
+5. Export using `Register.webComponent` directly
 6. Follow the existing naming conventions (umd-[component])
 
 ### Complex Components with Models

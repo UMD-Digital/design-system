@@ -34,7 +34,7 @@ const slots: SlotConfiguration = {
   headline: {
     ...Slots.element.allowed.headline,
     required: true,
-    allowedElements: ['span', 'p'],
+    allowedElements: ['span', 'p', 'h2', 'h3', 'h4', 'h5', 'h6'],
   },
   body: Slots.element.allowed.body,
   text: {

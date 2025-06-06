@@ -44,7 +44,6 @@ const baseElements = [
   'quote',
   'slider-events-feed',
   'slider-events',
-  'tabs',
 ].reduce(
   (acc, name) => ({
     ...acc,
@@ -256,6 +255,13 @@ const socialSharing = createElementStyles(socialSharingTag, {
   },
 });
 
+const tabsTag = 'umd-element-tabs';
+const tabs = createElementStyles(tabsTag, {
+  custom: {
+    [`${tabsTag} + *`]: { marginTop: spacing.lg },
+  },
+});
+
 export default {
   ...elements,
   ...breadcrumb,
@@ -266,4 +272,5 @@ export default {
   ...scrollTop,
   ...sectionIntro,
   ...socialSharing,
+  ...tabs,
 };

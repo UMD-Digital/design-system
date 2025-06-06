@@ -3,7 +3,7 @@
  *
  * This file contains shared type definitions used across all components
  * to ensure consistency and reduce duplication.
- * 
+ *
  * This is a pure type declaration file - no runtime code should be included here.
  * All implementation functions and constants have been moved to their appropriate modules.
  */
@@ -117,7 +117,9 @@ export interface ComponentConfiguration {
   /** Component creation function */
   createComponent: CreateComponentFunction;
   /** Attribute handlers */
-  attributes?: Attributes.AttributeHandlerTypes.Config | Attributes.AttributeHandlerTypes.Config[];
+  attributes?:
+    | Attributes.AttributeHandlerTypes.Config
+    | Attributes.AttributeHandlerTypes.Config[];
   /** Hook called before shadow DOM connection */
   beforeConnect?: (ref: ComponentRef, shadow: ShadowRoot) => void;
   /** Hook called after shadow DOM connection */
@@ -171,4 +173,61 @@ export interface ComponentEvents {
  */
 export interface TypedComponentRef extends Omit<ComponentRef, 'events'> {
   events?: ComponentEvents & Record<string, Function>;
+}
+
+/**
+ * Base event detail for all component events
+ */
+export interface ComponentEventDetail {
+  /** Component tag name */
+  tagName: string;
+  /** Component element reference */
+  element: HTMLElement;
+  /** Timestamp of event */
+  timestamp: number;
+}
+
+/**
+ * Event detail for component:ready event
+ */
+export interface ComponentReadyDetail extends ComponentEventDetail {
+  /** Shadow root reference */
+  shadowRoot: ShadowRoot;
+  /** Component reference with methods */
+  componentRef: ComponentRef;
+}
+
+/**
+ * Event detail for component:error event
+ */
+export interface ComponentErrorDetail extends ComponentEventDetail {
+  /** Error type */
+  type: 'validation' | 'initialization' | 'runtime';
+  /** Error message */
+  message: string;
+  /** Original error or additional details */
+  details?: unknown;
+}
+
+/**
+ * Event detail for component:resize event
+ */
+export interface ComponentResizeDetail extends ComponentEventDetail {
+  /** Previous dimensions */
+  previousSize?: { width: number; height: number };
+  /** Current dimensions */
+  currentSize: { width: number; height: number };
+  /** Source of resize trigger */
+  source: 'attribute' | 'window' | 'manual';
+}
+
+/**
+ * Global type augmentation for component events
+ */
+declare global {
+  interface HTMLElementEventMap {
+    'component:ready': CustomEvent<ComponentReadyDetail>;
+    'component:error': CustomEvent<ComponentErrorDetail>;
+    'component:resize': CustomEvent<ComponentResizeDetail>;
+  }
 }

@@ -1,20 +1,20 @@
 /**
  * Custom Element Model System
- * 
+ *
  * Provides a base class and utilities for creating web components with:
  * - Shadow DOM encapsulation
  * - Attribute observation and handling
  * - Slot validation
  * - Lifecycle management
  * - Error handling
- * 
+ *
  * ## Key Features:
- * 
+ *
  * 1. **Attribute Handling**: Automatic observation and callback execution
  * 2. **Slot Validation**: Required slots, deprecated warnings, element type checking
  * 3. **Lifecycle Hooks**: beforeConnect, afterConnect, onReady
  * 4. **Error Management**: Centralized error handling with custom events
- * 
+ *
  * ## Usage:
  * ```typescript
  * const element = createCustomElement({
@@ -36,7 +36,12 @@
  * ```
  */
 import StylesTemplate from '../utilities/styles';
-import type { SlotConfig } from '../../api/_types';
+import type {
+  SlotConfig,
+  ComponentEventDetail,
+  ComponentReadyDetail,
+  ComponentErrorDetail,
+} from '../../api/_types';
 
 interface AttributeConfig {
   name: string;
@@ -48,7 +53,6 @@ interface ElementRef {
   styles: string;
   events?: Record<string, Function>;
 }
-
 
 interface SlotValidationError {
   slot: string;
@@ -82,7 +86,7 @@ const ComponentConfig = (config: ComponentConfig) => {
  * Base class for all web components created by the Model system.
  * Extends HTMLElement with shadow DOM support, attribute observation,
  * slot validation, and lifecycle management.
- * 
+ *
  * @internal This class is not meant to be extended directly.
  * Use `createCustomElement` to create components.
  */
@@ -196,6 +200,12 @@ class BaseComponent extends HTMLElement {
     }
 
     await this.executeLifecycleCallbacks();
+
+    // Dispatch umdComponent:ready event after all lifecycle callbacks complete
+    this.dispatchComponentEvent<ComponentReadyDetail>('umdComponent:ready', {
+      shadowRoot: this.shadow,
+      componentRef: this.elementRef,
+    });
   }
 
   protected handleAttributeChange(
@@ -218,15 +228,44 @@ class BaseComponent extends HTMLElement {
     this.elementRef = null;
   }
 
-  protected handleError(message: string, error: unknown): void {
-    console.error(`[${this.config.tagName}]`, message, error);
+  /**
+   * Helper method to dispatch component events with consistent structure
+   */
+  protected dispatchComponentEvent<T extends ComponentEventDetail>(
+    eventName: string,
+    detail: Omit<T, 'tagName' | 'element' | 'timestamp'>,
+  ): void {
+    const fullDetail = {
+      ...detail,
+      tagName: this.config.tagName,
+      element: this,
+      timestamp: Date.now(),
+    } as unknown as T;
+
     this.dispatchEvent(
-      new CustomEvent('component-error', {
-        detail: { message, error },
+      new CustomEvent<T>(eventName, {
+        detail: fullDetail,
         bubbles: true,
         composed: true,
       }),
     );
+  }
+
+  protected handleError(message: string, error: unknown): void {
+    console.error(`[${this.config.tagName}]`, message, error);
+
+    // Determine error type based on component state and message
+    const errorType = this.elementRef
+      ? 'runtime'
+      : message.toLowerCase().includes('validation')
+      ? 'validation'
+      : 'initialization';
+
+    this.dispatchComponentEvent<ComponentErrorDetail>('umdComponent:error', {
+      type: errorType,
+      message,
+      details: error,
+    });
   }
 
   private validateSlots(): void {
@@ -325,10 +364,10 @@ class BaseComponent extends HTMLElement {
 
 /**
  * Factory function to create a custom element class.
- * 
+ *
  * @param config - Component configuration including tagName, slots, attributes, and lifecycle hooks
  * @returns Custom element class that extends BaseComponent
- * 
+ *
  * @example
  * ```typescript
  * export default () => {

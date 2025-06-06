@@ -3,21 +3,21 @@ import AttributeValues from './values';
 
 /**
  * Attribute Handler System
- * 
+ *
  * Provides reactive attribute observation for web components.
  * Handlers watch for specific attribute changes and execute callbacks.
- * 
+ *
  * ## Handler Types:
- * 
+ *
  * 1. **State Transitions**: Watch for specific value changes
  *    - e.g., state changing from "closed" to "open"
- * 
+ *
  * 2. **Boolean Triggers**: Watch for true/false changes
  *    - e.g., resize="true" triggers recalculation
- * 
+ *
  * 3. **Value Changes**: Watch for any value change
  *    - e.g., data-layout-position updates
- * 
+ *
  * ## Usage Example:
  * ```typescript
  * const attributes = Attributes.handler.combine(
@@ -78,10 +78,10 @@ export namespace AttributeHandlerTypes {
 /**
  * Combines multiple attribute handlers for the same attribute name.
  * When multiple handlers target the same attribute, they execute in sequence.
- * 
+ *
  * @param configs - Array of attribute handler configurations
  * @returns Combined handler configurations
- * 
+ *
  * @example
  * ```typescript
  * const handlers = combine(
@@ -122,7 +122,7 @@ const combine = (
 
 /**
  * Observes the 'resize' attribute.
- * Triggers callback when resize="true".
+ * Triggers callback when resize="true" and dispatches component:resize event.
  * Commonly used to recalculate component dimensions.
  */
 const resize = ({
@@ -132,7 +132,39 @@ const resize = ({
   name: name || AttributeNames.RESIZE,
   handler: (ref, _, newValue) => {
     if (newValue === AttributeValues.state.TRUE) {
+      const element = ref.element;
+
+      // Capture dimensions before resize
+      const previousSize = {
+        width: element.offsetWidth,
+        height: element.offsetHeight,
+      };
+
+      // Execute resize callback
       callback(ref);
+
+      // Dispatch resize event after callback with updated dimensions
+      setTimeout(() => {
+        const currentSize = {
+          width: element.offsetWidth,
+          height: element.offsetHeight,
+        };
+
+        element.dispatchEvent(
+          new CustomEvent('component:resize', {
+            detail: {
+              tagName: element.tagName.toLowerCase(),
+              element,
+              timestamp: Date.now(),
+              previousSize,
+              currentSize,
+              source: 'attribute',
+            },
+            bubbles: true,
+            composed: true,
+          }),
+        );
+      }, 0);
     }
   },
 });

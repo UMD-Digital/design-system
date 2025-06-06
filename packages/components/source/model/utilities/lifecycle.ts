@@ -39,3 +39,7 @@ export const hooks = {
  * @deprecated Use hooks instead
  */
 export const CommonLifecycleHooks = hooks;
+
+export default {
+  hooks,
+};

@@ -41,6 +41,7 @@ const baseElements = [
   'pathway-highlight',
   'pathway',
   'person-bio',
+  'person-hero',
   'quote',
   'slider-events-feed',
   'slider-events',

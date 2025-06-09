@@ -52,14 +52,6 @@ exports[`typography/sans fonts objects should match snapshot for all fonts objec
     "lineHeight": "1.25em",
     "textWrap": "pretty",
   },
-  "maximum": {
-    "className": "umd-sans-maximum",
-    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    "fontSize": "32px",
-    "fontWeight": "700",
-    "lineHeight": "1.125em",
-    "textWrap": "pretty",
-  },
   "medium": {
     "@media (min-width: 1024px)": {
       "fontSize": "18px",
@@ -210,14 +202,6 @@ exports[`typography/sans should match snapshot 1`] = `
       "lineHeight": "1.25em",
       "textWrap": "pretty",
     },
-    "maximum": {
-      "className": "umd-sans-maximum",
-      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-      "fontSize": "32px",
-      "fontWeight": "700",
-      "lineHeight": "1.125em",
-      "textWrap": "pretty",
-    },
     "medium": {
       "@media (min-width: 1024px)": {
         "fontSize": "18px",
@@ -295,13 +279,6 @@ exports[`typography/sans should match snapshot 1`] = `
     "fontSize": "22px",
     "fontWeight": "700",
     "lineHeight": "1.25em",
-    "textWrap": "pretty",
-  },
-  "maxium": {
-    "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    "fontSize": "32px",
-    "fontWeight": "700",
-    "lineHeight": "1.125em",
     "textWrap": "pretty",
   },
   "medium": {
@@ -476,16 +453,6 @@ exports[`typography/sans should match snapshot 1`] = `
 
 exports[`typography/sans size objects should have correctly defined size values 1`] = `
 {
-  "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-  "fontSize": "32px",
-  "fontWeight": "700",
-  "lineHeight": "1.125em",
-  "textWrap": "pretty",
-}
-`;
-
-exports[`typography/sans size objects should have correctly defined size values 2`] = `
-{
   "@media (min-width: 1024px)": {
     "fontSize": "48px",
     "lineHeight": "1.04em",
@@ -501,7 +468,7 @@ exports[`typography/sans size objects should have correctly defined size values 
 }
 `;
 
-exports[`typography/sans size objects should have correctly defined size values 3`] = `
+exports[`typography/sans size objects should have correctly defined size values 2`] = `
 {
   "@media (min-width: 1024px)": {
     "fontSize": "32px",
@@ -517,7 +484,7 @@ exports[`typography/sans size objects should have correctly defined size values 
 }
 `;
 
-exports[`typography/sans size objects should have correctly defined size values 4`] = `
+exports[`typography/sans size objects should have correctly defined size values 3`] = `
 {
   "@media (min-width: 1024px)": {
     "fontSize": "22px",
@@ -533,7 +500,7 @@ exports[`typography/sans size objects should have correctly defined size values 
 }
 `;
 
-exports[`typography/sans size objects should have correctly defined size values 5`] = `
+exports[`typography/sans size objects should have correctly defined size values 4`] = `
 {
   "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
   "fontSize": "18px",
@@ -542,7 +509,7 @@ exports[`typography/sans size objects should have correctly defined size values 
 }
 `;
 
-exports[`typography/sans size objects should have correctly defined size values 6`] = `
+exports[`typography/sans size objects should have correctly defined size values 5`] = `
 {
   "@media (min-width: 1024px)": {
     "fontSize": "18px",
@@ -557,7 +524,7 @@ exports[`typography/sans size objects should have correctly defined size values 
 }
 `;
 
-exports[`typography/sans size objects should have correctly defined size values 7`] = `
+exports[`typography/sans size objects should have correctly defined size values 6`] = `
 {
   "@media (min-width: 1024px)": {
     "fontSize": "16px",
@@ -572,7 +539,7 @@ exports[`typography/sans size objects should have correctly defined size values 
 }
 `;
 
-exports[`typography/sans size objects should have correctly defined size values 8`] = `
+exports[`typography/sans size objects should have correctly defined size values 7`] = `
 {
   "@media (min-width: 1024px)": {
     "fontSize": "14px",
@@ -587,7 +554,7 @@ exports[`typography/sans size objects should have correctly defined size values 
 }
 `;
 
-exports[`typography/sans size objects should have correctly defined size values 9`] = `
+exports[`typography/sans size objects should have correctly defined size values 8`] = `
 {
   "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
   "fontSize": "12px",

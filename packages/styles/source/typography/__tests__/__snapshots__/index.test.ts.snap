@@ -651,14 +651,6 @@ exports[`typography module should match snapshot 1`] = `
         "lineHeight": "1.25em",
         "textWrap": "pretty",
       },
-      "maximum": {
-        "className": "umd-sans-maximum",
-        "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-        "fontSize": "32px",
-        "fontWeight": "700",
-        "lineHeight": "1.125em",
-        "textWrap": "pretty",
-      },
       "medium": {
         "@media (min-width: 1024px)": {
           "fontSize": "18px",
@@ -736,13 +728,6 @@ exports[`typography module should match snapshot 1`] = `
       "fontSize": "22px",
       "fontWeight": "700",
       "lineHeight": "1.25em",
-      "textWrap": "pretty",
-    },
-    "maxium": {
-      "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-      "fontSize": "32px",
-      "fontWeight": "700",
-      "lineHeight": "1.125em",
       "textWrap": "pretty",
     },
     "medium": {

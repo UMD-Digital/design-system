@@ -101,28 +101,6 @@ const sizeMin = {
 };
 
 /**
- * Maximum size sans-serif typography style.
- * @type {object}
- * @property {string} fontFamily - Sans-serif font family
- * @property {string} fontWeight - Bold weight
- * @property {string} fontSize - Extra large font size (4xl/32px)
- * @property {string} lineHeight - Appropriate line height for size
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * // Use in object spread syntax
- * const myStyle = { ...Styles.typography.sans.maxium };
- * ```
- * @since 1.1.0
- */
-export const maxium = {
-  fontFamily: font.family['sans'],
-  fontWeight: font.weight['bold'],
-  textWrap: 'pretty',
-  ...sizeExtraLarge,
-};
-
-/**
  * Largest size sans-serif typography style with responsive scaling.
  * @type {object}
  * @property {string} fontFamily - Sans-serif font family
@@ -376,11 +354,6 @@ export const scalingMin = {
  * @since 1.1.0
  */
 export const fonts = {
-  maximum: create.jss.objectWithClassName({
-    className: 'umd-sans-maximum',
-    ...maxium,
-  }),
-
   largest: create.jss.objectWithClassName({
     className: 'umd-sans-largest',
     ...largest,

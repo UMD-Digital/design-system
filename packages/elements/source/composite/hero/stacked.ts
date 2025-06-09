@@ -55,8 +55,8 @@ const OverwriteEyebrow = `
     },
   })}
 
-  .${OVERWRITE_EYEBROW} {
-    color: ${token.color.black}
+  ${OVERWRITE_EYEBROW} {
+    color: ${token.color.black} !important;
   }
 `;
 

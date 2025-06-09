@@ -136,6 +136,10 @@ const LogoColumnStyles = `
     max-width: 350px;
   }
 
+  .${ELEMENT_HEADER_LOGO}:has(img[src*=".svg"]) img {
+    height: 240px;
+  }
+
   ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}`]: typography.sans.larger,

@@ -19,24 +19,22 @@ const { SlotWithDefaultStyling } = Markup.create;
  */
 const slots: SlotConfiguration = {
   stat: Slots.element.allowed.subHeadline,
-
   'sub-text': Slots.element.allowed.text,
 };
 
 /**
  * Creates a statistic display component with the provided configuration
  */
-const createComponent: CreateComponentFunction = (element) => {
-  return Composite.stat.display({
+const createComponent: CreateComponentFunction = (element) =>
+  Composite.stat.display({
     isThemeDark: Attributes.isTheme.dark({ element }),
-    displayType: element.getAttribute(Attributes.names.DISPLAY_TYPE),
+    isDisplayBlock: Attributes.isDisplay.block({ element }),
     size: element.getAttribute(Attributes.names.DISPLAY_SIZE),
     hasLine: Attributes.hasDecoration.line({ element }) || false,
     stat: SlotWithDefaultStyling({ element, slotRef: Slots.name.STAT }),
     text: Slots.text.default({ element }),
     subText: Slots.text.subText({ element }),
   });
-};
 
 /**
  * Statistic Display

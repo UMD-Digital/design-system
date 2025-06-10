@@ -1,6 +1,7 @@
 // Values
 
 const display = {
+  BLOCK: 'block',
   FEATURE: 'feature',
   FEATURED: 'featured',
   HERO: 'hero',

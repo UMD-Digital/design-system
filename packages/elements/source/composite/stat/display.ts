@@ -12,7 +12,7 @@ type TypeStatElement = {
 
 type TypeStatRequirements = TypeStatElement & {
   isThemeDark?: boolean;
-  displayType?: string | null;
+  isDisplayBlock?: boolean;
   size?: string | null;
   hasLine?: boolean;
   text?: HTMLElement | null;
@@ -317,14 +317,14 @@ const MakeDefaultLayout = (props: TypeStatRequirements) => {
 };
 
 export default (props: TypeStatRequirements) => {
-  const { displayType, hasLine } = props;
+  const { isDisplayBlock, hasLine } = props;
   const container = document.createElement('div');
   const wrapper = MakeDefaultLayout(props);
   let styles = STYLES_STAT_ELEMENT;
 
   container.classList.add(ELEMENT_STAT_CONTAINER);
 
-  if (displayType === 'block') {
+  if (isDisplayBlock) {
     const block = document.createElement('div');
     block.classList.add(ELEMENT_DISPLAY_BLOCK);
     block.innerHTML = BLOCK_TEXTURE;

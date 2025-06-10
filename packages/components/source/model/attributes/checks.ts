@@ -232,6 +232,18 @@ const isData = {
 
 // Display checks
 const isDisplay = {
+  block: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.DISPLAY_TYPE,
+      attributeNameNew: AttributeNames.display,
+      attributeValue: AttributesValues.display.BLOCK,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display,
+      attributeValue: AttributesValues.display.BLOCK,
+    }),
   feature: createAttributeCheck(
     AttributeNames.DISPLAY,
     AttributesValues.display.FEATURE,

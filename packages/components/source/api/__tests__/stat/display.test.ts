@@ -116,39 +116,39 @@ describe('Component: umd-element-stat', () => {
       expect(attributes['data-theme']).toBe('dark');
     });
 
-    it('should handle data-type attribute with different values', () => {
-      const types = ['inline', 'block', 'featured'];
+    it('should handle data-display attribute with different values', () => {
+      const displays = ['inline', 'block', 'featured'];
       
-      for (const type of types) {
+      for (const display of displays) {
         const { element } = createTestComponent(tagName, '', {
-          'data-type': type
+          'data-display': display
         });
       const attributes = getComponentAttributes(element);
-        expect(attributes['data-type']).toBe(type);
+        expect(attributes['data-display']).toBe(display);
         
         cleanupComponents();
       }
     });
 
-    it('should handle data-size attribute with different values', () => {
+    it('should handle data-visual-size attribute with different values', () => {
       const sizes = ['small', 'medium', 'large'];
       
       for (const size of sizes) {
         const { element } = createTestComponent(tagName, '', {
-          'data-size': size
+          'data-visual-size': size
         });
       const attributes = getComponentAttributes(element);
-        expect(attributes['data-size']).toBe(size);
+        expect(attributes['data-visual-size']).toBe(size);
         
         cleanupComponents();
       }
     });
 
-    it('should handle data-has-line attribute', () => {
+    it('should handle data-decoration-line attribute', () => {
       const { element } = createTestComponent(tagName, '', {
-        'data-has-line': ''
+        'data-decoration-line': ''
       });
-      expect(element.hasAttribute('data-has-line')).toBe(true);
+      expect(element.hasAttribute('data-decoration-line')).toBe(true);
     });
 
     it('should handle deprecated theme attribute with warning', async () => {
@@ -166,7 +166,7 @@ describe('Component: umd-element-stat', () => {
           'type': 'featured'
         });});
       
-      expect(validateDeprecatedAttribute(warnings, 'type', 'data-type')).toBe(true);
+      expect(validateDeprecatedAttribute(warnings, 'type', 'data-display')).toBe(true);
     });
 
     it('should handle deprecated size attribute with warning', async () => {
@@ -175,7 +175,7 @@ describe('Component: umd-element-stat', () => {
           'size': 'large'
         });});
       
-      expect(validateDeprecatedAttribute(warnings, 'size', 'data-size')).toBe(true);
+      expect(validateDeprecatedAttribute(warnings, 'size', 'data-visual-size')).toBe(true);
     });
 
     it('should handle deprecated has-line attribute with warning', async () => {
@@ -184,7 +184,16 @@ describe('Component: umd-element-stat', () => {
           'has-line': ''
         });});
       
-      expect(validateDeprecatedAttribute(warnings, 'has-line', 'data-has-line')).toBe(true);
+      expect(validateDeprecatedAttribute(warnings, 'has-line', 'data-decoration-line')).toBe(true);
+    });
+
+    it('should handle deprecated display-type attribute with warning', async () => {
+      const warnings = await captureWarningsAsync(async () => {
+        const { element } = createTestComponent(tagName, '', {
+          'display-type': 'block'
+        });});
+      
+      expect(validateDeprecatedAttribute(warnings, 'display-type', 'data-display')).toBe(true);
     });
   });
 
@@ -208,24 +217,24 @@ describe('Component: umd-element-stat', () => {
 
     it('should create inline stat display', () => {
       const { element } = createTestComponent(tagName, '', {
-        'data-type': 'inline',
-        'data-size': 'small'
+        'data-display': 'inline',
+        'data-visual-size': 'small'
       });
       
       element.appendChild(createSlotContent('stat', 'span', '12:1'));
       const text = document.createElement('p');
       text.textContent = 'Student-Faculty Ratio';
       element.appendChild(text)
-      expect(element.getAttribute('data-type')).toBe('inline');
-      expect(element.getAttribute('data-size')).toBe('small');
+      expect(element.getAttribute('data-display')).toBe('inline');
+      expect(element.getAttribute('data-visual-size')).toBe('small');
     });
 
     it('should create featured stat with all options', () => {
       const { element } = createTestComponent(tagName, '', {
-        'data-type': 'featured',
-        'data-size': 'large',
+        'data-display': 'featured',
+        'data-visual-size': 'large',
         'data-theme': 'dark',
-        'data-has-line': ''
+        'data-decoration-line': ''
       });
       
       element.appendChild(createSlotContent('stat', 'span', '#1'));
@@ -233,10 +242,10 @@ describe('Component: umd-element-stat', () => {
       text.textContent = 'Public University in Maryland';
       element.appendChild(text);
       element.appendChild(createSlotContent('sub-text', 'p', 'According to rankings'));
-      expect(element.getAttribute('data-type')).toBe('featured');
-      expect(element.getAttribute('data-size')).toBe('large');
+      expect(element.getAttribute('data-display')).toBe('featured');
+      expect(element.getAttribute('data-visual-size')).toBe('large');
       expect(element.getAttribute('data-theme')).toBe('dark');
-      expect(element.hasAttribute('data-has-line')).toBe(true);
+      expect(element.hasAttribute('data-decoration-line')).toBe(true);
     });
   });
 });

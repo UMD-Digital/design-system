@@ -54,21 +54,17 @@ const createComponent: CreateComponentFunction = (element) =>
  * ## Attributes
  * - `data-theme` - Color theme of the component:
  *   - `dark` - Dark background with light text
- * - `data-type` - Display style variant:
- *   - `inline` - Inline text style
+ * - `data-display` - Display style variant:
  *   - `block` - Block-level display
- *   - `featured` - Emphasized presentation
- * - `data-size` - Size of the statistic display:
- *   - `small` - Compact size
- *   - `medium` - Default size
+ * - `data-visual-size` - Size of the statistic display:
  *   - `large` - Prominent size
- * - `data-has-line` - Add decorative line element:
+ * - `data-decoration-line` - Add decorative line element:
  *   - When present - Shows accent line
  *
  * @example
  * ```html
- * <!-- Basic statistic -->
- * <umd-element-stat>
+ * <!-- Basic block statistic -->
+ * <umd-element-stat data-display="block">
  *   <span slot="stat">40,000+</span>
  *   <p>Students Enrolled</p>
  * </umd-element-stat>
@@ -76,8 +72,8 @@ const createComponent: CreateComponentFunction = (element) =>
  *
  * @example
  * ```html
- * <!-- Featured statistic with sub-text -->
- * <umd-element-stat data-type="featured" data-size="large">
+ * <!-- Block statistic with sub-text and large size -->
+ * <umd-element-stat data-display="block" data-visual-size="large">
  *   <span slot="stat">$500M</span>
  *   <p>Annual Research Funding</p>
  *   <p slot="sub-text">Supporting groundbreaking discoveries across all disciplines</p>
@@ -86,8 +82,8 @@ const createComponent: CreateComponentFunction = (element) =>
  *
  * @example
  * ```html
- * <!-- Dark theme with accent line -->
- * <umd-element-stat data-theme="dark" data-has-line>
+ * <!-- Dark theme block with accent line -->
+ * <umd-element-stat data-display="block" data-theme="dark" data-decoration-line>
  *   <span slot="stat">#1</span>
  *   <p>Public University in Maryland</p>
  *   <p slot="sub-text">According to U.S. News & World Report</p>
@@ -96,17 +92,17 @@ const createComponent: CreateComponentFunction = (element) =>
  *
  * @example
  * ```html
- * <!-- Inline statistics group -->
+ * <!-- Block statistics group -->
  * <div class="stats-row">
- *   <umd-element-stat data-type="inline" data-size="small">
+ *   <umd-element-stat data-display="block">
  *     <span slot="stat">12:1</span>
  *     <p>Student-Faculty Ratio</p>
  *   </umd-element-stat>
- *   <umd-element-stat data-type="inline" data-size="small">
+ *   <umd-element-stat data-display="block">
  *     <span slot="stat">300+</span>
  *     <p>Academic Programs</p>
  *   </umd-element-stat>
- *   <umd-element-stat data-type="inline" data-size="small">
+ *   <umd-element-stat data-display="block">
  *     <span slot="stat">90%</span>
  *     <p>Job Placement Rate</p>
  *   </umd-element-stat>

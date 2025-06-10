@@ -15,9 +15,8 @@ const tagName = 'umd-element-carousel-multiple-image';
 // Slot configuration for the multiple image carousel component
 const slots: SlotConfiguration = {
   images: {
-    ...Slots.element.allowed.image,
     required: true,
-    allowedElements: ['img'],
+    allowedElements: ['div', 'img'],
   },
 };
 

@@ -22,11 +22,9 @@ const slots: SlotConfiguration = {
   eyebrow: Slots.element.allowed.eyebrow,
   image: Slots.element.allowed.image,
   actions: Slots.element.allowed.actions,
-  date: {
-    allowedElements: ['p', 'span', 'time'],
-  },
+  date: Slots.element.allowed.time,
   'cta-icon': {
-    allowedElements: ['span', 'svg'],
+    allowedElements: ['a'],
   },
 };
 

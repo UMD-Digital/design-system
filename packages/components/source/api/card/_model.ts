@@ -25,11 +25,9 @@ const createCardComponent = ({ tagName }: CardConfig) => {
   const slots = {
     headline: {
       required: true,
-      allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
+      ...Slots.element.allowed.subHeadline,
     },
-    body: {
-      allowedElements: ['div', 'p'],
-    },
+    body: Slots.element.allowed.text,
   };
 
   const createComponentData = (element: HTMLElement): CardData => ({

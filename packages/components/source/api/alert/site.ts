@@ -15,9 +15,7 @@ const tagName = 'umd-element-alert-site';
  * Slot configuration for the site alert component
  */
 const slots: SlotConfiguration = {
-  headline: {
-    allowedElements: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'],
-  },
+  headline: Slots.element.allowed.headline,
   body: Slots.element.allowed.body,
   text: Slots.element.allowed.text,
   actions: Slots.element.allowed.actions,

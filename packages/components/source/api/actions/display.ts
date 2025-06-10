@@ -18,12 +18,12 @@ const tagName = 'umd-element-call-to-action';
  */
 const slots: SlotConfiguration = {
   text: {
-    allowedElements: ['a'],
+    allowedElements: ['a', 'button'],
   },
   plainText: {
     deprecated:
       'Use "text" instead. This attribute will be removed in version 2.0.',
-    allowedElements: ['a'],
+    allowedElements: ['a', 'button'],
   },
 };
 

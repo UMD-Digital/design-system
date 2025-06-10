@@ -9,6 +9,7 @@
 import type { SlotConfig } from '../../api/_types';
 
 const subHeadlineElements = ['h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
+const textElements = ['div', 'p', 'span', 'strong'];
 
 /**
  * Common slot configurations used across multiple components
@@ -17,38 +18,33 @@ const subHeadlineElements = ['h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
  * when defining component slots.
  */
 export const allowed: Record<string, SlotConfig> = {
-  /** Headline slot for headings */
-  headline: {
-    allowedElements: ['h1', ...subHeadlineElements],
-  },
-  /** Sub Headline slot for headings */
-  subHeadline: {
-    allowedElements: subHeadlineElements,
-  },
-  /** Text content slot */
-  text: {
-    allowedElements: ['div', 'p'],
-  },
-  /** Deprecated body slot - use text instead */
-  body: {
-    deprecated:
-      'Use "text" instead. This attribute will be removed in version 2.0.',
-    allowedElements: ['div', 'p'],
-  },
-  /** Actions slot for buttons and links */
   actions: {
     allowedElements: ['div', 'a', 'button', 'umd-element-call-to-action'],
   },
-  /** Image slot */
-  image: {
-    allowedElements: ['img', 'picture'],
+  body: {
+    deprecated:
+      'Use "text" instead. This attribute will be removed in version 2.0.',
+    allowedElements: [...textElements],
   },
-  /** Eyebrow text above headlines */
+  content: {
+    allowedElements: ['div'],
+  },
   eyebrow: {
     allowedElements: ['span', 'p'],
   },
-  /** Generic content container */
-  content: {
-    allowedElements: ['div'],
+  headline: {
+    allowedElements: ['h1', ...subHeadlineElements],
+  },
+  image: {
+    allowedElements: ['a', 'img', 'svg', 'picture', 'figure'],
+  },
+  subHeadline: {
+    allowedElements: subHeadlineElements,
+  },
+  text: {
+    allowedElements: [...textElements],
+  },
+  time: {
+    allowedElements: ['time'],
   },
 };

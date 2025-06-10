@@ -24,8 +24,8 @@ const slots: SlotConfiguration = {
   'additional-contact': {},
   image: { allowedElements: ['img'] },
   'sub-text': {},
-  actions: { allowedElements: ['a', 'button'] },
-  breadcrumb: { allowedElements: ['nav', 'ol', 'ul'] },
+  actions: Slots.element.allowed.actions,
+  breadcrumb: { allowedElements: ['umd-element-breadcrumb'] },
 };
 
 const createComponent: CreateComponentFunction = (element) => {

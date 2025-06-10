@@ -17,10 +17,7 @@ const slots: SlotConfiguration = {
     required: true,
   },
   text: Slots.element.allowed.text,
-  image: {
-    ...Slots.element.allowed.image,
-    required: true,
-  },
+  image: Slots.element.allowed.image,
 };
 
 /**

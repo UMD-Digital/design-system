@@ -25,7 +25,7 @@ const slots: SlotConfiguration = {
   image: { allowedElements: ['img'] },
   description: {},
   'sub-text': {},
-  actions: { allowedElements: ['a', 'button'] },
+  actions: Slots.element.allowed.actions,
 };
 
 const createComponent: CreateComponentFunction = (element) => {

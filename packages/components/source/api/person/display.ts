@@ -1,5 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Register } from 'model';
+import { Attributes, Register, Slots } from 'model';
 import { CommonPersonData } from './common';
 import {
   CreateComponentFunction,
@@ -21,7 +21,7 @@ const slots: SlotConfiguration = {
   'additional-contact': {},
   image: { allowedElements: ['img'] },
   'sub-text': {},
-  actions: { allowedElements: ['a', 'button'] },
+  actions: Slots.element.allowed.actions,
 };
 
 const createComponent: CreateComponentFunction = (element) => {

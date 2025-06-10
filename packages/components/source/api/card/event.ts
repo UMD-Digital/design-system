@@ -29,16 +29,9 @@ const slots: SlotConfiguration = {
     required: true,
   },
   text: Slots.element.allowed.text,
-  'date-start-iso': {
-    required: true,
-    allowedElements: ['time'],
-  },
-  'date-end-iso': {
-    allowedElements: ['time'],
-  },
-  location: {
-    allowedElements: ['p', 'span'],
-  },
+  'date-start-iso': Slots.element.allowed.time,
+  'date-end-iso': Slots.element.allowed.time,
+  location: Slots.element.allowed.text,
   image: Slots.element.allowed.image,
   eyebrow: Slots.element.allowed.eyebrow,
   actions: Slots.element.allowed.actions,

@@ -88,6 +88,14 @@ const isAttributeNotNull = ({
   element,
   attributeName,
 }: AttributeNullProps): boolean => element.getAttribute(attributeName) !== null;
+}: AttributeNullProps): boolean => {
+  const value = element.getAttribute(attributeName);
+
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+
+  return value !== null;
+};
 
 const depcreationWarning = ({
   element,

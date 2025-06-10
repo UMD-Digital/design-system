@@ -13,7 +13,7 @@ type TypeStatElement = {
 type TypeStatRequirements = TypeStatElement & {
   isThemeDark?: boolean;
   isDisplayBlock?: boolean;
-  size?: string | null;
+  isSizeLarge?: boolean;
   hasLine?: boolean;
   text?: HTMLElement | null;
   subText?: HTMLElement | null;
@@ -291,13 +291,13 @@ const MakeStat = ({ stat }: TypeStatElement) => {
 };
 
 const MakeDefaultLayout = (props: TypeStatRequirements) => {
-  const { isThemeDark, size, text, subText } = props;
+  const { isThemeDark, isSizeLarge, text, subText } = props;
 
   const wrapper = document.createElement('div');
   const statElement = MakeStat(props);
 
   if (isThemeDark) wrapper.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-  if (size) wrapper.setAttribute(ATTRIBUTE_SIZE, size);
+  if (isSizeLarge) wrapper.setAttribute(ATTRIBUTE_SIZE, 'true');
 
   wrapper.classList.add(ELEMENT_STAT_WRAPPER);
 

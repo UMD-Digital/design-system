@@ -545,6 +545,12 @@ const isVisual = {
       attributeNameNew: AttributeNames.visual.size,
       attributeValue: AttributesValues.size.LARGE,
     }) ||
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.DISPLAY_SIZE,
+      attributeNameNew: AttributeNames.visual.size,
+      attributeValue: '',
+    }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.visual.size,

@@ -29,7 +29,7 @@ const createComponent: CreateComponentFunction = (element) =>
   Composite.stat.display({
     isThemeDark: Attributes.isTheme.dark({ element }),
     isDisplayBlock: Attributes.isDisplay.block({ element }),
-    size: element.getAttribute(Attributes.names.DISPLAY_SIZE),
+    isSizeLarge: Attributes.isVisual.sizeLarge({ element }),
     hasLine: Attributes.hasDecoration.line({ element }) || false,
     stat: SlotWithDefaultStyling({ element, slotRef: Slots.name.STAT }),
     text: Slots.text.default({ element }),

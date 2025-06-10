@@ -1,11 +1,11 @@
 /**
  * Attribute Check Utilities
- * 
+ *
  * Provides a comprehensive set of functions to check attribute states on HTML elements.
  * These utilities form the foundation of the component attribute system.
- * 
+ *
  * ## Function Categories:
- * 
+ *
  * 1. **isTheme**: Theme-related checks (dark, light, gold, maryland)
  * 2. **isVisual**: Visual state checks (aligned, bordered, transparent, etc.)
  * 3. **isDisplay**: Display mode checks (feature, list, promo, etc.)
@@ -13,12 +13,12 @@
  * 5. **isInfo**: Content type checks (admissions, events, news, etc.)
  * 6. **includesFeature**: Feature flag checks (animation, lazyLoad, etc.)
  * 7. **getValue**: Attribute value getters (url, title, styleProps)
- * 
+ *
  * ## Naming Convention:
  * - `is*` functions return boolean values
  * - `includes*` functions check for feature presence
  * - `getValue*` functions return string values
- * 
+ *
  * ## Deprecation Handling:
  * Many functions handle both current (data-*) and deprecated attribute names,
  * logging warnings when deprecated attributes are used.
@@ -62,7 +62,7 @@ interface ValueGetterConfig {
  * Checks if an attribute equals a specific value.
  * Returns defaultValue if attribute is not present.
  * Special handling: 'false' string always returns false.
- * 
+ *
  * @internal
  */
 const isAttributeTrue = ({
@@ -87,7 +87,6 @@ const isAttributeTrue = ({
 const isAttributeNotNull = ({
   element,
   attributeName,
-}: AttributeNullProps): boolean => element.getAttribute(attributeName) !== null;
 }: AttributeNullProps): boolean => {
   const value = element.getAttribute(attributeName);
 
@@ -168,6 +167,35 @@ const createValueGetter = ({
 
     return null;
   };
+};
+
+// Value checks with null checks
+const hasInfo = {
+  gifts: (props: AttributeElementProps) =>
+    isAttributeNotNull({
+      ...props,
+      attributeName: AttributeNames.information.GIFT,
+    }),
+  search: (props: AttributeElementProps) =>
+    isAttributeNotNull({
+      ...props,
+      attributeName: AttributeNames.information.SEARCH,
+    }),
+};
+
+// Decoration checks
+const hasDecoration = {
+  line: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.OPTIONAL_HAS_LINE,
+      attributeNameNew: AttributeNames.decoration.line,
+      attributeValue: '',
+    }) ||
+    isAttributeNotNull({
+      ...props,
+      attributeName: AttributeNames.decoration.line,
+    }),
 };
 
 // Feature checks
@@ -305,19 +333,6 @@ const isInfo = {
     AttributesValues.search.DOMAIN,
   ),
 } as const;
-
-const hasInfo = {
-  gifts: (props: AttributeElementProps) =>
-    isAttributeNotNull({
-      ...props,
-      attributeName: AttributeNames.information.GIFT,
-    }),
-  search: (props: AttributeElementProps) =>
-    isAttributeNotNull({
-      ...props,
-      attributeName: AttributeNames.information.SEARCH,
-    }),
-};
 
 // Layout checks
 const isLayout = {
@@ -577,11 +592,12 @@ const getValue = {
 
 // Public API
 export {
+  hasInfo,
+  hasDecoration,
   includesFeature,
   isDisplay,
   isData,
   isInfo,
-  hasInfo,
   isLayout,
   isSharing,
   includesSharing,

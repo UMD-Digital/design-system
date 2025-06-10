@@ -1,3 +1,7 @@
+const decoration = {
+  line: 'data-decoration-line',
+};
+
 const display = 'data-display';
 
 const feature = {
@@ -113,6 +117,7 @@ const depractedVisual = {
 };
 
 const AttributeNames = {
+  decoration,
   display,
   feature,
   ...depractedFeature,

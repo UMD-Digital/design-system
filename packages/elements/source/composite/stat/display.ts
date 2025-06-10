@@ -25,11 +25,10 @@ const BLOCK_TEXTURE = `<svg id="stat_block-texture" aria-hidden="true" xmlns="ht
 
 const SMALL = 400;
 const ELEMENT_NAME = 'umd-element-stat';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_SIZE = 'size';
-const ATTRIBUTE_HAS_LINE = 'has-line';
+const ATTRIBUTE_THEME = 'data-theme';
+const ATTRIBUTE_SIZE = 'data-size-large';
+const ATTRIBUTE_HAS_LINE = 'data-has-line';
 const THEME_DARK = 'dark';
-const SIZE_LARGE = 'large';
 
 const ELEMENT_STAT_CONTAINER = `stat-container`;
 const ELEMENT_STAT_WRAPPER = `stat-wrapper`;
@@ -39,7 +38,7 @@ const ELEMENT_STAT_SUB_TEXT = `stat-sub-text`;
 const ELEMENT_DISPLAY_BLOCK = `stat-display-block`;
 
 const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
-const IS_SIZE_LARGE = `[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
+const IS_SIZE_LARGE = `[${ATTRIBUTE_SIZE}]`;
 const IS_WITH_LINE = `[${ATTRIBUTE_HAS_LINE}]`;
 
 const OVERWRITE_WITH_LINE_WRAPPER = `.${ELEMENT_STAT_WRAPPER}${IS_WITH_LINE}`;
@@ -297,7 +296,7 @@ const MakeDefaultLayout = (props: TypeStatRequirements) => {
   const statElement = MakeStat(props);
 
   if (isThemeDark) wrapper.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-  if (isSizeLarge) wrapper.setAttribute(ATTRIBUTE_SIZE, 'true');
+  if (isSizeLarge) wrapper.setAttribute(ATTRIBUTE_SIZE, '');
 
   wrapper.classList.add(ELEMENT_STAT_WRAPPER);
 

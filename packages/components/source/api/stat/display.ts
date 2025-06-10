@@ -31,7 +31,7 @@ const createComponent: CreateComponentFunction = (element) =>
     isDisplayBlock: Attributes.isDisplay.block({ element }),
     isSizeLarge: Attributes.isVisual.sizeLarge({ element }),
     hasLine: Attributes.hasDecoration.line({ element }) || false,
-    stat: SlotWithDefaultStyling({ element, slotRef: Slots.name.STAT }),
+    stat: Slots.text.stat({ element }),
     text: Slots.text.default({ element }),
     subText: Slots.text.subText({ element }),
   });

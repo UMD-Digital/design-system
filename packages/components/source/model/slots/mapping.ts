@@ -28,8 +28,9 @@ const content = {
 
 const deprecated = {
   body: 'body',
-  wrappingText: 'wrapping-text',
   plainText: 'plain-text',
+  stat: 'stat',
+  wrappingText: 'wrapping-text',
 };
 
 const eyebrows = {
@@ -50,6 +51,7 @@ const person = {
 const text = {
   caption: 'caption',
   default: 'text',
+  stat: 'stat',
   sub: 'sub-text',
 };
 
@@ -82,7 +84,7 @@ const NEEDS_CLEANUP = {
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',
   PRIMARY_SLIDE_SECONDARY_LINKS: 'primary-slide-secondary-links',
   QUOTE: 'quote',
-  STAT: 'stat',
+
   STATIC_COLUMN: 'static-column',
   STATS: 'stats',
   STICKY_COLUMN: 'sticky-column',

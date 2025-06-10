@@ -61,6 +61,7 @@ const social = {
 const text = {
   caption: createSlotFactory(SlotNames.text.caption),
   default: createSlotFactory(SlotNames.text.default),
+  stat: createSlotFactory(SlotNames.text.stat),
   subText: createSlotFactory(SlotNames.text.sub),
 } as const;
 
@@ -71,6 +72,7 @@ const deprecated = {
   body: createSlotFactory(SlotNames.deprecated.body),
   wrappingText: createSlotFactory(SlotNames.deprecated.wrappingText),
   plainText: createSlotFactory(SlotNames.deprecated.plainText),
+  stat: createSlotFactory(SlotNames.deprecated.stat),
 } as const;
 
 export default {

@@ -37,7 +37,7 @@ export const allowed: Record<string, SlotConfig> = {
   },
   /** Actions slot for buttons and links */
   actions: {
-    allowedElements: ['div', 'a', 'button'],
+    allowedElements: ['div', 'a', 'button', 'umd-element-call-to-action'],
   },
   /** Image slot */
   image: {

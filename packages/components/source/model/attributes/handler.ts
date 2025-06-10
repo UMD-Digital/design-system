@@ -129,7 +129,7 @@ const resize = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.RESIZE,
+  name: name || AttributeNames.deprecated.state.RESIZE,
   handler: (ref, _, newValue) => {
     if (newValue === AttributeValues.state.TRUE) {
       const element = ref.element;
@@ -177,7 +177,7 @@ const stateOpen = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.STATE,
+  name: name || AttributeNames.deprecated.state.STATE,
   handler: (ref, oldValue, newValue) => {
     if (
       newValue === AttributeValues.state.OPENED &&
@@ -196,7 +196,7 @@ const stateClosed = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.STATE,
+  name: name || AttributeNames.deprecated.state.STATE,
   handler: (ref, oldValue, newValue) => {
     if (
       newValue === AttributeValues.state.CLOSED &&
@@ -231,7 +231,7 @@ const visuallyHide = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.layout.HIDDEN,
+  name: name || AttributeNames.layout.hidden,
   handler: (ref, oldValue, newValue) => {
     if (
       newValue === AttributeValues.state.TRUE &&
@@ -261,7 +261,7 @@ const visuallyPosition = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.layout.POSITION,
+  name: name || AttributeNames.layout.position,
   handler: (ref, oldValue, newValue) => {
     if (newValue !== oldValue) {
       const top = newValue ? parseInt(newValue) : null;
@@ -278,7 +278,7 @@ const visuallyShow = ({
   callback,
   name,
 }: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
-  name: name || AttributeNames.layout.HIDDEN,
+  name: name || AttributeNames.layout.hidden,
   handler: (ref, oldValue, newValue) => {
     if (
       newValue === AttributeValues.state.FALSE &&

@@ -14,7 +14,9 @@ const createComponent: CreateComponentFunction = (element) => {
     element,
   });
   let numberOfRowsToStart =
-    Number(element.getAttribute(Attributes.names.FEED_ROW_COUNT)) || 5;
+    Number(
+      element.getAttribute(Attributes.names.deprecated.feed.FEED_ROW_COUNT),
+    ) || 5;
 
   if (numberOfRowsToStart > 10 || numberOfRowsToStart < 1) {
     numberOfRowsToStart = 5;

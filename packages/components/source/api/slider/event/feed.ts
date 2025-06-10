@@ -92,9 +92,9 @@ const attributes = Attributes.handler.common.resize((element) =>
 
 const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
-  const token = element.getAttribute(Attributes.names.FEED_TOKEN);
+  const token = element.getAttribute(Attributes.names.deprecated.feed.FEED_TOKEN);
   const isTypeAcademic =
-    element.getAttribute(Attributes.names.TYPE) === 'academic';
+    element.getAttribute(Attributes.names.deprecated.type.TYPE) === 'academic';
   const categories = element.getAttribute('categories');
 
   if (!token) {

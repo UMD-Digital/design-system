@@ -16,7 +16,7 @@ const attributes = Attributes.handler.combine(
   }),
   // Deprecated
   Attributes.handler.observe.visuallyPosition({
-    name: Attributes.names.LAYOUT_STICKY_TOP,
+    name: Attributes.names.deprecated.layout.LAYOUT_STICKY_TOP,
     callback: (element, topPosition) =>
       element.events?.setTopPosition({ value: topPosition }),
   }),

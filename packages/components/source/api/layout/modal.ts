@@ -16,7 +16,7 @@ interface ModalProps extends LayoutProps {
 const createComponent: CreateComponentFunction = (element) => {
   const callback = () => {
     element.setAttribute(
-      Attributes.names.layout.HIDDEN,
+      Attributes.names.layout.hidden,
       Attributes.values.state.TRUE,
     );
   };

@@ -17,7 +17,7 @@ const { SlotWithDefaultStyling } = Markup.create;
  * @internal
  */
 const MakeHeroData = ({ element }: { element: HTMLElement }) => {
-  const type = element.getAttribute(Attributes.names.TYPE);
+  const type = element.getAttribute(Attributes.names.deprecated.type.TYPE);
   const includesAnimation = Attributes.includesFeature.animation({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
   let isTextCenter = Attributes.isVisual.textCentered({ element });

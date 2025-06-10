@@ -174,12 +174,12 @@ const hasInfo = {
   gifts: (props: AttributeElementProps) =>
     isAttributeNotNull({
       ...props,
-      attributeName: AttributeNames.information.GIFT,
+      attributeName: AttributeNames.information.gift,
     }),
   search: (props: AttributeElementProps) =>
     isAttributeNotNull({
       ...props,
-      attributeName: AttributeNames.information.SEARCH,
+      attributeName: AttributeNames.information.search,
     }),
 };
 
@@ -188,7 +188,7 @@ const hasDecoration = {
   line: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.OPTIONAL_HAS_LINE,
+      attributeNameOld: AttributeNames.deprecated.option.OPTIONAL_HAS_LINE,
       attributeNameNew: AttributeNames.decoration.line,
       attributeValue: '',
     }) ||
@@ -201,22 +201,22 @@ const hasDecoration = {
 // Feature checks
 const includesFeature = {
   animation: createAttributeCheck(
-    AttributeNames.feature.ANIMATION,
+    AttributeNames.feature.animation,
     AttributesValues.state.TRUE,
     true,
   ),
   fullScreenOption: createAttributeCheck(
-    AttributeNames.FULLSCREEN,
+    AttributeNames.deprecated.feature.FULLSCREEN,
     AttributesValues.state.TRUE,
     true,
   ),
   visualTime: createAttributeCheck(
-    AttributeNames.SHOW_TIME,
+    AttributeNames.deprecated.feature.SHOW_TIME,
     AttributesValues.state.TRUE,
     true,
   ),
   lazyLoad: createAttributeCheck(
-    AttributeNames.FEED_LAZY_LOAD,
+    AttributeNames.deprecated.feed.FEED_LAZY_LOAD,
     AttributesValues.state.TRUE,
   ),
 } as const;
@@ -224,7 +224,7 @@ const includesFeature = {
 // Data checks
 const isData = {
   union: createAttributeCheck(
-    AttributeNames.FEED_UNION,
+    AttributeNames.deprecated.feed.FEED_UNION,
     AttributesValues.state.FALSE,
     true,
   ),
@@ -235,89 +235,89 @@ const isDisplay = {
   block: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.DISPLAY_TYPE,
-      attributeNameNew: AttributeNames.display,
+      attributeNameOld: AttributeNames.deprecated.display.DISPLAY_TYPE,
+      attributeNameNew: AttributeNames.display.default,
       attributeValue: AttributesValues.display.BLOCK,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.display,
+      attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.display.BLOCK,
     }),
   feature: createAttributeCheck(
-    AttributeNames.DISPLAY,
+    AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.FEATURE,
   ),
   featured: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.TYPE,
-      attributeNameNew: AttributeNames.display,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
       attributeValue: AttributesValues.display.FEATURED,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.display,
+      attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.display.FEATURED,
     }),
   list: createAttributeCheck(
-    AttributeNames.DISPLAY,
+    AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.LIST,
   ),
   outline: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.TYPE,
-      attributeNameNew: AttributeNames.display,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
       attributeValue: AttributesValues.type.OUTLINE,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.display,
+      attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.type.OUTLINE,
     }),
   promo: createAttributeCheck(
-    AttributeNames.DISPLAY,
+    AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.PROMO,
   ),
   primary: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.TYPE,
-      attributeNameNew: AttributeNames.display,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
       attributeValue: AttributesValues.type.PRIMARY,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.display,
+      attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.type.PRIMARY,
     }),
   secondary: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.TYPE,
-      attributeNameNew: AttributeNames.display,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
       attributeValue: AttributesValues.type.SECONDARY,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.display,
+      attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.type.SECONDARY,
     }),
   statement: createAttributeCheck(
-    AttributeNames.DISPLAY,
+    AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.STATEMENT,
   ),
   sticky: createAttributeCheck(
-    AttributeNames.DISPLAY,
+    AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.STICKY,
   ),
   stacked: createAttributeCheck(
-    AttributeNames.DISPLAY,
+    AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.STACKED,
   ),
   tabular: createAttributeCheck(
-    AttributeNames.DISPLAY,
+    AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.TABULAR,
   ),
 } as const;
@@ -325,23 +325,23 @@ const isDisplay = {
 // Information checks
 const isInfo = {
   admissions: createAttributeCheck(
-    AttributeNames.information.ADMISSIONS,
+    AttributeNames.information.admissions,
     AttributesValues.state.TRUE,
   ),
   events: createAttributeCheck(
-    AttributeNames.information.EVENTS,
+    AttributeNames.information.events,
     AttributesValues.state.TRUE,
   ),
   news: createAttributeCheck(
-    AttributeNames.information.NEWS,
+    AttributeNames.information.news,
     AttributesValues.state.TRUE,
   ),
   schools: createAttributeCheck(
-    AttributeNames.information.SCHOOLS,
+    AttributeNames.information.schools,
     AttributesValues.state.TRUE,
   ),
   searchDomain: createAttributeCheck(
-    AttributeNames.information.SEARCH_TYPE,
+    AttributeNames.information.searchType,
     AttributesValues.search.DOMAIN,
   ),
 } as const;
@@ -349,47 +349,47 @@ const isInfo = {
 // Layout checks
 const isLayout = {
   alertOff: createAttributeCheck(
-    AttributeNames.layout.ALERT_OFF,
+    AttributeNames.layout.alertOff,
     AttributesValues.state.TRUE,
   ),
   alignmentRight: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.LAYOUT_ALIGNMENT,
-      attributeNameNew: AttributeNames.layout.ALIGNMENT,
+      attributeNameOld: AttributeNames.deprecated.layout.LAYOUT_ALIGNMENT,
+      attributeNameNew: AttributeNames.layout.alignment,
       attributeValue: AttributesValues.layout.RIGHT,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.layout.ALIGNMENT,
+      attributeName: AttributeNames.layout.alignment,
       attributeValue: AttributesValues.layout.RIGHT,
     }),
   fixed: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.LAYOUT_FIXED,
-      attributeNameNew: AttributeNames.layout.FIXED,
+      attributeNameOld: AttributeNames.deprecated.layout.LAYOUT_FIXED,
+      attributeNameNew: AttributeNames.layout.fixed,
       attributeValue: '',
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.layout.FIXED,
+      attributeName: AttributeNames.layout.fixed,
       attributeValue: AttributesValues.state.TRUE,
     }),
   fullImage: createAttributeCheck(
-    AttributeNames.TYPE,
+    AttributeNames.deprecated.type.TYPE,
     AttributesValues.layout.FULL_IMAGE,
   ),
   hidden: createAttributeCheck(
-    AttributeNames.layout.HIDDEN,
+    AttributeNames.layout.hidden,
     AttributesValues.state.TRUE,
   ),
   image: createAttributeCheck(
-    AttributeNames.TYPE,
+    AttributeNames.deprecated.type.TYPE,
     AttributesValues.display.IMAGE,
   ),
   lockFull: createAttributeCheck(
-    AttributeNames.layout.LOCK,
+    AttributeNames.layout.lock,
     AttributesValues.layout.FULL,
   ),
 } as const;
@@ -398,23 +398,23 @@ const isLayout = {
 
 const isSharing = {
   email: createAttributeCheck(
-    AttributeNames.sharing.EMAIL,
+    AttributeNames.sharing.email,
     AttributesValues.state.TRUE,
   ),
   print: createAttributeCheck(
-    AttributeNames.sharing.PRINT,
+    AttributeNames.sharing.print,
     AttributesValues.state.TRUE,
   ),
 } as const;
 
 const includesSharing = {
   facebook: createAttributeCheck(
-    AttributeNames.social.FACEBOOK,
+    AttributeNames.social.facebook,
     AttributesValues.state.TRUE,
     true,
   ),
   twitter: createAttributeCheck(
-    AttributeNames.social.TWITTER,
+    AttributeNames.social.twitter,
     AttributesValues.state.TRUE,
     true,
   ),
@@ -425,49 +425,49 @@ const isTheme = {
   dark: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.THEME_DEPRECATD,
-      attributeNameNew: AttributeNames.theme,
+      attributeNameOld: AttributeNames.deprecated.theme.THEME_DEPRECATD,
+      attributeNameNew: AttributeNames.theme.default,
       attributeValue: AttributesValues.theme.DARK,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.theme,
+      attributeName: AttributeNames.theme.default,
       attributeValue: AttributesValues.theme.DARK,
     }),
   gold: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.THEME_DEPRECATD,
-      attributeNameNew: AttributeNames.theme,
+      attributeNameOld: AttributeNames.deprecated.theme.THEME_DEPRECATD,
+      attributeNameNew: AttributeNames.theme.default,
       attributeValue: AttributesValues.theme.GOLD,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.theme,
+      attributeName: AttributeNames.theme.default,
       attributeValue: AttributesValues.theme.GOLD,
     }),
   light: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.THEME_DEPRECATD,
-      attributeNameNew: AttributeNames.theme,
+      attributeNameOld: AttributeNames.deprecated.theme.THEME_DEPRECATD,
+      attributeNameNew: AttributeNames.theme.default,
       attributeValue: AttributesValues.theme.LIGHT,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.theme,
+      attributeName: AttributeNames.theme.default,
       attributeValue: AttributesValues.theme.LIGHT,
     }),
   maryland: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.THEME_DEPRECATD,
-      attributeNameNew: AttributeNames.theme,
+      attributeNameOld: AttributeNames.deprecated.theme.THEME_DEPRECATD,
+      attributeNameNew: AttributeNames.theme.default,
       attributeValue: AttributesValues.theme.MARYLAND,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.theme,
+      attributeName: AttributeNames.theme.default,
       attributeValue: AttributesValues.theme.MARYLAND,
     }),
 } as const;
@@ -475,21 +475,21 @@ const isTheme = {
 // Visual checks
 const isVisual = {
   aligned: createAttributeCheck(
-    AttributeNames.VISUAL_ALIGN,
+    AttributeNames.deprecated.visual.VISUAL_ALIGN,
     AttributesValues.state.TRUE,
   ),
   bordered: createAttributeCheck(
-    AttributeNames.VISUAL_BORDER,
+    AttributeNames.deprecated.visual.VISUAL_BORDER,
     AttributesValues.state.TRUE,
   ),
   list: createAttributeCheck(
-    AttributeNames.DISPLAY,
+    AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.LIST,
   ),
   icon_seal: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.VISUAL_HAS_LOGO,
+      attributeNameOld: AttributeNames.deprecated.visual.VISUAL_HAS_LOGO,
       attributeNameNew: AttributeNames.visual.icon_seal,
       attributeValue: AttributesValues.state.TRUE,
     }) ||
@@ -501,7 +501,7 @@ const isVisual = {
   open: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.STATE_DEPRECATD,
+      attributeNameOld: AttributeNames.deprecated.state.STATE_DEPRECATD,
       attributeNameNew: AttributeNames.visual.open,
       attributeValue: AttributesValues.state.OPENED,
     }) ||
@@ -511,13 +511,13 @@ const isVisual = {
       attributeValue: AttributesValues.state.TRUE,
     }),
   quote: createAttributeCheck(
-    AttributeNames.VISUAL_QUOTE,
+    AttributeNames.deprecated.visual.VISUAL_QUOTE,
     AttributesValues.state.TRUE,
   ),
   showIcon: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.VISUAL_ICON,
+      attributeNameOld: AttributeNames.deprecated.visual.VISUAL_ICON,
       attributeNameNew: AttributeNames.visual.icon,
       attributeValue: AttributesValues.state.TRUE,
     }) ||
@@ -529,7 +529,7 @@ const isVisual = {
   sizeNormal: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.DISPLAY_SIZE,
+      attributeNameOld: AttributeNames.deprecated.display.DISPLAY_SIZE,
       attributeNameNew: AttributeNames.visual.size,
       attributeValue: AttributesValues.size.NORMAL,
     }) ||
@@ -541,13 +541,13 @@ const isVisual = {
   sizeLarge: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.DISPLAY_SIZE,
+      attributeNameOld: AttributeNames.deprecated.display.DISPLAY_SIZE,
       attributeNameNew: AttributeNames.visual.size,
       attributeValue: AttributesValues.size.LARGE,
     }) ||
     checkDeprecatedAttribute({
       ...props,
-      attributeNameOld: AttributeNames.DISPLAY_SIZE,
+      attributeNameOld: AttributeNames.deprecated.display.DISPLAY_SIZE,
       attributeNameNew: AttributeNames.visual.size,
       attributeValue: '',
     }) ||
@@ -557,16 +557,16 @@ const isVisual = {
       attributeValue: AttributesValues.size.LARGE,
     }),
   stickyFirst: createAttributeCheck(
-    AttributeNames.OPTIONAL_STICKY_FIRST,
+    AttributeNames.deprecated.option.OPTIONAL_STICKY_FIRST,
     AttributesValues.state.TRUE,
     true,
   ),
   textCentered: createAttributeCheck(
-    AttributeNames.VISUAL_TEXT_CENTER,
+    AttributeNames.deprecated.visual.VISUAL_TEXT_CENTER,
     AttributesValues.layout.CENTER,
   ),
   transparent: createAttributeCheck(
-    AttributeNames.VISUAL_TRANSPARENT,
+    AttributeNames.deprecated.visual.VISUAL_TRANSPARENT,
     AttributesValues.state.TRUE,
   ),
 } as const;
@@ -578,25 +578,25 @@ const getValue = {
   }),
   daysToHide: createValueGetter({
     currentName: AttributeNames.visual.hidden_days,
-    deprecatedName: AttributeNames.VISUAL_DAYS_TO_HIDE,
+    deprecatedName: AttributeNames.deprecated.visual.VISUAL_DAYS_TO_HIDE,
   }),
   giftUrl: createValueGetter({
-    currentName: AttributeNames.information.GIFT,
+    currentName: AttributeNames.information.gift,
   }),
   layoutLock: createValueGetter({
-    currentName: AttributeNames.layout.LOCK,
+    currentName: AttributeNames.layout.lock,
   }),
   title: createValueGetter({
-    currentName: AttributeNames.information.TITLE,
+    currentName: AttributeNames.information.title,
   }),
   topPosition: createValueGetter({
-    currentName: AttributeNames.layout.POSITION,
-    deprecatedName: AttributeNames.LAYOUT_STICKY_TOP,
+    currentName: AttributeNames.layout.position,
+    deprecatedName: AttributeNames.deprecated.layout.LAYOUT_STICKY_TOP,
   }),
   styleProps: (props: AttributeElementProps) => {
     const cssString = createValueGetter({
       ...props,
-      currentName: AttributeNames.VISUAL_STYLE_PROPS,
+      currentName: AttributeNames.deprecated.visual.VISUAL_STYLE_PROPS,
     });
 
     if (cssString && typeof cssString === 'string') {
@@ -604,7 +604,7 @@ const getValue = {
     }
   },
   url: createValueGetter({
-    currentName: AttributeNames.information.URL,
+    currentName: AttributeNames.information.url,
   }),
 } as const;
 

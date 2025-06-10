@@ -2,13 +2,13 @@ import { Attributes } from 'model';
 import { newsProps } from '../_types';
 
 export const CommonFeedNewsData = ({ element }: { element: HTMLElement }) => {
-  const token = element.getAttribute(Attributes.names.FEED_TOKEN);
+  const token = element.getAttribute(Attributes.names.deprecated.feed.FEED_TOKEN);
   const isThemeDark = Attributes.isTheme.dark({ element });
   const categoriesAttribute = element.getAttribute(
-    Attributes.names.FEED_CATEGORIES,
+    Attributes.names.deprecated.feed.FEED_CATEGORIES,
   );
   const entriesToRemove = element.getAttribute(
-    Attributes.names.FEED_NOT_ENTRIES,
+    Attributes.names.deprecated.feed.FEED_NOT_ENTRIES,
   );
 
   if (!token) {

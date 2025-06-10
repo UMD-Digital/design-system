@@ -12,7 +12,9 @@ const createComponent: CreateComponentFunction = (element) =>
       isThemeDark: Attributes.isTheme.dark({ element }),
     }),
     text: Slots.text.default({ element }),
-    hasSeparator: element.hasAttribute(Attributes.names.OPTIONAL_HAS_SEPARATOR),
+    hasSeparator: element.hasAttribute(
+      Attributes.names.deprecated.option.OPTIONAL_HAS_SEPARATOR,
+    ),
     includesAnimation: Attributes.includesFeature.animation({ element }),
   });
 

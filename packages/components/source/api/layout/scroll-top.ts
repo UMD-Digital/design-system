@@ -11,7 +11,9 @@ interface ScrollTopProps extends Pick<LayoutProps, 'isFixed'> {}
 
 const createComponent: CreateComponentFunction = (element) => {
   const props: ScrollTopProps = {
-    isFixed: element.hasAttribute(Attributes.names.LAYOUT_FIXED),
+    isFixed: element.hasAttribute(
+      Attributes.names.deprecated.layout.LAYOUT_FIXED,
+    ),
   };
 
   return Composite.layout.scrollTop(props);

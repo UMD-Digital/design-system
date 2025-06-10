@@ -31,8 +31,12 @@ const MakeCommonDefaultData = ({
     `[slot="${Slots.name.contact.location}"]`,
   );
   const isImageRight =
-    element.getAttribute(Attributes.names.LAYOUT_IMAGE_POSITION) !== 'left';
-  const showTime = element.getAttribute(Attributes.names.SHOW_TIME) !== 'false';
+    element.getAttribute(
+      Attributes.names.deprecated.layout.LAYOUT_IMAGE_POSITION,
+    ) !== 'left';
+  const showTime =
+    element.getAttribute(Attributes.names.deprecated.feature.SHOW_TIME) !==
+    'false';
 
   const startDate = Markup.event.createDate({ element: startDateSlot });
   const endDate = Markup.event.createDate({ element: endDateSlot });
@@ -90,7 +94,9 @@ const MakeCommonDefaultData = ({
  */
 const createComponent: CreateComponentFunction = (element) => {
   const isImageScaled =
-    element.getAttribute(Attributes.names.LAYOUT_IMAGE_SCALED) !== 'false';
+    element.getAttribute(
+      Attributes.names.deprecated.layout.LAYOUT_IMAGE_SCALED,
+    ) !== 'false';
 
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeLight = Attributes.isTheme.light({ element });
@@ -98,7 +104,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const includesAnimation = Attributes.includesFeature.animation({ element });
 
   // Type Attribute should be deprecated for display
-  const type = element.getAttribute(Attributes.names.TYPE);
+  const type = element.getAttribute(Attributes.names.deprecated.type.TYPE);
 
   const themes = {
     isThemeDark,

@@ -18,9 +18,13 @@ const tagName = 'umd-feed-events';
 const createComponent: CreateComponentFunction = (element) => {
   const isTransparent = element.getAttribute('transparent') === 'true';
   let numberOfColumnsToShow =
-    Number(element.getAttribute(Attributes.names.FEED_COLUMN_COUNT)) || 3;
+    Number(
+      element.getAttribute(Attributes.names.deprecated.feed.FEED_COLUMN_COUNT),
+    ) || 3;
   let numberOfRowsToStart =
-    Number(element.getAttribute(Attributes.names.FEED_ROW_COUNT)) || 1;
+    Number(
+      element.getAttribute(Attributes.names.deprecated.feed.FEED_ROW_COUNT),
+    ) || 1;
 
   if (numberOfColumnsToShow < 1 || numberOfColumnsToShow > 4) {
     numberOfColumnsToShow = 3;

@@ -25,6 +25,11 @@
  * - `resize` - Triggers size recalculation
  * - `state-open` (deprecated) - Use data-visual-open
  *
+ * ### Accessing Attribute Names
+ * - Current attributes: `Attributes.names.visual.size`
+ * - Single-value attributes: `Attributes.names.theme.default`, `Attributes.names.display.default`
+ * - Deprecated attributes: `Attributes.names.deprecated.visual.VISUAL_SIZE`
+ * 
  * @module Attributes
  */
 import handler, { AttributeHandlerTypes } from './handler';

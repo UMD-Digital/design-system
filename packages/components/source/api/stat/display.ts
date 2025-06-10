@@ -18,9 +18,8 @@ const { SlotWithDefaultStyling } = Markup.create;
  * Slot configuration for the statistic display component
  */
 const slots: SlotConfiguration = {
-  stat: {
-    allowedElements: ['span', 'strong', 'em', 'b'],
-  },
+  stat: Slots.element.allowed.subHeadline,
+
   'sub-text': Slots.element.allowed.text,
 };
 

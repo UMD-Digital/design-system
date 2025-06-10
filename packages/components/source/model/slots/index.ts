@@ -1,5 +1,6 @@
 import { SlotNames, type SlotName } from './mapping';
 import { createSlot, type BaseProps, type OptionalProps } from './create';
+import * as element from './element';
 
 /**
  * Properties for creating slot content
@@ -63,13 +64,6 @@ const text = {
   subText: createSlotFactory(SlotNames.text.sub),
 } as const;
 
-// Import allowed element configurations
-import { allowed } from './element';
-
-const element = {
-  allowed,
-} as const;
-
 // Deprecated slots (marked for removal)
 /** @deprecated Use CommonSlots instead */
 const deprecated = {
@@ -79,7 +73,7 @@ const deprecated = {
   plainText: createSlotFactory(SlotNames.deprecated.plainText),
 } as const;
 
-const Slots = {
+export default {
   actions,
   assets,
   contact,
@@ -93,7 +87,6 @@ const Slots = {
   headline,
   social,
   text,
-} as const;
-
-export default Slots;
+  ...element,
+};
 export type { SlotName };

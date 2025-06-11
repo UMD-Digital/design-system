@@ -576,11 +576,15 @@ const isVisual = {
 // Value getters
 const getValue = {
   alertUrl: createValueGetter({
-    currentName: AttributeNames.value.ALERT_URL,
+    currentName: AttributeNames.information.alertUrl,
   }),
   daysToHide: createValueGetter({
     currentName: AttributeNames.visual.hidden_days,
     deprecatedName: AttributeNames.deprecated.visual.VISUAL_DAYS_TO_HIDE,
+  }),
+  feedFilterIds: createValueGetter({
+    currentName: AttributeNames.information.filterIds,
+    deprecatedName: AttributeNames.deprecated.feed.FEED_CATEGORIES,
   }),
   feedToken: createValueGetter({
     currentName: AttributeNames.information.token,

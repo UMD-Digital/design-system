@@ -24,7 +24,9 @@ const feature = {
 
 const information = {
   admissions: 'data-admissions',
+  alertUrl: 'data-alert-url',
   events: 'data-events',
+  filterIds: 'data-filter-ids',
   gift: 'data-gift',
   news: 'data-news',
   schools: 'data-schools',
@@ -56,10 +58,6 @@ const social = {
 
 const theme = {
   default: 'data-theme',
-};
-
-const value = {
-  ALERT_URL: 'data-alert-url',
 };
 
 const visual = {
@@ -136,7 +134,6 @@ const AttributeNames = {
   sharing,
   social,
   theme,
-  value,
   visual,
   deprecated,
 } as const;

@@ -4,9 +4,7 @@ import { eventProps } from '../_types';
 export const CommonFeedEventsData = ({ element }: { element: HTMLElement }) => {
   const token = Attributes.getValue.feedToken({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
-  const categoriesAttribute = element.getAttribute(
-    Attributes.names.deprecated.feed.FEED_CATEGORIES,
-  );
+  const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
 
   if (!token) {
     console.error(`Feed events requires a token to be set`);

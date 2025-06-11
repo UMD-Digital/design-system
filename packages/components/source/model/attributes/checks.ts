@@ -157,6 +157,8 @@ const createValueGetter = ({
           attributeNameOld: deprecatedName,
           attributeNameNew: currentName,
         });
+
+        return deprecatedValue;
       }
     }
 
@@ -579,6 +581,10 @@ const getValue = {
   daysToHide: createValueGetter({
     currentName: AttributeNames.visual.hidden_days,
     deprecatedName: AttributeNames.deprecated.visual.VISUAL_DAYS_TO_HIDE,
+  }),
+  feedToken: createValueGetter({
+    currentName: AttributeNames.information.token,
+    deprecatedName: AttributeNames.deprecated.feed.FEED_TOKEN,
   }),
   giftUrl: createValueGetter({
     currentName: AttributeNames.information.gift,

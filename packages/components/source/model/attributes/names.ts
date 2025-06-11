@@ -23,15 +23,16 @@ const feature = {
 };
 
 const information = {
-  title: 'data-title',
-  url: 'data-url',
+  admissions: 'data-admissions',
+  events: 'data-events',
+  gift: 'data-gift',
+  news: 'data-news',
+  schools: 'data-schools',
   search: 'data-search',
   searchType: 'data-search-type',
-  gift: 'data-gift',
-  admissions: 'data-admissions',
-  schools: 'data-schools',
-  news: 'data-news',
-  events: 'data-events',
+  title: 'data-title',
+  token: 'data-token',
+  url: 'data-url',
 };
 
 const layout = {

@@ -2,7 +2,7 @@ import { Attributes } from 'model';
 import { eventProps } from '../_types';
 
 export const CommonFeedEventsData = ({ element }: { element: HTMLElement }) => {
-  const token = element.getAttribute(Attributes.names.deprecated.feed.FEED_TOKEN);
+  const token = Attributes.getValue.feedToken({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
   const categoriesAttribute = element.getAttribute(
     Attributes.names.deprecated.feed.FEED_CATEGORIES,

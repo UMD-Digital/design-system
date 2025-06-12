@@ -35,13 +35,12 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
- * - `data-categories` - Comma-separated category IDs to filter news
- * - `data-row-count` - Initial rows to display (1-10, default: 5)
- * - `data-not-entries` - Comma-separated entry IDs to exclude
+ * - `data-filter-group-ids` - Comma-separated category IDs to filter news
+ * - `data-layout-row-count` - Initial rows to display (1-10, default: 5)
+ * - `data-entry-remove-ids` - Comma-separated entry IDs to exclude
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
- * - `data-feature` - Feature options:
- *   - `lazy-load` - Enable lazy loading of additional articles
+ * - `data-lazy-load` - Enable lazy loading of additional articles
  * - `data-is` - Data flags:
  *   - `union` - Union-specific feed configuration
  *
@@ -58,9 +57,9 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- News list with filters and more items -->
  * <umd-feed-news-list
  *   data-token="your-api-token"
- *   data-categories="faculty,awards"
- *   data-row-count="10"
- *   data-feature="lazy-load">
+ *   data-filter-group-ids="faculty,awards"
+ *   data-layout-row-count="10"
+ *   data-lazy-load="true">
  * </umd-feed-news-list>
  * ```
  *
@@ -70,8 +69,8 @@ const createComponent: CreateComponentFunction = (element) => {
  * <umd-feed-news-list
  *   data-token="your-api-token"
  *   data-theme="dark"
- *   data-not-entries="12345,67890"
- *   data-row-count="7">
+ *   data-entry-remove-ids="12345,67890"
+ *   data-layout-row-count="7">
  * </umd-feed-news-list>
  * ```
  *

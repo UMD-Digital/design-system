@@ -46,15 +46,13 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
- * - `data-categories` - Comma-separated category IDs to filter events
- * - `data-column-count` - Number of columns (1-4, default: 3)
- * - `data-row-count` - Initial rows to display (1-2, default: 1)
+ * - `data-filter-group-ids` - Comma-separated category IDs to filter events
+ * - `data-layout-column-count` - Number of columns (1-4, default: 3)
+ * - `data-layout-row-count` - Initial rows to display (1-2, default: 1)
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
- * - `data-transparent` - Transparency options:
- *   - `true` - Transparent card backgrounds
- * - `data-feature` - Feature options:
- *   - `lazy-load` - Enable lazy loading of additional events
+ * - `data-visual-transparent` - Transparent card backgrounds
+ * - `data-lazy-load` - Enable lazy loading of additional events
  *
  * @example
  * ```html
@@ -69,10 +67,10 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- Events grid with filters and lazy loading -->
  * <umd-feed-events
  *   data-token="your-api-token"
- *   data-categories="<added-category-id>, <another-category-id>"
- *   data-column-count="4"
- *   data-row-count="2"
- *   data-feature="lazy-load">
+ *   data-filter-group-ids="<added-category-id>, <another-category-id>"
+ *   data-layout-column-count="4"
+ *   data-layout-row-count="2"
+ *   data-lazy-load="true">
  * </umd-feed-events>
  * ```
  *
@@ -82,8 +80,8 @@ const createComponent: CreateComponentFunction = (element) => {
  * <umd-feed-events
  *   data-token="your-api-token"
  *   data-theme="dark"
- *   transparent="true"
- *   data-column-count="2">
+ *   data-visual-transparent
+ *   data-layout-column-count="2">
  * </umd-feed-events>
  * ```
  *

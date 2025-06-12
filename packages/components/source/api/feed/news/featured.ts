@@ -44,14 +44,12 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
- * - `data-categories` - Comma-separated category IDs to filter news
- * - `data-not-entries` - Comma-separated entry IDs to exclude
+ * - `data-filter-group-ids` - Comma-separated category IDs to filter news
+ * - `data-entry-remove-ids` - Comma-separated entry IDs to exclude
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
- * - `data-transparent` - Transparency options:
- *   - `true` - Transparent card background
- * - `data-layout` - Layout options:
- *   - `reversed` - Reverse content layout
+ * - `data-visual-transparent` - Transparent card background
+ * - `data-layout-reverse` - Reverse content layout
  * - `data-top-position` - Override sticky position in pixels
  * - `data-is` - Data flags:
  *   - `union` - Union-specific feed configuration
@@ -72,7 +70,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- Featured news with custom positioning -->
  * <umd-feed-news-featured
  *   data-token="your-api-token"
- *   data-categories="headlines"
+ *   data-filter-group-ids="headlines"
  *   data-top-position="100"
  *   data-theme="dark">
  * </umd-feed-news-featured>
@@ -83,9 +81,9 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- Reversed layout with transparency -->
  * <umd-feed-news-featured
  *   data-token="your-api-token"
- *   data-layout="reversed"
- *   data-transparent="true"
- *   data-feed-not-entries="12345">
+ *   data-layout-reverse="true"
+ *   data-visual-transparent
+ *   data-entry-remove-ids="12345">
  * </umd-feed-news-featured>
  * ```
  *

@@ -26,10 +26,10 @@ const tagName = 'umd-element-slider-events-feed';
  * - `data-theme` - Color theme of the component:
  *   - `dark` - Dark background with light text
  * - `data-token` - API token for fetching events (required)
- * - `data-type` - Feed type:
+ * - `data-feed-type` - Feed type:
  *   - `academic` - Academic calendar events
  *   - Default - General events feed
- * - `categories` - Comma-separated list of event categories to filter
+ * - `data-filter-group-ids` - Comma-separated list of event categories to filter
  *
  * ## Observed Attributes
  * - `resize` - Triggers recalculation of date element sizes
@@ -48,7 +48,7 @@ const tagName = 'umd-element-slider-events-feed';
  * <!-- Academic calendar feed -->
  * <umd-element-slider-events-feed
  *   data-token="academic-api-key"
- *   data-type="academic">
+ *   data-feed-type="academic">
  *   <h2 slot="headline">Academic Calendar</h2>
  *   <div slot="actions">
  *     <a href="/academic-calendar">Full Calendar</a>
@@ -63,7 +63,7 @@ const tagName = 'umd-element-slider-events-feed';
  * <umd-element-slider-events-feed
  *   data-token="events-api-key"
  *   data-theme="dark"
- *   categories="athletics,recreation">
+ *   data-filter-group-ids="athletics,recreation">
  *   <h2 slot="headline">Sports & Recreation</h2>
  *   <a slot="actions" href="/athletics">Athletics Home</a>
  * </umd-element-slider-events-feed>
@@ -74,7 +74,7 @@ const tagName = 'umd-element-slider-events-feed';
  * <!-- Multiple category filters -->
  * <umd-element-slider-events-feed
  *   data-token="events-api-key"
- *   categories="workshop,seminar,lecture">
+ *   data-filter-group-ids="workshop,seminar,lecture">
  *   <h2 slot="headline">Learning Opportunities</h2>
  *   <div slot="actions">
  *     <a href="/workshops">All Workshops</a>
@@ -134,10 +134,10 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `data-theme` - Color theme of the component:
  *   - `dark` - Dark background with light text
  * - `data-token` - API token for fetching events (required)
- * - `data-type` - Feed type:
+ * - `data-feed-type` - Feed type:
  *   - `academic` - Academic calendar events
  *   - Default - General events feed
- * - `categories` - Comma-separated list of event categories to filter
+ * - `data-filter-group-ids` - Comma-separated list of event categories to filter
  *
  * ## Observed Attributes
  * - `resize` - Triggers recalculation of date element sizes
@@ -156,7 +156,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- Academic calendar feed -->
  * <umd-element-slider-events-feed
  *   data-token="academic-api-key"
- *   data-type="academic">
+ *   data-feed-type="academic">
  *   <h2 slot="headline">Academic Calendar</h2>
  *   <div slot="actions">
  *     <a href="/academic-calendar">Full Calendar</a>
@@ -171,7 +171,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * <umd-element-slider-events-feed
  *   data-token="events-api-key"
  *   data-theme="dark"
- *   categories="athletics,recreation">
+ *   data-filter-group-ids="athletics,recreation">
  *   <h2 slot="headline">Sports & Recreation</h2>
  *   <a slot="actions" href="/athletics">Athletics Home</a>
  * </umd-element-slider-events-feed>
@@ -182,7 +182,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- Multiple category filters -->
  * <umd-element-slider-events-feed
  *   data-token="events-api-key"
- *   categories="workshop,seminar,lecture">
+ *   data-filter-group-ids="workshop,seminar,lecture">
  *   <h2 slot="headline">Learning Opportunities</h2>
  *   <div slot="actions">
  *     <a href="/workshops">All Workshops</a>

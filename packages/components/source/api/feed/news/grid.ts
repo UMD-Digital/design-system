@@ -40,18 +40,16 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
- * - `data-categories` - Comma-separated category IDs to filter news
- * - `data-column-count` - Number of columns (default: 3)
- * - `data-row-count` - Initial rows to display (default: 1)
- * - `data-not-entries` - Comma-separated entry IDs to exclude
+ * - `data-filter-group-ids` - Comma-separated category IDs to filter news
+ * - `data-layout-column-count` - Number of columns (default: 3)
+ * - `data-layout-row-count` - Initial rows to display (default: 1)
+ * - `data-entry-remove-ids` - Comma-separated entry IDs to exclude
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
- * - `data-feature` - Feature options:
- *   - `lazy-load` - Enable lazy loading of additional articles
- * - `data-type` - Display type options:
+ * - `data-lazy-load` - Enable lazy loading of additional articles
+ * - `data-display` - Display options:
  *   - `overlay` - Use overlay card style
- * - `data-transparent` - Transparency options:
- *   - `true` - Transparent card backgrounds
+ * - `data-visual-transparent` - Transparent card backgrounds
  * - `data-is` - Data flags:
  *   - `union` - Union-specific feed configuration
  *
@@ -68,11 +66,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- News grid with overlay style and filters -->
  * <umd-feed-news
  *   data-token="your-api-token"
- *   data-categories="research,innovation"
- *   data-type="overlay"
- *   data-column-count="4"
- *   data-row-count="2"
- *   data-feature="lazy-load">
+ *   data-filter-group-ids="research,innovation"
+ *   data-display="overlay"
+ *   data-layout-column-count="4"
+ *   data-layout-row-count="2"
+ *   data-lazy-load="true">
  * </umd-feed-news>
  * ```
  *
@@ -81,9 +79,9 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- News grid excluding specific articles -->
  * <umd-feed-news
  *   data-token="your-api-token"
- *   data-not-entries="12345,67890"
+ *   data-entry-remove-ids="12345,67890"
  *   data-theme="dark"
- *   data-transparent="true">
+ *   data-visual-transparent>
  * </umd-feed-news>
  * ```
  *

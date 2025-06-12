@@ -217,10 +217,18 @@ const includesFeature = {
     AttributesValues.state.TRUE,
     true,
   ),
-  lazyLoad: createAttributeCheck(
-    AttributeNames.deprecated.feed.FEED_LAZY_LOAD,
-    AttributesValues.state.TRUE,
-  ),
+  lazyLoad: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.feed.FEED_LAZY_LOAD,
+      attributeNameNew: AttributeNames.feature.lazyLoad,
+      attributeValue: AttributesValues.state.TRUE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.feature.lazyLoad,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
 } as const;
 
 // Data checks
@@ -291,6 +299,18 @@ const isDisplay = {
       ...props,
       attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.type.OUTLINE,
+    }),
+  overlay: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.OVERLAY,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.OVERLAY,
     }),
   promo: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
@@ -593,10 +613,18 @@ const isVisual = {
     AttributeNames.deprecated.visual.VISUAL_TEXT_CENTER,
     AttributesValues.layout.CENTER,
   ),
-  transparent: createAttributeCheck(
-    AttributeNames.deprecated.visual.VISUAL_TRANSPARENT,
-    AttributesValues.state.TRUE,
-  ),
+  transparent: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.visual.VISUAL_TRANSPARENT,
+      attributeNameNew: AttributeNames.visual.transparent,
+      attributeValue: AttributesValues.state.TRUE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.visual.transparent,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
 } as const;
 
 // Value getters

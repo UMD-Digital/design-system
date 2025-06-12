@@ -20,6 +20,7 @@ const display = {
 
 const feature = {
   animation: 'data-animation',
+  lazyLoad: 'data-lazy-load',
 };
 
 const feed = {
@@ -74,6 +75,7 @@ const visual = {
   hidden_days: 'data-days-to-hide',
   open: 'data-visual-open',
   size: 'data-visual-size',
+  transparent: 'data-visual-transparent',
 };
 
 // Deprecated

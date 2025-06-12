@@ -13,10 +13,12 @@ const createComponent: CreateComponentFunction = (element) => {
   const data = CommonFeedEventsData({
     element,
   });
-  let numberOfRowsToStart =
-    Number(
-      element.getAttribute(Attributes.names.deprecated.feed.FEED_ROW_COUNT),
-    ) || 5;
+  const attrRowCount = Number(
+    Attributes.getValue.layoutRowCount({
+      element,
+    }),
+  );
+  let numberOfRowsToStart = attrRowCount || 5;
 
   if (numberOfRowsToStart > 10 || numberOfRowsToStart < 1) {
     numberOfRowsToStart = 5;

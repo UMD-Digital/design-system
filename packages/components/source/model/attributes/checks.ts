@@ -607,8 +607,16 @@ const getValue = {
   giftUrl: createValueGetter({
     currentName: AttributeNames.information.gift,
   }),
+  layoutColumnCount: createValueGetter({
+    currentName: AttributeNames.layout.columnCount,
+    deprecatedName: AttributeNames.deprecated.feed.FEED_COLUMN_COUNT,
+  }),
   layoutLock: createValueGetter({
     currentName: AttributeNames.layout.lock,
+  }),
+  layoutRowCount: createValueGetter({
+    currentName: AttributeNames.layout.rowCount,
+    deprecatedName: AttributeNames.deprecated.feed.FEED_ROW_COUNT,
   }),
   title: createValueGetter({
     currentName: AttributeNames.information.title,

@@ -44,10 +44,12 @@ const information = {
 const layout = {
   alertOff: 'data-alert-off',
   alignment: 'data-layout-alignment',
+  columnCount: 'data-layout-column-count',
   fixed: 'data-layout-fixed',
   hidden: 'data-layout-hidden',
   lock: 'data-layout-lock',
   position: 'data-layout-position',
+  rowCount: 'data-layout-row-count',
 };
 
 const sharing = {

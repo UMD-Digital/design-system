@@ -608,6 +608,10 @@ const getValue = {
     currentName: AttributeNames.visual.hidden_days,
     deprecatedName: AttributeNames.deprecated.visual.VISUAL_DAYS_TO_HIDE,
   }),
+  feedEntryRemoveIds: createValueGetter({
+    currentName: AttributeNames.information.removeIds,
+    deprecatedName: AttributeNames.deprecated.feed.FEED_NOT_ENTRIES,
+  }),
   feedFilterIds: createValueGetter({
     currentName: AttributeNames.information.filterIds,
     deprecatedName: AttributeNames.deprecated.feed.FEED_CATEGORIES,

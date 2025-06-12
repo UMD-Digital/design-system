@@ -408,6 +408,18 @@ const isLayout = {
     AttributeNames.layout.lock,
     AttributesValues.layout.FULL,
   ),
+  reverse: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.layout.DEFAULT,
+      attributeNameNew: AttributeNames.layout.reverse,
+      attributeValue: AttributesValues.state.TRUE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.layout.reverse,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
 } as const;
 
 // Social checks

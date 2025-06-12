@@ -49,6 +49,7 @@ const layout = {
   hidden: 'data-layout-hidden',
   lock: 'data-layout-lock',
   position: 'data-layout-position',
+  reverse: 'data-layout-reverse',
   rowCount: 'data-layout-row-count',
 };
 
@@ -101,6 +102,7 @@ const deprecated = {
     OPTIONAL_STICKY_FIRST: 'isStickyFirst',
   },
   layout: {
+    DEFAULT: 'layout',
     LAYOUT_FIXED: 'fixed',
     LAYOUT_ALIGNMENT: 'alignment',
     LAYOUT_IMAGE_POSITION: 'image-position',

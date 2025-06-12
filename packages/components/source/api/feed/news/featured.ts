@@ -29,8 +29,12 @@ const createComponent: CreateComponentFunction = (element) => {
   return Feeds.news.featured({
     ...data,
     numberOfRowsToStart: 1,
-    isTransparent: element.getAttribute('transparent') === 'true',
-    isLayoutReversed: element.getAttribute('layout') === 'reversed',
+    isTransparent: Attributes.isVisual.transparent({
+      element,
+    }),
+    isLayoutReversed: Attributes.isLayout.reverse({
+      element,
+    }),
     overwriteStickyPosition: overwriteTopPosition
       ? parseInt(overwriteTopPosition)
       : undefined,

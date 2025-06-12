@@ -22,6 +22,10 @@ const feature = {
   animation: 'data-animation',
 };
 
+const feed = {
+  type: 'data-feed-type',
+};
+
 const information = {
   admissions: 'data-admissions',
   alertUrl: 'data-alert-url',
@@ -129,6 +133,7 @@ const AttributeNames = {
   decoration,
   display,
   feature,
+  feed,
   information,
   layout,
   sharing,

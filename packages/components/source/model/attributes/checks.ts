@@ -225,6 +225,20 @@ const includesFeature = {
 
 // Data checks
 const isData = {
+  type: {
+    academic: (props: AttributeElementProps): boolean =>
+      checkDeprecatedAttribute({
+        ...props,
+        attributeNameOld: AttributeNames.deprecated.type.TYPE,
+        attributeNameNew: AttributeNames.feed.type,
+        attributeValue: AttributesValues.data.type.academic,
+      }) ||
+      isAttributeTrue({
+        ...props,
+        attributeName: AttributeNames.feed.type,
+        attributeValue: AttributesValues.data.type.academic,
+      }),
+  },
   union: createAttributeCheck(
     AttributeNames.deprecated.feed.FEED_UNION,
     AttributesValues.state.FALSE,

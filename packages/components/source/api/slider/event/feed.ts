@@ -93,9 +93,10 @@ const attributes = Attributes.handler.common.resize((element) =>
 const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const token = Attributes.getValue.feedToken({ element });
-  const isTypeAcademic =
-    element.getAttribute(Attributes.names.deprecated.type.TYPE) === 'academic';
   const categories = Attributes.getValue.feedFilterIds({ element });
+  const isTypeAcademic = Attributes.isData.type.academic({
+    element,
+  });
 
   if (!token) {
     console.error('Token is required for this component');

@@ -1,5 +1,11 @@
 // Values
 
+const data = {
+  type: {
+    academic: 'academic',
+  },
+};
+
 const display = {
   BLOCK: 'block',
   FEATURE: 'feature',
@@ -59,6 +65,7 @@ const type = {
 };
 
 const AttributeValues = {
+  data,
   display,
   layout,
   search,

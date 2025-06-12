@@ -10,26 +10,17 @@ import { CreateComponentFunction, ComponentRegistration } from 'api/_types';
 const tagName = 'umd-feed-news-list';
 
 const createComponent: CreateComponentFunction = (element) => {
-  const data = CommonFeedNewsData({
-    element,
-  });
-  let numberOfRowsToStart =
-    Number(
-      element.getAttribute(Attributes.names.deprecated.feed.FEED_ROW_COUNT),
-    ) || 5;
-
-  if (numberOfRowsToStart > 10 || numberOfRowsToStart < 1) {
-    numberOfRowsToStart = 5;
-  }
+  const data = CommonFeedNewsData({ element });
 
   if (!data) {
-    console.error('Feed news requires a token to be set');
     return { element: document.createElement('div'), styles: '' };
   }
 
+  const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
+
   return Feeds.news.list({
     ...data,
-    numberOfRowsToStart,
+    numberOfRowsToStart: rowCount >= 1 && rowCount <= 10 ? rowCount : 5,
   });
 };
 

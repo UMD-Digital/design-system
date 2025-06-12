@@ -16,28 +16,20 @@ const attributes = Attributes.handler.combine(
 );
 
 const createComponent: CreateComponentFunction = (element) => {
-  const overwriteTopPosition = Attributes.getValue.topPosition({ element });
-  const data = CommonFeedNewsData({
-    element,
-  });
+  const data = CommonFeedNewsData({ element });
 
   if (!data) {
-    console.error('Feed news requires a token to be set');
     return { element: document.createElement('div'), styles: '' };
   }
+
+  const topPosition = Attributes.getValue.topPosition({ element });
 
   return Feeds.news.featured({
     ...data,
     numberOfRowsToStart: 1,
-    isTransparent: Attributes.isVisual.transparent({
-      element,
-    }),
-    isLayoutReversed: Attributes.isLayout.reverse({
-      element,
-    }),
-    overwriteStickyPosition: overwriteTopPosition
-      ? parseInt(overwriteTopPosition)
-      : undefined,
+    isTransparent: Attributes.isVisual.transparent({ element }),
+    isLayoutReversed: Attributes.isLayout.reverse({ element }),
+    overwriteStickyPosition: topPosition ? parseInt(topPosition) : undefined,
   });
 };
 

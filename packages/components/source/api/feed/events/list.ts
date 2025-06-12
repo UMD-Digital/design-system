@@ -10,28 +10,18 @@ import { CreateComponentFunction, ComponentRegistration } from 'api/_types';
 const tagName = 'umd-feed-events-list';
 
 const createComponent: CreateComponentFunction = (element) => {
-  const data = CommonFeedEventsData({
-    element,
-  });
-  const attrRowCount = Number(
-    Attributes.getValue.layoutRowCount({
-      element,
-    }),
-  );
-  let numberOfRowsToStart = attrRowCount || 5;
-
-  if (numberOfRowsToStart > 10 || numberOfRowsToStart < 1) {
-    numberOfRowsToStart = 5;
-  }
+  const data = CommonFeedEventsData({ element });
 
   if (!data) {
     console.error('Feed events requires a token to be set');
     return { element: document.createElement('div'), styles: '' };
   }
 
+  const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
+
   return Feeds.events.list({
     ...data,
-    numberOfRowsToStart,
+    numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 10),
   });
 };
 

@@ -16,42 +16,22 @@ const tagName = 'umd-feed-events';
  * @internal
  */
 const createComponent: CreateComponentFunction = (element) => {
-  const isTransparent = element.getAttribute('transparent') === 'true';
-  const attrColumnCount = Number(
-    Attributes.getValue.layoutColumnCount({
-      element,
-    }),
-  );
-  const attrRowCount = Number(
-    Attributes.getValue.layoutRowCount({
-      element,
-    }),
-  );
-  let numberOfColumnsToShow = attrColumnCount || 3;
-  let numberOfRowsToStart = attrRowCount || 1;
-
-  if (numberOfColumnsToShow < 1 || numberOfColumnsToShow > 4) {
-    numberOfColumnsToShow = 3;
-  }
-
-  if (numberOfRowsToStart > 2 || numberOfRowsToStart < 1) {
-    numberOfRowsToStart = 1;
-  }
-
-  const data = CommonFeedEventsData({
-    element,
-  });
+  const data = CommonFeedEventsData({ element });
 
   if (!data) {
     console.error('Feed events requires a token to be set');
     return { element: document.createElement('div'), styles: '' };
   }
 
+  const columnCount =
+    Number(Attributes.getValue.layoutColumnCount({ element })) || 3;
+  const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 1;
+
   return Feeds.events.grid({
     ...data,
-    numberOfColumnsToShow,
-    numberOfRowsToStart,
-    isTransparent,
+    numberOfColumnsToShow: Math.min(Math.max(columnCount, 1), 4),
+    numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 2),
+    isTransparent: Attributes.isVisual.transparent({ element }),
   });
 };
 

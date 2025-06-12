@@ -10,32 +10,22 @@ import { CreateComponentFunction, ComponentRegistration } from 'api/_types';
 const tagName = 'umd-feed-news';
 
 const createComponent: CreateComponentFunction = (element) => {
-  const isTransparent = element.getAttribute('transparent') === 'true';
-  const isTypeOverlay = element.getAttribute('type') === 'overlay';
-  const numberOfColumnsToShow =
-    Number(
-      element.getAttribute(Attributes.names.deprecated.feed.FEED_COLUMN_COUNT),
-    ) || 3;
-  const numberOfRowsToStart =
-    Number(
-      element.getAttribute(Attributes.names.deprecated.feed.FEED_ROW_COUNT),
-    ) || 1;
-
-  const data = CommonFeedNewsData({
-    element,
-  });
+  const data = CommonFeedNewsData({ element });
 
   if (!data) {
-    console.error('Feed news requires a token to be set');
     return { element: document.createElement('div'), styles: '' };
   }
 
+  const columnCount =
+    Number(Attributes.getValue.layoutColumnCount({ element })) || 3;
+  const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 1;
+
   return Feeds.news.grid({
     ...data,
-    numberOfColumnsToShow,
-    numberOfRowsToStart,
-    isTransparent,
-    isTypeOverlay,
+    numberOfColumnsToShow: Math.min(Math.max(columnCount, 1), 4),
+    numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 2),
+    isTransparent: Attributes.isVisual.transparent({ element }),
+    isTypeOverlay: Attributes.isDisplay.overlay({ element }),
   });
 };
 

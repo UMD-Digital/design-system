@@ -275,6 +275,13 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
         throw new Error('Missing slide for slide event');
 
       animate();
+
+      if (upcomingSlide.offsetHeight > elementContainer.offsetHeight) {
+        setTimeout(() => {
+          upcomingSlide.style.overflowY = `scroll`;
+          upcomingSlide.style.height = `100%`;
+        }, ANIMATION_TIME + 100);
+      }
     };
     const setUpcomingSlide = (arg: string) => {
       upcomingSlideRef = arg;

@@ -146,26 +146,16 @@ export type ComponentFactory<TProps, TReturn = ComponentRef> = (
  * Event handler types for component events
  */
 export interface ComponentEvents {
-  /** Initialize component */
-  load?: () => void;
-  /** Handle resize */
-  resize?: () => void;
-  /** Show component */
-  show?: () => void;
-  /** Hide component */
-  hide?: () => void;
-  /** Open with animation options */
-  open?: (options?: { hasAnimation?: boolean }) => void;
-  /** Close with animation options */
-  close?: (options?: { hasAnimation?: boolean }) => void;
-  /** Load animation */
-  loadAnimation?: () => void;
-  /** Set position */
-  setPosition?: (options?: { value?: number | null }) => void;
-  /** Set date element sizes */
-  size?: () => void;
-  /** Generic callback */
   callback?: (shadow?: ShadowRoot) => void;
+  close?: (options?: { hasAnimation?: boolean }) => void;
+  hide?: () => void;
+  load?: () => void;
+  loadAnimation?: () => void;
+  open?: (options?: { hasAnimation?: boolean }) => void;
+  resize?: () => void;
+  setPosition?: (options?: { value?: number | null }) => void;
+  show?: () => void;
+  size?: () => void;
 }
 
 /**

@@ -30,7 +30,6 @@ const baseElements = [
   'carousel-people',
   'carousel-thumbnail',
   'carousel',
-  'feed-news',
   'hero-brand-video',
   'hero-expand',
   'hero-logo',
@@ -49,6 +48,15 @@ const baseElements = [
   (acc, name) => ({
     ...acc,
     ...createElementStyles(`umd-element-${name}`),
+  }),
+  {},
+);
+
+// Feed elements with simple display toggle
+const feedElements = ['events', 'news'].reduce(
+  (acc, name) => ({
+    ...acc,
+    ...createElementStyles(`umd-feed-${name}`),
   }),
   {},
 );
@@ -265,6 +273,7 @@ const tabs = createElementStyles(tabsTag, {
 
 export default {
   ...elements,
+  ...feedElements,
   ...breadcrumb,
   ...action,
   ...footer,

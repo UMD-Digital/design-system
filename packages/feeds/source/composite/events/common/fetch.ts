@@ -63,19 +63,14 @@ const getCount = async ({ variables }: { variables: TypeAPIFeedVariables }) => {
     query: EVENTS_COUNT_QUERY,
   });
 
-  if (!feedData) {
-    console.error('Feed not found');
-    console.error(feedData);
+  console.log(feedData);
+
+  if (!feedData || !feedData.data || feedData.message) {
+    if (feedData.message) console.error(feedData.message);
     return null;
   }
 
-  const count = feedData?.data?.count?.events?.length;
-
-  if (count) {
-    return count;
-  }
-
-  return null;
+  return feedData?.data?.count?.events?.length || 0;
 };
 
 const getEntries = async ({
@@ -104,6 +99,8 @@ const getEntries = async ({
       graceFail({ message: `Feed data errors: ${feedData.message}` });
   }
 
+  console.log('Feed data fetched successfully:', feedData);
+
   return feedData.data.entries.events;
 };
 
@@ -131,27 +128,30 @@ export const load = async (props: LoadMoreProps) => {
 };
 
 export const start = async (props: CreateProps) => {
-  const { displayNoResults, displayResultStart, setTotalEntries, setStyles } =
-    props;
+  const { displayNoResults, displayResultStart, setTotalEntries } = props;
 
   await getCount({
     variables: dataComposed.apiVariables(props),
   }).then((count) => {
+    if (count === 0) {
+      displayNoResults({ ...props });
+      return;
+    }
+
     if (count) {
       setTotalEntries(count);
+    }
+
+    if (count === null) {
+      displayNoResults({
+        ...props,
+        message: 'An error occurred while fetching the data.',
+      });
+      return;
     }
   });
 
   getEntries({
     variables: dataComposed.apiVariables(props),
-  }).then((feedData) => {
-    const totalEntries = feedData.length;
-
-    if (totalEntries === 0) {
-      displayNoResults({ ...props });
-      return;
-    }
-
-    return displayResultStart({ ...props, feedData });
-  });
+  }).then((feedData) => displayResultStart({ ...props, feedData }));
 };

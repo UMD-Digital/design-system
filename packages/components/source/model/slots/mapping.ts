@@ -8,6 +8,7 @@ const actions = {
 
 const assets = {
   image: 'image',
+  video: 'video',
 };
 
 const date = {
@@ -90,7 +91,6 @@ const NEEDS_CLEANUP = {
   STICKY_COLUMN: 'sticky-column',
   TABS: 'tabs',
   TEXTS: 'texts',
-  VIDEO: 'video',
 };
 
 const SlotNames = {

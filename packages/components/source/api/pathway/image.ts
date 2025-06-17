@@ -50,7 +50,9 @@ const MakeCommonDefaultData = ({
       element,
       ImageSlot: Slots.name.assets.image,
     }),
-    video: SlotWithDefaultStyling({ element, slotRef: Slots.name.VIDEO }),
+    video: Slots.assets.video({
+      element,
+    }),
     eventDetails: null as null | HTMLElement,
     eventSign: null as null | HTMLElement,
     includedStyles: '',

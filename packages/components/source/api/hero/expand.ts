@@ -27,9 +27,7 @@ const createComponent: CreateComponentFunction = (element) => {
     element,
     ImageSlot: Slots.name.assets.image,
   });
-  const videoSlot = element.querySelector(
-    `[slot="${Slots.name.VIDEO}"]`,
-  ) as HTMLElement;
+  const videoSlot = element.querySelector(`[slot="video"]`) as HTMLElement;
   const actions = Markup.create.Node.slot({ type: Slots.name.actions.default });
   const additional = Markup.create.Node.slot({ type: Slots.name.ADDITIONAL });
 

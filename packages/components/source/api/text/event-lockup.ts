@@ -68,7 +68,7 @@ const tagName = 'umd-element-events-date';
  * @since 1.0.0
  */
 const attributes = Attributes.handler.common.resize((element) =>
-  element.events?.SetDateElementsSizes(),
+  element.events?.size(),
 );
 
 const createComponent: CreateComponentFunction = (element) => {

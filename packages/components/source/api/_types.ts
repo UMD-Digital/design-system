@@ -155,9 +155,9 @@ export interface ComponentEvents {
   /** Hide component */
   hide?: () => void;
   /** Open with animation options */
-  SetOpen?: (options?: { hasAnimation?: boolean }) => void;
+  open?: (options?: { hasAnimation?: boolean }) => void;
   /** Close with animation options */
-  SetClosed?: (options?: { hasAnimation?: boolean }) => void;
+  close?: (options?: { hasAnimation?: boolean }) => void;
   /** Load animation */
   loadAnimation?: () => void;
   /** Set position */

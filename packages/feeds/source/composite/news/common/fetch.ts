@@ -26,21 +26,22 @@ export interface TypeFetchVariables {
 
 export interface TypeAPIFeedVariables extends TypeFetchVariables {
   token: string | null;
+  displayNoResults: (props: NoResultsProps) => void;
 }
 
 export const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
 
 const getEntries = async ({
   limit,
+  not,
+  offset,
   related,
   relatedToAll,
-  offset,
-  not,
   token,
 }: TypeAPIFeedVariables) => {
   if (!token) throw new Error('Token not found');
   const graceFail = ({ message }: { message: string }) => {
-    throw new Error(message);
+    console.error(message);
   };
 
   const variables: TypeFetchVariables = {
@@ -65,11 +66,10 @@ const getEntries = async ({
     feedData.message
   ) {
     if (!feedData) graceFail({ message: 'Feed not found' });
-    if (!feedData.data) graceFail({ message: 'Feed data not found' });
-    if (!feedData.data.entries)
-      graceFail({ message: 'Feed entries not found' });
-    if (!feedData.message)
+    if (feedData?.message)
       graceFail({ message: `Feed data errors: ${feedData.message}` });
+
+    return null;
   }
 
   return {
@@ -88,14 +88,16 @@ export const load = async (props: LoadMoreProps) => {
   feedMacros.loader.display({ container });
 
   getEntries(dataComposed.apiVariables(props)).then((feedData) => {
-    displayResults({ feedData: feedData.entries });
+    if (feedData) {
+      displayResults({ feedData: feedData.entries });
 
-    feedMacros.ariaLive.update({
-      container,
-      message: `Showing ${
-        currentCount + feedData.entries.length
-      } of ${totalEntries} articles`,
-    });
+      feedMacros.ariaLive.update({
+        container,
+        message: `Showing ${
+          currentCount + feedData.entries.length
+        } of ${totalEntries} articles`,
+      });
+    }
   });
 };
 
@@ -103,6 +105,14 @@ export const start = async (props: CreateProps) => {
   const { displayNoResults, displayResultStart, setTotalEntries } = props;
 
   getEntries(dataComposed.apiVariables(props)).then((feedData) => {
+    if (!feedData || !feedData.entries) {
+      displayNoResults({
+        ...props,
+        message: 'An error occurred while fetching the data.',
+      });
+      return;
+    }
+
     const totalEntries = feedData.count;
 
     if (totalEntries === 0) {

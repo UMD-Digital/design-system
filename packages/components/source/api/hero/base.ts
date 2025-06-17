@@ -61,12 +61,10 @@ const MakeHeroData = ({ element }: { element: HTMLElement }) => {
  * @internal
  */
 const createComponent: CreateComponentFunction = (element) => {
-  const videoRef = SlotWithDefaultStyling({
+  const videoRef = Slots.assets.video({
     element,
-    slotRef: Slots.name.VIDEO,
-  });
+  }) as HTMLVideoElement | null;
 
-  // Type Attribute should be deprecated for display
   const type = element.getAttribute('type');
 
   if (

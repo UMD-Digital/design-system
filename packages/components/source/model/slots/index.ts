@@ -21,6 +21,7 @@ const actions = {
 
 const assets = {
   image: createSlotFactory(SlotNames.assets.image),
+  video: createSlotFactory(SlotNames.assets.video),
 } as const;
 
 const contact = {

@@ -101,6 +101,13 @@ const elements = {
     }),
     {},
   ),
+  ...['card-video'].reduce(
+    (acc, type) => ({
+      ...acc,
+      ...createElementStyles(`umd-element-${type}`, {}),
+    }),
+    {},
+  ),
   ...['card-overlay'].reduce(
     (acc, type) => ({
       ...acc,

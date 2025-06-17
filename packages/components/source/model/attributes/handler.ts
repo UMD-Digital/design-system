@@ -25,7 +25,7 @@ import AttributeValues from './values';
  *     callback: (element) => element.events?.recalculate()
  *   }),
  *   Attributes.handler.observe.visuallyOpen({
- *     callback: (element) => element.events?.SetOpen({ hasAnimation: true })
+ *     callback: (element) => element.events?.open({ hasAnimation: true })
  *   })
  * );
  * ```
@@ -365,22 +365,20 @@ const common = {
   accordion: () =>
     combine(
       resize({
-        callback: (element) => element.events?.SetOpen({ hasAnimation: false }),
+        callback: (element) => element.events?.open({ hasAnimation: false }),
       }),
       visuallyOpen({
-        callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
+        callback: (element) => element.events?.open({ hasAnimation: true }),
       }),
       visuallyClosed({
-        callback: (element) =>
-          element.events?.SetClosed({ hasAnimation: true }),
+        callback: (element) => element.events?.close({ hasAnimation: true }),
       }),
       // Deprecated handlers for backwards compatibility
       stateClosed({
-        callback: (element) =>
-          element.events?.SetClosed({ hasAnimation: true }),
+        callback: (element) => element.events?.close({ hasAnimation: true }),
       }),
       stateOpen({
-        callback: (element) => element.events?.SetOpen({ hasAnimation: true }),
+        callback: (element) => element.events?.open({ hasAnimation: true }),
       }),
     ),
 };

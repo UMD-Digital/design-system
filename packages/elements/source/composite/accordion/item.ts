@@ -17,8 +17,8 @@ type TypeAccordionProps = TypeHeadlineText &
 
 type TypeHeadlineProps = TypeHeadlineText &
   TypeAccordionState & {
-    SetClosed: (arg: StateProps) => void;
-    SetOpen: (arg: StateProps) => void;
+    close: (arg: StateProps) => void;
+    open: (arg: StateProps) => void;
   };
 
 type TypeBodyProps = TypeBodyText & TypeAccordionState;
@@ -247,8 +247,8 @@ const CreateBody = ({ text, isOpen }: TypeBodyProps) => {
 const CreateHeadline = ({
   headline,
   isOpen,
-  SetClosed,
-  SetOpen,
+  open,
+  close,
 }: TypeHeadlineProps) => {
   const headlineContainer = document.createElement('button');
 
@@ -262,9 +262,9 @@ const CreateHeadline = ({
       const isExpanded = headlineContainer.ariaExpanded == 'true';
 
       if (isExpanded) {
-        SetClosed({ hasAnimation: true });
+        close({ hasAnimation: true });
       } else {
-        SetOpen({ hasAnimation: true });
+        open({ hasAnimation: true });
       }
     });
 
@@ -329,11 +329,11 @@ export default (props: TypeAccordionProps) =>
     const container = document.createElement('div');
     let isOpen = isStateOpen;
 
-    const SetOpen = (props: StateProps) => {
+    const open = (props: StateProps) => {
       ActionAnimation({ ...props, container, isOpening: true });
       isOpen = true;
     };
-    const SetClosed = (props: StateProps) => {
+    const close = (props: StateProps) => {
       ActionAnimation({ ...props, container, isOpening: false });
       isOpen = false;
     };
@@ -352,7 +352,7 @@ export default (props: TypeAccordionProps) =>
       EventSize();
     };
 
-    const headline = CreateHeadline({ ...props, isOpen, SetClosed, SetOpen });
+    const headline = CreateHeadline({ ...props, isOpen, open, close });
     const body = CreateBody({ ...props, isOpen });
 
     if (headline) container.appendChild(headline);
@@ -366,7 +366,7 @@ export default (props: TypeAccordionProps) =>
     declaration.classList.add(ELEMENT_DECLARATION);
 
     if (isStateOpen) {
-      SetOpen({ hasAnimation: false });
+      open({ hasAnimation: false });
     }
 
     window.addEventListener('resize', Utility.performance.debounce(resize, 20));
@@ -375,8 +375,8 @@ export default (props: TypeAccordionProps) =>
       element: declaration,
       styles: STYLES_ACCORDION_ELEMENT,
       events: {
-        SetOpen,
-        SetClosed,
+        open,
+        close,
       },
     };
   })();

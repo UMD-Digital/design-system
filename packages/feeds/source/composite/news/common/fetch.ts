@@ -26,7 +26,6 @@ export interface TypeFetchVariables {
 
 export interface TypeAPIFeedVariables extends TypeFetchVariables {
   token: string | null;
-  displayNoResults: (props: NoResultsProps) => void;
 }
 
 export const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';

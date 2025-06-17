@@ -29,19 +29,19 @@ describe('Component: umd-element-slider-events', () => {
       // Create an element first so registration will proceed
       const testElement = document.createElement('umd-element-slider-events');
       document.body.appendChild(testElement);
-      
+
       sliderEventDisplay();
-      
+
       // Verify customElements.define was called
       expect(customElements.define).toHaveBeenCalledWith(
         tagName,
-        expect.any(Function)
+        expect.any(Function),
       );
     });
 
     it('should create custom element with correct tag name', () => {
       sliderEventDisplay();
-      
+
       const { element } = createTestComponent(tagName);
       expect(element.tagName.toLowerCase()).toBe(tagName);
     });
@@ -54,7 +54,7 @@ describe('Component: umd-element-slider-events', () => {
 
     it('should require event-list slot', () => {
       const { element } = createTestComponent(tagName);
-      
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = `
@@ -65,21 +65,21 @@ describe('Component: umd-element-slider-events', () => {
         </div>
       `;
       element.appendChild(eventList);
-      
+
       const validation = validateSlotConfiguration(element, {
         'event-list': { required: true },
       });
-      
+
       expect(validation.valid).toBe(true);
       expect(validation.errors).toHaveLength(0);
     });
 
     it('should log error if event-list slot is missing', () => {
       const { element } = createTestComponent(tagName);
-      
+
       // Component created without required event-list slot
       expect(element.querySelector('[slot="event-list"]')).toBeNull();
-      
+
       // In the real component, creating without the event-list slot would:
       // 1. Log an error: 'Slot event-list is required'
       // 2. The component would fail to render properly
@@ -88,37 +88,39 @@ describe('Component: umd-element-slider-events', () => {
 
     it('should accept optional headline slot', () => {
       const { element } = createTestComponent(tagName);
-      
-      element.appendChild(createSlotContent('headline', 'h2', 'Upcoming Events'));
-      
+
+      element.appendChild(
+        createSlotContent('headline', 'h2', 'Upcoming Events'),
+      );
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = '<div class="event">Event 1</div>';
       element.appendChild(eventList);
-      
+
       expect(element.querySelector('[slot="headline"]')).toBeTruthy();
     });
 
     it('should accept optional actions slot', () => {
       const { element } = createTestComponent(tagName);
-      
+
       const action = document.createElement('a');
       action.setAttribute('slot', 'actions');
       action.setAttribute('href', '/events');
       action.textContent = 'View All Events';
       element.appendChild(action);
-      
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = '<div class="event">Event 1</div>';
       element.appendChild(eventList);
-      
+
       expect(element.querySelector('[slot="actions"]')).toBeTruthy();
     });
 
     it('should accept multiple events in event-list', () => {
       const { element } = createTestComponent(tagName);
-      
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = `
@@ -139,14 +141,16 @@ describe('Component: umd-element-slider-events', () => {
         </div>
       `;
       element.appendChild(eventList);
-      
+
       expect(element.querySelector('[slot="event-list"]')).toBeTruthy();
-      expect(element.querySelectorAll('[slot="event-list"] .event').length).toBe(3);
+      expect(
+        element.querySelectorAll('[slot="event-list"] .event').length,
+      ).toBe(3);
     });
 
     it('should accept events with links', () => {
       const { element } = createTestComponent(tagName);
-      
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = `
@@ -164,14 +168,16 @@ describe('Component: umd-element-slider-events', () => {
         </div>
       `;
       element.appendChild(eventList);
-      
+
       expect(element.querySelector('[slot="event-list"]')).toBeTruthy();
-      expect(element.querySelectorAll('[slot="event-list"] .event a').length).toBe(2);
+      expect(
+        element.querySelectorAll('[slot="event-list"] .event a').length,
+      ).toBe(2);
     });
 
     it('should accept multiple actions in actions slot', () => {
       const { element } = createTestComponent(tagName);
-      
+
       const actionsDiv = document.createElement('div');
       actionsDiv.setAttribute('slot', 'actions');
       actionsDiv.innerHTML = `
@@ -179,12 +185,12 @@ describe('Component: umd-element-slider-events', () => {
         <a href="/events/subscribe">Subscribe</a>
       `;
       element.appendChild(actionsDiv);
-      
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = '<div class="event">Event 1</div>';
       element.appendChild(eventList);
-      
+
       expect(element.querySelector('[slot="actions"]')).toBeTruthy();
       expect(element.querySelectorAll('[slot="actions"] a').length).toBe(2);
     });
@@ -197,13 +203,13 @@ describe('Component: umd-element-slider-events', () => {
 
     it('should handle data-theme attribute with dark value', () => {
       const { element } = createTestComponent(tagName, '', {
-        'data-theme': 'dark'
+        'data-theme': 'dark',
       });
-      
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = '<div class="event">Event 1</div>';
-      element.appendChild(eventList)
+      element.appendChild(eventList);
       const attributes = getComponentAttributes(element);
       expect(attributes['data-theme']).toBe('dark');
     });
@@ -211,16 +217,18 @@ describe('Component: umd-element-slider-events', () => {
     it('should handle deprecated theme attribute with warning', async () => {
       const warnings = await captureWarningsAsync(async () => {
         const { element } = createTestComponent(tagName, '', {
-          'theme': 'dark'
+          theme: 'dark',
         });
-        
+
         const eventList = document.createElement('div');
         eventList.setAttribute('slot', 'event-list');
         eventList.innerHTML = '<div class="event">Event 1</div>';
-        element.appendChild(eventList)
+        element.appendChild(eventList);
       });
-      
-      expect(validateDeprecatedAttribute(warnings, 'theme', 'data-theme')).toBe(true);
+
+      expect(validateDeprecatedAttribute(warnings, 'theme', 'data-theme')).toBe(
+        true,
+      );
     });
   });
 
@@ -231,21 +239,21 @@ describe('Component: umd-element-slider-events', () => {
 
     it('should observe resize attribute', async () => {
       const { element } = createTestComponent(tagName);
-      
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = '<div class="event">Event 1</div>';
       element.appendChild(eventList);
       // Test setting resize attribute
       await setAttributeAndWait(element, 'resize', 'true');
-      
+
       // Should not throw error
       expect(element.hasAttribute('resize')).toBe(true);
     });
 
-    it('should trigger SetDateElementsSizes when resize attribute changes', async () => {
+    it('should trigger size when resize attribute changes', async () => {
       const { element } = createTestComponent(tagName);
-      
+
       const eventList = document.createElement('div');
       eventList.setAttribute('slot', 'event-list');
       eventList.innerHTML = `
@@ -255,16 +263,16 @@ describe('Component: umd-element-slider-events', () => {
         </div>
       `;
       element.appendChild(eventList);
-      // Mock the SetDateElementsSizes event handler
-      const mockSetDateElementsSizes = jest.fn();
+      // Mock the resize event handler
+      const mockSize = jest.fn();
       if ((element as any).events) {
-        (element as any).events.SetDateElementsSizes = mockSetDateElementsSizes;
+        (element as any).events.size = mockSize;
       }
-      
+
       // Trigger resize
       await setAttributeAndWait(element, 'resize', 'true');
-      
-      // Note: In a real implementation, this would trigger the SetDateElementsSizes callback
+
+      // Note: In a real implementation, this would trigger the resize callback
       // For testing purposes, we're just verifying the attribute is set
       expect(element.getAttribute('resize')).toBe('true');
     });

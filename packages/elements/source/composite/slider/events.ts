@@ -681,7 +681,7 @@ export default (props: TypeSliderEventProps) =>
     const SetCountBackward = () => (currentPosition = currentPosition - 1);
     const SetButtonVisibility = () =>
       ButtonVisibilityLogic({ ...CommonDomElements, currentPosition });
-    const SetDateElementsSizes = () =>
+    const size = () =>
       SizeDatesElements({
         ...CommonDomElements,
         isThemeDark,
@@ -704,7 +704,7 @@ export default (props: TypeSliderEventProps) =>
         SetButtonVisibility,
       });
     const EventResize = () => {
-      SetDateElementsSizes();
+      size();
       SetJumpToDate();
       SetButtonVisibility();
     };
@@ -750,8 +750,8 @@ export default (props: TypeSliderEventProps) =>
       element: declaration,
       styles,
       events: {
-        SetDateElementsSizes,
         load,
+        size,
       },
     };
   })();

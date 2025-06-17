@@ -87,7 +87,7 @@ const tagName = 'umd-element-slider-events-feed';
  * @since 1.0.0
  */
 const attributes = Attributes.handler.common.resize((element) =>
-  element.events?.SetDateElementsSizes(),
+  element.events?.size(),
 );
 
 const createComponent: CreateComponentFunction = (element) => {

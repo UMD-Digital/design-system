@@ -163,7 +163,7 @@ export interface ComponentEvents {
   /** Set position */
   setPosition?: (options?: { value?: number | null }) => void;
   /** Set date element sizes */
-  SetDateElementsSizes?: () => void;
+  size?: () => void;
   /** Generic callback */
   callback?: (shadow?: ShadowRoot) => void;
 }

@@ -19,10 +19,27 @@ export default (props: CardVideoShortProps) => {
           height: '100%',
           width: '100%',
           objectFit: 'cover',
+
+          ['&:hover']: {
+            cursor: 'pointer',
+          },
         },
       },
     },
   });
+
+  const setPlay = () => {
+    if (video.paused) {
+      video.muted = true;
+      video.play();
+    }
+  };
+
+  const setPause = () => {
+    if (!video.paused) {
+      video.pause();
+    }
+  };
 
   video.setAttribute('controls', 'true');
   video.setAttribute(
@@ -30,6 +47,13 @@ export default (props: CardVideoShortProps) => {
     'nodownload nofullscreen noremoteplayback noplaybackrate"',
   );
   video.setAttribute('preload', 'true');
+  video.setAttribute('playsinline', '');
+  video.setAttribute('muted', '');
+  video.addEventListener('mouseover', setPlay);
+  video.addEventListener('focus', setPlay);
+  video.addEventListener('mouseleave', setPause);
+  video.addEventListener('blur', setPause);
+
   composite.element.appendChild(video);
 
   return composite;

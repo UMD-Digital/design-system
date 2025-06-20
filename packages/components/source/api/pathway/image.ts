@@ -114,14 +114,14 @@ const createComponent: CreateComponentFunction = (element) => {
     isThemeMaryland,
   };
 
-  if (type === Attributes.values.display.HERO) {
+  if (type === Attributes.values.display.hero) {
     return Composite.pathway.hero({
       ...MakeCommonDefaultData({ element, ...themes }),
       includesAnimation,
     });
   }
 
-  if (type === Attributes.values.display.OVERLAY) {
+  if (type === Attributes.values.display.overlay) {
     return Composite.pathway.overlay({
       isImageScaled,
       ...themes,
@@ -130,7 +130,7 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
-  if (type === Attributes.values.display.STICKY) {
+  if (type === Attributes.values.display.sticky) {
     return Composite.pathway.sticky({
       isThemeDark: Attributes.isTheme.dark({ element }),
       isImageScaled,

@@ -7,19 +7,20 @@ const data = {
 };
 
 const display = {
-  BLOCK: 'block',
-  FEATURE: 'feature',
-  FEATURED: 'featured',
-  HERO: 'hero',
-  IMAGE: 'image',
-  LIST: 'list',
-  MINIMAL: 'minimal',
-  OVERLAY: 'overlay',
-  PROMO: 'promo',
-  STACKED: 'stacked',
-  STATEMENT: 'statement',
-  STICKY: 'sticky',
-  TABULAR: 'tabular',
+  block: 'block',
+  feature: 'feature',
+  featured: 'featured',
+  hero: 'hero',
+  image: 'image',
+  list: 'list',
+  minimal: 'minimal',
+  overlay: 'overlay',
+  promo: 'promo',
+  short: 'short',
+  stacked: 'stacked',
+  statement: 'statement',
+  sticky: 'sticky',
+  tabular: 'tabular',
 };
 
 const layout = {

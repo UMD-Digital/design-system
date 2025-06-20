@@ -68,7 +68,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const type = element.getAttribute('type');
 
   if (
-    type === Attributes.values.display.STACKED ||
+    type === Attributes.values.display.stacked ||
     type === Attributes.values.layout.STACKED_INTERIOR
   ) {
     return Composite.hero.stacked({
@@ -77,13 +77,13 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
-  if (type === Attributes.values.display.MINIMAL) {
+  if (type === Attributes.values.display.minimal) {
     return Composite.hero.minimal({
       ...MakeHeroData({ element }),
     });
   }
 
-  if (type === Attributes.values.display.OVERLAY) {
+  if (type === Attributes.values.display.overlay) {
     return Composite.hero.overlay({
       ...MakeHeroData({ element }),
       videoRef,

@@ -38,7 +38,10 @@ const MakeHeroData = ({ element }: { element: HTMLElement }) => {
     isTextCenter = true;
   }
 
-  if (type === Attributes.values.layout.STACKED_INTERIOR) {
+  if (
+    Attributes.isLayout.interior({ element }) ||
+    Attributes.isDisplay.stackedInterior({ element })
+  ) {
     isWithLock = true;
   }
 
@@ -68,8 +71,8 @@ const createComponent: CreateComponentFunction = (element) => {
   const type = element.getAttribute('type');
 
   if (
-    type === Attributes.values.display.stacked ||
-    type === Attributes.values.layout.STACKED_INTERIOR
+    Attributes.isDisplay.stacked({ element }) ||
+    Attributes.isDisplay.stackedInterior({ element })
   ) {
     return Composite.hero.stacked({
       ...MakeHeroData({ element }),

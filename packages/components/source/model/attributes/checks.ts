@@ -352,10 +352,30 @@ const isDisplay = {
     AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.sticky,
   ),
-  stacked: createAttributeCheck(
-    AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.stacked,
-  ),
+  stacked: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.stacked,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.stacked,
+    }),
+  stackedInterior: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.layout.STACKED_INTERIOR,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.layout.lock,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
   tabular: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.tabular,
@@ -427,6 +447,10 @@ const isLayout = {
   image: createAttributeCheck(
     AttributeNames.deprecated.type.TYPE,
     AttributesValues.display.image,
+  ),
+  interior: createAttributeCheck(
+    AttributeNames.layout.lock,
+    AttributesValues.state.TRUE,
   ),
   lockFull: createAttributeCheck(
     AttributeNames.layout.lock,

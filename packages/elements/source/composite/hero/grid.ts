@@ -76,8 +76,23 @@ const createImageWrapper = (image: HTMLImageElement) =>
   });
 
 const createVideoWrapper = (video: HTMLVideoElement) =>
-  assets.video({
+  assets.video.observedAutoPlay({
     video,
+    isAutoplay: true,
+    additionalElementStyles: {
+      additionalElementStyles: {
+        width: '100%',
+        aspectRatio: '1 / 1',
+        position: 'relative',
+        overflow: 'hidden',
+
+        [`& video`]: {
+          height: '100%',
+          width: '100%',
+          objectFit: 'cover',
+        },
+      },
+    },
   });
 
 const createCorner = ({ images, isCornerLeft }: CornerProps) => {

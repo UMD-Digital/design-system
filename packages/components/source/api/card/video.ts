@@ -35,53 +35,56 @@ const createComponent: CreateComponentFunction = (element) => {
 };
 
 /**
- * Overlay Card
+ * Video Card
  *
- * A dramatic card component with overlay styling, supporting both image
- * and color backgrounds. Perfect for hero sections and featured content.
+ * A card component for displaying short-form video content in a 9:16 aspect ratio.
+ * Features auto-play on hover/focus and auto-pause on blur for an interactive
+ * preview experience.
  *
  * ## Custom Element
- * `<umd-element-card-overlay>`
+ * `<umd-element-card-video>`
  *
  * ## Slots
- * - `Video` - Card title (required, accepts: h2-h6, p)
+ * - `video` - Video element (required, accepts: video element)
+ *
+ * ## Visual Behavior
+ * - Maintains 9:16 aspect ratio (vertical video format)
+ * - Auto-plays (muted) on hover or focus
+ * - Auto-pauses when user moves away
+ * - Shows video controls with restricted features (no download, fullscreen, etc.)
+ * - Video covers entire card area with object-fit: cover
  *
  * @example
  * ```html
- * <!-- Image overlay card -->
- * <umd-element-card-overlay data-layout="image">
- *   <img slot="image" src="campus-hero.jpg" alt="Campus view">
- *   <p slot="eyebrow">Welcome</p>
- *   <h2 slot="headline">Discover Maryland</h2>
- *   <p slot="text">Join a community of innovators and leaders</p>
- *   <div slot="actions">
- *     <a href="/apply">Apply Now</a>
- *   </div>
- * </umd-element-card-overlay>
+ * <!-- Basic video card -->
+ * <umd-element-card-video>
+ *   <video slot="video" src="campus-tour.mp4" poster="tour-thumb.jpg">
+ *     <source src="campus-tour.mp4" type="video/mp4">
+ *   </video>
+ * </umd-element-card-video>
  * ```
  *
  * @example
  * ```html
- * <!-- Color overlay with quote -->
- * <umd-element-card-overlay data-visual="quote" data-theme="dark">
- *   <h3 slot="headline">"The best investment in our future is education."</h3>
- *   <p slot="text">- President Darryll J. Pines</p>
- * </umd-element-card-overlay>
+ * <!-- Video card with multiple sources -->
+ * <umd-element-card-video>
+ *   <video slot="video" poster="preview.jpg">
+ *     <source src="student-life.webm" type="video/webm">
+ *     <source src="student-life.mp4" type="video/mp4">
+ *     Your browser does not support the video tag.
+ *   </video>
+ * </umd-element-card-video>
  * ```
  *
  * @example
  * ```html
- * <!-- Feature card with CTA icon -->
- * <umd-element-card-overlay data-layout="image" data-theme="light">
- *   <img slot="image" src="research-bg.jpg" alt="Research lab">
- *   <p slot="eyebrow">Innovation</p>
- *   <h2 slot="headline">Breakthrough Research</h2>
- *   <p slot="text">Solving tomorrow's challenges today</p>
- *   <span slot="cta-icon">→</span>
- *   <div slot="actions">
- *     <a href="/research">Explore Research</a>
- *   </div>
- * </umd-element-card-overlay>
+ * <!-- Video card with captions -->
+ * <umd-element-card-video>
+ *   <video slot="video" poster="athletics.jpg">
+ *     <source src="athletics-highlight.mp4" type="video/mp4">
+ *     <track kind="captions" src="captions.vtt" srclang="en" label="English">
+ *   </video>
+ * </umd-element-card-video>
  * ```
  *
  * @category Components

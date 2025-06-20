@@ -261,32 +261,32 @@ const isDisplay = {
       ...props,
       attributeNameOld: AttributeNames.deprecated.display.DISPLAY_TYPE,
       attributeNameNew: AttributeNames.display.default,
-      attributeValue: AttributesValues.display.BLOCK,
+      attributeValue: AttributesValues.display.block,
     }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.display.default,
-      attributeValue: AttributesValues.display.BLOCK,
+      attributeValue: AttributesValues.display.block,
     }),
   feature: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.FEATURE,
+    AttributesValues.display.feature,
   ),
   featured: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.deprecated.type.TYPE,
       attributeNameNew: AttributeNames.display.default,
-      attributeValue: AttributesValues.display.FEATURED,
+      attributeValue: AttributesValues.display.featured,
     }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.display.default,
-      attributeValue: AttributesValues.display.FEATURED,
+      attributeValue: AttributesValues.display.featured,
     }),
   list: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.LIST,
+    AttributesValues.display.list,
   ),
   outline: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
@@ -305,16 +305,16 @@ const isDisplay = {
       ...props,
       attributeNameOld: AttributeNames.deprecated.type.TYPE,
       attributeNameNew: AttributeNames.display.default,
-      attributeValue: AttributesValues.display.OVERLAY,
+      attributeValue: AttributesValues.display.overlay,
     }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.display.default,
-      attributeValue: AttributesValues.display.OVERLAY,
+      attributeValue: AttributesValues.display.overlay,
     }),
   promo: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.PROMO,
+    AttributesValues.display.promo,
   ),
   primary: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
@@ -340,21 +340,25 @@ const isDisplay = {
       attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.type.SECONDARY,
     }),
+  short: createAttributeCheck(
+    AttributeNames.deprecated.display.DISPLAY,
+    AttributesValues.display.short,
+  ),
   statement: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.STATEMENT,
+    AttributesValues.display.statement,
   ),
   sticky: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.STICKY,
+    AttributesValues.display.sticky,
   ),
   stacked: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.STACKED,
+    AttributesValues.display.stacked,
   ),
   tabular: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.TABULAR,
+    AttributesValues.display.tabular,
   ),
 } as const;
 
@@ -422,7 +426,7 @@ const isLayout = {
   ),
   image: createAttributeCheck(
     AttributeNames.deprecated.type.TYPE,
-    AttributesValues.display.IMAGE,
+    AttributesValues.display.image,
   ),
   lockFull: createAttributeCheck(
     AttributeNames.layout.lock,
@@ -532,7 +536,7 @@ const isVisual = {
   ),
   list: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.LIST,
+    AttributesValues.display.list,
   ),
   icon_seal: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({

@@ -134,6 +134,12 @@ module.exports = {
           element: document.createElement('div'),
           styles: '.mock-style-overlay-card'
         })
+      },
+      video: {
+        short: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-style-video-card'
+        })
       }
     },
     carousel: {

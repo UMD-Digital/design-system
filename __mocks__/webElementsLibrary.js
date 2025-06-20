@@ -179,6 +179,10 @@ module.exports = {
         element: document.createElement('div'),
         styles: '.mock-style-hero-expand'
       }),
+      grid: jest.fn().mockReturnValue({
+        element: document.createElement('div'),
+        styles: '.mock-style-hero-grid'
+      }),
       logo: jest.fn().mockReturnValue({
         element: document.createElement('div'),
         styles: '.mock-style-hero-logo'

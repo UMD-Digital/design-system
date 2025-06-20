@@ -55,69 +55,65 @@ const createComponent: CreateComponentFunction = (element) => {
 /**
  * Grid Hero Component
  *
- * A hero component with expandable content area and sticky positioning support.
- * Ideal for immersive experiences with additional content reveal.
+ * A three-column grid hero with scroll-triggered animations that progressively
+ * focus on center content. Creates an immersive visual experience with smooth
+ * transitions between grid states.
  *
  * ## Custom Element
- * `<umd-element-hero-expand>`
+ * `<umd-element-hero-grid>`
  *
  * ## Slots
- * - `eyebrow` - Small text above headline
- * - `headline` - Main hero heading
- * - `image` - Hero image
- * - `video` - Hero video (as video element or container)
- * - `actions` - Call-to-action buttons/links
- * - `additional` - Additional expandable content area
+ * - `column-left` - Left column container for images
+ * - `column-center` - Center column container for images and optional video
+ * - `column-right` - Right column container for images
  *
- * ## Attributes
- * - `data-visual-position` - Top position for sticky behavior (in pixels)
- * - `data-top-position` - Override sticky position value
- *
- * ## Observed Attributes
- * - `data-visual-position` - Updates sticky position dynamically
+ * ## Visual Behavior
+ * - Initial layout: 20% - 60% - 20% column widths
+ * - Scroll animation: Transitions to 0% - 100% - 0% (center-focused)
+ * - Center rows animate from 25vh-1fr-25vh to 0-1fr-0
+ * - Includes progressive tint overlay during scroll
  *
  * @example
  * ```html
- * <!-- Basic expandable hero -->
- * <umd-element-hero-expand>
- *   <h1 slot="headline">Explore Our Campus</h1>
- *   <img slot="image" src="aerial-view.jpg" alt="Campus aerial view">
- *   <div slot="additional">
- *     <p>Discover 1,250 acres of possibilities...</p>
+ * <!-- Basic grid hero with images -->
+ * <umd-element-hero-grid>
+ *   <div slot="column-left">
+ *     <img src="left1.jpg" alt="Campus view">
+ *     <img src="left2.jpg" alt="Students">
  *   </div>
- * </umd-element-hero-expand>
+ *   <div slot="column-center">
+ *     <img src="center1.jpg" alt="Main building">
+ *     <img src="center2.jpg" alt="Research lab">
+ *   </div>
+ *   <div slot="column-right">
+ *     <img src="right1.jpg" alt="Athletics">
+ *     <img src="right2.jpg" alt="Library">
+ *   </div>
+ * </umd-element-hero-grid>
  * ```
  *
  * @example
  * ```html
- * <!-- Expandable hero with video and sticky position -->
- * <umd-element-hero-expand data-visual-position="80">
- *   <p slot="eyebrow">Experience Maryland</p>
- *   <h1 slot="headline">Where Ideas Take Flight</h1>
- *   <video slot="video" autoplay muted loop>
- *     <source src="campus-tour.mp4" type="video/mp4">
- *   </video>
- *   <div slot="actions">
- *     <button>Take Virtual Tour</button>
+ * <!-- Grid hero with center video -->
+ * <umd-element-hero-grid>
+ *   <div slot="column-left">
+ *     <img src="left1.jpg" alt="Campus life">
+ *     <img src="left2.jpg" alt="Student activities">
+ *     <img src="left3.jpg" alt="Dining">
  *   </div>
- *   <div slot="additional">
- *     <h2>Discover Your Path</h2>
- *     <p>With over 100 undergraduate majors...</p>
- *   </div>
- * </umd-element-hero-expand>
- * ```
- *
- * @example
- * ```html
- * <!-- Hero with wrapped video element -->
- * <umd-element-hero-expand>
- *   <h1 slot="headline">Innovation Hub</h1>
- *   <div slot="video">
+ *   <div slot="column-center">
+ *     <img src="center1.jpg" alt="Aerial view">
  *     <video autoplay muted loop>
- *       <source src="innovation.mp4" type="video/mp4">
+ *       <source src="campus-tour.mp4" type="video/mp4">
  *     </video>
+ *     <img src="center2.jpg" alt="Graduation">
  *   </div>
- * </umd-element-hero-expand>
+ *   <div slot="column-right">
+ *     <img src="right1.jpg" alt="Research">
+ *     <img src="right2.jpg" alt="Innovation">
+ *     <img src="right3.jpg" alt="Community">
+ *   </div>
+ * </umd-element-hero-grid>
  * ```
  *
  * @category Components

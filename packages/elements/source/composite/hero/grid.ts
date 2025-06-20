@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { assets, textLockup } from 'atomic';
+import { assets } from 'atomic';
 import { ElementModel } from 'model';
 
 interface CornerProps {
@@ -54,12 +54,12 @@ const keyFrameTint = `
 const columnBase = {
   display: 'grid',
   gridAutoFlow: 'row dense',
-  gridGap: '8px',
+  gridGap: `${Styles.token.spacing.min}`,
   width: '100%',
   height: '100vh',
 
-  '@media (--tablet-min)': {
-    gridGap: '16px',
+  [`@media (${Styles.token.media.queries.tablet.min})`]: {
+    gridGap: `${Styles.token.spacing.md}`,
   },
 
   ['& > *']: {
@@ -75,19 +75,10 @@ const createImageWrapper = (image: HTMLImageElement) =>
     isShowCaption: true,
   });
 
-const createVideoWrapper = (video: HTMLVideoElement) => {
-  const wrapper = ElementModel.create({
-    element: document.createElement('div'),
-    className: 'hero-grid-video-wrapper',
-    elementStyles: {
-      element: {
-        height: '100%',
-      },
-    },
+const createVideoWrapper = (video: HTMLVideoElement) =>
+  assets.video({
+    video,
   });
-  wrapper.element.appendChild(video);
-  return wrapper;
-};
 
 const createCorner = ({ images, isCornerLeft }: CornerProps) => {
   const corner = ElementModel.create({
@@ -214,11 +205,11 @@ export default (props: HeroGridProps) => {
         height: '100vh',
         width: '100%',
         display: 'grid',
-        gridGap: '8px',
+        gridGap: `${Styles.token.spacing.min}`,
         backgroundColor: 'var(--grayDark)',
 
-        '@media (--tablet-min)': {
-          gridGap: '16px',
+        [`@media (${Styles.token.media.queries.tablet.min})`]: {
+          gridGap: `${Styles.token.spacing.md}`,
         },
 
         '@media (prefers-reduced-motion: no-preference)': {

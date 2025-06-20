@@ -341,7 +341,7 @@ const isDisplay = {
       attributeValue: AttributesValues.type.SECONDARY,
     }),
   short: createAttributeCheck(
-    AttributeNames.deprecated.display.DISPLAY,
+    AttributeNames.display.default,
     AttributesValues.display.short,
   ),
   statement: createAttributeCheck(

@@ -562,6 +562,10 @@ const isVisual = {
       attributeName: AttributeNames.visual.open,
       attributeValue: AttributesValues.state.TRUE,
     }),
+  play: createAttributeCheck(
+    AttributeNames.visual.play,
+    AttributesValues.state.TRUE,
+  ),
   quote: createAttributeCheck(
     AttributeNames.deprecated.visual.VISUAL_QUOTE,
     AttributesValues.state.TRUE,

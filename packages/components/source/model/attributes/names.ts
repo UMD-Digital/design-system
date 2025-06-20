@@ -74,6 +74,7 @@ const visual = {
   icon_seal: 'data-visual-icon-seal',
   hidden_days: 'data-days-to-hide',
   open: 'data-visual-open',
+  play: 'data-visual-play',
   size: 'data-visual-size',
   transparent: 'data-visual-transparent',
 };

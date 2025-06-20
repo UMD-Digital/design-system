@@ -163,14 +163,87 @@ describe('Component: umd-element-card-video', () => {
       cardVideo();
     });
 
-    it('should not have configuration attributes', () => {
-      // Video card doesn't have data-* attributes based on the component code
+    it('should handle data-display="short" attribute', () => {
       const { element } = createTestComponent(tagName);
-      const attributes = getComponentAttributes(element);
       
-      // Should only have base attributes like slot, id, class if any
-      const dataAttributes = Object.keys(attributes).filter(key => key.startsWith('data-'));
-      expect(dataAttributes.length).toBe(0);
+      // Add required video slot
+      const video = document.createElement('video');
+      video.setAttribute('slot', 'video');
+      video.src = 'test-video.mp4';
+      element.appendChild(video);
+      
+      // Set attribute
+      element.setAttribute('data-display', 'short');
+      
+      const attributes = getComponentAttributes(element);
+      expect(attributes['data-display']).toBe('short');
+    });
+
+    it('should handle data-visual-play="true" attribute', () => {
+      const { element } = createTestComponent(tagName);
+      
+      // Add required video slot
+      const video = document.createElement('video');
+      video.setAttribute('slot', 'video');
+      video.src = 'test-video.mp4';
+      element.appendChild(video);
+      
+      // Set attribute
+      element.setAttribute('data-visual-play', 'true');
+      
+      const attributes = getComponentAttributes(element);
+      expect(attributes['data-visual-play']).toBe('true');
+    });
+
+    it('should default to block display without data-display attribute', () => {
+      const { element } = createTestComponent(tagName);
+      
+      // Add required video slot
+      const video = document.createElement('video');
+      video.setAttribute('slot', 'video');
+      video.src = 'test-video.mp4';
+      element.appendChild(video);
+      
+      const attributes = getComponentAttributes(element);
+      expect(attributes['data-display']).toBeUndefined();
+    });
+
+    it('should handle both data-display and data-visual-play attributes together', () => {
+      const { element } = createTestComponent(tagName);
+      
+      // Add required video slot
+      const video = document.createElement('video');
+      video.setAttribute('slot', 'video');
+      video.src = 'test-video.mp4';
+      element.appendChild(video);
+      
+      // Set both attributes
+      element.setAttribute('data-display', 'short');
+      element.setAttribute('data-visual-play', 'true');
+      
+      const attributes = getComponentAttributes(element);
+      expect(attributes['data-display']).toBe('short');
+      expect(attributes['data-visual-play']).toBe('true');
+    });
+
+    it('should ignore data-visual-play when data-display="short"', () => {
+      // Note: data-visual-play only applies to default (block) display
+      const { element } = createTestComponent(tagName);
+      
+      // Add required video slot
+      const video = document.createElement('video');
+      video.setAttribute('slot', 'video');
+      video.src = 'test-video.mp4';
+      element.appendChild(video);
+      
+      // Set attributes
+      element.setAttribute('data-display', 'short');
+      element.setAttribute('data-visual-play', 'true');
+      
+      // Both attributes should be present but visual-play has no effect on short display
+      const attributes = getComponentAttributes(element);
+      expect(attributes['data-display']).toBe('short');
+      expect(attributes['data-visual-play']).toBe('true');
     });
   });
 

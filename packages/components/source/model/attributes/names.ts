@@ -49,10 +49,12 @@ const layout = {
   columnCount: 'data-layout-column-count',
   fixed: 'data-layout-fixed',
   hidden: 'data-layout-hidden',
+  interior: 'data-layout-interior',
   lock: 'data-layout-lock',
   position: 'data-layout-position',
   reverse: 'data-layout-reverse',
   rowCount: 'data-layout-row-count',
+  text: 'data-layout-text',
 };
 
 const sharing = {

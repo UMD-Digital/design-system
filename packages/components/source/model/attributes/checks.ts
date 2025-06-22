@@ -352,10 +352,34 @@ const isDisplay = {
     AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.sticky,
   ),
-  stacked: createAttributeCheck(
-    AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.stacked,
+  stacked: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.stacked,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.stacked,
+    }),
+  stackedInteriorDeprecated: createAttributeCheck(
+    AttributeNames.deprecated.type.TYPE,
+    AttributesValues.layout.STACKED_INTERIOR,
   ),
+  stackedInterior: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.layout.STACKED_INTERIOR,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.layout.STACKED_INTERIOR,
+    }),
   tabular: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.tabular,
@@ -428,6 +452,14 @@ const isLayout = {
     AttributeNames.deprecated.type.TYPE,
     AttributesValues.display.image,
   ),
+  interior: createAttributeCheck(
+    AttributeNames.layout.interior,
+    AttributesValues.state.TRUE,
+  ),
+  lock: createAttributeCheck(
+    AttributeNames.layout.lock,
+    AttributesValues.state.TRUE,
+  ),
   lockFull: createAttributeCheck(
     AttributeNames.layout.lock,
     AttributesValues.layout.FULL,
@@ -443,6 +475,30 @@ const isLayout = {
       ...props,
       attributeName: AttributeNames.layout.reverse,
       attributeValue: AttributesValues.state.TRUE,
+    }),
+  textCentered: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.visual.VISUAL_TEXT_CENTER,
+      attributeNameNew: AttributeNames.layout.text,
+      attributeValue: AttributesValues.layout.CENTER,
+    }) ||
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.layout.text,
+      attributeValue: AttributesValues.layout.DEFAULT_CENTERED,
+    }) ||
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.layout.text,
+      attributeValue: AttributesValues.layout.DEFAULT_INTERIOR_CENTERED,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.layout.text,
+      attributeValue: AttributesValues.layout.CENTER,
     }),
 } as const;
 
@@ -616,10 +672,6 @@ const isVisual = {
     AttributeNames.deprecated.option.OPTIONAL_STICKY_FIRST,
     AttributesValues.state.TRUE,
     true,
-  ),
-  textCentered: createAttributeCheck(
-    AttributeNames.deprecated.visual.VISUAL_TEXT_CENTER,
-    AttributesValues.layout.CENTER,
   ),
   transparent: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({

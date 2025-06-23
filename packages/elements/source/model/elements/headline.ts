@@ -53,6 +53,14 @@ export const sansScalingMin = createElement(
 
 // Campaign Fonts
 
+export const campaignMaximum = createElement(
+  Styles.typography.campaign.fonts.maximum,
+);
+
+export const campaignExtraLarge = createElement(
+  Styles.typography.campaign.fonts.extraLarge,
+);
+
 export const campaignLarge = createElement(
   Styles.typography.campaign.fonts.large,
 );

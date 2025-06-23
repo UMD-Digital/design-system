@@ -58,3 +58,6 @@ export const gridStacked = (props: ElementProps) =>
 
 export const spaceHorizontalMax = (props: ElementProps) =>
   createStyledElement(props, Styles.layout.space.horizontal.max);
+
+export const spaceHorizontalFull = (props: ElementProps) =>
+  createStyledElement(props, Styles.layout.space.horizontal.full);

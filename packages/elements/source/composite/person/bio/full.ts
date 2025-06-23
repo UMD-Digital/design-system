@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { PersonBio } from '../_types';
@@ -6,16 +6,28 @@ import { PersonBio } from '../_types';
 export default (props: PersonBio) => {
   const { isThemeDark, image, actions, description } = props;
   const { name, ...textProps } = props;
-  const container = document.createElement('div');
-  let styles = '';
+  const container = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'umd-element-composite-person-bio-full',
+    elementStyles: {
+      element: {
+        [`& .${Styles.element.asset.image.wrapper.className}`]: {
+          [`@container (max-width: ${Styles.token.media.breakpointValues.medium.max}px)`]:
+            {
+              display: 'flex',
+            },
+        },
+      },
+    },
+  });
 
   if (image) {
     const imageContainer = assets.image.background({
       image,
       isScaled: false,
     });
-    container.appendChild(imageContainer.element);
-    styles += imageContainer.styles;
+    container.element.appendChild(imageContainer.element);
+    container.styles += imageContainer.styles;
   }
 
   if (name) {
@@ -24,28 +36,28 @@ export default (props: PersonBio) => {
       isThemeDark,
       elementStyles: {
         element: {
-          marginTop: token.spacing.lg,
-          color: `${token.color.black}`,
+          marginTop: Styles.token.spacing.lg,
+          color: `${Styles.token.color.black}`,
           textTransform: 'uppercase',
           fontWeight: '800',
           display: 'block',
         },
         siblingAfter: {
-          marginTop: token.spacing.min,
+          marginTop: Styles.token.spacing.min,
         },
       },
     });
-    container.appendChild(styledName.element);
-    styles += styledName.styles;
+    container.element.appendChild(styledName.element);
+    container.styles += styledName.styles;
   }
 
   const textLockupElement = textLockup.person(textProps);
-  container.appendChild(textLockupElement.element);
-  styles += textLockupElement.styles;
+  container.element.appendChild(textLockupElement.element);
+  container.styles += textLockupElement.styles;
 
   const contactLockupElement = textLockup.contact(props);
-  container.appendChild(contactLockupElement.element);
-  styles += contactLockupElement.styles;
+  container.element.appendChild(contactLockupElement.element);
+  container.styles += contactLockupElement.styles;
 
   if (description) {
     const styledDescription = ElementModel.richText.simpleLarge({
@@ -53,14 +65,14 @@ export default (props: PersonBio) => {
       isThemeDark,
       elementStyles: {
         element: {
-          marginTop: token.spacing.lg,
-          maxWidth: token.spacing.maxWidth.smallest,
+          marginTop: Styles.token.spacing.lg,
+          maxWidth: Styles.token.spacing.maxWidth.smallest,
         },
       },
     });
 
-    container.appendChild(styledDescription.element);
-    styles += styledDescription.styles;
+    container.element.appendChild(styledDescription.element);
+    container.styles += styledDescription.styles;
   }
 
   if (actions) {
@@ -68,13 +80,13 @@ export default (props: PersonBio) => {
       element: actions,
       elementStyles: {
         element: {
-          marginTop: token.spacing.sm,
+          marginTop: Styles.token.spacing.sm,
         },
       },
     });
-    container.appendChild(styledActions.element);
-    styles += styledActions.styles;
+    container.element.appendChild(styledActions.element);
+    container.styles += styledActions.styles;
   }
 
-  return { element: container, styles };
+  return container;
 };

@@ -60,6 +60,10 @@ export const reset = {
     background: 'none',
   },
 
+  video: {
+    maxWidth: '100%',
+  },
+
   address: {
     fontStyle: 'normal',
   },

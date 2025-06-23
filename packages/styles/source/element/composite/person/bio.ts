@@ -3,8 +3,8 @@
  * Provides styles for biographical person components with responsive layouts.
  */
 
-import { color, media, spacing } from '../../../token';
-import { image } from '../../asset';
+import { media, spacing } from '../../../token';
+import { wrapper as imageWrapper } from '../../asset/image';
 import { create } from '../../../utilities';
 import type { JssObject } from '../../../_types';
 
@@ -42,6 +42,12 @@ const bioLayout = {
     gridGap: `${spacing.lg}`,
     alignItems: `center`,
   }),
+
+  [`& .${imageWrapper.className}`]: {
+    ...createContainerQuery(media.breakpointValues.medium.max, 'max-width', {
+      display: 'flex',
+    }),
+  },
 
   [`& img`]: {
     ...createContainerQuery(media.breakpointValues.large.min, 'min-width', {

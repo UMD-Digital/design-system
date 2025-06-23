@@ -22,6 +22,19 @@ export const simpleLarge = (props: ElementProps) => {
   return createStyledElement(props, Styles.element.text.rich.simpleLarge);
 };
 
+export const simpleLargest = (props: ElementProps) => {
+  const { isThemeDark } = props;
+
+  if (isThemeDark) {
+    return createStyledElement(
+      props,
+      Styles.element.text.rich.simpleLargestDark,
+    );
+  }
+
+  return createStyledElement(props, Styles.element.text.rich.simpleLargest);
+};
+
 export const simpleScaling = (props: ElementProps) => {
   const { isThemeDark } = props;
 

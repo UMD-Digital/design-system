@@ -3,7 +3,7 @@
  * Provides rich text styles for formatted HTML content with various variants.
  */
 
-import { color, font, spacing } from '../../token';
+import { color, font, media, spacing } from '../../token';
 import { sans } from '../../typography';
 import * as animation from '../../animation';
 import { create } from '../../utilities';
@@ -230,6 +230,75 @@ export const simpleLargeDark: JssObject = create.jss.objectWithClassName({
   },
 
   className: `${classNamePrefix}-simple-large-dark`,
+});
+
+/**
+ * Large simple rich text styles.
+ * @returns {JssObject} Larger font size variant of simple rich text.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.rich.simpleLargest
+ * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-simple-largest"
+ * ```
+ * @since 1.4.8
+ */
+export const simpleLargest: JssObject = create.jss.objectWithClassName({
+  ...simpleBase,
+  fontSize: font.size.lg,
+
+  [`@media (${media.queries.desktop.min})`]: {
+    fontSize: font.size['2xl'],
+  },
+
+  '& > *': {
+    fontSize: font.size.lg,
+    ...childSpacing,
+
+    [`@media (${media.queries.desktop.min})`]: {
+      fontSize: font.size['2xl'],
+    },
+  },
+
+  className: [`${classNamePrefix}-simple-largest`],
+});
+
+/**
+ * Large simple rich text with dark theme.
+ * @returns {JssObject} Largest font size variant of simple rich text with dark background theme.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.text.rich.simpleLargestDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-text-rich-simple-largest-dark"
+ * ```
+ * @since 1.4.8
+ */
+export const simpleLargestDark: JssObject = create.jss.objectWithClassName({
+  ...simpleBase,
+  ...themeDarkColors,
+  fontSize: font.size.lg,
+
+  [`@media (${media.queries.desktop.min})`]: {
+    fontSize: font.size['2xl'],
+  },
+
+  '& > *': {
+    fontSize: font.size.lg,
+    ...childSpacing,
+
+    [`@media (${media.queries.desktop.min})`]: {
+      fontSize: font.size['2xl'],
+    },
+  },
+
+  className: `${classNamePrefix}-simple-largest-dark`,
 });
 
 /**

@@ -1,5 +1,5 @@
 import { ElementModel } from 'model';
-import { gifToggle } from './gif';
+import { default as gifToggle } from './gif';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 

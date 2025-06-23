@@ -1,7 +1,7 @@
 import * as Utilities from 'utilities';
 import { ElementModel } from 'model';
 
-export const gifToggle = ({ image }: { image: HTMLImageElement }) => {
+export default ({ image }: { image: HTMLImageElement }) => {
   const composite = ElementModel.assets.gifToggle({
     element: document.createElement('div'),
   });

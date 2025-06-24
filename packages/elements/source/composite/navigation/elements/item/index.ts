@@ -51,9 +51,10 @@ const IS_SELECTED = `[${ATTRIBUTE_SELECTED}]`;
 const IS_SHOWING = `[${ATTRIBUTE_SHOWING}]`;
 const IS_DROPDOWN = `[${ATTRIBUTE_DROPDOWN}]`;
 
-const OVERWRITE_IS_SHOWING_DROPDOWN_CONTAINER = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN}${IS_SHOWING} .${ELEMENT_DROPDOWN_CONTAINER}`;
-const OVERWRITE_IS_SHOWING_PRIMARY_LINK = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN} .${ELEMENT_PRIMARLY_LINK_WRAPPER}`;
-const OVERWRITE_IS_SHOWING_PRIMARY_BUTTON = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN}${IS_SHOWING} .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON}`;
+const OVERWRITE_DROPDOWN_CONTAINER = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN}`;
+const OVERWRITE_IS_SHOWING_DROPDOWN_CONTAINER = `${OVERWRITE_DROPDOWN_CONTAINER}${IS_SHOWING} .${ELEMENT_DROPDOWN_CONTAINER}`;
+const OVERWRITE_IS_SHOWING_PRIMARY_LINK = `${OVERWRITE_DROPDOWN_CONTAINER} .${ELEMENT_PRIMARLY_LINK_WRAPPER}`;
+const OVERWRITE_IS_SHOWING_PRIMARY_BUTTON = `${OVERWRITE_DROPDOWN_CONTAINER}${IS_SHOWING} .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON}`;
 
 // prettier-ignore
 const OverwriteDropdownStyles = `
@@ -78,17 +79,19 @@ const PrimaryStyles = `
   }
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} {
-    display: inline-flex;
+    display: block;
     position: relative;
   }
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a {
     color: ${token.color.black};
     font-size: ${token.font.size.base};
-    white-space: nowrap;
     transition: color 0.2s ease-in-out;
-    line-height: 1.45em;
+    line-height: 1.15em;
     font-weight: 700;
+    text-align: right;
+    text-wrap: pretty;
+    display: block;
   }
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:hover,
@@ -106,9 +109,9 @@ const PrimaryStyles = `
   }
 
   .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON} {
-    align-self: flex-start;
-    margin-top: 5px;
-    margin-left: 8px;
+    position: absolute;
+    top: 2px;
+    right: -20px;
     transition: transform .5s;
   }
 
@@ -200,8 +203,8 @@ const DropdownStyles = `
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
-    min-width: 250px;
+    transform: translateX(-50%);v 
+    min-width: 200px;
     width: auto;
     padding-top: ${token.spacing.sm};
     display: none;
@@ -210,9 +213,12 @@ const DropdownStyles = `
 
 const STYLES_NAV_ITEM_ELEMENT = `
   .${ELEMENT_NAV_ITEM_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
     position: relative;
     z-index: 9999;
+  }
+
+  ${OVERWRITE_DROPDOWN_CONTAINER} {
+    padding-right: 20px;
   }
 
   .${ELEMENT_NAV_ITEM_CONTAINER} a {
@@ -440,25 +446,6 @@ const CreateNavItemElement = (props: TypeNavItem) =>
       if (!isShowing) HideDropdown();
     };
 
-    const EventSize = () => {
-      const wrapperElement = elementContainer.querySelector(
-        `.${ELEMENT_PRIMARLY_LINK_WRAPPER}`,
-      ) as HTMLDivElement;
-
-      if (!wrapperElement) return;
-      let width = wrapperElement.offsetWidth;
-
-      if (width > 230) {
-        width = 230;
-        const slottedLink = wrapperElement.querySelector(
-          `a`,
-        ) as HTMLAnchorElement;
-        slottedLink.style.whiteSpace = `initial`;
-      }
-
-      elementContainer.style.width = `${width}px`;
-    };
-
     const buttonClick = () => {
       isShowing = isShowing ? false : true;
       EventButtonClick();
@@ -473,13 +460,6 @@ const CreateNavItemElement = (props: TypeNavItem) =>
       navItemName,
     });
 
-    window.addEventListener(
-      'resize',
-      Utility.performance.debounce(() => {
-        EventSize();
-      }, 20),
-    );
-
     elementContainer.addEventListener('mouseover', () => {
       isShowing = true;
       ShowDropdown();
@@ -491,7 +471,6 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     });
 
     setTimeout(() => {
-      EventSize();
       OnLoadDropdownSpans();
     }, 10);
 

@@ -149,7 +149,13 @@ const CreateHeader = ({
     slotRef: LOGO,
   });
 
-  const utilitySlot = Node.slot({ type: UTILITY });
+  const utilitySlotElement = element.querySelector(
+    `[slot="${UTILITY}"]`,
+  ) as HTMLElement;
+  const utilityRow =
+    utilitySlotElement?.childElementCount > 0
+      ? Node.slot({ type: UTILITY })
+      : null;
   const searchUrl = element.getAttribute(ATTRIBUTE_SEARCH_URL);
   const ctaUrl = element.getAttribute(ATTRIBUTE_CTA_URL);
   const ctaText = element.getAttribute(ATTRIBUTE_CTA_TEXT);
@@ -160,7 +166,7 @@ const CreateHeader = ({
 
   const value = Composite.navigation.header.CreateElement({
     logo: logoSlot,
-    utilityRow: utilitySlot,
+    utilityRow,
     navItems: CreateNavItemSlots({ element }),
     eventOpen,
     searchUrl,

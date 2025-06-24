@@ -78,7 +78,7 @@ const CtaStyles = `
 `;
 
 const NavigationColumnStyles = `
-  @media (max-width: ${token.media.breakpoints.tablet.max}) {
+  @media (max-width: 1240px) {
     .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
       display: none;
     }

@@ -89,9 +89,13 @@ const PrimaryStyles = `
     transition: color 0.2s ease-in-out;
     line-height: 1.15em;
     font-weight: 700;
-    text-align: right;
     text-wrap: pretty;
     display: block;
+    display: flex;
+    align-items: flex-end;
+    text-align: right;
+    width: min-content;
+    width: -webkit-fill-available;
   }
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:hover,
@@ -121,13 +125,6 @@ const PrimaryStyles = `
     width: 14px;
     transform: rotate(0deg) translateY(0);
     transition: fill .5s,transform .5s;
-  }
-`;
-
-// prettier-ignore
-const DropdownCtaStyles = `
-  .${ELEMENT_DROPDOWN_CTA_COLUMN} > * {
-
   }
 `;
 
@@ -237,7 +234,6 @@ const STYLES_NAV_ITEM_ELEMENT = `
   ${DropdownStyles}
   ${DropdownMultipleColumnStyles}
   ${DropdownListStyles}
-  ${DropdownCtaStyles}
   ${OverwriteDropdownStyles}
 `;
 

@@ -23,14 +23,9 @@ const lockBase = {
     paddingRight: spacing['2xl'],
   },
 
-  [`@media (${media.queries.desktop.min})`]: {
+  [`@media (${media.queries.highDef.min})`]: {
     paddingLeft: spacing['4xl'],
     paddingRight: spacing['4xl'],
-  },
-
-  [`@media (${media.queries.highDef.min})`]: {
-    paddingLeft: spacing.max,
-    paddingRight: spacing.max,
   },
 };
 

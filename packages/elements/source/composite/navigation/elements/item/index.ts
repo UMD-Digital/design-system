@@ -94,8 +94,6 @@ const PrimaryStyles = `
     display: flex;
     align-items: flex-end;
     text-align: right;
-    width: min-content;
-    width: -webkit-fill-available;
   }
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:hover,

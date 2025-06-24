@@ -28,9 +28,11 @@ type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 const { convertJSSObjectToStyles } = Utility.styles;
 const ANIMATION_TIME = 500;
 
-const ATTRIBUTE_STICKY = 'sticky';
+const ATTRIBUTE_STICKY = 'data-sticky';
+const ATTRIBUTE_CTA = 'data-cta';
 
 const IS_STICKY = `[${ATTRIBUTE_STICKY}="true"]`;
+const IS_CTA = `[${ATTRIBUTE_CTA}="true"]`;
 
 const ELEMENT_HEADER_DECLARATION = 'element-header-declaration';
 const ELEMENT_HEADER_CONTAINTER = 'element-header-container';
@@ -46,6 +48,9 @@ const ELEMENT_HEADER_UTILITY_ROW = 'element-header-utility-row';
 
 const OVERWRITE_STICKY_CONTAINER = `.${ELEMENT_HEADER_CONTAINTER}${IS_STICKY}`;
 const OVERWRITE_STICKY_LOGO = `${OVERWRITE_STICKY_CONTAINER} .${ELEMENT_HEADER_LOGO}`;
+const OVERWRITE_CTA_WRAPPER = `.${ELEMENT_HEADER_WRAPPER}${IS_CTA}`;
+const OVERWRITE_CTA_WRAPPER_NAV_ROW = `${OVERWRITE_CTA_WRAPPER} .${ELEMENT_HEADER_NAVIGATION_ROW}`;
+const OVERWRITE_CTA_WRAPPER_CTA = `${OVERWRITE_CTA_WRAPPER} .${ELEMENT_HEADER_MENU_CTA}`;
 
 const OverwriteStickyStyles = `
   ${OVERWRITE_STICKY_CONTAINER} {
@@ -69,11 +74,16 @@ const CtaStyles = `
     padding: ${token.spacing.xs};
     background-color: ${token.color.red};
     transition: background .5s;
+    white-space: nowrap;
   }
 
   .${ELEMENT_HEADER_MENU_CTA}:hover,
   .${ELEMENT_HEADER_MENU_CTA}:focus {
     background-color: ${token.color.redDark};
+  }
+
+  ${OVERWRITE_CTA_WRAPPER_CTA} {
+    margin-top: -${token.spacing.min};
   }
 `;
 
@@ -85,10 +95,20 @@ const NavigationColumnStyles = `
   }
 
   .${ELEMENT_HEADER_NAVIGATION_ROW} {
-    display: flex;
-    justify-content flex-end;
-    align-items: center;
-    gap: ${token.spacing.md};
+    display: grid;
+    grid-auto-flow: column;
+  }
+
+  ${OVERWRITE_CTA_WRAPPER_NAV_ROW} {
+    padding-top: ${token.spacing.sm};
+  }
+
+  .${ELEMENT_HEADER_NAVIGATION_ROW} > * {
+    display: block;
+  }
+
+  .${ELEMENT_HEADER_NAVIGATION_ROW} > *:not(:first-child) {
+    margin-left: ${token.spacing.md};
   }
 
   .${ELEMENT_HEADER_NAVIGATION_ROW} svg {
@@ -307,6 +327,7 @@ const CreateLogoColumn = ({ logo, eventOpen }: TypeLogoRequirments) => {
 };
 
 const CreateNavigationHeader = (props: TypeHeaderRequirements) => {
+  const { ctaUrl, ctaText } = props;
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -342,6 +363,7 @@ const CreateNavigationHeader = (props: TypeHeaderRequirements) => {
   wrapper.appendChild(logoColumn);
 
   if (navigationColumn) wrapper.appendChild(navigationColumn);
+  if (ctaUrl && ctaText) wrapper.setAttribute(ATTRIBUTE_CTA, 'true');
 
   container.appendChild(wrapper);
   container.classList.add(ELEMENT_HEADER_CONTAINTER);

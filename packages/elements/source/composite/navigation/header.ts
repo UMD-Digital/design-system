@@ -108,10 +108,6 @@ const NavigationColumnStyles = `
     justify-content: flex-end;
     gap: ${token.spacing.md};
   }
-
-  .${ELEMENT_HEADER_MENU_SEARCH} {
-    margin-left: ${token.spacing.md};
-  }
 `;
 
 const LogoColumnStyles = `

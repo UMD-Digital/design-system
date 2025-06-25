@@ -40,7 +40,7 @@ export const base = {
   three: {
     ...baseSmallScreen,
 
-    [`@media (${media.queries.desktop.min})`]: {
+    [`@media (${media.queries.tablet.min})`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },

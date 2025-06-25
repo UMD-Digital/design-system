@@ -46,7 +46,7 @@ export default (props: CardVideoShortProps) => {
     'controlsList',
     'nodownload nofullscreen noremoteplayback noplaybackrate"',
   );
-  video.setAttribute('preload', 'true');
+  video.setAttribute('preload', 'metadata');
   video.setAttribute('playsinline', '');
   video.setAttribute('muted', '');
   video.addEventListener('mouseover', setPlay);

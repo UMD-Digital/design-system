@@ -49,6 +49,16 @@ const childSpacing = {
 };
 
 /**
+ * Consistent sizing for largest.
+ * @type {object}
+ * @private
+ */
+const largestTypography = {
+  fontSize: font.size['2xl'],
+  lineHeight: '1.25em',
+};
+
+/**
  * Base styles for simple rich text.
  * @type {object}
  * @private
@@ -251,7 +261,7 @@ export const simpleLargest: JssObject = create.jss.objectWithClassName({
   fontSize: font.size.lg,
 
   [`@media (${media.queries.desktop.min})`]: {
-    fontSize: font.size['2xl'],
+    ...largestTypography,
   },
 
   '& > *': {
@@ -259,7 +269,7 @@ export const simpleLargest: JssObject = create.jss.objectWithClassName({
     ...childSpacing,
 
     [`@media (${media.queries.desktop.min})`]: {
-      fontSize: font.size['2xl'],
+      ...largestTypography,
     },
   },
 
@@ -286,7 +296,7 @@ export const simpleLargestDark: JssObject = create.jss.objectWithClassName({
   fontSize: font.size.lg,
 
   [`@media (${media.queries.desktop.min})`]: {
-    fontSize: font.size['2xl'],
+    ...largestTypography,
   },
 
   '& > *': {
@@ -294,7 +304,7 @@ export const simpleLargestDark: JssObject = create.jss.objectWithClassName({
     ...childSpacing,
 
     [`@media (${media.queries.desktop.min})`]: {
-      fontSize: font.size['2xl'],
+      ...largestTypography,
     },
   },
 

@@ -20,7 +20,7 @@ const MakeHeroData = ({ element }: { element: HTMLElement }) => {
   const type = element.getAttribute(Attributes.names.deprecated.type.TYPE);
   const includesAnimation = Attributes.includesFeature.animation({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
-  let isTextCenter = Attributes.isVisual.textCentered({ element });
+  let isTextCenter = Attributes.isLayout.textCentered({ element });
 
   let isInterior = false;
   let isWithLock = false;
@@ -90,9 +90,13 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
+  const video = videoRef as HTMLVideoElement | null;
+  const image = Slots.assets.image({ element }) as HTMLImageElement | null;
+
   return Composite.hero.standard({
     ...MakeHeroData({ element }),
-    videoRef,
+    image,
+    video,
   });
 };
 

@@ -33,9 +33,8 @@ export default ({
     const styledEyebrow = ElementModel.text.ribbon({
       element: eyebrow,
       elementStyles: {
-        element: {},
         siblingAfter: {
-          marginTop: Styles.token.spacing.min,
+          marginTop: Styles.token.spacing.sm,
         },
       },
     });
@@ -51,7 +50,8 @@ export default ({
           textTransform: 'uppercase',
           [`@media (${Styles.token.media.queries.tablet.min})`]: {
             maxWidth: '700px',
-            margin: '0 auto',
+            marginLeft: 'auto',
+            marginRight: 'auto',
             color: `${Styles.token.color.white}`,
           },
 
@@ -61,13 +61,12 @@ export default ({
               fontSize: `120px`,
             }),
           },
-
-          [`& + *`]: {
-            marginTop: Styles.token.spacing.sm,
-          },
         },
         subElement: {
           color: 'currentColor',
+        },
+        siblingAfter: {
+          marginTop: Styles.token.spacing.sm,
         },
       },
       isThemeDark,
@@ -81,7 +80,7 @@ export default ({
       element: text,
       elementStyles: {
         siblingAfter: {
-          marginTop: Styles.token.spacing.min,
+          marginTop: Styles.token.spacing.lg,
         },
       },
       isThemeDark,
@@ -92,13 +91,8 @@ export default ({
   }
 
   if (actions) {
-    const styledActions = ElementModel.layout.gridInlineTabletRows({
+    const styledActions = ElementModel.layout.gridStacked({
       element: actions,
-      elementStyles: {
-        element: {
-          marginTop: Styles.token.spacing.sm,
-        },
-      },
     });
     composite.element.appendChild(styledActions.element);
     composite.styles += styledActions.styles;

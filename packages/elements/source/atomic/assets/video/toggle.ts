@@ -3,13 +3,19 @@ import * as Utility from 'utilities';
 
 interface VideoProps {
   video: HTMLVideoElement;
+  isScaled?: boolean;
   additionalElementStyles?: Record<string, any>;
   callback?: (isPlaying: boolean) => void;
 }
 
 export default (props: VideoProps) =>
   (() => {
-    const { video, additionalElementStyles, callback } = props;
+    const {
+      video,
+      additionalElementStyles,
+      isScaled = false,
+      callback,
+    } = props;
     const composite = ElementModel.create({
       element: document.createElement('div'),
       className: 'umd-element-video',
@@ -17,6 +23,13 @@ export default (props: VideoProps) =>
         element: {
           position: 'relative',
           ...additionalElementStyles,
+          ...(isScaled && {
+            [`& video`]: {
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            },
+          }),
         },
       },
     });

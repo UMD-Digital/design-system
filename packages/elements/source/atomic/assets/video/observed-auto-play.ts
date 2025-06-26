@@ -4,12 +4,14 @@ import * as Utility from 'utilities';
 interface CardVideoShortProps {
   video: HTMLVideoElement;
   isAutoplay?: boolean;
+  isScaled?: boolean;
   additionalElementStyles?: Record<string, any>;
 }
 
 export default ({
   video,
   isAutoplay = false,
+  isScaled = false,
   additionalElementStyles,
 }: CardVideoShortProps) =>
   (() => {
@@ -52,6 +54,7 @@ export default ({
     const composite = toggle({
       video,
       additionalElementStyles,
+      isScaled,
       callback,
     });
 

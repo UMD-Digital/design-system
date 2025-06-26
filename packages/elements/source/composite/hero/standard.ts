@@ -6,19 +6,25 @@ interface AnimationProps {
   includesAnimation?: boolean;
 }
 
+interface TextStyleProps {
+  isThemeDark?: boolean;
+  isInterior: boolean;
+}
+
 interface AssetProps extends AnimationProps {
   image?: HTMLImageElement | null;
   video?: HTMLVideoElement | null;
 }
 
-interface TextProps extends AnimationProps {
+interface HeadlineProps extends TextStyleProps {
   headline?: HTMLElement | null;
+}
+
+interface TextProps extends AnimationProps, HeadlineProps {
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  isThemeDark?: boolean;
   isTextCenter?: boolean;
-  isInterior: boolean;
 }
 
 interface HeroStandardProps extends AssetProps, TextProps {}
@@ -89,7 +95,10 @@ const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
   });
 
   if (video && video instanceof HTMLVideoElement) {
-    const videoElement = assets.video.observedAutoPlay({ video });
+    const videoElement = assets.video.observedAutoPlay({
+      video,
+      isScaled: true,
+    });
     assetContainer.element.appendChild(videoElement.element);
     assetContainer.styles += videoElement.styles;
 
@@ -114,9 +123,51 @@ const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
   return assetContainer;
 };
 
-const createText = (props: TextProps) => {
-  const { headline, isTextCenter, isInterior, includesAnimation } = props;
+const createHeadline = (props: HeadlineProps) => {
+  const { headline, isInterior, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
+  const isOverwriteHeadline = characterCount > 10 && isInterior;
+
+  let headlineElement = null;
+
+  if (headline) {
+    const tabletStyles = {
+      maxWidth: '700px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      color: Styles.token.color.white,
+    };
+
+    const desktopStyles = {
+      maxWidth: '816px',
+      ...(isOverwriteHeadline && { fontSize: '80px' }),
+    };
+
+    headlineElement = ElementModel.headline.campaignExtraLarge({
+      element: headline,
+      elementStyles: {
+        element: {
+          textTransform: 'uppercase',
+          [`@media (${Styles.token.media.queries.tablet.min})`]: tabletStyles,
+          [`@media (${Styles.token.media.queries.desktop.min})`]: desktopStyles,
+        },
+        subElement: {
+          color: 'currentColor',
+        },
+        siblingAfter: {
+          marginTop: Styles.token.spacing.sm,
+        },
+      },
+      isThemeDark,
+    });
+  }
+
+  return headlineElement;
+};
+
+const createText = (props: TextProps) => {
+  const { isTextCenter, isInterior, includesAnimation } = props;
+
   const lock = ElementModel.layout.spaceHorizontalMax({
     element: document.createElement('div'),
     elementStyles: {
@@ -179,10 +230,9 @@ const createText = (props: TextProps) => {
     },
   });
 
-  const isOverwriteHeadline = characterCount < 30 && !isInterior;
   const text = textLockup.large({
     ...props,
-    isHeadlineMaximum: isOverwriteHeadline,
+    headline: createHeadline(props),
     isThemeDark: true,
   });
 

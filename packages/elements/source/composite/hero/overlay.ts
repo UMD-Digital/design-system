@@ -1,228 +1,262 @@
-import {
-  element,
-  layout,
-  token,
-  typography,
-} from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-import ImageContainer, { TypeImageContainerProps } from './elements/image';
-import TextContainer, { TypeTextContainerProps } from './elements/text';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { assets, textLockup } from 'atomic';
+import { ElementModel } from 'model';
 
-type TypeHeroOverlayProps = TypeTextContainerProps &
-  TypeImageContainerProps & {
-    includesAnimation?: boolean;
-  };
+interface AnimationProps {
+  includesAnimation?: boolean;
+}
 
-const { convertJSSObjectToStyles } = Utility.styles;
+interface TextStyleProps {
+  isThemeDark?: boolean;
+  isTextCenter?: boolean;
+}
 
-const ATTRIBUTE_ANIMATION = 'data-animation';
+interface AssetProps extends AnimationProps {
+  image?: HTMLImageElement | null;
+  video?: HTMLVideoElement | null;
+}
 
-const TABLET = 768;
-const DESKTOP = 1024;
+interface HeadlineProps extends TextStyleProps {
+  headline?: HTMLElement | null;
+}
 
-const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
+interface TextProps extends AnimationProps, HeadlineProps {
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  actions?: HTMLElement | null;
+}
 
-const ELEMENT_NAME = 'umd-element-hero-overlay';
-const ELEMENT_HERO_DECLARATION = 'hero-overlay-element-declaration';
-const ELEMENT_HERO_CONTAINER = 'hero-overlay-container';
-const ELEMENT_HERO_LOCK = 'hero-overlay-lock';
+interface HeroOverlayProps extends AssetProps, TextProps {}
 
-const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.container}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
-const OVERWRITE_EYEBROW = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.eyebrow}`;
-const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
-const OVERWRITE_RICH_TEXT = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.richText}`;
-
-const OVERWRITE_CONTAINER_ANIMATION = `.${ELEMENT_HERO_CONTAINER}${IS_ANIMATION}`;
-const OVERWRITE_TEXT_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
-const OVERWRITE_IMAGE_CONTAINER_ANIMATION = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
-
-// prettier-ignore
-const OverwriteEyebrow = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: element.text.decoration.ribbon,
-    },
-  })}
-
-  ${OVERWRITE_EYEBROW} {
-    color: ${token.color.black} !important;
-  }
-`;
-
-// prettier-ignore
-const OverwriteHeadline = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: typography.campaign.extralarge,
-    },
-  })}
-`;
-
-// prettier-ignore
-const OverwriteRichText = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: typography.sans.larger,
-    },
-  })}
-  
-  ${OVERWRITE_RICH_TEXT} {
-    font-weight: 400;
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    ${OVERWRITE_RICH_TEXT} {
-      max-width: 60%;
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteTextContainer = `
-  ${OVERWRITE_TEXT_CONTAINER} {
-    padding: ${token.spacing.lg} 0;
-    display: flex;
-    position: relative;
-    z-index: 99;
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    ${OVERWRITE_TEXT_CONTAINER} {
-      width: 55%;
-      padding: ${token.spacing['5xl']} 0;
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteImageContainer = `
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} {
-      position: absolute;
-      width: 60%;
-      height: calc(100% - ${token.spacing['5xl']});
-      right: 0;
-      top: 0;
-      overflow: visible;
-    }
-  }
-
-  ${OVERWRITE_IMAGE_CONTAINER} img,
-  ${OVERWRITE_IMAGE_CONTAINER} video {
-    object-fit: cover;
-    object-position: center;
-    height: 100%;
-    width: 100%;
-  }
-`;
-
-const AnimationStyles = `
+const keyFrameHeroResize = `
   @keyframes hero-overlay-resize {
     from { transform: scale(1.1); }
     to { transform: scale(1); }
   }
+`;
 
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    @media (prefers-reduced-motion: no-preference) {
-      ${OVERWRITE_IMAGE_CONTAINER_ANIMATION} img,
-      ${OVERWRITE_IMAGE_CONTAINER_ANIMATION} video{
-        animation: hero-overlay-resize forwards 1.5s;
-      }
+const keyFrameHeroSlideUp = `
+  @keyframes hero-slide-up {
+    from {
+      transform: translateY(25px);
+      opacity: .2;
     }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    @media (prefers-reduced-motion: no-preference) {
-      ${OVERWRITE_TEXT_CONTAINER_ANIMATION} {
-        animation: hero-slide-up forwards 1.5s;
-      }
+    to {
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 `;
 
-export const STYLES_HERO_OVERLAY_ELEMENT = `
-  .${ELEMENT_HERO_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-    overflow: clip;
-  }
+const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
+  const assetContainer = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'umd-hero-overlay__asset',
+    elementStyles: {
+      element: {
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          position: 'absolute',
+          width: '60%',
+          height: `calc(100% - ${Styles.token.spacing['5xl']})`,
+          right: 0,
+          top: 0,
+          overflow: 'visible',
 
-  .${ELEMENT_HERO_CONTAINER} {
-    position: relative;
-    background-color: ${token.color.black};
-  }
+          ...(includesAnimation && {
+            [`@media (prefers-reduced-motion: no-preference)`]: {
+              animation: 'hero-overlay-resize forwards 1.5s',
+            },
+          }),
+        },
 
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${ELEMENT_HERO_CONTAINER}:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, .8) 50%, rgba(0, 0, 0, 0) 75%);
-      z-index: 999;
-    }
-  }
-
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: layout.space.horizontal.max,
+        ['& img, & video']: {
+          height: '100%',
+        },
+      },
     },
-  })}
+  });
 
-  .${ELEMENT_HERO_LOCK} {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 999;
+  let mediaElement;
+
+  if (video && video instanceof HTMLVideoElement) {
+    mediaElement = assets.video.observedAutoPlay({
+      video,
+      isScaled: true,
+    });
+  } else if (image) {
+    mediaElement = assets.image.background({
+      image,
+      isScaled: true,
+      isShowCaption: true,
+    });
+  } else {
+    return null;
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${ELEMENT_HERO_LOCK} {
-      min-height: 640px;
-      display: flex;
-      align-items: center;
-    }
-  }
+  assetContainer.element.appendChild(mediaElement.element);
+  assetContainer.styles += mediaElement.styles;
 
-  @container ${ELEMENT_NAME} (min-width: ${DESKTOP}px) {
-    .${ELEMENT_HERO_LOCK} {
-      min-height: 764px;
-    }
-  }
-  
-  ${AnimationStyles}
-  ${OverwriteEyebrow}
-  ${OverwriteHeadline}
-  ${OverwriteRichText}
-  ${OverwriteTextContainer}
-  ${OverwriteImageContainer}
-`;
-export default (element: TypeHeroOverlayProps) => {
-  const { includesAnimation } = element;
-  const declaration = document.createElement('div');
-  const container = document.createElement('div');
-  const lock = document.createElement('div');
-  const text = TextContainer.CreateElement(element);
-  const asset = ImageContainer.CreateElement(element);
-  let styles = STYLES_HERO_OVERLAY_ELEMENT;
-
-  lock.classList.add(ELEMENT_HERO_LOCK);
-  lock.appendChild(text.element);
-  styles += text.styles;
-
-  if (asset) {
-    container.appendChild(asset.element);
-    styles += asset.styles;
-  }
-
-  if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
-  container.classList.add(ELEMENT_HERO_CONTAINER);
-  container.appendChild(lock);
-
-  declaration.classList.add(ELEMENT_HERO_DECLARATION);
-  declaration.appendChild(container);
-
-  return { element: declaration, styles };
+  return assetContainer;
 };
+
+const createHeadline = (props: HeadlineProps) => {
+  const { headline } = props;
+  const characterCount = headline?.textContent?.trim().length || 0;
+  const isOverwriteHeadline = characterCount > 30;
+
+  if (!headline) return null;
+
+  const desktopStyles = {
+    ...(isOverwriteHeadline && { fontSize: '80px' }),
+  };
+
+  const headlineElement = ElementModel.headline.campaignExtraLarge({
+    element: headline,
+    elementStyles: {
+      element: {
+        textTransform: 'uppercase',
+        textWrap: 'pretty',
+        ...desktopStyles,
+      },
+      siblingAfter: {
+        marginTop: Styles.token.spacing.md,
+      },
+    },
+    isThemeDark: true,
+  });
+
+  return headlineElement;
+};
+
+const createText = (props: TextProps) => {
+  const { includesAnimation } = props;
+
+  const textContainer = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'umd-hero-overlay__text',
+    elementStyles: {
+      element: {
+        padding: `${Styles.token.spacing.lg} 0`,
+        display: 'flex',
+        position: 'relative',
+        zIndex: 999,
+
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          width: '55%',
+          padding: `${Styles.token.spacing['5xl']} 0`,
+
+          ...(includesAnimation && {
+            [`@media (prefers-reduced-motion: no-preference)`]: {
+              animation: 'hero-slide-up forwards 1.5s',
+            },
+          }),
+        },
+      },
+    },
+  });
+
+  const lock = ElementModel.layout.spaceHorizontalMax({
+    element: document.createElement('div'),
+    elementStyles: {
+      element: {
+        height: '100%',
+        width: '100%',
+        position: 'relative',
+      },
+    },
+  });
+
+  const textContent = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'umd-hero-overlay__text-content',
+    elementStyles: {
+      element: {
+        [`& .${Styles.element.text.rich.simpleLargestDark.className}`]: {
+          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+            maxWidth: '60%',
+          },
+        },
+      },
+    },
+  });
+
+  const textLockupElement = textLockup.large({
+    eyebrow: props.eyebrow,
+    headline: createHeadline(props),
+    text: props.text,
+    actions: props.actions,
+    isThemeDark: true,
+  });
+
+  textContent.element.appendChild(textLockupElement.element);
+  textContent.styles += textLockupElement.styles;
+
+  lock.element.appendChild(textContent.element);
+  lock.styles += textContent.styles;
+
+  textContainer.element.appendChild(lock.element);
+  textContainer.styles += lock.styles;
+
+  return textContainer;
+};
+
+export default (props: HeroOverlayProps) =>
+  (() => {
+    const composite = ElementModel.create({
+      element: document.createElement('div'),
+      className: 'umd-hero-overlay',
+      elementStyles: {
+        element: {
+          position: 'relative',
+          backgroundColor: Styles.token.color.black,
+          overflow: 'clip',
+
+          [`@container (${Styles.token.media.queries.large.max})`]: {
+            display: 'flex',
+            flexDirection: 'column-reverse',
+          },
+
+          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+            minHeight: '640px',
+            display: 'flex',
+            alignItems: 'center',
+
+            ['&:before']: {
+              content: '""',
+              position: 'absolute',
+              left: 0,
+              right: '50px',
+              top: 0,
+              height: '100%',
+              background:
+                'linear-gradient(90deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, .8) 50%, rgba(0, 0, 0, 0) 75%)',
+              zIndex: 999,
+            },
+          },
+
+          [`@container (${Styles.token.media.queries.desktop.min})`]: {
+            minHeight: '764px',
+          },
+        },
+      },
+    });
+
+    const text = createText(props);
+    const asset = createAsset(props);
+
+    composite.element.appendChild(text.element);
+    composite.styles += text.styles;
+
+    if (asset) {
+      composite.element.appendChild(asset.element);
+      composite.styles += asset.styles;
+    }
+
+    composite.styles = `
+      ${keyFrameHeroResize}
+      ${keyFrameHeroSlideUp}
+      ${composite.styles}
+    `;
+
+    return composite;
+  })();

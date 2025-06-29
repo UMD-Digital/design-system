@@ -73,15 +73,16 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
+  const video = videoRef as HTMLVideoElement | null;
+  const image = Slots.assets.image({ element }) as HTMLImageElement | null;
+
   if (type === Attributes.values.display.overlay) {
     return Composite.hero.overlay({
       ...MakeHeroData({ element }),
-      videoRef,
+      image,
+      video,
     });
   }
-
-  const video = videoRef as HTMLVideoElement | null;
-  const image = Slots.assets.image({ element }) as HTMLImageElement | null;
 
   if (
     type === Attributes.values.display.stacked ||

@@ -67,16 +67,6 @@ const createComponent: CreateComponentFunction = (element) => {
 
   const type = element.getAttribute('type');
 
-  if (
-    type === Attributes.values.display.stacked ||
-    type === Attributes.values.layout.STACKED_INTERIOR
-  ) {
-    return Composite.hero.stacked({
-      ...MakeHeroData({ element }),
-      videoRef,
-    });
-  }
-
   if (type === Attributes.values.display.minimal) {
     return Composite.hero.minimal({
       ...MakeHeroData({ element }),
@@ -92,6 +82,17 @@ const createComponent: CreateComponentFunction = (element) => {
 
   const video = videoRef as HTMLVideoElement | null;
   const image = Slots.assets.image({ element }) as HTMLImageElement | null;
+
+  if (
+    type === Attributes.values.display.stacked ||
+    type === Attributes.values.layout.STACKED_INTERIOR
+  ) {
+    return Composite.hero.stacked({
+      ...MakeHeroData({ element }),
+      video,
+      image,
+    });
+  }
 
   return Composite.hero.standard({
     ...MakeHeroData({ element }),

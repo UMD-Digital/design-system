@@ -1,183 +1,179 @@
-import {
-  element,
-  layout,
-  token,
-  typography,
-} from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-import ImageContainer, { TypeImageContainerProps } from './elements/image';
-import TextContainer, { TypeTextContainerProps } from './elements/text';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { assets, textLockup } from 'atomic';
+import { ElementModel } from 'model';
 
-type TypeHeroLogoProps = TypeTextContainerProps & TypeImageContainerProps;
+interface TextStyleProps {
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
+}
 
-const { convertJSSObjectToStyles } = Utility.styles;
+interface AssetProps {
+  image?: HTMLImageElement | null;
+}
 
-const THEME_LIGHT = 'light';
-const THEME_DARK = 'dark';
-const THEME_MARYLAND = 'maryland';
-const ATTRIBUTE_THEME = 'theme';
+interface HeadlineProps extends TextStyleProps {
+  headline?: HTMLElement | null;
+}
 
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
-const IS_THEME_LIGHT = `[${ATTRIBUTE_THEME}='${THEME_LIGHT}']`;
-const IS_THEME_MARYLAND = `[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
+interface TextProps extends HeadlineProps {
+  eyebrow?: HTMLElement | null;
+  text?: HTMLElement | null;
+  actions?: HTMLElement | null;
+}
 
-const ELEMENT_NAME = 'umd-element-hero-logo';
-const ELEMENT_HERO_ELEMENT_DECLARATION = 'hero-logo-element-declaration';
-const ELEMENT_HERO_CONTAINER = 'hero-logo-container';
-const ELEMENT_HERO_LOCK = 'hero-logo-lock';
+interface HeroLogoProps extends AssetProps, TextProps {}
 
-const OVERWRITE_TEXT_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.container}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${ELEMENT_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
-const OVERWRITE_EYEBROW = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.eyebrow}`;
-const OVERWRITE_HEADLINE = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
-const OVERWRITE_RICH_TEXT = `.${ELEMENT_HERO_CONTAINER} .${TextContainer.Elements.richText}`;
+const createAsset = ({ image }: AssetProps) => {
+  const assetContainer = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'umd-hero-logo__asset',
+    elementStyles: {
+      element: {
+        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        maxWidth: '800px',
+        margin: '0 auto',
+        marginBottom: Styles.token.spacing.xl,
 
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_LIGHT_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_LIGHT}`;
-const OVERWRITE_THEME_MARYLAND_CONTAINER = `.${ELEMENT_HERO_CONTAINER}${IS_THEME_MARYLAND}`;
-
-// prettier-ignore
-const OverwriteTheme = `
-  ${OVERWRITE_THEME_DARK_CONTAINER} {
-    background-color: ${token.color.black};
-  }
-
-  ${OVERWRITE_THEME_DARK_CONTAINER} .${TextContainer.Elements.eyebrow} {
-    color: ${token.color.black};
-  }
-
-  ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${token.color.white};
-  }
-
-  ${OVERWRITE_THEME_LIGHT_CONTAINER} {
-    background-color: ${token.color.gray.lightest};
-  }
-
-  ${OVERWRITE_THEME_MARYLAND_CONTAINER} {
-    background-color: ${token.color.red};
-  }
-`;
-
-// prettier-ignore
-const OverwriteEyebrow = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_EYEBROW}`]: element.text.decoration.ribbon,
+        ['& img']: {
+          maxWidth: '100%',
+          maxHeight: '500px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        },
+      },
     },
-  })}
-  
-  ${OVERWRITE_EYEBROW} {
-    color: ${token.color.black}
-  }
-`;
+  });
 
-// prettier-ignore
-const OverwriteHeadline = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_HEADLINE}`]: typography.campaign.large,
-    },
-  })}
+  let mediaElement;
 
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_HEADLINE} *`]: typography.campaign.large,
-    },
-  })}
-`;
-
-// prettier-ignore
-const OverwriteRichText = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_RICH_TEXT}`]: typography.sans.larger,
-    },
-  })}
-  
-  ${OVERWRITE_RICH_TEXT} {
-    color: ${token.color.gray.dark};
-    font-weight: 400;
-  }
-`;
-
-// prettier-ignore
-const OverwriteTextContainer = `
-  ${OVERWRITE_TEXT_CONTAINER} {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  }
-`;
-
-// prettier-ignore
-const OverwriteImageContainer = `
-  ${OVERWRITE_IMAGE_CONTAINER} {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    max-width: 800px;
-    margin: 0 auto;
-    margin-bottom: ${token.spacing.xl};
+  if (image) {
+    mediaElement = assets.image.background({
+      image,
+      isScaled: false,
+    });
+  } else {
+    return null;
   }
 
-  ${OVERWRITE_IMAGE_CONTAINER} img {
-    max-width: 100%;
-    max-height: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-`;
+  assetContainer.element.appendChild(mediaElement.element);
+  assetContainer.styles += mediaElement.styles;
 
-const STYLES_HERO_LOGO_ELEMENT = `
-  .${ELEMENT_HERO_ELEMENT_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-  
-  .${ELEMENT_HERO_CONTAINER} {
-    padding: ${token.spacing['5xl']} 0 ${token.spacing.lg};
-  }
-  
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_HERO_LOCK}`]: layout.space.horizontal.small,
-    },
-  })}
-  
-  ${OverwriteEyebrow}
-  ${OverwriteHeadline}
-  ${OverwriteRichText}
-  ${OverwriteTextContainer}
-  ${OverwriteImageContainer}
-  ${OverwriteTheme}
-`;
-
-export default (element: TypeHeroLogoProps) => {
-  const { isThemeDark } = element;
-
-  const declaration = document.createElement('div');
-  const container = document.createElement('div');
-  const lock = document.createElement('div');
-  const text = TextContainer.CreateElement({ ...element, isTextCenter: true });
-  const asset = ImageContainer.CreateElement(element);
-  let styles = STYLES_HERO_LOGO_ELEMENT;
-
-  container.classList.add(ELEMENT_HERO_CONTAINER);
-  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-
-  if (asset) {
-    lock.appendChild(asset.element);
-    styles += asset.styles;
-  }
-
-  lock.classList.add(ELEMENT_HERO_LOCK);
-  lock.appendChild(text.element);
-  styles += text.styles;
-
-  container.appendChild(lock);
-
-  declaration.classList.add(ELEMENT_HERO_ELEMENT_DECLARATION);
-  declaration.appendChild(container);
-
-  return { element: declaration, styles };
+  return assetContainer;
 };
+
+const createHeadline = (props: HeadlineProps) => {
+  const { headline, isThemeDark } = props;
+
+  if (!headline) return null;
+
+  const headlineElement = ElementModel.headline.campaignLarge({
+    element: headline,
+    elementStyles: {
+      element: {
+        textTransform: 'uppercase',
+      },
+      siblingAfter: {
+        marginTop: Styles.token.spacing.sm,
+      },
+    },
+    isThemeDark,
+  });
+
+  return headlineElement;
+};
+
+const createText = (props: TextProps) => {
+  const { isThemeDark } = props;
+
+  const textContainer = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'umd-hero-logo__text',
+    elementStyles: {
+      element: {
+        display: 'flex',
+        justifyContent: 'center',
+        textAlign: 'center',
+      },
+    },
+  });
+
+  const textContent = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'umd-hero-logo__text-content',
+    elementStyles: {
+      element: {
+        [`& .${Styles.element.text.rich.simpleLargest.className}`]: {
+          color: Styles.token.color.gray.dark,
+        },
+      },
+    },
+  });
+
+  const textLockupElement = textLockup.large({
+    eyebrow: props.eyebrow,
+    headline: createHeadline(props),
+    text: props.text,
+    actions: props.actions,
+    isThemeDark: isThemeDark || false,
+  });
+
+  textContent.element.appendChild(textLockupElement.element);
+  textContent.styles += textLockupElement.styles;
+
+  textContainer.element.appendChild(textContent.element);
+  textContainer.styles += textContent.styles;
+
+  return textContainer;
+};
+
+const getBackgroundColor = (props: HeroLogoProps) => {
+  const { isThemeDark, isThemeMaryland } = props;
+
+  if (isThemeDark) return Styles.token.color.black;
+  if (isThemeMaryland) return Styles.token.color.red;
+  return Styles.token.color.gray.lightest;
+};
+
+export default (props: HeroLogoProps) =>
+  (() => {
+    const composite = ElementModel.create({
+      element: document.createElement('div'),
+      className: 'umd-hero-logo',
+    });
+
+    const container = ElementModel.create({
+      element: document.createElement('div'),
+      className: 'umd-hero-logo__container',
+      elementStyles: {
+        element: {
+          padding: `${Styles.token.spacing['5xl']} 0 ${Styles.token.spacing.lg}`,
+          backgroundColor: getBackgroundColor(props),
+        },
+      },
+    });
+
+    const lock = ElementModel.layout.spaceHorizontalSmall({
+      element: document.createElement('div'),
+    });
+
+    const asset = createAsset(props);
+    const text = createText(props);
+
+    if (asset) {
+      lock.element.appendChild(asset.element);
+      lock.styles += asset.styles;
+    }
+
+    lock.element.appendChild(text.element);
+    lock.styles += text.styles;
+
+    container.element.appendChild(lock.element);
+    container.styles += lock.styles;
+
+    composite.element.appendChild(container.element);
+    composite.styles += container.styles;
+
+    return composite;
+  })();

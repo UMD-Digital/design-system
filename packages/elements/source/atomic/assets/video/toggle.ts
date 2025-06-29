@@ -24,10 +24,17 @@ export default (props: VideoProps) =>
           position: 'relative',
           ...additionalElementStyles,
           ...(isScaled && {
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }),
+
+          ...(isScaled && {
             [`& video`]: {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              display: 'block',
             },
           }),
         },
@@ -68,6 +75,13 @@ export default (props: VideoProps) =>
         setPause();
       }
     });
+
+    if (
+      video.getAttribute('autoplay') === '' ||
+      video.getAttribute('autoplay') === 'true'
+    ) {
+      setPlay();
+    }
 
     composite.element.appendChild(video);
     composite.element.appendChild(button.element);

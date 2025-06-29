@@ -294,7 +294,7 @@ const createText = (props: TextProps) => {
   });
 
   const textLockupProps = {
-    eyebrow: props.eyebrow,
+    ribbon: props.eyebrow,
     headline: createHeadline(props),
     text: props.text,
     actions: props.actions,

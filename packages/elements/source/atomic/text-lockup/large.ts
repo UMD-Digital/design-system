@@ -5,6 +5,7 @@ import { ElementVisual } from '_types';
 export type TypeTextLockupLarge = {
   headline?: ElementVisual | null;
   eyebrow?: HTMLElement | null;
+  ribbon?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
@@ -12,6 +13,7 @@ export type TypeTextLockupLarge = {
 
 export default ({
   eyebrow,
+  ribbon,
   headline,
   text,
   actions,
@@ -29,8 +31,26 @@ export default ({
   });
 
   if (eyebrow) {
-    const styledEyebrow = ElementModel.text.ribbon({
+    const styledEyebrow = ElementModel.headline.sansSmall({
       element: eyebrow,
+      elementStyles: {
+        element: {
+          textTransform: 'uppercase',
+          fontWeight: 600,
+        },
+        siblingAfter: {
+          marginTop: Styles.token.spacing.sm,
+        },
+      },
+      isThemeDark,
+    });
+    composite.element.appendChild(styledEyebrow.element);
+    composite.styles += styledEyebrow.styles;
+  }
+
+  if (ribbon) {
+    const styledEyebrow = ElementModel.text.ribbon({
+      element: ribbon,
       elementStyles: {
         siblingAfter: {
           marginTop: Styles.token.spacing.sm,

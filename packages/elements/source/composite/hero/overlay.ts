@@ -181,7 +181,7 @@ const createText = (props: TextProps) => {
   });
 
   const textLockupElement = textLockup.large({
-    eyebrow: props.eyebrow,
+    ribbon: props.eyebrow,
     headline: createHeadline(props),
     text: props.text,
     actions: props.actions,

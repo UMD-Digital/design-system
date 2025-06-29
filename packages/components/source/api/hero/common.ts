@@ -12,5 +12,6 @@ export const CommonHeroData = ({ element }: { element: HTMLElement }) => ({
     element,
     slotRef: Slots.name.assets.image,
   }),
+  image: Slots.assets.image({ element }) as HTMLImageElement | null,
   actions: Slots.actions.default({ element }),
 });

@@ -14,6 +14,12 @@ const createComponent: CreateComponentFunction = (element) =>
     isThemeDark: Attributes.isTheme.dark({
       element,
     }),
+    isThemeLight: Attributes.isTheme.light({
+      element,
+    }),
+    isThemeMaryland: Attributes.isTheme.maryland({
+      element,
+    }),
     ...CommonHeroData({
       element,
     }),
@@ -38,6 +44,8 @@ const createComponent: CreateComponentFunction = (element) =>
  * ## Attributes
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
+ *   - `light` - Light theme styling
+ *   - `maryland` - Maryland theme styling
  *
  * @example
  * ```html

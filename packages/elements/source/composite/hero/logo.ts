@@ -4,6 +4,7 @@ import { ElementModel } from 'model';
 
 interface TextStyleProps {
   isThemeDark?: boolean;
+  isThemeLight?: boolean;
   isThemeMaryland?: boolean;
 }
 
@@ -64,7 +65,7 @@ const createAsset = ({ image }: AssetProps) => {
 };
 
 const createHeadline = (props: HeadlineProps) => {
-  const { headline, isThemeDark } = props;
+  const { headline, isThemeDark, isThemeMaryland } = props;
 
   if (!headline) return null;
 
@@ -78,14 +79,14 @@ const createHeadline = (props: HeadlineProps) => {
         marginTop: Styles.token.spacing.sm,
       },
     },
-    isThemeDark,
+    isThemeDark: isThemeDark || isThemeMaryland || false,
   });
 
   return headlineElement;
 };
 
 const createText = (props: TextProps) => {
-  const { isThemeDark } = props;
+  const { isThemeDark, isThemeMaryland } = props;
 
   const textContainer = ElementModel.create({
     element: document.createElement('div'),
@@ -116,7 +117,7 @@ const createText = (props: TextProps) => {
     headline: createHeadline(props),
     text: props.text,
     actions: props.actions,
-    isThemeDark: isThemeDark || false,
+    isThemeDark: isThemeDark || isThemeMaryland || false,
   });
 
   textContent.element.appendChild(textLockupElement.element);
@@ -129,11 +130,12 @@ const createText = (props: TextProps) => {
 };
 
 const getBackgroundColor = (props: HeroLogoProps) => {
-  const { isThemeDark, isThemeMaryland } = props;
+  const { isThemeDark, isThemeMaryland, isThemeLight } = props;
 
   if (isThemeDark) return Styles.token.color.black;
   if (isThemeMaryland) return Styles.token.color.red;
-  return Styles.token.color.gray.lightest;
+  if (isThemeLight) return Styles.token.color.gray.lightest;
+  return Styles.token.color.white;
 };
 
 export default (props: HeroLogoProps) =>

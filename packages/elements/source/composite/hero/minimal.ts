@@ -10,7 +10,6 @@ interface TextStyleProps {
 
 interface AssetProps {
   image?: HTMLImageElement | null;
-  video?: HTMLVideoElement | null;
 }
 
 interface HeadlineProps extends TextStyleProps {
@@ -25,8 +24,8 @@ interface TextProps extends HeadlineProps {
 
 interface HeroMinimalProps extends AssetProps, TextProps {}
 
-const createAsset = ({ image, video }: AssetProps) => {
-  if (!image && !video) return null;
+const createAsset = ({ image }: AssetProps) => {
+  if (!image) return null;
 
   const assetContainer = ElementModel.create({
     element: document.createElement('div'),
@@ -55,12 +54,7 @@ const createAsset = ({ image, video }: AssetProps) => {
 
   let mediaElement;
 
-  if (video && video instanceof HTMLVideoElement) {
-    mediaElement = assets.video.observedAutoPlay({
-      video,
-      isScaled: true,
-    });
-  } else if (image) {
+  if (image) {
     mediaElement = assets.image.background({
       image,
       isScaled: true,

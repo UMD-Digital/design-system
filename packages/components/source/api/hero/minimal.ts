@@ -1,6 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Register, Lifecycle } from 'model';
-import { CommonHeroData } from './common';
+import { Attributes, Register, Slots, Lifecycle } from 'model';
 import type { CreateComponentFunction, ComponentRegistration } from '../_types';
 
 /**
@@ -20,9 +19,11 @@ const createComponent: CreateComponentFunction = (element) =>
     isThemeMaryland: Attributes.isTheme.maryland({
       element,
     }),
-    ...CommonHeroData({
-      element,
-    }),
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+    image: Slots.assets.image({ element }) as HTMLImageElement | null,
+    actions: Slots.actions.default({ element }),
   });
 
 /**

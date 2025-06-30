@@ -92,6 +92,7 @@ const createHeadline = (props: HeadlineProps) => {
     elementStyles: {
       element: {
         fontWeight: 800,
+        textTransform: 'uppercase',
         ...desktopStyles,
       },
       siblingAfter: {

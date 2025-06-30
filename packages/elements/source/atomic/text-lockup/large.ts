@@ -39,6 +39,7 @@ export default ({
         element: {
           textTransform: 'uppercase',
           fontWeight: 600,
+          color: Styles.token.color.black,
         },
         siblingAfter: {
           marginTop: Styles.token.spacing.sm,

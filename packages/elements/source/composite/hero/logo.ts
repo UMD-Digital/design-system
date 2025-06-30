@@ -138,6 +138,7 @@ const getBackgroundColor = (props: HeroLogoProps) => {
 
 export default (props: HeroLogoProps) =>
   (() => {
+    const { isThemeDark } = props;
     const composite = ElementModel.create({
       element: document.createElement('div'),
       className: 'umd-hero-logo',
@@ -150,6 +151,13 @@ export default (props: HeroLogoProps) =>
         element: {
           padding: `${Styles.token.spacing['5xl']} 0 ${Styles.token.spacing.lg}`,
           backgroundColor: getBackgroundColor(props),
+
+          // Dark them should have additonal padding at the bottom
+          [`@container (${Styles.token.media.queries.desktop.min})`]: {
+            ...(isThemeDark && {
+              paddingBottom: `${Styles.token.spacing['5xl']}`,
+            }),
+          },
         },
       },
     });

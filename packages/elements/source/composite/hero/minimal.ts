@@ -78,18 +78,21 @@ const createAsset = ({ image, video }: AssetProps) => {
 
 const createHeadline = (props: HeadlineProps) => {
   const { headline, isThemeDark, isThemeMaryland } = props;
+  const characterCount = headline?.textContent?.trim().length || 0;
+  const isOverwriteHeadline = characterCount > 40;
 
   if (!headline) return null;
+
+  const desktopStyles = {
+    ...(isOverwriteHeadline && { fontSize: '64px' }),
+  };
 
   const headlineElement = ElementModel.headline.campaignLarge({
     element: headline,
     elementStyles: {
       element: {
         fontWeight: 800,
-        color:
-          isThemeDark || isThemeMaryland
-            ? Styles.token.color.white
-            : Styles.token.color.black,
+        ...desktopStyles,
       },
       siblingAfter: {
         marginTop: Styles.token.spacing.sm,

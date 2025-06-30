@@ -171,7 +171,7 @@ const createText = (props: TextProps) => {
     className: 'umd-hero-overlay__text-content',
     elementStyles: {
       element: {
-        [`& .${Styles.element.text.rich.simpleLargestDark.className}`]: {
+        [`& .${Styles.element.text.rich.simpleLargeDark.className}`]: {
           [`@container (${Styles.token.media.queries.tablet.min})`]: {
             maxWidth: '60%',
           },

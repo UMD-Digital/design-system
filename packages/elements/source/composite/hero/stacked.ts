@@ -296,7 +296,7 @@ const createText = (props: TextProps) => {
   const textLockupProps = {
     ribbon: props.eyebrow,
     headline: createHeadline(props),
-    text: props.text,
+    textLargest: props.text,
     actions: props.actions,
     isTextCenter: true,
     isThemeDark: false,

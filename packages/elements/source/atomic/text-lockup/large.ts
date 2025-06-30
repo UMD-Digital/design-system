@@ -7,6 +7,7 @@ export type TypeTextLockupLarge = {
   eyebrow?: HTMLElement | null;
   ribbon?: HTMLElement | null;
   text?: HTMLElement | null;
+  textLargest?: HTMLElement | null;
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
 };
@@ -16,6 +17,7 @@ export default ({
   ribbon,
   headline,
   text,
+  textLargest,
   actions,
   isThemeDark,
 }: TypeTextLockupLarge) => {
@@ -67,8 +69,23 @@ export default ({
   }
 
   if (text) {
-    const styledText = ElementModel.richText.simpleLargest({
+    const styledText = ElementModel.richText.simpleLarge({
       element: text,
+      elementStyles: {
+        siblingAfter: {
+          marginTop: Styles.token.spacing.lg,
+        },
+      },
+      isThemeDark,
+    });
+
+    composite.element.appendChild(styledText.element);
+    composite.styles += styledText.styles;
+  }
+
+  if (textLargest) {
+    const styledText = ElementModel.richText.simpleLargest({
+      element: textLargest,
       elementStyles: {
         siblingAfter: {
           marginTop: Styles.token.spacing.lg,

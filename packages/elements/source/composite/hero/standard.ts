@@ -233,7 +233,7 @@ const createText = (props: TextProps) => {
   const text = textLockup.large({
     headline: createHeadline(props),
     ribbon: props.eyebrow,
-    text: props.text,
+    textLargest: props.text,
     actions: props.actions,
     isThemeDark: true,
   });

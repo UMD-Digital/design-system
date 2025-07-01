@@ -10,15 +10,32 @@ import type { CreateComponentFunction, ComponentRegistration } from '../_types';
  */
 const tagName = 'umd-element-hero';
 
-const { SlotWithDefaultStyling } = Markup.create;
-
 /**
- * Extracts and processes hero data based on attributes
+ * Creates a hero component based on type attribute
+ * @param element - The host HTML element
+ * @returns Configured hero component
  * @internal
  */
-const MakeHeroData = ({ element }: { element: HTMLElement }) => {
-  const type = element.getAttribute(Attributes.names.deprecated.type.TYPE);
+const createComponent: CreateComponentFunction = (element) => {
+  const makeSlots = ({ element }: { element: HTMLElement }) => ({
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+    video: Slots.assets.video({ element }) as HTMLVideoElement | null,
+    image: Slots.assets.image({ element }) as HTMLImageElement | null,
+    actions: Slots.actions.default({ element }),
+  });
   const includesAnimation = Attributes.includesFeature.animation({ element });
+
+  if (Attributes.isDisplay.overlay({ element })) {
+    return Composite.hero.overlay({
+      ...makeSlots({ element }),
+      includesAnimation,
+    });
+  }
+
+  const type = element.getAttribute('type');
+
   const isThemeDark = Attributes.isTheme.dark({ element });
   let isTextCenter = Attributes.isLayout.textCentered({ element });
 
@@ -42,63 +59,23 @@ const MakeHeroData = ({ element }: { element: HTMLElement }) => {
     isWithLock = true;
   }
 
-  return {
-    isThemeDark,
-    isTextCenter,
-    isInterior,
-    isWithLock,
-    includesAnimation,
-    ...CommonHeroData({
-      element,
-    }),
-  };
-};
-
-/**
- * Creates a hero component based on type attribute
- * @param element - The host HTML element
- * @returns Configured hero component
- * @internal
- */
-const createComponent: CreateComponentFunction = (element) => {
-  const videoRef = Slots.assets.video({
-    element,
-  }) as HTMLVideoElement | null;
-
-  const type = element.getAttribute('type');
-
-  if (type === Attributes.values.display.minimal) {
-    return Composite.hero.minimal({
-      ...MakeHeroData({ element }),
-    });
-  }
-
-  const video = videoRef as HTMLVideoElement | null;
-  const image = Slots.assets.image({ element }) as HTMLImageElement | null;
-
-  if (type === Attributes.values.display.overlay) {
-    return Composite.hero.overlay({
-      ...MakeHeroData({ element }),
-      image,
-      video,
-    });
-  }
-
   if (
     type === Attributes.values.display.stacked ||
     type === Attributes.values.layout.STACKED_INTERIOR
   ) {
     return Composite.hero.stacked({
-      ...MakeHeroData({ element }),
-      video,
-      image,
+      ...makeSlots({ element }),
+      isInterior,
+      isWithLock,
+      isThemeDark,
     });
   }
 
   return Composite.hero.standard({
-    ...MakeHeroData({ element }),
-    image,
-    video,
+    ...makeSlots({ element }),
+    isInterior,
+    isTextCenter,
+    isThemeDark,
   });
 };
 

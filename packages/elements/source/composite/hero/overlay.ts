@@ -6,17 +6,12 @@ interface AnimationProps {
   includesAnimation?: boolean;
 }
 
-interface TextStyleProps {
-  isThemeDark?: boolean;
-  isTextCenter?: boolean;
-}
-
 interface AssetProps extends AnimationProps {
   image?: HTMLImageElement | null;
   video?: HTMLVideoElement | null;
 }
 
-interface HeadlineProps extends TextStyleProps {
+interface HeadlineProps {
   headline?: HTMLElement | null;
 }
 

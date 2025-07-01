@@ -25,50 +25,60 @@ const createComponent: CreateComponentFunction = (element) => {
     image: Slots.assets.image({ element }) as HTMLImageElement | null,
     actions: Slots.actions.default({ element }),
   });
-  const includesAnimation = Attributes.includesFeature.animation({ element });
+  const isDisplayOverlay = Attributes.isDisplay.overlay({ element });
+  const isDisplayStacked = Attributes.isDisplay.stacked({ element });
+  const isDisplayStackedInterior = Attributes.isDisplay.stackedInterior({
+    element,
+  });
 
-  if (Attributes.isDisplay.overlay({ element })) {
+  const includesAnimation = Attributes.includesFeature.animation({ element });
+  const isThemeDark = Attributes.isTheme.dark({ element });
+
+  if (isDisplayOverlay) {
     return Composite.hero.overlay({
       ...makeSlots({ element }),
       includesAnimation,
     });
   }
 
-  const type = element.getAttribute('type');
-
-  const isThemeDark = Attributes.isTheme.dark({ element });
-  let isTextCenter = Attributes.isLayout.textCentered({ element });
-
-  let isInterior = false;
-  let isWithLock = false;
-
-  if (type === Attributes.values.layout.DEFAULT_CENTERED) {
-    isTextCenter = true;
-  }
-
-  if (type === Attributes.values.layout.DEFAULT_INTERIOR) {
-    isInterior = true;
-  }
-
-  if (type === Attributes.values.layout.DEFAULT_INTERIOR_CENTERED) {
-    isInterior = true;
-    isTextCenter = true;
-  }
-
-  if (type === Attributes.values.layout.STACKED_INTERIOR) {
-    isWithLock = true;
-  }
-
-  if (
-    type === Attributes.values.display.stacked ||
-    type === Attributes.values.layout.STACKED_INTERIOR
-  ) {
+  // Deprecated usage
+  if (isDisplayStackedInterior) {
     return Composite.hero.stacked({
       ...makeSlots({ element }),
-      isInterior,
-      isWithLock,
+      isHeightSmall: true,
+      isWidthLarge: true,
       isThemeDark,
+      includesAnimation,
     });
+  }
+
+  if (isDisplayStacked) {
+    return Composite.hero.stacked({
+      ...makeSlots({ element }),
+      isHeightSmall: Attributes.isLayout.heightSmall({ element }) || false,
+      isWidthLarge:
+        Attributes.isLayout.spaceHorizontalLarge({ element }) || false,
+      isThemeDark,
+      includesAnimation,
+    });
+  }
+
+  const type = element.getAttribute('type');
+
+  let isTextCenter = Attributes.isLayout.textCentered({ element });
+  let isInterior = false;
+
+  if (type === Attributes.values.layout.defaultCentered) {
+    isTextCenter = true;
+  }
+
+  if (type === Attributes.values.layout.defaultInterior) {
+    isInterior = true;
+  }
+
+  if (type === Attributes.values.layout.defaultInteriorCentered) {
+    isInterior = true;
+    isTextCenter = true;
   }
 
   return Composite.hero.standard({
@@ -76,6 +86,7 @@ const createComponent: CreateComponentFunction = (element) => {
     isInterior,
     isTextCenter,
     isThemeDark,
+    includesAnimation,
   });
 };
 

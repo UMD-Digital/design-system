@@ -366,19 +366,19 @@ const isDisplay = {
     }),
   stackedInteriorDeprecated: createAttributeCheck(
     AttributeNames.deprecated.type.TYPE,
-    AttributesValues.layout.STACKED_INTERIOR,
+    AttributesValues.layout.stackedInterior,
   ),
   stackedInterior: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.deprecated.type.TYPE,
       attributeNameNew: AttributeNames.display.default,
-      attributeValue: AttributesValues.layout.STACKED_INTERIOR,
+      attributeValue: AttributesValues.layout.stackedInterior,
     }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.display.default,
-      attributeValue: AttributesValues.layout.STACKED_INTERIOR,
+      attributeValue: AttributesValues.layout.stackedInterior,
     }),
   tabular: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
@@ -406,7 +406,7 @@ const isInfo = {
   ),
   searchDomain: createAttributeCheck(
     AttributeNames.information.searchType,
-    AttributesValues.search.DOMAIN,
+    AttributesValues.search.domain,
   ),
 } as const;
 
@@ -421,12 +421,12 @@ const isLayout = {
       ...props,
       attributeNameOld: AttributeNames.deprecated.layout.LAYOUT_ALIGNMENT,
       attributeNameNew: AttributeNames.layout.alignment,
-      attributeValue: AttributesValues.layout.RIGHT,
+      attributeValue: AttributesValues.layout.right,
     }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.layout.alignment,
-      attributeValue: AttributesValues.layout.RIGHT,
+      attributeValue: AttributesValues.layout.right,
     }),
   fixed: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
@@ -442,8 +442,14 @@ const isLayout = {
     }),
   fullImage: createAttributeCheck(
     AttributeNames.deprecated.type.TYPE,
-    AttributesValues.layout.FULL_IMAGE,
+    AttributesValues.layout.fullImage,
   ),
+  heightSmall: (props: AttributeElementProps): boolean =>
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.layout.height,
+      attributeValue: AttributesValues.layout.small,
+    }),
   hidden: createAttributeCheck(
     AttributeNames.layout.hidden,
     AttributesValues.state.TRUE,
@@ -462,7 +468,7 @@ const isLayout = {
   ),
   lockFull: createAttributeCheck(
     AttributeNames.layout.lock,
-    AttributesValues.layout.FULL,
+    AttributesValues.layout.large,
   ),
   reverse: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
@@ -476,29 +482,35 @@ const isLayout = {
       attributeName: AttributeNames.layout.reverse,
       attributeValue: AttributesValues.state.TRUE,
     }),
+  spaceHorizontalLarge: (props: AttributeElementProps): boolean =>
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.layout.spaceHorizontal,
+      attributeValue: AttributesValues.layout.large,
+    }),
   textCentered: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.deprecated.visual.VISUAL_TEXT_CENTER,
       attributeNameNew: AttributeNames.layout.text,
-      attributeValue: AttributesValues.layout.CENTER,
+      attributeValue: AttributesValues.layout.center,
     }) ||
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.deprecated.type.TYPE,
       attributeNameNew: AttributeNames.layout.text,
-      attributeValue: AttributesValues.layout.DEFAULT_CENTERED,
+      attributeValue: AttributesValues.layout.defaultCentered,
     }) ||
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.deprecated.type.TYPE,
       attributeNameNew: AttributeNames.layout.text,
-      attributeValue: AttributesValues.layout.DEFAULT_INTERIOR_CENTERED,
+      attributeValue: AttributesValues.layout.defaultInteriorCentered,
     }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.layout.text,
-      attributeValue: AttributesValues.layout.CENTER,
+      attributeValue: AttributesValues.layout.center,
     }),
 } as const;
 

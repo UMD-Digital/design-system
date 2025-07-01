@@ -24,20 +24,22 @@ const display = {
 };
 
 const layout = {
-  DEFAULT_CENTERED: 'default-centered',
-  DEFAULT_INTERIOR_CENTERED: 'default-interior-centered',
-  DEFAULT_INTERIOR: 'default-interior',
-  FULL_IMAGE: 'full-image',
-  STACKED_INTERIOR: 'stacked-interior',
-  CENTER: 'center',
-  RIGHT: 'right',
-  LEFT: 'left',
-  FIXED: 'fixed',
-  FULL: 'full',
+  center: 'center',
+  defaultCentered: 'default-centered',
+  defaultInteriorCentered: 'default-interior-centered',
+  defaultInterior: 'default-interior',
+  fixed: 'fixed',
+  fullImage: 'full-image',
+  full: 'full',
+  large: 'large',
+  small: 'small',
+  left: 'left',
+  right: 'right',
+  stackedInterior: 'stacked-interior',
 };
 
 const search = {
-  DOMAIN: 'domain',
+  domain: 'domain',
 };
 
 const size = {

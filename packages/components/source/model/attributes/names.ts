@@ -48,12 +48,14 @@ const layout = {
   alignment: 'data-layout-alignment',
   columnCount: 'data-layout-column-count',
   fixed: 'data-layout-fixed',
+  height: 'data-layout-height',
   hidden: 'data-layout-hidden',
   interior: 'data-layout-interior',
   lock: 'data-layout-lock',
   position: 'data-layout-position',
   reverse: 'data-layout-reverse',
   rowCount: 'data-layout-row-count',
+  spaceHorizontal: 'data-layout-space-horizontal',
   text: 'data-layout-text',
 };
 

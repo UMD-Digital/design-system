@@ -6,15 +6,18 @@ interface AnimationProps {
   includesAnimation?: boolean;
 }
 
-interface TextStyleProps {
-  isThemeDark?: boolean;
-  isInterior?: boolean;
+interface SizingProps {
+  isHeightSmall?: boolean;
+  isWidthLarge?: boolean;
 }
 
-interface AssetProps extends AnimationProps {
+interface TextStyleProps extends SizingProps {
+  isThemeDark?: boolean;
+}
+
+interface AssetProps extends AnimationProps, SizingProps {
   image?: HTMLImageElement | null;
   video?: HTMLVideoElement | null;
-  isWithLock?: boolean;
 }
 
 interface HeadlineProps extends TextStyleProps, AnimationProps {
@@ -47,7 +50,8 @@ const createAsset = ({
   image,
   video,
   includesAnimation,
-  isWithLock = false,
+  isWidthLarge = false,
+  isHeightSmall = false,
 }: AssetProps) => {
   const assetContainer = ElementModel.create({
     element: document.createElement('div'),
@@ -58,8 +62,17 @@ const createAsset = ({
         position: 'relative',
 
         ['& img, & video']: {
-          maxHeight: '700px',
-          minHeight: '40vh',
+          aspectRatio: '5 / 4',
+
+          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+            maxHeight: '700px',
+            minHeight: '300px',
+
+            ...(!isHeightSmall && {
+              minHeight: '400px',
+              height: '65vh !important',
+            }),
+          },
         },
       },
     },
@@ -138,7 +151,7 @@ const createAsset = ({
     wrapper.element.appendChild(overlay.element);
     wrapper.styles += overlay.styles;
 
-    if (isWithLock) {
+    if (isWidthLarge) {
       lock.element.appendChild(wrapper.element);
       lock.styles += wrapper.styles;
       assetContainer.element.appendChild(lock.element);
@@ -155,9 +168,9 @@ const createAsset = ({
 };
 
 const createHeadline = (props: HeadlineProps) => {
-  const { headline, isInterior, includesAnimation } = props;
+  const { headline, isHeightSmall, includesAnimation } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount > 30 && !isInterior;
+  const isOverwriteHeadline = characterCount > 30 && !isHeightSmall;
 
   let headlineElement = null;
 
@@ -174,14 +187,14 @@ const createHeadline = (props: HeadlineProps) => {
               animation: 'hero-stacked-font-color ease-in-out forwards',
               animationTimeline: 'view()',
 
-              ...(props.isInterior && {
-                animationRangeStart: '140vh',
-                animationRangeEnd: '200vh',
+              ...(props.isHeightSmall && {
+                animationRangeStart: '100vh',
+                animationRangeEnd: '110vh',
               }),
 
-              ...(!props.isInterior && {
-                animationRangeStart: '100vh',
-                animationRangeEnd: '150vh',
+              ...(!props.isHeightSmall && {
+                animationRangeStart: '90vh',
+                animationRangeEnd: '110vh',
               }),
             },
           },
@@ -204,7 +217,7 @@ const createHeadline = (props: HeadlineProps) => {
       },
     };
 
-    if (isInterior) {
+    if (isHeightSmall) {
       headlineElement = ElementModel.headline.campaignExtraLarge({
         element: headline,
         elementStyles,
@@ -256,14 +269,14 @@ const createText = (props: TextProps) => {
                   animation: 'hero-stacked-font-color ease-in-out forwards',
                   animationTimeline: 'view()',
 
-                  ...(props.isInterior && {
-                    animationRangeStart: '140vh',
-                    animationRangeEnd: '200vh',
-                  }),
-
-                  ...(!props.isInterior && {
+                  ...(props.isHeightSmall && {
                     animationRangeStart: '80vh',
                     animationRangeEnd: '100vh',
+                  }),
+
+                  ...(!props.isHeightSmall && {
+                    animationRangeStart: '100vh',
+                    animationRangeEnd: '120vh',
                   }),
                 },
               },

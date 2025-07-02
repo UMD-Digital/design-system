@@ -344,6 +344,42 @@ const isDisplay = {
     AttributeNames.display.default,
     AttributesValues.display.short,
   ),
+  standardCentered: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.layout.defaultCentered,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.deprecated.type.TYPE,
+      attributeValue: AttributesValues.layout.defaultCentered,
+    }),
+  standardInterior: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.layout.defaultInterior,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.deprecated.type.TYPE,
+      attributeValue: AttributesValues.layout.defaultInterior,
+    }),
+  standardInteriorCentered: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.layout.defaultInteriorCentered,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.deprecated.type.TYPE,
+      attributeValue: AttributesValues.layout.defaultInteriorCentered,
+    }),
   statement: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.statement,
@@ -494,18 +530,6 @@ const isLayout = {
       attributeNameOld: AttributeNames.deprecated.visual.VISUAL_TEXT_CENTER,
       attributeNameNew: AttributeNames.layout.text,
       attributeValue: AttributesValues.layout.center,
-    }) ||
-    checkDeprecatedAttribute({
-      ...props,
-      attributeNameOld: AttributeNames.deprecated.type.TYPE,
-      attributeNameNew: AttributeNames.layout.text,
-      attributeValue: AttributesValues.layout.defaultCentered,
-    }) ||
-    checkDeprecatedAttribute({
-      ...props,
-      attributeNameOld: AttributeNames.deprecated.type.TYPE,
-      attributeNameNew: AttributeNames.layout.text,
-      attributeValue: AttributesValues.layout.defaultInteriorCentered,
     }) ||
     isAttributeTrue({
       ...props,

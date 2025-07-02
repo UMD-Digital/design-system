@@ -6,9 +6,12 @@ interface AnimationProps {
   includesAnimation?: boolean;
 }
 
-interface TextStyleProps {
+interface SizingProps {
+  isHeightSmall?: boolean;
+}
+
+interface TextStyleProps extends SizingProps {
   isThemeDark?: boolean;
-  isInterior: boolean;
 }
 
 interface AssetProps extends AnimationProps {
@@ -124,9 +127,9 @@ const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
 };
 
 const createHeadline = (props: HeadlineProps) => {
-  const { headline, isInterior, isThemeDark } = props;
+  const { headline, isHeightSmall, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount > 10 && isInterior;
+  const isOverwriteHeadline = characterCount > 10 && isHeightSmall;
 
   let headlineElement = null;
 
@@ -166,7 +169,11 @@ const createHeadline = (props: HeadlineProps) => {
 };
 
 const createText = (props: TextProps) => {
-  const { isTextCenter, isInterior, includesAnimation } = props;
+  const {
+    isTextCenter = false,
+    isHeightSmall = false,
+    includesAnimation,
+  } = props;
 
   const lock = ElementModel.layout.spaceHorizontalMax({
     element: document.createElement('div'),
@@ -216,7 +223,7 @@ const createText = (props: TextProps) => {
           ...(!isTextCenter && {
             width: '80%',
           }),
-          ...(isInterior && {
+          ...(isHeightSmall && {
             minHeight: '400px',
             alignItems: 'flex-end',
             display: 'flex',
@@ -249,7 +256,7 @@ const createText = (props: TextProps) => {
 
 export default (props: HeroStandardProps) =>
   (() => {
-    const { isInterior } = props;
+    const { isHeightSmall } = props;
 
     const composite = ElementModel.create({
       element: document.createElement('div'),
@@ -259,14 +266,14 @@ export default (props: HeroStandardProps) =>
           position: 'relative',
           overflow: 'hidden',
           [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            ...(!isInterior && {
+            ...(!isHeightSmall && {
               height: '75vh',
               minHeight: '480px',
             }),
           },
 
           [`@container (${Styles.token.media.queries.desktop.min})`]: {
-            ...(!isInterior && {
+            ...(!isHeightSmall && {
               minHeight: '720px',
             }),
           },

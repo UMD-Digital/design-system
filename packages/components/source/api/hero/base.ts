@@ -27,27 +27,12 @@ const createComponent: CreateComponentFunction = (element) => {
   });
   const isDisplayOverlay = Attributes.isDisplay.overlay({ element });
   const isDisplayStacked = Attributes.isDisplay.stacked({ element });
-  const isDisplayStackedInterior = Attributes.isDisplay.stackedInterior({
-    element,
-  });
-
   const includesAnimation = Attributes.includesFeature.animation({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
 
   if (isDisplayOverlay) {
     return Composite.hero.overlay({
       ...makeSlots({ element }),
-      includesAnimation,
-    });
-  }
-
-  // Deprecated usage
-  if (isDisplayStackedInterior) {
-    return Composite.hero.stacked({
-      ...makeSlots({ element }),
-      isHeightSmall: true,
-      isWidthLarge: true,
-      isThemeDark,
       includesAnimation,
     });
   }
@@ -63,29 +48,66 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
-  const type = element.getAttribute('type');
-
-  let isTextCenter = Attributes.isLayout.textCentered({ element });
-  let isInterior = false;
-
-  if (type === Attributes.values.layout.defaultCentered) {
-    isTextCenter = true;
+  // Deprecated usage
+  if (
+    Attributes.isDisplay.stackedInterior({
+      element,
+    })
+  ) {
+    return Composite.hero.stacked({
+      ...makeSlots({ element }),
+      isHeightSmall: true,
+      isWidthLarge: true,
+      isThemeDark,
+      includesAnimation,
+    });
   }
 
-  if (type === Attributes.values.layout.defaultInterior) {
-    isInterior = true;
+  // Deprecated usage
+  if (
+    Attributes.isDisplay.standardCentered({
+      element,
+    })
+  ) {
+    return Composite.hero.standard({
+      ...makeSlots({ element }),
+      isTextCenter: true,
+      isHeightSmall: false,
+      includesAnimation,
+    });
   }
 
-  if (type === Attributes.values.layout.defaultInteriorCentered) {
-    isInterior = true;
-    isTextCenter = true;
+  // Deprecated usage
+  if (
+    Attributes.isDisplay.standardInterior({
+      element,
+    })
+  ) {
+    return Composite.hero.standard({
+      ...makeSlots({ element }),
+      isHeightSmall: true,
+      includesAnimation,
+    });
+  }
+
+  // Deprecated usage
+  if (
+    Attributes.isDisplay.standardInteriorCentered({
+      element,
+    })
+  ) {
+    return Composite.hero.standard({
+      ...makeSlots({ element }),
+      isHeightSmall: true,
+      isTextCenter: true,
+      includesAnimation,
+    });
   }
 
   return Composite.hero.standard({
     ...makeSlots({ element }),
-    isInterior,
-    isTextCenter,
-    isThemeDark,
+    isHeightSmall: Attributes.isLayout.heightSmall({ element }) || false,
+    isTextCenter: Attributes.isLayout.textCentered({ element }) || false,
     includesAnimation,
   });
 };

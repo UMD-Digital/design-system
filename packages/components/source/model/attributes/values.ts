@@ -18,6 +18,7 @@ const display = {
   promo: 'promo',
   short: 'short',
   stacked: 'stacked',
+  standard: 'standard',
   statement: 'statement',
   sticky: 'sticky',
   tabular: 'tabular',

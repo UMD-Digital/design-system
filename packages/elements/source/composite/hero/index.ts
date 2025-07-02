@@ -1,5 +1,4 @@
 export { default as brand } from './brand';
-export { default as elements } from './elements';
 export { default as expand } from './expand';
 export { default as grid } from './grid';
 export { default as logo } from './logo';

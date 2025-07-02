@@ -47,7 +47,7 @@ const createCardComponent = ({ tagName }: CardConfig) => {
   const createComponent = (element: HTMLElement) => {
     const isAligned = Attributes.isVisual.aligned({ element });
     const hasBorder = Attributes.isVisual.bordered({ element });
-    const isDisplayList = Attributes.isVisual.list({ element });
+    const isDisplayList = Attributes.isDisplay.list({ element });
 
     const cardData = createComponentData(element);
 

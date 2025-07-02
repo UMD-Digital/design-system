@@ -626,10 +626,6 @@ const isVisual = {
     AttributeNames.deprecated.visual.VISUAL_BORDER,
     AttributesValues.state.TRUE,
   ),
-  list: createAttributeCheck(
-    AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.list,
-  ),
   icon_seal: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,

@@ -1,7 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Lifecycle, Slots, Register } from 'model';
-import { Markup } from 'utilities';
-import { CommonHeroData } from './common';
 import type { CreateComponentFunction, ComponentRegistration } from '../_types';
 
 /**
@@ -130,20 +128,30 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `actions` - Call-to-action buttons/links
  *
  * ## Attributes
- * - `type` - Layout type options:
- *   - `default-centered` - Default layout with centered text
- *   - `default-interior` - Interior page layout
- *   - `default-interior-centered` - Interior with centered text
+ * - `data-display` - Display type options:
+ *   - `standard` - Standard hero layout (default)
  *   - `stacked` - Stacked content layout
- *   - `stacked-interior` - Stacked layout with lock element
- *   - `minimal` - Minimal hero style
  *   - `overlay` - Content overlaid on image/video
+ * - `data-layout-space-horizontal` - Horizontal spacing options:
+ *   - `large` - Large horizontal spacing (see https://designsystem.umd.edu/foundation/horizontal-spacing)
+ * - `data-layout-height` - Layout height options:
+ *   - `small` - Smaller layout height
+ * - `data-layout-text` - Text alignment options:
+ *   - `center` - Center align text
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
  * - `data-feature` - Feature options:
  *   - `animation` - Enable animations
- * - `data-visual-align` - Alignment options:
- *   - `center` - Center align text
+ *
+ * ## Deprecated Attributes
+ * The following attributes are deprecated and will be removed in v2.0:
+ * - `type="default-centered"` → Use `data-display="standard" data-layout-text="center"`
+ * - `type="default-interior"` → Use `data-display="standard" data-layout-height="small"`
+ * - `type="default-interior-centered"` → Use `data-display="standard" data-layout-height="small" data-layout-text="center"`
+ * - `type="stacked"` → Use `data-display="stacked"`
+ * - `type="stacked-interior"` → Use `data-display="stacked" data-layout-height="small" data-layout-space-horizontal="large"`
+ * - `type="overlay"` → Use `data-display="overlay"`
+ * - `data-visual-align="center"` → Use `data-layout-text="center"`
  *
  * @example
  * ```html
@@ -158,7 +166,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @example
  * ```html
  * <!-- Overlay hero with video -->
- * <umd-element-hero type="overlay" data-theme="dark">
+ * <umd-element-hero data-display="overlay" data-theme="dark">
  *   <p slot="eyebrow">Discover</p>
  *   <h1 slot="headline">Your Future Starts Here</h1>
  *   <p slot="text">Join a community of innovators and leaders</p>
@@ -174,8 +182,18 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * @example
  * ```html
- * <!-- Minimal interior hero -->
- * <umd-element-hero type="minimal" data-visual-align="center">
+ * <!-- Stacked hero with small height and large horizontal spacing -->
+ * <umd-element-hero data-display="stacked" data-layout-height="small" data-layout-space-horizontal="large">
+ *   <h1 slot="headline">Research Excellence</h1>
+ *   <p slot="text">Advancing knowledge through groundbreaking research</p>
+ *   <img slot="image" src="research-lab.jpg" alt="Research laboratory">
+ * </umd-element-hero>
+ * ```
+ *
+ * @example
+ * ```html
+ * <!-- Standard hero with centered text -->
+ * <umd-element-hero data-display="standard" data-layout-text="center">
  *   <h1 slot="headline">About the University</h1>
  *   <p slot="text">Founded in 1856, the University of Maryland...</p>
  * </umd-element-hero>

@@ -1,7 +1,6 @@
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { Markup } from 'utilities';
-import { CommonPathwayData } from './common';
 import { CreateComponentFunction } from '../_types';
 
 /**
@@ -21,6 +20,12 @@ const MakeCommonDefaultData = ({
   isThemeLight?: boolean;
   isThemeMaryland?: boolean;
 }) => {
+  const slots = ({ element }: { element: HTMLElement }) => ({
+    action: Slots.actions.default({ element }),
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+  });
   const startDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_START_ISO}"]`,
   );
@@ -41,7 +46,7 @@ const MakeCommonDefaultData = ({
   const startDate = Markup.event.createDate({ element: startDateSlot });
   const endDate = Markup.event.createDate({ element: endDateSlot });
   const obj = {
-    ...CommonPathwayData({
+    ...slots({
       element,
     }),
     isImageRight,

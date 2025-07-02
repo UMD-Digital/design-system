@@ -1,7 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
-import { CommonPathwayData } from './common';
 import { CreateComponentFunction } from '../_types';
 
 const { SlotWithDefaultStyling } = Markup.create;
@@ -14,9 +13,16 @@ const tagName = 'umd-element-pathway-highlight';
 /**
  * Creates a pathway highlight component with the provided configuration
  */
-const createComponent: CreateComponentFunction = (element) =>
-  Composite.pathway.highlight({
-    ...CommonPathwayData({
+const createComponent: CreateComponentFunction = (element) => {
+  const slots = ({ element }: { element: HTMLElement }) => ({
+    action: Slots.actions.default({ element }),
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+  });
+
+  return Composite.pathway.highlight({
+    ...slots({
       element,
     }),
     quote: SlotWithDefaultStyling({
@@ -29,6 +35,7 @@ const createComponent: CreateComponentFunction = (element) =>
     }),
     isThemeDark: Attributes.isTheme.dark({ element }),
   });
+};
 
 /**
  * Pathway Highlight

@@ -1,261 +1,257 @@
-import {
-  element,
-  token,
-  typography,
-} from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { animations, buttons } from 'atomic';
+import { ElementModel } from 'model';
 import * as Utility from 'utilities';
 
-type TypeHeroBrandVideoProps = {
+interface AnimationProps {
+  isAnimationOnLoad?: boolean;
+}
+
+interface VideoProps extends AnimationProps {
   video: HTMLVideoElement;
+}
+
+interface TextProps extends VideoProps {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
-  isAnimationOnLoad?: boolean;
+}
+
+interface HeroBrandVideoProps extends TextProps {}
+
+const OVERLAY_CLASS_NAME = 'hero-logo-brand-text-overlay';
+
+const createHeadline = (headline?: HTMLElement | null) => {
+  if (!headline) return null;
+
+  return ElementModel.headline.campaignExtraLarge({
+    element: headline,
+    elementStyles: {
+      element: {
+        textTransform: 'uppercase',
+        opacity: 0,
+        transition: 'opacity 1000ms ease-in-out',
+        transitionDelay: '600ms',
+        textWrap: 'balance',
+      },
+      siblingAfter: {
+        marginTop: Styles.token.spacing.md,
+      },
+    },
+  });
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
+const createText = (text?: HTMLElement | null) => {
+  if (!text) return null;
 
-const ELEMENT_NAME = 'umd-element-hero-brand-video';
-const ELEMENT_HERO_ELEMENT_DECLARATION = 'hero-logo-brand-video-declaration';
-const ELEMENT_HERO_ELEMENT_CONTAINER = 'hero-logo-brand-video-container';
-const ELEMENT_HERO_ELEMENT_WRAPPER = 'hero-logo-brand-video-wrapper';
-const ELEMENT_HERO_ELEMENT_VIDEO = 'hero-logo-brand-video';
-const ELEMENT_HERO_ELEMENT_TEXT_OVERLAY = 'hero-logo-brand-text-overlay';
-const ELEMENT_HERO_ELEMENT_TEXT_CONTAINER = 'hero-logo-brand-text-container';
-const ELEMENT_HERO_ELEMENT_HEADLINE = 'hero-logo-brand-headline';
-const ELEMENT_HERO_ELEMENT_TEXT = 'hero-logo-brand-text';
+  return ElementModel.richText.simpleLarge({
+    element: text,
 
-const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_HERO_ELEMENT_HEADLINE}`]: typography.campaign.maxium,
-    },
-  })}
+    elementStyles: {
+      element: {
+        maxWidth: '720px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        opacity: 0,
+        transition: 'opacity 1000ms ease-in-out',
+        transitionDelay: '1500ms',
 
-  .${ELEMENT_HERO_ELEMENT_HEADLINE} {
-    text-transform: uppercase;
-    opacity: 0;
-    transition: opacity 1000ms ease-in-out;
-    transition-delay: 600ms;
-    text-wrap: balance;
-  }
-`;
-
-const TextStyles = `
-  ${convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: element.text.rich.simpleLarge,
-    },
-  })}
-
-  @media (min-width: 1024px) {
-    ${convertJSSObjectToStyles({
-      styleObj: {
-        [`.${ELEMENT_HERO_ELEMENT_TEXT} *`]: typography.sans.larger,
+        [`@media (max-width: 649px)`]: {
+          display: 'none',
+        },
       },
-    })}
-  }
+    },
+  });
+};
 
-  .${ELEMENT_HERO_ELEMENT_TEXT} {
-    max-width: 720px;
-    margin: 0 auto;
-    opacity: 0;
-    transition: opacity 1000ms ease-in-out;
-    transition-delay: 1500ms;
-  }
-
-  @media (max-width: 649px) {
-    .${ELEMENT_HERO_ELEMENT_TEXT} {
-      display: none;
-    }
-  }
-
-  * + .${ELEMENT_HERO_ELEMENT_TEXT} {
-    margin-top: ${token.spacing.md};
-  }
-`;
-
-const TextContainerStyles = `
-  .${ELEMENT_HERO_ELEMENT_TEXT_CONTAINER} {
-    z-index: 99;
-    text-align: center;
-    width: calc(100% - 24px);
-    max-width: 950px;
-    padding: ${token.spacing.xl} ${token.spacing.md};
-  }
-
-  .${ELEMENT_HERO_ELEMENT_TEXT_CONTAINER} * {
-    color: ${token.color.white};
-  }
-`;
-
-const TextOverlayStyles = `
-  .${ELEMENT_HERO_ELEMENT_TEXT_OVERLAY} {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 98;
-    opacity: 0;
-    transition: opacity 1500ms ease-in-out;
-  }
-`;
-
-const VideoStyles = `
-  .${ELEMENT_HERO_ELEMENT_VIDEO} {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  @media (${token.media.queries.tablet.min}) {
-    .${ELEMENT_HERO_ELEMENT_VIDEO} {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: auto;
-      height: auto;
-      min-width: 100%;
-      min-height: 100%;
-    }
-  }
-`;
-
-const STYLES_HERO_BRAND_VIDEO_ELEMENT = `
-  .${ELEMENT_HERO_ELEMENT_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  .${ELEMENT_HERO_ELEMENT_CONTAINER} {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-  }
-
-  .${ELEMENT_HERO_ELEMENT_WRAPPER} {
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  ${VideoStyles}
-  ${TextContainerStyles}
-  ${TextOverlayStyles}
-  ${HeadlineStyles}
-  ${TextStyles}
-`;
-
-const CreateTextContainer = (props: TypeHeroBrandVideoProps) => {
+const createTextContainer = (props: TextProps) => {
   const { headline, text } = props;
-  const overlay = document.createElement('div');
-  const container = document.createElement('div');
+  const headlineElement = createHeadline(headline);
+  const textElement = createText(text);
 
-  if (!headline && !text) return null;
+  if (!headlineElement && !textElement) return null;
 
-  container.classList.add(ELEMENT_HERO_ELEMENT_TEXT_CONTAINER);
+  const container = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'hero-logo-brand-text-container',
+    elementStyles: {
+      element: {
+        zIndex: 99,
+        textAlign: 'center',
+        width: 'calc(100% - 24px)',
+        maxWidth: '950px',
+        padding: `${Styles.token.spacing.xl} ${Styles.token.spacing.md}`,
 
-  if (headline) {
-    headline.classList.add(ELEMENT_HERO_ELEMENT_HEADLINE);
-    container.appendChild(headline);
+        ['& *']: {
+          color: Styles.token.color.white,
+        },
+      },
+    },
+  });
+
+  if (headlineElement) {
+    container.element.appendChild(headlineElement.element);
+    container.styles += headlineElement.styles;
   }
 
-  if (text) {
-    text.classList.add(ELEMENT_HERO_ELEMENT_TEXT);
-    container.appendChild(text);
+  if (textElement) {
+    container.element.appendChild(textElement.element);
+    container.styles += textElement.styles;
   }
 
-  overlay.classList.add(ELEMENT_HERO_ELEMENT_TEXT_OVERLAY);
-  overlay.appendChild(container);
+  const overlay = ElementModel.create({
+    element: document.createElement('div'),
+    className: OVERLAY_CLASS_NAME,
+    elementStyles: {
+      element: {
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        zIndex: 98,
+        opacity: 0,
+        transition: 'opacity 1500ms ease-in-out',
+      },
+    },
+  });
+
+  overlay.element.appendChild(container.element);
+  overlay.styles += container.styles;
 
   return overlay;
 };
 
-const AnimationSequence = ({ container }: { container: HTMLDivElement }) => {
+const createVideo = (video: HTMLVideoElement) => {
+  return ElementModel.create({
+    element: video,
+    className: 'hero-logo-brand-video',
+    elementStyles: {
+      element: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+
+        [`@media (${Styles.token.media.queries.tablet.min})`]: {
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'auto',
+          height: 'auto',
+          minWidth: '100%',
+          minHeight: '100%',
+        },
+      },
+    },
+  });
+};
+
+const animationSequence = ({ container }: { container: HTMLElement }) => {
   const overlay = container.querySelector(
-    `.${ELEMENT_HERO_ELEMENT_TEXT_OVERLAY}`,
+    `.${OVERLAY_CLASS_NAME}`,
   ) as HTMLDivElement;
   const headline = container.querySelector(
-    `.${ELEMENT_HERO_ELEMENT_HEADLINE}`,
+    `.${Styles.typography.campaign.fonts.extraLarge.className}`,
   ) as HTMLDivElement;
   const text = container.querySelector(
-    `.${ELEMENT_HERO_ELEMENT_TEXT}`,
+    `.${Styles.element.text.rich.simpleLarge.className}`,
   ) as HTMLDivElement;
 
-  overlay.style.opacity = '1';
-  headline.style.opacity = '1';
-  text.style.opacity = '1';
+  if (overlay) overlay.style.opacity = '1';
+  if (headline) headline.style.opacity = '1';
+  if (text) text.style.opacity = '1';
 };
 
-const CreateHeroBrandVideoElement = (props: TypeHeroBrandVideoProps) => {
-  const { video, isAnimationOnLoad } = props;
-  const declaration = document.createElement('section');
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const textContainer = CreateTextContainer(props);
-  const completedCallback = () => AnimationSequence({ container });
-  const overlay = animations.brand.chevronFlow({
-    sizedContainer: container,
-    sizedWrapper: wrapper,
-    completedCallback,
-    isAnimationOnLoad,
-  });
-  const buttonState = buttons.videoState({ video });
-  const eventRize = () => {
-    if (container.offsetHeight > window.innerHeight) {
-      container.style.height = `${(window.innerHeight / 10) * 9}px`;
+export default (props: HeroBrandVideoProps) =>
+  (() => {
+    const { video, isAnimationOnLoad } = props;
+
+    const composite = ElementModel.create({
+      element: document.createElement('section'),
+      className: 'umd-element-hero-brand-video-declaration',
+      elementStyles: {
+        element: {
+          aspectRatio: '16 / 9',
+          width: '100%',
+        },
+      },
+    });
+
+    const wrapper = ElementModel.create({
+      element: document.createElement('div'),
+      className: 'hero-logo-brand-video-wrapper',
+      elementStyles: {
+        element: {
+          position: 'relative',
+          overflow: 'hidden',
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+      },
+    });
+
+    const videoElement = createVideo(video);
+    wrapper.element.appendChild(videoElement.element);
+    wrapper.styles += videoElement.styles;
+
+    const textContainer = createTextContainer(props);
+    if (textContainer) {
+      wrapper.element.appendChild(textContainer.element);
+      wrapper.styles += textContainer.styles;
     }
-  };
-  const eventLoad = () => {
-    overlay.events.load();
-    buttonState.events.setButtonPlay();
-    eventRize();
 
-    if (Utility.accessibility.isPrefferdReducedMotion()) {
-      video.pause();
-      buttonState.events.setButtonPause();
-    }
-  };
-  let styles = STYLES_HERO_BRAND_VIDEO_ELEMENT;
+    const completedCallback = () =>
+      animationSequence({ container: composite.element });
 
-  video.classList.add(ELEMENT_HERO_ELEMENT_VIDEO);
+    const overlay = animations.brand.chevronFlow({
+      sizedContainer: composite.element,
+      sizedWrapper: wrapper.element,
+      completedCallback,
+      isAnimationOnLoad,
+    });
+    wrapper.element.appendChild(overlay.element);
+    wrapper.styles += overlay.styles;
 
-  wrapper.classList.add(ELEMENT_HERO_ELEMENT_WRAPPER);
-  wrapper.appendChild(video);
-  if (textContainer) wrapper.appendChild(textContainer);
-  wrapper.appendChild(overlay.element);
-  styles += overlay.styles;
-  wrapper.appendChild(buttonState.element);
-  styles += buttonState.styles;
+    const buttonState = buttons.videoState({ video });
+    wrapper.element.appendChild(buttonState.element);
+    wrapper.styles += buttonState.styles;
 
-  container.classList.add(ELEMENT_HERO_ELEMENT_CONTAINER);
-  container.appendChild(wrapper);
+    composite.element.appendChild(wrapper.element);
+    composite.styles += wrapper.styles;
 
-  declaration.classList.add(ELEMENT_HERO_ELEMENT_DECLARATION);
-  declaration.appendChild(container);
+    const eventResize = () => {
+      if (composite.element.offsetHeight > window.innerHeight) {
+        composite.element.style.height = `${(window.innerHeight / 10) * 9}px`;
+      }
+    };
 
-  window.addEventListener(
-    'resize',
-    Utility.performance.debounce(() => {
-      eventRize();
-    }, 20),
-  );
+    const eventLoad = () => {
+      overlay.events.load();
+      buttonState.events.setButtonPlay();
+      eventResize();
 
-  return {
-    element: declaration,
-    styles,
-    events: {
-      load: eventLoad,
-    },
-  };
-};
+      if (Utility.accessibility.isPrefferdReducedMotion()) {
+        video.pause();
+        buttonState.events.setButtonPause();
+      }
+    };
 
-export default {
-  CreateElement: CreateHeroBrandVideoElement,
-};
+    window.addEventListener(
+      'resize',
+      Utility.performance.debounce(() => {
+        eventResize();
+      }, 20),
+    );
+
+    return {
+      ...composite,
+      events: {
+        load: eventLoad,
+      },
+    };
+  })();

@@ -1,5 +1,1 @@
-import { default as video } from './video';
-
-export default {
-  video,
-};
+export { default as video } from './video';

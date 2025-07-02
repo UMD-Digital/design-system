@@ -1,4 +1,4 @@
-export { default as brand } from './brand';
+export * as brand from './brand';
 export { default as expand } from './expand';
 export { default as grid } from './grid';
 export { default as logo } from './logo';

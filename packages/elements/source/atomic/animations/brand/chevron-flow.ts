@@ -256,8 +256,8 @@ export default ({
   completedCallback,
   isAnimationOnLoad = true,
 }: {
-  sizedContainer: HTMLDivElement;
-  sizedWrapper: HTMLDivElement;
+  sizedContainer: HTMLElement;
+  sizedWrapper: HTMLElement;
   completedCallback?: () => void;
   isAnimationOnLoad?: boolean;
 }) =>

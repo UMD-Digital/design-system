@@ -64,3 +64,6 @@ export const spaceHorizontalFull = (props: ElementProps) =>
 
 export const spaceHorizontalSmall = (props: ElementProps) =>
   createStyledElement(props, Styles.layout.space.horizontal.small);
+
+export const spaceHorizontalSmallest = (props: ElementProps) =>
+  createStyledElement(props, Styles.layout.space.horizontal.smallest);

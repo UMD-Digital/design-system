@@ -47,6 +47,9 @@ const createComponent: CreateComponentFunction = (element) => {
       images: centerImages,
       video: centerVideo,
     },
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+    actions: Slots.actions.default({ element }),
   };
 
   return Composite.hero.grid(elementData);

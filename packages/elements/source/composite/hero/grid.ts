@@ -1,6 +1,15 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { assets } from 'atomic';
+import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
+
+interface HeadlineProps {
+  headline?: HTMLElement | null;
+}
+
+interface TextProps extends HeadlineProps {
+  text?: HTMLElement | null;
+  actions?: HTMLElement | null;
+}
 
 interface CornerProps {
   images: Array<HTMLImageElement>;
@@ -12,7 +21,7 @@ interface CenterProps {
   video?: HTMLVideoElement | null;
 }
 
-interface HeroGridProps {
+interface HeroGridProps extends TextProps {
   corners: Array<CornerProps>;
   center: CenterProps;
 }
@@ -186,6 +195,100 @@ const createCenter = ({ images, video }: CenterProps) => {
   return center;
 };
 
+const createHeadline = (props: HeadlineProps) => {
+  const { headline } = props;
+  const characterCount = headline?.textContent?.trim().length || 0;
+  const isOverwriteHeadline = characterCount > 30;
+
+  if (!headline) return null;
+
+  const desktopStyles = {
+    ...(isOverwriteHeadline && { fontSize: '80px' }),
+  };
+
+  const headlineElement = ElementModel.headline.campaignExtraLarge({
+    element: headline,
+    elementStyles: {
+      element: {
+        textTransform: 'uppercase',
+        textWrap: 'pretty',
+        ...desktopStyles,
+      },
+      siblingAfter: {
+        marginTop: Styles.token.spacing.md,
+      },
+    },
+    isThemeDark: true,
+  });
+
+  return headlineElement;
+};
+
+const createTextContainer = (props: TextProps) => {
+  const { actions, headline, text } = props;
+
+  if (!text && !actions && !headline) {
+    return null;
+  }
+
+  const textContainer = ElementModel.create({
+    element: document.createElement('div'),
+    className: 'hero-expand-text-container',
+    elementStyles: {
+      element: {
+        position: 'relative',
+        height: '100%',
+        zIndex: 9999,
+        textAlign: 'center',
+        padding: `${Styles.token.spacing.md} 0`,
+
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          padding: `${Styles.token.spacing['3xl']} 0`,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        },
+
+        [`@container (${Styles.token.media.queries.highDef.min})`]: {
+          padding: `${Styles.token.spacing['6xl']} 0`,
+        },
+
+        '@media (prefers-reduced-motion: no-preference)': {
+          '@supports (animation-timeline: view())': {
+            paddingTop: '140vh',
+          },
+        },
+      },
+    },
+  });
+
+  const lock = ElementModel.layout.spaceHorizontalSmallest({
+    element: document.createElement('div'),
+    elementStyles: {
+      element: {
+        height: '100%',
+        width: '100%',
+        position: 'relative',
+      },
+    },
+  });
+
+  const textLockupElement = textLockup.large({
+    headline: createHeadline(props),
+    textLargest: text,
+    actions,
+    isThemeDark: true,
+  });
+
+  lock.element.appendChild(textLockupElement.element);
+  lock.styles += textLockupElement.styles;
+
+  textContainer.element.appendChild(lock.element);
+  textContainer.styles += lock.styles;
+
+  return textContainer;
+};
+
 export default (props: HeroGridProps) => {
   const { corners, center } = props;
   const declaration = ElementModel.create({
@@ -210,6 +313,8 @@ export default (props: HeroGridProps) => {
       },
     },
   });
+
+  const text = createTextContainer(props);
 
   const grid = ElementModel.create({
     element: document.createElement('div'),
@@ -273,6 +378,12 @@ export default (props: HeroGridProps) => {
 
   declaration.element.appendChild(grid.element);
   declaration.styles += grid.styles;
+
+  if (text) {
+    declaration.element.appendChild(text.element);
+    declaration.styles += text.styles;
+  }
+
   declaration.styles += keyFrameColumns;
   declaration.styles += keyFrameRows;
   declaration.styles += keyFrameTint;

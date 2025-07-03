@@ -1,7 +1,10 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register } from 'model';
 import { Markup } from 'utilities';
-import type { CreateComponentFunction, ComponentRegistration } from '../_types';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../_types';
 
 /**
  * Tag name for the expandable hero component
@@ -67,7 +70,7 @@ const createComponent: CreateComponentFunction = (element) => {
     elementData.additional = additional;
   }
 
-  return Composite.hero.expand(elementData);
+  return Composite.hero.custom.expand(elementData);
 };
 
 /**

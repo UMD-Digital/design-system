@@ -1,6 +1,4 @@
-export * as brand from './brand';
-export { default as expand } from './expand';
-export { default as grid } from './grid';
+export * as custom from './custom';
 export { default as logo } from './logo';
 export { default as minimal } from './minimal';
 export { default as overlay } from './overlay';

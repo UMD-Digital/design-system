@@ -1,6 +1,9 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Lifecycle, Slots, Register } from 'model';
-import type { CreateComponentFunction, ComponentRegistration } from '../_types';
+import { Slots, Register } from 'model';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../_types';
 
 /**
  * Tag name for the grid hero component
@@ -52,7 +55,7 @@ const createComponent: CreateComponentFunction = (element) => {
     actions: Slots.actions.default({ element }),
   };
 
-  return Composite.hero.grid(elementData);
+  return Composite.hero.custom.grid(elementData);
 };
 
 /**

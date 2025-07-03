@@ -15,7 +15,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const animationTriggerAttribute = element.getAttribute('animation-trigger');
   const video = element.querySelector('video') as HTMLVideoElement;
 
-  return Composite.hero.brand.video({
+  return Composite.hero.custom.videoArrow({
     video,
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),

@@ -1,4 +1,4 @@
-import heroBrandVideo from '../../../hero/brand/video';
+import heroBrandVideo from '../../../hero/custom/video';
 import {
   createTestComponent,
   cleanupComponents,
@@ -24,21 +24,23 @@ describe('Component: umd-element-hero-brand-video', () => {
   describe('Registration', () => {
     it('should register the web component', () => {
       // Create an element first so registration will proceed
-      const testElement = document.createElement('umd-element-hero-brand-video');
+      const testElement = document.createElement(
+        'umd-element-hero-brand-video',
+      );
       document.body.appendChild(testElement);
-      
+
       heroBrandVideo();
-      
+
       // Verify customElements.define was called
       expect(customElements.define).toHaveBeenCalledWith(
         tagName,
-        expect.any(Function)
+        expect.any(Function),
       );
     });
 
     it('should create custom element with correct tag name', () => {
       heroBrandVideo();
-      
+
       const { element } = createTestComponent(tagName);
       expect(element.tagName.toLowerCase()).toBe(tagName);
     });
@@ -51,11 +53,19 @@ describe('Component: umd-element-hero-brand-video', () => {
 
     it('should accept headline and text slots', () => {
       const { element } = createTestComponent(tagName);
-      
+
       // Add slots
-      element.appendChild(createSlotContent('headline', 'h1', 'Fearlessly Forward'));
-      element.appendChild(createSlotContent('text', 'p', 'The University of Maryland strategic vision'));
-      
+      element.appendChild(
+        createSlotContent('headline', 'h1', 'Fearlessly Forward'),
+      );
+      element.appendChild(
+        createSlotContent(
+          'text',
+          'p',
+          'The University of Maryland strategic vision',
+        ),
+      );
+
       // Verify slots are present
       expect(element.querySelector('[slot="headline"]')).toBeTruthy();
       expect(element.querySelector('[slot="text"]')).toBeTruthy();
@@ -63,15 +73,17 @@ describe('Component: umd-element-hero-brand-video', () => {
 
     it('should validate slot configuration', () => {
       const { element } = createTestComponent(tagName);
-      
+
       element.appendChild(createSlotContent('headline', 'h1', 'Do Good'));
-      element.appendChild(createSlotContent('text', 'p', 'Join us in making a positive impact'));
-      
+      element.appendChild(
+        createSlotContent('text', 'p', 'Join us in making a positive impact'),
+      );
+
       const validation = validateSlotConfiguration(element, {
         headline: { required: false },
         text: { required: false },
       });
-      
+
       expect(validation.valid).toBe(true);
       expect(validation.errors).toHaveLength(0);
     });
@@ -84,20 +96,20 @@ describe('Component: umd-element-hero-brand-video', () => {
 
     it('should accept video as direct child', () => {
       const { element } = createTestComponent(tagName);
-      
+
       // Add video as direct child (not slotted)
       const video = document.createElement('video');
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       video.setAttribute('loop', '');
-      
+
       const source = document.createElement('source');
       source.setAttribute('src', 'brand-video.mp4');
       source.setAttribute('type', 'video/mp4');
       video.appendChild(source);
-      
+
       element.appendChild(video);
-      
+
       const directVideo = element.querySelector('video');
       expect(directVideo).toBeInstanceOf(HTMLVideoElement);
       expect(directVideo?.hasAttribute('autoplay')).toBe(true);
@@ -107,25 +119,25 @@ describe('Component: umd-element-hero-brand-video', () => {
 
     it('should handle multiple video sources', () => {
       const { element } = createTestComponent(tagName);
-      
+
       const video = document.createElement('video');
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       video.setAttribute('loop', '');
-      
+
       // Add multiple sources for browser compatibility
       const mp4Source = document.createElement('source');
       mp4Source.setAttribute('src', 'campaign.mp4');
       mp4Source.setAttribute('type', 'video/mp4');
       video.appendChild(mp4Source);
-      
+
       const webmSource = document.createElement('source');
       webmSource.setAttribute('src', 'campaign.webm');
       webmSource.setAttribute('type', 'video/webm');
       video.appendChild(webmSource);
-      
+
       element.appendChild(video);
-      
+
       const sources = element.querySelectorAll('video source');
       expect(sources.length).toBe(2);
       expect(sources[0].getAttribute('type')).toBe('video/mp4');
@@ -140,14 +152,15 @@ describe('Component: umd-element-hero-brand-video', () => {
 
     it('should handle animation-trigger attribute with load value', () => {
       const { element } = createTestComponent(tagName, '', {
-        'animation-trigger': 'load'
+        'animation-trigger': 'load',
       });
       const attributes = getComponentAttributes(element);
       expect(attributes['animation-trigger']).toBe('load');
     });
 
     it('should handle no animation-trigger attribute', () => {
-      const { element } = createTestComponent(tagName);const attributes = getComponentAttributes(element);
+      const { element } = createTestComponent(tagName);
+      const attributes = getComponentAttributes(element);
       expect(attributes['animation-trigger']).toBeUndefined();
     });
   });
@@ -184,30 +197,30 @@ describe('Component: umd-element-hero-brand-video', () => {
 
     it('should initialize with load animation when specified', () => {
       const { element } = createTestComponent(tagName, '', {
-        'animation-trigger': 'load'
+        'animation-trigger': 'load',
       });
-      
+
       // Add required video
       const video = document.createElement('video');
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       video.setAttribute('loop', '');
       element.appendChild(video);
-      
+
       element.appendChild(createSlotContent('headline', 'h1', 'Animated Hero'));
       expect(element.getAttribute('animation-trigger')).toBe('load');
     });
 
     it('should handle component without animation', () => {
       const { element } = createTestComponent(tagName);
-      
+
       // Add required video
       const video = document.createElement('video');
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       video.setAttribute('loop', '');
       element.appendChild(video);
-      
+
       element.appendChild(createSlotContent('headline', 'h1', 'Static Hero'));
       expect(element.getAttribute('animation-trigger')).toBeNull();
     });
@@ -220,23 +233,31 @@ describe('Component: umd-element-hero-brand-video', () => {
 
     it('should support brand-focused content', () => {
       const { element } = createTestComponent(tagName);
-      
+
       // Add brand video
       const video = document.createElement('video');
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       video.setAttribute('loop', '');
-      
+
       const source = document.createElement('source');
       source.setAttribute('src', 'fearlessly-forward.mp4');
       source.setAttribute('type', 'video/mp4');
       video.appendChild(source);
-      
+
       element.appendChild(video);
-      
+
       // Add brand messaging
-      element.appendChild(createSlotContent('headline', 'h1', 'Fearlessly Forward'));
-      element.appendChild(createSlotContent('text', 'p', 'The University of Maryland strategic vision for excellence and impact'));
+      element.appendChild(
+        createSlotContent('headline', 'h1', 'Fearlessly Forward'),
+      );
+      element.appendChild(
+        createSlotContent(
+          'text',
+          'p',
+          'The University of Maryland strategic vision for excellence and impact',
+        ),
+      );
       const headline = element.querySelector('[slot="headline"]');
       expect(headline?.textContent).toBe('Fearlessly Forward');
     });

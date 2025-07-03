@@ -43,7 +43,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
 const createText = (text?: HTMLElement | null) => {
   if (!text) return null;
 
-  return ElementModel.richText.simpleLarge({
+  return ElementModel.richText.simpleLargest({
     element: text,
 
     elementStyles: {
@@ -156,7 +156,7 @@ const animationSequence = ({ container }: { container: HTMLElement }) => {
     `.${Styles.typography.campaign.fonts.extraLarge.className}`,
   ) as HTMLDivElement;
   const text = container.querySelector(
-    `.${Styles.element.text.rich.simpleLarge.className}`,
+    `.${Styles.element.text.rich.simpleLargest.className}`,
   ) as HTMLDivElement;
 
   if (overlay) overlay.style.opacity = '1';

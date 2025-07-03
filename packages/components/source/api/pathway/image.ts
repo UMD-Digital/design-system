@@ -1,96 +1,12 @@
-import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
-import { Markup } from 'utilities';
+import { createEventData } from '../_event';
 import { CreateComponentFunction } from '../_types';
 
 /**
  * Tag name for the pathway web component
  */
 const tagName = 'umd-element-pathway';
-
-const { SlotWithDefaultStyling } = Markup.create;
-
-const MakeCommonDefaultData = ({
-  element,
-  isThemeDark,
-  isThemeMaryland,
-}: {
-  element: HTMLElement;
-  isThemeDark?: boolean;
-  isThemeLight?: boolean;
-  isThemeMaryland?: boolean;
-}) => {
-  const slots = ({ element }: { element: HTMLElement }) => ({
-    action: Slots.actions.default({ element }),
-    eyebrow: Slots.eyebrow.default({ element }),
-    headline: Slots.headline.default({ element }),
-    text: Slots.text.default({ element }),
-  });
-  const startDateSlot = element.querySelector(
-    `[slot="${Slots.name.DATE_START_ISO}"]`,
-  );
-  const endDateSlot = element.querySelector(
-    `[slot="${Slots.name.DATE_END_ISO}"]`,
-  );
-  const locationSlot = element.querySelector(
-    `[slot="${Slots.name.contact.location}"]`,
-  );
-
-  const showTime =
-    element.getAttribute(Attributes.names.deprecated.feature.SHOW_TIME) !==
-    'false';
-
-  const startDate = Markup.event.createDate({ element: startDateSlot });
-  const endDate = Markup.event.createDate({ element: endDateSlot });
-  const obj = {
-    ...slots({
-      element,
-    }),
-    stats: SlotWithDefaultStyling({ element, slotRef: Slots.name.STATS }),
-    image: Markup.validate.ImageSlot({
-      element,
-      ImageSlot: Slots.name.assets.image,
-    }),
-    video: Slots.assets.video({
-      element,
-    }),
-    eventDetails: null as null | HTMLElement,
-    eventSign: null as null | HTMLElement,
-    includedStyles: '',
-  };
-  let themeToggle = false;
-
-  if (isThemeMaryland) themeToggle = true;
-  if (isThemeDark) themeToggle = true;
-
-  if (startDate) {
-    const eventData = Markup.event.createDetailsData({
-      locationElement: locationSlot,
-      startDate,
-      endDate,
-    });
-    let styles = '';
-
-    const eventMeta = Atomic.events.meta({
-      ...eventData,
-      isThemeDark: themeToggle,
-      showTime,
-    });
-    const eventSign = Atomic.events.sign({
-      ...eventData,
-    });
-
-    obj.eventDetails = eventMeta.element;
-    obj.eventSign = eventSign.element;
-
-    styles += eventMeta.styles;
-    styles += eventSign.styles;
-
-    obj.includedStyles = styles;
-  }
-
-  return obj;
-};
 
 /**
  * Creates a pathway component with the provided configuration
@@ -103,55 +19,58 @@ const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeLight = Attributes.isTheme.light({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });
+  const isDisplayHero = Attributes.isDisplay.hero({ element });
+  const isDisplayOverlay = Attributes.isDisplay.overlay({ element });
+  const isDisplaySticky = Attributes.isDisplay.sticky({ element });
   const includesAnimation = Attributes.includesFeature.animation({ element });
 
-  console.log(isImagePositionLeft);
+  const slots = ({ element }: { element: HTMLElement }) => ({
+    action: Slots.actions.default({ element }),
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+  });
 
-  // Type Attribute should be deprecated for display
-  const type = element.getAttribute(Attributes.names.deprecated.type.TYPE);
-
-  const themes = {
-    isThemeDark,
-    isThemeLight,
-    isThemeMaryland,
-  };
-
-  if (type === Attributes.values.display.hero) {
+  if (isDisplayHero) {
     return Composite.pathway.hero({
-      ...MakeCommonDefaultData({ element, ...themes }),
+      ...createEventData({ element }),
+      ...slots({ element }),
       includesAnimation,
       isImagePositionLeft,
     });
   }
 
-  if (type === Attributes.values.display.overlay) {
+  if (isDisplayOverlay) {
     return Composite.pathway.overlay({
+      ...createEventData({ element }),
+      ...slots({ element }),
+      isThemeDark,
+      isThemeLight,
+      isThemeMaryland,
       isImageScaled,
       isImagePositionLeft,
-      ...themes,
       includesAnimation,
-      ...MakeCommonDefaultData({ element, ...themes }),
     });
   }
 
-  if (type === Attributes.values.display.sticky) {
+  if (isDisplaySticky) {
     return Composite.pathway.sticky({
+      ...createEventData({ element }),
+      ...slots({ element }),
       isThemeDark: Attributes.isTheme.dark({ element }),
       isImageScaled,
       isImagePositionLeft,
-      ...MakeCommonDefaultData({ element, ...themes }),
     });
   }
 
   return Composite.pathway.standard({
-    ...themes,
+    ...createEventData({ element }),
+    ...slots({ element }),
+    isThemeDark,
+    isThemeMaryland,
     isImageScaled,
     isImagePositionLeft,
     includesAnimation,
-    ...MakeCommonDefaultData({
-      element,
-      ...themes,
-    }),
   });
 };
 

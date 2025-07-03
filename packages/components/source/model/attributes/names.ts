@@ -82,6 +82,7 @@ const visual = {
   open: 'data-visual-open',
   play: 'data-visual-play',
   size: 'data-visual-size',
+  time: 'data-visual-time',
   transparent: 'data-visual-transparent',
 };
 

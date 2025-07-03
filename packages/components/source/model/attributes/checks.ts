@@ -284,6 +284,18 @@ const isDisplay = {
       attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.display.featured,
     }),
+  hero: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.hero,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.hero,
+    }),
   list: createAttributeCheck(
     AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.list,
@@ -384,10 +396,18 @@ const isDisplay = {
     AttributeNames.deprecated.display.DISPLAY,
     AttributesValues.display.statement,
   ),
-  sticky: createAttributeCheck(
-    AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.sticky,
-  ),
+  sticky: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.sticky,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.sticky,
+    }),
   stacked: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
@@ -720,6 +740,19 @@ const isVisual = {
       ...props,
       attributeName: AttributeNames.visual.size,
       attributeValue: AttributesValues.size.NORMAL,
+    }),
+  showTime: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.feature.SHOW_TIME,
+      attributeNameNew: AttributeNames.visual.time,
+      attributeValue: AttributesValues.state.TRUE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.visual.time,
+      attributeValue: AttributesValues.state.TRUE,
+      defaultValue: true,
     }),
   sizeLarge: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({

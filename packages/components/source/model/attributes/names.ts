@@ -50,6 +50,7 @@ const layout = {
   fixed: 'data-layout-fixed',
   height: 'data-layout-height',
   hidden: 'data-layout-hidden',
+  imageScaled: 'data-layout-image-scaled',
   interior: 'data-layout-interior',
   lock: 'data-layout-lock',
   position: 'data-layout-position',

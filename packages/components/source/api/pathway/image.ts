@@ -100,11 +100,7 @@ const MakeCommonDefaultData = ({
  * Creates a pathway component with the provided configuration
  */
 const createComponent: CreateComponentFunction = (element) => {
-  const isImageScaled =
-    element.getAttribute(
-      Attributes.names.deprecated.layout.LAYOUT_IMAGE_SCALED,
-    ) !== 'false';
-
+  const isImageScaled = Attributes.isLayout.imageScaled({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeLight = Attributes.isTheme.light({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });

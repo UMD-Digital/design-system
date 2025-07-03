@@ -97,7 +97,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `location` - Event location information (optional, accepts: text elements)
  *
  * ## Attributes
- * - `data-type` - Display variant (deprecated, use specific pathway components):
+ * - `data-display` - Display variant (deprecated, use specific pathway components):
  *   - `hero` - Large hero display
  *   - `overlay` - Text overlaid on image
  *   - `sticky` - Sticky positioned elements
@@ -108,13 +108,13 @@ const createComponent: CreateComponentFunction = (element) => {
  *   - `maryland` - University brand colors
  * - `data-animation` - Enable scroll-triggered animations:
  *   - `true` - Enables entrance animations
- * - `data-image-position` - Image placement:
+ * - `data-layout-image-position` - Image placement:
  *   - `left` - Image on the left side
  *   - Default - Image on the right side
- * - `data-image-scaled` - Image scaling behavior:
+ * - `data-layout-image-scaled` - Image scaling behavior:
  *   - `false` - Disable image scaling
  *   - Default - Enable responsive scaling
- * - `data-show-time` - Show time in event details:
+ * - `data-visual-time` - Show time in event details:
  *   - `false` - Hide time display
  *   - Default - Show time if available
  *
@@ -133,7 +133,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @example
  * ```html
  * <!-- Event pathway with details -->
- * <umd-element-pathway data-theme="maryland" data-show-time="true">
+ * <umd-element-pathway data-theme="maryland" data-visual-time="true">
  *   <h2 slot="headline">Open House</h2>
  *   <p slot="text">Visit campus and discover what makes UMD special.</p>
  *   <time slot="date-start-iso" datetime="2024-04-15T10:00:00">April 15, 2024 10:00 AM</time>
@@ -147,7 +147,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @example
  * ```html
  * <!-- Hero pathway with video and stats -->
- * <umd-element-pathway data-type="hero" data-theme="dark" data-animation="true">
+ * <umd-element-pathway data-display="hero" data-theme="dark" data-animation="true">
  *   <span slot="eyebrow">Research Excellence</span>
  *   <h1 slot="headline">Pushing Boundaries</h1>
  *   <p slot="text">Our researchers are tackling the world's biggest challenges.</p>

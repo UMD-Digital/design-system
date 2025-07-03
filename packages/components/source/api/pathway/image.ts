@@ -35,10 +35,7 @@ const MakeCommonDefaultData = ({
   const locationSlot = element.querySelector(
     `[slot="${Slots.name.contact.location}"]`,
   );
-  const isImageRight =
-    element.getAttribute(
-      Attributes.names.deprecated.layout.LAYOUT_IMAGE_POSITION,
-    ) !== 'left';
+
   const showTime =
     element.getAttribute(Attributes.names.deprecated.feature.SHOW_TIME) !==
     'false';
@@ -49,7 +46,6 @@ const MakeCommonDefaultData = ({
     ...slots({
       element,
     }),
-    isImageRight,
     stats: SlotWithDefaultStyling({ element, slotRef: Slots.name.STATS }),
     image: Markup.validate.ImageSlot({
       element,
@@ -101,10 +97,15 @@ const MakeCommonDefaultData = ({
  */
 const createComponent: CreateComponentFunction = (element) => {
   const isImageScaled = Attributes.isLayout.imageScaled({ element });
+  const isImagePositionLeft = Attributes.isLayout.imagePositionLeft({
+    element,
+  });
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeLight = Attributes.isTheme.light({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });
   const includesAnimation = Attributes.includesFeature.animation({ element });
+
+  console.log(isImagePositionLeft);
 
   // Type Attribute should be deprecated for display
   const type = element.getAttribute(Attributes.names.deprecated.type.TYPE);
@@ -119,12 +120,14 @@ const createComponent: CreateComponentFunction = (element) => {
     return Composite.pathway.hero({
       ...MakeCommonDefaultData({ element, ...themes }),
       includesAnimation,
+      isImagePositionLeft,
     });
   }
 
   if (type === Attributes.values.display.overlay) {
     return Composite.pathway.overlay({
       isImageScaled,
+      isImagePositionLeft,
       ...themes,
       includesAnimation,
       ...MakeCommonDefaultData({ element, ...themes }),
@@ -135,6 +138,7 @@ const createComponent: CreateComponentFunction = (element) => {
     return Composite.pathway.sticky({
       isThemeDark: Attributes.isTheme.dark({ element }),
       isImageScaled,
+      isImagePositionLeft,
       ...MakeCommonDefaultData({ element, ...themes }),
     });
   }
@@ -142,6 +146,7 @@ const createComponent: CreateComponentFunction = (element) => {
   return Composite.pathway.standard({
     ...themes,
     isImageScaled,
+    isImagePositionLeft,
     includesAnimation,
     ...MakeCommonDefaultData({
       element,

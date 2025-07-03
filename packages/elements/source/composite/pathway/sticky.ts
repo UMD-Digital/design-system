@@ -5,7 +5,7 @@ import ImageContainer, { TypePathwayImageContainer } from './elements/image';
 
 type TypePathwayStickyProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
-    isImageRight: boolean;
+    isImagePositionLeft: boolean;
     includedStyles?: string;
   };
 
@@ -164,7 +164,7 @@ const STYLES_PATHWAY_STICKY_ELEMENT = `
 `;
 
 export default (props: TypePathwayStickyProps) => {
-  const { isImageRight = true, isThemeDark, includedStyles } = props;
+  const { isImagePositionLeft = true, isThemeDark, includedStyles } = props;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const lock = document.createElement('div');
@@ -180,7 +180,7 @@ export default (props: TypePathwayStickyProps) => {
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,
-    isImageRight ? 'right' : 'left',
+    isImagePositionLeft ? 'left' : 'right',
   );
 
   wrapper.classList.add(PATHWAY_STICKY_CONTAINER_WRAPPER);

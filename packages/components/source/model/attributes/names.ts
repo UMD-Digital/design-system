@@ -51,6 +51,7 @@ const layout = {
   height: 'data-layout-height',
   hidden: 'data-layout-hidden',
   imageScaled: 'data-layout-image-scaled',
+  imagePosition: 'data-layout-image-position',
   interior: 'data-layout-interior',
   lock: 'data-layout-lock',
   position: 'data-layout-position',

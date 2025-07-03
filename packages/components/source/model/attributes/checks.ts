@@ -494,6 +494,32 @@ const isLayout = {
     AttributeNames.deprecated.type.TYPE,
     AttributesValues.display.image,
   ),
+  imagePositionRight: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.layout.LAYOUT_IMAGE_POSITION,
+      attributeNameNew: AttributeNames.layout.imagePosition,
+      attributeValue: AttributesValues.layout.right,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.layout.imagePosition,
+      attributeValue: AttributesValues.layout.right,
+      defaultValue: true,
+    }),
+  imagePositionLeft: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.layout.LAYOUT_IMAGE_POSITION,
+      attributeNameNew: AttributeNames.layout.imagePosition,
+      attributeValue: AttributesValues.layout.left,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.layout.imagePosition,
+      attributeValue: AttributesValues.layout.left,
+      defaultValue: false,
+    }),
   imageScaled: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,

@@ -11,7 +11,7 @@ import ImageContainer, {
 
 type TypePathwayHeroProps = TypePathwayTextContainer &
   TypePathwayHeroImageContainer & {
-    isImageRight: boolean;
+    isImagePositionLeft: boolean;
     includesAnimation?: boolean;
     includedStyles?: string;
   };
@@ -280,7 +280,7 @@ export default (element: TypePathwayHeroProps) => {
   const lock = document.createElement('div');
   const lockWrapper = document.createElement('div');
   const {
-    isImageRight = true,
+    isImagePositionLeft = false,
     includesAnimation = true,
     includedStyles,
   } = element;
@@ -294,7 +294,7 @@ export default (element: TypePathwayHeroProps) => {
   container.classList.add(PATHWAY_HERO_CONTAINER);
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,
-    isImageRight ? 'right' : 'left',
+    isImagePositionLeft ? 'left' : 'right',
   );
 
   wrapper.classList.add(PATHWAY_HERO_CONTAINER_WRAPPER);

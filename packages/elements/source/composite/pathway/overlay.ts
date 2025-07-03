@@ -5,7 +5,7 @@ import ImageContainer, { TypePathwayImageContainer } from './elements/image';
 
 type TypePathwayOverlayProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
-    isImageRight: boolean;
+    isImagePositionLeft: boolean;
     includesAnimation?: boolean;
     isThemeLight?: boolean;
     isThemeMaryland?: boolean;
@@ -375,7 +375,7 @@ export default (element: TypePathwayOverlayProps) => {
   const lockWrapper = document.createElement('div');
   const background = document.createElement('div');
   const {
-    isImageRight = true,
+    isImagePositionLeft = false,
     includesAnimation,
     isThemeDark,
     isThemeLight,
@@ -399,7 +399,7 @@ export default (element: TypePathwayOverlayProps) => {
 
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,
-    isImageRight ? 'right' : 'left',
+    isImagePositionLeft ? 'left' : 'right',
   );
 
   wrapper.classList.add(PATHWAY_OVERLAY_CONTAINER_WRAPPER);

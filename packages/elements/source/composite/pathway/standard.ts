@@ -5,7 +5,7 @@ import ImageContainer, { TypePathwayImageContainer } from './elements/image';
 
 type TypePathwayDefaultProps = TypePathwayTextContainer &
   TypePathwayImageContainer & {
-    isImageRight: boolean;
+    isImagePositionLeft: boolean;
     includesAnimation?: boolean;
     includedStyles?: string;
   };
@@ -252,7 +252,7 @@ const Animation = ({
 
 export default (props: TypePathwayDefaultProps) => {
   const {
-    isImageRight = true,
+    isImagePositionLeft = false,
     includesAnimation,
     isThemeDark,
     includedStyles,
@@ -275,7 +275,7 @@ export default (props: TypePathwayDefaultProps) => {
   if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
   container.setAttribute(
     ATTRIBUTE_IMAGE_POSITION,
-    isImageRight ? 'right' : 'left',
+    isImagePositionLeft ? 'left' : 'right',
   );
 
   wrapper.classList.add(PATHWAY_DEFAULT_CONTAINER_WRAPPER);

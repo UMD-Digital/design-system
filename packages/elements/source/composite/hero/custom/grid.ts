@@ -71,6 +71,10 @@ const columnBase = {
     gridGap: `${Styles.token.spacing.md}`,
   },
 
+  [`@media (${Styles.token.media.queries.desktop.min})`]: {
+    gridGap: `${Styles.token.spacing.lg}`,
+  },
+
   ['& > *']: {
     overflow: 'hidden',
     position: 'relative',
@@ -321,7 +325,7 @@ export default (props: HeroGridProps) => {
     className: 'hero-grid-layout',
     elementStyles: {
       element: {
-        gridTemplateColumns: '20% 60% 20%',
+        gridTemplateColumns: '25% 50% 25%',
         height: '100vh',
         width: '100%',
         display: 'grid',
@@ -330,6 +334,10 @@ export default (props: HeroGridProps) => {
 
         [`@media (${Styles.token.media.queries.tablet.min})`]: {
           gridGap: `${Styles.token.spacing.md}`,
+        },
+
+        [`@media (${Styles.token.media.queries.desktop.min})`]: {
+          gridGap: `${Styles.token.spacing.lg}`,
         },
 
         '@media (prefers-reduced-motion: no-preference)': {

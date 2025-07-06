@@ -55,7 +55,11 @@ const createComponent: CreateComponentFunction = (element) => {
     actions: Slots.actions.default({ element }),
   };
 
-  return Composite.hero.custom.grid(elementData);
+  const gridElement = Composite.hero.custom.grid(elementData);
+
+  if (gridElement) return gridElement;
+
+  return { element: document.createElement('div'), styles: '' };
 };
 
 /**

@@ -23,7 +23,7 @@ interface CenterProps {
 
 interface HeroGridProps extends TextProps {
   corners: Array<CornerProps>;
-  center: CenterProps;
+  center: CenterProps | null;
 }
 
 const keyFrameColumns = `
@@ -292,106 +292,111 @@ const createTextContainer = (props: TextProps) => {
   return textContainer;
 };
 
-export default (props: HeroGridProps) => {
-  const { corners, center } = props;
-  const declaration = ElementModel.createDiv({
-    className: 'hero-grid-container',
-    elementStyles: {
-      element: {
-        width: '100%',
-        display: 'block',
+const validateGridProps = (props: HeroGridProps): {
+  leftCorner: CornerProps;
+  rightCorner: CornerProps;
+  center: CenterProps;
+} | null => {
+  const leftCorner = props.corners.find((c) => c.isCornerLeft);
+  const rightCorner = props.corners.find((c) => !c.isCornerLeft);
 
-        '@media (prefers-reduced-motion: no-preference)': {
-          '@supports (animation-timeline: view())': {
-            height: '300vh',
-          },
-        },
+  const errors = [];
+  if (!leftCorner) errors.push('Left corner is required for hero grid');
+  if (!rightCorner) errors.push('Right corner is required for hero grid');
+  if (!props.center) errors.push('Center is required for hero grid');
 
-        ['img, video']: {
-          objectFit: 'cover',
-          width: '100%',
-          height: '100%',
-        },
+  if (errors.length > 0) {
+    errors.forEach((error) => console.error(error));
+    return null;
+  }
+
+  return { 
+    leftCorner: leftCorner as CornerProps, 
+    rightCorner: rightCorner as CornerProps, 
+    center: props.center as CenterProps 
+  };
+};
+
+const createGridLayout = (
+  leftCorner: CornerProps,
+  rightCorner: CornerProps,
+  center: CenterProps,
+) => {
+  const gridStyles = {
+    gridTemplateColumns: '25% 50% 25%',
+    height: '100vh',
+    width: '100%',
+    display: 'grid',
+    gridGap: `${Styles.token.spacing.min}`,
+    backgroundColor: 'var(--grayDark)',
+
+    [`@media (${Styles.token.media.queries.tablet.min})`]: {
+      gridGap: `${Styles.token.spacing.md}`,
+    },
+
+    [`@media (${Styles.token.media.queries.desktop.min})`]: {
+      gridGap: `${Styles.token.spacing.lg}`,
+    },
+
+    '@media (prefers-reduced-motion: no-preference)': {
+      '@supports (animation-timeline: view())': {
+        position: 'sticky',
+        top: 0,
+        animation: 'grid-columns ease-in-out forwards',
+        animationTimeline: 'view()',
+        animationRangeStart: '110vh',
+        animationRangeEnd: '230vh',
       },
     },
-  });
+  };
 
-  const text = createTextContainer(props);
-
-  const grid = ElementModel.createDiv({
+  return ElementModel.createDiv({
     className: 'hero-grid-layout',
-    elementStyles: {
-      element: {
-        gridTemplateColumns: '25% 50% 25%',
-        height: '100vh',
-        width: '100%',
-        display: 'grid',
-        gridGap: `${Styles.token.spacing.min}`,
-        backgroundColor: 'var(--grayDark)',
+    children: [
+      createCorner(leftCorner),
+      createCenter(center),
+      createCorner(rightCorner),
+    ],
+    elementStyles: { element: gridStyles },
+  });
+};
 
-        [`@media (${Styles.token.media.queries.tablet.min})`]: {
-          gridGap: `${Styles.token.spacing.md}`,
-        },
+export default (props: HeroGridProps) => {
+  const validated = validateGridProps(props);
+  if (!validated) return null;
 
-        [`@media (${Styles.token.media.queries.desktop.min})`]: {
-          gridGap: `${Styles.token.spacing.lg}`,
-        },
+  const { leftCorner, rightCorner, center } = validated;
+  const text = createTextContainer(props);
+  const grid = createGridLayout(leftCorner, rightCorner, center);
 
-        '@media (prefers-reduced-motion: no-preference)': {
-          '@supports (animation-timeline: view())': {
-            position: 'sticky',
-            top: 0,
-            animation: 'grid-columns ease-in-out forwards',
-            animationTimeline: 'view()',
-            animationRangeStart: '110vh',
-            animationRangeEnd: '230vh',
-          },
-        },
+  const children = text ? [grid, text] : [grid];
+
+  const containerStyles = {
+    width: '100%',
+    display: 'block',
+
+    '@media (prefers-reduced-motion: no-preference)': {
+      '@supports (animation-timeline: view())': {
+        height: '300vh',
       },
     },
+
+    ['img, video']: {
+      objectFit: 'cover',
+      width: '100%',
+      height: '100%',
+    },
+  };
+
+  const composite = ElementModel.createDiv({
+    className: 'hero-grid-container',
+    children,
+    elementStyles: { element: containerStyles },
   });
 
-  const leftCorner = corners.find((c) => c.isCornerLeft);
-  const rightCorner = corners.find((c) => !c.isCornerLeft);
+  composite.styles += keyFrameColumns;
+  composite.styles += keyFrameRows;
+  composite.styles += keyFrameTint;
 
-  if (!leftCorner) {
-    console.error('Left corner is required for hero grid');
-  }
-
-  if (!center) {
-    console.error('Center is required for hero grid');
-  }
-
-  if (!rightCorner) {
-    console.error('Right corner is required for hero grid');
-  }
-
-  if (!rightCorner || !leftCorner || !center) {
-    return declaration;
-  }
-
-  const leftCornerElement = createCorner(leftCorner);
-  const centerElement = createCenter(center);
-  const rightCornerElement = createCorner(rightCorner);
-
-  grid.element.appendChild(leftCornerElement.element);
-  grid.styles += leftCornerElement.styles;
-  grid.element.appendChild(centerElement.element);
-  grid.styles += centerElement.styles;
-  grid.element.appendChild(rightCornerElement.element);
-  grid.styles += rightCornerElement.styles;
-
-  declaration.element.appendChild(grid.element);
-  declaration.styles += grid.styles;
-
-  if (text) {
-    declaration.element.appendChild(text.element);
-    declaration.styles += text.styles;
-  }
-
-  declaration.styles += keyFrameColumns;
-  declaration.styles += keyFrameRows;
-  declaration.styles += keyFrameTint;
-
-  return declaration;
+  return composite;
 };

@@ -6,6 +6,7 @@ import {
   type BuilderConfig,
   type StyleModifierProps,
   type ConfigurationProps,
+  type CompositeChild,
 } from './_types';
 
 interface styleObject {
@@ -88,8 +89,8 @@ class ElementBuilder {
     this.element = element;
   }
 
-  createElement(props: BuilderProps) {
-    const { config, options = {} } = props;
+  createElement(props: BuilderProps & { children?: CompositeChild[] }) {
+    const { config, options = {}, children } = props;
     const className = this.className;
     const element = this.element;
 
@@ -111,6 +112,14 @@ class ElementBuilder {
 
     element.classList.add(className);
 
+    // Process children if provided
+    if (children && children.length > 0) {
+      children.forEach(child => {
+        element.appendChild(child.element);
+        styles += child.styles;
+      });
+    }
+
     return {
       element,
       className,
@@ -125,7 +134,7 @@ const createElementBuild = (
   props: ConfigurationProps,
   config: BuilderConfig,
 ) => {
-  const { element, className, elementStyles, ...rest } = props;
+  const { element, className, elementStyles, children, ...rest } = props;
 
   return new ElementBuilder(className, element).createElement({
     config,
@@ -133,6 +142,7 @@ const createElementBuild = (
       ...elementStyles,
       ...rest,
     },
+    children,
   });
 };
 

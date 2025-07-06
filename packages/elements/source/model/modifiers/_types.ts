@@ -19,9 +19,16 @@ export interface StyleOptions {
   baseStyles?: Record<string, any>;
 }
 
+export interface CompositeChild {
+  element: HTMLElement;
+  className: string;
+  styles: string;
+}
+
 export interface ElementProps extends ElementColors {
   element: HTMLElement;
   elementStyles?: ElementStyles;
+  children?: CompositeChild[];
 }
 
 // Configuration Types

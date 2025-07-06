@@ -25,8 +25,7 @@ interface TextProps extends HeadlineProps {
 interface HeroLogoProps extends AssetProps, TextProps {}
 
 const createAsset = ({ image }: AssetProps) => {
-  const assetContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const assetContainer = ElementModel.createDiv({
     className: 'umd-hero-logo__asset',
     elementStyles: {
       element: {
@@ -88,8 +87,7 @@ const createHeadline = (props: HeadlineProps) => {
 const createText = (props: TextProps) => {
   const { isThemeDark, isThemeMaryland } = props;
 
-  const textContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const textContainer = ElementModel.createDiv({
     className: 'umd-hero-logo__text',
     elementStyles: {
       element: {
@@ -100,8 +98,7 @@ const createText = (props: TextProps) => {
     },
   });
 
-  const textContent = ElementModel.create({
-    element: document.createElement('div'),
+  const textContent = ElementModel.createDiv({
     className: 'umd-hero-logo__text-content',
     elementStyles: {
       element: {
@@ -114,7 +111,7 @@ const createText = (props: TextProps) => {
 
   const textLockupElement = textLockup.large({
     ribbon: props.eyebrow,
-    headline: createHeadline(props),
+    headlineComposite: createHeadline(props),
     textLargest: props.text,
     actions: props.actions,
     isThemeDark: isThemeDark || isThemeMaryland || false,
@@ -141,13 +138,11 @@ const getBackgroundColor = (props: HeroLogoProps) => {
 export default (props: HeroLogoProps) =>
   (() => {
     const { isThemeDark } = props;
-    const composite = ElementModel.create({
-      element: document.createElement('div'),
+    const composite = ElementModel.createDiv({
       className: 'umd-hero-logo',
     });
 
-    const container = ElementModel.create({
-      element: document.createElement('div'),
+    const container = ElementModel.createDiv({
       className: 'umd-hero-logo__container',
       elementStyles: {
         element: {

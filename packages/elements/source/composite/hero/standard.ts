@@ -57,8 +57,7 @@ const keyFrameHeroScaleDown = `
 `;
 
 const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
-  const assetContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const assetContainer = ElementModel.createDiv({
     className: 'umd-hero-default__asset',
     elementStyles: {
       element: {
@@ -196,8 +195,7 @@ const createText = (props: TextProps) => {
     },
   });
 
-  const textContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const textContainer = ElementModel.createDiv({
     className: 'umd-hero-default__text',
     elementStyles: {
       element: {
@@ -238,7 +236,7 @@ const createText = (props: TextProps) => {
   });
 
   const text = textLockup.large({
-    headline: createHeadline(props),
+    headlineComposite: createHeadline(props),
     ribbon: props.eyebrow,
     textLargest: props.text,
     actions: props.actions,
@@ -258,8 +256,7 @@ export default (props: HeroStandardProps) =>
   (() => {
     const { isHeightSmall } = props;
 
-    const composite = ElementModel.create({
-      element: document.createElement('div'),
+    const composite = ElementModel.createDiv({
       className: 'umd-hero-default',
       elementStyles: {
         element: {

@@ -44,8 +44,7 @@ const keyFrameHeroSlideUp = `
 `;
 
 const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
-  const assetContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const assetContainer = ElementModel.createDiv({
     className: 'umd-hero-overlay__asset',
     elementStyles: {
       element: {
@@ -126,8 +125,7 @@ const createHeadline = (props: HeadlineProps) => {
 const createText = (props: TextProps) => {
   const { includesAnimation } = props;
 
-  const textContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const textContainer = ElementModel.createDiv({
     className: 'umd-hero-overlay__text',
     elementStyles: {
       element: {
@@ -161,8 +159,7 @@ const createText = (props: TextProps) => {
     },
   });
 
-  const textContent = ElementModel.create({
-    element: document.createElement('div'),
+  const textContent = ElementModel.createDiv({
     className: 'umd-hero-overlay__text-content',
     elementStyles: {
       element: {
@@ -177,7 +174,7 @@ const createText = (props: TextProps) => {
 
   const textLockupElement = textLockup.large({
     ribbon: props.eyebrow,
-    headline: createHeadline(props),
+    headlineComposite: createHeadline(props),
     text: props.text,
     actions: props.actions,
     isThemeDark: true,
@@ -197,8 +194,7 @@ const createText = (props: TextProps) => {
 
 export default (props: HeroOverlayProps) =>
   (() => {
-    const composite = ElementModel.create({
-      element: document.createElement('div'),
+    const composite = ElementModel.createDiv({
       className: 'umd-hero-overlay',
       elementStyles: {
         element: {

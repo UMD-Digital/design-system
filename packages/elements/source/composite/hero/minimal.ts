@@ -27,8 +27,7 @@ interface HeroMinimalProps extends AssetProps, TextProps {}
 const createAsset = ({ image }: AssetProps) => {
   if (!image) return null;
 
-  const assetContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const assetContainer = ElementModel.createDiv({
     className: 'umd-hero-minimal__asset',
     elementStyles: {
       element: {
@@ -102,8 +101,7 @@ const createHeadline = (props: HeadlineProps) => {
 const createText = (props: TextProps, hasAsset: boolean) => {
   const { isThemeDark, isThemeMaryland } = props;
 
-  const textContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const textContainer = ElementModel.createDiv({
     className: 'umd-hero-minimal__text',
     elementStyles: {
       element: {
@@ -130,8 +128,7 @@ const createText = (props: TextProps, hasAsset: boolean) => {
     },
   });
 
-  const textWrapper = ElementModel.create({
-    element: document.createElement('div'),
+  const textWrapper = ElementModel.createDiv({
     className: 'umd-hero-minimal__text-wrapper',
     elementStyles: {
       element: {
@@ -151,7 +148,7 @@ const createText = (props: TextProps, hasAsset: boolean) => {
 
   const textLockupElement = textLockup.large({
     eyebrow: props.eyebrow,
-    headline: createHeadline(props),
+    headlineComposite: createHeadline(props),
     text: props.text,
     actions: props.actions,
     isThemeDark: isThemeDark || isThemeMaryland || false,
@@ -180,8 +177,7 @@ const getBackgroundColor = (props: HeroMinimalProps) => {
 
 export default (props: HeroMinimalProps) =>
   (() => {
-    const composite = ElementModel.create({
-      element: document.createElement('div'),
+    const composite = ElementModel.createDiv({
       className: 'umd-hero-minimal',
       elementStyles: {
         element: {

@@ -53,8 +53,7 @@ const createAsset = ({
   isWidthLarge = false,
   isHeightSmall = false,
 }: AssetProps) => {
-  const assetContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const assetContainer = ElementModel.createDiv({
     className: 'umd-hero-stacked__asset',
     elementStyles: {
       element: {
@@ -82,8 +81,7 @@ const createAsset = ({
     element: document.createElement('div'),
   });
 
-  const wrapper = ElementModel.create({
-    element: document.createElement('div'),
+  const wrapper = ElementModel.createDiv({
     className: 'umd-hero-stacked__asset',
     elementStyles: {
       element: {
@@ -92,8 +90,7 @@ const createAsset = ({
     },
   });
 
-  const overlay = ElementModel.create({
-    element: document.createElement('div'),
+  const overlay = ElementModel.createDiv({
     className: 'umd-hero-stacked__overlay',
     elementStyles: {
       element: {
@@ -234,8 +231,7 @@ const createHeadline = (props: HeadlineProps) => {
 };
 
 const createText = (props: TextProps) => {
-  const textContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const textContainer = ElementModel.createDiv({
     className: 'umd-hero-stacked__text',
     elementStyles: {
       element: {
@@ -328,8 +324,7 @@ const createText = (props: TextProps) => {
 
 export default (props: HeroStackedProps) =>
   (() => {
-    const composite = ElementModel.create({
-      element: document.createElement('div'),
+    const composite = ElementModel.createDiv({
       className: 'umd-hero-stacked',
     });
 

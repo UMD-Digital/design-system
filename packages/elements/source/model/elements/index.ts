@@ -1,18 +1,29 @@
 import { createStyledElement } from '../modifiers';
 import { type ElementProps } from '../modifiers/_types';
 
-interface ElementModelOption extends ElementProps {
+interface ElementModelBase extends ElementProps {
   className: string;
 }
+
+type ElementModelDefined = Omit<ElementModelBase, 'element'>;
 
 /**
  * Creates a styled element with the given properties
  * @param props - Element configuration options
  * @returns The created and styled HTML element
  */
-export function create(props: ElementModelOption) {
+export function create(props: ElementModelBase) {
   const { className, ...rest } = props;
   return createStyledElement(rest, { className });
+}
+
+/**
+ * Creates a styled div element with the given properties
+ * @param props - Element configuration options
+ * @returns The created and styled HTML element
+ */
+export function createDiv(props: ElementModelDefined) {
+  return create({ ...props, element: document.createElement('div') });
 }
 
 export * as actions from './actions';

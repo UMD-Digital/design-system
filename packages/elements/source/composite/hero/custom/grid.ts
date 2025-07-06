@@ -235,8 +235,7 @@ const createTextContainer = (props: TextProps) => {
     return null;
   }
 
-  const textContainer = ElementModel.create({
-    element: document.createElement('div'),
+  const textContainer = ElementModel.createDiv({
     className: 'hero-expand-text-container',
     elementStyles: {
       element: {
@@ -278,7 +277,7 @@ const createTextContainer = (props: TextProps) => {
   });
 
   const textLockupElement = textLockup.large({
-    headline: createHeadline(props),
+    headlineComposite: createHeadline(props),
     textLargest: text,
     actions,
     isThemeDark: true,
@@ -295,8 +294,7 @@ const createTextContainer = (props: TextProps) => {
 
 export default (props: HeroGridProps) => {
   const { corners, center } = props;
-  const declaration = ElementModel.create({
-    element: document.createElement('div'),
+  const declaration = ElementModel.createDiv({
     className: 'hero-grid-container',
     elementStyles: {
       element: {
@@ -320,8 +318,7 @@ export default (props: HeroGridProps) => {
 
   const text = createTextContainer(props);
 
-  const grid = ElementModel.create({
-    element: document.createElement('div'),
+  const grid = ElementModel.createDiv({
     className: 'hero-grid-layout',
     elementStyles: {
       element: {

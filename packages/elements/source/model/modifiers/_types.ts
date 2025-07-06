@@ -29,6 +29,7 @@ export interface ElementProps extends ElementColors {
   element: HTMLElement;
   elementStyles?: ElementStyles;
   children?: CompositeChild[];
+  attributes?: Record<string, string>[];
 }
 
 // Configuration Types

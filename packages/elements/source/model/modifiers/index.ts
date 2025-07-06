@@ -89,8 +89,8 @@ class ElementBuilder {
     this.element = element;
   }
 
-  createElement(props: BuilderProps & { children?: CompositeChild[] }) {
-    const { config, options = {}, children } = props;
+  createElement(props: BuilderProps & { children?: CompositeChild[]; attributes?: Record<string, string>[] }) {
+    const { config, options = {}, children, attributes } = props;
     const className = this.className;
     const element = this.element;
 
@@ -111,6 +111,15 @@ class ElementBuilder {
     }
 
     element.classList.add(className);
+
+    // Apply attributes if provided
+    if (attributes && attributes.length > 0) {
+      attributes.forEach(attrObject => {
+        Object.entries(attrObject).forEach(([key, value]) => {
+          element.setAttribute(key, value);
+        });
+      });
+    }
 
     // Process children if provided
     if (children && children.length > 0) {
@@ -134,7 +143,7 @@ const createElementBuild = (
   props: ConfigurationProps,
   config: BuilderConfig,
 ) => {
-  const { element, className, elementStyles, children, ...rest } = props;
+  const { element, className, elementStyles, children, attributes, ...rest } = props;
 
   return new ElementBuilder(className, element).createElement({
     config,
@@ -143,6 +152,7 @@ const createElementBuild = (
       ...rest,
     },
     children,
+    attributes,
   });
 };
 

@@ -4,7 +4,7 @@
  * @private
  */
 
-import { color, spacing } from '../../token';
+import { color, font, spacing } from '../../token';
 import { sans } from '../../typography';
 
 /**
@@ -76,6 +76,7 @@ export const baseInputChoiceWrapper = {
   gap: '16px',
   justifyContent: 'flex-start',
   transition: 'color 0.5s ease-in-out',
+  fontWeight: font.weight.normal,
 
   [`&:hover, &:focus, &:focus-within`]: {
     color: color.redDark,

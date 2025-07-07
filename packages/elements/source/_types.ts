@@ -19,13 +19,6 @@ export interface ElementModel {
 }
 
 /**
- * Extended element model with positioning capability
- */
-export interface PositionableElementModel extends ElementModel {
-  position?: (index: number) => void;
-}
-
-/**
  * Visual element structure
  */
 export interface ElementVisual {
@@ -82,17 +75,6 @@ export interface TypeProps {
   isTypeOutline?: boolean;
 }
 
-// ===== State Props =====
-
-export interface StateProps {
-  isActive?: boolean;
-  isOpen?: boolean;
-  isExpanded?: boolean;
-  isSelected?: boolean;
-  isDisabled?: boolean;
-  isLoading?: boolean;
-}
-
 // ===== Content Props =====
 
 export interface CommonContentProps {
@@ -126,14 +108,13 @@ export interface AssetProps {
   isScaled?: boolean;
 }
 
-// ===== Accessibility Props =====
+// ===== Media Component Base =====
 
-export interface AccessibilityProps {
-  ariaLabel?: string;
-  ariaDescribedBy?: string;
-  ariaLabelledBy?: string;
-  role?: string;
-  tabIndex?: number;
+export interface MediaComponentProps extends AssetProps, MediaProps {
+  caption?: ContentElement;
+  credit?: ContentElement;
+  altText?: string;
+  title?: string;
 }
 
 // ===== Style Configuration =====
@@ -163,14 +144,6 @@ export interface ConfigurationProps extends BaseElementProps {
   baseStyles?: Record<string, any>;
 }
 
-// ===== Card-Like Components =====
-
-export interface CardLikeProps extends CommonContentProps, ThemeProps {
-  image?: ImageElement | LinkElement;
-  link?: LinkElement;
-  category?: ContentElement;
-}
-
 // ===== Person-Like Components =====
 
 export interface PersonLikeProps extends ThemeProps {
@@ -185,20 +158,24 @@ export interface PersonLikeProps extends ThemeProps {
 
 // ===== Event/Date Types =====
 
-export interface DateInformationType {
-  startDayOfWeek: string;
-  startMonth: string;
-  startDay: string;
-  startTime: string;
-  endDayOfWeek: string;
-  endMonth: string;
-  endDay: string;
-  endTime: string;
+export interface DateTimeProps {
+  startDate: Date | string;
+  endDate?: Date | string;
+  allDay?: boolean;
+  timezone?: string;
 }
 
-export interface LocationType {
+export interface LocationInfo {
   title: string;
-  [key: string]: any;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  country?: string;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
 }
 
 // ===== Animation Props =====
@@ -208,26 +185,6 @@ export interface AnimationProps {
   animationDuration?: number;
   animationDelay?: number;
   animationType?: 'fade' | 'slide' | 'scale' | 'none';
-}
-
-// ===== Carousel/Slider Props =====
-
-export interface CarouselDisplayConfig {
-  mobileBreakpoint: number;
-  tabletBreakpoint: number;  desktopBreakpoint: number;
-  mobileCount: number;
-  tabletCount: number;
-  desktopCount: number;
-  maxCount: number;
-  showMobileHint: boolean;
-  showHint: boolean;
-}
-
-export interface CarouselProps {
-  blocks?: HTMLElement[];
-  slide?: HTMLElement;
-  shadowRef?: HTMLElement;
-  overwriteDisplayLogic?: CarouselDisplayConfig;
 }
 
 // ===== Function Types =====
@@ -288,11 +245,15 @@ export const hasContent = (element: ContentElement): element is HTMLElement => {
 };
 
 // Combined checks
-export const hasImageContent = (props: AssetProps): props is Required<Pick<AssetProps, 'image'>> => {
+export const hasImageContent = (
+  props: AssetProps,
+): props is Required<Pick<AssetProps, 'image'>> => {
   return props.image !== null && props.image !== undefined;
 };
 
-export const hasVideoContent = (props: AssetProps): props is Required<Pick<AssetProps, 'video'>> => {
+export const hasVideoContent = (
+  props: AssetProps,
+): props is Required<Pick<AssetProps, 'video'>> => {
   return props.video !== null && props.video !== undefined;
 };
 
@@ -311,7 +272,8 @@ export type DeepPartial<T> = {
 
 // Require at least one property
 export type RequireAtLeastOne<T> = {
-  [K in keyof T]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<keyof T, K>>>;
+  [K in keyof T]-?: Required<Pick<T, K>> &
+    Partial<Pick<T, Exclude<keyof T, K>>>;
 }[keyof T];
 
 // Extract props from element creator function

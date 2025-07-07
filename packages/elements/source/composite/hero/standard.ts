@@ -1,6 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
+import { type ElementVisual } from '_types';
 
 interface AnimationProps {
   includesAnimation?: boolean;
@@ -32,15 +33,63 @@ interface TextProps extends AnimationProps, HeadlineProps {
 
 interface HeroStandardProps extends AssetProps, TextProps {}
 
+const ANIMATION_CONFIG = {
+  SLIDE_UP: {
+    DURATION: '1s',
+    TRANSFORM: {
+      FROM: 'translateY(25px)',
+      TO: 'translateY(0)',
+    },
+    OPACITY: {
+      FROM: 0.2,
+      TO: 1,
+    },
+  },
+  SCALE_DOWN: {
+    DURATION: '1s',
+    TRANSFORM: {
+      FROM: 'scale(1.1)',
+      TO: 'scale(1)',
+    },
+  },
+} as const;
+
+const CLASS_NAMES = {
+  CONTAINER: 'umd-hero-default',
+  ASSET: 'umd-hero-default__asset',
+  TEXT: 'umd-hero-default__text',
+} as const;
+
+const THEME_VALUES = {
+  HEADLINE_CHAR_THRESHOLD: 10,
+  HEADLINE_LARGE_SIZE: '80px',
+  GRADIENT_OVERLAY:
+    'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .8) 85%)',
+  HEIGHTS: {
+    SMALL_MIN: '400px',
+    DEFAULT_MIN: '480px',
+    DESKTOP_MIN: '720px',
+    VH_PERCENTAGE: '75vh',
+  },
+  MAX_WIDTHS: {
+    HEADLINE_TABLET: '700px',
+    HEADLINE_DESKTOP: '816px',
+    TEXT_DESKTOP: '808px',
+    TEXT_TABLET: '736px',
+    TEXT_CENTER: '928px',
+  },
+  TEXT_WIDTH_PERCENTAGE: '80%',
+} as const;
+
 const keyFrameHeroSlideUp = `
   @keyframes hero-slide-up {
     from {
-      transform: translateY(25px);
-      opacity: .2;
+      transform: ${ANIMATION_CONFIG.SLIDE_UP.TRANSFORM.FROM};
+      opacity: ${ANIMATION_CONFIG.SLIDE_UP.OPACITY.FROM};
     }
     to {
-      transform: translateY(0);
-      opacity: 1;
+      transform: ${ANIMATION_CONFIG.SLIDE_UP.TRANSFORM.TO};
+      opacity: ${ANIMATION_CONFIG.SLIDE_UP.OPACITY.TO};
     }
   }
 `;
@@ -48,121 +97,142 @@ const keyFrameHeroSlideUp = `
 const keyFrameHeroScaleDown = `
   @keyframes hero-scale-down {
     from {
-      transform: scale(1.1);
+      transform: ${ANIMATION_CONFIG.SCALE_DOWN.TRANSFORM.FROM};
     }
     to {
-      transform: scale(1);
+      transform: ${ANIMATION_CONFIG.SCALE_DOWN.TRANSFORM.TO};
     }
   }
 `;
 
-const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
-  const assetContainer = ElementModel.createDiv({
-    className: 'umd-hero-default__asset',
-    elementStyles: {
-      element: {
-        [`@container (${Styles.token.media.queries.large.max})`]: {
-          aspectRatio: '16 / 9',
-        },
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          overflow: 'hidden',
-        },
-
-        [`&:before`]: {
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background:
-              'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .8) 85%)',
-            zIndex: '99',
-          },
-        },
-
-        ['& img']: {
-          ...(includesAnimation && {
-            animation: 'hero-scale-down forwards 1s',
-          }),
-        },
+const ASSET_STYLES = {
+  BASE: {
+    MOBILE: {
+      [`@container (${Styles.token.media.queries.large.max})`]: {
+        aspectRatio: '16 / 9',
       },
     },
+    TABLET_AND_UP: {
+      [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+      },
+    },
+  },
+  OVERLAY: {
+    [`@container (${Styles.token.media.queries.tablet.min})`]: {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      background: THEME_VALUES.GRADIENT_OVERLAY,
+      zIndex: '99',
+    },
+  },
+} as const;
+
+const createVideoAsset = (video: HTMLVideoElement) => {
+  return assets.video.observedAutoPlay({
+    video,
+    isScaled: true,
   });
+};
+
+const createImageAsset = (image: HTMLImageElement) => {
+  return assets.image.background({
+    image,
+    isScaled: true,
+    isShowCaption: true,
+  });
+};
+
+const buildAssetChildren = ({ image, video }: AssetProps): ElementVisual[] => {
+  const children: ElementVisual[] = [];
 
   if (video && video instanceof HTMLVideoElement) {
-    const videoElement = assets.video.observedAutoPlay({
-      video,
-      isScaled: true,
-    });
-    assetContainer.element.appendChild(videoElement.element);
-    assetContainer.styles += videoElement.styles;
-
-    return assetContainer;
+    children.push(createVideoAsset(video));
   }
 
   if (image) {
-    const imageElement = assets.image.background({
-      image,
-      isScaled: true,
-      isShowCaption: true,
-    });
-    assetContainer.element.appendChild(imageElement.element);
-    assetContainer.styles += imageElement.styles;
-    return assetContainer;
+    children.push(createImageAsset(image));
   }
 
-  const defaultImage = assets.image.placeholder.fearlessForward();
-  assetContainer.element.appendChild(defaultImage.element);
-  assetContainer.styles += defaultImage.styles;
+  children.push(assets.image.placeholder.fearlessForward());
 
-  return assetContainer;
+  return children;
+};
+
+const buildAssetStyles = (includesAnimation?: boolean) => {
+  return {
+    element: {
+      ...ASSET_STYLES.BASE.MOBILE,
+      ...ASSET_STYLES.BASE.TABLET_AND_UP,
+      [`&:before`]: ASSET_STYLES.OVERLAY,
+      ['& img']: {
+        ...(includesAnimation && {
+          [`@media (prefers-reduced-motion: no-preference)`]: {
+            animation: `hero-scale-down forwards ${ANIMATION_CONFIG.SCALE_DOWN.DURATION}`,
+          },
+        }),
+      },
+    },
+  };
+};
+
+const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
+  const children = buildAssetChildren({ image, video });
+  const elementStyles = buildAssetStyles(includesAnimation);
+
+  return ElementModel.createDiv({
+    className: CLASS_NAMES.ASSET,
+    children,
+    elementStyles,
+  });
 };
 
 const createHeadline = (props: HeadlineProps) => {
   const { headline, isHeightSmall, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount > 10 && isHeightSmall;
+  const isOverwriteHeadline =
+    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD && isHeightSmall;
 
-  let headlineElement = null;
+  if (!headline) return null;
 
-  if (headline) {
-    const tabletStyles = {
-      maxWidth: '700px',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      color: Styles.token.color.white,
-    };
+  const tabletStyles = {
+    maxWidth: THEME_VALUES.MAX_WIDTHS.HEADLINE_TABLET,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    color: Styles.token.color.white,
+  };
 
-    const desktopStyles = {
-      maxWidth: '816px',
-      ...(isOverwriteHeadline && { fontSize: '80px' }),
-    };
+  const desktopStyles = {
+    maxWidth: THEME_VALUES.MAX_WIDTHS.HEADLINE_DESKTOP,
+    ...(isOverwriteHeadline && { fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE }),
+  };
 
-    headlineElement = ElementModel.headline.campaignExtraLarge({
-      element: headline,
-      elementStyles: {
-        element: {
-          textTransform: 'uppercase',
-          [`@media (${Styles.token.media.queries.tablet.min})`]: tabletStyles,
-          [`@media (${Styles.token.media.queries.desktop.min})`]: desktopStyles,
-        },
-        subElement: {
-          color: 'currentColor',
-        },
-        siblingAfter: {
-          marginTop: Styles.token.spacing.sm,
-        },
+  const headlineElement = ElementModel.headline.campaignExtraLarge({
+    element: headline,
+    elementStyles: {
+      element: {
+        textTransform: 'uppercase',
+        [`@media (${Styles.token.media.queries.tablet.min})`]: tabletStyles,
+        [`@media (${Styles.token.media.queries.desktop.min})`]: desktopStyles,
       },
-      isThemeDark,
-    });
-  }
+      subElement: {
+        color: 'currentColor',
+      },
+      siblingAfter: {
+        marginTop: Styles.token.spacing.sm,
+      },
+    },
+    isThemeDark,
+  });
 
   return headlineElement;
 };
@@ -174,8 +244,58 @@ const createText = (props: TextProps) => {
     includesAnimation,
   } = props;
 
-  const lock = ElementModel.layout.spaceHorizontalMax({
+  const text = textLockup.large({
+    headlineComposite: createHeadline(props),
+    ribbon: props.eyebrow,
+    textLargest: props.text,
+    actions: props.actions,
+    isThemeDark: true,
+  });
+
+  const textContainer = ElementModel.createDiv({
+    className: CLASS_NAMES.TEXT,
+    children: [text],
+    elementStyles: {
+      element: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        height: '100%',
+        ...(isTextCenter && {
+          textAlign: 'center',
+          justifyContent: 'center',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT_CENTER,
+        }),
+
+        ...(includesAnimation && {
+          animation: `hero-slide-up forwards ${ANIMATION_CONFIG.SLIDE_UP.DURATION}`,
+        }),
+
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT_TABLET,
+          paddingTop: `${Styles.token.spacing['2xl']}`,
+          paddingBottom: `${Styles.token.spacing['2xl']}`,
+          ...(!isTextCenter && {
+            width: THEME_VALUES.TEXT_WIDTH_PERCENTAGE,
+          }),
+          ...(isHeightSmall && {
+            minHeight: THEME_VALUES.HEIGHTS.SMALL_MIN,
+            alignItems: 'flex-end',
+            display: 'flex',
+          }),
+        },
+
+        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+          maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT_DESKTOP,
+        },
+      },
+    },
+  });
+
+  return ElementModel.layout.spaceHorizontalMax({
     element: document.createElement('div'),
+    children: [textContainer],
     elementStyles: {
       element: {
         height: '100%',
@@ -194,110 +314,45 @@ const createText = (props: TextProps) => {
       },
     },
   });
+};
 
-  const textContainer = ElementModel.createDiv({
-    className: 'umd-hero-default__text',
+export default (props: HeroStandardProps) => {
+  const { isHeightSmall } = props;
+  const asset = createAsset(props);
+  const text = createText(props);
+
+  const composite = ElementModel.createDiv({
+    className: CLASS_NAMES.CONTAINER,
+    children: [asset, text],
     elementStyles: {
       element: {
-        display: 'flex',
-        alignItems: 'flex-end',
-        height: '100%',
-        ...(isTextCenter && {
-          textAlign: 'center',
-          justifyContent: 'center',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          maxWidth: '928px',
-        }),
-
-        ...(includesAnimation && {
-          animation: 'hero-slide-up forwards 1s',
-        }),
-
+        position: 'relative',
+        overflow: 'hidden',
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          maxWidth: '736px',
-          paddingTop: `${Styles.token.spacing['2xl']}`,
-          paddingBottom: `${Styles.token.spacing['2xl']}`,
-          ...(!isTextCenter && {
-            width: '80%',
-          }),
-          ...(isHeightSmall && {
-            minHeight: '400px',
-            alignItems: 'flex-end',
-            display: 'flex',
+          ...(!isHeightSmall && {
+            height: THEME_VALUES.HEIGHTS.VH_PERCENTAGE,
+            minHeight: THEME_VALUES.HEIGHTS.DEFAULT_MIN,
           }),
         },
 
         [`@container (${Styles.token.media.queries.desktop.min})`]: {
-          maxWidth: '808px',
+          ...(!isHeightSmall && {
+            minHeight: THEME_VALUES.HEIGHTS.DESKTOP_MIN,
+          }),
+        },
+      },
+      subElement: {
+        [`@container (${Styles.token.media.queries.large.max})`]: {
+          ['*']: {
+            color: `${Styles.token.color.black} !important`,
+          },
         },
       },
     },
   });
 
-  const text = textLockup.large({
-    headlineComposite: createHeadline(props),
-    ribbon: props.eyebrow,
-    textLargest: props.text,
-    actions: props.actions,
-    isThemeDark: true,
-  });
+  composite.styles += keyFrameHeroScaleDown;
+  composite.styles += keyFrameHeroSlideUp;
 
-  textContainer.element.appendChild(text.element);
-  textContainer.styles += text.styles;
-
-  lock.element.appendChild(textContainer.element);
-  lock.styles += textContainer.styles;
-
-  return lock;
+  return composite;
 };
-
-export default (props: HeroStandardProps) =>
-  (() => {
-    const { isHeightSmall } = props;
-
-    const composite = ElementModel.createDiv({
-      className: 'umd-hero-default',
-      elementStyles: {
-        element: {
-          position: 'relative',
-          overflow: 'hidden',
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            ...(!isHeightSmall && {
-              height: '75vh',
-              minHeight: '480px',
-            }),
-          },
-
-          [`@container (${Styles.token.media.queries.desktop.min})`]: {
-            ...(!isHeightSmall && {
-              minHeight: '720px',
-            }),
-          },
-        },
-        subElement: {
-          [`@container (${Styles.token.media.queries.large.max})`]: {
-            ['*']: {
-              color: `${Styles.token.color.black} !important`,
-            },
-          },
-        },
-      },
-    });
-
-    const asset = createAsset(props);
-    const text = createText(props);
-
-    composite.element.appendChild(asset.element);
-    composite.styles += asset.styles;
-    composite.element.appendChild(text.element);
-    composite.styles += text.styles;
-
-    composite.styles = `
-      ${keyFrameHeroScaleDown}
-      ${keyFrameHeroSlideUp}
-      ${composite.styles}
-    `;
-
-    return composite;
-  })();

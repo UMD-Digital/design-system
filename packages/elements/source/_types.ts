@@ -204,18 +204,17 @@ export interface LocationType {
 // ===== Animation Props =====
 
 export interface AnimationProps {
-  container: HTMLDivElement;
-  getHeightDiff: () => number;
-  getContainerHeight: () => number;
-  completedCallback?: () => void;
+  includesAnimation?: boolean;
+  animationDuration?: number;
+  animationDelay?: number;
+  animationType?: 'fade' | 'slide' | 'scale' | 'none';
 }
 
 // ===== Carousel/Slider Props =====
 
 export interface CarouselDisplayConfig {
   mobileBreakpoint: number;
-  tabletBreakpoint: number;
-  desktopBreakpoint: number;
+  tabletBreakpoint: number;  desktopBreakpoint: number;
   mobileCount: number;
   tabletCount: number;
   desktopCount: number;

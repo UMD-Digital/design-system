@@ -1,4 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
+import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 
@@ -26,13 +27,50 @@ interface HeroGridProps extends TextProps {
   center: CenterProps | null;
 }
 
+const ANIMATION_RANGES = {
+  GRID_COLUMNS: { start: '110vh', end: '230vh' },
+  GRID_ROWS: { start: '110vh', end: '230vh' },
+  TINT_FADE: { start: '50vh', end: '140vh' },
+} as const;
+
+const GRID_LAYOUT = {
+  COLUMNS: {
+    INITIAL: '20% 60% 20%',
+    FINAL: '0 100% 0',
+    DEFAULT: '25% 50% 25%',
+  },
+  ROWS: {
+    INITIAL: '25vh 1fr 25vh',
+    FINAL: '0 1fr 0',
+    TRIPLE: '1fr 1fr 1fr',
+  },
+} as const;
+
+const CLASS_NAMES = {
+  CORNER_LEFT: 'hero-grid-corner-left',
+  CORNER_RIGHT: 'hero-grid-corner-right',
+  CENTER: 'hero-grid-center',
+  TINT: 'hero-grid-tint',
+  TEXT_CONTAINER: 'hero-expand-text-container',
+  LAYOUT: 'hero-grid-layout',
+  CONTAINER: 'hero-grid-container',
+} as const;
+
+const THEME_VALUES = {
+  TINT_COLOR: 'rgba(0, 0, 0, 0.5)',
+  HEADLINE_CHAR_THRESHOLD: 30,
+  HEADLINE_LARGE_SIZE: '80px',
+  SCROLL_HEIGHT: '300vh',
+  SCROLL_PADDING_TOP: '140vh',
+} as const;
+
 const keyFrameColumns = `
   @keyframes grid-columns {
     from {
-      grid-template-columns: 20% 60% 20%;
+      grid-template-columns: ${GRID_LAYOUT.COLUMNS.INITIAL};
     }
     to {
-      grid-template-columns: 0 100% 0;
+      grid-template-columns: ${GRID_LAYOUT.COLUMNS.FINAL};
       grid-gap: 0;
     }
   }
@@ -41,10 +79,10 @@ const keyFrameColumns = `
 const keyFrameRows = `
   @keyframes grid-rows {
     from {
-      grid-template-rows: 25vh 1fr 25vh;
+      grid-template-rows: ${GRID_LAYOUT.ROWS.INITIAL};
     }
     to {
-      grid-template-rows: 0 1fr 0;
+      grid-template-rows: ${GRID_LAYOUT.ROWS.FINAL};
       grid-gap: 0;
     }
   }
@@ -60,6 +98,7 @@ const keyFrameTint = `
     }
   }
 `;
+
 const columnBase = {
   display: 'grid',
   gridAutoFlow: 'row dense',
@@ -109,105 +148,103 @@ const createVideoWrapper = (video: HTMLVideoElement) =>
   });
 
 const createCorner = ({ images, isCornerLeft }: CornerProps) => {
-  const corner = ElementModel.create({
-    element: document.createElement('div'),
-    className: `hero-grid-corner-${isCornerLeft ? 'left' : 'right'}`,
+  const children = images.map((image) => createImageWrapper(image));
+
+  return ElementModel.createDiv({
+    className: isCornerLeft
+      ? CLASS_NAMES.CORNER_LEFT
+      : CLASS_NAMES.CORNER_RIGHT,
+    children,
     elementStyles: {
       element: {
         ...columnBase,
-        gridTemplateRows: `1fr 1fr 1fr`,
+        gridTemplateRows: GRID_LAYOUT.ROWS.TRIPLE,
       },
     },
+    attributes: [
+      {
+        role: 'region',
+        'aria-label': `${
+          isCornerLeft ? 'Left' : 'Right'
+        } decorative image grid`,
+      },
+    ],
   });
-  images.forEach((image) => {
-    const imageElement = createImageWrapper(image);
-    corner.element.appendChild(imageElement.element);
-    corner.styles += imageElement.styles;
-  });
-  return corner;
 };
 
 const createCenter = ({ images, video }: CenterProps) => {
-  const center = ElementModel.create({
-    element: document.createElement('div'),
-    className: 'hero-grid-center',
-    elementStyles: {
-      element: {
-        ...columnBase,
-        gridTemplateRows: `25vh 1fr 25vh`,
-
-        '@media (prefers-reduced-motion: no-preference)': {
-          '@supports (animation-timeline: view())': {
-            animation: 'grid-rows ease-in-out forwards',
-            animationTimeline: 'view()',
-            animationRangeStart: '110vh',
-            animationRangeEnd: '230vh',
-          },
-        },
-      },
-    },
-  });
-
-  const tint = ElementModel.create({
-    element: document.createElement('div'),
-    className: 'hero-grid-tint',
-    elementStyles: {
-      element: {
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex: 9,
-        opacity: 0,
-
-        '@media (prefers-reduced-motion: no-preference)': {
-          '@supports (animation-timeline: view())': {
+  const children = [
+    ElementModel.create({
+      element: document.createElement('div'),
+      className: CLASS_NAMES.TINT,
+      elementStyles: {
+        element: {
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          backgroundColor: THEME_VALUES.TINT_COLOR,
+          zIndex: 9,
+          opacity: 0,
+          ...Utils.styles.media.withViewTimelineAnimation({
             animation: 'tint-fade ease-in-out forwards',
             animationTimeline: 'view()',
-            animationRangeStart: '50vh',
-            animationRangeEnd: '140vh',
-          },
+            animationRangeStart: ANIMATION_RANGES.TINT_FADE.start,
+            animationRangeEnd: ANIMATION_RANGES.TINT_FADE.end,
+          }),
         },
       },
-    },
-  });
-
-  center.element.appendChild(tint.element);
-  center.styles += tint.styles;
+      attributes: [
+        {
+          role: 'region',
+          'aria-label': 'Main hero content',
+        },
+      ],
+    }),
+  ];
 
   if (video) {
-    const videoElement = createVideoWrapper(video);
-    const firstImage = createImageWrapper(images[0]);
-    const secondImage = createImageWrapper(images[1]);
-
-    center.element.appendChild(firstImage.element);
-    center.styles += firstImage.styles;
-    center.element.appendChild(videoElement.element);
-    center.styles += videoElement.styles;
-    center.element.appendChild(secondImage.element);
-    center.styles += secondImage.styles;
+    children.push(
+      createVideoWrapper(video),
+      createImageWrapper(images[0]),
+      createImageWrapper(images[1]),
+    );
   } else {
     images.forEach((image) => {
-      const imageElement = createImageWrapper(image);
-      center.element.appendChild(imageElement.element);
-      center.styles += imageElement.styles;
+      children.push(createImageWrapper(image));
     });
   }
 
-  return center;
+  return ElementModel.create({
+    element: document.createElement('div'),
+    className: CLASS_NAMES.CENTER,
+    children,
+    elementStyles: {
+      element: {
+        ...columnBase,
+        gridTemplateRows: GRID_LAYOUT.ROWS.INITIAL,
+        ...Utils.styles.media.withViewTimelineAnimation({
+          animation: 'grid-rows ease-in-out forwards',
+          animationTimeline: 'view()',
+          animationRangeStart: ANIMATION_RANGES.GRID_ROWS.start,
+          animationRangeEnd: ANIMATION_RANGES.GRID_ROWS.end,
+        }),
+      },
+    },
+  });
 };
 
 const createHeadline = (props: HeadlineProps) => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount > 30;
+  const isOverwriteHeadline =
+    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD;
 
   if (!headline) return null;
 
   const desktopStyles = {
-    ...(isOverwriteHeadline && { fontSize: '80px' }),
+    ...(isOverwriteHeadline && { fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE }),
   };
 
   const headlineElement = ElementModel.headline.campaignExtraLarge({
@@ -236,7 +273,7 @@ const createTextContainer = (props: TextProps) => {
   }
 
   const textContainer = ElementModel.createDiv({
-    className: 'hero-expand-text-container',
+    className: CLASS_NAMES.TEXT_CONTAINER,
     elementStyles: {
       element: {
         position: 'relative',
@@ -256,11 +293,9 @@ const createTextContainer = (props: TextProps) => {
           padding: `${Styles.token.spacing['6xl']} 0`,
         },
 
-        '@media (prefers-reduced-motion: no-preference)': {
-          '@supports (animation-timeline: view())': {
-            paddingTop: '140vh',
-          },
-        },
+        ...Utils.styles.media.withViewTimelineAnimation({
+          paddingTop: THEME_VALUES.SCROLL_PADDING_TOP,
+        }),
       },
     },
   });
@@ -292,7 +327,9 @@ const createTextContainer = (props: TextProps) => {
   return textContainer;
 };
 
-const validateGridProps = (props: HeroGridProps): {
+const validateGridProps = (
+  props: HeroGridProps,
+): {
   leftCorner: CornerProps;
   rightCorner: CornerProps;
   center: CenterProps;
@@ -301,19 +338,40 @@ const validateGridProps = (props: HeroGridProps): {
   const rightCorner = props.corners.find((c) => !c.isCornerLeft);
 
   const errors = [];
-  if (!leftCorner) errors.push('Left corner is required for hero grid');
-  if (!rightCorner) errors.push('Right corner is required for hero grid');
-  if (!props.center) errors.push('Center is required for hero grid');
+
+  // Validate corners
+  if (!leftCorner) {
+    errors.push('Left corner is required for hero grid');
+  } else if (!leftCorner.images || leftCorner.images.length === 0) {
+    errors.push('Left corner must have at least one image');
+  }
+
+  if (!rightCorner) {
+    errors.push('Right corner is required for hero grid');
+  } else if (!rightCorner.images || rightCorner.images.length === 0) {
+    errors.push('Right corner must have at least one image');
+  }
+
+  // Validate center
+  if (!props.center) {
+    errors.push('Center is required for hero grid');
+  } else {
+    if (!props.center.images || props.center.images.length === 0) {
+      errors.push('Center must have at least one image');
+    } else if (props.center.video && props.center.images.length < 2) {
+      errors.push('Center must have at least 2 images when video is provided');
+    }
+  }
 
   if (errors.length > 0) {
     errors.forEach((error) => console.error(error));
     return null;
   }
 
-  return { 
-    leftCorner: leftCorner as CornerProps, 
-    rightCorner: rightCorner as CornerProps, 
-    center: props.center as CenterProps 
+  return {
+    leftCorner: leftCorner as CornerProps,
+    rightCorner: rightCorner as CornerProps,
+    center: props.center as CenterProps,
   };
 };
 
@@ -323,7 +381,7 @@ const createGridLayout = (
   center: CenterProps,
 ) => {
   const gridStyles = {
-    gridTemplateColumns: '25% 50% 25%',
+    gridTemplateColumns: GRID_LAYOUT.COLUMNS.DEFAULT,
     height: '100vh',
     width: '100%',
     display: 'grid',
@@ -338,26 +396,31 @@ const createGridLayout = (
       gridGap: `${Styles.token.spacing.lg}`,
     },
 
-    '@media (prefers-reduced-motion: no-preference)': {
-      '@supports (animation-timeline: view())': {
-        position: 'sticky',
-        top: 0,
-        animation: 'grid-columns ease-in-out forwards',
-        animationTimeline: 'view()',
-        animationRangeStart: '110vh',
-        animationRangeEnd: '230vh',
-      },
-    },
+    ...Utils.styles.media.withViewTimelineAnimation({
+      position: 'sticky',
+      top: 0,
+      animation: 'grid-columns ease-in-out forwards',
+      animationTimeline: 'view()',
+      animationRangeStart: ANIMATION_RANGES.GRID_COLUMNS.start,
+      animationRangeEnd: ANIMATION_RANGES.GRID_COLUMNS.end,
+    }),
   };
 
   return ElementModel.createDiv({
-    className: 'hero-grid-layout',
+    className: CLASS_NAMES.LAYOUT,
+
     children: [
       createCorner(leftCorner),
       createCenter(center),
       createCorner(rightCorner),
     ],
     elementStyles: { element: gridStyles },
+    attributes: [
+      {
+        role: 'region',
+        'aria-label': 'Hero grid layout',
+      },
+    ],
   });
 };
 
@@ -374,13 +437,9 @@ export default (props: HeroGridProps) => {
   const containerStyles = {
     width: '100%',
     display: 'block',
-
-    '@media (prefers-reduced-motion: no-preference)': {
-      '@supports (animation-timeline: view())': {
-        height: '300vh',
-      },
-    },
-
+    ...Utils.styles.media.withViewTimelineAnimation({
+      height: THEME_VALUES.SCROLL_HEIGHT,
+    }),
     ['img, video']: {
       objectFit: 'cover',
       width: '100%',
@@ -389,9 +448,15 @@ export default (props: HeroGridProps) => {
   };
 
   const composite = ElementModel.createDiv({
-    className: 'hero-grid-container',
+    className: CLASS_NAMES.CONTAINER,
     children,
     elementStyles: { element: containerStyles },
+    attributes: [
+      {
+        role: 'main',
+        'aria-label': 'Hero section',
+      },
+    ],
   });
 
   composite.styles += keyFrameColumns;

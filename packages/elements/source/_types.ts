@@ -41,6 +41,7 @@ export interface ThemeProps {
   isThemeDark?: boolean;
   isThemeLight?: boolean;
   isThemeGold?: boolean;
+  isThemeMaryland?: boolean;
 }
 
 export interface ColorProps {
@@ -52,9 +53,9 @@ export interface ColorProps {
 // ===== Size and Display Props =====
 
 export interface SizeProps {
-  isSizeLarge?: boolean;
   isSizeSmall?: boolean;
   isSizeMedium?: boolean;
+  isSizeLarge?: boolean;
 }
 
 export interface DisplayProps {
@@ -89,6 +90,38 @@ export interface ExtendedContentProps extends CommonContentProps {
   subHeadline?: ContentElement;
   description?: ContentElement;
   metadata?: ContentElement;
+}
+
+// ===== Layout and Alignment Props =====
+
+export interface LayoutProps {
+  isTextCenter?: boolean;
+  isTextRight?: boolean;
+  isTextLeft?: boolean;
+  isVerticalCenter?: boolean;
+  isHorizontalCenter?: boolean;
+}
+
+// ===== Contact Information Props =====
+
+export interface ContactProps {
+  phone?: string;
+  email?: string;
+  address?: string;
+  linkedin?: string;
+  additionalContact?: ContentElement;
+}
+
+// ===== Social Media Props =====
+
+export interface SocialMediaProps {
+  facebook?: string;
+  twitter?: string;
+  instagram?: string;
+  youtube?: string;
+  linkedin?: string;
+  pinterest?: string;
+  tiktok?: string;
 }
 
 // ===== Media Props =====
@@ -216,6 +249,7 @@ export const ATTRIBUTE_THEME = 'theme';
 export const THEME_DARK = 'dark';
 export const THEME_LIGHT = 'light';
 export const THEME_GOLD = 'gold';
+export const THEME_MARYLAND = 'maryland';
 
 // ===== Type Guards =====
 

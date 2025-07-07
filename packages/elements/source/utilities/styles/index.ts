@@ -6,6 +6,7 @@ const postcssJs = require('postcss-js');
 
 export * as animations from './animations';
 export * as assets from './assets';
+export * as media from './media';
 
 export const combineStyles = (...styles: (string | null | undefined)[]) =>
   styles.filter(Boolean).join('');

@@ -1,3 +1,11 @@
+/**
+ * Asset-related style utilities
+ * Functions for calculating responsive sizes and dimensions
+ */
+
+/**
+ * Calculate responsive image size based on container and viewport constraints
+ */
 export const getResponsiveImageSize = ({
   image,
   parentNode,

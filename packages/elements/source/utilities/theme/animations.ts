@@ -1,3 +1,11 @@
+/**
+ * Animation utilities for theme and style transitions
+ */
+
+/**
+ * Animate element shrinking and removal
+ * Used for collapsing UI elements smoothly
+ */
 export const shrinkThenRemove = ({ container }: { container: HTMLElement }) => {
   const frames = 30;
   const startingHeight = container.clientHeight;
@@ -36,6 +44,9 @@ export const shrinkThenRemove = ({ container }: { container: HTMLElement }) => {
   window.requestAnimationFrame(shrink);
 };
 
+/**
+ * Smooth scroll to element with optional offset
+ */
 export const scrollTo = ({
   element,
   spread = 30,

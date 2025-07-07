@@ -1,6 +1,8 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
+import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
+import { type ElementVisual } from '_types';
 
 interface AnimationProps {
   includesAnimation?: boolean;
@@ -32,66 +34,89 @@ interface TextProps extends AnimationProps, HeadlineProps {
 
 interface HeroStackedProps extends AssetProps, TextProps {}
 
+const ANIMATION_CONFIG = {
+  FADE_OVER: {
+    NAME: 'hero-stacked-fade-over',
+    RANGE: {
+      START: '30vh',
+      END: '70vh',
+    },
+  },
+  FONT_COLOR: {
+    NAME: 'hero-stacked-font-color',
+    RANGE: {
+      SMALL: {
+        HEADLINE_START: '100vh',
+        HEADLINE_END: '110vh',
+        TEXT_START: '80vh',
+        TEXT_END: '100vh',
+      },
+      DEFAULT: {
+        HEADLINE_START: '90vh',
+        HEADLINE_END: '110vh',
+        TEXT_START: '100vh',
+        TEXT_END: '120vh',
+      },
+    },
+  },
+} as const;
+
+const CLASS_NAMES = {
+  CONTAINER: 'umd-hero-stacked',
+  ASSET: 'umd-hero-stacked__asset',
+  OVERLAY: 'umd-hero-stacked__overlay',
+  TEXT: 'umd-hero-stacked__text',
+} as const;
+
+const THEME_VALUES = {
+  HEADLINE_CHAR_THRESHOLD: 30,
+  HEADLINE_LARGE_SIZE: '80px',
+  OVERLAY_COLOR: 'rgba(0,0,0,.7)',
+  HEIGHTS: {
+    MIN: '300px',
+    DEFAULT_MIN: '400px',
+    MAX: '700px',
+    VH_PERCENTAGE: '65vh',
+  },
+  MAX_WIDTHS: {
+    HEADLINE: '700px',
+    TEXT: '860px',
+  },
+  ASPECT_RATIO: '5 / 4',
+} as const;
+
 const keyFrameFadeOver = `
-  @keyframes hero-stacked-fade-over {
+  @keyframes ${ANIMATION_CONFIG.FADE_OVER.NAME} {
     from { opacity: 0; }
     to { opacity: 1; }
   }
 `;
 
 const keyFrameFontColor = `
-  @keyframes hero-stacked-font-color {
+  @keyframes ${ANIMATION_CONFIG.FONT_COLOR.NAME} {
     from { color: ${Styles.token.color.black}; }
     to { color: ${Styles.token.color.white}; }
   }
 `;
 
-const createAsset = ({
-  image,
-  video,
-  includesAnimation,
-  isWidthLarge = false,
-  isHeightSmall = false,
-}: AssetProps) => {
-  const assetContainer = ElementModel.createDiv({
-    className: 'umd-hero-stacked__asset',
-    elementStyles: {
-      element: {
-        overflow: 'clip',
-        position: 'relative',
-
-        ['& img, & video']: {
-          aspectRatio: '5 / 4',
-
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            maxHeight: '700px',
-            minHeight: '300px',
-
-            ...(!isHeightSmall && {
-              minHeight: '400px',
-              height: '65vh !important',
-            }),
-          },
-        },
-      },
-    },
+const createVideoAsset = (video: HTMLVideoElement) => {
+  return assets.video.observedAutoPlay({
+    video,
+    isScaled: true,
   });
+};
 
-  const lock = ElementModel.layout.spaceHorizontalMax({
-    element: document.createElement('div'),
+const createImageAsset = (image: HTMLImageElement) => {
+  return assets.image.background({
+    image,
+    isScaled: true,
+    isShowCaption: true,
   });
+};
 
-  const wrapper = ElementModel.createDiv({
-    className: 'umd-hero-stacked__asset',
-    elementStyles: {
-      element: {
-        position: 'relative',
-      },
-    },
-  });
-
-  const overlay = ElementModel.createDiv({
-    className: 'umd-hero-stacked__overlay',
+const createOverlay = (includesAnimation?: boolean) => {
+  return ElementModel.createDiv({
+    className: CLASS_NAMES.OVERLAY,
     elementStyles: {
       element: {
         position: 'absolute',
@@ -101,7 +126,7 @@ const createAsset = ({
         height: '100vh',
         width: '100vw',
         display: 'block',
-        backgroundColor: 'rgba(0,0,0,.7)',
+        backgroundColor: THEME_VALUES.OVERLAY_COLOR,
         zIndex: 99,
         opacity: 0,
 
@@ -109,10 +134,10 @@ const createAsset = ({
           [`@media (${Styles.token.media.queries.tablet.min})`]: {
             [`@media (prefers-reduced-motion: no-preference)`]: {
               [`@supports (animation-timeline: view())`]: {
-                animation: 'hero-stacked-fade-over ease-in-out forwards',
+                animation: `${ANIMATION_CONFIG.FADE_OVER.NAME} ease-in-out forwards`,
                 animationTimeline: 'view()',
-                animationRangeStart: '30vh',
-                animationRangeEnd: '70vh',
+                animationRangeStart: ANIMATION_CONFIG.FADE_OVER.RANGE.START,
+                animationRangeEnd: ANIMATION_CONFIG.FADE_OVER.RANGE.END,
               },
             },
           },
@@ -120,119 +145,200 @@ const createAsset = ({
       },
     },
   });
+};
 
-  let mediaElement;
+const buildAssetStyles = (isHeightSmall?: boolean) => {
+  return {
+    element: {
+      elementStyles: {
+        element: {
+          overflow: 'clip',
+          position: 'relative',
+
+          ['& img, & video']: {
+            aspectRatio: '5 / 4',
+
+            [`@container (${Styles.token.media.queries.tablet.min})`]: {
+              maxHeight: '700px',
+              minHeight: '300px',
+
+              ...(!isHeightSmall && {
+                minHeight: '400px',
+                height: '65vh !important',
+              }),
+            },
+          },
+        },
+      },
+    },
+  };
+};
+
+const createAssetWrapper = (
+  mediaElement: ElementVisual,
+  includesAnimation?: boolean,
+) => {
+  const overlay = createOverlay(includesAnimation);
+
+  return ElementModel.createDiv({
+    className: CLASS_NAMES.ASSET,
+    children: [mediaElement, overlay],
+    elementStyles: {
+      element: {
+        position: 'relative',
+      },
+    },
+  });
+};
+
+const createAsset = ({
+  image,
+  video,
+  includesAnimation,
+  isWidthLarge = false,
+  isHeightSmall = false,
+}: AssetProps) => {
+  let mediaElement: ElementVisual | null = null;
 
   if (video && video instanceof HTMLVideoElement) {
-    mediaElement = assets.video.observedAutoPlay({
-      video,
-      isScaled: true,
-    });
+    mediaElement = createVideoAsset(video);
   } else if (image) {
-    mediaElement = assets.image.background({
-      image,
-      isScaled: true,
-      isShowCaption: true,
-    });
-  } else {
+    mediaElement = createImageAsset(image);
+  }
+
+  if (!mediaElement) {
     return null;
   }
 
-  const appendToContainer = (
-    contentElement: ReturnType<
-      typeof assets.video.observedAutoPlay | typeof assets.image.background
-    >,
-  ) => {
-    wrapper.element.appendChild(contentElement.element);
-    wrapper.styles += contentElement.styles;
-    wrapper.element.appendChild(overlay.element);
-    wrapper.styles += overlay.styles;
+  const wrapper = createAssetWrapper(mediaElement, includesAnimation);
 
-    if (isWidthLarge) {
-      lock.element.appendChild(wrapper.element);
-      lock.styles += wrapper.styles;
-      assetContainer.element.appendChild(lock.element);
-      assetContainer.styles += lock.styles;
-    } else {
-      assetContainer.element.appendChild(wrapper.element);
-      assetContainer.styles += wrapper.styles;
-    }
-  };
-
-  appendToContainer(mediaElement);
+  const assetContainer = ElementModel.createDiv({
+    className: CLASS_NAMES.ASSET,
+    children: isWidthLarge
+      ? [
+          ElementModel.layout.spaceHorizontalMax({
+            element: document.createElement('div'),
+            children: [wrapper],
+          }),
+        ]
+      : [wrapper],
+    elementStyles: buildAssetStyles(isHeightSmall),
+  });
 
   return assetContainer;
+};
+
+const buildHeadlineAnimationStyles = (
+  includesAnimation?: boolean,
+  isHeightSmall?: boolean,
+) => {
+  if (!includesAnimation) return {};
+
+  const range = isHeightSmall
+    ? ANIMATION_CONFIG.FONT_COLOR.RANGE.SMALL
+    : ANIMATION_CONFIG.FONT_COLOR.RANGE.DEFAULT;
+
+  return {
+    [`@container (${Styles.token.media.queries.tablet.min})`]: {
+      ...Utils.styles.media.withViewTimelineAnimation({
+        animation: `${ANIMATION_CONFIG.FONT_COLOR.NAME} ease-in-out forwards`,
+        animationTimeline: 'view()',
+        animationRangeStart: range.HEADLINE_START,
+        animationRangeEnd: range.HEADLINE_END,
+      }),
+    },
+  };
 };
 
 const createHeadline = (props: HeadlineProps) => {
   const { headline, isHeightSmall, includesAnimation } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount > 30 && !isHeightSmall;
+  const isOverwriteHeadline =
+    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD && !isHeightSmall;
 
-  let headlineElement = null;
+  if (!headline) return null;
 
-  if (headline) {
-    const desktopStyles = {
-      ...(isOverwriteHeadline && { fontSize: '80px' }),
-    };
+  const desktopStyles = {
+    ...(isOverwriteHeadline && { fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE }),
+  };
 
-    const animationStyles = {
-      ...(includesAnimation && {
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          [`@media (prefers-reduced-motion: no-preference)`]: {
-            [`@supports (animation-timeline: view())`]: {
-              animation: 'hero-stacked-font-color ease-in-out forwards',
-              animationTimeline: 'view()',
+  const animationStyles = buildHeadlineAnimationStyles(
+    includesAnimation,
+    isHeightSmall,
+  );
 
-              ...(props.isHeightSmall && {
-                animationRangeStart: '100vh',
-                animationRangeEnd: '110vh',
-              }),
+  const elementStyles = {
+    element: {
+      color: Styles.token.color.black,
+      maxWidth: THEME_VALUES.MAX_WIDTHS.HEADLINE,
+      margin: '0 auto',
+      textTransform: 'uppercase',
+      marginTop: `${Styles.token.spacing.sm}`,
+      ...desktopStyles,
+      ...animationStyles,
+    },
+    siblingAfter: {
+      marginTop: `${Styles.token.spacing.md}`,
+    },
+  };
 
-              ...(!props.isHeightSmall && {
-                animationRangeStart: '90vh',
-                animationRangeEnd: '110vh',
-              }),
-            },
-          },
-        },
-      }),
-    };
-
-    const elementStyles = {
-      element: {
-        color: Styles.token.color.black,
-        maxWidth: '700px',
-        margin: '0 auto',
-        textTransform: 'uppercase',
-        marginTop: `${Styles.token.spacing.sm}`,
-        ...desktopStyles,
-        ...animationStyles,
-      },
-      siblingAfter: {
-        marginTop: `${Styles.token.spacing.md}`,
-      },
-    };
-
-    if (isHeightSmall) {
-      headlineElement = ElementModel.headline.campaignExtraLarge({
+  const headlineElement = isHeightSmall
+    ? ElementModel.headline.campaignExtraLarge({
+        element: headline,
+        elementStyles,
+      })
+    : ElementModel.headline.campaignLarge({
         element: headline,
         elementStyles,
       });
-    } else {
-      headlineElement = ElementModel.headline.campaignLarge({
-        element: headline,
-        elementStyles,
-      });
-    }
-  }
 
   return headlineElement;
 };
 
+const buildTextAnimationStyles = (
+  includesAnimation?: boolean,
+  isHeightSmall?: boolean,
+) => {
+  if (!includesAnimation) return {};
+
+  const range = isHeightSmall
+    ? ANIMATION_CONFIG.FONT_COLOR.RANGE.SMALL
+    : ANIMATION_CONFIG.FONT_COLOR.RANGE.DEFAULT;
+
+  return {
+    [`@container (${Styles.token.media.queries.tablet.min})`]: {
+      ...Utils.styles.media.withViewTimelineAnimation({
+        animation: `${ANIMATION_CONFIG.FONT_COLOR.NAME} ease-in-out forwards`,
+        animationTimeline: 'view()',
+        animationRangeStart: range.TEXT_START,
+        animationRangeEnd: range.TEXT_END,
+      }),
+    },
+  };
+};
+
 const createText = (props: TextProps) => {
-  const textContainer = ElementModel.createDiv({
-    className: 'umd-hero-stacked__text',
+  const textLockupElement = textLockup.large({
+    ribbon: props.eyebrow,
+    headlineComposite: createHeadline(props),
+    textLargest: props.text,
+    actions: props.actions,
+    isThemeDark: false,
+  });
+
+  const lock = ElementModel.layout.spaceHorizontalMax({
+    element: document.createElement('div'),
+    children: [textLockupElement],
+    elementStyles: {
+      element: {
+        position: 'relative',
+      },
+    },
+  });
+
+  return ElementModel.createDiv({
+    className: CLASS_NAMES.TEXT,
+    children: [lock],
     elementStyles: {
       element: {
         padding: `${Styles.token.spacing.lg} 0`,
@@ -248,36 +354,18 @@ const createText = (props: TextProps) => {
 
         ...(props.includesAnimation && {
           [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            [`@media (prefers-reduced-motion: no-preference)`]: {
-              [`@supports (animation-timeline: view())`]: {
-                position: 'sticky',
-                top: 0,
-              },
-            },
+            ...Utils.styles.media.withViewTimelineAnimation({
+              position: 'sticky',
+              top: 0,
+            }),
           },
         }),
 
         [`& *`]: {
-          ...(props.includesAnimation && {
-            [`@container (${Styles.token.media.queries.tablet.min})`]: {
-              [`@media (prefers-reduced-motion: no-preference)`]: {
-                [`@supports (animation-timeline: view())`]: {
-                  animation: 'hero-stacked-font-color ease-in-out forwards',
-                  animationTimeline: 'view()',
-
-                  ...(props.isHeightSmall && {
-                    animationRangeStart: '80vh',
-                    animationRangeEnd: '100vh',
-                  }),
-
-                  ...(!props.isHeightSmall && {
-                    animationRangeStart: '100vh',
-                    animationRangeEnd: '120vh',
-                  }),
-                },
-              },
-            },
-          }),
+          ...buildTextAnimationStyles(
+            props.includesAnimation,
+            props.isHeightSmall,
+          ),
         },
 
         [`& .${Styles.element.text.decoration.ribbon.className[0]}`]: {
@@ -285,71 +373,37 @@ const createText = (props: TextProps) => {
         },
 
         [`& .${Styles.element.text.rich.simpleLargest.className}`]: {
-          maxWidth: '860px',
+          maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT,
           marginLeft: 'auto',
           marginRight: 'auto',
         },
       },
     },
   });
-
-  const lock = ElementModel.layout.spaceHorizontalMax({
-    element: document.createElement('div'),
-    elementStyles: {
-      element: {
-        position: 'relative',
-      },
-    },
-  });
-
-  const textLockupProps = {
-    ribbon: props.eyebrow,
-    headline: createHeadline(props),
-    textLargest: props.text,
-    actions: props.actions,
-    isTextCenter: true,
-    isThemeDark: false,
-  };
-
-  const text = textLockup.large(textLockupProps);
-
-  lock.element.appendChild(text.element);
-  lock.styles += text.styles;
-
-  textContainer.element.appendChild(lock.element);
-  textContainer.styles += lock.styles;
-
-  return textContainer;
 };
 
-export default (props: HeroStackedProps) =>
-  (() => {
-    const composite = ElementModel.createDiv({
-      className: 'umd-hero-stacked',
-    });
+export default (props: HeroStackedProps) => {
+  const asset = createAsset(props);
+  const hasAsset = asset !== null;
+  const shouldAnimateText = hasAsset && props.includesAnimation;
 
-    const asset = createAsset(props);
-    const hasAsset = asset !== null && asset.element !== null;
-    const shouldAnimateText = hasAsset && props.includesAnimation;
+  const text = createText({
+    ...props,
+    includesAnimation: shouldAnimateText,
+  });
 
-    const text = createText({
-      ...props,
-      includesAnimation: shouldAnimateText,
-    });
+  const children: ElementVisual[] = [text];
+  if (hasAsset) {
+    children.push(asset);
+  }
 
-    composite.element.appendChild(text.element);
-    composite.styles += text.styles;
+  const composite = ElementModel.createDiv({
+    className: CLASS_NAMES.CONTAINER,
+    children,
+  });
 
-    if (hasAsset) {
-      composite.element.appendChild(asset.element);
-      composite.styles += asset.styles;
-    }
+  composite.styles += keyFrameFadeOver;
+  composite.styles += keyFrameFontColor;
 
-    composite.styles = `
-      ${keyFrameFadeOver}
-      ${keyFrameFontColor}
-      ${composite.styles}
-    `;
-
-    return composite;
-  })();
+  return composite;
+};

@@ -1,5 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
+import * as Utils from 'utilities';
 import { ElementModel } from 'model';
+import { type ElementVisual } from '_types';
 
 interface ContentProps {
   eyebrow?: HTMLElement | null;
@@ -15,36 +17,91 @@ interface AssetProps {
 
 interface HeroExpandProps extends ContentProps, AssetProps {}
 
+const CLASS_NAMES = {
+  CONTAINER: 'umd-hero-expand',
+  STICKY: 'hero-expand-sticky',
+  IMAGE_CONTAINER: 'hero-expand-image-container',
+  IMAGE_SIZE: 'hero-expand-image-size',
+  IMAGE_OVERLAY: 'hero-expand-image-overlay',
+  TEXT_CONTAINER: 'hero-expand-text-container',
+  TEXT_TOP: 'hero-expand-text-top-container',
+  TEXT_BOTTOM: 'hero-expand-text-bottom-container',
+  TEXT_ACTIONS: 'hero-expand-text-actions',
+  TEXT_ADDITIONAL: 'hero-expand-text-additional',
+} as const;
+
+const ANIMATION_CONFIG = {
+  IMAGE_OVERLAY: {
+    NAME: 'img-overlay',
+    RANGE: {
+      START: '70vh',
+      END: '100vh',
+    },
+  },
+  IMAGE_SIZE: {
+    NAME: 'img-size',
+    INITIAL_HEIGHT: '50vh',
+    FINAL_HEIGHT: '100vh',
+    RANGE: {
+      START: '40vh',
+      END: '100vh',
+      END_TABLET: '200vh',
+    },
+  },
+  COMPONENT_SIZE: {
+    NAME: 'component-size',
+    NAME_TABLET: 'component-size-tablet',
+    INITIAL_WIDTH: '10%',
+    INITIAL_WIDTH_TABLET: '60%',
+    FINAL_WIDTH: '100vw',
+    RANGE: {
+      START: '40vh',
+      END: '100vh',
+      START_TABLET: '60vh',
+      END_TABLET: '200vh',
+    },
+  },
+} as const;
+
+const THEME_VALUES = {
+  HEADLINE_CHAR_THRESHOLD: 30,
+  HEADLINE_LARGE_SIZE: '96px',
+  HEADLINE_FONT_WEIGHT: 800,
+  OVERLAY_BACKGROUND: 'rgba(0,0,0,0.65)',
+  STICKY_HEIGHT: '100vh',
+  TABLET_HEIGHT: '200vh',
+} as const;
+
 const keyFrameImgOverlay = `
-  @keyframes img-overlay {
+  @keyframes ${ANIMATION_CONFIG.IMAGE_OVERLAY.NAME} {
     from { opacity: 0; }
     to { opacity: 1; }
   }
 `;
 
 const keyFrameImgSize = `
-  @keyframes img-size {
-    from { height: 50vh; }
-    to { height: 100vh; }
+  @keyframes ${ANIMATION_CONFIG.IMAGE_SIZE.NAME} {
+    from { height: ${ANIMATION_CONFIG.IMAGE_SIZE.INITIAL_HEIGHT}; }
+    to { height: ${ANIMATION_CONFIG.IMAGE_SIZE.FINAL_HEIGHT}; }
   }
 `;
 
 const keyFrameComponentSize = `
-  @keyframes component-size {
-    from { width: 10%; }
-    to { width: 100vw; }
+  @keyframes ${ANIMATION_CONFIG.COMPONENT_SIZE.NAME} {
+    from { width: ${ANIMATION_CONFIG.COMPONENT_SIZE.INITIAL_WIDTH}; }
+    to { width: ${ANIMATION_CONFIG.COMPONENT_SIZE.FINAL_WIDTH}; }
   }
 
-  @keyframes component-size-tablet {
-    from { width: 60%; }
-    to { width: 100vw; }
+  @keyframes ${ANIMATION_CONFIG.COMPONENT_SIZE.NAME_TABLET} {
+    from { width: ${ANIMATION_CONFIG.COMPONENT_SIZE.INITIAL_WIDTH_TABLET}; }
+    to { width: ${ANIMATION_CONFIG.COMPONENT_SIZE.FINAL_WIDTH}; }
   }
 `;
 
 const createImageOverlay = () => {
   return ElementModel.create({
     element: document.createElement('div'),
-    className: 'hero-expand-image-overlay',
+    className: CLASS_NAMES.IMAGE_OVERLAY,
     elementStyles: {
       element: {
         position: 'absolute',
@@ -52,27 +109,38 @@ const createImageOverlay = () => {
         left: 0,
         height: '100%',
         width: '100%',
-        background: 'rgba(0,0,0,0.65)',
+        background: THEME_VALUES.OVERLAY_BACKGROUND,
         opacity: 1,
 
-        [`@media (prefers-reduced-motion: no-preference)`]: {
-          [`@supports (animation-timeline: view())`]: {
-            opacity: 0,
-            animation: 'img-overlay forwards',
-            animationTimeline: 'view()',
-            animationRangeStart: '70vh',
-            animationRangeEnd: '100vh',
-          },
-        },
+        ...Utils.styles.media.withViewTimelineAnimation({
+          opacity: 0,
+          animation: `${ANIMATION_CONFIG.IMAGE_OVERLAY.NAME} forwards`,
+          animationTimeline: 'view()',
+          animationRangeStart: ANIMATION_CONFIG.IMAGE_OVERLAY.RANGE.START,
+          animationRangeEnd: ANIMATION_CONFIG.IMAGE_OVERLAY.RANGE.END,
+        }),
       },
     },
   });
 };
 
-const createImageSize = ({ image, video }: AssetProps) => {
-  const imageSize = ElementModel.create({
+const buildAssetElement = ({
+  image,
+  video,
+}: AssetProps): HTMLElement | null => {
+  if (video) return video;
+  if (image) return image;
+  return null;
+};
+
+const createImageSize = (props: AssetProps) => {
+  const overlay = createImageOverlay();
+  const asset = buildAssetElement(props);
+
+  const container = ElementModel.create({
     element: document.createElement('div'),
-    className: 'hero-expand-image-size',
+    className: CLASS_NAMES.IMAGE_SIZE,
+    children: [overlay],
     elementStyles: {
       element: {
         overflow: 'hidden',
@@ -80,40 +148,33 @@ const createImageSize = ({ image, video }: AssetProps) => {
         height: '100%',
         width: '100%',
 
-        [`@media (prefers-reduced-motion: no-preference)`]: {
-          [`@supports (animation-timeline: view())`]: {
-            height: '50vh',
-            animation: 'img-size ease-in-out forwards',
-            animationTimeline: 'view()',
-            animationRangeStart: '40vh',
-            animationRangeEnd: '100vh',
+        ...Utils.styles.media.withViewTimelineAnimation({
+          height: ANIMATION_CONFIG.IMAGE_SIZE.INITIAL_HEIGHT,
+          animation: `${ANIMATION_CONFIG.IMAGE_SIZE.NAME} ease-in-out forwards`,
+          animationTimeline: 'view()',
+          animationRangeStart: ANIMATION_CONFIG.IMAGE_SIZE.RANGE.START,
+          animationRangeEnd: ANIMATION_CONFIG.IMAGE_SIZE.RANGE.END,
 
-            [`@container (${Styles.token.media.queries.tablet.min})`]: {
-              animationRangeEnd: '200vh',
-            },
+          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+            animationRangeEnd: ANIMATION_CONFIG.IMAGE_SIZE.RANGE.END_TABLET,
           },
-        },
+        }),
       },
     },
   });
 
-  if (video) {
-    imageSize.element.appendChild(video);
-  } else if (image) {
-    imageSize.element.appendChild(image);
+  if (asset) {
+    container.element.appendChild(asset);
   }
 
-  const overlay = createImageOverlay();
-  imageSize.element.appendChild(overlay.element);
-  imageSize.styles += overlay.styles;
-
-  return imageSize;
+  return container;
 };
 
-const createAssetContainer = (props: AssetProps) => {
-  const container = ElementModel.create({
+const createAssetContainer = (props: AssetProps) =>
+  ElementModel.create({
     element: document.createElement('div'),
-    className: 'hero-expand-image-container',
+    className: CLASS_NAMES.IMAGE_CONTAINER,
+    children: [createImageSize(props)],
     elementStyles: {
       element: {
         position: 'absolute',
@@ -126,37 +187,29 @@ const createAssetContainer = (props: AssetProps) => {
         display: 'flex',
         alignItems: 'center',
 
-        [`@media (prefers-reduced-motion: no-preference)`]: {
-          [`@supports (animation-timeline: view())`]: {
-            width: '10%',
-            position: 'absolute',
-            top: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            animation: 'component-size ease-in-out forwards',
-            animationTimeline: 'view()',
-            animationRangeStart: '40vh',
-            animationRangeEnd: '100vh',
+        ...Utils.styles.media.withViewTimelineAnimation({
+          width: ANIMATION_CONFIG.COMPONENT_SIZE.INITIAL_WIDTH,
+          position: 'absolute',
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          animation: `${ANIMATION_CONFIG.COMPONENT_SIZE.NAME} ease-in-out forwards`,
+          animationTimeline: 'view()',
+          animationRangeStart: ANIMATION_CONFIG.COMPONENT_SIZE.RANGE.START,
+          animationRangeEnd: ANIMATION_CONFIG.COMPONENT_SIZE.RANGE.END,
 
-            [`@container (${Styles.token.media.queries.tablet.min})`]: {
-              width: '60%',
-              animation: 'component-size-tablet ease-in-out forwards',
-              animationTimeline: 'view()',
-              animationRangeStart: '60vh',
-              animationRangeEnd: '200vh',
-            },
+          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+            width: ANIMATION_CONFIG.COMPONENT_SIZE.INITIAL_WIDTH_TABLET,
+            animation: `${ANIMATION_CONFIG.COMPONENT_SIZE.NAME_TABLET} ease-in-out forwards`,
+            animationTimeline: 'view()',
+            animationRangeStart:
+              ANIMATION_CONFIG.COMPONENT_SIZE.RANGE.START_TABLET,
+            animationRangeEnd: ANIMATION_CONFIG.COMPONENT_SIZE.RANGE.END_TABLET,
           },
-        },
+        }),
       },
     },
   });
-
-  const imageSize = createImageSize(props);
-  container.element.appendChild(imageSize.element);
-  container.styles += imageSize.styles;
-
-  return container;
-};
 
 const createEyebrow = (eyebrow?: HTMLElement | null) => {
   if (!eyebrow) return null;
@@ -173,12 +226,13 @@ const createEyebrow = (eyebrow?: HTMLElement | null) => {
 
 const createHeadline = (headline?: HTMLElement | null) => {
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount > 30;
+  const isOverwriteHeadline =
+    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD;
 
   if (!headline) return null;
 
   const desktopStyles = {
-    ...(isOverwriteHeadline && { fontSize: '96px' }),
+    ...(isOverwriteHeadline && { fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE }),
   };
 
   return ElementModel.headline.campaignMaximum({
@@ -186,7 +240,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
     elementStyles: {
       element: {
         color: Styles.token.color.white,
-        fontWeight: 800,
+        fontWeight: THEME_VALUES.HEADLINE_FONT_WEIGHT,
         textTransform: 'uppercase',
         textWrap: 'balance',
         ...desktopStyles,
@@ -195,15 +249,89 @@ const createHeadline = (headline?: HTMLElement | null) => {
   });
 };
 
-const createTextContainer = ({
-  headline,
+const buildTopTextChildren = ({
   eyebrow,
+  headline,
+}: ContentProps): ElementVisual[] => {
+  const children: ElementVisual[] = [];
+
+  const eyebrowElement = createEyebrow(eyebrow);
+  if (eyebrowElement) {
+    children.push(eyebrowElement);
+  }
+
+  const headlineElement = createHeadline(headline);
+  if (headlineElement) {
+    children.push(headlineElement);
+  }
+
+  return children;
+};
+
+const buildBottomTextChildren = ({
   actions,
   additional,
-}: ContentProps) => {
-  const textContainer = ElementModel.create({
+}: ContentProps): ElementVisual[] => {
+  const children: ElementVisual[] = [];
+
+  if (actions) {
+    const actionsContainer = ElementModel.create({
+      element: document.createElement('div'),
+      className: CLASS_NAMES.TEXT_ACTIONS,
+      elementStyles: {
+        siblingAfter: {
+          marginTop: Styles.token.spacing.lg,
+        },
+      },
+    });
+    actionsContainer.element.appendChild(actions);
+    children.push(actionsContainer);
+  }
+
+  if (additional) {
+    const additionalContainer = ElementModel.create({
+      element: document.createElement('div'),
+      className: CLASS_NAMES.TEXT_ADDITIONAL,
+    });
+    additionalContainer.element.appendChild(additional);
+    children.push(additionalContainer);
+  }
+
+  return children;
+};
+
+const createTextContainer = (props: ContentProps) => {
+  const textChildren: ElementVisual[] = [];
+
+  const topTextChildren = buildTopTextChildren(props);
+  if (topTextChildren.length > 0) {
+    const topText = ElementModel.create({
+      element: document.createElement('div'),
+      className: CLASS_NAMES.TEXT_TOP,
+      children: topTextChildren,
+      elementStyles: {
+        siblingAfter: {
+          marginTop: Styles.token.spacing.lg,
+        },
+      },
+    });
+    textChildren.push(topText);
+  }
+
+  const bottomTextChildren = buildBottomTextChildren(props);
+  if (bottomTextChildren.length > 0) {
+    const bottomText = ElementModel.create({
+      element: document.createElement('div'),
+      className: CLASS_NAMES.TEXT_BOTTOM,
+      children: bottomTextChildren,
+    });
+    textChildren.push(bottomText);
+  }
+
+  return ElementModel.create({
     element: document.createElement('div'),
-    className: 'hero-expand-text-container',
+    className: CLASS_NAMES.TEXT_CONTAINER,
+    children: textChildren,
     elementStyles: {
       element: {
         position: 'relative',
@@ -225,88 +353,26 @@ const createTextContainer = ({
       },
     },
   });
-
-  if (eyebrow || headline) {
-    const topText = ElementModel.create({
-      element: document.createElement('div'),
-      className: 'hero-expand-text-top-container',
-      elementStyles: {
-        siblingAfter: {
-          marginTop: Styles.token.spacing.lg,
-        },
-      },
-    });
-
-    const eyebrowElement = createEyebrow(eyebrow);
-    if (eyebrowElement) {
-      topText.element.appendChild(eyebrowElement.element);
-      topText.styles += eyebrowElement.styles;
-    }
-
-    const headlineElement = createHeadline(headline);
-    if (headlineElement) {
-      topText.element.appendChild(headlineElement.element);
-      topText.styles += headlineElement.styles;
-    }
-
-    textContainer.element.appendChild(topText.element);
-    textContainer.styles += topText.styles;
-  }
-
-  if (actions || additional) {
-    const bottomText = ElementModel.create({
-      element: document.createElement('div'),
-      className: 'hero-expand-text-bottom-container',
-    });
-
-    if (actions) {
-      const actionsContainer = ElementModel.create({
-        element: document.createElement('div'),
-        className: 'hero-expand-text-actions',
-        elementStyles: {
-          siblingAfter: {
-            marginTop: Styles.token.spacing.lg,
-          },
-        },
-      });
-      actionsContainer.element.appendChild(actions);
-      bottomText.element.appendChild(actionsContainer.element);
-      bottomText.styles += actionsContainer.styles;
-    }
-
-    if (additional) {
-      const additionalContainer = ElementModel.create({
-        element: document.createElement('div'),
-        className: 'hero-expand-text-additional',
-      });
-      additionalContainer.element.appendChild(additional);
-      bottomText.element.appendChild(additionalContainer.element);
-      bottomText.styles += additionalContainer.styles;
-    }
-
-    textContainer.element.appendChild(bottomText.element);
-    textContainer.styles += bottomText.styles;
-  }
-
-  return textContainer;
 };
 
 const createSticky = (props: HeroExpandProps) => {
-  const sticky = ElementModel.create({
+  const assetContainer = createAssetContainer(props);
+  const textContainer = createTextContainer(props);
+
+  return ElementModel.create({
     element: document.createElement('div'),
-    className: 'hero-expand-sticky',
+    className: CLASS_NAMES.STICKY,
+    children: [assetContainer, textContainer],
     elementStyles: {
       element: {
         position: 'relative',
 
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          [`@media (prefers-reduced-motion: no-preference)`]: {
-            [`@supports (animation-timeline: view())`]: {
-              position: 'sticky',
-              top: 0,
-              height: '100vh',
-            },
-          },
+          ...Utils.styles.media.withViewTimelineAnimation({
+            position: 'sticky',
+            top: 0,
+            height: THEME_VALUES.STICKY_HEIGHT,
+          }),
         },
 
         [`@supports (not (animation-timeline: view()))`]: {
@@ -315,64 +381,51 @@ const createSticky = (props: HeroExpandProps) => {
       },
     },
   });
-
-  const assetContainer = createAssetContainer(props);
-  sticky.element.appendChild(assetContainer.element);
-  sticky.styles += assetContainer.styles;
-
-  const textContainer = createTextContainer(props);
-  sticky.element.appendChild(textContainer.element);
-  sticky.styles += textContainer.styles;
-
-  return sticky;
 };
 
-export default (props: HeroExpandProps) =>
-  (() => {
-    const composite = ElementModel.create({
-      element: document.createElement('div'),
-      className: 'umd-hero-expand',
-      elementStyles: {
-        element: {
-          [`@media (prefers-reduced-motion: no-preference)`]: {
-            [`@supports (animation-timeline: view())`]: {
-              position: 'relative',
+const buildCompositeStyles = () => {
+  return {
+    element: {
+      ...Utils.styles.media.withViewTimelineAnimation({
+        position: 'relative',
 
-              [`@container (${Styles.token.media.queries.tablet.min})`]: {
-                height: '200vh',
-              },
-            },
-          },
-
-          ['& img, & video']: {
-            display: 'block',
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          },
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          height: THEME_VALUES.TABLET_HEIGHT,
         },
+      }),
+
+      ['& img, & video']: {
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
       },
-    });
+    },
+  };
+};
 
-    const sticky = createSticky(props);
-    composite.element.appendChild(sticky.element);
-    composite.styles += sticky.styles;
+export default (props: HeroExpandProps) => {
+  const sticky = createSticky(props);
 
-    const setTopPosition = ({ value }: { value: string | null }) => {
-      sticky.element.style.top = value || '0';
-    };
+  const composite = ElementModel.create({
+    element: document.createElement('div'),
+    className: CLASS_NAMES.CONTAINER,
+    children: [sticky],
+    elementStyles: buildCompositeStyles(),
+  });
 
-    composite.styles = `
-      ${keyFrameImgOverlay}
-      ${keyFrameImgSize}
-      ${keyFrameComponentSize}
-      ${composite.styles}
-    `;
+  const setTopPosition = ({ value }: { value: string | null }) => {
+    sticky.element.style.top = value || '0';
+  };
 
-    return {
-      ...composite,
-      events: {
-        setTopPosition,
-      },
-    };
-  })();
+  composite.styles += keyFrameImgOverlay;
+  composite.styles += keyFrameImgSize;
+  composite.styles += keyFrameComponentSize;
+
+  return {
+    ...composite,
+    events: {
+      setTopPosition,
+    },
+  };
+};

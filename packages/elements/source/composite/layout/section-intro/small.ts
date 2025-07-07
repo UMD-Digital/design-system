@@ -14,8 +14,6 @@ type TypeSectionIntroDefaultProps = {
   includesAnimation?: boolean;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
 const ATTRIBUTE_ANIMATION = 'data-animation';
 const ATTRIBUTE_THEME = 'theme';
@@ -125,7 +123,7 @@ const OverwriteSeparator = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: typography.sans.largest,
     },
@@ -145,13 +143,13 @@ const TextStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT}`]: typography.sans.larger,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT} *`]: typography.sans.larger,
     },
@@ -163,13 +161,13 @@ const TextStyles = `
     color: ${token.color.black};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT_SMALL}`]: typography.sans.medium,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT_SMALL} *`]: typography.sans.medium,
     },
@@ -182,7 +180,7 @@ const ActionStyles = `
     margin-top: ${token.spacing.md};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_ACTIONS}`]: layout.grid.inline.tabletRows,
     },

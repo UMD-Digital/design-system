@@ -27,8 +27,6 @@ export type TypeNavItemRequirements = TypeDropdownProps &
 
 type TypeNavItem = TypeNavItemRequirements;
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const ELEMENT_NAME = 'umd-element-nav-item';
 const ATTRIBUTE_DROPDOWN = 'data-dropdown';
 const ATTRIBUTE_SHOWING = 'data-showing';
@@ -160,7 +158,7 @@ const DropdownListStyles = `
     line-height: 1.5em;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
       animation.line.slideUnderRed,

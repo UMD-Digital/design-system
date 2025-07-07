@@ -16,8 +16,6 @@ type TypeCarouselCardsRequirements = {
   cards: HTMLElement[];
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const MEDIUM = 768;
 const LARGE = 1024;
 
@@ -94,13 +92,13 @@ const OverwriteCarouselStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE}`]: typography.sans.largest,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE} *`]: typography.sans.largest,
     },
@@ -120,13 +118,13 @@ const TextStyles = `
     margin-top: ${token.spacing.md};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_TEXT}`]: element.text.rich.advancedDark,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_TEXT}`]: typography.sans.medium,
     },
@@ -171,7 +169,7 @@ const IntroContainer = `
 const ContainerLock = `
   .${CAROUSEL_LOCK} {
     position: relative;
-    ${convertJSSObjectToStyles({
+    ${Utility.theme.convertJSSObjectToStyles({
       styleObj: layout.space.horizontal.max,
     })}
   }

@@ -4,10 +4,8 @@ import {
   layout,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { markup, styles } from 'utilities';
+import * as Utils from 'utilities';
 import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
-
-const { convertJSSObjectToStyles } = styles;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -28,7 +26,7 @@ const LinkStyles = `
     color: ${token.color.gray.light};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} a`]:
       animation.line.slideUnderWhite,
@@ -39,7 +37,7 @@ const LinkStyles = `
     color: ${token.color.black};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
       animation.line.slideUnderBlack,
@@ -71,7 +69,7 @@ export const UtilityContainerStyles = `
     background-color: ${token.color.gray.darker};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },
@@ -84,7 +82,7 @@ export const UtilityContainerStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${UTILITY_CONTAINER} *`]: typography.sans.smaller
     },
@@ -155,7 +153,7 @@ export default ({ slotUtilityLinks }: UtilityProps) => {
     ) as HTMLAnchorElement[];
 
     slottedLinks.forEach((link) => {
-      markup.modify.animationLinkSpan({ element: link });
+      Utils.markup.modify.animationLinkSpan({ element: link });
       link.classList.add(UTILITY_CONTAINER_LINK);
 
       wrapper.appendChild(link);
@@ -163,7 +161,7 @@ export default ({ slotUtilityLinks }: UtilityProps) => {
   }
 
   requiredSubLinks.forEach((link) =>
-    wrapper.appendChild(markup.create.linkWithSpan(link)),
+    wrapper.appendChild(Utils.markup.create.linkWithSpan(link)),
   );
   copyRight.classList.add(UTILITY_CONTAINER_LINK);
   copyRight.innerHTML = `©${new Date().getFullYear()} UNIVERSITY OF MARYLAND`;

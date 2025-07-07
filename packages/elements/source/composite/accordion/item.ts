@@ -29,7 +29,6 @@ type ActionAnimationProps = StateProps & {
 };
 
 const { token } = Styles;
-const { convertJSSObjectToStyles } = Utility.styles;
 
 const SMALL = 480;
 
@@ -90,7 +89,7 @@ const OverwriteThemeDark = `
 
 // prettier-ignore
 const bodyStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_BODY_WRAPPER}`]: Styles.typography.sans.medium
     },
@@ -130,7 +129,7 @@ const bodyStyles = `
 
 // prettier-ignore
 const headlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: Styles.typography.sans.large,
     },

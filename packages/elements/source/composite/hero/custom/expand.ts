@@ -112,7 +112,7 @@ const createImageOverlay = () => {
         background: THEME_VALUES.OVERLAY_BACKGROUND,
         opacity: 1,
 
-        ...Utils.styles.media.withViewTimelineAnimation({
+        ...Utils.theme.media.withViewTimelineAnimation({
           opacity: 0,
           animation: `${ANIMATION_CONFIG.IMAGE_OVERLAY.NAME} forwards`,
           animationTimeline: 'view()',
@@ -148,7 +148,7 @@ const createImageSize = (props: AssetProps) => {
         height: '100%',
         width: '100%',
 
-        ...Utils.styles.media.withViewTimelineAnimation({
+        ...Utils.theme.media.withViewTimelineAnimation({
           height: ANIMATION_CONFIG.IMAGE_SIZE.INITIAL_HEIGHT,
           animation: `${ANIMATION_CONFIG.IMAGE_SIZE.NAME} ease-in-out forwards`,
           animationTimeline: 'view()',
@@ -187,7 +187,7 @@ const createAssetContainer = (props: AssetProps) =>
         display: 'flex',
         alignItems: 'center',
 
-        ...Utils.styles.media.withViewTimelineAnimation({
+        ...Utils.theme.media.withViewTimelineAnimation({
           width: ANIMATION_CONFIG.COMPONENT_SIZE.INITIAL_WIDTH,
           position: 'absolute',
           top: 0,
@@ -368,7 +368,7 @@ const createSticky = (props: HeroExpandProps) => {
         position: 'relative',
 
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          ...Utils.styles.media.withViewTimelineAnimation({
+          ...Utils.theme.media.withViewTimelineAnimation({
             position: 'sticky',
             top: 0,
             height: THEME_VALUES.STICKY_HEIGHT,
@@ -386,7 +386,7 @@ const createSticky = (props: HeroExpandProps) => {
 const buildCompositeStyles = () => {
   return {
     element: {
-      ...Utils.styles.media.withViewTimelineAnimation({
+      ...Utils.theme.media.withViewTimelineAnimation({
         position: 'relative',
 
         [`@container (${Styles.token.media.queries.tablet.min})`]: {

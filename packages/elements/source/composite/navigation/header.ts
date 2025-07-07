@@ -25,7 +25,6 @@ type TypeNavRow = TypeSearchLink &
 
 type TypeHeaderRequirements = TypeLogoRequirments & TypeNavRow;
 
-const { convertJSSObjectToStyles } = Utility.styles;
 const ANIMATION_TIME = 500;
 
 const ATTRIBUTE_STICKY = 'data-sticky';
@@ -156,13 +155,13 @@ const LogoColumnStyles = `
     height: 240px;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}`]: typography.sans.larger,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO} *`]: typography.sans.larger,
     },
@@ -174,13 +173,13 @@ const LogoColumnStyles = `
     width: 100%;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: typography.sans.extraLarge,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: typography.sans.extraLarge,
     },

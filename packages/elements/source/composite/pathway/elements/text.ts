@@ -17,8 +17,6 @@ export type TypePathwayTextContainer = {
   isThemeMaryland?: boolean;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const MEDIUM = 400;
 const LARGE = 600;
 
@@ -52,7 +50,7 @@ const VarationThemeDark = `
     color: ${token.color.white};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleLargeDark,
     },
@@ -72,7 +70,7 @@ const VarationThemeMaryland = `
     color: ${token.color.white};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_MARYLAND_CONTAINER} .${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleLargeDark,
     },
@@ -86,7 +84,7 @@ const EyebrowStyles = `
     color: ${token.color.black} !important;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_EYEBROW}`]: element.text.decoration.ribbon,
     },
@@ -95,13 +93,13 @@ const EyebrowStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_HEADLINE}`]: typography.sans.largest,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_HEADLINE} *`]: typography.sans.largest,
     },
@@ -142,13 +140,13 @@ const TextStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT}`]: element.text.rich.simpleLarge,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_TEXT_CONTAINER_RICH_TEXT} *`]: element.text.rich.simpleLarge,
     },
@@ -173,7 +171,7 @@ const ActionStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: layout.grid.inline.tabletRows,
     },

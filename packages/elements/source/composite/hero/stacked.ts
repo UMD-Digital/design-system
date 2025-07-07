@@ -240,7 +240,7 @@ const buildHeadlineAnimationStyles = (
 
   return {
     [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      ...Utils.styles.media.withViewTimelineAnimation({
+      ...Utils.theme.media.withViewTimelineAnimation({
         animation: `${ANIMATION_CONFIG.FONT_COLOR.NAME} ease-in-out forwards`,
         animationTimeline: 'view()',
         animationRangeStart: range.HEADLINE_START,
@@ -307,7 +307,7 @@ const buildTextAnimationStyles = (
 
   return {
     [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      ...Utils.styles.media.withViewTimelineAnimation({
+      ...Utils.theme.media.withViewTimelineAnimation({
         animation: `${ANIMATION_CONFIG.FONT_COLOR.NAME} ease-in-out forwards`,
         animationTimeline: 'view()',
         animationRangeStart: range.TEXT_START,
@@ -354,7 +354,7 @@ const createText = (props: TextProps) => {
 
         ...(props.includesAnimation && {
           [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            ...Utils.styles.media.withViewTimelineAnimation({
+            ...Utils.theme.media.withViewTimelineAnimation({
               position: 'sticky',
               top: 0,
             }),

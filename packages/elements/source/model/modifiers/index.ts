@@ -45,14 +45,14 @@ const CONFIG = {
   builders: {
     action: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.styles.combineStyles(
+        Utility.theme.combineStyles(
           ...CONFIG.modifiers.withoutTextColor(props),
         ),
     },
 
     animationLine: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.styles.combineStyles(
+        Utility.theme.combineStyles(
           ...CONFIG.modifiers.withAnimationLink(props),
         ),
       elementModifiers: [
@@ -63,17 +63,17 @@ const CONFIG = {
 
     base: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.styles.combineStyles(...CONFIG.modifiers.base(props)),
+        Utility.theme.combineStyles(...CONFIG.modifiers.base(props)),
     },
 
     childLink: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.styles.combineStyles(...CONFIG.modifiers.withChildLink(props)),
+        Utility.theme.combineStyles(...CONFIG.modifiers.withChildLink(props)),
     },
 
     default: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.styles.combineStyles(...CONFIG.modifiers.default(props)),
+        Utility.theme.combineStyles(...CONFIG.modifiers.default(props)),
     },
   },
 };
@@ -89,7 +89,12 @@ class ElementBuilder {
     this.element = element;
   }
 
-  createElement(props: BuilderProps & { children?: CompositeChild[]; attributes?: Record<string, string>[] }) {
+  createElement(
+    props: BuilderProps & {
+      children?: CompositeChild[];
+      attributes?: Record<string, string>[];
+    },
+  ) {
     const { config, options = {}, children, attributes } = props;
     const className = this.className;
     const element = this.element;
@@ -114,7 +119,7 @@ class ElementBuilder {
 
     // Apply attributes if provided
     if (attributes && attributes.length > 0) {
-      attributes.forEach(attrObject => {
+      attributes.forEach((attrObject) => {
         Object.entries(attrObject).forEach(([key, value]) => {
           element.setAttribute(key, value);
         });
@@ -123,7 +128,7 @@ class ElementBuilder {
 
     // Process children if provided
     if (children && children.length > 0) {
-      children.forEach(child => {
+      children.forEach((child) => {
         element.appendChild(child.element);
         styles += child.styles;
       });
@@ -143,7 +148,8 @@ const createElementBuild = (
   props: ConfigurationProps,
   config: BuilderConfig,
 ) => {
-  const { element, className, elementStyles, children, attributes, ...rest } = props;
+  const { element, className, elementStyles, children, attributes, ...rest } =
+    props;
 
   return new ElementBuilder(className, element).createElement({
     config,

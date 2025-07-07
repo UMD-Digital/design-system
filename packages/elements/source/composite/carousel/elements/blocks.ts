@@ -54,7 +54,6 @@ type TypeEventScroll = TypeHelpers & {
   isDirectionRight?: boolean;
 };
 
-const { convertPixelStringToNumber } = Utility.styles;
 const { token } = Styles;
 const fullScreenClassName = Styles.element.action.button.fullScreen.className;
 
@@ -355,7 +354,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       tabletCount: 2,
       desktopCount: 3,
       maxCount: 4,
-      blockGap: convertPixelStringToNumber(token.spacing.lg),
+      blockGap: Utility.theme.convertPixelStringToNumber(token.spacing.lg),
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: true,

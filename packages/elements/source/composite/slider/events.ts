@@ -29,8 +29,6 @@ type TypeSliderEventProps = TypeSliderEventSlideContentProps &
     isThemeDark?: boolean;
   };
 
-const { convertJSSObjectToStyles, convertPixelStringToNumber } = Utility.styles;
-
 const TABLET = 750;
 const DESKTOP = 1000;
 const LARGE = 1300;
@@ -232,7 +230,7 @@ const IntroStyles = `
     display: block;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: typography.sans.larger,
     },
@@ -520,7 +518,9 @@ const SizeDatesElements = ({
       })[0];
       const height =
         maxHeightElement.offsetHeight +
-        convertPixelStringToNumber(maxHeightElement.style.marginTop);
+        Utility.theme.convertPixelStringToNumber(
+          maxHeightElement.style.marginTop,
+        );
 
       sliderWrapper.style.height = `${height}px`;
     };

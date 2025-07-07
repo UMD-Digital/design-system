@@ -40,7 +40,6 @@ type CacheCheckResult = {
 };
 
 const { FetchGraphQL } = Utility.network;
-const { convertJSSObjectToStyles } = Utility.styles;
 
 const QUERY = `
   query CampusAlertsQuery {
@@ -179,7 +178,7 @@ const CloseButtonStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${ALERT_TITLE}`]: typography.sans.large,
     },
@@ -193,7 +192,7 @@ const TextStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${ALERT_TEXT}`]: element.text.rich.advanced,
     },
@@ -232,7 +231,7 @@ const WrapperStyles = `
 
 // prettier-ignore
 const LockStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${LOCK}`]: layout.space.horizontal.full,
     },

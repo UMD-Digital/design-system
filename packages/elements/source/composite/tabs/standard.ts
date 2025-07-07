@@ -26,8 +26,6 @@ type TypeGetState = {
   getIsThemeDark: boolean;
 };
 
-const { convertPixelStringToNumber } = Utility.styles;
-
 const ATTRIBUTE_LAYOUT_HORIZONTAL = 'data-layout-horizontal';
 const ATTRIBUTE_ARIA_EXPANDED = 'aria-expanded';
 const ATTRIBUTE_THEME = 'theme';
@@ -160,8 +158,8 @@ const SetDisplay = ({
   const SetContentPosition = () => {
     const activeContent = contents[activeTab];
     const space = isFlexLayout
-      ? convertPixelStringToNumber(token.spacing.xl)
-      : convertPixelStringToNumber(token.spacing.md);
+      ? Utility.theme.convertPixelStringToNumber(token.spacing.xl)
+      : Utility.theme.convertPixelStringToNumber(token.spacing.md);
 
     if (activeContent) {
       if (transition) {
@@ -175,12 +173,14 @@ const SetDisplay = ({
       activeContent.style.width = '100%';
 
       if (!isFlexLayout && transition) {
-        const convertedSpace = convertPixelStringToNumber(token.spacing.md);
+        const convertedSpace = Utility.theme.convertPixelStringToNumber(
+          token.spacing.md,
+        );
         const spread = additionalSpread
           ? convertedSpace + additionalSpread
           : convertedSpace;
 
-        Utility.styles.animations.scrollTo({
+        Utility.theme.animations.scrollTo({
           element: activeContent,
           spread,
         });

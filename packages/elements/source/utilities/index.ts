@@ -7,6 +7,3 @@ export * as network from './network';
 export * as performance from './performance';
 export * as storage from './storage';
 export * as theme from './theme';
-
-// Legacy export for backward compatibility - use theme instead
-export * as styles from './theme';

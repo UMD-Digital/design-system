@@ -13,15 +13,13 @@ export type TypeAction = TypeActionProps & {
   link: HTMLAnchorElement;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const ELEMENT_SLIDE_ACTION_CONTAINER = 'nav-slide-action-container';
 const ELEMENT_SLIDE_ACTION_LINK = 'nav-slide-action-link';
 const ELEMENT_SLIDE_ACTION_BUTTON = 'nav-slide-action-button';
 
 // prettier-ignore
 const LinkStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_ACTION_LINK}`]: typography.sans.small,
     },

@@ -21,8 +21,6 @@ export type TypeFirstSlide = TypeFirstSlideProps & {
   isContextMenu: boolean;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const ELEMENT_SLIDER_FIRST_SLIDE_CONTAINER = 'nav-slider-first-slide-container';
 const ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER =
   'nav-slider-first-slide-primary-links-container';
@@ -35,7 +33,7 @@ const OVERWRITE_ACTION_PRIMARY_LINK = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LIN
 
 //prettier-ignore;
 const OverwriteSlidePrimaryLink = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_ACTION_PRIMARY_LINK}`]: typography.sans.large,
     },

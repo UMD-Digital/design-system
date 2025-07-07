@@ -9,7 +9,6 @@ type TypeEventLockupDate = {
 
 // To Do - Refactor to use element model
 
-const { convertJSSObjectToStyles } = Utility.styles;
 const { animation, token, typography } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -25,13 +24,13 @@ const HeadlineStyles = `
     margin-left: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE}`]: typography.sans.large,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE} *`]: typography.sans.large,
     },
@@ -45,13 +44,13 @@ const HeadlineStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE} a`]: animation.line.slideUnderBlack,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: animation.line.slideUnderWhite, 
     },

@@ -2,7 +2,7 @@ import { animation } from '@universityofmaryland/web-styles-library';
 import { Utilities } from '@universityofmaryland/web-elements-library';
 
 export const loadIntersectionObserver = () => {
-  const { convertJSSObjectToStyles } = Utilities.styles;
+  const { convertJSSObjectToStyles } = Utilities.theme;
 
   if (Utilities.accessibility.isPrefferdReducedMotion()) return;
 

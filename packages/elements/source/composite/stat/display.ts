@@ -19,8 +19,6 @@ type TypeStatRequirements = TypeStatElement & {
   subText?: HTMLElement | null;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const BLOCK_TEXTURE = `<svg id="stat_block-texture" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" ><defs><style>.cls-1{opacity:.02;}.cls-1,.cls-2{fill:#454545;fill-rule:evenodd;isolation:isolate;stroke-width:0px;}.cls-2{opacity:.04;}</style></defs><path class="cls-1" d="M109.49,0H0v63.18l181.67,182.32L0,427.82v63.18h109.49l244.61-245.5L109.49,0Z"/><path class="cls-2" d="M108.94,0h172.44l244.61,245.5-244.61,245.5H108.94l244.61-245.5L108.94,0ZM0,179.11l58.16-58.29L0,62.54v116.57Z"/></svg>`;
 
 const SMALL = 400;
@@ -65,7 +63,7 @@ const VarationThemeDarkStyles = `
     color: ${token.color.gray.light};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_TEXT}`]: animation.nestedElements.linksDark,
     },
@@ -109,37 +107,37 @@ const VarationDisplayBlockStyles = `
 
 // prettier-ignore
 const VarationSizeLargeStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_STAT_DISPLAY}`]: typography.stats.large,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_STAT_DISPLAY} *`]: typography.stats.large,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_STAT_TEXT}`]: typography.sans.larger,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_STAT_TEXT} *`]: typography.sans.larger,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_SUB_TEXT}`]: typography.sans.small,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_SIZE_LARGE_SUB_TEXT} *`]: typography.sans.small,
     },
@@ -162,13 +160,13 @@ const VarationWithLineStyles = `
 
 // prettier-ignore
 const StatDisplayStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_DISPLAY}`]: typography.stats.medium,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_DISPLAY} *`]: typography.stats.medium,
     },
@@ -191,19 +189,19 @@ const StatDisplayStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_TEXT}`]: element.text.rich.advanced,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_TEXT}`]: typography.sans.medium,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_TEXT} *`]: typography.sans.medium,
     },
@@ -225,13 +223,13 @@ const TextStyles = `
 
 // prettier-ignore
 const SubTextStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_SUB_TEXT}`]: typography.sans.min,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STAT_SUB_TEXT} *`]: typography.sans.min,
     },

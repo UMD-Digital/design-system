@@ -12,8 +12,6 @@ type TypePathwayOverlayProps = TypePathwayTextContainer &
     includedStyles?: string;
   };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const MEDIUM = 800;
 const LARGE = 1200;
 
@@ -232,7 +230,7 @@ const OverwriteTextContainerStyles = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    ${convertJSSObjectToStyles({
+    ${Utility.theme.convertJSSObjectToStyles({
       styleObj: {
         [`${OVERWRITE_TEXT_WRAPPER}`]: layout.space.horizontal.max,
       },
@@ -253,7 +251,7 @@ const OverwriteTextContainerStyles = `
 `;
 
 const LockStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_OVERLAY_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },

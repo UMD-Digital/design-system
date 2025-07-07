@@ -89,7 +89,7 @@ export default ({
 }: PersonTextLockup) => {
   const container = document.createElement('div');
   let styles = `
-    ${Utility.styles.getStyleStringFromJssObject(containerStyles)}
+    ${Utility.theme.getStyleStringFromJssObject(containerStyles)}
   `;
 
   container.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER);

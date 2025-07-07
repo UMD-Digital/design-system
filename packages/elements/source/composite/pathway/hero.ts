@@ -16,8 +16,6 @@ type TypePathwayHeroProps = TypePathwayTextContainer &
     includedStyles?: string;
   };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const MEDIUM = 1000;
 const LARGE = 1300;
 
@@ -178,25 +176,25 @@ const OverwriteTextContainerStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_HEADLINE}`]: typography.campaign.extralarge,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_HEADLINE} *`]: typography.campaign.extralarge,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_TEXT_RICHTEXT} *`]: typography.sans.larger,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${OVERWRITE_TEXT_RICHTEXT}`]: typography.sans.larger,
     },
@@ -234,7 +232,7 @@ const AnimationStyles = `
 `;
 
 const LockStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },

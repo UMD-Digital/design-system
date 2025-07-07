@@ -6,7 +6,6 @@ type TypeLayoutImageExpandProps = {
   image: HTMLImageElement;
 };
 
-const { convertJSSObjectToStyles, convertPixelStringToNumber } = Utility.styles;
 const { spacing } = token;
 
 const ELEMENT_NAME = 'umd-layout-image-expand';
@@ -24,7 +23,7 @@ const ELEMENT_EXPAND_TEXT_ANIMATION = 'layout-image-expand-text-animation';
 
 // prettier-ignore
 const TextLock = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: layout.space.horizontal.max,
     },
@@ -293,7 +292,7 @@ export default (props: TypeLayoutImageExpandProps) => {
   const sizeImageForText = () => {
     const textContainerHeight =
       textContainer.clientHeight +
-      convertPixelStringToNumber(spacing['2xl']) * 2;
+      Utility.theme.convertPixelStringToNumber(spacing['2xl']) * 2;
     const imageContainerHeight = container.clientHeight;
 
     if (textContainerHeight > imageContainerHeight) {

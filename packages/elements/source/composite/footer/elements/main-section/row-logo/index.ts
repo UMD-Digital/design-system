@@ -1,5 +1,5 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import { styles } from 'utilities';
+import * as Utils from 'utilities';
 import createSocialCampaignColumns, {
   SocialContainerStyles,
   SOCIAL_COLUMN_WRAPPER,
@@ -16,8 +16,6 @@ import createContactContainer, {
 } from './contact';
 import createLogoContainer, { LogoContainerStyles } from './logo';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
-
-const { convertJSSObjectToStyles } = styles;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -82,7 +80,7 @@ export const RowLogoStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LOGO_CONTAINER_LOCK}`]: layout.space.horizontal.max 
     },

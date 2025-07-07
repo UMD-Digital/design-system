@@ -1,5 +1,5 @@
 import { layout, token } from '@universityofmaryland/web-styles-library';
-import { styles } from 'utilities';
+import * as Utils from 'utilities';
 import createSocialCampaignColumns, {
   SOCIAL_COLUMN_WRAPPER,
   type SocialCampaignColumnsProps,
@@ -9,8 +9,6 @@ import createLinkColumns, {
   type slotColumnsProps,
 } from './link-columns';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
-
-const { convertJSSObjectToStyles } = styles;
 
 const { LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -63,7 +61,7 @@ export const RowLinkStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_CONTAINER_LOCK}`]: layout.space.horizontal.max, 
     },

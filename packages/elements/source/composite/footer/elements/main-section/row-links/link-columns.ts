@@ -3,10 +3,8 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { styles, markup } from 'utilities';
+import * as Utils from 'utilities';
 import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
-
-const { convertJSSObjectToStyles } = styles;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -118,7 +116,7 @@ const COLUMN_THREE_DEFAULT_LINKS = [
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_HEADLINE}`]: typography.elements.interativeMedium,
     },
@@ -146,13 +144,13 @@ const LinkStyles = `
     margin-bottom: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]: typography.sans.smaller,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ROW_LINKS_COLUMN_LINKS} a`]:
       animation.line.slideUnderWhite
@@ -164,7 +162,7 @@ const LinkStyles = `
     color: ${token.color.gray.light};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
       animation.line.slideUnderBlack
@@ -284,7 +282,7 @@ const CreateSlotColumn = ({
   const links = Array.from(slot.querySelectorAll('a')).map((link) => {
     const linkWrapper = document.createElement('div');
     linkWrapper.classList.add(ROW_LINKS_COLUMN_LINKS);
-    markup.modify.animationLinkSpan({ element: link });
+    Utils.markup.modify.animationLinkSpan({ element: link });
     linkWrapper.appendChild(link);
     return linkWrapper;
   });

@@ -3,14 +3,12 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { markup, styles } from 'utilities';
+import * as Utils from 'utilities';
 import createSocialCampaignColumns, {
   SOCIAL_COLUMN_WRAPPER,
   type SocialCampaignColumnsProps,
 } from '../social';
 import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
-
-const { convertJSSObjectToStyles } = styles;
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -67,14 +65,14 @@ const HeadlineStyles = `
     color: ${token.color.white};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE} a`]:
       animation.line.slideUnderWhite,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_HEADLINE}`]: typography.elements.interativeMedium,
     },
@@ -85,7 +83,7 @@ const HeadlineStyles = `
     color: ${token.color.black};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
       animation.line.slideUnderBlack,
@@ -103,7 +101,7 @@ const AddressStyles = `
     display: block;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LIST_ADDRESS} *`]: typography.sans.small,
     },
@@ -116,7 +114,7 @@ const LinkListStyles = `
     display: flex;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} *`]: typography.sans.small,
     },
@@ -126,14 +124,14 @@ const LinkListStyles = `
     display: block;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${CONTACT_LINKS_LIST} a`]:
       animation.line.slideUnderWhite,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
       animation.line.slideUnderBlack,
@@ -195,7 +193,7 @@ export const ContactContainerStyles = `
 
 const createDefaultHeadline = () => {
   const headline = document.createElement('p');
-  const headlineLink = markup.create.linkWithSpan(DEFAULT_HEADLINE_LINK);
+  const headlineLink = Utils.markup.create.linkWithSpan(DEFAULT_HEADLINE_LINK);
 
   headline.classList.add(CONTACT_LIST_HEADLINE);
   headline.appendChild(headlineLink);
@@ -238,8 +236,8 @@ const createDefaultLinks = () => {
   const contactList = document.createElement('p');
 
   contactList.classList.add(CONTACT_LINKS_LIST);
-  contactList.appendChild(markup.create.linkWithSpan(DEFAULT_EMAIL));
-  contactList.appendChild(markup.create.linkWithSpan(DEFAULT_PHONE));
+  contactList.appendChild(Utils.markup.create.linkWithSpan(DEFAULT_EMAIL));
+  contactList.appendChild(Utils.markup.create.linkWithSpan(DEFAULT_PHONE));
 
   return contactList;
 };
@@ -264,7 +262,7 @@ export default (props: ContactProps) => {
     const address = createAddress({ slotAddress });
 
     if (slotHeadline) {
-      markup.modify.animationLinkSpan({
+      Utils.markup.modify.animationLinkSpan({
         element: slotHeadline,
       });
       slotHeadline.classList.add(CONTACT_LIST_HEADLINE);

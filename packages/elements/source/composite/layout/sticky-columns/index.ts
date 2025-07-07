@@ -9,7 +9,6 @@ type TypeStickyProps = {
 };
 
 const { media } = token;
-const { convertJSSObjectToStyles } = Utility.styles;
 
 const ELEMENT_NAME = 'umd-sticky-columns';
 const ATTRIBUTE_STICKY_LAST = 'sticky-last';
@@ -47,7 +46,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: layout.grid.gap.two,
     },

@@ -37,7 +37,6 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
     isThemeDark?: boolean;
   };
 
-const { convertJSSObjectToStyles } = Utility.styles;
 const { element, token, typography } = Styles;
 
 const MEDIUM = 500;
@@ -142,7 +141,7 @@ const TextContainerStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_HEADLINE}`]: typography.sans.large,
     },
@@ -153,7 +152,7 @@ const TextContainerStyles = `
     color: ${token.color.gray.dark}
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_RICH_TEXT}`]: element.text.rich.advanced,
     },

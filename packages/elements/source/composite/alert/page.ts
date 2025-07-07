@@ -117,7 +117,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   closeButton.innerHTML = Utility.asset.icon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
-    Utility.styles.animations.shrinkThenRemove({ container });
+    Utility.theme.animations.shrinkThenRemove({ container });
   });
 
   return closeButton;

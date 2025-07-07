@@ -187,7 +187,7 @@ const createCenter = ({ images, video }: CenterProps) => {
           backgroundColor: THEME_VALUES.TINT_COLOR,
           zIndex: 9,
           opacity: 0,
-          ...Utils.styles.media.withViewTimelineAnimation({
+          ...Utils.theme.media.withViewTimelineAnimation({
             animation: 'tint-fade ease-in-out forwards',
             animationTimeline: 'view()',
             animationRangeStart: ANIMATION_RANGES.TINT_FADE.start,
@@ -224,7 +224,7 @@ const createCenter = ({ images, video }: CenterProps) => {
       element: {
         ...columnBase,
         gridTemplateRows: GRID_LAYOUT.ROWS.INITIAL,
-        ...Utils.styles.media.withViewTimelineAnimation({
+        ...Utils.theme.media.withViewTimelineAnimation({
           animation: 'grid-rows ease-in-out forwards',
           animationTimeline: 'view()',
           animationRangeStart: ANIMATION_RANGES.GRID_ROWS.start,
@@ -293,7 +293,7 @@ const createTextContainer = (props: TextProps) => {
           padding: `${Styles.token.spacing['6xl']} 0`,
         },
 
-        ...Utils.styles.media.withViewTimelineAnimation({
+        ...Utils.theme.media.withViewTimelineAnimation({
           paddingTop: THEME_VALUES.SCROLL_PADDING_TOP,
         }),
       },
@@ -396,7 +396,7 @@ const createGridLayout = (
       gridGap: `${Styles.token.spacing.lg}`,
     },
 
-    ...Utils.styles.media.withViewTimelineAnimation({
+    ...Utils.theme.media.withViewTimelineAnimation({
       position: 'sticky',
       top: 0,
       animation: 'grid-columns ease-in-out forwards',
@@ -437,7 +437,7 @@ export default (props: HeroGridProps) => {
   const containerStyles = {
     width: '100%',
     display: 'block',
-    ...Utils.styles.media.withViewTimelineAnimation({
+    ...Utils.theme.media.withViewTimelineAnimation({
       height: THEME_VALUES.SCROLL_HEIGHT,
     }),
     ['img, video']: {

@@ -1,10 +1,8 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as utilities from 'utilities';
+import * as Utils from 'utilities';
 import createCampaignRow, { CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
 import { BaseProps } from '../../_types';
-
-const { convertJSSObjectToStyles } = utilities.styles;
 
 const { LARGE, MEDIUM } = BREAKPOINTS;
 const { ELEMENT_WRAPPER } = ELEMENTS;
@@ -159,7 +157,7 @@ export const SocialContainerStyles = `
     fill: ${token.color.gray.dark} !important;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${SOCIAL_CONTAINER_HEADLINE}`]: typography.elements.interativeMedium,
     },
@@ -177,31 +175,31 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   if (!url) return link;
 
   if (url.match(/facebook.com/)) {
-    link.innerHTML = utilities.asset.social.FACEBOOK;
+    link.innerHTML = Utils.asset.social.FACEBOOK;
   }
 
   if (url.match(/x.com/)) {
-    link.innerHTML = utilities.asset.social.X;
+    link.innerHTML = Utils.asset.social.X;
   }
 
   if (url.match(/instagram.com/)) {
-    link.innerHTML = utilities.asset.social.INSTAGRAM;
+    link.innerHTML = Utils.asset.social.INSTAGRAM;
   }
 
   if (url.match(/youtube.com/)) {
-    link.innerHTML = utilities.asset.social.YOUTUBE;
+    link.innerHTML = Utils.asset.social.YOUTUBE;
   }
 
   if (url.match(/twitter.com/)) {
-    link.innerHTML = utilities.asset.social.TWITTER;
+    link.innerHTML = Utils.asset.social.TWITTER;
   }
 
   if (url.match(/linkedin.com/)) {
-    link.innerHTML = utilities.asset.social.LINKEDIN;
+    link.innerHTML = Utils.asset.social.LINKEDIN;
   }
 
   if (url.match(/threads.net/)) {
-    link.innerHTML = utilities.asset.social.THREADS;
+    link.innerHTML = Utils.asset.social.THREADS;
   }
 
   return link;

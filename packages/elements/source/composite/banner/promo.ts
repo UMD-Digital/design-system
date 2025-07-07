@@ -14,8 +14,6 @@ type TypeBannerPromoProps = {
   includeSeal?: boolean;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const SMALL = 650;
 
 const ATTRIBUTE_THEME = 'theme';
@@ -50,7 +48,7 @@ const OverwriteThemeDark = `
     color: ${token.color.white};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: element.text.rich.advancedDark,
     },
@@ -79,13 +77,13 @@ const ActionsStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT}`]: element.text.rich.advanced,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT} a`]: animation.line.fadeUnderRed,
     },
@@ -102,7 +100,7 @@ const TextStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: typography.sans.extraLarge,
     },

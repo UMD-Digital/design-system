@@ -61,7 +61,7 @@ const createSelector = (className: string, type: StyleType) => {
 const createStyles = (selector: string, styles: Record<string, any> | null) => {
   if (styles === null) return '';
 
-  return Utility.styles.convertJSSObjectToStyles({
+  return Utility.theme.convertJSSObjectToStyles({
     styleObj: { [selector]: styles },
   });
 };

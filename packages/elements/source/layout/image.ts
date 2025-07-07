@@ -1,8 +1,6 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const ATTRIBUTE_CAPTION = 'data-caption';
 
 const ELEMENT_IMAGE_CONTAINER = 'image-container';
@@ -14,7 +12,7 @@ const STYLES_IMAGE_CONTAINER = `
     display: inline-block;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_IMAGE_CONTAINER} > span`]: typography.sans.min,
     },

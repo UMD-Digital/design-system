@@ -14,8 +14,6 @@ type TypePathwayHighlightContainer = {
 type TypePathwayHighlightProps = TypePathwayTextContainer &
   TypePathwayHighlightContainer;
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const MEDIUM = 1000;
 const LARGE = 1200;
 const ATTRIBUTE_THEME = 'theme';
@@ -118,7 +116,7 @@ const HighlightContainer = `
     }
   }
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT}`]: typography.sans.larger,
     },
@@ -130,13 +128,13 @@ const HighlightContainer = `
     color: ${token.color.black};
   }
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION}`]: typography.sans.medium,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} *`]: typography.sans.medium,
     },
@@ -150,7 +148,7 @@ const HighlightContainer = `
 `
 
 const LockStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: layout.space.horizontal.max,
     },

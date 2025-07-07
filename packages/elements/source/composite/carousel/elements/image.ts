@@ -140,7 +140,7 @@ const SetCarouselSize = ({
       ? windowHeight
       : maxHeight
     : windowHeight;
-  const imageSize = Utility.styles.assets.getResponsiveImageSize({
+  const imageSize = Utility.theme.assets.getResponsiveImageSize({
     image: img,
     parentNode: slider,
     maxWindowHeight,

@@ -18,8 +18,6 @@ type TypeAlertButtonProps = {
   container: HTMLElement;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const MEDUM = 500;
 const DEFAULT_HIDE_TIME = 30;
 const ALERT_LOCAL_STORAGE_KEY = 'umd-alert-site-time';
@@ -61,7 +59,7 @@ const ButtonStyles = `
 `;
 
 const LockStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_ALERT_SITE_LOCK}`]: layout.space.horizontal.max,
     },
@@ -106,7 +104,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   closeButton.innerHTML = Utility.asset.icon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
-    Utility.styles.animations.shrinkThenRemove({ container });
+    Utility.theme.animations.shrinkThenRemove({ container });
     Utility.storage.local.set({ key: ALERT_LOCAL_STORAGE_KEY });
   });
 

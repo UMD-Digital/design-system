@@ -9,8 +9,6 @@ export type TypeAlertTextProps = {
   isThemeDark?: boolean;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 export const CONSTANTS = {
   className: {
     wrapper: 'wrapper',
@@ -27,7 +25,7 @@ const ctaStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${className.actions}`]: layout.grid.inline.tabletRows,
     },

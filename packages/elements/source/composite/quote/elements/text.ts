@@ -18,8 +18,6 @@ type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
   isSizeLarge?: boolean;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_SIZE = 'size';
@@ -41,13 +39,13 @@ const IS_SIZE_LARGE = `.${TEXT_CONTAINER}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
 
 // prettier-ignore
 const VarationSizeLarge = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.extraLarge,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.extraLarge,
     },
@@ -83,13 +81,13 @@ const QuoteStyles = `
     color: currentColor;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.larger,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.larger,
     },
@@ -114,13 +112,13 @@ const AttributionStyles = `
     color: currentColor;
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: typography.sans.medium,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: typography.sans.medium,
     },
@@ -142,13 +140,13 @@ const AttributionSubTextStyles = `
     color: currentColor;
   }
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: typography.sans.small,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: typography.sans.small,
     },
@@ -161,7 +159,7 @@ const ActionStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: layout.grid.inline.tabletRows,
     },

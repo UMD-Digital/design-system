@@ -8,8 +8,6 @@ export type TypeLogoRequirements = {
   text?: HTMLElement | null;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const ATTRIBUTE_THEME = 'theme';
 const ATTRIBUTE_BORDER = 'border';
 const THEME_DARK = 'dark';
@@ -61,13 +59,13 @@ const TextStyles = `
     color: ${token.color.gray.darker};
   }
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_LOGO_BLOCK_TEXT}`]: typography.sans.min,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_LOGO_BLOCK_TEXT} *`]: typography.sans.min,
     },

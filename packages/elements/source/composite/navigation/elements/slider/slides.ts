@@ -28,8 +28,6 @@ type TypeSliderSlideActions = TypeSlideProps & {
   slide: HTMLDivElement;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
 const ELEMENT_NAV_SLIDE_WRAPPER = 'nav-slide-wrapper';
 const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
@@ -84,7 +82,7 @@ const BackButtonStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: typography.sans.large,
     },

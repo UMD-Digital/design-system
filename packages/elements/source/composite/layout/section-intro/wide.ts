@@ -7,8 +7,6 @@ type TypeSectionIntroWideProps = {
   isThemeDark?: boolean;
 };
 
-const { convertJSSObjectToStyles } = Utility.styles;
-
 const TABLET = 500;
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -30,7 +28,7 @@ const OverwriteTheme = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: typography.sans.largest,
     },

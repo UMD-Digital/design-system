@@ -275,14 +275,45 @@ export const isLinkElement = (element: any): element is HTMLAnchorElement => {
   return element instanceof HTMLAnchorElement;
 };
 
+export const isButtonElement = (element: any): element is HTMLButtonElement => {
+  return element instanceof HTMLButtonElement;
+};
+
+export const isDivElement = (element: any): element is HTMLDivElement => {
+  return element instanceof HTMLDivElement;
+};
+
+// Content checks
+export const hasContent = (element: ContentElement): element is HTMLElement => {
+  return element !== null && element !== undefined;
+};
+
+// Combined checks
+export const hasImageContent = (props: AssetProps): props is Required<Pick<AssetProps, 'image'>> => {
+  return props.image !== null && props.image !== undefined;
+};
+
+export const hasVideoContent = (props: AssetProps): props is Required<Pick<AssetProps, 'video'>> => {
+  return props.video !== null && props.video !== undefined;
+};
+
 // ===== Utility Types =====
 
+// Make specific fields required
+export type WithRequired<T, K extends keyof T> = T & Required<Pick<T, K>>;
+
+// Omit fields and make result partial
+export type Without<T, K extends keyof T> = Partial<Omit<T, K>>;
+
+// Deep partial type
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
+// Require at least one property
 export type RequireAtLeastOne<T> = {
   [K in keyof T]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<keyof T, K>>>;
 }[keyof T];
 
+// Extract props from element creator function
 export type ExtractProps<T> = T extends ElementCreatorFn<infer P> ? P : never;

@@ -65,6 +65,81 @@ Elements typically return an object with:
 - `update`: Method to update properties
 - `destroy`: Cleanup method
 
+### File Structure Pattern
+All element files should follow this consistent structure:
+
+1. **Imports** - External dependencies, utilities, and types
+2. **Interfaces** - File-specific TypeScript interfaces
+3. **Constants** - Structured constants using `as const`
+   - `CLASS_NAMES` - All CSS class names
+   - `THEME_VALUES` - Theme-related values (sizes, colors, etc.)
+   - `ANIMATION_CONFIG` - Animation configurations
+   - Other domain-specific constants
+4. **Reusable pure functions** - Small, testable, Unix-type functions
+5. **Component structure** - UI element creation functions
+6. **Default export** - Main component function
+
+Example structure:
+```typescript
+// Imports
+import * as Styles from '@universityofmaryland/web-styles-library';
+import * as Utils from 'utilities';
+import { ElementModel } from 'model';
+import { type ElementVisual } from '_types';
+
+// Interfaces
+interface ComponentProps {
+  // ...
+}
+
+// Constants
+const CLASS_NAMES = {
+  CONTAINER: 'component-container',
+  // ...
+} as const;
+
+const THEME_VALUES = {
+  MAX_WIDTH: '1200px',
+  // ...
+} as const;
+
+// Pure functions
+const buildChildren = (props: ComponentProps): ElementVisual[] => {
+  // ...
+};
+
+// Component structure
+const createSubComponent = (props: ComponentProps) => {
+  return ElementModel.create({
+    element: document.createElement('div'),
+    className: CLASS_NAMES.SUB,
+    children: buildChildren(props),
+    elementStyles: { /* ... */ },
+  });
+};
+
+// Default export
+export default (props: ComponentProps) => {
+  return ElementModel.create({
+    element: document.createElement('div'),
+    className: CLASS_NAMES.CONTAINER,
+    children: [createSubComponent(props)],
+    elementStyles: { /* ... */ },
+    events: {
+      onClick: () => { /* ... */ },
+    },
+  });
+};
+```
+
+### Best Practices
+- Use the `children` property in ElementModel instead of manual DOM manipulation
+- Extract magic numbers and strings into constants
+- Create helper functions for building children arrays
+- Use `Utils` imports instead of direct utility imports
+- Return early from functions when appropriate
+- Avoid IIFEs in default exports
+
 ### TypeScript Configuration
 - Source files in `source/` directory
 - Output to `dist/` directory

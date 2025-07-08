@@ -2,36 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '_types';
-
-interface AnimationProps {
-  includesAnimation?: boolean;
-}
-
-interface SizingProps {
-  isHeightSmall?: boolean;
-}
-
-interface TextStyleProps extends SizingProps {
-  isThemeDark?: boolean;
-}
-
-interface AssetProps extends AnimationProps {
-  image?: HTMLImageElement | null;
-  video?: HTMLVideoElement | null;
-}
-
-interface HeadlineProps extends TextStyleProps {
-  headline?: HTMLElement | null;
-}
-
-interface TextProps extends AnimationProps, HeadlineProps {
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  actions?: HTMLElement | null;
-  isTextCenter?: boolean;
-}
-
-interface HeroStandardProps extends AssetProps, TextProps {}
+import { type HeroStandardProps } from './_types';
 
 const ANIMATION_CONFIG = {
   SLIDE_UP: {
@@ -152,7 +123,7 @@ const createImageAsset = (image: HTMLImageElement) => {
   });
 };
 
-const buildAssetChildren = ({ image, video }: AssetProps): ElementVisual[] => {
+const buildAssetChildren = ({ image, video }: Pick<HeroStandardProps, 'image' | 'video'>): ElementVisual[] => {
   const children: ElementVisual[] = [];
 
   if (video && video instanceof HTMLVideoElement) {
@@ -185,7 +156,7 @@ const buildAssetStyles = (includesAnimation?: boolean) => {
   };
 };
 
-const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
+const createAsset = ({ image, video, includesAnimation }: Pick<HeroStandardProps, 'image' | 'video' | 'includesAnimation'>) => {
   const children = buildAssetChildren({ image, video });
   const elementStyles = buildAssetStyles(includesAnimation);
 
@@ -196,7 +167,7 @@ const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
   });
 };
 
-const createHeadline = (props: HeadlineProps) => {
+const createHeadline = (props: Pick<HeroStandardProps, 'headline' | 'isHeightSmall' | 'isThemeDark'>) => {
   const { headline, isHeightSmall, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
@@ -237,7 +208,7 @@ const createHeadline = (props: HeadlineProps) => {
   return headlineElement;
 };
 
-const createText = (props: TextProps) => {
+const createText = (props: HeroStandardProps) => {
   const {
     isTextCenter = false,
     isHeightSmall = false,

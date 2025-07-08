@@ -1,30 +1,9 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
+import { type HeroLogoProps } from './_types';
 
-interface TextStyleProps {
-  isThemeDark?: boolean;
-  isThemeLight?: boolean;
-  isThemeMaryland?: boolean;
-}
-
-interface AssetProps {
-  image?: HTMLImageElement | null;
-}
-
-interface HeadlineProps extends TextStyleProps {
-  headline?: HTMLElement | null;
-}
-
-interface TextProps extends HeadlineProps {
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  actions?: HTMLElement | null;
-}
-
-interface HeroLogoProps extends AssetProps, TextProps {}
-
-const createAsset = ({ image }: AssetProps) => {
+const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
   const assetContainer = ElementModel.createDiv({
     className: 'umd-hero-logo__asset',
     elementStyles: {
@@ -63,7 +42,7 @@ const createAsset = ({ image }: AssetProps) => {
   return assetContainer;
 };
 
-const createHeadline = (props: HeadlineProps) => {
+const createHeadline = (props: Pick<HeroLogoProps, 'headline' | 'isThemeDark' | 'isThemeMaryland'>) => {
   const { headline, isThemeDark, isThemeMaryland } = props;
 
   if (!headline) return null;
@@ -84,7 +63,7 @@ const createHeadline = (props: HeadlineProps) => {
   return headlineElement;
 };
 
-const createText = (props: TextProps) => {
+const createText = (props: Omit<HeroLogoProps, 'image' | 'video' | 'includesAnimation' | 'logo'>) => {
   const { isThemeDark, isThemeMaryland } = props;
 
   const textContainer = ElementModel.createDiv({
@@ -135,50 +114,49 @@ const getBackgroundColor = (props: HeroLogoProps) => {
   return Styles.token.color.white;
 };
 
-export default (props: HeroLogoProps) =>
-  (() => {
-    const { isThemeDark } = props;
-    const composite = ElementModel.createDiv({
-      className: 'umd-hero-logo',
-    });
+export default (props: HeroLogoProps) => {
+  const { isThemeDark } = props;
+  const composite = ElementModel.createDiv({
+    className: 'umd-hero-logo',
+  });
 
-    const container = ElementModel.createDiv({
-      className: 'umd-hero-logo__container',
-      elementStyles: {
-        element: {
-          padding: `${Styles.token.spacing['5xl']} 0 ${Styles.token.spacing.lg}`,
-          backgroundColor: getBackgroundColor(props),
+  const container = ElementModel.createDiv({
+    className: 'umd-hero-logo__container',
+    elementStyles: {
+      element: {
+        padding: `${Styles.token.spacing['5xl']} 0 ${Styles.token.spacing.lg}`,
+        backgroundColor: getBackgroundColor(props),
 
-          // Dark them should have additonal padding at the bottom
-          [`@container (${Styles.token.media.queries.desktop.min})`]: {
-            ...(isThemeDark && {
-              paddingBottom: `${Styles.token.spacing['5xl']}`,
-            }),
-          },
+        // Dark them should have additonal padding at the bottom
+        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+          ...(isThemeDark && {
+            paddingBottom: `${Styles.token.spacing['5xl']}`,
+          }),
         },
       },
-    });
+    },
+  });
 
-    const lock = ElementModel.layout.spaceHorizontalSmall({
-      element: document.createElement('div'),
-    });
+  const lock = ElementModel.layout.spaceHorizontalSmall({
+    element: document.createElement('div'),
+  });
 
-    const asset = createAsset(props);
-    const text = createText(props);
+  const asset = createAsset(props);
+  const text = createText(props);
 
-    if (asset) {
-      lock.element.appendChild(asset.element);
-      lock.styles += asset.styles;
-    }
+  if (asset) {
+    lock.element.appendChild(asset.element);
+    lock.styles += asset.styles;
+  }
 
-    lock.element.appendChild(text.element);
-    lock.styles += text.styles;
+  lock.element.appendChild(text.element);
+  lock.styles += text.styles;
 
-    container.element.appendChild(lock.element);
-    container.styles += lock.styles;
+  container.element.appendChild(lock.element);
+  container.styles += lock.styles;
 
-    composite.element.appendChild(container.element);
-    composite.styles += container.styles;
+  composite.element.appendChild(container.element);
+  composite.styles += container.styles;
 
-    return composite;
-  })();
+  return composite;
+};

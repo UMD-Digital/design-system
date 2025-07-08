@@ -3,21 +3,13 @@ import * as Utils from 'utilities';
 import { animations, buttons } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '_types';
+import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
 
-interface AnimationProps {
+// Extend base type to add animation property and ensure video is required
+interface HeroVideoArrowProps extends Omit<BaseHeroVideoArrowProps, 'video'> {
+  video: HTMLVideoElement;
   isAnimationOnLoad?: boolean;
 }
-
-interface VideoProps extends AnimationProps {
-  video: HTMLVideoElement;
-}
-
-interface TextProps extends VideoProps {
-  headline?: HTMLElement | null;
-  text?: HTMLElement | null;
-}
-
-interface HeroBrandVideoProps extends TextProps {}
 
 const CLASS_NAMES = {
   COMPOSITE: 'umd-element-hero-brand-video-declaration',
@@ -115,7 +107,7 @@ const createText = (text?: HTMLElement | null) => {
   });
 };
 
-const buildTextChildren = (props: TextProps): ElementVisual[] => {
+const buildTextChildren = (props: Pick<HeroVideoArrowProps, 'headline' | 'text'>): ElementVisual[] => {
   const { headline, text } = props;
   const children: ElementVisual[] = [];
 
@@ -132,7 +124,7 @@ const buildTextChildren = (props: TextProps): ElementVisual[] => {
   return children;
 };
 
-const createTextContainer = (props: TextProps) => {
+const createTextContainer = (props: Pick<HeroVideoArrowProps, 'headline' | 'text'>) => {
   const children = buildTextChildren(props);
 
   if (children.length === 0) return null;
@@ -240,7 +232,7 @@ const createEventHandlers = (
   return { load: eventLoad };
 };
 
-export default (props: HeroBrandVideoProps) => {
+export default (props: HeroVideoArrowProps) => {
   const { video, isAnimationOnLoad } = props;
 
   const composite = ElementModel.create({

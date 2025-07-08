@@ -3,27 +3,7 @@ import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '_types';
-
-interface AnimationProps {
-  includesAnimation?: boolean;
-}
-
-interface AssetProps extends AnimationProps {
-  image?: HTMLImageElement | null;
-  video?: HTMLVideoElement | null;
-}
-
-interface HeadlineProps {
-  headline?: HTMLElement | null;
-}
-
-interface TextProps extends AnimationProps, HeadlineProps {
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  actions?: HTMLElement | null;
-}
-
-interface HeroOverlayProps extends AssetProps, TextProps {}
+import { type HeroOverlayProps } from './_types';
 
 const ANIMATION_CONFIG = {
   RESIZE: {
@@ -123,7 +103,7 @@ const createImageAsset = (image: HTMLImageElement) => {
   });
 };
 
-const buildAssetChildren = ({ image, video }: AssetProps): ElementVisual[] => {
+const buildAssetChildren = ({ image, video }: Pick<HeroOverlayProps, 'image' | 'video'>): ElementVisual[] => {
   if (video && video instanceof HTMLVideoElement) {
     return [createVideoAsset(video)];
   }
@@ -152,7 +132,7 @@ const buildAssetStyles = (includesAnimation?: boolean) => {
   };
 };
 
-const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
+const createAsset = ({ image, video, includesAnimation }: Pick<HeroOverlayProps, 'image' | 'video' | 'includesAnimation'>) => {
   const children = buildAssetChildren({ image, video });
 
   if (children.length === 0) {
@@ -166,7 +146,7 @@ const createAsset = ({ image, video, includesAnimation }: AssetProps) => {
   });
 };
 
-const createHeadline = (props: HeadlineProps) => {
+const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
@@ -196,7 +176,7 @@ const createHeadline = (props: HeadlineProps) => {
   return headlineElement;
 };
 
-const createTextContent = (props: TextProps) => {
+const createTextContent = (props: Pick<HeroOverlayProps, 'eyebrow' | 'headline' | 'text' | 'actions'>) => {
   const textLockupElement = textLockup.large({
     ribbon: props.eyebrow,
     headlineComposite: createHeadline(props),
@@ -220,7 +200,7 @@ const createTextContent = (props: TextProps) => {
   });
 };
 
-const createText = (props: TextProps) => {
+const createText = (props: Pick<HeroOverlayProps, 'eyebrow' | 'headline' | 'text' | 'actions' | 'includesAnimation'>) => {
   const { includesAnimation } = props;
   const textContent = createTextContent(props);
 

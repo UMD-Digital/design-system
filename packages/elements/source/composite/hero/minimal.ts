@@ -2,28 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '_types';
-
-interface TextStyleProps {
-  isThemeDark?: boolean;
-  isThemeLight?: boolean;
-  isThemeMaryland?: boolean;
-}
-
-interface AssetProps {
-  image?: HTMLImageElement | null;
-}
-
-interface HeadlineProps extends TextStyleProps {
-  headline?: HTMLElement | null;
-}
-
-interface TextProps extends HeadlineProps {
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  actions?: HTMLElement | null;
-}
-
-interface HeroMinimalProps extends AssetProps, TextProps {}
+import { type HeroMinimalProps } from './_types';
 
 const CLASS_NAMES = {
   CONTAINER: 'umd-hero-minimal',
@@ -72,7 +51,7 @@ const createImageAsset = (image: HTMLImageElement) => {
   });
 };
 
-const buildAssetChildren = ({ image }: AssetProps): ElementVisual[] => {
+const buildAssetChildren = ({ image }: Pick<HeroMinimalProps, 'image'>): ElementVisual[] => {
   if (!image) return [];
   return [createImageAsset(image)];
 };
@@ -92,7 +71,7 @@ const getBackgroundColor = (props: HeroMinimalProps) => {
   return 'transparent';
 };
 
-const createAsset = ({ image }: AssetProps) => {
+const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
   const children = buildAssetChildren({ image });
 
   if (children.length === 0) {
@@ -111,7 +90,7 @@ const createAsset = ({ image }: AssetProps) => {
   });
 };
 
-const createHeadline = (props: HeadlineProps) => {
+const createHeadline = (props: Pick<HeroMinimalProps, 'headline' | 'isThemeDark' | 'isThemeLight' | 'isThemeMaryland'>) => {
   const { headline, isThemeDark, isThemeMaryland } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
@@ -173,7 +152,7 @@ const buildTextContainerStyles = (hasAsset: boolean) => {
   };
 };
 
-const createText = (props: TextProps, hasAsset: boolean) => {
+const createText = (props: HeroMinimalProps, hasAsset: boolean) => {
   const { isThemeDark, isThemeMaryland } = props;
 
   const textLockupElement = textLockup.large({

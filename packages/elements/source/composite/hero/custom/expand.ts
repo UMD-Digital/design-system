@@ -1,21 +1,14 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '_types';
+import { type ElementVisual, type ContentElement } from '_types';
+import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
 
-interface ContentProps {
-  eyebrow?: HTMLElement | null;
-  headline?: HTMLElement | null;
-  actions?: HTMLElement | null;
+// Extend the base type to add additional properties
+interface HeroExpandProps extends BaseHeroExpandProps {
+  eyebrow?: ContentElement;
   additional?: HTMLSlotElement | null;
 }
-
-interface AssetProps {
-  image?: HTMLImageElement;
-  video?: HTMLVideoElement;
-}
-
-interface HeroExpandProps extends ContentProps, AssetProps {}
 
 const CLASS_NAMES = {
   CONTAINER: 'umd-hero-expand',
@@ -127,13 +120,13 @@ const createImageOverlay = () => {
 const buildAssetElement = ({
   image,
   video,
-}: AssetProps): HTMLElement | null => {
+}: Pick<HeroExpandProps, 'image' | 'video'>): HTMLElement | null => {
   if (video) return video;
   if (image) return image;
   return null;
 };
 
-const createImageSize = (props: AssetProps) => {
+const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
   const overlay = createImageOverlay();
   const asset = buildAssetElement(props);
 
@@ -170,7 +163,7 @@ const createImageSize = (props: AssetProps) => {
   return container;
 };
 
-const createAssetContainer = (props: AssetProps) =>
+const createAssetContainer = (props: Pick<HeroExpandProps, 'image' | 'video'>) =>
   ElementModel.create({
     element: document.createElement('div'),
     className: CLASS_NAMES.IMAGE_CONTAINER,
@@ -252,7 +245,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
 const buildTopTextChildren = ({
   eyebrow,
   headline,
-}: ContentProps): ElementVisual[] => {
+}: Pick<HeroExpandProps, 'eyebrow' | 'headline'>): ElementVisual[] => {
   const children: ElementVisual[] = [];
 
   const eyebrowElement = createEyebrow(eyebrow);
@@ -271,7 +264,7 @@ const buildTopTextChildren = ({
 const buildBottomTextChildren = ({
   actions,
   additional,
-}: ContentProps): ElementVisual[] => {
+}: Pick<HeroExpandProps, 'actions' | 'additional'>): ElementVisual[] => {
   const children: ElementVisual[] = [];
 
   if (actions) {
@@ -300,7 +293,7 @@ const buildBottomTextChildren = ({
   return children;
 };
 
-const createTextContainer = (props: ContentProps) => {
+const createTextContainer = (props: Pick<HeroExpandProps, 'eyebrow' | 'headline' | 'actions' | 'additional'>) => {
   const textChildren: ElementVisual[] = [];
 
   const topTextChildren = buildTopTextChildren(props);

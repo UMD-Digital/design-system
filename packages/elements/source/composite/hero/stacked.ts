@@ -3,36 +3,7 @@ import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '_types';
-
-interface AnimationProps {
-  includesAnimation?: boolean;
-}
-
-interface SizingProps {
-  isHeightSmall?: boolean;
-  isWidthLarge?: boolean;
-}
-
-interface TextStyleProps extends SizingProps {
-  isThemeDark?: boolean;
-}
-
-interface AssetProps extends AnimationProps, SizingProps {
-  image?: HTMLImageElement | null;
-  video?: HTMLVideoElement | null;
-}
-
-interface HeadlineProps extends TextStyleProps, AnimationProps {
-  headline?: HTMLElement | null;
-}
-
-interface TextProps extends AnimationProps, HeadlineProps {
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  actions?: HTMLElement | null;
-}
-
-interface HeroStackedProps extends AssetProps, TextProps {}
+import { type HeroStackedProps } from './_types';
 
 const ANIMATION_CONFIG = {
   FADE_OVER: {
@@ -197,7 +168,7 @@ const createAsset = ({
   includesAnimation,
   isWidthLarge = false,
   isHeightSmall = false,
-}: AssetProps) => {
+}: Pick<HeroStackedProps, 'image' | 'video' | 'includesAnimation' | 'isWidthLarge' | 'isHeightSmall'>) => {
   let mediaElement: ElementVisual | null = null;
 
   if (video && video instanceof HTMLVideoElement) {
@@ -250,7 +221,7 @@ const buildHeadlineAnimationStyles = (
   };
 };
 
-const createHeadline = (props: HeadlineProps) => {
+const createHeadline = (props: Pick<HeroStackedProps, 'headline' | 'isHeightSmall' | 'includesAnimation' | 'isThemeDark'>) => {
   const { headline, isHeightSmall, includesAnimation } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
@@ -317,7 +288,7 @@ const buildTextAnimationStyles = (
   };
 };
 
-const createText = (props: TextProps) => {
+const createText = (props: Omit<HeroStackedProps, 'image' | 'video' | 'isWidthLarge'>) => {
   const textLockupElement = textLockup.large({
     ribbon: props.eyebrow,
     headlineComposite: createHeadline(props),

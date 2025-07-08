@@ -2,15 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-
-interface HeadlineProps {
-  headline?: HTMLElement | null;
-}
-
-interface TextProps extends HeadlineProps {
-  text?: HTMLElement | null;
-  actions?: HTMLElement | null;
-}
+import { type ContentElement } from '_types';
 
 interface CornerProps {
   images: Array<HTMLImageElement>;
@@ -22,7 +14,10 @@ interface CenterProps {
   video?: HTMLVideoElement | null;
 }
 
-interface HeroGridProps extends TextProps {
+interface HeroGridProps {
+  headline?: ContentElement;
+  text?: ContentElement;
+  actions?: ContentElement;
   corners: Array<CornerProps>;
   center: CenterProps | null;
 }
@@ -235,7 +230,7 @@ const createCenter = ({ images, video }: CenterProps) => {
   });
 };
 
-const createHeadline = (props: HeadlineProps) => {
+const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
@@ -265,7 +260,7 @@ const createHeadline = (props: HeadlineProps) => {
   return headlineElement;
 };
 
-const createTextContainer = (props: TextProps) => {
+const createTextContainer = (props: Pick<HeroGridProps, 'headline' | 'text' | 'actions'>) => {
   const { actions, headline, text } = props;
 
   if (!text && !actions && !headline) {

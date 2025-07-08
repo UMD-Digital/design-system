@@ -1,11 +1,14 @@
+import {
+  type ContentElement,
+  type ImageElement,
+  type LinkElement,
+  type ThemeProps,
+} from '_types';
+
 /**
- * Card element content types
- * These define the possible HTML elements that can be placed in different card regions
+ * Card-specific type for image or link elements
  */
-export type CardContentElement = HTMLElement | null;
-export type CardImageElement = HTMLImageElement | null;
-export type CardLinkElement = HTMLAnchorElement | null;
-export type CardImageOrLinkElement = CardImageElement | CardLinkElement;
+export type CardImageOrLinkElement = ImageElement | LinkElement;
 
 /**
  * Style variants available for cards
@@ -17,36 +20,10 @@ export enum CardVariant {
 }
 
 /**
- * Base properties shared by all card types
- */
-export interface CardBaseProps {
-  /** Main title/heading of the card */
-  headline: CardContentElement;
-
-  /** Optional smaller text above the headline */
-  eyebrow?: CardContentElement;
-
-  /** Main body text content */
-  text?: CardContentElement;
-
-  /** Date information */
-  date?: CardContentElement;
-
-  /** Action buttons or links */
-  actions?: CardContentElement;
-
-  /** Action buttons or links */
-  isThemeDark?: boolean;
-}
-
-/**
  * Common properties for cards that can display images
  */
 export interface CardMediaProps {
-  /** Card image content */
   image?: CardImageOrLinkElement;
-
-  /** Display with image aligned */
   isAligned?: boolean;
 }
 
@@ -54,13 +31,10 @@ export interface CardMediaProps {
  * Properties specific to event-style cards
  */
 export interface CardEventProps {
-  /** Metadata display for events (time, location, etc) */
   eventMeta?: {
     element: HTMLElement;
     styles: string;
   };
-
-  /** Date display for events in sign format */
   dateSign?: {
     element: HTMLElement;
     styles: string;
@@ -71,19 +45,17 @@ export interface CardEventProps {
  * Properties specific to block-style cards
  */
 export interface CardBlockProps
-  extends CardBaseProps,
-    CardMediaProps,
-    CardEventProps {
-  /** Optional ID for news items */
+  extends CardMediaProps,
+    CardEventProps,
+    Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement;
+  text?: ContentElement;
+  actions?: ContentElement;
+  eyebrow?: ContentElement;
+  date?: ContentElement;
   newsId?: string;
-
-  /** Display with border */
   hasBorder?: boolean;
-
-  /** Display eyebrow as ribbon */
   hasEyebrowRibbon?: boolean;
-
-  /** Display transparent background */
   isTransparent?: boolean;
 }
 
@@ -91,25 +63,28 @@ export interface CardBlockProps
  * Properties specific to list-style cards
  */
 export interface CardListProps
-  extends CardBaseProps,
-    CardMediaProps,
-    CardEventProps {}
+  extends CardMediaProps,
+    CardEventProps,
+    Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement;
+  text?: ContentElement;
+  actions?: ContentElement;
+  eyebrow?: ContentElement;
+  date?: ContentElement;
+}
 
 /**
  * Properties specific to overlay cards with color background
  */
-export interface CardOverlayProps extends CardBaseProps, CardEventProps {
-  /** Icon to display with CTA */
-  ctaIcon?: CardContentElement;
-
-  /** Background image */
+export interface CardOverlayProps
+  extends CardEventProps,
+    Partial<Pick<ThemeProps, 'isThemeDark' | 'isThemeLight'>> {
+  headline: ContentElement;
+  text?: ContentElement;
+  actions?: ContentElement;
+  eyebrow?: ContentElement;
+  date?: ContentElement;
+  ctaIcon?: ContentElement;
   backgroundImage?: CardImageOrLinkElement;
-
-  /** Display with quote icon */
   isQuote?: boolean;
 }
-
-/**
- * Union type of all possible card configurations
- */
-export type CardProps = CardBlockProps | CardListProps | CardOverlayProps;

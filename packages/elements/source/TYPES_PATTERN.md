@@ -71,22 +71,27 @@ export interface ComponentAnimationProps {
   includesAnimation?: boolean;
 }
 
-// Base props for all variants
-export interface ComponentBaseProps extends
-  CommonContentProps,
-  ThemeProps {
-  // Common props for all variants
+// Base props for truly shared properties only
+export interface ComponentBaseProps {
+  // Only include props that ALL variants share
+  // Don't include theme or content props here
 }
 
-// Variant-specific props
+// Variant-specific props - be explicit
 export interface ComponentStandardProps extends
   ComponentBaseProps,
-  AssetProps {
+  AssetProps,
+  Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement;  // Required
+  text?: ContentElement;     // Optional  
+  actions?: ContentElement;  // Optional
   // Standard variant specific props
 }
 
 export interface ComponentMinimalProps extends
   ComponentBaseProps {
+  headline: ContentElement;  // Required
+  text?: ContentElement;     // Optional
   // Minimal variant specific props
 }
 ```
@@ -183,21 +188,37 @@ export type {
 
 ### 2. Type Composition
 
-Prefer composition over duplication:
+Be explicit about which properties each component variant needs:
 
 ```typescript
-// Good
-interface CardProps extends CommonContentProps, ThemeProps {
-  category?: ContentElement;
+// Good - Explicit about what properties are needed
+interface CardBlockProps extends 
+  CardMediaProps,
+  CardEventProps,
+  Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement;  // Required
+  text?: ContentElement;     // Optional
+  actions?: ContentElement;  // Optional
+  eyebrow?: ContentElement;  // Optional
+  date?: ContentElement;     // Optional
+  hasBorder?: boolean;
+  isTransparent?: boolean;
 }
 
-// Avoid
-interface CardProps {
-  headline?: HTMLElement | null;  // Duplicates CommonContentProps
-  text?: HTMLElement | null;      // Duplicates CommonContentProps
-  category?: HTMLElement | null;
+// Avoid - Too generic, hides what's actually needed
+interface CardBlockProps extends 
+  Partial<CommonContentProps>,
+  ThemeProps {
+  hasBorder?: boolean;
+  isTransparent?: boolean;
 }
 ```
+
+When extending shared interfaces:
+- Only extend full interfaces when you need ALL properties
+- Use `Pick<Interface, 'prop1' | 'prop2'>` to select specific properties
+- Be explicit about required vs optional properties
+- Don't use complex type gymnastics that obscure what's actually needed
 
 ### 3. Type Guards Usage
 
@@ -238,7 +259,12 @@ const createHeadline = (props: ComponentProps) => {
 
 ```typescript
 // card/_types.ts
-import { type CommonContentProps, type ThemeProps } from '_types';
+import { 
+  type ContentElement,
+  type ImageElement,
+  type LinkElement,
+  type ThemeProps 
+} from '_types';
 
 export enum CardVariant {
   Block = 'block',
@@ -246,13 +272,55 @@ export enum CardVariant {
   Overlay = 'overlay',
 }
 
-export interface CardBaseProps extends CommonContentProps, ThemeProps {
-  link?: LinkElement;
-  category?: ContentElement;
+// Media and event props shared by multiple variants
+export interface CardMediaProps {
+  image?: ImageElement | LinkElement;
+  isAligned?: boolean;
 }
 
-export interface CardBlockProps extends CardBaseProps {
-  isFeature?: boolean;
+export interface CardEventProps {
+  eventMeta?: { element: HTMLElement; styles: string; };
+  dateSign?: { element: HTMLElement; styles: string; };
+}
+
+// Each variant explicitly declares what it needs
+export interface CardBlockProps extends 
+  CardMediaProps,
+  CardEventProps,
+  Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement;   // Required
+  text?: ContentElement;      // Optional
+  actions?: ContentElement;   // Optional
+  eyebrow?: ContentElement;   // Optional
+  date?: ContentElement;      // Optional
+  newsId?: string;
+  hasBorder?: boolean;
+  hasEyebrowRibbon?: boolean;
+  isTransparent?: boolean;
+}
+
+export interface CardListProps extends
+  CardMediaProps,
+  CardEventProps,
+  Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement;   // Required
+  text?: ContentElement;      // Optional
+  actions?: ContentElement;   // Optional
+  eyebrow?: ContentElement;   // Optional
+  date?: ContentElement;      // Optional
+}
+
+export interface CardOverlayProps extends
+  CardEventProps,
+  Pick<ThemeProps, 'isThemeDark' | 'isThemeLight'> {
+  headline: ContentElement;   // Required
+  text?: ContentElement;      // Optional
+  actions?: ContentElement;   // Optional
+  eyebrow?: ContentElement;   // Optional
+  date?: ContentElement;      // Optional
+  ctaIcon?: ContentElement;
+  backgroundImage?: ImageElement | LinkElement;
+  isQuote?: boolean;
 }
 ```
 

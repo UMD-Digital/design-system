@@ -79,6 +79,32 @@ All element files should follow this consistent structure:
 5. **Component structure** - UI element creation functions
 6. **Default export** - Main component function
 
+### Type System Pattern
+The library follows a specific pattern for organizing types. See `source/TYPES_PATTERN.md` for detailed guidelines. Key principles:
+
+- **Be explicit about component needs** - Don't extend interfaces wholesale; use `Pick` to select specific properties
+- **Separate concerns** - Base interfaces should only contain truly shared properties
+- **Required vs optional** - Be clear about which properties are required for each variant
+- **Avoid type gymnastics** - Keep types simple and readable
+
+Example:
+```typescript
+// Good - Explicit about needs
+interface CardBlockProps extends 
+  Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement;  // Required
+  text?: ContentElement;     // Optional
+  hasBorder?: boolean;
+}
+
+// Avoid - Too generic
+interface CardBlockProps extends 
+  Partial<CommonContentProps>,
+  ThemeProps {
+  hasBorder?: boolean;
+}
+```
+
 Example structure:
 ```typescript
 // Imports
@@ -145,6 +171,42 @@ export default (props: ComponentProps) => {
 - Output to `dist/` directory
 - Uses module resolution for clean imports
 - Extends base tsconfig from repository root
+
+### Component Type Files (_types.ts)
+When a component has multiple variants or complex type needs, create a `_types.ts` file in the component directory:
+
+```typescript
+// composite/card/_types.ts
+import { 
+  type ContentElement,
+  type ThemeProps 
+} from '_types';
+
+// Shared interfaces for multiple variants
+export interface CardMediaProps {
+  image?: ImageElement | LinkElement;
+  isAligned?: boolean;
+}
+
+// Variant-specific interfaces
+export interface CardBlockProps extends 
+  CardMediaProps,
+  Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement;   // Required
+  text?: ContentElement;      // Optional
+  actions?: ContentElement;   // Optional
+  // Variant-specific props
+  hasBorder?: boolean;
+  isTransparent?: boolean;
+}
+```
+
+Key guidelines:
+- Only create base interfaces if properties are truly shared by ALL variants
+- Be explicit about which properties each variant needs
+- Use `Pick<Interface, 'prop1' | 'prop2'>` to select specific properties from shared interfaces
+- Clearly mark required vs optional properties
+- Avoid using `Partial<Interface>` which obscures what's actually needed
 
 ### Webpack Configuration
 - Entry point: `source/index.ts`

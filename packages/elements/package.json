@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "clean": "rm -rf build",
+    "docs": "npx typedoc --options ./typedoc.json",
     "prebuild": "node ../../source/update-badges.js",
     "release": "npm run test && npm run build && npm publish --access public",
     "build": "webpack --env NODE_ENV=production",

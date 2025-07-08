@@ -1,0 +1,20 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "UMD Web Elements Library",
+  "entryPoints": [
+    "./source/_types.ts",
+    "./source/atomic",
+    "./source/composite",
+  ],
+  "entryPointStrategy": "resolve",
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "skipErrorChecking": true,
+  "hideGenerator": true,
+  "cleanOutputDir": false,
+  "searchInDocuments": true,
+  "out": "../../docs/elements",
+  "readme": "README.md",
+  "githubPages": true
+}

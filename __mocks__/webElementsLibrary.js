@@ -130,9 +130,13 @@ module.exports = {
         styles: '.mock-style-list-card'
       }),
       overlay: {
+        color: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-style-overlay-card-color'
+        }),
         image: jest.fn().mockReturnValue({
           element: document.createElement('div'),
-          styles: '.mock-style-overlay-card'
+          styles: '.mock-style-overlay-card-image'
         })
       },
       video: {
@@ -202,7 +206,21 @@ module.exports = {
       standard: jest.fn().mockReturnValue({
         element: document.createElement('div'),
         styles: '.mock-style-hero-standard'
-      })
+      }),
+      custom: {
+        expand: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-style-hero-expand'
+        }),
+        grid: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-style-hero-grid'
+        }),
+        videoArrow: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-style-hero-video-arrow'
+        })
+      }
     },
     layout: {
       box: jest.fn().mockReturnValue({

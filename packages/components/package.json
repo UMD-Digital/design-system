@@ -14,7 +14,7 @@
     "clean": "rm -rf build",
     "docs": "npx typedoc --options ./typedoc.json",
     "prebuild": "node ../../source/update-badges.js",
-    "release": "npm run build && npm publish --access public",
+    "release": "npm run test && npm run build && npm publish --access public",
     "build": "webpack --env NODE_ENV=production",
     "webpack": "webpack -w --env NODE_ENV=development",
     "start": "npm run webpack",

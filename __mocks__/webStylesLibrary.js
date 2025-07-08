@@ -1,4 +1,41 @@
 module.exports = {
+  typography: {
+    sans: {
+      fonts: {
+        extraLarge: { className: 'mock-font-extra-large' },
+        larger: { className: 'mock-font-larger' },
+        large: { className: 'mock-font-large' },
+        base: { className: 'mock-font-base' },
+        small: { className: 'mock-font-small' },
+        min: { className: 'mock-font-min' }
+      },
+      scalingFonts: {
+        larger: { className: 'mock-scaling-font-larger' },
+        base: { className: 'mock-scaling-font-base' },
+        min: { className: 'mock-scaling-font-min' }
+      }
+    },
+    serif: {
+      fonts: {
+        extraLarge: { className: 'mock-serif-extra-large' },
+        larger: { className: 'mock-serif-larger' },
+        large: { className: 'mock-serif-large' },
+        base: { className: 'mock-serif-base' }
+      }
+    },
+    campaign: {
+      fonts: {
+        maximum: { className: 'mock-campaign-maximum' },
+        extraLarge: { className: 'mock-campaign-extra-large' },
+        larger: { className: 'mock-campaign-larger' },
+        large: { className: 'mock-campaign-large' },
+        medium: { className: 'mock-campaign-medium' },
+        base: { className: 'mock-campaign-base' },
+        small: { className: 'mock-campaign-small' },
+        min: { className: 'mock-campaign-min' }
+      }
+    }
+  },
   token: {
     spacing: {
       lg: '2rem',
@@ -8,6 +45,12 @@ module.exports = {
       queries: {
         large: {
           min: 'min-width: 1024px'
+        },
+        highDef: {
+          min: 'min-width: 1440px'
+        },
+        tablet: {
+          min: 'min-width: 768px'
         }
       }
     },

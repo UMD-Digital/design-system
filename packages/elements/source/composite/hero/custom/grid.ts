@@ -260,7 +260,9 @@ const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
   return headlineElement;
 };
 
-const createTextContainer = (props: Pick<HeroGridProps, 'headline' | 'text' | 'actions'>) => {
+const createTextContainer = (
+  props: Pick<HeroGridProps, 'headline' | 'text' | 'actions'>,
+) => {
   const { actions, headline, text } = props;
 
   if (!text && !actions && !headline) {
@@ -359,7 +361,7 @@ const validateGridProps = (
   }
 
   if (errors.length > 0) {
-    errors.forEach((error) => console.error(error));
+    errors.forEach((error) => console.log('Hero Grid Error:', error));
     return null;
   }
 

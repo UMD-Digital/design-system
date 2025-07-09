@@ -20,7 +20,9 @@
     "theme": "npx lerna run start --scope=@universityofmaryland/theme",
     "start": "yarn run variables & yarn run theme & yarn run elements & yarn run components",
     "update-badges": "node source/update-badges.js",
-    "preversion": "yarn run update-badges"
+    "preversion": "yarn run update-badges",
+    "generate:mocks": "node source/generate-style-mocks.js",
+    "pretest": "npm run generate:mocks"
   },
   "workspaces": [
     "packages/*"

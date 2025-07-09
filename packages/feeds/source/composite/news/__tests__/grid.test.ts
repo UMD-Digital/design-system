@@ -72,11 +72,11 @@ jest.spyOn(feedDisplay, 'resultStart').mockImplementation((props) => {
 
   container.appendChild(layoutElement.element);
 
-  const styleUtils = Styles.utilities as any;
-
-  styleUtils.events.dispatchEvent(container, 'feed:loaded', {
-    items: mockNewsEntries,
+  // Dispatch a custom event manually since Styles doesn't have an events utility
+  const event = new CustomEvent('feed:loaded', {
+    detail: { items: mockNewsEntries }
   });
+  container.dispatchEvent(event);
 });
 
 jest
@@ -195,11 +195,11 @@ describe('News Grid Component', () => {
 
     await new Promise(process.nextTick);
 
-    const styleUtils = Styles.utilities as any;
-
-    styleUtils.events.dispatchEvent(component.element, 'feed:loaded', {
-      items: mockNewsEntries,
+    // Dispatch a custom event manually since Styles doesn't have an events utility
+    const event = new CustomEvent('feed:loaded', {
+      detail: { items: mockNewsEntries }
     });
+    component.element.dispatchEvent(event);
 
     expect(listener).toHaveBeenCalledTimes(1);
   });

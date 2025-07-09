@@ -35,6 +35,10 @@ module.exports = {
         chevronScroll: jest.fn().mockReturnValue({
           element: document.createElement('div'),
           styles: '.mock-style-chevron-scroll'
+        }),
+        chevronFlow: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-style-chevron-flow'
         })
       }
     },
@@ -393,6 +397,12 @@ module.exports = {
           element: document.createElement('p'),
           styles: '.mock-style-headline'
         })
+      },
+      richText: {
+        simpleLargest: jest.fn().mockImplementation((props) => ({
+          element: props?.element || document.createElement('div'),
+          styles: '.mock-richtext-simple-largest'
+        }))
       }
     }
   },

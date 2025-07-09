@@ -1,4 +1,3 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
 import type { CardOverlayProps } from '../../card/_types';
 import {
   createElement,
@@ -8,12 +7,104 @@ import {
 } from '../test-helpers/element';
 import '../test-helpers/setup';
 
-// Mock the elements library
-jest.mock('@universityofmaryland/web-elements-library');
-
 describe('Card Overlay Components', () => {
+  // Create mock implementations
+  const mockColorOverlay = jest.fn();
+  const mockImageOverlay = jest.fn();
+
+  // Mock the Composite object
+  const Composite = {
+    card: {
+      overlay: {
+        color: mockColorOverlay,
+        image: mockImageOverlay,
+      },
+    },
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
+    
+    // Setup default mock implementations
+    mockColorOverlay.mockImplementation((props: CardOverlayProps) => {
+      const mockElement = document.createElement('div');
+      mockElement.className = 'card-overlay-color';
+      
+      // Add content based on props
+      if (props.headline) {
+        mockElement.appendChild(props.headline.cloneNode(true));
+      }
+      if (props.text) {
+        mockElement.appendChild(props.text.cloneNode(true));
+      }
+      if (props.eyebrow) {
+        mockElement.insertBefore(props.eyebrow.cloneNode(true), mockElement.firstChild);
+      }
+      if (props.actions) {
+        mockElement.appendChild(props.actions.cloneNode(true));
+      }
+      if (props.ctaIcon) {
+        mockElement.appendChild(props.ctaIcon.cloneNode(true));
+      }
+      
+      return {
+        element: mockElement,
+        className: 'card-overlay-color',
+        styles: '.mock-style-card-overlay-color',
+      };
+    });
+    
+    mockImageOverlay.mockImplementation((props: CardOverlayProps) => {
+      const mockElement = document.createElement('div');
+      mockElement.className = 'card-overlay-image';
+      
+      // Add content based on props
+      if (props.headline) {
+        mockElement.appendChild(props.headline.cloneNode(true));
+      }
+      if (props.text) {
+        mockElement.appendChild(props.text.cloneNode(true));
+      }
+      if (props.eyebrow) {
+        mockElement.insertBefore(props.eyebrow.cloneNode(true), mockElement.firstChild);
+      }
+      if (props.backgroundImage) {
+        const imgContainer = document.createElement('div');
+        if (props.backgroundImage.tagName === 'IMG') {
+          imgContainer.appendChild(props.backgroundImage.cloneNode(true));
+        } else if (props.backgroundImage.tagName === 'A') {
+          imgContainer.appendChild(props.backgroundImage.cloneNode(true));
+        }
+        mockElement.appendChild(imgContainer);
+      }
+      if (props.eventMeta) {
+        const eventDiv = document.createElement('div');
+        eventDiv.innerHTML = props.eventMeta.element.innerHTML || 'Event: Conference 2024';
+        mockElement.appendChild(eventDiv);
+      }
+      if (props.dateSign) {
+        const dateDiv = document.createElement('div');
+        dateDiv.innerHTML = props.dateSign.element.innerHTML || 'APR 15';
+        mockElement.appendChild(dateDiv);
+      }
+      
+      let styles = '.mock-style-card-overlay-image';
+      if (props.eventMeta?.styles) {
+        styles += '\n' + props.eventMeta.styles;
+      }
+      if (props.dateSign?.styles) {
+        styles += '\n' + props.dateSign.styles;
+      }
+      
+      return {
+        element: mockElement,
+        className: 'card-overlay-image',
+        styles,
+        events: {
+          load: jest.fn(),
+        },
+      };
+    });
   });
 
   describe('Color Overlay Card', () => {
@@ -23,17 +114,12 @@ describe('Card Overlay Components', () => {
           headline: createElement('h3', 'Overlay Card Title'),
         };
 
-        const mockResult = {
-          element: document.createElement('div'),
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
-
         const result = Composite.card.overlay.color(props);
 
         expect(result).toBeDefined();
         expect(result.element).toBeInstanceOf(HTMLElement);
         expect(typeof result.styles).toBe('string');
+        expect(mockColorOverlay).toHaveBeenCalledWith(props);
       });
     });
 
@@ -43,14 +129,6 @@ describe('Card Overlay Components', () => {
         const props: CardOverlayProps = {
           headline,
         };
-
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>Featured Story</h3>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.color(props);
 
@@ -62,14 +140,6 @@ describe('Card Overlay Components', () => {
           headline: createElement('h3', 'Title'),
           text: createElement('p', 'Overlay description text'),
         };
-
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>Title</h3><p>Overlay description text</p>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.color(props);
 
@@ -83,14 +153,6 @@ describe('Card Overlay Components', () => {
           headline: createElement('h3', 'Title'),
           eyebrow: createElement('span', 'Breaking'),
         };
-
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<span>Breaking</span><h3>Title</h3>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.color(props);
 
@@ -107,14 +169,6 @@ describe('Card Overlay Components', () => {
           actions,
         };
 
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>Title</h3><div><a>Explore More</a></div>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
-
         const result = Composite.card.overlay.color(props);
 
         expect(containsText(result.element, 'Explore More')).toBe(true);
@@ -126,14 +180,6 @@ describe('Card Overlay Components', () => {
           headline: createElement('h3', 'Title'),
           ctaIcon,
         };
-
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>Title</h3><span>→</span>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.color(props);
 
@@ -148,18 +194,13 @@ describe('Card Overlay Components', () => {
           isQuote: true,
         };
 
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>"This is a quote"</h3>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
-
         const result = Composite.card.overlay.color(props);
 
         expect(result).toBeDefined();
         expect(containsText(result.element, 'This is a quote')).toBe(true);
+        expect(mockColorOverlay).toHaveBeenCalledWith(
+          expect.objectContaining({ isQuote: true })
+        );
       });
     });
 
@@ -170,15 +211,12 @@ describe('Card Overlay Components', () => {
           isThemeDark: true,
         };
 
-        const mockResult = {
-          element: document.createElement('div'),
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
-
         const result = Composite.card.overlay.color(props);
 
         expect(result).toBeDefined();
+        expect(mockColorOverlay).toHaveBeenCalledWith(
+          expect.objectContaining({ isThemeDark: true })
+        );
       });
 
       it('should handle theme light property', () => {
@@ -187,15 +225,12 @@ describe('Card Overlay Components', () => {
           isThemeLight: true,
         };
 
-        const mockResult = {
-          element: document.createElement('div'),
-          styles: '.mock-style-card-overlay-color',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
-
         const result = Composite.card.overlay.color(props);
 
         expect(result).toBeDefined();
+        expect(mockColorOverlay).toHaveBeenCalledWith(
+          expect.objectContaining({ isThemeLight: true })
+        );
       });
     });
   });
@@ -208,17 +243,12 @@ describe('Card Overlay Components', () => {
           backgroundImage: createImageElement('bg.jpg', 'Background'),
         };
 
-        const mockResult = {
-          element: document.createElement('div'),
-          styles: '.mock-style-card-overlay-image',
-        };
-        (Composite.card.overlay.image as jest.Mock).mockReturnValue(mockResult);
-
         const result = Composite.card.overlay.image(props);
 
         expect(result).toBeDefined();
         expect(result.element).toBeInstanceOf(HTMLElement);
         expect(typeof result.styles).toBe('string');
+        expect(mockImageOverlay).toHaveBeenCalledWith(props);
       });
     });
 
@@ -232,15 +262,6 @@ describe('Card Overlay Components', () => {
           headline: createElement('h3', 'Title'),
           backgroundImage,
         };
-
-        const mockElement = document.createElement('div');
-        const img = document.createElement('img');
-        mockElement.appendChild(img);
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-image',
-        };
-        (Composite.card.overlay.image as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.image(props);
 
@@ -256,17 +277,6 @@ describe('Card Overlay Components', () => {
           headline: createElement('h3', 'Title'),
           backgroundImage: imageLink,
         };
-
-        const mockElement = document.createElement('div');
-        const mockLink = document.createElement('a');
-        const mockImg = document.createElement('img');
-        mockLink.appendChild(mockImg);
-        mockElement.appendChild(mockLink);
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-image',
-        };
-        (Composite.card.overlay.image as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.image(props);
 
@@ -288,14 +298,6 @@ describe('Card Overlay Components', () => {
           eventMeta,
         };
 
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>Conference</h3><div>Event: Conference 2024</div>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-image\n.event-overlay { position: absolute; }',
-        };
-        (Composite.card.overlay.image as jest.Mock).mockReturnValue(mockResult);
-
         const result = Composite.card.overlay.image(props);
 
         expect(containsText(result.element, 'Event: Conference 2024')).toBe(
@@ -316,14 +318,6 @@ describe('Card Overlay Components', () => {
           dateSign,
         };
 
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>Spring Event</h3><div>APR 15</div>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-image\n.date-overlay { color: white; }',
-        };
-        (Composite.card.overlay.image as jest.Mock).mockReturnValue(mockResult);
-
         const result = Composite.card.overlay.image(props);
 
         expect(containsText(result.element, 'APR 15')).toBe(true);
@@ -337,12 +331,6 @@ describe('Card Overlay Components', () => {
           headline: createElement('h3', 'No Background'),
           backgroundImage: null,
         };
-
-        const mockResult = {
-          element: document.createElement('div'),
-          styles: '.mock-style-card-overlay-image',
-        };
-        (Composite.card.overlay.image as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.image(props);
 
@@ -369,14 +357,6 @@ describe('Card Overlay Components', () => {
             styles: '',
           },
         };
-
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>Complete Overlay</h3><p>Full featured</p>';
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-complete',
-        };
-        (Composite.card.overlay.color as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.color(props);
 
@@ -406,16 +386,6 @@ describe('Card Overlay Components', () => {
             styles: '',
           },
         };
-
-        const mockElement = document.createElement('div');
-        mockElement.innerHTML = '<h3>Full Image Overlay</h3>';
-        const img = document.createElement('img');
-        mockElement.appendChild(img);
-        const mockResult = {
-          element: mockElement,
-          styles: '.mock-style-card-overlay-image',
-        };
-        (Composite.card.overlay.image as jest.Mock).mockReturnValue(mockResult);
 
         const result = Composite.card.overlay.image(props);
 

@@ -82,11 +82,12 @@ describe('Events Grid Component', () => {
       const container = props.getContainer();
 
       container.appendChild(layoutElement.element);
-      const styleUtils = Styles.utilities as any;
-
-      styleUtils.events.dispatchEvent(container, 'feed:loaded', {
-        items: mockEventEntries,
+      
+      // Dispatch a custom event manually since Styles doesn't have an events utility
+      const event = new CustomEvent('feed:loaded', {
+        detail: { items: mockEventEntries }
       });
+      container.dispatchEvent(event);
     });
 
     jest

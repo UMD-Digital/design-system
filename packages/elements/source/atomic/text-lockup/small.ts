@@ -25,10 +25,20 @@ export type TypeTextLockupSmall = TypeTheme & {
 };
 
 const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';
-const metaContainer = Styles.element.event.meta.container;
-const metaClass: string = Array.isArray(metaContainer.className)
-  ? metaContainer.className[0]
-  : metaContainer.className;
+const metaContainer = Styles?.element?.event?.meta?.container;
+const metaClass: string = (() => {
+  if (!metaContainer?.className) return '';
+  
+  if (Array.isArray(metaContainer.className)) {
+    return metaContainer.className[0] || '';
+  }
+  
+  if (typeof metaContainer.className === 'string') {
+    return metaContainer.className;
+  }
+  
+  return '';
+})();
 
 const { token } = Styles;
 

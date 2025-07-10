@@ -3,7 +3,7 @@ import {
   type ImageElement,
   type LinkElement,
   type ThemeProps,
-} from '_types';
+} from '../../_types';
 
 /**
  * Card-specific type for image or link elements

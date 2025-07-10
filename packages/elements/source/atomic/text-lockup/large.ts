@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
-import { ElementVisual } from '_types';
+import { ElementVisual } from '../../_types';
 
 interface TypeTextLockupLarge {
   headlineComposite?: ElementVisual | null;

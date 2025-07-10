@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../_types';
 import { type HeroStandardProps } from './_types';
 
 const ANIMATION_CONFIG = {
@@ -123,7 +123,10 @@ const createImageAsset = (image: HTMLImageElement) => {
   });
 };
 
-const buildAssetChildren = ({ image, video }: Pick<HeroStandardProps, 'image' | 'video'>): ElementVisual[] => {
+const buildAssetChildren = ({
+  image,
+  video,
+}: Pick<HeroStandardProps, 'image' | 'video'>): ElementVisual[] => {
   const children: ElementVisual[] = [];
 
   if (video && video instanceof HTMLVideoElement) {
@@ -156,7 +159,11 @@ const buildAssetStyles = (includesAnimation?: boolean) => {
   };
 };
 
-const createAsset = ({ image, video, includesAnimation }: Pick<HeroStandardProps, 'image' | 'video' | 'includesAnimation'>) => {
+const createAsset = ({
+  image,
+  video,
+  includesAnimation,
+}: Pick<HeroStandardProps, 'image' | 'video' | 'includesAnimation'>) => {
   const children = buildAssetChildren({ image, video });
   const elementStyles = buildAssetStyles(includesAnimation);
 
@@ -167,7 +174,9 @@ const createAsset = ({ image, video, includesAnimation }: Pick<HeroStandardProps
   });
 };
 
-const createHeadline = (props: Pick<HeroStandardProps, 'headline' | 'isHeightSmall' | 'isThemeDark'>) => {
+const createHeadline = (
+  props: Pick<HeroStandardProps, 'headline' | 'isHeightSmall' | 'isThemeDark'>,
+) => {
   const { headline, isHeightSmall, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =

@@ -2,7 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import { animations, buttons } from 'atomic';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../../_types';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
 
 // Extend base type to add animation property and ensure video is required
@@ -107,7 +107,9 @@ const createText = (text?: HTMLElement | null) => {
   });
 };
 
-const buildTextChildren = (props: Pick<HeroVideoArrowProps, 'headline' | 'text'>): ElementVisual[] => {
+const buildTextChildren = (
+  props: Pick<HeroVideoArrowProps, 'headline' | 'text'>,
+): ElementVisual[] => {
   const { headline, text } = props;
   const children: ElementVisual[] = [];
 
@@ -124,7 +126,9 @@ const buildTextChildren = (props: Pick<HeroVideoArrowProps, 'headline' | 'text'>
   return children;
 };
 
-const createTextContainer = (props: Pick<HeroVideoArrowProps, 'headline' | 'text'>) => {
+const createTextContainer = (
+  props: Pick<HeroVideoArrowProps, 'headline' | 'text'>,
+) => {
   const children = buildTextChildren(props);
 
   if (children.length === 0) return null;

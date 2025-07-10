@@ -2,7 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../_types';
 import { type HeroStackedProps } from './_types';
 
 const ANIMATION_CONFIG = {
@@ -168,7 +168,10 @@ const createAsset = ({
   includesAnimation,
   isWidthLarge = false,
   isHeightSmall = false,
-}: Pick<HeroStackedProps, 'image' | 'video' | 'includesAnimation' | 'isWidthLarge' | 'isHeightSmall'>) => {
+}: Pick<
+  HeroStackedProps,
+  'image' | 'video' | 'includesAnimation' | 'isWidthLarge' | 'isHeightSmall'
+>) => {
   let mediaElement: ElementVisual | null = null;
 
   if (video && video instanceof HTMLVideoElement) {
@@ -221,7 +224,12 @@ const buildHeadlineAnimationStyles = (
   };
 };
 
-const createHeadline = (props: Pick<HeroStackedProps, 'headline' | 'isHeightSmall' | 'includesAnimation' | 'isThemeDark'>) => {
+const createHeadline = (
+  props: Pick<
+    HeroStackedProps,
+    'headline' | 'isHeightSmall' | 'includesAnimation' | 'isThemeDark'
+  >,
+) => {
   const { headline, isHeightSmall, includesAnimation } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
@@ -288,7 +296,9 @@ const buildTextAnimationStyles = (
   };
 };
 
-const createText = (props: Omit<HeroStackedProps, 'image' | 'video' | 'isWidthLarge'>) => {
+const createText = (
+  props: Omit<HeroStackedProps, 'image' | 'video' | 'isWidthLarge'>,
+) => {
   const textLockupElement = textLockup.large({
     ribbon: props.eyebrow,
     headlineComposite: createHeadline(props),

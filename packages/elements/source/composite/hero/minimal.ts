@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../_types';
 import { type HeroMinimalProps } from './_types';
 
 const CLASS_NAMES = {
@@ -51,7 +51,9 @@ const createImageAsset = (image: HTMLImageElement) => {
   });
 };
 
-const buildAssetChildren = ({ image }: Pick<HeroMinimalProps, 'image'>): ElementVisual[] => {
+const buildAssetChildren = ({
+  image,
+}: Pick<HeroMinimalProps, 'image'>): ElementVisual[] => {
   if (!image) return [];
   return [createImageAsset(image)];
 };
@@ -90,7 +92,12 @@ const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
   });
 };
 
-const createHeadline = (props: Pick<HeroMinimalProps, 'headline' | 'isThemeDark' | 'isThemeLight' | 'isThemeMaryland'>) => {
+const createHeadline = (
+  props: Pick<
+    HeroMinimalProps,
+    'headline' | 'isThemeDark' | 'isThemeLight' | 'isThemeMaryland'
+  >,
+) => {
   const { headline, isThemeDark, isThemeMaryland } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =

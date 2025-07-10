@@ -1,8 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../_types';
 import { type HeroOverlayProps } from './_types';
 
 const ANIMATION_CONFIG = {
@@ -103,7 +102,10 @@ const createImageAsset = (image: HTMLImageElement) => {
   });
 };
 
-const buildAssetChildren = ({ image, video }: Pick<HeroOverlayProps, 'image' | 'video'>): ElementVisual[] => {
+const buildAssetChildren = ({
+  image,
+  video,
+}: Pick<HeroOverlayProps, 'image' | 'video'>): ElementVisual[] => {
   if (video && video instanceof HTMLVideoElement) {
     return [createVideoAsset(video)];
   }
@@ -121,7 +123,9 @@ const buildAssetStyles = (includesAnimation?: boolean) => {
       ...ASSET_STYLES.BASE,
       ...ASSET_STYLES.MEDIA,
       [`@container (${Styles.token.media.queries.tablet.min})`]: {
-        ...ASSET_STYLES.BASE[`@container (${Styles.token.media.queries.tablet.min})`],
+        ...ASSET_STYLES.BASE[
+          `@container (${Styles.token.media.queries.tablet.min})`
+        ],
         ...(includesAnimation && {
           [`@media (prefers-reduced-motion: no-preference)`]: {
             animation: `hero-overlay-resize forwards ${ANIMATION_CONFIG.RESIZE.DURATION}`,
@@ -132,7 +136,11 @@ const buildAssetStyles = (includesAnimation?: boolean) => {
   };
 };
 
-const createAsset = ({ image, video, includesAnimation }: Pick<HeroOverlayProps, 'image' | 'video' | 'includesAnimation'>) => {
+const createAsset = ({
+  image,
+  video,
+  includesAnimation,
+}: Pick<HeroOverlayProps, 'image' | 'video' | 'includesAnimation'>) => {
   const children = buildAssetChildren({ image, video });
 
   if (children.length === 0) {
@@ -176,7 +184,9 @@ const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
   return headlineElement;
 };
 
-const createTextContent = (props: Pick<HeroOverlayProps, 'eyebrow' | 'headline' | 'text' | 'actions'>) => {
+const createTextContent = (
+  props: Pick<HeroOverlayProps, 'eyebrow' | 'headline' | 'text' | 'actions'>,
+) => {
   const textLockupElement = textLockup.large({
     ribbon: props.eyebrow,
     headlineComposite: createHeadline(props),
@@ -200,7 +210,12 @@ const createTextContent = (props: Pick<HeroOverlayProps, 'eyebrow' | 'headline' 
   });
 };
 
-const createText = (props: Pick<HeroOverlayProps, 'eyebrow' | 'headline' | 'text' | 'actions' | 'includesAnimation'>) => {
+const createText = (
+  props: Pick<
+    HeroOverlayProps,
+    'eyebrow' | 'headline' | 'text' | 'actions' | 'includesAnimation'
+  >,
+) => {
   const { includesAnimation } = props;
   const textContent = createTextContent(props);
 

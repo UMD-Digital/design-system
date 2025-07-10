@@ -2,7 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { type ContentElement } from '_types';
+import { type ContentElement } from '../../../_types';
 
 interface CornerProps {
   images: Array<HTMLImageElement>;

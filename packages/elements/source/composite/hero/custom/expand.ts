@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import { ElementModel } from 'model';
-import { type ElementVisual, type ContentElement } from '_types';
+import { type ElementVisual, type ContentElement } from '../../../_types';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
 
 // Extend the base type to add additional properties
@@ -163,7 +163,9 @@ const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
   return container;
 };
 
-const createAssetContainer = (props: Pick<HeroExpandProps, 'image' | 'video'>) =>
+const createAssetContainer = (
+  props: Pick<HeroExpandProps, 'image' | 'video'>,
+) =>
   ElementModel.create({
     element: document.createElement('div'),
     className: CLASS_NAMES.IMAGE_CONTAINER,
@@ -293,7 +295,12 @@ const buildBottomTextChildren = ({
   return children;
 };
 
-const createTextContainer = (props: Pick<HeroExpandProps, 'eyebrow' | 'headline' | 'actions' | 'additional'>) => {
+const createTextContainer = (
+  props: Pick<
+    HeroExpandProps,
+    'eyebrow' | 'headline' | 'actions' | 'additional'
+  >,
+) => {
   const textChildren: ElementVisual[] = [];
 
   const topTextChildren = buildTopTextChildren(props);

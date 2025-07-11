@@ -137,7 +137,9 @@ const buildAssetChildren = ({
     children.push(createImageAsset(image));
   }
 
-  children.push(assets.image.placeholder.fearlessForward());
+  if (!image && !video) {
+    children.push(assets.image.placeholder.fearlessForward());
+  }
 
   return children;
 };

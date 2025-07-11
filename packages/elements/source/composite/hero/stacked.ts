@@ -17,16 +17,16 @@ const ANIMATION_CONFIG = {
     NAME: 'hero-stacked-font-color',
     RANGE: {
       SMALL: {
-        HEADLINE_START: '100vh',
-        HEADLINE_END: '110vh',
-        TEXT_START: '80vh',
-        TEXT_END: '100vh',
-      },
-      DEFAULT: {
-        HEADLINE_START: '90vh',
-        HEADLINE_END: '110vh',
+        HEADLINE_START: '120vh',
+        HEADLINE_END: '150vh',
         TEXT_START: '100vh',
         TEXT_END: '120vh',
+      },
+      DEFAULT: {
+        HEADLINE_START: '100vh',
+        HEADLINE_END: '130vh',
+        TEXT_START: '90vh',
+        TEXT_END: '110vh',
       },
     },
   },
@@ -118,50 +118,6 @@ const createOverlay = (includesAnimation?: boolean) => {
   });
 };
 
-const buildAssetStyles = (isHeightSmall?: boolean) => {
-  return {
-    element: {
-      elementStyles: {
-        element: {
-          overflow: 'clip',
-          position: 'relative',
-
-          ['& img, & video']: {
-            aspectRatio: '5 / 4',
-
-            [`@container (${Styles.token.media.queries.tablet.min})`]: {
-              maxHeight: '700px',
-              minHeight: '300px',
-
-              ...(!isHeightSmall && {
-                minHeight: '400px',
-                height: '65vh !important',
-              }),
-            },
-          },
-        },
-      },
-    },
-  };
-};
-
-const createAssetWrapper = (
-  mediaElement: ElementVisual,
-  includesAnimation?: boolean,
-) => {
-  const overlay = createOverlay(includesAnimation);
-
-  return ElementModel.createDiv({
-    className: CLASS_NAMES.ASSET,
-    children: [mediaElement, overlay],
-    elementStyles: {
-      element: {
-        position: 'relative',
-      },
-    },
-  });
-};
-
 const createAsset = ({
   image,
   video,
@@ -184,7 +140,16 @@ const createAsset = ({
     return null;
   }
 
-  const wrapper = createAssetWrapper(mediaElement, includesAnimation);
+  const assetInteriorElement = ElementModel.createDiv({
+    className: `${CLASS_NAMES.ASSET}--interior`,
+    children: [mediaElement, createOverlay(includesAnimation)],
+    elementStyles: {
+      element: {
+        overflow: 'clip',
+        position: 'relative',
+      },
+    },
+  });
 
   const assetContainer = ElementModel.createDiv({
     className: CLASS_NAMES.ASSET,
@@ -192,11 +157,30 @@ const createAsset = ({
       ? [
           ElementModel.layout.spaceHorizontalMax({
             element: document.createElement('div'),
-            children: [wrapper],
+            children: [assetInteriorElement],
           }),
         ]
-      : [wrapper],
-    elementStyles: buildAssetStyles(isHeightSmall),
+      : [mediaElement, createOverlay(includesAnimation)],
+    elementStyles: {
+      element: {
+        position: 'relative',
+        overflow: 'clip',
+
+        ['& img, & video']: {
+          aspectRatio: '5 / 4',
+
+          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+            maxHeight: '700px',
+            minHeight: '300px',
+
+            ...(!isHeightSmall && {
+              minHeight: '400px',
+              height: '65vh !important',
+            }),
+          },
+        },
+      },
+    },
   });
 
   return assetContainer;
@@ -233,12 +217,16 @@ const createHeadline = (
   const { headline, isHeightSmall, includesAnimation } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
-    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD && !isHeightSmall;
+    characterCount < THEME_VALUES.HEADLINE_CHAR_THRESHOLD;
 
   if (!headline) return null;
 
   const desktopStyles = {
-    ...(isOverwriteHeadline && { fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE }),
+    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+      ...(isOverwriteHeadline && {
+        fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE,
+      }),
+    },
   };
 
   const animationStyles = buildHeadlineAnimationStyles(
@@ -261,17 +249,10 @@ const createHeadline = (
     },
   };
 
-  const headlineElement = isHeightSmall
-    ? ElementModel.headline.campaignExtraLarge({
-        element: headline,
-        elementStyles,
-      })
-    : ElementModel.headline.campaignLarge({
-        element: headline,
-        elementStyles,
-      });
-
-  return headlineElement;
+  return ElementModel.headline.campaignLarge({
+    element: headline,
+    elementStyles,
+  });
 };
 
 const buildTextAnimationStyles = (

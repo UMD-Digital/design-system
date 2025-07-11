@@ -129,7 +129,7 @@ const buildAssetChildren = ({
 }: Pick<HeroStandardProps, 'image' | 'video'>): ElementVisual[] => {
   const children: ElementVisual[] = [];
 
-  if (video && video instanceof HTMLVideoElement) {
+  if (video && !image) {
     children.push(createVideoAsset(video));
   }
 

@@ -62,7 +62,7 @@ packages.forEach((packageName) => {
   const capitalizedName =
     packageName.charAt(0).toUpperCase() + packageName.slice(1);
   const badgeRegex = new RegExp(
-    `\\[\\!\\[${capitalizedName} Version\\]\\(https://img\\.shields\\.io/badge/${capitalizedName}-v[0-9.]+(-[a-zA-Z0-9]+)?-blue\\)\\]`,
+    `\\[\\!\\[${capitalizedName} Version\\]\\(https://img\\.shields\\.io/badge/${capitalizedName}-v[0-9.]+(-[a-zA-Z0-9.]+)?-blue\\)\\]`,
     'i',
   );
   const newBadge = `[![${capitalizedName} Version](https://img.shields.io/badge/${capitalizedName}-v${version}-blue)]`;
@@ -88,7 +88,7 @@ if (fs.existsSync(rootReadmePath)) {
     const capitalizedName =
       packageName.charAt(0).toUpperCase() + packageName.slice(1);
     const badgeRegex = new RegExp(
-      `\\[\\!\\[${capitalizedName} Version\\]\\(https://img\\.shields\\.io/badge/${capitalizedName}-v[0-9.]+(-[a-zA-Z0-9]+)?-blue\\)\\]`,
+      `\\[\\!\\[${capitalizedName} Version\\]\\(https://img\\.shields\\.io/badge/${capitalizedName}-v[0-9.]+(-[a-zA-Z0-9.]+)?-blue\\)\\]`,
       'i',
     );
     const newBadge = `[![${capitalizedName} Version](https://img.shields.io/badge/${capitalizedName}-v${version}-blue)]`;

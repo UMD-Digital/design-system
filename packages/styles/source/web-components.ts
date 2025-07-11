@@ -114,8 +114,13 @@ const elements = {
       ...createElementStyles(`umd-element-${type}`, {
         custom: {
           [`umd-element-${type}.size-large`]: {
-            minHeight: '560px',
+            minHeight: '320px',
+
+            [`@media (${media.queries.tablet.min})`]: {
+              minHeight: '560px',
+            },
           },
+
           [`umd-element-${type}[display="list"] + umd-element-${type}[display="list"]`]:
             {
               marginTop: spacing.md,

@@ -227,7 +227,11 @@ const createHeadline = (headline?: HTMLElement | null) => {
   if (!headline) return null;
 
   const desktopStyles = {
-    ...(isOverwriteHeadline && { fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE }),
+    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+      ...(isOverwriteHeadline && {
+        fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE,
+      }),
+    },
   };
 
   return ElementModel.headline.campaignMaximum({

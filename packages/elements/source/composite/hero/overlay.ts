@@ -69,24 +69,6 @@ const keyFrameHeroSlideUp = `
   }
 `;
 
-const ASSET_STYLES = {
-  BASE: {
-    [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      position: 'absolute',
-      width: THEME_VALUES.WIDTHS.ASSET,
-      height: `calc(100% - ${Styles.token.spacing['5xl']})`,
-      right: 0,
-      top: 0,
-      overflow: 'visible',
-    },
-  },
-  MEDIA: {
-    ['& img, & video']: {
-      height: '100%',
-    },
-  },
-} as const;
-
 const createVideoAsset = (video: HTMLVideoElement) => {
   return assets.video.observedAutoPlay({
     video,
@@ -117,25 +99,6 @@ const buildAssetChildren = ({
   return [];
 };
 
-const buildAssetStyles = (includesAnimation?: boolean) => {
-  return {
-    element: {
-      ...ASSET_STYLES.BASE,
-      ...ASSET_STYLES.MEDIA,
-      [`@container (${Styles.token.media.queries.tablet.min})`]: {
-        ...ASSET_STYLES.BASE[
-          `@container (${Styles.token.media.queries.tablet.min})`
-        ],
-        ...(includesAnimation && {
-          [`@media (prefers-reduced-motion: no-preference)`]: {
-            animation: `hero-overlay-resize forwards ${ANIMATION_CONFIG.RESIZE.DURATION}`,
-          },
-        }),
-      },
-    },
-  };
-};
-
 const createAsset = ({
   image,
   video,
@@ -150,7 +113,29 @@ const createAsset = ({
   return ElementModel.createDiv({
     className: CLASS_NAMES.ASSET,
     children,
-    elementStyles: buildAssetStyles(includesAnimation),
+    elementStyles: {
+      element: {
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          position: 'absolute',
+          width: THEME_VALUES.WIDTHS.ASSET,
+          height: `calc(100% - ${Styles.token.spacing['5xl']})`,
+          right: 0,
+          top: 0,
+          overflow: 'visible',
+
+          ...(includesAnimation && {
+            [`@media (prefers-reduced-motion: no-preference)`]: {
+              animation: `hero-overlay-resize forwards ${ANIMATION_CONFIG.RESIZE.DURATION}`,
+            },
+          }),
+        },
+
+        ['& img, & video']: {
+          height: '100%',
+          minHeight: '300px',
+        },
+      },
+    },
   });
 };
 
@@ -163,7 +148,11 @@ const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
   if (!headline) return null;
 
   const desktopStyles = {
-    ...(isOverwriteHeadline && { fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE }),
+    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+      ...(isOverwriteHeadline && {
+        fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE,
+      }),
+    },
   };
 
   const headlineElement = ElementModel.headline.campaignExtraLarge({

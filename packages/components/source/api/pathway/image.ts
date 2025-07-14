@@ -12,7 +12,11 @@ const tagName = 'umd-element-pathway';
  * Creates a pathway component with the provided configuration
  */
 const createComponent: CreateComponentFunction = (element) => {
-  const isImageScaled = Attributes.isLayout.imageScaled({ element });
+  const isImageScaledDeprecated =
+    element.getAttribute('image-scaled') === 'false' ? false : undefined;
+
+  const isImageScaled =
+    isImageScaledDeprecated ?? Attributes.isLayout.imageScaled({ element });
   const isImagePositionLeft = Attributes.isLayout.imagePositionLeft({
     element,
   });

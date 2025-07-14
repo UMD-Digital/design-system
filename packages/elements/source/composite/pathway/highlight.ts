@@ -150,7 +150,7 @@ const HighlightContainer = `
 const LockStyles = `
   ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: layout.space.horizontal.max,
+      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: layout.space.horizontal.larger,
     },
   })}
 

@@ -155,7 +155,7 @@ const createAsset = ({
     className: CLASS_NAMES.ASSET,
     children: isWidthLarge
       ? [
-          ElementModel.layout.spaceHorizontalMax({
+          ElementModel.layout.spaceHorizontalLarger({
             element: document.createElement('div'),
             children: [assetInteriorElement],
           }),
@@ -288,7 +288,7 @@ const createText = (
     isThemeDark: false,
   });
 
-  const lock = ElementModel.layout.spaceHorizontalMax({
+  const lock = ElementModel.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [textLockupElement],
     elementStyles: {

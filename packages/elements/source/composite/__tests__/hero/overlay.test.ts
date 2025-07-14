@@ -107,6 +107,10 @@ jest.mock('../../../model', () => ({
         element: props?.element || document.createElement('div'),
         styles: '.mock-layout-space-horizontal-small',
       })),
+      spaceHorizontalLarger: jest.fn().mockImplementation((props) => ({
+        element: props?.element || document.createElement('div'),
+        styles: '.mock-layout-space-horizontal-larger',
+      })),
       overlayModal: jest.fn().mockReturnValue({
         element: document.createElement('div'),
         styles: '.mock-overlay-modal',

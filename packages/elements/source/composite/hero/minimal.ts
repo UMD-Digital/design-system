@@ -186,7 +186,7 @@ const createText = (props: HeroMinimalProps, hasAsset: boolean) => {
     elementStyles: buildTextContainerStyles(hasAsset),
   });
 
-  return ElementModel.layout.spaceHorizontalMax({
+  return ElementModel.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [textContainer],
     elementStyles: {

@@ -146,7 +146,7 @@ const OverwriteTextContainerStyles = `
   @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
     ${Utility.theme.convertJSSObjectToStyles({
       styleObj: {
-        [`${OVERWRITE_TEXT_WRAPPER}`]: layout.space.horizontal.max,
+        [`${OVERWRITE_TEXT_WRAPPER}`]: layout.space.horizontal.larger,
       },
     })}
   }
@@ -167,7 +167,7 @@ const OverwriteTextContainerStyles = `
 const LockStyles = `
   ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_DEFAULT_CONTAINER_LOCK}`]: layout.space.horizontal.max,
+      [`.${PATHWAY_DEFAULT_CONTAINER_LOCK}`]: layout.space.horizontal.larger,
     },
   })}
 

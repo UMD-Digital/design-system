@@ -82,7 +82,7 @@ export const RowLogoStyles = `
 
   ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LOGO_CONTAINER_LOCK}`]: layout.space.horizontal.max 
+      [`.${ROW_LOGO_CONTAINER_LOCK}`]: layout.space.horizontal.larger 
     },
   })}
 

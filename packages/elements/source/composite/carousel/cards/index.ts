@@ -170,7 +170,7 @@ const ContainerLock = `
   .${CAROUSEL_LOCK} {
     position: relative;
     ${Utility.theme.convertJSSObjectToStyles({
-      styleObj: layout.space.horizontal.max,
+      styleObj: layout.space.horizontal.larger,
     })}
   }
 

@@ -275,7 +275,7 @@ const createText = (props: HeroStandardProps) => {
     },
   });
 
-  return ElementModel.layout.spaceHorizontalMax({
+  return ElementModel.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [textContainer],
     elementStyles: {

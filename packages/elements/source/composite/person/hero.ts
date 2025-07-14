@@ -281,7 +281,7 @@ export default (props: PersonHero) => {
       },
     },
   });
-  const elementLock = ElementModel.layout.spaceHorizontalMax({
+  const elementLock = ElementModel.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     elementStyles: {
       element: {

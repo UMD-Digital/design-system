@@ -234,7 +234,7 @@ const AnimationStyles = `
 const LockStyles = `
   ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: layout.space.horizontal.max,
+      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: layout.space.horizontal.larger,
     },
   })}
 

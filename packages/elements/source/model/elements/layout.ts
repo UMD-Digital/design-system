@@ -56,11 +56,11 @@ export const gridInlineTabletRows = (props: ElementProps) =>
 export const gridStacked = (props: ElementProps) =>
   createStyledElement(props, Styles.layout.grid.stacked);
 
-export const spaceHorizontalMax = (props: ElementProps) =>
-  createStyledElement(props, Styles.layout.space.horizontal.max);
-
 export const spaceHorizontalFull = (props: ElementProps) =>
   createStyledElement(props, Styles.layout.space.horizontal.full);
+
+export const spaceHorizontalLarger = (props: ElementProps) =>
+  createStyledElement(props, Styles.layout.space.horizontal.larger);
 
 export const spaceHorizontalSmall = (props: ElementProps) =>
   createStyledElement(props, Styles.layout.space.horizontal.small);

@@ -62,7 +62,7 @@ const isDesktop = () => window.innerWidth >= DESKTOP;
 const LockStyles = `
   ${Utility.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_UTILITY_LOCK}`]: layout.space.horizontal.max,
+      [`.${ELEMENT_UTILITY_LOCK}`]: layout.space.horizontal.larger,
     },
   })}
 

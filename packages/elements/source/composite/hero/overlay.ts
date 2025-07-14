@@ -208,7 +208,7 @@ const createText = (
   const { includesAnimation } = props;
   const textContent = createTextContent(props);
 
-  const lock = ElementModel.layout.spaceHorizontalMax({
+  const lock = ElementModel.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [textContent],
     elementStyles: {

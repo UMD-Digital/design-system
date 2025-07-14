@@ -380,7 +380,35 @@ module.exports = {
         grid: jest.fn().mockReturnValue({
           element: document.createElement('div'),
           styles: '.mock-style-grid'
-        })
+        }),
+        spaceHorizontalLarger: jest.fn().mockImplementation((props) => ({
+          element: props?.element || document.createElement('div'),
+          styles: '.mock-style-spaceHorizontalLarger'
+        })),
+        spaceHorizontalFull: jest.fn().mockImplementation((props) => ({
+          element: props?.element || document.createElement('div'),
+          styles: '.mock-style-spaceHorizontalFull'
+        })),
+        spaceHorizontalSmall: jest.fn().mockImplementation((props) => ({
+          element: props?.element || document.createElement('div'),
+          styles: '.mock-style-spaceHorizontalSmall'
+        })),
+        spaceHorizontalSmallest: jest.fn().mockImplementation((props) => ({
+          element: props?.element || document.createElement('div'),
+          styles: '.mock-style-spaceHorizontalSmallest'
+        })),
+        backgroundBoxWhite: jest.fn().mockImplementation((props) => ({
+          element: props?.element || document.createElement('div'),
+          styles: '.mock-style-backgroundBoxWhite'
+        })),
+        gridInlineRow: jest.fn().mockImplementation((props) => ({
+          element: props?.element || document.createElement('div'),
+          styles: '.mock-style-gridInlineRow'
+        })),
+        gridInlineTabletRows: jest.fn().mockImplementation((props) => ({
+          element: props?.element || document.createElement('div'),
+          styles: '.mock-style-gridInlineTabletRows'
+        }))
       },
       actions: {
         outline: jest.fn().mockImplementation(({ element }) => ({

@@ -71,7 +71,7 @@ export const UtilityContainerStyles = `
 
   ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${UTILITY_CONTAINER_LOCK}`]: layout.space.horizontal.max,
+      [`.${UTILITY_CONTAINER_LOCK}`]: layout.space.horizontal.larger,
     },
   })}
 

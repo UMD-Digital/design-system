@@ -116,6 +116,11 @@ export const three: JssObject = create.jss.objectWithClassName({
 export const threeLarge: JssObject = create.jss.objectWithClassName({
   ...base.three,
 
+  [`@media (${media.queries.large.min})`]: {
+    gridGap: spacing.lg,
+    ...paragraphOverwrite,
+  },
+
   [`@media (${media.queries.desktop.min})`]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
     gridGap: spacing.xl,

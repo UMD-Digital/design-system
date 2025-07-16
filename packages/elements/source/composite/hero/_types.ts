@@ -84,6 +84,7 @@ export interface HeroStackedProps
   text?: ContentElement;
   actions?: ContentElement;
   isWidthLarge?: boolean;
+  topPosition?: string | null;
 }
 
 /**

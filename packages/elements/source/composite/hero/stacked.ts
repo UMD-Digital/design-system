@@ -280,6 +280,8 @@ const buildTextAnimationStyles = (
 const createText = (
   props: Omit<HeroStackedProps, 'image' | 'video' | 'isWidthLarge'>,
 ) => {
+  const { topPosition, includesAnimation } = props;
+  const additionalSpread = topPosition ? parseInt(topPosition) : null;
   const textLockupElement = textLockup.large({
     ribbon: props.eyebrow,
     headlineComposite: createHeadline(props),
@@ -318,7 +320,7 @@ const createText = (
           [`@container (${Styles.token.media.queries.tablet.min})`]: {
             ...Utils.theme.media.withViewTimelineAnimation({
               position: 'sticky',
-              top: 0,
+              top: additionalSpread || 0,
             }),
           },
         }),

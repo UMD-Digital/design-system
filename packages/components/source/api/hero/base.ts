@@ -43,6 +43,9 @@ const createComponent: CreateComponentFunction = (element) => {
         Attributes.isLayout.spaceHorizontalLarge({ element }) || false,
       isThemeDark,
       includesAnimation,
+      topPosition: Attributes.getValue.topPosition({
+        element,
+      }),
     });
   }
 
@@ -142,6 +145,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *   - `dark` - Dark theme styling
  * - `data-feature` - Feature options:
  *   - `animation` - Enable animations
+ * - `data-layout-position` - Sticky position offset in pixels (e.g., `80` for 80px from top)
  *
  * ## Deprecated Attributes
  * The following attributes are deprecated and will be removed in v2.0:
@@ -183,7 +187,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @example
  * ```html
  * <!-- Stacked hero with small height and large horizontal spacing -->
- * <umd-element-hero data-display="stacked" data-layout-height="small" data-layout-space-horizontal="large">
+ * <umd-element-hero data-display="stacked" data-layout-height="small" data-layout-space-horizontal="large" data-layout-position="80">
  *   <h1 slot="headline">Research Excellence</h1>
  *   <p slot="text">Advancing knowledge through groundbreaking research</p>
  *   <img slot="image" src="research-lab.jpg" alt="Research laboratory">

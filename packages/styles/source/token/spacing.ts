@@ -43,11 +43,13 @@ const spacingScale = {
  * @since 1.1.0
  */
 export const maxWidth = {
-  max: '1728px',
-  large: '1552px',
-  normal: '1384px',
-  small: '1200px',
-  smallest: '992px',
+  // max is deprecated, use larger instead
+  max: '1600px',
+  larger: '1600px',
+  large: '1400px',
+  normal: '1280px',
+  small: '992px',
+  smallest: '800px',
 };
 
 /**

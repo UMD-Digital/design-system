@@ -95,7 +95,7 @@ export const lock: JssObject = create.jss.objectWithClassName({
 
 export const larger: JssObject = create.jss.objectWithClassName({
   ...lockBase,
-  maxWidth: `${spacing.maxWidth.max}`,
+  maxWidth: `${spacing.maxWidth.larger}`,
 
   className: [
     `${classNamePrefix}-larger`,

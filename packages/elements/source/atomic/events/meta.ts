@@ -1,5 +1,6 @@
 import * as Utility from 'utilities';
 import { ElementModel } from 'model';
+import { ElementVisual } from '_types';
 
 type LocationType = {
   title: string;
@@ -104,39 +105,33 @@ const createDateRow = (props: TypeMetaDisplay) => {
     styles += timeElement.styles;
   }
 
-  return { element: container, styles };
+  return { element: container, styles, className: 'event-meta-date-row' };
 };
 
 export default (props: TypeMetaDisplay) => {
   const { location } = props;
-  const composite = ElementModel.event.metaContainer({
-    element: document.createElement('div'),
-    ...props,
-  });
-  const wrapper = ElementModel.event.metaWrapper({
-    element: document.createElement('div'),
-    ...props,
-  });
   const dateRow = createDateRow(props);
-  let styles = '';
-
-  wrapper.element.appendChild(dateRow.element);
-  styles += dateRow.styles;
+  let wrapperChildren: ElementVisual[] = [dateRow];
 
   if (location && location.length > 0) {
-    const locationElm = MakeDetailItem({
-      ...props,
-      icon: Utility.asset.icon.PIN,
-      text: location[0].title,
-    });
-
-    wrapper.element.appendChild(locationElm.element);
-    styles += locationElm.styles;
+    wrapperChildren.push(
+      MakeDetailItem({
+        ...props,
+        icon: Utility.asset.icon.PIN,
+        text: location[0].title,
+      }),
+    );
   }
 
-  styles += wrapper.styles;
-  styles += composite.styles;
-  composite.element.appendChild(wrapper.element);
+  const wrapper = ElementModel.event.metaWrapper({
+    element: document.createElement('div'),
+    children: wrapperChildren,
+    ...props,
+  });
 
-  return { element: composite.element, styles };
+  return ElementModel.event.metaContainer({
+    element: document.createElement('div'),
+    children: [wrapper],
+    ...props,
+  });
 };

@@ -26,6 +26,24 @@ export function createDiv(props: ElementModelDefined) {
   return create({ ...props, element: document.createElement('div') });
 }
 
+/**
+ * Creates a styled p element with the given properties
+ * @param props - Element configuration options
+ * @returns The created and styled HTML element
+ */
+export function createParagraph(props: ElementModelDefined) {
+  return create({ ...props, element: document.createElement('p') });
+}
+
+/**
+ * Creates a styled span element with the given properties
+ * @param props - Element configuration options
+ * @returns The created and styled HTML element
+ */
+export function createSpan(props: ElementModelDefined) {
+  return create({ ...props, element: document.createElement('span') });
+}
+
 export * as actions from './actions';
 export * as assets from './assets';
 export * as buttons from './buttons';

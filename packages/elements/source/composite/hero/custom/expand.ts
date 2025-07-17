@@ -1,6 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import { ElementModel } from 'model';
+import { assets } from 'atomic';
 import { type ElementVisual, type ContentElement } from '../../../_types';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
 
@@ -120,20 +121,44 @@ const createImageOverlay = () => {
 const buildAssetElement = ({
   image,
   video,
-}: Pick<HeroExpandProps, 'image' | 'video'>): HTMLElement | null => {
-  if (video) return video;
-  if (image) return image;
+}: Pick<HeroExpandProps, 'image' | 'video'>): ElementVisual | null => {
+  if (video) {
+    return assets.video.toggle({
+      video,
+      additionalElementStyles: {
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        overflow: 'hidden',
+
+        [`& video`]: {
+          height: '100%',
+          width: '100%',
+          objectFit: 'cover',
+        },
+      },
+    });
+  }
+  if (image) {
+    return assets.image.background({
+      image,
+      isScaled: true,
+      isShowCaption: true,
+    });
+  }
+
   return null;
 };
 
 const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
   const overlay = createImageOverlay();
   const asset = buildAssetElement(props);
+  const children = asset ? [asset, overlay] : [overlay];
 
   const container = ElementModel.create({
     element: document.createElement('div'),
     className: CLASS_NAMES.IMAGE_SIZE,
-    children: [overlay],
+    children,
     elementStyles: {
       element: {
         overflow: 'hidden',
@@ -155,10 +180,6 @@ const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
       },
     },
   });
-
-  if (asset) {
-    container.element.appendChild(asset);
-  }
 
   return container;
 };
@@ -309,9 +330,8 @@ const createTextContainer = (
 
   const topTextChildren = buildTopTextChildren(props);
   if (topTextChildren.length > 0) {
-    const topText = ElementModel.create({
+    const topText = ElementModel.layout.spaceHorizontalNormal({
       element: document.createElement('div'),
-      className: CLASS_NAMES.TEXT_TOP,
       children: topTextChildren,
       elementStyles: {
         siblingAfter: {
@@ -324,16 +344,19 @@ const createTextContainer = (
 
   const bottomTextChildren = buildBottomTextChildren(props);
   if (bottomTextChildren.length > 0) {
-    const bottomText = ElementModel.create({
+    const bottomText = ElementModel.layout.spaceHorizontalNormal({
       element: document.createElement('div'),
-      className: CLASS_NAMES.TEXT_BOTTOM,
       children: bottomTextChildren,
+      elementStyles: {
+        element: {
+          width: '100%',
+        },
+      },
     });
     textChildren.push(bottomText);
   }
 
-  return ElementModel.create({
-    element: document.createElement('div'),
+  return ElementModel.createDiv({
     className: CLASS_NAMES.TEXT_CONTAINER,
     children: textChildren,
     elementStyles: {

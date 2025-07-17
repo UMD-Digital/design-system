@@ -28,6 +28,10 @@ jest.mock('../../../../atomic', () => ({
         element: document.createElement('video'),
         styles: '.mock-video-auto-play',
       }),
+      toggle: jest.fn().mockReturnValue({
+        element: document.createElement('div'),
+        styles: '.mock-video-toggle',
+      }),
     },
   },
   textLockup: {
@@ -74,6 +78,10 @@ jest.mock('../../../../model', () => ({
       spaceHorizontalSmall: jest.fn().mockImplementation((props) => ({
         element: props?.element || document.createElement('div'),
         styles: '.mock-layout-space-horizontal-small',
+      })),
+      spaceHorizontalNormal: jest.fn().mockImplementation((props) => ({
+        element: props?.element || document.createElement('div'),
+        styles: '.mock-layout-space-horizontal-normal',
       })),
     },
   },

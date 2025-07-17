@@ -64,11 +64,7 @@ export const personTabular = (props: ElementProps) => {
 };
 
 export default (props: ListProps) => {
-  const { isDisplayEvent, isDisplayPerson, isDisplayTabular, ...elementProps } =
-    props;
-  if (isDisplayEvent) {
-    return event(elementProps);
-  }
+  const { isDisplayPerson, isDisplayTabular, ...elementProps } = props;
 
   if (isDisplayPerson) {
     return person(elementProps);

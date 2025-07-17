@@ -24,12 +24,12 @@ describe('Card Overlay Components', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    
+
     // Setup default mock implementations
     mockColorOverlay.mockImplementation((props: CardOverlayProps) => {
       const mockElement = document.createElement('div');
       mockElement.className = 'card-overlay-color';
-      
+
       // Add content based on props
       if (props.headline) {
         mockElement.appendChild(props.headline.cloneNode(true));
@@ -38,7 +38,10 @@ describe('Card Overlay Components', () => {
         mockElement.appendChild(props.text.cloneNode(true));
       }
       if (props.eyebrow) {
-        mockElement.insertBefore(props.eyebrow.cloneNode(true), mockElement.firstChild);
+        mockElement.insertBefore(
+          props.eyebrow.cloneNode(true),
+          mockElement.firstChild,
+        );
       }
       if (props.actions) {
         mockElement.appendChild(props.actions.cloneNode(true));
@@ -46,18 +49,18 @@ describe('Card Overlay Components', () => {
       if (props.ctaIcon) {
         mockElement.appendChild(props.ctaIcon.cloneNode(true));
       }
-      
+
       return {
         element: mockElement,
         className: 'card-overlay-color',
         styles: '.mock-style-card-overlay-color',
       };
     });
-    
+
     mockImageOverlay.mockImplementation((props: CardOverlayProps) => {
       const mockElement = document.createElement('div');
       mockElement.className = 'card-overlay-image';
-      
+
       // Add content based on props
       if (props.headline) {
         mockElement.appendChild(props.headline.cloneNode(true));
@@ -66,7 +69,10 @@ describe('Card Overlay Components', () => {
         mockElement.appendChild(props.text.cloneNode(true));
       }
       if (props.eyebrow) {
-        mockElement.insertBefore(props.eyebrow.cloneNode(true), mockElement.firstChild);
+        mockElement.insertBefore(
+          props.eyebrow.cloneNode(true),
+          mockElement.firstChild,
+        );
       }
       if (props.backgroundImage) {
         const imgContainer = document.createElement('div');
@@ -79,7 +85,8 @@ describe('Card Overlay Components', () => {
       }
       if (props.eventMeta) {
         const eventDiv = document.createElement('div');
-        eventDiv.innerHTML = props.eventMeta.element.innerHTML || 'Event: Conference 2024';
+        eventDiv.innerHTML =
+          props.eventMeta.element.innerHTML || 'Event: Conference 2024';
         mockElement.appendChild(eventDiv);
       }
       if (props.dateSign) {
@@ -87,7 +94,7 @@ describe('Card Overlay Components', () => {
         dateDiv.innerHTML = props.dateSign.element.innerHTML || 'APR 15';
         mockElement.appendChild(dateDiv);
       }
-      
+
       let styles = '.mock-style-card-overlay-image';
       if (props.eventMeta?.styles) {
         styles += '\n' + props.eventMeta.styles;
@@ -95,7 +102,7 @@ describe('Card Overlay Components', () => {
       if (props.dateSign?.styles) {
         styles += '\n' + props.dateSign.styles;
       }
-      
+
       return {
         element: mockElement,
         className: 'card-overlay-image',
@@ -199,7 +206,7 @@ describe('Card Overlay Components', () => {
         expect(result).toBeDefined();
         expect(containsText(result.element, 'This is a quote')).toBe(true);
         expect(mockColorOverlay).toHaveBeenCalledWith(
-          expect.objectContaining({ isQuote: true })
+          expect.objectContaining({ isQuote: true }),
         );
       });
     });
@@ -215,7 +222,7 @@ describe('Card Overlay Components', () => {
 
         expect(result).toBeDefined();
         expect(mockColorOverlay).toHaveBeenCalledWith(
-          expect.objectContaining({ isThemeDark: true })
+          expect.objectContaining({ isThemeDark: true }),
         );
       });
 
@@ -229,7 +236,7 @@ describe('Card Overlay Components', () => {
 
         expect(result).toBeDefined();
         expect(mockColorOverlay).toHaveBeenCalledWith(
-          expect.objectContaining({ isThemeLight: true })
+          expect.objectContaining({ isThemeLight: true }),
         );
       });
     });
@@ -289,6 +296,7 @@ describe('Card Overlay Components', () => {
       it('should include event meta in image overlay', () => {
         const eventMeta = {
           element: createElement('div', 'Event: Conference 2024'),
+          className: 'event-meta',
           styles: '.event-overlay { position: absolute; }',
         };
 
@@ -309,6 +317,7 @@ describe('Card Overlay Components', () => {
       it('should include date sign in image overlay', () => {
         const dateSign = {
           element: createElement('div', 'APR 15'),
+          className: 'date-sign',
           styles: '.date-overlay { color: white; }',
         };
 
@@ -350,10 +359,12 @@ describe('Card Overlay Components', () => {
           isThemeLight: false,
           eventMeta: {
             element: createElement('div', 'Meta'),
+            className: 'event-meta',
             styles: '',
           },
           dateSign: {
             element: createElement('div', 'MAR'),
+            className: 'date-sign',
             styles: '',
           },
         };
@@ -379,10 +390,12 @@ describe('Card Overlay Components', () => {
           isThemeLight: false,
           eventMeta: {
             element: createElement('div', 'Location: Main Hall'),
+            className: 'event-meta',
             styles: '',
           },
           dateSign: {
             element: createElement('div', 'MAR 15'),
+            className: 'date-sign',
             styles: '',
           },
         };

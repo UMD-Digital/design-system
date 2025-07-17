@@ -10,7 +10,12 @@ import type {
   CardMediaProps,
   CardEventProps,
 } from '../../card/_types';
-import type { ContentElement, ImageElement, LinkElement, ThemeProps } from '../../../_types';
+import type {
+  ContentElement,
+  ImageElement,
+  LinkElement,
+  ThemeProps,
+} from '../../../_types';
 
 describe('Card Type Interfaces', () => {
   describe('CardBlockProps', () => {
@@ -18,7 +23,7 @@ describe('Card Type Interfaces', () => {
       const validProps: CardBlockProps = {
         headline: document.createElement('h3'),
       };
-      
+
       expect(validProps).toBeDefined();
     });
 
@@ -26,37 +31,39 @@ describe('Card Type Interfaces', () => {
       const fullProps: CardBlockProps = {
         // Required
         headline: document.createElement('h3'),
-        
+
         // Optional content
         text: document.createElement('p'),
         actions: document.createElement('div'),
         eyebrow: document.createElement('span'),
         date: document.createElement('time'),
         newsId: 'news-123',
-        
+
         // Media properties
         image: document.createElement('img') as ImageElement,
         isAligned: true,
-        
+
         // Event properties
         eventMeta: {
           element: document.createElement('div'),
+          className: 'event-meta',
           styles: '',
         },
         dateSign: {
           element: document.createElement('div'),
+          className: 'date-sign',
           styles: '',
         },
-        
+
         // Style properties
         hasBorder: true,
         hasEyebrowRibbon: true,
         isTransparent: false,
-        
+
         // Theme
         isThemeDark: true,
       };
-      
+
       expect(fullProps.headline).toBeDefined();
       expect(fullProps.isThemeDark).toBe(true);
     });
@@ -68,7 +75,7 @@ describe('Card Type Interfaces', () => {
         // @ts-expect-error - isThemeGold should not be available
         isThemeGold: true,
       };
-      
+
       expect(props).toBeDefined();
     });
   });
@@ -79,7 +86,7 @@ describe('Card Type Interfaces', () => {
         headline: document.createElement('h3'),
         date: document.createElement('time'),
       };
-      
+
       expect(validProps).toBeDefined();
     });
 
@@ -88,29 +95,31 @@ describe('Card Type Interfaces', () => {
         // Required
         headline: document.createElement('h3'),
         date: document.createElement('time'),
-        
+
         // Optional content
         eyebrow: document.createElement('span'),
         actions: document.createElement('div'),
-        
+
         // Media
         image: document.createElement('img') as ImageElement,
         isAligned: false,
-        
+
         // Event
         eventMeta: {
           element: document.createElement('div'),
+          className: 'event-meta',
           styles: '',
         },
         dateSign: {
           element: document.createElement('div'),
+          className: 'date-sign',
           styles: '',
         },
-        
+
         // Theme
         isThemeDark: true,
       };
-      
+
       expect(fullProps.headline).toBeDefined();
       expect(fullProps.date).toBeDefined();
     });
@@ -121,7 +130,7 @@ describe('Card Type Interfaces', () => {
         date: document.createElement('time'),
         text: document.createElement('p'),
       };
-      
+
       expect(props).toBeDefined();
       expect(props.text).toBeDefined();
     });
@@ -132,7 +141,7 @@ describe('Card Type Interfaces', () => {
       const validProps: CardOverlayProps = {
         headline: document.createElement('h3'),
       };
-      
+
       expect(validProps).toBeDefined();
     });
 
@@ -140,33 +149,35 @@ describe('Card Type Interfaces', () => {
       const fullProps: CardOverlayProps = {
         // Required
         headline: document.createElement('h3'),
-        
+
         // Optional content
         text: document.createElement('p'),
         eyebrow: document.createElement('span'),
         actions: document.createElement('div'),
         date: document.createElement('time'),
-        
+
         // Overlay-specific
         backgroundImage: document.createElement('img') as ImageElement,
         ctaIcon: document.createElement('span'),
         isQuote: true,
-        
+
         // Event
         eventMeta: {
           element: document.createElement('div'),
+          className: 'event-meta',
           styles: '',
         },
         dateSign: {
           element: document.createElement('div'),
+          className: 'date-sign',
           styles: '',
         },
-        
+
         // Theme
         isThemeDark: true,
         isThemeLight: false,
       };
-      
+
       expect(fullProps.isQuote).toBe(true);
       expect(fullProps.backgroundImage).toBeDefined();
     });
@@ -177,7 +188,7 @@ describe('Card Type Interfaces', () => {
         isThemeDark: true,
         isThemeLight: true,
       };
-      
+
       expect(props.isThemeDark).toBe(true);
       expect(props.isThemeLight).toBe(true);
     });
@@ -189,7 +200,7 @@ describe('Card Type Interfaces', () => {
         image: document.createElement('img') as ImageElement,
         isAligned: true,
       };
-      
+
       expect(mediaProps.image).toBeDefined();
       expect(mediaProps.isAligned).toBe(true);
     });
@@ -198,14 +209,16 @@ describe('Card Type Interfaces', () => {
       const eventProps: CardEventProps = {
         eventMeta: {
           element: document.createElement('div'),
+          className: 'event-meta',
           styles: '.event-styles',
         },
         dateSign: {
           element: document.createElement('div'),
+          className: 'event-sign',
           styles: '.date-styles',
         },
       };
-      
+
       expect(eventProps.eventMeta).toBeDefined();
       expect(eventProps.dateSign).toBeDefined();
     });
@@ -218,19 +231,19 @@ describe('Card Type Interfaces', () => {
         headline: document.createElement('h3'),
         text: document.createElement('p'),
       };
-      
+
       // List card requires date
       const listCard: CardListProps = {
         headline: document.createElement('h3'),
         date: document.createElement('time'),
       };
-      
+
       // Overlay card with quote variant
       const overlayCard: CardOverlayProps = {
         headline: document.createElement('h3'),
         isQuote: true,
       };
-      
+
       expect(blockCard).toBeDefined();
       expect(listCard).toBeDefined();
       expect(overlayCard).toBeDefined();
@@ -241,18 +254,18 @@ describe('Card Type Interfaces', () => {
       const block: Pick<CardBlockProps, 'isThemeDark'> = {
         isThemeDark: true,
       };
-      
+
       // List only has isThemeDark
       const list: Pick<CardListProps, 'isThemeDark'> = {
         isThemeDark: false,
       };
-      
+
       // Overlay has both dark and light
       const overlay: Pick<CardOverlayProps, 'isThemeDark' | 'isThemeLight'> = {
         isThemeDark: true,
         isThemeLight: false,
       };
-      
+
       expect(block.isThemeDark).toBe(true);
       expect(list.isThemeDark).toBe(false);
       expect(overlay.isThemeLight).toBe(false);

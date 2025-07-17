@@ -131,6 +131,7 @@ describe('Card Block Component', () => {
     it('should include event meta when provided', () => {
       const eventMeta = {
         element: createElement('div', 'Event details'),
+        className: 'event-meta',
         styles: '.event-meta { color: blue; }',
       };
 
@@ -147,6 +148,7 @@ describe('Card Block Component', () => {
     it('should include date sign when provided with image', () => {
       const dateSign = {
         element: createElement('div', 'DEC 25'),
+        className: 'date-sign',
         styles: '.date-sign { font-weight: bold; }',
       };
 
@@ -225,10 +227,12 @@ describe('Card Block Component', () => {
         image: createImageElement(),
         eventMeta: {
           element: createElement('div', 'Meta'),
+          className: 'event-meta',
           styles: '.meta {}',
         },
         dateSign: {
           element: createElement('div', 'DEC'),
+          className: 'date-sign',
           styles: '.sign {}',
         },
         newsId: 'test-123',

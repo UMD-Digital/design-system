@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
 import { ElementModel } from 'model';
+import { ElementVisual } from '../../_types';
 
 type TypeTheme = {
   isThemeDark?: boolean;
@@ -20,7 +20,7 @@ export type TypeTextLockupSmall = TypeTheme & {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  eventMeta?: { element: HTMLElement; styles: string };
+  eventMeta?: ElementVisual;
   hasEyebrowRibbon?: boolean;
 };
 
@@ -28,15 +28,15 @@ const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';
 const metaContainer = Styles?.element?.event?.meta?.container;
 const metaClass: string = (() => {
   if (!metaContainer?.className) return '';
-  
+
   if (Array.isArray(metaContainer.className)) {
     return metaContainer.className[0] || '';
   }
-  
+
   if (typeof metaContainer.className === 'string') {
     return metaContainer.className;
   }
-  
+
   return '';
 })();
 
@@ -106,7 +106,6 @@ export const actionStyles = {
 };
 
 const containerStyles = {
-  className: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
   zIndex: '9',
   position: 'relative',
 };
@@ -139,63 +138,59 @@ export default ({
   eventMeta,
   isThemeDark,
 }: TypeTextLockupSmall) => {
-  const container = document.createElement('div');
-  let styles = `
-    ${Utility.theme.getStyleStringFromJssObject(containerStyles)}
-  `;
-
-  container.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER);
+  let children: ElementVisual[] = [];
 
   if (eyebrow) {
-    const styledEyebrow = createEyebrow({ eyebrow, isThemeDark });
-    container.appendChild(styledEyebrow.element);
-    styles += styledEyebrow.styles;
+    children.push(createEyebrow({ eyebrow, isThemeDark }));
   }
 
   if (headline) {
-    const styledHeadline = ElementModel.headline.sansLarger({
-      element: headline,
-      elementStyles: headlineStyles,
-      isThemeDark,
-    });
-    container.appendChild(styledHeadline.element);
-    styles += styledHeadline.styles;
+    children.push(
+      ElementModel.headline.sansLarger({
+        element: headline,
+        elementStyles: headlineStyles,
+        isThemeDark,
+      }),
+    );
   }
 
   if (eventMeta) {
-    container.appendChild(eventMeta.element);
-    styles += eventMeta.styles;
+    children.push(eventMeta);
   }
 
   if (text) {
-    const styledText = ElementModel.richText.simple({
-      element: text,
-      elementStyles: textStyles,
-      isThemeDark,
-    });
-
-    container.appendChild(styledText.element);
-    styles += styledText.styles;
+    children.push(
+      ElementModel.richText.simple({
+        element: text,
+        elementStyles: textStyles,
+        isThemeDark,
+      }),
+    );
   }
 
   if (date) {
-    const styledDate = ElementModel.headline.sansMin({
-      element: date,
-      elementStyles: dateStyles,
-      isThemeDark,
-    });
-
-    container.appendChild(styledDate.element);
-    styles += styledDate.styles;
+    children.push(
+      ElementModel.headline.sansMin({
+        element: date,
+        elementStyles: dateStyles,
+        isThemeDark,
+      }),
+    );
   }
 
   if (actions) {
-    const styledActions = createActions({
-      actions,
-    });
-    container.appendChild(styledActions.element);
-    styles += styledActions.styles;
+    children.push(
+      createActions({
+        actions,
+      }),
+    );
   }
 
-  return { element: container, styles };
+  return ElementModel.createDiv({
+    className: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
+    children,
+    elementStyles: {
+      element: containerStyles,
+    },
+  });
 };

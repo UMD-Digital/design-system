@@ -252,6 +252,7 @@ describe('Card List Component', () => {
 
       const eventMeta = {
         element: createElement('div', 'Time: 2:00 PM'),
+        className: 'event-meta',
         styles: '.event-meta-list { font-size: 14px; }',
       };
 
@@ -273,6 +274,7 @@ describe('Card List Component', () => {
 
       const dateSign = {
         element: createElement('div', 'JAN 15'),
+        className: 'date-sign-list',
         styles: '.date-sign-list { display: inline-block; }',
       };
 
@@ -291,6 +293,7 @@ describe('Card List Component', () => {
     it('should set isDisplayEvent when dateSign is provided', () => {
       const dateSign = {
         element: createElement('div', 'FEB'),
+        className: 'date-sign',
         styles: '',
       };
 
@@ -363,10 +366,12 @@ describe('Card List Component', () => {
         image: createImageElement(),
         eventMeta: {
           element: createElement('div', 'Location: Room 101'),
+          className: 'event-meta',
           styles: '.meta {}',
         },
         dateSign: {
           element: createElement('div', 'MAR'),
+          className: 'date-sign',
           styles: '.sign {}',
         },
         isAligned: true,

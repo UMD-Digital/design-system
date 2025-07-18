@@ -296,10 +296,18 @@ const isDisplay = {
       attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.display.hero,
     }),
-  list: createAttributeCheck(
-    AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.list,
-  ),
+  list: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.display.DISPLAY,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.list,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.list,
+    }),
   outline: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
@@ -436,10 +444,18 @@ const isDisplay = {
       attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.layout.stackedInterior,
     }),
-  tabular: createAttributeCheck(
-    AttributeNames.deprecated.display.DISPLAY,
-    AttributesValues.display.tabular,
-  ),
+  tabular: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.display.DISPLAY,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.tabular,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.tabular,
+    }),
 } as const;
 
 // Information checks

@@ -1,149 +1,145 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
 import { ElementModel } from 'model';
-
-interface PersonTextLockup {
-  name?: HTMLElement | null;
-  job?: HTMLElement | null;
-  association?: HTMLElement | null;
-  pronouns?: HTMLElement | null;
-  subText?: HTMLElement | null;
-  isThemeDark?: boolean;
-}
-
-const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-person-container';
-const { token } = Styles;
-
-const headlineStyles = {
-  element: {
-    fontWeight: '700',
-    color: `${token.color.black}`,
-
-    [`& + *`]: {
-      marginTop: '4px',
-    },
-  },
-  subElement: {
-    color: 'currentColor',
-  },
-};
-
-const jobStyles = {
-  element: {
-    lineHeight: `1.25em`,
-  },
-  subElement: {
-    color: 'currentColor',
-  },
-};
-
-const associationStyles = {
-  element: {
-    lineHeight: '1.2em',
-    display: 'block',
-    color: `${token.color.gray.dark}`,
-
-    [`& + *`]: {
-      marginTop: '4px',
-    },
-
-    [`& a:hover, a:focus`]: {
-      textDecoration: 'underline',
-    },
-  },
-  subElement: {
-    color: 'currentColor',
-  },
-};
-
-const pronounsStyles = {
-  element: {
-    [`& + *`]: {
-      marginTop: '4px',
-    },
-  },
-  subElement: {
-    color: 'currentColor',
-  },
-};
-
-const subTextStyles = {
-  siblingAfter: {
-    marginTop: '4px',
-  },
-};
-
-const containerStyles = {
-  className: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
-  zIndex: '9',
-  position: 'relative',
-};
+import { type ElementVisual } from '../../_types';
+import { type PersonTextLockupProps } from '../_types';
 
 export default ({
-  name,
-  job,
+  actions,
   association,
+  isThemeDark,
+  job,
+  name,
+  nameComposite,
   pronouns,
   subText,
-  isThemeDark,
-}: PersonTextLockup) => {
-  const container = document.createElement('div');
-  let styles = `
-    ${Utility.theme.getStyleStringFromJssObject(containerStyles)}
-  `;
+}: PersonTextLockupProps) => {
+  let children: ElementVisual[] = [];
 
-  container.classList.add(ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER);
+  if (nameComposite && !name) {
+    children.push(nameComposite);
+  }
 
   if (name) {
-    const styledHeadline = ElementModel.headline.sansLarger({
-      element: name,
-      elementStyles: headlineStyles,
-      isThemeDark,
-    });
-    container.appendChild(styledHeadline.element);
-    styles += styledHeadline.styles;
+    children.push(
+      ElementModel.headline.sansLarger({
+        element: name,
+        elementStyles: {
+          element: {
+            fontWeight: '700',
+            color: `${Styles.token.color.black}`,
+
+            [`& + *`]: {
+              marginTop: '4px',
+            },
+          },
+          subElement: {
+            color: 'currentColor',
+          },
+        },
+        isThemeDark,
+      }),
+    );
   }
 
   if (job) {
-    const styledJob = ElementModel.headline.sansSmall({
-      element: job,
-      elementStyles: jobStyles,
-      isThemeDark,
-    });
-    container.appendChild(styledJob.element);
-    styles += styledJob.styles;
+    children.push(
+      ElementModel.headline.sansSmall({
+        element: job,
+        elementStyles: {
+          element: {
+            lineHeight: `1.25em`,
+          },
+          subElement: {
+            color: 'currentColor',
+          },
+        },
+        isThemeDark,
+      }),
+    );
   }
 
   if (association) {
-    const styledAssociation = ElementModel.headline.sansSmall({
-      element: association,
-      elementStyles: associationStyles,
-      isThemeDark,
-    });
-    container.appendChild(styledAssociation.element);
-    styles += styledAssociation.styles;
+    children.push(
+      ElementModel.headline.sansSmall({
+        element: association,
+        elementStyles: {
+          element: {
+            lineHeight: '1.2em',
+            display: 'block',
+            color: `${Styles.token.color.gray.dark}`,
+
+            [`& + *`]: {
+              marginTop: '4px',
+            },
+
+            [`& a:hover, a:focus`]: {
+              textDecoration: 'underline',
+            },
+          },
+          subElement: {
+            color: 'currentColor',
+          },
+        },
+        isThemeDark,
+      }),
+    );
   }
 
   if (pronouns) {
     pronouns.innerHTML = `<i>${pronouns.innerHTML}</i>`;
-    const styledPronouns = ElementModel.headline.sansSmall({
-      element: pronouns,
-      elementStyles: pronounsStyles,
-      isThemeDark,
-    });
-    container.appendChild(styledPronouns.element);
-    styles += styledPronouns.styles;
+    children.push(
+      ElementModel.headline.sansSmall({
+        element: pronouns,
+        elementStyles: {
+          element: {
+            [`& + *`]: {
+              marginTop: '4px',
+            },
+          },
+          subElement: {
+            color: 'currentColor',
+          },
+        },
+        isThemeDark,
+      }),
+    );
   }
 
   if (subText) {
-    const styledSubText = ElementModel.headline.sansSmall({
-      element: subText,
-      elementStyles: subTextStyles,
-      isThemeDark,
-    });
-    container.appendChild(styledSubText.element);
-    styles += styledSubText.styles;
+    children.push(
+      ElementModel.headline.sansSmall({
+        element: subText,
+        elementStyles: {
+          siblingAfter: {
+            marginTop: '4px',
+          },
+        },
+        isThemeDark,
+      }),
+    );
   }
 
-  return { element: container, styles };
+  if (actions) {
+    children.push(
+      ElementModel.layout.gridInlineTabletRows({
+        element: actions,
+        elementStyles: {
+          element: {
+            marginTop: Styles.token.spacing.sm,
+          },
+        },
+      }),
+    );
+  }
+
+  return ElementModel.createDiv({
+    className: 'text-lockup-person-container',
+    children,
+    elementStyles: {
+      element: {
+        zIndex: '9',
+        position: 'relative',
+      },
+    },
+  });
 };

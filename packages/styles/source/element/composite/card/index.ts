@@ -15,17 +15,6 @@
 export * as block from './block';
 
 /**
- * List card component styles for vertical layouts with different themes.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.element.composite.card.list.light
- * ```
- * @since 1.1.0
- */
-export * as list from './list';
-
-/**
  * Overlay card component styles with color and image overlays.
  * @example
  * ```typescript

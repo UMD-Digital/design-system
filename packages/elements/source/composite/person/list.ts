@@ -1,49 +1,93 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import { assets, textLockup } from 'atomic';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { theme } from 'utilities';
+import { layout } from 'atomic';
 import { ElementModel } from 'model';
 import { PersonCard } from './_types';
+import { ElementVisual } from '../../_types';
 
-const actionStyles = {
-  element: {
-    marginTop: token.spacing.sm,
-  },
-};
+const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
+const mediumBreakpointStart = Styles.token.media.breakpointValues.medium.min;
+const mediumBreakpoint = Styles.token.media.breakpointValues.large.min;
 
-export default (props: PersonCard) => {
-  const { image, actions } = props;
-  const composite = ElementModel.composite.card.list({
-    ...props,
-    element: document.createElement('div'),
-    isDisplayPerson: true,
-  });
+export default ({
+  actions,
+  address,
+  association,
+  email,
+  image,
+  isThemeDark,
+  job,
+  linkendIn,
+  name,
+  phone,
+  pronouns,
+  subText,
+}: PersonCard) => {
+  let children: ElementVisual[] = [];
 
   if (image) {
-    const imageContainer = assets.image.background({
-      image,
-      isScaled: false,
-    });
+    children.push(
+      layout.person.columns.image({
+        customStyles: {
+          ...theme.media.createContainerQuery(
+            'min-width',
+            mediumBreakpointStart,
+            {
+              display: 'block',
+              width: '160px',
+              paddingRight: `${Styles.token.spacing.md}`,
+              alignSelf: 'flex-start',
+            },
+          ),
 
-    composite.element.appendChild(imageContainer.element);
-    composite.styles += imageContainer.styles;
+          ...theme.media.createContainerQuery('min-width', mediumBreakpoint, {
+            width: '208px',
+          }),
+        },
+        image,
+        isThemeDark,
+      }),
+    );
   }
 
-  const textLockupElement = textLockup.person(props);
-  const contactLockupElement = textLockup.contact(props);
-
-  textLockupElement.element.appendChild(contactLockupElement.element);
-  textLockupElement.styles += contactLockupElement.styles;
-
-  if (actions) {
-    const styledActions = ElementModel.layout.gridInlineTabletRows({
-      element: actions,
-      elementStyles: actionStyles,
-    });
-    textLockupElement.element.appendChild(styledActions.element);
-    textLockupElement.styles += styledActions.styles;
+  if (name) {
+    children.push(
+      layout.person.columns.information({
+        actions,
+        address,
+        association,
+        customStyles: {},
+        email,
+        isThemeDark,
+        job,
+        linkendIn,
+        name,
+        phone,
+        pronouns,
+        subText,
+      }),
+    );
   }
 
-  composite.element.appendChild(textLockupElement.element);
-  composite.styles += textLockupElement.styles;
+  return ElementModel.createDiv({
+    className: 'person-list-container',
+    children,
+    elementStyles: {
+      element: {
+        maxWidth: `${Styles.token.spacing.maxWidth.smallest}`,
+        paddingBottom: `${Styles.token.spacing.md}`,
+        borderBottom: `1px solid ${Styles.token.color.gray.light}`,
+        overflow: 'hidden',
+        display: 'flex',
 
-  return composite;
+        ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+          flexDirection: 'column',
+        }),
+
+        ...(isThemeDark && {
+          borderBottom: `1px solid ${Styles.token.color.gray.dark}`,
+        }),
+      },
+    },
+  });
 };

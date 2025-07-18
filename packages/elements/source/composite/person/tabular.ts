@@ -1,82 +1,104 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import { assets, textLockup } from 'atomic';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { theme } from 'utilities';
+import { layout } from 'atomic';
 import { ElementModel } from 'model';
 import { PersonCard } from './_types';
+import { ElementVisual } from '../../_types';
 
-const actionStyles = {
-  element: {
-    marginTop: token.spacing.sm,
-  },
-};
+const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
 
-const headlineStyles = {
-  element: {
-    fontWeight: '700',
-    color: `${token.color.black}`,
-
-    [`& + *`]: {
-      marginTop: token.spacing.min,
-    },
-  },
-  subElement: {
-    color: 'currentColor',
-  },
-};
-
-export default (props: PersonCard) => {
-  const { image, actions, isThemeDark } = props;
-  const composite = ElementModel.composite.card.list({
-    ...props,
-    element: document.createElement('div'),
-    isDisplayTabular: true,
-  });
-  const { name, ...otherProps } = props;
-  const textLockupElement = textLockup.person(otherProps);
-  const contactLockupElement = textLockup.contact(props);
-
-  // First Column
+export default ({
+  actions,
+  additionalContact,
+  address,
+  association,
+  email,
+  image,
+  isThemeDark,
+  job,
+  linkendIn,
+  name,
+  phone,
+  pronouns,
+  subText,
+}: PersonCard) => {
+  let children: ElementVisual[] = [];
 
   if (image) {
-    const imageContainer = assets.image.background({
-      image,
-      isScaled: false,
-    });
-
-    composite.element.appendChild(imageContainer.element);
-    composite.styles += imageContainer.styles;
+    children.push(
+      layout.person.columns.image({
+        image,
+        isThemeDark,
+      }),
+    );
   }
-
-  // Second Column
 
   if (name) {
-    const styledName = ElementModel.headline.sansLarge({
+    const nameComposite = ElementModel.headline.sansLarge({
       element: name,
-      elementStyles: headlineStyles,
+      elementStyles: {
+        element: {
+          fontWeight: `${Styles.token.font.weight.bold}`,
+          color: `${Styles.token.color.black}`,
+
+          [`& + *`]: {
+            marginTop: Styles.token.spacing.min,
+          },
+        },
+        subElement: {
+          color: 'currentColor',
+        },
+      },
       isThemeDark,
     });
-    textLockupElement.element.insertBefore(
-      styledName.element,
-      textLockupElement.element.firstChild,
+
+    children.push(
+      layout.person.columns.details({
+        actions,
+        association,
+        isThemeDark,
+        customStyles: {},
+        job,
+        nameComposite,
+        pronouns,
+        subText,
+      }),
     );
-    textLockupElement.styles += styledName.styles;
   }
 
-  if (actions) {
-    const styledActions = ElementModel.layout.gridInlineTabletRows({
-      element: actions,
-      elementStyles: actionStyles,
-    });
-    textLockupElement.element.appendChild(styledActions.element);
-    textLockupElement.styles += styledActions.styles;
+  if (additionalContact || address || email || linkendIn || phone) {
+    children.push(
+      layout.person.columns.contact({
+        additionalContact,
+        address,
+        customStyles: {},
+        email,
+        isThemeDark,
+        linkendIn,
+        phone,
+      }),
+    );
   }
 
-  composite.element.appendChild(textLockupElement.element);
-  composite.styles += textLockupElement.styles;
+  return ElementModel.createDiv({
+    className: 'person-tabular-container',
+    children,
+    elementStyles: {
+      element: {
+        maxWidth: `${Styles.token.spacing.maxWidth.smallest}`,
+        paddingBottom: `${Styles.token.spacing.md}`,
+        borderBottom: `1px solid ${Styles.token.color.gray.light}`,
+        overflow: 'hidden',
+        display: 'flex',
 
-  // Third Column
+        ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+          flexDirection: 'column',
+        }),
 
-  composite.element.appendChild(contactLockupElement.element);
-  composite.styles += contactLockupElement.styles;
-
-  return composite;
+        ...(isThemeDark && {
+          borderBottom: `1px solid ${Styles.token.color.gray.dark}`,
+        }),
+      },
+    },
+  });
 };

@@ -1,26 +1,8 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 import { ElementModel } from 'model';
-
-interface PersonContact {
-  phone?: HTMLElement | null;
-  email?: HTMLElement | null;
-  linkendIn?: HTMLElement | null;
-  address?: HTMLElement | null;
-  additionalContact?: HTMLElement | null;
-  isThemeDark?: boolean;
-}
-
-const containerStyles = {
-  element: {
-    marginTop: '4px',
-    lineHeight: '1.2em',
-
-    [`&a:hover, &a:focus`]: {
-      textDecoration: 'underline',
-    },
-  },
-};
+import { type ElementVisual } from '../../_types';
+import { type PersonContactProps } from '../_types';
 
 const makeIcon = ({
   icon,
@@ -74,12 +56,23 @@ const makeContactLink = ({
     element.getAttribute('href') && icon !== Utility.asset.icon.PIN;
   const textSpan = makeText({ text: element.innerHTML, isThemeDark });
   const iconSpan = makeIcon({ icon, isThemeDark });
+  const containerStyles = {
+    element: {
+      marginTop: '4px',
+      lineHeight: '1.2em',
+
+      [`&a:hover, &a:focus`]: {
+        textDecoration: 'underline',
+      },
+    },
+  };
 
   if (isLink) {
     const link = ElementModel.layout.gridInlineRow({
       element: document.createElement('a'),
       elementStyles: containerStyles,
       isThemeDark,
+      children: [iconSpan, textSpan],
     });
 
     const ariaLabel = element.getAttribute('aria-label');
@@ -87,108 +80,107 @@ const makeContactLink = ({
     link.element.setAttribute('href', element.getAttribute('href') || '');
     if (ariaLabel) link.element.setAttribute('aria-label', ariaLabel);
 
-    link.element.appendChild(iconSpan.element);
-    link.styles += iconSpan.styles;
-
-    link.element.appendChild(textSpan.element);
-    link.styles += textSpan.styles;
-
     return link;
   }
 
-  const container = ElementModel.layout.gridInlineRow({
+  return ElementModel.layout.gridInlineRow({
     element: document.createElement('div'),
     elementStyles: containerStyles,
     isThemeDark,
+    children: [iconSpan, textSpan],
   });
-
-  container.element.appendChild(iconSpan.element);
-  container.styles += iconSpan.styles;
-
-  container.element.appendChild(textSpan.element);
-  container.styles += textSpan.styles;
-
-  return container;
 };
 
 export default ({
-  phone,
-  email,
-  linkendIn,
+  actions,
   address,
-  additionalContact,
+  email,
   isThemeDark,
-}: PersonContact) => {
-  const className = 'text-lockup-contact';
-  const container = document.createElement('div');
-  let styles = `
-    .${className} {
-      margin-top: ${Styles.token.spacing.sm};
-    }
-  `;
-
-  container.classList.add(className);
+  linkendIn,
+  phone,
+}: PersonContactProps) => {
+  let children: ElementVisual[] = [];
 
   if (phone) {
-    const phoneElement = document.createElement('div');
-    const styledPhone = makeContactLink({
-      element: phone,
-      icon: Utility.asset.icon.PHONE,
-      isThemeDark,
-    });
-
-    phoneElement.appendChild(styledPhone.element);
-    styles += styledPhone.styles;
-
-    container.appendChild(phoneElement);
+    children.push(
+      ElementModel.createDiv({
+        className: 'text-lockup-contact-phone',
+        children: [
+          makeContactLink({
+            element: phone,
+            icon: Utility.asset.icon.PHONE,
+            isThemeDark,
+          }),
+        ],
+      }),
+    );
   }
 
   if (email) {
-    const emailElement = document.createElement('div');
-    const styledEmail = makeContactLink({
-      element: email,
-      icon: Utility.asset.icon.EMAIL,
-      isThemeDark,
-    });
-
-    emailElement.appendChild(styledEmail.element);
-    styles += styledEmail.styles;
-
-    container.appendChild(emailElement);
+    children.push(
+      ElementModel.createDiv({
+        className: 'text-lockup-contact-email',
+        children: [
+          makeContactLink({
+            element: email,
+            icon: Utility.asset.icon.EMAIL,
+            isThemeDark,
+          }),
+        ],
+      }),
+    );
   }
 
   if (linkendIn) {
-    const linkedinElement = document.createElement('div');
-    const styledLinkedin = makeContactLink({
-      element: linkendIn,
-      icon: Utility.asset.social.LINKEDIN,
-      isThemeDark,
-    });
-
-    linkedinElement.appendChild(styledLinkedin.element);
-    styles += styledLinkedin.styles;
-
-    container.appendChild(linkedinElement);
+    children.push(
+      ElementModel.createDiv({
+        className: 'text-lockup-contact-linkedin',
+        children: [
+          makeContactLink({
+            element: linkendIn,
+            icon: Utility.asset.social.LINKEDIN,
+            isThemeDark,
+          }),
+        ],
+      }),
+    );
   }
 
   if (address) {
-    const addressElement = document.createElement('div');
-    const styledAddress = makeContactLink({
-      element: address,
-      icon: Utility.asset.icon.PIN,
-      isThemeDark,
-    });
-
-    addressElement.appendChild(styledAddress.element);
-    styles += styledAddress.styles;
-
-    container.appendChild(addressElement);
+    children.push(
+      ElementModel.createDiv({
+        className: 'text-lockup-contact-address',
+        children: [
+          makeContactLink({
+            element: address,
+            icon: Utility.asset.icon.PIN,
+            isThemeDark,
+          }),
+        ],
+      }),
+    );
   }
 
-  // if (additionalContact) {
-  //   additionalContact.classList.add(ELEMENT_PERSON_ADDITONAL_CONTACT);
-  //   container.appendChild(additionalContact);
-  // }
+  if (actions) {
+    children.push(
+      ElementModel.layout.gridInlineTabletRows({
+        element: actions,
+        elementStyles: {
+          element: {
+            marginTop: Styles.token.spacing.sm,
+          },
+        },
+      }),
+    );
+  }
 
-  return { element: container, styles };
+  return ElementModel.createDiv({
+    className: 'text-lockup-contact',
+    children,
+    elementStyles: {
+      element: {
+        marginTop: `${Styles.token.spacing.sm}`,
+      },
+    },
+  });
 };

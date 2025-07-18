@@ -96,6 +96,10 @@ const elements = {
             {
               marginTop: spacing.md,
             },
+          [`umd-element-${type}[data-display="list"] + umd-element-${type}[data-display="list"]`]:
+            {
+              marginTop: spacing.md,
+            },
         },
       }),
     }),
@@ -125,6 +129,10 @@ const elements = {
             {
               marginTop: spacing.md,
             },
+          [`umd-element-${type}[data-display="list"] + umd-element-${type}[data-display="list"]`]:
+            {
+              marginTop: spacing.md,
+            },
         },
       }),
     }),
@@ -136,6 +144,10 @@ const elements = {
       ...createElementStyles(`umd-element-${type}`, {
         custom: {
           [`umd-element-${type}[display="tabular"] + umd-element-${type}[display="tabular"]`]:
+            {
+              marginTop: spacing.md,
+            },
+          [`umd-element-${type}[data-display="tabular"] + umd-element-${type}[data-display="tabular"]`]:
             {
               marginTop: spacing.md,
             },

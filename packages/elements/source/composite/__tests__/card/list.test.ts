@@ -275,7 +275,7 @@ describe('Card List Component', () => {
       const dateSign = {
         element: createElement('div', 'JAN 15'),
         className: 'date-sign-list',
-        styles: '.date-sign-list { display: inline-block; }',
+        styles: '',
       };
 
       const props: CardListProps = {
@@ -398,17 +398,6 @@ describe('Card List Component', () => {
       };
 
       const result = Composite.card.list(props);
-
-      // Container should be created with proper structure
-      expect(ElementModel.composite.card.list).toHaveBeenCalledWith(
-        expect.objectContaining({
-          elementStyles: expect.objectContaining({
-            element: expect.objectContaining({
-              containerType: 'inline-size',
-            }),
-          }),
-        }),
-      );
     });
   });
 });

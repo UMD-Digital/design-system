@@ -1,93 +1,171 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
+import { theme } from 'utilities';
 import { ElementModel } from 'model';
 import { PersonBio } from '../_types';
+import { type ElementVisual } from '../../../_types';
 
-export default (props: PersonBio) => {
-  const { isThemeDark, image, actions, description } = props;
-  const { name, ...textProps } = props;
-  const container = document.createElement('div');
-  const textColumn = document.createElement('div');
-  const composite = ElementModel.composite.person.bio({
-    element: document.createElement('div'),
-    isThemeDark,
-  });
-  const textContainer = ElementModel.text.lineAdjustmentInset({
-    element: document.createElement('div'),
-  });
-  let styles = '';
-
-  const textLockupElement = textLockup.person(textProps);
-  const contactLockupElement = textLockup.contact(props);
-
-  if (image) {
-    const imageContainer = assets.image.background({
-      image,
-      isScaled: false,
-    });
-    composite.element.appendChild(imageContainer.element);
-    composite.styles += imageContainer.styles;
-  }
+const createTextContainer = (props: PersonBio) => {
+  const { isThemeDark, name, ...textProps } = props;
+  const children: ElementVisual[] = [];
 
   if (name) {
-    const styledName = ElementModel.headline.sansExtraLarge({
-      element: name,
-      isThemeDark,
-      elementStyles: {
-        element: {
-          color: `${token.color.black}`,
-          textTransform: 'uppercase',
-          fontWeight: '800',
-          display: 'block',
+    children.push(
+      ElementModel.headline.sansExtraLarge({
+        element: name,
+        isThemeDark,
+        elementStyles: {
+          element: {
+            color: `${Styles.token.color.black}`,
+            textTransform: 'uppercase',
+            fontWeight: '800',
+            display: 'block',
+          },
+          siblingAfter: {
+            marginTop: Styles.token.spacing.sm,
+          },
         },
-        siblingAfter: {
-          marginTop: token.spacing.sm,
-        },
-      },
-    });
-    textContainer.element.appendChild(styledName.element);
-    composite.styles += styledName.styles;
+      }),
+    );
   }
 
-  textContainer.element.appendChild(textLockupElement.element);
-  textColumn.appendChild(textContainer.element);
-  textColumn.appendChild(contactLockupElement.element);
-  composite.styles += textContainer.styles;
-  composite.styles += textLockupElement.styles;
-  composite.styles += contactLockupElement.styles;
-  styles += composite.styles;
+  children.push(textLockup.person({ ...textProps, isThemeDark }));
+
+  return ElementModel.text.lineAdjustmentInset({
+    element: document.createElement('div'),
+    children,
+  });
+};
+
+const createTextColumn = (props: PersonBio) => {
+  const { actions } = props;
+  const textContainer = createTextContainer(props);
+  const children: ElementVisual[] = [];
+
+  children.push(textContainer, textLockup.contact(props));
 
   if (actions) {
-    const styledActions = ElementModel.layout.gridInlineTabletRows({
-      element: actions,
-      elementStyles: {
-        element: {
-          marginTop: token.spacing.sm,
+    children.push(
+      ElementModel.layout.gridInlineTabletRows({
+        element: actions,
+        elementStyles: {
+          element: {
+            marginTop: Styles.token.spacing.sm,
+          },
         },
-      },
-    });
-    textColumn.appendChild(styledActions.element);
-    styles += styledActions.styles;
+      }),
+    );
   }
 
-  composite.element.appendChild(textColumn);
-  container.appendChild(composite.element);
+  return ElementModel.createDiv({
+    className: 'person-bio-summary-text-column',
+    children,
+  });
+};
+
+const makeContainer = (props: PersonBio) => {
+  const { image } = props;
+  const textColumn = createTextColumn(props);
+  const children: ElementVisual[] = [];
+
+  if (image) {
+    children.push(
+      assets.image.background({
+        image,
+        isScaled: false,
+        additionalStyles: {
+          element: {
+            ...theme.media.createContainerQuery(
+              'max-width',
+              Styles.token.media.breakpointValues.medium.max,
+              {
+                display: 'flex',
+              },
+            ),
+
+            [`& img`]: {
+              ...theme.media.createContainerQuery(
+                'min-width',
+                Styles.token.media.breakpointValues.large.min,
+                {
+                  width: `100%`,
+                  height: `auto !important`,
+                },
+              ),
+            },
+          },
+        },
+      }),
+    );
+  }
+
+  children.push(textColumn);
+
+  return ElementModel.createDiv({
+    className: 'person-bio-summary-container',
+    children,
+    elementStyles: {
+      element: {
+        display: 'grid',
+        gridGap: `${Styles.token.spacing.md}`,
+
+        ...theme.media.createContainerQuery(
+          'min-width',
+          Styles.token.media.breakpointValues.large.min,
+          {
+            gridTemplateColumns: `repeat(8, 1fr)`,
+            gridGap: `${Styles.token.spacing.lg}`,
+            alignItems: `center`,
+          },
+        ),
+
+        [`& > *`]: {
+          ...theme.media.createContainerQuery(
+            'min-width',
+            Styles.token.media.breakpointValues.large.min,
+            {
+              gridColumn: `span 5`,
+            },
+          ),
+        },
+
+        [`&:has(> :nth-child(2)) > *:first-child `]: {
+          ...theme.media.createContainerQuery(
+            'min-width',
+            Styles.token.media.breakpointValues.large.min,
+            {
+              gridColumn: `span 3`,
+              alignSelf: `flex-start`,
+            },
+          ),
+        },
+      },
+    },
+  });
+};
+
+export default (props: PersonBio) => {
+  const { isThemeDark, description } = props;
+  const container = makeContainer(props);
+  const children: ElementVisual[] = [container];
 
   if (description) {
-    const styledDescription = ElementModel.richText.simpleLarge({
-      element: description,
-      isThemeDark,
-      elementStyles: {
-        element: {
-          marginTop: token.spacing.lg,
-          maxWidth: token.spacing.maxWidth.smallest,
+    children.push(
+      ElementModel.richText.simpleLarge({
+        element: description,
+        isThemeDark,
+        elementStyles: {
+          element: {
+            marginTop: Styles.token.spacing.lg,
+            maxWidth: Styles.token.spacing.maxWidth.smallest,
+          },
         },
-      },
-    });
-
-    container.appendChild(styledDescription.element);
-    styles += styledDescription.styles;
+      }),
+    );
   }
 
-  return { element: container, styles };
+  return ElementModel.createDiv({
+    className: 'person-bio-summary-composite',
+    children,
+  });
 };

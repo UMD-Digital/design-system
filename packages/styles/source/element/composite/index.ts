@@ -13,14 +13,3 @@
  * @since 1.1.0
  */
 export * as card from './card';
-
-/**
- * Person component styles for biographical and profile displays.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.element.composite.person.bio.small
- * ```
- * @since 1.1.0
- */
-export * as person from './person';

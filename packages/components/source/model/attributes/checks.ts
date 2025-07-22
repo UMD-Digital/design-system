@@ -693,10 +693,6 @@ const isTheme = {
 
 // Visual checks
 const isVisual = {
-  bordered: createAttributeCheck(
-    AttributeNames.deprecated.visual.VISUAL_BORDER,
-    AttributesValues.state.TRUE,
-  ),
   aligned: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,
@@ -707,6 +703,18 @@ const isVisual = {
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.visual.imageAligned,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
+  bordered: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.visual.VISUAL_BORDER,
+      attributeNameNew: AttributeNames.visual.bordered,
+      attributeValue: AttributesValues.state.TRUE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.visual.bordered,
       attributeValue: AttributesValues.state.TRUE,
     }),
   icon_seal: (props: AttributeElementProps): boolean =>

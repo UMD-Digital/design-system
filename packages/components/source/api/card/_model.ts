@@ -48,7 +48,6 @@ const createCardComponent = ({ tagName }: CardConfig) => {
     const isAligned = Attributes.isVisual.aligned({ element });
     const hasBorder = Attributes.isVisual.bordered({ element });
     const isDisplayList = Attributes.isDisplay.list({ element });
-
     const cardData = createComponentData(element);
 
     if (isDisplayList) {

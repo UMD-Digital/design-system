@@ -693,14 +693,22 @@ const isTheme = {
 
 // Visual checks
 const isVisual = {
-  aligned: createAttributeCheck(
-    AttributeNames.deprecated.visual.VISUAL_ALIGN,
-    AttributesValues.state.TRUE,
-  ),
   bordered: createAttributeCheck(
     AttributeNames.deprecated.visual.VISUAL_BORDER,
     AttributesValues.state.TRUE,
   ),
+  aligned: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.visual.VISUAL_ALIGN,
+      attributeNameNew: AttributeNames.visual.imageAligned,
+      attributeValue: AttributesValues.state.TRUE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.visual.imageAligned,
+      attributeValue: AttributesValues.state.TRUE,
+    }),
   icon_seal: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,

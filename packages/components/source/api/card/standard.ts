@@ -27,6 +27,8 @@ import CardModel from './_model';
  *   - `bordered` - Add border styling
  * - `data-visual-transparent` - Visual display options:
  *   - `true` - Transparent background
+ * - `data-visual-image-aligned` - Visual display options:
+ *   - `true` - Aligned content layout
  *   - `list` - List display format
  * 
  * @example

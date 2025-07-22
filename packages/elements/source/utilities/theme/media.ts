@@ -28,3 +28,20 @@ export const createContainerQuery = (
     [`@media (${comparison}: ${breakpoint}px)`]: styles,
   };
 };
+
+/**
+ * Creates a container query for a range of viewport sizes.
+ * @param {number} min - The minimum breakpoint in pixels
+ * @param {number} max - The maximum breakpoint in pixels
+ * @param {object} styles - The styles to apply within this range
+ * @returns {object} Media query object
+ */
+export const createRangeContainerQuery = (
+  min: number,
+  max: number,
+  styles = {},
+) => {
+  return {
+    [`@media (min-width: ${min}px) and (max-width: ${max})`]: styles,
+  };
+};

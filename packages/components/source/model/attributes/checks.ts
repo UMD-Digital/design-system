@@ -721,12 +721,12 @@ const isVisual = {
     checkDeprecatedAttribute({
       ...props,
       attributeNameOld: AttributeNames.deprecated.visual.VISUAL_HAS_LOGO,
-      attributeNameNew: AttributeNames.visual.icon_seal,
+      attributeNameNew: AttributeNames.visual.iconSeal,
       attributeValue: AttributesValues.state.TRUE,
     }) ||
     isAttributeTrue({
       ...props,
-      attributeName: AttributeNames.visual.icon_seal,
+      attributeName: AttributeNames.visual.iconSeal,
       attributeValue: AttributesValues.state.TRUE,
     }),
   open: (props: AttributeElementProps): boolean =>
@@ -829,7 +829,7 @@ const getValue = {
     currentName: AttributeNames.information.alertUrl,
   }),
   daysToHide: createValueGetter({
-    currentName: AttributeNames.visual.hidden_days,
+    currentName: AttributeNames.visual.hiddenDays,
     deprecatedName: AttributeNames.deprecated.visual.VISUAL_DAYS_TO_HIDE,
   }),
   feedEntryRemoveIds: createValueGetter({

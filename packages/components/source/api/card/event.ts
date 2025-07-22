@@ -171,8 +171,8 @@ const createComponent: CreateComponentFunction = (element) => {
  *   - `visual-time` - Show time in event details
  * - `data-theme` - Theme styling options:
  *   - `dark` - Dark theme styling
- * - `data-visual` - Visual display options:
- *   - `transparent` - Transparent background
+ * - `data-visual-transparent` - Visual display options:
+ *   - `true` - Transparent background
  *
  * @example
  * ```html

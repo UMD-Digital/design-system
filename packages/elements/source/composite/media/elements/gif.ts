@@ -1,0 +1,55 @@
+import { ElementModel } from 'model';
+import { assets } from 'atomic';
+
+export default ({ image }: { image: HTMLImageElement }) => {
+  const container = document.createElement('div');
+
+  const calculateHeight = () => {
+    if (!image.naturalWidth || !image.naturalHeight) return;
+
+    const aspectRatio = image.naturalHeight / image.naturalWidth;
+    const containerWidth = container.offsetWidth;
+
+    if (containerWidth > 0) {
+      const calculatedHeight = Math.round(containerWidth * aspectRatio);
+      container.style.height = `${calculatedHeight}px`;
+    }
+  };
+
+  const resizeObserver = new ResizeObserver(() => {
+    calculateHeight();
+  });
+
+  if (image.complete && image.naturalWidth) {
+    calculateHeight();
+  } else {
+    image.addEventListener('load', calculateHeight);
+  }
+
+  setTimeout(() => {
+    resizeObserver.observe(container);
+  }, 0);
+
+  const elementModel = ElementModel.create({
+    element: container,
+    className: 'media-gif',
+    children: [assets.image.gif({ image })],
+    elementStyles: {
+      element: {
+        width: '100%',
+        maxHeight: '100%',
+        position: 'relative',
+        display: 'block',
+        overflow: 'hidden',
+      },
+    },
+  });
+
+  return {
+    ...elementModel,
+    destroy: () => {
+      resizeObserver.disconnect();
+      image.removeEventListener('load', calculateHeight);
+    },
+  };
+};

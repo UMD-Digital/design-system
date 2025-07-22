@@ -1,5 +1,2 @@
-import { default as caption } from './caption';
-
-export default {
-  caption,
-};
+export { default as caption } from './caption';
+export { default as gif } from './gif';

@@ -37,6 +37,7 @@ const baseElements = [
   'hero',
   'logo',
   'media-inline',
+  'media-gif',
   'pathway-highlight',
   'pathway',
   'person-bio',

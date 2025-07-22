@@ -25,11 +25,13 @@ const tagName = 'umd-element-article';
  * - `data-theme` - Theme styling options:
  *   - `dark` - Dark theme styling
  *   - `light` - Light theme styling
+ * - `data-display` - Display mode options:
+ *   - `list` - List display format
  * - `data-visual` - Visual display options:
  *   - `transparent` - Transparent background
  *   - `aligned` - Aligned content layout
  *   - `bordered` - Add border styling
- *   - `list` - List display format
+ *
  *
  * @example
  * ```html
@@ -64,7 +66,7 @@ const tagName = 'umd-element-article';
  * @example
  * ```html
  * <!-- List layout article -->
- * <umd-element-article data-visual="list" data-theme="light">
+ * <umd-element-article data-display="list" data-theme="light">
  *   <h4 slot="headline">Campus Sustainability Initiative</h4>
  *   <p slot="text">New programs reduce carbon footprint by 30%.</p>
  *   <p slot="date">October 5, 2023</p>

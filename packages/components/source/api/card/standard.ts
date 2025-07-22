@@ -27,6 +27,7 @@ import CardModel from './_model';
  *   - `true` - Aligned content layout
  * - `data-visual-bordered` - Visual display options:
  *   - `true` - Add border styling
+ * - `data-display` - Display options:
  *   - `list` - List display format
  *
  * @example
@@ -55,7 +56,7 @@ import CardModel from './_model';
  * @example
  * ```html
  * <!-- List layout with dark theme -->
- * <umd-element-card data-theme="dark" data-visual="list">
+ * <umd-element-card data-theme="dark" data-display="list">
  *   <h4 slot="headline">Quick Links</h4>
  *   <p slot="text">Access important resources and tools.</p>
  * </umd-element-card>

@@ -167,8 +167,8 @@ const createComponent: CreateComponentFunction = (element) => {
  *   - `feature` - Featured event layout with prominent date
  *   - `promo` - Promotional layout with image overlay
  *   - `list` - Compact list layout
- * - `data-feature` - Feature options:
- *   - `visual-time` - Show time in event details
+ * - `data-visual-time` - Time display options:
+ *   - `true` - Show time in event details
  * - `data-theme` - Theme styling options:
  *   - `dark` - Dark theme styling
  * - `data-visual-transparent` - Visual display options:

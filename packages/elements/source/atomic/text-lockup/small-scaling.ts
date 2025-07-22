@@ -1,4 +1,3 @@
-import * as Utility from 'utilities';
 import { ElementModel } from 'model';
 import {
   createEyebrow,
@@ -8,6 +7,7 @@ import {
   textStyles,
   dateStyles,
 } from './small';
+import { type ElementVisual } from '../../_types';
 
 export type TypeTextLockupSmallScaling = {
   headline?: HTMLElement | null;
@@ -15,17 +15,9 @@ export type TypeTextLockupSmallScaling = {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  eventMeta?: { element: HTMLElement; styles: string };
+  eventMeta?: ElementVisual;
   isThemeDark?: boolean;
   hasEyebrowRibbon?: boolean;
-};
-
-const ELEMENT_SCALABLE_FONT_CONTAINER = 'scaling-font-block-container';
-
-const containerStyles = {
-  className: ELEMENT_SCALABLE_FONT_CONTAINER,
-  zIndex: '9',
-  position: 'relative',
 };
 
 export default (props: TypeTextLockupSmallScaling) => {
@@ -39,67 +31,63 @@ export default (props: TypeTextLockupSmallScaling) => {
     isThemeDark,
     hasEyebrowRibbon = false,
   } = props;
-  const container = document.createElement('div');
-  let styles = `
-    ${Utility.theme.getStyleStringFromJssObject(containerStyles)}
-  `;
 
-  container.classList.add(ELEMENT_SCALABLE_FONT_CONTAINER);
+  const children: ElementVisual[] = [];
 
   if (eyebrow && !hasEyebrowRibbon) {
-    const styledEyebrow = createEyebrow({ eyebrow, isThemeDark });
-    container.appendChild(styledEyebrow.element);
-    styles += styledEyebrow.styles;
+    children.push(createEyebrow({ eyebrow, isThemeDark }));
   }
 
   if (eyebrow && hasEyebrowRibbon) {
-    const styledEyebrow = createRibbonEyebrow({ eyebrow });
-    container.appendChild(styledEyebrow.element);
-    styles += styledEyebrow.styles;
+    children.push(createRibbonEyebrow({ eyebrow }));
   }
 
   if (headline) {
-    const styledHeadline = ElementModel.headline.sansScalingLarge({
-      element: headline,
-      elementStyles: headlineStyles,
-      isThemeDark,
-    });
-    container.appendChild(styledHeadline.element);
-    styles += styledHeadline.styles;
+    children.push(
+      ElementModel.headline.sansScalingLarge({
+        element: headline,
+        elementStyles: headlineStyles,
+        isThemeDark,
+      }),
+    );
   }
 
   if (eventMeta) {
-    container.appendChild(eventMeta.element);
-    styles += eventMeta.styles;
+    children.push(eventMeta);
   }
 
   if (text) {
-    const styledText = ElementModel.richText.simpleScaling({
-      element: text,
-      elementStyles: textStyles,
-      isThemeDark,
-    });
-
-    container.appendChild(styledText.element);
-    styles += styledText.styles;
+    children.push(
+      ElementModel.richText.simpleScaling({
+        element: text,
+        elementStyles: textStyles,
+        isThemeDark,
+      }),
+    );
   }
 
   if (date) {
-    const styledDate = ElementModel.headline.sansScalingMin({
-      element: date,
-      elementStyles: dateStyles,
-      isThemeDark,
-    });
-
-    container.appendChild(styledDate.element);
-    styles += styledDate.styles;
+    children.push(
+      ElementModel.headline.sansScalingMin({
+        element: date,
+        elementStyles: dateStyles,
+        isThemeDark,
+      }),
+    );
   }
 
   if (actions) {
-    const styledActions = createActions({ actions });
-    container.appendChild(styledActions.element);
-    styles += styledActions.styles;
+    children.push(createActions({ actions }));
   }
 
-  return { element: container, styles };
+  return ElementModel.createDiv({
+    className: 'scaling-font-block-container',
+    children,
+    elementStyles: {
+      element: {
+        zIndex: '9',
+        position: 'relative',
+      },
+    },
+  });
 };

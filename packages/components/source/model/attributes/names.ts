@@ -76,6 +76,7 @@ const theme = {
 };
 
 const visual = {
+  bordered: 'data-visual-bordered',
   imageAligned: 'data-visual-image-aligned',
   icon: 'data-visual-icon',
   icon_seal: 'data-visual-icon-seal',

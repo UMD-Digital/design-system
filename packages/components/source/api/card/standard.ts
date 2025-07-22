@@ -2,13 +2,13 @@ import CardModel from './_model';
 
 /**
  * Standard Card
- * 
+ *
  * A versatile card component for displaying content with optional images, actions, and themes.
  * Supports multiple display modes including block, list, and transparent variations.
- * 
+ *
  * ## Custom Element
  * `<umd-element-card>`
- * 
+ *
  * ## Slots
  * - `headline` - Card title (required, accepts: h2-h6, p)
  * - `text` - Card content (accepts: p)
@@ -16,21 +16,19 @@ import CardModel from './_model';
  * - `image` - Card image
  * - `actions` - Action buttons or links
  * - `date` - Date information
- * 
+ *
  * ## Attributes
  * - `data-theme` - Theme styling options:
  *   - `dark` - Dark theme styling
  *   - `light` - Light theme styling
- * - `data-visual` - Visual display options:
- *   - `transparent` - Transparent background
- *   - `aligned` - Aligned content layout
- *   - `bordered` - Add border styling
  * - `data-visual-transparent` - Visual display options:
  *   - `true` - Transparent background
  * - `data-visual-image-aligned` - Visual display options:
  *   - `true` - Aligned content layout
+ * - `data-visual-bordered` - Visual display options:
+ *   - `true` - Add border styling
  *   - `list` - List display format
- * 
+ *
  * @example
  * ```html
  * <!-- Basic card -->
@@ -39,7 +37,7 @@ import CardModel from './_model';
  *   <p slot="text">Scientists discover new method for sustainable energy.</p>
  * </umd-element-card>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- Card with image and actions -->
@@ -53,7 +51,7 @@ import CardModel from './_model';
  *   </div>
  * </umd-element-card>
  * ```
- * 
+ *
  * @example
  * ```html
  * <!-- List layout with dark theme -->
@@ -62,7 +60,7 @@ import CardModel from './_model';
  *   <p slot="text">Access important resources and tools.</p>
  * </umd-element-card>
  * ```
- * 
+ *
  * @category Components
  * @since 1.0.0
  */

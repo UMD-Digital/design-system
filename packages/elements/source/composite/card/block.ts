@@ -1,43 +1,56 @@
-import { assets, textLockup } from 'atomic';
+import { assets, layout, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { CardBlockProps } from './_types';
-
-export const STYLES_BLOCK_CARD_ELEMENT = '';
-
-const elementStyles = {
-  element: {
-    className: 'card-block-container',
-    containerType: 'inline-size',
-    height: '100%',
-  },
-};
+import { type ElementVisual } from '../../_types';
 
 export default (props: CardBlockProps) => {
-  const { newsId, image, isAligned, dateSign } = props;
-  const composite = ElementModel.composite.card.block({
-    ...props,
-    elementStyles,
-    element: document.createElement('div'),
+  const {
+    dateSign,
+    hasBorder,
+    image,
+    isAligned,
+    isThemeDark,
+    isTransparent,
+    newsId,
+  } = props;
+  const children: ElementVisual[] = [];
+  const sizingProps = {
+    isThemeDark,
+    isTransparent,
+    hasBorder,
+  };
+
+  if (image) {
+    children.push(
+      layout.block.stacked.image({
+        children: [
+          assets.image.background({
+            image,
+            isScaled: true,
+            isAspectStandard: isAligned,
+            dateSign,
+          }),
+        ],
+        ...sizingProps,
+      }),
+    );
+  }
+
+  children.push(
+    layout.block.stacked.textContainer({
+      children: [textLockup.smallScaling(props)],
+      ...sizingProps,
+    }),
+  );
+
+  const composite = layout.block.stacked.container({
+    children,
+    ...sizingProps,
   });
-  const textLockupElement = textLockup.smallScaling(props);
 
   if (newsId) {
     composite?.element.setAttribute('news-id', newsId);
   }
-
-  if (image) {
-    const imageContainer = assets.image.background({
-      image,
-      isScaled: true,
-      isAspectStandard: isAligned,
-      dateSign,
-    });
-    composite.element.appendChild(imageContainer.element);
-    composite.styles += imageContainer.styles;
-  }
-
-  composite.element.appendChild(textLockupElement.element);
-  composite.styles += textLockupElement.styles;
 
   return composite;
 };

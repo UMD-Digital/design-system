@@ -45,6 +45,11 @@ export default (props: Props) => {
   const composite = ElementModel.assets.imageWrapper({
     ...props,
     element: document.createElement('div'),
+    elementStyles: {
+      element: {
+        ...customStyles,
+      },
+    },
   });
   const isTypeGif =
     image instanceof HTMLImageElement &&
@@ -53,7 +58,6 @@ export default (props: Props) => {
 
   const asset = embedAsset({ ...props, isTypeGif });
 
-  if (image.hasAttribute(ATTRIBUTE_CAPTION) && isShowCaption) {
   if (attributeCaption) {
     console.log(
       `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,

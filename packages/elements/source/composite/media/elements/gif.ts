@@ -17,11 +17,17 @@ export default ({ image }: { image: HTMLImageElement }) => {
   };
 
   const resizeObserver = new ResizeObserver(() => {
-    calculateHeight();
+    container.style.width = `${image.naturalWidth}px`;
+    setTimeout(() => {
+      calculateHeight();
+    }, 10);
   });
 
   if (image.complete && image.naturalWidth) {
-    calculateHeight();
+    container.style.width = `${image.naturalWidth}px`;
+    setTimeout(() => {
+      calculateHeight();
+    }, 10);
   } else {
     image.addEventListener('load', calculateHeight);
   }
@@ -33,11 +39,22 @@ export default ({ image }: { image: HTMLImageElement }) => {
   const elementModel = ElementModel.create({
     element: container,
     className: 'media-gif',
-    children: [assets.image.gif({ image })],
+    children: [
+      assets.image.background({
+        image,
+        isShowCaption: true,
+        isScaled: false,
+        customStyles: {
+          width: 'auto',
+          height: '100%',
+          display: 'inline',
+        },
+      }),
+    ],
     elementStyles: {
       element: {
-        width: '100%',
         maxHeight: '100%',
+        maxWidth: '100%',
         position: 'relative',
         display: 'block',
         overflow: 'hidden',

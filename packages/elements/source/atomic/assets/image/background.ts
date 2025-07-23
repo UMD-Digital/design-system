@@ -2,6 +2,7 @@ import { ElementModel } from 'model';
 import { default as gifToggle } from './gif';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
+const ATTRIBUTE_CREDIT = 'data-credit';
 
 interface Asset {
   image: HTMLImageElement | HTMLAnchorElement;
@@ -16,6 +17,7 @@ interface EmbedAsset extends Asset {
 interface Props extends Asset {
   dateSign?: { element: HTMLElement; styles: string };
   isShowCaption?: boolean;
+  customStyles?: Record<string, any>;
 }
 
 const embedAsset = ({
@@ -37,7 +39,9 @@ const embedAsset = ({
 };
 
 export default (props: Props) => {
-  const { image, dateSign, isShowCaption = false } = props;
+  const { image, dateSign, customStyles, isShowCaption = false } = props;
+  const attributeCaption = image.getAttribute(ATTRIBUTE_CAPTION);
+  const attributeCredit = image.getAttribute(ATTRIBUTE_CREDIT);
   const composite = ElementModel.assets.imageWrapper({
     ...props,
     element: document.createElement('div'),
@@ -50,8 +54,16 @@ export default (props: Props) => {
   const asset = embedAsset({ ...props, isTypeGif });
 
   if (image.hasAttribute(ATTRIBUTE_CAPTION) && isShowCaption) {
+  if (attributeCaption) {
+    console.log(
+      `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,
+    );
+  }
+
+  if (attributeCaption || attributeCredit) {
+    const text = attributeCaption || attributeCredit;
     const caption = document.createElement('span');
-    caption.textContent = image.getAttribute(ATTRIBUTE_CAPTION);
+    caption.textContent = text;
 
     const imageCaption = ElementModel.assets.imageCaption({
       element: caption,

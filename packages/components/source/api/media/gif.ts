@@ -1,4 +1,4 @@
-import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Slots, Register, Lifecycle } from 'model';
 import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 

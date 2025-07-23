@@ -94,7 +94,7 @@ const createContainerStyles = (customStyles = {}) => {
 
     ...createContainerQuery(media.breakpointValues.medium.min, 'min-width', {
       paddingTop: `${spacing['8xl']}`,
-      minHeight: `450px`,
+      minHeight: `424px`,
     }),
     ...customStyles,
   };

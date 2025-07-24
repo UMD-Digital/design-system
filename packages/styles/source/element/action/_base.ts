@@ -40,6 +40,8 @@ export const baseLarge = {
   },
 
   '&:has(svg), &:has(img)': {
+    paddingLeft: `${spacing['2xl']}`,
+
     [`@media (${media.queries.tablet.min})`]: {
       paddingLeft: `57px`,
     },
@@ -70,7 +72,7 @@ export const iconBase = {
  */
 export const iconBaseLarge = {
   ...iconBase,
-  left: `14px`,
+  left: `calc(${spacing['md']} + 4px)`,
 
   [`@media (${media.queries.tablet.min})`]: {
     height: '17px',

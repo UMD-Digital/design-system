@@ -73,7 +73,7 @@ const makeContainer = (props: PersonBio) => {
       assets.image.background({
         image,
         isScaled: false,
-        additionalStyles: {
+        customStyles: {
           element: {
             ...theme.media.createContainerQuery(
               'max-width',

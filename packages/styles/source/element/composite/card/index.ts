@@ -4,17 +4,6 @@
  */
 
 /**
- * Block card component styles with different themes and layouts.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.element.composite.card.block.light
- * ```
- * @since 1.1.0
- */
-export * as block from './block';
-
-/**
  * Overlay card component styles with color and image overlays.
  * @example
  * ```typescript

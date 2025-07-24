@@ -4,17 +4,6 @@
  */
 
 /**
- * Color overlay card styles with different background colors.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.element.composite.card.overlay.color.light
- * ```
- * @since 1.1.0
- */
-export * as color from './color';
-
-/**
  * Icon overlay card styles for cards with prominent icons.
  * @example
  * ```typescript

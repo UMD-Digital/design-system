@@ -16,22 +16,6 @@ export const elementQuote = (props: ElementProps) =>
     Styles.element.composite.card.overlay.image.quoateContainer,
   );
 
-export const color = (props: ElementProps) => {
-  const { isThemeDark } = props;
-
-  if (isThemeDark) {
-    return createStyledElement(
-      props,
-      Styles.element.composite.card.overlay.color.dark,
-    );
-  }
-
-  return createStyledElement(
-    props,
-    Styles.element.composite.card.overlay.color.light,
-  );
-};
-
 export const icon = (props: ElementProps) => {
   const { isThemeDark } = props;
 

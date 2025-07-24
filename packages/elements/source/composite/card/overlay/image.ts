@@ -33,7 +33,7 @@ export default (props: CardOverlayProps) => {
   let imageContainerClass: string | null = null;
 
   if (ctaIcon && ctaIcon instanceof HTMLElement) {
-    const actionIcon = actions.icon({ ...props, ctaIcon, isThemeDark: true });
+    const actionIcon = actions.icon({ ...props, ctaIcon, isThemeLight: false });
 
     composite.element.appendChild(actionIcon.element);
     composite.styles += actionIcon.styles;

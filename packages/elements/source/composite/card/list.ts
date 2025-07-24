@@ -78,6 +78,10 @@ const makeImageColumn = ({
             display: 'block',
             width: '160px',
             order: '3',
+
+            ...(isAligned && {
+              height: '160px',
+            }),
           },
         ),
 
@@ -96,7 +100,6 @@ const makeImageColumn = ({
       assets.image.background({
         image,
         isScaled: isAligned,
-        isAspectStandard: isAligned,
       }),
     ],
   });
@@ -105,16 +108,15 @@ export default (props: CardListProps) => {
   const { image, isAligned, isThemeDark, dateSign } = props;
   let children: ElementVisual[] = [];
 
+  if (image) {
+    children.push(makeImageColumn({ image, isAligned }));
+  }
+
   if (dateSign) {
     children.push(makeDateColumn(dateSign));
   }
 
   children.push(makeTextColumn(props));
-
-  // Image
-  if (image) {
-    children.push(makeImageColumn({ image, isAligned }));
-  }
 
   const wrapper = ElementModel.createDiv({
     className: 'card-list-wrapper',

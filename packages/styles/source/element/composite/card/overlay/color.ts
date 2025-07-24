@@ -89,9 +89,7 @@ const createContainerStyles = (customStyles = {}) => {
  */
 const colorContainerBase = {
   padding: `${spacing.lg} ${spacing.md}`,
-  ...createMediaQuery(media.breakpointValues.tablet.min, 'min-width', {
-    minHeight: '424px',
-  }),
+  minHeight: '360px',
 };
 
 /**

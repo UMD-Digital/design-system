@@ -67,7 +67,7 @@ export const full: JssObject = create.jss.objectWithClassName({
 });
 
 /**
- * @deprecated Use {@link max} instead.
+ * @deprecated Use {@link larger} instead.
  */
 export const lock: JssObject = create.jss.objectWithClassName({
   className: ['umd-lock'],

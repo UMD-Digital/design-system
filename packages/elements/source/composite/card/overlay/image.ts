@@ -123,7 +123,7 @@ export default (props: CardOverlayProps) => {
   );
 
   const textWrapper = ElementModel.createDiv({
-    className: 'card-overlay-image-wrapper',
+    className: 'card-overlay-image-text-wrapper',
     elementStyles: {
       element: {
         height: 'auto',
@@ -150,27 +150,36 @@ export default (props: CardOverlayProps) => {
 
   const composite = ElementModel.createDiv({
     className: 'card-overlay-image',
-    children: [...children, textWrapper],
+    children: [
+      ElementModel.createDiv({
+        className: 'card-overlay-image-container',
+        children: [...children, textWrapper],
+        elementStyles: {
+          element: {
+            position: 'relative',
+            padding: `${Styles.token.spacing.lg} ${Styles.token.spacing.md}`,
+            paddingTop: `${Styles.token.spacing['4xl']}`,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            minHeight: '360px',
+            overflow: 'hidden',
+
+            ...theme.media.createContainerQuery(
+              'min-width',
+              Styles.token.media.breakpointValues.medium.min,
+              {
+                paddingTop: `${Styles.token.spacing['8xl']}`,
+                minHeight: `424px`,
+              },
+            ),
+          },
+        },
+      }),
+    ],
     elementStyles: {
       element: {
-        overflow: 'hidden',
-        position: 'relative',
-        minHeight: '360px',
         height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        padding: `${Styles.token.spacing.lg} ${Styles.token.spacing.md}`,
-        paddingTop: `${Styles.token.spacing['4xl']}`,
-
-        ...theme.media.createContainerQuery(
-          'min-width',
-          Styles.token.media.breakpointValues.medium.min,
-          {
-            paddingTop: `${Styles.token.spacing['8xl']}`,
-            minHeight: `424px`,
-          },
-        ),
 
         [`&:hover .${imageContainerClass}:before, &:focus .${imageContainerClass}:before`]:
           {

@@ -1,5 +1,6 @@
 import { ElementModel } from 'model';
 import { default as gifToggle } from './gif';
+import { ElementVisual } from '_types';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 const ATTRIBUTE_CREDIT = 'data-credit';
@@ -15,7 +16,7 @@ interface EmbedAsset extends Asset {
 }
 
 interface Props extends Asset {
-  dateSign?: { element: HTMLElement; styles: string };
+  dateSign?: ElementVisual;
   isShowCaption?: boolean;
   customStyles?: Record<string, any>;
 }
@@ -35,22 +36,33 @@ const embedAsset = ({
     });
   }
 
-  return { element: image, styles: '' };
-};
-
-export default (props: Props) => {
-  const { image, dateSign, customStyles, isShowCaption = false } = props;
-  const attributeCaption = image.getAttribute(ATTRIBUTE_CAPTION);
-  const attributeCredit = image.getAttribute(ATTRIBUTE_CREDIT);
-  const composite = ElementModel.assets.imageWrapper({
-    ...props,
-    element: document.createElement('div'),
+  const defaultContainer = ElementModel.createDiv({
+    className: 'image-container',
     elementStyles: {
       element: {
-        ...customStyles,
+        position: 'relative',
+        width: '100%',
+        height: '100%',
       },
     },
   });
+
+  defaultContainer.element.appendChild(image);
+
+  return defaultContainer;
+};
+
+export default (props: Props) => {
+  const {
+    image,
+    dateSign,
+    isScaled,
+    customStyles,
+    isShowCaption = false,
+  } = props;
+  const children: ElementVisual[] = [];
+  const attributeCaption = image.getAttribute(ATTRIBUTE_CAPTION);
+  const attributeCredit = image.getAttribute(ATTRIBUTE_CREDIT);
   const isTypeGif =
     image instanceof HTMLImageElement &&
     image.src !== null &&
@@ -58,39 +70,45 @@ export default (props: Props) => {
 
   const asset = embedAsset({ ...props, isTypeGif });
 
-  if (isShowCaption) {
-    if (attributeCaption) {
-      console.log(
-        `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,
-      );
-    }
+  if (attributeCaption && isShowCaption) {
+    console.log(
+      `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,
+    );
+  }
 
+  if (isShowCaption) {
     if (attributeCaption || attributeCredit) {
       const text = attributeCaption || attributeCredit;
       const caption = document.createElement('span');
       caption.textContent = text;
 
-      const imageCaption = ElementModel.assets.imageCaption({
-        element: caption,
-      });
-      composite.element.appendChild(imageCaption.element);
-      composite.styles += imageCaption.styles;
+      children.push(
+        ElementModel.assets.imageCaption({
+          element: caption,
+        }),
+      );
     }
   }
 
   if (dateSign) {
-    const dateSignContainer = ElementModel.layout.backgroundBoxWhite({
-      element: document.createElement('div'),
-    });
-
-    composite.styles += dateSignContainer.styles;
-    composite.styles += dateSign.styles;
-    dateSignContainer.element.appendChild(dateSign.element);
-    composite.element.appendChild(dateSignContainer.element);
+    children.push(
+      ElementModel.layout.backgroundBoxWhite({
+        element: document.createElement('div'),
+        children: [dateSign],
+      }),
+    );
   }
 
-  composite.element.appendChild(asset.element);
-  composite.styles += asset.styles;
+  children.push(asset);
 
-  return composite;
+  return ElementModel.assets.imageWrapper({
+    element: document.createElement('div'),
+    children,
+    isScaled,
+    elementStyles: {
+      element: {
+        ...customStyles,
+      },
+    },
+  });
 };

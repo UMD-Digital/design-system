@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { Model } from '@universityofmaryland/web-elements-library';
+import { Model, Composite } from '@universityofmaryland/web-elements-library';
 
 export const stacked = (
   isThemeDark?: boolean,
@@ -83,7 +83,7 @@ export const gridOffsetGap = ({
   count?: number;
   isLayoutReversed?: boolean;
   overwriteStickyPosition?: number;
-}): { element: HTMLElement; styles: string } =>
+}) =>
   Model.ElementModel.layout.grid({
     element: document.createElement('div'),
     elementStyles: {
@@ -97,12 +97,16 @@ export const gridOffsetGap = ({
           order: isLayoutReversed ? 2 : -1,
         },
 
-        [`& .${Styles.element.composite.card.overlay.image.tint.className}`]: {
+        [`& .${Composite.card.overlay.imageClassRef}`]: {
           [`@media (${Styles.token.media.queries.large.min})`]: {
             minHeight: '560px !important',
             height: 'inherit',
             position: 'sticky',
             top: `${overwriteStickyPosition}px`,
+          },
+
+          [`.${Styles.element.asset.image.wrapperScaled.className}`]: {
+            position: 'absolute',
           },
 
           [`*`]: {

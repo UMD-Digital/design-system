@@ -1,4 +1,3 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { Composite } from '@universityofmaryland/web-elements-library';
 import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
@@ -55,9 +54,8 @@ export default (props: FeaturedProps): ElementModel =>
     };
     const setPosition = (position: number) => {
       const overlayElement = container.querySelector(
-        `.${Styles.element.composite.card.overlay.image.tint.className}`,
+        `.${Composite.card.overlay.imageClassRef}`,
       ) as HTMLElement;
-
       if (overlayElement) overlayElement.style.top = `${position}px`;
     };
 

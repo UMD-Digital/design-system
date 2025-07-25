@@ -99,18 +99,23 @@ export const gridOffsetGap = ({
 
         [`& .${Composite.card.overlay.imageClassRef}`]: {
           [`@media (${Styles.token.media.queries.large.min})`]: {
-            minHeight: '560px !important',
             height: 'inherit',
             position: 'sticky',
             top: `${overwriteStickyPosition}px`,
           },
 
-          [`.${Styles.element.asset.image.wrapperScaled.className}`]: {
-            position: 'absolute',
-          },
-
           [`*`]: {
             color: `${Styles.token.color.white}`,
+          },
+
+          [`& > div`]: {
+            [`@media (${Styles.token.media.queries.large.min})`]: {
+              minHeight: '560px !important',
+            },
+          },
+
+          [`.${Styles.element.asset.image.wrapperScaled.className}`]: {
+            position: 'absolute',
           },
         },
       },

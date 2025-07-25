@@ -5,6 +5,8 @@ import { asset, markup, theme } from 'utilities';
 import { CardOverlayProps } from '../_types';
 import { ElementVisual } from '../../../_types';
 
+export const classRef = 'card-overlay-image';
+
 export default (props: CardOverlayProps) => {
   const { isQuote, ctaIcon, dateSign, backgroundImage, text } = props;
   const children: ElementVisual[] = [];
@@ -149,7 +151,7 @@ export default (props: CardOverlayProps) => {
   });
 
   const composite = ElementModel.createDiv({
-    className: 'card-overlay-image',
+    className: classRef,
     children: [
       ElementModel.createDiv({
         className: 'card-overlay-image-container',

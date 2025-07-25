@@ -43,7 +43,7 @@ export const sansMin = createElement(Styles.typography.sans.fonts.min, true);
 
 // Sans Scaling Fonts
 
-export const sansScalingLarge = createElement(
+export const sansScalingLarger = createElement(
   Styles.typography.sans.scalingFonts.larger,
 );
 

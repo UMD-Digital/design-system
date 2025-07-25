@@ -10,28 +10,28 @@ import {
 import { type ElementVisual } from '../../_types';
 
 export type TypeTextLockupSmallScaling = {
-  headline?: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  text?: HTMLElement | null;
-  date?: HTMLElement | null;
   actions?: HTMLElement | null;
+  customStyles?: Record<string, string>;
+  date?: HTMLElement | null;
   eventMeta?: ElementVisual;
-  isThemeDark?: boolean;
+  eyebrow?: HTMLElement | null;
   hasEyebrowRibbon?: boolean;
+  headline?: HTMLElement | null;
+  isThemeDark?: boolean;
+  text?: HTMLElement | null;
 };
 
-export default (props: TypeTextLockupSmallScaling) => {
-  const {
-    headline,
-    eyebrow,
-    text,
-    date,
-    actions,
-    eventMeta,
-    isThemeDark,
-    hasEyebrowRibbon = false,
-  } = props;
-
+export default ({
+  actions,
+  customStyles = {},
+  date,
+  eventMeta,
+  eyebrow,
+  hasEyebrowRibbon = false,
+  headline,
+  isThemeDark,
+  text,
+}: TypeTextLockupSmallScaling) => {
   const children: ElementVisual[] = [];
 
   if (eyebrow && !hasEyebrowRibbon) {
@@ -44,7 +44,7 @@ export default (props: TypeTextLockupSmallScaling) => {
 
   if (headline) {
     children.push(
-      ElementModel.headline.sansScalingLarge({
+      ElementModel.headline.sansScalingLarger({
         element: headline,
         elementStyles: headlineStyles,
         isThemeDark,
@@ -87,6 +87,7 @@ export default (props: TypeTextLockupSmallScaling) => {
       element: {
         zIndex: '9',
         position: 'relative',
+        ...customStyles,
       },
     },
   });

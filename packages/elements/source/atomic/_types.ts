@@ -2,7 +2,7 @@ import {
   type ContentElement,
   type ElementVisual,
   type ThemeProps,
-} from '_types';
+} from '../_types';
 
 // Base interface for components with CTA actions
 export interface PersonCtaProps {

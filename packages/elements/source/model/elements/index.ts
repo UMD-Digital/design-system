@@ -47,7 +47,6 @@ export function createSpan(props: ElementModelDefined) {
 export * as actions from './actions';
 export * as assets from './assets';
 export * as buttons from './buttons';
-export * as composite from './composite';
 export * as event from './event';
 export * as headline from './headline';
 export * as layout from './layout';

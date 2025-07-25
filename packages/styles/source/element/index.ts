@@ -26,17 +26,6 @@ export * as action from './action';
 export * as asset from './asset';
 
 /**
- * Composite elements that combine multiple elements.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.element.composite
- * ```
- * @since 1.1.0
- */
-export * as composite from './composite';
-
-/**
  * Embed elements for external content.
  * @example
  * ```typescript

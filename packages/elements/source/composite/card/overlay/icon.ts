@@ -1,41 +1,62 @@
-import { textLockup } from 'atomic';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
+import { textLockup } from 'atomic';
+import { ElementVisual } from '../../../_types';
 
-type TypeBlockCardIconProps = {
+interface CardIconProps {
   headline: HTMLElement | null;
   text?: HTMLElement | null;
   image?: HTMLImageElement | null;
   isThemeDark?: boolean;
-};
+}
 
-const elementStyles = {
-  element: {
-    className: 'card-overlay-icon',
-    containerType: 'inline-size',
-  },
-};
+export default (props: CardIconProps) => {
+  const children: ElementVisual[] = [];
 
-export default (props: TypeBlockCardIconProps) => {
-  const { image } = props;
-  const composite = ElementModel.composite.card.overlay.icon({
-    ...props,
-    elementStyles,
-    element: document.createElement('div'),
-  });
-  const textContainer = textLockup.smallScaling(props);
+  if (props.image) {
+    const imageContainer = ElementModel.createDiv({
+      className: 'card-overlay-icon-image',
+      elementStyles: {
+        element: {
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginBottom: `${Styles.token.spacing.lg}`,
 
-  if (image) {
-    const imageContainer = ElementModel.composite.card.overlay.elementIcon({
-      ...props,
-      element: document.createElement('div'),
+          '& *': {
+            maxHeight: '120px',
+          },
+        },
+      },
     });
-    imageContainer.element.appendChild(image);
-    composite.element.appendChild(imageContainer.element);
-    composite.styles += imageContainer.styles;
+    imageContainer.element.appendChild(props.image);
+    children.push(imageContainer);
   }
 
-  composite.element.appendChild(textContainer.element);
-  composite.styles += textContainer.styles;
+  children.push(
+    textLockup.smallScaling({
+      ...props,
+      customStyles: {
+        height: 'auto',
+      },
+    }),
+  );
 
-  return composite;
+  return ElementModel.createDiv({
+    className: 'card-overlay-icon',
+    children,
+    elementStyles: {
+      element: {
+        height: '100%',
+        overflow: 'hidden',
+        position: 'relative',
+        padding: `${Styles.token.spacing.md}`,
+        paddingTop: `${Styles.token.spacing.sm}`,
+        backgroundColor: Styles.token.color.gray.lightest,
+
+        ...(props.isThemeDark && {
+          backgroundColor: Styles.token.color.gray.darker,
+        }),
+      },
+    },
+  });
 };

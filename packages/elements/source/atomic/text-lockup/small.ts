@@ -99,17 +99,6 @@ export const dateStyles = {
   },
 };
 
-export const actionStyles = {
-  element: {
-    marginTop: token.spacing.sm,
-  },
-};
-
-const containerStyles = {
-  zIndex: '9',
-  position: 'relative',
-};
-
 export const createEyebrow = ({ eyebrow, isThemeDark }: TypeEyebrow) =>
   ElementModel.text.eyebrow({
     element: eyebrow,
@@ -126,7 +115,11 @@ export const createRibbonEyebrow = ({ eyebrow }: TypeEyebrow) =>
 export const createActions = ({ actions }: TypeActions) =>
   ElementModel.layout.gridInlineTabletRows({
     element: actions,
-    elementStyles: actionStyles,
+    elementStyles: {
+      element: {
+        marginTop: token.spacing.sm,
+      },
+    },
   });
 
 export default ({
@@ -190,7 +183,10 @@ export default ({
     className: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
     children,
     elementStyles: {
-      element: containerStyles,
+      element: {
+        zIndex: '9',
+        position: 'relative',
+      },
     },
   });
 };

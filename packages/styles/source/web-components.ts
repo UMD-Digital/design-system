@@ -88,7 +88,7 @@ const elements = {
       },
     },
   }),
-  ...['article', 'card', 'event', 'person'].reduce(
+  ...['article', 'card', 'card-icon', 'event', 'person'].reduce(
     (acc, type) => ({
       ...acc,
       ...createElementStyles(`umd-element-${type}`, {

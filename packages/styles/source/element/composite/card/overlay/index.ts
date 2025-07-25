@@ -4,17 +4,6 @@
  */
 
 /**
- * Icon overlay card styles for cards with prominent icons.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.element.composite.card.overlay.icon.light
- * ```
- * @since 1.1.0
- */
-export * as icon from './icon';
-
-/**
  * Image overlay card styles for cards with image backgrounds.
  * @example
  * ```typescript

@@ -96,7 +96,7 @@ const buildAssetChildren = ({
     return [createImageAsset(image)];
   }
 
-  return [];
+  return [assets.image.placeholder.fearlessForward()];
 };
 
 const createAsset = ({

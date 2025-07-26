@@ -63,8 +63,10 @@ module.exports = (env) => {
     output: {
       path: path.resolve('dist'),
       filename: '[name].js',
-      umdNamedDefine: true,
+      library: 'UmdWebComponents',
       libraryTarget: 'umd',
+      libraryExport: 'default',
+      globalObject: 'typeof self !== \'undefined\' ? self : this',
     },
   };
 };

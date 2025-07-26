@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Usage Examples - UMD Design System Documentation</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .header {
+        background-color: #e21833;
+        color: white;
+        padding: 2rem 0;
+      }
+      .nav-link {
+        color: #000;
+      }
+      .nav-link:hover {
+        color: #e21833;
+      }
+      pre {
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+      }
+      code {
+        color: #e83e8c;
+      }
+      .alert-info {
+        background-color: #e3f2fd;
+        border-color: #2196f3;
+        color: #0c5460;
+      }
+      .grid-demo {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+    </style>
+</head>
+<body>
+    <header class="header">
+      <div class="container">
+        <h1>HTML Usage Examples</h1>
+        <p class="lead">UMD Web Components - Practical Examples and Patterns</p>
+      </div>
+    </header>
+
+    <div class="container py-5">
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="index.html">Components</a></li>
+              <li class="breadcrumb-item active" aria-current="page">HTML Usage Examples</li>
+            </ol>
+          </nav>
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="h4 mb-0">Getting Started</h2>
+            </div>
+            <div class="card-body">
+              <p>This guide demonstrates how to use UMD Web Components in your HTML pages. All examples include the necessary script setup and show practical usage patterns.</p>
+              
+              <h3 class="h5">Basic Setup</h3>
+              <p>First, include the UMD Web Components library in your HTML page:</p>
+              
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My UMD Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Your content here --&gt;
+    &lt;umd-element-card data-theme="light"&gt;
+        &lt;h3 slot="headline"&gt;Welcome to UMD&lt;/h3&gt;
+        &lt;p slot="text"&gt;Discover fearless ideas.&lt;/p&gt;
+    &lt;/umd-element-card&gt;
+    
+    &lt;!-- 
+    ⚠️ CDN Usage - For prototyping and development only!
+    Production applications should use npm and a build process for:
+    - Better performance (tree-shaking, bundling)
+    - Version control and dependency management
+    - Offline availability
+    - No external dependencies on third-party CDNs
+    --&gt;
+    &lt;script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/index.js"&gt;&lt;/script&gt;
+    
+    &lt;!-- Production Method (Recommended): Install via npm --&gt;
+    &lt;!-- npm install @universityofmaryland/web-components-library --&gt;
+    &lt;!-- Then use a build tool like Webpack, Vite, or Rollup --&gt;
+    &lt;!--
+    &lt;script type="module"&gt;
+        import LoadUmdComponents from '@universityofmaryland/web-components-library';
+        LoadUmdComponents();
+    &lt;/script&gt;
+    --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+              <div class="alert alert-info mt-3">
+                <strong>Note:</strong> If using a CDN or bundler, adjust the import path accordingly. Components must be loaded before they can be used in the DOM.
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="h4 mb-0">Basic Component Usage</h2>
+            </div>
+            <div class="card-body">
+              <h3 class="h5">Card Component</h3>
+              <p>The card component is one of the most versatile components for displaying content:</p>
+              
+              <pre><code>&lt;umd-element-card data-theme="light"&gt;
+    &lt;img slot="image" src="campus-photo.jpg" alt="UMD Campus" /&gt;
+    &lt;p slot="eyebrow"&gt;News &amp; Updates&lt;/p&gt;
+    &lt;h3 slot="headline"&gt;Welcome to the University of Maryland&lt;/h3&gt;
+    &lt;p slot="text"&gt;
+        Discover our vibrant campus community and world-class academic programs.
+        Join us in fearless ideas that change the world.
+    &lt;/p&gt;
+    &lt;div slot="actions"&gt;
+        &lt;a href="/learn-more" class="btn"&gt;Learn More&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/umd-element-card&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Alert Component</h3>
+              <p>Display important messages or notifications:</p>
+              
+              <pre><code>&lt;umd-element-alert data-type="info"&gt;
+    &lt;h4 slot="headline"&gt;Campus Update&lt;/h4&gt;
+    &lt;p slot="text"&gt;
+        The library will have extended hours during finals week.
+    &lt;/p&gt;
+&lt;/umd-element-alert&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Accordion Component</h3>
+              <p>Create collapsible content sections:</p>
+              
+              <pre><code>&lt;umd-element-accordion&gt;
+    &lt;umd-element-accordion-item data-visual-open="true"&gt;
+        &lt;h3 slot="headline"&gt;Admissions Requirements&lt;/h3&gt;
+        &lt;div slot="text"&gt;
+            &lt;p&gt;Learn about our admissions criteria and application process.&lt;/p&gt;
+            &lt;ul&gt;
+                &lt;li&gt;GPA requirements&lt;/li&gt;
+                &lt;li&gt;Standardized test scores&lt;/li&gt;
+                &lt;li&gt;Letters of recommendation&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/umd-element-accordion-item&gt;
+    
+    &lt;umd-element-accordion-item&gt;
+        &lt;h3 slot="headline"&gt;Financial Aid&lt;/h3&gt;
+        &lt;div slot="text"&gt;
+            &lt;p&gt;Explore scholarship and financial aid opportunities.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/umd-element-accordion-item&gt;
+&lt;/umd-element-accordion&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="card mb-4" id="styles-integration">
+            <div class="card-header">
+              <h2 class="h4 mb-0">Using the Styles Package with Web Components</h2>
+            </div>
+            <div class="card-body">
+              <p>The UMD Styles Package works seamlessly with the Web Components Library to provide consistent spacing, colors, theming, and layout utilities. This combination ensures your components follow UMD brand guidelines while maintaining flexibility.</p>
+              
+              <h3 class="h5">Installing the Styles Package</h3>
+              <pre><code># Using npm
+npm install @universityofmaryland/web-styles-library
+
+# Using yarn
+yarn add @universityofmaryland/web-styles-library</code></pre>
+
+              <h3 class="h5 mt-4">Layout Spacing Classes</h3>
+              <p>The styles package provides predefined spacing classes that work perfectly with components:</p>
+              
+              <pre><code>&lt;!-- Vertical spacing for landing pages --&gt;
+&lt;div class="umd-layout-space-vertical-landing"&gt;
+  &lt;umd-element-hero type="default"&gt;
+    &lt;!-- Hero content --&gt;
+  &lt;/umd-element-hero&gt;
+&lt;/div&gt;
+
+&lt;!-- Horizontal padding/margins --&gt;
+&lt;div class="umd-layout-space-horizontal-large"&gt;
+  &lt;umd-element-card&gt;
+    &lt;!-- Card content --&gt;
+  &lt;/umd-element-card&gt;
+&lt;/div&gt;
+
+&lt;!-- Available spacing sizes --&gt;
+&lt;!-- horizontal: extra-small, smaller, small, large, larger --&gt;
+&lt;!-- vertical: landing, landing-child --&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Grid Layout Classes</h3>
+              <p>Create responsive grids for component layouts:</p>
+              
+              <pre><code>&lt;!-- Responsive grid with gap --&gt;
+&lt;div class="umd-grid-gap"&gt;
+  &lt;umd-element-card&gt;&lt;!-- Card 1 --&gt;&lt;/umd-element-card&gt;
+  &lt;umd-element-card&gt;&lt;!-- Card 2 --&gt;&lt;/umd-element-card&gt;
+  &lt;umd-element-card&gt;&lt;!-- Card 3 --&gt;&lt;/umd-element-card&gt;
+&lt;/div&gt;
+
+&lt;!-- Masonry layout --&gt;
+&lt;div class="umd-grid-gap-masonry umd-animation-grid"&gt;
+  &lt;umd-element-card-overlay&gt;&lt;!-- Content --&gt;&lt;/umd-element-card-overlay&gt;
+  &lt;umd-element-card-overlay&gt;&lt;!-- Content --&gt;&lt;/umd-element-card-overlay&gt;
+&lt;/div&gt;
+
+&lt;!-- Three column grid --&gt;
+&lt;div class="umd-grid-gap-three"&gt;
+  &lt;umd-element-article&gt;&lt;!-- Article 1 --&gt;&lt;/umd-element-article&gt;
+  &lt;umd-element-article&gt;&lt;!-- Article 2 --&gt;&lt;/umd-element-article&gt;
+  &lt;umd-element-article&gt;&lt;!-- Article 3 --&gt;&lt;/umd-element-article&gt;
+&lt;/div&gt;
+
+&lt;!-- Stacked grid for mobile/tablet --&gt;
+&lt;div class="umd-grid-gap-stacked"&gt;
+  &lt;umd-element-stat&gt;&lt;!-- Stat 1 --&gt;&lt;/umd-element-stat&gt;
+  &lt;umd-element-stat&gt;&lt;!-- Stat 2 --&gt;&lt;/umd-element-stat&gt;
+&lt;/div&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Typography Classes</h3>
+              <p>Apply consistent typography with style utilities:</p>
+              
+              <pre><code>&lt;!-- Heading styles --&gt;
+&lt;h2 class="umd-sans-largest-uppercase"&gt;By The Numbers&lt;/h2&gt;
+
+&lt;!-- Rich text formatting --&gt;
+&lt;div class="umd-text-rich-simple-large"&gt;
+  &lt;p&gt;Large paragraph text with consistent styling.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Dark theme text --&gt;
+&lt;div class="umd-text-rich-simple-large-dark"&gt;
+  &lt;p&gt;Text styled for dark backgrounds.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Adjacent line text for special layouts --&gt;
+&lt;h2 class="umd-adjacent-line-text"&gt;Research Enterprise&lt;/h2&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Background and Theme Classes</h3>
+              <p>Apply themed backgrounds to sections:</p>
+              
+              <pre><code>&lt;!-- Quarter-tone light background --&gt;
+&lt;section class="umd-layout-background-quarter-light"&gt;
+  &lt;umd-element-section-intro data-theme="quarter"&gt;
+    &lt;!-- Content --&gt;
+  &lt;/umd-element-section-intro&gt;
+&lt;/section&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Animation Classes</h3>
+              <p>Add entrance animations to component grids:</p>
+              
+              <pre><code>&lt;div class="umd-animation-grid"&gt;
+  &lt;umd-element-card style="animation-delay: 0ms;"&gt;
+    &lt;!-- First card appears immediately --&gt;
+  &lt;/umd-element-card&gt;
+  
+  &lt;umd-element-card style="animation-delay: 350ms;"&gt;
+    &lt;!-- Second card appears after 350ms --&gt;
+  &lt;/umd-element-card&gt;
+  
+  &lt;umd-element-card style="animation-delay: 700ms;"&gt;
+    &lt;!-- Third card appears after 700ms --&gt;
+  &lt;/umd-element-card&gt;
+&lt;/div&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Practical Example: Hero with Stats Section</h3>
+              <p>Here's how the styles package and components work together in practice:</p>
+              
+              <pre><code>&lt;!-- Hero section with vertical spacing --&gt;
+&lt;div class="umd-layout-space-vertical-landing"&gt;
+  &lt;umd-element-hero type="default" data-theme="dark"&gt;
+    &lt;h1 slot="headline"&gt;Welcome to UMD&lt;/h1&gt;
+    &lt;p slot="text"&gt;Fearless ideas start here&lt;/p&gt;
+    &lt;div slot="actions"&gt;
+      &lt;umd-element-call-to-action data-display="primary" data-theme="dark"&gt;
+        &lt;a href="/apply"&gt;Apply Now&lt;/a&gt;
+      &lt;/umd-element-call-to-action&gt;
+    &lt;/div&gt;
+  &lt;/umd-element-hero&gt;
+&lt;/div&gt;
+
+&lt;!-- Stats section with proper spacing and grid --&gt;
+&lt;div class="umd-layout-space-vertical-landing"&gt;
+  &lt;div class="umd-layout-space-horizontal-larger"&gt;
+    &lt;h2 class="umd-sans-largest-uppercase mb-md"&gt;By The Numbers&lt;/h2&gt;
+    
+    &lt;div class="umd-grid-gap-stacked"&gt;
+      &lt;umd-element-stat size="large" has-line=""&gt;
+        &lt;h2 slot="stat"&gt;#12&lt;/h2&gt;
+        &lt;div slot="text"&gt;
+          &lt;p&gt;among public universities&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div slot="sub-text"&gt;
+          &lt;p&gt;&lt;i&gt;Forbes' America's Top Colleges&lt;/i&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/umd-element-stat&gt;
+      
+      &lt;umd-element-stat size="large" has-line=""&gt;
+        &lt;h2 slot="stat"&gt;71&lt;/h2&gt;
+        &lt;div slot="text"&gt;
+          &lt;p&gt;colleges and programs ranked in the top 25&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/umd-element-stat&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Sticky Columns Layout</h3>
+              <p>Create advanced layouts with sticky positioning:</p>
+              
+              <pre><code>&lt;umd-element-sticky-columns class="umd-layout-space-horizontal-large" 
+  position-top="92px"&gt;
+  &lt;div slot="sticky-column"&gt;
+    &lt;!-- This content stays in place while scrolling --&gt;
+    &lt;umd-element-card-overlay data-theme="dark"&gt;
+      &lt;!-- Card content --&gt;
+    &lt;/umd-element-card-overlay&gt;
+  &lt;/div&gt;
+  
+  &lt;div slot="static-column"&gt;
+    &lt;!-- This content scrolls normally --&gt;
+    &lt;umd-feed-news show-count="3"&gt;&lt;/umd-feed-news&gt;
+  &lt;/div&gt;
+&lt;/umd-element-sticky-columns&gt;</code></pre>
+
+              <div class="alert alert-info mt-4">
+                <h5>Best Practices</h5>
+                <ul class="mb-0">
+                  <li>Use layout spacing classes for consistent margins and padding</li>
+                  <li>Apply grid classes for responsive component layouts</li>
+                  <li>Combine typography utilities with component slots for branded text</li>
+                  <li>Use animation classes to create engaging entrance effects</li>
+                  <li>Theme components and their containers together for cohesive design</li>
+                </ul>
+              </div>
+
+              <h3 class="h5 mt-4">Using with Tailwind CSS</h3>
+              <p>The styles package can be integrated with Tailwind CSS for additional utility classes. See the <a href="../examples/tailwind.html">Tailwind Integration Guide</a> for setup instructions.</p>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="h4 mb-0">Nested Components Example</h2>
+            </div>
+            <div class="card-body">
+              <p>Components can be nested to create complex layouts. Here's an example of a hero section with a call-to-action that contains nested components:</p>
+              
+              <h3 class="h5">Hero with Call-to-Action</h3>
+              <pre><code>&lt;umd-element-hero data-theme="dark"&gt;
+    &lt;img slot="image" src="hero-background.jpg" alt="Campus aerial view" /&gt;
+    &lt;h1 slot="headline"&gt;Welcome to Fearless Ideas&lt;/h1&gt;
+    &lt;p slot="text"&gt;
+        Join a community of innovators, researchers, and leaders 
+        who are changing the world through groundbreaking discoveries.
+    &lt;/p&gt;
+    
+    &lt;!-- Call-to-action with nested components --&gt;
+    &lt;div slot="actions"&gt;
+        &lt;umd-element-call-to-action data-display="inline"&gt;
+            &lt;h3 slot="headline"&gt;Start Your Journey&lt;/h3&gt;
+            &lt;div slot="actions"&gt;
+                &lt;a href="/apply" class="btn-primary"&gt;Apply Now&lt;/a&gt;
+                &lt;a href="/visit" class="btn-secondary"&gt;Schedule a Visit&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/umd-element-call-to-action&gt;
+    &lt;/div&gt;
+&lt;/umd-element-hero&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Complex Layout: Cards Grid within a Section</h3>
+              <pre><code>&lt;section class="featured-programs"&gt;
+    &lt;umd-element-text-container&gt;
+        &lt;h2 slot="headline"&gt;Featured Programs&lt;/h2&gt;
+        &lt;p slot="text"&gt;Explore our top-ranked academic programs&lt;/p&gt;
+    &lt;/umd-element-text-container&gt;
+    
+    &lt;div class="grid-demo"&gt;
+        &lt;!-- Card 1 --&gt;
+        &lt;umd-element-card data-theme="light"&gt;
+            &lt;img slot="image" src="engineering.jpg" alt="Engineering lab" /&gt;
+            &lt;p slot="eyebrow"&gt;STEM&lt;/p&gt;
+            &lt;h3 slot="headline"&gt;Engineering&lt;/h3&gt;
+            &lt;p slot="text"&gt;
+                Ranked among the top engineering programs nationwide.
+            &lt;/p&gt;
+            &lt;div slot="actions"&gt;
+                &lt;umd-element-call-to-action data-display="text"&gt;
+                    &lt;a slot="cta" href="/engineering"&gt;Learn More&lt;/a&gt;
+                &lt;/umd-element-call-to-action&gt;
+            &lt;/div&gt;
+        &lt;/umd-element-card&gt;
+        
+        &lt;!-- Card 2 --&gt;
+        &lt;umd-element-card data-theme="light"&gt;
+            &lt;img slot="image" src="business.jpg" alt="Business school" /&gt;
+            &lt;p slot="eyebrow"&gt;Business&lt;/p&gt;
+            &lt;h3 slot="headline"&gt;Smith School of Business&lt;/h3&gt;
+            &lt;p slot="text"&gt;
+                Preparing tomorrow's business leaders and entrepreneurs.
+            &lt;/p&gt;
+            &lt;div slot="actions"&gt;
+                &lt;umd-element-call-to-action data-display="text"&gt;
+                    &lt;a slot="cta" href="/business"&gt;Learn More&lt;/a&gt;
+                &lt;/umd-element-call-to-action&gt;
+            &lt;/div&gt;
+        &lt;/umd-element-card&gt;
+        
+        &lt;!-- Card 3 --&gt;
+        &lt;umd-element-card data-theme="light"&gt;
+            &lt;img slot="image" src="journalism.jpg" alt="Journalism building" /&gt;
+            &lt;p slot="eyebrow"&gt;Communications&lt;/p&gt;
+            &lt;h3 slot="headline"&gt;Merrill College&lt;/h3&gt;
+            &lt;p slot="text"&gt;
+                Excellence in journalism and strategic communication.
+            &lt;/p&gt;
+            &lt;div slot="actions"&gt;
+                &lt;umd-element-call-to-action data-display="text"&gt;
+                    &lt;a slot="cta" href="/journalism"&gt;Learn More&lt;/a&gt;
+                &lt;/umd-element-call-to-action&gt;
+            &lt;/div&gt;
+        &lt;/umd-element-card&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="h4 mb-0">Common Attributes</h2>
+            </div>
+            <div class="card-body">
+              <h3 class="h5">Configuration Attributes (data-*)</h3>
+              <p>These attributes set the initial state and appearance of components:</p>
+              
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Values</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>data-theme</code></td>
+                    <td>light, dark</td>
+                    <td>Component color scheme</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-display</code></td>
+                    <td>grid, list, inline</td>
+                    <td>Layout style</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-visual-open</code></td>
+                    <td>true, false</td>
+                    <td>Initial open/closed state</td>
+                  </tr>
+                  <tr>
+                    <td><code>data-size</code></td>
+                    <td>small, medium, large</td>
+                    <td>Component size</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <h3 class="h5 mt-4">Responsive Components</h3>
+              <p>Components automatically adapt to different screen sizes. You can also use responsive attributes:</p>
+              
+              <pre><code>&lt;umd-element-carousel data-columns="3" data-columns-tablet="2" data-columns-mobile="1"&gt;
+    &lt;!-- Carousel items --&gt;
+&lt;/umd-element-carousel&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="h4 mb-0">Form Components</h2>
+            </div>
+            <div class="card-body">
+              <h3 class="h5">Search Component</h3>
+              <pre><code>&lt;umd-element-search data-theme="light"&gt;
+    &lt;form slot="form" action="/search" method="get"&gt;
+        &lt;input type="search" name="q" placeholder="Search UMD..." /&gt;
+        &lt;button type="submit"&gt;Search&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/umd-element-search&gt;</code></pre>
+
+              <h3 class="h5 mt-4">Navigation Components</h3>
+              <pre><code>&lt;!-- Header Navigation --&gt;
+&lt;umd-element-navigation-header&gt;
+    &lt;a slot="logo" href="/"&gt;
+        &lt;img src="umd-logo.svg" alt="University of Maryland" /&gt;
+    &lt;/a&gt;
+    &lt;nav slot="nav"&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/academics"&gt;Academics&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/admissions"&gt;Admissions&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/research"&gt;Research&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/umd-element-navigation-header&gt;
+
+&lt;!-- Breadcrumb Navigation --&gt;
+&lt;umd-element-navigation-breadcrumb&gt;
+    &lt;nav slot="nav"&gt;
+        &lt;ol&gt;
+            &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/academics"&gt;Academics&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;Undergraduate Programs&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/nav&gt;
+&lt;/umd-element-navigation-breadcrumb&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="h4 mb-0">Best Practices</h2>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-info mb-3">
+                <h5>Accessibility</h5>
+                <ul class="mb-0">
+                  <li>Always provide meaningful text in slots, especially headlines</li>
+                  <li>Use semantic HTML elements (h1-h6 for headlines, p for text)</li>
+                  <li>Include alt text for all images</li>
+                  <li>Ensure proper heading hierarchy</li>
+                </ul>
+              </div>
+              
+              <div class="alert alert-info mb-3">
+                <h5>Performance</h5>
+                <ul class="mb-0">
+                  <li>Load only the components you need for better performance</li>
+                  <li>Lazy load images when possible</li>
+                  <li>Components are automatically code-split and loaded on demand</li>
+                </ul>
+              </div>
+              
+              <div class="alert alert-info">
+                <h5>Styling</h5>
+                <ul class="mb-0">
+                  <li>Components use Shadow DOM - external CSS won't affect internal styles</li>
+                  <li>Use theme attributes for consistent styling</li>
+                  <li>Components follow UMD brand guidelines automatically</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="h4 mb-0">Complete Page Example</h2>
+            </div>
+            <div class="card-body">
+              <p>Here's a complete example of a landing page using multiple UMD components:</p>
+              
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Computer Science - University of Maryland&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Navigation Header --&gt;
+    &lt;umd-element-navigation-header&gt;
+        &lt;a slot="logo" href="/"&gt;
+            &lt;img src="umd-logo.svg" alt="University of Maryland" /&gt;
+        &lt;/a&gt;
+        &lt;nav slot="nav"&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="/programs"&gt;Programs&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="/faculty"&gt;Faculty&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="/research"&gt;Research&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="/apply"&gt;Apply&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/umd-element-navigation-header&gt;
+    
+    &lt;!-- Hero Section --&gt;
+    &lt;umd-element-hero data-theme="dark"&gt;
+        &lt;img slot="image" src="cs-hero.jpg" alt="Computer Science Building" /&gt;
+        &lt;h1 slot="headline"&gt;Computer Science at Maryland&lt;/h1&gt;
+        &lt;p slot="text"&gt;
+            Join one of the nation's top-ranked computer science programs
+        &lt;/p&gt;
+        &lt;div slot="actions"&gt;
+            &lt;umd-element-call-to-action&gt;
+                &lt;a slot="cta" href="/apply" class="btn-primary"&gt;Apply Now&lt;/a&gt;
+                &lt;a slot="cta" href="/visit" class="btn-secondary"&gt;Visit Us&lt;/a&gt;
+            &lt;/umd-element-call-to-action&gt;
+        &lt;/div&gt;
+    &lt;/umd-element-hero&gt;
+    
+    &lt;!-- Stats Section --&gt;
+    &lt;section class="stats-section"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="stats-grid"&gt;
+                &lt;umd-element-stat&gt;
+                    &lt;span slot="stat"&gt;#16&lt;/span&gt;
+                    &lt;p slot="text"&gt;Nationally Ranked&lt;/p&gt;
+                &lt;/umd-element-stat&gt;
+                
+                &lt;umd-element-stat&gt;
+                    &lt;span slot="stat"&gt;2,500+&lt;/span&gt;
+                    &lt;p slot="text"&gt;CS Majors&lt;/p&gt;
+                &lt;/umd-element-stat&gt;
+                
+                &lt;umd-element-stat&gt;
+                    &lt;span slot="stat"&gt;95%&lt;/span&gt;
+                    &lt;p slot="text"&gt;Job Placement Rate&lt;/p&gt;
+                &lt;/umd-element-stat&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    
+    &lt;!-- Featured Programs --&gt;
+    &lt;section class="programs-section"&gt;
+        &lt;div class="container"&gt;
+            &lt;umd-element-text-container&gt;
+                &lt;h2 slot="headline"&gt;Explore Our Programs&lt;/h2&gt;
+            &lt;/umd-element-text-container&gt;
+            
+            &lt;umd-element-tab&gt;
+                &lt;button slot="tab" data-tab="undergrad"&gt;Undergraduate&lt;/button&gt;
+                &lt;button slot="tab" data-tab="graduate"&gt;Graduate&lt;/button&gt;
+                &lt;button slot="tab" data-tab="phd"&gt;Ph.D.&lt;/button&gt;
+                
+                &lt;div slot="panel" data-panel="undergrad"&gt;
+                    &lt;h3&gt;Bachelor of Science in Computer Science&lt;/h3&gt;
+                    &lt;p&gt;Our undergraduate program provides a strong foundation...&lt;/p&gt;
+                &lt;/div&gt;
+                
+                &lt;div slot="panel" data-panel="graduate"&gt;
+                    &lt;h3&gt;Master's Programs&lt;/h3&gt;
+                    &lt;p&gt;Advanced study in specialized areas of computer science...&lt;/p&gt;
+                &lt;/div&gt;
+                
+                &lt;div slot="panel" data-panel="phd"&gt;
+                    &lt;h3&gt;Doctoral Program&lt;/h3&gt;
+                    &lt;p&gt;Join our research community and work with world-class faculty...&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/umd-element-tab&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    
+    &lt;!-- Load Components --&gt;
+    &lt;script type="module"&gt;
+        import LoadUmdComponents from '@universityofmaryland/web-components-library';
+        
+        document.addEventListener('DOMContentLoaded', () =&gt; {
+            LoadUmdComponents();
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="h4">Additional Resources</h2>
+              <ul class="list-unstyled">
+                <li><a href="https://designsystem.umd.edu">UMD Design System Documentation</a></li>
+                <li><a href="http://playground.designsystem.umd.edu">Component Playground</a></li>
+                <li><a href="advanced-usage.html">Advanced Usage Guide</a></li>
+                <li><a href="https://github.com/umd-digital/design-system">GitHub Repository</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>&copy; University of Maryland. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

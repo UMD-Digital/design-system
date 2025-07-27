@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Component Usage - UMD Design System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .header {
+        background-color: #e21833;
+        color: white;
+        padding: 2rem 0;
+      }
+      .nav-link {
+        color: #000;
+      }
+      .nav-link:hover {
+        color: #e21833;
+      }
+      .content-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+      .code-example {
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+      pre {
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+        margin-bottom: 0;
+      }
+      code {
+        color: #e83e8c;
+      }
+      .toc {
+        position: sticky;
+        top: 20px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .toc-link {
+        display: block;
+        padding: 0.5rem 0;
+        color: #495057;
+        text-decoration: none;
+        border-left: 3px solid transparent;
+        padding-left: 1rem;
+      }
+      .toc-link:hover,
+      .toc-link.active {
+        color: #e21833;
+        border-left-color: #e21833;
+      }
+      .type-card {
+        background-color: #f8f9fa;
+        border-left: 4px solid #e21833;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      .type-card code {
+        color: #0066cc;
+      }
+      .alert-pro-tip {
+        background-color: #e3f2fd;
+        border: 1px solid #90caf9;
+        color: #0d47a1;
+      }
+      .feature-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        background-color: #28a745;
+        color: white;
+        border-radius: 4px;
+        margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="20">
+    <header class="header">
+      <div class="container">
+        <h1>Advanced Component Usage</h1>
+        <p class="lead">TypeScript, testing, and custom development patterns</p>
+      </div>
+    </header>
+
+    <div class="container py-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Components</a></li>
+          <li class="breadcrumb-item active">Advanced Usage</li>
+        </ol>
+      </nav>
+
+      <div class="row">
+        <!-- Table of Contents -->
+        <div class="col-md-3">
+          <nav id="toc" class="toc">
+            <h5>On This Page</h5>
+            <a class="toc-link" href="#typescript">TypeScript Integration</a>
+            <a class="toc-link" href="#events">Event Handling</a>
+            <a class="toc-link" href="#reactive">Reactive Components</a>
+            <a class="toc-link" href="#testing">Testing Components</a>
+            <a class="toc-link" href="#custom">Custom Components</a>
+            <a class="toc-link" href="#performance">Performance</a>
+          </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+          <!-- TypeScript Integration -->
+          <section id="typescript" class="content-section">
+            <h2>TypeScript Integration</h2>
+            <p>
+              The components library provides comprehensive TypeScript support
+              with full type definitions.
+            </p>
+
+            <h3>Type Imports</h3>
+            <div class="code-example">
+              <pre><code class="language-typescript">import { 
+  Components,
+  ComponentRef,
+  SlotConfiguration,
+  ComponentEvents,
+  CreateComponentFunction,
+  TypedComponentRef
+} from '@universityofmaryland/web-components-library';
+
+// Component-specific types
+import type { 
+  HeroProps,
+  CardProps,
+  NavigationConfig 
+} from '@universityofmaryland/web-components-library/types';</code></pre>
+            </div>
+
+            <h3>Typed Component References</h3>
+            <div class="code-example">
+              <pre><code class="language-typescript">// Get typed component reference
+const hero = document.querySelector&lt;HTMLElement &amp; ComponentEvents&gt;('umd-element-hero');
+
+if (hero) {
+  // TypeScript knows about component events
+  hero.addEventListener('component:ready', (event) =&gt; {
+    console.log('Hero component initialized', event.detail);
+  });
+  
+  // Set attributes with type safety
+  hero.setAttribute('data-theme', 'dark'); // Valid
+  // hero.setAttribute('data-theme', 'invalid'); // TypeScript error
+}</code></pre>
+            </div>
+
+            <h3>Creating Components Programmatically</h3>
+            <div class="code-example">
+              <pre><code class="language-typescript">import { Components } from '@universityofmaryland/web-components-library';
+
+// Initialize components
+Components.hero.base();
+
+// Create element programmatically with type safety
+const createTypedHero = (): HTMLElement =&gt; {
+  const hero = document.createElement('umd-element-hero') as HTMLElement &amp; {
+    setTheme: (theme: 'light' | 'dark') =&gt; void;
+    updateContent: (content: HeroContent) =&gt; void;
+  };
+  
+  hero.setAttribute('data-theme', 'dark');
+  hero.setAttribute('data-display', 'overlay');
+  
+  return hero;
+};</code></pre>
+            </div>
+
+            <div class="type-card">
+              <strong>Key Types:</strong>
+              <ul>
+                <li>
+                  <code>ComponentRef</code> - Base reference returned by
+                  component factories
+                </li>
+                <li>
+                  <code>SlotConfiguration</code> - Defines allowed slots and
+                  their constraints
+                </li>
+                <li>
+                  <code>ComponentEvents</code> - Interface for component event
+                  handling
+                </li>
+                <li>
+                  <code>CreateComponentFunction</code> - Standard signature for
+                  component creation
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Event Handling -->
+          <section id="events" class="content-section">
+            <h2>Event Handling</h2>
+            <p>
+              Components emit custom events for lifecycle and interaction
+              handling.
+            </p>
+
+            <h3>Component Lifecycle Events</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">const card = document.querySelector('umd-element-card');
+
+// Component initialization
+card.addEventListener('component:ready', (event) =&gt; {
+  console.log('Component initialized with:', event.detail);
+});
+
+// Content changes
+card.addEventListener('component:updated', (event) =&gt; {
+  console.log('Component updated:', event.detail.changes);
+});
+
+// Before removal
+card.addEventListener('component:destroy', (event) =&gt; {
+  console.log('Component being removed');
+});</code></pre>
+            </div>
+          </section>
+
+          <!-- Reactive Components -->
+          <section id="reactive" class="content-section">
+            <h2>Reactive Components</h2>
+            <p>
+              Components support reactive updates through observed attributes.
+            </p>
+
+            <h3>Observed Attributes</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Visual state changes
+const drawer = document.querySelector('umd-element-navigation-drawer');
+
+// Open drawer programmatically
+drawer.setAttribute('is-visual-open', 'true');
+
+// Close drawer
+drawer.setAttribute('is-visual-open', 'false');
+
+// Listen for state changes
+const observer = new MutationObserver((mutations) =&gt; {
+  mutations.forEach((mutation) =&gt; {
+    if (mutation.attributeName === 'is-visual-open') {
+      const isOpen = drawer.getAttribute('is-visual-open') === 'true';
+      console.log('Drawer state:', isOpen ? 'open' : 'closed');
+    }
+  });
+});
+
+observer.observe(drawer, { attributes: true });</code></pre>
+            </div>
+
+            <h3>Responsive Behavior</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Trigger component resize calculations
+const hero = document.querySelector('umd-element-hero');
+
+// Manual resize trigger
+hero.setAttribute('resize', 'true');
+
+// Automatic resize handling
+const resizeObserver = new ResizeObserver((entries) =&gt; {
+  entries.forEach((entry) =&gt; {
+    if (entry.target.tagName.startsWith('UMD-ELEMENT-')) {
+      entry.target.setAttribute('resize', 'true');
+    }
+  });
+});
+
+// Observe all components
+document.querySelectorAll('[class*="umd-element-"]').forEach((element) =&gt; {
+  resizeObserver.observe(element);
+});</code></pre>
+            </div>
+          </section>
+
+          <!-- Testing Components -->
+          <section id="testing" class="content-section">
+            <h2>Testing Components</h2>
+            <p>Best practices for testing components in your application.</p>
+
+            <h3>Jest Testing Setup</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">// __tests__/components.test.js
+import { Components } from '@universityofmaryland/web-components-library';
+
+describe('UMD Components', () =&gt; {
+  beforeEach(() =&gt; {
+    document.body.innerHTML = '';
+    Components.card.standard();
+  });
+  
+  test('creates card component', () =&gt; {
+    const card = document.createElement('umd-element-card');
+    card.innerHTML = `
+      <h3 slot="headline">Test Headline</h3>
+      <p slot="text">Test content</p>
+    `;
+    
+    document.body.appendChild(card);
+    
+    expect(card.shadowRoot).toBeTruthy();
+    expect(card.querySelector('[slot="headline"]').textContent)
+      .toBe('Test Headline');
+  });
+  
+  test('handles missing required slots', () =&gt; {
+    const card = document.createElement('umd-element-card');
+    // Missing headline slot
+    card.innerHTML = '<p slot="text">Test content</p>';
+    
+    // Component should still render
+    document.body.appendChild(card);
+    expect(card.shadowRoot).toBeTruthy();
+  });
+});</code></pre>
+            </div>
+          </section>
+
+          <!-- Custom Components -->
+          <section id="custom" class="content-section">
+            <h2>Building Custom Components</h2>
+            <p>Extend the component library with your own custom components.</p>
+
+            <h3>Custom Component Template</h3>
+            <div class="code-example">
+              <pre><code class="language-typescript">import { 
+  Register, 
+  Slots, 
+  Attributes,
+  CommonSlots
+} from '@universityofmaryland/web-components-library/core';
+
+// Define your component
+const tagName = 'umd-custom-feature';
+
+const slots = {
+  headline: CommonSlots.headline,
+  text: CommonSlots.text,
+  media: {
+    allowedElements: ['img', 'video', 'iframe'],
+    required: false
+  }
+};
+
+const createComponent = (element) =&gt; {
+  const headline = Slots.headline.default({ element });
+  const text = Slots.text.default({ element });
+  const media = element.querySelector('[slot="media"]');
+  
+  // Create shadow DOM structure
+  const template = `
+    <style>
+      :host {
+        display: block;
+        padding: 2rem;
+      }
+      .feature-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+    </style>
+    <div class="feature-content">
+      ${headline ? `<h2>${headline.outerHTML}</h2>` : ''}
+      ${media ? `<div class="media">${media.outerHTML}</div>` : ''}
+      ${text ? `<div class="text">${text.outerHTML}</div>` : ''}
+    </div>
+  `;
+  
+  return {
+    element: element,
+    template: template
+  };
+};
+
+// Register the component
+export default Register.webComponent({
+  tagName,
+  slots,
+  createComponent
+});</code></pre>
+            </div>
+          </section>
+
+          <!-- Performance -->
+          <section id="performance" class="content-section">
+            <h2>Performance Optimization</h2>
+            <p>
+              Techniques for optimizing component performance in production.
+            </p>
+
+            <h3>Lazy Loading Components</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Load components only when needed
+const loadHeroComponents = () =&gt; 
+  import('@universityofmaryland/web-components-library').then(({ Components }) =&gt; {
+    Components.hero.base();
+    Components.hero.expand();
+  });
+
+// Intersection Observer for lazy loading
+const heroObserver = new IntersectionObserver((entries) =&gt; {
+  entries.forEach((entry) =&gt; {
+    if (entry.isIntersecting) {
+      loadHeroComponents().then(() =&gt; {
+        console.log('Hero components loaded');
+      });
+      heroObserver.disconnect();
+    }
+  });
+});
+
+// Observe hero section
+const heroSection = document.querySelector('.hero-section');
+if (heroSection) {
+  heroObserver.observe(heroSection);
+}</code></pre>
+            </div>
+
+            <h3>Bundle Optimization</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">// webpack.config.js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        umdComponents: {
+          test: /[\\/]node_modules[\\/]@universityofmaryland[\\/]/,
+          name: 'umd-components',
+          priority: 10,
+          chunks: 'all'
+        }
+      }
+    }
+  }
+};
+
+// Vite configuration
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'umd-components': ['@universityofmaryland/web-components-library'],
+          'umd-styles': ['@universityofmaryland/web-styles-library']
+        }
+      }
+    }
+  }
+};</code></pre>
+            </div>
+
+            <div class="alert alert-pro-tip">
+              <h5 class="alert-heading">💡 Performance Tips</h5>
+              <ul>
+                <li>Load only the components you use</li>
+                <li>Use dynamic imports for below-the-fold components</li>
+                <li>Enable production mode for smaller bundles</li>
+                <li>Consider server-side rendering for SEO-critical content</li>
+                <li>
+                  Use the <code>loading="lazy"</code> attribute on images within
+                  components
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Next Steps -->
+          <div class="mt-5">
+            <h3>Additional Resources</h3>
+            <ul>
+              <li>
+                <a href="https://github.com/UMD-Digital/design-system"
+                  >GitHub Repository</a
+                >
+              </li>
+              <li>
+                <a href="https://umd-digital.github.io/design-system/"
+                  >TypeDoc API Reference</a
+                >
+              </li>
+              <li>
+                <a href="http://playground.designsystem.umd.edu"
+                  >Component Playground</a
+                >
+              </li>
+              <li><a href="../index.html">Back to Documentation Home</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>&copy; University of Maryland. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+      // Smooth scrolling for TOC links
+      document.querySelectorAll('.toc-link').forEach(link =&gt; {
+        link.addEventListener('click', (e) =&gt; {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Update active TOC link on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const tocLinks = document.querySelectorAll('.toc-link');
+
+      window.addEventListener('scroll', () =&gt; {
+        let current = '';
+        sections.forEach(section =&gt; {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollY &gt;= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        tocLinks.forEach(link =&gt; {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

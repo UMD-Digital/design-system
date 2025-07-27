@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Styles Package Use Cases - UMD Design System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .header {
+        background-color: #e21833;
+        color: white;
+        padding: 2rem 0;
+      }
+      .nav-link {
+        color: #000;
+      }
+      .nav-link:hover {
+        color: #e21833;
+      }
+      pre {
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+      }
+      code {
+        color: #e83e8c;
+      }
+      .use-case-card {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        background-color: #fff;
+      }
+      .use-case-card h4 {
+        color: #e21833;
+        margin-bottom: 1rem;
+      }
+      .example-output {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+      .color-swatch {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        margin-right: 0.5rem;
+        vertical-align: middle;
+        border: 1px solid #dee2e6;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1>Styles Package Use Cases</h1>
+        <p class="lead">Real-world examples and implementation patterns</p>
+      </div>
+    </header>
+
+    <div class="container py-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Styles</a></li>
+          <li class="breadcrumb-item active">Use Cases</li>
+        </ol>
+      </nav>
+
+      <div class="alert alert-info mb-4">
+        <h5 class="alert-heading">About This Guide</h5>
+        <p class="mb-0">
+          This guide demonstrates practical use cases for the UMD Styles Library, showing how to implement common styling patterns in real applications.
+        </p>
+      </div>
+
+      <h2 class="mb-4">Common Use Cases</h2>
+
+      <!-- Use Case 1: Setting Up a New Project -->
+      <div class="use-case-card">
+        <h4>🚀 Use Case 1: Setting Up Base Styles for a New Project</h4>
+        <p>When starting a new UMD project, you need to establish consistent base styles.</p>
+        
+        <h5>Implementation</h5>
+        <pre><code>// styles-setup.js
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+export async function initializeStyles() {
+  // Load fonts and CSS variables first
+  const fonts = Styles.typography.fontFace.base64fonts;
+  const preRenderCSS = await Styles.preRenderCss;
+  
+  // Create and inject base styles
+  const baseStyles = document.createElement('style');
+  baseStyles.id = 'umd-base-styles';
+  baseStyles.textContent = `${fonts} ${preRenderCSS}`;
+  document.head.appendChild(baseStyles);
+  
+  // Load utility classes after DOM is ready
+  window.addEventListener('DOMContentLoaded', async () => {
+    const postRenderCSS = await Styles.postRenderCss;
+    const utilityStyles = document.createElement('style');
+    utilityStyles.id = 'umd-utility-styles';
+    utilityStyles.textContent = postRenderCSS;
+    document.head.appendChild(utilityStyles);
+  });
+}
+
+// Initialize on import
+initializeStyles();</code></pre>
+
+        <h5>Result</h5>
+        <div class="example-output">
+          <p>✓ UMD fonts loaded (Crimson Pro, Helvetica Neue)</p>
+          <p>✓ CSS variables available (--color-red, --spacing-md, etc.)</p>
+          <p>✓ Reset styles applied</p>
+          <p>✓ Utility classes ready to use</p>
+        </div>
+      </div>
+
+      <!-- Use Case 2: Creating a Theme System -->
+      <div class="use-case-card">
+        <h4>🎨 Use Case 2: Building a Theme System</h4>
+        <p>Create light and dark theme variations using UMD design tokens.</p>
+        
+        <h5>Implementation</h5>
+        <pre><code>// theme-manager.js
+import { token } from '@universityofmaryland/web-styles-library';
+
+class ThemeManager {
+  constructor() {
+    this.themes = {
+      light: {
+        '--theme-bg': '#ffffff',
+        '--theme-text': token.color.black,
+        '--theme-primary': token.color.red,
+        '--theme-secondary': token.color.gold,
+        '--theme-border': '#e0e0e0'
+      },
+      dark: {
+        '--theme-bg': '#1a1a1a',
+        '--theme-text': '#ffffff',
+        '--theme-primary': token.color.red,
+        '--theme-secondary': token.color.gold,
+        '--theme-border': '#333333'
+      }
+    };
+  }
+
+  apply(themeName) {
+    const theme = this.themes[themeName] || this.themes.light;
+    const root = document.documentElement;
+    
+    Object.entries(theme).forEach(([property, value]) => {
+      root.style.setProperty(property, value);
+    });
+    
+    root.setAttribute('data-theme', themeName);
+  }
+  
+  toggle() {
+    const current = document.documentElement.getAttribute('data-theme');
+    this.apply(current === 'dark' ? 'light' : 'dark');
+  }
+}
+
+export default new ThemeManager();</code></pre>
+
+        <h5>Usage</h5>
+        <pre><code>// In your component
+import themeManager from './theme-manager';
+
+// Apply dark theme
+themeManager.apply('dark');
+
+// Toggle between themes
+document.querySelector('#theme-toggle').addEventListener('click', () => {
+  themeManager.toggle();
+});</code></pre>
+      </div>
+
+      <!-- Use Case 3: Responsive Grid System -->
+      <div class="use-case-card">
+        <h4>📐 Use Case 3: Implementing Responsive Layouts</h4>
+        <p>Use UMD grid utilities and breakpoints for responsive designs.</p>
+        
+        <h5>Implementation</h5>
+        <pre><code>import { token, utilities } from '@universityofmaryland/web-styles-library';
+
+// Generate responsive grid styles
+const gridStyles = utilities.create.style.toString({
+  '.responsive-container': {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: `0 ${token.spacing.md}`,
+    
+    [`@media (min-width: ${token.media.breakpoints.tablet})`]: {
+      padding: `0 ${token.spacing.lg}`
+    },
+    
+    [`@media (min-width: ${token.media.breakpoints.desktop})`]: {
+      padding: `0 ${token.spacing.xl}`
+    }
+  }
+});
+
+// HTML structure using utility classes
+const template = `
+  <div class="umd-layout-space-vertical-landing">
+    <div class="responsive-container">
+      <div class="umd-grid-gap-three">
+        <div>Column 1</div>
+        <div>Column 2</div>
+        <div>Column 3</div>
+      </div>
+    </div>
+  </div>
+`;</code></pre>
+
+        <h5>Breakpoint Reference</h5>
+        <div class="example-output">
+          <p><strong>Mobile:</strong> 0 - 767px</p>
+          <p><strong>Tablet:</strong> 768px - 1023px</p>
+          <p><strong>Desktop:</strong> 1024px+</p>
+        </div>
+      </div>
+
+      <!-- Use Case 4: Custom Component Styling -->
+      <div class="use-case-card">
+        <h4>🧩 Use Case 4: Styling Custom Components</h4>
+        <p>Create consistent component styles using UMD design tokens.</p>
+        
+        <h5>Implementation</h5>
+        <pre><code>// custom-button.js
+import { token, animation } from '@universityofmaryland/web-styles-library';
+
+const buttonStyles = {
+  '.custom-button': {
+    display: 'inline-block',
+    padding: `${token.spacing.sm} ${token.spacing.lg}`,
+    backgroundColor: token.color.red,
+    color: '#ffffff',
+    fontFamily: token.font.family.sans,
+    fontSize: token.font.size.base,
+    fontWeight: token.font.weight.bold,
+    textDecoration: 'none',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    
+    '&:hover': {
+      backgroundColor: token.color.redDark,
+      transform: 'translateY(-2px)',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
+    },
+    
+    '&:active': {
+      transform: 'translateY(0)',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+    },
+    
+    '&.secondary': {
+      backgroundColor: 'transparent',
+      color: token.color.red,
+      border: `2px solid ${token.color.red}`,
+      
+      '&:hover': {
+        backgroundColor: token.color.red,
+        color: '#ffffff'
+      }
+    }
+  }
+};
+
+// Convert to CSS
+const css = await utilities.create.style.toString(buttonStyles);</code></pre>
+      </div>
+
+      <!-- Use Case 5: Typography System -->
+      <div class="use-case-card">
+        <h4>📝 Use Case 5: Implementing Typography Scales</h4>
+        <p>Use UMD typography utilities for consistent text styling.</p>
+        
+        <h5>Available Typography Classes</h5>
+        <pre><code><!-- Headings -->
+<h1 class="umd-sans-largest-uppercase">Page Title</h1>
+<h2 class="umd-sans-larger">Section Heading</h2>
+<h3 class="umd-sans-large">Subsection</h3>
+
+<!-- Body Text -->
+<div class="umd-text-rich-simple">
+  <p>Standard paragraph text with proper spacing.</p>
+</div>
+
+<div class="umd-text-rich-simple-large">
+  <p>Larger paragraph text for emphasis.</p>
+</div>
+
+<!-- Dark Theme Text -->
+<div class="umd-text-rich-simple-dark">
+  <p>Text optimized for dark backgrounds.</p>
+</div></code></pre>
+
+        <h5>Custom Typography</h5>
+        <pre><code>import { typography } from '@universityofmaryland/web-styles-library';
+
+// Access font stacks
+const headingStyles = {
+  fontFamily: typography.tokens.family.serif,
+  fontSize: typography.tokens.size.xl,
+  lineHeight: typography.tokens.lineHeight.tight,
+  letterSpacing: typography.tokens.letterSpacing.tight
+};</code></pre>
+      </div>
+
+      <!-- Use Case 6: Animation Utilities -->
+      <div class="use-case-card">
+        <h4>✨ Use Case 6: Adding Animations</h4>
+        <p>Implement smooth animations using UMD animation utilities.</p>
+        
+        <h5>Link Hover Effects</h5>
+        <pre><code>// Apply fade underline animation
+<a href="#" class="umd-fadein-simple-dark">
+  Hover for animation
+</a>
+
+// Custom animation using tokens
+import { animation } from '@universityofmaryland/web-styles-library';
+
+const linkStyles = {
+  '.animated-link': {
+    ...animation.line.fadeInSimpleDark,
+    // Override specific properties
+    color: token.color.red
+  }
+};</code></pre>
+
+        <h5>Loading States</h5>
+        <pre><code>// Use built-in loader
+<div class="umd-loader-dots">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+// Transition effects
+<div class="umd-transition-fade-in-from-bottom">
+  Content that fades in
+</div></code></pre>
+      </div>
+
+      <!-- Use Case 7: Color System -->
+      <div class="use-case-card">
+        <h4>🎨 Use Case 7: Working with Colors</h4>
+        <p>Access and use UMD brand colors effectively.</p>
+        
+        <h5>Color Tokens</h5>
+        <div class="example-output">
+          <p><span class="color-swatch" style="background-color: #e21833;"></span> Red: #e21833</p>
+          <p><span class="color-swatch" style="background-color: #FFD200;"></span> Gold: #FFD200</p>
+          <p><span class="color-swatch" style="background-color: #000000;"></span> Black: #000000</p>
+          <p><span class="color-swatch" style="background-color: #ffffff;"></span> White: #ffffff</p>
+        </div>
+
+        <h5>Usage Examples</h5>
+        <pre><code>import { token } from '@universityofmaryland/web-styles-library';
+
+// In JavaScript
+const styles = {
+  backgroundColor: token.color.red,
+  color: token.color.white,
+  borderColor: token.color.gold
+};
+
+// As CSS variables
+:root {
+  --primary: var(--color-red);
+  --secondary: var(--color-gold);
+  --text: var(--color-black);
+}</code></pre>
+      </div>
+
+      <!-- Best Practices -->
+      <div class="alert alert-success mt-5">
+        <h5 class="alert-heading">✅ Best Practices</h5>
+        <ul class="mb-0">
+          <li>Always use design tokens instead of hard-coded values</li>
+          <li>Load fonts and variables before other styles</li>
+          <li>Use utility classes when possible before creating custom styles</li>
+          <li>Test responsive designs at all UMD breakpoints</li>
+          <li>Ensure color combinations meet WCAG contrast requirements</li>
+        </ul>
+      </div>
+
+      <!-- Related Resources -->
+      <div class="mt-5">
+        <h3>Related Resources</h3>
+        <ul>
+          <li><a href="index.html">Styles Package Documentation</a></li>
+          <li><a href="tailwind.html">Tailwind Integration Guide</a></li>
+          <li><a href="../components/usage.html">Component Usage Examples</a></li>
+          <li><a href="https://brand.umd.edu">UMD Brand Guidelines</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>&copy; University of Maryland. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

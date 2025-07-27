@@ -2,7 +2,11 @@
 
 [![Elements Version](https://img.shields.io/badge/Elements-v1.3.6-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
 
-Foundational UI elements that make up the University of Maryland Components Library. This library provides the building blocks used to create more complex UI components while maintaining consistent design patterns across all UMD digital properties. Elements are crafted to be lightweight, accessible, and easily combinable into larger structures while adhering to UMD brand guidelines.
+Foundational UI building blocks for the UMD Design System, providing atomic elements that combine to create complex, accessible, and brand-compliant University of Maryland digital experiences.
+
+## Overview
+
+The UMD Web Elements Library provides the essential building blocks used to construct the UMD Web Components Library. Think of elements as atoms in a design system - they are the smallest, indivisible units that maintain meaning and functionality. These elements handle core UI patterns like buttons, images, text layouts, and containers while remaining unopinionated about their final appearance, relying on the Styles Library for visual presentation.
 
 ## Installation
 
@@ -14,505 +18,364 @@ npm install @universityofmaryland/web-elements-library
 yarn add @universityofmaryland/web-elements-library
 ```
 
+### Peer Dependencies
+
+Elements are styled by the Styles package:
+
+```bash
+npm install @universityofmaryland/web-styles-library
+```
+
 ## Quick Start
 
-Here's a simple example to get you started with the Elements library:
-
 ```javascript
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { Composite, Atomic } from '@universityofmaryland/web-elements-library';
 
-// Create a hero section
-const hero = Composite.hero.standard({
-  headline: document.createElement('h1'),
+// Create a card element
+const card = Composite.card.block({
+  headline: document.createElement('h3'),
   text: document.createElement('p'),
   image: document.querySelector('img'),
   isThemeDark: true
 });
 
-// Add the hero to your page
-document.getElementById('hero-container').appendChild(hero.element);
+// Add to DOM
+document.querySelector('.container').appendChild(card.element);
 
-// Inject the associated styles
-const styleElement = document.createElement('style');
-styleElement.textContent = hero.styles;
-document.head.appendChild(styleElement);
+// Apply associated styles
+const style = document.createElement('style');
+style.textContent = card.styles;
+document.head.appendChild(style);
 ```
 
-## Usage
+## Architecture
 
-### Importing Elements
+### Element Categories
+
+#### Atomic Elements
+The most basic building blocks:
+- **actions** - Buttons and interactive elements
+- **animations** - Animation patterns and effects
+- **assets** - Images, videos, and media handling
+- **buttons** - Specialized button components
+- **events** - Event-related display elements
+- **layout** - Basic layout structures
+- **textLockup** - Text grouping patterns
+
+#### Composite Elements
+Combinations of atomic elements forming UI patterns:
+- **accordion** - Expandable content sections
+- **alert** - Notification and alert displays
+- **banner** - Banner and promotional elements
+- **card** - Content cards (block, list, overlay)
+- **carousel** - Image and content sliders
+- **footer** - Footer compositions
+- **hero** - Hero sections (see detailed documentation below)
+- **layout** - Complex layout patterns
+- **media** - Media display compositions
+- **navigation** - Navigation structures
+- **pathway** - User journey elements
+- **person** - Profile and bio displays
+- **quote** - Quote and testimonial blocks
+- **slider** - Content slider variations
+- **social** - Social media integrations
+- **stat** - Statistics displays
+- **tabs** - Tabbed interfaces
+
+### Element Return Structure
+
+All elements return a consistent interface:
+
+```typescript
+interface ElementModel {
+  element: HTMLElement | DocumentFragment;
+  styles: string;
+  events?: {
+    load?: () => void;
+    resize?: () => void;
+    destroy?: () => void;
+  };
+}
+```
+
+## Integration with Other Packages
+
+### Styles Package Dependency
+
+Elements rely entirely on the Styles package for visual presentation:
 
 ```javascript
-// Import specific element categories
-import { Atomic, Composite, Layout } from '@universityofmaryland/web-elements-library';
-
-// Example: Using an atomic element
-const buttonElement = Atomic.actions.text({
-  text: 'Click Me',
-  url: '#',
-  isStyled: true
-});
-
-// Add the element to the DOM
-document.body.appendChild(buttonElement.element);
+import { Composite } from '@universityofmaryland/web-elements-library';
+// Styles are automatically included in the element.styles property
 ```
 
-## Element Categories
+### Components Package Relationship
 
-The library organizes elements into several categories:
+Components are built using Elements:
+- Elements provide structure and behavior
+- Components add web component wrapper and lifecycle
+- Elements can be used standalone for custom implementations
 
-### Atomic Elements
+### Usage in Feeds Package
 
-Atomic elements are the most basic building blocks that cannot be broken down further:
+Feed layouts use Elements for content display:
+```javascript
+// Feeds internally use card and grid elements
+import { card } from '@universityofmaryland/web-elements-library/Composite';
+```
+
+## Common Element Patterns
+
+### Actions Elements
 
 ```javascript
 import { Atomic } from '@universityofmaryland/web-elements-library';
 
-// Actions
-const buttonElement = Atomic.actions.text({
+// Text-based action
+const textAction = Atomic.actions.text({
   text: 'Learn More',
   url: '/learn-more',
   isStyled: true
 });
 
-// Assets
-const imageElement = Atomic.assets.image.background({
-  image: document.querySelector('img'),
-  isScaled: true
+// Icon action
+const iconAction = Atomic.actions.icon({
+  icon: 'arrow-right',
+  url: '#',
+  ariaLabel: 'Next page'
 });
 ```
 
-Available atomic elements:
-- `actions` - Buttons and interactive elements
-- `animations` - Animation elements
-- `assets` - Images, icons, and media elements
-- `buttons` - Button variations
-- `events` - Event-related elements
-- `layout` - Basic layout elements
-- `textLockup` - Text grouping elements
-
-### Composite Elements
-
-Composite elements are combinations of atomic elements that form more complex UI patterns:
+### Card Elements
 
 ```javascript
 import { Composite } from '@universityofmaryland/web-elements-library';
 
-const cardElement = Composite.card.block({
+// Block card
+const blockCard = Composite.card.block({
   headline: document.querySelector('h3'),
   text: document.querySelector('p'),
   image: document.querySelector('img'),
-  actions: document.querySelector('.actions')
-});
-```
-
-Available composite elements:
-- `accordion` - Expandable content sections
-- `alert` - Alert/notification elements
-- `banner` - Banner elements
-- `card` - Card elements (block, list, overlay)
-- `carousel` - Carousel/slider elements
-- `hero` - Hero section elements (see detailed section below)
-- `layout` - Layout compositions
-- `media` - Media display elements
-- `navigation` - Navigation elements
-- `pathway` - Pathway/journey elements
-- `person` - Person/profile elements
-- `quote` - Quote display elements
-- `slider` - Slider elements
-- `social` - Social media elements
-- `tabs` - Tabbed interface elements
-
-#### Hero Elements
-
-The hero category provides multiple variations for creating impactful page headers and feature sections:
-
-##### Standard Hero
-The default hero pattern with flexible content and media options:
-
-```javascript
-const heroStandard = Composite.hero.standard({
-  headline: document.createElement('h1'),
-  eyebrow: document.createElement('span'),
-  text: document.createElement('p'),
-  actions: document.createElement('div'),
-  image: document.querySelector('img'),
-  video: document.querySelector('video'),
-  includesAnimation: true,
-  isHeightSmall: false,
-  isHeightFull: false,
-  isTextCenter: false,
-  isTextRight: false,
-  isThemeDark: true
-});
-```
-
-##### Minimal Hero
-A simplified hero with essential content only:
-
-```javascript
-const heroMinimal = Composite.hero.minimal({
-  headline: document.createElement('h1'),
-  text: document.createElement('p'),
-  eyebrow: document.createElement('span'),
+  actions: document.querySelector('.actions'),
   isThemeDark: false
 });
-```
 
-##### Stacked Hero
-Hero with vertically stacked content and media:
-
-```javascript
-const heroStacked = Composite.hero.stacked({
-  headline: document.createElement('h1'),
-  text: document.createElement('p'),
-  image: document.querySelector('img'),
-  includesAnimation: true,
-  isHeightSmall: false,
-  isHeightFull: true,
-  isWidthLarge: true,  // Stacked-specific property
+// Overlay card
+const overlayCard = Composite.card.overlay({
+  headline: headlineElement,
+  text: textElement,
+  image: imageElement,
+  isTypeColor: true,
   isThemeDark: true
 });
 ```
 
-##### Overlay Hero
-Hero with overlay effects and advanced styling options:
+### Hero Elements
 
+The hero category offers multiple variations for impactful layouts:
+
+#### Standard Hero
 ```javascript
-const heroOverlay = Composite.hero.overlay({
+const hero = Composite.hero.standard({
   headline: document.createElement('h1'),
-  text: document.createElement('p'),
-  image: document.querySelector('img'),
-  hasBorder: true,
-  isTransparent: false,
-  isSticky: false,
-  isTextCenter: true,
-  isThemeDark: true
-});
-```
-
-##### Logo Hero
-Hero featuring institutional branding:
-
-```javascript
-const heroLogo = Composite.hero.logo({
-  headline: document.createElement('h1'),
-  logo: document.createElement('div'), // Logo element
+  eyebrow: document.createElement('span'),
   text: document.createElement('p'),
   actions: document.createElement('div'),
-  image: document.querySelector('img'),
-  isThemeDark: true,
-  isThemeLight: false,
-  isThemeMaryland: false
-});
-```
-
-##### Custom Hero Variations
-
-The library also provides specialized hero patterns for specific use cases:
-
-###### Expand Hero
-Hero with expandable content sections:
-
-```javascript
-const heroExpand = Composite.hero.custom.expand({
-  headline: document.createElement('h1'),
-  text: document.createElement('p'),
-  expandedContent: document.createElement('div'), // Content revealed on expand
+  image: imageElement,
   includesAnimation: true,
   isThemeDark: true
 });
 ```
 
-###### Grid Hero
-Hero with content blocks arranged in a grid:
-
+#### Minimal Hero
 ```javascript
-const heroGrid = Composite.hero.custom.grid({
+const minimalHero = Composite.hero.minimal({
   headline: document.createElement('h1'),
   text: document.createElement('p'),
-  blocks: [
-    document.createElement('div'), // Grid block 1
-    document.createElement('div'), // Grid block 2
-    document.createElement('div'), // Grid block 3
-    document.createElement('div')  // Grid block 4
-  ],
-  image: document.querySelector('img'),
+  eyebrow: document.createElement('span')
+});
+```
+
+#### Overlay Hero
+```javascript
+const overlayHero = Composite.hero.overlay({
+  headline: headlineElement,
+  text: textElement,
+  image: imageElement,
+  hasBorder: true,
+  isTransparent: false,
+  isSticky: true,
+  isTextCenter: true
+});
+```
+
+#### Custom Variations
+
+**Grid Hero** - Content blocks in grid layout:
+```javascript
+const gridHero = Composite.hero.custom.grid({
+  headline: headlineElement,
+  blocks: [block1, block2, block3, block4],
+  image: backgroundImage,
   isThemeDark: true
 });
 ```
 
-###### Video Arrow Hero
-Hero with prominent video playback controls:
-
+**Expand Hero** - With expandable content:
 ```javascript
-const heroVideoArrow = Composite.hero.custom.videoArrow({
-  headline: document.createElement('h1'),
-  text: document.createElement('p'),
-  video: document.querySelector('video'),
-  image: document.querySelector('img'), // Poster image
-  videoControls: true,
-  includesAnimation: true,
-  isThemeDark: true
+const expandHero = Composite.hero.custom.expand({
+  headline: headlineElement,
+  text: textElement,
+  expandedContent: hiddenContent,
+  includesAnimation: true
 });
 ```
-
-##### Hero Properties Reference
-
-Common properties across hero variants:
-- `headline` - Main heading element
-- `eyebrow` - Small text above headline
-- `text` - Descriptive paragraph text
-- `actions` - CTA buttons or links
-- `image` - Hero image element
-- `video` - Hero video element
-- `includesAnimation` - Enable entrance animations
-- `isThemeDark` - Dark theme styling
-
-Size properties (Standard, Stacked, Overlay):
-- `isHeightSmall` - Reduced height variant
-- `isHeightFull` - Full viewport height
-
-Layout properties (Standard, Overlay):
-- `isTextCenter` - Center-aligned text
-- `isTextRight` - Right-aligned text
-
-Theme properties (Logo):
-- `isThemeLight` - Light theme variant
-- `isThemeMaryland` - Maryland brand theme
-
-Unique properties:
-- `isWidthLarge` (Stacked) - Extended width layout
-- `hasBorder`, `isTransparent`, `isSticky` (Overlay) - Styling options
-- `expandedContent` (Expand) - Hidden content section
-- `blocks` (Grid) - Array of content blocks
-- `videoControls` (Video Arrow) - Show video controls
 
 ### Layout Elements
 
-Elements specifically designed for controlling page layout:
-
 ```javascript
-import { Layout } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 
-const imageLayout = Layout.image({
-  image: document.querySelector('img'),
-  align: 'left'
+// Sticky columns
+const stickyLayout = Composite.layout.stickyColumns({
+  leftColumn: sidebarContent,
+  rightColumn: mainContent,
+  stickyOffset: 100
+});
+
+// Image expand layout
+const imageExpand = Composite.layout.image.expand({
+  image: imageElement,
+  caption: 'Image caption',
+  isExpanded: false
 });
 ```
 
-### Model Elements
+## Advanced Usage
 
-Elements for creating and interacting with the component model:
-
-```javascript
-import { Model } from '@universityofmaryland/web-elements-library';
-
-// Create model elements
-const actionElement = Model.elements.actions({ url: '#', text: 'Click' });
-```
-
-### Utilities
-
-Helper functions for working with elements:
+### Event Handling
 
 ```javascript
-import { Utilities } from '@universityofmaryland/web-elements-library';
+const element = Composite.card.block({
+  headline: headlineEl,
+  text: textEl
+});
 
-// Accessibility utilities
-Utilities.accessibility.focusable(element);
-
-// DOM manipulation
-Utilities.markup.create.element('div', { class: 'container' });
-```
-
-## Element Structure
-
-Most elements return an object with the following properties:
-
-```javascript
-{
-  element: HTMLElement, // The DOM element
-  styles: string,       // CSS styles associated with the element
-  update: Function,     // Method to update element properties
-  destroy: Function,    // Method to clean up and remove element
-  // Other element-specific properties
+// Use lifecycle events
+if (element.events) {
+  // Call after adding to DOM
+  element.events.load?.();
+  
+  // Call on window resize
+  element.events.resize?.();
+  
+  // Clean up before removing
+  element.events.destroy?.();
 }
 ```
 
-Example of using the update method:
+### Dynamic Updates
+
+Many elements support property updates:
 
 ```javascript
-const button = Atomic.buttons.primary({
-  text: 'Learn More',
-  url: '#'
+const hero = Composite.hero.standard({
+  headline: headlineEl,
+  isThemeDark: false
 });
 
-// Update properties later
-button.update({
-  text: 'View Details',
-  isDisabled: true
-});
+// Update theme dynamically
+hero.element.setAttribute('data-theme', 'dark');
+if (hero.events?.resize) {
+  hero.events.resize();
+}
 ```
 
-## Browser Support
+### Custom Styling
 
-This library supports all modern browsers, including:
-- Chrome
-- Firefox
-- Safari
-- Edge
-
-## Performance Considerations
-
-The Elements library is designed with performance in mind:
-- Tree-shakable imports to reduce bundle size
-- Optimized rendering through element reuse
-- Minimal DOM operations for updates
-- Efficient event handling patterns
-
-## Accessibility
-
-All elements are built with accessibility as a priority:
-- WCAG 2.1 AA compliant
-- Proper semantic markup
-- ARIA attributes where appropriate
-- Keyboard navigation support
-- Focus management utilities
-
-## Documentation
-
-For complete documentation of all available elements and their options, see the [official UMD Design System documentation](https://umd-digital.github.io/design-system/).
-
-## Testing
-
-The Elements library includes comprehensive test coverage for all components. Tests are written using Jest and follow a consistent pattern:
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test file
-npm test -- source/composite/__tests__/hero/standard.test.ts
-```
-
-### Test Structure
-
-Tests are organized by component category and located in `__tests__` directories:
-
-```
-source/
-├── composite/
-│   └── __tests__/
-│       ├── hero/
-│       │   ├── standard.test.ts
-│       │   ├── minimal.test.ts
-│       │   ├── stacked.test.ts
-│       │   ├── overlay.test.ts
-│       │   ├── logo.test.ts
-│       │   └── custom/
-│       │       ├── expand.test.ts
-│       │       ├── grid.test.ts
-│       │       └── video-arrow.test.ts
-│       ├── card/
-│       │   ├── block.test.ts
-│       │   ├── list.test.ts
-│       │   └── overlay.test.ts
-│       └── types/
-│           ├── hero-types.test.ts
-│           └── card-types.test.ts
-```
-
-### Writing Tests
-
-When adding new elements, include tests that cover:
-
-1. **Basic Structure** - Element creation with minimal props
-2. **Content Properties** - All content variations
-3. **Asset Properties** - Image and video handling
-4. **Animation Properties** - Animation flags and behaviors
-5. **Theme Properties** - Theme variations
-6. **Edge Cases** - Null/undefined handling
-7. **Type Safety** - TypeScript interface compliance
-
-Example test pattern:
+While elements include default styles, you can extend them:
 
 ```javascript
-import { Composite } from '@universityofmaryland/web-elements-library';
-import type { HeroStandardProps } from '../../hero/_types';
+const card = Composite.card.block({ /* props */ });
 
-describe('Hero Standard Component', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should create a standard hero with minimal props', () => {
-    const props: HeroStandardProps = {
-      isThemeDark: true
-    };
-    
-    const result = Composite.hero.standard(props);
-    
-    expect(result).toBeDefined();
-    expect(result.element).toBeInstanceOf(HTMLElement);
-    expect(typeof result.styles).toBe('string');
-  });
-});
+// Add custom styles
+const customStyles = `
+  ${card.styles}
+  .my-custom-class {
+    /* Custom styles */
+  }
+`;
 ```
 
 ## TypeScript Support
 
-The library is written in TypeScript and provides comprehensive type definitions for all elements:
-
-### Import Types
+Full TypeScript definitions for type safety:
 
 ```typescript
 import type {
+  ElementModel,
   HeroStandardProps,
-  HeroMinimalProps,
-  HeroStackedProps,
-  HeroOverlayProps,
-  HeroLogoProps,
-  HeroGridProps,
-  HeroExpandProps,
-  HeroVideoArrowProps,
   CardBlockProps,
-  CardListProps,
-  CardOverlayProps
+  ThemeProps
 } from '@universityofmaryland/web-elements-library';
+
+const heroProps: HeroStandardProps = {
+  headline: document.createElement('h1'),
+  isThemeDark: true,
+  includesAnimation: false
+};
 ```
 
-### Type Safety
+## Browser Support
 
-All element functions are strictly typed to ensure proper usage:
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
 
-```typescript
-// TypeScript will enforce required properties
-const hero: HeroStandardProps = {
-  headline: document.createElement('h1'),
-  // isThemeDark is optional with boolean type
-  isThemeDark: true
-};
+## Performance Considerations
 
-// Type error if invalid property is provided
-const invalidHero: HeroStandardProps = {
-  headline: document.createElement('h1'),
-  invalidProp: true // TypeScript error
-};
+- **Lightweight** - Minimal JavaScript, no framework dependencies
+- **Tree-shakeable** - Import only needed elements
+- **Efficient** - Reusable element instances
+- **Lazy-loadable** - Load elements on demand
+
+## Accessibility
+
+All elements follow WCAG 2.1 AA standards:
+- Semantic HTML structure
+- ARIA attributes where needed
+- Keyboard navigation support
+- Screen reader compatibility
+- Focus management utilities
+
+## Documentation
+
+- **[Element Reference](https://umd-digital.github.io/design-system/docs/elements/)** - Complete API documentation
+- **[TypeScript Definitions](https://umd-digital.github.io/design-system/docs/elements/interfaces/)** - Type interfaces
+- **[Usage Examples](https://github.com/umd-digital/design-system/tree/main/packages/elements/source)** - Source code examples
+- **[Design System](https://designsystem.umd.edu)** - Complete design system documentation
+
+## Testing
+
+```bash
+# Run tests
+npm test
+
+# Watch mode
+npm run test:watch
+
+# Coverage report
+npm run test:coverage
+
+# Test specific category
+npm test -- composite/hero
 ```
 
 ## Contributing
 
-For contribution guidelines, please refer to the main repository README.
+See the [main repository](https://github.com/umd-digital/design-system) for contribution guidelines.
 
 ## License
 
-This project is licensed under the University of Maryland license.
+University of Maryland

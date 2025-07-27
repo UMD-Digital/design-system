@@ -47,14 +47,24 @@
         padding: 1rem;
         margin: 1rem 0;
       }
-      .color-swatch {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        border-radius: 4px;
-        margin-right: 0.5rem;
-        vertical-align: middle;
-        border: 1px solid #dee2e6;
+      .option-table {
+        width: 100%;
+        margin: 1rem 0;
+      }
+      .option-table th {
+        background-color: #f8f9fa;
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 2px solid #dee2e6;
+      }
+      .option-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #dee2e6;
+      }
+      .option-table code {
+        background-color: #f8f9fa;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
       }
     </style>
   </head>
@@ -62,7 +72,7 @@
     <header class="header">
       <div class="container">
         <h1>Styles Package Use Cases</h1>
-        <p class="lead">Real-world examples and implementation patterns</p>
+        <p class="lead">Real-world examples of using the UMD Styles Library</p>
       </div>
     </header>
 
@@ -78,40 +88,39 @@
       <div class="alert alert-info mb-4">
         <h5 class="alert-heading">About This Guide</h5>
         <p class="mb-0">
-          This guide demonstrates practical use cases for the UMD Styles Library, showing how to implement common styling patterns in real applications.
+          This guide demonstrates practical implementations of the UMD Styles Library for creating consistent, accessible designs.
         </p>
       </div>
 
       <h2 class="mb-4">Common Use Cases</h2>
 
-      <!-- Use Case 1: Setting Up a New Project -->
+      <!-- Use Case 1: Quick Start -->
       <div class="use-case-card">
-        <h4>🚀 Use Case 1: Setting Up Base Styles for a New Project</h4>
-        <p>When starting a new UMD project, you need to establish consistent base styles.</p>
+        <h4>🚀 Use Case 1: Quick Start - Setting Up Styles</h4>
+        <p>Initialize the UMD Styles Library in your project with all utilities.</p>
         
         <h5>Implementation</h5>
-        <pre><code>// styles-setup.js
-import * as Styles from '@universityofmaryland/web-styles-library';
+        <pre><code>// styles-init.js
+import { typography, reset, reset as resetStyles } from '@universityofmaryland/web-styles-library';
 
-export async function initializeStyles() {
-  // Load fonts and CSS variables first
-  const fonts = Styles.typography.fontFace.base64fonts;
-  const preRenderCSS = await Styles.preRenderCss;
+async function initializeStyles() {
+  // Load UMD fonts
+  const fontStyles = document.createElement('style');
+  fontStyles.innerHTML = typography.fontFace.base64fonts;
+  document.head.appendChild(fontStyles);
   
-  // Create and inject base styles
-  const baseStyles = document.createElement('style');
-  baseStyles.id = 'umd-base-styles';
-  baseStyles.textContent = `${fonts} ${preRenderCSS}`;
-  document.head.appendChild(baseStyles);
+  // Apply reset styles
+  const resetElement = document.createElement('style');
+  resetElement.innerHTML = await resetStyles.toString();
+  document.head.appendChild(resetElement);
   
-  // Load utility classes after DOM is ready
-  window.addEventListener('DOMContentLoaded', async () => {
-    const postRenderCSS = await Styles.postRenderCss;
-    const utilityStyles = document.createElement('style');
-    utilityStyles.id = 'umd-utility-styles';
-    utilityStyles.textContent = postRenderCSS;
-    document.head.appendChild(utilityStyles);
-  });
+  // Pre-render critical CSS (optional)
+  const { preRenderCss } = await import('@universityofmaryland/web-styles-library');
+  const criticalCss = await preRenderCss();
+  
+  const criticalElement = document.createElement('style');
+  criticalElement.innerHTML = criticalCss;
+  document.head.appendChild(criticalElement);
 }
 
 // Initialize on import
@@ -119,285 +128,478 @@ initializeStyles();</code></pre>
 
         <h5>Result</h5>
         <div class="example-output">
-          <p>✓ UMD fonts loaded (Crimson Pro, Helvetica Neue)</p>
+          <p>✓ UMD fonts loaded (Interstate, Crimson Pro, Barlow Condensed)</p>
           <p>✓ CSS variables available (--color-red, --spacing-md, etc.)</p>
           <p>✓ Reset styles applied</p>
           <p>✓ Utility classes ready to use</p>
         </div>
       </div>
 
-      <!-- Use Case 2: Creating a Theme System -->
+      <!-- Use Case 2: Using the Grid -->
       <div class="use-case-card">
-        <h4>🎨 Use Case 2: Building a Theme System</h4>
-        <p>Create light and dark theme variations using UMD design tokens.</p>
+        <h4>📐 Use Case 2: Grid System Classes</h4>
+        <p>The UMD Styles Library provides two types of grid systems: <strong>Grid with Gaps</strong> (for spacing between items) and <strong>Grid with Borders</strong> (for table-like layouts).</p>
         
-        <h5>Implementation</h5>
-        <pre><code>// theme-manager.js
-import { token } from '@universityofmaryland/web-styles-library';
+        <h5>Available Grid Gap Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Columns</th>
+              <th>Description</th>
+              <th>Responsive Behavior</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-layout-grid-gap-two</code></td>
+              <td>2</td>
+              <td>Two-column grid with standard gaps</td>
+              <td>Stacks to 1 column on mobile</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-grid-gap-three</code></td>
+              <td>3</td>
+              <td>Three-column grid with standard gaps</td>
+              <td>Mobile: 1 col, Tablet: 2 cols</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-grid-gap-three-large</code></td>
+              <td>3</td>
+              <td>Three-column grid with larger gaps on desktop</td>
+              <td>Mobile: 1 col, Tablet: 2 cols, Desktop: larger gaps</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-grid-gap-four</code></td>
+              <td>4</td>
+              <td>Four-column grid with standard gaps</td>
+              <td>Mobile: 1 col, Tablet: 2 cols</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-grid-gap-four-centered</code></td>
+              <td>4</td>
+              <td>Four-column grid where first item spans 2 columns</td>
+              <td>Mobile: 1 col, Tablet: 2 cols</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-grid-gap-stacked</code></td>
+              <td>1</td>
+              <td>Single column with consistent vertical spacing</td>
+              <td>Always single column</td>
+            </tr>
+          </tbody>
+        </table>
 
-class ThemeManager {
-  constructor() {
-    this.themes = {
-      light: {
-        '--theme-bg': '#ffffff',
-        '--theme-text': token.color.black,
-        '--theme-primary': token.color.red,
-        '--theme-secondary': token.color.gold,
-        '--theme-border': '#e0e0e0'
-      },
-      dark: {
-        '--theme-bg': '#1a1a1a',
-        '--theme-text': '#ffffff',
-        '--theme-primary': token.color.red,
-        '--theme-secondary': token.color.gold,
-        '--theme-border': '#333333'
-      }
-    };
-  }
+        <h5>Available Grid Border Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Columns</th>
+              <th>Description</th>
+              <th>Border Style</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-layout-grid-border-two</code></td>
+              <td>2</td>
+              <td>Two-column grid with borders</td>
+              <td>1px solid #E0E0E0</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-grid-border-three</code></td>
+              <td>3</td>
+              <td>Three-column grid with borders</td>
+              <td>1px solid #E0E0E0</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-grid-border-four</code></td>
+              <td>4</td>
+              <td>Four-column grid with borders</td>
+              <td>1px solid #E0E0E0</td>
+            </tr>
+          </tbody>
+        </table>
 
-  apply(themeName) {
-    const theme = this.themes[themeName] || this.themes.light;
-    const root = document.documentElement;
-    
-    Object.entries(theme).forEach(([property, value]) => {
-      root.style.setProperty(property, value);
-    });
-    
-    root.setAttribute('data-theme', themeName);
-  }
-  
-  toggle() {
-    const current = document.documentElement.getAttribute('data-theme');
-    this.apply(current === 'dark' ? 'light' : 'dark');
-  }
-}
-
-export default new ThemeManager();</code></pre>
-
-        <h5>Usage</h5>
-        <pre><code>// In your component
-import themeManager from './theme-manager';
-
-// Apply dark theme
-themeManager.apply('dark');
-
-// Toggle between themes
-document.querySelector('#theme-toggle').addEventListener('click', () => {
-  themeManager.toggle();
-});</code></pre>
-      </div>
-
-      <!-- Use Case 3: Responsive Grid System -->
-      <div class="use-case-card">
-        <h4>📐 Use Case 3: Implementing Responsive Layouts</h4>
-        <p>Use UMD grid utilities and breakpoints for responsive designs.</p>
-        
-        <h5>Implementation</h5>
-        <pre><code>import { token, utilities } from '@universityofmaryland/web-styles-library';
-
-// Generate responsive grid styles
-const gridStyles = utilities.create.style.toString({
-  '.responsive-container': {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: `0 ${token.spacing.md}`,
-    
-    [`@media (min-width: ${token.media.breakpoints.tablet})`]: {
-      padding: `0 ${token.spacing.lg}`
-    },
-    
-    [`@media (min-width: ${token.media.breakpoints.desktop})`]: {
-      padding: `0 ${token.spacing.xl}`
-    }
-  }
-});
-
-// HTML structure using utility classes
-const template = `
-  <div class="umd-layout-space-vertical-landing">
-    <div class="responsive-container">
-      <div class="umd-grid-gap-three">
-        <div>Column 1</div>
-        <div>Column 2</div>
-        <div>Column 3</div>
-      </div>
-    </div>
-  </div>
-`;</code></pre>
-
-        <h5>Breakpoint Reference</h5>
+        <h5>Gap Values</h5>
         <div class="example-output">
-          <p><strong>Mobile:</strong> 0 - 767px</p>
-          <p><strong>Tablet:</strong> 768px - 1023px</p>
-          <p><strong>Desktop:</strong> 1024px+</p>
-        </div>
-      </div>
-
-      <!-- Use Case 4: Custom Component Styling -->
-      <div class="use-case-card">
-        <h4>🧩 Use Case 4: Styling Custom Components</h4>
-        <p>Create consistent component styles using UMD design tokens.</p>
-        
-        <h5>Implementation</h5>
-        <pre><code>// custom-button.js
-import { token, animation } from '@universityofmaryland/web-styles-library';
-
-const buttonStyles = {
-  '.custom-button': {
-    display: 'inline-block',
-    padding: `${token.spacing.sm} ${token.spacing.lg}`,
-    backgroundColor: token.color.red,
-    color: '#ffffff',
-    fontFamily: token.font.family.sans,
-    fontSize: token.font.size.base,
-    fontWeight: token.font.weight.bold,
-    textDecoration: 'none',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    
-    '&:hover': {
-      backgroundColor: token.color.redDark,
-      transform: 'translateY(-2px)',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
-    },
-    
-    '&:active': {
-      transform: 'translateY(0)',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
-    },
-    
-    '&.secondary': {
-      backgroundColor: 'transparent',
-      color: token.color.red,
-      border: `2px solid ${token.color.red}`,
-      
-      '&:hover': {
-        backgroundColor: token.color.red,
-        color: '#ffffff'
-      }
-    }
-  }
-};
-
-// Convert to CSS
-const css = await utilities.create.style.toString(buttonStyles);</code></pre>
-      </div>
-
-      <!-- Use Case 5: Typography System -->
-      <div class="use-case-card">
-        <h4>📝 Use Case 5: Implementing Typography Scales</h4>
-        <p>Use UMD typography utilities for consistent text styling.</p>
-        
-        <h5>Available Typography Classes</h5>
-        <pre><code><!-- Headings -->
-<h1 class="umd-sans-largest-uppercase">Page Title</h1>
-<h2 class="umd-sans-larger">Section Heading</h2>
-<h3 class="umd-sans-large">Subsection</h3>
-
-<!-- Body Text -->
-<div class="umd-text-rich-simple">
-  <p>Standard paragraph text with proper spacing.</p>
-</div>
-
-<div class="umd-text-rich-simple-large">
-  <p>Larger paragraph text for emphasis.</p>
-</div>
-
-<!-- Dark Theme Text -->
-<div class="umd-text-rich-simple-dark">
-  <p>Text optimized for dark backgrounds.</p>
-</div></code></pre>
-
-        <h5>Custom Typography</h5>
-        <pre><code>import { typography } from '@universityofmaryland/web-styles-library';
-
-// Access font stacks
-const headingStyles = {
-  fontFamily: typography.tokens.family.serif,
-  fontSize: typography.tokens.size.xl,
-  lineHeight: typography.tokens.lineHeight.tight,
-  letterSpacing: typography.tokens.letterSpacing.tight
-};</code></pre>
-      </div>
-
-      <!-- Use Case 6: Animation Utilities -->
-      <div class="use-case-card">
-        <h4>✨ Use Case 6: Adding Animations</h4>
-        <p>Implement smooth animations using UMD animation utilities.</p>
-        
-        <h5>Link Hover Effects</h5>
-        <pre><code>// Apply fade underline animation
-<a href="#" class="umd-fadein-simple-dark">
-  Hover for animation
-</a>
-
-// Custom animation using tokens
-import { animation } from '@universityofmaryland/web-styles-library';
-
-const linkStyles = {
-  '.animated-link': {
-    ...animation.line.fadeInSimpleDark,
-    // Override specific properties
-    color: token.color.red
-  }
-};</code></pre>
-
-        <h5>Loading States</h5>
-        <pre><code>// Use built-in loader
-<div class="umd-loader-dots">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-
-// Transition effects
-<div class="umd-transition-fade-in-from-bottom">
-  Content that fades in
-</div></code></pre>
-      </div>
-
-      <!-- Use Case 7: Color System -->
-      <div class="use-case-card">
-        <h4>🎨 Use Case 7: Working with Colors</h4>
-        <p>Access and use UMD brand colors effectively.</p>
-        
-        <h5>Color Tokens</h5>
-        <div class="example-output">
-          <p><span class="color-swatch" style="background-color: #e21833;"></span> Red: #e21833</p>
-          <p><span class="color-swatch" style="background-color: #FFD200;"></span> Gold: #FFD200</p>
-          <p><span class="color-swatch" style="background-color: #000000;"></span> Black: #000000</p>
-          <p><span class="color-swatch" style="background-color: #ffffff;"></span> White: #ffffff</p>
+          <p><strong>Standard Gap:</strong> 16px (mobile), 24px (tablet), 32px (desktop)</p>
+          <p><strong>Large Gap:</strong> 16px (mobile), 24px (tablet), 48px (desktop), 64px (high-def)</p>
+          <p><strong>Stacked Gap:</strong> 32px vertical spacing between items</p>
         </div>
 
-        <h5>Usage Examples</h5>
-        <pre><code>import { token } from '@universityofmaryland/web-styles-library';
+        <h5>Usage Example</h5>
+        <pre><code>&lt;!-- Standard three-column grid --&gt;
+&lt;div class="umd-layout-grid-gap-three"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
 
-// In JavaScript
-const styles = {
-  backgroundColor: token.color.red,
-  color: token.color.white,
-  borderColor: token.color.gold
-};
+      <!-- Use Case 3: Horizontal and Vertical Spacing -->
+      <div class="use-case-card">
+        <h4>📏 Use Case 3: Spacing Utility Classes</h4>
+        <p>The library provides comprehensive spacing utilities for both <strong>horizontal containers</strong> (max-width with padding) and <strong>vertical spacing</strong> (margin-bottom).</p>
+        
+        <h5>Horizontal Container Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Max Width</th>
+              <th>Padding</th>
+              <th>Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-layout-space-horizontal-full</code></td>
+              <td>100%</td>
+              <td>16px (mobile), 40px (tablet), 64px (desktop)</td>
+              <td>Full-width sections</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-horizontal-larger</code></td>
+              <td>1400px</td>
+              <td>Same as above</td>
+              <td>Wide content areas</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-horizontal-large</code></td>
+              <td>1200px</td>
+              <td>Same as above</td>
+              <td>Standard content width</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-horizontal-normal</code></td>
+              <td>1000px</td>
+              <td>Same as above</td>
+              <td>Reading width</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-horizontal-small</code></td>
+              <td>800px</td>
+              <td>Same as above</td>
+              <td>Narrow content/forms</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-horizontal-smallest</code></td>
+              <td>600px</td>
+              <td>Same as above</td>
+              <td>Very narrow content</td>
+            </tr>
+          </tbody>
+        </table>
 
-// As CSS variables
-:root {
-  --primary: var(--color-red);
-  --secondary: var(--color-gold);
-  --text: var(--color-black);
-}</code></pre>
+        <h5>Vertical Spacing Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Mobile Margin</th>
+              <th>Tablet Margin</th>
+              <th>Desktop Margin</th>
+              <th>Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-layout-space-vertical-landing</code></td>
+              <td>48px</td>
+              <td>96px</td>
+              <td>120px</td>
+              <td>Major landing page sections</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-vertical-landing-child</code></td>
+              <td>24px</td>
+              <td>32px</td>
+              <td>40px</td>
+              <td>Elements within landing sections</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-vertical-interior</code></td>
+              <td>48px</td>
+              <td>48px</td>
+              <td>96px</td>
+              <td>Interior page sections</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-vertical-interior-child</code></td>
+              <td>24px</td>
+              <td>24px</td>
+              <td>24px</td>
+              <td>Elements within interior sections</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-vertical-headline-large</code></td>
+              <td>8px</td>
+              <td>8px</td>
+              <td>16px</td>
+              <td>After large headlines</td>
+            </tr>
+            <tr>
+              <td><code>umd-layout-space-vertical-headline-medium</code></td>
+              <td>8px</td>
+              <td>8px</td>
+              <td>8px</td>
+              <td>After medium headlines</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Usage Example</h5>
+        <pre><code>&lt;!-- Container with reading width --&gt;
+&lt;div class="umd-layout-space-horizontal-normal"&gt;
+  &lt;h1 class="umd-layout-space-vertical-headline-large"&gt;Page Title&lt;/h1&gt;
+  &lt;p&gt;Content with optimal reading width and proper spacing.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <!-- Use Case 4: Form Implementation -->
+      <div class="use-case-card">
+        <h4>📝 Use Case 4: Form Field Classes</h4>
+        <p>The library provides a complete set of form field classes for creating accessible, consistent forms.</p>
+        
+        <h5>Available Form Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Element Type</th>
+              <th>Description</th>
+              <th>Special Features</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-field-input</code></td>
+              <td>input</td>
+              <td>Base input field styling</td>
+              <td>Supports aria-invalid for validation states</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-input-date-wrapper</code></td>
+              <td>div (wrapper)</td>
+              <td>Wrapper for date inputs</td>
+              <td>Custom calendar icon</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-input-time-wrapper</code></td>
+              <td>div (wrapper)</td>
+              <td>Wrapper for time inputs</td>
+              <td>Custom clock icon</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-select-wrapper</code></td>
+              <td>div (wrapper)</td>
+              <td>Wrapper for select dropdowns</td>
+              <td>Custom dropdown arrow</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-select</code></td>
+              <td>select</td>
+              <td>Styled select dropdown</td>
+              <td>Consistent cross-browser styling</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-textarea</code></td>
+              <td>textarea</td>
+              <td>Styled textarea</td>
+              <td>Auto-resize option</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-checkbox-wrapper</code></td>
+              <td>div (wrapper)</td>
+              <td>Wrapper for checkbox + label</td>
+              <td>Custom checkbox styling</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-radio-wrapper</code></td>
+              <td>div (wrapper)</td>
+              <td>Wrapper for radio + label</td>
+              <td>Custom radio styling</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-file-wrapper</code></td>
+              <td>div (wrapper)</td>
+              <td>Wrapper for file inputs</td>
+              <td>Custom file button</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-file</code></td>
+              <td>input[type="file"]</td>
+              <td>Hidden file input</td>
+              <td>Visually hidden, label styled</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-file-label</code></td>
+              <td>span</td>
+              <td>Visual file button</td>
+              <td>Shows selected filename</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-set</code></td>
+              <td>fieldset</td>
+              <td>Groups related form fields</td>
+              <td>Proper spacing and borders</td>
+            </tr>
+            <tr>
+              <td><code>umd-field-set-item</code></td>
+              <td>div</td>
+              <td>Individual field container</td>
+              <td>Consistent spacing between fields</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Validation States</h5>
+        <div class="example-output">
+          <p><strong>Valid State:</strong> Add <code>aria-invalid="false"</code> to show green border</p>
+          <p><strong>Invalid State:</strong> Add <code>aria-invalid="true"</code> to show red border</p>
+          <p><strong>Disabled State:</strong> Add <code>disabled</code> attribute for disabled styling</p>
+        </div>
+
+        <h5>Usage Example</h5>
+        <pre><code>&lt;!-- Text input with validation --&gt;
+&lt;div class="umd-field-set-item"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email" class="umd-field-input" aria-invalid="false"&gt;
+&lt;/div&gt;
+
+&lt;!-- Date input with wrapper --&gt;
+&lt;div class="umd-field-input-date-wrapper"&gt;
+  &lt;input type="date" class="umd-field-input-date"&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <!-- Use Case 5: Web Components Default Styling -->
+      <div class="use-case-card">
+        <h4>🎨 Use Case 5: Automatic Web Component Styling</h4>
+        <p>All UMD web components receive automatic base styling from the styles package. No additional configuration needed!</p>
+        
+        <h5>How Automatic Styling Works</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>CSS Applied</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hidden Until Defined</td>
+              <td><code>:not(:defined) { display: none; }</code></td>
+              <td>Prevents flash of unstyled content</td>
+            </tr>
+            <tr>
+              <td>Block Display</td>
+              <td><code>:defined { display: block; }</code></td>
+              <td>Standard block-level behavior</td>
+            </tr>
+            <tr>
+              <td>Container Queries</td>
+              <td><code>:defined { container-type: inline-size; }</code></td>
+              <td>Enables responsive component design</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Components with Special Styling</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Special Styling</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-element-accordion-item</code></td>
+              <td>Auto spacing: <code>margin-top: 4px</code></td>
+              <td>Consistent spacing between accordion items</td>
+            </tr>
+            <tr>
+              <td><code>umd-element-brand-logo-animation</code></td>
+              <td>Absolute positioning, z-index: 9</td>
+              <td>Proper logo animation placement</td>
+            </tr>
+            <tr>
+              <td><code>umd-element-card[data-display="list"]</code></td>
+              <td>Auto spacing: <code>margin-top: 16px</code></td>
+              <td>Consistent list card spacing</td>
+            </tr>
+            <tr>
+              <td><code>umd-element-navigation-sticky</code></td>
+              <td>z-index: 9999</td>
+              <td>Ensures navigation stays on top</td>
+            </tr>
+            <tr>
+              <td><code>umd-element-scroll-top[data-layout-fixed="true"]</code></td>
+              <td>Fixed positioning, responsive sizing</td>
+              <td>Scroll to top button placement</td>
+            </tr>
+            <tr>
+              <td><code>umd-element-social-sharing[data-layout-fixed="true"]</code></td>
+              <td>Fixed positioning on desktop</td>
+              <td>Social sharing sidebar</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Component List</h5>
+        <div class="example-output">
+          <p><strong>Base Components (automatic show/hide):</strong></p>
+          <ul>
+            <li>alert-page, alert-site, banner-promo</li>
+            <li>All carousel variants (cards, image, multiple-image, people, thumbnail)</li>
+            <li>All hero variants (brand-video, expand, logo, minimal)</li>
+            <li>media-inline, media-gif, quote</li>
+            <li>pathway, pathway-highlight</li>
+            <li>person-bio, person-hero</li>
+            <li>slider-events, slider-events-feed</li>
+          </ul>
+          <p><strong>Feed Components:</strong> umd-feed-events, umd-feed-news</p>
+          <p><strong>Navigation Components:</strong> nav-item, nav-drawer, navigation-header, navigation-sticky</p>
+          <p><strong>Layout Components:</strong> footer, breadcrumb, call-to-action, tabs, section-intro</p>
+        </div>
+
+        <h5>Benefits</h5>
+        <pre><code>&lt;!-- Just use the component - styling is automatic! --&gt;
+&lt;umd-element-hero data-theme="dark"&gt;
+  &lt;!-- Component is hidden until JavaScript loads --&gt;
+  &lt;!-- Then displays as block with container queries enabled --&gt;
+&lt;/umd-element-hero&gt;</code></pre>
       </div>
 
       <!-- Best Practices -->
       <div class="alert alert-success mt-5">
         <h5 class="alert-heading">✅ Best Practices</h5>
         <ul class="mb-0">
-          <li>Always use design tokens instead of hard-coded values</li>
-          <li>Load fonts and variables before other styles</li>
-          <li>Use utility classes when possible before creating custom styles</li>
-          <li>Test responsive designs at all UMD breakpoints</li>
-          <li>Ensure color combinations meet WCAG contrast requirements</li>
+          <li>Always load fonts first for consistent typography</li>
+          <li>Use semantic HTML with UMD utility classes</li>
+          <li>Choose the appropriate grid system (gaps for cards, borders for data)</li>
+          <li>Select container widths based on content type (reading vs. full-width)</li>
+          <li>Apply proper vertical spacing for visual hierarchy</li>
+          <li>Use form field wrappers for enhanced styling</li>
+          <li>Let web components inherit their default styling</li>
+          <li>Test across different screen sizes and browsers</li>
+        </ul>
+      </div>
+
+      <!-- Performance Tips -->
+      <div class="alert alert-warning mt-4">
+        <h5 class="alert-heading">⚡ Performance Tips</h5>
+        <ul class="mb-0">
+          <li>Load only the CSS you need using tree-shaking</li>
+          <li>Use the preRenderCss function for critical styles</li>
+          <li>Lazy load fonts if not immediately visible</li>
+          <li>Combine utility classes instead of custom CSS</li>
+          <li>Use CSS custom properties for dynamic theming</li>
         </ul>
       </div>
 
@@ -406,9 +608,9 @@ const styles = {
         <h3>Related Resources</h3>
         <ul>
           <li><a href="index.html">Styles Package Documentation</a></li>
-          <li><a href="tailwind.html">Tailwind Integration Guide</a></li>
-          <li><a href="../components/usage.html">Component Usage Examples</a></li>
-          <li><a href="https://brand.umd.edu">UMD Brand Guidelines</a></li>
+          <li><a href="../components/usage.html">Component Integration Guide</a></li>
+          <li><a href="https://designsystem.umd.edu">Design System Website</a></li>
+          <li><a href="tailwind.html">Tailwind Integration</a></li>
         </ul>
       </div>
     </div>

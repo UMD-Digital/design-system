@@ -115,16 +115,24 @@
         <h4>🚀 Quick Navigation</h4>
         <div class="row">
           <div class="col-md-3">
-            <a href="#getting-started" class="btn btn-umd w-100 mb-2">Getting Started</a>
+            <a href="#getting-started" class="btn btn-umd w-100 mb-2"
+              >Getting Started</a
+            >
           </div>
           <div class="col-md-3">
-            <a href="#basic-usage" class="btn btn-umd w-100 mb-2">Basic Usage</a>
+            <a href="#basic-usage" class="btn btn-umd w-100 mb-2"
+              >Basic Usage</a
+            >
           </div>
           <div class="col-md-3">
-            <a href="#styles-integration" class="btn btn-umd w-100 mb-2">Styles Integration</a>
+            <a href="#styles-integration" class="btn btn-umd w-100 mb-2"
+              >Styles Integration</a
+            >
           </div>
           <div class="col-md-3">
-            <a href="#common-patterns" class="btn btn-umd w-100 mb-2">Common Patterns</a>
+            <a href="#common-patterns" class="btn btn-umd w-100 mb-2"
+              >Common Patterns</a
+            >
           </div>
         </div>
       </div>
@@ -132,8 +140,12 @@
       <!-- Getting Started Section -->
       <section id="getting-started" class="content-section">
         <h2>Getting Started</h2>
-        <p>The UMD Web Components Library provides ready-to-use components that automatically enforce UMD brand standards and accessibility requirements.</p>
-        
+        <p>
+          The UMD Web Components Library provides ready-to-use components that
+          automatically enforce UMD brand standards and accessibility
+          requirements.
+        </p>
+
         <h3>Installation</h3>
         <div class="code-example">
           <pre><code># Install the components library
@@ -161,7 +173,7 @@ Components.navigation.primary();</code></pre>
       <!-- Basic Usage Section -->
       <section id="basic-usage" class="content-section">
         <h2>Basic Usage Examples</h2>
-        
+
         <h3>Hero Component</h3>
         <p>Create engaging hero sections with built-in responsive behavior:</p>
         <div class="code-example">
@@ -229,7 +241,10 @@ Components.navigation.primary();</code></pre>
       <!-- Styles Integration Section -->
       <section id="styles-integration" class="content-section">
         <h2>Styles Package Integration</h2>
-        <p>Components work seamlessly with the UMD Styles package for consistent spacing, grids, and utilities.</p>
+        <p>
+          Components work seamlessly with the UMD Styles package for consistent
+          spacing, grids, and utilities.
+        </p>
 
         <h3>Spacing Utilities</h3>
         <div class="code-example">
@@ -243,39 +258,6 @@ Components.navigation.primary();</code></pre>
   &lt;!-- Card grid below --&gt;
 &lt;/div&gt;</code></pre>
         </div>
-
-        <h3>Grid Layouts</h3>
-        <div class="code-example">
-          <pre><code>&lt;!-- Three-column card grid with automatic spacing --&gt;
-&lt;div class="umd-grid-three umd-grid-gap"&gt;
-  &lt;umd-element-card&gt;...&lt;/umd-element-card&gt;
-  &lt;umd-element-card&gt;...&lt;/umd-element-card&gt;
-  &lt;umd-element-card&gt;...&lt;/umd-element-card&gt;
-&lt;/div&gt;
-
-&lt;!-- Responsive grid that stacks on mobile --&gt;
-&lt;div class="umd-grid-responsive umd-grid-gap-large"&gt;
-  &lt;umd-element-stat&gt;...&lt;/umd-element-stat&gt;
-  &lt;umd-element-stat&gt;...&lt;/umd-element-stat&gt;
-  &lt;umd-element-stat&gt;...&lt;/umd-element-stat&gt;
-  &lt;umd-element-stat&gt;...&lt;/umd-element-stat&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-
-        <h3>Typography Classes</h3>
-        <div class="code-example">
-          <pre><code>&lt;!-- Use UMD typography scales --&gt;
-&lt;h1 class="umd-sans-huge"&gt;Welcome to Maryland&lt;/h1&gt;
-&lt;p class="umd-serif-base"&gt;
-  The University of Maryland is the state's flagship university and one 
-  of the nation's preeminent public research universities.
-&lt;/p&gt;
-
-&lt;!-- Apply brand colors --&gt;
-&lt;div class="umd-text-red"&gt;
-  &lt;h2&gt;Important Deadline&lt;/h2&gt;
-&lt;/div&gt;</code></pre>
-        </div>
       </section>
 
       <!-- Common Patterns Section -->
@@ -285,7 +267,7 @@ Components.navigation.primary();</code></pre>
         <h3>Landing Page Hero Section</h3>
         <div class="code-example">
           <pre><code>&lt;!-- Full-width hero with overlay text --&gt;
-&lt;section class="umd-background-dark"&gt;
+&lt;section class="umd-layout-space-vertical-landing"&gt;
   &lt;umd-element-hero data-display="overlay" data-theme="dark"&gt;
     &lt;img slot="image" src="campus-aerial.jpg" alt="Aerial view of campus"&gt;
     &lt;h1 slot="headline"&gt;Do Good at Maryland&lt;/h1&gt;
@@ -309,10 +291,10 @@ Components.navigation.primary();</code></pre>
         <h3>News Grid Section</h3>
         <div class="code-example">
           <pre><code>&lt;section class="umd-layout-space-vertical-landing"&gt;
-  &lt;div class="container"&gt;
-    &lt;h2 class="umd-sans-larger text-center mb-4"&gt;Latest News&lt;/h2&gt;
+  &lt;div class="umd-layout-space-horizontal-larger"&gt;
+    &lt;h2 class="umd-sans-larger"&gt;Latest News&lt;/h2&gt;
     
-    &lt;div class="umd-grid-three umd-grid-gap"&gt;
+    &lt;div class="umd-grid-gap-three"&gt;
       &lt;umd-element-card data-display="article"&gt;
         &lt;a slot="image" href="/news/article-1"&gt;
           &lt;img src="news1.jpg" alt="Research lab"&gt;
@@ -338,12 +320,12 @@ Components.navigation.primary();</code></pre>
         <h3>Accordion FAQ Section</h3>
         <div class="code-example">
           <pre><code>&lt;section class="umd-layout-space-vertical"&gt;
-  &lt;div class="container"&gt;
-    &lt;h2 class="umd-sans-larger text-center mb-4"&gt;
+  &lt;div class="umd-layout-space-horizontal-small"&gt;
+    &lt;h2 class="umd-sans-larger"&gt;
       Frequently Asked Questions
     &lt;/h2&gt;
     
-    &lt;div class="umd-layout-max-width-text mx-auto"&gt;
+    &lt;div&gt;
       &lt;umd-element-accordion-item&gt;
         &lt;h3 slot="headline"&gt;How do I apply to Maryland?&lt;/h3&gt;
         &lt;div slot="text"&gt;
@@ -397,7 +379,9 @@ Components.navigation.primary();</code></pre>
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Component Reference</h5>
-                <p class="card-text">Detailed documentation for every component.</p>
+                <p class="card-text">
+                  Detailed documentation for every component.
+                </p>
                 <a href="index.html" class="btn btn-umd">View Reference</a>
               </div>
             </div>
@@ -406,8 +390,12 @@ Components.navigation.primary();</code></pre>
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Advanced Usage</h5>
-                <p class="card-text">TypeScript, testing, and custom development.</p>
-                <a href="advanced-usage.html" class="btn btn-umd">Advanced Guide</a>
+                <p class="card-text">
+                  TypeScript, testing, and custom development.
+                </p>
+                <a href="advanced-usage.html" class="btn btn-umd"
+                  >Advanced Guide</a
+                >
               </div>
             </div>
           </div>
@@ -416,7 +404,12 @@ Components.navigation.primary();</code></pre>
               <div class="card-body">
                 <h5 class="card-title">Live Examples</h5>
                 <p class="card-text">Interactive component playground.</p>
-                <a href="http://playground.designsystem.umd.edu" target="_blank" class="btn btn-umd">Open Playground</a>
+                <a
+                  href="http://playground.designsystem.umd.edu"
+                  target="_blank"
+                  class="btn btn-umd"
+                  >Open Playground</a
+                >
               </div>
             </div>
           </div>

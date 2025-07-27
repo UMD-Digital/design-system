@@ -230,14 +230,23 @@ The component library uses a sophisticated attribute system with two types of at
 
 2. **Observed Attributes**
    - Trigger component behavior when changed
-   - Examples: `is-visual-open`, `resize`, `is-visual-closed`
-   - Used for programmatic control: `element.setAttribute('is-visual-open', 'true')`
+   - Common observed attributes:
+     - `resize` - Triggers component recalculation and layout updates
+     - `data-visual-open` - Controls visual open state (true/false)
+     - `data-layout-hidden` - Controls visibility (true/false)
+     - `data-layout-position` - Sets position value (numeric)
+   - Used for programmatic control: `element.setAttribute('resize', 'true')`
+   - Note: Some tests use `is-visual-open` which maps to `data-visual-open` internally
 
 **Attribute Handlers**
 - Located in `source/model/attributes/handler.ts`
 - Observers watch for specific attribute changes and execute callbacks
 - Use `Attributes.handler.combine()` to apply multiple handlers
-- Common observers: `resize`, `visuallyOpen`, `visuallyClosed`
+- Common handler methods:
+  - `Attributes.handler.common.resize()` - Handles resize attribute
+  - `Attributes.handler.common.visualToggle()` - Handles open/close toggle
+  - `Attributes.handler.common.visualShowHide()` - Handles show/hide states
+  - `Attributes.handler.common.accordion()` - Accordion-specific handlers
 
 **Deprecation Pattern**
 - Old attributes (without `data-` prefix) are being phased out
@@ -295,8 +304,9 @@ When documenting components, follow this pattern:
  *   - `value1` - Description
  *   - `value2` - Description
  *
- * ## Observed Attributes
- * - `attribute-name` - Description of what it triggers
+ * ## Observed Attributes (if applicable)
+ * - `resize` - Triggers component recalculation
+ * - `data-visual-open` - Controls open/closed state
  *
  * @example
  * [Examples of usage]

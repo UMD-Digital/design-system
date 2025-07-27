@@ -53,7 +53,7 @@ Components.navigation.primary();
 
 ```html
 <umd-element-hero data-theme="dark" data-display="overlay">
-  <img slot="image" src="hero.jpg" alt="Hero image">
+  <img slot="image" src="hero.jpg" alt="Hero image" />
   <p slot="eyebrow">Welcome</p>
   <h1 slot="headline">University of Maryland</h1>
   <div slot="text">
@@ -72,6 +72,7 @@ Components.navigation.primary();
 ### Web Components Standards
 
 All components follow W3C Web Components standards:
+
 - **Custom Elements** - Semantic HTML tags (e.g., `<umd-element-card>`)
 - **Shadow DOM** - Style encapsulation and DOM isolation
 - **Slots** - Content distribution for flexible layouts
@@ -80,23 +81,17 @@ All components follow W3C Web Components standards:
 ### Naming Convention
 
 All components use the `umd-element-` prefix:
+
 - `<umd-element-card>`
 - `<umd-element-hero>`
 - `<umd-element-navigation>`
 
 ### Attribute System
 
-Components use two types of attributes:
+Components use configuration attributes with the `data-*` prefix:
 
-**Configuration Attributes** (data-*)
 - Set initial state: `data-theme="dark"`
 - Configure display: `data-display="overlay"`
-- Control layout: `data-columns="3"`
-
-**Observed Attributes**
-- Trigger behaviors: `is-visual-open="true"`
-- Request updates: `resize="true"`
-- Control state: `is-animated="true"`
 
 ## Integration with Other Packages
 
@@ -123,6 +118,7 @@ The Styles Package provides utility classes for spacing, grids, and typography:
 ### Elements Package Relationship
 
 Components are built on Elements:
+
 - Elements provide atomic building blocks
 - Components compose Elements into features
 - Components add interactivity and state management
@@ -144,28 +140,33 @@ Components.feed.newsList();
 ## Component Categories
 
 ### Navigation Components
+
 - `navigation.primary` - Main site navigation
 - `navigation.drawer` - Mobile navigation drawer
 - `navigation.breadcrumb` - Breadcrumb navigation
 - `navigation.utility` - Utility navigation bar
 
 ### Content Components
+
 - `hero.*` - Hero sections (base, expand, grid, logo, minimal)
 - `card.*` - Card layouts (standard, article, event, overlay, icon)
 - `carousel.*` - Content carousels
 - `accordion.item` - Expandable content sections
 
 ### Layout Components
+
 - `layout.modal` - Modal dialogs
 - `layout.stickyColumns` - Sticky column layouts
 - `layout.scrollTop` - Scroll to top functionality
 
 ### Interactive Components
+
 - `tab.display` - Tabbed interfaces
 - `slider.*` - Content sliders
 - `actions.display` - Call-to-action buttons
 
 ### Media Components
+
 - `media.inline` - Inline media players
 - `person.*` - Person/profile displays
 - `quote.display` - Quote/testimonial blocks
@@ -177,7 +178,7 @@ Components.feed.newsList();
 
 ```html
 <umd-element-hero data-display="overlay">
-  <img slot="image" src="campus.jpg" alt="Campus view">
+  <img slot="image" src="campus.jpg" alt="Campus view" />
   <h1 slot="headline">Discover Your Future</h1>
   <p slot="text">Join our community of innovators.</p>
   <div slot="actions">
@@ -194,7 +195,7 @@ Components.feed.newsList();
 <div class="umd-grid-gap-three">
   <umd-element-card data-theme="light">
     <a slot="image" href="/programs">
-      <img src="programs.jpg" alt="Academic programs">
+      <img src="programs.jpg" alt="Academic programs" />
     </a>
     <h3 slot="headline">
       <a href="/programs">Academic Programs</a>
@@ -227,14 +228,16 @@ Components.feed.newsList();
 Full TypeScript support with comprehensive type definitions:
 
 ```typescript
-import type { 
-  ComponentRef, 
+import type {
+  ComponentRef,
   SlotConfiguration,
-  ComponentEvents 
+  ComponentEvents,
 } from '@universityofmaryland/web-components-library';
 
 // Type-safe component usage
-const card = document.querySelector<HTMLElement & ComponentEvents>('umd-element-card');
+const card = document.querySelector<HTMLElement & ComponentEvents>(
+  'umd-element-card',
+);
 if (card) {
   card.addEventListener('component:ready', (e) => {
     console.log('Card initialized');

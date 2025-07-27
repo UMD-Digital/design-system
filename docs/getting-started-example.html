@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My UMD Project</title>
+
+    <!-- Load UMD Components (auto-initializes) -->
+    <script src="https://unpkg.com/@universityofmaryland/web-components-library"></script>
+
+    <!-- Load Companion UMD Styles -->
+    <script src="https://unpkg.com/@universityofmaryland/web-styles-library@latest/dist/umd-styles.js"></script>
+
+    <script>
+      // Styles library pre-render CSS
+      window.addEventListener('DOMContentLoaded', () => {
+        if (window.Styles && window.Styles.preRenderCss) {
+          window.Styles.preRenderCss.then((css) => {
+            const styleSheet = document.createElement('style');
+            const fonts = window.Styles.typography.fontFace.base64fonts;
+            styleSheet.innerHTML = `${fonts} ${css}`;
+            document.head.appendChild(styleSheet);
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Hero Section with Overlay Display -->
+    <umd-element-hero
+      data-display="overlay"
+      class="umd-layout-space-vertical-landing"
+    >
+      <img
+        src="https://playground.designsystem.umd.edu/static/media/umd-smiling-graduates.69846e70.webp"
+        alt="UMD graduates celebrating"
+        slot="image"
+      />
+      <p slot="eyebrow">Welcome</p>
+      <h1 slot="headline">University of Maryland</h1>
+      <div slot="text">
+        <p>
+          Fearless ideas start here. Join our community of innovators and
+          leaders.
+        </p>
+      </div>
+      <div slot="actions">
+        <umd-element-call-to-action data-display="primary">
+          <a href="https://designsystem.umd.edu/components/overlay-hero"
+            >Component Documentation</a
+          >
+        </umd-element-call-to-action>
+      </div>
+    </umd-element-hero>
+
+    <!-- Cards Section with Grid Layout -->
+    <section class="umd-layout-space-vertical-landing">
+      <div class="umd-layout-space-horizontal-full">
+        <div class="umd-grid-gap-three">
+          <!-- Card 1 -->
+          <umd-element-card>
+            <a slot="image" href="#">
+              <img
+                src="https://playground.designsystem.umd.edu/static/media/thurgood-marshall-hall.9f02ee31.webp"
+                alt="Thurgood Marshall Hall"
+              />
+            </a>
+            <h2 slot="headline">
+              <a href="#">Academic Excellence</a>
+            </h2>
+            <div slot="text">
+              <p>
+                Discover our world-class programs and renowned faculty across 12
+                schools and colleges.
+              </p>
+            </div>
+            <umd-element-call-to-action slot="actions" data-display="secondary">
+              <a href="#">Explore Programs</a>
+            </umd-element-call-to-action>
+          </umd-element-card>
+
+          <!-- Card 2 -->
+          <umd-element-card>
+            <a slot="image" href="#">
+              <img
+                src="https://playground.designsystem.umd.edu/static/media/thurgood-marshall-hall.9f02ee31.webp"
+                alt="Campus Life"
+              />
+            </a>
+            <h2 slot="headline">Campus Life</h2>
+            <div slot="text">
+              <p>
+                Experience a vibrant campus community with over 800 student
+                organizations and endless opportunities.
+              </p>
+            </div>
+            <umd-element-call-to-action slot="actions" data-display="secondary">
+              <a href="#">Student Life</a>
+            </umd-element-call-to-action>
+          </umd-element-card>
+
+          <!-- Card 3 -->
+          <umd-element-card>
+            <a slot="image" href="#">
+              <img
+                src="https://playground.designsystem.umd.edu/static/media/thurgood-marshall-hall.9f02ee31.webp"
+                alt="Research"
+              />
+            </a>
+            <h2 slot="headline">
+              <a href="#">Research Impact</a>
+            </h2>
+            <div slot="text">
+              <p>
+                Join researchers tackling grand challenges from climate change
+                to cybersecurity.
+              </p>
+            </div>
+            <umd-element-call-to-action slot="actions" data-display="secondary">
+              <a href="#">Research Areas</a>
+            </umd-element-call-to-action>
+          </umd-element-card>
+        </div>
+      </div>
+    </section>
+
+    <!-- Styles library post-render CSS -->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        if (window.Styles && window.Styles.postRenderCss) {
+          window.Styles.postRenderCss.then((css) => {
+            const styleSheet = document.createElement('style');
+            styleSheet.innerHTML = css;
+            document.body.appendChild(styleSheet);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

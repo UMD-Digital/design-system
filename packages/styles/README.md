@@ -2,308 +2,332 @@
 
 [![Styles Version](https://img.shields.io/badge/Styles-v1.5.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
-A comprehensive collection of JSS objects that can be used inline with JavaScript or converted to CSS strings using utility functions. This library provides the official University of Maryland design tokens and styling patterns for consistent branding across all digital properties.
+The foundation of the UMD Design System, providing design tokens, CSS utilities, and styling patterns that ensure consistent, accessible, and brand-compliant University of Maryland digital experiences.
 
 ## Overview
 
-The UMD Styles Library provides consistent styling across University of Maryland web properties through a set of JavaScript Style Sheet (JSS) objects. These styles encapsulate UMD brand guidelines and provide accessibility-compliant design patterns. By using this library, developers can ensure their projects maintain visual consistency with the UMD brand while benefiting from optimized, responsive styles that work across all devices and browsers.
+The UMD Styles Library is the cornerstone of visual consistency across all University of Maryland web properties. It provides a comprehensive collection of design tokens (colors, typography, spacing), utility classes, and CSS-in-JS objects that implement official UMD brand guidelines. This package serves as the single source of truth for styling, enabling developers to build interfaces that are automatically consistent, accessible, and responsive.
 
 ## Installation
 
 ```bash
-# Install the library
+# Using npm
 npm install @universityofmaryland/web-styles-library
 
-# Install peer dependencies
-npm install postcss postcss-js postcss-nesting postcss-discard-duplicates
-
-# Or using yarn
+# Using yarn
 yarn add @universityofmaryland/web-styles-library
-yarn add postcss postcss-js postcss-nesting postcss-discard-duplicates
 ```
 
-## Usage With Framework
+### Peer Dependencies
 
-### Tailwind 3 - Primarly for web development
+For CSS transformation features:
 
-##### Does code splitting by default and provides helper css functionality
+```bash
+npm install postcss postcss-js postcss-nesting postcss-discard-duplicates
+```
 
-```typescript
+## Quick Start
+
+### Using with Tailwind CSS
+
+```javascript
 /** @type {import('tailwindcss').Config} */
-
 import * as Styles from '@universityofmaryland/web-styles-library';
 import plugin from 'tailwindcss/plugin';
 
-// Paths to your HTML, JS or CSS files
-const content = [];
+const { token, root: utilities, outputStyles: components } = Styles;
 
-// Tailwind theme variables - accessible via theme() in CSS
-// Style package tokens can be added here
-const theme = {
-  media: Styles.tokens.media,
+export default {
+  content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      colors: token.color,
+      spacing: token.spacing,
+      fontFamily: token.font.family,
+    }
+  },
+  plugins: [
+    plugin(({ addUtilities, addComponents }) => {
+      addUtilities(utilities);
+      addComponents(components);
+    }),
+  ],
 };
-
-// Tailwind plugin options - add custom utilities, components, and base styles
-const plugins = [
-  plugin(function ({ addUtilities, addComponents }) {
-    // Add base styles - variables and reset styles
-    addUtilities({
-      ...Styles.root,
-      ...Styles.reset,
-    });
-    // Add element styles - Bundled JSS objects from the styles library
-    addComponents(Styles.outputStyles);
-  }),
-];
-
-export { content, theme, plugins };
 ```
 
-## Usage Without a Framework
+### Standalone CSS Generation
 
-### Converting Style Objects in CSS strings (stylesheet usage) - All styles
-
-##### Pull in all styles from the package and apply them to your interface (DOM example provided)
-
-```typescript
+```javascript
 import * as Styles from '@universityofmaryland/web-styles-library';
 
-// String of all styles: Parameter is the styleout provided by the library
-const allStyles = await Styles.utilities.create.style.toString({
-  ...Styles.outputStyles,
+// Pre-render CSS (fonts, variables, resets)
+Styles.preRenderCss.then(css => {
+  const style = document.createElement('style');
+  style.textContent = `${Styles.typography.fontFace.base64fonts} ${css}`;
+  document.head.appendChild(style);
 });
 
-// Output
-
-const styleSheet = document.createElement('style');
-styleSheet.innerHTML = `${allStyles}`;
-document.head.appendChild(styleSheet);
-```
-
-### Converting Style Objects in CSS strings (stylesheet usage) - Selection example
-
-##### You can pick any styles objects to import (manual code splitting) - use cases for importing before and after body render
-
-```typescript
-import * as Styles from '@universityofmaryland/web-styles-library';
-
-// String of selected styles: Parameter of selected style objects that you want to consume from the library
-const exampleWithElementAndLayout =
-  await Styles.utilities.create.style.toString({
-    ...Styles.element,
-    ...Styles.layout.grid,
-  });
-
-// Output
-
-const styleSheet = document.createElement('style');
-styleSheet.innerHTML = `${exampleWithElementAndLayout}`;
-document.head.appendChild(styleSheet);
-```
-
-### Converting Style Objects in CSS strings (stylesheet usage) - Render example
-
-##### Code splitting for load and usage
-
-```typescript
-import * as Styles from '@universityofmaryland/web-styles-library';
-
-const fontStyles = Styles.typography.fontFace.base64fonts;
-
-const headRenderStyles = await Styles.utilities.create.style.toString({
-  ...Styles.preRender,
-});
-
-const bodyRenderStyles = await Styles.utilities.create.style.toString({
-  ...Styles.postRender,
+// Post-render CSS (utilities and components)
+Styles.postRenderCss.then(css => {
+  const style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
 });
 ```
 
-##### Code splitting for load and usage with dom
+## Core Features
 
-```typescript
-import * as Styles from '@universityofmaryland/web-styles-library';
+### Design Tokens
 
-// Styles to load before the page renders - includes fonts in base64, variables, reset, and web component styles
-Styles.preRenderCss.then((css) => {
-  const styleSheet = document.createElement('style');
-  const fonts = Styles.typography.fontFace.base64fonts;
-  styleSheet.innerHTML = `${fonts} ${css}`;
-  document.head.appendChild(styleSheet);
-});
+Official UMD brand values accessible as JavaScript objects:
 
-// Styles to load after the body - classes for layout and elements
-Styles.postRenderCss.then((css) => {
-  const styleSheet = document.createElement('style');
-  styleSheet.innerHTML = `${css}`;
-  document.head.appendChild(styleSheet);
-});
+```javascript
+import { token } from '@universityofmaryland/web-styles-library';
+
+// Colors
+token.color.red;        // #e21833
+token.color.gold;       // #FFD200
+token.color.black;      // #000000
+
+// Spacing
+token.spacing.sm;       // 0.5rem
+token.spacing.md;       // 1rem
+token.spacing.lg;       // 1.5rem
+
+// Typography
+token.font.family.sans; // 'Helvetica Neue', Helvetica, Arial, sans-serif
+token.font.size.base;   // 1rem
+token.font.weight.bold; // 700
+
+// Breakpoints
+token.media.breakpoints.tablet;  // 768px
+token.media.breakpoints.desktop; // 1024px
 ```
 
-### Converting Style Objects to CSS Variables
+### Utility Classes
 
-##### Import CSS variables for usage (included by default when importing preRender styles)
-
-```typescript
-import * as Styles from '@universityofmaryland/web-styles-library';
-
-Styles.utilities.dom.tokens(Styles.variables);
-
-// Output
-<html style="--serif: 'Crimson Pro', Georgia, serif;">
-
-.element {
-  font-family: var(--serif)
-}
-```
-
-### Converting Style Objects to Media Queries (included by default when importing preRender styles)
-
-##### Media query usage with style queries - boolean values provided on root
+Pre-built utility classes for common patterns:
 
 ```css
-.element {
-  display: none;
+/* Layout spacing */
+.umd-layout-space-vertical-landing
+.umd-layout-space-horizontal-larger
 
-  @container style(--isMediaTablet: true) {
-    display: block;
-  }
-}
+/* Grid systems */
+.umd-grid-gap-three
+.umd-grid-gap-masonry
+
+/* Typography */
+.umd-sans-largest-uppercase
+.umd-text-rich-simple-large
+
+/* Backgrounds */
+.umd-background-quarter-light
+.umd-background-full-dark
 ```
 
-## Usage with modern Javascript Frameworks with Server rendering
+### CSS-in-JS Objects
 
-### Importing Styles to Reference
+All styles are available as JavaScript objects:
 
-```typescript
-// Import specific style modules
-import * as Styles from '@universityofmaryland/web-styles-library';
+```javascript
+import { animation, element, layout } from '@universityofmaryland/web-styles-library';
 
-const fadeInLine = Styles.animation.line.fadeInSimpleDark;
+// Animation utilities
+const fadeIn = animation.line.fadeInSimpleDark;
+// Returns: { className: 'umd-fadein-simple-dark', ...styles }
 
-// Ouput
-{
-    "className": "umd-fadein-simple-dark",
-    "position": "relative",
-    "textDecoration": "none",
-    "backgroundImage": "linear-gradient(#FFFFFF, #FFFFFF)",
-    "backgroundPosition": "left calc(100% - 1px)",
-    "backgroundRepeat": "no-repeat",
-    "backgroundSize": "100% 1px",
-    "color": "#FFFFFF",
-    "transition": "color 0.5s, background-image 0.5s, background-position 0.5s",
-    "&:hover, &:focus": {
-        "backgroundImage": "linear-gradient(#FFD200, #FFD200)",
-        "backgroundPosition": "left calc(100%)",
-        "color": "#FFFFFF",
-        "textDecoration": "none"
-    }
-}
+// Element styles
+const primaryButton = element.action.primary.normal;
+
+// Layout patterns
+const gridThree = layout.grid.columnsThree;
 ```
 
-### Converting Reference to style
+## Integration with Other Packages
 
-```typescript
-// Import specific style modules
-import * as Styles from '@universityofmaryland/web-styles-library';
+### Components Package Integration
 
-const fadeInLine = Styles.utilities.transform.jss.convertToClassSelectorCss({
-  Styles.animation.line.fadeInSimpleDark,
-);
+The Styles Library provides all visual styling for web components:
 
-// Ouput
-.umd-fadein-simple-dark {
-  position: relative;
-  text-decoration: none;
-  background-image: linear-gradient(#FFFFFF, #FFFFFF);
-  background-position: left calc(100% - 1px);
-  background-repeat: no-repeat;
-  background-size: 100% 1px;
-  color: #FFFFFF;
-  transition: color 0.5s, background-image 0.5s, background-position 0.5s;
-}
-.umd-fadein-simple-dark:hover, .umd-fadein-simple-dark:focus {
-  background-image: linear-gradient(#FFD200, #FFD200);
-  background-position: left calc(100%);
-  color: #FFFFFF;
-  text-decoration: none;
-}
+```html
+<!-- Components use styles automatically -->
+<umd-element-card data-theme="dark">
+  <!-- Styled by the styles package -->
+</umd-element-card>
+
+<!-- Combine with utility classes -->
+<div class="umd-layout-space-vertical-landing">
+  <umd-element-hero><!-- content --></umd-element-hero>
+</div>
+```
+
+### Elements Package Support
+
+Elements rely on styles for all visual properties:
+
+```javascript
+import { Composite } from '@universityofmaryland/web-elements-library';
+// Elements automatically include necessary styles
+```
+
+### Feeds Package Styling
+
+Feed components inherit consistent styling:
+
+```javascript
+import { news } from '@universityofmaryland/web-feeds-library';
+// Feeds use grid and card styles automatically
 ```
 
 ## Available Style Modules
 
-The library includes several style modules organized by functionality:
+### Core Modules
 
-- **Accessibility**: Screen reader utilities and skip navigation
-- **Animation**: Line effects, loaders, transitions, and nested element animations
-- **Layout**: Flexible grid system with responsive behavior
-- **Root**: Default styles for reset and variables
-- **Tokens**: Official UMD brand colors, spacing, breakpoints, and fonts
-- **Typography**: Text styles, fonts, and typographic scales
-- **Web Components**: Default styles from all Web Components
-- **Utilities**: Helper functions to convert JSS and CSS
+- **token** - Design tokens (colors, spacing, typography, media queries)
+- **root** - CSS reset and variables
+- **typography** - Font faces, sizes, and text styles
+- **layout** - Grid systems, spacing, alignment
+- **element** - Component-specific styles
+- **animation** - Transitions and animations
+- **accessibility** - Screen reader and a11y utilities
 
-Each module contains namespaces with specific style variables. For example:
+### Utility Modules
 
-- `color.red`
-- `spacing.sm`
-- `typography.sans.larger`
-- `animation.line.fadeUnderRed`
-- `accessibility.screenReader.only`
+- **utilities.transform** - JSS to CSS conversion
+- **utilities.create** - Style generation helpers
+- **utilities.dom** - DOM manipulation utilities
 
-## Documentation
+## Common Use Cases
 
-For detailed documentation of all available modules, namespaces, and style variables, see:
+### Setting Up Base Styles
 
-- [Complete Style Modules Documentation](https://umd-digital.github.io/design-system/styles/modules.html)
-- [Color Variables](https://umd-digital.github.io/design-system/styles/variables/token.color.html)
-- [Typography System](https://umd-digital.github.io/design-system/styles/modules/typography.html)
-- [Layout System](https://umd-digital.github.io/design-system/styles/modules/layout.html)
-- [Element Animation](https://umd-digital.github.io/design-system/styles/modules/animation.html)
+```javascript
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+// Option 1: Use pre-built bundles
+async function loadStyles() {
+  const preRender = await Styles.preRenderCss;
+  const postRender = await Styles.postRenderCss;
+  
+  // Apply styles to document
+  const fonts = Styles.typography.fontFace.base64fonts;
+  document.head.insertAdjacentHTML('beforeend', 
+    `<style>${fonts} ${preRender}</style>`
+  );
+  
+  // After body renders
+  document.head.insertAdjacentHTML('beforeend', 
+    `<style>${postRender}</style>`
+  );
+}
+
+// Option 2: Select specific styles
+const selectedStyles = await Styles.utilities.create.style.toString({
+  ...Styles.layout.grid,
+  ...Styles.element.action,
+  ...Styles.typography.sans,
+});
+```
+
+### Using Design Tokens
+
+```javascript
+// In JavaScript
+const theme = {
+  primaryColor: Styles.token.color.red,
+  secondaryColor: Styles.token.color.gold,
+  baseSpacing: Styles.token.spacing.md,
+};
+
+// As CSS variables
+Styles.utilities.dom.tokens(Styles.variables);
+// Creates: --color-red: #e21833; etc.
+```
+
+### Responsive Design
+
+```javascript
+// Media query tokens
+const { breakpoints } = Styles.token.media;
+
+// Use in CSS-in-JS
+const responsiveCard = {
+  padding: Styles.token.spacing.md,
+  [`@media (min-width: ${breakpoints.tablet})`]: {
+    padding: Styles.token.spacing.lg,
+  },
+  [`@media (min-width: ${breakpoints.desktop})`]: {
+    padding: Styles.token.spacing.xl,
+  },
+};
+```
+
+### Tailwind Integration
+
+See our [Tailwind Integration Guide](https://umd-digital.github.io/design-system/docs/styles/tailwind.html) for detailed setup instructions.
+
+## TypeScript Support
+
+Full TypeScript support with type definitions:
+
+```typescript
+import type { JssObject, JssEntry } from '@universityofmaryland/web-styles-library';
+
+// Type-safe style objects
+const customStyle: JssObject = {
+  className: 'my-custom-class',
+  color: Styles.token.color.red,
+  padding: Styles.token.spacing.md,
+};
+```
+
+## Browser Support
+
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## Performance Considerations
+
+- **Tree-shakeable** - Import only what you need
+- **CSS Variables** - Runtime theming support
+- **Optimized bundles** - Pre/post render splitting
+- **Cached transforms** - Efficient CSS generation
 
 ## Accessibility
 
-All styles in this library are designed with accessibility in mind:
-
-- Color combinations meet WCAG 2.1 AA contrast requirements
-- Typography sizes and spacing support readability
+All styles follow WCAG 2.1 AA guidelines:
+- Color contrast ratios meet standards
 - Focus states are clearly visible
-- Animation options include reduced-motion preferences
+- Typography supports readability
+- Reduced motion preferences respected
 
-## Contributing
+## Documentation
 
-For contribution guidelines, please refer to the main repository README.
+- **[Complete Style Reference](https://umd-digital.github.io/design-system/docs/styles/)** - All modules and utilities
+- **[Design Tokens](https://umd-digital.github.io/design-system/docs/styles/modules/token.html)** - Colors, spacing, typography
+- **[Tailwind Guide](https://umd-digital.github.io/design-system/docs/styles/tailwind.html)** - Tailwind CSS integration
+- **[Layout System](https://umd-digital.github.io/design-system/docs/styles/modules/layout.html)** - Grid and spacing utilities
 
-#### Testing
-
-The library uses Jest for unit testing. To run tests:
+## Testing
 
 ```bash
-# Run all tests
-npm run test
+# Run tests
+npm test
 
-# Run tests in watch mode during development
+# Watch mode
 npm run test:watch
 
-# Run tests with coverage report
+# Coverage report
 npm run test:coverage
 ```
 
-#### Release Process
+## Contributing
 
-The release process requires all tests to pass before publishing:
-
-```bash
-npm run release
-```
-
-This will:
-
-1. Run all tests (and abort if any tests fail)
-2. Clean the distribution directory
-3. Build the project
-4. Publish the package
+See the [main repository](https://github.com/umd-digital/design-system) for contribution guidelines.
 
 ## License
 
-This project is licensed under the University of Maryland license.
+University of Maryland

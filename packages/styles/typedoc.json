@@ -14,6 +14,7 @@
   ],
   "entryPointStrategy": "resolve",
   "hideGenerator": true,
+  "cleanOutputDir": false,
   "searchInDocuments": true,
   "out": "../../docs/styles",
   "readme": "README.md",

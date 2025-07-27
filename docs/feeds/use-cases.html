@@ -47,13 +47,24 @@
         padding: 1rem;
         margin: 1rem 0;
       }
-      .feed-preview {
-        border: 2px dashed #dee2e6;
-        border-radius: 8px;
-        padding: 2rem;
-        text-align: center;
-        color: #6c757d;
+      .option-table {
+        width: 100%;
         margin: 1rem 0;
+      }
+      .option-table th {
+        background-color: #f8f9fa;
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 2px solid #dee2e6;
+      }
+      .option-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #dee2e6;
+      }
+      .option-table code {
+        background-color: #f8f9fa;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
       }
     </style>
   </head>
@@ -77,479 +88,428 @@
       <div class="alert alert-info mb-4">
         <h5 class="alert-heading">About This Guide</h5>
         <p class="mb-0">
-          This guide demonstrates practical implementations of the UMD Feeds Library for displaying dynamic news, events, and academic content.
+          This guide demonstrates practical implementations of the UMD Feeds
+          Library using web components with HTML attributes for displaying
+          dynamic news, events, and academic content.
         </p>
       </div>
 
-      <h2 class="mb-4">Common Use Cases</h2>
+      <h2 class="mb-4">Web Component Use Cases</h2>
 
-      <!-- Use Case 1: Homepage News Section -->
+      <!-- Use Case 1: News Feeds -->
       <div class="use-case-card">
-        <h4>🏠 Use Case 1: Homepage News Section</h4>
-        <p>Display latest news in a featured layout with sidebar.</p>
-        
-        <h5>Implementation</h5>
-        <pre><code>// homepage-news.js
-import { news } from '@universityofmaryland/web-feeds-library';
-import * as Styles from '@universityofmaryland/web-styles-library';
+        <h4>📰 Use Case 1: News Feed Components</h4>
+        <p>
+          Display news content using web components with various layout options
+          and configurations.
+        </p>
 
-async function setupHomepageNews() {
-  // Create featured news layout
-  const newsSection = news.featured({
-    token: process.env.UMD_API_TOKEN,
-    isLazyLoad: true,
-    sidebarItemCount: 5,
-    filters: {
-      categories: ['featured', 'campus-life'],
-      tags: ['homepage']
-    }
-  });
-  
-  // Apply layout spacing
-  const container = document.querySelector('#homepage-news');
-  container.className = 'umd-layout-space-vertical-landing';
-  container.appendChild(newsSection.element);
-  
-  // Handle loading states
-  newsSection.element.addEventListener('feed:loading', () => {
-    container.insertAdjacentHTML('afterbegin', 
-      '<div class="loading-spinner">Loading news...</div>'
-    );
-  });
-  
-  newsSection.element.addEventListener('feed:loaded', (e) => {
-    container.querySelector('.loading-spinner')?.remove();
-    console.log(`Loaded ${e.detail.items.length} news items`);
-  });
-}
+        <h5>Simple News Block</h5>
+        <pre><code>&lt;!-- Basic 3-column news grid --&gt;
+&lt;umd-feed-news
+  data-token="your-api-token"&gt;
+&lt;/umd-feed-news&gt;
 
-setupHomepageNews();</code></pre>
+&lt;!-- News grid with custom columns and lazy loading --&gt;
+&lt;umd-feed-news
+  data-token="your-api-token"
+  data-layout-column-count="4"
+  data-layout-row-count="2"
+  data-lazy-load="true"&gt;
+&lt;/umd-feed-news&gt;
 
-        <h5>HTML Structure</h5>
-        <pre><code>&lt;section class="umd-background-quarter-light"&gt;
-  &lt;div class="container"&gt;
-    &lt;h2 class="umd-sans-larger"&gt;Latest News&lt;/h2&gt;
-    &lt;div id="homepage-news"&gt;
-      &lt;!-- Featured news feed renders here --&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
+&lt;!-- Filtered news with dark theme --&gt;
+&lt;umd-feed-news
+  data-token="your-api-token"
+  data-filter-group-ids="145,123"
+  data-theme="dark"
+  data-visual-transparent&gt;
+&lt;/umd-feed-news&gt;</code></pre>
 
-        <div class="feed-preview">
-          Featured article with large image on left, 5 sidebar items on right
-        </div>
+        <h5>Featured News Layout</h5>
+        <pre><code>&lt;!-- Featured news with sticky positioning --&gt;
+&lt;umd-feed-news-featured
+  data-token="your-api-token"&gt;
+&lt;/umd-feed-news-featured&gt;
+
+&lt;!-- Featured news with filters --&gt;
+&lt;umd-feed-news-featured
+  data-token="your-api-token"
+  data-filter-group-ids="101"
+  data-theme="dark"&gt;
+&lt;/umd-feed-news-featured&gt;
+
+&lt;!-- Transparent featured news --&gt;
+&lt;umd-feed-news-featured
+  data-token="your-api-token"
+  data-visual-transparent&gt;
+&lt;/umd-feed-news-featured&gt;</code></pre>
+
+        <h5>Available Attributes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+              <th>Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data-token</code></td>
+              <td>API authentication token (required)</td>
+              <td>String</td>
+            </tr>
+            <tr>
+              <td><code>data-filter-group-ids</code></td>
+              <td>Filter by category IDs</td>
+              <td>Comma-separated IDs</td>
+            </tr>
+            <tr>
+              <td><code>data-layout-column-count</code></td>
+              <td>Number of columns (grid only)</td>
+              <td>1-4 (default: 3)</td>
+            </tr>
+            <tr>
+              <td><code>data-layout-row-count</code></td>
+              <td>Initial rows to display</td>
+              <td>1-2 (default: 1)</td>
+            </tr>
+            <tr>
+              <td><code>data-theme</code></td>
+              <td>Visual theme</td>
+              <td>"dark" or unset</td>
+            </tr>
+            <tr>
+              <td><code>data-visual-transparent</code></td>
+              <td>Transparent card backgrounds</td>
+              <td>Present or absent</td>
+            </tr>
+            <tr>
+              <td><code>data-lazy-load</code></td>
+              <td>Enable lazy loading</td>
+              <td>"true" or unset</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- Use Case 2: Department Events Calendar -->
+      <!-- Use Case 2: Events Feeds -->
       <div class="use-case-card">
-        <h4>📅 Use Case 2: Department Events Calendar</h4>
-        <p>Create a filterable events display for academic departments.</p>
-        
-        <h5>Implementation</h5>
-        <pre><code>// department-events.js
-import { events } from '@universityofmaryland/web-feeds-library';
+        <h4>📅 Use Case 2: Events Feed Components</h4>
+        <p>
+          Display university events using web components with filtering and
+          display options.
+        </p>
 
-class DepartmentEventsFeed {
-  constructor(containerId) {
-    this.container = document.getElementById(containerId);
-    this.currentFilter = 'all';
-    this.feedInstance = null;
-    
-    this.init();
-  }
-  
-  init() {
-    // Add filter controls
-    this.renderFilters();
-    
-    // Create initial feed
-    this.loadEvents();
-  }
-  
-  renderFilters() {
-    const filterHTML = `
-      &lt;div class="btn-group mb-4" role="group"&gt;
-        &lt;button class="btn btn-outline-danger active" data-filter="all"&gt;
-          All Events
-        &lt;/button&gt;
-        &lt;button class="btn btn-outline-danger" data-filter="seminar"&gt;
-          Seminars
-        &lt;/button&gt;
-        &lt;button class="btn btn-outline-danger" data-filter="workshop"&gt;
-          Workshops
-        &lt;/button&gt;
-        &lt;button class="btn btn-outline-danger" data-filter="conference"&gt;
-          Conferences
-        &lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div id="events-feed"&gt;&lt;/div&gt;
-    `;
-    
-    this.container.innerHTML = filterHTML;
-    
-    // Add click handlers
-    this.container.querySelectorAll('[data-filter]').forEach(btn => {
-      btn.addEventListener('click', (e) => this.handleFilter(e));
-    });
-  }
-  
-  handleFilter(e) {
-    // Update active state
-    this.container.querySelectorAll('.btn').forEach(b => 
-      b.classList.remove('active')
-    );
-    e.target.classList.add('active');
-    
-    // Reload with filter
-    this.currentFilter = e.target.dataset.filter;
-    this.loadEvents();
-  }
-  
-  loadEvents() {
-    const feedContainer = this.container.querySelector('#events-feed');
-    feedContainer.innerHTML = ''; // Clear existing
-    
-    // Create filtered feed
-    this.feedInstance = events.grid({
-      token: process.env.UMD_API_TOKEN,
-      numberOfColumnsToShow: 3,
-      filters: this.currentFilter === 'all' ? {} : {
-        eventType: [this.currentFilter]
-      },
-      sortBy: 'date',
-      sortDirection: 'asc',
-      showPastEvents: false,
-      maxEvents: 9
-    });
-    
-    feedContainer.appendChild(this.feedInstance.element);
-  }
-}
+        <h5>Events Grid Layout</h5>
+        <pre><code>&lt;!-- Basic events grid --&gt;
+&lt;umd-feed-events
+  data-token="your-api-token"&gt;
+&lt;/umd-feed-events&gt;
 
-// Initialize
-new DepartmentEventsFeed('department-events');</code></pre>
+&lt;!-- Events with category filters and 4 columns --&gt;
+&lt;umd-feed-events
+  data-token="your-api-token"
+  data-filter-group-ids="201,202"
+  data-layout-column-count="4"
+  data-layout-row-count="2"
+  data-lazy-load="true"&gt;
+&lt;/umd-feed-events&gt;
 
-        <h5>Result</h5>
+&lt;!-- Dark theme events with transparent cards --&gt;
+&lt;umd-feed-events
+  data-token="your-api-token"
+  data-theme="dark"
+  data-visual-transparent
+  data-layout-column-count="2"&gt;
+&lt;/umd-feed-events&gt;</code></pre>
+
+        <h5>Events List Layout</h5>
+        <pre><code>&lt;!-- Basic events list --&gt;
+&lt;umd-feed-events-list
+  data-token="your-api-token"&gt;
+&lt;/umd-feed-events-list&gt;
+
+&lt;!-- Events list with filters and dark theme --&gt;
+&lt;umd-feed-events-list
+  data-token="your-api-token"
+  data-filter-group-ids="203"
+  data-theme="dark"&gt;
+&lt;/umd-feed-events-list&gt;</code></pre>
+
+        <h5>Common Event Attributes</h5>
         <div class="example-output">
-          ✓ Filterable event categories<br>
-          ✓ 3-column responsive grid<br>
-          ✓ Automatic date sorting<br>
-          ✓ Hide past events
+          <p><strong>Required:</strong></p>
+          <ul>
+            <li><code>data-token</code> - API authentication token</li>
+          </ul>
+          <p><strong>Filter Options:</strong></p>
+          <ul>
+            <li>
+              <code>data-filter-group-ids</code> - Filter by event categories
+            </li>
+          </ul>
+          <p><strong>Display Options:</strong></p>
+          <ul>
+            <li><code>data-layout-column-count</code> - Grid columns (1-4)</li>
+            <li><code>data-layout-row-count</code> - Initial rows (1-2)</li>
+            <li><code>data-theme</code> - Visual theme ("dark" or unset)</li>
+          </ul>
+          <p><strong>Performance:</strong></p>
+          <ul>
+            <li><code>data-lazy-load</code> - Load more on scroll</li>
+          </ul>
         </div>
       </div>
 
-      <!-- Use Case 3: Research News Slider -->
+      <!-- Use Case 3: Academic Feed Components -->
       <div class="use-case-card">
-        <h4>🔬 Use Case 3: Research News Slider</h4>
-        <p>Auto-rotating research highlights for landing pages.</p>
-        
-        <h5>Implementation</h5>
-        <pre><code>// research-slider.js
-import { news, events } from '@universityofmaryland/web-feeds-library';
+        <h4>🎓 Use Case 3: Academic Feed Components</h4>
+        <p>
+          Display academic calendar events using the slider web component with
+          the academic feed type.
+        </p>
 
-function createResearchSlider() {
-  // Combine news and events
-  const container = document.querySelector('#research-highlights');
-  
-  // Create news slider
-  const newsSlider = news.slider({
-    token: process.env.UMD_API_TOKEN,
-    filters: {
-      categories: ['research', 'innovation'],
-      tags: ['featured']
-    },
-    slidesToShow: 1,
-    autoPlay: true,
-    autoPlaySpeed: 5000,
-    dots: true,
-    arrows: true,
-    fade: true
-  });
-  
-  // Style the container
-  container.innerHTML = `
-    &lt;div class="research-slider-wrapper"&gt;
-      &lt;h2 class="umd-sans-larger text-center mb-4"&gt;
-        Research Highlights
-      &lt;/h2&gt;
-      &lt;div class="slider-container"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  `;
-  
-  container.querySelector('.slider-container')
-    .appendChild(newsSlider.element);
-  
-  // Add custom styling
-  const style = document.createElement('style');
-  style.textContent = `
-    .research-slider-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .slider-container {
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-  `;
-  document.head.appendChild(style);
-}</code></pre>
+        <h5>Academic Calendar Slider</h5>
+        <pre><code>&lt;!-- Basic academic calendar slider --&gt;
+&lt;umd-element-slider-events-feed 
+  data-token="your-api-token"
+  data-feed-type="academic"&gt;
+  &lt;div slot="headline"&gt;
+    Lorem Ipsum Dolor Sit Amet
+  &lt;/div&gt;
+  &lt;umd-element-call-to-action slot="actions" data-display="secondary"&gt;
+    &lt;a href="/"&gt;&lt;span&gt;Learn More&lt;/span&gt;&lt;/a&gt;
+  &lt;/umd-element-call-to-action&gt;
+&lt;/umd-element-slider-events-feed&gt;
+
+&lt;!-- Academic calendar with dark theme --&gt;
+&lt;umd-element-slider-events-feed 
+  data-token="your-api-token"
+  data-feed-type="academic"
+  data-theme="dark"&gt;
+  &lt;h2 slot="headline"&gt;Academic Calendar&lt;/h2&gt;
+  &lt;a slot="actions" href="/academic-calendar"&gt;Full Calendar&lt;/a&gt;
+&lt;/umd-element-slider-events-feed&gt;
+
+&lt;!-- Academic calendar with custom styling --&gt;
+&lt;umd-element-slider-events-feed 
+  data-token="your-api-token"
+  data-feed-type="academic"&gt;
+  &lt;h2 slot="headline"&gt;Important Academic Dates&lt;/h2&gt;
+  &lt;div slot="actions"&gt;
+    &lt;a href="/academic-calendar"&gt;View Full Calendar&lt;/a&gt;
+    &lt;a href="/academic-calendar/deadlines"&gt;Key Deadlines&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/umd-element-slider-events-feed&gt;</code></pre>
+
+        <h5>Academic Feed Attributes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+              <th>Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data-token</code></td>
+              <td>API authentication token (required)</td>
+              <td>String</td>
+            </tr>
+            <tr>
+              <td><code>data-feed-type</code></td>
+              <td>Must be set to "academic" for academic calendar</td>
+              <td>"academic" (required)</td>
+            </tr>
+            <tr>
+              <td><code>data-theme</code></td>
+              <td>Visual theme</td>
+              <td>"dark" or unset</td>
+            </tr>
+            <tr>
+              <td><code>resize</code></td>
+              <td>Triggers size recalculation (observed)</td>
+              <td>Any value</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Slots</h5>
+        <div class="example-output">
+          <ul>
+            <li><code>headline</code> - Section headline (optional)</li>
+            <li><code>actions</code> - Call-to-action links (optional)</li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Use Case 4: Multi-Feed Dashboard -->
-      <div class="use-case-card">
-        <h4>📊 Use Case 4: Multi-Feed Dashboard</h4>
-        <p>Combine multiple feed types in a unified dashboard.</p>
-        
-        <h5>Implementation</h5>
-        <pre><code>// dashboard.js
-import { news, events, academic } from '@universityofmaryland/web-feeds-library';
+      <h2 class="mb-4 mt-5">Advanced TypeScript Implementation</h2>
 
-class FeedDashboard {
-  constructor() {
-    this.feeds = new Map();
-    this.init();
-  }
-  
-  async init() {
-    const dashboard = document.getElementById('feed-dashboard');
-    
-    // Create layout
-    dashboard.innerHTML = `
-      &lt;div class="row"&gt;
-        &lt;div class="col-md-8"&gt;
-          &lt;div class="card mb-4"&gt;
-            &lt;div class="card-header"&gt;
-              &lt;h3&gt;Latest News&lt;/h3&gt;
-            &lt;/div&gt;
-            &lt;div class="card-body" id="news-feed"&gt;&lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="col-md-4"&gt;
-          &lt;div class="card mb-4"&gt;
-            &lt;div class="card-header"&gt;
-              &lt;h3&gt;Upcoming Events&lt;/h3&gt;
-            &lt;/div&gt;
-            &lt;div class="card-body" id="events-feed"&gt;&lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div class="card"&gt;
-            &lt;div class="card-header"&gt;
-              &lt;h3&gt;Academic Programs&lt;/h3&gt;
-            &lt;/div&gt;
-            &lt;div class="card-body" id="academic-feed"&gt;&lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    `;
-    
-    // Initialize feeds
-    this.loadNewsFeeed();
-    this.loadEventsFeed();
-    this.loadAcademicFeed();
-  }
-  
-  loadNewsFeeed() {
-    const newsFeed = news.list({
-      token: process.env.UMD_API_TOKEN,
-      maxItems: 5,
-      showImages: true,
-      showExcerpts: true
-    });
-    
-    this.feeds.set('news', newsFeed);
-    document.getElementById('news-feed')
-      .appendChild(newsFeed.element);
-  }
-  
-  loadEventsFeed() {
-    const eventsFeed = events.list({
-      token: process.env.UMD_API_TOKEN,
-      maxEvents: 5,
-      groupByDate: true,
-      showTimes: true
-    });
-    
-    this.feeds.set('events', eventsFeed);
-    document.getElementById('events-feed')
-      .appendChild(eventsFeed.element);
-  }
-  
-  loadAcademicFeed() {
-    const academicFeed = academic.slider({
-      token: process.env.UMD_API_TOKEN,
-      slidesToShow: 1,
-      vertical: true,
-      autoPlay: true
-    });
-    
-    this.feeds.set('academic', academicFeed);
-    document.getElementById('academic-feed')
-      .appendChild(academicFeed.element);
-  }
-  
-  // Refresh all feeds
-  refreshAll() {
-    this.feeds.forEach(feed => {
-      feed.element.dispatchEvent(new Event('feed:refresh'));
-    });
-  }
+      <!-- Use Case 4: TypeScript Integration -->
+      <div class="use-case-card">
+        <h4>📝 Use Case 4: TypeScript Integration</h4>
+        <p>
+          Use feeds programmatically in TypeScript applications with full type
+          safety.
+        </p>
+
+        <h5>Basic TypeScript Usage</h5>
+        <pre><code>import { news, events, academic } from '@universityofmaryland/web-feeds-library';
+
+// Create news feed with configuration
+const newsProps = {
+  token: 'your-api-token',
+  numberOfColumnsToShow: 3,
+  numberOfRowsToStart: 2,
+  isThemeDark: false,
+  isLazyLoad: true,
+  categories: ['145', '123']
+};
+
+const newsFeed = news.grid(newsProps);
+// newsFeed is of type { element: HTMLElement, styles: string }
+
+// Add the element to the DOM
+document.querySelector('#news-container')?.appendChild(newsFeed.element);
+
+// Inject the styles into the document head
+const styleElement = document.createElement('style');
+styleElement.textContent = newsFeed.styles;
+document.head.appendChild(styleElement);</code></pre>
+
+        <h5>Type Definitions</h5>
+        <pre><code>// News feed properties
+interface BaseProps {
+  token: string;
+  numberOfRowsToStart: number;
+  categories?: string[];
+  isThemeDark?: boolean;
+  isLazyLoad: boolean;
+  isUnion: boolean;
+  entriesToRemove?: string[];
 }
 
-// Initialize dashboard
-const dashboard = new FeedDashboard();
-
-// Refresh feeds every 5 minutes
-setInterval(() => dashboard.refreshAll(), 300000);</code></pre>
-      </div>
-
-      <!-- Use Case 5: Error Handling -->
-      <div class="use-case-card">
-        <h4>⚠️ Use Case 5: Robust Error Handling</h4>
-        <p>Handle feed errors gracefully with fallback content.</p>
-        
-        <h5>Implementation</h5>
-        <pre><code>// error-handling.js
-import { news } from '@universityofmaryland/web-feeds-library';
-
-class RobustNewsFeed {
-  constructor(containerId) {
-    this.container = document.getElementById(containerId);
-    this.retryCount = 0;
-    this.maxRetries = 3;
-    
-    this.loadFeed();
-  }
-  
-  loadFeed() {
-    const feed = news.grid({
-      token: process.env.UMD_API_TOKEN,
-      numberOfColumnsToShow: 3,
-      onError: (error) => this.handleError(error),
-      onLoad: (items) => this.handleSuccess(items),
-      cacheTimeout: 600000 // 10 minutes
-    });
-    
-    // Show loading state
-    this.showLoading();
-    
-    // Add to container
-    this.container.appendChild(feed.element);
-  }
-  
-  showLoading() {
-    this.container.innerHTML = `
-      &lt;div class="text-center py-5"&gt;
-        &lt;div class="spinner-border text-danger" role="status"&gt;
-          &lt;span class="visually-hidden"&gt;Loading...&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;p class="mt-3"&gt;Loading latest news...&lt;/p&gt;
-      &lt;/div&gt;
-    `;
-  }
-  
-  handleSuccess(items) {
-    this.retryCount = 0;
-    
-    if (items.length === 0) {
-      this.showEmptyState();
-    }
-  }
-  
-  handleError(error) {
-    console.error('Feed error:', error);
-    
-    if (this.retryCount < this.maxRetries) {
-      this.retryCount++;
-      setTimeout(() => this.loadFeed(), 2000 * this.retryCount);
-      
-      this.container.innerHTML = `
-        &lt;div class="alert alert-warning"&gt;
-          &lt;h5&gt;Loading News...&lt;/h5&gt;
-          &lt;p&gt;Having trouble connecting. Retrying (${this.retryCount}/${this.maxRetries})...&lt;/p&gt;
-        &lt;/div&gt;
-      `;
-    } else {
-      this.showFallback();
-    }
-  }
-  
-  showEmptyState() {
-    this.container.innerHTML = `
-      &lt;div class="text-center py-5"&gt;
-        &lt;h4&gt;No News Available&lt;/h4&gt;
-        &lt;p&gt;Check back later for the latest updates.&lt;/p&gt;
-        &lt;a href="/news" class="btn btn-outline-danger"&gt;
-          View News Archive
-        &lt;/a&gt;
-      &lt;/div&gt;
-    `;
-  }
-  
-  showFallback() {
-    this.container.innerHTML = `
-      &lt;div class="alert alert-danger"&gt;
-        &lt;h5&gt;Unable to Load News&lt;/h5&gt;
-        &lt;p&gt;We're having trouble loading the latest news. Please try again later.&lt;/p&gt;
-        &lt;div class="mt-3"&gt;
-          &lt;a href="/news" class="btn btn-danger me-2"&gt;View All News&lt;/a&gt;
-          &lt;button class="btn btn-outline-danger" onclick="location.reload()"&gt;
-            Retry
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    `;
-  }
+interface BlockProps extends BaseProps {
+  numberOfColumnsToShow?: number;
+  isTransparent?: boolean;
+  isTypeOverlay?: boolean;
 }
 
-// Initialize with error handling
-new RobustNewsFeed('news-container');</code></pre>
+interface FeaturedProps extends BaseProps {
+  isTransparent?: boolean;
+  isLayoutReversed?: boolean;
+  overwriteStickyPosition?: number;
+}
+</code></pre>
       </div>
 
-      <!-- Use Case 6: Infinite Scroll -->
+      <!-- Use Case 5: Event Bubbling -->
       <div class="use-case-card">
-        <h4>♾️ Use Case 6: Infinite Scroll Implementation</h4>
-        <p>Load more content as users scroll.</p>
+        <h4>🔄 Use Case 5: Event Bubbling and Style Callbacks</h4>
+        <p>
+          Feed components dispatch DOM events when content is loaded or errors occur, and provide callbacks for style injection.
+        </p>
         
-        <h5>Implementation</h5>
-        <pre><code>// infinite-scroll.js
+        <h5>Feed Events</h5>
+        <pre><code>// Listen for feed loaded event
+const feedElement = document.querySelector('umd-feed-news');
+
+feedElement.addEventListener('feed:loaded', (event) => {
+  console.log('Feed loaded with', event.detail.items.length, 'items');
+  // Access the loaded items
+  const items = event.detail.items;
+});
+
+// Listen for feed error event
+feedElement.addEventListener('feed:error', (event) => {
+  console.error('Feed error:', event.detail.error);
+  // Show fallback content
+  feedElement.innerHTML = '<p>Unable to load feed content</p>';
+});
+
+// Event bubbling allows listening at parent levels
+document.addEventListener('feed:loaded', (event) => {
+  if (event.target.tagName === 'UMD-FEED-NEWS') {
+    console.log('News feed loaded');
+  }
+});</code></pre>
+
+        <h5>Style Callback</h5>
+        <pre><code>// Using styleCallback with TypeScript API
 import { news } from '@universityofmaryland/web-feeds-library';
 
-const infiniteNews = news.list({
-  token: process.env.UMD_API_TOKEN,
-  itemsPerPage: 10,
-  enableInfiniteScroll: true,
-  infiniteScrollThreshold: 200,
-  onPageChange: (page) => {
-    console.log(`Loading page ${page}`);
-    
-    // Update URL without reload
-    window.history.pushState(
-      { page }, 
-      '', 
-      `?page=${page}`
-    );
+const newsFeed = news.grid({
+  token: 'your-api-token',
+  numberOfColumnsToShow: 3,
+  numberOfRowsToStart: 2,
+  isThemeDark: false,
+  isLazyLoad: true,
+  
+  // Style callback to handle CSS injection
+  styleCallback: (cssString) => {
+    // Custom style injection logic
+    const styleElement = document.createElement('style');
+    styleElement.textContent = cssString;
+    document.head.appendChild(styleElement);
   }
 });
 
-// Add scroll position restoration
-window.addEventListener('popstate', (event) => {
-  if (event.state?.page) {
-    infiniteNews.goToPage(event.state.page);
+document.querySelector('#news-container')?.appendChild(newsFeed.element);</code></pre>
+
+        <h5>Integration with Shadow DOM</h5>
+        <pre><code>// When feeds are inside web components with Shadow DOM
+class CustomFeedWrapper extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
   }
-});</code></pre>
+  
+  connectedCallback() {
+    const feed = document.createElement('umd-feed-events');
+    feed.setAttribute('data-token', 'your-api-token');
+    
+    // Events bubble from the feed to the shadow host
+    feed.addEventListener('feed:loaded', (event) => {
+      // Dispatch to light DOM if needed
+      this.dispatchEvent(new CustomEvent('feed:loaded', {
+        detail: event.detail,
+        bubbles: true
+      }));
+    });
+    
+    this.shadowRoot.appendChild(feed);
+  }
+}</code></pre>
+
+        <div class="alert alert-info mt-3">
+          <p class="mb-0"><strong>Available Events:</strong> <code>feed:loaded</code> (with items array) and <code>feed:error</code> (with error details). Standard DOM events (click, focus, etc.) also bubble normally through the component hierarchy.</p>
+        </div>
       </div>
 
       <!-- Best Practices -->
       <div class="alert alert-success mt-5">
         <h5 class="alert-heading">✅ Best Practices</h5>
         <ul class="mb-0">
-          <li>Always handle loading and error states</li>
-          <li>Use caching to reduce API calls</li>
-          <li>Implement pagination or infinite scroll for large datasets</li>
-          <li>Test with slow network connections</li>
-          <li>Provide fallback content when feeds fail</li>
-          <li>Use semantic HTML for accessibility</li>
-          <li>Add ARIA live regions for dynamic updates</li>
+          <li>
+            Always provide a valid API token via
+            <code>data-token</code> attribute
+          </li>
+          <li>
+            Use <code>data-lazy-load="true"</code> for better initial page
+            performance
+          </li>
+          <li>Implement error handling for network failures</li>
+          <li>Use appropriate column counts for different screen sizes</li>
+          <li>
+            Filter content using <code>data-filter-group-ids</code> to reduce
+            payload
+          </li>
+          <li>Enable event delegation for multiple feeds on the same page</li>
+          <li>Consider caching strategies for frequently accessed feeds</li>
+          <li>Test with slow network connections and API failures</li>
         </ul>
       </div>
 
@@ -557,11 +517,18 @@ window.addEventListener('popstate', (event) => {
       <div class="alert alert-warning mt-4">
         <h5 class="alert-heading">⚡ Performance Tips</h5>
         <ul class="mb-0">
-          <li>Use lazy loading for below-the-fold feeds</li>
-          <li>Limit initial item counts</li>
-          <li>Enable caching with appropriate timeouts</li>
-          <li>Load critical feeds first</li>
-          <li>Consider server-side rendering for SEO</li>
+          <li>
+            Limit initial rows with <code>data-layout-row-count="1"</code>
+          </li>
+          <li>
+            Use <code>data-entry-remove-ids</code> to exclude unnecessary items
+          </li>
+          <li>Enable lazy loading for below-the-fold feeds</li>
+          <li>Implement pagination for large datasets</li>
+          <li>Consider server-side rendering for SEO-critical content</li>
+          <li>
+            Use transparent cards on image backgrounds for better performance
+          </li>
         </ul>
       </div>
 

@@ -2,7 +2,11 @@
 
 [![Components Version](https://img.shields.io/badge/Components-v1.12.14-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
 
-High-level web components built from the elements library for interfaces, interactivity, layout, and data feeds. This library provides ready-to-use web components that follow the University of Maryland's design guidelines and accessibility standards.
+High-level web components built on the UMD Elements Library, providing feature-rich, accessible, and brand-compliant UI components for University of Maryland digital experiences.
+
+## Overview
+
+The UMD Web Components Library is the primary interface for developers building UMD websites and applications. It provides a comprehensive collection of web components that implement UMD design patterns, ensuring consistency, accessibility, and brand compliance across all digital properties. These components are built on top of the Elements Library and styled using the Styles Library, creating a complete design system solution.
 
 ## Installation
 
@@ -14,118 +18,261 @@ npm install @universityofmaryland/web-components-library
 yarn add @universityofmaryland/web-components-library
 ```
 
+### Peer Dependencies
+
+For complete functionality, install the companion packages:
+
+```bash
+npm install @universityofmaryland/web-styles-library
+npm install @universityofmaryland/web-elements-library
+```
+
 ## Quick Start
+
+### Load All Components
 
 ```javascript
 import LoadUmdComponents from '@universityofmaryland/web-components-library';
 
-document.addEventListener('DOMContentLoaded', () => {
-  LoadUmdComponents();
-  // All components are now registered and available
-});
+// Initialize all components
+LoadUmdComponents();
 ```
 
-Or load specific components for better performance:
+### Load Specific Components (Recommended)
 
 ```javascript
-import { card, hero } from '@universityofmaryland/web-components-library/Components';
+import { Components } from '@universityofmaryland/web-components-library';
 
-card.standard();
-hero.minimal();
+// Load only what you need
+Components.card.standard();
+Components.hero.base();
+Components.navigation.primary();
 ```
 
-## How Components Work
-
-### Web Components Architecture
-
-UMD components are standard web components built with:
-- **Custom Elements** - Define new HTML tags like `<umd-element-card>`
-- **Shadow DOM** - Encapsulates styles and prevents CSS conflicts
-- **Slots** - Content distribution system for flexible layouts
-
-### Basic Structure
+### HTML Usage
 
 ```html
-<umd-element-card data-theme="dark">
-  <h3 slot="headline">Card Title</h3>
-  <p slot="text">Card content goes here</p>
-  <div slot="actions">
-    <a href="#">Learn More</a>
+<umd-element-hero data-theme="dark" data-display="overlay">
+  <img slot="image" src="hero.jpg" alt="Hero image">
+  <p slot="eyebrow">Welcome</p>
+  <h1 slot="headline">University of Maryland</h1>
+  <div slot="text">
+    <p>Fearless ideas start here.</p>
   </div>
-</umd-element-card>
+  <div slot="actions">
+    <umd-element-call-to-action data-display="primary">
+      <a href="/apply">Apply Now</a>
+    </umd-element-call-to-action>
+  </div>
+</umd-element-hero>
 ```
 
-Components use:
-- **Tag name** - Always prefixed with `umd-element-`
-- **Configuration attributes** - Use `data-*` prefix for initial setup
-- **Slots** - Named areas where content can be inserted
+## Component Architecture
 
-### Working with the Styles Package
+### Web Components Standards
 
-For consistent spacing, typography, and layouts, install the companion styles package:
+All components follow W3C Web Components standards:
+- **Custom Elements** - Semantic HTML tags (e.g., `<umd-element-card>`)
+- **Shadow DOM** - Style encapsulation and DOM isolation
+- **Slots** - Content distribution for flexible layouts
+- **Attributes** - Configuration and reactive updates
 
-```bash
-npm install @universityofmaryland/web-styles-library
-```
+### Naming Convention
 
-This provides utility classes that work seamlessly with components:
+All components use the `umd-element-` prefix:
+- `<umd-element-card>`
+- `<umd-element-hero>`
+- `<umd-element-navigation>`
+
+### Attribute System
+
+Components use two types of attributes:
+
+**Configuration Attributes** (data-*)
+- Set initial state: `data-theme="dark"`
+- Configure display: `data-display="overlay"`
+- Control layout: `data-columns="3"`
+
+**Observed Attributes**
+- Trigger behaviors: `is-visual-open="true"`
+- Request updates: `resize="true"`
+- Control state: `is-animated="true"`
+
+## Integration with Other Packages
+
+### Styles Package Integration
+
+The Styles Package provides utility classes for spacing, grids, and typography:
 
 ```html
-<!-- Apply consistent spacing -->
+<!-- Consistent spacing -->
 <div class="umd-layout-space-vertical-landing">
-  <umd-element-hero>
-    <!-- Hero content -->
-  </umd-element-hero>
+  <umd-element-hero><!-- content --></umd-element-hero>
 </div>
 
-<!-- Create responsive grids -->
+<!-- Responsive grids -->
 <div class="umd-grid-gap-three">
-  <umd-element-card><!-- Card 1 --></umd-element-card>
-  <umd-element-card><!-- Card 2 --></umd-element-card>
-  <umd-element-card><!-- Card 3 --></umd-element-card>
+  <umd-element-card><!-- card 1 --></umd-element-card>
+  <umd-element-card><!-- card 2 --></umd-element-card>
+  <umd-element-card><!-- card 3 --></umd-element-card>
 </div>
 ```
 
-See [HTML Usage Examples](docs/components/usage.html#styles-integration) for detailed integration patterns.
+[Learn more about Styles integration →](./usage.html#styles-integration)
 
-## Available Components
+### Elements Package Relationship
+
+Components are built on Elements:
+- Elements provide atomic building blocks
+- Components compose Elements into features
+- Components add interactivity and state management
+
+### Feeds Package Integration
+
+For dynamic content, combine with Feeds:
+
+```javascript
+import { Components } from '@universityofmaryland/web-components-library';
+import { Feeds } from '@universityofmaryland/web-feeds-library';
+
+// Initialize components
+Components.feed.newsList();
+
+// Component will handle feed display
+```
+
+## Component Categories
+
+### Navigation Components
+- `navigation.primary` - Main site navigation
+- `navigation.drawer` - Mobile navigation drawer
+- `navigation.breadcrumb` - Breadcrumb navigation
+- `navigation.utility` - Utility navigation bar
+
+### Content Components
+- `hero.*` - Hero sections (base, expand, grid, logo, minimal)
+- `card.*` - Card layouts (standard, article, event, overlay, icon)
+- `carousel.*` - Content carousels
+- `accordion.item` - Expandable content sections
 
 ### Layout Components
-- `layout.boxLogo` - Box with logo layout
-- `layout.imageExpand` - Expandable image layout
-- `layout.modal` - Modal dialog
-- `layout.scrollTop` - Scroll to top button
-- `layout.stickyColumns` - Sticky columns layout
+- `layout.modal` - Modal dialogs
+- `layout.stickyColumns` - Sticky column layouts
+- `layout.scrollTop` - Scroll to top functionality
 
-### UI Components
-- `accordion` - Collapsible content panels
-- `actions` - Action buttons and links
-- `alert` - Alert notifications
-- `card` - Various card styles (standard, article, overlay)
-- `carousel` - Image and content carousels
-- `hero` - Hero sections (standard, minimal, expand, logo)
-- `navigation` - Navigation components (header, drawer, breadcrumb)
-- `person` - Person/profile components
-- `quote` - Quote/testimonial components
-- `stat` - Statistics display
-- `tab` - Tabbed interface
-- `text` - Text components
+### Interactive Components
+- `tab.display` - Tabbed interfaces
+- `slider.*` - Content sliders
+- `actions.display` - Call-to-action buttons
 
-## Documentation
+### Media Components
+- `media.inline` - Inline media players
+- `person.*` - Person/profile displays
+- `quote.display` - Quote/testimonial blocks
+- `stat.display` - Statistics displays
 
-- **[HTML Usage Examples](docs/components/usage.html)** - Interactive examples and common patterns
-- **[Advanced Usage Guide](docs/components/advanced-usage.md)** - Type system, testing, and reactive components
-- **[Design System Website](https://designsystem.umd.edu)** - Full documentation
-- **[Component Playground](http://playground.designsystem.umd.edu)** - Interactive demos
+## Common Use Cases
+
+### Hero with Call-to-Action
+
+```html
+<umd-element-hero data-display="overlay">
+  <img slot="image" src="campus.jpg" alt="Campus view">
+  <h1 slot="headline">Discover Your Future</h1>
+  <p slot="text">Join our community of innovators.</p>
+  <div slot="actions">
+    <umd-element-call-to-action data-display="primary">
+      <a href="/apply">Apply Now</a>
+    </umd-element-call-to-action>
+  </div>
+</umd-element-hero>
+```
+
+### Card Grid Layout
+
+```html
+<div class="umd-grid-gap-three">
+  <umd-element-card data-theme="light">
+    <a slot="image" href="/programs">
+      <img src="programs.jpg" alt="Academic programs">
+    </a>
+    <h3 slot="headline">
+      <a href="/programs">Academic Programs</a>
+    </h3>
+    <p slot="text">Explore our 200+ degree programs.</p>
+  </umd-element-card>
+  <!-- Additional cards -->
+</div>
+```
+
+### Navigation Header
+
+```html
+<umd-element-navigation-header>
+  <div slot="logo">
+    <a href="/">University of Maryland</a>
+  </div>
+  <nav slot="primary">
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/academics">Academics</a></li>
+      <li><a href="/research">Research</a></li>
+    </ul>
+  </nav>
+</umd-element-navigation-header>
+```
+
+## TypeScript Support
+
+Full TypeScript support with comprehensive type definitions:
+
+```typescript
+import type { 
+  ComponentRef, 
+  SlotConfiguration,
+  ComponentEvents 
+} from '@universityofmaryland/web-components-library';
+
+// Type-safe component usage
+const card = document.querySelector<HTMLElement & ComponentEvents>('umd-element-card');
+if (card) {
+  card.addEventListener('component:ready', (e) => {
+    console.log('Card initialized');
+  });
+}
+```
 
 ## Browser Support
 
-Supports all modern browsers with Web Components support:
 - Chrome 90+
 - Firefox 88+
 - Safari 14+
 - Edge 90+
 
+## Documentation
+
+- **[Component Reference](./index.html)** - Complete API documentation
+- **[Usage Examples](./usage.html)** - Practical implementation guide with real-world examples
+- **[Advanced Guide](./advanced-usage.html)** - TypeScript, testing, reactive components, and custom development
+- **[Playground](http://playground.designsystem.umd.edu)** - Live component demos
+
+## Testing
+
+```bash
+# Run tests
+npm test
+
+# Watch mode
+npm run test:watch
+
+# Coverage report
+npm run test:coverage
+```
+
+## Contributing
+
+See the [main repository](https://github.com/umd-digital/design-system) for contribution guidelines.
+
 ## License
 
-This project is licensed under the University of Maryland license.
+University of Maryland

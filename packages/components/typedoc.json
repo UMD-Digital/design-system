@@ -12,6 +12,7 @@
   "excludeProtected": true,
   "skipErrorChecking": true,
   "hideGenerator": true,
+   "cleanOutputDir": false,
   "searchInDocuments": true,
   "out": "../../docs/components",
   "readme": "README.md",

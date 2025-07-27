@@ -10,26 +10,15 @@ import * as utilitiesNamespace from './utilities';
 
 export type { JssEntry, JssObject } from './_types';
 
-export const accessibility = accessibilityNamespace;
-export const animation = animationsNamespace;
-export const element = elementNamespace;
-export const layout = layoutNamespace;
-export const typography = typographyNamespace;
-export const token = tokenNamespace;
-export const webComponents = webComponentsNamespace;
-export const utilities = utilitiesNamespace;
-
-export { root, reset, variables };
-
-export const preRender = {
+const preRender = {
   ...root,
   ...reset,
   ...webComponentsNamespace,
 };
 
-export const preRenderCss = utilities.create.style.toString(preRender);
+const preRenderCss = utilitiesNamespace.create.style.toString(preRender);
 
-export const postRender = {
+const postRender = {
   ...utilitiesNamespace.transform.jss.formatNestedObjects({
     accessibilityNamespace,
     animationsNamespace,
@@ -39,10 +28,44 @@ export const postRender = {
   }),
 };
 
-export const postRenderCss = utilities.create.style.toString(postRender);
+const postRenderCss = utilitiesNamespace.create.style.toString(postRender);
 
-export const outputStyles = {
+const outputStyles = {
   ...typographyNamespace.fontFace.typographyFontFaceObject,
   ...preRender,
   ...postRender,
 };
+
+const styles = {
+  accessibility: accessibilityNamespace,
+  animation: animationsNamespace,
+  element: elementNamespace,
+  layout: layoutNamespace,
+  typography: typographyNamespace,
+  token: tokenNamespace,
+  webComponents: webComponentsNamespace,
+  utilities: utilitiesNamespace,
+  root,
+  reset,
+  variables,
+  preRender,
+  preRenderCss,
+  postRender,
+  postRenderCss,
+  outputStyles,
+};
+
+export const {
+  accessibility,
+  animation,
+  element,
+  layout,
+  typography,
+  token,
+  webComponents,
+  utilities,
+} = styles;
+
+export { root, reset, variables, preRender, preRenderCss, postRender, postRenderCss, outputStyles };
+
+export default styles;

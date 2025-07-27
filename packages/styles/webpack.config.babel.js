@@ -70,5 +70,21 @@ module.exports = (env) => {
         outputModule: true,
       },
     },
+    {
+      ...baseConfig,
+      entry: {
+        'umd-styles': path.resolve('source/index'),
+      },
+      output: {
+        path: path.resolve('dist'),
+        filename: '[name].js',
+        library: {
+          name: 'Styles',
+          type: 'umd',
+          export: 'default',
+        },
+        globalObject: 'this',
+      },
+    },
   ];
 };

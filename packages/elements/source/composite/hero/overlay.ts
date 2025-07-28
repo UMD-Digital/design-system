@@ -43,8 +43,6 @@ const THEME_VALUES = {
   },
   WIDTHS: {
     ASSET: '60%',
-    TEXT: '55%',
-    TEXT_CONTENT_MAX: '60%',
   },
   OVERLAY_RIGHT: '50px',
 } as const;
@@ -189,9 +187,13 @@ const createTextContent = (
     children: [textLockupElement],
     elementStyles: {
       element: {
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          maxWidth: '55%',
+        },
+
         [`& .${Styles.element.text.rich.simpleLargeDark.className}`]: {
           [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            maxWidth: THEME_VALUES.WIDTHS.TEXT_CONTENT_MAX,
+            maxWidth: '60%',
           },
         },
       },
@@ -208,7 +210,7 @@ const createText = (
   const { includesAnimation } = props;
   const textContent = createTextContent(props);
 
-  const lock = ElementModel.layout.spaceHorizontalFull({
+  const lock = ElementModel.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [textContent],
     elementStyles: {
@@ -229,9 +231,9 @@ const createText = (
         display: 'flex',
         position: 'relative',
         zIndex: 999,
+        width: '100%',
 
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          width: THEME_VALUES.WIDTHS.TEXT,
           padding: `${Styles.token.spacing['5xl']} 0`,
 
           ...(includesAnimation && {

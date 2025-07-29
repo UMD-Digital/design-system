@@ -90,11 +90,10 @@ const createContainerStyles = (customStyles = {}) => {
     height: '100%',
     overflow: 'hidden',
     position: 'relative',
-    minHeight: '360px',
+    minHeight: '424px',
 
     ...createContainerQuery(media.breakpointValues.medium.min, 'min-width', {
       paddingTop: `${spacing['8xl']}`,
-      minHeight: `424px`,
     }),
     ...customStyles,
   };

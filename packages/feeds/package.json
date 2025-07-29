@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-feeds-library",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "UMD Feed Elements",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -24,12 +24,6 @@
     "test:snapshot": "jest --updateSnapshot"
   },
   "dependencies": {
-    "@types/postcss-js": "^4.0.4",
-    "postcss-js": "^4.0.1",
-    "tw-to-css": "^0.0.12"
-  },
-  "peerDependencies": {
-    "@universityofmaryland/web-elements-library": "*",
-    "@universityofmaryland/web-styles-library": "^1.1.0"
+    "@types/postcss-js": "^4.0.4"
   }
 }

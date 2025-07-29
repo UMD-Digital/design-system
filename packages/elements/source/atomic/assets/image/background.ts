@@ -58,22 +58,24 @@ export default (props: Props) => {
 
   const asset = embedAsset({ ...props, isTypeGif });
 
-  if (attributeCaption) {
-    console.log(
-      `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,
-    );
-  }
+  if (isShowCaption) {
+    if (attributeCaption) {
+      console.log(
+        `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,
+      );
+    }
 
-  if (attributeCaption || attributeCredit) {
-    const text = attributeCaption || attributeCredit;
-    const caption = document.createElement('span');
-    caption.textContent = text;
+    if (attributeCaption || attributeCredit) {
+      const text = attributeCaption || attributeCredit;
+      const caption = document.createElement('span');
+      caption.textContent = text;
 
-    const imageCaption = ElementModel.assets.imageCaption({
-      element: caption,
-    });
-    composite.element.appendChild(imageCaption.element);
-    composite.styles += imageCaption.styles;
+      const imageCaption = ElementModel.assets.imageCaption({
+        element: caption,
+      });
+      composite.element.appendChild(imageCaption.element);
+      composite.styles += imageCaption.styles;
+    }
   }
 
   if (dateSign) {

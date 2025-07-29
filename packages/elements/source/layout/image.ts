@@ -2,6 +2,7 @@ import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
+const ATTRIBUTE_CREDIT = 'data-credit';
 
 const ELEMENT_IMAGE_CONTAINER = 'image-container';
 
@@ -64,6 +65,13 @@ const CreateImageContainer = ({
   const container = document.createElement('div');
   const isString = typeof image === 'string';
   const hasCaption = !isString && image.hasAttribute(ATTRIBUTE_CAPTION);
+  const hasCredit = !isString && image.hasAttribute(ATTRIBUTE_CREDIT);
+  const attributeCaption = hasCaption
+    ? image.getAttribute(ATTRIBUTE_CAPTION)
+    : null;
+  const attributeCredit = hasCredit
+    ? image.getAttribute(ATTRIBUTE_CREDIT)
+    : null;
 
   container.classList.add(ELEMENT_IMAGE_CONTAINER);
 
@@ -72,10 +80,19 @@ const CreateImageContainer = ({
     return container;
   }
 
-  if (hasCaption && showCaption) {
-    const caption = document.createElement('span');
-    caption.textContent = image.getAttribute(ATTRIBUTE_CAPTION);
-    container.appendChild(caption);
+  if (showCaption) {
+    if (attributeCaption) {
+      console.log(
+        `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,
+      );
+    }
+
+    if (attributeCaption || attributeCredit) {
+      const text = attributeCaption || attributeCredit;
+      const caption = document.createElement('span');
+      caption.textContent = text;
+      container.appendChild(caption);
+    }
   }
 
   container.appendChild(image);

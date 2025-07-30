@@ -21,6 +21,7 @@ const actions = {
 
 const assets = {
   image: createSlotFactory(SlotNames.assets.image),
+  images: createSlotFactory(SlotNames.assets.images),
   video: createSlotFactory(SlotNames.assets.video),
 } as const;
 

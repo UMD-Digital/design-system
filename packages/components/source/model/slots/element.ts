@@ -36,7 +36,10 @@ export const allowed: Record<string, SlotConfig> = {
     allowedElements: ['h1', ...subHeadlineElements],
   },
   image: {
-    allowedElements: ['a', 'img', 'svg', 'picture', 'figure'],
+    allowedElements: ['img'],
+  },
+  images: {
+    allowedElements: ['div'],
   },
   subHeadline: {
     allowedElements: subHeadlineElements,

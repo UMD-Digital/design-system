@@ -17,4 +17,5 @@
   "out": "../../docs/feeds",
   "readme": "README.md",
   "githubPages": true,
+  "logLevel": "Error"
 }

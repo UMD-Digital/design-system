@@ -36,7 +36,7 @@ import { news, events } from '@universityofmaryland/web-feeds-library';
 const newsGrid = news.grid({
   token: 'your-api-token',
   numberOfColumnsToShow: 3,
-  isThemeDark: false
+  isThemeDark: false,
 });
 
 // Add to your page
@@ -57,14 +57,12 @@ const newsGrid = news.grid({
   token: 'your-api-token',
   numberOfColumnsToShow: 3,
   isThemeDark: false,
-  isTransparent: false
+  isTransparent: false,
 });
 
 // List layout - Vertical article list
 const newsList = news.list({
   token: 'your-api-token',
-  showImages: true,
-  showDates: true
 });
 
 // Featured layout - Hero article with sidebar
@@ -72,7 +70,6 @@ const newsFeatured = news.featured({
   token: 'your-api-token',
   isLazyLoad: true,
   isLayoutReversed: false,
-  overwriteStickyPosition: 100
 });
 ```
 
@@ -87,21 +84,16 @@ import { events } from '@universityofmaryland/web-feeds-library';
 const eventsGrid = events.grid({
   token: 'your-api-token',
   numberOfColumnsToShow: 3,
-  showPastEvents: false
 });
 
 // List layout - Chronological list
 const eventsList = events.list({
   token: 'your-api-token',
-  groupByDate: true,
-  maxEvents: 10
 });
 
 // Slider - Horizontal scroll
 const eventsSlider = events.slider({
   token: 'your-api-token',
-  slidesToShow: 4,
-  autoPlay: true
 });
 ```
 
@@ -116,7 +108,7 @@ import { academic } from '@universityofmaryland/web-feeds-library';
 const academicSlider = academic.slider({
   token: 'your-api-token',
   department: 'engineering',
-  programType: 'graduate'
+  programType: 'graduate',
 });
 ```
 
@@ -136,6 +128,7 @@ Feeds automatically use UMD styles for consistent appearance:
 ### Elements Package Usage
 
 Feeds are built using Elements for rendering:
+
 - Card elements for item display
 - Grid layouts from layout elements
 - Typography from text elements
@@ -161,64 +154,29 @@ All feeds accept these base properties:
 
 ```typescript
 interface BaseFeedProps {
-  token: string;              // Required: API authentication token
-  isThemeDark?: boolean;      // Dark theme styling
-  isTransparent?: boolean;    // Transparent card backgrounds
-  onError?: (error: Error) => void; // Error handler
-  onLoad?: (items: any[]) => void;  // Load complete handler
+  token: string; // Required: API authentication token
+  isThemeDark?: boolean; // Dark theme styling
+  isTransparent?: boolean; // Transparent card backgrounds
 }
 ```
 
 ### Layout-Specific Options
 
 **Grid Layout:**
+
 ```typescript
 interface GridProps extends BaseFeedProps {
   numberOfColumnsToShow?: number; // 1-4, default: 3
-  gapSize?: 'small' | 'medium' | 'large';
-  minCardHeight?: number;
-}
-```
-
-**List Layout:**
-```typescript
-interface ListProps extends BaseFeedProps {
-  showImages?: boolean;
-  showDates?: boolean;
-  showExcerpts?: boolean;
-  maxItems?: number;
 }
 ```
 
 **Featured Layout:**
+
 ```typescript
 interface FeaturedProps extends BaseFeedProps {
   isLazyLoad?: boolean;
   isLayoutReversed?: boolean;
-  overwriteStickyPosition?: number;
-  sidebarItemCount?: number;
 }
-```
-
-## Advanced Features
-
-### Filtering and Sorting
-
-```javascript
-const filteredNews = news.grid({
-  token: 'your-api-token',
-  filters: {
-    categories: ['research', 'campus-life'],
-    tags: ['featured', 'students'],
-    dateRange: {
-      start: new Date('2024-01-01'),
-      end: new Date('2024-12-31')
-    },
-    author: 'John Doe'
-  },
-  sortBy: 'date', // 'date' | 'title' | 'popularity'
-  sortDirection: 'desc' // 'asc' | 'desc'
-});
 ```
 
 ### Event Handling
@@ -238,44 +196,12 @@ const eventsFeed = events.list({
   onItemClick: (item) => {
     // Custom click handler
     console.log('Clicked:', item.title);
-  }
+  },
 });
 
 // Listen for feed updates
 eventsFeed.element.addEventListener('feed:update', (e) => {
   console.log('Feed updated with new items');
-});
-```
-
-### Pagination
-
-```javascript
-const paginatedNews = news.list({
-  token: 'your-api-token',
-  itemsPerPage: 10,
-  showPagination: true,
-  onPageChange: (page) => {
-    console.log(`Navigated to page ${page}`);
-  }
-});
-```
-
-### Custom Templates
-
-Override default item rendering:
-
-```javascript
-const customNews = news.grid({
-  token: 'your-api-token',
-  renderItem: (item) => {
-    return `
-      <div class="custom-news-item">
-        <h3>${item.title}</h3>
-        <time>${item.date}</time>
-        <p>${item.excerpt}</p>
-      </div>
-    `;
-  }
 });
 ```
 
@@ -289,29 +215,6 @@ Load content as users scroll:
 const lazyFeed = news.featured({
   token: 'your-api-token',
   isLazyLoad: true,
-  lazyLoadOffset: 200 // pixels before viewport
-});
-```
-
-### Caching
-
-Automatic caching reduces API calls:
-
-```javascript
-const cachedFeed = events.grid({
-  token: 'your-api-token',
-  cacheTimeout: 300000, // 5 minutes
-  forceFresh: false // Use cache if available
-});
-```
-
-### Infinite Scroll
-
-```javascript
-const infiniteFeed = news.list({
-  token: 'your-api-token',
-  enableInfiniteScroll: true,
-  infiniteScrollThreshold: 100 // pixels from bottom
 });
 ```
 
@@ -320,17 +223,17 @@ const infiniteFeed = news.list({
 Full TypeScript definitions included:
 
 ```typescript
-import type { 
+import type {
   NewsFeedProps,
   EventsFeedProps,
   FeedItem,
-  FeedEvents 
+  FeedEvents,
 } from '@universityofmaryland/web-feeds-library';
 
 const newsProps: NewsFeedProps = {
   token: 'token',
   numberOfColumnsToShow: 3,
-  isThemeDark: false
+  isThemeDark: false,
 };
 ```
 
@@ -344,6 +247,7 @@ const newsProps: NewsFeedProps = {
 ## Accessibility
 
 All feed components are WCAG 2.1 AA compliant:
+
 - Semantic HTML markup
 - ARIA live regions for updates
 - Keyboard navigation
@@ -352,9 +256,7 @@ All feed components are WCAG 2.1 AA compliant:
 
 ## Documentation
 
-- **[Feed Components](https://umd-digital.github.io/design-system/docs/feeds/)** - Complete reference
-- **[API Documentation](https://umd-digital.github.io/design-system/docs/feeds/modules/)** - TypeScript APIs
-- **[Integration Examples](https://github.com/umd-digital/design-system/tree/main/packages/feeds/examples)** - Sample implementations
+- **[Feed Components](./)** - Complete reference
 - **[Design System](https://designsystem.umd.edu)** - Full design system docs
 
 ## Testing

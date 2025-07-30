@@ -36,7 +36,7 @@ const card = Composite.card.block({
   headline: document.createElement('h3'),
   text: document.createElement('p'),
   image: document.querySelector('img'),
-  isThemeDark: true
+  isThemeDark: true,
 });
 
 // Add to DOM
@@ -53,7 +53,9 @@ document.head.appendChild(style);
 ### Element Categories
 
 #### Atomic Elements
+
 The most basic building blocks:
+
 - **actions** - Buttons and interactive elements
 - **animations** - Animation patterns and effects
 - **assets** - Images, videos, and media handling
@@ -63,7 +65,9 @@ The most basic building blocks:
 - **textLockup** - Text grouping patterns
 
 #### Composite Elements
+
 Combinations of atomic elements forming UI patterns:
+
 - **accordion** - Expandable content sections
 - **alert** - Notification and alert displays
 - **banner** - Banner and promotional elements
@@ -112,6 +116,7 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 ### Components Package Relationship
 
 Components are built using Elements:
+
 - Elements provide structure and behavior
 - Components add web component wrapper and lifecycle
 - Elements can be used standalone for custom implementations
@@ -119,6 +124,7 @@ Components are built using Elements:
 ### Usage in Feeds Package
 
 Feed layouts use Elements for content display:
+
 ```javascript
 // Feeds internally use card and grid elements
 import { card } from '@universityofmaryland/web-elements-library/Composite';
@@ -135,14 +141,14 @@ import { Atomic } from '@universityofmaryland/web-elements-library';
 const textAction = Atomic.actions.text({
   text: 'Learn More',
   url: '/learn-more',
-  isStyled: true
+  isStyled: true,
 });
 
 // Icon action
 const iconAction = Atomic.actions.icon({
   icon: 'arrow-right',
   url: '#',
-  ariaLabel: 'Next page'
+  ariaLabel: 'Next page',
 });
 ```
 
@@ -157,7 +163,7 @@ const blockCard = Composite.card.block({
   text: document.querySelector('p'),
   image: document.querySelector('img'),
   actions: document.querySelector('.actions'),
-  isThemeDark: false
+  isThemeDark: false,
 });
 
 // Overlay card
@@ -166,7 +172,7 @@ const overlayCard = Composite.card.overlay({
   text: textElement,
   image: imageElement,
   isTypeColor: true,
-  isThemeDark: true
+  isThemeDark: true,
 });
 ```
 
@@ -175,6 +181,7 @@ const overlayCard = Composite.card.overlay({
 The hero category offers multiple variations for impactful layouts:
 
 #### Standard Hero
+
 ```javascript
 const hero = Composite.hero.standard({
   headline: document.createElement('h1'),
@@ -183,20 +190,22 @@ const hero = Composite.hero.standard({
   actions: document.createElement('div'),
   image: imageElement,
   includesAnimation: true,
-  isThemeDark: true
+  isThemeDark: true,
 });
 ```
 
 #### Minimal Hero
+
 ```javascript
 const minimalHero = Composite.hero.minimal({
   headline: document.createElement('h1'),
   text: document.createElement('p'),
-  eyebrow: document.createElement('span')
+  eyebrow: document.createElement('span'),
 });
 ```
 
 #### Overlay Hero
+
 ```javascript
 const overlayHero = Composite.hero.overlay({
   headline: headlineElement,
@@ -205,29 +214,31 @@ const overlayHero = Composite.hero.overlay({
   hasBorder: true,
   isTransparent: false,
   isSticky: true,
-  isTextCenter: true
+  isTextCenter: true,
 });
 ```
 
 #### Custom Variations
 
 **Grid Hero** - Content blocks in grid layout:
+
 ```javascript
 const gridHero = Composite.hero.custom.grid({
   headline: headlineElement,
   blocks: [block1, block2, block3, block4],
   image: backgroundImage,
-  isThemeDark: true
+  isThemeDark: true,
 });
 ```
 
 **Expand Hero** - With expandable content:
+
 ```javascript
 const expandHero = Composite.hero.custom.expand({
   headline: headlineElement,
   text: textElement,
   expandedContent: hiddenContent,
-  includesAnimation: true
+  includesAnimation: true,
 });
 ```
 
@@ -240,71 +251,15 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 const stickyLayout = Composite.layout.stickyColumns({
   leftColumn: sidebarContent,
   rightColumn: mainContent,
-  stickyOffset: 100
+  stickyOffset: 100,
 });
 
 // Image expand layout
 const imageExpand = Composite.layout.image.expand({
   image: imageElement,
   caption: 'Image caption',
-  isExpanded: false
+  isExpanded: false,
 });
-```
-
-## Advanced Usage
-
-### Event Handling
-
-```javascript
-const element = Composite.card.block({
-  headline: headlineEl,
-  text: textEl
-});
-
-// Use lifecycle events
-if (element.events) {
-  // Call after adding to DOM
-  element.events.load?.();
-  
-  // Call on window resize
-  element.events.resize?.();
-  
-  // Clean up before removing
-  element.events.destroy?.();
-}
-```
-
-### Dynamic Updates
-
-Many elements support property updates:
-
-```javascript
-const hero = Composite.hero.standard({
-  headline: headlineEl,
-  isThemeDark: false
-});
-
-// Update theme dynamically
-hero.element.setAttribute('data-theme', 'dark');
-if (hero.events?.resize) {
-  hero.events.resize();
-}
-```
-
-### Custom Styling
-
-While elements include default styles, you can extend them:
-
-```javascript
-const card = Composite.card.block({ /* props */ });
-
-// Add custom styles
-const customStyles = `
-  ${card.styles}
-  .my-custom-class {
-    /* Custom styles */
-  }
-`;
 ```
 
 ## TypeScript Support
@@ -316,13 +271,13 @@ import type {
   ElementModel,
   HeroStandardProps,
   CardBlockProps,
-  ThemeProps
+  ThemeProps,
 } from '@universityofmaryland/web-elements-library';
 
 const heroProps: HeroStandardProps = {
   headline: document.createElement('h1'),
   isThemeDark: true,
-  includesAnimation: false
+  includesAnimation: false,
 };
 ```
 
@@ -343,6 +298,7 @@ const heroProps: HeroStandardProps = {
 ## Accessibility
 
 All elements follow WCAG 2.1 AA standards:
+
 - Semantic HTML structure
 - ARIA attributes where needed
 - Keyboard navigation support
@@ -351,10 +307,8 @@ All elements follow WCAG 2.1 AA standards:
 
 ## Documentation
 
-- **[Element Reference](https://umd-digital.github.io/design-system/docs/elements/)** - Complete API documentation
-- **[TypeScript Definitions](https://umd-digital.github.io/design-system/docs/elements/interfaces/)** - Type interfaces
-- **[Usage Examples](https://github.com/umd-digital/design-system/tree/main/packages/elements/source)** - Source code examples
-- **[Design System](https://designsystem.umd.edu)** - Complete design system documentation
+- **[Element Reference](./)** - Complete API documentation
+- **[Design System](https://designsystem.umd.edu)** - Full design system docs
 
 ## Testing
 

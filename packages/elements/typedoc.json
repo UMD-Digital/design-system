@@ -16,5 +16,6 @@
   "searchInDocuments": true,
   "out": "../../docs/elements",
   "readme": "README.md",
-  "githubPages": true
+  "githubPages": true,
+  "logLevel": "Error"
 }

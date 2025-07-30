@@ -39,23 +39,6 @@ const CLASS_NAMES = {
   TEXT: 'umd-hero-stacked__text',
 } as const;
 
-const THEME_VALUES = {
-  HEADLINE_CHAR_THRESHOLD: 30,
-  HEADLINE_LARGE_SIZE: '80px',
-  OVERLAY_COLOR: 'rgba(0,0,0,.7)',
-  HEIGHTS: {
-    MIN: '300px',
-    DEFAULT_MIN: '400px',
-    MAX: '700px',
-    VH_PERCENTAGE: '65vh',
-  },
-  MAX_WIDTHS: {
-    HEADLINE: '700px',
-    TEXT: '860px',
-  },
-  ASPECT_RATIO: '5 / 4',
-} as const;
-
 const keyFrameFadeOver = `
   @keyframes ${ANIMATION_CONFIG.FADE_OVER.NAME} {
     from { opacity: 0; }
@@ -97,7 +80,7 @@ const createOverlay = (includesAnimation?: boolean) => {
         height: '100vh',
         width: '100vw',
         display: 'block',
-        backgroundColor: THEME_VALUES.OVERLAY_COLOR,
+        backgroundColor: 'rgba(0,0,0,.7)',
         zIndex: 99,
         opacity: 0,
 
@@ -217,14 +200,14 @@ const createHeadline = (
   const { headline, isHeightSmall, includesAnimation } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
-    characterCount < THEME_VALUES.HEADLINE_CHAR_THRESHOLD;
+    characterCount < 30;
 
   if (!headline) return null;
 
   const desktopStyles = {
     [`@container (${Styles.token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
-        fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE,
+        fontSize: '80px',
       }),
     },
   };
@@ -237,7 +220,7 @@ const createHeadline = (
   const elementStyles = {
     element: {
       color: Styles.token.color.black,
-      maxWidth: THEME_VALUES.MAX_WIDTHS.HEADLINE,
+      maxWidth: '700px',
       margin: '0 auto',
       textTransform: 'uppercase',
       marginTop: `${Styles.token.spacing.sm}`,
@@ -337,7 +320,7 @@ const createText = (
         },
 
         [`& .${Styles.element.text.rich.simpleLargest.className}`]: {
-          maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT,
+          maxWidth: '860px',
           marginLeft: 'auto',
           marginRight: 'auto',
         },
@@ -364,6 +347,11 @@ export default (props: HeroStackedProps) => {
   const composite = ElementModel.createDiv({
     className: CLASS_NAMES.CONTAINER,
     children,
+    elementStyles: {
+      element: {
+        containerType: 'inline-size',
+      },
+    },
   });
 
   composite.styles += keyFrameFadeOver;

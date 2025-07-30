@@ -31,27 +31,6 @@ const CLASS_NAMES = {
   TEXT: 'umd-hero-default__text',
 } as const;
 
-const THEME_VALUES = {
-  HEADLINE_CHAR_THRESHOLD: 10,
-  HEADLINE_LARGE_SIZE: '80px',
-  GRADIENT_OVERLAY:
-    'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .8) 85%)',
-  HEIGHTS: {
-    SMALL_MIN: '400px',
-    DEFAULT_MIN: '480px',
-    DESKTOP_MIN: '720px',
-    VH_PERCENTAGE: '75vh',
-  },
-  MAX_WIDTHS: {
-    HEADLINE_TABLET: '700px',
-    HEADLINE_DESKTOP: '816px',
-    TEXT_DESKTOP: '808px',
-    TEXT_TABLET: '736px',
-    TEXT_CENTER: '928px',
-  },
-  TEXT_WIDTH_PERCENTAGE: '80%',
-} as const;
-
 const keyFrameHeroSlideUp = `
   @keyframes hero-slide-up {
     from {
@@ -102,7 +81,7 @@ const ASSET_STYLES = {
       left: 0,
       width: '100%',
       height: '100%',
-      background: THEME_VALUES.GRADIENT_OVERLAY,
+      background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .8) 85%)',
       zIndex: '99',
     },
   },
@@ -182,20 +161,20 @@ const createHeadline = (
   const { headline, isHeightSmall, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
-    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD && isHeightSmall;
+    characterCount > 10 && isHeightSmall;
 
   if (!headline) return null;
 
   const tabletStyles = {
-    maxWidth: THEME_VALUES.MAX_WIDTHS.HEADLINE_TABLET,
+    maxWidth: '700px',
     marginLeft: 'auto',
     marginRight: 'auto',
     color: Styles.token.color.white,
   };
 
   const desktopStyles = {
-    maxWidth: THEME_VALUES.MAX_WIDTHS.HEADLINE_DESKTOP,
-    ...(isOverwriteHeadline && { fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE }),
+    maxWidth: '816px',
+    ...(isOverwriteHeadline && { fontSize: '80px' }),
   };
 
   const headlineElement = ElementModel.headline.campaignExtraLarge({
@@ -247,7 +226,7 @@ const createText = (props: HeroStandardProps) => {
           justifyContent: 'center',
           marginLeft: 'auto',
           marginRight: 'auto',
-          maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT_CENTER,
+          maxWidth: '928px',
         }),
 
         ...(includesAnimation && {
@@ -255,21 +234,21 @@ const createText = (props: HeroStandardProps) => {
         }),
 
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT_TABLET,
+          maxWidth: '736px',
           paddingTop: `${Styles.token.spacing['2xl']}`,
           paddingBottom: `${Styles.token.spacing['2xl']}`,
           ...(!isTextCenter && {
-            width: THEME_VALUES.TEXT_WIDTH_PERCENTAGE,
+            width: '80%',
           }),
           ...(isHeightSmall && {
-            minHeight: THEME_VALUES.HEIGHTS.SMALL_MIN,
+            minHeight: '400px',
             alignItems: 'flex-end',
             display: 'flex',
           }),
         },
 
         [`@container (${Styles.token.media.queries.desktop.min})`]: {
-          maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT_DESKTOP,
+          maxWidth: '808px',
         },
       },
     },
@@ -310,16 +289,17 @@ export default (props: HeroStandardProps) => {
       element: {
         position: 'relative',
         overflow: 'hidden',
+        containerType: 'inline-size',
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
           ...(!isHeightSmall && {
-            height: THEME_VALUES.HEIGHTS.VH_PERCENTAGE,
-            minHeight: THEME_VALUES.HEIGHTS.DEFAULT_MIN,
+            height: '75vh',
+            minHeight: '480px',
           }),
         },
 
         [`@container (${Styles.token.media.queries.desktop.min})`]: {
           ...(!isHeightSmall && {
-            minHeight: THEME_VALUES.HEIGHTS.DESKTOP_MIN,
+            minHeight: '720px',
           }),
         },
       },

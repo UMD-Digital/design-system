@@ -4,7 +4,6 @@
  * Layout and structural components for page organization and content presentation.
  */
 export { default as boxLogo } from './box-logo';
-export { default as cardFireworks } from './fireworks';
 export { default as imageExpand } from './image-expand';
 export { default as modal } from './modal';
 export { default as scrollTop } from './scroll-top';

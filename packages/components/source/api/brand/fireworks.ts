@@ -10,7 +10,7 @@ import { decl } from 'postcss';
 import { ElementRef } from 'model/model';
 
 // Tag name for the card fireworks component
-const tagName = 'umd-layout-card-fireworks';
+const tagName = 'umd-element-brand-card-fireworks';
 
 const slots: SlotConfiguration = {};
 

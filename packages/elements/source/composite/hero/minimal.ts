@@ -11,38 +11,6 @@ const CLASS_NAMES = {
   TEXT_WRAPPER: 'umd-hero-minimal__text-wrapper',
 } as const;
 
-const THEME_VALUES = {
-  HEADLINE_CHAR_THRESHOLD: 40,
-  HEADLINE_LARGE_SIZE: '64px',
-  HEADLINE_FONT_WEIGHT: 800,
-  MIN_HEIGHT: '288px',
-  WIDTHS: {
-    ASSET: '50%',
-    TEXT_WITH_ASSET: `calc(50% - ${Styles.token.spacing['4xl']})`,
-  },
-  BORDER_WIDTH: '2px',
-} as const;
-
-const ASSET_STYLES = {
-  CONTAINER: {
-    [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      width: THEME_VALUES.WIDTHS.ASSET,
-      height: '100%',
-    },
-  },
-  IMAGE: {
-    [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      objectFit: 'cover',
-      objectPosition: 'center',
-      height: '100%',
-      width: '100%',
-    },
-  },
-} as const;
-
 const createImageAsset = (image: HTMLImageElement) => {
   return assets.image.background({
     image,
@@ -85,8 +53,22 @@ const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
     children,
     elementStyles: {
       element: {
-        ...ASSET_STYLES.CONTAINER,
-        ['& img']: ASSET_STYLES.IMAGE,
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          width: '50%',
+          height: '100%',
+        },
+
+        ['& img']: {
+          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+            objectFit: 'cover',
+            objectPosition: 'center',
+            height: '100%',
+            width: '100%',
+          },
+        },
       },
     },
   });
@@ -100,15 +82,14 @@ const createHeadline = (
 ) => {
   const { headline, isThemeDark, isThemeMaryland } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline =
-    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD;
+  const isOverwriteHeadline = characterCount > 40;
 
   if (!headline) return null;
 
   const desktopStyles = {
     [`@container (${Styles.token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
-        fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE,
+        fontSize: '64px',
       }),
     },
   };
@@ -117,7 +98,7 @@ const createHeadline = (
     element: headline,
     elementStyles: {
       element: {
-        fontWeight: THEME_VALUES.HEADLINE_FONT_WEIGHT,
+        fontWeight: 800,
         textTransform: 'uppercase',
         ...desktopStyles,
       },
@@ -136,10 +117,7 @@ const buildTextWrapperStyles = (
   return {
     element: {
       paddingLeft: Styles.token.spacing.md,
-      borderLeft: `${THEME_VALUES.BORDER_WIDTH} solid ${getBorderColor(
-        isThemeDark,
-        isThemeMaryland,
-      )}`,
+      borderLeft: `2px solid ${getBorderColor(isThemeDark, isThemeMaryland)}`,
 
       [`@container (${Styles.token.media.queries.desktop.min})`]: {
         paddingLeft: Styles.token.spacing.lg,
@@ -156,7 +134,7 @@ const buildTextContainerStyles = (hasAsset: boolean) => {
       [`@container (${Styles.token.media.queries.tablet.min})`]: {
         ...(hasAsset && {
           padding: `${Styles.token.spacing['4xl']} 0`,
-          width: THEME_VALUES.WIDTHS.TEXT_WITH_ASSET,
+          width: `calc(50% - ${Styles.token.spacing['4xl']})`,
         }),
       },
     },
@@ -199,25 +177,6 @@ const createText = (props: HeroMinimalProps, hasAsset: boolean) => {
   });
 };
 
-const buildCompositeStyles = (props: HeroMinimalProps) => {
-  return {
-    element: {
-      backgroundColor: getBackgroundColor(props),
-      position: 'relative',
-      display: 'flex',
-
-      [`@container (${Styles.token.media.queries.large.max})`]: {
-        flexDirection: 'column-reverse',
-      },
-
-      [`@container (${Styles.token.media.queries.tablet.min})`]: {
-        minHeight: THEME_VALUES.MIN_HEIGHT,
-        alignItems: 'center',
-      },
-    },
-  };
-};
-
 export default (props: HeroMinimalProps) => {
   const asset = createAsset(props);
   const text = createText(props, !!asset);
@@ -230,6 +189,22 @@ export default (props: HeroMinimalProps) => {
   return ElementModel.createDiv({
     className: CLASS_NAMES.CONTAINER,
     children,
-    elementStyles: buildCompositeStyles(props),
+    elementStyles: {
+      element: {
+        backgroundColor: getBackgroundColor(props),
+        position: 'relative',
+        display: 'flex',
+        containerType: 'inline-size',
+
+        [`@container (${Styles.token.media.queries.large.max})`]: {
+          flexDirection: 'column-reverse',
+        },
+
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          minHeight: '288px',
+          alignItems: 'center',
+        },
+      },
+    },
   });
 };

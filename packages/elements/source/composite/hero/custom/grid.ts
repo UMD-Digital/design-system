@@ -51,14 +51,6 @@ const CLASS_NAMES = {
   CONTAINER: 'hero-grid-container',
 } as const;
 
-const THEME_VALUES = {
-  TINT_COLOR: 'rgba(0, 0, 0, 0.5)',
-  HEADLINE_CHAR_THRESHOLD: 30,
-  HEADLINE_LARGE_SIZE: '80px',
-  SCROLL_HEIGHT: '300vh',
-  SCROLL_PADDING_TOP: '140vh',
-} as const;
-
 const keyFrameColumns = `
   @keyframes grid-columns {
     from {
@@ -179,7 +171,7 @@ const createCenter = ({ images, video }: CenterProps) => {
           position: 'absolute',
           top: 0,
           left: 0,
-          backgroundColor: THEME_VALUES.TINT_COLOR,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
           zIndex: 9,
           opacity: 0,
           ...Utils.theme.media.withViewTimelineAnimation({
@@ -233,15 +225,14 @@ const createCenter = ({ images, video }: CenterProps) => {
 const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline =
-    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD;
+  const isOverwriteHeadline = characterCount > 30;
 
   if (!headline) return null;
 
   const desktopStyles = {
     [`@container (${Styles.token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
-        fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE,
+        fontSize: '80px',
       }),
     },
   };
@@ -295,7 +286,7 @@ const createTextContainer = (
         },
 
         ...Utils.theme.media.withViewTimelineAnimation({
-          paddingTop: THEME_VALUES.SCROLL_PADDING_TOP,
+          paddingTop: '140vh',
         }),
       },
     },
@@ -435,23 +426,24 @@ export default (props: HeroGridProps) => {
 
   const children = text ? [grid, text] : [grid];
 
-  const containerStyles = {
-    width: '100%',
-    display: 'block',
-    ...Utils.theme.media.withViewTimelineAnimation({
-      height: THEME_VALUES.SCROLL_HEIGHT,
-    }),
-    ['img, video']: {
-      objectFit: 'cover',
-      width: '100%',
-      height: '100%',
-    },
-  };
-
   const composite = ElementModel.createDiv({
     className: CLASS_NAMES.CONTAINER,
     children,
-    elementStyles: { element: containerStyles },
+    elementStyles: {
+      element: {
+        width: '100%',
+        display: 'block',
+        containerType: 'inline-size',
+        ...Utils.theme.media.withViewTimelineAnimation({
+          height: '300vh',
+        }),
+        ['img, video']: {
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+        },
+      },
+    },
     attributes: [
       {
         role: 'main',

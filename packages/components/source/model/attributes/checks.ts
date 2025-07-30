@@ -207,6 +207,11 @@ const includesFeature = {
     AttributesValues.state.TRUE,
     true,
   ),
+  expandFeature: createAttributeCheck(
+    AttributeNames.feature.expandFeature,
+    AttributesValues.state.TRUE,
+    true,
+  ),
   fullScreenOption: createAttributeCheck(
     AttributeNames.deprecated.feature.FULLSCREEN,
     AttributesValues.state.TRUE,

@@ -8,7 +8,9 @@ const actions = {
 
 const assets = {
   image: 'image',
+  images: 'images',
   video: 'video',
+  featured: 'featured',
 };
 
 const date = {

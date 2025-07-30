@@ -254,10 +254,12 @@ if (card) {
 
 ## Documentation
 
-- **[Component Reference](components/index.html)** - Complete API documentation
-- **[Usage Examples](components/usage.html)** - Practical implementation guide with real-world examples
-- **[Advanced Guide](components/advanced-usage.html)** - TypeScript, testing, reactive components, and custom development
-- **[Playground](http://playground.designsystem.umd.edu)** - Live component demos
+- **[Component Reference](./)** - Complete API documentation
+- **[TypeScript APIs](./modules/)** - Module exports and types
+- **[Component Catalog](./interfaces/)** - Component interfaces
+- **[Usage Examples](./usage.html)** - Practical implementation guide with real-world examples
+- **[Advanced Guide](./advanced-usage.html)** - TypeScript, testing, reactive components, and custom development
+- **[Design System](https://designsystem.umd.edu)** - Full design system docs
 
 ## Testing
 

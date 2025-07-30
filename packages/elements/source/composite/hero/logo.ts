@@ -2,10 +2,28 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type HeroLogoProps } from './_types';
+import { type ElementVisual } from '../../_types';
+
+const getBackgroundColor = (props: HeroLogoProps) => {
+  const { isThemeDark, isThemeMaryland, isThemeLight } = props;
+
+  if (isThemeDark) return Styles.token.color.black;
+  if (isThemeMaryland) return Styles.token.color.red;
+  if (isThemeLight) return Styles.token.color.gray.lightest;
+  return Styles.token.color.white;
+};
 
 const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
-  const assetContainer = ElementModel.createDiv({
+  if (!image) return null;
+
+  return ElementModel.createDiv({
     className: 'umd-hero-logo__asset',
+    children: [
+      assets.image.background({
+        image,
+        isScaled: false,
+      }),
+    ],
     elementStyles: {
       element: {
         textAlign: 'center',
@@ -24,25 +42,11 @@ const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
       },
     },
   });
-
-  let mediaElement;
-
-  if (image) {
-    mediaElement = assets.image.background({
-      image,
-      isScaled: false,
-    });
-  } else {
-    return null;
-  }
-
-  assetContainer.element.appendChild(mediaElement.element);
-  assetContainer.styles += mediaElement.styles;
-
-  return assetContainer;
 };
 
-const createHeadline = (props: Pick<HeroLogoProps, 'headline' | 'isThemeDark' | 'isThemeMaryland'>) => {
+const createHeadline = (
+  props: Pick<HeroLogoProps, 'headline' | 'isThemeDark' | 'isThemeMaryland'>,
+) => {
   const { headline, isThemeDark, isThemeMaryland } = props;
 
   if (!headline) return null;
@@ -63,30 +67,10 @@ const createHeadline = (props: Pick<HeroLogoProps, 'headline' | 'isThemeDark' | 
   return headlineElement;
 };
 
-const createText = (props: Omit<HeroLogoProps, 'image' | 'video' | 'includesAnimation' | 'logo'>) => {
+const createText = (
+  props: Omit<HeroLogoProps, 'image' | 'video' | 'includesAnimation' | 'logo'>,
+) => {
   const { isThemeDark, isThemeMaryland } = props;
-
-  const textContainer = ElementModel.createDiv({
-    className: 'umd-hero-logo__text',
-    elementStyles: {
-      element: {
-        display: 'flex',
-        justifyContent: 'center',
-        textAlign: 'center',
-      },
-    },
-  });
-
-  const textContent = ElementModel.createDiv({
-    className: 'umd-hero-logo__text-content',
-    elementStyles: {
-      element: {
-        [`& .${Styles.element.text.rich.simpleLargest.className}`]: {
-          color: Styles.token.color.gray.dark,
-        },
-      },
-    },
-  });
 
   const textLockupElement = textLockup.large({
     ribbon: props.eyebrow,
@@ -96,32 +80,54 @@ const createText = (props: Omit<HeroLogoProps, 'image' | 'video' | 'includesAnim
     isThemeDark: isThemeDark || isThemeMaryland || false,
   });
 
-  textContent.element.appendChild(textLockupElement.element);
-  textContent.styles += textLockupElement.styles;
+  const textContent = ElementModel.createDiv({
+    className: 'umd-hero-logo__text-content',
+    children: [textLockupElement],
+    elementStyles: {
+      element: {
+        [`& .${Styles.element.text.rich.simpleLargest.className}`]: {
+          color: Styles.token.color.gray.dark,
+        },
+      },
+    },
+  });
 
-  textContainer.element.appendChild(textContent.element);
-  textContainer.styles += textContent.styles;
-
-  return textContainer;
+  return ElementModel.createDiv({
+    className: 'umd-hero-logo__text',
+    children: [textContent],
+    elementStyles: {
+      element: {
+        display: 'flex',
+        justifyContent: 'center',
+        textAlign: 'center',
+      },
+    },
+  });
 };
 
-const getBackgroundColor = (props: HeroLogoProps) => {
-  const { isThemeDark, isThemeMaryland, isThemeLight } = props;
+const makeLock = (props: HeroLogoProps) => {
+  const asset = createAsset(props);
+  const text = createText(props);
+  const children: ElementVisual[] = [];
 
-  if (isThemeDark) return Styles.token.color.black;
-  if (isThemeMaryland) return Styles.token.color.red;
-  if (isThemeLight) return Styles.token.color.gray.lightest;
-  return Styles.token.color.white;
+  if (asset) {
+    children.push(asset);
+  }
+
+  children.push(text);
+
+  return ElementModel.layout.spaceHorizontalSmall({
+    element: document.createElement('div'),
+    children,
+  });
 };
 
 export default (props: HeroLogoProps) => {
   const { isThemeDark } = props;
-  const composite = ElementModel.createDiv({
-    className: 'umd-hero-logo',
-  });
 
   const container = ElementModel.createDiv({
     className: 'umd-hero-logo__container',
+    children: [makeLock(props)],
     elementStyles: {
       element: {
         padding: `${Styles.token.spacing['5xl']} 0 ${Styles.token.spacing.lg}`,
@@ -137,26 +143,13 @@ export default (props: HeroLogoProps) => {
     },
   });
 
-  const lock = ElementModel.layout.spaceHorizontalSmall({
-    element: document.createElement('div'),
+  return ElementModel.createDiv({
+    className: 'umd-hero-logo',
+    children: [container],
+    elementStyles: {
+      element: {
+        containerType: 'inline-size',
+      },
+    },
   });
-
-  const asset = createAsset(props);
-  const text = createText(props);
-
-  if (asset) {
-    lock.element.appendChild(asset.element);
-    lock.styles += asset.styles;
-  }
-
-  lock.element.appendChild(text.element);
-  lock.styles += text.styles;
-
-  container.element.appendChild(lock.element);
-  container.styles += lock.styles;
-
-  composite.element.appendChild(container.element);
-  composite.styles += container.styles;
-
-  return composite;
 };

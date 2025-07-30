@@ -44,7 +44,7 @@ export default {
       colors: token.color,
       spacing: token.spacing,
       fontFamily: token.font.family,
-    }
+    },
   },
   plugins: [
     plugin(({ addUtilities, addComponents }) => {
@@ -61,14 +61,14 @@ export default {
 import * as Styles from '@universityofmaryland/web-styles-library';
 
 // Pre-render CSS (fonts, variables, resets)
-Styles.preRenderCss.then(css => {
+Styles.preRenderCss.then((css) => {
   const style = document.createElement('style');
   style.textContent = `${Styles.typography.fontFace.base64fonts} ${css}`;
   document.head.appendChild(style);
 });
 
 // Post-render CSS (utilities and components)
-Styles.postRenderCss.then(css => {
+Styles.postRenderCss.then((css) => {
   const style = document.createElement('style');
   style.textContent = css;
   document.head.appendChild(style);
@@ -85,22 +85,22 @@ Official UMD brand values accessible as JavaScript objects:
 import { token } from '@universityofmaryland/web-styles-library';
 
 // Colors
-token.color.red;        // #e21833
-token.color.gold;       // #FFD200
-token.color.black;      // #000000
+token.color.red; // #e21833
+token.color.gold; // #FFD200
+token.color.black; // #000000
 
 // Spacing
-token.spacing.sm;       // 0.5rem
-token.spacing.md;       // 1rem
-token.spacing.lg;       // 1.5rem
+token.spacing.sm; // 0.5rem
+token.spacing.md; // 1rem
+token.spacing.lg; // 1.5rem
 
 // Typography
 token.font.family.sans; // 'Helvetica Neue', Helvetica, Arial, sans-serif
-token.font.size.base;   // 1rem
+token.font.size.base; // 1rem
 token.font.weight.bold; // 700
 
 // Breakpoints
-token.media.breakpoints.tablet;  // 768px
+token.media.breakpoints.tablet; // 768px
 token.media.breakpoints.desktop; // 1024px
 ```
 
@@ -123,7 +123,7 @@ Pre-built utility classes for common patterns:
 
 /* Backgrounds */
 .umd-background-quarter-light
-.umd-background-full-dark
+.umd-background-full-dark;
 ```
 
 ### CSS-in-JS Objects
@@ -131,7 +131,11 @@ Pre-built utility classes for common patterns:
 All styles are available as JavaScript objects:
 
 ```javascript
-import { animation, element, layout } from '@universityofmaryland/web-styles-library';
+import {
+  animation,
+  element,
+  layout,
+} from '@universityofmaryland/web-styles-library';
 
 // Animation utilities
 const fadeIn = animation.line.fadeInSimpleDark;
@@ -209,17 +213,16 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 async function loadStyles() {
   const preRender = await Styles.preRenderCss;
   const postRender = await Styles.postRenderCss;
-  
+
   // Apply styles to document
   const fonts = Styles.typography.fontFace.base64fonts;
-  document.head.insertAdjacentHTML('beforeend', 
-    `<style>${fonts} ${preRender}</style>`
+  document.head.insertAdjacentHTML(
+    'beforeend',
+    `<style>${fonts} ${preRender}</style>`,
   );
-  
+
   // After body renders
-  document.head.insertAdjacentHTML('beforeend', 
-    `<style>${postRender}</style>`
-  );
+  document.head.insertAdjacentHTML('beforeend', `<style>${postRender}</style>`);
 }
 
 // Option 2: Select specific styles
@@ -265,14 +268,17 @@ const responsiveCard = {
 
 ### Tailwind Integration
 
-See our [Tailwind Integration Guide](https://umd-digital.github.io/design-system/docs/styles/tailwind.html) for detailed setup instructions.
+See our [Tailwind Integration Guide](./tailwind.html) for detailed setup instructions.
 
 ## TypeScript Support
 
 Full TypeScript support with type definitions:
 
 ```typescript
-import type { JssObject, JssEntry } from '@universityofmaryland/web-styles-library';
+import type {
+  JssObject,
+  JssEntry,
+} from '@universityofmaryland/web-styles-library';
 
 // Type-safe style objects
 const customStyle: JssObject = {
@@ -299,6 +305,7 @@ const customStyle: JssObject = {
 ## Accessibility
 
 All styles follow WCAG 2.1 AA guidelines:
+
 - Color contrast ratios meet standards
 - Focus states are clearly visible
 - Typography supports readability
@@ -306,10 +313,10 @@ All styles follow WCAG 2.1 AA guidelines:
 
 ## Documentation
 
-- **[Complete Style Reference](https://umd-digital.github.io/design-system/docs/styles/)** - All modules and utilities
-- **[Design Tokens](https://umd-digital.github.io/design-system/docs/styles/modules/token.html)** - Colors, spacing, typography
-- **[Tailwind Guide](https://umd-digital.github.io/design-system/docs/styles/tailwind.html)** - Tailwind CSS integration
-- **[Layout System](https://umd-digital.github.io/design-system/docs/styles/modules/layout.html)** - Grid and spacing utilities
+- **[Complete Style Reference](./)** - All modules and utilities
+- **[Design Tokens](./modules/token.html)** - Colors, spacing, typography
+- **[Tailwind Guide](./tailwind.html)** - Tailwind CSS integration
+- **[Layout System](./modules/layout.html)** - Grid and spacing utilities
 
 ## Testing
 

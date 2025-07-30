@@ -19,4 +19,5 @@
   "out": "../../docs/styles",
   "readme": "README.md",
   "githubPages": true,
+  "logLevel": "Error"
 }

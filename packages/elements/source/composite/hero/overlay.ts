@@ -26,25 +26,11 @@ const ANIMATION_CONFIG = {
 } as const;
 
 const CLASS_NAMES = {
-  CONTAINER: 'umd-hero-overlay',
+  COMPOSITE: 'umd-hero-overlay',
+  CONTAINER: 'umd-hero-overlay__container',
   ASSET: 'umd-hero-overlay__asset',
   TEXT: 'umd-hero-overlay__text',
   TEXT_CONTENT: 'umd-hero-overlay__text-content',
-} as const;
-
-const THEME_VALUES = {
-  HEADLINE_CHAR_THRESHOLD: 30,
-  HEADLINE_LARGE_SIZE: '80px',
-  GRADIENT_OVERLAY:
-    'linear-gradient(90deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, .8) 50%, rgba(0, 0, 0, 0) 75%)',
-  HEIGHTS: {
-    MOBILE_MIN: '640px',
-    DESKTOP_MIN: '764px',
-  },
-  WIDTHS: {
-    ASSET: '60%',
-  },
-  OVERLAY_RIGHT: '50px',
 } as const;
 
 const keyFrameHeroResize = `
@@ -115,7 +101,7 @@ const createAsset = ({
       element: {
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
           position: 'absolute',
-          width: THEME_VALUES.WIDTHS.ASSET,
+          width: '60%',
           height: `calc(100% - ${Styles.token.spacing['5xl']})`,
           right: 0,
           top: 0,
@@ -141,14 +127,14 @@ const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline =
-    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD;
+    characterCount > 30;
 
   if (!headline) return null;
 
   const desktopStyles = {
     [`@container (${Styles.token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
-        fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE,
+        fontSize: '80px',
       }),
     },
   };
@@ -247,42 +233,6 @@ const createText = (
   });
 };
 
-const buildCompositeStyles = () => {
-  return {
-    element: {
-      position: 'relative',
-      backgroundColor: Styles.token.color.black,
-      overflow: 'clip',
-
-      [`@container (${Styles.token.media.queries.large.max})`]: {
-        display: 'flex',
-        flexDirection: 'column-reverse',
-      },
-
-      [`@container (${Styles.token.media.queries.tablet.min})`]: {
-        minHeight: THEME_VALUES.HEIGHTS.MOBILE_MIN,
-        display: 'flex',
-        alignItems: 'center',
-
-        ['&:before']: {
-          content: '""',
-          position: 'absolute',
-          left: 0,
-          right: THEME_VALUES.OVERLAY_RIGHT,
-          top: 0,
-          height: '100%',
-          background: THEME_VALUES.GRADIENT_OVERLAY,
-          zIndex: 999,
-        },
-      },
-
-      [`@container (${Styles.token.media.queries.desktop.min})`]: {
-        minHeight: THEME_VALUES.HEIGHTS.DESKTOP_MIN,
-      },
-    },
-  };
-};
-
 export default (props: HeroOverlayProps) => {
   const text = createText(props);
   const asset = createAsset(props);
@@ -292,10 +242,52 @@ export default (props: HeroOverlayProps) => {
     children.push(asset);
   }
 
-  const composite = ElementModel.createDiv({
+  const container = ElementModel.createDiv({
     className: CLASS_NAMES.CONTAINER,
     children,
-    elementStyles: buildCompositeStyles(),
+    elementStyles: {
+      element: {
+        position: 'relative',
+        backgroundColor: Styles.token.color.black,
+        overflow: 'clip',
+
+        [`@container (${Styles.token.media.queries.large.max})`]: {
+          display: 'flex',
+          flexDirection: 'column-reverse',
+        },
+
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          minHeight: '640px',
+          display: 'flex',
+          alignItems: 'center',
+
+          ['&:before']: {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            right: '50px',
+            top: 0,
+            height: '100%',
+            background: 'linear-gradient(90deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, .8) 50%, rgba(0, 0, 0, 0) 75%)',
+            zIndex: 999,
+          },
+        },
+
+        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+          minHeight: '764px',
+        },
+      },
+    },
+  });
+
+  const composite = ElementModel.createDiv({
+    className: CLASS_NAMES.COMPOSITE,
+    children: [container],
+    elementStyles: {
+      element: {
+        containerType: 'inline-size',
+      },
+    },
   });
 
   composite.styles += keyFrameHeroResize;

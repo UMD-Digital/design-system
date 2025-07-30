@@ -32,39 +32,6 @@ const ANIMATION_CONFIG = {
   },
 } as const;
 
-const THEME_VALUES = {
-  ASPECT_RATIO: '16 / 9',
-  MAX_WIDTHS: {
-    TEXT_CONTAINER: '950px',
-    TEXT: '720px',
-  },
-  OVERLAY_BACKGROUND: 'rgba(0, 0, 0, 0.6)',
-  HEIGHT_REDUCTION_FACTOR: 0.9,
-  DEBOUNCE_DELAY: 20,
-  CONTAINER_PADDING: '24px',
-} as const;
-
-const VIDEO_STYLES = {
-  MOBILE: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-  },
-  TABLET_AND_UP: {
-    [`@media (${Styles.token.media.queries.tablet.min})`]: {
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 'auto',
-      height: 'auto',
-      minWidth: '100%',
-      minHeight: '100%',
-    },
-  },
-} as const;
-
 const createHeadline = (headline?: HTMLElement | null) => {
   if (!headline) return null;
 
@@ -92,7 +59,7 @@ const createText = (text?: HTMLElement | null) => {
     element: text,
     elementStyles: {
       element: {
-        maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT,
+        maxWidth: '720px',
         marginLeft: 'auto',
         marginRight: 'auto',
         opacity: 0,
@@ -141,8 +108,8 @@ const createTextContainer = (
       element: {
         zIndex: 99,
         textAlign: 'center',
-        width: `calc(100% - ${THEME_VALUES.CONTAINER_PADDING})`,
-        maxWidth: THEME_VALUES.MAX_WIDTHS.TEXT_CONTAINER,
+        width: `calc(100% - 24px)`,
+        maxWidth: '950px',
         padding: `${Styles.token.spacing.xl} ${Styles.token.spacing.md}`,
 
         ['& *']: {
@@ -163,7 +130,7 @@ const createTextContainer = (
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: THEME_VALUES.OVERLAY_BACKGROUND,
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
         zIndex: 98,
         opacity: 0,
         transition: `opacity ${ANIMATION_CONFIG.OVERLAY_FADE.DURATION} ${ANIMATION_CONFIG.OVERLAY_FADE.EASING}`,
@@ -178,8 +145,21 @@ const createVideo = (video: HTMLVideoElement) => {
     className: CLASS_NAMES.VIDEO,
     elementStyles: {
       element: {
-        ...VIDEO_STYLES.MOBILE,
-        ...VIDEO_STYLES.TABLET_AND_UP,
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+
+        [`@media (${Styles.token.media.queries.tablet.min})`]: {
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'auto',
+          height: 'auto',
+          minWidth: '100%',
+          minHeight: '100%',
+        },
       },
     },
   });
@@ -211,9 +191,7 @@ const createEventHandlers = (
 ) => {
   const eventResize = () => {
     if (composite.element.offsetHeight > window.innerHeight) {
-      composite.element.style.height = `${
-        window.innerHeight * THEME_VALUES.HEIGHT_REDUCTION_FACTOR
-      }px`;
+      composite.element.style.height = `${window.innerHeight * 0.9}px`;
     }
   };
 
@@ -230,7 +208,7 @@ const createEventHandlers = (
 
   window.addEventListener(
     'resize',
-    Utils.performance.debounce(eventResize, THEME_VALUES.DEBOUNCE_DELAY),
+    Utils.performance.debounce(eventResize, 20),
   );
 
   return { load: eventLoad };
@@ -244,7 +222,7 @@ export default (props: HeroVideoArrowProps) => {
     className: CLASS_NAMES.COMPOSITE,
     elementStyles: {
       element: {
-        aspectRatio: THEME_VALUES.ASPECT_RATIO,
+        aspectRatio: '16 / 9',
         width: '100%',
       },
     },
@@ -265,6 +243,7 @@ export default (props: HeroVideoArrowProps) => {
     children: wrapperChildren,
     elementStyles: {
       element: {
+        containerType: 'inline-size',
         position: 'relative',
         overflow: 'hidden',
         height: '100%',

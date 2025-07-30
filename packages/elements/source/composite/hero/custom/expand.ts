@@ -57,15 +57,6 @@ const ANIMATION_CONFIG = {
   },
 } as const;
 
-const THEME_VALUES = {
-  HEADLINE_CHAR_THRESHOLD: 30,
-  HEADLINE_LARGE_SIZE: '96px',
-  HEADLINE_FONT_WEIGHT: 800,
-  OVERLAY_BACKGROUND: 'rgba(0,0,0,0.65)',
-  STICKY_HEIGHT: '100vh',
-  TABLET_HEIGHT: '200vh',
-} as const;
-
 const keyFrameImgOverlay = `
   @keyframes ${ANIMATION_CONFIG.IMAGE_OVERLAY.NAME} {
     from { opacity: 0; }
@@ -103,7 +94,7 @@ const createImageOverlay = () => {
         left: 0,
         height: '100%',
         width: '100%',
-        background: THEME_VALUES.OVERLAY_BACKGROUND,
+        background: 'rgba(0,0,0,0.65)',
         opacity: 1,
 
         ...Utils.theme.media.withViewTimelineAnimation({
@@ -242,15 +233,14 @@ const createEyebrow = (eyebrow?: HTMLElement | null) => {
 
 const createHeadline = (headline?: HTMLElement | null) => {
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline =
-    characterCount > THEME_VALUES.HEADLINE_CHAR_THRESHOLD;
+  const isOverwriteHeadline = characterCount > 30;
 
   if (!headline) return null;
 
   const desktopStyles = {
     [`@container (${Styles.token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
-        fontSize: THEME_VALUES.HEADLINE_LARGE_SIZE,
+        fontSize: '96px',
       }),
     },
   };
@@ -260,7 +250,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
     elementStyles: {
       element: {
         color: Styles.token.color.white,
-        fontWeight: THEME_VALUES.HEADLINE_FONT_WEIGHT,
+        fontWeight: 800,
         textTransform: 'uppercase',
         textWrap: 'balance',
         ...desktopStyles,
@@ -398,7 +388,7 @@ const createSticky = (props: HeroExpandProps) => {
           ...Utils.theme.media.withViewTimelineAnimation({
             position: 'sticky',
             top: 0,
-            height: THEME_VALUES.STICKY_HEIGHT,
+            height: '100vh',
           }),
         },
 
@@ -410,27 +400,6 @@ const createSticky = (props: HeroExpandProps) => {
   });
 };
 
-const buildCompositeStyles = () => {
-  return {
-    element: {
-      ...Utils.theme.media.withViewTimelineAnimation({
-        position: 'relative',
-
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          height: THEME_VALUES.TABLET_HEIGHT,
-        },
-      }),
-
-      ['& img, & video']: {
-        display: 'block',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-      },
-    },
-  };
-};
-
 export default (props: HeroExpandProps) => {
   const sticky = createSticky(props);
 
@@ -438,7 +407,25 @@ export default (props: HeroExpandProps) => {
     element: document.createElement('div'),
     className: CLASS_NAMES.CONTAINER,
     children: [sticky],
-    elementStyles: buildCompositeStyles(),
+    elementStyles: {
+      element: {
+        containerType: 'inline-size',
+        ...Utils.theme.media.withViewTimelineAnimation({
+          position: 'relative',
+
+          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+            height: '200vh',
+          },
+        }),
+
+        ['& img, & video']: {
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        },
+      },
+    },
   });
 
   const setTopPosition = ({ value }: { value: string | null }) => {

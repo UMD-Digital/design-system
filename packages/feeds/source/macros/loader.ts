@@ -1,6 +1,9 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { Model } from '@universityofmaryland/web-elements-library';
+
 const ID_UMD_LOADER = 'umd-loader-container';
 
-export const styles = `
+const keyframes = `
   @keyframes loader-first-animation {
     0% {
       transform: scale(0);
@@ -27,71 +30,96 @@ export const styles = `
       transform: translate(24px, 0);
     }
   }
-
-  .${ID_UMD_LOADER} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    min-height: 40px;
-    position: relative;
-    grid-column: 1 / -1;
-  }
-
-  .${ID_UMD_LOADER} > div {
-    position: relative;
-  }
-
-  .${ID_UMD_LOADER} > div > div {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--grayDark);
-    animation-timing-function: cubic-bezier(0, 1, 1, 0);
-  }
-
-  .${ID_UMD_LOADER} > div > div:first-child {
-    left: 5px;
-    animation: loader-first-animation 0.6s infinite;
-  }
-
-  .${ID_UMD_LOADER} > div > div:nth-child(2) {
-    left: 5px;
-    animation: loader-middle-animation 0.6s infinite;
-  }
-
-  .${ID_UMD_LOADER} > div > div:nth-child(3) {
-    left: 24px;
-    animation: loader-middle-animation 0.6s infinite;
-  }
-
-  .${ID_UMD_LOADER} > div > div:last-child {
-    left: 45px;
-    animation: loader-last-animation 0.6s infinite;
-  }
 `;
 
-const create = () => {
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const innerElmOne = document.createElement('div');
-  const innerElmTwo = document.createElement('div');
-  const innerElmThree = document.createElement('div');
-  const innerElmFour = document.createElement('div');
+const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
+  const defaultDotStyles = {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '8px',
+    height: '8px',
+    borderRadius: '50%',
+    background: `${Styles.token.color.gray.dark}`,
+    animationTimingFunction: 'cubic-bezier(0, 1, 1, 0)',
 
-  container.classList.add(ID_UMD_LOADER);
+    ...(isThemeDark && {
+      background: `${Styles.token.color.gray.light}`,
+    }),
+  };
 
-  wrapper.appendChild(innerElmOne);
-  wrapper.appendChild(innerElmTwo);
-  wrapper.appendChild(innerElmThree);
-  wrapper.appendChild(innerElmFour);
+  const innerElmOne = Model.ElementModel.createDiv({
+    className: `${ID_UMD_LOADER}-one`,
+    elementStyles: {
+      element: {
+        ...defaultDotStyles,
+        left: '5px',
+        animation: 'loader-first-animation 0.6s infinite',
+      },
+    },
+  });
 
-  container.appendChild(wrapper);
+  const innerElmTwo = Model.ElementModel.createDiv({
+    className: `${ID_UMD_LOADER}-two`,
+    elementStyles: {
+      element: {
+        ...defaultDotStyles,
+        left: '5px',
+        animation: 'loader-middle-animation 0.6s infinite',
+      },
+    },
+  });
 
-  return container;
+  const innerElmThree = Model.ElementModel.createDiv({
+    className: `${ID_UMD_LOADER}-three`,
+    elementStyles: {
+      element: {
+        ...defaultDotStyles,
+        left: '24px',
+        animation: 'loader-middle-animation 0.6s infinite',
+      },
+    },
+  });
+  const innerElmFour = Model.ElementModel.createDiv({
+    className: `${ID_UMD_LOADER}-four`,
+    elementStyles: {
+      element: {
+        ...defaultDotStyles,
+        left: '45px',
+        animation: 'loader-last-animation 0.6s infinite',
+      },
+    },
+  });
+
+  const wrapper = Model.ElementModel.createDiv({
+    className: `${ID_UMD_LOADER}-wrapper`,
+    children: [innerElmOne, innerElmTwo, innerElmThree, innerElmFour],
+    elementStyles: {
+      element: {
+        position: 'relative',
+      },
+    },
+  });
+
+  const composite = Model.ElementModel.createDiv({
+    className: ID_UMD_LOADER,
+    children: [wrapper],
+    elementStyles: {
+      element: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '10px 0',
+        minHeight: '40px',
+        position: 'relative',
+        gridColumn: '1 / -1',
+      },
+    },
+  });
+
+  composite.styles += keyframes;
+
+  return composite;
 };
 
 const remove = ({ container }: { container: HTMLElement }) => {
@@ -100,10 +128,16 @@ const remove = ({ container }: { container: HTMLElement }) => {
   if (loader) loader.remove();
 };
 
-const display = ({ container }: { container: HTMLElement }) => {
-  const loader = create();
+const display = ({
+  container,
+  isThemeDark,
+}: {
+  container: HTMLElement;
+  isThemeDark?: boolean;
+}) => {
+  const loader = create({ isThemeDark });
 
-  container.appendChild(loader);
+  container.appendChild(loader.element);
 };
 
 export default {

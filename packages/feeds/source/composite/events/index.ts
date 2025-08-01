@@ -53,3 +53,21 @@ export { default as list } from './list';
  * @since 1.9.0
  */
 export { default as slider } from './slider';
+
+/**
+ * Creates a grouped layout component for displaying events organized by date.
+ *
+ * @param {ListProps} props - Configuration options for the grouped layout, including token, categories, row count, lazy load options and theme preference.
+ * @returns {ElementModel} An object containing the grouped element, associated events, and styles.
+ * @example
+ * ```typescript
+ * import * as Feeds from '@universityofmaryland/web-feeds-library';
+ * const grouped = Feeds.events.grouped({
+ *   token: 'your-token',
+ *   numberOfRowsToStart: 10
+ * });
+ * document.querySelector('.container').appendChild(grouped.element);
+ * ```
+ * @since 1.13.0
+ */
+export { default as grouped } from './grouped';

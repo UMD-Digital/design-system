@@ -152,22 +152,14 @@ describe('Events Grouped Component', () => {
     );
   });
 
-  test('uses custom group layout element', () => {
-    const component = grouped({
+  test('uses stacked layout element', () => {
+    grouped({
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
     });
 
-    // The grouped component uses its own groupLayout function, not feedElements.layout.stacked
-    expect(component.element).toBeInstanceOf(HTMLDivElement);
-    expect(feedFetch.start).toHaveBeenCalledWith(
-      expect.objectContaining({
-        layoutElement: expect.objectContaining({
-          element: expect.any(HTMLElement),
-        }),
-      }),
-    );
+    expect(feedElements.layout.stacked).toHaveBeenCalledTimes(1);
   });
 
   test('includes theme dark flag in props when set', () => {

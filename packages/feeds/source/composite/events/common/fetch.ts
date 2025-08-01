@@ -97,8 +97,6 @@ const getEntries = async ({
       graceFail({ message: `Feed data errors: ${feedData.message}` });
   }
 
-  console.log('Feed data fetched successfully:', feedData);
-
   return feedData.data.entries.events;
 };
 

@@ -46,6 +46,7 @@ export default (props: CardOverlayProps) => {
     children,
     elementStyles: {
       element: {
+        containerType: 'inline-size',
         padding: `${Styles.token.spacing.lg} ${Styles.token.spacing.md}`,
         minHeight: '360px',
         height: '100%',

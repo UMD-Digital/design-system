@@ -255,8 +255,6 @@ if (card) {
 ## Documentation
 
 - **[Component Reference](./)** - Complete API documentation
-- **[TypeScript APIs](./modules/)** - Module exports and types
-- **[Component Catalog](./interfaces/)** - Component interfaces
 - **[Usage Examples](./usage.html)** - Practical implementation guide with real-world examples
 - **[Advanced Guide](./advanced-usage.html)** - TypeScript, testing, reactive components, and custom development
 - **[Design System](https://designsystem.umd.edu)** - Full design system docs

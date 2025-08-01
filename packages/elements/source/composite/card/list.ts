@@ -122,6 +122,8 @@ export default (props: CardListProps) => {
     className: 'card-list-wrapper',
     elementStyles: {
       element: {
+        containerType: 'inline-size',
+
         ...theme.media.createContainerQuery(
           'min-width',
           mediumBreakpointStart,

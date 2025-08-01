@@ -1,17 +1,9 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from 'utilities';
-import { assets, textLockup } from 'atomic';
+import { textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import {
-  type PersonContactPropsWithStyles,
-  type PersonTextLockupPropsWithStyles,
-  type PersonFullProps,
-} from '../../_types';
-import {
-  type ElementVisual,
-  type ImageElement,
-  type LinkElement,
-} from '../../../_types';
+import { type PersonTextLockupPropsWithStyles } from '../../_types';
+import { type ElementVisual } from '../../../_types';
 
 const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
 const mediumBreakpointStart = Styles.token.media.breakpointValues.medium.min;
@@ -55,6 +47,8 @@ export const image = ({
           },
         ),
 
+        ...customStyles,
+
         '& img': {
           ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
             height: 'auto !important',
@@ -79,8 +73,6 @@ export const image = ({
             },
           ),
         }),
-
-        ...customStyles,
       },
     },
   });

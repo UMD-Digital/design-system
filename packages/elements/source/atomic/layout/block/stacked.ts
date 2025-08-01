@@ -172,6 +172,7 @@ export const container = ({
     children,
     elementStyles: {
       element: {
+        containerType: 'inline-size',
         height: '100%',
 
         // Theme Dark

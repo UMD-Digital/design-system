@@ -182,6 +182,7 @@ export default (props: CardOverlayProps) => {
     elementStyles: {
       element: {
         height: '100%',
+        containerType: 'inline-size',
 
         [`&:hover .${imageContainerClass}:before, &:focus .${imageContainerClass}:before`]:
           {

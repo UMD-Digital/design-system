@@ -46,6 +46,7 @@ export default (props: CardIconProps) => {
     children,
     elementStyles: {
       element: {
+        containerType: 'inline-size',
         height: '100%',
         overflow: 'hidden',
         position: 'relative',

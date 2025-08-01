@@ -378,7 +378,6 @@ const createGridLayout = (
     width: '100%',
     display: 'grid',
     gridGap: `${Styles.token.spacing.min}`,
-    backgroundColor: 'var(--grayDark)',
 
     [`@media (${Styles.token.media.queries.tablet.min})`]: {
       gridGap: `${Styles.token.spacing.md}`,

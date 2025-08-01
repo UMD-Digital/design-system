@@ -11,7 +11,7 @@ export default (props: BlockProps): ElementModel =>
   (() => {
     const { isThemeDark, isTransparent, numberOfColumnsToShow, isTypeOverlay } =
       props;
-    const loader = feedMacros.loader.create();
+    const loader = feedMacros.loader.create({ isThemeDark });
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);
@@ -24,7 +24,7 @@ export default (props: BlockProps): ElementModel =>
     let totalEntries = 0;
     let offset = 0;
     let styles = `
-      ${feedMacros.loaderStyles}
+      ${loader.styles}
     `;
     let shadowRoot: ShadowRoot | null = null;
 
@@ -85,7 +85,7 @@ export default (props: BlockProps): ElementModel =>
       ? feedElements.layout.grid({ count: numberOfColumnsToShow })
       : feedElements.layout.gridGap({ count: numberOfColumnsToShow });
 
-    container.appendChild(loader);
+    container.appendChild(loader.element);
 
     feedFetch.start({
       ...props,

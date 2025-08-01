@@ -19,7 +19,6 @@ const classNamePrefix = 'umd-asset-image';
 const base = {
   position: `relative`,
   display: `inline-block`,
-  height: `100%`,
   overflow: `hidden`,
 };
 
@@ -29,7 +28,6 @@ const base = {
  */
 const imageBase = {
   display: `block`,
-  height: '100%',
 };
 
 /**
@@ -41,6 +39,7 @@ const imageScaled = {
   objectFit: 'cover',
   objectPosition: 'center',
   width: '100%',
+  height: '100%',
 };
 
 /**
@@ -205,6 +204,7 @@ export const wrapperScaled: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-wrapper-scaled`,
   ...base,
   width: '100%',
+  height: `100%`,
   ...linkImageScaled,
   ...signBase,
 });

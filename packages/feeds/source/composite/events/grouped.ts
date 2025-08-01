@@ -160,6 +160,7 @@ export default (props: ListProps): ElementModel =>
     const displayResults = async ({ feedData }: FeedDisplay) => {
       const groupedEvents = groupEventsByDate(feedData);
       const entries: { element: HTMLElement; styles: string }[] = [];
+      let actualEventCount = 0;
 
       groupedEvents.forEach((group) => {
         const dateHeadline = document.createElement('p');
@@ -192,6 +193,8 @@ export default (props: ListProps): ElementModel =>
           }),
         );
 
+        actualEventCount += group.events.length;
+
         entries.push(
           Model.ElementModel.createDiv({
             className: 'umd-feed-events-grouped-entries',
@@ -208,12 +211,19 @@ export default (props: ListProps): ElementModel =>
         );
       });
 
+      // Override the offset with actual event count to fix lazy load
+      const originalSetOffset = helperFunctions.setOffset;
+      helperFunctions.setOffset = () => originalSetOffset(actualEventCount);
+
       await feedDisplay.resultLoad({
         ...props,
         ...helperFunctions,
         displayResults,
         entries,
       });
+
+      // Restore original setOffset
+      helperFunctions.setOffset = originalSetOffset;
 
       if (shadowRoot) {
         feedDisplay.setShadowStyles({

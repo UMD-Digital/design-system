@@ -63,8 +63,6 @@ const getCount = async ({ variables }: { variables: TypeAPIFeedVariables }) => {
     query: EVENTS_COUNT_QUERY,
   });
 
-  console.log(feedData);
-
   if (!feedData || !feedData.data || feedData.message) {
     if (feedData.message) console.error(feedData.message);
     return null;
@@ -98,8 +96,6 @@ const getEntries = async ({
     if (!feedData.message)
       graceFail({ message: `Feed data errors: ${feedData.message}` });
   }
-
-  console.log('Feed data fetched successfully:', feedData);
 
   return feedData.data.entries.events;
 };

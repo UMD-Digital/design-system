@@ -1,62 +1,67 @@
-// declare global {
-//   interface Window {
-//     UMDFeedEventsGrouped: typeof UMDFeedEventsGrouped;
-//   }
-// }
+import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { Register } from 'model';
+import { CommonFeedEventsData } from './common';
+import { CreateComponentFunction, ComponentRegistration } from 'api/_types';
 
-// import * as Feeds from '@universityofmaryland/web-feeds-library';
-// import { Markup, Styles } from 'utilities';
-// import { CommonFeedEventsData } from './common';
+/**
+ * Tag name for the events grid feed component
+ * @internal
+ */
+const tagName = 'umd-feed-events-grouped';
 
-// const { FeedsEvents } = Feeds;
+/**
+ * Creates an events grid feed component
+ * @param element - The host HTML element
+ * @returns Configured feed component
+ * @internal
+ */
+const createComponent: CreateComponentFunction = (element) => {
+  const data = CommonFeedEventsData({ element });
 
-// const styles = `
-//   :host {
-//     display: block;
-//   }
+  if (!data) {
+    console.error('Feed events requires a token to be set');
+    return { element: document.createElement('div'), styles: '' };
+  }
 
-//   ${Styles.reset}
-//   ${FeedsEvents.Styles}
-// `;
+  return Feeds.events.grouped({
+    ...data,
+    isLazyLoad: true,
+    numberOfRowsToStart: 10,
+  });
+};
 
-// const ELEMENT_NAME = 'umd-feed-events-grouped';
-// class UMDFeedEventsGrouped extends HTMLElement {
-//   _shadow: ShadowRoot;
+/**
+ * Events Grouped List Feed Component
+ *
+ * Displays a dynamic list of event cards grouped by date, fetched from an external feed.
+ * Supports lazy loading.
+ *
+ * ## Custom Element
+ * `<umd-feed-events-grouped>`
+ *
+ * ## Attributes
+ * - `data-token` - API authentication token (required)
+ * - `data-theme` - Theme options:
+ *   - `dark` - Dark theme styling
+ *
+ * @example
+ * ```html
+ * <!-- Basic events grid -->
+ * <umd-feed-events-grouped
+ *   data-token="your-api-token">
+ * </umd-feed-events-grouped>
+ * ```
+ *
+ *
+ * @category Components
+ * @since 1.13.0
+ */
+const registration: ComponentRegistration = Register.webComponent({
+  tagName,
+  createComponent,
+  afterConnect: (element, shadow) => {
+    element?.events?.callback(shadow);
+  },
+});
 
-//   constructor() {
-//     const template = Markup.create.Node.stylesTemplate({
-//       styles,
-//     });
-
-//     super();
-//     this._shadow = this.attachShadow({ mode: 'open' });
-//     this._shadow.appendChild(template.content.cloneNode(true));
-//   }
-
-//   connectedCallback() {
-//     const data = CommonFeedEventsData({
-//       element: this,
-//       numberOfRowsToStartDefault: 10,
-//     });
-//     if (!data) return;
-
-//     this._shadow.appendChild(
-//       FeedsEvents.CreateElement({
-//         ...data,
-//         isTypeGrouped: true,
-//       }),
-//     );
-//   }
-// }
-
-// export default () => {
-//   const hasElement =
-//     document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-//   if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-//     window.UMDFeedEventsGrouped = UMDFeedEventsGrouped;
-//     window.customElements.define(ELEMENT_NAME, UMDFeedEventsGrouped);
-//   }
-
-//   return '';
-// };
+export default registration;

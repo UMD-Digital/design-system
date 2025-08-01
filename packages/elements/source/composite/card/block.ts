@@ -1,18 +1,23 @@
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, layout, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import { theme } from 'utilities';
 import { CardBlockProps } from './_types';
 import { type ElementVisual } from '../../_types';
+
+const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
 
 export default (props: CardBlockProps) => {
   const {
     dateSign,
     hasBorder,
+    hasEyebrowRibbon,
     image,
     isAligned,
     isThemeDark,
     isTransparent,
     newsId,
   } = props;
+  const shouldImageBeFullWidth = hasEyebrowRibbon;
   const children: ElementVisual[] = [];
   const sizingProps = {
     isThemeDark,
@@ -31,6 +36,14 @@ export default (props: CardBlockProps) => {
             dateSign,
           }),
         ],
+        customStyles: {
+          ...(shouldImageBeFullWidth && {
+            ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+              marginBottom: Styles.token.spacing.md,
+              width: '100%',
+            }),
+          }),
+        },
         ...sizingProps,
       }),
     );

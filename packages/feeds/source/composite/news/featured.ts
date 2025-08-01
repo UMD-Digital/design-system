@@ -20,7 +20,7 @@ export default (props: FeaturedProps): ElementModel =>
       isTransparent,
       overwriteStickyPosition,
     } = props;
-    const loader = feedMacros.loader.create();
+    const loader = feedMacros.loader.create({ isThemeDark });
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);
@@ -34,7 +34,7 @@ export default (props: FeaturedProps): ElementModel =>
     let totalEntries = 0;
     let offset = 0;
     let styles = `
-      ${feedMacros.loaderStyles}
+      ${loader.styles}
     `;
     let shadowRoot: ShadowRoot | null = null;
 
@@ -183,7 +183,7 @@ export default (props: FeaturedProps): ElementModel =>
       );
     };
 
-    container.appendChild(loader);
+    container.appendChild(loader.element);
 
     feedFetch.start({
       ...props,

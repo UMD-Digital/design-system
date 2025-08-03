@@ -175,6 +175,7 @@ export default ({
 
     return {
       element: container,
+      className: ELEMENT_SLIDE_INDICATOR_CONTAINER,
       styles,
       position: eventPosition,
     };

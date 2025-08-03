@@ -60,6 +60,7 @@ export default (props: Props) => {
     customStyles,
     isShowCaption = false,
   } = props;
+
   const children: ElementVisual[] = [];
   const attributeCaption = image.getAttribute(ATTRIBUTE_CAPTION);
   const attributeCredit = image.getAttribute(ATTRIBUTE_CREDIT);

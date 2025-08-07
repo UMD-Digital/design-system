@@ -201,8 +201,8 @@ const createCenter = ({ images, video }: CenterProps) => {
 
   if (video) {
     children.push(
-      createVideoWrapper(video),
       createImageWrapper(images[0]),
+      createVideoWrapper(video),
       createImageWrapper(images[1]),
     );
   } else {

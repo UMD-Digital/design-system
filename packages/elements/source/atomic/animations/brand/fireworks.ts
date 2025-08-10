@@ -60,17 +60,17 @@ const RESPONSIVE_HEIGHT = {
 };
 
 const popInKeyframe = `
-@keyframes popIn {
-  from { opacity: 1; }
-  to   { opacity: 1; }
-}
+  @keyframes popIn {
+    from { opacity: 1; }
+    to   { opacity: 1; }
+  }
 `;
 
 const fadeOutKeyframe = `
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
 `;
 
 const getAllMediaInGrid = (grid: ElementVisual) =>

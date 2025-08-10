@@ -1,318 +1,320 @@
-import {
-  layout,
-  token,
-  typography,
-} from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-import TextContainer, { TypePathwayTextContainer } from './elements/text';
-import ImageContainer, {
-  TypePathwayHeroImageContainer,
-} from './elements/image';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementModel } from 'model';
+import { assets, textLockup } from 'atomic';
+import { theme } from 'utilities';
+import { type ElementVisual } from '../../_types';
 
-type TypePathwayHeroProps = TypePathwayTextContainer &
-  TypePathwayHeroImageContainer & {
-    isImagePositionLeft: boolean;
-    includesAnimation?: boolean;
-    includedStyles?: string;
-  };
+interface PathwayHeroProps {
+  actions: HTMLElement | null;
+  eyebrow: HTMLElement | null;
+  headline: HTMLElement | null;
+  image: HTMLImageElement | null;
+  includesAnimation?: boolean;
+  isImagePositionLeft?: boolean;
+  isThemeDark?: boolean;
+  text: HTMLElement | null;
+  video: HTMLVideoElement | null;
+}
 
-const MEDIUM = 1000;
-const LARGE = 1300;
+// Constants
+const BREAK_SMALL = 999;
+const BREAK_MEDIUM = 1000;
+const BREAK_LARGE = 1300;
 
-const ELEMENT_NAME = 'umd-element-pathway';
-const ATTRIBUTE_IMAGE_POSITION = 'image-position';
-const ATTRIBUTE_HERO = 'hero';
-const ATTRIBUTE_ANIMATION = 'data-animation';
-
-const PATHWAY_HERO_CONTAINER = 'pathway-hero-container';
-const PATHWAY_HERO_CONTAINER_WRAPPER = 'pathway-hero-container-wrapper';
-const PATHWAY_HERO_CONTAINER_LOCK = 'pathway-hero-container-lock';
-
-const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
-const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
-const IS_WITH_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
-
-const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_HERO_CONTAINER} .${ImageContainer.Elements.container}`;
-const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.wrapper}`;
-const OVERWRITE_TEXT_HEADLINE = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.headline}`;
-const OVERWRITE_TEXT_RICHTEXT = `.${PATHWAY_HERO_CONTAINER} .${TextContainer.Elements.text}`;
-
-const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
-const OVERWRITE_IMAGE_RIGHT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_WRAPPER}`;
-const OVERWRITE_IMAGE_RIGHT_CONTAINER_IMAGE = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ImageContainer.Elements.container}`;
-const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.container}`;
-const OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.wrapper}`;
-
-const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
-const OVERWRITE_IMAGE_LEFT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_WRAPPER}`;
-const OVERWRITE_IMAGE_LEFT_CONTAINER_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${TextContainer.Elements.wrapper}`;
-
-const OVERWRITE_CONTAINER_ANIMATION = `.${PATHWAY_HERO_CONTAINER}${IS_WITH_ANIMATION}`;
-const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
-const OVERWRITE_ANIMATION_IMAGE_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
-
-// prettier-ignore
-const OverwriteImageRightStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_WRAPPER} {
-      padding-right: 50%;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_CONTAINER_IMAGE} {
-      order: 2;
-      left: inherit;
-      right: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT} {
-      order: 1;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_CONTAINER_TEXT_WRAPPER} {
-      padding-left: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-right: ${token.spacing['2xl']};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-right: ${token.spacing['4xl']};
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteImageLeftStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_LEFT_WRAPPER} {
-      padding-left: 50%;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_LEFT_CONTAINER_TEXT_WRAPPER} {
-      padding-right: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-left: ${token.spacing['2xl']};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_IMAGE_LEFT_CONTAINER} .${PATHWAY_HERO_CONTAINER_LOCK} {
-      padding-left: ${token.spacing['4xl']};
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteImageContainerStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} {
-      width: 50%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      height: 100%;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} div {
-      height: 100%;
-      width: 100%;
-      overflow: clip;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} img {
-      min-height: inherit;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  ${OVERWRITE_IMAGE_CONTAINER} video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-`;
-
-// prettier-ignore
-const OverwriteTextContainerStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${token.spacing.md} 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${token.spacing['4xl']} 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${token.spacing['8xl']} 0;
-    }
-  }
-
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_TEXT_HEADLINE}`]: typography.campaign.extralarge,
+const ANIMATION_CONFIG = {
+  RESIZE: {
+    DURATION: '1.5s',
+    TRANSFORM: {
+      FROM: 'scale(1.1)',
+      TO: 'scale(1)',
     },
-  })}
-
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_TEXT_HEADLINE} *`]: typography.campaign.extralarge,
+  },
+  SLIDE_UP: {
+    DURATION: '1.5s',
+    TRANSFORM: {
+      FROM: 'translateY(25px)',
+      TO: 'translateY(0)',
     },
-  })}
-
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`${OVERWRITE_TEXT_RICHTEXT} *`]: typography.sans.larger,
+    OPACITY: {
+      FROM: 0.2,
+      TO: 1,
     },
-  })}
-  
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${OVERWRITE_TEXT_RICHTEXT}`]: typography.sans.larger,
-    },
-  })}
-`;
+  },
+} as const;
 
-// prettier-ignore
-const AnimationStyles = `
+// Keyframe animations
+const keyFramePathwayResize = `
   @keyframes pathway-hero-resize {
-    from { transform: scale(1.1); }
-    to { transform: scale(1); }
+    from { transform: ${ANIMATION_CONFIG.RESIZE.TRANSFORM.FROM}; }
+    to { transform: ${ANIMATION_CONFIG.RESIZE.TRANSFORM.TO}; }
   }
+`;
 
+const keyFramePathwaySlideUp = `
   @keyframes pathway-hero-slide-up {
-    from { transform: translateY(25px); opacity: .2 }
-    to { transform: translateY(0); opacity: 1 }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    @media (prefers-reduced-motion: no-preference) {
-      ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} img,
-      ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} video{
-        animation: pathway-hero-resize forwards 1.5s;
-      }
+    from { 
+      transform: ${ANIMATION_CONFIG.SLIDE_UP.TRANSFORM.FROM}; 
+      opacity: ${ANIMATION_CONFIG.SLIDE_UP.OPACITY.FROM};
     }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    @media (prefers-reduced-motion: no-preference) {
-      ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
-        animation: pathway-hero-slide-up forwards 1.5s;
-      }
+    to { 
+      transform: ${ANIMATION_CONFIG.SLIDE_UP.TRANSFORM.TO}; 
+      opacity: ${ANIMATION_CONFIG.SLIDE_UP.OPACITY.TO};
     }
   }
 `;
 
-const LockStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${PATHWAY_HERO_CONTAINER_LOCK}`]: layout.space.horizontal.larger,
+const createAssetColumn = ({
+  image,
+  video,
+  includesAnimation,
+  isImagePositionLeft,
+}: Pick<
+  PathwayHeroProps,
+  'image' | 'video' | 'includesAnimation' | 'isImagePositionLeft'
+>) => {
+  const children: ElementVisual[] = [];
+
+  if (!image && !video) return;
+
+  if (video) {
+    children.push(
+      assets.video.observedAutoPlay({
+        video,
+        isScaled: true,
+        additionalElementStyles: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+      }),
+    );
+  }
+
+  if (image && !video) {
+    children.push(
+      assets.image.background({
+        image,
+        isScaled: true,
+        isShowCaption: true,
+      }),
+    );
+  }
+
+  return ElementModel.createDiv({
+    className: 'pathway-hero-container-asset-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        overflow: 'hidden',
+        position: 'relative',
+
+        [`@container (max-width: ${BREAK_SMALL}px)`]: {
+          aspectRatio: '16 / 9',
+          maxHeight: '50vh',
+        },
+
+        [`@container (min-width: ${BREAK_MEDIUM}px)`]: {
+          width: '50%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          height: '100%',
+
+          ...(!isImagePositionLeft && {
+            left: 'inherit',
+            right: 0,
+          }),
+        },
+
+        [`& img, & video`]: {
+          [`@container (min-width: ${BREAK_MEDIUM}px)`]: {
+            ...(includesAnimation && {
+              ...theme.media.withViewTimelineAnimation({
+                animation: `pathway-hero-resize forwards ${ANIMATION_CONFIG.RESIZE.DURATION}`,
+              }),
+            }),
+          },
+        },
+      },
     },
-  })}
+  });
+};
 
-  .${PATHWAY_HERO_CONTAINER_LOCK} {
-    position: relative;
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HERO_CONTAINER_LOCK} {
-      display: flex;
-      align-items: center;
-      min-height: 720px;
-    }
-  }
+const createHeadline = (props: Pick<PathwayHeroProps, 'headline'>) => {
+  const { headline } = props;
+  const characterCount = headline?.textContent?.trim().length || 0;
+  const isOverwriteHeadline = characterCount < 30;
 
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HERO_CONTAINER_LOCK} > * {
-      width: 100%;
-    }
-  }
-`;
+  if (!headline) return null;
 
-// prettier-ignore
-const STYLES_PATHWAY_HERO_ELEMENT = `
-  .${PATHWAY_HERO_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    position: relative;
-  }
-
-  ${LockStyles}
-  ${AnimationStyles}
-  ${OverwriteTextContainerStyles}
-  ${OverwriteImageContainerStyles}
-  ${OverwriteImageRightStyles}
-  ${OverwriteImageLeftStyles}
-`;
-
-export default (element: TypePathwayHeroProps) => {
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const lock = document.createElement('div');
-  const lockWrapper = document.createElement('div');
-  const {
-    isImagePositionLeft = false,
-    includesAnimation = true,
-    includedStyles,
-  } = element;
-
-  const textContainer = TextContainer.CreateElement(element);
-  const imageContainer = ImageContainer.CreateElement(element);
-  let styles = STYLES_PATHWAY_HERO_ELEMENT;
-
-  if (includedStyles) styles += includedStyles;
-
-  container.classList.add(PATHWAY_HERO_CONTAINER);
-  container.setAttribute(
-    ATTRIBUTE_IMAGE_POSITION,
-    isImagePositionLeft ? 'left' : 'right',
-  );
-
-  wrapper.classList.add(PATHWAY_HERO_CONTAINER_WRAPPER);
-  lock.classList.add(PATHWAY_HERO_CONTAINER_LOCK);
-
-  lockWrapper.appendChild(textContainer.element);
-  styles += textContainer.styles;
-  lock.appendChild(lockWrapper);
-
-  if (imageContainer) {
-    wrapper.appendChild(imageContainer.element);
-    styles += imageContainer.styles;
-  }
-  wrapper.appendChild(lock);
-
-  if (includesAnimation) container.setAttribute(ATTRIBUTE_ANIMATION, '');
-  container.setAttribute(ATTRIBUTE_HERO, '');
-  container.appendChild(wrapper);
-  return {
-    element: container,
-    styles,
+  const desktopStyles = {
+    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+      ...(isOverwriteHeadline && {
+        fontSize: '80px',
+      }),
+    },
   };
+
+  const elementStyles = {
+    element: {
+      color: Styles.token.color.black,
+      margin: '0 auto',
+      textTransform: 'uppercase',
+      marginTop: `${Styles.token.spacing.sm}`,
+      ...desktopStyles,
+    },
+    siblingAfter: {
+      marginTop: `${Styles.token.spacing.md}`,
+    },
+  };
+
+  return ElementModel.headline.campaignExtraLarge({
+    element: headline,
+    elementStyles,
+  });
+};
+
+const createTextColumn = (
+  props: Pick<
+    PathwayHeroProps,
+    'actions' | 'eyebrow' | 'headline' | 'isThemeDark' | 'text'
+  >,
+) => {
+  const { headline, eyebrow, text, ...rest } = props;
+
+  return textLockup.large({
+    ...rest,
+    ribbon: eyebrow,
+    textLargest: text,
+    headlineComposite: createHeadline({ headline }),
+    additionalStyles: {
+      maxWidth: '720px',
+    },
+  });
+};
+
+const createTextWrapper = (props: PathwayHeroProps) =>
+  ElementModel.createDiv({
+    className: 'pathway-hero-container-lock-wrapper',
+    children: [createTextColumn(props)],
+    elementStyles: {
+      element: {
+        width: '100%',
+
+        [`@container  (max-width: ${BREAK_SMALL}px)`]: {
+          padding: `${Styles.token.spacing.md} 0`,
+        },
+
+        [`@container  (min-width: ${BREAK_MEDIUM}px)`]: {
+          padding: `${Styles.token.spacing['4xl']} 0`,
+
+          ...(props.isImagePositionLeft && {
+            paddingRight: 0,
+          }),
+
+          ...(!props.isImagePositionLeft && {
+            paddingLeft: 0,
+          }),
+
+          ...(props.includesAnimation && {
+            ...theme.media.withViewTimelineAnimation({
+              animation: `pathway-hero-slide-up forwards ${ANIMATION_CONFIG.SLIDE_UP.DURATION}`,
+            }),
+          }),
+        },
+
+        [`@container  (min-width: ${BREAK_LARGE}px)`]: {
+          padding: `${Styles.token.spacing['8xl']} 0`,
+        },
+      },
+    },
+  });
+
+const createLockColumn = (props: PathwayHeroProps) =>
+  ElementModel.layout.spaceHorizontalLarger({
+    element: document.createElement('div'),
+    children: [createTextWrapper(props)],
+    elementStyles: {
+      element: {
+        position: 'relative',
+
+        [`@container (min-width: ${BREAK_MEDIUM}px)`]: {
+          display: 'flex',
+          alignItems: 'center',
+          minHeight: '720px',
+
+          ...(props.isImagePositionLeft && {
+            paddingRight: Styles.token.spacing['2xl'],
+          }),
+
+          ...(!props.isImagePositionLeft && {
+            paddingLeft: Styles.token.spacing['2xl'],
+            order: 1,
+          }),
+        },
+
+        [`@container (min-width: ${BREAK_LARGE}px)`]: {
+          ...(!props.isImagePositionLeft && {
+            paddingRight: Styles.token.spacing['4xl'],
+          }),
+
+          ...(props.isImagePositionLeft && {
+            paddingLeft: Styles.token.spacing['4xl'],
+          }),
+        },
+      },
+    },
+  });
+
+const createWrapper = (props: PathwayHeroProps) => {
+  const { isImagePositionLeft = false } = props;
+  const imageColumn = createAssetColumn(props);
+  const children: ElementVisual[] = [];
+
+  if (imageColumn) {
+    children.push(imageColumn);
+  }
+
+  children.push(createLockColumn(props));
+
+  return ElementModel.createDiv({
+    className: 'pathway-hero-container-wrapper',
+    elementStyles: {
+      element: {
+        position: 'relative',
+
+        ...(isImagePositionLeft && {
+          [`@container (min-width: ${BREAK_MEDIUM}px)`]: {
+            paddingLeft: '50%',
+          },
+        }),
+
+        ...(!isImagePositionLeft && {
+          [`@container (min-width: ${BREAK_MEDIUM}px)`]: {
+            paddingRight: '50%',
+          },
+        }),
+      },
+    },
+    children,
+  });
+};
+
+export default (props: PathwayHeroProps) => {
+  const composite = ElementModel.createDiv({
+    className: 'pathway-hero-container',
+    children: [createWrapper(props)],
+    elementStyles: {
+      element: {
+        containerType: 'inline-size',
+        position: 'relative',
+      },
+    },
+  });
+
+  composite.styles += keyFramePathwayResize;
+  composite.styles += keyFramePathwaySlideUp;
+
+  return composite;
 };

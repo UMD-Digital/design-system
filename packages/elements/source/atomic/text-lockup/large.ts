@@ -10,6 +10,7 @@ interface TypeTextLockupLarge {
   textLargest?: HTMLElement | null;
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
+  additionalStyles?: Record<string, unknown>;
 }
 
 export default (props: TypeTextLockupLarge) => {
@@ -20,6 +21,7 @@ export default (props: TypeTextLockupLarge) => {
       element: {
         zIndex: '9',
         position: 'relative',
+        ...props.additionalStyles,
       },
     },
   });

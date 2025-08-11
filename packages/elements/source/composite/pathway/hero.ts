@@ -144,7 +144,7 @@ const createAssetColumn = ({
 const createHeadline = (props: Pick<PathwayHeroProps, 'headline'>) => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount < 30;
+  const isOverwriteHeadline = characterCount > 30;
 
   if (!headline) return null;
 

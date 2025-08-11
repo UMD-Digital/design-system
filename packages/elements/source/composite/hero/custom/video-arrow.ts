@@ -1,9 +1,9 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
-import { animations, buttons } from 'atomic';
+import { animations, assets } from 'atomic';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '../../../_types';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
+import { type ElementVisual } from '../../../_types';
 
 // Extend base type to add animation property and ensure video is required
 interface HeroVideoArrowProps extends Omit<BaseHeroVideoArrowProps, 'video'> {
@@ -11,13 +11,7 @@ interface HeroVideoArrowProps extends Omit<BaseHeroVideoArrowProps, 'video'> {
   isAnimationOnLoad?: boolean;
 }
 
-const CLASS_NAMES = {
-  COMPOSITE: 'umd-element-hero-brand-video-declaration',
-  WRAPPER: 'hero-logo-brand-video-wrapper',
-  VIDEO: 'hero-logo-brand-video',
-  TEXT_CONTAINER: 'hero-logo-brand-text-container',
-  OVERLAY: 'hero-logo-brand-text-overlay',
-} as const;
+const OVERLAY_CLASS = 'hero-logo-brand-text-overlay';
 
 const ANIMATION_CONFIG = {
   TEXT_FADE: {
@@ -74,7 +68,7 @@ const createText = (text?: HTMLElement | null) => {
   });
 };
 
-const buildTextChildren = (
+const createTextChildren = (
   props: Pick<HeroVideoArrowProps, 'headline' | 'text'>,
 ): ElementVisual[] => {
   const { headline, text } = props;
@@ -96,13 +90,13 @@ const buildTextChildren = (
 const createTextContainer = (
   props: Pick<HeroVideoArrowProps, 'headline' | 'text'>,
 ) => {
-  const children = buildTextChildren(props);
+  const children = createTextChildren(props);
 
   if (children.length === 0) return null;
 
   const container = ElementModel.create({
     element: document.createElement('div'),
-    className: CLASS_NAMES.TEXT_CONTAINER,
+    className: 'hero-logo-brand-text-container',
     children,
     elementStyles: {
       element: {
@@ -121,7 +115,7 @@ const createTextContainer = (
 
   return ElementModel.create({
     element: document.createElement('div'),
-    className: CLASS_NAMES.OVERLAY,
+    className: OVERLAY_CLASS,
     children: [container],
     elementStyles: {
       element: {
@@ -140,27 +134,14 @@ const createTextContainer = (
 };
 
 const createVideo = (video: HTMLVideoElement) => {
-  return ElementModel.create({
-    element: video,
-    className: CLASS_NAMES.VIDEO,
-    elementStyles: {
-      element: {
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-
-        [`@media (${Styles.token.media.queries.tablet.min})`]: {
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: 'auto',
-          height: 'auto',
-          minWidth: '100%',
-          minHeight: '100%',
-        },
-      },
+  return assets.video.observedAutoPlay({
+    video,
+    additionalElementStyles: {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      top: 0,
+      left: 0,
     },
   });
 };
@@ -168,7 +149,7 @@ const createVideo = (video: HTMLVideoElement) => {
 const createAnimationSequence = (container: HTMLElement) => {
   return () => {
     const overlay = container.querySelector(
-      `.${CLASS_NAMES.OVERLAY}`,
+      `.${OVERLAY_CLASS}`,
     ) as HTMLDivElement;
     const headline = container.querySelector(
       `.${Styles.typography.campaign.fonts.extraLarge.className}`,
@@ -185,9 +166,7 @@ const createAnimationSequence = (container: HTMLElement) => {
 
 const createEventHandlers = (
   composite: ElementVisual,
-  video: HTMLVideoElement,
   overlay: ReturnType<typeof animations.brand.chevronFlow>,
-  buttonState: ReturnType<typeof buttons.videoState>,
 ) => {
   const eventResize = () => {
     if (composite.element.offsetHeight > window.innerHeight) {
@@ -197,13 +176,7 @@ const createEventHandlers = (
 
   const eventLoad = () => {
     overlay.events.load();
-    buttonState.events.setButtonPlay();
     eventResize();
-
-    if (Utils.accessibility.isPrefferdReducedMotion()) {
-      video.pause();
-      buttonState.events.setButtonPause();
-    }
   };
 
   window.addEventListener(
@@ -219,7 +192,7 @@ export default (props: HeroVideoArrowProps) => {
 
   const composite = ElementModel.create({
     element: document.createElement('section'),
-    className: CLASS_NAMES.COMPOSITE,
+    className: 'umd-element-hero-brand-video',
     elementStyles: {
       element: {
         aspectRatio: '16 / 9',
@@ -230,7 +203,6 @@ export default (props: HeroVideoArrowProps) => {
 
   const videoElement = createVideo(video);
   const textContainer = createTextContainer(props);
-  const buttonState = buttons.videoState({ video });
 
   const wrapperChildren: ElementVisual[] = [videoElement];
   if (textContainer) {
@@ -239,7 +211,7 @@ export default (props: HeroVideoArrowProps) => {
 
   const wrapper = ElementModel.create({
     element: document.createElement('div'),
-    className: CLASS_NAMES.WRAPPER,
+    className: 'hero-logo-brand-video-wrapper',
     children: wrapperChildren,
     elementStyles: {
       element: {
@@ -264,13 +236,11 @@ export default (props: HeroVideoArrowProps) => {
 
   wrapper.element.appendChild(overlay.element);
   wrapper.styles += overlay.styles;
-  wrapper.element.appendChild(buttonState.element);
-  wrapper.styles += buttonState.styles;
 
   composite.element.appendChild(wrapper.element);
   composite.styles += wrapper.styles;
 
-  const events = createEventHandlers(composite, video, overlay, buttonState);
+  const events = createEventHandlers(composite, overlay);
 
   return {
     ...composite,

@@ -127,19 +127,19 @@ export const Utilties = {
 
 /**
  * Auto-initialization for CDN usage
- * 
+ *
  * When the library is loaded via a traditional script tag (not as an ES module),
  * it automatically initializes all web components when the DOM is ready.
  * This provides a zero-configuration experience for CDN users.
- * 
+ *
  * ## CDN Usage Examples
- * 
+ *
  * ### Auto-initialization (Simplest)
  * ```html
  * <!-- Components auto-initialize when DOM is ready -->
  * <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/index.js"></script>
  * ```
- * 
+ *
  * ### Manual Initialization
  * ```html
  * <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/index.js"></script>
@@ -148,7 +148,7 @@ export const Utilties = {
  *   window.UmdWebComponents.init();
  * </script>
  * ```
- * 
+ *
  * ### Selective Component Loading
  * ```html
  * <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/index.js"></script>
@@ -158,18 +158,18 @@ export const Utilties = {
  *   window.UmdWebComponents.Components.hero.base();
  * </script>
  * ```
- * 
+ *
  * ## Global API
- * 
+ *
  * When loaded via CDN, the following is exposed on `window.UmdWebComponents`:
  * - `init()` - Manually initialize all components (same as LoadUmdComponents)
  * - `Components` - Object containing all component registration functions
- * 
+ *
  * @remarks
  * - Auto-initialization only occurs for non-module script tags
  * - ES module imports must manually call LoadUmdComponents()
  * - The global object is always created for CDN compatibility
- * 
+ *
  * @since 1.13.0
  */
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

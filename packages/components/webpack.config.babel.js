@@ -65,7 +65,6 @@ module.exports = (env) => {
       filename: '[name].js',
       library: 'UmdWebComponents',
       libraryTarget: 'umd',
-      libraryExport: 'default',
       globalObject: 'typeof self !== \'undefined\' ? self : this',
     },
   };

@@ -11,7 +11,7 @@ describe('Loader Component', () => {
     const component = loader.create({});
 
     expect(component).toBeDefined();
-    expect(component).toBeInstanceOf(HTMLDivElement);
+    expect(component.element).toBeInstanceOf(HTMLDivElement);
     expect(component.element.classList.contains(ID_UMD_LOADER)).toBeTruthy();
 
     const wrapper = component.element.firstChild as HTMLElement;

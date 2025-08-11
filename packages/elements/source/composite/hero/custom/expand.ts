@@ -2,27 +2,14 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import { ElementModel } from 'model';
 import { assets } from 'atomic';
-import { type ElementVisual, type ContentElement } from '../../../_types';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
+import { type ElementVisual, type ContentElement } from '../../../_types';
 
 // Extend the base type to add additional properties
 interface HeroExpandProps extends BaseHeroExpandProps {
   eyebrow?: ContentElement;
   additional?: HTMLSlotElement | null;
 }
-
-const CLASS_NAMES = {
-  CONTAINER: 'umd-hero-expand',
-  STICKY: 'hero-expand-sticky',
-  IMAGE_CONTAINER: 'hero-expand-image-container',
-  IMAGE_SIZE: 'hero-expand-image-size',
-  IMAGE_OVERLAY: 'hero-expand-image-overlay',
-  TEXT_CONTAINER: 'hero-expand-text-container',
-  TEXT_TOP: 'hero-expand-text-top-container',
-  TEXT_BOTTOM: 'hero-expand-text-bottom-container',
-  TEXT_ACTIONS: 'hero-expand-text-actions',
-  TEXT_ADDITIONAL: 'hero-expand-text-additional',
-} as const;
 
 const ANIMATION_CONFIG = {
   IMAGE_OVERLAY: {
@@ -83,10 +70,9 @@ const keyFrameComponentSize = `
   }
 `;
 
-const createImageOverlay = () => {
-  return ElementModel.create({
-    element: document.createElement('div'),
-    className: CLASS_NAMES.IMAGE_OVERLAY,
+const createImageOverlay = () =>
+  ElementModel.createDiv({
+    className: 'hero-expand-image-overlay',
     elementStyles: {
       element: {
         position: 'absolute',
@@ -107,9 +93,8 @@ const createImageOverlay = () => {
       },
     },
   });
-};
 
-const buildAssetElement = ({
+const createAssetElement = ({
   image,
   video,
 }: Pick<HeroExpandProps, 'image' | 'video'>): ElementVisual | null => {
@@ -143,12 +128,11 @@ const buildAssetElement = ({
 
 const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
   const overlay = createImageOverlay();
-  const asset = buildAssetElement(props);
+  const asset = createAssetElement(props);
   const children = asset ? [asset, overlay] : [overlay];
 
-  const container = ElementModel.create({
-    element: document.createElement('div'),
-    className: CLASS_NAMES.IMAGE_SIZE,
+  const container = ElementModel.createDiv({
+    className: 'hero-expand-image-size',
     children,
     elementStyles: {
       element: {
@@ -178,9 +162,8 @@ const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
 const createAssetContainer = (
   props: Pick<HeroExpandProps, 'image' | 'video'>,
 ) =>
-  ElementModel.create({
-    element: document.createElement('div'),
-    className: CLASS_NAMES.IMAGE_CONTAINER,
+  ElementModel.createDiv({
+    className: 'hero-expand-image-container',
     children: [createImageSize(props)],
     elementStyles: {
       element: {
@@ -237,14 +220,6 @@ const createHeadline = (headline?: HTMLElement | null) => {
 
   if (!headline) return null;
 
-  const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
-      ...(isOverwriteHeadline && {
-        fontSize: '96px',
-      }),
-    },
-  };
-
   return ElementModel.headline.campaignMaximum({
     element: headline,
     elementStyles: {
@@ -253,13 +228,18 @@ const createHeadline = (headline?: HTMLElement | null) => {
         fontWeight: 800,
         textTransform: 'uppercase',
         textWrap: 'balance',
-        ...desktopStyles,
+
+        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+          ...(isOverwriteHeadline && {
+            fontSize: '96px',
+          }),
+        },
       },
     },
   });
 };
 
-const buildTopTextChildren = ({
+const createTopTextChildren = ({
   eyebrow,
   headline,
 }: Pick<HeroExpandProps, 'eyebrow' | 'headline'>): ElementVisual[] => {
@@ -278,16 +258,15 @@ const buildTopTextChildren = ({
   return children;
 };
 
-const buildBottomTextChildren = ({
+const createBottomTextChildren = ({
   actions,
   additional,
 }: Pick<HeroExpandProps, 'actions' | 'additional'>): ElementVisual[] => {
   const children: ElementVisual[] = [];
 
   if (actions) {
-    const actionsContainer = ElementModel.create({
-      element: document.createElement('div'),
-      className: CLASS_NAMES.TEXT_ACTIONS,
+    const actionsContainer = ElementModel.createDiv({
+      className: 'hero-expand-text-actions',
       elementStyles: {
         siblingAfter: {
           marginTop: Styles.token.spacing.lg,
@@ -299,9 +278,8 @@ const buildBottomTextChildren = ({
   }
 
   if (additional) {
-    const additionalContainer = ElementModel.create({
-      element: document.createElement('div'),
-      className: CLASS_NAMES.TEXT_ADDITIONAL,
+    const additionalContainer = ElementModel.createDiv({
+      className: 'hero-expand-text-additional',
     });
     additionalContainer.element.appendChild(additional);
     children.push(additionalContainer);
@@ -318,7 +296,7 @@ const createTextContainer = (
 ) => {
   const textChildren: ElementVisual[] = [];
 
-  const topTextChildren = buildTopTextChildren(props);
+  const topTextChildren = createTopTextChildren(props);
   if (topTextChildren.length > 0) {
     const topText = ElementModel.layout.spaceHorizontalNormal({
       element: document.createElement('div'),
@@ -332,7 +310,7 @@ const createTextContainer = (
     textChildren.push(topText);
   }
 
-  const bottomTextChildren = buildBottomTextChildren(props);
+  const bottomTextChildren = createBottomTextChildren(props);
   if (bottomTextChildren.length > 0) {
     const bottomText = ElementModel.layout.spaceHorizontalNormal({
       element: document.createElement('div'),
@@ -347,7 +325,7 @@ const createTextContainer = (
   }
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.TEXT_CONTAINER,
+    className: 'hero-expand-text-container',
     children: textChildren,
     elementStyles: {
       element: {
@@ -378,7 +356,7 @@ const createSticky = (props: HeroExpandProps) => {
 
   return ElementModel.create({
     element: document.createElement('div'),
-    className: CLASS_NAMES.STICKY,
+    className: 'hero-expand-sticky',
     children: [assetContainer, textContainer],
     elementStyles: {
       element: {
@@ -405,7 +383,7 @@ export default (props: HeroExpandProps) => {
 
   const composite = ElementModel.create({
     element: document.createElement('div'),
-    className: CLASS_NAMES.CONTAINER,
+    className: 'umd-hero-expand',
     children: [sticky],
     elementStyles: {
       element: {

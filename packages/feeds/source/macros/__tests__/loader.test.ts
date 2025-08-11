@@ -11,10 +11,17 @@ describe('Loader Component', () => {
     const component = loader.create();
 
     expect(component).toBeDefined();
+<<<<<<< Updated upstream
     expect(component).toBeInstanceOf(HTMLDivElement);
     expect(component.classList.contains(ID_UMD_LOADER)).toBeTruthy();
     
     const wrapper = component.firstChild as HTMLElement;
+=======
+    expect(component.element).toBeInstanceOf(HTMLDivElement);
+    expect(component.element.classList.contains(ID_UMD_LOADER)).toBeTruthy();
+
+    const wrapper = component.element.firstChild as HTMLElement;
+>>>>>>> Stashed changes
     expect(wrapper).toBeDefined();
     expect(wrapper.childNodes.length).toBe(4);
     

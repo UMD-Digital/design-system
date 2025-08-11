@@ -84,7 +84,10 @@ jest.mock('elements', () => ({
 
 jest.mock('macros', () => ({
   loader: {
-    create: jest.fn().mockReturnValue(document.createElement('div')),
+    create: jest.fn().mockReturnValue({
+      element: document.createElement('div'),
+      styles: '.mock-loader-styles'
+    }),
     remove: jest.fn(),
   },
   loaderStyles: '.mock-loader-styles',

@@ -368,6 +368,23 @@ module.exports = {
       return element;
     }),
     ElementModel: {
+      createDiv: jest.fn().mockImplementation((props = {}) => {
+        const div = document.createElement('div');
+        if (props.className) {
+          div.className = props.className;
+        }
+        if (props.children) {
+          props.children.forEach(child => {
+            if (child && child.element) {
+              div.appendChild(child.element);
+            }
+          });
+        }
+        return {
+          element: div,
+          styles: props.elementStyles ? '.mock-styles' : ''
+        };
+      }),
       layout: {
         alignedCenter: jest.fn().mockImplementation(({ element }) => ({
           element,

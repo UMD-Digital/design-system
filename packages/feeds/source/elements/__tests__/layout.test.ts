@@ -11,6 +11,13 @@ jest.mock('@universityofmaryland/web-elements-library', () => {
         },
       },
     },
+    Composite: {
+      card: {
+        overlay: {
+          imageClassRef: 'mock-overlay-image-class',
+        },
+      },
+    },
   };
 });
 

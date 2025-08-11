@@ -1,4 +1,3 @@
-import {} from './slider';
 import { type ElementModel } from '../../_types';
 import { type ListProps, type BlockProps, type SliderProps } from './_types';
 

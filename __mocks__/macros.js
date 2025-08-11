@@ -4,13 +4,15 @@
 module.exports = {
   // Loader pattern for showing loading states
   loader: {
-    create: jest.fn().mockImplementation((message = 'Loading...') => {
+    create: jest.fn().mockImplementation((options = {}) => {
       const loader = document.createElement('div');
       loader.className = 'loader';
       loader.setAttribute('role', 'status');
       loader.setAttribute('aria-live', 'polite');
-      loader.textContent = message;
-      return loader;
+      return {
+        element: loader,
+        styles: '.loader { display: flex; align-items: center; justify-content: center; }'
+      };
     }),
     remove: jest.fn().mockImplementation((loader) => {
       if (loader && loader.parentNode) {

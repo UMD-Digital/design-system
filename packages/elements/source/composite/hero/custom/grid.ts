@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utils from 'utilities';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
+import { theme } from 'utilities';
 import { type ContentElement } from '../../../_types';
 
 interface CornerProps {
@@ -39,16 +39,6 @@ const GRID_LAYOUT = {
     FINAL: '0 1fr 0',
     TRIPLE: '1fr 1fr 1fr',
   },
-} as const;
-
-const CLASS_NAMES = {
-  CORNER_LEFT: 'hero-grid-corner-left',
-  CORNER_RIGHT: 'hero-grid-corner-right',
-  CENTER: 'hero-grid-center',
-  TINT: 'hero-grid-tint',
-  TEXT_CONTAINER: 'hero-expand-text-container',
-  LAYOUT: 'hero-grid-layout',
-  CONTAINER: 'hero-grid-container',
 } as const;
 
 const keyFrameColumns = `
@@ -139,8 +129,8 @@ const createCorner = ({ images, isCornerLeft }: CornerProps) => {
 
   return ElementModel.createDiv({
     className: isCornerLeft
-      ? CLASS_NAMES.CORNER_LEFT
-      : CLASS_NAMES.CORNER_RIGHT,
+      ? 'hero-grid-corner-left'
+      : 'hero-grid-corner-right',
     children,
     elementStyles: {
       element: {
@@ -163,7 +153,7 @@ const createCenter = ({ images, video }: CenterProps) => {
   const children = [
     ElementModel.create({
       element: document.createElement('div'),
-      className: CLASS_NAMES.TINT,
+      className: 'hero-grid-tint',
       elementStyles: {
         element: {
           width: '100%',
@@ -174,7 +164,7 @@ const createCenter = ({ images, video }: CenterProps) => {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           zIndex: 9,
           opacity: 0,
-          ...Utils.theme.media.withViewTimelineAnimation({
+          ...theme.media.withViewTimelineAnimation({
             animation: 'tint-fade ease-in-out forwards',
             animationTimeline: 'view()',
             animationRangeStart: ANIMATION_RANGES.TINT_FADE.start,
@@ -205,13 +195,13 @@ const createCenter = ({ images, video }: CenterProps) => {
 
   return ElementModel.create({
     element: document.createElement('div'),
-    className: CLASS_NAMES.CENTER,
+    className: 'hero-grid-center',
     children,
     elementStyles: {
       element: {
         ...columnBase,
         gridTemplateRows: GRID_LAYOUT.ROWS.INITIAL,
-        ...Utils.theme.media.withViewTimelineAnimation({
+        ...theme.media.withViewTimelineAnimation({
           animation: 'grid-rows ease-in-out forwards',
           animationTimeline: 'view()',
           animationRangeStart: ANIMATION_RANGES.GRID_ROWS.start,
@@ -265,7 +255,7 @@ const createTextContainer = (
   }
 
   const textContainer = ElementModel.createDiv({
-    className: CLASS_NAMES.TEXT_CONTAINER,
+    className: 'hero-expand-text-container',
     elementStyles: {
       element: {
         position: 'relative',
@@ -285,7 +275,7 @@ const createTextContainer = (
           padding: `${Styles.token.spacing['6xl']} 0`,
         },
 
-        ...Utils.theme.media.withViewTimelineAnimation({
+        ...theme.media.withViewTimelineAnimation({
           paddingTop: '140vh',
         }),
       },
@@ -387,7 +377,7 @@ const createGridLayout = (
       gridGap: `${Styles.token.spacing.lg}`,
     },
 
-    ...Utils.theme.media.withViewTimelineAnimation({
+    ...theme.media.withViewTimelineAnimation({
       position: 'sticky',
       top: 0,
       animation: 'grid-columns ease-in-out forwards',
@@ -398,7 +388,7 @@ const createGridLayout = (
   };
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.LAYOUT,
+    className: 'hero-grid-layout',
 
     children: [
       createCorner(leftCorner),
@@ -426,14 +416,14 @@ export default (props: HeroGridProps) => {
   const children = text ? [grid, text] : [grid];
 
   const composite = ElementModel.createDiv({
-    className: CLASS_NAMES.CONTAINER,
+    className: 'hero-grid-container',
     children,
     elementStyles: {
       element: {
         width: '100%',
         display: 'block',
         containerType: 'inline-size',
-        ...Utils.theme.media.withViewTimelineAnimation({
+        ...theme.media.withViewTimelineAnimation({
           height: '300vh',
         }),
         ['img, video']: {

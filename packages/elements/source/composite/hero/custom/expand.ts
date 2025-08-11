@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utils from 'utilities';
 import { ElementModel } from 'model';
 import { assets } from 'atomic';
+import { theme } from 'utilities';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
 import { type ElementVisual, type ContentElement } from '../../../_types';
 
@@ -83,7 +83,7 @@ const createImageOverlay = () =>
         background: 'rgba(0,0,0,0.65)',
         opacity: 1,
 
-        ...Utils.theme.media.withViewTimelineAnimation({
+        ...theme.media.withViewTimelineAnimation({
           opacity: 0,
           animation: `${ANIMATION_CONFIG.IMAGE_OVERLAY.NAME} forwards`,
           animationTimeline: 'view()',
@@ -141,7 +141,7 @@ const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
         height: '100%',
         width: '100%',
 
-        ...Utils.theme.media.withViewTimelineAnimation({
+        ...theme.media.withViewTimelineAnimation({
           height: ANIMATION_CONFIG.IMAGE_SIZE.INITIAL_HEIGHT,
           animation: `${ANIMATION_CONFIG.IMAGE_SIZE.NAME} ease-in-out forwards`,
           animationTimeline: 'view()',
@@ -177,7 +177,7 @@ const createAssetContainer = (
         display: 'flex',
         alignItems: 'center',
 
-        ...Utils.theme.media.withViewTimelineAnimation({
+        ...theme.media.withViewTimelineAnimation({
           width: ANIMATION_CONFIG.COMPONENT_SIZE.INITIAL_WIDTH,
           position: 'absolute',
           top: 0,
@@ -363,7 +363,7 @@ const createSticky = (props: HeroExpandProps) => {
         position: 'relative',
 
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          ...Utils.theme.media.withViewTimelineAnimation({
+          ...theme.media.withViewTimelineAnimation({
             position: 'sticky',
             top: 0,
             height: '100vh',
@@ -388,7 +388,7 @@ export default (props: HeroExpandProps) => {
     elementStyles: {
       element: {
         containerType: 'inline-size',
-        ...Utils.theme.media.withViewTimelineAnimation({
+        ...theme.media.withViewTimelineAnimation({
           position: 'relative',
 
           [`@container (${Styles.token.media.queries.tablet.min})`]: {

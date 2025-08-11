@@ -4,13 +4,6 @@ import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
 import { type HeroMinimalProps } from './_types';
 
-const CLASS_NAMES = {
-  CONTAINER: 'umd-hero-minimal',
-  ASSET: 'umd-hero-minimal__asset',
-  TEXT: 'umd-hero-minimal__text',
-  TEXT_WRAPPER: 'umd-hero-minimal__text-wrapper',
-} as const;
-
 const createImageAsset = (image: HTMLImageElement) => {
   return assets.image.background({
     image,
@@ -49,7 +42,7 @@ const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
   }
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.ASSET,
+    className: 'umd-hero-minimal__asset',
     children,
     elementStyles: {
       element: {
@@ -153,13 +146,13 @@ const createText = (props: HeroMinimalProps, hasAsset: boolean) => {
   });
 
   const textWrapper = ElementModel.createDiv({
-    className: CLASS_NAMES.TEXT_WRAPPER,
+    className: 'umd-hero-minimal__text-wrapper',
     children: [textLockupElement],
     elementStyles: buildTextWrapperStyles(isThemeDark, isThemeMaryland),
   });
 
   const textContainer = ElementModel.createDiv({
-    className: CLASS_NAMES.TEXT,
+    className: 'umd-hero-minimal__text',
     children: [textWrapper],
     elementStyles: buildTextContainerStyles(hasAsset),
   });
@@ -187,7 +180,7 @@ export default (props: HeroMinimalProps) => {
   }
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.CONTAINER,
+    className: 'umd-hero-minimal',
     children,
     elementStyles: {
       element: {

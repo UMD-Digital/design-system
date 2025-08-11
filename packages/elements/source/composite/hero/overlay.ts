@@ -25,13 +25,6 @@ const ANIMATION_CONFIG = {
   },
 } as const;
 
-const CLASS_NAMES = {
-  COMPOSITE: 'umd-hero-overlay',
-  CONTAINER: 'umd-hero-overlay__container',
-  ASSET: 'umd-hero-overlay__asset',
-  TEXT: 'umd-hero-overlay__text',
-  TEXT_CONTENT: 'umd-hero-overlay__text-content',
-} as const;
 
 const keyFrameHeroResize = `
   @keyframes hero-overlay-resize {
@@ -95,7 +88,7 @@ const createAsset = ({
   }
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.ASSET,
+    className: 'umd-hero-overlay__asset',
     children,
     elementStyles: {
       element: {
@@ -169,7 +162,7 @@ const createTextContent = (
   });
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.TEXT_CONTENT,
+    className: 'umd-hero-overlay__text-content',
     children: [textLockupElement],
     elementStyles: {
       element: {
@@ -209,7 +202,7 @@ const createText = (
   });
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.TEXT,
+    className: 'umd-hero-overlay__text',
     children: [lock],
     elementStyles: {
       element: {
@@ -243,7 +236,7 @@ export default (props: HeroOverlayProps) => {
   }
 
   const container = ElementModel.createDiv({
-    className: CLASS_NAMES.CONTAINER,
+    className: 'umd-hero-overlay__container',
     children,
     elementStyles: {
       element: {
@@ -281,7 +274,7 @@ export default (props: HeroOverlayProps) => {
   });
 
   const composite = ElementModel.createDiv({
-    className: CLASS_NAMES.COMPOSITE,
+    className: 'umd-hero-overlay',
     children: [container],
     elementStyles: {
       element: {

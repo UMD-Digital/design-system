@@ -32,12 +32,6 @@ const ANIMATION_CONFIG = {
   },
 } as const;
 
-const CLASS_NAMES = {
-  CONTAINER: 'umd-hero-stacked',
-  ASSET: 'umd-hero-stacked__asset',
-  OVERLAY: 'umd-hero-stacked__overlay',
-  TEXT: 'umd-hero-stacked__text',
-} as const;
 
 const keyFrameFadeOver = `
   @keyframes ${ANIMATION_CONFIG.FADE_OVER.NAME} {
@@ -70,7 +64,7 @@ const createImageAsset = (image: HTMLImageElement) => {
 
 const createOverlay = (includesAnimation?: boolean) => {
   return ElementModel.createDiv({
-    className: CLASS_NAMES.OVERLAY,
+    className: 'umd-hero-stacked__overlay',
     elementStyles: {
       element: {
         position: 'absolute',
@@ -124,7 +118,7 @@ const createAsset = ({
   }
 
   const assetInteriorElement = ElementModel.createDiv({
-    className: `${CLASS_NAMES.ASSET}--interior`,
+    className: 'umd-hero-stacked__asset--interior',
     children: [mediaElement, createOverlay(includesAnimation)],
     elementStyles: {
       element: {
@@ -135,7 +129,7 @@ const createAsset = ({
   });
 
   const assetContainer = ElementModel.createDiv({
-    className: CLASS_NAMES.ASSET,
+    className: 'umd-hero-stacked__asset',
     children: isWidthLarge
       ? [
           ElementModel.layout.spaceHorizontalLarger({
@@ -284,7 +278,7 @@ const createText = (
   });
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.TEXT,
+    className: 'umd-hero-stacked__text',
     children: [lock],
     elementStyles: {
       element: {
@@ -345,7 +339,7 @@ export default (props: HeroStackedProps) => {
   }
 
   const composite = ElementModel.createDiv({
-    className: CLASS_NAMES.CONTAINER,
+    className: 'umd-hero-stacked',
     children,
     elementStyles: {
       element: {

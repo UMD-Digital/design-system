@@ -25,11 +25,6 @@ const ANIMATION_CONFIG = {
   },
 } as const;
 
-const CLASS_NAMES = {
-  CONTAINER: 'umd-hero-default',
-  ASSET: 'umd-hero-default__asset',
-  TEXT: 'umd-hero-default__text',
-} as const;
 
 const keyFrameHeroSlideUp = `
   @keyframes hero-slide-up {
@@ -54,38 +49,6 @@ const keyFrameHeroScaleDown = `
     }
   }
 `;
-
-const ASSET_STYLES = {
-  BASE: {
-    MOBILE: {
-      [`@container (${Styles.token.media.queries.large.max})`]: {
-        aspectRatio: '16 / 9',
-      },
-    },
-    TABLET_AND_UP: {
-      [`@container (${Styles.token.media.queries.tablet.min})`]: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden',
-      },
-    },
-  },
-  OVERLAY: {
-    [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .8) 85%)',
-      zIndex: '99',
-    },
-  },
-} as const;
 
 const createVideoAsset = (video: HTMLVideoElement) => {
   return assets.video.observedAutoPlay({
@@ -126,9 +89,33 @@ const buildAssetChildren = ({
 const buildAssetStyles = (includesAnimation?: boolean) => {
   return {
     element: {
-      ...ASSET_STYLES.BASE.MOBILE,
-      ...ASSET_STYLES.BASE.TABLET_AND_UP,
-      [`&:before`]: ASSET_STYLES.OVERLAY,
+      [`@container (${Styles.token.media.queries.large.max})`]: {
+        aspectRatio: '16 / 9',
+      },
+
+      [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+      },
+
+      [`&:before`]: {
+        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background:
+            'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .8) 85%)',
+          zIndex: '99',
+        },
+      },
+
       ['& img']: {
         ...(includesAnimation && {
           [`@media (prefers-reduced-motion: no-preference)`]: {
@@ -149,7 +136,7 @@ const createAsset = ({
   const elementStyles = buildAssetStyles(includesAnimation);
 
   return ElementModel.createDiv({
-    className: CLASS_NAMES.ASSET,
+    className: 'umd-hero-default__asset',
     children,
     elementStyles,
   });
@@ -160,8 +147,7 @@ const createHeadline = (
 ) => {
   const { headline, isHeightSmall, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline =
-    characterCount > 10 && isHeightSmall;
+  const isOverwriteHeadline = characterCount > 10 && isHeightSmall;
 
   if (!headline) return null;
 
@@ -214,7 +200,7 @@ const createText = (props: HeroStandardProps) => {
   });
 
   const textContainer = ElementModel.createDiv({
-    className: CLASS_NAMES.TEXT,
+    className: 'umd-hero-default__text',
     children: [text],
     elementStyles: {
       element: {
@@ -283,7 +269,7 @@ export default (props: HeroStandardProps) => {
   const text = createText(props);
 
   const composite = ElementModel.createDiv({
-    className: CLASS_NAMES.CONTAINER,
+    className: 'umd-hero-default',
     children: [asset, text],
     elementStyles: {
       element: {

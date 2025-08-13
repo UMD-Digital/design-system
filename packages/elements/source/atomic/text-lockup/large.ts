@@ -13,93 +13,99 @@ interface TypeTextLockupLarge {
   additionalStyles?: Record<string, unknown>;
 }
 
-export default (props: TypeTextLockupLarge) => {
-  const composite = ElementModel.create({
-    element: document.createElement('div'),
+export default ({
+  eyebrow,
+  ribbon,
+  headlineComposite,
+  text,
+  textLargest,
+  actions,
+  isThemeDark,
+  additionalStyles,
+}: TypeTextLockupLarge) => {
+  const children: ElementVisual[] = [];
+
+  if (eyebrow) {
+    children.push(
+      ElementModel.headline.sansSmall({
+        element: eyebrow,
+        elementStyles: {
+          element: {
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            color: Styles.token.color.black,
+          },
+          siblingAfter: {
+            marginTop: Styles.token.spacing.sm,
+          },
+        },
+        isThemeDark,
+      }),
+    );
+  }
+
+  if (ribbon) {
+    children.push(
+      ElementModel.text.ribbon({
+        element: ribbon,
+        elementStyles: {
+          siblingAfter: {
+            marginTop: Styles.token.spacing.sm,
+          },
+        },
+      }),
+    );
+  }
+
+  if (headlineComposite) {
+    children.push(headlineComposite);
+  }
+
+  if (text) {
+    children.push(
+      ElementModel.richText.simpleLarge({
+        element: text,
+        elementStyles: {
+          siblingAfter: {
+            marginTop: Styles.token.spacing.lg,
+          },
+        },
+        isThemeDark,
+      }),
+    );
+  }
+
+  if (textLargest) {
+    children.push(
+      ElementModel.richText.simpleLargest({
+        element: textLargest,
+        elementStyles: {
+          siblingAfter: {
+            marginTop: Styles.token.spacing.lg,
+          },
+        },
+        isThemeDark,
+      }),
+    );
+  }
+
+  if (actions) {
+    children.push(
+      ElementModel.layout.gridStacked({
+        element: actions,
+      }),
+    );
+  }
+
+  return ElementModel.createDiv({
     className: 'text-lockup-large',
+    children,
     elementStyles: {
       element: {
         zIndex: '9',
         position: 'relative',
-        ...props.additionalStyles,
+        ...additionalStyles,
       },
     },
   });
-
-  if (props.eyebrow) {
-    const styledEyebrow = ElementModel.headline.sansSmall({
-      element: props.eyebrow,
-      elementStyles: {
-        element: {
-          textTransform: 'uppercase',
-          fontWeight: 600,
-          color: Styles.token.color.black,
-        },
-        siblingAfter: {
-          marginTop: Styles.token.spacing.sm,
-        },
-      },
-      isThemeDark: props.isThemeDark || false,
-    });
-    composite.element.appendChild(styledEyebrow.element);
-    composite.styles += styledEyebrow.styles;
-  }
-
-  if (props.ribbon) {
-    const styledEyebrow = ElementModel.text.ribbon({
-      element: props.ribbon,
-      elementStyles: {
-        siblingAfter: {
-          marginTop: Styles.token.spacing.sm,
-        },
-      },
-    });
-    composite.element.appendChild(styledEyebrow.element);
-    composite.styles += styledEyebrow.styles;
-  }
-
-  if (props.headlineComposite) {
-    composite.element.appendChild(props.headlineComposite.element);
-    composite.styles += props.headlineComposite.styles;
-  }
-
-  if (props.text) {
-    const styledText = ElementModel.richText.simpleLarge({
-      element: props.text,
-      elementStyles: {
-        siblingAfter: {
-          marginTop: Styles.token.spacing.lg,
-        },
-      },
-      isThemeDark: props.isThemeDark || false,
-    });
-
-    composite.element.appendChild(styledText.element);
-    composite.styles += styledText.styles;
-  }
-
-  if (props.textLargest) {
-    const styledText = ElementModel.richText.simpleLargest({
-      element: props.textLargest,
-      elementStyles: {
-        siblingAfter: {
-          marginTop: Styles.token.spacing.lg,
-        },
-      },
-      isThemeDark: props.isThemeDark || false,
-    });
-
-    composite.element.appendChild(styledText.element);
-    composite.styles += styledText.styles;
-  }
-
-  if (props.actions) {
-    const styledActions = ElementModel.layout.gridStacked({
-      element: props.actions,
-    });
-    composite.element.appendChild(styledActions.element);
-    composite.styles += styledActions.styles;
-  }
-
-  return composite;
 };

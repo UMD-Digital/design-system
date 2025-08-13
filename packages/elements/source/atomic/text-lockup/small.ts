@@ -131,7 +131,7 @@ export default ({
   eventMeta,
   isThemeDark,
 }: TypeTextLockupSmall) => {
-  let children: ElementVisual[] = [];
+  const children: ElementVisual[] = [];
 
   if (eyebrow) {
     children.push(createEyebrow({ eyebrow, isThemeDark }));

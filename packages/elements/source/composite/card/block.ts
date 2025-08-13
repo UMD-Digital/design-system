@@ -2,7 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, layout, textLockup } from 'atomic';
 import { theme } from 'utilities';
 import { CardBlockProps } from './_types';
-import { type ElementVisual } from '../../_types';
+import { type UMDElement } from '../../_types';
 
 const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
 
@@ -18,7 +18,7 @@ export default (props: CardBlockProps) => {
     newsId,
   } = props;
   const shouldImageBeFullWidth = hasEyebrowRibbon;
-  const children: ElementVisual[] = [];
+  const children: UMDElement[] = [];
   const sizingProps = {
     isThemeDark,
     isTransparent,

@@ -7,13 +7,13 @@ import {
   textStyles,
   dateStyles,
 } from './small';
-import { type ElementVisual } from '../../_types';
+import { type UMDElement } from '../../_types';
 
 export type TypeTextLockupSmallScaling = {
   actions?: HTMLElement | null;
   customStyles?: Record<string, string>;
   date?: HTMLElement | null;
-  eventMeta?: ElementVisual;
+  eventMeta?: UMDElement;
   eyebrow?: HTMLElement | null;
   hasEyebrowRibbon?: boolean;
   headline?: HTMLElement | null;
@@ -32,7 +32,7 @@ export default ({
   isThemeDark,
   text,
 }: TypeTextLockupSmallScaling) => {
-  const children: ElementVisual[] = [];
+  const children: UMDElement[] = [];
 
   if (eyebrow && !hasEyebrowRibbon) {
     children.push(createEyebrow({ eyebrow, isThemeDark }));

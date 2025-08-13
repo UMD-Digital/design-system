@@ -3,7 +3,7 @@ import {
   type ImageElement,
   type LinkElement,
   type ThemeProps,
-  type ElementVisual,
+  type UMDElement,
 } from '../../_types';
 
 /**
@@ -32,8 +32,8 @@ export interface CardMediaProps {
  * Properties specific to event-style cards
  */
 export interface CardEventProps {
-  eventMeta?: ElementVisual;
-  dateSign?: ElementVisual;
+  eventMeta?: UMDElement;
+  dateSign?: UMDElement;
 }
 
 /**

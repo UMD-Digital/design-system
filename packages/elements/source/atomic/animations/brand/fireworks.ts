@@ -2,48 +2,20 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../../_types';
 import * as Utils from 'utilities';
-import { buttons } from 'atomic';
+import { assets } from 'atomic';
 
-const CLASS_NAMES = {
-  CONTAINER: 'umd-element-card-fireworks',
-  GRID: 'umd-element-card-fireworks__grid',
-  LEFT: 'umd-element-card-fireworks__left',
-  CENTER: 'umd-element-card-fireworks__center',
-  RIGHT: 'umd-element-card-fireworks__right',
-  FEATURED: 'umd-element-card-fireworks__featured',
-  FEATURED_WRAPPER: 'umd-element-card-fireworks__featured-wrapper',
-  NO_GROW: 'umd-element-card-fireworks__no-grow',
-  SHORTENED: 'umd-element-card-fireworks__shortened',
-  FULL_SCREEN: 'umd-element-card-fireworks__full-screen',
-  POPIN: 'umd-element-card-fireworks__popin',
-  FIVE: 'umd-element-card-fireworks__five',
-  SIX: 'umd-element-card-fireworks__six',
-} as const;
-
+const CONTAINER_QUERY_NAMED = 'umd-element-card-fireworks__container';
 const REDUCE_MOTION = Utils.accessibility.isPrefferdReducedMotion() === true;
-
-const ANIMATION_CONFIG = {
-  POP_IN: {
-    NAME: 'popIn',
-    STEP_MS: 400,
-    LAYER_VAR: '--pop-layer',
-    LAYER_BASE_ZINDEX: 800,
-  },
-  FULL_SCREEN: {
-    NAME: 'fullscreen',
-    DURATION_MS: 500,
-    EASE: 'ease-out',
-    FILL: 'forwards' as FillMode,
-  },
-};
 
 const RESPONSIVE_GAP = {
   gap: Styles.token.spacing.min,
-  [`@container ${CLASS_NAMES.CONTAINER} (${Styles.token.media.queries.large.min})`]:
-    { gap: Styles.token.spacing.md },
-  [`@container ${CLASS_NAMES.CONTAINER} (${Styles.token.media.queries.tablet.min})`]:
+  [`@container ${CONTAINER_QUERY_NAMED} (${Styles.token.media.queries.large.min})`]:
+    {
+      gap: Styles.token.spacing.md,
+    },
+  [`@container ${CONTAINER_QUERY_NAMED} (${Styles.token.media.queries.tablet.min})`]:
     { gap: Styles.token.spacing.lg },
-  [`@container ${CLASS_NAMES.CONTAINER} (${Styles.token.media.queries.desktop.min})`]:
+  [`@container ${CONTAINER_QUERY_NAMED} (${Styles.token.media.queries.desktop.min})`]:
     { gap: Styles.token.spacing.xl },
 };
 
@@ -59,28 +31,47 @@ const RESPONSIVE_HEIGHT = {
   },
 };
 
-const popInKeyframe = `
-  @keyframes popIn {
-    from { opacity: 1; }
-    to   { opacity: 1; }
-  }
-`;
-
-const fadeOutKeyframe = `
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-  }
-`;
+const ANIMATION_CONFIG = {
+  POP_IN: {
+    NAME: 'popIn',
+    STEP_MS: 400,
+    LAYER_VAR: '--pop-layer',
+    LAYER_BASE_ZINDEX: 800,
+    KEYFRAME: `
+      @keyframes popIn {
+        from { opacity: 1; }
+        to   { opacity: 1; }
+      }
+    `,
+  },
+  FULL_SCREEN: {
+    NAME: 'fullscreen',
+    DURATION_MS: 500,
+    EASE: 'ease-out',
+    FILL: 'forwards' as FillMode,
+  },
+};
 
 const getAllMediaInGrid = (grid: ElementVisual) =>
   [
-    ...grid.element.querySelectorAll(`img, .${CLASS_NAMES.FEATURED_WRAPPER}`),
+    ...grid.element.querySelectorAll(
+      `.umd-element-card-fireworks__grid-element, .umd-element-card-fireworks__featured-wrapper`,
+    ),
   ] as HTMLElement[];
 
-const createElementContainer = (className: string) =>
-  ElementModel.createDiv({
+const createElementContainer = (
+  className: string,
+  childElements: ElementVisual[],
+  elementsLength: number,
+) => {
+  const isLeft = className === 'umd-element-card-fireworks__left';
+  const isRight = className === 'umd-element-card-fireworks__right';
+  const isLengthFive = elementsLength === 5;
+  const isLengthSix = elementsLength === 6;
+
+  return ElementModel.createDiv({
     className,
+    children: childElements,
     elementStyles: {
       element: {
         display: 'flex',
@@ -91,22 +82,28 @@ const createElementContainer = (className: string) =>
         maxHeight: '80vh',
         ...RESPONSIVE_GAP,
 
-        [`&.${CLASS_NAMES.LEFT} > :first-child.${CLASS_NAMES.NO_GROW}`]: {
-          height: '60%',
-        },
-        [`&.${CLASS_NAMES.RIGHT} > :first-child.${CLASS_NAMES.NO_GROW}`]: {
-          height: '50%',
+        [` & > :first-child`]: {
+          flexGrow: 0,
+
+          ...(isLeft && {
+            height: '60%',
+          }),
+
+          ...(isRight && {
+            height: '50%',
+          }),
         },
 
-        [`&.${CLASS_NAMES.LEFT}, &.${CLASS_NAMES.RIGHT}`]: {
+        ...(isLengthFive && {
           maxHeight: '90%',
-          [`&.${CLASS_NAMES.FIVE}`]: { maxHeight: '90%' },
-          [`&.${CLASS_NAMES.SIX}`]: { maxHeight: '80%' },
-        },
-        [`&.${CLASS_NAMES.SHORTENED}`]: { maxHeight: '90%' },
-        [`& .${CLASS_NAMES.NO_GROW}`]: { flexGrow: 0 },
+        }),
+        ...(isLengthSix && {
+          maxHeight: '80%',
+        }),
 
-        [`& img, & .${CLASS_NAMES.FEATURED_WRAPPER}`]: {
+        [`&.umd-element-card-fireworks__shortened`]: { maxHeight: '90%' },
+
+        [`& > *`]: {
           position: 'relative',
           width: '100%',
           objectFit: 'cover',
@@ -117,7 +114,7 @@ const createElementContainer = (className: string) =>
           zIndex: `var(${ANIMATION_CONFIG.POP_IN.LAYER_VAR}, 0)`,
           opacity: 0,
 
-          [`&.${CLASS_NAMES.POPIN}`]: {
+          [`&.umd-element-card-fireworks__popin`]: {
             [`@media (prefers-reduced-motion: no-preference)`]: {
               animation: `popIn 1ms steps(1,end) forwards`,
             },
@@ -126,14 +123,15 @@ const createElementContainer = (className: string) =>
       },
     },
   });
+};
 
-const createParentContainer = ({ grid }: { grid: ElementVisual }) =>
+const createParentContainer = (grid: ElementVisual) =>
   ElementModel.createDiv({
-    className: CLASS_NAMES.CONTAINER,
+    className: 'umd-element-card-fireworks',
     children: [grid],
     elementStyles: {
       element: {
-        containerName: `${CLASS_NAMES.CONTAINER}`,
+        containerName: `${CONTAINER_QUERY_NAMED}`,
         containerType: 'inline-size',
         display: 'flex',
         alignItems: 'center',
@@ -145,152 +143,163 @@ const createParentContainer = ({ grid }: { grid: ElementVisual }) =>
     },
   });
 
-const createMainContainer = ({
-  left,
-  center,
-  right,
-}: {
-  left: ElementVisual;
-  center: ElementVisual;
-  right: ElementVisual;
-}) =>
+const createMainContainer = (
+  left: ElementVisual,
+  center: ElementVisual,
+  right: ElementVisual,
+) =>
   ElementModel.createDiv({
-    className: CLASS_NAMES.GRID,
+    className: 'umd-element-card-fireworks__grid',
     children: [left, center, right],
     elementStyles: {
       element: {
         display: 'grid',
         gridTemplateColumns: '1fr 2fr 1fr',
         alignItems: 'center',
+
         ...RESPONSIVE_GAP,
+      },
+    },
+  });
 
-        [`& .${CLASS_NAMES.FEATURED_WRAPPER}`]: {
-          display: 'block',
-          aspectRatio: '4 / 3',
-          flexGrow: 0,
+const createFeaturedElement = (featured: HTMLElement) => {
+  const createFeaturedBasedOnType = () => {
+    const featuredElementStyle = {
+      height: '100%',
+      width: '100%',
+      objectFit: 'cover',
+    };
 
-          [`&.${CLASS_NAMES.FULL_SCREEN}`]: {
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
+    if (featured instanceof HTMLVideoElement) {
+      const video = featured as HTMLVideoElement;
+      const videoElement = assets.video.toggle({
+        video,
+        additionalElementStyles: {
+          height: '100%',
+          width: '100%',
+
+          [`& video`]: featuredElementStyle,
+        },
+      });
+
+      return ElementModel.createDiv({
+        className: 'umd-element-card-fireworks__featured-element',
+        children: [videoElement],
+        elementStyles: {
+          element: {
             height: '100%',
-            zIndex: 9999,
-          },
-
-          [`& .${CLASS_NAMES.FEATURED}`]: {
-            height: '100%',
-            width: '100%',
-            objectFit: 'cover',
           },
         },
+      });
+    } else {
+      return ElementModel.create({
+        element: featured,
+        className: 'umd-element-card-fireworks__featured-element',
+        elementStyles: {
+          element: featuredElementStyle,
+        },
+      });
+    }
+  };
 
-        [`& .${CLASS_NAMES.FEATURED_WRAPPER}:nth-child(2)`]: {
-          aspectRatio: '5 / 3',
+  const featuredElement = createFeaturedBasedOnType();
+  const featuredElementContainer = ElementModel.createDiv({
+    className: 'umd-element-card-fireworks__featured-container',
+    children: [featuredElement],
+    elementStyles: {
+      element: {
+        height: '100%',
+      },
+    },
+  });
+
+  const featuredElementWrapper = ElementModel.createDiv({
+    className: 'umd-element-card-fireworks__featured-wrapper',
+    children: [featuredElementContainer],
+    elementStyles: {
+      element: {
+        zIndex: '999',
+        position: 'relative',
+        display: 'block',
+        aspectRatio: '4 / 3',
+        flexGrow: 0,
+
+        [`&.umd-element-card-fireworks__full-screen`]: {
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 9999,
         },
       },
     },
   });
 
-const createFeaturedElement = ({
-  featured,
-}: {
-  featured: HTMLVideoElement | HTMLImageElement;
-}) => {
-  const featuredElement = ElementModel.create({
-    element: featured,
-    className: CLASS_NAMES.FEATURED,
-    elementStyles: { element: { height: '100%' } },
-  });
+  return featuredElementWrapper;
+};
 
+const createNonFeaturedElement = (element: HTMLElement) => {
   return ElementModel.create({
-    element: document.createElement('div'),
-    className: CLASS_NAMES.FEATURED_WRAPPER,
-    children: [featuredElement],
-    elementStyles: { element: { zIndex: '999', position: 'relative' } },
+    element: element,
+    className: 'umd-element-card-fireworks__grid-element',
   });
 };
 
-const distributeCenterElements = ({
-  center,
-  featuredElement,
-  images,
-}: {
-  center: ElementVisual;
-  featuredElement: ElementVisual;
-  images: HTMLElement[];
-}) => {
-  if (images.length == 0) {
-    return;
-  }
-  const centerElement = center.element;
-  const isEvenCount = (images.length + 1) % 2 === 0;
-  const firstMedia = images[0];
-
-  centerElement.appendChild(featuredElement.element);
-
-  if (!isEvenCount) {
-    return;
-  }
-
-  firstMedia.classList.add(CLASS_NAMES.FEATURED);
-  centerElement.appendChild(firstMedia);
-  images.splice(0, 1);
-};
-
-const distributeSideElements = (
-  left: ElementVisual,
-  right: ElementVisual,
+const getCenterElements = (
+  featuredElement: ElementVisual,
   images: HTMLElement[],
 ) => {
+  const centerElements: ElementVisual[] = [];
+  const isEvenCount = (images.length + 1) % 2 === 0;
+
+  centerElements.push(featuredElement);
+
+  if (images.length == 0 || !isEvenCount) {
+    return centerElements;
+  }
+
+  const firstMedia = createNonFeaturedElement(images[0]);
+  centerElements.push(firstMedia);
+
+  images.splice(0, 1);
+
+  return centerElements;
+};
+
+const getSideElements = (images: HTMLElement[]) => {
+  const leftElements: ElementVisual[] = [];
+  const rightElements: ElementVisual[] = [];
+
   images.forEach((element, index) => {
     const isEvenIndex = index % 2 === 0;
+    const visualElement = createNonFeaturedElement(element);
 
     if (isEvenIndex) {
-      left.element.appendChild(element);
+      leftElements.push(visualElement);
     } else {
-      right.element.appendChild(element);
+      rightElements.push(visualElement);
     }
   });
+
+  return { leftElements, rightElements };
 };
 
 const distributeSideElementRatios = (
-  grid: ElementVisual,
   left: ElementVisual,
   right: ElementVisual,
   center: ElementVisual,
 ) => {
-  const leftChildren = [...left.element.children] as HTMLElement[];
-  const rightChildren = [...right.element.children] as HTMLElement[];
-  const allMedia = getAllMediaInGrid(grid);
+  const leftChildren = Array.from(left.element.children) as HTMLElement[];
+  const rightChildren = Array.from(right.element.children) as HTMLElement[];
   const centerHasMultipleMedia = center.element.children.length >= 2;
 
   if (leftChildren.length <= 0 || rightChildren.length <= 0) {
     return;
   }
-  const firstLeftChild = leftChildren[0];
-  const firstRightChild = rightChildren[0];
-
-  if (allMedia.length === 5) {
-    left.element.classList.add(CLASS_NAMES.FIVE);
-    right.element.classList.add(CLASS_NAMES.FIVE);
-  }
-
-  if (allMedia.length === 6) {
-    left.element.classList.add(CLASS_NAMES.SIX);
-    right.element.classList.add(CLASS_NAMES.SIX);
-  }
 
   if (centerHasMultipleMedia) {
-    left.element.classList.add(CLASS_NAMES.SHORTENED);
-    right.element.classList.add(CLASS_NAMES.SHORTENED);
-  }
-
-  if (firstLeftChild) {
-    firstLeftChild.classList.add(CLASS_NAMES.NO_GROW);
-  }
-
-  if (firstRightChild) {
-    firstRightChild.classList.add(CLASS_NAMES.NO_GROW);
+    left.element.classList.add('umd-element-card-fireworks__shortened');
+    right.element.classList.add('umd-element-card-fireworks__shortened');
   }
 };
 
@@ -318,7 +327,7 @@ const animatePopInStack = async (
   const ordered = getOrdering();
 
   ordered.forEach((element, index) => {
-    element.classList.add(CLASS_NAMES.POPIN);
+    element.classList.add('umd-element-card-fireworks__popin');
     element.style.setProperty(
       ANIMATION_CONFIG.POP_IN.LAYER_VAR,
       String(ANIMATION_CONFIG.POP_IN.LAYER_BASE_ZINDEX + index),
@@ -367,7 +376,9 @@ const animateFeaturedToFullscreen = (
   const fullScreenAnimation = async () => {
     const beginningElementRect =
       featuredElement.element.getBoundingClientRect();
-    featuredElement.element.classList.add(CLASS_NAMES.FULL_SCREEN);
+    featuredElement.element.classList.add(
+      'umd-element-card-fireworks__full-screen',
+    );
     const lastElementRect = featuredElement.element.getBoundingClientRect();
 
     await new Promise((r) => requestAnimationFrame(r));
@@ -511,48 +522,6 @@ const calculateStackPosition = (
   positionRight(rightElements);
 };
 
-const setVideoControls = (
-  featured: HTMLElement,
-  featuredWrapper: ElementVisual,
-  container: ElementVisual,
-) => {
-  if (!(featured instanceof HTMLVideoElement)) {
-    return;
-  }
-
-  const buttonState = buttons.videoState({ video: featured });
-  container.styles += buttonState.styles;
-  featuredWrapper.element.appendChild(buttonState.element);
-
-  featured.muted = true;
-  featured.loop = true;
-  featured.playsInline = true;
-  featured.autoplay = true;
-  featured.preload = 'auto';
-  featured.removeAttribute('controls');
-  buttonState.events.setButtonPlay();
-
-  if (REDUCE_MOTION) {
-    featured.loop = false;
-    featured.autoplay = false;
-    featured.pause();
-    buttonState.events.setButtonPause();
-  }
-};
-
-const setLayoutGrid = (
-  grid: ElementVisual,
-  left: ElementVisual,
-  center: ElementVisual,
-  right: ElementVisual,
-  featuredElement: ElementVisual,
-  images: HTMLElement[],
-) => {
-  distributeCenterElements({ center, featuredElement, images });
-  distributeSideElements(left, right, images);
-  distributeSideElementRatios(grid, left, right, center);
-};
-
 const setShowAllElements = (grid: ElementVisual) => {
   getAllMediaInGrid(grid).forEach((element) => {
     element.style.opacity = '1';
@@ -583,7 +552,6 @@ const observeIntersection = (
 const runAnimationSequence = async (
   grid: ElementVisual,
   center: ElementVisual,
-  right: ElementVisual,
   featuredElement: ElementVisual,
   isExpandFeature: boolean,
 ) => {
@@ -610,30 +578,45 @@ export default ({
   images: HTMLImageElement[];
   isExpandFeature: boolean;
 }): ElementVisual => {
-  const left = createElementContainer(CLASS_NAMES.LEFT);
-  const center = createElementContainer(CLASS_NAMES.CENTER);
-  const right = createElementContainer(CLASS_NAMES.RIGHT);
+  const elementsLength = images.length + 1;
 
-  const grid = createMainContainer({ left, center, right });
-  const container = createParentContainer({ grid });
-  const featuredElement = createFeaturedElement({ featured });
+  const featuredElement = createFeaturedElement(featured);
+  const centerElements = getCenterElements(featuredElement, images);
+  const { leftElements, rightElements } = getSideElements(images);
 
-  setVideoControls(featured, featuredElement, container);
-  setLayoutGrid(grid, left, center, right, featuredElement, images);
+  const left = createElementContainer(
+    'umd-element-card-fireworks__left',
+    leftElements,
+    elementsLength,
+  );
+  const center = createElementContainer(
+    'umd-element-card-fireworks__center',
+    centerElements,
+    elementsLength,
+  );
+  const right = createElementContainer(
+    'umd-element-card-fireworks__right',
+    rightElements,
+    elementsLength,
+  );
+
+  const grid = createMainContainer(left, center, right);
+  const container = createParentContainer(grid);
+
+  distributeSideElementRatios(grid, left, right);
 
   if (REDUCE_MOTION) {
     setShowAllElements(grid);
     return container;
   }
 
-  container.styles += fadeOutKeyframe;
-  container.styles += popInKeyframe;
+  container.styles += ANIMATION_CONFIG.POP_IN.KEYFRAME;
 
   observeResize(container, () =>
     calculateStackPosition(grid, center, left, right),
   );
   observeIntersection(container, () =>
-    runAnimationSequence(grid, center, right, featuredElement, isExpandFeature),
+    runAnimationSequence(grid, center, featuredElement, isExpandFeature),
   );
 
   return container;

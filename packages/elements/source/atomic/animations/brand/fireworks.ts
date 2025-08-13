@@ -270,7 +270,7 @@ const getSideElements = (images: HTMLElement[]) => {
   const leftElements: ElementVisual[] = [];
   const rightElements: ElementVisual[] = [];
 
-  images.forEach((element, index) => {
+  images.map((element, index) => {
     const isEvenIndex = index % 2 === 0;
     const visualElement = createNonFeaturedElement(element);
 
@@ -326,7 +326,7 @@ const animatePopInStack = async (
 
   const ordered = getOrdering();
 
-  ordered.forEach((element, index) => {
+  ordered.map((element, index) => {
     element.classList.add('umd-element-card-fireworks__popin');
     element.style.setProperty(
       ANIMATION_CONFIG.POP_IN.LAYER_VAR,
@@ -366,7 +366,7 @@ const animateFlareOutToGrid = async (grid: ElementVisual): Promise<void> => {
 
   await Promise.all(animations.map((animation) => animation.finished));
 
-  allMedia.forEach((element) => element.style.removeProperty('transform'));
+  allMedia.map((element) => element.style.removeProperty('transform'));
 };
 
 const animateFeaturedToFullscreen = (
@@ -413,7 +413,7 @@ const animateFeaturedToFullscreen = (
 
   const intersectionObserver = new IntersectionObserver(
     (entries) => {
-      entries.forEach((element) => {
+      entries.map((element) => {
         if (element.isIntersecting) {
           fullScreenAnimation();
           intersectionObserver.disconnect();
@@ -462,7 +462,7 @@ const calculateStackPosition = (
   const rightElements = [...right.element.children] as HTMLElement[];
 
   const positionCenter = (elements: HTMLElement[]) => {
-    elements.forEach((element, index) => {
+    elements.map((element, index) => {
       element.style.transform = randomTranslate();
 
       if (index === 0) {
@@ -476,7 +476,7 @@ const calculateStackPosition = (
   const positionLeft = (elements: HTMLElement[]) => {
     const multipleMedia = elements.length >= 2;
 
-    elements.forEach((element, index) => {
+    elements.map((element, index) => {
       element.style.transform = `translateX(${gridCenterX}px)`;
       element.style.transform += randomTranslate();
 
@@ -498,7 +498,7 @@ const calculateStackPosition = (
   const positionRight = (elements: HTMLElement[]) => {
     const multipleMedia = elements.length >= 2;
 
-    elements.forEach((element, index) => {
+    elements.map((element, index) => {
       element.style.transform = `translateX(${-gridCenterX}px)`;
       element.style.transform += randomTranslate();
 
@@ -523,7 +523,7 @@ const calculateStackPosition = (
 };
 
 const setShowAllElements = (grid: ElementVisual) => {
-  getAllMediaInGrid(grid).forEach((element) => {
+  getAllMediaInGrid(grid).map((element) => {
     element.style.opacity = '1';
   });
 };

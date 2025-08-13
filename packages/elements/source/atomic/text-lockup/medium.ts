@@ -3,13 +3,14 @@ import { ElementModel } from 'model';
 import { ElementVisual } from '../../_types';
 
 interface TypeTextLockupMedium {
-  headline?: HTMLElement | null;
-  compositeHeadline?: ElementVisual | null;
-  ribbon?: HTMLElement | null;
-  text?: HTMLElement | null;
   actions?: HTMLElement | null;
+  compositeHeadline?: ElementVisual | null;
+  eventDetails?: ElementVisual;
+  headline?: HTMLElement | null;
   isThemeDark?: boolean;
   isThemeMaryland?: boolean;
+  ribbon?: HTMLElement | null;
+  text?: HTMLElement | null;
 }
 
 const BREAKPOINTS = {
@@ -17,10 +18,106 @@ const BREAKPOINTS = {
   large: `@container (min-width: 600px)`,
 };
 
-export default (props: TypeTextLockupMedium) => {
-  const composite = ElementModel.create({
-    element: document.createElement('div'),
+export default ({
+  actions,
+  eventDetails,
+  compositeHeadline,
+  headline,
+  isThemeDark,
+  isThemeMaryland,
+  ribbon,
+  text,
+}: TypeTextLockupMedium) => {
+  const children: ElementVisual[] = [];
+
+  if (ribbon) {
+    children.push(
+      ElementModel.text.ribbon({
+        element: ribbon,
+        elementStyles: {
+          siblingAfter: {
+            marginTop: Styles.token.spacing.sm,
+          },
+        },
+      }),
+    );
+  }
+
+  if (compositeHeadline) {
+    children.push(compositeHeadline);
+  }
+
+  if (headline && !compositeHeadline) {
+    children.push(
+      ElementModel.headline.sansLarger({
+        element: headline,
+        elementStyles: {
+          element: {
+            color: `${Styles.token.color.black}`,
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            textWrap: 'balance',
+
+            [`${BREAKPOINTS.large}`]: {
+              maxWidth: '90%',
+            },
+          },
+          siblingAfter: {
+            marginTop: Styles.token.spacing.sm,
+          },
+        },
+      }),
+    );
+  }
+
+  if (eventDetails) {
+    children.push(
+      ElementModel.createDiv({
+        className: 'text-lockup-medium-event-details',
+        children: [eventDetails],
+        elementStyles: {
+          siblingAfter: {
+            marginTop: Styles.token.spacing.md,
+          },
+        },
+      }),
+    );
+  }
+
+  if (text) {
+    children.push(
+      ElementModel.richText.simpleLarge({
+        element: text,
+        elementStyles: {
+          siblingAfter: {
+            marginTop: Styles.token.spacing.md,
+          },
+        },
+        isThemeDark: isThemeDark || isThemeMaryland || false,
+      }),
+    );
+  }
+
+  if (actions) {
+    children.push(
+      ElementModel.layout.gridStacked({
+        element: actions,
+        elementStyles: {
+          element: {
+            marginTop: Styles.token.spacing.md,
+
+            [`${BREAKPOINTS.large}`]: {
+              marginTop: Styles.token.spacing.lg,
+            },
+          },
+        },
+      }),
+    );
+  }
+
+  return ElementModel.createDiv({
     className: 'text-lockup-medium',
+    children,
     elementStyles: {
       element: {
         zIndex: '9',
@@ -28,79 +125,4 @@ export default (props: TypeTextLockupMedium) => {
       },
     },
   });
-
-  if (props.ribbon) {
-    const styledEyebrow = ElementModel.text.ribbon({
-      element: props.ribbon,
-      elementStyles: {
-        siblingAfter: {
-          marginTop: Styles.token.spacing.sm,
-        },
-      },
-    });
-    composite.element.appendChild(styledEyebrow.element);
-    composite.styles += styledEyebrow.styles;
-  }
-
-  if (props.compositeHeadline) {
-    composite.element.appendChild(props.compositeHeadline.element);
-    composite.styles += props.compositeHeadline.styles;
-  }
-
-  if (props.headline) {
-    const styledEyebrow = ElementModel.headline.sansLarger({
-      element: props.headline,
-      elementStyles: {
-        element: {
-          color: `${Styles.token.color.black}`,
-          fontWeight: 800,
-          textTransform: 'uppercase',
-          textWrap: 'balance',
-
-          [`${BREAKPOINTS.large}`]: {
-            maxWidth: '90%',
-          },
-        },
-        siblingAfter: {
-          marginTop: Styles.token.spacing.sm,
-        },
-      },
-    });
-    composite.element.appendChild(styledEyebrow.element);
-    composite.styles += styledEyebrow.styles;
-  }
-
-  if (props.text) {
-    const styledText = ElementModel.richText.simpleLarge({
-      element: props.text,
-      elementStyles: {
-        siblingAfter: {
-          marginTop: Styles.token.spacing.md,
-        },
-      },
-      isThemeDark: props.isThemeDark || props.isThemeMaryland || false,
-    });
-
-    composite.element.appendChild(styledText.element);
-    composite.styles += styledText.styles;
-  }
-
-  if (props.actions) {
-    const styledActions = ElementModel.layout.gridStacked({
-      element: props.actions,
-      elementStyles: {
-        element: {
-          marginTop: Styles.token.spacing.md,
-
-          [`${BREAKPOINTS.large}`]: {
-            marginTop: Styles.token.spacing.lg,
-          },
-        },
-      },
-    });
-    composite.element.appendChild(styledActions.element);
-    composite.styles += styledActions.styles;
-  }
-
-  return composite;
 };

@@ -1,6 +1,6 @@
 import { ElementModel } from 'model';
 import { default as gifToggle } from './gif';
-import { ElementVisual } from '_types';
+import { type UMDElement } from '_types';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 const ATTRIBUTE_CREDIT = 'data-credit';
@@ -16,7 +16,7 @@ interface EmbedAsset extends Asset {
 }
 
 interface Props extends Asset {
-  dateSign?: ElementVisual;
+  dateSign?: UMDElement;
   isShowCaption?: boolean;
   customStyles?: Record<string, any>;
 }
@@ -61,7 +61,7 @@ export default (props: Props) => {
     isShowCaption = false,
   } = props;
 
-  const children: ElementVisual[] = [];
+  const children: UMDElement[] = [];
   const attributeCaption = image.getAttribute(ATTRIBUTE_CAPTION);
   const attributeCredit = image.getAttribute(ATTRIBUTE_CREDIT);
   const isTypeGif =

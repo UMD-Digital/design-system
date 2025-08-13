@@ -3,7 +3,7 @@ import { theme } from 'utilities';
 import { textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type PersonTextLockupPropsWithStyles } from '../../_types';
-import { type ElementVisual } from '../../../_types';
+import { type UMDElement } from '../../../_types';
 
 const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
 const mediumBreakpointStart = Styles.token.media.breakpointValues.medium.min;
@@ -21,7 +21,7 @@ export const image = ({
   hasBorder = false,
   isThemeDark = false,
 }: BoxProps & {
-  children: ElementVisual[];
+  children: UMDElement[];
   customStyles?: Record<string, any>;
 }) =>
   ElementModel.createDiv({
@@ -85,7 +85,7 @@ export const textContainer = ({
   isTransparent = false,
 }: BoxProps & {
   customStyles?: Record<string, any>;
-  children: Array<ElementVisual>;
+  children: UMDElement[];
 }) =>
   ElementModel.createDiv({
     className: 'layout-block-stacked-text',
@@ -157,7 +157,7 @@ export const container = ({
   isTransparent = false,
 }: BoxProps & {
   customStyles?: Record<string, any>;
-  children: ElementVisual[];
+  children: UMDElement[];
 }) =>
   ElementModel.createDiv({
     className: 'layout-block-stacked-container',

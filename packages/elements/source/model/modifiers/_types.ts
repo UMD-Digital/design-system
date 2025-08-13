@@ -21,7 +21,7 @@ export interface StyleOptions {
 
 export interface CompositeChild {
   element: HTMLElement;
-  className: string;
+  className?: string;
   styles: string;
 }
 

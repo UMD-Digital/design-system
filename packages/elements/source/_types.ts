@@ -21,10 +21,17 @@ export interface ElementModel {
 /**
  * Visual element structure
  */
-export interface ElementVisual {
+export interface UMDElement {
   element: HTMLElement;
-  className: string;
+  className?: string;
   styles: string;
+}
+
+/**
+ * Visual element structure
+ */
+export interface ElementVisual extends UMDElement {
+  className: string;
 }
 
 // ===== HTML Element Type Aliases =====

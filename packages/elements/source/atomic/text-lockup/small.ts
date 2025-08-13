@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
-import { ElementVisual } from '../../_types';
+import { type UMDElement } from '../../_types';
 
 type TypeTheme = {
   isThemeDark?: boolean;
@@ -20,7 +20,7 @@ export type TypeTextLockupSmall = TypeTheme & {
   text?: HTMLElement | null;
   date?: HTMLElement | null;
   actions?: HTMLElement | null;
-  eventMeta?: ElementVisual;
+  eventMeta?: UMDElement;
   hasEyebrowRibbon?: boolean;
 };
 
@@ -131,7 +131,7 @@ export default ({
   eventMeta,
   isThemeDark,
 }: TypeTextLockupSmall) => {
-  const children: ElementVisual[] = [];
+  const children: UMDElement[] = [];
 
   if (eyebrow) {
     children.push(createEyebrow({ eyebrow, isThemeDark }));

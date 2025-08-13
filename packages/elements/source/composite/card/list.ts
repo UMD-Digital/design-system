@@ -3,13 +3,13 @@ import { textLockup, assets } from 'atomic';
 import { theme } from 'utilities';
 import { ElementModel } from 'model';
 import { CardListProps } from './_types';
-import { ElementVisual } from '../../_types';
+import { type UMDElement } from '../../_types';
 
 const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
 const mediumBreakpointStart = Styles.token.media.breakpointValues.medium.min;
 const mediumBreakpoint = Styles.token.media.breakpointValues.large.min;
 
-const makeDateColumn = (dateSign: ElementVisual) =>
+const makeDateColumn = (dateSign: UMDElement) =>
   ElementModel.createDiv({
     className: 'card-list-date-sign-wrapper',
     elementStyles: {
@@ -106,7 +106,7 @@ const makeImageColumn = ({
 
 export default (props: CardListProps) => {
   const { image, isAligned, isThemeDark, dateSign } = props;
-  let children: ElementVisual[] = [];
+  let children: UMDElement[] = [];
 
   if (image) {
     children.push(makeImageColumn({ image, isAligned }));

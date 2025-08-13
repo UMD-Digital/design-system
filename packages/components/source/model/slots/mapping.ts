@@ -55,6 +55,7 @@ const text = {
   caption: 'caption',
   default: 'text',
   stat: 'stat',
+  stats: 'stats',
   sub: 'sub-text',
 };
 

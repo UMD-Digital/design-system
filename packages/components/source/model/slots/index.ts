@@ -64,6 +64,7 @@ const text = {
   caption: createSlotFactory(SlotNames.text.caption),
   default: createSlotFactory(SlotNames.text.default),
   stat: createSlotFactory(SlotNames.text.stat),
+  stats: createSlotFactory(SlotNames.text.stats),
   subText: createSlotFactory(SlotNames.text.sub),
 } as const;
 

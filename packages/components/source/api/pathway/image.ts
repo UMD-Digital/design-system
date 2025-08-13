@@ -39,7 +39,6 @@ const createComponent: CreateComponentFunction = (element) => {
 
   if (isDisplayHero) {
     return Composite.pathway.hero({
-      ...createEventData({ element }),
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
       text: Slots.text.default({ element }),
@@ -53,8 +52,9 @@ const createComponent: CreateComponentFunction = (element) => {
 
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
-      ...createEventData({ element }),
       ...slots({ element }),
+      image: Slots.assets.image({ element }) as HTMLImageElement,
+      video: Slots.assets.video({ element }) as HTMLVideoElement,
       isThemeDark,
       isThemeLight,
       isThemeMaryland,
@@ -66,8 +66,9 @@ const createComponent: CreateComponentFunction = (element) => {
 
   if (isDisplaySticky) {
     return Composite.pathway.sticky({
-      ...createEventData({ element }),
       ...slots({ element }),
+      image: Slots.assets.image({ element }) as HTMLImageElement,
+      video: Slots.assets.video({ element }) as HTMLVideoElement,
       isThemeDark: Attributes.isTheme.dark({ element }),
       isImageScaled,
       isImagePositionLeft,
@@ -76,7 +77,13 @@ const createComponent: CreateComponentFunction = (element) => {
 
   return Composite.pathway.standard({
     ...createEventData({ element }),
-    ...slots({ element }),
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+    actions: Slots.actions.default({ element }),
+    image: Slots.assets.image({ element }) as HTMLImageElement,
+    video: Slots.assets.video({ element }) as HTMLVideoElement,
+    stats: Slots.text.stats({ element }),
     isThemeDark,
     isThemeMaryland,
     isImageScaled,

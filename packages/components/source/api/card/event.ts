@@ -1,6 +1,6 @@
-import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register } from 'model';
-import { Markup } from 'utilities';
+import { extractEventData } from '../_event';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -32,7 +32,7 @@ const slots: SlotConfiguration = {
   'date-start-iso': Slots.element.allowed.time,
   'date-end-iso': Slots.element.allowed.time,
   location: Slots.element.allowed.text,
-  image: Slots.element.allowed.image,
+  image: Slots.element.allowed.imageLink,
   eyebrow: Slots.element.allowed.eyebrow,
   actions: Slots.element.allowed.actions,
 };
@@ -44,102 +44,71 @@ const slots: SlotConfiguration = {
  * @internal
  */
 const createComponent: CreateComponentFunction = (element) => {
-  const isThemeDark = Attributes.isTheme.dark({ element });
-  const showTime = Attributes.includesFeature.visualTime({ element });
+  // Extract event data with automatic configuration from element attributes
+  const eventComponents = extractEventData(element);
 
-  const startDateSlot = element.querySelector(
-    `[slot="${Slots.name.DATE_START_ISO}"]`,
-  );
-  const endDateSlot = element.querySelector(
-    `[slot="${Slots.name.DATE_END_ISO}"]`,
-  );
-  const locationSlot = element.querySelector(
-    `[slot="${Slots.name.contact.location}"]`,
-  );
-  const startDate = Markup.event.createDate({ element: startDateSlot });
-  const endDate = Markup.event.createDate({ element: endDateSlot });
-
-  if (!startDate) {
-    console.error('Missing start date for event web component');
+  if (!eventComponents) {
+    // Start date is missing - required field
     return { element: document.createElement('div'), styles: '' };
   }
 
-  // construct events meta
+  const { eventMeta, dateSign } = eventComponents;
+  const commonData = MakeCommonData({ element });
+  const image = Slots.assets.image({ element }) as HTMLImageElement;
 
-  const EventDetailsData = Markup.event.createDetailsData({
-    locationElement: locationSlot,
-    startDate,
-    endDate,
-  });
-
-  const EventDetailMeta = { ...EventDetailsData, showTime };
-
-  // construct event sign
-
-  const EventSignData = Markup.event.createDetailsData({
-    locationElement: locationSlot,
-    startDate,
-    endDate,
-  });
-
-  // Display options
+  // Display options with specific overrides for each layout
 
   if (Attributes.isDisplay.feature({ element })) {
+    // Feature layout: large date sign, eyebrow ribbon
+    const featureEvents = extractEventData(element, {
+      isLargeSize: true,
+      isDateSignDark: false,
+    });
+
     return Composite.card.block({
-      ...MakeCommonData({ element }),
-      image: Slots.assets.image({ element }) as HTMLImageElement,
+      ...commonData,
+      image,
       eyebrow: Slots.eyebrow.default({ element }),
       hasEyebrowRibbon: true,
-      eventMeta: Atomic.events.meta({
-        ...EventDetailMeta,
-        isThemeDark,
-      }),
-      dateSign: Atomic.events.sign({
-        ...EventSignData,
-        isThemeDark: false,
-        isLargeSize: true,
-      }),
+      eventMeta: featureEvents?.eventMeta,
+      dateSign: featureEvents?.dateSign,
     });
   }
 
   if (Attributes.isDisplay.promo({ element })) {
+    // Promo layout: overlay style with forced dark theme for meta
+    const promoEvents = extractEventData(element, {
+      isThemeDark: true, // Force dark theme for meta in overlay
+      isDateSignDark: false,
+    });
+
     return Composite.card.overlay.image({
-      ...MakeCommonData({ element }),
-      backgroundImage: Slots.assets.image({ element }) as HTMLImageElement,
-      eventMeta: Atomic.events.meta({
-        ...EventDetailMeta,
-        isThemeDark: true,
-      }),
-      dateSign: Atomic.events.sign({
-        ...EventSignData,
-        isThemeDark: false,
-      }),
+      ...commonData,
+      backgroundImage: image,
+      eventMeta: promoEvents?.eventMeta,
+      dateSign: promoEvents?.dateSign,
     });
   }
 
   if (Attributes.isDisplay.list({ element })) {
+    // List layout: large date sign, uses element's theme
+    const listEvents = extractEventData(element, {
+      isLargeSize: true,
+    });
+
     return Composite.card.list({
-      ...MakeCommonData({ element }),
-      image: Slots.assets.image({ element }) as HTMLImageElement,
-      eventMeta: Atomic.events.meta({
-        ...EventDetailMeta,
-        isThemeDark,
-      }),
-      dateSign: Atomic.events.sign({
-        ...EventSignData,
-        isThemeDark,
-        isLargeSize: true,
-      }),
+      ...commonData,
+      image,
+      eventMeta: listEvents?.eventMeta,
+      dateSign: listEvents?.dateSign,
     });
   }
 
+  // Default: block layout with standard configuration
   return Composite.card.block({
-    ...MakeCommonData({ element }),
-    image: Slots.assets.image({ element }) as HTMLImageElement,
-    eventMeta: Atomic.events.meta({
-      ...EventDetailMeta,
-      isThemeDark,
-    }),
+    ...commonData,
+    image,
+    eventMeta,
   });
 };
 

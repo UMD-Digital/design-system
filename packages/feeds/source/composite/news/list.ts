@@ -75,7 +75,7 @@ export default (props: ListProps): ElementModel =>
       displayResults,
       displayResultStart: feedDisplay.resultStart,
       displayNoResults: feedDisplay.noResults,
-      layoutElement: feedElements.layout.stacked(),
+      layoutElement: feedElements.layout.stacked(isThemeDark),
     });
 
     return {

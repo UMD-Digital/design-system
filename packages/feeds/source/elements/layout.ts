@@ -1,7 +1,9 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { Model } from '@universityofmaryland/web-elements-library';
 
-export const stacked = (): { element: HTMLElement; styles: string } =>
+export const stacked = (
+  isThemeDark?: boolean,
+): { element: HTMLElement; styles: string } =>
   Model.ElementModel.layout.gridStacked({
     element: document.createElement('div'),
     elementStyles: {
@@ -9,6 +11,16 @@ export const stacked = (): { element: HTMLElement; styles: string } =>
         gridGap: `${Styles.token.spacing.md}`,
         [` > *`]: {
           containerType: 'inline-size',
+        },
+
+        [` > *:not(:last-child)`]: {
+          paddingBottom: `${Styles.token.spacing.md}`,
+          marginBottom: `${Styles.token.spacing.md}`,
+          borderBottom: `${
+            isThemeDark
+              ? `1px solid ${Styles.token.color.gray.dark}`
+              : `1px solid ${Styles.token.color.gray.light}`
+          }`,
         },
 
         [`& .${Styles.element.asset.image.wrapperScaled.className}`]: {

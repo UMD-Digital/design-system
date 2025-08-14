@@ -63,8 +63,6 @@ const getCount = async ({ variables }: { variables: TypeAPIFeedVariables }) => {
     query: EVENTS_COUNT_QUERY,
   });
 
-  console.log(feedData);
-
   if (!feedData || !feedData.data || feedData.message) {
     if (feedData.message) console.error(feedData.message);
     return null;

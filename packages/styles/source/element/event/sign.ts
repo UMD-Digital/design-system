@@ -35,6 +35,5 @@ export const container: JssObject = create.jss.objectWithClassName({
     textAlign: 'center',
     maxWidth: '200px',
     fontWeight: '700',
-    color: `${color.black}`,
   },
 });

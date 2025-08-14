@@ -148,7 +148,7 @@ export default (props: {
         element: {
           width: '10px',
           height: '3px',
-          margin: '0 5px',
+          margin: '13px 5px 0',
           display: 'block',
           backgroundColor: isThemeDark ? 'white' : 'black',
         },

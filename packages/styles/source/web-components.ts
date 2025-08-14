@@ -96,10 +96,20 @@ const elements = {
           [`umd-element-${type}[display="list"] + umd-element-${type}[display="list"]`]:
             {
               marginTop: spacing.md,
+              paddingTop: spacing.md,
+              borderTop: `1px solid ${color.gray.light}`,
             },
           [`umd-element-${type}[data-display="list"] + umd-element-${type}[data-display="list"]`]:
             {
               marginTop: spacing.md,
+              paddingTop: spacing.md,
+              borderTop: `1px solid ${color.gray.light}`,
+            },
+          [`umd-element-${type}[data-display="list"][data-theme="dark"] + umd-element-${type}[data-display="list"][data-theme="dark"]`]:
+            {
+              marginTop: spacing.md,
+              paddingTop: spacing.md,
+              borderTop: `1px solid ${color.gray.dark}`,
             },
         },
       }),

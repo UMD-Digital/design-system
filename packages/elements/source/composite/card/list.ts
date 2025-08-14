@@ -139,14 +139,11 @@ export default (props: CardListProps) => {
       element: {
         height: '100%',
         maxWidth: `${Styles.token.spacing.maxWidth.smallest}`,
-        paddingBottom: '24px',
-        borderBottom: `1px solid ${Styles.token.color.gray.light}`,
         overflow: 'hidden',
 
         ...(isThemeDark && {
           backgroundColor: Styles.token.color.black,
           color: Styles.token.color.white,
-          borderBottom: `1px solid ${Styles.token.color.gray.dark}`,
         }),
       },
     },

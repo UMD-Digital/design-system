@@ -76,11 +76,10 @@ const createComponent: CreateComponentFunction = (element) => {
   }
 
   return Composite.pathway.standard({
-    ...createEventData({ element }),
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),
-    actions: Slots.actions.default({ element }),
+    action: Slots.actions.default({ element }),
     image: Slots.assets.image({ element }) as HTMLImageElement,
     video: Slots.assets.video({ element }) as HTMLVideoElement,
     stats: Slots.text.stats({ element }),

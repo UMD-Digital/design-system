@@ -1,301 +1,427 @@
-import { layout, token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-import TextContainer, { TypePathwayTextContainer } from './elements/text';
-import ImageContainer, { TypePathwayImageContainer } from './elements/image';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import * as Atomic from 'atomic';
+import { ElementModel } from 'model';
+import { theme } from 'utilities';
+import { type ElementVisual } from '_types';
 
-type TypePathwayDefaultProps = TypePathwayTextContainer &
-  TypePathwayImageContainer & {
-    isImagePositionLeft: boolean;
-    includesAnimation?: boolean;
-    includedStyles?: string;
-  };
-
-const MEDIUM = 800;
-const LARGE = 1200;
-
-const ELEMENT_NAME = 'umd-element-pathway-image';
-const ATTRIBUTE_IMAGE_POSITION = 'image-position';
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_ANIMATION = 'data-animation';
-
-const PATHWAY_DEFAULT_CONTAINER = 'pathway-default-container';
-const PATHWAY_DEFAULT_CONTAINER_WRAPPER = 'pathway-default-container-wrapper';
-const PATHWAY_DEFAULT_CONTAINER_LOCK = 'pathway-default-container-lock';
-const PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER =
-  'pathway-image-container-lock-wrapper';
-
-const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
-const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
-const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
-const IS_ANIMATION_START = `[${ATTRIBUTE_ANIMATION}="true"]`;
-
-const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_DEFAULT_CONTAINER} .${TextContainer.Elements.wrapper}`;
-
-const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
-const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_DEFAULT_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
-
-const OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ImageContainer.Elements.container}`;
-const OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.container}`;
-const OVERWRITE_IMAGE_RIGHT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.wrapper}`;
-const OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${TextContainer.Elements.wrapper}`;
-
-const OVERWRITE_CONTAINER_ANIMATION = `.${PATHWAY_DEFAULT_CONTAINER}${IS_ANIMATION}`;
-const OVERWRITE_CONTAINER_ANIMATION_START = `.${PATHWAY_DEFAULT_CONTAINER}${IS_ANIMATION_START}`;
-const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${TextContainer.Elements.container}`;
-const OVERWRITE_ANIMATION_IMAGE_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ImageContainer.Elements.container}`;
-const OVERWRITE_ANIMATION_TEXT_CONTAINE_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${TextContainer.Elements.container}`;
-const OVERWRITE_ANIMATION_IMAGE_CONTAINER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${ImageContainer.Elements.container}`;
-
-// prettier-ignore
-const AnimationStyles = `
-  @keyframes pathway-fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(100px);
-   }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINER}, 
-    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
-      opacity: 0;
-      transform: translateY(100px);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINE_START}, 
-    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER_START} {
-      animation: pathway-fade-in 1s forwards;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
-      animation-delay: 0.5s;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_IMAGE_CONTAINER} {
-      animation-delay: 0s;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER} {
-       animation-delay: 0s;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER} {
-      animation-delay: 0.5s;
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteImagePositionStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER} {
-      order: 2;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER} {
-      order: 1;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_TEXT_WRAPPER} {
-      padding-left: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER} {
-      padding-right: 0;
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteImageContainerStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ImageContainer.Elements.container} img {
-      min-height: 656px;
-     }
-  }
-`;
-
-// prettier-ignore
-const OverwriteTextContainerStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${token.spacing.md} 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    ${Utility.theme.convertJSSObjectToStyles({
-      styleObj: {
-        [`${OVERWRITE_TEXT_WRAPPER}`]: layout.space.horizontal.larger,
-      },
-    })}
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: 0 ${token.spacing['2xl']};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: 0 ${token.spacing['6xl']};
-    }
-  }
-`;
-
-const LockStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${PATHWAY_DEFAULT_CONTAINER_LOCK}`]: layout.space.horizontal.larger,
-    },
-  })}
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${PATHWAY_DEFAULT_CONTAINER_LOCK} {
-      padding: 0;
-    }
-  }
-`;
-
-const LockWrapperStyles = `
-  .${PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER} {
-    position: relative;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER} {
-      padding: 0;
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER} {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER} > * {
-      width: 50%;
-    }
-  }
-`;
-
-// prettier-ignore
-const STYLES_PATHWAY_DEFAULT_ELEMENT = `
-  .${PATHWAY_DEFAULT_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    position: relative;
-    overflow: hidden;
-  }
-
-  ${LockStyles}
-  ${LockWrapperStyles}
-  ${AnimationStyles}
-  ${OverwriteTextContainerStyles}
-  ${OverwriteImageContainerStyles}
-  ${OverwriteImagePositionStyles}
-`;
-
-const Animation = ({
-  includesAnimation = true,
-  container,
-}: {
+interface PathwayStandardProps {
+  actions?: HTMLElement | null;
+  dateSign?: ElementVisual;
+  eventDetails?: ElementVisual;
+  eyebrow?: HTMLElement | null;
+  headline?: HTMLElement | null;
+  image?: HTMLImageElement | null;
   includesAnimation?: boolean;
-  container: HTMLElement;
-}) => {
-  if (includesAnimation) {
-    const animation: IntersectionObserverCallback = (entries, observer) => {
+  isImagePositionLeft?: boolean;
+  isImageScaled?: boolean;
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
+  stats?: HTMLElement | null;
+  text?: HTMLElement | null;
+  video?: HTMLVideoElement | null;
+}
+
+const mediumSize = 800;
+const largeSize = 1200;
+
+const setupAnimation = (
+  container: HTMLElement,
+  textElement: HTMLElement,
+  imageElement: HTMLElement | null,
+) => {
+  const rect = container.getBoundingClientRect();
+  const elementTop = rect.top + window.scrollY;
+  const viewportBottom = window.scrollY + window.innerHeight;
+
+  if (elementTop < viewportBottom - rect.height * 0.65) {
+    textElement.style.transition = 'opacity 0s, transform 0s';
+    textElement.style.opacity = '1';
+    textElement.style.transform = 'translateY(0)';
+
+    if (imageElement) {
+      imageElement.style.transition = 'opacity 0s, transform 0s';
+      imageElement.style.opacity = '1';
+      imageElement.style.transform = 'translateY(0)';
+    }
+    return;
+  }
+
+  let isInitialCheck = true;
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
       entries.forEach((entry) => {
-        const target = entry.target as HTMLElement;
-
         if (entry.isIntersecting) {
-          target.setAttribute(ATTRIBUTE_ANIMATION, 'true');
-          observer.unobserve(target);
-        }
-      });
-    };
+          if (isInitialCheck && entry.intersectionRatio >= 0.35) {
+            textElement.style.transition = 'opacity 0s, transform 0s';
+          }
 
-    const observer = new IntersectionObserver(animation, {
+          textElement.style.opacity = '1';
+          textElement.style.transform = 'translateY(0)';
+
+          if (imageElement) {
+            if (isInitialCheck && entry.intersectionRatio >= 0.35) {
+              imageElement.style.transition = 'opacity 0s, transform 0s';
+            }
+            imageElement.style.opacity = '1';
+            imageElement.style.transform = 'translateY(0)';
+          }
+
+          observer.unobserve(entry.target);
+        }
+
+        isInitialCheck = false;
+      });
+    },
+    {
       rootMargin: '0px',
       threshold: [0.35],
-    });
-
-    observer.observe(container);
-    container.setAttribute(ATTRIBUTE_ANIMATION, '');
-  }
-};
-
-export default (props: TypePathwayDefaultProps) => {
-  const {
-    isImagePositionLeft = false,
-    includesAnimation,
-    isThemeDark,
-    includedStyles,
-  } = props;
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const lock = document.createElement('div');
-  const lockWrapper = document.createElement('div');
-  let styles = STYLES_PATHWAY_DEFAULT_ELEMENT;
-
-  if (includedStyles) styles += includedStyles;
-
-  const textContainer = TextContainer.CreateElement(props);
-  const imageContainer = ImageContainer.CreateElement(props);
-  const loadAnimation = () => {
-    Animation({ includesAnimation, container });
-  };
-
-  container.classList.add(PATHWAY_DEFAULT_CONTAINER);
-  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
-  container.setAttribute(
-    ATTRIBUTE_IMAGE_POSITION,
-    isImagePositionLeft ? 'left' : 'right',
+    },
   );
 
-  wrapper.classList.add(PATHWAY_DEFAULT_CONTAINER_WRAPPER);
-  lock.classList.add(PATHWAY_DEFAULT_CONTAINER_LOCK);
+  observer.observe(container);
+};
 
-  lockWrapper.classList.add(PATHWAY_DEFAULT_CONTAINER_LOCK_WRAPPER);
+const createAssetContent = ({
+  image,
+  video,
+  dateSign,
+  isImageScaled,
+}: Pick<
+  PathwayStandardProps,
+  'dateSign' | 'isThemeDark' | 'image' | 'video' | 'isImageScaled'
+>): ElementVisual => {
+  const children: ElementVisual[] = [];
 
-  if (imageContainer) {
-    lockWrapper.appendChild(imageContainer.element);
-    styles += imageContainer.styles;
+  if (video) {
+    children.push(
+      Atomic.assets.video.observedAutoPlay({
+        video,
+        isScaled: isImageScaled,
+      }),
+    );
   }
 
-  lockWrapper.appendChild(textContainer.element);
-  styles += textContainer.styles;
+  if (!video && image) {
+    children.push(
+      Atomic.assets.image.background({
+        image,
+        isScaled: isImageScaled,
+        isShowCaption: true,
+        dateSign,
+        customStyles: {
+          [' > * ']: {},
+        },
+      }),
+    );
+  }
 
-  lock.appendChild(lockWrapper);
-  wrapper.appendChild(lock);
-  container.appendChild(wrapper);
+  return ElementModel.createDiv({
+    className: 'pathway-image-container-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        position: 'relative',
+        overflow: 'hidden',
+        height: '100%',
+      },
+    },
+  });
+};
+
+const createAssetColumn = (
+  props: Pick<
+    PathwayStandardProps,
+    | 'dateSign'
+    | 'isThemeDark'
+    | 'image'
+    | 'video'
+    | 'includesAnimation'
+    | 'isImagePositionLeft'
+    | 'isImageScaled'
+  >,
+): ElementVisual | null => {
+  const {
+    image,
+    video,
+    includesAnimation,
+    isImagePositionLeft,
+    isImageScaled,
+  } = props;
+
+  if (!image && !video) return null;
+
+  return ElementModel.createDiv({
+    className: 'pathway-image-container',
+    children: [createAssetContent(props)],
+    elementStyles: {
+      element: {
+        position: 'relative',
+        height: '100%',
+
+        ...(includesAnimation && {
+          ...theme.media.withViewTimelineAnimation({
+            opacity: '0',
+            transform: 'translateY(100px)',
+            transition: 'opacity 1s, transform 1s',
+            transitionDelay: isImagePositionLeft ? '0s' : '0.5s',
+          }),
+        }),
+
+        ...(isImageScaled === false && {
+          display: 'flex',
+          justifyContent: 'center',
+        }),
+
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          display: 'grid',
+          minHeight: '56vw',
+        },
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          ...(isImagePositionLeft === false && {
+            order: '2',
+          }),
+        },
+      },
+    },
+  });
+};
+
+const createStat = ({ stats }: Pick<PathwayStandardProps, 'stats'>) => {
+  if (!stats) return null;
+
+  const statWrapper = ElementModel.createDiv({
+    className: 'text-lockup-medium-stats',
+    elementStyles: {
+      element: {
+        marginTop: Styles.token.spacing.lg,
+
+        [`&:has(> *:nth-child(2))`]: {
+          display: `grid`,
+          gridGap: `${Styles.token.spacing.md}`,
+        },
+
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          marginTop: Styles.token.spacing.lg,
+          paddingTop: Styles.token.spacing.md,
+          borderTop: `1px solid ${Styles.token.color.gray.light}`,
+        },
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          marginTop: Styles.token.spacing['2xl'],
+
+          [`&:has(> *:nth-child(2))`]: {
+            gridGap: `${Styles.token.spacing.lg}`,
+            gridTemplateColumns: `repeat(2, 1fr)`,
+          },
+        },
+      },
+    },
+  });
+
+  statWrapper.element.innerHTML = stats.innerHTML;
+
+  return statWrapper;
+};
+
+const createHeadline = ({
+  headline,
+  isThemeDark,
+}: Pick<PathwayStandardProps, 'headline' | 'isThemeDark'>) => {
+  const characterCount = headline?.textContent?.trim().length || 0;
+  const isOverwriteHeadline = characterCount > 30;
+
+  if (!headline) return null;
+
+  const desktopStyles = {
+    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+      ...(isOverwriteHeadline && {
+        fontSize: '40px',
+      }),
+    },
+  };
+
+  return ElementModel.headline.sansLargest({
+    element: headline,
+    isThemeDark,
+    elementStyles: {
+      element: {
+        fontWeight: 800,
+        textTransform: 'uppercase',
+        textWrap: 'balance',
+        ...desktopStyles,
+      },
+      siblingAfter: {
+        marginTop: Styles.token.spacing.md,
+      },
+    },
+  });
+};
+
+const createTextContent = (props: PathwayStandardProps): ElementVisual => {
+  const children: ElementVisual[] = [];
+
+  children.push(
+    Atomic.textLockup.medium({
+      actions: props.actions,
+      eventDetails: props.eventDetails,
+      compositeHeadline: createHeadline(props),
+      isThemeDark: props.isThemeDark,
+      ribbon: props.eyebrow,
+      compositeStats: createStat(props),
+      text: props.text,
+    }),
+  );
+
+  const wrapper = ElementModel.createDiv({
+    className: 'pathway-text-container-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        padding: `${Styles.token.spacing.md} ${Styles.token.spacing.lg}`,
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          padding: `0 ${Styles.token.spacing['2xl']}`,
+
+          ...(props.isImagePositionLeft === false && {
+            paddingLeft: '0',
+          }),
+
+          ...(props.isImagePositionLeft && {
+            paddingRight: '0',
+          }),
+        },
+
+        [`@container (min-width: ${largeSize}px)`]: {
+          padding: `0 ${Styles.token.spacing['6xl']}`,
+
+          ...(props.isImagePositionLeft === false && {
+            paddingLeft: '0',
+          }),
+
+          ...(props.isImagePositionLeft && {
+            paddingRight: '0',
+          }),
+        },
+      },
+    },
+  });
+
+  const container = ElementModel.createDiv({
+    className: 'pathway-text-container',
+    children: [wrapper],
+    elementStyles: {
+      element: {
+        container: 'inline-size',
+
+        ...(props.includesAnimation && {
+          ...theme.media.withViewTimelineAnimation({
+            opacity: '0',
+            transform: 'translateY(100px)',
+            transition: 'opacity 1s, transform 1s',
+            transitionDelay: props.isImagePositionLeft ? '0.5s' : '0s',
+          }),
+        }),
+
+        ...(props.isThemeDark && {
+          backgroundColor: Styles.token.color.black,
+          color: Styles.token.color.white,
+        }),
+
+        ...(props.isThemeMaryland && {
+          backgroundColor: Styles.token.color.red,
+          color: Styles.token.color.white,
+        }),
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          ...(props.isImagePositionLeft === false && {
+            order: '1',
+          }),
+        },
+      },
+    },
+  });
+
+  return container;
+};
+
+const createLock = (props: PathwayStandardProps) => {
+  const textContent = createTextContent(props);
+  const assetContent = createAssetColumn(props);
+  const children: ElementVisual[] = [];
+
+  if (assetContent) {
+    children.push(assetContent);
+  }
+  children.push(textContent);
+
+  const lockWrapper = ElementModel.createDiv({
+    className: 'pathway-container-lock-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        position: 'relative',
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          alignItems: 'center',
+        },
+      },
+    },
+  });
+
+  return ElementModel.layout.spaceHorizontalLarger({
+    element: document.createElement('div'),
+    children: [lockWrapper],
+    elementStyles: {
+      element: {
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          paddingLeft: 0,
+          paddingRight: 0,
+        },
+      },
+    },
+  });
+};
+
+export default (props: PathwayStandardProps) => {
+  const composite = ElementModel.createDiv({
+    className: 'pathway-container',
+    children: [
+      ElementModel.createDiv({
+        className: 'pathway-container-wrapper',
+        children: [createLock(props)],
+      }),
+    ],
+    elementStyles: {
+      element: {
+        container: 'inline-size',
+        position: 'relative',
+        overflow: 'hidden',
+      },
+    },
+  });
+
+  // Set up animation observer
+  const loadAnimation = () => {
+    if (props.includesAnimation) {
+      const textElement = composite.element.querySelector(
+        '.pathway-text-container',
+      ) as HTMLElement;
+      const imageElement = composite.element.querySelector(
+        '.pathway-image-container',
+      ) as HTMLElement | null;
+
+      if (textElement) {
+        setupAnimation(composite.element, textElement, imageElement);
+      }
+    }
+  };
 
   return {
-    element: container,
-    styles,
+    ...composite,
     events: {
       loadAnimation,
     },

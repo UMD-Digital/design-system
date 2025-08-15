@@ -5,27 +5,33 @@ This document outlines the migration strategy for converting the pathway compone
 ## Migration Overview
 
 Each pathway element will be updated to:
+
 1. Use `ElementModel.create()` for DOM construction
 2. Leverage atomic components from the `atomic/` directory
 3. Simplify TypeScript interfaces without excessive extending
-4. Organize constants using the `as const` pattern
-5. Structure files consistently (imports → interfaces → constants → functions → export)
+4. Keep class names and style values inline (no abstraction to constants)
+5. Structure files consistently (imports → interfaces → functions → export)
 
 ## File Migration Order
 
 ### Phase 1: Type System Setup
+
 **File**: Create `_types.ts`
+
 - Define base interfaces for shared properties
 - Create variant-specific interfaces using `Pick<>` pattern
 - Avoid `Partial<>` and excessive inheritance
 - Make required vs optional properties explicit
 
 ### Phase 2: Leverage Existing Atomic Elements
+
 **Atomic Components to Use**:
+
 - `/source/atomic/assets` - For image and video handling and display
 - `/source/atomic/text-lockup` - For text groupings and layouts
 
 **Enhancement Required**:
+
 - Extend `atomic/text-lockup/medium` to support:
   - Event details (date, time, location)
   - Stats display (numbers, metrics)
@@ -35,44 +41,55 @@ Each pathway element will be updated to:
 ### Phase 3: Core Variants Migration (Simple → Complex)
 
 #### 3.1 Standard Pathway (`standard.ts`)
+
 **Current State**:
+
 - Manual DOM creation with string concatenation
 - Complex style strings
 - Direct element manipulation
 
 **Migration Tasks**:
+
 - Replace DOM creation with `ElementModel.create()`
 - Use atomic components:
-  - `atomic/text-lockup/large` for headlines
+  - `atomic/text-lockup/medium` for headlines
   - `atomic/assets/image` for images
   - `atomic/layout/container` for spacing
 - Convert styles to `elementStyles` object
-- Organize constants (CLASS_NAMES, THEME_VALUES)
+- Keep class names and theme values inline within elementStyles (no abstraction to constants)
 - Simplify TypePathwayDefaultProps interface
 
 #### 3.2 Hero Pathway (`hero.ts`)
+
 **Migration Tasks**:
+
 - Implement Element Model structure
 - Integrate atomic components for prominent display
 - Add background media support using `assets.image.background()`
 - Use `textLockup.large()` for emphasized typography
 
 #### 3.3 Highlight Pathway (`highlight.ts`)
+
 **Migration Tasks**:
+
 - Convert accent styling to elementStyles
 - Use atomic components for numbered/icon indicators
 - Implement theme-aware color schemes
 - Simplify interaction with Element Model events
 
 #### 3.4 Overlay Pathway (`overlay.ts`)
+
 **Migration Tasks**:
+
 - Migrate overlay positioning to CSS-in-JS
 - Use `assets.image` with proper gradient overlays
 - Implement hover states through elementStyles
 - Convert animations to keyframe strings
 
 #### 3.5 Sticky Pathway (`sticky.ts`)
+
 **Migration Tasks**:
+
 - Complex scroll behavior using Element Model
 - Implement sticky positioning through elementStyles
 - Add scroll progress indicators
@@ -81,6 +98,7 @@ Each pathway element will be updated to:
 ## Implementation Pattern
 
 ### Before (Current Pattern)
+
 ```typescript
 // Complex inheritance and manual DOM
 type TypePathwayDefaultProps = TypePathwayTextContainer &
@@ -93,39 +111,26 @@ element.innerHTML = `...`;
 ```
 
 ### After (Element Model Pattern)
+
 ```typescript
 // Simplified, explicit interfaces
-interface PathwayStandardProps extends 
-  Pick<ThemeProps, 'isThemeDark'> {
-  headline: ContentElement;      // Required
-  text?: ContentElement;         // Optional
+interface PathwayStandardProps extends Pick<ThemeProps, 'isThemeDark'> {
+  headline: ContentElement; // Required
+  text?: ContentElement; // Optional
   image?: ImageElement;
   imagePosition?: 'left' | 'right';
   includesAnimation?: boolean;
 }
 
-// Constants organization
-const CLASS_NAMES = {
-  CONTAINER: 'pathway-standard-container',
-  WRAPPER: 'pathway-standard-wrapper',
-  LOCK: 'pathway-standard-lock',
-} as const;
-
-const THEME_VALUES = {
-  MAX_WIDTH: {
-    MEDIUM: '800px',
-    LARGE: '1200px',
-  },
-} as const;
-
-// Element Model creation
+// Element Model creation - no abstracted constants
 export default (props: PathwayStandardProps) => {
   const children = [
-    props.image && Atomic.assets.image({
-      src: props.image.src,
-      alt: props.image.alt,
-    }),
-    Atomic.textLockup.large({
+    props.image &&
+      Atomic.assets.image({
+        src: props.image.src,
+        alt: props.image.alt,
+      }),
+    Atomic.textLockup.medium({
       headline: props.headline,
       text: props.text,
     }),
@@ -133,12 +138,13 @@ export default (props: PathwayStandardProps) => {
 
   return ElementModel.create({
     element: document.createElement('div'),
-    className: CLASS_NAMES.CONTAINER,
+    className: 'pathway-standard-container', // Inline class name
     children,
     elementStyles: {
       element: {
         display: 'flex',
         gap: Styles.token.spacing.xl,
+        maxWidth: '1200px', // Inline theme value
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
           flexDirection: props.imagePosition === 'left' ? 'row' : 'row-reverse',
         },
@@ -151,6 +157,7 @@ export default (props: PathwayStandardProps) => {
 ## Testing Strategy
 
 ### For Each Migrated Component:
+
 1. Verify DOM structure matches original
 2. Test responsive behavior at all breakpoints
 3. Validate prop combinations
@@ -159,6 +166,7 @@ export default (props: PathwayStandardProps) => {
 6. Test update() method functionality
 
 ### Test Files to Update:
+
 - Update existing tests to work with Element Model
 - Add tests for new atomic component integration
 - Verify style output consistency
@@ -171,7 +179,7 @@ export default (props: PathwayStandardProps) => {
 ✅ Files follow consistent structure pattern  
 ✅ All tests passing  
 ✅ No breaking changes to public API  
-✅ Performance maintained or improved  
+✅ Performance maintained or improved
 
 ## Notes
 

@@ -20,14 +20,7 @@ export const hooks = {
    * AfterConnect hook that sets up component animations
    * Delays animation initialization to ensure proper positioning
    */
-  loadAnimation: (ref: ComponentRef) => {
-    const element = ref.element;
-    setTimeout(() => {
-      if (element.getBoundingClientRect().top > 0) {
-        ref?.events?.loadAnimation();
-      }
-    }, 10);
-  },
+  loadAnimation: (ref: ComponentRef) => ref?.events?.loadAnimation(),
 
   /**
    * Standard resize handler for afterConnect

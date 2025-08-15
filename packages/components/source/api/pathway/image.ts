@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
-import { createEventData } from '../_event';
+import { extractEventData } from '../_event';
 import { CreateComponentFunction } from '../_types';
 
 /**
@@ -28,66 +28,70 @@ const createComponent: CreateComponentFunction = (element) => {
   const isDisplaySticky = Attributes.isDisplay.sticky({ element });
   const includesAnimation = Attributes.includesFeature.animation({ element });
 
-  const slots = ({ element }: { element: HTMLElement }) => ({
-    action: Slots.actions.default({ element }),
-    eyebrow: Slots.eyebrow.default({ element }),
-    headline: Slots.headline.default({ element }),
-    text: Slots.text.default({ element }),
-    image: Slots.assets.image({ element }) as HTMLImageElement,
-    video: Slots.assets.video({ element }) as HTMLVideoElement,
-  });
-
   if (isDisplayHero) {
     return Composite.pathway.hero({
+      actions: Slots.actions.default({ element }),
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
-      text: Slots.text.default({ element }),
-      actions: Slots.actions.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
-      video: Slots.assets.video({ element }) as HTMLVideoElement,
       includesAnimation,
       isImagePositionLeft,
+      text: Slots.text.default({ element }),
+      video: Slots.assets.video({ element }) as HTMLVideoElement,
     });
   }
 
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
-      ...slots({ element }),
+      action: Slots.actions.default({ element }),
+      eyebrow: Slots.eyebrow.default({ element }),
+      headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
-      video: Slots.assets.video({ element }) as HTMLVideoElement,
+      includesAnimation,
+      isImagePositionLeft,
+      isImageScaled,
       isThemeDark,
       isThemeLight,
       isThemeMaryland,
-      isImageScaled,
-      isImagePositionLeft,
-      includesAnimation,
+      text: Slots.text.default({ element }),
+      video: Slots.assets.video({ element }) as HTMLVideoElement,
     });
   }
 
   if (isDisplaySticky) {
     return Composite.pathway.sticky({
-      ...slots({ element }),
+      action: Slots.actions.default({ element }),
+      eyebrow: Slots.eyebrow.default({ element }),
+      headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
-      video: Slots.assets.video({ element }) as HTMLVideoElement,
-      isThemeDark: Attributes.isTheme.dark({ element }),
-      isImageScaled,
       isImagePositionLeft,
+      isImageScaled,
+      isThemeDark: Attributes.isTheme.dark({ element }),
+      text: Slots.text.default({ element }),
+      video: Slots.assets.video({ element }) as HTMLVideoElement,
     });
   }
 
+  const featureEvents = extractEventData(element, {
+    isLargeSize: true,
+    isDateSignDark: false,
+  });
+
   return Composite.pathway.standard({
+    actions: Slots.actions.default({ element }),
+    dateSign: featureEvents?.dateSign,
+    eventDetails: featureEvents?.eventMeta,
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),
-    text: Slots.text.default({ element }),
-    action: Slots.actions.default({ element }),
     image: Slots.assets.image({ element }) as HTMLImageElement,
-    video: Slots.assets.video({ element }) as HTMLVideoElement,
-    stats: Slots.text.stats({ element }),
+    includesAnimation,
+    isImagePositionLeft,
+    isImageScaled,
     isThemeDark,
     isThemeMaryland,
-    isImageScaled,
-    isImagePositionLeft,
-    includesAnimation,
+    stats: Slots.text.stats({ element }),
+    text: Slots.text.default({ element }),
+    video: Slots.assets.video({ element }) as HTMLVideoElement,
   });
 };
 

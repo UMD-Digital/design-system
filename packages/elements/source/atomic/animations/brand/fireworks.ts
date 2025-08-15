@@ -14,20 +14,34 @@ const RESPONSIVE_GAP = {
       gap: Styles.token.spacing.md,
     },
   [`@container ${CONTAINER_QUERY_NAMED} (${Styles.token.media.queries.tablet.min})`]:
-    { gap: Styles.token.spacing.lg },
+    {
+      gap: Styles.token.spacing.lg,
+    },
   [`@container ${CONTAINER_QUERY_NAMED} (${Styles.token.media.queries.desktop.min})`]:
-    { gap: Styles.token.spacing.xl },
+    {
+      gap: Styles.token.spacing.xl,
+    },
 };
 
-const RESPONSIVE_HEIGHT = {
-  height: '60vh',
-  [`@media (${Styles.token.media.queries.large.min})`]: {
-    height: '80vh',
+const RESPONSIVE_PADDING = {
+  padding: '0 5vw',
+
+  [`@media (${Styles.token.media.queries.medium.min})`]: {
     padding: '0 10vw',
   },
-  [`@media (${Styles.token.media.queries.tablet.min})`]: {
-    height: '100vh',
+
+  [`@media (${Styles.token.media.queries.desktop.min})`]: {
     padding: '0 15vw',
+  },
+};
+
+const RESPONSIVE_STRETCH_HEIGHT = {
+  height: '400vh',
+  [`@media (${Styles.token.media.queries.large.min})`]: {
+    height: '500vh',
+  },
+  [`@media (${Styles.token.media.queries.tablet.min})`]: {
+    height: '600vh',
   },
 };
 
@@ -39,16 +53,37 @@ const ANIMATION_CONFIG = {
     LAYER_BASE_ZINDEX: 800,
     KEYFRAME: `
       @keyframes popIn {
-        from { opacity: 1; }
-        to   { opacity: 1; }
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    `,
+  },
+
+  GRID_FLARE: {
+    NAME: 'gridFlare',
+    KEYFRAME: `
+      @keyframes gridFlare {
+        from { transform: var(--stack-transform); }
+        to { transform: none; }
       }
     `,
   },
   FULL_SCREEN: {
     NAME: 'fullscreen',
-    DURATION_MS: 500,
-    EASE: 'ease-out',
-    FILL: 'forwards' as FillMode,
+    KEYFRAME: `
+     @keyframes fullscreen {
+      from { transform: scale(1);  }
+      to { transform: scale(var(--fs-end)); }
+    }`,
+  },
+
+  CENTER_FEATURED: {
+    NAME: 'centerFeatured',
+    KEYFRAME: `
+     @keyframes centerFeatured {
+      from { top: 0%; }
+      to   { top: 50%; }
+    }`,
   },
 };
 
@@ -84,22 +119,12 @@ const createElementContainer = (
 
         [` & > :first-child`]: {
           flexGrow: 0,
-
-          ...(isLeft && {
-            height: '60%',
-          }),
-
-          ...(isRight && {
-            height: '50%',
-          }),
+          ...(isLeft && { height: '60%' }),
+          ...(isRight && { height: '50%' }),
         },
 
-        ...(isLengthFive && {
-          maxHeight: '90%',
-        }),
-        ...(isLengthSix && {
-          maxHeight: '80%',
-        }),
+        ...(isLengthFive && { maxHeight: '90%' }),
+        ...(isLengthSix && { maxHeight: '80%' }),
 
         [`&.umd-element-card-fireworks__shortened`]: { maxHeight: '90%' },
 
@@ -112,12 +137,15 @@ const createElementContainer = (
           minHeight: 0,
           willChange: 'opacity, transform',
           zIndex: `var(${ANIMATION_CONFIG.POP_IN.LAYER_VAR}, 0)`,
-          opacity: 0,
+          animationName: ANIMATION_CONFIG.POP_IN.NAME,
+          animationTimingFunction: 'steps(1,start)',
+          animationFillMode: 'forwards',
+          animationDirection: 'normal',
+          animationTimeline: '--pop-timeline',
+          animationRange: '0% 0%',
 
-          [`&.umd-element-card-fireworks__popin`]: {
-            [`@media (prefers-reduced-motion: no-preference)`]: {
-              animation: `popIn 1ms steps(1,end) forwards`,
-            },
+          '@media (prefers-reduced-motion: no-preference)': {
+            opacity: 0,
           },
         },
       },
@@ -125,25 +153,27 @@ const createElementContainer = (
   });
 };
 
-const createParentContainer = (grid: ElementVisual) =>
-  ElementModel.createDiv({
+const createParentContainer = (grid: ElementVisual) => {
+  return ElementModel.createDiv({
     className: 'umd-element-card-fireworks',
     children: [grid],
     elementStyles: {
       element: {
         containerName: `${CONTAINER_QUERY_NAMED}`,
         containerType: 'inline-size',
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        margin: '0 auto',
-        padding: '0 5vw',
-        ...RESPONSIVE_HEIGHT,
+        overflow: 'visible',
+        viewTimelineName: '--pop-timeline',
+        viewTimelineAxis: 'block',
+
+        '@media (prefers-reduced-motion: no-preference)': {
+          ...RESPONSIVE_STRETCH_HEIGHT,
+        },
       },
     },
   });
+};
 
-const createMainContainer = (
+const createGrid = (
   left: ElementVisual,
   center: ElementVisual,
   right: ElementVisual,
@@ -156,60 +186,59 @@ const createMainContainer = (
         display: 'grid',
         gridTemplateColumns: '1fr 2fr 1fr',
         alignItems: 'center',
+        position: 'sticky',
+
+        '@media (prefers-reduced-motion: no-preference)': {
+          top: '50vh',
+          translate: '0 -50%',
+        },
 
         ...RESPONSIVE_GAP,
+        ...RESPONSIVE_PADDING,
       },
     },
   });
 
 const createFeaturedElement = (featured: HTMLElement) => {
-  const createFeaturedBasedOnType = () => {
-    const featuredElementStyle = {
-      height: '100%',
-      width: '100%',
-      objectFit: 'cover',
-    };
+  const featuredElement =
+    featured instanceof HTMLVideoElement
+      ? ElementModel.createDiv({
+          className: 'umd-element-card-fireworks__featured-element',
+          children: [
+            assets.video.observedAutoPlay({
+              video: featured as HTMLVideoElement,
+              additionalElementStyles: {
+                height: '100%',
+                width: '100%',
 
-    if (featured instanceof HTMLVideoElement) {
-      const video = featured as HTMLVideoElement;
-      const videoElement = assets.video.toggle({
-        video,
-        additionalElementStyles: {
-          height: '100%',
-          width: '100%',
-
-          [`& video`]: featuredElementStyle,
-        },
-      });
-
-      return ElementModel.createDiv({
-        className: 'umd-element-card-fireworks__featured-element',
-        children: [videoElement],
-        elementStyles: {
-          element: {
-            height: '100%',
+                [`& video`]: {
+                  objectFit: 'cover',
+                  width: '100%',
+                  height: '100%',
+                },
+              },
+            }),
+          ],
+          elementStyles: { element: { height: '100%', width: '100%' } },
+        })
+      : ElementModel.create({
+          element: featured,
+          className: 'umd-element-card-fireworks__featured-element',
+          elementStyles: {
+            element: {
+              height: '100%',
+              width: '100%',
+              objectFit: 'cover',
+              animationTimeline: '--pop-timeline',
+            },
           },
-        },
-      });
-    } else {
-      return ElementModel.create({
-        element: featured,
-        className: 'umd-element-card-fireworks__featured-element',
-        elementStyles: {
-          element: featuredElementStyle,
-        },
-      });
-    }
-  };
+        });
 
-  const featuredElement = createFeaturedBasedOnType();
   const featuredElementContainer = ElementModel.createDiv({
     className: 'umd-element-card-fireworks__featured-container',
     children: [featuredElement],
     elementStyles: {
-      element: {
-        height: '100%',
-      },
+      element: { height: '100%', width: '100%', position: 'relative' },
     },
   });
 
@@ -218,6 +247,9 @@ const createFeaturedElement = (featured: HTMLElement) => {
     children: [featuredElementContainer],
     elementStyles: {
       element: {
+        top: 0,
+        transform: 'scale(1)',
+        transition: 'top 0.5s ease',
         zIndex: '999',
         position: 'relative',
         display: 'block',
@@ -235,32 +267,26 @@ const createFeaturedElement = (featured: HTMLElement) => {
     },
   });
 
-  return featuredElementWrapper;
+  return { featuredElement, featuredElementContainer, featuredElementWrapper };
 };
 
-const createNonFeaturedElement = (element: HTMLElement) => {
-  return ElementModel.create({
-    element: element,
+const createNonFeaturedElement = (element: HTMLElement) =>
+  ElementModel.create({
+    element,
     className: 'umd-element-card-fireworks__grid-element',
   });
-};
 
 const getCenterElements = (
   featuredElement: ElementVisual,
   images: HTMLElement[],
 ) => {
-  const centerElements: ElementVisual[] = [];
+  const centerElements: ElementVisual[] = [featuredElement];
   const isEvenCount = (images.length + 1) % 2 === 0;
 
-  centerElements.push(featuredElement);
-
-  if (images.length == 0 || !isEvenCount) {
-    return centerElements;
-  }
+  if (images.length === 0 || !isEvenCount) return centerElements;
 
   const firstMedia = createNonFeaturedElement(images[0]);
   centerElements.push(firstMedia);
-
   images.splice(0, 1);
 
   return centerElements;
@@ -271,14 +297,8 @@ const getSideElements = (images: HTMLElement[]) => {
   const rightElements: ElementVisual[] = [];
 
   images.map((element, index) => {
-    const isEvenIndex = index % 2 === 0;
-    const visualElement = createNonFeaturedElement(element);
-
-    if (isEvenIndex) {
-      leftElements.push(visualElement);
-    } else {
-      rightElements.push(visualElement);
-    }
+    const visual = createNonFeaturedElement(element);
+    (index % 2 === 0 ? leftElements : rightElements).push(visual);
   });
 
   return { leftElements, rightElements };
@@ -291,143 +311,13 @@ const distributeSideElementRatios = (
 ) => {
   const leftChildren = Array.from(left.element.children) as HTMLElement[];
   const rightChildren = Array.from(right.element.children) as HTMLElement[];
-  const centerHasMultipleMedia = center.element.children.length >= 2;
+  const centerHasMultiple = center.element.children.length >= 2;
 
-  if (leftChildren.length <= 0 || rightChildren.length <= 0) {
-    return;
-  }
+  if (!leftChildren.length || !rightChildren.length) return;
 
-  if (centerHasMultipleMedia) {
+  if (centerHasMultiple) {
     left.element.classList.add('umd-element-card-fireworks__shortened');
     right.element.classList.add('umd-element-card-fireworks__shortened');
-  }
-};
-
-const animatePopInStack = async (
-  grid: ElementVisual,
-  center: ElementVisual,
-) => {
-  const allMedia = getAllMediaInGrid(grid);
-  const firstCenterChild = center.element.children[0] as
-    | HTMLElement
-    | undefined;
-
-  const getOrdering = () => {
-    if (firstCenterChild) {
-      const ordered = allMedia.filter(
-        (element) => element !== firstCenterChild,
-      );
-      ordered.push(firstCenterChild);
-      return ordered;
-    }
-
-    return allMedia;
-  };
-
-  const ordered = getOrdering();
-
-  ordered.map((element, index) => {
-    element.classList.add('umd-element-card-fireworks__popin');
-    element.style.setProperty(
-      ANIMATION_CONFIG.POP_IN.LAYER_VAR,
-      String(ANIMATION_CONFIG.POP_IN.LAYER_BASE_ZINDEX + index),
-    );
-    element.style.animationDelay = `${
-      index * ANIMATION_CONFIG.POP_IN.STEP_MS
-    }ms`;
-  });
-
-  const animationFinishes = ordered.flatMap((element) =>
-    element
-      .getAnimations({ subtree: false })
-      .filter(
-        (animation: any) =>
-          animation.animationName === ANIMATION_CONFIG.POP_IN.NAME,
-      )
-      .map((animation) => animation.finished),
-  );
-  await Promise.all(animationFinishes);
-};
-
-const animateFlareOutToGrid = async (grid: ElementVisual): Promise<void> => {
-  const allMedia = getAllMediaInGrid(grid);
-  if (allMedia.length === 0) return;
-
-  const animations = allMedia.map((element) => {
-    const from = getComputedStyle(element).transform;
-    const keyframes = [{ transform: from }, { transform: 'none' }];
-
-    return element.animate(keyframes, {
-      duration: ANIMATION_CONFIG.FULL_SCREEN.DURATION_MS,
-      easing: ANIMATION_CONFIG.FULL_SCREEN.EASE,
-      fill: ANIMATION_CONFIG.FULL_SCREEN.FILL,
-    });
-  });
-
-  await Promise.all(animations.map((animation) => animation.finished));
-
-  allMedia.map((element) => element.style.removeProperty('transform'));
-};
-
-const animateFeaturedToFullscreen = (
-  grid: ElementVisual,
-  featuredElement: ElementVisual,
-) => {
-  const fullScreenAnimation = async () => {
-    const beginningElementRect =
-      featuredElement.element.getBoundingClientRect();
-    featuredElement.element.classList.add(
-      'umd-element-card-fireworks__full-screen',
-    );
-    const lastElementRect = featuredElement.element.getBoundingClientRect();
-
-    await new Promise((r) => requestAnimationFrame(r));
-
-    const dx = beginningElementRect.left - lastElementRect.left;
-    const dy = beginningElementRect.top - lastElementRect.top;
-    const sx = beginningElementRect.width / lastElementRect.width;
-    const sy = beginningElementRect.height / lastElementRect.height;
-
-    featuredElement.element.style.transformOrigin = 'top left';
-    featuredElement.element.style.willChange = 'transform';
-
-    await featuredElement.element.animate(
-      [
-        { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
-        { transform: 'none' },
-      ],
-      {
-        duration: ANIMATION_CONFIG.FULL_SCREEN.DURATION_MS,
-        easing: ANIMATION_CONFIG.FULL_SCREEN.EASE,
-        fill: ANIMATION_CONFIG.FULL_SCREEN.FILL,
-      },
-    ).finished;
-
-    featuredElement.element.style.removeProperty('transformOrigin');
-    featuredElement.element.style.removeProperty('willChange');
-    featuredElement.element.style.removeProperty('transform');
-  };
-
-  const rect = grid.element.getBoundingClientRect();
-  const alreadyInView = rect.top <= 0 && rect.bottom > 0;
-
-  const intersectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.map((element) => {
-        if (element.isIntersecting) {
-          fullScreenAnimation();
-          intersectionObserver.disconnect();
-        }
-      });
-    },
-    { threshold: 1 },
-  );
-
-  intersectionObserver.observe(grid.element);
-
-  if (alreadyInView) {
-    intersectionObserver.disconnect();
-    fullScreenAnimation();
   }
 };
 
@@ -440,133 +330,217 @@ const calculateStackPosition = (
   const gridRect = grid.element.getBoundingClientRect();
   const gridStyle = getComputedStyle(grid.element);
 
-  const gridCenterX = (gridRect.width - parseInt(gridStyle.paddingLeft)) / 2;
+  const gridCenterX = gridRect.width / 2 - parseInt(gridStyle.paddingLeft);
   const gridCenterY = gridRect.height / 2;
 
   const randomTranslate = (min = 5, max = 20): string => {
-    const getRandomNumber = (a: number, b: number) => {
+    const randomNumber = (numOne: number, numTwo: number) => {
       const sign = Math.random() < 0.5 ? -1 : 1;
-      const randomNumber = (Math.random() * (b - a) + a) * sign;
-
-      return Math.round(randomNumber);
+      return Math.round((Math.random() * (numTwo - numOne) + numOne) * sign);
     };
+    return `translate(${randomNumber(min, max)}px, ${randomNumber(
+      min,
+      max,
+    )}px)`;
+  };
 
-    const randomX = getRandomNumber(min, max);
-    const randomY = getRandomNumber(min, max);
-
-    return `translate(${randomX}px, ${randomY}px)`;
+  const setStack = (element: HTMLElement, transformAmount: string) => {
+    element.style.setProperty('--stack-transform', transformAmount);
   };
 
   const centerElements = [...center.element.children] as HTMLElement[];
   const leftElements = [...left.element.children] as HTMLElement[];
   const rightElements = [...right.element.children] as HTMLElement[];
 
-  const positionCenter = (elements: HTMLElement[]) => {
+  const posCenter = (elements: HTMLElement[]) => {
     elements.map((element, index) => {
-      element.style.transform = randomTranslate();
+      let transformAmount = randomTranslate();
+      if (index === 0)
+        transformAmount += `translateY(${gridCenterY}px) translate(0, -50%)`;
+      else if (index === 1)
+        transformAmount += `translateY(${-gridCenterY}px) translate(0, 50%)`;
 
-      if (index === 0) {
-        element.style.transform += `translateY(${gridCenterY}px) translate(0, -50%)`;
-      } else if (index === 1) {
-        element.style.transform += `translateY(${-gridCenterY}px) translate(0, 50%)`;
-      }
+      setStack(element, transformAmount);
     });
   };
 
-  const positionLeft = (elements: HTMLElement[]) => {
-    const multipleMedia = elements.length >= 2;
+  const posLeft = (elements: HTMLElement[]) => {
+    const multiCount = elements.length >= 2;
 
     elements.map((element, index) => {
-      element.style.transform = `translateX(${gridCenterX}px)`;
-      element.style.transform += randomTranslate();
+      let transformAmount = `translateX(${gridCenterX}px)` + randomTranslate();
+      if (!multiCount) transformAmount += `translate(-50%, 0)`;
+      else if (index === 0) transformAmount += `translate(-50%, 25%)`;
+      else if (index === 1) transformAmount += `translate(-50%, -25%)`;
 
-      if (!multipleMedia) {
-        element.style.transform += `translate(-50%, 0)`;
-        return;
-      }
-
-      if (index === 0) {
-        element.style.transform += `translate(-50%, 25%)`;
-      }
-
-      if (index === 1) {
-        element.style.transform += `translate(-50%, -25%)`;
-      }
+      setStack(element, transformAmount);
     });
   };
 
-  const positionRight = (elements: HTMLElement[]) => {
-    const multipleMedia = elements.length >= 2;
-
+  const posRight = (elements: HTMLElement[]) => {
+    const multiCount = elements.length >= 2;
     elements.map((element, index) => {
-      element.style.transform = `translateX(${-gridCenterX}px)`;
-      element.style.transform += randomTranslate();
+      let transformAmount = `translateX(${-gridCenterX}px)` + randomTranslate();
+      if (!multiCount) transformAmount += `translate(50%, 0)`;
+      else if (index === 0) transformAmount += `translate(50%, 25%)`;
+      else if (index === 1) transformAmount += `translate(50%, -25%)`;
 
-      if (!multipleMedia) {
-        element.style.transform += `translate(50%, 0)`;
-        return;
-      }
-
-      if (index === 0) {
-        element.style.transform += `translate(50%, 25%)`;
-      }
-
-      if (index === 1) {
-        element.style.transform += `translate(50%, -25%)`;
-      }
+      setStack(element, transformAmount);
     });
   };
 
-  positionCenter(centerElements);
-  positionLeft(leftElements);
-  positionRight(rightElements);
+  posCenter(centerElements);
+  posLeft(leftElements);
+  posRight(rightElements);
 };
 
-const setShowAllElements = (grid: ElementVisual) => {
-  getAllMediaInGrid(grid).map((element) => {
-    element.style.opacity = '1';
+const appendToStyle = (
+  element: HTMLElement,
+  property: string,
+  value: string,
+) => {
+  const currPropertyValue = element.style.getPropertyValue(property).trim();
+
+  if (!currPropertyValue) {
+    element.style.setProperty(property, `${value}`);
+    return;
+  }
+
+  element.style.setProperty(property, `${currPropertyValue}, ${value}`);
+};
+
+const attachPopInStack = (grid: ElementVisual, center: ElementVisual) => {
+  const RANGE_START = 10;
+  const RANGE_END = 20;
+  const firstCenterChild = (center.element.children[0] as HTMLElement) ?? null;
+  const allMedia = getAllMediaInGrid(grid);
+
+  if (!firstCenterChild) {
+    return;
+  }
+
+  const mediaPopInOrder = [
+    ...allMedia.filter((element) => element !== firstCenterChild),
+    firstCenterChild,
+  ];
+  const scrollInterval = (RANGE_END - RANGE_START) / mediaPopInOrder.length;
+
+  mediaPopInOrder.map((element, index) => {
+    const elementStart = RANGE_START + index * scrollInterval;
+    const elementEnd = elementStart + scrollInterval;
+
+    element.style.setProperty(
+      ANIMATION_CONFIG.POP_IN.LAYER_VAR,
+      String(ANIMATION_CONFIG.POP_IN.LAYER_BASE_ZINDEX + index),
+    );
+    element.style.setProperty('animation-name', ANIMATION_CONFIG.POP_IN.NAME);
+    element.style.setProperty('animation-timing-function', 'steps(1,start)');
+    element.style.setProperty('animation-fill-mode', 'both');
+    element.style.setProperty('animation-direction', 'normal');
+    element.style.setProperty('animation-timeline', '--pop-timeline');
+    element.style.setProperty(
+      'animation-range',
+      `${elementStart}% ${elementEnd}%`,
+    );
   });
 };
 
-const observeResize = (container: ElementVisual, callback: () => void) => {
-  const resizeObserver = new ResizeObserver(callback);
-  resizeObserver.observe(container.element);
+const attachFlareToGridScroll = (grid: ElementVisual) => {
+  const allMedia = getAllMediaInGrid(grid);
+
+  if (!allMedia.length) {
+    return;
+  }
+
+  const RANGE_START = 20;
+  const RANGE_END = 50;
+
+  allMedia.map((element) => {
+    const currentTransform = getComputedStyle(element).transform;
+
+    element.style.transform = `${currentTransform}`;
+    appendToStyle(element, 'animation-name', ANIMATION_CONFIG.GRID_FLARE.NAME);
+    appendToStyle(element, 'animation-timing-function', 'ease-out');
+    appendToStyle(element, 'animation-fill-mode', 'both');
+    appendToStyle(element, 'animation-direction', 'normal');
+    appendToStyle(element, 'animation-timeline', '--pop-timeline');
+    appendToStyle(element, 'animation-range', `${RANGE_START}% ${RANGE_END}%`);
+  });
 };
 
-const observeIntersection = (
-  container: ElementVisual,
-  onIntersect: () => void,
-) => {
-  const intersectionObserver = new IntersectionObserver(
-    (entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        onIntersect();
-        intersectionObserver.disconnect();
-      }
-    },
-    { threshold: 0.7 },
-  );
-  intersectionObserver.observe(container.element);
-};
-
-const runAnimationSequence = async (
+const attachFullscreenScroll = (
   grid: ElementVisual,
-  center: ElementVisual,
   featuredElement: ElementVisual,
-  isExpandFeature: boolean,
 ) => {
-  const delay = (ms: number) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+  const computeFullscreenEnd = () => {
+    const startingPosition =
+      featuredElement.element.getBoundingClientRect() as DOMRect;
+    const fullscreenScale = Math.max(
+      window.innerWidth / startingPosition.width,
+      window.innerHeight / startingPosition.height,
+    );
+
+    return fullscreenScale;
   };
 
-  await animatePopInStack(grid, center);
-  await delay(200);
-  await animateFlareOutToGrid(grid);
-  await delay(400);
+  const handleFeaturedCentering = () => {
+    const RANGE_START_CENTER = 50;
+    const RANGE_END_CENTER = 60;
 
-  if (isExpandFeature) {
-    await animateFeaturedToFullscreen(grid, featuredElement);
+    appendToStyle(
+      featuredElement.element,
+      'animation-name',
+      ANIMATION_CONFIG.CENTER_FEATURED.NAME,
+    );
+    appendToStyle(featuredElement.element, 'animation-fill-mode', 'both');
+    appendToStyle(
+      featuredElement.element,
+      'animation-range',
+      `${RANGE_START_CENTER}% ${RANGE_END_CENTER}%`,
+    );
+  };
+
+  const expandScreen = () => {
+    const fullscreenScale = computeFullscreenEnd();
+
+    featuredElement.element.style.setProperty('transform-origin', '50% 50%');
+    featuredElement.element.style.setProperty('--fs-end', `${fullscreenScale}`);
+    featuredElement.element.style.setProperty('z-index', '9999');
+
+    appendToStyle(
+      featuredElement.element,
+      'animation-name',
+      ANIMATION_CONFIG.FULL_SCREEN.NAME,
+    );
+    appendToStyle(
+      featuredElement.element,
+      'animation-timing-function',
+      'ease-out',
+    );
+    appendToStyle(featuredElement.element, 'animation-fill-mode', 'both');
+    appendToStyle(featuredElement.element, 'animation-direction', 'normal');
+    appendToStyle(
+      featuredElement.element,
+      'animation-timeline',
+      '--pop-timeline',
+    );
+    appendToStyle(
+      featuredElement.element,
+      'animation-range',
+      `${RANGE_START}% ${RANGE_END}%`,
+    );
+  };
+
+  const RANGE_START = 60;
+  const RANGE_END = 80;
+  const allMedia = getAllMediaInGrid(grid);
+  const resizeObserver = new ResizeObserver(() => expandScreen());
+
+  if (allMedia.length === 4 || allMedia.length === 6) {
+    handleFeaturedCentering();
   }
+
+  resizeObserver.observe(grid.element);
 };
 
 export default ({
@@ -580,8 +554,10 @@ export default ({
 }): ElementVisual => {
   const elementsLength = images.length + 1;
 
-  const featuredElement = createFeaturedElement(featured);
-  const centerElements = getCenterElements(featuredElement, images);
+  const { featuredElement, featuredElementContainer, featuredElementWrapper } =
+    createFeaturedElement(featured);
+
+  const centerElements = getCenterElements(featuredElementWrapper, images);
   const { leftElements, rightElements } = getSideElements(images);
 
   const left = createElementContainer(
@@ -600,24 +576,31 @@ export default ({
     elementsLength,
   );
 
-  const grid = createMainContainer(left, center, right);
+  const grid = createGrid(left, center, right);
   const container = createParentContainer(grid);
 
-  distributeSideElementRatios(grid, left, right);
+  distributeSideElementRatios(left, right, center);
+
+  container.styles += ANIMATION_CONFIG.POP_IN.KEYFRAME;
+  container.styles += ANIMATION_CONFIG.GRID_FLARE.KEYFRAME;
+  container.styles += ANIMATION_CONFIG.FULL_SCREEN.KEYFRAME;
+  container.styles += ANIMATION_CONFIG.CENTER_FEATURED.KEYFRAME;
+
+  const resizeObserver = new ResizeObserver(() =>
+    calculateStackPosition(grid, center, left, right),
+  );
+  resizeObserver.observe(container.element);
 
   if (REDUCE_MOTION) {
-    setShowAllElements(grid);
     return container;
   }
 
-  container.styles += ANIMATION_CONFIG.POP_IN.KEYFRAME;
-
-  observeResize(container, () =>
-    calculateStackPosition(grid, center, left, right),
-  );
-  observeIntersection(container, () =>
-    runAnimationSequence(grid, center, featuredElement, isExpandFeature),
-  );
+  attachPopInStack(grid, center);
+  attachFlareToGridScroll(grid);
+  if (!isExpandFeature) {
+    return container;
+  }
+  attachFullscreenScroll(grid, featuredElementContainer);
 
   return container;
 };

@@ -23,6 +23,8 @@ export const sansExtraLarge = createElement(
   Styles.typography.sans.fonts.extraLarge,
 );
 
+export const sansLargest = createElement(Styles.typography.sans.fonts.largest);
+
 export const sansLarger = createElement(Styles.typography.sans.fonts.larger);
 
 export const sansLarge = createElement(Styles.typography.sans.fonts.large);

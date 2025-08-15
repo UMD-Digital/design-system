@@ -2,6 +2,16 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { createStyledElement } from '../modifiers';
 import { type ElementProps } from '../modifiers/_types';
 
+export const advanced = (props: ElementProps) => {
+  const { isThemeDark } = props;
+
+  if (isThemeDark) {
+    return createStyledElement(props, Styles.element.text.rich.advancedDark);
+  }
+
+  return createStyledElement(props, Styles.element.text.rich.advanced);
+};
+
 export const simple = (props: ElementProps) => {
   const { isThemeDark } = props;
 

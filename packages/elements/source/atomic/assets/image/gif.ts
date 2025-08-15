@@ -34,7 +34,7 @@ export default ({ image }: { image: HTMLImageElement }) => {
 
     // Set canvas display dimensions to match container
     canvas.style.width = '100%';
-    canvas.style.height = '100%';
+    canvas.style.height = `${image.clientHeight}px`;
     canvas.style.position = 'absolute';
     canvas.style.top = '0';
     canvas.style.left = '0';

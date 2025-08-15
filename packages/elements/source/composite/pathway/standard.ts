@@ -124,6 +124,8 @@ const createAssetContent = ({
         position: 'relative',
         overflow: 'hidden',
         height: '100%',
+        width: '100%',
+        display: 'grid',
       },
     },
   });
@@ -367,6 +369,7 @@ const createLock = (props: PathwayStandardProps) => {
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           alignItems: 'center',
+          minHeight: '40vh',
         },
       },
     },

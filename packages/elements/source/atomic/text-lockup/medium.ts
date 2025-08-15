@@ -10,6 +10,7 @@ interface TypeTextLockupMedium {
   isThemeDark?: boolean;
   isThemeMaryland?: boolean;
   ribbon?: HTMLElement | null;
+  compositeStats?: ElementVisual | null;
   text?: HTMLElement | null;
 }
 
@@ -22,6 +23,7 @@ export default ({
   actions,
   eventDetails,
   compositeHeadline,
+  compositeStats,
   headline,
   isThemeDark,
   isThemeMaryland,
@@ -49,7 +51,7 @@ export default ({
 
   if (headline && !compositeHeadline) {
     children.push(
-      ElementModel.headline.sansLarger({
+      ElementModel.headline.sansLargest({
         element: headline,
         elementStyles: {
           element: {
@@ -86,7 +88,7 @@ export default ({
 
   if (text) {
     children.push(
-      ElementModel.richText.simpleLarge({
+      ElementModel.richText.advanced({
         element: text,
         elementStyles: {
           siblingAfter: {
@@ -96,6 +98,10 @@ export default ({
         isThemeDark: isThemeDark || isThemeMaryland || false,
       }),
     );
+  }
+
+  if (compositeStats) {
+    children.push(compositeStats);
   }
 
   if (actions) {

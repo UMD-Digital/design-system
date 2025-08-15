@@ -72,7 +72,6 @@ const parseEventData = (slots: EventSlots): ParsedEventData | null => {
   const startDate = Markup.event.createDate({ element: slots.startDate });
 
   if (!startDate) {
-    console.error('Missing start date for event web component');
     return null;
   }
 

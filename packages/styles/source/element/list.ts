@@ -22,7 +22,7 @@ let orderedBase: Record<string, any> = {
   '& li ': {
     paddingLeft: spacing.xl,
     position: 'relative',
-    color: color.gray.darker,
+    color: color.gray.dark,
   },
 
   '& li': {

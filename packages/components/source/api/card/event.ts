@@ -7,22 +7,8 @@ import type {
   SlotConfiguration,
 } from '../_types';
 
-// Tag name for the event card component
 const tagName = 'umd-element-event';
 
-/**
- * Extracts common data from event element slots
- * @internal
- */
-const MakeCommonData = ({ element }: { element: HTMLElement }) => ({
-  headline: Slots.headline.default({ element }),
-  text: Slots.text.default({ element }),
-  actions: Slots.actions.default({ element }),
-  isTransparent: Attributes.isVisual.transparent({ element }),
-  isThemeDark: Attributes.isTheme.dark({ element }),
-});
-
-// Slot configuration for the event card component
 const slots: SlotConfiguration = {
   headline: {
     ...Slots.element.allowed.headline,
@@ -44,71 +30,83 @@ const slots: SlotConfiguration = {
  * @internal
  */
 const createComponent: CreateComponentFunction = (element) => {
-  // Extract event data with automatic configuration from element attributes
   const eventComponents = extractEventData(element);
 
+  // Start date is missing - required field
   if (!eventComponents) {
-    // Start date is missing - required field
     return { element: document.createElement('div'), styles: '' };
   }
 
-  const { eventMeta, dateSign } = eventComponents;
-  const commonData = MakeCommonData({ element });
-  const image = Slots.assets.image({ element }) as HTMLImageElement;
-
-  // Display options with specific overrides for each layout
+  // Feature layout: large date sign, eyebrow ribbon
 
   if (Attributes.isDisplay.feature({ element })) {
-    // Feature layout: large date sign, eyebrow ribbon
     const featureEvents = extractEventData(element, {
       isLargeSize: true,
       isDateSignDark: false,
     });
 
     return Composite.card.block({
-      ...commonData,
-      image,
+      actions: Slots.actions.default({ element }),
+      dateSign: featureEvents?.dateSign,
+      eventMeta: featureEvents?.eventMeta,
       eyebrow: Slots.eyebrow.default({ element }),
       hasEyebrowRibbon: true,
-      eventMeta: featureEvents?.eventMeta,
-      dateSign: featureEvents?.dateSign,
+      headline: Slots.headline.default({ element }),
+      image: Slots.assets.image({ element }) as HTMLImageElement,
+      isThemeDark: Attributes.isTheme.dark({ element }),
+      isTransparent: Attributes.isVisual.transparent({ element }),
+      text: Slots.text.default({ element }),
     });
   }
 
+  // Promo layout: overlay style with forced dark theme for meta
+
   if (Attributes.isDisplay.promo({ element })) {
-    // Promo layout: overlay style with forced dark theme for meta
     const promoEvents = extractEventData(element, {
       isThemeDark: true, // Force dark theme for meta in overlay
       isDateSignDark: false,
     });
 
     return Composite.card.overlay.image({
-      ...commonData,
-      backgroundImage: image,
-      eventMeta: promoEvents?.eventMeta,
+      actions: Slots.actions.default({ element }),
+      backgroundImage: Slots.assets.image({ element }) as HTMLImageElement,
       dateSign: promoEvents?.dateSign,
+      eventMeta: promoEvents?.eventMeta,
+      headline: Slots.headline.default({ element }),
+      isThemeDark: Attributes.isTheme.dark({ element }),
+      text: Slots.text.default({ element }),
     });
   }
 
+  // List layout: large date sign, uses element's theme
+
   if (Attributes.isDisplay.list({ element })) {
-    // List layout: large date sign, uses element's theme
     const listEvents = extractEventData(element, {
       isLargeSize: true,
     });
 
     return Composite.card.list({
-      ...commonData,
-      image,
-      eventMeta: listEvents?.eventMeta,
+      actions: Slots.actions.default({ element }),
       dateSign: listEvents?.dateSign,
+      eventMeta: listEvents?.eventMeta,
+      headline: Slots.headline.default({ element }),
+      image: Slots.assets.image({ element }) as HTMLImageElement,
+      isThemeDark: Attributes.isTheme.dark({ element }),
+      text: Slots.text.default({ element }),
     });
   }
 
   // Default: block layout with standard configuration
+
+  const { eventMeta } = eventComponents;
   return Composite.card.block({
-    ...commonData,
-    image,
+    actions: Slots.actions.default({ element }),
     eventMeta,
+    headline: Slots.headline.default({ element }),
+    image: Slots.assets.image({ element }) as HTMLImageElement,
+    isThemeDark: Attributes.isTheme.dark({ element }),
+    isTransparent: Attributes.isVisual.transparent({ element }),
+    text: Slots.text.default({ element }),
   });
 };
 

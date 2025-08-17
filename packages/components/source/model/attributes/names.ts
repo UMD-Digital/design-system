@@ -20,8 +20,8 @@ const display = {
 
 const feature = {
   animation: 'data-animation',
-  expandFeature: 'data-expand-feature',
   lazyLoad: 'data-lazy-load',
+  imageExpand: 'data-image-expand',
 };
 
 const feed = {

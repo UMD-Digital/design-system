@@ -207,8 +207,8 @@ const includesFeature = {
     AttributesValues.state.TRUE,
     true,
   ),
-  expandFeature: createAttributeCheck(
-    AttributeNames.feature.expandFeature,
+  imageExpand: createAttributeCheck(
+    AttributeNames.feature.imageExpand,
     AttributesValues.state.TRUE,
     true,
   ),

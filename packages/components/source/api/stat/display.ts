@@ -1,18 +1,15 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Register, Slots } from 'model';
-import { Markup } from 'utilities';
 import {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../_types';
+import { Atomic } from '@universityofmaryland/web-elements-library/';
 
 /**
  * Tag name for the statistic display web component
  */
 const tagName = 'umd-element-stat';
-
-const { SlotWithDefaultStyling } = Markup.create;
 
 /**
  * Slot configuration for the statistic display component
@@ -25,17 +22,19 @@ const slots: SlotConfiguration = {
 /**
  * Creates a statistic display component with the provided configuration
  */
-const createComponent: CreateComponentFunction = (element) =>
-  Composite.stat.display({
-    isThemeDark: Attributes.isTheme.dark({ element }),
-    isDisplayBlock: Attributes.isDisplay.block({ element }),
-    isSizeLarge: Attributes.isVisual.sizeLarge({ element }),
-    hasLine: Attributes.hasDecoration.line({ element }) || false,
-    stat: Slots.text.stat({ element }),
-    text: Slots.text.default({ element }),
-    subText: Slots.text.subText({ element }),
-  });
+const createComponent: CreateComponentFunction = (element) => {
+  const isDisplayBlock = Attributes.isDisplay.block({ element });
 
+  return Atomic.text.stat({
+    isThemeDark: Attributes.isTheme.dark({ element }),
+    isDisplayBlock: isDisplayBlock,
+    isSizeLarge: isDisplayBlock || Attributes.isVisual.sizeLarge({ element }),
+    hasLine: Attributes.hasDecoration.line({ element }) || false,
+    stat: Slots.text.stat({ element }) as HTMLElement,
+    text: Slots.text.default({ element }) as HTMLElement,
+    subText: Slots.text.subText({ element }) as HTMLElement,
+  });
+};
 /**
  * Statistic Display
  *

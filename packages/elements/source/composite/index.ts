@@ -13,5 +13,4 @@ export * as person from './person';
 export * as quote from './quote';
 export * as slider from './slider';
 export * as social from './social';
-export * as stat from './stat';
 export * as tabs from './tabs';

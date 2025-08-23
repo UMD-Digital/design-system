@@ -1,232 +1,246 @@
-import {
-  layout,
-  token,
-  typography,
-} from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-import TextContainer, { TypePathwayTextContainer } from './elements/text';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import * as Atomic from 'atomic';
+import { ElementModel } from 'model';
+import { type ElementVisual } from '_types';
 
-type TypePathwayHighlightContainer = {
-  quote: HTMLElement | null;
-  attribution: HTMLElement | null;
+interface PathwayHighlightProps {
+  actions?: HTMLElement | null;
+  attribution?: HTMLElement | null;
+  eyebrow?: HTMLElement | null;
+  headline?: HTMLElement | null;
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
+  quote?: HTMLElement | null;
+  text?: HTMLElement | null;
+}
+
+const mediumSize = 1000;
+const largeSize = 1200;
+
+const createHeadline = ({
+  headline,
+  isThemeDark,
+}: Pick<PathwayHighlightProps, 'headline' | 'isThemeDark'>) => {
+  const characterCount = headline?.textContent?.trim().length || 0;
+  const isOverwriteHeadline = characterCount > 30;
+
+  if (!headline) return null;
+
+  const desktopStyles = {
+    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+      ...(isOverwriteHeadline && {
+        fontSize: '40px',
+      }),
+    },
+  };
+
+  return ElementModel.headline.sansLargest({
+    element: headline,
+    isThemeDark,
+    elementStyles: {
+      element: {
+        fontWeight: 800,
+        textTransform: 'uppercase',
+        textWrap: 'balance',
+        ...desktopStyles,
+      },
+      siblingAfter: {
+        marginTop: Styles.token.spacing.md,
+      },
+    },
+  });
 };
 
-type TypePathwayHighlightProps = TypePathwayTextContainer &
-  TypePathwayHighlightContainer;
+const createTextContent = (props: PathwayHighlightProps): ElementVisual => {
+  const children: ElementVisual[] = [];
 
-const MEDIUM = 1000;
-const LARGE = 1200;
-const ATTRIBUTE_THEME = 'theme';
-const THEME_DARK = 'dark';
+  children.push(
+    Atomic.textLockup.medium({
+      actions: props.actions,
+      compositeHeadline: createHeadline(props),
+      isThemeDark: props.isThemeDark,
+      ribbon: props.eyebrow,
+      text: props.text,
+    }),
+  );
 
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
-
-const ELEMENT_NAME = 'umd-element-pathway-highlight';
-const PATHWAY_HIGHLIGHT_CONTAINER = 'pathway-highlight-container';
-const PATHWAY_HIGHLIGHT_CONTAINER_LOCK = 'pathway-highlight-container-lock';
-const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER = 'pathway-highlight-column-container';
-const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER =
-  'pathway-highlight-column-wrapper';
-const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT = 'pathway-highlight-text';
-const PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION =
-  'pathway-highlight-attribution';
-
-const OVERWRITE_TEXT_CONTAINER = `.${PATHWAY_HIGHLIGHT_CONTAINER} .${TextContainer.Elements.container}`;
-const OVERWRITE_THEME_DARK_HIGHLIGHT = `.${PATHWAY_HIGHLIGHT_CONTAINER}${IS_THEME_DARK} .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER}`;
-
-// prettier-ignore
-const OverwriteThemeDarkStyles = `
-  ${OVERWRITE_THEME_DARK_HIGHLIGHT} {
-    background-color: ${token.color.gray.darker};
-  }
-
-  ${OVERWRITE_THEME_DARK_HIGHLIGHT} * {
-   color: ${token.color.white};
-  }
-`
-
-// prettier-ignore
-const OverwriteTextContainerStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    ${OVERWRITE_TEXT_CONTAINER} {
-      padding-bottom: ${token.spacing.md};
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_TEXT_CONTAINER} {
-      padding-right: ${token.spacing['4xl']};
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_TEXT_CONTAINER} {
-      padding-right: ${token.spacing['6xl']};
-    }
-  }
-`;
-
-// prettier-ignore
-const HighlightContainer = `
-  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-    padding: ${token.spacing['5xl']} ${token.spacing.md} ${token.spacing.md} ${token.spacing.md};
-    background-color: ${token.color.gray.lightest};
-    position: relative;
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-      padding: ${token.spacing['4xl']} ${token.spacing['2xl']};
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER} {
-      padding: ${token.spacing['8xl']} ${token.spacing['xl']};
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER} {
-      padding-left: ${token.spacing['xl']};
-      position: relative;
-    }
-  }
-  
-  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER}:before {
-    content: '';
-    position: absolute;
-    background-color: ${token.color.red};
-  }
-  
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER}:before {
-      top: ${token.spacing['2xl']};
-      width: ${token.spacing['5xl']};
-      height: 2px;
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER}:before {
-      left: 0;
-      width: 2px;
-      height: 100%;
-      background-color: ${token.color.red};
-    }
-  }
-  
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT}`]: typography.sans.larger,
+  const wrapper = ElementModel.createDiv({
+    className: 'pathway-text-container-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        width: '100%',
+        position: 'relative',
+      },
     },
-  })}
-  
-  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT},
-  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT} * {
-    font-weight: 700;
-    color: ${token.color.black};
-  }
-  
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION}`]: typography.sans.medium,
+  });
+
+  const container = ElementModel.createDiv({
+    className: 'pathway-text-container',
+    children: [wrapper],
+    elementStyles: {
+      element: {
+        container: 'inline-size',
+        display: 'flex',
+        alignItems: 'center',
+        zIndex: '99',
+
+        ...(props.isThemeDark && {
+          backgroundColor: Styles.token.color.black,
+          color: Styles.token.color.white,
+        }),
+
+        ...(props.isThemeMaryland && {
+          backgroundColor: Styles.token.color.red,
+          color: Styles.token.color.white,
+        }),
+
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          paddingBottom: Styles.token.spacing.md,
+        },
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          paddingRight: Styles.token.spacing['4xl'],
+        },
+
+        [`@container (min-width: ${largeSize}px)`]: {
+          paddingRight: Styles.token.spacing['6xl'],
+        },
+      },
     },
-  })}
-
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} *`]: typography.sans.medium,
-    },
-  })}
-  
-  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION},
-  .${PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION} * {
-    margin-top: ${token.spacing.sm};
-    color: ${token.color.black};
-  }
-`
-
-const LockStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${PATHWAY_HIGHLIGHT_CONTAINER_LOCK}`]: layout.space.horizontal.larger,
-    },
-  })}
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HIGHLIGHT_CONTAINER_LOCK} {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_HIGHLIGHT_CONTAINER_LOCK} > * {
-      width: 50%;
-    }
-  }
-`;
-
-// prettier-ignore
-const STYLES_PATHWAY_HIGHLIGHT = `
-  .${PATHWAY_HIGHLIGHT_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  ${LockStyles}
-  ${OverwriteTextContainerStyles}
-  ${HighlightContainer}
-  ${OverwriteThemeDarkStyles}
-`;
-
-const CreateHighlightColumn = ({
-  quote,
-  attribution,
-}: TypePathwayHighlightContainer) => {
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-
-  wrapper.classList.add(PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_WRAPPER);
-
-  if (quote) {
-    quote.classList.add(PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_TEXT);
-    wrapper.appendChild(quote);
-  }
-
-  if (attribution) {
-    const attributionElement = document.createElement('div');
-    attributionElement.classList.add(
-      PATHWAY_HIGHLIGHT_COLUMN_CONTAINER_ATTRIBUTION,
-    );
-    attributionElement.appendChild(attribution);
-    wrapper.appendChild(attributionElement);
-  }
-
-  container.classList.add(PATHWAY_HIGHLIGHT_COLUMN_CONTAINER);
-  container.appendChild(wrapper);
+  });
 
   return container;
 };
 
-export default (element: TypePathwayHighlightProps) => {
-  const { isThemeDark } = element;
-  const container = document.createElement('div');
-  const lock = document.createElement('div');
+const createHighlightColumn = ({
+  quote,
+  attribution,
+  isThemeDark,
+}: Pick<
+  PathwayHighlightProps,
+  'quote' | 'attribution' | 'isThemeDark'
+>): ElementVisual => {
+  const children: ElementVisual[] = [];
 
-  const textContainer = TextContainer.CreateElement(element);
-  const highlightContainer = CreateHighlightColumn(element);
-  let styles = STYLES_PATHWAY_HIGHLIGHT;
+  if (quote) {
+    children.push(
+      ElementModel.headline.sansLarger({
+        element: quote,
+        isThemeDark,
+        elementStyles: {
+          element: {
+            fontWeight: '700',
+          },
+        },
+      }),
+    );
+  }
 
-  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-  container.classList.add(PATHWAY_HIGHLIGHT_CONTAINER);
-  lock.classList.add(PATHWAY_HIGHLIGHT_CONTAINER_LOCK);
+  if (attribution) {
+    children.push(
+      ElementModel.headline.sansMedium({
+        element: attribution,
+        isThemeDark,
+        elementStyles: {
+          element: {
+            marginTop: Styles.token.spacing.sm,
+          },
+        },
+      }),
+    );
+  }
 
-  lock.appendChild(textContainer.element);
-  styles += textContainer.styles;
+  const wrapper = ElementModel.createDiv({
+    className: 'pathway-highlight-column-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        [`@container (min-width: ${mediumSize}px)`]: {
+          paddingLeft: Styles.token.spacing['xl'],
+          position: 'relative',
+        },
 
-  lock.appendChild(highlightContainer);
+        '&:before': {
+          content: "''",
+          position: 'absolute',
+          backgroundColor: Styles.token.color.red,
 
-  container.appendChild(lock);
-  return { element: container, styles };
+          [`@container (max-width: ${mediumSize - 1}px)`]: {
+            top: Styles.token.spacing['2xl'],
+            width: Styles.token.spacing['5xl'],
+            height: '2px',
+          },
+
+          [`@container (min-width: ${mediumSize}px)`]: {
+            left: '0',
+            width: '2px',
+            height: '100%',
+          },
+        },
+      },
+    },
+  });
+
+  return ElementModel.createDiv({
+    className: 'pathway-highlight-column-container',
+    children: [wrapper],
+    elementStyles: {
+      element: {
+        backgroundColor: Styles.token.color.gray.lightest,
+        position: 'relative',
+        padding: `${Styles.token.spacing['5xl']} ${Styles.token.spacing.md} ${Styles.token.spacing.md} ${Styles.token.spacing.md}`,
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          padding: `${Styles.token.spacing['4xl']} ${Styles.token.spacing['2xl']}`,
+        },
+
+        [`@container (min-width: ${largeSize}px)`]: {
+          padding: `${Styles.token.spacing['8xl']} ${Styles.token.spacing['xl']}`,
+        },
+
+        ...(isThemeDark && {
+          backgroundColor: Styles.token.color.gray.darker,
+
+          [`& *`]: {
+            color: Styles.token.color.white,
+          },
+        }),
+      },
+    },
+  });
 };
+
+const createLock = (props: PathwayHighlightProps) => {
+  const textContent = createTextContent(props);
+  const highlightColumn = createHighlightColumn(props);
+  const children: ElementVisual[] = [textContent, highlightColumn];
+
+  return ElementModel.layout.spaceHorizontalLarger({
+    element: document.createElement('div'),
+    children,
+    elementStyles: {
+      element: {
+        [`@container (min-width: ${mediumSize}px)`]: {
+          display: 'flex',
+          alignItems: 'center',
+
+          [`& > *`]: {
+            width: '50%',
+          },
+        },
+      },
+    },
+  });
+};
+
+export default (props: PathwayHighlightProps) =>
+  ElementModel.createDiv({
+    className: 'pathway-highlight-container',
+    children: [createLock(props)],
+    elementStyles: {
+      element: {
+        container: 'inline-size',
+      },
+    },
+  });

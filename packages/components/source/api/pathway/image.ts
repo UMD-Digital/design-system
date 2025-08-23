@@ -61,7 +61,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   if (isDisplaySticky) {
     return Composite.pathway.sticky({
-      action: Slots.actions.default({ element }),
+      actions: Slots.actions.default({ element }),
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,

@@ -1,205 +1,343 @@
-import { layout, token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
-import TextContainer, { TypePathwayTextContainer } from './elements/text';
-import ImageContainer, { TypePathwayImageContainer } from './elements/image';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import * as Atomic from 'atomic';
+import { ElementModel } from 'model';
+import { type ElementVisual } from '_types';
 
-type TypePathwayStickyProps = TypePathwayTextContainer &
-  TypePathwayImageContainer & {
-    isImagePositionLeft: boolean;
-    includedStyles?: string;
+interface PathwayStickyProps {
+  actions?: HTMLElement | null;
+  dateSign?: ElementVisual;
+  eventDetails?: ElementVisual;
+  eyebrow?: HTMLElement | null;
+  headline?: HTMLElement | null;
+  image?: HTMLImageElement | null;
+  isImagePositionLeft?: boolean;
+  isImageScaled?: boolean;
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
+  stats?: HTMLElement | null;
+  text?: HTMLElement | null;
+  video?: HTMLVideoElement | null;
+}
+
+const mediumSize = 800;
+const largeSize = 1200;
+
+const createAssetContent = ({
+  image,
+  video,
+  dateSign,
+  isImageScaled,
+}: Pick<
+  PathwayStickyProps,
+  'dateSign' | 'isThemeDark' | 'image' | 'video' | 'isImageScaled'
+>): ElementVisual => {
+  const children: ElementVisual[] = [];
+
+  if (video) {
+    children.push(
+      Atomic.assets.video.observedAutoPlay({
+        video,
+        isScaled: isImageScaled,
+      }),
+    );
+  }
+
+  if (!video && image) {
+    children.push(
+      Atomic.assets.image.background({
+        image,
+        isScaled: isImageScaled,
+        isShowCaption: true,
+        dateSign,
+      }),
+    );
+  }
+
+  return ElementModel.createDiv({
+    className: 'pathway-image-container-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        position: 'relative',
+        overflow: 'hidden',
+        height: '100%',
+        width: '100%',
+        display: 'grid',
+
+        [`&:has(.image-container)`]: {
+          alignItems: 'center',
+        },
+      },
+    },
+  });
+};
+
+const createAssetColumn = (
+  props: Pick<
+    PathwayStickyProps,
+    | 'dateSign'
+    | 'isThemeDark'
+    | 'image'
+    | 'video'
+    | 'isImagePositionLeft'
+    | 'isImageScaled'
+  >,
+): ElementVisual | null => {
+  const { image, video, isImagePositionLeft, isImageScaled } = props;
+
+  if (!image && !video) return null;
+
+  return ElementModel.createDiv({
+    className: 'pathway-image-container',
+    children: [createAssetContent(props)],
+    elementStyles: {
+      element: {
+        position: 'sticky',
+        top: '0',
+        alignSelf: 'flex-start',
+        height: '100%',
+
+        ...(isImageScaled === false && {
+          display: 'flex',
+          justifyContent: 'center',
+        }),
+
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          position: 'relative',
+          display: 'grid',
+          minHeight: '56vw',
+        },
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          position: 'sticky',
+          top: '0',
+          alignSelf: 'flex-start',
+
+          ...(isImagePositionLeft === false && {
+            order: '2',
+          }),
+        },
+
+        [`@container (min-width: ${largeSize}px)`]: {
+          [`& img`]: {
+            minHeight: '656px',
+          },
+        },
+      },
+    },
+  });
+};
+
+const createHeadline = ({
+  headline,
+  isThemeDark,
+}: Pick<PathwayStickyProps, 'headline' | 'isThemeDark'>) => {
+  const characterCount = headline?.textContent?.trim().length || 0;
+  const isOverwriteHeadline = characterCount > 30;
+
+  if (!headline) return null;
+
+  const desktopStyles = {
+    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+      ...(isOverwriteHeadline && {
+        fontSize: '40px',
+      }),
+    },
   };
 
-const MEDIUM = 800;
-const LARGE = 1200;
-
-const ELEMENT_NAME = 'umd-element-pathway-sticky';
-const ATTRIBUTE_IMAGE_POSITION = 'image-position';
-const ATTRIBUTE_THEME = 'theme';
-
-const PATHWAY_STICKY_CONTAINER = 'pathway-sticky-container';
-const PATHWAY_STICKY_CONTAINER_WRAPPER = 'pathway-sticky-container-wrapper';
-const PATHWAY_STICKY_CONTAINER_LOCK = 'pathway-sticky-container-lock';
-const PATHWAY_STICKY_CONTAINER_LOCK_WRAPPER =
-  'pathway-sticky-image-container-lock-wrapper';
-
-const IS_WITH_IMAGE_RIGHT = `[${ATTRIBUTE_IMAGE_POSITION}="right"]`;
-const IS_WITH_IMAGE_LEFT = `[${ATTRIBUTE_IMAGE_POSITION}="left"]`;
-
-const OVERWRITE_TEXT_WRAPPER = `.${PATHWAY_STICKY_CONTAINER} .${TextContainer.Elements.wrapper}`;
-const OVERWRITE_IMAGE_CONTAINER = `.${PATHWAY_STICKY_CONTAINER} .${ImageContainer.Elements.container}`;
-
-const OVERWRITE_IMAGE_RIGHT_CONTAINER = `.${PATHWAY_STICKY_CONTAINER}${IS_WITH_IMAGE_RIGHT}`;
-const OVERWRITE_IMAGE_LEFT_CONTAINER = `.${PATHWAY_STICKY_CONTAINER}${IS_WITH_IMAGE_LEFT}`;
-
-const OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${ImageContainer.Elements.container}`;
-const OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.container}`;
-const OVERWRITE_IMAGE_RIGHT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_RIGHT_CONTAINER} .${TextContainer.Elements.wrapper}`;
-const OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER = `${OVERWRITE_IMAGE_LEFT_CONTAINER} .${TextContainer.Elements.wrapper}`;
-
-// prettier-ignore
-const OverwriteImagePositionStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_IMAGE_CONTAINER} {
-      order: 2;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_TEXT_CONTAINER} {
-      order: 1;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_RIGHT_TEXT_WRAPPER} {
-      padding-left: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_LEFT_TEXT_WRAPPER} {
-      padding-right: 0;
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteImageContainerStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} {
-      position: sticky;
-      top: 0;
-      align-self: flex-start;
-     }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_IMAGE_CONTAINER} img {
-      min-height: 656px;
-     }
-  }
-`;
-
-// prettier-ignore
-const OverwriteTextContainerStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: ${token.spacing.md} 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    ${Utility.theme.convertJSSObjectToStyles({
-      styleObj: {
-        [`${OVERWRITE_TEXT_WRAPPER}`]: layout.space.horizontal.larger,
+  return ElementModel.headline.sansLargest({
+    element: headline,
+    isThemeDark,
+    elementStyles: {
+      element: {
+        fontWeight: 800,
+        textTransform: 'uppercase',
+        textWrap: 'balance',
+        ...desktopStyles,
       },
-    })}
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: 0 ${token.spacing['2xl']};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_TEXT_WRAPPER} {
-      padding: 0 ${token.spacing['6xl']};
-    }
-  }
-`;
-
-const LockStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${PATHWAY_STICKY_CONTAINER_LOCK}`]: layout.space.horizontal.larger,
+      siblingAfter: {
+        marginTop: Styles.token.spacing.md,
+      },
     },
-  })}
+  });
+};
 
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${PATHWAY_STICKY_CONTAINER_LOCK} {
-      padding: 0;
-    }
-  }
-`;
+const createStat = ({ stats }: Pick<PathwayStickyProps, 'stats'>) => {
+  if (!stats) return null;
 
-const LockWrapperStyles = `
-  .${PATHWAY_STICKY_CONTAINER_LOCK_WRAPPER} {
-    position: relative;
-  }
+  const statWrapper = ElementModel.createDiv({
+    className: 'text-lockup-medium-stats',
+    elementStyles: {
+      element: {
+        marginTop: Styles.token.spacing.lg,
 
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${PATHWAY_STICKY_CONTAINER_LOCK_WRAPPER} {
-      padding: 0;
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_STICKY_CONTAINER_LOCK_WRAPPER} {
-      display: flex;
-    }
-  }
+        [`&:has(> *:nth-child(2))`]: {
+          display: `grid`,
+          gridGap: `${Styles.token.spacing.md}`,
+        },
 
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${PATHWAY_STICKY_CONTAINER_LOCK_WRAPPER} > * {
-      width: 50%;
-    }
-  }
-`;
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          marginTop: Styles.token.spacing.lg,
+          paddingTop: Styles.token.spacing.md,
+          borderTop: `1px solid ${Styles.token.color.gray.light}`,
+        },
 
-// prettier-ignore
-const STYLES_PATHWAY_STICKY_ELEMENT = `
-  .${PATHWAY_STICKY_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    position: relative;
-  }
+        [`@container (min-width: ${mediumSize}px)`]: {
+          marginTop: Styles.token.spacing['2xl'],
 
-  ${LockStyles}
-  ${LockWrapperStyles}
-  ${OverwriteTextContainerStyles}
-  ${OverwriteImageContainerStyles}
-  ${OverwriteImagePositionStyles}
-`;
+          [`&:has(> *:nth-child(2))`]: {
+            gridGap: `${Styles.token.spacing.lg}`,
+            gridTemplateColumns: `repeat(2, 1fr)`,
+          },
+        },
+      },
+    },
+  });
 
-export default (props: TypePathwayStickyProps) => {
-  const { isImagePositionLeft = true, isThemeDark, includedStyles } = props;
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const lock = document.createElement('div');
-  const lockWrapper = document.createElement('div');
+  statWrapper.element.innerHTML = stats.innerHTML;
 
-  const textContainer = TextContainer.CreateElement(props);
-  const imageContainer = ImageContainer.CreateElement(props);
-  let styles = STYLES_PATHWAY_STICKY_ELEMENT;
+  return statWrapper;
+};
 
-  if (includedStyles) styles += includedStyles;
+const createTextContent = (props: PathwayStickyProps): ElementVisual => {
+  const children: ElementVisual[] = [];
 
-  container.classList.add(PATHWAY_STICKY_CONTAINER);
-  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
-  container.setAttribute(
-    ATTRIBUTE_IMAGE_POSITION,
-    isImagePositionLeft ? 'left' : 'right',
+  children.push(
+    Atomic.textLockup.medium({
+      actions: props.actions,
+      eventDetails: props.eventDetails,
+      compositeHeadline: createHeadline(props),
+      isThemeDark: props.isThemeDark,
+      ribbon: props.eyebrow,
+      compositeStats: createStat(props),
+      text: props.text,
+    }),
   );
 
-  wrapper.classList.add(PATHWAY_STICKY_CONTAINER_WRAPPER);
-  lock.classList.add(PATHWAY_STICKY_CONTAINER_LOCK);
+  const wrapper = ElementModel.createDiv({
+    className: 'pathway-text-container-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        padding: `${Styles.token.spacing.md} 0`,
 
-  lockWrapper.classList.add(PATHWAY_STICKY_CONTAINER_LOCK_WRAPPER);
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          ...Styles.layout.space.horizontal.larger,
+        },
 
-  if (imageContainer) {
-    lockWrapper.appendChild(imageContainer.element);
-    styles += imageContainer.styles;
-  }
+        [`@container (min-width: ${mediumSize}px)`]: {
+          padding: `0 ${Styles.token.spacing['2xl']}`,
 
-  lockWrapper.appendChild(textContainer.element);
-  styles += textContainer.styles;
+          ...(props.isImagePositionLeft === false && {
+            paddingLeft: '0',
+          }),
 
-  lock.appendChild(lockWrapper);
-  wrapper.appendChild(lock);
-  container.appendChild(wrapper);
+          ...(props.isImagePositionLeft && {
+            paddingRight: '0',
+          }),
+        },
 
-  return {
-    element: container,
-    styles,
-  };
+        [`@container (min-width: ${largeSize}px)`]: {
+          padding: `0 ${Styles.token.spacing['6xl']}`,
+
+          ...(props.isImagePositionLeft === false && {
+            paddingLeft: '0',
+          }),
+
+          ...(props.isImagePositionLeft && {
+            paddingRight: '0',
+          }),
+        },
+      },
+    },
+  });
+
+  const container = ElementModel.createDiv({
+    className: 'pathway-text-container',
+    children: [wrapper],
+    elementStyles: {
+      element: {
+        ...(props.isThemeDark && {
+          backgroundColor: Styles.token.color.black,
+          color: Styles.token.color.white,
+        }),
+
+        ...(props.isThemeMaryland && {
+          backgroundColor: Styles.token.color.red,
+          color: Styles.token.color.white,
+        }),
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          ...(props.isImagePositionLeft === false && {
+            order: '1',
+          }),
+        },
+      },
+    },
+  });
+
+  return container;
 };
+
+const createLock = (props: PathwayStickyProps) => {
+  const textContent = createTextContent(props);
+  const assetContent = createAssetColumn(props);
+  const children: ElementVisual[] = [];
+
+  if (assetContent) {
+    children.push(assetContent);
+  }
+  children.push(textContent);
+
+  const lockWrapper = ElementModel.createDiv({
+    className: 'pathway-container-lock-wrapper',
+    children,
+    elementStyles: {
+      element: {
+        position: 'relative',
+
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          padding: '0',
+        },
+
+        [`@container (min-width: ${mediumSize}px)`]: {
+          display: 'flex',
+
+          [`& > *`]: {
+            width: '50%',
+          },
+        },
+      },
+    },
+  });
+
+  return ElementModel.layout.spaceHorizontalLarger({
+    element: document.createElement('div'),
+    children: [lockWrapper],
+    elementStyles: {
+      element: {
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          paddingLeft: 0,
+          paddingRight: 0,
+        },
+      },
+    },
+  });
+};
+
+export default (props: PathwayStickyProps) =>
+  ElementModel.createDiv({
+    className: 'pathway-sticky-container',
+    children: [
+      ElementModel.createDiv({
+        className: 'pathway-sticky-container-wrapper',
+        children: [createLock(props)],
+      }),
+    ],
+    elementStyles: {
+      element: {
+        container: 'inline-size',
+        position: 'relative',
+      },
+    },
+  });

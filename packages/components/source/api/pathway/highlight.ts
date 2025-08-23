@@ -13,18 +13,12 @@ const tagName = 'umd-element-pathway-highlight';
 /**
  * Creates a pathway highlight component with the provided configuration
  */
-const createComponent: CreateComponentFunction = (element) => {
-  const slots = ({ element }: { element: HTMLElement }) => ({
-    action: Slots.actions.default({ element }),
+const createComponent: CreateComponentFunction = (element) =>
+  Composite.pathway.highlight({
+    actions: Slots.actions.default({ element }),
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),
-  });
-
-  return Composite.pathway.highlight({
-    ...slots({
-      element,
-    }),
     quote: SlotWithDefaultStyling({
       element,
       slotRef: Slots.name.HIGHLIGHT,
@@ -35,7 +29,6 @@ const createComponent: CreateComponentFunction = (element) => {
     }),
     isThemeDark: Attributes.isTheme.dark({ element }),
   });
-};
 
 /**
  * Pathway Highlight

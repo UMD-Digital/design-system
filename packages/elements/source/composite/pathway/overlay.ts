@@ -293,6 +293,7 @@ const createLock = (props: PathwayOverlayProps) => {
         [`@container (min-width: ${mediumSize}px)`]: {
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
+          alignItems: 'center',
 
           ...(isThemeApplied && {
             padding: `${Styles.token.spacing['6xl']} 0`,

@@ -48,7 +48,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
-      action: Slots.actions.default({ element }),
+      actions: Slots.actions.default({ element }),
       dateSign: featureEvents?.dateSign,
       eventDetails: featureEvents?.eventMeta,
       eyebrow: Slots.eyebrow.default({ element }),

@@ -1,76 +1,11 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Atomic from 'atomic';
 import { ElementModel } from 'model';
+import { createAssetContent, createTextLockupMedium } from './_common';
+import { type PathwayStickyProps } from './_types';
 import { type ElementVisual } from '_types';
-
-interface PathwayStickyProps {
-  actions?: HTMLElement | null;
-  dateSign?: ElementVisual;
-  eventDetails?: ElementVisual;
-  eyebrow?: HTMLElement | null;
-  headline?: HTMLElement | null;
-  image?: HTMLImageElement | null;
-  isImagePositionLeft?: boolean;
-  isImageScaled?: boolean;
-  isThemeDark?: boolean;
-  isThemeMaryland?: boolean;
-  stats?: HTMLElement | null;
-  text?: HTMLElement | null;
-  video?: HTMLVideoElement | null;
-}
 
 const mediumSize = 800;
 const largeSize = 1200;
-
-const createAssetContent = ({
-  image,
-  video,
-  dateSign,
-  isImageScaled,
-}: Pick<
-  PathwayStickyProps,
-  'dateSign' | 'isThemeDark' | 'image' | 'video' | 'isImageScaled'
->): ElementVisual => {
-  const children: ElementVisual[] = [];
-
-  if (video) {
-    children.push(
-      Atomic.assets.video.observedAutoPlay({
-        video,
-        isScaled: isImageScaled,
-      }),
-    );
-  }
-
-  if (!video && image) {
-    children.push(
-      Atomic.assets.image.background({
-        image,
-        isScaled: isImageScaled,
-        isShowCaption: true,
-        dateSign,
-      }),
-    );
-  }
-
-  return ElementModel.createDiv({
-    className: 'pathway-image-container-wrapper',
-    children,
-    elementStyles: {
-      element: {
-        position: 'relative',
-        overflow: 'hidden',
-        height: '100%',
-        width: '100%',
-        display: 'grid',
-
-        [`&:has(.image-container)`]: {
-          alignItems: 'center',
-        },
-      },
-    },
-  });
-};
 
 const createAssetColumn = (
   props: Pick<
@@ -128,95 +63,10 @@ const createAssetColumn = (
   });
 };
 
-const createHeadline = ({
-  headline,
-  isThemeDark,
-}: Pick<PathwayStickyProps, 'headline' | 'isThemeDark'>) => {
-  const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount > 30;
-
-  if (!headline) return null;
-
-  const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
-      ...(isOverwriteHeadline && {
-        fontSize: '40px',
-      }),
-    },
-  };
-
-  return ElementModel.headline.sansLargest({
-    element: headline,
-    isThemeDark,
-    elementStyles: {
-      element: {
-        fontWeight: 800,
-        textTransform: 'uppercase',
-        textWrap: 'balance',
-        ...desktopStyles,
-      },
-      siblingAfter: {
-        marginTop: Styles.token.spacing.md,
-      },
-    },
-  });
-};
-
-const createStat = ({ stats }: Pick<PathwayStickyProps, 'stats'>) => {
-  if (!stats) return null;
-
-  const statWrapper = ElementModel.createDiv({
-    className: 'text-lockup-medium-stats',
-    elementStyles: {
-      element: {
-        marginTop: Styles.token.spacing.lg,
-
-        [`&:has(> *:nth-child(2))`]: {
-          display: `grid`,
-          gridGap: `${Styles.token.spacing.md}`,
-        },
-
-        [`@container (max-width: ${mediumSize - 1}px)`]: {
-          marginTop: Styles.token.spacing.lg,
-          paddingTop: Styles.token.spacing.md,
-          borderTop: `1px solid ${Styles.token.color.gray.light}`,
-        },
-
-        [`@container (min-width: ${mediumSize}px)`]: {
-          marginTop: Styles.token.spacing['2xl'],
-
-          [`&:has(> *:nth-child(2))`]: {
-            gridGap: `${Styles.token.spacing.lg}`,
-            gridTemplateColumns: `repeat(2, 1fr)`,
-          },
-        },
-      },
-    },
-  });
-
-  statWrapper.element.innerHTML = stats.innerHTML;
-
-  return statWrapper;
-};
-
 const createTextContent = (props: PathwayStickyProps): ElementVisual => {
-  const children: ElementVisual[] = [];
-
-  children.push(
-    Atomic.textLockup.medium({
-      actions: props.actions,
-      eventDetails: props.eventDetails,
-      compositeHeadline: createHeadline(props),
-      isThemeDark: props.isThemeDark,
-      ribbon: props.eyebrow,
-      compositeStats: createStat(props),
-      text: props.text,
-    }),
-  );
-
   const wrapper = ElementModel.createDiv({
     className: 'pathway-text-container-wrapper',
-    children,
+    children: [createTextLockupMedium(props)],
     elementStyles: {
       element: {
         padding: `${Styles.token.spacing.md} 0`,

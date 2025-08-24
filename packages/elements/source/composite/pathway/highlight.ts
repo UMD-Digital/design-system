@@ -1,72 +1,16 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Atomic from 'atomic';
 import { ElementModel } from 'model';
+import { createTextLockupMedium } from './_common';
+import { PathwayHighlightProps } from './_types';
 import { type ElementVisual } from '_types';
-
-interface PathwayHighlightProps {
-  actions?: HTMLElement | null;
-  attribution?: HTMLElement | null;
-  eyebrow?: HTMLElement | null;
-  headline?: HTMLElement | null;
-  isThemeDark?: boolean;
-  isThemeMaryland?: boolean;
-  quote?: HTMLElement | null;
-  text?: HTMLElement | null;
-}
 
 const mediumSize = 1000;
 const largeSize = 1200;
 
-const createHeadline = ({
-  headline,
-  isThemeDark,
-}: Pick<PathwayHighlightProps, 'headline' | 'isThemeDark'>) => {
-  const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline = characterCount > 30;
-
-  if (!headline) return null;
-
-  const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
-      ...(isOverwriteHeadline && {
-        fontSize: '40px',
-      }),
-    },
-  };
-
-  return ElementModel.headline.sansLargest({
-    element: headline,
-    isThemeDark,
-    elementStyles: {
-      element: {
-        fontWeight: 800,
-        textTransform: 'uppercase',
-        textWrap: 'balance',
-        ...desktopStyles,
-      },
-      siblingAfter: {
-        marginTop: Styles.token.spacing.md,
-      },
-    },
-  });
-};
-
 const createTextContent = (props: PathwayHighlightProps): ElementVisual => {
-  const children: ElementVisual[] = [];
-
-  children.push(
-    Atomic.textLockup.medium({
-      actions: props.actions,
-      compositeHeadline: createHeadline(props),
-      isThemeDark: props.isThemeDark,
-      ribbon: props.eyebrow,
-      text: props.text,
-    }),
-  );
-
   const wrapper = ElementModel.createDiv({
     className: 'pathway-text-container-wrapper',
-    children,
+    children: [createTextLockupMedium(props)],
     elementStyles: {
       element: {
         width: '100%',

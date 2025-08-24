@@ -46,6 +46,11 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
+  const featureEvents = extractEventData(element, {
+    isLargeSize: true,
+    isDateSignDark: false,
+  });
+
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
       actions: Slots.actions.default({ element }),
@@ -77,6 +82,7 @@ const createComponent: CreateComponentFunction = (element) => {
       isImagePositionLeft,
       isImageScaled,
       isThemeDark: Attributes.isTheme.dark({ element }),
+      stats: Slots.text.stats({ element }),
       text: Slots.text.default({ element }),
       video: Slots.assets.video({ element }) as HTMLVideoElement,
     });

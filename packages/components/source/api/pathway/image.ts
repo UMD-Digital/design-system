@@ -43,7 +43,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
-      action: Slots.actions.default({ element }),
+      actions: Slots.actions.default({ element }),
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,

@@ -106,7 +106,7 @@ export default ({
 
   if (actions) {
     children.push(
-      ElementModel.layout.gridInlineTabletRows({
+      ElementModel.layout.gridStacked({
         element: actions,
         elementStyles: {
           element: {

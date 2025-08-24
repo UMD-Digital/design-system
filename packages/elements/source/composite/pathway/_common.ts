@@ -98,6 +98,7 @@ export const createTextLockupMedium = (
 ) =>
   Atomic.textLockup.medium({
     ...props,
+    ribbon: props.eyebrow,
     compositeHeadline: createCompositeHeadline(props),
     compositeStats: createCompositeStat(props),
   });

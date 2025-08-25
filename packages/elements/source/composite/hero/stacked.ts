@@ -5,43 +5,18 @@ import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
 import { type HeroStackedProps } from './_types';
 
-const ANIMATION_CONFIG = {
-  FADE_OVER: {
-    NAME: 'hero-stacked-fade-over',
-    RANGE: {
-      START: '30vh',
-      END: '70vh',
-    },
-  },
-  FONT_COLOR: {
-    NAME: 'hero-stacked-font-color',
-    RANGE: {
-      SMALL: {
-        HEADLINE_START: '120vh',
-        HEADLINE_END: '150vh',
-        TEXT_START: '100vh',
-        TEXT_END: '120vh',
-      },
-      DEFAULT: {
-        HEADLINE_START: '100vh',
-        HEADLINE_END: '130vh',
-        TEXT_START: '90vh',
-        TEXT_END: '110vh',
-      },
-    },
-  },
-} as const;
-
+const REF_KEY_FRAME_FADE_OVER = 'hero-stacked-fade-over';
+const REF_KEY_FRAME_FONT_COLOR = 'hero-stacked-font-color';
 
 const keyFrameFadeOver = `
-  @keyframes ${ANIMATION_CONFIG.FADE_OVER.NAME} {
+  @keyframes ${REF_KEY_FRAME_FADE_OVER} {
     from { opacity: 0; }
     to { opacity: 1; }
   }
 `;
 
 const keyFrameFontColor = `
-  @keyframes ${ANIMATION_CONFIG.FONT_COLOR.NAME} {
+  @keyframes ${REF_KEY_FRAME_FONT_COLOR} {
     from { color: ${Styles.token.color.black}; }
     to { color: ${Styles.token.color.white}; }
   }
@@ -82,10 +57,10 @@ const createOverlay = (includesAnimation?: boolean) => {
           [`@media (${Styles.token.media.queries.tablet.min})`]: {
             [`@media (prefers-reduced-motion: no-preference)`]: {
               [`@supports (animation-timeline: view())`]: {
-                animation: `${ANIMATION_CONFIG.FADE_OVER.NAME} ease-in-out forwards`,
+                animation: `${REF_KEY_FRAME_FADE_OVER} ease-in-out forwards`,
                 animationTimeline: 'view()',
-                animationRangeStart: ANIMATION_CONFIG.FADE_OVER.RANGE.START,
-                animationRangeEnd: ANIMATION_CONFIG.FADE_OVER.RANGE.END,
+                animationRangeStart: '30vh',
+                animationRangeEnd: '70vh',
               },
             },
           },
@@ -163,38 +138,15 @@ const createAsset = ({
   return assetContainer;
 };
 
-const buildHeadlineAnimationStyles = (
-  includesAnimation?: boolean,
-  isHeightSmall?: boolean,
-) => {
-  if (!includesAnimation) return {};
-
-  const range = isHeightSmall
-    ? ANIMATION_CONFIG.FONT_COLOR.RANGE.SMALL
-    : ANIMATION_CONFIG.FONT_COLOR.RANGE.DEFAULT;
-
-  return {
-    [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      ...Utils.theme.media.withViewTimelineAnimation({
-        animation: `${ANIMATION_CONFIG.FONT_COLOR.NAME} ease-in-out forwards`,
-        animationTimeline: 'view()',
-        animationRangeStart: range.HEADLINE_START,
-        animationRangeEnd: range.HEADLINE_END,
-      }),
-    },
-  };
-};
-
 const createHeadline = (
   props: Pick<
     HeroStackedProps,
     'headline' | 'isHeightSmall' | 'includesAnimation' | 'isThemeDark'
   >,
 ) => {
-  const { headline, isHeightSmall, includesAnimation } = props;
+  const { headline, isHeightSmall, includesAnimation, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline =
-    characterCount < 30;
+  const isOverwriteHeadline = characterCount < 30;
 
   if (!headline) return null;
 
@@ -206,10 +158,21 @@ const createHeadline = (
     },
   };
 
-  const animationStyles = buildHeadlineAnimationStyles(
-    includesAnimation,
-    isHeightSmall,
-  );
+  const animationStyles = {
+    [`@container (${Styles.token.media.queries.tablet.min})`]: {
+      ...Utils.theme.media.withViewTimelineAnimation({
+        animation: `${REF_KEY_FRAME_FONT_COLOR} ease-in-out forwards`,
+        animationTimeline: 'view()',
+        animationRangeStart: '100vh',
+        animationRangeEnd: '130vh',
+
+        ...(isHeightSmall && {
+          animationRangeStart: '120vh',
+          animationRangeEnd: '150vh',
+        }),
+      }),
+    },
+  };
 
   const elementStyles = {
     element: {
@@ -218,8 +181,18 @@ const createHeadline = (
       margin: '0 auto',
       textTransform: 'uppercase',
       marginTop: `${Styles.token.spacing.sm}`,
+
+      ...(isThemeDark && {
+        color: Styles.token.color.white,
+      }),
+
+      ...(includesAnimation && {
+        ...(!isThemeDark && {
+          ...animationStyles,
+        }),
+      }),
+
       ...desktopStyles,
-      ...animationStyles,
     },
     siblingAfter: {
       marginTop: `${Styles.token.spacing.md}`,
@@ -232,39 +205,16 @@ const createHeadline = (
   });
 };
 
-const buildTextAnimationStyles = (
-  includesAnimation?: boolean,
-  isHeightSmall?: boolean,
-) => {
-  if (!includesAnimation) return {};
-
-  const range = isHeightSmall
-    ? ANIMATION_CONFIG.FONT_COLOR.RANGE.SMALL
-    : ANIMATION_CONFIG.FONT_COLOR.RANGE.DEFAULT;
-
-  return {
-    [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      ...Utils.theme.media.withViewTimelineAnimation({
-        animation: `${ANIMATION_CONFIG.FONT_COLOR.NAME} ease-in-out forwards`,
-        animationTimeline: 'view()',
-        animationRangeStart: range.TEXT_START,
-        animationRangeEnd: range.TEXT_END,
-      }),
-    },
-  };
-};
-
 const createText = (
   props: Omit<HeroStackedProps, 'image' | 'video' | 'isWidthLarge'>,
 ) => {
-  const { topPosition, includesAnimation } = props;
+  const { topPosition, isThemeDark, includesAnimation, isHeightSmall } = props;
   const additionalSpread = topPosition ? parseInt(topPosition) : null;
   const textLockupElement = textLockup.large({
+    ...props,
     ribbon: props.eyebrow,
     headlineComposite: createHeadline(props),
     textLargest: props.text,
-    actions: props.actions,
-    isThemeDark: false,
   });
 
   const lock = ElementModel.layout.spaceHorizontalLarger({
@@ -293,7 +243,7 @@ const createText = (
           padding: `${Styles.token.spacing['6xl']} 0 ${Styles.token.spacing['3xl']}`,
         },
 
-        ...(props.includesAnimation && {
+        ...(includesAnimation && {
           [`@container (${Styles.token.media.queries.tablet.min})`]: {
             ...Utils.theme.media.withViewTimelineAnimation({
               position: 'sticky',
@@ -303,10 +253,23 @@ const createText = (
         }),
 
         [`& *`]: {
-          ...buildTextAnimationStyles(
-            props.includesAnimation,
-            props.isHeightSmall,
-          ),
+          ...(includesAnimation && {
+            ...(!isThemeDark && {
+              [`@container (${Styles.token.media.queries.tablet.min})`]: {
+                ...Utils.theme.media.withViewTimelineAnimation({
+                  animation: `${REF_KEY_FRAME_FONT_COLOR} ease-in-out forwards`,
+                  animationTimeline: 'view()',
+                  animationRangeStart: '90vh',
+                  animationRangeEnd: '110vh',
+
+                  ...(isHeightSmall && {
+                    animationRangeStart: '90vh',
+                    animationRangeEnd: '110vh',
+                  }),
+                }),
+              },
+            }),
+          }),
         },
 
         [`& .${Styles.element.text.decoration.ribbon.className[0]}`]: {
@@ -344,6 +307,10 @@ export default (props: HeroStackedProps) => {
     elementStyles: {
       element: {
         containerType: 'inline-size',
+
+        ...(props.isThemeDark && {
+          backgroundColor: Styles.token.color.black,
+        }),
       },
     },
   });

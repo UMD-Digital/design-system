@@ -142,7 +142,6 @@ export default (props: CardListProps) => {
     elementStyles: {
       element: {
         height: '100%',
-        maxWidth: `${Styles.token.spacing.maxWidth.smallest}`,
         overflow: 'hidden',
 
         ...(isThemeDark && {

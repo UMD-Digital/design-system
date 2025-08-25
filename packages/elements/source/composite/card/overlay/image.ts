@@ -165,6 +165,7 @@ export default (props: CardOverlayProps) => {
             flexDirection: 'column',
             justifyContent: 'flex-end',
             minHeight: '360px',
+            height: '100%',
             overflow: 'hidden',
 
             ...theme.media.createContainerQuery(

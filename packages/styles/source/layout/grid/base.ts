@@ -161,6 +161,6 @@ export const stacked: JssObject = create.jss.objectWithClassName({
   flexDirection: 'column',
 
   [`> *:not(:last-child)`]: {
-    marginBottom: spacing.md,
+    marginBottom: spacing.sm,
   },
 });

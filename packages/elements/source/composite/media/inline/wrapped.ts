@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import { Image as LayoutImage } from 'layout';
+import { Image as LayoutImage } from 'old';
 import CaptionContainer from '../elements/caption';
 
 export type TypeMediaInlineWrappedRequirements = {

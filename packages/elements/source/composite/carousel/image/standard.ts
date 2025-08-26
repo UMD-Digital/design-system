@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { animations, buttons } from 'atomic';
-import { Image as LayoutImage } from 'layout';
+import { Image as LayoutImage } from 'old';
 import * as Utility from 'utilities';
 import * as carouselElements from '../elements';
 

@@ -217,7 +217,7 @@ const createText = (
     textLargest: props.text,
   });
 
-  const lock = ElementModel.layout.spaceHorizontalLarger({
+  const lock = ElementModel.layout.spaceHorizontalSmall({
     element: document.createElement('div'),
     children: [textLockupElement],
     elementStyles: {

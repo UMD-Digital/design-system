@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { buttons } from 'atomic';
-import { Image as LayoutImage } from 'layout';
+import { Image as LayoutImage } from 'old';
 import * as carouselElements from '../elements';
 
 type TypeCarouselMultipleProps = {

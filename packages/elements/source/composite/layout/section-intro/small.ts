@@ -1,295 +1,253 @@
-import {
-  typography,
-  token,
-  layout,
-} from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { token } from '@universityofmaryland/web-styles-library';
+import { ElementModel } from 'model';
+import { type ElementVisual } from '../../../_types';
 
-type TypeSectionIntroDefaultProps = {
+export interface SectionIntroProps {
   headline?: HTMLElement | null;
   actions?: HTMLElement | null;
   text?: HTMLElement | null;
   hasSeparator?: boolean;
   isThemeDark?: boolean;
   includesAnimation?: boolean;
+}
+
+const ANIMATION_CONFIGS = {
+  line: `
+    @keyframes intro-line {
+      from {
+        height: 0;
+        transform: translateY(${token.spacing.lg});
+      }
+      to {
+        height: ${token.spacing['4xl']};
+        transform: translateY(0);
+      }
+    }
+  `,
+  fadeIn: `
+    @keyframes intro-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `,
 };
 
-const ATTRIBUTE_WITH_SEPARATOR = 'include-separator';
-const ATTRIBUTE_ANIMATION = 'data-animation';
-const ATTRIBUTE_THEME = 'theme';
-const THEME_DARK = 'dark';
+const createHeadline = (props: Pick<SectionIntroProps, 'headline'>) => {
+  const { headline } = props;
+  if (!headline) return;
 
-const IS_ANIMATION = `[${ATTRIBUTE_ANIMATION}]`;
-const IS_ANIMATION_START = `[${ATTRIBUTE_ANIMATION}="true"]`;
-
-const ELEMENT_NAME = 'umd-section-intro-default';
-const ELEMENT_INTRO_CONTAINER = 'intro-default-container';
-const ELEMENT_INTRO_CONTAINER_WRAPPER = 'intro-default-container-wrapper';
-const ELEMENT_INTRO_TEXT_CONTAINER = 'intro-default-container-text';
-const ELEMENT_HEADLINE = 'intro-default-headline';
-const ELEMENT_RICH_TEXT = 'intro-default-rich-text';
-const ELEMENT_RICH_TEXT_SMALL = 'intro-default-rich-text-small';
-const ELEMENT_ACTIONS = 'intro-default-actions';
-
-const OVERWRITE_SEPARATOR_WRAPPER = `.${ELEMENT_INTRO_CONTAINER}[${ATTRIBUTE_WITH_SEPARATOR}] .${ELEMENT_INTRO_CONTAINER_WRAPPER}`;
-const OVERWRITE_THEME_DARK_CONTAINTER = `.${ELEMENT_INTRO_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
-
-const OVERWRITE_CONTAINER_ANIMATION = `.${ELEMENT_INTRO_CONTAINER}${IS_ANIMATION}`;
-const OVERWRITE_CONTAINER_ANIMATION_START = `.${ELEMENT_INTRO_CONTAINER}${IS_ANIMATION_START}`;
-const OVERWRITE_ANIMATION_TEXT_CONTAINER = `${OVERWRITE_CONTAINER_ANIMATION} .${ELEMENT_INTRO_TEXT_CONTAINER}`;
-const OVERWRITE_ANIMATION_WRAPPER = `${OVERWRITE_CONTAINER_ANIMATION} .${ELEMENT_INTRO_CONTAINER_WRAPPER}`;
-const OVERWRITE_ANIMATION_TEXT_CONTAINER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${ELEMENT_INTRO_TEXT_CONTAINER}`;
-const OVERWRITE_ANIMATION_WRAPPER_START = `${OVERWRITE_CONTAINER_ANIMATION_START} .${ELEMENT_INTRO_CONTAINER_WRAPPER}`;
-
-// prettier-ignore
-const OverwriteAnimationLine = `
-  @keyframes intro-line {
-    from {
-      height: 0;
-      transform: translateY(${token.spacing['lg']});
-   }
-    to {
-      height: ${token.spacing['4xl']};
-      transform: translateY(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_WRAPPER}:before {
-      height: 0;
-      transform: translateY(${token.spacing['lg']});
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_WRAPPER_START}:before {
-      animation: intro-line 1.2s forwards;
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteAnimationText = `
-  @keyframes intro-fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(100px);
-   }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINER} {
-      opacity: 0;
-      transform: translateY(100px);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    ${OVERWRITE_ANIMATION_TEXT_CONTAINER_START} {
-      animation: intro-fade-in 1s forwards;
-      animation-delay: 0.2s;
-    }
-  }
-`;
-
-// prettier-ignore
-const OverwriteTheme = `
-  ${OVERWRITE_THEME_DARK_CONTAINTER} * {
-    color: ${token.color.white};
-  }
-`;
-
-// prettier-ignore
-const OverwriteSeparator = `
-  ${OVERWRITE_SEPARATOR_WRAPPER} {
-    padding-top: ${token.spacing['6xl']};
-    position: relative;
-  }
-
-  ${OVERWRITE_SEPARATOR_WRAPPER}:before {
-    content: '';
-    background-color: ${token.color.red};
-    position: absolute;
-    height: ${token.spacing['4xl']};
-    width: 2px;
-    left: calc(50% - 1px);
-    top: 0;
-  }
-`;
-
-// prettier-ignore
-const HeadlineStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_HEADLINE}`]: typography.sans.largest,
+  return ElementModel.headline.sansLargest({
+    element: headline,
+    elementStyles: {
+      element: {
+        fontWeight: 800,
+        textTransform: 'uppercase',
+      },
     },
-  })}
+  });
+};
 
-  .${ELEMENT_HEADLINE} {
-    color: ${token.color.black};
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-`;
+const createText = (props: Pick<SectionIntroProps, 'text'>) => {
+  const { text } = props;
+  if (!text) return;
 
-// prettier-ignore
-const TextStyles = `
-  * + .${ELEMENT_RICH_TEXT},
-  * + .${ELEMENT_RICH_TEXT_SMALL} {
-    margin-top: ${token.spacing.sm};
-  }
-
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_RICH_TEXT}`]: typography.sans.larger,
+  return ElementModel.richText.simpleLarge({
+    element: text,
+    elementStyles: {
+      element: {
+        [`* + &`]: {
+          marginTop: token.spacing.sm,
+        },
+      },
     },
-  })}
+  });
+};
 
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_RICH_TEXT} *`]: typography.sans.larger,
+const createActions = (props: Pick<SectionIntroProps, 'actions'>) => {
+  const { actions } = props;
+  if (!actions) return;
+
+  return ElementModel.layout.gridInlineTabletRows({
+    element: actions,
+    elementStyles: {
+      element: {
+        justifyContent: 'center',
+
+        [`* + &`]: {
+          marginTop: token.spacing.md,
+        },
+      },
     },
-  })}
+  });
+};
 
-  .${ELEMENT_RICH_TEXT},
-  .${ELEMENT_RICH_TEXT} * {
-    font-weight: 700;
-    color: ${token.color.black};
-  }
+const createTextContainer = (
+  props: Pick<
+    SectionIntroProps,
+    'headline' | 'text' | 'actions' | 'isThemeDark' | 'includesAnimation'
+  >,
+) => {
+  const { headline, text, actions, includesAnimation } = props;
 
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_RICH_TEXT_SMALL}`]: typography.sans.medium,
+  const headlineElement = createHeadline({ headline });
+  const textElement = createText({ text });
+  const actionsElement = createActions({ actions });
+
+  const children = [headlineElement, textElement, actionsElement].filter(
+    Boolean,
+  ) as ElementVisual[];
+
+  return ElementModel.createDiv({
+    className: 'intro-default-container-text',
+    children,
+    elementStyles: {
+      element: {
+        ...(includesAnimation && {
+          opacity: 0,
+        }),
+
+        ['.intro-default-animated &']: {
+          transform: 'translateY(100px)',
+          animation: 'intro-fade-in 1s forwards',
+          animationDelay: '0.2s',
+        },
+
+        [`&:before`]: {
+          ...(includesAnimation && {
+            height: 0,
+            transform: `translateY(${token.spacing.lg})`,
+          }),
+        },
+      },
     },
-  })}
+  });
+};
 
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_RICH_TEXT_SMALL} *`]: typography.sans.medium,
+const createWrapper = (
+  props: Pick<
+    SectionIntroProps,
+    'headline' | 'text' | 'actions' | 'isThemeDark'
+  >,
+) => {
+  const textContainerElement = createTextContainer(props);
+
+  return ElementModel.createDiv({
+    className: 'intro-default-container-wrapper',
+    children: [textContainerElement],
+    elementStyles: {
+      element: {
+        textAlign: 'center',
+      },
     },
-  })}
-`;
+  });
+};
 
-// prettier-ignore
-const ActionStyles = `
-  * + .${ELEMENT_ACTIONS} {
-    margin-top: ${token.spacing.md};
-  }
+const createContainer = (
+  props: Pick<
+    SectionIntroProps,
+    | 'isThemeDark'
+    | 'hasSeparator'
+    | 'headline'
+    | 'text'
+    | 'actions'
+    | 'includesAnimation'
+  >,
+) => {
+  const { isThemeDark, hasSeparator, includesAnimation } = props;
 
-  ${Utility.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_ACTIONS}`]: layout.grid.inline.tabletRows,
+  const wrapperElement = createWrapper(props);
+
+  return ElementModel.createDiv({
+    className: 'intro-default-container',
+    children: [wrapperElement],
+    elementStyles: {
+      element: {
+        maxWidth: token.spacing.maxWidth.small,
+        margin: '0 auto',
+
+        ...(hasSeparator && {
+          paddingTop: token.spacing['6xl'],
+          position: 'relative',
+        }),
+
+        [`&:before`]: {
+          ...(hasSeparator && {
+            content: '""',
+            backgroundColor: token.color.red,
+            position: 'absolute',
+            height: token.spacing['4xl'],
+            width: '2px',
+            left: 'calc(50% - 1px)',
+            top: 0,
+          }),
+        },
+
+        ['&.intro-default-animated:before']: {
+          ...(includesAnimation && {
+            animation: 'intro-line 1.2s forwards',
+          }),
+        },
+
+        [`& *`]: {
+          ...(isThemeDark && {
+            color: token.color.white,
+          }),
+        },
+      },
     },
-  })}
+  });
+};
 
-  .${ELEMENT_ACTIONS} {
-    justify-content: center;
-    align-items: center;
-  }
-`;
+const setupAnimation = (
+  props: Pick<SectionIntroProps, 'includesAnimation'> & {
+    container: HTMLElement;
+  },
+) => {
+  const { includesAnimation, container } = props;
+  if (!includesAnimation) return;
 
-// prettier-ignore
-const STYLES_SECTION_INTRO_DEFAULT_ELEMENT = `
-  .${ELEMENT_INTRO_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    max-width: ${token.spacing.maxWidth.small};
-    margin: 0 auto;
-  }
+  const animation: IntersectionObserverCallback = (entries, observer) => {
+    entries.map((entry) => {
+      const target = entry.target as HTMLElement;
 
-  .${ELEMENT_INTRO_CONTAINER_WRAPPER} {
-    text-align: center;
-  }
-
-  ${HeadlineStyles}
-  ${TextStyles}
-  ${ActionStyles}
-  ${OverwriteSeparator}
-  ${OverwriteTheme}
-  ${OverwriteAnimationText}
-  ${OverwriteAnimationLine}
-`;
-
-const Animation = ({
-  includesAnimation = true,
-  container,
-}: {
-  includesAnimation?: boolean;
-  container: HTMLElement;
-}) => {
-  if (includesAnimation) {
-    const animation: IntersectionObserverCallback = (entries, observer) => {
-      entries.forEach((entry) => {
-        const target = entry.target as HTMLElement;
-
-        if (entry.isIntersecting) {
-          target.setAttribute(ATTRIBUTE_ANIMATION, 'true');
-          observer.unobserve(target);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(animation, {
-      root: null,
-      rootMargin: '0px',
-      threshold: [0.35],
+      if (entry.isIntersecting) {
+        target.classList.add('intro-default-animated');
+        observer.unobserve(target);
+      }
     });
-
-    observer.observe(container);
-    container.setAttribute(ATTRIBUTE_ANIMATION, '');
-  }
-};
-
-export default (element: TypeSectionIntroDefaultProps) => {
-  const {
-    headline,
-    actions,
-    text,
-    isThemeDark,
-    hasSeparator = false,
-    includesAnimation,
-  } = element;
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const textContainer = document.createElement('div');
-  const loadAnimation = () => {
-    Animation({ includesAnimation, container });
   };
 
-  textContainer.classList.add(ELEMENT_INTRO_TEXT_CONTAINER);
+  const observer = new IntersectionObserver(animation, {
+    root: null,
+    rootMargin: '0px',
+    threshold: [0.35],
+  });
 
-  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-  if (hasSeparator) container.setAttribute(ATTRIBUTE_WITH_SEPARATOR, '');
+  observer.observe(container);
+};
 
-  if (headline) {
-    headline.classList.add(ELEMENT_HEADLINE);
-    textContainer.appendChild(headline);
+export default (props: SectionIntroProps) => {
+  const containerElement = createContainer(props);
+
+  const loadAnimation = () =>
+    setupAnimation({
+      includesAnimation: props.includesAnimation,
+      container: containerElement.element,
+    });
+
+  if (props.includesAnimation) {
+    containerElement.styles += ANIMATION_CONFIGS.line;
+    containerElement.styles += ANIMATION_CONFIGS.fadeIn;
   }
-
-  if (text) {
-    text.classList.add(headline ? ELEMENT_RICH_TEXT_SMALL : ELEMENT_RICH_TEXT);
-    textContainer.appendChild(text);
-  }
-
-  if (actions) {
-    actions.classList.add(ELEMENT_ACTIONS);
-    textContainer.appendChild(actions);
-  }
-
-  wrapper.classList.add(ELEMENT_INTRO_CONTAINER_WRAPPER);
-  wrapper.appendChild(textContainer);
-
-  container.classList.add(ELEMENT_INTRO_CONTAINER);
-  container.appendChild(wrapper);
 
   return {
-    element: container,
-    styles: STYLES_SECTION_INTRO_DEFAULT_ELEMENT,
-    events: {
-      loadAnimation,
-    },
+    ...containerElement,
+    events: { loadAnimation },
   };
 };

@@ -27,7 +27,7 @@ const themeDarkColors = {
   color: color.white,
 
   '& *': {
-    color: `${color.white} !important`,
+    color: `${color.white}`,
   },
 };
 

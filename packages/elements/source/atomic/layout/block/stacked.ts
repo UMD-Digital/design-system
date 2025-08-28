@@ -37,6 +37,11 @@ export const image = ({
           width: '120px',
           float: 'right',
           alignSelf: 'flex-start',
+
+          ...(isThemeDark && {
+            marginRight: 0,
+            marginTop: 0,
+          }),
         }),
 
         ...theme.media.createContainerQuery(
@@ -47,6 +52,16 @@ export const image = ({
           },
         ),
 
+        ...theme.media.createRangeContainerQuery(
+          mediumBreakpointStart,
+          mediumBreakpoint,
+          {
+            ...(hasBorder && {
+              marginLeft: Styles.token.spacing.sm,
+            }),
+          },
+        ),
+
         ...customStyles,
 
         '& img': {
@@ -54,25 +69,6 @@ export const image = ({
             height: 'auto !important',
           }),
         },
-
-        // Theme Dark
-        ...(isThemeDark && {
-          ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
-            marginRight: Styles.token.spacing.sm,
-            marginTop: Styles.token.spacing.sm,
-          }),
-        }),
-
-        // Border Overwrite
-        ...(hasBorder && {
-          ...theme.media.createRangeContainerQuery(
-            mediumBreakpointStart,
-            mediumBreakpoint,
-            {
-              marginLeft: Styles.token.spacing.sm,
-            },
-          ),
-        }),
       },
     },
   });
@@ -104,49 +100,20 @@ export const textContainer = ({
 
         ...theme.media.createContainerQuery('min-width', mediumBreakpoint, {
           paddingTop: Styles.token.spacing.lg,
-        }),
 
-        // Theme Dark or Transparent or Bordered
-        ...((isThemeDark || isTransparent || hasBorder) && {
-          ...theme.media.createContainerQuery(
-            'min-width',
-            mediumBreakpointStart,
-            {
+          ...(hasBorder && {
+            padding: Styles.token.spacing.md,
+          }),
+
+          ...(isThemeDark &&
+            !isTransparent && {
               padding: Styles.token.spacing.md,
-            },
-          ),
+            }),
         }),
 
         ...customStyles,
       },
     },
-  });
-
-const personDetails = ({
-  actions,
-  association,
-  customStyles = {},
-  isThemeDark,
-  job,
-  name,
-  nameComposite,
-  pronouns,
-  subText,
-}: PersonTextLockupPropsWithStyles & BoxProps) =>
-  textContainer({
-    customStyles,
-    children: [
-      textLockup.person({
-        actions,
-        name,
-        nameComposite,
-        job,
-        association,
-        pronouns,
-        subText,
-        isThemeDark,
-      }),
-    ],
   });
 
 export const container = ({
@@ -167,34 +134,33 @@ export const container = ({
         containerType: 'inline-size',
         height: '100%',
 
-        // Theme Dark
         ...(isThemeDark && {
           backgroundColor: Styles.token.color.gray.darker,
-
-          ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
-            padding: Styles.token.spacing.md,
-          }),
         }),
 
-        // Transparent
         ...(isTransparent && {
           backgroundColor: 'transparent',
         }),
 
-        // Bordered
         ...(hasBorder && {
           border: `1px solid ${Styles.token.color.gray.light}`,
-
-          ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
-            padding: Styles.token.spacing.md,
-          }),
         }),
 
-        // Bordered & Theme Dark
         ...(hasBorder &&
           isThemeDark && {
             border: `1px solid ${Styles.token.color.gray.darker}`,
           }),
+
+        ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+          ...(isThemeDark &&
+            !isTransparent && {
+              padding: Styles.token.spacing.md,
+            }),
+
+          ...(hasBorder && {
+            padding: Styles.token.spacing.md,
+          }),
+        }),
 
         ...customStyles,
       },

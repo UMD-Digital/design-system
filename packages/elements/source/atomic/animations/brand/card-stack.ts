@@ -38,7 +38,7 @@ const configuration: Configuration[] = [
     count: 4,
     layout: {
       gridTemplateColumns: 'repeat(15, 10vw)',
-      gridTemplateRows: 'repeat(15, 10vh)',
+      gridTemplateRows: 'repeat(15, 8vh)',
     },
     items: [
       {
@@ -81,7 +81,7 @@ const configuration: Configuration[] = [
     count: 5,
     layout: {
       gridTemplateColumns: 'repeat(15, 10vw)',
-      gridTemplateRows: 'repeat(15, 10vh)',
+      gridTemplateRows: 'repeat(15, 8vh)',
     },
     items: [
       {
@@ -132,7 +132,7 @@ const configuration: Configuration[] = [
     count: 6,
     layout: {
       gridTemplateColumns: 'repeat(15, 10vw)',
-      gridTemplateRows: 'repeat(15, 10vh)',
+      gridTemplateRows: 'repeat(15, 8vh)',
     },
     items: [
       {
@@ -191,7 +191,7 @@ const configuration: Configuration[] = [
     count: 7,
     layout: {
       gridTemplateColumns: 'repeat(15, 10vw)',
-      gridTemplateRows: 'repeat(15, 10vh)',
+      gridTemplateRows: 'repeat(15, 8vh)',
     },
     items: [
       {
@@ -258,7 +258,7 @@ const configuration: Configuration[] = [
     count: 8,
     layout: {
       gridTemplateColumns: 'repeat(15, 10vw)',
-      gridTemplateRows: 'repeat(15, 10vh)',
+      gridTemplateRows: 'repeat(15, 8vh)',
     },
     items: [
       {
@@ -839,6 +839,10 @@ const createFeatured = (
   }
 
   if (element.tagName === 'VIDEO') {
+    element.setAttribute('muted', 'true');
+    element.setAttribute('playsinline', 'true');
+    element.setAttribute('loop', 'true');
+
     video = assets.video.toggle({
       video: element as HTMLVideoElement,
       isScaled: true,
@@ -871,7 +875,7 @@ const createFeatured = (
 
         ...(isExpand && {
           ...theme.media.withViewTimelineAnimation({
-            top: '15vh',
+            top: '30vh',
             animation: `${KEY_FRAME_FEATURED_SIZE} ease-in-out forwards`,
             animationTimeline: 'view()',
             animationRangeStart: `${100 + (totalCount - 4) * 10}vh`,

@@ -19,10 +19,13 @@ let orderedBase: Record<string, any> = {
   listStyleType: 'none !important',
   lineHeight: '1.4em',
 
+  '& * ': {
+    color: color.gray.dark,
+  },
+
   '& li ': {
     paddingLeft: spacing.xl,
     position: 'relative',
-    color: color.gray.dark,
   },
 
   '& li': {

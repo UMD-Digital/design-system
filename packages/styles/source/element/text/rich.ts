@@ -461,6 +461,24 @@ export const advancedDark: JssObject = create.jss.objectWithClassName({
     },
   },
 
+  [`& ul,
+    & ol ul`]: {
+    ...list.unordered,
+
+    '& *, & * > *': {
+      color: color.white,
+    },
+  },
+
+  [`& ol,
+    & ul ol`]: {
+    ...list.ordered,
+
+    '& *, & * > *': {
+      color: color.white,
+    },
+  },
+
   className: [
     `${classNamePrefix}-advanced-dark`,
     /** @deprecated Use 'umd-text-rich-advanced-dark' instead */

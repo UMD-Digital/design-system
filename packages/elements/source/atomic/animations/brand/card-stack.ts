@@ -871,7 +871,7 @@ const createFeatured = (
 
         ...(isExpand && {
           ...theme.media.withViewTimelineAnimation({
-            top: '30vh',
+            top: '15vh',
             animation: `${KEY_FRAME_FEATURED_SIZE} ease-in-out forwards`,
             animationTimeline: 'view()',
             animationRangeStart: `${100 + (totalCount - 4) * 10}vh`,

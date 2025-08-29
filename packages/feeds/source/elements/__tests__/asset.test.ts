@@ -30,13 +30,13 @@ describe('Asset Elements', () => {
       const linkElement = asset.standard({ images, url });
 
       expect(linkElement).toBeInstanceOf(HTMLAnchorElement);
-      expect(linkElement.getAttribute('href')).toBe(url);
-      expect(linkElement.getAttribute('target')).toBe('_blank');
-      expect(linkElement.getAttribute('aria-label')).toBe(
+      expect(linkElement?.getAttribute('href')).toBe(url);
+      expect(linkElement?.getAttribute('target')).toBe('_blank');
+      expect(linkElement?.getAttribute('aria-label')).toBe(
         'Maryland Today Article with image Example image',
       );
 
-      const imageElement = linkElement.querySelector('img');
+      const imageElement = linkElement?.querySelector('img');
       expect(imageElement).toBeDefined();
       expect(imageElement?.src).toBe('https://example.com/image.jpg');
       expect(imageElement?.alt).toBe('Example image');

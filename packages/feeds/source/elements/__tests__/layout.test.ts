@@ -32,7 +32,13 @@ jest.mock('@universityofmaryland/web-styles-library', () => {
     token: {
       spacing: { md: '16px' },
       media: { queries: { large: { min: 'min-width: 1024px' } } },
-      color: { white: '#ffffff' }
+      color: { 
+        white: '#ffffff',
+        gray: {
+          light: '#cccccc',
+          dark: '#333333'
+        }
+      }
     },
     element: {
       asset: {

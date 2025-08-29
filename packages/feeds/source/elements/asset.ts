@@ -9,25 +9,27 @@ export const standard = ({
 }: {
   images: ImageType;
   url?: string;
-}): HTMLImageElement | HTMLAnchorElement => {
+}) => {
   const image = images[0];
-  const imageElement = document.createElement('img');
-  imageElement.src = image.url;
-  imageElement.alt = image.altText;
+  if (image) {
+    const imageElement = document.createElement('img');
+    imageElement.src = image.url;
+    imageElement.alt = image.altText;
 
-  if (url) {
-    const link = document.createElement('a');
-    link.setAttribute('target', '_blank');
-    link.setAttribute('href', url);
-    link.setAttribute(
-      'aria-label',
-      `Maryland Today Article with image ${image.altText}`,
-    );
+    if (url) {
+      const link = document.createElement('a');
+      link.setAttribute('target', '_blank');
+      link.setAttribute('href', url);
+      link.setAttribute(
+        'aria-label',
+        `Maryland Today Article with image ${image.altText}`,
+      );
 
-    link.appendChild(imageElement);
+      link.appendChild(imageElement);
 
-    return link;
+      return link;
+    }
+
+    return imageElement;
   }
-
-  return imageElement;
 };

@@ -31,8 +31,9 @@ const createVideoAsset = (video: HTMLVideoElement) => {
 
 const createImageAsset = (image: HTMLImageElement) => {
   return assets.image.background({
-    image,
+    element: image,
     isScaled: true,
+    isGifAllowed: true,
     isShowCaption: true,
   });
 };

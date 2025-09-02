@@ -87,7 +87,10 @@ const CreateImageBlock = (props: PersonInfo) => {
         },
       },
     });
-    const imageBlock = assets.image.background({ image, isScaled: false });
+    const imageBlock = assets.image.background({
+      element: image,
+      isScaled: false,
+    });
 
     imageContainer.element.appendChild(imageBlock.element);
     imageContainer.styles += imageBlock.styles;

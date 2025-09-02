@@ -12,7 +12,7 @@ export default (props: PersonBio) => {
   if (image) {
     children.push(
       assets.image.background({
-        image,
+        element: image,
         isScaled: false,
       }),
     );

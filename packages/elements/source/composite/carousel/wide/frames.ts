@@ -147,7 +147,7 @@ const createMainFrameSlide = (
 
   children.push(
     assets.image.background({
-      image: slide.image,
+      element: slide.image,
       isScaled: true,
     }),
   );

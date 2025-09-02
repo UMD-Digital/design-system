@@ -53,7 +53,7 @@ export default (props: PersonCard) => {
       },
       children: [
         assets.image.background({
-          image,
+          element: image,
           isScaled: false,
           customStyles: {
             height: 'auto',

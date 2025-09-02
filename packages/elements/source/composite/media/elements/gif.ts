@@ -41,7 +41,7 @@ export default ({ image }: { image: HTMLImageElement }) => {
     className: 'media-gif',
     children: [
       assets.image.background({
-        image,
+        element: image,
         isShowCaption: true,
         isScaled: false,
         customStyles: {

@@ -43,8 +43,9 @@ export default (props: CardOverlayProps) => {
 
   if (backgroundImage) {
     const imageContainer = assets.image.background({
-      image: backgroundImage,
+      element: backgroundImage,
       isScaled: true,
+      isGifAllowed: true,
       customStyles: {
         position: 'absolute',
         top: 0,

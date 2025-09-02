@@ -1,10 +1,21 @@
 import * as Utilities from 'utilities';
 import { ElementModel } from 'model';
 
-export default ({ image }: { image: HTMLImageElement }) => {
-  const composite = ElementModel.assets.gifToggle({
-    element: document.createElement('div'),
-  });
+const extractImageElement = (
+  element: HTMLImageElement | HTMLAnchorElement,
+): HTMLImageElement | null => {
+  if (element instanceof HTMLImageElement) {
+    return element;
+  }
+
+  if (element instanceof HTMLAnchorElement) {
+    return element.querySelector('img');
+  }
+
+  return null;
+};
+
+const applyGifToggle = (image: HTMLImageElement, container: HTMLElement) => {
   const canvas = document.createElement('canvas');
   const button = document.createElement('button');
   const setButtonPlay = () => {
@@ -72,7 +83,10 @@ export default ({ image }: { image: HTMLImageElement }) => {
   let isPlaying = true;
 
   button.setAttribute('type', 'button');
-  button.addEventListener('click', () => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     if (isPlaying) {
       setButtonPause();
       isPlaying = false;
@@ -83,19 +97,43 @@ export default ({ image }: { image: HTMLImageElement }) => {
   });
 
   image.addEventListener('load', () => {
-    composite.element.appendChild(image);
-    composite.element.appendChild(canvas);
-    composite.element.appendChild(button);
+    container.appendChild(canvas);
+    container.appendChild(button);
     setButtonPlay();
-    sizeCanvas({ container: composite.element });
+    sizeCanvas({ container });
   });
 
   window.addEventListener(
     'resize',
     Utilities.performance.debounce(() => {
-      sizeCanvas({ container: composite.element });
+      sizeCanvas({ container });
     }, 50),
   );
+};
+
+export default ({
+  element,
+}: {
+  element: HTMLImageElement | HTMLAnchorElement;
+}) => {
+  const image = extractImageElement(element);
+
+  if (!image) {
+    throw new Error('No valid image element found');
+  }
+
+  const isAnchor = element instanceof HTMLAnchorElement;
+  const container = isAnchor ? element : document.createElement('div');
+
+  const composite = ElementModel.assets.gifToggle({
+    element: container,
+  });
+
+  if (!isAnchor) {
+    container.appendChild(element);
+  }
+
+  applyGifToggle(image, container);
 
   return composite;
 };

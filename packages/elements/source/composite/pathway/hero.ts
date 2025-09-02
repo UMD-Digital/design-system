@@ -93,7 +93,7 @@ const createAssetColumn = ({
   if (image && !video) {
     children.push(
       assets.image.background({
-        image,
+        element: image,
         isScaled: true,
         isShowCaption: true,
       }),

@@ -15,7 +15,7 @@ const makeDefaultImage = () => {
 export default {
   fearlessForward: () =>
     imageContainer({
-      image: makeDefaultImage(),
+      element: makeDefaultImage(),
       isScaled: true,
     }),
 };

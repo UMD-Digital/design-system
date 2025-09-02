@@ -98,8 +98,9 @@ const makeImageColumn = ({
     },
     children: [
       assets.image.background({
-        image,
+        element: image,
         isScaled: isAligned,
+        isGifAllowed: false,
       }),
     ],
   });

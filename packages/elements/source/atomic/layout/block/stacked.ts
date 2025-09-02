@@ -31,6 +31,11 @@ export const image = ({
       element: {
         height: 'auto',
 
+        // Gif Overwrite
+        [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {
+          aspectRatio: '4 / 3',
+        },
+
         ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
           marginLeft: Styles.token.spacing.sm,
           marginBottom: Styles.token.spacing.md,

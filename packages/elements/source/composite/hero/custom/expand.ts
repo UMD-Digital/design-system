@@ -117,8 +117,9 @@ const createAssetElement = ({
   }
   if (image) {
     return assets.image.background({
-      image,
+      element: image,
       isScaled: true,
+      isGifAllowed: true,
       isShowCaption: true,
     });
   }

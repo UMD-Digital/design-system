@@ -6,8 +6,9 @@ import { type HeroMinimalProps } from './_types';
 
 const createImageAsset = (image: HTMLImageElement) => {
   return assets.image.background({
-    image,
+    element: image,
     isScaled: true,
+    isGifAllowed: true,
     isShowCaption: true,
   });
 };

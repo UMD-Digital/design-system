@@ -20,7 +20,7 @@ const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
     className: 'umd-hero-logo__asset',
     children: [
       assets.image.background({
-        image,
+        element: image,
         isScaled: false,
       }),
     ],

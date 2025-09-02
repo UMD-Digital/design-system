@@ -83,7 +83,7 @@ const createPreviewElement = (
 ): HTMLElement => {
   const imageCopy = slide.image.cloneNode(true) as HTMLImageElement;
   const preview = assets.image.background({
-    image: imageCopy,
+    element: imageCopy,
     isScaled: true,
   });
 

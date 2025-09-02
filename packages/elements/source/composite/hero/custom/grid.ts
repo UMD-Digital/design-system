@@ -99,8 +99,9 @@ const columnBase = {
 
 const createImageWrapper = (image: HTMLImageElement) =>
   assets.image.background({
-    image,
+    element: image,
     isScaled: true,
+    isGifAllowed: true,
     isShowCaption: true,
   });
 

@@ -105,9 +105,10 @@ const createAssetContent = ({
   if (!video && image) {
     children.push(
       Atomic.assets.image.background({
-        image,
+        element: image,
         isScaled: isImageScaled,
         isShowCaption: true,
+        isGifAllowed: true,
         dateSign,
         customStyles: {
           [' > * ']: {},

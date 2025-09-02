@@ -2,10 +2,10 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { theme } from 'utilities';
 import { ElementModel } from 'model';
-import { 
+import {
   type PersonContactPropsWithStyles,
   type PersonTextLockupPropsWithStyles,
-  type PersonFullProps 
+  type PersonFullProps,
 } from '../../_types';
 
 const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
@@ -61,7 +61,7 @@ export const image = ({
     },
     children: [
       assets.image.background({
-        image,
+        element: image,
         isScaled: false,
       }),
     ],
@@ -88,9 +88,7 @@ const personLockup = ({
     isThemeDark,
   });
 
-export const details = (
-  props: PersonTextLockupPropsWithStyles,
-) => {
+export const details = (props: PersonTextLockupPropsWithStyles) => {
   const { customStyles = {} } = props;
   return ElementModel.createDiv({
     className: 'person-column-details',
@@ -123,9 +121,7 @@ const contactLockup = ({
     phone,
   });
 
-export const contact = (
-  props: PersonContactPropsWithStyles,
-) => {
+export const contact = (props: PersonContactPropsWithStyles) => {
   const { customStyles = {} } = props;
 
   return ElementModel.createDiv({

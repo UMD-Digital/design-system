@@ -691,7 +691,7 @@ const createGridElement = (
   if (element.tagName === 'IMG') {
     children.push(
       assets.image.background({
-        image: element as HTMLImageElement,
+        element: element as HTMLImageElement,
         isScaled: true,
       }),
     );
@@ -832,7 +832,7 @@ const createFeatured = (
   if (element.tagName === 'IMG') {
     children.push(
       assets.image.background({
-        image: element as HTMLImageElement,
+        element: element as HTMLImageElement,
         isScaled: true,
       }),
     );

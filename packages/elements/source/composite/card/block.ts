@@ -30,7 +30,7 @@ export default (props: CardBlockProps) => {
       layout.block.stacked.image({
         children: [
           assets.image.background({
-            image,
+            element: image,
             isScaled: true,
             isAspectStandard: isAligned,
             dateSign,

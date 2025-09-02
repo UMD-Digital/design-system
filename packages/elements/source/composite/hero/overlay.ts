@@ -25,7 +25,6 @@ const ANIMATION_CONFIG = {
   },
 } as const;
 
-
 const keyFrameHeroResize = `
   @keyframes hero-overlay-resize {
     from { transform: ${ANIMATION_CONFIG.RESIZE.TRANSFORM.FROM}; }
@@ -55,8 +54,9 @@ const createVideoAsset = (video: HTMLVideoElement) => {
 
 const createImageAsset = (image: HTMLImageElement) => {
   return assets.image.background({
-    image,
+    element: image,
     isScaled: true,
+    isGifAllowed: true,
     isShowCaption: true,
   });
 };
@@ -119,8 +119,7 @@ const createAsset = ({
 const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
-  const isOverwriteHeadline =
-    characterCount > 30;
+  const isOverwriteHeadline = characterCount > 30;
 
   if (!headline) return null;
 
@@ -261,7 +260,8 @@ export default (props: HeroOverlayProps) => {
             right: '50px',
             top: 0,
             height: '100%',
-            background: 'linear-gradient(90deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, .8) 50%, rgba(0, 0, 0, 0) 75%)',
+            background:
+              'linear-gradient(90deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, .8) 50%, rgba(0, 0, 0, 0) 75%)',
             zIndex: 999,
           },
         },

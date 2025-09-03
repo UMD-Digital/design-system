@@ -1,55 +1,64 @@
 import { token } from '@universityofmaryland/web-styles-library';
+import { ElementModel } from 'model';
+import { type ElementVisual } from '../../../../_types';
+import { BREAKPOINTS } from 'composite/footer/globals';
+import { BaseProps } from 'composite/footer/_types';
 
-export const CALL_TO_ACTION_CONTAINER = 'umd-footer-call-to-action-container';
+export interface CallToActionProps extends BaseProps {
+  slotCta?: HTMLAnchorElement;
+}
 
-export const CallToActionStyles = `
-  .${CALL_TO_ACTION_CONTAINER} {
-    margin-left: auto;
-  }
+const { LARGE } = BREAKPOINTS;
 
-  .${CALL_TO_ACTION_CONTAINER} a {
-    display: inline-block;
-    padding: ${token.spacing.xs} ${token.spacing['lg']};
-    background-color: ${token.color.red};
-    color: ${token.color.white} !important;
-    transition: background-color 0.3s ease-in-out;
-    font-weight: 700;
-  }
-
-  .${CALL_TO_ACTION_CONTAINER} a:hover,
-  .${CALL_TO_ACTION_CONTAINER} a:focus {
-    background-color: ${token.color.redDark};
-  }
-
-  .${CALL_TO_ACTION_CONTAINER} a * {
-    color: ${token.color.white} !important;
-  }
-`;
-
-const makeGivingLink = () => {
+const makeGivingLink = (): HTMLAnchorElement => {
   const defaultLink = document.createElement('a');
   defaultLink.textContent = 'Support UMD';
   defaultLink.href = 'https://giving.umd.edu/';
   defaultLink.target = '_blank';
   defaultLink.rel = 'noopener noreferrer';
-
   return defaultLink;
 };
 
-export interface CallToActionProps {
-  slotCta?: HTMLAnchorElement;
-}
+const createLinkElement = (
+  props: CallToActionProps,
+  link: HTMLAnchorElement,
+): ElementVisual => {
+  const { isThemeLight } = props;
 
-export const createCallToAction = ({ slotCta }: CallToActionProps) => {
-  const container = document.createElement('div');
+  return ElementModel.actions.primary({
+    element: link,
+    elementStyles: {
+      element: {
+        ...(isThemeLight && {
+          color: `${token.color.white} !important`,
+        }),
+      },
+    },
+  });
+};
 
-  container.classList.add(CALL_TO_ACTION_CONTAINER);
+export default (props: CallToActionProps): ElementVisual => {
+  const { isTypeSimple, slotCta } = props;
+  const baseLink = slotCta ?? makeGivingLink();
+  const styledLink = createLinkElement(props, baseLink);
 
-  if (slotCta) {
-    container.appendChild(slotCta);
-  } else {
-    container.appendChild(makeGivingLink());
-  }
+  return ElementModel.createDiv({
+    className: 'umd-footer-call-to-action-container',
+    children: [styledLink],
+    elementStyles: {
+      element: {
+        marginLeft: 'auto',
 
-  return container;
+        ...(isTypeSimple && {
+          display: 'none',
+        }),
+
+        [`@container (min-width: ${LARGE}px)`]: {
+          [`& .umd-footer-logo-container`]: {
+            display: 'none',
+          },
+        },
+      },
+    },
+  });
 };

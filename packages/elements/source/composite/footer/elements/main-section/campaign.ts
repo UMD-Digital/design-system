@@ -1,21 +1,15 @@
 import { token } from '@universityofmaryland/web-styles-library';
+import { ElementModel } from 'model';
 import * as utilities from 'utilities';
 import { BaseProps } from '../../_types';
-
-export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
-
-export const CampaignStyles = `
-  .${CAMPAIGN_COLUMN_WRAPPER} > a {
-    display: block;
-    margin-top: ${token.spacing.lg};
-    max-width: 250px;
-  }
-`;
+import { type ElementVisual } from '../../../../_types';
+import { BREAKPOINTS } from '../../globals';
 
 export interface CampaignProps extends BaseProps {}
 
-export const createCampaign = ({ isThemeLight }: CampaignProps) => {
-  const container = document.createElement('div');
+const { LARGE } = BREAKPOINTS;
+
+export default ({ isThemeLight }: CampaignProps): ElementVisual => {
   const link = document.createElement('a');
   link.href = 'https://fearlesslyforward.umd.edu';
   link.setAttribute('target', '_blank');
@@ -25,12 +19,43 @@ export const createCampaign = ({ isThemeLight }: CampaignProps) => {
     'Link to the Fearlessly Forward Brand website',
   );
 
-  link.innerHTML = !isThemeLight
-    ? utilities.asset.logo.CAMPAIGN_LOGO
-    : utilities.asset.logo.CAMPAIGN_LOGO_DARK;
+  link.innerHTML =
+    (!isThemeLight && utilities.asset.logo.CAMPAIGN_LOGO) ||
+    utilities.asset.logo.CAMPAIGN_LOGO_DARK;
 
-  container.classList.add(CAMPAIGN_COLUMN_WRAPPER);
-  container.appendChild(link);
+  const linkElement = ElementModel.create({
+    element: link,
+    className: 'campaign-column-link',
+    elementStyles: {
+      element: {
+        display: 'block',
+        marginTop: token.spacing.lg,
+        maxWidth: '250px',
+      },
+    },
+  });
 
-  return container;
+  return ElementModel.createDiv({
+    className: 'campaign-column-wrapper',
+    children: [linkElement],
+    elementStyles: {
+      element: {
+        [`@container (min-width: ${LARGE}px)`]: {
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginLeft: 'auto',
+
+          [`& .umd-footer-logo-container`]: {
+            display: 'none',
+          },
+        },
+
+        [`@container (max-width: ${LARGE - 1}px)`]: {
+          [`& .umd-footer-social-column_wrapper &`]: {
+            display: 'none',
+          },
+        },
+      },
+    },
+  });
 };

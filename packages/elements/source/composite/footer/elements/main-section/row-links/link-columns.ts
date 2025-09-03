@@ -4,10 +4,11 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
-import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
+import { ElementModel } from 'model';
+import { type ElementVisual } from '../../../../../_types';
+import { BREAKPOINTS, VARIABLES, REFERENCES } from '../../../globals';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
-const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT } = REFERENCES;
 
@@ -16,23 +17,19 @@ const HEADLINE_ATTRIBUTE_EMPTY = 'data-empty';
 const LINK_TYPE = 'link';
 const HEADLINE_TYPE = 'headline';
 
+const ROW_LINKS_COLUMNS_CONTAINER = 'umd-footer-row-links-columns';
+const ROW_LINKS_COLUMN_WRAPPER = 'umd-footer-row-links-column-wrapper';
+const ROW_LINKS_COLUMN_HEADLINE = 'link-column-headline';
+const ROW_LINKS_COLUMN_LINKS = 'link-column-fonts';
+
 type ColumnRow = {
   elmentType: string;
   title: string;
   url?: string;
 };
 
-const ROW_LINKS_COLUMNS_CONTAINER = 'umd-footer-row-links-columns';
-const ROW_LINKS_COLUMN_WRAPPER = 'umd-footer-row-links-column-wrapper';
-const ROW_LINKS_COLUMN_HEADLINE = `link-column-headline`;
-const ROW_LINKS_COLUMN_LINKS = `link-column-fonts`;
-
-const COLUMN_ONE_DEFAULT_LINKS = [
-  {
-    elmentType: LINK_TYPE,
-    title: 'Careers',
-    url: 'https://ejobs.umd.edu',
-  },
+const COLUMN_ONE_DEFAULT_LINKS: ColumnRow[] = [
+  { elmentType: LINK_TYPE, title: 'Careers', url: 'https://ejobs.umd.edu' },
   {
     elmentType: LINK_TYPE,
     title: 'Office of Civil Rights & Sexual Misconduct',
@@ -60,11 +57,8 @@ const COLUMN_ONE_DEFAULT_LINKS = [
   },
 ];
 
-const COLUMN_TWO_DEFAULT_LINKS = [
-  {
-    elmentType: HEADLINE_TYPE,
-    title: 'Information for',
-  },
+const COLUMN_TWO_DEFAULT_LINKS: ColumnRow[] = [
+  { elmentType: HEADLINE_TYPE, title: 'Information for' },
   {
     elmentType: LINK_TYPE,
     title: 'Prospective Undergraduate Students',
@@ -80,18 +74,11 @@ const COLUMN_TWO_DEFAULT_LINKS = [
     title: 'Parents & Families',
     url: 'https://admissions.umd.edu/persona/parent-families',
   },
-  {
-    elmentType: LINK_TYPE,
-    title: 'Alumni',
-    url: 'https://alumni.umd.edu/',
-  },
+  { elmentType: LINK_TYPE, title: 'Alumni', url: 'https://alumni.umd.edu/' },
 ];
 
-const COLUMN_THREE_DEFAULT_LINKS = [
-  {
-    elmentType: HEADLINE_TYPE,
-    title: 'Academics',
-  },
+const COLUMN_THREE_DEFAULT_LINKS: ColumnRow[] = [
+  { elmentType: HEADLINE_TYPE, title: 'Academics' },
   {
     elmentType: LINK_TYPE,
     title: 'Academic Calendars',
@@ -102,11 +89,7 @@ const COLUMN_THREE_DEFAULT_LINKS = [
     title: 'Course Catalogs',
     url: 'https://academiccatalog.umd.edu',
   },
-  {
-    elmentType: LINK_TYPE,
-    title: 'Libraries',
-    url: 'https://www.lib.umd.edu',
-  },
+  { elmentType: LINK_TYPE, title: 'Libraries', url: 'https://www.lib.umd.edu' },
   {
     elmentType: LINK_TYPE,
     title: 'Terp Portals',
@@ -114,158 +97,56 @@ const COLUMN_THREE_DEFAULT_LINKS = [
   },
 ];
 
-// prettier-ignore
-const HeadlineStyles = `
-  ${Utils.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ROW_LINKS_COLUMN_HEADLINE}`]: typography.elements.interativeMedium,
-    },
-  })}
-
-  .${ROW_LINKS_COLUMN_HEADLINE} {
-    margin-bottom: ${token.spacing.sm};
-    font-weight: 700;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ROW_LINKS_COLUMN_HEADLINE}[${HEADLINE_ATTRIBUTE_EMPTY}="true"] {
-      display: none;
-    }
-  }
-`;
-
-// prettier-ignore
-const LinkStyles = `
-  .${ROW_LINKS_COLUMN_LINKS}:not(:last-child) {
-    margin-bottom: ${token.spacing.sm};
-  }
-
-  .${ROW_LINKS_COLUMN_LINKS} > * {
-    margin-bottom: ${token.spacing.sm};
-  }
-
-  ${Utils.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ROW_LINKS_COLUMN_LINKS} a`]: typography.sans.smaller,
-    },
-  })}
-
-  ${Utils.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ROW_LINKS_COLUMN_LINKS} a`]:
-      animation.line.slideUnderWhite
-    },
-  })}
-
-  .${ROW_LINKS_COLUMN_LINKS} a,
-  .${ROW_LINKS_COLUMN_LINKS} span {
-    color: ${token.color.gray.light};
-  }
-
-  ${Utils.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_COLUMN_LINKS} a`]:
-      animation.line.slideUnderBlack
-    },
-  })}
-`;
-
-// prettier-ignore
-const ColumnWrapper = `
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER} {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 ${token.spacing.md};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDIUM - 1}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER}:not(:last-child) {
-      margin-bottom: ${token.spacing.lg};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER} {
-      padding-right: ${token.spacing.xs};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER}:not(:first-child) {
-      margin-left: ${token.spacing.lg};
-      padding-left: ${token.spacing.lg};
-      border-left: 1px solid ${token.color.gray.dark};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px) {
-    .${ROW_LINKS_COLUMN_WRAPPER} > p {
-      grid-column: 1 / span 2;
-    }
-  }
-`
-
-// prettier-ignore
-export const LinkColumnStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ROW_LINKS_COLUMNS_CONTAINER} {
-      padding-top: ${token.spacing.md};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ROW_LINKS_COLUMNS_CONTAINER} {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-
-  ${ColumnWrapper}
-  ${HeadlineStyles}
-  ${LinkStyles}
-`;
-
-const CreateDefaultColumn = ({
-  defaultContent,
-}: {
-  defaultContent: ColumnRow[];
-}) => {
-  const container = document.createElement('div');
-
-  container.classList.add(ROW_LINKS_COLUMN_WRAPPER);
-
-  defaultContent.forEach((row) => {
-    if (row.elmentType === LINK_TYPE) {
-      if (row.url) {
-        const wrapper = document.createElement('div');
+const createDefaultColumn = (defaultContent: ColumnRow[]): ElementVisual => {
+  const children: ElementVisual[] = defaultContent
+    .map((row) => {
+      if (row.elmentType === LINK_TYPE && row.url) {
         const link = document.createElement('a');
         const span = document.createElement('span');
-
         span.textContent = row.title;
         link.appendChild(span);
-
         link.href = row.url;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
 
-        wrapper.classList.add(ROW_LINKS_COLUMN_LINKS);
-        wrapper.appendChild(link);
-        container.appendChild(wrapper);
+        return ElementModel.createDiv({
+          className: ROW_LINKS_COLUMN_LINKS,
+          children: [
+            ElementModel.create({
+              element: link,
+              className: `${ROW_LINKS_COLUMN_LINKS}-link`,
+            }),
+          ],
+        });
       }
-    } else if (row.elmentType === HEADLINE_TYPE) {
-      const headline = document.createElement('p');
-      headline.textContent = row.title;
-      headline.classList.add(ROW_LINKS_COLUMN_HEADLINE);
-      container.appendChild(headline);
-    }
-  });
 
-  return container;
+      if (row.elmentType === HEADLINE_TYPE) {
+        const headline = document.createElement('p');
+        headline.textContent = row.title;
+        return ElementModel.create({
+          element: headline,
+          className: ROW_LINKS_COLUMN_HEADLINE,
+          elementStyles: {
+            element: {
+              ...typography.elements.interativeMedium,
+              marginBottom: token.spacing.sm,
+              fontWeight: 700,
+            },
+          },
+        });
+      }
+
+      return undefined as unknown as ElementVisual;
+    })
+    .filter(Boolean) as ElementVisual[];
+
+  return ElementModel.createDiv({
+    className: ROW_LINKS_COLUMN_WRAPPER,
+    children,
+  });
 };
 
-const CreateSlotColumn = ({
+const createSlotColumn = ({
   slot,
   hasHeadlines,
   isColumnOne,
@@ -273,96 +154,97 @@ const CreateSlotColumn = ({
   slot: HTMLElement;
   hasHeadlines: boolean;
   isColumnOne: boolean;
-}) => {
-  const container = document.createElement('div');
-
-  container.classList.add(ROW_LINKS_COLUMN_WRAPPER);
-
-  const wrapper = document.createElement('div');
-  const links = Array.from(slot.querySelectorAll('a')).map((link) => {
-    const linkWrapper = document.createElement('div');
-    linkWrapper.classList.add(ROW_LINKS_COLUMN_LINKS);
+}): ElementVisual => {
+  const linkChildren: ElementVisual[] = Array.from(
+    slot.querySelectorAll('a'),
+  ).map((link) => {
     Utils.markup.modify.animationLinkSpan({ element: link });
-    linkWrapper.appendChild(link);
-    return linkWrapper;
+    return ElementModel.createDiv({
+      className: ROW_LINKS_COLUMN_LINKS,
+      children: [
+        ElementModel.create({
+          element: link,
+          className: `${ROW_LINKS_COLUMN_LINKS}-link`,
+        }),
+      ],
+    });
   });
+
+  const wrapperChildren: ElementVisual[] = [];
 
   if (hasHeadlines) {
-    const headline = slot.getAttribute(HEADLINE_ATTRIBUTE) as string;
-    const headlineElement = document.createElement('p');
-    headlineElement.classList.add(ROW_LINKS_COLUMN_HEADLINE);
-    headlineElement.innerHTML = headline;
-
-    if (!headline && !isColumnOne) {
-      headlineElement.setAttribute(HEADLINE_ATTRIBUTE_EMPTY, 'true');
-      wrapper.appendChild(headlineElement);
+    const headlineAttr = slot.getAttribute(HEADLINE_ATTRIBUTE) ?? '';
+    const headline = document.createElement('p');
+    headline.innerHTML = headlineAttr;
+    if (!headlineAttr && !isColumnOne) {
+      headline.setAttribute(HEADLINE_ATTRIBUTE_EMPTY, 'true');
     }
 
-    if (headline) {
-      wrapper.appendChild(headlineElement);
-    }
+    wrapperChildren.push(
+      ElementModel.create({
+        element: headline,
+        className: ROW_LINKS_COLUMN_HEADLINE,
+        elementStyles: {
+          element: {
+            ...typography.elements.interativeMedium,
+            marginBottom: token.spacing.sm,
+            fontWeight: 700,
+          },
+        },
+      }),
+    );
   }
 
-  links.forEach((link) => {
-    wrapper.appendChild(link);
+  wrapperChildren.push(...linkChildren);
+
+  return ElementModel.createDiv({
+    className: ROW_LINKS_COLUMN_WRAPPER,
+    children: wrapperChildren,
   });
-
-  container.appendChild(wrapper);
-
-  return container;
 };
 
 export interface slotColumnsProps {
   slotColumns?: HTMLSlotElement[];
 }
 
-export default (props: slotColumnsProps) => {
+export default (props: slotColumnsProps): ElementVisual => {
   const { slotColumns } = props;
-  const container = document.createElement('div');
+
+  let children: ElementVisual[];
 
   if (slotColumns) {
     const hasHeadlines = slotColumns.some((slot) =>
       slot.hasAttribute(HEADLINE_ATTRIBUTE),
     );
 
-    slotColumns.forEach((slot, index) => {
-      const slotToAppend = CreateSlotColumn({
-        slot,
-        hasHeadlines,
-        isColumnOne: index === 0,
-      });
-      if (slotToAppend) container.appendChild(slotToAppend);
-    });
+    children = slotColumns.map((slot, index) =>
+      createSlotColumn({ slot, hasHeadlines, isColumnOne: index === 0 }),
+    );
 
     if (hasHeadlines) {
       setTimeout(() => {
-        // To Do - refactor to load event
         const headlines = Array.from(
-          container.querySelectorAll(`.${ROW_LINKS_COLUMN_HEADLINE}`),
-        ) as HTMLDivElement[];
-
-        const renderedHeadlinesSize = headlines.reduce((acc, headline) => {
-          return headline.offsetHeight > acc ? headline.offsetHeight : acc;
-        }, 10);
-
-        headlines.forEach((headline) => {
-          headline.style.height = `${renderedHeadlinesSize}px`;
-        });
+          document.querySelectorAll(`.${ROW_LINKS_COLUMN_HEADLINE}`),
+        ) as HTMLElement[];
+        const renderedHeadlinesSize = headlines.reduce(
+          (acc, h) => Math.max(acc, h.offsetHeight),
+          10,
+        );
+        headlines.forEach(
+          (h) => (h.style.height = `${renderedHeadlinesSize}px`),
+        );
       }, 200);
     }
   } else {
-    container.appendChild(
-      CreateDefaultColumn({ defaultContent: COLUMN_ONE_DEFAULT_LINKS }),
-    );
-    container.appendChild(
-      CreateDefaultColumn({ defaultContent: COLUMN_TWO_DEFAULT_LINKS }),
-    );
-    container.appendChild(
-      CreateDefaultColumn({ defaultContent: COLUMN_THREE_DEFAULT_LINKS }),
-    );
+    children = [
+      createDefaultColumn(COLUMN_ONE_DEFAULT_LINKS),
+      createDefaultColumn(COLUMN_TWO_DEFAULT_LINKS),
+      createDefaultColumn(COLUMN_THREE_DEFAULT_LINKS),
+    ];
   }
 
-  container.classList.add(ROW_LINKS_COLUMNS_CONTAINER);
-
-  return container;
+  return ElementModel.createDiv({
+    className: ROW_LINKS_COLUMNS_CONTAINER,
+    children,
+  });
 };

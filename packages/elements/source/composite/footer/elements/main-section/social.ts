@@ -1,11 +1,10 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
 import createCampaignRow, { CAMPAIGN_COLUMN_WRAPPER } from './campaign';
-import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
+import { BREAKPOINTS, VARIABLES, REFERENCES } from '../../globals';
 import { BaseProps } from '../../_types';
 
 const { LARGE, MEDIUM } = BREAKPOINTS;
-const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT } = REFERENCES;
 
@@ -66,20 +65,20 @@ const campaignOverwriteStyles = `
 `;
 
 const themeOverwriteStyles = `
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT}  .${SOCIAL_CONTAINER_WRAPPER} a {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT}  .${SOCIAL_CONTAINER_WRAPPER} a {
     background-color: ${token.color.gray.light};
   }
 
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a > *,
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a path {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a > *,
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a path {
     fill: ${token.color.black} !important;
   }
 
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT}  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT}  .${SOCIAL_CONTAINER_WRAPPER} a:hover {
     background-color: ${token.color.gray.dark};
   }
 
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${SOCIAL_CONTAINER_WRAPPER} a:hover path {
     fill: ${token.color.gray.light} !important;
   }
 `;
@@ -168,7 +167,6 @@ export const SocialContainerStyles = `
   ${OverwriteGridStyle}
 `;
 
-// Enforce known social link types logos
 const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   const url = link.getAttribute('href') || null;
 
@@ -223,7 +221,6 @@ const CreateSocialRow = ({ slotSocialLinks }: SocialProps) => {
     socialLinks = slottedSocialLinks;
   }
 
-  // Enforce university default links if none are provided
   if (socialLinks.length === 0) {
     const socialLink = ({ url, label }: { label: string; url: string }) => {
       const link = document.createElement('a');
@@ -286,7 +283,7 @@ export default (props: SocialCampaignColumnsProps) => {
   socialColumnWrapper.classList.add(SOCIAL_COLUMN_WRAPPER);
 
   socialColumnWrapper.appendChild(socialContainer);
-  socialColumnWrapper.appendChild(campaignContainer);
+  socialColumnWrapper.appendChild(campaignContainer.element);
 
   return socialColumnWrapper;
 };

@@ -1,21 +1,15 @@
 import { token } from '@universityofmaryland/web-styles-library';
+import { ElementModel } from 'model';
 import * as utilities from 'utilities';
 import { BaseProps } from '../../_types';
+import { type ElementVisual } from '../../../../_types';
 
 export const CAMPAIGN_COLUMN_WRAPPER = 'campaign-column-wrapper';
-
-export const CampaignStyles = `
-  .${CAMPAIGN_COLUMN_WRAPPER} > a {
-    display: block;
-    margin-top: ${token.spacing.lg};
-    max-width: 250px;
-  }
-`;
+const CAMPAIGN_LINK = 'campaign-column-link';
 
 export interface CampaignProps extends BaseProps {}
 
-export default ({ isThemeLight }: CampaignProps) => {
-  const container = document.createElement('div');
+export default ({ isThemeLight }: CampaignProps): ElementVisual => {
   const link = document.createElement('a');
   link.href = 'https://fearlesslyforward.umd.edu';
   link.setAttribute('target', '_blank');
@@ -29,8 +23,25 @@ export default ({ isThemeLight }: CampaignProps) => {
     ? utilities.asset.logo.CAMPAIGN_LOGO
     : utilities.asset.logo.CAMPAIGN_LOGO_DARK;
 
-  container.classList.add(CAMPAIGN_COLUMN_WRAPPER);
-  container.appendChild(link);
+  const linkElement = ElementModel.create({
+    element: link,
+    className: CAMPAIGN_LINK,
+    elementStyles: {
+      element: {
+        display: 'block',
+        marginTop: token.spacing.lg,
+        maxWidth: '250px',
 
-  return container;
+        [`& svg`]: {
+          width: '100%',
+          height: 'auto',
+        },
+      },
+    },
+  });
+
+  return ElementModel.createDiv({
+    className: CAMPAIGN_COLUMN_WRAPPER,
+    children: [linkElement],
+  });
 };

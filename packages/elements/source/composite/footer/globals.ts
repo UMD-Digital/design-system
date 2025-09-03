@@ -3,9 +3,7 @@ export const BREAKPOINTS = {
   MEDIUM: 650,
   LARGE: 1000,
 };
-export const ELEMENTS = {
-  ELEMENT_WRAPPER: 'umd-footer-element-wrapper',
-};
+
 export const SLOTS = {
   CONTACT_HEADLINE: 'contact-headline',
   CONTACT_LINKS: 'contact-links',

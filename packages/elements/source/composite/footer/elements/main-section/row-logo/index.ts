@@ -6,19 +6,19 @@ import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
 import createCallToActionContainer, {
-  CallToActionStyles,
-  CALL_TO_ACTION_CONTAINER,
+  // CallToActionStyles,
+  // CALL_TO_ACTION_CONTAINER,
   type CallToActionProps,
 } from '../call-to-action';
 import createContactContainer, {
   ContactContainerStyles,
   type ContactProps,
 } from './contact';
-import createLogoContainer, { LogoContainerStyles } from './logo';
-import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
+// import createLogoContainer, { LogoContainerStyles } from './logo';
+import createLogoContainer from './logo';
+import { BREAKPOINTS, VARIABLES, REFERENCES } from '../../../globals';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
-const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT, IS_VERSION_SIMPLE } = REFERENCES;
 
@@ -28,7 +28,7 @@ const ROW_LOGO_CONTAINER_LOCK = 'umd-footer-row-logo-container-lock';
 
 const ctaOverwriteStyles = `
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ROW_LOGO_CONTAINER_WRAPPER} > .${CALL_TO_ACTION_CONTAINER} {
+    .${ROW_LOGO_CONTAINER_WRAPPER} > .umd-footer-call-to-action-container {
       display: none;
     }
   }
@@ -36,12 +36,12 @@ const ctaOverwriteStyles = `
 
 // prettier-ignore
 const themeOverwriteStyles = `
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LOGO_CONTAINER} {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${ROW_LOGO_CONTAINER} {
     background-color: ${token.color.gray.lightest} !important;
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ELEMENT_WRAPPER}${IS_VERSION_SIMPLE} .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+    .umd-footer-element-wrapper${IS_VERSION_SIMPLE} .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
@@ -86,13 +86,14 @@ export const RowLogoStyles = `
     },
   })}
 
-  ${LogoContainerStyles}
   ${ContactContainerStyles}
   ${SocialContainerStyles}
-  ${CallToActionStyles}
   ${ctaOverwriteStyles}
   ${themeOverwriteStyles}
 `;
+
+// ${CallToActionStyles}
+// ${LogoContainerStyles}
 
 export interface RowLogoProps
   extends SocialCampaignColumnsProps,
@@ -115,13 +116,13 @@ export default (props: RowLogoProps) => {
       wrapper.appendChild(socialColumnWrapper);
     } else {
       const ctaWrapper = createCallToActionContainer(props);
-      wrapper.appendChild(ctaWrapper);
+      wrapper.appendChild(ctaWrapper.element);
     }
   };
 
   const logoElement = createLogoContainer(props);
   const contactElement = createContactContainer(props);
-  wrapper.appendChild(logoElement);
+  wrapper.appendChild(logoElement.element);
   wrapper.appendChild(contactElement);
 
   makeThirdColumn();

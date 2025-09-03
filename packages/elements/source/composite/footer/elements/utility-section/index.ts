@@ -5,10 +5,9 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
-import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
+import { BREAKPOINTS, VARIABLES, REFERENCES } from '../../globals';
 
 const { LARGE } = BREAKPOINTS;
-const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT } = REFERENCES;
 
@@ -33,13 +32,13 @@ const LinkStyles = `
     },
   })}
 
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a {
     color: ${token.color.black};
   }
 
   ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
+      [`.umd-footer-element-wrapper${IS_THEME_LIGHT} .${UTILITY_CONTAINER} a`]:
       animation.line.slideUnderBlack,
     },
   })}
@@ -57,7 +56,7 @@ const TextStyles = `
     color: ${token.color.gray.light};
   }
 
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} p {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${UTILITY_CONTAINER} p {
     color: ${token.color.black};
   }
 `;
@@ -103,7 +102,7 @@ export const UtilityContainerStyles = `
     }
   }
 
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${UTILITY_CONTAINER} {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${UTILITY_CONTAINER} {
     background-color: ${token.color.gray.light};
   }
 

@@ -8,10 +8,9 @@ import createSocialCampaignColumns, {
   SOCIAL_COLUMN_WRAPPER,
   type SocialCampaignColumnsProps,
 } from '../social';
-import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
+import { BREAKPOINTS, VARIABLES, REFERENCES } from '../../../globals';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
-const { ELEMENT_WRAPPER } = ELEMENTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT } = REFERENCES;
 
@@ -78,14 +77,14 @@ const HeadlineStyles = `
     },
   })}
 
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE},
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} * {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE},
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} * {
     color: ${token.color.black};
   }
 
   ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
+      [`.umd-footer-element-wrapper${IS_THEME_LIGHT} .${CONTACT_LIST_HEADLINE} a`]:
       animation.line.slideUnderBlack,
     },
   })}
@@ -133,7 +132,7 @@ const LinkListStyles = `
 
   ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
+      [`.umd-footer-element-wrapper${IS_THEME_LIGHT} .${CONTACT_LINKS_LIST} a`]:
       animation.line.slideUnderBlack,
     },
   })}
@@ -158,7 +157,7 @@ const LinkListStyles = `
     left: 0;
   }
 
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} a:not(:first-child):before {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} a:not(:first-child):before {
     background-color: ${token.color.black};
   }
 `;

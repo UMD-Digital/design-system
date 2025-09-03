@@ -1,56 +1,53 @@
-import {
-  createMainSection as createMain,
-  MainContainerStyles,
-  type MainSectionProps,
-} from './elements/main-section';
-import {
-  createUtilitySection as createUtility,
-  UtilityContainerStyles,
-  type UtilityProps,
-} from './elements/utility-section';
-import { ELEMENTS, VARIABLES } from './globals';
+import { ElementModel } from 'model';
+import createMain, { type MainSectionProps } from './elements/main-section';
+import createUtility, { type UtilityProps } from './elements/utility-section';
 import { BaseProps } from './_types';
+import { animation, token } from '@universityofmaryland/web-styles-library';
 
 export interface FooterProps
   extends BaseProps,
     UtilityProps,
     MainSectionProps {}
 
-const { ELEMENT_WRAPPER } = ELEMENTS;
-const { ELEMENT_NAME, ATTRIBUTE_THEME, ATTRIBUTE_TYPE } = VARIABLES;
-
-let styles = `
-  .${ELEMENT_WRAPPER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    overflow: hidden;
-  }
-    
-  ${MainContainerStyles}
-  ${UtilityContainerStyles}
-`;
-
 export default (props: FooterProps) => {
-  const {
-    isThemeLight,
-    isTypeSimple,
-    isTypeVisual,
-    isTypeMega,
-    slotUtilityLinks,
-  } = props;
-  const wrapper = document.createElement('div');
+  const { isThemeLight } = props;
+
   const main = createMain(props);
-  const utility = createUtility({ slotUtilityLinks });
-  const theme = isThemeLight ? 'light' : 'dark';
+  const utility = createUtility(props);
 
-  wrapper.setAttribute(ATTRIBUTE_THEME, theme);
-  if (isTypeSimple) wrapper.setAttribute(ATTRIBUTE_TYPE, 'simple');
-  if (isTypeVisual) wrapper.setAttribute(ATTRIBUTE_TYPE, 'visual');
-  if (isTypeMega) wrapper.setAttribute(ATTRIBUTE_TYPE, 'mega');
+  const wrapper = ElementModel.createDiv({
+    className: 'umd-footer-element-wrapper',
+    children: [main, utility],
+    elementStyles: {
+      element: {
+        containerType: 'inline-size',
+        overflow: 'hidden',
 
-  wrapper.classList.add(ELEMENT_WRAPPER);
+        ...(isThemeLight && {
+          backgroundColor: token.color.gray.lightest,
 
-  wrapper.appendChild(main);
-  wrapper.appendChild(utility);
+          ['& a']: {
+            ...animation.line.slideUnderBlack,
 
-  return { element: wrapper, styles };
+            ['&:not(:first-child)::before']: {
+              backgroundColor: token.color.black,
+            },
+          },
+        }),
+
+        ['& p, & a, & span']: {
+          color: token.color.white,
+
+          ...(isThemeLight && {
+            color: token.color.gray.dark,
+          }),
+        },
+      },
+    },
+  });
+
+  return {
+    element: wrapper.element,
+    styles: wrapper.styles,
+  };
 };

@@ -27,6 +27,7 @@ export const SLOTS = {
   LINK_COLUMN_ONE: 'link-column-one',
   LINK_COLUMN_TWO: 'link-column-two',
   LINK_COLUMN_THREE: 'link-column-three',
+  LOGO: 'logo',
 };
 
 /**
@@ -61,6 +62,18 @@ const createComponent: CreateComponentFunction = (element) => {
   const hasLabel = element.hasAttribute('aria-label');
   const columns = [];
   let isTypeSimple = element.getAttribute('type') === 'simple';
+
+  const logoElement = element.querySelector(`[slot="${SLOTS.LOGO}"]`) as
+    | HTMLImageElement
+    | HTMLAnchorElement;
+
+  if (logoElement && logoElement instanceof HTMLAnchorElement) {
+    const logoImage = logoElement.querySelector('img');
+
+    if (!logoImage) {
+      console.error('No logo element found in logo slot');
+    }
+  }
 
   if (columnOne && columnOne.hasChildNodes()) {
     columns.push(columnOne);
@@ -98,6 +111,9 @@ const createComponent: CreateComponentFunction = (element) => {
     slotCta: element.querySelector(
       `[slot="${SLOTS.CTA}"]`,
     ) as HTMLAnchorElement,
+    slotLogo: element.querySelector(`[slot="${SLOTS.LOGO}"]`) as
+      | HTMLImageElement
+      | HTMLAnchorElement,
     slotAddress: element.querySelector(
       `[slot="${SLOTS.CONTACT_ADDRESS}"]`,
     ) as HTMLSlotElement,

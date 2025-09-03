@@ -1,100 +1,94 @@
 import { token } from '@universityofmaryland/web-styles-library';
+import { ElementModel } from 'model';
 import * as utilities from 'utilities';
-import {
-  createCampaign as createCampaignRow,
-  CAMPAIGN_COLUMN_WRAPPER,
-  type CampaignProps,
-} from '../campaign';
-import {
-  createCallToAction as createCallToActionContainer,
-  CALL_TO_ACTION_CONTAINER,
-  type CallToActionProps,
-} from '../call-to-action';
-import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../../globals';
+import createCampaignRow, { type CampaignProps } from '../campaign';
+import createCallToAction, { type CallToActionProps } from '../call-to-action';
+import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
+import { type ElementVisual } from '../../../../../_types';
 
 const { LARGE } = BREAKPOINTS;
-const { ELEMENT_NAME } = VARIABLES;
-const { ELEMENT_WRAPPER } = ELEMENTS;
-const { IS_VERSION_SIMPLE } = REFERENCES;
 
-const LOGO_CONTAINER = 'umd-footer-logo-container';
-const LOGO_CONTAINER_LINK = 'umd-footer-logo-container_link';
+export interface LogoProps extends BaseProps, CampaignProps, CallToActionProps {
+  slotLogo: HTMLImageElement | HTMLAnchorElement | null;
+}
 
-// prettier-ignore
-const ctaOverwriteStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
-      margin-top: ${token.spacing.md};
-    }
-  }
+const createLogoLinkElement = (
+  isThemeLight?: boolean,
+  logo?: HTMLImageElement | HTMLAnchorElement | null,
+): ElementVisual => {
+  const createDefaultLogoLink = () => {
+    const logoLink = document.createElement('a');
+    logoLink.setAttribute('href', 'https://umd.edu');
+    logoLink.setAttribute('target', '_blank');
+    logoLink.setAttribute('rel', 'noopener noreferrer');
+    logoLink.setAttribute(
+      'aria-label',
+      'Link to the University of Maryland homepage',
+    );
 
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
-      display: none;
-    }
-  }
+    logoLink.innerHTML = !isThemeLight
+      ? `${utilities.asset.logo.DARK_LOGO}`
+      : `${utilities.asset.logo.LIGHT_LOGO}`;
 
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ELEMENT_WRAPPER}${IS_VERSION_SIMPLE} .${LOGO_CONTAINER} .${CALL_TO_ACTION_CONTAINER} {
-      display: none;
-    }
-  }
-`;
+    return logoLink;
+  };
 
-const campaignOverwriteStyles = `
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${LOGO_CONTAINER} .${CAMPAIGN_COLUMN_WRAPPER} {
-      display: none;
-    }
-  }
-`;
+  const logoLink = logo ?? createDefaultLogoLink();
 
-export const LogoContainerStyles = `
-  .${LOGO_CONTAINER_LINK} {
-    max-width: 310px;
-    align-self: flex-start;
-    background-size: 0;
-    display: block !important;
-  }
+  return ElementModel.create({
+    element: logoLink,
+    className: 'umd-footer-logo-container_link',
+    elementStyles: {
+      element: {
+        maxWidth: '310px',
+        alignSelf: 'flex-start',
+        backgroundSize: 0,
+        display: 'block !important',
 
-  .${LOGO_CONTAINER_LINK} svg {
-    width: 100%;
-  }
+        [`& svg`]: {
+          width: '100%',
+        },
+      },
+    },
+  });
+};
 
-  ${campaignOverwriteStyles}
-  ${ctaOverwriteStyles}
-`;
+const createContainer = (
+  logoLinkElement: ElementVisual,
+  campaignElement: ElementVisual,
+  callToActionElement: ElementVisual,
+): ElementVisual => {
+  return ElementModel.createDiv({
+    className: 'umd-footer-logo-container',
+    children: [logoLinkElement, campaignElement, callToActionElement],
+    elementStyles: {
+      element: {
+        [`@container (max-width: ${LARGE - 1}px)`]: {
+          [`& .umd-footer-call-to-action-container`]: {
+            marginTop: token.spacing.md,
+          },
+        },
+        [`@container (min-width: ${LARGE}px)`]: {
+          [`& > .campaign-column-wrapper`]: {
+            display: 'none',
+          },
 
-export interface LogoProps
-  extends BaseProps,
-    CampaignProps,
-    CallToActionProps {}
+          ['& > .umd-footer-call-to-action-container']: {
+            display: 'none',
+          },
+        },
+      },
+    },
+  });
+};
 
-export const createLogo = (props: LogoProps) => {
-  const { isThemeLight } = props;
-  const container = document.createElement('div');
-  const logoLink = document.createElement('a');
-  const campaignContainer = createCampaignRow(props);
-  const ctaWrapper = createCallToActionContainer(props);
+export default (props: LogoProps): ElementVisual => {
+  const { isThemeLight, slotLogo } = props;
 
-  logoLink.classList.add(LOGO_CONTAINER_LINK);
-  logoLink.setAttribute('href', 'https://umd.edu');
-  logoLink.setAttribute('target', '_blank');
-  logoLink.setAttribute('rel', 'noopener noreferrer');
-  logoLink.setAttribute(
-    'aria-label',
-    'Link to the Unvieristy of Maryland homepage',
-  );
+  const logoLinkElement = createLogoLinkElement(isThemeLight, slotLogo);
+  const campaignElement = createCampaignRow(props);
+  const callToActionElement = createCallToAction(props);
 
-  logoLink.innerHTML = !isThemeLight
-    ? `${utilities.asset.logo.DARK_LOGO}`
-    : `${utilities.asset.logo.LIGHT_LOGO}`;
-
-  container.classList.add(LOGO_CONTAINER);
-  container.appendChild(logoLink);
-  container.appendChild(campaignContainer);
-  container.appendChild(ctaWrapper);
-
-  return container;
+  return createContainer(logoLinkElement, campaignElement, callToActionElement);
 };

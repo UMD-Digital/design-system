@@ -1,97 +1,68 @@
 import { layout, token } from '@universityofmaryland/web-styles-library';
-import * as Utils from 'utilities';
-import {
-  createSocialCampaignColumns,
-  SOCIAL_COLUMN_WRAPPER,
+import { ElementModel } from 'model';
+import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
-import {
-  createLinkColumns,
-  LinkColumnStyles,
-  type slotColumnsProps,
-} from './link-columns';
-import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
+import createLinkColumns, { type slotColumnsProps } from './link-columns';
+import { BREAKPOINTS } from '../../../globals';
+import { type ElementVisual } from '../../../../../_types';
+import { BaseProps } from 'composite/footer/_types';
 
 const { LARGE } = BREAKPOINTS;
-const { ELEMENT_WRAPPER } = ELEMENTS;
-const { ELEMENT_NAME } = VARIABLES;
-const { IS_THEME_LIGHT } = REFERENCES;
-
-export const ROW_LINKS_CONTAINER = 'umd-footer-row-links';
-export const ROW_LINKS_CONTAINER_WRAPPER = 'umd-footer-row-links-wrapper';
-const ROW_LINKS_CONTAINER_LOCK = 'umd-footer-row-links-lock';
-
-const socialOverwriteStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
-      display: none;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ROW_LINKS_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
-      display: block !important;
-    }
-  }
-`;
-
-// prettier-ignore
-export const RowLinkStyles = `
-  .${ROW_LINKS_CONTAINER} {
-    padding-bottom: ${token.spacing.lg};
-    background-color: ${token.color.black};
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ROW_LINKS_CONTAINER} {
-      padding-bottom: ${token.spacing['2xl']};
-    }
-  }
-
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} .${ROW_LINKS_CONTAINER} {
-    background-color: ${token.color.gray.lightest};
-  }
-
-  .${ROW_LINKS_CONTAINER_WRAPPER}  {
-    display: flex;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ROW_LINKS_CONTAINER_WRAPPER}  {
-      flex-direction: column-reverse;
-      flex-wrap: wrap;
-    }
-  }
-
-  ${Utils.theme.convertJSSObjectToStyles({
-    styleObj: {
-      [`.${ROW_LINKS_CONTAINER_LOCK}`]: layout.space.horizontal.larger, 
-    },
-  })}
-
-  ${LinkColumnStyles}
-  ${socialOverwriteStyles}
-`;
 
 export interface RowLinksProps
   extends SocialCampaignColumnsProps,
+    BaseProps,
     slotColumnsProps {}
 
-export const createRowLinks = (props: RowLinksProps) => {
-  const container = document.createElement('div');
-  const lock = document.createElement('div');
-  const wrapper = document.createElement('div');
+export default (props: RowLinksProps): ElementVisual => {
+  const { isThemeLight } = props;
   const socialColumnWrapper = createSocialCampaignColumns(props);
   const linkColumnWrapper = createLinkColumns(props);
+  const wrapperElement = ElementModel.createDiv({
+    className: 'umd-footer-row-links-wrapper',
+    children: [linkColumnWrapper, socialColumnWrapper],
+    elementStyles: {
+      element: {
+        display: 'flex',
 
-  lock.classList.add(ROW_LINKS_CONTAINER_LOCK);
-  container.classList.add(ROW_LINKS_CONTAINER);
-  wrapper.classList.add(ROW_LINKS_CONTAINER_WRAPPER);
+        [`@container (max-width: ${LARGE - 1}px)`]: {
+          flexDirection: 'column-reverse',
+          flexWrap: 'wrap',
 
-  wrapper.appendChild(linkColumnWrapper);
-  wrapper.appendChild(socialColumnWrapper);
-  lock.appendChild(wrapper);
-  container.appendChild(lock);
+          ['& .umd-footer-social-column_wrapper']: {
+            display: 'none',
+          },
+        },
+      },
+    },
+  });
+  const lockElement = ElementModel.createDiv({
+    className: 'umd-footer-row-links-lock',
+    children: [wrapperElement],
+    elementStyles: {
+      element: {
+        ...layout.space.horizontal.larger,
+      },
+    },
+  });
 
-  return container;
+  return ElementModel.createDiv({
+    className: 'umd-footer-row-links',
+    children: [lockElement],
+    elementStyles: {
+      element: {
+        paddingBottom: token.spacing.lg,
+        backgroundColor: token.color.black,
+
+        ...(isThemeLight && {
+          backgroundColor: token.color.gray.lightest,
+        }),
+
+        [`@container  (min-width: ${LARGE}px)`]: {
+          paddingBottom: token.spacing['2xl'],
+        },
+      },
+    },
+  });
 };

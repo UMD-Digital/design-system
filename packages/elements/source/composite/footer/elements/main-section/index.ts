@@ -1,63 +1,8 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import { createRowLogo, RowLogoStyles, type RowLogoProps } from './row-logo';
-import { createRowLinks, RowLinkStyles, type RowLinksProps } from './row-links';
-import { CampaignStyles } from './campaign';
-import { ELEMENTS, REFERENCES } from '../../globals';
+import { ElementModel } from 'model';
+import createRowLogo, { type RowLogoProps } from './row-logo';
+import createRowLinks, { type RowLinksProps } from './row-links';
 import { BaseProps } from '../../_types';
-
-const { ELEMENT_WRAPPER } = ELEMENTS;
-const { IS_THEME_LIGHT, IS_VERSION_SIMPLE, IS_VERSION_VISUAL } = REFERENCES;
-
-const MAIN_CONTAINER = 'umd-footer-main-container';
-const BACKGROUND_IMAGE_CONTAINER = 'umd-footer-background-image-container';
-const BACKGROUND_IMAGE_GRADIENT = 'umd-footer-background-image-graident';
-
-const VariationVisualStyles = `
-  .${ELEMENT_WRAPPER}${IS_VERSION_VISUAL} .${BACKGROUND_IMAGE_CONTAINER},
-  .${ELEMENT_WRAPPER}${IS_VERSION_SIMPLE} .${BACKGROUND_IMAGE_CONTAINER} {
-    padding-top: 100px;
-  }
-
-  .${BACKGROUND_IMAGE_CONTAINER} {
-    position: relative;
-  }
-
-  .${BACKGROUND_IMAGE_GRADIENT} {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 2px;
-    width: 500vw;
-    height: 100px;
-    background: linear-gradient( 180deg, rgba(255, 255, 255, 1) 0%, #e4edf9 100% );
-  }
-
-  .${BACKGROUND_IMAGE_CONTAINER} img {
-    width: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    object-position: center;
-  }
-`;
-
-export const MainContainerStyles = `
-  .${ELEMENT_WRAPPER} p,
-  .${ELEMENT_WRAPPER} a,
-  .${ELEMENT_WRAPPER} span {
-    color: ${token.color.white};
-  }
-
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} p,
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} span,
-  .${ELEMENT_WRAPPER}${IS_THEME_LIGHT} a {
-    color: ${token.color.gray.dark}
-  }
-
-  ${RowLogoStyles}
-  ${RowLinkStyles}
-  ${CampaignStyles}
-  ${VariationVisualStyles}
-`;
+import { type ElementVisual } from '../../../../_types';
 
 export interface MainSectionProps
   extends BaseProps,
@@ -66,60 +11,110 @@ export interface MainSectionProps
   slotVisualImage: HTMLImageElement | null;
 }
 
-export const createMainSection = (props: MainSectionProps) => {
-  const { isTypeMega, isTypeSimple, isTypeVisual, slotVisualImage } = props;
+const createVisualContainer = (
+  props: Pick<
+    MainSectionProps,
+    'isTypeVisual' | 'isTypeSimple' | 'slotVisualImage'
+  >,
+): ElementVisual | undefined => {
+  const { isTypeVisual, isTypeSimple, slotVisualImage } = props;
   const isShowVisualImage = isTypeVisual || isTypeSimple;
-  const container = document.createElement('div');
+
+  if (!isShowVisualImage) return;
+
+  let altText: string | null = null;
+  let imageSrc: string | null = null;
+
+  if (slotVisualImage) {
+    const source = slotVisualImage.getAttribute('src');
+    const alt = slotVisualImage.getAttribute('alt');
+
+    if (typeof source === 'string' && source.length > 0) {
+      imageSrc = source;
+    }
+    if (typeof alt === 'string' && alt.length > 0) {
+      altText = alt;
+    }
+  } else if (isTypeVisual) {
+    altText = 'The University of Maryland Campus';
+    imageSrc = new URL('../../assets/visual-default.jpg', import.meta.url).href;
+  }
+
+  if (!imageSrc || !altText) return;
+
+  const gradientElement = ElementModel.createDiv({
+    className: 'umd-footer-background-image-graident',
+    elementStyles: {
+      element: {
+        display: 'block',
+        position: 'absolute',
+        left: 0,
+        top: '2px',
+        width: '500vw',
+        height: '100px',
+        background: `linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, #e4edf9 100%)`,
+      },
+    },
+  });
+
+  const imageElement = ElementModel.create({
+    element: document.createElement('img'),
+    className: 'umd-footer-background-image',
+    elementStyles: {
+      element: {
+        width: '100% !important',
+        objectFit: 'cover !important',
+        display: 'block !important',
+        objectPosition: 'center',
+      },
+    },
+  });
+
+  imageElement.element.setAttribute('src', imageSrc);
+  imageElement.element.setAttribute('alt', altText);
+
+  return ElementModel.createDiv({
+    className: 'umd-footer-background-image-container',
+    children: [gradientElement, imageElement],
+    elementStyles: {
+      element: {
+        position: 'relative',
+        paddingTop: '100px',
+
+        [`& img`]: {
+          width: '100% !important',
+          objectFit: 'cover !important',
+          display: 'block !important',
+          objectPosition: 'center',
+        },
+      },
+    },
+  });
+};
+
+const createContainer = (
+  logoRow: ElementVisual,
+  visualContainerElement?: ElementVisual,
+  linksRowElement?: ElementVisual,
+): ElementVisual => {
+  return ElementModel.createDiv({
+    className: 'umd-footer-main-container',
+    children: [visualContainerElement, logoRow, linksRowElement].filter(
+      Boolean,
+    ) as ElementVisual[],
+  });
+};
+
+export default (props: MainSectionProps): ElementVisual => {
+  const { isTypeMega, isTypeVisual } = props;
+
   const logoRow = createRowLogo(props);
+  const visualContainerElement = createVisualContainer(props);
+  const linksRowElement = (isTypeMega || isTypeVisual) && createRowLinks(props);
 
-  container.classList.add(MAIN_CONTAINER);
-
-  if (isShowVisualImage) {
-    const visualContainer = document.createElement('div');
-    const backgroundGraident = document.createElement('div');
-    const backgroundImage = document.createElement('img');
-    let altText = null;
-    let imageSrc = null;
-
-    if (slotVisualImage) {
-      const source = slotVisualImage.getAttribute('src');
-      const alt = slotVisualImage.getAttribute('alt');
-
-      if (typeof source === 'string' && source.length > 0) {
-        imageSrc = source;
-      }
-
-      if (typeof alt === 'string' && alt.length > 0) {
-        altText = alt;
-      }
-    } else {
-      if (isTypeVisual) {
-        altText = 'The University of Maryland Campus';
-        imageSrc =
-          'https://umd-design.transforms.svdcdn.com/production/images/download.jpeg?w=1600&h=780&auto=compress%2Cformat&fit=crop&dm=1717510653&s=90cdb38e190565b9a41969a78d262e07';
-      }
-    }
-
-    if (imageSrc && altText) {
-      visualContainer.classList.add(BACKGROUND_IMAGE_CONTAINER);
-      backgroundImage.setAttribute('src', imageSrc);
-      backgroundImage.setAttribute('alt', `${altText}`);
-
-      backgroundGraident.classList.add(BACKGROUND_IMAGE_GRADIENT);
-
-      visualContainer.appendChild(backgroundGraident);
-      visualContainer.appendChild(backgroundImage);
-
-      container.appendChild(visualContainer);
-    }
-  }
-
-  container.appendChild(logoRow);
-
-  if (isTypeMega || isTypeVisual) {
-    const linksRow = createRowLinks(props);
-    container.appendChild(linksRow);
-  }
-
-  return container;
+  return createContainer(
+    logoRow,
+    visualContainerElement,
+    linksRowElement || undefined,
+  );
 };

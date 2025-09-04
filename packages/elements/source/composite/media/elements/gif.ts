@@ -44,6 +44,7 @@ export default ({ image }: { image: HTMLImageElement }) => {
         element: image,
         isShowCaption: true,
         isScaled: false,
+        isGifAllowed: true,
         customStyles: {
           width: 'auto',
           height: '100%',

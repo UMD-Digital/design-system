@@ -60,25 +60,19 @@ const createContainer = (
       element: {
         // CTA overwrite
         [`@container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px)`]: {
-          [`.umd-footer-logo-container .umd-footer-call-to-action-container`]: {
+          [`& .umd-footer-call-to-action-container`]: {
             marginTop: token.spacing.md,
           },
         },
         [`@container ${ELEMENT_NAME} (min-width: ${LARGE}px)`]: {
-          [`.umd-footer-logo-container .umd-footer-call-to-action-container`]: {
+          [`& .umd-footer-call-to-action-container`]: {
             display: 'none',
           },
-        },
-        [`@container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px)`]: {
-          [`.umd-footer-element-wrapper${IS_VERSION_SIMPLE} .umd-footer-logo-container .umd-footer-call-to-action-container`]:
-            {
-              display: 'none',
-            },
         },
 
         // Campaign overwrite
         [`@container ${ELEMENT_NAME} (min-width: ${LARGE}px)`]: {
-          [`.umd-footer-logo-container .umd-footer-campaign-column-wrapper`]: {
+          [`& .umd-footer-campaign-column-wrapper`]: {
             display: 'none',
           },
         },

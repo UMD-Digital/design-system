@@ -1,6 +1,10 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../../../_types';
+import { VARIABLES, BREAKPOINTS } from 'composite/footer/globals';
+
+const { ELEMENT_NAME } = VARIABLES;
+const { MEDIUM, LARGE } = BREAKPOINTS;
 
 const makeGivingLink = (): HTMLAnchorElement => {
   const defaultLink = document.createElement('a');
@@ -49,6 +53,12 @@ export default ({ slotCta }: CallToActionProps): ElementVisual => {
     elementStyles: {
       element: {
         marginLeft: 'auto',
+
+        // Overwrites that used to be in row-logo.ts
+        [`@container ${ELEMENT_NAME} (max-width: ${BREAKPOINTS.LARGE - 1}px)`]:
+          {
+            display: 'none',
+          },
       },
     },
   });

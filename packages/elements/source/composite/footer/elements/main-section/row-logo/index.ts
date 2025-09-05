@@ -1,7 +1,8 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
+import { ElementModel } from 'model';
 import * as Utils from 'utilities';
 import createSocialCampaignColumns, {
-  SocialContainerStyles,
+  // SocialContainerStyles,
   SOCIAL_COLUMN_WRAPPER,
   type SocialCampaignColumnsProps,
 } from '../social';
@@ -11,37 +12,36 @@ import createCallToActionContainer, {
   type CallToActionProps,
 } from '../call-to-action';
 import createContactContainer, {
-  ContactContainerStyles,
+  // ContactContainerStyles,
   type ContactProps,
 } from './contact';
 // import createLogoContainer, { LogoContainerStyles } from './logo';
 import createLogoContainer from './logo';
 import { BREAKPOINTS, VARIABLES, REFERENCES } from '../../../globals';
+import { type ElementVisual } from '../../../../../_types';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME } = VARIABLES;
 const { IS_THEME_LIGHT, IS_VERSION_SIMPLE } = REFERENCES;
 
-const ROW_LOGO_CONTAINER = 'umd-footer-row-logo-container';
-const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
-const ROW_LOGO_CONTAINER_LOCK = 'umd-footer-row-logo-container-lock';
+// const ROW_LOGO_CONTAINER_WRAPPER = 'umd-footer-row-logo-container-wrapper';
 
-const ctaOverwriteStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ROW_LOGO_CONTAINER_WRAPPER} > .umd-footer-call-to-action-container {
-      display: none;
-    }
-  }
-`;
+// const ctaOverwriteStyles = `
+//   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
+//     .${ROW_LOGO_CONTAINER_WRAPPER} > .umd-footer-call-to-action-container {
+//       display: none;
+//     }
+//   }
+// `;
 
 // prettier-ignore
 const themeOverwriteStyles = `
-  .umd-footer-element-wrapper${IS_THEME_LIGHT} .${ROW_LOGO_CONTAINER} {
+  .umd-footer-element-wrapper${IS_THEME_LIGHT} .umd-footer-row-logo-container {
     background-color: ${token.color.gray.lightest} !important;
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .umd-footer-element-wrapper${IS_VERSION_SIMPLE} .${ROW_LOGO_CONTAINER} .${SOCIAL_COLUMN_WRAPPER} {
+    .umd-footer-element-wrapper${IS_VERSION_SIMPLE} .umd-footer-row-logo-container .${SOCIAL_COLUMN_WRAPPER} {
       display: none;
     }
   }
@@ -49,18 +49,18 @@ const themeOverwriteStyles = `
 
 // prettier-ignore
 export const RowLogoStyles = `
-  .${ROW_LOGO_CONTAINER} {
+  .umd-footer-row-logo-container {
     background-color: ${token.color.black};
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ROW_LOGO_CONTAINER} {
+    .umd-footer-row-logo-container {
       padding-top: ${token.spacing['2xl']};
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px) {
-    .${ROW_LOGO_CONTAINER_WRAPPER} {
+    .umd-footer-row-logo-container-wrapper {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: ${token.spacing.md};
@@ -68,13 +68,13 @@ export const RowLogoStyles = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${ROW_LOGO_CONTAINER} {
+    .umd-footer-row-logo-container {
       padding-bottom: ${token.spacing['md']} ;
     }
   }
 
   @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ROW_LOGO_CONTAINER_WRAPPER} {
+    .umd-footer-row-logo-container-wrapper {
       display: flex;
       padding: ${token.spacing['5xl']} 0 ${token.spacing['2xl']};
     }
@@ -82,16 +82,16 @@ export const RowLogoStyles = `
 
   ${Utils.theme.convertJSSObjectToStyles({
     styleObj: {
-      [`.${ROW_LOGO_CONTAINER_LOCK}`]: layout.space.horizontal.larger 
+      [`.umd-footer-row-logo-container-lock`]: layout.space.horizontal.larger 
     },
   })}
 
-  ${ContactContainerStyles}
-  ${SocialContainerStyles}
-  ${ctaOverwriteStyles}
   ${themeOverwriteStyles}
 `;
 
+//   ${ctaOverwriteStyles}
+// ${ContactContainerStyles}
+//  ${SocialContainerStyles}
 // ${CallToActionStyles}
 // ${LogoContainerStyles}
 
@@ -100,33 +100,61 @@ export interface RowLogoProps
     CallToActionProps,
     ContactProps {}
 
-export default (props: RowLogoProps) => {
+export default (props: RowLogoProps): ElementVisual => {
   const { isTypeSimple } = props;
-  const container = document.createElement('div');
-  const lock = document.createElement('div');
-  const wrapper = document.createElement('div');
-
-  container.classList.add(ROW_LOGO_CONTAINER);
-  wrapper.classList.add(ROW_LOGO_CONTAINER_WRAPPER);
-  lock.classList.add(ROW_LOGO_CONTAINER_LOCK);
-
-  const makeThirdColumn = () => {
-    if (isTypeSimple) {
-      const socialColumnWrapper = createSocialCampaignColumns(props);
-      wrapper.appendChild(socialColumnWrapper);
-    } else {
-      const ctaWrapper = createCallToActionContainer(props);
-      wrapper.appendChild(ctaWrapper.element);
-    }
-  };
 
   const logoElement = createLogoContainer(props);
   const contactElement = createContactContainer(props);
-  wrapper.appendChild(logoElement.element);
-  wrapper.appendChild(contactElement);
 
-  makeThirdColumn();
-  lock.appendChild(wrapper);
-  container.appendChild(lock);
-  return container;
+  const thirdColumnElement = isTypeSimple
+    ? createSocialCampaignColumns(props)
+    : createCallToActionContainer(props);
+
+  const wrapper = ElementModel.createDiv({
+    className: 'umd-footer-row-logo-container-wrapper',
+    children: [logoElement, contactElement, thirdColumnElement],
+    elementStyles: {
+      element: {
+        // Large screens
+        [`@container ${ELEMENT_NAME} (min-width: ${LARGE}px)`]: {
+          [`&`]: {
+            display: 'flex',
+            padding: `${token.spacing['5xl']} 0 ${token.spacing['2xl']}`,
+          },
+        },
+
+        // Between MEDIUM and LARGE
+        [`@container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px)`]:
+          {
+            [`&`]: {
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: token.spacing.md,
+            },
+          },
+      },
+    },
+  });
+
+  const lock = ElementModel.createDiv({
+    className: 'umd-footer-row-logo-container-lock',
+    children: [wrapper],
+    elementStyles: {
+      element: {
+        ...layout.space.horizontal.larger,
+      },
+    },
+  });
+
+  const rowLogoContainer = ElementModel.createDiv({
+    className: 'umd-footer-row-logo-container',
+    children: [lock],
+    elementStyles: {
+      element: {
+        backgroundColor: token.color.black,
+      },
+    },
+  });
+
+  return rowLogoContainer;
 };

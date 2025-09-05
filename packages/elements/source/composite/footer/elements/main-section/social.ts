@@ -3,10 +3,12 @@ import * as Utils from 'utilities';
 import createCampaignRow, { CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import { BREAKPOINTS, VARIABLES, REFERENCES } from '../../globals';
 import { BaseProps } from '../../_types';
+import { ElementModel } from 'model';
+import { type ElementVisual } from '../../../../_types';
 
-const { LARGE, MEDIUM } = BREAKPOINTS;
-const { ELEMENT_NAME } = VARIABLES;
-const { IS_THEME_LIGHT } = REFERENCES;
+// const { LARGE, MEDIUM } = BREAKPOINTS;
+// const { ELEMENT_NAME } = VARIABLES;
+// const { IS_THEME_LIGHT } = REFERENCES;
 
 const ATTRIBUTE_LAYOUT = 'layout';
 const LAYOUT_GRID = 'grid';
@@ -15,9 +17,12 @@ export const SOCIAL_COLUMN_WRAPPER = 'umd-footer-social-column_wrapper';
 const SOCIAL_CONTAINER = 'umd-footer-social-container';
 const SOCIAL_CONTAINER_WRAPPER = 'umd-footer-social-container_wrapper';
 const SOCIAL_CONTAINER_HEADLINE = 'umd-footer-social-container_headline';
-
+const { MEDIUM, LARGE } = BREAKPOINTS;
+const { ELEMENT_NAME, ATTRIBUTE_THEME, ATTRIBUTE_TYPE } = VARIABLES;
+const { IS_THEME_LIGHT, IS_VERSION_SIMPLE } = REFERENCES;
 const IS_LAYOUT_GRID = `[${ATTRIBUTE_LAYOUT}="${LAYOUT_GRID}"]`;
 
+/* old overwrite style constants (will be replaced by ElementModel styles later)
 const OVERWRITE_GRID_CONTAINER = `.${SOCIAL_CONTAINER}${IS_LAYOUT_GRID}`;
 const OVERWRITE_GRID_WRAPPER = `${OVERWRITE_GRID_CONTAINER} .${SOCIAL_CONTAINER_WRAPPER}`;
 
@@ -82,8 +87,9 @@ const themeOverwriteStyles = `
     fill: ${token.color.gray.light} !important;
   }
 `;
+*/
 
-// prettier-ignore
+/*  old CSS export (will later be replaced with inline ElementModel styles)
 export const SocialContainerStyles = `
   .${SOCIAL_CONTAINER} {
     margin-left: auto;
@@ -166,39 +172,19 @@ export const SocialContainerStyles = `
   ${themeOverwriteStyles}
   ${OverwriteGridStyle}
 `;
+*/
 
 const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   const url = link.getAttribute('href') || null;
-
   if (!url) return link;
 
-  if (url.match(/facebook.com/)) {
-    link.innerHTML = Utils.asset.social.FACEBOOK;
-  }
-
-  if (url.match(/x.com/)) {
-    link.innerHTML = Utils.asset.social.X;
-  }
-
-  if (url.match(/instagram.com/)) {
-    link.innerHTML = Utils.asset.social.INSTAGRAM;
-  }
-
-  if (url.match(/youtube.com/)) {
-    link.innerHTML = Utils.asset.social.YOUTUBE;
-  }
-
-  if (url.match(/twitter.com/)) {
-    link.innerHTML = Utils.asset.social.TWITTER;
-  }
-
-  if (url.match(/linkedin.com/)) {
-    link.innerHTML = Utils.asset.social.LINKEDIN;
-  }
-
-  if (url.match(/threads.net/)) {
-    link.innerHTML = Utils.asset.social.THREADS;
-  }
+  if (url.match(/facebook.com/)) link.innerHTML = Utils.asset.social.FACEBOOK;
+  if (url.match(/x.com/)) link.innerHTML = Utils.asset.social.X;
+  if (url.match(/instagram.com/)) link.innerHTML = Utils.asset.social.INSTAGRAM;
+  if (url.match(/youtube.com/)) link.innerHTML = Utils.asset.social.YOUTUBE;
+  if (url.match(/twitter.com/)) link.innerHTML = Utils.asset.social.TWITTER;
+  if (url.match(/linkedin.com/)) link.innerHTML = Utils.asset.social.LINKEDIN;
+  if (url.match(/threads.net/)) link.innerHTML = Utils.asset.social.THREADS;
 
   return link;
 };
@@ -207,20 +193,17 @@ interface SocialProps {
   slotSocialLinks?: HTMLSlotElement;
 }
 
-const CreateSocialRow = ({ slotSocialLinks }: SocialProps) => {
-  const container = document.createElement('div');
-  const linksWrapper = document.createElement('div');
-  const headline = document.createElement('p');
+const CreateSocialRow = ({ slotSocialLinks }: SocialProps): ElementVisual => {
   let socialLinks: HTMLAnchorElement[] = [];
 
   if (slotSocialLinks) {
     const socialLinksClone = slotSocialLinks.cloneNode(true) as HTMLSlotElement;
-    const slottedSocialLinks = Array.from(
+    socialLinks = Array.from(
       socialLinksClone.querySelectorAll(`a`),
     ) as HTMLAnchorElement[];
-    socialLinks = slottedSocialLinks;
   }
 
+  // Enforce university default links if none are provided
   if (socialLinks.length === 0) {
     const socialLink = ({ url, label }: { label: string; url: string }) => {
       const link = document.createElement('a');
@@ -237,14 +220,12 @@ const CreateSocialRow = ({ slotSocialLinks }: SocialProps) => {
         label: 'Link to the youtube channel for the University of Maryland',
       }),
     );
-
     socialLinks.push(
       socialLink({
         url: 'https://www.facebook.com/UnivofMaryland',
         label: 'Link to the facebook page for the University of Maryland',
       }),
     );
-
     socialLinks.push(
       socialLink({
         url: 'https://www.instagram.com/univofmaryland',
@@ -253,21 +234,59 @@ const CreateSocialRow = ({ slotSocialLinks }: SocialProps) => {
     );
   }
 
-  socialLinks.forEach((link) =>
-    linksWrapper.appendChild(GetSocialIcon({ link })),
-  );
+  const headline = ElementModel.create({
+    element: document.createElement('p'),
+    className: SOCIAL_CONTAINER_HEADLINE,
+    elementStyles: {
+      element: {
+        paddingTop: '3px',
+        fontWeight: 700,
 
-  container.classList.add(SOCIAL_CONTAINER);
-  linksWrapper.classList.add(SOCIAL_CONTAINER_WRAPPER);
-  linksWrapper.setAttribute('count', `${socialLinks.length}`);
+        [`.${SOCIAL_CONTAINER_HEADLINE}`]: typography.elements.interativeMedium,
+      },
+    },
+  });
+  headline.element.innerText = 'Stay Connected';
 
-  headline.classList.add(SOCIAL_CONTAINER_HEADLINE);
-  headline.innerText = 'Stay Connected';
+  const linksWrapper = ElementModel.createDiv({
+    className: SOCIAL_CONTAINER_WRAPPER,
+    children: socialLinks.map((link) =>
+      ElementModel.create({
+        element: GetSocialIcon({ link }),
+        className: 'umd-footer-social-link',
+      }),
+    ),
+    elementStyles: {
+      element: {
+        display: 'grid',
+        gridTemplateColumns: `repeat(${socialLinks.length >= 4 ? 4 : 3}, 1fr)`,
+        gridGap: token.spacing.xs,
+        marginLeft: token.spacing.xs,
+      },
+    },
+  });
+  linksWrapper.element.setAttribute('count', `${socialLinks.length}`);
 
-  container.appendChild(headline);
-  container.appendChild(linksWrapper);
+  const container = ElementModel.createDiv({
+    className: SOCIAL_CONTAINER,
+    children: [headline, linksWrapper],
+    elementStyles: {
+      element: {
+        marginLeft: 'auto',
+        display: 'flex',
+        alignItems: 'center',
+        alignSelf: 'flex-start',
+
+        [`@container umd-element-footer (min-width: 1000px)`]: {
+          justifyContent: 'flex-end',
+          paddingLeft: token.spacing['2xl'],
+        },
+      },
+    },
+  });
+
   if (socialLinks.length >= 4) {
-    container.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_GRID);
+    container.element.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_GRID);
   }
 
   return container;
@@ -275,15 +294,25 @@ const CreateSocialRow = ({ slotSocialLinks }: SocialProps) => {
 
 export interface SocialCampaignColumnsProps extends BaseProps, SocialProps {}
 
-export default (props: SocialCampaignColumnsProps) => {
-  const socialColumnWrapper = document.createElement('div');
+export default (props: SocialCampaignColumnsProps): ElementVisual => {
   const socialContainer = CreateSocialRow(props);
   const campaignContainer = createCampaignRow(props);
 
-  socialColumnWrapper.classList.add(SOCIAL_COLUMN_WRAPPER);
+  return ElementModel.createDiv({
+    className: SOCIAL_COLUMN_WRAPPER,
+    children: [socialContainer, campaignContainer],
+    elementStyles: {
+      element: {
+        // Small screen spacing
+        [`@container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px)`]: {
+          paddingTop: token.spacing['2xl'],
+          paddingBottom: token.spacing.md,
 
-  socialColumnWrapper.appendChild(socialContainer);
-  socialColumnWrapper.appendChild(campaignContainer.element);
-
-  return socialColumnWrapper;
+          // Social column visibility for "simple" type
+          [`.umd-footer-element-wrapper${IS_VERSION_SIMPLE} & .${SOCIAL_COLUMN_WRAPPER}`]:
+            { display: 'none' },
+        },
+      },
+    },
+  });
 };

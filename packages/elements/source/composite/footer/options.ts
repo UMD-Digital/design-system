@@ -1,26 +1,29 @@
+import { ElementModel } from 'model';
 import createMain, { type MainSectionProps } from './elements/main-section';
-import createUtility, {
-  UtilityContainerStyles,
-  type UtilityProps,
-} from './elements/utility-section';
-import { VARIABLES } from './globals';
+import createUtility, { type UtilityProps } from './elements/utility-section';
+import { VARIABLES, REFERENCES, BREAKPOINTS } from './globals';
 import { BaseProps } from './_types';
+import { token, layout } from '@universityofmaryland/web-styles-library';
+
+// import { UtilityContainerStyles } from './elements/utility-section'; // no longer imported
 
 export interface FooterProps
   extends BaseProps,
     UtilityProps,
     MainSectionProps {}
 
+const { MEDIUM, LARGE } = BREAKPOINTS;
 const { ELEMENT_NAME, ATTRIBUTE_THEME, ATTRIBUTE_TYPE } = VARIABLES;
+const { IS_THEME_LIGHT, IS_VERSION_SIMPLE } = REFERENCES;
 
-let styles = `
-  .umd-footer-element-wrapper {
-    container: ${ELEMENT_NAME} / inline-size;
-    overflow: hidden;
-  }
-
-  ${UtilityContainerStyles}
-`;
+// let styles = `
+//   .umd-footer-element-wrapper {
+//     container: ${ELEMENT_NAME} / inline-size;
+//     overflow: hidden;
+//   }
+//
+//   ${UtilityContainerStyles}
+// `; // old styles now inlined
 
 export default (props: FooterProps) => {
   const {
@@ -31,20 +34,44 @@ export default (props: FooterProps) => {
     slotUtilityLinks,
   } = props;
 
-  const wrapper = document.createElement('div');
   const main = createMain(props);
   const utility = createUtility({ slotUtilityLinks });
   const theme = isThemeLight ? 'light' : 'dark';
 
-  wrapper.setAttribute(ATTRIBUTE_THEME, theme);
-  if (isTypeSimple) wrapper.setAttribute(ATTRIBUTE_TYPE, 'simple');
-  if (isTypeVisual) wrapper.setAttribute(ATTRIBUTE_TYPE, 'visual');
-  if (isTypeMega) wrapper.setAttribute(ATTRIBUTE_TYPE, 'mega');
+  const wrapper = ElementModel.createDiv({
+    className: 'umd-footer-element-wrapper',
+    children: [main, utility],
+    elementStyles: {
+      element: {
+        container: `${ELEMENT_NAME} / inline-size`,
+        overflow: 'hidden',
 
-  wrapper.classList.add('umd-footer-element-wrapper');
+        ['& p, & a, & span']: {
+          color: token.color.white,
+        },
 
-  wrapper.appendChild(main.element);
-  wrapper.appendChild(utility);
+        // Theme overwrite
+        [`.umd-footer-element-wrapper${IS_THEME_LIGHT} &`]: {
+          backgroundColor: token.color.gray.lightest,
+        },
 
-  return { element: wrapper, styles };
+        [`@container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px)`]: {
+          [`.umd-footer-element-wrapper${IS_VERSION_SIMPLE} .umd-footer-logo-container .umd-footer-call-to-action-container`]:
+            {
+              display: 'none',
+            },
+        },
+      },
+    },
+  });
+
+  wrapper.element.setAttribute(ATTRIBUTE_THEME, theme);
+  if (isTypeSimple) wrapper.element.setAttribute(ATTRIBUTE_TYPE, 'simple');
+  if (isTypeVisual) wrapper.element.setAttribute(ATTRIBUTE_TYPE, 'visual');
+  if (isTypeMega) wrapper.element.setAttribute(ATTRIBUTE_TYPE, 'mega');
+
+  return {
+    element: wrapper.element,
+    styles: wrapper.styles,
+  };
 };

@@ -5,6 +5,7 @@ import createRowLinks, { type RowLinksProps } from './row-links';
 import { REFERENCES } from '../../globals';
 import { BaseProps } from '../../_types';
 import { type ElementVisual } from '../../../../_types';
+import { background } from 'atomic/assets/image';
 
 const { IS_THEME_LIGHT, IS_VERSION_SIMPLE, IS_VERSION_VISUAL } = REFERENCES;
 

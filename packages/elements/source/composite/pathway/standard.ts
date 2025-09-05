@@ -110,9 +110,6 @@ const createAssetContent = ({
         isShowCaption: true,
         isGifAllowed: true,
         dateSign,
-        customStyles: {
-          [' > * ']: {},
-        },
       }),
     );
   }
@@ -127,6 +124,10 @@ const createAssetContent = ({
         height: '100%',
         width: '100%',
         display: 'grid',
+
+        [`@container (max-width: ${mediumSize - 1}px)`]: {
+          width: '100vw',
+        },
 
         [`&:has(.image-container)`]: {
           alignItems: 'center',
@@ -182,7 +183,7 @@ const createAssetColumn = (
 
         [`@container (max-width: ${mediumSize - 1}px)`]: {
           display: 'grid',
-          minHeight: '56vw',
+          height: '56vw',
         },
 
         [`@container (min-width: ${mediumSize}px)`]: {

@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-components-library",
-  "version": "1.13.8",
+  "version": "1.13.9",
   "description": "UMD Web Components",
   "main": "dist/index.js",
   "module": "dist/index.js",

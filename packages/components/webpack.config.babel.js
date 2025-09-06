@@ -49,6 +49,7 @@ module.exports = (env) => {
   return {
     entry: {
       index: path.resolve('source/index'),
+      cdn: path.resolve('source/cdn'),
     },
     mode: devMode,
     optimization: optimization,

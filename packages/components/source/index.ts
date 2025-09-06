@@ -33,11 +33,79 @@ import * as umdComponents from './components';
 import * as umdElements from '@universityofmaryland/web-elements-library';
 import * as umdUtilities from './utilities';
 
-interface ComponentMap {
+/**
+ * Type definition for a map of component registration functions.
+ * Used to organize components by category and variant.
+ *
+ * @since 1.13.9
+ * @example
+ * ```typescript
+ * import { ComponentMap } from '@universityofmaryland/web-components-library';
+ *
+ * const myComponents: ComponentMap = {
+ *   card: {
+ *     standard: () => {...},
+ *     overlay: () => {...}
+ *   }
+ * };
+ * ```
+ */
+export interface ComponentMap {
   [key: string]: {
     [subKey: string]: () => void;
   };
 }
+
+const { utility, ...navComponents } = umdComponents.navigation;
+
+const allList = umdComponents as ComponentMap;
+const structuralList: ComponentMap = {
+  hero: umdComponents.hero,
+  navigation: navComponents,
+};
+const interactiveList: ComponentMap = {
+  accordion: umdComponents.accordion,
+  carousel: umdComponents.carousel,
+  social: umdComponents.social,
+  tab: umdComponents.tab,
+};
+const feedList: ComponentMap = {
+  feed: umdComponents.feed,
+  slider: umdComponents.slider,
+  utility: { utility },
+};
+
+/**
+ * Utility function to register a collection of UMD web components.
+ * Iterates through a ComponentMap and calls each registration function.
+ *
+ * @param componentMap - Map of component categories to registration functions
+ * @since 1.13.9
+ * @example
+ * ```typescript
+ * import { loadComponentClass } from '@universityofmaryland/web-components-library';
+ *
+ * const myCustomList = {
+ *   card: { standard: () => {...}, overlay: () => {...} },
+ *   hero: { base: () => {...} }
+ * };
+ *
+ * loadComponentClass(myCustomList);
+ * ```
+ */
+export const loadComponentClass = (componentMap: ComponentMap) => {
+  for (const key in componentMap) {
+    if (Object.prototype.hasOwnProperty.call(componentMap, key)) {
+      const component = componentMap[key];
+
+      for (const subKey in component) {
+        if (Object.prototype.hasOwnProperty.call(component, subKey)) {
+          component[subKey]();
+        }
+      }
+    }
+  }
+};
 
 /**
  * Registers all UMD web components with the browser.
@@ -54,21 +122,94 @@ interface ComponentMap {
  * ```
  */
 const LoadUmdComponents = () => {
-  const list = umdComponents as ComponentMap;
+  loadComponentClass(allList);
+  umdUtilities.Animations.loadIntersectionObserver();
+};
 
-  for (const key in list) {
-    if (Object.prototype.hasOwnProperty.call(list, key)) {
-      const component = list[key];
+/**
+ * Registers above-the-fold UMD web components (hero and navigation).
+ *
+ * @since 1.13.9
+ * @example
+ * ```typescript
+ * import { LoadHeadComponents } from '@universityofmaryland/web-components-library';
+ *
+ * // Register above-the-fold components when DOM is ready
+ * document.addEventListener('DOMContentLoaded', () => {
+ *   LoadHeadComponents();
+ * });
+ * ```
+ */
+export const LoadStructuralComponents = () => {
+  console.log('Loading structural components...');
+  loadComponentClass(structuralList);
+};
 
-      for (const subKey in component) {
-        if (Object.prototype.hasOwnProperty.call(component, subKey)) {
-          component[subKey]();
-        }
-      }
+/**
+ * Registers interactive UMD web components (accordion, carousel, slider, social, tab).
+ *
+ * @since 1.13.9
+ * @example
+ * ```typescript
+ * import { LoadInteractiveComponents } from '@universityofmaryland/web-components-library';
+ *
+ * // Register interactive components when DOM is ready
+ * document.addEventListener('DOMContentLoaded', () => {
+ *   LoadInteractiveComponents();
+ * });
+ * ```
+ */
+export const LoadInteractiveComponents = () => {
+  loadComponentClass(interactiveList);
+};
+
+/**
+ * Registers feed UMD web components for dynamic content.
+ *
+ * @since 1.13.9
+ * @example
+ * ```typescript
+ * import { LoadFeedComponents } from '@universityofmaryland/web-components-library';
+ *
+ * // Register feed components when DOM is ready
+ * document.addEventListener('DOMContentLoaded', () => {
+ *   LoadFeedComponents();
+ * });
+ * ```
+ */
+export const LoadFeedComponents = () => {
+  loadComponentClass(feedList);
+};
+
+/**
+ * Registers all common UMD web components (excluding above-the-fold, interactive, and feed components).
+ *
+ * @since 1.13.9
+ * @example
+ * ```typescript
+ * import { LoadCommonComponents } from '@universityofmaryland/web-components-library';
+ *
+ * // Register common components when DOM is ready
+ * document.addEventListener('DOMContentLoaded', () => {
+ *   LoadCommonComponents();
+ * });
+ * ```
+ */
+export const LoadCommonComponents = () => {
+  const excludedKeys = new Set([
+    ...Object.keys(structuralList),
+    ...Object.keys(interactiveList),
+    ...Object.keys(feedList),
+  ]);
+
+  const commonList: ComponentMap = {};
+  for (const key in allList) {
+    if (!excludedKeys.has(key)) {
+      commonList[key] = allList[key];
     }
   }
 
-  umdUtilities.Animations.loadIntersectionObserver();
+  loadComponentClass(commonList);
 };
 
 /**
@@ -124,74 +265,5 @@ export const Utilties = {
   ...umdUtilities,
   ...umdElements.Utilities,
 };
-
-/**
- * Auto-initialization for CDN usage
- *
- * When the library is loaded via a traditional script tag (not as an ES module),
- * it automatically initializes all web components when the DOM is ready.
- * This provides a zero-configuration experience for CDN users.
- *
- * ## CDN Usage Examples
- *
- * ### Auto-initialization (Simplest)
- * ```html
- * <!-- Components auto-initialize when DOM is ready -->
- * <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/index.js"></script>
- * ```
- *
- * ### Manual Initialization
- * ```html
- * <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/index.js"></script>
- * <script>
- *   // Manually initialize if needed
- *   window.UmdWebComponents.init();
- * </script>
- * ```
- *
- * ### Selective Component Loading
- * ```html
- * <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/index.js"></script>
- * <script>
- *   // Load only specific components
- *   window.UmdWebComponents.Components.card.standard();
- *   window.UmdWebComponents.Components.hero.base();
- * </script>
- * ```
- *
- * ## Global API
- *
- * When loaded via CDN, the following is exposed on `window.UmdWebComponents`:
- * - `init()` - Manually initialize all components (same as LoadUmdComponents)
- * - `Components` - Object containing all component registration functions
- *
- * @remarks
- * - Auto-initialization only occurs for non-module script tags
- * - ES module imports must manually call LoadUmdComponents()
- * - The global object is always created for CDN compatibility
- *
- * @since 1.13.0
- */
-if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  const currentScript = document.currentScript;
-  const isScriptTag =
-    currentScript &&
-    currentScript.tagName === 'SCRIPT' &&
-    !currentScript.type?.includes('module');
-
-  if (isScriptTag) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', LoadUmdComponents);
-    } else {
-      LoadUmdComponents();
-    }
-  }
-
-  // Make the library available globally for CDN usage
-  (window as any).UmdWebComponents = {
-    init: LoadUmdComponents,
-    Components,
-  };
-}
 
 export default LoadUmdComponents;

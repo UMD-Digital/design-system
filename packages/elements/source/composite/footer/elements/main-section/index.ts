@@ -95,7 +95,8 @@ export const createMainSection = (props: MainSectionProps) => {
     } else {
       if (isTypeVisual) {
         altText = 'The University of Maryland Campus';
-        imageSrc = require('../../assets/visual-default.jpg').default;
+        imageSrc =
+          'https://umd-design.transforms.svdcdn.com/production/images/download.jpeg?w=1600&h=780&auto=compress%2Cformat&fit=crop&dm=1717510653&s=90cdb38e190565b9a41969a78d262e07';
       }
     }
 

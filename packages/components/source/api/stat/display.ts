@@ -3,8 +3,8 @@ import {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../_types';
-import { Atomic } from '@universityofmaryland/web-elements-library/';
+} from '../../_types';
+import { Atomic } from '@universityofmaryland/web-elements-library';
 
 /**
  * Tag name for the statistic display web component

@@ -5,13 +5,12 @@
 
 import * as Styles from '@universityofmaryland/web-styles-library';
 import postcss from 'postcss';
+import postcssNesting from 'postcss-nesting';
+import postcssJs from 'postcss-js';
 
 export * as animations from './animations';
 export * as assets from './assets';
 export * as media from './media';
-
-const postcssNesting = require('postcss-nesting');
-const postcssJs = require('postcss-js');
 
 /**
  * Combine multiple style strings, filtering out null/undefined values
@@ -24,7 +23,7 @@ export const combineStyles = (...styles: (string | null | undefined)[]) =>
  */
 export const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
   postcss([postcssNesting]).process(styleObj, {
-    parser: postcssJs,
+    parser: postcssJs as any,
   }).css;
 
 /**

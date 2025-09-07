@@ -3,7 +3,7 @@ import { assets } from 'atomic';
 import { ElementModel } from 'model';
 import { createElementWithRefs } from './_elementModel';
 import { createControlButton } from './controls';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../../_types';
 import { type CarouselWideProps } from '../_types';
 
 const ASPECT_RATIO = '16 / 9';

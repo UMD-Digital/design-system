@@ -1,4 +1,4 @@
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../_types';
 
 export interface PathwayThemeProps {
   isThemeDark?: boolean;

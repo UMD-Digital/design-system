@@ -2,7 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { createTextLockupMedium } from './_common';
 import { PathwayHighlightProps } from './_types';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../_types';
 
 const mediumSize = 1000;
 const largeSize = 1200;

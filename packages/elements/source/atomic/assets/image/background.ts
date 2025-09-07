@@ -1,6 +1,6 @@
 import { ElementModel } from 'model';
 import { default as gifToggle } from './gif';
-import { type UMDElement } from '_types';
+import { type UMDElement } from '../../../_types';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 const ATTRIBUTE_CREDIT = 'data-credit';

@@ -1,5 +1,5 @@
 import { ElementModel } from 'model';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../../_types';
 
 interface ElementWithRefsProps<T extends Record<string, any>> {
   className: string;

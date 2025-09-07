@@ -52,5 +52,3 @@ export * as headline from './headline';
 export * as layout from './layout';
 export * as richText from './rich-text';
 export * as text from './text';
-
-export default create;

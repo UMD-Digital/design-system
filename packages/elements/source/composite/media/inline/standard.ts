@@ -1,4 +1,4 @@
-import { Image as LayoutImage } from 'old';
+import { Image as LayoutImage } from 'layout';
 
 export type TypeMediaInlineRequirements = {
   image?: HTMLImageElement | null;

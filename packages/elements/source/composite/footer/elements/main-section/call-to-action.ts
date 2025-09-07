@@ -40,7 +40,7 @@ export interface CallToActionProps {
   slotCta?: HTMLAnchorElement;
 }
 
-export default ({ slotCta }: CallToActionProps) => {
+export const createCallToAction = ({ slotCta }: CallToActionProps) => {
   const container = document.createElement('div');
 
   container.classList.add(CALL_TO_ACTION_CONTAINER);

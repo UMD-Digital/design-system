@@ -1,10 +1,12 @@
 import { layout, token } from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
-import createSocialCampaignColumns, {
+import {
+  createSocialCampaignColumns,
   SOCIAL_COLUMN_WRAPPER,
   type SocialCampaignColumnsProps,
 } from '../social';
-import createLinkColumns, {
+import {
+  createLinkColumns,
   LinkColumnStyles,
   type slotColumnsProps,
 } from './link-columns';
@@ -75,7 +77,7 @@ export interface RowLinksProps
   extends SocialCampaignColumnsProps,
     slotColumnsProps {}
 
-export default (props: RowLinksProps) => {
+export const createRowLinks = (props: RowLinksProps) => {
   const container = document.createElement('div');
   const lock = document.createElement('div');
   const wrapper = document.createElement('div');

@@ -1,6 +1,7 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import AlertText, {
+import {
+  CreateAlertText as AlertText,
   CONSTANTS as TEXT_CONSTANTS,
   TypeAlertTextProps,
 } from './elements/text';
@@ -158,5 +159,3 @@ export const CreateAlertSiteElement = (props: TypeAlertProps) =>
       styles,
     };
   })();
-
-export default CreateAlertSiteElement;

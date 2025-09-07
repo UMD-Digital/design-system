@@ -106,4 +106,3 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   };
 };
 
-export default CreateAlertText;

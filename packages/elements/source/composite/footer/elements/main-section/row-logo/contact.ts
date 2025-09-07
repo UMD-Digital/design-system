@@ -4,7 +4,8 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
-import createSocialCampaignColumns, {
+import {
+  createSocialCampaignColumns,
   SOCIAL_COLUMN_WRAPPER,
   type SocialCampaignColumnsProps,
 } from '../social';
@@ -252,7 +253,7 @@ export interface ContactProps
     HeadlineProps,
     LinksProps {}
 
-export default (props: ContactProps) => {
+export const createContact = (props: ContactProps) => {
   const { slotAddress, slotHeadline, slotContentLinks } = props;
   const contactContainer = document.createElement('div');
   const socialContainer = createSocialCampaignColumns(props);

@@ -1,10 +1,12 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import * as utilities from 'utilities';
-import createCampaignRow, {
+import {
+  createCampaign as createCampaignRow,
   CAMPAIGN_COLUMN_WRAPPER,
   type CampaignProps,
 } from '../campaign';
-import createCallToActionContainer, {
+import {
+  createCallToAction as createCallToActionContainer,
   CALL_TO_ACTION_CONTAINER,
   type CallToActionProps,
 } from '../call-to-action';
@@ -69,7 +71,7 @@ export interface LogoProps
     CampaignProps,
     CallToActionProps {}
 
-export default (props: LogoProps) => {
+export const createLogo = (props: LogoProps) => {
   const { isThemeLight } = props;
   const container = document.createElement('div');
   const logoLink = document.createElement('a');

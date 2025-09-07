@@ -7,7 +7,7 @@ import { ElementVisual } from '../../../_types';
 
 export const classRef = 'card-overlay-image';
 
-export default (props: CardOverlayProps) => {
+export const createCardOverlayImage = (props: CardOverlayProps) => {
   const { isQuote, ctaIcon, dateSign, backgroundImage, text } = props;
   const children: ElementVisual[] = [];
   const wrapperChildren: ElementVisual[] = [];

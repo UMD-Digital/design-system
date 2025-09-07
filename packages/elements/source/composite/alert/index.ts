@@ -1,2 +1,2 @@
-export { default as page } from './page';
-export { default as site } from './site';
+export { CreateAlertPageElement as page } from './page';
+export { CreateAlertSiteElement as site } from './site';

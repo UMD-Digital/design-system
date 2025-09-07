@@ -4,7 +4,7 @@ import {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../_types';
+} from '../../_types';
 
 const { actions } = Atomic;
 

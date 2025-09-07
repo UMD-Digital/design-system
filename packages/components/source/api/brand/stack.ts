@@ -1,6 +1,6 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Attributes, Lifecycle, Register } from 'model';
-import { CreateComponentFunction, ComponentRegistration } from '../_types';
+import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 /**
  * Tag name for the card stack component

@@ -5,7 +5,7 @@ import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../_types';
+} from '../../_types';
 
 // Tag name for the icon card component
 const tagName = 'umd-element-card-icon';

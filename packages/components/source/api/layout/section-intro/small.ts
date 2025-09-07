@@ -1,7 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { CommonIntroData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from '../../_types';
+import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
 
 const tagName = 'umd-element-section-intro';
 

@@ -6,7 +6,7 @@
  * components accept and validate slotted content.
  */
 
-import type { SlotConfig } from '../../api/_types';
+import type { SlotConfig } from '../../_types';
 
 const subHeadlineElements = ['h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'];
 const textElements = ['div', 'p', 'span', 'strong'];

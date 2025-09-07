@@ -41,17 +41,12 @@ import type {
   ComponentEventDetail,
   ComponentReadyDetail,
   ComponentErrorDetail,
-} from '../../api/_types';
+  ElementRef
+} from '../../_types';
 
 interface AttributeConfig {
   name: string;
   handler: (element: ElementRef, oldValue: string, newValue: string) => void;
-}
-
-interface ElementRef {
-  element: HTMLElement;
-  styles: string;
-  events?: Record<string, Function>;
 }
 
 interface SlotValidationError {
@@ -165,7 +160,7 @@ class BaseComponent extends HTMLElement {
 
   protected setupShadowDom(component: ElementRef): void {
     this.shadow.appendChild(
-      StylesTemplate({ styles: component.styles }).content.cloneNode(true),
+      StylesTemplate({ styles: component.styles || '' }).content.cloneNode(true),
     );
     this.shadow.appendChild(component.element);
   }
@@ -204,7 +199,7 @@ class BaseComponent extends HTMLElement {
     // Dispatch umdComponent:ready event after all lifecycle callbacks complete
     this.dispatchComponentEvent<ComponentReadyDetail>('umdComponent:ready', {
       shadowRoot: this.shadow,
-      componentRef: this.elementRef,
+      ref: this.elementRef,
     });
   }
 
@@ -397,8 +392,6 @@ const createCustomElement = (config: ComponentConfig): typeof BaseComponent => {
 export {
   createCustomElement,
   BaseComponent,
-  type ElementRef,
   type ComponentConfig,
   type AttributeConfig,
-  type SlotConfig,
 };

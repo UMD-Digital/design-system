@@ -1,7 +1,7 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { Register } from 'model';
 import { CommonFeedEventsData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from 'api/_types';
+import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
 
 /**
  * Tag name for the events grid feed component

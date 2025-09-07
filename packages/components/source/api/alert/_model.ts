@@ -1,4 +1,5 @@
 import { Model, Register, Slots } from 'model';
+import { ComponentRef } from '../../_types';
 
 interface AlertBaseProps {
   headline: HTMLElement | null;
@@ -26,7 +27,7 @@ interface AlertProps extends AlertBaseProps {
   alertUrl: string | null;
 }
 
-type AlertRenderer<T> = (props: T) => Model.ElementRef;
+type AlertRenderer<T> = (props: T) => ComponentRef;
 
 interface AlertConfig<T extends AlertBaseProps> {
   tagName: string;

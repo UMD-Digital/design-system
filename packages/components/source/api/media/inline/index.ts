@@ -1,7 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { Markup } from 'utilities';
-import { CreateComponentFunction, SlotConfiguration } from '../../_types';
+import { CreateComponentFunction, SlotConfiguration } from '../../../_types';
 
 /**
  * Tag name for the media inline web component

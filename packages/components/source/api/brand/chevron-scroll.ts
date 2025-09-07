@@ -1,6 +1,6 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Register } from 'model';
-import { CreateComponentFunction, ComponentRegistration } from '../_types';
+import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 /**
  * Tag name for the brand chevron animation component

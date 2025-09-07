@@ -9,7 +9,7 @@ import { Markup, Styles } from 'utilities';
 import { SLOTS, MakeNavDrawer } from './common';
 import {
   ComponentRegistration,
-} from '../_types';
+} from '../../_types';
 
 /**
  * Tag name for the navigation drawer web component

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "source",
-    "baseUrl": "source",
+    "baseUrl": "source"
   },
   "include": ["./source"]
- }
+}

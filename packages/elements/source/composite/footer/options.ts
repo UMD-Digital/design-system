@@ -1,8 +1,10 @@
-import createMain, {
+import {
+  createMainSection as createMain,
   MainContainerStyles,
   type MainSectionProps,
 } from './elements/main-section';
-import createUtility, {
+import {
+  createUtilitySection as createUtility,
   UtilityContainerStyles,
   type UtilityProps,
 } from './elements/utility-section';

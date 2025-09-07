@@ -316,7 +316,7 @@ export interface slotColumnsProps {
   slotColumns?: HTMLSlotElement[];
 }
 
-export default (props: slotColumnsProps) => {
+export const createLinkColumns = (props: slotColumnsProps) => {
   const { slotColumns } = props;
   const container = document.createElement('div');
 

@@ -36,7 +36,7 @@ export const STYLES_MODAL = `
   }
 `;
 
-export default ({
+export const createModal = ({
   content,
   callback,
   isHidden,

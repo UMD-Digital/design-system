@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import createRowLogo, { RowLogoStyles, type RowLogoProps } from './row-logo';
-import createRowLinks, { RowLinkStyles, type RowLinksProps } from './row-links';
+import { createRowLogo, RowLogoStyles, type RowLogoProps } from './row-logo';
+import { createRowLinks, RowLinkStyles, type RowLinksProps } from './row-links';
 import { CampaignStyles } from './campaign';
 import { ELEMENTS, REFERENCES } from '../../globals';
 import { BaseProps } from '../../_types';
@@ -66,7 +66,7 @@ export interface MainSectionProps
   slotVisualImage: HTMLImageElement | null;
 }
 
-export default (props: MainSectionProps) => {
+export const createMainSection = (props: MainSectionProps) => {
   const { isTypeMega, isTypeSimple, isTypeVisual, slotVisualImage } = props;
   const isShowVisualImage = isTypeVisual || isTypeSimple;
   const container = document.createElement('div');

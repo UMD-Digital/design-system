@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import AlertText, { TypeAlertTextProps } from './elements/text';
+import { CreateAlertText as AlertText, TypeAlertTextProps } from './elements/text';
 
 type TypeShouldShowProps = {
   daysToHide?: string;
@@ -149,5 +149,3 @@ export const CreateAlertPageElement = (props: TypeAlertProps) =>
       styles,
     };
   })();
-
-export default CreateAlertPageElement;

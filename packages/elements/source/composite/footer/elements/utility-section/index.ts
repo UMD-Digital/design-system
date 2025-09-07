@@ -139,7 +139,7 @@ export interface UtilityProps {
   slotUtilityLinks?: HTMLElement | null;
 }
 
-export default ({ slotUtilityLinks }: UtilityProps) => {
+export const createUtilitySection = ({ slotUtilityLinks }: UtilityProps) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
   const copyRight = document.createElement('p');

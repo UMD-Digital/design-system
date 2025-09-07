@@ -1,6 +1,6 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
-import createCampaignRow, { CAMPAIGN_COLUMN_WRAPPER } from './campaign';
+import { createCampaign as createCampaignRow, CAMPAIGN_COLUMN_WRAPPER } from './campaign';
 import { BREAKPOINTS, ELEMENTS, VARIABLES, REFERENCES } from '../../globals';
 import { BaseProps } from '../../_types';
 
@@ -278,7 +278,7 @@ const CreateSocialRow = ({ slotSocialLinks }: SocialProps) => {
 
 export interface SocialCampaignColumnsProps extends BaseProps, SocialProps {}
 
-export default (props: SocialCampaignColumnsProps) => {
+export const createSocialCampaignColumns = (props: SocialCampaignColumnsProps) => {
   const socialColumnWrapper = document.createElement('div');
   const socialContainer = CreateSocialRow(props);
   const campaignContainer = createCampaignRow(props);

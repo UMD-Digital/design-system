@@ -1,20 +1,23 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
-import createSocialCampaignColumns, {
+import {
+  createSocialCampaignColumns,
   SocialContainerStyles,
   SOCIAL_COLUMN_WRAPPER,
   type SocialCampaignColumnsProps,
 } from '../social';
-import createCallToActionContainer, {
+import {
+  createCallToAction as createCallToActionContainer,
   CallToActionStyles,
   CALL_TO_ACTION_CONTAINER,
   type CallToActionProps,
 } from '../call-to-action';
-import createContactContainer, {
+import {
+  createContact as createContactContainer,
   ContactContainerStyles,
   type ContactProps,
 } from './contact';
-import createLogoContainer, { LogoContainerStyles } from './logo';
+import { createLogo as createLogoContainer, LogoContainerStyles } from './logo';
 import { BREAKPOINTS, VARIABLES, ELEMENTS, REFERENCES } from '../../../globals';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
@@ -99,7 +102,7 @@ export interface RowLogoProps
     CallToActionProps,
     ContactProps {}
 
-export default (props: RowLogoProps) => {
+export const createRowLogo = (props: RowLogoProps) => {
   const { isTypeSimple } = props;
   const container = document.createElement('div');
   const lock = document.createElement('div');

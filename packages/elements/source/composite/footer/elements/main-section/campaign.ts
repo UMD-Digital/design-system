@@ -14,7 +14,7 @@ export const CampaignStyles = `
 
 export interface CampaignProps extends BaseProps {}
 
-export default ({ isThemeLight }: CampaignProps) => {
+export const createCampaign = ({ isThemeLight }: CampaignProps) => {
   const container = document.createElement('div');
   const link = document.createElement('a');
   link.href = 'https://fearlesslyforward.umd.edu';

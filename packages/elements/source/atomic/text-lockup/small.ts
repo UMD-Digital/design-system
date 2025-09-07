@@ -122,7 +122,7 @@ export const createActions = ({ actions }: TypeActions) =>
     },
   });
 
-export default ({
+export const createTextLockupSmall = ({
   eyebrow,
   headline,
   text,

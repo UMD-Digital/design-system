@@ -1,6 +1,6 @@
 import * as Utility from 'utilities';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '../../_types';
+import { ElementVisual } from '../../_types';
 
 type LocationType = {
   title: string;

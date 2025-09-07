@@ -4,7 +4,7 @@ import { ElementModel } from 'model';
 import { theme } from 'utilities';
 import { createTextLockupMedium, createAssetContent } from './_common';
 import { type PathwayOverlayProps } from './_types';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../_types';
 
 const REF_TEXT_ELEMENT = 'pathway-text-container';
 const REF_IMAGE_ELEMENT = 'pathway-image-container';

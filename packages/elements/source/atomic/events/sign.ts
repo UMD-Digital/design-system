@@ -1,5 +1,5 @@
 import { ElementModel } from 'model';
-import { type ElementVisual } from '../../_types';
+import { ElementVisual } from '../../_types';
 
 const makeDateElement = ({
   element,

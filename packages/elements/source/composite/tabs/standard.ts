@@ -320,7 +320,7 @@ export default (props: TypeTabsProps) =>
 
         Object.keys(typography.sans.large).forEach((key) => {
           const keyRef = key as keyof typeof typography.sans.large;
-          button.style[keyRef] = typography.sans.large[keyRef];
+          (button.style as any)[keyRef] = typography.sans.large[keyRef];
         });
 
         if (isThemeDark) {

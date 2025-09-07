@@ -3,8 +3,30 @@
   "version": "1.0.9",
   "description": "UMD Feed Elements",
   "main": "dist/index.js",
-  "module": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./academic": {
+      "types": "./dist/composite/academic/index.d.ts",
+      "import": "./dist/composite/academic/index.mjs",
+      "require": "./dist/composite/academic/index.js"
+    },
+    "./events": {
+      "types": "./dist/composite/events/index.d.ts",
+      "import": "./dist/composite/events/index.mjs",
+      "require": "./dist/composite/events/index.js"
+    },
+    "./news": {
+      "types": "./dist/composite/news/index.d.ts",
+      "import": "./dist/composite/news/index.mjs",
+      "require": "./dist/composite/news/index.js"
+    }
+  },
   "license": "MIT",
   "repository": "",
   "files": [
@@ -15,9 +37,9 @@
     "docs": "npx typedoc --options ./typedoc.json",
     "prebuild": "node ../../source/update-badges.js",
     "release": "npm run test && npm run build && npm publish --access public",
-    "build": "webpack --env NODE_ENV=production",
-    "webpack": "webpack -w --env NODE_ENV=development",
-    "start": "npm run webpack",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "start": "npm run dev",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -25,5 +47,9 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4"
+  },
+  "devDependencies": {
+    "vite-plugin-checker": "^0.10.3",
+    "vite-plugin-dts": "^4.5.4"
   }
 }

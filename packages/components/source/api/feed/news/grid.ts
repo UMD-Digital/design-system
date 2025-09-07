@@ -1,7 +1,7 @@
 import * as Feeds from '@universityofmaryland/web-feeds-library';
 import { Attributes, Register } from 'model';
 import { CommonFeedNewsData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from 'api/_types';
+import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
 
 /**
  * Tag name for the news grid feed component

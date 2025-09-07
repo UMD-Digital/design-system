@@ -1,6 +1,6 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register } from 'model';
-import { CreateComponentFunction, LayoutProps } from '../_types';
+import { CreateComponentFunction, LayoutProps } from '../../_types';
 
 const tagName = 'umd-element-modal';
 

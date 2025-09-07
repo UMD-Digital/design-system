@@ -31,8 +31,8 @@ const registerWebComponent = ({ name, element }: WebComponentConfig): void => {
   window.customElements.define(name, element);
 };
 
-import type { ComponentConfiguration, ComponentRegistration } from '../types';
-import { createCustomElement } from '../model/index';
+import type { ComponentConfiguration, ComponentRegistration } from '../../_types';
+import { createCustomElement } from '../model';
 
 /**
  * Helper to create a standard component registration function.

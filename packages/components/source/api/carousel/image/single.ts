@@ -5,7 +5,7 @@ import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../../_types';
+} from '../../../_types';
 
 const { ImageHasAlt } = Markup.validate;
 

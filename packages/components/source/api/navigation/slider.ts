@@ -9,7 +9,7 @@ import { Markup, Styles } from 'utilities';
 import { MakeNavSlider, SLOTS } from './common';
 import {
   ComponentRegistration,
-} from '../_types';
+} from '../../_types';
 
 /**
  * Tag name for the navigation slider web component

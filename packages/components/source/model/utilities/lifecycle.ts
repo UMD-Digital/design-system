@@ -5,7 +5,7 @@
  * reused across multiple components.
  */
 
-import type { ComponentRef } from '../types';
+import type { ComponentRef } from '../../_types';
 
 /**
  * Common lifecycle hooks for component initialization and state management
@@ -14,18 +14,18 @@ export const hooks = {
   /**
    * Standard afterConnect that calls the component's load event
    */
-  loadOnConnect: (ref: ComponentRef) => ref?.events?.load(),
+  loadOnConnect: (ref: ComponentRef) => ref?.events?.load?.(),
 
   /**
    * AfterConnect hook that sets up component animations
    * Delays animation initialization to ensure proper positioning
    */
-  loadAnimation: (ref: ComponentRef) => ref?.events?.loadAnimation(),
+  loadAnimation: (ref: ComponentRef) => ref?.events?.loadAnimation?.(),
 
   /**
    * Standard resize handler for afterConnect
    */
-  resizeOnConnect: (ref: ComponentRef) => ref?.events?.resize(),
+  resizeOnConnect: (ref: ComponentRef) => ref?.events?.resize?.(),
 };
 
 /**

@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register } from 'model';
-import { CreateComponentFunction, SlotConfiguration } from '../_types';
+import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 
 /**
  * Tag name for the accordion item web component

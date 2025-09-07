@@ -4,7 +4,7 @@ import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../_types';
+} from '../../_types';
 
 const tagName = 'umd-element-card-video';
 

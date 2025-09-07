@@ -4,7 +4,7 @@ import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../_types';
+} from '../../_types';
 
 // Tag name for the thumbnail carousel component
 const tagName = 'umd-element-carousel-thumbnail';

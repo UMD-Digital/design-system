@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Lifecycle, Slots, Register } from 'model';
-import type { CreateComponentFunction, ComponentRegistration } from '../_types';
+import type { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 /**
  * Tag name for the base hero component

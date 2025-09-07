@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Register, Lifecycle } from 'model';
-import { CreateComponentFunction, LayoutProps } from '../_types';
+import { CreateComponentFunction, LayoutProps } from '../../_types';
 
 const tagName = 'umd-element-scroll-top';
 

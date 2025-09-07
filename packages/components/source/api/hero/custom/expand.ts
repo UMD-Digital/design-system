@@ -4,7 +4,7 @@ import { Markup } from 'utilities';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
-} from '../../_types';
+} from '../../../_types';
 
 /**
  * Tag name for the expandable hero component
@@ -149,11 +149,13 @@ const ExpandHero: ComponentRegistration = Register.webComponent({
   createComponent,
   attributes,
   afterConnect: (ref) => {
-    const topPosition = Attributes.getValue.topPosition({
-      element: ref.element,
-    });
-    if (topPosition) {
-      ref?.events?.setTopPosition({ value: topPosition });
+    if (ref.element instanceof HTMLElement) {
+      const topPosition = Attributes.getValue.topPosition({
+        element: ref.element,
+      });
+      if (topPosition) {
+        ref?.events?.setTopPosition({ value: topPosition });
+      }
     }
   },
 });

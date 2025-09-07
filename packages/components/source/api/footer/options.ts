@@ -4,7 +4,7 @@ import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../_types';
+} from '../../_types';
 
 /**
  * Tag name for the footer component

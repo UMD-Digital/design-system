@@ -3,7 +3,7 @@ import {
   ComponentReadyDetail, 
   ComponentErrorDetail, 
   ComponentResizeDetail 
-} from '../../_types';
+} from '../../../_types';
 import { waitForComponentEvent, captureComponentEvents } from '../test-helpers/validation';
 import { createTestComponent, cleanupComponents } from '../test-helpers/component';
 
@@ -34,7 +34,7 @@ describe('Component Events', () => {
           element,
           timestamp: Date.now(),
           shadowRoot: mockShadowRoot,
-          componentRef: mockComponentRef,
+          ref: mockComponentRef,
         },
         bubbles: true,
         composed: true,
@@ -53,7 +53,7 @@ describe('Component Events', () => {
       expect(capturedEvent!.detail.element).toBe(element);
       expect(capturedEvent!.detail.timestamp).toBeGreaterThan(0);
       expect(capturedEvent!.detail.shadowRoot).toBeDefined();
-      expect(capturedEvent!.detail.componentRef).toBeDefined();
+      expect(capturedEvent!.detail.ref).toBeDefined();
     });
   });
 
@@ -178,7 +178,7 @@ describe('Component Events', () => {
           element,
           timestamp: Date.now(),
           shadowRoot: {} as ShadowRoot,
-          componentRef: { element: document.createElement('div'), styles: '' },
+          ref: { element: document.createElement('div'), styles: '' },
         },
         bubbles: true,
         composed: true,

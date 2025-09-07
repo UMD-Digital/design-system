@@ -5,7 +5,7 @@ import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../_types';
+} from '../../_types';
 
 // Tag name for the cards carousel component
 const tagName = 'umd-element-carousel-cards';

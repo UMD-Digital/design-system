@@ -8,7 +8,7 @@ import { Composite } from '@universityofmaryland/web-elements-library';
 import { Markup, Styles } from 'utilities';
 import {
   ComponentRegistration,
-} from '../_types';
+} from '../../_types';
 
 const { Node } = Markup.create;
 

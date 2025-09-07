@@ -3,7 +3,7 @@ import { Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
-} from '../../_types';
+} from '../../../_types';
 
 /**
  * Tag name for the grid hero component

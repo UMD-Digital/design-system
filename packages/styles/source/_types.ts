@@ -10,7 +10,10 @@ export interface JssEntry {
  * A JSS object that represents a styled component.
  * This is the standard object format used throughout the design system.
  */
-export type JssObject = JssEntry;
+export interface JssObject {
+  className: string | string[];
+  [key: string]: any;
+}
 
 /**
  * Input format for JSS objects.

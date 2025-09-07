@@ -4,9 +4,50 @@
   "description": "Styles used for use in the University of Maryland Design System",
   "main": "dist/index.js",
   "author": "UMD Web Services <digital@umd.edu>",
-  "module": "dist/index.js",
-  "browser": "dist/umd-styles.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./accessibility": {
+      "types": "./dist/accessibility/index.d.ts",
+      "import": "./dist/accessibility/index.mjs",
+      "require": "./dist/accessibility/index.js"
+    },
+    "./animation": {
+      "types": "./dist/animation/index.d.ts",
+      "import": "./dist/animation/index.mjs",
+      "require": "./dist/animation/index.js"
+    },
+    "./element": {
+      "types": "./dist/element/index.d.ts",
+      "import": "./dist/element/index.mjs",
+      "require": "./dist/element/index.js"
+    },
+    "./layout": {
+      "types": "./dist/layout/index.d.ts",
+      "import": "./dist/layout/index.mjs",
+      "require": "./dist/layout/index.js"
+    },
+    "./token": {
+      "types": "./dist/token/index.d.ts",
+      "import": "./dist/token/index.mjs",
+      "require": "./dist/token/index.js"
+    },
+    "./typography": {
+      "types": "./dist/typography/index.d.ts",
+      "import": "./dist/typography/index.mjs",
+      "require": "./dist/typography/index.js"
+    },
+    "./utilities": {
+      "types": "./dist/utilities/index.d.ts",
+      "import": "./dist/utilities/index.mjs",
+      "require": "./dist/utilities/index.js"
+    }
+  },
   "license": "MIT",
   "repository": "",
   "private": false,
@@ -18,9 +59,9 @@
     "clean": "rm -rf dist",
     "prebuild": "node ../../source/update-badges.js",
     "release": "npm run test && npm run build && npm publish --access public",
-    "build": "webpack --env NODE_ENV=production",
-    "webpack": "webpack -w --env NODE_ENV=development",
-    "start": "npm run webpack",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "start": "npm run dev",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -28,8 +69,15 @@
   },
   "dependencies": {
     "postcss": "~8.4.21",
+    "postcss-discard-duplicates": "~7.0.1",
     "postcss-js": "~4.0.1",
-    "postcss-nesting": "~13.0.1",
-    "postcss-discard-duplicates": "~7.0.1"
+    "postcss-nesting": "~13.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^7.2.1",
+    "typescript": "^5.8.2",
+    "vite": "^7.1.4",
+    "vite-plugin-checker": "^0.10.3",
+    "vite-plugin-dts": "^4.5.4"
   }
 }

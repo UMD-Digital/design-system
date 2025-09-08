@@ -1,8 +1,7 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import postcss from 'postcss';
-
-const postcssNesting = require('postcss-nesting');
-const postcssJs = require('postcss-js');
+import postcssNesting from 'postcss-nesting';
+import postcssJs from 'postcss-js';
 
 export const reset = `
   :host {
@@ -71,7 +70,7 @@ export const reset = `
   }
 `;
 
-export const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) =>
-  postcss(postcssNesting).process(styleObj, {
-    parser: postcssJs,
-  }).css;
+export const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) => {
+  const root = postcssJs.parse(styleObj);
+  return postcss(postcssNesting).process(root as any).css;
+};

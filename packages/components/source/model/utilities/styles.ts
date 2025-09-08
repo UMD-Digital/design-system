@@ -1,7 +1,6 @@
 import postcss from 'postcss';
 import { token } from '@universityofmaryland/web-styles-library';
-
-const postcssDuplicates = require('postcss-discard-duplicates');
+import postcssDuplicates from 'postcss-discard-duplicates';
 const CreateStyleString = (styles: string) =>
   postcss([postcssDuplicates]).process(styles, {}).css;
 

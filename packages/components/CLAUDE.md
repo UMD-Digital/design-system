@@ -29,13 +29,34 @@ Each component follows this pattern:
 2. **Model exports** - Components may have `_model.ts` files for shared types
 3. **Variants** - Complex components have multiple variant files (e.g., card has standard.ts, overlay.ts, etc.)
 
-### Type System Architecture
+### Type System Architecture (CRITICAL - Updated to fix vite-plugin-dts issues)
 
-The library uses a modular type system with clear separation between type definitions and implementations:
+The type system has been restructured to avoid circular dependencies and maximum call stack errors:
 
-#### Type Definitions (`source/model/types.ts`)
+#### Type Hierarchy
+1. **Root Types (`source/_types.ts`)** - Contains 80% of shared types with ZERO imports
+   - Basic interfaces: ElementRef, ComponentRef, SlotConfig, SlotConfiguration
+   - Event types: ComponentEventDetail, ComponentReadyDetail, etc.
+   - Common interfaces used across modules
+   - Global type augmentations
 
-Pure type definitions and interfaces:
+2. **Domain Types** - Import from root _types.ts only
+   - `api/_types.ts` - Component-specific types
+   - Domain-specific type files as needed
+
+3. **Implementation Files** - Import from _types.ts or domain types
+   - Never re-export types they import
+   - Import types directly from where they're defined
+
+#### Critical Rules
+- **NO TYPE RE-EXPORTS**: Never import and export the same type
+- **NO CIRCULAR IMPORTS**: Root _types.ts must have zero imports
+- **DIRECT IMPORTS ONLY**: Import types from where they're defined, not through intermediaries
+- **NO BACKWARD COMPATIBILITY**: Don't maintain deprecated type exports
+
+#### Type Definitions (Now in `source/_types.ts`)
+
+Core type definitions and interfaces:
 - `ComponentRef` - Base reference returned by all component factories
 - `CreateComponentFunction` - Standard signature for component creation functions
 - `ComponentRegistration` - Function signature for registering components

@@ -7,14 +7,39 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
     "./cdn": {
+      "types": "./dist/cdn.d.ts",
       "import": "./dist/cdn.js",
-      "require": "./dist/cdn.js",
-      "types": "./dist/cdn.d.ts"
+      "require": "./dist/cdn.js"
+    },
+    "./structural": {
+      "types": "./dist/structural.d.ts",
+      "import": "./dist/structural.js",
+      "require": "./dist/structural.js"
+    },
+    "./interactive": {
+      "types": "./dist/interactive.d.ts",
+      "import": "./dist/interactive.js",
+      "require": "./dist/interactive.js"
+    },
+    "./feed": {
+      "types": "./dist/feed.d.ts",
+      "import": "./dist/feed.js",
+      "require": "./dist/feed.js"
+    },
+    "./content": {
+      "types": "./dist/content.d.ts",
+      "import": "./dist/content.js",
+      "require": "./dist/content.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js",
+      "require": "./dist/components/*.js"
     }
   },
   "license": "MIT",
@@ -23,13 +48,14 @@
     "dist"
   ],
   "scripts": {
-    "clean": "rm -rf build",
+    "clean": "rm -rf dist",
     "docs": "npx typedoc --options ./typedoc.json",
     "prebuild": "node ../../source/update-badges.js",
     "release": "npm run test && npm run build && npm publish --access public",
-    "build": "webpack --env NODE_ENV=production",
-    "webpack": "webpack -w --env NODE_ENV=development",
-    "start": "npm run webpack",
+    "build": "vite build --mode production",
+    "vite": "vite build --mode development --watch",
+    "start": "npm run vite",
+    "preview": "vite preview",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
@@ -39,5 +65,8 @@
     "jest-dom": "^4.0.0",
     "postcss-js": "^4.0.1",
     "tw-to-css": "^0.0.12"
+  },
+  "devDependencies": {
+    "vite-plugin-dts": "^4.5.4"
   }
 }

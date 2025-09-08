@@ -1,7 +1,8 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { extractEventData } from '../_event';
-import { CreateComponentFunction } from '../_types';
+import { toElementVisual } from 'utilities/markup/validate';
+import { CreateComponentFunction } from '../../_types';
 
 /**
  * Tag name for the pathway web component
@@ -54,8 +55,8 @@ const createComponent: CreateComponentFunction = (element) => {
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
       actions: Slots.actions.default({ element }),
-      dateSign: featureEvents?.dateSign,
-      eventDetails: featureEvents?.eventMeta,
+      dateSign: toElementVisual(featureEvents?.dateSign),
+      eventDetails: toElementVisual(featureEvents?.eventMeta),
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
@@ -74,8 +75,8 @@ const createComponent: CreateComponentFunction = (element) => {
   if (isDisplaySticky) {
     return Composite.pathway.sticky({
       actions: Slots.actions.default({ element }),
-      dateSign: featureEvents?.dateSign,
-      eventDetails: featureEvents?.eventMeta,
+      dateSign: toElementVisual(featureEvents?.dateSign),
+      eventDetails: toElementVisual(featureEvents?.eventMeta),
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
@@ -90,8 +91,8 @@ const createComponent: CreateComponentFunction = (element) => {
 
   return Composite.pathway.standard({
     actions: Slots.actions.default({ element }),
-    dateSign: featureEvents?.dateSign,
-    eventDetails: featureEvents?.eventMeta,
+    dateSign: toElementVisual(featureEvents?.dateSign),
+    eventDetails: toElementVisual(featureEvents?.eventMeta),
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),
     image: Slots.assets.image({ element }) as HTMLImageElement,

@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Register } from 'model';
-import { CreateComponentFunction } from '../_types';
+import { CreateComponentFunction } from '../../../_types';
 
 /**
  * Tag name for the utility navigation web component

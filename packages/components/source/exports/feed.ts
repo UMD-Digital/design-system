@@ -8,11 +8,11 @@
 export * as feed from '../api/feed';
 export * as slider from '../api/slider';
 
-// Also export the registration function for all feed components
-import { feed, slider } from '../api';
+import { alert, feed, slider } from '../api';
 import { loadComponentClass, ComponentMap } from './loader';
 
-const feedComponents: ComponentMap = {
+export const feedComponents: ComponentMap = {
+  alert,
   feed,
   slider,
 };

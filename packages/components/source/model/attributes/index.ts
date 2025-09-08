@@ -32,7 +32,7 @@
  * 
  * @module Attributes
  */
-import handler, { AttributeHandlerTypes } from './handler';
+import handler from './handler';
 import names from './names';
 import values from './values';
 
@@ -51,4 +51,10 @@ export {
   getValue,
   type AttributeElementProps,
 } from './checks';
-export { handler, names, values, AttributeHandlerTypes };
+export { handler, names, values };
+export type { 
+  AttributeElementRef,
+  AttributeCallback,
+  AttributeHandlerConfig,
+  AttributeHandlerProps 
+} from './handler';

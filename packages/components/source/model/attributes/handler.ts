@@ -31,48 +31,42 @@ import AttributeValues from './values';
  * ```
  */
 /**
- * Type definitions for the attribute handler system
+ * Reference to an element with optional event handlers
  */
-export namespace AttributeHandlerTypes {
-  /**
-   * Callback function type for attribute handlers
-   * @typeParam T - The element reference type, defaults to ElementRef
-   */
-  export type Callback<T = ElementRef> = (arg: T, arg2?: any) => void;
+export interface AttributeElementRef {
+  /** The HTML element being observed */
+  element: HTMLElement;
+  /** Optional event handlers attached to the element */
+  events?: Record<string, Function>;
+}
 
-  /**
-   * Reference to an element with optional event handlers
-   */
-  export interface ElementRef {
-    /** The HTML element being observed */
-    element: HTMLElement;
-    /** Optional event handlers attached to the element */
-    events?: Record<string, Function>;
-  }
+/**
+ * Callback function type for attribute handlers
+ */
+export type AttributeCallback = (arg: AttributeElementRef, arg2?: any) => void;
 
-  /**
-   * Configuration for an attribute handler
-   */
-  export interface Config {
-    /** The attribute name to observe */
-    name: string;
-    /** Handler function called when the attribute changes */
-    handler: (
-      ref: ElementRef,
-      oldValue: string | null,
-      newValue: string | null,
-    ) => void;
-  }
+/**
+ * Configuration for an attribute handler
+ */
+export interface AttributeHandlerConfig {
+  /** The attribute name to observe */
+  name: string;
+  /** Handler function called when the attribute changes */
+  handler: (
+    ref: AttributeElementRef,
+    oldValue: string | null,
+    newValue: string | null,
+  ) => void;
+}
 
-  /**
-   * Properties for creating attribute handlers
-   */
-  export interface Props {
-    /** Callback function to execute when attribute changes */
-    callback: Callback;
-    /** Optional attribute name override */
-    name?: string;
-  }
+/**
+ * Properties for creating attribute handlers
+ */
+export interface AttributeHandlerProps {
+  /** Callback function to execute when attribute changes */
+  callback: AttributeCallback;
+  /** Optional attribute name override */
+  name?: string;
 }
 
 /**
@@ -91,12 +85,12 @@ export namespace AttributeHandlerTypes {
  * ```
  */
 const combine = (
-  ...configs: AttributeHandlerTypes.Config[]
-): AttributeHandlerTypes.Config[] => {
+  ...configs: AttributeHandlerConfig[]
+): AttributeHandlerConfig[] => {
   const handlerMap = new Map<
     string,
     ((
-      ref: AttributeHandlerTypes.ElementRef,
+      ref: AttributeElementRef,
       oldValue: string | null,
       newValue: string | null,
     ) => void)[]
@@ -111,7 +105,7 @@ const combine = (
   return Array.from(handlerMap.entries()).map(([name, handlers]) => ({
     name,
     handler: (
-      ref: AttributeHandlerTypes.ElementRef,
+      ref: AttributeElementRef,
       oldValue: string | null,
       newValue: string | null,
     ) => {
@@ -128,7 +122,7 @@ const combine = (
 const resize = ({
   callback,
   name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
   name: name || AttributeNames.deprecated.state.RESIZE,
   handler: (ref, _, newValue) => {
     if (newValue === AttributeValues.state.TRUE) {
@@ -176,7 +170,7 @@ const resize = ({
 const stateOpen = ({
   callback,
   name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
   name: name || AttributeNames.deprecated.state.STATE,
   handler: (ref, oldValue, newValue) => {
     if (
@@ -195,7 +189,7 @@ const stateOpen = ({
 const stateClosed = ({
   callback,
   name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
   name: name || AttributeNames.deprecated.state.STATE,
   handler: (ref, oldValue, newValue) => {
     if (
@@ -215,7 +209,7 @@ const stateClosed = ({
 const visuallyClosed = ({
   callback,
   name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
   name: name || AttributeNames.visual.open,
   handler: (ref, oldValue, newValue) => {
     if (
@@ -230,7 +224,7 @@ const visuallyClosed = ({
 const visuallyHide = ({
   callback,
   name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
   name: name || AttributeNames.layout.hidden,
   handler: (ref, oldValue, newValue) => {
     if (
@@ -245,7 +239,7 @@ const visuallyHide = ({
 const visuallyOpen = ({
   callback,
   name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
   name: name || AttributeNames.visual.open,
   handler: (ref, oldValue, newValue) => {
     if (
@@ -260,7 +254,7 @@ const visuallyOpen = ({
 const visuallyPosition = ({
   callback,
   name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
   name: name || AttributeNames.layout.position,
   handler: (ref, oldValue, newValue) => {
     if (newValue !== oldValue) {
@@ -277,7 +271,7 @@ const visuallyPosition = ({
 const visuallyShow = ({
   callback,
   name,
-}: AttributeHandlerTypes.Props): AttributeHandlerTypes.Config => ({
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
   name: name || AttributeNames.layout.hidden,
   handler: (ref, oldValue, newValue) => {
     if (
@@ -308,15 +302,15 @@ const common = {
   /**
    * Resize observer for responsive components
    */
-  resize: (callback: (element: AttributeHandlerTypes.ElementRef) => void) =>
+  resize: (callback: (element: AttributeElementRef) => void) =>
     resize({ callback }),
 
   /**
    * Visual show/hide handlers for modals and overlays
    */
   visualShowHide: (options: {
-    onShow?: (element: AttributeHandlerTypes.ElementRef) => void;
-    onHide?: (element: AttributeHandlerTypes.ElementRef) => void;
+    onShow?: (element: AttributeElementRef) => void;
+    onHide?: (element: AttributeElementRef) => void;
   }) =>
     combine(
       ...(options.onShow
@@ -339,8 +333,8 @@ const common = {
    * Visual open/close handlers for expandable components
    */
   visualToggle: (options: {
-    onOpen?: (element: AttributeHandlerTypes.ElementRef) => void;
-    onClose?: (element: AttributeHandlerTypes.ElementRef) => void;
+    onOpen?: (element: AttributeElementRef) => void;
+    onClose?: (element: AttributeElementRef) => void;
   }) =>
     combine(
       ...(options.onOpen
@@ -389,3 +383,4 @@ const common = {
 export const CommonAttributeHandlers = common;
 
 export default { combine, observe, common };
+// Types are now exported directly, not through namespace

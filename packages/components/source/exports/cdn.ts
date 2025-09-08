@@ -1,4 +1,11 @@
-import LoadUmdComponents, { Components } from './index';
+import * as Components from '../api';
+import { loadComponentClass } from './loader';
+import * as Utilities from '../utilities';
+
+const LoadUmdComponents = () => {
+  loadComponentClass(Components as any);
+  Utilities.Animations.loadIntersectionObserver();
+};
 
 // CDN initialization for script tag usage
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

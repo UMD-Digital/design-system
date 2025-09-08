@@ -376,7 +376,7 @@ const createLock = (props: PathwayStandardProps) => {
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           alignItems: 'center',
-          minHeight: '40vh',
+          minHeight: '48vh',
         },
       },
     },

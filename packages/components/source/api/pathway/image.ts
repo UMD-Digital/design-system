@@ -53,6 +53,7 @@ const createComponent: CreateComponentFunction = (element) => {
       isThemeDark,
       isThemeLight,
       isThemeMaryland,
+      stats: Slots.text.stats({ element }),
       text: Slots.text.default({ element }),
       video: Slots.assets.video({ element }) as HTMLVideoElement,
     });

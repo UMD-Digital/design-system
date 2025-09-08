@@ -1,11 +1,12 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register } from 'model';
 import { extractEventData } from '../_event';
+import { toUMDElement } from 'utilities/markup/validate';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
-} from '../_types';
+} from '../../_types';
 
 const tagName = 'umd-element-event';
 
@@ -47,8 +48,8 @@ const createComponent: CreateComponentFunction = (element) => {
 
     return Composite.card.block({
       actions: Slots.actions.default({ element }),
-      dateSign: featureEvents?.dateSign,
-      eventMeta: featureEvents?.eventMeta,
+      dateSign: toUMDElement(featureEvents?.dateSign),
+      eventMeta: toUMDElement(featureEvents?.eventMeta),
       eyebrow: Slots.eyebrow.default({ element }),
       hasEyebrowRibbon: true,
       headline: Slots.headline.default({ element }),
@@ -70,8 +71,8 @@ const createComponent: CreateComponentFunction = (element) => {
     return Composite.card.overlay.image({
       actions: Slots.actions.default({ element }),
       backgroundImage: Slots.assets.image({ element }) as HTMLImageElement,
-      dateSign: promoEvents?.dateSign,
-      eventMeta: promoEvents?.eventMeta,
+      dateSign: toUMDElement(promoEvents?.dateSign),
+      eventMeta: toUMDElement(promoEvents?.eventMeta),
       headline: Slots.headline.default({ element }),
       isThemeDark: Attributes.isTheme.dark({ element }),
       text: Slots.text.default({ element }),
@@ -87,8 +88,8 @@ const createComponent: CreateComponentFunction = (element) => {
 
     return Composite.card.list({
       actions: Slots.actions.default({ element }),
-      dateSign: listEvents?.dateSign,
-      eventMeta: listEvents?.eventMeta,
+      dateSign: toUMDElement(listEvents?.dateSign),
+      eventMeta: toUMDElement(listEvents?.eventMeta),
       headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
       isThemeDark: Attributes.isTheme.dark({ element }),
@@ -101,7 +102,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const { eventMeta } = eventComponents;
   return Composite.card.block({
     actions: Slots.actions.default({ element }),
-    eventMeta,
+    eventMeta: toUMDElement(eventMeta) as any,
     headline: Slots.headline.default({ element }),
     image: Slots.assets.image({ element }) as HTMLImageElement,
     isThemeDark: Attributes.isTheme.dark({ element }),

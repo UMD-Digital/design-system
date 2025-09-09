@@ -48,7 +48,7 @@ export default ({ image }: { image: HTMLImageElement }) => {
         customStyles: {
           width: 'auto',
           height: '100%',
-          display: 'inline',
+          display: 'block',
         },
       }),
     ],

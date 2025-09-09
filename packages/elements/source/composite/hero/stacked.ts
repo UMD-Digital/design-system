@@ -35,6 +35,23 @@ const createImageAsset = (image: HTMLImageElement) => {
     isScaled: true,
     isGifAllowed: true,
     isShowCaption: true,
+    customStyles: {
+      [`@media (${Styles.token.media.queries.large.max})`]: {
+        [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {
+          minHeight: '56vw',
+        },
+      },
+
+      [`@media (${Styles.token.media.queries.tablet.min})`]: {
+        [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {
+          minHeight: '550px',
+        },
+      },
+
+      [`& .${Styles.element.asset.gif.toggle.className} button`]: {
+        zIndex: 99999,
+      },
+    },
   });
 };
 
@@ -100,6 +117,18 @@ const createAsset = ({
       element: {
         overflow: 'clip',
         position: 'relative',
+        height: '100%',
+      },
+    },
+  });
+
+  const horizontalLock = ElementModel.layout.spaceHorizontalLarger({
+    element: document.createElement('div'),
+    children: [assetInteriorElement],
+    elementStyles: {
+      element: {
+        height: '100%',
+        width: '100%',
       },
     },
   });
@@ -107,19 +136,16 @@ const createAsset = ({
   const assetContainer = ElementModel.createDiv({
     className: 'umd-hero-stacked__asset',
     children: isWidthLarge
-      ? [
-          ElementModel.layout.spaceHorizontalLarger({
-            element: document.createElement('div'),
-            children: [assetInteriorElement],
-          }),
-        ]
+      ? [horizontalLock]
       : [mediaElement, createOverlay(includesAnimation)],
     elementStyles: {
       element: {
         position: 'relative',
         overflow: 'clip',
+        display: 'grid',
 
         ['& img, & video']: {
+          objectFit: 'cover',
           aspectRatio: '5 / 4',
 
           [`@container (${Styles.token.media.queries.tablet.min})`]: {

@@ -156,8 +156,11 @@ export const columnsFour: JssObject = create.jss.objectWithClassName({
  * @since 1.1.0
  */
 export const stacked: JssObject = create.jss.objectWithClassName({
+  className: `${classNamePrefix}-stacked`,
   display: 'flex',
   flexDirection: 'column',
 
-  className: `${classNamePrefix}-stacked`,
+  [`> *:not(:last-child)`]: {
+    marginBottom: spacing.sm,
+  },
 });

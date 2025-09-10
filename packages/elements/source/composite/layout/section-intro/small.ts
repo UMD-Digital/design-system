@@ -78,6 +78,7 @@ const createActions = (props: Pick<SectionIntroProps, 'actions'>) => {
     elementStyles: {
       element: {
         justifyContent: 'center',
+        alignItems: 'center',
 
         [`* + &`]: {
           marginTop: token.spacing.md,

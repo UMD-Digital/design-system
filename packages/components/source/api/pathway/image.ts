@@ -28,6 +28,11 @@ const createComponent: CreateComponentFunction = (element) => {
   const isDisplaySticky = Attributes.isDisplay.sticky({ element });
   const includesAnimation = Attributes.includesFeature.animation({ element });
 
+  const featureEvents = extractEventData(element, {
+    isLargeSize: true,
+    isDateSignDark: false,
+  });
+
   if (isDisplayHero) {
     return Composite.pathway.hero({
       actions: Slots.actions.default({ element }),
@@ -44,6 +49,7 @@ const createComponent: CreateComponentFunction = (element) => {
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
       action: Slots.actions.default({ element }),
+      eventDetails: featureEvents?.eventMeta,
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
@@ -62,6 +68,7 @@ const createComponent: CreateComponentFunction = (element) => {
   if (isDisplaySticky) {
     return Composite.pathway.sticky({
       action: Slots.actions.default({ element }),
+      eventDetails: featureEvents?.eventMeta,
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
       image: Slots.assets.image({ element }) as HTMLImageElement,
@@ -72,11 +79,6 @@ const createComponent: CreateComponentFunction = (element) => {
       video: Slots.assets.video({ element }) as HTMLVideoElement,
     });
   }
-
-  const featureEvents = extractEventData(element, {
-    isLargeSize: true,
-    isDateSignDark: false,
-  });
 
   return Composite.pathway.standard({
     actions: Slots.actions.default({ element }),

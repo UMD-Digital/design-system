@@ -5,13 +5,14 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
+import { type ElementVisual } from '_types';
 
 export type TypePathwayTextContainer = {
   eyebrow: HTMLElement | null;
   headline: HTMLElement | null;
   text: HTMLElement | null;
   action: HTMLElement | null;
-  eventDetails?: HTMLElement | null;
+  eventDetails?: ElementVisual;
   stats?: HTMLElement | null;
   isThemeDark?: boolean;
   isThemeMaryland?: boolean;
@@ -263,8 +264,9 @@ const CreatePathwayTextContainer = ({
   }
 
   if (eventDetails) {
-    eventDetails.classList.add(ELEMENT_TEXT_CONTAINER_EVENT_DETAILS);
-    wrapper.appendChild(eventDetails);
+    eventDetails.element.classList.add(ELEMENT_TEXT_CONTAINER_EVENT_DETAILS);
+    wrapper.appendChild(eventDetails.element);
+    styles += eventDetails.styles;
   }
 
   if (text) {

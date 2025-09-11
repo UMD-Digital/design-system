@@ -20,6 +20,7 @@ interface HeroGridProps {
   actions?: ContentElement;
   corners: Array<CornerProps>;
   center: CenterProps | null;
+  isThemeDark?: boolean;
 }
 
 const ANIMATION_RANGES = {
@@ -247,9 +248,17 @@ const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
 };
 
 const createTextContainer = (
-  props: Pick<HeroGridProps, 'headline' | 'text' | 'actions'>,
+  props: Pick<HeroGridProps, 'headline' | 'text' | 'actions' | 'isThemeDark'>,
 ) => {
-  const { actions, headline, text } = props;
+  const { actions, headline, text, isThemeDark } = props;
+  let shouldRenderBlackText = null;
+  const allowsMotion =
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    !CSS.supports('animation-timeline', 'view()');
+
+  if (!allowsMotion && !isThemeDark) {
+    shouldRenderBlackText = true;
+  }
 
   if (!text && !actions && !headline) {
     return null;
@@ -279,6 +288,12 @@ const createTextContainer = (
         ...theme.media.withViewTimelineAnimation({
           paddingTop: '140vh',
         }),
+
+        ['*']: {
+          ...(shouldRenderBlackText && {
+            color: `${Styles.token.color.black} !important`,
+          }),
+        },
       },
     },
   });

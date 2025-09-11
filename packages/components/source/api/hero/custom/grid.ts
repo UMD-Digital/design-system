@@ -1,5 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Slots, Register } from 'model';
+import { Attributes, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -53,6 +53,7 @@ const createComponent: CreateComponentFunction = (element) => {
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),
     actions: Slots.actions.default({ element }),
+    isThemeDark: Attributes.isTheme.dark({ element }) || false,
   };
 
   const gridElement = Composite.hero.custom.grid(elementData);

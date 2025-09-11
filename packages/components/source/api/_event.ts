@@ -101,9 +101,7 @@ const extractEventConfig = (element: HTMLElement): EventComponentOptions => ({
   isThemeDark:
     Attributes.isTheme.dark({ element }) ||
     Attributes.isTheme.maryland({ element }),
-  showTime:
-    Attributes.isVisual.showTime({ element }) ||
-    Attributes.includesFeature.visualTime({ element }),
+  showTime: Attributes.isVisual.showTime({ element }),
 });
 
 /**

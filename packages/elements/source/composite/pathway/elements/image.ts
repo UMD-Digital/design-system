@@ -2,6 +2,7 @@ import { token } from '@universityofmaryland/web-styles-library';
 import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import * as Utility from 'utilities';
+import { type ElementVisual } from '_types';
 
 type TypeScaleProps = {
   isImageScaled: boolean;
@@ -10,7 +11,7 @@ type TypeScaleProps = {
 type TypeImageProps = {
   image: HTMLElement | null;
   video: HTMLElement | null;
-  eventSign?: HTMLElement | null;
+  dateSign?: ElementVisual;
 };
 
 export type TypePathwayImageContainer = TypeScaleProps & TypeImageProps;
@@ -135,7 +136,7 @@ const CreatePathwayImageContainer = (
 ) => {
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
-  const { image, video, eventSign } = element;
+  const { image, video, dateSign } = element;
   const isVideo = video instanceof HTMLVideoElement;
   let styles = STYLES_PATHWAY_IMAGE_CONTAINER;
 
@@ -179,10 +180,11 @@ const CreatePathwayImageContainer = (
       container.appendChild(wrapper);
     }
 
-    if (eventSign) {
-      eventSign.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN);
+    if (dateSign) {
+      dateSign.element.classList.add(ELEMENT_PATHWAY_CONTAINER_IMAGE_SIGN);
       container.setAttribute(ATTRIBUTE_IMAGE_SCALED, 'true');
-      container.appendChild(eventSign);
+      container.appendChild(dateSign.element);
+      styles += dateSign.styles;
     }
 
     return {

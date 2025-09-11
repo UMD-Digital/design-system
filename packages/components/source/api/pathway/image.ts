@@ -49,6 +49,7 @@ const createComponent: CreateComponentFunction = (element) => {
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
       action: Slots.actions.default({ element }),
+      dateSign: featureEvents?.dateSign,
       eventDetails: featureEvents?.eventMeta,
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
@@ -68,6 +69,7 @@ const createComponent: CreateComponentFunction = (element) => {
   if (isDisplaySticky) {
     return Composite.pathway.sticky({
       action: Slots.actions.default({ element }),
+      dateSign: featureEvents?.dateSign,
       eventDetails: featureEvents?.eventMeta,
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
